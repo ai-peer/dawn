@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a76699f7_5e03fa46",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-02T16:40:34Z",
+      "side": 1,
+      "message": "I tried, but we call DAWN_INTERNAL_ERROR with a std::string a ton so it\u0027ll be a bigger change to move all of them over. Maybe we can do that macro overloading thing Loko has used to delegate to either absl or just the message",
+      "parentUuid": "96d54558_066a53ef",
+      "revId": "523a73d9d81a9ec44d3a8601ec79e5686b3980d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "288212d7_6135653f",
         "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
         "patchSetId": 6
@@ -48,6 +66,30 @@
       "writtenOn": "2021-12-02T08:21:01Z",
       "side": 1,
       "message": "nit: mVulkanInstance since it is one of our members?",
+      "range": {
+        "startLine": 50,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 27
+      },
+      "revId": "523a73d9d81a9ec44d3a8601ec79e5686b3980d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb6d5fad_6b929f96",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-02T16:40:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "288212d7_6135653f",
       "range": {
         "startLine": 50,
         "startChar": 8,
@@ -71,6 +113,30 @@
       "writtenOn": "2021-12-02T08:21:01Z",
       "side": 1,
       "message": "nit: grammar",
+      "range": {
+        "startLine": 181,
+        "startChar": 21,
+        "endLine": 181,
+        "endChar": 32
+      },
+      "revId": "523a73d9d81a9ec44d3a8601ec79e5686b3980d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2018e5b6_4bf8e68b",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-02T16:40:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5261bbb2_2258fae1",
       "range": {
         "startLine": 181,
         "startChar": 21,
@@ -141,6 +207,30 @@
       "writtenOn": "2021-12-02T08:21:01Z",
       "side": 1,
       "message": "optional-nit: we might as well pass the adapter now.",
+      "range": {
+        "startLine": 279,
+        "startChar": 48,
+        "endLine": 280,
+        "endChar": 76
+      },
+      "revId": "523a73d9d81a9ec44d3a8601ec79e5686b3980d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc1efa21_e6569371",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-02T16:40:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5b384d0_99efa5b6",
       "range": {
         "startLine": 279,
         "startChar": 48,
