@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f490041_6ae9135b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-12-02T18:16:34Z",
+      "side": 1,
+      "message": "Now that https://github.com/gpuweb/gpuweb/pull/2368 has been merged we can finally land this! I had to update it to match the new name/signature, though, so please take another look.",
+      "revId": "b38547dd56ab9fba2dc2c86b17c938bb52abf918",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
