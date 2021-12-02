@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e59b2e34_a4076e0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T17:01:43Z",
+      "side": 1,
+      "message": "LGTM with Ben\u0027s comments too",
+      "revId": "03bacaf4c502cf3aaa1893a00b7ab190ee9de132",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c289cf8_b49b395b",
@@ -48,6 +65,41 @@
       "writtenOn": "2021-12-02T14:59:36Z",
       "side": 1,
       "message": "I don\u0027t think it is usually common to add more than one LICENSE file in the project.",
+      "revId": "03bacaf4c502cf3aaa1893a00b7ab190ee9de132",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97d116d2_d5597bae",
+        "filename": "generator/LICENSE",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T17:01:43Z",
+      "side": 1,
+      "message": "This is so that the file can be used inside template. Maybe put it in the templates/ subdirectory and call it BsdLicenseForInclusionInTemplates so that stuff is super clear?",
+      "parentUuid": "59b59496_42540838",
+      "revId": "03bacaf4c502cf3aaa1893a00b7ab190ee9de132",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99bdb176_0445b11f",
+        "filename": "generator/LICENSE",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T17:01:43Z",
+      "side": 1,
+      "message": "nit: can we add a copyright year to dawn.json metadata and remove this line (plus replace {{year}} below with {{metadata.copyright_year}})?",
       "revId": "03bacaf4c502cf3aaa1893a00b7ab190ee9de132",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
