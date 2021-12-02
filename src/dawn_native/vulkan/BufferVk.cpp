@@ -194,9 +194,36 @@ namespace dawn_native { namespace vulkan {
             device->fn.CreateBuffer(device->GetVkDevice(), &createInfo, nullptr, &*mHandle),
             "vkCreateBuffer"));
 
-        // Gather requirements for the buffer's memory and allocate it.
+        // Gather requirements for the buffer's memory. If the requirement's size is not the same
+        // as the size in the buffer handle, we may need to re-allocate another proxy buffer handle
+        // which we will use to zero out all the padding between the user requested size and the
+        // requirement's size. (Note that this is technically resource aliasing, but should work as
+        // expected because non-sparse buffers are linear resources.) This is important because the
+        // binding will be based on the size in the requirement, not the size specified by the
+        // handle and can cause issues with robustness accesses as was seen in crbug.com/dawn/1214.
         VkMemoryRequirements requirements;
         device->fn.GetBufferMemoryRequirements(device->GetVkDevice(), mHandle, &requirements);
+
+        // Use originalHandle != VK_NULL_HANDLE to indicate that we need to remap the buffer after
+        // zero-ing out padding.
+        VkBuffer originalHandle = VK_NULL_HANDLE;
+        if (mAllocatedSize != requirements.size) {
+            originalHandle = mHandle;
+
+            mAllocatedSize = requirements.size;
+            createInfo.size = requirements.size;
+            DAWN_TRY(CheckVkOOMThenSuccess(
+                device->fn.CreateBuffer(device->GetVkDevice(), &createInfo, nullptr, &*mHandle),
+                "vkCreateBuffer"));
+            device->fn.GetBufferMemoryRequirements(device->GetVkDevice(), mHandle, &requirements);
+
+            if (mAllocatedSize == requirements.size) {
+                // Since the new handle's requirement is the same as the original requirement, we
+                // can just use the new handle directly and deallocate the original handle.
+                ToBackend(GetDevice())->GetFencedDeleter()->DeleteWhenUnused(originalHandle);
+                originalHandle = VK_NULL_HANDLE;
+            }
+        }
 
         MemoryKind requestKind = MemoryKind::Linear;
         if (GetUsage() & kMappableBufferUsages) {
@@ -205,7 +232,7 @@ namespace dawn_native { namespace vulkan {
         DAWN_TRY_ASSIGN(mMemoryAllocation,
                         device->GetResourceMemoryAllocator()->Allocate(requirements, requestKind));
 
-        // Finally associate it with the buffer.
+        // Associate the memory with the current handle.
         DAWN_TRY(CheckVkSuccess(
             device->fn.BindBufferMemory(device->GetVkDevice(), mHandle,
                                         ToBackend(mMemoryAllocation.GetResourceHeap())->GetMemory(),
@@ -229,6 +256,17 @@ namespace dawn_native { namespace vulkan {
                 CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
                 ClearBuffer(recordingContext, 0, clearOffset, clearSize);
             }
+        }
+
+        if (originalHandle != VK_NULL_HANDLE) {
+            // Remap the buffer to the original handle and de-allocate the current handle.
+            ToBackend(GetDevice())->GetFencedDeleter()->DeleteWhenUnused(mHandle);
+            mHandle = originalHandle;
+            DAWN_TRY(CheckVkSuccess(device->fn.BindBufferMemory(
+                                        device->GetVkDevice(), mHandle,
+                                        ToBackend(mMemoryAllocation.GetResourceHeap())->GetMemory(),
+                                        mMemoryAllocation.GetOffset()),
+                                    "vkBindBufferMemory"));
         }
 
         SetLabelImpl();
