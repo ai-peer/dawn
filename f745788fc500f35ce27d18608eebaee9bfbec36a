@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44c7c7e6_70967db1",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-02T18:36:22Z",
+      "side": 1,
+      "message": "I think we can remove this comment since it seems like we will never be able to remove this (for fallback cases where we cannot load the json?)",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 76
+      },
+      "revId": "f745788fc500f35ce27d18608eebaee9bfbec36a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "123a09da_4e3c0058",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-02T18:36:22Z",
+      "side": 1,
+      "message": "Do we end up loading the same lib twice if we are running with both SS (via json) and an actual vulkan device? Do you know if the close on the dynamic lib on one of the instances will cause the other to lose access to the lib? (i.e. is it cached when we load it internally? I\u0027m not too familiar with that).",
+      "range": {
+        "startLine": 163,
+        "startChar": 16,
+        "endLine": 163,
+        "endChar": 61
+      },
+      "revId": "f745788fc500f35ce27d18608eebaee9bfbec36a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

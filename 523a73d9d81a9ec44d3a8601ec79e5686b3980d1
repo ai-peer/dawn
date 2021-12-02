@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b94787f_595a2791",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-02T18:36:22Z",
+      "side": 1,
+      "message": "You might also be able to do a maybe dirtier hack to do it... something like:\n\n#define DAWN_INTERNAL_ERROR(message) DAWN_FORMAT_INTERNAL_ERROR((message + \"%s\"), \"\")\n\nNot sure if that\u0027ll work though.",
+      "parentUuid": "c75a25cc_bdc1ad48",
+      "revId": "523a73d9d81a9ec44d3a8601ec79e5686b3980d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "288212d7_6135653f",
