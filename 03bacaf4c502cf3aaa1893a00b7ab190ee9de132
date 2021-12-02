@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ca31e27_26e971d7",
+        "filename": "generator/LICENSE",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-12-02T17:04:14Z",
+      "side": 1,
+      "message": "Do we need to move this file outside of the template? What does that give us?",
+      "parentUuid": "97d116d2_d5597bae",
+      "revId": "03bacaf4c502cf3aaa1893a00b7ab190ee9de132",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "99bdb176_0445b11f",
         "filename": "generator/LICENSE",
         "patchSetId": 5
