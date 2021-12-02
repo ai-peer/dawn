@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dee36ad_9bde4af9",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-12-02T02:04:08Z",
+      "side": 1,
+      "message": "Oh yes you are right and I haven\u0027t met any issues with \"void*\" yet.\n\nDone",
+      "parentUuid": "1f4f91cd_4da6d5eb",
+      "revId": "8f846f50990cb78442a1766d3ebb25879e55dcdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70b933f2_ced2184a",
@@ -65,6 +83,30 @@
       "writtenOn": "2021-12-01T14:31:40Z",
       "side": 1,
       "message": "nit: we can keep the constness of the pointer. We\u0027re just removing the volatile keyword.",
+      "range": {
+        "startLine": 407,
+        "startChar": 50,
+        "endLine": 407,
+        "endChar": 51
+      },
+      "revId": "8f846f50990cb78442a1766d3ebb25879e55dcdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74dc70c8_05051d4a",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-12-02T02:04:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70b933f2_ced2184a",
       "range": {
         "startLine": 407,
         "startChar": 50,
