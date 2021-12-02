@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6ff873a_d50f7042",
+        "filename": "LICENSE",
+        "patchSetId": 5
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-12-02T19:10:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c289cf8_b49b395b",
+      "revId": "03bacaf4c502cf3aaa1893a00b7ab190ee9de132",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59b59496_42540838",
@@ -123,6 +141,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93b8d407_9ffb13f3",
+        "filename": "generator/LICENSE",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-12-02T19:10:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aaabc56e_789d5baf",
+      "revId": "03bacaf4c502cf3aaa1893a00b7ab190ee9de132",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99bdb176_0445b11f",
@@ -136,6 +172,24 @@
       "writtenOn": "2021-12-02T17:01:43Z",
       "side": 1,
       "message": "nit: can we add a copyright year to dawn.json metadata and remove this line (plus replace {{year}} below with {{metadata.copyright_year}})?",
+      "revId": "03bacaf4c502cf3aaa1893a00b7ab190ee9de132",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9453b470_68cbb195",
+        "filename": "generator/LICENSE",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-12-02T19:10:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99bdb176_0445b11f",
       "revId": "03bacaf4c502cf3aaa1893a00b7ab190ee9de132",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
