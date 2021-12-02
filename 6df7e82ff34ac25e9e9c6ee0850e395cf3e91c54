@@ -33,6 +33,24 @@
       "message": "Hmm, IIUC, a lot of the VulkanInstance code is just from the old BackendVk. Is there anyway that we could force the revision to see it as a copy and modification so it\u0027s easier to review? Maybe something like what is suggested here: https://stackoverflow.com/questions/16937359/git-copy-file-preserving-history (Not sure how feasible/easy it would be)\n\nWould be nice to preserve the history also instead of having the file look entirely new.",
       "revId": "6df7e82ff34ac25e9e9c6ee0850e395cf3e91c54",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6511c0a1_8a3fbcfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-02T00:51:21Z",
+      "side": 1,
+      "message": "I\u0027ll try to put VulkanInstance instead BackendVk and hope it helps. And then later we can move it entirely.",
+      "parentUuid": "81f68c3e_e23b50c3",
+      "revId": "6df7e82ff34ac25e9e9c6ee0850e395cf3e91c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
