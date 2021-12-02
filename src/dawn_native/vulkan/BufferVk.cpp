@@ -205,6 +205,31 @@ namespace dawn_native { namespace vulkan {
         DAWN_TRY_ASSIGN(mMemoryAllocation,
                         device->GetResourceMemoryAllocator()->Allocate(requirements, requestKind));
 
+        // Before binding the memory to the buffer, we need to check that the requirement's size is
+        // reflected in the buffer handle so we can zero out all padding bytes. If they do not match
+        // we actually deallocate the handle and re-allocate a new handle. This is important because
+        // the binding will be based on the size in the requirement, not the size specified by the
+        // handle and can cause issues with robustness accesses as was seen in crbug.com/dawn/1214.
+        if (mAllocatedSize != requirements.size) {
+            // Deallocate the old handle so that it does not linger.
+            ToBackend(GetDevice())->GetFencedDeleter()->DeleteWhenUnused(mHandle);
+
+            createInfo.size = requirements.size;
+            DAWN_TRY(CheckVkOOMThenSuccess(
+                device->fn.CreateBuffer(device->GetVkDevice(), &createInfo, nullptr, &*mHandle),
+                "vkCreateBuffer"));
+            mAllocatedSize = requirements.size;
+
+#if defined(DAWN_ENABLE_ASSERTS)
+            // Verify that the new allocated buffer handle has the same size requirement as the
+            // original.
+            VkMemoryRequirements newRequirements;
+            device->fn.GetBufferMemoryRequirements(device->GetVkDevice(), mHandle,
+                                                   &newRequirements);
+            ASSERT(requirements.size == newRequirements.size);
+#endif
+        }
+
         // Finally associate it with the buffer.
         DAWN_TRY(CheckVkSuccess(
             device->fn.BindBufferMemory(device->GetVkDevice(), mHandle,
