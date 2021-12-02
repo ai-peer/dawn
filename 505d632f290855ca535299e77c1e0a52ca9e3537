@@ -39,6 +39,46 @@
       },
       "revId": "505d632f290855ca535299e77c1e0a52ca9e3537",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eda1643_5b187a13",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T09:51:43Z",
+      "side": 1,
+      "message": "[here]",
+      "revId": "505d632f290855ca535299e77c1e0a52ca9e3537",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81540729_66273fe7",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T09:51:43Z",
+      "side": 1,
+      "message": "This should be WRITE as well so that we avoid a hazard after the render pass because store does an actual write. It can be merged with [here]",
+      "range": {
+        "startLine": 87,
+        "startChar": 25,
+        "endLine": 87,
+        "endChar": 68
+      },
+      "revId": "505d632f290855ca535299e77c1e0a52ca9e3537",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
