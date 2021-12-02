@@ -77,9 +77,19 @@ namespace dawn_native { namespace vulkan {
     }
 #endif  // DAWN_PLATFORM_LINUX
 
+#if defined(DAWN_PLATFORM_FUCHSIA)
+    ExternalImageDescriptorZirconHandle::ExternalImageDescriptorZirconHandle()
+        : ExternalImageDescriptorVk(ExternalImageType::ZirconHandle) {
+    }
+
+    ExternalImageExportInfoZirconHandle::ExternalImageExportInfoZirconHandle()
+        : ExternalImageExportInfoVk(ExternalImageType::ZirconHandle) {
+    }
+#endif  // defined(DAWN_PLATFORM_FUCHSIA)
+
     WGPUTexture WrapVulkanImage(WGPUDevice device, const ExternalImageDescriptorVk* descriptor) {
-#if defined(DAWN_PLATFORM_LINUX)
         switch (descriptor->type) {
+#if defined(DAWN_PLATFORM_LINUX)
             case ExternalImageType::OpaqueFD:
             case ExternalImageType::DmaBuf: {
                 Device* backendDevice = ToBackend(FromAPI(device));
@@ -89,12 +99,20 @@ namespace dawn_native { namespace vulkan {
                 return ToAPI(backendDevice->CreateTextureWrappingVulkanImage(
                     fdDescriptor, fdDescriptor->memoryFD, fdDescriptor->waitFDs));
             }
+#endif  // defined(DAWN_PLATFORM_LINUX)
+#if defined(DAWN_PLATFORM_FUCHSIA)
+            case ExternalImageType::ZirconHandle: {
+                Device* backendDevice = ToBackend(FromAPI(device));
+                const ExternalImageDescriptorZirconHandle* fdDescriptor =
+                    static_cast<const ExternalImageDescriptorZirconHandle*>(descriptor);
+
+                return ToAPI(backendDevice->CreateTextureWrappingVulkanImage(
+                    descriptor, fdDescriptor->memoryVmo, fdDescriptor->waitEvents));
+            }
+#endif  // defined(DAWN_PLATFORM_FUCHSIA)
             default:
                 return nullptr;
         }
-#else
-        return nullptr;
-#endif  // DAWN_PLATFORM_LINUX
     }
 
     bool ExportVulkanImage(WGPUTexture texture,
@@ -103,8 +121,8 @@ namespace dawn_native { namespace vulkan {
         if (texture == nullptr) {
             return false;
         }
-#if defined(DAWN_PLATFORM_LINUX)
         switch (info->type) {
+#if defined(DAWN_PLATFORM_LINUX)
             case ExternalImageType::OpaqueFD:
             case ExternalImageType::DmaBuf: {
                 Texture* backendTexture = ToBackend(FromAPI(texture));
@@ -114,12 +132,21 @@ namespace dawn_native { namespace vulkan {
                 return device->SignalAndExportExternalTexture(backendTexture, desiredLayout, fdInfo,
                                                               &fdInfo->semaphoreHandles);
             }
+#endif  // defined(DAWN_PLATFORM_LINUX)
+#if defined(DAWN_PLATFORM_FUCHSIA)
+            case ExternalImageType::ZirconHandle: {
+                Texture* backendTexture = ToBackend(FromAPI(texture));
+                Device* device = ToBackend(backendTexture->GetDevice());
+                ExternalImageExportInfoZirconHandle* zirconInfo =
+                    static_cast<ExternalImageExportInfoZirconHandle*>(info);
+
+                return device->SignalAndExportExternalTexture(
+                    backendTexture, desiredLayout, zirconInfo, &zirconInfo->semaphoreEvents);
+            }
+#endif  // defined(DAWN_PLATFORM_FUCHSIA)
             default:
                 return false;
         }
-#else
-        return false;
-#endif  // DAWN_PLATFORM_LINUX
     }
 
 }}  // namespace dawn_native::vulkan

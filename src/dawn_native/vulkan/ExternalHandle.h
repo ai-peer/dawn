@@ -5,12 +5,12 @@
 
 namespace dawn_native { namespace vulkan {
 
-#if DAWN_PLATFORM_LINUX
+#if defined(DAWN_PLATFORM_LINUX)
     // File descriptor
     using ExternalMemoryHandle = int;
     // File descriptor
     using ExternalSemaphoreHandle = int;
-#elif DAWN_PLATFORM_FUCHSIA
+#elif defined(DAWN_PLATFORM_FUCHSIA)
     // Really a Zircon vmo handle.
     using ExternalMemoryHandle = zx_handle_t;
     // Really a Zircon event handle.
