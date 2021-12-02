@@ -194,6 +194,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bda588a1_1c1a22cf",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-02T22:29:19Z",
+      "side": 1,
+      "message": "I\u0027m not familiar enough with all of the possible transforms we\u0027ll need to do. I wrote this based on my understanding of your current shader but maybe it doesn\u0027t work well ultimately in the general case.\n\nThe color_transform code has the advantage that it\u0027s generating code so it doesn\u0027t need to worry about optimizing out unused parts. However I think we should avoid that if we can.\n\nWe can skip handling HDR for now, but I think we may need it relatively soon - though we don\u0027t have HDR canvas output yet, HDR video is well established and HDR video input is probably still useful as it can be used in HDR rendering pipelines.\n\nMaybe a better way to generalize would look more like:\n\n // 0x01 \u003d unpremultiply (src is premultiplied)\n // 0x02 \u003d do gamma decoding (src is nonlinear)\n // 0x04 \u003d apply conversion matrix (color primaries are not the same)\n // 0x08 \u003d do gamma encoding (dst is nonlinear)\n // 0x10 \u003d premultiply (dst is premultiplied)\n // (Inject more steps into this mask as needed)\n u32 step_mask;\n // TODO: Add info about which gamma encodings are used at each step, once it\u0027s not always sRGB\n\n if (step_mask \u0026 0x01) unpremultiply;\n if (step_mask \u0026 0x02) convert nonlinear to linear;\n if (step_mask \u0026 0x04) apply conversion matrix;\n if (step_mask \u0026 0x08) convert linear to nonlinear;\n if (step_mask \u0026 0x10) premultiply;\n\nI\u0027m not sure.",
+      "parentUuid": "93e8f114_3e535421",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ff5aa34_235f52c1",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 3
@@ -346,6 +364,30 @@
       "side": 1,
       "message": "Ah, I\u0027ve never seen this word before, I thought you had made typo.",
       "parentUuid": "d1c12020_2910b4a5",
+      "range": {
+        "startLine": 58,
+        "startChar": 32,
+        "endLine": 58,
+        "endChar": 41
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "098f9fdf_eafafa74",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-02T22:29:19Z",
+      "side": 1,
+      "message": "I haven\u0027t seen it before either, but from looking it up it seems like it refers to both the \"compression\" and \"expansion\" steps so it\u0027s perhaps not entirely clear. It\u0027s similar to \"codec\" (compression/decompression).\n\n\"gamma-uncompressed\" or \"uncompressed\" would be a good word here IMO as it will be more universally understood, but keeping the terminology from the CSS spec is also fine.",
+      "parentUuid": "4ec41d48_1aa73245",
       "range": {
         "startLine": 58,
         "startChar": 32,
@@ -567,6 +609,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6e5347c_dce4c24a",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-02T22:29:19Z",
+      "side": 1,
+      "message": "I think I am just confused because some of the alpha premultiplication is handled inside color_space_conversion and some of it is outside. If you\u0027re going to refactor this then I\u0027ll not worry about it for now.",
+      "parentUuid": "642b1b76_7dcc89c4",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebfa24d7_c476fa37",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 3
@@ -667,6 +727,24 @@
       "side": 1,
       "message": "The reason is that we don\u0027t support display p3 as destination color space in this CL 😊\nI plan to use following CL to support more source/dest color space but I\u0027m not sure which ones should in the lists.",
       "parentUuid": "c35a023d_806a9376",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f89d909_d3571b3e",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-02T22:29:19Z",
+      "side": 1,
+      "message": "This switch is about the src color space though. I guess if we only support srgb-\u003esrgb (which doesn\u0027t need this shader) and p3-\u003esrgb then it doesn\u0027t strictly matter. But if that\u0027s the case, then IMO we may as well just do the srgb-decode and srg-encode unconditionally for the moment and add conditionals later.",
+      "parentUuid": "c0d032b1_92b2f026",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
