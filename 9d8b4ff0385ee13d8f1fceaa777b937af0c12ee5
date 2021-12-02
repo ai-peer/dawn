@@ -16,6 +16,121 @@
       "message": "Loko, PTAL as well",
       "revId": "9d8b4ff0385ee13d8f1fceaa777b937af0c12ee5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7f42705_cd95ffba",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-02T23:45:24Z",
+      "side": 1,
+      "message": "This function looks like its the same across the backends now? Maybe we could consider moving it up to BackendConnection?",
+      "range": {
+        "startLine": 550,
+        "startChar": 4,
+        "endLine": 558,
+        "endChar": 5
+      },
+      "revId": "9d8b4ff0385ee13d8f1fceaa777b937af0c12ee5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7f43feb_4fa53cbf",
+        "filename": "src/tests/end2end/AdapterDiscoveryTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-02T23:45:24Z",
+      "side": 1,
+      "message": "If we are placing the test in anonymous namespace, we could just put everything in, (i.e. the TESTs as well). I think that\u0027s actually the recommended way in google3.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 25
+      },
+      "revId": "9d8b4ff0385ee13d8f1fceaa777b937af0c12ee5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "570f88e5_84d55050",
+        "filename": "src/tests/end2end/AdapterDiscoveryTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-02T23:45:24Z",
+      "side": 1,
+      "message": "Mostly for educational purposes for myself, does this mean that the drivers aren\u0027t there? Or can this be an actual failure? Is there anyways to differentiate the two (if both are possible?), since skipping the test wouldn\u0027t be the same as failing it.",
+      "range": {
+        "startLine": 155,
+        "startChar": 4,
+        "endLine": 157,
+        "endChar": 5
+      },
+      "revId": "9d8b4ff0385ee13d8f1fceaa777b937af0c12ee5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64d91598_0caf9701",
+        "filename": "src/tests/end2end/AdapterDiscoveryTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-02T23:45:24Z",
+      "side": 1,
+      "message": "nit. \n```\n#if defined(DAWN_ENABLE_BACKEND_METAL) \u0026\u0026 defined(DAWN_ENABLE_BACKEND_VULKAN)\n```\n\nTo avoid unnecessary nesting.",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 43
+      },
+      "revId": "9d8b4ff0385ee13d8f1fceaa777b937af0c12ee5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69d353b9_5e1249c9",
+        "filename": "src/tests/end2end/AdapterDiscoveryTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-02T23:45:24Z",
+      "side": 1,
+      "message": "We can also do (outside the loop):\n```\nmetalAdapterCount \u003d adapaters.size();\n```",
+      "range": {
+        "startLine": 244,
+        "startChar": 12,
+        "endLine": 244,
+        "endChar": 32
+      },
+      "revId": "9d8b4ff0385ee13d8f1fceaa777b937af0c12ee5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
