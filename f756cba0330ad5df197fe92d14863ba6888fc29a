@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e9cfd6e_80c37a93",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-02T11:36:07Z",
+      "side": 1,
+      "message": "Oops, forget to revert it. Thanks for the catching.",
+      "parentUuid": "01c3e408_c40f767e",
+      "revId": "f756cba0330ad5df197fe92d14863ba6888fc29a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c9dd6e6_ac37165b",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 11
@@ -31,6 +49,24 @@
       "writtenOn": "2021-12-02T10:19:53Z",
       "side": 1,
       "message": "Is there a way to assert that we are not DISJOINT here so we know to update the code if that happens?",
+      "revId": "f756cba0330ad5df197fe92d14863ba6888fc29a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20db8a5e_0f506804",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-02T11:36:07Z",
+      "side": 1,
+      "message": "As an implicit rule, for now we can only know that by checking whether all plane handles of a nv12 gbm buffer are same.",
+      "parentUuid": "5c9dd6e6_ac37165b",
       "revId": "f756cba0330ad5df197fe92d14863ba6888fc29a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af9c940e_fa35396a",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-02T11:36:07Z",
+      "side": 1,
+      "message": "Sounds good.",
+      "parentUuid": "e8b1b484_1401fbf7",
+      "revId": "f756cba0330ad5df197fe92d14863ba6888fc29a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f87f0e44_75dac387",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 11
@@ -65,6 +119,24 @@
       "writtenOn": "2021-12-02T10:19:53Z",
       "side": 1,
       "message": "nit: this can be inside the condition. This code is really host so we should try to minimize the amount spent on special cases when we are on the regular case.",
+      "revId": "f756cba0330ad5df197fe92d14863ba6888fc29a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ca8cc8f_32440b0f",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-02T11:36:07Z",
+      "side": 1,
+      "message": "Fair suggestion!",
+      "parentUuid": "f87f0e44_75dac387",
       "revId": "f756cba0330ad5df197fe92d14863ba6888fc29a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

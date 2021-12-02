@@ -574,6 +574,24 @@
       "parentUuid": "1a83f6f5_b3782344",
       "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd2abd0c_af92877d",
+        "filename": "src/tests/end2end/PlatformVideoViewsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-02T11:36:07Z",
+      "side": 1,
+      "message": "Great, a factory method below would make my life much easier.\n\n// PlatformVideoViewsTests.h\n class VideoViewsTestBackend {\n   static std::unique_ptr\u003cVideoViewsTestBackend\u003e Create();\n\n...\n\n};",
+      "parentUuid": "aa2dc844_71b81c1a",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
