@@ -33,6 +33,24 @@
       "message": "LGTM too! dawn_standalone is used on bots only the mac-rel etc bots on this CQ.",
       "revId": "1afbbb3874fd9652ba9ab68c22d5ef956de68392",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3fb8811_627b536a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-02T00:02:28Z",
+      "side": 1,
+      "message": "Standalone means it\u0027s built with Dawn as the root project, rather than as a dependency of another project like Chromium or Skia.",
+      "parentUuid": "4341895e_abc99a35",
+      "revId": "1afbbb3874fd9652ba9ab68c22d5ef956de68392",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
