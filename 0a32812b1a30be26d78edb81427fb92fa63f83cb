@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6810639c_266eef4c",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-02T07:39:03Z",
+      "side": 1,
+      "message": "Hmm, that would be better.\nThe change here was for blink which is unused in this CL. Let\u0027s undo this change here for now, and have another CL to address the concerns later.",
+      "parentUuid": "74a3a76b_48ec6ae2",
+      "revId": "0a32812b1a30be26d78edb81427fb92fa63f83cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83e79231_85c35e6f",
         "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
         "patchSetId": 9
@@ -66,6 +84,30 @@
       "writtenOn": "2021-12-01T14:28:01Z",
       "side": 1,
       "message": "u-nit: since is only useful in the multiplanar case. So maybe we can move it inside the condition. (maybe ditto for viewFormats\u0027 initialization, not sure). And maybe we could add an ASSERT that the Vulkan format is VK_FORMAT_G8_B8R8_2PLANE_420_UNORM so we know to change this code if we support additional formats in the future.",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 0
+      },
+      "revId": "0a32812b1a30be26d78edb81427fb92fa63f83cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96211bc5_324146a6",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-02T07:39:03Z",
+      "side": 1,
+      "message": "If I were to put viewFormats, and imageFormatListInfo into the branch scope, that would cause the unexpected local variable lifetime issue, and there would be dangling pointers in the createInfo chain.",
+      "parentUuid": "83e79231_85c35e6f",
       "range": {
         "startLine": 170,
         "startChar": 0,
@@ -95,6 +137,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "647cced0_f6a080b8",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-02T07:39:03Z",
+      "side": 1,
+      "message": "Unlike viewFormat, and imageFormatListInfo, lines here are not specific to VK_FORMAT_G8_B8R8_2PLANE_420_UNORM. It\u0027s general for multi-planar formats. Maybe we don\u0027t need ASSERT here.",
+      "parentUuid": "3fc48baf_d3b421c6",
+      "revId": "0a32812b1a30be26d78edb81427fb92fa63f83cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4294c4c6_35c81703",
         "filename": "src/tests/end2end/PlatformVideoViewsTests.cpp",
         "patchSetId": 9
@@ -106,6 +166,30 @@
       "writtenOn": "2021-11-30T22:38:56Z",
       "side": 1,
       "message": "nit: not needed",
+      "range": {
+        "startLine": 58,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 9
+      },
+      "revId": "0a32812b1a30be26d78edb81427fb92fa63f83cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "081491b6_6c7a9929",
+        "filename": "src/tests/end2end/PlatformVideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-02T07:39:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4294c4c6_35c81703",
       "range": {
         "startLine": 58,
         "startChar": 8,

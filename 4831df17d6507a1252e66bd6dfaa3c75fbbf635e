@@ -254,6 +254,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6032006c_4bf94dcc",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-02T07:39:03Z",
+      "side": 1,
+      "message": "Got it, thanks for clarifying!\nIn this case, as the underlying vkImage is not disjoint, I should merge VK_IMAGE_ASPECT_PLANE_n_BIT into a single barrier of VK_IMAGE_ASPECT_COLOR_BIT according to the vkspec[1].\n\n[1]: https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VUID-VkImageMemoryBarrier-image-01671",
+      "parentUuid": "58491d3d_701bbaea",
+      "range": {
+        "startLine": 870,
+        "startChar": 60,
+        "endLine": 870,
+        "endChar": 79
+      },
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecf48877_ef5c8c86",
         "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
         "patchSetId": 6
@@ -511,6 +535,24 @@
       "writtenOn": "2021-12-01T14:28:01Z",
       "side": 1,
       "message": "I\u0027m not sure that typed testing would work because a different set of things would be available on each platform. But maybe with ifdefs to choose what goes in Types\u003c\u003e it would work?",
+      "parentUuid": "09c2ebbe_ebf014f3",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a83f6f5_b3782344",
+        "filename": "src/tests/end2end/PlatformVideoViewsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-02T07:39:03Z",
+      "side": 1,
+      "message": "To implement VideoViewsTestBackend in PlatformVideoViewsTests_gbm.cpp, I would need to add VideoViewsTestBackendGbm like this:\n// PlatformVideoViewsTests_gbm.h\n\nclass VideoViewsTestBackendGbm : public VideoViewsTestBackendGbm {\n    ...\n  private:\n  gbm_device* gbmDevice;\n};\n\nConsequently that would lead to \"#ifdef\" in PlatformVideoViewsTests.cpp\n// PlatformVideoViewsTests.cpp\n...\n#ifdef (OS_CHROMEOS)\n#include \"PlatformVideoViewsTests_gbm.h\"\n#else\n#include \"PlatformVideoViewsTests_win.h\"\n#endif\n\n...\n#ifdef (OS_CHROMEOS)\nmBackend \u003d std::make_unique\u003cVideoViewsTestBackendGbm\u003e();\n#else\nmBackend \u003d std::make_unique\u003cVideoViewsTestBackendWin\u003e();\n#endif\n\nHow would you like it?\n\nIt would be much better for me if we could get rid of the compile-time dependencies of these specific backend types in PlatformVideoViewsTests.cpp. Any ideas?",
       "parentUuid": "09c2ebbe_ebf014f3",
       "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
