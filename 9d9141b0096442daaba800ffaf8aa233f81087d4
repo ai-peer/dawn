@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "670b2d52_a528b1f8",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-12-02T02:47:57Z",
+      "side": 1,
+      "message": "If I get it right, this test is aimed at testing a binding group entry setting one texture view and one other resource as well. I think the original code clear the texture view mistakenly (typo?), it should keep the texture view and clean the additional sampler resource, as same as what the code below is doing.",
+      "parentUuid": "48c8266c_f45c1a17",
+      "revId": "9d9141b0096442daaba800ffaf8aa233f81087d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d72ad133_28245aed",
         "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 5
@@ -65,6 +83,24 @@
       "writtenOn": "2021-12-02T02:28:55Z",
       "side": 1,
       "message": "nit: could set descriptorMip \u003d descriptorNoMip so they\u0027re exactly the same, and then change `mipLevelCount`.\n\nOr: make the descriptor, create the texture, then modify the descriptor and create the next texture.",
+      "revId": "9d9141b0096442daaba800ffaf8aa233f81087d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8401ee12_ec5e99f5",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-12-02T02:47:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d72ad133_28245aed",
       "revId": "9d9141b0096442daaba800ffaf8aa233f81087d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
