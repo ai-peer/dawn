@@ -16,6 +16,160 @@
       "message": " Do you plan to rename \"dawn\" prefix to \"webgpu\", i propose to add a configurable\n metadata like \"proc_table_prefix\" because It will be used in many scenarios, for example\n 1, ProcTable struct prefix that will be exported to Chromium\n 2, file name prefix such as \"dawn_thread_dispatch_proc.h\"\n 3, namespace prefix such as \"dawn_native\" and \"dawn_wire\"",
       "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "265489c6_267dbc9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-03T09:41:10Z",
+      "side": 1,
+      "message": "LGTM too. Some nits.",
+      "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a622bfad_34cbdd7a",
+        "filename": "docs/codegen.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-03T09:41:10Z",
+      "side": 1,
+      "message": "nit: IMHO there isn\u0027t a ton of value to having defaults for the metadata since it is done only once per whole API. Right now the default value seems like it will be used only once for webnn.json so it\u0027s not very useful.",
+      "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2af6dc08_7f7a2e06",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-03T09:41:10Z",
+      "side": 1,
+      "message": "nit: could be in the if condition.",
+      "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "830ff8de_9b45f794",
+        "filename": "generator/templates/dawn_proc_table.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-03T09:41:10Z",
+      "side": 1,
+      "message": "nit: Prefix?",
+      "range": {
+        "startLine": 15,
+        "startChar": 7,
+        "endLine": 15,
+        "endChar": 10
+      },
+      "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55822ed7_d6643954",
+        "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-03T09:41:10Z",
+      "side": 1,
+      "message": "ditto\n\nBut you could also have Prefix and prefix to distinguish the .lower() version so that the template reads a tiny bit more fluently.",
+      "range": {
+        "startLine": 1,
+        "startChar": 7,
+        "endLine": 1,
+        "endChar": 10
+      },
+      "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20522664_ba64766b",
+        "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-03T09:41:10Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbc251d8_0bbd3b40",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-03T09:41:10Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07ae12a6_c9bd7acb",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-03T09:41:10Z",
+      "side": 1,
+      "message": "metadata.wire_namespace maybe? It will useful in more places and means that we don\u0027t use the proc prefix to deduce namespaces that are unrelated.",
+      "range": {
+        "startLine": 176,
+        "startChar": 17,
+        "endLine": 176,
+        "endChar": 37
+      },
+      "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
