@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2c0f846_ae66fa80",
+        "filename": "docs/codegen.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-03T12:53:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a622bfad_34cbdd7a",
+      "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2af6dc08_7f7a2e06",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-12-03T09:41:10Z",
       "side": 1,
       "message": "nit: could be in the if condition.",
+      "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5741084e_f4ead598",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-03T12:53:24Z",
+      "side": 1,
+      "message": "Does \"dawn_proc.c\" and \"dawn_thread_dispatch_proc.cpp\" use the metadata ”proc_table_prefix”?",
+      "parentUuid": "2af6dc08_7f7a2e06",
       "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +128,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "966982c0_59839d5c",
+        "filename": "generator/templates/dawn_proc_table.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-03T12:53:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "830ff8de_9b45f794",
+      "range": {
+        "startLine": 15,
+        "startChar": 7,
+        "endLine": 15,
+        "endChar": 10
+      },
+      "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55822ed7_d6643954",
@@ -105,6 +165,30 @@
       "writtenOn": "2021-12-03T09:41:10Z",
       "side": 1,
       "message": "ditto\n\nBut you could also have Prefix and prefix to distinguish the .lower() version so that the template reads a tiny bit more fluently.",
+      "range": {
+        "startLine": 1,
+        "startChar": 7,
+        "endLine": 1,
+        "endChar": 10
+      },
+      "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1ca7391_288c46c8",
+        "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-03T12:53:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55822ed7_d6643954",
       "range": {
         "startLine": 1,
         "startChar": 7,
@@ -149,6 +233,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f069a0f4_83171d2c",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-03T12:53:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbc251d8_0bbd3b40",
+      "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07ae12a6_c9bd7acb",
@@ -162,6 +264,30 @@
       "writtenOn": "2021-12-03T09:41:10Z",
       "side": 1,
       "message": "metadata.wire_namespace maybe? It will useful in more places and means that we don\u0027t use the proc prefix to deduce namespaces that are unrelated.",
+      "range": {
+        "startLine": 176,
+        "startChar": 17,
+        "endLine": 176,
+        "endChar": 37
+      },
+      "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "494fc3a0_27af387b",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-03T12:53:24Z",
+      "side": 1,
+      "message": "Let\u0027s define it in next CL.",
+      "parentUuid": "07ae12a6_c9bd7acb",
       "range": {
         "startLine": 176,
         "startChar": 17,
