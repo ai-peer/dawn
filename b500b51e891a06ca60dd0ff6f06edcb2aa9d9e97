@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed207959_29ee65f1",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-03T09:14:47Z",
+      "side": 1,
+      "message": "This is a great find that the extra padding at the end of the bound memory is what is causing the issue here. I dug a bit in the Vulkan spec and it seems to be an Nvidia driver bug maybe? It seems that robustBufferAccess should take into account the size of the buffer, not its bound size.\n\nMaybe it is worth filing an issue on https://github.com/KhronosGroup/Vulkan-Docs to clarify that (by saying VkBufferCreateInfo::size explicitly?)\n\nhttps://www.khronos.org/registry/vulkan/specs/1.2/html/vkspec.html#:~:text\u003drobustBufferAccess%20specifies%20that%20accesses%20to%20buffers%20are%20bounds%2Dchecked%20against%20the%20range%20of%20the%20buffer%20descriptor%20(as%20determined%20by%20VkDescriptorBufferInfo%3A%3Arange%2C%20VkBufferViewCreateInfo%3A%3Arange%2C%20or%20the%20size%20of%20the%20buffer).\n\nIn all cases as a workaround, or if the size is turns out to be the bound size, then this fix looks like it is in the correct direction, but has a hidden assumption that the memory requirements of the larger buffer will be the same as the original one. However there is no guarantee for this in the list of guarantees from vkGetBufferMemoryRequirements.\n\nhttps://www.khronos.org/registry/vulkan/specs/1.2/html/vkspec.html#:~:text\u003dThe%20implementation%20guarantees%20certain%20properties%20about%20the%20memory%20requirements%20returned%20by%20vkGetBufferMemoryRequirements%20and%20vkGetImageMemoryRequirements%3A\n\nI think that it is a fair assumption though. I tried to look for Vulkan spec text that describes how buffers are laid out in memory, and the memory aliasing section say that that buffers are host-accessible resources (they are linear) so I think they are specced to purely represent a range of memory and so we could have that guarantee. But it\u0027s worth opening an issue on the Vulkan spec too.\n\nHowever we can\u0027t really wait for the Vulkan spec clarifications on this and for the drivers to be fixed. So I think we should move ahead with this CL. Can we have a Debug-only code path that checks that the memory requirements of the new buffer are the same as the previous one? (Only the size needs to be checked, the rest is guaranteed) as well as a test that tries to stress-test this code path by creating buffers with many size alignments and many combinations of usages?\n\nIn the future if it is an Nvidia-specific bug we could add a Toggle etc.",
+      "revId": "b500b51e891a06ca60dd0ff6f06edcb2aa9d9e97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47c6d0a7_059297bf",
+        "filename": "src/tests/white_box/BufferAllocatedSizeTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-03T09:14:47Z",
+      "side": 1,
+      "message": "Maybe instead the test needs to be updated to get the allocation size for kMinBufferSize, then do allocationSize + 1 and check it is still aligned, etc.",
+      "revId": "b500b51e891a06ca60dd0ff6f06edcb2aa9d9e97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
