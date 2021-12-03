@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c2021b6_77a04e26",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-03T17:23:10Z",
+      "side": 1,
+      "message": "Can\u0027t because this is dawn_native::{backend}::AdapterDiscoveryOptions",
+      "parentUuid": "e7f42705_cd95ffba",
+      "range": {
+        "startLine": 550,
+        "startChar": 4,
+        "endLine": 558,
+        "endChar": 5
+      },
+      "revId": "9d8b4ff0385ee13d8f1fceaa777b937af0c12ee5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7f43feb_4fa53cbf",
