@@ -66,6 +66,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0c57a7df_5965029b",
+        "filename": "src/tests/end2end/AdapterDiscoveryTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-03T00:01:08Z",
+      "side": 1,
+      "message": "lot of indentation, but done. Maybe we can change our git cl format rules somehow",
+      "parentUuid": "a7f43feb_4fa53cbf",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 25
+      },
+      "revId": "9d8b4ff0385ee13d8f1fceaa777b937af0c12ee5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "570f88e5_84d55050",
         "filename": "src/tests/end2end/AdapterDiscoveryTests.cpp",
         "patchSetId": 13
@@ -77,6 +101,30 @@
       "writtenOn": "2021-12-02T23:45:24Z",
       "side": 1,
       "message": "Mostly for educational purposes for myself, does this mean that the drivers aren\u0027t there? Or can this be an actual failure? Is there anyways to differentiate the two (if both are possible?), since skipping the test wouldn\u0027t be the same as failing it.",
+      "range": {
+        "startLine": 155,
+        "startChar": 4,
+        "endLine": 157,
+        "endChar": 5
+      },
+      "revId": "9d8b4ff0385ee13d8f1fceaa777b937af0c12ee5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e99dbff4_9294dd2c",
+        "filename": "src/tests/end2end/AdapterDiscoveryTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-03T00:01:08Z",
+      "side": 1,
+      "message": "It could mean that, or it could mean you don\u0027t have a monitor plugged in so it can\u0027t make a window. I think we could call glfwGetError https://www.glfw.org/docs/3.3/group__errors.html. It\u0027s usually non-fatal like the API is not available.",
+      "parentUuid": "570f88e5_84d55050",
       "range": {
         "startLine": 155,
         "startChar": 4,
@@ -110,6 +158,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27434403_d7bef804",
+        "filename": "src/tests/end2end/AdapterDiscoveryTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-03T00:01:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64d91598_0caf9701",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 43
+      },
+      "revId": "9d8b4ff0385ee13d8f1fceaa777b937af0c12ee5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69d353b9_5e1249c9",
@@ -123,6 +195,30 @@
       "writtenOn": "2021-12-02T23:45:24Z",
       "side": 1,
       "message": "We can also do (outside the loop):\n```\nmetalAdapterCount \u003d adapaters.size();\n```",
+      "range": {
+        "startLine": 244,
+        "startChar": 12,
+        "endLine": 244,
+        "endChar": 32
+      },
+      "revId": "9d8b4ff0385ee13d8f1fceaa777b937af0c12ee5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d2e4067_19591dc9",
+        "filename": "src/tests/end2end/AdapterDiscoveryTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-03T00:01:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69d353b9_5e1249c9",
       "range": {
         "startLine": 244,
         "startChar": 12,
