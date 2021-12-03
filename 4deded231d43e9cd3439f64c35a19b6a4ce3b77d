@@ -212,6 +212,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c783a7f_4f4dd93a",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-03T08:49:06Z",
+      "side": 1,
+      "message": "step_mask is great! And I combined it with AlphaOp changes. Still working on the new patch set.",
+      "parentUuid": "bda588a1_1c1a22cf",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ff5aa34_235f52c1",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 3
