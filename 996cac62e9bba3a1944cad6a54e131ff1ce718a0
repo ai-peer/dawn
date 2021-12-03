@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8bc4b44_4c8aa78d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-03T01:38:55Z",
+      "side": 1,
+      "message": " Do you plan to rename \"dawn\" prefix to \"webgpu\", i propose to add a configurable\n metadata like \"proc_table_prefix\" because It will be used in many scenarios, for example\n 1, ProcTable struct prefix that will be exported to Chromium\n 2, file name prefix such as \"dawn_thread_dispatch_proc.h\"\n 3, namespace prefix such as \"dawn_native\" and \"dawn_wire\"",
+      "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
