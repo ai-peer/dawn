@@ -143,6 +143,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "bd0c9074_e9033d29",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-03T08:19:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ca8cc8f_32440b0f",
+      "revId": "f756cba0330ad5df197fe92d14863ba6888fc29a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "cd8a09eb_87a75507",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 11

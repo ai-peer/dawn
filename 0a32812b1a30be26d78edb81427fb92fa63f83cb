@@ -166,6 +166,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a4e79be_fa6c0e79",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-03T08:19:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a65978f_e306767b",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 0
+      },
+      "revId": "0a32812b1a30be26d78edb81427fb92fa63f83cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3fc48baf_d3b421c6",
@@ -215,6 +239,24 @@
       "side": 1,
       "message": "Yeah the assert would be unnecessary.",
       "parentUuid": "647cced0_f6a080b8",
+      "revId": "0a32812b1a30be26d78edb81427fb92fa63f83cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afeb21d7_b05e6e4e",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-03T08:19:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc7fa049_8d416eeb",
       "revId": "0a32812b1a30be26d78edb81427fb92fa63f83cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
