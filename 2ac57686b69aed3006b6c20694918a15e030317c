@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e838aeeb_7046e97e",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-03T23:41:00Z",
+      "side": 1,
+      "message": "This logic depends on the comment above as well (\"since both of them are powers of two...\"). I don\u0027t think that will ever change but I think it needs an explicit callout that this line assumes offsetAlignment is already a power of 2. (If it weren\u0027t this could cause offsetAlignment to be unaligned with optimalOffsetAlignment or byteSize.)\n\nAlso, since it\u0027s already assuming that, offsetAlignment \u003d std::max(offsetAlignment, 4u) should work equally well and is more consistent with line 99.",
+      "revId": "2ac57686b69aed3006b6c20694918a15e030317c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f4b9510_4bcb536c",
         "filename": "src/tests/end2end/QueueTests.cpp",
         "patchSetId": 1
