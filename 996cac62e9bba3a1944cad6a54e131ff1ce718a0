@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "74c605ed_51a6ed3e",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-03T14:37:53Z",
+      "side": 1,
+      "message": "They are hardcoded. I think you\u0027ll have to duplicate these files. But right now the prefix is used only inside the if, so we could move it there.",
+      "parentUuid": "5741084e_f4ead598",
+      "revId": "996cac62e9bba3a1944cad6a54e131ff1ce718a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "830ff8de_9b45f794",
         "filename": "generator/templates/dawn_proc_table.h",
         "patchSetId": 3
