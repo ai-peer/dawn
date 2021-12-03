@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e01d45f3_1a70d14e",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-03T21:50:43Z",
+      "side": 1,
+      "message": "can we discover this and ASSERT (or better, fail) when we import into Dawn?\n\n[1]\nIf tiling is VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT, then the value of imageCreateFormatFeatures is found by calling vkGetPhysicalDeviceFormatProperties2 with VkImageFormatProperties::format equal to VkImageCreateInfo::format and with VkDrmFormatModifierPropertiesListEXT chained into VkImageFormatProperties2; by collecting all members of the returned array VkDrmFormatModifierPropertiesListEXT::pDrmFormatModifierProperties whose drmFormatModifier belongs to imageCreateDrmFormatModifiers; and by taking the bitwise intersection, over the collected array members, of drmFormatModifierTilingFeatures. (The resultant imageCreateFormatFeatures may be empty).\n\nif it requires VK_FORMAT_FEATURE_DISJOINT_BIT then we need VK_IMAGE_CREATE_DISJOINT_BIT and need to use the PLANE0 PLANE1 barriers.\n\n[1] https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageCreateInfo.html",
+      "parentUuid": "20db8a5e_0f506804",
+      "revId": "f756cba0330ad5df197fe92d14863ba6888fc29a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e8b1b484_1401fbf7",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 11
