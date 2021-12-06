@@ -138,7 +138,7 @@ namespace dawn_native { namespace vulkan {
         // TODO(enga): Consider deduping allocators for layouts with the same descriptor type
         // counts.
         mDescriptorSetAllocator =
-            std::make_unique<DescriptorSetAllocator>(this, std::move(descriptorCountPerType));
+            DescriptorSetAllocator::Create(this, std::move(descriptorCountPerType));
 
         SetLabelImpl();
 
@@ -189,10 +189,6 @@ namespace dawn_native { namespace vulkan {
                                               DescriptorSetAllocation* descriptorSetAllocation) {
         mDescriptorSetAllocator->Deallocate(descriptorSetAllocation);
         mBindGroupAllocator.Deallocate(bindGroup);
-    }
-
-    void BindGroupLayout::FinishDeallocation(ExecutionSerial completedSerial) {
-        mDescriptorSetAllocator->FinishDeallocation(completedSerial);
     }
 
     void BindGroupLayout::SetLabelImpl() {
