@@ -33,6 +33,24 @@
       "message": "I tried to make the driver tell us whether we need a dedicated allocation or not, but it always returned false (even when the image was created with a dedicated allocation, and we know that\u0027s an issue in Chromium).\n\nSo WDYT of adding a boolean dedicatedAllocation to ExternalImageDescriptorVk ?",
       "revId": "0452c6724c9b710dcb45a6b021b81191b8da5573",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1f0ec11_34ab5f8e",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceOpaqueFD.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-06T18:02:25Z",
+      "side": 1,
+      "message": "looking strictly at the code here, you\u0027re checking |prefersDedicatedAllocation|.\nThere is also |requiresDedicatedAllocation|. Is that also always false?\n\nIf it is, then yea I guess we unfortunately need to add a boolean to ExternalImageDescriptorVk. I guess that means that the actual allocation can query the requirements, but the import needs to know exactly what parameters the original creation used without a way to query - that\u0027s pretty annoying.",
+      "parentUuid": "4e06a25e_0a75833f",
+      "revId": "0452c6724c9b710dcb45a6b021b81191b8da5573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
