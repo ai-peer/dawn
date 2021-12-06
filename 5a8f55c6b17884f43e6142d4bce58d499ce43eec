@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f83f9476_eeae86a1",
+        "filename": "src/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-06T14:36:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af7f20d5_5db3a3d6",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 1
+      },
+      "revId": "5a8f55c6b17884f43e6142d4bce58d499ce43eec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f3f3557_3143b756",
@@ -75,6 +99,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74de1022_5ea74674",
+        "filename": "src/tests/end2end/VideoViewsTests.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-06T14:36:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f3f3557_3143b756",
+      "revId": "5a8f55c6b17884f43e6142d4bce58d499ce43eec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bad0e79_d4d8618e",
@@ -88,6 +130,30 @@
       "writtenOn": "2021-12-03T21:50:43Z",
       "side": 1,
       "message": "nit: \u003d default, but best to define it in the .cpp next to OnSetUp, etc?",
+      "range": {
+        "startLine": 27,
+        "startChar": 37,
+        "endLine": 29,
+        "endChar": 0
+      },
+      "revId": "5a8f55c6b17884f43e6142d4bce58d499ce43eec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61354e95_490b95a9",
+        "filename": "src/tests/end2end/VideoViewsTests.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-06T14:36:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bad0e79_d4d8618e",
       "range": {
         "startLine": 27,
         "startChar": 37,
@@ -121,6 +187,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dffde36_fc258a4c",
+        "filename": "src/tests/end2end/VideoViewsTests.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-06T14:36:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3113133e_7c70280c",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 17
+      },
+      "revId": "5a8f55c6b17884f43e6142d4bce58d499ce43eec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f703a74_baae0795",
@@ -134,6 +224,30 @@
       "writtenOn": "2021-12-03T21:50:43Z",
       "side": 1,
       "message": "not needed since there is UNREACHABLE()",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 26
+      },
+      "revId": "5a8f55c6b17884f43e6142d4bce58d499ce43eec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d00510d5_5f25f415",
+        "filename": "src/tests/end2end/VideoViewsTests_gbm.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-06T14:36:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f703a74_baae0795",
       "range": {
         "startLine": 74,
         "startChar": 0,
@@ -167,6 +281,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b376ec8b_2d29d1aa",
+        "filename": "src/tests/end2end/VideoViewsTests_gbm.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-06T14:36:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb6c6b5f_033f73ae",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 51
+      },
+      "revId": "5a8f55c6b17884f43e6142d4bce58d499ce43eec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98823791_c888240b",
@@ -180,6 +318,30 @@
       "writtenOn": "2021-12-03T21:50:43Z",
       "side": 1,
       "message": "not needed since there is UNREACHABLE()",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 45
+      },
+      "revId": "5a8f55c6b17884f43e6142d4bce58d499ce43eec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58b43b4c_50af615a",
+        "filename": "src/tests/end2end/VideoViewsTests_gbm.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-06T14:36:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98823791_c888240b",
       "range": {
         "startLine": 94,
         "startChar": 0,
@@ -209,6 +371,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "948d26af_e6335bea",
+        "filename": "src/tests/end2end/VideoViewsTests_gbm.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-06T14:36:48Z",
+      "side": 1,
+      "message": "Sounds better, done!",
+      "parentUuid": "2cf204db_ee54adbf",
+      "revId": "5a8f55c6b17884f43e6142d4bce58d499ce43eec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9fa778c9_8315b951",
         "filename": "src/tests/end2end/VideoViewsTests_gbm.cpp",
         "patchSetId": 12
@@ -220,6 +400,24 @@
       "writtenOn": "2021-12-03T21:50:43Z",
       "side": 1,
       "message": "instead of hardcoding NV12 here, did you intend to call GetGbmBoFormat which is never called?\n\nI guess that means we will need to change IsSupported() to be IsSupported(format)",
+      "revId": "5a8f55c6b17884f43e6142d4bce58d499ce43eec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b020eea4_0089ad74",
+        "filename": "src/tests/end2end/VideoViewsTests_gbm.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-06T14:36:48Z",
+      "side": 1,
+      "message": "Thanks for catching the hardcoding!\nIsSupported() now is removed, and covered by CanWrapAsWGPUTexture().",
+      "parentUuid": "9fa778c9_8315b951",
       "revId": "5a8f55c6b17884f43e6142d4bce58d499ce43eec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -249,6 +447,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "54467b13_ca647e40",
+        "filename": "src/tests/end2end/VideoViewsTests_gbm.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-06T14:36:48Z",
+      "side": 1,
+      "message": "Thanks for the hint!",
+      "parentUuid": "77fd4dd8_c4c60079",
+      "range": {
+        "startLine": 158,
+        "startChar": 40,
+        "endLine": 158,
+        "endChar": 53
+      },
+      "revId": "5a8f55c6b17884f43e6142d4bce58d499ce43eec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "54df4874_ec39d049",
         "filename": "src/tests/end2end/VideoViewsTests_win.cpp",
         "patchSetId": 12
@@ -260,6 +482,30 @@
       "writtenOn": "2021-12-03T21:50:43Z",
       "side": 1,
       "message": "not needed since there is UNREACHABLE",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 43
+      },
+      "revId": "5a8f55c6b17884f43e6142d4bce58d499ce43eec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b037d760_376e4bc7",
+        "filename": "src/tests/end2end/VideoViewsTests_win.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-06T14:36:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54df4874_ec39d049",
       "range": {
         "startLine": 77,
         "startChar": 0,
