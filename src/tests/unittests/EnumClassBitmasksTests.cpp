@@ -18,6 +18,10 @@
 
 namespace wgpu {
 
+    // EnumClassBitmmasks is a helper in the dawn:: namespace.
+    // Re-export it in the wgpu namespace.
+    USING_DAWN_BITMASK_OPERATORS
+
     enum class Color : uint32_t {
         R = 1,
         G = 2,
@@ -25,10 +29,16 @@ namespace wgpu {
         A = 8,
     };
 
+}  // namespace wgpu
+
+namespace dawn {
     template <>
-    struct IsDawnBitmask<Color> {
+    struct IsDawnBitmask<wgpu::Color> {
         static constexpr bool enable = true;
     };
+}  // namespace dawn
+
+namespace wgpu {
 
     TEST(BitmaskTests, BasicOperations) {
         Color test1 = Color::R | Color::G;

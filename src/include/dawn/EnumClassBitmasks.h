@@ -17,7 +17,18 @@
 
 #include <type_traits>
 
-namespace wgpu {
+// Re-export EnumClassBitmasks from dawn:: namespace to other various namespace.
+#define USING_DAWN_BITMASK_OPERATORS \
+    using dawn::operator|;           \
+    using dawn::operator&;           \
+    using dawn::operator^;           \
+    using dawn::operator~;           \
+    using dawn::operator&=;          \
+    using dawn::operator|=;          \
+    using dawn::operator^=;          \
+    using dawn::HasZeroOrOneBits;
+
+namespace dawn {
 
     template <typename T>
     struct IsDawnBitmask {
@@ -139,6 +150,6 @@ namespace wgpu {
         return (static_cast<Integral>(value) & (static_cast<Integral>(value) - 1)) == 0;
     }
 
-}  // namespace wgpu
+}  // namespace dawn
 
 #endif  // DAWN_ENUM_CLASS_BITMASKS_H_

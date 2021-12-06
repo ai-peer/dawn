@@ -46,14 +46,6 @@ namespace {{metadata.namespace}} {
 
     {% endfor %}
 
-    {% for type in by_category["bitmask"] %}
-        template<>
-        struct IsDawnBitmask<{{as_cppType(type.name)}}> {
-            static constexpr bool enable = true;
-        };
-
-    {% endfor %}
-
     {% for type in by_category["function pointer"] %}
         using {{as_cppType(type.name)}} = {{as_cType(type.name)}};
     {% endfor %}
@@ -242,6 +234,20 @@ namespace {{metadata.namespace}} {
         };
 
     {% endfor %}
+
+    // EnumClassBitmmasks is a helper in the dawn:: namespace.
+    // Re-export it in the {{metadata.namespace}} namespace with the macro.
+    USING_DAWN_BITMASK_OPERATORS
 }  // namespace {{metadata.namespace}}
+
+namespace dawn {
+    {% for type in by_category["bitmask"] %}
+        template<>
+        struct IsDawnBitmask<{{metadata.namespace}}::{{as_cppType(type.name)}}> {
+            static constexpr bool enable = true;
+        };
+
+    {% endfor %}
+} // namespace dawn
 
 #endif // {{API}}_CPP_H_
