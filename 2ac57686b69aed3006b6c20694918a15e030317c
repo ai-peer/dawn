@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf0b9039_629935f5",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-12-06T02:27:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db1cb527_8b1610d6",
+      "revId": "2ac57686b69aed3006b6c20694918a15e030317c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e838aeeb_7046e97e",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a0cf0c4_fcd8c469",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-12-06T02:27:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e838aeeb_7046e97e",
+      "revId": "2ac57686b69aed3006b6c20694918a15e030317c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f4b9510_4bcb536c",
@@ -82,6 +118,24 @@
       "writtenOn": "2021-12-03T09:28:08Z",
       "side": 1,
       "message": "Can we have some commments that explain how this tests the issue? Right now I don\u0027t see why it would reproduce the problem: it\u0027s not that the source offset isn\u0027t aligned, the issue is that the DynamicUploader gives back an unaligned pointer. So I think we just need to do 2 writeTextures, one an R8Unorm of a single pixel that will unalign the DynamicUploader, then one into a stencil aspect that would have used the unaligned dynamic uploader.",
+      "revId": "2ac57686b69aed3006b6c20694918a15e030317c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2789f888_d4a92951",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-12-06T02:27:06Z",
+      "side": 1,
+      "message": "I\u0027ve just updated the comments here to explain how to reproduce this issue in the test. I think using R8Unorm and Stencil textures are same, what do you think?",
+      "parentUuid": "6f4b9510_4bcb536c",
       "revId": "2ac57686b69aed3006b6c20694918a15e030317c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
