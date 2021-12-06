@@ -138,7 +138,7 @@ namespace dawn_native { namespace vulkan {
         // TODO(enga): Consider deduping allocators for layouts with the same descriptor type
         // counts.
         mDescriptorSetAllocator =
-            std::make_unique<DescriptorSetAllocator>(this, std::move(descriptorCountPerType));
+            DescriptorSetAllocator::Create(this, std::move(descriptorCountPerType));
 
         SetLabelImpl();
 
@@ -169,6 +169,12 @@ namespace dawn_native { namespace vulkan {
             device->fn.DestroyDescriptorSetLayout(device->GetVkDevice(), mHandle, nullptr);
             mHandle = VK_NULL_HANDLE;
         }
+
+        // Pass the descriptor set allocator off to the device to finish deallocating when the
+        // device is idled. It needs to be passed off because the allocators destructor needs to run
+        // after the device is ticked to actually deallocate the memory.
+        device->EnqueueDeferredDeallocation(mDescriptorSetAllocator.Get());
+        mDescriptorSetAllocator = nullptr;
     }
 
     VkDescriptorSetLayout BindGroupLayout::GetHandle() const {
@@ -189,10 +195,6 @@ namespace dawn_native { namespace vulkan {
                                               DescriptorSetAllocation* descriptorSetAllocation) {
         mDescriptorSetAllocator->Deallocate(descriptorSetAllocation);
         mBindGroupAllocator.Deallocate(bindGroup);
-    }
-
-    void BindGroupLayout::FinishDeallocation(ExecutionSerial completedSerial) {
-        mDescriptorSetAllocator->FinishDeallocation(completedSerial);
     }
 
     void BindGroupLayout::SetLabelImpl() {

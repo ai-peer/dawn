@@ -24,6 +24,13 @@ namespace dawn_native { namespace vulkan {
     // TODO(enga): Figure out this value.
     static constexpr uint32_t kMaxDescriptorsPerPool = 512;
 
+    // static
+    Ref<DescriptorSetAllocator> DescriptorSetAllocator::Create(
+        BindGroupLayout* layout,
+        std::map<VkDescriptorType, uint32_t> descriptorCountPerType) {
+        return AcquireRef(new DescriptorSetAllocator(layout, descriptorCountPerType));
+    }
+
     DescriptorSetAllocator::DescriptorSetAllocator(
         BindGroupLayout* layout,
         std::map<VkDescriptorType, uint32_t> descriptorCountPerType)
@@ -107,7 +114,7 @@ namespace dawn_native { namespace vulkan {
                                       serial);
 
         if (mLastDeallocationSerial != serial) {
-            device->EnqueueDeferredDeallocation(mLayout);
+            device->EnqueueDeferredDeallocation(this);
             mLastDeallocationSerial = serial;
         }
 
