@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0a53142_7ebe3d88",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-06T19:22:24Z",
+      "side": 1,
+      "message": "So actually, I don\u0027t think that it is necessarily an Nvidia issue only. I believe that the spec cited:\n\n```\nrobustBufferAccess specifies that accesses to buffers are bounds-checked against the range of the buffer descriptor (as determined by VkDescriptorBufferInfo::range, VkBufferViewCreateInfo::range, or the size of the buffer).\n```\n\nholds true, however, a bit further down, the actual return value when the access is OOB is described:\n\n```\nIf a vertex input attribute is out of bounds, it will be assigned one of the following values:\n\n(1) Values from anywhere within the memory range(s) bound to the buffer, converted according to the format of the attribute.\n(2) Zero values, format converted according to the format of the attribute.\n(3) Zero values, or (0,0,0,x) vectors, as described above.\n```\n\nSo what I think is happening is that we *are* OOB, however we are returning (1) something in the bound memory range (not the buffer descriptor size range).\n\nI will file an issue nonetheless indicating the issue and how we are planning to work around it and see if we get any good responses.\n\nI also agree that, unfortunately, we are making some assumptions about the second handle and its memory requirements for this to work, so I did add the debug code-path for now.",
+      "parentUuid": "ed207959_29ee65f1",
+      "revId": "b500b51e891a06ca60dd0ff6f06edcb2aa9d9e97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47c6d0a7_059297bf",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-12-03T09:14:47Z",
       "side": 1,
       "message": "Maybe instead the test needs to be updated to get the allocation size for kMinBufferSize, then do allocationSize + 1 and check it is still aligned, etc.",
+      "revId": "b500b51e891a06ca60dd0ff6f06edcb2aa9d9e97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f8e6df1_3a42b866",
+        "filename": "src/tests/white_box/BufferAllocatedSizeTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-06T19:22:24Z",
+      "side": 1,
+      "message": "Hmm I just tried this but this has some issues when the requiredBufferAlignment is actually 1, since IIUC, we are pretty much assuming the actual returned size to be the alignment criteria, but we are not asking for a buffer of size 1 so there is no way to know. I will keep this as is for now until we can find a better way to do it.",
+      "parentUuid": "47c6d0a7_059297bf",
       "revId": "b500b51e891a06ca60dd0ff6f06edcb2aa9d9e97",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
