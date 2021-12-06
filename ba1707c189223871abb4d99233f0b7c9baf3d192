@@ -16,6 +16,161 @@
       "message": "@Austin, really appreciate your reviewing effort! PTAL again.",
       "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d65c455e_ee35a3b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-06T18:31:11Z",
+      "side": 1,
+      "message": "couple more comments but still LGTM",
+      "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c43be73_66033e4f",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-06T18:31:11Z",
+      "side": 1,
+      "message": "why do we have to introduce unique_ptr?",
+      "range": {
+        "startLine": 600,
+        "startChar": 33,
+        "endLine": 600,
+        "endChar": 88
+      },
+      "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4746c434_d3cb2305",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-06T18:31:11Z",
+      "side": 1,
+      "message": "We already handle this PLANE0/1 -\u003e COLOR for Vulkan at [3]. Why do we need to change the storage to use Aspect::Color? I think this is a bit confusing because Aspect::Color is a frontend concept that shouldn\u0027t involve Vulkan semantics.\n\nIt\u0027s used in many other places like [1] and [2] so it\u0027s not immediately obvious that this code change is correct. If we really did want to merge the planes into a single aspect, I think maybe we should introduce a separate one like Aspect::CombinedPlanes. But again - is the code at [3] sufficient?",
+      "range": {
+        "startLine": 674,
+        "startChar": 8,
+        "endLine": 677,
+        "endChar": 9
+      },
+      "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d354d5e0_ba9978b2",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-06T18:31:11Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 752,
+        "startChar": 63,
+        "endLine": 752,
+        "endChar": 76
+      },
+      "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "842effa2_f50e6bff",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-06T18:31:11Z",
+      "side": 1,
+      "message": "[3]",
+      "range": {
+        "startLine": 998,
+        "startChar": 11,
+        "endLine": 1005,
+        "endChar": 26
+      },
+      "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab795a64_ea304c46",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-06T18:31:11Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 1309,
+        "startChar": 67,
+        "endLine": 1309,
+        "endChar": 80
+      },
+      "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dec01732_6ac72e74",
+        "filename": "src/tests/end2end/VideoViewsTests_gbm.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-06T18:31:11Z",
+      "side": 1,
+      "message": "if this were using the c++ api too with wgpu::DawnTextureInternalUsageDescriptor, then you wouldn\u0027t need to reinterpret_cast to assign to nextInChain, below",
+      "range": {
+        "startLine": 150,
+        "startChar": 8,
+        "endLine": 150,
+        "endChar": 47
+      },
+      "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
