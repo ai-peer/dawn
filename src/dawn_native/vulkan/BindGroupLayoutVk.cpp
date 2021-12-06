@@ -193,6 +193,11 @@ namespace dawn_native { namespace vulkan {
 
     void BindGroupLayout::FinishDeallocation(ExecutionSerial completedSerial) {
         mDescriptorSetAllocator->FinishDeallocation(completedSerial);
+
+        if (!IsAlive()) {
+            // Eagerly destroy the allocator if we the layout is destroyed.
+            mDescriptorSetAllocator->Destroy();
+        }
     }
 
     void BindGroupLayout::SetLabelImpl() {

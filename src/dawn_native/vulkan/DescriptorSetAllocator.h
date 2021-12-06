@@ -40,6 +40,7 @@ namespace dawn_native { namespace vulkan {
         ResultOrError<DescriptorSetAllocation> Allocate();
         void Deallocate(DescriptorSetAllocation* allocationInfo);
         void FinishDeallocation(ExecutionSerial completedSerial);
+        void Destroy();
 
       private:
         MaybeError AllocateDescriptorPool();

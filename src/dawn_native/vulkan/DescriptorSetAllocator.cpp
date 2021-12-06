@@ -62,15 +62,7 @@ namespace dawn_native { namespace vulkan {
         }
     }
 
-    DescriptorSetAllocator::~DescriptorSetAllocator() {
-        for (auto& pool : mDescriptorPools) {
-            ASSERT(pool.freeSetIndices.size() == mMaxSets);
-            if (pool.vkPool != VK_NULL_HANDLE) {
-                Device* device = ToBackend(mLayout->GetDevice());
-                device->GetFencedDeleter()->DeleteWhenUnused(pool.vkPool);
-            }
-        }
-    }
+    DescriptorSetAllocator::~DescriptorSetAllocator() = default;
 
     ResultOrError<DescriptorSetAllocation> DescriptorSetAllocator::Allocate() {
         if (mAvailableDescriptorPoolIndices.empty()) {
@@ -113,6 +105,16 @@ namespace dawn_native { namespace vulkan {
 
         // Clear the content of allocation so that use after frees are more visible.
         *allocationInfo = {};
+    }
+
+    void DescriptorSetAllocator::Destroy() {
+        for (auto& pool : mDescriptorPools) {
+            ASSERT(pool.freeSetIndices.size() == mMaxSets);
+            if (pool.vkPool != VK_NULL_HANDLE) {
+                Device* device = ToBackend(mLayout->GetDevice());
+                device->GetFencedDeleter()->DeleteWhenUnused(pool.vkPool);
+            }
+        }
     }
 
     void DescriptorSetAllocator::FinishDeallocation(ExecutionSerial completedSerial) {
