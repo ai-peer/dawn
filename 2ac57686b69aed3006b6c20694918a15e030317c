@@ -138,6 +138,24 @@
       "parentUuid": "6f4b9510_4bcb536c",
       "revId": "2ac57686b69aed3006b6c20694918a15e030317c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aa59935_130f532a",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-12-06T05:55:58Z",
+      "side": 1,
+      "message": "The reason why I think using R8Unorm and Stencil textures are same is that in the first writeTexture call the data is always written into the offset 0 of the staging buffer regardless of the format of the destination texture.",
+      "parentUuid": "2789f888_d4a92951",
+      "revId": "2ac57686b69aed3006b6c20694918a15e030317c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
