@@ -156,6 +156,24 @@
       "parentUuid": "2789f888_d4a92951",
       "revId": "2ac57686b69aed3006b6c20694918a15e030317c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7a257ed_fe915093",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-06T08:40:50Z",
+      "side": 1,
+      "message": "Ah thanks for the explanation. The allocation is aligned to 4 bytes, but gets unaligned because we copy only two pixels. Makes sense, thank you.",
+      "parentUuid": "9aa59935_130f532a",
+      "revId": "2ac57686b69aed3006b6c20694918a15e030317c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
