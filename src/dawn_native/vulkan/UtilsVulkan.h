@@ -31,8 +31,7 @@ namespace dawn_native { namespace vulkan {
     // A Helper type used to build a pNext chain of extension structs.
     // Usage is:
     //   1) Create instance, passing the address of the first struct in the
-    //      chain. This will parse the existing |pNext| chain in it to find
-    //      its tail.
+    //      chain. This requires pNext to be nullptr.
     //
     //   2) Call Add(&vk_struct) every time a new struct needs to be appended
     //      to the chain.
@@ -61,10 +60,7 @@ namespace dawn_native { namespace vulkan {
         template <typename VK_STRUCT_TYPE>
         explicit PNextChainBuilder(VK_STRUCT_TYPE* head)
             : mCurrent(reinterpret_cast<VkBaseOutStructure*>(head)) {
-            // Find the end of the current chain.
-            while (mCurrent->pNext != nullptr) {
-                mCurrent = mCurrent->pNext;
-            }
+            ASSERT(head->pNext == nullptr);
         }
 
         // Add one item to the chain. |vk_struct| must be a Vulkan structure
