@@ -81,6 +81,7 @@ namespace dawn_native { namespace vulkan {
         ExternalSemaphoreCapabilities,
         ExternalMemory,
         ExternalSemaphore,
+        DedicatedAllocation,
         _16BitStorage,
         SamplerYCbCrConversion,
 
