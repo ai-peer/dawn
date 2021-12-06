@@ -22,6 +22,7 @@
 #include "dawn_native/vulkan/FencedDeleter.h"
 #include "dawn_native/vulkan/ResourceMemoryAllocatorVk.h"
 #include "dawn_native/vulkan/TextureVk.h"
+#include "dawn_native/vulkan/UtilsVulkan.h"
 #include "utils/SystemUtils.h"
 #include "utils/WGPUHelpers.h"
 
@@ -29,7 +30,10 @@ namespace dawn_native { namespace vulkan {
 
     namespace {
 
-        class VulkanImageWrappingTestBase : public DawnTest {
+        using UseDedicatedAllocation = bool;
+        DAWN_TEST_PARAM_STRUCT(ImageWrappingParams, UseDedicatedAllocation);
+
+        class VulkanImageWrappingTestBase : public DawnTestWithParams<ImageWrappingParams> {
           protected:
             std::vector<const char*> GetRequiredFeatures() override {
                 return {"dawn-internal-usages"};
@@ -37,10 +41,12 @@ namespace dawn_native { namespace vulkan {
 
           public:
             void SetUp() override {
-                DawnTest::SetUp();
+                DawnTestWithParams<ImageWrappingParams>::SetUp();
                 DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
                 deviceVk = dawn_native::vulkan::ToBackend(dawn_native::FromAPI(device.Get()));
+
+                DAWN_TEST_UNSUPPORTED_IF(GetParam().mUseDedicatedAllocation && !deviceVk->GetDeviceInfo().HasExt(DeviceExt::DedicatedAllocation));
             }
 
             // Creates a VkImage with external memory
@@ -49,17 +55,12 @@ namespace dawn_native { namespace vulkan {
                                    uint32_t height,
                                    VkFormat format,
                                    VkImage* image) {
-                VkExternalMemoryImageCreateInfoKHR externalInfo;
-                externalInfo.sType = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHR;
-                externalInfo.pNext = nullptr;
-                externalInfo.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR;
-
                 auto usage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT |
                              VK_IMAGE_USAGE_TRANSFER_DST_BIT;
 
                 VkImageCreateInfo createInfo;
                 createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
-                createInfo.pNext = &externalInfo;
+                createInfo.pNext = nullptr;
                 createInfo.flags = VK_IMAGE_CREATE_ALIAS_BIT_KHR;
                 createInfo.imageType = VK_IMAGE_TYPE_2D;
                 createInfo.format = format;
@@ -73,6 +74,11 @@ namespace dawn_native { namespace vulkan {
                 createInfo.queueFamilyIndexCount = 0;
                 createInfo.pQueueFamilyIndices = nullptr;
                 createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+                PNextChainBuilder createChain(&createInfo);
+
+                VkExternalMemoryImageCreateInfoKHR externalInfo;
+                externalInfo.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR;
+                createChain.Add(&externalInfo, VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHR);
 
                 return deviceVk->fn.CreateImage(deviceVk->GetVkDevice(), &createInfo, nullptr,
                                                 &**image);
@@ -88,20 +94,28 @@ namespace dawn_native { namespace vulkan {
                 VkMemoryRequirements requirements;
                 deviceVk->fn.GetImageMemoryRequirements(deviceVk->GetVkDevice(), handle,
                                                         &requirements);
+                int bestType = deviceVk->GetResourceMemoryAllocator()->FindBestTypeIndex(
+                    requirements, MemoryKind::Opaque);
+
+                VkMemoryAllocateInfo allocateInfo;
+                allocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+                allocateInfo.pNext = nullptr;
+                allocateInfo.allocationSize = requirements.size;
+                allocateInfo.memoryTypeIndex = static_cast<uint32_t>(bestType);
+                PNextChainBuilder allocateChain(&allocateInfo);
 
                 // Import memory from file descriptor
                 VkExportMemoryAllocateInfoKHR externalInfo;
-                externalInfo.sType = VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_KHR;
-                externalInfo.pNext = nullptr;
                 externalInfo.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR;
+                allocateChain.Add(&externalInfo, VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_KHR);
 
-                int bestType = deviceVk->GetResourceMemoryAllocator()->FindBestTypeIndex(
-                    requirements, MemoryKind::Opaque);
-                VkMemoryAllocateInfo allocateInfo;
-                allocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-                allocateInfo.pNext = &externalInfo;
-                allocateInfo.allocationSize = requirements.size;
-                allocateInfo.memoryTypeIndex = static_cast<uint32_t>(bestType);
+                // Use a dedicated memory allocation if testing that path.
+                VkMemoryDedicatedAllocateInfo dedicatedInfo;
+                if (GetParam().mUseDedicatedAllocation) {
+                    dedicatedInfo.image = handle;
+                    dedicatedInfo.buffer = VK_NULL_HANDLE;
+                    allocateChain.Add(&dedicatedInfo, VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO);
+                }
 
                 *allocationSize = allocateInfo.allocationSize;
                 *memoryTypeIndex = allocateInfo.memoryTypeIndex;
@@ -223,7 +237,7 @@ namespace dawn_native { namespace vulkan {
 
     }  // anonymous namespace
 
-    class VulkanImageWrappingValidationTests : public VulkanImageWrappingTestBase {
+    class VulkanImageWrappingValidationTests : public VulkanImageWrappingTestBase{
       public:
         void SetUp() override {
             VulkanImageWrappingTestBase::SetUp();
@@ -375,7 +389,7 @@ namespace dawn_native { namespace vulkan {
 
     // Fixture to test using external memory textures through different usages.
     // These tests are skipped if the harness is using the wire.
-    class VulkanImageWrappingUsageTests : public VulkanImageWrappingTestBase {
+    class VulkanImageWrappingUsageTests : public VulkanImageWrappingTestBase{
       public:
         void SetUp() override {
             VulkanImageWrappingTestBase::SetUp();
@@ -1009,7 +1023,7 @@ namespace dawn_native { namespace vulkan {
         secondDeviceVk->GetFencedDeleter()->DeleteWhenUnused(allocationA);
     }
 
-    DAWN_INSTANTIATE_TEST(VulkanImageWrappingValidationTests, VulkanBackend());
-    DAWN_INSTANTIATE_TEST(VulkanImageWrappingUsageTests, VulkanBackend());
+    DAWN_INSTANTIATE_TEST_P(VulkanImageWrappingValidationTests, {VulkanBackend()}, {false, true});
+    DAWN_INSTANTIATE_TEST_P(VulkanImageWrappingUsageTests, {VulkanBackend()}, {false, true});
 
 }}  // namespace dawn_native::vulkan
