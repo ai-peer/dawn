@@ -191,10 +191,6 @@ namespace dawn_native { namespace vulkan {
         mBindGroupAllocator.Deallocate(bindGroup);
     }
 
-    void BindGroupLayout::FinishDeallocation(ExecutionSerial completedSerial) {
-        mDescriptorSetAllocator->FinishDeallocation(completedSerial);
-    }
-
     void BindGroupLayout::SetLabelImpl() {
         SetDebugName(ToBackend(GetDevice()), VK_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT,
                      reinterpret_cast<uint64_t&>(mHandle), "Dawn_BindGroupLayout", GetLabel());

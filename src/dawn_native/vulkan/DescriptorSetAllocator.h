@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_VULKAN_DESCRIPTORSETALLOCATOR_H_
 #define DAWNNATIVE_VULKAN_DESCRIPTORSETALLOCATOR_H_
 
+#include "common/RefCounted.h"
 #include "common/SerialQueue.h"
 #include "common/vulkan_platform.h"
 #include "dawn_native/Error.h"
@@ -28,11 +29,15 @@ namespace dawn_native { namespace vulkan {
 
     class BindGroupLayout;
 
-    class DescriptorSetAllocator {
+    class DescriptorSetAllocator : public RefCounted {
         using PoolIndex = uint32_t;
         using SetIndex = uint16_t;
 
       public:
+        static Ref<DescriptorSetAllocator> Create(
+            BindGroupLayout* layout,
+            std::map<VkDescriptorType, uint32_t> descriptorCountPerType);
+
         DescriptorSetAllocator(BindGroupLayout* layout,
                                std::map<VkDescriptorType, uint32_t> descriptorCountPerType);
         ~DescriptorSetAllocator();

@@ -60,7 +60,6 @@ namespace dawn_native { namespace vulkan {
                                                         const BindGroupDescriptor* descriptor);
         void DeallocateBindGroup(BindGroup* bindGroup,
                                  DescriptorSetAllocation* descriptorSetAllocation);
-        void FinishDeallocation(ExecutionSerial completedSerial);
 
       private:
         ~BindGroupLayout() override;
