@@ -11,13 +11,16 @@
 //* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //* See the License for the specific language governing permissions and
 //* limitations under the License.
-#ifndef WEBGPU_CPP_H_
-#define WEBGPU_CPP_H_
+{% set API = API %}
+{% set api = API.lower() %}
+#ifndef {{API}}_CPP_H_
+#define {{API}}_CPP_H_
 
-#include "dawn/webgpu.h"
+#include "dawn/{{api}}.h"
 #include "dawn/EnumClassBitmasks.h"
 
-namespace wgpu {
+{% set namespace = metadata.namespace %}
+namespace {{namespace}} {
 
     {% set c_prefix = metadata.c_prefix %}
     {% for constant in by_category["constant"] %}
@@ -75,10 +78,10 @@ namespace wgpu {
       public:
         ObjectBase() = default;
         ObjectBase(CType handle): mHandle(handle) {
-            if (mHandle) Derived::WGPUReference(mHandle);
+            if (mHandle) Derived::{{c_prefix}}Reference(mHandle);
         }
         ~ObjectBase() {
-            if (mHandle) Derived::WGPURelease(mHandle);
+            if (mHandle) Derived::{{c_prefix}}Release(mHandle);
         }
 
         ObjectBase(ObjectBase const& other)
@@ -86,9 +89,9 @@ namespace wgpu {
         }
         Derived& operator=(ObjectBase const& other) {
             if (&other != this) {
-                if (mHandle) Derived::WGPURelease(mHandle);
+                if (mHandle) Derived::{{c_prefix}}Release(mHandle);
                 mHandle = other.mHandle;
-                if (mHandle) Derived::WGPUReference(mHandle);
+                if (mHandle) Derived::{{c_prefix}}Reference(mHandle);
             }
 
             return static_cast<Derived&>(*this);
@@ -100,7 +103,7 @@ namespace wgpu {
         }
         Derived& operator=(ObjectBase&& other) {
             if (&other != this) {
-                if (mHandle) Derived::WGPURelease(mHandle);
+                if (mHandle) Derived::{{c_prefix}}Release(mHandle);
                 mHandle = other.mHandle;
                 other.mHandle = 0;
             }
@@ -111,7 +114,7 @@ namespace wgpu {
         ObjectBase(std::nullptr_t) {}
         Derived& operator=(std::nullptr_t) {
             if (mHandle != nullptr) {
-                Derived::WGPURelease(mHandle);
+                Derived::{{c_prefix}}Release(mHandle);
                 mHandle = nullptr;
             }
             return static_cast<Derived&>(*this);
@@ -188,8 +191,8 @@ namespace wgpu {
 
           private:
             friend ObjectBase<{{CppType}}, {{CType}}>;
-            static void WGPUReference({{CType}} handle);
-            static void WGPURelease({{CType}} handle);
+            static void {{c_prefix}}Reference({{CType}} handle);
+            static void {{c_prefix}}Release({{CType}} handle);
         };
 
     {% endfor %}
@@ -233,6 +236,6 @@ namespace wgpu {
         };
 
     {% endfor %}
-}  // namespace wgpu
+}  // namespace {{namespace}}
 
-#endif // WEBGPU_CPP_H_
+#endif // {{API}}_CPP_H_
