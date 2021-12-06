@@ -179,6 +179,18 @@ TEST_P(DestroyTest, DestroyDeviceBeforeSubmit) {
     ASSERT_DEVICE_ERROR_MSG(queue.Submit(1, &commands), HasSubstr("[Device] is lost."));
 }
 
+// Regression test for crbug.com/1276928 where a lingering BGL reference in Vulkan could cause bad
+// memory reads because members in the BGL whose destuctors expected a live device were not released
+// until after the device was destroyed.
+TEST_P(DestroyTest, DestroyDeviceLingeringBGL) {
+    // Get an additional reference to the BGL.
+    wgpu::BindGroupLayout bindGroupLayout = pipeline.GetBindGroupLayout(0);
+    // Tests normally don't expect a device lost error, but since we are destroying the device, we
+    // actually do, so we need to override the default device lost callback.
+    ExpectDeviceDestruction();
+    device.Destroy();
+}
+
 DAWN_INSTANTIATE_TEST(DestroyTest,
                       D3D12Backend(),
                       MetalBackend(),

@@ -193,6 +193,12 @@ namespace dawn_native { namespace vulkan {
 
     void BindGroupLayout::FinishDeallocation(ExecutionSerial completedSerial) {
         mDescriptorSetAllocator->FinishDeallocation(completedSerial);
+        // Eagerly clean up the allocator now that we finished deallocating because the allocator's
+        // destructor calls into the device's fenced deleter which may have been released already if
+        // the reference to this BGL exists after the parent device was destroyed. By eagerly
+        // cleaning it up here, the allocator's destructor is called within Device::Destroy where
+        // the device is still valid.
+        mDescriptorSetAllocator = nullptr;
     }
 
     void BindGroupLayout::SetLabelImpl() {
