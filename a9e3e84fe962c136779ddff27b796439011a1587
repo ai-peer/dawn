@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00057aaf_5a3bf96f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-07T07:43:29Z",
+      "side": 1,
+      "message": "PTAL. Thanks!",
+      "revId": "a9e3e84fe962c136779ddff27b796439011a1587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f869642b_3bf317f6",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-07T07:43:29Z",
+      "side": 1,
+      "message": "I just copy ANGLE issue. Do we need to have a separate Dawn issue?",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 31
+      },
+      "revId": "a9e3e84fe962c136779ddff27b796439011a1587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15cdb165_befbddcb",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-07T07:43:29Z",
+      "side": 1,
+      "message": "ANGLE misses this for stencil. I guess its tests don\u0027t cover stencil-only readonly attachment.",
+      "range": {
+        "startLine": 75,
+        "startChar": 5,
+        "endLine": 79,
+        "endChar": 27
+      },
+      "revId": "a9e3e84fe962c136779ddff27b796439011a1587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

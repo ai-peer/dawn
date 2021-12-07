@@ -58,6 +58,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d13ba79_b8d2e48e",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-07T07:43:29Z",
+      "side": 1,
+      "message": "See the comment below.",
+      "parentUuid": "7eda1643_5b187a13",
+      "revId": "505d632f290855ca535299e77c1e0a52ca9e3537",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81540729_66273fe7",
@@ -71,6 +89,30 @@
       "writtenOn": "2021-12-02T09:51:43Z",
       "side": 1,
       "message": "This should be WRITE as well so that we avoid a hazard after the render pass because store does an actual write. It can be merged with [here]",
+      "range": {
+        "startLine": 87,
+        "startChar": 25,
+        "endLine": 87,
+        "endChar": 68
+      },
+      "revId": "505d632f290855ca535299e77c1e0a52ca9e3537",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d81d9b8_cc8e62dc",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-07T07:43:29Z",
+      "side": 1,
+      "message": "It seems that read-only really require READ, and STORE_OP_STORE is incorrect but it still works if we ignore that validation error. But in read-only depth/stencil situation, we don\u0027t need to change this to read+write because of using STORE_OP_STORE.",
+      "parentUuid": "81540729_66273fe7",
       "range": {
         "startLine": 87,
         "startChar": 25,

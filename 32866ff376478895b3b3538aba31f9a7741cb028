@@ -499,6 +499,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39644442_d7447684",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-07T07:43:29Z",
+      "side": 1,
+      "message": "I use STORE_OP_STORE at first in this change. Just as ANGLE team said, it works well if we ignore the Vulkan validation error. I will add STORE_OP_NONE extension at the next CL. So the logic is:\n - 1) If STORE_OP_NONE extension exists, use STORE_OP_NONE, \n - 2) Otherwise, use STORE_OP_STORE and ignore the validation error.\n\nI didn\u0027t add part 1) use STORE_OP_NONE if it can be used. Because STORE_OP_STORE will not be tested because on current bots if I add part 1) in this change: I think current bots can support STORE_OP_NONE extension, that\u0027s why patchset 4 can pass.\n\nI will add part 1) soon in the next CL.",
+      "parentUuid": "3fc2ce9b_ca0fc21a",
+      "range": {
+        "startLine": 172,
+        "startChar": 12,
+        "endLine": 181,
+        "endChar": 0
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37f4604e_f18331e9",
         "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
         "patchSetId": 2
