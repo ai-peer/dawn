@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcb5bdaa_eb9b9efc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-07T18:15:47Z",
+      "side": 1,
+      "message": "Sending this now, but will wait until CTS tests are complete, landed, and rolled in successfully.",
+      "revId": "7156403d08b13d9b855fb17ea7271b1229403085",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
