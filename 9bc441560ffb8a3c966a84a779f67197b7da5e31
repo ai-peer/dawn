@@ -1,0 +1,198 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e4c39ce_22c274f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T14:24:52Z",
+      "side": 1,
+      "message": "Some comments for simplifications of the Vulkan backend. Tests LGTM too.",
+      "revId": "9bc441560ffb8a3c966a84a779f67197b7da5e31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30f92566_6793aa12",
+        "filename": "src/dawn_native/Subresource.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T14:24:52Z",
+      "side": 1,
+      "message": "nit: Maybe explain that it is only used in the Vulkan backend to represent non-disjoint multi-planar images.",
+      "revId": "9bc441560ffb8a3c966a84a779f67197b7da5e31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1652c8b_47febc2d",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T14:24:52Z",
+      "side": 1,
+      "message": "With CombinedPlanes I think this change can be reverted.",
+      "range": {
+        "startLine": 176,
+        "startChar": 50,
+        "endLine": 176,
+        "endChar": 98
+      },
+      "revId": "9bc441560ffb8a3c966a84a779f67197b7da5e31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12960c5f_39b3b116",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T14:24:52Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "9bc441560ffb8a3c966a84a779f67197b7da5e31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42ec0c59_5be070ee",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T14:24:52Z",
+      "side": 1,
+      "message": "Should be possible to revert as well? Maybe we should make subresourceStorage-\u003eGetAspectForTesting by no longer just for testing.",
+      "range": {
+        "startLine": 761,
+        "startChar": 46,
+        "endLine": 761,
+        "endChar": 70
+      },
+      "revId": "9bc441560ffb8a3c966a84a779f67197b7da5e31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15810625_bfb45854",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T14:24:52Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1251,
+        "startChar": 44,
+        "endLine": 1251,
+        "endChar": 68
+      },
+      "revId": "9bc441560ffb8a3c966a84a779f67197b7da5e31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "833b02d6_15046b02",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T14:24:52Z",
+      "side": 1,
+      "message": "nit: Do we expect a modifier to be present multiple times? If not, then we can return a boolean on whether the modifier was found, and the VkDrmFormatModifierPropertiesEXT for that modifier.",
+      "revId": "9bc441560ffb8a3c966a84a779f67197b7da5e31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47f10653_ed1fd6a1",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T14:24:52Z",
+      "side": 1,
+      "message": "nit: the function could just return an std::vector.",
+      "range": {
+        "startLine": 32,
+        "startChar": 12,
+        "endLine": 32,
+        "endChar": 58
+      },
+      "revId": "9bc441560ffb8a3c966a84a779f67197b7da5e31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a5a53ae_cea32fbb",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T14:24:52Z",
+      "side": 1,
+      "message": "nit: could we directly return props.drmFormatModifierTilingFeatures \u0026 VK_FORMAT_FEATURE_DISJOINT_BIT or do we expect a modifier to be present multiple times?",
+      "revId": "9bc441560ffb8a3c966a84a779f67197b7da5e31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbd69824_c4560cae",
+        "filename": "src/tests/end2end/VideoViewsTests_gbm.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T14:24:52Z",
+      "side": 1,
+      "message": "nit: extra semi",
+      "revId": "9bc441560ffb8a3c966a84a779f67197b7da5e31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

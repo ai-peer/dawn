@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1603e454_332eeba4",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T14:24:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e9cfd6e_80c37a93",
+      "revId": "f756cba0330ad5df197fe92d14863ba6888fc29a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c9dd6e6_ac37165b",
@@ -107,6 +125,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3946bbf_e0198356",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T14:24:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "20db8a5e_0f506804",
+      "revId": "f756cba0330ad5df197fe92d14863ba6888fc29a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8b1b484_1401fbf7",
@@ -138,6 +174,24 @@
       "side": 1,
       "message": "Sounds good.",
       "parentUuid": "e8b1b484_1401fbf7",
+      "revId": "f756cba0330ad5df197fe92d14863ba6888fc29a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89ce3811_298513ac",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T14:24:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af9c940e_fa35396a",
       "revId": "f756cba0330ad5df197fe92d14863ba6888fc29a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

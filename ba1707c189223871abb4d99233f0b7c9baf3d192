@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2985e0e1_c72cd063",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T14:24:52Z",
+      "side": 1,
+      "message": "I think it is to be able to create it late at [1]. I agree it would be nice to not require the unique_ptr but we can see about that later.",
+      "parentUuid": "9c43be73_66033e4f",
+      "range": {
+        "startLine": 600,
+        "startChar": 33,
+        "endLine": 600,
+        "endChar": 88
+      },
+      "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4746c434_d3cb2305",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 13
@@ -213,6 +237,30 @@
       "writtenOn": "2021-12-06T18:31:11Z",
       "side": 1,
       "message": "[3]",
+      "range": {
+        "startLine": 998,
+        "startChar": 11,
+        "endLine": 1005,
+        "endChar": 26
+      },
+      "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2155e268_b40ce05a",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T14:24:52Z",
+      "side": 1,
+      "message": "With CombinedPlanes we don\u0027t need the special handling for Aspect::Plane0/1 and can just remove this method in favor of VulkanAspectMask",
+      "parentUuid": "842effa2_f50e6bff",
       "range": {
         "startLine": 998,
         "startChar": 11,
