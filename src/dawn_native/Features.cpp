@@ -157,6 +157,10 @@ namespace dawn_native {
         featuresBitSet.set(featureIndex);
     }
 
+    void FeaturesSet::EnableFeature(wgpu::FeatureName feature) {
+        EnableFeature(FromAPIFeature(feature));
+    }
+
     bool FeaturesSet::IsEnabled(Feature feature) const {
         ASSERT(feature != Feature::InvalidEnum);
         const size_t featureIndex = static_cast<size_t>(feature);
@@ -184,8 +188,13 @@ namespace dawn_native {
 
         uint32_t index = 0;
         for (uint32_t i : IterateBitSet(featuresBitSet)) {
-            const char* featureName = FeatureEnumToName(static_cast<Feature>(i));
-            enabledFeatureNames[index] = featureName;
+            Feature feature = static_cast<Feature>(i);
+            ASSERT(feature != Feature::InvalidEnum);
+
+            const FeatureEnumAndInfo& featureNameAndInfo = kFeatureNameAndInfoList[i];
+            ASSERT(featureNameAndInfo.feature == feature);
+
+            enabledFeatureNames[index] = featureNameAndInfo.info.name;
             ++index;
         }
         return enabledFeatureNames;
@@ -199,9 +208,12 @@ namespace dawn_native {
         }
     }
 
-    const char* FeatureEnumToName(Feature feature) {
+    wgpu::FeatureName FeatureEnumToAPIFeature(Feature feature) {
         ASSERT(feature != Feature::InvalidEnum);
+        return ToAPIFeature(feature);
+    }
 
+    const char* FeatureEnumToName(Feature feature) {
         const FeatureEnumAndInfo& featureNameAndInfo =
             kFeatureNameAndInfoList[static_cast<size_t>(feature)];
         ASSERT(featureNameAndInfo.feature == feature);
@@ -216,14 +228,12 @@ namespace dawn_native {
         }
     }
 
-    const FeatureInfo* FeaturesInfo::GetFeatureInfo(const char* featureName) const {
-        ASSERT(featureName);
-
-        const auto& iter = mFeatureNameToEnumMap.find(featureName);
-        if (iter != mFeatureNameToEnumMap.cend()) {
-            return &kFeatureNameAndInfoList[static_cast<size_t>(iter->second)].info;
+    const FeatureInfo* FeaturesInfo::GetFeatureInfo(wgpu::FeatureName feature) const {
+        Feature f = FromAPIFeature(feature);
+        if (f == Feature::InvalidEnum) {
+            return nullptr;
         }
-        return nullptr;
+        return &kFeatureNameAndInfoList[static_cast<size_t>(f)].info;
     }
 
     Feature FeaturesInfo::FeatureNameToEnum(const char* featureName) const {
@@ -253,16 +263,13 @@ namespace dawn_native {
         return Feature::InvalidEnum;
     }
 
-    FeaturesSet FeaturesInfo::FeatureNamesToFeaturesSet(
-        const std::vector<const char*>& requiredFeatures) const {
-        FeaturesSet featuresSet;
-
-        for (const char* featureName : requiredFeatures) {
-            Feature featureEnum = FeatureNameToEnum(featureName);
-            ASSERT(featureEnum != Feature::InvalidEnum);
-            featuresSet.EnableFeature(featureEnum);
+    wgpu::FeatureName FeaturesInfo::FeatureNameToAPIEnum(const char* featureName) const {
+        Feature f = FeatureNameToEnum(featureName);
+        if (f != Feature::InvalidEnum) {
+            return ToAPIFeature(f);
         }
-        return featuresSet;
+        // Pass something invalid.
+        return static_cast<wgpu::FeatureName>(-1);
     }
 
 }  // namespace dawn_native
