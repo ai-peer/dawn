@@ -44,6 +44,7 @@ namespace dawn_native {
         void APIRequestDevice(const DeviceDescriptor* descriptor,
                               WGPURequestDeviceCallback callback,
                               void* userdata);
+        DeviceBase* APICreateDevice(const DeviceDescriptor* descriptor = nullptr);
 
         wgpu::BackendType GetBackendType() const;
         wgpu::AdapterType GetAdapterType() const;
@@ -51,16 +52,11 @@ namespace dawn_native {
         const PCIInfo& GetPCIInfo() const;
         InstanceBase* GetInstance() const;
 
-        DeviceBase* CreateDevice(const DawnDeviceDescriptor* descriptor = nullptr);
-
-        void RequestDevice(const DawnDeviceDescriptor* descriptor,
-                           WGPURequestDeviceCallback callback,
-                           void* userdata);
-
         void ResetInternalDeviceForTesting();
 
         FeaturesSet GetSupportedFeatures() const;
-        bool SupportsAllRequestedFeatures(const std::vector<const char*>& requestedFeatures) const;
+        bool SupportsAllRequiredFeatures(const wgpu::FeatureName* features,
+                                         uint32_t featuresCount) const;
         WGPUDeviceProperties GetAdapterProperties() const;
 
         bool GetLimits(SupportedLimits* limits) const;
@@ -76,8 +72,8 @@ namespace dawn_native {
         FeaturesSet mSupportedFeatures;
 
       private:
-        virtual ResultOrError<DeviceBase*> CreateDeviceImpl(
-            const DawnDeviceDescriptor* descriptor) = 0;
+        virtual ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(
+            const DeviceDescriptor* descriptor) = 0;
 
         virtual MaybeError InitializeImpl() = 0;
 
@@ -87,8 +83,7 @@ namespace dawn_native {
         // Check base WebGPU limits and populate supported limits.
         virtual MaybeError InitializeSupportedLimitsImpl(CombinedLimits* limits) = 0;
 
-        MaybeError CreateDeviceInternal(DeviceBase** result,
-                                        const DawnDeviceDescriptor* descriptor);
+        ResultOrError<Ref<DeviceBase>> CreateDeviceInternal(const DeviceDescriptor* descriptor);
 
         virtual MaybeError ResetInternalDeviceForTestingImpl();
         InstanceBase* mInstance = nullptr;
