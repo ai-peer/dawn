@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9167169e_25741ba7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-07T02:05:27Z",
+      "side": 1,
+      "message": "Another approach is the use of code generation to generate various namespace for EnumClassBitmasks, WDYT?",
+      "revId": "cbad2f3b4390feb07064d3f6b01c8aeea6787c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfa4d9e1_0b1ae543",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-07T02:05:27Z",
+      "side": 1,
+      "message": "PTAL, thanks.",
+      "revId": "cbad2f3b4390feb07064d3f6b01c8aeea6787c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
