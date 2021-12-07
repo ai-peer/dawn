@@ -121,10 +121,9 @@ namespace dawn_native {
 
         explicit operator bool() const;
 
-        // Create a device on this adapter, note that the interface will change to include at least
-        // a device descriptor and a pointer to backend specific options.
-        // On an error, nullptr is returned.
-        WGPUDevice CreateDevice(const DawnDeviceDescriptor* deviceDescriptor = nullptr);
+        // Create a device on this adapter. On an error, nullptr is returned.
+        WGPUDevice CreateDevice(const DawnDeviceDescriptor* deviceDescriptor);
+        WGPUDevice CreateDevice(const WGPUDeviceDescriptor* deviceDescriptor = nullptr);
 
         void RequestDevice(const DawnDeviceDescriptor* descriptor,
                            WGPURequestDeviceCallback callback,
@@ -173,6 +172,7 @@ namespace dawn_native {
         std::vector<Adapter> GetAdapters() const;
 
         const ToggleInfo* GetToggleInfo(const char* toggleName);
+        const FeatureInfo* GetFeatureInfo(WGPUFeatureName feature);
 
         // Enables backend validation layers
         void EnableBackendValidation(bool enableBackendValidation);
