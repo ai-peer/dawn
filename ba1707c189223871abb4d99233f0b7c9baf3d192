@@ -131,6 +131,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8fe3a0d7_779480b7",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-07T07:29:01Z",
+      "side": 1,
+      "message": "You\u0027ve got a point there. we\u0027d better introduce a separate Aspect::CombinedPlanes. Thanks!",
+      "parentUuid": "e210f373_02366213",
+      "range": {
+        "startLine": 674,
+        "startChar": 8,
+        "endLine": 677,
+        "endChar": 9
+      },
+      "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d354d5e0_ba9978b2",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 13
