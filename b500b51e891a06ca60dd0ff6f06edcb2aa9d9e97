@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d549218b_8c437ad8",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T09:10:06Z",
+      "side": 1,
+      "message": "Re-reading the spec I think I agree with your interpretation.\n\nCan we have another Vulkan-Docs issue for the addition of a new vkGetBufferMemoryRequirements guarantee so that drivers are forced to give us the same size for both handles?\n\nDo you have an example of when the debug code-path triggers and what the sizes are?\n\nAlso this can kind be a security issue but luckily it only happens on Nvidia Vulkan and we only ship by default on ChromeOS that doesn\u0027t have Nvidia GPUs. Can we also have a Dawn end2end test that repros this failure on its own so we can check if other GPUs have the same issue? (just they don\u0027t show it with this particular example) For example:\n - Allocated a large buffer and fill it with 1s.\n - Deallocates it.\n - Wait for GPU command completion and ticks the device multiple time to make sure it actually freed the space in the sub allocator.\n - Allocates a smaller buffer, zeroes it.\n - Sample the buffer OOB like in the test that was failing and check the value is 0.\n\nThe only proper fix I can see right now if requirements.size !\u003d newRequirements.size is to use the new buffer to do a fillBuffer operation on exactly the extra bytes mark the created buffer as \"last used with TransferDst\" so that the correct pipeline barrier is added on first use to see the written padding. This requires over-allocating the memory given to the suballocator though even a buffer placed at the very end of it can have a bigger buffer created to fill the padding. Ew.",
+      "parentUuid": "c897a314_1fea7c1f",
+      "revId": "b500b51e891a06ca60dd0ff6f06edcb2aa9d9e97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47c6d0a7_059297bf",
         "filename": "src/tests/white_box/BufferAllocatedSizeTests.cpp",
         "patchSetId": 2
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "Hmm I just tried this but this has some issues when the requiredBufferAlignment is actually 1, since IIUC, we are pretty much assuming the actual returned size to be the alignment criteria, but we are not asking for a buffer of size 1 so there is no way to know. I will keep this as is for now until we can find a better way to do it.",
       "parentUuid": "47c6d0a7_059297bf",
+      "revId": "b500b51e891a06ca60dd0ff6f06edcb2aa9d9e97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1bca95d_b931214e",
+        "filename": "src/tests/white_box/BufferAllocatedSizeTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T09:10:06Z",
+      "side": 1,
+      "message": "In Vulkan we still require an alignment of 4, it\u0027s just that it can be larger, so wouldn\u0027t changing the logic to be in terms of alignment instead of exact size make this work?",
+      "parentUuid": "9f8e6df1_3a42b866",
       "revId": "b500b51e891a06ca60dd0ff6f06edcb2aa9d9e97",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
