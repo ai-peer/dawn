@@ -33,6 +33,91 @@
       "message": "PTAL, thanks.",
       "revId": "cbad2f3b4390feb07064d3f6b01c8aeea6787c76",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66d0ff27_e3ccb1fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T09:43:26Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "cbad2f3b4390feb07064d3f6b01c8aeea6787c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "817aa38a_a05f8d91",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T09:43:26Z",
+      "side": 1,
+      "message": "note: I think with ADL, SFINAE and constexpr functions there should be a way to not need all these namespaces but we can try to do this kind of magic much later in the future.",
+      "revId": "cbad2f3b4390feb07064d3f6b01c8aeea6787c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55652ac8_42501184",
+        "filename": "src/include/dawn/EnumClassBitmasks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T09:43:26Z",
+      "side": 1,
+      "message": "nit: I think the macro should start with DAWN_ to be properly namespaced. Maybe DAWN_IMPORT_BITMASK_OPERATORS? Also we should explain that the operators need to be in the correct namespace for C++ Argument Dependent Lookup to work.",
+      "revId": "cbad2f3b4390feb07064d3f6b01c8aeea6787c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "700f5243_3b75196b",
+        "filename": "src/tests/unittests/EnumClassBitmasksTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T09:43:26Z",
+      "side": 1,
+      "message": "I think we can just use the dawn namespace in this file instead.",
+      "revId": "cbad2f3b4390feb07064d3f6b01c8aeea6787c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d213aca_531c6998",
+        "filename": "src/tests/unittests/MathTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T09:43:26Z",
+      "side": 1,
+      "message": "Why is this put in two namespaces, dawn and dawn again? Isn\u0027t a single one sufficient?",
+      "revId": "cbad2f3b4390feb07064d3f6b01c8aeea6787c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
