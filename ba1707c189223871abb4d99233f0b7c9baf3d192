@@ -83,6 +83,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01ae1179_82662540",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-07T02:05:36Z",
+      "side": 1,
+      "message": "In Texture::CreateFromExternal(...), This function InitializeFromExternal(...) runs after the Texture::Texture(...), where mSubresourceLastUsage has been initialized with Plane0/Plane1 for NV12 already. As a result, I manually change mSubresourceLastUsages to Color here. As it seems to me there isn\u0027t such a method in SubresourceStorage class that can modify the \u0027aspects\u0027 directly, so I chose to use the unique_ptr to destroy it, and create a new one instead. Maybe I should have add some comments for that. I would really appreciate your perspective on this!",
+      "parentUuid": "4746c434_d3cb2305",
+      "range": {
+        "startLine": 674,
+        "startChar": 8,
+        "endLine": 677,
+        "endChar": 9
+      },
+      "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d354d5e0_ba9978b2",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 13
@@ -163,6 +187,30 @@
       "writtenOn": "2021-12-06T18:31:11Z",
       "side": 1,
       "message": "if this were using the c++ api too with wgpu::DawnTextureInternalUsageDescriptor, then you wouldn\u0027t need to reinterpret_cast to assign to nextInChain, below",
+      "range": {
+        "startLine": 150,
+        "startChar": 8,
+        "endLine": 150,
+        "endChar": 47
+      },
+      "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "749093c6_d4b94874",
+        "filename": "src/tests/end2end/VideoViewsTests_gbm.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-07T02:05:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dec01732_6ac72e74",
       "range": {
         "startLine": 150,
         "startChar": 8,
