@@ -51,6 +51,24 @@
       "parentUuid": "4e06a25e_0a75833f",
       "revId": "0452c6724c9b710dcb45a6b021b81191b8da5573",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f140c699_90fef8b9",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceOpaqueFD.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T09:28:50Z",
+      "side": 1,
+      "message": "requiresDedicatedAllocation also returns false. (and the spec requires that \"requires\" implies \"prefer\"). Yeah that\u0027s kind of annoying. I think we could make the boolean default to true since most people will be using that?",
+      "parentUuid": "f1f0ec11_34ab5f8e",
+      "revId": "0452c6724c9b710dcb45a6b021b81191b8da5573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
