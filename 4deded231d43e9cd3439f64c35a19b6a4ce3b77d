@@ -140,6 +140,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "060b85e4_3acd8726",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbf358a7_d29c770e",
+      "range": {
+        "startLine": 860,
+        "startChar": 74,
+        "endLine": 860,
+        "endChar": 87
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc927528_53c98baf",
@@ -153,6 +177,24 @@
       "writtenOn": "2021-12-01T23:23:17Z",
       "side": 1,
       "message": "unrelated nit: Shouldn\u0027t the names be spelled \"flip y\" and \"alpha op\"?",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "197455d2_bf326951",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc927528_53c98baf",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -228,6 +270,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52093f4a_d48a29dc",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c783a7f_4f4dd93a",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ff5aa34_235f52c1",
@@ -275,6 +335,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6a5929a_b12f5443",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7022d0e5_61be84ee",
+      "range": {
+        "startLine": 46,
+        "startChar": 18,
+        "endLine": 46,
+        "endChar": 27
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ef48d4c_8ae1e2d5",
@@ -298,6 +382,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "698abcdb_7ab21cde",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ef48d4c_8ae1e2d5",
+      "range": {
+        "startLine": 56,
+        "startChar": 26,
+        "endLine": 56,
+        "endChar": 31
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1032bee_614ba165",
@@ -311,6 +419,30 @@
       "writtenOn": "2021-12-01T16:21:43Z",
       "side": 1,
       "message": "nit: s/\\t/    / (replace tabs with 4 spaces)",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 1
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f14444a7_8ccb5353",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1032bee_614ba165",
       "range": {
         "startLine": 57,
         "startChar": 0,
@@ -416,6 +548,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "890c8384_c7be96a6",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "098f9fdf_eafafa74",
+      "range": {
+        "startLine": 58,
+        "startChar": 32,
+        "endLine": 58,
+        "endChar": 41
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad8b4e06_e0454188",
@@ -429,6 +585,30 @@
       "writtenOn": "2021-12-01T23:23:17Z",
       "side": 1,
       "message": "nit: Browser",
+      "range": {
+        "startLine": 60,
+        "startChar": 49,
+        "endLine": 60,
+        "endChar": 56
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97de4992_16465b17",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad8b4e06_e0454188",
       "range": {
         "startLine": 60,
         "startChar": 49,
@@ -486,6 +666,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68830a53_02dcfea7",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d23e7208_7b05a671",
+      "range": {
+        "startLine": 62,
+        "startChar": 57,
+        "endLine": 62,
+        "endChar": 62
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adfb48d0_7e2a564f",
@@ -499,6 +703,24 @@
       "writtenOn": "2021-12-01T23:23:17Z",
       "side": 1,
       "message": "Architectures might prefer a \"vectorized\" version of this operation which operates on all three components in parallel, like:\n\n ... (v: vec3\u003cf32\u003e) -\u003e vec3\u003cf32\u003e {\n   let linear_part \u003d vec3\u003cf32\u003e(12.92) * v;\n   let gamma_part \u003d vec3\u003cf32\u003e(1.055) * pow(v, vec3\u003cf32\u003e(1.0 / 2.4)) - vec3\u003cf32\u003e(0.055);\n   return select(gamma_part, linear_part, v \u003c vec\u003cf32\u003e(0.0031308));\n }\n\nNot very necessary to do now, but could try it, or leave a TODO to consider it.",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c63c7abe_f60d73d4",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adfb48d0_7e2a564f",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -573,6 +795,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4a37c00_c7a57a61",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc42d4cd_9c17303e",
+      "range": {
+        "startLine": 76,
+        "startChar": 26,
+        "endLine": 76,
+        "endChar": 31
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c428d5e_fb70b342",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1986f026_220abec5",
+      "range": {
+        "startLine": 76,
+        "startChar": 73,
+        "endLine": 76,
+        "endChar": 80
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9136525_e4c7ac6e",
@@ -586,6 +856,24 @@
       "writtenOn": "2021-12-01T16:21:43Z",
       "side": 1,
       "message": "ditto",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6454e46c_6dfd285b",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9136525_e4c7ac6e",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -639,6 +927,24 @@
       "side": 1,
       "message": "I think I am just confused because some of the alpha premultiplication is handled inside color_space_conversion and some of it is outside. If you\u0027re going to refactor this then I\u0027ll not worry about it for now.",
       "parentUuid": "642b1b76_7dcc89c4",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "695ca7f7_b8aafe9b",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6e5347c_dce4c24a",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -714,6 +1020,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ace7233d_613638d6",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10ae74a1_68cbc728",
+      "range": {
+        "startLine": 117,
+        "startChar": 52,
+        "endLine": 117,
+        "endChar": 54
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c35a023d_806a9376",
@@ -767,6 +1097,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cb3596e_7da19a30",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f89d909_d3571b3e",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6467e9f5_d782c9db",
@@ -780,6 +1128,24 @@
       "writtenOn": "2021-12-01T23:23:17Z",
       "side": 1,
       "message": "Also needs to run for display p3?",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "452824b2_99496332",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6467e9f5_d782c9db",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -831,6 +1197,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd64d941_d59519ab",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8206ed0f_9c0c15f9",
+      "range": {
+        "startLine": 152,
+        "startChar": 42,
+        "endLine": 152,
+        "endChar": 44
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f2806f9_27ce54b2",
@@ -854,6 +1244,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1581473_83f3d490",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f2806f9_27ce54b2",
+      "range": {
+        "startLine": 153,
+        "startChar": 20,
+        "endLine": 153,
+        "endChar": 34
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dda2a760_73e5a657",
@@ -867,6 +1281,24 @@
       "writtenOn": "2021-12-01T16:21:43Z",
       "side": 1,
       "message": "You can use ValidationUtils_autogen.h and call ValidateColorSpace().\n\nSo the code could be\n\n  DAWN_TRY(ValidateColorSpace(srcColorSpace));\n  DAWN_TRY(ValidateColorSpace(dstColorSpace));\n  DAWN_INVALID_IF(dstColorSpace, \"Destination color space (%s) is not %s.\", dstColorSpace, wgpu::ColorSpace::SRGB);\n  \n(and IMHO then we don\u0027t need a new function for this)",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df444093_0958aa77",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dda2a760_73e5a657",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -929,6 +1361,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "830ae0d2_dcace644",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87d531c8_460303a2",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27f40793_2257ff77",
@@ -942,6 +1392,24 @@
       "writtenOn": "2021-12-01T16:21:43Z",
       "side": 1,
       "message": "We must avoid global constructors in Chromium, and unordered_map\u0027s constructor is not constexpr. Can we instead have something similar to what is done in Format.cpp or VulkanExtensions.cpp where we have an array of values that\u0027s constexpr and we check when accessing it that the ColorSpace associated with the entry is what we expected?",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bb5ea1b_a3abf5c9",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27f40793_2257ff77",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -969,6 +1437,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f0d8bc3_6fe57ec6",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a586889_4c711b6e",
+      "range": {
+        "startLine": 403,
+        "startChar": 14,
+        "endLine": 403,
+        "endChar": 34
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e17d49f_da63b6d7",
@@ -982,6 +1474,24 @@
       "writtenOn": "2021-12-01T16:21:43Z",
       "side": 1,
       "message": "Why does fuseMatrix start as the partial identity? All values will be overwritten anyway so we can use {} (that will zero initialize).",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25f09d55_6ee9cdc9",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e17d49f_da63b6d7",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -1003,6 +1513,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "061b3f29_ecf5c868",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf6338e9_fb5adfbb",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3dc1f2a3_7e38bbcb",
@@ -1020,6 +1548,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c5f4136_b68327f5",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3dc1f2a3_7e38bbcb",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01a3f071_601e19b3",
@@ -1033,6 +1579,24 @@
       "writtenOn": "2021-12-01T16:21:43Z",
       "side": 1,
       "message": "I think that if uniformData contained that data and GetTransformMatrix used at [b], then a pointer to the stack would be passed to GetTransformMatrix and \"return value optimization\" would happen. This means that we can keep using utils::CreateBufferFromData without any performance penalty.",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7b1d676_d51e45a5",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01a3f071_601e19b3",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -1104,6 +1668,24 @@
       "side": 1,
       "message": "Got it 😂",
       "parentUuid": "c8b319a1_6a948953",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5fd600e_6e34d9c7",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "286b050e_97604309",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

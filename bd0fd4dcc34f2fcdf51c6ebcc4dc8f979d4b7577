@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d81461c8_1919c62d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-07T09:29:20Z",
+      "side": 1,
+      "message": "Spend time on initialize-list and uniform alignment. Finally got a new patch set! PTAL again, thanks!",
+      "revId": "bd0fd4dcc34f2fcdf51c6ebcc4dc8f979d4b7577",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
