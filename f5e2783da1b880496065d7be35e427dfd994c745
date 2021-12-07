@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a60232f2_8d805a07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-12-07T23:44:34Z",
+      "side": 1,
+      "message": "Note that this CL assumes that https://github.com/gpuweb/gpuweb/pull/2393 will land and is the desired behavior.",
+      "revId": "f5e2783da1b880496065d7be35e427dfd994c745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
