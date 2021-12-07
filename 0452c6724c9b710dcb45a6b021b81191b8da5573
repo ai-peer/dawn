@@ -69,6 +69,24 @@
       "parentUuid": "f1f0ec11_34ab5f8e",
       "revId": "0452c6724c9b710dcb45a6b021b81191b8da5573",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05b04301_b2611851",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceOpaqueFD.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-07T18:17:35Z",
+      "side": 1,
+      "message": "sad. default to true sounds good to me",
+      "parentUuid": "f140c699_90fef8b9",
+      "revId": "0452c6724c9b710dcb45a6b021b81191b8da5573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
