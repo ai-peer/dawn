@@ -1305,6 +1305,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fad2ae0b_3e1875c5",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T13:58:34Z",
+      "side": 1,
+      "message": "This seems like it wasn\u0027t addressed completely.",
+      "parentUuid": "df444093_0958aa77",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8fb88b81_88f43473",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 3
@@ -1727,6 +1745,24 @@
       "writtenOn": "2021-12-01T16:21:43Z",
       "side": 1,
       "message": "Sorry I didn\u0027t have time to re-review the tests yet.",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "352134aa_055270cc",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-07T13:58:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e8654b9d_5327c9da",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
