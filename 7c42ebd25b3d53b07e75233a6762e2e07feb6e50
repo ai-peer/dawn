@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "075e7baa_a4705f1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-07T18:59:22Z",
+      "side": 1,
+      "message": "Opening up this patch stack for feedback. Tests are in this CL and implementation is below it. Basically, this stack implements passing descriptors and forwarding callbacks for requestAdapter and requestDevice. It does not yet actually implement those in dawn_native, or provide a way for Chromium to customize what requestAdapter/Device returns.\n",
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
