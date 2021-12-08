@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "296e727a_07409065",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T03:02:09Z",
+      "side": 1,
+      "message": "Nice find!\n\nNow thinking about it, it makes sense Chromium would be willing to do this in order to prevent the shader from being regenerated and recompiled. But since we don\u0027t regenerate the shader, I don\u0027t think it\u0027s super necessary for Dawn. I\u0027m not so worried about copying over a few extra floats in the wire command.\n\nIt\u0027s interesting that the code you linked only detects when a profile \u003d\u003d sRGB (but not Display-P3 or Adobe RGB or other common profiles). Maybe those are somewhere else.\n\nI also don\u0027t know how common it is for user images to have ICC profiles that don\u0027t match one of the common profiles. But if Dawn supports only a few (like sRGB and Display-P3) then there will certainly be plenty of others that show up, at least Adobe RGB, Display P3, and ProPhoto like on https://webkit.org/blog-files/color-gamut/\n\nOTOH the spec dictates a small possible list of _destination_ color spaces, so using presets there makes sense.\n\nWhat I\u0027m currently envisioning would have CopyTextureForBrowser pass the following:\n\n- srcAlphaMode: enum { premul, unpremul }\n- srcTransferFunctionParameters: f32 A,B,C,E,F,G,epsilon\n- 3x3 f32 conversion matrix\n- dstTransferFunction: enum { linear, srgb } // doesn\u0027t make sense to specify the whole color space because it would make it non-orthogonal to the conversion matrix\n- dstAlphaMode: enum { premul, unpremul }",
+      "parentUuid": "804c7bff_802ba2d2",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3d30207_8a2ed744",
         "filename": "dawn.json",
         "patchSetId": 5
