@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8177b4fe_1220c00a",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T21:40:18Z",
+      "side": 1,
+      "message": "The fix you wrote down looks great, the only tricky thing is to make sure that the writes done through handle 2 are visible through handle 1. You\u0027ll need to set something like mLastUsage \u003d wgpu::BufferUsage::CopyDst so that the next time we try to use the buffer, it emits a pipeline barrier that makes the write from vkCmdFillBuffer to whatever will use the buffer.\n\nAlso maybe add a note that it is technically Vulkan resource aliasing, but that\u0027s specified to work as expected since non-sparse buffers are linear resources (does it make sense when you read that?)",
+      "parentUuid": "a68ef51e_b8ecebe1",
+      "revId": "b500b51e891a06ca60dd0ff6f06edcb2aa9d9e97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47c6d0a7_059297bf",
         "filename": "src/tests/white_box/BufferAllocatedSizeTests.cpp",
         "patchSetId": 2
