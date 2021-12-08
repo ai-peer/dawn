@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7619c055_0dd2b372",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T21:27:43Z",
+      "side": 1,
+      "message": "nit. Maybe just DeprecatedDawnDeviceDescriptor? Not sure what the \"Combo\" part adds?",
+      "range": {
+        "startLine": 30,
+        "startChar": 15,
+        "endLine": 30,
+        "endChar": 50
+      },
+      "revId": "a06e2e7a2b7ff4a23ca236cb0d9cd6c996ec8abf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4edbcff4_7a86d324",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T21:27:43Z",
+      "side": 1,
+      "message": "Is this needed? We can\u0027t just do something like:\n```\nnextInChain \u003d \u0026mTogglesDesc\n```\ndirectly?",
+      "range": {
+        "startLine": 35,
+        "startChar": 16,
+        "endLine": 35,
+        "endChar": 46
+      },
+      "revId": "a06e2e7a2b7ff4a23ca236cb0d9cd6c996ec8abf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b3d457c_60110b19",
+        "filename": "src/dawn_native/Features.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T21:27:43Z",
+      "side": 1,
+      "message": "Wait... is this missing from the header now?",
+      "range": {
+        "startLine": 218,
+        "startChar": 4,
+        "endLine": 218,
+        "endChar": 52
+      },
+      "revId": "a06e2e7a2b7ff4a23ca236cb0d9cd6c996ec8abf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faf968d6_6d910cea",
+        "filename": "src/dawn_native/Features.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T21:27:43Z",
+      "side": 1,
+      "message": "Ah... the name FeatureName for an enum is so misleading... Just Feature would have been probably better. Not something we can easily change so don\u0027t worry about it though...",
+      "range": {
+        "startLine": 70,
+        "startChar": 42,
+        "endLine": 70,
+        "endChar": 59
+      },
+      "revId": "a06e2e7a2b7ff4a23ca236cb0d9cd6c996ec8abf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
