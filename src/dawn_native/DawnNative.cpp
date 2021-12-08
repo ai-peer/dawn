@@ -164,6 +164,10 @@ namespace dawn_native {
         return ToAPI(mImpl->CreateDevice(&desc));
     }
 
+    WGPUDevice Adapter::CreateDevice(const wgpu::DeviceDescriptor* deviceDescriptor) {
+        return CreateDevice(reinterpret_cast<const WGPUDeviceDescriptor*>(deviceDescriptor));
+    }
+
     WGPUDevice Adapter::CreateDevice(const WGPUDeviceDescriptor* deviceDescriptor) {
         return ToAPI(mImpl->CreateDevice(FromAPI(deviceDescriptor)));
     }
@@ -175,8 +179,26 @@ namespace dawn_native {
         mImpl->APIRequestDevice(&desc, callback, userdata);
     }
 
+    void Adapter::RequestDevice(const wgpu::DeviceDescriptor* descriptor,
+                                WGPURequestDeviceCallback callback,
+                                void* userdata) {
+        mImpl->APIRequestDevice(reinterpret_cast<const DeviceDescriptor*>(descriptor), callback,
+                                userdata);
+    }
+
+    void Adapter::RequestDevice(const WGPUDeviceDescriptor* descriptor,
+                                WGPURequestDeviceCallback callback,
+                                void* userdata) {
+        mImpl->APIRequestDevice(reinterpret_cast<const DeviceDescriptor*>(descriptor), callback,
+                                userdata);
+    }
+
     void Adapter::ResetInternalDeviceForTesting() {
         mImpl->ResetInternalDeviceForTesting();
+    }
+
+    WGPUAdapter Adapter::Get() const {
+        return ToAPI(mImpl);
     }
 
     // AdapterDiscoverOptionsBase
