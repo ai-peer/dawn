@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c65000a_6f8f44f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:47:19Z",
+      "side": 1,
+      "message": "When we implement the path fully, won\u0027t we have a problem because the renderer process can start causing crashes in the GPU process even if it isn\u0027t the path it is supposed to use?",
+      "revId": "9502d5d9f9bac9f01c4535a3bd322cfba45a0a6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e26a8fc_2f3c8881",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:47:19Z",
+      "side": 1,
+      "message": "I think we need to figure out the story for embedding in Chromium before we add paths that are partially implemented. LGTM otherwise.",
+      "revId": "9502d5d9f9bac9f01c4535a3bd322cfba45a0a6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a567e7dd_7e0e0e83",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:47:19Z",
+      "side": 1,
+      "message": "maybe default nullptr too?",
+      "revId": "9502d5d9f9bac9f01c4535a3bd322cfba45a0a6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f3be607_ec5f0f06",
+        "filename": "src/dawn_wire/client/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:47:19Z",
+      "side": 1,
+      "message": "nit: UNIMPLEMENTED()?",
+      "range": {
+        "startLine": 20,
+        "startChar": 8,
+        "endLine": 20,
+        "endChar": 19
+      },
+      "revId": "9502d5d9f9bac9f01c4535a3bd322cfba45a0a6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f6a74d5_20e83b75",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:47:19Z",
+      "side": 1,
+      "message": "nit: we usually have tests for this reservation APIs, but I don\u0027t know how easy it is to do for Instance since it is the root object.",
+      "revId": "9502d5d9f9bac9f01c4535a3bd322cfba45a0a6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
