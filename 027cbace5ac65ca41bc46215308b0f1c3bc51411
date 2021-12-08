@@ -54,6 +54,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d65ef67b_cd130c6b",
+        "filename": "src/dawn_native/Features.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T20:53:01Z",
+      "side": 1,
+      "message": "Might be useful to have a comment to document nullptr input since it\u0027s not obvious from the header.",
+      "range": {
+        "startLine": 56,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 70
+      },
+      "revId": "027cbace5ac65ca41bc46215308b0f1c3bc51411",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6e40300_d466cccf",
         "filename": "src/dawn_wire/client/Adapter.cpp",
         "patchSetId": 5
