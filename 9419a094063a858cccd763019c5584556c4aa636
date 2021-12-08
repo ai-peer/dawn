@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b84f886d_9e427ee6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T18:46:18Z",
+      "side": 1,
+      "message": "```\nisn\u0027t it sufficient to set mDescriptorSetAllocator to nullptr in BGL::DestroyImpl\n```\nUnfortunately it is not because when the *::DestroyImpl functions all run in sequence before any Ticking can be done in the Device::Destroy function. The DescriptorSetAllocator\u0027s (DSA) dtor has an ASSERT that assumes Ticks have been ran so that memory has actually been released. So the DSA\u0027s dtor cannot be ran in BGL::DestroyImpl, and needs to be ran after. Running it after, however, means that the BGL may have already been destroyed and getting the Device is not safe anymore so we need the DSA to hold a pointer to the Device where it calls GetFencedDeleter.\n\n```\na reason to deduplicate DescriptorSetAllocators between multiple BGLs\n```\nRight, I saw the comment and thought this as well.",
+      "parentUuid": "35b6efef_ea503070",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0f7beaa0_07c18e5e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 11
@@ -93,6 +111,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c2c2f85_c0aa4b4a",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T18:46:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "498d4a3a_e15e5daa",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 48
+      },
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07c68186_41e65756",
@@ -130,6 +172,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4165229c_0cce28c5",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T18:46:18Z",
+      "side": 1,
+      "message": "```\nObjectBase has a lot more functionality than just these two things\n```\nHmm, ObjectBase doesn\u0027t have THAT much more functionality? Maybe you are thinking about ApiObjectBase?\n\n\n```\nthere\u0027s no precedent for using ObjectBase for non-API objects that I know of\n```\nDepends on whether you consider AttachmentState to be API object. But I feel like the allocator feels pretty similar.\n\nI can change if you guys feel strongly about it though, this feels like it reuses what we already have.",
+      "parentUuid": "9b801d4d_d044acc9",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b663d32e_48aee2be",
         "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.h",
         "patchSetId": 11
@@ -141,6 +201,30 @@
       "writtenOn": "2021-12-08T17:53:42Z",
       "side": 1,
       "message": "should this be private now?",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 92
+      },
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05b1869e_d9299658",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T18:46:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b663d32e_48aee2be",
       "range": {
         "startLine": 41,
         "startChar": 8,
@@ -182,6 +266,24 @@
       "side": 1,
       "message": "We already do that! at [1]",
       "parentUuid": "d30f4593_10fa08fb",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b248d348_5215a8b7",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T18:46:18Z",
+      "side": 1,
+      "message": "Yup! Thanks Austin!",
+      "parentUuid": "2577e305_c6935998",
       "revId": "9419a094063a858cccd763019c5584556c4aa636",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
