@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5efa6df7_4a4d9472",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-08T04:16:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f31aa21_4106162d",
+      "range": {
+        "startLine": 62,
+        "startChar": 97,
+        "endLine": 63,
+        "endChar": 16
+      },
+      "revId": "a9e3e84fe962c136779ddff27b796439011a1587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "679fdb93_f4728bf6",
@@ -104,6 +128,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b80f605_f0645951",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-08T04:16:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1e009a96_0d168802",
+      "range": {
+        "startLine": 65,
+        "startChar": 70,
+        "endLine": 65,
+        "endChar": 71
+      },
+      "revId": "a9e3e84fe962c136779ddff27b796439011a1587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc5f6d63_3b3babc5",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-08T04:16:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "679fdb93_f4728bf6",
+      "range": {
+        "startLine": 65,
+        "startChar": 41,
+        "endLine": 65,
+        "endChar": 46
+      },
+      "revId": "a9e3e84fe962c136779ddff27b796439011a1587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98389a4a_a584177f",
@@ -117,6 +189,30 @@
       "writtenOn": "2021-12-07T13:34:50Z",
       "side": 1,
       "message": "nit: Dawn can\u0027t rely... ?",
+      "range": {
+        "startLine": 66,
+        "startChar": 30,
+        "endLine": 66,
+        "endChar": 43
+      },
+      "revId": "a9e3e84fe962c136779ddff27b796439011a1587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9e384fd_eab55495",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-08T04:16:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98389a4a_a584177f",
       "range": {
         "startLine": 66,
         "startChar": 30,
@@ -174,6 +270,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84964ffd_f8a94f67",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-08T04:16:26Z",
+      "side": 1,
+      "message": "Dawn:485 has too many stuff. So I created a new issue with some explanations, and linked to more issues/changes.",
+      "parentUuid": "0e85363d_3c405f97",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 31
+      },
+      "revId": "a9e3e84fe962c136779ddff27b796439011a1587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95636b4f_dbeba73a",
@@ -187,6 +307,30 @@
       "writtenOn": "2021-12-07T13:34:50Z",
       "side": 1,
       "message": "Maybe we should remove the command because it could be vkCmdDrawIndexed or indirect too.",
+      "range": {
+        "startLine": 73,
+        "startChar": 5,
+        "endLine": 73,
+        "endChar": 25
+      },
+      "revId": "a9e3e84fe962c136779ddff27b796439011a1587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "328971c6_d3ace304",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-08T04:16:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95636b4f_dbeba73a",
       "range": {
         "startLine": 73,
         "startChar": 5,
@@ -246,6 +390,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55bff117_123eba19",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-08T04:16:26Z",
+      "side": 1,
+      "message": "Austin, can you talk to ANGLE folks about this? I remember that you found this method in ANGLE and talked to ANGLE folks before. Thank you!",
+      "parentUuid": "903a3bdd_5dab9677",
+      "range": {
+        "startLine": 75,
+        "startChar": 5,
+        "endLine": 79,
+        "endChar": 27
+      },
+      "revId": "a9e3e84fe962c136779ddff27b796439011a1587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7f3ad22_60001eba",
         "filename": "src/dawn_native/vulkan/BackendVk.cpp",
         "patchSetId": 6
@@ -257,6 +425,30 @@
       "writtenOn": "2021-12-07T13:34:50Z",
       "side": 1,
       "message": "uber-nit: if we invert the condition then the return can be inside the if and we don\u0027t need a continue.",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 17
+      },
+      "revId": "a9e3e84fe962c136779ddff27b796439011a1587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b889841b_0d4ae17c",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-08T04:16:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7f3ad22_60001eba",
       "range": {
         "startLine": 96,
         "startChar": 0,
@@ -284,6 +476,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7560213_ea4d2c32",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-08T04:16:26Z",
+      "side": 1,
+      "message": "Ack. I did this because I came across validation error during the implementation. But the validation error disappears now. \n\nThis validation error is texFormat\u003ddepthOnly (or stencilOnly), so we don\u0027t set loadOp/storeOp to LOAD/STORE for the other aspect. But we set DEPTH_STENCIL_READ_ONLY_OPTIMAL image layout (and maybe other flags). Note that these flags are set for both aspects because we don\u0027t have readonly for separate aspect on Vk 1.0. So Vulkan validation layer reports error even though for the other aspect even though the texFormat doesn\u0027t has that aspect.\n\nNow that it\u0027s gone. I can remove the code snippet. And I don\u0027t think the validation error I met before make any sense.",
+      "parentUuid": "47a23b2b_a87e58bd",
+      "revId": "a9e3e84fe962c136779ddff27b796439011a1587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e15eab98_e7934a62",
@@ -297,6 +507,30 @@
       "writtenOn": "2021-12-07T13:34:50Z",
       "side": 1,
       "message": "nit: unused for now? We can add it in the future when we implement NONE (or better, we\u0027ll have the thing set directly in the branch for readonly)",
+      "range": {
+        "startLine": 44,
+        "startChar": 52,
+        "endLine": 44,
+        "endChar": 83
+      },
+      "revId": "a9e3e84fe962c136779ddff27b796439011a1587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b5d6021_0892361b",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-08T04:16:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e15eab98_e7934a62",
       "range": {
         "startLine": 44,
         "startChar": 52,
@@ -324,6 +558,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1676c411_84c55843",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-08T04:16:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71c7a399_e3af22f2",
+      "revId": "a9e3e84fe962c136779ddff27b796439011a1587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcb56143_e4108fea",
@@ -347,6 +599,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bc2556b_6c1e279e",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-08T04:16:26Z",
+      "side": 1,
+      "message": "NONE_KHR or NONE_EXT doesn\u0027t work. Only NONE_QCOM works. It is a little weird to me. \n\nBut the numbers for all these enums are the same. Maybe NONE_QCOM came first, so Vulkan implementations used it and didn\u0027t change it to NONE_EXT or NONE_KHR because the values are the same.",
+      "parentUuid": "bcb56143_e4108fea",
+      "range": {
+        "startLine": 49,
+        "startChar": 48,
+        "endLine": 49,
+        "endChar": 72
+      },
+      "revId": "a9e3e84fe962c136779ddff27b796439011a1587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a39eeaf7_39b4e59d",
@@ -360,6 +636,24 @@
       "writtenOn": "2021-12-07T13:34:50Z",
       "side": 1,
       "message": "nit: no need to keep deadcode.",
+      "revId": "a9e3e84fe962c136779ddff27b796439011a1587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ad00e53_1eb54b2a",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-08T04:16:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a39eeaf7_39b4e59d",
       "revId": "a9e3e84fe962c136779ddff27b796439011a1587",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

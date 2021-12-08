@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cf08a40_b4e3daab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-08T04:16:26Z",
+      "side": 1,
+      "message": "PTAL. Thank you. \n\nLooks like windows bot is not stable. ",
+      "revId": "d8ac41ef8e994bd9564c66723101eae47316a076",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
