@@ -1,0 +1,221 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd1471bc_99051704",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:19:18Z",
+      "side": 1,
+      "message": "LGTM but I\u0027m surprised tests are in a different CL.",
+      "revId": "4ed002090182fbf022e70a7ea7cfb3ba48857024",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22c5e3ef_87be390f",
+        "filename": "dawn_wire.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:19:18Z",
+      "side": 1,
+      "message": "Just to check, additional limits will be handled by chaining descriptor?",
+      "revId": "4ed002090182fbf022e70a7ea7cfb3ba48857024",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b70398e_e44c7025",
+        "filename": "src/dawn_wire/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:19:18Z",
+      "side": 1,
+      "message": "nit: and the additional server objects too.",
+      "revId": "4ed002090182fbf022e70a7ea7cfb3ba48857024",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77f51c0c_555a65b2",
+        "filename": "src/dawn_wire/client/Adapter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:19:18Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 28,
+        "startChar": 33,
+        "endLine": 28,
+        "endChar": 50
+      },
+      "revId": "4ed002090182fbf022e70a7ea7cfb3ba48857024",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cf043fb_e4659afd",
+        "filename": "src/dawn_wire/client/Device.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:19:18Z",
+      "side": 1,
+      "message": "nit: it\u0027s a bit weird that a client is-a LimitsAndFeatures and not has-a LimitsAndFeatures. It saves some boilerplate but I think it makes things slightly less clear. LimitsAndFeatures could be a public member though if that helps avoid the boilerplate for Set calls?",
+      "range": {
+        "startLine": 34,
+        "startChar": 32,
+        "endLine": 34,
+        "endChar": 49
+      },
+      "revId": "4ed002090182fbf022e70a7ea7cfb3ba48857024",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5e821af_3ea4ef76",
+        "filename": "src/dawn_wire/client/Instance.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:19:18Z",
+      "side": 1,
+      "message": "Isn\u0027t the server side handled already? Seems like there\u0027s some other code that needs a comment update.",
+      "range": {
+        "startLine": 86,
+        "startChar": 59,
+        "endLine": 86,
+        "endChar": 75
+      },
+      "revId": "4ed002090182fbf022e70a7ea7cfb3ba48857024",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d467ae8_f1e23dff",
+        "filename": "src/dawn_wire/client/LimitsAndFeatures.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:19:18Z",
+      "side": 1,
+      "message": "nit: .count() !\u003d 0",
+      "range": {
+        "startLine": 31,
+        "startChar": 25,
+        "endLine": 31,
+        "endChar": 57
+      },
+      "revId": "4ed002090182fbf022e70a7ea7cfb3ba48857024",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a96b36b3_f56b3ec2",
+        "filename": "src/dawn_wire/client/LimitsAndFeatures.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:19:18Z",
+      "side": 1,
+      "message": "u-nit: range-based for loop + a features++; in the loop is just as good. Here we have to parse more to understand we were trying to have two end of loop statements.",
+      "range": {
+        "startLine": 36,
+        "startChar": 17,
+        "endLine": 36,
+        "endChar": 85
+      },
+      "revId": "4ed002090182fbf022e70a7ea7cfb3ba48857024",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55f9f284_97ffe3d4",
+        "filename": "src/dawn_wire/server/ServerAdapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:19:18Z",
+      "side": 1,
+      "message": "We should match the requested features against the allow list of features to make sure that we don\u0027t let features the wire doesn\u0027t support go through.",
+      "revId": "4ed002090182fbf022e70a7ea7cfb3ba48857024",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a239829_55bb808a",
+        "filename": "src/dawn_wire/server/ServerInstance.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:19:18Z",
+      "side": 1,
+      "message": "nit: slight preference to do:\n\n if (status !\u003d Success) {\n    FreeObject, ASSERT\n    SerializeCommand\n    return;\n }\n \n // Now we can declare stuff on the stack\n         WGPUAdapterProperties properties \u003d {};\n        WGPUSupportedLimits limits \u003d {};\n        std::vector\u003cWGPUFeatureName\u003e features;\n        \n ditto for the device.",
+      "revId": "4ed002090182fbf022e70a7ea7cfb3ba48857024",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b61a5ba_51debd0f",
+        "filename": "src/dawn_wire/server/ServerInstance.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:19:18Z",
+      "side": 1,
+      "message": "I think that the wire should have an allow list of features that it filters against, because if some features require additional limits to be chained in to adapterGetLimits, we will forget to add them.",
+      "revId": "4ed002090182fbf022e70a7ea7cfb3ba48857024",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
