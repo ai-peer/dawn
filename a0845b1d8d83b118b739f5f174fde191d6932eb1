@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "071a10b7_6f26b855",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T00:45:46Z",
+      "side": 1,
+      "message": "\u003e we would move all of the ColorSpaceTable data to Blink where it\u0027s probably already known?\nNo, chromium doesn\u0027t have it. Chromium calculate all of the matrices and transferFn parameters in runtime(Chromium only have the basic color space metas, e.g. rx, ry, gx, gy, bx, by and white point). So I think we still need to have the similar table in blink.\n\nThe only concern here is the data it transfers between client and server. With ID, we have less bytes to transfer and the serialization/deserialization doesn\u0027t touch the value we need in conversion.\nBTW, Chromium has a comments in the ColorSpace IDs part but I\u0027m not quite sure I fully understand it. It says, \n\"// Used to represet a color space for the purpose of color conversion.\n// This is designed to be safe and compact enough to send over IPC\n// between any processes.\n\"\n(https://source.chromium.org/chromium/chromium/src/+/main:ui/gfx/color_space.h;l\u003d59)",
+      "parentUuid": "c5fb0961_4f7ab59b",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3d30207_8a2ed744",
         "filename": "dawn.json",
         "patchSetId": 5
@@ -306,6 +324,30 @@
       "writtenOn": "2021-12-07T13:58:34Z",
       "side": 1,
       "message": "nit mathematics",
+      "range": {
+        "startLine": 340,
+        "startChar": 15,
+        "endLine": 340,
+        "endChar": 25
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a661242f_85e8afc9",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T00:45:46Z",
+      "side": 1,
+      "message": "Really sry for these mis-spelling issues(in long time). I\u0027ve installed a vscode plug in named Code Spell Checker(https://marketplace.visualstudio.com/items?itemName\u003dstreetsidesoftware.code-spell-checker) to see whether it helps.",
+      "parentUuid": "8119de98_6ee798da",
       "range": {
         "startLine": 340,
         "startChar": 15,
@@ -621,6 +663,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de3fa681_edfc6641",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T00:45:46Z",
+      "side": 1,
+      "message": "No, it is not, so I have a TODO in line 637. Plan to calculate the result in CPU or Compute shader with the basic color space info (which means we\u0027ll calculate the conversion matrix, transferFn). But it is a big change, so I plan to have it in a following up CL.",
+      "parentUuid": "07e37ea1_34743614",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "429a6dbb_bf2de096",
@@ -634,6 +694,24 @@
       "writtenOn": "2021-12-08T00:03:47Z",
       "side": 1,
       "message": "Apple\u0027s what?",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b26b558_28ea2d4d",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T00:45:46Z",
+      "side": 1,
+      "message": "Oops...",
+      "parentUuid": "429a6dbb_bf2de096",
       "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
