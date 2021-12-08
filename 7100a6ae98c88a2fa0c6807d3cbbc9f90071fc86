@@ -125,6 +125,24 @@
       "parentUuid": "d9608616_40aa49bd",
       "revId": "7100a6ae98c88a2fa0c6807d3cbbc9f90071fc86",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f58e9357_fd92a161",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T21:35:21Z",
+      "side": 1,
+      "message": "Talked with Dzmitry, he would like to avoid wgpu.dll that\u0027s a Dawn thing, which makes sense. He (or Kai) suggested webgpu_dawn.dll WDYT?",
+      "parentUuid": "e8b95b43_61b1a1d0",
+      "revId": "7100a6ae98c88a2fa0c6807d3cbbc9f90071fc86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
