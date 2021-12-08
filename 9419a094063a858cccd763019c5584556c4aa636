@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc77365c_6fc7979f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:29:42Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand why the DescriptorSetAllocator needs to outlive the layout, isn\u0027t it sufficient to set mDescriptorSetAllocator to nullptr in BGL::DestroyImpl?\n\nBut also I think we can keep the change as is if you want. In the future we\u0027re likely to have a reason to deduplicate DescriptorSetAllocators between multiple BGLs.",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f7beaa0_07c18e5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:29:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07c68186_41e65756",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:29:42Z",
+      "side": 1,
+      "message": "nit: Small preference to use Refcounted + mDevice. ObjectBase has a lot more functionality than just these two things and there\u0027s no precedent for using ObjectBase for non-API objects that I know of.",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d30f4593_10fa08fb",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:29:42Z",
+      "side": 1,
+      "message": "nit: can we have a TODO + an issue to avoid adding redundant refs to the same DescriptorSetAllocator for the same ExecutionSerial?",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
