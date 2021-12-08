@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a68ef51e_b8ecebe1",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T20:23:53Z",
+      "side": 1,
+      "message": "Ugh.. sorry the formatting got really messed up... Since there\u0027s no way to edit here is a revised version of the comment:\n\n```\nCan we have another Vulkan-Docs issue for the addition of a new vkGetBufferMemoryRequirements guarantee so that drivers are forced to give us the same size for both handles?\n```\n\nSure, I will file one.\n\n```\nDo you have an example of when the debug code-path triggers and what the sizes are?\n```\n\nI just saw failures when running CQ. I will repro and try to get concrete numbers.\n\n```\nCan we also have a Dawn end2end test that repros this failure\n```\n\nWill do along with the other fixes.\n\n```\nThe only proper fix I can see right now ...\n```\n\nI am a bit confused about the wording of the suggested fix. Can you elaborate a bit?\n\nAlternatively, this is what I was thinking and maybe you can correct/update on what parts of it could be improved:\n- Allocate buffer handle 1\n- Get requirements for handle 1\n- Allocate buffer handle 2 using size in requirements for handle 1\n- Get requirements for handle 2 (If different...)\n- Allocate actual memory based on requirements for handle 2\n- Bind memory to handle 2 and zero out region up to req.size for handle 1\n- (Optionally?) Unbind memory from handle 2, and bind to handle 1.",
+      "parentUuid": "88707752_e32548f9",
+      "revId": "b500b51e891a06ca60dd0ff6f06edcb2aa9d9e97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47c6d0a7_059297bf",
         "filename": "src/tests/white_box/BufferAllocatedSizeTests.cpp",
         "patchSetId": 2
