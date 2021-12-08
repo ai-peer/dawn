@@ -251,6 +251,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90a489f9_18d96093",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T08:53:29Z",
+      "side": 1,
+      "message": "Note that Aspect::CombinedPlanes is an internal frontend mask, what the users see are wgpu::TextureAspect::[Plane0Only, StencilOnly, All, ...].\n\nThe addition of CombinedPlanes in the frontend is so that SubresourceStorage that\u0027s also a frontend type can use it so we store the texture state for a single \"plane\" instead of two planes that happen to always be the same.\n\nEither direction sounds good I think, but we can keep things the way they are currently and see later. We have been iterating on this CL a lot and I want to make sure you aren\u0027t blocked indefinitely on finding the perfect design for this. (it only needs to be correct to the best of our knowledge).",
+      "parentUuid": "07811667_baf27c12",
+      "range": {
+        "startLine": 674,
+        "startChar": 8,
+        "endLine": 677,
+        "endChar": 9
+      },
+      "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d354d5e0_ba9978b2",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 13
