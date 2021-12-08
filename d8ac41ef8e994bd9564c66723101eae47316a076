@@ -16,6 +16,41 @@
       "message": "PTAL. Thank you. \n\nLooks like windows bot is not stable. ",
       "revId": "d8ac41ef8e994bd9564c66723101eae47316a076",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6111b73_d1168c61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T09:49:01Z",
+      "side": 1,
+      "message": "It seems it was a one off. The bot is green now.",
+      "parentUuid": "6cf08a40_b4e3daab",
+      "revId": "d8ac41ef8e994bd9564c66723101eae47316a076",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcba7ec3_3a0ef65c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T09:49:01Z",
+      "side": 1,
+      "message": "LGTM. No additional comments.",
+      "revId": "d8ac41ef8e994bd9564c66723101eae47316a076",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
