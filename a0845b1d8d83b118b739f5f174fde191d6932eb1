@@ -20,6 +20,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5157132a_be673dc4",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 872,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T00:03:47Z",
+      "side": 1,
+      "message": "nit: \"sep*e*rate\" -\u003e \"sep*a*rate\".\n\nThat said though, I don\u0027t think this name is very clear. I prefer just \"unpremultiplied\".",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5fb0961_4f7ab59b",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T00:03:47Z",
+      "side": 1,
+      "message": "Since we now have the generalized conversion code in the shader (nice!) does Dawn really need to understand sRGB and display p3? Could we just have Chromium pass the gamma parameters and conversion matrix instead? (Or maybe the conversion matrix and \"is sRGB encoded\" for src/dst)\n\nThis could simplify a few things:\n\n- less or no work would be required in Dawn for new src color space support\n- we wouldn\u0027t need ValidateCopyTextureColorSpaceConversion\n- we would move all of the ColorSpaceTable data to Blink where it\u0027s probably already known? (Maybe this isn\u0027t true, I don\u0027t know if Chromium has it in Blink or in the GPU process. Maybe we would need to make this call from the GPU process which would be harder.)\n\nThough it also makes the stepsMask more complicated to compute because we would need to compare the actual parameters passed in. Also we would still end up needing some ColorSpaceTable data in the tests.\n\n(We should discuss this further before you make a change. Probably shouldn\u0027t do it in this CL but we could do it before integrating into Chromium if we want to avoid conflicts.)",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3d30207_8a2ed744",
         "filename": "dawn.json",
         "patchSetId": 5
@@ -100,6 +134,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c12217f_475d5f41",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T00:03:47Z",
+      "side": 1,
+      "message": "Instead of vec4+vec3 could this just be a struct with 7 f32s and 1 u32 (which can then be properly named as A, B, G, E, epsilon, C, F, colorSpaceExtended)?",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f97ae724_b2f7cf78",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 5
@@ -123,6 +174,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "829e2471_87befa15",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T00:03:47Z",
+      "side": 1,
+      "message": "I don\u0027t quite understand why you need the colorSpaceIsExtended option at all. (Maybe just because I\u0027ve been thinking only about srgb and display-p3.)\n\nIIUC either colorSpaceIsExtended and you need to handle negative numbers, or it\u0027s not and you can pretend they don\u0027t exist. Here, I think the select() calls have no effect for this reason.\n\nAlso, they don\u0027t save any performance because sign() and abs() occur unconditionally. sign() and abs() are very cheap so I think you should just use them without the select() which will also be cheaper.",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "648f1072_6f8d2375",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 5
@@ -140,6 +208,47 @@
         "endLine": 88,
         "endChar": 81
       },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b70048cf_3c12a8d2",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T00:03:47Z",
+      "side": 1,
+      "message": "I suggested this because it seemed better to do one vectorized select() than three separate branches or branching function calls. Maybe it\u0027s not helpful though, especially now that there\u0027s more multiplication inside each part?",
+      "parentUuid": "648f1072_6f8d2375",
+      "range": {
+        "startLine": 88,
+        "startChar": 55,
+        "endLine": 88,
+        "endChar": 81
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e37027f_de6b7971",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T00:03:47Z",
+      "side": 1,
+      "message": "nit: Since this changes value throughout the function and isn\u0027t always the \"src color\", perhaps rename to just \"color\"",
       "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -230,6 +339,92 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ead6ba05_93269acb",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T00:03:47Z",
+      "side": 1,
+      "message": "Nice that you found these docs that describe exactly what we\u0027re doing here!",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8b4daf6_37568481",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T00:03:47Z",
+      "side": 1,
+      "message": "\"premultiplied; alpha\"",
+      "range": {
+        "startLine": 525,
+        "startChar": 50,
+        "endLine": 525,
+        "endChar": 69
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cfc93bd_a33f582c",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T00:03:47Z",
+      "side": 1,
+      "message": "nit: I think this would be clearer inverted, like \"needsColorSpaceConversion\".",
+      "range": {
+        "startLine": 538,
+        "startChar": 13,
+        "endLine": 538,
+        "endChar": 37
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa788d23_b1b4521b",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T00:03:47Z",
+      "side": 1,
+      "message": "nit: Unpremultiply\n\n(But these comments can be removed when you name the 0x constants anyway.)",
+      "range": {
+        "startLine": 544,
+        "startChar": 39,
+        "endLine": 544,
+        "endChar": 52
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b53012fc_e8a4e183",
@@ -243,6 +438,30 @@
       "writtenOn": "2021-12-07T13:58:34Z",
       "side": 1,
       "message": "nit: this and the same for the dst Tetxture can be put inside the !skipColorSpaceConversion block below.\n\nBut also why is it skipped if we don\u0027t do a color space conversion?",
+      "range": {
+        "startLine": 543,
+        "startChar": 0,
+        "endLine": 545,
+        "endChar": 13
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a26caa02_da10b267",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T00:03:47Z",
+      "side": 1,
+      "message": "We have to handle the alpha state if there is a color conversion OR srcTextureAlphaState !\u003d dstTextureAlphaState. 0x01 means \"unpremultiply the source\" so we only need to do it if the source is premultiplied, AND there is either a conversion or the dstTextureAlphaState is different.\n\nLogic looks correct to me. Could maybe be slightly clearer if written as:\n\n        if (options-\u003esrcTextureAlphaState \u003d\u003d wgpu::AlphaState::Premultiplied) {\n            if (needsColorSpaceConversion ||\n                options-\u003esrcTextureAlphaState !\u003d options-\u003edstTextureAlphaState) {",
+      "parentUuid": "b53012fc_e8a4e183",
       "range": {
         "startLine": 543,
         "startChar": 0,
@@ -318,6 +537,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a9ea0112_1884a14c",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T00:03:47Z",
+      "side": 1,
+      "message": "ditto, looks OK to me.",
+      "parentUuid": "3258be83_e915b094",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4bbec4ff_099714c1",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 5
@@ -329,6 +566,23 @@
       "writtenOn": "2021-12-07T13:58:34Z",
       "side": 1,
       "message": "Can we have a device-\u003eEmitDerprecationWarning if these are used?",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10fb13c7_d931a744",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T00:03:47Z",
+      "side": 1,
+      "message": "Nice simple handling of the old alphaOp modes!",
       "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -369,6 +623,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "429a6dbb_bf2de096",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T00:03:47Z",
+      "side": 1,
+      "message": "Apple\u0027s what?",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e8f3beb6_de61d7ac",
         "filename": "src/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
         "patchSetId": 5
@@ -403,6 +674,24 @@
       "writtenOn": "2021-12-07T13:58:34Z",
       "side": 1,
       "message": "What about Display P3 to SRGB?",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73529b04_171ab727",
+        "filename": "src/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T00:03:47Z",
+      "side": 1,
+      "message": "It\u0027s in the block above this one. Maybe you meant SRGB to DisplayP3?",
+      "parentUuid": "22e9970f_1fa8f009",
       "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
