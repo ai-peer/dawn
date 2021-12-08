@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6f97001_d840432b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:53:27Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "027cbace5ac65ca41bc46215308b0f1c3bc51411",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67d06e56_f84da7a8",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:53:27Z",
+      "side": 1,
+      "message": "Can we have some sort of assert in the wire client generation that we don\u0027t autogenerate procs that return pointery things or take non-const* pointers?",
+      "revId": "027cbace5ac65ca41bc46215308b0f1c3bc51411",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "730e142a_9f1d9135",
+        "filename": "src/dawn_native/Features.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:53:27Z",
+      "side": 1,
+      "message": "nit: maybe we don\u0027t need to count manually\n\n if (features !\u003d nullptr) {\n     for (i : IterateBitSet ...) {\n        *features \u003d ...;\n        features ++;\n     }\n }\n return featureBitSet.count()",
+      "revId": "027cbace5ac65ca41bc46215308b0f1c3bc51411",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6e40300_d466cccf",
+        "filename": "src/dawn_wire/client/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:53:27Z",
+      "side": 1,
+      "message": "ditto UNIMPLEMENTED, same for Device.",
+      "range": {
+        "startLine": 32,
+        "startChar": 8,
+        "endLine": 32,
+        "endChar": 19
+      },
+      "revId": "027cbace5ac65ca41bc46215308b0f1c3bc51411",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
