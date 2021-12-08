@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be786fee_9f2eacdf",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T19:10:52Z",
+      "side": 1,
+      "message": "Yeah, I noticed it\u0027s conditional on the dirty bit, but that dirty bit probably gets set pretty often (every time you set an index buffer), I don\u0027t know how often a single index buffer can be used for many draw calls.\n\nI might go so far as to say the dirty bits probably shouldn\u0027t be marked as UNLIKELY?",
+      "parentUuid": "ee82fca8_556463e9",
+      "revId": "f5e2783da1b880496065d7be35e427dfd994c745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd35a821_6cb38da9",
         "filename": "src/tests/unittests/validation/IndexBufferValidationTests.cpp",
         "patchSetId": 1
