@@ -209,6 +209,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f17c8444_21f9909f",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T00:59:20Z",
+      "side": 1,
+      "message": "Oh, I see. There is some difference between chromium implementation and css spec here.\nIt seems that in css color space spec, we need to handle sign always(https://www.w3.org/TR/css-color-4/#color-conversion-code). But in chromium code to generate decoding/encoding result, it has a extended_ attributes to decide whether we needs sign() and abs()(https://source.chromium.org/chromium/chromium/src/+/main:ui/gfx/color_transform.cc;l\u003d328;drc\u003d94c6fda0960a28d2f7083624c6643ae89cb8d57f;bpv\u003d1;bpt\u003d1).\n\nAnd for display-P3, it generates the code that doesn\u0027t consider the sign but for extended-srgb, it uses it.\n\nI think we could align with css color space spec here.",
+      "parentUuid": "829e2471_87befa15",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "648f1072_6f8d2375",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 5
