@@ -82,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27b527b8_d731d5e9",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-08T07:57:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2985e0e1_c72cd063",
+      "range": {
+        "startLine": 600,
+        "startChar": 33,
+        "endLine": 600,
+        "endChar": 88
+      },
+      "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4746c434_d3cb2305",
@@ -203,6 +227,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07811667_baf27c12",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-08T07:57:52Z",
+      "side": 1,
+      "message": "After digging further into the code, I\u0027ve changed my mind on Aspect::CombinedPlanes.\nExposing Aspect::CombinedPlanes in frontend would unnecessary, as no frontend clients would use it on Vulkan backend even. They would rather use Aspect::Plane0/1 as usual. Also we\u0027d better not impose such a burden on them to decide whether to use Aspect::CombinedPlanes or Aspect::Plane0/1. Instead we could hide this implementation level details in TextureVk. Simply put, for any usage of Aspect::Plane0/1 from frontend clients, if disjoint vkimage is unavailable we internally use Aspect::Color for range tracking when building image barriers.",
+      "parentUuid": "abac5171_bbc62934",
+      "range": {
+        "startLine": 674,
+        "startChar": 8,
+        "endLine": 677,
+        "endChar": 9
+      },
+      "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d354d5e0_ba9978b2",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 13
@@ -261,6 +309,30 @@
       "side": 1,
       "message": "With CombinedPlanes we don\u0027t need the special handling for Aspect::Plane0/1 and can just remove this method in favor of VulkanAspectMask",
       "parentUuid": "842effa2_f50e6bff",
+      "range": {
+        "startLine": 998,
+        "startChar": 11,
+        "endLine": 1005,
+        "endChar": 26
+      },
+      "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "283dd170_4cab508b",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-08T07:57:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2155e268_b40ce05a",
       "range": {
         "startLine": 998,
         "startChar": 11,

@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95ee9ca4_93c60d7f",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-08T07:57:52Z",
+      "side": 0,
+      "message": "Remove the unused code lines.",
+      "range": {
+        "startLine": 838,
+        "startChar": 0,
+        "endLine": 854,
+        "endChar": 5
+      },
+      "revId": "5496323a32ece5f663bea320eaddf85a027c0004",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51acd5a5_06d8c3c7",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 1060,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-08T07:57:52Z",
+      "side": 0,
+      "message": "Unused.",
+      "range": {
+        "startLine": 1060,
+        "startChar": 12,
+        "endLine": 1060,
+        "endChar": 58
+      },
+      "revId": "5496323a32ece5f663bea320eaddf85a027c0004",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ec4ab88_7404dc3b",
+        "filename": "src/dawn_native/vulkan/TextureVk.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-08T07:57:52Z",
+      "side": 0,
+      "message": "Unused code line.",
+      "range": {
+        "startLine": 65,
+        "startChar": 8,
+        "endLine": 65,
+        "endChar": 77
+      },
+      "revId": "5496323a32ece5f663bea320eaddf85a027c0004",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
