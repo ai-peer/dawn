@@ -68,13 +68,14 @@ namespace {
             mD3d11Device = std::move(d3d11Device);
         }
 
-        std::vector<const char*> GetRequiredFeatures() override {
-            mIsMultiPlanarFormatsSupported = SupportsFeatures({"multiplanar-formats"});
+        std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+            mIsMultiPlanarFormatsSupported =
+                SupportsFeatures({wgpu::FeatureName::DawnMultiPlanarFormats});
             if (!mIsMultiPlanarFormatsSupported) {
                 return {};
             }
 
-            return {"multiplanar-formats"};
+            return {wgpu::FeatureName::DawnMultiPlanarFormats};
         }
 
         bool IsMultiPlanarFormatsSupported() const {

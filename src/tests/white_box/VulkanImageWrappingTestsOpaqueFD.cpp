@@ -31,8 +31,8 @@ namespace dawn_native { namespace vulkan {
 
         class VulkanImageWrappingTestBase : public DawnTest {
           protected:
-            std::vector<const char*> GetRequiredFeatures() override {
-                return {"dawn-internal-usages"};
+            std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+                return {wgpu::FeatureName::DawnInternalUsages};
             }
 
           public:
@@ -383,8 +383,11 @@ namespace dawn_native { namespace vulkan {
 
             // Create another device based on the original
             backendAdapter = dawn_native::vulkan::ToBackend(deviceVk->GetAdapter());
-            deviceDescriptor.forceEnabledToggles = GetParam().forceEnabledWorkarounds;
-            deviceDescriptor.forceDisabledToggles = GetParam().forceDisabledWorkarounds;
+            deviceDescriptor.nextInChain = &togglesDesc;
+            togglesDesc.forceEnabledToggles = GetParam().forceEnabledWorkarounds.data();
+            togglesDesc.forceEnabledTogglesCount = GetParam().forceEnabledWorkarounds.size();
+            togglesDesc.forceDisabledToggles = GetParam().forceDisabledWorkarounds.data();
+            togglesDesc.forceDisabledTogglesCount = GetParam().forceDisabledWorkarounds.size();
 
             secondDeviceVk =
                 dawn_native::vulkan::ToBackend(backendAdapter->CreateDevice(&deviceDescriptor));
@@ -418,7 +421,8 @@ namespace dawn_native { namespace vulkan {
         dawn_native::vulkan::Device* secondDeviceVk;
 
         dawn_native::vulkan::Adapter* backendAdapter;
-        dawn_native::DawnDeviceDescriptor deviceDescriptor;
+        wgpu::DeviceDescriptor deviceDescriptor;
+        wgpu::DawnTogglesDeviceDescriptor togglesDesc;
 
         wgpu::TextureDescriptor defaultDescriptor;
         VkImage defaultImage;
