@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "41c25f4ec726e205895c18b1dfa589fa523480ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8bf720a_50a6ca72",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T08:40:58Z",
+      "side": 1,
+      "message": "Sorry, we can\u0027t do that. The problem is that the memberBuffer is still accessible by that renderer process and could be modified concurrently with dawn_native looking at it. For example dawn_native could validate an enum, then the renderer process change the enum value, then dawn_native uses the enum. Prevention of TOCTOU attacks is an important feature of the wire and is done by making every single value returned to dawn_native a thing that\u0027s a copy of what\u0027s in the wire.\n\nFor WriteBuffer since it is data-only that\u0027s not security sensitive we could carve out an exception, but the optimization cannot be for all members.",
+      "revId": "41c25f4ec726e205895c18b1dfa589fa523480ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
