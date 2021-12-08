@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37ad3cf3_7527229b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:35:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7100a6ae98c88a2fa0c6807d3cbbc9f90071fc86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9930a1e_ff6c85e3",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:35:11Z",
+      "side": 1,
+      "message": "same comment about the name as below. I don\u0027t have a very strong opinion but we should be sure we think this through.",
+      "range": {
+        "startLine": 791,
+        "startChar": 12,
+        "endLine": 791,
+        "endChar": 33
+      },
+      "revId": "7100a6ae98c88a2fa0c6807d3cbbc9f90071fc86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20856103_d47032e6",
+        "filename": "generator/templates/dawn_native/wgpu_dawn_native_proc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:35:11Z",
+      "side": 1,
+      "message": "nit: Maybe add a comment to explain that this needs to be kept in sync with dawn_native/ProcTable.cpp?",
+      "revId": "7100a6ae98c88a2fa0c6807d3cbbc9f90071fc86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "827bab4c_2f3ff9d5",
+        "filename": "generator/templates/dawn_native/wgpu_dawn_native_proc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:35:11Z",
+      "side": 1,
+      "message": "Hopefully LTCG optimizes this out :)",
+      "revId": "7100a6ae98c88a2fa0c6807d3cbbc9f90071fc86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9608616_40aa49bd",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T13:35:11Z",
+      "side": 1,
+      "message": "Do we really want to use the name \"wgpu\" when that\u0027s already the name of the rust library? dawn_native_with_procs is a bit verbose but describes what it is well. Not sure.\n\nPeople are going to love this change if they also don\u0027t need to use DawnNative.h anymore, since it makes it really easy to build the library for use in other projects ;)",
+      "revId": "7100a6ae98c88a2fa0c6807d3cbbc9f90071fc86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
