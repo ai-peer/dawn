@@ -74,6 +74,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3b59e637_db6f5a6d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T19:18:31Z",
+      "side": 1,
+      "message": "Yep! That\u0027s what is happening. I was trying to address why we need to keep a mDevice (or just ObjectBase as parent class) here, and that\u0027s because when the DSA\u0027s dtor finally runs, it is definitely possible that mLayout has already been destroyed, so doing mLayout-\u003eGetDevice() isn\u0027t valid. So we save the device at ctor and use that instead.",
+      "parentUuid": "1b846593_f652e60a",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0f7beaa0_07c18e5e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 11
