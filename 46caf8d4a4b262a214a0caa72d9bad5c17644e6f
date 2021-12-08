@@ -16,6 +16,23 @@
       "message": "It seems to me that a couple of validation rules for DepthStencilState are missing. I found this issue when I was debugging my patch at https://dawn-review.googlesource.com/c/dawn/+/71441 for readonly depth/stencil attachment. \n\nPTAL. Thank you.",
       "revId": "46caf8d4a4b262a214a0caa72d9bad5c17644e6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3c69b8d_6f8bc05b",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-08T18:05:58Z",
+      "side": 1,
+      "message": "AFAIK, wgpu::TextureFormat::Stencil8 is not fully implemented in Dawn, but it has already been added into FormatList at https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn_native/Format.cpp#330. That is sufficient for this patch. So I used Stencil8 (a stencil-only format) for the new test, instead of writing a TODO.",
+      "revId": "46caf8d4a4b262a214a0caa72d9bad5c17644e6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
