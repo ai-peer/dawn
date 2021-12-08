@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b23170e_ddc0cfdc",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-12-08T16:13:54Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "f5e2783da1b880496065d7be35e427dfd994c745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e74d1d2_f8e2efe2",
@@ -52,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee82fca8_556463e9",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-12-08T16:13:54Z",
+      "side": 1,
+      "message": "It\u0027s easy to miss on a quick reading, but this branch is actually only executed if a much faster check (See [1]) fails, at which point the method is GOING to fail (See the UNREACHABLE() below this) and any further checks serve only to produce more precise error messages.",
+      "parentUuid": "0e74d1d2_f8e2efe2",
+      "revId": "f5e2783da1b880496065d7be35e427dfd994c745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd35a821_6cb38da9",
@@ -65,6 +100,24 @@
       "writtenOn": "2021-12-08T00:20:24Z",
       "side": 1,
       "message": "nit: formats -\u003e format",
+      "revId": "f5e2783da1b880496065d7be35e427dfd994c745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d543519c_8792ea40",
+        "filename": "src/tests/unittests/validation/IndexBufferValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-12-08T16:13:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd35a821_6cb38da9",
       "revId": "f5e2783da1b880496065d7be35e427dfd994c745",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
