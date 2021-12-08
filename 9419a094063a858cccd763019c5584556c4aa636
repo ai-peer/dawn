@@ -90,6 +90,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cae15d4_991cf3b3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-08T19:21:08Z",
+      "side": 1,
+      "message": "mmm point being that, we don\u0027t need to call device-\u003eEnqueueDeferredDeallocation since it should already be enqueued if there is any pending deallocation that needs to happen?",
+      "parentUuid": "3b59e637_db6f5a6d",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0f7beaa0_07c18e5e",
