@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ac263ce_2724594e",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T04:11:43Z",
+      "side": 1,
+      "message": "(More thoughts)\nSo, finally, we need to get something like skcms_ICCProfile(https://source.chromium.org/chromium/chromium/src/+/main:third_party/skia/include/third_party/skcms/skcms.h;l\u003d156;drc\u003d94c6fda0960a28d2f7083624c6643ae89cb8d57f) in blink side for input ExternalImage.\nAnd for dst color space, we could get similar infos too.\nSo we need to do precompute in blink side for :\n1. For dst color space, get the inverse matrix of toXYZD50.\n2. Precompute the conversion matrix by dst.fromXYZD50 * src.toXYZD50.\n3. Compute the encoding transferFn from the known decoding transferFn\n\n\u003e dstTransferFunction: enum { linear, srgb } // doesn\u0027t make sense to specify the whole color space because it would make it non-orthogonal to the conversion matrix\nWhy this doesn\u0027t transfer all parameters but with these enums? I assume that this needs Dawn to keep some parameters.\n\nAnd we could transfer final results to CopyTextureForBrowser with:\n- needColorSpaceConversion: bool // fast path to skip conversions.\n- srcAlphaMode: enum { premul, unpremul }\n- srcTransferFunctionParameters: f32 A,B,C,E,F,G,epsilon\n- 3x3 f32 conversion matrix\n- dstTransferFunctionParameters: f32 A,B,C,E,F,G,epsilon\n- dstAlphaMode: enum { premul, unpremul }\n\nWDYT?",
+      "parentUuid": "9ba38dc7_ae1d8d85",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3d30207_8a2ed744",
         "filename": "dawn.json",
         "patchSetId": 5
