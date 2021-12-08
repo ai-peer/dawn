@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b00f803_a9799bae",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T20:54:19Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "370e6bd7341034c840bbea8e2bd017ceab0257ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

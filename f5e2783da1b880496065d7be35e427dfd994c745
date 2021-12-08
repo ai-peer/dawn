@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0aa2208b_85f61490",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T20:54:19Z",
+      "side": 1,
+      "message": "This code is only to produce a nice error. The actual validation is at [1]. This function would be really cold.",
+      "parentUuid": "be786fee_9f2eacdf",
+      "revId": "f5e2783da1b880496065d7be35e427dfd994c745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd35a821_6cb38da9",
         "filename": "src/tests/unittests/validation/IndexBufferValidationTests.cpp",
         "patchSetId": 1
