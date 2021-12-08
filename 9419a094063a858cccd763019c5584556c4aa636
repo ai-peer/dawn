@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b846593_f652e60a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-08T19:09:42Z",
+      "side": 1,
+      "message": "the ASSERT will fire if there are pending deallocations\n\nIsn\u0027t it the case that if there are pending deallocations, then a BindGroupVk must have put a Ref\u003cDescriptorSetAllocator\u003e into mDescriptorAllocatorsPendingDeallocation, and thus, setting mDescriptorSetAllocator to null here should not actually destroy it, yet?",
+      "parentUuid": "b84f886d_9e427ee6",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0f7beaa0_07c18e5e",
@@ -184,6 +202,24 @@
       "side": 1,
       "message": "```\nObjectBase has a lot more functionality than just these two things\n```\nHmm, ObjectBase doesn\u0027t have THAT much more functionality? Maybe you are thinking about ApiObjectBase?\n\n\n```\nthere\u0027s no precedent for using ObjectBase for non-API objects that I know of\n```\nDepends on whether you consider AttachmentState to be API object. But I feel like the allocator feels pretty similar.\n\nI can change if you guys feel strongly about it though, this feels like it reuses what we already have.",
       "parentUuid": "9b801d4d_d044acc9",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c6c3a9b_38fd9b8a",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-08T19:09:42Z",
+      "side": 1,
+      "message": "oh right - seems fine to me",
+      "parentUuid": "4165229c_0cce28c5",
       "revId": "9419a094063a858cccd763019c5584556c4aa636",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
