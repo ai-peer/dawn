@@ -16,6 +16,40 @@
       "message": "Note that this CL assumes that https://github.com/gpuweb/gpuweb/pull/2393 will land and is the desired behavior.",
       "revId": "f5e2783da1b880496065d7be35e427dfd994c745",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e74d1d2_f8e2efe2",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T00:20:24Z",
+      "side": 1,
+      "message": "This detailed error message is nice but also makes this draw-time validation 2 checks instead of 1. Maybe the outside if() should change to:\n\n if (IsStripPrimitiveTopology(...) \u0026\u0026 mIndexFormat !\u003d pipelineIndexFormat) {\n\nto avoid that? (And the second DAWN_INVALID_IF would become unconditional:\n\n return DAWN_FORMAT_VALIDATION_ERROR(...);\n\n.)",
+      "revId": "f5e2783da1b880496065d7be35e427dfd994c745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd35a821_6cb38da9",
+        "filename": "src/tests/unittests/validation/IndexBufferValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-08T00:20:24Z",
+      "side": 1,
+      "message": "nit: formats -\u003e format",
+      "revId": "f5e2783da1b880496065d7be35e427dfd994c745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
