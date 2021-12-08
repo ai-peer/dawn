@@ -293,6 +293,16 @@ namespace dawn_native {
                             "Either depthBiasSlopeScale (%f) or depthBiasClamp (%f) is NaN.",
                             descriptor->depthBiasSlopeScale, descriptor->depthBiasClamp);
 
+            DAWN_INVALID_IF(!format->HasDepth() && DepthTestEnabled(descriptor),
+                            "Depth stencil format (%s) doesn't have depth aspect while depth test "
+                            "or depth write is enabled.",
+                            descriptor->format);
+
+            DAWN_INVALID_IF(!format->HasStencil() && StencilTestEnabled(descriptor),
+                            "Depth stencil format (%s) doesn't have stencil aspect while stencil "
+                            "test or stencil write is enabled.",
+                            descriptor->format);
+
             return {};
         }
 
@@ -541,6 +551,11 @@ namespace dawn_native {
                 {SingleShaderStage::Fragment, dummyFragmentShader, "fs_empty_main", 0, nullptr});
         }
         return stages;
+    }
+
+    bool DepthTestEnabled(const DepthStencilState* depthStencil) {
+        return depthStencil->depthCompare != wgpu::CompareFunction::Always ||
+               depthStencil->depthWriteEnabled;
     }
 
     bool StencilTestEnabled(const DepthStencilState* depthStencil) {
