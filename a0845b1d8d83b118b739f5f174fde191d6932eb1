@@ -544,6 +544,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1715c033_a2d57f95",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:40:39Z",
+      "side": 1,
+      "message": "Yeah I think branches are marginally better now.",
+      "parentUuid": "b70048cf_3c12a8d2",
+      "range": {
+        "startLine": 88,
+        "startChar": 55,
+        "endLine": 88,
+        "endChar": 81
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e37027f_de6b7971",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 5
@@ -1008,6 +1032,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e9b575f2_d88b1f58",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:40:39Z",
+      "side": 1,
+      "message": "I think it was only done for the dst, not the src.",
+      "parentUuid": "e67ed963_702e3f45",
+      "range": {
+        "startLine": 543,
+        "startChar": 0,
+        "endLine": 545,
+        "endChar": 13
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a64f53f4_4fa3725f",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 5
@@ -1184,6 +1232,24 @@
       "side": 1,
       "message": "Sry, I don\u0027t find the EmitDeprecationWarning in device. Instead, I\u0027m using dawn::WarningLog for this. Is it Ok?",
       "parentUuid": "4bbec4ff_099714c1",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97b69088_083d6492",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:40:39Z",
+      "side": 1,
+      "message": "https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/Device.h;drc\u003d2494c9be8f06f43675bbd2482d127e7630468fa7;l\u003d322",
+      "parentUuid": "44f2c43a_111e78b9",
       "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

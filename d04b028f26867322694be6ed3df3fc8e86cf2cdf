@@ -18,6 +18,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f345e9fb_5944f9e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:40:39Z",
+      "side": 1,
+      "message": "Dawn side looks good. But I really don\u0027t understand anything about color spaces so I\u0027ll let Kai re-review that part. It seems that we\u0027re making forward progress, but let\u0027s try to unblock this CL as much as possible because we have been iterating a huge lot already.",
+      "revId": "d04b028f26867322694be6ed3df3fc8e86cf2cdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "209d5565_5f5e831c",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:40:39Z",
+      "side": 1,
+      "message": "I think you can remove transferFunctionParametersCount by replacing length/default with \"length\": 9, \"optional\": true. Ditto for others. This way we don\u0027t need validation and only documentation?\n\nNot sure if this it is that much better though.",
+      "range": {
+        "startLine": 886,
+        "startChar": 21,
+        "endLine": 886,
+        "endChar": 89
+      },
+      "revId": "d04b028f26867322694be6ed3df3fc8e86cf2cdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eecc50fd_cff03732",
@@ -31,6 +71,47 @@
       "writtenOn": "2021-12-08T08:42:38Z",
       "side": 1,
       "message": "My local test cases failed on \"OpenGLES_ANGLE_Google_Vulkan_1_2_0_SwiftShader_Device_Subzero_\" with error message:\nGot unexpected device error: Program link failed:\nStructure names of uniform block \u0027Uniforms\u0027 member \u0027Uniforms.gamma_decoding_params\u0027 differ between VERTEX and FRAGMENT shaders.\n\nI\u0027m not sure whether this is the compiler bug",
+      "revId": "d04b028f26867322694be6ed3df3fc8e86cf2cdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f14f0082_e48f2000",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:40:39Z",
+      "side": 1,
+      "message": "Let\u0027s suppress, file an issue and CC senorblanco on it.",
+      "parentUuid": "eecc50fd_cff03732",
+      "revId": "d04b028f26867322694be6ed3df3fc8e86cf2cdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3eac289_a869b3b5",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:40:39Z",
+      "side": 1,
+      "message": "nit: the style for error messages is the opposite of here: We shouldn\u0027t say what MUST happen, but say what the problem is. \"foo is nullptr when doing color conversion\". Ditto for all the other messages here.",
+      "range": {
+        "startLine": 364,
+        "startChar": 47,
+        "endLine": 364,
+        "endChar": 64
+      },
       "revId": "d04b028f26867322694be6ed3df3fc8e86cf2cdf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
