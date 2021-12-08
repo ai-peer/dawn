@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c044199_aad6025b",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 872,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5157132a_be673dc4",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5fb0961_4f7ab59b",
@@ -177,6 +195,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ae42f18_1c7f9184",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Thanks for telling this! We don\u0027t need these enums any more.",
+      "parentUuid": "f3d30207_8a2ed744",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae383899_b6804357",
@@ -190,6 +226,30 @@
       "writtenOn": "2021-12-07T13:58:34Z",
       "side": 1,
       "message": "nit: \"src color space\", and \"dst color space\"\n\nBut also it really seems like it could be in the main options. We can add the transfer matrices in the main options with an extension struct too.",
+      "range": {
+        "startLine": 888,
+        "startChar": 22,
+        "endLine": 888,
+        "endChar": 35
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0ee3ded_bc7d47e7",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "We don\u0027t have color space conversion struct any more",
+      "parentUuid": "ae383899_b6804357",
       "range": {
         "startLine": 888,
         "startChar": 22,
@@ -217,6 +277,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff25f76e_e94c1cda",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82fb3a3e_2480a74c",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0f3af10_f93688e0",
@@ -230,6 +308,30 @@
       "writtenOn": "2021-12-07T13:58:34Z",
       "side": 1,
       "message": "Can be in a follow-up but the names don\u0027t all follow the same convention: conversionMatrix or conversion_matrix?\n\nAlso the u_ prefix is unnecessary since the structure is nested in a \"uniforms\" variable.",
+      "range": {
+        "startLine": 44,
+        "startChar": 16,
+        "endLine": 44,
+        "endChar": 34
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e4bc8ac_23fcd57b",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0f3af10_f93688e0",
       "range": {
         "startLine": 44,
         "startChar": 16,
@@ -257,6 +359,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "434e5af0_6be94ff9",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c12217f_475d5f41",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f97ae724_b2f7cf78",
@@ -270,6 +390,30 @@
       "writtenOn": "2021-12-07T13:58:34Z",
       "side": 1,
       "message": "nit: bool?",
+      "range": {
+        "startLine": 70,
+        "startChar": 78,
+        "endLine": 70,
+        "endChar": 81
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db92a3f7_1892b8aa",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f97ae724_b2f7cf78",
       "range": {
         "startLine": 70,
         "startChar": 78,
@@ -329,6 +473,24 @@
       "side": 1,
       "message": "That change in the CSS spec is quite new, so that makes sense. And yes, we explicitly want to implement the latest CSS definitions.\n\nChromium is probably just omitting generation of sign()/abs() if it\u0027s not needed, for some performance. I don\u0027t suspect it\u0027s ever harmful to include them - it only makes a difference for negative values and I don\u0027t even know whether we can get negative display-p3 values into the conversion code in Chromium. (It seems very unlikely to me that anything is expecting negative values to have any other behavior anyway.)",
       "parentUuid": "f17c8444_21f9909f",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d1f9240_715065be",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07243138_2e01df13",
       "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -397,6 +559,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "947f7747_a67add45",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e37027f_de6b7971",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef515179_c6a6179d",
@@ -420,6 +600,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a6aaf7b_0fd9fa44",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef515179_c6a6179d",
+      "range": {
+        "startLine": 146,
+        "startChar": 49,
+        "endLine": 146,
+        "endChar": 54
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7f8ae26_443a24dd",
@@ -433,6 +637,24 @@
       "writtenOn": "2021-12-07T13:58:34Z",
       "side": 1,
       "message": "To make the code a bit less fragile, can we have the enum the ColorSpaceInfo is for encoded in ColorSpaceInfo so we can assert that casting the value to an integer is the correct way to index the array?",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a911ec6_472fc629",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Strengthen them and move them to the test file",
+      "parentUuid": "e7f8ae26_443a24dd",
       "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -484,6 +706,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e4686d3_4faec0a0",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a661242f_85e8afc9",
+      "range": {
+        "startLine": 340,
+        "startChar": 15,
+        "endLine": 340,
+        "endChar": 25
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0460898e_f873f594",
@@ -497,6 +743,30 @@
       "writtenOn": "2021-12-07T13:58:34Z",
       "side": 1,
       "message": "nit: matrices",
+      "range": {
+        "startLine": 371,
+        "startChar": 19,
+        "endLine": 371,
+        "endChar": 26
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b6dc368_cf8f249c",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0460898e_f873f594",
       "range": {
         "startLine": 371,
         "startChar": 19,
@@ -547,6 +817,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58294e24_d7548f22",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8b4daf6_37568481",
+      "range": {
+        "startLine": 525,
+        "startChar": 50,
+        "endLine": 525,
+        "endChar": 69
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cfc93bd_a33f582c",
@@ -570,6 +864,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6ee4600_163c7e73",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cfc93bd_a33f582c",
+      "range": {
+        "startLine": 538,
+        "startChar": 13,
+        "endLine": 538,
+        "endChar": 37
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa788d23_b1b4521b",
@@ -583,6 +901,30 @@
       "writtenOn": "2021-12-08T00:03:47Z",
       "side": 1,
       "message": "nit: Unpremultiply\n\n(But these comments can be removed when you name the 0x constants anyway.)",
+      "range": {
+        "startLine": 544,
+        "startChar": 39,
+        "endLine": 544,
+        "endChar": 52
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "519184db_6d95312d",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa788d23_b1b4521b",
       "range": {
         "startLine": 544,
         "startChar": 39,
@@ -640,6 +982,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e67ed963_702e3f45",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a26caa02_da10b267",
+      "range": {
+        "startLine": 543,
+        "startChar": 0,
+        "endLine": 545,
+        "endChar": 13
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a64f53f4_4fa3725f",
@@ -663,6 +1029,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c4d7ef0_febf034e",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a64f53f4_4fa3725f",
+      "range": {
+        "startLine": 555,
+        "startChar": 29,
+        "endLine": 555,
+        "endChar": 33
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35f11ba8_d5fe8f42",
@@ -676,6 +1066,30 @@
       "writtenOn": "2021-12-07T13:58:34Z",
       "side": 1,
       "message": "Is the cast really needed? I thought C++ conversion of booleans to integers was well defined to give 0 and 1.",
+      "range": {
+        "startLine": 558,
+        "startChar": 20,
+        "endLine": 558,
+        "endChar": 67
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e6c0e43_825eae4b",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "I think you\u0027re right. And it seems I\u0027m too careful here to add the static_cast",
+      "parentUuid": "35f11ba8_d5fe8f42",
       "range": {
         "startLine": 558,
         "startChar": 20,
@@ -721,6 +1135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b794651a_d4ba1ecf",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9ea0112_1884a14c",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bbec4ff_099714c1",
@@ -734,6 +1166,24 @@
       "writtenOn": "2021-12-07T13:58:34Z",
       "side": 1,
       "message": "Can we have a device-\u003eEmitDerprecationWarning if these are used?",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44f2c43a_111e78b9",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Sry, I don\u0027t find the EmitDeprecationWarning in device. Instead, I\u0027m using dawn::WarningLog for this. Is it Ok?",
+      "parentUuid": "4bbec4ff_099714c1",
       "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -768,6 +1218,24 @@
       "writtenOn": "2021-12-07T13:58:34Z",
       "side": 1,
       "message": "nit: this seems to have moved between patchsets and should be around EXPECT_TEXTURE_EQ",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf7160d7_99956197",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4cbe546_b5160f71",
       "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -842,6 +1310,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c605c90b_ff4cfc32",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b26b558_28ea2d4d",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8f3beb6_de61d7ac",
@@ -855,6 +1341,30 @@
       "writtenOn": "2021-12-07T13:58:34Z",
       "side": 1,
       "message": "nit: Color",
+      "range": {
+        "startLine": 258,
+        "startChar": 50,
+        "endLine": 258,
+        "endChar": 63
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c188737_37e32847",
+        "filename": "src/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8f3beb6_de61d7ac",
       "range": {
         "startLine": 258,
         "startChar": 50,
@@ -896,6 +1406,24 @@
       "side": 1,
       "message": "It\u0027s in the block above this one. Maybe you meant SRGB to DisplayP3?",
       "parentUuid": "22e9970f_1fa8f009",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5c3691c_289ae618",
+        "filename": "src/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "No need for these enums",
+      "parentUuid": "73529b04_171ab727",
       "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

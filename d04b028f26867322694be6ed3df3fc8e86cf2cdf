@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0b04c39_c1b5769a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "A more general implementation for color space conversion. PTAL again, thanks!",
+      "revId": "d04b028f26867322694be6ed3df3fc8e86cf2cdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eecc50fd_cff03732",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T08:42:38Z",
+      "side": 1,
+      "message": "My local test cases failed on \"OpenGLES_ANGLE_Google_Vulkan_1_2_0_SwiftShader_Device_Subzero_\" with error message:\nGot unexpected device error: Program link failed:\nStructure names of uniform block \u0027Uniforms\u0027 member \u0027Uniforms.gamma_decoding_params\u0027 differ between VERTEX and FRAGMENT shaders.\n\nI\u0027m not sure whether this is the compiler bug",
+      "revId": "d04b028f26867322694be6ed3df3fc8e86cf2cdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
