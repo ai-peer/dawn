@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "35b6efef_ea503070",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-08T17:53:42Z",
+      "side": 1,
+      "message": "I think this should be okay as well. If it needed to be in the list of deferred allocation, that should have happened when BindGroupVk was destroyed.",
+      "parentUuid": "dc77365c_6fc7979f",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0f7beaa0_07c18e5e",
@@ -31,6 +49,46 @@
       "writtenOn": "2021-12-08T13:29:42Z",
       "side": 1,
       "message": "LGTM",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "302df404_d077236d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-08T17:53:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "498d4a3a_e15e5daa",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-08T17:53:42Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 48
+      },
       "revId": "9419a094063a858cccd763019c5584556c4aa636",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +112,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b801d4d_d044acc9",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-08T17:53:42Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "07c68186_41e65756",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b663d32e_48aee2be",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-08T17:53:42Z",
+      "side": 1,
+      "message": "should this be private now?",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 92
+      },
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d30f4593_10fa08fb",
         "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
         "patchSetId": 11
@@ -65,6 +164,24 @@
       "writtenOn": "2021-12-08T13:29:42Z",
       "side": 1,
       "message": "nit: can we have a TODO + an issue to avoid adding redundant refs to the same DescriptorSetAllocator for the same ExecutionSerial?",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2577e305_c6935998",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-08T17:53:42Z",
+      "side": 1,
+      "message": "We already do that! at [1]",
+      "parentUuid": "d30f4593_10fa08fb",
       "revId": "9419a094063a858cccd763019c5584556c4aa636",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
