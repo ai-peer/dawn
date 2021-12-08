@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b93f8d2c_3e3d4a99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:31:52Z",
+      "side": 1,
+      "message": "LGTM with two more tests.",
+      "revId": "c101518527015e87ff8330c607acfb9bebc24030",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6461468_6ae57e1f",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:31:52Z",
+      "side": 1,
+      "message": "note: This is a lot of expectations, multiple times in these files. I don\u0027t know what we can do about them but worry a bit that they might be change detecting.",
+      "revId": "c101518527015e87ff8330c607acfb9bebc24030",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "750c7489_001ec6ba",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:31:52Z",
+      "side": 1,
+      "message": "We\u0027ll need to also see what happens when the device request a feature that\u0027s supported by the apiDevice but not by the wire (the callback should fail).",
+      "revId": "c101518527015e87ff8330c607acfb9bebc24030",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16d143c5_69587f6e",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:31:52Z",
+      "side": 1,
+      "message": "Don\u0027t we have a helper in WireTest.cpp for this?",
+      "revId": "c101518527015e87ff8330c607acfb9bebc24030",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81a6779b_f98f1091",
+        "filename": "src/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:31:52Z",
+      "side": 1,
+      "message": "Maybe we can implement CreateInstance in the wire too? IDK",
+      "revId": "c101518527015e87ff8330c607acfb9bebc24030",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd1502bd_c14b30cc",
+        "filename": "src/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-08T14:31:52Z",
+      "side": 1,
+      "message": "We\u0027ll also need a test that checks what happens when a feature not supported by the wire is returned by the adapter.",
+      "revId": "c101518527015e87ff8330c607acfb9bebc24030",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
