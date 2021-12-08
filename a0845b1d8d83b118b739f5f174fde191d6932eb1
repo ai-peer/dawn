@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9ba38dc7_ae1d8d85",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T03:31:19Z",
+      "side": 1,
+      "message": "(Take CopyExternalImageToTexture() implementation in blink side in consideration)\nThe only place we could get the color space info from ExternalImage is PaintImage generated from StaticBitmapImage. It has methods to return pointer to SkColorSpace object. But SkColorSpace doesn\u0027t have any methods that could return transferFn params or conversion matrix. (https://source.chromium.org/chromium/chromium/src/+/main:third_party/skia/include/core/SkColorSpace.h;drc\u003d94c6fda0960a28d2f7083624c6643ae89cb8d57f;l\u003d104)\nIt provides a function to compare whether to SkColorSpace are the same.\n\nIf we don\u0027t add methods in SkColorSpace to return those meta infos, the logic should be:\nin gpu_queue.cc or a new gpu_xxx.h file, we hold the conversion matrix and transferFn for known supported color space. Create SkColorSpace with them and compare it with the input. Then transfer the matrix and transferFn params to Dawn.\n\nBut we don\u0027t have abilities to support CUSTOM color space, I think. So maybe we should expand the SkColorSpace API?",
+      "parentUuid": "296e727a_07409065",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3d30207_8a2ed744",
         "filename": "dawn.json",
         "patchSetId": 5
