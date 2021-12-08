@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9df57dd7_2aaa6369",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T18:31:36Z",
+      "side": 1,
+      "message": "Overall LGTM, just some nits and suggestions.",
+      "revId": "c101518527015e87ff8330c607acfb9bebc24030",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a6461468_6ae57e1f",
         "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
         "patchSetId": 6
@@ -31,6 +48,29 @@
       "writtenOn": "2021-12-08T14:31:52Z",
       "side": 1,
       "message": "note: This is a lot of expectations, multiple times in these files. I don\u0027t know what we can do about them but worry a bit that they might be change detecting.",
+      "revId": "c101518527015e87ff8330c607acfb9bebc24030",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a84299fd_66b0c214",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T18:31:36Z",
+      "side": 1,
+      "message": "Maybe:\n```\nEXPECT_EQ(apiDesc-\u003erequiredFeaturesCount, features.size());\nEXPECT_THAT(apiDesc-\u003erequiredFeatures,\n    ElementsAre(WGPUFeatureName::TextureCompressionETC2, \n                WGPUFeatureName::TextureCompressionASTC)\n);\n```",
+      "range": {
+        "startLine": 134,
+        "startChar": 20,
+        "endLine": 138,
+        "endChar": 21
+      },
       "revId": "c101518527015e87ff8330c607acfb9bebc24030",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

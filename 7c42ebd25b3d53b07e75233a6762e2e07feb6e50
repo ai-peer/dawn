@@ -16,6 +16,167 @@
       "message": "Opening up this patch stack for feedback. Tests are in this CL and implementation is below it. Basically, this stack implements passing descriptors and forwarding callbacks for requestAdapter and requestDevice. It does not yet actually implement those in dawn_native, or provide a way for Chromium to customize what requestAdapter/Device returns.\n",
       "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8497c65_3b2e9c72",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T18:31:36Z",
+      "side": 1,
+      "message": "Do these expects/invokes actually matter? i.e. are they something that we are testing? I also agree with Corentin that there are a lot of expects for this and that could make the tests really rigid. One option would be to consider making the mock object a NiceMock instead of a StrictMock. Then we only set expectations when absolutely necessary and allow returning defaults otherwise.",
+      "range": {
+        "startLine": 53,
+        "startChar": 20,
+        "endLine": 64,
+        "endChar": 29
+      },
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e221226c_e5c284a1",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T18:31:36Z",
+      "side": 1,
+      "message": "Similar to my comment above about what we are actually trying to test. For some of these, if the actual call isn\u0027t too important, I think it would be better to drop them and use a NiceMock so that the tests don\u0027t become so rigid. I also think that the Exactly might not be necessary since Times should already assume exactness.",
+      "range": {
+        "startLine": 174,
+        "startChar": 16,
+        "endLine": 181,
+        "endChar": 39
+      },
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9d899e7_03f5de77",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T18:31:36Z",
+      "side": 1,
+      "message": "Same comment here for unnecessary expectations. If we want to test the callback settings, I think we should do that in a separate test.",
+      "range": {
+        "startLine": 228,
+        "startChar": 8,
+        "endLine": 233,
+        "endChar": 31
+      },
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1719b25_c79c1e48",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T18:31:36Z",
+      "side": 1,
+      "message": "See my comment in the other file about _ in test names.",
+      "range": {
+        "startLine": 261,
+        "startChar": 29,
+        "endLine": 261,
+        "endChar": 73
+      },
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc5f1012_95a22856",
+        "filename": "src/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T18:31:36Z",
+      "side": 1,
+      "message": "nit. I assume this comes from the length of the list in the loop? Maybe worth to declare the list outside as a temp and use that for the loop and the list.size() here to have the justification for the number in the code.",
+      "range": {
+        "startLine": 92,
+        "startChar": 90,
+        "endLine": 92,
+        "endChar": 98
+      },
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef7e32e2_3e9e4e09",
+        "filename": "src/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T18:31:36Z",
+      "side": 1,
+      "message": "IIUC, I think that (maybe) you could do something like this for the ones where we are just setting the arguments: (assuming the casting works)\n```\nEXPECT_CALL(api, AdapterGetProperties(apiAdapter, NotNull()))\n    .WillOnce(SetArgPointee\u003c1\u003e(static_cast\u003cWGPUAdapterProperties\u003e(fakeProperties)))\n```",
+      "range": {
+        "startLine": 125,
+        "startChar": 30,
+        "endLine": 126,
+        "endChar": 97
+      },
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f61534d_22feb241",
+        "filename": "src/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-08T18:31:36Z",
+      "side": 1,
+      "message": "I know this isn\u0027t the first test that we have like this, but style guide suggests to not to use _ in names, so maybe worth to not add new cases of it. (go/gunitfaq#why-should-test-suite-names-and-test-names-not-contain-underscore)",
+      "range": {
+        "startLine": 206,
+        "startChar": 30,
+        "endLine": 206,
+        "endChar": 76
+      },
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
