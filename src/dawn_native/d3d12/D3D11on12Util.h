@@ -16,6 +16,8 @@
 #define DAWNNATIVE_D3D11ON12UTIL_H_
 
 #include "common/RefCounted.h"
+#include "dawn_native/Error.h"
+#include "dawn_native/d3d12/IntegerTypes.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 #include <dawn_native/DawnNative.h>
@@ -35,7 +37,21 @@ namespace dawn_native { namespace d3d12 {
                                     ComPtr<ID3D11On12Device> d3d11on12Device);
         ~D3D11on12ResourceCacheEntry();
 
-        ComPtr<IDXGIKeyedMutex> GetDXGIKeyedMutex() const;
+        // Keep entries which have acquired keyed mutex in cache so that we don't recursively
+        // acquire the keyed mutex.
+        bool CanEvictFromCache() const {
+            return mAcquireCount == 0;
+        }
+
+        // Acquires the keyed mutex with |acquireMutexKey| which will later be released with
+        // |releaseMutexKey|. If AcquireKeyedMutex is called recursively, it must be called
+        // with the same acquire and release keys.
+        MaybeError AcquireKeyedMutex(ExternalMutexSerial acquireMutexKey,
+                                     ExternalMutexSerial releaseMutexKey);
+        // Releases the keyed mutex with the |releaseMutexKey| provided to AcquireKeyedMutex.
+        // For recursive acquires, the keyed mutex is only released after a matching number of
+        // ReleaseKeyedMutex calls are made.
+        void ReleaseKeyedMutex();
 
         // Functors necessary for the
         // unordered_set<D3D11on12ResourceCacheEntry&>-based cache.
@@ -51,6 +67,9 @@ namespace dawn_native { namespace d3d12 {
       private:
         ComPtr<IDXGIKeyedMutex> mDXGIKeyedMutex;
         ComPtr<ID3D11On12Device> mD3D11on12Device;
+        int mAcquireCount = 0;
+        ExternalMutexSerial mAcquireMutexKey = ExternalMutexSerial(UINT64_MAX);
+        ExternalMutexSerial mReleaseMutexKey = ExternalMutexSerial(UINT64_MAX);
     };
 
     // |D3D11on12ResourceCache| maintains a cache of 11 wrapped resources.

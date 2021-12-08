@@ -19,6 +19,7 @@
 
 #include "common/HashUtils.h"
 #include "common/Log.h"
+#include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
@@ -85,9 +86,34 @@ namespace dawn_native { namespace d3d12 {
         Flush11On12DeviceToAvoidLeaks(std::move(mD3D11on12Device));
     }
 
-    ComPtr<IDXGIKeyedMutex> D3D11on12ResourceCacheEntry::GetDXGIKeyedMutex() const {
+    MaybeError D3D11on12ResourceCacheEntry::AcquireKeyedMutex(ExternalMutexSerial acquireMutexKey,
+                                                              ExternalMutexSerial releaseMutexKey) {
         ASSERT(mDXGIKeyedMutex != nullptr);
-        return mDXGIKeyedMutex;
+        ASSERT(mAcquireCount >= 0);
+        if (mAcquireCount == 0) {
+            ASSERT(mAcquireMutexKey == ExternalMutexSerial(UINT64_MAX));
+            ASSERT(mReleaseMutexKey == ExternalMutexSerial(UINT64_MAX));
+            mAcquireMutexKey = acquireMutexKey;
+            mReleaseMutexKey = releaseMutexKey;
+
+            DAWN_TRY(
+                CheckHRESULT(mDXGIKeyedMutex->AcquireSync(uint64_t(mAcquireMutexKey), INFINITE),
+                             "D3D12 acquiring shared mutex"));
+        }
+        ASSERT(mAcquireMutexKey == acquireMutexKey);
+        ASSERT(mReleaseMutexKey == releaseMutexKey);
+        mAcquireCount++;
+        return {};
+    }
+
+    void D3D11on12ResourceCacheEntry::ReleaseKeyedMutex() {
+        ASSERT(mDXGIKeyedMutex != nullptr);
+        ASSERT(mAcquireCount > 0);
+        if (--mAcquireCount == 0) {
+            mDXGIKeyedMutex->ReleaseSync(uint64_t(mReleaseMutexKey));
+            mAcquireMutexKey = ExternalMutexSerial(UINT64_MAX);
+            mReleaseMutexKey = ExternalMutexSerial(UINT64_MAX);
+        }
     }
 
     size_t D3D11on12ResourceCacheEntry::HashFunc::operator()(
@@ -151,7 +177,14 @@ namespace dawn_native { namespace d3d12 {
         // Keep this cache from growing unbounded.
         // TODO(dawn:625): Consider using a replacement policy based cache.
         if (mCache.size() > kMaxD3D11on12ResourceCacheSize) {
-            mCache.clear();
+            auto it = mCache.begin();
+            while (it != mCache.end()) {
+                if ((*it)->CanEvictFromCache()) {
+                    it = mCache.erase(it);
+                } else {
+                    ++it;
+                }
+            }
         }
 
         Ref<D3D11on12ResourceCacheEntry> entry =
