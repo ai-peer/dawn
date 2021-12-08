@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "804c7bff_802ba2d2",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-08T02:36:40Z",
+      "side": 1,
+      "message": "\u003e The main thing I don\u0027t know is whether or how Chromium would get from a user-provided image file to one of these color spaces. Maybe it would always use the \"CUSTOM\" modes.\n\nI think they have a ICCProfile compare function. https://source.chromium.org/chromium/chromium/src/+/main:third_party/skia/third_party/skcms/skcms.cc;l\u003d1567;drc\u003d94c6fda0960a28d2f7083624c6643ae89cb8d57f\nand do things like this\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/skia/src/core/SkColorSpace.cpp;l\u003d196;drc\u003d94c6fda0960a28d2f7083624c6643ae89cb8d57f;bpv\u003d0;bpt\u003d1",
+      "parentUuid": "4e8ab818_8f00cb04",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3d30207_8a2ed744",
         "filename": "dawn.json",
         "patchSetId": 5
