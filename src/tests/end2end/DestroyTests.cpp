@@ -115,7 +115,7 @@ TEST_P(DestroyTest, BufferSubmitDestroySubmit) {
     vertexBuffer.Destroy();
 
     // Submit fails because vertex buffer was destroyed
-    ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
+    ASSERT_DEVICE_ERROR_MSG(queue.Submit(1, &commands), HasSubstr("lol"));
 
     // Pixel stays the same
     EXPECT_PIXEL_RGBA8_EQ(filled, renderPass.color, 1, 3);
@@ -156,7 +156,6 @@ TEST_P(DestroyTest, TextureSubmitDestroySubmit) {
 
 // Attempting to set an object label after it has been destroyed should not cause an error.
 TEST_P(DestroyTest, DestroyThenSetLabel) {
-    DAWN_TEST_UNSUPPORTED_IF(UsesWire());
     std::string label = "test";
     wgpu::BufferDescriptor descriptor;
     descriptor.size = 4;
@@ -166,36 +165,48 @@ TEST_P(DestroyTest, DestroyThenSetLabel) {
     buffer.SetLabel(label.c_str());
 }
 
-// Device destroy before buffer submit will result in error.
-TEST_P(DestroyTest, DestroyDeviceBeforeSubmit) {
-    // TODO(crbug.com/dawn/628) Add more comprehensive tests with destroy and backends.
-    DAWN_TEST_UNSUPPORTED_IF(UsesWire());
-    wgpu::CommandBuffer commands = CreateTriangleCommandBuffer();
+DAWN_INSTANTIATE_TEST(DestroyTest,
+                      D3D12Backend(),
+                      MetalBackend(),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
+                      VulkanBackend());
 
-    // Tests normally don't expect a device lost error, but since we are destroying the device, we
-    // actually do, so we need to override the default device lost callback.
-    ExpectDeviceDestruction();
-    device.Destroy();
-    ASSERT_DEVICE_ERROR_MSG(queue.Submit(1, &commands), HasSubstr("[Device] is lost."));
-}
+class DestroyDeviceTest : public DawnTest {
+  protected:
+    void SetUp() override {
+        DawnTest::SetUp();
+        DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("skip_validation"));
+    }
+
+    void DestroyDevice() {
+        ExpectDeviceDestruction();
+        device.Destroy();
+    }
+};
+
+// Device destroy before command submit will result in error.
+// TEST_P(DestroyDeviceTest, SubmitError) {
+//     wgpu::CommandBuffer commands = CreateTriangleCommandBuffer();
+
+//     DestroyDevice();
+//     ASSERT_DEVICE_ERROR_MSG(queue.Submit(1, &commands), HasSubstr("[Device] is lost."));
+// }
 
 // Regression test for crbug.com/1276928 where a lingering BGL reference in Vulkan with at least one
 // BG instance could cause bad memory reads because members in the BGL whose destuctors expected a
 // live device were not released until after the device was destroyed.
-TEST_P(DestroyTest, DestroyDeviceLingeringBGL) {
+TEST_P(DestroyDeviceTest, LingeringBindGroupLayout) {
     // Create and hold the layout reference so that its destructor gets called after the device has
     // been destroyed via device.Destroy().
     wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Fragment, wgpu::SamplerBindingType::Filtering}});
     utils::MakeBindGroup(device, layout, {{0, device.CreateSampler()}});
 
-    // Tests normally don't expect a device lost error, but since we are destroying the device, we
-    // actually do, so we need to override the default device lost callback.
-    ExpectDeviceDestruction();
-    device.Destroy();
+    DestroyDevice();
 }
 
-DAWN_INSTANTIATE_TEST(DestroyTest,
+DAWN_INSTANTIATE_TEST(DestroyDeviceTest,
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
