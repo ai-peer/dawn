@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7830067a_58c18c17",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-08T18:01:05Z",
+      "side": 1,
+      "message": "I don\u0027t think so, since Chromium will always Reserve+Inject the instance. Or if we ever add CreateInstance, we\u0027re going to override that proc on the server to return a ref to an externally owned instance. So the client will only ever be able to remove refs for injected instances, but not fully delete it. Probably should update this, because I don\u0027t think \"in the near term\" is accurate. It\u0027ll likely be this way for quite a while.",
+      "parentUuid": "8c65000a_6f8f44f8",
+      "revId": "9502d5d9f9bac9f01c4535a3bd322cfba45a0a6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6e26a8fc_2f3c8881",
