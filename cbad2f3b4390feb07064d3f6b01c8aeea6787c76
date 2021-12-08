@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f84aaadd_23cba7e8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-08T02:47:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9167169e_25741ba7",
+      "revId": "cbad2f3b4390feb07064d3f6b01c8aeea6787c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bfa4d9e1_0b1ae543",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -86,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15fb72de_9ec94ab1",
+        "filename": "src/include/dawn/EnumClassBitmasks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-08T02:47:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55652ac8_42501184",
+      "revId": "cbad2f3b4390feb07064d3f6b01c8aeea6787c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "700f5243_3b75196b",
@@ -103,6 +139,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54c28bd2_f6ff6b8b",
+        "filename": "src/tests/unittests/EnumClassBitmasksTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-08T02:47:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "700f5243_3b75196b",
+      "revId": "cbad2f3b4390feb07064d3f6b01c8aeea6787c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d213aca_531c6998",
@@ -116,6 +170,24 @@
       "writtenOn": "2021-12-07T09:43:26Z",
       "side": 1,
       "message": "Why is this put in two namespaces, dawn and dawn again? Isn\u0027t a single one sufficient?",
+      "revId": "cbad2f3b4390feb07064d3f6b01c8aeea6787c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2dc4845_bbb516bd",
+        "filename": "src/tests/unittests/MathTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-08T02:47:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d213aca_531c6998",
       "revId": "cbad2f3b4390feb07064d3f6b01c8aeea6787c76",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
