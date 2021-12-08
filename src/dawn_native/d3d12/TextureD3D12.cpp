@@ -559,12 +559,8 @@ namespace dawn_native { namespace d3d12 {
         ExternalMutexSerial acquireMutexKey,
         ExternalMutexSerial releaseMutexKey,
         bool isSwapChainTexture) {
-        DAWN_TRY(CheckHRESULT(d3d11on12Resource->GetDXGIKeyedMutex()->AcquireSync(
-                                  uint64_t(acquireMutexKey), INFINITE),
-                              "D3D12 acquiring shared mutex"));
+        DAWN_TRY(d3d11on12Resource->AcquireKeyedMutex(acquireMutexKey, releaseMutexKey));
 
-        mAcquireMutexKey = acquireMutexKey;
-        mReleaseMutexKey = releaseMutexKey;
         mD3D11on12Resource = std::move(d3d11on12Resource);
         mSwapChainTexture = isSwapChainTexture;
 
@@ -683,7 +679,7 @@ namespace dawn_native { namespace d3d12 {
         mSwapChainTexture = false;
 
         if (mD3D11on12Resource != nullptr) {
-            mD3D11on12Resource->GetDXGIKeyedMutex()->ReleaseSync(uint64_t(mReleaseMutexKey));
+            mD3D11on12Resource->ReleaseKeyedMutex();
         }
     }
 
