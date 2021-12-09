@@ -128,6 +128,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0a9728f1_da0a2c98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-09T08:40:12Z",
+      "side": 1,
+      "message": "Ok thanks for the explanation, I think it makes sense. Basically it\u0027s not possible to do the simpler version because the device is not \"waited for idle\" before we destroy all the API objects. That makes sense.",
+      "parentUuid": "bd26c6a7_e572e15b",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0f7beaa0_07c18e5e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 11
@@ -274,6 +292,24 @@
       "side": 1,
       "message": "oh right - seems fine to me",
       "parentUuid": "4165229c_0cce28c5",
+      "revId": "9419a094063a858cccd763019c5584556c4aa636",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d519edc_a6a10256",
+        "filename": "src/dawn_native/vulkan/DescriptorSetAllocator.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-09T08:40:12Z",
+      "side": 1,
+      "message": "Ah sorry I was confused with ApiObjectBase",
+      "parentUuid": "8c6c3a9b_38fd9b8a",
       "revId": "9419a094063a858cccd763019c5584556c4aa636",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
