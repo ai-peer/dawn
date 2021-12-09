@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6852de67_024a85d6",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-09T18:25:58Z",
+      "side": 1,
+      "message": "this is the name of the generator target, not library. not sure what specifically this comment is about?",
+      "parentUuid": "a9930a1e_ff6c85e3",
+      "range": {
+        "startLine": 791,
+        "startChar": 12,
+        "endLine": 791,
+        "endChar": 33
+      },
+      "revId": "7100a6ae98c88a2fa0c6807d3cbbc9f90071fc86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20856103_d47032e6",
         "filename": "generator/templates/dawn_native/wgpu_dawn_native_proc.cpp",
         "patchSetId": 4
@@ -71,6 +95,24 @@
       "writtenOn": "2021-12-08T13:35:11Z",
       "side": 1,
       "message": "nit: Maybe add a comment to explain that this needs to be kept in sync with dawn_native/ProcTable.cpp?",
+      "revId": "7100a6ae98c88a2fa0c6807d3cbbc9f90071fc86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3170978b_0c5e647c",
+        "filename": "generator/templates/dawn_native/wgpu_dawn_native_proc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-09T18:25:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20856103_d47032e6",
       "revId": "7100a6ae98c88a2fa0c6807d3cbbc9f90071fc86",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -159,6 +201,24 @@
       "side": 1,
       "message": "SGTM.",
       "parentUuid": "f58e9357_fd92a161",
+      "revId": "7100a6ae98c88a2fa0c6807d3cbbc9f90071fc86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "982fa819_5bb5d1fe",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-09T18:25:58Z",
+      "side": 1,
+      "message": "Renamed to wgpu_dawn. though I just realized this thread says \"webgpu_dawn\" with an \"e\". I think it should still be okay with wgpu though, since there\u0027s the Dawn suffix?",
+      "parentUuid": "842331e5_b0d0ea33",
       "revId": "7100a6ae98c88a2fa0c6807d3cbbc9f90071fc86",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
