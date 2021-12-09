@@ -18,6 +18,63 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a105c142_b9dce2de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-09T08:20:09Z",
+      "side": 1,
+      "message": "LGTM! Thanks for the fix",
+      "revId": "46caf8d4a4b262a214a0caa72d9bad5c17644e6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9089a76_4eae259c",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-09T08:20:09Z",
+      "side": 1,
+      "message": "nit: Maybe we can add information about these two values in the error message (in parenthensis) to help developer know what is causing the issue?\n\nFor stencil there\u0027s just too much information so I think we can skip it (and revisit only if someone complains about it)",
+      "revId": "46caf8d4a4b262a214a0caa72d9bad5c17644e6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c78bde61_62320d83",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-09T08:20:09Z",
+      "side": 1,
+      "message": "nit: this name is a bit misleading because you can have no depth test but still write depth. Maybe we can just check both condition manually in ValidateDepthStencilState?",
+      "range": {
+        "startLine": 556,
+        "startChar": 9,
+        "endLine": 556,
+        "endChar": 25
+      },
+      "revId": "46caf8d4a4b262a214a0caa72d9bad5c17644e6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3c69b8d_6f8bc05b",
@@ -31,6 +88,24 @@
       "writtenOn": "2021-12-08T18:05:58Z",
       "side": 1,
       "message": "AFAIK, wgpu::TextureFormat::Stencil8 is not fully implemented in Dawn, but it has already been added into FormatList at https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn_native/Format.cpp#330. That is sufficient for this patch. So I used Stencil8 (a stencil-only format) for the new test, instead of writing a TODO.",
+      "revId": "46caf8d4a4b262a214a0caa72d9bad5c17644e6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b7572cb_66a9da4a",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-09T08:20:09Z",
+      "side": 1,
+      "message": "LGTM since these tests are running on the Null backend.",
+      "parentUuid": "a3c69b8d_6f8bc05b",
       "revId": "46caf8d4a4b262a214a0caa72d9bad5c17644e6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
