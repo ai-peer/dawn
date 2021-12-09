@@ -250,6 +250,24 @@
       "parentUuid": "e3d684c9_91d334e4",
       "revId": "46caf8d4a4b262a214a0caa72d9bad5c17644e6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60a50c80_22c336a4",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-09T20:04:44Z",
+      "side": 1,
+      "message": "I have a slight preference to just remove it. We\u0027ll be able to grab it back from the CL history when Stencil8 gets implemented.",
+      "parentUuid": "2ab8c205_98da7a19",
+      "revId": "46caf8d4a4b262a214a0caa72d9bad5c17644e6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
