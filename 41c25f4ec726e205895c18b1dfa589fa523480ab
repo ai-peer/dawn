@@ -69,6 +69,24 @@
       "parentUuid": "e467a024_b63ee101",
       "revId": "41c25f4ec726e205895c18b1dfa589fa523480ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "631ab677_0a94eb48",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-12-09T06:19:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1112c497_44a62734",
+      "revId": "41c25f4ec726e205895c18b1dfa589fa523480ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
