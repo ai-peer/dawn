@@ -51,6 +51,23 @@
       "message": "LGTM. No additional comments.",
       "revId": "d8ac41ef8e994bd9564c66723101eae47316a076",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "869de19a_35ab970e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-09T17:26:05Z",
+      "side": 1,
+      "message": "LGTM too; thanks for the update to suppress the messages",
+      "revId": "d8ac41ef8e994bd9564c66723101eae47316a076",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
