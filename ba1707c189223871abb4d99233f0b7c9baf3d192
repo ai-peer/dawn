@@ -321,6 +321,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e479004_dfbf096d",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-09T02:57:31Z",
+      "side": 1,
+      "message": "Great. Really appreciate your efforts improving this CL greatly.",
+      "parentUuid": "aaa36fe7_f170ebbd",
+      "range": {
+        "startLine": 674,
+        "startChar": 8,
+        "endLine": 677,
+        "endChar": 9
+      },
+      "revId": "ba1707c189223871abb4d99233f0b7c9baf3d192",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d354d5e0_ba9978b2",
