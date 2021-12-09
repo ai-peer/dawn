@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3721699c_2c30db61",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-09T07:35:49Z",
+      "side": 1,
+      "message": "Or we could define some \"constant\" category to achieve this.",
+      "parentUuid": "02684cd8_767c6cab",
+      "range": {
+        "startLine": 886,
+        "startChar": 21,
+        "endLine": 886,
+        "endChar": 89
+      },
+      "revId": "d04b028f26867322694be6ed3df3fc8e86cf2cdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eecc50fd_cff03732",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 7
