@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0392a2c_8e04d135",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-09T08:57:55Z",
+      "side": 1,
+      "message": "I afraid not, as we haven\u0027t done the corresponding CL in blink.",
+      "parentUuid": "8689a816_95b45b53",
+      "revId": "51620165ffcfd484f65f822b28c58e97bfcd9b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd0f11c2_46b25864",
@@ -77,6 +95,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9b5d89b_97648641",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-09T08:57:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd0f11c2_46b25864",
+      "range": {
+        "startLine": 32,
+        "startChar": 36,
+        "endLine": 32,
+        "endChar": 68
+      },
+      "revId": "51620165ffcfd484f65f822b28c58e97bfcd9b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d51e7608_6f7cd863",
@@ -90,6 +132,42 @@
       "writtenOn": "2021-12-09T08:30:26Z",
       "side": 1,
       "message": "u-u-nit: just return directly?",
+      "revId": "51620165ffcfd484f65f822b28c58e97bfcd9b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "177d72db_88da0f54",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-09T08:57:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d51e7608_6f7cd863",
+      "revId": "51620165ffcfd484f65f822b28c58e97bfcd9b6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f552dcc9_68066fc5",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-09T08:57:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d51e7608_6f7cd863",
       "revId": "51620165ffcfd484f65f822b28c58e97bfcd9b6b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
