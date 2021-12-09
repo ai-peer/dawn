@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c1b620e_9b4c06aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-09T19:59:30Z",
+      "side": 1,
+      "message": "Please take another look. I made a mistake before (see the comment below), thank you!",
+      "revId": "4a62f81d64548e8ff94af3da434a2a9c3e55ca01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
