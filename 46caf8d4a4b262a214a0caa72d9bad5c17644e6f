@@ -268,6 +268,24 @@
       "parentUuid": "2ab8c205_98da7a19",
       "revId": "46caf8d4a4b262a214a0caa72d9bad5c17644e6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7556bab0_54244799",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-09T21:20:21Z",
+      "side": 1,
+      "message": "Done. Agreed. And these two sub-tests are simple enough to write them from scratch, just some copy+paste from tests above. :)",
+      "parentUuid": "60a50c80_22c336a4",
+      "revId": "46caf8d4a4b262a214a0caa72d9bad5c17644e6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
