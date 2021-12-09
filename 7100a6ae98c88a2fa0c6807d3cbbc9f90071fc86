@@ -221,6 +221,24 @@
       "parentUuid": "842331e5_b0d0ea33",
       "revId": "7100a6ae98c88a2fa0c6807d3cbbc9f90071fc86",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ab186db_9220ec5a",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-09T18:28:32Z",
+      "side": 1,
+      "message": "IMHO we implement WebGPU with Dawn, it\u0027s just that wgpu happens to be the namespace prefix.",
+      "parentUuid": "982fa819_5bb5d1fe",
+      "revId": "7100a6ae98c88a2fa0c6807d3cbbc9f90071fc86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
