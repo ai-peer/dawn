@@ -68,6 +68,23 @@
       "message": "LGTM too; thanks for the update to suppress the messages",
       "revId": "d8ac41ef8e994bd9564c66723101eae47316a076",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25931240_43465bdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-09T17:55:47Z",
+      "side": 1,
+      "message": "Thanks for thing long review, Corentin and Austin!",
+      "revId": "d8ac41ef8e994bd9564c66723101eae47316a076",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
