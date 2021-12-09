@@ -568,6 +568,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fef39cef_aa18fcf1",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-09T07:32:44Z",
+      "side": 1,
+      "message": "Double check here:\nIf we don\u0027t use select, I think gamma_conversion() could only accept a single scalar but not vectors. Because color.rgb might have the cases that color.r and color.g greater than epsilon but color.b smaller than epsilon. I don\u0027t think vectorize if could handle this.",
+      "parentUuid": "1715c033_a2d57f95",
+      "range": {
+        "startLine": 88,
+        "startChar": 55,
+        "endLine": 88,
+        "endChar": 81
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e37027f_de6b7971",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 5
@@ -1250,6 +1274,24 @@
       "side": 1,
       "message": "https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/Device.h;drc\u003d2494c9be8f06f43675bbd2482d127e7630468fa7;l\u003d322",
       "parentUuid": "44f2c43a_111e78b9",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b08cd66_a52e39bc",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-09T07:32:44Z",
+      "side": 1,
+      "message": "Sry, I don\u0027t noticed the typo.... Thanks for pointing to the function.",
+      "parentUuid": "97b69088_083d6492",
       "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
