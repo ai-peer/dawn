@@ -122,6 +122,24 @@
       "parentUuid": "a8037aa6_c6ab47a2",
       "revId": "01dcc872791a76166c572d91e11c8728e6599e55",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72180ca8_366e9415",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-09T17:27:40Z",
+      "side": 1,
+      "message": "ok sounds good; I guess \"dawn_\" is okay because dawn is now implementing both WebGPU and WebNN",
+      "parentUuid": "4af12a10_9fb484b4",
+      "revId": "01dcc872791a76166c572d91e11c8728e6599e55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
