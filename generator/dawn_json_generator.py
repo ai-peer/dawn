@@ -164,7 +164,8 @@ class RecordMember:
                  optional=False,
                  is_return_value=False,
                  default_value=None,
-                 skip_serialize=False):
+                 skip_serialize=False,
+                 is_data_only=False):
         self.name = name
         self.type = typ
         self.annotation = annotation
@@ -175,6 +176,7 @@ class RecordMember:
         self.handle_type = None
         self.default_value = default_value
         self.skip_serialize = skip_serialize
+        self.is_data_only = is_data_only
 
     def set_handle_type(self, handle_type):
         assert self.type.dict_name == "ObjectHandle"
@@ -280,7 +282,8 @@ def linked_record_members(json_data, types):
                               optional=m.get('optional', False),
                               is_return_value=m.get('is_return_value', False),
                               default_value=m.get('default', None),
-                              skip_serialize=m.get('skip_serialize', False))
+                              skip_serialize=m.get('skip_serialize', False),
+                              is_data_only=m.get('is_data_only', False))
         handle_type = m.get('handle_type')
         if handle_type:
             member.set_handle_type(types[handle_type])
