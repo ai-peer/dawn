@@ -33,6 +33,24 @@
       "message": "LGTM too. The file name changed but I think that\u0027s ok. Can you check it doesn\u0027t break the CMake build?",
       "revId": "01dcc872791a76166c572d91e11c8728e6599e55",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37391d57_f90a13b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-09T02:25:54Z",
+      "side": 1,
+      "message": "CMake can build as well and the output files name still are dawn_proc.c and dawn_thread_dispatch_proc.cpp.",
+      "parentUuid": "b21f8df4_9fd4cc9c",
+      "revId": "01dcc872791a76166c572d91e11c8728e6599e55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
