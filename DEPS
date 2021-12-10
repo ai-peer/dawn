@@ -18,15 +18,15 @@ vars = {
 deps = {
   # Dependencies required to use GN/Clang in standalone
   'build': {
-    'url': '{chromium_git}/chromium/src/build@0ff4b3d4eeb6d480c716b432a9a93a58c42150d5',
+    'url': '{chromium_git}/chromium/src/build@9e199ef15fac05c52bd5f962e8f6b56dcb18ca69',
     'condition': 'dawn_standalone',
   },
   'buildtools': {
-    'url': '{chromium_git}/chromium/src/buildtools@9c143ace7560797fed136da85e22ea4834e6b147',
+    'url': '{chromium_git}/chromium/src/buildtools@075dd7e22837a69189003e4fa84499acf63188cf',
     'condition': 'dawn_standalone',
   },
   'buildtools/clang_format/script': {
-    'url': '{chromium_git}/external/github.com/llvm/llvm-project/clang/tools/clang-format.git@99803d74e35962f63a775f29477882afd4d57d94',
+    'url': '{chromium_git}/external/github.com/llvm/llvm-project/clang/tools/clang-format.git@e435ad79c17b1888b34df88d6a30a094936e3836',
     'condition': 'dawn_standalone',
   },
 
@@ -56,17 +56,17 @@ deps = {
   },
 
   'buildtools/third_party/libc++/trunk': {
-    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxx.git@8fa87946779682841e21e2da977eccfb6cb3bded',
+    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxx.git@a928ef355316571d863c77e381d4c5c8770ef09d',
     'condition': 'dawn_standalone',
   },
 
   'buildtools/third_party/libc++abi/trunk': {
-    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxxabi.git@f4328ad7c0d8242d36cb5bea530925f9fea34248',
+    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxxabi.git@58799ca24f08088ab1db9cdf7d67ee8b1f4bc605',
     'condition': 'dawn_standalone',
   },
 
   'tools/clang': {
-    'url': '{chromium_git}/chromium/src/tools/clang@03ff857f12277f511e0a30aca44b80e8aaebafd7',
+    'url': '{chromium_git}/chromium/src/tools/clang@7fd41684df20fe67267e48971486b5a334e67e67',
     'condition': 'dawn_standalone',
   },
   'tools/clang/dsymutil': {
@@ -80,11 +80,11 @@ deps = {
 
   # Testing, GTest and GMock
   'testing': {
-    'url': '{chromium_git}/chromium/src/testing@3e2640a325dc34ec3d9cb2802b8da874aecaf52d',
+    'url': '{chromium_git}/chromium/src/testing@285433a7e9736c07b42611fdd85f496d89db401f',
     'condition': 'dawn_standalone',
   },
   'third_party/googletest': {
-    'url': '{chromium_git}/external/github.com/google/googletest@2828773179fa425ee406df61890a150577178ea2',
+    'url': '{chromium_git}/external/github.com/google/googletest@054a986a8513149e8374fc669a5fe40117ca6b41',
     'condition': 'dawn_standalone',
   },
 
