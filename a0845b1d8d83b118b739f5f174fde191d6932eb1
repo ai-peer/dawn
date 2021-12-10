@@ -1362,6 +1362,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "44bfd03a_f77b7a21",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-10T09:36:34Z",
+      "side": 1,
+      "message": "You can wrap the calls with EXPECT_DEPRECATION_WARNING to fix this error. This makes it clear when tests are using deprecated behavior.",
+      "parentUuid": "823022d0_a1a6ca8a",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "10fb13c7_d931a744",

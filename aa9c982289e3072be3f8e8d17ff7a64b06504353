@@ -16,6 +16,23 @@
       "message": "Address part of the comments, but others are having some problems. PTAL again, thanks!",
       "revId": "aa9c982289e3072be3f8e8d17ff7a64b06504353",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "667a43e3_7bba92fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-10T09:36:34Z",
+      "side": 1,
+      "message": "LGTM. We can do the deprecation warning as a follow up if you want.\n\nDo you need an additional review from Kai?",
+      "revId": "aa9c982289e3072be3f8e8d17ff7a64b06504353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
