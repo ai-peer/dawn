@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a334b991_cbb6177d",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-10T20:37:23Z",
+      "side": 1,
+      "message": "Done. for args. Return values already can\u0027t be pointers at all because there\u0027s no way to currently express an annotation on it.",
+      "parentUuid": "67d06e56_f84da7a8",
+      "revId": "027cbace5ac65ca41bc46215308b0f1c3bc51411",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "730e142a_9f1d9135",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-12-08T13:53:27Z",
       "side": 1,
       "message": "nit: maybe we don\u0027t need to count manually\n\n if (features !\u003d nullptr) {\n     for (i : IterateBitSet ...) {\n        *features \u003d ...;\n        features ++;\n     }\n }\n return featureBitSet.count()",
+      "revId": "027cbace5ac65ca41bc46215308b0f1c3bc51411",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61548f49_18c21473",
+        "filename": "src/dawn_native/Features.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-10T20:37:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "730e142a_9f1d9135",
       "revId": "027cbace5ac65ca41bc46215308b0f1c3bc51411",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +111,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40a1244d_3964f10b",
+        "filename": "src/dawn_native/Features.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-10T20:37:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d65ef67b_cd130c6b",
+      "range": {
+        "startLine": 56,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 70
+      },
+      "revId": "027cbace5ac65ca41bc46215308b0f1c3bc51411",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6e40300_d466cccf",
@@ -88,6 +148,30 @@
       "writtenOn": "2021-12-08T13:53:27Z",
       "side": 1,
       "message": "ditto UNIMPLEMENTED, same for Device.",
+      "range": {
+        "startLine": 32,
+        "startChar": 8,
+        "endLine": 32,
+        "endChar": 19
+      },
+      "revId": "027cbace5ac65ca41bc46215308b0f1c3bc51411",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3505bf1_01bc5549",
+        "filename": "src/dawn_wire/client/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-10T20:37:23Z",
+      "side": 1,
+      "message": "ditto, not a thing right now",
+      "parentUuid": "c6e40300_d466cccf",
       "range": {
         "startLine": 32,
         "startChar": 8,
