@@ -592,6 +592,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf731356_61eba51b",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-10T06:47:24Z",
+      "side": 1,
+      "message": "I think it is Done.",
+      "parentUuid": "fef39cef_aa18fcf1",
+      "range": {
+        "startLine": 88,
+        "startChar": 55,
+        "endLine": 88,
+        "endChar": 81
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e37027f_de6b7971",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 5
@@ -1316,6 +1340,24 @@
       "side": 1,
       "message": "Sry, I don\u0027t noticed the typo.... Thanks for pointing to the function.",
       "parentUuid": "97b69088_083d6492",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "823022d0_a1a6ca8a",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-10T06:47:24Z",
+      "side": 1,
+      "message": "It seems using device-\u003eEmitDpreciationWarning causes errors in current AlphaOp end2end cases. It yields: Expected equality of these values:\n  mLastWarningCount\n    Which is: 0\n  dawn_native::GetDeprecationWarningCountForTesting(device.Get())\n    Which is: 1\n    \nSince it is used only in blink implementation part, this deprecation shouldn\u0027t affect many client users.\nWould you mind me to use a follow up CL to remove all the AlphaOp?",
+      "parentUuid": "2b08cd66_a52e39bc",
       "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
