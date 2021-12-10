@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "941dea2c_9a45ec22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-10T20:35:41Z",
+      "side": 1,
+      "message": "what do you mean? I think we can add this stuff since it gets the protocol most of the way there. and then later we can teach the server how to customize the response to requestAdapter/Device. and once that\u0027s done, actually migrate to using it in Chrome.\nor is the concern about rando commands in shmem telling the server to invoke unimplemented stuff (should be ok I think since we always reject the callback in dawn_native for requestAdapter/requestDevice right now).",
+      "parentUuid": "6e26a8fc_2f3c8881",
+      "revId": "9502d5d9f9bac9f01c4535a3bd322cfba45a0a6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a567e7dd_7e0e0e83",
@@ -66,6 +84,24 @@
       "writtenOn": "2021-12-08T13:47:19Z",
       "side": 1,
       "message": "maybe default nullptr too?",
+      "revId": "9502d5d9f9bac9f01c4535a3bd322cfba45a0a6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04a42f3f_790d171a",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-10T20:35:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a567e7dd_7e0e0e83",
       "revId": "9502d5d9f9bac9f01c4535a3bd322cfba45a0a6e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -93,6 +129,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "455bdca7_0ed475e5",
+        "filename": "src/dawn_wire/client/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-10T20:35:41Z",
+      "side": 1,
+      "message": "we don\u0027t have that macro (we have DAWN_UNIMPLEMENTED_ERROR for error scopes)",
+      "parentUuid": "0f3be607_ec5f0f06",
+      "range": {
+        "startLine": 20,
+        "startChar": 8,
+        "endLine": 20,
+        "endChar": 19
+      },
+      "revId": "9502d5d9f9bac9f01c4535a3bd322cfba45a0a6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f6a74d5_20e83b75",
@@ -106,6 +166,24 @@
       "writtenOn": "2021-12-08T13:47:19Z",
       "side": 1,
       "message": "nit: we usually have tests for this reservation APIs, but I don\u0027t know how easy it is to do for Instance since it is the root object.",
+      "revId": "9502d5d9f9bac9f01c4535a3bd322cfba45a0a6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3af07480_6d5fee56",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-10T20:35:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f6a74d5_20e83b75",
       "revId": "9502d5d9f9bac9f01c4535a3bd322cfba45a0a6e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
