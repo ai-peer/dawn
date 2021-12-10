@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79033014_2e258197",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceZirconHandle.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-10T13:00:33Z",
+      "side": 1,
+      "message": "need to keep pNext \u003d nullptr.",
+      "revId": "3b98d0f339ccc94701b236641b2ec30624c21cc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
