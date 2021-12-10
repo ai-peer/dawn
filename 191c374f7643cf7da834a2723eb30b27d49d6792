@@ -16,6 +16,57 @@
       "message": "PTAL, thanks.",
       "revId": "191c374f7643cf7da834a2723eb30b27d49d6792",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a167737b_4b070cc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-10T09:42:43Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "191c374f7643cf7da834a2723eb30b27d49d6792",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38df9b8e_ee11e5eb",
+        "filename": "generator/templates/api_cpp.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-10T09:42:43Z",
+      "side": 1,
+      "message": "nit: it\u0027s a bit weird that the macro is inside the loop, do you know if it recreates one every time or if it\u0027s a one time thing?",
+      "revId": "191c374f7643cf7da834a2723eb30b27d49d6792",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dbce0af_3bef6077",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-10T09:42:43Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand why this change is needed. Doesn\u0027t the previous code produce the exact same thing?",
+      "revId": "191c374f7643cf7da834a2723eb30b27d49d6792",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
