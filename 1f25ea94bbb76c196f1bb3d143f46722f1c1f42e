@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33009583_86fd42a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-10T02:33:46Z",
+      "side": 1,
+      "message": "Thanks Jiawei\u0027s reminder, we will consider whether to use it instead of MappedMemoryManager for weights, both of them have one copy from user data to shared memory.",
+      "revId": "1f25ea94bbb76c196f1bb3d143f46722f1c1f42e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
