@@ -664,11 +664,8 @@ source_set("dawn_native_sources") {
       # Necessary to ensure that the Vulkan libraries will be in the
       # final Fuchsia package.
       data_deps = [
-        "//third_party/fuchsia-sdk:vulkan_base",
-        "//third_party/fuchsia-sdk:vulkan_validation",
-
-        # NOTE: The line below is a work around for http://crbug.com/1001081
-        "//third_party/fuchsia-sdk/sdk:trace_engine",
+        "//third_party/fuchsia-sdk/sdk/pkg/vulkan",
+        "//third_party/fuchsia-sdk/sdk/pkg/vulkan_layers:VkLayer_khronos_validation",
       ]
     }
     if (enable_vulkan_validation_layers) {

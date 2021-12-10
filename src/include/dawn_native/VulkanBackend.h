@@ -120,6 +120,34 @@ namespace dawn_native { namespace vulkan {
 
 #endif  // __linux__
 
+#ifdef __Fuchsia__
+
+        // On successful import the Zircon handle ownerships are transferred ot the Dawn
+        // implementation and they shouldn't be used outside of Dawn again.
+        // TODO(dawn:221): Also transfer ownership in the error case so the caller can assume the
+        // handles are always consumed.
+        struct DAWN_NATIVE_EXPORT ExternalImageDescriptorZirconHandle : ExternalImageDescriptorVk {
+          public:
+            ExternalImageDescriptorZirconHandle();
+
+            uint32_t memoryVmo;                // Zircon VMO handle for the image's memory.
+            std::vector<uint32_t> waitEvents;  // Zircon event handles for the semaphores to wait.
+
+            VkDeviceSize allocationSize;  // Must match VkMemoryAllocateInfo from image creation
+            uint32_t memoryTypeIndex;     // Must match VkMemoryAllocateInfo from image creation
+        };
+
+        // Info struct that is written to in |ExportVulkanImage|.
+        struct DAWN_NATIVE_EXPORT ExternalImageExportInfoZirconHandle : ExternalImageExportInfoVk {
+          public:
+            ExternalImageExportInfoZirconHandle();
+
+            // Contains the exported semaphore handles as Zircon event handles
+            std::vector<uint32_t> semaphoreEvents;
+        };
+
+#endif  // __Fuchsia__
+
         // Imports external memory into a Vulkan image. Internally, this uses external memory /
         // semaphore extensions to import the image and wait on the provided synchronizaton
         // primitives before the texture can be used.

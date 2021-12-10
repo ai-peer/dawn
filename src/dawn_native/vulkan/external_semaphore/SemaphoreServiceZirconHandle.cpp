@@ -81,7 +81,7 @@ namespace dawn_native { namespace vulkan { namespace external_semaphore {
         importSemaphoreHandleInfo.flags = 0;
         importSemaphoreHandleInfo.handleType =
             VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA;
-        importSemaphoreHandleInfo.handle = handle;
+        importSemaphoreHandleInfo.zirconHandle = handle;
 
         MaybeError status = CheckVkSuccess(mDevice->fn.ImportSemaphoreZirconHandleFUCHSIA(
                                                mDevice->GetVkDevice(), &importSemaphoreHandleInfo),
