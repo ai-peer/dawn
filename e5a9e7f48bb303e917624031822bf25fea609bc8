@@ -67,6 +67,24 @@
       "message": "optional-nit: this is so specific that I think we could use json_data[\"wire_is_data_only\"] Json data is the exact JSON dictionary that you can access from templates.",
       "revId": "e5a9e7f48bb303e917624031822bf25fea609bc8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "652f163e_1825ae89",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-12-10T01:10:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6710c233_36685df7",
+      "revId": "e5a9e7f48bb303e917624031822bf25fea609bc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
