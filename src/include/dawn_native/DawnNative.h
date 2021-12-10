@@ -234,6 +234,7 @@ namespace dawn_native {
         IOSurface,
         DXGISharedHandle,
         EGLImage,
+        ZirconHandle,
     };
 
     // Common properties of external images
