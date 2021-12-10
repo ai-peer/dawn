@@ -2,6 +2,10 @@ use_relative_paths = True
 
 gclient_gn_args_file = 'build/config/gclient_args.gni'
 
+gclient_gn_args = [
+  'generate_location_tags',
+]
+
 vars = {
   'chromium_git': 'https://chromium.googlesource.com',
   'dawn_git': 'https://dawn.googlesource.com',
@@ -12,7 +16,11 @@ vars = {
   'dawn_node': False, # Also fetches dependencies required for building NodeJS bindings.
   'dawn_cmake_version': 'version:3.13.5',
   'dawn_cmake_win32_sha1': 'b106d66bcdc8a71ea2cdf5446091327bfdb1bcd7',
+  'dawn_gn_version': 'git_revision:fc295f3ac7ca4fe7acc6cb5fb052d22909ef3a8f',
   'dawn_go_version': 'version:1.16',
+
+  # We don't use location metadata in our test isolates.
+  'generate_location_tags': False,
 }
 
 deps = {
@@ -33,7 +41,7 @@ deps = {
   'buildtools/linux64': {
     'packages': [{
       'package': 'gn/gn/linux-amd64',
-      'version': 'git_revision:dfcbc6fed0a8352696f92d67ccad54048ad182b3',
+      'version': Var('dawn_gn_version'),
     }],
     'dep_type': 'cipd',
     'condition': 'dawn_standalone and host_os == "linux"',
@@ -41,7 +49,7 @@ deps = {
   'buildtools/mac': {
     'packages': [{
       'package': 'gn/gn/mac-${{arch}}',
-      'version': 'git_revision:dfcbc6fed0a8352696f92d67ccad54048ad182b3',
+      'version': Var('dawn_gn_version'),
     }],
     'dep_type': 'cipd',
     'condition': 'dawn_standalone and host_os == "mac"',
@@ -49,7 +57,7 @@ deps = {
   'buildtools/win': {
     'packages': [{
       'package': 'gn/gn/windows-amd64',
-      'version': 'git_revision:dfcbc6fed0a8352696f92d67ccad54048ad182b3',
+      'version': Var('dawn_gn_version'),
     }],
     'dep_type': 'cipd',
     'condition': 'dawn_standalone and host_os == "win"',
@@ -85,6 +93,11 @@ deps = {
   },
   'third_party/googletest': {
     'url': '{chromium_git}/external/github.com/google/googletest@054a986a8513149e8374fc669a5fe40117ca6b41',
+    'condition': 'dawn_standalone',
+  },
+  # This is a dependency of //testing
+  'third_party/catapult': {
+    'url': '{chromium_git}/catapult.git@fa35beefb3429605035f98211ddb8750dee6a13d',
     'condition': 'dawn_standalone',
   },
 
@@ -213,7 +226,7 @@ hooks = [
     # Note: On Win, this should run after win_toolchain, as it may use it.
     'name': 'clang',
     'pattern': '.',
-    'action': ['python', 'tools/clang/scripts/update.py'],
+    'action': ['python3', 'tools/clang/scripts/update.py'],
     'condition': 'dawn_standalone',
   },
   {
