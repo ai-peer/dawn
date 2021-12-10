@@ -46,6 +46,30 @@
       },
       "revId": "9dedc7c69f8a3d5e8e99ad3e146dfee17f59e529",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3098a0c7_f6f02635",
+        "filename": "src/tests/end2end/VideoViewsTests_gbm.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-10T12:50:40Z",
+      "side": 1,
+      "message": "I have been using my local chromium for chromes build environment set up according to this guide: https://chromium.googlesource.com/chromiumos/docs/+/main/simple_chrome_workflow.md#. As a non-googler, I am using the generic board(amd64-generic) Chrome OS SDK, where the gbm.h is new enough to build. It is in src/build/cros_cache/chrome-sdk/tarballs/sysroot_chromeos-base_chromeos-chrome.tar.xz/chromeos-image-archive-amd64-generic-full-R98-14335.0.0-rc1-sysroot_chromeos-base_chromeos-chrome.tar.xz/usr/include/gbm.h. For Googlers, they can choose a specific ChromeOS board other than that. So the Chrome OS SDK for that board on the \"linux-chromeos-rel\" most likely is too old. This is just my speculation. It\u0027s out of my league to fix such infrastructure issue.",
+      "parentUuid": "75812ea6_8df8423d",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 0
+      },
+      "revId": "9dedc7c69f8a3d5e8e99ad3e146dfee17f59e529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
