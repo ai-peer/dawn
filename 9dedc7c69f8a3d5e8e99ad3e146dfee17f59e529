@@ -22,6 +22,30 @@
       },
       "revId": "9dedc7c69f8a3d5e8e99ad3e146dfee17f59e529",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75812ea6_8df8423d",
+        "filename": "src/tests/end2end/VideoViewsTests_gbm.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-10T09:40:08Z",
+      "side": 1,
+      "message": "Eww, that\u0027s annoying. Do you know if / when mini GBM will be updated for that bot?\n\nWorkaround LGTM esp. if it is temporary.",
+      "parentUuid": "e185b2a1_1d9c3fd1",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 0
+      },
+      "revId": "9dedc7c69f8a3d5e8e99ad3e146dfee17f59e529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
