@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d3acb7a_9e803f44",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-11T00:42:56Z",
+      "side": 1,
+      "message": "These ones are needed otherwise we get invalid data and it\u0027ll go dereference some memory it\u0027s not supposed to. I cut two other expectations and simplified some of the fake data here since it doesn\u0027t matter that much (still can\u0027t be null).",
+      "parentUuid": "e8497c65_3b2e9c72",
+      "range": {
+        "startLine": 53,
+        "startChar": 20,
+        "endLine": 64,
+        "endChar": 29
+      },
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e221226c_e5c284a1",
         "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
         "patchSetId": 5
@@ -54,6 +78,30 @@
       "writtenOn": "2021-12-08T18:31:36Z",
       "side": 1,
       "message": "Similar to my comment above about what we are actually trying to test. For some of these, if the actual call isn\u0027t too important, I think it would be better to drop them and use a NiceMock so that the tests don\u0027t become so rigid. I also think that the Exactly might not be necessary since Times should already assume exactness.",
+      "range": {
+        "startLine": 174,
+        "startChar": 16,
+        "endLine": 181,
+        "endChar": 39
+      },
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a1cdde0_5c8d0a83",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-11T00:42:56Z",
+      "side": 1,
+      "message": "I think these are kind of important because they\u0027re necessary for the device to function correctly after it has been requested.\n\nAlso, MockCallback are already NiceMock. I did drop a couple expectations in the latest revision though.\nHowever, all the EXPECT_CALL(api, ...) stuff is used tremendously in the rest of the wire tests and is all StrictMock, so can\u0027t remove more stuff without a more widespread change. Again though, I think these device callbacks are important to test here as it\u0027s part of setting up a correct device after requestDevice succeeds",
+      "parentUuid": "e221226c_e5c284a1",
       "range": {
         "startLine": 174,
         "startChar": 16,
@@ -110,6 +158,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72e09ad4_70cd5001",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-11T00:42:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1719b25_c79c1e48",
+      "range": {
+        "startLine": 261,
+        "startChar": 29,
+        "endLine": 261,
+        "endChar": 73
+      },
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc5f1012_95a22856",
@@ -123,6 +195,30 @@
       "writtenOn": "2021-12-08T18:31:36Z",
       "side": 1,
       "message": "nit. I assume this comes from the length of the list in the loop? Maybe worth to declare the list outside as a temp and use that for the loop and the list.size() here to have the justification for the number in the code.",
+      "range": {
+        "startLine": 92,
+        "startChar": 90,
+        "endLine": 92,
+        "endChar": 98
+      },
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1a45b72_a47d7aec",
+        "filename": "src/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-11T00:42:56Z",
+      "side": 1,
+      "message": "it\u0027s called once to get the length, and then a second time to populate the output var.\n\ndropped this EXPECT_CALL though.",
+      "parentUuid": "bc5f1012_95a22856",
       "range": {
         "startLine": 92,
         "startChar": 90,
@@ -156,6 +252,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac64da54_e1d4fd60",
+        "filename": "src/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-11T00:42:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef7e32e2_3e9e4e09",
+      "range": {
+        "startLine": 125,
+        "startChar": 30,
+        "endLine": 126,
+        "endChar": 97
+      },
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f61534d_22feb241",
@@ -169,6 +289,30 @@
       "writtenOn": "2021-12-08T18:31:36Z",
       "side": 1,
       "message": "I know this isn\u0027t the first test that we have like this, but style guide suggests to not to use _ in names, so maybe worth to not add new cases of it. (go/gunitfaq#why-should-test-suite-names-and-test-names-not-contain-underscore)",
+      "range": {
+        "startLine": 206,
+        "startChar": 30,
+        "endLine": 206,
+        "endChar": 76
+      },
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88e53741_9da7f214",
+        "filename": "src/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-11T00:42:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f61534d_22feb241",
       "range": {
         "startLine": 206,
         "startChar": 30,

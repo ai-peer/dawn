@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15501a4c_9492ee15",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-11T00:42:56Z",
+      "side": 1,
+      "message": "requiredFeatures is a raw pointer, not iterable.",
+      "parentUuid": "a84299fd_66b0c214",
+      "range": {
+        "startLine": 134,
+        "startChar": 20,
+        "endLine": 138,
+        "endChar": 21
+      },
+      "revId": "c101518527015e87ff8330c607acfb9bebc24030",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "750c7489_001ec6ba",
@@ -88,6 +112,24 @@
       "writtenOn": "2021-12-08T14:31:52Z",
       "side": 1,
       "message": "We\u0027ll need to also see what happens when the device request a feature that\u0027s supported by the apiDevice but not by the wire (the callback should fail).",
+      "revId": "c101518527015e87ff8330c607acfb9bebc24030",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "128b06a9_f85faaa1",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-11T00:42:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "750c7489_001ec6ba",
       "revId": "c101518527015e87ff8330c607acfb9bebc24030",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -111,6 +153,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4cc6ed9b_4b8a2b7a",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-11T00:42:56Z",
+      "side": 1,
+      "message": "I don\u0027t think so - we do it in SetUp/TearDown, but not sure it\u0027s worth factoring out since I don\u0027t think other tests would need it.",
+      "parentUuid": "16d143c5_69587f6e",
+      "revId": "c101518527015e87ff8330c607acfb9bebc24030",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81a6779b_f98f1091",
         "filename": "src/tests/unittests/wire/WireInstanceTests.cpp",
         "patchSetId": 6
@@ -128,6 +188,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d87679d_00208671",
+        "filename": "src/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-11T00:42:56Z",
+      "side": 1,
+      "message": "maybe? I think it\u0027s not as needed though. In Chromium we\u0027re just going to override it cause it\u0027s not good for lifetime stuff. Maybe after if/when dawn_native gets more robust against dropping things. Sounds like we\u0027ll need to eventually based on the recent webgpu.h lifetime discussion.\n\nidk. maybe we\u0027ll need it more if there\u0027s more an more stuff in the instance descriptor, but I don\u0027t see a use right now for WebGPU in Blink at least.",
+      "parentUuid": "81a6779b_f98f1091",
+      "revId": "c101518527015e87ff8330c607acfb9bebc24030",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd1502bd_c14b30cc",
         "filename": "src/tests/unittests/wire/WireInstanceTests.cpp",
         "patchSetId": 6
@@ -139,6 +217,24 @@
       "writtenOn": "2021-12-08T14:31:52Z",
       "side": 1,
       "message": "We\u0027ll also need a test that checks what happens when a feature not supported by the wire is returned by the adapter.",
+      "revId": "c101518527015e87ff8330c607acfb9bebc24030",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "768c0154_feb08656",
+        "filename": "src/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-11T00:42:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd1502bd_c14b30cc",
       "revId": "c101518527015e87ff8330c607acfb9bebc24030",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
