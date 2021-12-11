@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c9d25669_415885ca",
+        "filename": "generator/templates/api_cpp.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-11T07:12:36Z",
+      "side": 1,
+      "message": "It will create one node [1] for the macro in my test.\n\n[2] is the simple test to render output with the template [3] that has a macro inside loop.\n\n[1] https://github.com/pallets/jinja/blob/main/src/jinja2/parser.py#L444\n[2] https://github.com/fujunwei/webnn-native-1/blob/jinja_debug/generator/jinja_test.py\n[3] https://github.com/fujunwei/webnn-native-1/blob/jinja_debug/generator/templates/showpersons.txt",
+      "parentUuid": "38df9b8e_ee11e5eb",
+      "revId": "191c374f7643cf7da834a2723eb30b27d49d6792",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dbce0af_3bef6077",
         "filename": "generator/templates/api_cpp.h",
         "patchSetId": 1
@@ -65,6 +83,24 @@
       "writtenOn": "2021-12-10T09:42:43Z",
       "side": 1,
       "message": "I\u0027m not sure I understand why this change is needed. Doesn\u0027t the previous code produce the exact same thing?",
+      "revId": "191c374f7643cf7da834a2723eb30b27d49d6792",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87365a36_631d2ac0",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-11T07:12:36Z",
+      "side": 1,
+      "message": "They are some layout differentiation, it is like below before the modification.\nInstance CreateInstance(        InstanceDescriptor const * descriptor\n         \u003d nullptr);\n \nNow it\u0027s like this:\nInstance CreateInstance(InstanceDescriptor const * descriptor \u003d nullptr);",
+      "parentUuid": "5dbce0af_3bef6077",
       "revId": "191c374f7643cf7da834a2723eb30b27d49d6792",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
