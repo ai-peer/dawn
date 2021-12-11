@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e20e6214_0161d0cc",
+        "filename": "dawn_wire.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-11T00:31:03Z",
+      "side": 1,
+      "message": "yep",
+      "parentUuid": "22c5e3ef_87be390f",
+      "revId": "4ed002090182fbf022e70a7ea7cfb3ba48857024",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b70398e_e44c7025",
@@ -340,6 +358,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49d35d5f_4db54b6b",
+        "filename": "src/dawn_wire/server/ServerAdapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-11T00:31:03Z",
+      "side": 1,
+      "message": "nvm, I added it and found a way to test it.",
+      "parentUuid": "a5997b7e_fa393af0",
+      "revId": "4ed002090182fbf022e70a7ea7cfb3ba48857024",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a239829_55bb808a",
@@ -406,6 +442,24 @@
       "side": 1,
       "message": "we don\u0027t have any such cases right now since though - can we address it when we need it?\n\non this note though - maybe in dawn.json we can have something that says what base struct an extension struct belongs too. Then we can autogenerate the limit chain.",
       "parentUuid": "7b61a5ba_51debd0f",
+      "revId": "4ed002090182fbf022e70a7ea7cfb3ba48857024",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fa1f83c_56eaf7d1",
+        "filename": "src/dawn_wire/server/ServerInstance.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-11T00:31:03Z",
+      "side": 1,
+      "message": "this one still can\u0027t test, but I put a comment next to the feature support list noting that the limit code should be updated",
+      "parentUuid": "d0fe74ec_5f82caa3",
       "revId": "4ed002090182fbf022e70a7ea7cfb3ba48857024",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
