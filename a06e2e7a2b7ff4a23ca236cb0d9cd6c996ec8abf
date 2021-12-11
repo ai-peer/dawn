@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e0d971c_4fc13fe5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-11T00:53:09Z",
+      "side": 1,
+      "message": "sorry don\u0027t need to review this yet; it was still WIP, but had a common base as some other CLs so I guess gerrit showed it as related",
+      "revId": "a06e2e7a2b7ff4a23ca236cb0d9cd6c996ec8abf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7619c055_0dd2b372",
