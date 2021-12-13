@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8673821_79b7a977",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-12-13T21:50:56Z",
+      "side": 1,
+      "message": "https://critique-ng.corp.google.com/cl/411914505/depot/google3/third_party/dawn/generator/templates/api.h?left\u003do5f44er14\u0026right\u003ds8#1R\nrtp@ mentions to put this at very top... Although I do agree this needs to be after license header.",
+      "parentUuid": "daa902f4_5000ab90",
+      "revId": "b7397857a9f343df8470b032541dfe30271148cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70d0dc1c_892047ab",
         "filename": "generator/templates/api.h",
         "patchSetId": 2
