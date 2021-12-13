@@ -272,8 +272,6 @@ TEST_F(CopyTextureForBrowserTest, ColorSpaceConversion_ColorSpace) {
     options.srcTransferFunctionParameters = srcTransferFunctionParameters.data();
     options.dstTransferFunctionParameters = dstTransferFunctionParameters.data();
     options.conversionMatrix = conversionMatrix.data();
-    options.conversionMatrixElementsCount = 9;
-    options.transferFunctionParametersCount = 7;
 
     // Valid cases
     {
@@ -286,22 +284,6 @@ TEST_F(CopyTextureForBrowserTest, ColorSpaceConversion_ColorSpace) {
         TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
                                   {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All,
                                   noColorSpaceConversion);
-    }
-
-    // Invalid cases: wrong transferFunctionParametersCount
-    {
-        // wrong: transferFunctionParametersCount must be 7
-        options.transferFunctionParametersCount = 6;
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
-    }
-
-    // Invalid cases: wrong conversionMatrixElementsCount
-    {
-        // wrong: conversionMatrixElementsCount
-        options.conversionMatrixElementsCount = 10;
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
     }
 
     // Invalid cases: srcTransferFunctionParameters, dstTransferFunctionParameters or
