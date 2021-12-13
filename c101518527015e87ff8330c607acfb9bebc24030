@@ -169,6 +169,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1609b11_e6a5a22f",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-13T08:25:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4cc6ed9b_4b8a2b7a",
+      "revId": "c101518527015e87ff8330c607acfb9bebc24030",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81a6779b_f98f1091",
