@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bb0cfe8_83472a14",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-13T08:21:18Z",
+      "side": 1,
+      "message": "Ah I guess it could have been just optional. Either way.",
+      "parentUuid": "04a42f3f_790d171a",
+      "revId": "9502d5d9f9bac9f01c4535a3bd322cfba45a0a6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f3be607_ec5f0f06",
