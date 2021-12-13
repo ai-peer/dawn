@@ -87,6 +87,24 @@
       "parentUuid": "1229e7d9_90ed0672",
       "revId": "c74ef663e4c0ca82b4cdbbda62d53c9a648b9e54",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf9babb8_d017be4d",
+        "filename": "src/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-13T11:52:39Z",
+      "side": 1,
+      "message": "Gotcha, we can remove it in the follow-up that adds constant length info to the wire.",
+      "parentUuid": "f2a59e9a_a225a83c",
+      "revId": "c74ef663e4c0ca82b4cdbbda62d53c9a648b9e54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
