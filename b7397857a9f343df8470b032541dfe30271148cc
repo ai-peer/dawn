@@ -67,6 +67,75 @@
       "message": "I think we should have this text below the license header, just in front of the `include`",
       "revId": "b7397857a9f343df8470b032541dfe30271148cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70d0dc1c_892047ab",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-13T21:48:16Z",
+      "side": 1,
+      "message": "\"2.0\"",
+      "range": {
+        "startLine": 2,
+        "startChar": 20,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "b7397857a9f343df8470b032541dfe30271148cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3858f12_9e7c2c40",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-13T21:48:16Z",
+      "side": 1,
+      "message": "let\u0027s just say \"because the WebGPU native API for which the generator is used is related to the W3C WebGPU standard. BSD 3-Clause is the license for W3C standards, so it is desirable to use the same license.\"\n\n^ or something like that? wdyt?",
+      "range": {
+        "startLine": 3,
+        "startChar": 55,
+        "endLine": 3,
+        "endChar": 56
+      },
+      "revId": "b7397857a9f343df8470b032541dfe30271148cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f574be8_5cbffc36",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-13T21:48:16Z",
+      "side": 1,
+      "message": "I would clarify this and say it\u0027s used to generate the header for an API named by template variable {{metadata.api}}",
+      "range": {
+        "startLine": 3,
+        "startChar": 39,
+        "endLine": 3,
+        "endChar": 55
+      },
+      "revId": "b7397857a9f343df8470b032541dfe30271148cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
