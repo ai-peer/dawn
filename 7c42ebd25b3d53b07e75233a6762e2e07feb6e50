@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b245a03c_28d5c1ab",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-13T08:28:10Z",
+      "side": 1,
+      "message": "I don\u0027t know about using NiceMock though. The problem is that sometimes there are a lot of calls we don\u0027t care as much about (like potentially the ones above, although they set pointers and stuff so maybe not). But in the other cases we want very strict mocks so that we assert the flow of commands performed by the wire. I\u0027m not sure how to improve things without coming with a custom text format to describe wire interactions.",
+      "parentUuid": "6d3acb7a_9e803f44",
+      "range": {
+        "startLine": 53,
+        "startChar": 20,
+        "endLine": 64,
+        "endChar": 29
+      },
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e221226c_e5c284a1",
         "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
         "patchSetId": 5
