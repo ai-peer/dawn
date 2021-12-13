@@ -33,6 +33,24 @@
       "message": "Why not set it unconditionally?",
       "revId": "c74ef663e4c0ca82b4cdbbda62d53c9a648b9e54",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1229e7d9_90ed0672",
+        "filename": "src/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-13T08:40:05Z",
+      "side": 1,
+      "message": "if I set it with any numbers, --use-wire will crash the tests. I guess that\u0027s because wire wants to copy 10 elements from the nullptr.",
+      "parentUuid": "b7ce096a_be64606d",
+      "revId": "c74ef663e4c0ca82b4cdbbda62d53c9a648b9e54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
