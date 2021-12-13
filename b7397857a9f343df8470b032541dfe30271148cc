@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d873ca04_d043ae90",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-13T21:52:23Z",
+      "side": 1,
+      "message": "ok nvm. i defer to them",
+      "parentUuid": "e8673821_79b7a977",
+      "revId": "b7397857a9f343df8470b032541dfe30271148cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70d0dc1c_892047ab",
         "filename": "generator/templates/api.h",
         "patchSetId": 2
