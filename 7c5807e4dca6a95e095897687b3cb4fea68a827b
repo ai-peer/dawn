@@ -16,6 +16,23 @@
       "message": "PTAL at the trivial CL",
       "revId": "7c5807e4dca6a95e095897687b3cb4fea68a827b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f0856ab_1d0e5060",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-13T16:54:58Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7c5807e4dca6a95e095897687b3cb4fea68a827b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
