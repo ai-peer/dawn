@@ -272,8 +272,6 @@ TEST_F(CopyTextureForBrowserTest, ColorSpaceConversion_ColorSpace) {
     options.srcTransferFunctionParameters = srcTransferFunctionParameters.data();
     options.dstTransferFunctionParameters = dstTransferFunctionParameters.data();
     options.conversionMatrix = conversionMatrix.data();
-    options.conversionMatrixElementsCount = 9;
-    options.transferFunctionParametersCount = 7;
 
     // Valid cases
     {
@@ -288,46 +286,21 @@ TEST_F(CopyTextureForBrowserTest, ColorSpaceConversion_ColorSpace) {
                                   noColorSpaceConversion);
     }
 
-    // Invalid cases: wrong transferFunctionParametersCount
-    {
-        // wrong: transferFunctionParametersCount must be 7
-        options.transferFunctionParametersCount = 6;
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
-    }
-
-    // Invalid cases: wrong conversionMatrixElementsCount
-    {
-        // wrong: conversionMatrixElementsCount
-        options.conversionMatrixElementsCount = 10;
-        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
-                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
-    }
-
     // Invalid cases: srcTransferFunctionParameters, dstTransferFunctionParameters or
     // conversionMatrix is nullptr
     {
-        if (UsesWire()) {
-            options.transferFunctionParametersCount = 0;
-        }
         options.srcTransferFunctionParameters = nullptr;
         TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
                                   {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
     }
 
     {
-        if (UsesWire()) {
-            options.transferFunctionParametersCount = 0;
-        }
         options.dstTransferFunctionParameters = nullptr;
         TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
                                   {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
     }
 
     {
-        if (UsesWire()) {
-            options.conversionMatrixElementsCount = 0;
-        }
         options.conversionMatrix = nullptr;
         TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
                                   {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
