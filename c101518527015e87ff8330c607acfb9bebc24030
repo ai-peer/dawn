@@ -101,6 +101,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "964bae91_e1365c5a",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-13T16:18:43Z",
+      "side": 1,
+      "message": "Ah... In that case I *think* it may work if you do something like:\n```\nEXPECT_THAT({apiDesc-\u003erequiredFeatures, apiDesc-\u003erequiredFeaturesCount},\n    ElementsAre(WGPUFeatureName::TextureCompressionETC2, \n                WGPUFeatureName::TextureCompressionASTC)\n);\n```",
+      "parentUuid": "15501a4c_9492ee15",
+      "range": {
+        "startLine": 134,
+        "startChar": 20,
+        "endLine": 138,
+        "endChar": 21
+      },
+      "revId": "c101518527015e87ff8330c607acfb9bebc24030",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "750c7489_001ec6ba",
         "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
         "patchSetId": 6

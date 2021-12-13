@@ -89,6 +89,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45522a8e_51f65673",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-13T16:18:43Z",
+      "side": 1,
+      "message": "I think that the NiceMock should still be fine for both cases though? For the cases where we want to be strict, we can, and for the cases where it\u0027s fine for default action it just gives us an option to leave out the expect call. For test writers they will still see a log for every mock call that didn\u0027t have an expectation so if they feel like it\u0027s necessary they can add one, but for calls that don\u0027t matter too much then we can just ignore the log.\n\nBy taking the default actions, it also makes sure that the tests are a bit more robust if the default action calls are removed or changed later on.\n\nEither way though, I don\u0027t think it is something that needs to be changed in this CL, but it should be something to consider moving forwards with our testing.",
+      "parentUuid": "b245a03c_28d5c1ab",
+      "range": {
+        "startLine": 53,
+        "startChar": 20,
+        "endLine": 64,
+        "endChar": 29
+      },
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e221226c_e5c284a1",
@@ -136,6 +160,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba198731_fb7f9b4c",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-13T16:18:43Z",
+      "side": 1,
+      "message": "Ok, that sounds fine. I still think the expects (on the callback funcs) at the end aren\u0027t great/necessary since those should be tested on destruction of the device, not on create, i.e. the testing could be more isolated. But I think you have to keep them for now because of the StrictMock.\n\nI think it\u0027s fine to keep the StrictMock for now if necessary, but the change shouldn\u0027t affect any other tests, since a NiceMock works exactly the same way as a Strict one, and since we had a strict one before, there is no way that we were letting any calls through unexpectedly, so same thing would happen for the Nice one.",
+      "parentUuid": "9a1cdde0_5c8d0a83",
+      "range": {
+        "startLine": 174,
+        "startChar": 16,
+        "endLine": 181,
+        "endChar": 39
+      },
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9d899e7_03f5de77",
@@ -149,6 +197,30 @@
       "writtenOn": "2021-12-08T18:31:36Z",
       "side": 1,
       "message": "Same comment here for unnecessary expectations. If we want to test the callback settings, I think we should do that in a separate test.",
+      "range": {
+        "startLine": 228,
+        "startChar": 8,
+        "endLine": 233,
+        "endChar": 31
+      },
+      "revId": "7c42ebd25b3d53b07e75233a6762e2e07feb6e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1b496f4_3787ffd2",
+        "filename": "src/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-13T16:18:43Z",
+      "side": 1,
+      "message": "Moved discussions into previous comment about these callback setting mocks.",
+      "parentUuid": "e9d899e7_03f5de77",
       "range": {
         "startLine": 228,
         "startChar": 8,
