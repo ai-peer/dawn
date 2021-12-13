@@ -33,6 +33,24 @@
       "message": "LGTM. We can do the deprecation warning as a follow up if you want.\n\nDo you need an additional review from Kai?",
       "revId": "aa9c982289e3072be3f8e8d17ff7a64b06504353",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27971fc9_5d74415b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-13T01:33:49Z",
+      "side": 1,
+      "message": "Yes, I think Kai\u0027s additional review is still required. But I could some follow ups right now (e.g. deprecate AlphaOp, constant length supported).",
+      "parentUuid": "667a43e3_7bba92fd",
+      "revId": "aa9c982289e3072be3f8e8d17ff7a64b06504353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -1380,6 +1380,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "155a76b8_7ea6586e",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-13T01:33:49Z",
+      "side": 1,
+      "message": "It cannot fix the error. The reason is that we don\u0027t define a invalid alphaOp and AlphaOp::DontChange is the default one. This makes options-\u003ealphaOp \u003d\u003d wgpu::AlphaOp::DontChange won\u0027t trigger the deprecation warning. And EXPECT_DEPRECATION_WARNING always expect warning + 1.\n\nBut I don\u0027t think we need to worry about this because I\u0027ll handle the alphaOp issue immediately after this CL landed.",
+      "parentUuid": "44bfd03a_f77b7a21",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "10fb13c7_d931a744",
