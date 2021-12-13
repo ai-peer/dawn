@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ed43f01_673f4e6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-13T21:44:00Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b7397857a9f343df8470b032541dfe30271148cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "865a614a_617093d7",
+        "filename": "generator/templates/BSD_LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-13T21:44:00Z",
+      "side": 1,
+      "message": "just want to check: these get correctly replaced in the generated output, right?",
+      "revId": "b7397857a9f343df8470b032541dfe30271148cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "543aceec_911ed4ec",
+        "filename": "generator/templates/BSD_LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-13T21:44:00Z",
+      "side": 1,
+      "message": "nit: I think we should have a newline at the end. Otherwise, the next line might run up against the end of the text here.",
+      "revId": "b7397857a9f343df8470b032541dfe30271148cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daa902f4_5000ab90",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-13T21:44:00Z",
+      "side": 1,
+      "message": "I think we should have this text below the license header, just in front of the `include`",
+      "revId": "b7397857a9f343df8470b032541dfe30271148cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
