@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9e1554bb_64672a59",
+        "filename": "src/dawn_wire/client/LimitsAndFeatures.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-13T08:23:53Z",
+      "side": 1,
+      "message": "Nevermind, the requestAdapter flow will send the unsupported features to the server without going through SetFeatures.",
+      "parentUuid": "97ea7ffa_ad13c29a",
+      "revId": "4a6d1c14066a6e20f49207a43231750abc0a379f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a3261532_907eaf05",
         "filename": "src/dawn_wire/server/ServerInstance.cpp",
         "patchSetId": 7
