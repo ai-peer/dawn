@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9c95c7c_70c7a7dd",
+        "filename": "src/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-13T08:50:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50e17f26_5252b2da",
+      "revId": "c74ef663e4c0ca82b4cdbbda62d53c9a648b9e54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7ce096a_be64606d",
