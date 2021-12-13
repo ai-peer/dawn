@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50e17f26_5252b2da",
+        "filename": "src/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-13T08:34:28Z",
+      "side": 1,
+      "message": "nit: I think we should copy from baseOptions to a local options variable to make sure that we don\u0027t leak modifications between subcases.",
+      "revId": "c74ef663e4c0ca82b4cdbbda62d53c9a648b9e54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7ce096a_be64606d",
+        "filename": "src/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-13T08:34:28Z",
+      "side": 1,
+      "message": "Why not set it unconditionally?",
+      "revId": "c74ef663e4c0ca82b4cdbbda62d53c9a648b9e54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
