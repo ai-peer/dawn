@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97ea7ffa_ad13c29a",
+        "filename": "src/dawn_wire/client/LimitsAndFeatures.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-13T08:17:27Z",
+      "side": 1,
+      "message": "It seems that this will silently remove features that are asked for device creation but that the wire doesn\u0027t support? Maybe we should fail the callback immediately in the client when that\u0027s the case.",
+      "revId": "4a6d1c14066a6e20f49207a43231750abc0a379f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3261532_907eaf05",
+        "filename": "src/dawn_wire/server/ServerInstance.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-13T08:17:27Z",
+      "side": 1,
+      "message": "TIL",
+      "revId": "4a6d1c14066a6e20f49207a43231750abc0a379f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
