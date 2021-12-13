@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bdeb074_c70cba7d",
+        "filename": "generator/templates/api_cpp.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-13T08:30:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c9d25669_415885ca",
+      "revId": "191c374f7643cf7da834a2723eb30b27d49d6792",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5dbce0af_3bef6077",
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "They are some layout differentiation, it is like below before the modification.\nInstance CreateInstance(        InstanceDescriptor const * descriptor\n         \u003d nullptr);\n \nNow it\u0027s like this:\nInstance CreateInstance(InstanceDescriptor const * descriptor \u003d nullptr);",
       "parentUuid": "5dbce0af_3bef6077",
+      "revId": "191c374f7643cf7da834a2723eb30b27d49d6792",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d072e95c_e26cd39b",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-13T08:30:54Z",
+      "side": 1,
+      "message": "Ah, you can use a -%} to remove the whitespace after the %} so the following should work too.\n\n               {% if not loop.first %}, {% endif -%}\n               {{as_annotated_cppType(arg)}}{{render_cpp_default_value(arg, False)}}\n\nEither way sounds good,",
+      "parentUuid": "87365a36_631d2ac0",
       "revId": "191c374f7643cf7da834a2723eb30b27d49d6792",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
