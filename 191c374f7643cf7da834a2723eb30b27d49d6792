@@ -156,6 +156,24 @@
       "parentUuid": "87365a36_631d2ac0",
       "revId": "191c374f7643cf7da834a2723eb30b27d49d6792",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a669858_5c7f1475",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-14T01:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d072e95c_e26cd39b",
+      "revId": "191c374f7643cf7da834a2723eb30b27d49d6792",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
