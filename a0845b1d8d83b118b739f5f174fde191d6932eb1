@@ -196,6 +196,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73eec4c9_45714236",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-14T04:49:39Z",
+      "side": 1,
+      "message": "Thanks! Let\u0027s keep the more general form for src and dst for now!",
+      "parentUuid": "374f8454_66e90580",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3d30207_8a2ed744",
@@ -1454,6 +1472,24 @@
       "side": 1,
       "message": "In that case I agree it\u0027s OK to not have the deprecation warning since it\u0027s only used by Blink.",
       "parentUuid": "155a76b8_7ea6586e",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91ec9647_11d47b7a",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-14T04:49:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1a782699_cf702b7c",
       "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
