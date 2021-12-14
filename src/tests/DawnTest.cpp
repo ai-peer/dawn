@@ -1592,6 +1592,19 @@ namespace detail {
             return testing::AssertionSuccess();
         }
 
+        template <>
+        testing::AssertionResult CheckImpl<uint32_t>(const uint32_t& expected,
+                                                     const uint32_t& actual,
+                                                     const uint32_t& tolerance) {
+            if (abs(static_cast<int32_t>(expected - actual)) > static_cast<int32_t>(tolerance)) {
+                return tolerance == 0
+                           ? testing::AssertionFailure() << expected << ", actual " << actual
+                           : testing::AssertionFailure() << "within " << tolerance << " of "
+                                                         << expected << ", actual " << actual;
+            }
+            return testing::AssertionSuccess();
+        }
+
         // Interpret uint16_t as float16
         // This is mostly for reading float16 output from textures
         template <>
