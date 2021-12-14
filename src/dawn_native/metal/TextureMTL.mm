@@ -222,6 +222,7 @@ namespace dawn_native { namespace metal {
             case wgpu::TextureFormat::Depth24Plus:
                 return MTLPixelFormatDepth32Float;
             case wgpu::TextureFormat::Depth24PlusStencil8:
+            case wgpu::TextureFormat::Depth32FloatStencil8:
                 return MTLPixelFormatDepth32Float_Stencil8;
             case wgpu::TextureFormat::Depth16Unorm:
                 if (@available(macOS 10.12, iOS 13.0, *)) {
@@ -230,6 +231,8 @@ namespace dawn_native { namespace metal {
                     // TODO (dawn:1181): Allow non-conformant implementation on macOS 10.11
                     UNREACHABLE();
                 }
+            case wgpu::TextureFormat::Depth24UnormStencil8:
+                return MTLPixelFormatDepth24Unorm_Stencil8;
 
 #if defined(DAWN_PLATFORM_MACOS)
             case wgpu::TextureFormat::BC1RGBAUnorm:
@@ -321,13 +324,29 @@ namespace dawn_native { namespace metal {
 
             // TODO(dawn:666): implement stencil8
             case wgpu::TextureFormat::Stencil8:
-            // TODO(dawn:690): implement depth24unorm-stencil8
-            case wgpu::TextureFormat::Depth24UnormStencil8:
-            // TODO(dawn:690): implement depth32float-stencil8
-            case wgpu::TextureFormat::Depth32FloatStencil8:
             case wgpu::TextureFormat::Undefined:
                 UNREACHABLE();
         }
+    }
+
+    ResultOrError<MTLPixelFormat> MetalStencilTextureViewPixelFormat(MTLPixelFormat format) {
+        if (@available(macOS 10.12, iOS 10.0, *)) {
+            if (format == MTLPixelFormatDepth32Float_Stencil8) {
+                return MTLPixelFormatX32_Stencil8;
+            }
+
+#if defined(DAWN_PLATFORM_MACOS)
+            if (format == MTLPixelFormatDepth24Unorm_Stencil8) {
+                return MTLPixelFormatX24_Stencil8;
+            }
+#endif
+        }
+
+        // TODO(enga): Add a workaround to back combined depth/stencil textures
+        // with Sampled usage using two separate textures.
+        // Or, consider always using the workaround for D32S8.
+        return DAWN_DEVICE_LOST_ERROR("Cannot create stencil-only texture view of "
+                                      "combined depth/stencil format.");
     }
 
     MaybeError ValidateIOSurfaceCanBeWrapped(const DeviceBase*,
@@ -745,17 +764,7 @@ namespace dawn_native { namespace metal {
         } else {
             MTLPixelFormat format = MetalPixelFormat(descriptor->format);
             if (descriptor->aspect == wgpu::TextureAspect::StencilOnly) {
-                if (@available(macOS 10.12, iOS 10.0, *)) {
-                    ASSERT(format == MTLPixelFormatDepth32Float_Stencil8);
-                    format = MTLPixelFormatX32_Stencil8;
-                } else {
-                    // TODO(enga): Add a workaround to back combined depth/stencil textures
-                    // with Sampled usage using two separate textures.
-                    // Or, consider always using the workaround for D32S8.
-                    GetDevice()->ConsumedError(
-                        DAWN_DEVICE_LOST_ERROR("Cannot create stencil-only texture view of "
-                                               "combined depth/stencil format."));
-                }
+                DAWN_TRY_ASSIGN(format, MetalStencilTextureViewPixelFormat(format));
             }
 
             MTLTextureType textureViewType =

@@ -729,7 +729,7 @@ namespace dawn_native { namespace opengl {
                         case Aspect::Depth:
                             glAttachment = GL_DEPTH_ATTACHMENT;
                             glFormat = GL_DEPTH_COMPONENT;
-                            glType = GL_FLOAT;
+                            glType = format.type;
                             break;
                         case Aspect::Stencil:
                             glAttachment = GL_STENCIL_ATTACHMENT;
