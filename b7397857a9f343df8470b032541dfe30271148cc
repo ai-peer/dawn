@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84c8c3b0_b626946d",
+        "filename": "generator/templates/BSD_LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-12-14T00:06:49Z",
+      "side": 1,
+      "message": "Yep. They are still replaced.",
+      "parentUuid": "865a614a_617093d7",
+      "revId": "b7397857a9f343df8470b032541dfe30271148cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "543aceec_911ed4ec",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-12-13T21:44:00Z",
       "side": 1,
       "message": "nit: I think we should have a newline at the end. Otherwise, the next line might run up against the end of the text here.",
+      "revId": "b7397857a9f343df8470b032541dfe30271148cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c2567ad_dcc9a1cd",
+        "filename": "generator/templates/BSD_LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-12-14T00:06:49Z",
+      "side": 1,
+      "message": "Done. This lack of newline actually seems to fail the build",
+      "parentUuid": "543aceec_911ed4ec",
       "revId": "b7397857a9f343df8470b032541dfe30271148cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -105,6 +141,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce445732_22e95247",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-12-14T00:06:49Z",
+      "side": 1,
+      "message": "Keep as is.",
+      "parentUuid": "d873ca04_d043ae90",
+      "revId": "b7397857a9f343df8470b032541dfe30271148cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70d0dc1c_892047ab",
@@ -118,6 +172,30 @@
       "writtenOn": "2021-12-13T21:48:16Z",
       "side": 1,
       "message": "\"2.0\"",
+      "range": {
+        "startLine": 2,
+        "startChar": 20,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "b7397857a9f343df8470b032541dfe30271148cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb146faf_a8eefba3",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-12-14T00:06:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70d0dc1c_892047ab",
       "range": {
         "startLine": 2,
         "startChar": 20,
@@ -164,6 +242,54 @@
       "writtenOn": "2021-12-13T21:48:16Z",
       "side": 1,
       "message": "I would clarify this and say it\u0027s used to generate the header for an API named by template variable {{metadata.api}}",
+      "range": {
+        "startLine": 3,
+        "startChar": 39,
+        "endLine": 3,
+        "endChar": 55
+      },
+      "revId": "b7397857a9f343df8470b032541dfe30271148cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a285ddb_e173ad86",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-12-14T00:06:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3858f12_9e7c2c40",
+      "range": {
+        "startLine": 3,
+        "startChar": 55,
+        "endLine": 3,
+        "endChar": 56
+      },
+      "revId": "b7397857a9f343df8470b032541dfe30271148cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d4dc790_576a08a5",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-12-14T00:06:49Z",
+      "side": 1,
+      "message": "Just naming back to \"WebGPU native API\" to better fit the sentence you mention below\n(WebNN licensing issue is out of our scope)",
+      "parentUuid": "9f574be8_5cbffc36",
       "range": {
         "startLine": 3,
         "startChar": 39,
