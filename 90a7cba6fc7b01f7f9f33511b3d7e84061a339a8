@@ -16,6 +16,23 @@
       "message": "PTAL I pushed to main, then did a cherry-pick using Gerrit interface",
       "revId": "90a7cba6fc7b01f7f9f33511b3d7e84061a339a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d82f12c0_36b25140",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-14T17:28:23Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "90a7cba6fc7b01f7f9f33511b3d7e84061a339a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
