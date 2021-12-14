@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5911ecc_d20c240d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-14T09:48:16Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "09d8898a3b8463cfabe76f936b8e68e3ebbcc79d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "080037a1_a17832f9",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-14T09:48:16Z",
+      "side": 1,
+      "message": "nit: what happens when that condition is true? Seems like it could be an assert.",
+      "range": {
+        "startLine": 300,
+        "startChar": 45,
+        "endLine": 300,
+        "endChar": 65
+      },
+      "revId": "09d8898a3b8463cfabe76f936b8e68e3ebbcc79d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
