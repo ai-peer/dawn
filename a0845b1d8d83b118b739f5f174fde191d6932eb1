@@ -180,6 +180,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "374f8454_66e90580",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-14T04:42:42Z",
+      "side": 1,
+      "message": "Because destination is specified by the WebGPU spec and it can only be \"srgb\" right now (and later \"srgb-linear\" and \"display-p3\" probably). We could also just pass all of the parameters but it\u0027s not strictly necessary - in fact we could even hardcode the srgb numbers into the shader for the destination if we wanted to (I don\u0027t think we need to).\n\nThe parameters sound good to me. needColorSpaceConversion could possibly be determined by Dawn but maybe it\u0027s better to have it explicit.",
+      "parentUuid": "8ac263ce_2724594e",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3d30207_8a2ed744",
         "filename": "dawn.json",
         "patchSetId": 5
@@ -604,6 +622,30 @@
       "side": 1,
       "message": "I think it is Done.",
       "parentUuid": "fef39cef_aa18fcf1",
+      "range": {
+        "startLine": 88,
+        "startChar": 55,
+        "endLine": 88,
+        "endChar": 81
+      },
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a678755_cc1f87b4",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-14T04:42:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cf731356_61eba51b",
       "range": {
         "startLine": 88,
         "startChar": 55,
@@ -1394,6 +1436,24 @@
       "side": 1,
       "message": "It cannot fix the error. The reason is that we don\u0027t define a invalid alphaOp and AlphaOp::DontChange is the default one. This makes options-\u003ealphaOp \u003d\u003d wgpu::AlphaOp::DontChange won\u0027t trigger the deprecation warning. And EXPECT_DEPRECATION_WARNING always expect warning + 1.\n\nBut I don\u0027t think we need to worry about this because I\u0027ll handle the alphaOp issue immediately after this CL landed.",
       "parentUuid": "44bfd03a_f77b7a21",
+      "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a782699_cf702b7c",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-14T04:42:42Z",
+      "side": 1,
+      "message": "In that case I agree it\u0027s OK to not have the deprecation warning since it\u0027s only used by Blink.",
+      "parentUuid": "155a76b8_7ea6586e",
       "revId": "a0845b1d8d83b118b739f5f174fde191d6932eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
