@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7607fa6d_fea96f11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-14T09:52:46Z",
+      "side": 1,
+      "message": "LGTM too. Thanks for pushing this through.",
+      "revId": "d7304d1971537684597e15f3a4973df1a48620fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33976d09_003a0280",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-14T09:52:46Z",
+      "side": 1,
+      "message": "Maybe add that \"Using Apache 2.0 like the rest of Dawn would also prevent using the generated header as part of GPLv2 projects.\"",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 0
+      },
+      "revId": "d7304d1971537684597e15f3a4973df1a48620fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
