@@ -81,9 +81,10 @@ namespace dawn_native { namespace vulkan {
     ResultOrError<Ref<BindGroupLayout>> BindGroupLayout::Create(
         Device* device,
         const BindGroupLayoutDescriptor* descriptor,
+        BindingCounts bindingCounts,
         PipelineCompatibilityToken pipelineCompatibilityToken) {
-        Ref<BindGroupLayout> bgl =
-            AcquireRef(new BindGroupLayout(device, descriptor, pipelineCompatibilityToken));
+        Ref<BindGroupLayout> bgl = AcquireRef(
+            new BindGroupLayout(device, descriptor, bindingCounts, pipelineCompatibilityToken));
         DAWN_TRY(bgl->Initialize());
         return bgl;
     }
@@ -147,8 +148,9 @@ namespace dawn_native { namespace vulkan {
 
     BindGroupLayout::BindGroupLayout(DeviceBase* device,
                                      const BindGroupLayoutDescriptor* descriptor,
+                                     BindingCounts bindingCounts,
                                      PipelineCompatibilityToken pipelineCompatibilityToken)
-        : BindGroupLayoutBase(device, descriptor, pipelineCompatibilityToken),
+        : BindGroupLayoutBase(device, descriptor, bindingCounts, pipelineCompatibilityToken),
           mBindGroupAllocator(MakeFrontendBindGroupAllocator<BindGroup>(4096)) {
     }
 

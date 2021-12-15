@@ -39,6 +39,7 @@ namespace dawn_native { namespace d3d12 {
       public:
         static Ref<BindGroupLayout> Create(Device* device,
                                            const BindGroupLayoutDescriptor* descriptor,
+                                           BindingCounts bindingCounts,
                                            PipelineCompatibilityToken pipelineCompatibilityToken);
 
         ResultOrError<Ref<BindGroup>> AllocateBindGroup(Device* device,
@@ -63,6 +64,7 @@ namespace dawn_native { namespace d3d12 {
       private:
         BindGroupLayout(Device* device,
                         const BindGroupLayoutDescriptor* descriptor,
+                        BindingCounts bindingCounts,
                         PipelineCompatibilityToken pipelineCompatibilityToken);
         ~BindGroupLayout() override = default;
 

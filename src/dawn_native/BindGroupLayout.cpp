@@ -154,11 +154,11 @@ namespace dawn_native {
 
     MaybeError ValidateBindGroupLayoutDescriptor(DeviceBase* device,
                                                  const BindGroupLayoutDescriptor* descriptor,
+                                                 BindingCounts& bindingCounts,
                                                  bool allowInternalBinding) {
         DAWN_INVALID_IF(descriptor->nextInChain != nullptr, "nextInChain must be nullptr");
 
         std::set<BindingNumber> bindingsSet;
-        BindingCounts bindingCounts = {};
 
         for (uint32_t i = 0; i < descriptor->entryCount; ++i) {
             const BindGroupLayoutEntry& entry = descriptor->entries[i];
@@ -361,9 +361,11 @@ namespace dawn_native {
 
     BindGroupLayoutBase::BindGroupLayoutBase(DeviceBase* device,
                                              const BindGroupLayoutDescriptor* descriptor,
+                                             BindingCounts bindingCounts,
                                              PipelineCompatibilityToken pipelineCompatibilityToken,
                                              ApiObjectBase::UntrackedByDeviceTag tag)
         : ApiObjectBase(device, descriptor->label),
+          mBindingCounts(bindingCounts),
           mBindingInfo(BindingIndex(descriptor->entryCount)),
           mPipelineCompatibilityToken(pipelineCompatibilityToken) {
         std::vector<BindGroupLayoutEntry> sortedBindings(
@@ -371,6 +373,7 @@ namespace dawn_native {
 
         std::sort(sortedBindings.begin(), sortedBindings.end(), SortBindingsCompare);
 
+        BindingIndex bufferCount{0};
         for (BindingIndex i{0}; i < mBindingInfo.size(); ++i) {
             const BindGroupLayoutEntry& binding = sortedBindings[static_cast<uint32_t>(i)];
 
@@ -378,9 +381,9 @@ namespace dawn_native {
 
             if (IsBufferBinding(binding)) {
                 // Buffers must be contiguously packed at the start of the binding info.
-                ASSERT(GetBufferCount() == i);
+                ASSERT(bufferCount == i);
+                bufferCount++;
             }
-            IncrementBindingCounts(&mBindingCounts, binding);
 
             const auto& it = mBindingMap.emplace(BindingNumber(binding.binding), i);
             ASSERT(it.second);
@@ -391,8 +394,13 @@ namespace dawn_native {
 
     BindGroupLayoutBase::BindGroupLayoutBase(DeviceBase* device,
                                              const BindGroupLayoutDescriptor* descriptor,
+                                             BindingCounts bindingCounts,
                                              PipelineCompatibilityToken pipelineCompatibilityToken)
-        : BindGroupLayoutBase(device, descriptor, pipelineCompatibilityToken, kUntrackedByDevice) {
+        : BindGroupLayoutBase(device,
+                              descriptor,
+                              bindingCounts,
+                              pipelineCompatibilityToken,
+                              kUntrackedByDevice) {
         TrackInDevice();
     }
 
