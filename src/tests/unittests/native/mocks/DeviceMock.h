@@ -58,7 +58,7 @@ namespace dawn_native {
                     (override));
         MOCK_METHOD(ResultOrError<Ref<BindGroupLayoutBase>>,
                     CreateBindGroupLayoutImpl,
-                    (const BindGroupLayoutDescriptor*, PipelineCompatibilityToken),
+                    (const BindGroupLayoutDescriptor*, BindingCounts, PipelineCompatibilityToken),
                     (override));
         MOCK_METHOD(ResultOrError<Ref<BufferBase>>,
                     CreateBufferImpl,

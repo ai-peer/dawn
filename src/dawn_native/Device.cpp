@@ -678,8 +678,9 @@ namespace dawn_native {
 
     ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::GetOrCreateBindGroupLayout(
         const BindGroupLayoutDescriptor* descriptor,
+        BindingCounts bindingCounts,
         PipelineCompatibilityToken pipelineCompatibilityToken) {
-        BindGroupLayoutBase blueprint(this, descriptor, pipelineCompatibilityToken,
+        BindGroupLayoutBase blueprint(this, descriptor, bindingCounts, pipelineCompatibilityToken,
                                       ApiObjectBase::kUntrackedByDevice);
 
         const size_t blueprintHash = blueprint.ComputeContentHash();
@@ -690,8 +691,8 @@ namespace dawn_native {
         if (iter != mCaches->bindGroupLayouts.end()) {
             result = *iter;
         } else {
-            DAWN_TRY_ASSIGN(result,
-                            CreateBindGroupLayoutImpl(descriptor, pipelineCompatibilityToken));
+            DAWN_TRY_ASSIGN(result, CreateBindGroupLayoutImpl(descriptor, bindingCounts,
+                                                              pipelineCompatibilityToken));
             result->SetIsCachedReference();
             result->SetContentHash(blueprintHash);
             mCaches->bindGroupLayouts.insert(result.Get());
@@ -712,7 +713,7 @@ namespace dawn_native {
         desc.entryCount = 0;
         desc.entries = nullptr;
 
-        return GetOrCreateBindGroupLayout(&desc);
+        return GetOrCreateBindGroupLayout(&desc, BindingCounts());
     }
 
     BindGroupLayoutBase* DeviceBase::GetEmptyBindGroupLayout() {
@@ -1250,12 +1251,17 @@ namespace dawn_native {
         const BindGroupLayoutDescriptor* descriptor,
         bool allowInternalBinding) {
         DAWN_TRY(ValidateIsAlive());
+        BindingCounts bindingCounts = {};
         if (IsValidationEnabled()) {
-            DAWN_TRY_CONTEXT(
-                ValidateBindGroupLayoutDescriptor(this, descriptor, allowInternalBinding),
-                "validating %s", descriptor);
+            DAWN_TRY_CONTEXT(ValidateBindGroupLayoutDescriptor(this, descriptor, bindingCounts,
+                                                               allowInternalBinding),
+                             "validating %s", descriptor);
+        } else {
+            for (uint32_t i = 0; i < descriptor->entryCount; i++) {
+                IncrementBindingCounts(&bindingCounts, descriptor->entries[i]);
+            }
         }
-        return GetOrCreateBindGroupLayout(descriptor);
+        return GetOrCreateBindGroupLayout(descriptor, bindingCounts);
     }
 
     ResultOrError<Ref<BufferBase>> DeviceBase::CreateBuffer(const BufferDescriptor* descriptor) {

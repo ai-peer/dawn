@@ -163,6 +163,7 @@ namespace dawn_native {
         // cache, then the descriptor is used to make a new object.
         ResultOrError<Ref<BindGroupLayoutBase>> GetOrCreateBindGroupLayout(
             const BindGroupLayoutDescriptor* descriptor,
+            BindingCounts bindingCounts,
             PipelineCompatibilityToken pipelineCompatibilityToken = PipelineCompatibilityToken(0));
         void UncacheBindGroupLayout(BindGroupLayoutBase* obj);
 
@@ -390,6 +391,7 @@ namespace dawn_native {
             const BindGroupDescriptor* descriptor) = 0;
         virtual ResultOrError<Ref<BindGroupLayoutBase>> CreateBindGroupLayoutImpl(
             const BindGroupLayoutDescriptor* descriptor,
+            BindingCounts bindingCounts,
             PipelineCompatibilityToken pipelineCompatibilityToken) = 0;
         virtual ResultOrError<Ref<BufferBase>> CreateBufferImpl(
             const BufferDescriptor* descriptor) = 0;

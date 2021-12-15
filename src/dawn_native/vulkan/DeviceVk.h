@@ -112,6 +112,7 @@ namespace dawn_native { namespace vulkan {
             const BindGroupDescriptor* descriptor) override;
         ResultOrError<Ref<BindGroupLayoutBase>> CreateBindGroupLayoutImpl(
             const BindGroupLayoutDescriptor* descriptor,
+            BindingCounts bindingCounts,
             PipelineCompatibilityToken pipelineCompatibilityToken) override;
         ResultOrError<Ref<BufferBase>> CreateBufferImpl(
             const BufferDescriptor* descriptor) override;
