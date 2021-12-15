@@ -29,6 +29,7 @@ class Metadata:
         self.namespace = metadata['namespace']
         self.c_prefix = metadata.get('c_prefix', self.namespace.upper())
         self.proc_table_prefix = metadata['proc_table_prefix']
+        self.native_namespace = metadata['native_namespace']
         self.copyright_year = metadata.get('copyright_year', None)
 
 
@@ -856,13 +857,14 @@ class MultiGeneratorFromDawnJSON(Generator):
                 }
             ]
 
+            native_dir = Name(metadata.native_namespace).snake_case()
             renders.append(
                 FileRender('dawn_native/ValidationUtils.h',
-                           'src/dawn_native/ValidationUtils_autogen.h',
+                           'src/' + native_dir + '/ValidationUtils_autogen.h',
                            frontend_params))
             renders.append(
                 FileRender('dawn_native/ValidationUtils.cpp',
-                           'src/dawn_native/ValidationUtils_autogen.cpp',
+                           'src/' + native_dir + '/ValidationUtils_autogen.cpp',
                            frontend_params))
             renders.append(
                 FileRender('dawn_native/dawn_platform.h',
