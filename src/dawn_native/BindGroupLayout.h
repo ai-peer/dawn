@@ -35,6 +35,7 @@ namespace dawn_native {
 
     MaybeError ValidateBindGroupLayoutDescriptor(DeviceBase* device,
                                                  const BindGroupLayoutDescriptor* descriptor,
+                                                 BindingCounts& bindingCounts,
                                                  bool allowInternalBinding = false);
 
     // Bindings are specified as a |BindingNumber| in the BindGroupLayoutDescriptor.
@@ -44,10 +45,12 @@ namespace dawn_native {
       public:
         BindGroupLayoutBase(DeviceBase* device,
                             const BindGroupLayoutDescriptor* descriptor,
+                            BindingCounts bindingCounts,
                             PipelineCompatibilityToken pipelineCompatibilityToken,
                             ApiObjectBase::UntrackedByDeviceTag tag);
         BindGroupLayoutBase(DeviceBase* device,
                             const BindGroupLayoutDescriptor* descriptor,
+                            BindingCounts bindingCounts,
                             PipelineCompatibilityToken pipelineCompatibilityToken);
         ~BindGroupLayoutBase() override;
 

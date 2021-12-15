@@ -83,6 +83,7 @@ namespace dawn_native { namespace metal {
             const BindGroupDescriptor* descriptor) override;
         ResultOrError<Ref<BindGroupLayoutBase>> CreateBindGroupLayoutImpl(
             const BindGroupLayoutDescriptor* descriptor,
+            BindingCounts bindingCounts,
             PipelineCompatibilityToken pipelineCompatibilityToken) override;
         ResultOrError<Ref<BufferBase>> CreateBufferImpl(
             const BufferDescriptor* descriptor) override;
