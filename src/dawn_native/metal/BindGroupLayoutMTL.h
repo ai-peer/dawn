@@ -27,6 +27,7 @@ namespace dawn_native { namespace metal {
       public:
         static Ref<BindGroupLayout> Create(DeviceBase* device,
                                            const BindGroupLayoutDescriptor* descriptor,
+                                           BindingCounts bindingCounts,
                                            PipelineCompatibilityToken pipelineCompatibilityToken);
 
         Ref<BindGroup> AllocateBindGroup(Device* device, const BindGroupDescriptor* descriptor);
@@ -35,6 +36,7 @@ namespace dawn_native { namespace metal {
       private:
         BindGroupLayout(DeviceBase* device,
                         const BindGroupLayoutDescriptor* descriptor,
+                        BindingCounts bindingCounts,
                         PipelineCompatibilityToken pipelineCompatibilityToken);
         ~BindGroupLayout() override = default;
 
