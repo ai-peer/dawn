@@ -384,8 +384,9 @@ namespace dawn_native { namespace d3d12 {
     }
     ResultOrError<Ref<BindGroupLayoutBase>> Device::CreateBindGroupLayoutImpl(
         const BindGroupLayoutDescriptor* descriptor,
+        BindingCounts bindingCounts,
         PipelineCompatibilityToken pipelineCompatibilityToken) {
-        return BindGroupLayout::Create(this, descriptor, pipelineCompatibilityToken);
+        return BindGroupLayout::Create(this, descriptor, bindingCounts, pipelineCompatibilityToken);
     }
     ResultOrError<Ref<BufferBase>> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
         return Buffer::Create(this, descriptor);

@@ -48,10 +48,12 @@ namespace dawn_native { namespace vulkan {
         static ResultOrError<Ref<BindGroupLayout>> Create(
             Device* device,
             const BindGroupLayoutDescriptor* descriptor,
+            BindingCounts bindingCounts,
             PipelineCompatibilityToken pipelineCompatibilityToken);
 
         BindGroupLayout(DeviceBase* device,
                         const BindGroupLayoutDescriptor* descriptor,
+                        BindingCounts bindingCounts,
                         PipelineCompatibilityToken pipelineCompatibilityToken);
 
         VkDescriptorSetLayout GetHandle() const;
