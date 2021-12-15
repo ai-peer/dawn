@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8e7c676_00663821",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-15T04:53:48Z",
+      "side": 1,
+      "message": "I found the commit messages will be one line, should i resubmit it to format the commit messages.",
+      "revId": "16ae3b8b95eccbd73befde361bf3e9bda60b6bb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
