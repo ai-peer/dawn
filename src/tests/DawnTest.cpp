@@ -1027,8 +1027,15 @@ void DawnTestBase::TearDown() {
                   dawn_native::GetDeprecationWarningCountForTesting(device.Get()));
     }
 
+    // With expectations resolved, clear out the state regarding slots and expectations.
+    mReadbackSlots.clear();
+    mNumPendingMapOperations = 0;
+    mDeferredExpectations.clear();
+
     // The device will be destroyed soon after, so we want to set the expectation.
     ExpectDeviceDestruction();
+    queue = wgpu::Queue();
+    device = wgpu::Device();
 }
 
 void DawnTestBase::StartExpectDeviceError(testing::Matcher<std::string> errorMatcher) {
