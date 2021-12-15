@@ -243,11 +243,19 @@ namespace dawn_native {
             desc.entries = entryVec.data();
             desc.entryCount = entryVec.size();
 
+            BindingCounts bindingCounts = {};
+
             if (device->IsValidationEnabled()) {
-                DAWN_TRY_CONTEXT(ValidateBindGroupLayoutDescriptor(device, &desc), "validating %s",
-                                 &desc);
+                DAWN_TRY_CONTEXT(ValidateBindGroupLayoutDescriptor(device, &desc, bindingCounts),
+                                 "validating %s", &desc);
+            } else {
+                for (uint32_t i = 0; i < desc.entryCount; ++i) {
+                    IncrementBindingCounts(&bindingCounts, desc.entries[i]);
+                }
             }
-            return device->GetOrCreateBindGroupLayout(&desc, pipelineCompatibilityToken);
+
+            return device->GetOrCreateBindGroupLayout(&desc, bindingCounts,
+                                                      pipelineCompatibilityToken);
         };
 
         ASSERT(!stages.empty());

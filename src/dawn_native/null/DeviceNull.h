@@ -127,6 +127,7 @@ namespace dawn_native { namespace null {
             const BindGroupDescriptor* descriptor) override;
         ResultOrError<Ref<BindGroupLayoutBase>> CreateBindGroupLayoutImpl(
             const BindGroupLayoutDescriptor* descriptor,
+            BindingCounts bindingCounts,
             PipelineCompatibilityToken pipelineCompatibilityToken) override;
         ResultOrError<Ref<BufferBase>> CreateBufferImpl(
             const BufferDescriptor* descriptor) override;
@@ -210,6 +211,7 @@ namespace dawn_native { namespace null {
       public:
         BindGroupLayout(DeviceBase* device,
                         const BindGroupLayoutDescriptor* descriptor,
+                        BindingCounts bindingCounts,
                         PipelineCompatibilityToken pipelineCompatibilityToken);
 
       private:

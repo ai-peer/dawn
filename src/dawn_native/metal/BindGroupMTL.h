@@ -24,9 +24,13 @@ namespace dawn_native { namespace metal {
 
     class BindGroup final : public BindGroupBase, public PlacementAllocated {
       public:
-        static Ref<BindGroup> Create(Device* device, const BindGroupDescriptor* descriptor);
+        static Ref<BindGroup> Create(Device* device,
+                                     const BindGroupDescriptor* descriptor,
+                                     BindingCounts bindingCounts);
 
-        BindGroup(Device* device, const BindGroupDescriptor* descriptor);
+        BindGroup(Device* device,
+                  const BindGroupDescriptor* descriptor,
+                  BindingCounts bindingCounts);
 
       private:
         ~BindGroup() override;
