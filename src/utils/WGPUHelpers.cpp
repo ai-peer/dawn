@@ -79,8 +79,76 @@ namespace utils {
         descriptor.usage = usage | wgpu::BufferUsage::CopyDst;
         wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
 
-        device.GetQueue().WriteBuffer(buffer, 0, data, size);
+        // If the size is 4 byte aligned, then we can just write the buffer data out. Otherwise,
+        // write the data via a CopyTextureToBuffer which does not require the alignment.
+        if (size % 4 == 0) {
+            device.GetQueue().WriteBuffer(buffer, 0, data, size);
+        } else {
+            // Creates and initializes an 8-bit texture to be used in the CopyTextureToBuffer.
+            wgpu::TextureDescriptor textureDescriptor = {};
+            textureDescriptor.size = {static_cast<uint32_t>(size), 1, 1};
+            textureDescriptor.format = wgpu::TextureFormat::R8Unorm;
+            textureDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
+            wgpu::ImageCopyTexture copyTextureSrc = utils::CreateImageCopyTexture(
+                device.CreateTexture(&textureDescriptor), 0, {0, 0, 0});
+            wgpu::TextureDataLayout layout =
+                utils::CreateTextureDataLayout(0, wgpu::kCopyStrideUndefined);
+            device.GetQueue().WriteTexture(&copyTextureSrc, data, size, &layout,
+                                           &textureDescriptor.size);
+
+            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+            wgpu::ImageCopyBuffer copyBufferDst =
+                utils::CreateImageCopyBuffer(buffer, 0, wgpu::kCopyStrideUndefined);
+            encoder.CopyTextureToBuffer(&copyTextureSrc, &copyBufferDst, &textureDescriptor.size);
+            wgpu::CommandBuffer commandBuffer = encoder.Finish();
+            device.GetQueue().Submit(1, &commandBuffer);
+        }
         return buffer;
+    }
+
+    wgpu::Buffer CreateBufferFromGenerator(const wgpu::Device& device,
+                                           wgpu::BufferUsage usage,
+                                           uint64_t size,
+                                           std::function<uint8_t(uint64_t)> generator) {
+        std::vector<uint8_t> data(size);
+        for (uint64_t i = 0; i < size; i++) {
+            data[i] = generator(i);
+        }
+        return CreateBufferFromData(device, data.data(), size, usage);
+    }
+
+    wgpu::Texture CreateTextureFromColor(const wgpu::Device& device,
+                                         const wgpu::Extent3D& size,
+                                         wgpu::TextureFormat format,
+                                         wgpu::Color color) {
+        wgpu::TextureDescriptor descriptor;
+        descriptor.size = size;
+        descriptor.format = format;
+        descriptor.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc |
+                           wgpu::TextureUsage::RenderAttachment |
+                           wgpu::TextureUsage::StorageBinding;
+        wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+
+        for (uint32_t arrayLayer = 0; arrayLayer < size.depthOrArrayLayers; ++arrayLayer) {
+            wgpu::TextureViewDescriptor viewDescriptor;
+            viewDescriptor.format = format;
+            viewDescriptor.dimension = wgpu::TextureViewDimension::e2D;
+            viewDescriptor.baseArrayLayer = arrayLayer;
+            viewDescriptor.arrayLayerCount = 1u;
+
+            utils::ComboRenderPassDescriptor renderPassDescriptor(
+                {texture.CreateView(&viewDescriptor)});
+            renderPassDescriptor.cColorAttachments[0].clearColor = color;
+            wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
+            renderPass.EndPass();
+        }
+
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+        device.GetQueue().Submit(1, &commandBuffer);
+
+        return texture;
     }
 
     ComboRenderPassDescriptor::ComboRenderPassDescriptor(
