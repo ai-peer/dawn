@@ -16,6 +16,23 @@
       "message": "Add \"impl_dir\" metadata for other API implemenation, PTAL, thanks.",
       "revId": "2c592ac378bd316e3cad5d6369ad6fea6e7f9eba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "667b5f56_23300cca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-15T12:33:27Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2c592ac378bd316e3cad5d6369ad6fea6e7f9eba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
