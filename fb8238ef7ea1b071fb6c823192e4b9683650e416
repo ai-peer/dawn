@@ -93,6 +93,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "078d3b1f_41283e3a",
+        "filename": "generator/templates/dawn_native/ValidationUtils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2021-12-15T10:56:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1a8c9d00_48346fd8",
+      "revId": "fb8238ef7ea1b071fb6c823192e4b9683650e416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baf4b520_2b724b94",
