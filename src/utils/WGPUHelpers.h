@@ -31,6 +31,10 @@ namespace utils {
     wgpu::ShaderModule CreateShaderModuleFromASM(const wgpu::Device& device, const char* source);
     wgpu::ShaderModule CreateShaderModule(const wgpu::Device& device, const char* source);
 
+    // Creates and initializes the data in a buffer via a WriteBuffer (if size is 4 byte aligned),
+    // or via a CopyTextureToBuffer otherwise. Note that currently if the size is not 4 byte
+    // aligned, there is also a size limitation based on the max texture width. This limit can be
+    // increased if necessary by using more than a "1D" texture for the copy.
     wgpu::Buffer CreateBufferFromData(const wgpu::Device& device,
                                       const void* data,
                                       uint64_t size,
@@ -42,6 +46,11 @@ namespace utils {
                                       std::initializer_list<T> data) {
         return CreateBufferFromData(device, data.begin(), uint32_t(sizeof(T) * data.size()), usage);
     }
+
+    wgpu::Texture CreateTextureFromColor(const wgpu::Device& device,
+                                         const wgpu::Extent3D& size,
+                                         wgpu::TextureFormat format,
+                                         wgpu::Color color = {0.f, 0.f, 0.f, 0.f});
 
     wgpu::ImageCopyBuffer CreateImageCopyBuffer(wgpu::Buffer buffer,
                                                 uint64_t offset,
