@@ -16,6 +16,46 @@
       "message": "PTAL, thanks.",
       "revId": "cf89a5771bea5a1f807b287265f0898b7e6be2ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12954fd6_4b940b1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-16T10:08:56Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "cf89a5771bea5a1f807b287265f0898b7e6be2ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61124533_eacb94fc",
+        "filename": "generator/templates/dawn_native/dawn_platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-16T10:08:56Z",
+      "side": 1,
+      "message": "when does this happen?",
+      "range": {
+        "startLine": 23,
+        "startChar": 44,
+        "endLine": 23,
+        "endChar": 71
+      },
+      "revId": "cf89a5771bea5a1f807b287265f0898b7e6be2ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
