@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18cfec6a_d9a0099f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-16T18:07:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7104e6c9f7072503c0e6ffe0bc0adfb5caf40251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f5813c4_1caf0da0",
@@ -48,6 +65,24 @@
       "writtenOn": "2021-12-16T11:04:01Z",
       "side": 1,
       "message": "Also if chained and extensible I think we can\u0027t copy directly.",
+      "revId": "7104e6c9f7072503c0e6ffe0bc0adfb5caf40251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99c0ecb5_5add9384",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-16T18:07:46Z",
+      "side": 1,
+      "message": "we set may_have_dawn_object \u003d may_have_dawn_object || chained || extensible somewhere.\n\ncause we don\u0027t know the types of the chained structs. That said, I think it\u0027s a good idea to include \"or chained or extensible\" here as well (or assert). We might change how we compute may_have_dawn_object to be more precise in the future",
+      "parentUuid": "4f5813c4_1caf0da0",
       "revId": "7104e6c9f7072503c0e6ffe0bc0adfb5caf40251",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
