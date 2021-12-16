@@ -56,6 +56,30 @@
       },
       "revId": "cf89a5771bea5a1f807b287265f0898b7e6be2ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f334b00_271d8c40",
+        "filename": "generator/templates/dawn_native/dawn_platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-16T12:10:04Z",
+      "side": 1,
+      "message": "impl_dir is the relative path of \"src\" that is not configured in dawn.json becuase current WebGPU implementation is in the directory, so native_dir will be \"dawn_native\".\n\nWebNN will configure \"impl_dir\" metadata in webnn.json like below, so the native_dir will be \"webnn/webnn_native\"\n\"_metadata\": {\n    \"impl_dir\": \"webnn\",\n    \"native_namespace\": \"webnn native\",\n     ......\n  },",
+      "parentUuid": "61124533_eacb94fc",
+      "range": {
+        "startLine": 23,
+        "startChar": 44,
+        "endLine": 23,
+        "endChar": 71
+      },
+      "revId": "cf89a5771bea5a1f807b287265f0898b7e6be2ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
