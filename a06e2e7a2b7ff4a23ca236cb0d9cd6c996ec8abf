@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "29ee26c9_54e1bba7",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-16T16:40:31Z",
+      "side": 1,
+      "message": "\"Combo\" means it holds onto the chained descriptor as well. I should delete this class\u0027 move and copy constructors though as they are invalid since the descriptor points to its own member.\n\nSimilar to ComboRenderPipelineDescriptor in other tests?",
+      "parentUuid": "7619c055_0dd2b372",
+      "range": {
+        "startLine": 30,
+        "startChar": 15,
+        "endLine": 30,
+        "endChar": 50
+      },
+      "revId": "a06e2e7a2b7ff4a23ca236cb0d9cd6c996ec8abf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4edbcff4_7a86d324",
         "filename": "src/dawn_native/DawnNative.cpp",
         "patchSetId": 1
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3c4905a_cd6bd8ad",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-16T16:40:31Z",
+      "side": 1,
+      "message": "we can. I just liked this a bit better for clarity so it\u0027s clear we\u0027re setting the DeviceDescriptor members which this struct extends. happy to change it though",
+      "parentUuid": "4edbcff4_7a86d324",
+      "range": {
+        "startLine": 35,
+        "startChar": 16,
+        "endLine": 35,
+        "endChar": 46
+      },
+      "revId": "a06e2e7a2b7ff4a23ca236cb0d9cd6c996ec8abf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b3d457c_60110b19",
         "filename": "src/dawn_native/Features.cpp",
         "patchSetId": 1
@@ -77,6 +125,30 @@
       "writtenOn": "2021-12-08T21:27:43Z",
       "side": 1,
       "message": "Wait... is this missing from the header now?",
+      "range": {
+        "startLine": 218,
+        "startChar": 4,
+        "endLine": 218,
+        "endChar": 52
+      },
+      "revId": "a06e2e7a2b7ff4a23ca236cb0d9cd6c996ec8abf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "119ee9a9_5e05b6ee",
+        "filename": "src/dawn_native/Features.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-16T16:40:31Z",
+      "side": 1,
+      "message": "Removed completely.",
+      "parentUuid": "1b3d457c_60110b19",
       "range": {
         "startLine": 218,
         "startChar": 4,
