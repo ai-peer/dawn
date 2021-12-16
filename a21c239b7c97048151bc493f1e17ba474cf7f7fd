@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb5e5ef5_deb40d04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-16T22:56:05Z",
+      "side": 1,
+      "message": "This change will address the unresolved discussion at https://dawn-review.googlesource.com/c/dawn/+/70280/2/src/dawn_native/vulkan/TextureVk.cpp#540. PTAL. Thank you!",
+      "revId": "a21c239b7c97048151bc493f1e17ba474cf7f7fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
