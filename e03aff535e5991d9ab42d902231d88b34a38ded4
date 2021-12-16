@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ffa2d80a_73f355b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-16T18:39:29Z",
+      "side": 1,
+      "message": "Also letting the wire set toggles would be pretty scary imho, since it could compromise security.",
+      "revId": "e03aff535e5991d9ab42d902231d88b34a38ded4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "487638b9_e54453fc",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -14,6 +31,97 @@
       "writtenOn": "2021-12-16T16:40:31Z",
       "side": 1,
       "message": "PTAL!",
+      "revId": "e03aff535e5991d9ab42d902231d88b34a38ded4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4cc200a_2d3d75a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-16T18:39:29Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e03aff535e5991d9ab42d902231d88b34a38ded4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f01a3b58_8569831a",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-16T18:39:29Z",
+      "side": 1,
+      "message": "nit: Maybe assert in WireCmd that we never get this.",
+      "revId": "e03aff535e5991d9ab42d902231d88b34a38ded4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a98a1d0b_bab702f7",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-16T18:39:29Z",
+      "side": 1,
+      "message": "nit: in the future instance could have the same \"ConsumedError that extracts the result\" as DeviceBase does.",
+      "revId": "e03aff535e5991d9ab42d902231d88b34a38ded4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "229dc8fc_366cdc48",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-16T18:39:29Z",
+      "side": 1,
+      "message": "u-nit: we could use span\u003c\u003e",
+      "range": {
+        "startLine": 58,
+        "startChar": 41,
+        "endLine": 59,
+        "endChar": 63
+      },
+      "revId": "e03aff535e5991d9ab42d902231d88b34a38ded4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f34c47b_809c8e13",
+        "filename": "src/tests/unittests/native/DeviceCreationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-16T18:39:29Z",
+      "side": 1,
+      "message": "nit: maybe assert that we found an adapter?",
       "revId": "e03aff535e5991d9ab42d902231d88b34a38ded4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
