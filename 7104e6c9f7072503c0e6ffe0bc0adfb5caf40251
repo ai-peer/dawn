@@ -16,6 +16,91 @@
       "message": "PTAL, thanks!",
       "revId": "7104e6c9f7072503c0e6ffe0bc0adfb5caf40251",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acc95632_aa6eacb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-16T11:04:01Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7104e6c9f7072503c0e6ffe0bc0adfb5caf40251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f5813c4_1caf0da0",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-16T11:04:01Z",
+      "side": 1,
+      "message": "Also if chained and extensible I think we can\u0027t copy directly.",
+      "revId": "7104e6c9f7072503c0e6ffe0bc0adfb5caf40251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c636fb5_4540cfbc",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-16T11:04:01Z",
+      "side": 1,
+      "message": "We toposort the structures before calling update_metadata, so I think member.is_wire_transparent should have already been updated.",
+      "revId": "7104e6c9f7072503c0e6ffe0bc0adfb5caf40251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72b32596_e5b358d7",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-16T11:04:01Z",
+      "side": 1,
+      "message": "Can we have a static_assert that the sizes match?",
+      "revId": "7104e6c9f7072503c0e6ffe0bc0adfb5caf40251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d573a846_ef5cf498",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-16T11:04:01Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "7104e6c9f7072503c0e6ffe0bc0adfb5caf40251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
