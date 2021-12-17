@@ -882,7 +882,7 @@ class MultiGeneratorFromDawnJSON(Generator):
                            frontend_params))
             renders.append(
                 FileRender('dawn_native/ProcTable.cpp',
-                           'src/dawn_native/ProcTable.cpp', frontend_params))
+                           'src/' + native_dir + '/ProcTable.cpp', frontend_params))
             renders.append(
                 FileRender('dawn_native/ChainUtils.h',
                            'src/dawn_native/ChainUtils_autogen.h',

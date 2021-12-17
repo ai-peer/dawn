@@ -77,7 +77,7 @@ namespace {{native_namespace}} {
 
     namespace {
 
-{% set c_prefix = metadata.c_prefix %}
+        {% set c_prefix = metadata.c_prefix %}
         struct ProcEntry {
             {{c_prefix}}Proc proc;
             const char* name;
@@ -126,7 +126,7 @@ namespace {{native_namespace}} {
         }
 
         {% for function in by_category["function"] %}
-            if (strcmp(procName, "{{metadata.namespace}}{{as_cppType(function.name)}}") == 0) {
+            if (strcmp(procName, "{{as_cMethod(None, function.name)}}") == 0) {
                 return reinterpret_cast<{{c_prefix}}Proc>(Native{{as_cppType(function.name)}});
             }
 
