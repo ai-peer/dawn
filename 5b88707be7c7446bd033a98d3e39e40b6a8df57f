@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0c3f66d_6538f27e",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2021-12-17T15:00:59Z",
+      "side": 1,
+      "message": "good catch, will fix",
+      "parentUuid": "2095b5b2_422f9d8e",
+      "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96880a40_4eec8ba7",
         "filename": "generator/templates/dawn_native/ProcTable.cpp",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2021-12-17T12:18:43Z",
       "side": 1,
       "message": "Does it also use as_cMethod?",
+      "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2eb1728c_ad571219",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2021-12-17T15:00:59Z",
+      "side": 1,
+      "message": "sure, will fix",
+      "parentUuid": "96880a40_4eec8ba7",
       "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b3401d4c_df019b5f",
+        "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2021-12-17T15:00:59Z",
+      "side": 1,
+      "message": "I\u0027d agree. There are other templates under \"dawn\" those probably need to move as well. How about handle in a separate CL?",
+      "parentUuid": "8f37c1e2_d72bb781",
+      "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21648fd1_d9ffb5a6",
         "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 1
@@ -82,6 +136,24 @@
       "writtenOn": "2021-12-17T12:18:43Z",
       "side": 1,
       "message": "We need add a wire namespace similar with \"native_namespace\" in metadata.",
+      "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ba7f37e_2299edc1",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2021-12-17T15:00:59Z",
+      "side": 1,
+      "message": "IMHO, the {{api}}_wire::client is distinct, so probably not need a different inner namespace.",
+      "parentUuid": "21648fd1_d9ffb5a6",
       "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
