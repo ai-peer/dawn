@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c672a21f_3f01e558",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2021-12-17T15:05:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0c3f66d_6538f27e",
+      "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96880a40_4eec8ba7",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "sure, will fix",
       "parentUuid": "96880a40_4eec8ba7",
+      "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "568c9e36_c0ca75a8",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2021-12-17T15:05:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2eb1728c_ad571219",
       "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
