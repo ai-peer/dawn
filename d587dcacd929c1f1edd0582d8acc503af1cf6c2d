@@ -56,6 +56,30 @@
       },
       "revId": "d587dcacd929c1f1edd0582d8acc503af1cf6c2d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bde470b_00dd8bb7",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-17T02:55:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93d73001_1e81ab26",
+      "range": {
+        "startLine": 191,
+        "startChar": 29,
+        "endLine": 193,
+        "endChar": 31
+      },
+      "revId": "d587dcacd929c1f1edd0582d8acc503af1cf6c2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
