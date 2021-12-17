@@ -16,6 +16,91 @@
       "message": "PTAL, thanks!",
       "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2095b5b2_422f9d8e",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-17T12:18:43Z",
+      "side": 1,
+      "message": "There are 8 spaces before it?",
+      "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96880a40_4eec8ba7",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-17T12:18:43Z",
+      "side": 1,
+      "message": "Does it also use as_cMethod?",
+      "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f37c1e2_d72bb781",
+        "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-17T12:18:43Z",
+      "side": 1,
+      "message": "Current webnn_thread_dispatch_proc.h is under dawn directory [1], do we need move to \"webnn\"?\n\n[1] https://dawn.googlesource.com/dawn/+/refs/heads/main/generator/dawn_json_generator.py#794",
+      "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21648fd1_d9ffb5a6",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-17T12:18:43Z",
+      "side": 1,
+      "message": "We need add a wire namespace similar with \"native_namespace\" in metadata.",
+      "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9d0d036_43dc2e11",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-17T12:18:43Z",
+      "side": 1,
+      "message": "Ditto.",
+      "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
