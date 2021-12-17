@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f660741_9725dd34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-12-17T00:24:34Z",
+      "side": 1,
+      "message": "This is honestly pretty infuriating. I\u0027ve sunk way more time than I\u0027d care to admit spread out over a few weeks trying to figure out why this message fails to format correctly when the EXACT SAME THING works correctly in ComputePassEncoder, but I\u0027ve come up empty handed. At this point I\u0027d like to at least get this workaround in place so that developers are able to see the encoder, index, and dynamicOffset count when an error occurs.",
+      "revId": "4c43bd83ec7f6024fda40e5e41d5da34cbd4c5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
