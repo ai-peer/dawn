@@ -1,6 +1,6 @@
 {% set Prefix = metadata.proc_table_prefix %}
 {% set prefix = Prefix.lower() %}
-#include "dawn/{{prefix}}_thread_dispatch_proc.h"
+#include "{{prefix}}/{{prefix}}_thread_dispatch_proc.h"
 
 #include <thread>
 
@@ -14,6 +14,11 @@ void {{prefix}}ProcSetPerThreadProcs(const {{Prefix}}ProcTable* procs) {
         perThreadProcs = nullProcs;
     }
 }
+
+static {{metadata.c_prefix}}Proc ThreadDispatchGetProcAddress(const char* procName) {
+    return perThreadProcs.getProcAddress(procName);
+}
+
 
 {% for function in by_category["function"] %}
     static {{as_cType(function.return_type.name)}} ThreadDispatch{{as_cppType(function.name)}}(
@@ -50,6 +55,7 @@ void {{prefix}}ProcSetPerThreadProcs(const {{Prefix}}ProcTable* procs) {
 
 extern "C" {
     {{Prefix}}ProcTable {{prefix}}ThreadDispatchProcTable = {
+        ThreadDispatchGetProcAddress,
         {% for function in by_category["function"] %}
             ThreadDispatch{{as_cppType(function.name)}},
         {% endfor %}

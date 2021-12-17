@@ -21,7 +21,8 @@
 #include <string>
 #include <vector>
 
-namespace dawn_wire { namespace client {
+{% set api = metadata.proc_table_prefix %}
+namespace {{api.lower()}}_wire { namespace client {
 
     //* Outputs an rvalue that's the number of elements a pointer member points to.
     {% macro member_length(member, accessor) -%}
@@ -125,7 +126,7 @@ namespace dawn_wire { namespace client {
         static constexpr size_t sProcMapSize = sizeof(sProcMap) / sizeof(sProcMap[0]);
     }  // anonymous namespace
 
-    WGPUProc ClientGetProcAddress(WGPUDevice, const char* procName) {
+    WGPUProc ClientGetProcAddress(const char* procName) {
         if (procName == nullptr) {
             return nullptr;
         }
@@ -163,6 +164,7 @@ namespace dawn_wire { namespace client {
 
     {% set Prefix = metadata.proc_table_prefix %}
     static {{Prefix}}ProcTable gProcTable = {
+        ClientGetProcAddress,
         {% for function in by_category["function"] %}
             Client{{as_cppType(function.name)}},
         {% endfor %}
@@ -175,4 +177,4 @@ namespace dawn_wire { namespace client {
     const {{Prefix}}ProcTable& GetProcs() {
         return gProcTable;
     }
-}}  // namespace dawn_wire::client
+}}  // namespace {{api.lower()}}_wire::client
