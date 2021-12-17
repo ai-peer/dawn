@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "002f6054_07b05d38",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-12-17T07:59:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99c0ecb5_5add9384",
+      "revId": "7104e6c9f7072503c0e6ffe0bc0adfb5caf40251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c636fb5_4540cfbc",
@@ -100,6 +118,24 @@
       "writtenOn": "2021-12-16T11:04:01Z",
       "side": 1,
       "message": "We toposort the structures before calling update_metadata, so I think member.is_wire_transparent should have already been updated.",
+      "revId": "7104e6c9f7072503c0e6ffe0bc0adfb5caf40251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f149e4d_a1d08207",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-12-17T07:59:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c636fb5_4540cfbc",
       "revId": "7104e6c9f7072503c0e6ffe0bc0adfb5caf40251",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -121,6 +157,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf3b6c6e_1b3f119e",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-12-17T07:59:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b32596_e5b358d7",
+      "revId": "7104e6c9f7072503c0e6ffe0bc0adfb5caf40251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d573a846_ef5cf498",
@@ -134,6 +188,24 @@
       "writtenOn": "2021-12-16T11:04:01Z",
       "side": 1,
       "message": "ditto",
+      "revId": "7104e6c9f7072503c0e6ffe0bc0adfb5caf40251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "879a4f17_84163463",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-12-17T07:59:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d573a846_ef5cf498",
       "revId": "7104e6c9f7072503c0e6ffe0bc0adfb5caf40251",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
