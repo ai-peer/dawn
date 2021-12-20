@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19f59464_8fd752d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-20T12:49:02Z",
+      "side": 1,
+      "message": "LGTM. I tried to repro but the message formats correctly if I add a dynamic offset to CppHelloTriangle. Do you have a repro?\n\nError: Validation error: The number of dynamic offsets (1) does not match the number of dynamic buffers (0) in [BindGroupLayout].\n - While encoding [RenderPassEncoder].SetBindGroup(0, [BindGroup], 1, ...).",
+      "revId": "58f58fb07089d25c4100123597103d7d99144395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
