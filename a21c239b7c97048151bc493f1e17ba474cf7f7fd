@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1dd62a2_7eef2543",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-20T18:55:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8df92791_243b5bd6",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 2
+      },
+      "revId": "a21c239b7c97048151bc493f1e17ba474cf7f7fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf7571f6_4d078665",
@@ -71,6 +95,24 @@
       "writtenOn": "2021-12-20T10:46:45Z",
       "side": 1,
       "message": "Why did this have to change?",
+      "revId": "a21c239b7c97048151bc493f1e17ba474cf7f7fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03a5ebd9_ab7f26ab",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-20T18:55:13Z",
+      "side": 1,
+      "message": "Do you mean the difference between patchset 2 and patchset 1 for this code snippet? WebGPU requires that the format of depthStencilAttachment must have depth or stencil component if depth or stencil test is enabled. We cannot blindly enable both depth and stencil test for a unknown depth/stencil format.",
+      "parentUuid": "cf7571f6_4d078665",
       "revId": "a21c239b7c97048151bc493f1e17ba474cf7f7fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
