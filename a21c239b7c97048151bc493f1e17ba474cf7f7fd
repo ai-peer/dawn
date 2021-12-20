@@ -16,6 +16,63 @@
       "message": "This change will address the unresolved discussion at https://dawn-review.googlesource.com/c/dawn/+/70280/2/src/dawn_native/vulkan/TextureVk.cpp#540. PTAL. Thank you!",
       "revId": "a21c239b7c97048151bc493f1e17ba474cf7f7fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73369998_c7fc3529",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-20T10:46:45Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a21c239b7c97048151bc493f1e17ba474cf7f7fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8df92791_243b5bd6",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-20T10:46:45Z",
+      "side": 1,
+      "message": "nit: can we replace these tabs with spaces?",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 2
+      },
+      "revId": "a21c239b7c97048151bc493f1e17ba474cf7f7fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf7571f6_4d078665",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-20T10:46:45Z",
+      "side": 1,
+      "message": "Why did this have to change?",
+      "revId": "a21c239b7c97048151bc493f1e17ba474cf7f7fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
