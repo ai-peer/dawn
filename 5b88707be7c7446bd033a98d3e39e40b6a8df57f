@@ -196,6 +196,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79bac172_7b599255",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-20T13:06:08Z",
+      "side": 1,
+      "message": "Right now we do this because Chromium can\u0027t use C++17. But when it does (soon! [1]), I think we can do:\n\n  namespace dawn::wire {\n\nand\n\n  namespace dawn::native {\n\nWhich should help simplfigy some templates as there\u0027s only two to care about: the API namespace (wnn?) and the library namespace (webnn?)\n\n[1] https://bugs.chromium.org/p/chromium/issues/detail?id\u003d752720",
+      "parentUuid": "8ba7f37e_2299edc1",
+      "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c9d0d036_43dc2e11",
         "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 1

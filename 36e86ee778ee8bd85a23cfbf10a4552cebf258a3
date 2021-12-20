@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6988c2d7_98463ab0",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-20T13:06:08Z",
+      "side": 0,
+      "message": "[2]",
+      "revId": "36e86ee778ee8bd85a23cfbf10a4552cebf258a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

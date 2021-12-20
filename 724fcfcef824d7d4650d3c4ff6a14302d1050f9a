@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "927d64fa_9d290eb1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-20T13:06:08Z",
+      "side": 1,
+      "message": "It is not used now, but was agreed on for the upstream WebGPU.h so that we could give better proc for a device. For example by directly calling into backends instead of doing virtual dispatch. Can we keep it?",
+      "revId": "724fcfcef824d7d4650d3c4ff6a14302d1050f9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "12b63550_ea96d0a7",
@@ -14,6 +31,74 @@
       "writtenOn": "2021-12-17T15:05:47Z",
       "side": 1,
       "message": "fix junwei\u0027s comments and also move ProcTable.cpp to API dependent gen folder.",
+      "revId": "724fcfcef824d7d4650d3c4ff6a14302d1050f9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e07fd5d5_0e1a40ba",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-20T13:06:08Z",
+      "side": 1,
+      "message": "[3]",
+      "revId": "724fcfcef824d7d4650d3c4ff6a14302d1050f9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dd9a60a_4f5e2d5f",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-20T13:06:08Z",
+      "side": 1,
+      "message": "Instead of removing GetProcAddress at [2], we could do the following at [3]\n\n  {% for function in by_category[\"function\"] if function.name.canonical_case() !\u003d get proc address\"\" %}\n  \nThis would avoid having to reintroduce GetProcAddress everywhere and keep the implementation detail in this file.",
+      "revId": "724fcfcef824d7d4650d3c4ff6a14302d1050f9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9522575_b770db39",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-20T13:06:08Z",
+      "side": 1,
+      "message": "nit: Can we have a TODO (associated with a new Dawn issue) to optimize this in the future because it is AMAZINGLY slow to check strings one by one like this?",
+      "revId": "724fcfcef824d7d4650d3c4ff6a14302d1050f9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "364f3d0c_ae9e8554",
+        "filename": "src/tests/unittests/GetProcAddressTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-20T13:06:08Z",
+      "side": 1,
+      "message": "Why did this test need to be changed?",
       "revId": "724fcfcef824d7d4650d3c4ff6a14302d1050f9a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
