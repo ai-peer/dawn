@@ -16,6 +16,40 @@
       "message": "PTAL, thanks.",
       "revId": "13fb68bd4f70d144c04b9d1286986c4b6455e0d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d73445f_e517b55f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-20T12:56:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "13fb68bd4f70d144c04b9d1286986c4b6455e0d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "622798fe_56651a2c",
+        "filename": "generator/templates/dawn_native/api_structs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-20T12:56:22Z",
+      "side": 1,
+      "message": "I think all these can be simplified a bit in the future by accepting some changes to the output for the templates and putting more seemingly redundant information in the metadata. But it doesn\u0027t really matter for now.",
+      "revId": "13fb68bd4f70d144c04b9d1286986c4b6455e0d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
