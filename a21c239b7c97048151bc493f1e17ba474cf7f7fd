@@ -133,6 +133,24 @@
       "parentUuid": "03a5ebd9_ab7f26ab",
       "revId": "a21c239b7c97048151bc493f1e17ba474cf7f7fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b24f0b6_9fd96043",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-21T03:59:56Z",
+      "side": 1,
+      "message": "Ack. That situation will occur if we add such new tests to cover \"all\" aspect (or both aspects). We actually discussed this a bit before and concluded that maybe we don\u0027t need to test \"all\" (or both aspects) in this end2end test in Dawn and we can have more comprehensive operation tests in CTS instead. But I am totally open to add such new tests and do that in the future if needed.",
+      "parentUuid": "1cde3c72_842187bd",
+      "revId": "a21c239b7c97048151bc493f1e17ba474cf7f7fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
