@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "821759fb_4ffd1c26",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2021-12-21T05:00:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61b9fe55_525258f9",
+      "revId": "724fcfcef824d7d4650d3c4ff6a14302d1050f9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "12b63550_ea96d0a7",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -66,6 +84,24 @@
       "writtenOn": "2021-12-20T13:06:08Z",
       "side": 1,
       "message": "[3]",
+      "revId": "724fcfcef824d7d4650d3c4ff6a14302d1050f9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4b9694a_91039d34",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2021-12-21T05:00:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e07fd5d5_0e1a40ba",
       "revId": "724fcfcef824d7d4650d3c4ff6a14302d1050f9a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -105,6 +141,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd0cd1dd_a1d2ab00",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2021-12-21T05:00:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1cee131_2cf84068",
+      "revId": "724fcfcef824d7d4650d3c4ff6a14302d1050f9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9522575_b770db39",
@@ -140,6 +194,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a8ea41c_a5680ca6",
+        "filename": "generator/templates/dawn_native/ProcTable.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2021-12-21T05:00:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a066be81_5821e851",
+      "revId": "724fcfcef824d7d4650d3c4ff6a14302d1050f9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "364f3d0c_ae9e8554",
@@ -171,6 +243,24 @@
       "side": 1,
       "message": "I\u0027ll revert the getProcAddress API change, so this test change will be reverted as well.",
       "parentUuid": "364f3d0c_ae9e8554",
+      "revId": "724fcfcef824d7d4650d3c4ff6a14302d1050f9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e821bb3_f9e39ea2",
+        "filename": "src/tests/unittests/GetProcAddressTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2021-12-21T05:00:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eaac149_7188b9d0",
       "revId": "724fcfcef824d7d4650d3c4ff6a14302d1050f9a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
