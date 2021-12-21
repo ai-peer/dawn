@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "147c6635_1138c068",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-21T23:07:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "29ee26c9_54e1bba7",
+      "range": {
+        "startLine": 30,
+        "startChar": 15,
+        "endLine": 30,
+        "endChar": 50
+      },
+      "revId": "a06e2e7a2b7ff4a23ca236cb0d9cd6c996ec8abf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4edbcff4_7a86d324",
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "we can. I just liked this a bit better for clarity so it\u0027s clear we\u0027re setting the DeviceDescriptor members which this struct extends. happy to change it though",
       "parentUuid": "4edbcff4_7a86d324",
+      "range": {
+        "startLine": 35,
+        "startChar": 16,
+        "endLine": 35,
+        "endChar": 46
+      },
+      "revId": "a06e2e7a2b7ff4a23ca236cb0d9cd6c996ec8abf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "956d3554_56ae81e5",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-21T23:07:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3c4905a_cd6bd8ad",
       "range": {
         "startLine": 35,
         "startChar": 16,
