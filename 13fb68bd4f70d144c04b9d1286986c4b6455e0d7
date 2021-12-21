@@ -50,6 +50,24 @@
       "message": "I think all these can be simplified a bit in the future by accepting some changes to the output for the templates and putting more seemingly redundant information in the metadata. But it doesn\u0027t really matter for now.",
       "revId": "13fb68bd4f70d144c04b9d1286986c4b6455e0d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba705a9b_e54e9dac",
+        "filename": "generator/templates/dawn_native/api_structs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-21T00:55:27Z",
+      "side": 1,
+      "message": "Sounds good. It can be simplified after supporting like \"namespace dawn::native\" as you mentioned in the comment https://dawn-review.googlesource.com/c/dawn/+/73400/comment/21648fd1_d9ffb5a6/",
+      "parentUuid": "622798fe_56651a2c",
+      "revId": "13fb68bd4f70d144c04b9d1286986c4b6455e0d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
