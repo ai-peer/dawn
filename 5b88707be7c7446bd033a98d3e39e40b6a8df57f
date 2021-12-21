@@ -214,6 +214,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf8ab8ad_f1bf532d",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2021-12-21T04:54:43Z",
+      "side": 1,
+      "message": "It sounds great. Given I\u0027ll revert the GetProcAddress API change, this file will not be touched in this CL. We can address the namespace change later.",
+      "parentUuid": "79bac172_7b599255",
+      "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c9d0d036_43dc2e11",
         "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 1
