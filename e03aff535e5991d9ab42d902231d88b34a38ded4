@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0da40292_6d7a3516",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-21T21:37:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f01a3b58_8569831a",
+      "revId": "e03aff535e5991d9ab42d902231d88b34a38ded4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a98a1d0b_bab702f7",
@@ -82,6 +100,24 @@
       "writtenOn": "2021-12-16T18:39:29Z",
       "side": 1,
       "message": "nit: in the future instance could have the same \"ConsumedError that extracts the result\" as DeviceBase does.",
+      "revId": "e03aff535e5991d9ab42d902231d88b34a38ded4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0582e832_8dffcf47",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-21T21:37:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a98a1d0b_bab702f7",
       "revId": "e03aff535e5991d9ab42d902231d88b34a38ded4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +145,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3038896b_6d385c83",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-21T21:37:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "229dc8fc_366cdc48",
+      "range": {
+        "startLine": 58,
+        "startChar": 41,
+        "endLine": 59,
+        "endChar": 63
+      },
+      "revId": "e03aff535e5991d9ab42d902231d88b34a38ded4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f34c47b_809c8e13",
@@ -122,6 +182,24 @@
       "writtenOn": "2021-12-16T18:39:29Z",
       "side": 1,
       "message": "nit: maybe assert that we found an adapter?",
+      "revId": "e03aff535e5991d9ab42d902231d88b34a38ded4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e127b728_10bbd0c0",
+        "filename": "src/tests/unittests/native/DeviceCreationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-21T21:37:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f34c47b_809c8e13",
       "revId": "e03aff535e5991d9ab42d902231d88b34a38ded4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
