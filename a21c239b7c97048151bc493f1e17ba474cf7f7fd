@@ -115,6 +115,24 @@
       "parentUuid": "cf7571f6_4d078665",
       "revId": "a21c239b7c97048151bc493f1e17ba474cf7f7fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cde3c72_842187bd",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-21T01:33:17Z",
+      "side": 1,
+      "message": "makes sense to me -  we can\u0027t use the stencil test if the format is depth-only.\n\nWe might need to change this further in the future if we test cases where the format only has depth and the aspect is \"all\".",
+      "parentUuid": "03a5ebd9_ab7f26ab",
+      "revId": "a21c239b7c97048151bc493f1e17ba474cf7f7fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
