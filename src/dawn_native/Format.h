@@ -23,6 +23,7 @@
 #include "dawn_native/Subresource.h"
 
 #include <array>
+#include <unordered_set>
 
 // About multi-planar formats.
 //
@@ -103,6 +104,10 @@ namespace dawn_native {
         // allowed by multi-planar formats (ex. NV12).
         bool IsMultiPlanar() const;
 
+        // CompatibleWith() returns true if the input format is in the list of compatible formats.
+        // The compatible rule is defined by WebGPU spec.
+        bool CompatibleWith(wgpu::TextureFormat format) const;
+
         const AspectInfo& GetAspectInfo(wgpu::TextureAspect aspect) const;
         const AspectInfo& GetAspectInfo(Aspect aspect) const;
 
@@ -116,6 +121,8 @@ namespace dawn_native {
         // info is depth and the second aspect info is stencil. For multi-planar formats,
         // aspectInfo[i] is the ith plane.
         std::array<AspectInfo, kMaxPlanesPerFormat> aspectInfo;
+
+        std::unordered_set<wgpu::TextureFormat> compatibleFormats;
 
         friend FormatTable BuildFormatTable(const DeviceBase* device);
     };
