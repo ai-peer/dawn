@@ -85,6 +85,9 @@ namespace dawn_native {
     // A wgpu::TextureFormat along with all the information about it necessary for validation.
     struct Format {
         wgpu::TextureFormat format;
+
+        // If two formats has the same baseFormat, they could copy to each other.
+        wgpu::TextureFormat baseFormat;
         bool isRenderable;
         bool isCompressed;
         // A format can be known but not supported because it is part of a disabled extension.
@@ -102,6 +105,10 @@ namespace dawn_native {
         // IsMultiPlanar() returns true if the format allows selecting a plane index. This is only
         // allowed by multi-planar formats (ex. NV12).
         bool IsMultiPlanar() const;
+
+        // CompatibleWith() returns true if the input format is in the list of compatible formats.
+        // The compatible rule is defined by WebGPU spec.
+        bool CompatibleWith(const Format& format) const;
 
         const AspectInfo& GetAspectInfo(wgpu::TextureAspect aspect) const;
         const AspectInfo& GetAspectInfo(Aspect aspect) const;
