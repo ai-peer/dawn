@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9a706ed_04f967a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-12-22T09:21:00Z",
+      "side": 1,
+      "message": "@Jiawei, could you help to review this CL? Corentin and Austin are on vacation.",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
