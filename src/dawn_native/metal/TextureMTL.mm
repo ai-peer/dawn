@@ -507,6 +507,10 @@ namespace dawn_native { namespace metal {
         return mMtlTexture.Get();
     }
 
+    id<MTLTexture> Texture::GetCompatibleMTLTexture(wgpu::TextureFormat format) {
+        return [mMtlTexture.Get() newTextureViewWithPixelFormat:MetalPixelFormat(format)];
+    }
+
     MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                                      const SubresourceRange& range,
                                      TextureBase::ClearValue clearValue) {
