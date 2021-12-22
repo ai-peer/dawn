@@ -159,6 +159,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9be5d080_1c621d0f",
+        "filename": "generator/templates/dawn_thread_dispatch_proc.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2021-12-22T00:32:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b3401d4c_df019b5f",
+      "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21648fd1_d9ffb5a6",
@@ -261,6 +279,24 @@
       "writtenOn": "2021-12-17T12:18:43Z",
       "side": 1,
       "message": "Ditto.",
+      "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e69e420_9fad926a",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2021-12-22T00:32:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c9d0d036_43dc2e11",
       "revId": "5b88707be7c7446bd033a98d3e39e40b6a8df57f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
