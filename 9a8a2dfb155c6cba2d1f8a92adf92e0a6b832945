@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a798107a_6b02194e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-22T10:38:11Z",
+      "side": 1,
+      "message": "nit: formats",
+      "range": {
+        "startLine": 7,
+        "startChar": 58,
+        "endLine": 7,
+        "endChar": 65
+      },
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c9a706ed_04f967a7",
@@ -14,6 +37,205 @@
       "writtenOn": "2021-12-22T09:21:00Z",
       "side": 1,
       "message": "@Jiawei, could you help to review this CL? Corentin and Austin are on vacation.",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21fee3d9_bd4fbaf1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-22T10:38:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d2592f2_3b7655bf",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-22T10:38:11Z",
+      "side": 1,
+      "message": "Note: I checked that these formats are required in FL 11.0 and renderable.",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2f3640d_8a136eaf",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-22T10:38:11Z",
+      "side": 1,
+      "message": "nit: no need to check for macOS 10.11 since Metal was introduced in 10.11.",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f03a6ae_49e893cb",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-22T10:38:11Z",
+      "side": 1,
+      "message": "I think this needs to be inside the #if defined DAWN_PLATFORM_MACOS otherwise it will break iOS compilation.",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d47e293a_52f50fa4",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-22T10:38:11Z",
+      "side": 1,
+      "message": "nit: in a follow-up CL, can we move this helper to Math.h and call it \"FloatToUnorm\" along with some tests?",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cc08c0b_59e76b1f",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-22T10:38:11Z",
+      "side": 1,
+      "message": "nit: here and in other places, this is actually unsupported, not suppressed.",
+      "range": {
+        "startLine": 332,
+        "startChar": 4,
+        "endLine": 332,
+        "endChar": 25
+      },
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54177833_b83fe2a4",
+        "filename": "src/tests/end2end/DepthStencilLoadOpTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-22T10:38:11Z",
+      "side": 1,
+      "message": "Note that there will be a merge conflict with https://dawn-review.googlesource.com/c/dawn/+/72062, that will likely land first. You can update the same way as was done in that CL.",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d850e51_d96ed4d4",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-22T10:38:11Z",
+      "side": 1,
+      "message": "If it is only D3D12, can we add that to the list of conditions?",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfea51f7_62d6648e",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-22T10:38:11Z",
+      "side": 1,
+      "message": "u-u-nit: imho we don\u0027t get that much clarity from moving the format to a separate variable since it is used only once.",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f490d52_c6560d86",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-22T10:38:11Z",
+      "side": 1,
+      "message": "Why did this need to change?",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a90de3e0_fd401b30",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-22T10:38:11Z",
+      "side": 1,
+      "message": "nit: Maybe it should be marked \"unsupported\" then. It\u0027s fine to never actually support testing these formats in dawn_end2end_tests. We can delegate that to the CTS.",
+      "range": {
+        "startLine": 764,
+        "startChar": 4,
+        "endLine": 764,
+        "endChar": 25
+      },
       "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
