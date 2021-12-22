@@ -64,7 +64,6 @@ namespace dawn_native { namespace d3d12 {
                                 const Extent3D& copySize) {
             // Checked by validation
             ASSERT(src.texture->GetSampleCount() == dst.texture->GetSampleCount());
-            ASSERT(src.texture->GetFormat().format == dst.texture->GetFormat().format);
             ASSERT(src.aspect == dst.aspect);
 
             const Extent3D& srcSize = src.texture->GetSize();
