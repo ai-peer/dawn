@@ -904,7 +904,8 @@ namespace dawn_native { namespace metal {
                                  sourceOrigin:MTLOriginMake(copy->source.origin.x,
                                                             copy->source.origin.y, sourceOriginZ)
                                    sourceSize:sizeOneSlice
-                                    toTexture:dstTexture->GetMTLTexture()
+                                    toTexture:dstTexture->GetCompatibleMTLTexture(
+                                                  srcTexture->GetFormat().format)
                              destinationSlice:destinationLayer
                              destinationLevel:copy->destination.mipLevel
                             destinationOrigin:MTLOriginMake(copy->destination.origin.x,
