@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfbe4f3a_8557f9b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-24T01:14:13Z",
+      "side": 1,
+      "message": "It\u0027s holidays so no need to review this in hurry. Just append to your review lists.(Assume it is mostly FIFO lists) :). Thanks!",
+      "revId": "3f3802c376fa2f6a4603f8ad077679d4313bbd24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
