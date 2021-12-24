@@ -232,7 +232,9 @@ namespace dawn_native {
                 case wgpu::TextureFormat::RG16Float:
                 case wgpu::TextureFormat::RG32Float:
                 case wgpu::TextureFormat::RGBA8Unorm:
+                case wgpu::TextureFormat::RGBA8UnormSrgb:
                 case wgpu::TextureFormat::BGRA8Unorm:
+                case wgpu::TextureFormat::BGRA8UnormSrgb:
                 case wgpu::TextureFormat::RGB10A2Unorm:
                 case wgpu::TextureFormat::RGBA16Float:
                 case wgpu::TextureFormat::RGBA32Float:
@@ -362,6 +364,30 @@ namespace dawn_native {
         return {};
     }
 
+    bool IsSrgbDstFormat(wgpu::TextureFormat format) {
+        switch (format) {
+            case wgpu::TextureFormat::RGBA8UnormSrgb:
+            case wgpu::TextureFormat::BGRA8UnormSrgb:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    // Copy to *-srgb texture should keep the bytes exactly the same as copy
+    // to non-srgb texture. Discard the srgb-ness to avoid srgb decoding in
+    // rendering.
+    wgpu::TextureFormat GetAttachmentFormat(wgpu::TextureFormat format) {
+        switch (format) {
+            case wgpu::TextureFormat::RGBA8UnormSrgb:
+                return wgpu::TextureFormat::RGBA8Unorm;
+            case wgpu::TextureFormat::BGRA8UnormSrgb:
+                return wgpu::TextureFormat::BGRA8Unorm;
+            default:
+                return format;
+        }
+    }
+
     MaybeError DoCopyTextureForBrowser(DeviceBase* device,
                                        const ImageCopyTexture* source,
                                        const ImageCopyTexture* destination,
@@ -375,9 +401,11 @@ namespace dawn_native {
             return {};
         }
 
+        bool isSrgbDstFormat = IsSrgbDstFormat(destination->texture->GetFormat().format);
         RenderPipelineBase* pipeline;
-        DAWN_TRY_ASSIGN(pipeline, GetOrCreateCopyTextureForBrowserPipeline(
-                                      device, destination->texture->GetFormat().format));
+        DAWN_TRY_ASSIGN(pipeline,
+                        GetOrCreateCopyTextureForBrowserPipeline(
+                            device, GetAttachmentFormat(destination->texture->GetFormat().format)));
 
         // Prepare bind group layout.
         Ref<BindGroupLayoutBase> layout;
@@ -511,9 +539,29 @@ namespace dawn_native {
         dstTextureViewDesc.baseArrayLayer = destination->origin.z;
         dstTextureViewDesc.arrayLayerCount = 1;
         Ref<TextureViewBase> dstView;
-        DAWN_TRY_ASSIGN(dstView,
-                        device->CreateTextureView(destination->texture, &dstTextureViewDesc));
+        Ref<TextureBase> renderAttachment;
 
+        // Copy to *-srgb texture should keep the bytes exactly the same as copy
+        // to non-srgb texture. Create an intermediate texture with no srgb-postfix format
+        // and use it as render attachment to do the first copy. Then schedule an extra
+        // copy from intermediate texture to dst texture to keep the bytes.
+        // TODO(crbug.com/dawn/1195): Reinterpret to non-srgb texture view on *-srgb texture
+        // and use it as render attachment when possible.
+        if (isSrgbDstFormat) {
+            TextureDescriptor intermediateTextureDesc;
+            intermediateTextureDesc.usage = destination->texture->GetUsage();
+            intermediateTextureDesc.dimension = destination->texture->GetDimension();
+            intermediateTextureDesc.size = destination->texture->GetSize();
+            intermediateTextureDesc.format =
+                GetAttachmentFormat(destination->texture->GetFormat().format);
+            intermediateTextureDesc.mipLevelCount = destination->texture->GetNumMipLevels();
+            intermediateTextureDesc.sampleCount = destination->texture->GetSampleCount();
+            DAWN_TRY_ASSIGN(renderAttachment, device->CreateTexture(&intermediateTextureDesc));
+        } else {
+            renderAttachment = destination->texture;
+        }
+        DAWN_TRY_ASSIGN(dstView,
+                        device->CreateTextureView(renderAttachment.Get(), &dstTextureViewDesc));
         // Prepare render pass color attachment descriptor.
         RenderPassColorAttachment colorAttachmentDesc;
 
@@ -539,6 +587,16 @@ namespace dawn_native {
         passEncoder->APIDraw(3);
         passEncoder->APIEndPass();
 
+        if (isSrgbDstFormat) {
+            ImageCopyTexture intermediateImageCopyTexture;
+            intermediateImageCopyTexture.texture = renderAttachment.Get();
+            intermediateImageCopyTexture.mipLevel = destination->mipLevel;
+            intermediateImageCopyTexture.origin = destination->origin;
+            intermediateImageCopyTexture.aspect = destination->aspect;
+
+            encoder->APICopyTextureToTexture(&intermediateImageCopyTexture, destination, copySize);
+        }
+
         // Finsh encoding.
         // TODO(dawn:723): change to not use AcquireRef for reentrant object creation.
         Ref<CommandBufferBase> commandBuffer = AcquireRef(encoder->APIFinish());
@@ -546,7 +604,6 @@ namespace dawn_native {
 
         // Submit command buffer.
         device->GetQueue()->APISubmit(1, &submitCommandBuffer);
-
         return {};
     }
 
