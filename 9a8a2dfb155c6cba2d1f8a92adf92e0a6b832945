@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "264cf89d_fbc16c44",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-12-24T09:48:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a798107a_6b02194e",
+      "range": {
+        "startLine": 7,
+        "startChar": 58,
+        "endLine": 7,
+        "endChar": 65
+      },
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c9a706ed_04f967a7",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
@@ -75,6 +99,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f0d3714_63414145",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-12-24T09:48:22Z",
+      "side": 1,
+      "message": "What I found is that they are required since FL10.0:\nhttps://docs.microsoft.com/en-us/windows/win32/direct3ddxgi/format-support-for-direct3d-feature-level-10-0-hardware",
+      "parentUuid": "2d2592f2_3b7655bf",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2f3640d_8a136eaf",
@@ -88,6 +130,24 @@
       "writtenOn": "2021-12-22T10:38:11Z",
       "side": 1,
       "message": "nit: no need to check for macOS 10.11 since Metal was introduced in 10.11.",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f4e1728_b9ffa5d6",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-12-24T09:48:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2f3640d_8a136eaf",
       "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +169,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54cd8f95_4827ca00",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-12-24T09:48:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f03a6ae_49e893cb",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d47e293a_52f50fa4",
@@ -126,6 +204,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed81a3b1_4c03ecd3",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-12-24T09:48:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d47e293a_52f50fa4",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1cc08c0b_59e76b1f",
@@ -139,6 +235,30 @@
       "writtenOn": "2021-12-22T10:38:11Z",
       "side": 1,
       "message": "nit: here and in other places, this is actually unsupported, not suppressed.",
+      "range": {
+        "startLine": 332,
+        "startChar": 4,
+        "endLine": 332,
+        "endChar": 25
+      },
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71aef3da_93ebdc6b",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-12-24T09:48:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cc08c0b_59e76b1f",
       "range": {
         "startLine": 332,
         "startChar": 4,
@@ -183,6 +303,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b9df1fd_4b1a4058",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-12-24T09:48:22Z",
+      "side": 1,
+      "message": "Yes, it only fails on D3D12 backend, we should use IsD3D12() instead IsWindows(), otherwise it will also skip Vulkan backend on Windows.",
+      "parentUuid": "2d850e51_d96ed4d4",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dfea51f7_62d6648e",
@@ -196,6 +334,24 @@
       "writtenOn": "2021-12-22T10:38:11Z",
       "side": 1,
       "message": "u-u-nit: imho we don\u0027t get that much clarity from moving the format to a separate variable since it is used only once.",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d66c452_d3d5543f",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-12-24T09:48:22Z",
+      "side": 1,
+      "message": "Keep this. The format will be used to get tolerance value for the depth sampling  of Depth24UnormStencil8.",
+      "parentUuid": "dfea51f7_62d6648e",
       "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -217,6 +373,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b94d357f_1a3bce98",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-12-24T09:48:22Z",
+      "side": 1,
+      "message": "For Depth24UnormStencil8 format, when clear depth to 0.43f, the expected value converted by memcpy is a litte different from the actual value obtained by depth sampling:\n\nExpected data[0] to be 1054615798, actual 1054615799\n\nIf use 0.42f as depth value, it does not happen.\n\nThe stencil values don\u0027t need to be modified, I forgot to revert them back and we need add a tolerance for the depth value checking of Depth24UnormStencil8.",
+      "parentUuid": "4f490d52_c6560d86",
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a90de3e0_fd401b30",
@@ -230,6 +404,30 @@
       "writtenOn": "2021-12-22T10:38:11Z",
       "side": 1,
       "message": "nit: Maybe it should be marked \"unsupported\" then. It\u0027s fine to never actually support testing these formats in dawn_end2end_tests. We can delegate that to the CTS.",
+      "range": {
+        "startLine": 764,
+        "startChar": 4,
+        "endLine": 764,
+        "endChar": 25
+      },
+      "revId": "9a8a2dfb155c6cba2d1f8a92adf92e0a6b832945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a32ca05_328328db",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-12-24T09:48:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a90de3e0_fd401b30",
       "range": {
         "startLine": 764,
         "startChar": 4,
