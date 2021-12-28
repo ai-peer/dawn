@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab8713f8_69ea3c0a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-28T19:36:25Z",
+      "side": 0,
+      "message": "change to ASSERT CompatibleWith?",
+      "revId": "7e5930bd1c657703ad146e2fee349223b8ada7cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dd358fb_2fdf9364",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-28T19:36:25Z",
+      "side": 0,
+      "message": "change to ASSERT CompatibleWith?",
+      "revId": "7e5930bd1c657703ad146e2fee349223b8ada7cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

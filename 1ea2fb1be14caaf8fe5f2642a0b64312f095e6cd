@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c95d201_332ebdff",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-28T19:36:25Z",
+      "side": 1,
+      "message": "it\u0027s unfortunate that if A is compatible with B, we also need to insert into the table that B is compatible with A. Maybe instead, after all the entries have been added, we define the sets of compatible formats afterward.\n\nSo if we define compatible set {A, B}, it\u0027ll add both A -\u003e B and B -\u003e A relationships.\n\nOr, instead of adding a bunch of unordered_sets into the table, we can more simply define the \"base format\" for a format. The base format of RGBA8Unorm is RGBA8Unorm, and the base format of RGBA8UnormSrgb is RGBA8Unorm. Two formats are copy-compatible if they have identical base formats.",
+      "revId": "1ea2fb1be14caaf8fe5f2642a0b64312f095e6cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb07f969_539b0e6d",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-28T19:36:25Z",
+      "side": 1,
+      "message": "\"Reinterpretation\"",
+      "range": {
+        "startLine": 120,
+        "startChar": 24,
+        "endLine": 120,
+        "endChar": 37
+      },
+      "revId": "1ea2fb1be14caaf8fe5f2642a0b64312f095e6cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f521d996_41d3d11d",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-28T19:36:25Z",
+      "side": 1,
+      "message": "if the format is the same, just return mMtlTexture.Get(); ?",
+      "revId": "1ea2fb1be14caaf8fe5f2642a0b64312f095e6cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
