@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "384738a7_212c5899",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-28T23:00:08Z",
+      "side": 1,
+      "message": "\"do not match\" -\u003e \"are not compatible\"",
+      "range": {
+        "startLine": 437,
+        "startChar": 66,
+        "endLine": 437,
+        "endChar": 78
+      },
+      "revId": "1ea2fb1be14caaf8fe5f2642a0b64312f095e6cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c95d201_332ebdff",
         "filename": "src/dawn_native/Format.cpp",
         "patchSetId": 10
@@ -14,6 +37,24 @@
       "writtenOn": "2021-12-28T19:36:25Z",
       "side": 1,
       "message": "it\u0027s unfortunate that if A is compatible with B, we also need to insert into the table that B is compatible with A. Maybe instead, after all the entries have been added, we define the sets of compatible formats afterward.\n\nSo if we define compatible set {A, B}, it\u0027ll add both A -\u003e B and B -\u003e A relationships.\n\nOr, instead of adding a bunch of unordered_sets into the table, we can more simply define the \"base format\" for a format. The base format of RGBA8Unorm is RGBA8Unorm, and the base format of RGBA8UnormSrgb is RGBA8Unorm. Two formats are copy-compatible if they have identical base formats.",
+      "revId": "1ea2fb1be14caaf8fe5f2642a0b64312f095e6cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0d3596c_e31bfcec",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-28T23:00:08Z",
+      "side": 1,
+      "message": "I think base format (defaulting to `format`) is a good idea. D3D12 defines things similarly with the TYPELESS classes.\n\nLater on we are going probably going to need compatibility classes for actual reinterpretation (https://github.com/gpuweb/gpuweb/issues/168) so maybe that will be a second base format field.",
+      "parentUuid": "8c95d201_332ebdff",
       "revId": "1ea2fb1be14caaf8fe5f2642a0b64312f095e6cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
