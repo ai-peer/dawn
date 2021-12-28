@@ -16,6 +16,57 @@
       "message": "It\u0027s holidays so no need to review this in hurry. Thanks!",
       "revId": "1ef8c73502eabdae1b13df432b7a37dad2dd1d83",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dd13074_854a55b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-28T19:36:34Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1ef8c73502eabdae1b13df432b7a37dad2dd1d83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f140e58f_3efb68db",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-28T19:36:34Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "1ef8c73502eabdae1b13df432b7a37dad2dd1d83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2c36c46_ef4fdf84",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-28T19:36:34Z",
+      "side": 1,
+      "message": "nit: could put this at [1] and use the same command encoder",
+      "revId": "1ef8c73502eabdae1b13df432b7a37dad2dd1d83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
