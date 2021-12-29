@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf1e800c_155c9d97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-29T00:12:25Z",
+      "side": 1,
+      "message": "dawn:1195",
+      "range": {
+        "startLine": 19,
+        "startChar": 5,
+        "endLine": 19,
+        "endChar": 9
+      },
+      "revId": "1ef8c73502eabdae1b13df432b7a37dad2dd1d83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "400c006b_04a3abc7",
@@ -31,6 +54,46 @@
       "writtenOn": "2021-12-28T19:36:34Z",
       "side": 1,
       "message": "LGTM",
+      "revId": "1ef8c73502eabdae1b13df432b7a37dad2dd1d83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "102fd489_2efdcb5b",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-29T00:12:25Z",
+      "side": 1,
+      "message": "nit: Formats -\u003e Format",
+      "range": {
+        "startLine": 367,
+        "startChar": 18,
+        "endLine": 367,
+        "endChar": 25
+      },
+      "revId": "1ef8c73502eabdae1b13df432b7a37dad2dd1d83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e665d745_ef1f2e25",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-29T00:12:25Z",
+      "side": 1,
+      "message": "Ideally we want to use a non-srgb view instead of an intermediate texture when possible. Right now it\u0027s not possible by spec (https://github.com/gpuweb/gpuweb/issues/168) but maybe we should leave a TODO to use a view if the destination texture supports it?",
       "revId": "1ef8c73502eabdae1b13df432b7a37dad2dd1d83",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
