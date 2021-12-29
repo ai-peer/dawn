@@ -232,6 +232,24 @@
       "parentUuid": "b2c36c46_ef4fdf84",
       "revId": "1ef8c73502eabdae1b13df432b7a37dad2dd1d83",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f83cc549_389b405b",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-29T22:49:45Z",
+      "side": 1,
+      "message": "This code got moved up but is also still here",
+      "parentUuid": "52e2fe5c_0a7bb922",
+      "revId": "1ef8c73502eabdae1b13df432b7a37dad2dd1d83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
