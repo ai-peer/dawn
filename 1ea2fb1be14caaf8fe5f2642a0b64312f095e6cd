@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7251836_7d75419f",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-29T02:43:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "384738a7_212c5899",
+      "range": {
+        "startLine": 437,
+        "startChar": 66,
+        "endLine": 437,
+        "endChar": 78
+      },
+      "revId": "1ea2fb1be14caaf8fe5f2642a0b64312f095e6cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c95d201_332ebdff",
@@ -59,6 +83,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08c4b5d1_693fdfe0",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-29T02:43:18Z",
+      "side": 1,
+      "message": "That\u0027s quite good! Done.",
+      "parentUuid": "a0d3596c_e31bfcec",
+      "revId": "1ea2fb1be14caaf8fe5f2642a0b64312f095e6cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb07f969_539b0e6d",
@@ -82,6 +124,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "864d2d6f_76b41467",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-29T02:43:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb07f969_539b0e6d",
+      "range": {
+        "startLine": 120,
+        "startChar": 24,
+        "endLine": 120,
+        "endChar": 37
+      },
+      "revId": "1ea2fb1be14caaf8fe5f2642a0b64312f095e6cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f521d996_41d3d11d",
@@ -95,6 +161,24 @@
       "writtenOn": "2021-12-28T19:36:25Z",
       "side": 1,
       "message": "if the format is the same, just return mMtlTexture.Get(); ?",
+      "revId": "1ea2fb1be14caaf8fe5f2642a0b64312f095e6cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3873f606_c90d0370",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-29T02:43:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f521d996_41d3d11d",
       "revId": "1ea2fb1be14caaf8fe5f2642a0b64312f095e6cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
