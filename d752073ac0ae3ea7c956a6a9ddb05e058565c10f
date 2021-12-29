@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3f1762db_53db5cff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-12-29T09:57:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc191a5f_ec7bdb58",
+      "range": {
+        "startLine": 10,
+        "startChar": 42,
+        "endLine": 10,
+        "endChar": 50
+      },
+      "revId": "d752073ac0ae3ea7c956a6a9ddb05e058565c10f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d5d4079d_874b29a7",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -54,6 +78,30 @@
       "writtenOn": "2021-12-28T19:50:35Z",
       "side": 1,
       "message": "why do we need tolerance for integer data?\n\noh - I see it is used in a place where we reinterpret float to int. Could we do the expectation with floating point data instead?",
+      "range": {
+        "startLine": 1617,
+        "startChar": 69,
+        "endLine": 1617,
+        "endChar": 78
+      },
+      "revId": "d752073ac0ae3ea7c956a6a9ddb05e058565c10f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22277826_824db98a",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1617,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-12-29T09:57:06Z",
+      "side": 1,
+      "message": "Yes, we can.",
+      "parentUuid": "696acf70_4d33e46b",
       "range": {
         "startLine": 1617,
         "startChar": 69,
