@@ -250,6 +250,24 @@
       "parentUuid": "52e2fe5c_0a7bb922",
       "revId": "1ef8c73502eabdae1b13df432b7a37dad2dd1d83",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9c0b002_b9c484f2",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-30T01:11:42Z",
+      "side": 1,
+      "message": "Errr... Sry! Thanks for catching this!",
+      "parentUuid": "f83cc549_389b405b",
+      "revId": "1ef8c73502eabdae1b13df432b7a37dad2dd1d83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
