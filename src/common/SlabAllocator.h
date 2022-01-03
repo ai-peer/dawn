@@ -77,19 +77,19 @@ class SlabAllocatorImpl {
         // Ownership of the allocation is transferred to the slab on creation.
         // | ---------- allocation --------- |
         // | pad | Slab | data ------------> |
-        Slab(char allocation[], IndexLinkNode* head);
+        Slab(void* allocation, IndexLinkNode* head);
         Slab(Slab&& rhs);
 
         void Splice();
 
-        char* allocation;
+        void* allocation;
         IndexLinkNode* freeList;
         Slab* prev;
         Slab* next;
         Index blocksInUse;
     };
 
-    SlabAllocatorImpl(Index blocksPerSlab, uint32_t objectSize, uint32_t objectAlignment);
+    SlabAllocatorImpl(Index blocksPerSlab, size_t objectSize, size_t objectAlignment);
     ~SlabAllocatorImpl();
 
     // Allocate a new block of memory.
@@ -122,8 +122,6 @@ class SlabAllocatorImpl {
     // Both slabs may still be used for for allocation/deallocation, but older slabs
     // will be a little slower to get allocations from.
     void GetNewSlab();
-
-    const uint32_t mAllocationAlignment;
 
     // | Slab | pad | Obj | pad | Node | pad | Obj | pad | Node | pad | ....
     // | -----------|                              mSlabBlocksOffset
@@ -165,8 +163,8 @@ template <typename T>
 class SlabAllocator : public SlabAllocatorImpl {
   public:
     SlabAllocator(size_t totalObjectBytes,
-                  uint32_t objectSize = sizeof(T),
-                  uint32_t objectAlignment = alignof(T))
+                  size_t objectSize = sizeof(T),
+                  size_t objectAlignment = alignof(T))
         : SlabAllocatorImpl(totalObjectBytes / objectSize, objectSize, objectAlignment) {
     }
 
