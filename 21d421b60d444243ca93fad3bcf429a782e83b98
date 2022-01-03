@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35fea998_2f0bbb85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-03T08:33:52Z",
+      "side": 1,
+      "message": "Why can\u0027t we do the gamma correction in the shader and have to do an extra copy instead?",
+      "revId": "21d421b60d444243ca93fad3bcf429a782e83b98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b62acfa_801910b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-03T08:33:52Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "21d421b60d444243ca93fad3bcf429a782e83b98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f87ab564_dd01fbfc",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-03T08:33:52Z",
+      "side": 1,
+      "message": "u-nit: Maybe just IsSrgbFormat since the function doesn\u0027t care if the format is dst or not.",
+      "range": {
+        "startLine": 367,
+        "startChar": 9,
+        "endLine": 367,
+        "endChar": 24
+      },
+      "revId": "21d421b60d444243ca93fad3bcf429a782e83b98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24c4458a_f3bbabe5",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-03T08:33:52Z",
+      "side": 1,
+      "message": "u-nit: GetSrgbLessFormat, and move the comment in DoCopyTextureForBrowser, see [1]",
+      "revId": "21d421b60d444243ca93fad3bcf429a782e83b98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6da0c8c_5e0edc39",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-03T08:33:52Z",
+      "side": 1,
+      "message": "nit: it might be clearer to do things recursively:\n\n\n  MaybeError EncodeCopyTextureForBrowser(encoder, ...) {\n    // Comment that explains why we are doing this.\n    if (IsSrgbFormat(format)) {\n      format \u003d GetSrgbLessFormat\n      Create temporary texture with format.\n      DAWN_TRY(EncodeCopyTextureForBrowser());\n      encoder-\u003eCopyTextureToTexture.\n      return {};\n    }\n  }",
+      "revId": "21d421b60d444243ca93fad3bcf429a782e83b98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d9e40b0_cd074cdf",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-03T08:33:52Z",
+      "side": 1,
+      "message": "Instead of modifying the expected result we copy into a non-srgb texture so that we can verify the bytes are what we expect? We should comment that. But also how hard would it be to do the gamma correction here instead?",
+      "revId": "21d421b60d444243ca93fad3bcf429a782e83b98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
