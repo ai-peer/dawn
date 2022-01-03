@@ -18,6 +18,7 @@
 #include "common/Math.h"
 
 #include <algorithm>
+#include <cstddef>
 #include <cstdlib>
 #include <limits>
 #include <new>
@@ -30,7 +31,7 @@ SlabAllocatorImpl::IndexLinkNode::IndexLinkNode(Index index, Index nextIndex)
 
 // Slab
 
-SlabAllocatorImpl::Slab::Slab(char allocation[], IndexLinkNode* head)
+SlabAllocatorImpl::Slab::Slab(void* allocation, IndexLinkNode* head)
     : allocation(allocation), freeList(head), prev(nullptr), next(nullptr), blocksInUse(0) {
 }
 
@@ -47,7 +48,7 @@ SlabAllocatorImpl::SentinelSlab::~SentinelSlab() {
         Slab* next = slab->next;
         ASSERT(slab->blocksInUse == 0);
         // Delete the slab's allocation. The slab is allocated inside slab->allocation.
-        delete[] slab->allocation;
+        free(slab->allocation);
         slab = next;
     }
 }
@@ -57,26 +58,21 @@ SlabAllocatorImpl::SentinelSlab::~SentinelSlab() {
 SlabAllocatorImpl::Index SlabAllocatorImpl::kInvalidIndex =
     std::numeric_limits<SlabAllocatorImpl::Index>::max();
 
-SlabAllocatorImpl::SlabAllocatorImpl(Index blocksPerSlab,
-                                     uint32_t objectSize,
-                                     uint32_t objectAlignment)
-    : mAllocationAlignment(std::max(static_cast<uint32_t>(alignof(Slab)), objectAlignment)),
-      mSlabBlocksOffset(Align(sizeof(Slab), objectAlignment)),
+SlabAllocatorImpl::SlabAllocatorImpl(Index blocksPerSlab, size_t objectSize, size_t objectAlignment)
+    : mSlabBlocksOffset(Align(sizeof(Slab), objectAlignment)),
       mIndexLinkNodeOffset(Align(objectSize, alignof(IndexLinkNode))),
       mBlockStride(Align(mIndexLinkNodeOffset + sizeof(IndexLinkNode), objectAlignment)),
       mBlocksPerSlab(blocksPerSlab),
-      mTotalAllocationSize(
-          // required allocation size
-          static_cast<size_t>(mSlabBlocksOffset) + mBlocksPerSlab * mBlockStride +
-          // Pad the allocation size by mAllocationAlignment so that the aligned allocation still
-          // fulfills the required size.
-          mAllocationAlignment) {
-    ASSERT(IsPowerOfTwo(mAllocationAlignment));
+      mTotalAllocationSize(static_cast<size_t>(mSlabBlocksOffset) + mBlocksPerSlab * mBlockStride) {
+    // malloc() must be guaranteed to return T aligned allocations. Note that we can't use
+    // aligned_alloc since it is only available on macOS >= 10.15A
+    size_t allocationAlignment = std::max(objectAlignment, alignof(Slab));
+    ASSERT(IsPowerOfTwo(allocationAlignment));
+    ASSERT(allocationAlignment <= alignof(max_align_t));
 }
 
 SlabAllocatorImpl::SlabAllocatorImpl(SlabAllocatorImpl&& rhs)
-    : mAllocationAlignment(rhs.mAllocationAlignment),
-      mSlabBlocksOffset(rhs.mSlabBlocksOffset),
+    : mSlabBlocksOffset(rhs.mSlabBlocksOffset),
       mIndexLinkNodeOffset(rhs.mIndexLinkNodeOffset),
       mBlockStride(rhs.mBlockStride),
       mBlocksPerSlab(rhs.mBlocksPerSlab),
@@ -228,13 +224,9 @@ void SlabAllocatorImpl::GetNewSlab() {
         return;
     }
 
-    // TODO(crbug.com/dawn/824): Use aligned_alloc with C++17.
-    char* allocation = new char[mTotalAllocationSize];
-    char* alignedPtr = AlignPtr(allocation, mAllocationAlignment);
+    void* allocation = malloc(mTotalAllocationSize);
 
-    char* dataStart = alignedPtr + mSlabBlocksOffset;
-
-    IndexLinkNode* node = NodeFromObject(dataStart);
+    IndexLinkNode* node = NodeFromObject(static_cast<char*>(allocation) + mSlabBlocksOffset);
     for (uint32_t i = 0; i < mBlocksPerSlab; ++i) {
         new (OffsetFrom(node, i)) IndexLinkNode(i, i + 1);
     }
@@ -242,5 +234,5 @@ void SlabAllocatorImpl::GetNewSlab() {
     IndexLinkNode* lastNode = OffsetFrom(node, mBlocksPerSlab - 1);
     lastNode->nextIndex = kInvalidIndex;
 
-    mAvailableSlabs.Prepend(new (alignedPtr) Slab(allocation, node));
+    mAvailableSlabs.Prepend(new (allocation) Slab(allocation, node));
 }
