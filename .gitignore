@@ -10,6 +10,7 @@
 /third_party/abseil-cpp/
 /third_party/angle
 /third_party/clang-format
+/third_party/catapult
 /third_party/glfw
 /third_party/googletest
 /third_party/gpuweb
