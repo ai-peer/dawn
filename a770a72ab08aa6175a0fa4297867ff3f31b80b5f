@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64735e11_f8d6813e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-03T08:52:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a770a72ab08aa6175a0fa4297867ff3f31b80b5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7efe2206_5b251ac6",
+        "filename": "src/common/Math.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-03T08:52:32Z",
+      "side": 1,
+      "message": "Can we have some simple tests (with min max, and middle values) in MathTests.cpp?",
+      "revId": "a770a72ab08aa6175a0fa4297867ff3f31b80b5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
