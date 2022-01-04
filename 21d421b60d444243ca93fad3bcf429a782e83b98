@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c592b92_a9b4deed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-04T23:55:35Z",
+      "side": 1,
+      "message": "This is probably a good idea. If the destination format is -srgb and the destination color space is srgb-encoded then we can just skip the srgb conversion at the end. Unfortunately if the destination color space is not srgb-encoded then it requires extra code in the shader and that\u0027s why I didn\u0027t give this enough thought.\n\nNow I\u0027m thinking the spec should actually disallow copying into *-srgb with color spaces that aren\u0027t srgb-encoded (so \"srgb\" and \"display-p3\" are OK, but \"srgb-linear\" or \"prophoto-rgb\" are not). (Right now the only destination color space is \"srgb\", so we would put limitation in when we expand it.)",
+      "parentUuid": "35fea998_2f0bbb85",
+      "revId": "21d421b60d444243ca93fad3bcf429a782e83b98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9b62acfa_801910b0",
@@ -60,6 +78,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9ed32268_268c05bb",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-04T23:55:35Z",
+      "side": 1,
+      "message": "This function returns false for formats like bc2-rgba-unorm-srgb so I think the name is good as is.",
+      "parentUuid": "f87ab564_dd01fbfc",
+      "range": {
+        "startLine": 367,
+        "startChar": 9,
+        "endLine": 367,
+        "endChar": 24
+      },
+      "revId": "21d421b60d444243ca93fad3bcf429a782e83b98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "24c4458a_f3bbabe5",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 4
@@ -71,6 +113,24 @@
       "writtenOn": "2022-01-03T08:33:52Z",
       "side": 1,
       "message": "u-nit: GetSrgbLessFormat, and move the comment in DoCopyTextureForBrowser, see [1]",
+      "revId": "21d421b60d444243ca93fad3bcf429a782e83b98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c392aa82_f0948785",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-04T23:55:35Z",
+      "side": 1,
+      "message": "Maybe GetDstFormatWithoutSrgb to match IsSrgbDstFormat?",
+      "parentUuid": "24c4458a_f3bbabe5",
       "revId": "21d421b60d444243ca93fad3bcf429a782e83b98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
