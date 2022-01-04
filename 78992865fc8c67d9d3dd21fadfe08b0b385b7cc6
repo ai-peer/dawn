@@ -16,6 +16,29 @@
       "message": "PTAL! I believe this may be a fix for https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1282651",
       "revId": "78992865fc8c67d9d3dd21fadfe08b0b385b7cc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b5ef22b_b4481678",
+        "filename": "src/dawn_native/CompilationMessages.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-04T23:13:12Z",
+      "side": 1,
+      "message": "LGTM, but I think it would be more clear to handle the case when these are zero, and then otherwise ASSERT end is not less than begin?\n\n(if indeed it is the case that there are no other situations when end \u003c begin)\n\nspecifically cause the second inequality you\u0027ve modified here is a bit confusing since (endOffset \u003e offset) happens indirectly.\n\nI think the real issue is:\n\nendOffset +\u003d endLinePos - 1; // which means endOffset +\u003d (0 - 1) which wraps around",
+      "range": {
+        "startLine": 81,
+        "startChar": 12,
+        "endLine": 83,
+        "endChar": 0
+      },
+      "revId": "78992865fc8c67d9d3dd21fadfe08b0b385b7cc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
