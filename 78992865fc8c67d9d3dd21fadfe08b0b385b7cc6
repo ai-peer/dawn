@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42ebeeca_e877ccb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-01-04T22:30:45Z",
+      "side": 1,
+      "message": "PTAL! I believe this may be a fix for https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1282651",
+      "revId": "78992865fc8c67d9d3dd21fadfe08b0b385b7cc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
