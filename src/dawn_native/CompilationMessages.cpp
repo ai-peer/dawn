@@ -80,6 +80,12 @@ namespace dawn_native {
             // lines in between to the ending offset.
             uint64_t endLineNum = diagnostic.source.range.end.line;
             uint64_t endLinePos = diagnostic.source.range.end.column;
+
+            // Prevent negative ranges.
+            if (endLineNum < lineNum) {
+                endLineNum = lineNum;
+            }
+
             uint64_t endOffset = offset;
             for (; i < endLineNum - 1; ++i) {
                 endOffset += lines[i].length() + 1;
@@ -90,9 +96,12 @@ namespace dawn_native {
             offset += linePos - 1;
             endOffset += endLinePos - 1;
 
-            // The length of the message is the difference between the starting offset and the
-            // ending offset.
-            length = endOffset - offset;
+            // Prevent negative ranges.
+            if (endOffset > offset) {
+                // The length of the message is the difference between the starting offset and the
+                // ending offset.
+                length = endOffset - offset;
+            }
         }
 
         if (diagnostic.code) {
