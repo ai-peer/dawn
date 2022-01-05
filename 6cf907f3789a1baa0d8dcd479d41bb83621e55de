@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "905dbdd0_3cb59282",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-05T00:52:36Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6cf907f3789a1baa0d8dcd479d41bb83621e55de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44be3985_3fad5ccb",
+        "filename": "src/dawn_native/CompilationMessages.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-05T00:52:36Z",
+      "side": 1,
+      "message": "should these be separated? (again, not sure what Tint outputs. is it possible for a diagnostic to have a line number, but no column?)",
+      "range": {
+        "startLine": 85,
+        "startChar": 16,
+        "endLine": 85,
+        "endChar": 50
+      },
+      "revId": "6cf907f3789a1baa0d8dcd479d41bb83621e55de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
