@@ -56,6 +56,30 @@
       },
       "revId": "cf42baad904357a55b48a5fd4c12de1ab291b730",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d76186ef_1427318a",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-05T17:07:52Z",
+      "side": 1,
+      "message": "Yes, I should have noted that in the commit message.",
+      "parentUuid": "653ff0ab_2bde0d20",
+      "range": {
+        "startLine": 77,
+        "startChar": 35,
+        "endLine": 77,
+        "endChar": 47
+      },
+      "revId": "cf42baad904357a55b48a5fd4c12de1ab291b730",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
