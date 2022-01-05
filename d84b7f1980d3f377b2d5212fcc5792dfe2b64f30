@@ -16,6 +16,23 @@
       "message": "Ben FYI",
       "revId": "d84b7f1980d3f377b2d5212fcc5792dfe2b64f30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d05537f6_4a1f8ef3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-05T08:42:03Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "d84b7f1980d3f377b2d5212fcc5792dfe2b64f30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
