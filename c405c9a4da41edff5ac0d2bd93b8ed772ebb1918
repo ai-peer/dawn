@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "404f28eb_2122bb80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-05T17:05:53Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c405c9a4da41edff5ac0d2bd93b8ed772ebb1918",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d111d96_c769c3b0",
+        "filename": "docs/codegen.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-05T17:05:53Z",
+      "side": 1,
+      "message": "did you intend to add an alias in dawn.json? I don\u0027t see it there",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 58
+      },
+      "revId": "c405c9a4da41edff5ac0d2bd93b8ed772ebb1918",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
