@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f37794fe_21134cf6",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Double check my vscode plugin and it marks this error correctly, it is me that fail to resolve it :(. Done.",
+      "parentUuid": "84709fba_afb7ace0",
+      "range": {
+        "startLine": 177,
+        "startChar": 19,
+        "endLine": 177,
+        "endChar": 26
+      },
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5fbe0649_777bea76",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-01-03T09:19:03Z",
       "side": 1,
       "message": "nit: ditto",
+      "range": {
+        "startLine": 224,
+        "startChar": 15,
+        "endLine": 224,
+        "endChar": 22
+      },
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcd6cf29_afc38785",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fbe0649_777bea76",
       "range": {
         "startLine": 224,
         "startChar": 15,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c19a423_b90f3652",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c022338_811dd75e",
+      "range": {
+        "startLine": 254,
+        "startChar": 15,
+        "endLine": 254,
+        "endChar": 22
+      },
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2f3877b_278172e6",
@@ -127,6 +199,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7256d9b_bf8be481",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2f3877b_278172e6",
+      "range": {
+        "startLine": 284,
+        "startChar": 19,
+        "endLine": 284,
+        "endChar": 26
+      },
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bf6ab60_6ebc6f2b",
@@ -140,6 +236,30 @@
       "writtenOn": "2022-01-03T09:19:03Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 315,
+        "startChar": 19,
+        "endLine": 315,
+        "endChar": 26
+      },
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65db6064_ce15562f",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bf6ab60_6ebc6f2b",
       "range": {
         "startLine": 315,
         "startChar": 19,
@@ -185,6 +305,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0929e104_50be312f",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ddf8547_51dd54f6",
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b707b510_2a7fd971",
@@ -202,6 +340,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6afbbf8c_4ea77a35",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b707b510_2a7fd971",
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fde7392c_d062b818",
@@ -215,6 +371,24 @@
       "writtenOn": "2022-01-03T09:19:03Z",
       "side": 1,
       "message": "We need to put the new texture in an NSPRef (or better, make the function return an NSPRef) otherwise we will leak a reference to the texture. See [1]",
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ace012d_420c9d12",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fde7392c_d062b818",
       "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -265,6 +439,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05149ab6_3a0d7c17",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ad3dd79_8fec32ff",
+      "range": {
+        "startLine": 426,
+        "startChar": 83,
+        "endLine": 426,
+        "endChar": 91
+      },
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a014f2db_3ac35423",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25f611a1_f92bedbe",
+      "range": {
+        "startLine": 426,
+        "startChar": 53,
+        "endLine": 426,
+        "endChar": 60
+      },
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e970303_422f61a7",
@@ -278,6 +500,30 @@
       "writtenOn": "2022-01-03T09:19:03Z",
       "side": 1,
       "message": "nit: creating ... or creating.",
+      "range": {
+        "startLine": 427,
+        "startChar": 47,
+        "endLine": 427,
+        "endChar": 53
+      },
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0f78b3b_d5cae36a",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e970303_422f61a7",
       "range": {
         "startLine": 427,
         "startChar": 47,
@@ -311,6 +557,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "909b335c_e49e263e",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca908ed6_bd02c6dc",
+      "range": {
+        "startLine": 556,
+        "startChar": 28,
+        "endLine": 556,
+        "endChar": 51
+      },
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc56b1de_625fce01",
@@ -328,6 +598,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5102dd2f_066dc4aa",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fc56b1de_625fce01",
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0ed4d03_be202a42",
@@ -341,6 +629,30 @@
       "writtenOn": "2022-01-03T09:19:03Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 530,
+        "startChar": 24,
+        "endLine": 530,
+        "endChar": 43
+      },
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2897df3f_bb4ac490",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Keep the compatibleFormat because the helper function returns the compatible formats.",
+      "parentUuid": "e0ed4d03_be202a42",
       "range": {
         "startLine": 530,
         "startChar": 24,
@@ -374,6 +686,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43b0718d_78c8a353",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 2464,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "910b1414_d9068c96",
+      "range": {
+        "startLine": 2464,
+        "startChar": 26,
+        "endLine": 2464,
+        "endChar": 36
+      },
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "870d1237_a6dc88f7",
@@ -391,6 +727,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44be7cc0_1020f62a",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 2475,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Yes, source format cover two non-srgb+srgb-ness pair. And the dst texture format is generated by GetCopyCompatibleFormat().",
+      "parentUuid": "870d1237_a6dc88f7",
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b22b3a5_ab3ab07f",
@@ -404,6 +758,30 @@
       "writtenOn": "2022-01-03T09:19:03Z",
       "side": 1,
       "message": "nit: GetCopyCompatibleSrgbFormat or something like that?",
+      "range": {
+        "startLine": 1641,
+        "startChar": 24,
+        "endLine": 1641,
+        "endChar": 43
+      },
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9a8a75d_b688e300",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1641,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Ignore SrgbFormat because it returns non-srgb formats too.",
+      "parentUuid": "6b22b3a5_ab3ab07f",
       "range": {
         "startLine": 1641,
         "startChar": 24,
@@ -462,6 +840,30 @@
       "writtenOn": "2022-01-03T09:19:03Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 2136,
+        "startChar": 24,
+        "endLine": 2136,
+        "endChar": 43
+      },
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2da0fb5_c527303d",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 2136,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:33:38Z",
+      "side": 1,
+      "message": "Same reason, keep compatible name and remove srgb words because it returns non-srgb formats too.",
+      "parentUuid": "99b989f3_ed050620",
       "range": {
         "startLine": 2136,
         "startChar": 24,
