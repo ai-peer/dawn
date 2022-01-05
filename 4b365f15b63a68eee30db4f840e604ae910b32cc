@@ -169,6 +169,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9ddf8547_51dd54f6",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T02:48:00Z",
+      "side": 1,
+      "message": "\u003e I\u0027m not sure that this will scale to when we allow more copies, for example like \u003e Vulkan\u0027s block compatible formats. Maybe when that happens we\u0027ll have \u003ecompatibility classes for formats etc.\n\nMaybe a *typeless format could resolve this?",
+      "parentUuid": "25e0dde3_3121fd72",
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b707b510_2a7fd971",
         "filename": "src/dawn_native/Format.h",
         "patchSetId": 13
@@ -413,6 +431,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "629cc87e_dc7c58ab",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1914,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T02:48:00Z",
+      "side": 1,
+      "message": "I think yes. The source format covers both srgb-ness and non-srgb-ness formats and GetCopyCompatibleSrgbFormat() will return the compatible one",
+      "parentUuid": "6730b17b_f4daec5a",
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99b989f3_ed050620",
@@ -449,6 +485,24 @@
       "writtenOn": "2022-01-03T09:19:03Z",
       "side": 1,
       "message": "ditto",
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5ebf8ff_85226ca1",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 2509,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T02:48:00Z",
+      "side": 1,
+      "message": "I think yes.",
+      "parentUuid": "27e24c2f_51a430be",
       "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
