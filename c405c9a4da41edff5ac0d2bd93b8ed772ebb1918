@@ -39,6 +39,30 @@
       },
       "revId": "c405c9a4da41edff5ac0d2bd93b8ed772ebb1918",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "196bd85b_693eb45d",
+        "filename": "docs/codegen.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-05T18:02:29Z",
+      "side": 1,
+      "message": "I noticed this issue while trying to add a typedef indeed. I couldn\u0027t add a typedef in the end because having duplicate sType enums made the code generator produce two functions for the same type, causing a compilation error.\n\nSince only Dawn is using this for now, I went ahead without a deprecation period.",
+      "parentUuid": "0d111d96_c769c3b0",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 58
+      },
+      "revId": "c405c9a4da41edff5ac0d2bd93b8ed772ebb1918",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
