@@ -84,6 +84,9 @@ config("dawn_internal") {
   if (dawn_use_x11) {
     defines += [ "DAWN_USE_X11" ]
   }
+  if (dawn_use_wayland) {
+    defines += [ "DAWN_USE_WAYLAND" ]
+  }
 
   if (dawn_enable_error_injection) {
     defines += [ "DAWN_ENABLE_ERROR_INJECTION" ]
