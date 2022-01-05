@@ -413,6 +413,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9c72d12_caacc79e",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-05T16:53:22Z",
+      "side": 1,
+      "message": "MTLCommandBuffer keeps refs internally to all resources, unless you ask it not to. So we don\u0027t need to store the ref.\n\nHowever, maybe we should, and set retainReferences: NO since Dawn already keeps all the other refs alive.",
+      "parentUuid": "067dc5f2_abd9854a",
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "25f611a1_f92bedbe",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 13
