@@ -491,11 +491,14 @@ source_set("dawn_white_box_tests_sources") {
   if (dawn_enable_vulkan) {
     deps += [ "${dawn_root}/third_party/khronos:vulkan_headers" ]
 
-    if (is_chromeos) {
-      sources += [ "white_box/VulkanImageWrappingTestsDmaBuf.cpp" ]
-    } else if (is_linux) {
-      sources += [ "white_box/VulkanImageWrappingTestsOpaqueFD.cpp" ]
-    }
+    sources += [ "white_box/VulkanImageWrappingTests.cpp" ]
+    sources += [ "white_box/VulkanImageWrappingTests_OpaqueFD.cpp" ]
+
+    #    if (is_chromeos) {
+    #      sources += [ "white_box/VulkanImageWrappingTestsDmaBuf.cpp" ]
+    #    } else if (is_linux) {
+    #      sources += [ "white_box/VulkanImageWrappingTestsOpaqueFD.cpp" ]
+    #    }
 
     if (dawn_enable_error_injection) {
       sources += [ "white_box/VulkanErrorInjectorTests.cpp" ]
