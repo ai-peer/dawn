@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbef6b92_17fe2162",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T06:41:39Z",
+      "side": 1,
+      "message": "\u003e Why can\u0027t we do the gamma correction in the shader and have to do \u003e an extra copy instead?\nIn previous, I think we don\u0027t go this way because it is complicated to add an extra step in the shader. But\nI think it is doable in current copyTextureForBrowser(). With stepMask and general gamma conversion functions, I\u0027d like to have a try.",
+      "parentUuid": "8c592b92_a9b4deed",
+      "revId": "21d421b60d444243ca93fad3bcf429a782e83b98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9b62acfa_801910b0",
