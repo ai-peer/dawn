@@ -56,6 +56,30 @@
       },
       "revId": "6cf907f3789a1baa0d8dcd479d41bb83621e55de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e76e43a7_9d8cfc50",
+        "filename": "src/dawn_native/CompilationMessages.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-01-05T18:16:36Z",
+      "side": 1,
+      "message": "The positions reported by Tint are 1-based, with 0 indicating \"no related position\". As a result, it\u0027s fairly nonsensical to give a zero for only one of these values. The struct initializes to zeros, however, so it seems to be a reasonable thing to protect against.",
+      "parentUuid": "44be3985_3fad5ccb",
+      "range": {
+        "startLine": 85,
+        "startChar": 16,
+        "endLine": 85,
+        "endChar": 50
+      },
+      "revId": "6cf907f3789a1baa0d8dcd479d41bb83621e55de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
