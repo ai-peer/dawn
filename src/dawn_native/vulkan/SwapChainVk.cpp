@@ -115,6 +115,26 @@ namespace dawn_native { namespace vulkan {
                     break;
 #endif  // defined(DAWN_ENABLE_BACKEND_METAL)
 
+#if defined(DAWN_USE_WAYLAND)
+                case Surface::Type::Wayland: {
+                    if (info.HasExt(InstanceExt::XlibSurface)) {
+                        VkWaylandSurfaceCreateInfoKHR createInfo;
+                        createInfo.sType = VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR;
+                        createInfo.pNext = nullptr;
+                        createInfo.flags = 0;
+                        createInfo.display = static_cast<struct wl_display*>(surface->GetWaylandDisplay());
+                        createInfo.surface = static_cast<struct wl_surface*>(surface->GetWaylandSurface());
+
+                        VkSurfaceKHR vkSurface = VK_NULL_HANDLE;
+                        DAWN_TRY(CheckVkSuccess(
+                            fn.CreateWaylandSurfaceKHR(instance, &createInfo, nullptr, &*vkSurface),
+                            "CreateWaylandSurface"));
+                        return vkSurface;
+                    }
+                    break;
+                }
+#endif  // defined(DAWN_USE_WAYLAND)
+
 #if defined(DAWN_PLATFORM_WINDOWS)
                 case Surface::Type::WindowsHWND:
                     if (info.HasExt(InstanceExt::Win32Surface)) {

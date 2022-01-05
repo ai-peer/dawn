@@ -38,6 +38,9 @@ namespace dawn_native {
             case Surface::Type::MetalLayer:
                 s->Append("MetalLayer");
                 break;
+            case Surface::Type::Wayland:
+                s->Append("Wayland");
+                break;
             case Surface::Type::WindowsHWND:
                 s->Append("WindowsHWND");
                 break;
@@ -135,6 +138,18 @@ namespace dawn_native {
         }
 #endif  // defined(DAWN_USE_X11)
 
+#if defined(DAWN_USE_WAYLAND)
+        const SurfaceDescriptorFromWaylandSurface* waylandDesc = nullptr;
+        FindInChain(descriptor->nextInChain, &waylandDesc);
+        if (waylandDesc) {
+            // Unfortunately we can't check the validity of wayland objects. Only that they
+            // aren't nullptr.
+            DAWN_INVALID_IF(waylandDesc->display == nullptr, "Wayland display is nullptr.");
+            DAWN_INVALID_IF(waylandDesc->surface == nullptr, "Wayland surface is nullptr.");
+            return {};
+        }
+#endif  // defined(DAWN_USE_X11)
+
         return DAWN_FORMAT_VALIDATION_ERROR("Unsupported sType (%s)",
                                             descriptor->nextInChain->sType);
     }
@@ -147,6 +162,7 @@ namespace dawn_native {
         const SurfaceDescriptorFromWindowsCoreWindow* coreWindowDesc = nullptr;
         const SurfaceDescriptorFromWindowsSwapChainPanel* swapChainPanelDesc = nullptr;
         const SurfaceDescriptorFromXlibWindow* xDesc = nullptr;
+        const SurfaceDescriptorFromWaylandSurface* waylandDesc = nullptr;
         FindInChain(descriptor->nextInChain, &metalDesc);
         FindInChain(descriptor->nextInChain, &hwndDesc);
         FindInChain(descriptor->nextInChain, &coreWindowDesc);
@@ -156,6 +172,10 @@ namespace dawn_native {
         if (metalDesc) {
             mType = Type::MetalLayer;
             mMetalLayer = metalDesc->layer;
+        } else if (waylandDesc) {
+            mType = Type::Wayland;
+            mWaylandDisplay = waylandDesc->display;
+            mWaylandSurface = waylandDesc->surface;
         } else if (hwndDesc) {
             mType = Type::WindowsHWND;
             mHInstance = hwndDesc->hinstance;
@@ -205,6 +225,16 @@ namespace dawn_native {
     void* Surface::GetMetalLayer() const {
         ASSERT(mType == Type::MetalLayer);
         return mMetalLayer;
+    }
+
+    void* Surface::GetWaylandDisplay() const {
+        ASSERT(mType == Type::Wayland);
+        return mWaylandDisplay;
+    }
+
+    void* Surface::GetWaylandSurface() const {
+        ASSERT(mType == Type::Wayland);
+        return mWaylandSurface;
     }
 
     void* Surface::GetHInstance() const {
