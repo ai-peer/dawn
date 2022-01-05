@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91c47e8f_8f6211f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T08:05:53Z",
+      "side": 1,
+      "message": "Changes the CL with supporting extra gamma-decoding steps for srgb-ness dst texture. PTAL, thanks!",
+      "revId": "4ff9d27e7ca31497f89fdf86beeb619a42bb4864",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

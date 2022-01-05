@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8c8fea4_3fd4795c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T08:05:53Z",
+      "side": 1,
+      "message": "Adding an extra decoding step for srgb-ness format. PTAL!",
+      "parentUuid": "bbef6b92_17fe2162",
+      "revId": "21d421b60d444243ca93fad3bcf429a782e83b98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9b62acfa_801910b0",
@@ -118,6 +136,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55e21833_821db4ad",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T08:05:53Z",
+      "side": 1,
+      "message": "Yes, this is specific for dst formats. Add comments for this.",
+      "parentUuid": "9ed32268_268c05bb",
+      "range": {
+        "startLine": 367,
+        "startChar": 9,
+        "endLine": 367,
+        "endChar": 24
+      },
+      "revId": "21d421b60d444243ca93fad3bcf429a782e83b98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24c4458a_f3bbabe5",
@@ -153,6 +195,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36f5b0a8_d40b3417",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T08:05:53Z",
+      "side": 1,
+      "message": "Don\u0027t need this helper function. Done.",
+      "parentUuid": "c392aa82_f0948785",
+      "revId": "21d421b60d444243ca93fad3bcf429a782e83b98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6da0c8c_5e0edc39",
@@ -170,6 +230,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45a54692_eff7ce4f",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T08:05:53Z",
+      "side": 1,
+      "message": "Don\u0027t need the extra copy steps any more!",
+      "parentUuid": "a6da0c8c_5e0edc39",
+      "revId": "21d421b60d444243ca93fad3bcf429a782e83b98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d9e40b0_cd074cdf",
@@ -183,6 +261,24 @@
       "writtenOn": "2022-01-03T08:33:52Z",
       "side": 1,
       "message": "Instead of modifying the expected result we copy into a non-srgb texture so that we can verify the bytes are what we expect? We should comment that. But also how hard would it be to do the gamma correction here instead?",
+      "revId": "21d421b60d444243ca93fad3bcf429a782e83b98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a5fb831_8c91a16d",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-05T08:05:53Z",
+      "side": 1,
+      "message": "Since we\u0027re using extra gamma correction step in shaders. I think the test cases use another way to ensure bytes equal is good. Adding comments for this.",
+      "parentUuid": "7d9e40b0_cd074cdf",
       "revId": "21d421b60d444243ca93fad3bcf429a782e83b98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
