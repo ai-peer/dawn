@@ -21,8 +21,11 @@
 
 #if defined(DAWN_PLATFORM_WINDOWS)
 #    define GLFW_EXPOSE_NATIVE_WIN32
-#elif defined(DAWN_USE_X11)
-#    define GLFW_EXPOSE_NATIVE_X11
+#elif defined(DAWN_PLATFORM_LINUX)
+#    if defined(DAWN_USE_X11)
+#        define GLFW_EXPOSE_NATIVE_X11
+#    endif
+   // TODO(dawn:1246) add support for Wayland
 #endif
 #include "GLFW/glfw3native.h"
 
@@ -68,14 +71,20 @@ namespace utils {
         desc->hinstance = GetModuleHandle(nullptr);
         return std::move(desc);
     }
-#elif defined(DAWN_USE_X11)
+#elif defined(DAWN_PLATFORM_LINUX)
     std::unique_ptr<wgpu::ChainedStruct> SetupWindowAndGetSurfaceDescriptorForTesting(
         GLFWwindow* window) {
-        std::unique_ptr<wgpu::SurfaceDescriptorFromXlibWindow> desc =
-            std::make_unique<wgpu::SurfaceDescriptorFromXlibWindow>();
-        desc->display = glfwGetX11Display();
-        desc->window = glfwGetX11Window(window);
-        return std::move(desc);
+#if defined(DAWN_USE_X11)
+        if (glfwGetPlatform() == GLFW_PLATFORM_X11) {
+            std::unique_ptr<wgpu::SurfaceDescriptorFromXlibWindow> desc =
+                std::make_unique<wgpu::SurfaceDescriptorFromXlibWindow>();
+            desc->display = glfwGetX11Display();
+            desc->window = glfwGetX11Window(window);
+            return std::move(desc);
+        }
+#endif  // defined(DAWN_USE_X11)
+        // TODO(dawn:1246) add support for Wayland
+        return nullptr;
     }
 #elif defined(DAWN_ENABLE_BACKEND_METAL)
     // SetupWindowAndGetSurfaceDescriptorForTesting defined in GLFWUtils_metal.mm

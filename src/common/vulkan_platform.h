@@ -166,6 +166,10 @@ namespace dawn_native { namespace vulkan {
 #    include "common/xlib_with_undefs.h"
 #endif  // defined(DAWN_USE_X11)
 
+#if defined(DAWN_USE_WAYLAND)
+#    define VK_USE_PLATFORM_WAYLAND_KHR
+#endif  // defined(DAWN_USE_WAYLAND)
+
 #if defined(DAWN_ENABLE_BACKEND_METAL)
 #    define VK_USE_PLATFORM_METAL_EXT
 #endif  // defined(DAWN_ENABLE_BACKEND_METAL)

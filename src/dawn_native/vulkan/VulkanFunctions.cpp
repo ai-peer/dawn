@@ -140,6 +140,13 @@ namespace dawn_native { namespace vulkan {
         }
 #endif  // defined(DAWN_ENABLE_BACKEND_METAL)
 
+#if defined(DAWN_USE_WAYLAND)
+        if (globalInfo.HasExt(InstanceExt::WaylandSurface)) {
+            GET_INSTANCE_PROC(CreateWaylandSurfaceKHR);
+            GET_INSTANCE_PROC(GetPhysicalDeviceWaylandPresentationSupportKHR);
+        }
+#endif  // defined(DAWN_USE_WAYLAND)
+
 #if defined(DAWN_PLATFORM_WINDOWS)
         if (globalInfo.HasExt(InstanceExt::Win32Surface)) {
             GET_INSTANCE_PROC(CreateWin32SurfaceKHR);
@@ -157,6 +164,7 @@ namespace dawn_native { namespace vulkan {
             GET_INSTANCE_PROC(GetPhysicalDeviceXcbPresentationSupportKHR);
         }
 #endif  // defined(DAWN_USE_X11)
+
         return {};
     }
 
