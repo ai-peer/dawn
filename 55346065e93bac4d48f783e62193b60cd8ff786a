@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "409291c3_387f7d31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-06T18:27:40Z",
+      "side": 1,
+      "message": "the other alternative is to reorganize the Dawn (webgpu) directories to be src/dawn/native, src/dawn/wire, etc.\n\nI don\u0027t feel very strongly about src/dawn/native vs. src/dawn_native, but the former does match your suggestion for test organization better as well as the new C++17 namespaces we\u0027re migrating to.\n\nthere\u0027s also the question about what we do with src/common which we have been discussing putting in the dawn:: namespace. IIRC, webnn would like to use some of it as well. maybe some of src/common stays where it is and we alias stuff into the dawn:: or webnn:: namespaces.",
+      "parentUuid": "8130d97b_504cfbc2",
+      "revId": "55346065e93bac4d48f783e62193b60cd8ff786a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d6af40a_766b5e93",
