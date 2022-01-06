@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "84d3bb46_f406abcf",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-06T02:07:29Z",
+      "side": 1,
+      "message": "Thanks! Yes, the premultiply-alpha step is the main reason why I added a standalone steps. \n\nBut one thing surprised me is that \"Premultiplied alpha doesn\u0027t work with -srgb formats, because they specifically assume unpremultiplied data.\" Would you mind to guide me with some links about this? thanks!\n\nAnd I think a seperate PR to remove the extra step in shader after spec landed the restriction is good!",
+      "parentUuid": "8d8f5fd5_d2a5ff95",
+      "revId": "6ed212d8234a73799b097145e06d7d94e78ea035",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a446aacb_bd284a28",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 6
@@ -82,6 +100,24 @@
       "writtenOn": "2022-01-06T00:55:34Z",
       "side": 1,
       "message": "IIUC, this comment is outdated because the extra copy has been removed.\n\n[1] Grammar nit: \"srgb-ness\" refers to whether it is a -srgb texture or not (like how \"endianness\" refers to whether something is big-endian or little-endian).\n\nHere you would say, for example, \"If the dst texture is an srgb format, ... comparable non-srgb format texture.\" and so on.",
+      "revId": "6ed212d8234a73799b097145e06d7d94e78ea035",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c94f63e4_c4b40b3d",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-06T02:07:29Z",
+      "side": 1,
+      "message": "This comment describes how we construct test expected values. In the test case, I still use an extra-copy to copy from *-srgb formats to non-srgb formats (To ensure it is different from the implementation.)",
+      "parentUuid": "beff4043_b4ffbdaf",
       "revId": "6ed212d8234a73799b097145e06d7d94e78ea035",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
