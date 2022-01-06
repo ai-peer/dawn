@@ -449,6 +449,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7fe4a03_f9f1671a",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-06T05:43:18Z",
+      "side": 1,
+      "message": "IIUC the retainedReferences\u003dNO (or commandBufferWithUnretainedReferences) change would be a larger change because we need to change how the entire command buffer is configured, it\u0027s not just local to here. Seems like it should be separate from this change.\n\nHowever I think Corentin\u0027s comment is still correct. The problem I see is, CreateFormatView returns an NSPRef\u003cid\u003cMTLTexture\u003e\u003e. Then, you .Get() that. The problem is, I believe the NSPRef\u0027s destructor will run after .Get() but before [MTLBlitCommandEncoder copyFromTexture] is entered. So if the NSPRef is the last ref, then it can will [release] the id\u003cMTLTexture\u003e before Metal receives it and performs its own [retain].\n\nFix would just be:\n\n NSPRef\u003cid\u003cMTLTexture\u003e\u003e dstTextureView \u003d\n     dstTexture-\u003eCreateFormatView(srcTexture-\u003eGetFormat().format);\n [... copyFromTexture ... toTexture:dstTextureView.Get() ...]\n // dstTextureView goes out of scope AFTER [copyFromTexture] executes.",
+      "parentUuid": "16c510f0_7215e0f2",
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "25f611a1_f92bedbe",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 13
