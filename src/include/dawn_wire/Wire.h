@@ -21,7 +21,7 @@
 #include "dawn/webgpu.h"
 #include "dawn_wire/dawn_wire_export.h"
 
-namespace dawn_wire {
+namespace dawn::wire {
 
     class DAWN_WIRE_EXPORT CommandSerializer {
       public:
@@ -71,6 +71,19 @@ namespace dawn_wire {
                                                          const volatile char* deserializeBuffer,
                                                          size_t deserializeBufferSize);
 
+}  // namespace dawn::wire
+
+namespace dawn_wire {
+    using dawn::wire::CommandSerializer;
+    using dawn::wire::CommandHandler;
+
+    using dawn::wire::SerializedWGPUDevicePropertiesSize;
+    using dawn::wire::SerializeWGPUDeviceProperties;
+    using dawn::wire::DeserializeWGPUDeviceProperties;
+
+    using dawn::wire::SerializedWGPUSupportedLimitsSize;
+    using dawn::wire::SerializeWGPUSupportedLimits;
+    using dawn::wire::DeserializeWGPUSupportedLimits;
 }  // namespace dawn_wire
 
 #endif  // DAWNWIRE_WIRE_H_

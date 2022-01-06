@@ -21,7 +21,7 @@
 
 struct DawnProcTable;
 
-namespace dawn_wire {
+namespace dawn::wire {
 
     namespace server {
         class Server;
@@ -145,6 +145,15 @@ namespace dawn_wire {
         };
     }  // namespace server
 
+}  // namespace dawn::wire
+
+namespace dawn_wire {
+    using dawn::wire::WireServerDescriptor;
+    using dawn::wire::WireServer;
+
+    namespace server {
+        using dawn::wire::server::MemoryTransferService;
+    }  // namespace server
 }  // namespace dawn_wire
 
 #endif  // DAWNWIRE_WIRESERVER_H_
