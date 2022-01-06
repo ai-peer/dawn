@@ -16,6 +16,74 @@
       "message": "PTAL, thanks.",
       "revId": "55346065e93bac4d48f783e62193b60cd8ff786a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8130d97b_504cfbc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-06T16:59:02Z",
+      "side": 1,
+      "message": "This CL spawns two important discussions:\n\n - Did WebNN go through https://chromium.googlesource.com/chromium/src.git/+/HEAD/docs/adding_to_third_party.md#Get-a-review ? While you\u0027re integrating in the Dawn repo, it really is a new third-party library that you are looking to copy paste into the Dawn repo.\n - What do we see the final directory structure be like? IMHO we shouldn\u0027t have a webnn directory and instead have it do the same as other Dawn library:\n \n  src/webnn_wire src/webnn_native etc. The biggest question is for tests because they are not correctly namespaces right now. I think it could be src/tests/dawn/{white_box, validation, perf, end2end} src/tests/unittests and src/tests/webnn/* same thing for fuzzers.\n  \nAustin, Jiawei, kainino WDYT?",
+      "revId": "55346065e93bac4d48f783e62193b60cd8ff786a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d6af40a_766b5e93",
+        "filename": "BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-06T16:59:02Z",
+      "side": 1,
+      "message": "nit: this could go in \"all\", but also we probably can build by default so that compilation is already tested on the bots.",
+      "revId": "55346065e93bac4d48f783e62193b60cd8ff786a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f479766_b59397d3",
+        "filename": "webnn/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-06T16:59:02Z",
+      "side": 1,
+      "message": "Since this is now in the Dawn repo, WDYT if just keeping Dawn Authors for everything? All contributors to the webnn-native repo were from Intel so I think this should be fine. (check with your lawyers as needed of course)",
+      "revId": "55346065e93bac4d48f783e62193b60cd8ff786a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d21be6f3_e0a20be0",
+        "filename": "webnn/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-06T16:59:02Z",
+      "side": 1,
+      "message": "THe path needs to be updated if we keep everything in the webnn/ subdirectory.",
+      "revId": "55346065e93bac4d48f783e62193b60cd8ff786a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
