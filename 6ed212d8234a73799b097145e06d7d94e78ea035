@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7925ad02_e0f3cdaf",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-06T08:24:45Z",
+      "side": 1,
+      "message": "Ack. Thanks, I understand now.",
+      "parentUuid": "f8ef0bc4_1c63f8b3",
+      "revId": "6ed212d8234a73799b097145e06d7d94e78ea035",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a446aacb_bd284a28",
