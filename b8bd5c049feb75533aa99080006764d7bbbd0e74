@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "b8bd5c049feb75533aa99080006764d7bbbd0e74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1080dc5_5ce813aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-06T17:00:59Z",
+      "side": 1,
+      "message": "LGTM but can we also undo the static_cast added in https://dawn-review.googlesource.com/c/dawn/+/75072 ?\n\nWe might need to transform a couple size_t into uint32_t in these tests too.",
+      "revId": "b8bd5c049feb75533aa99080006764d7bbbd0e74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
