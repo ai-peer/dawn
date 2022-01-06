@@ -467,6 +467,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ccb22262_5f01040a",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-06T05:46:54Z",
+      "side": 1,
+      "message": "Ah, thanks, I understand now.",
+      "parentUuid": "e7fe4a03_f9f1671a",
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "25f611a1_f92bedbe",
         "filename": "src/dawn_native/metal/TextureMTL.mm",
         "patchSetId": 13
