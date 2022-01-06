@@ -33,6 +33,23 @@
       "message": "Oh, great find! I missed this when I added store op previously.",
       "revId": "852a2945c333011d2b31449afb7f784215dc2480",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9b3b725_d5904871",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-06T18:29:51Z",
+      "side": 1,
+      "message": "lgtm too",
+      "revId": "852a2945c333011d2b31449afb7f784215dc2480",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
