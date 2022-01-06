@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac403c3d_1785a4dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-01-06T23:54:21Z",
+      "side": 1,
+      "message": "PTAL - this is the first step in scoping Acquire/Release calls to command list submission instead of texture object lifetime (Produce/Destroy). In any case this is a no-op change since Chromium is already using a fixed key of 0, and we\u0027re making this explicit now.",
+      "revId": "53955fb1febade626e4c8daa75092027a36efe71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
