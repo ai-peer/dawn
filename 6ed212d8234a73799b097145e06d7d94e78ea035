@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8ef0bc4_1c63f8b3",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-06T05:27:59Z",
+      "side": 1,
+      "message": "Commented more on the issue, I think that my original claim was too strong.",
+      "parentUuid": "84d3bb46_f406abcf",
+      "revId": "6ed212d8234a73799b097145e06d7d94e78ea035",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a446aacb_bd284a28",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 6
@@ -83,6 +101,24 @@
       "writtenOn": "2022-01-06T00:55:34Z",
       "side": 1,
       "message": "nit: see [1]",
+      "revId": "6ed212d8234a73799b097145e06d7d94e78ea035",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "085656c8_5963a628",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-06T05:27:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a446aacb_bd284a28",
       "revId": "6ed212d8234a73799b097145e06d7d94e78ea035",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -118,6 +154,24 @@
       "side": 1,
       "message": "This comment describes how we construct test expected values. In the test case, I still use an extra-copy to copy from *-srgb formats to non-srgb formats (To ensure it is different from the implementation.)",
       "parentUuid": "beff4043_b4ffbdaf",
+      "revId": "6ed212d8234a73799b097145e06d7d94e78ea035",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f41aad6b_0374f1ab",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-06T05:27:59Z",
+      "side": 1,
+      "message": "Oh, sorry for the misunderstanding. LGTM.",
+      "parentUuid": "c94f63e4_c4b40b3d",
       "revId": "6ed212d8234a73799b097145e06d7d94e78ea035",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
