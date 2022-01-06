@@ -58,6 +58,7 @@ namespace dawn_native { namespace d3d12 {
     struct DAWN_NATIVE_EXPORT ExternalImageAccessDescriptorDXGIKeyedMutex
         : ExternalImageAccessDescriptor {
       public:
+        // TODO(sunnyps): Remove deprecated keyed mutex params after removing from Chromium.
         uint64_t acquireMutexKey;
         uint64_t releaseMutexKey;
         bool isSwapChainTexture = false;
