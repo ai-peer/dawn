@@ -483,6 +483,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c69f061d_609d1a05",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-06T07:54:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccb22262_5f01040a",
+      "revId": "4b365f15b63a68eee30db4f840e604ae910b32cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25f611a1_f92bedbe",
