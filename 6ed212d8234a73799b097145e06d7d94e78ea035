@@ -16,6 +16,74 @@
       "message": "LGTM",
       "revId": "6ed212d8234a73799b097145e06d7d94e78ea035",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "472599fc_7d3af7a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-06T00:55:34Z",
+      "side": 1,
+      "message": "LGTM again! Nice simplification. Just a few grammar nits and then I think we should land this.",
+      "revId": "6ed212d8234a73799b097145e06d7d94e78ea035",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d8f5fd5_d2a5ff95",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-06T00:55:34Z",
+      "side": 1,
+      "message": "It\u0027s strange that this is after the premultiply step, but I realize that\u0027s technically correct. But premultiplication with an srgb destination format doesn\u0027t make any sense. I think it should also be disallowed in the spec. I commented this on https://github.com/gpuweb/gpuweb/issues/1715#issuecomment-1006192707.\n\nIf premultiplication is disallowed, then we shouldn\u0027t need an extra step in the shader here: kDecodeForSrgbDstFormat can cancel out with kEncodeToGammaStep. Then instead of introducing the extra step you just modify the steps_mask.\n\nIMO, we shouldn\u0027t block this CL. We can do that in a follow-up patch (perhaps after the spec has this restriction). It will be an incremental change on top of this one: a self-contained optimization that will stand well on its own as a separate PR.",
+      "revId": "6ed212d8234a73799b097145e06d7d94e78ea035",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a446aacb_bd284a28",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-06T00:55:34Z",
+      "side": 1,
+      "message": "nit: see [1]",
+      "revId": "6ed212d8234a73799b097145e06d7d94e78ea035",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beff4043_b4ffbdaf",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-06T00:55:34Z",
+      "side": 1,
+      "message": "IIUC, this comment is outdated because the extra copy has been removed.\n\n[1] Grammar nit: \"srgb-ness\" refers to whether it is a -srgb texture or not (like how \"endianness\" refers to whether something is big-endian or little-endian).\n\nHere you would say, for example, \"If the dst texture is an srgb format, ... comparable non-srgb format texture.\" and so on.",
+      "revId": "6ed212d8234a73799b097145e06d7d94e78ea035",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
