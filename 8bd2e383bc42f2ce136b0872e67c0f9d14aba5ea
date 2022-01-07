@@ -16,6 +16,40 @@
       "message": "This is what I had in mind about scoping keyed mutex acquire/release more tightly.\n\nOne thing that\u0027s not immediately clear is if it\u0027s guaranteed that all external textures (D3D11on12) used in a pass/pipeline will be added to the recording context\u0027s shared texture list. AddToSharedTextureList is called in TrackUsageAndGetResourceBarrierForPass, so I\u0027m guessing that it should be guaranteed?",
       "revId": "8bd2e383bc42f2ce136b0872e67c0f9d14aba5ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ce84190_bbfe9c19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-07T13:01:03Z",
+      "side": 1,
+      "message": "LGTM, although I think it might be more scalable to go with a solution like CompositeSharedImage that does copies so that we have correctness everywhere. Here the Dawn and GL decoder will have to run in the same thread of have submissions be synchronized somehow to make this mechanism work correctly.",
+      "revId": "8bd2e383bc42f2ce136b0872e67c0f9d14aba5ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5efbd8b_80bf345d",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-07T13:01:03Z",
+      "side": 1,
+      "message": "nit: maybe use a uint64_t so that we\u0027re sure that it will never overflow?",
+      "revId": "8bd2e383bc42f2ce136b0872e67c0f9d14aba5ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
