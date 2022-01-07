@@ -16,6 +16,23 @@
       "message": "PTAL! This will need https://dawn-review.googlesource.com/c/dawn/+/75421 and https://chromium-review.googlesource.com/c/chromium/src/+/3372809 landed first.",
       "revId": "20ca26cc14fb29be0021ba00bd9f85f9d5458071",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50e5ce4a_6cd3142b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-07T19:24:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "20ca26cc14fb29be0021ba00bd9f85f9d5458071",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
