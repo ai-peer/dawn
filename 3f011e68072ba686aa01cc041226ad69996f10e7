@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23dbe61e_3fe8c573",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2022-01-07T19:06:22Z",
+      "side": 1,
+      "message": "I _think_ it only needs 10.12 maybe? See this diff https://chromium-review.googlesource.com/c/chromium/src/+/3362856/2/build/config/compiler/BUILD.gn which I think will make this work in chromium, where we\u0027re guaranteed to statically link our hermetic, up-to-date libc++abi. (This might not help dawn, which might not do this, I don\u0027t know.)",
+      "revId": "3f011e68072ba686aa01cc041226ad69996f10e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
