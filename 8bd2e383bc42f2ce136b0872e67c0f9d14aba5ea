@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db3f7b21_4b188407",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-01-07T00:59:53Z",
+      "side": 1,
+      "message": "This is what I had in mind about scoping keyed mutex acquire/release more tightly.\n\nOne thing that\u0027s not immediately clear is if it\u0027s guaranteed that all external textures (D3D11on12) used in a pass/pipeline will be added to the recording context\u0027s shared texture list. AddToSharedTextureList is called in TrackUsageAndGetResourceBarrierForPass, so I\u0027m guessing that it should be guaranteed?",
+      "revId": "8bd2e383bc42f2ce136b0872e67c0f9d14aba5ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
