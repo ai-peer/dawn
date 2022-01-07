@@ -53,6 +53,41 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28962f0a_1f7ef69b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2022-01-07T00:59:51Z",
+      "side": 1,
+      "message": "\u003e  - Did WebNN go through https://chromium.googlesource.com/chromium/src.git/+/HEAD/docs/adding_to_third_party.md#Get-a-review ? While you\u0027re integrating in the Dawn repo, it really is a new third-party library that you are looking to copy paste into the Dawn repo.\n\nWe will re-implement those code in webnn-native repo [1] that will be reviewed in Dawn repo, and webnn-native repo [1] will don\u0027t host those code that duplicates with Dawn repo, it means the code in webnn-native repo [1] will depend on Dawn repo, so does it [1] still pass third party review?\n\n[1] https://github.com/webmachinelearning/webnn-native\n\n\u003e - What do we see the final directory structure be like? IMHO we shouldn\u0027t have a webnn directory and instead have it do the same as other Dawn library:\n\u003e\n\u003e src/webnn_wire src/webnn_native etc. The biggest question is for tests because they are not correctly namespaces right now. I think it could be src/tests/dawn/{white_box, validation, perf, end2end} src/tests/unittests and src/tests/webnn/* same thing for fuzzers.\n\nWe initial proposal of webnn directory structure is like below:\n\n// Current directory structure\nroot\n├─buildoverrides\n├─doc\n├─examples\n├─generator\n├─scripts\n├─src\n├  ├─common\n├  ├─dawn_native\n├  ├─dawn_wire\n├  ├─fuzzers\n├  ├─include\n├  └tests\n├─dawn.json\n├─dawn_wire.json\n\n// Add webnn directory\n├─webnn\n├  ├─buildoverrides\n├  ├─doc\n├  ├─examples\n├  ├─generator\n├  ├─scripts\n├  ├─src\n├  ├  ├─common\n├  ├  ├─webnn_native\n├  ├  ├─webnn_wire\n├  ├  ├─fuzzers\n├  ├  ├─include\n├  ├  └tests\n├  ├─webnn.json\n├  ├─webnn_wire.json\n\nso webnn will doesn\u0027t pollute Dawn\u0027s directory structure, it\u0027s fine to implement webnn in Dawn directory structure (not add new directory structure the same as Dawn) if pollution is not a problem.\n\nI have a prototype here https://github.com/fujunwei/webnn-native-1/tree/main/webnn",
+      "parentUuid": "409291c3_387f7d31",
+      "revId": "55346065e93bac4d48f783e62193b60cd8ff786a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65aca429_5f90cfe0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2022-01-07T00:59:51Z",
+      "side": 1,
+      "message": "Thanks for your feedback.",
+      "revId": "55346065e93bac4d48f783e62193b60cd8ff786a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d6af40a_766b5e93",
