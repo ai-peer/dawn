@@ -98,46 +98,6 @@ namespace dawn_native {
         GetProperties(reinterpret_cast<wgpu::AdapterProperties*>(properties));
     }
 
-    BackendType Adapter::GetBackendType() const {
-        switch (mImpl->GetBackendType()) {
-            case wgpu::BackendType::D3D12:
-                return BackendType::D3D12;
-            case wgpu::BackendType::Metal:
-                return BackendType::Metal;
-            case wgpu::BackendType::Null:
-                return BackendType::Null;
-            case wgpu::BackendType::OpenGL:
-                return BackendType::OpenGL;
-            case wgpu::BackendType::Vulkan:
-                return BackendType::Vulkan;
-            case wgpu::BackendType::OpenGLES:
-                return BackendType::OpenGLES;
-
-            case wgpu::BackendType::D3D11:
-            case wgpu::BackendType::WebGPU:
-                break;
-        }
-        UNREACHABLE();
-    }
-
-    DeviceType Adapter::GetDeviceType() const {
-        switch (mImpl->GetAdapterType()) {
-            case wgpu::AdapterType::DiscreteGPU:
-                return DeviceType::DiscreteGPU;
-            case wgpu::AdapterType::IntegratedGPU:
-                return DeviceType::IntegratedGPU;
-            case wgpu::AdapterType::CPU:
-                return DeviceType::CPU;
-            case wgpu::AdapterType::Unknown:
-                return DeviceType::Unknown;
-        }
-        UNREACHABLE();
-    }
-
-    const PCIInfo& Adapter::GetPCIInfo() const {
-        return mImpl->GetPCIInfo();
-    }
-
     WGPUAdapter Adapter::Get() const {
         return ToAPI(mImpl);
     }
