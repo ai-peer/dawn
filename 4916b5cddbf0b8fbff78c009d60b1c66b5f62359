@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfff8081_58b15380",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-07T16:44:51Z",
+      "side": 1,
+      "message": "PTAL! It will require https://chromium-review.googlesource.com/c/chromium/src/+/3371609 to be landed first.",
+      "revId": "4916b5cddbf0b8fbff78c009d60b1c66b5f62359",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
