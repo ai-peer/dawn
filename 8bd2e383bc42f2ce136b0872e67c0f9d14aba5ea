@@ -50,6 +50,24 @@
       "message": "nit: maybe use a uint64_t so that we\u0027re sure that it will never overflow?",
       "revId": "8bd2e383bc42f2ce136b0872e67c0f9d14aba5ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16812e8b_474648dc",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-01-07T19:07:37Z",
+      "side": 1,
+      "message": "In general, we try to avoid unsigned types except when needed for bit-patterns or for interop with external APIs: https://google.github.io/styleguide/cppguide.html#Integer_Types\n\n\"You should not use the unsigned integer types such as uint32_t, unless there is a valid reason such as representing a bit pattern rather than a number, or you need defined overflow modulo 2^N. In particular, do not use unsigned types to say a number will never be negative. Instead, use assertions for this.\"\n\nIn this case making it unsigned would make the ASSERT(mAcquireCount \u003e\u003d 0) in AcquireKeyedMutex() a no-op although that ASSERT is strictly not needed due to the other one in ReleaseKeyedMutex().\n\nLet me know if you meant using a larger signed type instead like int64_t, but even that is a bit dubious since we don\u0027t allow that many textures in the first place, right?",
+      "parentUuid": "b5efbd8b_80bf345d",
+      "revId": "8bd2e383bc42f2ce136b0872e67c0f9d14aba5ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
