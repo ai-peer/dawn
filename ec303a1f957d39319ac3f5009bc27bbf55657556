@@ -56,6 +56,48 @@
       "message": "nit: Maybe detail that 0 will be used for both acquire and release.",
       "revId": "ec303a1f957d39319ac3f5009bc27bbf55657556",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f390bc64_6ad16eec",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-01-07T18:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9625076b_9fac01f2",
+      "range": {
+        "startLine": 61,
+        "startChar": 16,
+        "endLine": 61,
+        "endChar": 23
+      },
+      "revId": "ec303a1f957d39319ac3f5009bc27bbf55657556",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b1d7255_6073d99d",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-01-07T18:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f943f35_f131cb08",
+      "revId": "ec303a1f957d39319ac3f5009bc27bbf55657556",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
