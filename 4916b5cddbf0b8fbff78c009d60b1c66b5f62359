@@ -16,6 +16,23 @@
       "message": "PTAL! It will require https://chromium-review.googlesource.com/c/chromium/src/+/3371609 to be landed first.",
       "revId": "4916b5cddbf0b8fbff78c009d60b1c66b5f62359",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd047d59_e8993a57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-01-07T17:27:35Z",
+      "side": 1,
+      "message": "LGTM once the pre-requisite Chrome patch lands.",
+      "revId": "4916b5cddbf0b8fbff78c009d60b1c66b5f62359",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
