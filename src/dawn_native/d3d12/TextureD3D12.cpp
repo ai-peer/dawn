@@ -34,9 +34,6 @@
 namespace dawn_native::d3d12 {
 
     namespace {
-        // Keyed mutex acquire/release uses a fixed key of 0 to match Chromium behavior.
-        constexpr UINT64 kDXGIKeyedMutexAcquireReleaseKey = 0;
-
         D3D12_RESOURCE_STATES D3D12TextureUsage(wgpu::TextureUsage usage, const Format& format) {
             D3D12_RESOURCE_STATES resourceState = D3D12_RESOURCE_STATE_COMMON;
 
@@ -554,10 +551,6 @@ namespace dawn_native::d3d12 {
         ComPtr<ID3D12Resource> d3d12Texture,
         Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
         bool isSwapChainTexture) {
-        DAWN_TRY(CheckHRESULT(d3d11on12Resource->GetDXGIKeyedMutex()->AcquireSync(
-                                  kDXGIKeyedMutexAcquireReleaseKey, INFINITE),
-                              "D3D12 acquiring shared mutex"));
-
         mD3D11on12Resource = std::move(d3d11on12Resource);
         mSwapChainTexture = isSwapChainTexture;
 
@@ -674,10 +667,6 @@ namespace dawn_native::d3d12 {
         // We can set mSwapChainTexture to false to avoid passing a nullptr to
         // ID3D12SharingContract::Present.
         mSwapChainTexture = false;
-
-        if (mD3D11on12Resource != nullptr) {
-            mD3D11on12Resource->GetDXGIKeyedMutex()->ReleaseSync(kDXGIKeyedMutexAcquireReleaseKey);
-        }
     }
 
     DXGI_FORMAT Texture::GetD3D12Format() const {
@@ -707,6 +696,16 @@ namespace dawn_native::d3d12 {
                 ASSERT(HasOneBit(GetFormat().aspects));
                 return GetD3D12Format();
         }
+    }
+
+    MaybeError Texture::AcquireKeyedMutex() {
+        ASSERT(mD3D11on12Resource != nullptr);
+        return mD3D11on12Resource->AcquireKeyedMutex();
+    }
+
+    void Texture::ReleaseKeyedMutex() {
+        ASSERT(mD3D11on12Resource != nullptr);
+        mD3D11on12Resource->ReleaseKeyedMutex();
     }
 
     void Texture::TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
