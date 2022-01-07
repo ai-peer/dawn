@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dcc19af_5575cfb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-07T17:06:20Z",
+      "side": 1,
+      "message": "PTAL! I think this will be possible to land after https://chromium-review.googlesource.com/c/chromium/src/+/3372826",
+      "revId": "a11838e59f1f2db6d8dbec8c7116c4e05edcc9e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
