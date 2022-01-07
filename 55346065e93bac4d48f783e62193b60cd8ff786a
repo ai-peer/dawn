@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90dd7bdd_c52d4feb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2022-01-07T01:17:41Z",
+      "side": 1,
+      "message": "\u003e there\u0027s also the question about what we do with src/common which we have been discussing putting in the dawn:: namespace. IIRC, webnn would like to use some of it as well. maybe some of src/common stays where it is and we alias stuff into the dawn:: or webnn:: namespaces.\n\nCurrently, we can use it directly with dpes [1], and i think it\u0027s fine to put it in the dawn:: namespace for webnn.\n\n  deps \u003d [\n    \":webnn_native_headers\",\n    \":webnn_native_utils_gen\",\n    \"${dawn_root}/src/common\",\n  ]\n  \n[1] https://github.com/fujunwei/webnn-native-1/blob/main/webnn/src/webnn_native/BUILD.gn#L100",
+      "parentUuid": "28962f0a_1f7ef69b",
+      "revId": "55346065e93bac4d48f783e62193b60cd8ff786a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d6af40a_766b5e93",
