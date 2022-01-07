@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19c2bddc_610f44f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-07T12:56:27Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ec303a1f957d39319ac3f5009bc27bbf55657556",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9625076b_9fac01f2",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-07T12:56:27Z",
+      "side": 1,
+      "message": "u-nit: can we associate this with an issue like chromium:1241533?",
+      "range": {
+        "startLine": 61,
+        "startChar": 16,
+        "endLine": 61,
+        "endChar": 23
+      },
+      "revId": "ec303a1f957d39319ac3f5009bc27bbf55657556",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
