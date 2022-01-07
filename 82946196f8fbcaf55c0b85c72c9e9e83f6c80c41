@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a66709c8_7f4e59f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-01-07T14:43:49Z",
+      "side": 1,
+      "message": "Hi all,\n\nI\u0027ve just become aware of the intention to move WebNN into the Dawn repo, and I have some pretty big reservations about this.\n\nFirst, I\u0027d like to confirm the goals here. After chatting with Corentin, it seems that the goals are to:\n(a) Share some of the code in \u003cdawn\u003e/generator and \u003cdawn\u003e/src/Common with WebNN.\n(b) Keep code that shares IPC patterns close, by putting it in the same repo.\n(c) Re-use Dawn\u0027s infra (presubmit testing, auto-rolls, etc).\n(d) Potentially avoid third-party / security reviews.\n\nIs this correct? Are there other reasons I\u0027ve missed?\n\nMaybe I\u0027m being naive, but in my opinion:\n(a) The amount of code being shared seems negligible to the vast differences between WebNN and WebGPU. It seems entirely reasonable to fork and adapt code that is useful for WebNN. If we decide to share this code at a later date, we can always produce a common library that both depend on.\n(b) IPC patterns can be documented and referred to by both projects. There\u0027s no hard dependency here that requires sharing a repo.\n(c) Re-use Dawn\u0027s infra is my biggest concern. By having WebNN in the Dawn repo, we\u0027re stepping towards a monorepo for projects that share very little in common. We\u0027ll be sharing gerrit, presubmits, auto-rollers, and ACLs. Without substantial dependency analysis, WebNN changes will pointlessly trigger CQ testing for WebGPU\u0027s test suites across a vast number of machines, and vice-versa. One failing project can prevent another from rolling into Chromium, which can be a nightmare for high-severity / urgency bug fixes.\n(d) We\u0027ll almost certainly need a chromium engineering review for any large, new contributions. We can\u0027t use the Dawn repo for a way to bypass the policies described at https://chromium.googlesource.com/chromium/src.git/+/HEAD/docs/adding_to_third_party.md.\n\nAlso, by sharing a repo: Changes to the few shared files involves understanding and testing both projects. People have to keep track of what is shared before making edits. There\u0027s an increased chance of merge conflicts. Human parsing of git logs for WebGPU changes is much noisier. Bisecting breakages is slower. and so on. It\u0027s a big commitment to make, and I\u0027m struggling to see the justifications here.\n\nI believe the best approach here is to set up a new repo for WebNN, and fork the common code between Dawn and WebNN, with the intention to move common code to a shared place that both can depend on, once both projects have matured.\n\nIf the group disagrees, we should still involve chromium engineering for a review of the WebNN code before there\u0027s a substantial amount of new code landed.\n\nThanks,\nBen",
+      "revId": "82946196f8fbcaf55c0b85c72c9e9e83f6c80c41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
