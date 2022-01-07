@@ -39,6 +39,23 @@
       },
       "revId": "ec303a1f957d39319ac3f5009bc27bbf55657556",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f943f35_f131cb08",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-07T13:01:30Z",
+      "side": 1,
+      "message": "nit: Maybe detail that 0 will be used for both acquire and release.",
+      "revId": "ec303a1f957d39319ac3f5009bc27bbf55657556",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
