@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3cbabad_8bdaa554",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-01-07T01:18:47Z",
+      "side": 1,
+      "message": "Thanks for Junwei\u0027s explanation.\n\nI\u0027d prefer Junwei\u0027s proposal that WebNN code will be put in \"webnn\" folder and won\u0027t pollute the exsiting Dawn stuffs.",
+      "parentUuid": "28962f0a_1f7ef69b",
+      "revId": "55346065e93bac4d48f783e62193b60cd8ff786a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d6af40a_766b5e93",
