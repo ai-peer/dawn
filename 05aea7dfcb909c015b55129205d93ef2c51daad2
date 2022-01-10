@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1c42c18_0aa87a05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-01-10T20:06:20Z",
+      "side": 1,
+      "message": "Took me a while to wrap my head around this, mostly because of the similarity of variable names for all the \"expected\" stuff, but it looks good.",
+      "revId": "05aea7dfcb909c015b55129205d93ef2c51daad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18885a3f_531e8c3f",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-01-10T20:06:20Z",
+      "side": 1,
+      "message": "numExpected and numUnexpected in this comment - were these variables before that you renamed?",
+      "range": {
+        "startLine": 771,
+        "startChar": 24,
+        "endLine": 771,
+        "endChar": 37
+      },
+      "revId": "05aea7dfcb909c015b55129205d93ef2c51daad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
