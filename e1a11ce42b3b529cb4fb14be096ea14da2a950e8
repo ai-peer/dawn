@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2165034d_d39d08f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-10T07:53:28Z",
+      "side": 1,
+      "message": "do you mean storeOp? loadOp is already present.",
+      "revId": "e1a11ce42b3b529cb4fb14be096ea14da2a950e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "bc42f97e_916b221b",
@@ -14,6 +31,23 @@
       "writtenOn": "2022-01-10T01:56:11Z",
       "side": 1,
       "message": "Sorry I missed this issue in my last CL:\nhttps://dawn-review.googlesource.com/c/dawn/+/75482\n\nPTAL, thanks!",
+      "revId": "e1a11ce42b3b529cb4fb14be096ea14da2a950e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0554bdd_2ac5def6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-10T07:53:28Z",
+      "side": 1,
+      "message": "LGTM",
       "revId": "e1a11ce42b3b529cb4fb14be096ea14da2a950e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
