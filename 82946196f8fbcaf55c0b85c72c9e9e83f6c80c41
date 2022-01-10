@@ -51,6 +51,24 @@
       "message": "+CC Rafael.",
       "revId": "82946196f8fbcaf55c0b85c72c9e9e83f6c80c41",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "582b7197_33df1b1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2022-01-10T00:41:19Z",
+      "side": 1,
+      "message": "Thanks Ben and Corentin for your comments. \n\nRegarding to the goals:\n\n\u003e (d) Potentially avoid third-party / security reviews.\n\u003e Is this correct?\n\nThis is not correct. We\u0027d like to follow any required reviews. \n\nFor security review, recently Alex Gough started the security review [1] with us, we responded and added the security consideration section [2] into our design doc accordingly.\n\nFor third-party review, I appreciate Corentin help initiate it. We intended to implement WebNN in Dawn and we documented this purpose in the design doc included in WebNN Intent to Prototype [3]. We haven\u0027t receive any objections (or feedbacks) to our I2P, so we proceed in this way. It looks like we should go to chrome engineering review and potentially get more feedback, that sounds good to me.\n\n\u003e Are there other reasons I\u0027ve missed?\n\n\u003e There is also the possibility of sharing buffers between WebNN and WebGPU in the future, maybe.\n\nThis is correct. WebNN spec [4] allows to create a MLContext from WebGPU device, in which case the corresponding GPUBuffer resources could be used as graph constants, as well as the GPUTexture/GPUBuffer could be used as graph inputs/outputs. This is a key feature requested by ML frameworks, like TensorFlow.js, to allow custom kernels written in WebGPU and a subgraph of WebNN to interoperate efficiently.\n\n\u003e But there\u0027s been 0 investigations on it so I don\u0027t think that should be taken into consideration for now.\n\nThis is not true. Bryan Bernhart (CC+) has been working with Rafael on the design of WebNN-WebGPU interop on Windows. It would involve DirectML (WebNN backend) to  interop with D3D12 (WebGPU backend). It would be similar for other OS, like on macOS, MPS (WebNN backend) interops with Metal (WebGPU backend). So this is another reason why we intend to implement WebNN in Dawn for closer integration.\n\n\n[1]: https://docs.google.com/document/d/1uh8nTcOLJPJmib-1NT25K2TrlzIiS6rf7I1DwqX6o-E/edit\n[2]: https://docs.google.com/document/d/1KDVuz38fx3SpLVdE8FzCCqASjFfOBXcJWj124jP7ZZ4/edit#heading\u003dh.qjpzx8d6k7t5\n[3]: https://groups.google.com/a/chromium.org/g/blink-dev/c/PD6TDMDS9mg\n[4]: https://www.w3.org/TR/webnn/#programming-model-device-selection",
+      "parentUuid": "e0e9abf9_14c96110",
+      "revId": "82946196f8fbcaf55c0b85c72c9e9e83f6c80c41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
