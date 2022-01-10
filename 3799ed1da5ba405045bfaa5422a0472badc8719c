@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f96c8aa_3dc185ad",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-01-10T09:37:43Z",
+      "side": 1,
+      "message": "push_variable is not a builtin CMake macro - it is declared in spirv-tools. Does this build? If so, it\u0027s picking up the definition from L41, which isn\u0027t a great thing.",
+      "range": {
+        "startLine": 61,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 17
+      },
+      "revId": "3799ed1da5ba405045bfaa5422a0472badc8719c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
