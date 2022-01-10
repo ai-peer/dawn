@@ -16,6 +16,23 @@
       "message": "Thanks!",
       "revId": "fa5988a0b4114db3d0602e65798ec929a3407525",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62667acb_12fbb770",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-10T07:55:05Z",
+      "side": 1,
+      "message": "Still LGTM. Loko PTAL since Austin seems OOO",
+      "revId": "fa5988a0b4114db3d0602e65798ec929a3407525",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
