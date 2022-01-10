@@ -68,6 +68,24 @@
       "parentUuid": "b5efbd8b_80bf345d",
       "revId": "8bd2e383bc42f2ce136b0872e67c0f9d14aba5ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1e0c70a_c119880b",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-10T08:32:21Z",
+      "side": 1,
+      "message": "Uh, I guess we completely missed this guideline. Ok for int64_t here if you want, and we\u0027ll have to see for the rest of Dawn.\n\nThe comment was more about using a wider integer type like you guessed because it seems possible to trigger an overflow: the texture is locked once for each time it is transitioned inside the command buffer. For example once per copy it is used it. While unlikely that a texture will be used 2B times, it is possible that a malicious web page might try to do that to causes crashes or other issues.",
+      "parentUuid": "16812e8b_474648dc",
+      "revId": "8bd2e383bc42f2ce136b0872e67c0f9d14aba5ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
