@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4035ee5e_cf877dd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-10T12:49:24Z",
+      "side": 1,
+      "message": "Is there anything blocking this CL? Adding stencil8 would allow removing a lot of suppressions.",
+      "revId": "745b672ad12187fb70dbf355f912df4be26de956",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
