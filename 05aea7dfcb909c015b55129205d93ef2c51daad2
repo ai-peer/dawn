@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76452640_7e942f6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-01-10T20:24:50Z",
+      "side": 1,
+      "message": "No, that\u0027s not what I meant. Part of it is my lack of experience with Go, and not seeing or being able to know the types easily when reading the code. Maybe more explicit typing would help. Anyway, it\u0027s fine.",
+      "parentUuid": "0883885e_e4a1eea7",
+      "revId": "05aea7dfcb909c015b55129205d93ef2c51daad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18885a3f_531e8c3f",
