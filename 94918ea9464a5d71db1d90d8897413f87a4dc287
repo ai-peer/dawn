@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f59c5742_7647bba3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-11T08:57:17Z",
+      "side": 1,
+      "message": "Whoops, I forgot to remove the change id before making the push to this CL. I\u0027ll revert and make an actual copy.",
+      "revId": "94918ea9464a5d71db1d90d8897413f87a4dc287",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e3e4682_bd9e09c8",
