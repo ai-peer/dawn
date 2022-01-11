@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e3e4682_bd9e09c8",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-01-11T03:22:34Z",
+      "side": 1,
+      "message": "According to Vulkan SPEC (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#features-required-format-support, \nTable 72), VK_FORMAT_S8_UINT is not required to be supported on all Vulkan drivers.\n\nSo here I think we should first check if VK_FORMAT_S8_UINT is supported, and if not then we should implement it with VK_FORMAT_D32_SFLOAT_S8_UINT or VK_FORMAT_D32_SFLOAT_S8_UINT.",
+      "range": {
+        "startLine": 322,
+        "startChar": 23,
+        "endLine": 322,
+        "endChar": 40
+      },
+      "revId": "94918ea9464a5d71db1d90d8897413f87a4dc287",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
