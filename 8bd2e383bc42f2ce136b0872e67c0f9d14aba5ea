@@ -86,6 +86,24 @@
       "parentUuid": "16812e8b_474648dc",
       "revId": "8bd2e383bc42f2ce136b0872e67c0f9d14aba5ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38f38811_9a0b262f",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-01-11T22:01:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1e0c70a_c119880b",
+      "revId": "8bd2e383bc42f2ce136b0872e67c0f9d14aba5ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
