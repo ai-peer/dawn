@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "630ae11d_23087f83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-11T00:19:31Z",
+      "side": 1,
+      "message": "nit: reference a bug?",
+      "revId": "b76209577e6e40bae9f6904d1a08554d3a625fde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "183a87be_a3e377af",
@@ -14,6 +31,23 @@
       "writtenOn": "2022-01-10T08:32:47Z",
       "side": 1,
       "message": "Loko PTAL as well as Austin seems to be OOO",
+      "revId": "b76209577e6e40bae9f6904d1a08554d3a625fde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50e165a5_2d12dff5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-11T00:19:31Z",
+      "side": 1,
+      "message": "lgtm",
       "revId": "b76209577e6e40bae9f6904d1a08554d3a625fde",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
