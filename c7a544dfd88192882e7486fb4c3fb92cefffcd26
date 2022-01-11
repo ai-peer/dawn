@@ -18,6 +18,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b7fdef5_84bde67c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-11T17:58:17Z",
+      "side": 1,
+      "message": "General thought also, for the validation tests, we should try to use the 2 argument overload of ASSERT_DEVICE_ERROR so that we can check which errors we are actually seeing. Otherwise the errors could change and the test could still pass if we are just expecting any random error.",
+      "revId": "c7a544dfd88192882e7486fb4c3fb92cefffcd26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4797eec_257c6a21",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-11T17:58:17Z",
+      "side": 1,
+      "message": "Would it be possible to make these conditions into a switch statement also? Or maybe lump together the switch statement above and just do something like the following so it is easier to read:\n\nswitch (dimension) {\n  case 1D:\n    DAWN_INVALID_IF(...);\n    DAWN_INVALID_IF(...);\n    ...\n    break;\n  case 2D:\n    DAWN_INVALID_IF(...);\n    ...\n    break;\n  ...\n}\n\nUnder the 1D case, we could also explicitly add a \"can\u0027t be compressed format\" condition, then in the CompressedTextureFormatsValidationTests.1DTexture below, we could use the block sizes and still get the right error.",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 0
+      },
+      "revId": "c7a544dfd88192882e7486fb4c3fb92cefffcd26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1cf254de_46a4c42f",
