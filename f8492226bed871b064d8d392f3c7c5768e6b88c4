@@ -16,6 +16,23 @@
       "message": "PTAL! My plan is to land this Monday morning, breaking the Dawn CQ, then immediately update and land https://chromium-review.googlesource.com/c/chromium/src/+/3372809\n\nWhich will unbreak the Dawn CQ. If landing the Chromium CL fails, I\u0027ll revert this CL.",
       "revId": "f8492226bed871b064d8d392f3c7c5768e6b88c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d43d3bd_556bf670",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-11T00:34:03Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "f8492226bed871b064d8d392f3c7c5768e6b88c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
