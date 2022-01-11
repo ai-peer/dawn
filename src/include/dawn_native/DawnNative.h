@@ -31,7 +31,7 @@ namespace wgpu {
     struct DeviceDescriptor;
 }
 
-namespace dawn_native {
+namespace dawn::native {
 
     class InstanceBase;
     class AdapterBase;
@@ -247,6 +247,6 @@ namespace dawn_native {
     DAWN_NATIVE_EXPORT bool BindGroupLayoutBindingsEqualForTesting(WGPUBindGroupLayout a,
                                                                    WGPUBindGroupLayout b);
 
-}  // namespace dawn_native
+}  // namespace dawn::native
 
 #endif  // DAWNNATIVE_DAWNNATIVE_H_
