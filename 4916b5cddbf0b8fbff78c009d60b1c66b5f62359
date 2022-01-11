@@ -33,6 +33,23 @@
       "message": "LGTM once the pre-requisite Chrome patch lands.",
       "revId": "4916b5cddbf0b8fbff78c009d60b1c66b5f62359",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f72bb28_da683cae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-11T00:36:11Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "4916b5cddbf0b8fbff78c009d60b1c66b5f62359",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
