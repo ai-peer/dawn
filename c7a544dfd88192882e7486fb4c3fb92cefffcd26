@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "c7a544dfd88192882e7486fb4c3fb92cefffcd26",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cf254de_46a4c42f",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-11T14:45:32Z",
+      "side": 1,
+      "message": "Additional test coverage in https://github.com/gpuweb/cts/pull/873",
+      "revId": "c7a544dfd88192882e7486fb4c3fb92cefffcd26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
