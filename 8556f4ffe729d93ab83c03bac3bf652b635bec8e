@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "82cd1db4_95a90002",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-11T17:41:05Z",
+      "side": 1,
+      "message": "Huh, the change was in patchset 1 with a TODO to remove it. Not sure if it was supposed to be removed yet though.",
+      "parentUuid": "7f799462_27583957",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 54
+      },
+      "revId": "8556f4ffe729d93ab83c03bac3bf652b635bec8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8a5ca417_729959af",
