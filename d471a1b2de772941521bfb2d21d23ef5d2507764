@@ -53,6 +53,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff349a7b_c123cda1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-12T07:45:18Z",
+      "side": 1,
+      "message": "LGTM, with Austin\u0027s comment about D3D12 render passes that we\u0027ll want to do as a follow up.",
+      "revId": "d471a1b2de772941521bfb2d21d23ef5d2507764",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ebe7b4c_c782d9e3",
