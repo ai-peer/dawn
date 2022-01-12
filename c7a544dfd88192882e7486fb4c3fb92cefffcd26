@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d23f38a6_e92a5bcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-12T15:25:00Z",
+      "side": 1,
+      "message": "Checking strings means we\u0027ll have to update the tests when the error messages changes and not just when the validation logic changes, so I think that doing it in general for validation tests wouldn\u0027t be great. However for this case where it isn\u0027t possible to make an exact control case, I think it is a good idea. Done.",
+      "parentUuid": "7b7fdef5_84bde67c",
+      "revId": "c7a544dfd88192882e7486fb4c3fb92cefffcd26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b4797eec_257c6a21",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 11
@@ -54,6 +72,47 @@
         "endLine": 221,
         "endChar": 0
       },
+      "revId": "c7a544dfd88192882e7486fb4c3fb92cefffcd26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e603338_0610c5cf",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-12T15:25:00Z",
+      "side": 1,
+      "message": "Done for the switch. I didn\u0027t add the validation for !isCompressed for 1d because it is already done at [1] so it would be redundant. WDYT?",
+      "parentUuid": "b4797eec_257c6a21",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 0
+      },
+      "revId": "c7a544dfd88192882e7486fb4c3fb92cefffcd26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee45b918_4d05a41e",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-12T15:25:00Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "c7a544dfd88192882e7486fb4c3fb92cefffcd26",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
