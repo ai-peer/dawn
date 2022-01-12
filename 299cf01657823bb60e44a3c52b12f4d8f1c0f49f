@@ -154,6 +154,29 @@
       "message": "[1]",
       "revId": "299cf01657823bb60e44a3c52b12f4d8f1c0f49f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68911a58_ea7f1a0f",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-12T18:37:20Z",
+      "side": 1,
+      "message": "Hmm, WDYT about keeping mAdapters sorted in the preferred order, and creating filters out of the options which we just then pass to an std::find or something? Not really necessary but just a thought since maybe we might add more filter options in the future.",
+      "range": {
+        "startLine": 157,
+        "startChar": 8,
+        "endLine": 198,
+        "endChar": 9
+      },
+      "revId": "299cf01657823bb60e44a3c52b12f4d8f1c0f49f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
