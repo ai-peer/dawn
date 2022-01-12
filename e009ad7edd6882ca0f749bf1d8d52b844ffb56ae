@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38f67632_5877da7e",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-12T08:46:58Z",
+      "side": 1,
+      "message": "I just realized we didn\u0027t add store op to the hashing function. Can we do it?",
+      "revId": "e009ad7edd6882ca0f749bf1d8d52b844ffb56ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
