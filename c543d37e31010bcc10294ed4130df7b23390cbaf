@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bb7623a_7690d84e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-12T22:08:23Z",
+      "side": 1,
+      "message": "LGTM, just a question for my understanding.",
+      "revId": "c543d37e31010bcc10294ed4130df7b23390cbaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b66bfc0_273fd95e",
@@ -48,6 +65,29 @@
       "writtenOn": "2022-01-12T15:45:10Z",
       "side": 1,
       "message": "I had to remove the const to allow the structure to have a default copy constructor. TODO make it private and add a getter. I forgot to do it before sending for review, sorry.",
+      "revId": "c543d37e31010bcc10294ed4130df7b23390cbaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a84fbe4f_01e68f1f",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-12T22:08:23Z",
+      "side": 1,
+      "message": "I\u0027m not too familiar with the image wrapping stuff, so maybe just a clarification question for my understanding... Is the intention that there are going to be more than 1 type of image wrapping for Vulkan and the \"backend\" is going to change (i.e. a different cpp file compiled in)?\n\nIs there no way to determine (at runtime) the backend that needs to be used? Otherwise couldn\u0027t we do something similar to the VulkanBackend implementation and pass in backend impls as parameters for the tests?",
+      "range": {
+        "startLine": 34,
+        "startChar": 10,
+        "endLine": 34,
+        "endChar": 40
+      },
       "revId": "c543d37e31010bcc10294ed4130df7b23390cbaf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
