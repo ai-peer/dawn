@@ -16,6 +16,52 @@
       "message": "PTAL again",
       "revId": "4e885305075417f90cd9587c2344fc3ad25bef70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "134cc47f_5b831a07",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-12T18:45:06Z",
+      "side": 1,
+      "message": "Maybe a TODO to remove this and [1] once ready?",
+      "range": {
+        "startLine": 712,
+        "startChar": 12,
+        "endLine": 712,
+        "endChar": 69
+      },
+      "revId": "4e885305075417f90cd9587c2344fc3ad25bef70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dff9c23c_ffbccbff",
+        "filename": "src/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-12T18:45:06Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 1
+      },
+      "revId": "4e885305075417f90cd9587c2344fc3ad25bef70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
