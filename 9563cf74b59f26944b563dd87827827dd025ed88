@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71fbc466_0b9c87b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-12T07:59:26Z",
+      "side": 1,
+      "message": "Just saw this. You should know that this swapchain is only used in native, but not on Web. The Web swapchain is implemented in Chromium here https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/webgpu/gpu_canvas_context.h?q\u003dgpu_canvas_context",
+      "revId": "9563cf74b59f26944b563dd87827827dd025ed88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
