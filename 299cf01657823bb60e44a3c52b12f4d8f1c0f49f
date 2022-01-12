@@ -35,6 +35,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd3f854e_44518c66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-12T09:15:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "299cf01657823bb60e44a3c52b12f4d8f1c0f49f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e798f26_2c9cbede",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-12T09:15:09Z",
+      "side": 1,
+      "message": "Can we add a TODO to only call the callback on ProcessEvents?",
+      "revId": "299cf01657823bb60e44a3c52b12f4d8f1c0f49f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e8b6ca4_372ee761",
@@ -48,6 +82,58 @@
       "writtenOn": "2022-01-12T04:07:59Z",
       "side": 1,
       "message": "Out of curiosity, why is `options` required? It\u0027s optional in the Javascript API, and passing nullptr works for Emscripten too.\n\nI\u0027ve generally been assuming that nullptr is a valid argument for any parameters whose equivalents are marked as optional in the JS API.",
+      "revId": "299cf01657823bb60e44a3c52b12f4d8f1c0f49f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18abc53a_4cb09eb3",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-12T09:15:09Z",
+      "side": 1,
+      "message": "That\u0027s a correct assumption, I think that the C++ header should even make RequestAdapter() without arguments valid.",
+      "parentUuid": "1e8b6ca4_372ee761",
+      "revId": "299cf01657823bb60e44a3c52b12f4d8f1c0f49f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24083458_d194063a",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-12T09:15:09Z",
+      "side": 1,
+      "message": "What if the application already called RequestAdapter or DiscoverAdapter? In the logic below we wouldn\u0027t be giving back the swiftshader adapter. So I think we should add an extra condition around [1]. Ah this is done in the loop over adapters below. Either solution LGTM.",
+      "revId": "299cf01657823bb60e44a3c52b12f4d8f1c0f49f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64246d2e_67ea4500",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-12T09:15:09Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "299cf01657823bb60e44a3c52b12f4d8f1c0f49f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
