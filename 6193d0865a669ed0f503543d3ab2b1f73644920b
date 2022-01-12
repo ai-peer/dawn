@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "435947b4_f865ce32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-01-12T21:23:58Z",
+      "side": 1,
+      "message": "Addressing feedback, but had a question.",
+      "revId": "6193d0865a669ed0f503543d3ab2b1f73644920b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "912e3db2_568a4342",
@@ -71,6 +88,30 @@
       "writtenOn": "2022-01-12T20:43:02Z",
       "side": 1,
       "message": "nit: do you think it\u0027s worth timing this directly as well? - ditto for other backends",
+      "range": {
+        "startLine": 648,
+        "startChar": 28,
+        "endLine": 648,
+        "endChar": 41
+      },
+      "revId": "6193d0865a669ed0f503543d3ab2b1f73644920b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cc5d003_352ce194",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-01-12T21:23:58Z",
+      "side": 1,
+      "message": "In my earlier code I was timing this as well and it never showed up in the profiles, so I removed it in favor of trying to focus on the longer running functions.\n\nA semi-related question, though: Because this is wrapped in a DAWN_TRY_ASSIGN it may return if there\u0027s an error. My assumption is that if I wrap it in a TRACE_EVENT_BEGIN/TRACE_EVENT_END that it\u0027ll lead to an imbalanced trace and potentially cause problems should the function return here. Is there a preferred way to resolve that aside from extracting the traced statement from the TRY?",
+      "parentUuid": "c31afbaa_a269eccc",
       "range": {
         "startLine": 648,
         "startChar": 28,
