@@ -157,10 +157,10 @@ TEST_P(SwapChainValidationTests, InvalidCreationUsage) {
     ASSERT_DEVICE_ERROR(device.CreateSwapChain(surface, &desc));
 }
 
-// Checks that the creation format must (currently) be BGRA8Unorm
+// Checks that the creation format must (currently) be BGRA8Unorm, RGBA8Unorm, RGBA16Float.
 TEST_P(SwapChainValidationTests, InvalidCreationFormat) {
     wgpu::SwapChainDescriptor desc = goodDescriptor;
-    desc.format = wgpu::TextureFormat::RGBA8Unorm;
+    desc.format = wgpu::TextureFormat::BGRA8UnormSrgb;
     ASSERT_DEVICE_ERROR(device.CreateSwapChain(surface, &desc));
 }
 

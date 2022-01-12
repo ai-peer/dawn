@@ -74,11 +74,16 @@ namespace dawn_native {
 
             DAWN_TRY(ValidatePresentMode(descriptor->presentMode));
 
-            // TODO(crbug.com/dawn/160): Lift this restriction once
-            // wgpu::Instance::GetPreferredSurfaceFormat is implemented.
-            DAWN_INVALID_IF(descriptor->format != wgpu::TextureFormat::BGRA8Unorm,
-                            "Format (%s) is not %s, which is (currently) the only accepted format.",
-                            descriptor->format, wgpu::TextureFormat::BGRA8Unorm);
+            switch (descriptor->format) {
+                case wgpu::TextureFormat::BGRA8Unorm:
+                case wgpu::TextureFormat::RGBA8Unorm:
+                case wgpu::TextureFormat::RGBA16Float:
+                    break;
+                default:
+                    return DAWN_FORMAT_VALIDATION_ERROR(
+                        "Format (%s) is not a supported swapchain texture format.",
+                        descriptor->format);
+            }
 
             DAWN_INVALID_IF(descriptor->usage != wgpu::TextureUsage::RenderAttachment,
                             "Usage (%s) is not %s, which is (currently) the only accepted usage.",
