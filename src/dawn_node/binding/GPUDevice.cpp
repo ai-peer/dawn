@@ -105,6 +105,7 @@ namespace wgpu::binding {
                     promise.Resolve(
                         interop::GPUDeviceLostInfo::Create<DeviceLostInfo>(self->env_, r, message));
                 }
+                self->lost_promises_.clear();
             },
             this);
     }
@@ -139,12 +140,7 @@ namespace wgpu::binding {
     }
 
     void GPUDevice::destroy(Napi::Env env) {
-        for (auto promise : lost_promises_) {
-            promise.Resolve(interop::GPUDeviceLostInfo::Create<DeviceLostInfo>(
-                env_, interop::GPUDeviceLostReason::kDestroyed, "device was destroyed"));
-        }
-        lost_promises_.clear();
-        device_.Release();
+        device_.Destroy();
     }
 
     interop::Interface<interop::GPUBuffer> GPUDevice::createBuffer(
