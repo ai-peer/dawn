@@ -129,13 +129,10 @@ class BindGroupTests : public DawnTest {
 // This test passes by not asserting or crashing.
 TEST_P(BindGroupTests, ReusedBindGroupSingleSubmit) {
     wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
-        struct Contents {
-            f : f32;
-        };
-        [[group(0), binding(0)]] var <uniform> contents: Contents;
+        [[group(0), binding(0)]] var <uniform> contents: f32;
 
         [[stage(compute), workgroup_size(1)]] fn main() {
-          var f : f32 = contents.f;
+          var f : f32 = contents;
         })");
 
     wgpu::ComputePipelineDescriptor cpDesc;
@@ -1035,21 +1032,13 @@ TEST_P(BindGroupTests, DynamicOffsetOrder) {
 
     wgpu::ComputePipelineDescriptor pipelineDescriptor;
     pipelineDescriptor.compute.module = utils::CreateShaderModule(device, R"(
-        struct Buffer {
-            value : u32;
-        };
-
-        struct OutputBuffer {
-            value : vec3<u32>;
-        };
-
-        [[group(0), binding(2)]] var<uniform> buffer2 : Buffer;
-        [[group(0), binding(3)]] var<storage, read> buffer3 : Buffer;
-        [[group(0), binding(0)]] var<storage, read> buffer0 : Buffer;
-        [[group(0), binding(4)]] var<storage, read_write> outputBuffer : OutputBuffer;
+        [[group(0), binding(2)]] var<uniform> buffer2 : u32;
+        [[group(0), binding(3)]] var<storage, read> buffer3 : u32;
+        [[group(0), binding(0)]] var<storage, read> buffer0 : u32;
+        [[group(0), binding(4)]] var<storage, read_write> outputBuffer : vec3<u32>;
 
         [[stage(compute), workgroup_size(1)]] fn main() {
-            outputBuffer.value = vec3<u32>(buffer0.value, buffer2.value, buffer3.value);
+            outputBuffer = vec3<u32>(buffer0, buffer2, buffer3);
         })");
     pipelineDescriptor.compute.entryPoint = "main";
     pipelineDescriptor.layout = utils::MakeBasicPipelineLayout(device, &bgl);
@@ -1518,14 +1507,10 @@ TEST_P(BindGroupTests, ReallyLargeBindGroup) {
             device, wgpu::BufferUsage::Storage, {expectedValue});
         bgEntries.push_back({nullptr, binding, buffer, 0, sizeof(uint32_t), nullptr, nullptr});
 
-        interface << "struct ReadOnlyStorageBuffer" << i << R"({
-                value : u32;
-            };
-        )";
         interface << "[[group(0), binding(" << binding++ << ")]] "
-                  << "var<storage, read> sbuf" << i << " : ReadOnlyStorageBuffer" << i << ";\n";
+                  << "var<storage, read> sbuf" << i << " : u32" << ";\n";
 
-        body << "if (sbuf" << i << ".value != " << expectedValue++ << "u) {\n";
+        body << "if (sbuf" << i << " != " << expectedValue++ << "u) {\n";
         body << "    return;\n";
         body << "}\n";
     }
@@ -1534,14 +1519,10 @@ TEST_P(BindGroupTests, ReallyLargeBindGroup) {
         device, wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc, {0});
     bgEntries.push_back({nullptr, binding, result, 0, sizeof(uint32_t), nullptr, nullptr});
 
-    interface << R"(struct ReadWriteStorageBuffer{
-            value : u32;
-        };
-    )";
     interface << "[[group(0), binding(" << binding++ << ")]] "
-              << "var<storage, read_write> result : ReadWriteStorageBuffer;\n";
+              << "var<storage, read_write> result : u32;\n";
 
-    body << "result.value = 1u;\n";
+    body << "result = 1u;\n";
 
     std::string shader = interface.str() + "[[stage(compute), workgroup_size(1)]] fn main() {\n" +
                          body.str() + "}\n";
