@@ -104,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "128fd040_56e82871",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-12T18:14:32Z",
+      "side": 1,
+      "message": "hm right now only trailing args can be optional with Dawn\u0027s generator. and we don\u0027t have a way to generate multiple C++ overloads yet.\n\nFor now, I think I\u0027ll add a concept that this argument may be \"nullable\" - which won\u0027t really do anything except assert it\u0027s a pointer type, and assert that non-nullable non-optional pointers are not nullptr.",
+      "parentUuid": "18abc53a_4cb09eb3",
+      "revId": "299cf01657823bb60e44a3c52b12f4d8f1c0f49f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "24083458_d194063a",
