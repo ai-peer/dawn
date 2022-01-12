@@ -124,6 +124,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2d0e5a1_0b3df588",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-12T21:26:12Z",
+      "side": 1,
+      "message": "Ah - then there\u0027s maybe no use in timing it then.\n\nI think we should use TRACE_EVENT0 when possible instead of BEGIN/END because it automatically handles the scoping.\n\nWe can always add curly braces to narrow  the scope.\n\n{\n   TRACE_EVENT0(...)\n   DANW_TRY_ASSING(my operation)\n}",
+      "parentUuid": "1cc5d003_352ce194",
+      "range": {
+        "startLine": 648,
+        "startChar": 28,
+        "endLine": 648,
+        "endChar": 41
+      },
+      "revId": "6193d0865a669ed0f503543d3ab2b1f73644920b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "943b394d_baad5f05",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 1
