@@ -19,6 +19,10 @@
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/WGPUHelpers.h"
 
+namespace {
+    using testing::HasSubstr;
+}  // anonymous namespace
+
 class UnsafeAPIValidationTest : public ValidationTest {
   protected:
     WGPUDevice CreateTestDevice() override {
@@ -31,6 +35,12 @@ class UnsafeAPIValidationTest : public ValidationTest {
         return adapter.CreateDevice(&descriptor);
     }
 };
+
+// Check that explicit user device.destroy() is disallowed as part of unsafe APIs.
+// TODO(crbug.com/dawn/628) Remove when CTS testing is in place and passing.
+TEST_F(UnsafeAPIValidationTest, ExplicitDeviceDestroy) {
+    ASSERT_DEVICE_ERROR(device.Destroy(), HasSubstr("Explicit device.destroy() is disallowed"));
+}
 
 // Check that pipeline overridable constants are disallowed as part of unsafe APIs.
 // TODO(dawn:1041) Remove when implementation for all backend is added
