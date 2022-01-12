@@ -16,6 +16,64 @@
       "message": "PTAL. Thank you! \n\nI feel like that we don\u0027t need to do anything on Metal. The tests can pass too. Two reasons to explain this: 1) the implementations on D3D12 and Vulkan mainly add transition barriers. But transition barriers are not explicitly exposed to developers on Metal. Metal can ensure its correctness about state transition under the hood, per my understanding. 2) Considering that the feature of readonly depth/stencil attachment adds a new texture usage (kReadOnlyRenderAttachment) for depth/stencil attachment in render pass in Dawn project, I looked into some related data structures like MTLTextureUsage (https://developer.apple.com/documentation/metal/mtltextureusage) and MTLRenderPassAttachmentDescriptor(https://developer.apple.com/documentation/metal/mtlrenderpassattachmentdescriptor), I don\u0027t think we need to do any change for this feature. ",
       "revId": "d471a1b2de772941521bfb2d21d23ef5d2507764",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d22d701_620cf4be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-12T06:06:51Z",
+      "side": 1,
+      "message": "makes sense to me",
+      "parentUuid": "592ea50c_313ef3a4",
+      "revId": "d471a1b2de772941521bfb2d21d23ef5d2507764",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9b1fdfa_f948ab94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-12T06:06:51Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d471a1b2de772941521bfb2d21d23ef5d2507764",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ebe7b4c_c782d9e3",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-12T06:06:51Z",
+      "side": 1,
+      "message": "just realized: we should probably test this both with/without use_d3d12_render_pass toggle",
+      "range": {
+        "startLine": 323,
+        "startChar": 25,
+        "endLine": 323,
+        "endChar": 37
+      },
+      "revId": "d471a1b2de772941521bfb2d21d23ef5d2507764",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
