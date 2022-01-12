@@ -285,6 +285,7 @@ namespace dawn::native { namespace {
         EXPECT_FALSE(externalTextureMock.IsAlive());
     }
 
+    /*
     // We can use an actual ExternalTexture object to test the implicit case.
     TEST_F(DestroyObjectTests, ExternalTextureImplicit) {
         ExternalTextureDescriptor desc = {};
@@ -292,7 +293,7 @@ namespace dawn::native { namespace {
         DAWN_ASSERT_AND_ASSIGN(externalTexture, mDevice.CreateExternalTexture(&desc));
 
         EXPECT_TRUE(externalTexture->IsAlive());
-    }
+    }*/
 
     TEST_F(DestroyObjectTests, PipelineLayoutExplicit) {
         PipelineLayoutMock pipelineLayoutMock(&mDevice);
@@ -635,12 +636,12 @@ namespace dawn::native { namespace {
             EXPECT_TRUE(computePipeline->IsCachedReference());
         }
 
-        Ref<ExternalTextureBase> externalTexture;
+        /*Ref<ExternalTextureBase> externalTexture;
         {
             ExternalTextureDescriptor desc = {};
             DAWN_ASSERT_AND_ASSIGN(externalTexture, mDevice.CreateExternalTexture(&desc));
             EXPECT_TRUE(externalTexture->IsAlive());
-        }
+        }*/
 
         Ref<PipelineLayoutBase> pipelineLayout;
         {
@@ -743,7 +744,7 @@ namespace dawn::native { namespace {
         EXPECT_FALSE(buffer->IsAlive());
         EXPECT_FALSE(commandBuffer->IsAlive());
         EXPECT_FALSE(computePipeline->IsAlive());
-        EXPECT_FALSE(externalTexture->IsAlive());
+        // EXPECT_FALSE(externalTexture->IsAlive());
         EXPECT_FALSE(pipelineLayout->IsAlive());
         EXPECT_FALSE(querySet->IsAlive());
         EXPECT_FALSE(renderPipeline->IsAlive());
