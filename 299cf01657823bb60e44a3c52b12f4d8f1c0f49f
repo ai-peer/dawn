@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffcb83d0_88577fba",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-12T21:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e798f26_2c9cbede",
+      "revId": "299cf01657823bb60e44a3c52b12f4d8f1c0f49f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e8b6ca4_372ee761",
@@ -124,6 +142,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e9d75d99_5db0c89e",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-12T21:58:16Z",
+      "side": 1,
+      "message": "I realized this is also a problem with requestDevice. For now I just made nullptr valid because the generator can\u0027t support optional. I\u0027ll work on a generator change as a follow-up - which may even allow the no-arguments version :)",
+      "parentUuid": "128fd040_56e82871",
+      "revId": "299cf01657823bb60e44a3c52b12f4d8f1c0f49f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "24083458_d194063a",
         "filename": "src/dawn_native/Instance.cpp",
         "patchSetId": 7
@@ -169,6 +205,30 @@
       "writtenOn": "2022-01-12T18:37:20Z",
       "side": 1,
       "message": "Hmm, WDYT about keeping mAdapters sorted in the preferred order, and creating filters out of the options which we just then pass to an std::find or something? Not really necessary but just a thought since maybe we might add more filter options in the future.",
+      "range": {
+        "startLine": 157,
+        "startChar": 8,
+        "endLine": 198,
+        "endChar": 9
+      },
+      "revId": "299cf01657823bb60e44a3c52b12f4d8f1c0f49f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e3a4f3e_d54e514f",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-12T21:58:16Z",
+      "side": 1,
+      "message": "hmm.. discover adapters may add additional adapters to |mAdapters| though so we would need to re-sort every time this function is called. So not sure it\u0027ll actually help a ton. Keeping the way it is for now.",
+      "parentUuid": "68911a58_ea7f1a0f",
       "range": {
         "startLine": 157,
         "startChar": 8,
