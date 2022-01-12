@@ -70,6 +70,41 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b507aed_c7306be2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-01-12T18:06:50Z",
+      "side": 1,
+      "message": "OK. I will submit a follow-up patch for that soon.",
+      "parentUuid": "ff349a7b_c123cda1",
+      "revId": "d471a1b2de772941521bfb2d21d23ef5d2507764",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9d9fb42_8f6a7b19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-01-12T18:06:50Z",
+      "side": 1,
+      "message": "Thanks for your review, Austin and Corentin. Merging now.",
+      "revId": "d471a1b2de772941521bfb2d21d23ef5d2507764",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ebe7b4c_c782d9e3",
