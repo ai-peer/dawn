@@ -16,6 +16,109 @@
       "message": "PTAL! Cleaned up a bit from what I used to profile the Unity shaders, and made sure to cover each of the backends to some degree (though they\u0027re not symmetrical.)",
       "revId": "6193d0865a669ed0f503543d3ab2b1f73644920b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7696852b_43d1f051",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-12T20:43:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6193d0865a669ed0f503543d3ab2b1f73644920b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "912e3db2_568a4342",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-12T20:43:02Z",
+      "side": 1,
+      "message": "nit: here and elsewhere, usually we don\u0027t include the ()",
+      "range": {
+        "startLine": 451,
+        "startChar": 74,
+        "endLine": 451,
+        "endChar": 76
+      },
+      "revId": "6193d0865a669ed0f503543d3ab2b1f73644920b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c31afbaa_a269eccc",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-12T20:43:02Z",
+      "side": 1,
+      "message": "nit: do you think it\u0027s worth timing this directly as well? - ditto for other backends",
+      "range": {
+        "startLine": 648,
+        "startChar": 28,
+        "endLine": 648,
+        "endChar": 41
+      },
+      "revId": "6193d0865a669ed0f503543d3ab2b1f73644920b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "943b394d_baad5f05",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-12T20:43:02Z",
+      "side": 1,
+      "message": "nit: and this",
+      "range": {
+        "startLine": 677,
+        "startChar": 12,
+        "endLine": 677,
+        "endChar": 85
+      },
+      "revId": "6193d0865a669ed0f503543d3ab2b1f73644920b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb6aaf48_5309ce0d",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-12T20:43:02Z",
+      "side": 1,
+      "message": "nit: maybe we should just pass the Platform* into CompileShader, and also put the TRACE_EVENT here instead of in CompileShaderFXC.\n\nOverall, we\u0027ve tried to limit the inputs to the Compile functions so we don\u0027t accidentally start relying on other things from the device (like features/extensions enabled) that weren\u0027t included in the |request| and not part of the cache key.\n\nSo concretely, suggestion is: use Platform* instead of Device* where possible. minimize arguments added to Compile functions where possible",
+      "revId": "6193d0865a669ed0f503543d3ab2b1f73644920b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
