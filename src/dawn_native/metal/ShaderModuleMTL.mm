@@ -19,6 +19,8 @@
 #include "dawn_native/metal/DeviceMTL.h"
 #include "dawn_native/metal/PipelineLayoutMTL.h"
 #include "dawn_native/metal/RenderPipelineMTL.h"
+#include "dawn_platform/DawnPlatform.h"
+#include "dawn_platform/tracing/TraceEvent.h"
 
 #include <tint/tint.h>
 
@@ -54,6 +56,8 @@ namespace dawn_native::metal {
         bool* needsStorageBufferLength,
         bool* hasInvariantAttribute,
         std::vector<uint32_t>* workgroupAllocations) {
+        TRACE_EVENT0(GetDevice()->GetPlatform(), General, "ShaderModuleMTL::TranslateToMSL()");
+
         ScopedTintICEHandler scopedICEHandler(GetDevice());
 
         std::ostringstream errorStream;
@@ -174,6 +178,8 @@ namespace dawn_native::metal {
                                             id constantValuesPointer,
                                             uint32_t sampleMask,
                                             const RenderPipeline* renderPipeline) {
+        TRACE_EVENT0(GetDevice()->GetPlatform(), General, "ShaderModuleMTL::CreateFunction()");
+
         ASSERT(!IsError());
         ASSERT(out);
 
@@ -216,10 +222,15 @@ namespace dawn_native::metal {
         }
         auto mtlDevice = ToBackend(GetDevice())->GetMTLDevice();
         NSError* error = nullptr;
+
+        TRACE_EVENT_BEGIN0(GetDevice()->GetPlatform(), General,
+                           "MTLDevice::newLibraryWithSource()");
         NSPRef<id<MTLLibrary>> library =
             AcquireNSPRef([mtlDevice newLibraryWithSource:mslSource.Get()
                                                   options:compileOptions.Get()
                                                     error:&error]);
+        TRACE_EVENT_END0(GetDevice()->GetPlatform(), General, "MTLDevice::newLibraryWithSource()");
+
         if (error != nullptr) {
             DAWN_INVALID_IF(error.code != MTLLibraryErrorCompileWarning,
                             "Unable to create library object: %s.",
@@ -230,6 +241,7 @@ namespace dawn_native::metal {
         NSRef<NSString> name =
             AcquireNSRef([[NSString alloc] initWithUTF8String:remappedEntryPointName.c_str()]);
 
+        TRACE_EVENT0(GetDevice()->GetPlatform(), General, "MTLLibrary::newFunctionWithName()");
         if (constantValuesPointer != nil) {
             if (@available(macOS 10.12, *)) {
                 MTLFunctionConstantValues* constantValues = constantValuesPointer;

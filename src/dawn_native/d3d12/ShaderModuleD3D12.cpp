@@ -26,6 +26,8 @@
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/UtilsD3D12.h"
+#include "dawn_platform/DawnPlatform.h"
+#include "dawn_platform/tracing/TraceEvent.h"
 
 #include <d3dcompiler.h>
 
@@ -214,6 +216,8 @@ namespace dawn_native::d3d12 {
                 const tint::Program* program,
                 const EntryPointMetadata& entryPoint,
                 const ProgrammableStage& programmableStage) {
+                TRACE_EVENT0(device->GetPlatform(), General,
+                             "ShaderModuleD3D12::ShaderCompilationRequest::Create");
                 Compiler compiler;
                 uint64_t dxcVersion = 0;
                 if (device->IsToggleEnabled(Toggle::UseDXC)) {
@@ -439,10 +443,13 @@ namespace dawn_native::d3d12 {
             return arguments;
         }
 
-        ResultOrError<ComPtr<IDxcBlob>> CompileShaderDXC(IDxcLibrary* dxcLibrary,
+        ResultOrError<ComPtr<IDxcBlob>> CompileShaderDXC(const Device* device,
+                                                         IDxcLibrary* dxcLibrary,
                                                          IDxcCompiler* dxcCompiler,
                                                          const ShaderCompilationRequest& request,
                                                          const std::string& hlslSource) {
+            TRACE_EVENT0(device->GetPlatform(), General, "CompileShaderDXC()");
+
             ComPtr<IDxcBlobEncoding> sourceBlob;
             DAWN_TRY(
                 CheckHRESULT(dxcLibrary->CreateBlobWithEncodingOnHeapCopy(
@@ -554,9 +561,12 @@ namespace dawn_native::d3d12 {
             return result;
         }
 
-        ResultOrError<ComPtr<ID3DBlob>> CompileShaderFXC(const PlatformFunctions* functions,
+        ResultOrError<ComPtr<ID3DBlob>> CompileShaderFXC(const Device* device,
+                                                         const PlatformFunctions* functions,
                                                          const ShaderCompilationRequest& request,
                                                          const std::string& hlslSource) {
+            TRACE_EVENT0(device->GetPlatform(), General, "CompileShaderFXC()");
+
             const char* targetProfile = nullptr;
             switch (request.stage) {
                 case SingleShaderStage::Vertex:
@@ -596,8 +606,11 @@ namespace dawn_native::d3d12 {
             return std::move(compiledShader);
         }
 
-        ResultOrError<std::string> TranslateToHLSL(const ShaderCompilationRequest& request,
+        ResultOrError<std::string> TranslateToHLSL(const Device* device,
+                                                   const ShaderCompilationRequest& request,
                                                    std::string* remappedEntryPointName) {
+            TRACE_EVENT0(device->GetPlatform(), General, "TranslateToHLSL()");
+
             std::ostringstream errorStream;
             errorStream << "Tint HLSL failure:" << std::endl;
 
@@ -669,7 +682,8 @@ namespace dawn_native::d3d12 {
         }
 
         template <typename F>
-        MaybeError CompileShader(const PlatformFunctions* functions,
+        MaybeError CompileShader(const Device* device,
+                                 const PlatformFunctions* functions,
                                  IDxcLibrary* dxcLibrary,
                                  IDxcCompiler* dxcCompiler,
                                  ShaderCompilationRequest&& request,
@@ -679,7 +693,7 @@ namespace dawn_native::d3d12 {
             // Compile the source shader to HLSL.
             std::string hlslSource;
             std::string remappedEntryPoint;
-            DAWN_TRY_ASSIGN(hlslSource, TranslateToHLSL(request, &remappedEntryPoint));
+            DAWN_TRY_ASSIGN(hlslSource, TranslateToHLSL(device, request, &remappedEntryPoint));
             if (dumpShaders) {
                 std::ostringstream dumpedMsg;
                 dumpedMsg << "/* Dumped generated HLSL */" << std::endl << hlslSource;
@@ -688,12 +702,13 @@ namespace dawn_native::d3d12 {
             request.entryPointName = remappedEntryPoint.c_str();
             switch (request.compiler) {
                 case ShaderCompilationRequest::Compiler::DXC:
-                    DAWN_TRY_ASSIGN(compiledShader->compiledDXCShader,
-                                    CompileShaderDXC(dxcLibrary, dxcCompiler, request, hlslSource));
+                    DAWN_TRY_ASSIGN(
+                        compiledShader->compiledDXCShader,
+                        CompileShaderDXC(device, dxcLibrary, dxcCompiler, request, hlslSource));
                     break;
                 case ShaderCompilationRequest::Compiler::FXC:
                     DAWN_TRY_ASSIGN(compiledShader->compiledFXCShader,
-                                    CompileShaderFXC(functions, request, hlslSource));
+                                    CompileShaderFXC(device, functions, request, hlslSource));
                     break;
             }
 
@@ -743,6 +758,7 @@ namespace dawn_native::d3d12 {
                                                         SingleShaderStage stage,
                                                         PipelineLayout* layout,
                                                         uint32_t compileFlags) {
+        TRACE_EVENT0(GetDevice()->GetPlatform(), General, "ShaderModuleD3D12::Compile");
         ASSERT(!IsError());
         ScopedTintICEHandler scopedICEHandler(GetDevice());
 
@@ -755,6 +771,7 @@ namespace dawn_native::d3d12 {
 
         const tint::Program* program;
         tint::Program programAsValue;
+
         if (stage == SingleShaderStage::Vertex) {
             transformManager.Add<tint::transform::FirstIndexOffset>();
             transformInputs.Add<tint::transform::FirstIndexOffset::BindingPoint>(
@@ -799,7 +816,7 @@ namespace dawn_native::d3d12 {
             device->GetPersistentCache()->GetOrCreate(
                 shaderCacheKey, [&](auto doCache) -> MaybeError {
                     DAWN_TRY(CompileShader(
-                        device->GetFunctions(),
+                        device, device->GetFunctions(),
                         device->IsToggleEnabled(Toggle::UseDXC) ? device->GetDxcLibrary().Get()
                                                                 : nullptr,
                         device->IsToggleEnabled(Toggle::UseDXC) ? device->GetDxcCompiler().Get()
@@ -809,6 +826,7 @@ namespace dawn_native::d3d12 {
                             GetDevice()->EmitLog(loggingType, message);
                         },
                         &compiledShader));
+
                     const D3D12_SHADER_BYTECODE shader = compiledShader.GetD3D12ShaderBytecode();
                     doCache(shader.pShaderBytecode, shader.BytecodeLength);
                     return {};
