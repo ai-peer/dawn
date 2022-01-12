@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_EXTERNALTEXTURE_H_
 #define DAWNNATIVE_EXTERNALTEXTURE_H_
 
+#include "dawn_native/Buffer.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/ObjectBase.h"
@@ -24,8 +25,19 @@
 
 namespace dawn::native {
 
-    struct ExternalTextureDescriptor;
     class TextureViewBase;
+
+    struct ExternalTextureDescriptor;
+
+    struct ExternalTextureParams {
+        uint32_t numPlanes;
+        float vr;
+        float vg;
+        float ub;
+        float ug;
+    };
+
+    enum ExternalTextureComponent { plane0, plane1, params };
 
     MaybeError ValidateExternalTextureDescriptor(const DeviceBase* device,
                                                  const ExternalTextureDescriptor* descriptor);
@@ -39,10 +51,11 @@ namespace dawn::native {
         const std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat>& GetTextureViews() const;
 
         MaybeError ValidateCanUseInSubmitNow() const;
-
+        MaybeError Initialize(DeviceBase* device, const ExternalTextureDescriptor* descriptor);
         static ExternalTextureBase* MakeError(DeviceBase* device);
 
         ObjectType GetType() const override;
+        Ref<BufferBase> GetParamsBuffer() const;
 
         void APIDestroy();
 
@@ -55,8 +68,9 @@ namespace dawn::native {
         enum class ExternalTextureState { Alive, Destroyed };
         ExternalTextureBase(DeviceBase* device, const ExternalTextureDescriptor* descriptor);
         ExternalTextureBase(DeviceBase* device, ObjectBase::ErrorTag tag);
-        std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat> textureViews;
+        std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat> mTextureViews;
         ExternalTextureState mState;
+        Ref<BufferBase> mParamsBuffer;
     };
 }  // namespace dawn::native
 

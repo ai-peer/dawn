@@ -14,8 +14,10 @@
 
 #include "dawn_native/ExternalTexture.h"
 
+#include "dawn_native/Buffer.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/ObjectType_autogen.h"
+#include "dawn_native/Queue.h"
 #include "dawn_native/Texture.h"
 
 #include "dawn_native/dawn_platform.h"
@@ -61,13 +63,32 @@ namespace dawn::native {
         DAWN_TRY_ASSIGN(format, device->GetInternalFormat(descriptor->format));
         DAWN_UNUSED(format);
 
+        DAWN_INVALID_IF(descriptor->colorSpace != wgpu::PredefinedColorSpace::Srgb,
+                        "An external texture destination colorspace must be srgb.");
+
         switch (descriptor->format) {
             case wgpu::TextureFormat::RGBA8Unorm:
             case wgpu::TextureFormat::BGRA8Unorm:
             case wgpu::TextureFormat::RGBA16Float:
+                DAWN_INVALID_IF(descriptor->plane1 != nullptr,
+                                "An single-planar format cannot be used when more than one texture "
+                                "plane is present.");
                 DAWN_TRY_CONTEXT(
                     ValidateExternalTexturePlane(descriptor->plane0, descriptor->format),
                     "validating plane0 against the external texture format (%s)",
+                    descriptor->format);
+                break;
+            case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+                DAWN_INVALID_IF(
+                    descriptor->plane1 == nullptr,
+                    "A biplanar format cannot be used when only one texture plane is present.");
+                DAWN_TRY_CONTEXT(
+                    ValidateExternalTexturePlane(descriptor->plane0, descriptor->format),
+                    "validating plane0 against the external texture format (%s)",
+                    descriptor->format);
+                DAWN_TRY_CONTEXT(
+                    ValidateExternalTexturePlane(descriptor->plane1, descriptor->format),
+                    "validating plane1 against the external texture format (%s)",
                     descriptor->format);
                 break;
             default:
@@ -84,13 +105,13 @@ namespace dawn::native {
         const ExternalTextureDescriptor* descriptor) {
         Ref<ExternalTextureBase> externalTexture =
             AcquireRef(new ExternalTextureBase(device, descriptor));
+        DAWN_TRY(externalTexture->Initialize(device, descriptor));
         return std::move(externalTexture);
     }
 
     ExternalTextureBase::ExternalTextureBase(DeviceBase* device,
                                              const ExternalTextureDescriptor* descriptor)
         : ApiObjectBase(device, descriptor->label), mState(ExternalTextureState::Alive) {
-        textureViews[0] = descriptor->plane0;
         TrackInDevice();
     }
 
@@ -103,9 +124,58 @@ namespace dawn::native {
         : ApiObjectBase(device, tag) {
     }
 
+    MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
+                                               const ExternalTextureDescriptor* descriptor) {
+        // Store any passed in TextureViews associated with individual planes.
+        mTextureViews[0] = descriptor->plane0;
+
+        if (descriptor->plane1) {
+            mTextureViews[1] = descriptor->plane1;
+        }
+
+        // We must create a buffer to store parameters needed by a shader that operates on this
+        // external texture.
+        BufferDescriptor desc;
+        desc.size = sizeof(ExternalTextureParams);
+        desc.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;
+        desc.label = "Dawn_External_Texture_Params_Buffer";
+
+        DAWN_TRY_ASSIGN(mParamsBuffer, device->CreateBuffer(&desc));
+
+        // Dawn & Tint's YUV to RGB conversion implementation was inspired by the conversions found
+        // in libYUV. If this implementation needs expanded to support more colorspaces, this file
+        // is an excellent reference: chromium/src/third_party/libyuv/source/row_common.cc.
+        //
+        // The conversion from YUV to RGB looks like this:
+        // r = Y * 1.164          + V * vr
+        // g = Y * 1.164 - U * ug - V * vg
+        // b = Y * 1.164 + U * ub
+        //
+        // By changing the values of vr, vg, ub, and ug we can change the destination color space.
+        ExternalTextureParams params;
+        params.numPlanes = descriptor->plane1 == nullptr ? 1 : 2;
+
+        switch (descriptor->colorSpace) {
+            case wgpu::PredefinedColorSpace::Srgb:
+                // Numbers derived from ITU-R recommendation for limited range BT.709
+                params.vr = 1.793;
+                params.vg = 0.392;
+                params.ub = 0.813;
+                params.ug = 2.017;
+                break;
+            default:
+                UNREACHABLE();
+        }
+
+        DAWN_TRY(device->GetQueue()->WriteBuffer(mParamsBuffer.Get(), 0, &params,
+                                                 sizeof(ExternalTextureParams)));
+
+        return {};
+    }
+
     const std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat>&
     ExternalTextureBase::GetTextureViews() const {
-        return textureViews;
+        return mTextureViews;
     }
 
     MaybeError ExternalTextureBase::ValidateCanUseInSubmitNow() const {
@@ -135,4 +205,7 @@ namespace dawn::native {
         return ObjectType::ExternalTexture;
     }
 
+    Ref<BufferBase> ExternalTextureBase::GetParamsBuffer() const {
+        return mParamsBuffer;
+    }
 }  // namespace dawn::native
