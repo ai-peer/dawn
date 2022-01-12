@@ -22,6 +22,8 @@
 #include "dawn_native/vulkan/PipelineLayoutVk.h"
 #include "dawn_native/vulkan/UtilsVulkan.h"
 #include "dawn_native/vulkan/VulkanError.h"
+#include "dawn_platform/DawnPlatform.h"
+#include "dawn_platform/tracing/TraceEvent.h"
 
 #include <tint/tint.h>
 #include <spirv-tools/libspirv.hpp>
@@ -110,6 +112,9 @@ namespace dawn_native::vulkan {
     ResultOrError<VkShaderModule> ShaderModule::GetTransformedModuleHandle(
         const char* entryPointName,
         PipelineLayout* layout) {
+        TRACE_EVENT0(GetDevice()->GetPlatform(), General,
+                     "ShaderModuleVk::GetTransformedModuleHandle");
+
         // If the shader was destroyed, we should never call this function.
         ASSERT(IsAlive());
 
@@ -161,13 +166,20 @@ namespace dawn_native::vulkan {
         transformInputs.Add<tint::transform::SingleEntryPoint::Config>(entryPointName);
 
         tint::Program program;
-        DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, GetTintProgram(), transformInputs,
-                                               nullptr, nullptr));
+        {
+            TRACE_EVENT0(GetDevice()->GetPlatform(), General, "RunTransforms");
+            DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, GetTintProgram(),
+                                                   transformInputs, nullptr, nullptr));
+        }
 
         tint::writer::spirv::Options options;
         options.emit_vertex_point_size = true;
         options.disable_workgroup_init = GetDevice()->IsToggleEnabled(Toggle::DisableWorkgroupInit);
+
+        TRACE_EVENT_BEGIN0(GetDevice()->GetPlatform(), General, "tint::writer::spirv::Generate()");
         auto result = tint::writer::spirv::Generate(&program, options);
+        TRACE_EVENT_END0(GetDevice()->GetPlatform(), General, "tint::writer::spirv::Generate()");
+
         DAWN_INVALID_IF(!result.success, "An error occured while generating SPIR-V: %s.",
                         result.error);
 
@@ -185,10 +197,12 @@ namespace dawn_native::vulkan {
         Device* device = ToBackend(GetDevice());
 
         VkShaderModule newHandle = VK_NULL_HANDLE;
-
-        DAWN_TRY(CheckVkSuccess(
-            device->fn.CreateShaderModule(device->GetVkDevice(), &createInfo, nullptr, &*newHandle),
-            "CreateShaderModule"));
+        {
+            TRACE_EVENT0(GetDevice()->GetPlatform(), General, "vkCreateShaderModule");
+            DAWN_TRY(CheckVkSuccess(device->fn.CreateShaderModule(
+                                        device->GetVkDevice(), &createInfo, nullptr, &*newHandle),
+                                    "CreateShaderModule"));
+        }
         if (newHandle != VK_NULL_HANDLE) {
             newHandle =
                 mTransformedShaderModuleCache->AddOrGetCachedShaderModule(cacheKey, newHandle);
