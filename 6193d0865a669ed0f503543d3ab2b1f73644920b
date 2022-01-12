@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "572077b4_bd148d7c",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-01-12T22:25:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "912e3db2_568a4342",
+      "range": {
+        "startLine": 451,
+        "startChar": 74,
+        "endLine": 451,
+        "endChar": 76
+      },
+      "revId": "6193d0865a669ed0f503543d3ab2b1f73644920b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c31afbaa_a269eccc",
@@ -146,6 +170,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b700205_dd1e8dac",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-01-12T22:25:43Z",
+      "side": 1,
+      "message": "Ah, good suggestion with using a narrowed scope and TRACE_EVENT! Thanks!\n\nAlso, I reconfigured my code and did a few more tests and now I AM seeing RunTransforms show up as a significant chunk of the time spent when compiling shaders. Must have done something wrong previously. I\u0027ve wrapped it in a trace now, thanks for prompting me to look at it again.",
+      "parentUuid": "b2d0e5a1_0b3df588",
+      "range": {
+        "startLine": 648,
+        "startChar": 28,
+        "endLine": 648,
+        "endChar": 41
+      },
+      "revId": "6193d0865a669ed0f503543d3ab2b1f73644920b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "943b394d_baad5f05",
@@ -169,6 +217,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07685e7c_41128e30",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-01-12T22:25:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "943b394d_baad5f05",
+      "range": {
+        "startLine": 677,
+        "startChar": 12,
+        "endLine": 677,
+        "endChar": 85
+      },
+      "revId": "6193d0865a669ed0f503543d3ab2b1f73644920b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb6aaf48_5309ce0d",
@@ -182,6 +254,24 @@
       "writtenOn": "2022-01-12T20:43:02Z",
       "side": 1,
       "message": "nit: maybe we should just pass the Platform* into CompileShader, and also put the TRACE_EVENT here instead of in CompileShaderFXC.\n\nOverall, we\u0027ve tried to limit the inputs to the Compile functions so we don\u0027t accidentally start relying on other things from the device (like features/extensions enabled) that weren\u0027t included in the |request| and not part of the cache key.\n\nSo concretely, suggestion is: use Platform* instead of Device* where possible. minimize arguments added to Compile functions where possible",
+      "revId": "6193d0865a669ed0f503543d3ab2b1f73644920b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81efa2e9_6d16cf6a",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-01-12T22:25:43Z",
+      "side": 1,
+      "message": "Refactored to only pass Platform*, and try to minimize how many places it needs to be passed.",
+      "parentUuid": "bb6aaf48_5309ce0d",
       "revId": "6193d0865a669ed0f503543d3ab2b1f73644920b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
