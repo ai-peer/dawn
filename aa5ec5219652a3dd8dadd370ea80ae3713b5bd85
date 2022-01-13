@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3bb5a79_c7f9ac5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-13T23:25:07Z",
+      "side": 1,
+      "message": "GPUExternalTextureDescriptor.colorSpace controls the output color space of a sample operation on the external texture - that is, the R,G,B values you get from the sample encode a particular color using that color space.\n\nIt only has one valid value right now, \"srgb\" (\u0027undefined\u0027 is not possible in the spec, it defaults to \"srgb\"), though I expect it to later gain other well-defined spaces like \"srgb-linear\" and \"display-p3\".\n\nIf you don\u0027t have color conversions implemented for single-plane I think that\u0027s OK for now, and maybe WGPUPredefinedColorSpace_Undefined is a good way to represent that, but eventually we\u0027re going to want to implement it. Have you looked at Shaobo\u0027s color conversion code? It\u0027s probably simple enough that we don\u0027t need to actually share code, but we can copy a lot of it.\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/CopyTextureForBrowserHelper.cpp",
+      "parentUuid": "3ca55ef5_9b7dcaa4",
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef5a7824_3403a949",
         "filename": "src/dawn_native/ExternalTexture.cpp",
         "patchSetId": 4
