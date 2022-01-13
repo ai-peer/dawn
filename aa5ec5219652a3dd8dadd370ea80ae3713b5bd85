@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15500690_35ee8e23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-01-13T21:12:26Z",
+      "side": 1,
+      "message": "PTAL. I\u0027m still fuzzy on when/how the colorspace parameter is used. Seems like requiring undefined for single plane and requiring srgb for multiplane might make sense (because that\u0027s what operations are implemented).",
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
