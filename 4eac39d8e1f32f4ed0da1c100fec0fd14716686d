@@ -16,6 +16,108 @@
       "message": "Addressed all feedback, thanks!",
       "revId": "4eac39d8e1f32f4ed0da1c100fec0fd14716686d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ba8993e_5e5da2e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-13T09:45:35Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "4eac39d8e1f32f4ed0da1c100fec0fd14716686d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df3cef4d_a50ec361",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-13T09:45:35Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "4eac39d8e1f32f4ed0da1c100fec0fd14716686d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53cdc817_716d9497",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-13T09:45:35Z",
+      "side": 1,
+      "message": "u-nit: ditto",
+      "revId": "4eac39d8e1f32f4ed0da1c100fec0fd14716686d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3632a0ed_8335d7b2",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-13T09:45:35Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "4eac39d8e1f32f4ed0da1c100fec0fd14716686d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73e75506_a896d1da",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-13T09:45:35Z",
+      "side": 1,
+      "message": "u-nit: ditto",
+      "revId": "4eac39d8e1f32f4ed0da1c100fec0fd14716686d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae44e018_aa4ac27f",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-13T09:45:35Z",
+      "side": 1,
+      "message": "u-nit: maybe we can use scoping here like we did for tint::Program above.",
+      "revId": "4eac39d8e1f32f4ed0da1c100fec0fd14716686d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
