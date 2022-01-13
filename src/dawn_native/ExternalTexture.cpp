@@ -61,13 +61,32 @@ namespace dawn::native {
         DAWN_TRY_ASSIGN(format, device->GetInternalFormat(descriptor->format));
         DAWN_UNUSED(format);
 
+        DAWN_INVALID_IF(descriptor->colorSpace != wgpu::PredefinedColorSpace::Srgb,
+                        "An external texture destination colorspace must be srgb.");
+
         switch (descriptor->format) {
             case wgpu::TextureFormat::RGBA8Unorm:
             case wgpu::TextureFormat::BGRA8Unorm:
             case wgpu::TextureFormat::RGBA16Float:
+                DAWN_INVALID_IF(descriptor->plane1 != nullptr,
+                                "An single-planar format cannot be used when more than one texture "
+                                "plane is present.");
                 DAWN_TRY_CONTEXT(
                     ValidateExternalTexturePlane(descriptor->plane0, descriptor->format),
                     "validating plane0 against the external texture format (%s)",
+                    descriptor->format);
+                break;
+            case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+                DAWN_INVALID_IF(
+                    descriptor->plane1 == nullptr,
+                    "A biplanar format cannot be used when only one texture plane is present.");
+                DAWN_TRY_CONTEXT(
+                    ValidateExternalTexturePlane(descriptor->plane0, descriptor->format),
+                    "validating plane0 against the external texture format (%s)",
+                    descriptor->format);
+                DAWN_TRY_CONTEXT(
+                    ValidateExternalTexturePlane(descriptor->plane1, descriptor->format),
+                    "validating plane1 against the external texture format (%s)",
                     descriptor->format);
                 break;
             default:
@@ -84,13 +103,13 @@ namespace dawn::native {
         const ExternalTextureDescriptor* descriptor) {
         Ref<ExternalTextureBase> externalTexture =
             AcquireRef(new ExternalTextureBase(device, descriptor));
+        DAWN_TRY(externalTexture->Initialize(device, descriptor));
         return std::move(externalTexture);
     }
 
     ExternalTextureBase::ExternalTextureBase(DeviceBase* device,
                                              const ExternalTextureDescriptor* descriptor)
         : ApiObjectBase(device, descriptor->label), mState(ExternalTextureState::Alive) {
-        textureViews[0] = descriptor->plane0;
         TrackInDevice();
     }
 
@@ -103,9 +122,21 @@ namespace dawn::native {
         : ApiObjectBase(device, tag) {
     }
 
+    MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
+                                               const ExternalTextureDescriptor* descriptor) {
+        // Store any passed in TextureViews associated with individual planes.
+        mTextureViews[0] = descriptor->plane0;
+
+        if (descriptor->plane1) {
+            mTextureViews[1] = descriptor->plane1;
+        }
+
+        return {};
+    }
+
     const std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat>&
     ExternalTextureBase::GetTextureViews() const {
-        return textureViews;
+        return mTextureViews;
     }
 
     MaybeError ExternalTextureBase::ValidateCanUseInSubmitNow() const {
