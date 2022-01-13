@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6361d24_66001060",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-13T09:15:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b66bfc0_273fd95e",
+      "revId": "c543d37e31010bcc10294ed4130df7b23390cbaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a84fbe4f_01e68f1f",
