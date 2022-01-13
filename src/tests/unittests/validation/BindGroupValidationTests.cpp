@@ -58,7 +58,6 @@ class BindGroupValidationTest : public ValidationTest {
             mSampledTextureView = mSampledTexture.CreateView();
 
             wgpu::ExternalTextureDescriptor externalTextureDesc;
-            externalTextureDesc.format = kDefaultTextureFormat;
             externalTextureDesc.plane0 = mSampledTextureView;
             mExternalTexture = device.CreateExternalTexture(&externalTextureDesc);
             mExternalTextureBindingEntry.externalTexture = mExternalTexture;
@@ -311,7 +310,6 @@ TEST_F(BindGroupValidationTest, ExternalTextureBindingType) {
         CreateTexture(wgpu::TextureUsage::TextureBinding, kDefaultTextureFormat, 1);
     wgpu::ExternalTextureDescriptor externalDesc;
     externalDesc.plane0 = texture.CreateView();
-    externalDesc.format = kDefaultTextureFormat;
     wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
 
     // Create a bind group layout for a single external texture
@@ -357,9 +355,11 @@ TEST_F(BindGroupValidationTest, ExternalTextureBindingType) {
 
     // Setting the external texture to an error external texture is an error.
     {
+        wgpu::Texture errorTexture = CreateTexture(wgpu::TextureUsage::TextureBinding,
+                                                   wgpu::TextureFormat::RGBA8UnormSrgb, 1);
+        wgpu::ExternalTextureDescriptor externalDesc;
         wgpu::ExternalTextureDescriptor errorExternalDesciptor;
-        errorExternalDesciptor.plane0 = texture.CreateView();
-        errorExternalDesciptor.format = wgpu::TextureFormat::R8Uint;
+        errorExternalDesciptor.plane0 = errorTexture.CreateView();
 
         wgpu::ExternalTexture errorExternalTexture;
         ASSERT_DEVICE_ERROR(errorExternalTexture =
