@@ -16,6 +16,121 @@
       "message": "PTAL!",
       "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9bf1297_126cac23",
+        "filename": "docs/features/dawn_internal_usages.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-13T23:14:26Z",
+      "side": 1,
+      "message": "I think it would be easier to understand the usage/examples if they followed immediately after the \"Add ...\" bullets above. Or at least some sort of delimiter between the two different examples being shown here.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 3
+      },
+      "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e64ed515_77dfa9dd",
+        "filename": "src/dawn_native/CommandValidation.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-13T23:14:26Z",
+      "side": 1,
+      "message": "Maybe worth to default this to Default? Then we don\u0027t need to update [1].",
+      "range": {
+        "startLine": 83,
+        "startChar": 32,
+        "endLine": 83,
+        "endChar": 56
+      },
+      "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2573bc36_3a8b82a8",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-13T23:14:26Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 353,
+        "startChar": 8,
+        "endLine": 361,
+        "endChar": 65
+      },
+      "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c76f989a_ce38b3b2",
+        "filename": "src/tests/unittests/validation/InternalUsageValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-13T23:14:26Z",
+      "side": 1,
+      "message": "I think short substr check is fine, but I think that the substr should also be unique enough to guarantee that the failure is the expected failure, otherwise we run into the same issues where we could fail for the wrong reason.\n\nIn this case, I think \"is invalid\" is too generic for this validation. It\u0027s generic enough that I would just consider leaving it out entirely, or making it a bit more specific.",
+      "range": {
+        "startLine": 62,
+        "startChar": 61,
+        "endLine": 62,
+        "endChar": 73
+      },
+      "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35bef9d9_4ae7d806",
+        "filename": "src/tests/unittests/validation/InternalUsageValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-13T23:14:26Z",
+      "side": 1,
+      "message": "Just as a topic for discussion (potentially outside the scope of this CL):\n\nIf we do error matching in the tests, maybe the paradigm of having \"control\" cases isn\u0027t necessary as much anymore? WDYT?",
+      "range": {
+        "startLine": 225,
+        "startChar": 4,
+        "endLine": 234,
+        "endChar": 5
+      },
+      "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
