@@ -33,6 +33,24 @@
       "message": "overall, if we\u0027re going to use strings, we should probably make them more minimal, like \"is disallowed\". But this one is going away very soon, so eh.",
       "revId": "b231b97f3af9d81087fe41b94d826b0b781466a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d15ae1cf_a53490ea",
+        "filename": "src/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-13T23:44:47Z",
+      "side": 1,
+      "message": "Yea, similar to my comment in the other CL, I agree with minimal, but it should also be unique. Probably \"device.destroy() is disallowed\" for this one would be what I would deem necessary. But since it\u0027s going away soon, I will just leave it?",
+      "parentUuid": "b53c738e_34fe91b3",
+      "revId": "b231b97f3af9d81087fe41b94d826b0b781466a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
