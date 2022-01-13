@@ -60,6 +60,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "807fc380_2ca72750",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-13T09:18:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "134cc47f_5b831a07",
+      "range": {
+        "startLine": 712,
+        "startChar": 12,
+        "endLine": 712,
+        "endChar": 69
+      },
+      "revId": "4e885305075417f90cd9587c2344fc3ad25bef70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "dff9c23c_ffbccbff",
         "filename": "src/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
         "patchSetId": 12
