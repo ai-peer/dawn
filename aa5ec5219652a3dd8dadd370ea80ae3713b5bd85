@@ -16,6 +16,162 @@
       "message": "PTAL. I\u0027m still fuzzy on when/how the colorspace parameter is used. Seems like requiring undefined for single plane and requiring srgb for multiplane might make sense (because that\u0027s what operations are implemented).",
       "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ca55ef5_9b7dcaa4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-13T22:49:43Z",
+      "side": 1,
+      "message": "adding kainino@ for clarification on this question",
+      "parentUuid": "15500690_35ee8e23",
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef5a7824_3403a949",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-13T22:49:43Z",
+      "side": 1,
+      "message": "(%s) ... descriptor-\u003eformat",
+      "range": {
+        "startLine": 69,
+        "startChar": 56,
+        "endLine": 69,
+        "endChar": 57
+      },
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0f98118_3f2ad215",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-13T22:49:43Z",
+      "side": 1,
+      "message": "(%s) ... descriptor-\u003eformat",
+      "range": {
+        "startLine": 79,
+        "startChar": 38,
+        "endLine": 79,
+        "endChar": 39
+      },
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d77e234_ab530eaa",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-13T22:49:43Z",
+      "side": 1,
+      "message": "nit: prefer phrasing as \"Multiplanar external texture destination color space (%s) is not %s\", descriptor-\u003ecolorSpace, wgpu::PredefinedColorSpace::Srgb\"\n \nso it prints what the enum is, and what was expected",
+      "range": {
+        "startLine": 82,
+        "startChar": 22,
+        "endLine": 82,
+        "endChar": 88
+      },
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00211697_fb6affbb",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-13T22:49:43Z",
+      "side": 1,
+      "message": "(%s) ... descriptor-\u003eplane0",
+      "range": {
+        "startLine": 85,
+        "startChar": 38,
+        "endLine": 85,
+        "endChar": 39
+      },
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4051ac6f_91bb25ae",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-13T22:49:43Z",
+      "side": 1,
+      "message": "(%s) ... descriptor-\u003eplane1",
+      "range": {
+        "startLine": 89,
+        "startChar": 38,
+        "endLine": 89,
+        "endChar": 39
+      },
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f91e4d4_6eb5fc50",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-13T22:49:43Z",
+      "side": 1,
+      "message": "nit: just mTextureViews[1] \u003d descriptor-\u003eplane1 ?",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 132,
+        "endChar": 9
+      },
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
