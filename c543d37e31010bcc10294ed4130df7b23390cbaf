@@ -108,6 +108,30 @@
       },
       "revId": "c543d37e31010bcc10294ed4130df7b23390cbaf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6056249_b7525244",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-13T08:59:56Z",
+      "side": 1,
+      "message": "\u003e I\u0027m not too familiar with the image wrapping stuff, so maybe just a clarification question for my understanding... Is the intention that there are going to be more than 1 type of image wrapping for Vulkan and the \"backend\" is going to change (i.e. a different cpp file compiled in)?\n\nExactly, there will be _DmaBuf that Jie will do, then _ZirconHandle(or _SysmemBufferQueue?) for Fuchsia and _AHardwareBuffer for Android.\n\n\u003e Is there no way to determine (at runtime) the backend that needs to be used? Otherwise couldn\u0027t we do something similar to the VulkanBackend implementation and pass in backend impls as parameters for the tests?\n\nWe can somewhat easily do that for dawn_native backends because they are hidden behind an interface that doesn\u0027t change based on the OS. Here there OpaqueFD/DMABuf/Zircon/AHB correspond to one OS each (Linux/ChromeOS/Fuchsia/Android). In the future the opaque FD might be available in more, and the DMABuf might be available on Linux, but that would necessitate changes in dawn_native to be able to use more than on memory service. We can make the test parametrized on the memory service backend when that happens.",
+      "parentUuid": "a84fbe4f_01e68f1f",
+      "range": {
+        "startLine": 34,
+        "startChar": 10,
+        "endLine": 34,
+        "endChar": 40
+      },
+      "revId": "c543d37e31010bcc10294ed4130df7b23390cbaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
