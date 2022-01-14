@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "865e7185_284c8ec5",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 2373,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-14T17:54:44Z",
+      "side": 1,
+      "message": "yes - chrome is still using it so this for Canvas, so I would need to land and then update in Chrome first",
+      "parentUuid": "e890bf15_08b6b655",
+      "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9bf1297_126cac23",
@@ -88,6 +106,24 @@
       "writtenOn": "2022-01-14T13:01:05Z",
       "side": 1,
       "message": "This function is super hot code, that\u0027s why I was a thinking it would be better to add \"CopyB2TInternal\" and \"CopyT2BInternal\" so that we don\u0027t add this extra branch. WDYT? It seems only the copy commands would need internal versions.\n\nBut maybe it\u0027s not that hot if it is only for the copy commands. BindGroups are the hottest part but do their own validation on creation.\n\nBuffers are an other story because they are used for vertex/index/indirect",
+      "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9391a92a_b602bb05",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-14T17:54:44Z",
+      "side": 1,
+      "message": "yea, currently it is only Copy commands and beginRenderPass that get an extra branch - which I think is OK. And this expands nicely if/when we need internal usages for the buffers too. If it becomes a problem, we can pay extra binary size to generate code for internal/non-internal pass encoders if internal usages need to expand there.",
+      "parentUuid": "b2fc5395_1885e5b8",
       "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
