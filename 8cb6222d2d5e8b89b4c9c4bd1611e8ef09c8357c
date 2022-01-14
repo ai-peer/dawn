@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b62886e9_c76c99a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-01-14T18:51:01Z",
+      "side": 1,
+      "message": "Merging now without a second review because this change is really small and Corentin is OOO for one week.",
+      "revId": "8cb6222d2d5e8b89b4c9c4bd1611e8ef09c8357c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7452e9aa_ccbbb75d",
@@ -118,6 +135,30 @@
       "side": 1,
       "message": "Yes. the first list is forceEnable. The second list is forceDisable.\n\nre no differences:\n\nit\u0027s only turned on by default if the device supports it - maybe that is why you saw no difference?\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/d3d12/DeviceD3D12.cpp;l\u003d576?q\u003df:dawn%20UseD3D12R",
       "parentUuid": "00ce7176_bb7ba520",
+      "range": {
+        "startLine": 327,
+        "startChar": 54,
+        "endLine": 327,
+        "endChar": 56
+      },
+      "revId": "8cb6222d2d5e8b89b4c9c4bd1611e8ef09c8357c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab284c4e_bca81f7a",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-01-14T18:51:01Z",
+      "side": 1,
+      "message": "Gotcha, thanks for the explanation. Makes sense considering the default behavior. I neither investigated deep nor tested on multiple machines with different Windows versions. So it is possible my observation is not correct. Anyway, the empty toggle is meaningful.",
+      "parentUuid": "53510482_8341a90a",
       "range": {
         "startLine": 327,
         "startChar": 54,
