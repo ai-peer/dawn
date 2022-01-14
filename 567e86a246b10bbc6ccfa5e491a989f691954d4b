@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebdf6232_3215d084",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-14T13:01:05Z",
+      "side": 1,
+      "message": "LGTM too, but slight preference to add copyB2TInternal and copyT2BInternal instead.",
+      "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e890bf15_08b6b655",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 2373,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-14T13:01:05Z",
+      "side": 1,
+      "message": "I assume this would deprecate copyT2TInternal? Can be done as a follow up.",
+      "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9bf1297_126cac23",
@@ -37,6 +71,23 @@
         "endLine": 34,
         "endChar": 3
       },
+      "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2fc5395_1885e5b8",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-14T13:01:05Z",
+      "side": 1,
+      "message": "This function is super hot code, that\u0027s why I was a thinking it would be better to add \"CopyB2TInternal\" and \"CopyT2BInternal\" so that we don\u0027t add this extra branch. WDYT? It seems only the copy commands would need internal versions.\n\nBut maybe it\u0027s not that hot if it is only for the copy commands. BindGroups are the hottest part but do their own validation on creation.\n\nBuffers are an other story because they are used for vertex/index/indirect",
       "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -123,6 +174,30 @@
       "writtenOn": "2022-01-13T23:14:26Z",
       "side": 1,
       "message": "Just as a topic for discussion (potentially outside the scope of this CL):\n\nIf we do error matching in the tests, maybe the paradigm of having \"control\" cases isn\u0027t necessary as much anymore? WDYT?",
+      "range": {
+        "startLine": 225,
+        "startChar": 4,
+        "endLine": 234,
+        "endChar": 5
+      },
+      "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4e02f36_3ed02c78",
+        "filename": "src/tests/unittests/validation/InternalUsageValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-14T13:01:05Z",
+      "side": 1,
+      "message": "Control cases also test that the validation passes for many cases as well. IMHO it provides more coverage, are about the same amount of work, and should be less change-detecting than adding message checks for every call.",
+      "parentUuid": "35bef9d9_4ae7d806",
       "range": {
         "startLine": 225,
         "startChar": 4,
