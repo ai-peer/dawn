@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed440465_e32a32e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-14T18:14:12Z",
+      "side": 1,
+      "message": "LGTM, thanks for adding the extra coverage!",
+      "revId": "8cb6222d2d5e8b89b4c9c4bd1611e8ef09c8357c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7452e9aa_ccbbb75d",
@@ -77,6 +94,30 @@
       "writtenOn": "2022-01-14T17:56:04Z",
       "side": 1,
       "message": "Do we really need an empty toggle before \"use_d3d12_render_pass\"? I noticed that every current instances which have \"use_d3d12_render_pass\" put it at the second. But I didn\u0027t see any differences for this test (and the test above) if I remove the empty toggle.",
+      "range": {
+        "startLine": 327,
+        "startChar": 54,
+        "endLine": 327,
+        "endChar": 56
+      },
+      "revId": "8cb6222d2d5e8b89b4c9c4bd1611e8ef09c8357c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53510482_8341a90a",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-14T18:14:12Z",
+      "side": 1,
+      "message": "Yes. the first list is forceEnable. The second list is forceDisable.\n\nre no differences:\n\nit\u0027s only turned on by default if the device supports it - maybe that is why you saw no difference?\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/d3d12/DeviceD3D12.cpp;l\u003d576?q\u003df:dawn%20UseD3D12R",
+      "parentUuid": "00ce7176_bb7ba520",
       "range": {
         "startLine": 327,
         "startChar": 54,
