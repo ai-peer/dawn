@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f43b3d1_69107b72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-01-14T17:56:04Z",
+      "side": 1,
+      "message": "PTAL. Thank you!",
+      "revId": "8cb6222d2d5e8b89b4c9c4bd1611e8ef09c8357c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7452e9aa_ccbbb75d",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-01-14T17:56:04Z",
+      "side": 1,
+      "message": "Adding the texture usage only when it is needed.",
+      "range": {
+        "startLine": 141,
+        "startChar": 8,
+        "endLine": 144,
+        "endChar": 9
+      },
+      "revId": "8cb6222d2d5e8b89b4c9c4bd1611e8ef09c8357c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07541b58_802e00af",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-01-14T17:56:04Z",
+      "side": 1,
+      "message": "This is the follow-up for comments from Austin at https://dawn-review.googlesource.com/c/dawn/+/76040/2/src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp#323.",
+      "range": {
+        "startLine": 322,
+        "startChar": 41,
+        "endLine": 322,
+        "endChar": 83
+      },
+      "revId": "8cb6222d2d5e8b89b4c9c4bd1611e8ef09c8357c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00ce7176_bb7ba520",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-01-14T17:56:04Z",
+      "side": 1,
+      "message": "Do we really need an empty toggle before \"use_d3d12_render_pass\"? I noticed that every current instances which have \"use_d3d12_render_pass\" put it at the second. But I didn\u0027t see any differences for this test (and the test above) if I remove the empty toggle.",
+      "range": {
+        "startLine": 327,
+        "startChar": 54,
+        "endLine": 327,
+        "endChar": 56
+      },
+      "revId": "8cb6222d2d5e8b89b4c9c4bd1611e8ef09c8357c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
