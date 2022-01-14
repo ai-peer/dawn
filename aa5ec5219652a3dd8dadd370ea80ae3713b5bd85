@@ -300,6 +300,24 @@
       "parentUuid": "c8cbf091_af801d02",
       "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78fee8e6_df9d9f11",
+        "filename": "src/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-01-14T19:38:21Z",
+      "side": 1,
+      "message": "Or we can just delete format from ExternalTextureDescriptor all together and infer the format from the passed in planes.",
+      "parentUuid": "285e7f01_4b8a947a",
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
