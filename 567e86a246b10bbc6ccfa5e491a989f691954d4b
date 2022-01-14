@@ -151,6 +151,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fbb9269_7dbdea3f",
+        "filename": "src/dawn_native/CommandValidation.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-14T18:49:46Z",
+      "side": 1,
+      "message": "I prefer being explicit so that it\u0027s very clear where this argument is passed in. Regarding Corentin\u0027s other comment about hot code, right now with this CL it\u0027s clear we\u0027re not introducing a branch in performance-sensitive parts of the code. Using a default argument would obscure this a bit more.",
+      "parentUuid": "e64ed515_77dfa9dd",
+      "range": {
+        "startLine": 83,
+        "startChar": 32,
+        "endLine": 83,
+        "endChar": 56
+      },
+      "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2573bc36_3a8b82a8",
