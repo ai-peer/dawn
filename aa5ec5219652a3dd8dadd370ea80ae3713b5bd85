@@ -79,6 +79,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae7afb8d_2aeeba5d",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-14T11:23:55Z",
+      "side": 1,
+      "message": "In general, please read https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/errors.md#error-message-formatting (error should say what happened, not what cannot happen, etc).",
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d761a66b_4504a520",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-14T11:23:55Z",
+      "side": 1,
+      "message": "Can we make this an \"unsafe api\" until it is fully implemented? Otherwise it will be possible for the renderer process to attack the GPU process using the WIP implementation of multi planar external textures.",
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0f98118_3f2ad215",
         "filename": "src/dawn_native/ExternalTexture.cpp",
         "patchSetId": 4
@@ -188,6 +222,46 @@
         "endLine": 132,
         "endChar": 9
       },
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2c16bfc_a9e11751",
+        "filename": "src/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-14T11:23:55Z",
+      "side": 1,
+      "message": "nit: you could use default argument values for kDefaultTextureFormat and kDefaultUsage",
+      "range": {
+        "startLine": 23,
+        "startChar": 56,
+        "endLine": 24,
+        "endChar": 82
+      },
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8cbf091_af801d02",
+        "filename": "src/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-14T11:23:55Z",
+      "side": 1,
+      "message": "In this CL we make it so a YUV multiplanar texture can only be created with two views from a R8BG8Biplanar420Unorm. But I don\u0027t think that\u0027s what we want, because sometimes we could get the two planes as two separate textures (for example on Metal?)\n\nInstead the ExternalTexture creation would take two views: an R8unorm (Y) one and a RG8unorm one (UV) (TBD if we need to support other single and two component formats).\n\nThis would also make it much easier to test the new GPUExternalTexture code paths because they would only need regular textures, no need to create a multiplanar one!",
       "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
