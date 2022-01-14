@@ -93,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd81ad7c_67600522",
+        "filename": "docs/features/dawn_internal_usages.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-14T21:46:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9bf1297_126cac23",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 3
+      },
+      "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2fc5395_1885e5b8",
@@ -211,6 +235,30 @@
       "writtenOn": "2022-01-13T23:14:26Z",
       "side": 1,
       "message": "I think short substr check is fine, but I think that the substr should also be unique enough to guarantee that the failure is the expected failure, otherwise we run into the same issues where we could fail for the wrong reason.\n\nIn this case, I think \"is invalid\" is too generic for this validation. It\u0027s generic enough that I would just consider leaving it out entirely, or making it a bit more specific.",
+      "range": {
+        "startLine": 62,
+        "startChar": 61,
+        "endLine": 62,
+        "endChar": 73
+      },
+      "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "342f33c3_1b254194",
+        "filename": "src/tests/unittests/validation/InternalUsageValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-14T21:46:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c76f989a_ce38b3b2",
       "range": {
         "startLine": 62,
         "startChar": 61,
