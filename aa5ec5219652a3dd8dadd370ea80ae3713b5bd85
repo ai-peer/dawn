@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c37c95b9_2698a31b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-01-14T17:46:30Z",
+      "side": 1,
+      "message": "Okay. I understand referenced code and it\u0027s able to be added on top of what I have. Just to be clear I have nothing at all implemented that\u0027s related to this generic colorspace-to-colorspace conversion. Single-plane external texture sampling currently does nothing - whatever is passed in will be passed out. Multiplane conversion does result in srgb output - but that\u0027s because the YUV-\u003eRGB conversion I used (ITU Rec.709) has srgb output (after an additional gamma correction).\n\nTo support generic colorspace-to-colorspace conversion it looks like I\u0027ll need to have source colorspace info and info on if the source has premultiplied alpha. I don\u0027t know if this info can be acquired from Chromium, or if it needs to be provided by the WebGPU API.",
+      "parentUuid": "c3bb5a79_c7f9ac5e",
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef5a7824_3403a949",
         "filename": "src/dawn_native/ExternalTexture.cpp",
         "patchSetId": 4
