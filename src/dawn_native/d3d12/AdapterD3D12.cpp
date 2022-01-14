@@ -347,6 +347,11 @@ namespace dawn::native::d3d12 {
             // get rejected and generate a debug error. Then, we request 0 to get the allowed
             // allowed alignment.
             D3D12_MESSAGE_ID_CREATERESOURCE_INVALIDALIGNMENT,
+
+            // WebGPU SPEC doesn't require srcFactor and dstFactor must be both "one" when blend
+            // operation is either "min" or "max".
+            D3D12_MESSAGE_ID_CREATEBLENDSTATE_BLENDOP_WARNING,
+            D3D12_MESSAGE_ID_CREATEBLENDSTATE_BLENDOPALPHA_WARNING,
         };
 
         // Create a retrieval filter with a deny list to suppress messages.
