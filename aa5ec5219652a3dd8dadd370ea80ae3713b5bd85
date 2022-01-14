@@ -282,6 +282,24 @@
       "message": "In this CL we make it so a YUV multiplanar texture can only be created with two views from a R8BG8Biplanar420Unorm. But I don\u0027t think that\u0027s what we want, because sometimes we could get the two planes as two separate textures (for example on Metal?)\n\nInstead the ExternalTexture creation would take two views: an R8unorm (Y) one and a RG8unorm one (UV) (TBD if we need to support other single and two component formats).\n\nThis would also make it much easier to test the new GPUExternalTexture code paths because they would only need regular textures, no need to create a multiplanar one!",
       "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "285e7f01_4b8a947a",
+        "filename": "src/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-01-14T19:19:18Z",
+      "side": 1,
+      "message": "I see. So does that also mean we need a secondary format parameter in ExternalTextureDescriptor? i.e. plane0format, plane1format etc. I suppose we should also validate TextureAspect::\u003cPlane0Only, Plane1Only\u003e",
+      "parentUuid": "c8cbf091_af801d02",
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
