@@ -43,7 +43,7 @@ namespace {
         // Expect the actual results are approximately equal to the expected values.
         testing::AssertionResult Check(const void* data, size_t size) override {
             DAWN_ASSERT(size == sizeof(uint64_t) * mExpected.size());
-            constexpr static float kErrorToleranceRatio = 0.002f;
+            constexpr static float kErrorToleranceRatio = 1.2e-05f;
 
             const uint64_t* actual = static_cast<const uint64_t*>(data);
             for (size_t i = 0; i < mExpected.size(); ++i) {
@@ -78,6 +78,7 @@ constexpr uint64_t kGPUFrequency = 12000048u;
 constexpr uint64_t kNsPerSecond = 1000000000u;
 // Timestamp period in nanoseconds
 constexpr float kPeriod = static_cast<float>(kNsPerSecond) / kGPUFrequency;
+constexpr uint32_t kFactor = 1024u;
 
 class QueryInternalShaderTests : public DawnTest {
   protected:
@@ -147,7 +148,8 @@ class QueryInternalShaderTests : public DawnTest {
                                         kQueryCount * sizeof(uint32_t), wgpu::BufferUsage::Storage);
 
         // The params uniform buffer
-        dawn::native::TimestampParams params = {firstQuery, queryCount, destinationOffset, kPeriod};
+        dawn::native::TimestampParams params = {firstQuery, queryCount, destinationOffset,
+                                                static_cast<uint32_t>(kPeriod * kFactor), kFactor};
         wgpu::Buffer paramsBuffer = utils::CreateBufferFromData(device, &params, sizeof(params),
                                                                 wgpu::BufferUsage::Uniform);
 
