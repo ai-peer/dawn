@@ -362,6 +362,11 @@ namespace dawn::native::d3d12 {
                 // Must be called before applying the bindgroups.
                 SetID3D12DescriptorHeaps(commandList);
 
+                // Invalidate the root sampler tables, the bounded descriptor heaps are changed
+                // above, the root descriptor table also need to be set again, otherwise the
+                // shader cannot access these descriptor heaps.
+                mBoundRootSamplerTables = {};
+
                 for (BindGroupIndex index : IterateBitSet(mBindGroupLayoutsMask)) {
                     BindGroup* group = ToBackend(mBindGroups[index]);
                     didCreateBindGroupViews = group->PopulateViews(mViewAllocator);
