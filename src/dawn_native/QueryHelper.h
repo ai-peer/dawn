@@ -27,7 +27,14 @@ namespace dawn::native {
         uint32_t first;
         uint32_t count;
         uint32_t offset;
-        float period;
+        // To improve the precision of the product of timestamp and period in the post-processing
+        // compute shader, we simulate the multiplication by unsigned 32-bit integers.
+        // Here the period is obtained by multiplying the origin period (float, got from GPUDevice)
+        // by a factor and converting it to an unsigned 32-bit integer.
+        uint32_t period;
+        // Must be a power of 2, used to multiply the origin period (float) and do division using
+        // right shifting in the post-processing compute shader.
+        uint32_t factor;
     };
 
     MaybeError EncodeConvertTimestampsToNanoseconds(CommandEncoder* encoder,

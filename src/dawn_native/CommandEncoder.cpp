@@ -439,9 +439,14 @@ namespace dawn::native {
                                                      availability.size() * sizeof(uint32_t)));
 
             // Timestamp params uniform buffer
+            float period = device->GetTimestampPeriodInNS();
+            // If there is a loss of precision when converting the period to uint32, multiply the
+            // period by a factor of 1024 to mitigate the loss.
+            uint32_t factor =
+                static_cast<float>(static_cast<uint32_t>(period)) == period ? 1u : 1024u;
             TimestampParams params = {firstQuery, queryCount,
                                       static_cast<uint32_t>(destinationOffset),
-                                      device->GetTimestampPeriodInNS()};
+                                      static_cast<uint32_t>(period * factor), factor};
 
             BufferDescriptor parmsDesc = {};
             parmsDesc.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;
