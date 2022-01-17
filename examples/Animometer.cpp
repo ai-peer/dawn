@@ -67,6 +67,8 @@ void init() {
             scalarOffset : f32;
         };
         [[group(0), binding(0)]] var<uniform> c : Constants;
+        [[group(0), binding(2)]] var<uniform> d : Constants;
+        [[group(0), binding(7)]] var<uniform> e : Constants;
 
         struct VertexOut {
             [[location(0)]] v_color : vec4<f32>;
@@ -91,6 +93,8 @@ void init() {
 
             // TODO(dawn:572): Revisit once modf has been reworked in WGSL.
             var fade : f32 = c.scalarOffset + c.time * c.scalar / 10.0;
+            fade = fade + d.scalarOffset + d.time * d.scalar / 10.0;
+            fade = fade + e.scalarOffset + e.time * e.scalar / 10.0;
             fade = fade - floor(fade);
             if (fade < 0.5) {
                 fade = fade * 2.0;
@@ -119,7 +123,11 @@ void init() {
         })");
 
     wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-        device, {{0, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform, true}});
+        device, {
+          {0, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform, true},
+          {2, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform, true},
+          {7, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform, true},
+        });
 
     utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = utils::MakeBasicPipelineLayout(device, &bgl);
@@ -144,7 +152,11 @@ void init() {
     bufferDesc.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform;
     ubo = device.CreateBuffer(&bufferDesc);
 
-    bindGroup = utils::MakeBindGroup(device, bgl, {{0, ubo, 0, sizeof(ShaderData)}});
+    bindGroup = utils::MakeBindGroup(device, bgl, {
+      {0, ubo, 0, sizeof(ShaderData)},
+      {2, ubo, 0, sizeof(ShaderData)},
+      {7, ubo, 0, sizeof(ShaderData)},
+    });
 }
 
 void frame() {
@@ -164,8 +176,9 @@ void frame() {
         pass.SetPipeline(pipeline);
 
         for (size_t i = 0; i < kNumTriangles; i++) {
-            uint32_t offset = i * sizeof(ShaderData);
-            pass.SetBindGroup(0, bindGroup, 1, &offset);
+            uint32_t offsets[3];
+            offsets[0] = offsets[1] = offsets[2] = i * sizeof(ShaderData);
+            pass.SetBindGroup(0, bindGroup, 3, offsets);
             pass.Draw(3);
         }
 

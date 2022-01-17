@@ -464,12 +464,13 @@ namespace dawn::native::opengl {
 
         std::string glsl = compiler.compile();
 
-        if (GetDevice()->IsToggleEnabled(Toggle::DumpShaders)) {
+//        if (GetDevice()->IsToggleEnabled(Toggle::DumpShaders)) {
             std::ostringstream dumpedMsg;
             dumpedMsg << "/* Dumped generated GLSL */" << std::endl << glsl;
+            printf("%s\n", dumpedMsg.str().c_str());
 
             GetDevice()->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
-        }
+//        }
 
         return glsl;
 #endif
