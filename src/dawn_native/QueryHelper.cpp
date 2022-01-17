@@ -33,6 +33,7 @@ namespace dawn::native {
         static_assert(offsetof(dawn::native::TimestampParams, count) == 4, "");
         static_assert(offsetof(dawn::native::TimestampParams, offset) == 8, "");
         static_assert(offsetof(dawn::native::TimestampParams, period) == 12, "");
+        static_assert(offsetof(dawn::native::TimestampParams, powerOfTwo) == 16, "");
 
         static const char sConvertTimestampsToNanoseconds[] = R"(
             struct Timestamp {
@@ -49,10 +50,16 @@ namespace dawn::native {
             };
 
             struct TimestampParams {
-                first  : u32;
-                count  : u32;
-                offset : u32;
-                period : f32;
+                first       : u32;
+                count       : u32;
+                offset      : u32;
+                period      : f32;
+                powerOfTwo  : u32;
+            };
+
+            struct Result {
+                value : u32;
+                carry : u32;
             };
 
             [[group(0), binding(0)]]
@@ -61,6 +68,31 @@ namespace dawn::native {
                 var<storage, read> availability : AvailabilityArr;
             [[group(0), binding(2)]] var<uniform> params : TimestampParams;
 
+            // The carry value comes from the Result.carry of mul(Timestamp.low, period, 0u),
+            // 0 means no bits are carried from the multiplication of the low bits.
+            fn mulOp(timestamp: u32, period: u32, carry: u32) -> Result {
+                // If the product of timestamp and period does not exceed the maximum of u32,
+                // directly do the multiplication, otherwise, use two u32 to represent the high
+                // 16-bits and low 16-bits of the timestamp, then multiply them by the period
+                // separately.
+                var result: Result;
+                if (timestamp <= u32(0xFFFFFFFFu / period)) {
+                    result.value = timestamp * period + carry;
+                    result.carry = 0u;
+                } else {
+                    var timestamp_low = timestamp & 0xFFFFu;
+                    var timestamp_high = timestamp >> 16u;
+
+                    var result_low = timestamp_low * period + carry;
+                    var result_high = timestamp_high * period + (result_low >> 16u);
+                    result.carry = result_high >> 16u;
+
+                    result.value = result_high << 16u;
+                    result.value = result.value | (result_low & 0xFFFFu);
+                }
+
+                return result;
+            }
 
             let sizeofTimestamp : u32 = 8u;
 
@@ -79,31 +111,27 @@ namespace dawn::native {
                     return;
                 }
 
-                // Multiply the values in timestamps buffer by the period.
-                var period = params.period;
-                var w = 0u;
+                // Multiply the values in timestamps buffer by the period, however, the product of
+                // u32 and float has a large loss of precision when converted to u32. One way to
+                // mitigate the loss is to multiply the period by the n-th power of 2 (the n depends
+                // on the number of decimal places you want to keep, here it's the value of
+                // params.powerOfTwo) and convert it to u32, then do the multiplication. The final
+                // product result needs to be divided by the n-th power of 2.
+                var powerOfTwo = params.powerOfTwo;
+                var scaler = pow(2.0f, f32(powerOfTwo));
+                var period = u32(params.period * scaler);
 
-                // If the product of low 32-bits and the period does not exceed the maximum of u32,
-                // directly do the multiplication, otherwise, use two u32 to represent the high
-                // 16-bits and low 16-bits of this u32, then multiply them by the period separately.
-                if (timestamp.low <= u32(f32(0xFFFFFFFFu) / period)) {
-                    timestamps.t[index].low = u32(round(f32(timestamp.low) * period));
-                } else {
-                    var lo = timestamp.low & 0xFFFFu;
-                    var hi = timestamp.low >> 16u;
+                // Multiplication
+                var result_low: Result = mulOp(timestamp.low, period, 0u);
+                var result_high: Result = mulOp(timestamp.high, period, result_low.carry);
 
-                    var t0 = u32(round(f32(lo) * period));
-                    var t1 = u32(round(f32(hi) * period)) + (t0 >> 16u);
-                    w = t1 >> 16u;
+                // Division
+                timestamps.t[index].high = result_high.value >> powerOfTwo;
 
-                    var result = t1 << 16u;
-                    result = result | (t0 & 0xFFFFu);
-                    timestamps.t[index].low = result;
-                }
-
-                // Get the nearest integer to the float result. For high 32-bits, the round
-                // function will greatly help reduce the accuracy loss of the final result.
-                timestamps.t[index].high = u32(round(f32(timestamp.high) * period)) + w;
+                var high_bits_to_low = result_high.value & (u32(scaler) - 1u);
+                result_low.value = result_low.value >> powerOfTwo;
+                result_low.value = high_bits_to_low << (32u - powerOfTwo) | result_low.value;
+                timestamps.t[index].low = result_low.value;
             }
         )";
 

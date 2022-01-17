@@ -28,6 +28,9 @@ namespace dawn::native {
         uint32_t count;
         uint32_t offset;
         float period;
+        // Used to improve the precision of the product of timestamp (uint64_t) and period (float)
+        // which is simulated by 32-bits unsigned integers in the post-processing compute shader.
+        uint32_t powerOfTwo;
     };
 
     MaybeError EncodeConvertTimestampsToNanoseconds(CommandEncoder* encoder,
