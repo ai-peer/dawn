@@ -390,6 +390,11 @@ namespace dawn::native::d3d12 {
             ASSERT(descriptorHeaps[0] != nullptr);
             ASSERT(descriptorHeaps[1] != nullptr);
             commandList->SetDescriptorHeaps(descriptorHeaps.size(), descriptorHeaps.data());
+
+            // Invalidate the root sampler tables. The descriptor heaps are changed, the root
+            // descriptor table also need to be set again, otherwise the shader cannot access these
+            // descriptor heaps.
+            mBoundRootSamplerTables = {};
         }
 
       private:
