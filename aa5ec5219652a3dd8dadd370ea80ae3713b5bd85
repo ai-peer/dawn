@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aabf1109_af91d11d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-01-18T22:44:43Z",
+      "side": 1,
+      "message": "As far as validation goes - my implementation produces an error when predefined color space is not srgb in multiplanar scenarios - it does not produce an error in any single-plane case. I think this makes the most sense for now.",
+      "parentUuid": "7880d42a_131def31",
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef5a7824_3403a949",
         "filename": "src/dawn_native/ExternalTexture.cpp",
         "patchSetId": 4
@@ -130,6 +148,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91c5b841_b85cfe4e",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-01-18T22:44:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ae7afb8d_2aeeba5d",
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64688ba3_58936e7f",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-01-18T22:44:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef5a7824_3403a949",
+      "range": {
+        "startLine": 69,
+        "startChar": 56,
+        "endLine": 69,
+        "endChar": 57
+      },
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d761a66b_4504a520",
@@ -147,6 +207,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a57cd1da_585b32f5",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-01-18T22:44:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d761a66b_4504a520",
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0f98118_3f2ad215",
@@ -160,6 +238,30 @@
       "writtenOn": "2022-01-13T22:49:43Z",
       "side": 1,
       "message": "(%s) ... descriptor-\u003eformat",
+      "range": {
+        "startLine": 79,
+        "startChar": 38,
+        "endLine": 79,
+        "endChar": 39
+      },
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d9c672c_034b1641",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-01-18T22:44:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0f98118_3f2ad215",
       "range": {
         "startLine": 79,
         "startChar": 38,
@@ -193,6 +295,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c4d4b28_fd57d2f2",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-01-18T22:44:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d77e234_ab530eaa",
+      "range": {
+        "startLine": 82,
+        "startChar": 22,
+        "endLine": 82,
+        "endChar": 88
+      },
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00211697_fb6affbb",
@@ -206,6 +332,30 @@
       "writtenOn": "2022-01-13T22:49:43Z",
       "side": 1,
       "message": "(%s) ... descriptor-\u003eplane0",
+      "range": {
+        "startLine": 85,
+        "startChar": 38,
+        "endLine": 85,
+        "endChar": 39
+      },
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfa43870_25601fc8",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-01-18T22:44:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00211697_fb6affbb",
       "range": {
         "startLine": 85,
         "startChar": 38,
@@ -239,6 +389,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7e0907a_ebd12408",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-01-18T22:44:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4051ac6f_91bb25ae",
+      "range": {
+        "startLine": 89,
+        "startChar": 38,
+        "endLine": 89,
+        "endChar": 39
+      },
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f91e4d4_6eb5fc50",
@@ -262,6 +436,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9f47999_1dd22444",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-01-18T22:44:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f91e4d4_6eb5fc50",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 132,
+        "endChar": 9
+      },
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2c16bfc_a9e11751",
@@ -275,6 +473,30 @@
       "writtenOn": "2022-01-14T11:23:55Z",
       "side": 1,
       "message": "nit: you could use default argument values for kDefaultTextureFormat and kDefaultUsage",
+      "range": {
+        "startLine": 23,
+        "startChar": 56,
+        "endLine": 24,
+        "endChar": 82
+      },
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f0e65fe_00eba0fd",
+        "filename": "src/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-01-18T22:44:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2c16bfc_a9e11751",
       "range": {
         "startLine": 23,
         "startChar": 56,
@@ -352,6 +574,24 @@
       "side": 1,
       "message": "It seems very reasonable to infer the ExternalTexture format from the passed in planes, assuming that\u0027s possible. In this case it certainly sounds possible to infer \"R8 BG8 Biplanar 420 unorm\" from \"R8unorm\"+\"RG8unorm\". We can always add a \"format\" parameter later if we need disambiguation.",
       "parentUuid": "78fee8e6_df9d9f11",
+      "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "641a153b_17a5f3e4",
+        "filename": "src/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-01-18T22:44:43Z",
+      "side": 1,
+      "message": "Removed format param and switched everything over to R8Unorm + RG8Unorm",
+      "parentUuid": "5b98f646_2194e750",
       "revId": "aa5ec5219652a3dd8dadd370ea80ae3713b5bd85",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
