@@ -16,6 +16,24 @@
       "message": "Assuming this comment was outdated. But does this change now require dawn_swiftshader_dir to be set or does it skip enabling swiftshader if it\u0027s unset?",
       "revId": "ff35c65f6568d55ef77ac68656c72bf730c7a32b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bf7ea5f_9dd50cd8",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-18T23:55:25Z",
+      "side": 0,
+      "message": "it skips if dawn_swiftshader_dir is unset. I guess I should keep the bit of the comment that says it won\u0027t actually enable if you don\u0027t set it.",
+      "parentUuid": "7bc36f76_2f58b60f",
+      "revId": "ff35c65f6568d55ef77ac68656c72bf730c7a32b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
