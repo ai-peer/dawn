@@ -347,6 +347,10 @@ namespace dawn::native::d3d12 {
             // get rejected and generate a debug error. Then, we request 0 to get the allowed
             // allowed alignment.
             D3D12_MESSAGE_ID_CREATERESOURCE_INVALIDALIGNMENT,
+
+            // WebGPU allows implementations to choose to display a warning in case of out-of-bould
+            // vertex buffer access.
+            D3D12_MESSAGE_ID_COMMAND_LIST_DRAW_VERTEX_BUFFER_TOO_SMALL,
         };
 
         // Create a retrieval filter with a deny list to suppress messages.
