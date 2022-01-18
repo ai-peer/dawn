@@ -154,6 +154,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "606e5730_cbadfe4d",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-18T20:05:35Z",
+      "side": 1,
+      "message": "I think this is OK since it\u0027s only copy commands and beginRenderPass.",
+      "parentUuid": "9391a92a_b602bb05",
+      "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e64ed515_77dfa9dd",
         "filename": "src/dawn_native/CommandValidation.h",
         "patchSetId": 2
