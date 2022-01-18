@@ -268,7 +268,7 @@ namespace dawn::native::opengl {
                                                              const PipelineLayout* layout,
                                                              bool* needsDummySampler) const {
         TRACE_EVENT0(GetDevice()->GetPlatform(), General, "TranslateToGLSL");
-#if USE_TINT_GLSL_GENERATOR
+#if 1
         tint::transform::Manager transformManager;
         tint::transform::DataMap transformInputs;
         tint::transform::DataMap transformOutputs;
@@ -328,6 +328,13 @@ namespace dawn::native::opengl {
             return DAWN_FORMAT_VALIDATION_ERROR("Transform output missing renamer data.");
         }
         tint::writer::glsl::Options tintOptions;
+        tint::inspector::Inspector inspector(&program);
+        for (auto use : inspector.GetSamplerTextureUses(remappedEntryPointName)) {
+            CombinedSampler combinedSampler;
+            combinedSampler.samplerLocation = BindingLocation();
+            combinedSampler.textureLocation = BindingLocation();
+            tintOptions.binding_map[use] = combinedSampler.GetName();
+        }
         auto result = tint::writer::glsl::Generate(&program, tintOptions, remappedEntryPointName);
         DAWN_INVALID_IF(!result.success, "An error occured while generating GLSL: %s.",
                         result.error);
