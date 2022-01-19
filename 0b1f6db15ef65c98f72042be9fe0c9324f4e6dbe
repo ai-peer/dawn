@@ -33,6 +33,29 @@
       "message": "LGTM",
       "revId": "0b1f6db15ef65c98f72042be9fe0c9324f4e6dbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f9633b1_b9762262",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-19T16:00:12Z",
+      "side": 1,
+      "message": "I might say that WebGPU allows OOB vertex buffer access and relies on D3D12\u0027s robust buffer access behavior",
+      "range": {
+        "startLine": 351,
+        "startChar": 22,
+        "endLine": 352,
+        "endChar": 36
+      },
+      "revId": "0b1f6db15ef65c98f72042be9fe0c9324f4e6dbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
