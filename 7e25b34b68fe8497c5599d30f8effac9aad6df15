@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "7e25b34b68fe8497c5599d30f8effac9aad6df15",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38e903c3_fcde8843",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-19T17:40:56Z",
+      "side": 1,
+      "message": "Not sure if it would make sense to try to de-deplicate this code. I assume different backends may handle it differently so maybe we can just leave as is for now and once we have all the backends implemented we can try to consolidate code if it\u0027s still similar.",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 6
+      },
+      "revId": "7e25b34b68fe8497c5599d30f8effac9aad6df15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
