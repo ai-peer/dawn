@@ -39,23 +39,6 @@ namespace wgpu::binding {
 
     namespace {
 
-        class DeviceLostInfo : public interop::GPUDeviceLostInfo {
-          public:
-            DeviceLostInfo(interop::GPUDeviceLostReason reason, std::string message)
-                : reason_(reason), message_(message) {
-            }
-            std::variant<interop::GPUDeviceLostReason> getReason(Napi::Env env) override {
-                return reason_;
-            }
-            std::string getMessage(Napi::Env) override {
-                return message_;
-            }
-
-          private:
-            interop::GPUDeviceLostReason reason_;
-            std::string message_;
-        };
-
         class OOMError : public interop::GPUOutOfMemoryError {};
         class ValidationError : public interop::GPUValidationError {
           public:
@@ -90,7 +73,7 @@ namespace wgpu::binding {
 
         device_.SetDeviceLostCallback(
             [](WGPUDeviceLostReason reason, char const* message, void* userdata) {
-                interop::GPUDeviceLostReason r;
+                auto r = interop::GPUDeviceLostReason::kDestroyed;
                 switch (reason) {
                     case WGPUDeviceLostReason_Force32:
                         UNREACHABLE("WGPUDeviceLostReason_Force32");
@@ -102,9 +85,10 @@ namespace wgpu::binding {
                         break;
                 }
                 auto* self = static_cast<GPUDevice*>(userdata);
+                self->lost_ = DeviceLostInfo(r, message);
                 for (auto promise : self->lost_promises_) {
-                    promise.Resolve(
-                        interop::GPUDeviceLostInfo::Create<DeviceLostInfo>(self->env_, r, message));
+                    promise.Resolve(interop::GPUDeviceLostInfo::Create<DeviceLostInfo>(
+                        self->env_, *self->lost_));
                 }
                 self->lost_promises_.clear();
             },
@@ -421,7 +405,11 @@ namespace wgpu::binding {
         Napi::Env env) {
         auto promise =
             interop::Promise<interop::Interface<interop::GPUDeviceLostInfo>>(env, PROMISE_INFO);
-        lost_promises_.emplace_back(promise);
+        if (lost_) {
+            promise.Resolve(interop::GPUDeviceLostInfo::Create<DeviceLostInfo>(env, *lost_));
+        } else {
+            lost_promises_.emplace_back(promise);
+        }
         return promise;
     }
 

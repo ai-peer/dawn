@@ -21,6 +21,26 @@
 #include "src/dawn_node/interop/WebGPU.h"
 
 namespace wgpu::binding {
+    class DeviceLostInfo : public interop::GPUDeviceLostInfo {
+      public:
+        DeviceLostInfo(interop::GPUDeviceLostReason reason, std::string message)
+            : reason_(reason), message_(message) {
+        }
+        DeviceLostInfo(const DeviceLostInfo& other)
+            : reason_(other.reason_), message_(other.message_) {
+        }
+        std::variant<interop::GPUDeviceLostReason> getReason(Napi::Env env) override {
+            return reason_;
+        }
+        std::string getMessage(Napi::Env) override {
+            return message_;
+        }
+
+      private:
+        interop::GPUDeviceLostReason reason_;
+        std::string message_;
+    };
+
     // GPUDevice is an implementation of interop::GPUDevice that wraps a wgpu::Device.
     class GPUDevice final : public interop::GPUDevice {
       public:
@@ -104,6 +124,8 @@ namespace wgpu::binding {
         Napi::Env env_;
         wgpu::Device device_;
         std::shared_ptr<AsyncRunner> async_;
+
+        std::optional<DeviceLostInfo> lost_;
         std::vector<interop::Promise<interop::Interface<interop::GPUDeviceLostInfo>>>
             lost_promises_;
     };
