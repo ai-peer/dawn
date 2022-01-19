@@ -16,6 +16,40 @@
       "message": "The trybot failures should disappear after WebGPU CTS is updated to the latest version (with my fix).\n\nPTAL, thanks!",
       "revId": "445ca2ed1565e66fa3abc4bf5460827f1f1db8c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f263111a_ec45a2f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-19T16:30:58Z",
+      "side": 1,
+      "message": "LGTM - adding Loko, but Kai may review too",
+      "revId": "445ca2ed1565e66fa3abc4bf5460827f1f1db8c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0e25748_bf69be23",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-19T16:30:58Z",
+      "side": 1,
+      "message": "Please see [dawn]/docs/errors.md\n\nprefer:\n(\"Blend factor (%s) is not %s when blend operation is %s.\", factor, wgpu::BlendFactor::One, operation)",
+      "revId": "445ca2ed1565e66fa3abc4bf5460827f1f1db8c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
