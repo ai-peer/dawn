@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e68742b7_1780cfdb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-01-19T10:10:04Z",
+      "side": 1,
+      "message": "The trybot failures should disappear after WebGPU CTS is updated to the latest version (with my fix).\n\nPTAL, thanks!",
+      "revId": "445ca2ed1565e66fa3abc4bf5460827f1f1db8c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
