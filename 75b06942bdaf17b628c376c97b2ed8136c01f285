@@ -16,6 +16,23 @@
       "message": "Note that this can\u0027t be merged until I remove a usage of the deprecated \"format\" member in Chromium.",
       "revId": "75b06942bdaf17b628c376c97b2ed8136c01f285",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fab814e_cc9d912d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-19T16:26:23Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "75b06942bdaf17b628c376c97b2ed8136c01f285",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
