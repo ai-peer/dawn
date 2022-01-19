@@ -269,14 +269,29 @@ namespace dawn::native::opengl {
                                                              bool* needsDummySampler) const {
         TRACE_EVENT0(GetDevice()->GetPlatform(), General, "TranslateToGLSL");
 #if 1
+        tint::inspector::Inspector inspector(GetTintProgram());
+        tint::transform::CombineSamplers::BindingMap bindingMap;
+        for (auto use : inspector.GetSamplerTextureUses(entryPointName)) {
+            combinedSamplers->emplace_back();
+
+            CombinedSampler* info = &combinedSamplers->back();
+            info->samplerLocation.group = BindGroupIndex(use.sampler_binding_point.group);
+            info->samplerLocation.binding = BindingNumber(use.sampler_binding_point.binding);
+            info->textureLocation.group = BindGroupIndex(use.texture_binding_point.group);
+            info->textureLocation.binding = BindingNumber(use.texture_binding_point.binding);
+            bindingMap[use] = info->GetName();
+        }
         tint::transform::Manager transformManager;
         tint::transform::DataMap transformInputs;
         tint::transform::DataMap transformOutputs;
 
         transformManager.Add<tint::transform::Renamer>();
+        transformManager.Add<tint::transform::CombineSamplers>();
 
         transformInputs.Add<tint::transform::Renamer::Config>(
             tint::transform::Renamer::Target::kGlslKeywords);
+        transformInputs.Add<tint::transform::CombineSamplers::BindingInfo>(
+            tint::transform::CombineSamplers::BindingInfo(bindingMap));
 
         using tint::transform::BindingPoint;
         using tint::transform::BindingRemapper;
@@ -328,17 +343,17 @@ namespace dawn::native::opengl {
             return DAWN_FORMAT_VALIDATION_ERROR("Transform output missing renamer data.");
         }
         tint::writer::glsl::Options tintOptions;
-        tint::inspector::Inspector inspector(&program);
-        for (auto use : inspector.GetSamplerTextureUses(remappedEntryPointName)) {
-            CombinedSampler combinedSampler;
-            combinedSampler.samplerLocation = BindingLocation();
-            combinedSampler.textureLocation = BindingLocation();
-            tintOptions.binding_map[use] = combinedSampler.GetName();
-        }
         auto result = tint::writer::glsl::Generate(&program, tintOptions, remappedEntryPointName);
         DAWN_INVALID_IF(!result.success, "An error occured while generating GLSL: %s.",
                         result.error);
         std::string glsl = result.glsl;
+
+        if (GetDevice()->IsToggleEnabled(Toggle::DumpShaders)) {
+            std::ostringstream dumpedMsg;
+            dumpedMsg << "/* Dumped generated GLSL */" << std::endl << glsl;
+
+            GetDevice()->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+        }
         return glsl;
 #else
         tint::transform::SingleEntryPoint singleEntryPointTransform;
@@ -471,13 +486,12 @@ namespace dawn::native::opengl {
 
         std::string glsl = compiler.compile();
 
-//        if (GetDevice()->IsToggleEnabled(Toggle::DumpShaders)) {
+        if (GetDevice()->IsToggleEnabled(Toggle::DumpShaders)) {
             std::ostringstream dumpedMsg;
             dumpedMsg << "/* Dumped generated GLSL */" << std::endl << glsl;
-            printf("%s\n", dumpedMsg.str().c_str());
 
             GetDevice()->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
-//        }
+        }
 
         return glsl;
 #endif
