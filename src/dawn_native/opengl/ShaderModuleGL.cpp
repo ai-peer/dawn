@@ -268,6 +268,94 @@ namespace dawn::native::opengl {
                                                              const PipelineLayout* layout,
                                                              bool* needsDummySampler) const {
         TRACE_EVENT0(GetDevice()->GetPlatform(), General, "TranslateToGLSL");
+#if 1
+        tint::inspector::Inspector inspector(GetTintProgram());
+        tint::transform::CombineSamplers::BindingMap bindingMap;
+        for (auto use : inspector.GetSamplerTextureUses(entryPointName)) {
+            combinedSamplers->emplace_back();
+
+            CombinedSampler* info = &combinedSamplers->back();
+            info->samplerLocation.group = BindGroupIndex(use.sampler_binding_point.group);
+            info->samplerLocation.binding = BindingNumber(use.sampler_binding_point.binding);
+            info->textureLocation.group = BindGroupIndex(use.texture_binding_point.group);
+            info->textureLocation.binding = BindingNumber(use.texture_binding_point.binding);
+            bindingMap[use] = info->GetName();
+        }
+        tint::transform::Manager transformManager;
+        tint::transform::DataMap transformInputs;
+        tint::transform::DataMap transformOutputs;
+
+        transformManager.Add<tint::transform::Renamer>();
+        transformManager.Add<tint::transform::CombineSamplers>();
+
+        transformInputs.Add<tint::transform::Renamer::Config>(
+            tint::transform::Renamer::Target::kGlslKeywords);
+        transformInputs.Add<tint::transform::CombineSamplers::BindingInfo>(
+            tint::transform::CombineSamplers::BindingInfo(bindingMap));
+
+        using tint::transform::BindingPoint;
+        using tint::transform::BindingRemapper;
+
+        BindingRemapper::BindingPoints bindingPoints;
+        BindingRemapper::AccessControls accessControls;
+        for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+            const BindGroupLayoutBase::BindingMap& bindingMap =
+                layout->GetBindGroupLayout(group)->GetBindingMap();
+            for (const auto& it : bindingMap) {
+                BindingNumber bindingNumber = it.first;
+                BindingIndex bindingIndex = it.second;
+                const BindingInfo& bindingInfo =
+                    layout->GetBindGroupLayout(group)->GetBindingInfo(bindingIndex);
+                if (!(bindingInfo.visibility & StageBit(stage))) {
+                    continue;
+                }
+
+                uint32_t shaderIndex = layout->GetBindingIndexInfo()[group][bindingIndex];
+                BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
+                                             static_cast<uint32_t>(bindingNumber)};
+                BindingPoint dstBindingPoint{0, shaderIndex};
+                if (srcBindingPoint != dstBindingPoint) {
+                    bindingPoints.emplace(srcBindingPoint, dstBindingPoint);
+                }
+            }
+        }
+        transformManager.Add<BindingRemapper>();
+        transformInputs.Add<BindingRemapper::Remappings>(std::move(bindingPoints),
+                                                         std::move(accessControls),
+                                                         /* mayCollide */ true);
+
+        tint::Program program;
+        DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, GetTintProgram(), transformInputs,
+                                               &transformOutputs, nullptr));
+
+        std::string remappedEntryPointName;
+        if (auto* data = transformOutputs.Get<tint::transform::Renamer::Data>()) {
+            auto it = data->remappings.find(entryPointName);
+            if (it != data->remappings.end()) {
+                remappedEntryPointName = it->second;
+            } else {
+                DAWN_INVALID_IF(!GetDevice()->IsToggleEnabled(Toggle::DisableSymbolRenaming),
+                                "Could not find remapped name for entry point.");
+
+                remappedEntryPointName = entryPointName;
+            }
+        } else {
+            return DAWN_FORMAT_VALIDATION_ERROR("Transform output missing renamer data.");
+        }
+        tint::writer::glsl::Options tintOptions;
+        auto result = tint::writer::glsl::Generate(&program, tintOptions, remappedEntryPointName);
+        DAWN_INVALID_IF(!result.success, "An error occured while generating GLSL: %s.",
+                        result.error);
+        std::string glsl = result.glsl;
+
+        if (GetDevice()->IsToggleEnabled(Toggle::DumpShaders)) {
+            std::ostringstream dumpedMsg;
+            dumpedMsg << "/* Dumped generated GLSL */" << std::endl << glsl;
+
+            GetDevice()->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+        }
+        return glsl;
+#else
         tint::transform::SingleEntryPoint singleEntryPointTransform;
 
         tint::transform::DataMap transformInputs;
@@ -406,6 +494,7 @@ namespace dawn::native::opengl {
         }
 
         return glsl;
+#endif
     }
 
 }  // namespace dawn::native::opengl
