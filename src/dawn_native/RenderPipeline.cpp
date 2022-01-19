@@ -317,6 +317,17 @@ namespace dawn::native {
             return {};
         }
 
+        MaybeError ValidateBlendComponent(BlendComponent blendComponent) {
+            if (blendComponent.operation == wgpu::BlendOperation::Min ||
+                blendComponent.operation == wgpu::BlendOperation::Max) {
+                DAWN_INVALID_IF(blendComponent.srcFactor != wgpu::BlendFactor::One ||
+                                    blendComponent.dstFactor != wgpu::BlendFactor::One,
+                                "Blend Factor must be One when blend operation is Min or Max");
+            }
+
+            return {};
+        }
+
         MaybeError ValidateBlendState(DeviceBase* device, const BlendState* descriptor) {
             DAWN_TRY(ValidateBlendOperation(descriptor->alpha.operation));
             DAWN_TRY(ValidateBlendFactor(descriptor->alpha.srcFactor));
@@ -324,6 +335,9 @@ namespace dawn::native {
             DAWN_TRY(ValidateBlendOperation(descriptor->color.operation));
             DAWN_TRY(ValidateBlendFactor(descriptor->color.srcFactor));
             DAWN_TRY(ValidateBlendFactor(descriptor->color.dstFactor));
+            DAWN_TRY(ValidateBlendComponent(descriptor->alpha));
+            DAWN_TRY(ValidateBlendComponent(descriptor->color));
+
             return {};
         }
 
