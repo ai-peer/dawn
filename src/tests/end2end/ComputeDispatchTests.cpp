@@ -315,6 +315,65 @@ TEST_P(ComputeDispatchTests, ExceedsMaxWorkgroupsWithOffsetNoop) {
     IndirectTest({1, 2, 3, max + 1, 4, 5}, 3 * sizeof(uint32_t));
 }
 
+// This test is used to reproduce a FXC issue that FXC will get different results when evaluating
+// an equal statement.
+TEST_P(ComputeDispatchTests, DifferentResultOfEXP) {
+    // Compute the constant value exp(10) inside shaders in two different ways.
+    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+            struct OutputBuf {
+                values : vec2<f32>;
+            };
+
+            [[group(0), binding(0)]] var<storage, read_write> output : OutputBuf;
+
+            fn unaryOperation(a : f32) -> f32 {
+                return exp(a);
+            }
+
+            [[stage(compute), workgroup_size(1, 1, 1)]]
+            fn main([[builtin(global_invocation_id)]] GlobalInvocationID : vec3<u32>,
+                    [[builtin(num_workgroups)]] dispatch : vec3<u32>) {
+
+                output.values[0] = exp(10.0);
+                output.values[1] = unaryOperation(10.0);
+            })");
+
+    wgpu::ComputePipelineDescriptor csDesc;
+    csDesc.compute.module = module;
+    csDesc.compute.entryPoint = "main";
+    wgpu::ComputePipeline pipelineWithExp = device.CreateComputePipeline(&csDesc);
+
+    wgpu::Buffer dst = utils::CreateBufferFromData<uint32_t>(
+        device,
+        wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst,
+        {0, 0});
+
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipelineWithExp.GetBindGroupLayout(0),
+                                                     {
+                                                         {0, dst, 0, 2 * sizeof(float)},
+                                                     });
+
+    wgpu::CommandBuffer commands;
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+        pass.SetPipeline(pipelineWithExp);
+        pass.SetBindGroup(0, bindGroup);
+        pass.Dispatch(1, 1, 1);
+        pass.EndPass();
+
+        commands = encoder.Finish();
+    }
+
+    queue.Submit(1, &commands);
+
+    float expected = std::expf(10.f);
+    EXPECT_BUFFER_FLOAT_EQ(expected, dst, 0);
+
+    // The test will fail after executing the below statement.
+    EXPECT_BUFFER_FLOAT_EQ(expected, dst, 4);
+}
+
 DAWN_INSTANTIATE_TEST(ComputeDispatchTests,
                       D3D12Backend(),
                       MetalBackend(),
