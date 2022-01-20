@@ -846,12 +846,14 @@ TEST_F(BufferValidationTest, GetMappedRange_OffsetSizeOOB) {
         EXPECT_NE(buffer.GetMappedRange(0, 8), nullptr);
     }
 
-    // Valid case: empty range at the end is ok
+    // Valid case: empty range at the end is ok (size=0, kWholeMapSize, default)
     {
         wgpu::Buffer buffer = CreateMapWriteBuffer(8);
         buffer.MapAsync(wgpu::MapMode::Write, 0, 8, nullptr, nullptr);
         WaitForAllOperations(device);
         EXPECT_NE(buffer.GetMappedRange(8, 0), nullptr);
+        EXPECT_NE(buffer.GetMappedRange(8, wgpu::kWholeMapSize), nullptr);
+        EXPECT_NE(buffer.GetMappedRange(8), nullptr);
     }
 
     // Valid case: range in the middle is ok.
@@ -862,13 +864,18 @@ TEST_F(BufferValidationTest, GetMappedRange_OffsetSizeOOB) {
         EXPECT_NE(buffer.GetMappedRange(8, 4), nullptr);
     }
 
-    // Error case: offset is larger than the mapped range (even with size = 0)
+    // Error case: offset is larger than the mapped range (even with size = 0, kWholeMapSize, or
+    // default)
     {
         wgpu::Buffer buffer = CreateMapWriteBuffer(8);
         buffer.MapAsync(wgpu::MapMode::Write, 0, 8, nullptr, nullptr);
         WaitForAllOperations(device);
         EXPECT_EQ(buffer.GetMappedRange(9, 0), nullptr);
         EXPECT_EQ(buffer.GetMappedRange(16, 0), nullptr);
+        EXPECT_EQ(buffer.GetMappedRange(9, wgpu::kWholeMapSize), nullptr);
+        EXPECT_EQ(buffer.GetMappedRange(16, wgpu::kWholeMapSize), nullptr);
+        EXPECT_EQ(buffer.GetMappedRange(9), nullptr);
+        EXPECT_EQ(buffer.GetMappedRange(16), nullptr);
     }
 
     // Error case: offset + size is larger than the mapped range
@@ -885,7 +892,7 @@ TEST_F(BufferValidationTest, GetMappedRange_OffsetSizeOOB) {
         wgpu::Buffer buffer = CreateMapWriteBuffer(12);
         buffer.MapAsync(wgpu::MapMode::Write, 0, 12, nullptr, nullptr);
         WaitForAllOperations(device);
-        EXPECT_EQ(buffer.GetMappedRange(8, std::numeric_limits<size_t>::max()), nullptr);
+        EXPECT_EQ(buffer.GetMappedRange(8, std::numeric_limits<size_t>::max() - 1), nullptr);
     }
 
     // Error case: offset is before the start of the range

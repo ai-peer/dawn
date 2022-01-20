@@ -481,6 +481,9 @@ namespace dawn::native {
     }
 
     bool BufferBase::CanGetMappedRange(bool writable, size_t offset, size_t size) const {
+        if (size == wgpu::kWholeMapSize && offset <= mMapOffset + mMapSize) {
+            size = mMapOffset + mMapSize - offset;
+        }
         if (offset % 8 != 0 || size % 4 != 0) {
             return false;
         }
