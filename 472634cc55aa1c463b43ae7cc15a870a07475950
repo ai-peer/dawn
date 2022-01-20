@@ -16,6 +16,23 @@
       "message": "PTAL..does the minimum change needed so I can merge https://chromium-review.googlesource.com/c/chromium/src/+/3401818.",
       "revId": "472634cc55aa1c463b43ae7cc15a870a07475950",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11a72931_b7aaeebb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-20T19:31:35Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "472634cc55aa1c463b43ae7cc15a870a07475950",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
