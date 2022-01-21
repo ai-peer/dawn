@@ -16,6 +16,46 @@
       "message": "PTAL, thanks",
       "revId": "47e269c3f68d1c3763fd0be46c24a802ff38faf8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2700fa00_efe82738",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-21T18:01:55Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "47e269c3f68d1c3763fd0be46c24a802ff38faf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "275b1705_0ea88007",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-21T18:01:55Z",
+      "side": 1,
+      "message": "just say \"%s\", wgpu::BufferUsage::None",
+      "range": {
+        "startLine": 106,
+        "startChar": 56,
+        "endLine": 106,
+        "endChar": 64
+      },
+      "revId": "47e269c3f68d1c3763fd0be46c24a802ff38faf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
