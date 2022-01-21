@@ -788,7 +788,7 @@ TEST_F(BufferValidationTest, GetMappedRange_ValidBufferStateCases) {
 }
 
 // Test valid cases to call GetMappedRange on an error buffer.
-TEST_F(BufferValidationTest, GetMappedRange_OnErrorBuffer) {
+TEST_F(BufferValidationTest, DISABLED_GetMappedRange_OnErrorBuffer) {
     wgpu::BufferDescriptor desc;
     desc.size = 4;
     desc.usage = wgpu::BufferUsage::Storage | wgpu::BufferUsage::MapRead;
