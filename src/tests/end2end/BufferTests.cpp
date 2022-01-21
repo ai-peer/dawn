@@ -820,7 +820,7 @@ TEST_P(BufferTests, CreateBufferOOM) {
 }
 
 // Test that a very large buffer mappedAtCreation fails gracefully.
-TEST_P(BufferTests, BufferMappedAtCreationOOM) {
+TEST_P(BufferTests, DISABLED_BufferMappedAtCreationOOM) {
     // TODO(http://crbug.com/dawn/749): Missing support.
     DAWN_TEST_UNSUPPORTED_IF(IsOpenGL());
     DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
