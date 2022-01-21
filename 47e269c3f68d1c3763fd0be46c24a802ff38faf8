@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfa70e7f_f8511bba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-21T22:36:48Z",
+      "side": 1,
+      "message": "The new spec changes apply to createTexture as well; is that already correct or will it be another CL?\nhttps://github.com/gpuweb/gpuweb/pull/2422",
+      "revId": "47e269c3f68d1c3763fd0be46c24a802ff38faf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a891842e_75da1f6c",
@@ -48,6 +65,30 @@
       "writtenOn": "2022-01-21T18:01:55Z",
       "side": 1,
       "message": "just say \"%s\", wgpu::BufferUsage::None",
+      "range": {
+        "startLine": 106,
+        "startChar": 56,
+        "endLine": 106,
+        "endChar": 64
+      },
+      "revId": "47e269c3f68d1c3763fd0be46c24a802ff38faf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44930faa_55022f3b",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-21T22:36:48Z",
+      "side": 1,
+      "message": "There is no \"None\" in the JS API though, so maybe we should just say \"must not be 0.\" without reference to \"none\"?\n\nhttps://gpuweb.github.io/gpuweb/#namespacedef-gpubufferusage",
+      "parentUuid": "275b1705_0ea88007",
       "range": {
         "startLine": 106,
         "startChar": 56,
