@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "9e051111641d1619f630909b6cc00aeaf8efbe71",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e1cfb4c_2626c9a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-21T00:12:54Z",
+      "side": 1,
+      "message": "actually.. now i\u0027m not sure if this is correct. \nis WGPU_WHOLE_MAP_SIZE only for MapAsync, or also for GetMappedRange()?",
+      "revId": "9e051111641d1619f630909b6cc00aeaf8efbe71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
