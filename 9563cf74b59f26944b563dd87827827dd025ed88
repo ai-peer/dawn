@@ -16,6 +16,24 @@
       "message": "Just saw this. You should know that this swapchain is only used in native, but not on Web. The Web swapchain is implemented in Chromium here https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/webgpu/gpu_canvas_context.h?q\u003dgpu_canvas_context",
       "revId": "9563cf74b59f26944b563dd87827827dd025ed88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d6af3e7_c0f3446b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-01-21T06:25:28Z",
+      "side": 1,
+      "message": "Thanks for the reminder. Indeed this is not needed for me to run CTS. So do we need to keep the native and web in sync? I am not quite sure whether I should bother to work on this!",
+      "parentUuid": "71fbc466_0b9c87b3",
+      "revId": "9563cf74b59f26944b563dd87827827dd025ed88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
