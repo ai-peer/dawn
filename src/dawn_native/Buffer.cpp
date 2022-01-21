@@ -102,6 +102,9 @@ namespace dawn::native {
 
         wgpu::BufferUsage usage = descriptor->usage;
 
+        DAWN_INVALID_IF(usage == wgpu::BufferUsage::None,
+                        "Buffer usages (%s) must not be 0 (None).", usage);
+
         const wgpu::BufferUsage kMapWriteAllowedUsages =
             wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
         DAWN_INVALID_IF(
