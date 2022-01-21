@@ -16,6 +16,97 @@
       "message": "PTAL, thanks",
       "revId": "dead7aaec1de97eb9c2b6d3e8a2c3a42b7bc33d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ad9fb28_9d9c117c",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-21T22:53:23Z",
+      "side": 1,
+      "message": "freqency -\u003e frequency",
+      "range": {
+        "startLine": 238,
+        "startChar": 36,
+        "endLine": 238,
+        "endChar": 44
+      },
+      "revId": "dead7aaec1de97eb9c2b6d3e8a2c3a42b7bc33d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79d8196a_a6db0892",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-21T22:53:23Z",
+      "side": 1,
+      "message": "Incorrect bug number, should be 1264",
+      "revId": "dead7aaec1de97eb9c2b6d3e8a2c3a42b7bc33d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bddc50e_c7175d04",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-21T22:53:23Z",
+      "side": 1,
+      "message": "Frequence -\u003e Frequency\nFreqence -\u003e Frequency",
+      "revId": "dead7aaec1de97eb9c2b6d3e8a2c3a42b7bc33d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57bf2d37_001598c8",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-21T22:53:23Z",
+      "side": 1,
+      "message": "nit: we use static_cast over C-style casts, and uint64_t over UINT64\n\n static_cast\u003cuint64_t\u003e",
+      "revId": "dead7aaec1de97eb9c2b6d3e8a2c3a42b7bc33d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19b9fe46_59ebd691",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-21T22:53:23Z",
+      "side": 1,
+      "message": "optional: Consider using absl::StrFormat, then you won\u0027t need PRIu16 etc and can just use %d which will make this code easier to read. (And not have to reason about the maximum length.)",
+      "revId": "dead7aaec1de97eb9c2b6d3e8a2c3a42b7bc33d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
