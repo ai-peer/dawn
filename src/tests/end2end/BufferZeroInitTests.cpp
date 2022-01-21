@@ -1192,7 +1192,7 @@ TEST_P(BufferZeroInitTest, PaddingInitialized) {
             // Uniform usage is added to force even more padding on D3D12.
             // The buffer is internally padded and allocated as a larger buffer.
             const uint32_t vertexBufferSize = vertexFormatSize + extraBytes;
-            for (uint32_t vertexBufferOffset = 0; vertexBufferOffset <= vertexBufferSize;
+            for (uint32_t vertexBufferOffset = 0; vertexBufferOffset < vertexBufferSize;
                  vertexBufferOffset += 4u) {
                 wgpu::Buffer vertexBuffer = CreateBuffer(
                     vertexBufferSize, wgpu::BufferUsage::Vertex | wgpu::BufferUsage::Uniform |
