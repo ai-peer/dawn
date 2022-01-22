@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d47721da_9aa7a6a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-22T00:24:16Z",
+      "side": 1,
+      "message": "Oops, didn\u0027t realize there were e2e tests verifying the behavior. Silenced them with the update. Please take a look at the follow up CL that adds testing for the new behavior to make up for the lost coverage in this one. Will submit if no major pushback.",
+      "revId": "d88e6508710f3c78d31b750120c568a911de22a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
