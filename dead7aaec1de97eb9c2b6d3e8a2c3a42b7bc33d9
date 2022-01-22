@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf9a8589_62e9099d",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-01-22T07:11:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ad9fb28_9d9c117c",
+      "range": {
+        "startLine": 238,
+        "startChar": 36,
+        "endLine": 238,
+        "endChar": 44
+      },
+      "revId": "dead7aaec1de97eb9c2b6d3e8a2c3a42b7bc33d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79d8196a_a6db0892",
@@ -54,6 +78,24 @@
       "writtenOn": "2022-01-21T22:53:23Z",
       "side": 1,
       "message": "Incorrect bug number, should be 1264",
+      "revId": "dead7aaec1de97eb9c2b6d3e8a2c3a42b7bc33d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e41ec330_ef60b87e",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-01-22T07:11:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79d8196a_a6db0892",
       "revId": "dead7aaec1de97eb9c2b6d3e8a2c3a42b7bc33d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f325186_44fa28e5",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-01-22T07:11:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3bddc50e_c7175d04",
+      "revId": "dead7aaec1de97eb9c2b6d3e8a2c3a42b7bc33d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57bf2d37_001598c8",
@@ -92,6 +152,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b58cd65_3ea18c22",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-01-22T07:11:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57bf2d37_001598c8",
+      "revId": "dead7aaec1de97eb9c2b6d3e8a2c3a42b7bc33d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19b9fe46_59ebd691",
@@ -105,6 +183,24 @@
       "writtenOn": "2022-01-21T22:53:23Z",
       "side": 1,
       "message": "optional: Consider using absl::StrFormat, then you won\u0027t need PRIu16 etc and can just use %d which will make this code easier to read. (And not have to reason about the maximum length.)",
+      "revId": "dead7aaec1de97eb9c2b6d3e8a2c3a42b7bc33d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8a34ff2_42f8dbb9",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-01-22T07:11:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19b9fe46_59ebd691",
       "revId": "dead7aaec1de97eb9c2b6d3e8a2c3a42b7bc33d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
