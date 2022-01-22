@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "255941fe_800c9396",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-01-22T15:32:57Z",
+      "side": 1,
+      "message": "@Corentin， I had uploaded a CL for that： https://dawn-review.googlesource.com/c/dawn/+/76940",
+      "revId": "9e1ec4cc1c0d49df586f1455e677f89d7dc9e2b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
