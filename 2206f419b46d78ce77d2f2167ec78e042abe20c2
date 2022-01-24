@@ -16,6 +16,23 @@
       "message": "Let\u0027s suppress them for now, and see whether there will be more such full validation specific failure cases emerging.",
       "revId": "2206f419b46d78ce77d2f2167ec78e042abe20c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dc71c87_f625765b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-24T14:43:05Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2206f419b46d78ce77d2f2167ec78e042abe20c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
