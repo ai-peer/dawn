@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab283758_4d32141c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-24T08:15:03Z",
+      "side": 1,
+      "message": "I had some time on the train so I took a try at making the computation better and more robust to varying timestamp values (see the comments about missing carries). It is in https://dawn-review.googlesource.com/c/dawn/+/77780 which I think addresses all the comments raised here. Do you mind if we try to land that one?",
+      "revId": "d4d1f15e2d3d1e7b9933d54cdd80dd1f62f71657",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26a9711d_7e39fbcd",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-24T08:15:03Z",
+      "side": 1,
+      "message": "I think this constant 1024 could be improved to depend on the actual period. If the period is more than 64, params.period will be larger than 2^16 and the computations in the shader will overflow.",
+      "revId": "d4d1f15e2d3d1e7b9933d54cdd80dd1f62f71657",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdfb9050_cbc7d901",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-24T08:15:03Z",
+      "side": 1,
+      "message": "nit: Result as a structure name is too generic, this is a MulOpResult for example.",
+      "revId": "d4d1f15e2d3d1e7b9933d54cdd80dd1f62f71657",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5c27e4a_4fb9b13a",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-24T08:15:03Z",
+      "side": 1,
+      "message": "In general I think we can skip these small optimizations: mathematical operations on the GPU are extremely cheap so we can favor readability (be having less code) over execution speed.",
+      "revId": "d4d1f15e2d3d1e7b9933d54cdd80dd1f62f71657",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c561845c_820a4a88",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-24T08:15:03Z",
+      "side": 1,
+      "message": "The addition in the computation of result_low could overflow if timestamp_low * period is very large.",
+      "revId": "d4d1f15e2d3d1e7b9933d54cdd80dd1f62f71657",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "567f5288_9d209876",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-24T08:15:03Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d4d1f15e2d3d1e7b9933d54cdd80dd1f62f71657",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c77fce6a_3bf63b6b",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-24T08:15:03Z",
+      "side": 1,
+      "message": "we don\u0027t use result_high.carry, so if it contains bits, we will just discard them, making the conversion very far off the expected value.",
+      "revId": "d4d1f15e2d3d1e7b9933d54cdd80dd1f62f71657",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "059e7366_062e1164",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-24T08:15:03Z",
+      "side": 1,
+      "message": "nit: we could compute the period and factor for the user of this structure. They shouldn\u0027t need to know the details of how the shader computes the conversion.",
+      "revId": "d4d1f15e2d3d1e7b9933d54cdd80dd1f62f71657",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b043fd0c_39c58c62",
+        "filename": "src/dawn_native/QueryHelper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-24T08:15:03Z",
+      "side": 1,
+      "message": "nit: pass a shift instead?",
+      "revId": "d4d1f15e2d3d1e7b9933d54cdd80dd1f62f71657",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
