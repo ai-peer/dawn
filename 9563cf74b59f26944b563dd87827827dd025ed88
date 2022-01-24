@@ -34,6 +34,24 @@
       "parentUuid": "71fbc466_0b9c87b3",
       "revId": "9563cf74b59f26944b563dd87827827dd025ed88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "768c794b_e6d50caf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-24T08:14:31Z",
+      "side": 1,
+      "message": "I think you should just skip this. Eventually I think that we would like the swapchains in native to match the Web swapchains as much as possible, but it is low priority and requires a lot more work anyway (because GPUSwapChain was folded in GPUCanvasContext)",
+      "parentUuid": "3d6af3e7_c0f3446b",
+      "revId": "9563cf74b59f26944b563dd87827827dd025ed88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
