@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f8a197a_d7a57931",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-24T09:03:18Z",
+      "side": 0,
+      "message": "I\u0027m not sure I understand what\u0027s causing the issue, why isn\u0027t it sufficient to invalidate the sampler heaps when the root signature changes?",
+      "revId": "12a6c724550158bf9258b0a3c65cbe1656d5cbaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
