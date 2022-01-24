@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7ccbe540_e7b0ef33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-24T08:13:51Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7e25b34b68fe8497c5599d30f8effac9aad6df15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "38e903c3_fcde8843",
         "filename": "src/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp",
         "patchSetId": 2
@@ -61,6 +78,40 @@
         "endLine": 41,
         "endChar": 6
       },
+      "revId": "7e25b34b68fe8497c5599d30f8effac9aad6df15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad11636b_102dce8c",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-24T08:13:51Z",
+      "side": 1,
+      "message": "optional nit: you can use the same trick as [1] to set multiple members at once.",
+      "revId": "7e25b34b68fe8497c5599d30f8effac9aad6df15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc9f20de_b3cbbe6a",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-24T08:13:51Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "7e25b34b68fe8497c5599d30f8effac9aad6df15",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
