@@ -51,6 +51,24 @@
       "parentUuid": "6e1cfb4c_2626c9a8",
       "revId": "9e051111641d1619f630909b6cc00aeaf8efbe71",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29e553b5_33a8e3c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-24T18:04:04Z",
+      "side": 1,
+      "message": "that\u0027s a bit odd tbh; it means:\n\nlet buffer \u003d device.createBuffer({ size: 8, mapwrite });\nbuffer.mapAsync(write, 0, 4);\nbuffer.getMappedRange();\n\nis invalid.\n\nin any case, we can\u0027t use WGPU_WHOLE_SIZE as the default either since it may not fit in size_t. So perhaps \"0\" meaning \"all\" is ok.",
+      "parentUuid": "569cec6c_279697d9",
+      "revId": "9e051111641d1619f630909b6cc00aeaf8efbe71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
