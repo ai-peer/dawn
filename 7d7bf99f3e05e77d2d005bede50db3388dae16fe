@@ -33,6 +33,24 @@
       "message": "nit: put system includes after dawn includes (in a separate block). The include of.CommandRecordingContext.h should be its own block at the top too.",
       "revId": "7d7bf99f3e05e77d2d005bede50db3388dae16fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb8748f6_8bd86ae2",
+        "filename": "src/dawn_native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-01-24T08:24:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8bdd5de_5f55ec1e",
+      "revId": "7d7bf99f3e05e77d2d005bede50db3388dae16fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
