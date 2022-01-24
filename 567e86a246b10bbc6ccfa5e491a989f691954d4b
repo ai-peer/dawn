@@ -188,6 +188,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "568813d2_734aef3e",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-24T16:37:55Z",
+      "side": 1,
+      "message": "yea I already added a deprecation note in the docs and will remove it from Chrome.",
+      "parentUuid": "6771b769_625a5524",
+      "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e64ed515_77dfa9dd",
