@@ -16,6 +16,24 @@
       "message": "LGTM, but do we really not set the vertex buffer?\nthe code appears to always set it though the size may be zero.\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/d3d12/CommandBufferD3D12.cpp;l\u003d561;bpv\u003d0;bpt\u003d1",
       "revId": "2fac156d48e9ed389a9b316ddc026011e9257d9c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "449eaff8_552779c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-01-24T04:53:41Z",
+      "side": 1,
+      "message": "I think we indeed set a vetex buffer view with size 0 in dawn d3d12 backend. And according to D3D12 doc https://docs.microsoft.com/en-us/windows/win32/api/d3d12/ns-d3d12-d3d12_vertex_buffer_view and https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12graphicscommandlist-iasetvertexbuffers I cannot find any clue that requires the size \u003e 0. \n\nSo I think that\u0027s why this is an warning in full debug layer and why this warning should be suppressed.",
+      "parentUuid": "3cb4e855_709634a8",
+      "revId": "2fac156d48e9ed389a9b316ddc026011e9257d9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
