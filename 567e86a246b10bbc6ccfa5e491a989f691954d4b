@@ -172,6 +172,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6771b769_625a5524",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-24T08:14:40Z",
+      "side": 1,
+      "message": "Then we should probably remove CopyB2TInternal and reuse this new extension for the other Chromium thing that needs CopyB2TInternal",
+      "parentUuid": "606e5730_cbadfe4d",
+      "revId": "567e86a246b10bbc6ccfa5e491a989f691954d4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e64ed515_77dfa9dd",
         "filename": "src/dawn_native/CommandValidation.h",
         "patchSetId": 2
