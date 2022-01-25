@@ -61,5 +61,8 @@ static constexpr uint32_t kMaxQueryCount = 8192u;
 static constexpr uint8_t kSampledTexturesPerExternalTexture = 3u;
 static constexpr uint8_t kSamplersPerExternalTexture = 1u;
 static constexpr uint8_t kUniformsPerExternalTexture = 1u;
+// The above bindings describe the specification-defined contents of an external texture, but not
+// all of these bindings are implemented in Dawn, so we use the below constant for validation.
+constexpr uint32_t kNumExpandedBindingsPerExternalTextureImplemented = 2;
 
 #endif  // COMMON_CONSTANTS_H_
