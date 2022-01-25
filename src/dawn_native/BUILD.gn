@@ -331,10 +331,10 @@ source_set("dawn_native_sources") {
     "VertexFormat.cpp",
     "VertexFormat.h",
     "dawn_platform.h",
-    "webgpu_absl_format.cpp",
-    "webgpu_absl_format.h",
     "utils/WGPUHelpers.cpp",
     "utils/WGPUHelpers.h",
+    "webgpu_absl_format.cpp",
+    "webgpu_absl_format.h",
   ]
 
   if (dawn_use_x11) {
@@ -536,6 +536,8 @@ source_set("dawn_native_sources") {
       "opengl/ComputePipelineGL.h",
       "opengl/DeviceGL.cpp",
       "opengl/DeviceGL.h",
+      "opengl/ExternalTextureGL.cpp",
+      "opengl/ExternalTextureGL.h",
       "opengl/Forward.h",
       "opengl/GLFormat.cpp",
       "opengl/GLFormat.h",
@@ -597,6 +599,8 @@ source_set("dawn_native_sources") {
       "vulkan/DeviceVk.cpp",
       "vulkan/DeviceVk.h",
       "vulkan/ExternalHandle.h",
+      "vulkan/ExternalTextureVk.cpp",
+      "vulkan/ExternalTextureVk.h",
       "vulkan/FencedDeleter.cpp",
       "vulkan/FencedDeleter.h",
       "vulkan/Forward.h",

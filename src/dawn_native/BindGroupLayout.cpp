@@ -367,27 +367,113 @@ namespace dawn::native {
                                              PipelineCompatibilityToken pipelineCompatibilityToken,
                                              ApiObjectBase::UntrackedByDeviceTag tag)
         : ApiObjectBase(device, descriptor->label),
-          mBindingInfo(BindingIndex(descriptor->entryCount)),
           mPipelineCompatibilityToken(pipelineCompatibilityToken) {
-        std::vector<BindGroupLayoutEntry> sortedBindings(
-            descriptor->entries, descriptor->entries + descriptor->entryCount);
+        std::vector<BindGroupLayoutEntry> sortedBindings;
+        std::unordered_map<uint32_t, BindGroupLayoutEntry> map;
+        ityp::vector<BindingNumber, BindingNumber> externalTextureBindingNumbers;
+        // Create a map of all bgl entries
+        for (uint32_t i = 0; i < descriptor->entryCount; i++) {
+            BindGroupLayoutEntry entry = descriptor->entries[i];
+            map[entry.binding] = entry;
+            const ExternalTextureBindingLayout* externalTextureBindingLayout = nullptr;
+            FindInChain(entry.nextInChain, &externalTextureBindingLayout);
+            if (externalTextureBindingLayout != nullptr) {
+                externalTextureBindingNumbers.push_back(BindingNumber(entry.binding));
+            } else {
+                sortedBindings.push_back(entry);
+            }
+        }
+
+        // External textures are expanded from a texture_external into two texture_2d<f32>
+        // bindings and one uniform buffer binding. The original binding location is used
+        // for the first texture_2d<f32> and we must find two open binding locations to
+        // assign the second texture_2d<f32> and uniform to.
+        for (BindingNumber binding : externalTextureBindingNumbers) {
+            dawn_native::ExternalTextureBindingExpansion bindingExpansion;
+            bindingExpansion.plane0 = binding;
+
+            // Insert a new entry
+            BindGroupLayoutEntry plane0Entry;
+            plane0Entry.binding = static_cast<uint32_t>(binding);
+            plane0Entry.visibility = wgpu::ShaderStage::Fragment;
+            TextureBindingLayout plane0Layout;
+            plane0Layout.viewDimension = wgpu::TextureViewDimension::e2D;
+            plane0Layout.multisampled = false;
+            plane0Layout.sampleType = wgpu::TextureSampleType::Float;
+            plane0Entry.texture = plane0Layout;
+            sortedBindings.push_back(plane0Entry);
+
+            bool plane1Set = false;
+            bool paramsSet = false;
+            uint32_t index(0);
+            while (plane1Set == false || paramsSet == false) {
+                // Find unused binding slots
+                if (map.find(index) == map.end()) {
+                    if (!plane1Set) {
+                        bindingExpansion.plane1 = BindingNumber(index);
+
+                        // insert a new entry
+                        BindGroupLayoutEntry e;
+                        e.binding = index;
+                        e.visibility = wgpu::ShaderStage::Fragment;
+
+                        TextureBindingLayout b;
+                        b.viewDimension = wgpu::TextureViewDimension::e2D;
+                        b.multisampled = false;
+                        b.sampleType = wgpu::TextureSampleType::Float;
+
+                        e.texture = b;
+                        sortedBindings.push_back(e);
+
+                        // insert back into map
+                        map[index] = e;
+                        plane1Set = true;
+                    } else if (!paramsSet) {
+                        bindingExpansion.params = BindingNumber(index);
+
+                        // insert a new entry
+                        BindGroupLayoutEntry e;
+                        e.binding = index;
+                        e.visibility = wgpu::ShaderStage::Fragment;
+
+                        BufferBindingLayout b;
+                        b.hasDynamicOffset = false;
+                        b.type = wgpu::BufferBindingType::Uniform;
+
+                        e.buffer = b;
+                        sortedBindings.push_back(e);
+                        // insert back into map
+                        map[index] = e;
+                        paramsSet = true;
+                    }
+                }
+                index++;
+            }
+            mExternalTextureBindingExpansions[binding] = bindingExpansion;
+        }
 
         std::sort(sortedBindings.begin(), sortedBindings.end(), SortBindingsCompare);
 
-        for (BindingIndex i{0}; i < mBindingInfo.size(); ++i) {
+        for (uint32_t i = 0; i < sortedBindings.size(); ++i) {
             const BindGroupLayoutEntry& binding = sortedBindings[static_cast<uint32_t>(i)];
 
-            mBindingInfo[i] = CreateBindGroupLayoutInfo(binding);
+            mBindingInfo.push_back(CreateBindGroupLayoutInfo(binding));
 
             if (IsBufferBinding(binding)) {
                 // Buffers must be contiguously packed at the start of the binding info.
-                ASSERT(GetBufferCount() == i);
+                ASSERT(GetBufferCount() == BindingIndex(i));
             }
             IncrementBindingCounts(&mBindingCounts, binding);
 
             const auto& [_, inserted] = mBindingMap.emplace(BindingNumber(binding.binding), i);
             ASSERT(inserted);
+
+            // const auto& it = mBindingMap.emplace(BindingNumber(binding.binding),
+            // BindingIndex(i));
+
+            // ASSERT(it.second);
         }
+
         ASSERT(CheckBufferBindingsFirst({mBindingInfo.data(), GetBindingCount()}));
         ASSERT(mBindingInfo.size() <= kMaxBindingsPerPipelineLayoutTyped);
     }
@@ -486,8 +572,17 @@ namespace dawn::native {
         return mBindingCounts.unverifiedBufferCount;
     }
 
+    uint32_t BindGroupLayoutBase::GetExternalTextureBindingCount() const {
+        return mExternalTextureBindingExpansions.size();
+    }
+
     const BindingCounts& BindGroupLayoutBase::GetBindingCountInfo() const {
         return mBindingCounts;
+    }
+
+    std::map<BindingNumber, dawn_native::ExternalTextureBindingExpansion>
+    BindGroupLayoutBase::GetExternalTextureBindingExpansions() const {
+        return mExternalTextureBindingExpansions;
     }
 
     bool BindGroupLayoutBase::IsLayoutEqual(const BindGroupLayoutBase* other,

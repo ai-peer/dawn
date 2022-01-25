@@ -46,10 +46,11 @@ namespace dawn::native::vulkan {
         createInfo.stage.stage = VK_SHADER_STAGE_COMPUTE_BIT;
         // Generate a new VkShaderModule with BindingRemapper tint transform for each pipeline
         const ProgrammableStage& computeStage = GetStage(SingleShaderStage::Compute);
-        DAWN_TRY_ASSIGN(createInfo.stage.module,
-                        ToBackend(computeStage.module.Get())
-                            ->GetTransformedModuleHandle(computeStage.entryPoint.c_str(),
-                                                         ToBackend(GetLayout())));
+        DAWN_TRY_ASSIGN(
+            createInfo.stage.module,
+            ToBackend(computeStage.module.Get())
+                ->GetTransformedModuleHandle(computeStage.entryPoint.c_str(),
+                                             ToBackend(GetLayout()), SingleShaderStage::Compute));
 
         createInfo.stage.pName = computeStage.entryPoint.c_str();
 
