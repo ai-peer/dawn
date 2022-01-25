@@ -394,6 +394,8 @@ namespace dawn::native {
             PipelineCompatibilityToken pipelineCompatibilityToken) = 0;
         virtual ResultOrError<Ref<BufferBase>> CreateBufferImpl(
             const BufferDescriptor* descriptor) = 0;
+        virtual ResultOrError<Ref<ExternalTextureBase>> CreateExternalTextureImpl(
+            const ExternalTextureDescriptor* descriptor);
         virtual ResultOrError<Ref<PipelineLayoutBase>> CreatePipelineLayoutImpl(
             const PipelineLayoutDescriptor* descriptor) = 0;
         virtual ResultOrError<Ref<QuerySetBase>> CreateQuerySetImpl(

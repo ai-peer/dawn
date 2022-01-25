@@ -225,17 +225,10 @@ TEST_F(OcclusionQueryValidationTest, InvalidBeginAndEnd) {
 class TimestampQueryValidationTest : public QuerySetValidationTest {
   protected:
     WGPUDevice CreateTestDevice() override {
-        wgpu::DeviceDescriptor descriptor;
-        wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::TimestampQuery};
-        descriptor.requiredFeatures = requiredFeatures;
-        descriptor.requiredFeaturesCount = 1;
-
-        wgpu::DawnTogglesDeviceDescriptor togglesDesc;
-        descriptor.nextInChain = &togglesDesc;
-        const char* forceDisabledToggles[1] = {"disallow_unsafe_apis"};
-        togglesDesc.forceDisabledToggles = forceDisabledToggles;
-        togglesDesc.forceDisabledTogglesCount = 1;
-
+        dawn_native::DawnDeviceDescriptor descriptor;
+        descriptor.requiredFeatures.push_back("timestamp-query");
+        descriptor.forceEnabledToggles.push_back(
+            "disable_multiplanar_texture_creation_validation_for_testing");
         return adapter.CreateDevice(&descriptor);
     }
 };
