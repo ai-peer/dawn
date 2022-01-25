@@ -87,6 +87,24 @@
       "parentUuid": "29e553b5_33a8e3c3",
       "revId": "9e051111641d1619f630909b6cc00aeaf8efbe71",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "895d29a6_df826139",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-25T01:13:51Z",
+      "side": 1,
+      "message": "yes, mapAsync already handles WGPU_WHOLE_MAP_SIZE. CAn\u0027t be default because callback args are after it.\n\n\u003e can we use that ?\nwould WGPU_WHOLE_MAP_SIZE be a bit misleading because it is not actually the whole map size for getMappedRange(), instead it is the whole buffer size?",
+      "parentUuid": "a8c1b2af_3d9ea789",
+      "revId": "9e051111641d1619f630909b6cc00aeaf8efbe71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
