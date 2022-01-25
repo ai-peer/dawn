@@ -97,6 +97,32 @@ namespace dawn::native::metal {
         transformManager.Add<tint::transform::SingleEntryPoint>();
         transformInputs.Add<tint::transform::SingleEntryPoint::Config>(entryPointName);
 
+        // Transform external textures into the binding locations specified in the bgl
+        tint::transform::MultiplanarExternalTexture::BindingsMap newBindingsMap;
+        for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+            const BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(i);
+
+            std::map<BindingNumber, dawn_native::ExternalTextureBindingExpansion> expansions =
+                bgl->GetExternalTextureBindingExpansions();
+
+            std::map<BindingNumber, dawn_native::ExternalTextureBindingExpansion>::iterator it =
+                expansions.begin();
+
+            while (it != expansions.end()) {
+                newBindingsMap[{static_cast<uint32_t>(i),
+                                static_cast<uint32_t>(it->second.plane0)}] = {
+                    {static_cast<uint32_t>(i), static_cast<uint32_t>(it->second.plane1)},
+                    {static_cast<uint32_t>(i), static_cast<uint32_t>(it->second.params)}};
+                it++;
+            }
+        }
+
+        if (!newBindingsMap.empty()) {
+            transformManager.Add<tint::transform::MultiplanarExternalTexture>();
+            transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
+                newBindingsMap);
+        }
+
         if (stage == SingleShaderStage::Vertex &&
             GetDevice()->IsToggleEnabled(Toggle::MetalEnableVertexPulling)) {
             transformManager.Add<tint::transform::VertexPulling>();
