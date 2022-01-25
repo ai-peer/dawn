@@ -111,7 +111,8 @@ namespace dawn::native::vulkan {
 
     ResultOrError<VkShaderModule> ShaderModule::GetTransformedModuleHandle(
         const char* entryPointName,
-        PipelineLayout* layout) {
+        PipelineLayout* layout,
+        SingleShaderStage stage) {
         TRACE_EVENT0(GetDevice()->GetPlatform(), General,
                      "ShaderModuleVk::GetTransformedModuleHandle");
 
@@ -164,6 +165,34 @@ namespace dawn::native::vulkan {
                                                          std::move(accessControls),
                                                          /* mayCollide */ false);
         transformInputs.Add<tint::transform::SingleEntryPoint::Config>(entryPointName);
+
+        if (stage == SingleShaderStage::Fragment) {
+            tint::transform::MultiplanarExternalTexture::BindingsMap newBindingsMap;
+
+            for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+                BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(i);
+
+                std::map<BindingNumber, dawn_native::ExternalTextureBindingExpansion> expansions =
+                    bgl->GetExternalTextureBindingExpansions();
+                std::map<BindingNumber, dawn_native::ExternalTextureBindingExpansion>::iterator it =
+                    expansions.begin();
+
+                while (it != expansions.end()) {
+                    newBindingsMap[{
+                        static_cast<uint32_t>(i),
+                        static_cast<uint32_t>(bgl->GetBindingIndex(it->second.plane0))}] = {
+                        {static_cast<uint32_t>(i),
+                         static_cast<uint32_t>(bgl->GetBindingIndex(it->second.plane1))},
+                        {static_cast<uint32_t>(i),
+                         static_cast<uint32_t>(bgl->GetBindingIndex(it->second.params))}};
+                    it++;
+                }
+
+                transformManager.Add<tint::transform::MultiplanarExternalTexture>();
+                transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
+                    newBindingsMap);
+            }
+        }
 
         tint::Program program;
         {

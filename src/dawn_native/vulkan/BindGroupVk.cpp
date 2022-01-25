@@ -130,24 +130,9 @@ namespace dawn::native::vulkan {
                     break;
                 }
 
-                case BindingInfoType::ExternalTexture: {
-                    const std::array<Ref<dawn::native::TextureViewBase>, kMaxPlanesPerFormat>&
-                        textureViews = GetBindingAsExternalTexture(bindingIndex)->GetTextureViews();
-
-                    // Only single-plane formats are supported right now, so ensure only one view
-                    // exists.
-                    ASSERT(textureViews[1].Get() == nullptr);
-                    ASSERT(textureViews[2].Get() == nullptr);
-
-                    TextureView* view = ToBackend(textureViews[0].Get());
-
-                    writeImageInfo[numWrites].imageView = view->GetHandle();
-                    writeImageInfo[numWrites].imageLayout = VulkanImageLayout(
-                        ToBackend(view->GetTexture()), wgpu::TextureUsage::TextureBinding);
-
-                    write.pImageInfo = &writeImageInfo[numWrites];
+                case BindingInfoType::ExternalTexture:
+                    UNREACHABLE();
                     break;
-                }
             }
 
             numWrites++;
