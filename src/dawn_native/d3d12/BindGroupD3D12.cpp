@@ -131,8 +131,8 @@ namespace dawn::native::d3d12 {
 
                 case BindingInfoType::Texture: {
                     auto* view = ToBackend(GetBindingAsTextureView(bindingIndex));
-                    auto& srv = view->GetSRVDescriptor();
 
+                    auto& srv = view->GetSRVDescriptor();
                     ID3D12Resource* resource = ToBackend(view->GetTexture())->GetD3D12Resource();
                     if (resource == nullptr) {
                         // The Texture was destroyed. Skip creating the SRV since there is no
@@ -177,21 +177,7 @@ namespace dawn::native::d3d12 {
                 }
 
                 case BindingInfoType::ExternalTexture: {
-                    const std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat>& views =
-                        GetBindingAsExternalTexture(bindingIndex)->GetTextureViews();
-
-                    ASSERT(views[2].Get() == nullptr);
-
-                    auto& srv = ToBackend(views[0])->GetSRVDescriptor();
-
-                    ID3D12Resource* resource =
-                        ToBackend(views[0]->GetTexture())->GetD3D12Resource();
-
-                    d3d12Device->CreateShaderResourceView(
-                        resource, &srv,
-                        viewAllocation.OffsetFrom(viewSizeIncrement,
-                                                  descriptorHeapOffsets[bindingIndex]));
-                    break;
+                    UNREACHABLE();
                 }
 
                 case BindingInfoType::Sampler: {
