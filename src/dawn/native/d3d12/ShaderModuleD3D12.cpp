@@ -753,7 +753,7 @@ namespace dawn::native::d3d12 {
 
     ResultOrError<CompiledShader> ShaderModule::Compile(const ProgrammableStage& programmableStage,
                                                         SingleShaderStage stage,
-                                                        PipelineLayout* layout,
+                                                        const PipelineLayout* layout,
                                                         uint32_t compileFlags) {
         TRACE_EVENT0(GetDevice()->GetPlatform(), General, "ShaderModuleD3D12::Compile");
         ASSERT(!IsError());
@@ -767,8 +767,11 @@ namespace dawn::native::d3d12 {
         tint::transform::Manager transformManager;
         tint::transform::DataMap transformInputs;
 
-        const tint::Program* program;
+        const tint::Program* program = GetTintProgram();
         tint::Program programAsValue;
+
+        AddExternalTextureTransform(layout, transformManager, transformInputs);
+
         if (stage == SingleShaderStage::Vertex) {
             transformManager.Add<tint::transform::FirstIndexOffset>();
             transformInputs.Add<tint::transform::FirstIndexOffset::BindingPoint>(
@@ -777,7 +780,7 @@ namespace dawn::native::d3d12 {
 
             tint::transform::DataMap transformOutputs;
             DAWN_TRY_ASSIGN(programAsValue,
-                            RunTransforms(&transformManager, GetTintProgram(), transformInputs,
+                            RunTransforms(&transformManager, program, transformInputs,
                                           &transformOutputs, nullptr));
 
             if (auto* data = transformOutputs.Get<tint::transform::FirstIndexOffset::Data>()) {
@@ -796,7 +799,10 @@ namespace dawn::native::d3d12 {
 
             program = &programAsValue;
         } else {
-            program = GetTintProgram();
+            DAWN_TRY_ASSIGN(programAsValue, RunTransforms(&transformManager, program,
+                                                          transformInputs, nullptr, nullptr));
+
+            program = &programAsValue;
         }
 
         ShaderCompilationRequest request;
