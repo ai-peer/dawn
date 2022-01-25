@@ -123,6 +123,24 @@
       "parentUuid": "895d29a6_df826139",
       "revId": "9e051111641d1619f630909b6cc00aeaf8efbe71",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "611623e9_445d39cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-25T07:12:38Z",
+      "side": 1,
+      "message": "+1 for using that value, or a new WGPU_WHOLE_BUFFER_SIZE_FOR_MAPPED_RANGE but that\u0027s a mouthful.",
+      "parentUuid": "f2eced3e_cb4df810",
+      "revId": "9e051111641d1619f630909b6cc00aeaf8efbe71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
