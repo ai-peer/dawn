@@ -16,6 +16,57 @@
       "message": "PTAL, thanks!",
       "revId": "92709a0dbb1a1e6ce368080ef8b20fabf55bcaf1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce531815_5e48a767",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-25T09:03:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "92709a0dbb1a1e6ce368080ef8b20fabf55bcaf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9407a73b_a9890086",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-25T09:03:09Z",
+      "side": 1,
+      "message": "How does it fail? Is it Dawn\u0027s fault?",
+      "revId": "92709a0dbb1a1e6ce368080ef8b20fabf55bcaf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42661723_8fc02d0f",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-25T09:03:09Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "92709a0dbb1a1e6ce368080ef8b20fabf55bcaf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
