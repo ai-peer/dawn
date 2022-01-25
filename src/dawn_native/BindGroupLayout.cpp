@@ -153,6 +153,28 @@ namespace dawn::native {
             return {};
         }
 
+        BindGroupLayoutEntry CreateSampledTextureBindingForExternalTexture(
+            uint32_t binding,
+            wgpu::ShaderStage visibility) {
+            BindGroupLayoutEntry entry;
+            entry.binding = binding;
+            entry.visibility = visibility;
+            entry.texture.viewDimension = wgpu::TextureViewDimension::e2D;
+            entry.texture.multisampled = false;
+            entry.texture.sampleType = wgpu::TextureSampleType::Float;
+            return entry;
+        }
+
+        BindGroupLayoutEntry CreateUniformBindingForExternalTexture(uint32_t binding,
+                                                                    wgpu::ShaderStage visibility) {
+            BindGroupLayoutEntry entry;
+            entry.binding = binding;
+            entry.visibility = visibility;
+            entry.buffer.hasDynamicOffset = false;
+            entry.buffer.type = wgpu::BufferBindingType::Uniform;
+            return entry;
+        }
+
     }  // anonymous namespace
 
     MaybeError ValidateBindGroupLayoutDescriptor(DeviceBase* device,
@@ -367,21 +389,83 @@ namespace dawn::native {
                                              PipelineCompatibilityToken pipelineCompatibilityToken,
                                              ApiObjectBase::UntrackedByDeviceTag tag)
         : ApiObjectBase(device, descriptor->label),
-          mBindingInfo(BindingIndex(descriptor->entryCount)),
           mPipelineCompatibilityToken(pipelineCompatibilityToken) {
-        std::vector<BindGroupLayoutEntry> sortedBindings(
-            descriptor->entries, descriptor->entries + descriptor->entryCount);
+        std::vector<BindGroupLayoutEntry> sortedBindings;
+        std::vector<BindGroupLayoutEntry> externalTextureBindingEntries;
+        std::set<uint32_t> bindingNumberSet;
+
+        // Here we:
+        // - Insert all non-ExternalTexture bindings into the (unsorted) sortedBindings list.
+        // - Create a list of all external textures in the bgl.
+        // - Create a set of all the binding numbers used in this bgl.
+        for (uint32_t i = 0; i < descriptor->entryCount; i++) {
+            BindGroupLayoutEntry entry = descriptor->entries[i];
+            bindingNumberSet.insert(entry.binding);
+            const ExternalTextureBindingLayout* externalTextureBindingLayout = nullptr;
+            FindInChain(entry.nextInChain, &externalTextureBindingLayout);
+            if (externalTextureBindingLayout != nullptr) {
+                for (SingleShaderStage stage : IterateStages(entry.visibility)) {
+                    // External textures are not fully implemented, which means that expanding the
+                    // external texture at this time will not occupy the same number of binding
+                    // slots as defined in the WebGPU specification. Here we prematurely increment
+                    // the binding counts for an additional sampled texture and a sampler so that an
+                    // external texture will occupy the correct number of slots for correct
+                    // validation of shader binding limits.
+                    mBindingCounts.perStage[stage].sampledTextureCount++;
+                    mBindingCounts.perStage[stage].samplerCount++;
+                }
+                externalTextureBindingEntries.push_back(entry);
+            } else {
+                sortedBindings.push_back(entry);
+            }
+        }
+
+        // External textures are expanded from a texture_external into two sampled texture
+        // bindings and one uniform buffer binding. The original binding number is used
+        // for the first sampled texture. For every external texture we must find two open binding
+        // locations to assign the second sampled texture and uniform buffer.
+        for (BindGroupLayoutEntry entry : externalTextureBindingEntries) {
+            dawn_native::ExternalTextureBindingExpansion bindingExpansion;
+            bindingExpansion.plane0 = BindingNumber(entry.binding);
+
+            BindGroupLayoutEntry plane0Entry = CreateSampledTextureBindingForExternalTexture(
+                static_cast<uint32_t>(entry.binding), entry.visibility);
+            sortedBindings.push_back(plane0Entry);
+
+            uint32_t index = 0;
+            while (bindingNumberSet.find(index) != bindingNumberSet.end()) {
+                index++;
+            }
+
+            bindingExpansion.plane1 = BindingNumber(index);
+            BindGroupLayoutEntry plane1Entry =
+                CreateSampledTextureBindingForExternalTexture(index, entry.visibility);
+            sortedBindings.push_back(plane1Entry);
+            bindingNumberSet.insert(index);
+
+            while (bindingNumberSet.find(index) != bindingNumberSet.end()) {
+                index++;
+            }
+
+            bindingExpansion.params = BindingNumber(index);
+            BindGroupLayoutEntry paramsEntry =
+                CreateUniformBindingForExternalTexture(index, entry.visibility);
+            sortedBindings.push_back(paramsEntry);
+            bindingNumberSet.insert(index);
+
+            mExternalTextureBindingExpansions[BindingNumber(entry.binding)] = bindingExpansion;
+        }
 
         std::sort(sortedBindings.begin(), sortedBindings.end(), SortBindingsCompare);
 
-        for (BindingIndex i{0}; i < mBindingInfo.size(); ++i) {
+        for (uint32_t i = 0; i < sortedBindings.size(); ++i) {
             const BindGroupLayoutEntry& binding = sortedBindings[static_cast<uint32_t>(i)];
 
-            mBindingInfo[i] = CreateBindGroupLayoutInfo(binding);
+            mBindingInfo.push_back(CreateBindGroupLayoutInfo(binding));
 
             if (IsBufferBinding(binding)) {
                 // Buffers must be contiguously packed at the start of the binding info.
-                ASSERT(GetBufferCount() == i);
+                ASSERT(GetBufferCount() == BindingIndex(i));
             }
             IncrementBindingCounts(&mBindingCounts, binding);
 
@@ -486,8 +570,17 @@ namespace dawn::native {
         return mBindingCounts.unverifiedBufferCount;
     }
 
+    uint32_t BindGroupLayoutBase::GetExternalTextureBindingCount() const {
+        return mExternalTextureBindingExpansions.size();
+    }
+
     const BindingCounts& BindGroupLayoutBase::GetBindingCountInfo() const {
         return mBindingCounts;
+    }
+
+    std::map<BindingNumber, dawn_native::ExternalTextureBindingExpansion>
+    BindGroupLayoutBase::GetExternalTextureBindingExpansions() const {
+        return mExternalTextureBindingExpansions;
     }
 
     bool BindGroupLayoutBase::IsLayoutEqual(const BindGroupLayoutBase* other,
