@@ -155,6 +155,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af942d4f_59cbe2de",
+        "filename": "src/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-01-25T02:34:08Z",
+      "side": 1,
+      "message": "I simply moved the implementation from VulkanImageWrappingTests.cpp to \"_OpaqueFD.cpp\" and \"_DmaBuf.cpp\" respectively.",
+      "parentUuid": "51e776ee_2df19b8f",
+      "revId": "7e25b34b68fe8497c5599d30f8effac9aad6df15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc9f20de_b3cbbe6a",
         "filename": "src/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp",
         "patchSetId": 2
