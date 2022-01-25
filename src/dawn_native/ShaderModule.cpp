@@ -444,6 +444,25 @@ namespace dawn::native {
             const ShaderBindingInfo& shaderInfo) {
             const BindGroupLayoutBase::BindingMap& layoutBindings = layout->GetBindingMap();
 
+            // An external texture binding found in the shader will later be expanded into multiple
+            // bindings at compile time. This expansion will have already happened in the bgl - so
+            // the shader and bgl will always mismatch at this point. Expansion info is contained in
+            // the bgl object, so we can still verify the bgl used to have an external texture in
+            // the slot corresponding to the shader reflection.
+            if (shaderInfo.bindingType == BindingInfoType::ExternalTexture) {
+                // If an external texture binding used to exist in the bgl, it will be found as a
+                // key in the ExternalTextureBindingExpansions map.
+                std::map<BindingNumber, dawn_native::ExternalTextureBindingExpansion> expansions =
+                    layout->GetExternalTextureBindingExpansions();
+                std::map<BindingNumber, dawn_native::ExternalTextureBindingExpansion>::iterator it =
+                    expansions.find(bindingNumber);
+                DAWN_INVALID_IF(it == expansions.end(),
+                                "Binding type (buffer vs. texture vs. sampler vs. external) "
+                                "doesn't match the type in the layout.");
+
+                return {};
+            }
+
             const auto& bindingIt = layoutBindings.find(bindingNumber);
             DAWN_INVALID_IF(bindingIt == layoutBindings.end(), "Binding doesn't exist in %s.",
                             layout);
@@ -452,9 +471,16 @@ namespace dawn::native {
             const BindingInfo& layoutInfo = layout->GetBindingInfo(bindingIndex);
 
             // TODO(dawn:563): Provide info about the binding types.
-            DAWN_INVALID_IF(layoutInfo.bindingType != shaderInfo.bindingType,
-                            "Binding type (buffer vs. texture vs. sampler) doesn't match the type "
-                            "in the layout.");
+            DAWN_INVALID_IF(
+                layoutInfo.bindingType != shaderInfo.bindingType,
+                "Binding type (buffer vs. texture vs. sampler vs. external) doesn't match the type "
+                "in the layout.");
+
+            std::map<BindingNumber, dawn_native::ExternalTextureBindingExpansion> expansions =
+                layout->GetExternalTextureBindingExpansions();
+            DAWN_INVALID_IF(expansions.find(bindingNumber) != expansions.end(),
+                            "Binding type (buffer vs. texture vs. sampler vs. external) doesn't "
+                            "match the type in the layout.");
 
             // TODO(dawn:563): Provide info about the visibility.
             DAWN_INVALID_IF(
@@ -509,11 +535,6 @@ namespace dawn::native {
                     break;
                 }
 
-                case BindingInfoType::ExternalTexture: {
-                    // Nothing to validate! (yet?)
-                    break;
-                }
-
                 case BindingInfoType::Buffer: {
                     // Binding mismatch between shader and bind group is invalid. For example, a
                     // writable binding in the shader with a readonly storage buffer in the bind
@@ -529,7 +550,8 @@ namespace dawn::native {
 
                     DAWN_INVALID_IF(
                         layoutInfo.buffer.type != shaderInfo.buffer.type && !validBindingConversion,
-                        "The buffer type in the shader (%s) is not compatible with the type in the "
+                        "The buffer type in the shader (%s) is not compatible with "
+                        "the type in the "
                         "layout (%s).",
                         shaderInfo.buffer.type, layoutInfo.buffer.type);
 
@@ -546,11 +568,17 @@ namespace dawn::native {
                     DAWN_INVALID_IF(
                         (layoutInfo.sampler.type == wgpu::SamplerBindingType::Comparison) !=
                             shaderInfo.sampler.isComparison,
-                        "The sampler type in the shader (comparison: %u) doesn't match the type in "
+                        "The sampler type in the shader (comparison: %u) doesn't match the "
+                        "type in "
                         "the layout (comparison: %u).",
                         shaderInfo.sampler.isComparison,
                         layoutInfo.sampler.type == wgpu::SamplerBindingType::Comparison);
                     break;
+
+                case BindingInfoType::ExternalTexture: {
+                    UNREACHABLE();
+                    break;
+                }
             }
 
             return {};
