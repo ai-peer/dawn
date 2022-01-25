@@ -14,11 +14,15 @@
 
 #include "dawn_native/ExternalTexture.h"
 
+#include "dawn_native/Buffer.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/ObjectType_autogen.h"
+#include "dawn_native/Queue.h"
 #include "dawn_native/Texture.h"
 
 #include "dawn_native/dawn_platform.h"
+
+#include <string>
 
 namespace dawn::native {
 
@@ -122,6 +126,49 @@ namespace dawn::native {
         // Store any passed in TextureViews associated with individual planes.
         mTextureViews[0] = descriptor->plane0;
         mTextureViews[1] = descriptor->plane1;
+
+        // We must create a buffer to store parameters needed by a shader that operates on this
+        // external texture.
+        BufferDescriptor bufferDesc;
+        bufferDesc.size = sizeof(ExternalTextureParams);
+        bufferDesc.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;
+        if (descriptor->label) {
+            std::string label = "Dawn_External_Texture_Params_Buffer_";
+            label.append(descriptor->label);
+            bufferDesc.label = label.c_str();
+        } else {
+            bufferDesc.label = "Dawn_External_Texture_Params_Buffer";
+        }
+
+        DAWN_TRY_ASSIGN(mParamsBuffer, device->CreateBuffer(&bufferDesc));
+
+        // Dawn & Tint's YUV to RGB conversion implementation was inspired by the conversions found
+        // in libYUV. If this implementation needs expanded to support more colorspaces, this file
+        // is an excellent reference: chromium/src/third_party/libyuv/source/row_common.cc.
+        //
+        // The conversion from YUV to RGB looks like this:
+        // r = Y * 1.164          + V * vr
+        // g = Y * 1.164 - U * ug - V * vg
+        // b = Y * 1.164 + U * ub
+        //
+        // By changing the values of vr, vg, ub, and ug we can change the destination color space.
+        ExternalTextureParams params;
+        params.numPlanes = descriptor->plane1 == nullptr ? 1 : 2;
+
+        switch (descriptor->colorSpace) {
+            case wgpu::PredefinedColorSpace::Srgb:
+                // Numbers derived from ITU-R recommendation for limited range BT.709
+                params.vr = 1.793;
+                params.vg = 0.392;
+                params.ub = 0.813;
+                params.ug = 2.017;
+                break;
+            default:
+                UNREACHABLE();
+        }
+
+        DAWN_TRY(device->GetQueue()->WriteBuffer(mParamsBuffer.Get(), 0, &params,
+                                                 sizeof(ExternalTextureParams)));
 
         return {};
     }
