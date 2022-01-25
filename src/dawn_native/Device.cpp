@@ -1425,7 +1425,7 @@ namespace dawn::native {
                              descriptor);
         }
 
-        return ExternalTextureBase::Create(this, descriptor);
+        return CreateExternalTextureImpl(descriptor);
     }
 
     ResultOrError<Ref<QuerySetBase>> DeviceBase::CreateQuerySet(
