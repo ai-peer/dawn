@@ -69,6 +69,24 @@
       "parentUuid": "569cec6c_279697d9",
       "revId": "9e051111641d1619f630909b6cc00aeaf8efbe71",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8c1b2af_3d9ea789",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-25T01:11:14Z",
+      "side": 1,
+      "message": "yeah, it\u0027s a little odd, but I think we preferred to have getMappedRange be less state-dependent, especially on the offset of the mapAsync call.\n\nLooks like we have WGPU_WHOLE_MAP_SIZE for just that (presumably for mapAsync), can we use that?",
+      "parentUuid": "29e553b5_33a8e3c3",
+      "revId": "9e051111641d1619f630909b6cc00aeaf8efbe71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
