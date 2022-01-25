@@ -34,7 +34,8 @@ namespace dawn::native::vulkan {
                                                        ShaderModuleParseResult* parseResult);
 
         ResultOrError<VkShaderModule> GetTransformedModuleHandle(const char* entryPointName,
-                                                                 PipelineLayout* layout);
+                                                                 PipelineLayout* layout,
+                                                                 SingleShaderStage stage);
 
       private:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
