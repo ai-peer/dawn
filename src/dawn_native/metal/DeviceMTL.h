@@ -89,6 +89,8 @@ namespace dawn::native::metal {
         ResultOrError<Ref<CommandBufferBase>> CreateCommandBuffer(
             CommandEncoder* encoder,
             const CommandBufferDescriptor* descriptor) override;
+        ResultOrError<Ref<ExternalTextureBase>> CreateExternalTextureImpl(
+            const ExternalTextureDescriptor* descriptor) override;
         ResultOrError<Ref<PipelineLayoutBase>> CreatePipelineLayoutImpl(
             const PipelineLayoutDescriptor* descriptor) override;
         ResultOrError<Ref<QuerySetBase>> CreateQuerySetImpl(

@@ -268,15 +268,40 @@ namespace dawn::native::opengl {
                                                              const PipelineLayout* layout,
                                                              bool* needsDummySampler) const {
         TRACE_EVENT0(GetDevice()->GetPlatform(), General, "TranslateToGLSL");
-        tint::transform::SingleEntryPoint singleEntryPointTransform;
+        tint::transform::Manager transformManager;
+        transformManager.append(std::make_unique<tint::transform::SingleEntryPoint>());
 
         tint::transform::DataMap transformInputs;
         transformInputs.Add<tint::transform::SingleEntryPoint::Config>(entryPointName);
 
+        if (stage == SingleShaderStage::Fragment) {
+            tint::transform::MultiplanarExternalTexture::BindingsMap newBindingsMap;
+            for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+                const BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(i);
+
+                std::map<BindingNumber, dawn_native::ExternalTextureBindingExpansion> expansions =
+                    bgl->GetExternalTextureBindingExpansions();
+                std::map<BindingNumber, dawn_native::ExternalTextureBindingExpansion>::iterator it =
+                    expansions.begin();
+
+                while (it != expansions.end()) {
+                    newBindingsMap[{static_cast<uint32_t>(i),
+                                    static_cast<uint32_t>(it->second.plane0)}] = {
+                        {static_cast<uint32_t>(i), static_cast<uint32_t>(it->second.plane1)},
+                        {static_cast<uint32_t>(i), static_cast<uint32_t>(it->second.params)}};
+                    it++;
+                }
+
+                transformManager.Add<tint::transform::MultiplanarExternalTexture>();
+                transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
+                    newBindingsMap);
+            }
+        }
+
         tint::Program program;
         {
             TRACE_EVENT0(GetDevice()->GetPlatform(), General, "RunTransforms");
-            DAWN_TRY_ASSIGN(program, RunTransforms(&singleEntryPointTransform, GetTintProgram(),
+            DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, GetTintProgram(),
                                                    transformInputs, nullptr, nullptr));
         }
 

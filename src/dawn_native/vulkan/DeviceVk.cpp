@@ -27,6 +27,7 @@
 #include "dawn_native/vulkan/BufferVk.h"
 #include "dawn_native/vulkan/CommandBufferVk.h"
 #include "dawn_native/vulkan/ComputePipelineVk.h"
+#include "dawn_native/vulkan/ExternalTextureVk.h"
 #include "dawn_native/vulkan/FencedDeleter.h"
 #include "dawn_native/vulkan/PipelineLayoutVk.h"
 #include "dawn_native/vulkan/QuerySetVk.h"
@@ -120,6 +121,10 @@ namespace dawn::native::vulkan {
         CommandEncoder* encoder,
         const CommandBufferDescriptor* descriptor) {
         return CommandBuffer::Create(encoder, descriptor);
+    }
+    ResultOrError<Ref<ExternalTextureBase>> Device::CreateExternalTextureImpl(
+        const ExternalTextureDescriptor* descriptor) {
+        return ExternalTexture::Create(this, descriptor);
     }
     Ref<ComputePipelineBase> Device::CreateUninitializedComputePipelineImpl(
         const ComputePipelineDescriptor* descriptor) {
