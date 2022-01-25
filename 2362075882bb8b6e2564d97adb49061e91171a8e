@@ -16,6 +16,23 @@
       "message": "Corentin: PTAL. Thanks!",
       "revId": "2362075882bb8b6e2564d97adb49061e91171a8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5829064f_2c785ba0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-25T15:22:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2362075882bb8b6e2564d97adb49061e91171a8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
