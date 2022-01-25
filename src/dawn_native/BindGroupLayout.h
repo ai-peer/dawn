@@ -32,6 +32,11 @@
 #include <map>
 
 namespace dawn::native {
+    struct ExternalTextureBindingExpansion {
+        BindingNumber plane0;
+        BindingNumber plane1;
+        BindingNumber params;
+    };
 
     MaybeError ValidateBindGroupLayoutDescriptor(DeviceBase* device,
                                                  const BindGroupLayoutDescriptor* descriptor,
@@ -84,6 +89,12 @@ namespace dawn::native {
         // Used to get counts and validate them in pipeline layout creation. Other getters
         // should be used to get typed integer counts.
         const BindingCounts& GetBindingCountInfo() const;
+
+        uint32_t GetExternalTextureBindingCount() const;
+
+        // Used to specify unpacked external texture binding slots when transforming shader modules.
+        std::map<BindingNumber, ExternalTextureBindingExpansion>
+        GetExternalTextureBindingExpansions() const;
 
         // Tests that the BindingInfo of two bind groups are equal,
         // ignoring their compatibility groups.
@@ -140,6 +151,8 @@ namespace dawn::native {
         // Non-0 if this BindGroupLayout was created as part of a default PipelineLayout.
         const PipelineCompatibilityToken mPipelineCompatibilityToken =
             PipelineCompatibilityToken(0);
+
+        std::map<BindingNumber, ExternalTextureBindingExpansion> mExternalTextureBindingExpansions;
     };
 
 }  // namespace dawn::native

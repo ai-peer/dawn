@@ -1425,6 +1425,11 @@ namespace dawn::native {
                              descriptor);
         }
 
+        return CreateExternalTextureImpl(descriptor);
+    }
+
+    ResultOrError<Ref<ExternalTextureBase>> DeviceBase::CreateExternalTextureImpl(
+        const ExternalTextureDescriptor* descriptor) {
         return ExternalTextureBase::Create(this, descriptor);
     }
 
