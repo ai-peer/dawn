@@ -444,113 +444,165 @@ namespace dawn::native {
             const ShaderBindingInfo& shaderInfo) {
             const BindGroupLayoutBase::BindingMap& layoutBindings = layout->GetBindingMap();
 
-            const auto& bindingIt = layoutBindings.find(bindingNumber);
-            DAWN_INVALID_IF(bindingIt == layoutBindings.end(), "Binding doesn't exist in %s.",
-                            layout);
+            // An external texture binding found in the shader will later be expanded into multiple
+            // bindings at compile time. This expansion will have already happened in the bgl - so
+            // the shader and bgl will always mismatch at this point. Expansion info is contained in
+            // the bgl object, so we can still verify the bgl used to have an external texture in
+            // the slot corresponding to the shader reflection.
+            if (shaderInfo.bindingType == BindingInfoType::ExternalTexture) {
+                // If an external texture binding used to exist in the bgl, it will be found as a
+                // key in the ExternalTextureBindingExpansions map.
+                std::map<BindingNumber, dawn_native::ExternalTextureBindingExpansion> expansions =
+                    layout->GetExternalTextureBindingExpansions();
+                std::map<BindingNumber, dawn_native::ExternalTextureBindingExpansion>::iterator it =
+                    expansions.find(bindingNumber);
+                DAWN_INVALID_IF(
+                    it == expansions.end(),
+                    "Binding type (buffer vs. texture vs. sampler) doesn't match the type "
+                    "in the layout.");
 
-            BindingIndex bindingIndex(bindingIt->second);
-            const BindingInfo& layoutInfo = layout->GetBindingInfo(bindingIndex);
+                // Assert expanded plane0 matches.
+                const auto& plane0BindingIt = layoutBindings.find(it->second.plane0);
+                ASSERT(plane0BindingIt != layoutBindings.end());
+                BindingIndex plane0BindingIndex(plane0BindingIt->second);
+                const BindingInfo& plane0layoutInfo = layout->GetBindingInfo(plane0BindingIndex);
+                ASSERT(plane0layoutInfo.bindingType == BindingInfoType::Texture);
 
-            // TODO(dawn:563): Provide info about the binding types.
-            DAWN_INVALID_IF(layoutInfo.bindingType != shaderInfo.bindingType,
-                            "Binding type (buffer vs. texture vs. sampler) doesn't match the type "
-                            "in the layout.");
+                // Assert expanded plane1 matches.
+                const auto& plane1BindingIt = layoutBindings.find(it->second.plane1);
+                ASSERT(plane1BindingIt != layoutBindings.end());
+                BindingIndex plane1BindingIndex(plane1BindingIt->second);
+                const BindingInfo& plane1layoutInfo = layout->GetBindingInfo(plane1BindingIndex);
+                ASSERT(plane1layoutInfo.bindingType == BindingInfoType::Texture);
 
-            // TODO(dawn:563): Provide info about the visibility.
-            DAWN_INVALID_IF(
-                (layoutInfo.visibility & StageBit(entryPointStage)) == 0,
-                "Entry point's stage is not in the binding visibility in the layout (%s)",
-                layoutInfo.visibility);
+                // Assert expanded params buffer matches.
+                const auto& paramsBindingIt = layoutBindings.find(it->second.params);
+                ASSERT(paramsBindingIt != layoutBindings.end());
+                BindingIndex paramsBindingIndex(paramsBindingIt->second);
+                const BindingInfo& paramslayoutInfo = layout->GetBindingInfo(paramsBindingIndex);
+                ASSERT(paramslayoutInfo.bindingType == BindingInfoType::Buffer);
+            } else {
+                const auto& bindingIt = layoutBindings.find(bindingNumber);
+                DAWN_INVALID_IF(bindingIt == layoutBindings.end(), "Binding doesn't exist in %s.",
+                                layout);
 
-            switch (layoutInfo.bindingType) {
-                case BindingInfoType::Texture: {
-                    DAWN_INVALID_IF(
-                        layoutInfo.texture.multisampled != shaderInfo.texture.multisampled,
-                        "Binding multisampled flag (%u) doesn't match the layout's multisampled "
-                        "flag (%u)",
-                        layoutInfo.texture.multisampled, shaderInfo.texture.multisampled);
+                BindingIndex bindingIndex(bindingIt->second);
 
-                    // TODO(dawn:563): Provide info about the sample types.
-                    DAWN_INVALID_IF((SampleTypeToSampleTypeBit(layoutInfo.texture.sampleType) &
-                                     shaderInfo.texture.compatibleSampleTypes) == 0,
-                                    "The sample type in the shader is not compatible with the "
-                                    "sample type of the layout.");
+                const BindingInfo& layoutInfo = layout->GetBindingInfo(bindingIndex);
 
-                    DAWN_INVALID_IF(
-                        layoutInfo.texture.viewDimension != shaderInfo.texture.viewDimension,
-                        "The shader's binding dimension (%s) doesn't match the shader's binding "
-                        "dimension (%s).",
-                        layoutInfo.texture.viewDimension, shaderInfo.texture.viewDimension);
-                    break;
-                }
+                // TODO(dawn:563): Provide info about the binding types.
+                DAWN_INVALID_IF(
+                    layoutInfo.bindingType != shaderInfo.bindingType,
+                    "Binding type (buffer vs. texture vs. sampler) doesn't match the type "
+                    "in the layout.");
 
-                case BindingInfoType::StorageTexture: {
-                    ASSERT(layoutInfo.storageTexture.format != wgpu::TextureFormat::Undefined);
-                    ASSERT(shaderInfo.storageTexture.format != wgpu::TextureFormat::Undefined);
+                std::map<BindingNumber, dawn_native::ExternalTextureBindingExpansion> expansions =
+                    layout->GetExternalTextureBindingExpansions();
+                DAWN_INVALID_IF(expansions.find(bindingNumber) != expansions.end(),
+                                "Binding type (buffer vs. texture vs. sampler) doesn't "
+                                "match the type in the layout.");
 
-                    DAWN_INVALID_IF(
-                        layoutInfo.storageTexture.access != shaderInfo.storageTexture.access,
-                        "The layout's binding access (%s) isn't compatible with the shader's "
-                        "binding access (%s).",
-                        layoutInfo.storageTexture.access, shaderInfo.storageTexture.access);
+                // TODO(dawn:563): Provide info about the visibility.
+                DAWN_INVALID_IF(
+                    (layoutInfo.visibility & StageBit(entryPointStage)) == 0,
+                    "Entry point's stage is not in the binding visibility in the layout (%s)",
+                    layoutInfo.visibility);
 
-                    DAWN_INVALID_IF(
-                        layoutInfo.storageTexture.format != shaderInfo.storageTexture.format,
-                        "The layout's binding format (%s) doesn't match the shader's binding "
-                        "format (%s).",
-                        layoutInfo.storageTexture.format, shaderInfo.storageTexture.format);
+                switch (layoutInfo.bindingType) {
+                    case BindingInfoType::Texture: {
+                        DAWN_INVALID_IF(
+                            layoutInfo.texture.multisampled != shaderInfo.texture.multisampled,
+                            "Binding multisampled flag (%u) doesn't match the layout's "
+                            "multisampled "
+                            "flag (%u)",
+                            layoutInfo.texture.multisampled, shaderInfo.texture.multisampled);
 
-                    DAWN_INVALID_IF(layoutInfo.storageTexture.viewDimension !=
-                                        shaderInfo.storageTexture.viewDimension,
-                                    "The layout's binding dimension (%s) doesn't match the "
-                                    "shader's binding dimension (%s).",
-                                    layoutInfo.storageTexture.viewDimension,
-                                    shaderInfo.storageTexture.viewDimension);
-                    break;
-                }
+                        // TODO(dawn:563): Provide info about the sample types.
+                        DAWN_INVALID_IF((SampleTypeToSampleTypeBit(layoutInfo.texture.sampleType) &
+                                         shaderInfo.texture.compatibleSampleTypes) == 0,
+                                        "The sample type in the shader is not compatible with the "
+                                        "sample type of the layout.");
 
-                case BindingInfoType::ExternalTexture: {
-                    // Nothing to validate! (yet?)
-                    break;
-                }
+                        DAWN_INVALID_IF(
+                            layoutInfo.texture.viewDimension != shaderInfo.texture.viewDimension,
+                            "The shader's binding dimension (%s) doesn't match the shader's "
+                            "binding "
+                            "dimension (%s).",
+                            layoutInfo.texture.viewDimension, shaderInfo.texture.viewDimension);
 
-                case BindingInfoType::Buffer: {
-                    // Binding mismatch between shader and bind group is invalid. For example, a
-                    // writable binding in the shader with a readonly storage buffer in the bind
-                    // group layout is invalid. However, a readonly binding in the shader with a
-                    // writable storage buffer in the bind group layout is valid, a storage
-                    // binding in the shader with an internal storage buffer in the bind group
-                    // layout is also valid.
-                    bool validBindingConversion =
-                        (layoutInfo.buffer.type == wgpu::BufferBindingType::Storage &&
-                         shaderInfo.buffer.type == wgpu::BufferBindingType::ReadOnlyStorage) ||
-                        (layoutInfo.buffer.type == kInternalStorageBufferBinding &&
-                         shaderInfo.buffer.type == wgpu::BufferBindingType::Storage);
+                        break;
+                    }
 
-                    DAWN_INVALID_IF(
-                        layoutInfo.buffer.type != shaderInfo.buffer.type && !validBindingConversion,
-                        "The buffer type in the shader (%s) is not compatible with the type in the "
-                        "layout (%s).",
-                        shaderInfo.buffer.type, layoutInfo.buffer.type);
+                    case BindingInfoType::StorageTexture: {
+                        ASSERT(layoutInfo.storageTexture.format != wgpu::TextureFormat::Undefined);
+                        ASSERT(shaderInfo.storageTexture.format != wgpu::TextureFormat::Undefined);
 
-                    DAWN_INVALID_IF(
-                        layoutInfo.buffer.minBindingSize != 0 &&
-                            shaderInfo.buffer.minBindingSize > layoutInfo.buffer.minBindingSize,
-                        "The shader uses more bytes of the buffer (%u) than the layout's "
-                        "minBindingSize (%u).",
-                        shaderInfo.buffer.minBindingSize, layoutInfo.buffer.minBindingSize);
-                    break;
-                }
+                        DAWN_INVALID_IF(
+                            layoutInfo.storageTexture.access != shaderInfo.storageTexture.access,
+                            "The layout's binding access (%s) isn't compatible with the shader's "
+                            "binding access (%s).",
+                            layoutInfo.storageTexture.access, shaderInfo.storageTexture.access);
 
-                case BindingInfoType::Sampler:
-                    DAWN_INVALID_IF(
-                        (layoutInfo.sampler.type == wgpu::SamplerBindingType::Comparison) !=
+                        DAWN_INVALID_IF(
+                            layoutInfo.storageTexture.format != shaderInfo.storageTexture.format,
+                            "The layout's binding format (%s) doesn't match the shader's binding "
+                            "format (%s).",
+                            layoutInfo.storageTexture.format, shaderInfo.storageTexture.format);
+
+                        DAWN_INVALID_IF(layoutInfo.storageTexture.viewDimension !=
+                                            shaderInfo.storageTexture.viewDimension,
+                                        "The layout's binding dimension (%s) doesn't match the "
+                                        "shader's binding dimension (%s).",
+                                        layoutInfo.storageTexture.viewDimension,
+                                        shaderInfo.storageTexture.viewDimension);
+                        break;
+                    }
+
+                    case BindingInfoType::Buffer: {
+                        // Binding mismatch between shader and bind group is invalid. For example, a
+                        // writable binding in the shader with a readonly storage buffer in the bind
+                        // group layout is invalid. However, a readonly binding in the shader with a
+                        // writable storage buffer in the bind group layout is valid, a storage
+                        // binding in the shader with an internal storage buffer in the bind group
+                        // layout is also valid.
+                        bool validBindingConversion =
+                            (layoutInfo.buffer.type == wgpu::BufferBindingType::Storage &&
+                             shaderInfo.buffer.type == wgpu::BufferBindingType::ReadOnlyStorage) ||
+                            (layoutInfo.buffer.type == kInternalStorageBufferBinding &&
+                             shaderInfo.buffer.type == wgpu::BufferBindingType::Storage);
+
+                        DAWN_INVALID_IF(layoutInfo.buffer.type != shaderInfo.buffer.type &&
+                                            !validBindingConversion,
+                                        "The buffer type in the shader (%s) is not compatible with "
+                                        "the type in the "
+                                        "layout (%s).",
+                                        shaderInfo.buffer.type, layoutInfo.buffer.type);
+
+                        DAWN_INVALID_IF(
+                            layoutInfo.buffer.minBindingSize != 0 &&
+                                shaderInfo.buffer.minBindingSize > layoutInfo.buffer.minBindingSize,
+                            "The shader uses more bytes of the buffer (%u) than the layout's "
+                            "minBindingSize (%u).",
+                            shaderInfo.buffer.minBindingSize, layoutInfo.buffer.minBindingSize);
+                        break;
+                    }
+
+                    case BindingInfoType::Sampler:
+                        DAWN_INVALID_IF(
+                            (layoutInfo.sampler.type == wgpu::SamplerBindingType::Comparison) !=
+                                shaderInfo.sampler.isComparison,
+                            "The sampler type in the shader (comparison: %u) doesn't match the "
+                            "type in "
+                            "the layout (comparison: %u).",
                             shaderInfo.sampler.isComparison,
-                        "The sampler type in the shader (comparison: %u) doesn't match the type in "
-                        "the layout (comparison: %u).",
-                        shaderInfo.sampler.isComparison,
-                        layoutInfo.sampler.type == wgpu::SamplerBindingType::Comparison);
-                    break;
+                            layoutInfo.sampler.type == wgpu::SamplerBindingType::Comparison);
+                        break;
+
+                    case BindingInfoType::ExternalTexture: {
+                        UNREACHABLE();
+                        break;
+                    }
+                }
             }
 
             return {};
@@ -892,8 +944,9 @@ namespace dawn::native {
                                 TintTextureDimensionToTextureViewDimension(resource.dim);
 
                             break;
-                        case BindingInfoType::ExternalTexture:
+                        case BindingInfoType::ExternalTexture: {
                             break;
+                        }
                         default:
                             return DAWN_VALIDATION_ERROR("Unknown binding type in Shader");
                     }
