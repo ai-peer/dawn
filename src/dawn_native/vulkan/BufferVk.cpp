@@ -27,7 +27,6 @@
 namespace dawn::native::vulkan {
 
     namespace {
-
         VkBufferUsageFlags VulkanBufferUsage(wgpu::BufferUsage usage) {
             VkBufferUsageFlags flags = 0;
 

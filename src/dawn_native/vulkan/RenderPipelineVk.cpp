@@ -347,7 +347,7 @@ namespace dawn::native::vulkan {
             DAWN_TRY_ASSIGN(shaderStage.module,
                             ToBackend(programmableStage.module)
                                 ->GetTransformedModuleHandle(programmableStage.entryPoint.c_str(),
-                                                             ToBackend(GetLayout())));
+                                                             ToBackend(GetLayout()), stage));
 
             shaderStage.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
             shaderStage.pNext = nullptr;
