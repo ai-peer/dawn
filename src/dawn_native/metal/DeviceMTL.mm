@@ -25,6 +25,7 @@
 #include "dawn_native/metal/BufferMTL.h"
 #include "dawn_native/metal/CommandBufferMTL.h"
 #include "dawn_native/metal/ComputePipelineMTL.h"
+#include "dawn_native/metal/ExternalTextureMTL.h"
 #include "dawn_native/metal/PipelineLayoutMTL.h"
 #include "dawn_native/metal/QuerySetMTL.h"
 #include "dawn_native/metal/QueueMTL.h"
@@ -242,6 +243,10 @@ namespace dawn::native::metal {
         CommandEncoder* encoder,
         const CommandBufferDescriptor* descriptor) {
         return CommandBuffer::Create(encoder, descriptor);
+    }
+    ResultOrError<Ref<ExternalTextureBase>> Device::CreateExternalTextureImpl(
+        const ExternalTextureDescriptor* descriptor) {
+        return ExternalTexture::Create(this, descriptor);
     }
     Ref<ComputePipelineBase> Device::CreateUninitializedComputePipelineImpl(
         const ComputePipelineDescriptor* descriptor) {

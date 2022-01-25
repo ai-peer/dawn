@@ -23,6 +23,7 @@
 #include "dawn_native/opengl/BufferGL.h"
 #include "dawn_native/opengl/CommandBufferGL.h"
 #include "dawn_native/opengl/ComputePipelineGL.h"
+#include "dawn_native/opengl/ExternalTextureGL.h"
 #include "dawn_native/opengl/PipelineLayoutGL.h"
 #include "dawn_native/opengl/QuerySetGL.h"
 #include "dawn_native/opengl/QueueGL.h"
@@ -124,6 +125,10 @@ namespace dawn::native::opengl {
     }
     ResultOrError<Ref<BufferBase>> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
         return AcquireRef(new Buffer(this, descriptor));
+    }
+    ResultOrError<Ref<ExternalTextureBase>> Device::CreateExternalTextureImpl(
+        const ExternalTextureDescriptor* descriptor) {
+        return ExternalTexture::Create(this, descriptor);
     }
     ResultOrError<Ref<CommandBufferBase>> Device::CreateCommandBuffer(
         CommandEncoder* encoder,
