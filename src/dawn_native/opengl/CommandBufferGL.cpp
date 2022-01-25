@@ -364,28 +364,9 @@ namespace dawn::native::opengl {
                             break;
                         }
 
-                        case BindingInfoType::ExternalTexture: {
-                            const std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat>&
-                                textureViews = mBindGroups[index]
-                                                   ->GetBindingAsExternalTexture(bindingIndex)
-                                                   ->GetTextureViews();
-
-                            // Only single-plane formats are supported right now, so assert only one
-                            // view exists.
-                            ASSERT(textureViews[1].Get() == nullptr);
-                            ASSERT(textureViews[2].Get() == nullptr);
-
-                            TextureView* view = ToBackend(textureViews[0].Get());
-                            GLuint handle = view->GetHandle();
-                            GLenum target = view->GetGLTarget();
-                            GLuint viewIndex = indices[bindingIndex];
-
-                            for (auto unit : mPipeline->GetTextureUnitsForTextureView(viewIndex)) {
-                                gl.ActiveTexture(GL_TEXTURE0 + unit);
-                                gl.BindTexture(target, handle);
-                            }
+                        case BindingInfoType::ExternalTexture:
+                            UNREACHABLE();
                             break;
-                        }
                     }
                 }
             }
