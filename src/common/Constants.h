@@ -59,7 +59,9 @@ static constexpr uint32_t kMaxQueryCount = 8192u;
 // An external texture occupies multiple binding slots. These are the per-external-texture bindings
 // needed.
 static constexpr uint8_t kSampledTexturesPerExternalTexture = 3u;
+static constexpr uint8_t kImplementedSampledTexturesPerExternalTexture = 2u;
 static constexpr uint8_t kSamplersPerExternalTexture = 1u;
 static constexpr uint8_t kUniformsPerExternalTexture = 1u;
+static constexpr uint8_t kImplementedUniformsPerExternalTexture = 1u;
 
 #endif  // COMMON_CONSTANTS_H_
