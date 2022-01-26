@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad82db42_6b8a6038",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-01-26T06:43:44Z",
+      "side": 1,
+      "message": "I agree that we need an API to check if we are on Win11.\n\nI plan to add IsWin11() after my vacation. Is it OK for you?",
+      "parentUuid": "23e8e5b0_69691042",
+      "revId": "92709a0dbb1a1e6ce368080ef8b20fabf55bcaf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42661723_8fc02d0f",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 1
