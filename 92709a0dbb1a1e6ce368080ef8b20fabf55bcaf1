@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23e8e5b0_69691042",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-26T02:19:26Z",
+      "side": 1,
+      "message": "OK with me to not know why right now. But we should file new bugs with the failures so we know to get back to it and the failure wasn\u0027t triaged.\n\nAlso, if there\u0027s a way we can have an IsWin11() method, that would be really great, so we don\u0027t lose coverage on our current bots.",
+      "parentUuid": "eef01a14_0d3a2d40",
+      "revId": "92709a0dbb1a1e6ce368080ef8b20fabf55bcaf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42661723_8fc02d0f",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 1
