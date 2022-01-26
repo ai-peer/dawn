@@ -16,6 +16,41 @@
       "message": "The changes look fine, but I can\u0027t find record of the actual crash on Win7 so I can\u0027t evaluate whether this will fix it. We also haven\u0027t seen yet whether the revert fixed the crash so I can\u0027t base it on that either.\n\nThe previous timing is more precise, right? So seems to me we would like to keep using it if possible. If this turns out not to have been the culprit then better to just reland the original change. And if it was the culprit, there must be something we can do to prevent these from getting called on Win7.",
       "revId": "540be552806d04ba3535602dd87c71605b480ec6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "664f5425_28fbcb23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-01-26T03:20:26Z",
+      "side": 1,
+      "message": "This patch is running tryjobs with several Win7 bots chosen.",
+      "revId": "540be552806d04ba3535602dd87c71605b480ec6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d676ba5_345b7dcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-01-26T03:20:26Z",
+      "side": 1,
+      "message": "Yes, the previous timing is much more precise. I can do more investigation if we want to use it, but after the vocation ends. Not blocking others though.",
+      "parentUuid": "d86ebae4_43f5713f",
+      "revId": "540be552806d04ba3535602dd87c71605b480ec6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
