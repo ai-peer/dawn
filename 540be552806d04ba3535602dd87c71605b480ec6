@@ -122,6 +122,23 @@
       "message": "This seems to pass on Win7\nhttps://chromium-swarm.appspot.com/task?id\u003d58ad440777c25010",
       "revId": "540be552806d04ba3535602dd87c71605b480ec6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7777648_f8e8f629",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-26T03:42:35Z",
+      "side": 1,
+      "message": "CR+2 then. Feel free to land unless you want to try to figure out how to make this work on Win7 now.",
+      "revId": "540be552806d04ba3535602dd87c71605b480ec6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
