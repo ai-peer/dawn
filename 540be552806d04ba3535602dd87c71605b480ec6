@@ -69,6 +69,24 @@
       "parentUuid": "d86ebae4_43f5713f",
       "revId": "540be552806d04ba3535602dd87c71605b480ec6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dc56c0e_2e9269eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2022-01-26T03:30:53Z",
+      "side": 1,
+      "message": "I\u0027m not sure if the trybots were able to apply a Dawn CL.\nhttps://logs.chromium.org/logs/chromium/buildbucket/cr-buildbucket/8824009901309866753/+/u/bot_update/json.output\nfrom\nhttps://ci.chromium.org/ui/p/chromium/builders/try/gpu-fyi-try-win7-amd-rel-32/229/overview\nshows a revision which is my revert.\n\nI can try this patch manually.",
+      "parentUuid": "db499820_8ca127aa",
+      "revId": "540be552806d04ba3535602dd87c71605b480ec6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
