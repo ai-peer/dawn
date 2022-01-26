@@ -16,6 +16,24 @@
       "message": "surprising because this shouldn\u0027t be enabled unless the toggle is turned on, but if you\u0027ve narrowed it down and it fixes it, sounds good.",
       "revId": "aaa6968957cf9b5a47b1d5662d22c95f78e594be",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91e82274_b2b26f74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000226
+      },
+      "writtenOn": "2022-01-26T17:47:32Z",
+      "side": 1,
+      "message": "The problem is that GetSystemTimePreciseAsFileTime doesn\u0027t exist on Windows 7. Therefore Chrome doesn\u0027t _crash_ on Windows 7, it actually fails to launch. Or, at least, chrome.exe launches but then chrome.dll fails to load. See crbug.com/1291149 for details.",
+      "parentUuid": "2dfa3a71_45bc22c1",
+      "revId": "aaa6968957cf9b5a47b1d5662d22c95f78e594be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
