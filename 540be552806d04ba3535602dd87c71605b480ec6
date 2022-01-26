@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d86ebae4_43f5713f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-26T03:10:43Z",
+      "side": 1,
+      "message": "The changes look fine, but I can\u0027t find record of the actual crash on Win7 so I can\u0027t evaluate whether this will fix it. We also haven\u0027t seen yet whether the revert fixed the crash so I can\u0027t base it on that either.\n\nThe previous timing is more precise, right? So seems to me we would like to keep using it if possible. If this turns out not to have been the culprit then better to just reland the original change. And if it was the culprit, there must be something we can do to prevent these from getting called on Win7.",
+      "revId": "540be552806d04ba3535602dd87c71605b480ec6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
