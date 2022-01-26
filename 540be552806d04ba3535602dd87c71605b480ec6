@@ -87,6 +87,24 @@
       "parentUuid": "db499820_8ca127aa",
       "revId": "540be552806d04ba3535602dd87c71605b480ec6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb09a5c4_41829d65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-26T03:40:54Z",
+      "side": 1,
+      "message": "Thanks for confirming Yuly! That explains why I couldn\u0027t understand the crashes on the fyi waterfall. Admittedly I don\u0027t understand how startup works especially on Windows, but I guess it\u0027s essentially a dynamic linking failure which makes sense. We might need something like dlsym to load it. LGTM since maybe we don\u0027t want to figure that out right now.\n\nIf you\u0027re able to try this patch manually that would be really helpful so we can be sure it won\u0027t break again.",
+      "parentUuid": "9dc56c0e_2e9269eb",
+      "revId": "540be552806d04ba3535602dd87c71605b480ec6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
