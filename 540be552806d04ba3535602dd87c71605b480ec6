@@ -51,6 +51,24 @@
       "parentUuid": "d86ebae4_43f5713f",
       "revId": "540be552806d04ba3535602dd87c71605b480ec6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db499820_8ca127aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2022-01-26T03:23:15Z",
+      "side": 1,
+      "message": "The revert did fix Win7.\nThere are no records of the crash because it happens very early in the process startup, long before any crash reporting is alive. It probably happens when loading Chrome or its dependency DLLs, somewhere in Windows system libraries.",
+      "parentUuid": "d86ebae4_43f5713f",
+      "revId": "540be552806d04ba3535602dd87c71605b480ec6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
