@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eef01a14_0d3a2d40",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-01-26T01:26:42Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin, we decide to temporarily skip these two tests because we want to have a clean result on Win11 with debug layer for our driver team before our Spring Festival vacation, and Hao (the owner of these issues) has already been on vacation now.\n\nCould you help us?",
+      "parentUuid": "1fa541e6_f51b4627",
+      "revId": "92709a0dbb1a1e6ce368080ef8b20fabf55bcaf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42661723_8fc02d0f",
         "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
         "patchSetId": 1
