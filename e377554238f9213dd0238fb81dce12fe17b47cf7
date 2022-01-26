@@ -3,6 +3,46 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "404ac16a_37c92f5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-26T20:11:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e377554238f9213dd0238fb81dce12fe17b47cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4bc7e77_9f7ccf81",
+        "filename": "src/dawn_native/ExternalTexture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-26T20:11:11Z",
+      "side": 1,
+      "message": "uuuu-nit: minor preference to not put the state member in between the two ref members",
+      "range": {
+        "startLine": 66,
+        "startChar": 8,
+        "endLine": 68,
+        "endChar": 76
+      },
+      "revId": "e377554238f9213dd0238fb81dce12fe17b47cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1541ec72_759a8202",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
         "patchSetId": 5
