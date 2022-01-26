@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1541ec72_759a8202",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-01-26T19:57:29Z",
+      "side": 1,
+      "message": "Had to rename this unrelated function due to a conflict when making the API version in Device.h virtual.",
+      "revId": "e377554238f9213dd0238fb81dce12fe17b47cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
