@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b83663ba_22f239c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-27T17:28:59Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "87a7128280f14182c2e07e3728a9648f1fc42526",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b02d2c36_69d45e85",
+        "filename": "src/fuzzers/dawn/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-27T17:28:59Z",
+      "side": 1,
+      "message": "Please set up a proxy group so that https://source.chromium.org/chromium/chromium/src/+/main:BUILD.gn;l\u003d837?q\u003ddawn_fuzzers keeps working, along with a TODO.",
+      "revId": "87a7128280f14182c2e07e3728a9648f1fc42526",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
