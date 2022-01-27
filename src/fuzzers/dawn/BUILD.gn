@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import("//build_overrides/build.gni")
-import("../../scripts/dawn_overrides_with_defaults.gni")
+import("../../../scripts/dawn_overrides_with_defaults.gni")
 
 # We only have libfuzzer in Chromium builds but if we build fuzzer targets only
 # there, we would risk breaking fuzzer targets all the time when making changes
