@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91caa6cf_bd16f5dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-28T23:38:08Z",
+      "side": 1,
+      "message": "I think this should have a comment in the code to explain how it\u0027s intended to work.",
+      "revId": "8b5d40952608282d240670d0a1a43a132ecda471",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
