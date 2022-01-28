@@ -16,6 +16,23 @@
       "message": "I think this should have a comment in the code to explain how it\u0027s intended to work.",
       "revId": "8b5d40952608282d240670d0a1a43a132ecda471",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f95aec9_fd7fd37b",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-01-28T23:42:59Z",
+      "side": 1,
+      "message": "// The substring matching matches both VK_PIPELINE_STAGE_2_NONE and VK_PIPELINE_STAGE_2_NONE_KHR.",
+      "revId": "8b5d40952608282d240670d0a1a43a132ecda471",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
