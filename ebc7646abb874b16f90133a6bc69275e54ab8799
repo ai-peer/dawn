@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d75b9df_30eada98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-01-28T07:02:00Z",
+      "side": 1,
+      "message": "We discussed this during the biweekly WebGPU/Dawn sync meeting. \n\nPTAL. Thanks.",
+      "revId": "ebc7646abb874b16f90133a6bc69275e54ab8799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
