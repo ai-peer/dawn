@@ -61,7 +61,6 @@ namespace dawn::native::d3d12 {
             // common state right before command list submission. TransitionUsageNow itself ensures
             // no unnecessary transitions happen if the resources is already in the common state.
             for (Texture* texture : mSharedTextures) {
-                DAWN_TRY(texture->AcquireKeyedMutex());
                 texture->TrackAllUsageAndTransitionNow(this, D3D12_RESOURCE_STATE_COMMON);
             }
 
@@ -76,10 +75,6 @@ namespace dawn::native::d3d12 {
 
             ID3D12CommandList* d3d12CommandList = GetCommandList();
             device->GetCommandQueue()->ExecuteCommandLists(1, &d3d12CommandList);
-
-            for (Texture* texture : mSharedTextures) {
-                texture->ReleaseKeyedMutex();
-            }
 
             mIsOpen = false;
             mSharedTextures.clear();

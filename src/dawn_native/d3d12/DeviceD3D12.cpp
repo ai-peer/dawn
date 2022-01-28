@@ -533,13 +533,17 @@ namespace dawn::native::d3d12 {
     Ref<TextureBase> Device::CreateExternalTexture(
         const TextureDescriptor* descriptor,
         ComPtr<ID3D12Resource> d3d12Texture,
+        ComPtr<ID3D12Fence> d3d12Fence,
         Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
+        uint64_t fenceWaitValue,
+        uint64_t fenceSignalValue,
         bool isSwapChainTexture,
         bool isInitialized) {
         Ref<Texture> dawnTexture;
-        if (ConsumedError(Texture::CreateExternalImage(this, descriptor, std::move(d3d12Texture),
-                                                       std::move(d3d11on12Resource),
-                                                       isSwapChainTexture, isInitialized),
+        if (ConsumedError(Texture::CreateExternalImage(
+                              this, descriptor, std::move(d3d12Texture), std::move(d3d12Fence),
+                              std::move(d3d11on12Resource), fenceWaitValue, fenceSignalValue,
+                              isSwapChainTexture, isInitialized),
                           &dawnTexture)) {
             return nullptr;
         }

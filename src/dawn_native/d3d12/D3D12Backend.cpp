@@ -53,8 +53,10 @@ namespace dawn::native::d3d12 {
     }
 
     ExternalImageDXGI::ExternalImageDXGI(ComPtr<ID3D12Resource> d3d12Resource,
+                                         ComPtr<ID3D12Fence> d3d12Fence,
                                          const WGPUTextureDescriptor* descriptor)
         : mD3D12Resource(std::move(d3d12Resource)),
+          mD3D12Fence(std::move(d3d12Fence)),
           mUsage(descriptor->usage),
           mDimension(descriptor->dimension),
           mSize(descriptor->size),
@@ -75,7 +77,7 @@ namespace dawn::native::d3d12 {
 
     WGPUTexture ExternalImageDXGI::ProduceTexture(
         WGPUDevice device,
-        const ExternalImageAccessDescriptorDXGIKeyedMutex* descriptor) {
+        const ExternalImageAccessDescriptorDXGISharedHandle* descriptor) {
         Device* backendDevice = ToBackend(FromAPI(device));
 
         // Ensure the texture usage is allowed
@@ -99,15 +101,19 @@ namespace dawn::native::d3d12 {
             internalDesc.sType = wgpu::SType::DawnTextureInternalUsageDescriptor;
         }
 
-        Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource =
-            mD3D11on12ResourceCache->GetOrCreateD3D11on12Resource(device, mD3D12Resource.Get());
-        if (d3d11on12Resource == nullptr) {
-            dawn::ErrorLog() << "Unable to create 11on12 resource for external image";
-            return nullptr;
+        Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource;
+        if (!mD3D12Fence) {
+            d3d11on12Resource =
+                mD3D11on12ResourceCache->GetOrCreateD3D11on12Resource(device, mD3D12Resource.Get());
+            if (d3d11on12Resource == nullptr) {
+                dawn::ErrorLog() << "Unable to create 11on12 resource for external image";
+                return nullptr;
+            }
         }
 
         Ref<TextureBase> texture = backendDevice->CreateExternalTexture(
-            &textureDescriptor, mD3D12Resource, std::move(d3d11on12Resource),
+            &textureDescriptor, mD3D12Resource, mD3D12Fence, std::move(d3d11on12Resource),
+            descriptor->fenceWaitValue, descriptor->fenceSignalValue,
             descriptor->isSwapChainTexture, descriptor->isInitialized);
 
         return ToAPI(texture.Detach());
@@ -119,9 +125,22 @@ namespace dawn::native::d3d12 {
         const ExternalImageDescriptorDXGISharedHandle* descriptor) {
         Device* backendDevice = ToBackend(FromAPI(device));
 
+        // Use sharedHandle as a fallback until Chromium code is changed to set textureSharedHandle.
+        HANDLE textureSharedHandle = descriptor->textureSharedHandle;
+        if (!textureSharedHandle) {
+            textureSharedHandle = descriptor->sharedHandle;
+        }
+
         Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource;
         if (FAILED(backendDevice->GetD3D12Device()->OpenSharedHandle(
-                descriptor->sharedHandle, IID_PPV_ARGS(&d3d12Resource)))) {
+                textureSharedHandle, IID_PPV_ARGS(&d3d12Resource)))) {
+            return nullptr;
+        }
+
+        Microsoft::WRL::ComPtr<ID3D12Fence> d3d12Fence;
+        if (descriptor->fenceSharedHandle &&
+            FAILED(backendDevice->GetD3D12Device()->OpenSharedHandle(descriptor->fenceSharedHandle,
+                                                                     IID_PPV_ARGS(&d3d12Fence)))) {
             return nullptr;
         }
 
@@ -155,8 +174,8 @@ namespace dawn::native::d3d12 {
             }
         }
 
-        std::unique_ptr<ExternalImageDXGI> result(
-            new ExternalImageDXGI(std::move(d3d12Resource), descriptor->cTextureDescriptor));
+        std::unique_ptr<ExternalImageDXGI> result(new ExternalImageDXGI(
+            std::move(d3d12Resource), std::move(d3d12Fence), descriptor->cTextureDescriptor));
         return result;
     }
 

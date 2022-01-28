@@ -52,20 +52,32 @@ namespace dawn::native::d3d12 {
         ExternalImageDescriptorDXGISharedHandle();
 
         // Note: SharedHandle must be a handle to a texture object.
-        HANDLE sharedHandle;
+        // TODO: Remove after changing Chromium code to set textureSharedHandle.
+        HANDLE sharedHandle = nullptr;
+        HANDLE textureSharedHandle = nullptr;
+
+        HANDLE fenceSharedHandle = nullptr;
     };
 
     // Keyed mutex acquire/release uses a fixed key of 0 to match Chromium behavior.
     constexpr UINT64 kDXGIKeyedMutexAcquireReleaseKey = 0;
 
-    struct DAWN_NATIVE_EXPORT ExternalImageAccessDescriptorDXGIKeyedMutex
+    struct DAWN_NATIVE_EXPORT ExternalImageAccessDescriptorDXGISharedHandle
         : ExternalImageAccessDescriptor {
+      public:
+        uint64_t fenceWaitValue = 0;
+        uint64_t fenceSignalValue = 0;  // 0 means do not release i.e. read-only
+        bool isSwapChainTexture = false;
+    };
+
+    // TODO: Remove after changing Chromium code to use the new struct name.
+    struct DAWN_NATIVE_EXPORT ExternalImageAccessDescriptorDXGIKeyedMutex
+        : ExternalImageAccessDescriptorDXGISharedHandle {
       public:
         // TODO(chromium:1241533): Remove deprecated keyed mutex params after removing associated
         // code from Chromium - we use a fixed key of 0 for acquire and release everywhere now.
         uint64_t acquireMutexKey;
         uint64_t releaseMutexKey;
-        bool isSwapChainTexture = false;
     };
 
     class DAWN_NATIVE_EXPORT ExternalImageDXGI {
@@ -78,13 +90,15 @@ namespace dawn::native::d3d12 {
             const ExternalImageDescriptorDXGISharedHandle* descriptor);
 
         WGPUTexture ProduceTexture(WGPUDevice device,
-                                   const ExternalImageAccessDescriptorDXGIKeyedMutex* descriptor);
+                                   const ExternalImageAccessDescriptorDXGISharedHandle* descriptor);
 
       private:
         ExternalImageDXGI(Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource,
+                          Microsoft::WRL::ComPtr<ID3D12Fence> d3d12Fence,
                           const WGPUTextureDescriptor* descriptor);
 
         Microsoft::WRL::ComPtr<ID3D12Resource> mD3D12Resource;
+        Microsoft::WRL::ComPtr<ID3D12Fence> mD3D12Fence;
 
         // Contents of WGPUTextureDescriptor are stored individually since the descriptor
         // could outlive this image.
