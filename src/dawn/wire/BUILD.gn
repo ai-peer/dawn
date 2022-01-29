@@ -54,6 +54,8 @@ dawn_component("wire") {
   deps = [
     ":gen",
     "${dawn_root}/src/dawn/common",
+    "${dawn_root}/src/dawn/native:sources",
+    "${dawn_root}/src/dawn/native:static",
   ]
 
   configs = [ "${dawn_root}/src/dawn/common:internal_config" ]

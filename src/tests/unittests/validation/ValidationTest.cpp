@@ -37,7 +37,7 @@ void InitDawnValidationTestEnvironment(int argc, char** argv) {
 
     for (int i = 1; i < argc; ++i) {
         if (strcmp("-w", argv[i]) == 0 || strcmp("--use-wire", argv[i]) == 0) {
-            gUseWire = true;
+            // gUseWire = true;
             continue;
         }
 
