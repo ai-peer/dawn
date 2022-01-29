@@ -14,6 +14,8 @@
 
 #include "dawn/wire/client/Queue.h"
 
+#include "dawn/native/Format.h"
+#include "dawn/native/Texture.h"
 #include "dawn/wire/client/Client.h"
 #include "dawn/wire/client/Device.h"
 
@@ -75,10 +77,26 @@ namespace dawn::wire::client {
         QueueWriteTextureCmd cmd;
         cmd.queueId = id;
         cmd.destination = destination;
-        cmd.data = static_cast<const uint8_t*>(data);
-        cmd.dataSize = dataSize;
-        cmd.dataLayout = dataLayout;
         cmd.writeSize = writeSize;
+
+        // Send and copy data in ArrayBuffer only if it is needed over client/server
+        ASSERT(dataLayout->offset <= dataSize);
+        cmd.data = static_cast<const uint8_t*>(data) + dataLayout->offset;
+
+        auto destination_ = reinterpret_cast<native::ImageCopyTexture const*>(destination);
+        const native::TexelBlockInfo& blockInfo =
+            destination_->texture->GetFormat().GetAspectInfo(destination_->aspect).block;
+        size_t copySize = writeSize->width * writeSize->height * writeSize->depthOrArrayLayers *
+                          blockInfo.byteSize / blockInfo.width / blockInfo.height;
+        ASSERT(copySize <= dataSize);
+        ASSERT(dataLayout->offset + copySize <= dataSize);
+        cmd.dataSize = copySize;
+
+        WGPUTextureDataLayout layout = {};
+        layout.offset = 0;
+        layout.bytesPerRow = dataLayout->bytesPerRow;
+        layout.rowsPerImage = dataLayout->rowsPerImage;
+        cmd.dataLayout = &layout;
 
         client->SerializeCommand(cmd);
     }
