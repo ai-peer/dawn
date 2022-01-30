@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4707ef84_b7f42d91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-01-30T20:28:13Z",
+      "side": 1,
+      "message": "This could be done with a 5 way patch:\n\n1. add a new temporary getter to tint::Source\n2. update Dawn to use it\n3. land https://dawn-review.googlesource.com/c/tint/+/78700 with the getter updated to point to the new thing\n4. change Dawn to use the new tint::Source::File\n5. Remove the temporary getter\n\n... Or we could just land this.",
+      "revId": "f23fa48061f942aa68a1626d468cf72eb0f684cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
