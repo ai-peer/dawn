@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2785014_b8ce4de5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-31T19:00:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b98100f943146f28ec9193f33c91565d3eb5f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09369652_2d7af248",
@@ -14,6 +31,30 @@
       "writtenOn": "2022-01-31T17:55:36Z",
       "side": 1,
       "message": "Hmm, from initial glance why does this need to be templated instead of just a func argument? (I think it\u0027s just in 1 if statement?) I feel like templating it seems like overkill? I think if we don\u0027t use a template we probably don\u0027t need the externs below either?",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 51
+      },
+      "revId": "b98100f943146f28ec9193f33c91565d3eb5f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5aec36d6_f4301343",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-01-31T19:00:14Z",
+      "side": 1,
+      "message": "looks like it\u0027s to keep the branching cost the same:\n\n\u003e Went with monomorphization to keep the branching cost the same as the previous version, but I could make the direction an argument if you\u0027d like that better.\n\nWould be OK with me to make this an argument until we find it necessary if copies get slow for some reason - unlikely.\nFWIW though - I love how we can do \"if constexpr\" now :)",
+      "parentUuid": "09369652_2d7af248",
       "range": {
         "startLine": 52,
         "startChar": 4,
