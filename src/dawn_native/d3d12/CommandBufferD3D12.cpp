@@ -871,8 +871,8 @@ namespace dawn::native::d3d12 {
                                 uint32_t sourceZ = 0;
                                 switch (source->GetDimension()) {
                                     case wgpu::TextureDimension::e1D:
-					ASSERT(copy->source.origin.z == 0);
-					break;
+                                        ASSERT(copy->source.origin.z == 0);
+                                        break;
                                     case wgpu::TextureDimension::e2D:
                                         sourceLayer = copy->source.origin.z + z;
                                         break;
@@ -885,8 +885,8 @@ namespace dawn::native::d3d12 {
                                 uint32_t destinationZ = 0;
                                 switch (destination->GetDimension()) {
                                     case wgpu::TextureDimension::e1D:
-					ASSERT(copy->destination.origin.z == 0);
-					break;
+                                        ASSERT(copy->destination.origin.z == 0);
+                                        break;
                                     case wgpu::TextureDimension::e2D:
                                         destinationLayer = copy->destination.origin.z + z;
                                         break;
