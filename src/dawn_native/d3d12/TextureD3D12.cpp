@@ -870,8 +870,6 @@ namespace dawn::native::d3d12 {
         const ExecutionSerial pendingCommandSerial =
             ToBackend(GetDevice())->GetPendingCommandSerial();
 
-        ASSERT(GetDimension() != wgpu::TextureDimension::e1D);
-
         mSubresourceStateAndDecay.Update(
             range, [&](const SubresourceRange& updateRange, StateAndDecay* state) {
                 TransitionSubresourceRange(barriers, updateRange, state, newState,
@@ -893,8 +891,6 @@ namespace dawn::native::d3d12 {
 
         const ExecutionSerial pendingCommandSerial =
             ToBackend(GetDevice())->GetPendingCommandSerial();
-        // TODO(crbug.com/dawn/814): support 1D textures.
-        ASSERT(GetDimension() != wgpu::TextureDimension::e1D);
 
         mSubresourceStateAndDecay.Merge(textureUsages, [&](const SubresourceRange& mergeRange,
                                                            StateAndDecay* state,
