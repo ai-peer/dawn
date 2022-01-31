@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98d5632c_3d232daf",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-31T17:03:56Z",
+      "side": 0,
+      "message": "Note that all of 1D textures are still behind DisallowUnsafeAPIs, so this is a \"safe\" change.",
+      "revId": "b98100f943146f28ec9193f33c91565d3eb5f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c926de22_5a9a3ccb",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-31T17:03:56Z",
+      "side": 0,
+      "message": "I had to remove this, as some lazy-clearing code was computing a 2D footprint. I think the major confusion to avoid is between the depth of 3D textures and the layer count of 2D textures anyway.",
+      "revId": "b98100f943146f28ec9193f33c91565d3eb5f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
