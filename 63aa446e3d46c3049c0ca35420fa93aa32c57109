@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89e014d5_0cc96703",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-31T15:07:39Z",
+      "side": 1,
+      "message": "PTAL! Went with monomorphization to keep the branching cost the same as the previous version, but I could make the direction an argument if you\u0027d like that better.",
+      "revId": "63aa446e3d46c3049c0ca35420fa93aa32c57109",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
