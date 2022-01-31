@@ -63,6 +63,30 @@
       },
       "revId": "b98100f943146f28ec9193f33c91565d3eb5f07b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36c2dc74_cd21465b",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-31T23:08:23Z",
+      "side": 1,
+      "message": "Ah I missed that sorry. Yea I\u0027m not adamant about either direction. Was just wondering if there was a good reason for additional complexity.",
+      "parentUuid": "5aec36d6_f4301343",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 51
+      },
+      "revId": "b98100f943146f28ec9193f33c91565d3eb5f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
