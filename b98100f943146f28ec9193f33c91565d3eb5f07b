@@ -87,6 +87,30 @@
       },
       "revId": "b98100f943146f28ec9193f33c91565d3eb5f07b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2247fa92_23d214ce",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-01-31T23:25:22Z",
+      "side": 1,
+      "message": "nit. Maybe we can add a comment somewhere in the code also about why we chose to do this. Otherwise it\u0027s not immediately clear, and finding the reason in this CL is a couple more jumps.",
+      "parentUuid": "36c2dc74_cd21465b",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 51
+      },
+      "revId": "b98100f943146f28ec9193f33c91565d3eb5f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
