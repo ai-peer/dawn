@@ -87,6 +87,8 @@ namespace dawn::native {
             return 1;
         } else if (aspects == (Aspect::Plane0 | Aspect::Plane1)) {
             return 2;
+        } else if (aspects == Aspect::Stencil) {
+            return 2;  // FIXME
         } else {
             ASSERT(aspects == (Aspect::Depth | Aspect::Stencil));
             return 2;

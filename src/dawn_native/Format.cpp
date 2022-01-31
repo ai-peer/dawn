@@ -378,7 +378,7 @@ namespace dawn::native {
 
         // Depth-stencil formats
         // TODO(dawn:666): Implement the stencil8 format
-        AddStencilFormat(wgpu::TextureFormat::Stencil8, false);
+        AddStencilFormat(wgpu::TextureFormat::Stencil8, true);
         AddDepthFormat(wgpu::TextureFormat::Depth16Unorm, 2, true);
         // TODO(crbug.com/dawn/843): This is 4 because we read this to perform zero initialization,
         // and textures are always use depth32float. We should improve this to be more robust. Perhaps,
