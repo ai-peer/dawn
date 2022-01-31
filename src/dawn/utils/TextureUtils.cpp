@@ -130,12 +130,17 @@ namespace utils {
         }
     }
 
+    bool IsStencilOnlyFormat(wgpu::TextureFormat textureFormat) {
+        return textureFormat == wgpu::TextureFormat::Stencil8;
+    }
+
     uint32_t GetTexelBlockSizeInBytes(wgpu::TextureFormat textureFormat) {
         switch (textureFormat) {
             case wgpu::TextureFormat::R8Unorm:
             case wgpu::TextureFormat::R8Snorm:
             case wgpu::TextureFormat::R8Uint:
             case wgpu::TextureFormat::R8Sint:
+            case wgpu::TextureFormat::Stencil8:
                 return 1u;
 
             case wgpu::TextureFormat::R16Uint:
@@ -254,8 +259,6 @@ namespace utils {
             // Block size of a multi-planar format depends on aspect.
             case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
 
-            // TODO(dawn:666): implement stencil8
-            case wgpu::TextureFormat::Stencil8:
             case wgpu::TextureFormat::Undefined:
                 break;
         }
@@ -306,6 +309,7 @@ namespace utils {
             case wgpu::TextureFormat::Depth16Unorm:
             case wgpu::TextureFormat::Depth24UnormStencil8:
             case wgpu::TextureFormat::Depth32FloatStencil8:
+            case wgpu::TextureFormat::Stencil8:
                 return 1u;
 
             case wgpu::TextureFormat::BC1RGBAUnorm:
@@ -372,8 +376,6 @@ namespace utils {
             // Block size of a multi-planar format depends on aspect.
             case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
 
-            // TODO(dawn:666): implement stencil8
-            case wgpu::TextureFormat::Stencil8:
             case wgpu::TextureFormat::Undefined:
                 break;
         }
@@ -424,6 +426,7 @@ namespace utils {
             case wgpu::TextureFormat::Depth16Unorm:
             case wgpu::TextureFormat::Depth24UnormStencil8:
             case wgpu::TextureFormat::Depth32FloatStencil8:
+            case wgpu::TextureFormat::Stencil8:
                 return 1u;
 
             case wgpu::TextureFormat::BC1RGBAUnorm:
@@ -490,8 +493,6 @@ namespace utils {
             // Block size of a multi-planar format depends on aspect.
             case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
 
-            // TODO(dawn:666): implement stencil8
-            case wgpu::TextureFormat::Stencil8:
             case wgpu::TextureFormat::Undefined:
                 break;
         }
