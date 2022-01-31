@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "683aea1d_0156cd2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-31T17:01:47Z",
+      "side": 1,
+      "message": "PTAL! Companion CTS is https://github.com/gpuweb/cts/pull/960 and more to come (operation tests, tests for copies between 1D and 2D/3D) in the future!",
+      "revId": "7d46fc86d6258811765a82007e7e36b60a9623a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
