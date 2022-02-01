@@ -52,6 +52,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff9f412e_ed2c31f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-02-01T00:02:41Z",
+      "side": 1,
+      "message": "LGTM. Sorry took a while for me to understand what the purpose of the CL was for and then how it works.",
+      "revId": "9e1ec4cc1c0d49df586f1455e677f89d7dc9e2b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbeb0b20_34d4b31f",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-02-01T00:02:41Z",
+      "side": 1,
+      "message": "Just for my knowledge, why do we still need to do the \u0026 here? Does the shift not drop the bits? (Same for the chunk[3]).\n\nEdit: Actually given what we do in line 103-104, it seems like this might be unnecessary then?",
+      "range": {
+        "startLine": 89,
+        "startChar": 51,
+        "endLine": 89,
+        "endChar": 60
+      },
+      "revId": "9e1ec4cc1c0d49df586f1455e677f89d7dc9e2b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e51c06c0_7c46936a",
@@ -87,6 +127,29 @@
         "startChar": 0,
         "endLine": 46,
         "endChar": 66
+      },
+      "revId": "9e1ec4cc1c0d49df586f1455e677f89d7dc9e2b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6339c332_a2fa60e3",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-02-01T00:02:41Z",
+      "side": 1,
+      "message": "nit. Maybe we can append \u003c\u003c with some of the args so that debugging tests is easier?",
+      "range": {
+        "startLine": 165,
+        "startChar": 8,
+        "endLine": 166,
+        "endChar": 95
       },
       "revId": "9e1ec4cc1c0d49df586f1455e677f89d7dc9e2b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
