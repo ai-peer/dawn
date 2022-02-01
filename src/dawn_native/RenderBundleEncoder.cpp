@@ -71,8 +71,11 @@ namespace dawn::native {
                         "No color or depth/stencil attachment formats specified.");
 
         for (uint32_t i = 0; i < descriptor->colorFormatsCount; ++i) {
-            DAWN_TRY_CONTEXT(ValidateColorAttachmentFormat(device, descriptor->colorFormats[i]),
-                             "validating colorFormats[%u]", i);
+            wgpu::TextureFormat format = descriptor->colorFormats[i];
+            if (format != wgpu::TextureFormat::Undefined) {
+                DAWN_TRY_CONTEXT(ValidateColorAttachmentFormat(device, format),
+                                 "validating colorFormats[%u]", i);
+            }
         }
 
         if (descriptor->depthStencilFormat != wgpu::TextureFormat::Undefined) {

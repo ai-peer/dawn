@@ -109,10 +109,20 @@ namespace dawn::native::vulkan {
     ResultOrError<VkRenderPass> RenderPassCache::CreateRenderPassForQuery(
         const RenderPassCacheQuery& query) const {
         // The Vulkan subpasses want to know the layout of the attachments with VkAttachmentRef.
-        // Precompute them as they must be pointer-chained in VkSubpassDescription
+        // Precompute them as they must be pointer-chained in VkSubpassDescription.
+        // Note that both colorAttachmentRefs and resolveAttachmentRefs can be sparse with holes
+        // filled with VK_ATTACHMENT_UNUSED.
         std::array<VkAttachmentReference, kMaxColorAttachments> colorAttachmentRefs;
         std::array<VkAttachmentReference, kMaxColorAttachments> resolveAttachmentRefs;
         VkAttachmentReference depthStencilAttachmentRef;
+
+        for (uint32_t i = 0; i < kMaxColorAttachments; i++) {
+            colorAttachmentRefs[i].attachment = VK_ATTACHMENT_UNUSED;
+            resolveAttachmentRefs[i].attachment = VK_ATTACHMENT_UNUSED;
+            // The Khronos Vulkan validation layer will complain if not set
+            colorAttachmentRefs[i].layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+            resolveAttachmentRefs[i].layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+        }
 
         // Contains the attachment description that will be chained in the create info
         // The order of all attachments in attachmentDescs is "color-depthstencil-resolve".
@@ -121,12 +131,13 @@ namespace dawn::native::vulkan {
 
         VkSampleCountFlagBits vkSampleCount = VulkanSampleCount(query.sampleCount);
 
-        uint32_t colorAttachmentIndex = 0;
+        uint32_t attachmentCount = 0;
+        ColorAttachmentIndex maxColorAttachment{uint8_t(0)};
         for (ColorAttachmentIndex i : IterateBitSet(query.colorMask)) {
-            auto& attachmentRef = colorAttachmentRefs[colorAttachmentIndex];
-            auto& attachmentDesc = attachmentDescs[colorAttachmentIndex];
+            auto& attachmentRef = colorAttachmentRefs[static_cast<uint8_t>(i)];
+            auto& attachmentDesc = attachmentDescs[attachmentCount];
 
-            attachmentRef.attachment = colorAttachmentIndex;
+            attachmentRef.attachment = attachmentCount;
             attachmentRef.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
 
             attachmentDesc.flags = 0;
@@ -137,10 +148,10 @@ namespace dawn::native::vulkan {
             attachmentDesc.initialLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
             attachmentDesc.finalLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
 
-            ++colorAttachmentIndex;
+            maxColorAttachment = std::max(maxColorAttachment, i);
+            attachmentCount++;
         }
 
-        uint32_t attachmentCount = colorAttachmentIndex;
         VkAttachmentReference* depthStencilAttachment = nullptr;
         if (query.hasDepthStencil) {
             auto& attachmentDesc = attachmentDescs[attachmentCount];
@@ -166,12 +177,11 @@ namespace dawn::native::vulkan {
             attachmentDesc.initialLayout = depthStencilAttachmentRef.layout;
             attachmentDesc.finalLayout = depthStencilAttachmentRef.layout;
 
-            ++attachmentCount;
+            attachmentCount++;
         }
 
-        uint32_t resolveAttachmentIndex = 0;
         for (ColorAttachmentIndex i : IterateBitSet(query.resolveTargetMask)) {
-            auto& attachmentRef = resolveAttachmentRefs[resolveAttachmentIndex];
+            auto& attachmentRef = resolveAttachmentRefs[static_cast<uint8_t>(i)];
             auto& attachmentDesc = attachmentDescs[attachmentCount];
 
             attachmentRef.attachment = attachmentCount;
@@ -185,19 +195,8 @@ namespace dawn::native::vulkan {
             attachmentDesc.initialLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
             attachmentDesc.finalLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
 
-            ++attachmentCount;
-            ++resolveAttachmentIndex;
+            attachmentCount++;
         }
-
-        // All color attachments without a corresponding resolve attachment must be set to VK_ATTACHMENT_UNUSED
-        for (; resolveAttachmentIndex < colorAttachmentIndex; resolveAttachmentIndex++) {
-            auto& attachmentRef = resolveAttachmentRefs[resolveAttachmentIndex];
-            attachmentRef.attachment = VK_ATTACHMENT_UNUSED;
-            attachmentRef.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL; // The Khronos Vulkan validation layer will complain if not set
-        }
-
-        VkAttachmentReference* resolveTargetAttachmentRefs =
-            query.resolveTargetMask.any() ? resolveAttachmentRefs.data() : nullptr;
 
         // Create the VkSubpassDescription that will be chained in the VkRenderPassCreateInfo
         VkSubpassDescription subpassDesc;
@@ -205,9 +204,9 @@ namespace dawn::native::vulkan {
         subpassDesc.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
         subpassDesc.inputAttachmentCount = 0;
         subpassDesc.pInputAttachments = nullptr;
-        subpassDesc.colorAttachmentCount = colorAttachmentIndex;
+        subpassDesc.colorAttachmentCount = static_cast<uint8_t>(maxColorAttachment) + 1;
         subpassDesc.pColorAttachments = colorAttachmentRefs.data();
-        subpassDesc.pResolveAttachments = resolveTargetAttachmentRefs;
+        subpassDesc.pResolveAttachments = resolveAttachmentRefs.data();
         subpassDesc.pDepthStencilAttachment = depthStencilAttachment;
         subpassDesc.preserveAttachmentCount = 0;
         subpassDesc.pPreserveAttachments = nullptr;

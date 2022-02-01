@@ -221,6 +221,11 @@ namespace dawn::native {
             uint32_t* sampleCount,
             UsageValidationMode usageValidationMode) {
             TextureViewBase* attachment = colorAttachment.view;
+
+            if (attachment == nullptr) {
+                // Skip, TODO warnings?
+            }
+
             DAWN_TRY(device->ValidateObject(attachment));
             DAWN_TRY(ValidateCanUseAs(attachment->GetTexture(),
                                       wgpu::TextureUsage::RenderAttachment, usageValidationMode));

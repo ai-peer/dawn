@@ -459,9 +459,11 @@ namespace dawn::native::vulkan {
             // data pre-computed in the ColorState
             const auto& fragmentOutputsWritten =
                 GetStage(SingleShaderStage::Fragment).metadata->fragmentOutputsWritten;
+            ColorAttachmentIndex maxColorAttachment{uint8_t(0)};
             for (ColorAttachmentIndex i : IterateBitSet(GetColorAttachmentsMask())) {
                 const ColorTargetState* target = GetColorTargetState(i);
                 colorBlendAttachments[i] = ComputeColorDesc(target, fragmentOutputsWritten[i]);
+                maxColorAttachment = std::max(maxColorAttachment, i);
             }
 
             colorBlend.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
@@ -470,7 +472,7 @@ namespace dawn::native::vulkan {
             // LogicOp isn't supported so we disable it.
             colorBlend.logicOpEnable = VK_FALSE;
             colorBlend.logicOp = VK_LOGIC_OP_CLEAR;
-            colorBlend.attachmentCount = static_cast<uint32_t>(GetColorAttachmentsMask().count());
+            colorBlend.attachmentCount = static_cast<uint8_t>(maxColorAttachment) + 1;
             colorBlend.pAttachments = colorBlendAttachments.data();
             // The blend constant is always dynamic so we fill in a dummy value
             colorBlend.blendConstants[0] = 0.0f;
