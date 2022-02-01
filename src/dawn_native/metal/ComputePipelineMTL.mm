@@ -62,7 +62,9 @@ namespace dawn::native::metal {
             if (mWorkgroupAllocations[i] == 0) {
                 continue;
             }
-            [encoder setThreadgroupMemoryLength:mWorkgroupAllocations[i] atIndex:i];
+            // Size must be a multiple of 16 bytes.
+            uint32_t rounded = (mWorkgroupAllocations[i] + 15u) & 0xfffffff0u;
+            [encoder setThreadgroupMemoryLength:rounded atIndex:i];
         }
     }
 
