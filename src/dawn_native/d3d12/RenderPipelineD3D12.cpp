@@ -393,14 +393,26 @@ namespace dawn::native::d3d12 {
             descriptorD3D12.DSVFormat = D3D12TextureFormat(GetDepthStencilFormat());
         }
 
+        ColorAttachmentIndex maxColorAttachment{uint8_t(0)};
+        for (uint32_t i = 0; i < 8; i++) {
+            descriptorD3D12.RTVFormats[i] = DXGI_FORMAT_R8G8B8A8_UNORM;
+            descriptorD3D12.BlendState.RenderTarget[i].BlendEnable = false;
+            descriptorD3D12.BlendState.RenderTarget[i].RenderTargetWriteMask = 0;
+            descriptorD3D12.BlendState.RenderTarget[i].LogicOpEnable = false;
+            descriptorD3D12.BlendState.RenderTarget[i].LogicOp = D3D12_LOGIC_OP_NOOP;
+        }
         for (ColorAttachmentIndex i : IterateBitSet(GetColorAttachmentsMask())) {
             descriptorD3D12.RTVFormats[static_cast<uint8_t>(i)] =
                 D3D12TextureFormat(GetColorAttachmentFormat(i));
             descriptorD3D12.BlendState.RenderTarget[static_cast<uint8_t>(i)] =
                 ComputeColorDesc(GetColorTargetState(i));
+            maxColorAttachment = std::max(maxColorAttachment, i);
         }
-        descriptorD3D12.NumRenderTargets = static_cast<uint32_t>(GetColorAttachmentsMask().count());
+        descriptorD3D12.NumRenderTargets = static_cast<uint8_t>(maxColorAttachment) + 1;
 
+        for (uint32_t i = descriptorD3D12.NumRenderTargets; i < 8; i++) {
+            descriptorD3D12.RTVFormats[i] = DXGI_FORMAT_UNKNOWN;
+        }
         descriptorD3D12.BlendState.AlphaToCoverageEnable = IsAlphaToCoverageEnabled();
         descriptorD3D12.BlendState.IndependentBlendEnable = TRUE;
 
