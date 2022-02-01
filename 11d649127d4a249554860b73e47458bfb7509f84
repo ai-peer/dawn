@@ -16,6 +16,23 @@
       "message": "I had forgotten to run the tests manually in Debug, so I missed a bunch of asserts. PTAL at the diff between patchsets 17 and 19.",
       "revId": "11d649127d4a249554860b73e47458bfb7509f84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1dba72f_a8cf718c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-01T15:22:18Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "11d649127d4a249554860b73e47458bfb7509f84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
