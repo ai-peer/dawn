@@ -1095,6 +1095,46 @@ TEST_P(ColorStateTest, ColorWriteMaskDoesNotAffectRenderPassLoadOpClear) {
     EXPECT_PIXEL_RGBA8_EQ(expected, renderPass.color, kRTSize / 2, kRTSize / 2);
 }
 
+TEST_P(ColorStateTest, Ignore) {
+    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        struct Outputs {
+            @location(0) o0 : vec4<f32>;
+            @location(1) o1 : vec4<f32>;
+        }
+
+        @stage(fragment) fn main() -> Outputs {
+            return Outputs(vec4<f32>(1.0), vec4<f32>(0.5));
+        }
+    )");
+
+    utils::ComboRenderPipelineDescriptor pDesc;
+    pDesc.vertex.module = vsModule;
+    pDesc.cFragment.module = fsModule;
+    pDesc.cFragment.targetCount = 1;
+    pDesc.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pDesc);
+
+    wgpu::TextureDescriptor tDesc;
+    tDesc.dimension = wgpu::TextureDimension::e2D;
+    tDesc.format = wgpu::TextureFormat::RGBA8Unorm;
+    tDesc.usage = wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc;
+    tDesc.size = {1, 1};
+    wgpu::Texture tex = device.CreateTexture(&tDesc);
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+
+    utils::ComboRenderPassDescriptor passDesc({tex.CreateView()});
+    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&passDesc);
+    pass.SetPipeline(pipeline);
+    pass.Draw(3);
+    pass.EndPass();
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8::kWhite, tex, 0, 0);
+}
+
 DAWN_INSTANTIATE_TEST(ColorStateTest,
                       D3D12Backend(),
                       MetalBackend(),
