@@ -92,6 +92,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8b33db1_48f74a7c",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-01T09:37:45Z",
+      "side": 1,
+      "message": "Good catch, it wasn\u0027t necessary.",
+      "parentUuid": "dbeb0b20_34d4b31f",
+      "range": {
+        "startLine": 89,
+        "startChar": 51,
+        "endLine": 89,
+        "endChar": 60
+      },
+      "revId": "9e1ec4cc1c0d49df586f1455e677f89d7dc9e2b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e51c06c0_7c46936a",
@@ -105,6 +129,24 @@
       "writtenOn": "2022-01-31T17:01:11Z",
       "side": 1,
       "message": "nit: I think it would be helpful to write out the math we\u0027re going to do. Had to think a bit to remember how math works.. heh. IIUC, effectively:\n\nr \u003d 16 - log2(period)\nx * period ~\u003d x * (1/2)^r * (2^r * period)",
+      "revId": "9e1ec4cc1c0d49df586f1455e677f89d7dc9e2b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f9c24e1_8b3b4f25",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-01T09:37:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e51c06c0_7c46936a",
       "revId": "9e1ec4cc1c0d49df586f1455e677f89d7dc9e2b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -132,6 +174,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e4053eb_f1b60129",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-01T09:37:45Z",
+      "side": 1,
+      "message": "It was experimentally what I the error was (2.25e-5) but I found an explanation why! Added a comment + an expression for that value.",
+      "parentUuid": "4e409a7b_bfa80f80",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 66
+      },
+      "revId": "9e1ec4cc1c0d49df586f1455e677f89d7dc9e2b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6339c332_a2fa60e3",
@@ -145,6 +211,30 @@
       "writtenOn": "2022-02-01T00:02:41Z",
       "side": 1,
       "message": "nit. Maybe we can append \u003c\u003c with some of the args so that debugging tests is easier?",
+      "range": {
+        "startLine": 165,
+        "startChar": 8,
+        "endLine": 166,
+        "endChar": 95
+      },
+      "revId": "9e1ec4cc1c0d49df586f1455e677f89d7dc9e2b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4c94554_04af3fa4",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-01T09:37:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6339c332_a2fa60e3",
       "range": {
         "startLine": 165,
         "startChar": 8,
