@@ -33,6 +33,24 @@
       "message": "nit: I think you can use Align from Math.h https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/common/Math.h;l\u003d56?q\u003df:dawn%20common%20Math",
       "revId": "8dda194a73a8831af69664afb928f4b3039e87d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fa873c8_0ee048ee",
+        "filename": "src/dawn_native/metal/ComputePipelineMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-02-01T14:18:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d2a0203_ad61200f",
+      "revId": "8dda194a73a8831af69664afb928f4b3039e87d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
