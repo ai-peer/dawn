@@ -14,7 +14,7 @@ This repository contains the implementation of Dawn, which is itself composed of
 - [`scripts`](../scripts): contains a grab-bag of files that are used for building Dawn, in testing, etc.
 - [`src`](../src):
   - [`common`](../src/common): helper code that is allowed to be used by Dawn's core libraries, `dawn_native` and `dawn_wire`. Also allowed for use in all other Dawn targets.
-  - [`dawn_native`](../src/dawn_native): code for the implementation of WebGPU on top of graphics APIs. Files in this folder are the "frontend" while subdirectories are "backends".
+  - [`dawn_native`](../src/dawn/native): code for the implementation of WebGPU on top of graphics APIs. Files in this folder are the "frontend" while subdirectories are "backends".
       - `<backend>`: code for the implementation of the backend on a specific graphics API, for example `d3d12`, `metal` or `vulkan`.
   - [`dawn_platform`](../src/dawn_platform): definition of interfaces for dependency injection in `dawn_native` or `dawn_wire`.
   - [`dawn_wire`](../src/dawn_wire): code for an implementation of WebGPU as a client-server architecture.
