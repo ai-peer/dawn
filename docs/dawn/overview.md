@@ -14,12 +14,13 @@ This repository contains the implementation of Dawn, which is itself composed of
 - [`scripts`](../scripts): contains a grab-bag of files that are used for building Dawn, in testing, etc.
 - [`src`](../src):
   - [`common`](../src/common): helper code that is allowed to be used by Dawn's core libraries, `dawn_native` and `dawn_wire`. Also allowed for use in all other Dawn targets.
-  - [`dawn_native`](../src/dawn_native): code for the implementation of WebGPU on top of graphics APIs. Files in this folder are the "frontend" while subdirectories are "backends".
-      - `<backend>`: code for the implementation of the backend on a specific graphics API, for example `d3d12`, `metal` or `vulkan`.
-  - [`dawn_platform`](../src/dawn_platform): definition of interfaces for dependency injection in `dawn_native` or `dawn_wire`.
-  - [`dawn_wire`](../src/dawn_wire): code for an implementation of WebGPU as a client-server architecture.
+  - [`dawn`](../src/dawn): holds the dawn implementation source code
+      - [`native`](../src/dawn/native): code for the implementation of WebGPU on top of graphics APIs. Files in this folder are the "frontend" while subdirectories are "backends".
+          - `<backend>`: code for the implementation of the backend on a specific graphics API, for example `d3d12`, `metal` or `vulkan`.
+      - [`platform`](../src/dawn_platform): definition of interfaces for dependency injection in `dawn_native` or `dawn_wire`.
+      - [`wire`](../src/dawn_wire): code for an implementation of WebGPU as a client-server architecture.
   - [`fuzzers`](../src/dawn/fuzzers): various fuzzers for Dawn that are running in [Clusterfuzz](https://google.github.io/clusterfuzz/).
-  - [`include`](../src/include): public headers with subdirectories for each library. Note that some headers are auto-generated and not present directly in the directory.
+  - [`include`](../include): public headers with subdirectories for each library. Note that some headers are auto-generated and not present directly in the directory.
   - [`tests`](../src/tests):
     - [`end2end`](../src/tests/end2end): tests for the execution of the WebGPU API and require a GPU to run.
     - [`perf_tests`](../src/tests/perf_tests): benchmarks for various aspects of Dawn.

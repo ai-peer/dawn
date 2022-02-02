@@ -38,7 +38,7 @@ endif()
 set(DAWN_BUILD_GEN_DIR "${Dawn_BINARY_DIR}/gen")
 set(DAWN_GENERATOR_DIR "${Dawn_SOURCE_DIR}/generator")
 set(DAWN_SRC_DIR "${Dawn_SOURCE_DIR}/src")
-set(DAWN_INCLUDE_DIR "${DAWN_SRC_DIR}/include")
+set(DAWN_INCLUDE_DIR "${Dawn_SOURCE_DIR}/include")
 set(DAWN_TEMPLATE_DIR "${DAWN_GENERATOR_DIR}/templates")
 
 set(DAWN_DUMMY_FILE "${DAWN_SRC_DIR}/Dummy.cpp")
@@ -160,8 +160,8 @@ endif()
 # The public config contains only the include paths for the Dawn headers.
 add_library(dawn_public_config INTERFACE)
 target_include_directories(dawn_public_config INTERFACE
-    "${DAWN_SRC_DIR}/include"
-    "${DAWN_BUILD_GEN_DIR}/src/include"
+    "${DAWN_INCLUDE_DIR}"
+    "${DAWN_BUILD_GEN_DIR}/include"
 )
 
 # The internal config conatins additional path but includes the dawn_public_config include paths
@@ -211,39 +211,15 @@ set(CMAKE_CXX_STANDARD "17")
 ################################################################################
 
 add_subdirectory(third_party)
-add_subdirectory(src/common)
 add_subdirectory(generator)
 add_subdirectory(src/dawn)
-add_subdirectory(src/dawn_platform)
-add_subdirectory(src/dawn_native)
-add_subdirectory(src/dawn_wire)
-# TODO(dawn:269): Remove once the implementation-based swapchains are removed.
-add_subdirectory(src/utils)
+
+################################################################################
+# Samples
+################################################################################
 
 if (DAWN_BUILD_EXAMPLES)
     #TODO(dawn:269): Add this once implementation-based swapchains are removed.
     #add_subdirectory(src/utils)
-    add_subdirectory(examples)
-endif()
-
-if (DAWN_BUILD_NODE_BINDINGS)
-    set(NODE_BINDING_DEPS
-        ${NODE_ADDON_API_DIR}
-        ${NODE_API_HEADERS_DIR}
-        ${WEBGPU_IDL_PATH}
-    )
-    foreach(DEP ${NODE_BINDING_DEPS})
-        if (NOT EXISTS ${DEP})
-            message(FATAL_ERROR
-                "DAWN_BUILD_NODE_BINDINGS requires missing dependency '${DEP}'\n"
-                "Please follow the 'Fetch dependencies' instructions at:\n"
-                "./src/dawn_node/README.md"
-            )
-        endif()
-    endforeach()
-    if (NOT CMAKE_POSITION_INDEPENDENT_CODE)
-        message(FATAL_ERROR "DAWN_BUILD_NODE_BINDINGS requires building with DAWN_ENABLE_PIC")
-    endif()
-
-    add_subdirectory(src/dawn_node)
+    add_subdirectory(samples/dawn)
 endif()
