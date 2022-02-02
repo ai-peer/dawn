@@ -16,6 +16,80 @@
       "message": "PTAL! Refactoring to stick closer to the spec and enable a smoother path for https://chromium-review.googlesource.com/c/chromium/src/+/3418258 now that we\u0027ve identified that the ops should be optional in the IDL.",
       "revId": "f524f0c22115067c276d73f2dbee6447cb20921b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3de97f0d_8683ed5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-02T21:32:49Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f524f0c22115067c276d73f2dbee6447cb20921b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ee1d676_43c322cf",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-02T21:32:49Z",
+      "side": 1,
+      "message": "nit: need a test for these warnings in DeprecatedAPITests",
+      "revId": "f524f0c22115067c276d73f2dbee6447cb20921b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "495fdaba_af42013c",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-02T21:32:49Z",
+      "side": 1,
+      "message": "\"depthLoadOp (%s) and depthStoreOp (%s)\" so that the user knows what they passed?\n\nmaybe we should have it as two separate statements that way Undefined will never get printed since it\u0027s not a real enum in JS.\nex.) in the depthLoadOp\u003dundefined depthStoreOp\u003dstore case.\n\nPresumably we already have tests for readonly with Load+Store. Should also add validation tests for readonly with Undefined+Store and Load+Undefined.\n\nOK to do the new tests just in the CTS. But, adding in Dawn might be a relatively small amount of work (and Blink isn\u0027t hooked up for CTS testing of the optionality yet).",
+      "range": {
+        "startLine": 302,
+        "startChar": 25,
+        "endLine": 302,
+        "endChar": 53
+      },
+      "revId": "f524f0c22115067c276d73f2dbee6447cb20921b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcee1b8a_90bb1a6c",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-02T21:32:49Z",
+      "side": 1,
+      "message": "kinda unfortunate we need to explicitly do this, but I\u0027m guessing that changing  ComboRenderPassDescriptor::ComboRenderPassDescriptor to use Undefined as the default will mean a TON of other tests will need to change",
+      "revId": "f524f0c22115067c276d73f2dbee6447cb20921b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
