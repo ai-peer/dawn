@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d93b8a3_46ca4594",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-02T15:15:25Z",
+      "side": 1,
+      "message": "There are two types of bots, the ones you see in the list are CPU-only bots and run stuff only with Swiftshader / WARP. The dawn-mac-x64-deps-rel and friends run on GPU hardware so you can use that. If you don\u0027t have access to mac hardware, someone from Google can help with this CL too.",
+      "parentUuid": "6fb26b33_3e6114e5",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "43e987de_ef6f9eed",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 11
@@ -125,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bfcea069_d22d4d77",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-02T15:15:25Z",
+      "side": 1,
+      "message": "Maybe someone also wants to use external textures in fragment shader. It\u0027s unlikely  but we shouldn\u0027t prevent it.",
+      "parentUuid": "65126e87_99a43d03",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03e00aed_2caf8cfb",
         "filename": "src/dawn_native/metal/ExternalTextureMTL.mm",
         "patchSetId": 11
@@ -154,6 +190,24 @@
       "side": 1,
       "message": "Rafael has been adamant about taking advantage of D3D12\u0027s allowance for null bindings. I agree that splitting ExternalTexture into each backend is a very wordy way of achieving this - but it seemed more correct than checking numPlanes and binding null when 1 in D3D12.",
       "parentUuid": "03e00aed_2caf8cfb",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19c46e2c_05ba83f3",
+        "filename": "src/dawn_native/metal/ExternalTextureMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-02T15:15:25Z",
+      "side": 1,
+      "message": "IMHO we shouldn\u0027t care about optimizing for D3D12 at this stage. And in the future we could have a special TextureD3D12 that\u0027s the null texture maybe?",
+      "parentUuid": "b86a2104_37aaad05",
       "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
