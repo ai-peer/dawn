@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42df6e5b_3fb89101",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-02T15:21:23Z",
+      "side": 1,
+      "message": "I see. I can write the code...but if I run into issues it\u0027s non-trivial for me to get a debugging environment set up. Will reach out if needed.",
+      "parentUuid": "9d93b8a3_46ca4594",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43e987de_ef6f9eed",
@@ -161,6 +179,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed75f532_908aa505",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-02T15:21:23Z",
+      "side": 1,
+      "message": "I assume you meant vertex. Will do.",
+      "parentUuid": "bfcea069_d22d4d77",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03e00aed_2caf8cfb",
         "filename": "src/dawn_native/metal/ExternalTextureMTL.mm",
         "patchSetId": 11
@@ -208,6 +244,24 @@
       "side": 1,
       "message": "IMHO we shouldn\u0027t care about optimizing for D3D12 at this stage. And in the future we could have a special TextureD3D12 that\u0027s the null texture maybe?",
       "parentUuid": "b86a2104_37aaad05",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1707e28_843eacda",
+        "filename": "src/dawn_native/metal/ExternalTextureMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-02T15:21:23Z",
+      "side": 1,
+      "message": "\u003e\u003e special TextureD3D12 that\u0027s the null texture maybe\n\nThat seems like a reasonable solution.",
+      "parentUuid": "19c46e2c_05ba83f3",
       "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
