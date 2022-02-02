@@ -14,14 +14,14 @@
 
 #include "DawnWireServerFuzzer.h"
 
-#include "common/Assert.h"
-#include "common/Log.h"
-#include "common/SystemUtils.h"
+#include "dawn/common/Assert.h"
+#include "dawn/common/Log.h"
+#include "dawn/common/SystemUtils.h"
 #include "dawn/dawn_proc.h"
+#include "dawn/native/DawnNative.h"
+#include "dawn/utils/SystemUtils.h"
 #include "dawn/webgpu_cpp.h"
-#include "dawn_native/DawnNative.h"
-#include "dawn_wire/WireServer.h"
-#include "utils/SystemUtils.h"
+#include "dawn/wire/WireServer.h"
 
 #include <fstream>
 #include <vector>
