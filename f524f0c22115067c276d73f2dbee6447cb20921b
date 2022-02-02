@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d847e4e_801f1283",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-02-02T21:06:43Z",
+      "side": 1,
+      "message": "PTAL! Refactoring to stick closer to the spec and enable a smoother path for https://chromium-review.googlesource.com/c/chromium/src/+/3418258 now that we\u0027ve identified that the ops should be optional in the IDL.",
+      "revId": "f524f0c22115067c276d73f2dbee6447cb20921b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
