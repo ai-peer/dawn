@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6fb26b33_3e6114e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-02T15:05:47Z",
+      "side": 1,
+      "message": "One question I have is on Metal - the bots do not appear to run any e2e tests with Metal Shading Language, only SwiftShader. Is this correct? Do I need to have this working on MSL?",
+      "parentUuid": "2782dfa1_d05ad0c6",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "43e987de_ef6f9eed",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 11
@@ -31,6 +49,24 @@
       "writtenOn": "2022-02-02T11:02:47Z",
       "side": 1,
       "message": "nit: I\u0027m not sure what we\u0027re checking here? It seems to just be the consistency of the layout, but is that necessary to do in the layout\u003c-\u003eshader compatibility check?",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1d91863_ec00925e",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-02T15:05:47Z",
+      "side": 1,
+      "message": "This code isn\u0027t necessary.",
+      "parentUuid": "43e987de_ef6f9eed",
       "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "65126e87_99a43d03",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-02T15:05:47Z",
+      "side": 1,
+      "message": "This should also include compute.",
+      "parentUuid": "44625611_740346a1",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03e00aed_2caf8cfb",
         "filename": "src/dawn_native/metal/ExternalTextureMTL.mm",
         "patchSetId": 11
@@ -88,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b86a2104_37aaad05",
+        "filename": "src/dawn_native/metal/ExternalTextureMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-02T15:05:47Z",
+      "side": 1,
+      "message": "Rafael has been adamant about taking advantage of D3D12\u0027s allowance for null bindings. I agree that splitting ExternalTexture into each backend is a very wordy way of achieving this - but it seemed more correct than checking numPlanes and binding null when 1 in D3D12.",
+      "parentUuid": "03e00aed_2caf8cfb",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a02c093_220850d7",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 11
@@ -99,6 +171,24 @@
       "writtenOn": "2022-02-02T11:02:47Z",
       "side": 1,
       "message": "GL is not shipped. Feel free to skip it for now if that helps.",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8043967_0afc8ab2",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-02T15:05:47Z",
+      "side": 1,
+      "message": "Will disable for now. I\u0027m getting shader compile issues only on GL and I\u0027m not sure where the issue lies.",
+      "parentUuid": "6a02c093_220850d7",
       "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
