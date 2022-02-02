@@ -69,56 +69,65 @@ if (build_with_chromium) {
   }
 }
 
-static_library("dawn_wire_server_fuzzer_common") {
+static_library("wire_server_fuzzer_common") {
   sources = [
     "DawnWireServerFuzzer.cpp",
     "DawnWireServerFuzzer.h",
   ]
   public_deps = [
-    "${dawn_root}/src/common",
-    "${dawn_root}/src/dawn:dawn_proc",
-    "${dawn_root}/src/dawn:dawncpp",
-    "${dawn_root}/src/dawn_native:dawn_native_static",
-    "${dawn_root}/src/dawn_wire:dawn_wire_static",
-    "${dawn_root}/src/utils:dawn_utils",
+    "${dawn_root}/src/dawn:proc",
+    "${dawn_root}/src/dawn:cpp",
+    "${dawn_root}/src/dawn/common",
+    "${dawn_root}/src/dawn/native:static",
+    "${dawn_root}/src/dawn/wire:static",
+    "${dawn_root}/src/dawn/utils",
   ]
 }
 
-dawn_fuzzer_test("dawn_wire_server_and_frontend_fuzzer") {
+dawn_fuzzer_test("wire_server_and_frontend_fuzzer") {
   sources = [ "DawnWireServerAndFrontendFuzzer.cpp" ]
 
-  deps = [ ":dawn_wire_server_fuzzer_common" ]
+  deps = [ ":wire_server_fuzzer_common" ]
 
-  additional_configs = [ "${dawn_root}/src/common:dawn_internal" ]
+  additional_configs = [ "${dawn_root}/src/dawn/common:internal" ]
 }
 
 if (is_win) {
-  dawn_fuzzer_test("dawn_wire_server_and_d3d12_backend_fuzzer") {
+  dawn_fuzzer_test("wire_server_and_d3d12_backend_fuzzer") {
     sources = [ "DawnWireServerAndD3D12BackendFuzzer.cpp" ]
 
-    deps = [ ":dawn_wire_server_fuzzer_common" ]
+    deps = [ ":wire_server_fuzzer_common" ]
 
-    additional_configs = [ "${dawn_root}/src/common:dawn_internal" ]
+    additional_configs = [ "${dawn_root}/src/dawn/common:internal" ]
   }
 }
 
-dawn_fuzzer_test("dawn_wire_server_and_vulkan_backend_fuzzer") {
+dawn_fuzzer_test("wire_server_and_vulkan_backend_fuzzer") {
   sources = [ "DawnWireServerAndVulkanBackendFuzzer.cpp" ]
 
-  deps = [ ":dawn_wire_server_fuzzer_common" ]
+  deps = [ ":wire_server_fuzzer_common" ]
 
-  additional_configs = [ "${dawn_root}/src/common:dawn_internal" ]
+  additional_configs = [ "${dawn_root}/src/dawn/common:internal" ]
 }
 
 # A group target to build all the fuzzers
-group("dawn_fuzzers") {
+group("fuzzers") {
   testonly = true
   deps = [
-    ":dawn_wire_server_and_frontend_fuzzer",
-    ":dawn_wire_server_and_vulkan_backend_fuzzer",
+    ":wire_server_and_frontend_fuzzer",
+    ":wire_server_and_vulkan_backend_fuzzer",
   ]
 
   if (is_win) {
-    deps += [ ":dawn_wire_server_and_d3d12_backend_fuzzer" ]
+    deps += [ ":wire_server_and_d3d12_backend_fuzzer" ]
   }
+}
+
+################################################################################
+# Build target aliases
+# TODO(crbug.com/dawn/1275) - remove these
+################################################################################
+group("dawn_fuzzers") {
+  testonly = true
+  public_deps = [ ":fuzzers" ]
 }
