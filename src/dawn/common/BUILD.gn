@@ -35,13 +35,6 @@ if (build_with_chromium) {
 # Common dawn configs
 ###############################################################################
 
-config("public_include_dirs") {
-  include_dirs = [
-    "${target_gen_dir}/../../../src/include",
-    "${dawn_root}/src/include",
-  ]
-}
-
 config("internal") {
   include_dirs = [
     "${target_gen_dir}/../../../src",
@@ -92,9 +85,9 @@ config("internal") {
   # Only internal Dawn targets can use this config, this means only targets in
   # this BUILD.gn file and related subdirs.
   visibility = [
-    "${dawn_root}/examples/*",
-    "${dawn_root}/src/*",
     "${dawn_root}/src/dawn/*",
+    "${dawn_root}/src/fuzzers/dawn/*",
+    "${dawn_root}/samples/dawn/*",
   ]
 
   cflags = []
@@ -237,8 +230,8 @@ if (is_win || is_linux || is_chromeos || is_mac || is_fuchsia || is_android) {
 
     public_configs = [ ":internal" ]
     deps = [
-      "${dawn_root}/src/dawn:dawn_headers",
-      "${dawn_root}/src/dawn:dawncpp_headers",
+      "${dawn_root}/include/dawn:headers",
+      "${dawn_root}/include/dawn:cpp_headers",
     ]
 
     if (is_win) {
