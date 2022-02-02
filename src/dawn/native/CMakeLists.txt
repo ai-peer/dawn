@@ -13,7 +13,7 @@
 # limitations under the License.
 
 DawnJSONGenerator(
-    TARGET "native_utils"
+    TARGET "dawn_native_utils"
     PRINT_NAME "Dawn native utilities"
     RESULT_VARIABLE "DAWN_NATIVE_UTILS_GEN_SOURCES"
 )
@@ -26,8 +26,8 @@ if(BUILD_SHARED_LIBS)
 endif()
 
 target_sources(dawn_native PRIVATE
-    "${DAWN_INCLUDE_DIR}/dawn/native/DawnNative.h"
-    "${DAWN_INCLUDE_DIR}/dawn/native/dawn_native_export.h"
+    "${DAWN_INCLUDE_DIR}/dawn_native/DawnNative.h"
+    "${DAWN_INCLUDE_DIR}/dawn_native/dawn_native_export.h"
     ${DAWN_NATIVE_UTILS_GEN_SOURCES}
     "Adapter.cpp"
     "Adapter.h"
@@ -231,7 +231,7 @@ endif()
 
 if (DAWN_ENABLE_D3D12)
     target_sources(dawn_native PRIVATE
-        "${DAWN_INCLUDE_DIR}/dawn/native/D3D12Backend.h"
+        "${DAWN_INCLUDE_DIR}/dawn_native/D3D12Backend.h"
         "d3d12/AdapterD3D12.cpp"
         "d3d12/AdapterD3D12.h"
         "d3d12/BackendD3D12.cpp"
@@ -317,7 +317,7 @@ endif()
 
 if (DAWN_ENABLE_METAL)
     target_sources(dawn_native PRIVATE
-        "${DAWN_INCLUDE_DIR}/dawn/native/MetalBackend.h"
+        "${DAWN_INCLUDE_DIR}/dawn_native/MetalBackend.h"
         "Surface_metal.mm"
         "metal/BackendMTL.h"
         "metal/BackendMTL.mm"
@@ -368,7 +368,7 @@ endif()
 
 if (DAWN_ENABLE_NULL)
     target_sources(dawn_native PRIVATE
-        "${DAWN_INCLUDE_DIR}/dawn/native/NullBackend.h"
+        "${DAWN_INCLUDE_DIR}/dawn_native/NullBackend.h"
         "null/DeviceNull.cpp"
         "null/DeviceNull.h"
     )
@@ -393,7 +393,7 @@ if (DAWN_ENABLE_OPENGL)
     )
 
     target_sources(dawn_native PRIVATE
-        "${DAWN_INCLUDE_DIR}/dawn/native/OpenGLBackend.h"
+        "${DAWN_INCLUDE_DIR}/dawn_native/OpenGLBackend.h"
         ${DAWN_NATIVE_OPENGL_AUTOGEN_SOURCES}
         "opengl/BackendGL.cpp"
         "opengl/BackendGL.h"
@@ -450,7 +450,7 @@ endif()
 
 if (DAWN_ENABLE_VULKAN)
     target_sources(dawn_native PRIVATE
-        "${DAWN_INCLUDE_DIR}/dawn/native/VulkanBackend.h"
+        "${DAWN_INCLUDE_DIR}/dawn_native/VulkanBackend.h"
         "vulkan/AdapterVk.cpp"
         "vulkan/AdapterVk.h"
         "vulkan/BackendVk.cpp"

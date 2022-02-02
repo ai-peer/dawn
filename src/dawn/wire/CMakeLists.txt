@@ -13,7 +13,7 @@
 # limitations under the License.
 
 DawnJSONGenerator(
-    TARGET "wire"
+    TARGET "dawn_wire"
     PRINT_NAME "Dawn wire"
     RESULT_VARIABLE "DAWN_WIRE_GEN_SOURCES"
 )
@@ -26,10 +26,10 @@ if(BUILD_SHARED_LIBS)
 endif()
 
 target_sources(dawn_wire PRIVATE
-    "${DAWN_INCLUDE_DIR}/dawn/wire/Wire.h"
-    "${DAWN_INCLUDE_DIR}/dawn/wire/WireClient.h"
-    "${DAWN_INCLUDE_DIR}/dawn/wire/WireServer.h"
-    "${DAWN_INCLUDE_DIR}/dawn/wire/dawn_wire_export.h"
+    "${DAWN_INCLUDE_DIR}/dawn_wire/Wire.h"
+    "${DAWN_INCLUDE_DIR}/dawn_wire/WireClient.h"
+    "${DAWN_INCLUDE_DIR}/dawn_wire/WireServer.h"
+    "${DAWN_INCLUDE_DIR}/dawn_wire/dawn_wire_export.h"
     ${DAWN_WIRE_GEN_SOURCES}
     "BufferConsumer.h"
     "BufferConsumer_impl.h"
