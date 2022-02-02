@@ -763,8 +763,8 @@ class MultiGeneratorFromDawnJSON(Generator):
 
     def add_commandline_arguments(self, parser):
         allowed_targets = [
-            'dawn_headers', 'cpp_headers', 'cpp', 'dawn_proc', 'mock_api',
-            'wire', "native_utils"
+            'dawn_headers', 'cpp_headers', 'cpp', 'proc', 'mock_api', 'wire',
+            'native_utils'
         ]
 
         parser.add_argument('--dawn-json',
