@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2782dfa1_d05ad0c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-02T11:02:47Z",
+      "side": 1,
+      "message": "Eagerly reviewing even though it is \"no for review\" because I noticed this CL and am quite interested in finally having 0-copy textures! Feel free to send it early so we can start iterating on some parts while for example tests are still WIP.",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43e987de_ef6f9eed",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-02T11:02:47Z",
+      "side": 1,
+      "message": "nit: I\u0027m not sure what we\u0027re checking here? It seems to just be the consistency of the layout, but is that necessary to do in the layout\u003c-\u003eshader compatibility check?",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a82c705_85e4f3d4",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-02T11:02:47Z",
+      "side": 1,
+      "message": "nit: Maybe early-out so the rest of the code can be dedented?",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44625611_740346a1",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-02T11:02:47Z",
+      "side": 1,
+      "message": "Why only in fragment?",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03e00aed_2caf8cfb",
+        "filename": "src/dawn_native/metal/ExternalTextureMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-02T11:02:47Z",
+      "side": 1,
+      "message": "nit: the dummy texture could be created in the frontend unconditionally. It\u0027s ok for D3D12 to do it unnecessarily.",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a02c093_220850d7",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-02T11:02:47Z",
+      "side": 1,
+      "message": "GL is not shipped. Feel free to skip it for now if that helps.",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
