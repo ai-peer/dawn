@@ -182,8 +182,8 @@ dawn_test("unittests") {
     ":gmock_and_gtest",
     ":mock_webgpu_gen",
     "${dawn_root}/src/dawn/common",
-    "${dawn_root}/src/dawn:dawn_proc",
-    "${dawn_root}/src/dawn:dawncpp",
+    "${dawn_root}/src/dawn:proc",
+    "${dawn_root}/src/dawn:cpp",
     "${dawn_root}/src/dawn/native:sources",
     "${dawn_root}/src/dawn/native:static",
     "${dawn_root}/src/dawn/wire",
@@ -339,8 +339,8 @@ source_set("end2end_tests_sources") {
   deps = [
     ":gmock_and_gtest",
     "${dawn_root}/src/dawn/common",
-    "${dawn_root}/src/dawn:dawn_proc",
-    "${dawn_root}/src/dawn:dawncpp",
+    "${dawn_root}/src/dawn:proc",
+    "${dawn_root}/src/dawn:cpp",
 
     # Statically linked because the end2end white_box tests use Dawn internals.
     "${dawn_root}/src/dawn/native:static",
@@ -487,8 +487,8 @@ source_set("white_box_tests_sources") {
   deps = [
     ":gmock_and_gtest",
     "${dawn_root}/src/dawn/common",
-    "${dawn_root}/src/dawn:dawn_proc",
-    "${dawn_root}/src/dawn:dawncpp",
+    "${dawn_root}/src/dawn:proc",
+    "${dawn_root}/src/dawn:cpp",
     "${dawn_root}/src/dawn/native:sources",
 
     # Statically linked because the end2end white_box tests use Dawn internals.
@@ -562,8 +562,8 @@ dawn_test("end2end_tests") {
     ":white_box_tests_sources",
     ":gmock_and_gtest",
     "${dawn_root}/src/dawn/common",
-    "${dawn_root}/src/dawn:dawn_proc",
-    "${dawn_root}/src/dawn:dawncpp",
+    "${dawn_root}/src/dawn:proc",
+    "${dawn_root}/src/dawn:cpp",
     "${dawn_root}/src/dawn/native:static",
     "${dawn_root}/src/dawn/wire",
     "${dawn_root}/src/dawn/utils",
@@ -601,8 +601,8 @@ dawn_test("perf_tests") {
   deps = [
     ":gmock_and_gtest",
     "${dawn_root}/src/dawn/common",
-    "${dawn_root}/src/dawn:dawn_proc",
-    "${dawn_root}/src/dawn:dawncpp",
+    "${dawn_root}/src/dawn:proc",
+    "${dawn_root}/src/dawn:cpp",
     "${dawn_root}/src/dawn/native",
     "${dawn_root}/src/dawn/platform",
     "${dawn_root}/src/dawn/wire",

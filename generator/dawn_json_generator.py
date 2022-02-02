@@ -763,8 +763,8 @@ class MultiGeneratorFromDawnJSON(Generator):
 
     def add_commandline_arguments(self, parser):
         allowed_targets = [
-            'dawn_headers', 'dawncpp_headers', 'dawncpp', 'dawn_proc',
-            'mock_api', 'wire', "native_utils"
+            'dawn_headers', 'cpp_headers', 'cpp', 'proc', 'mock_api', 'wire',
+            'native_utils'
         ]
 
         parser.add_argument('--dawn-json',
@@ -802,26 +802,26 @@ class MultiGeneratorFromDawnJSON(Generator):
 
         api = metadata.api.lower()
         prefix = metadata.proc_table_prefix.lower()
-        if 'dawn_headers' in targets:
+        if 'headers' in targets:
             renders.append(
-                FileRender('api.h', 'src/include/dawn/' + api + '.h',
+                FileRender('api.h', 'include/dawn/' + api + '.h',
                            [RENDER_PARAMS_BASE, params_dawn]))
             renders.append(
                 FileRender('dawn_proc_table.h',
-                           'src/include/dawn/' + prefix + '_proc_table.h',
+                           'include/dawn/' + prefix + '_proc_table.h',
                            [RENDER_PARAMS_BASE, params_dawn]))
 
-        if 'dawncpp_headers' in targets:
+        if 'cpp_headers' in targets:
             renders.append(
-                FileRender('api_cpp.h', 'src/include/dawn/' + api + '_cpp.h',
+                FileRender('api_cpp.h', 'include/dawn/' + api + '_cpp.h',
                            [RENDER_PARAMS_BASE, params_dawn]))
 
             renders.append(
                 FileRender('api_cpp_print.h',
-                           'src/include/dawn/' + api + '_cpp_print.h',
+                           'include/dawn/' + api + '_cpp_print.h',
                            [RENDER_PARAMS_BASE, params_dawn]))
 
-        if 'dawn_proc' in targets:
+        if 'proc' in targets:
             renders.append(
                 FileRender('dawn_proc.c', 'src/dawn/' + prefix + '_proc.c',
                            [RENDER_PARAMS_BASE, params_dawn]))
@@ -836,7 +836,7 @@ class MultiGeneratorFromDawnJSON(Generator):
                            'src/dawn/native/webgpu_dawn_native_proc.cpp',
                            [RENDER_PARAMS_BASE, params_dawn]))
 
-        if 'dawncpp' in targets:
+        if 'cpp' in targets:
             renders.append(
                 FileRender('api_cpp.cpp', 'src/dawn/' + api + '_cpp.cpp',
                            [RENDER_PARAMS_BASE, params_dawn]))
