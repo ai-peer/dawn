@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaa9cc27_ea216b58",
+        "filename": "src/common/SystemUtils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-02T17:10:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc1f67ee_48bf8338",
+      "revId": "03abc01784f97694710e4f819552d78d65ee855c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10f1d5dd_3173c54d",
@@ -65,6 +83,24 @@
       "writtenOn": "2022-02-02T16:19:01Z",
       "side": 1,
       "message": "Do we need this anymore? It seems that the bunch of search paths we added should be enough to use Swiftshader in local builds and it\u0027s ok to load swiftshader directly?",
+      "revId": "03abc01784f97694710e4f819552d78d65ee855c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7bb0c7b_9483e7ad",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-02T17:10:35Z",
+      "side": 1,
+      "message": "good point - seems to work locally; I\u0027ll try it on CQ. it would be a great simplification",
+      "parentUuid": "10f1d5dd_3173c54d",
       "revId": "03abc01784f97694710e4f819552d78d65ee855c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
