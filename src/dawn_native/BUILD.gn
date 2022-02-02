@@ -16,7 +16,9 @@
 # Build target aliases
 # TODO(crbug.com/dawn/1275) - remove these
 ################################################################################
-group("dawn_fuzzers") {
-  public_deps = [ "../../dawn/fuzzers" ]
-  testonly = true
+group("dawn_native") {
+  public_deps = [ "../dawn/native" ]
+}
+group("webgpu_dawn") {
+  public_deps = [ "../dawn/native:webgpu_dawn" ]
 }
