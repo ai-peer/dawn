@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90427795_bedf0bfd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-02-02T18:50:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7e3c109bf21789c37f0eb04ffbec603f900d2b2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "892d9c30_3d27fe24",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-02-02T18:50:04Z",
+      "side": 1,
+      "message": "Hmm maybe in the future if we add absl::StrJoin also we can just use that instead of this? (Not sure if absl::StrFormat already includes the join function, but I don\u0027t think it does?)",
+      "range": {
+        "startLine": 175,
+        "startChar": 8,
+        "endLine": 186,
+        "endChar": 10
+      },
+      "revId": "7e3c109bf21789c37f0eb04ffbec603f900d2b2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
