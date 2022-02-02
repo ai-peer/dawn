@@ -87,7 +87,7 @@ static_library("utils") {
     "WireHelper.h",
   ]
   deps = [
-    "${dawn_root}/src/dawn:dawn_proc",
+    "${dawn_root}/src/dawn:proc",
     "${dawn_root}/src/dawn/common",
     "${dawn_root}/src/dawn/native:headers",
     "${dawn_root}/src/dawn/wire",
