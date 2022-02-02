@@ -331,10 +331,10 @@ source_set("dawn_native_sources") {
     "VertexFormat.cpp",
     "VertexFormat.h",
     "dawn_platform.h",
-    "webgpu_absl_format.cpp",
-    "webgpu_absl_format.h",
     "utils/WGPUHelpers.cpp",
     "utils/WGPUHelpers.h",
+    "webgpu_absl_format.cpp",
+    "webgpu_absl_format.h",
   ]
 
   if (dawn_use_x11) {
@@ -673,6 +673,9 @@ source_set("dawn_native_sources") {
         "//third_party/fuchsia-sdk/sdk:trace_engine",
       ]
     }
+    if (dawn_is_winuwp) {
+      defines += [ "DAWN_IS_WINUWP" ]
+    }
     if (enable_vulkan_validation_layers) {
       defines += [
         "DAWN_ENABLE_VULKAN_VALIDATION_LAYERS",
@@ -681,7 +684,6 @@ source_set("dawn_native_sources") {
     }
     if (enable_vulkan_loader) {
       data_deps += [ "${dawn_vulkan_loader_dir}:libvulkan" ]
-      defines += [ "DAWN_ENABLE_VULKAN_LOADER" ]
     }
     if (use_swiftshader) {
       data_deps += [
