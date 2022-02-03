@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d030f446_5b343f39",
+        "filename": "src/dawn/wire/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-02-03T19:27:34Z",
+      "side": 1,
+      "message": "Yeah, I\u0027d prefer to defer this for now. There will have to be a lot of thinking about how the CMake stuff will merge together.",
+      "parentUuid": "3eb212e1_308a6f21",
+      "range": {
+        "startLine": 16,
+        "startChar": 12,
+        "endLine": 16,
+        "endChar": 16
+      },
+      "revId": "25834679823b5fa6c25e58bdb9b9f4f90f6a4536",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf31df13_7ab3557a",
@@ -58,6 +82,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8130d445_d04d0855",
+        "filename": "src/include/dawn/wire/Wire.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-02-03T19:27:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf31df13_7ab3557a",
+      "revId": "25834679823b5fa6c25e58bdb9b9f4f90f6a4536",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb3a6ee7_eed82a2b",
@@ -71,6 +113,24 @@
       "writtenOn": "2022-02-03T18:20:33Z",
       "side": 1,
       "message": "nit: Maybe a TODO to remove it? Ditto in others.\n\nTBH also I think we could rename it to dawn/wire/Client.h and Server.h, but let\u0027s worry about it later.",
+      "revId": "25834679823b5fa6c25e58bdb9b9f4f90f6a4536",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69b38b28_e6ebb633",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-02-03T19:27:34Z",
+      "side": 1,
+      "message": "I add a README.md file at src/include in a later CL to nuke the whole directory:\nhttps://dawn-review.googlesource.com/c/dawn/+/79102/5/src/include/README.md",
+      "parentUuid": "bb3a6ee7_eed82a2b",
       "revId": "25834679823b5fa6c25e58bdb9b9f4f90f6a4536",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
