@@ -137,8 +137,8 @@ if (dawn_enable_opengl) {
 # Public dawn native headers so they can be publicly visible for
 # dependencies of dawn native
 source_set("headers") {
-  public_deps = [ "${dawn_root}/src/dawn:cpp_headers" ]
-  all_dependent_configs = [ "${dawn_root}/src/dawn/common:public_include_dirs" ]
+  public_deps = [ "${dawn_root}/include/dawn:cpp_headers" ]
+  all_dependent_configs = [ "${dawn_root}/include/dawn:public" ]
   sources = [
     "${dawn_root}/include/dawn/native/DawnNative.h",
     "${dawn_root}/include/dawn/native/dawn_native_export.h",
