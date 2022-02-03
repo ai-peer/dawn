@@ -86,7 +86,6 @@ config("internal") {
   # this BUILD.gn file and related subdirs.
   visibility = [
     "${dawn_root}/samples/dawn/*",
-    "${dawn_root}/src/*",
     "${dawn_root}/src/dawn/*",
   ]
 
