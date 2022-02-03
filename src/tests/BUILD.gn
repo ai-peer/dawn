@@ -1,4 +1,4 @@
-# Copyright 2012 The Dawn Authors
+# Copyright 2022 The Dawn Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,13 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+################################################################################
+# A copy of src/dawn/tests/BUILD.gn
+# These targets are referenced by external code. We cannot simply alias the
+# targets in src/dawn/tests/BUILD.gn due to an issue with resolving runtime
+# dependencies via 'group' aliases. This whole file should be removed once
+# the external targets are updated to use the new BUILD.gn file.
+# TODO(crbug.com/dawn/1275) - remove this file.
+################################################################################
+
 import("../../scripts/dawn_overrides_with_defaults.gni")
 
 import("//testing/test.gni")
 import("${dawn_root}/generator/dawn_generator.gni")
 import("${dawn_root}/scripts/dawn_features.gni")
 
-group("dawn_tests") {
+group("tests") {
   testonly = true
   deps = [
     ":dawn_end2end_tests",
@@ -97,20 +106,35 @@ if (!build_with_chromium) {
 # can't use the dawn_internal config, otherwise Dawn's warning flags get
 # applied while compiling a bunch of Chromium's //base (via header inclusion)
 if (build_with_chromium) {
-  source_set("dawn_unittests_main") {
+  source_set("unittests_main") {
     testonly = true
     deps = [ ":gmock_and_gtest" ]
     sources = [ "//gpu/dawn_unittests_main.cc" ]
   }
-  source_set("dawn_end2end_tests_main") {
+  source_set("end2end_tests_main") {
     testonly = true
     deps = [ ":gmock_and_gtest" ]
     sources = [ "//gpu/dawn_end2end_tests_main.cc" ]
   }
-  source_set("dawn_perf_tests_main") {
+  source_set("perf_tests_main") {
     testonly = true
     deps = [ ":gmock_and_gtest" ]
     sources = [ "//gpu/dawn_perf_tests_main.cc" ]
+  }
+}
+
+###############################################################################
+# Dawn test template
+###############################################################################
+template("dawn_test") {
+  test(target_name) {
+    # Copy all variables except "configs", which has a default value
+    forward_variables_from(invoker, "*", [ "configs" ])
+    if (defined(invoker.configs)) {
+      configs += invoker.configs
+    }
+
+    configs += [ "${dawn_root}/src/dawn/common:internal_config" ]
   }
 }
 
@@ -128,7 +152,7 @@ dawn_json_generator("mock_webgpu_gen") {
 
 # Source code for mocks used for unit testing are separated from the rest of
 # sources so that they aren't included in non-test builds.
-source_set("dawn_native_mocks_sources") {
+source_set("native_mocks_sources") {
   testonly = true
 
   deps = [
@@ -138,7 +162,7 @@ source_set("dawn_native_mocks_sources") {
     "${dawn_root}/src/dawn/utils",
   ]
 
-  # Add internal dawn_native config for internal unittests.
+  # Add internal dawn native config for internal unittests.
   configs += [ "${dawn_root}/src/dawn/native:internal" ]
 
   sources = [
@@ -159,13 +183,11 @@ source_set("dawn_native_mocks_sources") {
   ]
 }
 
-test("dawn_unittests") {
-  configs += [ "${dawn_root}/src/dawn/common:internal_config" ]
-
+dawn_test("dawn_unittests") {
   deps = [
-    ":dawn_native_mocks_sources",
     ":gmock_and_gtest",
     ":mock_webgpu_gen",
+    ":native_mocks_sources",
     "${dawn_root}/src/dawn:cpp",
     "${dawn_root}/src/dawn:proc",
     "${dawn_root}/src/dawn/common",
@@ -175,8 +197,8 @@ test("dawn_unittests") {
     "${dawn_root}/src/dawn/wire",
   ]
 
-  # Add internal dawn_native config for internal unittests.
-  configs += [ "${dawn_root}/src/dawn/native:internal" ]
+  # Add internal dawn native config for internal unittests.
+  configs = [ "${dawn_root}/src/dawn/native:internal" ]
 
   sources = get_target_outputs(":mock_webgpu_gen")
   sources += [
@@ -307,7 +329,7 @@ test("dawn_unittests") {
   # When building inside Chromium, use their gtest main function because it is
   # needed to run in swarming correctly.
   if (build_with_chromium) {
-    deps += [ ":dawn_unittests_main" ]
+    deps += [ ":unittests_main" ]
   } else {
     sources += [ "UnittestsMain.cpp" ]
   }
@@ -317,7 +339,7 @@ test("dawn_unittests") {
 # Dawn end2end tests targets
 ###############################################################################
 
-source_set("dawn_end2end_tests_sources") {
+source_set("end2end_tests_sources") {
   configs += [ "${dawn_root}/src/dawn/common:internal_config" ]
   testonly = true
 
@@ -465,7 +487,7 @@ source_set("dawn_end2end_tests_sources") {
   }
 }
 
-source_set("dawn_white_box_tests_sources") {
+source_set("white_box_tests_sources") {
   configs += [ "${dawn_root}/src/dawn/native:internal" ]
   testonly = true
 
@@ -541,13 +563,11 @@ source_set("dawn_white_box_tests_sources") {
   libs = []
 }
 
-test("dawn_end2end_tests") {
-  configs += [ "${dawn_root}/src/dawn/common:internal_config" ]
-
+dawn_test("dawn_end2end_tests") {
   deps = [
-    ":dawn_end2end_tests_sources",
-    ":dawn_white_box_tests_sources",
+    ":end2end_tests_sources",
     ":gmock_and_gtest",
+    ":white_box_tests_sources",
     "${dawn_root}/src/dawn:cpp",
     "${dawn_root}/src/dawn:proc",
     "${dawn_root}/src/dawn/common",
@@ -566,7 +586,7 @@ test("dawn_end2end_tests") {
   # When building inside Chromium, use their gtest main function because it is
   # needed to run in swarming correctly.
   if (build_with_chromium) {
-    deps += [ ":dawn_end2end_tests_main" ]
+    deps += [ ":end2end_tests_main" ]
   } else {
     sources += [ "End2EndTestsMain.cpp" ]
   }
@@ -584,18 +604,16 @@ test("dawn_end2end_tests") {
 # Dawn perf tests
 ###############################################################################
 
-test("dawn_perf_tests") {
-  configs += [ "${dawn_root}/src/dawn/common:internal_config" ]
-
+dawn_test("dawn_perf_tests") {
   deps = [
     ":gmock_and_gtest",
     "${dawn_root}/src/dawn:cpp",
     "${dawn_root}/src/dawn:proc",
     "${dawn_root}/src/dawn/common",
     "${dawn_root}/src/dawn/native",
+    "${dawn_root}/src/dawn/platform",
     "${dawn_root}/src/dawn/utils",
     "${dawn_root}/src/dawn/wire",
-    "${dawn_root}/src/dawn_platform",
   ]
 
   sources = [
@@ -619,7 +637,7 @@ test("dawn_perf_tests") {
   # When building inside Chromium, use their gtest main function and the
   # other perf test scaffolding in order to run in swarming correctly.
   if (build_with_chromium) {
-    deps += [ ":dawn_perf_tests_main" ]
+    deps += [ ":perf_tests_main" ]
     data_deps = [ "//testing:run_perf_test" ]
   } else {
     sources += [ "PerfTestsMain.cpp" ]
