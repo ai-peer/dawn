@@ -18,8 +18,8 @@ group("all") {
   testonly = true
   deps = [
     "src/dawn/native:webgpu_dawn",
+    "src/dawn/tests",
     "src/fuzzers/dawn:dawn_fuzzers",
-    "src/tests:dawn_tests",
   ]
   if (dawn_standalone) {
     deps += [ "examples:dawn_samples" ]
