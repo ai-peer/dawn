@@ -16,6 +16,23 @@
       "message": "PTAL!\n\nFYI next steps are:\n - extend CTS zero init tests for 1D/3D textures.\n - extend a couple small and random CTS tests for 1D/3D textures\n - mark 1D textures as safe to use.",
       "revId": "032a8ca75c6b0e38db19916e2052a4643e55b017",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b6a1332_a8e2a5bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-02-03T20:04:56Z",
+      "side": 1,
+      "message": "Nice! LGTM~",
+      "revId": "032a8ca75c6b0e38db19916e2052a4643e55b017",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
