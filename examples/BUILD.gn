@@ -37,10 +37,10 @@ static_library("dawn_sample_utils") {
     "${dawn_root}/src/dawn:dawncpp",
     "${dawn_root}/src/dawn_native",
     "${dawn_root}/src/dawn_wire",
-    "${dawn_root}/src/utils:dawn_bindings",
-    "${dawn_root}/src/utils:dawn_glfw",
-    "${dawn_root}/src/utils:dawn_utils",
     "${dawn_root}/src/dawn/common",
+    "${dawn_root}/src/dawn/utils",
+    "${dawn_root}/src/dawn/utils:bindings",
+    "${dawn_root}/src/dawn/utils:glfw",
   ]
   public_configs = [ "${dawn_root}/src/dawn/common:internal" ]
 }
