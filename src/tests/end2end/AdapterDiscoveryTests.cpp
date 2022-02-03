@@ -17,8 +17,8 @@
 #include "dawn/common/Platform.h"
 #include "dawn/common/SystemUtils.h"
 #include "dawn/dawn_proc.h"
+#include "dawn/native/DawnNative.h"
 #include "dawn/webgpu_cpp.h"
-#include "dawn_native/DawnNative.h"
 #include "tests/MockCallback.h"
 
 #if defined(DAWN_ENABLE_BACKEND_VULKAN)
