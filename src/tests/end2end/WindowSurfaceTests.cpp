@@ -17,7 +17,7 @@
 #include "dawn/dawn_proc.h"
 #include "dawn_native/DawnNative.h"
 #include "tests/DawnTest.h"
-#include "utils/GLFWUtils.h"
+#include "dawn/utils/GLFWUtils.h"
 
 #include <gtest/gtest.h>
 
