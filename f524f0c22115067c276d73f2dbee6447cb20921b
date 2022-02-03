@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df28fd7e_d0070cd7",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-02-03T00:16:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ee1d676_43c322cf",
+      "revId": "f524f0c22115067c276d73f2dbee6447cb20921b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "495fdaba_af42013c",
@@ -75,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7deee684_9d13d520",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-02-03T00:16:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "495fdaba_af42013c",
+      "range": {
+        "startLine": 302,
+        "startChar": 25,
+        "endLine": 302,
+        "endChar": 53
+      },
+      "revId": "f524f0c22115067c276d73f2dbee6447cb20921b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcee1b8a_90bb1a6c",
@@ -88,6 +130,24 @@
       "writtenOn": "2022-02-02T21:32:49Z",
       "side": 1,
       "message": "kinda unfortunate we need to explicitly do this, but I\u0027m guessing that changing  ComboRenderPassDescriptor::ComboRenderPassDescriptor to use Undefined as the default will mean a TON of other tests will need to change",
+      "revId": "f524f0c22115067c276d73f2dbee6447cb20921b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02e1f112_ea665d35",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-02-03T00:16:08Z",
+      "side": 1,
+      "message": "Yeah. That breaks... a lot. And given that the ComboRenderPassDescriptor is a helper class it\u0027s appropriate that it\u0027s pre-loaded with some of the most common options here.\n\nWe could maybe revisit these tests specifically and refactor them to not use the Combo descriptor, but I don\u0027t personally feel it\u0027s worth the effort.",
+      "parentUuid": "dcee1b8a_90bb1a6c",
       "revId": "f524f0c22115067c276d73f2dbee6447cb20921b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
