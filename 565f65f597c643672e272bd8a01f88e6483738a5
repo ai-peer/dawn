@@ -107,6 +107,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7734e0d5_5be81579",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-03T18:41:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1d91863_ec00925e",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a82c705_85e4f3d4",
@@ -120,6 +138,24 @@
       "writtenOn": "2022-02-02T11:02:47Z",
       "side": 1,
       "message": "nit: Maybe early-out so the rest of the code can be dedented?",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0566253d_ea7a5d44",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-03T18:41:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a82c705_85e4f3d4",
       "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

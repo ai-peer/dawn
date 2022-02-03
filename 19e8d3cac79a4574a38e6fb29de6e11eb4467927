@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16afebff_1db069e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-03T18:41:50Z",
+      "side": 1,
+      "message": "This CL isn\u0027t entirely ready, but Corentin expressed interest in starting review early.\n\nThe main outstanding issue is a failure on CTS tests on Mac. There appears to be interference between my transform and one of the other transforms being invoked in the same block.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
