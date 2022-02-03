@@ -16,6 +16,24 @@
       "message": "ditto",
       "revId": "f09886315af4ae0e5a2905de824fa1064edddd44",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d0e0a5f_48bd8542",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-02-03T19:28:37Z",
+      "side": 1,
+      "message": "I add a README.md file at src/include in a later CL to nuke the whole directory:\nhttps://dawn-review.googlesource.com/c/dawn/+/79102/5/src/include/README.md",
+      "parentUuid": "caebd595_c28c78f7",
+      "revId": "f09886315af4ae0e5a2905de824fa1064edddd44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
