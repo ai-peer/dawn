@@ -19,7 +19,7 @@ group("all") {
   deps = [
     "src/dawn/native:webgpu_dawn",
     "src/fuzzers/dawn:dawn_fuzzers",
-    "src/tests:dawn_tests",
+    "src/dawn/tests",
   ]
   if (dawn_standalone) {
     deps += [ "examples:dawn_samples" ]
