@@ -15,6 +15,7 @@
 #include "dawn_native/Device.h"
 
 #include "dawn/common/Log.h"
+#include "dawn_native/utils/WGPUHelpers.h"
 #include "dawn_native/Adapter.h"
 #include "dawn_native/AsyncTask.h"
 #include "dawn_native/AttachmentState.h"
@@ -46,7 +47,6 @@
 #include "dawn_native/ValidationUtils_autogen.h"
 #include "dawn_platform/DawnPlatform.h"
 #include "dawn_platform/tracing/TraceEvent.h"
-#include "utils/WGPUHelpers.h"
 
 #include <array>
 #include <mutex>

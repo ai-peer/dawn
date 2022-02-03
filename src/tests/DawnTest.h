@@ -24,8 +24,8 @@
 #include "dawn_native/DawnNative.h"
 #include "tests/ParamGenerator.h"
 #include "tests/ToggleParser.h"
-#include "utils/ScopedAutoreleasePool.h"
-#include "utils/TextureUtils.h"
+#include "dawn/utils/ScopedAutoreleasePool.h"
+#include "dawn/utils/TextureUtils.h"
 
 #include <dawn_platform/DawnPlatform.h>
 #include <gmock/gmock.h>
