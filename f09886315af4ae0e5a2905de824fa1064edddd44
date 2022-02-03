@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caebd595_c28c78f7",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-03T18:22:09Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "f09886315af4ae0e5a2905de824fa1064edddd44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
