@@ -16,6 +16,91 @@
       "message": "This CL isn\u0027t entirely ready, but Corentin expressed interest in starting review early.\n\nThe main outstanding issue is a failure on CTS tests on Mac. There appears to be interference between my transform and one of the other transforms being invoked in the same block.",
       "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bf17336_a0e4ebae",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-03T18:49:14Z",
+      "side": 1,
+      "message": "Change no longer necessary. Needs revert.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2658289e_a6ff46af",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-03T18:49:14Z",
+      "side": 1,
+      "message": "nit: delete newline",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e95c0b7b_1b8aed80",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-03T18:49:14Z",
+      "side": 1,
+      "message": "RunTransforms should be invoked once, not in the loop.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83ca6db7_73f9ea77",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 22
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-03T18:49:14Z",
+      "side": 1,
+      "message": "I see symbol collisions on ImportExternalTexture Compute CTS tests on MacOS. Still trying to figure it out.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f80163e_9e1d7d00",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-03T18:49:14Z",
+      "side": 1,
+      "message": "There\u0027s an issue with compiling the transfromed Tint output on OpenGL. Disabling for now but need to root cause and file bug.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

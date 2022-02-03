@@ -231,6 +231,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27b6ef75_b2af26bf",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-03T18:49:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed75f532_908aa505",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03e00aed_2caf8cfb",
@@ -298,6 +316,24 @@
       "side": 1,
       "message": "\u003e\u003e special TextureD3D12 that\u0027s the null texture maybe\n\nThat seems like a reasonable solution.",
       "parentUuid": "19c46e2c_05ba83f3",
+      "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "890bbbff_6045c221",
+        "filename": "src/dawn_native/metal/ExternalTextureMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-03T18:49:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1707e28_843eacda",
       "revId": "565f65f597c643672e272bd8a01f88e6483738a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
