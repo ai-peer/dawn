@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f188c078_a5489ded",
+        "filename": "examples/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-02-03T21:22:40Z",
+      "side": 1,
+      "message": "Done - on all CLs on this stack. That was fun.",
+      "parentUuid": "05efa99e_361ad06b",
+      "revId": "8c9a543f07d274c1055d215adc3b1110a7f80f40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "500b59fb_80b3cdb3",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-02-03T18:07:23Z",
       "side": 1,
       "message": "nit: can we add a TODO in the tracking bug to rename this one internal_config maybe? (I can do it, I just want to not forget about it)",
+      "revId": "8c9a543f07d274c1055d215adc3b1110a7f80f40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f57e8741_6661ed90",
+        "filename": "src/dawn/common/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-02-03T21:22:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "500b59fb_80b3cdb3",
       "revId": "8c9a543f07d274c1055d215adc3b1110a7f80f40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91099400_066600be",
+        "filename": "src/dawn/common/Result.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-02-03T21:22:40Z",
+      "side": 1,
+      "message": "*shrug*\nMy default clang-format, and the buildtools/linux64/clang-format both want to format this file this way.",
+      "parentUuid": "47cffd84_9a3da4d0",
+      "revId": "8c9a543f07d274c1055d215adc3b1110a7f80f40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63b06cc5_c9eebc07",
         "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
         "patchSetId": 1
@@ -82,6 +136,24 @@
       "writtenOn": "2022-02-03T18:07:23Z",
       "side": 1,
       "message": "nit: put the comment above the assignment.",
+      "revId": "8c9a543f07d274c1055d215adc3b1110a7f80f40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cabc57c_ff2df07a",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-02-03T21:22:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63b06cc5_c9eebc07",
       "revId": "8c9a543f07d274c1055d215adc3b1110a7f80f40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -99,6 +171,24 @@
       "writtenOn": "2022-02-03T18:07:23Z",
       "side": 1,
       "message": "nit: we could dedent the comment a bit to have it not wrap (or remove C and 3)",
+      "revId": "8c9a543f07d274c1055d215adc3b1110a7f80f40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2efd7c0a_0515a9e5",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-02-03T21:22:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "caf7e7a5_2220c4b1",
       "revId": "8c9a543f07d274c1055d215adc3b1110a7f80f40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
