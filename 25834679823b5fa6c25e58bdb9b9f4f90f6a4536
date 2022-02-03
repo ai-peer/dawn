@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b2a26ff_19cc7303",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-03T18:20:33Z",
+      "side": 1,
+      "message": "LGTM but there are build errors.",
+      "revId": "25834679823b5fa6c25e58bdb9b9f4f90f6a4536",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eb212e1_308a6f21",
+        "filename": "src/dawn/wire/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-03T18:20:33Z",
+      "side": 1,
+      "message": "I wonder if it should be dawn::wire, seems like it is something people do in CMake files nowadays. Again feel free to defer.",
+      "range": {
+        "startLine": 16,
+        "startChar": 12,
+        "endLine": 16,
+        "endChar": 16
+      },
+      "revId": "25834679823b5fa6c25e58bdb9b9f4f90f6a4536",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf31df13_7ab3557a",
+        "filename": "src/include/dawn/wire/Wire.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-03T18:20:33Z",
+      "side": 1,
+      "message": "I\u0027m not sure, but maybe this one will need a proxy header as well.",
+      "revId": "25834679823b5fa6c25e58bdb9b9f4f90f6a4536",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb3a6ee7_eed82a2b",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-03T18:20:33Z",
+      "side": 1,
+      "message": "nit: Maybe a TODO to remove it? Ditto in others.\n\nTBH also I think we could rename it to dawn/wire/Client.h and Server.h, but let\u0027s worry about it later.",
+      "revId": "25834679823b5fa6c25e58bdb9b9f4f90f6a4536",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
