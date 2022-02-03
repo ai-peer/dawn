@@ -1,4 +1,4 @@
-# Copyright 2012 The Dawn Authors
+# Copyright 2022 The Dawn Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,13 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+################################################################################
+# A copy of src/dawn/tests/BUILD.gn
+# These targets are referenced by external code. We cannot simply alias the
+# targets in src/dawn/tests/BUILD.gn due to an issue with resolving runtime
+# dependencies via 'group' aliases. This whole file should be removed once
+# the external targets are updated to use the new BUILD.gn file.
+# TODO(crbug.com/dawn/1275) - remove this file.
+################################################################################
+
 import("../../scripts/dawn_overrides_with_defaults.gni")
 
 import("//testing/test.gni")
 import("${dawn_root}/generator/dawn_generator.gni")
 import("${dawn_root}/scripts/dawn_features.gni")
 
-group("dawn_tests") {
+group("tests") {
   testonly = true
   deps = [
     ":dawn_end2end_tests",
@@ -97,20 +106,35 @@ if (!build_with_chromium) {
 # can't use the dawn_internal config, otherwise Dawn's warning flags get
 # applied while compiling a bunch of Chromium's //base (via header inclusion)
 if (build_with_chromium) {
-  source_set("dawn_unittests_main") {
+  source_set("unittests_main") {
     testonly = true
     deps = [ ":gmock_and_gtest" ]
     sources = [ "//gpu/dawn_unittests_main.cc" ]
   }
-  source_set("dawn_end2end_tests_main") {
+  source_set("end2end_tests_main") {
     testonly = true
     deps = [ ":gmock_and_gtest" ]
     sources = [ "//gpu/dawn_end2end_tests_main.cc" ]
   }
-  source_set("dawn_perf_tests_main") {
+  source_set("perf_tests_main") {
     testonly = true
     deps = [ ":gmock_and_gtest" ]
     sources = [ "//gpu/dawn_perf_tests_main.cc" ]
+  }
+}
+
+###############################################################################
+# Dawn test template
+###############################################################################
+template("dawn_test") {
+  test(target_name) {
+    # Copy all variables except "configs", which has a default value
+    forward_variables_from(invoker, "*", [ "configs" ])
+    if (defined(invoker.configs)) {
+      configs += invoker.configs
+    }
+
+    configs += [ "${dawn_root}/src/dawn/common:internal_config" ]
   }
 }
 
@@ -128,7 +152,7 @@ dawn_json_generator("mock_webgpu_gen") {
 
 # Source code for mocks used for unit testing are separated from the rest of
 # sources so that they aren't included in non-test builds.
-source_set("dawn_native_mocks_sources") {
+source_set("native_mocks_sources") {
   testonly = true
 
   deps = [
@@ -138,34 +162,32 @@ source_set("dawn_native_mocks_sources") {
     "${dawn_root}/src/dawn/utils",
   ]
 
-  # Add internal dawn_native config for internal unittests.
+  # Add internal dawn native config for internal unittests.
   configs += [ "${dawn_root}/src/dawn/native:internal" ]
 
   sources = [
-    "unittests/native/mocks/BindGroupLayoutMock.h",
-    "unittests/native/mocks/BindGroupMock.h",
-    "unittests/native/mocks/CommandBufferMock.h",
-    "unittests/native/mocks/ComputePipelineMock.h",
-    "unittests/native/mocks/DeviceMock.h",
-    "unittests/native/mocks/ExternalTextureMock.h",
-    "unittests/native/mocks/PipelineLayoutMock.h",
-    "unittests/native/mocks/QuerySetMock.h",
-    "unittests/native/mocks/RenderPipelineMock.h",
-    "unittests/native/mocks/SamplerMock.h",
-    "unittests/native/mocks/ShaderModuleMock.cpp",
-    "unittests/native/mocks/ShaderModuleMock.h",
-    "unittests/native/mocks/SwapChainMock.h",
-    "unittests/native/mocks/TextureMock.h",
+    "../dawn/tests/unittests/native/mocks/BindGroupLayoutMock.h",
+    "../dawn/tests/unittests/native/mocks/BindGroupMock.h",
+    "../dawn/tests/unittests/native/mocks/CommandBufferMock.h",
+    "../dawn/tests/unittests/native/mocks/ComputePipelineMock.h",
+    "../dawn/tests/unittests/native/mocks/DeviceMock.h",
+    "../dawn/tests/unittests/native/mocks/ExternalTextureMock.h",
+    "../dawn/tests/unittests/native/mocks/PipelineLayoutMock.h",
+    "../dawn/tests/unittests/native/mocks/QuerySetMock.h",
+    "../dawn/tests/unittests/native/mocks/RenderPipelineMock.h",
+    "../dawn/tests/unittests/native/mocks/SamplerMock.h",
+    "../dawn/tests/unittests/native/mocks/ShaderModuleMock.cpp",
+    "../dawn/tests/unittests/native/mocks/ShaderModuleMock.h",
+    "../dawn/tests/unittests/native/mocks/SwapChainMock.h",
+    "../dawn/tests/unittests/native/mocks/TextureMock.h",
   ]
 }
 
-test("dawn_unittests") {
-  configs += [ "${dawn_root}/src/dawn/common:internal_config" ]
-
+dawn_test("dawn_unittests") {
   deps = [
-    ":dawn_native_mocks_sources",
     ":gmock_and_gtest",
     ":mock_webgpu_gen",
+    ":native_mocks_sources",
     "${dawn_root}/src/dawn:cpp",
     "${dawn_root}/src/dawn:proc",
     "${dawn_root}/src/dawn/common",
@@ -175,8 +197,8 @@ test("dawn_unittests") {
     "${dawn_root}/src/dawn/wire",
   ]
 
-  # Add internal dawn_native config for internal unittests.
-  configs += [ "${dawn_root}/src/dawn/native:internal" ]
+  # Add internal dawn native config for internal unittests.
+  configs = [ "${dawn_root}/src/dawn/native:internal" ]
 
   sources = get_target_outputs(":mock_webgpu_gen")
   sources += [
@@ -184,132 +206,132 @@ test("dawn_unittests") {
     "${dawn_root}/src/dawn/wire/client/ClientMemoryTransferService_mock.h",
     "${dawn_root}/src/dawn/wire/server/ServerMemoryTransferService_mock.cpp",
     "${dawn_root}/src/dawn/wire/server/ServerMemoryTransferService_mock.h",
-    "DawnNativeTest.cpp",
-    "DawnNativeTest.h",
-    "MockCallback.h",
-    "ToggleParser.cpp",
-    "ToggleParser.h",
-    "unittests/AsyncTaskTests.cpp",
-    "unittests/BitSetIteratorTests.cpp",
-    "unittests/BuddyAllocatorTests.cpp",
-    "unittests/BuddyMemoryAllocatorTests.cpp",
-    "unittests/ChainUtilsTests.cpp",
-    "unittests/CommandAllocatorTests.cpp",
-    "unittests/ConcurrentCacheTests.cpp",
-    "unittests/EnumClassBitmasksTests.cpp",
-    "unittests/EnumMaskIteratorTests.cpp",
-    "unittests/ErrorTests.cpp",
-    "unittests/FeatureTests.cpp",
-    "unittests/GPUInfoTests.cpp",
-    "unittests/GetProcAddressTests.cpp",
-    "unittests/ITypArrayTests.cpp",
-    "unittests/ITypBitsetTests.cpp",
-    "unittests/ITypSpanTests.cpp",
-    "unittests/ITypVectorTests.cpp",
-    "unittests/LimitsTests.cpp",
-    "unittests/LinkedListTests.cpp",
-    "unittests/MathTests.cpp",
-    "unittests/ObjectBaseTests.cpp",
-    "unittests/PerStageTests.cpp",
-    "unittests/PerThreadProcTests.cpp",
-    "unittests/PlacementAllocatedTests.cpp",
-    "unittests/RefBaseTests.cpp",
-    "unittests/RefCountedTests.cpp",
-    "unittests/ResultTests.cpp",
-    "unittests/RingBufferAllocatorTests.cpp",
-    "unittests/SerialMapTests.cpp",
-    "unittests/SerialQueueTests.cpp",
-    "unittests/SlabAllocatorTests.cpp",
-    "unittests/StackContainerTests.cpp",
-    "unittests/SubresourceStorageTests.cpp",
-    "unittests/SystemUtilsTests.cpp",
-    "unittests/ToBackendTests.cpp",
-    "unittests/TypedIntegerTests.cpp",
-    "unittests/native/CommandBufferEncodingTests.cpp",
-    "unittests/native/DestroyObjectTests.cpp",
-    "unittests/native/DeviceCreationTests.cpp",
-    "unittests/validation/BindGroupValidationTests.cpp",
-    "unittests/validation/BufferValidationTests.cpp",
-    "unittests/validation/CommandBufferValidationTests.cpp",
-    "unittests/validation/ComputeIndirectValidationTests.cpp",
-    "unittests/validation/ComputeValidationTests.cpp",
-    "unittests/validation/CopyCommandsValidationTests.cpp",
-    "unittests/validation/CopyTextureForBrowserTests.cpp",
-    "unittests/validation/DebugMarkerValidationTests.cpp",
-    "unittests/validation/DeviceValidationTests.cpp",
-    "unittests/validation/DrawIndirectValidationTests.cpp",
-    "unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
-    "unittests/validation/DynamicStateCommandValidationTests.cpp",
-    "unittests/validation/ErrorScopeValidationTests.cpp",
-    "unittests/validation/ExternalTextureTests.cpp",
-    "unittests/validation/GetBindGroupLayoutValidationTests.cpp",
-    "unittests/validation/IndexBufferValidationTests.cpp",
-    "unittests/validation/InternalUsageValidationTests.cpp",
-    "unittests/validation/LabelTests.cpp",
-    "unittests/validation/MinimumBufferSizeValidationTests.cpp",
-    "unittests/validation/MultipleDeviceTests.cpp",
-    "unittests/validation/OverridableConstantsValidationTests.cpp",
-    "unittests/validation/PipelineAndPassCompatibilityTests.cpp",
-    "unittests/validation/QueryValidationTests.cpp",
-    "unittests/validation/QueueOnSubmittedWorkDoneValidationTests.cpp",
-    "unittests/validation/QueueSubmitValidationTests.cpp",
-    "unittests/validation/QueueWriteBufferValidationTests.cpp",
-    "unittests/validation/QueueWriteTextureValidationTests.cpp",
-    "unittests/validation/RenderBundleValidationTests.cpp",
-    "unittests/validation/RenderPassDescriptorValidationTests.cpp",
-    "unittests/validation/RenderPipelineValidationTests.cpp",
-    "unittests/validation/ResourceUsageTrackingTests.cpp",
-    "unittests/validation/SamplerValidationTests.cpp",
-    "unittests/validation/ShaderModuleValidationTests.cpp",
-    "unittests/validation/StorageTextureValidationTests.cpp",
-    "unittests/validation/TextureSubresourceTests.cpp",
-    "unittests/validation/TextureValidationTests.cpp",
-    "unittests/validation/TextureViewValidationTests.cpp",
-    "unittests/validation/ToggleValidationTests.cpp",
-    "unittests/validation/UnsafeAPIValidationTests.cpp",
-    "unittests/validation/ValidationTest.cpp",
-    "unittests/validation/ValidationTest.h",
-    "unittests/validation/VertexBufferValidationTests.cpp",
-    "unittests/validation/VertexStateValidationTests.cpp",
-    "unittests/validation/VideoViewsValidationTests.cpp",
-    "unittests/validation/WriteBufferTests.cpp",
-    "unittests/wire/WireAdapterTests.cpp",
-    "unittests/wire/WireArgumentTests.cpp",
-    "unittests/wire/WireBasicTests.cpp",
-    "unittests/wire/WireBufferMappingTests.cpp",
-    "unittests/wire/WireCreatePipelineAsyncTests.cpp",
-    "unittests/wire/WireDestroyObjectTests.cpp",
-    "unittests/wire/WireDisconnectTests.cpp",
-    "unittests/wire/WireErrorCallbackTests.cpp",
-    "unittests/wire/WireExtensionTests.cpp",
-    "unittests/wire/WireInjectDeviceTests.cpp",
-    "unittests/wire/WireInjectInstanceTests.cpp",
-    "unittests/wire/WireInjectSwapChainTests.cpp",
-    "unittests/wire/WireInjectTextureTests.cpp",
-    "unittests/wire/WireInstanceTests.cpp",
-    "unittests/wire/WireMemoryTransferServiceTests.cpp",
-    "unittests/wire/WireOptionalTests.cpp",
-    "unittests/wire/WireQueueTests.cpp",
-    "unittests/wire/WireShaderModuleTests.cpp",
-    "unittests/wire/WireTest.cpp",
-    "unittests/wire/WireTest.h",
-    "unittests/wire/WireWGPUDevicePropertiesTests.cpp",
+    "../dawn/tests/DawnNativeTest.cpp",
+    "../dawn/tests/DawnNativeTest.h",
+    "../dawn/tests/MockCallback.h",
+    "../dawn/tests/ToggleParser.cpp",
+    "../dawn/tests/ToggleParser.h",
+    "../dawn/tests/unittests/AsyncTaskTests.cpp",
+    "../dawn/tests/unittests/BitSetIteratorTests.cpp",
+    "../dawn/tests/unittests/BuddyAllocatorTests.cpp",
+    "../dawn/tests/unittests/BuddyMemoryAllocatorTests.cpp",
+    "../dawn/tests/unittests/ChainUtilsTests.cpp",
+    "../dawn/tests/unittests/CommandAllocatorTests.cpp",
+    "../dawn/tests/unittests/ConcurrentCacheTests.cpp",
+    "../dawn/tests/unittests/EnumClassBitmasksTests.cpp",
+    "../dawn/tests/unittests/EnumMaskIteratorTests.cpp",
+    "../dawn/tests/unittests/ErrorTests.cpp",
+    "../dawn/tests/unittests/FeatureTests.cpp",
+    "../dawn/tests/unittests/GPUInfoTests.cpp",
+    "../dawn/tests/unittests/GetProcAddressTests.cpp",
+    "../dawn/tests/unittests/ITypArrayTests.cpp",
+    "../dawn/tests/unittests/ITypBitsetTests.cpp",
+    "../dawn/tests/unittests/ITypSpanTests.cpp",
+    "../dawn/tests/unittests/ITypVectorTests.cpp",
+    "../dawn/tests/unittests/LimitsTests.cpp",
+    "../dawn/tests/unittests/LinkedListTests.cpp",
+    "../dawn/tests/unittests/MathTests.cpp",
+    "../dawn/tests/unittests/ObjectBaseTests.cpp",
+    "../dawn/tests/unittests/PerStageTests.cpp",
+    "../dawn/tests/unittests/PerThreadProcTests.cpp",
+    "../dawn/tests/unittests/PlacementAllocatedTests.cpp",
+    "../dawn/tests/unittests/RefBaseTests.cpp",
+    "../dawn/tests/unittests/RefCountedTests.cpp",
+    "../dawn/tests/unittests/ResultTests.cpp",
+    "../dawn/tests/unittests/RingBufferAllocatorTests.cpp",
+    "../dawn/tests/unittests/SerialMapTests.cpp",
+    "../dawn/tests/unittests/SerialQueueTests.cpp",
+    "../dawn/tests/unittests/SlabAllocatorTests.cpp",
+    "../dawn/tests/unittests/StackContainerTests.cpp",
+    "../dawn/tests/unittests/SubresourceStorageTests.cpp",
+    "../dawn/tests/unittests/SystemUtilsTests.cpp",
+    "../dawn/tests/unittests/ToBackendTests.cpp",
+    "../dawn/tests/unittests/TypedIntegerTests.cpp",
+    "../dawn/tests/unittests/native/CommandBufferEncodingTests.cpp",
+    "../dawn/tests/unittests/native/DestroyObjectTests.cpp",
+    "../dawn/tests/unittests/native/DeviceCreationTests.cpp",
+    "../dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+    "../dawn/tests/unittests/validation/BufferValidationTests.cpp",
+    "../dawn/tests/unittests/validation/CommandBufferValidationTests.cpp",
+    "../dawn/tests/unittests/validation/ComputeIndirectValidationTests.cpp",
+    "../dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+    "../dawn/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+    "../dawn/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+    "../dawn/tests/unittests/validation/DebugMarkerValidationTests.cpp",
+    "../dawn/tests/unittests/validation/DeviceValidationTests.cpp",
+    "../dawn/tests/unittests/validation/DrawIndirectValidationTests.cpp",
+    "../dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+    "../dawn/tests/unittests/validation/DynamicStateCommandValidationTests.cpp",
+    "../dawn/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+    "../dawn/tests/unittests/validation/ExternalTextureTests.cpp",
+    "../dawn/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+    "../dawn/tests/unittests/validation/IndexBufferValidationTests.cpp",
+    "../dawn/tests/unittests/validation/InternalUsageValidationTests.cpp",
+    "../dawn/tests/unittests/validation/LabelTests.cpp",
+    "../dawn/tests/unittests/validation/MinimumBufferSizeValidationTests.cpp",
+    "../dawn/tests/unittests/validation/MultipleDeviceTests.cpp",
+    "../dawn/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+    "../dawn/tests/unittests/validation/PipelineAndPassCompatibilityTests.cpp",
+    "../dawn/tests/unittests/validation/QueryValidationTests.cpp",
+    "../dawn/tests/unittests/validation/QueueOnSubmittedWorkDoneValidationTests.cpp",
+    "../dawn/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+    "../dawn/tests/unittests/validation/QueueWriteBufferValidationTests.cpp",
+    "../dawn/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+    "../dawn/tests/unittests/validation/RenderBundleValidationTests.cpp",
+    "../dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+    "../dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+    "../dawn/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+    "../dawn/tests/unittests/validation/SamplerValidationTests.cpp",
+    "../dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+    "../dawn/tests/unittests/validation/StorageTextureValidationTests.cpp",
+    "../dawn/tests/unittests/validation/TextureSubresourceTests.cpp",
+    "../dawn/tests/unittests/validation/TextureValidationTests.cpp",
+    "../dawn/tests/unittests/validation/TextureViewValidationTests.cpp",
+    "../dawn/tests/unittests/validation/ToggleValidationTests.cpp",
+    "../dawn/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+    "../dawn/tests/unittests/validation/ValidationTest.cpp",
+    "../dawn/tests/unittests/validation/ValidationTest.h",
+    "../dawn/tests/unittests/validation/VertexBufferValidationTests.cpp",
+    "../dawn/tests/unittests/validation/VertexStateValidationTests.cpp",
+    "../dawn/tests/unittests/validation/VideoViewsValidationTests.cpp",
+    "../dawn/tests/unittests/validation/WriteBufferTests.cpp",
+    "../dawn/tests/unittests/wire/WireAdapterTests.cpp",
+    "../dawn/tests/unittests/wire/WireArgumentTests.cpp",
+    "../dawn/tests/unittests/wire/WireBasicTests.cpp",
+    "../dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+    "../dawn/tests/unittests/wire/WireCreatePipelineAsyncTests.cpp",
+    "../dawn/tests/unittests/wire/WireDestroyObjectTests.cpp",
+    "../dawn/tests/unittests/wire/WireDisconnectTests.cpp",
+    "../dawn/tests/unittests/wire/WireErrorCallbackTests.cpp",
+    "../dawn/tests/unittests/wire/WireExtensionTests.cpp",
+    "../dawn/tests/unittests/wire/WireInjectDeviceTests.cpp",
+    "../dawn/tests/unittests/wire/WireInjectInstanceTests.cpp",
+    "../dawn/tests/unittests/wire/WireInjectSwapChainTests.cpp",
+    "../dawn/tests/unittests/wire/WireInjectTextureTests.cpp",
+    "../dawn/tests/unittests/wire/WireInstanceTests.cpp",
+    "../dawn/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+    "../dawn/tests/unittests/wire/WireOptionalTests.cpp",
+    "../dawn/tests/unittests/wire/WireQueueTests.cpp",
+    "../dawn/tests/unittests/wire/WireShaderModuleTests.cpp",
+    "../dawn/tests/unittests/wire/WireTest.cpp",
+    "../dawn/tests/unittests/wire/WireTest.h",
+    "../dawn/tests/unittests/wire/WireWGPUDevicePropertiesTests.cpp",
   ]
 
   if (is_win) {
-    sources += [ "unittests/WindowsUtilsTests.cpp" ]
+    sources += [ "../dawn/tests/unittests/WindowsUtilsTests.cpp" ]
   }
 
   if (dawn_enable_d3d12) {
-    sources += [ "unittests/d3d12/CopySplitTests.cpp" ]
+    sources += [ "../dawn/tests/unittests/d3d12/CopySplitTests.cpp" ]
   }
 
   # When building inside Chromium, use their gtest main function because it is
   # needed to run in swarming correctly.
   if (build_with_chromium) {
-    deps += [ ":dawn_unittests_main" ]
+    deps += [ ":unittests_main" ]
   } else {
-    sources += [ "UnittestsMain.cpp" ]
+    sources += [ "../dawn/tests/UnittestsMain.cpp" ]
   }
 }
 
@@ -317,7 +339,7 @@ test("dawn_unittests") {
 # Dawn end2end tests targets
 ###############################################################################
 
-source_set("dawn_end2end_tests_sources") {
+source_set("end2end_tests_sources") {
   configs += [ "${dawn_root}/src/dawn/common:internal_config" ]
   testonly = true
 
@@ -334,100 +356,100 @@ source_set("dawn_end2end_tests_sources") {
   ]
 
   sources = [
-    "DawnTest.h",
-    "MockCallback.h",
-    "ParamGenerator.h",
-    "ToggleParser.cpp",
-    "ToggleParser.h",
-    "end2end/AdapterDiscoveryTests.cpp",
-    "end2end/BasicTests.cpp",
-    "end2end/BindGroupTests.cpp",
-    "end2end/BufferTests.cpp",
-    "end2end/BufferZeroInitTests.cpp",
-    "end2end/ClipSpaceTests.cpp",
-    "end2end/ColorStateTests.cpp",
-    "end2end/CommandEncoderTests.cpp",
-    "end2end/CompressedTextureFormatTests.cpp",
-    "end2end/ComputeCopyStorageBufferTests.cpp",
-    "end2end/ComputeDispatchTests.cpp",
-    "end2end/ComputeLayoutMemoryBufferTests.cpp",
-    "end2end/ComputeSharedMemoryTests.cpp",
-    "end2end/ComputeStorageBufferBarrierTests.cpp",
-    "end2end/CopyTests.cpp",
-    "end2end/CopyTextureForBrowserTests.cpp",
-    "end2end/CreatePipelineAsyncTests.cpp",
-    "end2end/CullingTests.cpp",
-    "end2end/DebugMarkerTests.cpp",
-    "end2end/DeprecatedAPITests.cpp",
-    "end2end/DepthBiasTests.cpp",
-    "end2end/DepthStencilCopyTests.cpp",
-    "end2end/DepthStencilLoadOpTests.cpp",
-    "end2end/DepthStencilSamplingTests.cpp",
-    "end2end/DepthStencilStateTests.cpp",
-    "end2end/DestroyTests.cpp",
-    "end2end/DeviceInitializationTests.cpp",
-    "end2end/DeviceLostTests.cpp",
-    "end2end/DrawIndexedIndirectTests.cpp",
-    "end2end/DrawIndexedTests.cpp",
-    "end2end/DrawIndirectTests.cpp",
-    "end2end/DrawTests.cpp",
-    "end2end/DynamicBufferOffsetTests.cpp",
-    "end2end/EntryPointTests.cpp",
-    "end2end/ExternalTextureTests.cpp",
-    "end2end/FirstIndexOffsetTests.cpp",
-    "end2end/GpuMemorySynchronizationTests.cpp",
-    "end2end/IndexFormatTests.cpp",
-    "end2end/MaxLimitTests.cpp",
-    "end2end/MemoryAllocationStressTests.cpp",
-    "end2end/MultisampledRenderingTests.cpp",
-    "end2end/MultisampledSamplingTests.cpp",
-    "end2end/NonzeroBufferCreationTests.cpp",
-    "end2end/NonzeroTextureCreationTests.cpp",
-    "end2end/ObjectCachingTests.cpp",
-    "end2end/OpArrayLengthTests.cpp",
-    "end2end/PipelineLayoutTests.cpp",
-    "end2end/PrimitiveStateTests.cpp",
-    "end2end/PrimitiveTopologyTests.cpp",
-    "end2end/QueryTests.cpp",
-    "end2end/QueueTests.cpp",
-    "end2end/QueueTimelineTests.cpp",
-    "end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
-    "end2end/RenderAttachmentTests.cpp",
-    "end2end/RenderBundleTests.cpp",
-    "end2end/RenderPassLoadOpTests.cpp",
-    "end2end/RenderPassTests.cpp",
-    "end2end/SamplerFilterAnisotropicTests.cpp",
-    "end2end/SamplerTests.cpp",
-    "end2end/ScissorTests.cpp",
-    "end2end/ShaderFloat16Tests.cpp",
-    "end2end/ShaderTests.cpp",
-    "end2end/StorageTextureTests.cpp",
-    "end2end/SubresourceRenderAttachmentTests.cpp",
-    "end2end/Texture3DTests.cpp",
-    "end2end/TextureFormatTests.cpp",
-    "end2end/TextureSubresourceTests.cpp",
-    "end2end/TextureViewTests.cpp",
-    "end2end/TextureZeroInitTests.cpp",
-    "end2end/VertexFormatTests.cpp",
-    "end2end/VertexOnlyRenderPipelineTests.cpp",
-    "end2end/VertexStateTests.cpp",
-    "end2end/ViewportOrientationTests.cpp",
-    "end2end/ViewportTests.cpp",
+    "../dawn/tests/DawnTest.h",
+    "../dawn/tests/MockCallback.h",
+    "../dawn/tests/ParamGenerator.h",
+    "../dawn/tests/ToggleParser.cpp",
+    "../dawn/tests/ToggleParser.h",
+    "../dawn/tests/end2end/AdapterDiscoveryTests.cpp",
+    "../dawn/tests/end2end/BasicTests.cpp",
+    "../dawn/tests/end2end/BindGroupTests.cpp",
+    "../dawn/tests/end2end/BufferTests.cpp",
+    "../dawn/tests/end2end/BufferZeroInitTests.cpp",
+    "../dawn/tests/end2end/ClipSpaceTests.cpp",
+    "../dawn/tests/end2end/ColorStateTests.cpp",
+    "../dawn/tests/end2end/CommandEncoderTests.cpp",
+    "../dawn/tests/end2end/CompressedTextureFormatTests.cpp",
+    "../dawn/tests/end2end/ComputeCopyStorageBufferTests.cpp",
+    "../dawn/tests/end2end/ComputeDispatchTests.cpp",
+    "../dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+    "../dawn/tests/end2end/ComputeSharedMemoryTests.cpp",
+    "../dawn/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+    "../dawn/tests/end2end/CopyTests.cpp",
+    "../dawn/tests/end2end/CopyTextureForBrowserTests.cpp",
+    "../dawn/tests/end2end/CreatePipelineAsyncTests.cpp",
+    "../dawn/tests/end2end/CullingTests.cpp",
+    "../dawn/tests/end2end/DebugMarkerTests.cpp",
+    "../dawn/tests/end2end/DeprecatedAPITests.cpp",
+    "../dawn/tests/end2end/DepthBiasTests.cpp",
+    "../dawn/tests/end2end/DepthStencilCopyTests.cpp",
+    "../dawn/tests/end2end/DepthStencilLoadOpTests.cpp",
+    "../dawn/tests/end2end/DepthStencilSamplingTests.cpp",
+    "../dawn/tests/end2end/DepthStencilStateTests.cpp",
+    "../dawn/tests/end2end/DestroyTests.cpp",
+    "../dawn/tests/end2end/DeviceInitializationTests.cpp",
+    "../dawn/tests/end2end/DeviceLostTests.cpp",
+    "../dawn/tests/end2end/DrawIndexedIndirectTests.cpp",
+    "../dawn/tests/end2end/DrawIndexedTests.cpp",
+    "../dawn/tests/end2end/DrawIndirectTests.cpp",
+    "../dawn/tests/end2end/DrawTests.cpp",
+    "../dawn/tests/end2end/DynamicBufferOffsetTests.cpp",
+    "../dawn/tests/end2end/EntryPointTests.cpp",
+    "../dawn/tests/end2end/ExternalTextureTests.cpp",
+    "../dawn/tests/end2end/FirstIndexOffsetTests.cpp",
+    "../dawn/tests/end2end/GpuMemorySynchronizationTests.cpp",
+    "../dawn/tests/end2end/IndexFormatTests.cpp",
+    "../dawn/tests/end2end/MaxLimitTests.cpp",
+    "../dawn/tests/end2end/MemoryAllocationStressTests.cpp",
+    "../dawn/tests/end2end/MultisampledRenderingTests.cpp",
+    "../dawn/tests/end2end/MultisampledSamplingTests.cpp",
+    "../dawn/tests/end2end/NonzeroBufferCreationTests.cpp",
+    "../dawn/tests/end2end/NonzeroTextureCreationTests.cpp",
+    "../dawn/tests/end2end/ObjectCachingTests.cpp",
+    "../dawn/tests/end2end/OpArrayLengthTests.cpp",
+    "../dawn/tests/end2end/PipelineLayoutTests.cpp",
+    "../dawn/tests/end2end/PrimitiveStateTests.cpp",
+    "../dawn/tests/end2end/PrimitiveTopologyTests.cpp",
+    "../dawn/tests/end2end/QueryTests.cpp",
+    "../dawn/tests/end2end/QueueTests.cpp",
+    "../dawn/tests/end2end/QueueTimelineTests.cpp",
+    "../dawn/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+    "../dawn/tests/end2end/RenderAttachmentTests.cpp",
+    "../dawn/tests/end2end/RenderBundleTests.cpp",
+    "../dawn/tests/end2end/RenderPassLoadOpTests.cpp",
+    "../dawn/tests/end2end/RenderPassTests.cpp",
+    "../dawn/tests/end2end/SamplerFilterAnisotropicTests.cpp",
+    "../dawn/tests/end2end/SamplerTests.cpp",
+    "../dawn/tests/end2end/ScissorTests.cpp",
+    "../dawn/tests/end2end/ShaderFloat16Tests.cpp",
+    "../dawn/tests/end2end/ShaderTests.cpp",
+    "../dawn/tests/end2end/StorageTextureTests.cpp",
+    "../dawn/tests/end2end/SubresourceRenderAttachmentTests.cpp",
+    "../dawn/tests/end2end/Texture3DTests.cpp",
+    "../dawn/tests/end2end/TextureFormatTests.cpp",
+    "../dawn/tests/end2end/TextureSubresourceTests.cpp",
+    "../dawn/tests/end2end/TextureViewTests.cpp",
+    "../dawn/tests/end2end/TextureZeroInitTests.cpp",
+    "../dawn/tests/end2end/VertexFormatTests.cpp",
+    "../dawn/tests/end2end/VertexOnlyRenderPipelineTests.cpp",
+    "../dawn/tests/end2end/VertexStateTests.cpp",
+    "../dawn/tests/end2end/ViewportOrientationTests.cpp",
+    "../dawn/tests/end2end/ViewportTests.cpp",
   ]
 
   # Validation tests that need OS windows live in end2end tests.
   sources += [
-    "unittests/validation/ValidationTest.cpp",
-    "unittests/validation/ValidationTest.h",
+    "../dawn/tests/unittests/validation/ValidationTest.cpp",
+    "../dawn/tests/unittests/validation/ValidationTest.h",
   ]
 
   libs = []
 
   if (dawn_enable_d3d12) {
     sources += [
-      "end2end/D3D12CachingTests.cpp",
-      "end2end/D3D12ResourceWrappingTests.cpp",
-      "end2end/VideoViewsTests_win.cpp",
+      "../dawn/tests/end2end/D3D12CachingTests.cpp",
+      "../dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+      "../dawn/tests/end2end/VideoViewsTests_win.cpp",
     ]
     libs += [
       "d3d11.lib",
@@ -436,7 +458,7 @@ source_set("dawn_end2end_tests_sources") {
   }
 
   if (dawn_enable_metal) {
-    sources += [ "end2end/IOSurfaceWrappingTests.cpp" ]
+    sources += [ "../dawn/tests/end2end/IOSurfaceWrappingTests.cpp" ]
     frameworks = [ "IOSurface.framework" ]
   }
 
@@ -446,26 +468,26 @@ source_set("dawn_end2end_tests_sources") {
 
   if (dawn_supports_glfw_for_windowing) {
     sources += [
-      "end2end/SwapChainTests.cpp",
-      "end2end/SwapChainValidationTests.cpp",
-      "end2end/WindowSurfaceTests.cpp",
+      "../dawn/tests/end2end/SwapChainTests.cpp",
+      "../dawn/tests/end2end/SwapChainValidationTests.cpp",
+      "../dawn/tests/end2end/WindowSurfaceTests.cpp",
     ]
     deps += [ "${dawn_root}/src/dawn/utils:glfw" ]
   }
 
   if (dawn_enable_d3d12 || (dawn_enable_vulkan && is_chromeos)) {
     sources += [
-      "end2end/VideoViewsTests.cpp",
-      "end2end/VideoViewsTests.h",
+      "../dawn/tests/end2end/VideoViewsTests.cpp",
+      "../dawn/tests/end2end/VideoViewsTests.h",
     ]
   }
 
   if (dawn_enable_vulkan && is_chromeos) {
-    sources += [ "end2end/VideoViewsTests_gbm.cpp" ]
+    sources += [ "../dawn/tests/end2end/VideoViewsTests_gbm.cpp" ]
   }
 }
 
-source_set("dawn_white_box_tests_sources") {
+source_set("white_box_tests_sources") {
   configs += [ "${dawn_root}/src/dawn/native:internal" ]
   testonly = true
 
@@ -483,9 +505,9 @@ source_set("dawn_white_box_tests_sources") {
   ]
 
   sources = [
-    "DawnTest.h",
-    "ParamGenerator.h",
-    "ToggleParser.h",
+    "../dawn/tests/DawnTest.h",
+    "../dawn/tests/ParamGenerator.h",
+    "../dawn/tests/ToggleParser.h",
   ]
 
   if (dawn_enable_vulkan) {
@@ -493,40 +515,40 @@ source_set("dawn_white_box_tests_sources") {
 
     if (is_chromeos) {
       sources += [
-        "white_box/VulkanImageWrappingTests.cpp",
-        "white_box/VulkanImageWrappingTests.h",
-        "white_box/VulkanImageWrappingTests_DmaBuf.cpp",
+        "../dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "../dawn/tests/white_box/VulkanImageWrappingTests.h",
+        "../dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp",
       ]
     } else if (is_linux) {
       sources += [
-        "white_box/VulkanImageWrappingTests.cpp",
-        "white_box/VulkanImageWrappingTests.h",
-        "white_box/VulkanImageWrappingTests_OpaqueFD.cpp",
+        "../dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "../dawn/tests/white_box/VulkanImageWrappingTests.h",
+        "../dawn/tests/white_box/VulkanImageWrappingTests_OpaqueFD.cpp",
       ]
     }
 
     if (dawn_enable_error_injection) {
-      sources += [ "white_box/VulkanErrorInjectorTests.cpp" ]
+      sources += [ "../dawn/tests/white_box/VulkanErrorInjectorTests.cpp" ]
     }
   }
 
   sources += [
-    "white_box/BufferAllocatedSizeTests.cpp",
-    "white_box/InternalResourceUsageTests.cpp",
-    "white_box/InternalStorageBufferBindingTests.cpp",
-    "white_box/QueryInternalShaderTests.cpp",
+    "../dawn/tests/white_box/BufferAllocatedSizeTests.cpp",
+    "../dawn/tests/white_box/InternalResourceUsageTests.cpp",
+    "../dawn/tests/white_box/InternalStorageBufferBindingTests.cpp",
+    "../dawn/tests/white_box/QueryInternalShaderTests.cpp",
   ]
 
   if (dawn_enable_d3d12) {
     sources += [
-      "white_box/D3D12DescriptorHeapTests.cpp",
-      "white_box/D3D12ResidencyTests.cpp",
-      "white_box/D3D12ResourceHeapTests.cpp",
+      "../dawn/tests/white_box/D3D12DescriptorHeapTests.cpp",
+      "../dawn/tests/white_box/D3D12ResidencyTests.cpp",
+      "../dawn/tests/white_box/D3D12ResourceHeapTests.cpp",
     ]
   }
 
   if (dawn_enable_metal) {
-    sources += [ "white_box/MetalAutoreleasePoolTests.mm" ]
+    sources += [ "../dawn/tests/white_box/MetalAutoreleasePoolTests.mm" ]
   }
 
   if (dawn_enable_opengl) {
@@ -534,20 +556,18 @@ source_set("dawn_white_box_tests_sources") {
   }
 
   if (dawn_enable_opengles) {
-    sources += [ "white_box/EGLImageWrappingTests.cpp" ]
+    sources += [ "../dawn/tests/white_box/EGLImageWrappingTests.cpp" ]
     deps += [ "//third_party/angle:libEGL" ]
   }
 
   libs = []
 }
 
-test("dawn_end2end_tests") {
-  configs += [ "${dawn_root}/src/dawn/common:internal_config" ]
-
+dawn_test("dawn_end2end_tests") {
   deps = [
-    ":dawn_end2end_tests_sources",
-    ":dawn_white_box_tests_sources",
+    ":end2end_tests_sources",
     ":gmock_and_gtest",
+    ":white_box_tests_sources",
     "${dawn_root}/src/dawn:cpp",
     "${dawn_root}/src/dawn:proc",
     "${dawn_root}/src/dawn/common",
@@ -557,8 +577,8 @@ test("dawn_end2end_tests") {
   ]
 
   sources = [
-    "DawnTest.cpp",
-    "DawnTest.h",
+    "../dawn/tests/DawnTest.cpp",
+    "../dawn/tests/DawnTest.h",
   ]
 
   libs = []
@@ -566,9 +586,9 @@ test("dawn_end2end_tests") {
   # When building inside Chromium, use their gtest main function because it is
   # needed to run in swarming correctly.
   if (build_with_chromium) {
-    deps += [ ":dawn_end2end_tests_main" ]
+    deps += [ ":end2end_tests_main" ]
   } else {
-    sources += [ "End2EndTestsMain.cpp" ]
+    sources += [ "../dawn/tests/End2EndTestsMain.cpp" ]
   }
 
   if (dawn_enable_opengl) {
@@ -584,34 +604,32 @@ test("dawn_end2end_tests") {
 # Dawn perf tests
 ###############################################################################
 
-test("dawn_perf_tests") {
-  configs += [ "${dawn_root}/src/dawn/common:internal_config" ]
-
+dawn_test("dawn_perf_tests") {
   deps = [
     ":gmock_and_gtest",
     "${dawn_root}/src/dawn:cpp",
     "${dawn_root}/src/dawn:proc",
     "${dawn_root}/src/dawn/common",
     "${dawn_root}/src/dawn/native",
+    "${dawn_root}/src/dawn/platform",
     "${dawn_root}/src/dawn/utils",
     "${dawn_root}/src/dawn/wire",
-    "${dawn_root}/src/dawn_platform",
   ]
 
   sources = [
-    "DawnTest.cpp",
-    "DawnTest.h",
-    "ParamGenerator.h",
-    "ToggleParser.cpp",
-    "ToggleParser.h",
-    "perf_tests/BufferUploadPerf.cpp",
-    "perf_tests/DawnPerfTest.cpp",
-    "perf_tests/DawnPerfTest.h",
-    "perf_tests/DawnPerfTestPlatform.cpp",
-    "perf_tests/DawnPerfTestPlatform.h",
-    "perf_tests/DrawCallPerf.cpp",
-    "perf_tests/ShaderRobustnessPerf.cpp",
-    "perf_tests/SubresourceTrackingPerf.cpp",
+    "../dawn/tests/DawnTest.cpp",
+    "../dawn/tests/DawnTest.h",
+    "../dawn/tests/ParamGenerator.h",
+    "../dawn/tests/ToggleParser.cpp",
+    "../dawn/tests/ToggleParser.h",
+    "../dawn/tests/perf_tests/BufferUploadPerf.cpp",
+    "../dawn/tests/perf_tests/DawnPerfTest.cpp",
+    "../dawn/tests/perf_tests/DawnPerfTest.h",
+    "../dawn/tests/perf_tests/DawnPerfTestPlatform.cpp",
+    "../dawn/tests/perf_tests/DawnPerfTestPlatform.h",
+    "../dawn/tests/perf_tests/DrawCallPerf.cpp",
+    "../dawn/tests/perf_tests/ShaderRobustnessPerf.cpp",
+    "../dawn/tests/perf_tests/SubresourceTrackingPerf.cpp",
   ]
 
   libs = []
@@ -619,10 +637,10 @@ test("dawn_perf_tests") {
   # When building inside Chromium, use their gtest main function and the
   # other perf test scaffolding in order to run in swarming correctly.
   if (build_with_chromium) {
-    deps += [ ":dawn_perf_tests_main" ]
+    deps += [ ":perf_tests_main" ]
     data_deps = [ "//testing:run_perf_test" ]
   } else {
-    sources += [ "PerfTestsMain.cpp" ]
+    sources += [ "../dawn/tests/PerfTestsMain.cpp" ]
   }
 
   if (dawn_enable_metal) {
