@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "515e2f2e_55fce2b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-03T18:07:23Z",
+      "side": 1,
+      "message": "LGTM feel free to push back against any of these comments and instead put them as TODO for after the moving of directories. (leaving them open so we know when they are addressed.)",
+      "revId": "8c9a543f07d274c1055d215adc3b1110a7f80f40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05efa99e_361ad06b",
+        "filename": "examples/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-03T18:07:23Z",
+      "side": 1,
+      "message": "nit: git cl format will reorder the dependency list.",
+      "revId": "8c9a543f07d274c1055d215adc3b1110a7f80f40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "500b59fb_80b3cdb3",
+        "filename": "src/dawn/common/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-03T18:07:23Z",
+      "side": 1,
+      "message": "nit: can we add a TODO in the tracking bug to rename this one internal_config maybe? (I can do it, I just want to not forget about it)",
+      "revId": "8c9a543f07d274c1055d215adc3b1110a7f80f40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47cffd84_9a3da4d0",
+        "filename": "src/dawn/common/Result.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-03T18:07:23Z",
+      "side": 1,
+      "message": "Did this file get reformatted with a different clang-format config? Weirdly running it locally doesn\u0027t revert the whitespace to what it was previously.",
+      "revId": "8c9a543f07d274c1055d215adc3b1110a7f80f40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63b06cc5_c9eebc07",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-03T18:07:23Z",
+      "side": 1,
+      "message": "nit: put the comment above the assignment.",
+      "revId": "8c9a543f07d274c1055d215adc3b1110a7f80f40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caf7e7a5_2220c4b1",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-03T18:07:23Z",
+      "side": 1,
+      "message": "nit: we could dedent the comment a bit to have it not wrap (or remove C and 3)",
+      "revId": "8c9a543f07d274c1055d215adc3b1110a7f80f40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
