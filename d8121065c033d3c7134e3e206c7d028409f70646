@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f3876d6_e05ce100",
+        "filename": "scripts/dawn_component.gni",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-03T18:14:06Z",
+      "side": 1,
+      "message": "nit: Maybe comment about this in the template doc. This behavior is quite surprising TBH given that in general target names are passed as is through templates.",
+      "revId": "d8121065c033d3c7134e3e206c7d028409f70646",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
