@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3063f9f_7171ba49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T13:05:02Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "b560b4ccd72b86727832dd0b3b1ca30e93ce343a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24010cb0_5eed3874",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 17
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T13:05:02Z",
+      "side": 1,
+      "message": "nit: I think we should keep as a public_deps so that transitive public_deps get propagated correctly (even if it is unlikely there are any because these are executables)",
+      "revId": "b560b4ccd72b86727832dd0b3b1ca30e93ce343a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
