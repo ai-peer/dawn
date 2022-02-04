@@ -1477,7 +1477,7 @@ class SetBindGroupValidationTest : public ValidationTest {
             renderPassEncoder.SetBindGroup(0, bindGroup, count, offsets);
         }
         renderPassEncoder.Draw(3);
-        renderPassEncoder.EndPass();
+        renderPassEncoder.End();
         if (!expectation) {
             ASSERT_DEVICE_ERROR(commandEncoder.Finish());
         } else {
@@ -1498,7 +1498,7 @@ class SetBindGroupValidationTest : public ValidationTest {
             computePassEncoder.SetBindGroup(0, bindGroup, count, offsets);
         }
         computePassEncoder.Dispatch(1);
-        computePassEncoder.EndPass();
+        computePassEncoder.End();
         if (!expectation) {
             ASSERT_DEVICE_ERROR(commandEncoder.Finish());
         } else {
@@ -1566,7 +1566,7 @@ TEST_F(SetBindGroupValidationTest, VerifyGroupIfChangedAfterAction) {
         computePassEncoder.Dispatch(1);
         computePassEncoder.SetBindGroup(0, invalidGroup, 0, nullptr);
         computePassEncoder.Dispatch(1);
-        computePassEncoder.EndPass();
+        computePassEncoder.End();
         ASSERT_DEVICE_ERROR(commandEncoder.Finish());
     }
     {
@@ -1580,7 +1580,7 @@ TEST_F(SetBindGroupValidationTest, VerifyGroupIfChangedAfterAction) {
         renderPassEncoder.Draw(3);
         renderPassEncoder.SetBindGroup(0, invalidGroup, 0, nullptr);
         renderPassEncoder.Draw(3);
-        renderPassEncoder.EndPass();
+        renderPassEncoder.End();
         ASSERT_DEVICE_ERROR(commandEncoder.Finish());
     }
 }
@@ -1749,7 +1749,7 @@ TEST_F(SetBindGroupValidationTest, DynamicOffsetOrder) {
         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         wgpu::ComputePassEncoder computePassEncoder = commandEncoder.BeginComputePass();
         computePassEncoder.SetBindGroup(0, bindGroup, offsets.size(), offsets.data());
-        computePassEncoder.EndPass();
+        computePassEncoder.End();
         commandEncoder.Finish();
     }
     {
@@ -1762,7 +1762,7 @@ TEST_F(SetBindGroupValidationTest, DynamicOffsetOrder) {
         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         wgpu::ComputePassEncoder computePassEncoder = commandEncoder.BeginComputePass();
         computePassEncoder.SetBindGroup(0, bindGroup, offsets.size(), offsets.data());
-        computePassEncoder.EndPass();
+        computePassEncoder.End();
         commandEncoder.Finish();
     }
     {
@@ -1773,7 +1773,7 @@ TEST_F(SetBindGroupValidationTest, DynamicOffsetOrder) {
         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         wgpu::ComputePassEncoder computePassEncoder = commandEncoder.BeginComputePass();
         computePassEncoder.SetBindGroup(0, bindGroup, offsets.size(), offsets.data());
-        computePassEncoder.EndPass();
+        computePassEncoder.End();
         commandEncoder.Finish();
     }
     {
@@ -1786,7 +1786,7 @@ TEST_F(SetBindGroupValidationTest, DynamicOffsetOrder) {
         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         wgpu::ComputePassEncoder computePassEncoder = commandEncoder.BeginComputePass();
         computePassEncoder.SetBindGroup(0, bindGroup, offsets.size(), offsets.data());
-        computePassEncoder.EndPass();
+        computePassEncoder.End();
         commandEncoder.Finish();
     }
     {
@@ -1797,7 +1797,7 @@ TEST_F(SetBindGroupValidationTest, DynamicOffsetOrder) {
         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         wgpu::ComputePassEncoder computePassEncoder = commandEncoder.BeginComputePass();
         computePassEncoder.SetBindGroup(0, bindGroup, offsets.size(), offsets.data());
-        computePassEncoder.EndPass();
+        computePassEncoder.End();
         commandEncoder.Finish();
     }
 }
@@ -1944,7 +1944,7 @@ TEST_F(SetBindGroupPersistenceValidationTest, BindGroupBeforePipeline) {
     renderPassEncoder.SetPipeline(pipeline);
     renderPassEncoder.Draw(3);
 
-    renderPassEncoder.EndPass();
+    renderPassEncoder.End();
     commandEncoder.Finish();
 }
 
@@ -2004,7 +2004,7 @@ TEST_F(SetBindGroupPersistenceValidationTest, NotVulkanInheritance) {
     // Bind group 1 persists even though it is not "inherited".
     renderPassEncoder.Draw(3);
 
-    renderPassEncoder.EndPass();
+    renderPassEncoder.End();
     commandEncoder.Finish();
 }
 
@@ -2246,7 +2246,7 @@ class BindingsValidationTest : public BindGroupLayoutCompatibilityTest {
         }
         rp.SetPipeline(pipeline);
         rp.Draw(3);
-        rp.EndPass();
+        rp.End();
         if (!expectation) {
             ASSERT_DEVICE_ERROR(encoder.Finish());
         } else {
@@ -2265,7 +2265,7 @@ class BindingsValidationTest : public BindGroupLayoutCompatibilityTest {
         }
         cp.SetPipeline(pipeline);
         cp.Dispatch(1);
-        cp.EndPass();
+        cp.End();
         if (!expectation) {
             ASSERT_DEVICE_ERROR(encoder.Finish());
         } else {
