@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9591f10_e1f1a28a",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-04T20:14:16Z",
+      "side": 1,
+      "message": "No longer needed.",
+      "parentUuid": "ecae4c6d_adaec4b8",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9231519e_01ebc6f6",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-02-04T09:24:43Z",
       "side": 1,
       "message": "Maybe we could precompute this in the layout and have \"GetUnexpandedBindingCount\"? (in the spirit of reducing the amount of work done in the hot path)",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c9d46ca_21e09a32",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-04T20:14:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9231519e_01ebc6f6",
       "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +139,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "791cbef7_fc35bfed",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-04T20:14:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "525f09f9_20aed985",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "477d90a4_548cf89a",
@@ -116,6 +170,24 @@
       "writtenOn": "2022-02-04T09:24:43Z",
       "side": 1,
       "message": "nit: Maybe add a comment that explains what\u0027s happening here.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "721e26f2_642bbd9b",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-04T20:14:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "477d90a4_548cf89a",
       "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -171,6 +243,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7eea9d2_58c69e76",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-04T20:14:16Z",
+      "side": 1,
+      "message": "The associated constant was outdated from the spec. +1\u0027d here and there.",
+      "parentUuid": "a8730794_4a23ef59",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e2337ea_0518b31f",
@@ -222,6 +312,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f51f2ab9_992d05a2",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-04T20:14:16Z",
+      "side": 1,
+      "message": "Nevermind. This code needs to stay since I\u0027m using sortedBindings.size() now.",
+      "parentUuid": "2bf17336_a0e4ebae",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2aa31032_f668dfd8",
@@ -262,6 +370,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2c10f02_b1ad507c",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-04T20:14:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2658289e_a6ff46af",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72d93164_520dab35",
@@ -296,6 +422,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0223b018_a845e10d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-04T20:14:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e73c063_3b317907",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "987fac96_7a90a5bb",
@@ -313,6 +457,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10975f9c_b885d7bc",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-04T20:14:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "987fac96_7a90a5bb",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df3ed37f_75443adc",
@@ -326,6 +488,24 @@
       "writtenOn": "2022-02-04T09:24:43Z",
       "side": 1,
       "message": "This seems to be the same code on all backends. Can it be moved to the frontend? That\u0027s where the transform is for the BGL as well so I think it could work.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03b82b1c_258aeb22",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-04T20:14:16Z",
+      "side": 1,
+      "message": "Still to do. I think this is doable, but it gets a little tricky when done alongside the BindingRemapper transform. I think I can make this common code for D3D,GL,and Metal in this CL - but will defer the Vk change for a follow up.",
+      "parentUuid": "df3ed37f_75443adc",
       "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -382,6 +562,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13477363_6e9c9c7d",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-04T20:14:16Z",
+      "side": 1,
+      "message": "Done, but also planning to replace this block with something in ShaderModuleBase.",
+      "parentUuid": "6a19d1da_262ffbe9",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83ca6db7_73f9ea77",
@@ -395,6 +593,24 @@
       "writtenOn": "2022-02-03T18:49:14Z",
       "side": 1,
       "message": "I see symbol collisions on ImportExternalTexture Compute CTS tests on MacOS. Still trying to figure it out.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd2d606c_7e963764",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 22
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-04T20:14:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83ca6db7_73f9ea77",
       "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
