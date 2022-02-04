@@ -51,6 +51,24 @@
       "parentUuid": "d8c27e28_5c06bf6d",
       "revId": "67f02d4787915c30d17e357ee590296b17d41a6a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dd2ac46_8e51c15a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-04T17:30:07Z",
+      "side": 1,
+      "message": "Maybe the selector is bad???\ntaking inspiration from the cpp headers..\n\nhttps://github.com/bkaradzic/metal-cpp/blob/0c40582f703eadfe507c8a147f3d2e7b9aca8d5c/Foundation/NSObject.hpp#L234\n\nMaybe we can directly get the @(counterSets) selector,\ncheck repondsToSelector and methodSignatureForSelector\nhttps://developer.apple.com/documentation/objectivec/1418956-nsobject/1418583-respondstoselector\nhttps://developer.apple.com/documentation/objectivec/nsobject/1571960-methodsignatureforselector\n\nbefore manually calling objc_msgSend ????\n\nI can\u0027t understand why we would have to do this though.......\nunless the docs page about where counterSets is available is a lie",
+      "parentUuid": "5bf91a31_3ec98b84",
+      "revId": "67f02d4787915c30d17e357ee590296b17d41a6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
