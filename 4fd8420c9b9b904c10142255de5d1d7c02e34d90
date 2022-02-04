@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccb5a515_c94bc458",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:32:26Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4fd8420c9b9b904c10142255de5d1d7c02e34d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab1552ae_df963152",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1505,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:32:26Z",
+      "side": 1,
+      "message": "nit: I think passing an undefined power preference is valid. Because it means \"I don\u0027t care, give me an adapter\".",
+      "range": {
+        "startLine": 1505,
+        "startChar": 67,
+        "endLine": 1505,
+        "endChar": 83
+      },
+      "revId": "4fd8420c9b9b904c10142255de5d1d7c02e34d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
