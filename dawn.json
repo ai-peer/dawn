@@ -1502,7 +1502,7 @@
     "power preference": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "undefined"},
+            {"value": 0, "name": "undefined", "jsrepr": "undefined", "valid": false},
             {"value": 1, "name": "low power"},
             {"value": 2, "name": "high performance"}
         ]
@@ -2070,7 +2070,7 @@
     "primitive depth clip control": {
         "category": "structure",
         "chained": "in",
-        "tags": ["upstream"],
+        "tags": ["upstream", "emscripten"],
         "members": [
             {"name": "unclipped depth", "type": "bool", "default": "false"}
         ]
@@ -2362,7 +2362,7 @@
             {"value": 4, "name": "surface descriptor from canvas HTML selector"},
             {"value": 5, "name": "shader module SPIRV descriptor"},
             {"value": 6, "name": "shader module WGSL descriptor"},
-            {"value": 7, "name": "primitive depth clip control", "tags": ["upstream"]},
+            {"value": 7, "name": "primitive depth clip control", "tags": ["upstream", "emscripten"]},
             {"value": 8, "name": "surface descriptor from windows core window", "tags": ["dawn"]},
             {"value": 9, "name": "external texture binding entry", "tags": ["dawn"]},
             {"value": 10, "name": "external texture binding layout", "tags": ["dawn"]},
