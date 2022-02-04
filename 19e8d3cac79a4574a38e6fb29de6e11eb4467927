@@ -297,6 +297,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3253a31_05e758a0",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-04T20:21:10Z",
+      "side": 1,
+      "message": "Not sure what you mean. All operations for plane0 are done in the preceding lines. We don\u0027t need to add plane0 into BindingNumberSet because we reuse the binding location of the old ExternalTexture binding.",
+      "parentUuid": "648e056b_9867157d",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2bf17336_a0e4ebae",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 22
