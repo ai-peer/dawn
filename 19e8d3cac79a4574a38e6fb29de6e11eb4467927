@@ -20,6 +20,193 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ecae4c6d_adaec4b8",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "nit: this will only be used in the BGL so we can put it in there?",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9231519e_01ebc6f6",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "Maybe we could precompute this in the layout and have \"GetUnexpandedBindingCount\"? (in the spirit of reducing the amount of work done in the hot path)",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dc56c11_dd2aefff",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "ditto a TODO to reoptimize I guess.\n\nWe can use a \"continue\" in the if to dedent the rest.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98aae357_7cf00e4e",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "Can we have a comment explaining that external texture is special cased because the BGL contains already transformed data?",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "525f09f9_20aed985",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "477d90a4_548cf89a",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "nit: Maybe add a comment that explains what\u0027s happening here.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53ebabfd_40eb1463",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "BindGroups are fairly hot code. Would it be possible to put the external textures in BindGroupLayoutBase::BindingDataPointers::bindings? To know what range they are in, we can ask the layout. They would be after all the \"actual\" bindings.\n\nMaybe we can just have a TODO to reoptimize since it might be tricky and delay this CL.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2710c9f_9daa7f51",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "Maybe hide that in a helper function?",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8730794_4a23ef59",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we add 2 since we have two planes that we add?",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e2337ea_0518b31f",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "nit: .count() !\u003d 0, but also we could create valid unused binding numbers easily with https://dawn-review.googlesource.com/c/dawn/+/79260 by adding offsets that are multiples of kMaxBindingNumber. This way we can fold the two loops into a single one.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "648e056b_9867157d",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "Where do we add plane 0?",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2bf17336_a0e4ebae",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 22
@@ -31,6 +218,29 @@
       "writtenOn": "2022-02-03T18:49:14Z",
       "side": 1,
       "message": "Change no longer necessary. Needs revert.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aa31032_f668dfd8",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "nit: we could have typedef for this.",
+      "range": {
+        "startLine": 96,
+        "startChar": 8,
+        "endLine": 96,
+        "endChar": 64
+      },
       "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +264,91 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "72d93164_520dab35",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "That\u0027s also another reason why I think we can separate the frontend and backend data in the layout. But could just be a TODO for now.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e73c063_3b317907",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "987fac96_7a90a5bb",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "nit: can you reflow this string?",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df3ed37f_75443adc",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "This seems to be the same code on all backends. Can it be moved to the frontend? That\u0027s where the transform is for the BGL as well so I think it could work.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58640e91_b5ac12af",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "nit: we can use for (const auto\u0026 expansions : bgl-\u003eGetExternalTextureBindingExpansions()) {stuff} This takes care both of the iteration and of doing nothing when expansions is empty.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e95c0b7b_1b8aed80",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 22
@@ -65,6 +360,24 @@
       "writtenOn": "2022-02-03T18:49:14Z",
       "side": 1,
       "message": "RunTransforms should be invoked once, not in the loop.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a19d1da_262ffbe9",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T09:24:43Z",
+      "side": 1,
+      "message": "Also I think the transform can be added only once, just the binding map that needs to be filled in the loop.",
+      "parentUuid": "e95c0b7b_1b8aed80",
       "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
