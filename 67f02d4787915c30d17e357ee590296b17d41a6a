@@ -33,6 +33,24 @@
       "message": "LGTM, but we had https://dawn-review.googlesource.com/c/dawn/+/69340 previously :-/",
       "revId": "67f02d4787915c30d17e357ee590296b17d41a6a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bf91a31_3ec98b84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-04T17:04:13Z",
+      "side": 1,
+      "message": "Ah uh, what else is there to do? \u003e_\u003e",
+      "parentUuid": "d8c27e28_5c06bf6d",
+      "revId": "67f02d4787915c30d17e357ee590296b17d41a6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
