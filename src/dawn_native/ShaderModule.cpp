@@ -684,11 +684,11 @@ namespace dawn::native {
                 if (metadata->stage == SingleShaderStage::Vertex) {
                     for (const auto& inputVar : entryPoint.input_variables) {
                         DAWN_INVALID_IF(
-                            !inputVar.has_location_decoration,
-                            "Vertex input variable \"%s\" doesn't have a location decoration.",
+                            !inputVar.has_location_attribute,
+                            "Vertex input variable \"%s\" doesn't have a location attribute.",
                             inputVar.name);
 
-                        uint32_t unsanitizedLocation = inputVar.location_decoration;
+                        uint32_t unsanitizedLocation = inputVar.location_attribute;
                         DAWN_INVALID_IF(unsanitizedLocation >= kMaxVertexAttributes,
                                         "Vertex input variable \"%s\" has a location (%u) that "
                                         "exceeds the maximum (%u)",
@@ -706,11 +706,11 @@ namespace dawn::native {
                     uint32_t totalInterStageShaderComponents = 4;
                     for (const auto& outputVar : entryPoint.output_variables) {
                         DAWN_INVALID_IF(
-                            !outputVar.has_location_decoration,
-                            "Vertex ouput variable \"%s\" doesn't have a location decoration.",
+                            !outputVar.has_location_attribute,
+                            "Vertex ouput variable \"%s\" doesn't have a location attribute.",
                             outputVar.name);
 
-                        uint32_t location = outputVar.location_decoration;
+                        uint32_t location = outputVar.location_attribute;
                         DAWN_INVALID_IF(location > kMaxInterStageShaderLocation,
                                         "Vertex output variable \"%s\" has a location (%u) that "
                                         "exceeds the maximum (%u).",
@@ -745,11 +745,11 @@ namespace dawn::native {
                     uint32_t totalInterStageShaderComponents = 0;
                     for (const auto& inputVar : entryPoint.input_variables) {
                         DAWN_INVALID_IF(
-                            !inputVar.has_location_decoration,
-                            "Fragment input variable \"%s\" doesn't have a location decoration.",
+                            !inputVar.has_location_attribute,
+                            "Fragment input variable \"%s\" doesn't have a location attribute.",
                             inputVar.name);
 
-                        uint32_t location = inputVar.location_decoration;
+                        uint32_t location = inputVar.location_attribute;
                         DAWN_INVALID_IF(location > kMaxInterStageShaderLocation,
                                         "Fragment input variable \"%s\" has a location (%u) that "
                                         "exceeds the maximum (%u).",
@@ -794,11 +794,11 @@ namespace dawn::native {
 
                     for (const auto& outputVar : entryPoint.output_variables) {
                         DAWN_INVALID_IF(
-                            !outputVar.has_location_decoration,
-                            "Fragment input variable \"%s\" doesn't have a location decoration.",
+                            !outputVar.has_location_attribute,
+                            "Fragment input variable \"%s\" doesn't have a location attribute.",
                             outputVar.name);
 
-                        uint32_t unsanitizedAttachment = outputVar.location_decoration;
+                        uint32_t unsanitizedAttachment = outputVar.location_attribute;
                         DAWN_INVALID_IF(unsanitizedAttachment >= kMaxColorAttachments,
                                         "Fragment output variable \"%s\" has a location (%u) that "
                                         "exceeds the maximum (%u).",
@@ -825,7 +825,7 @@ namespace dawn::native {
                 for (const tint::inspector::ResourceBinding& resource :
                      inspector.GetResourceBindings(entryPoint.name)) {
                     DAWN_INVALID_IF(resource.bind_group >= kMaxBindGroups,
-                                    "The entry-point uses a binding with a group decoration (%u) "
+                                    "The entry-point uses a binding with a group attribute (%u) "
                                     "that exceeds the maximum (%u).",
                                     resource.bind_group, kMaxBindGroups);
 
@@ -899,13 +899,13 @@ namespace dawn::native {
                     }
                 }
 
-                std::vector<tint::inspector::SamplerTexturePair> samplerTextureUses =
+                std::vector<tint::sem::SamplerTexturePair> samplerTextureUses =
                     inspector.GetSamplerTextureUses(entryPoint.name);
                 metadata->samplerTexturePairs.reserve(samplerTextureUses.size());
                 std::transform(
                     samplerTextureUses.begin(), samplerTextureUses.end(),
                     std::back_inserter(metadata->samplerTexturePairs),
-                    [](const tint::inspector::SamplerTexturePair& pair) {
+                    [](const tint::sem::SamplerTexturePair& pair) {
                         EntryPointMetadata::SamplerTexturePair result;
                         result.sampler = {BindGroupIndex(pair.sampler_binding_point.group),
                                           BindingNumber(pair.sampler_binding_point.binding)};
