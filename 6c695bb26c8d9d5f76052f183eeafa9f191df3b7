@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6199cca0_cf0aba5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-02-04T02:17:09Z",
+      "side": 1,
+      "message": "This CL addresses comments at:\nhttps://github.com/emscripten-core/emscripten/pull/16078#discussion_r792286784\nhttps://github.com/emscripten-core/emscripten/pull/16078#discussion_r792290345\n\nFor the second issue (remove \"upstream\" tagged content from emscripten-bits gen)\nThe only thing I added an \"emscripten\" tag is\n- primitive depth clip control\n\nThe others are not found in webgpu spec:\n- pipeline statistics query\n- instance process events\n- surface get preferred format\n\nThis one is in spec but is an unimplemented new feature (we need to add emscripten tag after it\u0027s done)\n- timestamp location, writes of compute/render pass\n\nPlease let me know if anything is wrong here, and if there\u0027s other projects rely on any of these \"upstream\" tagged content generated for emscripten\n\n",
+      "revId": "6c695bb26c8d9d5f76052f183eeafa9f191df3b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
