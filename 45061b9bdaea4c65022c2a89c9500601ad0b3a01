@@ -16,6 +16,23 @@
       "message": "Lots of files touched but 99% of it is search and replace. Mostly pay attention to the GPU*PassEncoder files, dawn.json, and DeprecatedAPITest",
       "revId": "45061b9bdaea4c65022c2a89c9500601ad0b3a01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41cdef93_d6fedc36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-05T02:36:05Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "45061b9bdaea4c65022c2a89c9500601ad0b3a01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
