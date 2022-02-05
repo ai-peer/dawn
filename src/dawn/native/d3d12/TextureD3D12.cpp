@@ -516,13 +516,17 @@ namespace dawn::native::d3d12 {
         Device* device,
         const TextureDescriptor* descriptor,
         ComPtr<ID3D12Resource> d3d12Texture,
+        ComPtr<ID3D12Fence> d3d12Fence,
         Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
+        uint64_t fenceWaitValue,
+        uint64_t fenceSignalValue,
         bool isSwapChainTexture,
         bool isInitialized) {
         Ref<Texture> dawnTexture =
             AcquireRef(new Texture(device, descriptor, TextureState::OwnedExternal));
         DAWN_TRY(dawnTexture->InitializeAsExternalTexture(
-            descriptor, std::move(d3d12Texture), std::move(d3d11on12Resource), isSwapChainTexture));
+            std::move(d3d12Texture), std::move(d3d12Fence), std::move(d3d11on12Resource),
+            fenceWaitValue, fenceSignalValue, isSwapChainTexture));
 
         // Importing a multi-planar format must be initialized. This is required because
         // a shared multi-planar format cannot be initialized by Dawn.
@@ -547,13 +551,12 @@ namespace dawn::native::d3d12 {
     }
 
     MaybeError Texture::InitializeAsExternalTexture(
-        const TextureDescriptor* descriptor,
         ComPtr<ID3D12Resource> d3d12Texture,
+        ComPtr<ID3D12Fence> d3d12Fence,
         Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
+        uint64_t fenceWaitValue,
+        uint64_t fenceSignalValue,
         bool isSwapChainTexture) {
-        mD3D11on12Resource = std::move(d3d11on12Resource);
-        mSwapChainTexture = isSwapChainTexture;
-
         D3D12_RESOURCE_DESC desc = d3d12Texture->GetDesc();
         mD3D12ResourceFlags = desc.Flags;
 
@@ -564,9 +567,26 @@ namespace dawn::native::d3d12 {
         // memory management.
         mResourceAllocation = {info, 0, std::move(d3d12Texture), nullptr};
 
+        mD3D12Fence = std::move(d3d12Fence);
+        mD3D11on12Resource = std::move(d3d11on12Resource);
+        mFenceWaitValue = fenceWaitValue;
+        mFenceSignalValue = fenceSignalValue;
+        mSwapChainTexture = isSwapChainTexture;
+
         SetLabelHelper("Dawn_ExternalTexture");
 
+        if (mD3D11on12Resource != nullptr) {
+            DAWN_TRY(mD3D11on12Resource->AcquireKeyedMutex());
+        } else {
+            DAWN_TRY(CheckHRESULT(
+                ToBackend(GetDevice())->GetCommandQueue()->Wait(mD3D12Fence.Get(), mFenceWaitValue),
+                "D3D12 fence wait"));
+        }
         return {};
+    }
+
+    bool Texture::IsExternalTexture() const {
+        return mResourceAllocation.GetInfo().mMethod == AllocationMethod::kExternal;
     }
 
     MaybeError Texture::InitializeAsInternalTexture() {
@@ -667,6 +687,12 @@ namespace dawn::native::d3d12 {
         // We can set mSwapChainTexture to false to avoid passing a nullptr to
         // ID3D12SharingContract::Present.
         mSwapChainTexture = false;
+
+        if (mD3D11on12Resource != nullptr) {
+            mD3D11on12Resource->ReleaseKeyedMutex();
+        } else if (mFenceSignalValue != 0) {
+            device->GetCommandQueue()->Signal(mD3D12Fence.Get(), mFenceSignalValue);
+        }
     }
 
     DXGI_FORMAT Texture::GetD3D12Format() const {
@@ -696,16 +722,6 @@ namespace dawn::native::d3d12 {
                 ASSERT(HasOneBit(GetFormat().aspects));
                 return GetD3D12Format();
         }
-    }
-
-    MaybeError Texture::AcquireKeyedMutex() {
-        ASSERT(mD3D11on12Resource != nullptr);
-        return mD3D11on12Resource->AcquireKeyedMutex();
-    }
-
-    void Texture::ReleaseKeyedMutex() {
-        ASSERT(mD3D11on12Resource != nullptr);
-        mD3D11on12Resource->ReleaseKeyedMutex();
     }
 
     void Texture::TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
@@ -846,7 +862,7 @@ namespace dawn::native::d3d12 {
         // Textures with keyed mutexes can be written from other graphics queues. Hence, they
         // must be acquired before command list submission to ensure work from the other queues
         // has finished. See Device::ExecuteCommandContext.
-        if (mD3D11on12Resource != nullptr) {
+        if (IsExternalTexture()) {
             commandContext->AddToSharedTextureList(this);
         }
     }
