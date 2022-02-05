@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f187fff_d7afd32c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-02-05T00:11:49Z",
+      "side": 1,
+      "message": "Having a question about generator dawn.json and template\nHow can we have different define values for the same variable?\nI\u0027m thinking about having \n\"whole map size\" being 0xffffffff for emscripten gen\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/dawn.json;l\u003d2674?q\u003ddawn.json%20f:dawn\n\n(PS: The other \"whole size\" is also a 64bit max which cannot be represented in js.)\n",
+      "revId": "0889700f6ed4cb0a63e02d50150e2176e2f7d5fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
