@@ -44,7 +44,11 @@ namespace dawn::native::d3d12 {
             Device* device,
             const TextureDescriptor* descriptor,
             ComPtr<ID3D12Resource> d3d12Texture,
+            ComPtr<ID3D12Fence> d3d12Fence,
             Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
+            uint64_t textureArrayIndex,
+            uint64_t fenceWaitValue,
+            uint64_t fenceSignalValue,
             bool isSwapChainTexture,
             bool isInitialized);
         static ResultOrError<Ref<Texture>> Create(Device* device,
@@ -54,6 +58,7 @@ namespace dawn::native::d3d12 {
         DXGI_FORMAT GetD3D12Format() const;
         ID3D12Resource* GetD3D12Resource() const;
         DXGI_FORMAT GetD3D12CopyableSubresourceFormat(Aspect aspect) const;
+        int GetTextureArrayIndex() const;
 
         D3D12_RENDER_TARGET_VIEW_DESC GetRTVDescriptor(uint32_t mipLevel,
                                                        uint32_t baseSlice,
@@ -67,9 +72,6 @@ namespace dawn::native::d3d12 {
 
         void EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
                                                  const SubresourceRange& range);
-
-        MaybeError AcquireKeyedMutex();
-        void ReleaseKeyedMutex();
 
         void TrackUsageAndGetResourceBarrierForPass(CommandRecordingContext* commandContext,
                                                     std::vector<D3D12_RESOURCE_BARRIER>* barrier,
@@ -95,11 +97,16 @@ namespace dawn::native::d3d12 {
         using TextureBase::TextureBase;
 
         MaybeError InitializeAsInternalTexture();
-        MaybeError InitializeAsExternalTexture(const TextureDescriptor* descriptor,
-                                               ComPtr<ID3D12Resource> d3d12Texture,
+        MaybeError InitializeAsExternalTexture(ComPtr<ID3D12Resource> d3d12Texture,
+                                               ComPtr<ID3D12Fence> d3d12Fence,
                                                Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
+                                               uint64_t textureArrayIndex,
+                                               uint64_t fenceWaitValue,
+                                               uint64_t fenceSignalValue,
                                                bool isSwapChainTexture);
         MaybeError InitializeAsSwapChainTexture(ComPtr<ID3D12Resource> d3d12Texture);
+
+        bool IsExternalTexture() const;
 
         void SetLabelHelper(const char* prefix);
 
@@ -130,13 +137,17 @@ namespace dawn::native::d3d12 {
                                         ExecutionSerial pendingCommandSerial) const;
         void HandleTransitionSpecialCases(CommandRecordingContext* commandContext);
 
-        SubresourceStorage<StateAndDecay> mSubresourceStateAndDecay;
-
-        ResourceHeapAllocation mResourceAllocation;
-        bool mSwapChainTexture = false;
         D3D12_RESOURCE_FLAGS mD3D12ResourceFlags;
+        ResourceHeapAllocation mResourceAllocation;
 
+        ComPtr<ID3D12Fence> mD3D12Fence;
         Ref<D3D11on12ResourceCacheEntry> mD3D11on12Resource;
+        int mTextureArrayIndex = -1;
+        uint64_t mFenceWaitValue = 0;
+        uint64_t mFenceSignalValue = 0;
+        bool mSwapChainTexture = false;
+
+        SubresourceStorage<StateAndDecay> mSubresourceStateAndDecay;
     };
 
     class TextureView final : public TextureViewBase {

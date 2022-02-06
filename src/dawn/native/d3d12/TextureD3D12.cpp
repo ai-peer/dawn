@@ -439,8 +439,8 @@ namespace dawn::native::d3d12 {
         DAWN_INVALID_IF(descriptor->mipLevelCount != 1, "Mip level count (%u) is not 1.",
                         descriptor->mipLevelCount);
 
-        DAWN_INVALID_IF(descriptor->size.depthOrArrayLayers != 1,
-                        "Array layer count (%u) is not 1.", descriptor->size.depthOrArrayLayers);
+        // DAWN_INVALID_IF(descriptor->size.depthOrArrayLayers != 1,
+        //                 "Array layer count (%u) is not 1.", descriptor->size.depthOrArrayLayers);
 
         DAWN_INVALID_IF(descriptor->sampleCount != 1, "Sample count (%u) is not 1.",
                         descriptor->sampleCount);
@@ -454,11 +454,12 @@ namespace dawn::native::d3d12 {
         DAWN_INVALID_IF(
             (dawnDescriptor->size.width != d3dDescriptor.Width) ||
                 (dawnDescriptor->size.height != d3dDescriptor.Height) ||
-                (dawnDescriptor->size.depthOrArrayLayers != 1),
-            "D3D12 texture size (Width: %u, Height: %u, DepthOrArraySize: 1) doesn't match Dawn "
+                (dawnDescriptor->size.depthOrArrayLayers != d3dDescriptor.DepthOrArraySize),
+            "D3D12 texture size (Width: %u, Height: %u, DepthOrArraySize: %u) doesn't match Dawn "
             "descriptor size (width: %u, height: %u, depthOrArrayLayers: %u).",
-            d3dDescriptor.Width, d3dDescriptor.Height, dawnDescriptor->size.width,
-            dawnDescriptor->size.height, dawnDescriptor->size.depthOrArrayLayers);
+            d3dDescriptor.Width, d3dDescriptor.Height, d3dDescriptor.DepthOrArraySize,
+            dawnDescriptor->size.width, dawnDescriptor->size.height,
+            dawnDescriptor->size.depthOrArrayLayers);
 
         const DXGI_FORMAT dxgiFormatFromDescriptor = D3D12TextureFormat(dawnDescriptor->format);
         DAWN_INVALID_IF(
@@ -470,8 +471,9 @@ namespace dawn::native::d3d12 {
                         "D3D12 texture number of miplevels (%u) is not 1.",
                         d3dDescriptor.MipLevels);
 
-        DAWN_INVALID_IF(d3dDescriptor.DepthOrArraySize != 1,
-                        "D3D12 texture array size (%u) is not 1.", d3dDescriptor.DepthOrArraySize);
+        // DAWN_INVALID_IF(d3dDescriptor.DepthOrArraySize != 1,
+        //                 "D3D12 texture array size (%u) is not 1.",
+        //                 d3dDescriptor.DepthOrArraySize);
 
         // Shared textures cannot be multi-sample so no need to check those.
         ASSERT(d3dDescriptor.SampleDesc.Count == 1);
@@ -516,13 +518,18 @@ namespace dawn::native::d3d12 {
         Device* device,
         const TextureDescriptor* descriptor,
         ComPtr<ID3D12Resource> d3d12Texture,
+        ComPtr<ID3D12Fence> d3d12Fence,
         Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
+        uint64_t textureArrayIndex,
+        uint64_t fenceWaitValue,
+        uint64_t fenceSignalValue,
         bool isSwapChainTexture,
         bool isInitialized) {
         Ref<Texture> dawnTexture =
             AcquireRef(new Texture(device, descriptor, TextureState::OwnedExternal));
         DAWN_TRY(dawnTexture->InitializeAsExternalTexture(
-            descriptor, std::move(d3d12Texture), std::move(d3d11on12Resource), isSwapChainTexture));
+            std::move(d3d12Texture), std::move(d3d12Fence), std::move(d3d11on12Resource),
+            textureArrayIndex, fenceWaitValue, fenceSignalValue, isSwapChainTexture));
 
         // Importing a multi-planar format must be initialized. This is required because
         // a shared multi-planar format cannot be initialized by Dawn.
@@ -547,13 +554,13 @@ namespace dawn::native::d3d12 {
     }
 
     MaybeError Texture::InitializeAsExternalTexture(
-        const TextureDescriptor* descriptor,
         ComPtr<ID3D12Resource> d3d12Texture,
+        ComPtr<ID3D12Fence> d3d12Fence,
         Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
+        uint64_t textureArrayIndex,
+        uint64_t fenceWaitValue,
+        uint64_t fenceSignalValue,
         bool isSwapChainTexture) {
-        mD3D11on12Resource = std::move(d3d11on12Resource);
-        mSwapChainTexture = isSwapChainTexture;
-
         D3D12_RESOURCE_DESC desc = d3d12Texture->GetDesc();
         mD3D12ResourceFlags = desc.Flags;
 
@@ -564,9 +571,27 @@ namespace dawn::native::d3d12 {
         // memory management.
         mResourceAllocation = {info, 0, std::move(d3d12Texture), nullptr};
 
+        mD3D12Fence = std::move(d3d12Fence);
+        mD3D11on12Resource = std::move(d3d11on12Resource);
+        mTextureArrayIndex = textureArrayIndex;
+        mFenceWaitValue = fenceWaitValue;
+        mFenceSignalValue = fenceSignalValue;
+        mSwapChainTexture = isSwapChainTexture;
+
         SetLabelHelper("Dawn_ExternalTexture");
 
+        if (mD3D11on12Resource != nullptr) {
+            DAWN_TRY(mD3D11on12Resource->AcquireKeyedMutex());
+        } else {
+            DAWN_TRY(CheckHRESULT(
+                ToBackend(GetDevice())->GetCommandQueue()->Wait(mD3D12Fence.Get(), mFenceWaitValue),
+                "D3D12 fence wait"));
+        }
         return {};
+    }
+
+    bool Texture::IsExternalTexture() const {
+        return mResourceAllocation.GetInfo().mMethod == AllocationMethod::kExternal;
     }
 
     MaybeError Texture::InitializeAsInternalTexture() {
@@ -667,6 +692,12 @@ namespace dawn::native::d3d12 {
         // We can set mSwapChainTexture to false to avoid passing a nullptr to
         // ID3D12SharingContract::Present.
         mSwapChainTexture = false;
+
+        if (mD3D11on12Resource != nullptr) {
+            mD3D11on12Resource->ReleaseKeyedMutex();
+        } else if (mFenceSignalValue != 0) {
+            device->GetCommandQueue()->Signal(mD3D12Fence.Get(), mFenceSignalValue);
+        }
     }
 
     DXGI_FORMAT Texture::GetD3D12Format() const {
@@ -698,14 +729,8 @@ namespace dawn::native::d3d12 {
         }
     }
 
-    MaybeError Texture::AcquireKeyedMutex() {
-        ASSERT(mD3D11on12Resource != nullptr);
-        return mD3D11on12Resource->AcquireKeyedMutex();
-    }
-
-    void Texture::ReleaseKeyedMutex() {
-        ASSERT(mD3D11on12Resource != nullptr);
-        mD3D11on12Resource->ReleaseKeyedMutex();
+    int Texture::GetTextureArrayIndex() const {
+        return mTextureArrayIndex;
     }
 
     void Texture::TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
@@ -846,7 +871,7 @@ namespace dawn::native::d3d12 {
         // Textures with keyed mutexes can be written from other graphics queues. Hence, they
         // must be acquired before command list submission to ensure work from the other queues
         // has finished. See Device::ExecuteCommandContext.
-        if (mD3D11on12Resource != nullptr) {
+        if (IsExternalTexture()) {
             commandContext->AddToSharedTextureList(this);
         }
     }
@@ -1287,16 +1312,24 @@ namespace dawn::native::d3d12 {
                     break;
 
                 case wgpu::TextureViewDimension::e2D:
-                case wgpu::TextureViewDimension::e2DArray:
+                case wgpu::TextureViewDimension::e2DArray: {
                     ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
                     mSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2DARRAY;
-                    mSrvDesc.Texture2DArray.ArraySize = descriptor->arrayLayerCount;
-                    mSrvDesc.Texture2DArray.FirstArraySlice = descriptor->baseArrayLayer;
+                    int overrideTextureArrayIndex = ToBackend(texture)->GetTextureArrayIndex();
+                    if (overrideTextureArrayIndex >= 0) {
+                        mSrvDesc.Texture2DArray.ArraySize = 1;
+                        mSrvDesc.Texture2DArray.FirstArraySlice =
+                            static_cast<UINT>(overrideTextureArrayIndex);
+                    } else {
+                        mSrvDesc.Texture2DArray.ArraySize = descriptor->arrayLayerCount;
+                        mSrvDesc.Texture2DArray.FirstArraySlice = descriptor->baseArrayLayer;
+                    }
                     mSrvDesc.Texture2DArray.MipLevels = descriptor->mipLevelCount;
                     mSrvDesc.Texture2DArray.MostDetailedMip = descriptor->baseMipLevel;
                     mSrvDesc.Texture2DArray.PlaneSlice = planeSlice;
                     mSrvDesc.Texture2DArray.ResourceMinLODClamp = 0;
                     break;
+                }
                 case wgpu::TextureViewDimension::Cube:
                 case wgpu::TextureViewDimension::CubeArray:
                     ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
