@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4826c13_7bdc39cc",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-07T21:45:02Z",
+      "side": 1,
+      "message": "ValidateSingleSType is called inside ValidateExternalTextureBinding",
+      "parentUuid": "5a7cbc9a_44ce14d5",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7882227d_7462f89d",
         "filename": "src/dawn/native/BindGroup.cpp",
         "patchSetId": 24
@@ -121,6 +139,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "593c2713_dcdc51b6",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-07T21:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de33087b_830e1b9d",
+      "range": {
+        "startLine": 179,
+        "startChar": 35,
+        "endLine": 179,
+        "endChar": 48
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07587dd2_9c618748",
@@ -155,6 +197,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa546419_dd241602",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-07T21:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90e046b3_04ab5673",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eda9faef_dba71644",
@@ -172,6 +232,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87afbb6d_36b877b1",
+        "filename": "src/dawn/native/BindGroupLayout.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-07T21:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eda9faef_dba71644",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a016da0_3a39227b",
@@ -185,6 +263,30 @@
       "writtenOn": "2022-02-07T17:03:00Z",
       "side": 1,
       "message": "nit: return raw BufferBase*\nthe caller can add a ref if they want to",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 23
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55df38aa_d22c2e52",
+        "filename": "src/dawn/native/ExternalTexture.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-07T21:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a016da0_3a39227b",
       "range": {
         "startLine": 46,
         "startChar": 8,
@@ -269,6 +371,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6e975d3_58ec572d",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 1290,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-07T21:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9a503e9_4d4efc43",
+      "range": {
+        "startLine": 1290,
+        "startChar": 0,
+        "endLine": 1290,
+        "endChar": 55
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cf8ed73_8cca3f86",
@@ -292,6 +418,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3b8fe01_fc3a1114",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-07T21:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cf8ed73_8cca3f86",
+      "range": {
+        "startLine": 287,
+        "startChar": 41,
+        "endLine": 288,
+        "endChar": 82
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14acf698_ef2c466f",
@@ -305,6 +455,24 @@
       "writtenOn": "2022-02-07T12:30:32Z",
       "side": 1,
       "message": "u-nit: very slight preference for splitting this block in two so the RunTransforms is done in a single place. program and programAsValue can be simplified a bit too I think.\n\n if (vertex) {\n   Add another transform\n }\n \n RunTransforms\n \n if (vertex) {\n   get back transform data\n }",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2874b8d9_7afff794",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-07T21:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14acf698_ef2c466f",
       "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -362,6 +530,30 @@
       "writtenOn": "2022-02-07T12:30:32Z",
       "side": 1,
       "message": "nit: since this is fixed-size it can be an array (or std::array)",
+      "range": {
+        "startLine": 194,
+        "startChar": 4,
+        "endLine": 194,
+        "endChar": 39
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "765bc515_80c56eda",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-07T21:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80a035dd_9ff7bb00",
       "range": {
         "startLine": 194,
         "startChar": 4,
