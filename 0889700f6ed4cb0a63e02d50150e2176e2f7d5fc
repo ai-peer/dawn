@@ -16,6 +16,24 @@
       "message": "Having a question about generator dawn.json and template\nHow can we have different define values for the same variable?\nI\u0027m thinking about having \n\"whole map size\" being 0xffffffff for emscripten gen\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/dawn.json;l\u003d2674?q\u003ddawn.json%20f:dawn\n\n(PS: The other \"whole size\" is also a 64bit max which cannot be represented in js.)\n",
       "revId": "0889700f6ed4cb0a63e02d50150e2176e2f7d5fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0daae6c8_e136ef73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-07T08:16:07Z",
+      "side": 1,
+      "message": "They cannot be represented in JS but the header should be the same ideally: the values passed in argument to getMappedRange and friends all take 64bit integers.\n\nWhat you could do is check for 0xFFFF\u0027FFFF manually both for the high and low words before converting to a Number.\n\nI don\u0027t think there\u0027s currently a way to have two different values for a define because the dawn.json parser expects a single entry in the \"types\" dictionnary for each name. If we need to do this, it will require a more extensive change of the dawn_json_generator.py.",
+      "parentUuid": "0f187fff_d7afd32c",
+      "revId": "0889700f6ed4cb0a63e02d50150e2176e2f7d5fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
