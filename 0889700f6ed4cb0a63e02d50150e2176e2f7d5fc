@@ -34,6 +34,24 @@
       "parentUuid": "0f187fff_d7afd32c",
       "revId": "0889700f6ed4cb0a63e02d50150e2176e2f7d5fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56fd4b7b_b62f3002",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-02-07T23:09:31Z",
+      "side": 1,
+      "message": "Since size_t and pointers are always 32-bit in WASM, 64 bits values are truncated anyway. We will check for equality with 32 uint max (0xFFFF\u0027FFFF) in emscripten library_webgpu.js. \nThis CL remains unchanged and should be good to go.\nThanks for the answers!",
+      "parentUuid": "0daae6c8_e136ef73",
+      "revId": "0889700f6ed4cb0a63e02d50150e2176e2f7d5fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
