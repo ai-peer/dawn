@@ -20,6 +20,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a7cbc9a_44ce14d5",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-07T17:03:00Z",
+      "side": 1,
+      "message": "should have ValidateSingleSType to check that chained struct either does not exist, or is ExternalTextureBindingEntry",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7882227d_7462f89d",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-07T17:03:00Z",
+      "side": 1,
+      "message": "Corentin recently landed the change to validate that the binding number is \u003c 2^16. Instead of searching for a hole, can we simply use large bindings numbers greater than the limit we expose to developers?",
+      "range": {
+        "startLine": 387,
+        "startChar": 44,
+        "endLine": 389,
+        "endChar": 36
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63121112_eba9df85",
         "filename": "src/dawn/native/BindGroup.cpp",
         "patchSetId": 24
@@ -31,6 +71,29 @@
       "writtenOn": "2022-02-07T12:30:32Z",
       "side": 1,
       "message": "u-nit: this conversion from BindingNumber to BindingIndex could be precomputed in the layout.\n\nThe transforms requiring either BindingNumber of BindingIndex make this a bit annoying though so feel free to postpone to when the Vulkan backend is handled.",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "251b0558_1df12e4b",
+        "filename": "src/dawn/native/BindGroup.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-07T17:03:00Z",
+      "side": 1,
+      "message": "I think this needs to be Ref\u003cExternalTextureBase\u003e. We store to it from the descriptor.\n\nwe should be able to make a test that creates the bind group, drops the ExternalTexture ref, and then does not induce a use-after-free crash",
+      "range": {
+        "startLine": 89,
+        "startChar": 20,
+        "endLine": 89,
+        "endChar": 41
+      },
       "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -111,6 +174,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a016da0_3a39227b",
+        "filename": "src/dawn/native/ExternalTexture.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-07T17:03:00Z",
+      "side": 1,
+      "message": "nit: return raw BufferBase*\nthe caller can add a ref if they want to",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 23
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef08955e_80d965d1",
         "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
         "patchSetId": 24
@@ -122,6 +208,63 @@
       "writtenOn": "2022-02-07T12:30:32Z",
       "side": 1,
       "message": "Since we stopped adding the views to internal textures, we need to ensure that ExternalTexture::ValidateCanUseInSubmit checks that the planes can be used in submits. Otherwise it is possible to create an ExternalTexture, destroy its plane, and still use it in a submit.\n\nAlso can we have some validation tests for that?",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5d5f764_937fbdd1",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-07T17:03:00Z",
+      "side": 1,
+      "message": "nit: add the TODO here as well. but I think we can still be slightly more descriptive and say that the binding type in the shader was external, but the layout was not\n\n// TODO(dawn:563): Provide info about the binding types.",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67ba6d08_d328090f",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-07T17:03:00Z",
+      "side": 1,
+      "message": "nit: I think we can be more descriptive here and say that the binding type in the layout was external, but the type in shader was not",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9a503e9_4d4efc43",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 1290,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-07T17:03:00Z",
+      "side": 1,
+      "message": "can this method be static?",
+      "range": {
+        "startLine": 1290,
+        "startChar": 0,
+        "endLine": 1290,
+        "endChar": 55
+      },
       "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -162,6 +305,23 @@
       "writtenOn": "2022-02-07T12:30:32Z",
       "side": 1,
       "message": "u-nit: very slight preference for splitting this block in two so the RunTransforms is done in a single place. program and programAsValue can be simplified a bit too I think.\n\n if (vertex) {\n   Add another transform\n }\n \n RunTransforms\n \n if (vertex) {\n   get back transform data\n }",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cae180fe_08bb40b8",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-07T17:03:00Z",
+      "side": 1,
+      "message": "this looks the same as calling AddExternalTextureTransform; is it different?",
       "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
