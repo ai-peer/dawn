@@ -55,7 +55,8 @@ if (NOT TARGET libtint)
     # TODO(crbug.com/tint/1217): Tint expects glslang for validation when
     # building the GLSL writer, but currently Dawn does not provide this
     # third_party dependency. Disable the GLSL writer for now.
-    set(TINT_BUILD_GLSL_WRITER OFF)
+    set(TINT_BUILD_GLSL_WRITER ON)
+    set(TINT_BUILD_SAMPLES OFF)
     # TODO(crbug.com/tint/455): Tint does not currently build with CMake when
     # BUILD_SHARED_LIBS=1, so always build it as static for now.
     set(BUILD_SHARED_LIBS_SAVED ${BUILD_SHARED_LIBS})
