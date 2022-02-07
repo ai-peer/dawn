@@ -1,0 +1,232 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc4cc451_7bcdf0d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-07T12:30:32Z",
+      "side": 1,
+      "message": "The direction is looking great. Happy to defer changes or add TODO for the larger things (folding the Vulkan backend transform, splitting BGL data into frontend / backend)",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63121112_eba9df85",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-07T12:30:32Z",
+      "side": 1,
+      "message": "u-nit: this conversion from BindingNumber to BindingIndex could be precomputed in the layout.\n\nThe transforms requiring either BindingNumber of BindingIndex make this a bit annoying though so feel free to postpone to when the Vulkan backend is handled.",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de33087b_830e1b9d",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-07T12:30:32Z",
+      "side": 1,
+      "message": "nit: we should use a pointers since we modify this.",
+      "range": {
+        "startLine": 179,
+        "startChar": 35,
+        "endLine": 179,
+        "endChar": 48
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07587dd2_9c618748",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-07T12:30:32Z",
+      "side": 1,
+      "message": "[1] Do we run into issues if we don\u0027t do this? The validation for the binding counts is done in ValidateBindGroupLayout prior to the BindGroupLayout constructor, so everything we do here is to help the frontend or backends allocate stuff (and we need to know what is the actual number of bindings, not what the spec mandates).",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90e046b3_04ab5673",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-07T12:30:32Z",
+      "side": 1,
+      "message": "nit: sortedBindings \u003d ExtractAndExpandBglEntries(...); ?",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eda9faef_dba71644",
+        "filename": "src/dawn/native/BindGroupLayout.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-07T12:30:32Z",
+      "side": 1,
+      "message": "nit: (sorry I used the name typedef), we can use C++ type aliases: using X \u003d Y;",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef08955e_80d965d1",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-07T12:30:32Z",
+      "side": 1,
+      "message": "Since we stopped adding the views to internal textures, we need to ensure that ExternalTexture::ValidateCanUseInSubmit checks that the planes can be used in submits. Otherwise it is possible to create an ExternalTexture, destroy its plane, and still use it in a submit.\n\nAlso can we have some validation tests for that?",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cf8ed73_8cca3f86",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-07T12:30:32Z",
+      "side": 1,
+      "message": "nit: since we modify these, we should take them as pointers so it is clear in the caller that they are modified.",
+      "range": {
+        "startLine": 287,
+        "startChar": 41,
+        "endLine": 288,
+        "endChar": 82
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14acf698_ef2c466f",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-07T12:30:32Z",
+      "side": 1,
+      "message": "u-nit: very slight preference for splitting this block in two so the RunTransforms is done in a single place. program and programAsValue can be simplified a bit too I think.\n\n if (vertex) {\n   Add another transform\n }\n \n RunTransforms\n \n if (vertex) {\n   get back transform data\n }",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3aef58f8_f5d853fa",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-07T12:30:32Z",
+      "side": 1,
+      "message": "nit: types can not be omitted!",
+      "range": {
+        "startLine": 155,
+        "startChar": 26,
+        "endLine": 155,
+        "endChar": 47
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80a035dd_9ff7bb00",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-07T12:30:32Z",
+      "side": 1,
+      "message": "nit: since this is fixed-size it can be an array (or std::array)",
+      "range": {
+        "startLine": 194,
+        "startChar": 4,
+        "endLine": 194,
+        "endChar": 39
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b116e915_8498c5bb",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-07T12:30:32Z",
+      "side": 1,
+      "message": "u-nit: you can use GetBindGroupLayout too.",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
