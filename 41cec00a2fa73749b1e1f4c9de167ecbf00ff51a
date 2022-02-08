@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a22f3722_314cf97f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-08T03:13:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "41cec00a2fa73749b1e1f4c9de167ecbf00ff51a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21e66bce_ae94d525",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-08T03:13:46Z",
+      "side": 1,
+      "message": "I might say \"provides\".\n\"includes\" makes it sound like it injects \"#include webgpu/webgpu.h\" for you, when in reality, it just provides them in system/include/webgpu/webgpu.h",
+      "range": {
+        "startLine": 29,
+        "startChar": 59,
+        "endLine": 29,
+        "endChar": 67
+      },
+      "revId": "41cec00a2fa73749b1e1f4c9de167ecbf00ff51a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ea48388_5ff7a506",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-08T03:13:46Z",
+      "side": 1,
+      "message": "nit: {{metadata.api}}",
+      "range": {
+        "startLine": 29,
+        "startChar": 87,
+        "endLine": 29,
+        "endChar": 93
+      },
+      "revId": "41cec00a2fa73749b1e1f4c9de167ecbf00ff51a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
