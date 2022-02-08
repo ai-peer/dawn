@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "74c28920_2e2c09ed",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-02-08T16:57:59Z",
+      "side": 1,
+      "message": "I think one reason that I put it here is when generating emscripten-bits version header to copy into emscripten, we don\u0027t want these warnings to be there.\nIn that case I think I will remove the {% if \u0027emscripten\u0027 not in enabled_tags %} branch and add some notes in emscripten to say this line needs removing when updating webgpu (otherwise it will emits error when building with emscripten)",
+      "parentUuid": "096f87f7_0c6c0df8",
+      "revId": "41cec00a2fa73749b1e1f4c9de167ecbf00ff51a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21e66bce_ae94d525",
         "filename": "generator/templates/api.h",
         "patchSetId": 2
