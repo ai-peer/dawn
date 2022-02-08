@@ -46,6 +46,30 @@
       },
       "revId": "1ed75bc4df033deb07d433e1dd43c233e775d894",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bdfb184_a3dd94c2",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-08T16:21:18Z",
+      "side": 1,
+      "message": "Jie - Yes, when you create an external texture with more than one plane a YUV-to-RGB conversion will occur inside the shader. This is being done by injecting code into any shader that has a texture_external binding.\n\nThe method of conversion shouldn\u0027t be relevant to the end user (i.e. you). Someone using an external texture should use the predefined colorspace option to specify the desired colorspace (which only has one option right now: sRGB). \n\nTo answer your question - underneath all of this we are converting YUV to RGB using BT.709 because it uses chromaticity coordinates identical to sRGB. At this time, resolution information like SDR or HDR is not being considered.",
+      "parentUuid": "ced35f22_f3f7e67e",
+      "range": {
+        "startLine": 173,
+        "startChar": 19,
+        "endLine": 173,
+        "endChar": 80
+      },
+      "revId": "1ed75bc4df033deb07d433e1dd43c233e775d894",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
