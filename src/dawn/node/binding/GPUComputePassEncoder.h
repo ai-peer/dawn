@@ -43,7 +43,7 @@ namespace wgpu::binding {
         void dispatchIndirect(Napi::Env,
                               interop::Interface<interop::GPUBuffer> indirectBuffer,
                               interop::GPUSize64 indirectOffset) override;
-        void end(Napi::Env) override;
+        void end(Napi::Env);
         void endPass(Napi::Env) override;  // TODO(dawn:1286): Remove after deprecation period.
         void setBindGroup(Napi::Env,
                           interop::GPUIndex32 index,
