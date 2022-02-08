@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "096f87f7_0c6c0df8",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-08T10:12:50Z",
+      "side": 1,
+      "message": "I don\u0027t think we should have this in the upstream webgpu.h, just Dawn\u0027s. The reason is that the Emscripten webgpu.h should be the same as the upstream webgpu.h (just that things are still moving for now) so this warning doesn\u0027t make sense there.",
+      "revId": "41cec00a2fa73749b1e1f4c9de167ecbf00ff51a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21e66bce_ae94d525",
         "filename": "generator/templates/api.h",
         "patchSetId": 2
