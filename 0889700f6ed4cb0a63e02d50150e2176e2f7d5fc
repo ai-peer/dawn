@@ -69,6 +69,24 @@
       "message": "I think the following items that have only [\"upstream\"] also need to have \"emscripten\":\n\n- begin pipeline statistics query (both copies)\n- end pipeline statistics query (both copies)\n- process events\n- get preferred format",
       "revId": "0889700f6ed4cb0a63e02d50150e2176e2f7d5fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be816d59_ef2508de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-02-08T17:08:01Z",
+      "side": 1,
+      "message": "Gotcha. Is it because these are still needed when emscripten is used to build standalone dawn?",
+      "parentUuid": "99e9b882_b58a3ac2",
+      "revId": "0889700f6ed4cb0a63e02d50150e2176e2f7d5fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
