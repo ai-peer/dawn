@@ -533,6 +533,8 @@ source_set("end2end_tests_sources") {
   if (dawn_enable_vulkan && is_chromeos) {
     sources += [ "end2end/VideoViewsTests_gbm.cpp" ]
   }
+
+  public_configs = [ "${dawn_root}/src/dawn/common:set_rpath_if_needed" ]
 }
 
 source_set("white_box_tests_sources") {

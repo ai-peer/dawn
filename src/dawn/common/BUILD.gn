@@ -167,6 +167,21 @@ config("internal_config") {
   }
 }
 
+config("set_rpath_if_needed") {
+  if (!is_component_build) {
+    # Executable needs an rpath to find our shared libraries on OSX and Linux
+    if (is_mac) {
+      ldflags = [
+        "-rpath",
+        "@executable_path/",
+      ]
+    }
+    if (is_linux || is_chromeos) {
+      configs = [ "//build/config/gcc:rpath_for_built_shared_libraries" ]
+    }
+  }
+}
+
 ###############################################################################
 # Common dawn library
 ###############################################################################
