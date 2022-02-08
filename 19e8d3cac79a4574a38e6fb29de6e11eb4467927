@@ -644,6 +644,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cdc9b7dd_a5df28c7",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-08T01:14:24Z",
+      "side": 1,
+      "message": "Also you\u0027ve mentioned changing the ExternalTextureExpansion type to use binding index instead of binding number - if we do this, we should actually leave Vk as is, and change the other backends to invoke the external texture transform after remapping. This would require moving my code around on D3D/Mtl/Maybe GL.",
+      "parentUuid": "508b95cd_9849f60c",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58640e91_b5ac12af",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 22
