@@ -332,6 +332,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4aa1634_d4d46783",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-08T20:13:13Z",
+      "side": 1,
+      "message": "Done in a slightly different way. Just incrementing from kMaxBindingNumber seemed simpler than working around the multiply-by-zero case.",
+      "parentUuid": "e319a5b1_3b266ffb",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "648e056b_9867157d",
@@ -363,6 +381,24 @@
       "side": 1,
       "message": "Not sure what you mean. All operations for plane0 are done in the preceding lines. We don\u0027t need to add plane0 into BindingNumberSet because we reuse the binding location of the old ExternalTexture binding.",
       "parentUuid": "648e056b_9867157d",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ed997ca_4fd95acf",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-08T20:13:13Z",
+      "side": 1,
+      "message": "Marking resolved.",
+      "parentUuid": "f3253a31_05e758a0",
       "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -656,6 +692,24 @@
       "side": 1,
       "message": "Also you\u0027ve mentioned changing the ExternalTextureExpansion type to use binding index instead of binding number - if we do this, we should actually leave Vk as is, and change the other backends to invoke the external texture transform after remapping. This would require moving my code around on D3D/Mtl/Maybe GL.",
       "parentUuid": "508b95cd_9849f60c",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c6966cc_3528f307",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-08T20:13:13Z",
+      "side": 1,
+      "message": "Added TODO @ ShaderModuleVk.cpp:L169",
+      "parentUuid": "cdc9b7dd_a5df28c7",
       "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
