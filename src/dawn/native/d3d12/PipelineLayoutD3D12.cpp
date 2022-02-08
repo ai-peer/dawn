@@ -224,18 +224,22 @@ namespace dawn::native::d3d12 {
         ASSERT(dynamicStorageBufferLengthsShaderRegisterOffset <=
                kMaxDynamicStorageBuffersPerPipelineLayout);
 
-        D3D12_ROOT_PARAMETER dynamicStorageBufferLengthConstants{};
-        dynamicStorageBufferLengthConstants.ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
-        dynamicStorageBufferLengthConstants.ParameterType =
-            D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS;
-        dynamicStorageBufferLengthConstants.Constants.Num32BitValues =
-            dynamicStorageBufferLengthsShaderRegisterOffset;
-        dynamicStorageBufferLengthConstants.Constants.RegisterSpace =
-            kDynamicStorageBufferLengthsRegisterSpace;
-        dynamicStorageBufferLengthConstants.Constants.ShaderRegister =
-            kDynamicStorageBufferLengthsBaseRegister;
+        if (dynamicStorageBufferLengthsShaderRegisterOffset > 0) {
+            D3D12_ROOT_PARAMETER dynamicStorageBufferLengthConstants{};
+            dynamicStorageBufferLengthConstants.ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+            dynamicStorageBufferLengthConstants.ParameterType =
+                D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS;
+            dynamicStorageBufferLengthConstants.Constants.Num32BitValues =
+                dynamicStorageBufferLengthsShaderRegisterOffset;
+            dynamicStorageBufferLengthConstants.Constants.RegisterSpace =
+                kDynamicStorageBufferLengthsRegisterSpace;
+            dynamicStorageBufferLengthConstants.Constants.ShaderRegister =
+                kDynamicStorageBufferLengthsBaseRegister;
+            rootParameters.emplace_back(dynamicStorageBufferLengthConstants);
+        }
+        // When there is no dynamic storage buffers, mDynamicStorageBufferLengthsParameterIndex
+        // will actually be an invalid index in rootParameters.
         mDynamicStorageBufferLengthsParameterIndex = rootParameters.size();
-        rootParameters.emplace_back(dynamicStorageBufferLengthConstants);
 
         D3D12_ROOT_SIGNATURE_DESC rootSignatureDescriptor;
         rootSignatureDescriptor.NumParameters = rootParameters.size();
