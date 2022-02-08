@@ -189,6 +189,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f54287bb_7a42fe4c",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-08T09:29:55Z",
+      "side": 1,
+      "message": "Same for bindingsCount?",
+      "parentUuid": "593c2713_dcdc51b6",
+      "range": {
+        "startLine": 179,
+        "startChar": 35,
+        "endLine": 179,
+        "endChar": 48
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "07587dd2_9c618748",
         "filename": "src/dawn/native/BindGroupLayout.cpp",
         "patchSetId": 24
@@ -554,6 +578,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42b4269c_50524340",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-08T09:29:55Z",
+      "side": 1,
+      "message": "And to be clear, this one adds GetBindingIndex() conversion to all the bindings passed to the newBindingsMap.",
+      "parentUuid": "4c4ab44f_37b1edca",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3aef58f8_f5d853fa",
@@ -591,6 +633,30 @@
       "side": 1,
       "message": "I hope you meant types can be omitted - because that\u0027s what I did.",
       "parentUuid": "3aef58f8_f5d853fa",
+      "range": {
+        "startLine": 155,
+        "startChar": 26,
+        "endLine": 155,
+        "endChar": 47
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d41537f2_7e77bf94",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-08T09:29:55Z",
+      "side": 1,
+      "message": "s/not/now/ indeed ^^",
+      "parentUuid": "c5f8f9b7_c3f59409",
       "range": {
         "startLine": 155,
         "startChar": 26,

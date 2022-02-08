@@ -22,6 +22,30 @@
       },
       "revId": "1ed75bc4df033deb07d433e1dd43c233e775d894",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ced35f22_f3f7e67e",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-08T09:29:55Z",
+      "side": 1,
+      "message": "The ExternalTextureDescriptor takes a PredefinedColorspace enum, would that be sufficient?",
+      "parentUuid": "6a2005b5_8811b2e9",
+      "range": {
+        "startLine": 173,
+        "startChar": 19,
+        "endLine": 173,
+        "endChar": 80
+      },
+      "revId": "1ed75bc4df033deb07d433e1dd43c233e775d894",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
