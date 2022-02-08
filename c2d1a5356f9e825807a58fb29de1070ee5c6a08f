@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac99d246_92bd4970",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-02-08T01:52:54Z",
+      "side": 1,
+      "message": "Thanks Brandon for this! We could use this to integrate the chromium part! I\u0027ll cc Jie too.",
+      "revId": "c2d1a5356f9e825807a58fb29de1070ee5c6a08f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
