@@ -42,7 +42,10 @@ static_library("utils") {
     "${dawn_root}/src/dawn/utils:glfw",
     "${dawn_root}/src/dawn/wire",
   ]
-  public_configs = [ "${dawn_root}/src/dawn/common:internal_config" ]
+  public_configs = [
+    "${dawn_root}/src/dawn/common:internal_config",
+    "${dawn_root}/src/dawn/common:set_rpath_if_needed",
+  ]
 }
 
 # Template for samples to avoid listing utils as a dep every time
