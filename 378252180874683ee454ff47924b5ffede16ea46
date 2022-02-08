@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec7c48cb_50a65360",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-08T20:22:19Z",
+      "side": 1,
+      "message": "this is step 1, step 2 is Chromium in https://chromium-review.googlesource.com/c/chromium/src/+/3448894 which appears to be working as expected so far",
+      "revId": "378252180874683ee454ff47924b5ffede16ea46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
