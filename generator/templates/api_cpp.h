@@ -13,6 +13,11 @@
 //* limitations under the License.
 {% set API = metadata.api.upper() %}
 {% set api = API.lower() %}
+{% if 'emscripten' not in enabled_tags %}
+    #ifdef __EMSCRIPTEN__
+    #error "Do not include this header. Emscripten already includes headers needed for WebGPU."
+    #endif
+{% endif %}
 #ifndef {{API}}_CPP_H_
 #define {{API}}_CPP_H_
 
