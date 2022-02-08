@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a2005b5_8811b2e9",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-02-08T08:19:18Z",
+      "side": 1,
+      "message": "If my understanding is correct, there is an implicit yuv-rgb conversion in Tint, right? If so, what\u0027s that colorspace conversion? Is it being hardcoded for now? For yuv video frames, they can be Bt601, Bt709 for SDR, and Bt2020 for HDR. Do we have an option for clients to choose their desired colorspace conversion?",
+      "range": {
+        "startLine": 173,
+        "startChar": 19,
+        "endLine": 173,
+        "endChar": 80
+      },
+      "revId": "1ed75bc4df033deb07d433e1dd43c233e775d894",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
