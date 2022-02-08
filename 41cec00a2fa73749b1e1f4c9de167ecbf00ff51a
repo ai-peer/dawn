@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "629305ae_e0dc9858",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-08T17:36:00Z",
+      "side": 1,
+      "message": "My suggestion was to replace the condition with `if \u0027dawn\u0027 in enabled_tags`",
+      "parentUuid": "74c28920_2e2c09ed",
+      "revId": "41cec00a2fa73749b1e1f4c9de167ecbf00ff51a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21e66bce_ae94d525",
         "filename": "generator/templates/api.h",
         "patchSetId": 2
