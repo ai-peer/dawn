@@ -87,6 +87,24 @@
       "parentUuid": "99e9b882_b58a3ac2",
       "revId": "0889700f6ed4cb0a63e02d50150e2176e2f7d5fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69daf9be_a2e0e748",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-02-08T20:11:05Z",
+      "side": 1,
+      "message": "Pipeline statistics just because Emscripten already implements them. If we want to remove them from Emscripten then we could probably do that though. (since they\u0027re removed from WebGPU)\n\nProcessEvents will eventually be implemented by Emscripten (in Asyncify mode only) and GetPreferredFormat is a core feature that I think Dawn just doesn\u0027t implement yet.",
+      "parentUuid": "be816d59_ef2508de",
+      "revId": "0889700f6ed4cb0a63e02d50150e2176e2f7d5fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
