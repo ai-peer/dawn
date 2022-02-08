@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0326f842_c55a493c",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-02-08T17:50:09Z",
+      "side": 1,
+      "message": "Oh gotcha. Fixed.",
+      "parentUuid": "629305ae_e0dc9858",
+      "revId": "41cec00a2fa73749b1e1f4c9de167ecbf00ff51a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21e66bce_ae94d525",
@@ -107,6 +125,54 @@
       "writtenOn": "2022-02-08T03:13:46Z",
       "side": 1,
       "message": "nit: {{metadata.api}}",
+      "range": {
+        "startLine": 29,
+        "startChar": 87,
+        "endLine": 29,
+        "endChar": 93
+      },
+      "revId": "41cec00a2fa73749b1e1f4c9de167ecbf00ff51a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52c28406_f33460dd",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-02-08T17:50:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21e66bce_ae94d525",
+      "range": {
+        "startLine": 29,
+        "startChar": 59,
+        "endLine": 29,
+        "endChar": 67
+      },
+      "revId": "41cec00a2fa73749b1e1f4c9de167ecbf00ff51a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf734f23_9443fd9c",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-02-08T17:50:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ea48388_5ff7a506",
       "range": {
         "startLine": 29,
         "startChar": 87,
