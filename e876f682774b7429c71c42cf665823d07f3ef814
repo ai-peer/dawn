@@ -76,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6473f913_1bad1f8e",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-08T00:57:00Z",
+      "side": 1,
+      "message": "I plan to do this. Corentin commented this elsewhere - so I\u0027m going to resolve this and use the other comment to track.",
+      "parentUuid": "7882227d_7462f89d",
+      "range": {
+        "startLine": 387,
+        "startChar": 44,
+        "endLine": 389,
+        "endChar": 36
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63121112_eba9df85",
@@ -176,6 +200,24 @@
       "writtenOn": "2022-02-07T12:30:32Z",
       "side": 1,
       "message": "[1] Do we run into issues if we don\u0027t do this? The validation for the binding counts is done in ValidateBindGroupLayout prior to the BindGroupLayout constructor, so everything we do here is to help the frontend or backends allocate stuff (and we need to know what is the actual number of bindings, not what the spec mandates).",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdcf924d_597a5ea9",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-08T00:57:00Z",
+      "side": 1,
+      "message": "We do fail binding count validation tests if we remove these lines. When I looked for calls of GetBindingCountInfo() I found it was only being used for validation so I thought this would be fine.\n\nAn alternative approach would be modifying the validation to account for unimplemented aspects of external texture. For example, the sampled texture binding count would be something like: (numSampledTextures + (numExternalTextures * kUnimplementedSampledTexturesPerExternalTexture)",
+      "parentUuid": "07587dd2_9c618748",
       "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -494,6 +536,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c4ab44f_37b1edca",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-08T00:57:00Z",
+      "side": 1,
+      "message": "Yeah. \n\nThis is a duplicate of a conversation I have with Corentin - so resolving.",
+      "parentUuid": "cae180fe_08bb40b8",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3aef58f8_f5d853fa",
@@ -507,6 +567,30 @@
       "writtenOn": "2022-02-07T12:30:32Z",
       "side": 1,
       "message": "nit: types can not be omitted!",
+      "range": {
+        "startLine": 155,
+        "startChar": 26,
+        "endLine": 155,
+        "endChar": 47
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5f8f9b7_c3f59409",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-08T00:57:00Z",
+      "side": 1,
+      "message": "I hope you meant types can be omitted - because that\u0027s what I did.",
+      "parentUuid": "3aef58f8_f5d853fa",
       "range": {
         "startLine": 155,
         "startChar": 26,

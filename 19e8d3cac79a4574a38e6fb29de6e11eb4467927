@@ -122,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a26f8ab2_36035597",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-08T00:57:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98aae357_7cf00e4e",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "525f09f9_20aed985",
@@ -222,6 +240,24 @@
       "writtenOn": "2022-02-04T09:24:43Z",
       "side": 1,
       "message": "Maybe hide that in a helper function?",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "982cd34e_37ebe39a",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-08T00:57:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2710c9f_9daa7f51",
       "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -590,6 +626,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "508b95cd_9849f60c",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-08T00:57:00Z",
+      "side": 1,
+      "message": "Not 100% sure, but I spent some time debugging the issue and it looks like I need to rewrite the block in shaderModuleVk that creates binding remappings. This appears to only remap the binding points originally found in the shader - which doesn\u0027t have the expanded bindings - which leaves me with a collision. I\u0027m pretty sure after fixing this I\u0027ll be able to move the external texture transform above the remapper and can share code with all the other backends.",
+      "parentUuid": "c70e314d_5066a2a6",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58640e91_b5ac12af",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 22
@@ -724,6 +778,24 @@
       "side": 1,
       "message": "OpenGL is still using mixed-mode Tint+SPIRV-Cross, but we\u0027ll replace it with a full Tint path soon, so let\u0027s not worry about it for now and come back to this when we polish the GL backend.",
       "parentUuid": "9f80163e_9e1d7d00",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c3ac060_c09c9562",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-08T00:57:00Z",
+      "side": 1,
+      "message": "Added a TODO",
+      "parentUuid": "e19f8bc1_813d7fe7",
       "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
