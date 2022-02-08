@@ -731,6 +731,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2296b2d_fdd5b64d",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-08T20:54:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58640e91_b5ac12af",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e95c0b7b_1b8aed80",

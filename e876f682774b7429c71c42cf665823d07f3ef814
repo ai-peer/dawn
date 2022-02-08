@@ -457,6 +457,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "117b3e31_b94cdc7a",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-08T20:54:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5d5f764_937fbdd1",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67ba6d08_d328090f",
@@ -470,6 +488,24 @@
       "writtenOn": "2022-02-07T17:03:00Z",
       "side": 1,
       "message": "nit: I think we can be more descriptive here and say that the binding type in the layout was external, but the type in shader was not",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95a7b7f0_9f825b32",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-08T20:54:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67ba6d08_d328090f",
       "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -787,6 +823,24 @@
       "writtenOn": "2022-02-07T12:30:32Z",
       "side": 1,
       "message": "u-nit: you can use GetBindGroupLayout too.",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f6059af_b5ee8a13",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-08T20:54:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b116e915_8498c5bb",
       "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
