@@ -105,6 +105,24 @@
       "parentUuid": "be816d59_ef2508de",
       "revId": "0889700f6ed4cb0a63e02d50150e2176e2f7d5fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba42ddf0_9adb3464",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-02-08T20:15:27Z",
+      "side": 1,
+      "message": "Thanks for the answers.\nAdded back emscripten tag to these functions. The CL is good for review now.",
+      "parentUuid": "69daf9be_a2e0e748",
+      "revId": "0889700f6ed4cb0a63e02d50150e2176e2f7d5fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
