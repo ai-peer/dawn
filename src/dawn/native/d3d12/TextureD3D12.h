@@ -57,7 +57,8 @@ namespace dawn::native::d3d12 {
 
         D3D12_RENDER_TARGET_VIEW_DESC GetRTVDescriptor(uint32_t mipLevel,
                                                        uint32_t baseSlice,
-                                                       uint32_t sliceCount) const;
+                                                       uint32_t sliceCount,
+                                                       Aspect aspects) const;
         D3D12_DEPTH_STENCIL_VIEW_DESC GetDSVDescriptor(uint32_t mipLevel,
                                                        uint32_t baseArrayLayer,
                                                        uint32_t layerCount,

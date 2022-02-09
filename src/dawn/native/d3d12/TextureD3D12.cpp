@@ -261,6 +261,44 @@ namespace dawn::native::d3d12 {
             }
         }
 
+        DXGI_FORMAT TypelessD3D12DepthStencilFormatForAspect(wgpu::TextureFormat format,
+                                                             Aspect aspect) {
+            ASSERT(IsSubset(aspect, Aspect::Depth | Aspect::Stencil));
+            switch (format) {
+                case wgpu::TextureFormat::Depth32Float:
+                case wgpu::TextureFormat::Depth24Plus:
+                    return DXGI_FORMAT_R32_FLOAT;
+                case wgpu::TextureFormat::Depth16Unorm:
+                    return DXGI_FORMAT_R16_UNORM;
+                case wgpu::TextureFormat::Depth24UnormStencil8:
+                    switch (aspect) {
+                        case Aspect::Depth:
+                            return DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
+                        case Aspect::Stencil:
+                            return DXGI_FORMAT_X24_TYPELESS_G8_UINT;
+                        default:
+                            ASSERT(aspect == (Aspect::Depth | Aspect::Stencil));
+                            return DXGI_FORMAT_R24G8_TYPELESS;
+                    }
+                case wgpu::TextureFormat::Stencil8:
+                    return DXGI_FORMAT_X24_TYPELESS_G8_UINT;
+                case wgpu::TextureFormat::Depth24PlusStencil8:
+                case wgpu::TextureFormat::Depth32FloatStencil8:
+                    switch (aspect) {
+                        case Aspect::Depth:
+                            return DXGI_FORMAT_R32_FLOAT_X8X24_TYPELESS;
+                        case Aspect::Stencil:
+                            return DXGI_FORMAT_X32_TYPELESS_G8X24_UINT;
+                        default:
+                            ASSERT(aspect == (Aspect::Depth | Aspect::Stencil));
+                            return DXGI_FORMAT_R32G8X24_TYPELESS;
+                    }
+                    break;
+                default:
+                    UNREACHABLE();
+                    break;
+            }
+        }
     }  // namespace
 
     DXGI_FORMAT D3D12TextureFormat(wgpu::TextureFormat format) {
@@ -910,9 +948,15 @@ namespace dawn::native::d3d12 {
 
     D3D12_RENDER_TARGET_VIEW_DESC Texture::GetRTVDescriptor(uint32_t mipLevel,
                                                             uint32_t baseSlice,
-                                                            uint32_t sliceCount) const {
+                                                            uint32_t sliceCount,
+                                                            Aspect aspects) const {
         D3D12_RENDER_TARGET_VIEW_DESC rtvDesc;
         rtvDesc.Format = GetD3D12Format();
+
+        if (GetFormat().HasDepthOrStencil()) {
+            rtvDesc.Format = TypelessD3D12DepthStencilFormatForAspect(GetFormat().format, aspects);
+        }
+
         if (IsMultisampledTexture()) {
             ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
             ASSERT(GetNumMipLevels() == 1);
@@ -1069,7 +1113,7 @@ namespace dawn::native::d3d12 {
                         sliceCount = std::max(GetDepth() >> level, 1u);
                     }
                     D3D12_RENDER_TARGET_VIEW_DESC rtvDesc =
-                        GetRTVDescriptor(level, baseSlice, sliceCount);
+                        GetRTVDescriptor(level, baseSlice, sliceCount, range.aspects);
                     device->GetD3D12Device()->CreateRenderTargetView(GetD3D12Resource(), &rtvDesc,
                                                                      rtvHandle);
                     commandList->ClearRenderTargetView(rtvHandle, clearColorRGBA, 0, nullptr);
@@ -1173,85 +1217,22 @@ namespace dawn::native::d3d12 {
         // texture view compatibility rules.
         UINT planeSlice = 0;
         if (GetFormat().HasDepthOrStencil()) {
+            if (descriptor->aspect == wgpu::TextureAspect::StencilOnly) {
+                planeSlice = 1;
+
+                // Stencil is accessed using the .g component in the shader.
+                // Map it to the zeroth component to match other APIs.
+                mSrvDesc.Shader4ComponentMapping = D3D12_ENCODE_SHADER_4_COMPONENT_MAPPING(
+                    D3D12_SHADER_COMPONENT_MAPPING_FROM_MEMORY_COMPONENT_1,
+                    D3D12_SHADER_COMPONENT_MAPPING_FORCE_VALUE_0,
+                    D3D12_SHADER_COMPONENT_MAPPING_FORCE_VALUE_0,
+                    D3D12_SHADER_COMPONENT_MAPPING_FORCE_VALUE_1);
+            }
+
             // Configure the SRV descriptor to reinterpret the texture allocated as
             // TYPELESS as a single-plane shader-accessible view.
-            switch (descriptor->format) {
-                case wgpu::TextureFormat::Depth32Float:
-                case wgpu::TextureFormat::Depth24Plus:
-                    mSrvDesc.Format = DXGI_FORMAT_R32_FLOAT;
-                    break;
-                case wgpu::TextureFormat::Depth16Unorm:
-                    mSrvDesc.Format = DXGI_FORMAT_R16_UNORM;
-                    break;
-                case wgpu::TextureFormat::Depth24UnormStencil8:
-                    switch (descriptor->aspect) {
-                        case wgpu::TextureAspect::DepthOnly:
-                            planeSlice = 0;
-                            mSrvDesc.Format = DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
-                            break;
-                        case wgpu::TextureAspect::StencilOnly:
-                            planeSlice = 1;
-                            mSrvDesc.Format = DXGI_FORMAT_X24_TYPELESS_G8_UINT;
-                            // Stencil is accessed using the .g component in the shader.
-                            // Map it to the zeroth component to match other APIs.
-                            mSrvDesc.Shader4ComponentMapping =
-                                D3D12_ENCODE_SHADER_4_COMPONENT_MAPPING(
-                                    D3D12_SHADER_COMPONENT_MAPPING_FROM_MEMORY_COMPONENT_1,
-                                    D3D12_SHADER_COMPONENT_MAPPING_FORCE_VALUE_0,
-                                    D3D12_SHADER_COMPONENT_MAPPING_FORCE_VALUE_0,
-                                    D3D12_SHADER_COMPONENT_MAPPING_FORCE_VALUE_1);
-                            break;
-                        case wgpu::TextureAspect::All:
-                            // A single aspect is not selected. The texture view must not be
-                            // sampled.
-                            mSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
-                            break;
-
-                        // Depth formats cannot use plane aspects.
-                        case wgpu::TextureAspect::Plane0Only:
-                        case wgpu::TextureAspect::Plane1Only:
-                            UNREACHABLE();
-                            break;
-                    }
-                case wgpu::TextureFormat::Stencil8:
-                    mSrvDesc.Format = DXGI_FORMAT_X24_TYPELESS_G8_UINT;
-                    break;
-                case wgpu::TextureFormat::Depth24PlusStencil8:
-                case wgpu::TextureFormat::Depth32FloatStencil8:
-                    switch (descriptor->aspect) {
-                        case wgpu::TextureAspect::DepthOnly:
-                            planeSlice = 0;
-                            mSrvDesc.Format = DXGI_FORMAT_R32_FLOAT_X8X24_TYPELESS;
-                            break;
-                        case wgpu::TextureAspect::StencilOnly:
-                            planeSlice = 1;
-                            mSrvDesc.Format = DXGI_FORMAT_X32_TYPELESS_G8X24_UINT;
-                            // Stencil is accessed using the .g component in the shader.
-                            // Map it to the zeroth component to match other APIs.
-                            mSrvDesc.Shader4ComponentMapping =
-                                D3D12_ENCODE_SHADER_4_COMPONENT_MAPPING(
-                                    D3D12_SHADER_COMPONENT_MAPPING_FROM_MEMORY_COMPONENT_1,
-                                    D3D12_SHADER_COMPONENT_MAPPING_FORCE_VALUE_0,
-                                    D3D12_SHADER_COMPONENT_MAPPING_FORCE_VALUE_0,
-                                    D3D12_SHADER_COMPONENT_MAPPING_FORCE_VALUE_1);
-                            break;
-                        case wgpu::TextureAspect::All:
-                            // A single aspect is not selected. The texture view must not be
-                            // sampled.
-                            mSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
-                            break;
-
-                        // Depth formats cannot use plane aspects.
-                        case wgpu::TextureAspect::Plane0Only:
-                        case wgpu::TextureAspect::Plane1Only:
-                            UNREACHABLE();
-                            break;
-                    }
-                    break;
-                default:
-                    UNREACHABLE();
-                    break;
-            }
+            mSrvDesc.Format = TypelessD3D12DepthStencilFormatForAspect(
+                descriptor->format, ConvertViewAspect(GetFormat(), descriptor->aspect));
         }
 
         // Per plane view formats must have the plane slice number be the index of the plane in the
@@ -1339,7 +1320,8 @@ namespace dawn::native::d3d12 {
 
     D3D12_RENDER_TARGET_VIEW_DESC TextureView::GetRTVDescriptor() const {
         return ToBackend(GetTexture())
-            ->GetRTVDescriptor(GetBaseMipLevel(), GetBaseArrayLayer(), GetLayerCount());
+            ->GetRTVDescriptor(GetBaseMipLevel(), GetBaseArrayLayer(), GetLayerCount(),
+                               GetAspects());
     }
 
     D3D12_DEPTH_STENCIL_VIEW_DESC TextureView::GetDSVDescriptor(bool depthReadOnly,
