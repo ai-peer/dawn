@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "276d8a49_e473e625",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-09T13:26:47Z",
+      "side": 1,
+      "message": "LGTM! Just a few nits / requests for TODOs. Thanks a lot for the iterations!",
+      "revId": "7e01a5c0a9449ad5338e6b20f4b70d29eddb1f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0673a460_49bc951f",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-09T13:26:47Z",
+      "side": 1,
+      "message": "nit: auto, or you can use the typedef.",
+      "range": {
+        "startLine": 400,
+        "startChar": 16,
+        "endLine": 400,
+        "endChar": 95
+      },
+      "revId": "7e01a5c0a9449ad5338e6b20f4b70d29eddb1f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9c5488f_85c37a83",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-09T13:26:47Z",
+      "side": 1,
+      "message": "nit: could return by const\u0026 to avoid a copy.",
+      "range": {
+        "startLine": 521,
+        "startChar": 4,
+        "endLine": 521,
+        "endChar": 37
+      },
+      "revId": "7e01a5c0a9449ad5338e6b20f4b70d29eddb1f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "181aa6a9_75695dac",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-09T13:26:47Z",
+      "side": 1,
+      "message": "u-nit: for additional sampled textures. Also the computation could be `kSampledTexturesPerExternalTexture - 2` and `kSamplersPerExternalTexture`",
+      "range": {
+        "startLine": 199,
+        "startChar": 60,
+        "endLine": 199,
+        "endChar": 74
+      },
+      "revId": "7e01a5c0a9449ad5338e6b20f4b70d29eddb1f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7953e5a2_133c14af",
+        "filename": "src/dawn/native/BindGroupLayout.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-09T13:26:47Z",
+      "side": 1,
+      "message": "ditto, could return by const\u0026 to avoid a copy.",
+      "range": {
+        "startLine": 100,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 42
+      },
+      "revId": "7e01a5c0a9449ad5338e6b20f4b70d29eddb1f83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

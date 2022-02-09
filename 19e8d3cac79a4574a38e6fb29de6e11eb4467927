@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62418a93_0d1bc995",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-09T13:26:47Z",
+      "side": 1,
+      "message": "The bind group creation code paths are very hot code, here we are adding several branches and memory loads for every entry in the bind group when we could theoretically only keep a switch if the BGL could tell use the unexpanded resource type.\n\nIn the future I think we\u0027ll need to split the tracking of the BGL between two things: the frontend tracking (unexpanded) that contains things like the minBufferSize, viewType, etc. and the backend tracking (expanded) that contains a packed list of binding type and that\u0027s it. This should be fairly more efficient in a couple ways.\n\nBut it\u0027s way too much to do now (or even pre-v1) so we can just file an issue to consider additional optimizations for bind group creation by precomputing more / duplicating some data in  the BGL, and add a TODO here.",
+      "parentUuid": "b892753c_d2f1f1ac",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98aae357_7cf00e4e",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 22
@@ -277,6 +295,24 @@
       "side": 1,
       "message": "\u003e\u003e Would it be possible to put the external textures in BindGroupLayoutBase::BindingDataPointers::bindings?\n\nSounds reasonable.\n\nNote: The only thing we use the member on the line for is submit validation.",
       "parentUuid": "53ebabfd_40eb1463",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83253fa7_dab15d96",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-09T13:26:47Z",
+      "side": 1,
+      "message": "Yeah but let\u0027s just add a TODO, it would be a change that\u0027s a bit complicated and would make this CL too big.",
+      "parentUuid": "179bb9ae_e2702ce6",
       "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -605,6 +641,24 @@
       "side": 1,
       "message": "I don\u0027t understand this comment. Could you explain further?",
       "parentUuid": "72d93164_520dab35",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f050d0c6_6d83a24d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-09T13:26:47Z",
+      "side": 1,
+      "message": "See other answer.",
+      "parentUuid": "58b8639d_81f6e13c",
       "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

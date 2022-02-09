@@ -308,6 +308,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5eb33c40_eb9351db",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-09T13:26:47Z",
+      "side": 1,
+      "message": "Ah I think I know what\u0027s happening: the BindingCountInfo is used to aggregate all the binding counts in the pipeline layout, so if we just remove this, then the count will be an underestimate.\n\nGiven that we only use the buffer info of the binding counts otherwise I think we can keep this as is and revisit later with the split between expanded and unexpanded data.",
+      "parentUuid": "bdcf924d_597a5ea9",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90e046b3_04ab5673",
         "filename": "src/dawn/native/BindGroupLayout.cpp",
         "patchSetId": 24
@@ -472,6 +490,24 @@
       "side": 1,
       "message": "FYI, when I say \"it will check the expanded bindings instead of the external texture binding\" - ValidateSubmit does check both - but due to the current order of the code we\u0027ll hit the underlying resources before we check the external texture.",
       "parentUuid": "bf5da4e6_4f0fdb8c",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15d2a80e_938df01f",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-09T13:26:47Z",
+      "side": 1,
+      "message": "Thanks for the explanation, I completely missed that the texture views would be added to the bind group so they are checked with the regular path.",
+      "parentUuid": "04b8996c_268e08f3",
       "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
