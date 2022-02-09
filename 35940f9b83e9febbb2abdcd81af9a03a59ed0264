@@ -34,6 +34,24 @@
       "parentUuid": "fdf165fc_227f730d",
       "revId": "35940f9b83e9febbb2abdcd81af9a03a59ed0264",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d80cc83_60477d95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-02-09T09:02:56Z",
+      "side": 1,
+      "message": "https://gn.googlesource.com/gn/+/HEAD/docs/style_guide.md#Naming-and-ordering-within-the-file\n\nTargets\n\n* Most BUILD files should have a target with the same name as the directory. This target should be the first target.\n* Other targets should be in some logical order -- usually more important targets will be first, and unit tests will follow the corresponding target. If there\u0027s no clear ordering, consider alphabetical order.\n* Test support libraries should be static libraries named “test_support”. For example, “//ui/compositor:test_support”. Test support libraries should include as public deps the non-test-support version of the library so tests need only depend on the test_support target (rather than both).\n\nNaming advice\n\n* Targets and configs should be named using lowercase with underscores separating words, unless there is a strong reason to do otherwise.\n* Source sets, groups, and static libraries do not need globally unique names. Prefer to give such targets short, non-redundant names without worrying about global uniqueness. For example, it looks much better to write a dependency as \"//mojo/public/bindings\" rather than \"//mojo/public/bindings:mojo_bindings\"\n* Shared libraries (and by extension, components) must have globally unique output names. Give such targets short non-unique names above, and then provide a globally unique output_name for that target.\n* Executables and tests should be given a globally unique name. Technically only the output names must be unique, but since only the output names appear in the shell and on bots, it\u0027s much less confusing if the name matches the other places the executable appears.",
+      "parentUuid": "371ffe96_e9617955",
+      "revId": "35940f9b83e9febbb2abdcd81af9a03a59ed0264",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
