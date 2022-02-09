@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a710f7f_c2f7ed77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-09T05:42:39Z",
+      "side": 1,
+      "message": "ok this should be working now - please see diff of patchsets 30 -\u003e 32",
+      "revId": "8fd9d46a018ace2a0bbe1bf628883dd69ccf3de2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba41cd1b_59cb9e6f",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 32
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-09T05:42:39Z",
+      "side": 1,
+      "message": "I untrimmed these because of my comment on https://dawn-review.googlesource.com/c/dawn/+/79101/comments/fdf165fc_227f730d\n\nIf this is not a real problem, then we\u0027ll still have to add even more proxy groups for these since the dawn.py build recipe is trying to build targets \"dawn_end2end_tests\" and \"dawn_unittests\".",
+      "revId": "8fd9d46a018ace2a0bbe1bf628883dd69ccf3de2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
