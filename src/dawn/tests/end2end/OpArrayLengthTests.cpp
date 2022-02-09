@@ -97,6 +97,10 @@ TEST_P(OpArrayLengthTest, Compute) {
     // Nvidia OpenGL.
     DAWN_SUPPRESS_TEST_IF(IsNvidia() && (IsOpenGL() || IsOpenGLES()));
 
+    // TODO(crbug.com/dawn/1292): Some Intel drivers don't seem to like the
+    // (spurious but harmless) offset=64 that Tint/GLSL produces.
+    DAWN_SUPPRESS_TEST_IF(IsIntel() && IsOpenGL());
+
     // Create a buffer to hold the result sizes and create a bindgroup for it.
     wgpu::BufferDescriptor bufferDesc;
     bufferDesc.usage = wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc;
