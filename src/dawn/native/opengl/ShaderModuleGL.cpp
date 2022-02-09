@@ -268,7 +268,13 @@ namespace dawn::native::opengl {
                                                              const PipelineLayout* layout,
                                                              bool* needsDummySampler) const {
         TRACE_EVENT0(GetDevice()->GetPlatform(), General, "TranslateToGLSL");
+        const OpenGLVersion& version = ToBackend(GetDevice())->gl.GetVersion();
+
         tint::writer::glsl::Options tintOptions;
+        tintOptions.version = tint::writer::glsl::Version(
+            version.IsDesktop() ? tint::writer::glsl::Version::Standard::kDesktop
+                                : tint::writer::glsl::Version::Standard::kES,
+            version.GetMajor(), version.GetMinor());
 
         tint::transform::Manager transformManager;
         tint::transform::DataMap transformInputs;
