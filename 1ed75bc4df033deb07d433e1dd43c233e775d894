@@ -70,6 +70,30 @@
       },
       "revId": "1ed75bc4df033deb07d433e1dd43c233e775d894",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df0a4cd3_3e224317",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-02-09T01:19:22Z",
+      "side": 1,
+      "message": "Got it. It makes sense to me. Thanks for the explanation.",
+      "parentUuid": "7bdfb184_a3dd94c2",
+      "range": {
+        "startLine": 173,
+        "startChar": 19,
+        "endLine": 173,
+        "endChar": 80
+      },
+      "revId": "1ed75bc4df033deb07d433e1dd43c233e775d894",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
