@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdf165fc_227f730d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-09T05:07:34Z",
+      "side": 1,
+      "message": "hmmmm.. I think we should probably reverse the changes made in this CL\nThese changes, and those made in Ben\u0027s CL (https://dawn-review.googlesource.com/c/dawn/+/79100) have far-reaching effects outside of Dawn\u0027s repo.\n\nBecause Dawn\u0027s BUILD.gn files are reachable from Chromium\u0027s BUILD.gn file, you can now build `libdawn_native` from the root of a *Chromium checkout* by doing: `autoninja -C out/Release native`. And likewise, you\u0027d be able to build Dawn\u0027s unittests by doing `autoninja -C out/Release unittests`. It\u0027s rather amazing that there\u0027s no name conflict, but this is probably not what we want.\n(at least I think this is the case. it could be that my checkout for some reason has some magic sauce)",
+      "revId": "35940f9b83e9febbb2abdcd81af9a03a59ed0264",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
