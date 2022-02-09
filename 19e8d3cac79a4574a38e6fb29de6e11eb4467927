@@ -159,6 +159,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61bf9e2a_29e3271e",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-09T22:48:33Z",
+      "side": 1,
+      "message": "TODO added",
+      "parentUuid": "62418a93_0d1bc995",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98aae357_7cf00e4e",
@@ -313,6 +331,24 @@
       "side": 1,
       "message": "Yeah but let\u0027s just add a TODO, it would be a change that\u0027s a bit complicated and would make this CL too big.",
       "parentUuid": "179bb9ae_e2702ce6",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccf8a475_a4a00e04",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-09T22:48:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83253fa7_dab15d96",
       "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -659,6 +695,24 @@
       "side": 1,
       "message": "See other answer.",
       "parentUuid": "58b8639d_81f6e13c",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d1ebfd7_008fad69",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-09T22:48:33Z",
+      "side": 1,
+      "message": "TODO added",
+      "parentUuid": "f050d0c6_6d83a24d",
       "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

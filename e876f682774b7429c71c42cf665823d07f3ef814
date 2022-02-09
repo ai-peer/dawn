@@ -178,6 +178,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "186257e9_7423cff0",
+        "filename": "src/dawn/native/BindGroup.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-09T22:48:33Z",
+      "side": 1,
+      "message": "Made the change, but I\u0027m not sure how write the test you\u0027ve suggested. We do have ExternalTextureTest.SubmitDestroyedExternalTextureInRenderPass, however we weren\u0027t seeing a use-after-free. Any ideas how I could invoke this behavior?",
+      "parentUuid": "251b0558_1df12e4b",
+      "range": {
+        "startLine": 89,
+        "startChar": 20,
+        "endLine": 89,
+        "endChar": 41
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de33087b_830e1b9d",
         "filename": "src/dawn/native/BindGroupLayout.cpp",
         "patchSetId": 24
@@ -320,6 +344,24 @@
       "side": 1,
       "message": "Ah I think I know what\u0027s happening: the BindingCountInfo is used to aggregate all the binding counts in the pipeline layout, so if we just remove this, then the count will be an underestimate.\n\nGiven that we only use the buffer info of the binding counts otherwise I think we can keep this as is and revisit later with the split between expanded and unexpanded data.",
       "parentUuid": "bdcf924d_597a5ea9",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c99f257_cbe69abf",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-09T22:48:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5eb33c40_eb9351db",
       "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
