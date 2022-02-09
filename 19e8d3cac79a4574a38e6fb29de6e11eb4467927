@@ -107,6 +107,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18d819d0_5869cea9",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-09T00:28:52Z",
+      "side": 1,
+      "message": "Dedented.\n\nI\u0027m not sure what the TODO is referring to. Could you explain further?",
+      "parentUuid": "0dc56c11_dd2aefff",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b892753c_d2f1f1ac",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-09T00:28:52Z",
+      "side": 1,
+      "message": "Dedented.\n\nCould you explain the optimization TODO part of this comment?",
+      "parentUuid": "0dc56c11_dd2aefff",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98aae357_7cf00e4e",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 22
@@ -223,6 +259,24 @@
       "writtenOn": "2022-02-04T09:24:43Z",
       "side": 1,
       "message": "BindGroups are fairly hot code. Would it be possible to put the external textures in BindGroupLayoutBase::BindingDataPointers::bindings? To know what range they are in, we can ask the layout. They would be after all the \"actual\" bindings.\n\nMaybe we can just have a TODO to reoptimize since it might be tricky and delay this CL.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "179bb9ae_e2702ce6",
+        "filename": "src/dawn_native/BindGroup.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-09T00:28:52Z",
+      "side": 1,
+      "message": "\u003e\u003e Would it be possible to put the external textures in BindGroupLayoutBase::BindingDataPointers::bindings?\n\nSounds reasonable.\n\nNote: The only thing we use the member on the line for is submit validation.",
+      "parentUuid": "53ebabfd_40eb1463",
       "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -533,6 +587,24 @@
       "writtenOn": "2022-02-04T09:24:43Z",
       "side": 1,
       "message": "That\u0027s also another reason why I think we can separate the frontend and backend data in the layout. But could just be a TODO for now.",
+      "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58b8639d_81f6e13c",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-09T00:28:52Z",
+      "side": 1,
+      "message": "I don\u0027t understand this comment. Could you explain further?",
+      "parentUuid": "72d93164_520dab35",
       "revId": "19e8d3cac79a4574a38e6fb29de6e11eb4467927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

@@ -442,6 +442,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf5da4e6_4f0fdb8c",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-09T00:28:52Z",
+      "side": 1,
+      "message": "Hmmm. So the situation now is that ValidateSubmit will error when an underlying texture plane has been destroyed because it will check the expanded bindings instead of the external texture binding. This means we directly use TextureBase::ValidateCanUseInSubmitNow() instead of calling it from inside ExternalTextureBase::ValidateCanUseInSubmitNow. I\u0027m fine with adding it - but seems redundant.\n\nDo we need testing beyond ExternalTextureTest.SubmitDestroyedExternalTexturePlaneInRenderPass?",
+      "parentUuid": "ef08955e_80d965d1",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c5d5f764_937fbdd1",
         "filename": "src/dawn/native/ShaderModule.cpp",
         "patchSetId": 24
