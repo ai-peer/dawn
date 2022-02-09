@@ -460,6 +460,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04b8996c_268e08f3",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-09T00:30:54Z",
+      "side": 1,
+      "message": "FYI, when I say \"it will check the expanded bindings instead of the external texture binding\" - ValidateSubmit does check both - but due to the current order of the code we\u0027ll hit the underlying resources before we check the external texture.",
+      "parentUuid": "bf5da4e6_4f0fdb8c",
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c5d5f764_937fbdd1",
         "filename": "src/dawn/native/ShaderModule.cpp",
         "patchSetId": 24
