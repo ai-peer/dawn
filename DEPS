@@ -301,6 +301,20 @@ hooks = [
                 'tools/cmake-win32/',
     ],
   },
+    'name': 'fetch_custom_patch',
+    'pattern': '.',
+    'action': [ 'git', '-C', 'third_party/tint/',
+                'fetch', 'https://dawn.googlesource.com/tint', 'refs/changes/12/79700/00',
+    ],
+  },
+  {
+    'name': 'apply_custom_patch',
+    'pattern': '.',
+    'action': ['git', '-C', 'third_party/tint/',
+               '-c', 'user.name=Custom Patch', '-c', 'user.email=custompatch@example.com',
+               'cherry-pick', 'FETCH_HEAD',
+    ],
+  },
 ]
 
 recursedeps = [
