@@ -33,6 +33,24 @@
       "message": "TBH I think this file could be removed. It is out of date as we use vulkan-deps that\u0027s rolled automatically now.",
       "revId": "bbbffb3503e78e8e21b3ac09e8dd360f9186e24c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2793078e_dc2ba310",
+        "filename": "scripts/roll-shader-deps.sh",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-02-10T16:47:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b1f10e0_cefbcaad",
+      "revId": "bbbffb3503e78e8e21b3ac09e8dd360f9186e24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
