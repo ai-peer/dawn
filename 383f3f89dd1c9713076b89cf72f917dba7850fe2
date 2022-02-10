@@ -16,6 +16,171 @@
       "message": "Corentin: PTAL. Thanks!",
       "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c07c1c06_78e0361e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-10T08:42:37Z",
+      "side": 1,
+      "message": "LGTM but this is non-trivial and should have a second review. Also please keep at least some comments and delineate blocks of logic. What this code does is a bit subtle and there is exactly zero comments for future us to understand what\u0027s happening.",
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b768479c_3962dbf1",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-10T08:42:37Z",
+      "side": 1,
+      "message": "nit: unused until way below so it could be moved there? Ditto for the OpenGLVersion",
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2892a3a0_3320601e",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-10T08:42:37Z",
+      "side": 1,
+      "message": "Could we have some comments to signal blocks of the logic? Also we could keep comments explaining what\u0027s happening when we mess around with texture bindings, and the dummy sampler, etc.",
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdc13a86_260c4ff2",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-10T08:42:37Z",
+      "side": 1,
+      "message": "nit: sentinelForNoSampler, although matching the name in Tint would help too so IDK. It would make it clear when reading the variable name what it does. That and a comment would help.",
+      "range": {
+        "startLine": 302,
+        "startChar": 32,
+        "endLine": 302,
+        "endChar": 55
+      },
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0480c8e_6e96a2ce",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-10T08:42:37Z",
+      "side": 1,
+      "message": "nit: the second overload in the inspector could be removed?\n\nAlso const auto\u0026 use to avoid copying the value around?",
+      "range": {
+        "startLine": 305,
+        "startChar": 23,
+        "endLine": 305,
+        "endChar": 44
+      },
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e5d54d8_68bd02f3",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-10T08:42:37Z",
+      "side": 1,
+      "message": "nit: We could use that earlier so the alias is available for the declaration of placeHolderBindingPoint.",
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27cb2be9_1fdad3ce",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-10T08:42:37Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4104977_3fe36349",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-10T08:42:37Z",
+      "side": 1,
+      "message": "u-nit: we could probably do this unconditionally.",
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "650038d8_41191a66",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-10T08:42:37Z",
+      "side": 1,
+      "message": "u-nit: std::move?",
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
