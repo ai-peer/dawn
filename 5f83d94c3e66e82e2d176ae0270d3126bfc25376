@@ -16,6 +16,23 @@
       "message": "fingers crossed this works",
       "revId": "5f83d94c3e66e82e2d176ae0270d3126bfc25376",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d80f83c_dda5ab91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-02-10T19:38:52Z",
+      "side": 1,
+      "message": "Thank you!",
+      "revId": "5f83d94c3e66e82e2d176ae0270d3126bfc25376",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
