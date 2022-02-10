@@ -39,6 +39,30 @@
       },
       "revId": "a142bc8d78d42c886103aed4ad5fa44a2870a2d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8fa9ed8_99109f60",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-02-10T20:20:00Z",
+      "side": 1,
+      "message": "What I meant was this code here: \n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/opengl/ShaderModuleGL.cpp;l\u003d60?q\u003dCombinedSampler::GetName\u0026ss\u003dchromium\n\nwhere I think it does only use the texture binding point.\n\nAdded a comment.",
+      "parentUuid": "a42e2514_3161f809",
+      "range": {
+        "startLine": 291,
+        "startChar": 46,
+        "endLine": 292,
+        "endChar": 39
+      },
+      "revId": "a142bc8d78d42c886103aed4ad5fa44a2870a2d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
