@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2842650a_63691e14",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-02-10T16:23:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b768479c_3962dbf1",
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2892a3a0_3320601e",
@@ -86,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d195ed4_9b0e4bc3",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-02-10T16:23:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2892a3a0_3320601e",
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bdc13a86_260c4ff2",
@@ -99,6 +135,30 @@
       "writtenOn": "2022-02-10T08:42:37Z",
       "side": 1,
       "message": "nit: sentinelForNoSampler, although matching the name in Tint would help too so IDK. It would make it clear when reading the variable name what it does. That and a comment would help.",
+      "range": {
+        "startLine": 302,
+        "startChar": 32,
+        "endLine": 302,
+        "endChar": 55
+      },
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92478ecf_458803d5",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-02-10T16:23:34Z",
+      "side": 1,
+      "message": "Kept the name to match Tint, but added a comment.",
+      "parentUuid": "bdc13a86_260c4ff2",
       "range": {
         "startLine": 302,
         "startChar": 32,
@@ -132,6 +192,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7b79401_ed6b8085",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-02-10T16:23:34Z",
+      "side": 1,
+      "message": "\u003e nit: the second overload in the inspector could be removed?\n\nNot quite: it\u0027s still called by dawn::native::ShaderModule::ReflectShaderUsingTint() (yikes, that function is 347 lines). It also performs slightly differently, in that it doesn\u0027t return the texture-only references. Filed https://crbug.com/dawn/1295 to clean it up.\n\n\u003e Also const auto\u0026 use to avoid copying the value around?\n\nDone.",
+      "parentUuid": "f0480c8e_6e96a2ce",
+      "range": {
+        "startLine": 305,
+        "startChar": 23,
+        "endLine": 305,
+        "endChar": 44
+      },
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e5d54d8_68bd02f3",
@@ -145,6 +229,24 @@
       "writtenOn": "2022-02-10T08:42:37Z",
       "side": 1,
       "message": "nit: We could use that earlier so the alias is available for the declaration of placeHolderBindingPoint.",
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbefc858_37812edd",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-02-10T16:23:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e5d54d8_68bd02f3",
       "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -166,6 +268,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f3fb9c1_55d4fc30",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-02-10T16:23:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27cb2be9_1fdad3ce",
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4104977_3fe36349",
@@ -183,6 +303,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "004681f1_6ae2e220",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-02-10T16:23:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4104977_3fe36349",
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "650038d8_41191a66",
@@ -196,6 +334,24 @@
       "writtenOn": "2022-02-10T08:42:37Z",
       "side": 1,
       "message": "u-nit: std::move?",
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "737f84ef_17ed3d78",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-02-10T16:23:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "650038d8_41191a66",
       "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
