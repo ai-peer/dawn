@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69743149_932373c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-10T18:14:30Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "a142bc8d78d42c886103aed4ad5fa44a2870a2d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a42e2514_3161f809",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-10T18:14:30Z",
+      "side": 1,
+      "message": "this doesn\u0027t appear to be true. looks like we use the \"full\" name - just that the sampler bit is the placeholder one. Might be better to call out what useDummySampler will cause downstream of this transformation:\n - Dawn will bind in a non-filtering sampler for it\n - whatever tintOptions.placeholder_binding_point does",
+      "range": {
+        "startLine": 291,
+        "startChar": 46,
+        "endLine": 292,
+        "endChar": 39
+      },
+      "revId": "a142bc8d78d42c886103aed4ad5fa44a2870a2d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
