@@ -34,6 +34,46 @@
       "parentUuid": "7c7f918f_2fc0d9c6",
       "revId": "8cef6430c26fe47899f4da52e60ecbfa3eee9865",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7d9b3d3_f8c6a0ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-10T05:08:16Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "8cef6430c26fe47899f4da52e60ecbfa3eee9865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e936deaa_80281cfd",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-10T05:08:16Z",
+      "side": 1,
+      "message": "nit: const\u0026\n|entry| isn\u0027t modified in this code",
+      "range": {
+        "startLine": 188,
+        "startChar": 16,
+        "endLine": 188,
+        "endChar": 36
+      },
+      "revId": "8cef6430c26fe47899f4da52e60ecbfa3eee9865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

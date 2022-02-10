@@ -202,6 +202,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12ef0db3_6765dcab",
+        "filename": "src/dawn/native/BindGroup.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-10T05:08:16Z",
+      "side": 1,
+      "message": "maybe something like:\n```\n{\n    // Drop all external references. It should be kept alive by the bind group\n    externalTexture \u003d nullptr;\n\n    wgpu::CommandEncoder encoder \u003d device.CreateCommandEncoder();\n    wgpu::RenderPassEncoder pass \u003d encoder.BeginRenderPass(\u0026renderPass);\n    {\n         pass.SetBindGroup(0, bindGroup);\n         pass.End();\n    }\n\n    wgpu::CommandBuffer commands \u003d encoder.Finish();\n    queue.Submit(1, \u0026commands);\n}\n```",
+      "parentUuid": "186257e9_7423cff0",
+      "range": {
+        "startLine": 89,
+        "startChar": 20,
+        "endLine": 89,
+        "endChar": 41
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de33087b_830e1b9d",
         "filename": "src/dawn/native/BindGroupLayout.cpp",
         "patchSetId": 24
