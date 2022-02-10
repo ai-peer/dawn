@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ba0cf21_8b3db7f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-02-10T15:39:38Z",
+      "side": 1,
+      "message": "Thanks for your review. I will address your comments shortly, but I realized looking at this code that there\u0027s a Tint change that will significantly simplify it. I\u0027m going to land that first.",
+      "revId": "383f3f89dd1c9713076b89cf72f917dba7850fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b768479c_3962dbf1",
