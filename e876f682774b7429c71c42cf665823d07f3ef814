@@ -224,6 +224,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23ff55f4_4868850e",
+        "filename": "src/dawn/native/BindGroup.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-10T18:13:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12ef0db3_6765dcab",
+      "range": {
+        "startLine": 89,
+        "startChar": 20,
+        "endLine": 89,
+        "endChar": 41
+      },
+      "revId": "e876f682774b7429c71c42cf665823d07f3ef814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de33087b_830e1b9d",
