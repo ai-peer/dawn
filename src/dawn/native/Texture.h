@@ -45,7 +45,7 @@ namespace dawn::native {
 
     class TextureBase : public ApiObjectBase {
       public:
-        enum class TextureState { OwnedInternal, OwnedExternal, Destroyed };
+        enum class TextureState { OwnedInternal, OwnedExternal, Unbacked, Destroyed };
         enum class ClearValue { Zero, NonZero };
         TextureBase(DeviceBase* device, const TextureDescriptor* descriptor, TextureState state);
 

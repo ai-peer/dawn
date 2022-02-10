@@ -1581,6 +1581,21 @@ namespace dawn::native {
         return CreateTextureImpl(descriptor);
     }
 
+    ResultOrError<Ref<TextureBase>> DeviceBase::CreateDummyTextureForExternalTexture() {
+        return CreateDummyTextureForExternalTextureImpl();
+    }
+
+    ResultOrError<Ref<TextureBase>> DeviceBase::CreateDummyTextureForExternalTextureImpl() {
+        TextureDescriptor textureDesc;
+        textureDesc.dimension = wgpu::TextureDimension::e2D;
+        textureDesc.format = wgpu::TextureFormat::RGBA8Unorm;
+        textureDesc.label = "Dawn_External_Texture_Dummy_Texture";
+        textureDesc.size = {1, 1, 1};
+        textureDesc.usage = wgpu::TextureUsage::TextureBinding;
+
+        return CreateTextureImpl(&textureDesc);
+    }
+
     ResultOrError<Ref<TextureViewBase>> DeviceBase::CreateTextureView(
         TextureBase* texture,
         const TextureViewDescriptor* descriptor) {

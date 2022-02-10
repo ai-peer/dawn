@@ -432,6 +432,14 @@ namespace dawn::native::d3d12 {
     ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(const TextureDescriptor* descriptor) {
         return Texture::Create(this, descriptor);
     }
+    ResultOrError<Ref<TextureBase>> Device::CreateDummyTextureForExternalTextureImpl() {
+        TextureDescriptor textureDesc;
+        textureDesc.dimension = wgpu::TextureDimension::e2D;
+        textureDesc.format = wgpu::TextureFormat::RGBA8Unorm;
+        textureDesc.label = "Dawn_External_Texture_Dummy_Texture";
+
+        return Texture::CreateUnbackedTexture(this, &textureDesc);
+    }
     ResultOrError<Ref<TextureViewBase>> Device::CreateTextureViewImpl(
         TextureBase* texture,
         const TextureViewDescriptor* descriptor) {

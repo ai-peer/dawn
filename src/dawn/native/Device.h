@@ -223,6 +223,7 @@ namespace dawn::native {
         ResultOrError<Ref<SwapChainBase>> CreateSwapChain(Surface* surface,
                                                           const SwapChainDescriptor* descriptor);
         ResultOrError<Ref<TextureBase>> CreateTexture(const TextureDescriptor* descriptor);
+        ResultOrError<Ref<TextureBase>> CreateDummyTextureForExternalTexture();
         ResultOrError<Ref<TextureViewBase>> CreateTextureView(
             TextureBase* texture,
             const TextureViewDescriptor* descriptor);
@@ -412,6 +413,7 @@ namespace dawn::native {
             const SwapChainDescriptor* descriptor) = 0;
         virtual ResultOrError<Ref<TextureBase>> CreateTextureImpl(
             const TextureDescriptor* descriptor) = 0;
+        virtual ResultOrError<Ref<TextureBase>> CreateDummyTextureForExternalTextureImpl();
         virtual ResultOrError<Ref<TextureViewBase>> CreateTextureViewImpl(
             TextureBase* texture,
             const TextureViewDescriptor* descriptor) = 0;

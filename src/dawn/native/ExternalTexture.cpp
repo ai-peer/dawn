@@ -129,14 +129,7 @@ namespace dawn::native {
         if (descriptor->plane1) {
             mTextureViews[1] = descriptor->plane1;
         } else {
-            TextureDescriptor textureDesc;
-            textureDesc.dimension = wgpu::TextureDimension::e2D;
-            textureDesc.format = wgpu::TextureFormat::RGBA8Unorm;
-            textureDesc.label = "Dawn_External_Texture_Dummy_Texture";
-            textureDesc.size = {1, 1, 1};
-            textureDesc.usage = wgpu::TextureUsage::TextureBinding;
-
-            DAWN_TRY_ASSIGN(mDummyTexture, device->CreateTexture(&textureDesc));
+            DAWN_TRY_ASSIGN(mDummyTexture, device->CreateDummyTextureForExternalTexture());
 
             TextureViewDescriptor textureViewDesc;
             textureViewDesc.arrayLayerCount = 1;

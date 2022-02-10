@@ -40,6 +40,9 @@ namespace dawn::native::d3d12 {
       public:
         static ResultOrError<Ref<Texture>> Create(Device* device,
                                                   const TextureDescriptor* descriptor);
+        static ResultOrError<Ref<Texture>> CreateUnbackedTexture(
+            Device* device,
+            const TextureDescriptor* descriptor);
         static ResultOrError<Ref<Texture>> CreateExternalImage(
             Device* device,
             const TextureDescriptor* descriptor,

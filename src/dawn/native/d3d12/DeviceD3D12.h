@@ -174,6 +174,7 @@ namespace dawn::native::d3d12 {
             const SwapChainDescriptor* descriptor) override;
         ResultOrError<Ref<TextureBase>> CreateTextureImpl(
             const TextureDescriptor* descriptor) override;
+        ResultOrError<Ref<TextureBase>> CreateDummyTextureForExternalTextureImpl() override;
         ResultOrError<Ref<TextureViewBase>> CreateTextureViewImpl(
             TextureBase* texture,
             const TextureViewDescriptor* descriptor) override;

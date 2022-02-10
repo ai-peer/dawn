@@ -512,6 +512,15 @@ namespace dawn::native::d3d12 {
     }
 
     // static
+    ResultOrError<Ref<Texture>> Texture::CreateUnbackedTexture(
+        Device* device,
+        const TextureDescriptor* descriptor) {
+        Ref<Texture> dawnTexture =
+            AcquireRef(new Texture(device, descriptor, TextureState::Unbacked));
+        return std::move(dawnTexture);
+    }
+
+    // static
     ResultOrError<Ref<Texture>> Texture::CreateExternalImage(
         Device* device,
         const TextureDescriptor* descriptor,
@@ -880,6 +889,10 @@ namespace dawn::native::d3d12 {
         CommandRecordingContext* commandContext,
         std::vector<D3D12_RESOURCE_BARRIER>* barriers,
         const TextureSubresourceUsage& textureUsages) {
+        if (GetTextureState() == TextureState::Unbacked) {
+            return;
+        }
+
         if (mResourceAllocation.GetInfo().mMethod != AllocationMethod::kExternal) {
             // Track the underlying heap to ensure residency.
             Heap* heap = ToBackend(mResourceAllocation.GetResourceHeap());
@@ -980,6 +993,10 @@ namespace dawn::native::d3d12 {
     MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                                      const SubresourceRange& range,
                                      TextureBase::ClearValue clearValue) {
+        if (GetTextureState() == TextureState::Unbacked) {
+            return {};
+        }
+
         ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
 
         Device* device = ToBackend(GetDevice());

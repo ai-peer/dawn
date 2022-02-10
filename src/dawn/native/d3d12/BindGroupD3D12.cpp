@@ -134,7 +134,8 @@ namespace dawn::native::d3d12 {
                     auto& srv = view->GetSRVDescriptor();
 
                     ID3D12Resource* resource = ToBackend(view->GetTexture())->GetD3D12Resource();
-                    if (resource == nullptr) {
+                    if (resource == nullptr && view->GetTexture()->GetTextureState() !=
+                                                   TextureBase::TextureState::Unbacked) {
                         // The Texture was destroyed. Skip creating the SRV since there is no
                         // resource. This bind group won't be used as it is an error to submit a
                         // command buffer that references destroyed resources.
