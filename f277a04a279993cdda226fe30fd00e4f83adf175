@@ -16,6 +16,24 @@
       "message": "nit: missing git cl format?",
       "revId": "f277a04a279993cdda226fe30fd00e4f83adf175",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd19a183_62a47864",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-02-11T16:37:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe6ca43d_97f0e2a2",
+      "revId": "f277a04a279993cdda226fe30fd00e4f83adf175",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
