@@ -17,12 +17,14 @@
 
 bool InitSample(int argc, const char** argv);
 void DoFlush();
+void DoHeadlessFlush();
 bool ShouldQuit();
 
 struct GLFWwindow;
 struct GLFWwindow* GetGLFWWindow();
 
 wgpu::Device CreateCppDawnDevice();
+wgpu::Device CreateCppDawnHeadlessDevice();
 uint64_t GetSwapChainImplementation();
 wgpu::TextureFormat GetPreferredSwapChainTextureFormat();
 wgpu::SwapChain GetSwapChain(const wgpu::Device& device);

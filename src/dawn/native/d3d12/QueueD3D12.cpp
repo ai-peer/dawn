@@ -34,6 +34,22 @@ namespace dawn::native::d3d12 {
 
         DAWN_TRY(device->Tick());
 
+        uint64_t frequency = 12000048;
+        DAWN_TRY(CheckHRESULT(device->GetCommandQueue()->GetTimestampFrequency(&frequency),
+                              "D3D12 get timestamp frequency"));
+
+        LARGE_INTEGER cputimestampFrequency;
+        QueryPerformanceFrequency(&cputimestampFrequency);
+        double gpu = static_cast<double>(1e3) / double(frequency);
+
+        UINT64 gpuTimestampBegin, gpuTimestampEnd;
+        UINT64 cpuTimestampBegin, cpuTimestampEnd;
+        device->GetCommandQueue()->GetClockCalibration(&gpuTimestampBegin, &cpuTimestampBegin);
+        device->GetCommandQueue()->GetClockCalibration(&gpuTimestampEnd, &cpuTimestampEnd);
+        char buffer[80];
+        snprintf(buffer, 80, "%f", (double)gpuTimestampBegin * gpu);
+        fprintf(stderr, "QueueSubmitImpl: %s\n", buffer);
+
         CommandRecordingContext* commandContext;
         DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext());
 

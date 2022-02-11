@@ -88,6 +88,25 @@ namespace dawn::native::d3d12 {
                                   "D3D12 get timestamp frequency"));
             // Calculate the period in nanoseconds by the frequency.
             mTimestampPeriod = static_cast<float>(1e9) / frequency;
+            // float mTimestampPeriod = 1.0f;
+            // float mCPUTimestampPeriod = 1.0f;
+
+            LARGE_INTEGER cputimestampFrequency;  // m_cputimestampFrequency;
+            QueryPerformanceFrequency(&cputimestampFrequency);
+            // mCPUTimestampPeriod =
+            // static_cast<float>(1e9)/UINT64(cputimestampFrequency.QuadPart);// / 1000.0;
+            mTimestampPeriod = static_cast<double>(1e9) / frequency;
+            double cpu = static_cast<double>(1e3) / double(cputimestampFrequency.QuadPart);
+            double gpu = static_cast<double>(1e3) / double(frequency);
+
+            UINT64 gpuTimestamp, cpuTimestamp;
+
+            mCommandQueue->GetClockCalibration(&gpuTimestamp, &cpuTimestamp);
+            char buffer[80];
+            snprintf(buffer, 80, "GPU: %f, %lld; CPU: %f, %lld", (double)gpuTimestamp * gpu,
+                     frequency, (double)cpuTimestamp * cpu, cputimestampFrequency.QuadPart);
+
+            fprintf(stderr, "Device::Initialize %s\n", buffer);
         }
 
         // If PIX is not attached, the QueryInterface fails. Hence, no need to check the return
