@@ -39,3 +39,6 @@ target_link_libraries(ComputeBoids dawn_sample_utils)
 
 add_executable(Animometer "Animometer.cpp")
 target_link_libraries(Animometer dawn_sample_utils)
+
+add_executable(GpuTimestamp "GpuTimestamp.cpp")
+target_link_libraries(GpuTimestamp dawn_sample_utils)

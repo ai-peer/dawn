@@ -277,3 +277,99 @@ bool ShouldQuit() {
 GLFWwindow* GetGLFWWindow() {
     return window;
 }
+
+wgpu::Device CreateCppDawnHeadlessDevice() {
+    ScopedEnvironmentVar angleDefaultPlatform;
+    if (GetEnvironmentVar("ANGLE_DEFAULT_PLATFORM").first.empty()) {
+        angleDefaultPlatform.Set("ANGLE_DEFAULT_PLATFORM", "swiftshader");
+    }
+
+    instance = std::make_unique<dawn::native::Instance>();
+    utils::DiscoverAdapter(instance.get(), nullptr, backendType);
+
+    // Get an adapter for the backend to use, and create the device.
+    dawn::native::Adapter backendAdapter;
+    {
+        std::vector<dawn::native::Adapter> adapters = instance->GetAdapters();
+        auto adapterIt = std::find_if(adapters.begin(), adapters.end(),
+                                      [](const dawn::native::Adapter adapter) -> bool {
+                                          wgpu::AdapterProperties properties;
+                                          adapter.GetProperties(&properties);
+                                          return properties.backendType == backendType;
+                                      });
+        ASSERT(adapterIt != adapters.end());
+        backendAdapter = *adapterIt;
+    }
+
+    std::vector<wgpu::FeatureName> requiredFeatures = {};
+    requiredFeatures.push_back(wgpu::FeatureName::TimestampQuery);
+    wgpu::DeviceDescriptor deviceDescriptor = {};
+    deviceDescriptor.requiredFeatures = requiredFeatures.data();
+    deviceDescriptor.requiredFeaturesCount = requiredFeatures.size();
+
+    std::vector<const char*> forceDisabledToggles = {};
+    // Disabled disallowing unsafe APIs so we can test them.
+    forceDisabledToggles.push_back("disallow_unsafe_apis");
+    wgpu::DawnTogglesDeviceDescriptor togglesDesc = {};
+    togglesDesc.forceDisabledToggles = forceDisabledToggles.data();
+    togglesDesc.forceDisabledTogglesCount = forceDisabledToggles.size();
+
+    deviceDescriptor.nextInChain = &togglesDesc;
+
+    WGPUDevice backendDevice = backendAdapter.CreateDevice(&deviceDescriptor);
+    DawnProcTable backendProcs = dawn_native::GetProcs();
+
+    binding = utils::CreateBinding(backendType, window, backendDevice);
+    if (binding == nullptr) {
+        return wgpu::Device();
+    }
+
+    // Choose whether to use the backend procs and devices directly, or set up the wire.
+    WGPUDevice cDevice = nullptr;
+    DawnProcTable procs;
+
+    switch (cmdBufType) {
+        case CmdBufType::None:
+            procs = backendProcs;
+            cDevice = backendDevice;
+            break;
+
+        case CmdBufType::Terrible: {
+            c2sBuf = new utils::TerribleCommandBuffer();
+            s2cBuf = new utils::TerribleCommandBuffer();
+
+            dawn::wire::WireServerDescriptor serverDesc = {};
+            serverDesc.procs = &backendProcs;
+            serverDesc.serializer = s2cBuf;
+
+            wireServer = new dawn::wire::WireServer(serverDesc);
+            c2sBuf->SetHandler(wireServer);
+
+            dawn::wire::WireClientDescriptor clientDesc = {};
+            clientDesc.serializer = c2sBuf;
+
+            wireClient = new dawn::wire::WireClient(clientDesc);
+            procs = dawn::wire::client::GetProcs();
+            s2cBuf->SetHandler(wireClient);
+
+            auto deviceReservation = wireClient->ReserveDevice();
+            wireServer->InjectDevice(backendDevice, deviceReservation.id,
+                                     deviceReservation.generation);
+
+            cDevice = deviceReservation.device;
+        } break;
+    }
+
+    dawnProcSetProcs(&procs);
+    procs.deviceSetUncapturedErrorCallback(cDevice, PrintDeviceError, nullptr);
+    return wgpu::Device::Acquire(cDevice);
+}
+
+void DoHeadlessFlush() {
+    if (cmdBufType == CmdBufType::Terrible) {
+        bool c2sSuccess = c2sBuf->Flush();
+        bool s2cSuccess = s2cBuf->Flush();
+
+        ASSERT(c2sSuccess && s2cSuccess);
+    }
+}
