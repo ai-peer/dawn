@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8d12c96_ccfde4d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-02-12T01:18:27Z",
+      "side": 1,
+      "message": "It\u0027s possible there\u0027s more places this could be applied, but it\u0027s 5:00 on a Friday, so that\u0027s a question for Next Week Brandon to explore. Just wanted to get the code uploaded before I signed off.\n\nAn example of the type of error developers could expect from this change:\n\nNumber of entries (1) did not match the number of entries (2) specified in [BindGroupLayout].\nExpected layout:  [{\n  binding: 0\n  visibility: ShaderStage::Compute\n  Buffer: {\n    type: BufferBindingType::ReadOnlyStorage\n    minBindingSize: 48\n  }\n}, {\n  binding: 1\n  visibility: ShaderStage::Compute\n  Buffer: {\n    type: BufferBindingType::Storage\n    minBindingSize: 68\n  }\n}, ]\n - While validating [BindGroupDescriptor \"Metaball Compute Bind Group\"] against [BindGroupLayout]\n - While calling [Device].CreateBindGroup([BindGroupDescriptor \"Metaball Compute Bind Group\"]).",
+      "revId": "32959ef892ee3513ed37d2c7171af42b2ac8e69a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
