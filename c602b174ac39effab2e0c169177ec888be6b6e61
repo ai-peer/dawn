@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfe7a78f_6d135274",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-02-14T21:46:21Z",
+      "side": 1,
+      "message": "PTAL\n\nhttps://dawn-review.googlesource.com/c/tint/+/80482 is the corresponding Tint change.\nhttps://chromium-review.googlesource.com/c/chromium/src/+/3462178 is the corresponding Chromium change",
+      "revId": "c602b174ac39effab2e0c169177ec888be6b6e61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
