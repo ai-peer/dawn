@@ -182,7 +182,7 @@ namespace utils {
                 return 2u;
 
             case wgpu::TextureFormat::Depth24Plus:
-            case wgpu::TextureFormat::Depth24UnormStencil8:
+            case wgpu::TextureFormat::Depth24PlusStencil8:
             case wgpu::TextureFormat::Depth32Float:
                 return 4u;
 
@@ -248,7 +248,7 @@ namespace utils {
             case wgpu::TextureFormat::ASTC12x12UnormSrgb:
                 return 16u;
 
-            case wgpu::TextureFormat::Depth24PlusStencil8:
+            case wgpu::TextureFormat::Depth24UnormStencil8:
             case wgpu::TextureFormat::Depth32FloatStencil8:
 
             // Block size of a multi-planar format depends on aspect.
