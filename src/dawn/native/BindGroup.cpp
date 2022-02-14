@@ -403,7 +403,11 @@ namespace dawn::native {
                 ExternalTextureBindingExpansionMap::iterator it =
                     expansions.find(BindingNumber(entry.binding));
 
-                ASSERT(it != expansions.end());
+                // Validation should error before this if the binding doesn't exist. We break here
+                // to avoid issues when validation is disabled.
+                if (it == expansions.end()) {
+                    break;
+                }
 
                 BindingIndex plane0BindingIndex =
                     descriptor->layout->GetBindingIndex(it->second.plane0);
