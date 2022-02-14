@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c975d1c_bf782e2d",
+        "filename": "src/dawn/native/BindingInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-02-14T17:42:57Z",
+      "side": 1,
+      "message": "Might as well include it, especially because there\u0027s always a possibility that some function other than the bind group validation may try to use this in the future.",
+      "parentUuid": "728808fb_1d783f60",
+      "revId": "32959ef892ee3513ed37d2c7171af42b2ac8e69a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8dc94f7_f4148b40",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a94b41cb_7bec4acf",
+        "filename": "src/dawn/native/BindingInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-02-14T17:42:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8dc94f7_f4148b40",
+      "revId": "32959ef892ee3513ed37d2c7171af42b2ac8e69a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02f7da05_f830a755",
@@ -82,6 +118,24 @@
       "writtenOn": "2022-02-12T01:52:26Z",
       "side": 1,
       "message": "It might be confusing if you had a multisampled texture and tried to use it with a nonmultisampled layout because it wouldn\u0027t specify `multisampled: false`. Probably include this unconditionally?",
+      "revId": "32959ef892ee3513ed37d2c7171af42b2ac8e69a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af339133_46a6baac",
+        "filename": "src/dawn/native/BindingInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-02-14T17:42:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02f7da05_f830a755",
       "revId": "32959ef892ee3513ed37d2c7171af42b2ac8e69a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
