@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e162a220_f4b3043f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-14T14:14:20Z",
+      "side": 1,
+      "message": "Austin, I\u0027m not going to be able to finish this CL before quite some time. There are two issues leftover:\n\n - A VVL failure, likely due to UtilsVulkan.cpp\u0027s VulkanAspectMask choosing pure stencil for stencil8 textures when they are falling back to depth*-stencil8.\n - A d3d12 debug layer issue where it wants 4 bytes per texel for stencil copies with buffers, when AFAIK it should just be 1 byte. (we should check with Rafael, Jesse Natalie).\n \nCan you make sure it finds an owner to take over it?",
+      "revId": "f9d0b26b17695bc3d901c66cb1451fae3c8043f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
