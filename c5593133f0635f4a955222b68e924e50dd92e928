@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d8644d1_0bcaeed6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-15T17:52:20Z",
+      "side": 1,
+      "message": "I\u0027ll let Rafael know.\n\nOne point I\u0027m aware of is the memory saved by not allocating the D3D12 resource. A 1x1x1 RGBA8 texture appears to be only 4 bytes, but I believe it\u0027s actually 4KB due to alignment requirements.",
+      "parentUuid": "bb5ed42f_ddc492ae",
+      "revId": "c5593133f0635f4a955222b68e924e50dd92e928",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "818df3c9_b853592f",
