@@ -34,6 +34,24 @@
       "parentUuid": "bd2cf08c_4194f576",
       "revId": "8dbb735fd6ad8c08b34b50b9d68bb5162a6a231e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c065f8f_64e0f3c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-02-15T01:22:18Z",
+      "side": 1,
+      "message": "I notice depth24plus was already returning 4. This is also questionable, just kind of works because depth24plus is always 3-4 bytes with a 4-byte stride. If we can remove the unsized AND multiaspect formats from here it would be less confusing.\n\nwriteTexture isn\u0027t supposed to work on unsized formats (although we have considered it in the past, with a format conversion). There is a bug in the spec where it assumes the format is sized before calling into \"validating linear texture data\": https://gpuweb.github.io/gpuweb/#dom-gpuqueue-writetexture\nIn fact we might be missing the equivalent validation in copyBufferToTexture etc as well.",
+      "parentUuid": "6c6a9ef2_18fa9e18",
+      "revId": "8dbb735fd6ad8c08b34b50b9d68bb5162a6a231e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
