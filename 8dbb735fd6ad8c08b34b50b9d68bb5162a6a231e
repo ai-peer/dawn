@@ -70,6 +70,24 @@
       "parentUuid": "6c6a9ef2_18fa9e18",
       "revId": "8dbb735fd6ad8c08b34b50b9d68bb5162a6a231e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aa6caf9_139c445f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-02-15T01:41:11Z",
+      "side": 1,
+      "message": "(To Kai), it\u0027s true that there is an issue about unsized texture format: Define the copies with \"depth24plus\", \"depth24plus-stencil8\", and \"stencil8\". [Issue #gpuweb/gpuweb#652] in current spec. Before that issue is clear, the current spec says it must follow the section about depth/stencil format at https://gpuweb.github.io/gpuweb/#depth-formats, which says that unsized formats like stencil8 and stencil aspect of Depth24PlusStencil8 are copyable.\n\nAnd like Kai said, the function return 4 for depth24plus, which make me suspect even more that the original code introduced a typo here: it intended to be Depth24PlusStencil8, not Depth24UnormStencil8. However, copying these unsized formats needs to be clarified in spec.",
+      "parentUuid": "0f22730f_b4c1a221",
+      "revId": "8dbb735fd6ad8c08b34b50b9d68bb5162a6a231e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
