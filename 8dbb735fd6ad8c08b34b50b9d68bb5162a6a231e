@@ -16,6 +16,24 @@
       "message": "This is a tiny fix about TexelBlockInfo in Dawn. I think Depth24plusStencil8 should be supported and return a meaningful value when calling GetTexelBlockSizeInBytes(), while Depth24UnormStencil8 can return nothing and hit UNREACHABLE() because it is not fully supported yet (looks like Hao is working on this). \n\nPTAL. Thanks!\n\nBTW, it turns out that there are already two places about TexelBlockInfo: one is in dawn/native/Format.h|.cpp, another is this one (dawn/utils/TextureUtils.h|.cpp and TestUtils.h|.cpp). We may need to refactor all of these in future. Otherwise, we need to update more-than-one places for the same thing. ",
       "revId": "8dbb735fd6ad8c08b34b50b9d68bb5162a6a231e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c6a9ef2_18fa9e18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-15T01:02:43Z",
+      "side": 1,
+      "message": "we only use TextureUtils in tests, right?\n\nI think Depth24UnormStencil8 should rightly be 4. Depth24plusStencil8 should not because we don\u0027t know if it depth is backed by 24unorm or 32float.\n\nI believe these helpers overall are used to upload texture data. It wouldn\u0027t make sense to return a size for Depth24plusStencil8 since we can\u0027t copy to the depth channel using the WebGPU API.",
+      "parentUuid": "bd2cf08c_4194f576",
+      "revId": "8dbb735fd6ad8c08b34b50b9d68bb5162a6a231e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
