@@ -16,6 +16,63 @@
       "message": "PTAL, thanks!",
       "revId": "ca1b7dffbcdaaa55ff3405b717ffd0bbf2eb9ab4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d1ae918_0af9b1cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-15T08:52:33Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ca1b7dffbcdaaa55ff3405b717ffd0bbf2eb9ab4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da27db9e_fa1fc1ec",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-15T08:52:33Z",
+      "side": 1,
+      "message": "In the future we\u0027ll want to find a way to make this table definition nicer. It\u0027s getting hard to know what all the booleans mean.",
+      "revId": "ca1b7dffbcdaaa55ff3405b717ffd0bbf2eb9ab4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "350f4456_d5b75634",
+        "filename": "src/dawn/utils/TextureUtils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-15T08:52:33Z",
+      "side": 1,
+      "message": "nit: Is format supports reads a bit weird. Maybe just TextureFormatSupportsMultisampling?",
+      "range": {
+        "startLine": 234,
+        "startChar": 9,
+        "endLine": 234,
+        "endChar": 45
+      },
+      "revId": "ca1b7dffbcdaaa55ff3405b717ffd0bbf2eb9ab4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
