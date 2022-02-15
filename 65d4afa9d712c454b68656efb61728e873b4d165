@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "65d4afa9d712c454b68656efb61728e873b4d165",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e7ffd87_8a9c927a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-15T09:02:53Z",
+      "side": 1,
+      "message": "LGTM too, thanks for making the function that defensive. I hope it works",
+      "revId": "65d4afa9d712c454b68656efb61728e873b4d165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
