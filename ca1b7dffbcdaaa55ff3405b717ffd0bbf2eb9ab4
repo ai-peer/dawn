@@ -37,6 +37,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6cf9ad23_60661ca7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-02-15T17:47:11Z",
+      "side": 1,
+      "message": "LGTM as well, though I\u0027d like to see @cwallez\u0027s nit about the function name addressed before landing.",
+      "revId": "ca1b7dffbcdaaa55ff3405b717ffd0bbf2eb9ab4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "da27db9e_fa1fc1ec",
         "filename": "src/dawn/native/Format.cpp",
         "patchSetId": 2
