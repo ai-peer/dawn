@@ -50,6 +50,29 @@
       "message": "LGTM too, thanks for making the function that defensive. I hope it works",
       "revId": "65d4afa9d712c454b68656efb61728e873b4d165",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35da23d5_85361caf",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-02-15T09:22:03Z",
+      "side": 1,
+      "message": "I\u0027m not sure if the root cause is calling the selector in for loop. In the official example (https://developer.apple.com/documentation/metal/counter_sampling/checking_for_gpu_counter_support?language\u003dobjc), the counterSets is obtained by dot operation which I used previously, but it\u0027s out of the loop.\nCould we use device.counterSets instead of [device counterSets], so we don\u0027t need to check the selector response.",
+      "range": {
+        "startLine": 203,
+        "startChar": 54,
+        "endLine": 203,
+        "endChar": 75
+      },
+      "revId": "65d4afa9d712c454b68656efb61728e873b4d165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
