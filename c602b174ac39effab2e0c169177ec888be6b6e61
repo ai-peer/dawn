@@ -39,6 +39,30 @@
       },
       "revId": "c602b174ac39effab2e0c169177ec888be6b6e61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "058efd33_391b240f",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-15T09:23:52Z",
+      "side": 1,
+      "message": "Or a proxy group and do the n-way patching?",
+      "parentUuid": "e3e7485b_8d31668d",
+      "range": {
+        "startLine": 166,
+        "startChar": 4,
+        "endLine": 166,
+        "endChar": 40
+      },
+      "revId": "c602b174ac39effab2e0c169177ec888be6b6e61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
