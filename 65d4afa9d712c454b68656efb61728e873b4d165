@@ -73,6 +73,30 @@
       },
       "revId": "65d4afa9d712c454b68656efb61728e873b4d165",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "072873ca_7662cc7f",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-15T16:48:42Z",
+      "side": 1,
+      "message": "It *shouldn\u0027t* matter, but I\u0027ll match the example code to be safe. General Obj C guidance is to use \".\" for simple property accessors.",
+      "parentUuid": "35da23d5_85361caf",
+      "range": {
+        "startLine": 203,
+        "startChar": 54,
+        "endLine": 203,
+        "endChar": 75
+      },
+      "revId": "65d4afa9d712c454b68656efb61728e873b4d165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
