@@ -25,10 +25,7 @@
 
 namespace dawn::native::vulkan {
 
-    enum class ICD {
-        None,
-        SwiftShader,
-    };
+    enum class ICD : uint32_t;
 
     // VulkanInstance holds the reference to the Vulkan library, the VkInstance, VkPhysicalDevices
     // on that instance, Vulkan functions loaded from the library, and global information

@@ -81,10 +81,19 @@ constexpr SkippedMessage kSkippedMessages[] = {
 
 namespace dawn::native::vulkan {
 
+    enum class ICD : uint32_t {
+        DummyToPreventEmptyArray,
+        None,
+        SwiftShader,
+    };
+
     namespace {
 
         static constexpr ICD kICDs[] = {
+            ICD::DummyToPreventEmptyArray,
+#if !defined(DAWN_PLATFORM_MACOS)
             ICD::None,
+#endif  // !defined(DAWN_PLATFORM_MACOS)
 #if defined(DAWN_ENABLE_SWIFTSHADER)
             ICD::SwiftShader,
 #endif  // defined(DAWN_ENABLE_SWIFTSHADER)
@@ -199,6 +208,8 @@ namespace dawn::native::vulkan {
         };
 
         switch (icd) {
+            case ICD::DummyToPreventEmptyArray:
+                break;
             case ICD::None: {
                 DAWN_TRY(LoadVulkan(kVulkanLibName));
                 // Succesfully loaded driver; break.
