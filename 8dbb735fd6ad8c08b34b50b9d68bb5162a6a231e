@@ -106,6 +106,24 @@
       "parentUuid": "1aa6caf9_139c445f",
       "revId": "8dbb735fd6ad8c08b34b50b9d68bb5162a6a231e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dd168aa_730077c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-02-15T04:22:35Z",
+      "side": 1,
+      "message": "Gotcha. This function is also used in tests for B2T/T2B/T2T copy. Maybe we can introduce parameter aspect, just like https://chromium-review.googlesource.com/c/chromium/src/+/3457847/3/third_party/blink/renderer/modules/webgpu/texture_utils.cc#65.",
+      "parentUuid": "b86f25dd_d3694a5f",
+      "revId": "8dbb735fd6ad8c08b34b50b9d68bb5162a6a231e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
