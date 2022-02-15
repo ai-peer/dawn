@@ -16,6 +16,29 @@
       "message": "PTAL\n\nhttps://dawn-review.googlesource.com/c/tint/+/80482 is the corresponding Tint change.\nhttps://chromium-review.googlesource.com/c/chromium/src/+/3462178 is the corresponding Chromium change",
       "revId": "c602b174ac39effab2e0c169177ec888be6b6e61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3e7485b_8d31668d",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-02-15T09:20:58Z",
+      "side": 1,
+      "message": "You could add a tint GN target here so that this can land.",
+      "range": {
+        "startLine": 166,
+        "startChar": 4,
+        "endLine": 166,
+        "endChar": 40
+      },
+      "revId": "c602b174ac39effab2e0c169177ec888be6b6e61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
