@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "597deb5a_40a2f0aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-02-15T00:14:03Z",
+      "side": 1,
+      "message": "Would you consider mentioning a little more background in another paragraph? For example, that the GLSL and GLSL ES backends are passing all tests that the SPIRV-Cross backend was, and that the SPIRV-Cross backend has been removed?",
+      "revId": "26989b7139485b6e9b426a0c787bd0832a666b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "97981647_2ebcc4ea",
