@@ -124,6 +124,23 @@
       "parentUuid": "b86f25dd_d3694a5f",
       "revId": "8dbb735fd6ad8c08b34b50b9d68bb5162a6a231e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78f5f8db_543654b8",
+        "filename": "src/dawn/utils/TextureUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-15T08:45:21Z",
+      "side": 1,
+      "message": "I think this isn\u0027t the bug: the problem is that formats with multiple aspects have a texel byte size per aspect. Depth formats (except depth16unorm) always use 4 bytes per texel for the depth aspect, but the stencil8 is always a single byte per aspect.\n\nIf we wanted to fix this, we would need to make GetTexelBlockSizeInBytes take an aspect (defaulted to color?) as a parameter so we can return 4 or 1 depending on depth or stencil.",
+      "revId": "8dbb735fd6ad8c08b34b50b9d68bb5162a6a231e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
