@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd2cf08c_4194f576",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-02-15T00:49:47Z",
+      "side": 1,
+      "message": "This is a tiny fix about TexelBlockInfo in Dawn. I think Depth24plusStencil8 should be supported and return a meaningful value when calling GetTexelBlockSizeInBytes(), while Depth24UnormStencil8 can return nothing and hit UNREACHABLE() because it is not fully supported yet (looks like Hao is working on this). \n\nPTAL. Thanks!\n\nBTW, it turns out that there are already two places about TexelBlockInfo: one is in dawn/native/Format.h|.cpp, another is this one (dawn/utils/TextureUtils.h|.cpp and TestUtils.h|.cpp). We may need to refactor all of these in future. Otherwise, we need to update more-than-one places for the same thing. ",
+      "revId": "8dbb735fd6ad8c08b34b50b9d68bb5162a6a231e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
