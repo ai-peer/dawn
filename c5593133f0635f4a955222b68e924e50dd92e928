@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb5ed42f_ddc492ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-15T09:07:24Z",
+      "side": 1,
+      "message": "I\u0027m on the fence on this one. Rafael believes that making a null SRV is better for perf, but here we are introducing a bunch of additional branches in the hot path for D3D12. (texture barrier, srv creation, etc). Overall it seems we\u0027re adding complexity for 1) slower CPU side code and maybe 2) tiny gains on the GPU side.\n\nI don\u0027t think this is worth it. If Rafael disagrees, I\u0027m happy to argue. (though it will have to wait for quite some time).\n\nThe code LGTM in terms of correctness / readability otherwise.",
+      "revId": "c5593133f0635f4a955222b68e924e50dd92e928",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "818df3c9_b853592f",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1588,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-02-15T09:07:24Z",
+      "side": 1,
+      "message": "nit: GetOrCreateDummyTexture? So we can cache it on the device.",
+      "revId": "c5593133f0635f4a955222b68e924e50dd92e928",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
