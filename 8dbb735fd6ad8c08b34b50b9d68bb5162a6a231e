@@ -52,6 +52,24 @@
       "parentUuid": "6c6a9ef2_18fa9e18",
       "revId": "8dbb735fd6ad8c08b34b50b9d68bb5162a6a231e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f22730f_b4c1a221",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-02-15T01:23:17Z",
+      "side": 1,
+      "message": "Yes. TextureUtils is only used in tests. Dawn tests doesn\u0027t require full coverage, and it doesn\u0027t test Depth24PlusStencil8 via this function. \n\nThat\u0027s one of the differences between Format.* and TextureUtils.* for the same information(TexelBlockInfo). It makes sense that it can run into UNREAACHABLE() for depth aspect for this format, which is not copyable. But this format is allowed to copy for stencil aspect, which will run into UNREACHABLE() too because this function doesn\u0027t consider texture aspect at all. But Format.* consider texture aspect.\n\nFor now, whether apply tis fix doesn\u0027t impact any tests/code. But I think the original code is more like a typo. Otherwise, we should return a value for Depth32FloatStencil8\u0027s byte size in this function?",
+      "parentUuid": "6c6a9ef2_18fa9e18",
+      "revId": "8dbb735fd6ad8c08b34b50b9d68bb5162a6a231e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
