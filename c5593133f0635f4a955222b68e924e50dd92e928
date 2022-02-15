@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "009f9717_ac511904",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-15T21:11:10Z",
+      "side": 1,
+      "message": "To add - the minimum page size for D3D is 64KB, which is non-negligible overhead for a 1x1x1 texture. In the absolute worst case scenario, Dawn\u0027s allocation scheme could require creating a 4MB heap for this texture. We must also consider the CPU cycles associated with each allocation.\n\nI\u0027ve been told that the overhead associated with what\u0027s stated above will be very apparent in a profile - so that\u0027s what I will plan to do when I have the time.",
+      "parentUuid": "6d8644d1_0bcaeed6",
+      "revId": "c5593133f0635f4a955222b68e924e50dd92e928",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "818df3c9_b853592f",
