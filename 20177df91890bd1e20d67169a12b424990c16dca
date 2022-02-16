@@ -16,6 +16,23 @@
       "message": "ptal -- this is needed to support rgba16float framebuffers on macOS",
       "revId": "20177df91890bd1e20d67169a12b424990c16dca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2dd08f0_e8772e4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-16T18:39:07Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "20177df91890bd1e20d67169a12b424990c16dca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
