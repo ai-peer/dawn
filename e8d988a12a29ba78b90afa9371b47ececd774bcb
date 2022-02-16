@@ -16,6 +16,46 @@
       "message": "Completely misread the code on my first patchset. This validation is needed and should fix the fuzzer issue.",
       "revId": "e8d988a12a29ba78b90afa9371b47ececd774bcb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d261b305_243fa9e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-16T15:49:10Z",
+      "side": 1,
+      "message": "LGTM, but can we have a validation test that would catch this class of validation error?\n\nAlso, Corentin will be out for some time; for future CLs, you can probably add another reviewer like lokokung@google.com",
+      "revId": "e8d988a12a29ba78b90afa9371b47ececd774bcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6facfe4_6e2a200b",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-16T15:49:10Z",
+      "side": 1,
+      "message": "nit: use a const\u0026 to avoid a copy",
+      "range": {
+        "startLine": 247,
+        "startChar": 12,
+        "endLine": 247,
+        "endChar": 46
+      },
+      "revId": "e8d988a12a29ba78b90afa9371b47ececd774bcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
