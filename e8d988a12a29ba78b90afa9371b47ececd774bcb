@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "086c2dca_b249d41c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-02-16T15:46:43Z",
+      "side": 1,
+      "message": "Completely misread the code on my first patchset. This validation is needed and should fix the fuzzer issue.",
+      "revId": "e8d988a12a29ba78b90afa9371b47ececd774bcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
