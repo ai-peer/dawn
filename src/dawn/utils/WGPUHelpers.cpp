@@ -17,7 +17,7 @@
 #include "dawn/common/Constants.h"
 #include "dawn/common/Log.h"
 
-#include "spirv-tools/optimizer.hpp"
+// #include "spirv-tools/optimizer.hpp"
 
 #include <cstring>
 #include <iomanip>
@@ -26,41 +26,41 @@
 #include <sstream>
 
 namespace utils {
-    wgpu::ShaderModule CreateShaderModuleFromASM(const wgpu::Device& device, const char* source) {
-        // Use SPIRV-Tools's C API to assemble the SPIR-V assembly text to binary. Because the types
-        // aren't RAII, we don't return directly on success and instead always go through the code
-        // path that destroys the SPIRV-Tools objects.
-        wgpu::ShaderModule result = nullptr;
+    // wgpu::ShaderModule CreateShaderModuleFromASM(const wgpu::Device& device, const char* source) {
+    //     // Use SPIRV-Tools's C API to assemble the SPIR-V assembly text to binary. Because the types
+    //     // aren't RAII, we don't return directly on success and instead always go through the code
+    //     // path that destroys the SPIRV-Tools objects.
+    //     wgpu::ShaderModule result = nullptr;
 
-        spv_context context = spvContextCreate(SPV_ENV_UNIVERSAL_1_3);
-        ASSERT(context != nullptr);
+    //     spv_context context = spvContextCreate(SPV_ENV_UNIVERSAL_1_3);
+    //     ASSERT(context != nullptr);
 
-        spv_binary spirv = nullptr;
-        spv_diagnostic diagnostic = nullptr;
-        if (spvTextToBinary(context, source, strlen(source), &spirv, &diagnostic) == SPV_SUCCESS) {
-            ASSERT(spirv != nullptr);
-            ASSERT(spirv->wordCount <= std::numeric_limits<uint32_t>::max());
+    //     spv_binary spirv = nullptr;
+    //     spv_diagnostic diagnostic = nullptr;
+    //     if (spvTextToBinary(context, source, strlen(source), &spirv, &diagnostic) == SPV_SUCCESS) {
+    //         ASSERT(spirv != nullptr);
+    //         ASSERT(spirv->wordCount <= std::numeric_limits<uint32_t>::max());
 
-            wgpu::ShaderModuleSPIRVDescriptor spirvDesc;
-            spirvDesc.codeSize = static_cast<uint32_t>(spirv->wordCount);
-            spirvDesc.code = spirv->code;
+    //         wgpu::ShaderModuleSPIRVDescriptor spirvDesc;
+    //         spirvDesc.codeSize = static_cast<uint32_t>(spirv->wordCount);
+    //         spirvDesc.code = spirv->code;
 
-            wgpu::ShaderModuleDescriptor descriptor;
-            descriptor.nextInChain = &spirvDesc;
-            result = device.CreateShaderModule(&descriptor);
-        } else {
-            ASSERT(diagnostic != nullptr);
-            dawn::WarningLog() << "CreateShaderModuleFromASM SPIRV assembly error:"
-                               << diagnostic->position.line + 1 << ":"
-                               << diagnostic->position.column + 1 << ": " << diagnostic->error;
-        }
+    //         wgpu::ShaderModuleDescriptor descriptor;
+    //         descriptor.nextInChain = &spirvDesc;
+    //         result = device.CreateShaderModule(&descriptor);
+    //     } else {
+    //         ASSERT(diagnostic != nullptr);
+    //         dawn::WarningLog() << "CreateShaderModuleFromASM SPIRV assembly error:"
+    //                            << diagnostic->position.line + 1 << ":"
+    //                            << diagnostic->position.column + 1 << ": " << diagnostic->error;
+    //     }
 
-        spvDiagnosticDestroy(diagnostic);
-        spvBinaryDestroy(spirv);
-        spvContextDestroy(context);
+    //     spvDiagnosticDestroy(diagnostic);
+    //     spvBinaryDestroy(spirv);
+    //     spvContextDestroy(context);
 
-        return result;
-    }
+    //     return result;
+    // }
 
     wgpu::ShaderModule CreateShaderModule(const wgpu::Device& device, const char* source) {
         wgpu::ShaderModuleWGSLDescriptor wgslDesc;
@@ -296,18 +296,18 @@ namespace utils {
         storageTexture.viewDimension = textureViewDimension;
     }
 
-    // ExternalTextureBindingLayout never contains data, so just make one that can be reused instead
-    // of declaring a new one every time it's needed.
-    wgpu::ExternalTextureBindingLayout kExternalTextureBindingLayout = {};
+    // // ExternalTextureBindingLayout never contains data, so just make one that can be reused instead
+    // // of declaring a new one every time it's needed.
+    // wgpu::ExternalTextureBindingLayout kExternalTextureBindingLayout = {};
 
-    BindingLayoutEntryInitializationHelper::BindingLayoutEntryInitializationHelper(
-        uint32_t entryBinding,
-        wgpu::ShaderStage entryVisibility,
-        wgpu::ExternalTextureBindingLayout* bindingLayout) {
-        binding = entryBinding;
-        visibility = entryVisibility;
-        nextInChain = bindingLayout;
-    }
+    // BindingLayoutEntryInitializationHelper::BindingLayoutEntryInitializationHelper(
+    //     uint32_t entryBinding,
+    //     wgpu::ShaderStage entryVisibility,
+    //     wgpu::ExternalTextureBindingLayout* bindingLayout) {
+    //     binding = entryBinding;
+    //     visibility = entryVisibility;
+    //     nextInChain = bindingLayout;
+    // }
 
     BindingLayoutEntryInitializationHelper::BindingLayoutEntryInitializationHelper(
         const wgpu::BindGroupLayoutEntry& entry)
@@ -324,12 +324,12 @@ namespace utils {
         : binding(binding), textureView(textureView) {
     }
 
-    BindingInitializationHelper::BindingInitializationHelper(
-        uint32_t binding,
-        const wgpu::ExternalTexture& externalTexture)
-        : binding(binding) {
-        externalTextureBindingEntry.externalTexture = externalTexture;
-    }
+    // BindingInitializationHelper::BindingInitializationHelper(
+    //     uint32_t binding,
+    //     const wgpu::ExternalTexture& externalTexture)
+    //     : binding(binding) {
+    //     externalTextureBindingEntry.externalTexture = externalTexture;
+    // }
 
     BindingInitializationHelper::BindingInitializationHelper(uint32_t binding,
                                                              const wgpu::Buffer& buffer,
@@ -347,9 +347,9 @@ namespace utils {
         result.buffer = buffer;
         result.offset = offset;
         result.size = size;
-        if (externalTextureBindingEntry.externalTexture != nullptr) {
-            result.nextInChain = &externalTextureBindingEntry;
-        }
+        // if (externalTextureBindingEntry.externalTexture != nullptr) {
+        //     result.nextInChain = &externalTextureBindingEntry;
+        // }
 
         return result;
     }

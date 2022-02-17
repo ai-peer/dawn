@@ -14,6 +14,10 @@
 
 #include "dawn/common/Platform.h"
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#else
+
 #if defined(DAWN_PLATFORM_WINDOWS)
 #    include <Windows.h>
 #elif defined(DAWN_PLATFORM_POSIX)
@@ -22,7 +26,15 @@
 #    error "Unsupported platform."
 #endif
 
+#endif
+
 namespace utils {
+
+#ifdef __EMSCRIPTEN__
+    void USleep(unsigned int usecs) {
+        emscripten_sleep(usecs);
+    }
+#else
 
 #if defined(DAWN_PLATFORM_WINDOWS)
     void USleep(unsigned int usecs) {
@@ -34,6 +46,8 @@ namespace utils {
     }
 #else
 #    error "Implement USleep for your platform."
+#endif
+
 #endif
 
 }  // namespace utils

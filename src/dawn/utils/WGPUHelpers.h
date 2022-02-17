@@ -15,7 +15,11 @@
 #ifndef UTILS_DAWNHELPERS_H_
 #define UTILS_DAWNHELPERS_H_
 
+#ifdef __EMSCRIPTEN__
+#include <webgpu/webgpu_cpp.h>
+#else
 #include <dawn/webgpu_cpp.h>
+#endif
 
 #include <array>
 #include <initializer_list>
@@ -98,7 +102,7 @@ namespace utils {
     wgpu::PipelineLayout MakePipelineLayout(const wgpu::Device& device,
                                             std::vector<wgpu::BindGroupLayout> bgls);
 
-    extern wgpu::ExternalTextureBindingLayout kExternalTextureBindingLayout;
+    // extern wgpu::ExternalTextureBindingLayout kExternalTextureBindingLayout;
 
     // Helpers to make creating bind group layouts look nicer:
     //
@@ -129,9 +133,9 @@ namespace utils {
             wgpu::StorageTextureAccess storageTextureAccess,
             wgpu::TextureFormat format,
             wgpu::TextureViewDimension viewDimension = wgpu::TextureViewDimension::e2D);
-        BindingLayoutEntryInitializationHelper(uint32_t entryBinding,
-                                               wgpu::ShaderStage entryVisibility,
-                                               wgpu::ExternalTextureBindingLayout* bindingLayout);
+        // BindingLayoutEntryInitializationHelper(uint32_t entryBinding,
+        //                                        wgpu::ShaderStage entryVisibility,
+        //                                        wgpu::ExternalTextureBindingLayout* bindingLayout);
 
         BindingLayoutEntryInitializationHelper(const wgpu::BindGroupLayoutEntry& entry);
     };
@@ -153,7 +157,7 @@ namespace utils {
     struct BindingInitializationHelper {
         BindingInitializationHelper(uint32_t binding, const wgpu::Sampler& sampler);
         BindingInitializationHelper(uint32_t binding, const wgpu::TextureView& textureView);
-        BindingInitializationHelper(uint32_t binding, const wgpu::ExternalTexture& externalTexture);
+        // BindingInitializationHelper(uint32_t binding, const wgpu::ExternalTexture& externalTexture);
         BindingInitializationHelper(uint32_t binding,
                                     const wgpu::Buffer& buffer,
                                     uint64_t offset = 0,
@@ -165,7 +169,7 @@ namespace utils {
         wgpu::Sampler sampler;
         wgpu::TextureView textureView;
         wgpu::Buffer buffer;
-        wgpu::ExternalTextureBindingEntry externalTextureBindingEntry;
+        // wgpu::ExternalTextureBindingEntry externalTextureBindingEntry;
         uint64_t offset = 0;
         uint64_t size = 0;
     };

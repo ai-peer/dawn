@@ -15,7 +15,11 @@
 #ifndef UTILS_TESTHELPERS_H_
 #define UTILS_TESTHELPERS_H_
 
+#ifdef __EMSCRIPTEN__
+#include <webgpu/webgpu_cpp.h>
+#else
 #include <dawn/webgpu_cpp.h>
+#endif
 
 namespace utils {
 
@@ -61,6 +65,8 @@ namespace utils {
     void UnalignDynamicUploader(wgpu::Device device);
 
     uint32_t VertexFormatSize(wgpu::VertexFormat format);
+
+    void DeviceTick();
 
 }  // namespace utils
 

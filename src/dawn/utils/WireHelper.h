@@ -15,7 +15,11 @@
 #ifndef UTILS_WIREHELPER_H_
 #define UTILS_WIREHELPER_H_
 
+#ifdef __EMSCRIPTEN__
+#include <webgpu/webgpu_cpp.h>
+#else
 #include "dawn/webgpu_cpp.h"
+#endif
 
 #include <cstdint>
 #include <memory>

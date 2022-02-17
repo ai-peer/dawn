@@ -58,6 +58,9 @@ TEST_F(ComputeValidationTest, PerDimensionDispatchSizeLimits_SmallestValid) {
 // Check that the largest allowed dispatch is OK.
 TEST_F(ComputeValidationTest, PerDimensionDispatchSizeLimits_LargestValid) {
     const uint32_t max = GetSupportedLimits().limits.maxComputeWorkgroupsPerDimension;
+    printf("%u\n", GetSupportedLimits().limits.maxTextureDimension1D);
+    printf("%llu\n", GetSupportedLimits().limits.maxUniformBufferBindingSize);
+    printf("%u\n", GetSupportedLimits().limits.maxComputeWorkgroupsPerDimension);
     TestDispatch(max, max, max);
 }
 

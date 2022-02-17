@@ -20,6 +20,10 @@
 #include "dawn/utils/TextureUtils.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
 #include <vector>
 
 namespace utils {
@@ -176,6 +180,15 @@ namespace utils {
                 break;
         }
         UNREACHABLE();
+    }
+
+    void DeviceTick() {
+#ifdef __EMSCRIPTEN__
+    emscripten_sleep(1);
+#else
+    // dawn native device tick API
+    device.tick();
+#endif
     }
 
 }  // namespace utils
