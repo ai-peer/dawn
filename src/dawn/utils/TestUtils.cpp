@@ -20,6 +20,10 @@
 #include "dawn/utils/TextureUtils.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+#ifdef __EMSCRIPTEN__
+#    include <emscripten.h>
+#endif
+
 #include <vector>
 
 namespace utils {
@@ -177,5 +181,4 @@ namespace utils {
         }
         UNREACHABLE();
     }
-
 }  // namespace utils
