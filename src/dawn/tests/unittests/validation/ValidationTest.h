@@ -21,8 +21,11 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include "dawn/common/Log.h"
-#include "dawn/native/DawnNative.h"
-#include "dawn/webgpu_cpp.h"
+
+#ifndef __EMSCRIPTEN__
+#    include "dawn/native/DawnNative.h"
+#endif
+#include "dawn/utils/WebGPUHeaderInclude.h"
 
 // Argument helpers to allow macro overriding.
 #define UNIMPLEMENTED_MACRO(...) UNREACHABLE()
@@ -74,6 +77,7 @@
         }                                                       \
     } while (0)
 
+// TODO(crbug.com/dawn/1182): Use alternative logging other than dawn native ones
 #define EXPECT_DEPRECATION_WARNINGS(statement, n)                                                  \
     do {                                                                                           \
         FlushWire();                                                                               \
@@ -139,15 +143,28 @@ class ValidationTest : public testing::Test {
   protected:
     virtual WGPUDevice CreateTestDevice();
 
+#ifdef __EMSCRIPTEN__
+    wgpu::Instance instance = nullptr;
+    wgpu::Adapter adapter;
+#else
     std::unique_ptr<dawn::native::Instance> instance;
     dawn::native::Adapter adapter;
+#endif
     wgpu::Device device;
     WGPUDevice backendDevice;
 
     size_t mLastWarningCount = 0;
 
   private:
+#ifndef __EMSCRIPTEN__
     std::unique_ptr<utils::WireHelper> mWireHelper;
+#else
+    void RequestAdapterResolve(wgpu::Adapter adapter);
+    void RequestDeviceResolve(wgpu::Device device);
+    static void PopErrorScopeResolve(WGPUErrorType type, const char* message, void* userdata);
+    bool mRequestDeviceResolved = false;
+    bool mIsPopErrorScopeResolved = false;
+#endif
 
     static void OnDeviceError(WGPUErrorType type, const char* message, void* userdata);
     static void OnDeviceLost(WGPUDeviceLostReason reason, const char* message, void* userdata);

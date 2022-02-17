@@ -17,8 +17,8 @@
 
 #include <array>
 
+#include "WebGPUHeaderInclude.h"
 #include "dawn/common/Constants.h"
-#include "dawn/webgpu_cpp.h"
 
 namespace utils {
 

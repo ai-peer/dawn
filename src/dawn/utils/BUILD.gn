@@ -83,6 +83,7 @@ static_library("utils") {
     "Timer.h",
     "WGPUHelpers.cpp",
     "WGPUHelpers.h",
+    "WebGPUHeaderInclude.h",
     "WireHelper.cpp",
     "WireHelper.h",
   ]
