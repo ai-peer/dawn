@@ -36,6 +36,8 @@ namespace {{native_namespace}} {
         {{" "}}= {{namespace}}::{{as_cppType(member.type.name)}}::{{as_cppEnum(Name(member.default_value))}}
     {%- elif member.type.category == "native" and member.default_value != None -%}
         {{" "}}= {{member.default_value}}
+    {%- elif member.default_value != None -%}
+        {{" "}}= {{member.default_value}}
     {%- else -%}
         {{assert(member.default_value == None)}}
     {%- endif -%}

@@ -43,6 +43,11 @@ namespace dawn::native {
 
     namespace {
 
+        bool hasDeprecatedColor(const RenderPassColorAttachment& attachment) {
+            return attachment.clearColor.r >= 0.0f || attachment.clearColor.g >= 0.0f ||
+                   attachment.clearColor.b >= 0.0f || attachment.clearColor.a >= 0.0f;
+        }
+
         MaybeError ValidateB2BCopyAlignment(uint64_t dataSize,
                                             uint64_t srcOffset,
                                             uint64_t dstOffset) {
@@ -233,13 +238,19 @@ namespace dawn::native {
             DAWN_TRY(ValidateLoadOp(colorAttachment.loadOp));
             DAWN_TRY(ValidateStoreOp(colorAttachment.storeOp));
 
+            // TODO(dawn:1269): Remove after the deprecation period.
+            bool useClearColor = hasDeprecatedColor(colorAttachment);
+            const dawn::native::Color& clearValue =
+                useClearColor ? colorAttachment.clearColor : colorAttachment.clearValue;
+            if (useClearColor) {
+                device->EmitDeprecationWarning(
+                    "clearColor is deprecated, prefer using clearValue instead.");
+            }
+
             if (colorAttachment.loadOp == wgpu::LoadOp::Clear) {
-                DAWN_INVALID_IF(std::isnan(colorAttachment.clearColor.r) ||
-                                    std::isnan(colorAttachment.clearColor.g) ||
-                                    std::isnan(colorAttachment.clearColor.b) ||
-                                    std::isnan(colorAttachment.clearColor.a),
-                                "Color clear value (%s) contain a NaN.",
-                                &colorAttachment.clearColor);
+                DAWN_INVALID_IF(std::isnan(clearValue.r) || std::isnan(clearValue.g) ||
+                                    std::isnan(clearValue.b) || std::isnan(clearValue.a),
+                                "Color clear value (%s) contain a NaN.", &clearValue);
             }
 
             DAWN_TRY(ValidateOrSetColorAttachmentSampleCount(attachment, sampleCount));
@@ -331,9 +342,26 @@ namespace dawn::native {
                 DAWN_TRY(ValidateStoreOp(depthStencilAttachment->stencilStoreOp));
             }
 
-            DAWN_INVALID_IF(depthStencilAttachment->depthLoadOp == wgpu::LoadOp::Clear &&
-                                std::isnan(depthStencilAttachment->clearDepth),
-                            "Depth clear value is NaN.");
+            if (depthStencilAttachment->depthClearValue == 0.0f &&
+                depthStencilAttachment->clearDepth != 0.0f) {
+                // TODO(dawn:1269): Remove this branch after the deprecation period.
+                device->EmitDeprecationWarning(
+                    "clearDepth is deprecated, prefer depthClearValue instead.");
+                DAWN_INVALID_IF(depthStencilAttachment->depthLoadOp == wgpu::LoadOp::Clear &&
+                                    std::isnan(depthStencilAttachment->clearDepth),
+                                "clearDepth is NaN.");
+            } else {
+                DAWN_INVALID_IF(depthStencilAttachment->depthLoadOp == wgpu::LoadOp::Clear &&
+                                    std::isnan(depthStencilAttachment->depthClearValue),
+                                "depthClearValue is NaN.");
+            }
+
+            // TODO(dawn:1269): Remove after the deprecation period.
+            if (depthStencilAttachment->stencilClearValue == 0 &&
+                depthStencilAttachment->clearStencil != 0) {
+                device->EmitDeprecationWarning(
+                    "clearStencil is deprecated, prefer stencilClearValue instead.");
+            }
 
             // *sampleCount == 0 must only happen when there is no color attachment. In that case we
             // do not need to validate the sample count of the depth stencil attachment.
@@ -641,8 +669,11 @@ namespace dawn::native {
                     cmd->colorAttachments[index].resolveTarget = resolveTarget;
                     cmd->colorAttachments[index].loadOp = descriptor->colorAttachments[i].loadOp;
                     cmd->colorAttachments[index].storeOp = descriptor->colorAttachments[i].storeOp;
+
                     cmd->colorAttachments[index].clearColor =
-                        descriptor->colorAttachments[i].clearColor;
+                        hasDeprecatedColor(descriptor->colorAttachments[i])
+                            ? descriptor->colorAttachments[i].clearColor
+                            : descriptor->colorAttachments[i].clearValue;
 
                     usageTracker.TextureViewUsedAs(view, wgpu::TextureUsage::RenderAttachment);
 
@@ -656,10 +687,27 @@ namespace dawn::native {
                     TextureViewBase* view = descriptor->depthStencilAttachment->view;
 
                     cmd->depthStencilAttachment.view = view;
-                    cmd->depthStencilAttachment.clearDepth =
-                        descriptor->depthStencilAttachment->clearDepth;
-                    cmd->depthStencilAttachment.clearStencil =
-                        descriptor->depthStencilAttachment->clearStencil;
+
+                    if (descriptor->depthStencilAttachment->depthClearValue == 0.0 &&
+                        descriptor->depthStencilAttachment->clearDepth != 0.0) {
+                        // TODO(dawn:1269): Remove this branch after the deprecation period.
+                        cmd->depthStencilAttachment.clearDepth =
+                            descriptor->depthStencilAttachment->clearDepth;
+                    } else {
+                        cmd->depthStencilAttachment.clearDepth =
+                            descriptor->depthStencilAttachment->depthClearValue;
+                    }
+
+                    if (descriptor->depthStencilAttachment->stencilClearValue == 0 &&
+                        descriptor->depthStencilAttachment->clearStencil != 0) {
+                        // TODO(dawn:1269): Remove this branch after the deprecation period.
+                        cmd->depthStencilAttachment.clearStencil =
+                            descriptor->depthStencilAttachment->clearStencil;
+                    } else {
+                        cmd->depthStencilAttachment.clearStencil =
+                            descriptor->depthStencilAttachment->stencilClearValue;
+                    }
+
                     cmd->depthStencilAttachment.depthReadOnly =
                         descriptor->depthStencilAttachment->depthReadOnly;
                     cmd->depthStencilAttachment.stencilReadOnly =
