@@ -17,7 +17,7 @@
 #include "dawn/common/Constants.h"
 #include "dawn/common/Log.h"
 
-#include "spirv-tools/optimizer.hpp"
+// #include "spirv-tools/optimizer.hpp"
 
 #include <cstring>
 #include <iomanip>
@@ -26,6 +26,7 @@
 #include <sstream>
 
 namespace utils {
+#ifndef __EMSCRIPTEN__
     wgpu::ShaderModule CreateShaderModuleFromASM(const wgpu::Device& device, const char* source) {
         // Use SPIRV-Tools's C API to assemble the SPIR-V assembly text to binary. Because the types
         // aren't RAII, we don't return directly on success and instead always go through the code
@@ -61,6 +62,7 @@ namespace utils {
 
         return result;
     }
+#endif
 
     wgpu::ShaderModule CreateShaderModule(const wgpu::Device& device, const char* source) {
         wgpu::ShaderModuleWGSLDescriptor wgslDesc;
@@ -296,6 +298,7 @@ namespace utils {
         storageTexture.viewDimension = textureViewDimension;
     }
 
+#ifndef __EMSCRIPTEN__
     // ExternalTextureBindingLayout never contains data, so just make one that can be reused instead
     // of declaring a new one every time it's needed.
     wgpu::ExternalTextureBindingLayout kExternalTextureBindingLayout = {};
@@ -308,6 +311,7 @@ namespace utils {
         visibility = entryVisibility;
         nextInChain = bindingLayout;
     }
+#endif
 
     BindingLayoutEntryInitializationHelper::BindingLayoutEntryInitializationHelper(
         const wgpu::BindGroupLayoutEntry& entry)
@@ -324,12 +328,14 @@ namespace utils {
         : binding(binding), textureView(textureView) {
     }
 
+#ifndef __EMSCRIPTEN__
     BindingInitializationHelper::BindingInitializationHelper(
         uint32_t binding,
         const wgpu::ExternalTexture& externalTexture)
         : binding(binding) {
         externalTextureBindingEntry.externalTexture = externalTexture;
     }
+#endif
 
     BindingInitializationHelper::BindingInitializationHelper(uint32_t binding,
                                                              const wgpu::Buffer& buffer,
@@ -347,9 +353,11 @@ namespace utils {
         result.buffer = buffer;
         result.offset = offset;
         result.size = size;
+#ifndef __EMSCRIPTEN__
         if (externalTextureBindingEntry.externalTexture != nullptr) {
             result.nextInChain = &externalTextureBindingEntry;
         }
+#endif
 
         return result;
     }
