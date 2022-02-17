@@ -17,18 +17,31 @@
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/SystemUtils.h"
-#include "dawn/dawn_proc.h"
-#include "dawn/native/NullBackend.h"
 #include "dawn/tests/ToggleParser.h"
 #include "dawn/tests/unittests/validation/ValidationTest.h"
-#include "dawn/utils/WireHelper.h"
-#include "dawn/webgpu.h"
+
+#ifdef __EMSCRIPTEN__
+#    include <emscripten.h>
+#else
+#    include "dawn/dawn_proc.h"
+#    include "dawn/native/NullBackend.h"
+#    include "dawn/utils/WireHelper.h"
+#endif
+#include "dawn/utils/WebGPUHeaderInclude.h"
 
 namespace {
 
     bool gUseWire = false;
     std::string gWireTraceDir = "";
     std::unique_ptr<ToggleParser> gToggleParser = nullptr;
+
+    void DeviceTick(const wgpu::Device& device) {
+#ifdef __EMSCRIPTEN__
+        emscripten_sleep(1000);
+#else
+        device.Tick();
+#endif
+    }
 
 }  // namespace
 
@@ -79,10 +92,54 @@ void InitDawnValidationTestEnvironment(int argc, char** argv) {
 }
 
 ValidationTest::ValidationTest()
-    : mWireHelper(utils::CreateWireHelper(gUseWire, gWireTraceDir.c_str())) {
+#ifndef __EMSCRIPTEN__
+    : mWireHelper(utils::CreateWireHelper(gUseWire, gWireTraceDir.c_str()))
+#endif
+{
 }
 
+#ifdef __EMSCRIPTEN__
+void ValidationTest::RequestAdapterResolve(wgpu::Adapter adapter) {
+    this->adapter = adapter;
+}
+
+void ValidationTest::RequestDeviceResolve(wgpu::Device device) {
+    this->device = device;
+    this->device.SetUncapturedErrorCallback(ValidationTest::OnDeviceError, this);
+    this->device.SetDeviceLostCallback(ValidationTest::OnDeviceLost, this);
+    mRequestDeviceResolved = true;
+}
+#endif
+
 void ValidationTest::SetUp() {
+#ifdef __EMSCRIPTEN__
+    // Null instance until supported in Emscripten
+    wgpu::Instance instance{};
+    instance.RequestAdapter(
+        nullptr,
+        [](WGPURequestAdapterStatus status, WGPUAdapter adapter, const char* message,
+           void* userdata) {
+            ASSERT(status == WGPURequestAdapterStatus_Success);
+            ASSERT(userdata != nullptr);
+            reinterpret_cast<ValidationTest*>(userdata)->RequestAdapterResolve(
+                wgpu::Adapter::Acquire(adapter));
+
+            wgpuAdapterRequestDevice(
+                adapter, nullptr,
+                [](WGPURequestDeviceStatus status, WGPUDevice dev, const char* message,
+                   void* userdata) {
+                    ASSERT(status == WGPURequestDeviceStatus_Success);
+                    wgpu::Device device = wgpu::Device::Acquire(dev);
+                    reinterpret_cast<ValidationTest*>(userdata)->RequestDeviceResolve(device);
+                },
+                userdata);
+        },
+        reinterpret_cast<void*>(this));
+
+    while (!mRequestDeviceResolved) {
+        emscripten_sleep(1);
+    }
+#else
     instance = std::make_unique<dawn::native::Instance>();
     instance->DiscoverDefaultAdapters();
 
@@ -111,13 +168,16 @@ void ValidationTest::SetUp() {
         std::string(::testing::UnitTest::GetInstance()->current_test_info()->test_suite_name()) +
         "_" + ::testing::UnitTest::GetInstance()->current_test_info()->name();
     mWireHelper->BeginWireTrace(traceName.c_str());
+#endif
 }
 
 ValidationTest::~ValidationTest() {
     // We need to destroy Dawn objects before setting the procs to null otherwise the dawn*Release
     // will call a nullptr
     device = wgpu::Device();
+#ifndef __EMSCRIPTEN__
     mWireHelper.reset();
+#endif
 }
 
 void ValidationTest::TearDown() {
@@ -125,15 +185,34 @@ void ValidationTest::TearDown() {
     ASSERT_FALSE(mExpectError);
 
     if (device) {
+#ifdef __EMSCRIPTEN__
+#else
         EXPECT_EQ(mLastWarningCount,
                   dawn::native::GetDeprecationWarningCountForTesting(backendDevice));
+#endif
     }
 
     // The device will be destroyed soon after, so we want to set the expectation.
     ExpectDeviceDestruction();
 }
 
+#ifdef __EMSCRIPTEN__
+void ValidationTest::PopErrorScopeResolve(WGPUErrorType type, const char* message, void* userdata) {
+    auto self = static_cast<ValidationTest*>(userdata);
+    self->mError = type != WGPUErrorType_NoError;
+    if (message) {
+        self->mDeviceErrorMessage = message;
+    } else {
+        self->mDeviceErrorMessage = "";
+    }
+    self->mIsPopErrorScopeResolved = true;
+}
+#endif
+
 void ValidationTest::StartExpectDeviceError(testing::Matcher<std::string> errorMatcher) {
+#ifdef __EMSCRIPTEN__
+    device.PushErrorScope(wgpu::ErrorFilter::Validation);
+#endif
     mExpectError = true;
     mError = false;
     mErrorMatcher = errorMatcher;
@@ -144,6 +223,14 @@ void ValidationTest::StartExpectDeviceError() {
 }
 
 bool ValidationTest::EndExpectDeviceError() {
+#ifdef __EMSCRIPTEN__
+    mIsPopErrorScopeResolved = false;
+    device.PopErrorScope(ValidationTest::PopErrorScopeResolve, this);
+    while (!mIsPopErrorScopeResolved) {
+        // TODO(crbug.com/dawn/1182): Change to use WaitABit() after DawnTest.cpp is updated
+        emscripten_sleep(1);
+    }
+#endif
     mExpectError = false;
     mErrorMatcher = testing::_;
     return mError;
@@ -157,7 +244,11 @@ void ValidationTest::ExpectDeviceDestruction() {
 }
 
 wgpu::Device ValidationTest::RegisterDevice(WGPUDevice backendDevice) {
+#ifndef __EMSCRIPTEN__
     return mWireHelper->RegisterDevice(backendDevice).first;
+#else
+    return device;
+#endif
 }
 
 bool ValidationTest::UsesWire() const {
@@ -165,8 +256,10 @@ bool ValidationTest::UsesWire() const {
 }
 
 void ValidationTest::FlushWire() {
+#ifndef __EMSCRIPTEN__
     EXPECT_TRUE(mWireHelper->FlushClient());
     EXPECT_TRUE(mWireHelper->FlushServer());
+#endif
 }
 
 void ValidationTest::WaitForAllOperations(const wgpu::Device& device) {
@@ -177,31 +270,48 @@ void ValidationTest::WaitForAllOperations(const wgpu::Device& device) {
 
     // Force the currently submitted operations to completed.
     while (!done) {
-        device.Tick();
+        DeviceTick(device);
         FlushWire();
     }
 
     // TODO(cwallez@chromium.org): It's not clear why we need this additional tick. Investigate it
     // once WebGPU has defined the ordering of callbacks firing.
-    device.Tick();
+    DeviceTick(device);
     FlushWire();
 }
 
 bool ValidationTest::HasToggleEnabled(const char* toggle) const {
+#ifdef __EMSCRIPTEN__
+    // We don't have ability to toggle these features used in validation tests:
+    // - "skip_validation"
+    // - "disable_base_vertex"
+    return false;
+#else
     auto toggles = dawn::native::GetTogglesUsed(backendDevice);
     return std::find_if(toggles.begin(), toggles.end(), [toggle](const char* name) {
                return strcmp(toggle, name) == 0;
            }) != toggles.end();
+#endif
 }
 
 wgpu::SupportedLimits ValidationTest::GetSupportedLimits() {
+#ifdef __EMSCRIPTEN__
+    wgpu::SupportedLimits supportedLimits;
+    device.GetLimits(&supportedLimits);
+    return supportedLimits;
+#else
     WGPUSupportedLimits supportedLimits;
     supportedLimits.nextInChain = nullptr;
     dawn::native::GetProcs().deviceGetLimits(backendDevice, &supportedLimits);
     return *reinterpret_cast<wgpu::SupportedLimits*>(&supportedLimits);
+#endif
 }
 
 WGPUDevice ValidationTest::CreateTestDevice() {
+#ifdef __EMSCRIPTEN__
+    // This function is not being used
+    return nullptr;
+#else
     // Disabled disallowing unsafe APIs so we can test them.
     std::vector<const char*> forceEnabledToggles;
     std::vector<const char*> forceDisabledToggles = {"disallow_unsafe_apis"};
@@ -224,6 +334,7 @@ WGPUDevice ValidationTest::CreateTestDevice() {
     togglesDesc.forceDisabledTogglesCount = forceDisabledToggles.size();
 
     return adapter.CreateDevice(&deviceDescriptor);
+#endif
 }
 
 // static
