@@ -15,10 +15,9 @@
 #ifndef UTILS_WIREHELPER_H_
 #define UTILS_WIREHELPER_H_
 
-#include "dawn/webgpu_cpp.h"
-
 #include <cstdint>
 #include <memory>
+#include "dawn/webgpu_cpp.h"
 
 namespace utils {
 
