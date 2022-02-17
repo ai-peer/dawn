@@ -24,15 +24,20 @@
 #include "dawn/common/Log.h"
 #include "dawn/common/Platform.h"
 #include "dawn/common/Preprocessor.h"
-#include "dawn/dawn_proc_table.h"
-#include "dawn/native/DawnNative.h"
-#include "dawn/platform/DawnPlatform.h"
 #include "dawn/tests/ParamGenerator.h"
 #include "dawn/tests/ToggleParser.h"
 #include "dawn/utils/ScopedAutoreleasePool.h"
 #include "dawn/utils/TextureUtils.h"
-#include "dawn/webgpu_cpp.h"
-#include "dawn/webgpu_cpp_print.h"
+#ifdef __EMSCRIPTEN__
+#    include <webgpu/webgpu_cpp.h>
+#else
+#    include "dawn/dawn_proc_table.h"
+#    include "dawn/native/DawnNative.h"
+#    include "dawn/platform/DawnPlatform.h"
+#    include "dawn/webgpu_cpp.h"
+#    include "dawn/webgpu_cpp_print.h"
+#endif
+
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 

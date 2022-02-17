@@ -22,6 +22,10 @@
 #include "dawn/utils/TextureUtils.h"
 #include "dawn/utils/WGPUHelpers.h"
 
+#ifdef __EMSCRIPTEN__
+#    include <emscripten.h>
+#endif
+
 namespace utils {
 
     uint32_t GetMinimumBytesPerRow(wgpu::TextureFormat format, uint32_t width) {
@@ -177,5 +181,4 @@ namespace utils {
         }
         UNREACHABLE();
     }
-
 }  // namespace utils
