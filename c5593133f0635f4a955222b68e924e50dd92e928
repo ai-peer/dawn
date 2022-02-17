@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9100c66_cd912b14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-17T05:36:06Z",
+      "side": 1,
+      "message": "I don\u0027t feel as strongly about this as Corentin, but it is indeed additional complexity without a clear promise of what it gives us.\n\nSo agreed, a profile would make sense and could be convincing. To that end, let\u0027s get this wired up in Chrome, tested, with zero-copy. And then, measure to evaluate performance.",
+      "parentUuid": "009f9717_ac511904",
+      "revId": "c5593133f0635f4a955222b68e924e50dd92e928",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "818df3c9_b853592f",
