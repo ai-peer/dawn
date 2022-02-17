@@ -15,7 +15,11 @@
 #ifndef SRC_DAWN_UTILS_TESTUTILS_H_
 #define SRC_DAWN_UTILS_TESTUTILS_H_
 
-#include "dawn/webgpu_cpp.h"
+#ifdef __EMSCRIPTEN__
+#    include <webgpu/webgpu_cpp.h>
+#else
+#    include "dawn/webgpu_cpp.h"
+#endif
 
 namespace utils {
 

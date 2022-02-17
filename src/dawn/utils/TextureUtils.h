@@ -17,7 +17,11 @@
 
 #include <array>
 
-#include "dawn/webgpu_cpp.h"
+#ifdef __EMSCRIPTEN__
+#    include <webgpu/webgpu_cpp.h>
+#else
+#    include "dawn/webgpu_cpp.h"
+#endif
 
 #include "dawn/common/Assert.h"
 
