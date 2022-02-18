@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e423df69_db8a4191",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-18T18:38:37Z",
+      "side": 1,
+      "message": "LGTM. Corentin will be away for some time, so please add someone else like Loko to reviews.",
+      "revId": "ea40d2aa3432cb75d442ec2b69dcf3901168cf10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bff0b781_10dd0316",
+        "filename": "src/dawn/tests/white_box/D3D12GPUTimestampCalibrationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-18T18:38:37Z",
+      "side": 1,
+      "message": "nit: 2022",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "ea40d2aa3432cb75d442ec2b69dcf3901168cf10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
