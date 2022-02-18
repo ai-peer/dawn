@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f31d6e5e_254ab103",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003066
+      },
+      "writtenOn": "2022-02-18T03:56:44Z",
+      "side": 1,
+      "message": "I was surprised to see that we didn\u0027t have R16Unorm and RG16Unorm -- those are the usual ways of addressing HDR video. Do we have plans for them?",
+      "revId": "74135f097b2735d5f471a78d0b2e6afce78e3325",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
