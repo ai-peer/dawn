@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a228353d_efcea81b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-02-18T19:22:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91bb46a8_193fd9f8",
+      "range": {
+        "startLine": 7,
+        "startChar": 18,
+        "endLine": 7,
+        "endChar": 28
+      },
+      "revId": "80660ddfad9aa38e900d3ec8919f71c6c1c430ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c88babfd_8daa928a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -95,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "224bdffd_e6c7577c",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-02-18T19:22:38Z",
+      "side": 1,
+      "message": "The validation only confirms that you DIDN\u0027T pass a NaN. So we could default the deprecated value to NaN, only use it if it\u0027s not NaN, and then validate that the non-deprecated value isn\u0027t NaN.\n\nAnd actually, if we\u0027re going to do that maybe I should have the deprecated clearColor be all NaNs as well, for consistency.\n\nStill don\u0027t have any better ideas for stencil. I can definitely see something like 0xFFFFFFFF being used as a legitimate (though unlikely) clear value.",
+      "parentUuid": "8c3fed89_4c688934",
+      "revId": "80660ddfad9aa38e900d3ec8919f71c6c1c430ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e6e12d0_13f714a1",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 2
@@ -106,6 +148,30 @@
       "writtenOn": "2022-02-18T18:25:06Z",
       "side": 1,
       "message": "casing nit: HasDeprecatedColor\n\ncan we check !\u003d -1 ?",
+      "range": {
+        "startLine": 46,
+        "startChar": 13,
+        "endLine": 46,
+        "endChar": 31
+      },
+      "revId": "80660ddfad9aa38e900d3ec8919f71c6c1c430ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "866b4158_8e6fb3bf",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-02-18T19:22:38Z",
+      "side": 1,
+      "message": "Checking for NaNs now.",
+      "parentUuid": "3e6e12d0_13f714a1",
       "range": {
         "startLine": 46,
         "startChar": 13,
