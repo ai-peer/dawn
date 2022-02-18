@@ -204,6 +204,30 @@
       },
       "revId": "80660ddfad9aa38e900d3ec8919f71c6c1c430ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29e448d4_8882e663",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-02-18T19:30:15Z",
+      "side": 1,
+      "message": "Sorry, missed that was part of the original request. Fixed.",
+      "parentUuid": "328ca50d_a53b6f34",
+      "range": {
+        "startLine": 46,
+        "startChar": 13,
+        "endLine": 46,
+        "endChar": 31
+      },
+      "revId": "80660ddfad9aa38e900d3ec8919f71c6c1c430ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
