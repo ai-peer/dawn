@@ -19,7 +19,7 @@
 #include "dawn/native/Instance.h"
 #include "dawn/native/SwapChain.h"
 
-#if defined(DAWN_PLATFORM_WINDOWS)
+#if defined(DAWN_PLATFORM_WINDOWS) && !defined(DAWN_NO_WINDOWS_UI)
 #    include <windows.ui.core.h>
 #    include <windows.ui.xaml.controls.h>
 #endif  // defined(DAWN_PLATFORM_WINDOWS)
@@ -106,6 +106,7 @@ namespace dawn::native {
             return {};
         }
 #    endif  // defined(DAWN_PLATFORM_WIN32)
+#    if !defined(DAWN_NO_WINDOWS_UI)
         const SurfaceDescriptorFromWindowsCoreWindow* coreWindowDesc = nullptr;
         FindInChain(descriptor->nextInChain, &coreWindowDesc);
         if (coreWindowDesc) {
@@ -128,6 +129,7 @@ namespace dawn::native {
                             "Invalid SwapChainPanel");
             return {};
         }
+#endif  // !defined(DAWN_NO_WINDOWS_UI)
 #endif  // defined(DAWN_PLATFORM_WINDOWS)
 
 #if defined(DAWN_USE_X11)
