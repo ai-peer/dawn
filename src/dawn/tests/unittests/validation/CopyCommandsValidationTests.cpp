@@ -715,8 +715,10 @@ TEST_F(CopyCommandTest_B2T, IncorrectBufferOffsetForColorTexture) {
 // Test B2T copies with incorrect buffer offset usage for depth-stencil texture
 TEST_F(CopyCommandTest_B2T, IncorrectBufferOffsetForDepthStencilTexture) {
     // TODO(dawn:570, dawn:666): List other valid parameters after missing texture formats
-    // are implemented, e.g. Stencil8 and depth16unorm.
-    std::array<std::tuple<wgpu::TextureFormat, wgpu::TextureAspect>, 3> params = {
+    // are implemented, e.g. Stencil8.
+    std::array<std::tuple<wgpu::TextureFormat, wgpu::TextureAspect>, 5> params = {
+        std::make_tuple(wgpu::TextureFormat::Depth16Unorm, wgpu::TextureAspect::DepthOnly),
+        std::make_tuple(wgpu::TextureFormat::Depth16Unorm, wgpu::TextureAspect::All),
         std::make_tuple(wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureAspect::StencilOnly),
         std::make_tuple(wgpu::TextureFormat::Depth24UnormStencil8,
                         wgpu::TextureAspect::StencilOnly),
@@ -875,14 +877,22 @@ TEST_F(CopyCommandTest_B2T, CopyToDepthAspect) {
         wgpu::Texture destination =
             Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopyDst);
 
-        // Test it is invalid to copy from a buffer into a depth texture
-        TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 16, destination, 0, {0, 0, 0},
-                    {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
-
-        if (utils::IsDepthOnlyFormat(format)) {
-            // Test "all" of a depth texture which is only the depth aspect.
-            TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 16, destination, 0, {0, 0, 0},
+        if (format == wgpu::TextureFormat::Depth16Unorm) {
+            // Test that Depth16Unorm copies are valid
+            TestB2TCopy(utils::Expectation::Success, source, 0, 256, 16, destination, 0, {0, 0, 0},
+                        {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
+            TestB2TCopy(utils::Expectation::Success, source, 0, 256, 16, destination, 0, {0, 0, 0},
                         {16, 16, 1}, wgpu::TextureAspect::All);
+        } else {
+            // Test it is invalid to copy from a buffer into a depth texture
+            TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 16, destination, 0, {0, 0, 0},
+                        {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
+
+            if (utils::IsDepthOnlyFormat(format)) {
+                // Test "all" of a depth texture which is only the depth aspect.
+                TestB2TCopy(utils::Expectation::Failure, source, 0, 256, 16, destination, 0,
+                            {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::All);
+            }
         }
     }
 }
@@ -1325,8 +1335,10 @@ TEST_F(CopyCommandTest_T2B, IncorrectBufferOffsetForColorTexture) {
 // Test T2B copies with incorrect buffer offset usage for depth-stencil texture
 TEST_F(CopyCommandTest_T2B, IncorrectBufferOffsetForDepthStencilTexture) {
     // TODO(dawn:570, dawn:666): List other valid parameters after missing texture formats
-    // are implemented, e.g. Stencil8 and depth16unorm.
-    std::array<std::tuple<wgpu::TextureFormat, wgpu::TextureAspect>, 6> params = {
+    // are implemented, e.g. Stencil8.
+    std::array<std::tuple<wgpu::TextureFormat, wgpu::TextureAspect>, 8> params = {
+        std::make_tuple(wgpu::TextureFormat::Depth16Unorm, wgpu::TextureAspect::DepthOnly),
+        std::make_tuple(wgpu::TextureFormat::Depth16Unorm, wgpu::TextureAspect::All),
         std::make_tuple(wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureAspect::StencilOnly),
         std::make_tuple(wgpu::TextureFormat::Depth32Float, wgpu::TextureAspect::DepthOnly),
         std::make_tuple(wgpu::TextureFormat::Depth32Float, wgpu::TextureAspect::All),
