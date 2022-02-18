@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e98fb8d9_cfe917e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-18T23:21:51Z",
+      "side": 1,
+      "message": "LGTM! say goodbye to 500 test expectations :)",
+      "revId": "871c59543b165913f027460f733c5ac144d5fc0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b94d25e_b26f7295",
+        "filename": "src/dawn/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-18T23:21:51Z",
+      "side": 1,
+      "message": "nit: check it\u0027s in the valid list?",
+      "range": {
+        "startLine": 880,
+        "startChar": 12,
+        "endLine": 880,
+        "endChar": 55
+      },
+      "revId": "871c59543b165913f027460f733c5ac144d5fc0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
