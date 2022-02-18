@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd1f5add_3b58a775",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-02-18T00:43:20Z",
+      "side": 1,
+      "message": "This CL makes several validation tests built and run with emscripten (with unmerged wgpuDeviceGetLimits impl at https://github.com/emscripten-core/emscripten/pull/16299).\nIt should have no impact on dawn native itself.\nLeft two question comments. Gonna write perf stuff.",
+      "revId": "9bc566127283a087c117780e8f5615bd2c96bbc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9374ae80_14083b88",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-02-18T00:43:20Z",
+      "side": 1,
+      "message": "Ideally we should create device here as this is a virtual function and tests would override this function to have required features/limits.\nMy small tests for moving wgpuAdapterRequestDevice here ends in some memory access abort. Should investigate further though",
+      "revId": "9bc566127283a087c117780e8f5615bd2c96bbc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90e46e9c_c67f3f79",
+        "filename": "src/dawn/utils/WGPUHelpers.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-02-18T00:43:20Z",
+      "side": 1,
+      "message": "Is it we already removed spriv dependencies for dawn? If so we should be able to remove this function and several references in the tests",
+      "revId": "9bc566127283a087c117780e8f5615bd2c96bbc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
