@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "91bb46a8_193fd9f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-18T18:25:06Z",
+      "side": 1,
+      "message": "typo nit: attachment",
+      "range": {
+        "startLine": 7,
+        "startChar": 18,
+        "endLine": 7,
+        "endChar": 28
+      },
+      "revId": "80660ddfad9aa38e900d3ec8919f71c6c1c430ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c88babfd_8daa928a",
@@ -14,6 +37,63 @@
       "writtenOn": "2022-02-18T17:34:28Z",
       "side": 1,
       "message": "Important changes are in dawn.json, generator/, CommandEncoder.cpp, and DeprecatedAPITests.cpp. The rest is updating the tests to use the new names. PTAL!",
+      "revId": "80660ddfad9aa38e900d3ec8919f71c6c1c430ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14ce86f4_da222d8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-18T18:25:06Z",
+      "side": 1,
+      "message": "LGTM - feel free to alternatively add Shrek or Loko as reviewers.",
+      "revId": "80660ddfad9aa38e900d3ec8919f71c6c1c430ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65dbf4ff_97107525",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-18T18:25:06Z",
+      "side": 1,
+      "message": "Clearing depth or stencil to 0 seems like something people might actually want to explicitly do. So they wouldn\u0027t get the deprecation message. Not sure if there\u0027s a way we can avoid that.  Looks like NaN is already taken for validation. Maybe alternative NaN encodings?? I think NaN only needs a certain exponent, and the rest of the bits can be whatever. Stencil doesn\u0027t have a ton of options...",
+      "revId": "80660ddfad9aa38e900d3ec8919f71c6c1c430ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e6e12d0_13f714a1",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-18T18:25:06Z",
+      "side": 1,
+      "message": "casing nit: HasDeprecatedColor\n\ncan we check !\u003d -1 ?",
+      "range": {
+        "startLine": 46,
+        "startChar": 13,
+        "endLine": 46,
+        "endChar": 31
+      },
       "revId": "80660ddfad9aa38e900d3ec8919f71c6c1c430ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
