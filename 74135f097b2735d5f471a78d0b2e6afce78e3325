@@ -16,6 +16,41 @@
       "message": "I was surprised to see that we didn\u0027t have R16Unorm and RG16Unorm -- those are the usual ways of addressing HDR video. Do we have plans for them?",
       "revId": "74135f097b2735d5f471a78d0b2e6afce78e3325",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08e2587f_eadd8b5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-02-18T05:39:50Z",
+      "side": 1,
+      "message": "The reason is that R16Unorm and RG16Unorm is not supported in vulkan 1.0 spec, so WebGPU doesn\u0027t support them. As a implementation of WebGPU, Dawn doesn\u0027t support it officially either. But you\u0027re right, when we\u0027re going to support HDR on all platforms, we needs to add them into Dawn(to use them internally).",
+      "parentUuid": "f31d6e5e_254ab103",
+      "revId": "74135f097b2735d5f471a78d0b2e6afce78e3325",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67d8266d_da6ad4df",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-02-18T05:39:50Z",
+      "side": 1,
+      "message": "If we choose the path that wrapping whole IOSurface into a WGPUTexture, then I think we may don\u0027t need to care plane here. We could describe the WGPUTexture is the R8BG8Biplanar420Unorm format.\nhttps://source.chromium.org/chromium/chromium/src/+/main:out/Debug/gen/third_party/dawn/include/dawn/webgpu_cpp.h;l\u003d415?q\u003dwgpu::TextureFormat\u0026ss\u003dchromium\nAnd create R8Unorm views and RG8Unorm views when calling createTextureView(texture, plane).",
+      "revId": "74135f097b2735d5f471a78d0b2e6afce78e3325",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
