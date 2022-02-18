@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c88babfd_8daa928a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-02-18T17:34:28Z",
+      "side": 1,
+      "message": "Important changes are in dawn.json, generator/, CommandEncoder.cpp, and DeprecatedAPITests.cpp. The rest is updating the tests to use the new names. PTAL!",
+      "revId": "80660ddfad9aa38e900d3ec8919f71c6c1c430ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
