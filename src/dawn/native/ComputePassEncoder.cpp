@@ -113,9 +113,11 @@ namespace dawn::native {
     ComputePassEncoder::ComputePassEncoder(DeviceBase* device,
                                            const ComputePassDescriptor* descriptor,
                                            CommandEncoder* commandEncoder,
-                                           EncodingContext* encodingContext)
+                                           EncodingContext* encodingContext,
+                                           std::vector<TimestampWrite> timestampWritesAtEnd)
         : ProgrammableEncoder(device, descriptor->label, encodingContext),
-          mCommandEncoder(commandEncoder) {
+          mCommandEncoder(commandEncoder),
+          mTimestampWritesAtEnd(std::move(timestampWritesAtEnd)) {
         TrackInDevice();
     }
 
@@ -148,6 +150,13 @@ namespace dawn::native {
                 [&](CommandAllocator* allocator) -> MaybeError {
                     if (IsValidationEnabled()) {
                         DAWN_TRY(ValidateProgrammableEncoderEnd());
+                    }
+
+                    for (const auto& timestampWrite : mTimestampWritesAtEnd) {
+                        // The query availability has already been updated at the beginning of
+                        // compute pass, and no need to do update here.
+                        EncodeTimestampWrite(timestampWrite.querySet.Get(),
+                                             timestampWrite.queryIndex);
                     }
 
                     allocator->Allocate<EndComputePassCmd>(Command::EndComputePass);
@@ -415,8 +424,7 @@ namespace dawn::native {
             this,
             [&](CommandAllocator* allocator) -> MaybeError {
                 if (IsValidationEnabled()) {
-                    DAWN_TRY(GetDevice()->ValidateObject(querySet));
-                    DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex));
+                    DAWN_TRY(ValidateTimestampQuery(GetDevice(), querySet, queryIndex));
                 }
 
                 mCommandEncoder->TrackQueryAvailability(querySet, queryIndex);
@@ -458,6 +466,20 @@ namespace dawn::native {
 
         // Restore the frontend state tracking information.
         mCommandBufferState = std::move(state);
+    }
+
+    void ComputePassEncoder::EncodeTimestampWrite(QuerySetBase* querySet, uint32_t queryIndex) {
+        mEncodingContext->TryEncode(
+            this,
+            [&](CommandAllocator* allocator) -> MaybeError {
+                WriteTimestampCmd* cmd =
+                    allocator->Allocate<WriteTimestampCmd>(Command::WriteTimestamp);
+                cmd->querySet = querySet;
+                cmd->queryIndex = queryIndex;
+
+                return {};
+            },
+            "encoding %s.TimestampWrite(%s, %u).", this, querySet, queryIndex);
     }
 
     CommandBufferStateTracker* ComputePassEncoder::GetCommandBufferStateTrackerForTesting() {

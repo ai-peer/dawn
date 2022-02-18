@@ -31,7 +31,7 @@ namespace dawn::native {
                           EncodingContext* encodingContext,
                           RenderPassResourceUsageTracker usageTracker,
                           Ref<AttachmentState> attachmentState,
-                          QuerySetBase* occlusionQuerySet,
+                          std::vector<TimestampWrite> timestampWritesAtEnd,
                           uint32_t renderTargetWidth,
                           uint32_t renderTargetHeight,
                           bool depthReadOnly,
@@ -73,6 +73,8 @@ namespace dawn::native {
 
         void TrackQueryAvailability(QuerySetBase* querySet, uint32_t queryIndex);
 
+        void EncodeTimestampWrite(QuerySetBase* querySet, uint32_t queryIndex);
+
         // For render and compute passes, the encoding context is borrowed from the command encoder.
         // Keep a reference to the encoder to make sure the context isn't freed.
         Ref<CommandEncoder> mCommandEncoder;
@@ -84,6 +86,8 @@ namespace dawn::native {
         Ref<QuerySetBase> mOcclusionQuerySet;
         uint32_t mCurrentOcclusionQueryIndex = 0;
         bool mOcclusionQueryActive = false;
+
+        std::vector<TimestampWrite> mTimestampWritesAtEnd;
     };
 
 }  // namespace dawn::native

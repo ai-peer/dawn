@@ -54,7 +54,7 @@ namespace dawn::native {
                                          EncodingContext* encodingContext,
                                          RenderPassResourceUsageTracker usageTracker,
                                          Ref<AttachmentState> attachmentState,
-                                         QuerySetBase* occlusionQuerySet,
+                                         std::vector<TimestampWrite> timestampWritesAtEnd,
                                          uint32_t renderTargetWidth,
                                          uint32_t renderTargetHeight,
                                          bool depthReadOnly,
@@ -68,7 +68,8 @@ namespace dawn::native {
           mCommandEncoder(commandEncoder),
           mRenderTargetWidth(renderTargetWidth),
           mRenderTargetHeight(renderTargetHeight),
-          mOcclusionQuerySet(occlusionQuerySet) {
+          mOcclusionQuerySet(descriptor->occlusionQuerySet),
+          mTimestampWritesAtEnd(std::move(timestampWritesAtEnd)) {
         mUsageTracker = std::move(usageTracker);
         TrackInDevice();
     }
@@ -108,6 +109,20 @@ namespace dawn::native {
         mCommandEncoder->TrackQueryAvailability(querySet, queryIndex);
     }
 
+    void RenderPassEncoder::EncodeTimestampWrite(QuerySetBase* querySet, uint32_t queryIndex) {
+        mEncodingContext->TryEncode(
+            this,
+            [&](CommandAllocator* allocator) -> MaybeError {
+                WriteTimestampCmd* cmd =
+                    allocator->Allocate<WriteTimestampCmd>(Command::WriteTimestamp);
+                cmd->querySet = querySet;
+                cmd->queryIndex = queryIndex;
+
+                return {};
+            },
+            "encoding %s.TimestampWrite(%s, %u).", this, querySet, queryIndex);
+    }
+
     void RenderPassEncoder::APIEnd() {
         if (mEncodingContext->TryEncode(
                 this,
@@ -121,7 +136,15 @@ namespace dawn::native {
                             this, mCurrentOcclusionQueryIndex, mOcclusionQuerySet.Get());
                     }
 
+                    for (const auto& timestampWrite : mTimestampWritesAtEnd) {
+                        // The query availability has already been updated at the beginning of
+                        // render pass, and no need to do update here.
+                        EncodeTimestampWrite(timestampWrite.querySet.Get(),
+                                             timestampWrite.queryIndex);
+                    }
+
                     allocator->Allocate<EndRenderPassCmd>(Command::EndRenderPass);
+
                     DAWN_TRY(mEncodingContext->ExitRenderPass(this, std::move(mUsageTracker),
                                                               mCommandEncoder.Get(),
                                                               std::move(mIndirectDrawMetadata)));
@@ -375,8 +398,7 @@ namespace dawn::native {
             this,
             [&](CommandAllocator* allocator) -> MaybeError {
                 if (IsValidationEnabled()) {
-                    DAWN_TRY(GetDevice()->ValidateObject(querySet));
-                    DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex));
+                    DAWN_TRY(ValidateTimestampQuery(GetDevice(), querySet, queryIndex));
                     DAWN_TRY_CONTEXT(
                         ValidateQueryIndexOverwrite(querySet, queryIndex,
                                                     mUsageTracker.GetQueryAvailabilityMap()),
