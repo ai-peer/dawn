@@ -157,28 +157,47 @@ namespace dawn::native::metal {
             }
         }
 
-        ResultOrError<wgpu::TextureFormat> GetFormatEquivalentToIOSurfaceFormat(uint32_t format) {
-            switch (format) {
-                case kCVPixelFormatType_64RGBAHalf:
-                    return wgpu::TextureFormat::RGBA16Float;
-                case kCVPixelFormatType_TwoComponent16Half:
-                    return wgpu::TextureFormat::RG16Float;
-                case kCVPixelFormatType_OneComponent16Half:
-                    return wgpu::TextureFormat::R16Float;
-                case kCVPixelFormatType_ARGB2101010LEPacked:
-                    return wgpu::TextureFormat::RGB10A2Unorm;
-                case kCVPixelFormatType_32RGBA:
-                    return wgpu::TextureFormat::RGBA8Unorm;
-                case kCVPixelFormatType_32BGRA:
-                    return wgpu::TextureFormat::BGRA8Unorm;
-                case kCVPixelFormatType_TwoComponent8:
-                    return wgpu::TextureFormat::RG8Unorm;
-                case kCVPixelFormatType_OneComponent8:
-                    return wgpu::TextureFormat::R8Unorm;
-                default:
-                    return DAWN_FORMAT_VALIDATION_ERROR("Unsupported IOSurface format (%x).",
-                                                        format);
+        ResultOrError<wgpu::TextureFormat> GetFormatEquivalentToIOSurfaceFormat(uint32_t format,
+                                                                                uint32_t plane) {
+            switch (plane) {
+                case 0:
+                    switch (format) {
+                        case kCVPixelFormatType_64RGBAHalf:
+                            return wgpu::TextureFormat::RGBA16Float;
+                        case kCVPixelFormatType_TwoComponent16Half:
+                            return wgpu::TextureFormat::RG16Float;
+                        case kCVPixelFormatType_OneComponent16Half:
+                            return wgpu::TextureFormat::R16Float;
+                        case kCVPixelFormatType_ARGB2101010LEPacked:
+                            return wgpu::TextureFormat::RGB10A2Unorm;
+                        case kCVPixelFormatType_32RGBA:
+                            return wgpu::TextureFormat::RGBA8Unorm;
+                        case kCVPixelFormatType_32BGRA:
+                            return wgpu::TextureFormat::BGRA8Unorm;
+                        case kCVPixelFormatType_TwoComponent8:
+                            return wgpu::TextureFormat::RG8Unorm;
+                        case kCVPixelFormatType_OneComponent8:
+                            return wgpu::TextureFormat::R8Unorm;
+                        case kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange:
+                            return wgpu::TextureFormat::R8Unorm;
+                        case kCVPixelFormatType_420YpCbCr10BiPlanarVideoRange:
+                            // This would be R16Unorm, but that does not exist.
+                        default:
+                            break;
+                    }
+                case 1:
+                    switch (format) {
+                        case kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange:
+                            return wgpu::TextureFormat::RG8Unorm;
+                        case kCVPixelFormatType_420YpCbCr10BiPlanarVideoRange:
+                            // This would be RG16Unorm, but that does not exist.
+                        default:
+                            break;
+                    }
+                    break;
             }
+            return DAWN_FORMAT_VALIDATION_ERROR("Unsupported IOSurface format (%x) plane %d.",
+                                                format, plane);
         }
 
 #if defined(DAWN_PLATFORM_MACOS)
@@ -418,8 +437,8 @@ namespace dawn::native::metal {
             surfaceWidth, surfaceHeight, &descriptor->size);
 
         wgpu::TextureFormat ioSurfaceFormat;
-        DAWN_TRY_ASSIGN(ioSurfaceFormat,
-                        GetFormatEquivalentToIOSurfaceFormat(IOSurfaceGetPixelFormat(ioSurface)));
+        DAWN_TRY_ASSIGN(ioSurfaceFormat, GetFormatEquivalentToIOSurfaceFormat(
+                                             IOSurfaceGetPixelFormat(ioSurface), plane));
         DAWN_INVALID_IF(descriptor->format != ioSurfaceFormat,
                         "IOSurface format (%s) doesn't match the descriptor format (%s).",
                         ioSurfaceFormat, descriptor->format);
