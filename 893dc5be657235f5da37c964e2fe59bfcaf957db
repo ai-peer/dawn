@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b00a8dde_d7d5c255",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-02-18T20:54:33Z",
+      "side": 1,
+      "message": "LGTM.\nJust a question:\nDo we need any jsrepr for the NAN? (given it\u0027s a std thing maybe it could be properly handled by emscripten)\nWill the WGPUColor translates to {NaN, NaN, NaN, NaN} and get blocked by validation if WGPURenderPassColorAttachment.clearValue is undefined (stays default)?",
+      "revId": "893dc5be657235f5da37c964e2fe59bfcaf957db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
