@@ -16,6 +16,24 @@
       "message": "LGTM.\nJust a question:\nDo we need any jsrepr for the NAN? (given it\u0027s a std thing maybe it could be properly handled by emscripten)\nWill the WGPUColor translates to {NaN, NaN, NaN, NaN} and get blocked by validation if WGPURenderPassColorAttachment.clearValue is undefined (stays default)?",
       "revId": "893dc5be657235f5da37c964e2fe59bfcaf957db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46ed4ffe_6f4bd885",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-02-19T00:29:23Z",
+      "side": 1,
+      "message": "I\u0027m not sure we do. This is only temporarily for the deprecation period anyway. If `clearColor` is left as an array of NaNs then the `clearValue` is used instead, which has the same behavior as before (no default value).\n\nIn Chrome\u0027s bindings it\u0027s always set to either what the user explicitly passed or transparent black if undefined.",
+      "parentUuid": "b00a8dde_d7d5c255",
+      "revId": "893dc5be657235f5da37c964e2fe59bfcaf957db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
