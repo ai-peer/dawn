@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4e0de24_2da77c50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-02-21T17:58:10Z",
+      "side": 1,
+      "message": "*-dawn-rel bots create a cyclical dependency between Dawn \u0026 Chrome, so either require a N-way patch, which would require 2 or 3 CLs into Chrome, or a forced landing.",
+      "revId": "b3e6d37055bc0fc78e0dedc32b09805fafdd54c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
