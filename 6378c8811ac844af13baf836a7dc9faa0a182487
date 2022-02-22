@@ -16,6 +16,23 @@
       "message": "PTAL, this needs to be propagated through, so I can land the Chromium change.",
       "revId": "6378c8811ac844af13baf836a7dc9faa0a182487",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1da949e_62d4ca89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-22T17:54:34Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6378c8811ac844af13baf836a7dc9faa0a182487",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
