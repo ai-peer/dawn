@@ -224,6 +224,8 @@ namespace dawn::native::metal {
             }
             SetToggle(Toggle::UseDummyFragmentInVertexOnlyPipeline, useDummyFragmentShader);
         }
+
+        SetToggle(Toggle::DisallowUnsafeAPIs, false);
     }
 
     ResultOrError<Ref<BindGroupBase>> Device::CreateBindGroupImpl(
