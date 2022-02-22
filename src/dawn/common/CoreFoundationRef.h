@@ -26,7 +26,9 @@ struct CoreFoundationRefTraits {
         CFRetain(value);
     }
     static void Release(T value) {
-        CFRelease(value);
+        if (value != kNullValue) {
+            CFRelease(value);
+        }
     }
 };
 
