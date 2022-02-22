@@ -48,6 +48,7 @@ namespace dawn::native::metal {
                                            NSPRef<id<MTLTexture>> wrapped);
 
         id<MTLTexture> GetMTLTexture();
+        IOSurfaceRef GetMultiplanarIOSurface();
         NSPRef<id<MTLTexture>> CreateFormatView(wgpu::TextureFormat format);
 
         void EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
@@ -74,7 +75,9 @@ namespace dawn::native::metal {
                                 TextureBase::ClearValue clearValue);
 
         NSPRef<id<MTLTexture>> mMtlTexture;
+
         MTLTextureUsage mMtlUsage;
+        IOSurfaceRef mMultiplanarIOSurface = nullptr;
     };
 
     class TextureView final : public TextureViewBase {

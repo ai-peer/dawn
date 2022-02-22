@@ -175,6 +175,8 @@ namespace dawn::native::metal {
                     return wgpu::TextureFormat::RG8Unorm;
                 case kCVPixelFormatType_OneComponent8:
                     return wgpu::TextureFormat::R8Unorm;
+                case kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange:
+                    return wgpu::TextureFormat::R8BG8Biplanar420Unorm;
                 default:
                     return DAWN_FORMAT_VALIDATION_ERROR("Unsupported IOSurface format (%x).",
                                                         format);
@@ -390,7 +392,7 @@ namespace dawn::native::metal {
                                              uint32_t plane) {
         // IOSurfaceGetPlaneCount can return 0 for non-planar IOSurfaces but we will treat
         // non-planar like it is a single plane.
-        size_t surfacePlaneCount = std::max(size_t(1), IOSurfaceGetPlaneCount(ioSurface));
+        size_t surfacePlaneCount = std::max(size_t(3), IOSurfaceGetPlaneCount(ioSurface));
         DAWN_INVALID_IF(plane >= surfacePlaneCount,
                         "IOSurface plane (%u) exceeds the surface's plane count (%u).", plane,
                         surfacePlaneCount);
@@ -496,7 +498,7 @@ namespace dawn::native::metal {
         const TextureDescriptor* textureDescriptor = FromAPI(descriptor->cTextureDescriptor);
 
         Ref<Texture> texture =
-            AcquireRef(new Texture(device, textureDescriptor, TextureState::OwnedInternal));
+            AcquireRef(new Texture(device, textureDescriptor, TextureState::OwnedExternal));
         DAWN_TRY(texture->InitializeFromIOSurface(descriptor, textureDescriptor, ioSurface, plane));
         return texture;
     }
@@ -542,22 +544,29 @@ namespace dawn::native::metal {
                                                 const TextureDescriptor* textureDescriptor,
                                                 IOSurfaceRef ioSurface,
                                                 uint32_t plane) {
-        Device* device = ToBackend(GetDevice());
+        if (textureDescriptor->format == wgpu::TextureFormat::R8BG8Biplanar420Unorm) {
+            mMultiplanarIOSurface = ioSurface;
+            CFRetain(mMultiplanarIOSurface);
+        } else {
+            Device* device = ToBackend(GetDevice());
+            NSRef<MTLTextureDescriptor> mtlDesc = CreateMetalTextureDescriptor();
+            [*mtlDesc setStorageMode:kIOSurfaceStorageMode];
 
-        NSRef<MTLTextureDescriptor> mtlDesc = CreateMetalTextureDescriptor();
-        [*mtlDesc setStorageMode:kIOSurfaceStorageMode];
-
-        mMtlUsage = [*mtlDesc usage];
-        mMtlTexture = AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc.Get()
-                                                                           iosurface:ioSurface
-                                                                               plane:plane]);
-
+            mMtlUsage = [*mtlDesc usage];
+            mMtlTexture =
+                AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc.Get()
+                                                                     iosurface:ioSurface
+                                                                         plane:plane]);
+        }
         SetIsSubresourceContentInitialized(descriptor->isInitialized, GetAllSubresources());
-
         return {};
     }
 
     Texture::~Texture() {
+        if (mMultiplanarIOSurface != nullptr) {
+            CFRelease(mMultiplanarIOSurface);
+            mMultiplanarIOSurface = nullptr;
+        }
     }
 
     void Texture::DestroyImpl() {
@@ -567,6 +576,10 @@ namespace dawn::native::metal {
 
     id<MTLTexture> Texture::GetMTLTexture() {
         return mMtlTexture.Get();
+    }
+
+    IOSurfaceRef Texture::GetMultiplanarIOSurface() {
+        return mMultiplanarIOSurface;
     }
 
     NSPRef<id<MTLTexture>> Texture::CreateFormatView(wgpu::TextureFormat format) {
@@ -815,6 +828,31 @@ namespace dawn::native::metal {
             mMtlTextureView = nullptr;
         } else if (!RequiresCreatingNewTextureView(texture, descriptor)) {
             mMtlTextureView = mtlTexture;
+        } else if (texture->GetFormat().format == wgpu::TextureFormat::R8BG8Biplanar420Unorm) {
+            NSRef<MTLTextureDescriptor> mtlDescRef = AcquireNSRef([MTLTextureDescriptor new]);
+            MTLTextureDescriptor* mtlDesc = mtlDescRef.Get();
+
+            mtlDesc.sampleCount = texture->GetSampleCount();
+            mtlDesc.usage = MetalTextureUsage(texture->GetFormat(), texture->GetInternalUsage(),
+                                              texture->GetSampleCount());
+            mtlDesc.pixelFormat = MetalPixelFormat(descriptor->format);
+            mtlDesc.mipmapLevelCount = texture->GetNumMipLevels();
+            mtlDesc.storageMode = MTLStorageModePrivate;
+
+            uint32_t plane = descriptor->aspect == wgpu::TextureAspect::Plane0Only ? 0 : 1;
+            mtlDesc.width = IOSurfaceGetWidthOfPlane(texture->GetMultiplanarIOSurface(), plane);
+            mtlDesc.height = IOSurfaceGetHeightOfPlane(texture->GetMultiplanarIOSurface(), plane);
+            mtlDesc.arrayLength = texture->GetArrayLayers();
+            mtlDesc.depth = 1;
+
+            mMtlTextureView = AcquireNSPRef([ToBackend(GetDevice())->GetMTLDevice()
+                newTextureWithDescriptor:mtlDesc
+                               iosurface:texture->GetMultiplanarIOSurface()
+                                   plane:plane]);
+            if (mMtlTextureView == nil) {
+                return DAWN_INTERNAL_ERROR(
+                    "Failed to create MTLTexture view for external texture.");
+            }
         } else {
             MTLPixelFormat format = MetalPixelFormat(descriptor->format);
             if (descriptor->aspect == wgpu::TextureAspect::StencilOnly) {
