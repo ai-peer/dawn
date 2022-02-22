@@ -16,6 +16,57 @@
       "message": "Shrek, PTAL",
       "revId": "511d53f1ca749b945325138dceaab0d98d7469ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc6ab955_4ba14c99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-02-22T18:30:27Z",
+      "side": 1,
+      "message": "LGTM (with some nit comments)",
+      "revId": "511d53f1ca749b945325138dceaab0d98d7469ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8f5ece1_2c124c7e",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-02-22T18:30:27Z",
+      "side": 1,
+      "message": "Q: If the conversion is lossy only on Windows, why do we need to disable it on Metal?",
+      "revId": "511d53f1ca749b945325138dceaab0d98d7469ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8e27935_ed2247c9",
+        "filename": "src/dawn/tests/white_box/D3D12GPUTimestampCalibrationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-02-22T18:30:27Z",
+      "side": 1,
+      "message": "super nit: I once added a ExpectBetweenColor and its inclusive. https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/DawnTest.cpp;l\u003d1696?q\u003dexpect%20between%20f:dawn\u0026ss\u003dchromium%2Fchromium%2Fsrc\n\n(This one seems to be exclusive range). Maybe add a \"(Exclusive Range)\" to the assert failure message?",
+      "revId": "511d53f1ca749b945325138dceaab0d98d7469ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
