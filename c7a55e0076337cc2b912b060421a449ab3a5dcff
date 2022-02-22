@@ -16,6 +16,46 @@
       "message": "PTAL, thanks!",
       "revId": "c7a55e0076337cc2b912b060421a449ab3a5dcff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6a2c427_85af59ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-22T17:53:28Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "c7a55e0076337cc2b912b060421a449ab3a5dcff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "958d2500_6acfad08",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-22T17:53:28Z",
+      "side": 1,
+      "message": "nit: prefer \"is destroyed\"",
+      "range": {
+        "startLine": 330,
+        "startChar": 43,
+        "endLine": 330,
+        "endChar": 51
+      },
+      "revId": "c7a55e0076337cc2b912b060421a449ab3a5dcff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
