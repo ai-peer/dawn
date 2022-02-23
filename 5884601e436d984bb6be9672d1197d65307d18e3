@@ -16,6 +16,23 @@
       "message": "Apply https://chromium-review.googlesource.com/c/chromium/src/+/3479376 in chromium \nAnd try the sample:\nhttps://austin-eng.com/webgpu-samples/samples/videoUploading (CPU decoding)\nand the https://source.chromium.org/chromium/chromium/src/+/main:content/test/data/gpu/vc/webgpu_videos_mxn.html (GPU decoding)\n",
       "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be55e6de_a5f18722",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-02-23T08:59:11Z",
+      "side": 1,
+      "message": "I don\u0027t know whether wrap CVPixelBuffer directly and create mtlTexture on it could support 0-copy path on more devices.",
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
