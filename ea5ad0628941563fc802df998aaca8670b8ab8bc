@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "024f8866_3a4fd21d",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-23T19:45:57Z",
+      "side": 0,
+      "message": "I think we need to keep this",
+      "revId": "ea5ad0628941563fc802df998aaca8670b8ab8bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

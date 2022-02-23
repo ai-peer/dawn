@@ -20,6 +20,172 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a0d12c4_b23922be",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-23T19:45:57Z",
+      "side": 1,
+      "message": "Instead, prefer to define a function like:\n\nvoid Tick(WGPUDevice device);\nor Tick(wgpu::Device device);\n\nAnd define it separately for emscripten vs native.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 30
+      },
+      "revId": "9bc566127283a087c117780e8f5615bd2c96bbc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9e8c9a7_9bcc126c",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-23T19:45:57Z",
+      "side": 1,
+      "message": "can we use the C++ api?",
+      "revId": "9bc566127283a087c117780e8f5615bd2c96bbc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1651a17d_676a06d8",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-23T19:45:57Z",
+      "side": 1,
+      "message": "can we use our ASSERT macro? May need special stuff in HandleAssertionFailure if __EMSCRIPTEN__",
+      "range": {
+        "startLine": 120,
+        "startChar": 12,
+        "endLine": 120,
+        "endChar": 18
+      },
+      "revId": "9bc566127283a087c117780e8f5615bd2c96bbc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "453cecf3_300044fd",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-23T19:45:57Z",
+      "side": 1,
+      "message": "RequestAdapterResolve and RequestDeviceResolve are only used here.\n\nCould we just inline them into these lambdas?\n\nIf we need them separate (maybe private/public variables), I think we should just make the entire thing separate. ex.) \n\ninstance.requestAdapter(nullptr, ValidationTest::OnRequestAdapter);",
+      "revId": "9bc566127283a087c117780e8f5615bd2c96bbc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07208914_12f8f2e7",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-23T19:45:57Z",
+      "side": 1,
+      "message": "this is duplicated in RequestDeviceResolve.\n\nIf possible we should rely on the existing code here and not have it in RequestDeviceResolve",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 164,
+        "endChar": 0
+      },
+      "revId": "9bc566127283a087c117780e8f5615bd2c96bbc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9fc42e8_51be4070",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-23T19:45:57Z",
+      "side": 1,
+      "message": "what happens if we always use pop error scope instead of the uncaptured error handler?",
+      "revId": "9bc566127283a087c117780e8f5615bd2c96bbc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ad12fa0_b3542454",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-23T19:45:57Z",
+      "side": 1,
+      "message": "or rather: any features at all",
+      "range": {
+        "startLine": 283,
+        "startChar": 54,
+        "endLine": 285,
+        "endChar": 30
+      },
+      "revId": "9bc566127283a087c117780e8f5615bd2c96bbc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96132528_1d18faaf",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-23T19:45:57Z",
+      "side": 1,
+      "message": "should be able to combine these functions if we make the Emscripten device the backendDevice, and if we save have an mBackendProcs member var that\u0027s either dawn::native::GetProcs() or the emscripten procs",
+      "range": {
+        "startLine": 303,
+        "startChar": 4,
+        "endLine": 303,
+        "endChar": 28
+      },
+      "revId": "9bc566127283a087c117780e8f5615bd2c96bbc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9374ae80_14083b88",
         "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
         "patchSetId": 8
@@ -37,6 +203,70 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c75fb24_70b851dd",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-23T19:45:57Z",
+      "side": 1,
+      "message": "+1 this would be preferred",
+      "parentUuid": "9374ae80_14083b88",
+      "revId": "9bc566127283a087c117780e8f5615bd2c96bbc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1dd620a_56b8a0bc",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-23T19:45:57Z",
+      "side": 1,
+      "message": "we should be able to hold just the wgpu::Instance and wgpu::Adapter.\n\nWe can make a dawn::native::Adapter or dawn::native::Instance from the wgpu:: versions if we need it.\n\nEdit: dawn::native::Adapter can be created from WGPUAdapter. We can add a constructor to dawn::native::Instance to do the same",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 6
+      },
+      "revId": "9bc566127283a087c117780e8f5615bd2c96bbc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19f3d4eb_b369766c",
+        "filename": "src/dawn/utils/TextureUtils.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-23T19:45:57Z",
+      "side": 1,
+      "message": "this shows up a lot - maybe we can put it in utils/ somewhere",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 6
+      },
+      "revId": "9bc566127283a087c117780e8f5615bd2c96bbc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90e46e9c_c67f3f79",
         "filename": "src/dawn/utils/WGPUHelpers.cpp",
         "patchSetId": 8
@@ -48,6 +278,24 @@
       "writtenOn": "2022-02-18T00:43:20Z",
       "side": 1,
       "message": "Is it we already removed spriv dependencies for dawn? If so we should be able to remove this function and several references in the tests",
+      "revId": "9bc566127283a087c117780e8f5615bd2c96bbc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecbb2df1_eeea5b3b",
+        "filename": "src/dawn/utils/WGPUHelpers.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-23T19:45:57Z",
+      "side": 1,
+      "message": "There\u0027s like 1 test that uses this function. I guess the #ifdef is fine for now.",
+      "parentUuid": "90e46e9c_c67f3f79",
       "revId": "9bc566127283a087c117780e8f5615bd2c96bbc5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
