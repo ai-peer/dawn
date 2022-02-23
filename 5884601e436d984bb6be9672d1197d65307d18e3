@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4d6ae30_c21777e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-02-23T08:55:31Z",
+      "side": 1,
+      "message": "Apply https://chromium-review.googlesource.com/c/chromium/src/+/3479376 in chromium \nAnd try the sample:\nhttps://austin-eng.com/webgpu-samples/samples/videoUploading (CPU decoding)\nand the https://source.chromium.org/chromium/chromium/src/+/main:content/test/data/gpu/vc/webgpu_videos_mxn.html (GPU decoding)\n",
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
