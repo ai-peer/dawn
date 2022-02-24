@@ -109,35 +109,43 @@ namespace dawn::native::d3d12 {
         }
     }  // anonymous namespace
 
-    RenderPassBuilder::RenderPassBuilder(bool hasUAV) {
+    RenderPassBuilder::RenderPassBuilder(bool hasUAV, D3D12_CPU_DESCRIPTOR_HANDLE nullRTV) {
         if (hasUAV) {
             mRenderPassFlags = D3D12_RENDER_PASS_FLAG_ALLOW_UAV_WRITES;
+        }
+        for (auto& rtv : mRenderTargetViews) {
+            rtv = nullRTV;
+        }
+        for (auto& desc : mRenderPassRenderTargetDescriptors) {
+            desc.cpuDescriptor = nullRTV;
         }
     }
 
     void RenderPassBuilder::SetRenderTargetView(ColorAttachmentIndex attachmentIndex,
                                                 D3D12_CPU_DESCRIPTOR_HANDLE baseDescriptor) {
-        ASSERT(mColorAttachmentCount < kMaxColorAttachmentsTyped);
         mRenderTargetViews[attachmentIndex] = baseDescriptor;
         mRenderPassRenderTargetDescriptors[attachmentIndex].cpuDescriptor = baseDescriptor;
-        mColorAttachmentCount++;
+        mHighestColorAttachmentIndexPlusOne = std::max(
+            mHighestColorAttachmentIndexPlusOne,
+            ColorAttachmentIndex{static_cast<uint8_t>(static_cast<uint8_t>(attachmentIndex) + 1u)});
     }
 
     void RenderPassBuilder::SetDepthStencilView(D3D12_CPU_DESCRIPTOR_HANDLE baseDescriptor) {
         mRenderPassDepthStencilDesc.cpuDescriptor = baseDescriptor;
     }
 
-    ColorAttachmentIndex RenderPassBuilder::GetColorAttachmentCount() const {
-        return mColorAttachmentCount;
+    ColorAttachmentIndex RenderPassBuilder::GetHighestColorAttachmentIndexPlusOne() const {
+        return mHighestColorAttachmentIndexPlusOne;
     }
 
     bool RenderPassBuilder::HasDepth() const {
         return mHasDepth;
     }
 
-    ityp::span<ColorAttachmentIndex, const D3D12_RENDER_PASS_RENDER_TARGET_DESC>
+    ityp::span<uint8_t, const D3D12_RENDER_PASS_RENDER_TARGET_DESC>
     RenderPassBuilder::GetRenderPassRenderTargetDescriptors() const {
-        return {mRenderPassRenderTargetDescriptors.data(), mColorAttachmentCount};
+        return {mRenderPassRenderTargetDescriptors.data(),
+                static_cast<uint8_t>(mHighestColorAttachmentIndexPlusOne)};
     }
 
     const D3D12_RENDER_PASS_DEPTH_STENCIL_DESC*
