@@ -17,12 +17,13 @@
 #include "dawn/common/Constants.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/Instance.h"
+#include "dawn/native/PersistentCache.h"
 #include "dawn/native/ValidationUtils_autogen.h"
 
 namespace dawn::native {
 
     AdapterBase::AdapterBase(InstanceBase* instance, wgpu::BackendType backend)
-        : mInstance(instance), mBackend(backend) {
+        : mInstance(instance), mBackend(backend), mPersistentCache(instance) {
         mSupportedFeatures.EnableFeature(Feature::DawnNative);
         mSupportedFeatures.EnableFeature(Feature::DawnInternalUsages);
     }
@@ -143,6 +144,10 @@ namespace dawn::native {
 
     InstanceBase* AdapterBase::GetInstance() const {
         return mInstance;
+    }
+
+    PersistentCache* AdapterBase::GetPersistentCache() {
+        return &mPersistentCache;
     }
 
     FeaturesSet AdapterBase::GetSupportedFeatures() const {
