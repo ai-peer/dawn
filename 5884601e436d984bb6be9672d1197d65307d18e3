@@ -163,6 +163,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d788867d_e7c1aa20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-02-24T19:25:08Z",
+      "side": 1,
+      "message": "(I don\u0027t have enough background to help on this thread, hopefully ccameron/etc can.)",
+      "parentUuid": "bd344d35_2796fa0e",
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be55e6de_a5f18722",
         "filename": "src/dawn/native/metal/BackendMTL.mm",
         "patchSetId": 3
@@ -192,6 +210,24 @@
       "side": 1,
       "message": "this looks fine to me. we require macOS 11, and don\u0027t need iOS for Chrome",
       "parentUuid": "be55e6de_a5f18722",
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3165c6aa_c6c01136",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-02-24T19:25:08Z",
+      "side": 1,
+      "message": "Metal was first introduced in macOS 10.11, that\u0027s why this requires 10.11. We\u0027ll worry about iOS only if someone needs this path to work on older iOS.\n\nAnd per https://github.com/gpuweb/gpuweb/issues/1069 our minimum macOS version is 10.12.",
+      "parentUuid": "b4fca9c7_8627e308",
       "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
