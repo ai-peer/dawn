@@ -23,6 +23,7 @@ class ITypBitsetTest : public testing::Test {
   protected:
     using Key = TypedInteger<struct KeyT, size_t>;
     using Bitset = ityp::bitset<Key, 9>;
+    using Bitset40 = ityp::bitset<Key, 40>;
 
     // Test that the expected bitset methods can be constexpr
     struct ConstexprTest {
@@ -175,4 +176,23 @@ TEST_F(ITypBitsetTest, Xor) {
 
     bits ^= Bitset{1 << 1 | 1 << 6};
     ExpectBits(bits, {2, 6, 7});
+}
+
+// Testing the getHighestBitIndexExclusive function
+TEST_F(ITypBitsetTest, GetHighestBitIndexExclusive) {
+    EXPECT_EQ(0u, Bitset40(0b00).getHighestBitIndexExclusive());
+    EXPECT_EQ(1u, Bitset40(0b01).getHighestBitIndexExclusive());
+    EXPECT_EQ(2u, Bitset40(0b10).getHighestBitIndexExclusive());
+    EXPECT_EQ(2u, Bitset40(0b11).getHighestBitIndexExclusive());
+
+    EXPECT_EQ(5u, Bitset40(0x10).getHighestBitIndexExclusive());
+    EXPECT_EQ(5u, Bitset40(0x1F).getHighestBitIndexExclusive());
+    EXPECT_EQ(16u, Bitset40(0xF000).getHighestBitIndexExclusive());
+    EXPECT_EQ(16u, Bitset40(0xFFFF).getHighestBitIndexExclusive());
+    EXPECT_EQ(32u, Bitset40(0xF0000000).getHighestBitIndexExclusive());
+    EXPECT_EQ(32u, Bitset40(0xFFFFFFFF).getHighestBitIndexExclusive());
+    EXPECT_EQ(36u, Bitset40(0xF00000000).getHighestBitIndexExclusive());
+    EXPECT_EQ(36u, Bitset40(0xFFFFFFFFF).getHighestBitIndexExclusive());
+    EXPECT_EQ(40u, Bitset40(0xF000000000).getHighestBitIndexExclusive());
+    EXPECT_EQ(40u, Bitset40(0xFFFFFFFFFF).getHighestBitIndexExclusive());
 }
