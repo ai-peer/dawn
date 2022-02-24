@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0afb3064_e7375e92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-24T04:27:30Z",
+      "side": 1,
+      "message": "I have a preference for wrapping the whole IOSurface directly instead of creating two WGPUTextures which each point to a plane of the IOSurface. Because architecturally, it seems simpler to think about. We have a 1:1 mapping of external IOSurface -\u003e WGPUTexture. And we just create views normally.\n\nHowever, I\u0027m not sure what details need to be considered on the Chromium side. Looking at those patches, you said:\n\n\u003e Note that this requires invoke AssociateMailbox in render process always use the mailbox[0]. \n\nIf in Chromium, the planes are separate SharedImages, then maybe it\u0027s better having a 1:1 SharedImage -\u003e WGPUTexture association instead of a 1:1 IOSurface -\u003e WGPUTexture mapping. \nOr - is there a plan for a single SharedImage with multiple planes?\n\n(sunnyps@ had messaged me about 0-copy on Mac last week, but the messages have disappeared, so I don\u0027t remember what he said. So Sunny please chime in if you have additional thoughts).",
+      "parentUuid": "ae89d830_8e16388d",
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be55e6de_a5f18722",
         "filename": "src/dawn/native/metal/BackendMTL.mm",
         "patchSetId": 3
