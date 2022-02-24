@@ -22,6 +22,7 @@
 #include "dawn/native/Error.h"
 #include "dawn/native/Features.h"
 #include "dawn/native/Limits.h"
+#include "dawn/native/PersistentCache.h"
 #include "dawn/native/dawn_platform.h"
 
 #include <string>
@@ -51,6 +52,8 @@ namespace dawn::native {
         uint32_t GetDeviceId() const;
         wgpu::BackendType GetBackendType() const;
         InstanceBase* GetInstance() const;
+
+        PersistentCache* GetPersistentCache();
 
         void ResetInternalDeviceForTesting();
 
@@ -92,6 +95,7 @@ namespace dawn::native {
         wgpu::BackendType mBackend;
         CombinedLimits mLimits;
         bool mUseTieredLimits = false;
+        PersistentCache mPersistentCache;
     };
 
 }  // namespace dawn::native
