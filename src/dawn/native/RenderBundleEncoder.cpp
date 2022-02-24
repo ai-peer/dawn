@@ -70,9 +70,14 @@ namespace dawn::native {
                             descriptor->depthStencilFormat == wgpu::TextureFormat::Undefined,
                         "No color or depth/stencil attachment formats specified.");
 
+        bool isAllColorFormatUndefined = true;
         for (uint32_t i = 0; i < descriptor->colorFormatsCount; ++i) {
-            DAWN_TRY_CONTEXT(ValidateColorAttachmentFormat(device, descriptor->colorFormats[i]),
-                             "validating colorFormats[%u]", i);
+            wgpu::TextureFormat format = descriptor->colorFormats[i];
+            if (format != wgpu::TextureFormat::Undefined) {
+                DAWN_TRY_CONTEXT(ValidateColorAttachmentFormat(device, format),
+                                 "validating colorFormats[%u]", i);
+                isAllColorFormatUndefined = false;
+            }
         }
 
         if (descriptor->depthStencilFormat != wgpu::TextureFormat::Undefined) {
@@ -80,6 +85,10 @@ namespace dawn::native {
                                  device, descriptor->depthStencilFormat, descriptor->depthReadOnly,
                                  descriptor->stencilReadOnly),
                              "validating depthStencilFormat");
+        } else {
+            DAWN_INVALID_IF(
+                isAllColorFormatUndefined,
+                "depthStencilFormat must not be null when all colorFormats are null members.");
         }
 
         return {};
