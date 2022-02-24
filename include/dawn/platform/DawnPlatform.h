@@ -32,26 +32,27 @@ namespace dawn::platform {
         GPUWork,     // Actual GPU work
     };
 
+    // Implementation should be thread-safe since the interface is at the platform level
+    // while the usage could be across multiple adapters/devices which can have async
+    // behaviors. The implementation is also assumed to handle evictions from the backing
+    // storage.
     class DAWN_PLATFORM_EXPORT CachingInterface {
       public:
         CachingInterface();
         virtual ~CachingInterface();
 
-        // LoadData has two modes. The first mode is used to get a value which
-        // corresponds to the |key|. The |valueOut| is a caller provided buffer
-        // allocated to the size |valueSize| which is loaded with data of the
-        // size returned. The second mode is used to query for the existence of
-        // the |key| where |valueOut| is nullptr and |valueSize| must be 0.
-        // The return size is non-zero if the |key| exists.
-        virtual size_t LoadData(const WGPUDevice device,
-                                const void* key,
+        // LoadData has two modes. The first mode is used to get a value which corresponds
+        // to the |key|. The |valueOut| is a caller provided buffer allocated to the size
+        // |valueSize| which is loaded with data of the size returned. The second mode is
+        // used to query for the existence of the |key| where |valueOut| is nullptr and
+        // |valueSize| must be 0. The return size is non-zero if the |key| exists.
+        virtual size_t LoadData(const void* key,
                                 size_t keySize,
                                 void* valueOut,
                                 size_t valueSize) = 0;
 
         // StoreData puts a |value| in the cache which corresponds to the |key|.
-        virtual void StoreData(const WGPUDevice device,
-                               const void* key,
+        virtual void StoreData(const void* key,
                                size_t keySize,
                                const void* value,
                                size_t valueSize) = 0;
