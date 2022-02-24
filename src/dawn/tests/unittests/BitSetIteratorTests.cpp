@@ -217,3 +217,22 @@ TEST_F(ITypBitsetIteratorTest, NonLValueBitset) {
 
     EXPECT_EQ((mStateBits & otherBits).count(), seenBits.size());
 }
+
+// Testing the GetHighestBitIndexExclusive function
+TEST_F(ITypBitsetIteratorTest, GetHighestBitIndexExclusive) {
+    EXPECT_EQ(0u, IterateBitSet(std::bitset<40>{0b00}).GetHighestBitIndexExclusive());
+    EXPECT_EQ(1u, IterateBitSet(std::bitset<40>{0b01}).GetHighestBitIndexExclusive());
+    EXPECT_EQ(2u, IterateBitSet(std::bitset<40>{0b10}).GetHighestBitIndexExclusive());
+    EXPECT_EQ(2u, IterateBitSet(std::bitset<40>{0b11}).GetHighestBitIndexExclusive());
+
+    EXPECT_EQ(5u, IterateBitSet(std::bitset<40>{0x10}).GetHighestBitIndexExclusive());
+    EXPECT_EQ(5u, IterateBitSet(std::bitset<40>{0x1F}).GetHighestBitIndexExclusive());
+    EXPECT_EQ(16u, IterateBitSet(std::bitset<40>{0xF000}).GetHighestBitIndexExclusive());
+    EXPECT_EQ(16u, IterateBitSet(std::bitset<40>{0xFFFF}).GetHighestBitIndexExclusive());
+    EXPECT_EQ(32u, IterateBitSet(std::bitset<40>{0xF0000000}).GetHighestBitIndexExclusive());
+    EXPECT_EQ(32u, IterateBitSet(std::bitset<40>{0xFFFFFFFF}).GetHighestBitIndexExclusive());
+    EXPECT_EQ(36u, IterateBitSet(std::bitset<40>{0xF00000000}).GetHighestBitIndexExclusive());
+    EXPECT_EQ(36u, IterateBitSet(std::bitset<40>{0xFFFFFFFFF}).GetHighestBitIndexExclusive());
+    EXPECT_EQ(40u, IterateBitSet(std::bitset<40>{0xF000000000}).GetHighestBitIndexExclusive());
+    EXPECT_EQ(40u, IterateBitSet(std::bitset<40>{0xFFFFFFFFFF}).GetHighestBitIndexExclusive());
+}
