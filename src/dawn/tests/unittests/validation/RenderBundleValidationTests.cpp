@@ -635,14 +635,6 @@ TEST_F(RenderBundleValidationTest, ColorFormatsCountOutOfBounds) {
     }
 }
 
-// Test that render bundle color formats cannot be set to undefined.
-TEST_F(RenderBundleValidationTest, ColorFormatUndefined) {
-    utils::ComboRenderBundleEncoderDescriptor desc = {};
-    desc.colorFormatsCount = 1;
-    desc.cColorFormats[0] = wgpu::TextureFormat::Undefined;
-    ASSERT_DEVICE_ERROR(device.CreateRenderBundleEncoder(&desc));
-}
-
 // Test that the render bundle depth stencil format cannot be set to undefined.
 TEST_F(RenderBundleValidationTest, DepthStencilFormatUndefined) {
     utils::ComboRenderBundleEncoderDescriptor desc = {};
