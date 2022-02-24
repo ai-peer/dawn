@@ -39,18 +39,13 @@ namespace dawn::platform {
 }  // namespace dawn::platform
 
 namespace dawn::native {
-    class AdapterBase;
     class AsyncTaskManager;
     class AttachmentState;
     class AttachmentStateBlueprint;
-    class BindGroupLayoutBase;
     class CallbackTaskManager;
     class DynamicUploader;
     class ErrorScopeStack;
-    class ExternalTextureBase;
     class OwnedCompilationMessages;
-    class PersistentCache;
-    class StagingBufferBase;
     struct CallbackTask;
     struct InternalPipelineStore;
     struct ShaderModuleParseResult;
@@ -196,6 +191,8 @@ namespace dawn::native {
         Ref<AttachmentState> GetOrCreateAttachmentState(const RenderPassDescriptor* descriptor);
         void UncacheAttachmentState(AttachmentState* obj);
 
+        Ref<PipelineCacheBase> GetOrCreatePipelineCache(PipelineBase* pipeline);
+
         // Object creation methods that be used in a reentrant manner.
         ResultOrError<Ref<BindGroupBase>> CreateBindGroup(const BindGroupDescriptor* descriptor);
         ResultOrError<Ref<BindGroupLayoutBase>> CreateBindGroupLayout(
@@ -209,7 +206,6 @@ namespace dawn::native {
         MaybeError CreateComputePipelineAsync(const ComputePipelineDescriptor* descriptor,
                                               WGPUCreateComputePipelineAsyncCallback callback,
                                               void* userdata);
-
         ResultOrError<Ref<PipelineLayoutBase>> CreatePipelineLayout(
             const PipelineLayoutDescriptor* descriptor);
         ResultOrError<Ref<QuerySetBase>> CreateQuerySet(const QuerySetDescriptor* descriptor);
@@ -275,8 +271,6 @@ namespace dawn::native {
         bool APIPopErrorScope(wgpu::ErrorCallback callback, void* userdata);
 
         MaybeError ValidateIsAlive() const;
-
-        PersistentCache* GetPersistentCache();
 
         virtual ResultOrError<std::unique_ptr<StagingBufferBase>> CreateStagingBuffer(
             size_t size) = 0;
@@ -440,6 +434,7 @@ namespace dawn::native {
             Ref<ComputePipelineBase> computePipeline);
         Ref<RenderPipelineBase> AddOrGetCachedRenderPipeline(
             Ref<RenderPipelineBase> renderPipeline);
+        virtual Ref<PipelineCacheBase> GetOrCreatePipelineCacheImpl(PipelineBase* pipeline);
         virtual void InitializeComputePipelineAsyncImpl(
             Ref<ComputePipelineBase> computePipeline,
             WGPUCreateComputePipelineAsyncCallback callback,
@@ -542,8 +537,6 @@ namespace dawn::native {
         FeaturesSet mEnabledFeatures;
 
         std::unique_ptr<InternalPipelineStore> mInternalPipelineStore;
-
-        std::unique_ptr<PersistentCache> mPersistentCache;
 
         std::unique_ptr<CallbackTaskManager> mCallbackTaskManager;
         std::unique_ptr<dawn::platform::WorkerTaskPool> mWorkerTaskPool;
