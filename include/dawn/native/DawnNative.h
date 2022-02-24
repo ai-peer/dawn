@@ -178,6 +178,9 @@ namespace dawn::native {
     // Query the names of all the toggles that are enabled in device
     DAWN_NATIVE_EXPORT std::vector<const char*> GetTogglesUsed(WGPUDevice device);
 
+    // Query the cache isolation key that is enabled in device
+    DAWN_NATIVE_EXPORT std::string GetCacheIsolationKey(WGPUDevice device);
+
     // Backdoor to get the number of lazy clears for testing
     DAWN_NATIVE_EXPORT size_t GetLazyClearCountForTesting(WGPUDevice device);
 

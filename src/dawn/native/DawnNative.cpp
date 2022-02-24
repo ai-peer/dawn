@@ -71,6 +71,10 @@ namespace dawn::native {
         return FromAPI(device)->GetTogglesUsed();
     }
 
+    std::string GetCacheIsolationKey(WGPUDevice device) {
+        return FromAPI(device)->GetCacheIsolationKey();
+    }
+
     // Adapter
 
     Adapter::Adapter() = default;
