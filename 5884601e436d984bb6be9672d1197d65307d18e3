@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9180fa7e_cf55ec3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-02-24T02:08:25Z",
+      "side": 1,
+      "message": "Also cc enga@ and kai@ for comments,\nThe basic idea here is to Retain the external iosurface from the shared image which contains a multiplanar IOSurface (get from multiplanar CVPixelBuffer) in the WGPUTexture for AssociateMailbox. Then Creating per plane mtlTexture from IOSurface when user creating texture view on this texture through Dawn and WGPUTextureView holds the per plane mtlTexture. \nDo you think this is the correct direction in Dawn? If yes, I\u0027ll iterate on this CL to make it mature.",
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be55e6de_a5f18722",
