@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "1abbcd8690bb2921e206283d18bca13873e5b53d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b18ce6dc_a94d3c8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-24T17:43:59Z",
+      "side": 1,
+      "message": "adding Loko to review",
+      "revId": "1abbcd8690bb2921e206283d18bca13873e5b53d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
