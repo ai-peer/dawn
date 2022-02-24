@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce0175d0_d5b3ccdd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-24T04:39:23Z",
+      "side": 1,
+      "message": "Also, for RG16Unorm and R16Unorm, please feel free to add them as a Dawn extension.",
+      "parentUuid": "0afb3064_e7375e92",
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be55e6de_a5f18722",
         "filename": "src/dawn/native/metal/BackendMTL.mm",
         "patchSetId": 3
