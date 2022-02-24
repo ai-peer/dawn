@@ -33,6 +33,46 @@
       "message": "adding Loko to review",
       "revId": "1abbcd8690bb2921e206283d18bca13873e5b53d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0b6a5bd_1c8068d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-24T17:48:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1abbcd8690bb2921e206283d18bca13873e5b53d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "375e0852_badacd9f",
+        "filename": "src/dawn/tests/unittests/native/CreatePipelineAsyncTaskTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-24T17:48:37Z",
+      "side": 1,
+      "message": "I don\u0027t think you need the new class RenderPipelineMockForTest.\n\nShould be possible to do:\n\n RenderPipelineMock* renderPipelineMock \u003d new RenderPipelineMock(deviceBase);\n ON_CALL(*renderPipelineMock,\n         Initialize).WillByDefault(Return(DAWN_MAKE_ERROR(...)));",
+      "range": {
+        "startLine": 26,
+        "startChar": 3,
+        "endLine": 35,
+        "endChar": 6
+      },
+      "revId": "1abbcd8690bb2921e206283d18bca13873e5b53d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
