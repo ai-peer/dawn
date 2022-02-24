@@ -15,6 +15,7 @@
 #include "dawn/native/RenderPipeline.h"
 
 #include "dawn/common/BitSetIterator.h"
+#include "dawn/common/Log.h"
 #include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/Device.h"
@@ -430,11 +431,20 @@ namespace dawn::native {
                 descriptor->module->GetEntryPoint(descriptor->entryPoint);
             for (ColorAttachmentIndex i(uint8_t(0));
                  i < ColorAttachmentIndex(static_cast<uint8_t>(descriptor->targetCount)); ++i) {
-                DAWN_TRY_CONTEXT(
-                    ValidateColorTargetState(device, &descriptor->targets[static_cast<uint8_t>(i)],
-                                             fragmentMetadata.fragmentOutputsWritten[i],
-                                             fragmentMetadata.fragmentOutputVariables[i]),
-                    "validating targets[%u].", static_cast<uint8_t>(i));
+                const ColorTargetState* target = &descriptor->targets[static_cast<uint8_t>(i)];
+                if (target->format != wgpu::TextureFormat::Undefined) {
+                    DAWN_TRY_CONTEXT(ValidateColorTargetState(
+                                         device, target, fragmentMetadata.fragmentOutputsWritten[i],
+                                         fragmentMetadata.fragmentOutputVariables[i]),
+                                     "validating targets[%u].", static_cast<uint8_t>(i));
+                } else {
+                    if (target->blend) {
+                        dawn::WarningLog() << "Color target is null but blend state is set.";
+                    }
+                    if (target->writeMask != wgpu::ColorWriteMask::None) {
+                        dawn::WarningLog() << "Color target is null but write mask is set.";
+                    }
+                }
             }
 
             return {};
