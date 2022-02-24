@@ -129,6 +129,46 @@ namespace ityp {
         friend struct std::hash<bitset>;
     };
 
+    // Assume we have bitset of at most 64 bits
+    // Returns i which is the next integer of the index of the highest bit
+    // i == 0 if there is no bit set to true
+    // i == 1 if only the least significant bit (at index 0) is the bit set to true with the
+    // highest index
+    // ...
+    // i == 64 if the most significant bit (at index 64) is the bit set to true with the highest
+    // index
+    template <typename Index, size_t N>
+    Index GetHighestBitIndexPlusOne(const bitset<Index, N>& bitset) {
+        using I = UnderlyingType<Index>;
+#if defined(DAWN_COMPILER_MSVC)
+#    if defined(DAWN_PLATFORM_64_BIT)
+        unsigned long firstBitIndex = 0ul;
+#        if N > 32
+        unsigned char ret = _BitScanReverse64(&firstBitIndex, bitset.to_ullong());
+#        else   // N > 32
+        unsigned char ret = _BitScanReverse(&firstBitIndex, bitset.to_ulong());
+#        endif  // N > 32
+        if (ret == 0) {
+            return Index(static_cast<I>(0));
+        }
+        return Index(static_cast<I>(firstBitIndex + 1));
+#    else   // defined(DAWN_PLATFORM_64_BIT)
+        unsigned long firstBitIndex = 0ul;
+        unsigned char ret = _BitScanReverse(&firstBitIndex, bitset.to_ullong());
+        if (ret == 0) {
+            return Index(static_cast<I>(0));
+        }
+        return Index(static_cast<I>(firstBitIndex + 1));
+#    endif  // defined(DAWN_PLATFORM_64_BIT)
+#else       // defined(DAWN_COMPILER_MSVC)
+        if (bitset.none()) {
+            return Index(static_cast<I>(0));
+        }
+        return Index(
+            static_cast<I>(64 - static_cast<uint32_t>(__builtin_clzll(bitset.to_ullong()))));
+#endif      // defined(DAWN_COMPILER_MSVC)
+    }
+
 }  // namespace ityp
 
 #endif  // COMMON_ITYP_BITSET_H_
