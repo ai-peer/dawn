@@ -106,6 +106,46 @@ namespace ityp {
             return static_cast<bitset&>(Base::flip(static_cast<I>(i)));
         }
 
+        // Assume we have bitset of at most 64 bits
+        // Returns i which is the next integer of the index of the highest bit
+        // i == 0 if there is no bit is set to true
+        // i == 1 if only the least significant bit (at index 0) is the bit set to true with the
+        // highest index
+        // ...
+        // i == 64 if the most significant bit (at index 64) is the bit set to true with the highest
+        // index
+#if defined(DAWN_COMPILER_MSVC)
+#    if defined(DAWN_PLATFORM_64_BIT)
+        uint64_t getHighestBitIndexExclusive() const {
+            unsigned long firstBitIndex = 0ul;
+            unsigned char ret = _BitScanReverse64(&firstBitIndex, to_ullong());
+            if (ret == 0) {
+                return 0;
+            }
+            return firstBitIndex + 1;
+        }
+#    else   // defined(DAWN_PLATFORM_64_BIT)
+        uint32_t getHighestBitIndexExclusive() const {
+            if (none()) {
+                return 0;
+            }
+            for (uint32_t i = 0u; i < N; i++) {
+                if (test(N - 1 - i)) {
+                    return N - i;
+                }
+            }
+            UNREACHABLE();
+        }
+#    endif  // defined(DAWN_PLATFORM_64_BIT)
+#else       // defined(DAWN_COMPILER_MSVC)
+        uint64_t getHighestBitIndexExclusive() const {
+            if (none()) {
+                return 0;
+            }
+            return 64 - static_cast<uint32_t>(__builtin_clzll(to_ullong()));
+        }
+#endif      // defined(DAWN_COMPILER_MSVC)
+
         using Base::to_string;
         using Base::to_ullong;
         using Base::to_ulong;
