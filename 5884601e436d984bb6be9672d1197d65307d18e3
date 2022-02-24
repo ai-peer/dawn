@@ -68,6 +68,24 @@
       "message": "I don\u0027t know whether wrap CVPixelBuffer directly and create mtlTexture on it could support 0-copy path on more devices.",
       "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4fca9c7_8627e308",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-24T02:19:55Z",
+      "side": 1,
+      "message": "this looks fine to me. we require macOS 11, and don\u0027t need iOS for Chrome",
+      "parentUuid": "be55e6de_a5f18722",
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
