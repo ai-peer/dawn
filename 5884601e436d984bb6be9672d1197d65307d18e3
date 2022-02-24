@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d242676_62ec6656",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-02-24T05:54:05Z",
+      "side": 1,
+      "message": "\u003e If in Chromium, the planes are separate SharedImages, then maybe it\u0027s better having a 1:1 SharedImage -\u003e WGPUTexture association instead of a 1:1 IOSurface -\u003e WGPUTexture mapping. Or - is there a plan for a single SharedImage with multiple planes?\n\n(My understanding, ccameron@ pls correct me if I\u0027m wrong)\nUnfortunately, on current chromium side, the shared image will wrap the whole CVPixelBuffer but expose the single plane infos. So the videoFrame contains two SIs and each of them wrap the same CVPixelBufferRef but expose different plane info. But I\u0027m not sure whether there is plan to have a single video shared image (It would be ideal if there is such plan).\n\n\u003e Also, for RG16Unorm and R16Unorm, please feel free to add them as a Dawn extension.\n\nAck.",
+      "parentUuid": "ce0175d0_d5b3ccdd",
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be55e6de_a5f18722",
         "filename": "src/dawn/native/metal/BackendMTL.mm",
         "patchSetId": 3
