@@ -17,6 +17,7 @@
 #include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/FencedDeleter.h"
+#include "dawn/native/vulkan/PipelineCacheVk.h"
 #include "dawn/native/vulkan/PipelineLayoutVk.h"
 #include "dawn/native/vulkan/ShaderModuleVk.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
@@ -74,10 +75,17 @@ namespace dawn::native::vulkan {
                 VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT);
         }
 
-        DAWN_TRY(CheckVkSuccess(
-            device->fn.CreateComputePipelines(device->GetVkDevice(), ::VK_NULL_HANDLE, 1,
-                                              &createInfo, nullptr, &*mHandle),
-            "CreateComputePipeline"));
+        // Try to see if we have anything in the persistent cache.
+        VkPipelineCache cacheHandle = ::VK_NULL_HANDLE;
+        Ref<PipelineCacheBase> cache = GetDevice()->GetOrCreatePipelineCache(this);
+        if (cache != nullptr) {
+            cacheHandle = ToBackend(cache)->GetHandle();
+        }
+
+        DAWN_TRY(
+            CheckVkSuccess(device->fn.CreateComputePipelines(device->GetVkDevice(), cacheHandle, 1,
+                                                             &createInfo, nullptr, &*mHandle),
+                           "CreateComputePipeline"));
 
         SetLabelImpl();
 
