@@ -230,6 +230,23 @@
       "parentUuid": "b4fca9c7_8627e308",
       "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "602cc082_ca18d2e6",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1003066
+      },
+      "writtenOn": "2022-02-24T20:11:44Z",
+      "side": 1,
+      "message": "If we are going this route, then we should not have a plane argument here, or in CreateTextureWrappingIOSurface.\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/DeviceMTL.h;l\u003d56;drc\u003d818001d32ea782c784d42dbaedf66868a31cc9af",
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
