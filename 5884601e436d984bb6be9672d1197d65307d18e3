@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8bf885a_ac5b00d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-02-24T02:25:54Z",
+      "side": 1,
+      "message": "I think the other one is to obey the GLImageIOSurface format which has been per plane format already. So we could create mtlTexture on IOSurface plane during the initialization and keep the mtlTexture in Dawn(But I\u0027m not sure whether the IOSurface could be released unexpected in chromium). User in render process could call AssociateMailbox twice with mailbox[0] and mailbox[1] to get 2 WebGPUMailboxTexture. Then they could call creating texture view for each texture.",
+      "parentUuid": "ded86f46_c3762ef3",
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be55e6de_a5f18722",
