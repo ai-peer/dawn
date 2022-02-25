@@ -258,6 +258,7 @@ source_set("sources") {
     "IndirectDrawValidationEncoder.h",
     "Instance.cpp",
     "Instance.h",
+    "IntegerTypes.cpp",
     "IntegerTypes.h",
     "InternalPipelineStore.cpp",
     "InternalPipelineStore.h",

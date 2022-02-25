@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_INTEGERTYPES_H_
 #define DAWNNATIVE_INTEGERTYPES_H_
 
+#include "absl/strings/str_format.h"
 #include "dawn/common/Constants.h"
 #include "dawn/common/TypedInteger.h"
 
@@ -70,6 +71,11 @@ namespace dawn::native {
     // token, which prevents them (and any BindGroups created with them) from being used with any
     // other pipelines.
     using PipelineCompatibilityToken = TypedInteger<struct PipelineCompatibilityTokenT, uint64_t>;
+
+    absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
+        const PipelineCompatibilityToken& value,
+        const absl::FormatConversionSpec& spec,
+        absl::FormatSink* s);
 
 }  // namespace dawn::native
 
