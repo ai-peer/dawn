@@ -76,8 +76,9 @@ namespace dawn::native {
         bool HasBinding(BindingNumber bindingNumber) const;
         BindingIndex GetBindingIndex(BindingNumber bindingNumber) const;
 
-        // Functions necessary for the unordered_set<BGLBase*>-based cache.
+        // CachedObject functions. Hash is necessary for unordered_set<BGLBase*>-based cache.
         size_t ComputeContentHash() override;
+        std::string ComputeCacheKeyBase() const override;
 
         struct EqualityFunc {
             bool operator()(const BindGroupLayoutBase* a, const BindGroupLayoutBase* b) const;
@@ -130,8 +131,10 @@ namespace dawn::native {
 
         bool IsStorageBufferBinding(BindingIndex bindingIndex) const;
 
-        // Returns a detailed string representation of the layout entries for use in error messages.
-        std::string EntriesToString() const;
+        // Returns a detailed string representation of the layout entries for use in error messages
+        // and serialization. Optional `pretty` parameter can be toggled for more readable string or
+        // more compact representation.
+        std::string EntriesToString(bool pretty = true) const;
 
       protected:
         // Constructor used only for mocking and testing.

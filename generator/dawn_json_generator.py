@@ -172,9 +172,11 @@ class RecordMember:
                  optional=False,
                  is_return_value=False,
                  default_value=None,
-                 skip_serialize=False):
+                 skip_serialize=False,
+                 member_id=None):
         self.name = name
         self.type = typ
+        self.member_id = member_id
         self.annotation = annotation
         self.json_data = json_data
         self.length = None
@@ -239,6 +241,7 @@ class StructureType(Record, Type):
         Type.__init__(self, name, dict(json_data, **json_data_override))
         self.chained = json_data.get("chained", None)
         self.extensible = json_data.get("extensible", None)
+        self.serializable = json_data.get("serializable", None)
         if self.chained:
             assert (self.chained == "in" or self.chained == "out")
         if self.extensible:
@@ -303,7 +306,8 @@ def linked_record_members(json_data, types):
                               optional=m.get('optional', False),
                               is_return_value=m.get('is_return_value', False),
                               default_value=m.get('default', None),
-                              skip_serialize=m.get('skip_serialize', False))
+                              skip_serialize=m.get('skip_serialize', False),
+                              member_id=m.get('member_id', None))
         handle_type = m.get('handle_type')
         if handle_type:
             member.set_handle_type(types[handle_type])
@@ -684,6 +688,15 @@ def as_wireType(metadata, typ):
         return as_cppType(typ.name)
 
 
+def as_formatType(typ):
+    # Unsigned integral types
+    if typ.json_data['type'] in ['bool', 'uint32_t', 'uint64_t']:
+        return 'u'
+
+    # Defaults everything else to strings.
+    return 's'
+
+
 def c_methods(params, typ):
     return typ.methods + [
         x for x in [
@@ -753,7 +766,8 @@ def make_base_render_params(metadata):
             'as_jsEnumValue': as_jsEnumValue,
             'convert_cType_to_cppType': convert_cType_to_cppType,
             'as_varName': as_varName,
-            'decorate': decorate
+            'decorate': decorate,
+            'as_formatType': as_formatType
         }
 
 

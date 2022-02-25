@@ -22,24 +22,46 @@ namespace dawn::native {
         BindingInfoType value,
         const absl::FormatConversionSpec& spec,
         absl::FormatSink* s) {
-        switch (value) {
-            case BindingInfoType::Buffer:
-                s->Append("Buffer");
-                break;
-            case BindingInfoType::Sampler:
-                s->Append("Sampler");
-                break;
-            case BindingInfoType::Texture:
-                s->Append("Texture");
-                break;
-            case BindingInfoType::StorageTexture:
-                s->Append("StorageTexture");
-                break;
-            case BindingInfoType::ExternalTexture:
-                s->Append("ExternalTexture");
-                break;
-            default:
-                UNREACHABLE();
+        if (!spec.has_alt_flag()) {
+            switch (value) {
+                case BindingInfoType::Buffer:
+                    s->Append("buffer");
+                    break;
+                case BindingInfoType::Sampler:
+                    s->Append("sampler");
+                    break;
+                case BindingInfoType::Texture:
+                    s->Append("texture");
+                    break;
+                case BindingInfoType::StorageTexture:
+                    s->Append("storageTexture");
+                    break;
+                case BindingInfoType::ExternalTexture:
+                    s->Append("externalTexture");
+                    break;
+                default:
+                    UNREACHABLE();
+            }
+        } else {
+            switch (value) {
+                case BindingInfoType::Buffer:
+                    s->Append("2");
+                    break;
+                case BindingInfoType::Sampler:
+                    s->Append("3");
+                    break;
+                case BindingInfoType::Texture:
+                    s->Append("4");
+                    break;
+                case BindingInfoType::StorageTexture:
+                    s->Append("5");
+                    break;
+                case BindingInfoType::ExternalTexture:
+                    s->Append("6");
+                    break;
+                default:
+                    UNREACHABLE();
+            }
         }
         return {true};
     }
@@ -48,44 +70,55 @@ namespace dawn::native {
         const BindingInfo& value,
         const absl::FormatConversionSpec& spec,
         absl::FormatSink* s) {
-        s->Append(absl::StrFormat("{\n  binding: %u\n  visibility: %s\n  %s: {\n",
-                                  static_cast<uint32_t>(value.binding), value.visibility,
-                                  value.bindingType));
-
-        switch (value.bindingType) {
-            case BindingInfoType::Buffer:
-                s->Append(absl::StrFormat("    type: %s\n", value.buffer.type));
-                if (value.buffer.hasDynamicOffset) {
-                    s->Append("    hasDynamicOffset: true\n");
-                }
-                if (value.buffer.minBindingSize != 0) {
-                    s->Append(
-                        absl::StrFormat("    minBindingSize: %u\n", value.buffer.minBindingSize));
-                }
-                break;
-            case BindingInfoType::Sampler:
-                s->Append(absl::StrFormat("    type: %s\n", value.sampler.type));
-                break;
-            case BindingInfoType::Texture:
-                s->Append(absl::StrFormat("    sampleType: %s\n", value.texture.sampleType));
-                s->Append(absl::StrFormat("    viewDimension: %s\n", value.texture.viewDimension));
-                if (value.texture.multisampled) {
-                    s->Append("    multisampled: true\n");
-                } else {
-                    s->Append("    multisampled: false\n");
-                }
-                break;
-            case BindingInfoType::StorageTexture:
-                s->Append(absl::StrFormat("    access: %s\n", value.storageTexture.access));
-                s->Append(absl::StrFormat("    format: %s\n", value.storageTexture.format));
-                s->Append(
-                    absl::StrFormat("    viewDimension: %s\n", value.storageTexture.viewDimension));
-                break;
-            case BindingInfoType::ExternalTexture:
-                break;
+        if (!spec.has_alt_flag()) {
+            static const auto* const prettyFmt = new absl::ParsedFormat<'u', 's', 's', 's'>(
+                "{ binding: %u, visibility: %s, %s: %#s }");
+            switch (value.bindingType) {
+                case BindingInfoType::Buffer:
+                    s->Append(absl::StrFormat(*prettyFmt, static_cast<uint32_t>(value.binding),
+                                              value.visibility, value.bindingType, value.buffer));
+                    break;
+                case BindingInfoType::Sampler:
+                    s->Append(absl::StrFormat(*prettyFmt, static_cast<uint32_t>(value.binding),
+                                              value.visibility, value.bindingType, value.sampler));
+                    break;
+                case BindingInfoType::Texture:
+                    s->Append(absl::StrFormat(*prettyFmt, static_cast<uint32_t>(value.binding),
+                                              value.visibility, value.bindingType, value.texture));
+                    break;
+                case BindingInfoType::StorageTexture:
+                    s->Append(absl::StrFormat(*prettyFmt, static_cast<uint32_t>(value.binding),
+                                              value.visibility, value.bindingType,
+                                              value.storageTexture));
+                    break;
+                case BindingInfoType::ExternalTexture:
+                    break;
+            }
+        } else {
+            static const auto* const condensedFmt =
+                new absl::ParsedFormat<'u', 's', 's', 's'>("{0:%u,1:%#s,%#s:%#s}");
+            switch (value.bindingType) {
+                case BindingInfoType::Buffer:
+                    s->Append(absl::StrFormat(*condensedFmt, static_cast<uint32_t>(value.binding),
+                                              value.visibility, value.bindingType, value.buffer));
+                    break;
+                case BindingInfoType::Sampler:
+                    s->Append(absl::StrFormat(*condensedFmt, static_cast<uint32_t>(value.binding),
+                                              value.visibility, value.bindingType, value.sampler));
+                    break;
+                case BindingInfoType::Texture:
+                    s->Append(absl::StrFormat(*condensedFmt, static_cast<uint32_t>(value.binding),
+                                              value.visibility, value.bindingType, value.texture));
+                    break;
+                case BindingInfoType::StorageTexture:
+                    s->Append(absl::StrFormat(*condensedFmt, static_cast<uint32_t>(value.binding),
+                                              value.visibility, value.bindingType,
+                                              value.storageTexture));
+                    break;
+                case BindingInfoType::ExternalTexture:
+                    break;
+            }
         }
-
-        s->Append("  }\n}");
         return {true};
     }
 

@@ -111,6 +111,7 @@ target_sources(dawn_native PRIVATE
     "Instance.h"
     "InternalPipelineStore.cpp"
     "InternalPipelineStore.h"
+    "IntegerTypes.cpp"
     "IntegerTypes.h"
     "Limits.cpp"
     "Limits.h"

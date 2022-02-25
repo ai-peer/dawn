@@ -16,6 +16,7 @@
 
 #include "dawn/common/BitSetIterator.h"
 
+#include "dawn/native/CacheKeySerializer.h"
 #include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/ObjectBase.h"
@@ -553,6 +554,10 @@ namespace dawn::native {
         return recorder.GetContentHash();
     }
 
+    std::string BindGroupLayoutBase::ComputeCacheKeyBase() const {
+        return CacheKeySerializer(mPipelineCompatibilityToken, EntriesToString(false));
+    }
+
     bool BindGroupLayoutBase::EqualityFunc::operator()(const BindGroupLayoutBase* a,
                                                        const BindGroupLayoutBase* b) const {
         return a->IsLayoutEqual(b);
@@ -660,12 +665,18 @@ namespace dawn::native {
         }
     }
 
-    std::string BindGroupLayoutBase::EntriesToString() const {
-        std::string entries = " [";
+    std::string BindGroupLayoutBase::EntriesToString(bool pretty) const {
+        std::string entries = "[";
+        std::string sep = "";
         const BindGroupLayoutBase::BindingMap& bindingMap = GetBindingMap();
         for (const auto [bindingNumber, bindingIndex] : bindingMap) {
             const BindingInfo& bindingInfo = GetBindingInfo(bindingIndex);
-            entries += absl::StrFormat("%s, ", bindingInfo);
+            if (pretty) {
+                entries += absl::StrFormat("%s%s", sep, bindingInfo);
+            } else {
+                entries += absl::StrFormat("%s%#s", sep, bindingInfo);
+            }
+            sep = ", ";
         }
         entries += "]";
         return entries;
