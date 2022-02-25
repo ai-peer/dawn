@@ -239,6 +239,7 @@ class StructureType(Record, Type):
         Type.__init__(self, name, dict(json_data, **json_data_override))
         self.chained = json_data.get("chained", None)
         self.extensible = json_data.get("extensible", None)
+        self.serializable = json_data.get("serializable", None)
         if self.chained:
             assert (self.chained == "in" or self.chained == "out")
         if self.extensible:
