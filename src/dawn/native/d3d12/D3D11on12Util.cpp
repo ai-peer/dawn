@@ -132,7 +132,8 @@ namespace dawn::native::d3d12 {
 
     Ref<D3D11on12ResourceCacheEntry> D3D11on12ResourceCache::GetOrCreateD3D11on12Resource(
         WGPUDevice device,
-        ID3D12Resource* d3d12Resource) {
+        ID3D12Resource* d3d12Resource,
+        UINT d3d11BindFlags) {
         Device* backendDevice = reinterpret_cast<Device*>(device);
         // The Dawn and 11on12 device share the same D3D12 command queue whereas this external image
         // could be accessed/produced with multiple Dawn devices. To avoid cross-queue sharing
@@ -156,13 +157,16 @@ namespace dawn::native::d3d12 {
         // resource using 11on12 and QueryInterface the D3D11 representation for the keyed mutex.
         ComPtr<ID3D11Texture2D> d3d11Texture;
         D3D11_RESOURCE_FLAGS resourceFlags;
-        resourceFlags.BindFlags = 0;
+        resourceFlags.BindFlags = d3d11BindFlags;
         resourceFlags.MiscFlags = D3D11_RESOURCE_MISC_SHARED_KEYEDMUTEX;
         resourceFlags.CPUAccessFlags = 0;
         resourceFlags.StructureByteStride = 0;
-        if (FAILED(d3d11on12Device->CreateWrappedResource(
-                d3d12Resource, &resourceFlags, D3D12_RESOURCE_STATE_COMMON,
-                D3D12_RESOURCE_STATE_COMMON, IID_PPV_ARGS(&d3d11Texture)))) {
+        HRESULT hr = d3d11on12Device->CreateWrappedResource(
+            d3d12Resource, &resourceFlags, D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_STATE_COMMON,
+            IID_PPV_ARGS(&d3d11Texture));
+        if (FAILED(hr)) {
+            dawn::ErrorLog() << "Unable to create 11on12 resource for external image: 0x"
+                             << std::hex << hr;
             return nullptr;
         }
 

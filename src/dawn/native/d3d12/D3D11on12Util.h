@@ -69,9 +69,9 @@ namespace dawn::native::d3d12 {
         D3D11on12ResourceCache();
         ~D3D11on12ResourceCache();
 
-        Ref<D3D11on12ResourceCacheEntry> GetOrCreateD3D11on12Resource(
-            WGPUDevice device,
-            ID3D12Resource* d3d12Resource);
+        Ref<D3D11on12ResourceCacheEntry> GetOrCreateD3D11on12Resource(WGPUDevice device,
+                                                                      ID3D12Resource* d3d12Resource,
+                                                                      UINT d3d11BindFlags);
 
       private:
         // TODO(dawn:625): Figure out a large enough cache size.
