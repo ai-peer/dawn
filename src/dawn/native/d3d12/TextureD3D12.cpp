@@ -439,9 +439,6 @@ namespace dawn::native::d3d12 {
         DAWN_INVALID_IF(descriptor->mipLevelCount != 1, "Mip level count (%u) is not 1.",
                         descriptor->mipLevelCount);
 
-        DAWN_INVALID_IF(descriptor->size.depthOrArrayLayers != 1,
-                        "Array layer count (%u) is not 1.", descriptor->size.depthOrArrayLayers);
-
         DAWN_INVALID_IF(descriptor->sampleCount != 1, "Sample count (%u) is not 1.",
                         descriptor->sampleCount);
 
@@ -455,10 +452,11 @@ namespace dawn::native::d3d12 {
             (dawnDescriptor->size.width != d3dDescriptor.Width) ||
                 (dawnDescriptor->size.height != d3dDescriptor.Height) ||
                 (dawnDescriptor->size.depthOrArrayLayers != 1),
-            "D3D12 texture size (Width: %u, Height: %u, DepthOrArraySize: 1) doesn't match Dawn "
+            "D3D12 texture size (Width: %u, Height: %u, DepthOrArraySize: %u) doesn't match Dawn "
             "descriptor size (width: %u, height: %u, depthOrArrayLayers: %u).",
-            d3dDescriptor.Width, d3dDescriptor.Height, dawnDescriptor->size.width,
-            dawnDescriptor->size.height, dawnDescriptor->size.depthOrArrayLayers);
+            d3dDescriptor.Width, d3dDescriptor.Height, d3dDescriptor.DepthOrArraySize,
+            dawnDescriptor->size.width, dawnDescriptor->size.height,
+            dawnDescriptor->size.depthOrArrayLayers);
 
         const DXGI_FORMAT dxgiFormatFromDescriptor = D3D12TextureFormat(dawnDescriptor->format);
         DAWN_INVALID_IF(
@@ -469,9 +467,6 @@ namespace dawn::native::d3d12 {
         DAWN_INVALID_IF(d3dDescriptor.MipLevels != 1,
                         "D3D12 texture number of miplevels (%u) is not 1.",
                         d3dDescriptor.MipLevels);
-
-        DAWN_INVALID_IF(d3dDescriptor.DepthOrArraySize != 1,
-                        "D3D12 texture array size (%u) is not 1.", d3dDescriptor.DepthOrArraySize);
 
         // Shared textures cannot be multi-sample so no need to check those.
         ASSERT(d3dDescriptor.SampleDesc.Count == 1);
