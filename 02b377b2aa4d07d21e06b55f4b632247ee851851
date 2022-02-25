@@ -16,6 +16,23 @@
       "message": "LGTM!",
       "revId": "02b377b2aa4d07d21e06b55f4b632247ee851851",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c44e06fe_089f1aff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-02-25T18:28:10Z",
+      "side": 1,
+      "message": "I checked: these limits are hit in BindGroupTests.ReallyLargeBindGroup and llvmpipe does indeed pass those tests.\n\nI\u0027m OK keeping llvmpipe exposed for now if someone wants to use it, but FYI \nllvmpipe doesn\u0027t pass some other of Dawn\u0027s end2end_tests. Not sure if Intel is planning to run this on CI; some tests will need to be skipped.\n\nIn Chrome, we don\u0027t expose it because we check that the only software rasterizer we ever give to the page is SwiftShader. So, this change is safe and is not going to expose a non-conformant driver for WebGPU.",
+      "revId": "02b377b2aa4d07d21e06b55f4b632247ee851851",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
