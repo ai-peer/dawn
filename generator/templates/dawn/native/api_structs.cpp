@@ -71,5 +71,30 @@ namespace {{native_namespace}} {
             );
         }
 
+        {% if type.serializable %}
+            std::ostream& operator<<(std::ostream& os, const {{as_cppType(type.name)}}& s) {
+                os << "{";
+                {% for member in type.members %}
+                    {% set memberName = member.name.camelCase() %}
+                    os << "{{memberName}}=" << s.{{memberName}} << {{ "\" \"" if not loop.last else "\"\"" }};
+                {% endfor %}
+                os << "}";
+                return os;
+            }
+        {% endif %}
+    {% endfor %}
+
+    {% for type in by_category["enum"] %}
+        {% set CppType = as_cppType(type.name) %}
+        std::ostream& operator<<(std::ostream& os, const wgpu::{{CppType}} e) {
+            switch (e) {
+                {% for value in type.values %}
+                    case wgpu::{{CppType}}::{{as_cppEnum(value.name)}}:
+                        os << "{{CppType}}::{{as_cppEnum(value.name)}}";
+                        break;
+                {% endfor %}
+            }
+            return os;
+        }
     {% endfor %}
 } // namespace {{native_namespace}}
