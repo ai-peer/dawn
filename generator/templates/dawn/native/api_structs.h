@@ -25,6 +25,7 @@
 {% set native_dir = impl_dir + namespace_name.Dirs() %}
 #include "{{native_dir}}/Forward.h"
 #include <cmath>
+#include <iostream>
 
 namespace {{native_namespace}} {
 
@@ -75,11 +76,18 @@ namespace {{native_namespace}} {
             // strict pointer-pointer equality if the struct contains member pointers.
             bool operator==(const {{as_cppType(type.name)}}& rhs) const;
         };
+        {% if type.serializable %}
+            std::ostream& operator<<(std::ostream& os, const {{as_cppType(type.name)}}& s);
+        {% endif %}
 
     {% endfor %}
 
     {% for typeDef in by_category["typedef"] if typeDef.type.category == "structure" %}
         using {{as_cppType(typeDef.name)}} = {{as_cppType(typeDef.type.name)}};
+    {% endfor %}
+
+    {% for type in by_category["enum"] %}
+        std::ostream& operator<<(std::ostream& os, const wgpu::{{as_cppType(type.name)}} e);
     {% endfor %}
 
 } // namespace {{native_namespace}}
