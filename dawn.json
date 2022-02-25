@@ -259,10 +259,11 @@
     "buffer binding layout": {
         "category": "structure",
         "extensible": "in",
+        "serializable": true,
         "members": [
-            {"name": "type", "type": "buffer binding type", "default": "undefined"},
-            {"name": "has dynamic offset", "type": "bool", "default": "false"},
-            {"name": "min binding size", "type": "uint64_t", "default": "0"}
+            {"name": "type", "type": "buffer binding type", "member_id": 0, "default": "undefined"},
+            {"name": "has dynamic offset", "type": "bool", "member_id": 1, "default": "false"},
+            {"name": "min binding size", "type": "uint64_t", "member_id": 2, "default": "0"}
         ]
     },
 
@@ -278,8 +279,9 @@
     "sampler binding layout": {
         "category": "structure",
         "extensible": "in",
+        "serializable": true,
         "members": [
-            {"name": "type", "type": "sampler binding type", "default": "undefined"}
+            {"name": "type", "type": "sampler binding type", "member_id": 0, "default": "undefined"}
         ]
     },
 
@@ -297,10 +299,11 @@
     "texture binding layout": {
         "category": "structure",
         "extensible": "in",
+        "serializable": true,
         "members": [
-            {"name": "sample type", "type": "texture sample type", "default": "undefined"},
-            {"name": "view dimension", "type": "texture view dimension", "default": "undefined"},
-            {"name": "multisampled", "type": "bool", "default": "false"}
+            {"name": "sample type", "type": "texture sample type", "member_id": 0, "default": "undefined"},
+            {"name": "view dimension", "type": "texture view dimension", "member_id": 1, "default": "undefined"},
+            {"name": "multisampled", "type": "bool", "member_id": 2, "default": "false"}
         ]
     },
 
@@ -330,10 +333,11 @@
     "storage texture binding layout": {
         "category": "structure",
         "extensible": "in",
+        "serializable": true,
         "members": [
-            {"name": "access", "type": "storage texture access", "default": "undefined"},
-            {"name": "format", "type": "texture format", "default": "undefined"},
-            {"name": "view dimension", "type": "texture view dimension", "default": "undefined"}
+            {"name": "access", "type": "storage texture access", "member_id": 0, "default": "undefined"},
+            {"name": "format", "type": "texture format", "member_id": 1, "default": "undefined"},
+            {"name": "view dimension", "type": "texture view dimension", "member_id": 2, "default": "undefined"}
         ]
     },
 

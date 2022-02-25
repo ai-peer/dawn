@@ -55,17 +55,18 @@ namespace dawn::native {
         const absl::FormatConversionSpec& spec,
         absl::FormatSink* s);
 
+    // Serializable struct includes member ids. Currently hard-coded for non-generated structs.
     struct BindingInfo {
-        BindingNumber binding;
-        wgpu::ShaderStage visibility;
+        BindingNumber binding;         // member_id: 1
+        wgpu::ShaderStage visibility;  // member_id: 2
 
-        BindingInfoType bindingType;
+        BindingInfoType bindingType;  // member_id: 3
 
         // TODO(dawn:527): These four values could be made into a union.
-        BufferBindingLayout buffer;
-        SamplerBindingLayout sampler;
-        TextureBindingLayout texture;
-        StorageTextureBindingLayout storageTexture;
+        BufferBindingLayout buffer;                  // member_id: 4
+        SamplerBindingLayout sampler;                // member_id: 5
+        TextureBindingLayout texture;                // member_id: 6
+        StorageTextureBindingLayout storageTexture;  // member_id: 7
     };
 
     absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
