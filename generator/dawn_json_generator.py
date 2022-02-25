@@ -239,6 +239,7 @@ class StructureType(Record, Type):
         Type.__init__(self, name, dict(json_data, **json_data_override))
         self.chained = json_data.get("chained", None)
         self.extensible = json_data.get("extensible", None)
+        self.serializable = json_data.get("serializable", None)
         if self.chained:
             assert (self.chained == "in" or self.chained == "out")
         if self.extensible:
@@ -684,6 +685,15 @@ def as_wireType(metadata, typ):
         return as_cppType(typ.name)
 
 
+def as_formatType(typ):
+    # Unsigned integral types
+    if typ.json_data['type'] in ['bool', 'uint32_t', 'uint64_t']:
+        return 'u'
+
+    # Defaults everything else to strings.
+    return 's'
+
+
 def c_methods(params, typ):
     return typ.methods + [
         x for x in [
@@ -753,7 +763,8 @@ def make_base_render_params(metadata):
             'as_jsEnumValue': as_jsEnumValue,
             'convert_cType_to_cppType': convert_cType_to_cppType,
             'as_varName': as_varName,
-            'decorate': decorate
+            'decorate': decorate,
+            'as_formatType': as_formatType
         }
 
 

@@ -549,6 +549,14 @@ namespace dawn::native {
         return recorder.GetContentHash();
     }
 
+    std::string BindGroupLayoutBase::ComputeCacheKeyBase() const {
+        static const auto* const parsedFmt =
+            new absl::ParsedFormat<'u', 's'>("pipelineCompatibilityToken: %u, bindingEntries: %s");
+
+        return absl::StrFormat(*parsedFmt, static_cast<uint64_t>(mPipelineCompatibilityToken),
+                               EntriesToString());
+    }
+
     bool BindGroupLayoutBase::EqualityFunc::operator()(const BindGroupLayoutBase* a,
                                                        const BindGroupLayoutBase* b) const {
         return a->IsLayoutEqual(b);
@@ -657,11 +665,13 @@ namespace dawn::native {
     }
 
     std::string BindGroupLayoutBase::EntriesToString() const {
-        std::string entries = " [";
+        std::string entries = "[";
+        std::string sep = "";
         const BindGroupLayoutBase::BindingMap& bindingMap = GetBindingMap();
         for (const auto [bindingNumber, bindingIndex] : bindingMap) {
             const BindingInfo& bindingInfo = GetBindingInfo(bindingIndex);
-            entries += absl::StrFormat("%s, ", bindingInfo);
+            entries += absl::StrFormat("%s%s", sep, bindingInfo);
+            sep = ", ";
         }
         entries += "]";
         return entries;
