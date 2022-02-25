@@ -49,6 +49,34 @@ namespace {{native_namespace}} {
         {% endfor %}
     {% endfor %}
 
+    //
+    // Serializables
+    //
+    using absl::ParsedFormat;
+
+    {% for type in by_category["structure"] %}
+        {% if type.serializable %}
+            absl::FormatConvertResult<absl::FormatConversionCharSet::kString>
+                AbslFormatConvert(const {{as_cppType(type.name)}}& value,
+                                  const absl::FormatConversionSpec& spec,
+                                  absl::FormatSink* s) {
+                {% set members = [] %}
+                {% set format = [] %}
+                {% set template = [] %}
+                {% for member in type.members %}
+                    {% set memberName = member.name.camelCase() %}
+                    {% do members.append("value." + memberName) %}
+                    {% do format.append(memberName + ": %" + as_formatType(member)) %}
+                    {% do template.append("'" + as_formatType(member) + "'") %}
+                {% endfor %}
+                static const auto* const parsedFmt =
+                    new ParsedFormat<{{template|join(",")}}>("{ {{format|join(", ")}} }");
+                s->Append(absl::StrFormat(*parsedFmt, {{members|join(", ")}}));
+                return {true};
+            }
+        {% endif %}
+    {% endfor %}
+
 }  // namespace {{native_namespace}}
 
 {% set namespace = metadata.namespace %}
@@ -61,8 +89,8 @@ namespace {{namespace}} {
     {% for type in by_category["enum"] %}
         absl::FormatConvertResult<absl::FormatConversionCharSet::kString>
         AbslFormatConvert({{as_cppType(type.name)}} value,
-                            const absl::FormatConversionSpec& spec,
-                            absl::FormatSink* s) {
+                          const absl::FormatConversionSpec& spec,
+                          absl::FormatSink* s) {
             s->Append("{{as_cppType(type.name)}}::");
             switch (value) {
             {% for value in type.values %}

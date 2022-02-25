@@ -76,8 +76,9 @@ namespace dawn::native {
         bool HasBinding(BindingNumber bindingNumber) const;
         BindingIndex GetBindingIndex(BindingNumber bindingNumber) const;
 
-        // Functions necessary for the unordered_set<BGLBase*>-based cache.
+        // CachedObject functions. Hash is necessary for unordered_set<BGLBase*>-based cache.
         size_t ComputeContentHash() override;
+        std::string ComputeCacheKeyBase() const override;
 
         struct EqualityFunc {
             bool operator()(const BindGroupLayoutBase* a, const BindGroupLayoutBase* b) const;

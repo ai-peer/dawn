@@ -36,12 +36,25 @@ namespace {{native_namespace}} {
         {% for member in type.members %}
             {% if member.name.canonical_case() == "label" %}
                 absl::FormatConvertResult<absl::FormatConversionCharSet::kString>
-                AbslFormatConvert(const {{as_cppType(type.name)}}* value,
-                                  const absl::FormatConversionSpec& spec,
-                                  absl::FormatSink* s);
+                    AbslFormatConvert(const {{as_cppType(type.name)}}* value,
+                                      const absl::FormatConversionSpec& spec,
+                                      absl::FormatSink* s);
             {% endif %}
         {% endfor %}
     {% endfor %}
+
+    //
+    // Serializables (Needs to be disjoint from having a 'label' for now.)
+    //
+    {% for type in by_category["structure"] %}
+        {% if type.serializable %}
+            absl::FormatConvertResult<absl::FormatConversionCharSet::kString>
+                AbslFormatConvert(const {{as_cppType(type.name)}}& value,
+                                  const absl::FormatConversionSpec& spec,
+                                  absl::FormatSink* s);
+        {% endif %}
+    {% endfor %}
+
 } // namespace {{native_namespace}}
 
 {% set namespace = metadata.namespace %}

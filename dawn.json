@@ -260,6 +260,7 @@
     "buffer binding layout": {
         "category": "structure",
         "extensible": "in",
+        "serializable": true,
         "members": [
             {"name": "type", "type": "buffer binding type", "default": "undefined"},
             {"name": "has dynamic offset", "type": "bool", "default": "false"},
@@ -279,6 +280,7 @@
     "sampler binding layout": {
         "category": "structure",
         "extensible": "in",
+        "serializable": true,
         "members": [
             {"name": "type", "type": "sampler binding type", "default": "undefined"}
         ]
@@ -298,6 +300,7 @@
     "texture binding layout": {
         "category": "structure",
         "extensible": "in",
+        "serializable": true,
         "members": [
             {"name": "sample type", "type": "texture sample type", "default": "undefined"},
             {"name": "view dimension", "type": "texture view dimension", "default": "undefined"},
@@ -331,6 +334,7 @@
     "storage texture binding layout": {
         "category": "structure",
         "extensible": "in",
+        "serializable": true,
         "members": [
             {"name": "access", "type": "storage texture access", "default": "undefined"},
             {"name": "format", "type": "texture format", "default": "undefined"},
