@@ -69,6 +69,24 @@
       "parentUuid": "213e4a87_dfe011b6",
       "revId": "02b377b2aa4d07d21e06b55f4b632247ee851851",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd248532_0c59a81d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000022
+      },
+      "writtenOn": "2022-02-26T02:49:27Z",
+      "side": 1,
+      "message": "We add gn arg is_official_build\u003dtrue when building Chromium targets, so dawn_end2end_tests would stop due to this error.",
+      "parentUuid": "7a6535b7_db8251db",
+      "revId": "02b377b2aa4d07d21e06b55f4b632247ee851851",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
