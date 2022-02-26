@@ -33,7 +33,24 @@
       "message": "I checked: these limits are hit in BindGroupTests.ReallyLargeBindGroup and llvmpipe does indeed pass those tests.\n\nI\u0027m OK keeping llvmpipe exposed for now if someone wants to use it, but FYI \nllvmpipe doesn\u0027t pass some other of Dawn\u0027s end2end_tests. Not sure if Intel is planning to run this on CI; some tests will need to be skipped.\n\nIn Chrome, we don\u0027t expose it because we check that the only software rasterizer we ever give to the page is SwiftShader. So, this change is safe and is not going to expose a non-conformant driver for WebGPU.",
       "revId": "02b377b2aa4d07d21e06b55f4b632247ee851851",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "213e4a87_dfe011b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002556
+      },
+      "writtenOn": "2022-02-26T01:04:02Z",
+      "side": 1,
+      "message": "We don\u0027t run this in CI. But as a valid adapter, it\u0027s better to keep it. Currently we build dawn_end2end_tests in Chromium repo (dawn as third_party), and this error will stop the tests.",
+      "parentUuid": "c44e06fe_089f1aff",
+      "revId": "02b377b2aa4d07d21e06b55f4b632247ee851851",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
-  ],
-  "submitRequirementResults": []
+  ]
 }
