@@ -204,6 +204,8 @@ namespace dawn::native::vulkan {
         tint::writer::spirv::Options options;
         options.emit_vertex_point_size = true;
         options.disable_workgroup_init = GetDevice()->IsToggleEnabled(Toggle::DisableWorkgroupInit);
+        options.use_zero_initialize_workgroup_memory_extension =
+            ToBackend(GetDevice())->UseZeroInitializeWorkgroupMemoryExtension();
 
         std::vector<uint32_t> spirv;
         {

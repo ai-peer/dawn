@@ -105,6 +105,8 @@ namespace dawn::native::vulkan {
 
         float GetTimestampPeriodInNS() const override;
 
+        bool UseZeroInitializeWorkgroupMemoryExtension() const;
+
       private:
         Device(Adapter* adapter, const DeviceDescriptor* descriptor);
 
@@ -152,6 +154,7 @@ namespace dawn::native::vulkan {
         uint32_t FindComputeSubgroupSize() const;
         void InitTogglesFromDriver();
         void ApplyDepth24PlusS8Toggle();
+        void ApplyUseZeroInitializeWorkgroupMemoryExtensionToggle();
 
         void DestroyImpl() override;
         MaybeError WaitForIdleForDestruction() override;
