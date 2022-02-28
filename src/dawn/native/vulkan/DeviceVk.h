@@ -105,6 +105,8 @@ namespace dawn::native::vulkan {
 
         float GetTimestampPeriodInNS() const override;
 
+        bool UseZeroInitializeWorkgroupMemoryExtension() const;
+
       private:
         Device(Adapter* adapter, const DeviceDescriptor* descriptor);
 
@@ -165,6 +167,7 @@ namespace dawn::native::vulkan {
         uint32_t mQueueFamily = 0;
         VkQueue mQueue = VK_NULL_HANDLE;
         uint32_t mComputeSubgroupSize = 0;
+        bool mUseZeroInitializeWorkgroupMemoryExtension = false;
 
         SerialQueue<ExecutionSerial, Ref<DescriptorSetAllocator>>
             mDescriptorAllocatorsPendingDeallocation;
