@@ -230,6 +230,10 @@ namespace dawn::native::vulkan {
         return mResourceMemoryAllocator.get();
     }
 
+    bool Device::UseZeroInitializeWorkgroupMemoryExtension() const {
+        return mUseZeroInitializeWorkgroupMemoryExtension;
+    }
+
     void Device::EnqueueDeferredDeallocation(DescriptorSetAllocator* allocator) {
         mDescriptorAllocatorsPendingDeallocation.Enqueue(allocator, GetPendingCommandSerial());
     }
@@ -343,6 +347,18 @@ namespace dawn::native::vulkan {
             featuresChain.Add(&usedKnobs.subgroupSizeControlFeatures);
 
             mComputeSubgroupSize = FindComputeSubgroupSize();
+        }
+
+        if (mDeviceInfo.HasExt(DeviceExt::ZeroInitializeWorkgroupMemory)) {
+            ASSERT(usedKnobs.HasExt(DeviceExt::ZeroInitializeWorkgroupMemory));
+
+            usedKnobs.zeroInitializeWorkgroupMemoryFeatures.sType =
+                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR;
+            usedKnobs.zeroInitializeWorkgroupMemoryFeatures.shaderZeroInitializeWorkgroupMemory =
+                VK_TRUE;
+            featuresChain.Add(&usedKnobs.zeroInitializeWorkgroupMemoryFeatures);
+
+            mUseZeroInitializeWorkgroupMemoryExtension = true;
         }
 
         if (mDeviceInfo.features.samplerAnisotropy == VK_TRUE) {
