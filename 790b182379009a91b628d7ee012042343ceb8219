@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92b1ee83_91c48097",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-02-28T07:55:18Z",
+      "side": 1,
+      "message": "Sry for this bug, PTAL, thanks!",
+      "revId": "790b182379009a91b628d7ee012042343ceb8219",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bff079e8_bdd61eba",
+        "filename": "src/dawn/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-02-28T07:55:18Z",
+      "side": 1,
+      "message": "Although change the unittest, it still cannot catch the bug. ASSERT_DEVICE_ERROR will always catch a validation error fomr APISubmit call (But not the correct place to validate out the error case).",
+      "revId": "790b182379009a91b628d7ee012042343ceb8219",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
