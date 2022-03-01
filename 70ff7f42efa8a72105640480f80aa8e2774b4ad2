@@ -80,6 +80,30 @@
       },
       "revId": "70ff7f42efa8a72105640480f80aa8e2774b4ad2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8ee3b1e_a4baf98e",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-01T18:45:31Z",
+      "side": 1,
+      "message": "on separate thought though, they might make sense to keep if we ever have a version of the end2end_tests that mostly uses the public API (except for these few functions), where we don\u0027t statically link.\nand then only link into Dawn internals for unittests.\nNot sure though... so no rush to do it.",
+      "parentUuid": "383a7166_59d4d823",
+      "range": {
+        "startLine": 182,
+        "startChar": 35,
+        "endLine": 182,
+        "endChar": 55
+      },
+      "revId": "70ff7f42efa8a72105640480f80aa8e2774b4ad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
