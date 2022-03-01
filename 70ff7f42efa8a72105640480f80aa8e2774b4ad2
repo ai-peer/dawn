@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4325251b_d91323ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-01T05:07:16Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "70ff7f42efa8a72105640480f80aa8e2774b4ad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfd4babe_e0af88e1",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-01T05:07:16Z",
+      "side": 1,
+      "message": "nit: add suffix \"ForTesting\"\nI don\u0027t think Chromium will need to query it back.\n\nOne step further though - maybe we don\u0027t need these testing APIs in DawnNative.h at all.\n\nTest might be able to directly do:\n  dawn::native::FromAPI(device.Get())-\u003eGetCacheIsolationKey();\n  \nThe other functions were probably originally been added to DawnNative.h before we had static linking of dawn::native into the test binaries.",
+      "range": {
+        "startLine": 182,
+        "startChar": 35,
+        "endLine": 182,
+        "endChar": 55
+      },
+      "revId": "70ff7f42efa8a72105640480f80aa8e2774b4ad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
