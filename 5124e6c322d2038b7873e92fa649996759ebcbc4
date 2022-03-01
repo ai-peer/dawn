@@ -33,6 +33,24 @@
       "message": "hm it appears this is a real failure! perhaps check to make sure all other depth-related functions are updated? Probably something is resulting in an illegal call in D3D12 and losing the device\n\nhttps://source.chromium.org/search?q\u003df:dawn%20wgpu::TextureFormat::Depth32%20f:native\u0026sq\u003d",
       "revId": "5124e6c322d2038b7873e92fa649996759ebcbc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8c58640_b73bb632",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-03-01T18:25:39Z",
+      "side": 1,
+      "message": "Yeah, it\u0027s unexpected because the format it\u0027s failing on isn\u0027t a depth format, but I can repro locally. Funny thing is that it only repros if I run all the tests before the failing one, but if I run those one in isolation they\u0027re fine. That leads me to believe that what we\u0027re actually seeing is some sort of resource leak or other limit being hit, though I\u0027m struggling to understand what it might be. It\u0027s very consistent which tests are failing, though. Hm....\n\nAnyway, I\u0027m looking into it, but I fear there\u0027s a deeper hole here.",
+      "parentUuid": "49a34d56_55775dcc",
+      "revId": "5124e6c322d2038b7873e92fa649996759ebcbc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
