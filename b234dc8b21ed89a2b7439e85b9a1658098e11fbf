@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bf353b1_ce8f7ec6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-01T18:07:25Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b234dc8b21ed89a2b7439e85b9a1658098e11fbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90272099_47596b43",
+        "filename": "src/dawn/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-01T18:07:25Z",
+      "side": 1,
+      "message": "isn\u0027t this catching the failure?",
+      "range": {
+        "startLine": 199,
+        "startChar": 34,
+        "endLine": 199,
+        "endChar": 61
+      },
+      "revId": "b234dc8b21ed89a2b7439e85b9a1658098e11fbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

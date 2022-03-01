@@ -33,6 +33,24 @@
       "message": "Although change the unittest, it still cannot catch the bug. ASSERT_DEVICE_ERROR will always catch a validation error fomr APISubmit call (But not the correct place to validate out the error case).",
       "revId": "790b182379009a91b628d7ee012042343ceb8219",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25ae5fc6_308523c8",
+        "filename": "src/dawn/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-01T18:07:25Z",
+      "side": 1,
+      "message": "not sure what you mean; it doesn\u0027t fail the test before your fix?",
+      "parentUuid": "bff079e8_bdd61eba",
+      "revId": "790b182379009a91b628d7ee012042343ceb8219",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
