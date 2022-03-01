@@ -51,6 +51,24 @@
       "parentUuid": "49a34d56_55775dcc",
       "revId": "5124e6c322d2038b7873e92fa649996759ebcbc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8ceb2b1_03ccbefd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-03-01T18:37:50Z",
+      "side": 1,
+      "message": "FWIW I\u0027ve updated the CTS to give more info in this situation (see https://github.com/gpuweb/cts/pull/1024) and the error that I\u0027m seeing is\n\n\"D3D12 closing pending command list failed with 0x80070057\"\n\nWhich is E_INVALIDARG (https://docs.microsoft.com/en-us/windows/win32/seccrypto/common-hresult-values). Still digging into what exactly that might mean here.",
+      "parentUuid": "b8c58640_b73bb632",
+      "revId": "5124e6c322d2038b7873e92fa649996759ebcbc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
