@@ -51,6 +51,24 @@
       "parentUuid": "cba62a7a_56811803",
       "revId": "dfdd669a6236ae612bbf0244778ac46480ba6f43",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a49feb6c_bdaede58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-02T22:45:55Z",
+      "side": 1,
+      "message": "ok overall both seem fine, but I\u0027ll still wait for the other stuff to see how the serialization will be used",
+      "parentUuid": "67c75926_b37d17ac",
+      "revId": "dfdd669a6236ae612bbf0244778ac46480ba6f43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
