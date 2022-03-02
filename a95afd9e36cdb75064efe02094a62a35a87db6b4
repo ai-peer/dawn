@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03a0dd4d_c5a8f103",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-02T19:47:39Z",
+      "side": 1,
+      "message": "https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/docs/dawn/errors.md\n\nMaybe say \"No color or depthStencil attachments provided. At least one is required.\"",
+      "range": {
+        "startLine": 416,
+        "startChar": 16,
+        "endLine": 418,
+        "endChar": 62
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ef0cddf_e752a614",
         "filename": "src/dawn/native/RenderBundleEncoder.cpp",
         "patchSetId": 6
@@ -99,6 +122,75 @@
         "startChar": 24,
         "endLine": 442,
         "endChar": 93
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c5b7099_c42ff934",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-02T19:47:39Z",
+      "side": 1,
+      "message": "I think this should be lazy, and I think it should be done inside CommandBuffer::SetupRenderPass.\n\nSetupRenderPass would do something like:\n\n```\nfor (i from to 0 MaxIndex+1) {\n  if (mask[i]) {\n    // normal thing\n  } else {\n    if (!nullRTVAllocation) {\n       // create null rtv\n    }\n    // set it.\n  }\n}\n```",
+      "range": {
+        "startLine": 1352,
+        "startChar": 7,
+        "endLine": 1362,
+        "endChar": 89
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10a9a16c_e63ed818",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-02T19:47:39Z",
+      "side": 1,
+      "message": "is this right, or should it be UNKNOWN if not used? If unknown, then this would be the same as zero-initializing the struct",
+      "range": {
+        "startLine": 399,
+        "startChar": 44,
+        "endLine": 399,
+        "endChar": 70
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "039dd13d_23091a90",
+        "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-02T19:47:39Z",
+      "side": 1,
+      "message": "we do this so much now, maybe we should add a thing to get the highest index bit from a bitset. Would use similar primitives like BitscanReverse in Dawn\u0027s common/Math Log2 implementation",
+      "range": {
+        "startLine": 477,
+        "startChar": 0,
+        "endLine": 477,
+        "endChar": 69
       },
       "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
