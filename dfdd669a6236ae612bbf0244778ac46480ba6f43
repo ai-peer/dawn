@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "dfdd669a6236ae612bbf0244778ac46480ba6f43",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cba62a7a_56811803",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-02T00:03:53Z",
+      "side": 1,
+      "message": "is this used yet in the WIP CL https://dawn-review.googlesource.com/c/dawn/+/81921 ? I didn\u0027t see it, but want to get context on how it will be used",
+      "revId": "dfdd669a6236ae612bbf0244778ac46480ba6f43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
