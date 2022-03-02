@@ -129,6 +129,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b24e9f4_1685dd66",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-02T22:02:46Z",
+      "side": 1,
+      "message": "We could make this a validation error. Please see errors.md for the formatting.\n\nIIUC, JS never hits this case, but native could hit it if they ask for a target with Undefined format in the descriptor?",
+      "parentUuid": "11b076d0_da2f77ae",
+      "range": {
+        "startLine": 442,
+        "startChar": 24,
+        "endLine": 442,
+        "endChar": 93
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c5b7099_c42ff934",
         "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 6
