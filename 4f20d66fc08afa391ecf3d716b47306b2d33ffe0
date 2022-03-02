@@ -16,6 +16,52 @@
       "message": "Pulled cwallez@ work from https://dawn-review.googlesource.com/c/dawn/+/75983 over into this patch so we can wrap it up while he\u0027s out.\n\nImplemented the suggestion Michael made in TextureD3D12.cpp, and in the same file found that the addition to the switch statement in the TextureView constructor was broken. (It accidentally removed the break statement from the Depth24UnormStencil8 case.) Resolved that by making the Stencil8 case take the same logic path, since it also needs the same shader component mapping.\n\nAll together this appears to get us a lot closer to having a working stencil8 texture format! I think there\u0027s likely to be a few more test failures to clean up, but at least on my machine the end2end tests are now back to ~same number of failures as the main branch. ",
       "revId": "4f20d66fc08afa391ecf3d716b47306b2d33ffe0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65e92b6b_3d6d3f21",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-02T20:08:30Z",
+      "side": 1,
+      "message": "666 ?",
+      "range": {
+        "startLine": 107,
+        "startChar": 38,
+        "endLine": 107,
+        "endChar": 40
+      },
+      "revId": "4f20d66fc08afa391ecf3d716b47306b2d33ffe0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9986d80f_53b20058",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-02T20:08:30Z",
+      "side": 1,
+      "message": "we should run these tests with both VulkanBackend and VulkanBackend with VulkanUseS8 force disabled to get coverage of both paths.\n\nExample of force disable:\nhttps://source.chromium.org/search?q\u003duse_d3d12_render_pass%20f:dawn%20f:Tests\u0026sq\u003d",
+      "range": {
+        "startLine": 670,
+        "startChar": 25,
+        "endLine": 670,
+        "endChar": 38
+      },
+      "revId": "4f20d66fc08afa391ecf3d716b47306b2d33ffe0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
