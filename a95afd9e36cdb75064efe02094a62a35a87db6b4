@@ -16,6 +16,138 @@
       "message": "Extra implementation for Metal seems not needed (indicated at https://github.com/gpuweb/gpuweb/issues/2060#issuecomment-1031207665 and it just passed the tests)",
       "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3f72023_aaf7b4d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-02T19:16:39Z",
+      "side": 1,
+      "message": "I didn\u0027t extensively go through the individual backend code, just skimmed through since I\u0027m not too sure how each backend works for this yet. Hopefully Austin can help take a look at those. Is Metal support also planned (in a follow-up CL?) or is it only a D3D12/Vulkan feature?",
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ef0cddf_e752a614",
+        "filename": "src/dawn/native/RenderBundleEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-02T19:16:39Z",
+      "side": 1,
+      "message": "nit. \"The depthStencilFormat\" to match the other validation message.",
+      "range": {
+        "startLine": 91,
+        "startChar": 17,
+        "endLine": 91,
+        "endChar": 35
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30dbdeac_fd8e9e1a",
+        "filename": "src/dawn/native/RenderBundleEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-02T19:16:39Z",
+      "side": 1,
+      "message": "This looks pretty much the same as the other one in CommandEncoder. Is it possible to unify it a bit? Maybe through a helper of some sort?",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 0
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11b076d0_da2f77ae",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-02T19:16:39Z",
+      "side": 1,
+      "message": "If we are outputting a warning, should we add some context to it also? i.e. the color attachment index at least?",
+      "range": {
+        "startLine": 442,
+        "startChar": 24,
+        "endLine": 442,
+        "endChar": 93
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80d3e0c2_c40c77f1",
+        "filename": "src/dawn/tests/end2end/RenderPassTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-02T19:16:39Z",
+      "side": 1,
+      "message": "Wait... is this an unrelated fix to this test? Not sure I understand why this is affected by the changes in the CL? (It\u0027s fine, just for my understanding though)",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 162,
+        "endChar": 70
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c64dcf20_8300db42",
+        "filename": "src/dawn/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-02T19:16:39Z",
+      "side": 1,
+      "message": "You can consider using the overload to check the message is the expected one if you want?",
+      "range": {
+        "startLine": 655,
+        "startChar": 8,
+        "endLine": 655,
+        "endChar": 69
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
