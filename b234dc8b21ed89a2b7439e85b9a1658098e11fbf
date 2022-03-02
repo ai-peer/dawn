@@ -87,6 +87,30 @@
       },
       "revId": "b234dc8b21ed89a2b7439e85b9a1658098e11fbf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0c70b55_56856811",
+        "filename": "src/dawn/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-02T02:08:18Z",
+      "side": 1,
+      "message": "Thanks! And mark as Done here.",
+      "parentUuid": "4be02481_a60c5837",
+      "range": {
+        "startLine": 199,
+        "startChar": 34,
+        "endLine": 199,
+        "endChar": 61
+      },
+      "revId": "b234dc8b21ed89a2b7439e85b9a1658098e11fbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
