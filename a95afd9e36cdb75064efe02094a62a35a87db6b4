@@ -127,6 +127,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4a55992_88f83e45",
+        "filename": "src/dawn/tests/end2end/RenderPassTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-02T19:22:11Z",
+      "side": 1,
+      "message": "Yep this is a sort of unrelated fix. It\u0027s supposed to read the pixel at the corner. Similiar tests above uses 1.\nI touched this test since it failed during the implementation. But this change itself should be independent.",
+      "parentUuid": "80d3e0c2_c40c77f1",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 162,
+        "endChar": 70
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c64dcf20_8300db42",
