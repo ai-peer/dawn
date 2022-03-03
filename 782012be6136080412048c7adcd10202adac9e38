@@ -186,6 +186,30 @@
       },
       "revId": "782012be6136080412048c7adcd10202adac9e38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "547bd9aa_ab4ae53a",
+        "filename": "src/dawn/native/BindingInfo.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-03T20:32:23Z",
+      "side": 1,
+      "message": "that\u0027s only the case because this specific serialization comes paired with an enum. If you were to serialize SamplerBindingLayout or BufferBindingLayout by itself elsewhere, it wouldn\u0027t have that. So the concern is that it could be easy to mess it up by accident.",
+      "parentUuid": "163d47bf_4d2799aa",
+      "range": {
+        "startLine": 52,
+        "startChar": 87,
+        "endLine": 52,
+        "endChar": 93
+      },
+      "revId": "782012be6136080412048c7adcd10202adac9e38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
