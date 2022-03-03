@@ -241,6 +241,10 @@ namespace dawn::native {
 
             DAWN_TRY(ValidateLoadOp(colorAttachment.loadOp));
             DAWN_TRY(ValidateStoreOp(colorAttachment.storeOp));
+            DAWN_INVALID_IF(colorAttachment.loadOp == wgpu::LoadOp::Undefined,
+                            "loadOp must not be undefined.");
+            DAWN_INVALID_IF(colorAttachment.storeOp == wgpu::StoreOp::Undefined,
+                            "storeOp must not be undefined.");
 
             // TODO(dawn:1269): Remove after the deprecation period.
             bool useClearColor = HasDeprecatedColor(colorAttachment);
@@ -321,7 +325,11 @@ namespace dawn::native {
                 }
             } else {
                 DAWN_TRY(ValidateLoadOp(depthStencilAttachment->depthLoadOp));
+                DAWN_INVALID_IF(depthStencilAttachment->depthLoadOp == wgpu::LoadOp::Undefined,
+                                "depthLoadOp must not be undefined if depthReadOnly is false.");
                 DAWN_TRY(ValidateStoreOp(depthStencilAttachment->depthStoreOp));
+                DAWN_INVALID_IF(depthStencilAttachment->depthStoreOp == wgpu::StoreOp::Undefined,
+                                "depthStoreOp must not be undefined if depthReadOnly is false.");
             }
 
             if (depthStencilAttachment->stencilReadOnly) {
@@ -343,7 +351,12 @@ namespace dawn::native {
                 }
             } else {
                 DAWN_TRY(ValidateLoadOp(depthStencilAttachment->stencilLoadOp));
+                DAWN_INVALID_IF(depthStencilAttachment->stencilLoadOp == wgpu::LoadOp::Undefined,
+                                "stencilLoadOp must not be undefined if stencilReadOnly is false.");
                 DAWN_TRY(ValidateStoreOp(depthStencilAttachment->stencilStoreOp));
+                DAWN_INVALID_IF(
+                    depthStencilAttachment->stencilStoreOp == wgpu::StoreOp::Undefined,
+                    "stencilStoreOp must not be undefined if stencilReadOnly is false.");
             }
 
             if (!std::isnan(depthStencilAttachment->clearDepth)) {
