@@ -51,6 +51,24 @@
       "parentUuid": "2d9648b9_19bd46e5",
       "revId": "1d907a63e26ceffa5c9e996c5d4d37aa64c83716",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3900515b_2b68125b",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-03T19:58:40Z",
+      "side": 1,
+      "message": "it\u0027s required for color:\nhttps://gpuweb.github.io/gpuweb/#dictdef-gpurenderpasscolorattachment\n\nbut optional for depth/stencil\nhttps://gpuweb.github.io/gpuweb/#dictdef-gpurenderpassdepthstencilattachment\n\n(note the absence of \"required\").",
+      "parentUuid": "ceb53890_84dfafc8",
+      "revId": "1d907a63e26ceffa5c9e996c5d4d37aa64c83716",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
