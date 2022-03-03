@@ -241,6 +241,10 @@ namespace dawn::native {
 
             DAWN_TRY(ValidateLoadOp(colorAttachment.loadOp));
             DAWN_TRY(ValidateStoreOp(colorAttachment.storeOp));
+            DAWN_INVALID_IF(colorAttachment.loadOp == wgpu::LoadOp::Undefined,
+                            "loadOp must not be %s.", wgpu::LoadOp::Undefined);
+            DAWN_INVALID_IF(colorAttachment.storeOp == wgpu::StoreOp::Undefined,
+                            "storeOp must not be %s.", wgpu::StoreOp::Undefined);
 
             // TODO(dawn:1269): Remove after the deprecation period.
             bool useClearColor = HasDeprecatedColor(colorAttachment);
