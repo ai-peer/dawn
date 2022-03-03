@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a8fe22c_d5460034",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-03T01:40:21Z",
+      "side": 1,
+      "message": "also, maybe we should add some unittests of the serialization",
+      "revId": "782012be6136080412048c7adcd10202adac9e38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4aa460c6_55f6561f",
         "filename": "generator/dawn_json_generator.py",
         "patchSetId": 6
