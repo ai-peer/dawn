@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1e2ffce_3f38edcf",
+        "filename": "generator/templates/dawn/native/api_absl_format.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-03T20:11:48Z",
+      "side": 1,
+      "message": "(2) that\u0027s why seeing how we do the caching would be instructive. Definitely BGLs are important. But, taking current examples of how stuff works:\n\nShader translation for D3D12 takes:\n - WGSL shader\n - bunch of boolean/integer flags\n - some strings\n - version/device info\n - ArrayLengthFromUniformOptions (map produced from bindings + stuff?)\n - BindingRemapper::BindingPoints (map produced from bindings + stuff?)\n - BindingRemapper::AccessControls (map produced from bindings + stuff?)\n\nPipeline compilation:\n - bunch of enums, booleans, numbers\n - shader bytecode\n - root signature\n   - produced from BGLs, but it\u0027s also serialized to a blob https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/PipelineLayoutD3D12.cpp;l\u003d258\n   \nSo there definitely is a bunch of stuff that\u0027s produced from BGLs and bindings, and so I think it would probably be sufficient to serialize the way you\u0027re doing. My question is how necessary it is. Either way, we need to generate code, or write generalized code that can serialize a bunch of stuff. It seems like it should be possible to have the data produced from BGLs get serialized instead of the BGLs themselves.\n\nIt would be more code shuffling because we need to reorganize functions like d3d12::RenderPipeline::Initialize which gets a ton of stuff from |this| and populates a D3D12_GRAPHICS_PIPELINE_STATE_DESC, to instead have a layer of indirection.\nCurrently: (inputs from |this|) -\u003e D3D12_GRAPHICS_PIPELINE_STATE_DESC\nCould be: (inputs from |this|) -\u003e (key from inputs, inputs w/out from |this|) -\u003e D3D12_GRAPHICS_PIPELINE_STATE_DESC **\n\nI think the advantage though is that it\u0027s both the precise, minimal set of things we need to serialize, and we can structurally guarantee that everything in the middle step becomes part of the key.\n\nI guess all of this depends on this hypothetical easy-to-use indirection layer that I\u0027m just assuming exists. So maybe I should try to hack up what I think it could look like. We primarily need something that works well, so I don\u0027t want to distract with \"but what if... etc.\" What do you think?\n\n**But wait! in reality we can probably just zero-initialize D3D12_GRAPHICS_PIPELINE_STATE_DESC, populate it w/out pointer members, dump that to memory, replace the root signature pointer with the serialized root signature and bytecode pointers with serialized bytecode, and prefix with the cache isolation key. And that\u0027s the entire key. Precise, and as small as possible.\nProbably not all backends can do this, so the extra layer of indirection might still be applicable for other backends.",
+      "parentUuid": "7c7cdffa_d5c5723a",
+      "revId": "782012be6136080412048c7adcd10202adac9e38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "87c15814_0fdf0a24",
         "filename": "src/dawn/native/BindingInfo.cpp",
         "patchSetId": 6
