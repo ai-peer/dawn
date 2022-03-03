@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c7cdffa_d5c5723a",
+        "filename": "generator/templates/dawn/native/api_absl_format.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-03T19:13:22Z",
+      "side": 1,
+      "message": "Hmm thought about this some more, and there\u0027s 2 separate questions here.\n\n(1) Compact serialization vs more readable serialization: One possible way I can think of is sort of \"hacky\", which is to supply another non-string (%s) formatter for the types and use that one for serialization and use %s for readable serialization, and (say) %d for cache key serialization.\n\n(2) Serialization for inputs to compilation: I am a little confused about this point. Is that referring to shaders? Or does that apply to pipelines as well? I was under the impression that the BGLs would be important for the pipelines which is why I thought I would need to serialize them (regardless of backend), and then backends can add more stuff if necessary.",
+      "parentUuid": "63415645_661f7217",
+      "revId": "782012be6136080412048c7adcd10202adac9e38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "87c15814_0fdf0a24",
         "filename": "src/dawn/native/BindingInfo.cpp",
         "patchSetId": 6
@@ -118,6 +136,30 @@
       "writtenOn": "2022-03-03T01:38:51Z",
       "side": 1,
       "message": "so this looks like:\n\nmyBindingInfoType: { ...stuff }\n\nwhat if we exclude myBindingInfoType and instead serialization of \"stuff\" (buffer binding layout, sampling binding layout, etc.) includes the name of the struct in front?\n\n\nSo \"BufferBindingLayout {  ...contents  }\"\nthen, we might not need myBindingInfoType\n\nBecause right now, the serialization of two structs, with different types, looks identical since it doesn\u0027t include the struct name. I don\u0027t think we have such structs with identical layouts, but if could be a source of obscure bugs in the future if two keys collide because they serialized in this way.",
+      "range": {
+        "startLine": 52,
+        "startChar": 87,
+        "endLine": 52,
+        "endChar": 93
+      },
+      "revId": "782012be6136080412048c7adcd10202adac9e38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "163d47bf_4d2799aa",
+        "filename": "src/dawn/native/BindingInfo.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-03T19:13:22Z",
+      "side": 1,
+      "message": "myBindingInfoType is actually formatted into the name of the struct via the formatter above. So we actually end up with something like what you mention already:\n\nbuffer { ..contents }\n\nsampler { .. contents }",
+      "parentUuid": "87c15814_0fdf0a24",
       "range": {
         "startLine": 52,
         "startChar": 87,
