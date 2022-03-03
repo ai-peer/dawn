@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4aa460c6_55f6561f",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-03-03T01:11:08Z",
+      "side": 1,
+      "message": "Do we want/need support for floats here?",
+      "revId": "782012be6136080412048c7adcd10202adac9e38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b743c1f4_36757972",
+        "filename": "generator/templates/dawn/native/api_absl_format.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-03-03T01:11:08Z",
+      "side": 1,
+      "message": "This is a nice generalization of the serialization output!\n\nNot a problem that needs to be solved now, but I feel like we\u0027re likely to hit a point in the not-so-distant future where we may want an object to have both a nice formatting for error messages AND a serialized format. It\u0027s not clear to me how we\u0027d manage that with the Abseil formatting, but something to keep in mind.",
+      "revId": "782012be6136080412048c7adcd10202adac9e38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
