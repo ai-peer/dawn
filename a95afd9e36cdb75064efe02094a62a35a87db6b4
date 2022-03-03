@@ -359,6 +359,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee3246e2_c3cdfcea",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-03T15:57:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "154b4c73_fa637e88",
+      "range": {
+        "startLine": 399,
+        "startChar": 44,
+        "endLine": 399,
+        "endChar": 70
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "039dd13d_23091a90",

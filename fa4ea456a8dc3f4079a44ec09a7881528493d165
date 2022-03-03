@@ -1,0 +1,164 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "376c9a34_096f1c17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-03T15:57:41Z",
+      "side": 1,
+      "message": "appears to be a real MSVC compile failure",
+      "revId": "fa4ea456a8dc3f4079a44ec09a7881528493d165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e7fe214_a047b167",
+        "filename": "src/dawn/common/ityp_bitset.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-03T15:57:41Z",
+      "side": 1,
+      "message": "nit: I think this should be GetHighestBitIndexExclusive(ityp::bitset) and GetHighestBitIndexExclusive(std::bitset) just like how IterateBitSet is a \"free\" function.\n\nTyped-version can return type `Index`.\n\nMaybe we should just call it GetHighestBitIndexPlusOne() ?",
+      "revId": "fa4ea456a8dc3f4079a44ec09a7881528493d165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21774f9a_79cf3698",
+        "filename": "src/dawn/common/ityp_bitset.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-03T15:57:41Z",
+      "side": 1,
+      "message": "We look at N, the size, to determine if we should use to_ullong() or to_ulong()",
+      "revId": "fa4ea456a8dc3f4079a44ec09a7881528493d165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81c244d6_7d917b53",
+        "filename": "src/dawn/common/ityp_bitset.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-03T15:57:41Z",
+      "side": 1,
+      "message": "what about _BitScanReverse and to_ullong() on 32-bit?",
+      "revId": "fa4ea456a8dc3f4079a44ec09a7881528493d165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "482b4789_49ee07f2",
+        "filename": "src/dawn/native/RenderBundleEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-03T15:57:41Z",
+      "side": 1,
+      "message": "grammar nit: \n\n\"is all\" is like \"all is\", You would instead say \"are all\" or \"all are\".\nbut could be shorter like:  \"all color formats undefined\"",
+      "range": {
+        "startLine": 69,
+        "startChar": 13,
+        "endLine": 69,
+        "endChar": 38
+      },
+      "revId": "fa4ea456a8dc3f4079a44ec09a7881528493d165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dca6e44d_a08ce002",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-03T15:57:41Z",
+      "side": 1,
+      "message": "I think unneeded now",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 28
+      },
+      "revId": "fa4ea456a8dc3f4079a44ec09a7881528493d165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b779915_1fb8722d",
+        "filename": "src/dawn/native/d3d12/RenderPassBuilderD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-03T15:57:41Z",
+      "side": 1,
+      "message": "why the cast?",
+      "range": {
+        "startLine": 148,
+        "startChar": 28,
+        "endLine": 148,
+        "endChar": 35
+      },
+      "revId": "fa4ea456a8dc3f4079a44ec09a7881528493d165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad83c900_3f8ea5b2",
+        "filename": "src/dawn/tests/unittests/ITypBitsetTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-03T15:57:41Z",
+      "side": 1,
+      "message": "test 32-bit too - especially if we add an implementation specifically for it",
+      "range": {
+        "startLine": 183,
+        "startChar": 18,
+        "endLine": 183,
+        "endChar": 26
+      },
+      "revId": "fa4ea456a8dc3f4079a44ec09a7881528493d165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
