@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e59e97d_f729906e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Extra implementation for Metal seems not needed (indicated at https://github.com/gpuweb/gpuweb/issues/2060#issuecomment-1031207665 and it just passed the tests)",
+      "parentUuid": "e3f72023_aaf7b4d4",
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03a0dd4d_c5a8f103",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-03-02T19:47:39Z",
       "side": 1,
       "message": "https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/docs/dawn/errors.md\n\nMaybe say \"No color or depthStencil attachments provided. At least one is required.\"",
+      "range": {
+        "startLine": 416,
+        "startChar": 16,
+        "endLine": 418,
+        "endChar": 62
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2c29d3c_59b990c3",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03a0dd4d_c5a8f103",
       "range": {
         "startLine": 416,
         "startChar": 16,
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22bd0ecc_07ce4f45",
+        "filename": "src/dawn/native/RenderBundleEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ef0cddf_e752a614",
+      "range": {
+        "startLine": 91,
+        "startChar": 17,
+        "endLine": 91,
+        "endChar": 35
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30dbdeac_fd8e9e1a",
@@ -94,6 +160,30 @@
       "writtenOn": "2022-03-02T19:16:39Z",
       "side": 1,
       "message": "This looks pretty much the same as the other one in CommandEncoder. Is it possible to unify it a bit? Maybe through a helper of some sort?",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 0
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99645b55_5de368b3",
+        "filename": "src/dawn/native/RenderBundleEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Turns out they are a bit different (undefined vs null, ValidateRenderPassColorAttachment vs ValidateColorAttachmentFormat)\nBut while checking this I noticed the early DAWN_INVALID_IF for descriptor-\u003ecolorFormatsCount \u003d\u003d 0 \u0026\u0026 descriptor-\u003edepthStencilFormat \u003d\u003d wgpu::TextureFormat::Undefined and removed it since it\u0027s redundant now.",
+      "parentUuid": "30dbdeac_fd8e9e1a",
       "range": {
         "startLine": 73,
         "startChar": 8,
@@ -151,6 +241,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcb10240_48981d6d",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done.\nYes you cannot have undefined format for the GPUColorTargetState of render pipeline descriptor in JS.\nAdd a validation test for these error.",
+      "parentUuid": "11b076d0_da2f77ae",
+      "range": {
+        "startLine": 442,
+        "startChar": 24,
+        "endLine": 442,
+        "endChar": 93
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c5b7099_c42ff934",
@@ -164,6 +278,30 @@
       "writtenOn": "2022-03-02T19:47:39Z",
       "side": 1,
       "message": "I think this should be lazy, and I think it should be done inside CommandBuffer::SetupRenderPass.\n\nSetupRenderPass would do something like:\n\n```\nfor (i from to 0 MaxIndex+1) {\n  if (mask[i]) {\n    // normal thing\n  } else {\n    if (!nullRTVAllocation) {\n       // create null rtv\n    }\n    // set it.\n  }\n}\n```",
+      "range": {
+        "startLine": 1352,
+        "startChar": 7,
+        "endLine": 1362,
+        "endChar": 89
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06b429ed_0ced3a55",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-03T01:57:59Z",
+      "side": 1,
+      "message": "TODO",
+      "parentUuid": "8c5b7099_c42ff934",
       "range": {
         "startLine": 1352,
         "startChar": 7,
@@ -199,6 +337,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "154b4c73_fa637e88",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-03T01:57:59Z",
+      "side": 1,
+      "message": "I inherit this part thinking it might be D3D12 not allowing sparse DXGI_FORMAT_UNKNOWN before any active attachment. But Let me change this to DXGI_FORMAT_UNKNOWN and see the test result.\n\nRenderTargetWriteMask is default to D3D12_COLOR_WRITE_ENABLE_ALL so this initialization is still needed.",
+      "parentUuid": "10a9a16c_e63ed818",
+      "range": {
+        "startLine": 399,
+        "startChar": 44,
+        "endLine": 399,
+        "endChar": 70
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "039dd13d_23091a90",
         "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
         "patchSetId": 6
@@ -210,6 +372,30 @@
       "writtenOn": "2022-03-02T19:47:39Z",
       "side": 1,
       "message": "we do this so much now, maybe we should add a thing to get the highest index bit from a bitset. Would use similar primitives like BitscanReverse in Dawn\u0027s common/Math Log2 implementation",
+      "range": {
+        "startLine": 477,
+        "startChar": 0,
+        "endLine": 477,
+        "endChar": 69
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db07ce22_c5810c54",
+        "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done. Made a GetHighestBitIndexExclusive for Bitset. (0 for none, max index + 1 if any)",
+      "parentUuid": "039dd13d_23091a90",
       "range": {
         "startLine": 477,
         "startChar": 0,
@@ -280,6 +466,30 @@
       "writtenOn": "2022-03-02T19:16:39Z",
       "side": 1,
       "message": "You can consider using the overload to check the message is the expected one if you want?",
+      "range": {
+        "startLine": 655,
+        "startChar": 8,
+        "endLine": 655,
+        "endChar": 69
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c86ba1d8_cfdd03ba",
+        "filename": "src/dawn/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-03T01:57:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c64dcf20_8300db42",
       "range": {
         "startLine": 655,
         "startChar": 8,
