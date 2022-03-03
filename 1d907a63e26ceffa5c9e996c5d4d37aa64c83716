@@ -87,6 +87,24 @@
       "parentUuid": "3900515b_2b68125b",
       "revId": "1d907a63e26ceffa5c9e996c5d4d37aa64c83716",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "958fc1d5_8cd40102",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-03-03T20:05:36Z",
+      "side": 1,
+      "message": "Sorry, I meant the fields `wgpu::interop::GPURenderPassDepthStencilAttachment::depthLoadOp` and `wgpu::interop::GPURenderPassDepthStencilAttachment::stencilLoadOp`",
+      "parentUuid": "7a1dc0ce_e50d0a70",
+      "revId": "1d907a63e26ceffa5c9e996c5d4d37aa64c83716",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
