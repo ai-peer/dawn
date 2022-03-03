@@ -50,6 +50,23 @@
       "message": "thanks!",
       "revId": "00bdd139850b5fc769aad9df7dc2c9d5afc9560a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60eaeaa4_b9f71e4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-03T19:05:16Z",
+      "side": 1,
+      "message": "good thing I decided to re-run through CQ since the CTS change landed since the last time I ran it which updates the depthLoadOp/stencilLoadOp usage everywhere.\n\nhttps://gpuweb.github.io/gpuweb/#abstract-opdef-gpurenderpassdepthstencilattachment-gpurenderpassdepthstencilattachment-valid-usage\n\nBrandon, this bit is not clear to me, and it\u0027s hitting an ASSERT in Dawn. Need to figure out what we should be doing.\n\nIf this.depthReadOnly is true:\n   this.depthLoadOp must not be provided.\n   this.depthStoreOp must not be provided.\n\nWhat if depthReadOnly is false AND you don\u0027t provide load/store ops?\nIs that a validation error? or do they also default to load+store, respectively?",
+      "revId": "00bdd139850b5fc769aad9df7dc2c9d5afc9560a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
