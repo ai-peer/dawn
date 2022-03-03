@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "63415645_661f7217",
+        "filename": "generator/templates/dawn/native/api_absl_format.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-03T17:48:08Z",
+      "side": 1,
+      "message": "hmm but basically, I\u0027m still questioning whether serializing the BGLs is what we really want to do for the cache key.\n\nI think it certainly happens to be easy and convenient because we have already have a generator for these descriptors.\n\nHowever, it would also still be easy if we generated serialization helpers for inputs to compilation. I think that\u0027s just strings, primitives, and std::maps of stuff. Seems not too bad to generate or templatize serialization for that? I also haven\u0027t tried it myself - so who knows.\nBut again, not clear from the WIP CL how you plan to use stuff, so this concern may not apply.\n\nOne example is that the tint team is talking about having a step just for Shader -\u003e Shader w/ Defines - which has fairly minimal inputs. We should make sure our caching strategy is flexible enough for stuff like that",
+      "parentUuid": "bf9c7728_a973982d",
+      "revId": "782012be6136080412048c7adcd10202adac9e38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "87c15814_0fdf0a24",
         "filename": "src/dawn/native/BindingInfo.cpp",
         "patchSetId": 6
