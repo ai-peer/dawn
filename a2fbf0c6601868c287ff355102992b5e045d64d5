@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba859e6d_a2879b70",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-03T13:35:41Z",
+      "side": 1,
+      "message": "It\u0027s used to check whether the query is used in this render pass, so use \u0027usedQueries\u0027 instead.",
+      "parentUuid": "cddbb754_ca3e162f",
+      "range": {
+        "startLine": 422,
+        "startChar": 37,
+        "endLine": 422,
+        "endChar": 44
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cc4071b_afb3501d",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-03-01T18:33:46Z",
       "side": 1,
       "message": "nit: ASSERT non-null",
+      "range": {
+        "startLine": 424,
+        "startChar": 34,
+        "endLine": 424,
+        "endChar": 42
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c2c6790_da22e66d",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-03T13:35:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cc4071b_afb3501d",
       "range": {
         "startLine": 424,
         "startChar": 34,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eada8760_5394400b",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-03T13:35:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "682d71df_0690177f",
+      "range": {
+        "startLine": 431,
+        "startChar": 61,
+        "endLine": 431,
+        "endChar": 79
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "899d92fd_544ca46a",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-03-01T18:33:46Z",
       "side": 1,
       "message": "typo: \"timestampWrites\" ?",
+      "range": {
+        "startLine": 466,
+        "startChar": 61,
+        "endLine": 466,
+        "endChar": 79
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b904fd2_1d7c28cd",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-03T13:35:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "899d92fd_544ca46a",
       "range": {
         "startLine": 466,
         "startChar": 61,
@@ -118,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3fdb5f4c_3f8e2b91",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-03T13:35:41Z",
+      "side": 1,
+      "message": "Add ASSERT to ValidateComputePassDescriptor(). It must be non-null here if it passes the validation.",
+      "parentUuid": "cb47a521_e7686b57",
+      "range": {
+        "startLine": 667,
+        "startChar": 20,
+        "endLine": 667,
+        "endChar": 37
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12d71795_1fbc9eeb",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 1
@@ -129,6 +249,30 @@
       "writtenOn": "2022-03-01T18:33:46Z",
       "side": 1,
       "message": "nit: std::move",
+      "range": {
+        "startLine": 684,
+        "startChar": 39,
+        "endLine": 684,
+        "endChar": 65
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b856c5f_d0e40fef",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-03T13:35:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12d71795_1fbc9eeb",
       "range": {
         "startLine": 684,
         "startChar": 39,
@@ -152,6 +296,30 @@
       "writtenOn": "2022-03-01T18:33:46Z",
       "side": 1,
       "message": "nit: std::move",
+      "range": {
+        "startLine": 697,
+        "startChar": 61,
+        "endLine": 697,
+        "endChar": 81
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dca4fcbf_1502c058",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-03T13:35:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34425fc9_226ca253",
       "range": {
         "startLine": 697,
         "startChar": 61,
@@ -187,6 +355,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "babbdf43_dfbbec77",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-03T13:35:41Z",
+      "side": 1,
+      "message": "We make sure the querySet is non-null in ValidateRenderPassDescriptor, I think the ASSERT is not needed here.",
+      "parentUuid": "f468037a_9fed89a4",
+      "range": {
+        "startLine": 736,
+        "startChar": 20,
+        "endLine": 736,
+        "endChar": 38
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc2450d5_b46f3c7b",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 1
@@ -198,6 +390,30 @@
       "writtenOn": "2022-03-01T18:33:46Z",
       "side": 1,
       "message": "nit: std::move",
+      "range": {
+        "startLine": 844,
+        "startChar": 39,
+        "endLine": 844,
+        "endChar": 65
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7059f530_26f36c4d",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-03T13:35:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc2450d5_b46f3c7b",
       "range": {
         "startLine": 844,
         "startChar": 39,
@@ -221,6 +437,30 @@
       "writtenOn": "2022-03-01T18:33:46Z",
       "side": 1,
       "message": "nit: std::move",
+      "range": {
+        "startLine": 853,
+        "startChar": 44,
+        "endLine": 853,
+        "endChar": 64
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a916896_5d6a3b64",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-03T13:35:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71bbbf74_948c7e5f",
       "range": {
         "startLine": 853,
         "startChar": 44,
@@ -256,6 +496,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc4b08d1_22edbcf9",
+        "filename": "src/dawn/native/Commands.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-03T13:35:41Z",
+      "side": 1,
+      "message": "The part 2 will be each backend implementation.\n\nWhat I though is call the WriteTimestamp cmd as close as possible to the BeginRenderPass and EndRenderPass of D3D12 and Vulkan, like Metal did, they are set directly to render pass descriptor at creation and smapled when starting the render pass.\n\nIf we encode these timestampWrites immediately, there may be many other cmds, e.g. setting default pipeline state on D3D12 backend, between BeginRenderPass and writeTimestamp.\n\nThis is somewhat different from APIWriteTimestamp which verify and encode commands one by one, so we cannot euse it. And I will consider to add another extension for APIWriteTimestamp.",
+      "parentUuid": "0266e31a_681ac6be",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 52
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "761c6b11_511b79be",
         "filename": "src/dawn/native/Commands.h",
         "patchSetId": 1
@@ -273,6 +537,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2fec319_860196ae",
+        "filename": "src/dawn/native/Commands.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-03T13:35:41Z",
+      "side": 1,
+      "message": "For EndCmd, yes, we can encode the timestampWritesAtEnd immediately. But I don\u0027t want to resue the this-\u003eAPIWriteTimestamp() because I\u0027m thinking to hide it behind another extension. I will introudce another helper function just for encoding the wirteTimestamp cmd without validation.",
+      "parentUuid": "761c6b11_511b79be",
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9360612a_3fc63268",
         "filename": "src/dawn/native/ComputePassEncoder.cpp",
         "patchSetId": 1
@@ -284,6 +566,30 @@
       "writtenOn": "2022-03-01T18:33:46Z",
       "side": 1,
       "message": "nit: construct by value instead of const\u0026 and use std::move",
+      "range": {
+        "startLine": 119,
+        "startChar": 42,
+        "endLine": 120,
+        "endChar": 54
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67bf6ee2_be0740ec",
+        "filename": "src/dawn/native/ComputePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-03T13:35:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9360612a_3fc63268",
       "range": {
         "startLine": 119,
         "startChar": 42,
@@ -317,6 +623,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff0eb294_a273ba8d",
+        "filename": "src/dawn/native/ComputePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-03T13:35:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6471c95f_4e7a982a",
+      "range": {
+        "startLine": 159,
+        "startChar": 43,
+        "endLine": 159,
+        "endChar": 64
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "016bed5b_1ca1cc97",
@@ -340,6 +670,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "170e6d39_d89ecee1",
+        "filename": "src/dawn/native/RenderPassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-03T13:35:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "016bed5b_1ca1cc97",
+      "range": {
+        "startLine": 72,
+        "startChar": 10,
+        "endLine": 72,
+        "endChar": 53
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17c50733_a9e8a1d9",
@@ -353,6 +707,30 @@
       "writtenOn": "2022-03-01T18:33:46Z",
       "side": 1,
       "message": "std::move",
+      "range": {
+        "startLine": 129,
+        "startChar": 43,
+        "endLine": 129,
+        "endChar": 64
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66ff2d5f_c67cfb7d",
+        "filename": "src/dawn/native/RenderPassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-03T13:35:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17c50733_a9e8a1d9",
       "range": {
         "startLine": 129,
         "startChar": 43,
