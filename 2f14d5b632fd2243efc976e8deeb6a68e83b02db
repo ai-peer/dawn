@@ -1,0 +1,158 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd944b86_5417fb4b",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-03T23:24:29Z",
+      "side": 1,
+      "message": "`timestampWriteCount \u003e 0 \u0026\u0026 timestampWrites \u003d\u003d nullptr` is a problem and shouldn\u0027t be silently ignored IMO. I don\u0027t know what we do in other similar cases, but my intuition is this should just say:\n\n```\nif (descriptor-\u003etimestampWriteCount \u003e 0) {\n  DAWN_ASSERT(descriptor-\u003etimestampWrites !\u003d nullptr);\n```\n\n(Not a validation error because this is just a sanity check - we can\u0027t validate that the timestampWrites pointer is actually valid.)",
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dff0f58b_6b0780ca",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-03T23:24:29Z",
+      "side": 1,
+      "message": "Is this validation missing from the spec? I didn\u0027t see it (but I didn\u0027t look very hard).",
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b553c713_27b6b945",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-03T23:24:29Z",
+      "side": 1,
+      "message": "Why don\u0027t we need a QueryAvailabilityMap here? Explain in a comment?",
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61037697_3ab50397",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-03T23:24:29Z",
+      "side": 1,
+      "message": "same",
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57498442_0841b0a0",
+        "filename": "src/dawn/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-03T23:24:29Z",
+      "side": 1,
+      "message": "nit: Form -\u003e From",
+      "range": {
+        "startLine": 327,
+        "startChar": 31,
+        "endLine": 327,
+        "endChar": 35
+      },
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da659838_e8e98f95",
+        "filename": "src/dawn/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-03T23:24:29Z",
+      "side": 1,
+      "message": "nit: destoryed -\u003e destroyed",
+      "range": {
+        "startLine": 362,
+        "startChar": 37,
+        "endLine": 362,
+        "endChar": 46
+      },
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ac4eba6_0e75baad",
+        "filename": "src/dawn/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-03T23:24:29Z",
+      "side": 1,
+      "message": "Need to test this for compute passes too (regardless of whether it\u0027s valid or invalid).",
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04bd39f5_e4233288",
+        "filename": "src/dawn/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-03T23:24:29Z",
+      "side": 1,
+      "message": "nit: destoryed -\u003e destroyed",
+      "range": {
+        "startLine": 459,
+        "startChar": 37,
+        "endLine": 459,
+        "endChar": 46
+      },
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
