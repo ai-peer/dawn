@@ -1042,6 +1042,8 @@ TEST_P(CopyTests_T2B, CopyOneRowWithDepth32Float) {
     renderPass.cDepthStencilAttachmentInfo.depthClearValue = kClearDepthValue;
     renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
     renderPass.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
+    renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = {};
+    renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = {};
     wgpu::RenderPassEncoder renderPassEncoder = encoder.BeginRenderPass(&renderPass);
     renderPassEncoder.End();
 

@@ -156,6 +156,24 @@ class ReadOnlyDepthStencilAttachmentTests
             passDescriptorInit.cDepthStencilAttachmentInfo.stencilClearValue =
                 values->stencilInitValue;
         }
+        switch (format) {
+            case wgpu::TextureFormat::Depth24Plus:
+            case wgpu::TextureFormat::Depth32Float:
+            case wgpu::TextureFormat::Depth16Unorm:
+                passDescriptorInit.cDepthStencilAttachmentInfo.stencilLoadOp =
+                    wgpu::LoadOp::Undefined;
+                passDescriptorInit.cDepthStencilAttachmentInfo.stencilStoreOp =
+                    wgpu::StoreOp::Undefined;
+                break;
+            case wgpu::TextureFormat::Stencil8:
+                passDescriptorInit.cDepthStencilAttachmentInfo.depthLoadOp =
+                    wgpu::LoadOp::Undefined;
+                passDescriptorInit.cDepthStencilAttachmentInfo.depthStoreOp =
+                    wgpu::StoreOp::Undefined;
+                break;
+            default:
+                break;
+        }
         wgpu::RenderPassEncoder passInit = commandEncoder.BeginRenderPass(&passDescriptorInit);
         passInit.End();
 

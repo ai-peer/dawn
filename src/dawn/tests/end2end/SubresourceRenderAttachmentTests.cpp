@@ -57,11 +57,33 @@ class SubresourceRenderAttachmentTest : public DawnTest {
                 case Type::Depth: {
                     utils::ComboRenderPassDescriptor renderPass({}, renderTargetView);
                     renderPass.cDepthStencilAttachmentInfo.depthClearValue = expectedDepth;
+                    switch (format) {
+                        case wgpu::TextureFormat::Depth24Plus:
+                        case wgpu::TextureFormat::Depth32Float:
+                        case wgpu::TextureFormat::Depth16Unorm:
+                            renderPass.cDepthStencilAttachmentInfo.stencilLoadOp =
+                                wgpu::LoadOp::Undefined;
+                            renderPass.cDepthStencilAttachmentInfo.stencilStoreOp =
+                                wgpu::StoreOp::Undefined;
+                            break;
+                        default:
+                            break;
+                    }
                     return renderPass;
                 }
                 case Type::Stencil: {
                     utils::ComboRenderPassDescriptor renderPass({}, renderTargetView);
                     renderPass.cDepthStencilAttachmentInfo.stencilClearValue = expectedStencil;
+                    switch (format) {
+                        case wgpu::TextureFormat::Stencil8:
+                            renderPass.cDepthStencilAttachmentInfo.depthLoadOp =
+                                wgpu::LoadOp::Undefined;
+                            renderPass.cDepthStencilAttachmentInfo.depthStoreOp =
+                                wgpu::StoreOp::Undefined;
+                            break;
+                        default:
+                            break;
+                    }
                     return renderPass;
                 }
                 default:

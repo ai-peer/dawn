@@ -93,6 +93,19 @@ class DepthBiasTests : public DawnTest {
         utils::ComboRenderPassDescriptor renderPassDesc({mRenderTarget.CreateView()},
                                                         mDepthTexture.CreateView());
         renderPassDesc.cDepthStencilAttachmentInfo.depthClearValue = depthClear;
+        switch (depthFormat) {
+            case wgpu::TextureFormat::Depth24PlusStencil8:
+            case wgpu::TextureFormat::Depth24UnormStencil8:
+            case wgpu::TextureFormat::Depth32FloatStencil8:
+                renderPassDesc.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Load;
+                renderPassDesc.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Store;
+                break;
+            default:
+                renderPassDesc.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
+                renderPassDesc.cDepthStencilAttachmentInfo.stencilStoreOp =
+                    wgpu::StoreOp::Undefined;
+                break;
+        }
 
         // Create a render pipeline to render the quad
         utils::ComboRenderPipelineDescriptor renderPipelineDesc;

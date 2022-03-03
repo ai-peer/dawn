@@ -89,6 +89,24 @@ namespace {
                     kDepthValues[mipLevel];
                 renderPassDescriptor.cDepthStencilAttachmentInfo.stencilClearValue =
                     kStencilValues[mipLevel];
+                switch (GetParam().mFormat) {
+                    case wgpu::TextureFormat::Depth24Plus:
+                    case wgpu::TextureFormat::Depth32Float:
+                    case wgpu::TextureFormat::Depth16Unorm:
+                        renderPassDescriptor.cDepthStencilAttachmentInfo.stencilLoadOp =
+                            wgpu::LoadOp::Undefined;
+                        renderPassDescriptor.cDepthStencilAttachmentInfo.stencilStoreOp =
+                            wgpu::StoreOp::Undefined;
+                        break;
+                    case wgpu::TextureFormat::Stencil8:
+                        renderPassDescriptor.cDepthStencilAttachmentInfo.depthLoadOp =
+                            wgpu::LoadOp::Undefined;
+                        renderPassDescriptor.cDepthStencilAttachmentInfo.depthStoreOp =
+                            wgpu::StoreOp::Undefined;
+                        break;
+                    default:
+                        break;
+                }
                 renderPassDescriptors.push_back(renderPassDescriptor);
             }
         }
