@@ -119,6 +119,8 @@ class ViewportTest : public DawnTest {
         utils::ComboRenderPassDescriptor rpDesc({}, depthTexture.CreateView());
         rpDesc.cDepthStencilAttachmentInfo.depthClearValue = 0.0f;
         rpDesc.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
+        rpDesc.cDepthStencilAttachmentInfo.stencilLoadOp = {};
+        rpDesc.cDepthStencilAttachmentInfo.stencilStoreOp = {};
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&rpDesc);
         pass.SetPipeline(pipeline);

@@ -1010,6 +1010,8 @@ TEST_F(RenderBundleValidationTest, RenderPassDepthStencilFormatMismatch) {
     // Test the success case
     {
         utils::ComboRenderPassDescriptor renderPass({tex0.CreateView()}, tex1.CreateView());
+        renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = {};
+        renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = {};
 
         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = commandEncoder.BeginRenderPass(&renderPass);
@@ -1021,6 +1023,8 @@ TEST_F(RenderBundleValidationTest, RenderPassDepthStencilFormatMismatch) {
     // Test the failure case for mismatched format
     {
         utils::ComboRenderPassDescriptor renderPass({tex0.CreateView()}, tex2.CreateView());
+        renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = {};
+        renderPass.cDepthStencilAttachmentInfo.stencilStoreOp = {};
 
         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = commandEncoder.BeginRenderPass(&renderPass);
