@@ -309,6 +309,8 @@ source_set("sources") {
     "ScratchBuffer.h",
     "ShaderModule.cpp",
     "ShaderModule.h",
+    "ShaderUtils.cpp",
+    "ShaderUtils.h",
     "StagingBuffer.cpp",
     "StagingBuffer.h",
     "Subresource.cpp",
