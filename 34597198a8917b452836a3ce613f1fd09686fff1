@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66f89cdc_169e081b",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-04T21:00:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a1ff9e1_220bddfd",
+      "range": {
+        "startLine": 412,
+        "startChar": 75,
+        "endLine": 412,
+        "endChar": 95
+      },
+      "revId": "34597198a8917b452836a3ce613f1fd09686fff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e98538f7_90216fe9",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-03-04T06:24:16Z",
       "side": 1,
       "message": "this one, we know from |attachmentCount|, so at this location we could just remember it instead of calling GetHighestBitIndexPlusOne. like we did previously at [1]",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 0
+      },
+      "revId": "34597198a8917b452836a3ce613f1fd09686fff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "377cd47f_bd74a439",
+        "filename": "src/dawn/native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-04T21:00:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e98538f7_90216fe9",
       "range": {
         "startLine": 141,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b65e83b_06f5623f",
+        "filename": "src/dawn/native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-04T21:00:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "584ba790_63116e2e",
+      "range": {
+        "startLine": 144,
+        "startChar": 54,
+        "endLine": 144,
+        "endChar": 77
+      },
+      "revId": "34597198a8917b452836a3ce613f1fd09686fff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3aa6c77_7cc3db82",
@@ -100,6 +172,24 @@
       "writtenOn": "2022-03-04T06:24:16Z",
       "side": 1,
       "message": "seems like a good opportunity to make resolveAttachmentRefs into ityp::array",
+      "revId": "34597198a8917b452836a3ce613f1fd09686fff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb26e8a9_421a2ba4",
+        "filename": "src/dawn/native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-04T21:00:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3aa6c77_7cc3db82",
       "revId": "34597198a8917b452836a3ce613f1fd09686fff1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
