@@ -236,6 +236,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce17f825_874e44b2",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-04T05:59:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3fdb5f4c_3f8e2b91",
+      "range": {
+        "startLine": 667,
+        "startChar": 20,
+        "endLine": 667,
+        "endChar": 37
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12d71795_1fbc9eeb",
@@ -367,6 +391,30 @@
       "side": 1,
       "message": "We make sure the querySet is non-null in ValidateRenderPassDescriptor, I think the ASSERT is not needed here.",
       "parentUuid": "f468037a_9fed89a4",
+      "range": {
+        "startLine": 736,
+        "startChar": 20,
+        "endLine": 736,
+        "endChar": 38
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "023f734f_15c73acc",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-04T05:59:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "babbdf43_dfbbec77",
       "range": {
         "startLine": 736,
         "startChar": 20,
@@ -518,6 +566,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b14445e6_76a41a32",
+        "filename": "src/dawn/native/Commands.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-04T05:59:19Z",
+      "side": 1,
+      "message": "ah I see, makes sense to me that in Vulkan/D3D12 we might be missing some commands that were encoded as part of BeginRenderPass. Thanks for the explanation.",
+      "parentUuid": "dc4b08d1_22edbcf9",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 52
+      },
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "761c6b11_511b79be",
@@ -549,6 +621,24 @@
       "side": 1,
       "message": "For EndCmd, yes, we can encode the timestampWritesAtEnd immediately. But I don\u0027t want to resue the this-\u003eAPIWriteTimestamp() because I\u0027m thinking to hide it behind another extension. I will introudce another helper function just for encoding the wirteTimestamp cmd without validation.",
       "parentUuid": "761c6b11_511b79be",
+      "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c8667c2_692facf5",
+        "filename": "src/dawn/native/Commands.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-04T05:59:19Z",
+      "side": 1,
+      "message": "After your comment about BeginRenderPass adding additional commands - do you think we should have the same concern for EndPass? I could see it valuable to have the timestampWritesAtEnd inside the EndPassCmd now since EndPass could potentially encode some work as well.\nThis could happen if in https://github.com/gpuweb/gpuweb/issues/1988 we add storeOp present. The end of the render pass might do something do the color attachments before the final store.",
+      "parentUuid": "a2fec319_860196ae",
       "revId": "a2fbf0c6601868c287ff355102992b5e045d64d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

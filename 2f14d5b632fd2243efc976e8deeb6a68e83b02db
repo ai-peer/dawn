@@ -89,6 +89,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e5289e4_5e5d6f04",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-04T05:59:19Z",
+      "side": 1,
+      "message": "std::move",
+      "range": {
+        "startLine": 699,
+        "startChar": 61,
+        "endLine": 699,
+        "endChar": 81
+      },
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57498442_0841b0a0",
         "filename": "src/dawn/tests/unittests/validation/QueryValidationTests.cpp",
         "patchSetId": 3
