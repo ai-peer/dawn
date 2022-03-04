@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7744531_ba77656b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-04T06:24:16Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "34597198a8917b452836a3ce613f1fd09686fff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a1ff9e1_220bddfd",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-04T06:24:16Z",
+      "side": 1,
+      "message": "we have kMaxColorAttachmentsTyped, then don\u0027t need the cast",
+      "range": {
+        "startLine": 412,
+        "startChar": 75,
+        "endLine": 412,
+        "endChar": 95
+      },
+      "revId": "34597198a8917b452836a3ce613f1fd09686fff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e98538f7_90216fe9",
+        "filename": "src/dawn/native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-04T06:24:16Z",
+      "side": 1,
+      "message": "this one, we know from |attachmentCount|, so at this location we could just remember it instead of calling GetHighestBitIndexPlusOne. like we did previously at [1]",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 0
+      },
+      "revId": "34597198a8917b452836a3ce613f1fd09686fff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "584ba790_63116e2e",
+        "filename": "src/dawn/native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-04T06:24:16Z",
+      "side": 1,
+      "message": "seems like a good opportunity to make colorAttachmentRefs into ityp::array",
+      "range": {
+        "startLine": 144,
+        "startChar": 54,
+        "endLine": 144,
+        "endChar": 77
+      },
+      "revId": "34597198a8917b452836a3ce613f1fd09686fff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3aa6c77_7cc3db82",
+        "filename": "src/dawn/native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-04T06:24:16Z",
+      "side": 1,
+      "message": "seems like a good opportunity to make resolveAttachmentRefs into ityp::array",
+      "revId": "34597198a8917b452836a3ce613f1fd09686fff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

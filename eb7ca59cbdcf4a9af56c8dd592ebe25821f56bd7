@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "790bda63_594bdad1",
+        "filename": "src/dawn/native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-04T06:24:16Z",
+      "side": 0,
+      "message": "[1]",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 56
+      },
+      "revId": "eb7ca59cbdcf4a9af56c8dd592ebe25821f56bd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
