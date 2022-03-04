@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b08f6f0_6f6a6525",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-04T00:55:32Z",
+      "side": 1,
+      "message": "Oops, I saw your PR https://github.com/gpuweb/gpuweb/pull/2627\nI looked for a PR before but somehow missed it.",
+      "parentUuid": "dff0f58b_6b0780ca",
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b553c713_27b6b945",
