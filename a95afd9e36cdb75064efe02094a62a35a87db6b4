@@ -312,6 +312,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb5fa6d3_7f149e64",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-04T00:52:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06b429ed_0ced3a55",
+      "range": {
+        "startLine": 1352,
+        "startChar": 7,
+        "endLine": 1362,
+        "endChar": 89
+      },
+      "revId": "a95afd9e36cdb75064efe02094a62a35a87db6b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10a9a16c_e63ed818",
