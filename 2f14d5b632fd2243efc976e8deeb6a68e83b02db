@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5798714_20b008d2",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-04T09:40:00Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dff0f58b_6b0780ca",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 3
@@ -83,6 +100,24 @@
       "writtenOn": "2022-03-03T23:24:29Z",
       "side": 1,
       "message": "same",
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34eade91_27af8eaf",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-04T09:40:00Z",
+      "side": 1,
+      "message": "I don\u0027t think we need that here which is only useful on render pass. See [1]",
+      "parentUuid": "b553c713_27b6b945",
       "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
