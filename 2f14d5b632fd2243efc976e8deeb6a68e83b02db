@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9569cb16_77139922",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-04T14:41:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd944b86_5417fb4b",
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5798714_20b008d2",
@@ -122,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82784c5d_d6ba0886",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-04T14:41:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61037697_3ab50397",
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e5289e4_5e5d6f04",
@@ -135,6 +171,30 @@
       "writtenOn": "2022-03-04T05:59:19Z",
       "side": 1,
       "message": "std::move",
+      "range": {
+        "startLine": 699,
+        "startChar": 61,
+        "endLine": 699,
+        "endChar": 81
+      },
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "293524db_b3e68093",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-04T14:41:10Z",
+      "side": 1,
+      "message": "Forgot to commit this change.",
+      "parentUuid": "3e5289e4_5e5d6f04",
       "range": {
         "startLine": 699,
         "startChar": 61,
@@ -168,6 +228,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54c7cbf9_5583ddd0",
+        "filename": "src/dawn/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-04T14:41:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57498442_0841b0a0",
+      "range": {
+        "startLine": 327,
+        "startChar": 31,
+        "endLine": 327,
+        "endChar": 35
+      },
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da659838_e8e98f95",
@@ -181,6 +265,30 @@
       "writtenOn": "2022-03-03T23:24:29Z",
       "side": 1,
       "message": "nit: destoryed -\u003e destroyed",
+      "range": {
+        "startLine": 362,
+        "startChar": 37,
+        "endLine": 362,
+        "endChar": 46
+      },
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4daa882e_b6e60e87",
+        "filename": "src/dawn/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-04T14:41:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da659838_e8e98f95",
       "range": {
         "startLine": 362,
         "startChar": 37,
@@ -208,6 +316,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1354b0c_5fc817d3",
+        "filename": "src/dawn/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-04T14:41:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ac4eba6_0e75baad",
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04bd39f5_e4233288",
@@ -221,6 +347,30 @@
       "writtenOn": "2022-03-03T23:24:29Z",
       "side": 1,
       "message": "nit: destoryed -\u003e destroyed",
+      "range": {
+        "startLine": 459,
+        "startChar": 37,
+        "endLine": 459,
+        "endChar": 46
+      },
+      "revId": "2f14d5b632fd2243efc976e8deeb6a68e83b02db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "344997e8_59a9dbcc",
+        "filename": "src/dawn/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-04T14:41:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04bd39f5_e4233288",
       "range": {
         "startLine": 459,
         "startChar": 37,
