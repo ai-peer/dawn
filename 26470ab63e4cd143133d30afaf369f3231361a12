@@ -16,6 +16,69 @@
       "message": "Fully passed now",
       "revId": "26470ab63e4cd143133d30afaf369f3231361a12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c473959a_5c517990",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-04T23:48:13Z",
+      "side": 1,
+      "message": "LGTM - just a couple more nits. sorry didn\u0027t comment earlier",
+      "revId": "26470ab63e4cd143133d30afaf369f3231361a12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91f63dc8_f2ed2e60",
+        "filename": "src/dawn/common/ityp_bitset.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-04T23:48:13Z",
+      "side": 1,
+      "message": "nit: I think this should probably be outside of the namespace\n\nGetHighestBitIndexPlusOne(ityp::bitset) \ninstead of\nityp::GetHighestBitIndexPlusOne(bitset)",
+      "range": {
+        "startLine": 141,
+        "startChar": 10,
+        "endLine": 141,
+        "endChar": 35
+      },
+      "revId": "26470ab63e4cd143133d30afaf369f3231361a12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4890b057_67692f6b",
+        "filename": "src/dawn/common/ityp_bitset.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-04T23:48:13Z",
+      "side": 1,
+      "message": "nit: what about __builtin_clz if N \u003c\u003d 32?",
+      "range": {
+        "startLine": 176,
+        "startChar": 54,
+        "endLine": 176,
+        "endChar": 69
+      },
+      "revId": "26470ab63e4cd143133d30afaf369f3231361a12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
