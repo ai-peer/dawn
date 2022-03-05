@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "634191c4_9e78e9ee",
+        "filename": "src/dawn/common/ityp_bitset.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-05T00:32:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91f63dc8_f2ed2e60",
+      "range": {
+        "startLine": 141,
+        "startChar": 10,
+        "endLine": 141,
+        "endChar": 35
+      },
+      "revId": "26470ab63e4cd143133d30afaf369f3231361a12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4890b057_67692f6b",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-03-04T23:48:13Z",
       "side": 1,
       "message": "nit: what about __builtin_clz if N \u003c\u003d 32?",
+      "range": {
+        "startLine": 176,
+        "startChar": 54,
+        "endLine": 176,
+        "endChar": 69
+      },
+      "revId": "26470ab63e4cd143133d30afaf369f3231361a12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8542551_88fbd1cc",
+        "filename": "src/dawn/common/ityp_bitset.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-05T00:32:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4890b057_67692f6b",
       "range": {
         "startLine": 176,
         "startChar": 54,
