@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fba5d96d_75854b8c",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-07T23:27:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c5cfd14_2bd36761",
+      "revId": "ac19f59f19a3675cb3e97eddaea867cc35422ad3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a1321b2_1b6a230e",
@@ -83,6 +101,24 @@
       "writtenOn": "2022-03-07T22:22:46Z",
       "side": 1,
       "message": "I\u0027m not clear why the curly braces are needed here? Similarly, there\u0027s a mix of using {} and *Op::Undefined in this and other files that doesn\u0027t seem to have a clear pattern to it.",
+      "revId": "ac19f59f19a3675cb3e97eddaea867cc35422ad3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9de9eae1_594ee6fe",
+        "filename": "src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-07T23:27:57Z",
+      "side": 1,
+      "message": "made them consistent. no real reason",
+      "parentUuid": "8a1321b2_1b6a230e",
       "revId": "ac19f59f19a3675cb3e97eddaea867cc35422ad3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
