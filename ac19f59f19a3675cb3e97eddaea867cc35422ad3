@@ -16,6 +16,75 @@
       "message": "Brandon could you review again? I updated according to the latest spec.\n\nIt appears I\u0027ll need to make some CTS updates as well.",
       "revId": "ac19f59f19a3675cb3e97eddaea867cc35422ad3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48dcb4ff_0f7d1e69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-03-07T22:22:46Z",
+      "side": 1,
+      "message": "LGTM with a couple of nits",
+      "revId": "ac19f59f19a3675cb3e97eddaea867cc35422ad3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "502421b3_62dc6c6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-03-07T22:22:46Z",
+      "side": 1,
+      "message": "Gladly!",
+      "parentUuid": "fafbea4e_7d145435",
+      "revId": "ac19f59f19a3675cb3e97eddaea867cc35422ad3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c5cfd14_2bd36761",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-03-07T22:22:46Z",
+      "side": 1,
+      "message": "Pre-existing Nit: Can we change this to say \"Setting depthLoadOp and depthStoreOp...\"",
+      "revId": "ac19f59f19a3675cb3e97eddaea867cc35422ad3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a1321b2_1b6a230e",
+        "filename": "src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-03-07T22:22:46Z",
+      "side": 1,
+      "message": "I\u0027m not clear why the curly braces are needed here? Similarly, there\u0027s a mix of using {} and *Op::Undefined in this and other files that doesn\u0027t seem to have a clear pattern to it.",
+      "revId": "ac19f59f19a3675cb3e97eddaea867cc35422ad3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
