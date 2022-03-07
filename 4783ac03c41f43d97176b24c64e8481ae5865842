@@ -16,6 +16,46 @@
       "message": "PTAL, thanks!",
       "revId": "4783ac03c41f43d97176b24c64e8481ae5865842",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b35155f7_1cce420a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-07T18:06:18Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "4783ac03c41f43d97176b24c64e8481ae5865842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6db3617a_a8f07df1",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-07T18:06:18Z",
+      "side": 1,
+      "message": "can\u0027t we just use IsToggleEnabled(..) ?",
+      "range": {
+        "startLine": 208,
+        "startChar": 36,
+        "endLine": 208,
+        "endChar": 77
+      },
+      "revId": "4783ac03c41f43d97176b24c64e8481ae5865842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
