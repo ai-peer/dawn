@@ -89,11 +89,20 @@ namespace dawn::native::d3d12 {
         }
 
         void RecordWriteTimestampCmd(ID3D12GraphicsCommandList* commandList,
-                                     WriteTimestampCmd* cmd) {
-            QuerySet* querySet = ToBackend(cmd->querySet.Get());
-            ASSERT(D3D12QueryType(querySet->GetQueryType()) == D3D12_QUERY_TYPE_TIMESTAMP);
-            commandList->EndQuery(querySet->GetQueryHeap(), D3D12_QUERY_TYPE_TIMESTAMP,
-                                  cmd->queryIndex);
+                                     QuerySetBase* querySet,
+                                     uint32_t queryIndex) {
+            QuerySet* d3dQuerySet = ToBackend(querySet);
+            ASSERT(D3D12QueryType(d3dQuerySet->GetQueryType()) == D3D12_QUERY_TYPE_TIMESTAMP);
+            commandList->EndQuery(d3dQuerySet->GetQueryHeap(), D3D12_QUERY_TYPE_TIMESTAMP,
+                                  queryIndex);
+        }
+
+        void RecordTimestampWrites(ID3D12GraphicsCommandList* commandList,
+                                   const std::vector<TimestampWrite>& timestampWrites) {
+            for (const TimestampWrite& timestampWrite : timestampWrites) {
+                RecordWriteTimestampCmd(commandList, timestampWrite.querySet.Get(),
+                                        timestampWrite.queryIndex);
+            }
         }
 
         void RecordResolveQuerySetCmd(ID3D12GraphicsCommandList* commandList,
@@ -684,9 +693,13 @@ namespace dawn::native::d3d12 {
         while (mCommands.NextCommandId(&type)) {
             switch (type) {
                 case Command::BeginComputePass: {
-                    mCommands.NextCommand<BeginComputePassCmd>();
+                    BeginComputePassCmd* cmd = mCommands.NextCommand<BeginComputePassCmd>();
 
                     bindingTracker.SetInComputePass(true);
+
+                    // Write timestamps at the end of compute pass
+                    RecordTimestampWrites(commandContext->GetCommandList(), cmd->timestampWrites);
+
                     DAWN_TRY(RecordComputePass(
                         commandContext, &bindingTracker,
                         GetResourceUsages().computePasses[nextComputePassNumber]));
@@ -980,7 +993,7 @@ namespace dawn::native::d3d12 {
                 case Command::WriteTimestamp: {
                     WriteTimestampCmd* cmd = mCommands.NextCommand<WriteTimestampCmd>();
 
-                    RecordWriteTimestampCmd(commandList, cmd);
+                    RecordWriteTimestampCmd(commandList, cmd->querySet.Get(), cmd->queryIndex);
                     break;
                 }
 
@@ -1109,7 +1122,11 @@ namespace dawn::native::d3d12 {
                 }
 
                 case Command::EndComputePass: {
-                    mCommands.NextCommand<EndComputePassCmd>();
+                    EndComputePassCmd* cmd = mCommands.NextCommand<EndComputePassCmd>();
+
+                    // Write timestamps at the end of compute pass
+                    RecordTimestampWrites(commandContext->GetCommandList(), cmd->timestampWrites);
+
                     return {};
                 }
 
@@ -1180,7 +1197,7 @@ namespace dawn::native::d3d12 {
                 case Command::WriteTimestamp: {
                     WriteTimestampCmd* cmd = mCommands.NextCommand<WriteTimestampCmd>();
 
-                    RecordWriteTimestampCmd(commandList, cmd);
+                    RecordWriteTimestampCmd(commandList, cmd->querySet.Get(), cmd->queryIndex);
                     break;
                 }
 
@@ -1394,6 +1411,9 @@ namespace dawn::native::d3d12 {
 
         ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
 
+        // Write timestamps at the beginning of render pass
+        RecordTimestampWrites(commandList, renderPass->timestampWrites);
+
         // Set up default dynamic state
         {
             uint32_t width = renderPass->width;
@@ -1575,7 +1595,11 @@ namespace dawn::native::d3d12 {
         while (mCommands.NextCommandId(&type)) {
             switch (type) {
                 case Command::EndRenderPass: {
-                    mCommands.NextCommand<EndRenderPassCmd>();
+                    EndRenderPassCmd* cmd = mCommands.NextCommand<EndRenderPassCmd>();
+
+                    // Write timestamps at the end of render pass
+                    RecordTimestampWrites(commandContext->GetCommandList(), cmd->timestampWrites);
+
                     if (useRenderPass) {
                         commandContext->GetCommandList4()->EndRenderPass();
                     } else if (renderPass->attachmentState->GetSampleCount() > 1) {
@@ -1661,7 +1685,7 @@ namespace dawn::native::d3d12 {
                 case Command::WriteTimestamp: {
                     WriteTimestampCmd* cmd = mCommands.NextCommand<WriteTimestampCmd>();
 
-                    RecordWriteTimestampCmd(commandList, cmd);
+                    RecordWriteTimestampCmd(commandList, cmd->querySet.Get(), cmd->queryIndex);
                     break;
                 }
 

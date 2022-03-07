@@ -383,12 +383,39 @@ namespace dawn::native::vulkan {
 
         void RecordWriteTimestampCmd(CommandRecordingContext* recordingContext,
                                      Device* device,
-                                     WriteTimestampCmd* cmd) {
+                                     QuerySetBase* querySet,
+                                     uint32_t queryIndex,
+                                     bool isComputePass) {
             VkCommandBuffer commands = recordingContext->commandBuffer;
-            QuerySet* querySet = ToBackend(cmd->querySet.Get());
+
+            // The query must be reset between uses, and the reset command must be called outside
+            // render pass.
+            if (isComputePass) {
+                device->fn.CmdResetQueryPool(commands, ToBackend(querySet)->GetHandle(), queryIndex,
+                                             1);
+            }
 
             device->fn.CmdWriteTimestamp(commands, VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
-                                         querySet->GetHandle(), cmd->queryIndex);
+                                         ToBackend(querySet)->GetHandle(), queryIndex);
+        }
+
+        void RecordTimestampWritesOnComputePass(
+            CommandRecordingContext* recordingContext,
+            Device* device,
+            const std::vector<TimestampWrite>& timestampWrites) {
+            for (const TimestampWrite& timestampWrite : timestampWrites) {
+                RecordWriteTimestampCmd(recordingContext, device, timestampWrite.querySet.Get(),
+                                        timestampWrite.queryIndex, true);
+            }
+        }
+
+        void RecordTimestampWritesOnRenderPass(CommandRecordingContext* recordingContext,
+                                               Device* device,
+                                               const std::vector<TimestampWrite>& timestampWrites) {
+            for (const TimestampWrite& timestampWrite : timestampWrites) {
+                RecordWriteTimestampCmd(recordingContext, device, timestampWrite.querySet.Get(),
+                                        timestampWrite.queryIndex, false);
+            }
         }
 
         void RecordResolveQuerySetCmd(VkCommandBuffer commands,
@@ -749,7 +776,11 @@ namespace dawn::native::vulkan {
                 }
 
                 case Command::BeginComputePass: {
-                    mCommands.NextCommand<BeginComputePassCmd>();
+                    BeginComputePassCmd* cmd = mCommands.NextCommand<BeginComputePassCmd>();
+
+                    // Write timestamps at the beginning of compute pass
+                    RecordTimestampWritesOnComputePass(recordingContext, device,
+                                                       cmd->timestampWrites);
 
                     DAWN_TRY(RecordComputePass(
                         recordingContext,
@@ -795,11 +826,8 @@ namespace dawn::native::vulkan {
                 case Command::WriteTimestamp: {
                     WriteTimestampCmd* cmd = mCommands.NextCommand<WriteTimestampCmd>();
 
-                    // The query must be reset between uses.
-                    device->fn.CmdResetQueryPool(commands, ToBackend(cmd->querySet)->GetHandle(),
-                                                 cmd->queryIndex, 1);
-
-                    RecordWriteTimestampCmd(recordingContext, device, cmd);
+                    RecordWriteTimestampCmd(recordingContext, device, cmd->querySet.Get(),
+                                            cmd->queryIndex, true);
                     break;
                 }
 
@@ -907,7 +935,12 @@ namespace dawn::native::vulkan {
         while (mCommands.NextCommandId(&type)) {
             switch (type) {
                 case Command::EndComputePass: {
-                    mCommands.NextCommand<EndComputePassCmd>();
+                    EndComputePassCmd* cmd = mCommands.NextCommand<EndComputePassCmd>();
+
+                    // Write timestamps at the end of compute pass
+                    RecordTimestampWritesOnComputePass(recordingContext, device,
+                                                       cmd->timestampWrites);
+
                     return {};
                 }
 
@@ -1015,11 +1048,8 @@ namespace dawn::native::vulkan {
                 case Command::WriteTimestamp: {
                     WriteTimestampCmd* cmd = mCommands.NextCommand<WriteTimestampCmd>();
 
-                    // The query must be reset between uses.
-                    device->fn.CmdResetQueryPool(commands, ToBackend(cmd->querySet)->GetHandle(),
-                                                 cmd->queryIndex, 1);
-
-                    RecordWriteTimestampCmd(recordingContext, device, cmd);
+                    RecordWriteTimestampCmd(recordingContext, device, cmd->querySet.Get(),
+                                            cmd->queryIndex, true);
                     break;
                 }
 
@@ -1038,6 +1068,9 @@ namespace dawn::native::vulkan {
         VkCommandBuffer commands = recordingContext->commandBuffer;
 
         DAWN_TRY(RecordBeginRenderPass(recordingContext, device, renderPassCmd));
+
+        // Write timestamps at the beginning of render pass
+        RecordTimestampWritesOnRenderPass(recordingContext, device, renderPassCmd->timestampWrites);
 
         // Set the default value for the dynamic state
         {
@@ -1223,7 +1256,12 @@ namespace dawn::native::vulkan {
         while (mCommands.NextCommandId(&type)) {
             switch (type) {
                 case Command::EndRenderPass: {
-                    mCommands.NextCommand<EndRenderPassCmd>();
+                    EndRenderPassCmd* cmd = mCommands.NextCommand<EndRenderPassCmd>();
+
+                    // Write timestamps at the end of render pass
+                    RecordTimestampWritesOnRenderPass(recordingContext, device,
+                                                      cmd->timestampWrites);
+
                     device->fn.CmdEndRenderPass(commands);
                     return {};
                 }
@@ -1311,7 +1349,8 @@ namespace dawn::native::vulkan {
                 case Command::WriteTimestamp: {
                     WriteTimestampCmd* cmd = mCommands.NextCommand<WriteTimestampCmd>();
 
-                    RecordWriteTimestampCmd(recordingContext, device, cmd);
+                    RecordWriteTimestampCmd(recordingContext, device, cmd->querySet.Get(),
+                                            cmd->queryIndex, false);
                     break;
                 }
 
