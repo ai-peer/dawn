@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c665c5aa_21d805cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-07T18:42:26Z",
+      "side": 1,
+      "message": "Found out at https://github.com/emscripten-core/emscripten/pull/16429#discussion_r820011903\n\nWe also need update upstream webgpu-header",
+      "revId": "fd99593322b30520fa7b82e11dd17703d7f5d68c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
