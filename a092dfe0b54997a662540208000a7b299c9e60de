@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f38f915_dcd3e0e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-08T18:11:00Z",
+      "side": 1,
+      "message": "LGTM - one more comment",
+      "revId": "a092dfe0b54997a662540208000a7b299c9e60de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ccacf31_54d4cfbb",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-08T18:11:00Z",
+      "side": 1,
+      "message": "I think we can remove tags here. We agreed to have this upstream in https://github.com/webgpu-native/webgpu-headers/pull/137\n\nSame for deviceEnumerateFeatures and deviceHasFeature",
+      "revId": "a092dfe0b54997a662540208000a7b299c9e60de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
