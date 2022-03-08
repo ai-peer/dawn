@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a737b5dd_a12d7e31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-08T19:23:20Z",
+      "side": 1,
+      "message": "Renamed SurfaceDescriptorFromXlibWindow -\u003e SurfaceDescriptorFromXlib to sync up with upstream webgpu-headers",
+      "revId": "7ef1e857d182484eedc4cf72444c9d356a3a065b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
