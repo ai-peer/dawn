@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "654a0007_157fad63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-08T00:09:02Z",
+      "side": 1,
+      "message": "Regards to https://github.com/webgpu-native/webgpu-headers/pull/150",
+      "revId": "da83c4f540eb79917551050c574b999fc0a775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
