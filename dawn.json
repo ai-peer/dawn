@@ -1345,7 +1345,7 @@
             {"value": 1001, "name": "dawn shader float 16", "tags": ["dawn"]},
             {"value": 1002, "name": "dawn internal usages", "tags": ["dawn"]},
             {"value": 1003, "name": "dawn multi planar formats", "tags": ["dawn"]},
-            {"value": 1004, "name": "dawn native", "tags": ["dawn", "native"]}
+            {"value": 1004, "name": "dawn native", "tags": ["dawn"]}
         ]
     },
     "filter mode": {
@@ -2306,6 +2306,14 @@
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true}
         ]
     },
+    "surface descriptor from android native window": {
+        "category": "structure",
+        "chained": "in",
+        "tags": ["native"],
+        "members": [
+            {"name": "window", "type": "void", "annotation": "*"}
+        ]
+    },
     "surface descriptor from canvas HTML selector": {
         "category": "structure",
         "chained": "in",
@@ -2337,6 +2345,15 @@
         "members": [
             {"name": "display", "type": "void", "annotation": "*"},
             {"name": "window", "type": "uint32_t"}
+        ]
+    },
+    "surface descriptor from wayland surface": {
+        "category": "structure",
+        "chained": "in",
+        "tags": ["native"],
+        "members": [
+            {"name": "display", "type": "void", "annotation": "*"},
+            {"name": "surface", "type": "void", "annotation": "*"}
         ]
     },
     "surface descriptor from windows core window": {
@@ -2401,6 +2418,8 @@
             {"value": 9, "name": "external texture binding entry", "tags": ["dawn"]},
             {"value": 10, "name": "external texture binding layout", "tags": ["dawn"]},
             {"value": 11, "name": "surface descriptor from windows swap chain panel", "tags": ["dawn"]},
+            {"value": 12, "name": "surface descriptor from android native window", "tags": ["native"]},
+            {"value": 13, "name": "surface descriptor from wayland surface", "tags": ["native"]},
             {"value": 1000, "name": "dawn texture internal usage descriptor", "tags": ["dawn"]},
             {"value": 1001, "name": "primitive depth clamping state", "tags": ["dawn", "emscripten"]},
             {"value": 1002, "name": "dawn toggles device descriptor", "tags": ["dawn", "native"]},
