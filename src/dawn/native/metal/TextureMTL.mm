@@ -90,7 +90,12 @@ namespace dawn::native::metal {
                 return true;
             }
 
-            if (texture->GetArrayLayers() != textureViewDescriptor->arrayLayerCount) {
+            if (texture->GetArrayLayers() != textureViewDescriptor->arrayLayerCount ||
+                (texture->GetArrayLayers() == 1 &&
+                 textureViewDescriptor->dimension != wgpu::TextureViewDimension::e2D)) {
+                // If the view has a different number of array layers, we need a new view.
+                // And, if the original texture has one array layer, it is allocated as
+                // MTLTextureType2D. We need a new view if a non-2D view is requested.
                 return true;
             }
 
