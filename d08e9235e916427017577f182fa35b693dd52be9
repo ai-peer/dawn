@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be5f04f0_4d00673f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-09T17:32:32Z",
+      "side": 1,
+      "message": "Rename it back as suggested by https://github.com/webgpu-native/webgpu-headers/pull/150#discussion_r822311773\nSorry for the back and forth",
+      "revId": "d08e9235e916427017577f182fa35b693dd52be9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
