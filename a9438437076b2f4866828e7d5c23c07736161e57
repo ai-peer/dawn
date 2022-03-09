@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fed0e44_0473633a",
+        "filename": "src/dawn/native/CacheKeySerializer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-09T23:34:56Z",
+      "side": 1,
+      "message": "Changed it entirely, PTAL. Note that child CL is *NOT* ready yet lol...",
+      "parentUuid": "1c795f88_209acef9",
+      "range": {
+        "startLine": 27,
+        "startChar": 7,
+        "endLine": 31,
+        "endChar": 69
+      },
+      "revId": "a9438437076b2f4866828e7d5c23c07736161e57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e52f98c_eeb7bb2a",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a515cdb_02cb5080",
+        "filename": "src/dawn/native/CacheKeySerializer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-09T23:34:56Z",
+      "side": 1,
+      "message": "n/a anymore",
+      "parentUuid": "9e52f98c_eeb7bb2a",
+      "range": {
+        "startLine": 91,
+        "startChar": 33,
+        "endLine": 91,
+        "endChar": 37
+      },
+      "revId": "a9438437076b2f4866828e7d5c23c07736161e57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e137d5f_32ecaa88",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-03-09T16:43:38Z",
       "side": 1,
       "message": "Using has_alt_flag and %s vs #%s requires a weird specific knowledge that in Dawn, we\u0027re using #%s for cache key serialization, and %s for other string formatting.\n\nWhat about a solution where we define AbslFormatConvert for wrapper struct CacheKeyInput\u003cT\u003e to call something like CacheKeyFormat? I think it would be more clear, and we wouldn\u0027t have need for an \"Unexpected\" branch.\n\nhttps://godbolt.org/z/c3s7Wfo95",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 5
+      },
+      "revId": "a9438437076b2f4866828e7d5c23c07736161e57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a05b4ba1_7f563746",
+        "filename": "src/dawn/tests/unittests/native/CacheKeySerializerTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-09T23:34:56Z",
+      "side": 1,
+      "message": "n/a anymore",
+      "parentUuid": "6e137d5f_32ecaa88",
       "range": {
         "startLine": 45,
         "startChar": 4,
