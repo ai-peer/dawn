@@ -52,6 +52,8 @@ target_sources(dawn_native PRIVATE
     "Buffer.h"
     "CachedObject.cpp"
     "CachedObject.h"
+    "CacheKeySerializer.cpp",
+    "CacheKeySerializer.h",
     "CallbackTaskManager.cpp"
     "CallbackTaskManager.h"
     "CommandAllocator.cpp"
