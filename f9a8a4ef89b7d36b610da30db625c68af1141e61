@@ -135,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d94774a_5cd2d76c",
+        "filename": "src/dawn/tests/unittests/validation/VertexBufferValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-10T23:05:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "364d5d61_9d61bdbe",
+      "range": {
+        "startLine": 376,
+        "startChar": 9,
+        "endLine": 376,
+        "endChar": 13
+      },
+      "revId": "f9a8a4ef89b7d36b610da30db625c68af1141e61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a5dd3c3_dfca9580",
@@ -158,6 +182,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "012edc7a_4c9bfe48",
+        "filename": "src/dawn/tests/unittests/validation/VertexBufferValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-10T23:05:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a5dd3c3_dfca9580",
+      "range": {
+        "startLine": 507,
+        "startChar": 9,
+        "endLine": 507,
+        "endChar": 13
+      },
+      "revId": "f9a8a4ef89b7d36b610da30db625c68af1141e61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36a8f9c5_5f6d4b77",
@@ -171,6 +219,30 @@
       "writtenOn": "2022-03-10T22:57:54Z",
       "side": 1,
       "message": "nit. remove",
+      "range": {
+        "startLine": 638,
+        "startChar": 9,
+        "endLine": 638,
+        "endChar": 13
+      },
+      "revId": "f9a8a4ef89b7d36b610da30db625c68af1141e61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d1f0383_11e6af32",
+        "filename": "src/dawn/tests/unittests/validation/VertexBufferValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-10T23:05:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36a8f9c5_5f6d4b77",
       "range": {
         "startLine": 638,
         "startChar": 9,
