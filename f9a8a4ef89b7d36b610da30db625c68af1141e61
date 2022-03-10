@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47f44394_c81b96ee",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-10T22:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8e02f8d_9fdb7916",
+      "range": {
+        "startLine": 121,
+        "startChar": 91,
+        "endLine": 121,
+        "endChar": 96
+      },
+      "revId": "f9a8a4ef89b7d36b610da30db625c68af1141e61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb387a1d_eecd714d",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-03-10T22:01:04Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 166,
+        "startChar": 91,
+        "endLine": 166,
+        "endChar": 96
+      },
+      "revId": "f9a8a4ef89b7d36b610da30db625c68af1141e61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff212ccc_147c1cba",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-10T22:48:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb387a1d_eecd714d",
       "range": {
         "startLine": 166,
         "startChar": 91,
