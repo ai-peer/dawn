@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90b9f0da_0256a4d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-10T00:01:53Z",
+      "side": 1,
+      "message": "Patch 1: learning template syntax",
+      "revId": "9afab2bb9ab12b11ddad3f49291041ddb150a383",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5bf84d1_211bf3f9",
+        "filename": "src/dawn/native/CacheKeySerializer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-10T00:01:53Z",
+      "side": 1,
+      "message": "If it\u0027s only used for cache key, maybe \"{}\" is not needed? And maybe we can just leave trailing comma?\n-\u003e \"0:a,1:b,2:c,\"\nI am actually not sure about how readability and perf should balance here.",
+      "revId": "9afab2bb9ab12b11ddad3f49291041ddb150a383",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
