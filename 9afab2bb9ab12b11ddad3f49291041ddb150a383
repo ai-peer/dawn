@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21e591b1_590af5a5",
+        "filename": "src/dawn/native/CacheKeySerializer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-10T23:33:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "187d7750_983d12fe",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 34,
+        "endChar": 61
+      },
+      "revId": "9afab2bb9ab12b11ddad3f49291041ddb150a383",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d22ee879_8a05bb54",
@@ -71,6 +95,24 @@
       "writtenOn": "2022-03-10T00:17:23Z",
       "side": 1,
       "message": "nit: \"CacheKeySerializer\" is a noun, when I think it should be a verb because it is performing an action. Maybe \"MakeCacheKey\".",
+      "revId": "9afab2bb9ab12b11ddad3f49291041ddb150a383",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bc88e57_99f61863",
+        "filename": "src/dawn/native/CacheKeySerializer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-10T23:33:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d22ee879_8a05bb54",
       "revId": "9afab2bb9ab12b11ddad3f49291041ddb150a383",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -121,6 +163,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1df2a7da_164ba582",
+        "filename": "src/dawn/native/CacheKeySerializer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-10T23:33:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77f1c2c8_2a5174ac",
+      "range": {
+        "startLine": 45,
+        "startChar": 13,
+        "endLine": 45,
+        "endChar": 22
+      },
+      "revId": "9afab2bb9ab12b11ddad3f49291041ddb150a383",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98790404_34c773b9",
+        "filename": "src/dawn/native/CacheKeySerializer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-10T23:33:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef1268c8_1f3d2790",
+      "range": {
+        "startLine": 45,
+        "startChar": 29,
+        "endLine": 45,
+        "endChar": 33
+      },
+      "revId": "9afab2bb9ab12b11ddad3f49291041ddb150a383",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5bf84d1_211bf3f9",
@@ -134,6 +224,24 @@
       "writtenOn": "2022-03-10T00:01:53Z",
       "side": 1,
       "message": "If it\u0027s only used for cache key, maybe \"{}\" is not needed? And maybe we can just leave trailing comma?\n-\u003e \"0:a,1:b,2:c,\"\nI am actually not sure about how readability and perf should balance here.",
+      "revId": "9afab2bb9ab12b11ddad3f49291041ddb150a383",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ab846d9_7a87f347",
+        "filename": "src/dawn/native/CacheKeySerializer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-10T23:33:09Z",
+      "side": 1,
+      "message": "I think the {} might be necessary for nested types, but the comma logic could be unnecessary. Might leave it for now since it\u0027s easier to read/test, and we can remove it later on if perf is an issue.",
+      "parentUuid": "c5bf84d1_211bf3f9",
       "revId": "9afab2bb9ab12b11ddad3f49291041ddb150a383",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
