@@ -90,6 +90,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d220fa0e_1c44f070",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-03-11T17:11:43Z",
+      "side": 1,
+      "message": "I\u0027ve done some analysis on the impact of not doing this CL.\n\nI just ran a WebGPU page with 3 ExternalTexture-based videos going and analyzed the D3D12 heap contents at multiple points before and after.\n\nI found that without this CL:\n- Each external texture costs an extra 64KB, always.\n- In the worst case, the allocation manager would not have any free memory available and have to create an additional 4MB heap to store the unnecessary 64KB allocation.\n\nI did not find a significant CPU cost to creating the additional texture.\n\nThere\u0027s certainly an inefficiency to creating dummy textures, but given the very short lifetime of an external texture I do not consider it particularly impactful. If the lifetime of an external texture was increased (which I believe is still a possibility) the impact of unnecessary dummy textures would increase.",
+      "parentUuid": "ed901739_653a414e",
+      "revId": "c5593133f0635f4a955222b68e924e50dd92e928",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "818df3c9_b853592f",
