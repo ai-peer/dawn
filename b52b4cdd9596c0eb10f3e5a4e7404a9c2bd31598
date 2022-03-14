@@ -16,6 +16,46 @@
       "message": "Renamed the files a bit. Lmk if there\u0027s any issues, otherwise I will submit this later today.",
       "revId": "b52b4cdd9596c0eb10f3e5a4e7404a9c2bd31598",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48a1a82d_32cea6cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-14T17:57:40Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "b52b4cdd9596c0eb10f3e5a4e7404a9c2bd31598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "855f76aa_7243f40f",
+        "filename": "src/dawn/tests/unittests/native/CacheKeyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-14T17:57:40Z",
+      "side": 1,
+      "message": "if the string were:\n\nstri\\\",2:\\\"ng1\n\nthen this looks like:\n\n1:\\\"stri\\\",2:\\\"ng1\\\"\n\nwhich could be ambiguous\n\nwe\u0027re not serializing unknown user input (yet) but we do need to be careful in the upcoming CLs. It\u0027ll happen if/when we serialize WGSL input.\n\nIt is fine as long as there is something else that tells you how long a string is supposed to be. It could be another numerical field before the string field - or we could change the format to prefix the string with its length.\n\n{len0:7,0:\\\"string0\\\",len1:7,1:\\\"string1\\\"}\n{0:7\\\"string0\\\",1:7\\\"string1\\\"}\n\nI still kinda think this might become a binary format in the future in which case the length will also have to become part of the format.",
+      "range": {
+        "startLine": 71,
+        "startChar": 83,
+        "endLine": 71,
+        "endChar": 94
+      },
+      "revId": "b52b4cdd9596c0eb10f3e5a4e7404a9c2bd31598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
