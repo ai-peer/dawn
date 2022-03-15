@@ -22,7 +22,8 @@
 
 namespace dawn::native {
 
-    using CacheKey = std::vector<uint8_t>;
+    // Inherit instead of using statement to allow for class specialization.
+    class CacheKey : public std::vector<uint8_t> {};
 
     // Overridable serializer struct that should be implemented for cache key serializable
     // types/classes.
