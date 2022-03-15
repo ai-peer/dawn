@@ -20,6 +20,8 @@ group("samples") {
     ":CHelloTriangle",
     ":ComputeBoids",
     ":CppHelloTriangle",
+    ":GpuTimeStamp",
+    ":GpuTimeStampBatchResolve",
     ":ManualSwapChainTest",
   ]
 }
@@ -70,6 +72,14 @@ sample("ComputeBoids") {
 
 sample("Animometer") {
   sources = [ "Animometer.cpp" ]
+}
+
+sample("GpuTimeStamp") {
+  sources = [ "GpuTimeStamp.cpp" ]
+}
+
+sample("GpuTimeStampBatchResolve") {
+  sources = [ "GpuTimeStampBatchResolve.cpp" ]
 }
 
 sample("ManualSwapChainTest") {
