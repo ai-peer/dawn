@@ -75,8 +75,10 @@ namespace dawn::native {
         // [0, kMaxBindGroups]
         BindGroupIndex GroupsInheritUpTo(const PipelineLayoutBase* other) const;
 
-        // Functions necessary for the unordered_set<PipelineLayoutBase*>-based cache.
+        // CachedObject functions. Hash is necessary for unordered_set<PipelineLayoutBase*>-based
+        // cache.
         size_t ComputeContentHash() override;
+        CacheKey ComputeCacheKeyBase() override;
 
         struct EqualityFunc {
             bool operator()(const PipelineLayoutBase* a, const PipelineLayoutBase* b) const;
