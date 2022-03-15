@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e7b6a70_cd9fef1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-15T07:37:11Z",
+      "side": 1,
+      "message": "After some chatting with Austin, we changed the way that the cache keys were to be serialized entirely. The infra in this CL is still useful for further pretty printing, so I went ahead and fixed up the CL for just that purpose. PTAL!",
+      "revId": "1ce8ec20d28452592ffe17b97c20fc140d3237b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

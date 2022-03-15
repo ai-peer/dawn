@@ -54,6 +54,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9c562135_453446ab",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-15T07:37:11Z",
+      "side": 1,
+      "message": "Possibly? But I will defer to adding that when we have a use case since the current serializable structs don\u0027t have any floats yet.",
+      "parentUuid": "4aa460c6_55f6561f",
+      "revId": "782012be6136080412048c7adcd10202adac9e38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b743c1f4_36757972",
         "filename": "generator/templates/dawn/native/api_absl_format.h",
         "patchSetId": 6
