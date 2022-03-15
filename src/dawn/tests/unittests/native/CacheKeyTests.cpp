@@ -23,6 +23,7 @@
 
 #include "dawn/native/BindGroupLayout.h"
 #include "dawn/native/CacheKey.h"
+#include "dawn/native/PipelineLayout.h"
 #include "dawn/native/utils/WGPUHelpers.h"
 
 namespace dawn::native {
@@ -340,6 +341,45 @@ namespace dawn::native {
                         ]
                     })"));
             }
+        }
+
+        TEST_F(CacheKeyDawnNativeTests, PipelineLayouts) {
+            Ref<BindGroupLayoutBase> bgl0;
+            DAWN_ASSERT_AND_ASSIGN(
+                bgl0, utils::MakeBindGroupLayout(
+                          dawn::native::FromAPI(device.Get()),
+                          {{0, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform}}));
+            Ref<BindGroupLayoutBase> bgl1;
+            DAWN_ASSERT_AND_ASSIGN(
+                bgl1, utils::MakeBindGroupLayout(
+                          dawn::native::FromAPI(device.Get()),
+                          {{1, wgpu::ShaderStage::Fragment, wgpu::SamplerBindingType::Filtering}}));
+            Ref<PipelineLayoutBase> pipelineLayout;
+            DAWN_ASSERT_AND_ASSIGN(pipelineLayout,
+                                   utils::MakePipelineLayout(dawn::native::FromAPI(device.Get()),
+                                                             {bgl0.Get(), bgl1.Get()}));
+            EXPECT_THAT(pipelineLayout->GetCacheKey(), CacheKeyEq(R"(
+                    { 0: { 0:0,
+                           1:[ { 0:0,
+                                 1:1,
+                                 2:0,
+                                 3:{0:1,1:0,2:0},
+                                 4:{0:0},
+                                 5:{0:0,1:0,2:0},
+                                 6:{0:0,1:0,2:0} },
+                             ]
+                         },
+                      1: { 0:0,
+                           1:[ { 0:1,
+                                 1:2,
+                                 2:1,
+                                 3:{0:0,1:0,2:0},
+                                 4:{0:1},
+                                 5:{0:0,1:0,2:0},
+                                 6:{0:0,1:0,2:0} },
+                             ]
+                         },
+                    })"));
         }
 
     }  // namespace
