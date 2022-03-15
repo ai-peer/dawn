@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_CACHED_OBJECT_H_
 #define DAWNNATIVE_CACHED_OBJECT_H_
 
+#include "dawn/native/CacheKey.h"
 #include "dawn/native/Forward.h"
 
 #include <cstddef>
@@ -38,13 +39,12 @@ namespace dawn::native {
         size_t GetContentHash() const;
         void SetContentHash(size_t contentHash);
 
-        // Two versions of GetCacheKey, when passed a device, prepends the stored cache
-        // key base with device and adapter information. When called without passing a
-        // device, returns the stored cache key base. This is useful when the instance
-        // is a member to a parent class.
-        const std::string& GetCacheKey() const;
-        std::string GetCacheKey(DeviceBase* device) const;
-        void SetCacheKey(const std::string& cacheKey);
+        // Two versions of GetCacheKey, when passed a device, prepends the stored cache key base
+        // with device and adapter information. When called without passing a device, computes the
+        // key if necessary and returns the saved result. This is useful when the instance is a
+        // member to a parent class.
+        const CacheKey& GetCacheKey();
+        CacheKey GetCacheKey(DeviceBase* device);
 
       private:
         friend class DeviceBase;
@@ -56,11 +56,11 @@ namespace dawn::native {
         virtual size_t ComputeContentHash() = 0;
 
         // Not all classes implement cache key computation, so by default we assert.
-        virtual std::string ComputeCacheKeyBase() const;
+        virtual CacheKey ComputeCacheKeyBase() const;
 
         size_t mContentHash = 0;
         bool mIsContentHashInitialized = false;
-        std::string mCacheKeyBase = "";
+        CacheKey mCacheKeyBase;
         bool mIsCacheKeyBaseInitialized = false;
     };
 
