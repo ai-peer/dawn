@@ -232,6 +232,47 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9da1765_a426357d",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-15T13:47:33Z",
+      "side": 1,
+      "message": "So it seems we can just support this feature unconditionally for now?",
+      "parentUuid": "3165c6aa_c6c01136",
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbc007f7_a21626c2",
+        "filename": "src/dawn/native/metal/TextureMTL.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-15T13:47:33Z",
+      "side": 1,
+      "message": "nit: We have NSRef for this.",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 80,
+        "endChar": 20
+      },
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "602cc082_ca18d2e6",
@@ -263,6 +304,23 @@
       "side": 1,
       "message": "Agree. It seems current path always transfer 0 for plane param.",
       "parentUuid": "602cc082_ca18d2e6",
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fac999c_6b2eeca0",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-15T13:47:33Z",
+      "side": 1,
+      "message": "don\u0027t we leak this texture at the moment?",
       "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
