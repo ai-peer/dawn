@@ -54,7 +54,7 @@ namespace dawn::native {
         return GetCacheKey();
     }
 
-    CacheKey CachedObject::ComputeCacheKeyBase() const {
+    CacheKey CachedObject::ComputeCacheKeyBase() {
         // This implementation should never be called. Only overrides should be called.
         UNREACHABLE();
     }
