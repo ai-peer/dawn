@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5ef9ab4_9124c34b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-15T13:16:52Z",
+      "side": 1,
+      "message": "Abandoning in favor of https://dawn-review.googlesource.com/c/dawn/+/68280 that integrated Michael\u0027s fix.",
+      "revId": "f9d0b26b17695bc3d901c66cb1451fae3c8043f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b74b8199_1adb1d5b",
