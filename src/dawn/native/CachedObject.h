@@ -56,7 +56,7 @@ namespace dawn::native {
         virtual size_t ComputeContentHash() = 0;
 
         // Not all classes implement cache key computation, so by default we assert.
-        virtual CacheKey ComputeCacheKeyBase() const;
+        virtual CacheKey ComputeCacheKeyBase();
 
         size_t mContentHash = 0;
         bool mIsContentHashInitialized = false;
