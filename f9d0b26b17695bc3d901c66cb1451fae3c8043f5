@@ -145,5 +145,38 @@
       "revId": "f9d0b26b17695bc3d901c66cb1451fae3c8043f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
+  ],
+  "submitRequirementResults": [
+    {
+      "submitRequirement": {
+        "name": "Code-Review",
+        "description": {
+          "value": "At least one maximum vote for label \u0027Code-Review\u0027 is required"
+        },
+        "applicabilityExpression": {},
+        "submittabilityExpression": {
+          "expressionString": "label:Code-Review\u003dMAX,user\u003dnon_uploader AND -label:Code-Review\u003dMIN"
+        },
+        "overrideExpression": {
+          "value": {
+            "expressionString": "label:Bot-Commit\u003d+1"
+          }
+        },
+        "allowOverrideInChildProjects": true
+      },
+      "applicabilityExpressionResult": {},
+      "submittabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"label:Code-Review=MAX,user=non_uploader AND -label:Code-Review=MIN"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Code-Review=MAX,user=non_uploader","label:Code-Review=MIN"]}
+      },
+      "overrideExpressionResult": {
+        "value": {"expression":{"expressionString":"label:Bot-Commit=+1"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Bot-Commit=+1"]}
+      },
+      "patchSetCommitId": "f9d0b26b17695bc3d901c66cb1451fae3c8043f5",
+      "legacy": {
+        "value": false
+      },
+      "forced": {},
+      "hidden": {}
+    }
   ]
 }
