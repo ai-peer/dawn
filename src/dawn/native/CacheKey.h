@@ -22,7 +22,8 @@
 
 namespace dawn::native {
 
-    using CacheKey = std::vector<uint8_t>;
+    // Inherit instead of using statement to allow for class specialization.
+    class CacheKey : public std::vector<uint8_t> {};
 
     // Forwarding template called in details to forward serialization for overloaded types.
     // This function should NOT be called by external users, but cannot live inside the
@@ -40,6 +41,10 @@ namespace dawn::native {
 #endif
         SerializeInto(key, t);
     }
+
+    // Explicitly forward declare the SerializeInto overload for CacheKey's since it is used
+    // for nested data structure often.
+    void SerializeInto(CacheKey* key, const CacheKey&);
 
     namespace detail {
 

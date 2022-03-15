@@ -259,6 +259,7 @@
     "buffer binding layout": {
         "category": "structure",
         "extensible": "in",
+        "cachekey": true,
         "strformat": true,
         "members": [
             {"name": "type", "type": "buffer binding type", "default": "undefined"},
@@ -279,6 +280,7 @@
     "sampler binding layout": {
         "category": "structure",
         "extensible": "in",
+        "cachekey": true,
         "strformat": true,
         "members": [
             {"name": "type", "type": "sampler binding type", "default": "undefined"}
@@ -299,6 +301,7 @@
     "texture binding layout": {
         "category": "structure",
         "extensible": "in",
+        "cachekey": true,
         "strformat": true,
         "members": [
             {"name": "sample type", "type": "texture sample type", "default": "undefined"},
@@ -333,6 +336,7 @@
     "storage texture binding layout": {
         "category": "structure",
         "extensible": "in",
+        "cachekey": true,
         "strformat": true,
         "members": [
             {"name": "access", "type": "storage texture access", "default": "undefined"},
