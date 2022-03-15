@@ -108,6 +108,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b93dab6e_20f8adb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-15T14:30:42Z",
+      "side": 1,
+      "message": "If we deduplicate using GetOrCreate as Austin said, that would be a single 64kb allocation. Probably ok? I\u0027m still worried about the branch on the hot path, but maybe in the future we\u0027ll find a way to remove it by merging it with some other branches.",
+      "parentUuid": "d220fa0e_1c44f070",
+      "revId": "c5593133f0635f4a955222b68e924e50dd92e928",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "818df3c9_b853592f",
