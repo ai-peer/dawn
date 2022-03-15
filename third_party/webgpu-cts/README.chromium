@@ -1,0 +1,12 @@
+Name: WebGPU Conformance Test Suite
+Short Name: webgpu-cts
+Version: unknown
+Revision: latest
+URL: https://gpuweb.github.io/cts/
+SOURCE CODE: git clone https://github.com/gpuweb/cts.git
+Security Critical: no
+License: BSD-3-Clause
+License File: NOT_SHIPPED
+
+Description:
+The WebGPU conformance test suite. Run in Chromium's GPU testing infrastructure.

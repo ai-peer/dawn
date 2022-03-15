@@ -152,6 +152,12 @@ deps = {
     'condition': 'dawn_standalone',
   },
 
+  # WebGPU CTS
+  'third_party/webgpu-cts/src': {
+    'url': '{chromium_git}/external/github.com/gpuweb/cts@90654f28f4092a4993e91726cb18f697aefb201f',
+    'condition': 'dawn_download_cts',
+  },
+
   # Dependencies required to build Dawn NodeJS bindings
   'third_party/node-api-headers': {
     'url': '{github_git}/nodejs/node-api-headers.git@d68505e4055ecb630e14c26c32e5c2c65e179bba',
