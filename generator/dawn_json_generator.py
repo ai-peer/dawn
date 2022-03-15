@@ -240,6 +240,7 @@ class StructureType(Record, Type):
         self.chained = json_data.get("chained", None)
         self.extensible = json_data.get("extensible", None)
         self.strformat = json_data.get("strformat", None)
+        self.cachekey = json_data.get("cachekey", None)
         if self.chained:
             assert (self.chained == "in" or self.chained == "out")
         if self.extensible:
@@ -955,6 +956,10 @@ class MultiGeneratorFromDawnJSON(Generator):
             renders.append(
                 FileRender('dawn/native/ObjectType.cpp',
                            'src/' + native_dir + '/ObjectType_autogen.cpp',
+                           frontend_params))
+            renders.append(
+                FileRender('dawn/native/CacheKey.cpp',
+                           'src/' + native_dir + '/CacheKey_autogen.cpp',
                            frontend_params))
 
         if 'wire' in targets:
