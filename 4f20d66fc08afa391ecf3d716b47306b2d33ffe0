@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3434b36_98c4a8e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-15T13:00:18Z",
+      "side": 1,
+      "message": "LGTM, although IIRC there was a potential issue with UtilsVulkan.cpp\n\n\u003e  - A VVL failure, likely due to UtilsVulkan.cpp\u0027s VulkanAspectMask choosing pure stencil for stencil8 textures when they are falling back to depth*-stencil8.",
+      "revId": "4f20d66fc08afa391ecf3d716b47306b2d33ffe0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65e92b6b_3d6d3f21",
