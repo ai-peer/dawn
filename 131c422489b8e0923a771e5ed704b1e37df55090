@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b1c487f_dd0bb024",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-15T14:38:51Z",
+      "side": 1,
+      "message": "nit: Is this going to be O(query set size)? Maybe if we have a Map\u003cQuery*, Set\u003cinteger\u003e\u003e we could make it O(1).",
+      "revId": "131c422489b8e0923a771e5ed704b1e37df55090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "985560d3_c37826c6",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-15T14:38:51Z",
+      "side": 1,
+      "message": "Don\u0027t we need the same validation here as for the RenderPassDescriptor? We could merge the validation in that case.",
+      "revId": "131c422489b8e0923a771e5ed704b1e37df55090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
