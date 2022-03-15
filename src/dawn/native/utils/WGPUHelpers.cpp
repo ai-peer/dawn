@@ -67,6 +67,15 @@ namespace dawn::native::utils {
         return device->CreatePipelineLayout(&descriptor);
     }
 
+    ResultOrError<Ref<PipelineLayoutBase>> MakePipelineLayout(
+        DeviceBase* device,
+        std::vector<BindGroupLayoutBase*> bindGroupLayouts) {
+        PipelineLayoutDescriptor descriptor;
+        descriptor.bindGroupLayoutCount = bindGroupLayouts.size();
+        descriptor.bindGroupLayouts = bindGroupLayouts.data();
+        return device->CreatePipelineLayout(&descriptor);
+    }
+
     ResultOrError<Ref<BindGroupLayoutBase>> MakeBindGroupLayout(
         DeviceBase* device,
         std::initializer_list<BindingLayoutEntryInitializationHelper> entriesInitializer,
