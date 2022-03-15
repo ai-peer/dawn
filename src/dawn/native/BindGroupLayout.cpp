@@ -690,7 +690,7 @@ namespace dawn::native {
         key->push_back(']');
     }
 
-    CacheKey BindGroupLayoutBase::ComputeCacheKeyBase() const {
+    CacheKey BindGroupLayoutBase::ComputeCacheKeyBase() {
         return dawn::native::GetCacheKey(static_cast<uint64_t>(mPipelineCompatibilityToken),
                                          BindingInfoWrapper(*this, GetBindingMap()));
     }

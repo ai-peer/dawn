@@ -391,6 +391,19 @@ namespace dawn::native {
         return recorder.GetContentHash();
     }
 
+    CacheKey PipelineLayoutBase::ComputeCacheKeyBase() {
+        CacheKey key;
+        key.push_back('{');
+        for (BindGroupIndex group : IterateBitSet(mMask)) {
+            SerializeInto(&key, static_cast<uint32_t>(group));
+            key.push_back(':');
+            SerializeInto(&key, GetBindGroupLayout(group)->GetCacheKey());
+            key.push_back(',');
+        }
+        key.push_back('}');
+        return key;
+    }
+
     bool PipelineLayoutBase::EqualityFunc::operator()(const PipelineLayoutBase* a,
                                                       const PipelineLayoutBase* b) const {
         if (a->mMask != b->mMask) {
