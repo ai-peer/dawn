@@ -23,6 +23,9 @@ dawn_standalone = true
 # True if Dawn can access build/, testing/ and other Chrome folders.
 dawn_has_build = true
 
+# Enables the third_party/webgpu-cts/src entry in DEPS.
+dawn_download_cts = false
+
 # Defaults for these are set again in dawn_overrides_with_defaults.gni so that
 # users of Dawn don't have to set dirs if they happen to use the same as Dawn.
 
