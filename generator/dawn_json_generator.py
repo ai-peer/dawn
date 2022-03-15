@@ -968,6 +968,10 @@ class MultiGeneratorFromDawnJSON(Generator):
                 FileRender('dawn/native/Git.h',
                            'src/' + native_dir + '/Git_autogen.h',
                            frontend_params))
+            renders.append(
+                FileRender('dawn/native/CacheKey.cpp',
+                           'src/' + native_dir + '/CacheKey_autogen.cpp',
+                           frontend_params))
 
         if 'wire' in targets:
             params_dawn_wire = parse_json(loaded_json,

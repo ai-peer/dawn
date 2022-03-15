@@ -14,6 +14,7 @@
 
 #include "dawn/native/BindingInfo.h"
 
+#include "dawn/native/CacheKey.h"
 #include "dawn/native/ChainUtils_autogen.h"
 
 namespace dawn::native {
@@ -72,6 +73,20 @@ namespace dawn::native {
                 break;
         }
         return {true};
+    }
+
+    template <>
+    void CacheKeySerializer<BindingInfoType>::Serialize(CacheKey* key,
+                                                        const BindingInfoType& value) {
+        SerializeInto(key,
+                      static_cast<typename std::underlying_type<BindingInfoType>::type>(value));
+    }
+
+    template <>
+    void CacheKeySerializer<BindingInfo>::Serialize(CacheKey* key, const BindingInfo& value) {
+        SerializeInto(key, GetCacheKey(static_cast<uint32_t>(value.binding), value.visibility,
+                                       value.bindingType, value.buffer, value.sampler,
+                                       value.texture, value.storageTexture));
     }
 
     void IncrementBindingCounts(BindingCounts* bindingCounts, const BindGroupLayoutEntry& entry) {
