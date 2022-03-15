@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0882a5cf_b27ad12c",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-15T12:59:43Z",
+      "side": 1,
+      "message": "Thanks for investigating this and sorry for the noise :)",
+      "parentUuid": "2fc382dc_f8428847",
+      "range": {
+        "startLine": 690,
+        "startChar": 0,
+        "endLine": 691,
+        "endChar": 33
+      },
+      "revId": "f9d0b26b17695bc3d901c66cb1451fae3c8043f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7b886b92_04732e94",
         "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
         "patchSetId": 11
