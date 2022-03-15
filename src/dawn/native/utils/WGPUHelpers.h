@@ -44,6 +44,10 @@ namespace dawn::native::utils {
         DeviceBase* device,
         const Ref<BindGroupLayoutBase>& bindGroupLayout);
 
+    ResultOrError<Ref<PipelineLayoutBase>> MakePipelineLayout(
+        DeviceBase* device,
+        std::vector<BindGroupLayoutBase*> bindGroupLayouts);
+
     // Helpers to make creating bind group layouts look nicer:
     //
     //   utils::MakeBindGroupLayout(device, {
