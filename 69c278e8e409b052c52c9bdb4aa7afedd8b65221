@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cbe2e43_07bded47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-03-15T18:22:15Z",
+      "side": 1,
+      "message": "New focus for the CL LGTM, thanks for continuing to work on it!",
+      "revId": "69c278e8e409b052c52c9bdb4aa7afedd8b65221",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
