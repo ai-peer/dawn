@@ -78,7 +78,7 @@ namespace dawn::native {
 
         // CachedObject functions. Hash is necessary for unordered_set<BGLBase*>-based cache.
         size_t ComputeContentHash() override;
-        CacheKey ComputeCacheKeyBase() const override;
+        CacheKey ComputeCacheKeyBase() override;
 
         struct EqualityFunc {
             bool operator()(const BindGroupLayoutBase* a, const BindGroupLayoutBase* b) const;
