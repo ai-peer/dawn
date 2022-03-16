@@ -12,8 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+DawnGenerator(
+    SCRIPT "${Dawn_SOURCE_DIR}/generator/dawn_common_generator.py"
+    PRINT_NAME "Dawn common utilities"
+    RESULT_VARIABLE "DAWN_COMMON_AUTOGEN_SOURCES"
+)
+
 add_library(dawn_common STATIC ${DAWN_DUMMY_FILE})
 target_sources(dawn_common PRIVATE
+    ${DAWN_COMMON_AUTOGEN_SOURCES}
     "Alloc.h"
     "Assert.cpp"
     "Assert.h"
