@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b17390d1_14a39787",
+        "filename": "dawn.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-16T07:33:58Z",
+      "side": 1,
+      "message": "nit: we should update docs/codegen.md to explain this, but also it seems a bit overkill to add a new attribute for 4 structs like that. Maybe we could hardcode the list somewhere in the template file, or have a dawn_native.json file similarly to dawn_wire.json that contains extra data?",
+      "revId": "ed9c2efe70581bf454842c5061513345fe9fb08b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
