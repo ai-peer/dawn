@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bafaaf45_c6ce9ac7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-16T00:07:32Z",
+      "side": 1,
+      "message": "LGTM\n(Mostly just read and understand things)\n(TIL C++17 erase remove if idiom)",
+      "revId": "f8619a8f6fb5c478bb72bbfb659f57dfdd293e6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cee62abe_339d27ba",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-16T00:07:32Z",
+      "side": 1,
+      "message": "Q: does external texture binding layout not having cache key because of it is a dawn specific thing or it has no member? (But does the internal slots matter?)",
+      "revId": "f8619a8f6fb5c478bb72bbfb659f57dfdd293e6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "601701ef_b067b2d9",
+        "filename": "src/dawn/native/CachedObject.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-03-16T00:07:32Z",
+      "side": 1,
+      "message": "Wondering if this should rename to ComputeCacheKey. given its overridden by some classes (BindGroupLayout)\n(Maybe in patch https://dawn-review.googlesource.com/c/dawn/+/83121/)",
+      "revId": "f8619a8f6fb5c478bb72bbfb659f57dfdd293e6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
