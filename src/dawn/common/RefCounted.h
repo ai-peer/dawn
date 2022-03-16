@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// A no-op change to force all tests to run
+
 #ifndef COMMON_REFCOUNTED_H_
 #define COMMON_REFCOUNTED_H_
 
