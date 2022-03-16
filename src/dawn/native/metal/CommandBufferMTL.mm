@@ -1102,8 +1102,8 @@ namespace dawn::native::metal {
                     bindGroups.Apply(encoder);
                     storageBufferLengths.Apply(encoder, lastPipeline);
 
-                    [encoder dispatchThreadgroups:MTLSizeMake(dispatch->x, dispatch->y, dispatch->z)
-                            threadsPerThreadgroup:lastPipeline->GetLocalWorkGroupSize()];
+                    // [encoder dispatchThreadgroups:MTLSizeMake(dispatch->x, dispatch->y, dispatch->z)
+                    //         threadsPerThreadgroup:lastPipeline->GetLocalWorkGroupSize()];
                     break;
                 }
 
