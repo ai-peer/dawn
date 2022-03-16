@@ -16,6 +16,24 @@
       "message": "nit: we should update docs/codegen.md to explain this, but also it seems a bit overkill to add a new attribute for 4 structs like that. Maybe we could hardcode the list somewhere in the template file, or have a dawn_native.json file similarly to dawn_wire.json that contains extra data?",
       "revId": "ed9c2efe70581bf454842c5061513345fe9fb08b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23d2dc9e_b5167927",
+        "filename": "dawn.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-16T22:33:19Z",
+      "side": 1,
+      "message": "Done for both this and the immediate child CL. Unfortunate that this one has 2 template files though since the list is repeated, but making a new dawn_native.json file right now also seems overkill.",
+      "parentUuid": "b17390d1_14a39787",
+      "revId": "ed9c2efe70581bf454842c5061513345fe9fb08b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
