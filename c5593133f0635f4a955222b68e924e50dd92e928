@@ -126,6 +126,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a31ee9e_faec7eba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-03-16T21:19:53Z",
+      "side": 1,
+      "message": "Sounds fine. As far as the GetOrCreate implementation - we don\u0027t have the hashing infra for textures like we do for pipeline layouts/shaders etc. and I\u0027m feeling like it\u0027s not something we\u0027re going to need in the future. Is it find if I just store a dummy texture on the device that we can reuse?",
+      "parentUuid": "b93dab6e_20f8adb2",
+      "revId": "c5593133f0635f4a955222b68e924e50dd92e928",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "818df3c9_b853592f",
