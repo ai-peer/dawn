@@ -16,6 +16,24 @@
       "message": "ah, so this is why I had the SFINAE thing. \nBetter way would be:\n\n```\ntemplate \u003ctypename T, typename SFINAE \u003d void\u003e\nstruct CacheKeySerializer {\n    static void Serialize(CacheKey* key, const T\u0026 t);\n};\n\ntemplate \u003ctypename Integer\u003e\nstruct CacheKeySerializer\u003cInteger, std::enable_if_t\u003cstd::is_integral_v\u003cInteger\u003e\u003e\u003e {\n    static void Serialize(CacheKey* key, const Integer i) {\n        std::string str \u003d std::to_string(i);\n        key-\u003einsert(key-\u003eend(), str.begin(), str.end());\n    }\n};\n```\n\nThat way you can enable_if a new type without needing to add even more template params",
       "revId": "4b459a3ac640ebc1fba8a51f4eece9939b04ce22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf2e9f98_43076493",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-16T18:57:13Z",
+      "side": 1,
+      "message": "Ah... fixed!",
+      "parentUuid": "6279a7da_b1657714",
+      "revId": "4b459a3ac640ebc1fba8a51f4eece9939b04ce22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
