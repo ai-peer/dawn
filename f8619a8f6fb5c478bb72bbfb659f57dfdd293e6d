@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d279a355_06b9cabd",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-16T18:55:51Z",
+      "side": 1,
+      "message": "It\u0027s not in the BindingInfo structure used in Dawn. I think that since we serialize the type, and the type has external texture as one we should be ok.",
+      "parentUuid": "cee62abe_339d27ba",
+      "revId": "f8619a8f6fb5c478bb72bbfb659f57dfdd293e6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "601701ef_b067b2d9",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-03-16T00:07:32Z",
       "side": 1,
       "message": "Wondering if this should rename to ComputeCacheKey. given its overridden by some classes (BindGroupLayout)\n(Maybe in patch https://dawn-review.googlesource.com/c/dawn/+/83121/)",
+      "revId": "f8619a8f6fb5c478bb72bbfb659f57dfdd293e6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e403b0ab_b14e0eae",
+        "filename": "src/dawn/native/CachedObject.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-16T18:55:51Z",
+      "side": 1,
+      "message": "The Base is because the cache key isn\u0027t the \"complete\" cache key, it is just the base cache key for the class. The final cache key would also append some information from the device/adapter.",
+      "parentUuid": "601701ef_b067b2d9",
       "revId": "f8619a8f6fb5c478bb72bbfb659f57dfdd293e6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
