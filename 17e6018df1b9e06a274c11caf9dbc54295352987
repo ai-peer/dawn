@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1d77dcf_cd730868",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-16T14:32:19Z",
+      "side": 1,
+      "message": "Yes, it will be more annoying. Just one expectation file.\nI think the thought is that the annoyances will happen less often than they do now.\n\nWe could probably do the second expectation file, but we had concerns that it would become difficult to manage, and both would become non-trivial in size. CTS roll into Chromium modify the Chromium expectation files for new/changed tests. But implementation changes modify the Dawn expectation file.\n\nRealized just now that this is less a problem with CTS as a DEP of Dawn since in this new world, CTS rolls into Dawn change the Dawn expectation file, and Dawn changes also may modify the Dawn expectation file. If we added a second expectation file in Chromium, it theoretically could only need updates for Chromium-side changes.",
+      "parentUuid": "26e31d74_c35c56ed",
+      "revId": "17e6018df1b9e06a274c11caf9dbc54295352987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cc7c80d_755e4ed9",
