@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import json, os, sys
+import json, os, subprocess, sys
 from collections import namedtuple
 
 from generator_lib import Generator, run_generator, FileRender
@@ -693,6 +693,14 @@ def as_formatType(typ):
     return 's'
 
 
+def get_gitHash():
+    git = 'git.bat' if sys.platform == 'win32' else 'git'
+    result = subprocess.run([git, 'rev-parse', 'HEAD'], stdout=subprocess.PIPE)
+    if result.returncode == 0:
+        return result.stdout.decode('utf-8').strip()
+    return ''
+
+
 def c_methods(params, typ):
     return typ.methods + [
         x for x in [
@@ -763,7 +771,8 @@ def make_base_render_params(metadata):
             'convert_cType_to_cppType': convert_cType_to_cppType,
             'as_varName': as_varName,
             'decorate': decorate,
-            'as_formatType': as_formatType
+            'as_formatType': as_formatType,
+            'get_gitHash': get_gitHash
         }
 
 
@@ -958,6 +967,10 @@ class MultiGeneratorFromDawnJSON(Generator):
             renders.append(
                 FileRender('dawn/native/CacheKey.cpp',
                            'src/' + native_dir + '/CacheKey_autogen.cpp',
+                           frontend_params))
+            renders.append(
+                FileRender('dawn/native/Git.h',
+                           'src/' + native_dir + '/Git_autogen.h',
                            frontend_params))
 
         if 'wire' in targets:
