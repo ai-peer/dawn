@@ -16,6 +16,52 @@
       "message": "enga: please take a first look",
       "revId": "17e6018df1b9e06a274c11caf9dbc54295352987",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cc7c80d_755e4ed9",
+        "filename": "DEPS",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-16T01:15:48Z",
+      "side": 1,
+      "message": "Could we make this third_party/webgpu-cts to avoid the double src/src/ we currently have? If it\u0027s too much work, then it\u0027s probably fine; but I think it would be better for organization. and src/src/ is a little annoying.\n\nWe\u0027ll have to move source lists, BUILD.gn and scripts elsewhere, but that\u0027s probably ok? abseil-cpp and glfw build files are in third_party/gn/abseil-cpp and third_party/gn/glfw",
+      "range": {
+        "startLine": 156,
+        "startChar": 3,
+        "endLine": 156,
+        "endChar": 29
+      },
+      "revId": "17e6018df1b9e06a274c11caf9dbc54295352987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21338ad2_e73da760",
+        "filename": "DEPS",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-16T01:15:48Z",
+      "side": 1,
+      "message": "should we just make this build_with_chromium?",
+      "range": {
+        "startLine": 158,
+        "startChar": 18,
+        "endLine": 158,
+        "endChar": 35
+      },
+      "revId": "17e6018df1b9e06a274c11caf9dbc54295352987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
