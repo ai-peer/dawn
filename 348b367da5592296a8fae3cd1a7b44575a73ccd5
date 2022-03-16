@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a6e0b2f_ad544a3f",
+        "filename": "src/dawn/tests/end2end/IOSurfaceWrappingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-16T14:49:35Z",
+      "side": 1,
+      "message": "IOSurface also has\n\nIOSurfaceGetBytesPerRow\nIOSurfaceGetBytesPerRowOfPlane\n... and similar functions.\n\nhttps://developer.apple.com/documentation/iosurface/iosurface_functions?language\u003dobjc\n\nI think this test was written specifically to avoid needing to copy with bytes per row correctly. But now that it is 2x2, using the row pitch is necessary. That\u0027s probably why the test is no longer working.",
+      "revId": "348b367da5592296a8fae3cd1a7b44575a73ccd5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
