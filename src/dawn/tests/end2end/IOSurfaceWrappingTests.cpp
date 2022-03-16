@@ -301,7 +301,7 @@ class IOSurfaceUsageTests : public IOSurfaceTestBase {
             wgpu::TextureDescriptor textureDescriptor;
             textureDescriptor.dimension = wgpu::TextureDimension::e2D;
             textureDescriptor.format = format;
-            textureDescriptor.size = {1, 1, 1};
+            textureDescriptor.size = {2, 2, 1};
             textureDescriptor.sampleCount = 1;
             textureDescriptor.mipLevelCount = 1;
             textureDescriptor.usage = wgpu::TextureUsage::TextureBinding;
@@ -316,7 +316,7 @@ class IOSurfaceUsageTests : public IOSurfaceTestBase {
         }
 
         // Submit commands samping from the ioSurface and writing the result to renderPass.color
-        utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+        utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 2, 2);
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         {
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -375,9 +375,9 @@ class IOSurfaceUsageTests : public IOSurfaceTestBase {
 TEST_P(IOSurfaceUsageTests, SampleFromR8IOSurface) {
     DAWN_TEST_UNSUPPORTED_IF(UsesWire());
     ScopedIOSurfaceRef ioSurface =
-        CreateSinglePlaneIOSurface(1, 1, kCVPixelFormatType_OneComponent8, 1);
+        CreateSinglePlaneIOSurface(2, 2, kCVPixelFormatType_OneComponent8, 1);
 
-    uint8_t data = 0x01;
+    uint8_t data[4] = {0x01, 0x01, 0x01, 0x01};
     DoSampleTest(ioSurface.get(), wgpu::TextureFormat::R8Unorm, &data, sizeof(data),
                  RGBA8(1, 0, 0, 255));
 }
