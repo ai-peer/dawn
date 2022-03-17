@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "99163244_ba8db102",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-17T10:36:01Z",
+      "side": 1,
+      "message": "Out of curiosity, why did you choose to go with implementing this by adding support for multi-planar formats instead of importing each plane separately?\n\nThe latter seemed that it would be simpler, at least in Dawn. (but maybe having everything using multi-planar formats in Chromium makes things simpler there).",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "97abe852_6502e8e4",
@@ -14,6 +31,182 @@
       "writtenOn": "2022-03-17T09:56:59Z",
       "side": 1,
       "message": "The CL is ready for reviewing! PTAL, thanks!",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e87519c_9eae4651",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-17T10:36:01Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f73ef5e_a10b8bce",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-17T10:36:01Z",
+      "side": 1,
+      "message": "u-u-nit: Uses ... which is available on ...",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1537de3c_ce00f85e",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-17T10:36:01Z",
+      "side": 1,
+      "message": "Seems like leftover debug code?",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fe18fb4_5969826a",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-17T10:36:01Z",
+      "side": 1,
+      "message": "u-nit: We could just store the iosurface for single-planar imports too. There\u0027s basically no cost and makes the code more general.",
+      "range": {
+        "startLine": 577,
+        "startChar": 15,
+        "endLine": 577,
+        "endChar": 36
+      },
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86a4b144_70ff3d1f",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-17T10:36:01Z",
+      "side": 1,
+      "message": "This idea where we create the texture for the view as needed when creating the view won\u0027t work when want to use the texture for things other than rendering/sampling.  In the future we might want to support copies and that will fail.\n\nMaybe we could make metal::Texture store kMaxAspects MTLTextures, then you can ask the texture for a specific aspect. This would also mean that all the code to create mtlDescs from the IOSurface.\n\nWDYT?",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b4fecd6_7f6a9e11",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-17T10:36:01Z",
+      "side": 1,
+      "message": "Is this leaked or does CFDictionaryAddValue take the ref?",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b78aa4a_eeab23c0",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-17T10:36:01Z",
+      "side": 1,
+      "message": "Ditto using CFRef or IORef",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "023333ac_b73e9962",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-17T10:36:01Z",
+      "side": 1,
+      "message": "nit: we could lock/unlock outside of the loop",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00007bc5_e9396a22",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-17T10:36:01Z",
+      "side": 1,
+      "message": "nit: unused",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87a5fd2f_263231e4",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-17T10:36:01Z",
+      "side": 1,
+      "message": "I think this retain is redundant with the one in the constructor of PlatformTextureIOSurface.",
       "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

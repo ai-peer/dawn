@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b6ae4c8_db44d3e8",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-17T10:36:01Z",
+      "side": 0,
+      "message": "We should mark the plane in the descriptor as deprecated and eventually remove it.",
+      "revId": "fe11659ccb7fe93e461c871a63925edb482266c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

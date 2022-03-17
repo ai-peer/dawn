@@ -323,6 +323,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "315a88b3_41d828cc",
+        "filename": "src/dawn/native/metal/TextureMTL.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-17T10:36:01Z",
+      "side": 1,
+      "message": "Maybe IORef from common/IOKitRef.h works?\n\nAlso we could store the iosurface the texture comes even if single planar to special case less.",
+      "parentUuid": "7c720a14_c07ec46c",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 80,
+        "endChar": 20
+      },
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "602cc082_ca18d2e6",
         "filename": "src/dawn/native/metal/TextureMTL.mm",
         "patchSetId": 3
@@ -405,6 +429,24 @@
       "side": 1,
       "message": "Maybe I\u0027m wrong. But I think the created texture is stored in mMtlTextureView which is guard by NSPRef?",
       "parentUuid": "4fac999c_6b2eeca0",
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88a9ddae_ac525fe8",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-17T10:36:01Z",
+      "side": 1,
+      "message": "Ack, I forgot Metal didn\u0027t have a separate view object.",
+      "parentUuid": "48c08c34_244dd1be",
       "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
