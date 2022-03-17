@@ -1,0 +1,27 @@
+{
+    "TestFilter": ".*webgpu_blink_web_tests/wpt_internal/webgpu/cts\\.https\\.html.*",
+    "TestNameRegex": "cts\\.https\\.html\\?q=(.*)",
+    "Gerrit": {
+        "Defaults": {
+            "Host": "dawn-review.googlesource.com",
+            "Project": "dawn"
+        }
+    },
+    "Builders": {
+        "Win": {
+            "Project": "chromium",
+            "Bucket": "try",
+            "Builder": "win-dawn-rel"
+        },
+        "Mac": {
+            "Project": "chromium",
+            "Bucket": "try",
+            "Builder": "mac-dawn-rel"
+        },
+        "Linux": {
+            "Project": "chromium",
+            "Bucket": "try",
+            "Builder": "linux-dawn-rel"
+        }
+    }
+}
