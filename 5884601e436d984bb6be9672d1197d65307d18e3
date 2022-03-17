@@ -299,6 +299,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c720a14_c07ec46c",
+        "filename": "src/dawn/native/metal/TextureMTL.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-17T09:56:59Z",
+      "side": 1,
+      "message": "I tried but failed to use NSRef here. It seems that the Core Foundation type cannot be cast to objC types. Do you have any suggestions?",
+      "parentUuid": "2d5f6d4a_010aea4c",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 80,
+        "endChar": 20
+      },
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "602cc082_ca18d2e6",
         "filename": "src/dawn/native/metal/TextureMTL.mm",
         "patchSetId": 3
@@ -332,6 +356,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a79fffcc_6b3208d0",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-17T09:56:59Z",
+      "side": 1,
+      "message": "Done. Also need to remove the plane in chromium side. Will use a follow up Cl to address it.",
+      "parentUuid": "bcbd053c_92c939c4",
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fac999c_6b2eeca0",
@@ -345,6 +387,24 @@
       "writtenOn": "2022-03-15T13:47:33Z",
       "side": 1,
       "message": "don\u0027t we leak this texture at the moment?",
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48c08c34_244dd1be",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-17T09:56:59Z",
+      "side": 1,
+      "message": "Maybe I\u0027m wrong. But I think the created texture is stored in mMtlTextureView which is guard by NSPRef?",
+      "parentUuid": "4fac999c_6b2eeca0",
       "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
