@@ -71,6 +71,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b426322a_78c7f5d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-17T03:53:39Z",
+      "side": 1,
+      "message": "I guess this is ready for review.\nbsheedy, since you\u0027ll be integrating into this - PTAL",
+      "revId": "17e6018df1b9e06a274c11caf9dbc54295352987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cc7c80d_755e4ed9",
@@ -96,6 +113,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69c4791f_bb2c77a3",
+        "filename": "DEPS",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-17T03:53:39Z",
+      "side": 1,
+      "message": "SGTM, didn\u0027t realize we had third_party/gn.\n\ntarget_gen_dir means output goes to out/r/gen/third_party/dawn/third_party/gn/webgpu-cts/\nSo I changed it to target_gen_dir/../../webgpu-cts/. I don\u0027t know if this is valid, but my Chrome build on Linux is happy with it. Maybe weird because it doesn\u0027t correspond with the BUILD.gn (and therefore the name of the target).",
+      "parentUuid": "7cc7c80d_755e4ed9",
+      "range": {
+        "startLine": 156,
+        "startChar": 3,
+        "endLine": 156,
+        "endChar": 29
+      },
+      "revId": "17e6018df1b9e06a274c11caf9dbc54295352987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21338ad2_e73da760",
         "filename": "DEPS",
         "patchSetId": 6
@@ -107,6 +148,30 @@
       "writtenOn": "2022-03-16T01:15:48Z",
       "side": 1,
       "message": "should we just make this build_with_chromium?",
+      "range": {
+        "startLine": 158,
+        "startChar": 18,
+        "endLine": 158,
+        "endChar": 35
+      },
+      "revId": "17e6018df1b9e06a274c11caf9dbc54295352987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e7bbacc_34b339a2",
+        "filename": "DEPS",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-17T03:53:39Z",
+      "side": 1,
+      "message": "sounds good, I thought we had something like that but for some reason couldn\u0027t find it.",
+      "parentUuid": "21338ad2_e73da760",
       "range": {
         "startLine": 158,
         "startChar": 18,
