@@ -1,0 +1,4 @@
+{
+    "TestFilter": ".*webgpu_blink_web_tests/wpt_internal/webgpu/cts\\.https\\.html.*",
+    "TestNameRegex": "cts\\.https\\.html\\?q=(.*)"
+}
