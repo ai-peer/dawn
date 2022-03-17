@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de1024fa_43191404",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-17T17:19:05Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "cd18c2866a6745665de6c4072733acfd19740bed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3efd8b63_0a4da725",
+        "filename": "build_overrides/dawn.gni",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-17T17:19:05Z",
+      "side": 1,
+      "message": "unused now",
+      "revId": "cd18c2866a6745665de6c4072733acfd19740bed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c1c1570_ad70982e",
