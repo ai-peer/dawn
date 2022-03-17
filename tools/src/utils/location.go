@@ -16,8 +16,10 @@ package utils
 
 import (
 	"fmt"
+	"os"
 	"path/filepath"
 	"runtime"
+	"strings"
 )
 
 // ThisLine returns the filepath and line number of the calling function
@@ -36,4 +38,38 @@ func ThisDir() string {
 		return ""
 	}
 	return filepath.Dir(file)
+}
+
+// DawnRoot returns the path to the dawn project's root directory or empty
+// string if not found.
+func DawnRoot() string {
+	return getPathOfFileInParentDirs(ThisDir(), "DEPS")
+}
+
+// getPathOfFileInParentDirs looks for file with `name` in paths starting from
+// `path`, and up into parent directories, returning the clean path in which the
+// file is found, or empty string if not found.
+func getPathOfFileInParentDirs(path string, name string) string {
+	sep := string(filepath.Separator)
+	path, _ = filepath.Abs(path)
+	numDirs := strings.Count(path, sep) + 1
+	for i := 0; i < numDirs; i++ {
+		test := filepath.Join(path, name)
+		if _, err := os.Stat(test); err == nil {
+			return filepath.Clean(path)
+		}
+
+		path = path + sep + ".."
+	}
+	return ""
+}
+
+func ExpandHome(path string) string {
+	if strings.ContainsRune(path, '~') {
+		home, err := os.UserHomeDir()
+		if err != nil {
+			return strings.ReplaceAll(path, "~", home)
+		}
+	}
+	return path
 }
