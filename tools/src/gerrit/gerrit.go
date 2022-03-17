@@ -200,19 +200,59 @@ func (g *Gerrit) LatestPatchest(changeID string) (Patchset, error) {
 	return ps, nil
 }
 
+type CommentSide int
+
+const (
+	Left CommentSide = iota
+	Right
+)
+
+type FileComment struct {
+	Path    string
+	Side    CommentSide
+	Line    int
+	Message string
+}
+
 // Comment posts a review comment on the given patchset.
-func (g *Gerrit) Comment(ps Patchset, msg string) error {
-	_, _, err := g.client.Changes.SetReview(
-		strconv.Itoa(ps.Change),
-		strconv.Itoa(ps.Patchset),
-		&gerrit.ReviewInput{
-			Message: msg,
-		})
+func (g *Gerrit) Comment(ps Patchset, msg string, comments []FileComment) error {
+	input := &gerrit.ReviewInput{
+		Message: msg,
+	}
+	if len(comments) > 0 {
+		input.Comments = map[string][]gerrit.CommentInput{}
+		for _, c := range comments {
+			ci := gerrit.CommentInput{
+				Line: c.Line,
+				// Updated: &gerrit.Timestamp{Time: time.Now()},
+				Message: c.Message,
+			}
+			if c.Side == Left {
+				ci.Side = "PARENT"
+			} else {
+				ci.Side = "REVISION"
+			}
+			input.Comments[c.Path] = append(input.Comments[c.Path], ci)
+		}
+	}
+	_, _, err := g.client.Changes.SetReview(strconv.Itoa(ps.Change), strconv.Itoa(ps.Patchset), input)
 	if err != nil {
 		return g.maybeWrapError(err)
 	}
 	return nil
 }
+
+// SetReady marks the change as ready for review.
+func (g *Gerrit) SetReadyForReview(changeID, message string) error {
+	resp, err := g.client.Changes.SetReadyForReview(changeID, &gerrit.ReadyForReviewInput{
+		Message: message,
+	})
+	if err != nil && resp.StatusCode != 409 { // 409: already ready
+		return g.maybeWrapError(err)
+	}
+	return nil
+}
+
 func (g *Gerrit) maybeWrapError(err error) error {
 	if err != nil && !g.authenticated {
 		return fmt.Errorf(`query failed, possibly because of authentication.
