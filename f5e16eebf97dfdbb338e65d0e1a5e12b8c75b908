@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92d7100f_748bb13e",
+        "filename": "generator/templates/dawn/native/CacheKey.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-17T17:14:12Z",
+      "side": 1,
+      "message": "Could add a TODO for future optimization, or maybe now because of [1].\n\nThis makes a new std::vector, and then we immediately append it to the current key.\n\nIf GetCacheKey took in the |key|, or we made another version of it like EmplaceCacheKey(key, ts...), then we would be able to handle nested stuff like this without making new vectors.",
+      "range": {
+        "startLine": 75,
+        "startChar": 31,
+        "endLine": 75,
+        "endChar": 66
+      },
+      "revId": "f5e16eebf97dfdbb338e65d0e1a5e12b8c75b908",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da43bd5b_d36b6e79",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-17T17:14:12Z",
+      "side": 1,
+      "message": "why can\u0027t we just pass const BindGroupLayoutBase\u0026 and call GetBindingMap() inside this function?",
+      "range": {
+        "startLine": 683,
+        "startChar": 65,
+        "endLine": 683,
+        "endChar": 83
+      },
+      "revId": "f5e16eebf97dfdbb338e65d0e1a5e12b8c75b908",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c14a60fd_516384ff",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-17T17:14:12Z",
+      "side": 1,
+      "message": "would be nice if these functions didn\u0027t have to care that the key is strings, and we could contain all of that inside CacheKey.h/cpp. That makes it so that the specializations here mostly just express the type and structure of the data, and CacheKey is in charge of how that data gets turned into a key. Today it\u0027s a string, but it could be binary in the future. (or lately I\u0027ve now been contemplating sha256 builtin instructions........ let\u0027s not do that now though.)\n\nPerhaps we can do something like:\n\n`SerializeIterableInto(key, iterable)`.\n\nwhich maybe just effectively does `GetCacheKey(...iterable)`. Obviously can\u0027t unpack an iterable like that, but that\u0027s the idea.\n\nthis thing would also take care of prepending the serialized data with the length of the iterable. We have the same issue here as we did with strings. You can have an array element that has commas and array brackets in it.\n\n`SerializeIterableInto` might look like:\n```\nSerializeInto(key, Length(iterable));\nkey-\u003epush_back(\u0027[\u0027);\nfor (foo in iterable) {\n   SerializeInto(key, foo);\n   key-\u003epush_back(\u0027,\u0027);\n}\nkey-\u003epush_back(\u0027]\u0027);\n```\n\nMaking iterables is annoying though. so maybe it should look like:\n\n```\nSerializeGeneratorInto(key, bindingMap-\u003esize(), MakeGenerator([\u0026](yield) {\n  for ([_, bindingIndex] in bindingMap.get()) {\n     yield(bgl.get().GetBindingInfo(bindingIndex));\n  }\n}));\n```\n\n~~I\u0027m not sure if [] or {} and \",\" versus \"0: foo, 1: bar\" actually matters. Realizing now we can simplify GetCacheKey to just use comma delimiters since the member ids auto increment anyway. If we care about structure versus array, we can tag it, have two versions, etc.~~\nActually, I think it matters. Difference between everything of the same type, and elements of different types.",
+      "range": {
+        "startLine": 684,
+        "startChar": 0,
+        "endLine": 684,
+        "endChar": 28
+      },
+      "revId": "f5e16eebf97dfdbb338e65d0e1a5e12b8c75b908",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff0aff2f_3014d6e0",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-17T17:14:12Z",
+      "side": 1,
+      "message": "Why do we not include bindingNumber and mExternalTextureBindingExpansionMap?",
+      "range": {
+        "startLine": 686,
+        "startChar": 25,
+        "endLine": 686,
+        "endChar": 26
+      },
+      "revId": "f5e16eebf97dfdbb338e65d0e1a5e12b8c75b908",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dcf3d61_65ee6dd9",
+        "filename": "src/dawn/tests/unittests/native/CacheKeyTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-17T17:14:12Z",
+      "side": 1,
+      "message": "nit: string_view",
+      "range": {
+        "startLine": 46,
+        "startChar": 24,
+        "endLine": 46,
+        "endChar": 30
+      },
+      "revId": "f5e16eebf97dfdbb338e65d0e1a5e12b8c75b908",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d105377f_6af627ac",
+        "filename": "src/dawn/tests/unittests/native/CacheKeyTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-17T17:14:12Z",
+      "side": 1,
+      "message": "nit: should probably add a note here that if fields are added/removed/changed, it\u0027s expected for these tests to start failing, and they\u0027ll need to be re-baselined.",
+      "revId": "f5e16eebf97dfdbb338e65d0e1a5e12b8c75b908",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

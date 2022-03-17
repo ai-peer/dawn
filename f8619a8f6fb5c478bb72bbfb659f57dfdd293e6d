@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "765a994c_24e9431d",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-17T17:14:12Z",
+      "side": 1,
+      "message": "I believe external textures get mapped into a sampled texture, uniform buffer, and sampler. Should add a test that uses external texture too.",
+      "parentUuid": "d279a355_06b9cabd",
+      "revId": "f8619a8f6fb5c478bb72bbfb659f57dfdd293e6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "601701ef_b067b2d9",
