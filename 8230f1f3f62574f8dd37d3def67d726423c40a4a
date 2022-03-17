@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9f39305_2dde1e70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-17T17:16:21Z",
+      "side": 1,
+      "message": "LGTM ",
+      "revId": "8230f1f3f62574f8dd37d3def67d726423c40a4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5caad2d7_80bff9ed",
+        "filename": "src/dawn/native/BindingInfo.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-17T17:16:21Z",
+      "side": 1,
+      "message": "does this still need to be %#s?",
+      "range": {
+        "startLine": 52,
+        "startChar": 92,
+        "endLine": 52,
+        "endChar": 93
+      },
+      "revId": "8230f1f3f62574f8dd37d3def67d726423c40a4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
