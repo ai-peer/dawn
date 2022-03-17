@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6f3b6bb_d4610b50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2022-03-17T17:04:09Z",
+      "side": 1,
+      "message": "Shouldn\u0027t affect my current CL until things start getting removed. Only webgpu-cts changes I have anyways are a minor change to scripts/generate_telemetry_expectations.js (not touched yet) and a new file in the root directory, which should be trivial to move.",
+      "revId": "cd18c2866a6745665de6c4072733acfd19740bed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c1c1570_ad70982e",
+        "filename": "third_party/gn/webgpu-cts/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2022-03-17T17:04:09Z",
+      "side": 1,
+      "message": "Nit: 2022",
+      "range": {
+        "startLine": 1,
+        "startChar": 15,
+        "endLine": 1,
+        "endChar": 16
+      },
+      "revId": "cd18c2866a6745665de6c4072733acfd19740bed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
