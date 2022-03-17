@@ -3,7 +3,7 @@ module dawn.googlesource.com/dawn
 go 1.18
 
 require (
-	github.com/andygrunwald/go-gerrit v0.0.0-20220404064545-525eecd29744
+	github.com/andygrunwald/go-gerrit v0.0.0-20220411070329-4bec308719bb
 	github.com/ben-clayton/webidlparser v0.0.0-20210923100217-8ba896ded094
 	github.com/fatih/color v1.13.0
 	github.com/go-git/go-git/v5 v5.4.2
@@ -12,9 +12,10 @@ require (
 	github.com/mattn/go-isatty v0.0.14
 	github.com/sergi/go-diff v1.2.0
 	github.com/shirou/gopsutil v3.21.11+incompatible
+	github.com/tidwall/jsonc v0.3.2
 	go.chromium.org/luci v0.0.0-20220412023008-ab2409fe739a
 	golang.org/x/net v0.0.0-20220403103023-749bd193bc2b
-	google.golang.org/protobuf v1.27.1
+	google.golang.org/protobuf v1.28.0
 )
 
 require (
@@ -31,8 +32,10 @@ require (
 	github.com/klauspost/compress v1.13.5 // indirect
 	github.com/kr/pretty v0.3.0 // indirect
 	github.com/kr/text v0.2.0 // indirect
+	github.com/maruel/subcommands v1.1.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/rogpeppe/go-internal v1.8.0 // indirect
+	github.com/texttheater/golang-levenshtein v1.0.1 // indirect
 	github.com/tklauser/go-sysconf v0.3.10 // indirect
 	github.com/tklauser/numcpus v0.4.0 // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
@@ -46,3 +49,5 @@ require (
 	google.golang.org/grpc v1.44.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 )
+
+replace github.com/andygrunwald/go-gerrit => github.com/ben-clayton/go-gerrit v0.0.0-20220422144853-ee1d0d370e69
