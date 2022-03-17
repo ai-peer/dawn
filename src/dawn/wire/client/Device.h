@@ -41,7 +41,7 @@ namespace dawn::wire::client {
         void SetDeviceLostCallback(WGPUDeviceLostCallback errorCallback, void* errorUserdata);
         void InjectError(WGPUErrorType type, const char* message);
         void PushErrorScope(WGPUErrorFilter filter);
-        bool PopErrorScope(WGPUErrorCallback callback, void* userdata);
+        void PopErrorScope(WGPUErrorCallback callback, void* userdata);
         WGPUBuffer CreateBuffer(const WGPUBufferDescriptor* descriptor);
         WGPUBuffer CreateErrorBuffer();
         WGPUComputePipeline CreateComputePipeline(WGPUComputePipelineDescriptor const* descriptor);
@@ -84,7 +84,6 @@ namespace dawn::wire::client {
             void* userdata = nullptr;
         };
         RequestTracker<ErrorScopeData> mErrorScopes;
-        uint64_t mErrorScopeStackSize = 0;
 
         struct CreatePipelineAsyncRequest {
             WGPUCreateComputePipelineAsyncCallback createComputePipelineAsyncCallback = nullptr;
