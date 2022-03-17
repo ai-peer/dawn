@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b52f6a3_7bcd3875",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-17T02:35:03Z",
+      "side": 1,
+      "message": "@enga, @cwallez,\nCorrect, the reason is due to the row pitch. I think I was fully misleading by the test here https://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/src/tests/egl_tests/EGLIOSurfaceClientBufferTest.cpp;l\u003d81?q\u003dIOSurfaceCreate\u0026ss\u003dchromium%2Fchromium%2Fsrc\n\nNow I ref to the codes here (https://source.chromium.org/chromium/chromium/src/+/main:ui/gfx/mac/io_surface.cc;l\u003d228?q\u003dIOSurfaceCreate\u0026ss\u003dchromium%2Fchromium%2Fsrc) and the test passed.\n\nThanks for your helps!",
+      "revId": "348b367da5592296a8fae3cd1a7b44575a73ccd5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a6e0b2f_ad544a3f",
