@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e16211dc_2f16dde2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-17T11:29:47Z",
+      "side": 1,
+      "message": "(I\u0027ll reply others tomorrow)\nAh, the idea comes from that we don\u0027t need to modify current blink API like AssociateMailbox to tell dawn that we want which plane to be imported.\nAnd this info is provided with texture view.",
+      "parentUuid": "99163244_ba8db102",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "97abe852_6502e8e4",
