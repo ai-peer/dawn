@@ -208,6 +208,16 @@ TEST_F(ErrorScopeValidationTest, DeviceDestroyedBeforeCallback) {
     }
 }
 
+// If the device is destroyed, pop error scope should return false and not call any callbacks.
+TEST_F(ErrorScopeValidationTest, DeviceDestroyedBeforePop) {
+    device.PushErrorScope(wgpu::ErrorFilter::OutOfMemory);
+    ExpectDeviceDestruction();
+    device.Destroy();
+
+    EXPECT_CALL(*mockDevicePopErrorScopeCallback, Call).Times(0);
+    EXPECT_FALSE(device.PopErrorScope(ToMockDevicePopErrorScopeCallback, this));
+}
+
 // Regression test that on device shutdown, we don't get a recursion in O(pushed error scope) that
 // would lead to a stack overflow
 TEST_F(ErrorScopeValidationTest, ShutdownStackOverflow) {

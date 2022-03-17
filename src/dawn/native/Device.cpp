@@ -542,7 +542,7 @@ namespace dawn::native {
     }
 
     bool DeviceBase::APIPopErrorScope(wgpu::ErrorCallback callback, void* userdata) {
-        if (mErrorScopeStack->Empty()) {
+        if (IsLost() || mErrorScopeStack->Empty()) {
             return false;
         }
         ErrorScope scope = mErrorScopeStack->Pop();
