@@ -95,6 +95,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1d89d4c_05a1f7ce",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-17T22:56:56Z",
+      "side": 1,
+      "message": "or rather, I think the frontend needs to serialize *everything*. otherwise, there\u0027s too much code and mental distance between where key generation occurs and where pipelines get compiled to be absolutely sure every input was included in the key.\nultimately, this is why I think we\u0027re eventually going to want to have backend-speciric key generation for both total clarity and precise keys. we should think about whether it would be better to invest in that now. I think actually creating the keys won\u0027t be so bad - memcpy several structs. but it would require being able to have null-terminator bytes inside the key (or I guess escape them if we can\u0027t).",
+      "parentUuid": "ff0aff2f_3014d6e0",
+      "range": {
+        "startLine": 686,
+        "startChar": 25,
+        "endLine": 686,
+        "endChar": 26
+      },
+      "revId": "f5e16eebf97dfdbb338e65d0e1a5e12b8c75b908",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9dcf3d61_65ee6dd9",
         "filename": "src/dawn/tests/unittests/native/CacheKeyTests.cpp",
         "patchSetId": 7
