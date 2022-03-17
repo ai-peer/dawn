@@ -14,7 +14,10 @@
 
 package container
 
-import "sort"
+import (
+	"fmt"
+	"sort"
+)
 
 // Set is a generic unordered set, which wrap's go's builtin 'map'.
 // T is the set key, which must match the 'key' constraint.
@@ -97,4 +100,16 @@ func (s Set[T]) List() []T {
 	}
 	sort.Slice(out, func(i, j int) bool { return out[i] < out[j] })
 	return out
+}
+
+// Format writes the Target to the fmt.State
+func (s Set[T]) Format(f fmt.State, verb rune) {
+	fmt.Fprint(f, "[")
+	for i, item := range s.List() {
+		if i > 0 {
+			fmt.Fprint(f, ", ")
+		}
+		fmt.Fprint(f, item)
+	}
+	fmt.Fprint(f, "]")
 }

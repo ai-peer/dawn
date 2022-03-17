@@ -28,3 +28,15 @@ const (
 	Slow           = Status("Slow")
 	Unknown        = Status("Unknown")
 )
+
+// StatusMerger is a function that can be used by StatusTree.Reduce() to reduce
+// tree nodes with the same status
+func StatusMerger(statuses []Status) *Status {
+	first := statuses[0]
+	for _, s := range statuses[1:] {
+		if first != s {
+			return nil
+		}
+	}
+	return &first
+}

@@ -1,0 +1,342 @@
+// Copyright 2022 The Dawn Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package query
+
+import (
+	"fmt"
+	"io"
+	"sort"
+)
+
+// Tree holds a tree structure of Query to generic Data type.
+// Each separate suite, file, test of the query produces a separate tree node.
+// All cases of the query produce a single leaf tree node.
+type Tree[Data any] struct {
+	Node[Data]
+}
+
+type Node[Data any] struct {
+	Query    Query
+	Data     *Data
+	Children Children[Data]
+}
+
+type ChildKey struct {
+	Name   string
+	Target Target
+}
+
+type Children[Data any] map[ChildKey]*Node[Data]
+
+func (n *Node[Data]) traverse(f func(n *Node[Data]) error) error {
+	if err := f(n); err != nil {
+		return err
+	}
+	keys := make([]ChildKey, 0, len(n.Children))
+	for key := range n.Children {
+		keys = append(keys, key)
+	}
+	sort.Slice(keys, func(i, j int) bool {
+		a, b := keys[i], keys[j]
+		switch {
+		case a.Name < b.Name:
+			return true
+		case a.Name > b.Name:
+			return false
+		case a.Target < b.Target:
+			return true
+		case a.Target > b.Target:
+			return false
+		}
+		return false
+	})
+	for _, key := range keys {
+		if err := n.Children[key].traverse(f); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+type Merger[Data any] func([]Data) *Data
+
+// merge collapses tree nodes based on child node data, using the function f.
+// Returns the merged target data for this node.
+func (n *Node[Data]) merge(f Merger[Data]) *Data {
+	// If the node is a leaf, then simply return the node's data.
+	if len(n.Children) == 0 {
+		return n.Data
+	}
+
+	// Build a map of child target to merged child data.
+	// A nil for the value indicates that one or more children could not merge.
+	mergedChildren := map[Target][]Data{}
+	for key, child := range n.Children {
+		// Call merge() on the child. Even if we cannot merge this node, we want
+		// to do this for all children so they can merge their sub-graphs.
+		childData := child.merge(f)
+
+		// Fetch the merge list for this child's target.
+		list, found := mergedChildren[key.Target]
+		if !found { // First child with the given target?
+			list = []Data{} // Create the list.
+			mergedChildren[key.Target] = list
+		}
+
+		if list == nil {
+			// A nil list indicates a merge failure for this target.
+			// There's nothing more to do.
+			continue
+		}
+
+		if childData != nil {
+			mergedChildren[key.Target] = append(list, *childData)
+		} else {
+			// If merge() returned nil, then the data could not be merged.
+			// Mark the target as unmergeable.
+			mergedChildren[key.Target] = nil
+		}
+	}
+
+	merge := func(in []Data) *Data {
+		switch len(in) {
+		case 0:
+			return nil // nothing to merge.
+		case 1:
+			return &in[0] // merge of a single item results in that item
+		default:
+			return f(in)
+		}
+	}
+
+	// Might it possible to merge this node?
+	maybeMergeable := true
+
+	// The merged data, per target
+	mergedTargets := map[Target]Data{}
+
+	// Attempt to merge each of the target's data
+	for target, list := range mergedChildren {
+		if list != nil { // nil == unmergeable target
+			if data := merge(list); data != nil {
+				// Merge success!
+				mergedTargets[target] = *data
+				continue
+			}
+		}
+		maybeMergeable = false // Merge of this node is not possible
+	}
+
+	// Remove all children that have been merged
+	for key := range n.Children {
+		if _, merged := mergedTargets[key.Target]; merged {
+			delete(n.Children, key)
+		}
+	}
+
+	// Add wildcards for merged targets
+	for target, data := range mergedTargets {
+		t := Target(target)
+		data := data // Don't take address of iterator
+		n.getOrCreateChild(ChildKey{"*", t}).Data = &data
+	}
+
+	// If any of the targets are unmergeable, then we cannot merge the node itself.
+	if !maybeMergeable {
+		return nil
+	}
+
+	// All targets were merged. Attempt to merge each of the targets.
+	data := make([]Data, 0, len(mergedTargets))
+	for _, d := range mergedTargets {
+		data = append(data, d)
+	}
+	return merge(data)
+}
+
+func (n *Node[Data]) print(w io.Writer, prefix string) {
+	fmt.Fprintf(w, "%v{\n", prefix)
+	fmt.Fprintf(w, "%v  query: '%v'\n", prefix, n.Query)
+	fmt.Fprintf(w, "%v  data:  '%v'\n", prefix, n.Data)
+	for _, child := range n.Children {
+		child.print(w, prefix+"  ")
+	}
+	fmt.Fprintf(w, "%v}\n", prefix)
+}
+
+func (n *Node[Data]) Format(f fmt.State, verb rune) {
+	n.print(f, "")
+}
+
+func (n *Node[Data]) getOrCreateChild(key ChildKey) *Node[Data] {
+	if n.Children == nil {
+		child := &Node[Data]{Query: n.Query.Append(key.Target, key.Name)}
+		n.Children = Children[Data]{key: child}
+		return child
+	}
+	if child, ok := n.Children[key]; ok {
+		return child
+	}
+	child := &Node[Data]{Query: n.Query.Append(key.Target, key.Name)}
+	n.Children[key] = child
+	return child
+}
+
+// QueryData is a pair of a Query and a generic Data type.
+// Used by NewTree for constructing a tree with entries.
+type QueryData[Data any] struct {
+	Query Query
+	Data  Data
+}
+
+func NewTree[Data any](entries ...QueryData[Data]) (Tree[Data], error) {
+	out := Tree[Data]{}
+	for _, qd := range entries {
+		if err := out.Add(qd.Query, qd.Data); err != nil {
+			return Tree[Data]{}, err
+		}
+	}
+	return out, nil
+}
+
+// Add adds a new data to the tree.
+// Returns ErrDuplicateData if the tree already contains a data for the given
+func (t *Tree[Data]) Add(q Query, d Data) error {
+	node := t.getOrCreateNode(q)
+	if node.Data != nil {
+		return ErrDuplicateData{node.Query}
+	}
+	node.Data = &d
+	return nil
+}
+
+func (t *Tree[Data]) Reduce(f Merger[Data]) {
+	for _, root := range t.Node.Children {
+		root.merge(f)
+	}
+}
+
+func (t *Tree[Data]) ReduceTo(fq Query, f Merger[Data]) error {
+	node := &t.Node
+	return fq.Walk(func(q Query, t Target, n string) error {
+		if n == "*" {
+			node.merge(f)
+			return nil
+		}
+		child, ok := node.Children[ChildKey{n, t}]
+		if !ok {
+			return ErrNoDataForQuery{q}
+		}
+		node = child
+		if q == fq {
+			node.merge(f)
+		}
+		return nil
+	})
+}
+
+func (t *Tree[Data]) glob(fq Query, f func(f *Node[Data]) error) error {
+	node := &t.Node
+
+	return fq.Walk(func(q Query, t Target, n string) error {
+		if n == "*" {
+			for _, child := range node.Children {
+				if child.Query.Target() == t {
+					if err := child.traverse(f); err != nil {
+						return err
+					}
+				}
+			}
+			return nil
+		}
+		switch t {
+		case Suite, Files, Tests:
+			child, ok := node.Children[ChildKey{n, t}]
+			if !ok {
+				return ErrNoDataForQuery{q}
+			}
+			node = child
+		case Cases:
+			for _, child := range node.Children {
+				if child.Query.Contains(q) {
+					if err := f(child); err != nil {
+						return err
+					}
+				}
+			}
+		}
+		if q == fq {
+			return f(node)
+		}
+		return nil
+	})
+}
+
+func (t *Tree[Data]) getOrCreateNode(q Query) *Node[Data] {
+	node := &t.Node
+	q.Walk(func(q Query, t Target, n string) error {
+		node = node.getOrCreateChild(ChildKey{n, t})
+		return nil
+	})
+	return node
+}
+
+func (t *Tree[Data]) Replace(what Query, with Data) error {
+	node := &t.Node
+	return what.Walk(func(q Query, t Target, n string) error {
+		childKey := ChildKey{n, t}
+		if q == what {
+			for key, child := range node.Children {
+				if q.Contains(child.Query) {
+					delete(node.Children, key)
+				}
+			}
+			node = node.getOrCreateChild(childKey)
+			node.Data = &with
+		} else {
+			child, ok := node.Children[childKey]
+			if !ok {
+				return ErrNoDataForQuery{q}
+			}
+			node = child
+		}
+		return nil
+	})
+}
+
+func (t *Tree[Data]) List() []QueryData[Data] {
+	out := []QueryData[Data]{}
+	t.traverse(func(n *Node[Data]) error {
+		if n.Data != nil {
+			out = append(out, QueryData[Data]{n.Query, *n.Data})
+		}
+		return nil
+	})
+	return out
+}
+
+func (t *Tree[Data]) Glob(q Query) ([]QueryData[Data], error) {
+	out := []QueryData[Data]{}
+	err := t.glob(q, func(n *Node[Data]) error {
+		if n.Data != nil {
+			out = append(out, QueryData[Data]{n.Query, *n.Data})
+		}
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
