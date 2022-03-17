@@ -1,0 +1,39 @@
+{
+  "Test": {
+    "Prefix": "ninja://chrome/test:telemetry_gpu_integration_test/gpu_tests.webgpu_cts_integration_test.WebGpuCtsIntegrationTest."
+  },
+  "Gerrit": {
+    "Host": "https://dawn-review.googlesource.com",
+    "Project": "dawn"
+  },
+  "Git": {
+    "CTS": {
+      "Host": "chromium.googlesource.com",
+      "Project": "external/github.com/gpuweb/cts"
+    },
+    "Dawn": {
+      "Host": "dawn.googlesource.com",
+      "Project": "dawn"
+    }
+  },
+  "Builders": {
+    "Win": {
+      "Project": "chromium",
+      "Bucket": "try",
+      "Builder": "win-dawn-rel"
+    },
+    "Mac": {
+      "Project": "chromium",
+      "Bucket": "try",
+      "Builder": "mac-dawn-rel"
+    },
+    "Linux": {
+      "Project": "chromium",
+      "Bucket": "try",
+      "Builder": "linux-dawn-rel"
+    }
+  },
+  "Expectations": {
+    "Path": "webgpu-cts/expectations.txt"
+  }
+}
