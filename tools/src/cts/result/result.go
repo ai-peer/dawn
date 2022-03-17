@@ -16,7 +16,11 @@
 package result
 
 import (
+	"bufio"
 	"fmt"
+	"io"
+	"os"
+	"path/filepath"
 	"sort"
 	"strings"
 
@@ -208,4 +212,99 @@ func (l List) Statuses() container.Set[Status] {
 		set.Add(r.Status)
 	}
 	return set
+}
+
+func Load(path string) (List, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	results, err := Read(file)
+	if err != nil {
+		return nil, fmt.Errorf("while reading '%v': %w", path, err)
+	}
+	return results, nil
+}
+
+func Save(path string, results List) error {
+	dir := filepath.Dir(path)
+	if err := os.MkdirAll(dir, 0777); err != nil {
+		return err
+	}
+	file, err := os.Create(path)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+	return Write(file, results)
+}
+
+func Read(r io.Reader) (List, error) {
+	scanner := bufio.NewScanner(r)
+	l := List{}
+	for scanner.Scan() {
+		r, err := Parse(scanner.Text())
+		if err != nil {
+			return nil, err
+		}
+		l = append(l, r)
+	}
+	return l, nil
+}
+
+func Write(w io.Writer, l List) error {
+	for _, r := range l {
+		_, err := fmt.Fprintln(w, r)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func Merge(a, b List) List {
+	merged := make(List, 0, len(a)+len(b))
+	merged = append(merged, a...)
+	merged = append(merged, b...)
+	return Deduplicate(merged)
+}
+
+func Deduplicate(l List) List {
+	out := l.ReplaceDuplicates(func(l List) Status {
+		s := l.Statuses()
+
+		// If all results have the same status, then use that
+		if len(s) == 1 {
+			for status := range s {
+				return status
+			}
+		}
+
+		// Mixed statuses. Replace with something appropriate.
+		switch {
+		// Crash + * = Crash
+		case s.Contains(Crash):
+			return Crash
+		// Abort + * = Abort
+		case s.Contains(Abort):
+			return Abort
+		// Unknown + * = Unknown
+		case s.Contains(Unknown):
+			return Unknown
+		// RetryOnFailure + ~(Crash | Abort | Unknown) = RetryOnFailure
+		case s.Contains(RetryOnFailure):
+			return RetryOnFailure
+		// Slow + ~(Crash | Abort | Unknown | RetryOnFailure) = Slow
+		case s.Contains(Slow):
+			return Failure
+		// Pass + ~(Crash | Abort | Unknown | RetryOnFailure | Slow) = RetryOnFailure
+		case s.Contains(Pass):
+			return RetryOnFailure
+		}
+		return Unknown
+	})
+	out.Sort()
+	return out
 }
