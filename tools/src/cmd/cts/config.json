@@ -1,0 +1,64 @@
+{
+  "TestFilter": "ninja:\/\/chrome\/test:telemetry_gpu_integration_test\/gpu_tests.webgpu_cts_integration_test.*",
+  "TestNameRegex": "telemetry_gpu_integration_test\/gpu_tests\\.webgpu_cts_integration_test\\.WebGpuCtsIntegrationTest\\.(.*)",
+  "Gerrit": {
+    "Host": "dawn-review.googlesource.com",
+    "Project": "dawn"
+  },
+  "Git": {
+    "CTS": {
+      "Host": "chromium.googlesource.com",
+      "Project": "external/github.com/gpuweb/cts"
+    },
+    "Dawn": {
+      "Host": "dawn.googlesource.com",
+      "Project": "dawn"
+    }
+  },
+  "Builders": {
+    "Win": {
+      "Project": "chromium",
+      "Bucket": "try",
+      "Builder": "win-dawn-rel"
+    },
+    "Mac": {
+      "Project": "chromium",
+      "Bucket": "try",
+      "Builder": "mac-dawn-rel"
+    },
+    "Linux": {
+      "Project": "chromium",
+      "Bucket": "try",
+      "Builder": "linux-dawn-rel"
+    }
+  },
+  "Expectations": {
+    "Path": "webgpu-cts/expectations.txt",
+    "TestPrefix": "wpt_internal/webgpu/cts.https.html?q=",
+    "Tags": {
+      "OS": [
+        "Windows-10-18363",
+        "Windows-10",
+        "Mac11",
+        "Mac-11.5.2",
+        "Mac-12.1",
+        "Ubuntu-19.04",
+        "Ubuntu-18.04.5|Ubuntu-18.04.6"
+      ],
+      "Aliases": {
+        "Win": [
+          "Windows-10-18363",
+          "Windows-10"
+        ],
+        "Mac": [
+          "Mac-11.5.2",
+          "Mac-12.1"
+        ],
+        "Linux": [
+          "Ubuntu-19.04",
+          "Ubuntu-18.04.5|Ubuntu-18.04.6"
+        ]
+      }
+    }
+  }
+}
