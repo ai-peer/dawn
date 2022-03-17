@@ -542,17 +542,23 @@ namespace dawn::native {
     }
 
     bool DeviceBase::APIPopErrorScope(wgpu::ErrorCallback callback, void* userdata) {
-        if (mErrorScopeStack->Empty()) {
-            return false;
-        }
-        ErrorScope scope = mErrorScopeStack->Pop();
+        // TODO(crbug.com/dawn/1324) Remove return and make function void when users are updated.
+        bool returnValue = true;
         if (callback != nullptr) {
             // TODO(crbug.com/dawn/1122): Call callbacks only on wgpuInstanceProcessEvents
+            if (IsLost()) {
+                callback(WGPUErrorType_DeviceLost, "GPU device disconnected", userdata);
+                return returnValue;
+            }
+            if (mErrorScopeStack->Empty()) {
+                callback(WGPUErrorType_Unknown, "No error scopes to pop", userdata);
+                return returnValue;
+            }
+            ErrorScope scope = mErrorScopeStack->Pop();
             callback(static_cast<WGPUErrorType>(scope.GetErrorType()), scope.GetErrorMessage(),
                      userdata);
         }
-
-        return true;
+        return returnValue;
     }
 
     PersistentCache* DeviceBase::GetPersistentCache() {
