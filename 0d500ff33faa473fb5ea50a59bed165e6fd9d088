@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f7b9dfa_eadad803",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003066
+      },
+      "writtenOn": "2022-03-17T15:47:48Z",
+      "side": 1,
+      "message": "(some additional comments, but I\u0027ll defer to the dawn experts for the details)",
+      "revId": "0d500ff33faa473fb5ea50a59bed165e6fd9d088",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "595da75c_926a7275",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1003066
+      },
+      "writtenOn": "2022-03-17T15:47:48Z",
+      "side": 1,
+      "message": "nit: we should only accept Plane0Only and Plane1Only (and throw errors otherwise).",
+      "revId": "0d500ff33faa473fb5ea50a59bed165e6fd9d088",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

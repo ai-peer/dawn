@@ -347,6 +347,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e1f0ef9f_346bdc69",
+        "filename": "src/dawn/native/metal/TextureMTL.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003066
+      },
+      "writtenOn": "2022-03-17T15:47:48Z",
+      "side": 1,
+      "message": "I think Dawn should add CFRef. Dawn already has NSRef which is very similar to scoped_nsobject[0]. Add CFRef as something very similar to CFTypeRef [1]\n\n[0] https://source.chromium.org/chromium/chromium/src/+/main:base/mac/scoped_nsobject.h;l\u003d85;drc\u003dd21c92cedbfb1a81e021c5bfd0cd030edcb6e45b\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:base/mac/scoped_cftyperef.h;l\u003d14;drc\u003d093de9b30c0ba6ded896506a297314e5ed818b89",
+      "parentUuid": "315a88b3_41d828cc",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 80,
+        "endChar": 20
+      },
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "602cc082_ca18d2e6",
         "filename": "src/dawn/native/metal/TextureMTL.mm",
         "patchSetId": 3
