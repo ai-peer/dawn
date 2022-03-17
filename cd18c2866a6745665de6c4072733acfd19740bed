@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ace0f6b_eb5fd2d2",
+        "filename": "build_overrides/dawn.gni",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-17T18:49:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3efd8b63_0a4da725",
+      "revId": "cd18c2866a6745665de6c4072733acfd19740bed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c1c1570_ad70982e",
@@ -65,6 +83,30 @@
       "writtenOn": "2022-03-17T17:04:09Z",
       "side": 1,
       "message": "Nit: 2022",
+      "range": {
+        "startLine": 1,
+        "startChar": 15,
+        "endLine": 1,
+        "endChar": 16
+      },
+      "revId": "cd18c2866a6745665de6c4072733acfd19740bed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5da3bb7_65e7f31b",
+        "filename": "third_party/gn/webgpu-cts/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-17T18:49:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c1c1570_ad70982e",
       "range": {
         "startLine": 1,
         "startChar": 15,
