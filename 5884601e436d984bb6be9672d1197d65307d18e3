@@ -395,6 +395,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "447f40d3_1a95d789",
+        "filename": "src/dawn/native/metal/TextureMTL.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-18T02:43:45Z",
+      "side": 1,
+      "message": "(In case I\u0027m using it wrongly)\nI tried that \nIORef\u003cIOSurfaceRef\u003e multplanarIOSurface \u003d AcquireIORef\u003cIOSurfaceRef\u003e(iosurface);",
+      "parentUuid": "ca7f0bce_ebf11e04",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 80,
+        "endChar": 20
+      },
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "602cc082_ca18d2e6",
         "filename": "src/dawn/native/metal/TextureMTL.mm",
         "patchSetId": 3
