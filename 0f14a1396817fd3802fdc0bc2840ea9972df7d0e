@@ -106,6 +106,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1039bc45_879af0fc",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-18T02:30:32Z",
+      "side": 1,
+      "message": "Oops...",
+      "parentUuid": "1537de3c_ce00f85e",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5fe18fb4_5969826a",
         "filename": "src/dawn/native/metal/TextureMTL.mm",
         "patchSetId": 4
@@ -140,6 +158,24 @@
       "writtenOn": "2022-03-17T10:36:01Z",
       "side": 1,
       "message": "This idea where we create the texture for the view as needed when creating the view won\u0027t work when want to use the texture for things other than rendering/sampling.  In the future we might want to support copies and that will fail.\n\nMaybe we could make metal::Texture store kMaxAspects MTLTextures, then you can ask the texture for a specific aspect. This would also mean that all the code to create mtlDescs from the IOSurface.\n\nWDYT?",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9064af9a_aab44ee4",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-18T02:30:32Z",
+      "side": 1,
+      "message": "@cwallez, @enga, @ccameron\nLet me describe the cases I\u0027m considering and see which is the possible solution.\nThe VideoFrame which we could access in blink might hold:\n- Multiple SIs (and multiple mailboxes) but the single IOSurface\n- Single SI and single IOSurfcae (But stands for multiplanar data, not the current implementation states yet)\n- Multiple SIs and multiple IOSurface (Each IOSurface stores a single plane).\n\nSo in blink, we probably do the things like:\n```\nTextureView plane_texture_views[kMaxPlane];\n// Check VideoFrame Plane number\nfor (uint32_t plane \u003d 0; plane \u003c plane_number; ++plane) {\n  gpu::webgpu::ReservedTexture reservation \u003d webgpu-\u003eReserveTexture(device_);\n  webgpu-\u003eAssociateMailbox(videoFrame-\u003emailboxes[plane], usage, reservation.texture ...);\n  plane_texture_views[plane] \u003d reservation.texture-\u003eCreateView(\u0026viewDesc);\n}\n\nWGPUExternalTextureDescriptor external_texture_desc \u003d {};\nexternal_texture_desc.plane0 \u003d plane_texture_views[0];\nexternal_texture_desc.plane1 \u003d plane_texture_views[1];\nexternal_texture_desc.colorSpace \u003d WGPUPredefinedColorSpace_Srgb;\n\n// Create GPUExternalTexture.\n```\n\nSo:\n- I think `AssociateMailbox` with plane ID might not be a good idea. Because we might have the case creating texture view with wrong plane index with the generated gpuTexture(e.g. gpuTexture is generated with AssociateMailbox(plane0), but createTextureView has aspect Plane1). This means we needs to add some validation which is not necessary at all.\n\n- Current CL requires creating TextureView explicitly before any ops. AssociateMailbox is lightweight (Creating WGPUTexture and adding Ref). But It is weired to support the usage like copy.\n\n- The proposal above which will do creating all MTLTextures in InitializeFromIOSurface phase will fix the issue by creating MTLTextures from all planes and holds them.\nBut I think it might have duplicated works when handling the case that VideoFrame has multiple SIs but the single IOSurface. In the second AssociateMailbox, we\u0027ll creating a new WGPUTexture and creating real MTLTextures again. I\u0027m not sure whether we could avoid this duplicated work. If there is a way, I think this probably the best solution.\n\nDo you have any suggestions?",
+      "parentUuid": "86a4b144_70ff3d1f",
       "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
