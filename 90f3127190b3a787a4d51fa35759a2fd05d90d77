@@ -16,6 +16,23 @@
       "message": "Kai PTAL",
       "revId": "90f3127190b3a787a4d51fa35759a2fd05d90d77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "169d3e2f_4d745bef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-18T23:52:08Z",
+      "side": 1,
+      "message": "I assume this is stale but lgtm in case",
+      "revId": "90f3127190b3a787a4d51fa35759a2fd05d90d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
