@@ -50,16 +50,46 @@ namespace dawn::native::vulkan {
             }
             // TODO(crbug.com/dawn/269): For now this is hardcoded to what works with one NVIDIA
             // driver. Need to generalize
-            config->nativeFormat = VK_FORMAT_B8G8R8A8_UNORM;
-            config->colorSpace = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR;
-            config->format = wgpu::TextureFormat::BGRA8Unorm;
+
+            auto CheckFormats = [&info](VkFormat fmt, VkColorSpaceKHR colorSpace) -> bool {
+                for (const VkSurfaceFormatKHR& format : info.formats) {
+                    if (format.format == fmt && format.colorSpace == colorSpace) {
+                        return true;
+                    }
+                }
+                return false;
+            };
+
+            // TODO(android): duplicated-isch from SwapChainVK.cpp
+            if (CheckFormats(VK_FORMAT_B8G8R8A8_UNORM, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)) {
+                config->nativeFormat     = VK_FORMAT_B8G8R8A8_UNORM;
+                config->colorSpace = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR;
+                config->format = wgpu::TextureFormat::BGRA8Unorm;
+            } else if(CheckFormats(VK_FORMAT_R8G8B8A8_UNORM, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)) {
+                config->nativeFormat     = VK_FORMAT_R8G8B8A8_UNORM;
+                config->colorSpace = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR;
+                config->format = wgpu::TextureFormat::RGBA8Unorm;
+            } else {
+                // TODO(android): Correct way of handling
+                ASSERT(false);
+            }
+
             config->minImageCount = 3;
             // TODO(crbug.com/dawn/269): This is upside down compared to what we want, at least
             // on Linux
             config->preTransform = info.capabilities.currentTransform;
             config->presentMode = presentMode;
-            config->compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
 
+
+            // TODO(android)
+            bool supportsCompositeAlpha = info.capabilities.supportedCompositeAlpha &
+                VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
+            if (supportsCompositeAlpha) {
+                config->compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
+            } else {
+                config->compositeAlpha = VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR;
+            }
+            
             return true;
         }
     }  // anonymous namespace

@@ -76,9 +76,9 @@ namespace dawn::native {
 
             // TODO(crbug.com/dawn/160): Lift this restriction once
             // wgpu::Instance::GetPreferredSurfaceFormat is implemented.
-            DAWN_INVALID_IF(descriptor->format != wgpu::TextureFormat::BGRA8Unorm,
-                            "Format (%s) is not %s, which is (currently) the only accepted format.",
-                            descriptor->format, wgpu::TextureFormat::BGRA8Unorm);
+            // DAWN_INVALID_IF(descriptor->format != wgpu::TextureFormat::BGRA8Unorm,
+            //                 "Format (%s) is not %s, which is (currently) the only accepted format.",
+            //                 descriptor->format, wgpu::TextureFormat::BGRA8Unorm);
 
             DAWN_INVALID_IF(descriptor->usage != wgpu::TextureUsage::RenderAttachment,
                             "Usage (%s) is not %s, which is (currently) the only accepted usage.",
