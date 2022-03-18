@@ -371,6 +371,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca7f0bce_ebf11e04",
+        "filename": "src/dawn/native/metal/TextureMTL.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-18T02:40:41Z",
+      "side": 1,
+      "message": "@cwallez I\u0027ve tried IORef but seems still not work. I think ccameron@\u0027s suggestion is the right way. Maybe we could add this in Dawn?",
+      "parentUuid": "e1f0ef9f_346bdc69",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 80,
+        "endChar": 20
+      },
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "602cc082_ca18d2e6",
         "filename": "src/dawn/native/metal/TextureMTL.mm",
         "patchSetId": 3
