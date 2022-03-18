@@ -421,6 +421,10 @@ namespace dawn::native {
     }
 
     void DeviceBase::HandleError(InternalErrorType type, const char* message) {
+        if (IsLost()) {
+            // If the device is already lost, then we no longer care about any errors.
+            return;
+        }
         if (type == InternalErrorType::DeviceLost) {
             mState = State::Disconnected;
 

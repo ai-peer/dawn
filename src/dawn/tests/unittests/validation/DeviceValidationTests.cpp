@@ -225,6 +225,8 @@ TEST_F(DeviceTickValidationTest, DestroyDeviceBeforeInternalTick) {
     ExpectDeviceDestruction();
     device.Destroy();
     dawn::native::DeviceBase* nativeDevice = dawn::native::FromAPI(device.Get());
-    ASSERT_DEVICE_ERROR(nativeDevice->ConsumedError(nativeDevice->Tick()),
-                        HasSubstr("[Device] is lost."));
+    dawn::native::MaybeError error = nativeDevice->Tick();
+    ASSERT_TRUE(error.IsError());
+    auto errorData = error.AcquireError();
+    EXPECT_THAT(errorData->GetMessage(), HasSubstr("[Device] is lost."));
 }
