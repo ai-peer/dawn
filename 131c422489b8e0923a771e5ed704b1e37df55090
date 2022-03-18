@@ -33,6 +33,24 @@
       "message": "Don\u0027t we need the same validation here as for the RenderPassDescriptor? We could merge the validation in that case.",
       "revId": "131c422489b8e0923a771e5ed704b1e37df55090",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4b9f40c_91779929",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-18T14:31:38Z",
+      "side": 1,
+      "message": "We don\u0027t need to validate query index overwritten on compute pass, its\u0027s allowed. That validation on render pass is required by Vulkan backend, because the queries must be reset between uses, and the reset commands must be called outside render pass.",
+      "parentUuid": "985560d3_c37826c6",
+      "revId": "131c422489b8e0923a771e5ed704b1e37df55090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
