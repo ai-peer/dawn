@@ -88,6 +88,9 @@ if (WIN32)
     endif()
 elseif(APPLE)
     set(ENABLE_METAL ON)
+elseif(ANDROID)
+    set(ENABLE_VULKAN ON)
+    set(ENABLE_OPENGLES ON)
 elseif(UNIX)
     set(ENABLE_OPENGLES ON)
     set(ENABLE_DESKTOP_GL ON)
@@ -96,14 +99,17 @@ elseif(UNIX)
 endif()
 
 # GLFW is not supported in UWP
-if((WIN32 AND NOT WINDOWS_STORE) OR UNIX)
+if((WIN32 AND NOT WINDOWS_STORE) OR UNIX AND NOT ANDROID)
     set(DAWN_SUPPORTS_GLFW_FOR_WINDOWING ON)
 endif()
+
 
 # Current examples are depend on GLFW
 if (DAWN_SUPPORTS_GLFW_FOR_WINDOWING)
     set(BUILD_SAMPLES ON)
 endif()
+
+
 
 option_if_not_defined(DAWN_ENABLE_D3D12 "Enable compilation of the D3D12 backend" ${ENABLE_D3D12})
 option_if_not_defined(DAWN_ENABLE_METAL "Enable compilation of the Metal backend" ${ENABLE_METAL})
