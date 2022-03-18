@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54e952dd_f50458cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-18T21:54:58Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5a5ede51fbae667c70deea697f62a02944556f61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef1f44c2_2b086738",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-18T21:54:58Z",
+      "side": 1,
+      "message": "the view holds Ref\u003cTextureBase\u003e so I think we only need the view here",
+      "range": {
+        "startLine": 512,
+        "startChar": 8,
+        "endLine": 513,
+        "endChar": 55
+      },
+      "revId": "5a5ede51fbae667c70deea697f62a02944556f61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
