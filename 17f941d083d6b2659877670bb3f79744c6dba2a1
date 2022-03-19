@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d37dad5e_4531153c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-19T03:47:27Z",
+      "side": 1,
+      "message": "testing this against https://chromium-review.googlesource.com/c/chromium/src/+/3537743\nHopefully once Ben\u0027s tool is done it can just populate expectations.txt for us.\n\nthe split I\u0027ve chosen here means that we can atomically update test_page.html/test_runner.js during a CTS roll should stuff in the CTS change, but if the protocol between Telemetry and test_runner.js changes - we\u0027ll need multiple patches. I\u0027m hoping that won\u0027t be needed very often. And, it communicates data with a .json object so we should be able to extend it relatively easily.\n\nany opinions on directories / naming? bclayton@ in particular since you\u0027re also adding go scripts somewhere.\n\n[dawn_root]/third_party/gn/webgpu-cts is where GN-related things to compile just the CTS lives\n[dawn_root]/webgpu-cts is where the rest of the support code lives. Either for generating lists of stuff for GN, or for Telemetry.",
+      "revId": "17f941d083d6b2659877670bb3f79744c6dba2a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c7a087d_bea57c29",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-19T03:47:27Z",
+      "side": 1,
+      "message": "uncommented just for testing. Will add the skip back before landing.",
+      "revId": "17f941d083d6b2659877670bb3f79744c6dba2a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
