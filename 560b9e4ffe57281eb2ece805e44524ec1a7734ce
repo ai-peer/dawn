@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13c56d58_1cba8279",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-19T04:27:35Z",
+      "side": 1,
+      "message": "that\u0027s not what the code does though? native always returns true. wire returns false if disconnected (but still calls the callback), and true otherwise.",
+      "range": {
+        "startLine": 9,
+        "startChar": 90,
+        "endLine": 9,
+        "endChar": 147
+      },
+      "revId": "560b9e4ffe57281eb2ece805e44524ec1a7734ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f4eaaa3_f28c2713",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-19T04:27:35Z",
+      "side": 1,
+      "message": "this means we can remove it from the handwritten commands list",
+      "revId": "560b9e4ffe57281eb2ece805e44524ec1a7734ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
