@@ -33,6 +33,23 @@
       "message": "I assume this is stale but lgtm in case",
       "revId": "90f3127190b3a787a4d51fa35759a2fd05d90d77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d0cf480_7984bb85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-19T00:47:49Z",
+      "side": 1,
+      "message": "still useful to get things in Dawn closer to HEAD, and to update BUILD.gn",
+      "revId": "90f3127190b3a787a4d51fa35759a2fd05d90d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
