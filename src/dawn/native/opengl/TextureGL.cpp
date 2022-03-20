@@ -122,6 +122,61 @@ namespace dawn::native::opengl {
             return false;
         }
 
+        // FIXME: refactor this with CommandBufferGL
+        void CopyTextureToTextureWithBlit(const OpenGLFunctions& gl,
+                                          const Texture* srcTexture,
+                                          GLuint dstHandle,
+                                          GLuint dstTarget,
+                                          GLenum internalFormat,
+                                          GLuint minLevels,
+                                          GLuint numLevels,
+                                          GLuint minLayer,
+                                          GLuint numLayers) {
+            // Generate temporary framebuffers for the blits.
+            GLuint readFBO = 0, drawFBO = 0;
+            gl.GenFramebuffers(1, &readFBO);
+            gl.GenFramebuffers(1, &drawFBO);
+            gl.BindFramebuffer(GL_READ_FRAMEBUFFER, readFBO);
+            gl.BindFramebuffer(GL_DRAW_FRAMEBUFFER, drawFBO);
+
+            // Reset state that may affect glBlitFramebuffer().
+            gl.Disable(GL_SCISSOR_TEST);
+            GLenum blitMask = 0;
+            blitMask |= GL_COLOR_BUFFER_BIT;
+
+            // FIXME: what about depth and/or stencil?
+            // Iterate over all layers, doing a single blit for each.
+            for (uint32_t layer = minLayer; layer < numLayers; ++layer) {
+                // Bind all required aspects for this layer.
+                {
+                    // FIXME: what about depth and/or stencil?
+                    GLenum glAttachment = GL_COLOR_ATTACHMENT0;
+                    if (srcTexture->GetArrayLayers() == 1 &&
+                        srcTexture->GetDimension() == wgpu::TextureDimension::e2D) {
+                        gl.FramebufferTexture2D(GL_READ_FRAMEBUFFER, glAttachment,
+                                                srcTexture->GetGLTarget(), srcTexture->GetHandle(),
+                                                minLevels);
+                    } else {
+                        gl.FramebufferTextureLayer(GL_READ_FRAMEBUFFER, glAttachment,
+                                                   srcTexture->GetHandle(), minLevels, layer);
+                    }
+                    if (dstTarget == GL_TEXTURE_2D) {
+                        gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER, glAttachment, dstTarget,
+                                                dstHandle, minLevels);
+                    } else {
+                        gl.FramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, glAttachment, dstHandle,
+                                                   minLevels, layer);
+                    }
+                }
+                uint32_t width = srcTexture->GetWidth();
+                uint32_t height = srcTexture->GetHeight();
+                gl.BlitFramebuffer(0, 0, width, height, 0, 0, width, height, blitMask, GL_NEAREST);
+            }
+            gl.Enable(GL_SCISSOR_TEST);
+            gl.DeleteFramebuffers(1, &readFBO);
+            gl.DeleteFramebuffers(1, &drawFBO);
+        }
+
     }  // namespace
 
     // Texture
@@ -551,9 +606,16 @@ namespace dawn::native::opengl {
             mHandle = GenTexture(gl);
             const Texture* textureGL = ToBackend(texture);
             const GLFormat& glFormat = ToBackend(GetDevice())->GetGLFormat(GetFormat());
-            gl.TextureView(mHandle, mTarget, textureGL->GetHandle(), glFormat.internalFormat,
-                           descriptor->baseMipLevel, descriptor->mipLevelCount,
-                           descriptor->baseArrayLayer, descriptor->arrayLayerCount);
+            if (gl.TextureView) {
+                gl.TextureView(mHandle, mTarget, textureGL->GetHandle(), glFormat.internalFormat,
+                               descriptor->baseMipLevel, descriptor->mipLevelCount,
+                               descriptor->baseArrayLayer, descriptor->arrayLayerCount);
+            } else {
+                CopyTextureToTextureWithBlit(gl, textureGL, mHandle, mTarget,
+                                             glFormat.internalFormat, descriptor->baseMipLevel,
+                                             descriptor->mipLevelCount, descriptor->baseArrayLayer,
+                                             descriptor->arrayLayerCount);
+            }
             mOwnsHandle = true;
         }
     }
