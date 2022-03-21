@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "100b9fde_6abbea88",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-21T18:25:17Z",
+      "side": 1,
+      "message": "Oops, changed it and forgot to update the details. Should be all true now. (Also fixed the call in wire since I think it can return true there as well.)",
+      "parentUuid": "13c56d58_1cba8279",
+      "range": {
+        "startLine": 9,
+        "startChar": 90,
+        "endLine": 9,
+        "endChar": 147
+      },
+      "revId": "560b9e4ffe57281eb2ece805e44524ec1a7734ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f4eaaa3_f28c2713",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-03-19T04:27:35Z",
       "side": 1,
       "message": "this means we can remove it from the handwritten commands list",
+      "revId": "560b9e4ffe57281eb2ece805e44524ec1a7734ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e62f02c_a4623a3a",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-21T18:25:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f4eaaa3_f28c2713",
       "revId": "560b9e4ffe57281eb2ece805e44524ec1a7734ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
