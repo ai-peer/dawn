@@ -16,6 +16,24 @@
       "message": "nit: should keep the behavior of calling Pop, even if no callback is passed.\n\nmaybe a simple way would be to set callback to a lambda that does nothing if it\u0027s nullptr.",
       "revId": "83da4d9075d908d307e79cc8a37364e3cede9b73",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "737ee8c6_900b914c",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-21T20:30:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd6011e7_7af6c7fc",
+      "revId": "83da4d9075d908d307e79cc8a37364e3cede9b73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
