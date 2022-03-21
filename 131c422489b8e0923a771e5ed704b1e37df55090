@@ -51,6 +51,24 @@
       "parentUuid": "985560d3_c37826c6",
       "revId": "131c422489b8e0923a771e5ed704b1e37df55090",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2caa69f5_5bc252be",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T07:54:28Z",
+      "side": 1,
+      "message": "Ok, I hadn\u0027t realized the spec didn\u0027t have validation for this for compute passes.",
+      "parentUuid": "f4b9f40c_91779929",
+      "revId": "131c422489b8e0923a771e5ed704b1e37df55090",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
