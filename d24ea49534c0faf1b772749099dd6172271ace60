@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e546743_55679815",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "Can you add Bug: dawn:286? It will automatically associate this CL with https://bugs.chromium.org/p/dawn/issues/detail?id\u003d286",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "44a0f371_a5caecd4",
@@ -14,6 +31,200 @@
       "writtenOn": "2022-03-21T14:36:36Z",
       "side": 1,
       "message": "A working render of the cpphelloworld sample and a personal project that uses compute + some rendering. I ran into a couple of problems which I\u0027m not sure if they\u0027re bad code on my part, or issues with Dawn. I think running the tests on the phone would probably be a good start.\n\nRight now I\u0027m using a CMakeFile.txt with an empty activity, and basically no further tinkering on the Android side (basic example here: https://github.com/AlexVestin/dawn-android-example). \n\nIs there any example of setting up Dawn + gn with android studio / do you know if there\u0027d be any issue with that? From a quick glance the tests weren\u0027t set up with the cmake build, and adding support for that doesn\u0027t sound that fun ",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e524e29_ebe7996c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "It\u0027s great that you got it working with only the implementation of the SwapChain that\u0027s needed. I feared the rest of the Android support bitrot but turns out it didn\u0027t.\n\nWe eventually (in the coming quarter?) want to run the tests on phones with CMake since we\u0027ll ship WebGPU on Android and need test coverage. Compiling for Android using GN can only be done inside a Chromium checkout so I\u0027d suggest you not attempt that :) But also adding support for tests in CMake is a lot of work, so feel free to just wait for us to turn on testing on Android on our CQ.",
+      "parentUuid": "44a0f371_a5caecd4",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2388163_fe30da7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "Added a bunch of comments but it looks great overall!\n\nWe usually ask for two code reviewers in Dawn, I added Austin as second reviewer. Austin, I checked that Alexander signed the CLA. Alexander, I added you to the CLA to run \"CQ dry runs\" and submit changes after you have CodeReview+2. So you can press the Dry Run button now so we see if things are good.",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41f6163d_3bf27cbb",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "nit: newlines seem to be a leftover from experiments while making the CL?",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "639030a1_8f993ba8",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "diito",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a10a69c_96764745",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1574,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "760d6f1a_3c759a15",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f7e9482_b62864df",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "We usually add a TODO(dawn:\u003cnumber\u003e) to help track issues. So dawn:286 in this case.\n\nBut also, is there any validation that we can reasonably do? If none, then we can just comment that and not leave a TODO.",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a71c2c2_e8193a54",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "It\u0027s weird that this ASSERT doesn\u0027t cover all the extension structs. It\u0027s also redundant with the UNREACHABLE() at [1]. Could you remove it?",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97c2a1f6_4a93041c",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61f89e01_37bc1357",
+        "filename": "src/dawn/native/Surface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "nit: AndroidWindow to match the chained struct name?\n\nultra nit (as in even more nitpicky than others): This enum was ordered alphabetically so AndroidWindow would be first.\n\nXlibWindow was renamed recently but we forget to update the enum apparently.",
+      "range": {
+        "startLine": 53,
+        "startChar": 99,
+        "endLine": 53,
+        "endChar": 106
+      },
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06a737a0_5b124493",
+        "filename": "src/dawn/native/Surface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "nit: please run `git cl format` to automatically format files for the CL.",
       "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -37,6 +248,92 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d4bdd48_32b594ae",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "It is definitely needed since this change allows all WebGPU formats to be used for swapchains.\n\nMaybe we could have\n\n #if defined(DAWN_PLATFORM_ANDROID)\n      constexpr wgpu::TextureFormat kRequiredSwapChainFormat \u003d ...\n #else\n      constexpr wgpu::TextureFormat kRequiredSwapChainFormat \u003d ...\n #endif\n\nand use that in the validation.\n\nIn the future we could make sure RGBA8 and BGRA8 are both supported, with a blit if needed, but that\u0027s a lot more work :)",
+      "parentUuid": "2276b13a_758d478b",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fa29cad_8b740703",
+        "filename": "src/dawn/native/vulkan/NativeSwapChainImplVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "Let\u0027s not modify this file. It is used for Dawn\u0027s deprecated swapchain mechanism that we should just remove at this point (we\u0027re just blocked on a small thing in our GL backend).",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb20c86a_e7952d98",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "nit: I think you might not need this header to do the cast at [2] in which case it could be removed.",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17382de5_70c1a6cf",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2c01256_7e4676d6",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c870cd1f_f0dc7c7e",
         "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
         "patchSetId": 1
@@ -48,6 +345,41 @@
       "writtenOn": "2022-03-21T14:36:36Z",
       "side": 1,
       "message": "Some bad initialisation/naming, POST_MULT was just chosen randomly. The capabilties of the surface didn\u0027t support VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR, but maybe this is configurable on the android side, or the restriction could be loosened to use something like: https://github.com/LunarG/VulkanSamples/blob/master/API-Samples/05-init_swapchain/05-init_swapchain.cpp#L209",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99f41ccb_ea611183",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "We chose to require opaqueness on desktop so your windows don\u0027t leak data that\u0027s behind but eventually we\u0027d want to expose something in WebGPU-native to tell you what\u0027s possible to do.\n\nWhatever works on Android with a TODO(dawn:286) works for now, although for clarity, would you mind splitting the current code in #if !defined(DAWN_PLATFORM_ANDROID) and have the new android code have slight duplication if needed (or add the list of preferred composite alpha modes and the logic to chose the first supported one)? Alternatively we can have a list of preferred composite alpha mode for Android vs. not, then iterate it and error if none of the preferred was found.",
+      "parentUuid": "c870cd1f_f0dc7c7e",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a34830d_a3daf788",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T15:27:44Z",
+      "side": 1,
+      "message": "Maybe this could be gated on DAWN_SUPPORTS_GLFW_FOR_WINDOWING instead of NOT ANDROID.",
       "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
