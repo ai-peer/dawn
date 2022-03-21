@@ -177,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0907f8c1_1a0448f4",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2022-03-21T17:13:13Z",
+      "side": 1,
+      "message": "Currently, validate_tag_consistency doesn\u0027t know about this expectation file\u0027s existence since it\u0027s not in //content/test/gpu/gpu_tests/test_expectations, so there won\u0027t be any issues with updating tags here.",
+      "parentUuid": "d3e85401_0436b94f",
+      "revId": "17f941d083d6b2659877670bb3f79744c6dba2a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c7a087d_bea57c29",
         "filename": "webgpu-cts/expectations.txt",
         "patchSetId": 4
