@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2dfa0d9_bf0c6f66",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-21T23:04:48Z",
+      "side": 1,
+      "message": "I assume returning true unconditionally (here and in the non-wire version) is fine, but just checking. Guessing the only actual user is blink, and blink handles the GPUErrorType_Unknown already.",
+      "revId": "3cedd6529c7922adec424e37abbcb244f665003f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7e03080_e37ffe7b",
+        "filename": "src/dawn/wire/server/ServerDevice.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-21T23:04:48Z",
+      "side": 1,
+      "message": "nice that this change resulted in this being cleaner!",
+      "revId": "3cedd6529c7922adec424e37abbcb244f665003f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
