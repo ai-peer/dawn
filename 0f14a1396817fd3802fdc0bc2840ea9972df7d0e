@@ -218,6 +218,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7473e5e0_5b350155",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T07:51:05Z",
+      "side": 1,
+      "message": "Eventually I think all OSes will have a mechanism similar to what Dawn has today on D3D12 to persistently import texture and vend them out. This should be an optimization that\u0027s worthwhile everywhere (and we already know there\u0027s avoidable overhead on Linux).\n\nWith the various cases you described I think the current direction with multi-planar is good and it would be a bit of work but not too hard to change if we find we need to later.",
+      "parentUuid": "57ed82ac_41134272",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b4fecd6_7f6a9e11",
         "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
         "patchSetId": 4

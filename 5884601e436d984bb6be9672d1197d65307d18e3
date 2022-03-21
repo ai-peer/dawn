@@ -419,6 +419,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e39c736_0ce0c0b5",
+        "filename": "src/dawn/native/metal/TextureMTL.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-21T07:51:05Z",
+      "side": 1,
+      "message": "Yeah CFRef is probably the correct one. Can you add it to common/ ?",
+      "parentUuid": "447f40d3_1a95d789",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 80,
+        "endChar": 20
+      },
+      "revId": "5884601e436d984bb6be9672d1197d65307d18e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "602cc082_ca18d2e6",
         "filename": "src/dawn/native/metal/TextureMTL.mm",
         "patchSetId": 3
