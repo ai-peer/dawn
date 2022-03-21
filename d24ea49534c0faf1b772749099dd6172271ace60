@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44a0f371_a5caecd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-21T14:36:36Z",
+      "side": 1,
+      "message": "A working render of the cpphelloworld sample and a personal project that uses compute + some rendering. I ran into a couple of problems which I\u0027m not sure if they\u0027re bad code on my part, or issues with Dawn. I think running the tests on the phone would probably be a good start.\n\nRight now I\u0027m using a CMakeFile.txt with an empty activity, and basically no further tinkering on the Android side (basic example here: https://github.com/AlexVestin/dawn-android-example). \n\nIs there any example of setting up Dawn + gn with android studio / do you know if there\u0027d be any issue with that? From a quick glance the tests weren\u0027t set up with the cmake build, and adding support for that doesn\u0027t sound that fun ",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2276b13a_758d478b",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-21T14:36:36Z",
+      "side": 1,
+      "message": "Didn\u0027t check if this validation was still needed for other backends than Vulkan",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c870cd1f_f0dc7c7e",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-21T14:36:36Z",
+      "side": 1,
+      "message": "Some bad initialisation/naming, POST_MULT was just chosen randomly. The capabilties of the surface didn\u0027t support VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR, but maybe this is configurable on the android side, or the restriction could be loosened to use something like: https://github.com/LunarG/VulkanSamples/blob/master/API-Samples/05-init_swapchain/05-init_swapchain.cpp#L209",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
