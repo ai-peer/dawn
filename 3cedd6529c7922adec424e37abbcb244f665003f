@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3ef67b96_144e42ec",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-21T23:10:23Z",
+      "side": 1,
+      "message": "Yup, I have a follow up CL in chromium to ignore the retvalue. Eventually, we could deprecate the return value entirely, but leaving that for later since it has some more implications on other users atm.",
+      "parentUuid": "a2dfa0d9_bf0c6f66",
+      "revId": "3cedd6529c7922adec424e37abbcb244f665003f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c7e03080_e37ffe7b",
         "filename": "src/dawn/wire/server/ServerDevice.cpp",
         "patchSetId": 8
