@@ -200,6 +200,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57ed82ac_41134272",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-21T05:41:21Z",
+      "side": 1,
+      "message": "Re-re my answer:\nOn mac there is a bit hard to have similar cache. One big problem is where should we store these pre-built MTLTextures. SIs, WGPUTextures and Dawn Device are not good places.\nThe only way to store it is we should have a shared_state object which is similar to D3D backend. I suspect it is worth on mac. On Windows D3D, the shared_state could store shared_handle which re-open is expensive. But on mac, I think CFRetain/CFRelease is light-weight. So my question above is still available. \n\ncwallez@, enga@ and ccameron@, WDYT?",
+      "parentUuid": "af43c962_9c340e25",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b4fecd6_7f6a9e11",
         "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
         "patchSetId": 4
