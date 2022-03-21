@@ -182,6 +182,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af43c962_9c340e25",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-21T00:43:16Z",
+      "side": 1,
+      "message": "Answer my own question.\nI recalled that on other platform, we should have cache system as optimization mechanism. For example, windows platform here https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/D3D11on12Util.h;l\u003d32?q\u003dD3D11on12ResourceCacheEntry\u0026ss\u003dchromium%2Fchromium%2Fsrc.\n\nSo I think macOS could have similar cache mechanism to store IOSurface and created plane MTLTextures. I\u0027ll have a try on this.",
+      "parentUuid": "9064af9a_aab44ee4",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b4fecd6_7f6a9e11",
         "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
         "patchSetId": 4
