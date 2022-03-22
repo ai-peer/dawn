@@ -741,4 +741,13 @@ namespace dawn::native::d3d12 {
         return ToBackend(computePipeline)->UsesNumWorkgroups();
     }
 
+    bool Device::MayRequireDuplicationOfIndirectParameters() const {
+        return true;
+    }
+
+    bool Device::ShouldDuplicateParametersForDrawIndirect(
+        RenderPipelineBase* renderPipelineBase) const {
+        return ToBackend(renderPipelineBase)->GetFirstOffsetInfo().usesVertexIndex;
+    }
+
 }  // namespace dawn::native::d3d12
