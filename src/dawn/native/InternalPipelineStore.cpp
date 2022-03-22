@@ -30,7 +30,8 @@ namespace dawn::native {
         : scratchStorage(device, wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Storage),
           scratchIndirectStorage(device,
                                  wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Indirect |
-                                     wgpu::BufferUsage::Storage) {
+                                     wgpu::BufferUsage::Storage),
+          scratchUniform(device, wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform) {
     }
 
     InternalPipelineStore::~InternalPipelineStore() = default;

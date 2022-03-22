@@ -50,6 +50,9 @@ namespace dawn::native {
         // buffer for indirect dispatch or draw calls.
         ScratchBuffer scratchIndirectStorage;
 
+        // A scratch buffer suitable for use as a copy destination and uniform binding.
+        ScratchBuffer scratchUniform;
+
         Ref<ComputePipelineBase> renderValidationPipeline;
         Ref<ShaderModuleBase> renderValidationShader;
         Ref<ComputePipelineBase> dispatchIndirectValidationPipeline;

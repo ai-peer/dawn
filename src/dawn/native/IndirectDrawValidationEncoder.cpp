@@ -35,6 +35,12 @@ namespace dawn::native {
         // NOTE: This must match the workgroup_size attribute on the compute entry point below.
         constexpr uint64_t kWorkgroupSize = 64;
 
+        struct PassInfo {
+            uint32_t enableValidation;
+            uint32_t duplicateBaseVertex;
+            uint32_t indexedDraw;
+        };
+
         // Equivalent to the BatchInfo struct defined in the shader below.
         struct BatchInfo {
             uint64_t numIndexBufferElements;
@@ -45,13 +51,16 @@ namespace dawn::native {
         // TODO(https://crbug.com/dawn/1108): Propagate validation feedback from this shader in
         // various failure modes.
         static const char sRenderValidationShaderSource[] = R"(
-            let kNumIndirectParamsPerDrawCall = 5u;
-
+            let kNumDrawIndirectParams = 4u;
+            
             let kIndexCountEntry = 0u;
-            let kInstanceCountEntry = 1u;
             let kFirstIndexEntry = 2u;
-            let kBaseVertexEntry = 3u;
-            let kFirstInstanceEntry = 4u;
+
+            struct PassInfo {
+                enableValidation: u32;
+                duplicateBaseVertex: u32;
+                indexedDraw: u32;
+            };
 
             struct BatchInfo {
                 numIndexBufferElementsLow: u32;
@@ -68,29 +77,67 @@ namespace dawn::native {
             @group(0) @binding(0) var<storage, read> batch: BatchInfo;
             @group(0) @binding(1) var<storage, read_write> clientParams: IndirectParams;
             @group(0) @binding(2) var<storage, write> validatedParams: IndirectParams;
+            @group(0) @binding(3) var<uniform> passInfo: PassInfo;
+
+            fn numIndirectParamsPerDrawCallClient() -> u32 {
+                var numParams = kNumDrawIndirectParams;
+                // Indexed Draw has an extra parameter (firstIndex)
+                if (passInfo.indexedDraw > 0u) {
+                    numParams = numParams + 1u;
+                }
+                return numParams;
+            }
+
+            fn numIndirectParamsPerDrawCallValidated() -> u32 {
+                var numParams = numIndirectParamsPerDrawCallClient();
+                // 2 extra parameter for duplicated first/baseVexter and firstInstance
+                if (passInfo.duplicateBaseVertex > 0u) {
+                    numParams = numParams + 2u;
+                }
+                return numParams;
+            }
 
             fn fail(drawIndex: u32) {
-                let index = drawIndex * kNumIndirectParamsPerDrawCall;
-                validatedParams.data[index + kIndexCountEntry] = 0u;
-                validatedParams.data[index + kInstanceCountEntry] = 0u;
-                validatedParams.data[index + kFirstIndexEntry] = 0u;
-                validatedParams.data[index + kBaseVertexEntry] = 0u;
-                validatedParams.data[index + kFirstInstanceEntry] = 0u;
+                var index = drawIndex * numIndirectParamsPerDrawCallValidated();
+                var i = 0u;
+                for(; i < kNumDrawIndirectParams; i = i + 1u) {
+                    validatedParams.data[index + i] = 0u;
+                }
+                if(passInfo.indexedDraw > 0u) {
+                    validatedParams.data[index + i] = 0u;
+                    i = i + 1u;
+                }
+                if(passInfo.duplicateBaseVertex > 0u) {
+                    validatedParams.data[index + i] = 0u;
+                    validatedParams.data[index + i + 1u] = 0u;
+                }
             }
 
             fn pass(drawIndex: u32) {
-                let vIndex = drawIndex * kNumIndirectParamsPerDrawCall;
+                var vIndex = drawIndex * numIndirectParamsPerDrawCallValidated();
                 let cIndex = batch.indirectOffsets[drawIndex];
-                validatedParams.data[vIndex + kIndexCountEntry] =
-                    clientParams.data[cIndex + kIndexCountEntry];
-                validatedParams.data[vIndex + kInstanceCountEntry] =
-                    clientParams.data[cIndex + kInstanceCountEntry];
-                validatedParams.data[vIndex + kFirstIndexEntry] =
-                    clientParams.data[cIndex + kFirstIndexEntry];
-                validatedParams.data[vIndex + kBaseVertexEntry] =
-                    clientParams.data[cIndex + kBaseVertexEntry];
-                validatedParams.data[vIndex + kFirstInstanceEntry] =
-                    clientParams.data[cIndex + kFirstInstanceEntry];
+
+                // The first 2 parameter is reserved for the duplicated first/baseVertex and firstInstance
+                if (passInfo.duplicateBaseVertex > 0u) {
+                    vIndex = vIndex + 2u;
+                }
+
+                var i = 0u;
+                for(; i < kNumDrawIndirectParams; i = i + 1u) {
+                    validatedParams.data[vIndex + i] = clientParams.data[cIndex + i];
+                }
+                if(passInfo.indexedDraw > 0u) {
+                    validatedParams.data[vIndex + i] =
+                        clientParams.data[cIndex + i];
+                    i = i + 1u;
+                }
+                if (passInfo.duplicateBaseVertex > 0u) {
+                    // first/baseVertex is always the penultimate parameter
+                    validatedParams.data[vIndex - 2u] =
+                        clientParams.data[cIndex + i - 2u];
+                    // firstInstance should always be zero
+                    validatedParams.data[vIndex - 1u] = 0u;
+                }
             }
 
             @stage(compute) @workgroup_size(64, 1, 1)
@@ -99,10 +146,21 @@ namespace dawn::native {
                     return;
                 }
 
+                if(passInfo.enableValidation == 0u) {
+                    pass(id.x);
+                    return;
+                }
+
                 let clientIndex = batch.indirectOffsets[id.x];
-                let firstInstance = clientParams.data[clientIndex + kFirstInstanceEntry];
+                // firstInstance is always the last parameter
+                let firstInstance = clientParams.data[clientIndex + numIndirectParamsPerDrawCallClient() - 1u];
                 if (firstInstance != 0u) {
                     fail(id.x);
+                    return;
+                }
+
+                if(passInfo.indexedDraw == 0u) {
+                    pass(id.x);
                     return;
                 }
 
@@ -154,6 +212,7 @@ namespace dawn::native {
                              wgpu::BufferBindingType::ReadOnlyStorage},
                             {1, wgpu::ShaderStage::Compute, kInternalStorageBufferBinding},
                             {2, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage},
+                            {3, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Uniform},
                         },
                         /* allowInternalBinding */ true));
 
@@ -194,7 +253,7 @@ namespace dawn::native {
                                                     RenderPassResourceUsageTracker* usageTracker,
                                                     IndirectDrawMetadata* indirectDrawMetadata) {
         struct Batch {
-            const IndirectDrawMetadata::IndexedIndirectValidationBatch* metadata;
+            const IndirectDrawMetadata::IndirectValidationBatch* metadata;
             uint64_t numIndexBufferElements;
             uint64_t dataBufferOffset;
             uint64_t dataSize;
@@ -206,6 +265,7 @@ namespace dawn::native {
         };
 
         struct Pass {
+            PassInfo passInfo;
             BufferBase* clientIndirectBuffer;
             uint64_t validatedParamsSize = 0;
             uint64_t batchDataSize = 0;
@@ -231,8 +291,11 @@ namespace dawn::native {
             device->GetLimits().v1.minStorageBufferOffsetAlignment;
 
         for (auto& [config, validationInfo] : bufferInfoMap) {
-            BufferBase* clientIndirectBuffer = config.first;
-            for (const IndirectDrawMetadata::IndexedIndirectValidationBatch& batch :
+            auto [clientIndirectBuffer, numIndexBufferElements, duplicateBaseVertex] = config;
+            const uint64_t kIndirectDrawSize =
+                numIndexBufferElements == 0 ? kDrawIndirectSize : kDrawIndexedIndirectSize;
+
+            for (const IndirectDrawMetadata::IndirectValidationBatch& batch :
                  validationInfo.GetBatches()) {
                 const uint64_t minOffsetFromAlignedBoundary =
                     batch.minOffset % minStorageBufferOffsetAlignment;
@@ -241,13 +304,16 @@ namespace dawn::native {
 
                 Batch newBatch;
                 newBatch.metadata = &batch;
-                newBatch.numIndexBufferElements = config.second;
+                newBatch.numIndexBufferElements = numIndexBufferElements;
                 newBatch.dataSize = GetBatchDataSize(batch.draws.size());
                 newBatch.clientIndirectOffset = minOffsetAlignedDown;
                 newBatch.clientIndirectSize =
-                    batch.maxOffset + kDrawIndexedIndirectSize - minOffsetAlignedDown;
+                    batch.maxOffset + kIndirectDrawSize - minOffsetAlignedDown;
 
-                newBatch.validatedParamsSize = batch.draws.size() * kDrawIndexedIndirectSize;
+                uint64_t validatedIndirectSize = kIndirectDrawSize;
+                if (duplicateBaseVertex)
+                    validatedIndirectSize += 2 * sizeof(uint32_t);
+                newBatch.validatedParamsSize = batch.draws.size() * validatedIndirectSize;
                 newBatch.validatedParamsOffset =
                     Align(validatedParamsSize, minStorageBufferOffsetAlignment);
                 validatedParamsSize = newBatch.validatedParamsOffset + newBatch.validatedParamsSize;
@@ -276,6 +342,9 @@ namespace dawn::native {
                 newPass.clientIndirectBuffer = clientIndirectBuffer;
                 newPass.batchDataSize = newBatch.dataSize;
                 newPass.batches.push_back(newBatch);
+                newPass.passInfo.duplicateBaseVertex = duplicateBaseVertex;
+                newPass.passInfo.enableValidation = device->IsValidationEnabled();
+                newPass.passInfo.indexedDraw = numIndexBufferElements != 0;
                 passes.push_back(std::move(newPass));
             }
         }
@@ -283,6 +352,7 @@ namespace dawn::native {
         auto* const store = device->GetInternalPipelineStore();
         ScratchBuffer& validatedParamsBuffer = store->scratchIndirectStorage;
         ScratchBuffer& batchDataBuffer = store->scratchStorage;
+        ScratchBuffer& passInfoBuffer = store->scratchUniform;
 
         uint64_t requiredBatchDataBufferSize = 0;
         for (const Pass& pass : passes) {
@@ -293,6 +363,9 @@ namespace dawn::native {
 
         DAWN_TRY(validatedParamsBuffer.EnsureCapacity(validatedParamsSize));
         usageTracker->BufferUsedAs(validatedParamsBuffer.GetBuffer(), wgpu::BufferUsage::Indirect);
+
+        DAWN_TRY(passInfoBuffer.EnsureCapacity(sizeof(PassInfo)));
+        usageTracker->BufferUsedAs(passInfoBuffer.GetBuffer(), wgpu::BufferUsage::Uniform);
 
         // Now we allocate and populate host-side batch data to be copied to the GPU.
         for (Pass& pass : passes) {
@@ -312,10 +385,20 @@ namespace dawn::native {
                     *indirectOffsets++ = static_cast<uint32_t>(
                         (draw.clientBufferOffset - batch.clientIndirectOffset) / 4);
 
-                    draw.cmd->indirectBuffer = validatedParamsBuffer.GetBuffer();
-                    draw.cmd->indirectOffset = validatedParamsOffset;
+                    if (pass.passInfo.indexedDraw) {
+                        absl::get<DrawIndexedIndirectCmd*>(draw.cmd)->indirectBuffer =
+                            validatedParamsBuffer.GetBuffer();
+                        absl::get<DrawIndexedIndirectCmd*>(draw.cmd)->indirectOffset =
+                            validatedParamsOffset;
 
-                    validatedParamsOffset += kDrawIndexedIndirectSize;
+                        validatedParamsOffset += kDrawIndexedIndirectSize;
+                    } else {
+                        absl::get<DrawIndirectCmd*>(draw.cmd)->indirectBuffer =
+                            validatedParamsBuffer.GetBuffer();
+                        absl::get<DrawIndirectCmd*>(draw.cmd)->indirectOffset =
+                            validatedParamsOffset;
+                        validatedParamsOffset += kDrawIndirectSize;
+                    }
                 }
             }
         }
@@ -326,7 +409,7 @@ namespace dawn::native {
         Ref<BindGroupLayoutBase> layout;
         DAWN_TRY_ASSIGN(layout, pipeline->GetBindGroupLayout(0));
 
-        BindGroupEntry bindings[3];
+        BindGroupEntry bindings[4];
         BindGroupEntry& bufferDataBinding = bindings[0];
         bufferDataBinding.binding = 0;
         bufferDataBinding.buffer = batchDataBuffer.GetBuffer();
@@ -338,18 +421,28 @@ namespace dawn::native {
         validatedParamsBinding.binding = 2;
         validatedParamsBinding.buffer = validatedParamsBuffer.GetBuffer();
 
+        BindGroupEntry& passInfoBinding = bindings[3];
+        passInfoBinding.binding = 3;
+        passInfoBinding.buffer = passInfoBuffer.GetBuffer();
+        passInfoBinding.size = sizeof(PassInfo);
+
         BindGroupDescriptor bindGroupDescriptor = {};
         bindGroupDescriptor.layout = layout.Get();
-        bindGroupDescriptor.entryCount = 3;
+        bindGroupDescriptor.entryCount = 4;
         bindGroupDescriptor.entries = bindings;
 
-        // Finally, we can now encode our validation passes. Each pass first does a single
-        // WriteBuffer to get batch data over to the GPU, followed by a single compute pass. The
-        // compute pass encodes a separate SetBindGroup and Dispatch command for each batch.
+        // Finally, we can now encode our validation and duplication passes. Each pass first does a
+        // two WriteBuffer to get batch and pass data over to the GPU, followed by a single compute
+        // pass. The compute pass encodes a separate SetBindGroup and Dispatch command for each
+        // batch.
         for (const Pass& pass : passes) {
             commandEncoder->APIWriteBuffer(batchDataBuffer.GetBuffer(), 0,
                                            static_cast<const uint8_t*>(pass.batchData.get()),
                                            pass.batchDataSize);
+
+            commandEncoder->APIWriteBuffer(passInfoBuffer.GetBuffer(), 0,
+                                           reinterpret_cast<const uint8_t*>(&pass.passInfo),
+                                           sizeof(PassInfo));
 
             // TODO(dawn:723): change to not use AcquireRef for reentrant object creation.
             ComputePassDescriptor descriptor = {};

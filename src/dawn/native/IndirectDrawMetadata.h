@@ -21,6 +21,7 @@
 #include "dawn/native/CommandBufferStateTracker.h"
 #include "dawn/native/Commands.h"
 
+#include <absl/types/variant.h>
 #include <cstdint>
 #include <map>
 #include <set>
@@ -42,18 +43,19 @@ namespace dawn::native {
     // commands.
     class IndirectDrawMetadata : public NonCopyable {
       public:
-        struct IndexedIndirectDraw {
+        using IndirectCmdWrapper = absl::variant<DrawIndexedIndirectCmd*, DrawIndirectCmd*>;
+        struct IndirectDraw {
             uint64_t clientBufferOffset;
             // This is a pointer to the command that should be populated with the validated
             // indirect scratch buffer. It is only valid up until the encoded command buffer
             // is submitted.
-            DrawIndexedIndirectCmd* cmd;
+            IndirectCmdWrapper cmd;
         };
 
-        struct IndexedIndirectValidationBatch {
+        struct IndirectValidationBatch {
             uint64_t minOffset;
             uint64_t maxOffset;
-            std::vector<IndexedIndirectDraw> draws;
+            std::vector<IndirectDraw> draws;
         };
 
         // Tracks information about every draw call in this render pass which uses the same indirect
@@ -67,16 +69,16 @@ namespace dawn::native {
             // assigned (and deferred) buffer ref and relative offset before returning.
             void AddIndexedIndirectDraw(uint32_t maxDrawCallsPerIndirectValidationBatch,
                                         uint32_t maxBatchOffsetRange,
-                                        IndexedIndirectDraw draw);
+                                        IndirectDraw draw);
 
             // Adds draw calls from an already-computed batch, e.g. from a previously encoded
             // RenderBundle. The added batch is merged into an existing batch if possible, otherwise
             // it's added to mBatch.
             void AddBatch(uint32_t maxDrawCallsPerIndirectValidationBatch,
                           uint32_t maxBatchOffsetRange,
-                          const IndexedIndirectValidationBatch& batch);
+                          const IndirectValidationBatch& batch);
 
-            const std::vector<IndexedIndirectValidationBatch>& GetBatches() const;
+            const std::vector<IndirectValidationBatch>& GetBatches() const;
 
           private:
             Ref<BufferBase> mIndirectBuffer;
@@ -89,12 +91,12 @@ namespace dawn::native {
             // Since the most common expected cases will overwhelmingly require only a single
             // validation pass per render pass, this is optimized for efficient updates to a single
             // batch rather than for efficient manipulation of a large number of batches.
-            std::vector<IndexedIndirectValidationBatch> mBatches;
+            std::vector<IndirectValidationBatch> mBatches;
         };
 
-        // Combination of an indirect buffer reference, and the number of addressable index buffer
-        // elements at the time of a draw call.
-        using IndexedIndirectConfig = std::pair<BufferBase*, uint64_t>;
+        // Combination of an indirect buffer reference, the number of addressable index buffer
+        // elements, and if first/base vertex should be duplicated at the time of a draw call.
+        using IndexedIndirectConfig = std::tuple<BufferBase*, uint64_t, bool>;
         using IndexedIndirectBufferValidationInfoMap =
             std::map<IndexedIndirectConfig, IndexedIndirectBufferValidationInfo>;
 
@@ -111,7 +113,13 @@ namespace dawn::native {
                                     uint64_t indexBufferSize,
                                     BufferBase* indirectBuffer,
                                     uint64_t indirectOffset,
+                                    bool duplicateBaseVertex,
                                     DrawIndexedIndirectCmd* cmd);
+
+        void AddIndirectDraw(BufferBase* indirectBuffer,
+                             uint64_t indirectOffset,
+                             bool duplicateBaseVertex,
+                             DrawIndirectCmd* cmd);
 
       private:
         IndexedIndirectBufferValidationInfoMap mIndexedIndirectBufferValidationInfo;
