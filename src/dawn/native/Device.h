@@ -138,6 +138,8 @@ namespace dawn::native {
         // The reference returned has the same lifetime as the device.
         const Format& GetValidInternalFormat(wgpu::TextureFormat format) const;
 
+        FormatSetIterator IterateFormatSet(const FormatSet& formatSet) const;
+
         virtual ResultOrError<Ref<CommandBufferBase>> CreateCommandBuffer(
             CommandEncoder* encoder,
             const CommandBufferDescriptor* descriptor) = 0;

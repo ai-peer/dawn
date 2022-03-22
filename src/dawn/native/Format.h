@@ -114,12 +114,17 @@ namespace dawn::native {
         size_t GetIndex() const;
 
         // baseFormat represents the memory layout of the format.
-        // If two formats has the same baseFormat, they could copy to each other.
+        // If two formats has the same baseFormat, they could copy to and be viewed as the other
+        // format. Currently two formats have the same baseFormat if they differ only in sRGB-ness.
         wgpu::TextureFormat baseFormat;
 
-        // CopyCompatibleWith() returns true if the input format has the same baseFormat
-        // with current format.
+        // Returns true if the formats are copy compatible.
+        // Currently means they differ only in sRGB-ness.
         bool CopyCompatibleWith(const Format& format) const;
+
+        // Returns true if the formats are texture view format compatible.
+        // Currently means they differ only in sRGB-ness.
+        bool ViewCompatibleWith(const Format& format) const;
 
       private:
         // Used to store the aspectInfo for one or more planes. For single plane "color" formats,
@@ -129,6 +134,48 @@ namespace dawn::native {
         std::array<AspectInfo, kMaxPlanesPerFormat> aspectInfo;
 
         friend FormatTable BuildFormatTable(const DeviceBase* device);
+    };
+
+    class FormatSetIterator {
+        using IndexIterator = BitSetIterator<kKnownFormatCount, size_t>::Iterator;
+
+      public:
+        FormatSetIterator(const FormatTable& formatTable,
+                          const std::bitset<kKnownFormatCount>& formatSet);
+
+        class Iterator final {
+          public:
+            Iterator(const FormatTable& formatTable, IndexIterator&& iter);
+            Iterator& operator++();
+            bool operator==(const Iterator& other) const;
+            bool operator!=(const Iterator& other) const;
+
+            const Format& operator*();
+
+          private:
+            const FormatTable& mFormatTable;
+            IndexIterator mIter;
+        };
+
+        Iterator begin() const;
+        Iterator end() const;
+
+      private:
+        const FormatTable& mFormatTable;
+        const std::bitset<kKnownFormatCount>& mFormatSet;
+    };
+
+    class FormatSet {
+      public:
+        void Set(const Format& format, bool value = true);
+        bool Has(const Format& format) const;
+        bool Any() const;
+
+        friend FormatSetIterator MakeFormatSetIterator(const FormatTable& formatTable,
+                                                       const FormatSet& formatSet);
+
+      private:
+        std::bitset<kKnownFormatCount> mFormatSet = {};
     };
 
     // Implementation details of the format table in the device.

@@ -703,6 +703,10 @@ namespace dawn::native {
         return mFormatTable[index];
     }
 
+    FormatSetIterator DeviceBase::IterateFormatSet(const FormatSet& formatSet) const {
+        return MakeFormatSetIterator(mFormatTable, formatSet);
+    }
+
     ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::GetOrCreateBindGroupLayout(
         const BindGroupLayoutDescriptor* descriptor,
         PipelineCompatibilityToken pipelineCompatibilityToken) {
