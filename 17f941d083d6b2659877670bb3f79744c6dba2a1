@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc359390_66284b4a",
+        "filename": "webgpu-cts/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-22T23:27:25Z",
+      "side": 1,
+      "message": "I will relicense them.\n\nasked opensource-licensing\n\n\u003e Yes, as long as all third-party contributions to these Chromium files have been received by Google under our CLA, then it is fine to apply the Apache 2.0 license and Dawn\u0027s standard license header to these files.",
+      "parentUuid": "497cb509_ea7a53ea",
+      "revId": "17f941d083d6b2659877670bb3f79744c6dba2a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8fc67576_c7864693",
         "filename": "webgpu-cts/expectations.txt",
         "patchSetId": 4
