@@ -741,4 +741,15 @@ namespace dawn::native::d3d12 {
         return ToBackend(computePipeline)->UsesNumWorkgroups();
     }
 
+    bool Device::MayRequireDuplicationOfIndirectParameters() const {
+        return true;
+    }
+
+    bool Device::ShouldDuplicateParametersForDrawIndirect(
+        const RenderPipelineBase* renderPipelineBase) const {
+        // TODO(crbug.com/dawn/1197): add reference to usesInstanceIndex once we support non-zero
+        // firstInstance values.
+        return ToBackend(renderPipelineBase)->GetFirstOffsetInfo().usesVertexIndex;
+    }
+
 }  // namespace dawn::native::d3d12

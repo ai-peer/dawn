@@ -35,14 +35,14 @@ namespace dawn::native {
         : mIndirectBuffer(indirectBuffer) {
     }
 
-    void IndirectDrawMetadata::IndexedIndirectBufferValidationInfo::AddIndexedIndirectDraw(
+    void IndirectDrawMetadata::IndexedIndirectBufferValidationInfo::AddIndirectDraw(
         uint32_t maxDrawCallsPerIndirectValidationBatch,
         uint32_t maxBatchOffsetRange,
-        IndexedIndirectDraw draw) {
+        IndirectDraw draw) {
         const uint64_t newOffset = draw.clientBufferOffset;
         auto it = mBatches.begin();
         while (it != mBatches.end()) {
-            IndexedIndirectValidationBatch& batch = *it;
+            IndirectValidationBatch& batch = *it;
             if (batch.draws.size() >= maxDrawCallsPerIndirectValidationBatch) {
                 // This batch is full. If its minOffset is to the right of the new offset, we can
                 // just insert a new batch here.
@@ -82,7 +82,7 @@ namespace dawn::native {
             ++it;
         }
 
-        IndexedIndirectValidationBatch newBatch;
+        IndirectValidationBatch newBatch;
         newBatch.minOffset = newOffset;
         newBatch.maxOffset = newOffset;
         newBatch.draws.push_back(std::move(draw));
@@ -93,10 +93,10 @@ namespace dawn::native {
     void IndirectDrawMetadata::IndexedIndirectBufferValidationInfo::AddBatch(
         uint32_t maxDrawCallsPerIndirectValidationBatch,
         uint32_t maxBatchOffsetRange,
-        const IndexedIndirectValidationBatch& newBatch) {
+        const IndirectValidationBatch& newBatch) {
         auto it = mBatches.begin();
         while (it != mBatches.end()) {
-            IndexedIndirectValidationBatch& batch = *it;
+            IndirectValidationBatch& batch = *it;
             uint64_t min = std::min(newBatch.minOffset, batch.minOffset);
             uint64_t max = std::max(newBatch.maxOffset, batch.maxOffset);
             if (max - min <= maxBatchOffsetRange && batch.draws.size() + newBatch.draws.size() <=
@@ -117,7 +117,7 @@ namespace dawn::native {
         mBatches.push_back(newBatch);
     }
 
-    const std::vector<IndirectDrawMetadata::IndexedIndirectValidationBatch>&
+    const std::vector<IndirectDrawMetadata::IndirectValidationBatch>&
     IndirectDrawMetadata::IndexedIndirectBufferValidationInfo::GetBatches() const {
         return mBatches;
     }
@@ -149,7 +149,7 @@ namespace dawn::native {
             auto it = mIndexedIndirectBufferValidationInfo.lower_bound(config);
             if (it != mIndexedIndirectBufferValidationInfo.end() && it->first == config) {
                 // We already have batches for the same config. Merge the new ones in.
-                for (const IndexedIndirectValidationBatch& batch : validationInfo.GetBatches()) {
+                for (const IndirectValidationBatch& batch : validationInfo.GetBatches()) {
                     it->second.AddBatch(mMaxDrawCallsPerBatch, mMaxBatchOffsetRange, batch);
                 }
             } else {
@@ -162,6 +162,7 @@ namespace dawn::native {
                                                       uint64_t indexBufferSize,
                                                       BufferBase* indirectBuffer,
                                                       uint64_t indirectOffset,
+                                                      bool duplicateBaseVertex,
                                                       DrawIndexedIndirectCmd* cmd) {
         uint64_t numIndexBufferElements;
         switch (indexFormat) {
@@ -175,7 +176,8 @@ namespace dawn::native {
                 UNREACHABLE();
         }
 
-        const IndexedIndirectConfig config(indirectBuffer, numIndexBufferElements);
+        const IndexedIndirectConfig config = {indirectBuffer, numIndexBufferElements,
+                                              duplicateBaseVertex, true};
         auto it = mIndexedIndirectBufferValidationInfo.find(config);
         if (it == mIndexedIndirectBufferValidationInfo.end()) {
             auto result = mIndexedIndirectBufferValidationInfo.emplace(
@@ -183,11 +185,48 @@ namespace dawn::native {
             it = result.first;
         }
 
-        IndexedIndirectDraw draw;
+        IndirectDraw draw{};
         draw.clientBufferOffset = indirectOffset;
-        draw.cmd = cmd;
-        it->second.AddIndexedIndirectDraw(mMaxDrawCallsPerBatch, mMaxBatchOffsetRange,
-                                          std::move(draw));
+        draw.indexedCmd = cmd;
+        it->second.AddIndirectDraw(mMaxDrawCallsPerBatch, mMaxBatchOffsetRange, std::move(draw));
+    }
+
+    void IndirectDrawMetadata::AddIndirectDraw(BufferBase* indirectBuffer,
+                                               uint64_t indirectOffset,
+                                               bool duplicateBaseVertex,
+                                               DrawIndirectCmd* cmd) {
+        const IndexedIndirectConfig config = {indirectBuffer, 0, duplicateBaseVertex, false};
+        auto it = mIndexedIndirectBufferValidationInfo.find(config);
+        if (it == mIndexedIndirectBufferValidationInfo.end()) {
+            auto result = mIndexedIndirectBufferValidationInfo.emplace(
+                config, IndexedIndirectBufferValidationInfo(indirectBuffer));
+            it = result.first;
+        }
+
+        IndirectDraw draw{};
+        draw.clientBufferOffset = indirectOffset;
+        draw.nonIndexedCmd = cmd;
+        it->second.AddIndirectDraw(mMaxDrawCallsPerBatch, mMaxBatchOffsetRange, std::move(draw));
+    }
+
+    bool IndirectDrawMetadata::IndexedIndirectConfig::operator<(
+        const IndexedIndirectConfig& other) const {
+        if (clientIndirectBuffer == other.clientIndirectBuffer) {
+            if (numIndexBufferElements == other.numIndexBufferElements) {
+                if (duplicateBaseVertex == other.duplicateBaseVertex) {
+                    return indexedDraw < other.indexedDraw;
+                }
+                return duplicateBaseVertex < other.duplicateBaseVertex;
+            }
+            return numIndexBufferElements < other.numIndexBufferElements;
+        }
+        return clientIndirectBuffer < other.clientIndirectBuffer;
+    }
+
+    bool IndirectDrawMetadata::IndexedIndirectConfig::operator==(
+        const IndexedIndirectConfig& other) const {
+        return clientIndirectBuffer == other.clientIndirectBuffer && numIndexBufferElements &&
+               duplicateBaseVertex == other.duplicateBaseVertex && indexedDraw == other.indexedDraw;
     }
 
 }  // namespace dawn::native
