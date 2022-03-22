@@ -351,6 +351,11 @@ namespace dawn::native {
         virtual bool ShouldDuplicateNumWorkgroupsForDispatchIndirect(
             ComputePipelineBase* computePipeline) const;
 
+        virtual bool MayRequireDuplicationOfIndirectParameters() const;
+
+        virtual bool ShouldDuplicateParametersForDrawIndirect(
+            RenderPipelineBase* renderPipelineBase) const;
+
         const CombinedLimits& GetLimits() const;
 
         AsyncTaskManager* GetAsyncTaskManager() const;

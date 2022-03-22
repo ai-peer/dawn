@@ -228,11 +228,6 @@ struct FragInputs {
     queue.Submit(1, &commands);
 
     std::array<uint32_t, 2> expected = {firstVertex, firstInstance};
-    // TODO(dawn:548): remove this once builtins are emulated for indirect draws.
-    // Until then the expected values should always be {0, 0}.
-    if (IsD3D12() && (mode == DrawMode::NonIndexedIndirect || mode == DrawMode::IndexedIndirect)) {
-        expected = {0, 0};
-    }
     EXPECT_BUFFER_U32_RANGE_EQ(expected.data(), buffer, 0, expected.size());
 }
 
