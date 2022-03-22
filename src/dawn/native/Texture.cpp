@@ -29,19 +29,49 @@
 
 namespace dawn::native {
     namespace {
-        // WebGPU currently does not have texture format reinterpretation. If it does, the
-        // code to check for it might go here.
-        MaybeError ValidateTextureViewFormatCompatibility(const TextureBase* texture,
-                                                          const TextureViewDescriptor* descriptor) {
-            if (texture->GetFormat().format != descriptor->format) {
-                if (descriptor->aspect != wgpu::TextureAspect::All &&
-                    texture->GetFormat().GetAspectInfo(descriptor->aspect).format ==
-                        descriptor->format) {
-                    return {};
-                }
 
-                return DAWN_VALIDATION_ERROR(
-                    "The format of texture view is not compatible to the original texture");
+        MaybeError ValidateTextureViewFormatCompatibility(const DeviceBase* device,
+                                                          const Format& format,
+                                                          wgpu::TextureFormat viewFormatEnum) {
+            const Format* viewFormat;
+            DAWN_TRY_ASSIGN(viewFormat, device->GetInternalFormat(viewFormatEnum));
+
+            DAWN_INVALID_IF(
+                !format.ViewCompatibleWith(*viewFormat),
+                "The texture format (%s) is not texture view format compatible with %s.",
+                format.format, viewFormatEnum);
+            return {};
+        }
+
+        MaybeError ValidateCanViewTextureAs(const DeviceBase* device,
+                                            const TextureBase* texture,
+                                            wgpu::TextureAspect aspect,
+                                            wgpu::TextureFormat viewFormat) {
+            wgpu::TextureFormat aspectFormat =
+                aspect != wgpu::TextureAspect::All
+                    ? texture->GetFormat().GetAspectInfo(aspect).format
+                    : texture->GetFormat().format;
+
+            if (aspectFormat != viewFormat) {
+                const auto& compatibleViewFormats = texture->GetViewFormats();
+                if (std::find(compatibleViewFormats.begin(), compatibleViewFormats.end(),
+                              viewFormat) == compatibleViewFormats.end()) {
+                    if (!device->GetValidInternalFormat(aspectFormat)
+                             .ViewCompatibleWith(device->GetValidInternalFormat(viewFormat))) {
+                        return DAWN_FORMAT_VALIDATION_ERROR(
+                            "The texture view format (%s) is not compatible with aspect %s of the "
+                            "texture format (%s)."
+                            "The format (%s) of the selected aspect must be equal to the view "
+                            "format, and the view format "
+                            "must be passed in the list of view formats on texture creation.",
+                            viewFormat, aspect, texture->GetFormat().format, aspectFormat);
+                    } else {
+                        return DAWN_FORMAT_VALIDATION_ERROR(
+                            "%s was not created with the texture view format (%s) "
+                            "in the list of compatible view formats.",
+                            texture, viewFormat);
+                    }
+                }
             }
 
             return {};
@@ -290,6 +320,12 @@ namespace dawn::native {
         const Format* format;
         DAWN_TRY_ASSIGN(format, device->GetInternalFormat(descriptor->format));
 
+        for (uint32_t i = 0; i < descriptor->viewFormatCount; ++i) {
+            DAWN_TRY_CONTEXT(
+                ValidateTextureViewFormatCompatibility(device, *format, descriptor->format),
+                "validating viewFormats[%u]", i);
+        }
+
         wgpu::TextureUsage usage = descriptor->usage;
         if (internalUsageDesc != nullptr) {
             usage |= internalUsageDesc->internalUsage;
@@ -375,7 +411,7 @@ namespace dawn::native {
             "texture's mip level count (%u).",
             descriptor->baseMipLevel, descriptor->mipLevelCount, texture->GetNumMipLevels());
 
-        DAWN_TRY(ValidateTextureViewFormatCompatibility(texture, descriptor));
+        DAWN_TRY(ValidateCanViewTextureAs(device, texture, descriptor->aspect, descriptor->format));
         DAWN_TRY(ValidateTextureViewDimensionCompatibility(texture, descriptor));
 
         return {};
@@ -410,8 +446,15 @@ namespace dawn::native {
         }
 
         if (desc.format == wgpu::TextureFormat::Undefined) {
-            // TODO(dawn:682): Use GetAspectInfo(aspect).
-            desc.format = texture->GetFormat().format;
+            Aspect aspect = SelectFormatAspects(texture->GetFormat(), desc.aspect);
+            if (!HasOneBit(aspect)) {
+                // If more than one aspect is selected (All), use the original format.
+                // Also use the original format if zero aspects are selected. This is
+                // invalid and would be caught later in texture view validation.
+                desc.format = texture->GetFormat().format;
+            } else {
+                desc.format = texture->GetFormat().GetAspectInfo(aspect).format;
+            }
         }
         if (desc.arrayLayerCount == wgpu::kArrayLayerCountUndefined) {
             switch (desc.dimension) {
@@ -461,6 +504,11 @@ namespace dawn::native {
         : ApiObjectBase(device, descriptor->label),
           mDimension(descriptor->dimension),
           mFormat(device->GetValidInternalFormat(descriptor->format)),
+          mViewFormats(descriptor->viewFormatCount == 0
+                           ? std::vector<wgpu::TextureFormat>()
+                           : std::vector<wgpu::TextureFormat>(
+                                 descriptor->viewFormats,
+                                 descriptor->viewFormats + descriptor->viewFormatCount)),
           mSize(descriptor->size),
           mMipLevelCount(descriptor->mipLevelCount),
           mSampleCount(descriptor->sampleCount),
@@ -511,6 +559,10 @@ namespace dawn::native {
     const Format& TextureBase::GetFormat() const {
         ASSERT(!IsError());
         return mFormat;
+    }
+    const std::vector<wgpu::TextureFormat>& TextureBase::GetViewFormats() const {
+        ASSERT(!IsError());
+        return mViewFormats;
     }
     const Extent3D& TextureBase::GetSize() const {
         ASSERT(!IsError());
