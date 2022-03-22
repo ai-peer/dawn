@@ -34,6 +34,24 @@
       "parentUuid": "8bb55ec7_6495a287",
       "revId": "67efacb67fd3d14f0e4c7a93add1b1f7504d2b9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4c6e97e_aba6f01b",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-22T14:05:44Z",
+      "side": 0,
+      "message": "We would add the validation in the frontend and here we would do something like:\n\n```\nVkFormat targetFormat \u003d VulkanImageFormat(GetDevice(), GetFormat());\nfor (...) {\n  if (format.format \u003d\u003d targetFormat \u0026\u0026 ...)\n   ....\n}\n```",
+      "parentUuid": "b2f79a4a_c917abdb",
+      "revId": "67efacb67fd3d14f0e4c7a93add1b1f7504d2b9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

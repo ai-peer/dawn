@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c9e38d4_ea49c702",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-22T14:05:44Z",
+      "side": 1,
+      "message": "To update CLs in Gerrit you amend them and git push to refs/for/main again. The Change-Id that was added to the commit message is used to match against existing code reviews and update them.",
+      "parentUuid": "290717c3_db43a296",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41f6163d_3bf27cbb",
@@ -277,6 +295,24 @@
       "side": 1,
       "message": "I think checking androidDesc-\u003ewindow for nullptr and that casting to ANativeWindow works would be reasonable. The other two validations I can think of are doing a call to get the width to see that it doesn\u0027t error, and checking the format to match against the user provided swapchain format (https://developer.android.com/ndk/reference/group/a-native-window#anativewindow_getwidth). I think the latter gets caught in the swapchain validation either way though",
       "parentUuid": "9f7e9482_b62864df",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f88716ce_97eda7e2",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-22T14:05:44Z",
+      "side": 1,
+      "message": "Checking for nullptr sounds good, but casting ANativeWindow would always work so I don\u0027t think we can use that, and same for calling GetWidth() since it would just crash with an invalid pointer.\n\nI asked a colleague that worked on Android and he says that it\u0027s not possible to check the pointer is a valid ANativeWindow.\n\nCan you add the nullptr check and a comment that we can\u0027t do better?",
+      "parentUuid": "eb078953_549023b7",
       "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
