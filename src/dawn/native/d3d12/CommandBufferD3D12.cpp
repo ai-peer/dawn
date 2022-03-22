@@ -149,11 +149,17 @@ namespace dawn::native::d3d12 {
             uint32_t count = 0;
             if (firstOffsetInfo.usesVertexIndex) {
                 offsets[firstOffsetInfo.vertexIndexOffset / sizeof(uint32_t)] = firstVertex;
-                ++count;
+                count = std::max(static_cast<uint32_t>(firstOffsetInfo.instanceIndexOffset /
+                                                       sizeof(uint32_t)),
+                                 count) +
+                        1;
             }
             if (firstOffsetInfo.usesInstanceIndex) {
                 offsets[firstOffsetInfo.instanceIndexOffset / sizeof(uint32_t)] = firstInstance;
-                ++count;
+                count = std::max(static_cast<uint32_t>(firstOffsetInfo.instanceIndexOffset /
+                                                       sizeof(uint32_t)),
+                                 count) +
+                        1;
             }
             PipelineLayout* layout = ToBackend(pipeline->GetLayout());
             commandList->SetGraphicsRoot32BitConstants(layout->GetFirstIndexOffsetParameterIndex(),
@@ -1446,13 +1452,17 @@ namespace dawn::native::d3d12 {
                     DAWN_TRY(bindingTracker->Apply(commandContext));
                     vertexBufferTracker.Apply(commandList, lastPipeline);
 
-                    // TODO(dawn:548): remove this once builtins are emulated for indirect draws.
-                    // Zero the index offset values to avoid reusing values from the previous draw
-                    RecordFirstIndexOffset(commandList, lastPipeline, 0, 0);
+                    // TODO(dawn:548): update when we add support for "indirect-first-instance".
+                    // Validation shader allocates a zeroed out first_instance only when
+                    // vertex_index is duplicated.
+                    if (lastPipeline->GetFirstOffsetInfo().usesInstanceIndex &&
+                        !lastPipeline->GetFirstOffsetInfo().usesVertexIndex) {
+                        RecordFirstIndexOffset(commandList, lastPipeline, 0, 0);
+                    }
 
                     Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
                     ComPtr<ID3D12CommandSignature> signature =
-                        ToBackend(GetDevice())->GetDrawIndirectSignature();
+                        lastPipeline->GetDrawIndirectCommandSignature();
                     commandList->ExecuteIndirect(signature.Get(), 1, buffer->GetD3D12Resource(),
                                                  draw->indirectOffset, nullptr, 0);
                     break;
@@ -1464,15 +1474,19 @@ namespace dawn::native::d3d12 {
                     DAWN_TRY(bindingTracker->Apply(commandContext));
                     vertexBufferTracker.Apply(commandList, lastPipeline);
 
-                    // TODO(dawn:548): remove this once builtins are emulated for indirect draws.
-                    // Zero the index offset values to avoid reusing values from the previous draw
-                    RecordFirstIndexOffset(commandList, lastPipeline, 0, 0);
+                    // TODO(dawn:548): update when we add support for "indirect-first-instance".
+                    // Validation shader allocates a zeroed out first_instance only when
+                    // vertex_index is duplicated.
+                    if (lastPipeline->GetFirstOffsetInfo().usesInstanceIndex &&
+                        !lastPipeline->GetFirstOffsetInfo().usesVertexIndex) {
+                        RecordFirstIndexOffset(commandList, lastPipeline, 0, 0);
+                    }
 
                     Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
                     ASSERT(buffer != nullptr);
 
                     ComPtr<ID3D12CommandSignature> signature =
-                        ToBackend(GetDevice())->GetDrawIndexedIndirectSignature();
+                        lastPipeline->GetDrawIndexedIndirectCommandSignature();
                     commandList->ExecuteIndirect(signature.Get(), 1, buffer->GetD3D12Resource(),
                                                  draw->indirectOffset, nullptr, 0);
                     break;
