@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5b29ea8e_81485c94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-22T12:00:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1e546743_55679815",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "44a0f371_a5caecd4",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -70,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "290717c3_db43a296",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-22T12:00:55Z",
+      "side": 1,
+      "message": "Thanks for the feedback! I think I\u0027ll hold off on trying the tests then, thanks. To update the CL do I do a new commit and push to ref/for/main again, or do I need to do something different, also do I squash at the end then?",
+      "parentUuid": "f2388163_fe30da7b",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41f6163d_3bf27cbb",
@@ -83,6 +119,24 @@
       "writtenOn": "2022-03-21T15:27:44Z",
       "side": 1,
       "message": "nit: newlines seem to be a leftover from experiments while making the CL?",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f95ef290_bbd4c43f",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-22T12:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41f6163d_3bf27cbb",
       "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -104,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b745d3b_ec7ce74c",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-22T12:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "639030a1_8f993ba8",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a10a69c_96764745",
@@ -121,6 +193,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5843a697_3c27182a",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1574,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-22T12:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a10a69c_96764745",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "760d6f1a_3c759a15",
@@ -134,6 +224,24 @@
       "writtenOn": "2022-03-21T15:27:44Z",
       "side": 1,
       "message": "ditto",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdb58986_1d57ab66",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-22T12:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "760d6f1a_3c759a15",
       "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -157,6 +265,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb078953_549023b7",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-22T12:00:55Z",
+      "side": 1,
+      "message": "I think checking androidDesc-\u003ewindow for nullptr and that casting to ANativeWindow works would be reasonable. The other two validations I can think of are doing a call to get the width to see that it doesn\u0027t error, and checking the format to match against the user provided swapchain format (https://developer.android.com/ndk/reference/group/a-native-window#anativewindow_getwidth). I think the latter gets caught in the swapchain validation either way though",
+      "parentUuid": "9f7e9482_b62864df",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a71c2c2_e8193a54",
         "filename": "src/dawn/native/Surface.cpp",
         "patchSetId": 1
@@ -168,6 +294,24 @@
       "writtenOn": "2022-03-21T15:27:44Z",
       "side": 1,
       "message": "It\u0027s weird that this ASSERT doesn\u0027t cover all the extension structs. It\u0027s also redundant with the UNREACHABLE() at [1]. Could you remove it?",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06462a15_07266e42",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-22T12:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a71c2c2_e8193a54",
       "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -212,6 +356,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd6860c9_7da13557",
+        "filename": "src/dawn/native/Surface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-22T12:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61f89e01_37bc1357",
+      "range": {
+        "startLine": 53,
+        "startChar": 99,
+        "endLine": 53,
+        "endChar": 106
+      },
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06a737a0_5b124493",
@@ -225,6 +393,24 @@
       "writtenOn": "2022-03-21T15:27:44Z",
       "side": 1,
       "message": "nit: please run `git cl format` to automatically format files for the CL.",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17be07cd_cab48ca8",
+        "filename": "src/dawn/native/Surface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-22T12:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06a737a0_5b124493",
       "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -264,6 +450,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9cd256a_8aeab790",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-22T12:00:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4d4bdd48_32b594ae",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fa29cad_8b740703",
@@ -281,6 +485,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6989e599_a8cafe3c",
+        "filename": "src/dawn/native/vulkan/NativeSwapChainImplVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-22T12:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fa29cad_8b740703",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb20c86a_e7952d98",
@@ -294,6 +516,24 @@
       "writtenOn": "2022-03-21T15:27:44Z",
       "side": 1,
       "message": "nit: I think you might not need this header to do the cast at [2] in which case it could be removed.",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d14cc913_54937e40",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-22T12:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb20c86a_e7952d98",
       "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -328,6 +568,24 @@
       "writtenOn": "2022-03-21T15:27:44Z",
       "side": 1,
       "message": "ditto",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5434781_7b0eddfc",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-22T12:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2c01256_7e4676d6",
       "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -367,6 +625,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8de0a2d1_efdc58e2",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-22T12:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99f41ccb_ea611183",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a34830d_a3daf788",
@@ -380,6 +656,24 @@
       "writtenOn": "2022-03-21T15:27:44Z",
       "side": 1,
       "message": "Maybe this could be gated on DAWN_SUPPORTS_GLFW_FOR_WINDOWING instead of NOT ANDROID.",
+      "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3d7fb11_a9630b13",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-22T12:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a34830d_a3daf788",
       "revId": "d24ea49534c0faf1b772749099dd6172271ace60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

@@ -16,6 +16,24 @@
       "message": "We know what format the application wants to use for this since it is given by the application when creating the swapchain (and we validate it in SwapChain.cpp). So instead we could get the format of the swapchain with GetFormat() (https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/SwapChain.h;drc\u003de9d9e23e80e5687b28a4476e8dffc5f74093f4ae;l\u003d127) and then convert it to a Vulkan format with https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/TextureVk.h;drc\u003d818001d32ea782c784d42dbaedf66868a31cc9af;l\u003d32\n\nThis would avoid the need for introducing a CheckFormat function.",
       "revId": "67efacb67fd3d14f0e4c7a93add1b1f7504d2b9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2f79a4a_c917abdb",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2022-03-22T12:00:55Z",
+      "side": 0,
+      "message": "Keep the validation for BGRA + ifndef android or validate GetFormat()?",
+      "parentUuid": "8bb55ec7_6495a287",
+      "revId": "67efacb67fd3d14f0e4c7a93add1b1f7504d2b9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
