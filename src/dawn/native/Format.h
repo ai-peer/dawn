@@ -114,12 +114,17 @@ namespace dawn::native {
         size_t GetIndex() const;
 
         // baseFormat represents the memory layout of the format.
-        // If two formats has the same baseFormat, they could copy to each other.
+        // If two formats has the same baseFormat, they could copy to and be viewed as the other
+        // format. Currently two formats have the same baseFormat if they differ only in sRGB-ness.
         wgpu::TextureFormat baseFormat;
 
-        // CopyCompatibleWith() returns true if the input format has the same baseFormat
-        // with current format.
+        // Returns true if the foramts are copy compatible.
+        // Currently means they differ only in sRGB-ness.
         bool CopyCompatibleWith(const Format& format) const;
+
+        // Returns true if the formats are texture view format compatible.
+        // Currently means they differ only in sRGB-ness.
+        bool ViewCompatibleWith(const Format& format) const;
 
       private:
         // Used to store the aspectInfo for one or more planes. For single plane "color" formats,
