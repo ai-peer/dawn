@@ -438,6 +438,94 @@ TEST_P(TextureViewSamplingTest, Texture2DArrayViewOnOneLevelOf2DArrayTexture) {
     Texture2DArrayViewTest(6, 6, 2, 4);
 }
 
+// Test that an RGBA8 texture may be interpreted as RGBA8UnormSrgb
+// More extensive color value checks and format tests are left for the CTS.
+TEST_P(TextureViewSamplingTest, SRGBReinterpretation) {
+    // TODO(crbug.com/dawn/593): This test requires glTextureView, which is unsupported on GLES.
+    DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
+
+    wgpu::TextureViewDescriptor viewDesc = {};
+    viewDesc.format = wgpu::TextureFormat::RGBA8UnormSrgb;
+
+    wgpu::TextureDescriptor textureDesc = {};
+    textureDesc.size = {2, 2, 1};
+    textureDesc.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::TextureBinding;
+    textureDesc.format = wgpu::TextureFormat::RGBA8Unorm;
+    textureDesc.viewFormats = &viewDesc.format;
+    textureDesc.viewFormatCount = 1;
+    wgpu::Texture texture = device.CreateTexture(&textureDesc);
+
+    wgpu::ImageCopyTexture dst = {};
+    dst.texture = texture;
+    std::array<RGBA8, 4> rgbaTextureData = {
+        RGBA8(180, 0, 0, 255),
+        RGBA8(0, 84, 0, 127),
+        RGBA8(0, 0, 62, 100),
+        RGBA8(62, 180, 84, 90),
+    };
+
+    wgpu::TextureDataLayout dataLayout = {};
+    dataLayout.bytesPerRow = textureDesc.size.width * sizeof(RGBA8);
+
+    queue.WriteTexture(&dst, rgbaTextureData.data(), rgbaTextureData.size() * sizeof(RGBA8),
+                       &dataLayout, &textureDesc.size);
+
+    wgpu::TextureView textureView = texture.CreateView(&viewDesc);
+
+    utils::ComboRenderPipelineDescriptor pipelineDesc;
+    pipelineDesc.vertex.module = utils::CreateShaderModule(device, R"(
+        @stage(vertex)
+        fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4<f32> {
+            var pos = array<vec2<f32>, 6>(
+                                        vec2<f32>(-1.0, -1.0),
+                                        vec2<f32>(-1.0,  1.0),
+                                        vec2<f32>( 1.0, -1.0),
+                                        vec2<f32>(-1.0,  1.0),
+                                        vec2<f32>( 1.0, -1.0),
+                                        vec2<f32>( 1.0,  1.0));
+            return vec4<f32>(pos[VertexIndex], 0.0, 1.0);
+        }
+    )");
+    pipelineDesc.cFragment.module = utils::CreateShaderModule(device, R"(
+        @group(0) @binding(0) var texture : texture_2d<f32>;
+
+        @stage(fragment)
+        fn main(@builtin(position) coord: vec4<f32>) -> @location(0) vec4<f32> {
+            return textureLoad(texture, vec2<i32>(coord.xy), 0);
+        }
+    )");
+
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(
+        device, textureDesc.size.width, textureDesc.size.height, wgpu::TextureFormat::RGBA8Unorm);
+    pipelineDesc.cTargets[0].format = renderPass.colorFormat;
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    {
+        wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDesc);
+
+        wgpu::BindGroup bindGroup =
+            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, textureView}});
+
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.SetPipeline(pipeline);
+        pass.SetBindGroup(0, bindGroup);
+        pass.Draw(6);
+        pass.End();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    std::array<RGBA8, 4> expectedData = {
+        RGBA8(0x74, 0, 0, 255),
+        RGBA8(0, 0x17, 0, 127),
+        RGBA8(0, 0, 0x0C, 100),
+        RGBA8(0x0C, 0x74, 0x17, 90),
+    };
+    EXPECT_TEXTURE_EQ(expectedData.data(), renderPass.color, {0, 0},
+                      {textureDesc.size.width, textureDesc.size.height});
+}
+
 // Test sampling from a cube map texture view that covers a whole 2D array texture.
 TEST_P(TextureViewSamplingTest, TextureCubeMapOnWholeTexture) {
     constexpr uint32_t kTotalLayers = 6;
