@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5af732c8_712ae3cb",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-23T05:27:15Z",
+      "side": 1,
+      "message": "No, it should be managed. I think I correct before. Thanks for pointing out.",
+      "parentUuid": "5e98f8ae_b7899c6d",
+      "range": {
+        "startLine": 849,
+        "startChar": 0,
+        "endLine": 849,
+        "endChar": 56
+      },
+      "revId": "568f739a5cc7d2dda56af29c38771db494346452",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96345480_58ad1d5b",
         "filename": "src/dawn/native/metal/TextureMTL.mm",
         "patchSetId": 6
