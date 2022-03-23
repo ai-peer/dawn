@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c3563893_246fdf48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-23T03:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e16211dc_2f16dde2",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "97abe852_6502e8e4",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
@@ -87,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d6aaaaa_ece15bb1",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-23T03:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f73ef5e_a10b8bce",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1537de3c_ce00f85e",
@@ -122,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3583a03d_281122f9",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-23T03:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1039bc45_879af0fc",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5fe18fb4_5969826a",
@@ -135,6 +189,30 @@
       "writtenOn": "2022-03-17T10:36:01Z",
       "side": 1,
       "message": "u-nit: We could just store the iosurface for single-planar imports too. There\u0027s basically no cost and makes the code more general.",
+      "range": {
+        "startLine": 577,
+        "startChar": 15,
+        "endLine": 577,
+        "endChar": 36
+      },
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "902e3329_675644dc",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-23T03:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fe18fb4_5969826a",
       "range": {
         "startLine": 577,
         "startChar": 15,
@@ -234,6 +312,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "349e1b31_b7fff698",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-23T03:39:22Z",
+      "side": 1,
+      "message": "Thanks! Ack.",
+      "parentUuid": "7473e5e0_5b350155",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b4fecd6_7f6a9e11",
@@ -247,6 +343,24 @@
       "writtenOn": "2022-03-17T10:36:01Z",
       "side": 1,
       "message": "Is this leaked or does CFDictionaryAddValue take the ref?",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c9541b7_f4d95c21",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-23T03:39:22Z",
+      "side": 1,
+      "message": "Leaked. Thanks for catching this!",
+      "parentUuid": "6b4fecd6_7f6a9e11",
       "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -268,6 +382,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49df262d_a708a913",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-23T03:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b78aa4a_eeab23c0",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "023333ac_b73e9962",
@@ -281,6 +413,24 @@
       "writtenOn": "2022-03-17T10:36:01Z",
       "side": 1,
       "message": "nit: we could lock/unlock outside of the loop",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76dbe8e3_440ee622",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-23T03:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "023333ac_b73e9962",
       "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -302,6 +452,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c931fcb_1da77c56",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-23T03:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00007bc5_e9396a22",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87a5fd2f_263231e4",
@@ -315,6 +483,24 @@
       "writtenOn": "2022-03-17T10:36:01Z",
       "side": 1,
       "message": "I think this retain is redundant with the one in the constructor of PlatformTextureIOSurface.",
+      "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b18046c6_256382a1",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-23T03:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87a5fd2f_263231e4",
       "revId": "0f14a1396817fd3802fdc0bc2840ea9972df7d0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

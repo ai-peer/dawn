@@ -33,6 +33,24 @@
       "message": "nit: we should only accept Plane0Only and Plane1Only (and throw errors otherwise).",
       "revId": "0d500ff33faa473fb5ea50a59bed165e6fd9d088",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4633bb1_39f33aa7",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-23T03:39:22Z",
+      "side": 1,
+      "message": "Added a helper function to handle this. We might have more planes in future.",
+      "parentUuid": "595da75c_926a7275",
+      "revId": "0d500ff33faa473fb5ea50a59bed165e6fd9d088",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

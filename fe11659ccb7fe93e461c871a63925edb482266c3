@@ -16,6 +16,24 @@
       "message": "We should mark the plane in the descriptor as deprecated and eventually remove it.",
       "revId": "fe11659ccb7fe93e461c871a63925edb482266c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b21ad35_bb5320b2",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-23T03:39:22Z",
+      "side": 0,
+      "message": "This plane is defined in MetalBackend.h(https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/include/dawn_native/MetalBackend.h). I\u0027m not sure how can we mark this as deprecated(I think it is in dawn.json?)",
+      "parentUuid": "6b6ae4c8_db44d3e8",
+      "revId": "fe11659ccb7fe93e461c871a63925edb482266c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
