@@ -122,6 +122,121 @@ namespace dawn::native::opengl {
             return false;
         }
 
+        // FIXME: refactor this with CommandBufferGL
+        void CopyTextureToTexture(const OpenGLFunctions& gl,
+                                  const Texture* srcTexture,
+                                  Aspect srcAspects,
+                                  GLuint dstHandle,
+                                  GLuint dstTarget,
+                                  GLenum internalFormat,
+                                  GLuint minLevel,
+                                  GLuint numLevels,
+                                  GLuint minLayer,
+                                  GLuint numLayers) {
+            uint32_t width = srcTexture->GetWidth() >> minLevel;
+            uint32_t height = srcTexture->GetHeight() >> minLevel;
+            gl.BindTexture(dstTarget, dstHandle);
+
+            switch (dstTarget) {
+                case GL_TEXTURE_2D_ARRAY:
+                case GL_TEXTURE_3D:
+                    gl.TexStorage3D(dstTarget, numLevels, internalFormat, width, height, numLayers);
+                case GL_TEXTURE_2D:
+                case GL_TEXTURE_CUBE_MAP:
+                    gl.TexStorage2D(dstTarget, numLevels, internalFormat, width, height);
+                    break;
+
+                case GL_TEXTURE_1D:
+                    UNREACHABLE();
+            }
+
+            GLuint srcHandle = srcTexture->GetHandle();
+            GLenum srcTarget = srcTexture->GetGLTarget();
+
+            if (gl.IsAtLeastGL(4, 3) || gl.IsAtLeastGLES(3, 2)) {
+                for (GLuint level = 0; level < numLevels; ++level) {
+                    gl.CopyImageSubData(srcHandle, srcTarget, minLevel + level, 0, 0, minLayer,
+                                        dstHandle, dstTarget, level, 0, 0, 0, width, height,
+                                        numLayers);
+                }
+                return;
+            }
+
+            GLint prevReadFBO = 0, prevDrawFBO = 0;
+            gl.GetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &prevReadFBO);
+            gl.GetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &prevDrawFBO);
+
+            // Generate temporary framebuffers for the blits.
+            GLuint readFBO = 0, drawFBO = 0;
+            gl.GenFramebuffers(1, &readFBO);
+            gl.GenFramebuffers(1, &drawFBO);
+            gl.BindFramebuffer(GL_READ_FRAMEBUFFER, readFBO);
+            gl.BindFramebuffer(GL_DRAW_FRAMEBUFFER, drawFBO);
+
+            // Reset state that may affect glBlitFramebuffer().
+            gl.Disable(GL_SCISSOR_TEST);
+            GLenum blitMask = 0;
+            if (srcAspects & Aspect::Color) {
+                blitMask |= GL_COLOR_BUFFER_BIT;
+            }
+            if (srcAspects & Aspect::Depth) {
+                blitMask |= GL_DEPTH_BUFFER_BIT;
+            }
+            if (srcAspects & Aspect::Stencil) {
+                blitMask |= GL_STENCIL_BUFFER_BIT;
+            }
+
+            // Iterate over all layers, doing a single blit for each.
+            for (GLuint layer = 0; layer < numLayers; ++layer) {
+                for (GLuint level = 0; level < numLevels; ++level) {
+                    for (Aspect aspect : IterateEnumMask(srcAspects)) {
+                        GLenum glAttachment;
+                        switch (aspect) {
+                            case Aspect::Color:
+                                glAttachment = GL_COLOR_ATTACHMENT0;
+                                break;
+                            case Aspect::Depth:
+                                glAttachment = GL_DEPTH_ATTACHMENT;
+                                break;
+                            case Aspect::Stencil:
+                                glAttachment = GL_STENCIL_ATTACHMENT;
+                                break;
+                            case Aspect::CombinedDepthStencil:
+                            case Aspect::None:
+                            case Aspect::Plane0:
+                            case Aspect::Plane1:
+                                UNREACHABLE();
+                        }
+                        if (srcTarget == GL_TEXTURE_2D_ARRAY) {
+                            gl.FramebufferTextureLayer(GL_READ_FRAMEBUFFER, glAttachment, srcHandle,
+                                                       minLevel + level, minLayer + layer);
+                        } else {
+                            gl.FramebufferTexture2D(GL_READ_FRAMEBUFFER, glAttachment, srcTarget,
+                                                    srcHandle, minLevel + level);
+                        }
+                        if (dstTarget == GL_TEXTURE_2D_ARRAY) {
+                            gl.FramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, glAttachment, dstHandle,
+                                                       level, layer);
+                        } else if (dstTarget == GL_TEXTURE_CUBE_MAP) {
+                            GLenum target = GL_TEXTURE_CUBE_MAP_POSITIVE_X + layer;
+                            gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER, glAttachment, target,
+                                                    dstHandle, 0);
+                        } else {
+                            gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER, glAttachment, dstTarget,
+                                                    dstHandle, 0);
+                        }
+                    }
+                    gl.BlitFramebuffer(0, 0, width, height, 0, 0, width, height, blitMask,
+                                       GL_NEAREST);
+                }
+            }
+            gl.Enable(GL_SCISSOR_TEST);
+            gl.DeleteFramebuffers(1, &readFBO);
+            gl.DeleteFramebuffers(1, &drawFBO);
+            gl.BindFramebuffer(GL_READ_FRAMEBUFFER, prevReadFBO);
+            gl.BindFramebuffer(GL_DRAW_FRAMEBUFFER, prevDrawFBO);
+        }
+
     }  // namespace
 
     // Texture
@@ -177,6 +292,14 @@ namespace dawn::native::opengl {
             GetDevice()->ConsumedError(
                 ClearTexture(GetAllSubresources(), TextureBase::ClearValue::NonZero));
         }
+    }
+
+    void Texture::Touch() {
+        mGenID++;
+    }
+
+    uint32_t Texture::GetGenID() const {
+        return mGenID;
     }
 
     Texture::Texture(Device* device,
@@ -516,6 +639,7 @@ namespace dawn::native::opengl {
             SetIsSubresourceContentInitialized(true, range);
             device->IncrementLazyClearCountForTesting();
         }
+        Touch();
         return {};
     }
 
@@ -545,15 +669,17 @@ namespace dawn::native::opengl {
         } else if (!RequiresCreatingNewTextureView(texture, descriptor)) {
             mHandle = ToBackend(texture)->GetHandle();
         } else {
-            // glTextureView() is supported on OpenGL version >= 4.3
-            // TODO(crbug.com/dawn/593): support texture view on OpenGL version <= 4.2 and ES
             const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
             mHandle = GenTexture(gl);
             const Texture* textureGL = ToBackend(texture);
             const GLFormat& glFormat = ToBackend(GetDevice())->GetGLFormat(GetFormat());
-            gl.TextureView(mHandle, mTarget, textureGL->GetHandle(), glFormat.internalFormat,
-                           descriptor->baseMipLevel, descriptor->mipLevelCount,
-                           descriptor->baseArrayLayer, descriptor->arrayLayerCount);
+            if (gl.IsAtLeastGL(4, 3)) {
+                gl.TextureView(mHandle, mTarget, textureGL->GetHandle(), glFormat.internalFormat,
+                               descriptor->baseMipLevel, descriptor->mipLevelCount,
+                               descriptor->baseArrayLayer, descriptor->arrayLayerCount);
+            } else {
+                mNeedsUpdate = true;
+            }
             mOwnsHandle = true;
         }
     }
@@ -575,6 +701,24 @@ namespace dawn::native::opengl {
 
     GLenum TextureView::GetGLTarget() const {
         return mTarget;
+    }
+
+    void TextureView::UpdateIfNeeded() {
+        if (!mNeedsUpdate) {
+            return;
+        }
+        const Texture* texture = ToBackend(GetTexture());
+        uint32_t genID = texture->GetGenID();
+        if (mGenID == genID) {
+            return;
+        }
+        Device* device = ToBackend(GetDevice());
+        const OpenGLFunctions& gl = device->gl;
+        const GLFormat& glFormat = device->GetGLFormat(GetFormat());
+        CopyTextureToTexture(gl, texture, GetAspects(), GetHandle(), GetGLTarget(),
+                             glFormat.internalFormat, GetBaseMipLevel(), GetLevelCount(),
+                             GetBaseArrayLayer(), GetLayerCount());
+        mGenID = genID;
     }
 
 }  // namespace dawn::native::opengl
