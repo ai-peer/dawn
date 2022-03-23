@@ -154,6 +154,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c275c42_ca68f857",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-23T18:31:35Z",
+      "side": 1,
+      "message": "Thanks for the explanation. Special casing multiplanar formats to require they have viewFormats \u003d\u003d 0 in Dawn sounds good. Since it doesn\u0027t affect the semantics of the spec, we can always see later.",
+      "parentUuid": "46034e18_2cac6f4e",
+      "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e40fca6f_4336071c",
         "filename": "src/dawn/native/Texture.cpp",
         "patchSetId": 5
@@ -230,6 +248,24 @@
       "side": 1,
       "message": "Yea, FormatSet would be faster and less space, though I don\u0027t think it would be that much faster for lookups right now since at most 1 viewFormat is actually valid for a given format. Probably not going to do this right now?\n\nFor compatibility, I was thinking that we\u0027d have either a bitset indexed like a 2D matrix, or a bitset indexed like a 2D matrix, but stored only as one of upper/lower triangle.\n\nThe former would be for storing compatibility bits when A-\u003eB and B-\u003eA are different.\nThe latter would be for storing compatibility bits when A-\u003eB and B-\u003eA are the same.\nHaven\u0027t thought about whether we actually need that distinction yet - I feel most cases we only need one triangle of the matrix - which would be half the storage of 96 96-bit bitsets.",
       "parentUuid": "838856f1_bb43afe0",
+      "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce652348_07d7f147",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-23T18:31:35Z",
+      "side": 1,
+      "message": "The compatibility matrices would be nice. They would probably live on the Device yeah. I\u0027m not too worried about storage size: 100*100 bits is 1.25KB so w/e.\n\nI kinda like FormatSet even now, but we could do it afterwards when we do the bitset matrices (put then please add a TODO ^^).",
+      "parentUuid": "889fdf5d_3f6cac6e",
       "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
