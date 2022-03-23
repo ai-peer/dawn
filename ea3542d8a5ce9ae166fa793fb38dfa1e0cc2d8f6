@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2b5cb37_f88b0da5",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-23T06:42:12Z",
+      "side": 0,
+      "message": "Just for my curiosity, was this just removed because it was just unnecessary? Or is there actually something changed?",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 308,
+        "endChar": 29
+      },
+      "revId": "ea3542d8a5ce9ae166fa793fb38dfa1e0cc2d8f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
