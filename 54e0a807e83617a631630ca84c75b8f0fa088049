@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca5d6471_54e4ef8e",
+        "filename": "src/dawn/native/Format.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-23T15:16:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14560a49_300e0a49",
+      "range": {
+        "startLine": 121,
+        "startChar": 31,
+        "endLine": 121,
+        "endChar": 38
+      },
+      "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c76ffb53_3ebab492",
@@ -75,6 +99,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41fea22e_6824d716",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-23T15:16:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c76ffb53_3ebab492",
+      "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a32bf8c6_073cc1ed",
@@ -88,6 +130,24 @@
       "writtenOn": "2022-03-23T12:20:07Z",
       "side": 1,
       "message": "I think the discussions in https://github.com/gpuweb/gpuweb/issues/2679 mean that this check should disappear.",
+      "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46034e18_2cac6f4e",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-23T15:16:23Z",
+      "side": 1,
+      "message": "mm did not post on that issue yet. tldr, I don\u0027t like it and I also don\u0027t think it maps well to the backend. I\u0027ll post there as well.\n\nIn Vulkan\n1. VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT specifies that the image can be used to create a VkImageView with a different format from the image. **For multi-planar formats, VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT specifies that a VkImageView can be created of a plane of the image.**\n\n2. If image was created with the VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, and **if the format of the image is not multi-planar, format can be different from the image’s format**, ...\n\n3. If image was not created with the VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, or **if the format of the image is a multi-planar format and if subresourceRange.aspectMask is VK_IMAGE_ASPECT_COLOR_BIT, format must be identical to the format used to create image**\n\nSo in Vulkan, multiplanar is already mutable format, and it doesn\u0027t mean you reinterpret the whole format, but you reinterpret via selecting a plane. And, if I\u0027m reading (3) correctly, you may not reinterpret all planes of multiplanar as another multiplanar.\n\nbut basically - my conclusion is that we probably shouldn\u0027t allow selecting BOTH a plane AND a view format. Not sure if we need to do anything about that though yet since depth/stencil is special-cased in the spec. I should check D3D12/Metal.",
+      "parentUuid": "a32bf8c6_073cc1ed",
       "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -115,6 +175,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9656cc8f_ae17ccc4",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-23T15:16:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e40fca6f_4336071c",
+      "range": {
+        "startLine": 60,
+        "startChar": 16,
+        "endLine": 61,
+        "endChar": 82
+      },
+      "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "838856f1_bb43afe0",
@@ -128,6 +212,24 @@
       "writtenOn": "2022-03-23T12:20:07Z",
       "side": 1,
       "message": "What do you think of introducing a FormatSet helper class similar to ToggleSet? It would use less space than an std::vector and provide likely faster lookups.\n\nWe\u0027d probably use it at some point in Format.cpp to define the compatibility classes but can leave that for later.",
+      "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "889fdf5d_3f6cac6e",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-23T15:16:23Z",
+      "side": 1,
+      "message": "Yea, FormatSet would be faster and less space, though I don\u0027t think it would be that much faster for lookups right now since at most 1 viewFormat is actually valid for a given format. Probably not going to do this right now?\n\nFor compatibility, I was thinking that we\u0027d have either a bitset indexed like a 2D matrix, or a bitset indexed like a 2D matrix, but stored only as one of upper/lower triangle.\n\nThe former would be for storing compatibility bits when A-\u003eB and B-\u003eA are different.\nThe latter would be for storing compatibility bits when A-\u003eB and B-\u003eA are the same.\nHaven\u0027t thought about whether we actually need that distinction yet - I feel most cases we only need one triangle of the matrix - which would be half the storage of 96 96-bit bitsets.",
+      "parentUuid": "838856f1_bb43afe0",
       "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
