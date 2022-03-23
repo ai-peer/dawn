@@ -18,6 +18,80 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1a4e059_ac78d1b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-23T12:20:07Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14560a49_300e0a49",
+        "filename": "src/dawn/native/Format.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-23T12:20:07Z",
+      "side": 1,
+      "message": "nit: formats",
+      "range": {
+        "startLine": 121,
+        "startChar": 31,
+        "endLine": 121,
+        "endChar": 38
+      },
+      "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c76ffb53_3ebab492",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-23T12:20:07Z",
+      "side": 1,
+      "message": "u-nit: we could early out.",
+      "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a32bf8c6_073cc1ed",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-23T12:20:07Z",
+      "side": 1,
+      "message": "I think the discussions in https://github.com/gpuweb/gpuweb/issues/2679 mean that this check should disappear.",
+      "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e40fca6f_4336071c",
@@ -43,6 +117,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "838856f1_bb43afe0",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-23T12:20:07Z",
+      "side": 1,
+      "message": "What do you think of introducing a FormatSet helper class similar to ToggleSet? It would use less space than an std::vector and provide likely faster lookups.\n\nWe\u0027d probably use it at some point in Format.cpp to define the compatibility classes but can leave that for later.",
+      "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c2dcf2d_1cd39a68",
         "filename": "src/dawn/tests/unittests/validation/TextureViewValidationTests.cpp",
         "patchSetId": 5
@@ -60,6 +151,23 @@
         "endLine": 677,
         "endChar": 95
       },
+      "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "786d2619_be16a2c9",
+        "filename": "src/dawn/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-23T12:20:07Z",
+      "side": 1,
+      "message": "I think the spec discussion means this wouldn\u0027t be allowed.",
       "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

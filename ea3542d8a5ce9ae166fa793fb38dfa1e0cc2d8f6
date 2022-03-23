@@ -22,6 +22,30 @@
       },
       "revId": "ea3542d8a5ce9ae166fa793fb38dfa1e0cc2d8f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0b2b3c5_6285726d",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-23T12:20:07Z",
+      "side": 0,
+      "message": "I think it is already copied from baseCreateInfo that should have it to 0.",
+      "parentUuid": "b2b5cb37_f88b0da5",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 308,
+        "endChar": 29
+      },
+      "revId": "ea3542d8a5ce9ae166fa793fb38dfa1e0cc2d8f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
