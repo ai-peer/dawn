@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b48eb120_a2002540",
+        "filename": "webgpu-cts/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2022-03-23T20:12:06Z",
+      "side": 1,
+      "message": "Since the source and destination directories are the same here unlike when they were in Chromium, you could combine into a single target https://gn.googlesource.com/gn/+/refs/heads/main/docs/reference.md#func_copy",
+      "range": {
+        "startLine": 11,
+        "startChar": 1,
+        "endLine": 21,
+        "endChar": 1
+      },
+      "revId": "343b1f41f261adef328f9674c831aa38be4d6c51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
