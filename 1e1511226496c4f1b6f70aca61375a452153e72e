@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12913d35_45464a88",
+        "filename": "third_party/gn/webgpu-cts/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-23T20:17:54Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "1e1511226496c4f1b6f70aca61375a452153e72e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ef7dd35_1a12b4ab",
         "filename": "webgpu-cts/README.md",
         "patchSetId": 7
@@ -83,6 +100,30 @@
       "writtenOn": "2022-03-23T20:12:06Z",
       "side": 1,
       "message": "This doesn\u0027t seem correct to me, although the tests seem to pass with this, right?\n\nIf the cwd is //third_party/dawn/webgpu-cts, then won\u0027t this resolve to //third_party/dawn/third_party/webgpu-cts ?",
+      "range": {
+        "startLine": 15,
+        "startChar": 39,
+        "endLine": 15,
+        "endChar": 65
+      },
+      "revId": "1e1511226496c4f1b6f70aca61375a452153e72e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b6f0e47_0fee236b",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-23T20:17:54Z",
+      "side": 1,
+      "message": "right, so this file should be at\ngen/third_party/dawn/webgpu-cts/test_runner.js\n\nand resolves to\ngen/third_party/dawn/third_party/webgpu-cts/...\n\nit\u0027s a bit odd since third_party/gn/webgpu-cts/BUILD.gn at [1] compiles sources into $target_gen_dir/../../webgpu-cts\n\nwhich is gen/third_party/dawn/third_party/gn/webgpu-cts/../../webgpu-cts\n\u003d\u003e gen/third_party/dawn/third_party/webgpu-cts/",
+      "parentUuid": "fce2e9bd_d965281f",
       "range": {
         "startLine": 15,
         "startChar": 39,
