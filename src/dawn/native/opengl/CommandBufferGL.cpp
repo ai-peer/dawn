@@ -302,6 +302,7 @@ namespace dawn::native::opengl {
                             GLuint handle = view->GetHandle();
                             GLenum target = view->GetGLTarget();
                             GLuint viewIndex = indices[bindingIndex];
+                            view->UpdateIfNeeded();
 
                             for (auto unit : mPipeline->GetTextureUnitsForTextureView(viewIndex)) {
                                 gl.ActiveTexture(GL_TEXTURE0 + unit);
@@ -361,6 +362,7 @@ namespace dawn::native::opengl {
                             gl.BindImageTexture(imageIndex, handle, view->GetBaseMipLevel(),
                                                 isLayered, view->GetBaseArrayLayer(), access,
                                                 texture->GetGLFormat().internalFormat);
+                            texture->Touch();
                             break;
                         }
 
@@ -651,6 +653,7 @@ namespace dawn::native::opengl {
                     DoTexSubImage(gl, dst, reinterpret_cast<void*>(src.offset), dataLayout,
                                   copy->copySize);
                     gl.BindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+                    ToBackend(dst.texture)->Touch();
                     break;
                 }
 
@@ -803,6 +806,7 @@ namespace dawn::native::opengl {
                     } else {
                         CopyTextureToTextureWithBlit(gl, src, dst, copySize);
                     }
+                    ToBackend(dst.texture)->Touch();
                     break;
                 }
 
@@ -989,6 +993,7 @@ namespace dawn::native::opengl {
                                                textureView->GetBaseMipLevel(),
                                                textureView->GetBaseArrayLayer());
                 }
+                ToBackend(textureView->GetTexture())->Touch();
                 drawBuffers[i] = glAttachment;
                 attachmentCount = i;
                 attachmentCount++;

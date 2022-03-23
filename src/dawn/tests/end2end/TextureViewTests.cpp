@@ -203,8 +203,6 @@ class TextureViewSamplingTest : public DawnTest {
                            uint32_t textureMipLevels,
                            uint32_t textureViewBaseLayer,
                            uint32_t textureViewBaseMipLevel) {
-        // TODO(crbug.com/dawn/593): This test requires glTextureView, which is unsupported on GLES.
-        DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
         ASSERT(textureViewBaseLayer < textureArrayLayers);
         ASSERT(textureViewBaseMipLevel < textureMipLevels);
 
@@ -236,8 +234,6 @@ class TextureViewSamplingTest : public DawnTest {
                                 uint32_t textureMipLevels,
                                 uint32_t textureViewBaseLayer,
                                 uint32_t textureViewBaseMipLevel) {
-        // TODO(crbug.com/dawn/593): This test requires glTextureView, which is unsupported on GLES.
-        DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
         ASSERT(textureViewBaseLayer < textureArrayLayers);
         ASSERT(textureViewBaseMipLevel < textureMipLevels);
 
@@ -316,9 +312,9 @@ class TextureViewSamplingTest : public DawnTest {
                             uint32_t textureViewBaseLayer,
                             uint32_t textureViewLayerCount,
                             bool isCubeMapArray) {
-        // TODO(crbug.com/dawn/600): In OpenGL ES, cube map textures cannot be treated as arrays
-        // of 2D textures. Find a workaround.
-        DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
+        // TODO(crbug.com/dawn/1300): OpenGLES does not support cube map arrays.
+        DAWN_TEST_UNSUPPORTED_IF(isCubeMapArray && IsOpenGLES());
+
         constexpr uint32_t kMipLevels = 1u;
         initTexture(textureArrayLayers, kMipLevels);
 
