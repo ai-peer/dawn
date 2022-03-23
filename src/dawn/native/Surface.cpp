@@ -28,7 +28,6 @@
 #    include "dawn/common/xlib_with_undefs.h"
 #endif  // defined(DAWN_USE_X11)
 
-
 namespace dawn::native {
 
     absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
@@ -51,7 +50,7 @@ namespace dawn::native {
             case Surface::Type::Xlib:
                 s->Append("Xlib");
                 break;
-            case Surface::Type::Android:
+            case Surface::Type::AndroidWindow:
                 s->Append("Android");
                 break;
         }
@@ -88,11 +87,15 @@ namespace dawn::native {
 #endif  // defined(DAWN_ENABLE_BACKEND_METAL)
 
 #if defined(DAWN_PLATFORM_ANDROID)
-    const SurfaceDescriptorFromAndroidNativeWindow* androidDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &androidDesc);
-    // TODO(android): validation here
-    return {};
-#endif // defined(DAWN_PLATFORM_ANDROID)
+        const SurfaceDescriptorFromAndroidNativeWindow* androidDesc = nullptr;
+        FindInChain(descriptor->nextInChain, &androidDesc);
+        // TODO(dawn:286): Currently the best validation we can do
+        // since it's not possible to check if the pointer to a ANativeWindow is valid
+        if (androidDesc) {
+            DAWN_INVALID_IF(androidDesc->window == nullptr, "Android window is not set.");
+            return {};
+        }
+#endif  // defined(DAWN_PLATFORM_ANDROID)
 
 #if defined(DAWN_PLATFORM_WINDOWS)
 #    if defined(DAWN_PLATFORM_WIN32)
@@ -166,12 +169,11 @@ namespace dawn::native {
         FindInChain(descriptor->nextInChain, &coreWindowDesc);
         FindInChain(descriptor->nextInChain, &swapChainPanelDesc);
         FindInChain(descriptor->nextInChain, &xDesc);
-        ASSERT(metalDesc || hwndDesc || xDesc || androidDesc);
         if (metalDesc) {
             mType = Type::MetalLayer;
             mMetalLayer = metalDesc->layer;
-        } else if (androidDesc)  {
-            mType = Type::Android;
+        } else if (androidDesc) {
+            mType = Type::AndroidWindow;
             mAndroidNativeWindow = androidDesc->window;
         } else if (hwndDesc) {
             mType = Type::WindowsHWND;
@@ -220,7 +222,7 @@ namespace dawn::native {
     }
 
     void* Surface::GetAndroidNativeWindow() const {
-        ASSERT(mType == Type::Android);
+        ASSERT(mType == Type::AndroidWindow);
         return mAndroidNativeWindow;
     }
 

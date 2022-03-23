@@ -1571,7 +1571,7 @@ namespace dawn::native {
 
             Ref<NewSwapChainBase> newSwapChain;
             DAWN_TRY_ASSIGN(newSwapChain, std::move(maybeNewSwapChain));
-            
+
             newSwapChain->SetIsAttached();
             surface->SetAttachedSwapChain(newSwapChain.Get());
             return newSwapChain;

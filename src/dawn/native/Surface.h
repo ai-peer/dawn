@@ -50,7 +50,14 @@ namespace dawn::native {
         NewSwapChainBase* GetAttachedSwapChain();
 
         // These are valid to call on all Surfaces.
-        enum class Type { MetalLayer, WindowsHWND, WindowsCoreWindow, WindowsSwapChainPanel, Xlib, Android };
+        enum class Type {
+            AndroidWindow,
+            MetalLayer,
+            WindowsHWND,
+            WindowsCoreWindow,
+            WindowsSwapChainPanel,
+            Xlib
+        };
         Type GetType() const;
         InstanceBase* GetInstance();
 
@@ -85,7 +92,7 @@ namespace dawn::native {
 
         // MetalLayer
         void* mMetalLayer = nullptr;
-        
+
         // ANativeWindow
         void* mAndroidNativeWindow = nullptr;
 

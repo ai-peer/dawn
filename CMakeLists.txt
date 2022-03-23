@@ -103,13 +103,10 @@ if((WIN32 AND NOT WINDOWS_STORE) OR UNIX AND NOT ANDROID)
     set(DAWN_SUPPORTS_GLFW_FOR_WINDOWING ON)
 endif()
 
-
 # Current examples are depend on GLFW
 if (DAWN_SUPPORTS_GLFW_FOR_WINDOWING)
     set(BUILD_SAMPLES ON)
 endif()
-
-
 
 option_if_not_defined(DAWN_ENABLE_D3D12 "Enable compilation of the D3D12 backend" ${ENABLE_D3D12})
 option_if_not_defined(DAWN_ENABLE_METAL "Enable compilation of the Metal backend" ${ENABLE_METAL})

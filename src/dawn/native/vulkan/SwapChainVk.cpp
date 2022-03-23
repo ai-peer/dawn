@@ -30,10 +30,6 @@
 #    include "dawn/native/XlibXcbFunctions.h"
 #endif  // defined(DAWN_USE_X11)
 
-#if defined(DAWN_PLATFORM_ANDROID)
-#    include <android/native_activity.h>
-#endif  // defined(DAWN_PLATFORM_ANDROID)
-
 namespace dawn::native::vulkan {
 
     // OldSwapChain
@@ -139,7 +135,7 @@ namespace dawn::native::vulkan {
 #endif  // defined(DAWN_PLATFORM_WINDOWS)
 
 #if defined(DAWN_PLATFORM_ANDROID)
-                case Surface::Type::Android: {
+                case Surface::Type::AndroidWindow: {
                     if (info.HasExt(InstanceExt::AndroidSurface)) {
                         ASSERT(surface->GetAndroidNativeWindow() != nullptr);
 
@@ -147,19 +143,20 @@ namespace dawn::native::vulkan {
                         createInfo.sType = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR;
                         createInfo.pNext = nullptr;
                         createInfo.flags = 0;
-                        createInfo.window = static_cast<struct ANativeWindow *>(surface->GetAndroidNativeWindow());
-                            
+                        createInfo.window =
+                            static_cast<struct ANativeWindow*>(surface->GetAndroidNativeWindow());
+
                         VkSurfaceKHR vkSurface = VK_NULL_HANDLE;
                         DAWN_TRY(CheckVkSuccess(
                             fn.CreateAndroidSurfaceKHR(instance, &createInfo, nullptr, &*vkSurface),
                             "CreateAndroidSurfaceKHR"));
                         return vkSurface;
                     }
-                    
+
                     break;
                 }
 
-#endif // defined(DAWN_PLATFORM_ANDROID)
+#endif  // defined(DAWN_PLATFORM_ANDROID)
 
 #if defined(DAWN_USE_X11)
                 case Surface::Type::Xlib: {
@@ -307,10 +304,8 @@ namespace dawn::native::vulkan {
 
         VulkanSurfaceInfo surfaceInfo;
         DAWN_TRY_ASSIGN(surfaceInfo, GatherSurfaceInfo(*adapter, mVkSurface));
-        
-        DAWN_TRY_ASSIGN(mConfig, ChooseConfig(surfaceInfo));
 
-        
+        DAWN_TRY_ASSIGN(mConfig, ChooseConfig(surfaceInfo));
 
         // TODO Choose config instead of hardcoding
         VkSwapchainCreateInfoKHR createInfo;
@@ -411,45 +406,24 @@ namespace dawn::native::vulkan {
             config.wgpuUsage = GetUsage();
         }
 
-        // TODO(android): got a RGBA8 format from the native window
-        // Only support BGRA8Unorm with SRGB color space for now.
-        // #ifndef (DAWN_PLATFORM_ANDROID)
-        // bool hasBGRA8Unorm = false;
-        // for (const VkSurfaceFormatKHR& format : surfaceInfo.formats) {
-        //     if (format.format == VK_FORMAT_B8G8R8A8_UNORM &&
-        //         format.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {
-        //         hasBGRA8Unorm = true;
-        //         break;
-        //     }
-        // }
-        // if (!hasBGRA8Unorm) {
-        //     return DAWN_INTERNAL_ERROR(
-        //         "Vulkan SwapChain must support BGRA8Unorm with sRGB colorspace.");
-        // }
-        // #endif
+        // Only support BGRA8Unorm (and RGBA8Unorm on android) with SRGB color space for now.
+        config.wgpuFormat = GetFormat();
+        config.format = VulkanImageFormat(ToBackend(GetDevice()), config.wgpuFormat);
+        config.colorSpace = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR;
 
-        auto CheckFormats = [&surfaceInfo](VkFormat fmt, VkColorSpaceKHR colorSpace) -> bool {
-            for (const VkSurfaceFormatKHR& format : surfaceInfo.formats) {
-                if (format.format == fmt && format.colorSpace == colorSpace) {
-                    return true;
-                }
+        bool formatIsSupported = false;
+        for (const VkSurfaceFormatKHR& format : surfaceInfo.formats) {
+            if (format.format == config.format &&
+                format.colorSpace == config.colorSpace) {
+                formatIsSupported = true;
+                break;
             }
-            return false;
-        };
-
-        if (CheckFormats(VK_FORMAT_B8G8R8A8_UNORM, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)) {
-            config.format     = VK_FORMAT_B8G8R8A8_UNORM;
-            config.colorSpace = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR;
-            config.wgpuFormat = wgpu::TextureFormat::BGRA8Unorm;
-        } else if(CheckFormats(VK_FORMAT_R8G8B8A8_UNORM, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)) {
-            config.format     = VK_FORMAT_R8G8B8A8_UNORM;
-            config.colorSpace = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR;
-            config.wgpuFormat = wgpu::TextureFormat::RGBA8Unorm;
-        } else {
-            // TODO(android): Correct way of handling error
-            ASSERT(false);
         }
-   
+        if (!formatIsSupported) {
+            return DAWN_INTERNAL_ERROR(
+                "Vulkan SwapChain must support format BGRA8Unorm with sRGB colorspace.");
+        }
+
         // Only the identity transform with opaque alpha is supported for now.
         DAWN_INVALID_IF((surfaceInfo.capabilities.supportedTransforms &
                          VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR) == 0,
@@ -457,20 +431,27 @@ namespace dawn::native::vulkan {
 
         config.transform = VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR;
 
-        // TODO(android)
-        bool supportsCompositeAlpha = surfaceInfo.capabilities.supportedCompositeAlpha &
-                         VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
-        
-        #ifndef DAWN_PLATFORM_ANDROID
-        DAWN_INVALID_IF(supportsCompositeAlpha, "Vulkan SwapChain must support opaque alpha.");
-        #endif
-
-        if (supportsCompositeAlpha) {
-            config.alphaMode = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;    
-        } else {
-            config.alphaMode = VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR;    
+        config.alphaMode = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
+#if !defined(DAWN_PLATFORM_ANDROID)
+        DAWN_INVALID_IF(surfaceInfo.capabilities.supportedCompositeAlpha &
+                            VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR == 0,
+                        "Vulkan SwapChain must support opaque alpha.");
+#else
+        // TODO(dawn:286)
+        VkCompositeAlphaFlagBitsKHR compositeAlphaFlags[4] = {
+            VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
+            VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR,
+            VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR,
+            VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR,
+        };
+        for (uint32_t i = 0; i < 4; i++) {
+            if (surfCapabilities.supportedCompositeAlpha & compositeAlphaFlags[i]) {
+                config.alphaMode = compositeAlphaFlags[i];
+                break;
+            }
         }
-        
+#endif  // #if !defined(DAWN_PLATFORM_ANDROID)
+
         // Choose the number of images for the swapchain= and clamp it to the min and max from the
         // surface capabilities. maxImageCount = 0 means there is no limit.
         ASSERT(surfaceInfo.capabilities.maxImageCount == 0 ||
