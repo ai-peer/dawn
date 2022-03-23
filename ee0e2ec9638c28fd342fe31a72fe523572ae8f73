@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4629b512_0c7f655e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-03-23T01:45:12Z",
+      "side": 1,
+      "message": "Update on this: I\u0027ve now got all of the previously failing dawn end2end tests this patch introduced working except for some of the stencil copy tests on Vulkan and D3D12 with full backend validation. It looks like none of the other stencil formats are passing with Vulkan either, however, so I will consider that a separate issue. I can repro the backend validation issue (See here: https://ci.chromium.org/ui/p/chromium/builders/try/win-dawn-rel/12019/test-results) locally at least, so I\u0027ll work on clearing that up and then we should be (finally) ready to land.",
+      "revId": "ee0e2ec9638c28fd342fe31a72fe523572ae8f73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
