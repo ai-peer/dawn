@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "275573bb_1ded1ca7",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-23T04:04:49Z",
+      "side": 1,
+      "message": "would IOSurfaceGetWidth / IOSurfaceGetHeight work here, or do we need to say OfPlane ?",
+      "range": {
+        "startLine": 422,
+        "startChar": 32,
+        "endLine": 423,
+        "endChar": 58
+      },
+      "revId": "568f739a5cc7d2dda56af29c38771db494346452",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e69384b1_11f8dc71",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-23T04:04:49Z",
+      "side": 1,
+      "message": "prefer using Format::IsMultiPlanar\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Format.h;l\u003d16;bpv\u003d1;bpt\u003d1?q\u003dFormat.h%20f:dawn",
+      "range": {
+        "startLine": 562,
+        "startChar": 12,
+        "endLine": 562,
+        "endChar": 83
+      },
+      "revId": "568f739a5cc7d2dda56af29c38771db494346452",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e98f8ae_b7899c6d",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-23T04:04:49Z",
+      "side": 1,
+      "message": "is it OK for the IOSurface to be Managed, and this one to be private? (on MacOS)",
+      "range": {
+        "startLine": 849,
+        "startChar": 0,
+        "endLine": 849,
+        "endChar": 56
+      },
+      "revId": "568f739a5cc7d2dda56af29c38771db494346452",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96345480_58ad1d5b",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-23T04:04:49Z",
+      "side": 1,
+      "message": "arrayLength and mipmapLevelCount should come from descriptor-\u003earrayLayerCount and descriptor-\u003emipmapLevelCount for a texture view.\n\nHowever, this is fine as it is right now since multiplanar textures are validated to only have a single layer and mip level. Instead of using GetNumMipLevels and GetArrayLayers, we should probably just ASSERT that they are both 1. Same for GetDepth() ?",
+      "range": {
+        "startLine": 854,
+        "startChar": 0,
+        "endLine": 854,
+        "endChar": 60
+      },
+      "revId": "568f739a5cc7d2dda56af29c38771db494346452",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58d0a3b2_d5ed5e0d",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-23T04:04:49Z",
+      "side": 1,
+      "message": "2022",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "568f739a5cc7d2dda56af29c38771db494346452",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d3a668f_0e86dfcb",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-23T04:04:49Z",
+      "side": 1,
+      "message": "no need to define this if it\u0027s empty",
+      "range": {
+        "startLine": 58,
+        "startChar": 2,
+        "endLine": 59,
+        "endChar": 5
+      },
+      "revId": "568f739a5cc7d2dda56af29c38771db494346452",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
