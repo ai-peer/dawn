@@ -177,6 +177,14 @@ namespace dawn::native::vulkan {
             barrier.newLayout = VulkanImageLayout(texture, usage);
             barrier.image = texture->GetHandle();
             barrier.subresourceRange.aspectMask = VulkanAspectMask(range.aspects);
+
+            // If the Stencil8 format is being emulated then memory barriers also need to include
+            // the depth aspect.
+            if (texture->GetFormat().format == wgpu::TextureFormat::Stencil8 &&
+                !texture->GetDevice()->IsToggleEnabled(Toggle::VulkanUseS8)) {
+                barrier.subresourceRange.aspectMask |= VK_IMAGE_ASPECT_DEPTH_BIT;
+            }
+
             barrier.subresourceRange.baseMipLevel = range.baseMipLevel;
             barrier.subresourceRange.levelCount = range.levelCount;
             barrier.subresourceRange.baseArrayLayer = range.baseArrayLayer;
