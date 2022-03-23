@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03a38256_3819016f",
+        "filename": "webgpu-cts/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-23T20:45:44Z",
+      "side": 1,
+      "message": "Updated to say it\u0027s important to build `telemetry_gpu_integration_test` too",
+      "parentUuid": "9ef7dd35_1a12b4ab",
+      "range": {
+        "startLine": 6,
+        "startChar": 4,
+        "endLine": 6,
+        "endChar": 19
+      },
+      "revId": "1e1511226496c4f1b6f70aca61375a452153e72e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cab53dd_e2fcff17",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bed53515_5ef8064f",
+        "filename": "webgpu-cts/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-23T20:45:44Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "3cab53dd_e2fcff17",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "1e1511226496c4f1b6f70aca61375a452153e72e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff6ab451_e66f3cb4",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-03-23T20:12:06Z",
       "side": 1,
       "message": "Assign node_dir to None otherwise so it\u0027s always defined. I think if the scripts were run as-is without a Chromium checkout, you would get an ImportError.",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 30,
+        "endChar": 12
+      },
+      "revId": "1e1511226496c4f1b6f70aca61375a452153e72e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0be0dde4_1f7acfc0",
+        "filename": "webgpu-cts/scripts/dir_paths.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-23T20:45:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff6ab451_e66f3cb4",
       "range": {
         "startLine": 30,
         "startChar": 4,
