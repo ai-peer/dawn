@@ -585,10 +585,6 @@ TEST_P(StencilCopyTests, FromStencilAspect) {
     // stencil.
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_depth_stencil_read"));
 
-    // TODO(crbug.com/dawn/1331): Fails on Vulkan debug layer when stencil8 is emulated.
-    DAWN_TEST_UNSUPPORTED_IF(GetParam().mTextureFormat == wgpu::TextureFormat::Stencil8 &&
-                             IsVulkan() && !HasToggleEnabled("vulkan_use_s8"));
-
     constexpr uint32_t kWidth = 4;
     constexpr uint32_t kHeight = 4;
 
@@ -616,10 +612,6 @@ TEST_P(StencilCopyTests, FromNonZeroMipStencilAspect) {
 
     // TODO(crbug.com/dawn/667): Work around some platforms' inability to read back stencil.
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_depth_stencil_read"));
-
-    // TODO(crbug.com/dawn/1331): Fails on Vulkan debug layer when stencil8 is emulated.
-    DAWN_TEST_UNSUPPORTED_IF(GetParam().mTextureFormat == wgpu::TextureFormat::Stencil8 &&
-                             IsVulkan() && !HasToggleEnabled("vulkan_use_s8"));
 
     wgpu::Texture depthStencilTexture = CreateDepthStencilTexture(
         9, 9, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc, 2);
@@ -649,10 +641,6 @@ TEST_P(StencilCopyTests, ToStencilAspect) {
 
     // TODO(crbug.com/dawn/1273): Fails on Win11 with D3D12 debug layer and full validation
     DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsBackendValidationEnabled());
-
-    // TODO(crbug.com/dawn/1331): Fails on Vulkan debug layer when stencil8 is emulated.
-    DAWN_TEST_UNSUPPORTED_IF(GetParam().mTextureFormat == wgpu::TextureFormat::Stencil8 &&
-                             IsVulkan() && !HasToggleEnabled("vulkan_use_s8"));
 
     // Create a stencil texture
     constexpr uint32_t kWidth = 4;

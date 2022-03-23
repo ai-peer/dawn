@@ -177,6 +177,7 @@ namespace dawn::native::vulkan {
             barrier.newLayout = VulkanImageLayout(texture, usage);
             barrier.image = texture->GetHandle();
             barrier.subresourceRange.aspectMask = VulkanAspectMask(range.aspects);
+
             barrier.subresourceRange.baseMipLevel = range.baseMipLevel;
             barrier.subresourceRange.levelCount = range.levelCount;
             barrier.subresourceRange.baseArrayLayer = range.baseArrayLayer;
@@ -988,6 +989,12 @@ namespace dawn::native::vulkan {
     // single plane in a new SubresourceStorage<TextureUsage>. The barriers will be produced
     // for DEPTH | STENCIL since the SubresourceRange uses Aspect::CombinedDepthStencil.
     bool Texture::ShouldCombineDepthStencilBarriers() const {
+        // If the Stencil8 format is being emulated then memory barriers also need to include
+        // the depth aspect. (See: crbug.com/dawn/1331)
+        if (GetFormat().format == wgpu::TextureFormat::Stencil8 &&
+            !GetDevice()->IsToggleEnabled(Toggle::VulkanUseS8)) {
+            return true;
+        }
         return GetFormat().aspects == (Aspect::Depth | Aspect::Stencil);
     }
 
