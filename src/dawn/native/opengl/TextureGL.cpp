@@ -87,15 +87,19 @@ namespace dawn::native::opengl {
             return handle;
         }
 
-        bool UsageNeedsTextureView(wgpu::TextureUsage usage) {
-            constexpr wgpu::TextureUsage kUsageNeedingTextureView =
-                wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::TextureBinding;
-            return usage & kUsageNeedingTextureView;
-        }
-
         bool RequiresCreatingNewTextureView(const TextureBase* texture,
                                             const TextureViewDescriptor* textureViewDescriptor) {
-            if (texture->GetFormat().format != textureViewDescriptor->format) {
+            constexpr wgpu::TextureUsage kUsageNeedsView = wgpu::TextureUsage::StorageBinding |
+                                                           wgpu::TextureUsage::TextureBinding |
+                                                           wgpu::TextureUsage::RenderAttachment;
+            if ((texture->GetInternalUsage() & kUsageNeedsView) == 0) {
+                return false;
+            }
+
+            if (texture->GetFormat().format != textureViewDescriptor->format &&
+                !texture->GetFormat().HasDepthOrStencil()) {
+                // Color format reinterpretation required. Note: Depth/stencil formats don't support
+                // reinterpretation.
                 return true;
             }
 
@@ -549,14 +553,21 @@ namespace dawn::native::opengl {
             return;
         }
 
-        if (!UsageNeedsTextureView(texture->GetUsage())) {
-            mHandle = 0;
-        } else if (!RequiresCreatingNewTextureView(texture, descriptor)) {
+        if (!RequiresCreatingNewTextureView(texture, descriptor)) {
             mHandle = ToBackend(texture)->GetHandle();
         } else {
-            // glTextureView() is supported on OpenGL version >= 4.3
-            // TODO(crbug.com/dawn/593): support texture view on OpenGL version <= 4.2 and ES
             const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
+            if (gl.TextureView == nullptr) {
+                // glTextureView() is supported on OpenGL version >= 4.3
+                // TODO(crbug.com/dawn/593): support texture view on OpenGL version <= 4.2 and ES
+                // |RequiresCreatingNewTextureView| is inexact, and it's relatively easy to trigger
+                // a condition such that it returns true (like adding a usage). Set |mHandle| to 0
+                // which will hit an ASSERT in GetHandle() if the handle is accessed. This makes
+                // tests which use texture views less fragile such that they won't crash on ES
+                // unless the handle is actually needed.
+                mHandle = 0;
+                return;
+            }
             mHandle = GenTexture(gl);
             const Texture* textureGL = ToBackend(texture);
             const GLFormat& glFormat = ToBackend(GetDevice())->GetGLFormat(GetFormat());
@@ -589,13 +600,32 @@ namespace dawn::native::opengl {
     void TextureView::BindToFramebuffer(GLenum target, GLenum attachment) {
         const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
 
-        // Use the texture's handle and target, and the view's base mip level and base array layer
-        GLuint handle = ToBackend(GetTexture())->GetHandle();
-        GLuint textarget = ToBackend(GetTexture())->GetGLTarget();
-        GLuint mipLevel = GetBaseMipLevel();
+        // Use our own view if the formats do not match.
+        // If the formats do not match, format reinterpretation will be required.
+        // Note: Depth/stencil formats don't support  reinterpretation.
+        bool useOwnView = GetFormat().format != GetTexture()->GetFormat().format &&
+                          !GetTexture()->GetFormat().HasDepthOrStencil();
+
+        GLuint handle, textarget, mipLevel, arrayLayer;
+        if (useOwnView) {
+            ASSERT(mHandle != 0);
+            // Use our own texture handle and target which points to a subset of the texture's
+            // subresources.
+            handle = GetHandle();
+            textarget = GetGLTarget();
+            mipLevel = 0;
+            arrayLayer = 0;
+        } else {
+            // Use the texture's handle and target, with the view's base mip level and base array
+            // layer.
+            handle = ToBackend(GetTexture())->GetHandle();
+            textarget = ToBackend(GetTexture())->GetGLTarget();
+            mipLevel = GetBaseMipLevel();
+            arrayLayer = GetBaseArrayLayer();
+        }
 
         if (textarget == GL_TEXTURE_2D_ARRAY || textarget == GL_TEXTURE_3D) {
-            gl.FramebufferTextureLayer(target, attachment, handle, mipLevel, GetBaseArrayLayer());
+            gl.FramebufferTextureLayer(target, attachment, handle, mipLevel, arrayLayer);
         } else {
             gl.FramebufferTexture2D(target, attachment, textarget, handle, mipLevel);
         }
