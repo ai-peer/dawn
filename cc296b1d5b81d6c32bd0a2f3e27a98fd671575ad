@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45d24822_0fee9911",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-24T19:16:24Z",
+      "side": 1,
+      "message": "LGTM, but maybe git -\u003e version; I think it would make more sense to include native/Version.h and ask for the version hash, where git is just an implementation detail",
+      "revId": "cc296b1d5b81d6c32bd0a2f3e27a98fd671575ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
