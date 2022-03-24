@@ -14,6 +14,7 @@
 
 #include "dawn/native/BindingInfo.h"
 
+#include "dawn/native/CacheKey.h"
 #include "dawn/native/ChainUtils_autogen.h"
 
 namespace dawn::native {
