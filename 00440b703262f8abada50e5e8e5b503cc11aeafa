@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74d0dee3_7c16e548",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-03-24T00:15:10Z",
+      "side": 1,
+      "message": "Follow-up to https://dawn-review.googlesource.com/c/dawn/+/68280, which finally (FINALLY!) looks like it\u0027s just about ready to land. Kept this change separate because I wanted to be able to discuss it more easily.\n\nThis change works, in that it satisfies the Vulkan debug layer. The actual copies are still failing, but that seems to be a more universal issue with Vulkan and stencil copies. Doesn\u0027t feel like a very clean way of doing it, but the other approaches that I tried all ended up trying to stuff metadata into Format (like baseAspects) that simply didn\u0027t apply anywhere else and felt very awkward to maintain.\n\nOpinions on a preferred approach here would be appreciated!",
+      "revId": "00440b703262f8abada50e5e8e5b503cc11aeafa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
