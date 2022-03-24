@@ -87,10 +87,28 @@ namespace dawn::native::opengl {
             return handle;
         }
 
-        bool UsageNeedsTextureView(wgpu::TextureUsage usage) {
+        bool NeedsTextureView(const TextureBase* texture,
+                              const TextureViewDescriptor* textureViewDescriptor) {
             constexpr wgpu::TextureUsage kUsageNeedingTextureView =
-                wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::TextureBinding;
-            return usage & kUsageNeedingTextureView;
+                wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::TextureBinding |
+                wgpu::TextureUsage::RenderAttachment;
+
+            wgpu::TextureUsage usage = texture->GetInternalUsage();
+            if ((usage & kUsageNeedingTextureView) == 0) {
+                return false;
+            }
+
+            if (texture->GetFormat().format != textureViewDescriptor->format) {
+                // Different formats. Need a new view.
+                return true;
+            }
+
+            // Same format, and only used to render. New view is not necessary.
+            if (usage == wgpu::TextureUsage::RenderAttachment) {
+                return false;
+            }
+
+            return true;
         }
 
         bool RequiresCreatingNewTextureView(const TextureBase* texture,
@@ -549,7 +567,7 @@ namespace dawn::native::opengl {
             return;
         }
 
-        if (!UsageNeedsTextureView(texture->GetUsage())) {
+        if (!NeedsTextureView(texture, descriptor)) {
             mHandle = 0;
         } else if (!RequiresCreatingNewTextureView(texture, descriptor)) {
             mHandle = ToBackend(texture)->GetHandle();
@@ -589,13 +607,25 @@ namespace dawn::native::opengl {
     void TextureView::BindToFramebuffer(GLenum target, GLenum attachment) {
         const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
 
-        // Use the texture's handle and target, and the view's base mip level and base array layer
-        GLuint handle = ToBackend(GetTexture())->GetHandle();
-        GLuint textarget = ToBackend(GetTexture())->GetGLTarget();
-        GLuint mipLevel = GetBaseMipLevel();
+        GLuint handle, textarget, mipLevel, arrayLayer;
+        if (mHandle) {
+            // Use our own texture handle and target which points to a subset of the texture's
+            // subresources.
+            handle = mHandle;
+            textarget = mTarget;
+            mipLevel = 0;
+            arrayLayer = 0;
+        } else {
+            // Use the texture's handle and target, and the view's base mip level and base array
+            // layer
+            handle = ToBackend(GetTexture())->GetHandle();
+            textarget = ToBackend(GetTexture())->GetGLTarget();
+            mipLevel = GetBaseMipLevel();
+            arrayLayer = GetBaseArrayLayer();
+        }
 
         if (textarget == GL_TEXTURE_2D_ARRAY || textarget == GL_TEXTURE_3D) {
-            gl.FramebufferTextureLayer(target, attachment, handle, mipLevel, GetBaseArrayLayer());
+            gl.FramebufferTextureLayer(target, attachment, handle, mipLevel, arrayLayer);
         } else {
             gl.FramebufferTexture2D(target, attachment, textarget, handle, mipLevel);
         }
