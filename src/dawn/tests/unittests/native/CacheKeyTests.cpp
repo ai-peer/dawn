@@ -19,7 +19,11 @@
 #include <iomanip>
 #include <string>
 
+#include "dawn/tests/DawnNativeTest.h"
+
+#include "dawn/native/BindGroupLayout.h"
 #include "dawn/native/CacheKey.h"
+#include "dawn/native/utils/WGPUHelpers.h"
 
 namespace dawn::native {
 
@@ -40,6 +44,11 @@ namespace dawn::native {
             *stream << std::setfill('0') << std::setw(2) << b << " ";
         }
         *stream << std::dec;
+    }
+
+    // Custom printer for CacheKey for clearer debug testing messages.
+    void PrintTo(const CacheKey& key, std::ostream* stream) {
+        *stream << std::string(key.begin(), key.end());
     }
 
     namespace {
@@ -177,6 +186,160 @@ namespace dawn::native {
             expected.insert(expected.end(), data.begin(), data.end());
 
             EXPECT_THAT(CacheKey().Record(data), CacheKeyEq(expected));
+        }
+
+        class CacheKeyDawnNativeTests : public DawnNativeTest {};
+
+        TEST_F(CacheKeyDawnNativeTests, BindGroupLayouts) {
+            // Bind group layout serialization breakdown:
+            //     0: Pipeline compatibility token
+            //     1: List/Map of sorted binding entries according to binding number
+            //         0: Binding number
+            //         1: Visibility        Vertex=1,Fragment=2,Compute=4
+            //         2: Binding type      Buffer=0,Sampler=1,Texture=2,StorageTexture=3
+            //         3: Buffer            Default: {0:0,1:0,2:0}
+            //         4: Sampler           Default: {0:0}
+            //         5: Texture           Default: {0:0,1:0,2:0}
+            //         6: Storage Texture   Default: {0:0,1:0,2:0}
+            {
+                // Buffer binding type.
+                Ref<BindGroupLayoutBase> bindGroupLayout;
+                DAWN_ASSERT_AND_ASSIGN(
+                    bindGroupLayout,
+                    utils::MakeBindGroupLayout(
+                        dawn::native::FromAPI(device.Get()),
+                        {{0, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform}}));
+                EXPECT_THAT(bindGroupLayout->GetCacheKey(), CacheKeyEq(R"(
+                    { 0:0,
+                      1:[
+                          { 0:0,
+                            1:1,
+                            2:0,
+                            3:{0:1,1:0,2:0},
+                            4:{0:0},
+                            5:{0:0,1:0,2:0},
+                            6:{0:0,1:0,2:0}
+                          },
+                        ]
+                    })"));
+            }
+            {
+                // Sampler binding type.
+                Ref<BindGroupLayoutBase> bindGroupLayout;
+                DAWN_ASSERT_AND_ASSIGN(
+                    bindGroupLayout,
+                    utils::MakeBindGroupLayout(
+                        dawn::native::FromAPI(device.Get()),
+                        {{1, wgpu::ShaderStage::Fragment, wgpu::SamplerBindingType::Filtering}}));
+                EXPECT_THAT(bindGroupLayout->GetCacheKey(), CacheKeyEq(R"(
+                    { 0:0,
+                      1:[
+                          { 0:1,
+                            1:2,
+                            2:1,
+                            3:{0:0,1:0,2:0},
+                            4:{0:1},
+                            5:{0:0,1:0,2:0},
+                            6:{0:0,1:0,2:0}
+                          },
+                        ]
+                    })"));
+            }
+            {
+                // Texture binding type.
+                Ref<BindGroupLayoutBase> bindGroupLayout;
+                DAWN_ASSERT_AND_ASSIGN(
+                    bindGroupLayout,
+                    utils::MakeBindGroupLayout(
+                        dawn::native::FromAPI(device.Get()),
+                        {{2, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::Float}}));
+                EXPECT_THAT(bindGroupLayout->GetCacheKey(), CacheKeyEq(R"(
+                    { 0:0,
+                      1:[
+                          { 0:2,
+                            1:4,
+                            2:2,
+                            3:{0:0,1:0,2:0},
+                            4:{0:0},
+                            5:{0:1,1:2,2:0},
+                            6:{0:0,1:0,2:0}
+                          },
+                        ]
+                    })"));
+            }
+            {
+                // Storage texture binding type.
+                Ref<BindGroupLayoutBase> bindGroupLayout;
+                DAWN_ASSERT_AND_ASSIGN(
+                    bindGroupLayout,
+                    utils::MakeBindGroupLayout(
+                        dawn::native::FromAPI(device.Get()),
+                        {{3, wgpu::ShaderStage::Fragment | wgpu::ShaderStage::Compute,
+                          wgpu::StorageTextureAccess::WriteOnly, wgpu::TextureFormat::RGBA8Uint}}));
+                EXPECT_THAT(bindGroupLayout->GetCacheKey(), CacheKeyEq(R"(
+                    { 0:0,
+                      1:[
+                          { 0:3,
+                            1:6,
+                            2:3,
+                            3:{0:0,1:0,2:0},
+                            4:{0:0},
+                            5:{0:0,1:0,2:0},
+                            6:{0:1,1:21,2:2}
+                          },
+                        ]
+                    })"));
+            }
+            {
+                // Multiple binding types.
+                Ref<BindGroupLayoutBase> bindGroupLayout;
+                DAWN_ASSERT_AND_ASSIGN(
+                    bindGroupLayout,
+                    utils::MakeBindGroupLayout(
+                        dawn::native::FromAPI(device.Get()),
+                        {{0, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform},
+                         {1, wgpu::ShaderStage::Fragment, wgpu::SamplerBindingType::Filtering},
+                         {2, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::Float},
+                         {3, wgpu::ShaderStage::Fragment | wgpu::ShaderStage::Compute,
+                          wgpu::StorageTextureAccess::WriteOnly, wgpu::TextureFormat::RGBA8Uint}}));
+                EXPECT_THAT(bindGroupLayout->GetCacheKey(), CacheKeyEq(R"(
+                    { 0:0,
+                      1:[
+                          { 0:0,
+                            1:1,
+                            2:0,
+                            3:{0:1,1:0,2:0},
+                            4:{0:0},
+                            5:{0:0,1:0,2:0},
+                            6:{0:0,1:0,2:0}
+                          },
+                          { 0:1,
+                            1:2,
+                            2:1,
+                            3:{0:0,1:0,2:0},
+                            4:{0:1},
+                            5:{0:0,1:0,2:0},
+                            6:{0:0,1:0,2:0}
+                          },
+                          { 0:2,
+                            1:4,
+                            2:2,
+                            3:{0:0,1:0,2:0},
+                            4:{0:0},
+                            5:{0:1,1:2,2:0},
+                            6:{0:0,1:0,2:0}
+                          },
+                          { 0:3,
+                            1:6,
+                            2:3,
+                            3:{0:0,1:0,2:0},
+                            4:{0:0},
+                            5:{0:0,1:0,2:0},
+                            6:{0:1,1:21,2:2}
+                          },
+                        ]
+                    })"));
+            }
         }
 
     }  // namespace
