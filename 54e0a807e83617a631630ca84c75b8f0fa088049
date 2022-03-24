@@ -172,6 +172,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1905f988_680fc904",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-24T17:13:09Z",
+      "side": 1,
+      "message": "ok I think the semantic is more fully implemented by the next CL, but it\u0027s blocked a bit on stencil8. I\u0027ll probably jut wait till that lands soon.\nI made a spec PR https://github.com/gpuweb/gpuweb/pull/2687/files because this section of the spec doesn\u0027t make sense anyway.\n\nIf the descriptor.aspect is\n\"stencil-only\"\nthis.[[descriptor]].format must be a depth-or-stencil format which has a stencil aspect.\n\n???? so I can make a stencil-only view of a stencil8 texture. but use a view format of depth32float-stencil8 ???",
+      "parentUuid": "6c275c42_ca68f857",
+      "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e40fca6f_4336071c",
         "filename": "src/dawn/native/Texture.cpp",
         "patchSetId": 5
@@ -272,6 +290,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94b032af_86984114",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-24T17:13:09Z",
+      "side": 1,
+      "message": "ok I did the FormatSet. I realized it was .. very small",
+      "parentUuid": "ce652348_07d7f147",
+      "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c2dcf2d_1cd39a68",
         "filename": "src/dawn/tests/unittests/validation/TextureViewValidationTests.cpp",
         "patchSetId": 5
@@ -306,6 +342,48 @@
       "writtenOn": "2022-03-23T12:20:07Z",
       "side": 1,
       "message": "I think the spec discussion means this wouldn\u0027t be allowed.",
+      "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11ef8406_66fbdcc8",
+        "filename": "src/dawn/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-24T17:13:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "786d2619_be16a2c9",
+      "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6049d73_e1b42c44",
+        "filename": "src/dawn/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-24T17:13:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c2dcf2d_1cd39a68",
+      "range": {
+        "startLine": 677,
+        "startChar": 94,
+        "endLine": 677,
+        "endChar": 95
+      },
       "revId": "54e0a807e83617a631630ca84c75b8f0fa088049",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
