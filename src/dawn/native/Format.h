@@ -60,6 +60,14 @@ namespace dawn::native {
     // Converts an wgpu::TextureSampleType to its bitmask representation.
     SampleTypeBit SampleTypeToSampleTypeBit(wgpu::TextureSampleType sampleType);
 
+    absl::FormatConvertResult<absl::FormatConversionCharSet::kString>
+    AbslFormatConvert(Aspect value, const absl::FormatConversionSpec& spec, absl::FormatSink* s);
+
+    absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
+        SampleTypeBit value,
+        const absl::FormatConversionSpec& spec,
+        absl::FormatSink* s);
+
     struct TexelBlockInfo {
         uint32_t byteSize;
         uint32_t width;

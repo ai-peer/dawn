@@ -79,6 +79,98 @@ namespace dawn::native {
         return static_cast<SampleTypeBit>(1 << (static_cast<uint32_t>(sampleType) - 1));
     }
 
+    absl::FormatConvertResult<absl::FormatConversionCharSet::kString>
+    AbslFormatConvert(Aspect value, const absl::FormatConversionSpec& spec, absl::FormatSink* s) {
+        if (value == Aspect::None) {
+            s->Append("None");
+            return {true};
+        }
+
+        bool first = true;
+
+        if (value & Aspect::Color) {
+            first = false;
+            s->Append("Color");
+            value &= ~Aspect::Color;
+        }
+
+        if (value & Aspect::Depth) {
+            if (!first) {
+                s->Append("|");
+            }
+            first = false;
+            s->Append("Depth");
+            value &= ~Aspect::Depth;
+        }
+
+        if (value & Aspect::Stencil) {
+            if (!first) {
+                s->Append("|");
+            }
+            first = false;
+            s->Append("Stencil");
+            value &= ~Aspect::Stencil;
+        }
+
+        return {true};
+    }
+
+    absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
+        SampleTypeBit value,
+        const absl::FormatConversionSpec& spec,
+        absl::FormatSink* s) {
+        if (value == SampleTypeBit::None) {
+            s->Append("None");
+            return {true};
+        }
+
+        bool first = true;
+
+        if (value & SampleTypeBit::Float) {
+            first = false;
+            s->Append("Float");
+            value &= ~SampleTypeBit::Float;
+        }
+
+        if (value & SampleTypeBit::UnfilterableFloat) {
+            if (!first) {
+                s->Append("|");
+            }
+            first = false;
+            s->Append("UnfilterableFloat");
+            value &= ~SampleTypeBit::UnfilterableFloat;
+        }
+
+        if (value & SampleTypeBit::Depth) {
+            if (!first) {
+                s->Append("|");
+            }
+            first = false;
+            s->Append("Depth");
+            value &= ~SampleTypeBit::Depth;
+        }
+
+        if (value & SampleTypeBit::Sint) {
+            if (!first) {
+                s->Append("|");
+            }
+            first = false;
+            s->Append("Sint");
+            value &= ~SampleTypeBit::Sint;
+        }
+
+        if (value & SampleTypeBit::Uint) {
+            if (!first) {
+                s->Append("|");
+            }
+            first = false;
+            s->Append("Uint");
+            value &= ~SampleTypeBit::Uint;
+        }
+
+        return {true};
+    }
+
     bool Format::IsColor() const {
         return aspects == Aspect::Color;
     }
