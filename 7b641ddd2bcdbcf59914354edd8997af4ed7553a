@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c68daa9_89e0ef5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-24T09:33:10Z",
+      "side": 1,
+      "message": "Thanks for the update! I only have pretty minor comments on this version so LGTM.\n\nAustin or Brandon, can you do the second review?",
+      "revId": "7b641ddd2bcdbcf59914354edd8997af4ed7553a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a11dbeb9_0d8c2214",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-24T09:33:10Z",
+      "side": 1,
+      "message": "nit: no need for a TODO since we don\u0027t expect to be able to do better in the future.",
+      "revId": "7b641ddd2bcdbcf59914354edd8997af4ed7553a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d48ded2b_c1c34e9d",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-24T09:33:10Z",
+      "side": 1,
+      "message": "nit: clang-format seems to have made the formatting ugly, any way to fix it in a way that it doesnt?",
+      "revId": "7b641ddd2bcdbcf59914354edd8997af4ed7553a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa3adb89_79833df5",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-24T09:33:10Z",
+      "side": 1,
+      "message": "What I meant was that we could do something like\n\n```\n#if defined(ANDROID)\n     constexpr wgpu::TextureFormat kRequireSwapChainFormat \u003d wgpu::TextureFormat::RGBA8Unorm;\n#else\n     constexpr wgpu::TextureFormat kRequireSwapChainFormat \u003d wgpu::TextureFormat::BGRA8Unorm;\n#endif\n\n            DAWN_INVALID_IF(descriptor-\u003eformat !\u003d kRequireSwapChainFormat,\n                            \"Format (%s) is not %s, which is (currently) the only accepted format.\",\n                            descriptor-\u003eformat, kRequireSwapChainFormat);\n```\n\nAlso here as well, if we leave a TODO(dawn:286), we should describe briefly what\u0027s to be done.",
+      "revId": "7b641ddd2bcdbcf59914354edd8997af4ed7553a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b300711c_4c247057",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-24T09:33:10Z",
+      "side": 1,
+      "message": "nit: Can we use absk::StrFormat(\"Vulkan SwapChain must support %s with sRGB colorspace\", config.format)?",
+      "range": {
+        "startLine": 423,
+        "startChar": 54,
+        "endLine": 423,
+        "endChar": 64
+      },
+      "revId": "7b641ddd2bcdbcf59914354edd8997af4ed7553a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f4438d5_3e0e65b1",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-24T09:33:10Z",
+      "side": 1,
+      "message": "nit: Can you describe what\u0027s to do ?",
+      "revId": "7b641ddd2bcdbcf59914354edd8997af4ed7553a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
