@@ -16,6 +16,7 @@
 
 #include "dawn/common/BitSetIterator.h"
 
+#include "dawn/native/CacheKey.h"
 #include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/ObjectBase.h"
@@ -671,6 +672,27 @@ namespace dawn::native {
         }
         entries += "]";
         return entries;
+    }
+
+    // Helper wrapper to serialize the binding info for computing the cache key.
+    using BindingInfoWrapper =
+        std::pair<std::reference_wrapper<const BindGroupLayoutBase>,
+                  std::reference_wrapper<const BindGroupLayoutBase::BindingMap>>;
+    template <>
+    void CacheKeySerializer<BindingInfoWrapper>::Serialize(CacheKey* key,
+                                                           const BindingInfoWrapper& value) {
+        key->push_back('[');
+        const auto& [bgl, bindingMap] = value;
+        for (const auto [_, bindingIndex] : bindingMap.get()) {
+            SerializeInto(key, bgl.get().GetBindingInfo(bindingIndex));
+            key->push_back(',');
+        }
+        key->push_back(']');
+    }
+
+    CacheKey BindGroupLayoutBase::ComputeCacheKeyBase() const {
+        return dawn::native::GetCacheKey(static_cast<uint64_t>(mPipelineCompatibilityToken),
+                                         BindingInfoWrapper(*this, GetBindingMap()));
     }
 
 }  // namespace dawn::native
