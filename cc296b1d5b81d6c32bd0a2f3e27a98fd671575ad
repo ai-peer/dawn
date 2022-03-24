@@ -16,6 +16,23 @@
       "message": "LGTM, but maybe git -\u003e version; I think it would make more sense to include native/Version.h and ask for the version hash, where git is just an implementation detail",
       "revId": "cc296b1d5b81d6c32bd0a2f3e27a98fd671575ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbd6a19a_e2d429fa",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-24T19:19:29Z",
+      "side": 1,
+      "message": "hmm later on, we might want to be able to check if the tree is dirty - and disable the cache in that case. Otherwise in local testing, things could get really wonky since the hash won\u0027t change between edits if they aren\u0027t committed.",
+      "revId": "cc296b1d5b81d6c32bd0a2f3e27a98fd671575ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
