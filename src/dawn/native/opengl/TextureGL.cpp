@@ -95,7 +95,10 @@ namespace dawn::native::opengl {
 
         bool RequiresCreatingNewTextureView(const TextureBase* texture,
                                             const TextureViewDescriptor* textureViewDescriptor) {
-            if (texture->GetFormat().format != textureViewDescriptor->format) {
+            if (texture->GetFormat().format != textureViewDescriptor->format &&
+                !texture->GetFormat().HasDepthOrStencil()) {
+                // Color format reinterpretation required. Note: Depth/stencil formats don't support
+                // reinterpretation.
                 return true;
             }
 
