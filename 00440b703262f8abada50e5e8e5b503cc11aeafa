@@ -33,6 +33,24 @@
       "message": "LGTM, but alternative idea! (yours is certainly nice and simple though)\n\nBecause the VVL error is about separate depth/stencil layouts, what do you think of instead modifying ShouldCombineDepthStencilBarriers\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/TextureVk.cpp;l\u003d985;drc\u003d4f70b046f82976388f68084840bd3e9b2811ec27?q\u003dCombinedDepthStencil%20f:dawn%20f:native\u0026ss\u003dchromium%2Fchromium%2Fsrc\n\nto return true if the format is Stencil8 but actually backed by DepthStencil?\n\nThis would make it so that whenever we need combined barrier logic for when the separateDepthStencilLayouts Vulkan feature is not available, we\u0027ll still correctly pass depth and stencil aspects.",
       "revId": "00440b703262f8abada50e5e8e5b503cc11aeafa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78c25ffe_fa91d175",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-03-24T02:21:43Z",
+      "side": 1,
+      "message": "Ah, thank you! This is exactly the sort of suggestion I was hoping for. Mildly annoyed that I missed the existence of ShouldCombineDepthStencilBarriers initially, but updating that with the same logic does the trick and feels like a much better point of abstraction.\n\nGiven that this is still only a couple of new lines and I feel better about the change now, I\u0027m going to pull this back into the original Stencil8 CL (because it\u0027s apparently STILL causing some issues over there despite my suppressions.)",
+      "parentUuid": "e3e0d759_da176fe5",
+      "revId": "00440b703262f8abada50e5e8e5b503cc11aeafa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
