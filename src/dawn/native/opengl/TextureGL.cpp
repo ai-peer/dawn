@@ -82,10 +82,28 @@ namespace dawn::native::opengl {
             return handle;
         }
 
-        bool UsageNeedsTextureView(wgpu::TextureUsage usage) {
+        bool NeedsTextureView(const TextureBase* texture,
+                              const TextureViewDescriptor* textureViewDescriptor) {
             constexpr wgpu::TextureUsage kUsageNeedingTextureView =
-                wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::TextureBinding;
-            return usage & kUsageNeedingTextureView;
+                wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::TextureBinding |
+                wgpu::TextureUsage::RenderAttachment;
+
+            wgpu::TextureUsage usage = texture->GetUsage();
+            if ((usage & kUsageNeedingTextureView) == 0) {
+                return false;
+            }
+
+            if (texture->GetFormat().format != textureViewDescriptor->format) {
+                // Different formats. Need a new view.
+                return true;
+            }
+
+            // Same format, and only used to render. New view is not necessary.
+            if (usage == wgpu::TextureUsage::RenderAttachment) {
+                return false;
+            }
+
+            return true;
         }
 
         bool RequiresCreatingNewTextureView(const TextureBase* texture,
@@ -547,7 +565,7 @@ namespace dawn::native::opengl {
             return;
         }
 
-        if (!UsageNeedsTextureView(texture->GetUsage())) {
+        if (!NeedsTextureView(texture, descriptor)) {
             mHandle = 0;
         } else if (!RequiresCreatingNewTextureView(texture, descriptor)) {
             mHandle = ToBackend(texture)->GetHandle();

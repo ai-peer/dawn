@@ -974,20 +974,37 @@ namespace dawn::native::opengl {
             ColorAttachmentIndex attachmentCount(uint8_t(0));
             for (ColorAttachmentIndex i :
                  IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
-                TextureViewBase* textureView = renderPass->colorAttachments[i].view.Get();
-                GLuint texture = ToBackend(textureView->GetTexture())->GetHandle();
-
+                TextureView* textureView = ToBackend(renderPass->colorAttachments[i].view.Get());
                 GLenum glAttachment = GL_COLOR_ATTACHMENT0 + static_cast<uint8_t>(i);
 
                 // Attach color buffers.
-                if (textureView->GetTexture()->GetArrayLayers() == 1) {
-                    GLenum target = ToBackend(textureView->GetTexture())->GetGLTarget();
-                    gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER, glAttachment, target, texture,
-                                            textureView->GetBaseMipLevel());
+                if (textureView->GetTexture()->GetFormat().format !=
+                    textureView->GetFormat().format) {
+                    // Format reinterpretation. We need to use the texture view's handle.
+                    GLuint texture = textureView->GetHandle();
+
+                    if (textureView->GetLayerCount() == 1) {
+                        GLenum target = textureView->GetGLTarget();
+                        gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER, glAttachment, target, texture,
+                                                0);
+                    } else {
+                        gl.FramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, glAttachment, texture, 0,
+                                                   0);
+                    }
                 } else {
-                    gl.FramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, glAttachment, texture,
-                                               textureView->GetBaseMipLevel(),
-                                               textureView->GetBaseArrayLayer());
+                    // No format reinterpretation. We may not have created a separate view handle.
+                    // Use the texture (not view) handle directly.
+                    GLuint texture = ToBackend(textureView->GetTexture())->GetHandle();
+
+                    if (textureView->GetTexture()->GetArrayLayers() == 1) {
+                        GLenum target = ToBackend(textureView->GetTexture())->GetGLTarget();
+                        gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER, glAttachment, target, texture,
+                                                textureView->GetBaseMipLevel());
+                    } else {
+                        gl.FramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, glAttachment, texture,
+                                                   textureView->GetBaseMipLevel(),
+                                                   textureView->GetBaseArrayLayer());
+                    }
                 }
                 drawBuffers[i] = glAttachment;
                 attachmentCount = i;

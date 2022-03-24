@@ -671,6 +671,7 @@ namespace dawn::native::vulkan {
             if (device->GetDeviceInfo().HasExt(DeviceExt::ImageFormatList)) {
                 createInfoChain.Add(&imageFormatListInfo,
                                     VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO);
+                viewFormats.push_back(VulkanImageFormat(device, GetFormat().format));
                 for (FormatIndex i : IterateBitSet(GetViewFormats())) {
                     const Format& viewFormat = device->GetValidInternalFormat(i);
                     viewFormats.push_back(VulkanImageFormat(device, viewFormat.format));
