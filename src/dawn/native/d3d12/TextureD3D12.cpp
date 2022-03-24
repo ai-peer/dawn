@@ -1177,7 +1177,7 @@ namespace dawn::native::d3d12 {
         if (GetFormat().HasDepthOrStencil()) {
             // Configure the SRV descriptor to reinterpret the texture allocated as
             // TYPELESS as a single-plane shader-accessible view.
-            switch (descriptor->format) {
+            switch (texture->GetFormat().format) {
                 case wgpu::TextureFormat::Depth32Float:
                 case wgpu::TextureFormat::Depth24Plus:
                     mSrvDesc.Format = DXGI_FORMAT_R32_FLOAT;
