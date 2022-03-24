@@ -1373,7 +1373,12 @@ namespace dawn::native::vulkan {
         createInfo.flags = 0;
         createInfo.image = ToBackend(GetTexture())->GetHandle();
         createInfo.viewType = VulkanImageViewType(descriptor->dimension);
-        createInfo.format = VulkanImageFormat(device, descriptor->format);
+        if (HasOneBit(GetTexture()->GetAllSubresources().aspects)) {
+            createInfo.format = VulkanImageFormat(device, descriptor->format);
+        } else {
+            createInfo.format = VulkanImageFormat(device, GetTexture()->GetFormat().format);
+        }
+
         createInfo.components = VkComponentMapping{VK_COMPONENT_SWIZZLE_R, VK_COMPONENT_SWIZZLE_G,
                                                    VK_COMPONENT_SWIZZLE_B, VK_COMPONENT_SWIZZLE_A};
 
