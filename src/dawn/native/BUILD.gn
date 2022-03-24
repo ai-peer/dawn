@@ -102,6 +102,7 @@ config("vulkan_rpath") {
 dawn_json_generator("utils_gen") {
   target = "native_utils"
   outputs = [
+    "src/dawn/native/CacheKey_autogen.cpp",
     "src/dawn/native/ChainUtils_autogen.h",
     "src/dawn/native/ChainUtils_autogen.cpp",
     "src/dawn/native/ProcTable.cpp",
