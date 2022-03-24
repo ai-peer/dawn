@@ -18,16 +18,24 @@ namespace dawn::native {
 
     template <>
     void CacheKeySerializer<std::string>::Serialize(CacheKey* key, const std::string& t) {
-        std::string len = std::to_string(t.length());
-        key->insert(key->end(), len.begin(), len.end());
-        key->push_back('"');
+        SerializeInto(key, (size_t)t.length());
         key->insert(key->end(), t.begin(), t.end());
-        key->push_back('"');
     }
 
     template <>
     void CacheKeySerializer<CacheKey>::Serialize(CacheKey* key, const CacheKey& t) {
+        SerializeInto(key, (size_t)t.size());
         key->insert(key->end(), t.begin(), t.end());
+    }
+
+    CacheKeyGenerator::CacheKeyGenerator(CacheKeyGenerator& parent)
+        : mIsSubGenerator(true), mKey(parent.mKey) {
+        SerializeInto(mKey, parent.mMemberId++);
+    }
+
+    CacheKey CacheKeyGenerator::GetCacheKey() const {
+        ASSERT(!mIsSubGenerator);
+        return mDefaultKey;
     }
 
 }  // namespace dawn::native
