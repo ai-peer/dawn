@@ -438,7 +438,7 @@ TEST_P(TextureViewSamplingTest, Texture2DArrayViewOnOneLevelOf2DArrayTexture) {
     Texture2DArrayViewTest(6, 6, 2, 4);
 }
 
-// Test that an RGBA8 texture may be interpreted as RGBA8UnormSrgb
+// Test that an RGBA8 texture may be interpreted as RGBA8UnormSrgb and sampled from.
 // More extensive color value checks and format tests are left for the CTS.
 TEST_P(TextureViewSamplingTest, SRGBReinterpretation) {
     // TODO(crbug.com/dawn/593): This test requires glTextureView, which is unsupported on GLES.
@@ -770,6 +770,208 @@ TEST_P(TextureViewRenderingTest, Texture2DArrayViewOnALayerOf2DArrayTextureAsCol
         TextureLayerAsColorAttachmentTest(wgpu::TextureViewDimension::e2DArray, kLayers, kMipLevels,
                                           kBaseLayer, kBaseLevel, 1 << kMipLevels, 1 << kMipLevels);
     }
+}
+
+class TextureViewReinterpretationRenderingTest : public TextureViewRenderingTest {
+    void SetUp() override {
+        TextureViewRenderingTest::SetUp();
+    }
+};
+
+// Test that an RGBA8 texture may be interpreted as RGBA8UnormSrgb and rendered to.
+// More extensive color value checks and format tests are left for the CTS.
+TEST_P(TextureViewRenderingTest, SRGBReinterpretationRenderAttachment) {
+    // TODO(crbug.com/dawn/593): This test requires glTextureView, which is unsupported on GLES.
+    DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
+
+    wgpu::TextureViewDescriptor viewDesc = {};
+    viewDesc.format = wgpu::TextureFormat::RGBA8UnormSrgb;
+
+    wgpu::TextureDescriptor textureDesc = {};
+    textureDesc.size = {2, 2, 1};
+    textureDesc.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::RenderAttachment;
+    textureDesc.format = wgpu::TextureFormat::RGBA8Unorm;
+    textureDesc.viewFormats = &viewDesc.format;
+    textureDesc.viewFormatCount = 1;
+    wgpu::Texture texture = device.CreateTexture(&textureDesc);
+
+    textureDesc.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::TextureBinding;
+    wgpu::Texture sampledTexture = device.CreateTexture(&textureDesc);
+
+    wgpu::ImageCopyTexture dst = {};
+    dst.texture = sampledTexture;
+    std::array<RGBA8, 4> rgbaTextureData = {
+        RGBA8(117, 0, 0, 255),
+        RGBA8(0, 23, 0, 127),
+        RGBA8(0, 0, 12, 100),
+        RGBA8(13, 117, 24, 90),
+    };
+
+    wgpu::TextureDataLayout dataLayout = {};
+    dataLayout.bytesPerRow = textureDesc.size.width * sizeof(RGBA8);
+
+    queue.WriteTexture(&dst, rgbaTextureData.data(), rgbaTextureData.size() * sizeof(RGBA8),
+                       &dataLayout, &textureDesc.size);
+
+    wgpu::TextureView textureView = texture.CreateView(&viewDesc);
+
+    utils::ComboRenderPipelineDescriptor pipelineDesc;
+    pipelineDesc.vertex.module = utils::CreateShaderModule(device, R"(
+        @stage(vertex)
+        fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4<f32> {
+            var pos = array<vec2<f32>, 6>(
+                                        vec2<f32>(-1.0, -1.0),
+                                        vec2<f32>(-1.0,  1.0),
+                                        vec2<f32>( 1.0, -1.0),
+                                        vec2<f32>(-1.0,  1.0),
+                                        vec2<f32>( 1.0, -1.0),
+                                        vec2<f32>( 1.0,  1.0));
+            return vec4<f32>(pos[VertexIndex], 0.0, 1.0);
+        }
+    )");
+    pipelineDesc.cFragment.module = utils::CreateShaderModule(device, R"(
+        @group(0) @binding(0) var texture : texture_2d<f32>;
+
+        @stage(fragment)
+        fn main(@builtin(position) coord: vec4<f32>) -> @location(0) vec4<f32> {
+            return textureLoad(texture, vec2<i32>(coord.xy), 0);
+        }
+    )");
+
+    utils::ComboRenderPassDescriptor renderPassInfo{textureView};
+    pipelineDesc.cTargets[0].format = viewDesc.format;
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    {
+        wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDesc);
+
+        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                         {{0, sampledTexture.CreateView()}});
+
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassInfo);
+        pass.SetPipeline(pipeline);
+        pass.SetBindGroup(0, bindGroup);
+        pass.Draw(6);
+        pass.End();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_PIXEL_RGBA8_BETWEEN(  //
+        RGBA8(180, 0, 0, 255),   //
+        RGBA8(181, 0, 0, 255), texture, 0, 0);
+    EXPECT_PIXEL_RGBA8_BETWEEN(  //
+        RGBA8(0, 85, 0, 127),    //
+        RGBA8(0, 86, 0, 127), texture, 1, 0);
+    EXPECT_PIXEL_RGBA8_BETWEEN(  //
+        RGBA8(0, 0, 61, 100),    //
+        RGBA8(0, 0, 62, 100), texture, 0, 1);
+    EXPECT_PIXEL_RGBA8_BETWEEN(  //
+        RGBA8(64, 180, 86, 90),  //
+        RGBA8(15, 181, 87, 90), texture, 1, 1);
+}
+
+// Test that an RGBA8 texture may be interpreted as RGBA8UnormSrgb and resolved to.
+// More extensive color value checks and format tests are left for the CTS.
+TEST_P(TextureViewRenderingTest, SRGBReinterpretionResolveAttachment) {
+    // TODO(crbug.com/dawn/593): This test requires glTextureView, which is unsupported on GLES.
+    DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
+
+    wgpu::TextureViewDescriptor viewDesc = {};
+    viewDesc.format = wgpu::TextureFormat::RGBA8UnormSrgb;
+
+    wgpu::TextureDescriptor textureDesc = {};
+    textureDesc.size = {2, 2, 1};
+    textureDesc.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::RenderAttachment;
+    textureDesc.format = wgpu::TextureFormat::RGBA8Unorm;
+    textureDesc.viewFormats = &viewDesc.format;
+    textureDesc.viewFormatCount = 1;
+    wgpu::Texture texture = device.CreateTexture(&textureDesc);
+
+    textureDesc.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::TextureBinding;
+    wgpu::Texture sampledTexture = device.CreateTexture(&textureDesc);
+
+    textureDesc.sampleCount = 4;
+    textureDesc.usage = wgpu::TextureUsage::RenderAttachment;
+    textureDesc.format = viewDesc.format;
+    wgpu::Texture multisampledTexture = device.CreateTexture(&textureDesc);
+
+    wgpu::ImageCopyTexture dst = {};
+    dst.texture = sampledTexture;
+    std::array<RGBA8, 4> rgbaTextureData = {
+        RGBA8(117, 0, 0, 255),
+        RGBA8(0, 23, 0, 127),
+        RGBA8(0, 0, 12, 100),
+        RGBA8(13, 117, 24, 90),
+    };
+
+    wgpu::TextureDataLayout dataLayout = {};
+    dataLayout.bytesPerRow = textureDesc.size.width * sizeof(RGBA8);
+
+    queue.WriteTexture(&dst, rgbaTextureData.data(), rgbaTextureData.size() * sizeof(RGBA8),
+                       &dataLayout, &textureDesc.size);
+
+    wgpu::TextureView textureView = texture.CreateView(&viewDesc);
+    wgpu::TextureView multisampledTextureView = multisampledTexture.CreateView(&viewDesc);
+
+    utils::ComboRenderPipelineDescriptor pipelineDesc;
+    pipelineDesc.vertex.module = utils::CreateShaderModule(device, R"(
+        @stage(vertex)
+        fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4<f32> {
+            var pos = array<vec2<f32>, 6>(
+                                        vec2<f32>(-1.0, -1.0),
+                                        vec2<f32>(-1.0,  1.0),
+                                        vec2<f32>( 1.0, -1.0),
+                                        vec2<f32>(-1.0,  1.0),
+                                        vec2<f32>( 1.0, -1.0),
+                                        vec2<f32>( 1.0,  1.0));
+            return vec4<f32>(pos[VertexIndex], 0.0, 1.0);
+        }
+    )");
+    pipelineDesc.cFragment.module = utils::CreateShaderModule(device, R"(
+        @group(0) @binding(0) var texture : texture_2d<f32>;
+
+        @stage(fragment)
+        fn main(@builtin(position) coord: vec4<f32>) -> @location(0) vec4<f32> {
+            return textureLoad(texture, vec2<i32>(coord.xy), 0);
+        }
+    )");
+
+    utils::ComboRenderPassDescriptor renderPassInfo{multisampledTextureView};
+    renderPassInfo.cColorAttachments[0].resolveTarget = textureView;
+    pipelineDesc.cTargets[0].format = viewDesc.format;
+    pipelineDesc.multisample.count = 4;
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    {
+        wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDesc);
+
+        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                         {{0, sampledTexture.CreateView()}});
+
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassInfo);
+        pass.SetPipeline(pipeline);
+        pass.SetBindGroup(0, bindGroup);
+        pass.Draw(6);
+        pass.End();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_PIXEL_RGBA8_BETWEEN(  //
+        RGBA8(180, 0, 0, 255),   //
+        RGBA8(181, 0, 0, 255), texture, 0, 0);
+    EXPECT_PIXEL_RGBA8_BETWEEN(  //
+        RGBA8(0, 85, 0, 127),    //
+        RGBA8(0, 86, 0, 127), texture, 1, 0);
+    EXPECT_PIXEL_RGBA8_BETWEEN(  //
+        RGBA8(0, 0, 61, 100),    //
+        RGBA8(0, 0, 62, 100), texture, 0, 1);
+    EXPECT_PIXEL_RGBA8_BETWEEN(  //
+        RGBA8(64, 180, 86, 90),  //
+        RGBA8(15, 181, 87, 90), texture, 1, 1);
 }
 
 DAWN_INSTANTIATE_TEST(TextureViewSamplingTest,

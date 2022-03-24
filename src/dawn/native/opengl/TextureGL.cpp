@@ -82,10 +82,28 @@ namespace dawn::native::opengl {
             return handle;
         }
 
-        bool UsageNeedsTextureView(wgpu::TextureUsage usage) {
+        bool NeedsTextureView(const TextureBase* texture,
+                              const TextureViewDescriptor* textureViewDescriptor) {
             constexpr wgpu::TextureUsage kUsageNeedingTextureView =
-                wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::TextureBinding;
-            return usage & kUsageNeedingTextureView;
+                wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::TextureBinding |
+                wgpu::TextureUsage::RenderAttachment;
+
+            wgpu::TextureUsage usage = texture->GetInternalUsage();
+            if ((usage & kUsageNeedingTextureView) == 0) {
+                return false;
+            }
+
+            if (texture->GetFormat().format != textureViewDescriptor->format) {
+                // Different formats. Need a new view.
+                return true;
+            }
+
+            // Same format, and only used to render. New view is not necessary.
+            if (usage == wgpu::TextureUsage::RenderAttachment) {
+                return false;
+            }
+
+            return true;
         }
 
         bool RequiresCreatingNewTextureView(const TextureBase* texture,
@@ -547,7 +565,7 @@ namespace dawn::native::opengl {
             return;
         }
 
-        if (!UsageNeedsTextureView(texture->GetUsage())) {
+        if (!NeedsTextureView(texture, descriptor)) {
             mHandle = 0;
         } else if (!RequiresCreatingNewTextureView(texture, descriptor)) {
             mHandle = ToBackend(texture)->GetHandle();
@@ -582,6 +600,25 @@ namespace dawn::native::opengl {
 
     GLenum TextureView::GetGLTarget() const {
         return mTarget;
+    }
+
+    TextureView::AttachmentInfo TextureView::GetAttachmentInfo() const {
+        AttachmentInfo info;
+        if (mHandle) {
+            info.handle = mHandle;
+            info.target = mTarget;
+            info.baseMipLevel = 0;
+            info.baseArrayLayer = 0;
+            info.useFramebufferLayer = GetLayerCount() > 1;
+            return info;
+        }
+
+        info.handle = ToBackend(GetTexture())->GetHandle();
+        info.target = ToBackend(GetTexture())->GetGLTarget();
+        info.baseMipLevel = GetBaseMipLevel();
+        info.baseArrayLayer = GetBaseArrayLayer();
+        info.useFramebufferLayer = GetTexture()->GetArrayLayers() > 1;
+        return info;
     }
 
 }  // namespace dawn::native::opengl

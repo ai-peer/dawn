@@ -55,6 +55,15 @@ namespace dawn::native::opengl {
         GLuint GetHandle() const;
         GLenum GetGLTarget() const;
 
+        struct AttachmentInfo {
+            GLuint handle;
+            GLenum target;
+            uint32_t baseMipLevel;
+            uint32_t baseArrayLayer;
+            bool useFramebufferLayer;
+        };
+        AttachmentInfo GetAttachmentInfo() const;
+
       private:
         ~TextureView() override;
         void DestroyImpl() override;

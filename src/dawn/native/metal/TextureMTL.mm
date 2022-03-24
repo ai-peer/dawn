@@ -28,11 +28,6 @@
 namespace dawn::native::metal {
 
     namespace {
-        bool UsageNeedsTextureView(wgpu::TextureUsage usage) {
-            constexpr wgpu::TextureUsage kUsageNeedsTextureView =
-                wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::TextureBinding;
-            return usage & kUsageNeedsTextureView;
-        }
 
         MTLTextureUsage MetalTextureUsage(const Format& format,
                                           wgpu::TextureUsage usage,
@@ -82,6 +77,30 @@ namespace dawn::native::metal {
                 case wgpu::TextureViewDimension::Undefined:
                     UNREACHABLE();
             }
+        }
+
+        bool NeedsTextureView(const TextureBase* texture,
+                              const TextureViewDescriptor* textureViewDescriptor) {
+            constexpr wgpu::TextureUsage kUsageNeedingTextureView =
+                wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::TextureBinding |
+                wgpu::TextureUsage::RenderAttachment;
+
+            wgpu::TextureUsage usage = texture->GetInternalUsage();
+            if ((usage & kUsageNeedingTextureView) == 0) {
+                return false;
+            }
+
+            if (texture->GetFormat().format != textureViewDescriptor->format) {
+                // Different formats. Need a new view.
+                return true;
+            }
+
+            // Same format, and only used to render. New view is not necessary.
+            if (usage == wgpu::TextureUsage::RenderAttachment) {
+                return false;
+            }
+
+            return true;
         }
 
         bool RequiresCreatingNewTextureView(const TextureBase* texture,
@@ -571,7 +590,7 @@ namespace dawn::native::metal {
         mMtlTexture = nullptr;
     }
 
-    id<MTLTexture> Texture::GetMTLTexture() {
+    id<MTLTexture> Texture::GetMTLTexture() const {
         return mMtlTexture.Get();
     }
 
@@ -817,7 +836,7 @@ namespace dawn::native::metal {
 
         id<MTLTexture> mtlTexture = texture->GetMTLTexture();
 
-        if (!UsageNeedsTextureView(texture->GetInternalUsage())) {
+        if (!NeedsTextureView(texture, descriptor)) {
             mMtlTextureView = nullptr;
         } else if (!RequiresCreatingNewTextureView(texture, descriptor)) {
             mMtlTextureView = mtlTexture;
@@ -865,8 +884,21 @@ namespace dawn::native::metal {
         return {};
     }
 
-    id<MTLTexture> TextureView::GetMTLTexture() {
+    id<MTLTexture> TextureView::GetMTLTexture() const {
         ASSERT(mMtlTextureView != nullptr);
         return mMtlTextureView.Get();
     }
+
+    TextureView::AttachmentInfo TextureView::GetAttachmentInfo() const {
+        ASSERT(GetTexture()->GetUsage() & wgpu::TextureUsage::RenderAttachment);
+        if (mMtlTextureView.Get()) {
+            return {mMtlTextureView, 0, 0};
+        }
+        AttachmentInfo info;
+        info.texture = ToBackend(GetTexture())->GetMTLTexture();
+        info.baseMipLevel = GetBaseMipLevel();
+        info.baseArrayLayer = GetBaseArrayLayer();
+        return info;
+    }
+
 }  // namespace dawn::native::metal

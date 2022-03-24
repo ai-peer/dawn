@@ -47,7 +47,7 @@ namespace dawn::native::metal {
                                            const TextureDescriptor* descriptor,
                                            NSPRef<id<MTLTexture>> wrapped);
 
-        id<MTLTexture> GetMTLTexture();
+        id<MTLTexture> GetMTLTexture() const;
         NSPRef<id<MTLTexture>> CreateFormatView(wgpu::TextureFormat format);
 
         void EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
@@ -82,7 +82,14 @@ namespace dawn::native::metal {
         static ResultOrError<Ref<TextureView>> Create(TextureBase* texture,
                                                       const TextureViewDescriptor* descriptor);
 
-        id<MTLTexture> GetMTLTexture();
+        id<MTLTexture> GetMTLTexture() const;
+
+        struct AttachmentInfo {
+            NSPRef<id<MTLTexture>> texture;
+            uint32_t baseMipLevel;
+            uint32_t baseArrayLayer;
+        };
+        AttachmentInfo GetAttachmentInfo() const;
 
       private:
         using TextureViewBase::TextureViewBase;
