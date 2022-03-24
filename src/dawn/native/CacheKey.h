@@ -15,52 +15,25 @@
 #ifndef DAWNNATIVE_CACHE_KEY_H_
 #define DAWNNATIVE_CACHE_KEY_H_
 
+#include <limits>
 #include <string>
 #include <vector>
 
-#include "dawn/common/Compiler.h"
+#include "dawn/common/Assert.h"
 
 namespace dawn::native {
 
-    using CacheKey = std::vector<uint8_t>;
+    // Inherit instead of using statement to allow for class specialization.
+    class CacheKey : public std::vector<uint8_t> {
+        using std::vector<uint8_t>::vector;
+    };
 
     // Overridable serializer struct that should be implemented for cache key serializable
     // types/classes.
     template <typename T, typename SFINAE = void>
-    struct CacheKeySerializer {
+    class CacheKeySerializer {
+      public:
         static void Serialize(CacheKey* key, const T& t);
-    };
-
-    // Specialized overload for integral types. Note that we are currently serializing as a string
-    // to avoid handling null termiantors.
-    template <typename Integer>
-    struct CacheKeySerializer<Integer, std::enable_if_t<std::is_integral_v<Integer>>> {
-        static void Serialize(CacheKey* key, const Integer i) {
-            std::string str = std::to_string(i);
-            key->insert(key->end(), str.begin(), str.end());
-        }
-    };
-
-    // Specialized overload for floating point types. Note that we are currently serializing as a
-    // string to avoid handling null termiantors.
-    template <typename Float>
-    struct CacheKeySerializer<Float, std::enable_if_t<std::is_floating_point_v<Float>>> {
-        static void Serialize(CacheKey* key, const Float f) {
-            std::string str = std::to_string(f);
-            key->insert(key->end(), str.begin(), str.end());
-        }
-    };
-
-    // Specialized overload for string literals. Note we drop the null-terminator.
-    template <size_t N>
-    struct CacheKeySerializer<char[N]> {
-        static void Serialize(CacheKey* key, const char (&t)[N]) {
-            std::string len = std::to_string(N - 1);
-            key->insert(key->end(), len.begin(), len.end());
-            key->push_back('"');
-            key->insert(key->end(), t, t + N - 1);
-            key->push_back('"');
-        }
     };
 
     // Helper template function that defers to underlying static functions.
@@ -69,24 +42,90 @@ namespace dawn::native {
         CacheKeySerializer<T>::Serialize(key, t);
     }
 
-    // Given list of arguments of types with a free implementation of SerializeIntoImpl in the
-    // dawn::native namespace, serializes each argument and appends them to the CacheKey while
-    // prepending member ids before each argument.
-    template <typename... Ts>
-    CacheKey GetCacheKey(const Ts&... inputs) {
-        CacheKey key;
-        key.push_back('{');
-        int memberId = 0;
-        auto Serialize = [&](const auto& input) {
-            std::string memberIdStr = (memberId == 0 ? "" : ",") + std::to_string(memberId) + ":";
-            key.insert(key.end(), memberIdStr.begin(), memberIdStr.end());
-            SerializeInto(&key, input);
-            memberId++;
-        };
-        (Serialize(inputs), ...);
-        key.push_back('}');
-        return key;
-    }
+    // Specialized overload for integral types.
+    template <typename Integer>
+    class CacheKeySerializer<Integer, std::enable_if_t<std::is_integral_v<Integer>>> {
+      public:
+        static void Serialize(CacheKey* key, const Integer t) {
+            const char* it = reinterpret_cast<const char*>(&t);
+            for (size_t i = 0; i < sizeof(Integer); i++) {
+                key->push_back(*(it + i));
+            }
+        }
+    };
+
+    // Specialized overload for floating point types.
+    template <typename Float>
+    class CacheKeySerializer<Float, std::enable_if_t<std::is_floating_point_v<Float>>> {
+      public:
+        static void Serialize(CacheKey* key, const Float t) {
+            const char* it = reinterpret_cast<const char*>(&t);
+            for (size_t i = 0; i < sizeof(Float); i++) {
+                key->push_back(*(it + i));
+            }
+        }
+    };
+
+    // Specialized overload for string literals. Note we drop the null-terminator.
+    template <size_t N>
+    class CacheKeySerializer<char[N]> {
+      public:
+        static void Serialize(CacheKey* key, const char (&t)[N]) {
+            SerializeInto(key, (size_t)(N - 1));
+            key->insert(key->end(), t, t + N - 1);
+        }
+    };
+
+    // Helper class used as a temporary to generate cache keys. The class helps keep track of state
+    // such as member ids.
+    class CacheKeyGenerator {
+      public:
+        // Currently we assume that cache keys will not have more than 256 unique flattened members.
+        using MemberId = uint8_t;
+
+        CacheKeyGenerator() = default;
+
+        // Sub-generator ctor to serialize into an already existing key to avoid unnecessary copies.
+        explicit CacheKeyGenerator(CacheKeyGenerator& parent);
+
+        // Calls into appropriately overwritten serialization function for each argument.
+        template <typename T>
+        CacheKeyGenerator& Record(const T& value) {
+            ASSERT(mMemberId <= std::numeric_limits<MemberId>::max());
+            SerializeInto(mKey, mMemberId++);
+            SerializeInto(mKey, value);
+            return *this;
+        }
+        template <typename T, typename... Args>
+        CacheKeyGenerator& Record(const T& value, const Args&... args) {
+            return Record(value).Record(args...);
+        }
+
+        // Records iterables by prepending the number of elements. Note that all elements in a
+        // single iterable are recorded under one member id. Some common iterables are have a
+        // SerializeInto implemented to avoid needing to split them out when recording, i.e.
+        // strings and CacheKeys, but they fundamentally do the same as this function.
+        template <typename IterableT>
+        CacheKeyGenerator& RecordIterable(const IterableT& iterable) {
+            SerializeInto(mKey, mMemberId++);
+            // Always serialize the size of the iterable as a size_t for now.
+            SerializeInto(mKey, (size_t)iterable.size());
+            for (auto it = iterable.begin(); it != iterable.end(); ++it) {
+                SerializeInto(mKey, *it);
+            }
+            return *this;
+        }
+
+        // Returns the generated cache key iff this is the outer-most generator. Sub generators
+        // should not call this function.
+        CacheKey GetCacheKey() const;
+
+      private:
+        bool mIsSubGenerator = false;
+        MemberId mMemberId = 0;
+        CacheKey mDefaultKey;
+        CacheKey* mKey = &mDefaultKey;
+    };
 
 }  // namespace dawn::native
 
