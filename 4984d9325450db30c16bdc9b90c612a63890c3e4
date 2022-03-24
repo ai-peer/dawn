@@ -50,6 +50,46 @@
       "message": "cwallez@: PTAL. Thanks!",
       "revId": "4984d9325450db30c16bdc9b90c612a63890c3e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eca39fe_c1c52e7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-24T18:05:29Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4984d9325450db30c16bdc9b90c612a63890c3e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77d7be78_dfcf8413",
+        "filename": "src/dawn/native/opengl/UtilsGL.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-24T18:05:29Z",
+      "side": 1,
+      "message": "u-nit: WDYT of passing these, dstFOO and srcFOO as Origin3D and Extent3D?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 37
+      },
+      "revId": "4984d9325450db30c16bdc9b90c612a63890c3e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
