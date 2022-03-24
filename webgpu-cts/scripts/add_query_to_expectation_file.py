@@ -16,23 +16,76 @@
 
 """Script for easily adding expectations to expectations.txt
 
-Converts a single WebGPU CTS query into one or more individual expectations and
-appends them to the end of the file.
+Converts one or more WebGPU CTS queries into one or more individual expectations
+and appends them to the end of the file.
 """
 
 import argparse
+import logging
 import os
 import subprocess
+import sys
 
 import dir_paths
 
 LIST_SCRIPT_PATH = os.path.join(dir_paths.webgpu_cts_scripts_dir, 'list.py')
+TRANSPILE_DIR = os.path.join(dir_paths.dawn_dir, '.node_transpile_work_dir')
+EXPECTATION_FILE_PATH = os.path.join(
+        dir_paths.dawn_dir, 'webgpu-cts', 'expectations.txt')
+
+
+def expand_query(query):
+    cmd = [
+        sys.executable, LIST_SCRIPT_PATH,
+        '--js-out-dir', TRANSPILE_DIR,
+        '--query', query,
+    ]
+    p = subprocess.run(cmd, stdout=subprocess.PIPE, check=True)
+    return p.stdout.decode('utf-8').splitlines()
+
+
+def generate_expectations(queries, tags, results, bug):
+    tags = '[ %s ] ' % ' '.join(tags) if tags else ''
+    results = ' [ %s ]' % ' '.join(results)
+    bug = bug + ' ' if bug else ''
+    content = ''
+    for q in queries:
+        test_names = expand_query(q)
+        if not test_names:
+            logging.warning('Did not get any test names for query %s', q)
+        for tn in test_names:
+            content += '{bug}{tags}{test}{results}\n'.format(
+                    bug=bug, tags=tags, test=tn, results=results)
+    with open(EXPECTATION_FILE_PATH, 'a') as outfile:
+        outfile.write(content)
+
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+            description=('Converts one or more WebGPU CTS queries into one or '
+                         'more individual expectations and appends them to the '
+                         'end of expectations.txt'))
     parser.add_argument('-b', '--bug',
                         help='The bug link to associate with the expectations')
-    parser.add_argument('-t', '--tag', action='append', default=[],
+    parser.add_argument('-t', '--tag',
+                        action='append',
+                        default=[],
+                        dest='tags',
                         help=('A tag to restrict the expectation to. Can be '
                               'specified multiple times.'))
-    parser.add_argument('-r', '--result', action='append', default=[], required=True)
+    parser.add_argument('-r', '--result',
+                        action='append',
+                        default=[],
+                        dest='results',
+                        required=True,
+                        help=('An expected result for the expectation. Can be '
+                              'specified multiple times, although a single '
+                              'result is the most common usage.'))
+    parser.add_argument('-q', '--query',
+                        action='append',
+                        default=[],
+                        dest='queries',
+                        help=('A CTS query to expand into expectations. Can '
+                              'be specified multiple times.'))
+    args = parser.parse_args()
+    generate_expectations(args.queries, args.tags, args.results, args.bug)
