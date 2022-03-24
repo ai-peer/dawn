@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e92ba31b_58cd7852",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-24T17:21:43Z",
+      "side": 1,
+      "message": "Still LGTM, thank you for doing the FormatSet",
+      "revId": "f884d2e420345f6366810022febd5b188cc04ece",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8049bb0_895ab041",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-24T17:21:43Z",
+      "side": 1,
+      "message": "Maybe you did it somewhere else, but can we have a TODO and an issue for the compatibility matrices?",
+      "revId": "f884d2e420345f6366810022febd5b188cc04ece",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd561fa0_5c513623",
+        "filename": "src/dawn/native/Format.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-24T17:21:43Z",
+      "side": 1,
+      "message": "nit: Maybe Base::reference?",
+      "range": {
+        "startLine": 151,
+        "startChar": 17,
+        "endLine": 151,
+        "endChar": 48
+      },
+      "revId": "f884d2e420345f6366810022febd5b188cc04ece",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63749dae_e670eaa1",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-24T17:21:43Z",
+      "side": 1,
+      "message": "u-u-nit: I got confused for a second because the comment seems to be contradicting the code. Maybe moving the comment at [1] between the ifs would make this clear.",
+      "revId": "f884d2e420345f6366810022febd5b188cc04ece",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "070369bb_108ca881",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-24T17:21:43Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "f884d2e420345f6366810022febd5b188cc04ece",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
