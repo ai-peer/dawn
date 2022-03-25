@@ -993,11 +993,6 @@ namespace dawn::native {
     }
     CommandEncoder* DeviceBase::APICreateCommandEncoder(
         const CommandEncoderDescriptor* descriptor) {
-        const CommandEncoderDescriptor defaultDescriptor = {};
-        if (descriptor == nullptr) {
-            descriptor = &defaultDescriptor;
-        }
-
         Ref<CommandEncoder> result;
         if (ConsumedError(CreateCommandEncoder(descriptor), &result,
                           "calling %s.CreateCommandEncoder(%s).", this, descriptor)) {
@@ -1365,6 +1360,11 @@ namespace dawn::native {
 
     ResultOrError<Ref<CommandEncoder>> DeviceBase::CreateCommandEncoder(
         const CommandEncoderDescriptor* descriptor) {
+        const CommandEncoderDescriptor defaultDescriptor = {};
+        if (descriptor == nullptr) {
+            descriptor = &defaultDescriptor;
+        }
+
         DAWN_TRY(ValidateIsAlive());
         if (IsValidationEnabled()) {
             DAWN_TRY(ValidateCommandEncoderDescriptor(this, descriptor));
