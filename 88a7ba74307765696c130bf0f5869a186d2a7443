@@ -16,6 +16,24 @@
       "message": "IWBN if we could do this outside of the bind group application, perhaps at the start of CommandBuffer::Execute(), but currently the SyncScopeResourceUsage tracks Textures, not TextureViews.",
       "revId": "88a7ba74307765696c130bf0f5869a186d2a7443",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa2707c9_56182533",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-03-25T18:03:32Z",
+      "side": 1,
+      "message": "After discussion, we\u0027ll leave this as-is.",
+      "parentUuid": "e2935dd8_c963d9ad",
+      "revId": "88a7ba74307765696c130bf0f5869a186d2a7443",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
