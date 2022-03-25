@@ -90,6 +90,30 @@
       },
       "revId": "4984d9325450db30c16bdc9b90c612a63890c3e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb7e3760_b46cc42c",
+        "filename": "src/dawn/native/opengl/UtilsGL.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-03-25T16:11:28Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "77d7be78_dfcf8413",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 37
+      },
+      "revId": "4984d9325450db30c16bdc9b90c612a63890c3e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
