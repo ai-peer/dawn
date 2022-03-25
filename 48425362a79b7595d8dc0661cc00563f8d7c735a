@@ -50,6 +50,46 @@
       "message": "nice ",
       "revId": "48425362a79b7595d8dc0661cc00563f8d7c735a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96f60663_840d9dad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-25T18:32:36Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "48425362a79b7595d8dc0661cc00563f8d7c735a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3762599b_a0580819",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-25T18:32:36Z",
+      "side": 1,
+      "message": "Is it possible to make sure that this check is done somewhere else instead of here?  Might be nice to keep this function a simple enum-\u003eenum converter.",
+      "range": {
+        "startLine": 347,
+        "startChar": 16,
+        "endLine": 347,
+        "endChar": 57
+      },
+      "revId": "48425362a79b7595d8dc0661cc00563f8d7c735a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
