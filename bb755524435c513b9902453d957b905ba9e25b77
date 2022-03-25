@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5cdba76_c9f64480",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-25T08:18:00Z",
+      "side": 1,
+      "message": "Using AcquireCFRef won\u0027t add reference(invoke CFRetain) for CFObject. Use operator\u003d() for it.",
+      "revId": "bb755524435c513b9902453d957b905ba9e25b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
