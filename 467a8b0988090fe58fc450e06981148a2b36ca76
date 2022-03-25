@@ -16,6 +16,23 @@
       "message": "Bots fixed! PTAL again, thanks!",
       "revId": "467a8b0988090fe58fc450e06981148a2b36ca76",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bd7678a_2fa86c77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-25T13:14:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "467a8b0988090fe58fc450e06981148a2b36ca76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

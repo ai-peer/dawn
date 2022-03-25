@@ -16,6 +16,41 @@
       "message": "Using AcquireCFRef won\u0027t add reference(invoke CFRetain) for CFObject. Use operator\u003d() for it.",
       "revId": "bb755524435c513b9902453d957b905ba9e25b77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36e9f86d_e1c1997c",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-25T13:14:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f5cdba76_c9f64480",
+      "revId": "bb755524435c513b9902453d957b905ba9e25b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2c0ee12_176ca4da",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-25T13:14:42Z",
+      "side": 1,
+      "message": "Since the format has been validated already we can use the version of GetFormat that doesn\u0027t return a ResultOrError.\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Device.h;drc\u003dc86f28cb849dc7af8144250f15884e86f50f3e8e;l\u003d139",
+      "revId": "bb755524435c513b9902453d957b905ba9e25b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
