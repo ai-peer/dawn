@@ -899,9 +899,6 @@ TEST_P(TextureZeroInitTest, RenderPassSampledTextureClear) {
 // sampled and attachment (with LoadOp::Clear so the lazy clear can be skipped) then the sampled
 // subresource is correctly cleared.
 TEST_P(TextureZeroInitTest, TextureBothSampledAndAttachmentClear) {
-    // TODO(crbug.com/dawn/593): This test uses glTextureView() which is not supported on OpenGL ES.
-    DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
-
     // Create a 2D array texture, layer 0 will be used as attachment, layer 1 as sampled.
     wgpu::TextureDescriptor texDesc;
     texDesc.usage = wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::RenderAttachment |
@@ -1342,9 +1339,6 @@ TEST_P(TextureZeroInitTest, PreservesInitializedMip) {
 // Test that if one layer of a texture is initialized and another is uninitialized, lazy clearing
 // the uninitialized layer does not clear the initialized layer.
 TEST_P(TextureZeroInitTest, PreservesInitializedArrayLayer) {
-    // TODO(crbug.com/dawn/593): This test uses glTextureView() which is not supported on OpenGL ES.
-    DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
-
     wgpu::TextureDescriptor sampleTextureDescriptor =
         CreateTextureDescriptor(1, 2,
                                 wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
