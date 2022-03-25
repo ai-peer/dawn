@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "842f75c0_952dcec6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-25T13:16:06Z",
+      "side": 1,
+      "message": "Still LGTM! Thanks for the iterations. I\u0027ll submit to CQ (even though you could do it yourself) because I\u0027d like to make a small CL that builds on this one.",
+      "revId": "9215f1dec4a9723f86952b629358c72e1840e1fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
