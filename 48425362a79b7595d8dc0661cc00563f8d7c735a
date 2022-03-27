@@ -90,6 +90,30 @@
       },
       "revId": "48425362a79b7595d8dc0661cc00563f8d7c735a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "600d7801_f2b4a6a0",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-27T14:15:29Z",
+      "side": 1,
+      "message": "Unfortunately it is not possible because ObjC warnings require that we check availability of identifiers/function/... either in an enclosing scope (like done here) or by tagging the function (but then the constraint propagates to calling the function). Since it is an if(@available()) if we are not on a system that supports these formats, the else clause is used.\n\nThe various ways I can think of fixing this are:\n\n - Splitting the switch in multiple switches that are executed only in the correct system.\n - Add a macro that makes things look prettier.\n - Have an ityp::array\u003cFormatIndex, MTLPixelFormat, FormatCount\u003e that\u0027s filled on device creation with formats or MTLPixelFormatInvalid.",
+      "parentUuid": "3762599b_a0580819",
+      "range": {
+        "startLine": 347,
+        "startChar": 16,
+        "endLine": 347,
+        "endChar": 57
+      },
+      "revId": "48425362a79b7595d8dc0661cc00563f8d7c735a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
