@@ -16,6 +16,23 @@
       "message": "Will wait until the latest device destroy PR is rolled into Dawn successfully.",
       "revId": "cd4bf2e10a2adb21ff8769d9d5e7b48145c8283b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd430b52_276c48f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-27T13:48:24Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "cd4bf2e10a2adb21ff8769d9d5e7b48145c8283b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
