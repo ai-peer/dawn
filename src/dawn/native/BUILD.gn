@@ -573,6 +573,7 @@ source_set("sources") {
   if (dawn_enable_vulkan) {
     public_deps += [ "${dawn_vulkan_headers_dir}:vulkan_headers" ]
     sources += [
+      "${dawn_vulkan_headers_dir}/icd/generated/vk_typemap_helper.h",
       "vulkan/AdapterVk.cpp",
       "vulkan/AdapterVk.h",
       "vulkan/BackendVk.cpp",
@@ -583,6 +584,8 @@ source_set("sources") {
       "vulkan/BindGroupVk.h",
       "vulkan/BufferVk.cpp",
       "vulkan/BufferVk.h",
+      "vulkan/CacheKeyVk.cpp",
+      "vulkan/CacheKeyVk.h",
       "vulkan/CommandBufferVk.cpp",
       "vulkan/CommandBufferVk.h",
       "vulkan/CommandRecordingContext.h",
