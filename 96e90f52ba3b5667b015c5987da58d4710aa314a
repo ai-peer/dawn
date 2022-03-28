@@ -33,6 +33,29 @@
       "message": "LGTM",
       "revId": "96e90f52ba3b5667b015c5987da58d4710aa314a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22c9ba85_353f7815",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-28T16:39:01Z",
+      "side": 1,
+      "message": "nit. Maybe this can just be CreateView now?",
+      "range": {
+        "startLine": 680,
+        "startChar": 34,
+        "endLine": 680,
+        "endChar": 77
+      },
+      "revId": "96e90f52ba3b5667b015c5987da58d4710aa314a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
