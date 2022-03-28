@@ -16,6 +16,23 @@
       "message": "PTAL! Got bored on the train with no internet and did some cleanups.",
       "revId": "96e90f52ba3b5667b015c5987da58d4710aa314a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69f11029_49299572",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-28T15:49:31Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "96e90f52ba3b5667b015c5987da58d4710aa314a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
