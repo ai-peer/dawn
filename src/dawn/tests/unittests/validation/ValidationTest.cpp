@@ -94,7 +94,7 @@ void ValidationTest::SetUp() {
         wgpu::AdapterProperties adapterProperties;
         currentAdapter.GetProperties(&adapterProperties);
 
-        if (adapterProperties.backendType == wgpu::BackendType::Null) {
+        if (adapterProperties.backendType == wgpu::BackendType::Vulkan) {
             adapter = currentAdapter;
             foundNullAdapter = true;
             break;

@@ -33,6 +33,10 @@ namespace dawn::native::vulkan {
                                                        const ShaderModuleDescriptor* descriptor,
                                                        ShaderModuleParseResult* parseResult);
 
+        // TODO(dawn:1341) The generated shader could be cached, potentially on disk.
+        ResultOrError<std::vector<uint32_t>> GetTransformedShader(const char* entryPointName,
+                                                                  PipelineLayout* layout);
+
         ResultOrError<VkShaderModule> GetTransformedModuleHandle(const char* entryPointName,
                                                                  PipelineLayout* layout);
 
