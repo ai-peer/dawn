@@ -299,6 +299,7 @@ namespace dawn::native::opengl {
                         case BindingInfoType::Texture: {
                             TextureView* view =
                                 ToBackend(group->GetBindingAsTextureView(bindingIndex));
+                            view->CopyIfNeeded();
                             GLuint handle = view->GetHandle();
                             GLenum target = view->GetGLTarget();
                             GLuint viewIndex = indices[bindingIndex];
@@ -361,6 +362,7 @@ namespace dawn::native::opengl {
                             gl.BindImageTexture(imageIndex, handle, view->GetBaseMipLevel(),
                                                 isLayered, view->GetBaseArrayLayer(), access,
                                                 texture->GetGLFormat().internalFormat);
+                            texture->Touch();
                             break;
                         }
 
@@ -572,6 +574,7 @@ namespace dawn::native::opengl {
                     DoTexSubImage(gl, dst, reinterpret_cast<void*>(src.offset), dataLayout,
                                   copy->copySize);
                     gl.BindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+                    ToBackend(dst.texture)->Touch();
                     break;
                 }
 
@@ -718,6 +721,7 @@ namespace dawn::native::opengl {
                                      srcTexture->GetGLTarget(), src.mipLevel, src.origin,
                                      dstTexture->GetHandle(), dstTexture->GetGLTarget(),
                                      dst.mipLevel, dst.origin, copySize);
+                    ToBackend(dst.texture)->Touch();
                     break;
                 }
 
@@ -904,6 +908,7 @@ namespace dawn::native::opengl {
                                                textureView->GetBaseMipLevel(),
                                                textureView->GetBaseArrayLayer());
                 }
+                ToBackend(textureView->GetTexture())->Touch();
                 drawBuffers[i] = glAttachment;
                 attachmentCount = i;
                 attachmentCount++;
