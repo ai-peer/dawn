@@ -1138,7 +1138,6 @@ TEST_P(BufferZeroInitTest, SetVertexBuffer) {
 // draw call. A backend which implements robust buffer access via clamping should
 // still see zeros at the end of the buffer.
 TEST_P(BufferZeroInitTest, PaddingInitialized) {
-    DAWN_SUPPRESS_TEST_IF(IsANGLE());                              // TODO(crbug.com/dawn/1084).
     DAWN_SUPPRESS_TEST_IF(IsLinux() && IsVulkan() && IsNvidia());  // TODO(crbug.com/dawn/1214).
 
     constexpr wgpu::TextureFormat kColorAttachmentFormat = wgpu::TextureFormat::RGBA8Unorm;
