@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9719d0f8_595fc89b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-28T16:45:01Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3e383de096895c8a84a8f89de0c5642e3cd64a5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82ce79c8_dfe1159d",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-28T16:45:01Z",
+      "side": 1,
+      "message": "just a thought: maybe in the future we won\u0027t use glTexStorage* on GLES since glTextureView isn\u0027t supported anyway. Not sure if allocating differently will matter.",
+      "revId": "3e383de096895c8a84a8f89de0c5642e3cd64a5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1532b86a_0ac516ab",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-28T16:45:01Z",
+      "side": 1,
+      "message": "could have ASSERTs about depth in the 2D / cube map cases",
+      "revId": "3e383de096895c8a84a8f89de0c5642e3cd64a5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65a1bcfd_944d0828",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-28T16:45:01Z",
+      "side": 1,
+      "message": "could we pass in GetSize() ?",
+      "range": {
+        "startLine": 177,
+        "startChar": 87,
+        "endLine": 178,
+        "endChar": 42
+      },
+      "revId": "3e383de096895c8a84a8f89de0c5642e3cd64a5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
