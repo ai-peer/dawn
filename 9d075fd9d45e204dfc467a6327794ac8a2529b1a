@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13952c82_cb072d20",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-28T17:03:44Z",
+      "side": 1,
+      "message": "I think std::is_fundamental could handle both of these.\n\nInstead of the for-loop, I think you can do `key-\u003einsert(key-\u003eend(), it, it + sizeof(T));`",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 6
+      },
+      "revId": "9d075fd9d45e204dfc467a6327794ac8a2529b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec5c4c23_d521c76a",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-28T17:03:44Z",
+      "side": 1,
+      "message": "nit: static_assert N \u003e 0",
+      "revId": "9d075fd9d45e204dfc467a6327794ac8a2529b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0733733f_9cea7b72",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-28T17:03:44Z",
+      "side": 1,
+      "message": "ah, I see what you meant now. You\u0027re right, I don\u0027t think we\u0027ll necessarily need this class. since we don\u0027t need mMemberId.\n\nSpecializing SerializeInto\u003cT\u003e for some struct T should be sufficient. The layout and types of the struct members should be constant, and we don\u0027t need to make it work across versions of Dawn since the Dawn revision will be prefixed to the key.\n\nRecordIterable looks useful though - maybe we can have a SerializeIterableInto helper.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 29
+      },
+      "revId": "9d075fd9d45e204dfc467a6327794ac8a2529b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7874c8b7_fe8bc40b",
+        "filename": "src/dawn/native/CachedObject.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-28T17:03:44Z",
+      "side": 1,
+      "message": "will we still need these here? IIUC, we won\u0027t need to store the generated key on objects",
+      "revId": "9d075fd9d45e204dfc467a6327794ac8a2529b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
