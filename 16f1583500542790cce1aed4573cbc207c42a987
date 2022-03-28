@@ -16,6 +16,23 @@
       "message": "PTAL! Got bored on the train with no internet and did some cleanups.",
       "revId": "16f1583500542790cce1aed4573cbc207c42a987",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d497d055_ff087786",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-28T16:36:44Z",
+      "side": 1,
+      "message": "LGTM, but I think? we might still need to release the device last. which currently is the case since it is declared first. I think this is tracked in crbug.com/dawn/1164 though and probably fine to remove these TODOs.",
+      "revId": "16f1583500542790cce1aed4573cbc207c42a987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
