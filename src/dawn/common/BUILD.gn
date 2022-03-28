@@ -224,6 +224,7 @@ if (is_win || is_linux || is_chromeos || is_mac || is_fuchsia || is_android) {
       "TypeTraits.h",
       "TypedInteger.h",
       "UnderlyingType.h",
+      "ZeroedStruct.h",
       "ityp_array.h",
       "ityp_bitset.h",
       "ityp_span.h",
