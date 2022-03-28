@@ -157,7 +157,6 @@ namespace dawn::native::opengl {
                     UNREACHABLE();
             }
         }
-
     }  // namespace
 
     // Texture
@@ -185,6 +184,14 @@ namespace dawn::native::opengl {
             GetDevice()->ConsumedError(
                 ClearTexture(GetAllSubresources(), TextureBase::ClearValue::NonZero));
         }
+    }
+
+    void Texture::Touch() {
+        mGenID++;
+    }
+
+    uint32_t Texture::GetGenID() const {
+        return mGenID;
     }
 
     Texture::Texture(Device* device,
@@ -524,6 +531,7 @@ namespace dawn::native::opengl {
             SetIsSubresourceContentInitialized(true, range);
             device->IncrementLazyClearCountForTesting();
         }
+        Touch();
         return {};
     }
 
@@ -553,16 +561,20 @@ namespace dawn::native::opengl {
         } else if (!RequiresCreatingNewTextureView(texture, descriptor)) {
             mHandle = ToBackend(texture)->GetHandle();
         } else {
-            // glTextureView() is supported on OpenGL version >= 4.3
-            // TODO(crbug.com/dawn/593): support texture view on OpenGL version <= 4.2 and ES
             const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
-            mHandle = GenTexture(gl);
-            const Texture* textureGL = ToBackend(texture);
-            const GLFormat& glFormat = ToBackend(GetDevice())->GetGLFormat(GetFormat());
-            gl.TextureView(mHandle, mTarget, textureGL->GetHandle(), glFormat.internalFormat,
-                           descriptor->baseMipLevel, descriptor->mipLevelCount,
-                           descriptor->baseArrayLayer, descriptor->arrayLayerCount);
-            mOwnsHandle = true;
+            if (gl.IsAtLeastGL(4, 3)) {
+                mHandle = GenTexture(gl);
+                const Texture* textureGL = ToBackend(texture);
+                const GLFormat& glFormat = ToBackend(GetDevice())->GetGLFormat(GetFormat());
+                gl.TextureView(mHandle, mTarget, textureGL->GetHandle(), glFormat.internalFormat,
+                               descriptor->baseMipLevel, descriptor->mipLevelCount,
+                               descriptor->baseArrayLayer, descriptor->arrayLayerCount);
+                mOwnsHandle = true;
+            } else {
+                // Simulate glTextureView() with texture-to-texture copies.
+                mUseCopy = true;
+                mHandle = 0;
+            }
         }
     }
 
@@ -583,6 +595,43 @@ namespace dawn::native::opengl {
 
     GLenum TextureView::GetGLTarget() const {
         return mTarget;
+    }
+
+    void TextureView::CopyIfNeeded() {
+        if (!mUseCopy) {
+            return;
+        }
+
+        const Texture* texture = ToBackend(GetTexture());
+        if (mGenID == texture->GetGenID()) {
+            return;
+        }
+
+        Device* device = ToBackend(GetDevice());
+        const OpenGLFunctions& gl = device->gl;
+        const GLFormat& glFormat = device->GetGLFormat(GetFormat());
+        uint32_t srcLevel = GetBaseMipLevel();
+        uint32_t numLevels = GetLevelCount();
+        uint32_t width = texture->GetWidth() >> srcLevel;
+        uint32_t height = texture->GetHeight() >> srcLevel;
+
+        if (mHandle == 0) {
+            mHandle = GenTexture(gl);
+            gl.BindTexture(mTarget, mHandle);
+            AllocateTexture(gl, mTarget, texture->GetSampleCount(), numLevels,
+                            glFormat.internalFormat, width, height, GetLayerCount());
+            mOwnsHandle = true;
+        }
+
+        Origin3D src{0, 0, GetBaseArrayLayer()};
+        Origin3D dst{0, 0, 0};
+        Extent3D size{width, height, GetLayerCount()};
+        for (GLuint level = 0; level < numLevels; ++level) {
+            CopyImageSubData(gl, GetAspects(), texture->GetHandle(), texture->GetGLTarget(),
+                             srcLevel + level, src, mHandle, mTarget, level, dst, size);
+        }
+
+        mGenID = texture->GetGenID();
     }
 
 }  // namespace dawn::native::opengl
