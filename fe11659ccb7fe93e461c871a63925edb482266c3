@@ -34,6 +34,24 @@
       "parentUuid": "6b6ae4c8_db44d3e8",
       "revId": "fe11659ccb7fe93e461c871a63925edb482266c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27812fc7_71b0c3ac",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-03-28T00:33:30Z",
+      "side": 0,
+      "message": "WontFix?",
+      "parentUuid": "5b21ad35_bb5320b2",
+      "revId": "fe11659ccb7fe93e461c871a63925edb482266c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
