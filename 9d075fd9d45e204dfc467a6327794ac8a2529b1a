@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fcee81d_d0df733a",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-28T23:48:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13952c82_cb072d20",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 6
+      },
+      "revId": "9d075fd9d45e204dfc467a6327794ac8a2529b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec5c4c23_d521c76a",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-03-28T17:03:44Z",
       "side": 1,
       "message": "nit: static_assert N \u003e 0",
+      "revId": "9d075fd9d45e204dfc467a6327794ac8a2529b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78757518_b78103e1",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-28T23:48:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec5c4c23_d521c76a",
       "revId": "9d075fd9d45e204dfc467a6327794ac8a2529b1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ead8bb9_1bc398ad",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-28T23:48:32Z",
+      "side": 1,
+      "message": "Yea, moved everything directly into the CacheKey class now. I think this is a lot cleaner now!",
+      "parentUuid": "0733733f_9cea7b72",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 29
+      },
+      "revId": "9d075fd9d45e204dfc467a6327794ac8a2529b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7874c8b7_fe8bc40b",
@@ -77,6 +143,24 @@
       "writtenOn": "2022-03-28T17:03:44Z",
       "side": 1,
       "message": "will we still need these here? IIUC, we won\u0027t need to store the generated key on objects",
+      "revId": "9d075fd9d45e204dfc467a6327794ac8a2529b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05ea47ff_7cec278f",
+        "filename": "src/dawn/native/CachedObject.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-28T23:48:32Z",
+      "side": 1,
+      "message": "I think we do. There\u0027s no way to get the cache key from some of the backend objects after the Initialize functions, so I think we need to pre-generate and store them.",
+      "parentUuid": "7874c8b7_fe8bc40b",
       "revId": "9d075fd9d45e204dfc467a6327794ac8a2529b1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
