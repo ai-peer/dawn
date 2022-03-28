@@ -15,17 +15,24 @@
 #ifndef DAWNNATIVE_CACHE_KEY_H_
 #define DAWNNATIVE_CACHE_KEY_H_
 
+#include <iomanip>
 #include <limits>
 #include <string>
 #include <type_traits>
 #include <vector>
 
 #include "dawn/common/Assert.h"
+#include "dawn/common/UnderlyingType.h"
+#include "dawn/common/ZeroedStruct.h"
+#include "dawn/common/ityp_vector.h"
 
 namespace dawn::native {
 
     // Forward declare CacheKey class because of co-dependency.
     class CacheKey;
+
+    // Stream operator for CacheKey for debugging.
+    std::ostream& operator<<(std::ostream& os, const CacheKey& key);
 
     // Overridable serializer struct that should be implemented for cache key serializable
     // types/classes.
@@ -82,6 +89,29 @@ namespace dawn::native {
         }
     };
 
+    // Specialized overload for enums.
+    template <typename T>
+    class CacheKeySerializer<T, std::enable_if_t<std::is_enum_v<T>>> {
+      public:
+        static void Serialize(CacheKey* key, const T t) {
+            CacheKeySerializer<std::underlying_type_t<T>>::Serialize(
+                key, static_cast<std::underlying_type_t<T>>(t));
+        }
+    };
+
+    // Specialized overload for pointers. Since we are serializing for a cache key, we always
+    // serialize via value, not by pointer.
+    template <typename T>
+    class CacheKeySerializer<T, std::enable_if_t<std::is_pointer_v<T>>> {
+      public:
+        static void Serialize(CacheKey* key, const T t) {
+            if (t == nullptr) {
+                return;
+            }
+            CacheKeySerializer<std::remove_cv_t<std::remove_pointer_t<T>>>::Serialize(key, *t);
+        }
+    };
+
     // Specialized overload for string literals. Note we drop the null-terminator.
     template <size_t N>
     class CacheKeySerializer<char[N]> {
@@ -90,6 +120,16 @@ namespace dawn::native {
             static_assert(N > 0);
             key->Record(static_cast<size_t>(N - 1));
             key->insert(key->end(), t, t + N - 1);
+        }
+    };
+
+    // Specialized overload for ZeroedStructs where we are trying to directly copy the structs data.
+    template <typename Struct>
+    class CacheKeySerializer<ZeroedStruct<Struct>> {
+      public:
+        static void Serialize(CacheKey* key, const ZeroedStruct<Struct>& t) {
+            const char* it = reinterpret_cast<const char*>(&t);
+            key->insert(key->end(), it, it + sizeof(Struct));
         }
     };
 
