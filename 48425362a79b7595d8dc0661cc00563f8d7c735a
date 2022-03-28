@@ -114,6 +114,30 @@
       },
       "revId": "48425362a79b7595d8dc0661cc00563f8d7c735a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b3ab408_f589b25a",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-28T17:37:09Z",
+      "side": 1,
+      "message": "Hmm no strong preference, and the current way is probably fine also. I wasn\u0027t aware of the ObjC limitation here, thanks for the explanation!",
+      "parentUuid": "600d7801_f2b4a6a0",
+      "range": {
+        "startLine": 347,
+        "startChar": 16,
+        "endLine": 347,
+        "endChar": 57
+      },
+      "revId": "48425362a79b7595d8dc0661cc00563f8d7c735a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
