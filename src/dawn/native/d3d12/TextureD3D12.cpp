@@ -1180,7 +1180,18 @@ namespace dawn::native::d3d12 {
                 case wgpu::TextureFormat::Depth16Unorm:
                     mSrvDesc.Format = DXGI_FORMAT_R16_UNORM;
                     break;
-                case wgpu::TextureFormat::Stencil8:
+                case wgpu::TextureFormat::Stencil8: {
+                    planeSlice = 1;
+                    mSrvDesc.Format = DXGI_FORMAT_X24_TYPELESS_G8_UINT;
+                    // Stencil is accessed using the .g component in the shader.
+                    // Map it to the zeroth component to match other APIs.
+                    mSrvDesc.Shader4ComponentMapping = D3D12_ENCODE_SHADER_4_COMPONENT_MAPPING(
+                        D3D12_SHADER_COMPONENT_MAPPING_FROM_MEMORY_COMPONENT_1,
+                        D3D12_SHADER_COMPONENT_MAPPING_FORCE_VALUE_0,
+                        D3D12_SHADER_COMPONENT_MAPPING_FORCE_VALUE_0,
+                        D3D12_SHADER_COMPONENT_MAPPING_FORCE_VALUE_1);
+                    break;
+                }
                 case wgpu::TextureFormat::Depth24UnormStencil8:
                     switch (descriptor->aspect) {
                         case wgpu::TextureAspect::DepthOnly:
