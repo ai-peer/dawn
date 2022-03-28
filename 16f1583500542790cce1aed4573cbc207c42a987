@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "712b8399_7a366891",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-28T08:24:41Z",
+      "side": 1,
+      "message": "PTAL! Got bored on the train with no internet and did some cleanups.",
+      "revId": "16f1583500542790cce1aed4573cbc207c42a987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
