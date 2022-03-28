@@ -38,8 +38,8 @@ namespace dawn::native::vulkan {
     ShaderModule::ConcurrentTransformedShaderModuleCache::
         ~ConcurrentTransformedShaderModuleCache() {
         std::lock_guard<std::mutex> lock(mMutex);
-        for (const auto& [_, module] : mTransformedShaderModuleCache) {
-            mDevice->GetFencedDeleter()->DeleteWhenUnused(module);
+        for (const auto& [_, moduleAndSpirv] : mTransformedShaderModuleCache) {
+            mDevice->GetFencedDeleter()->DeleteWhenUnused(moduleAndSpirv.first);
         }
     }
 
@@ -48,24 +48,36 @@ namespace dawn::native::vulkan {
         std::lock_guard<std::mutex> lock(mMutex);
         auto iter = mTransformedShaderModuleCache.find(key);
         if (iter != mTransformedShaderModuleCache.end()) {
-            auto cached = iter->second;
-            return cached;
+            return iter->second.first;
         }
         return VK_NULL_HANDLE;
     }
 
+    std::optional<ShaderModule::ModuleAndSpirv>
+    ShaderModule::ConcurrentTransformedShaderModuleCache::FindModuleAndSpirv(
+        const PipelineLayoutEntryPointPair& key) {
+        std::lock_guard<std::mutex> lock(mMutex);
+        auto iter = mTransformedShaderModuleCache.find(key);
+        if (iter != mTransformedShaderModuleCache.end()) {
+            return std::make_pair(iter->second.first, iter->second.second.get());
+        }
+        return {};
+    }
+
     VkShaderModule ShaderModule::ConcurrentTransformedShaderModuleCache::AddOrGetCachedShaderModule(
         const PipelineLayoutEntryPointPair& key,
-        VkShaderModule value) {
-        ASSERT(value != VK_NULL_HANDLE);
+        VkShaderModule module,
+        std::vector<uint32_t>&& spirv) {
+        ASSERT(module != VK_NULL_HANDLE);
         std::lock_guard<std::mutex> lock(mMutex);
         auto iter = mTransformedShaderModuleCache.find(key);
         if (iter == mTransformedShaderModuleCache.end()) {
-            mTransformedShaderModuleCache.emplace(key, value);
-            return value;
+            mTransformedShaderModuleCache.emplace(
+                key, std::make_pair(module, std::unique_ptr<Spirv>(new Spirv(spirv))));
+            return module;
         } else {
-            mDevice->GetFencedDeleter()->DeleteWhenUnused(value);
-            return iter->second;
+            mDevice->GetFencedDeleter()->DeleteWhenUnused(module);
+            return iter->second.first;
         }
     }
 
@@ -108,6 +120,21 @@ namespace dawn::native::vulkan {
     }
 
     ShaderModule::~ShaderModule() = default;
+
+    ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
+        const char* entryPointName,
+        PipelineLayout* layout) {
+        // Check to see if we have any spirv output cached already.
+        auto cacheKey = std::make_pair(layout, entryPointName);
+        auto handleAndSpirv = mTransformedShaderModuleCache->FindModuleAndSpirv(cacheKey);
+        if (handleAndSpirv.has_value()) {
+            return std::move(*handleAndSpirv);
+        }
+
+        // TODO(dawn:549): Collapse this and GetTransformedModuleHandle once RenderPipeline is done.
+        DAWN_TRY(GetTransformedModuleHandle(entryPointName, layout));
+        return GetHandleAndSpirv(entryPointName, layout);
+    }
 
     ResultOrError<VkShaderModule> ShaderModule::GetTransformedModuleHandle(
         const char* entryPointName,
@@ -207,7 +234,7 @@ namespace dawn::native::vulkan {
         options.use_zero_initialize_workgroup_memory_extension =
             GetDevice()->IsToggleEnabled(Toggle::VulkanUseZeroInitializeWorkgroupMemoryExtension);
 
-        std::vector<uint32_t> spirv;
+        Spirv spirv;
         {
             TRACE_EVENT0(GetDevice()->GetPlatform(), General, "tint::writer::spirv::Generate()");
             auto result = tint::writer::spirv::Generate(&program, options);
@@ -237,8 +264,8 @@ namespace dawn::native::vulkan {
                                     "CreateShaderModule"));
         }
         if (newHandle != VK_NULL_HANDLE) {
-            newHandle =
-                mTransformedShaderModuleCache->AddOrGetCachedShaderModule(cacheKey, newHandle);
+            newHandle = mTransformedShaderModuleCache->AddOrGetCachedShaderModule(
+                cacheKey, newHandle, std::move(spirv));
         }
 
         SetDebugName(ToBackend(GetDevice()), VK_OBJECT_TYPE_SHADER_MODULE,
