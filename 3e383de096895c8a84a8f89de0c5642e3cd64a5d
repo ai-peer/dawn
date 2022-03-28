@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b348d838_610160f8",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-03-28T17:25:56Z",
+      "side": 1,
+      "message": "I don\u0027t think there\u0027s any advantage to using mutable storage in this case. It\u0027s more code, more error-prone, and we still can\u0027t do the one thing we really need to emulate texture views: to change the texture target, etc without changing the stored data.",
+      "parentUuid": "82ce79c8_dfe1159d",
+      "revId": "3e383de096895c8a84a8f89de0c5642e3cd64a5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1532b86a_0ac516ab",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31ba286e_56234d3b",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-03-28T17:25:56Z",
+      "side": 1,
+      "message": "OK, I\u0027ve put ASSERTs in TargetForTexture() and TargetForTextureViewDimension(). We should be able to trust the target consistency after that point.",
+      "parentUuid": "1532b86a_0ac516ab",
+      "revId": "3e383de096895c8a84a8f89de0c5642e3cd64a5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65a1bcfd_944d0828",
@@ -65,6 +101,30 @@
       "writtenOn": "2022-03-28T16:45:01Z",
       "side": 1,
       "message": "could we pass in GetSize() ?",
+      "range": {
+        "startLine": 177,
+        "startChar": 87,
+        "endLine": 178,
+        "endChar": 42
+      },
+      "revId": "3e383de096895c8a84a8f89de0c5642e3cd64a5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "730e94e2_0535359d",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-03-28T17:25:56Z",
+      "side": 1,
+      "message": "Thank you! Done.",
+      "parentUuid": "65a1bcfd_944d0828",
       "range": {
         "startLine": 177,
         "startChar": 87,
