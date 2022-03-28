@@ -40,6 +40,7 @@
 #include "src/tint/ast/discard_statement.h"
 #include "src/tint/ast/enable.h"
 #include "src/tint/ast/external_texture.h"
+#include "src/tint/ast/f16.h"
 #include "src/tint/ast/f32.h"
 #include "src/tint/ast/fallthrough_statement.h"
 #include "src/tint/ast/float_literal_expression.h"
@@ -81,6 +82,7 @@
 #include "src/tint/sem/bool.h"
 #include "src/tint/sem/depth_texture.h"
 #include "src/tint/sem/external_texture.h"
+#include "src/tint/sem/f16.h"
 #include "src/tint/sem/f32.h"
 #include "src/tint/sem/i32.h"
 #include "src/tint/sem/matrix.h"
@@ -169,6 +171,8 @@ class ProgramBuilder {
     /// Useful for passing to template methods such as `vec2<f32>()` to imitate
     /// WGSL syntax.
     using f32 = float;
+    /// `f16` should be IEEE 754 binary16. However we treat it as `float` internally.
+    using f16 = struct { float v; };
 
     /// Constructor
     ProgramBuilder();
@@ -401,6 +405,15 @@ class ProgramBuilder {
             return builder->create<ast::Bool>(source);
         }
 
+        /// @returns a f16 type
+        const ast::F16* f16() const { return builder->create<ast::F16>(); }
+
+        /// @param source the Source of the node
+        /// @returns a f16 type
+        const ast::F16* f16(const Source& source) const {
+            return builder->create<ast::F16>(source);
+        }
+        
         /// @returns a f32 type
         const ast::F32* f32() const { return builder->create<ast::F32>(); }
 
@@ -2653,6 +2666,13 @@ struct ProgramBuilder::TypesBuilder::CToAST<ProgramBuilder::u32> {
 template <>
 struct ProgramBuilder::TypesBuilder::CToAST<ProgramBuilder::f32> {
     static const ast::Type* get(const ProgramBuilder::TypesBuilder* t) { return t->f32(); }
+};
+// TODO: Add f16 here
+template <>
+struct ProgramBuilder::TypesBuilder::CToAST<ProgramBuilder::f16> {
+  static const ast::Type* get(const ProgramBuilder::TypesBuilder* t) {
+    return t->f16();
+  }
 };
 template <>
 struct ProgramBuilder::TypesBuilder::CToAST<bool> {

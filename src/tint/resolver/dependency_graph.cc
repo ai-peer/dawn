@@ -341,8 +341,9 @@ class DependencyScanner {
             [&](const ast::MultisampledTexture* tex) {  //
                 TraverseType(tex->type);
             },
+            // Add F16 validation here if necessary
             [&](Default) {
-                if (!ty->IsAnyOf<ast::Void, ast::Bool, ast::I32, ast::U32, ast::F32,
+                if (!ty->IsAnyOf<ast::Void, ast::Bool, ast::I32, ast::U32, ast::F16, ast::F32,
                                  ast::DepthTexture, ast::DepthMultisampledTexture,
                                  ast::StorageTexture, ast::ExternalTexture, ast::Sampler>()) {
                     UnhandledNode(diagnostics_, ty);

@@ -1038,8 +1038,10 @@ Token Lexer::check_keyword(const Source& source, std::string_view str) {
         return {Token::Type::kElse, source, "else"};
     if (str == "enable")
         return {Token::Type::kEnable, source, "enable"};
+    if (str == "f16")
+        return { Token::Type::kF16, source, "f16" };
     if (str == "f32")
-        return {Token::Type::kF32, source, "f32"};
+        return { Token::Type::kF32, source, "f32" };
     if (str == "fallthrough")
         return {Token::Type::kFallthrough, source, "fallthrough"};
     if (str == "false")

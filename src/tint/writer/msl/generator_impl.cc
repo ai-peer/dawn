@@ -1464,6 +1464,10 @@ bool GeneratorImpl::EmitZeroValue(std::ostream& out, const sem::Type* type) {
             out << "false";
             return true;
         },
+        [&](const sem::F16*) {
+            out << "0.0h";
+            return true;
+        },
         [&](const sem::F32*) {
             out << "0.0f";
             return true;
@@ -2234,6 +2238,10 @@ bool GeneratorImpl::EmitType(std::ostream& out,
         },
         [&](const sem::Bool*) {
             out << "bool";
+            return true;
+        },
+        [&](const sem::F16*) {
+            out << "half";
             return true;
         },
         [&](const sem::F32*) {

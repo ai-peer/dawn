@@ -24,6 +24,7 @@ namespace {
 using i32 = ProgramBuilder::i32;
 using u32 = ProgramBuilder::u32;
 using f32 = ProgramBuilder::f32;
+using f16 = ProgramBuilder::f16;
 
 }  // namespace
 
@@ -75,6 +76,10 @@ sem::Constant Resolver::EvaluateConstantValue(const ast::CallExpression* call,
         if (elem_type->Is<sem::U32>()) {
             return sem::Constant(type, sem::Constant::Scalars(result_size, 0u));
         }
+        // Add f16 zero scalar here
+        if (elem_type->Is<sem::F16>()) {
+            return sem::Constant(type, sem::Constant::Scalars(result_size, f16{ 0.f }));
+        }
         if (elem_type->Is<sem::F32>()) {
             return sem::Constant(type, sem::Constant::Scalars(result_size, 0.f));
         }
@@ -117,7 +122,12 @@ sem::Constant Resolver::ConstantCast(const sem::Constant& value,
             elems.emplace_back(value.WithScalarAt(i, [](auto&& s) { return static_cast<i32>(s); }));
         } else if (target_elem_type->Is<sem::U32>()) {
             elems.emplace_back(value.WithScalarAt(i, [](auto&& s) { return static_cast<u32>(s); }));
-        } else if (target_elem_type->Is<sem::F32>()) {
+        } else if (target_elem_type->Is<sem::F16>()) {
+            // Convert to f16 constant with internal float data
+            elems.emplace_back(value.WithScalarAt(
+                i, [](auto&& s) { return f16{ static_cast<float>(s) }; }));
+        }
+        else if (target_elem_type->Is<sem::F32>()) {
             elems.emplace_back(value.WithScalarAt(i, [](auto&& s) { return static_cast<f32>(s); }));
         } else if (target_elem_type->Is<sem::Bool>()) {
             elems.emplace_back(

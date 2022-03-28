@@ -28,6 +28,8 @@ class Constant {
     using i32 = ProgramBuilder::i32;
     using u32 = ProgramBuilder::u32;
     using f32 = ProgramBuilder::f32;
+    // TODO: if we want to use f16 constant within Tint, we should deal with f16 constant
+    using f16 = ProgramBuilder::f16;
 
   public:
     /// Scalar holds a single constant scalar value, as a union of an i32, u32,
@@ -39,6 +41,8 @@ class Constant {
         uint32_t u32;
         /// The scalar value as a f32
         float f32;
+        /// The scalar value as a f16, internally storaged as float
+        float f16;
         /// The scalar value as a bool
         bool bool_;
 
@@ -53,6 +57,10 @@ class Constant {
         /// Constructs the scalar with the f32 value `v`
         /// @param v the value of the Scalar
         Scalar(ProgramBuilder::f32 v) : f32(v) {}  // NOLINT
+
+        /// Constructs the scalar with the f16 value `v`
+        /// @param v the value of the Scalar
+        Scalar(ProgramBuilder::f16 v) : f16(v.v) {}  // NOLINT
 
         /// Constructs the scalar with the bool value `v`
         /// @param v the value of the Scalar
@@ -112,6 +120,9 @@ class Constant {
         }
         if (elem_type->Is<U32>()) {
             return func(elems_[index].u32);
+        }
+        if (elem_type->Is<F16>()) {
+            return func(elems_[index].f16);
         }
         if (elem_type->Is<F32>()) {
             return func(elems_[index].f32);

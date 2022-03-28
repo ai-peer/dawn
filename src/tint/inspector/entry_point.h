@@ -30,6 +30,7 @@ enum class ComponentType {
     kFloat,
     kUInt,
     kSInt,
+    // TODO: Add f16 here
 };
 
 /// Composition of components of a stage variable.
