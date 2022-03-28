@@ -50,6 +50,24 @@
       "message": "Does this ever happen?",
       "revId": "208574d6f8ef871011181c6b8ca968483be913f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e1725ee_9c217642",
+        "filename": "src/dawn/native/webgpu_absl_format.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-03-28T15:43:24Z",
+      "side": 1,
+      "message": "I don\u0027t think it does in the code base currently, but given how general purpose these formatters are and how they can be used from just about anywhere, not to mention the fact that they are far more likely to be used in error scenarios where something has gone wrong anyway, I felt it was safer to include a null branch here than ASSERT. Note that this is consistent with other formatters in the code base.",
+      "parentUuid": "568b6d1e_c6a5f370",
+      "revId": "208574d6f8ef871011181c6b8ca968483be913f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
