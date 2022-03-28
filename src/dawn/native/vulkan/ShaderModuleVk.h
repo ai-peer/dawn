@@ -20,7 +20,9 @@
 #include "dawn/common/vulkan_platform.h"
 #include "dawn/native/Error.h"
 
+#include <memory>
 #include <mutex>
+#include <optional>
 
 namespace dawn::native::vulkan {
 
@@ -29,10 +31,14 @@ namespace dawn::native::vulkan {
 
     class ShaderModule final : public ShaderModuleBase {
       public:
+        using Spirv = std::vector<uint32_t>;
+
         static ResultOrError<Ref<ShaderModule>> Create(Device* device,
                                                        const ShaderModuleDescriptor* descriptor,
                                                        ShaderModuleParseResult* parseResult);
 
+        ResultOrError<const Spirv*> GetTransformedShader(const char* entryPointName,
+                                                         PipelineLayout* layout);
         ResultOrError<VkShaderModule> GetTransformedModuleHandle(const char* entryPointName,
                                                                  PipelineLayout* layout);
 
@@ -48,14 +54,18 @@ namespace dawn::native::vulkan {
             explicit ConcurrentTransformedShaderModuleCache(Device* device);
             ~ConcurrentTransformedShaderModuleCache();
             VkShaderModule FindShaderModule(const PipelineLayoutEntryPointPair& key);
+            std::optional<const Spirv*> FindSpirv(const PipelineLayoutEntryPointPair& key);
             VkShaderModule AddOrGetCachedShaderModule(const PipelineLayoutEntryPointPair& key,
-                                                      VkShaderModule value);
+                                                      std::vector<uint32_t>&& spirv,
+                                                      VkShaderModule module);
 
           private:
+            using ShaderAndSpirv = std::pair<VkShaderModule, std::unique_ptr<Spirv>>;
+
             Device* mDevice;
             std::mutex mMutex;
             std::unordered_map<PipelineLayoutEntryPointPair,
-                               VkShaderModule,
+                               ShaderAndSpirv,
                                PipelineLayoutEntryPointPairHashFunc>
                 mTransformedShaderModuleCache;
         };

@@ -15,7 +15,10 @@
 #include "dawn/native/vulkan/BindGroupLayoutVk.h"
 
 #include "dawn/common/BitSetIterator.h"
+#include "dawn/common/Log.h"
+#include "dawn/common/ZeroedStruct.h"
 #include "dawn/common/ityp_vector.h"
+#include "dawn/native/CacheKey.h"
 #include "dawn/native/vulkan/BindGroupVk.h"
 #include "dawn/native/vulkan/DescriptorSetAllocator.h"
 #include "dawn/native/vulkan/DeviceVk.h"
@@ -92,13 +95,13 @@ namespace dawn::native::vulkan {
         // Compute the bindings that will be chained in the DescriptorSetLayout create info. We add
         // one entry per binding set. This might be optimized by computing continuous ranges of
         // bindings of the same type.
-        ityp::vector<BindingIndex, VkDescriptorSetLayoutBinding> bindings;
+        ityp::vector<BindingIndex, ZeroedStruct<VkDescriptorSetLayoutBinding>> bindings;
         bindings.reserve(GetBindingCount());
 
         for (const auto& [_, bindingIndex] : GetBindingMap()) {
             const BindingInfo& bindingInfo = GetBindingInfo(bindingIndex);
 
-            VkDescriptorSetLayoutBinding vkBinding;
+            ZeroedStruct<VkDescriptorSetLayoutBinding> vkBinding;
             vkBinding.binding = static_cast<uint32_t>(bindingIndex);
             vkBinding.descriptorType = VulkanDescriptorType(bindingInfo);
             vkBinding.descriptorCount = 1;
@@ -114,6 +117,9 @@ namespace dawn::native::vulkan {
         createInfo.flags = 0;
         createInfo.bindingCount = static_cast<uint32_t>(bindings.size());
         createInfo.pBindings = bindings.data();
+
+        // Record cache key information now since the createInfo is not stored.
+        GetCacheKey()->Record(createInfo);
 
         Device* device = ToBackend(GetDevice());
         DAWN_TRY(CheckVkSuccess(device->fn.CreateDescriptorSetLayout(
