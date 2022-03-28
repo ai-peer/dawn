@@ -109,26 +109,9 @@ namespace dawn::native::vulkan {
 
     ShaderModule::~ShaderModule() = default;
 
-    ResultOrError<VkShaderModule> ShaderModule::GetTransformedModuleHandle(
+    ResultOrError<std::vector<uint32_t>> ShaderModule::GetTransformedShader(
         const char* entryPointName,
         PipelineLayout* layout) {
-        TRACE_EVENT0(GetDevice()->GetPlatform(), General,
-                     "ShaderModuleVk::GetTransformedModuleHandle");
-
-        // If the shader was destroyed, we should never call this function.
-        ASSERT(IsAlive());
-
-        ScopedTintICEHandler scopedICEHandler(GetDevice());
-
-        auto cacheKey = std::make_pair(layout, entryPointName);
-        VkShaderModule cachedShaderModule =
-            mTransformedShaderModuleCache->FindShaderModule(cacheKey);
-        if (cachedShaderModule != VK_NULL_HANDLE) {
-            return cachedShaderModule;
-        }
-
-        // Creation of VkShaderModule is deferred to this point when using tint generator
-
         // Remap BindingNumber to BindingIndex in WGSL shader
         using BindingRemapper = tint::transform::BindingRemapper;
         using BindingPoint = tint::transform::BindingPoint;
@@ -216,7 +199,30 @@ namespace dawn::native::vulkan {
 
             spirv = std::move(result.spirv);
         }
+        return std::move(spirv);
+    }
 
+    ResultOrError<VkShaderModule> ShaderModule::GetTransformedModuleHandle(
+        const char* entryPointName,
+        PipelineLayout* layout) {
+        TRACE_EVENT0(GetDevice()->GetPlatform(), General,
+                     "ShaderModuleVk::GetTransformedModuleHandle");
+
+        // If the shader was destroyed, we should never call this function.
+        ASSERT(IsAlive());
+
+        ScopedTintICEHandler scopedICEHandler(GetDevice());
+
+        auto cacheKey = std::make_pair(layout, entryPointName);
+        VkShaderModule cachedShaderModule =
+            mTransformedShaderModuleCache->FindShaderModule(cacheKey);
+        if (cachedShaderModule != VK_NULL_HANDLE) {
+            return cachedShaderModule;
+        }
+
+        // Creation of VkShaderModule is deferred to this point when using tint generator
+        std::vector<uint32_t> spirv;
+        DAWN_TRY_ASSIGN(spirv, GetTransformedShader(entryPointName, layout));
         DAWN_TRY(
             ValidateSpirv(GetDevice(), spirv, GetDevice()->IsToggleEnabled(Toggle::DumpShaders)));
 
