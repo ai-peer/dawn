@@ -129,6 +129,32 @@ namespace dawn::native::opengl {
             return false;
         }
 
+        void AllocateTexture(const OpenGLFunctions& gl,
+                             GLenum target,
+                             GLsizei samples,
+                             GLuint levels,
+                             GLenum internalFormat,
+                             GLsizei width,
+                             GLsizei height,
+                             GLsizei depth) {
+            switch (target) {
+                case GL_TEXTURE_2D_ARRAY:
+                case GL_TEXTURE_3D:
+                    gl.TexStorage3D(target, levels, internalFormat, width, height, depth);
+                    break;
+                case GL_TEXTURE_2D:
+                case GL_TEXTURE_CUBE_MAP:
+                    gl.TexStorage2D(target, levels, internalFormat, width, height);
+                    break;
+                case GL_TEXTURE_2D_MULTISAMPLE:
+                    gl.TexStorage2DMultisample(target, samples, internalFormat, width, height,
+                                               true);
+                    break;
+                default:
+                    UNREACHABLE();
+            }
+        }
+
     }  // namespace
 
     // Texture
@@ -137,12 +163,10 @@ namespace dawn::native::opengl {
         : Texture(device, descriptor, GenTexture(device->gl), TextureState::OwnedInternal) {
         const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
 
-        uint32_t width = GetWidth();
-        uint32_t height = GetHeight();
         uint32_t levels = GetNumMipLevels();
-        uint32_t arrayLayers = GetArrayLayers();
-        uint32_t sampleCount = GetSampleCount();
 
+        GLenum target = GetGLTarget();
+        GLuint depth = target == GL_TEXTURE_3D ? GetDepth() : GetArrayLayers();
         const GLFormat& glFormat = GetGLFormat();
 
         gl.BindTexture(mTarget, mHandle);
@@ -150,31 +174,8 @@ namespace dawn::native::opengl {
         // glTextureView() requires the value of GL_TEXTURE_IMMUTABLE_FORMAT for origtexture to be
         // GL_TRUE, so the storage of the texture must be allocated with glTexStorage*D.
         // https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glTextureView.xhtml
-        switch (GetDimension()) {
-            case wgpu::TextureDimension::e2D:
-                if (arrayLayers > 1) {
-                    ASSERT(!IsMultisampledTexture());
-                    gl.TexStorage3D(mTarget, levels, glFormat.internalFormat, width, height,
-                                    arrayLayers);
-                } else {
-                    if (IsMultisampledTexture()) {
-                        gl.TexStorage2DMultisample(mTarget, sampleCount, glFormat.internalFormat,
-                                                   width, height, true);
-                    } else {
-                        gl.TexStorage2D(mTarget, levels, glFormat.internalFormat, width, height);
-                    }
-                }
-                break;
-            case wgpu::TextureDimension::e3D:
-                ASSERT(!IsMultisampledTexture());
-                ASSERT(arrayLayers == 1);
-                gl.TexStorage3D(mTarget, levels, glFormat.internalFormat, width, height,
-                                GetDepth());
-                break;
-
-            case wgpu::TextureDimension::e1D:
-                UNREACHABLE();
-        }
+        AllocateTexture(gl, target, GetSampleCount(), levels, glFormat.internalFormat, GetWidth(),
+                        GetHeight(), depth);
 
         // The texture is not complete if it uses mipmapping and not all levels up to
         // MAX_LEVEL have been defined.
