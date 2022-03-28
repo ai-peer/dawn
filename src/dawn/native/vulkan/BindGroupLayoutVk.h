@@ -22,6 +22,10 @@
 
 #include <vector>
 
+namespace dawn::native {
+    class CacheKey;
+}  // namespace dawn::native
+
 namespace dawn::native::vulkan {
 
     class BindGroup;
@@ -69,10 +73,13 @@ namespace dawn::native::vulkan {
         // Dawn API
         void SetLabelImpl() override;
 
+        CacheKey ComputeCacheKeyBase() const override;
+
         VkDescriptorSetLayout mHandle = VK_NULL_HANDLE;
 
         SlabAllocator<BindGroup> mBindGroupAllocator;
         Ref<DescriptorSetAllocator> mDescriptorSetAllocator;
+        CacheKey mCacheKey;
     };
 
 }  // namespace dawn::native::vulkan

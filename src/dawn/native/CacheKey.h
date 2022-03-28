@@ -15,17 +15,24 @@
 #ifndef DAWNNATIVE_CACHE_KEY_H_
 #define DAWNNATIVE_CACHE_KEY_H_
 
+#include <iomanip>
 #include <limits>
 #include <string>
 #include <type_traits>
 #include <vector>
 
 #include "dawn/common/Assert.h"
+#include "dawn/common/UnderlyingType.h"
+#include "dawn/common/ZeroedStruct.h"
+#include "dawn/common/ityp_vector.h"
 
 namespace dawn::native {
 
     // Forward declare CacheKey class because of co-dependency.
     class CacheKey;
+
+    // Stream operator for CacheKey for debugging.
+    std::ostream& operator<<(std::ostream& os, const CacheKey& key);
 
     // Overridable serializer struct that should be implemented for cache key serializable
     // types/classes.
@@ -90,6 +97,16 @@ namespace dawn::native {
             static_assert(N > 0);
             key->Record((size_t)(N - 1));
             key->insert(key->end(), t, t + N - 1);
+        }
+    };
+
+    // Specialized overload for ZeroedStructs where we are trying to directly copy the structs data.
+    template <typename Struct>
+    class CacheKeySerializer<ZeroedStruct<Struct>> {
+      public:
+        static void Serialize(CacheKey* key, const ZeroedStruct<Struct>& t) {
+            const char* it = reinterpret_cast<const char*>(&t);
+            key->insert(key->end(), it, it + sizeof(Struct));
         }
     };
 
