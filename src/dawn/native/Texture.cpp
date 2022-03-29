@@ -222,17 +222,6 @@ namespace dawn::native {
                 }
             }
 
-            if (format->isCompressed) {
-                const TexelBlockInfo& blockInfo =
-                    format->GetAspectInfo(wgpu::TextureAspect::All).block;
-                DAWN_INVALID_IF(
-                    descriptor->size.width % blockInfo.width != 0 ||
-                        descriptor->size.height % blockInfo.height != 0,
-                    "The size (%s) of the texture is not a multiple of the block width (%u) and "
-                    "height (%u) of the texture format (%s).",
-                    &descriptor->size, blockInfo.width, blockInfo.height, format->format);
-            }
-
             return {};
         }
 

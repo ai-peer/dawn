@@ -838,6 +838,7 @@ namespace {
         }
     }
 
+#if 0
     // Test that it is invalid to use numbers for a texture's width/height that are not multiples
     // of the compressed block sizes.
     TEST_F(CompressedTextureFormatsValidationTests, TextureSize) {
@@ -887,5 +888,5 @@ namespace {
             }
         }
     }
-
+#endif
 }  // namespace

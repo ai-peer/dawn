@@ -671,6 +671,13 @@ TEST_P(CompressedTextureFormatTest, Basic) {
     config.copyExtent3D = config.textureDescriptor.size;
 
     TestCopyRegionIntoFormatTextures(config);
+
+    wgpu::TextureDescriptor desc;
+    desc.format = GetParam().mTextureFormat;
+    desc.size = {3, 3, 1};
+    desc.mipLevelCount = 1;
+    desc.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::TextureBinding;
+    wgpu::Texture tex = device.CreateTexture(&desc);
 }
 
 // Test copying into a sub-region of a texture works correctly.
