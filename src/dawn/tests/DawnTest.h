@@ -472,8 +472,13 @@ class DawnTestBase {
     // Check depth by uploading expected data to a sampled texture, writing it out as a depth
     // attachment, and then using the "equals" depth test to check the contents are the same.
     // Check stencil by rendering a full screen quad and using the "equals" stencil test with
-    // a stencil reference value. Note that checking stencil checks that the entire stencil
-    // buffer is equal to the expected stencil value.
+    // a stencil reference value. Note that:
+    // 1. Checking stencil checks that the entire stencil buffer is equal to the expected stencil
+    //    value.
+    // 2. The parameter 'depthWriteEnabled' is used to enable / disable writting into depth aspects
+    //    when we compare the depth value. The default value is set to true as there is a crash
+    //    issue on the old Intel Mesa Vulkan driver (<= 19.0.2) when we write into gl_FragDepth and
+    //    'depthWriteEnabled' is set to false.
     std::ostringstream& ExpectAttachmentDepthStencilTestData(wgpu::Texture texture,
                                                              wgpu::TextureFormat format,
                                                              uint32_t width,
@@ -481,7 +486,8 @@ class DawnTestBase {
                                                              uint32_t arrayLayer,
                                                              uint32_t mipLevel,
                                                              std::vector<float> expectedDepth,
-                                                             uint8_t* expectedStencil);
+                                                             uint8_t* expectedStencil,
+                                                             bool depthWriteEnabled = true);
 
     std::ostringstream& ExpectAttachmentDepthTestData(wgpu::Texture texture,
                                                       wgpu::TextureFormat format,
@@ -489,9 +495,11 @@ class DawnTestBase {
                                                       uint32_t height,
                                                       uint32_t arrayLayer,
                                                       uint32_t mipLevel,
-                                                      std::vector<float> expectedDepth) {
+                                                      std::vector<float> expectedDepth,
+                                                      bool depthWriteEnabled = true) {
         return ExpectAttachmentDepthStencilTestData(texture, format, width, height, arrayLayer,
-                                                    mipLevel, std::move(expectedDepth), nullptr);
+                                                    mipLevel, std::move(expectedDepth), nullptr,
+                                                    depthWriteEnabled);
     }
 
     std::ostringstream& ExpectAttachmentStencilTestData(wgpu::Texture texture,
