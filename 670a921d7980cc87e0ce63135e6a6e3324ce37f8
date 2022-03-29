@@ -16,6 +16,24 @@
       "message": "I\u0027m slightly surprised that just .git/HEAD is sufficient since its content doesn\u0027t seem to change. Maybe git always rewrites it? Maybe we should still parse it and add .git/refs/heads/main or whatever else is in .git/HEAD?",
       "revId": "670a921d7980cc87e0ce63135e6a6e3324ce37f8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7813300c_db9bf0dc",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-03-29T20:51:57Z",
+      "side": 1,
+      "message": "You are right, changed it a bit to get only the needed file via the command. (I was testing it on a rebase so the HEAD file was always an actual hash, not a ref so I didn\u0027t realize). \n\nAlso made sure to pass the CWD down properly since I tried it in chromium build and it wasn\u0027t getting the dawn hash.",
+      "parentUuid": "28911cab_c047b347",
+      "revId": "670a921d7980cc87e0ce63135e6a6e3324ce37f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
