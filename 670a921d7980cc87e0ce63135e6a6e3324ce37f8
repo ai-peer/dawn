@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28911cab_c047b347",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-29T08:23:52Z",
+      "side": 1,
+      "message": "I\u0027m slightly surprised that just .git/HEAD is sufficient since its content doesn\u0027t seem to change. Maybe git always rewrites it? Maybe we should still parse it and add .git/refs/heads/main or whatever else is in .git/HEAD?",
+      "revId": "670a921d7980cc87e0ce63135e6a6e3324ce37f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
