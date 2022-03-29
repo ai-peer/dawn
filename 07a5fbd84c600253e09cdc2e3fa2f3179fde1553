@@ -87,6 +87,24 @@
       "parentUuid": "c277b2a0_98b77bc3",
       "revId": "07a5fbd84c600253e09cdc2e3fa2f3179fde1553",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab07d424_230a020d",
+        "filename": "src/dawn/native/opengl/GLFormat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-29T16:16:42Z",
+      "side": 1,
+      "message": "LGTM then",
+      "parentUuid": "d1f067a7_d42960c3",
+      "revId": "07a5fbd84c600253e09cdc2e3fa2f3179fde1553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
