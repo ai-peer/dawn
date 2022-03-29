@@ -85,6 +85,24 @@
       "message": "Note: this could be const if you like (although it affects GL state so it depends on how you interpret constness).",
       "revId": "f44e6b077a1d0a9755fa8fc1bf4ab3950c2e2e7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99714bd3_9ab20129",
+        "filename": "src/dawn/native/opengl/TextureGL.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-03-29T16:50:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f9a2c9b3_248cf62d",
+      "revId": "f44e6b077a1d0a9755fa8fc1bf4ab3950c2e2e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
