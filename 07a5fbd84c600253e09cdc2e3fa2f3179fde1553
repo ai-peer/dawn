@@ -69,6 +69,24 @@
       "parentUuid": "d753b8b0_355ce28d",
       "revId": "07a5fbd84c600253e09cdc2e3fa2f3179fde1553",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1f067a7_d42960c3",
+        "filename": "src/dawn/native/opengl/GLFormat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-03-29T15:22:44Z",
+      "side": 1,
+      "message": "Core as of desktop 3.0, AFAICT.",
+      "parentUuid": "c277b2a0_98b77bc3",
+      "revId": "07a5fbd84c600253e09cdc2e3fa2f3179fde1553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
