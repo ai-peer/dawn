@@ -33,6 +33,24 @@
       "message": "Is it supported unconditionally in GLES ?",
       "revId": "07a5fbd84c600253e09cdc2e3fa2f3179fde1553",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d753b8b0_355ce28d",
+        "filename": "src/dawn/native/opengl/GLFormat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-03-29T14:41:46Z",
+      "side": 1,
+      "message": "Since ES 3.0 (same as DEPTH32F_STENCIL8, which we\u0027re using unconditionally).\n\nWhich provokes the question: should we switch 24PlusStencil8 to use DEPTH24_STENCIL8?",
+      "parentUuid": "4f57b7af_422091ea",
+      "revId": "07a5fbd84c600253e09cdc2e3fa2f3179fde1553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
