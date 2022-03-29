@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f303a2c_d05db4ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-29T13:52:54Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "90b8fe93792c5eef5673aabfe770b1be043ff966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37ccc82e_74cbb334",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-29T13:52:54Z",
+      "side": 1,
+      "message": "It seems that we\u0027re only using -\u003eInsert so it may be slightly overkill to inherit from std::vector. I think inheriting from the STL is generally frowned upon because you can\u0027t add a virtual destructor (but it\u0027s ok if you are careful to not deallocate the object through a pointer to std::vector).",
+      "revId": "90b8fe93792c5eef5673aabfe770b1be043ff966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88ba22b6_1ec8d830",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-29T13:52:54Z",
+      "side": 1,
+      "message": "nit: we usually avoid C-style casts, instead we use static_cast and friends.\n\nOr constructor cast size_t(foo)",
+      "range": {
+        "startLine": 59,
+        "startChar": 19,
+        "endLine": 59,
+        "endChar": 27
+      },
+      "revId": "90b8fe93792c5eef5673aabfe770b1be043ff966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3f406dc_e782b33d",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-29T13:52:54Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "90b8fe93792c5eef5673aabfe770b1be043ff966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6712191_706351be",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-29T13:52:54Z",
+      "side": 1,
+      "message": "nit: Does char[N] always mean that we have the null terminator inside the array? Since we\u0027re doing binary data, we could just include it, in case it\u0027s a char[] without null terminator.",
+      "revId": "90b8fe93792c5eef5673aabfe770b1be043ff966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81165175_ba48f2b1",
+        "filename": "src/dawn/tests/unittests/native/CacheKeyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-29T13:52:54Z",
+      "side": 1,
+      "message": "ditto casts.",
+      "revId": "90b8fe93792c5eef5673aabfe770b1be043ff966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
