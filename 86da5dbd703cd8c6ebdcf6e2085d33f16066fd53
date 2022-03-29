@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15e36c52_48e9a7ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-29T06:59:16Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "86da5dbd703cd8c6ebdcf6e2085d33f16066fd53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6589db80_5a4816a4",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-29T06:59:16Z",
+      "side": 1,
+      "message": "nit: Isn\u0027t this comment a bit misleading now that we want to support GLES 3.1 that doesn\u0027t have glTextureView?",
+      "revId": "86da5dbd703cd8c6ebdcf6e2085d33f16066fd53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
