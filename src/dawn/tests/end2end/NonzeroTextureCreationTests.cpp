@@ -115,15 +115,10 @@ namespace {
                                   GetParam().mAspect == wgpu::TextureAspect::StencilOnly &&
                                   (IsOpenGL() || IsOpenGLES()));
 
-            // TODO(crbug.com/dawn/593): Test depends on glTextureView which is unsupported on GLES.
+            // Sampled depth only populates the first texel when running on OpenGL.
             DAWN_SUPPRESS_TEST_IF(GetParam().mFormat == wgpu::TextureFormat::Depth24PlusStencil8 &&
                                   GetParam().mAspect == wgpu::TextureAspect::DepthOnly &&
-                                  IsOpenGLES());
-
-            // Sampled depth only populates the first texel when running on OpenGL Mesa.
-            DAWN_SUPPRESS_TEST_IF(GetParam().mFormat == wgpu::TextureFormat::Depth24PlusStencil8 &&
-                                  GetParam().mAspect == wgpu::TextureAspect::DepthOnly &&
-                                  IsOpenGL() && IsLinux());
+                                  (IsOpenGL() || IsOpenGLES()));
 
             // GL may support the feature, but reading data back is not implemented.
             DAWN_TEST_UNSUPPORTED_IF(GetParam().mFormat == wgpu::TextureFormat::BC1RGBAUnorm &&
