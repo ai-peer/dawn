@@ -51,6 +51,24 @@
       "parentUuid": "4f57b7af_422091ea",
       "revId": "07a5fbd84c600253e09cdc2e3fa2f3179fde1553",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c277b2a0_98b77bc3",
+        "filename": "src/dawn/native/opengl/GLFormat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-29T14:43:26Z",
+      "side": 1,
+      "message": "Probably, we might just need to check for desktop vs. ES, I don\u0027t know if it is always supported in desktop.",
+      "parentUuid": "d753b8b0_355ce28d",
+      "revId": "07a5fbd84c600253e09cdc2e3fa2f3179fde1553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
