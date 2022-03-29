@@ -16,6 +16,23 @@
       "message": "OK, ANGLE looks happy now. PTAL.",
       "revId": "d8afd8df740147b5513489167ec5c4c4db7f67c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c2676b9_5cc4a184",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-29T23:28:55Z",
+      "side": 1,
+      "message": "LGTM, nice find",
+      "revId": "d8afd8df740147b5513489167ec5c4c4db7f67c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
