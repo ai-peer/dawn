@@ -34,6 +34,24 @@
       "parentUuid": "28911cab_c047b347",
       "revId": "670a921d7980cc87e0ce63135e6a6e3324ce37f8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "122bd156_67f52e6d",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-29T22:15:36Z",
+      "side": 1,
+      "message": "found https://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/BUILD.gn;l\u003d676?q\u003d%22.git%22%20f:BUILD.gn\n\n\n`# If git has packed the contents of .git/refs/heads/ in .git/packed-refs,....`\n\n^ do we need to worry about this?",
+      "parentUuid": "7813300c_db9bf0dc",
+      "revId": "670a921d7980cc87e0ce63135e6a6e3324ce37f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
