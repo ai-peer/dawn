@@ -1301,7 +1301,8 @@ std::ostringstream& DawnTestBase::ExpectAttachmentDepthStencilTestData(
     uint32_t arrayLayer,
     uint32_t mipLevel,
     std::vector<float> expectedDepth,
-    uint8_t* expectedStencil) {
+    uint8_t* expectedStencil,
+    bool depthWriteEnabled) {
     wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
 
     // Make the color attachment that we'll use to read back.
@@ -1375,11 +1376,7 @@ std::ostringstream& DawnTestBase::ExpectAttachmentDepthStencilTestData(
     if (depthDataTexture) {
         // Pass the depth test only if the depth is equal.
         depthStencil->depthCompare = wgpu::CompareFunction::Equal;
-
-        // TODO(jiawei.shao@intel.com): The Intel Mesa Vulkan driver can't set gl_FragDepth unless
-        // depthWriteEnabled == true. This either needs to be fixed in the driver or restricted by
-        // the WebGPU API.
-        depthStencil->depthWriteEnabled = true;
+        depthStencil->depthWriteEnabled = depthWriteEnabled;
     }
 
     if (expectedStencil != nullptr) {

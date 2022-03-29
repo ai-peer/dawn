@@ -828,6 +828,39 @@ TEST_P(DepthStencilStateTest, StencilReferenceInitialized) {
     }
 }
 
+// This is a regression test to reproduce a crash issue on old (<= 19.0.2) Intel Mesa Vulkan driver
+// when we write into gl_FragDepth and 'depthWriteEnabled' is set to false. Note that this issue
+// cannot be reproduced on a newer (>= 20.0.8) Intel Mesa Vulkan driver.
+TEST_P(DepthStencilStateTest, CheckWithDepthWriteDisabled) {
+    constexpr uint32_t kSize = 4;
+    constexpr wgpu::TextureFormat kDepthFormat = wgpu::TextureFormat::Depth24Plus;
+
+    wgpu::TextureDescriptor depthDescriptor;
+    depthDescriptor.dimension = wgpu::TextureDimension::e2D;
+    depthDescriptor.size = {kSize, kSize, 1};
+    depthDescriptor.format = kDepthFormat;
+    depthDescriptor.usage = wgpu::TextureUsage::RenderAttachment;
+    wgpu::Texture depthTextureForTest = device.CreateTexture(&depthDescriptor);
+
+    constexpr float kDepthValue = 1.0f;
+    const std::vector<float> kExpectedData(kSize * kSize, kDepthValue);
+
+    utils::ComboRenderPassDescriptor renderPassDescriptor({}, depthTextureForTest.CreateView());
+    renderPassDescriptor.UnsetDepthStencilLoadStoreOpsForFormat(kDepthFormat);
+    renderPassDescriptor.cDepthStencilAttachmentInfo.depthClearValue = kDepthValue;
+    renderPassDescriptor.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
+    renderPassDescriptor.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.BeginRenderPass(&renderPassDescriptor).End();
+    wgpu::CommandBuffer commandBuffer = encoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    constexpr bool kDepthWriteEnabledInComparison = false;
+    ExpectAttachmentDepthTestData(depthTextureForTest, kDepthFormat, kSize, kSize, 0, 0,
+                                  kExpectedData, kDepthWriteEnabledInComparison);
+}
+
 DAWN_INSTANTIATE_TEST(DepthStencilStateTest,
                       D3D12Backend(),
                       MetalBackend(),
