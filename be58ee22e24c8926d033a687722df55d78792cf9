@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2eb73e5_420248e9",
+        "filename": "src/dawn/tests/unittests/native/CacheKeyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-29T22:11:48Z",
+      "side": 1,
+      "message": "these casts still should be like: `uint8_t(255)`",
+      "range": {
+        "startLine": 140,
+        "startChar": 42,
+        "endLine": 140,
+        "endChar": 55
+      },
+      "revId": "be58ee22e24c8926d033a687722df55d78792cf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

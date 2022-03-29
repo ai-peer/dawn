@@ -172,6 +172,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4863b83_e7dec24a",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-29T22:11:48Z",
+      "side": 1,
+      "message": "seems like maybe it\u0027s not worth doing anything special to drop the null terminator though? In the tests, you can also push back a `\\0` for the comparison, and for std::string, push back chars one-by-one to avoid inserting a `\\0`.",
+      "parentUuid": "8efaa0d2_5ade18aa",
+      "revId": "90b8fe93792c5eef5673aabfe770b1be043ff966",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81165175_ba48f2b1",
         "filename": "src/dawn/tests/unittests/native/CacheKeyTests.cpp",
         "patchSetId": 3
