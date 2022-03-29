@@ -586,4 +586,17 @@ namespace dawn::native::opengl {
         return mTarget;
     }
 
+    void TextureView::FramebufferTexture(GLenum target, GLenum attachment) {
+        const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
+        // Use the texture's handle and target, and the view's base mip level and base array layer
+        GLuint handle = ToBackend(GetTexture())->GetHandle();
+        GLuint textarget = ToBackend(GetTexture())->GetGLTarget();
+        if (textarget == GL_TEXTURE_2D || textarget == GL_TEXTURE_2D_MULTISAMPLE) {
+            gl.FramebufferTexture2D(target, attachment, textarget, handle, GetBaseMipLevel());
+        } else {
+            gl.FramebufferTextureLayer(target, attachment, handle, GetBaseMipLevel(),
+                                       GetBaseArrayLayer());
+        }
+    }
+
 }  // namespace dawn::native::opengl
