@@ -16,6 +16,46 @@
       "message": "After some fairly painstaking manual runs through the CTS with https://chromium-review.googlesource.com/c/chromium/src/+/3554880 applied, I think these are the only two new issues I\u0027ve encountered. PTAL!",
       "revId": "bfd6a8896befab5400f7eca59e22de32e4695013",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7865a66b_24c6439f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-29T21:15:17Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "bfd6a8896befab5400f7eca59e22de32e4695013",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dae4c1a9_0d11e90f",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1185,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-29T21:15:17Z",
+      "side": 1,
+      "message": "we should comment that this is because it is always backed by DXGI_FORMAT_R24G8_TYPELESS, not real stencil 8",
+      "range": {
+        "startLine": 1184,
+        "startChar": 20,
+        "endLine": 1185,
+        "endChar": 71
+      },
+      "revId": "bfd6a8896befab5400f7eca59e22de32e4695013",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
