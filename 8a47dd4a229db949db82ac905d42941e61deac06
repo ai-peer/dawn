@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcf040fb_ab66a08e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-29T06:53:38Z",
+      "side": 1,
+      "message": "nit: Bug: dawn:286 (I think that\u0027s the correct ID?)",
+      "revId": "8a47dd4a229db949db82ac905d42941e61deac06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19aae5de_029f3d1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-29T06:53:38Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "8a47dd4a229db949db82ac905d42941e61deac06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
