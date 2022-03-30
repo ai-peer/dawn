@@ -1,4 +1,8 @@
+<<<<<<< HEAD   (b5c5df Implement support for depth24stencil8 on OpenGL.)
 # Copyright 2018 The Dawn Authors
+=======
+# Copyright 2021 The Dawn Authors
+>>>>>>> BRANCH (66d666 Implement discard semantics)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (b5c5df Implement support for depth24stencil8 on OpenGL.)
 cwallez@chromium.org
 enga@chromium.org
 jiawei.shao@intel.com
@@ -9,3 +10,12 @@ kainino@chromium.org
 per-file dawn.json=kainino@chromium.org
 per-file DEPS=*
 per-file README.md=file://docs/dawn/OWNERS
+=======
+amaiorano@google.com
+bclayton@chromium.org
+bclayton@google.com
+cwallez@chromium.org
+dneto@google.com
+jrprice@google.com
+rharrison@chromium.org
+>>>>>>> BRANCH (66d666 Implement discard semantics)
