@@ -166,7 +166,11 @@ namespace dawn::native::vulkan {
 #endif  // defined(DAWN_USE_X11)
 
 #if defined(DAWN_ENABLE_BACKEND_METAL)
-#    define VK_USE_PLATFORM_METAL_EXT
+#    ifndef VK_USE_PLATFORM_METAL_EXT
+#        define VK_USE_PLATFORM_METAL_EXT
+#    endif
+#else
+#    undef VK_USE_PLATFORM_METAL_EXT
 #endif  // defined(DAWN_ENABLE_BACKEND_METAL)
 
 #if defined(DAWN_PLATFORM_ANDROID)
