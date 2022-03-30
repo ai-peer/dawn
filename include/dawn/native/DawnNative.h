@@ -230,13 +230,13 @@ namespace dawn::native {
 
     struct DAWN_NATIVE_EXPORT ExternalImageAccessDescriptor {
       public:
-        bool isInitialized;  // Whether the texture is initialized on import
-        WGPUTextureUsageFlags usage;
+        bool isInitialized = false;  // Whether the texture is initialized on import
+        WGPUTextureUsageFlags usage = WGPUTextureUsage_None;
     };
 
     struct DAWN_NATIVE_EXPORT ExternalImageExportInfo {
       public:
-        bool isInitialized;  // Whether the texture is initialized after export
+        bool isInitialized = false;  // Whether the texture is initialized after export
         ExternalImageType GetType() const;
 
       protected:
