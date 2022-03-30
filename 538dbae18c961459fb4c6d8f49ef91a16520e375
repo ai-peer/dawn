@@ -34,6 +34,24 @@
       "parentUuid": "af2e6124_1b5d4fcc",
       "revId": "538dbae18c961459fb4c6d8f49ef91a16520e375",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18c367da_4ede3eb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-03-30T19:30:11Z",
+      "side": 1,
+      "message": "Chatted with someone on the go team. No easy way to lower the constraints from `Ordered` to `comparable`, without going via some dirty reflection, or changing the API to be more complex.\n\nGiven that the only `Map` and `Set` key types we use are POD, I see no need to complicate the API right now. If we want to support more types in the future, it should be trivial to change these.",
+      "parentUuid": "8b485e67_f17bb2ec",
+      "revId": "538dbae18c961459fb4c6d8f49ef91a16520e375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
