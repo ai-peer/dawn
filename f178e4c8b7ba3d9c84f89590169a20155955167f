@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "477a54ab_afaba0ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-30T13:54:05Z",
+      "side": 1,
+      "message": "LGTM with .git/HEAD added to dependencies. (not necessarily directly, if we find a way to use git plumbing to get the name of that file)",
+      "revId": "f178e4c8b7ba3d9c84f89590169a20155955167f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbe14969_0243ee8b",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-30T13:54:05Z",
+      "side": 1,
+      "message": "Sorry again, but I think we still need to add .git/HEAD because otherwise the script won\u0027t work correctly when you change which ref HEAD points to (for example when changing branches). The ref of the previous branch itself doesn\u0027t change, but which branch you point to changes.",
+      "revId": "f178e4c8b7ba3d9c84f89590169a20155955167f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
