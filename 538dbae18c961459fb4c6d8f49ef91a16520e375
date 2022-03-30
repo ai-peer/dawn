@@ -16,6 +16,24 @@
       "message": "The actual implementation looks good to me.\n\nI have a concern about the high-level design. Limiting items in a Set to only valid Key types, feels unintuitive and leaking the implementation details. Atleast in my mental model, I would have expected any valid value for a Map would be a valid value for Set.\n\nI understand that realistically this would require either a generic hashing mechanism to generate keys for the set or using a bespoke internal implementation, which is probably more work than justified.\nI think atleast the comments/documentation around Set should be very explicit about this limitation.",
       "revId": "538dbae18c961459fb4c6d8f49ef91a16520e375",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b485e67_f17bb2ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-03-30T15:33:09Z",
+      "side": 1,
+      "message": "The `Map` and `Key` both use the `key` type constraint, so there\u0027s no difference in what either of these can accept. That said, `Map` and `Key` are more restrictive than go\u0027s builtin `map`, as these wrappers do implicit sorting when returning slices of the data.\nI\u0027m not sure if there\u0027s a way to work around this limitation right now, I\u0027m asking my friends who work on Go if they have any suggested solutions.",
+      "parentUuid": "af2e6124_1b5d4fcc",
+      "revId": "538dbae18c961459fb4c6d8f49ef91a16520e375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
