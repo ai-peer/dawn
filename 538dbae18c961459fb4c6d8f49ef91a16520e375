@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af2e6124_1b5d4fcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-03-30T14:57:43Z",
+      "side": 1,
+      "message": "The actual implementation looks good to me.\n\nI have a concern about the high-level design. Limiting items in a Set to only valid Key types, feels unintuitive and leaking the implementation details. Atleast in my mental model, I would have expected any valid value for a Map would be a valid value for Set.\n\nI understand that realistically this would require either a generic hashing mechanism to generate keys for the set or using a bespoke internal implementation, which is probably more work than justified.\nI think atleast the comments/documentation around Set should be very explicit about this limitation.",
+      "revId": "538dbae18c961459fb4c6d8f49ef91a16520e375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
