@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18ab68b8_2ba2cb1d",
+        "filename": "src/dawn/node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-03-30T16:02:31Z",
+      "side": 1,
+      "message": "Should we rename this to `getDawnRoot`, or add another helper that calls this?\nI\u0027m guessing this will want to be promoted.",
+      "range": {
+        "startLine": 1124,
+        "startChar": 5,
+        "endLine": 1124,
+        "endChar": 30
+      },
+      "revId": "d71fa664eb92b529a1682e97d3d4f1da40fbbaa7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed90d0eb_c6eac6a7",
+        "filename": "src/dawn/node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 1127,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-03-30T16:02:31Z",
+      "side": 1,
+      "message": "`CountRunes`",
+      "range": {
+        "startLine": 1127,
+        "startChar": 20,
+        "endLine": 1127,
+        "endChar": 25
+      },
+      "revId": "d71fa664eb92b529a1682e97d3d4f1da40fbbaa7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
