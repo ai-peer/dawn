@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4517e672_f75a0cda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-30T18:00:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a934caabb0061cfd4395fa7bfc5f3714e538a034",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f18964b1_41342886",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-30T18:00:20Z",
+      "side": 1,
+      "message": "nit: is not",
+      "range": {
+        "startLine": 196,
+        "startChar": 78,
+        "endLine": 196,
+        "endChar": 86
+      },
+      "revId": "a934caabb0061cfd4395fa7bfc5f3714e538a034",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
