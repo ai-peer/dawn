@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc37de72_761caecd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-31T08:04:05Z",
+      "side": 1,
+      "message": "LGTM, I assume you\u0027ll get rid of our copy of the headers once this CL lands?",
+      "revId": "d1fc9ceac65515b40b6379cd272274bd9e20dfee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3a7e3df_1b71fbf1",
+        "filename": "src/dawn/common/vulkan_platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-31T08:04:05Z",
+      "side": 1,
+      "message": "Why are these changes needed? As far as I can read there is no header we include above that should set these defines.",
+      "revId": "d1fc9ceac65515b40b6379cd272274bd9e20dfee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
