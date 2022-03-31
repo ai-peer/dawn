@@ -154,12 +154,12 @@ namespace wgpu::binding {
         return "dawn-adapter";
     }
 
-    interop::Interface<interop::GPUSupportedFeatures> GPUAdapter::getFeatures(Napi::Env env) {
+    interop::Interface<interop::GPUSupportedFeatures> GPUAdapter::getOnceFeatures(Napi::Env env) {
         return interop::GPUSupportedFeatures::Create<Features>(env,
                                                                adapter_.GetAdapterProperties());
     }
 
-    interop::Interface<interop::GPUSupportedLimits> GPUAdapter::getLimits(Napi::Env env) {
+    interop::Interface<interop::GPUSupportedLimits> GPUAdapter::getOnceLimits(Napi::Env env) {
         WGPUSupportedLimits limits{};
         if (!adapter_.GetLimits(&limits)) {
             Napi::Error::New(env, "failed to get adapter limits").ThrowAsJavaScriptException();

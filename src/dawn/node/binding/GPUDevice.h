@@ -28,9 +28,9 @@ namespace wgpu::binding {
         ~GPUDevice();
 
         // interop::GPUDevice interface compliance
-        interop::Interface<interop::GPUSupportedFeatures> getFeatures(Napi::Env) override;
-        interop::Interface<interop::GPUSupportedLimits> getLimits(Napi::Env) override;
-        interop::Interface<interop::GPUQueue> getQueue(Napi::Env env) override;
+        interop::Interface<interop::GPUSupportedFeatures> getOnceFeatures(Napi::Env) override;
+        interop::Interface<interop::GPUSupportedLimits> getOnceLimits(Napi::Env) override;
+        interop::Interface<interop::GPUQueue> getOnceQueue(Napi::Env env) override;
         void destroy(Napi::Env) override;
         interop::Interface<interop::GPUBuffer> createBuffer(
             Napi::Env env,

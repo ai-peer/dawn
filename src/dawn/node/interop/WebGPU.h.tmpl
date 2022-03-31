@@ -224,9 +224,13 @@ std::ostream& operator<<(std::ostream& o, {{$.Name}});
 --------------------------------------------------------------------------------
 */ -}}
 {{- define "InterfaceAttribute"}}
+{{-   if HasAnnotation $ "SameObject"}}
+  virtual {{template "Type" $.Type}} getOnce{{Title $.Name}}(Napi::Env) = 0;
+{{-   else }}
   virtual {{template "Type" $.Type}} get{{Title $.Name}}(Napi::Env) = 0;
 {{-   if not $.Readonly}}
   virtual void set{{Title $.Name}}(Napi::Env, {{template "Type" $.Type}} value) = 0;
+{{-    end }}
 {{-   end }}
 {{- end }}
 

@@ -113,7 +113,7 @@ namespace wgpu::binding {
     GPUDevice::~GPUDevice() {
     }
 
-    interop::Interface<interop::GPUSupportedFeatures> GPUDevice::getFeatures(Napi::Env env) {
+    interop::Interface<interop::GPUSupportedFeatures> GPUDevice::getOnceFeatures(Napi::Env env) {
         class Features : public interop::GPUSupportedFeatures {
           public:
             bool has(Napi::Env, std::string feature) override {
@@ -126,7 +126,7 @@ namespace wgpu::binding {
         return interop::GPUSupportedFeatures::Create<Features>(env);
     }
 
-    interop::Interface<interop::GPUSupportedLimits> GPUDevice::getLimits(Napi::Env env) {
+    interop::Interface<interop::GPUSupportedLimits> GPUDevice::getOnceLimits(Napi::Env env) {
         wgpu::SupportedLimits limits{};
         if (!device_.GetLimits(&limits)) {
             Napi::Error::New(env, "failed to get device limits").ThrowAsJavaScriptException();
@@ -134,7 +134,7 @@ namespace wgpu::binding {
         return interop::GPUSupportedLimits::Create<GPUSupportedLimits>(env, limits);
     }
 
-    interop::Interface<interop::GPUQueue> GPUDevice::getQueue(Napi::Env env) {
+    interop::Interface<interop::GPUQueue> GPUDevice::getOnceQueue(Napi::Env env) {
         // TODO(crbug.com/dawn/1144): Should probably return the same Queue JS object.
         return interop::GPUQueue::Create<GPUQueue>(env, device_.GetQueue(), async_);
     }

@@ -30,8 +30,8 @@ namespace wgpu::binding {
 
         // interop::GPUAdapter interface compliance
         std::string getName(Napi::Env) override;
-        interop::Interface<interop::GPUSupportedFeatures> getFeatures(Napi::Env) override;
-        interop::Interface<interop::GPUSupportedLimits> getLimits(Napi::Env) override;
+        interop::Interface<interop::GPUSupportedFeatures> getOnceFeatures(Napi::Env) override;
+        interop::Interface<interop::GPUSupportedLimits> getOnceLimits(Napi::Env) override;
         bool getIsFallbackAdapter(Napi::Env) override;
         interop::Promise<interop::Interface<interop::GPUDevice>> requestDevice(
             Napi::Env env,
