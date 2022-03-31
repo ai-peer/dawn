@@ -168,25 +168,31 @@ namespace wgpu::interop {
         int line = 0;
     };
 
+    enum class PromiseState {
+        Pending,
+        Resolved,
+        Rejected,
+    };
+
     namespace detail {
         // Base class for Promise<T> specializations.
         class PromiseBase {
           public:
             // Implicit conversion operators to Napi promises.
             inline operator napi_value() const {
-                return state->deferred.Promise();
+                return state_->deferred.Promise();
             }
             inline operator Napi::Value() const {
-                return state->deferred.Promise();
+                return state_->deferred.Promise();
             }
             inline operator Napi::Promise() const {
-                return state->deferred.Promise();
+                return state_->deferred.Promise();
             }
 
             // Reject() rejects the promise with the given failure value.
             void Reject(Napi::Value value) const {
-                state->deferred.Reject(value);
-                state->resolved_or_rejected = true;
+                state_->deferred.Reject(value);
+                state_->state = PromiseState::Rejected;
             }
             void Reject(Napi::Error err) const {
                 Reject(err.Value());
@@ -195,39 +201,37 @@ namespace wgpu::interop {
                 Reject(Napi::Error::New(state->deferred.Env(), err));
             }
 
+            PromiseState GetState() const {
+                return state_->state;
+            }
+
           protected:
             void Resolve(Napi::Value value) const {
                 state->deferred.Resolve(value);
-                state->resolved_or_rejected = true;
+                state->state_ = PromiseState::Resolved;
             }
 
             struct State {
                 Napi::Promise::Deferred deferred;
                 PromiseInfo info;
-                bool resolved_or_rejected = false;
+                PromiseState state = PromiseState::Pending;
             };
 
             PromiseBase(Napi::Env env, const PromiseInfo& info)
                 : state(new State{Napi::Promise::Deferred::New(env), info}) {
                 state->deferred.Promise().AddFinalizer(
                     [](Napi::Env, State* state) {
-                        // TODO(https://github.com/gpuweb/cts/issues/784):
-                        // Devices are never destroyed, so we always end up
-                        // leaking the Device.lost promise. Enable this once
-                        // fixed.
-                        if ((false)) {
-                            if (!state->resolved_or_rejected) {
-                                ::wgpu::utils::Fatal("Promise not resolved or rejected",
-                                                     state->info.file, state->info.line,
-                                                     state->info.function);
-                            }
+                        if (state->state == PromiseState::Pending) {
+                            ::wgpu::utils::Fatal("Promise not resolved or rejected",
+                                                 state->info.file, state->info.line,
+                                                 state->info.function);
                         }
                         delete state;
                     },
-                    state);
+                    state_);
             }
 
-            State* const state;
+            State* const state_;
         };
     }  // namespace detail
 

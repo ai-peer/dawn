@@ -77,7 +77,7 @@ namespace wgpu::binding {
         interop::Interface<interop::GPUQuerySet> createQuerySet(
             Napi::Env,
             interop::GPUQuerySetDescriptor descriptor) override;
-        interop::Promise<interop::Interface<interop::GPUDeviceLostInfo>> getLost(
+        interop::Promise<interop::Interface<interop::GPUDeviceLostInfo>> getOnceLost(
             Napi::Env env) override;
         void pushErrorScope(Napi::Env, interop::GPUErrorFilter filter) override;
         interop::Promise<std::optional<interop::GPUError>> popErrorScope(Napi::Env env) override;
@@ -104,8 +104,10 @@ namespace wgpu::binding {
         Napi::Env env_;
         wgpu::Device device_;
         std::shared_ptr<AsyncRunner> async_;
-        std::vector<interop::Promise<interop::Interface<interop::GPUDeviceLostInfo>>>
-            lost_promises_;
+
+        // This promise's JS object lives as long as the device because it is stored in .lost
+        // of the wrapper JS object.
+        interop::Promise<interop::Interface<interop::GPUDeviceLostInfo>> lost_promise_;
     };
 
 }  // namespace wgpu::binding
