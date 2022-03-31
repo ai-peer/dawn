@@ -21,6 +21,7 @@ DawnJSONGenerator(
 add_library(dawn_native ${DAWN_DUMMY_FILE})
 
 target_compile_definitions(dawn_native PRIVATE "DAWN_NATIVE_IMPLEMENTATION")
+target_compile_definitions(dawn_native PRIVATE "DAWN_ENABLE_SWIFTSHADER")
 if(BUILD_SHARED_LIBS)
     target_compile_definitions(dawn_native PRIVATE "DAWN_NATIVE_SHARED_LIBRARY")
 endif()
