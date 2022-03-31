@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2689e0c5_e293ca8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-31T01:16:10Z",
+      "side": 1,
+      "message": "LGTM\n\nthough. I just realized, the Dawn-\u003egoogle3 import may also need something special. Not sure if it\u0027s a git repo there. Use copybara to import it into google3 google3/third_party/dawn/copy.bara.sky\nif it\u0027s not, maybe copybara has some other hooks we can use. Or we can pull the version from google3/third_party/dawn/METADATA\n\nfeel free to address this separately. for now, we can probably update google3 to just run this generator, and the git hash may be empty string (which should disable the caching).",
+      "revId": "feaade2a3542783f2c1a991f635a356734a8fae3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
