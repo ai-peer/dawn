@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8864837_de4e75b7",
+        "filename": "tools/src/cts/query/query.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-31T19:23:42Z",
+      "side": 1,
+      "message": "Maybe add a code comment about what these represent though, since it diverges from the upstream documentation.",
+      "parentUuid": "1533a359_0ea6499f",
+      "revId": "da2e438f9b247a780bf8bbf9260f2c33884d4a16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "99dd823f_b3bc2b41",
         "filename": "tools/src/cts/query/query.go",
         "patchSetId": 4
