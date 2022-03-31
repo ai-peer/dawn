@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "105d12a0_f082b2a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-31T01:05:46Z",
+      "side": 1,
+      "message": "I\u0027m going to land this to avoid rebase woes. sampling works, rendering does not, but it\u0027s not insecure or unsafe to render - it simply doesn\u0027t actually do format reinterpretation. Will address in follow-ups.\n(also not exposed to JS yet)",
+      "revId": "4f61bf7a160b2901dc547734829dc56ab84c55eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
