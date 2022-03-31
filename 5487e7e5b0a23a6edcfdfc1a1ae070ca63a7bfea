@@ -16,6 +16,46 @@
       "message": "PTAL!",
       "revId": "5487e7e5b0a23a6edcfdfc1a1ae070ca63a7bfea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1852845f_197a5ac4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-03-31T17:37:51Z",
+      "side": 1,
+      "message": "Sneaky. I like it.",
+      "revId": "5487e7e5b0a23a6edcfdfc1a1ae070ca63a7bfea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3e74b87_3c359070",
+        "filename": "src/dawn/node/tools/src/cmd/idlgen/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-03-31T17:37:51Z",
+      "side": 1,
+      "message": "Can be cleaned up a bit with a type switch:\n\n```\nfunc hasAnnotation(obj interface{}, name string) bool {\n\tswitch obj :\u003d obj.(type) {\n\tcase *ast.Member:\n\t\treturn findAnnotation(obj.Annotations, name) !\u003d nil\n\tcase *ast.Interface:\n\t\treturn findAnnotation(obj.Annotations, name) !\u003d nil\n\tcase *ast.Namespace:\n\t\treturn findAnnotation(obj.Annotations, name) !\u003d nil\n\t}\n\tpanic(\"Unhandled AST node type in hasAnnotation\")\n}\n```\n\nAlternatively, I could add a method on the AST types, and you could use an interface, but this is fine.",
+      "range": {
+        "startLine": 515,
+        "startChar": 0,
+        "endLine": 528,
+        "endChar": 0
+      },
+      "revId": "5487e7e5b0a23a6edcfdfc1a1ae070ca63a7bfea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
