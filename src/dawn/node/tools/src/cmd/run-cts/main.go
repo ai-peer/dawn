@@ -580,6 +580,9 @@ func (r *runner) runServer(caseIndices <-chan int, results chan<- result) error 
 		case <-time.After(time.Second * 10):
 			return fmt.Errorf("timeout waiting for server port:\n%v", serverLog.String())
 		case <-ctx.Done():
+			if r.verbose {
+				serverLog.WriteTo(os.Stdout)
+			}
 			return ctx.Err()
 		}
 
