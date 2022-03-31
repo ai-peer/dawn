@@ -147,6 +147,9 @@ namespace dawn::native::d3d12 {
         bool ShouldDuplicateNumWorkgroupsForDispatchIndirect(
             ComputePipelineBase* computePipeline) const override;
 
+        // Dawn API
+        void SetLabelImpl() override;
+
       private:
         using DeviceBase::DeviceBase;
 

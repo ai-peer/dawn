@@ -547,6 +547,7 @@ namespace dawn::native {
         std::unique_ptr<CallbackTaskManager> mCallbackTaskManager;
         std::unique_ptr<dawn::platform::WorkerTaskPool> mWorkerTaskPool;
         std::string mLabel;
+        std::string mDefaultQueueLabel;
         std::string mCacheIsolationKey = "";
     };
 

@@ -101,6 +101,8 @@ namespace dawn::native::vulkan {
         // extension is available. Override the decision if it is no applicable.
         ApplyUseZeroInitializeWorkgroupMemoryExtensionToggle();
 
+        SetLabelImpl();
+
         return DeviceBase::Initialize(Queue::Create(this));
     }
 
@@ -1048,6 +1050,11 @@ namespace dawn::native::vulkan {
 
     float Device::GetTimestampPeriodInNS() const {
         return mDeviceInfo.properties.limits.timestampPeriod;
+    }
+
+    void Device::SetLabelImpl() {
+        SetDebugName(this, VK_OBJECT_TYPE_DEVICE, reinterpret_cast<uint64_t&>(mVkDevice),
+                     "Dawn_Device", GetLabel());
     }
 
 }  // namespace dawn::native::vulkan

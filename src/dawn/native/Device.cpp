@@ -198,6 +198,14 @@ namespace dawn::native {
 
         mFormatTable = BuildFormatTable(this);
         SetDefaultToggles();
+
+        if (descriptor->label) {
+            mLabel = descriptor->label;
+        }
+
+        if (descriptor->defaultQueue.label) {
+            mDefaultQueueLabel = descriptor->defaultQueue.label;
+        }
     }
 
     DeviceBase::DeviceBase() : mState(State::Alive) {
@@ -212,6 +220,12 @@ namespace dawn::native {
 
     MaybeError DeviceBase::Initialize(QueueBase* defaultQueue) {
         mQueue = AcquireRef(defaultQueue);
+
+        // If an label was specified for the default queue in the device descriptor, set it now.
+        if (!mDefaultQueueLabel.empty()) {
+            mQueue->APISetLabel(mDefaultQueueLabel.c_str());
+            mDefaultQueueLabel = "";
+        }
 
 #if defined(DAWN_ENABLE_ASSERTS)
         mUncapturedErrorCallback = [](WGPUErrorType, char const*, void*) {

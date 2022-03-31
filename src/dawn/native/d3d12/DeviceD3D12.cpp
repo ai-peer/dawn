@@ -741,4 +741,8 @@ namespace dawn::native::d3d12 {
         return ToBackend(computePipeline)->UsesNumWorkgroups();
     }
 
+    void Device::SetLabelImpl() {
+        SetDebugName(this, mD3d12Device.Get(), "Dawn_Device", GetLabel());
+    }
+
 }  // namespace dawn::native::d3d12

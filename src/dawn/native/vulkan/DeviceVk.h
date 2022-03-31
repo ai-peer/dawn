@@ -105,6 +105,8 @@ namespace dawn::native::vulkan {
 
         float GetTimestampPeriodInNS() const override;
 
+        void SetLabelImpl() override;
+
       private:
         Device(Adapter* adapter, const DeviceDescriptor* descriptor);
 
