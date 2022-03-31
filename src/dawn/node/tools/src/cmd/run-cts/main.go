@@ -554,7 +554,8 @@ func (r *runner) runServer(caseIndices <-chan int, results chan<- result) error 
 		pl := newPortListener()
 
 		cmd.Dir = r.cts
-		cmd.Stdout = io.MultiWriter(&rw, serverLog, &pl)
+		//cmd.Stdout = io.MultiWriter(&rw, serverLog, &pl)
+		cmd.Stdout = io.MultiWriter(&rw, os.Stdout, serverLog, &pl)
 		cmd.Stderr = io.MultiWriter(&rw, serverLog)
 
 		err := cmd.Start()
