@@ -69,6 +69,24 @@
       "parentUuid": "b3a7e3df_1b71fbf1",
       "revId": "d1fc9ceac65515b40b6379cd272274bd9e20dfee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd0e7a21_f44a7784",
+        "filename": "src/dawn/common/vulkan_platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-31T19:06:26Z",
+      "side": 1,
+      "message": "seems fine, though not sure we need to #undef it in the else case.",
+      "parentUuid": "01a091e9_b033de55",
+      "revId": "d1fc9ceac65515b40b6379cd272274bd9e20dfee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
