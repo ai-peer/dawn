@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1533a359_0ea6499f",
+        "filename": "tools/src/cts/query/query.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-31T19:23:00Z",
+      "side": 1,
+      "message": "got it, that makes sense. The typescript implementation represents nodes in wildcard form, and context dictates whether that means the node itself, or the entire subtree.",
+      "parentUuid": "547ddc25_e4fb48cc",
+      "revId": "da2e438f9b247a780bf8bbf9260f2c33884d4a16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99dd823f_b3bc2b41",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Ack. I also don\u0027t think it should happen, but this seemed like a better option than either dropping stuff on the floor, or panicing in code that I hope will run as a service.",
       "parentUuid": "99dd823f_b3bc2b41",
+      "revId": "da2e438f9b247a780bf8bbf9260f2c33884d4a16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5ac1628_2c36021a",
+        "filename": "tools/src/cts/query/query.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-31T19:23:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ca6e90c7_fd99377e",
       "revId": "da2e438f9b247a780bf8bbf9260f2c33884d4a16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
