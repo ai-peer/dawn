@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "dac452458f4ca6bf4168877ee06f17bf236bccee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5a28082_c6d185c1",
+        "filename": "src/dawn/node/tools/src/cmd/idlgen/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-03-31T18:07:11Z",
+      "side": 1,
+      "message": "HACK!\nPlease file a bug so this smell doesn\u0027t last forever.",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 2
+      },
+      "revId": "dac452458f4ca6bf4168877ee06f17bf236bccee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
