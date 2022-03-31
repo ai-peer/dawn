@@ -517,6 +517,12 @@ func hasAnnotation(obj interface{}, name string) bool {
 	if member, ok := obj.(*ast.Member); ok {
 		return findAnnotation(member.Annotations, name) != nil
 	}
+	if iface, ok := obj.(*ast.Interface); ok {
+		return findAnnotation(iface.Annotations, name) != nil
+	}
+	if namespace, ok := obj.(*ast.Namespace); ok {
+		return findAnnotation(namespace.Annotations, name) != nil
+	}
 	panic("Unhandled AST node type in hasAnnotation")
 }
 
