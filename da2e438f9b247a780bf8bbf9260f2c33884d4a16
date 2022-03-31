@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0290fca9_544f31b9",
+        "filename": "tools/src/cts/query/query.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-31T18:50:30Z",
+      "side": 1,
+      "message": "in the typescript implementation, all queries must end in wildcards unless they identify a specific test. So these would be invalid:\n\n suite\n suite:file\n suite:file,file\n suite:file,file:test\n\nand these would be valid:\n\n suite:file,file:test,test:case\n suite:file,file:test,test:case;case\n\nThat is, there are 4 types of queries:\n- multi-file: `s:*` `s:f,f,*`\n- multi-test: `s:f,f:*` `s:f:t,t,*`\n- multi-case: `s:f,f:t,t:*` `s:f,f:t,t:c;c;*`\n- single-case: `s:f,f:t,t:` `s:f,f:t,t:c;c`\n\nhttps://github.com/gpuweb/cts/blob/main/src/common/internal/query/query.ts",
+      "revId": "da2e438f9b247a780bf8bbf9260f2c33884d4a16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99dd823f_b3bc2b41",
+        "filename": "tools/src/cts/query/query.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-03-31T18:50:30Z",
+      "side": 1,
+      "message": "nit: Pretty sure this should never happen and could panic()",
+      "revId": "da2e438f9b247a780bf8bbf9260f2c33884d4a16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
