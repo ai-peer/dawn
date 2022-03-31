@@ -16,6 +16,126 @@
       "message": "PTAL. Thanks!",
       "revId": "5aab0cae09156c60c99549f6c8b6c6dfc7ef8eb6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba3c6621_ac20a76d",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-31T05:37:43Z",
+      "side": 1,
+      "message": "resolveView is being written to here, not colorView. colorView is the source of the blit, resolveView is the destination",
+      "revId": "5aab0cae09156c60c99549f6c8b6c6dfc7ef8eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a57ff2fd_2744d4a8",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-31T05:37:43Z",
+      "side": 1,
+      "message": "maybe we can perform the touch at the end of the render pass.\n\nIt\u0027s valid to use one subresource as render attachment and one as sampled/storage. So, if you do that, you will always incur a copy on ApplyBindGroup. This unnecessary copy might be eliminated if we don\u0027t perform the touch until EndPass - or if we have subresource tracking for it.",
+      "range": {
+        "startLine": 892,
+        "startChar": 0,
+        "endLine": 892,
+        "endChar": 62
+      },
+      "revId": "5aab0cae09156c60c99549f6c8b6c6dfc7ef8eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ff4f541_9e872796",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-31T05:37:43Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 915,
+        "startChar": 0,
+        "endLine": 915,
+        "endChar": 82
+      },
+      "revId": "5aab0cae09156c60c99549f6c8b6c6dfc7ef8eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c5dc9fa_979d53cb",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-31T05:37:43Z",
+      "side": 1,
+      "message": "weird that this is here, instead of up at [1] where color is handled. (or vice versa)",
+      "range": {
+        "startLine": 998,
+        "startChar": 0,
+        "endLine": 998,
+        "endChar": 71
+      },
+      "revId": "5aab0cae09156c60c99549f6c8b6c6dfc7ef8eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aabf7f8_7d871767",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-31T05:37:43Z",
+      "side": 1,
+      "message": "I\u0027m working on srgb reinterpretation for rendering right now, and that means that this function might bind to `mHandle` if we need to do format reinterpretation instead of `ToBackend(GetTexture())-\u003eGetHandle();`. No action needed now / I can try to handle it later, but it does mean we may need to do bidirectional blits...",
+      "revId": "5aab0cae09156c60c99549f6c8b6c6dfc7ef8eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4745d9c2_7869ab4d",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-03-31T05:37:43Z",
+      "side": 1,
+      "message": "probably eventually Touch and CopyIfNeeded could take the subresources touched, and we can use SubresourceStorage to track which subresources need to be updated. Should be less copying for textures with many subresources.",
+      "revId": "5aab0cae09156c60c99549f6c8b6c6dfc7ef8eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
