@@ -144,6 +144,16 @@ func run() error {
 	idl, declarations := simplify(idl)
 	g.declarations = declarations
 
+	// Fix the IDL for things that aren't present upstream.
+	// Add [SameObject] to GPUDevice.lost
+	for _, member := range g.declarations["GPUDevice"].(*ast.Interface).Members {
+		if m := member.(*ast.Member); m != nil && m.Name == "lost" {
+			annotation := &ast.Annotation{}
+			annotation.Name = "SameObject"
+			m.Annotations = append(m.Annotations, annotation)
+		}
+	}
+
 	// Write the file header
 	fmt.Fprintf(out, header, strings.Join(os.Args[1:], "\n//   "))
 

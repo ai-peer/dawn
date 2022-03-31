@@ -168,6 +168,12 @@ namespace wgpu::interop {
         int line = 0;
     };
 
+    enum class PromiseState {
+        Pending,
+        Resolved,
+        Rejected,
+    };
+
     namespace detail {
         // Base class for Promise<T> specializations.
         class PromiseBase {
@@ -186,7 +192,7 @@ namespace wgpu::interop {
             // Reject() rejects the promise with the given failure value.
             void Reject(Napi::Value value) const {
                 state->deferred.Reject(value);
-                state->resolved_or_rejected = true;
+                state->state = PromiseState::Rejected;
             }
             void Reject(Napi::Error err) const {
                 Reject(err.Value());
@@ -195,16 +201,20 @@ namespace wgpu::interop {
                 Reject(Napi::Error::New(state->deferred.Env(), err));
             }
 
+            PromiseState GetState() const {
+                return state->state;
+            }
+
           protected:
             void Resolve(Napi::Value value) const {
                 state->deferred.Resolve(value);
-                state->resolved_or_rejected = true;
+                state->state = PromiseState::Resolved;
             }
 
             struct State {
                 Napi::Promise::Deferred deferred;
                 PromiseInfo info;
-                bool resolved_or_rejected = false;
+                PromiseState state = PromiseState::Pending;
             };
 
             PromiseBase(Napi::Env env, const PromiseInfo& info)
@@ -216,7 +226,7 @@ namespace wgpu::interop {
                         // leaking the Device.lost promise. Enable this once
                         // fixed.
                         if ((false)) {
-                            if (!state->resolved_or_rejected) {
+                            if (state->state == PromiseState::Pending) {
                                 ::wgpu::utils::Fatal("Promise not resolved or rejected",
                                                      state->info.file, state->info.line,
                                                      state->info.function);
