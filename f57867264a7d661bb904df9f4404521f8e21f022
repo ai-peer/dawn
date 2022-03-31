@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc4f5779_9954ff2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-31T08:12:07Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "f57867264a7d661bb904df9f4404521f8e21f022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fde26ed_cd1f4cfd",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-31T08:12:07Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "f57867264a7d661bb904df9f4404521f8e21f022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e848f09c_1dab4ea7",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-31T08:12:07Z",
+      "side": 1,
+      "message": "note: since we get the HEAD hash with [1], we don\u0027t technically need to decompress, just validate that packed contains the ref we care about and return it as a dependency? I\u0027m not 100% sure because git might have precedence rules for the decompressed file so nvm, let\u0027s decompress.",
+      "revId": "f57867264a7d661bb904df9f4404521f8e21f022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
