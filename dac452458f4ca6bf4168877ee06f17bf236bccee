@@ -39,6 +39,30 @@
       },
       "revId": "dac452458f4ca6bf4168877ee06f17bf236bccee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "286b1b5d_7741edb7",
+        "filename": "src/dawn/node/tools/src/cmd/idlgen/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-01T07:52:52Z",
+      "side": 1,
+      "message": "I don\u0027t know that we can ever fix this: https://github.com/whatwg/webidl/issues/71#issuecomment-324278992\n\nWe could use a patched gpuweb.idl maybe? Blink does that.",
+      "parentUuid": "e5a28082_c6d185c1",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 2
+      },
+      "revId": "dac452458f4ca6bf4168877ee06f17bf236bccee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
