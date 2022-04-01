@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4cdeb46_8bffee68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T17:09:53Z",
+      "side": 1,
+      "message": "LGTM but comments about the error message generation.",
+      "revId": "20386b557b0a81ead370e9694a511e0d9133b1bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab5ba10f_c1aa3a2a",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T17:09:53Z",
+      "side": 1,
+      "message": "mmm.. maybe we should just define a macro here so we don\u0027t have to deal with untyped formats. I think it would be preferable to have macros that gives us compile errors when we do it wrong.\n\nIf we don\u0027t want the macro to do toooo many things inside (like append to metadata, etc), we could make something like DAWN_MAKE_ERROR_IF and do something like:\n```\n#define DAWN_MAKE_ERROR_IF(EXPR, ...) \\\n  [\u0026]() -\u003e MaybeError { DAWN_INVALID_IF(EXPR, __VA_ARGS__); return {}; }()\n\nauto CheckLimit \u003d [\u0026metadata](MaybeError maybeError) -\u003e bool {\n  if (maybeError.IsError()) {\n    metadata-\u003einfringedLimits.push_back(maybeError-\u003eAcquireError()-\u003eGetMessage());\n    return false;\n  }\n  return true;\n};\n\nif (CheckLimit(DAWN_MAKE_ERROR_IF(......))) {\n}\n```",
+      "revId": "20386b557b0a81ead370e9694a511e0d9133b1bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b05f125a_34e1eb34",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T17:09:53Z",
+      "side": 1,
+      "message": "I am a slight -1 about inverting the condition we use. Makes error checking in Dawn less consistent.\n\nI think all the places you do `if(CheckLimit(...)) { //stuff }`, they could instead be `if(LimitIsInvalid(...)) continue; // stuff`",
+      "range": {
+        "startLine": 678,
+        "startChar": 55,
+        "endLine": 678,
+        "endChar": 57
+      },
+      "revId": "20386b557b0a81ead370e9694a511e0d9133b1bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e55f10d4_9e7e05e4",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T17:09:53Z",
+      "side": 1,
+      "message": "uuunit: I might call this \"infringedLimitErrors\". The current name makes it seem like it could be just the names of the infringed limits, and not the full message describing what happened.",
+      "range": {
+        "startLine": 172,
+        "startChar": 33,
+        "endLine": 172,
+        "endChar": 48
+      },
+      "revId": "20386b557b0a81ead370e9694a511e0d9133b1bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
