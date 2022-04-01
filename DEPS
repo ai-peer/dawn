@@ -118,7 +118,7 @@ deps = {
 
   # WGSL support
   'third_party/tint': {
-    'url': '{dawn_git}/tint@e47b313d0c55f567c48a6313ce066019e05e9e0d',
+    'url': '{dawn_git}/tint@79db32aff201c8bdffa47231018615f33de6f813',
   },
 
   # GLFW for tests and samples
@@ -159,7 +159,7 @@ deps = {
 
   # WebGPU CTS - not used directly by Dawn, only transitively by Chromium.
   'third_party/webgpu-cts': {
-    'url': '{chromium_git}/external/github.com/gpuweb/cts@87e74a93e0c046b30a798667f19a449fc99ddb5d',
+    'url': '{chromium_git}/external/github.com/gpuweb/cts@93b87218fd12f312e6e061c1edc14a43a1465ad4',
     'condition': 'build_with_chromium',
   },
 
