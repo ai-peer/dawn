@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b4a6589_b1e2300a",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-01T22:59:08Z",
+      "side": 1,
+      "message": "*sigh* Yup, that fixes it. I\u0027ll have to land that change first then.\n\nOut of curiosity, why does RequestDevice have that sort of two-stage descriptor (DeviceProperties in Blink-\u003eDeviceDescriptor in the Command Bufffer) rather than just passing one directly from Blink like we do every other object?",
+      "parentUuid": "a8d35ae8_41e5e2a6",
+      "revId": "bbdcde8e001e63a0f3f6a1b73ac9f28d535632ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15eb48e6_13890afb",
