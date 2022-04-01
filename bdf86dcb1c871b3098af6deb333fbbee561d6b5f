@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "153aedb4_83573a53",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-01T20:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93b16490_db8b6164",
+      "range": {
+        "startLine": 206,
+        "startChar": 7,
+        "endLine": 209,
+        "endChar": 0
+      },
+      "revId": "bdf86dcb1c871b3098af6deb333fbbee561d6b5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb255b81_54e4ed7c",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-04-01T17:48:05Z",
       "side": 1,
       "message": "usually we\u0027d file a bug and link to it",
+      "range": {
+        "startLine": 58,
+        "startChar": 11,
+        "endLine": 58,
+        "endChar": 15
+      },
+      "revId": "bdf86dcb1c871b3098af6deb333fbbee561d6b5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f53f94b_bd807611",
+        "filename": "src/dawn/native/d3d12/QueueD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-01T20:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb255b81_54e4ed7c",
       "range": {
         "startLine": 58,
         "startChar": 11,

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb85c84c_af906dcc",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-01T20:56:47Z",
+      "side": 1,
+      "message": "This is causing a problem and I don\u0027t know why? While the checks above work fine if I assign the descriptor\u0027s label to mLabel (an std::string) then it starts causing crashes when I run the code from Chrome. This is really confusing because every other object that uses a label is effectively doing the same thing without issue?",
+      "revId": "bbdcde8e001e63a0f3f6a1b73ac9f28d535632ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15eb48e6_13890afb",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-01T20:56:47Z",
+      "side": 1,
+      "message": "Same problem here as well.",
+      "revId": "bbdcde8e001e63a0f3f6a1b73ac9f28d535632ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
