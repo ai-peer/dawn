@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aff8f66e_72b94baf",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-04-01T23:11:16Z",
+      "side": 1,
+      "message": "I think we can be pretty confident that this is what the upstream equivalent will be, so would just remove the TODO and tags.",
+      "revId": "bbdcde8e001e63a0f3f6a1b73ac9f28d535632ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "704fd727_b6c0afb0",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1680,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-04-01T23:11:16Z",
+      "side": 1,
+      "message": "same",
+      "revId": "bbdcde8e001e63a0f3f6a1b73ac9f28d535632ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb85c84c_af906dcc",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 2
@@ -67,6 +101,24 @@
       "writtenOn": "2022-04-01T23:05:51Z",
       "side": 1,
       "message": "most other objects go directly from Blink -\u003e dawn::wire -\u003e dawn::native\nNot the case for requestDevice cause we want to do \"stuff\", so there\u0027s this other custom serialization thing.\nI want to get rid of it and use the wire serialization, but haven\u0027t gotten around to providing a way for webgpu_decoder_impl to still customize the implementation of requestDevice to do things like set Dawn toggles, etc.\n\nbasically, it\u0027s an artifact of old code, and there\u0027s some new stuff we need to implement to fully remove it",
+      "parentUuid": "8b4a6589_b1e2300a",
+      "revId": "bbdcde8e001e63a0f3f6a1b73ac9f28d535632ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3fa249d_3d476563",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-04-01T23:11:16Z",
+      "side": 1,
+      "message": "If only we were using the C++ API in Blink, which defaults it to nullptr :)\n\nre: last thing: likely historical due to the recent change from a dawn-specific init API to the standard one?",
       "parentUuid": "8b4a6589_b1e2300a",
       "revId": "bbdcde8e001e63a0f3f6a1b73ac9f28d535632ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
