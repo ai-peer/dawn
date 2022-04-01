@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fe22ef1_e9d46a65",
+        "filename": "src/dawn/node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-01T10:37:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2047966d_c651e1be",
+      "revId": "bec16d109815b47a0db0cd51b76e79e861150e65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f32e791_3c9d63db",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-04-01T10:23:57Z",
       "side": 1,
       "message": "übernit: I was trying to use two whitespaces for indentation.",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 230,
+        "endChar": 11
+      },
+      "revId": "bec16d109815b47a0db0cd51b76e79e861150e65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8af15db1_1c247235",
+        "filename": "src/dawn/node/interop/WebGPU.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-01T10:37:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f32e791_3c9d63db",
       "range": {
         "startLine": 228,
         "startChar": 0,
