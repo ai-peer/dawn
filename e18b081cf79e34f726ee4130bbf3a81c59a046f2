@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "860dfebf_a2d2222d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-01T16:41:55Z",
+      "side": 1,
+      "message": "I think it\u0027s a bug in the sense that it requires bytes that are never touched. But we can\u0027t actually ignore this bug because it is not only the validation layers.\n\nWe can do a copy in a temporary buffer and gate that on a toggle that\u0027s disabled in newer versions of Windows or something?",
+      "parentUuid": "335c877a_a8ff7b4a",
+      "revId": "e18b081cf79e34f726ee4130bbf3a81c59a046f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93ea7c91_af548d87",
