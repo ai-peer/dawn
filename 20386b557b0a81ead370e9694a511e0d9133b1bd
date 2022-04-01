@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef3ab153_ef4ff638",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-01T22:52:34Z",
+      "side": 1,
+      "message": "LGTM as well, but holding off on a +2 until the question about macro use is resolved one way or the other.",
+      "revId": "20386b557b0a81ead370e9694a511e0d9133b1bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab5ba10f_c1aa3a2a",
@@ -31,6 +48,24 @@
       "writtenOn": "2022-04-01T17:09:53Z",
       "side": 1,
       "message": "mmm.. maybe we should just define a macro here so we don\u0027t have to deal with untyped formats. I think it would be preferable to have macros that gives us compile errors when we do it wrong.\n\nIf we don\u0027t want the macro to do toooo many things inside (like append to metadata, etc), we could make something like DAWN_MAKE_ERROR_IF and do something like:\n```\n#define DAWN_MAKE_ERROR_IF(EXPR, ...) \\\n  [\u0026]() -\u003e MaybeError { DAWN_INVALID_IF(EXPR, __VA_ARGS__); return {}; }()\n\nauto CheckLimit \u003d [\u0026metadata](MaybeError maybeError) -\u003e bool {\n  if (maybeError.IsError()) {\n    metadata-\u003einfringedLimits.push_back(maybeError-\u003eAcquireError()-\u003eGetMessage());\n    return false;\n  }\n  return true;\n};\n\nif (CheckLimit(DAWN_MAKE_ERROR_IF(......))) {\n}\n```",
+      "revId": "20386b557b0a81ead370e9694a511e0d9133b1bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "105b816e_51f26c48",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-01T22:52:34Z",
+      "side": 1,
+      "message": "Agreed. I\u0027ve found that we\u0027ve had some weird, unpredictable issues with FormatUntyped elsewhere in the code, necessitating the \"Failed to format message\" catches like you have here. I\u0027d prefer to avoid those when possible, and a macro is the way to do that.",
+      "parentUuid": "ab5ba10f_c1aa3a2a",
       "revId": "20386b557b0a81ead370e9694a511e0d9133b1bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +106,30 @@
       "writtenOn": "2022-04-01T17:09:53Z",
       "side": 1,
       "message": "uuunit: I might call this \"infringedLimitErrors\". The current name makes it seem like it could be just the names of the infringed limits, and not the full message describing what happened.",
+      "range": {
+        "startLine": 172,
+        "startChar": 33,
+        "endLine": 172,
+        "endChar": 48
+      },
+      "revId": "20386b557b0a81ead370e9694a511e0d9133b1bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a378ebe_2cb225d0",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-01T22:52:34Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "e55f10d4_9e7e05e4",
       "range": {
         "startLine": 172,
         "startChar": 33,
