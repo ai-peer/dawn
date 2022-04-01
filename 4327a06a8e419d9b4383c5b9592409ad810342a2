@@ -85,6 +85,24 @@
       "parentUuid": "58b5ee57_414ddcf3",
       "revId": "4327a06a8e419d9b4383c5b9592409ad810342a2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a17d379_c71fe10a",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-01T21:41:57Z",
+      "side": 1,
+      "message": "Ah! Thanks for clarifying, and sorry I missed that. LGTM then!",
+      "parentUuid": "0b540af1_837da6d0",
+      "revId": "4327a06a8e419d9b4383c5b9592409ad810342a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
