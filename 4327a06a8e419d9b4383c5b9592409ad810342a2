@@ -67,6 +67,24 @@
       "message": "Aspect::All is valid here for Stencil8, as it is equivalent to Aspect::Stencil, so it shouldn\u0027t be treated as an error in this case. That\u0027s why Stencil8 was previously broken out into a separate case in the old code. (It was causing some CTS failure otherwise.)",
       "revId": "4327a06a8e419d9b4383c5b9592409ad810342a2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b540af1_837da6d0",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T21:40:49Z",
+      "side": 1,
+      "message": "ah, see above:\nAspect aspects \u003d SelectFormatAspects(textureFormat, descriptor-\u003easpect);\n\nSelectFormatAspects turns the All/DepthOnly/StencilOnly into aspects that are actually in the texture.\nNone/Color/Depth/Stencil/Plane0/Plane1\n\nSo selecting All on Stencil8 will yield Stencil8",
+      "parentUuid": "58b5ee57_414ddcf3",
+      "revId": "4327a06a8e419d9b4383c5b9592409ad810342a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
