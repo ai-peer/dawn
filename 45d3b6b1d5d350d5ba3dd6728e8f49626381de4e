@@ -16,6 +16,29 @@
       "message": "PTAL! I actually found a CTS (and Chromium) bug with this! https://github.com/gpuweb/cts/pull/1129",
       "revId": "45d3b6b1d5d350d5ba3dd6728e8f49626381de4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68a2183c_d53cb33f",
+        "filename": "src/dawn/node/binding/GPUQueue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-01T15:41:53Z",
+      "side": 1,
+      "message": "`static_cast\u003cuint64_t\u003e`, here and below. I think at least one compiler will vomit on C-style casts.",
+      "range": {
+        "startLine": 89,
+        "startChar": 33,
+        "endLine": 89,
+        "endChar": 41
+      },
+      "revId": "45d3b6b1d5d350d5ba3dd6728e8f49626381de4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
