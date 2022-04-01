@@ -72,6 +72,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93f93e8b_20b5da6a",
+        "filename": "tools/src/cts/query/query.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-01T15:28:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8864837_de4e75b7",
+      "revId": "da2e438f9b247a780bf8bbf9260f2c33884d4a16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99dd823f_b3bc2b41",
