@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "befcb29e_890fa0a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-01T08:03:28Z",
+      "side": 1,
+      "message": "Thank you for the great explanation! Let\u0027s get the D3D debug layers fixed.",
+      "revId": "e18b081cf79e34f726ee4130bbf3a81c59a046f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a0df3edf_d03a2704",
@@ -14,6 +31,80 @@
       "writtenOn": "2022-04-01T04:18:49Z",
       "side": 1,
       "message": "PTAL. Thanks. You can also see the discussions at https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1278.",
+      "revId": "e18b081cf79e34f726ee4130bbf3a81c59a046f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea76a17f_26b90b2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-01T08:03:28Z",
+      "side": 1,
+      "message": "LGTM! Thanks for the small repro and investigation, it is crystal clear.\n\n+CC Rafael, we found a D3D debug layer bug with great certainty, can you bring it to your people?",
+      "revId": "e18b081cf79e34f726ee4130bbf3a81c59a046f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93ea7c91_af548d87",
+        "filename": "src/dawn/tests/end2end/BufferSizeInCopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-01T08:03:28Z",
+      "side": 1,
+      "message": "The name seems a bit generic when this is for a specific issue. Maybe BufferSizeTestsFor1288 ?",
+      "revId": "e18b081cf79e34f726ee4130bbf3a81c59a046f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1c88411_685fd406",
+        "filename": "src/dawn/tests/end2end/BufferSizeInCopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-01T08:03:28Z",
+      "side": 1,
+      "message": "nit: I think the this-\u003e is not necessary",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 14
+      },
+      "revId": "e18b081cf79e34f726ee4130bbf3a81c59a046f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c56fd366_f7e8e336",
+        "filename": "src/dawn/tests/end2end/BufferSizeInCopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-01T08:03:28Z",
+      "side": 1,
+      "message": "Can we copy some of the explanation in the commit message here? It would help people looking at the code understand what the problem tested is.",
       "revId": "e18b081cf79e34f726ee4130bbf3a81c59a046f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
