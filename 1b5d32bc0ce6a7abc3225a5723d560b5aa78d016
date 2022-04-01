@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "352f1502_68afa128",
+        "filename": "src/dawn/node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-01T10:23:57Z",
+      "side": 0,
+      "message": "übernit: I use double newlines to visually separate out the macros.",
+      "revId": "1b5d32bc0ce6a7abc3225a5723d560b5aa78d016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

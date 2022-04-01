@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7735b8cb_444b5fa3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-01T10:23:57Z",
+      "side": 1,
+      "message": "Just nits",
+      "revId": "bec16d109815b47a0db0cd51b76e79e861150e65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2047966d_c651e1be",
+        "filename": "src/dawn/node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-01T10:23:57Z",
+      "side": 1,
+      "message": "A comment here describing what\u0027s going on would be nice\n\n`{{/* blah */}}`",
+      "revId": "bec16d109815b47a0db0cd51b76e79e861150e65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f32e791_3c9d63db",
+        "filename": "src/dawn/node/interop/WebGPU.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-01T10:23:57Z",
+      "side": 1,
+      "message": "übernit: I was trying to use two whitespaces for indentation.",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 230,
+        "endChar": 11
+      },
+      "revId": "bec16d109815b47a0db0cd51b76e79e861150e65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
