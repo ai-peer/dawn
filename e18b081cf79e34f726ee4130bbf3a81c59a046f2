@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0df3edf_d03a2704",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-01T04:18:49Z",
+      "side": 1,
+      "message": "PTAL. Thanks. You can also see the discussions at https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1278.",
+      "revId": "e18b081cf79e34f726ee4130bbf3a81c59a046f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
