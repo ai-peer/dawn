@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "963a29ca_31001736",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-01T15:31:21Z",
+      "side": 1,
+      "message": "PTAL! I actually found a CTS (and Chromium) bug with this! https://github.com/gpuweb/cts/pull/1129",
+      "revId": "45d3b6b1d5d350d5ba3dd6728e8f49626381de4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
