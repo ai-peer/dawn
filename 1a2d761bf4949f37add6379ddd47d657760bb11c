@@ -39,6 +39,30 @@
       },
       "revId": "1a2d761bf4949f37add6379ddd47d657760bb11c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e94f99fc_e5d12b84",
+        "filename": "src/dawn/node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-01T16:44:24Z",
+      "side": 1,
+      "message": "I don\u0027t expect we\u0027ll ever want to run the CTS without this flag. In fact in Chromium we have never run the CTS without it (and we constantly trip on it being not enabled when testing manually.)",
+      "parentUuid": "3518dd77_d63a7797",
+      "range": {
+        "startLine": 208,
+        "startChar": 1,
+        "endLine": 208,
+        "endChar": 74
+      },
+      "revId": "1a2d761bf4949f37add6379ddd47d657760bb11c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
