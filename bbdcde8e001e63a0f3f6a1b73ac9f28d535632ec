@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a8d35ae8_41e5e2a6",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T22:03:05Z",
+      "side": 1,
+      "message": "hm, maybe because in Chrome we don\u0027t zero-initialize the device descriptor?\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/webgpu_decoder_impl.cc;l\u003d1064;bpv\u003d1;bpt\u003d1?q\u003dwebgpu_decoder_impl\n\nso it\u0027s pointing to just garbage and going through random bytes.\nMaybe strlen gives up at some point and returns 0.",
+      "parentUuid": "eb85c84c_af906dcc",
+      "revId": "bbdcde8e001e63a0f3f6a1b73ac9f28d535632ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15eb48e6_13890afb",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 2
