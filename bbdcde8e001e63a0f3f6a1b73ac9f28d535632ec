@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d59b8d2_f9b1c829",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T23:05:51Z",
+      "side": 1,
+      "message": "most other objects go directly from Blink -\u003e dawn::wire -\u003e dawn::native\nNot the case for requestDevice cause we want to do \"stuff\", so there\u0027s this other custom serialization thing.\nI want to get rid of it and use the wire serialization, but haven\u0027t gotten around to providing a way for webgpu_decoder_impl to still customize the implementation of requestDevice to do things like set Dawn toggles, etc.\n\nbasically, it\u0027s an artifact of old code, and there\u0027s some new stuff we need to implement to fully remove it",
+      "parentUuid": "8b4a6589_b1e2300a",
+      "revId": "bbdcde8e001e63a0f3f6a1b73ac9f28d535632ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15eb48e6_13890afb",
