@@ -39,6 +39,30 @@
       },
       "revId": "45d3b6b1d5d350d5ba3dd6728e8f49626381de4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e0ad7f0_0e1bfdde",
+        "filename": "src/dawn/node/binding/GPUQueue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-01T16:43:25Z",
+      "side": 1,
+      "message": "Isn\u0027t this a constructor cast and not a C cast? I thought they are different but I\u0027m not C++ expert.",
+      "parentUuid": "68a2183c_d53cb33f",
+      "range": {
+        "startLine": 89,
+        "startChar": 33,
+        "endLine": 89,
+        "endChar": 41
+      },
+      "revId": "45d3b6b1d5d350d5ba3dd6728e8f49626381de4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
