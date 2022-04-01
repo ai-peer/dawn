@@ -33,6 +33,24 @@
       "message": "Good catch!",
       "revId": "3a449e62f45e705ea365e0019493c41a1b7c1af4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "982486a1_04831fd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-01T07:53:14Z",
+      "side": 1,
+      "message": "CTS makes it easy :)",
+      "parentUuid": "4ce4e643_f08f73c2",
+      "revId": "3a449e62f45e705ea365e0019493c41a1b7c1af4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
