@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "335c877a_a8ff7b4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-01T16:32:56Z",
+      "side": 1,
+      "message": "Is this actually a D3D bug, though? Sounds like D3D just requires more padding than we expected, but is consistent about it\u0027s requirement. Even without backend validation turned on this can fail.",
+      "parentUuid": "ea76a17f_26b90b2f",
+      "revId": "e18b081cf79e34f726ee4130bbf3a81c59a046f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93ea7c91_af548d87",
