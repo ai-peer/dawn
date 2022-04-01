@@ -1,0 +1,320 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce2c7436_f4d35a68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T18:53:16Z",
+      "side": 1,
+      "message": "did you check locally if this passes the CTS tests? (currently suppressed)",
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "083167c9_7ffe0f06",
+        "filename": "src/dawn/native/IndirectDrawMetadata.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T18:53:16Z",
+      "side": 1,
+      "message": "seems this should be renamed because the draw may not be indexed.",
+      "range": {
+        "startLine": 211,
+        "startChar": 19,
+        "endLine": 211,
+        "endChar": 41
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a5adaf8_44e6e3f0",
+        "filename": "src/dawn/native/IndirectDrawMetadata.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T18:53:16Z",
+      "side": 1,
+      "message": "now with C++17, we can use std::variant to represent the union. I believe only one of these is set at a time.",
+      "range": {
+        "startLine": 50,
+        "startChar": 12,
+        "endLine": 51,
+        "endChar": 43
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "635f63ae_68566939",
+        "filename": "src/dawn/native/IndirectDrawMetadata.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T18:53:16Z",
+      "side": 1,
+      "message": "I think it\u0027s time to turn this into a struct so the members are named",
+      "range": {
+        "startLine": 98,
+        "startChar": 38,
+        "endLine": 98,
+        "endChar": 76
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95346a97_0ee373d6",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T18:53:16Z",
+      "side": 1,
+      "message": "It feels scary to use the size of the index buffer as the indication that it is an indexedDraw. Is it possible to bind an index buffer that isn\u0027t big enough (numElements \u003d\u003d 0) and confuse this code into thinking it\u0027s used for a non-Indexed draw? IMO, the config should store whether the draw is indexed or not so it\u0027s unambiguous.",
+      "range": {
+        "startLine": 339,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 66
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "560400bc_5a8515de",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T18:53:16Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 351,
+        "startChar": 54,
+        "endLine": 351,
+        "endChar": 55
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53249e27_d062c77e",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T18:53:16Z",
+      "side": 1,
+      "message": "nit: factor out this index computation",
+      "range": {
+        "startLine": 151,
+        "startChar": 24,
+        "endLine": 151,
+        "endChar": 76
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c542e16_383f7027",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T18:53:16Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 158,
+        "startChar": 24,
+        "endLine": 158,
+        "endChar": 78
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6297f37c_38ee1fd0",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T18:53:16Z",
+      "side": 1,
+      "message": "not sure if this is quite right.\n\nShoudn\u0027t it be:\n\n`count \u003d max(index + 1, count);`\n\ninstead of:\n\n`count \u003d max(index, count) + 1`\n\nThe latter always adds 1, whereas I think we only want to add it to the index.",
+      "range": {
+        "startLine": 159,
+        "startChar": 16,
+        "endLine": 162,
+        "endChar": 26
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77925e44_948e475b",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1455,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T18:53:16Z",
+      "side": 1,
+      "message": "update to crbug.com/dawn/1197",
+      "range": {
+        "startLine": 1455,
+        "startChar": 28,
+        "endLine": 1455,
+        "endChar": 36
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22e2dddd_640c7908",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T18:53:16Z",
+      "side": 1,
+      "message": "could be const",
+      "range": {
+        "startLine": 749,
+        "startChar": 8,
+        "endLine": 749,
+        "endChar": 26
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c93f770a_841f27b8",
+        "filename": "src/dawn/native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T18:53:16Z",
+      "side": 1,
+      "message": "typo: Instace -\u003e Instance",
+      "range": {
+        "startLine": 100,
+        "startChar": 39,
+        "endLine": 100,
+        "endChar": 92
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c45f7489_720be01a",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T18:53:16Z",
+      "side": 1,
+      "message": "what about usesInstanceIndex?",
+      "range": {
+        "startLine": 464,
+        "startChar": 29,
+        "endLine": 464,
+        "endChar": 44
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3fa7b40_815609d9",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-01T18:53:16Z",
+      "side": 1,
+      "message": "what about usesInstanceIndex?",
+      "range": {
+        "startLine": 473,
+        "startChar": 29,
+        "endLine": 473,
+        "endChar": 44
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
