@@ -165,6 +165,8 @@ namespace dawn::native {
     // pointers to EntryPointMetadata are safe to store as long as you also keep a Ref to the
     // ShaderModuleBase.
     struct EntryPointMetadata {
+        std::vector<std::string> infringedLimits;
+
         // bindings[G][B] is the reflection data for the binding defined with
         // @group(G) @binding(B) in WGSL / SPIRV.
         BindingInfoArray bindings;
