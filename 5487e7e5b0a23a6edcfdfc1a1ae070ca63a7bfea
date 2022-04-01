@@ -56,6 +56,30 @@
       },
       "revId": "5487e7e5b0a23a6edcfdfc1a1ae070ca63a7bfea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0212232_646356ea",
+        "filename": "src/dawn/node/tools/src/cmd/idlgen/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-01T07:54:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3e74b87_3c359070",
+      "range": {
+        "startLine": 515,
+        "startChar": 0,
+        "endLine": 528,
+        "endChar": 0
+      },
+      "revId": "5487e7e5b0a23a6edcfdfc1a1ae070ca63a7bfea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
