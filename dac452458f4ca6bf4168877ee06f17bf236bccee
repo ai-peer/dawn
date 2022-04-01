@@ -63,6 +63,30 @@
       },
       "revId": "dac452458f4ca6bf4168877ee06f17bf236bccee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0df52a79_1e64c4f2",
+        "filename": "src/dawn/node/tools/src/cmd/idlgen/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-01T10:30:24Z",
+      "side": 1,
+      "message": "Fair enough.\nCan we at least separate this out to a separate function, with the comment that it is responsible for patching up the AST with stuff missing from the IDL?\n\nI\u0027m okay with the bodge, but would like it moved somewhere that all future bodges can live together in harmony.",
+      "parentUuid": "286b1b5d_7741edb7",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 2
+      },
+      "revId": "dac452458f4ca6bf4168877ee06f17bf236bccee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
