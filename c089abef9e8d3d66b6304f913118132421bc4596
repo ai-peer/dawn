@@ -108,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a5fbac0_04e092f9",
+        "filename": "src/dawn/native/IndirectDrawMetadata.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-02T00:01:19Z",
+      "side": 1,
+      "message": "huh - that\u0027s news to me. I guess it\u0027s ok to keep these members separate for now, then. We should add some asserts where they\u0027re acceded that only the one we are expecting to be non-null is set.",
+      "parentUuid": "7bc9a044_07c5cf16",
+      "range": {
+        "startLine": 50,
+        "startChar": 12,
+        "endLine": 51,
+        "endChar": 43
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "635f63ae_68566939",
         "filename": "src/dawn/native/IndirectDrawMetadata.h",
         "patchSetId": 4
@@ -350,6 +374,30 @@
       "side": 1,
       "message": "Since we currently don\u0027t support non-zero instance index, there is no reason to run the compute shader and copy the extra values.",
       "parentUuid": "c45f7489_720be01a",
+      "range": {
+        "startLine": 464,
+        "startChar": 29,
+        "endLine": 464,
+        "endChar": 44
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "630e5355_9c63b668",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-02T00:01:19Z",
+      "side": 1,
+      "message": "ah I see - please add a comment explaining this",
+      "parentUuid": "d96534b8_e61cc7db",
       "range": {
         "startLine": 464,
         "startChar": 29,
