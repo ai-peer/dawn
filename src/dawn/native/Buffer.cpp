@@ -23,6 +23,8 @@
 #include "dawn/native/ObjectType_autogen.h"
 #include "dawn/native/Queue.h"
 #include "dawn/native/ValidationUtils_autogen.h"
+#include "dawn/platform/DawnPlatform.h"
+#include "dawn/platform/tracing/TraceEvent.h"
 
 #include <cstdio>
 #include <cstring>
@@ -35,7 +37,8 @@ namespace dawn::native {
             MapRequestTask(Ref<BufferBase> buffer, MapRequestID id)
                 : buffer(std::move(buffer)), id(id) {
             }
-            void Finish() override {
+            void Finish(dawn::platform::Platform* platform, uint64_t serial) override {
+                TRACE_EVENT1(platform, General, "Buffer::TaskInFlight::Finished", "serial", serial);
                 buffer->OnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_Success);
             }
             void HandleDeviceLoss() override {
@@ -350,6 +353,8 @@ namespace dawn::native {
         }
         std::unique_ptr<MapRequestTask> request =
             std::make_unique<MapRequestTask>(this, mLastMapID);
+        TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Buffer::APIMapAsync", "serial",
+                     static_cast<uint64_t>(GetDevice()->GetPendingCommandSerial()));
         GetDevice()->GetQueue()->TrackTask(std::move(request),
                                            GetDevice()->GetPendingCommandSerial());
     }
