@@ -59,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af8cea82_2fcaed99",
+        "filename": "src/dawn/native/IndirectDrawMetadata.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-02T00:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "083167c9_7ffe0f06",
+      "range": {
+        "startLine": 211,
+        "startChar": 19,
+        "endLine": 211,
+        "endChar": 41
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a5adaf8_44e6e3f0",
@@ -130,6 +154,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76f82d61_f830cfe4",
+        "filename": "src/dawn/native/IndirectDrawMetadata.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-02T00:58:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9a5fbac0_04e092f9",
+      "range": {
+        "startLine": 50,
+        "startChar": 12,
+        "endLine": 51,
+        "endChar": 43
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "635f63ae_68566939",
@@ -143,6 +191,30 @@
       "writtenOn": "2022-04-01T18:53:16Z",
       "side": 1,
       "message": "I think it\u0027s time to turn this into a struct so the members are named",
+      "range": {
+        "startLine": 98,
+        "startChar": 38,
+        "endLine": 98,
+        "endChar": 76
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f703c23b_a299b06f",
+        "filename": "src/dawn/native/IndirectDrawMetadata.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-02T00:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "635f63ae_68566939",
       "range": {
         "startLine": 98,
         "startChar": 38,
@@ -176,6 +248,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01bda8a3_c7ca57df",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-02T00:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95346a97_0ee373d6",
+      "range": {
+        "startLine": 339,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 66
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "560400bc_5a8515de",
@@ -189,6 +285,30 @@
       "writtenOn": "2022-04-01T18:53:16Z",
       "side": 1,
       "message": "?",
+      "range": {
+        "startLine": 351,
+        "startChar": 54,
+        "endLine": 351,
+        "endChar": 55
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a9dcfa0_2938f459",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-02T00:58:16Z",
+      "side": 1,
+      "message": "Oops, extra char from development.",
+      "parentUuid": "560400bc_5a8515de",
       "range": {
         "startLine": 351,
         "startChar": 54,
@@ -222,6 +342,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a722208_037a68b3",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-02T00:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53249e27_d062c77e",
+      "range": {
+        "startLine": 151,
+        "startChar": 24,
+        "endLine": 151,
+        "endChar": 76
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c542e16_383f7027",
@@ -235,6 +379,30 @@
       "writtenOn": "2022-04-01T18:53:16Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 158,
+        "startChar": 24,
+        "endLine": 158,
+        "endChar": 78
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ca36206_7ad668bc",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-02T00:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c542e16_383f7027",
       "range": {
         "startLine": 158,
         "startChar": 24,
@@ -268,6 +436,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c205db95_b1bc37eb",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-02T00:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6297f37c_38ee1fd0",
+      "range": {
+        "startLine": 159,
+        "startChar": 16,
+        "endLine": 162,
+        "endChar": 26
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77925e44_948e475b",
@@ -281,6 +473,30 @@
       "writtenOn": "2022-04-01T18:53:16Z",
       "side": 1,
       "message": "update to crbug.com/dawn/1197",
+      "range": {
+        "startLine": 1455,
+        "startChar": 28,
+        "endLine": 1455,
+        "endChar": 36
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25d0ffbe_a57d3a20",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1455,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-02T00:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77925e44_948e475b",
       "range": {
         "startLine": 1455,
         "startChar": 28,
@@ -314,6 +530,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfd92ed8_1e7d4af0",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-02T00:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22e2dddd_640c7908",
+      "range": {
+        "startLine": 749,
+        "startChar": 8,
+        "endLine": 749,
+        "endChar": 26
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c93f770a_841f27b8",
@@ -327,6 +567,30 @@
       "writtenOn": "2022-04-01T18:53:16Z",
       "side": 1,
       "message": "typo: Instace -\u003e Instance",
+      "range": {
+        "startLine": 100,
+        "startChar": 39,
+        "endLine": 100,
+        "endChar": 92
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19237df7_b822f26b",
+        "filename": "src/dawn/native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-02T00:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c93f770a_841f27b8",
       "range": {
         "startLine": 100,
         "startChar": 39,
@@ -408,6 +672,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfed5a73_94d645b6",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-02T00:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "630e5355_9c63b668",
+      "range": {
+        "startLine": 464,
+        "startChar": 29,
+        "endLine": 464,
+        "endChar": 44
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3fa7b40_815609d9",
@@ -421,6 +709,30 @@
       "writtenOn": "2022-04-01T18:53:16Z",
       "side": 1,
       "message": "what about usesInstanceIndex?",
+      "range": {
+        "startLine": 473,
+        "startChar": 29,
+        "endLine": 473,
+        "endChar": 44
+      },
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e75078b_575f6c7a",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-02T00:58:16Z",
+      "side": 1,
+      "message": "Added comment explaining that we will add usesInstanceIndex once we support non-zero firstInstance.",
+      "parentUuid": "e3fa7b40_815609d9",
       "range": {
         "startLine": 473,
         "startChar": 29,
