@@ -66,6 +66,7 @@ namespace dawn::native {
         RecordDetailedTimingInTraceEvents,
         DisableTimestampQueryConversion,
         VulkanUseZeroInitializeWorkgroupMemoryExtension,
+        EnableDebugTracing,
 
         EnumCount,
         InvalidEnum = EnumCount,

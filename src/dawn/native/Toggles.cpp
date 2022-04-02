@@ -259,6 +259,11 @@ namespace dawn::native {
               "Initialize workgroup memory with OpConstantNull on Vulkan when the Vulkan extension "
               "VK_KHR_zero_initialize_workgroup_memory is supported.",
               "https://crbug.com/dawn/1302"}},
+            {Toggle::EnableDebugTracing,
+             {"enable_debug_tracing",
+              "Add more trace event to understand dawn work flow in detail. These trace events "
+              "might affect performance.",
+              "https://crbug.com/dawn/1335"}},
 
             // Dummy comment to separate the }} so it is clearer what to copy-paste to add a toggle.
         }};

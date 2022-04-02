@@ -145,6 +145,10 @@ namespace dawn::native {
                 mCallback(WGPUQueueWorkDoneStatus_DeviceLost, mUserdata);
                 mCallback = nullptr;
             }
+            void trace(dawn::platform::Platform* platform, uint64_t serial) override {
+                TRACE_EVENT1(platform, General, "Queue::SubmittedWorkDone::Finished", "serial",
+                             serial);
+            }
             ~SubmittedWorkDone() override = default;
 
           private:
@@ -168,6 +172,8 @@ namespace dawn::native {
     // QueueBase
 
     QueueBase::TaskInFlight::~TaskInFlight() {
+    }
+    void QueueBase::TaskInFlight::trace(dawn::platform::Platform* platform, uint64_t serial) {
     }
 
     QueueBase::QueueBase(DeviceBase* device, const QueueDescriptor* descriptor)
@@ -220,6 +226,11 @@ namespace dawn::native {
         // commands (this is non-observable outside of tests so it's ok to do deviate a bit from the
         // spec).
         TrackTask(std::move(task), GetDevice()->GetPendingCommandSerial());
+
+        if (GetDevice()->IsToggleEnabled(Toggle::EnableDebugTracing)) {
+            TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Queue::APIOnSubmittedWorkDone",
+                         "serial", static_cast<uint64_t>(GetDevice()->GetPendingCommandSerial()));
+        }
     }
 
     void QueueBase::TrackTask(std::unique_ptr<TaskInFlight> task, ExecutionSerial serial) {
@@ -233,6 +244,11 @@ namespace dawn::native {
         // To prevent the reentrant call from invalidating mTasksInFlight while in use by the first
         // call, we remove the tasks to finish from the queue, update mTasksInFlight, then run the
         // callbacks.
+        if (GetDevice()->IsToggleEnabled(Toggle::EnableDebugTracing)) {
+            TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Queue::Tick", "finishedSerial",
+                         static_cast<uint64_t>(finishedSerial));
+        }
+
         std::vector<std::unique_ptr<TaskInFlight>> tasks;
         for (auto& task : mTasksInFlight.IterateUpTo(finishedSerial)) {
             tasks.push_back(std::move(task));
@@ -241,6 +257,10 @@ namespace dawn::native {
 
         for (auto& task : tasks) {
             task->Finish();
+
+            if (GetDevice()->IsToggleEnabled(Toggle::EnableDebugTracing)) {
+                task->trace(GetDevice()->GetPlatform(), static_cast<uint64_t>(finishedSerial));
+            }
         }
     }
 
