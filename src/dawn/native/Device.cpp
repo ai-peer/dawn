@@ -198,6 +198,10 @@ namespace dawn::native {
 
         mFormatTable = BuildFormatTable(this);
         SetDefaultToggles();
+
+        if (descriptor->label != nullptr && strlen(descriptor->label) != 0) {
+            mLabel = descriptor->label;
+        }
     }
 
     DeviceBase::DeviceBase() : mState(State::Alive) {
