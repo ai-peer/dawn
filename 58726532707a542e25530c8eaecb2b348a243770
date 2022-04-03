@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6300f09d_f2c0cf2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-03T19:31:42Z",
+      "side": 1,
+      "message": "Sending this out for an initial review pass to get some feedback. It is having some issues building atm because of the dep to vulkan-tools, and I suspect I may need to send a PR to modify the BUILD file in that repo. Wanted to see if the other aspects of the CL make sense before I continue though.",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
