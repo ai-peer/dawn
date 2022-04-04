@@ -51,6 +51,29 @@
       "parentUuid": "958fbedd_6b9f12cb",
       "revId": "eddd8db935af5c2d4a94cceb07fbad0855d8def1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4062885_a198f709",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-04T09:26:42Z",
+      "side": 1,
+      "message": "What do you think about putting this logic in `src/dawn/node/binding/Converter.h`\u0027s string conversion function, and using that?\n\n```\n        // std::string to C string\n        inline bool Convert(const char*\u0026 out, const std::string\u0026 in) {\n            out \u003d in.c_str();\n            return true;\n        }\n```\n\nOr do you think there\u0027s no other places where null characters might creep in?",
+      "range": {
+        "startLine": 543,
+        "startChar": 0,
+        "endLine": 554,
+        "endChar": 36
+      },
+      "revId": "eddd8db935af5c2d4a94cceb07fbad0855d8def1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
