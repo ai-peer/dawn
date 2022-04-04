@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a55a2976_64b5ea21",
+        "filename": "src/dawn/node/binding/GPUComputePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-04T11:37:46Z",
+      "side": 1,
+      "message": "I thiink it is valid to specify a 0 range at the end of the array.",
+      "parentUuid": "07b37294_9bf65f77",
+      "range": {
+        "startLine": 87,
+        "startChar": 36,
+        "endLine": 87,
+        "endChar": 37
+      },
+      "revId": "6633ce41c20ece47881330f640ae4c57da1812ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5fae744e_7bd3102f",
         "filename": "src/dawn/node/binding/GPURenderPassEncoder.cpp",
         "patchSetId": 1
