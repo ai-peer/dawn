@@ -33,6 +33,24 @@
       "message": "https://www.w3.org/TR/WGSL/#textual-structure states:\n\n\u003e The program text must not include a null character.\n\n\nSo... This shouldn\u0027t be reachable code?",
       "revId": "eddd8db935af5c2d4a94cceb07fbad0855d8def1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50928478_6ba0d117",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-04T08:34:31Z",
+      "side": 1,
+      "message": "This is for the entryPoint passed from the API to match against the shader. WGSL can\u0027t contain a \\0, but \"main\\0\" shouldn\u0027t match with the entryPoint \"main\" in the shader.",
+      "parentUuid": "958fbedd_6b9f12cb",
+      "revId": "eddd8db935af5c2d4a94cceb07fbad0855d8def1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
