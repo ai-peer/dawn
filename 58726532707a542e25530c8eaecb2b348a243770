@@ -16,6 +16,142 @@
       "message": "Sending this out for an initial review pass to get some feedback. It is having some issues building atm because of the dep to vulkan-tools, and I suspect I may need to send a PR to modify the BUILD file in that repo. Wanted to see if the other aspects of the CL make sense before I continue though.",
       "revId": "58726532707a542e25530c8eaecb2b348a243770",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dca66491_8c7a51c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-04T15:37:54Z",
+      "side": 1,
+      "message": "Logic looks mostly good, but I\u0027m worried that this structure makes it easy to forget add stuff to the cache key when we modify the code in the future. The only idea I had for this is to use something like a Request in ShaderModuleD3D12, but it is indeed heavy handed.",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26896070_1cbddf6c",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 10
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-04T15:37:54Z",
+      "side": 1,
+      "message": "nit: missing the header.",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c14df2c_f2752ac2",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-04T15:37:54Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ffe09a3_e336c73c",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-04T15:37:54Z",
+      "side": 1,
+      "message": "nit: unused? Same for ityp_vector.",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc93efc3_f9a31c53",
+        "filename": "src/dawn/native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-04T15:37:54Z",
+      "side": 1,
+      "message": "nit: stray include",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fed31b4_151d2ed4",
+        "filename": "src/dawn/native/vulkan/ComputePipelineVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-04T15:37:54Z",
+      "side": 1,
+      "message": "WDYT of returning both the handle and the SPIRV there, then using the SPIR-V below?",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92873e15_ffd307d8",
+        "filename": "src/dawn/native/vulkan/PipelineLayoutVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-04T15:37:54Z",
+      "side": 1,
+      "message": "Do we need to Record the createInfo as well for the pushConstantRange? (will be used at some point, if only for workarounds, see https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1125)",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f1c0524_926e508c",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-04T15:37:54Z",
+      "side": 1,
+      "message": "I think we need to add vector and utility as well.",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
