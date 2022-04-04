@@ -16,6 +16,41 @@
       "message": "The bug report says that this test is flaky and it fails randomly. But I cannot reproduce the bug on my local machine when I run dawn e2e tests alone. Maybe we should disable it if it make Chromium bots not stable? I feel like it is a memory leak problem, not T2T copy problem.  ",
       "revId": "91ab61b870b6a87ca41cb842d118f1fbc104dc56",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7cd4c27_1f003825",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-04T19:04:40Z",
+      "side": 1,
+      "message": "I agree. I think that disabling this test will simply make a different test start failing.",
+      "parentUuid": "c45534e4_db234bfa",
+      "revId": "91ab61b870b6a87ca41cb842d118f1fbc104dc56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4da35dac_dc45695f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-04T19:04:40Z",
+      "side": 1,
+      "message": "I ",
+      "revId": "91ab61b870b6a87ca41cb842d118f1fbc104dc56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
