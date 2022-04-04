@@ -89,6 +89,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "290899b4_45d4f42b",
+        "filename": "src/dawn/node/binding/GPUQueue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-04T08:29:02Z",
+      "side": 1,
+      "message": "Tentatively keeping the function-style casts.",
+      "parentUuid": "05be6ee7_e3b89a0b",
+      "range": {
+        "startLine": 89,
+        "startChar": 33,
+        "endLine": 89,
+        "endChar": 41
+      },
+      "revId": "45d3b6b1d5d350d5ba3dd6728e8f49626381de4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11280e33_1cc1abe1",
@@ -102,6 +126,30 @@
       "writtenOn": "2022-04-01T22:59:06Z",
       "side": 1,
       "message": "nit: \"4 bytes\"\n(since it doesn\u0027t have to be a multiple of 4 elements)",
+      "range": {
+        "startLine": 117,
+        "startChar": 76,
+        "endLine": 117,
+        "endChar": 77
+      },
+      "revId": "45d3b6b1d5d350d5ba3dd6728e8f49626381de4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c69824ff_2c8530aa",
+        "filename": "src/dawn/node/binding/GPUQueue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-04T08:29:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11280e33_1cc1abe1",
       "range": {
         "startLine": 117,
         "startChar": 76,
