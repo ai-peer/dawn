@@ -98,6 +98,30 @@
       },
       "revId": "eddd8db935af5c2d4a94cceb07fbad0855d8def1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b52bc7f_1c1f6004",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-04T11:49:45Z",
+      "side": 1,
+      "message": "Copying in IM discussions here:\n\nI feel this is a bodge, highlighting a problem with the Dawn interface. Changing the actual data at the binding layer is just going to add WTFs.\n\nI\u0027d personally prefer to either:\n\n(a) Change the Dawn API so that it can accept strings that contain `\\0`. Having a `const char*` paired with an optional length is a common pattern, and would suffice.\n(b) Change the spec to forbid `\\0` from all API interfaces, and reject these consistently.\n\nIf we can agree on one of these, and file issues so this is actually tracked, and link to that issue here, I\u0027d be happy to land this as a temporary solution.",
+      "parentUuid": "4643cc2f_6e54897b",
+      "range": {
+        "startLine": 543,
+        "startChar": 0,
+        "endLine": 554,
+        "endChar": 36
+      },
+      "revId": "eddd8db935af5c2d4a94cceb07fbad0855d8def1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
