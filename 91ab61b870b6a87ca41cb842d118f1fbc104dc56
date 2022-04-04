@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c45534e4_db234bfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-04T18:58:48Z",
+      "side": 1,
+      "message": "The bug report says that this test is flaky and it fails randomly. But I cannot reproduce the bug on my local machine when I run dawn e2e tests alone. Maybe we should disable it if it make Chromium bots not stable? I feel like it is a memory leak problem, not T2T copy problem.  ",
+      "revId": "91ab61b870b6a87ca41cb842d118f1fbc104dc56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
