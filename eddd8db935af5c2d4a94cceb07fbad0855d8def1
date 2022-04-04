@@ -122,6 +122,30 @@
       },
       "revId": "eddd8db935af5c2d4a94cceb07fbad0855d8def1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01caf0b9_6dc4c878",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-04T14:11:23Z",
+      "side": 1,
+      "message": "Done, filed crbug.com/dawn/1345",
+      "parentUuid": "3b52bc7f_1c1f6004",
+      "range": {
+        "startLine": 543,
+        "startChar": 0,
+        "endLine": 554,
+        "endChar": 36
+      },
+      "revId": "eddd8db935af5c2d4a94cceb07fbad0855d8def1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
