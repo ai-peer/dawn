@@ -35,6 +35,41 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8da28c24_d15d7caa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-04T23:14:38Z",
+      "side": 1,
+      "message": "Thanks Corentin!",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "003dd94a_745185cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-04T23:14:38Z",
+      "side": 1,
+      "message": "The hope is that since we need to explicitly declare what types of extension structs we expect in the CacheKeyVk.cpp file, otherwise we will see a runtime assert failure, that this will cover future cases a bit more.",
+      "parentUuid": "dca66491_8c7a51c9",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26896070_1cbddf6c",
@@ -48,6 +83,24 @@
       "writtenOn": "2022-04-04T15:37:54Z",
       "side": 1,
       "message": "nit: missing the header.",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73b87406_ae5887fb",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 10
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-04T23:14:38Z",
+      "side": 1,
+      "message": "Done, yea I still needed to figure out how to include the vulkan-tools file first which was why I left it out before.",
+      "parentUuid": "26896070_1cbddf6c",
       "revId": "58726532707a542e25530c8eaecb2b348a243770",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a717be0b_bb1d1006",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-04T23:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c14df2c_f2752ac2",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ffe09a3_e336c73c",
@@ -82,6 +153,24 @@
       "writtenOn": "2022-04-04T15:37:54Z",
       "side": 1,
       "message": "nit: unused? Same for ityp_vector.",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b809d2_d2767b8e",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-04T23:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ffe09a3_e336c73c",
       "revId": "58726532707a542e25530c8eaecb2b348a243770",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +192,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2cc814e_23de6bca",
+        "filename": "src/dawn/native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-04T23:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc93efc3_f9a31c53",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fed31b4_151d2ed4",
@@ -116,6 +223,24 @@
       "writtenOn": "2022-04-04T15:37:54Z",
       "side": 1,
       "message": "WDYT of returning both the handle and the SPIRV there, then using the SPIR-V below?",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec9c6276_c93ba241",
+        "filename": "src/dawn/native/vulkan/ComputePipelineVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-04T23:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fed31b4_151d2ed4",
       "revId": "58726532707a542e25530c8eaecb2b348a243770",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -137,6 +262,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e00ce11_0b88b34e",
+        "filename": "src/dawn/native/vulkan/PipelineLayoutVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-04T23:14:38Z",
+      "side": 1,
+      "message": "We are recording the createInfo? (Maybe I am misunderstanding this comment?)",
+      "parentUuid": "92873e15_ffd307d8",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f1c0524_926e508c",
@@ -150,6 +293,24 @@
       "writtenOn": "2022-04-04T15:37:54Z",
       "side": 1,
       "message": "I think we need to add vector and utility as well.",
+      "revId": "58726532707a542e25530c8eaecb2b348a243770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83deb669_4e48f7cf",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-04T23:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f1c0524_926e508c",
       "revId": "58726532707a542e25530c8eaecb2b348a243770",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
