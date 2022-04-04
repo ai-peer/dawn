@@ -74,6 +74,29 @@
       },
       "revId": "91ab61b870b6a87ca41cb842d118f1fbc104dc56",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ede0756a_e5af3cdf",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2183,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-04T19:16:21Z",
+      "side": 1,
+      "message": "One more note: I think this bug is different from https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1278 because the error message is quite different from that one, although 1278 can not be reproduced either if we test it standalone. In addition, dawn bug 1278 is caused by B2T/T2B copy (WriteTexture tests always need a T2B copy in order to verify the results) and this bug appears in a T2T copy.",
+      "range": {
+        "startLine": 2183,
+        "startChar": 4,
+        "endLine": 2183,
+        "endChar": 65
+      },
+      "revId": "91ab61b870b6a87ca41cb842d118f1fbc104dc56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
