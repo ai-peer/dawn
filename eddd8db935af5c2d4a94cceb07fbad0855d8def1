@@ -74,6 +74,30 @@
       },
       "revId": "eddd8db935af5c2d4a94cceb07fbad0855d8def1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4643cc2f_6e54897b",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-04T10:25:16Z",
+      "side": 1,
+      "message": "This would make \\0 in WGSL code pass through and would make it valid in comments. Note that this is an existing issue in Dawn right now because we take WGSL as a null-terminated string.\n\nOther places where we\u0027d need to do this workarounds would be GPUShaderModule.hints keys, GPUPipelineDescriptorBase.constants keys and I think that\u0027s it.\n\nWDYT of putting this code in a helper function so it can be reused easily, but not changing Convert(std::string)?",
+      "parentUuid": "f4062885_a198f709",
+      "range": {
+        "startLine": 543,
+        "startChar": 0,
+        "endLine": 554,
+        "endChar": 36
+      },
+      "revId": "eddd8db935af5c2d4a94cceb07fbad0855d8def1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
