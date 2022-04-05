@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1a34fc4_313c095e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-05T23:13:31Z",
+      "side": 1,
+      "message": "Okay! Think I\u0027ve got it now. (I can at least verify that it no longer repros the issue with the x86 build on my local machine.)",
+      "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1957dbbc_5475854a",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-05T23:13:31Z",
+      "side": 1,
+      "message": "This cast here (previously reinterpret_cast\u003cuint64_t\u0026\u003e) was the culprit.",
+      "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
