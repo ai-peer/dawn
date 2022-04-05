@@ -16,6 +16,24 @@
       "message": "Given that there\u0027s no error context here that indicates which bundle of the array the error is from, can we add back the \"renderBundles[%i]\"?",
       "revId": "a812d1eef3623c01489c2e14138f075cda0e399b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82a1a54f_4259b0a2",
+        "filename": "src/dawn/native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-05T15:50:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de052e34_7b69eb58",
+      "revId": "a812d1eef3623c01489c2e14138f075cda0e399b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
