@@ -39,6 +39,30 @@
       },
       "revId": "daa32d5604aadf1a5ecc8173ffb4f4c3a0ed5d46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9309114_bc0ab210",
+        "filename": "src/dawn/native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-05T14:12:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b0744f3_0e19edc0",
+      "range": {
+        "startLine": 284,
+        "startChar": 24,
+        "endLine": 285,
+        "endChar": 35
+      },
+      "revId": "daa32d5604aadf1a5ecc8173ffb4f4c3a0ed5d46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
