@@ -227,6 +227,7 @@ namespace dawn::native::d3d12 {
             }
         }
         mAllocationsToDelete.ClearUpTo(completedSerial);
+        mHeapsToDelete.ClearUpTo(completedSerial);
     }
 
     void ResourceAllocatorManager::DeallocateMemory(ResourceHeapAllocation& allocation) {
@@ -240,7 +241,8 @@ namespace dawn::native::d3d12 {
         // manually deleted upon deallocation. See ResourceAllocatorManager::CreateCommittedResource
         // for more information.
         if (allocation.GetInfo().mMethod == AllocationMethod::kDirect) {
-            delete allocation.GetResourceHeap();
+            mHeapsToDelete.Enqueue(std::unique_ptr<ResourceHeapBase>(allocation.GetResourceHeap()),
+                                   mDevice->GetPendingCommandSerial());
         }
 
         // Invalidate the allocation immediately in case one accidentally
