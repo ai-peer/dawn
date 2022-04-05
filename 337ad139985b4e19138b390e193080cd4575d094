@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09657c4b_521fd0b1",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-05T17:31:45Z",
+      "side": 1,
+      "message": "No, only stencil because Metal is weird like that. There\u0027s a comment somewhere about this; I\u0027ll dup it to here too",
+      "parentUuid": "1c72d002_9ef52ce1",
+      "revId": "337ad139985b4e19138b390e193080cd4575d094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68d3319c_b57c34cb",
         "filename": "src/dawn/native/metal/TextureMTL.mm",
         "patchSetId": 13
@@ -138,6 +156,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "66510cde_7d3ec007",
+        "filename": "src/dawn/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-05T17:31:45Z",
+      "side": 1,
+      "message": "yea - I\u0027ll add a comment. We don\u0027t have the amazing color conversion helpers we have in the CTS, so there isn\u0027t a good way to compute the result in the test. It\u0027s just hard-coded instead.",
+      "parentUuid": "61a4617f_10e953aa",
+      "revId": "337ad139985b4e19138b390e193080cd4575d094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d538850d_cd3399a9",
@@ -151,6 +187,30 @@
       "writtenOn": "2022-04-05T17:25:31Z",
       "side": 1,
       "message": "Just for my understanding why were these not here before?",
+      "range": {
+        "startLine": 988,
+        "startChar": 22,
+        "endLine": 990,
+        "endChar": 71
+      },
+      "revId": "337ad139985b4e19138b390e193080cd4575d094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ba78b23_535fc992",
+        "filename": "src/dawn/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-05T17:31:45Z",
+      "side": 1,
+      "message": "Not 100% sure. either the test author deemed the tests didn\u0027t need to be run in both modes, or the toggles didn\u0027t exist at the time.",
+      "parentUuid": "d538850d_cd3399a9",
       "range": {
         "startLine": 988,
         "startChar": 22,
