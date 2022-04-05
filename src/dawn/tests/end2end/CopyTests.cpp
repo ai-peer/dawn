@@ -2178,6 +2178,8 @@ TEST_P(CopyTests_T2T, CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4Bytes) {
     // TODO(crbug.com/dawn/819): enable this test on Intel Vulkan drivers after the upgrade of
     // try bots.
     DAWN_SUPPRESS_TEST_IF(IsVulkan() && IsWindows() && IsIntel());
+    // TODO(crbug.com/1312066): flaky due to an allocation of std::vector
+    DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsWindows() && IsIntel());
 
     constexpr std::array<wgpu::TextureFormat, 11> kFormats = {
         {wgpu::TextureFormat::RG8Sint, wgpu::TextureFormat::RG8Uint, wgpu::TextureFormat::RG8Snorm,
