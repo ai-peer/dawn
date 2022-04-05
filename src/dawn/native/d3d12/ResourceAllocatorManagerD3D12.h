@@ -100,6 +100,7 @@ namespace dawn::native::d3d12 {
             mPooledHeapAllocators;
 
         SerialQueue<ExecutionSerial, ResourceHeapAllocation> mAllocationsToDelete;
+        SerialQueue<ExecutionSerial, ResourceHeapBase*> mHeapsToDelete;
     };
 
 }  // namespace dawn::native::d3d12

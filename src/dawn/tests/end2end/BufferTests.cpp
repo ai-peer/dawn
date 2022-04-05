@@ -902,6 +902,52 @@ TEST_P(BufferTests, CreateBufferOOMMapAsync) {
     RunTest(descriptor);
 }
 
+// Regression test for crbug.com/1313172
+// This tests makes a large buffer. It then performs writeBuffer and immediately destroys
+// it. Though writeBuffer references a destroyed buffer, it should not crash.
+TEST_P(BufferTests, WriteBufferLargeBufferThenDestroy) {
+    DAWN_SUPPRESS_TEST_IF(IsWARP());
+
+    // Allocate a buffer, decreasing the allocated size until
+    // it succeeds.
+    uint64_t bufferSize = 4294967295;
+    wgpu::Buffer buffer;
+    bool didAllocate = false;
+    do {
+        wgpu::BufferDescriptor desc;
+        desc.size = bufferSize;
+        desc.usage = wgpu::BufferUsage::CopyDst;
+
+        // Allocate the buffer, but allow it to OOM since the allocation is quite large.
+        device.PushErrorScope(wgpu::ErrorFilter::OutOfMemory);
+        buffer = device.CreateBuffer(&desc);
+
+        didAllocate = true;
+        device.PopErrorScope(
+            [](WGPUErrorType errorType, const char*, void* didAllocatePtr) {
+                if (errorType != WGPUErrorType_NoError) {
+                    *reinterpret_cast<bool*>(didAllocatePtr) = false;
+                }
+            },
+            &didAllocate);
+        WaitForAllOperations();
+
+        bufferSize = bufferSize / 2;
+    } while (!didAllocate);
+
+    // Enqueue a pending write into the buffer.
+    uint32_t myData = 0x01020304;
+    constexpr size_t kSize = sizeof(myData);
+    queue.WriteBuffer(buffer, 0, &myData, kSize);
+
+    // Destroy the buffer.
+    buffer.Destroy();
+
+    // Flush and wait for all commands.
+    queue.Submit(0, nullptr);
+    WaitForAllOperations();
+}
+
 DAWN_INSTANTIATE_TEST(BufferTests,
                       D3D12Backend(),
                       MetalBackend(),
