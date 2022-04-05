@@ -16,6 +16,108 @@
       "message": "Wrote CTS tests for this and discovered these fun issues.. https://github.com/gpuweb/gpuweb/issues/2729\n\nTests in this CL are of cases where the behavior is not divergent across backends.",
       "revId": "337ad139985b4e19138b390e193080cd4575d094",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5492df21_e91b1bd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-05T09:42:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "337ad139985b4e19138b390e193080cd4575d094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c72d002_9ef52ce1",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-05T09:42:11Z",
+      "side": 1,
+      "message": "Do we need to reinterpret also when selecting the depth aspect?",
+      "revId": "337ad139985b4e19138b390e193080cd4575d094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68d3319c_b57c34cb",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-05T09:42:11Z",
+      "side": 1,
+      "message": "nit: can we have something stored on the view to know if it owns its MTLTexture or not? Re-deriving every time risks creating bugs when we change the logic in the future.",
+      "revId": "337ad139985b4e19138b390e193080cd4575d094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "339d5a75_5dce5ce3",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-05T09:42:11Z",
+      "side": 1,
+      "message": "Can\u0027t we use mOwnsHandle instead to whether to use the view\u0027s data or the texture\u0027s data?",
+      "revId": "337ad139985b4e19138b390e193080cd4575d094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c67693c_4411e18a",
+        "filename": "src/dawn/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-05T09:42:11Z",
+      "side": 1,
+      "message": "nit: in these tests, can we have some comments on blocks of code to help readers follow what we\u0027re doing?",
+      "revId": "337ad139985b4e19138b390e193080cd4575d094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c30c8554_c844b4ae",
+        "filename": "src/dawn/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-05T09:42:11Z",
+      "side": 1,
+      "message": "These are the result of RGB -\u003e sRGB conversion?",
+      "revId": "337ad139985b4e19138b390e193080cd4575d094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
