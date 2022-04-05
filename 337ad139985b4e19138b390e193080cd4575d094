@@ -118,6 +118,47 @@
       "message": "These are the result of RGB -\u003e sRGB conversion?",
       "revId": "337ad139985b4e19138b390e193080cd4575d094",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61a4617f_10e953aa",
+        "filename": "src/dawn/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-05T17:25:31Z",
+      "side": 1,
+      "message": "+1 I\u0027m also a bit confused by these values... (In the existing test like SRGBReinterpretation as well since I assume that\u0027s where these values initially came from.)",
+      "parentUuid": "c30c8554_c844b4ae",
+      "revId": "337ad139985b4e19138b390e193080cd4575d094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d538850d_cd3399a9",
+        "filename": "src/dawn/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-05T17:25:31Z",
+      "side": 1,
+      "message": "Just for my understanding why were these not here before?",
+      "range": {
+        "startLine": 988,
+        "startChar": 22,
+        "endLine": 990,
+        "endChar": 71
+      },
+      "revId": "337ad139985b4e19138b390e193080cd4575d094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
