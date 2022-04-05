@@ -15,7 +15,8 @@
 #ifndef DAWNNATIVE_CACHE_KEY_H_
 #define DAWNNATIVE_CACHE_KEY_H_
 
-#include "dawn/common/Assert.h"
+#include "dawn/common/TypedInteger.h"
+#include "dawn/common/ityp_array.h"
 
 #include <iostream>
 #include <limits>
@@ -36,7 +37,10 @@ namespace dawn::native {
     template <typename T, typename SFINAE = void>
     class CacheKeySerializer {
       public:
-        static void Serialize(CacheKey* key, const T& t);
+        static void Serialize(CacheKey* key, const T& t) {
+            // Default serialize asserts to generate runtime error.
+            ASSERT(false);
+        }
     };
 
     class CacheKey : public std::vector<uint8_t> {
@@ -61,6 +65,14 @@ namespace dawn::native {
         CacheKey& RecordIterable(const IterableT& iterable) {
             // Always record the size of generic iterables as a size_t for now.
             Record(static_cast<size_t>(iterable.size()));
+            for (auto it = iterable.begin(); it != iterable.end(); ++it) {
+                Record(*it);
+            }
+            return *this;
+        }
+        template <typename Index, typename Value, size_t Size>
+        CacheKey& RecordIterable(const ityp::array<Index, Value, Size>& iterable) {
+            Record(static_cast<Index>(iterable.size()));
             for (auto it = iterable.begin(); it != iterable.end(); ++it) {
                 Record(*it);
             }
@@ -96,6 +108,15 @@ namespace dawn::native {
         }
     };
 
+    // Specialized overload for TypedInteger.
+    template <typename T, typename Integer>
+    class CacheKeySerializer<TypedInteger<T, Integer>> {
+      public:
+        static void Serialize(CacheKey* key, const TypedInteger<T, Integer> t) {
+            CacheKeySerializer<Integer>::Serialize(key, static_cast<Integer>(t));
+        }
+    };
+
     // Specialized overload for pointers. Since we are serializing for a cache key, we always
     // serialize via value, not by pointer. To handle nullptr scenarios, we always serialize whether
     // the pointer was nullptr followed by the contents if applicable.
@@ -118,6 +139,18 @@ namespace dawn::native {
             static_assert(N > 0);
             key->Record(static_cast<size_t>(N));
             key->insert(key->end(), t, t + N);
+        }
+    };
+
+    // Specialized overload for fixed arrays.
+    template <typename T, size_t N>
+    class CacheKeySerializer<T[N]> {
+      public:
+        static void Serialize(CacheKey* key, const T (&t)[N]) {
+            static_assert(N > 0);
+            for (size_t i = 0; i < N; i++) {
+                key->Record(t[i]);
+            }
         }
     };
 
