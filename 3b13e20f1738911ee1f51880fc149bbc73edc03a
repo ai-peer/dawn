@@ -16,6 +16,23 @@
       "message": "Can\u0027t dry run until https://dawn-review.googlesource.com/c/dawn/+/85700 lands.\n\nPrimary change from the previous attempt at this (https://dawn-review.googlesource.com/c/dawn/+/85540) is that the initialization of the Queue and setting of it\u0027s label has been refactored to look a lot more like the initialization of most other GPU objects in Dawn, like buffers and textures. The theory being that because the label setting was being called in the constructor, which called into the Device, but was being called before the queue was set on the DeviceBase that there may be some order-of-initialization bugs at work.\n\nUnfortunately I can\u0027t repro the failure showing up on the bots (https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1346) locally, so this is an educated guess at what might be triggering the failure. At the very least this new approach does feel cleaner and more consistent with the rest of the code base, and I\u0027d like to run it against the previously failing dawn-win10-x86-deps-rel bot several times to see if it provokes the same failure.",
       "revId": "3b13e20f1738911ee1f51880fc149bbc73edc03a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb1700a8_e9e308d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-05T21:20:31Z",
+      "side": 1,
+      "message": "I just realized all the flakes were on dawn-win10-x86-deps-rel!\n\nBrandon, if you build with target_cpu\u003dx86, can you repro the issue?\n\nif we can\u0027t repro locally, it\u0027ll be best if we can test this either by running win-dawn-rel a couple times or by making a Chromium CL that points DEPS to this CL, and then running dawn-win10-x86-deps-rel a couple times.\n\nIf local repro still doesn\u0027t work, it might be better to defer testing the CL against CQ until things are less flaky and slow overall :-/ \n\n \n",
+      "revId": "3b13e20f1738911ee1f51880fc149bbc73edc03a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
