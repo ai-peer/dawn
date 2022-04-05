@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2800e81_da620981",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-05T16:33:40Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0fb33e58c75c51717009d57c1be4a0b10804bd68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3a03bcb_bd48159e",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-05T16:33:40Z",
+      "side": 1,
+      "message": "nit: Maybe explicitly return that we didn\u0027t find a hash here?",
+      "revId": "0fb33e58c75c51717009d57c1be4a0b10804bd68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
