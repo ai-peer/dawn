@@ -33,6 +33,24 @@
       "message": "nit: Maybe explicitly return that we didn\u0027t find a hash here?",
       "revId": "0fb33e58c75c51717009d57c1be4a0b10804bd68",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adab8c40_849bed7e",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-05T17:06:49Z",
+      "side": 1,
+      "message": "You mean like return a fixed hash? This goes directly into the generated code. I was thinking that it would be easier to check that len(hash) \u003e 0 vs checking hash !\u003d kBadHash or something like that.",
+      "parentUuid": "e3a03bcb_bd48159e",
+      "revId": "0fb33e58c75c51717009d57c1be4a0b10804bd68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
