@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "a823a3c5fce5ba89c6e4e222978e777ba2ff72ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7867aef_e08dae77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-05T15:41:36Z",
+      "side": 1,
+      "message": "LGTM! Glad it was a simple fix.",
+      "revId": "a823a3c5fce5ba89c6e4e222978e777ba2ff72ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
