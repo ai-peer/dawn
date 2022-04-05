@@ -50,6 +50,24 @@
       "message": "maybe this should be 0x0 if it\u0027s null, and otherwise 0x1 followed by the serialized pointer. Otherwise if you can clash on \n\nCreateCacheKey(a, b) and CreateCacheKey(b, c)\n\nif a \u003d\u003d null and c \u003d\u003d null, the serialization of both just looks like b",
       "revId": "dd332e0ad7111a123a5a036a29af3853fc5f5272",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed9bd906_14aa9768",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-05T21:28:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "448b0844_a47ebd8f",
+      "revId": "dd332e0ad7111a123a5a036a29af3853fc5f5272",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
