@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7b6b61e_1a2dd112",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-05T19:00:01Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a7dda709b9cd06e9ebd79d5ac6f1d10a39dc72b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fac33c6_9c42bb4e",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-05T19:00:01Z",
+      "side": 1,
+      "message": "why are we performing the lookups again when you can iterate through the key-value pairs in `m`? is the intent to preserve original ordering?",
+      "range": {
+        "startLine": 145,
+        "startChar": 2,
+        "endLine": 146,
+        "endChar": 24
+      },
+      "revId": "a7dda709b9cd06e9ebd79d5ac6f1d10a39dc72b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
