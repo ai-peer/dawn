@@ -33,6 +33,24 @@
       "message": "I just realized all the flakes were on dawn-win10-x86-deps-rel!\n\nBrandon, if you build with target_cpu\u003dx86, can you repro the issue?\n\nif we can\u0027t repro locally, it\u0027ll be best if we can test this either by running win-dawn-rel a couple times or by making a Chromium CL that points DEPS to this CL, and then running dawn-win10-x86-deps-rel a couple times.\n\nIf local repro still doesn\u0027t work, it might be better to defer testing the CL against CQ until things are less flaky and slow overall :-/ \n\n \n",
       "revId": "3b13e20f1738911ee1f51880fc149bbc73edc03a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91737d4b_36914b65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-05T21:21:32Z",
+      "side": 1,
+      "message": "x86 problem is quite likely because the handle is not actually a 64-bit pointer and it\u0027s just 32 bit. and we\u0027re reinterpret_casting all wrong.",
+      "parentUuid": "cb1700a8_e9e308d1",
+      "revId": "3b13e20f1738911ee1f51880fc149bbc73edc03a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
