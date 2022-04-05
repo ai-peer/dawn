@@ -51,6 +51,24 @@
       "parentUuid": "cb1700a8_e9e308d1",
       "revId": "3b13e20f1738911ee1f51880fc149bbc73edc03a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58490e27_8d2dd87a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-05T22:21:24Z",
+      "side": 1,
+      "message": "Did a build with target_cpu\u003d\"x86\" and I can repro! Yay for pointer size shenanigans!\n\nAnd yes, this CL still suffers from the same issue, but now I can at least debug it. Thanks!",
+      "parentUuid": "91737d4b_36914b65",
+      "revId": "3b13e20f1738911ee1f51880fc149bbc73edc03a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
