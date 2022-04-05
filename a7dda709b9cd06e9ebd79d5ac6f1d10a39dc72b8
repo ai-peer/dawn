@@ -39,6 +39,30 @@
       },
       "revId": "a7dda709b9cd06e9ebd79d5ac6f1d10a39dc72b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d803181_4dbfaf76",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-05T19:04:48Z",
+      "side": 1,
+      "message": "Correct. Go intentionally randomizes ordering of map iteration. Great for preventing portability issues, annoying for anything that actually needs stable output, like this.",
+      "parentUuid": "9fac33c6_9c42bb4e",
+      "range": {
+        "startLine": 145,
+        "startChar": 2,
+        "endLine": 146,
+        "endChar": 24
+      },
+      "revId": "a7dda709b9cd06e9ebd79d5ac6f1d10a39dc72b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
