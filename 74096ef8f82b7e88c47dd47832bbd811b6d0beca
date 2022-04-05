@@ -16,6 +16,40 @@
       "message": "Brandon PTAL too (trying to land this today so I can cherry pick).\n\ntests are in the next CL to easily separate the cherry pick and stuff that won\u0027t cherry pick nicely.",
       "revId": "74096ef8f82b7e88c47dd47832bbd811b6d0beca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6686b68_c7745c56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-05T22:07:16Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "74096ef8f82b7e88c47dd47832bbd811b6d0beca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a92e43a5_09bfa61d",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-05T22:07:16Z",
+      "side": 1,
+      "message": "nit: The Vulkan equivalent of this code has a comment explaining why the deallocation is deferred. Something similar might be good here too.",
+      "revId": "74096ef8f82b7e88c47dd47832bbd811b6d0beca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
