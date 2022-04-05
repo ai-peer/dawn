@@ -69,18 +69,10 @@ namespace dawn::native {
         }
 
         MaybeError ValidateLinearTextureCopyOffset(const TextureDataLayout& layout,
-                                                   const TexelBlockInfo& blockInfo,
-                                                   const bool hasDepthOrStencil) {
-            if (hasDepthOrStencil) {
-                // For depth-stencil texture, buffer offset must be a multiple of 4.
-                DAWN_INVALID_IF(layout.offset % 4 != 0,
-                                "Offset (%u) is not a multiple of 4 for depth/stencil texture.",
-                                layout.offset);
-            } else {
-                DAWN_INVALID_IF(layout.offset % blockInfo.byteSize != 0,
-                                "Offset (%u) is not a multiple of the texel block byte size (%u).",
-                                layout.offset, blockInfo.byteSize);
-            }
+                                                   const TexelBlockInfo& blockInfo) {
+            DAWN_INVALID_IF(layout.offset % blockInfo.byteSize != 0,
+                            "Offset (%u) is not a multiple of the texel block byte size (%u).",
+                            layout.offset, blockInfo.byteSize);
             return {};
         }
 
@@ -1000,9 +992,7 @@ namespace dawn::native {
                 const TexelBlockInfo& blockInfo =
                     destination->texture->GetFormat().GetAspectInfo(destination->aspect).block;
                 if (GetDevice()->IsValidationEnabled()) {
-                    DAWN_TRY(ValidateLinearTextureCopyOffset(
-                        source->layout, blockInfo,
-                        destination->texture->GetFormat().HasDepthOrStencil()));
+                    DAWN_TRY(ValidateLinearTextureCopyOffset(source->layout, blockInfo));
                     DAWN_TRY(ValidateLinearTextureData(source->layout, source->buffer->GetSize(),
                                                        blockInfo, *copySize));
 
@@ -1060,9 +1050,7 @@ namespace dawn::native {
                 const TexelBlockInfo& blockInfo =
                     source->texture->GetFormat().GetAspectInfo(source->aspect).block;
                 if (GetDevice()->IsValidationEnabled()) {
-                    DAWN_TRY(ValidateLinearTextureCopyOffset(
-                        destination->layout, blockInfo,
-                        source->texture->GetFormat().HasDepthOrStencil()));
+                    DAWN_TRY(ValidateLinearTextureCopyOffset(destination->layout, blockInfo));
                     DAWN_TRY(ValidateLinearTextureData(
                         destination->layout, destination->buffer->GetSize(), blockInfo, *copySize));
 
