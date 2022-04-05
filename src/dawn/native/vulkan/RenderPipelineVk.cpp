@@ -381,6 +381,9 @@ namespace dawn::native::vulkan {
             DAWN_ASSERT(stageCount < 2);
             shaderStages[stageCount] = shaderStage;
             stageCount++;
+
+            // Record cache key for each shader since it will become inaccessible later on.
+            GetCacheKey()->Record(stage).RecordIterable(*spirv);
         }
 
         PipelineVertexInputStateCreateInfoTemporaryAllocations tempAllocations;

@@ -121,6 +121,18 @@ namespace dawn::native {
         }
     };
 
+    // Specialized overload for fixed arrays.
+    template <typename T, size_t N>
+    class CacheKeySerializer<T[N]> {
+      public:
+        static void Serialize(CacheKey* key, const T (&t)[N]) {
+            static_assert(N > 0);
+            for (size_t i = 0; i < N; i++) {
+                key->Record(t[i]);
+            }
+        }
+    };
+
 }  // namespace dawn::native
 
 #endif  // DAWNNATIVE_CACHE_KEY_H_
