@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47852fa0_27c4f01d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-05T16:46:17Z",
+      "side": 1,
+      "message": "thanks Shrek - though Yunchao just did this too in https://dawn-review.googlesource.com/c/dawn/+/85681",
+      "revId": "a0da35c9a56adb83025840db4221f9ad49e933f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
