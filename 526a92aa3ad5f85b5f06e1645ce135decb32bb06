@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "398670a3_21d3d267",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-04-06T02:37:23Z",
+      "side": 1,
+      "message": "`mLabel` is std::string, guessing you can\u0027t assign it a `nullptr`",
+      "parentUuid": "23038408_9b965e3d",
+      "range": {
+        "startLine": 202,
+        "startChar": 12,
+        "endLine": 202,
+        "endChar": 74
+      },
+      "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dde8f0e4_43a27f88",
         "filename": "src/dawn/native/d3d12/QueueD3D12.h",
         "patchSetId": 2
@@ -59,6 +83,29 @@
         "startChar": 15,
         "endLine": 29,
         "endChar": 22
+      },
+      "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68a3319a_d46711ae",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-04-06T02:37:23Z",
+      "side": 1,
+      "message": "looks like this has the same problem",
+      "range": {
+        "startLine": 1056,
+        "startChar": 50,
+        "endLine": 1056,
+        "endChar": 88
       },
       "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
@@ -95,6 +142,24 @@
       "side": 1,
       "message": "we\u0027re doing this cast for all the other Vulkan objects too. Is it wrong in all those places too, particularly on 32-bit?\n\nWe should make sure we check what the type of the handles are for vulkan - they can be pointers to structs or integer handles.\n\nI think we should make a version of SetDebugName that does this casting for us so we don\u0027t mess it up more. If the type is a struct like\nusing VkQueue \u003d struct VkQueueImpl*;\n\nthen we can have\ntemplate \u003ctypename VkObj\u003e\nvoid SetDebugName(device, type, VkObj* obj, name, label)\n\nwhich will do the cast for us, and then call SetDebugName with an integer.",
       "parentUuid": "1957dbbc_5475854a",
+      "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d17fb3aa_55b4bf4c",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-04-06T02:37:23Z",
+      "side": 1,
+      "message": "Non-dispatchable handles are always 64-bits:\nhttps://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_DEFINE_NON_DISPATCHABLE_HANDLE.html\nhttps://www.khronos.org/registry/vulkan/specs/1.2/html/chap3.html#fundamentals-objectmodel-overview\nAnd we also override them with our own type:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/common/vulkan_platform.h;l\u003d145;drc\u003d09100b79d078510391f5e8c6bf7d985da0b7de09\n(note `dawn::native::vulkan::VkSampler` shadows `::VkSampler`).\n(wow, dawn code I actually worked on!)\n\nHowever, VkDevice and VkQueue are *dispatchable* handles.\nhttps://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_DEFINE_HANDLE.html\nThese aren\u0027t guaranteed to be 64-bit, but `VkDebugUtilsObjectNameInfoEXT.objectHandle` is uint64_t, and I assume you\u0027re supposed to cast up to that. Which is what you are doing here now since `GetQueue` returns a dispatchable handle (which is a pointer).\n(Confusingly, BTW, `DeviceVk::GetQueue` shadows `DeviceBase::GetQueue`.)\n\nThe current code used everywhere else (`reinterpret_cast\u003cuint64_t\u0026\u003e`) is pretty weird. I spent like an hour understanding this.\nFor samplers, for example, it reinterprets a `dawn::native::vulkan::VkSampler` (`dawn::native::vulkan::detail::VkHandle`) as `uint64_t\u0026`, which IIUC automatically takes a reference to the `VkHandle` object as `VkHandle\u0026`, and then reinterprets. Now you have a `uint64_t\u0026` which points to the `VkHandle`, at offset 0 of which is `mHandle`, so it deferences to the right thing.\n\nSo... given I think the other callsites are correct, I think we can leave them alone for now, land this, and then try to do a template thing in a followup. I\u0027m wondering if it\u0027s time to clean up our vulkan binding code like we promised ourselves:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/common/vulkan_platform.h;l\u003d41;drc\u003d09100b79d078510391f5e8c6bf7d985da0b7de09",
+      "parentUuid": "ba5c23b1_5b8ad9e6",
       "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
