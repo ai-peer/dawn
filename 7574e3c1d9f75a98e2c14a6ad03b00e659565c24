@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e907606d_c2b9b73e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-04-06T21:21:41Z",
+      "side": 1,
+      "message": "I took the suggestion about capturing a `ProgramBuilder\u0026 b` from the review on Tint CL, otherwise this change is identical to the one that was already reviewed.",
+      "revId": "7574e3c1d9f75a98e2c14a6ad03b00e659565c24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
