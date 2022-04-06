@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (04c182 Roll ANGLE from ca3b7d35fef0 to 152616eedcfd (8 revisions))
 BasedOnStyle: Chromium
 Standard: Cpp11
 
@@ -17,3 +18,7 @@ NamespaceIndentation: All
 
 # Use this option once clang-format 6 is out.
 IndentPPDirectives: AfterHash
+=======
+# http://clang.llvm.org/docs/ClangFormatStyleOptions.html
+BasedOnStyle: Chromium
+>>>>>>> BRANCH (28674d AST fuzzer: reduce depth for unary wrapping)

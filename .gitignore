@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (04c182 Roll ANGLE from ca3b7d35fef0 to 152616eedcfd (8 revisions))
 *.pyc
 
 # Directories added by gclient sync and the GN build
@@ -106,3 +107,36 @@ src/dawn/node/tools/bin/
 
 ### Cached node transpiled tools
 /.node_transpile_work_dir
+=======
+.cipd
+.DS_Store
+.gclient
+.gclient_entries
+.vs
+.vscode/*
+!.vscode/tasks.json
+.idea
+coverage.summary
+default.profraw
+lcov.info
+
+/buildtools
+/cmake-build-*/
+/out
+/testing
+/third_party/clang-format
+/third_party/catapult
+/third_party/cpplint
+/third_party/benchmark
+/third_party/binutils
+/third_party/googletest
+/third_party/gpuweb-cts
+/third_party/llvm-build
+/third_party/protobuf
+/third_party/vulkan-deps
+/tools/clang
+/tools/bin
+
+/build*/
+/test.wgsl
+>>>>>>> BRANCH (28674d AST fuzzer: reduce depth for unary wrapping)

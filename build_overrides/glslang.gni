@@ -1,4 +1,8 @@
+<<<<<<< HEAD   (04c182 Roll ANGLE from ca3b7d35fef0 to 152616eedcfd (8 revisions))
 # Copyright 2018 The Dawn Authors
+=======
+# Copyright 2021 The Dawn Authors
+>>>>>>> BRANCH (28674d AST fuzzer: reduce depth for unary wrapping)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
