@@ -162,6 +162,24 @@
       "parentUuid": "ba5c23b1_5b8ad9e6",
       "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15c968c0_058cf87c",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-06T02:45:43Z",
+      "side": 1,
+      "message": "ah, thanks for the explanation. but still if `VkQueue` is `struct VkQueue_T*`\nthen we\u0027re reinterpret_casting a 32-bit pointer to a 64-bit integer. that doesn\u0027t make a lot of sense. I would think we need to first reinterpret to uintptr_t, and then static_cast to uint64_t.",
+      "parentUuid": "d17fb3aa_55b4bf4c",
+      "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
