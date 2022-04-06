@@ -70,6 +70,29 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e7f8bdb_6678ff3b",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000076
+      },
+      "writtenOn": "2022-04-06T20:54:25Z",
+      "side": 1,
+      "message": "Would you consider switching this to use subprocess.call or subprocess.check_call? We (Skia) have bots with python \u003c 3.5 (when .run was added), so we\u0027re getting errors when running the script:\n\nhttps://logs.chromium.org/logs/skia/5a193c9a06193811/+/steps/ninja/0/stdout",
+      "range": {
+        "startLine": 26,
+        "startChar": 13,
+        "endLine": 26,
+        "endChar": 27
+      },
+      "revId": "f57867264a7d661bb904df9f4404521f8e21f022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e848f09c_1dab4ea7",
