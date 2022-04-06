@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "b12e634bf6fc702841cb587fe147a86818e19987",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1129705_5408e508",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-06T14:46:26Z",
+      "side": 1,
+      "message": "ah so all the \"min\" ones are alignment. that\u0027s nice\nLGTM",
+      "revId": "b12e634bf6fc702841cb587fe147a86818e19987",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
