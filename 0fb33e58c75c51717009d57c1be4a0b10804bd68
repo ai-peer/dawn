@@ -87,6 +87,24 @@
       "parentUuid": "88247b91_a4fe4018",
       "revId": "0fb33e58c75c51717009d57c1be4a0b10804bd68",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cba2feb_05ee4cde",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-06T18:51:56Z",
+      "side": 1,
+      "message": "Hmm, yea that should be fine. Would we want to use it as a direct replacement, or do we want 2 separate fields in that case? (To avoid possible clashes?) And I guess whenever we have a Dawn hash, we just zero out the Chromium hash or make it the same?",
+      "parentUuid": "2d6596a1_1bcb9430",
+      "revId": "0fb33e58c75c51717009d57c1be4a0b10804bd68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
