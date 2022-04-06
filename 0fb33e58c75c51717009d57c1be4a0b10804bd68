@@ -69,6 +69,24 @@
       "parentUuid": "adab8c40_849bed7e",
       "revId": "0fb33e58c75c51717009d57c1be4a0b10804bd68",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d6596a1_1bcb9430",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-06T07:17:48Z",
+      "side": 1,
+      "message": "I don\u0027t know that we should disable caching when the hash is \u0027\u0027, that would break WebGPU shader caching in builds from release tarballs. Maybe the Chromium hash is enough in that case? It would be added in the platform for example. WDYT?",
+      "parentUuid": "88247b91_a4fe4018",
+      "revId": "0fb33e58c75c51717009d57c1be4a0b10804bd68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
