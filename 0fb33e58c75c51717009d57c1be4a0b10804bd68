@@ -105,6 +105,24 @@
       "parentUuid": "2d6596a1_1bcb9430",
       "revId": "0fb33e58c75c51717009d57c1be4a0b10804bd68",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "451fd578_6a512c23",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-06T20:15:12Z",
+      "side": 1,
+      "message": "chromium hash probably makes sense - especially if there are chromium-side bits of the caching implementation.",
+      "parentUuid": "9cba2feb_05ee4cde",
+      "revId": "0fb33e58c75c51717009d57c1be4a0b10804bd68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
