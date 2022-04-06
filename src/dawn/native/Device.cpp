@@ -177,6 +177,9 @@ namespace dawn::native {
         : mInstance(adapter->GetInstance()), mAdapter(adapter), mNextPipelineCompatibilityToken(1) {
         ASSERT(descriptor != nullptr);
 
+        AdapterProperties adapterProperties;
+        adapter->APIGetProperties(&adapterProperties);
+
         const DawnTogglesDeviceDescriptor* togglesDesc = nullptr;
         FindInChain(descriptor->nextInChain, &togglesDesc);
         if (togglesDesc != nullptr) {
@@ -198,6 +201,11 @@ namespace dawn::native {
 
         mFormatTable = BuildFormatTable(this);
         SetDefaultToggles();
+
+        // Record the cache key from the properties. Note that currently, if a new extension
+        // descriptor is added (and probably handled here), the cache key recording needs to be
+        // updated.
+        mDeviceCacheKey.Record(adapterProperties, descriptor, togglesDesc, cacheDesc);
     }
 
     DeviceBase::DeviceBase() : mState(State::Alive) {

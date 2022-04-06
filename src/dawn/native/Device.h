@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_DEVICE_H_
 #define DAWNNATIVE_DEVICE_H_
 
+#include "dawn/native/CacheKey.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/ComputePipeline.h"
 #include "dawn/native/Error.h"
@@ -548,6 +549,7 @@ namespace dawn::native {
         std::unique_ptr<dawn::platform::WorkerTaskPool> mWorkerTaskPool;
         std::string mLabel;
         std::string mCacheIsolationKey = "";
+        CacheKey mDeviceCacheKey;
     };
 
 }  // namespace dawn::native
