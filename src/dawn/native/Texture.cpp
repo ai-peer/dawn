@@ -473,7 +473,21 @@ namespace dawn::native {
 
         if (desc.format == wgpu::TextureFormat::Undefined) {
             const Format& format = texture->GetFormat();
-            Aspect aspects = SelectFormatAspects(format, desc.aspect);
+
+            // Check the aspect. If it's invalid, use Aspects::None for
+            // choosing the default format since |SelectFormatAspects| assumes
+            // a valid aspect. Creation will fail validation later since the
+            // aspect is invalid.
+            Aspects aspects;
+            MaybeError err = ValidateTextureAspect(desc.aspect);
+            if (err.IsError()) {
+                err.AcquireError();
+
+                aspects = Aspects::None;
+            } else {
+                aspects = SelectFormatAspects(format, desc.aspect);
+            }
+
             if (HasOneBit(aspects)) {
                 desc.format = format.GetAspectInfo(aspects).format;
             } else {
