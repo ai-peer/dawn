@@ -95,7 +95,10 @@ namespace dawn::native::opengl {
 
         bool RequiresCreatingNewTextureView(const TextureBase* texture,
                                             const TextureViewDescriptor* textureViewDescriptor) {
-            if (texture->GetFormat().format != textureViewDescriptor->format) {
+            if (texture->GetFormat().format != textureViewDescriptor->format &&
+                !texture->GetFormat().HasDepthOrStencil()) {
+                // Color format reinterpretation required. Note: Depth/stencil formats don't support
+                // reinterpretation.
                 return true;
             }
 
@@ -258,6 +261,7 @@ namespace dawn::native::opengl {
                 GLuint framebuffer = 0;
                 gl.GenFramebuffers(1, &framebuffer);
                 gl.BindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer);
+                gl.Disable(GL_SCISSOR_TEST);
 
                 GLenum attachment;
                 if (range.aspects == (Aspect::Depth | Aspect::Stencil)) {
@@ -328,6 +332,7 @@ namespace dawn::native::opengl {
                     }
                 }
 
+                gl.Enable(GL_SCISSOR_TEST);
                 gl.DeleteFramebuffers(1, &framebuffer);
             } else {
                 ASSERT(range.aspects == Aspect::Color);
@@ -559,7 +564,14 @@ namespace dawn::native::opengl {
             const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
             mHandle = GenTexture(gl);
             const Texture* textureGL = ToBackend(texture);
-            const GLFormat& glFormat = ToBackend(GetDevice())->GetGLFormat(GetFormat());
+
+            const Format& textureFormat = GetTexture()->GetFormat();
+            // Depth/stencil don't support reinterpretation, and the aspect is specified at
+            // bind time. In that case, we use the base texture format.
+            const GLFormat& glFormat = textureFormat.HasDepthOrStencil()
+                                           ? ToBackend(GetDevice())->GetGLFormat(textureFormat)
+                                           : ToBackend(GetDevice())->GetGLFormat(GetFormat());
+
             gl.TextureView(mHandle, mTarget, textureGL->GetHandle(), glFormat.internalFormat,
                            descriptor->baseMipLevel, descriptor->mipLevelCount,
                            descriptor->baseArrayLayer, descriptor->arrayLayerCount);
@@ -584,6 +596,21 @@ namespace dawn::native::opengl {
 
     GLenum TextureView::GetGLTarget() const {
         return mTarget;
+    }
+
+    void TextureView::BindToFramebuffer(GLenum target, GLenum attachment) {
+        const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
+
+        // Use the texture's handle and target, and the view's base mip level and base array layer
+        GLuint handle = ToBackend(GetTexture())->GetHandle();
+        GLuint textarget = ToBackend(GetTexture())->GetGLTarget();
+        GLuint mipLevel = GetBaseMipLevel();
+
+        if (textarget == GL_TEXTURE_2D_ARRAY || textarget == GL_TEXTURE_3D) {
+            gl.FramebufferTextureLayer(target, attachment, handle, mipLevel, GetBaseArrayLayer());
+        } else {
+            gl.FramebufferTexture2D(target, attachment, textarget, handle, mipLevel);
+        }
     }
 
 }  // namespace dawn::native::opengl
