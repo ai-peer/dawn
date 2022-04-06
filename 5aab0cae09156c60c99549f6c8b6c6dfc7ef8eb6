@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e091f851_8e90803a",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-04-06T18:17:40Z",
+      "side": 1,
+      "message": "Whoops, fixed.\n\nThis may need a CopyIfNeeded() on the colorView. I\u0027ll try to come up with a test.",
+      "parentUuid": "ba3c6621_ac20a76d",
+      "revId": "5aab0cae09156c60c99549f6c8b6c6dfc7ef8eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a57ff2fd_2744d4a8",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-03-31T05:37:43Z",
       "side": 1,
       "message": "maybe we can perform the touch at the end of the render pass.\n\nIt\u0027s valid to use one subresource as render attachment and one as sampled/storage. So, if you do that, you will always incur a copy on ApplyBindGroup. This unnecessary copy might be eliminated if we don\u0027t perform the touch until EndPass - or if we have subresource tracking for it.",
+      "range": {
+        "startLine": 892,
+        "startChar": 0,
+        "endLine": 892,
+        "endChar": 62
+      },
+      "revId": "5aab0cae09156c60c99549f6c8b6c6dfc7ef8eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aca807b_58629b7e",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-04-06T18:17:40Z",
+      "side": 1,
+      "message": "Good idea; done.",
+      "parentUuid": "a57ff2fd_2744d4a8",
       "range": {
         "startLine": 892,
         "startChar": 0,
@@ -104,6 +146,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8572b5b8_33310c53",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-04-06T18:17:40Z",
+      "side": 1,
+      "message": "At [1], we don\u0027t yet know if we have a depth/stencil attachment. At any rate, I\u0027ve moved this to EndPass.",
+      "parentUuid": "8c5dc9fa_979d53cb",
+      "range": {
+        "startLine": 998,
+        "startChar": 0,
+        "endLine": 998,
+        "endChar": 71
+      },
+      "revId": "5aab0cae09156c60c99549f6c8b6c6dfc7ef8eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6aabf7f8_7d871767",
@@ -121,6 +187,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71a0cf19_dc8c55e6",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-04-06T18:17:40Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "6aabf7f8_7d871767",
+      "revId": "5aab0cae09156c60c99549f6c8b6c6dfc7ef8eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4745d9c2_7869ab4d",
@@ -134,6 +218,24 @@
       "writtenOn": "2022-03-31T05:37:43Z",
       "side": 1,
       "message": "probably eventually Touch and CopyIfNeeded could take the subresources touched, and we can use SubresourceStorage to track which subresources need to be updated. Should be less copying for textures with many subresources.",
+      "revId": "5aab0cae09156c60c99549f6c8b6c6dfc7ef8eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5626119e_b4d1080c",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-04-06T18:17:40Z",
+      "side": 1,
+      "message": "It would be nice, but it\u0027d be a bit more complex than the GenID implementation can support. I think we\u0027d have to keep a list of backpointers from the texture to the view, in order to propagate and aggregate subresource invalidations per-view.\n\n(I actually did a backpointer-based implementation before the GenID one, I just thought this was simpler. Happy to reconsider if we feel tracking subresources is valuable.)",
+      "parentUuid": "4745d9c2_7869ab4d",
       "revId": "5aab0cae09156c60c99549f6c8b6c6dfc7ef8eb6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
