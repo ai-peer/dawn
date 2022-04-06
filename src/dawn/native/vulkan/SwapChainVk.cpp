@@ -159,7 +159,7 @@ namespace dawn::native::vulkan {
 #endif  // defined(DAWN_PLATFORM_ANDROID)
 
 #if defined(DAWN_USE_X11)
-                case Surface::Type::Xlib: {
+                case Surface::Type::XlibWindow: {
                     if (info.HasExt(InstanceExt::XlibSurface)) {
                         VkXlibSurfaceCreateInfoKHR createInfo;
                         createInfo.sType = VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR;
@@ -444,7 +444,7 @@ namespace dawn::native::vulkan {
             VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR,
         };
         for (uint32_t i = 0; i < 4; i++) {
-            if (surfCapabilities.supportedCompositeAlpha & compositeAlphaFlags[i]) {
+            if (surfaceInfo.capabilities.supportedCompositeAlpha & compositeAlphaFlags[i]) {
                 config.alphaMode = compositeAlphaFlags[i];
                 break;
             }

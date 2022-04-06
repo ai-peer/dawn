@@ -66,10 +66,16 @@ if (NOT TARGET libabsl)
     add_subdirectory(${DAWN_ABSEIL_DIR} "${CMAKE_CURRENT_BINARY_DIR}/abseil")
 endif()
 
+if (NOT TARGET Vulkan-Headers)
+    message(STATUS "Dawn: using Vulkan-Headers at ${DAWN_VULKAN_HEADERS_DIR}")
+    add_subdirectory(${DAWN_VULKAN_HEADERS_DIR} "${CMAKE_CURRENT_BINARY_DIR}/vulkan-headers")
+endif()
+
 # Header-only library for khrplatform.h
 add_library(dawn_khronos_platform INTERFACE)
 target_sources(dawn_khronos_platform INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/khronos/KHR/khrplatform.h")
 target_include_directories(dawn_khronos_platform INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/khronos")
+<<<<<<< HEAD   (685c8b Implement changes suggested by bclayton)
 
 # Header-only library for Vulkan headers
 add_library(dawn_vulkan_headers INTERFACE)
@@ -99,3 +105,5 @@ if ((${TINT_BUILD_SPIRV_TOOLS_FUZZER} OR ${TINT_BUILD_AST_FUZZER}) AND
   set(protobuf_MSVC_STATIC_RUNTIME OFF CACHE BOOL "Controls whether a protobuf static runtime is built" FORCE)
   add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/protobuf/cmake)
 endif()
+=======
+>>>>>>> BRANCH (b2e4a9 Roll Tint from 12f2f9b1bc9a to a730eb738e9f (1 revision))

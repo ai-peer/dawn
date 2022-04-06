@@ -32,7 +32,15 @@
 /third_party/vulkan_memory_allocator
 /third_party/webgpu-cts
 /third_party/zlib
+<<<<<<< HEAD   (685c8b Implement changes suggested by bclayton)
 /tools
+=======
+/tools/clang
+/tools/cmake
+/tools/golang
+/tools/memory
+/out
+>>>>>>> BRANCH (b2e4a9 Roll Tint from 12f2f9b1bc9a to a730eb738e9f (1 revision))
 
 # Modified from https://www.gitignore.io/api/vim,macos,linux,emacs,windows,sublimetext,visualstudio,visualstudiocode,intellij
 
