@@ -45,6 +45,30 @@
       },
       "revId": "0aba123a5f4b61fe406fb3553cb95f3318e2a781",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b56f376_5628cc8f",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-06T23:34:25Z",
+      "side": 1,
+      "message": "if it\u0027s not invalid, we do want to use it. like if you select StencilOnly for Depth24PlusStencil8, the default format should be Stencil8.\n\nonly when its invalid do we use All, just to get *something* valid out of SelectFormatAspects",
+      "parentUuid": "2db3c4ad_70007b5d",
+      "range": {
+        "startLine": 482,
+        "startChar": 12,
+        "endLine": 482,
+        "endChar": 64
+      },
+      "revId": "0aba123a5f4b61fe406fb3553cb95f3318e2a781",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
