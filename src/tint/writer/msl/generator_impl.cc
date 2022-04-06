@@ -61,6 +61,7 @@
 #include "src/tint/transform/array_length_from_uniform.h"
 #include "src/tint/transform/builtin_polyfill.h"
 #include "src/tint/transform/canonicalize_entry_point_io.h"
+#include "src/tint/transform/expand_compound_assignment.h"
 #include "src/tint/transform/manager.h"
 #include "src/tint/transform/module_scope_var_to_entry_point_param.h"
 #include "src/tint/transform/promote_initializers_to_const_var.h"
@@ -76,6 +77,7 @@
 #include "src/tint/utils/map.h"
 #include "src/tint/utils/scoped_assignment.h"
 #include "src/tint/writer/float_to_string.h"
+#include "src/tint/writer/generate_external_texture_bindings.h"
 
 namespace tint {
 namespace writer {
@@ -112,6 +114,7 @@ class ScopedBitCast {
  private:
   std::ostream& s;
 };
+
 }  // namespace
 
 SanitizedResult::SanitizedResult() = default;
@@ -124,6 +127,7 @@ SanitizedResult Sanitize(
     uint32_t fixed_sample_mask,
     bool emit_vertex_point_size,
     bool disable_workgroup_init,
+    bool generate_external_texture_bindings,
     const ArrayLengthFromUniformOptions& array_length_from_uniform) {
   transform::Manager manager;
   transform::DataMap data;
@@ -166,6 +170,13 @@ SanitizedResult Sanitize(
       transform::CanonicalizeEntryPointIO::ShaderStyle::kMsl, fixed_sample_mask,
       emit_vertex_point_size);
 
+  if (generate_external_texture_bindings) {
+    auto new_bindings_map = GenerateExternalTextureBindings(in);
+    data.Add<transform::MultiplanarExternalTexture::NewBindingPoints>(
+        new_bindings_map);
+  }
+  manager.Add<transform::MultiplanarExternalTexture>();
+
   manager.Add<transform::Unshadow>();
 
   if (!disable_workgroup_init) {
@@ -174,6 +185,7 @@ SanitizedResult Sanitize(
     manager.Add<transform::ZeroInitWorkgroupMemory>();
   }
   manager.Add<transform::CanonicalizeEntryPointIO>();
+  manager.Add<transform::ExpandCompoundAssignment>();
   manager.Add<transform::PromoteSideEffectsToDecl>();
   manager.Add<transform::UnwindDiscardFunctions>();
   manager.Add<transform::PromoteInitializersToConstVar>();
@@ -1423,6 +1435,7 @@ std::string GeneratorImpl::generate_builtin_name(const sem::Builtin* builtin) {
     case sem::BuiltinType::kRound:
       out += "rint";
       break;
+    case sem::BuiltinType::kSmoothstep:
     case sem::BuiltinType::kSmoothStep:
       out += "smoothstep";
       break;

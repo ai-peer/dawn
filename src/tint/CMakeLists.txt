@@ -98,6 +98,8 @@ set(TINT_LIB_SRCS
   ast/call_statement.h
   ast/case_statement.cc
   ast/case_statement.h
+  ast/compound_assignment_statement.cc
+  ast/compound_assignment_statement.h
   ast/continue_statement.cc
   ast/continue_statement.h
   ast/depth_multisampled_texture.cc
@@ -333,6 +335,8 @@ set(TINT_LIB_SRCS
   transform/localize_struct_array_assignment.h
   transform/for_loop_to_loop.cc
   transform/for_loop_to_loop.h
+  transform/expand_compound_assignment.cc
+  transform/expand_compound_assignment.h
   transform/glsl.cc
   transform/glsl.h
   transform/loop_to_for_loop.cc
@@ -351,6 +355,8 @@ set(TINT_LIB_SRCS
   transform/promote_side_effects_to_decl.h
   transform/remove_phonies.cc
   transform/remove_phonies.h
+  transform/remove_continue_in_switch.cc
+  transform/remove_continue_in_switch.h
   transform/remove_unreachable_statements.cc
   transform/remove_unreachable_statements.h
   transform/renamer.cc
@@ -377,6 +383,8 @@ set(TINT_LIB_SRCS
   transform/wrap_arrays_in_structs.h
   transform/zero_init_workgroup_memory.cc
   transform/zero_init_workgroup_memory.h
+  transform/utils/get_insertion_point.cc
+  transform/utils/get_insertion_point.h
   transform/utils/hoist_to_decl_before.cc
   transform/utils/hoist_to_decl_before.h
   sem/bool_type.cc
@@ -443,6 +451,8 @@ set(TINT_LIB_SRCS
   writer/array_length_from_uniform_options.h
   writer/float_to_string.cc
   writer/float_to_string.h
+  writer/generate_external_texture_bindings.cc
+  writer/generate_external_texture_bindings.h
   writer/text_generator.cc
   writer/text_generator.h
   writer/text.cc
@@ -654,6 +664,7 @@ if(TINT_BUILD_TESTS)
     ast/call_expression_test.cc
     ast/call_statement_test.cc
     ast/case_statement_test.cc
+    ast/compound_assignment_statement_test.cc
     ast/continue_statement_test.cc
     ast/depth_multisampled_texture_test.cc
     ast/depth_texture_test.cc
@@ -725,6 +736,7 @@ if(TINT_BUILD_TESTS)
     resolver/builtin_validation_test.cc
     resolver/call_test.cc
     resolver/call_validation_test.cc
+    resolver/compound_assignment_validation_test.cc
     resolver/compound_statement_test.cc
     resolver/control_block_validation_test.cc
     resolver/attribute_validation_test.cc
@@ -800,6 +812,7 @@ if(TINT_BUILD_TESTS)
     utils/unique_vector_test.cc
     writer/append_vector_test.cc
     writer/float_to_string_test.cc
+    writer/generate_external_texture_bindings_test.cc
     writer/text_generator_test.cc
   )
 
@@ -1018,6 +1031,7 @@ if(TINT_BUILD_TESTS)
       transform/fold_constants_test.cc
       transform/fold_trivial_single_use_lets_test.cc
       transform/for_loop_to_loop_test.cc
+      transform/expand_compound_assignment.cc
       transform/localize_struct_array_assignment_test.cc
       transform/loop_to_for_loop_test.cc
       transform/module_scope_var_to_entry_point_param_test.cc
@@ -1025,6 +1039,7 @@ if(TINT_BUILD_TESTS)
       transform/num_workgroups_from_uniform_test.cc
       transform/promote_initializers_to_const_var_test.cc
       transform/promote_side_effects_to_decl_test.cc
+      transform/remove_continue_in_switch_test.cc
       transform/remove_phonies_test.cc
       transform/remove_unreachable_statements_test.cc
       transform/renamer_test.cc
@@ -1039,6 +1054,7 @@ if(TINT_BUILD_TESTS)
       transform/vertex_pulling_test.cc
       transform/wrap_arrays_in_structs_test.cc
       transform/zero_init_workgroup_memory_test.cc
+      transform/utils/get_insertion_point_test.cc
       transform/utils/hoist_to_decl_before_test.cc
     )
   endif()

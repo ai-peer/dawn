@@ -1761,8 +1761,8 @@ Maybe<const ast::SwitchStatement*> ParserImpl::switch_stmt() {
 }
 
 // switch_body
-//   : CASE case_selectors COLON BRACKET_LEFT case_body BRACKET_RIGHT
-//   | DEFAULT COLON BRACKET_LEFT case_body BRACKET_RIGHT
+//   : CASE case_selectors COLON? BRACKET_LEFT case_body BRACKET_RIGHT
+//   | DEFAULT COLON? BRACKET_LEFT case_body BRACKET_RIGHT
 Maybe<const ast::CaseStatement*> ParserImpl::switch_body() {
   if (!peek_is(Token::Type::kCase) && !peek_is(Token::Type::kDefault))
     return Failure::kNoMatch;
@@ -1779,11 +1779,10 @@ Maybe<const ast::CaseStatement*> ParserImpl::switch_body() {
     selector_list = std::move(selectors.value);
   }
 
+  // Consume the optional colon if present.
+  match(Token::Type::kColon);
+
   const char* use = "case statement";
-
-  if (!expect(use, Token::Type::kColon))
-    return Failure::kErrored;
-
   auto body = expect_brace_block(use, [&] { return case_body(); });
 
   if (body.errored)
@@ -2652,9 +2651,45 @@ Maybe<const ast::Expression*> ParserImpl::logical_or_expression() {
   return expect_logical_or_expr(lhs.value);
 }
 
+// compound_assignment_operator:
+// | plus_equal
+// | minus_equal
+// | times_equal
+// | division_equal
+// | modulo_equal
+// | and_equal
+// | or_equal
+// | xor_equal
+Maybe<ast::BinaryOp> ParserImpl::compound_assignment_operator() {
+  ast::BinaryOp compound_op = ast::BinaryOp::kNone;
+  if (peek_is(Token::Type::kPlusEqual)) {
+    compound_op = ast::BinaryOp::kAdd;
+  } else if (peek_is(Token::Type::kMinusEqual)) {
+    compound_op = ast::BinaryOp::kSubtract;
+  } else if (peek_is(Token::Type::kTimesEqual)) {
+    compound_op = ast::BinaryOp::kMultiply;
+  } else if (peek_is(Token::Type::kDivisionEqual)) {
+    compound_op = ast::BinaryOp::kDivide;
+  } else if (peek_is(Token::Type::kModuloEqual)) {
+    compound_op = ast::BinaryOp::kModulo;
+  } else if (peek_is(Token::Type::kAndEqual)) {
+    compound_op = ast::BinaryOp::kAnd;
+  } else if (peek_is(Token::Type::kOrEqual)) {
+    compound_op = ast::BinaryOp::kOr;
+  } else if (peek_is(Token::Type::kXorEqual)) {
+    compound_op = ast::BinaryOp::kXor;
+  }
+  if (compound_op != ast::BinaryOp::kNone) {
+    next();
+    return compound_op;
+  }
+  return Failure::kNoMatch;
+}
+
 // assignment_stmt
-//   : (unary_expression | underscore) EQUAL logical_or_expression
-Maybe<const ast::AssignmentStatement*> ParserImpl::assignment_stmt() {
+// | lhs_expression ( equal | compound_assignment_operator ) expression
+// | underscore equal expression
+Maybe<const ast::Statement*> ParserImpl::assignment_stmt() {
   auto t = peek();
   auto source = t.source();
 
@@ -2677,8 +2712,14 @@ Maybe<const ast::AssignmentStatement*> ParserImpl::assignment_stmt() {
     lhs = create<ast::PhonyExpression>(source);
   }
 
-  if (!expect("assignment", Token::Type::kEqual)) {
+  auto compound_op = compound_assignment_operator();
+  if (compound_op.errored) {
     return Failure::kErrored;
+  }
+  if (!compound_op.matched) {
+    if (!expect("assignment", Token::Type::kEqual)) {
+      return Failure::kErrored;
+    }
   }
 
   auto rhs = logical_or_expression();
@@ -2689,7 +2730,12 @@ Maybe<const ast::AssignmentStatement*> ParserImpl::assignment_stmt() {
     return add_error(peek(), "unable to parse right side of assignment");
   }
 
-  return create<ast::AssignmentStatement>(source, lhs.value, rhs.value);
+  if (compound_op.value != ast::BinaryOp::kNone) {
+    return create<ast::CompoundAssignmentStatement>(
+        source, lhs.value, rhs.value, compound_op.value);
+  } else {
+    return create<ast::AssignmentStatement>(source, lhs.value, rhs.value);
+  }
 }
 
 // const_literal

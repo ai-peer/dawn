@@ -5,6 +5,8 @@
 ### New Features
 
 * Parentheses are no longer required around expressions for if and switch statements [tint:1424](crbug.com/tint/1424)
+* Compound assignment statements are now supported. [tint:1325](https://crbug.com/tint/1325)
+* The colon in case statements is now optional. [tint:1485](crbug.com/tint/1485)
 
 ### Breaking changes
 
@@ -13,6 +15,10 @@
 * The `@stride` attribute has been removed. [tint:1381](crbug.com/tint/1381)
 * Attributes using `[[attribute]]` syntax are no longer supported. [tint:1382](crbug.com/tint/1382)
 * The `elseif` keyword is no longer supported. [tint:1289](crbug.com/tint/1289)
+
+### Deprecated Features
+
+* The `smoothStep()` builtin has been renamed to `smoothstep()`. [tint:1483](crbug.com/tint/1483)
 
 ## Changes for M101
 
