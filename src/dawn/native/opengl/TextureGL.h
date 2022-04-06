@@ -35,6 +35,8 @@ namespace dawn::native::opengl {
         GLuint GetHandle() const;
         GLenum GetGLTarget() const;
         const GLFormat& GetGLFormat() const;
+        uint32_t GetGenID() const;
+        void Touch();
 
         void EnsureSubresourceContentInitialized(const SubresourceRange& range);
 
@@ -46,6 +48,7 @@ namespace dawn::native::opengl {
 
         GLuint mHandle;
         GLenum mTarget;
+        uint32_t mGenID = 0;
     };
 
     class TextureView final : public TextureViewBase {
@@ -55,14 +58,18 @@ namespace dawn::native::opengl {
         GLuint GetHandle() const;
         GLenum GetGLTarget() const;
         void BindToFramebuffer(GLenum target, GLenum attachment);
+        void CopyIfNeeded();
 
       private:
         ~TextureView() override;
         void DestroyImpl() override;
+        GLenum GetInternalFormat() const;
 
         GLuint mHandle;
         GLenum mTarget;
         bool mOwnsHandle;
+        bool mUseCopy = false;
+        uint32_t mGenID = 0;
     };
 
 }  // namespace dawn::native::opengl
