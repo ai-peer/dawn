@@ -158,6 +158,7 @@ tint_unittests_source_set("tint_unittests_ast_src") {
     "../../src/tint/ast/call_expression_test.cc",
     "../../src/tint/ast/call_statement_test.cc",
     "../../src/tint/ast/case_statement_test.cc",
+    "../../src/tint/ast/compound_assignment_statement_test.cc",
     "../../src/tint/ast/continue_statement_test.cc",
     "../../src/tint/ast/depth_multisampled_texture_test.cc",
     "../../src/tint/ast/depth_texture_test.cc",
@@ -244,6 +245,7 @@ tint_unittests_source_set("tint_unittests_resolver_src") {
     "../../src/tint/resolver/builtins_validation_test.cc",
     "../../src/tint/resolver/call_test.cc",
     "../../src/tint/resolver/call_validation_test.cc",
+    "../../src/tint/resolver/compound_assignment_validation_test.cc",
     "../../src/tint/resolver/compound_statement_test.cc",
     "../../src/tint/resolver/control_block_validation_test.cc",
     "../../src/tint/resolver/dependency_graph_test.cc",
@@ -322,6 +324,7 @@ tint_unittests_source_set("tint_unittests_transform_src") {
     "../../src/tint/transform/fold_constants_test.cc",
     "../../src/tint/transform/fold_trivial_single_use_lets_test.cc",
     "../../src/tint/transform/for_loop_to_loop_test.cc",
+    "../../src/tint/transform/expand_compound_assignment_test.cc",
     "../../src/tint/transform/localize_struct_array_assignment_test.cc",
     "../../src/tint/transform/loop_to_for_loop_test.cc",
     "../../src/tint/transform/module_scope_var_to_entry_point_param_test.cc",
@@ -329,6 +332,7 @@ tint_unittests_source_set("tint_unittests_transform_src") {
     "../../src/tint/transform/num_workgroups_from_uniform_test.cc",
     "../../src/tint/transform/promote_initializers_to_const_var_test.cc",
     "../../src/tint/transform/promote_side_effects_to_decl_test.cc",
+    "../../src/tint/transform/remove_continue_in_switch_test.cc",
     "../../src/tint/transform/remove_phonies_test.cc",
     "../../src/tint/transform/remove_unreachable_statements_test.cc",
     "../../src/tint/transform/renamer_test.cc",
@@ -339,6 +343,7 @@ tint_unittests_source_set("tint_unittests_transform_src") {
     "../../src/tint/transform/transform_test.cc",
     "../../src/tint/transform/unshadow_test.cc",
     "../../src/tint/transform/unwind_discard_functions_test.cc",
+    "../../src/tint/transform/utils/get_insertion_point_test.cc",
     "../../src/tint/transform/utils/hoist_to_decl_before_test.cc",
     "../../src/tint/transform/var_for_dynamic_index_test.cc",
     "../../src/tint/transform/vectorize_scalar_matrix_constructors_test.cc",
@@ -371,6 +376,7 @@ tint_unittests_source_set("tint_unittests_writer_src") {
   sources = [
     "../../src/tint/writer/append_vector_test.cc",
     "../../src/tint/writer/float_to_string_test.cc",
+    "../../src/tint/writer/generate_external_texture_bindings_test.cc",
     "../../src/tint/writer/text_generator_test.cc",
   ]
 }

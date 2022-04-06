@@ -45,6 +45,7 @@
 #include "src/tint/transform/add_spirv_block_attribute.h"
 #include "src/tint/transform/builtin_polyfill.h"
 #include "src/tint/transform/canonicalize_entry_point_io.h"
+#include "src/tint/transform/expand_compound_assignment.h"
 #include "src/tint/transform/fold_constants.h"
 #include "src/tint/transform/for_loop_to_loop.h"
 #include "src/tint/transform/manager.h"
@@ -59,6 +60,7 @@
 #include "src/tint/utils/defer.h"
 #include "src/tint/utils/map.h"
 #include "src/tint/writer/append_vector.h"
+#include "src/tint/writer/generate_external_texture_bindings.h"
 
 namespace tint {
 namespace writer {
@@ -216,6 +218,7 @@ uint32_t builtin_to_glsl_method(const sem::Builtin* builtin) {
       return GLSLstd450Sin;
     case BuiltinType::kSinh:
       return GLSLstd450Sinh;
+    case BuiltinType::kSmoothstep:
     case BuiltinType::kSmoothStep:
       return GLSLstd450SmoothStep;
     case BuiltinType::kSqrt:
@@ -256,7 +259,8 @@ const sem::Type* ElementTypeOf(const sem::Type* ty) {
 
 SanitizedResult Sanitize(const Program* in,
                          bool emit_vertex_point_size,
-                         bool disable_workgroup_init) {
+                         bool disable_workgroup_init,
+                         bool generate_external_texture_bindings) {
   transform::Manager manager;
   transform::DataMap data;
 
@@ -273,11 +277,19 @@ SanitizedResult Sanitize(const Program* in,
     manager.Add<transform::BuiltinPolyfill>();
   }
 
+  if (generate_external_texture_bindings) {
+    auto new_bindings_map = GenerateExternalTextureBindings(in);
+    data.Add<transform::MultiplanarExternalTexture::NewBindingPoints>(
+        new_bindings_map);
+  }
+  manager.Add<transform::MultiplanarExternalTexture>();
+
   manager.Add<transform::Unshadow>();
   if (!disable_workgroup_init) {
     manager.Add<transform::ZeroInitWorkgroupMemory>();
   }
   manager.Add<transform::RemoveUnreachableStatements>();
+  manager.Add<transform::ExpandCompoundAssignment>();
   manager.Add<transform::PromoteSideEffectsToDecl>();
   manager.Add<transform::UnwindDiscardFunctions>();
   manager.Add<transform::SimplifyPointers>();  // Required for arrayLength()

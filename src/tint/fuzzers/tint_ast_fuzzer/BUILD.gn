@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-<<<<<<< HEAD
 import("//build_overrides/build.gni")
 import("../../../../tint_overrides_with_defaults.gni")
 
@@ -42,6 +41,8 @@ if (build_with_chromium) {
     sources = [
       "cli.cc",
       "cli.h",
+      "expression_size.cc",
+      "expression_size.h",
       "fuzzer.cc",
       "mutation.cc",
       "mutation.h",
@@ -51,10 +52,14 @@ if (build_with_chromium) {
       "mutation_finders/change_binary_operators.h",
       "mutation_finders/replace_identifiers.cc",
       "mutation_finders/replace_identifiers.h",
+      "mutation_finders/wrap_unary_operators.cc",
+      "mutation_finders/wrap_unary_operators.h",
       "mutations/change_binary_operator.cc",
       "mutations/change_binary_operator.h",
       "mutations/replace_identifier.cc",
       "mutations/replace_identifier.h",
+      "mutations/wrap_unary_operator.cc",
+      "mutations/wrap_unary_operator.h",
       "mutator.cc",
       "mutator.h",
       "node_id_map.cc",

@@ -1602,6 +1602,7 @@ std::string GeneratorImpl::generate_builtin_name(const sem::Builtin* builtin) {
       return "packUnorm4x8";
     case sem::BuiltinType::kReverseBits:
       return "bitfieldReverse";
+    case sem::BuiltinType::kSmoothstep:
     case sem::BuiltinType::kSmoothStep:
       return "smoothstep";
     case sem::BuiltinType::kUnpack2x16float:
@@ -2487,7 +2488,8 @@ bool GeneratorImpl::EmitType(std::ostream& out,
       out << "out ";
       break;
     }
-    case ast::StorageClass::kUniform: {
+    case ast::StorageClass::kUniform:
+    case ast::StorageClass::kUniformConstant: {
       out << "uniform ";
       break;
     }
@@ -2551,7 +2553,7 @@ bool GeneratorImpl::EmitType(std::ostream& out,
     auto* depth_ms = tex->As<sem::DepthMultisampledTexture>();
     auto* sampled = tex->As<sem::SampledTexture>();
 
-    out << "uniform highp ";
+    out << "highp ";
 
     if (storage && storage->access() != ast::Access::kRead) {
       out << "writeonly ";

@@ -38,12 +38,15 @@ set(LIBTINT_AST_FUZZER_SOURCES
         ../mersenne_twister_engine.h
         ../random_generator.h
         ../random_generator_engine.h
+        expression_size.h
         mutation.h
         mutation_finder.h
         mutation_finders/change_binary_operators.h
         mutation_finders/replace_identifiers.h
+        mutation_finders/wrap_unary_operators.h
         mutations/change_binary_operator.h
         mutations/replace_identifier.h
+        mutations/wrap_unary_operator.h
         mutator.h
         node_id_map.h
         probability_context.h
@@ -55,12 +58,15 @@ set(LIBTINT_AST_FUZZER_SOURCES ${LIBTINT_AST_FUZZER_SOURCES}
         ../mersenne_twister_engine.cc
         ../random_generator.cc
         ../random_generator_engine.cc
+        expression_size.cc
         mutation.cc
         mutation_finder.cc
         mutation_finders/change_binary_operators.cc
         mutation_finders/replace_identifiers.cc
+        mutation_finders/wrap_unary_operators.cc
         mutations/change_binary_operator.cc
         mutations/replace_identifier.cc
+        mutations/wrap_unary_operator.cc
         mutator.cc
         node_id_map.cc
         probability_context.cc
@@ -96,8 +102,10 @@ add_tint_ast_fuzzer(tint_ast_wgsl_writer_fuzzer)
 # Add tests.
 if (${TINT_BUILD_TESTS})
     set(TEST_SOURCES
+            expression_size_test.cc
             mutations/change_binary_operator_test.cc
-            mutations/replace_identifier_test.cc)
+            mutations/replace_identifier_test.cc
+	        mutations/wrap_unary_operator_test.cc)
 
     add_executable(tint_ast_fuzzer_unittests ${TEST_SOURCES})
 

@@ -52,6 +52,7 @@
 #include "src/tint/transform/calculate_array_length.h"
 #include "src/tint/transform/canonicalize_entry_point_io.h"
 #include "src/tint/transform/decompose_memory_access.h"
+#include "src/tint/transform/expand_compound_assignment.h"
 #include "src/tint/transform/fold_trivial_single_use_lets.h"
 #include "src/tint/transform/localize_struct_array_assignment.h"
 #include "src/tint/transform/loop_to_for_loop.h"
@@ -59,6 +60,7 @@
 #include "src/tint/transform/num_workgroups_from_uniform.h"
 #include "src/tint/transform/promote_initializers_to_const_var.h"
 #include "src/tint/transform/promote_side_effects_to_decl.h"
+#include "src/tint/transform/remove_continue_in_switch.h"
 #include "src/tint/transform/remove_phonies.h"
 #include "src/tint/transform/simplify_pointers.h"
 #include "src/tint/transform/unshadow.h"
@@ -69,6 +71,7 @@
 #include "src/tint/utils/scoped_assignment.h"
 #include "src/tint/writer/append_vector.h"
 #include "src/tint/writer/float_to_string.h"
+#include "src/tint/writer/generate_external_texture_bindings.h"
 
 namespace tint {
 namespace writer {
@@ -137,6 +140,7 @@ SanitizedResult Sanitize(
     const Program* in,
     sem::BindingPoint root_constant_binding_point,
     bool disable_workgroup_init,
+    bool generate_external_texture_bindings,
     const ArrayLengthFromUniformOptions& array_length_from_uniform) {
   transform::Manager manager;
   transform::DataMap data;
@@ -160,6 +164,13 @@ SanitizedResult Sanitize(
       array_length_from_uniform.ubo_binding);
   array_length_from_uniform_cfg.bindpoint_to_size_index =
       array_length_from_uniform.bindpoint_to_size_index;
+
+  if (generate_external_texture_bindings) {
+    auto new_bindings_map = GenerateExternalTextureBindings(in);
+    data.Add<transform::MultiplanarExternalTexture::NewBindingPoints>(
+        new_bindings_map);
+  }
+  manager.Add<transform::MultiplanarExternalTexture>();
 
   manager.Add<transform::Unshadow>();
 
@@ -187,6 +198,7 @@ SanitizedResult Sanitize(
   // assumes that num_workgroups builtins only appear as struct members and are
   // only accessed directly via member accessors.
   manager.Add<transform::NumWorkgroupsFromUniform>();
+  manager.Add<transform::ExpandCompoundAssignment>();
   manager.Add<transform::PromoteSideEffectsToDecl>();
   manager.Add<transform::UnwindDiscardFunctions>();
   manager.Add<transform::SimplifyPointers>();
@@ -209,6 +221,8 @@ SanitizedResult Sanitize(
   // will be transformed by CalculateArrayLength
   manager.Add<transform::CalculateArrayLength>();
   manager.Add<transform::PromoteInitializersToConstVar>();
+
+  manager.Add<transform::RemoveContinueInSwitch>();
 
   manager.Add<transform::AddEmptyEntryPoint>();
 
@@ -2547,6 +2561,7 @@ std::string GeneratorImpl::generate_builtin_name(const sem::Builtin* builtin) {
       return "lerp";
     case sem::BuiltinType::kReverseBits:
       return "reversebits";
+    case sem::BuiltinType::kSmoothstep:
     case sem::BuiltinType::kSmoothStep:
       return "smoothstep";
     default:
