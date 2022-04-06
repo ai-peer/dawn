@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb430a78_55392c4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-06T18:47:28Z",
+      "side": 1,
+      "message": "So... Chromium sandbox perms didn\u0027t like that I was including a new shared lib in order to get the typemap_helper header in mac-rel... I updated the BUILD here and sent out https://github.com/KhronosGroup/Vulkan-Tools/pull/639 to factor out that header to a source_set. Hopefully if that PR goes through this should work...",
+      "revId": "a7a79bfa85e971d5695bc59a23d297c70be89e57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
