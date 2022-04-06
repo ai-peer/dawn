@@ -93,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "071547cc_68a26b2b",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000076
+      },
+      "writtenOn": "2022-04-06T20:58:41Z",
+      "side": 1,
+      "message": "Actually, sorry - those bots do have newer (3.7.3) python, so I\u0027m not really sure what\u0027s broken here. It works for me locally (when trying to roll new Dawn manually), but our bots are consistently failing to run the version generator script.",
+      "parentUuid": "6e7f8bdb_6678ff3b",
+      "range": {
+        "startLine": 26,
+        "startChar": 13,
+        "endLine": 26,
+        "endChar": 27
+      },
+      "revId": "f57867264a7d661bb904df9f4404521f8e21f022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e848f09c_1dab4ea7",
