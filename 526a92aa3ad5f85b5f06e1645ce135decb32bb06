@@ -180,6 +180,24 @@
       "parentUuid": "d17fb3aa_55b4bf4c",
       "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35439d78_a1064c8f",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-04-06T02:51:31Z",
+      "side": 1,
+      "message": "That threw me off for a while too, I thought reinterpret_cast had to be of the same size. I was going to suggest exactly that (`reinterpret_cast(static_cast(x))`) but I\u0027m pretty sure that\u0027s the same thing.",
+      "parentUuid": "15c968c0_058cf87c",
+      "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
