@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "267e5e41_98add358",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-04-06T21:22:04Z",
+      "side": 1,
+      "message": "Change cherry-picked from the Tint CL without changes.",
+      "revId": "d93eed8479e51d9eae28ea0624d5c4d0b274466a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
