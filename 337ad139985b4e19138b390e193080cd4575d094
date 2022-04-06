@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6884ebf9_ff78286f",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-06T18:26:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09657c4b_521fd0b1",
+      "revId": "337ad139985b4e19138b390e193080cd4575d094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68d3319c_b57c34cb",
@@ -83,6 +101,24 @@
       "writtenOn": "2022-04-05T09:42:11Z",
       "side": 1,
       "message": "nit: can we have something stored on the view to know if it owns its MTLTexture or not? Re-deriving every time risks creating bugs when we change the logic in the future.",
+      "revId": "337ad139985b4e19138b390e193080cd4575d094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1be40806_ac1375f7",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-06T18:26:19Z",
+      "side": 1,
+      "message": "Added a comment about why we do this. We still need an extra condition somewhere because rendering to the depth-stencil view on Metal doesn\u0027t work. But, we always need to make a view if the texture has a stencil aspect a view is created for sampling.",
+      "parentUuid": "68d3319c_b57c34cb",
       "revId": "337ad139985b4e19138b390e193080cd4575d094",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -104,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "872406cb_115f4b3e",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-06T18:26:19Z",
+      "side": 1,
+      "message": "Done. Metal however is another story",
+      "parentUuid": "339d5a75_5dce5ce3",
+      "revId": "337ad139985b4e19138b390e193080cd4575d094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c67693c_4411e18a",
@@ -117,6 +171,24 @@
       "writtenOn": "2022-04-05T09:42:11Z",
       "side": 1,
       "message": "nit: in these tests, can we have some comments on blocks of code to help readers follow what we\u0027re doing?",
+      "revId": "337ad139985b4e19138b390e193080cd4575d094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea9ef72f_4b261fee",
+        "filename": "src/dawn/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-06T18:26:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c67693c_4411e18a",
       "revId": "337ad139985b4e19138b390e193080cd4575d094",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -170,6 +242,24 @@
       "side": 1,
       "message": "yea - I\u0027ll add a comment. We don\u0027t have the amazing color conversion helpers we have in the CTS, so there isn\u0027t a good way to compute the result in the test. It\u0027s just hard-coded instead.",
       "parentUuid": "61a4617f_10e953aa",
+      "revId": "337ad139985b4e19138b390e193080cd4575d094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db50f9cf_b3479e3a",
+        "filename": "src/dawn/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-06T18:26:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66510cde_7d3ec007",
       "revId": "337ad139985b4e19138b390e193080cd4575d094",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
