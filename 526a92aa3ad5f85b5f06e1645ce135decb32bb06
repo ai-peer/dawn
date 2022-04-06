@@ -18,6 +18,52 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "23038408_9b965e3d",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-06T00:24:12Z",
+      "side": 1,
+      "message": "do we still need these checks after the zero-initialization landed in Chrome?",
+      "range": {
+        "startLine": 202,
+        "startChar": 12,
+        "endLine": 202,
+        "endChar": 74
+      },
+      "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dde8f0e4_43a27f88",
+        "filename": "src/dawn/native/d3d12/QueueD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-06T00:24:12Z",
+      "side": 1,
+      "message": "if you want to make this like the other objects, it should return Ref\u003cQueue\u003e and get created with AcquireRef(new Queue(...));\n\nthen DeviceBase::Initialize will simply move the ref into mQueue",
+      "range": {
+        "startLine": 29,
+        "startChar": 15,
+        "endLine": 29,
+        "endChar": 22
+      },
+      "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1957dbbc_5475854a",
@@ -31,6 +77,24 @@
       "writtenOn": "2022-04-05T23:13:31Z",
       "side": 1,
       "message": "This cast here (previously reinterpret_cast\u003cuint64_t\u0026\u003e) was the culprit.",
+      "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba5c23b1_5b8ad9e6",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-06T00:24:12Z",
+      "side": 1,
+      "message": "we\u0027re doing this cast for all the other Vulkan objects too. Is it wrong in all those places too, particularly on 32-bit?\n\nWe should make sure we check what the type of the handles are for vulkan - they can be pointers to structs or integer handles.\n\nI think we should make a version of SetDebugName that does this casting for us so we don\u0027t mess it up more. If the type is a struct like\nusing VkQueue \u003d struct VkQueueImpl*;\n\nthen we can have\ntemplate \u003ctypename VkObj\u003e\nvoid SetDebugName(device, type, VkObj* obj, name, label)\n\nwhich will do the cast for us, and then call SetDebugName with an integer.",
+      "parentUuid": "1957dbbc_5475854a",
       "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
