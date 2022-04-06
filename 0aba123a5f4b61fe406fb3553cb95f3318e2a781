@@ -69,6 +69,30 @@
       },
       "revId": "0aba123a5f4b61fe406fb3553cb95f3318e2a781",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71a7c19d_17d2f869",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-06T23:45:10Z",
+      "side": 1,
+      "message": "Ah... Ok, it\u0027s a bit unfortunate that we end up calling ValidateTextureAspect twice then since technically we could\u0027ve already returned the error at this point.\n\nHmm not sure about the other call sites of `SelectFormatAspects`, but I guess another possible option would be to have it return None? (Didn\u0027t read through all the other call sites yet so maybe that\u0027s not possible either...)\n\nEither way though, this isn\u0027t too bad since the validation is just a switch-case anyways.",
+      "parentUuid": "5b56f376_5628cc8f",
+      "range": {
+        "startLine": 482,
+        "startChar": 12,
+        "endLine": 482,
+        "endChar": 64
+      },
+      "revId": "0aba123a5f4b61fe406fb3553cb95f3318e2a781",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
