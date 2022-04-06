@@ -262,6 +262,24 @@
       "parentUuid": "4745d9c2_7869ab4d",
       "revId": "5aab0cae09156c60c99549f6c8b6c6dfc7ef8eb6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f97ec415_4714bfb1",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-06T20:23:13Z",
+      "side": 1,
+      "message": "Ack. Let\u0027s keep it simple for now, especially since it was mentioned we might not keep this copy workaround.",
+      "parentUuid": "5626119e_b4d1080c",
+      "revId": "5aab0cae09156c60c99549f6c8b6c6dfc7ef8eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
