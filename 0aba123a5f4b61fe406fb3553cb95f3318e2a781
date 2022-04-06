@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77203edd_1349ea14",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-06T23:31:58Z",
+      "side": 1,
+      "message": "nit. adjust to line limits",
+      "range": {
+        "startLine": 477,
+        "startChar": 12,
+        "endLine": 480,
+        "endChar": 33
+      },
+      "revId": "0aba123a5f4b61fe406fb3553cb95f3318e2a781",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db3c4ad_70007b5d",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-06T23:31:58Z",
+      "side": 1,
+      "message": "Hmm, do we even need to do this validation call? Couldn\u0027t we just have\n`Aspect aspects \u003d SelectFormatAspects(format, qgpu::TextureAspect::All)` and then just rely on the validation separately?",
+      "range": {
+        "startLine": 482,
+        "startChar": 12,
+        "endLine": 482,
+        "endChar": 64
+      },
+      "revId": "0aba123a5f4b61fe406fb3553cb95f3318e2a781",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
