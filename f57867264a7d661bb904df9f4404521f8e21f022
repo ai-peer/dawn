@@ -141,6 +141,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "872a11d4_1cd72876",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000076
+      },
+      "writtenOn": "2022-04-06T21:19:03Z",
+      "side": 1,
+      "message": "Here\u0027s the CL where I was trying to do the roll: https://skia-review.googlesource.com/c/skia/+/528118/\n\nSwarming task for the failed builder: https://chromium-swarm.appspot.com/task?id\u003d5a193c9a06193810\n\nFrom doing other research online, I think there are other possible reasons. One is that GN always invokes python using `python`, so it\u0027s possible that for the user running the task, that still resolves to python2.",
+      "parentUuid": "fdb1af80_230000dd",
+      "range": {
+        "startLine": 26,
+        "startChar": 13,
+        "endLine": 26,
+        "endChar": 27
+      },
+      "revId": "f57867264a7d661bb904df9f4404521f8e21f022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e848f09c_1dab4ea7",
