@@ -23,13 +23,9 @@ namespace ast {
 class IfStatement;
 class ElseStatement;
 }  // namespace ast
+
 namespace sem {
 class Expression;
-}  // namespace sem
-}  // namespace tint
-
-namespace tint {
-namespace sem {
 
 /// Holds semantic information about an if statement
 class IfStatement final : public Castable<IfStatement, CompoundStatement> {

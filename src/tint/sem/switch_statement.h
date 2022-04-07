@@ -23,9 +23,7 @@ namespace ast {
 class CaseStatement;
 class SwitchStatement;
 }  // namespace ast
-}  // namespace tint
 
-namespace tint {
 namespace sem {
 
 /// Holds semantic information about an switch statement

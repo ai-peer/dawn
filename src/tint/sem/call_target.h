@@ -22,8 +22,7 @@
 #include "src/tint/sem/variable.h"
 #include "src/tint/utils/hash.h"
 
-namespace tint {
-namespace sem {
+namespace tint::sem {
 // Forward declarations
 class Type;
 
@@ -84,8 +83,7 @@ class CallTarget : public Castable<CallTarget, Node> {
   CallTargetSignature signature_;
 };
 
-}  // namespace sem
-}  // namespace tint
+}  // namespace tint::sem
 
 namespace std {
 

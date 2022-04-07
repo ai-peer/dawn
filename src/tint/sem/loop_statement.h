@@ -22,9 +22,7 @@ namespace tint {
 namespace ast {
 class LoopStatement;
 }  // namespace ast
-}  // namespace tint
 
-namespace tint {
 namespace sem {
 
 /// Holds semantic information about a loop statement

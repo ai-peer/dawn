@@ -20,12 +20,13 @@
 #include "src/tint/sem/node.h"
 
 // Forward declarations
-namespace tint::ast {
+namespace tint {
+namespace ast {
 class Node;
 class Module;
-}  // namespace tint::ast
+}  // namespace ast
 
-namespace tint::sem {
+namespace sem {
 
 /// Module holds the top-level semantic types, functions and global variables
 /// used by a Program.
@@ -47,6 +48,7 @@ class Module final : public Castable<Module, Node> {
   const std::vector<const ast::Node*> dep_ordered_decls_;
 };
 
-}  // namespace tint::sem
+}  // namespace sem
+}  // namespace tint
 
 #endif  // SRC_TINT_SEM_MODULE_H_

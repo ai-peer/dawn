@@ -21,13 +21,9 @@ namespace tint {
 namespace ast {
 class ForLoopStatement;
 }  // namespace ast
+
 namespace sem {
 class Expression;
-}  // namespace sem
-}  // namespace tint
-
-namespace tint {
-namespace sem {
 
 /// Holds semantic information about a for-loop statement
 class ForLoopStatement final

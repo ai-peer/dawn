@@ -24,13 +24,9 @@ namespace ast {
 class Function;
 class Statement;
 }  // namespace ast
+
 namespace sem {
 class BlockStatement;
-}  // namespace sem
-}  // namespace tint
-
-namespace tint {
-namespace sem {
 
 /// Forward declaration
 class CompoundStatement;
