@@ -16,6 +16,23 @@
       "message": "This allows the linter to pass when running `git cl presubmit -uf --all`.",
       "revId": "15b758ec780c3daed684a7d8852151cb38cfe12c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd28f7bf_25506521",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-07T15:37:08Z",
+      "side": 1,
+      "message": "If this is using cpplint, we should also roll it forward - it didn\u0027t understand C++17 stuff in Tint.",
+      "revId": "15b758ec780c3daed684a7d8852151cb38cfe12c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
