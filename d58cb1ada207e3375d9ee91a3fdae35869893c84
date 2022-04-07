@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9328d0e_89322054",
+        "filename": "generator/templates/dawn/native/CacheKey.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-07T22:58:43Z",
+      "side": 1,
+      "message": "2022",
+      "revId": "d58cb1ada207e3375d9ee91a3fdae35869893c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74e9a665_0c656f2e",
+        "filename": "generator/templates/dawn/native/CacheKey.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-07T22:58:43Z",
+      "side": 1,
+      "message": "Device has TogglesSet which is much more compact - and describes what is actually on/off. this descriptor is just a request that can still get overridden at runtime.\n\ncould we use TogglesSet instead?\n\nmaybe we can use FeaturesSet too\nthen, I don\u0027t know if use of the device descriptor is necessary anymore",
+      "revId": "d58cb1ada207e3375d9ee91a3fdae35869893c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4cfcdbe_7d237c63",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-07T22:58:43Z",
+      "side": 1,
+      "message": "could we use mCacheIsolationKey directly? or alternatively only use the descriptor.\n\nwe probably don\u0027t need both mCacheIsolationKey and mDeviceCacheKey",
+      "revId": "d58cb1ada207e3375d9ee91a3fdae35869893c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
