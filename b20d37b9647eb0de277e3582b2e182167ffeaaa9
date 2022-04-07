@@ -33,6 +33,24 @@
       "message": "I assume `bclayton@google.com` is inherited, right?",
       "revId": "b20d37b9647eb0de277e3582b2e182167ffeaaa9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e64c3e3_39f4a4c0",
+        "filename": "src/tint/OWNERS",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-07T15:57:38Z",
+      "side": 1,
+      "message": "It is, but adding here makes it clear that you\u0027re a good reviewer for the directory.",
+      "parentUuid": "46dd9f20_0d800449",
+      "revId": "b20d37b9647eb0de277e3582b2e182167ffeaaa9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
