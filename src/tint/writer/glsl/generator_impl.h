@@ -48,8 +48,7 @@ class TypeConstructor;
 class TypeConversion;
 }  // namespace sem
 
-namespace writer {
-namespace glsl {
+namespace writer::glsl {
 
 /// Implementation class for GLSL generator
 class GeneratorImpl : public TextGenerator {
@@ -500,8 +499,7 @@ class GeneratorImpl : public TextGenerator {
   Version version_;
 };
 
-}  // namespace glsl
-}  // namespace writer
+}  // namespace writer::glsl
 }  // namespace tint
 
 #endif  // SRC_TINT_WRITER_GLSL_GENERATOR_IMPL_H_

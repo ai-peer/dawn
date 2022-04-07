@@ -33,8 +33,7 @@ namespace tint {
 // Forward declarations
 class Program;
 
-namespace writer {
-namespace glsl {
+namespace writer::glsl {
 
 // Forward declarations
 class GeneratorImpl;
@@ -112,8 +111,7 @@ Result Generate(const Program* program,
                 const Options& options,
                 const std::string& entry_point);
 
-}  // namespace glsl
-}  // namespace writer
+}  // namespace writer::glsl
 }  // namespace tint
 
 #endif  // SRC_TINT_WRITER_GLSL_GENERATOR_H_
