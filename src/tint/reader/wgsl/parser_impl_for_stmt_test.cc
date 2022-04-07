@@ -16,9 +16,7 @@
 
 #include "src/tint/ast/discard_statement.h"
 
-namespace tint {
-namespace reader {
-namespace wgsl {
+namespace tint::reader::wgsl {
 namespace {
 
 using ForStmtTest = ParserImplTest;
@@ -294,6 +292,4 @@ TEST_F(ForStmtErrorTest, InvalidBodyMatch) {
 }
 
 }  // namespace
-}  // namespace wgsl
-}  // namespace reader
-}  // namespace tint
+}  // namespace tint::reader::wgsl

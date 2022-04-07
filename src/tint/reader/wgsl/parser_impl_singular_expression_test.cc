@@ -14,9 +14,7 @@
 
 #include "src/tint/reader/wgsl/parser_impl_test_helper.h"
 
-namespace tint {
-namespace reader {
-namespace wgsl {
+namespace tint::reader::wgsl {
 namespace {
 
 TEST_F(ParserImplTest, SingularExpression_Array_ConstantIndex) {
@@ -258,6 +256,4 @@ TEST_F(ParserImplTest, SingularExpression_PostfixMinusMinus) {
 }
 
 }  // namespace
-}  // namespace wgsl
-}  // namespace reader
-}  // namespace tint
+}  // namespace tint::reader::wgsl

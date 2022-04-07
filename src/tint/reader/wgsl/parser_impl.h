@@ -41,8 +41,7 @@ class SwitchStatement;
 class VariableDeclStatement;
 }  // namespace ast
 
-namespace reader {
-namespace wgsl {
+namespace reader::wgsl {
 
 class Lexer;
 
@@ -876,8 +875,7 @@ class ParserImpl {
   size_t max_errors_ = 25;
 };
 
-}  // namespace wgsl
-}  // namespace reader
+}  // namespace reader::wgsl
 }  // namespace tint
 
 #endif  // SRC_TINT_READER_WGSL_PARSER_IMPL_H_
