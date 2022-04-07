@@ -97,6 +97,10 @@ status "Configuring build system"
 if [ "$BUILD_SYSTEM" == "cmake" ]; then
     using cmake-3.17.2
 
+    # TODO(crbug.com/dawn/TODO): Remove the need to depend on GLFW.
+    sudo apt update
+    sudo apt -y install libxcursor-dev libxinerama-dev libxrandr-dev
+
     COMMON_CMAKE_FLAGS=""
     COMMON_CMAKE_FLAGS+=" -DCMAKE_BUILD_TYPE=${BUILD_TYPE}"
     COMMON_CMAKE_FLAGS+=" -DTINT_DOCS_WARN_AS_ERROR=1"
