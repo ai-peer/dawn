@@ -31,8 +31,7 @@ namespace tint {
 // Forward declarations
 class Program;
 
-namespace writer {
-namespace hlsl {
+namespace writer::hlsl {
 
 // Forward declarations
 class GeneratorImpl;
@@ -99,8 +98,7 @@ struct Result {
 /// @returns the resulting HLSL and supplementary information
 Result Generate(const Program* program, const Options& options);
 
-}  // namespace hlsl
-}  // namespace writer
+}  // namespace writer::hlsl
 }  // namespace tint
 
 #endif  // SRC_TINT_WRITER_HLSL_GENERATOR_H_

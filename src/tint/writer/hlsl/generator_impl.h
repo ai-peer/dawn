@@ -49,8 +49,7 @@ class TypeConstructor;
 class TypeConversion;
 }  // namespace sem
 
-namespace writer {
-namespace hlsl {
+namespace writer::hlsl {
 
 /// The result of sanitizing a program for generation.
 struct SanitizedResult {
@@ -539,8 +538,7 @@ class GeneratorImpl : public TextGenerator {
   std::unordered_map<const sem::Type*, std::string> value_or_one_if_zero_;
 };
 
-}  // namespace hlsl
-}  // namespace writer
+}  // namespace writer::hlsl
 }  // namespace tint
 
 #endif  // SRC_TINT_WRITER_HLSL_GENERATOR_IMPL_H_
