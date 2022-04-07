@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ce567e7_09a677d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-07T19:03:49Z",
+      "side": 1,
+      "message": "Still blocked on vulkan-deps roll into Chromium which has been failing for a while.",
+      "revId": "156d539cb18f588f3c0d8a590fc60ed8ed1fc01a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
