@@ -16,6 +16,40 @@
       "message": "cpplint after the tint-\u003edawn merge is blocking presubmit :( ",
       "revId": "a443cbeb7d860ec5a1ffd2eabf6997c00b062529",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b87e1bc9_0ca19183",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-07T06:43:40Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a443cbeb7d860ec5a1ffd2eabf6997c00b062529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2394a8b6_f7d1b45a",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-07T06:43:40Z",
+      "side": 1,
+      "message": "Maybe we can make this function return ResultOrError\u003cTextureViewDescriptor\u003e?",
+      "revId": "a443cbeb7d860ec5a1ffd2eabf6997c00b062529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
