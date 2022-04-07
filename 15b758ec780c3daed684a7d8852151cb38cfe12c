@@ -33,6 +33,24 @@
       "message": "If this is using cpplint, we should also roll it forward - it didn\u0027t understand C++17 stuff in Tint.",
       "revId": "15b758ec780c3daed684a7d8852151cb38cfe12c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81fb4037_e7e94bee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-07T15:42:18Z",
+      "side": 1,
+      "message": "This check comes from depot_tools, as far as I can tell we don\u0027t have cpplint in our DEPs file?\n\nThe `--all` flag should have run the presubmit over every file, so I think the tint files should be passing with this?",
+      "parentUuid": "fd28f7bf_25506521",
+      "revId": "15b758ec780c3daed684a7d8852151cb38cfe12c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
