@@ -56,6 +56,30 @@
       },
       "revId": "75496d1101e1093ac738d74d01c0c88dca21493b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35fb55d4_287b5406",
+        "filename": "src/tint/writer/spirv/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-07T09:33:31Z",
+      "side": 1,
+      "message": "The last line should have been `namespace tint::writer::spirv {` 😊",
+      "parentUuid": "954e7eef_5f2ba087",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 25
+      },
+      "revId": "75496d1101e1093ac738d74d01c0c88dca21493b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
