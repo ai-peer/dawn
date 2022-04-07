@@ -40,11 +40,12 @@ class ReturnStatement;
 class SwitchStatement;
 class VariableDeclStatement;
 }  // namespace ast
-
-namespace reader {
-namespace wgsl {
-
+namespace reader::wgsl {
 class Lexer;
+}
+}  // namespace tint
+
+namespace tint::reader::wgsl {
 
 /// Struct holding information for a for loop
 struct ForHeader {
@@ -876,8 +877,6 @@ class ParserImpl {
   size_t max_errors_ = 25;
 };
 
-}  // namespace wgsl
-}  // namespace reader
-}  // namespace tint
+}  // namespace tint::reader::wgsl
 
 #endif  // SRC_TINT_READER_WGSL_PARSER_IMPL_H_
