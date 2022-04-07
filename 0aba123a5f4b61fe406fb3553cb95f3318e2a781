@@ -93,6 +93,30 @@
       },
       "revId": "0aba123a5f4b61fe406fb3553cb95f3318e2a781",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dbd1cda_ec8f01f3",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-07T02:28:24Z",
+      "side": 1,
+      "message": "I\u0027m worried that an optimizing compiler will remove the \"return None\" since all the cases for the type are enumerated in `SelectFormatAspects`, and then we end up with undefined behavior.\n\nfor what its worth though, I updated it to default to None instead of all.",
+      "parentUuid": "71a7c19d_17d2f869",
+      "range": {
+        "startLine": 482,
+        "startChar": 12,
+        "endLine": 482,
+        "endChar": 64
+      },
+      "revId": "0aba123a5f4b61fe406fb3553cb95f3318e2a781",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

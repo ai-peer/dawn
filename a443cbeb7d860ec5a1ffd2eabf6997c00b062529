@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ccf5e3b_20e05a3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-07T02:28:24Z",
+      "side": 1,
+      "message": "cpplint after the tint-\u003edawn merge is blocking presubmit :( ",
+      "revId": "a443cbeb7d860ec5a1ffd2eabf6997c00b062529",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
