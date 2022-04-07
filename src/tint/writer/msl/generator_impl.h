@@ -51,8 +51,7 @@ class TypeConstructor;
 class TypeConversion;
 }  // namespace sem
 
-namespace writer {
-namespace msl {
+namespace writer::msl {
 
 /// The result of sanitizing a program for generation.
 struct SanitizedResult {
@@ -444,8 +443,7 @@ class GeneratorImpl : public TextGenerator {
   std::unordered_map<uint32_t, std::string> int_dot_funcs_;
 };
 
-}  // namespace msl
-}  // namespace writer
+}  // namespace writer::msl
 }  // namespace tint
 
 #endif  // SRC_TINT_WRITER_MSL_GENERATOR_IMPL_H_
