@@ -102,9 +102,7 @@ namespace tint {
 namespace ast {
 class VariableDeclStatement;
 }  // namespace ast
-}  // namespace tint
 
-namespace tint {
 class CloneContext;
 
 /// ProgramBuilder is a mutable builder for a Program.
