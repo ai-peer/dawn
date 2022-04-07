@@ -16,6 +16,52 @@
       "message": "Note that this doesn\u0027t build on CQ atm because of the block on the vulkan-dep roll into Chromium, but sending it out for review since it builds and runs fine locally.",
       "revId": "b5a0efefb36fa4ef24fec62af5f626e63f177fe7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d415384b_71ebd079",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-07T21:32:14Z",
+      "side": 1,
+      "message": "why do we need this? with a default implementation like this, we won\u0027t get compile errors if Serialize gets called with an unsupported type",
+      "range": {
+        "startLine": 43,
+        "startChar": 12,
+        "endLine": 44,
+        "endChar": 26
+      },
+      "revId": "b5a0efefb36fa4ef24fec62af5f626e63f177fe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "905caf8f_3eb2aa33",
+        "filename": "src/dawn/native/vulkan/CacheKeyVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-07T21:32:14Z",
+      "side": 1,
+      "message": "all these reinterprets, can we have a helper that you can use like:\n\n`const VkBaseOutStructure* s \u003d ToBaseVkStructure(\u0026foo);`\n\nwhere `ToBaseVkStructure\u003cT\u003e(const T* foo)` has compile-time checks about the presence and types of foo-\u003esType and foo-\u003epNext ?",
+      "range": {
+        "startLine": 119,
+        "startChar": 38,
+        "endLine": 119,
+        "endChar": 81
+      },
+      "revId": "b5a0efefb36fa4ef24fec62af5f626e63f177fe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
