@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c46051fa_bc48767c",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-07T14:32:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77203edd_1349ea14",
+      "range": {
+        "startLine": 477,
+        "startChar": 12,
+        "endLine": 480,
+        "endChar": 33
+      },
+      "revId": "0aba123a5f4b61fe406fb3553cb95f3318e2a781",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2db3c4ad_70007b5d",
