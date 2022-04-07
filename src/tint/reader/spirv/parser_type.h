@@ -27,17 +27,16 @@
 #include "src/tint/castable.h"
 #include "src/tint/utils/block_allocator.h"
 
-// Forward declarations
 namespace tint {
+
+// Forward declarations
 class ProgramBuilder;
+
 namespace ast {
 class Type;
 }  // namespace ast
-}  // namespace tint
 
-namespace tint {
-namespace reader {
-namespace spirv {
+namespace reader::spirv {
 
 /// Type is the base class for all types
 class Type : public Castable<Type> {
@@ -604,8 +603,7 @@ class TypeManager {
   std::unique_ptr<State> state;
 };
 
-}  // namespace spirv
-}  // namespace reader
+}  // namespace reader::spirv
 }  // namespace tint
 
 #endif  // SRC_TINT_READER_SPIRV_PARSER_TYPE_H_
