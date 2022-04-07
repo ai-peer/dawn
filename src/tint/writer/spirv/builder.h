@@ -50,8 +50,7 @@ class TypeConstructor;
 class TypeConversion;
 }  // namespace sem
 
-namespace writer {
-namespace spirv {
+namespace writer::spirv {
 
 /// The result of sanitizing a program for generation.
 struct SanitizedResult {
@@ -658,8 +657,7 @@ class Builder {
   std::vector<Backedge> backedge_stack_;
 };
 
-}  // namespace spirv
-}  // namespace writer
+}  // namespace writer::spirv
 }  // namespace tint
 
 #endif  // SRC_TINT_WRITER_SPIRV_BUILDER_H_
