@@ -25,9 +25,7 @@ namespace ast {
 class IndexAccessorExpression;
 class CallExpression;
 }  // namespace ast
-}  // namespace tint
 
-namespace tint {
 namespace transform {
 
 /// This transform is responsible for clamping all array accesses to be within

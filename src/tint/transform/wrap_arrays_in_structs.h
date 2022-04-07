@@ -25,9 +25,7 @@ namespace tint {
 namespace ast {
 class Type;
 }  // namespace ast
-}  // namespace tint
 
-namespace tint {
 namespace transform {
 
 /// WrapArraysInStructs is a transform that replaces all array types with a
