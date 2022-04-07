@@ -16,6 +16,46 @@
       "message": "ptal",
       "revId": "75496d1101e1093ac738d74d01c0c88dca21493b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27cc5593_2aca0098",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-07T09:32:06Z",
+      "side": 1,
+      "message": "+2 with a request to change the style for forward declarations",
+      "revId": "75496d1101e1093ac738d74d01c0c88dca21493b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "954e7eef_5f2ba087",
+        "filename": "src/tint/writer/spirv/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-07T09:32:06Z",
+      "side": 1,
+      "message": "For forward declarations like this, please can we format it as:\n\n```\n// Forward declarations\nnamespace tint::sem {\nclass Call;\nclass Reference;\nclass TypeConstructor;\nclass TypeConversion;\n}  // namespace tint::sem\n\nnamespace writer::spirv {\n```\n\nThat way the forward-declarations sit in a nice chunk, and the rest of the header has the same format as if the forward-decl\u0027s weren\u0027t there. We also don\u0027t have to concern ourselves about partial nesting of forward declarations when they come from different namespaces.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 25
+      },
+      "revId": "75496d1101e1093ac738d74d01c0c88dca21493b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
