@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dd646f4_f3a2e39a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-07T09:40:41Z",
+      "side": 1,
+      "message": "Silly CQ.\nI rebased this on to main so it could land... but now I\u0027m the uploader and my +2 is meaningless.",
+      "revId": "acf5ace71dc062663b2a4c795e159c476444e002",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
