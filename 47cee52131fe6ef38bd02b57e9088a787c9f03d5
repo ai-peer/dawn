@@ -16,6 +16,29 @@
       "message": "Change cherry-picked from the Tint CL without changes.",
       "revId": "47cee52131fe6ef38bd02b57e9088a787c9f03d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c632ae12_2891a15d",
+        "filename": "src/tint/ast/increment_decrement_statement.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-07T11:46:53Z",
+      "side": 1,
+      "message": "Dan\u0027s on a mission to combine all namespaces using C++17\u0027s `namespace a::b {` syntax. As these are landing in parallel, please can you apply the new style in these changes?",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 15
+      },
+      "revId": "47cee52131fe6ef38bd02b57e9088a787c9f03d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
