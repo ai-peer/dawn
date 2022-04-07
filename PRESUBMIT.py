@@ -76,8 +76,8 @@ LINT_FILTERS = [
     "-build/include_order", "-build/include_what_you_use", "-build/namespaces",
     "-legal/copyright", "-readability/braces", "-readability/casting",
     "-readability/inheritance", "-readability/namespace", "-runtime/explicit",
-    "-runtime/indentation_namespace", "-runtime/int", "-runtime/printf",
-    "-whitespace/comments", "-whitespace/empty_if_body"
+    "-runtime/indentation_namespace", "-runtime/int", "-whitespace/comments",
+    "-whitespace/empty_if_body"
 ]
 
 
