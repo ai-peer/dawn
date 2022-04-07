@@ -213,6 +213,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c1d9220_927c7bab",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000076
+      },
+      "writtenOn": "2022-04-07T13:50:11Z",
+      "side": 1,
+      "message": "We\u0027re still working on it, but I think we\u0027re going to be able to resolve it on our end. Setting script_executable seems like the right direction, but we ran into additional problems with some of our docker images, etc... In any case, I expect it to be fully resolved today. Thank you!",
+      "parentUuid": "284db568_1c53fb7b",
+      "range": {
+        "startLine": 26,
+        "startChar": 13,
+        "endLine": 26,
+        "endChar": 27
+      },
+      "revId": "f57867264a7d661bb904df9f4404521f8e21f022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e848f09c_1dab4ea7",
