@@ -29,8 +29,7 @@ namespace sem {
 class Call;
 }  // namespace sem
 
-namespace writer {
-namespace spirv {
+namespace writer::spirv {
 
 /// ScalarConstant represents a scalar constant value
 struct ScalarConstant {
@@ -127,8 +126,7 @@ struct ScalarConstant {
   uint32_t constant_id = 0;
 };
 
-}  // namespace spirv
-}  // namespace writer
+}  // namespace writer::spirv
 }  // namespace tint
 
 namespace std {

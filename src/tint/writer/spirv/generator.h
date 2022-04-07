@@ -26,8 +26,7 @@ namespace tint {
 // Forward declarations
 class Program;
 
-namespace writer {
-namespace spirv {
+namespace writer::spirv {
 
 /// Forward declarations
 class Builder;
@@ -79,8 +78,7 @@ struct Result {
 /// @returns the resulting SPIR-V and supplementary information
 Result Generate(const Program* program, const Options& options);
 
-}  // namespace spirv
-}  // namespace writer
+}  // namespace writer::spirv
 }  // namespace tint
 
 #endif  // SRC_TINT_WRITER_SPIRV_GENERATOR_H_
