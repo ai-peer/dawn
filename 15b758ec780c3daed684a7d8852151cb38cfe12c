@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7360a41_7d16965b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-07T15:29:16Z",
+      "side": 1,
+      "message": "This allows the linter to pass when running `git cl presubmit -uf --all`.",
+      "revId": "15b758ec780c3daed684a7d8852151cb38cfe12c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
