@@ -102,6 +102,10 @@ if [ "$BUILD_SYSTEM" == "cmake" ]; then
     COMMON_CMAKE_FLAGS+=" -DTINT_DOCS_WARN_AS_ERROR=1"
     COMMON_CMAKE_FLAGS+=" -DTINT_BUILD_BENCHMARKS=1"
 
+    # Disable building of Dawn's samples.
+    # These require a number of system dependencies, via GLFW.
+    COMMON_CMAKE_FLAGS+=" -DDAWN_BUILD_SAMPLES=0"
+
     if [ "$BUILD_TOOLCHAIN" == "clang" ]; then
         using clang-10.0.0
         COMMON_CMAKE_FLAGS+=" -DTINT_BUILD_FUZZERS=1"
