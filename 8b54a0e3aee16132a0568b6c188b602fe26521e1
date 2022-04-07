@@ -16,6 +16,23 @@
       "message": "Late-submitted change brought over from Tint",
       "revId": "8b54a0e3aee16132a0568b6c188b602fe26521e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "203d9404_cd6abe8a",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3360,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-04-07T15:35:10Z",
+      "side": 1,
+      "message": "I found the rule in Vulkan 1.0\nhttps://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#_image_operations_overview \n\"The “Depth” operand of OpTypeImage is ignored.\"\n\nThose drivers have bugs, and apparently Vulkan CTS is not testing this.\n\nI filed Vulkan CTS coverage issue https://gitlab.khronos.org/Tracker/vk-gl-cts/-/issues/3603",
+      "revId": "8b54a0e3aee16132a0568b6c188b602fe26521e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
