@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0405002_59ba36f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-07T20:47:20Z",
+      "side": 1,
+      "message": "Note that this doesn\u0027t build on CQ atm because of the block on the vulkan-dep roll into Chromium, but sending it out for review since it builds and runs fine locally.",
+      "revId": "b5a0efefb36fa4ef24fec62af5f626e63f177fe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
