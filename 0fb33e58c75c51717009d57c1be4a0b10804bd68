@@ -123,6 +123,24 @@
       "parentUuid": "9cba2feb_05ee4cde",
       "revId": "0fb33e58c75c51717009d57c1be4a0b10804bd68",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4847eb40_c000d074",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-07T06:45:17Z",
+      "side": 1,
+      "message": "Maybe we could use the Chromium has in addition to Dawn\u0027s. Either way would work I think.\n\nI don\u0027t know that there would be any Chromium-specific things in the cached blob, since everything goes through Dawn\u0027s interface.",
+      "parentUuid": "451fd578_6a512c23",
+      "revId": "0fb33e58c75c51717009d57c1be4a0b10804bd68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
