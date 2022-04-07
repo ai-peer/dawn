@@ -24,9 +24,7 @@
 // Forward declarations
 namespace tint {
 class Program;
-}  // namespace tint
 
-namespace tint {
 namespace val {
 
 using EntryPointList = std::vector<std::pair<std::string, ast::PipelineStage>>;
