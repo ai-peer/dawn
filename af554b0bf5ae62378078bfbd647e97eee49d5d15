@@ -16,6 +16,29 @@
       "message": "ptal.",
       "revId": "af554b0bf5ae62378078bfbd647e97eee49d5d15",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "717382c8_f147c970",
+        "filename": "src/tint/writer/hlsl/generator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-07T09:38:13Z",
+      "side": 1,
+      "message": "```\n// Forward declarations\nnamespace tint {\nclass Program;\n}  // namespace tint\n\nnamespace tint::writer::hlsl {\n```\n\nHere and elsewhere.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 24
+      },
+      "revId": "af554b0bf5ae62378078bfbd647e97eee49d5d15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
