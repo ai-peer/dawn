@@ -23,12 +23,11 @@ namespace tint {
 
 // Forward declarations
 class CloneContext;
+
 namespace sem {
 class Type;
-}
-namespace sem {
 class Info;
-}
+}  // namespace sem
 
 namespace ast {
 
