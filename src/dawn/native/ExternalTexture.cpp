@@ -60,8 +60,8 @@ namespace dawn::native {
                 "Bi-planar external textures are disabled until the implementation is completed.");
 
             DAWN_INVALID_IF(descriptor->colorSpace != wgpu::PredefinedColorSpace::Srgb,
-                            "The specified color space (%s) is not %s.", descriptor->colorSpace,
-                            wgpu::PredefinedColorSpace::Srgb);
+                            "The specified destination color space (%s) is not %s.",
+                            descriptor->colorSpace, wgpu::PredefinedColorSpace::Srgb);
 
             DAWN_TRY(device->ValidateObject(descriptor->plane1));
             wgpu::TextureFormat plane1Format = descriptor->plane1->GetFormat().format;
@@ -147,23 +147,66 @@ namespace dawn::native {
         // is an excellent reference: chromium/src/third_party/libyuv/source/row_common.cc.
         //
         // The conversion from YUV to RGB looks like this:
-        // r = Y * 1.164          + V * vr
-        // g = Y * 1.164 - U * ug - V * vg
-        // b = Y * 1.164 + U * ub
+        // y = Y - yRangeOffset
+        // u = U - uvRangeOffset
+        // v = V - uvRangeOffset
+        // r = y * yRangeMultiplier + v * vr
+        // g = y * yRangeMultiplier - u * ug - v * vg
+        // b = y * yRangeMultiplier + u * ub
         //
-        // By changing the values of vr, vg, ub, and ug we can change the destination color space.
+        // By changing the parameter values we can use the correct YUV to RGB conversion to match
+        // the source video color space.
         ExternalTextureParams params;
         params.numPlanes = descriptor->plane1 == nullptr ? 1 : 2;
 
-        switch (descriptor->colorSpace) {
-            case wgpu::PredefinedColorSpace::Srgb:
-                // Numbers derived from ITU-R recommendation for limited range BT.709
-                params.vr = 1.793;
-                params.vg = 0.392;
-                params.ub = 0.813;
-                params.ug = 2.017;
+        switch (descriptor->videoSourceColorSpace) {
+            case wgpu::VideoSourceColorSpace::Bt601Limited:
+                params.vr = 1.596;
+                params.ug = 0.391;
+                params.vg = 0.813;
+                params.ub = 2.018;
+                params.yRangeMultiplier = 1.164;
+                params.yRangeOffset = 0.0625;
+                params.uvRangeOffset = 0.5;
                 break;
-            case wgpu::PredefinedColorSpace::Undefined:
+            case wgpu::VideoSourceColorSpace::Bt601Full:
+                params.vr = 1.40200;
+                params.ug = 0.34414;
+                params.vg = 0.71414;
+                params.ub = 1.77200;
+                params.yRangeMultiplier = 1.0;
+                params.yRangeOffset = 0.0;
+                params.uvRangeOffset = 0.0;
+                break;
+            case wgpu::VideoSourceColorSpace::Bt709Limited:
+                params.vr = 1.793;
+                params.ug = 0.213;
+                params.vg = 0.533;
+                params.ub = 2.112;
+                params.yRangeMultiplier = 1.164;
+                params.yRangeOffset = 0.0625;
+                params.uvRangeOffset = 0.5;
+                break;
+            case wgpu::VideoSourceColorSpace::Bt709Full:
+                params.vr = 1.5748;
+                params.ug = 0.18732;
+                params.vg = 0.46812;
+                params.ub = 1.8556;
+                params.yRangeMultiplier = 1.0;
+                params.yRangeOffset = 0.0;
+                params.uvRangeOffset = 0.0;
+                break;
+            case wgpu::VideoSourceColorSpace::Bt2020Limited:
+                params.vr = 1.67867;
+                params.ug = 0.187326;
+                params.vg = 0.65042;
+                params.ub = 2.14177;
+                params.yRangeMultiplier = 1.164384;
+                params.yRangeOffset = 0.0625;
+                params.uvRangeOffset = 0.5;
+                break;
+            default:
+                UNREACHABLE();
                 break;
         }
 

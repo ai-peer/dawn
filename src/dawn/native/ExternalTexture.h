@@ -29,9 +29,12 @@ namespace dawn::native {
     struct ExternalTextureParams {
         uint32_t numPlanes;
         float vr;
+        float ug;
         float vg;
         float ub;
-        float ug;
+        float yRangeOffset;
+        float yRangeMultiplier;
+        float uvRangeOffset;
     };
 
     MaybeError ValidateExternalTextureDescriptor(const DeviceBase* device,

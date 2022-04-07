@@ -112,6 +112,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -155,6 +158,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -197,6 +203,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -211,13 +220,13 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   if ((params.numPlanes == 1u)) {
     return textureSampleLevel(plane0, smp, coord, 0.0);
   }
-  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - 0.0625);
-  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - 0.5);
+  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - params.yRangeOffset);
+  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 
@@ -231,6 +240,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
   data.Add<MultiplanarExternalTexture::NewBindingPoints>(
       MultiplanarExternalTexture::BindingsMap{{{0, 1}, {{0, 2}, {0, 3}}}});
   auto got = Run<MultiplanarExternalTexture>(src, data);
+  std::cout << str(got);
   EXPECT_EQ(expect, str(got));
 }
 
@@ -253,6 +263,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -263,13 +276,13 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   if ((params.numPlanes == 1u)) {
     return textureSampleLevel(plane0, smp, coord, 0.0);
   }
-  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - 0.0625);
-  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - 0.5);
+  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - params.yRangeOffset);
+  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 
@@ -308,6 +321,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -320,13 +336,13 @@ fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord
   if ((params.numPlanes == 1u)) {
     return textureLoad(plane0, coord, 0);
   }
-  let y = (textureLoad(plane0, coord, 0).r - 0.0625);
-  let uv = (textureLoad(plane1, coord, 0).rg - 0.5);
+  let y = (textureLoad(plane0, coord, 0).r - params.yRangeOffset);
+  let uv = (textureLoad(plane1, coord, 0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 
@@ -361,6 +377,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -371,13 +390,13 @@ fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord
   if ((params.numPlanes == 1u)) {
     return textureLoad(plane0, coord, 0);
   }
-  let y = (textureLoad(plane0, coord, 0).r - 0.0625);
-  let uv = (textureLoad(plane1, coord, 0).rg - 0.5);
+  let y = (textureLoad(plane0, coord, 0).r - params.yRangeOffset);
+  let uv = (textureLoad(plane1, coord, 0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 
@@ -416,6 +435,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -430,13 +452,13 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   if ((params.numPlanes == 1u)) {
     return textureSampleLevel(plane0, smp, coord, 0.0);
   }
-  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - 0.0625);
-  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - 0.5);
+  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - params.yRangeOffset);
+  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 
@@ -444,13 +466,13 @@ fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord
   if ((params.numPlanes == 1u)) {
     return textureLoad(plane0, coord, 0);
   }
-  let y = (textureLoad(plane0, coord, 0).r - 0.0625);
-  let uv = (textureLoad(plane1, coord, 0).rg - 0.5);
+  let y = (textureLoad(plane0, coord, 0).r - params.yRangeOffset);
+  let uv = (textureLoad(plane1, coord, 0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 
@@ -487,6 +509,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -497,13 +522,13 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   if ((params.numPlanes == 1u)) {
     return textureSampleLevel(plane0, smp, coord, 0.0);
   }
-  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - 0.0625);
-  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - 0.5);
+  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - params.yRangeOffset);
+  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 
@@ -511,13 +536,13 @@ fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord
   if ((params.numPlanes == 1u)) {
     return textureLoad(plane0, coord, 0);
   }
-  let y = (textureLoad(plane0, coord, 0).r - 0.0625);
-  let uv = (textureLoad(plane1, coord, 0).rg - 0.5);
+  let y = (textureLoad(plane0, coord, 0).r - params.yRangeOffset);
+  let uv = (textureLoad(plane1, coord, 0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 
@@ -560,6 +585,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(4) var ext_tex_plane_1 : texture_2d<f32>;
@@ -592,13 +620,13 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   if ((params.numPlanes == 1u)) {
     return textureSampleLevel(plane0, smp, coord, 0.0);
   }
-  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - 0.0625);
-  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - 0.5);
+  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - params.yRangeOffset);
+  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 
@@ -644,6 +672,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -654,13 +685,13 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   if ((params.numPlanes == 1u)) {
     return textureSampleLevel(plane0, smp, coord, 0.0);
   }
-  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - 0.0625);
-  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - 0.5);
+  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - params.yRangeOffset);
+  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 
@@ -711,6 +742,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -726,13 +760,13 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   if ((params.numPlanes == 1u)) {
     return textureSampleLevel(plane0, smp, coord, 0.0);
   }
-  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - 0.0625);
-  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - 0.5);
+  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - params.yRangeOffset);
+  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 
@@ -777,6 +811,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -787,13 +824,13 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   if ((params.numPlanes == 1u)) {
     return textureSampleLevel(plane0, smp, coord, 0.0);
   }
-  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - 0.0625);
-  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - 0.5);
+  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - params.yRangeOffset);
+  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 
@@ -845,6 +882,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(3) var ext_tex_plane_1 : texture_2d<f32>;
@@ -859,13 +899,13 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   if ((params.numPlanes == 1u)) {
     return textureSampleLevel(plane0, smp, coord, 0.0);
   }
-  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - 0.0625);
-  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - 0.5);
+  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - params.yRangeOffset);
+  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 
@@ -923,6 +963,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(3) var ext_tex_plane_1 : texture_2d<f32>;
@@ -942,13 +985,13 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   if ((params.numPlanes == 1u)) {
     return textureSampleLevel(plane0, smp, coord, 0.0);
   }
-  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - 0.0625);
-  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - 0.5);
+  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - params.yRangeOffset);
+  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 
@@ -1001,6 +1044,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1011,13 +1057,13 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   if ((params.numPlanes == 1u)) {
     return textureSampleLevel(plane0, smp, coord, 0.0);
   }
-  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - 0.0625);
-  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - 0.5);
+  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - params.yRangeOffset);
+  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 
@@ -1076,6 +1122,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1086,13 +1135,13 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   if ((params.numPlanes == 1u)) {
     return textureSampleLevel(plane0, smp, coord, 0.0);
   }
-  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - 0.0625);
-  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - 0.5);
+  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - params.yRangeOffset);
+  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 
@@ -1139,6 +1188,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 fn f(ext_tex : texture_2d<f32>, ext_tex_plane_1 : texture_2d<f32>, ext_tex_params : ExternalTextureParams) -> vec2<i32> {
@@ -1178,6 +1230,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1190,13 +1245,13 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   if ((params.numPlanes == 1u)) {
     return textureSampleLevel(plane0, smp, coord, 0.0);
   }
-  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - 0.0625);
-  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - 0.5);
+  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - params.yRangeOffset);
+  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 
@@ -1247,6 +1302,9 @@ struct ExternalTextureParams {
   ug : f32,
   vg : f32,
   ub : f32,
+  yRangeOffset : f32,
+  yRangeMultiplier : f32,
+  uvRangeOffset : f32,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1262,13 +1320,13 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   if ((params.numPlanes == 1u)) {
     return textureSampleLevel(plane0, smp, coord, 0.0);
   }
-  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - 0.0625);
-  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - 0.5);
+  let y = (textureSampleLevel(plane0, smp, coord, 0.0).r - params.yRangeOffset);
+  let uv = (textureSampleLevel(plane1, smp, coord, 0.0).rg - params.uvRangeOffset);
   let u = uv.x;
   let v = uv.y;
-  let r = ((1.164000034 * y) + (params.vr * v));
-  let g = (((1.164000034 * y) - (params.ug * u)) - (params.vg * v));
-  let b = ((1.164000034 * y) + (params.ub * u));
+  let r = ((params.yRangeMultiplier * y) + (params.vr * v));
+  let g = (((params.yRangeMultiplier * y) - (params.ug * u)) - (params.vg * v));
+  let b = ((params.yRangeMultiplier * y) + (params.ub * u));
   return vec4<f32>(r, g, b, 1.0);
 }
 

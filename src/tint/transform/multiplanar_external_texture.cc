@@ -239,9 +239,14 @@ struct MultiplanarExternalTexture::State {
   /// Creates the ExternalTextureParams struct.
   void createExtTexParamsStruct() {
     ast::StructMemberList member_list = {
-        b.Member("numPlanes", b.ty.u32()), b.Member("vr", b.ty.f32()),
-        b.Member("ug", b.ty.f32()), b.Member("vg", b.ty.f32()),
-        b.Member("ub", b.ty.f32())};
+        b.Member("numPlanes", b.ty.u32()),
+        b.Member("vr", b.ty.f32()),
+        b.Member("ug", b.ty.f32()),
+        b.Member("vg", b.ty.f32()),
+        b.Member("ub", b.ty.f32()),
+        b.Member("yRangeOffset", b.ty.f32()),
+        b.Member("yRangeMultiplier", b.ty.f32()),
+        b.Member("uvRangeOffset", b.ty.f32())};
 
     params_struct_sym = b.Symbols().New("ExternalTextureParams");
 
@@ -287,30 +292,35 @@ struct MultiplanarExternalTexture::State {
                  ast::BinaryOp::kEqual, b.MemberAccessor("params", "numPlanes"),
                  b.Expr(1u)),
              b.Block(b.Return(single_plane_call))),
-        // let y = plane0Call.r - 0.0625;
+        // let y = plane0Call.r - params.yRangeOffset;
         b.Decl(b.Const("y", nullptr,
-                       b.Sub(b.MemberAccessor(plane_0_call, "r"), 0.0625f))),
-        // let uv = plane1Call.rg - 0.5;
+                       b.Sub(b.MemberAccessor(plane_0_call, "r"),
+                             b.MemberAccessor("params", "yRangeOffset")))),
+        // let uv = plane1Call.rg - params.uvRangeOffset;
         b.Decl(b.Const("uv", nullptr,
-                       b.Sub(b.MemberAccessor(plane_1_call, "rg"), 0.5f))),
+                       b.Sub(b.MemberAccessor(plane_1_call, "rg"),
+                             b.MemberAccessor("params", "uvRangeOffset")))),
         // let u = uv.x;
         b.Decl(b.Const("u", nullptr, b.MemberAccessor("uv", "x"))),
         // let v = uv.y;
         b.Decl(b.Const("v", nullptr, b.MemberAccessor("uv", "y"))),
-        // let r = 1.164 * y + params.vr * v;
-        b.Decl(b.Const("r", nullptr,
-                       b.Add(b.Mul(1.164f, "y"),
-                             b.Mul(b.MemberAccessor("params", "vr"), "v")))),
-        // let g = 1.164 * y - params.ug * u - params.vg * v;
-        b.Decl(
-            b.Const("g", nullptr,
-                    b.Sub(b.Sub(b.Mul(1.164f, "y"),
-                                b.Mul(b.MemberAccessor("params", "ug"), "u")),
-                          b.Mul(b.MemberAccessor("params", "vg"), "v")))),
-        // let b = 1.164 * y + params.ub * u;
-        b.Decl(b.Const("b", nullptr,
-                       b.Add(b.Mul(1.164f, "y"),
-                             b.Mul(b.MemberAccessor("params", "ub"), "u")))),
+        // let r = params.yRangeMultiplier * y + params.vr * v;
+        b.Decl(b.Const(
+            "r", nullptr,
+            b.Add(b.Mul(b.MemberAccessor("params", "yRangeMultiplier"), "y"),
+                  b.Mul(b.MemberAccessor("params", "vr"), "v")))),
+        // let g = params.yRangeMultiplier * y - params.ug * u - params.vg * v;
+        b.Decl(b.Const(
+            "g", nullptr,
+            b.Sub(b.Sub(b.Mul(b.MemberAccessor("params", "yRangeMultiplier"),
+                              "y"),
+                        b.Mul(b.MemberAccessor("params", "ug"), "u")),
+                  b.Mul(b.MemberAccessor("params", "vg"), "v")))),
+        // let b = params.yRangeMultiplier * y + params.ub * u;
+        b.Decl(b.Const(
+            "b", nullptr,
+            b.Add(b.Mul(b.MemberAccessor("params", "yRangeMultiplier"), "y"),
+                  b.Mul(b.MemberAccessor("params", "ub"), "u")))),
         // return vec4<f32>(r, g, b, 1.0);
         b.Return(b.vec4<f32>("r", "g", "b", 1.0f)),
     };

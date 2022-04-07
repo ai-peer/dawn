@@ -1323,6 +1323,7 @@
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
             {"name": "plane 0", "type": "texture view"},
             {"name": "plane 1", "type": "texture view", "optional": true},
+            {"name": "video source color space", "type": "video source color space", "default": "bt709 limited"},
             {"name": "color space", "type": "predefined color space", "default": "srgb"}
         ]
     },
@@ -1540,6 +1541,17 @@
         "values": [
             {"value": 0, "name": "undefined", "jsrepr": "undefined"},
             {"value": 1, "name": "srgb"}
+        ]
+    },
+    "video source color space": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "undefined", "jsrepr": "undefined"},
+            {"value": 1, "name": "bt601 limited"},
+            {"value": 2, "name": "bt601 full"},
+            {"value": 3, "name": "bt709 limited"},
+            {"value": 4, "name": "bt709 full"},
+            {"value": 5, "name": "bt2020 limited"}
         ]
     },
     "present mode": {
