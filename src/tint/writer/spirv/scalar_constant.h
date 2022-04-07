@@ -22,14 +22,12 @@
 
 #include "src/tint/utils/hash.h"
 
-namespace tint {
-
 // Forward declarations
-namespace sem {
+namespace tint::sem {
 class Call;
-}  // namespace sem
+}  // namespace tint::sem
 
-namespace writer::spirv {
+namespace tint::writer::spirv {
 
 /// ScalarConstant represents a scalar constant value
 struct ScalarConstant {
@@ -126,8 +124,7 @@ struct ScalarConstant {
   uint32_t constant_id = 0;
 };
 
-}  // namespace writer::spirv
-}  // namespace tint
+}  // namespace tint::writer::spirv
 
 namespace std {
 

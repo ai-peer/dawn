@@ -40,17 +40,16 @@
 #include "src/tint/writer/spirv/function.h"
 #include "src/tint/writer/spirv/scalar_constant.h"
 
-namespace tint {
 
 // Forward declarations
-namespace sem {
+namespace tint::sem {
 class Call;
 class Reference;
 class TypeConstructor;
 class TypeConversion;
-}  // namespace sem
+}  // namespace tint::sem
 
-namespace writer::spirv {
+namespace tint::writer::spirv {
 
 /// The result of sanitizing a program for generation.
 struct SanitizedResult {
@@ -657,7 +656,6 @@ class Builder {
   std::vector<Backedge> backedge_stack_;
 };
 
-}  // namespace writer::spirv
-}  // namespace tint
+}  // namespace tint::writer::spirv
 
 #endif  // SRC_TINT_WRITER_SPIRV_BUILDER_H_
