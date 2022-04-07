@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a578bea2_2a1b9d63",
+        "filename": "src/tint/writer/hlsl/generator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-07T13:08:39Z",
+      "side": 1,
+      "message": "Sorry, I clearly haven\u0027t described the style particularly clearly (I need to write it up).\nIdeally this would be:\n\n```\n// Forward declarations\nnamespace tint {\nclass Program;\n}  // namespace tint\nnamespace tint::writer::hlsl {\nclass GeneratorImpl;\n}  // namespace tint::writer::hlsl\n```\n\nAnyway, this is better than it was. Let\u0027s land. I can nitpick about this later.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 20
+      },
+      "revId": "6b2ea28a10d567a643373c2136cd41e7ee6b9d35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
