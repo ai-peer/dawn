@@ -22,7 +22,7 @@
 namespace dawn::native {
 
     AdapterBase::AdapterBase(InstanceBase* instance, wgpu::BackendType backend)
-        : mInstance(instance), mBackend(backend) {
+        : mInstance(instance), mBackend(backend), mBlobCache(instance) {
         mSupportedFeatures.EnableFeature(Feature::DawnNative);
         mSupportedFeatures.EnableFeature(Feature::DawnInternalUsages);
     }
@@ -143,6 +143,10 @@ namespace dawn::native {
 
     InstanceBase* AdapterBase::GetInstance() const {
         return mInstance;
+    }
+
+    BlobCache& AdapterBase::GetBlobCache() {
+        return mBlobCache;
     }
 
     FeaturesSet AdapterBase::GetSupportedFeatures() const {
