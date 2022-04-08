@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f567906_898e243d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-08T22:15:34Z",
+      "side": 1,
+      "message": "PTAL at this approach. It\u0027s pretty close but I wanted to be sure we can agree on this approach before finishing the tests.\n\nThe alternative here is what Corentin mentioned to me in our last meeting - we *could* pass the conversion constants as part of the GPUExternalTextureDescriptor interface, which I chose not to do here.\n\nIf we wanted to, it looks like in Chromium we\u0027d need to convert the video frame color space enum to a skia colorspace enum, grab the corresponding conversion matrix from SkYUVMath.cpp [1], extract the 4 relevant values and pass them to Dawn (along with a bool denoting whether the color space is full or limited range). If we did this we also might consider changing the injected shader to instead take a 3x3 matrix (as  seen in SkYUVMath) instead of 4 floats like I currently pass. Note that for some reason SkYUVMath doesn\u0027t include BT.601 Full, which had been recommended to me to support.\n\nWe\u0027ll need to have more constants later for the transfer functions and gamut conversion, but I\u0027m not yet sure we\u0027ll be able to pass those from chromium either. These matrices in Skia aren\u0027t adequate for all the color spaces we need - but I can find all the relevant matrices being created in ui/gfx [2] - it appears they get created at runtime however.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/skia/src/core/SkYUVMath.cpp\n[2] https://source.chromium.org/chromium/chromium/src/+/main:ui/gfx/color_space.cc;l\u003d803",
+      "revId": "c3caa48251fe2eca3fa2b5952ccd9c81e4dc78fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
