@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fd215cc_e136bc5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-08T19:48:41Z",
+      "side": 1,
+      "message": "Thoughts? This makes all the headers match the usual Chromium style and allows the lint check to be enabled.",
+      "revId": "fc4f681cd73b48c6770d7d1a0fc277fc518f7165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
