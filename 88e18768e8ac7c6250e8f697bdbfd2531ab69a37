@@ -34,6 +34,24 @@
       "parentUuid": "722a33e2_a97d691e",
       "revId": "88e18768e8ac7c6250e8f697bdbfd2531ab69a37",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aee57e7_259609a9",
+        "filename": "include/tint/tint.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-08T18:35:00Z",
+      "side": 1,
+      "message": "Fixed. Added .clang-format to `include/tint` as discussed.",
+      "parentUuid": "2ce5313d_2d7f3a57",
+      "revId": "88e18768e8ac7c6250e8f697bdbfd2531ab69a37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
