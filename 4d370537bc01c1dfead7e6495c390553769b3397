@@ -16,6 +16,57 @@
       "message": "ptal.",
       "revId": "4d370537bc01c1dfead7e6495c390553769b3397",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dcc3d25_9453199a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-08T12:24:29Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4d370537bc01c1dfead7e6495c390553769b3397",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "401d6853_fa729c92",
+        "filename": "src/dawn/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1693,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-08T12:24:29Z",
+      "side": 1,
+      "message": "nit: these other tabs around this comment should likely be fixed even is the lint passes.",
+      "revId": "4d370537bc01c1dfead7e6495c390553769b3397",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97bfdaa9_c01030f3",
+        "filename": "src/dawn/tests/unittests/validation/TextureSubresourceTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-08T12:24:29Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "4d370537bc01c1dfead7e6495c390553769b3397",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
