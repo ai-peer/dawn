@@ -19,11 +19,13 @@
 
 #include "dawn/common/RefCounted.h"
 #include "dawn/common/ityp_span.h"
+#include "dawn/native/BlobCache.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Features.h"
 #include "dawn/native/Limits.h"
 #include "dawn/native/dawn_platform.h"
 
+#include <memory>
 #include <string>
 
 namespace dawn::native {

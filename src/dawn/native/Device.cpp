@@ -20,6 +20,7 @@
 #include "dawn/native/AttachmentState.h"
 #include "dawn/native/BindGroup.h"
 #include "dawn/native/BindGroupLayout.h"
+#include "dawn/native/BlobCache.h"
 #include "dawn/native/Buffer.h"
 #include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/CommandBuffer.h"
@@ -575,6 +576,10 @@ namespace dawn::native {
     PersistentCache* DeviceBase::GetPersistentCache() {
         ASSERT(mPersistentCache.get() != nullptr);
         return mPersistentCache.get();
+    }
+
+    BlobCache* DeviceBase::GetBlobCache() {
+        return mInstance->GetBlobCache();
     }
 
     MaybeError DeviceBase::ValidateObject(const ApiObjectBase* object) const {
