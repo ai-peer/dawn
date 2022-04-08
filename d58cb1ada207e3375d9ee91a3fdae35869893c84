@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b2559e7_28ab2bab",
+        "filename": "generator/templates/dawn/native/CacheKey.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-08T22:36:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9328d0e_89322054",
+      "revId": "d58cb1ada207e3375d9ee91a3fdae35869893c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb9e2fe8_a2bb2fa9",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-04-08T00:52:19Z",
       "side": 1,
       "message": "do we need call/endcall? or can it juts be\n\n`{{render_cache_key_serializer(\"adapter properties\")}}`\nor\n`{% render_cache_key_serializer(\"adapter properties\") %}`\n?",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 13
+      },
+      "revId": "d58cb1ada207e3375d9ee91a3fdae35869893c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6673260b_1f0dc5be",
+        "filename": "generator/templates/dawn/native/CacheKey.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-08T22:36:50Z",
+      "side": 1,
+      "message": "Can\u0027t because of the `{{ caller() }}` in the macro. I could remove it now since there\u0027s no custom serializing in there anymore (and just do the `{{render_cache_key_serializer(\"adapter properties\")}}` but I feel like it could be a useful feature (in case we need to do any other descriptor serializations), so I want to leave it in.",
+      "parentUuid": "bb9e2fe8_a2bb2fa9",
       "range": {
         "startLine": 62,
         "startChar": 0,
@@ -58,6 +100,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6875ea2_fa035abe",
+        "filename": "generator/templates/dawn/native/CacheKey.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-08T22:36:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74e9a665_0c656f2e",
+      "revId": "d58cb1ada207e3375d9ee91a3fdae35869893c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4cfcdbe_7d237c63",
@@ -71,6 +131,24 @@
       "writtenOn": "2022-04-07T22:58:43Z",
       "side": 1,
       "message": "could we use mCacheIsolationKey directly? or alternatively only use the descriptor.\n\nwe probably don\u0027t need both mCacheIsolationKey and mDeviceCacheKey",
+      "revId": "d58cb1ada207e3375d9ee91a3fdae35869893c84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02a2bb5f_e6c6415d",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-08T22:36:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4cfcdbe_7d237c63",
       "revId": "d58cb1ada207e3375d9ee91a3fdae35869893c84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
