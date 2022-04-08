@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c4653137_4db8c2c5",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-08T12:09:59Z",
+      "side": 1,
+      "message": "Gotcha, can you comment that somewhere to explain the format we chose?",
+      "parentUuid": "b30777b5_cdc1c1e2",
+      "revId": "a7dda709b9cd06e9ebd79d5ac6f1d10a39dc72b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "650cd69b_15b1a36f",
         "filename": "tools/src/cts/result/result.go",
         "patchSetId": 1
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "`token()` steals the next token from the line, leaving the remainder in `line`.",
       "parentUuid": "650cd69b_15b1a36f",
+      "revId": "a7dda709b9cd06e9ebd79d5ac6f1d10a39dc72b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d962fd21_d10ca4ee",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-08T12:09:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8e740df9_6f855cbf",
       "revId": "a7dda709b9cd06e9ebd79d5ac6f1d10a39dc72b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -136,6 +172,24 @@
       "side": 1,
       "message": "Yes",
       "parentUuid": "edd8c3ed_02892fc4",
+      "revId": "a7dda709b9cd06e9ebd79d5ac6f1d10a39dc72b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "693c1ebe_7548cda3",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-08T12:09:59Z",
+      "side": 1,
+      "message": "Then I think there\u0027s an issue because TagsToString might return a different order for different tags no?",
+      "parentUuid": "e478c69c_205f21bc",
       "revId": "a7dda709b9cd06e9ebd79d5ac6f1d10a39dc72b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -224,6 +278,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2dd3b3f_44f62878",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-08T12:09:59Z",
+      "side": 1,
+      "message": "ditto with the sort",
+      "parentUuid": "37bcbc17_2d7e7aca",
+      "revId": "a7dda709b9cd06e9ebd79d5ac6f1d10a39dc72b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b9fd6a8a_411c30a2",
         "filename": "tools/src/cts/result/tags.go",
         "patchSetId": 1
@@ -253,6 +325,24 @@
       "side": 1,
       "message": "Ack. I don\u0027t really have any strong preferences, but I\u0027m slightly cautious of a comma being used in the tags. I\u0027ve learnt to expect nothing with this stuff.",
       "parentUuid": "b9fd6a8a_411c30a2",
+      "revId": "a7dda709b9cd06e9ebd79d5ac6f1d10a39dc72b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01da191f_173118f7",
+        "filename": "tools/src/cts/result/tags.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-08T12:09:59Z",
+      "side": 1,
+      "message": "Where is the format for these results used? I don\u0027t think it\u0027s the expectation file no?",
+      "parentUuid": "9c0c130d_cb2ecc50",
       "revId": "a7dda709b9cd06e9ebd79d5ac6f1d10a39dc72b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
