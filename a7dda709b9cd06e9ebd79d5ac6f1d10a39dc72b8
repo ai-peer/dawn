@@ -345,6 +345,24 @@
       "parentUuid": "9c0c130d_cb2ecc50",
       "revId": "a7dda709b9cd06e9ebd79d5ac6f1d10a39dc72b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dad12824_a433351f",
+        "filename": "tools/src/cts/result/tags.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-08T12:36:48Z",
+      "side": 1,
+      "message": "No, it\u0027s currently only used by new tooling (mostly for debugging stuff), and for caching of fetches from ResultsDB.",
+      "parentUuid": "01da191f_173118f7",
+      "revId": "a7dda709b9cd06e9ebd79d5ac6f1d10a39dc72b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
