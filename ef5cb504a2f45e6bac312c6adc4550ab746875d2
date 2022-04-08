@@ -16,6 +16,29 @@
       "message": "Hi Ben and David,\n\nI\u0027ve fixed the issue that causes the previous failures on the bots. PTAL, thanks!",
       "revId": "ef5cb504a2f45e6bac312c6adc4550ab746875d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "121908d7_3c156162",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3833,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-08T08:31:06Z",
+      "side": 1,
+      "message": "For future reference, tint has a `Switch()` which is faster at type dispatch than multiple `if (...As...) {} else` statements.\nThis is fine to land though.",
+      "range": {
+        "startLine": 3826,
+        "startChar": 0,
+        "endLine": 3833,
+        "endChar": 3
+      },
+      "revId": "ef5cb504a2f45e6bac312c6adc4550ab746875d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
