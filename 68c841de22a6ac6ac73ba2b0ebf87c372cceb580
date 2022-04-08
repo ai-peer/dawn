@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de40524d_1ce8f151",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-08T20:52:29Z",
+      "side": 1,
+      "message": "Waiting for Kokoro and CQ to pass, but in the meantime, Corentin can PTAL?",
+      "revId": "68c841de22a6ac6ac73ba2b0ebf87c372cceb580",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
