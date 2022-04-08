@@ -523,7 +523,7 @@ func (j job) run(wd, exe string, fxc, fxcAndDxc bool, dxcPath, xcrunPath string,
 			skipped = true
 		}
 
-		expected = strings.ReplaceAll(expected, "\r\n", "\n")
+		expected = normalizeNewLines(expected)
 
 		file, err := filepath.Rel(wd, j.file)
 		if err != nil {
@@ -587,7 +587,7 @@ func (j job) run(wd, exe string, fxc, fxcAndDxc bool, dxcPath, xcrunPath string,
 			ok, out = invoke(wd, exe, args...)
 		}
 		timeTaken := time.Since(start)
-		out = strings.ReplaceAll(out, "\r\n", "\n")
+		out = normalizeNewLines(out)
 		matched := expected == "" || expected == out
 
 		canEmitPassExpectationFile := true
@@ -768,7 +768,7 @@ func parseFlags(path string) []string {
 	if err != nil {
 		return nil
 	}
-	header := strings.SplitN(string(content), "\n", 1)[0]
+	header := strings.SplitN(normalizeNewLines(string(content)), "\n", 1)[0]
 	m := reFlags.FindStringSubmatch(header)
 	if len(m) != 2 {
 		return nil
@@ -793,4 +793,8 @@ func printDuration(d time.Duration) string {
 		fmt.Fprintf(sb, "%ds", sec)
 	}
 	return sb.String()
+}
+
+func normalizeNewLines(s string) string {
+	return strings.ReplaceAll(s, "\r\n", "\n")
 }
