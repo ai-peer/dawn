@@ -18,11 +18,19 @@
 #include "dawn/native/Device.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/ValidationUtils_autogen.h"
+#include "dawn/platform/DawnPlatform.h"
 
 namespace dawn::native {
 
     AdapterBase::AdapterBase(InstanceBase* instance, wgpu::BackendType backend)
         : mInstance(instance), mBackend(backend) {
+        // TODO(dawn:549): Re-evaluate fingerprint since it might be possible to just rely on key.
+        mBlobCache = std::make_unique<BlobCache>(
+            instance != nullptr && instance->GetPlatform() != nullptr
+                ? instance->GetPlatform()->GetCachingInterface(/*fingerprint*/ nullptr,
+                                                               /*fingerprintSize*/ 0)
+                : nullptr);
+
         mSupportedFeatures.EnableFeature(Feature::DawnNative);
         mSupportedFeatures.EnableFeature(Feature::DawnInternalUsages);
     }
@@ -143,6 +151,10 @@ namespace dawn::native {
 
     InstanceBase* AdapterBase::GetInstance() const {
         return mInstance;
+    }
+
+    BlobCache* AdapterBase::GetBlobCache() {
+        return mBlobCache.get();
     }
 
     FeaturesSet AdapterBase::GetSupportedFeatures() const {
