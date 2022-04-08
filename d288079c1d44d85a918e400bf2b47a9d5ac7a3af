@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e122b772_8f83e359",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-08T07:25:50Z",
+      "side": 1,
+      "message": "A lot of it similar and there should only be tiny differences., can we have a contributing.md that\u0027s top level and gives useful contributions while pointing out the differences in the projects.",
+      "revId": "d288079c1d44d85a918e400bf2b47a9d5ac7a3af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
