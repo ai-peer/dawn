@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9abc44b_d0e152f5",
+        "filename": "src/tint/writer/spirv/builder_entry_point_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-08T18:03:06Z",
+      "side": 1,
+      "message": "The reason spir-v output changed is because of a difference in default values for spirv that was there before.\n\nFormerly, in src/tint/writer/spirv/builder.h, the Sanitize would set `emit_vertex_point_size` to false by default:\n\n```\nSanitizedResult Sanitize(const Program* program,\n                         bool emit_vertex_point_size \u003d false,\n                         bool disable_workgroup_init \u003d false,\n                         bool generate_external_texture_bindings \u003d false);\n```\n\nBut the Options struct for spir-v sets this to true by default (in `/src/dawn/src/tint/writer/spirv/generator.h`):\n\n```\nstruct Options {\n  /// Set to `true` to generate a PointSize builtin and have it set to 1.0\n  /// from all vertex shaders in the module.\n  bool emit_vertex_point_size \u003d true;\n...\n```\n\nIn my change, when we call Sanitize(), we pass it Options, and in `src/tint/writer/spirv/test_helper.h`, I modified SanitizeAndBuild to take an Options struct, just like the other test helpers:\n\n```\nspirv::Builder\u0026 SanitizeAndBuild(const Options\u0026 options \u003d {}) {\n```\n\nSo, now when we run the tests, we (correctly) run the sanitizer transform with the proper default value from Options. This change removes those defaulted args that were out of sync with the same ones in Options - yet another reason to do this change.",
+      "revId": "1b88508cd9abbe2bcd78e36cfeed522605a5f621",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
