@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fa6ab9b_b0901591",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-08T12:22:06Z",
+      "side": 1,
+      "message": "PTAL. The other possible fix for this is content for the `if` body. Please let me know if this isn\u0027t the right solution here.",
+      "revId": "0506345897298ad17f56b49c0ca0916867965e90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
