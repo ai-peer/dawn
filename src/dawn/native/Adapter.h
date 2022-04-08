@@ -19,11 +19,13 @@
 
 #include "dawn/common/RefCounted.h"
 #include "dawn/common/ityp_span.h"
+#include "dawn/native/BlobCache.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Features.h"
 #include "dawn/native/Limits.h"
 #include "dawn/native/dawn_platform.h"
 
+#include <memory>
 #include <string>
 
 namespace dawn::native {
@@ -51,6 +53,8 @@ namespace dawn::native {
         uint32_t GetDeviceId() const;
         wgpu::BackendType GetBackendType() const;
         InstanceBase* GetInstance() const;
+
+        BlobCache* GetBlobCache();
 
         void ResetInternalDeviceForTesting();
 
@@ -92,6 +96,7 @@ namespace dawn::native {
         wgpu::BackendType mBackend;
         CombinedLimits mLimits;
         bool mUseTieredLimits = false;
+        std::unique_ptr<BlobCache> mBlobCache;
     };
 
 }  // namespace dawn::native
