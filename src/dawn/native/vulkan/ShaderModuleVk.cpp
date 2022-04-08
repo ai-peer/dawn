@@ -201,6 +201,7 @@ namespace dawn::native::vulkan {
                                                    transformInputs, nullptr, nullptr));
         }
 
+#if TINT_BUILD_SPV_WRITER
         tint::writer::spirv::Options options;
         options.emit_vertex_point_size = true;
         options.disable_workgroup_init = GetDevice()->IsToggleEnabled(Toggle::DisableWorkgroupInit);
@@ -245,6 +246,9 @@ namespace dawn::native::vulkan {
                      reinterpret_cast<uint64_t&>(newHandle), "Dawn_ShaderModule", GetLabel());
 
         return newHandle;
+#else
+        return DAWN_INTERNAL_ERROR("TINT_BUILD_SPV_WRITER is not defined.");
+#endif
     }
 
 }  // namespace dawn::native::vulkan
