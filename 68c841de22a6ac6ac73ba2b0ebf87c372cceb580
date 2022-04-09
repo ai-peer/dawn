@@ -16,6 +16,23 @@
       "message": "Waiting for Kokoro and CQ to pass, but in the meantime, Corentin can PTAL?",
       "revId": "68c841de22a6ac6ac73ba2b0ebf87c372cceb580",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad31c8a5_bcee7454",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-09T17:40:12Z",
+      "side": 1,
+      "message": "This works, but I had a thought that maybe it doesn\u0027t make sense for Dawn to ever be built with these defines disabled. The Tint library needs to support it, but Dawn probably would never disable these flags. So an alternative fix here would be to change our Kokoro script to only built Tint targets when disabling reader/writer flags.",
+      "revId": "68c841de22a6ac6ac73ba2b0ebf87c372cceb580",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
