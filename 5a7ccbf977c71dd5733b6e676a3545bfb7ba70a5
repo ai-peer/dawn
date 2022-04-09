@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed8cf465_5fb4efa1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-09T14:00:42Z",
+      "side": 1,
+      "message": "PTAL. The build finds the napi.h file for me, but then errors on a missing define around exceptions (which I also get without the patch).\n\n```\n/Users/dj2/Development/dawn/third_party/node-addon-api/napi.h:32:6: error: Exception support not detected.       Define either NAPI_CPP_EXCEPTIONS or NAPI_DISABLE_CPP_EXCEPTIONS.\n    #error Exception support not detected. \\\n     ^\n```",
+      "revId": "5a7ccbf977c71dd5733b6e676a3545bfb7ba70a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
