@@ -16,6 +16,23 @@
       "message": "ptal",
       "revId": "b519ae3015b5cf9ac3549f9f89e5cf64dde3584f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d571c346_beb3b4fd",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-10T21:17:57Z",
+      "side": 1,
+      "message": "Instead of duplicating the CPPLINT.cfg configuration in many places, WDYT of filtering the affected files inside the PRESUBMIT to run CPPLINT with two different configs for Dawn and Tint? It would also work as an allow-list instead of adding skips in places.\n\nIt would mostly be include/dawn(/webgpu?) and src/dawn on one side and include/tint and src/tint on the other. Samples should be moved in src/dawn/samples soon. (I can do it.)",
+      "revId": "b519ae3015b5cf9ac3549f9f89e5cf64dde3584f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
