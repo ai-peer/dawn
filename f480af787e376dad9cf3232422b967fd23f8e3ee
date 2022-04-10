@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72707f32_6bc41a0c",
+        "filename": "src/dawn/utils/SystemUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-10T21:40:29Z",
+      "side": 1,
+      "message": "Why does the lint not like just using SystemUtils here? Same for TextureUtils.",
+      "revId": "f480af787e376dad9cf3232422b967fd23f8e3ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
