@@ -33,6 +33,23 @@
       "message": "This works, but I had a thought that maybe it doesn\u0027t make sense for Dawn to ever be built with these defines disabled. The Tint library needs to support it, but Dawn probably would never disable these flags. So an alternative fix here would be to change our Kokoro script to only built Tint targets when disabling reader/writer flags.",
       "revId": "68c841de22a6ac6ac73ba2b0ebf87c372cceb580",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95183f9f_b7204ef8",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1024,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-10T21:42:20Z",
+      "side": 1,
+      "message": "nit: This is a constant string, so we don\u0027t really need the ostringstream and can just pass it directly in EmitLog.",
+      "revId": "68c841de22a6ac6ac73ba2b0ebf87c372cceb580",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
