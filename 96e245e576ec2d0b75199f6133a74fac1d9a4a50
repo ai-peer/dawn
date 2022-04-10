@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "894989b0_498b977d",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-10T21:24:05Z",
+      "side": 1,
+      "message": "IIRC there\u0027s a way to make something similar to GN\u0027s configs in CMake but I can\u0027t find it again, do you remember what it is? Also any way to not have to add the compile options manually for each library? Tint CMakeLists didn\u0027t need a change.",
+      "revId": "96e245e576ec2d0b75199f6133a74fac1d9a4a50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
