@@ -16,6 +16,24 @@
       "message": "PTAL. The build finds the napi.h file for me, but then errors on a missing define around exceptions (which I also get without the patch).\n\n```\n/Users/dj2/Development/dawn/third_party/node-addon-api/napi.h:32:6: error: Exception support not detected.       Define either NAPI_CPP_EXCEPTIONS or NAPI_DISABLE_CPP_EXCEPTIONS.\n    #error Exception support not detected. \\\n     ^\n```",
       "revId": "5a7ccbf977c71dd5733b6e676a3545bfb7ba70a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "948f1127_a03ff7e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-11T09:24:50Z",
+      "side": 1,
+      "message": "Argh, this is caused by my change on Friday:\nhttps://dawn-review.googlesource.com/c/dawn/+/86143/2/CMakeLists.txt#169\n\nThe CMake build now disabled exceptions, but we\u0027re not explicitly telling napi that we\u0027re not available. I\u0027ve created a change based on this that fixes this by wrapping the napi header with a stub that defines `NAPI_DISABLE_CPP_EXCEPTIONS`, then includes `napi.h`:\n\nhttps://dawn-review.googlesource.com/c/dawn/+/86301",
+      "parentUuid": "ed8cf465_5fb4efa1",
+      "revId": "5a7ccbf977c71dd5733b6e676a3545bfb7ba70a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
