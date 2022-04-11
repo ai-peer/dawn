@@ -612,26 +612,13 @@ namespace dawn::native::opengl {
     void TextureView::BindToFramebuffer(GLenum target, GLenum attachment) {
         const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
 
-        GLuint handle, textarget, mipLevel, arrayLayer;
-        if (mOwnsHandle) {
-            // Use our own texture handle and target which points to a subset of the texture's
-            // subresources.
-            handle = GetHandle();
-            textarget = GetGLTarget();
-            mipLevel = 0;
-            arrayLayer = 0;
-        } else {
-            // Use the texture's handle and target, with the view's base mip level and base array
-            // layer.
-            handle = ToBackend(GetTexture())->GetHandle();
-            textarget = ToBackend(GetTexture())->GetGLTarget();
-            mipLevel = GetBaseMipLevel();
-            arrayLayer = GetBaseArrayLayer();
-        }
+        // Use the texture's handle and target, and the view's base mip level and base array layer
+        GLuint handle = ToBackend(GetTexture())->GetHandle();
+        GLuint textarget = ToBackend(GetTexture())->GetGLTarget();
+        GLuint mipLevel = GetBaseMipLevel();
 
-        ASSERT(handle != 0);
         if (textarget == GL_TEXTURE_2D_ARRAY || textarget == GL_TEXTURE_3D) {
-            gl.FramebufferTextureLayer(target, attachment, handle, mipLevel, arrayLayer);
+            gl.FramebufferTextureLayer(target, attachment, handle, mipLevel, GetBaseArrayLayer());
         } else {
             gl.FramebufferTexture2D(target, attachment, textarget, handle, mipLevel);
         }
