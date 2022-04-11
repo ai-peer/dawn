@@ -65,6 +65,7 @@ namespace dawn::native {
         RecordDetailedTimingInTraceEvents,
         DisableTimestampQueryConversion,
         VulkanUseZeroInitializeWorkgroupMemoryExtension,
+        BufferSmallerThanRequiredForCopyOnD3D12Workaround,
 
         EnumCount,
         InvalidEnum = EnumCount,

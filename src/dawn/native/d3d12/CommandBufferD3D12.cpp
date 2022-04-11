@@ -306,6 +306,99 @@ namespace dawn::native::d3d12 {
                     textureUsages & wgpu::TextureUsage::StorageBinding);
         }
 
+        uint64_t RequiredCopySizeByD3D12(const uint32_t bytesPerRow,
+                                         const uint32_t rowsPerImage,
+                                         const Extent3D& copySize,
+                                         const TexelBlockInfo& blockInfo) {
+            uint64_t bytesPerImage = Safe32x32(bytesPerRow, rowsPerImage);
+
+            // Required copy size for B2T/T2B copy on D3D12 is smaller than (but very close to)
+            // depth * bytesPerImage. So, if the computation of depth * bytesPerImage doesn't
+            // overflow, none of the computations for RequiredCopySizeByD3D12 will. And it's not
+            // a very pessimizing check.
+            ASSERT(bytesPerImage <
+                   std::numeric_limits<uint64_t>::max() / copySize.depthOrArrayLayers);
+            uint64_t requiredCopySizeByD3D12 = bytesPerImage * (copySize.depthOrArrayLayers - 1);
+
+            // When calculating the required copy size for B2T/T2B copy, D3D12 doesn't respect
+            // rowsPerImage paddings on the last image for 3D texture, but it does respect
+            // bytesPerRow paddings on the last row.
+            ASSERT(blockInfo.width == 1 && blockInfo.height == 1);
+            uint64_t lastRowBytes = Safe32x32(blockInfo.byteSize, copySize.width);
+            ASSERT(rowsPerImage > copySize.height);
+            uint64_t lastImageBytesByD3D12 =
+                Safe32x32(bytesPerRow, rowsPerImage - 1) + lastRowBytes;
+
+            requiredCopySizeByD3D12 += lastImageBytesByD3D12;
+            return requiredCopySizeByD3D12;
+        }
+
+        // This function is used to access whether we need a workaround for D3D12's wrong algorithm
+        // of calculating required buffer size for B2T/T2B copy. The workaround is needed only when
+        //   - The corresponding toggle is enabled.
+        //   - It is a 3D texture (so the format is uncompressed).
+        //   - There are multiple depth images to be copied (copySize.depthOrArrayLayers > 1).
+        //   - It has rowsPerImage paddings (rowsPerImage > copySize.height).
+        //   - The buffer size doesn't meet D3D12's requirement.
+        bool NeedBufferSizeWorkaroundForBufferTextureCopyOnD3D12(
+            uint64_t* requiredBufferSizeByD3D12,
+            const BufferCopy& bufferCopy,
+            const TextureCopy& textureCopy,
+            const Extent3D& copySize) {
+            TextureBase* texture = textureCopy.texture.Get();
+            Device* device = ToBackend(texture->GetDevice());
+
+            if (!device->IsToggleEnabled(
+                    Toggle::BufferSmallerThanRequiredForCopyOnD3D12Workaround) ||
+                texture->GetDimension() != wgpu::TextureDimension::e3D ||
+                copySize.depthOrArrayLayers <= 1 || bufferCopy.rowsPerImage <= copySize.height) {
+                return false;
+            }
+
+            const TexelBlockInfo& blockInfo =
+                texture->GetFormat().GetAspectInfo(textureCopy.aspect).block;
+            uint64_t requiredCopySizeByD3D12 = RequiredCopySizeByD3D12(
+                bufferCopy.bytesPerRow, bufferCopy.rowsPerImage, copySize, blockInfo);
+            ASSERT(requiredCopySizeByD3D12 <
+                   std::numeric_limits<uint64_t>::max() - bufferCopy.offset);
+            *requiredBufferSizeByD3D12 = requiredCopySizeByD3D12 + bufferCopy.offset;
+            return bufferCopy.buffer->GetSize() < *requiredBufferSizeByD3D12;
+        }
+
+        MaybeError RecordBufferToTextureCopyWithTempBuffer(CommandRecordingContext* commandContext,
+                                                           ID3D12GraphicsCommandList* commandList,
+                                                           const uint64_t requiredBufferSizeByD3D12,
+                                                           const BufferCopy& bufferCopy,
+                                                           const TextureCopy& textureCopy,
+                                                           const Extent3D& copySize) {
+            BufferDescriptor tempBufferDescriptor;
+            tempBufferDescriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+            tempBufferDescriptor.size = requiredBufferSizeByD3D12;
+            TextureBase* texture = textureCopy.texture.Get();
+            Device* device = ToBackend(texture->GetDevice());
+            Ref<BufferBase> tempBufferBase;
+            DAWN_TRY_ASSIGN(tempBufferBase, device->CreateBuffer(&tempBufferDescriptor));
+            Ref<Buffer> tempBuffer = ToBackend(std::move(tempBufferBase));
+
+            tempBuffer->TrackUsageAndTransitionNow(commandContext, wgpu::BufferUsage::CopyDst);
+
+            commandList->CopyBufferRegion(tempBuffer->GetD3D12Resource(), bufferCopy.offset,
+                                          ToBackend(bufferCopy.buffer)->GetD3D12Resource(),
+                                          bufferCopy.offset,
+                                          bufferCopy.buffer->GetSize() - bufferCopy.offset);
+            tempBuffer->TrackUsageAndTransitionNow(commandContext, wgpu::BufferUsage::CopySrc);
+
+            RecordBufferTextureCopyWithBufferHandle(BufferTextureCopyDirection::B2T, commandList,
+                                                    tempBuffer->GetD3D12Resource(),
+                                                    bufferCopy.offset, bufferCopy.bytesPerRow,
+                                                    bufferCopy.rowsPerImage, textureCopy, copySize);
+
+            // Save tempBuffer into recordingContext
+            commandContext->AddToTempBuffers(std::move(tempBuffer));
+
+            return {};
+        }
+
     }  // anonymous namespace
 
     class BindGroupStateTracker : public BindGroupTrackerBase<false, uint64_t> {
@@ -764,8 +857,20 @@ namespace dawn::native::d3d12 {
                     texture->TrackUsageAndTransitionNow(commandContext, wgpu::TextureUsage::CopyDst,
                                                         subresources);
 
-                    RecordBufferTextureCopy(BufferTextureCopyDirection::B2T, commandList,
-                                            copy->source, copy->destination, copy->copySize);
+                    uint64_t requiredBufferSizeByD3D12 = 0;
+                    bool needBufferSizeWorkaround =
+                        NeedBufferSizeWorkaroundForBufferTextureCopyOnD3D12(
+                            &requiredBufferSizeByD3D12, copy->source, copy->destination,
+                            copy->copySize);
+
+                    if (!needBufferSizeWorkaround) {
+                        RecordBufferTextureCopy(BufferTextureCopyDirection::B2T, commandList,
+                                                copy->source, copy->destination, copy->copySize);
+                    } else {
+                        DAWN_TRY(RecordBufferToTextureCopyWithTempBuffer(
+                            commandContext, commandList, requiredBufferSizeByD3D12, copy->source,
+                            copy->destination, copy->copySize));
+                    }
 
                     break;
                 }
@@ -791,8 +896,40 @@ namespace dawn::native::d3d12 {
                                                         subresources);
                     buffer->TrackUsageAndTransitionNow(commandContext, wgpu::BufferUsage::CopyDst);
 
-                    RecordBufferTextureCopy(BufferTextureCopyDirection::T2B, commandList,
-                                            copy->destination, copy->source, copy->copySize);
+                    uint64_t requiredBufferSizeByD3D12 = 0;
+                    bool needBufferSizeWorkaround =
+                        NeedBufferSizeWorkaroundForBufferTextureCopyOnD3D12(
+                            &requiredBufferSizeByD3D12, copy->destination, copy->source,
+                            copy->copySize);
+
+                    if (!needBufferSizeWorkaround) {
+                        RecordBufferTextureCopy(BufferTextureCopyDirection::T2B, commandList,
+                                                copy->destination, copy->source, copy->copySize);
+                    } else {
+                        // If buffer is not big enough, then split the copy into two:
+                        //   - The first one copy all depth slices bug the last one,
+                        //   - The second one copy the last depth slice.
+                        Extent3D extentForAllButTheLastImage = copy->copySize;
+                        extentForAllButTheLastImage.depthOrArrayLayers -= 1;
+                        RecordBufferTextureCopy(BufferTextureCopyDirection::T2B, commandList,
+                                                copy->destination, copy->source,
+                                                extentForAllButTheLastImage);
+
+                        Extent3D extentForTheLastImage = copy->copySize;
+                        extentForTheLastImage.depthOrArrayLayers = 1;
+
+                        TextureCopy textureCopyForTheLastImage = copy->source;
+                        textureCopyForTheLastImage.origin.z +=
+                            copy->copySize.depthOrArrayLayers - 1;
+
+                        BufferCopy bufferCopyForTheLastImage = copy->destination;
+                        bufferCopyForTheLastImage.offset += copy->destination.bytesPerRow *
+                                                            copy->destination.rowsPerImage *
+                                                            (copy->copySize.depthOrArrayLayers - 1);
+                        RecordBufferTextureCopy(BufferTextureCopyDirection::T2B, commandList,
+                                                bufferCopyForTheLastImage,
+                                                textureCopyForTheLastImage, extentForTheLastImage);
+                    }
 
                     break;
                 }
