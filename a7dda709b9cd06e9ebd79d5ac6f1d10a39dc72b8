@@ -196,6 +196,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a2395ba_32fc8206",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-11T09:06:40Z",
+      "side": 1,
+      "message": "I don\u0027t follow. The map key always uses the sorted tags, so tags are always normalized for lookup. What\u0027s the issue?",
+      "parentUuid": "693c1ebe_7548cda3",
+      "revId": "a7dda709b9cd06e9ebd79d5ac6f1d10a39dc72b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9fac33c6_9c42bb4e",
         "filename": "tools/src/cts/result/result.go",
         "patchSetId": 1
@@ -290,6 +308,24 @@
       "side": 1,
       "message": "ditto with the sort",
       "parentUuid": "37bcbc17_2d7e7aca",
+      "revId": "a7dda709b9cd06e9ebd79d5ac6f1d10a39dc72b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7ef9603_4019d082",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-11T09:06:40Z",
+      "side": 1,
+      "message": "?",
+      "parentUuid": "f2dd3b3f_44f62878",
       "revId": "a7dda709b9cd06e9ebd79d5ac6f1d10a39dc72b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
