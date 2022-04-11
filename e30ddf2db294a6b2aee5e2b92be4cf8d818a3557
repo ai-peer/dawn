@@ -33,6 +33,23 @@
       "message": "I know, let me do the revert and you CR+2 it.",
       "revId": "e30ddf2db294a6b2aee5e2b92be4cf8d818a3557",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a954bc0_7cc60a15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2022-04-11T23:52:53Z",
+      "side": 1,
+      "message": "PTAL https://dawn-review.googlesource.com/c/dawn/+/86460",
+      "revId": "e30ddf2db294a6b2aee5e2b92be4cf8d818a3557",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
