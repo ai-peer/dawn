@@ -33,17 +33,13 @@ namespace dawn::native {
         CachedBlob(size_t size = 0);
 
         const uint8_t* Get() const;
-        size_t Size() const;
-
-      private:
         uint8_t* Get();
+        size_t Size() const;
         void Reset(size_t size);
 
+      private:
         std::unique_ptr<uint8_t[]> mData = nullptr;
         size_t mSize;
-
-        // Friend BlobCache class so that it can actually write to the data field.
-        friend class BlobCache;
     };
 
     // This class should always be thread-safe because it may be called asynchronously.
