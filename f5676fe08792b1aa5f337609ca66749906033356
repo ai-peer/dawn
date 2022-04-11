@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "809c1d90_683959f7",
+        "filename": "src/dawn/node/interop/Core.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-11T16:11:35Z",
+      "side": 1,
+      "message": "nit: What caused this change? It seems like the previous formatting was the correct one?",
+      "revId": "f5676fe08792b1aa5f337609ca66749906033356",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
