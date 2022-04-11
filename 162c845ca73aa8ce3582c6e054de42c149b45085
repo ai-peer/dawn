@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eadae5de_6d2838b0",
+        "filename": "generator/templates/dawn/native/CacheKey.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-11T21:08:26Z",
+      "side": 1,
+      "message": "Yea, but unless strong opinion, was just going to keep it for now since it may be useful later on?",
+      "parentUuid": "be9270f9_0ac1f49e",
+      "range": {
+        "startLine": 49,
+        "startChar": 48,
+        "endLine": 49,
+        "endChar": 56
+      },
+      "revId": "162c845ca73aa8ce3582c6e054de42c149b45085",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4825355e_43bbb4ae",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-04-11T16:27:59Z",
       "side": 1,
       "message": "are any of our bitsets that big?\n\nwe can `if constexpr` on `N` and choose `to_ulong` or `to_ullong` or static_assert that its unsupported. If we do have bitsets that large, then we can use your custom serialization",
+      "range": {
+        "startLine": 89,
+        "startChar": 56,
+        "endLine": 89,
+        "endChar": 93
+      },
+      "revId": "162c845ca73aa8ce3582c6e054de42c149b45085",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "580d5d80_8628ed25",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-11T21:08:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4825355e_43bbb4ae",
       "range": {
         "startLine": 89,
         "startChar": 56,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83ad31b4_bdea9e57",
+        "filename": "src/dawn/tests/unittests/native/DeviceCreationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-11T21:08:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9db6d1b_bb2a460c",
+      "range": {
+        "startLine": 89,
+        "startChar": 8,
+        "endLine": 90,
+        "endChar": 38
+      },
+      "revId": "162c845ca73aa8ce3582c6e054de42c149b45085",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "caae62dd_28424f71",
@@ -100,6 +172,24 @@
       "writtenOn": "2022-04-11T16:27:59Z",
       "side": 1,
       "message": "also test two devices with two different explicit isolation keys",
+      "revId": "162c845ca73aa8ce3582c6e054de42c149b45085",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91f2fd20_34b927d2",
+        "filename": "src/dawn/tests/unittests/native/DeviceCreationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-11T21:08:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "caae62dd_28424f71",
       "revId": "162c845ca73aa8ce3582c6e054de42c149b45085",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
