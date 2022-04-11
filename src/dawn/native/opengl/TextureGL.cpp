@@ -612,6 +612,7 @@ namespace dawn::native::opengl {
     void TextureView::BindToFramebuffer(GLenum target, GLenum attachment) {
         const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
 
+        // Use the base texture where possible to minimize the amount of copying required on GLES.
         bool useOwnView = GetFormat().format != GetTexture()->GetFormat().format &&
                           !GetTexture()->GetFormat().HasDepthOrStencil();
 
@@ -625,7 +626,7 @@ namespace dawn::native::opengl {
             arrayLayer = 0;
         } else {
             // Use the texture's handle and target, with the view's base mip level and base array
-            // layer.
+
             handle = ToBackend(GetTexture())->GetHandle();
             textarget = ToBackend(GetTexture())->GetGLTarget();
             mipLevel = GetBaseMipLevel();
