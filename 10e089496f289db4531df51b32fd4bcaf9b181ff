@@ -16,6 +16,23 @@
       "message": "Clearly, there\u0027s a lot of triaging, and bug mapping to be done, but I\u0027d like to land this and iterate.",
       "revId": "10e089496f289db4531df51b32fd4bcaf9b181ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d4ae001_330ace67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 55
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-11T17:39:16Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "10e089496f289db4531df51b32fd4bcaf9b181ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
