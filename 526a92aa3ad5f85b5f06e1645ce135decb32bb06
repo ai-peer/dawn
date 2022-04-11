@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0c4b2d7_cc943cdc",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-11T23:26:13Z",
+      "side": 1,
+      "message": "Assigning nullptr to an std::string is undefined behavior, and since Dawn will have other embedders than just Chrome I\u0027d say this is a reasonable precaution.",
+      "parentUuid": "398670a3_21d3d267",
+      "range": {
+        "startLine": 202,
+        "startChar": 12,
+        "endLine": 202,
+        "endChar": 74
+      },
+      "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dde8f0e4_43a27f88",
@@ -78,6 +102,30 @@
       "writtenOn": "2022-04-06T00:24:12Z",
       "side": 1,
       "message": "if you want to make this like the other objects, it should return Ref\u003cQueue\u003e and get created with AcquireRef(new Queue(...));\n\nthen DeviceBase::Initialize will simply move the ref into mQueue",
+      "range": {
+        "startLine": 29,
+        "startChar": 15,
+        "endLine": 29,
+        "endChar": 22
+      },
+      "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bda260b_5e804047",
+        "filename": "src/dawn/native/d3d12/QueueD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-11T23:26:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dde8f0e4_43a27f88",
       "range": {
         "startLine": 29,
         "startChar": 15,
@@ -196,6 +244,24 @@
       "side": 1,
       "message": "That threw me off for a while too, I thought reinterpret_cast had to be of the same size. I was going to suggest exactly that (`reinterpret_cast(static_cast(x))`) but I\u0027m pretty sure that\u0027s the same thing.",
       "parentUuid": "15c968c0_058cf87c",
+      "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f94ef8e8_9db3bc46",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-11T23:26:13Z",
+      "side": 1,
+      "message": "I stumbled on the difference between dispatchable/non-dispatchable handles right before leaving on vacation last week, at which point I said \"Screw it. This is a problem for Next Week Brandon.\" ;D\n\nAlso, according to https://en.cppreference.com/w/cpp/language/reinterpret_cast\n\n\"A pointer can be converted to any integral type large enough to hold all values of its type\", which I understand to mean that you should be able to cast to a uint64_t from any 64 bit or 32 bit pointer?\n\nLeaving the casts as-is for now but added a comment to explain why they\u0027re different. Also, I did some exploratory code and have an idea as to how to make this nicer overall, but I\u0027ll leave that to a separate patch.",
+      "parentUuid": "35439d78_a1064c8f",
       "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
