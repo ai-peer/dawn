@@ -161,8 +161,6 @@ TEST_P(RequiredBufferSizeInCopyTests, BufferSizeOnBoundary) {
                     kBytesPerRow * (kRowsPerImage - 1) + kBytesPerBlock * kCopySize.width;
     DoTest(size);
 
-    // TODO(crbug.com/dawn/1278, 1288, 1289): Required buffer size for copy is wrong on D3D12.
-    DAWN_SUPPRESS_TEST_IF(IsD3D12());
     size -= kBytesPerBlock;
     DoTest(size);
 }
@@ -171,14 +169,14 @@ TEST_P(RequiredBufferSizeInCopyTests, BufferSizeOnBoundary) {
 // storage for these paddings, and the copy operation will never access to these paddings. So it
 // should work.
 TEST_P(RequiredBufferSizeInCopyTests, MininumBufferSize) {
-    // TODO(crbug.com/dawn/1278, 1288, 1289): Required buffer size for copy is wrong on D3D12.
-    DAWN_SUPPRESS_TEST_IF(IsD3D12());
     uint64_t size =
         kOffset + utils::RequiredBytesInCopy(kBytesPerRow, kRowsPerImage, kCopySize, kFormat);
     DoTest(size);
 }
 
-DAWN_INSTANTIATE_TEST_P(RequiredBufferSizeInCopyTests,
-                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
-                         VulkanBackend()},
-                        {Type::T2BCopy, Type::B2TCopy});
+DAWN_INSTANTIATE_TEST_P(
+    RequiredBufferSizeInCopyTests,
+    {D3D12Backend(),
+     D3D12Backend({"d3d12_split_buffer_texture_copy_if_rows_per_image_greater_than_copy_height"}),
+     MetalBackend(), OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
+    {Type::T2BCopy, Type::B2TCopy});
