@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69a112f4_7dfe7118",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-11T15:08:52Z",
+      "side": 1,
+      "message": "PTAL! It will conflicts with some of Dan\u0027s changes so we\u0027ll have some minor conflicts to resolve at some point.",
+      "revId": "76ccc7abacc9b84cee317c2f8faafb7547302316",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
