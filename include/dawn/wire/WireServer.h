@@ -34,6 +34,15 @@ struct DAWN_WIRE_EXPORT WireServerDescriptor {
     server::MemoryTransferService* memoryTransferService = nullptr;
 };
 
+struct DAWN_WIRE_EXPORT WireServerCallbackUserdata {
+    virtual ~WireServerCallbackUserdata();
+
+    // Returns null after the server has been destructed. This may
+    // occur if the userdata is used in a callback after the server
+    // was destructed.
+    virtual server::Server* MaybeGetServer() const = 0;
+};
+
 class DAWN_WIRE_EXPORT WireServer : public CommandHandler {
   public:
     explicit WireServer(const WireServerDescriptor& descriptor);

@@ -50,13 +50,16 @@ class MemoryTransferService;
 //      userdata.release());
 //
 // void Server::MyCallbackHandler(MyUserdata* userdata, Other args) { }
-struct CallbackUserdata {
+struct CallbackUserdata : WireServerCallbackUserdata {
     Server* const server;
     std::weak_ptr<bool> const serverIsAlive;
 
     CallbackUserdata() = delete;
-    CallbackUserdata(Server* server, const std::shared_ptr<bool>& serverIsAlive)
-        : server(server), serverIsAlive(serverIsAlive) {}
+    ~CallbackUserdata() override;
+    CallbackUserdata(Server* server, const std::shared_ptr<bool>& serverIsAlive);
+
+    // WireServerCallbackUserdata implementation
+    Server* MaybeGetServer() const final;
 };
 
 template <auto F>

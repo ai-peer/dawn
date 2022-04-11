@@ -17,6 +17,18 @@
 
 namespace dawn::wire::server {
 
+CallbackUserdata::CallbackUserdata(Server* server, const std::shared_ptr<bool>& serverIsAlive)
+    : server(server), serverIsAlive(serverIsAlive) {}
+
+CallbackUserdata::~CallbackUserdata() = default;
+
+Server* CallbackUserdata::MaybeGetServer() const {
+    if (serverIsAlive.expired()) {
+        return nullptr;
+    }
+    return server;
+}
+
 Server::Server(const DawnProcTable& procs,
                CommandSerializer* serializer,
                MemoryTransferService* memoryTransferService)

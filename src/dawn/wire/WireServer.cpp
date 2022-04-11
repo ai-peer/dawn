@@ -17,6 +17,8 @@
 
 namespace dawn::wire {
 
+WireServerCallbackUserdata::~WireServerCallbackUserdata() = default;
+
 WireServer::WireServer(const WireServerDescriptor& descriptor)
     : mImpl(new server::Server(*descriptor.procs,
                                descriptor.serializer,
