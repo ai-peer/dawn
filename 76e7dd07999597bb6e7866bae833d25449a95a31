@@ -33,6 +33,24 @@
       "message": "Note for future change: we should probably remove this comment and possibly the transform. FXC isn\u0027t involved on the GLSL side.",
       "revId": "76e7dd07999597bb6e7866bae833d25449a95a31",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62588718_fe38d11e",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-11T15:43:02Z",
+      "side": 1,
+      "message": "Thanks. Created a bug: https://bugs.chromium.org/p/tint/issues/detail?id\u003d1499",
+      "parentUuid": "d0bab358_aafd9e1e",
+      "revId": "76e7dd07999597bb6e7866bae833d25449a95a31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
