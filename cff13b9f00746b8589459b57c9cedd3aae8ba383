@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79f237d3_2cb7ab37",
+        "filename": "src/dawn/node/interop/Napi.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-11T11:46:14Z",
+      "side": 1,
+      "message": "You need to change the CMakefile if you want to use this path to add the dawn third_party directory to the target includes.",
+      "revId": "cff13b9f00746b8589459b57c9cedd3aae8ba383",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
