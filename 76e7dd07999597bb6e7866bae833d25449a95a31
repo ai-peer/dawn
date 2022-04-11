@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d10576e_76978cca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-04-11T15:11:17Z",
+      "side": 1,
+      "message": "Thanks for this cleanup!",
+      "revId": "76e7dd07999597bb6e7866bae833d25449a95a31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0bab358_aafd9e1e",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-04-11T15:11:17Z",
+      "side": 1,
+      "message": "Note for future change: we should probably remove this comment and possibly the transform. FXC isn\u0027t involved on the GLSL side.",
+      "revId": "76e7dd07999597bb6e7866bae833d25449a95a31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
