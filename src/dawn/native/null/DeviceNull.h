@@ -168,7 +168,7 @@ namespace dawn::native::null {
 
     class Adapter : public AdapterBase {
       public:
-        Adapter(InstanceBase* instance);
+        explicit Adapter(InstanceBase* instance);
         ~Adapter() override;
 
         // AdapterBase Implementation
@@ -250,7 +250,7 @@ namespace dawn::native::null {
 
     class Queue final : public QueueBase {
       public:
-        Queue(Device* device);
+        explicit Queue(Device* device);
 
       private:
         ~Queue() override;

@@ -67,7 +67,7 @@ namespace dawn::native {
         void HandleDeviceLoss();
 
       protected:
-        QueueBase(DeviceBase* device);
+        explicit QueueBase(DeviceBase* device);
         QueueBase(DeviceBase* device, ObjectBase::ErrorTag tag);
         void DestroyImpl() override;
 
