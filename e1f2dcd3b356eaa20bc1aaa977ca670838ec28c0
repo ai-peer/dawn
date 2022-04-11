@@ -34,6 +34,24 @@
       "parentUuid": "b728b5d2_2101e0d1",
       "revId": "e1f2dcd3b356eaa20bc1aaa977ca670838ec28c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "484058f0_83b300ed",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-04-11T17:04:29Z",
+      "side": 1,
+      "message": "Hmm. So why doesn\u0027t it break any tests if I revert it completely? Is the test broken altogether with GLES due to lack of bidirectional copy?",
+      "parentUuid": "25928fa5_01f8a1b0",
+      "revId": "e1f2dcd3b356eaa20bc1aaa977ca670838ec28c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
