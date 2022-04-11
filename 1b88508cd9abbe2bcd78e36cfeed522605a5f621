@@ -34,6 +34,24 @@
       "parentUuid": "c9abc44b_d0e152f5",
       "revId": "1b88508cd9abbe2bcd78e36cfeed522605a5f621",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c62e9d93_b1a1eec1",
+        "filename": "src/tint/writer/spirv/builder_entry_point_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-11T14:39:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "114a7522_4d0bc5d3",
+      "revId": "1b88508cd9abbe2bcd78e36cfeed522605a5f621",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
