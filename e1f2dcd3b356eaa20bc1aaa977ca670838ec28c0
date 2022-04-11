@@ -52,6 +52,24 @@
       "parentUuid": "25928fa5_01f8a1b0",
       "revId": "e1f2dcd3b356eaa20bc1aaa977ca670838ec28c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ec6f27d_15a8f06f",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-11T17:06:30Z",
+      "side": 1,
+      "message": "TextureViewRenderingTest has new DAWN_SKIP_TEST_IF for reinterpret tests since they (were) using glTextureView. I\u0027m guessing I landed this at the same time as your CL, so those skips weren\u0027t removed.",
+      "parentUuid": "484058f0_83b300ed",
+      "revId": "e1f2dcd3b356eaa20bc1aaa977ca670838ec28c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
