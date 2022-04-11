@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69a8a7b8_6e6e7e1c",
+        "filename": "docs/tint/style_guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-11T12:48:21Z",
+      "side": 1,
+      "message": "ahhh, I\u0027d missed this bit of suble-ess. Good example.",
+      "revId": "81e6ec1a354afe1e73284e7751c205f91566433e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
