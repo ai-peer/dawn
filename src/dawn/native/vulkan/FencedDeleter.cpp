@@ -67,6 +67,10 @@ namespace dawn::native::vulkan {
         mPipelinesToDelete.Enqueue(pipeline, mDevice->GetPendingCommandSerial());
     }
 
+    void FencedDeleter::DeleteWhenUnused(VkPipelineCache pipelineCache) {
+        mPipelineCachesToDelete.Enqueue(pipelineCache, mDevice->GetPendingCommandSerial());
+    }
+
     void FencedDeleter::DeleteWhenUnused(VkPipelineLayout layout) {
         mPipelineLayoutsToDelete.Enqueue(layout, mDevice->GetPendingCommandSerial());
     }
@@ -148,6 +152,11 @@ namespace dawn::native::vulkan {
             mDevice->fn.DestroyPipeline(vkDevice, pipeline, nullptr);
         }
         mPipelinesToDelete.ClearUpTo(completedSerial);
+
+        for (VkPipelineCache pipelineCache : mPipelineCachesToDelete.IterateUpTo(completedSerial)) {
+            mDevice->fn.DestroyPipelineCache(vkDevice, pipelineCache, nullptr);
+        }
+        mPipelineCachesToDelete.ClearUpTo(completedSerial);
 
         // Vulkan swapchains must be destroyed before their corresponding VkSurface
         for (VkSwapchainKHR swapChain : mSwapChainsToDelete.IterateUpTo(completedSerial)) {
