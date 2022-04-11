@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bc81ef4_afa0e45f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 37
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-11T15:47:48Z",
+      "side": 1,
+      "message": "PTAL! I needed this to make dawn.node testing work correctly on macOS",
+      "revId": "75613b2fd8d660073702010aa105e5ad872dd437",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
