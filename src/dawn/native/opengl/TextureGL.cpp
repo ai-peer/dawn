@@ -612,8 +612,11 @@ namespace dawn::native::opengl {
     void TextureView::BindToFramebuffer(GLenum target, GLenum attachment) {
         const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
 
+        bool useOwnView = GetFormat().format != GetTexture()->GetFormat().format &&
+                          !GetTexture()->GetFormat().HasDepthOrStencil();
+
         GLuint handle, textarget, mipLevel, arrayLayer;
-        if (mOwnsHandle) {
+        if (useOwnView) {
             // Use our own texture handle and target which points to a subset of the texture's
             // subresources.
             handle = GetHandle();
