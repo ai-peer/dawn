@@ -66,9 +66,14 @@ struct SanitizedResult {
 };
 
 /// Sanitize a program in preparation for generating HLSL.
+/// @param program the input program
 /// @param root_constant_binding_point the binding point to use for information
 /// that will be passed via root constants
 /// @param disable_workgroup_init `true` to disable workgroup memory zero
+/// @param generate_external_texture_bindings `true` to automatically generate
+/// bindings for the external texture planes
+/// @param array_length_from_uniform options used to specify a mapping of
+/// binding points to indices into a UBO from which to load buffer sizes
 /// @returns the sanitized program and any supplementary information
 SanitizedResult Sanitize(
     const Program* program,
