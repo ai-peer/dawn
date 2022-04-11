@@ -70,6 +70,24 @@
       "parentUuid": "484058f0_83b300ed",
       "revId": "e1f2dcd3b356eaa20bc1aaa977ca670838ec28c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9cbc6a5_7430eab3",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-04-11T17:07:57Z",
+      "side": 1,
+      "message": "Never mind; I see now they\u0027re suppressed. Will see if there\u0027s a hope of them working.",
+      "parentUuid": "484058f0_83b300ed",
+      "revId": "e1f2dcd3b356eaa20bc1aaa977ca670838ec28c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
