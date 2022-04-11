@@ -34,6 +34,24 @@
       "parentUuid": "894989b0_498b977d",
       "revId": "96e245e576ec2d0b75199f6133a74fac1d9a4a50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50577f0d_a2fff1df",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-11T10:06:00Z",
+      "side": 1,
+      "message": "I was hoping we could use some of the PUBLIC/INTERFACE/PRIVATE mechanisms of CMake to set these compile options automatically on most targets. But maybe that\u0027s not possible and we have to be more imperative in how we do things in CMake.",
+      "parentUuid": "ddb1017d_0f100951",
+      "revId": "96e245e576ec2d0b75199f6133a74fac1d9a4a50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
