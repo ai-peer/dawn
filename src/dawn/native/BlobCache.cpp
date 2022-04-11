@@ -27,6 +27,10 @@ namespace dawn::native {
         }
     }
 
+    bool CachedBlob::Empty() const {
+        return mSize == 0;
+    }
+
     const uint8_t* CachedBlob::Get() const {
         return mData.get();
     }

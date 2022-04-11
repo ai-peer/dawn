@@ -32,6 +32,7 @@ namespace dawn::native {
       public:
         CachedBlob(size_t size = 0);
 
+        bool Empty() const;
         const uint8_t* Get() const;
         uint8_t* Get();
         size_t Size() const;

@@ -25,7 +25,7 @@ namespace dawn::native {
 
     class DeviceBase;
 
-    class ObjectBase : public RefCounted {
+    class ObjectBase : virtual public RefCounted {
       public:
         struct ErrorTag {};
         static constexpr ErrorTag kError = {};
