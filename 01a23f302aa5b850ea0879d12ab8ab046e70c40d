@@ -16,6 +16,40 @@
       "message": "Austin: PTAL. Thanks!",
       "revId": "01a23f302aa5b850ea0879d12ab8ab046e70c40d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47553d57_b0b84e54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-11T21:39:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "01a23f302aa5b850ea0879d12ab8ab046e70c40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "548c2857_ec83dc0c",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-11T21:39:02Z",
+      "side": 1,
+      "message": "Corentin wanted to unify around mOwnsHandle. Since we\u0027re diverging here, could we add a comment that we\u0027re doing this to limit the number of scenarios where a separate texture handle is used for writing and would require copying back to the original texture ?",
+      "revId": "01a23f302aa5b850ea0879d12ab8ab046e70c40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
