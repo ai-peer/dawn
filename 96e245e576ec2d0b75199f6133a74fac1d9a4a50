@@ -16,6 +16,24 @@
       "message": "IIRC there\u0027s a way to make something similar to GN\u0027s configs in CMake but I can\u0027t find it again, do you remember what it is? Also any way to not have to add the compile options manually for each library? Tint CMakeLists didn\u0027t need a change.",
       "revId": "96e245e576ec2d0b75199f6133a74fac1d9a4a50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddb1017d_0f100951",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-11T09:00:15Z",
+      "side": 1,
+      "message": "\u003e IIRC there\u0027s a way to make something similar to GN\u0027s configs in CMake but I can\u0027t find it again, do you remember what it is?\n\nNot entirely sure what you\u0027re after here. We can move bits of CMake out to utility files, but I\u0027m not sure that would help with the structure.\n\n\u003e Also any way to not have to add the compile options manually for each library?\n\nYou can globally change build options, but it becomes a bit of a nightmare when you have outer projects wanting to include dawn / tint. Leakage becomes a real issue.\n\n\u003e Tint CMakeLists didn\u0027t need a change.\n\nThey don\u0027t because they already use `tint_default_compile_options()` for all targets:\nhttps://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/CMakeLists.txt#54",
+      "parentUuid": "894989b0_498b977d",
+      "revId": "96e245e576ec2d0b75199f6133a74fac1d9a4a50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
