@@ -604,6 +604,11 @@ namespace dawn::native::d3d12 {
                     true);
             }
         }
+
+        // Currently this workaround is needed on any D3D12 backend. But we may need to limit it if
+        // D3D12 runtime fixes the bug on its new release. See https://crbug.com/dawn/1289 for more
+        // information.
+        SetToggle(Toggle::BufferSmallerThanRequiredForCopyOnD3D12Workaround, true);
     }
 
     MaybeError Device::WaitForIdleForDestruction() {
