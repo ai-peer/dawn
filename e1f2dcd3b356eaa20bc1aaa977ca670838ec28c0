@@ -16,6 +16,24 @@
       "message": "This is not correct, at least for color attachments. We don\u0027t want to bind to the view\u0027s handle; we always want to render to the base texture; we just use the view to know which layer/mip to render to. This breaks the deferred rendering sample on Compat, for example.\n\nWhat use cases was this change intended to handle?",
       "revId": "e1f2dcd3b356eaa20bc1aaa977ca670838ec28c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25928fa5_01f8a1b0",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-11T16:17:01Z",
+      "side": 1,
+      "message": "Ah, see https://dawn-review.googlesource.com/c/dawn/+/84704/comments/339d5a75_5dce5ce3\n\nWe can switch the condition back to that one so it should work for that deferred rendering sample, but still be broken (needs bidirectional copy) for anything that renders with view format reinterpretation.",
+      "parentUuid": "b728b5d2_2101e0d1",
+      "revId": "e1f2dcd3b356eaa20bc1aaa977ca670838ec28c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
