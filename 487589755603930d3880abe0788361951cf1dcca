@@ -16,6 +16,46 @@
       "message": "LGTM",
       "revId": "487589755603930d3880abe0788361951cf1dcca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d88295f0_24b97118",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-11T16:09:31Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "487589755603930d3880abe0788361951cf1dcca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b802d09_009470f4",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-11T16:09:31Z",
+      "side": 1,
+      "message": "msvc is complaining that t[i] is a bool which is not compatible with uint8_t",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 30
+      },
+      "revId": "487589755603930d3880abe0788361951cf1dcca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
