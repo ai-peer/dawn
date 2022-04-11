@@ -252,6 +252,12 @@ namespace dawn::native {
               "Initialize workgroup memory with OpConstantNull on Vulkan when the Vulkan extension "
               "VK_KHR_zero_initialize_workgroup_memory is supported.",
               "https://crbug.com/dawn/1302"}},
+            {Toggle::BufferSmallerThanRequiredForCopyOnD3D12Workaround,
+             {"buffer_smaller_than_required_for_copy_on_d3d12_workaround",
+              "D3D12 requires more buffer storage than it should. If the buffer used for B2T/T2B "
+              "copy is big enough but it doesn't meet D3D12's requirement, we need to workaround "
+              "it, in order to make B2T/T2B copy being done correctly on D3D12.",
+              "https://crbug.com/dawn/1289"}},
 
             // Dummy comment to separate the }} so it is clearer what to copy-paste to add a toggle.
         }};
