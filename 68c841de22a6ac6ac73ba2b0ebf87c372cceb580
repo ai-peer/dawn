@@ -50,6 +50,24 @@
       "message": "nit: This is a constant string, so we don\u0027t really need the ostringstream and can just pass it directly in EmitLog.",
       "revId": "68c841de22a6ac6ac73ba2b0ebf87c372cceb580",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c155702_9718c025",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1024,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-11T14:16:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95183f9f_b7204ef8",
+      "revId": "68c841de22a6ac6ac73ba2b0ebf87c372cceb580",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
