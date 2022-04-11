@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc3bf1c3_ae749b4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-11T16:27:59Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "162c845ca73aa8ce3582c6e054de42c149b45085",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be9270f9_0ac1f49e",
+        "filename": "generator/templates/dawn/native/CacheKey.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-11T16:27:59Z",
+      "side": 1,
+      "message": "now this is unused",
+      "range": {
+        "startLine": 49,
+        "startChar": 48,
+        "endLine": 49,
+        "endChar": 56
+      },
+      "revId": "162c845ca73aa8ce3582c6e054de42c149b45085",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4825355e_43bbb4ae",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-11T16:27:59Z",
+      "side": 1,
+      "message": "are any of our bitsets that big?\n\nwe can `if constexpr` on `N` and choose `to_ulong` or `to_ullong` or static_assert that its unsupported. If we do have bitsets that large, then we can use your custom serialization",
+      "range": {
+        "startLine": 89,
+        "startChar": 56,
+        "endLine": 89,
+        "endChar": 93
+      },
+      "revId": "162c845ca73aa8ce3582c6e054de42c149b45085",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9db6d1b_bb2a460c",
+        "filename": "src/dawn/tests/unittests/native/DeviceCreationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-11T16:27:59Z",
+      "side": 1,
+      "message": "I feel like this should not be the case. Maybe we should pull out cacheDesc-\u003eisolationKey and pass that in, or empty string directly. That way default descriptor, or default cache descriptor will match",
+      "range": {
+        "startLine": 89,
+        "startChar": 8,
+        "endLine": 90,
+        "endChar": 38
+      },
+      "revId": "162c845ca73aa8ce3582c6e054de42c149b45085",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caae62dd_28424f71",
+        "filename": "src/dawn/tests/unittests/native/DeviceCreationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-11T16:27:59Z",
+      "side": 1,
+      "message": "also test two devices with two different explicit isolation keys",
+      "revId": "162c845ca73aa8ce3582c6e054de42c149b45085",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
