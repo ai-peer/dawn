@@ -33,6 +33,24 @@
       "message": "+2. Still don\u0027t know why you need this, and I don\u0027t.",
       "revId": "75613b2fd8d660073702010aa105e5ad872dd437",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d95dcac_9a11936d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 37
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-11T15:55:04Z",
+      "side": 1,
+      "message": "This is so 1) libvk_swiftshader.dylib can be built inside the Dawn build and 2) Dawn knowsn to look for libvk_swiftshader.dylib in addition to libvulkan.dylib.",
+      "parentUuid": "9ea01ed8_c9a5a6e2",
+      "revId": "75613b2fd8d660073702010aa105e5ad872dd437",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
