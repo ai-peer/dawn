@@ -51,6 +51,24 @@
       "parentUuid": "d571c346_beb3b4fd",
       "revId": "b519ae3015b5cf9ac3549f9f89e5cf64dde3584f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc687d60_10d7aeb4",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-11T06:32:55Z",
+      "side": 1,
+      "message": "But are we keeping these files in the long term or is that just a temporary measure? If it\u0027s temporary then it\u0027s a bit ugly for now but I guess it\u0027s ok, but long term it would be nice to have a single place with the conf otherwise we are going to always forget updating it for some subdirectory.",
+      "parentUuid": "8755c850_79d7fcb7",
+      "revId": "b519ae3015b5cf9ac3549f9f89e5cf64dde3584f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
