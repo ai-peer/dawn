@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "605df74b_b2113677",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-12T22:12:18Z",
+      "side": 1,
+      "message": "It appears the answer is yes! Done.",
+      "parentUuid": "27d49125_e568e8a4",
+      "range": {
+        "startLine": 30,
+        "startChar": 51,
+        "endLine": 35,
+        "endChar": 5
+      },
+      "revId": "89b2f20c4a36acbc7a6bb11f69abcae8e348fede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ceb1947_048d8b61",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-04-12T21:26:16Z",
       "side": 1,
       "message": "was it irrelevant that this was previously uint64_t\u0026 ?",
+      "range": {
+        "startLine": 126,
+        "startChar": 46,
+        "endLine": 126,
+        "endChar": 54
+      },
+      "revId": "89b2f20c4a36acbc7a6bb11f69abcae8e348fede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d47c41b1_7432bebf",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-12T22:12:18Z",
+      "side": 1,
+      "message": "That was examined by Kai in the comments of the previous patch: https://dawn-review.googlesource.com/c/dawn/+/85843/2..4/src/dawn/native/vulkan/QueueVk.cpp#b71\n\n\"The current code used everywhere else (`reinterpret_cast\u003cuint64_t\u0026\u003e`) is pretty weird. I spent like an hour understanding this.\nFor samplers, for example, it reinterprets a `dawn::native::vulkan::VkSampler` (`dawn::native::vulkan::detail::VkHandle`) as `uint64_t\u0026`, which IIUC automatically takes a reference to the `VkHandle` object as `VkHandle\u0026`, and then reinterprets. Now you have a `uint64_t\u0026` which points to the `VkHandle`, at offset 0 of which is `mHandle`, so it deferences to the right thing.\"\n\nI figured while we were refactoring this might as well make that part a bit more explicit so that future developers don\u0027t need to spend the same hour deciphering this that Kai did. 😄",
+      "parentUuid": "3ceb1947_048d8b61",
       "range": {
         "startLine": 126,
         "startChar": 46,
