@@ -16,6 +16,69 @@
       "message": "Followup to https://dawn-review.googlesource.com/c/dawn/+/85843 to help ensure that we don\u0027t run into the same type of casting confusion again (which broke the Dawn-\u003eChromium roll initially).",
       "revId": "89b2f20c4a36acbc7a6bb11f69abcae8e348fede",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fa10008_1feca2b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-12T21:26:16Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "89b2f20c4a36acbc7a6bb11f69abcae8e348fede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27d49125_e568e8a4",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-12T21:26:16Z",
+      "side": 1,
+      "message": "can we get away with not defining this function body so we get a compile error if VK_OBJECT_TYPE_GETTER is not defined for some type?",
+      "range": {
+        "startLine": 30,
+        "startChar": 51,
+        "endLine": 35,
+        "endChar": 5
+      },
+      "revId": "89b2f20c4a36acbc7a6bb11f69abcae8e348fede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ceb1947_048d8b61",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-12T21:26:16Z",
+      "side": 1,
+      "message": "was it irrelevant that this was previously uint64_t\u0026 ?",
+      "range": {
+        "startLine": 126,
+        "startChar": 46,
+        "endLine": 126,
+        "endChar": 54
+      },
+      "revId": "89b2f20c4a36acbc7a6bb11f69abcae8e348fede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
