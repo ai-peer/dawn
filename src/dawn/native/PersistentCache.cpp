@@ -16,49 +16,78 @@
 
 #include "dawn/common/Assert.h"
 #include "dawn/native/Device.h"
+#include "dawn/native/Instance.h"
 #include "dawn/platform/DawnPlatform.h"
+
+#include <sstream>
 
 namespace dawn::native {
 
-    PersistentCache::PersistentCache(DeviceBase* device)
-        : mDevice(device), mCache(GetPlatformCache()) {
+    // TODO(dawn:549): Create a fingerprint of concatenated version strings (ex. Dawn commit hash).
+    // This will be used by the client so it may know when to discard previously cached Dawn
+    // objects should this fingerprint change.
+    PersistentCache::PersistentCache(InstanceBase* instance)
+        : mCache(instance->GetPlatform()->GetCachingInterface(/*fingerprint*/ nullptr,
+                                                              /*fingerprintSize*/ 0)) {
     }
 
-    ScopedCachedBlob PersistentCache::LoadData(const PersistentCacheKey& key) {
-        ScopedCachedBlob blob = {};
-        if (mCache == nullptr) {
-            return blob;
-        }
+    PersistentCache::Key PersistentCache::CreateKey(KeyType type,
+                                                    const std::string& isolationKey,
+                                                    const size_t hash) {
+        std::stringstream stream;
+        stream << static_cast<uint32_t>(type) << isolationKey << hash;
+        return Key(std::istreambuf_iterator<char>{stream}, std::istreambuf_iterator<char>{});
+    }
+
+    ScopedCachedBlob PersistentCache::LoadData(const Key& key) {
         std::lock_guard<std::mutex> lock(mMutex);
-        blob.bufferSize = mCache->LoadData(ToAPI(mDevice), key.data(), key.size(), nullptr, 0);
-        if (blob.bufferSize > 0) {
-            blob.buffer.reset(new uint8_t[blob.bufferSize]);
-            const size_t bufferSize = mCache->LoadData(ToAPI(mDevice), key.data(), key.size(),
-                                                       blob.buffer.get(), blob.bufferSize);
-            ASSERT(bufferSize == blob.bufferSize);
-            return blob;
+        return LoadDataInternal(key);
+    }
+
+    void PersistentCache::StoreData(const Key& key, const void* value, size_t size) {
+        std::lock_guard<std::mutex> lock(mMutex);
+        return StoreDataInternal(key, value, size);
+    }
+
+    void PersistentCache::StoreData(const Key& key, const ScopedCachedBlob& blob) {
+        std::lock_guard<std::mutex> lock(mMutex);
+        return StoreDataInternal(key, blob.buffer.get(), blob.bufferSize);
+    }
+
+    void PersistentCache::LoadAndUpdate(const Key& key, UpdateFn updateFn) {
+        std::lock_guard<std::mutex> lock(mMutex);
+
+        ScopedCachedBlob blob = LoadDataInternal(key);
+        std::vector<uint8_t> result = updateFn(blob);
+        StoreDataInternal(key, result.data(), result.size());
+    }
+
+    ScopedCachedBlob PersistentCache::LoadDataInternal(const Key& key) {
+        if (mCache == nullptr) {
+            return {};
         }
+
+        ScopedCachedBlob blob = {};
+        blob.bufferSize = mCache->LoadData(key.data(), key.size(), nullptr, 0);
+        if (blob.bufferSize == 0) {
+            return {};
+        }
+
+        blob.buffer.reset(new uint8_t[blob.bufferSize]);
+        const size_t bufferSize =
+            mCache->LoadData(key.data(), key.size(), blob.buffer.get(), blob.bufferSize);
+        ASSERT(bufferSize == blob.bufferSize);
         return blob;
     }
 
-    void PersistentCache::StoreData(const PersistentCacheKey& key, const void* value, size_t size) {
+    void PersistentCache::StoreDataInternal(const Key& key, const void* value, size_t size) {
         if (mCache == nullptr) {
             return;
         }
         ASSERT(value != nullptr);
         ASSERT(size > 0);
         std::lock_guard<std::mutex> lock(mMutex);
-        mCache->StoreData(ToAPI(mDevice), key.data(), key.size(), value, size);
+        mCache->StoreData(key.data(), key.size(), value, size);
     }
 
-    dawn::platform::CachingInterface* PersistentCache::GetPlatformCache() {
-        // TODO(dawn:549): Create a fingerprint of concatenated version strings (ex. Tint commit
-        // hash, Dawn commit hash). This will be used by the client so it may know when to discard
-        // previously cached Dawn objects should this fingerprint change.
-        dawn::platform::Platform* platform = mDevice->GetPlatform();
-        if (platform != nullptr) {
-            return platform->GetCachingInterface(/*fingerprint*/ nullptr, /*fingerprintSize*/ 0);
-        }
-        return nullptr;
-    }
 }  // namespace dawn::native

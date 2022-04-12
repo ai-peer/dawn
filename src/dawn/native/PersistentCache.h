@@ -15,8 +15,10 @@
 #ifndef SRC_DAWN_NATIVE_PERSISTENTCACHE_H_
 #define SRC_DAWN_NATIVE_PERSISTENTCACHE_H_
 
+#include "dawn/common/RefCounted.h"
 #include "dawn/native/Error.h"
 
+#include <functional>
 #include <mutex>
 #include <vector>
 
@@ -26,64 +28,45 @@ namespace dawn::platform {
 
 namespace dawn::native {
 
-    using PersistentCacheKey = std::vector<uint8_t>;
+    class InstanceBase;
 
     struct ScopedCachedBlob {
         std::unique_ptr<uint8_t[]> buffer;
         size_t bufferSize = 0;
     };
 
-    class DeviceBase;
-
-    enum class PersistentKeyType { Shader };
-
-    // This class should always be thread-safe as it is used in Create*PipelineAsync() where it is
-    // called asynchronously.
-    // The thread-safety of any access to mCache (the function LoadData() and StoreData()) is
-    // protected by mMutex.
+    // The public API of this class must be thread-safe as they can be used in async functions.
+    // Currently, the class synchronizes on all load/store operations, but we may be able to
+    // optimize this more later to only block based on key.
     class PersistentCache {
       public:
-        explicit PersistentCache(DeviceBase* device);
+        using Key = std::vector<uint8_t>;
 
-        // Combines load/store operations into a single call.
-        // If the load was successful, a non-empty blob is returned to the caller.
-        // Else, the creation callback |createFn| gets invoked with a callback
-        // |doCache| to store the newly created blob back in the cache.
-        //
-        // Example usage:
-        //
-        // ScopedCachedBlob cachedBlob = {};
-        // DAWN_TRY_ASSIGN(cachedBlob, GetOrCreate(key, [&](auto doCache)) {
-        //      // Create a new blob to be stored
-        //      doCache(newBlobPtr, newBlobSize); // store
-        // }));
-        //
-        template <typename CreateFn>
-        ResultOrError<ScopedCachedBlob> GetOrCreate(const PersistentCacheKey& key,
-                                                    CreateFn&& createFn) {
-            // Attempt to load an existing blob from the cache.
-            ScopedCachedBlob blob = LoadData(key);
-            if (blob.bufferSize > 0) {
-                return std::move(blob);
-            }
+        // Update functions should be able to handle `empty` blob inputs.
+        using UpdateFn = std::function<std::vector<uint8_t>(const ScopedCachedBlob&)>;
 
-            // Allow the caller to create a new blob to be stored for the given key.
-            DAWN_TRY(createFn([this, key](const void* value, size_t size) {
-                this->StoreData(key, value, size);
-            }));
+        enum class KeyType { Pipeline };
 
-            return std::move(blob);
-        }
+        static Key CreateKey(KeyType type, const std::string& isolationKey, const size_t hash);
+
+        explicit PersistentCache(InstanceBase* instance);
+
+        // Load returns an empty blob result if the key is not found in the cache.
+        ScopedCachedBlob LoadData(const Key& key);
+        void StoreData(const Key& key, const void* value, size_t size);
+        void StoreData(const Key& key, const ScopedCachedBlob& blob);
+
+        // Atomically loads from key, uses the loaded value, and updates it according to `updateFn`.
+        // Useful when the cache is a more monolithic-like cache where we can update it.
+        void LoadAndUpdate(const Key& key, UpdateFn updateFn);
 
       private:
-        // PersistentCache impl
-        ScopedCachedBlob LoadData(const PersistentCacheKey& key);
-        void StoreData(const PersistentCacheKey& key, const void* value, size_t size);
+        // Non-thread safe internal implementations of load/store. Exposed callers that use these
+        // helpers need to make sure that the functions are entered with `mMutex` held.
+        ScopedCachedBlob LoadDataInternal(const Key& key);
+        void StoreDataInternal(const Key& key, const void* value, size_t size);
 
-        dawn::platform::CachingInterface* GetPlatformCache();
-
-        DeviceBase* mDevice = nullptr;
-
+        // Protects thread safety of access to mCache.
         std::mutex mMutex;
         dawn::platform::CachingInterface* mCache = nullptr;
     };
