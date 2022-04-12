@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5b8ae5a_d6b5c442",
+        "filename": "tools/src/gerrit/gerrit.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-04-12T14:31:01Z",
+      "side": 1,
+      "message": "Yeah. I don\u0027t like Go\u0027s love of global state, but for things like command line args, I can just about live with it.",
+      "parentUuid": "5e92cd66_0f685745",
+      "revId": "42874fad308913c31f2e620a1d6250ace101d44c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06ddc6ba_6df5824a",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-04-12T14:24:48Z",
       "side": 1,
       "message": "Maybe explain that we are looking in .gitcookies as well?",
+      "revId": "42874fad308913c31f2e620a1d6250ace101d44c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d38a306_cca8fc5a",
+        "filename": "tools/src/gerrit/gerrit.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-04-12T14:31:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06ddc6ba_6df5824a",
       "revId": "42874fad308913c31f2e620a1d6250ace101d44c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
