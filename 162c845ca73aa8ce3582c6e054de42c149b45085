@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "646bec90_a5ea35aa",
+        "filename": "generator/templates/dawn/native/CacheKey.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-12T14:53:55Z",
+      "side": 1,
+      "message": "I don\u0027t feel very strongly since it\u0027s fairly small. I think generally the guidance is that it\u0027s not always worth designing for extensibility \"just in case\". Since in the future, the requirements/constraints may have changed, and the original solution may not be the best one anymore.",
+      "parentUuid": "eadae5de_6d2838b0",
+      "range": {
+        "startLine": 49,
+        "startChar": 48,
+        "endLine": 49,
+        "endChar": 56
+      },
+      "revId": "162c845ca73aa8ce3582c6e054de42c149b45085",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4825355e_43bbb4ae",
