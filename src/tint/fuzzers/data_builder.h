@@ -221,6 +221,15 @@ class DataBuilder {
     }
   };
 
+  template <>
+  struct BuildImpl<writer::MultiplanarExternalTextureOptions> {
+    static writer::ArrayLengthFromUniformOptions impl(DataBuilder* b) {
+      writer::MultiplanarExternalTextureOptions out{};
+      b->build(out.bindings_map);
+      return out;
+    }
+  };
+
   /// Specialization for std::unordered_map<K, V>
   template <typename K, typename V>
   struct BuildImpl<std::unordered_map<K, V>> {
