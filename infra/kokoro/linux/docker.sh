@@ -75,7 +75,7 @@ CLONE_SRC_DIR="$(pwd)"
 . /bin/using.sh # Declare the bash `using` function for configuring toolchains.
 
 using depot_tools
-using go-1.14.4      # Speeds up ./tools/lint
+using go-1.18
 using doxygen-1.8.18
 
 status "Creating source directory '${SRC_DIR}' and build directory '${BUILD_DIR}'"
@@ -148,6 +148,13 @@ if [ "$BUILD_SYSTEM" == "cmake" ]; then
         # fail. See https://www.doxygen.nl/manual/config.html#cfg_warn_as_error
         cmake ${SRC_DIR} ${CMAKE_FLAGS} ${COMMON_CMAKE_FLAGS}
         cmake --build . --target tint-docs
+    hide_cmds
+
+    status "Running go tool unittests"
+    show_cmds
+        pushd tools/src > /dev/null
+            go test ./...
+        popd > /dev/null
     hide_cmds
 
     status "Building dawn in '${BUILD_DIR}'"
