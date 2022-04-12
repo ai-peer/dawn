@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bb9f272_bad27974",
+        "filename": "src/tint/fuzzers/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-04-12T14:37:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9f8093e_2fa552ac",
+      "revId": "49da66a3a4ee365ebd6fe93385bd08bff9c538f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dec245df_ec990966",
