@@ -16,6 +16,23 @@
       "message": "PTAL! SampleUtils should be massively improved at some point, but it\u0027s not that high on the priority at the moment.",
       "revId": "6bf82aa1d582544f94fba6fbe291abebe00465b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da18843e_06c8a407",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-12T14:56:43Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6bf82aa1d582544f94fba6fbe291abebe00465b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
