@@ -152,9 +152,7 @@ if [ "$BUILD_SYSTEM" == "cmake" ]; then
 
     status "Running go tool unittests"
     show_cmds
-        pushd tools/src > /dev/null
-            go test ./...
-        popd > /dev/null
+        go test ./...
     hide_cmds
 
     status "Building dawn in '${BUILD_DIR}'"
