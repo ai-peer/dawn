@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6f7dd1e_e336321a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-12T14:24:48Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "42874fad308913c31f2e620a1d6250ace101d44c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e92cd66_0f685745",
+        "filename": "tools/src/gerrit/gerrit.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-12T14:24:48Z",
+      "side": 1,
+      "message": "This modifies the global \"flag\" variable? That\u0027s a bit weird.",
+      "revId": "42874fad308913c31f2e620a1d6250ace101d44c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06ddc6ba_6df5824a",
+        "filename": "tools/src/gerrit/gerrit.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-12T14:24:48Z",
+      "side": 1,
+      "message": "Maybe explain that we are looking in .gitcookies as well?",
+      "revId": "42874fad308913c31f2e620a1d6250ace101d44c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
