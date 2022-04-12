@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "670406ee_00b44c08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-04-12T04:14:59Z",
+      "side": 1,
+      "message": "Over LGTM, other then the one missing }",
+      "revId": "49da66a3a4ee365ebd6fe93385bd08bff9c538f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9f8093e_2fa552ac",
+        "filename": "src/tint/fuzzers/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-04-12T04:14:59Z",
+      "side": 1,
+      "message": "I think the *-rel bots are suggeting that `${fuzzer_corpus_wgsl_stamp` should be `${fuzzer_corpus_wgsl_stamp}`",
+      "revId": "49da66a3a4ee365ebd6fe93385bd08bff9c538f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dec245df_ec990966",
@@ -14,6 +48,30 @@
       "writtenOn": "2022-04-12T01:59:35Z",
       "side": 1,
       "message": "why not use argparse?",
+      "range": {
+        "startLine": 29,
+        "startChar": 7,
+        "endLine": 29,
+        "endChar": 15
+      },
+      "revId": "49da66a3a4ee365ebd6fe93385bd08bff9c538f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7296e87a_67c8a844",
+        "filename": "src/tint/fuzzers/generate_wgsl_corpus.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-04-12T04:14:59Z",
+      "side": 1,
+      "message": "I am not aware of any specific reason for the use of optparse instead of argparge.",
+      "parentUuid": "dec245df_ec990966",
       "range": {
         "startLine": 29,
         "startChar": 7,
