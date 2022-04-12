@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e191338e_5f5e871f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001791
+      },
+      "writtenOn": "2022-04-12T13:49:03Z",
+      "side": 1,
+      "message": "This commit breaks compilation from official tarballs (i.e. https://commondatastorage.googleapis.com/chromium-browser-official/chromium-102.0.4987.0.tar.xz ) because it tries to use git to obtain the revision, but that\u0027s not available in the tarball.",
+      "revId": "f57867264a7d661bb904df9f4404521f8e21f022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fde26ed_cd1f4cfd",
