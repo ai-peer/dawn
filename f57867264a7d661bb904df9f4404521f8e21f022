@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b95fefd9_53e9cff4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-12T13:52:59Z",
+      "side": 1,
+      "message": "Yeah :/. This should now be fixed as https://dawn-review.googlesource.com/c/dawn/+/85745 landed a while ago. Sorry for the breakage.",
+      "parentUuid": "e191338e_5f5e871f",
+      "revId": "f57867264a7d661bb904df9f4404521f8e21f022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fde26ed_cd1f4cfd",
