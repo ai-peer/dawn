@@ -16,6 +16,23 @@
       "message": "ptal",
       "revId": "a4d85f101a2871fb0417cc8dd6954eec060785e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65b5ed69_50df614e",
+        "filename": "src/dawn/platform/WorkerThread.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-12T07:03:09Z",
+      "side": 1,
+      "message": "nit: this one removed `explicit`?",
+      "revId": "a4d85f101a2871fb0417cc8dd6954eec060785e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
