@@ -105,6 +105,24 @@
       "parentUuid": "0f1a9792_f315797d",
       "revId": "63600cb63836a974a3ed054e9536416b87352412",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e6c4f13_1b71f6e5",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-12T13:51:29Z",
+      "side": 1,
+      "message": "This breaks Chrome build:\n\n```\n../../gpu/command_buffer/service/webgpu_decoder_impl.cc:1548:55: error: reference to type \u0027const dawn::native::Adapter\u0027 could not bind to an rvalue of type \u0027std::nullptr_t\u0027\n    SendAdapterProperties(request_adapter_serial, -1, nullptr,\n```",
+      "parentUuid": "741f4f93_f4be5596",
+      "revId": "63600cb63836a974a3ed054e9536416b87352412",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
