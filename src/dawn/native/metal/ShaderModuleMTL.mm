@@ -97,8 +97,6 @@ namespace dawn::native::metal {
         transformManager.Add<tint::transform::SingleEntryPoint>();
         transformInputs.Add<tint::transform::SingleEntryPoint::Config>(entryPointName);
 
-        AddExternalTextureTransform(layout, &transformManager, &transformInputs);
-
         if (stage == SingleShaderStage::Vertex &&
             GetDevice()->IsToggleEnabled(Toggle::MetalEnableVertexPulling)) {
             transformManager.Add<tint::transform::VertexPulling>();
@@ -163,6 +161,7 @@ namespace dawn::native::metal {
         options.emit_vertex_point_size =
             stage == SingleShaderStage::Vertex &&
             renderPipeline->GetPrimitiveTopology() == wgpu::PrimitiveTopology::PointList;
+        options.multiplanar_external_texture = BuildExternalTextureOptions(layout, true);
         TRACE_EVENT0(GetDevice()->GetPlatform(), General, "tint::writer::msl::Generate");
         auto result = tint::writer::msl::Generate(&program, options);
         DAWN_INVALID_IF(!result.success, "An error occured while generating MSL: %s.",

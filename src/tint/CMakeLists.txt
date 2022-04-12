@@ -453,6 +453,8 @@ set(TINT_LIB_SRCS
   writer/float_to_string.h
   writer/generate_external_texture_bindings.cc
   writer/generate_external_texture_bindings.h
+  writer/multiplanar_external_texture_options.cc
+  writer/multiplanar_external_texture_options.h
   writer/text_generator.cc
   writer/text_generator.h
   writer/text.cc
