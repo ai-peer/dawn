@@ -1304,26 +1304,28 @@ namespace dawn::native {
     }
 
     // static
-    void ShaderModuleBase::AddExternalTextureTransform(const PipelineLayoutBase* layout,
-                                                       tint::transform::Manager* transformManager,
-                                                       tint::transform::DataMap* transformInputs) {
-        tint::transform::MultiplanarExternalTexture::BindingsMap newBindingsMap;
+    tint::writer::MultiplanarExternalTextureOptions ShaderModuleBase::BuildExternalTextureOptions(
+        const PipelineLayoutBase* layout,
+        bool use_binding_index) {
+        tint::writer::MultiplanarExternalTextureOptions extTexOptions;
         for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
             const BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(i);
 
+            auto to_index = [&](auto index) -> uint32_t {
+                if (use_binding_index) {
+                    return static_cast<uint32_t>(bgl->GetBindingIndex(index));
+                }
+                return static_cast<uint32_t>(index);
+            };
+
             for (const auto& expansion : bgl->GetExternalTextureBindingExpansionMap()) {
-                newBindingsMap[{static_cast<uint32_t>(i),
-                                static_cast<uint32_t>(expansion.second.plane0)}] = {
-                    {static_cast<uint32_t>(i), static_cast<uint32_t>(expansion.second.plane1)},
-                    {static_cast<uint32_t>(i), static_cast<uint32_t>(expansion.second.params)}};
+                auto gi = static_cast<uint32_t>(i);
+                extTexOptions.bindings_map[{gi, to_index(expansion.second.plane0)}] = {
+                    {gi, to_index(expansion.second.plane1)},
+                    {gi, to_index(expansion.second.params)}};
             }
         }
-
-        if (!newBindingsMap.empty()) {
-            transformManager->Add<tint::transform::MultiplanarExternalTexture>();
-            transformInputs->Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
-                newBindingsMap);
-        }
+        return extTexOptions;
     }
 
     MaybeError ShaderModuleBase::InitializeBase(ShaderModuleParseResult* parseResult) {

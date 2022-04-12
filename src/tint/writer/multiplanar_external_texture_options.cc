@@ -12,18 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_TINT_WRITER_GENERATE_EXTERNAL_TEXTURE_BINDINGS_H_
-#define SRC_TINT_WRITER_GENERATE_EXTERNAL_TEXTURE_BINDINGS_H_
-
-#include "src/tint/transform/multiplanar_external_texture.h"
+#include "src/tint/writer/multiplanar_external_texture_options.h"
 
 namespace tint::writer {
 
-/// Automatically generates and returns the binding points map for all
-/// texture_externals in `program`.
-transform::MultiplanarExternalTexture::BindingsMap
-GenerateExternalTextureBindings(const Program* program);
+MultiplanarExternalTextureOptions::MultiplanarExternalTextureOptions() =
+    default;
+MultiplanarExternalTextureOptions::~MultiplanarExternalTextureOptions() =
+    default;
+MultiplanarExternalTextureOptions::MultiplanarExternalTextureOptions(
+    const MultiplanarExternalTextureOptions&) = default;
+MultiplanarExternalTextureOptions& MultiplanarExternalTextureOptions::operator=(
+    const MultiplanarExternalTextureOptions&) = default;
+MultiplanarExternalTextureOptions::MultiplanarExternalTextureOptions(
+    MultiplanarExternalTextureOptions&&) = default;
 
 }  // namespace tint::writer
-
-#endif  // SRC_TINT_WRITER_GENERATE_EXTERNAL_TEXTURE_BINDINGS_H_

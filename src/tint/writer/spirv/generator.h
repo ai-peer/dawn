@@ -19,6 +19,7 @@
 #include <string>
 #include <vector>
 
+#include "src/tint/writer/multiplanar_external_texture_options.h"
 #include "src/tint/writer/writer.h"
 
 // Forward declarations
@@ -41,12 +42,13 @@ struct Options {
   /// Set to `true` to disable workgroup memory zero initialization
   bool disable_workgroup_init = false;
 
-  /// Set to 'true' to generates binding mappings for external textures
-  bool generate_external_texture_bindings = false;
-
   /// Set to `true` to initialize workgroup memory with OpConstantNull when
   /// VK_KHR_zero_initialize_workgroup_memory is enabled.
   bool use_zero_initialize_workgroup_memory_extension = false;
+
+  /// Options used to specify the mapping of external texture binding points to
+  /// the pair of binding points for the texture_2d plane #1 and the uniform.
+  MultiplanarExternalTextureOptions multiplanar_external_texture;
 };
 
 /// The result produced when generating SPIR-V.
