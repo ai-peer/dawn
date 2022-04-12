@@ -22,6 +22,7 @@
 #include "dawn/native/Error.h"
 #include "dawn/native/Features.h"
 #include "dawn/native/Limits.h"
+#include "dawn/native/PersistentCache.h"
 #include "dawn/native/dawn_platform.h"
 
 #include <string>
