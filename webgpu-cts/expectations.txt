@@ -124,12 +124,6 @@ crbug.com/dawn/0000 webgpu:web_platform,copyToTexture,ImageBitmap:* [ Failure ]
 crbug.com/dawn/0000 [ win ] webgpu:api,validation,state,device_lost,destroy:* [ Failure ]
 
 ################################################################################
-# webgpu:api,validation,queue,writeBuffer:ranges:
-# KEEP
-################################################################################
-crbug.com/dawn/0000 webgpu:api,validation,queue,writeBuffer:ranges: [ Failure ]
-
-################################################################################
 # webgpu:web_platform,copyToTexture,canvas:copy_contents_from_gpu_context_canvas
 # KEEP
 ################################################################################
@@ -197,26 +191,6 @@ crbug.com/dawn/0000 [ mac ] webgpu:api,operation,render_pass,storeOp:render_pass
 crbug.com/dawn/0000 [ win ] webgpu:api,operation,command_buffer,copyTextureToTexture:copy_depth_stencil:format="depth24unorm-stencil8" [ Failure ]
 crbug.com/dawn/0000 [ win ] webgpu:api,operation,command_buffer,image_copy:rowsPerImage_and_bytesPerRow_depth_stencil:format="depth32float-stencil8";copyMethod="CopyT2B";aspect="depth-only" [ Failure ]
 crbug.com/dawn/0000 [ win ] webgpu:api,operation,render_pass,storeOp:render_pass_store_op,depth_stencil_attachment_only:depthStencilFormat="stencil8";* [ Failure ]
-crbug.com/dawn/0000 webgpu:api,operation,command_buffer,image_copy:offsets_and_sizes_copy_depth_stencil:format="depth32float-stencil8";copyMethod="CopyT2B";aspect="depth-only" [ Failure ]
-crbug.com/dawn/0000 webgpu:api,validation,image_copy,layout_related:required_bytes_in_copy:method="CopyB2T";format="stencil8";* [ Failure ]
-crbug.com/dawn/0000 webgpu:api,validation,image_copy,layout_related:required_bytes_in_copy:method="CopyT2B";format="stencil8";* [ Failure ]
-crbug.com/dawn/0000 webgpu:api,validation,resource_usages,texture,in_pass_encoder:subresources_and_binding_types_combination_for_aspect:compute=false;binding0InBundle=false;binding1InBundle=false;format="depth24unorm-stencil8" [ Failure ]
-crbug.com/dawn/0000 webgpu:api,validation,resource_usages,texture,in_pass_encoder:subresources_and_binding_types_combination_for_aspect:compute=false;binding0InBundle=false;binding1InBundle=false;format="depth32float-stencil8" [ Failure ]
-crbug.com/dawn/0000 webgpu:api,validation,resource_usages,texture,in_pass_encoder:subresources_and_binding_types_combination_for_aspect:compute=false;binding0InBundle=true;binding1InBundle=false;format="depth24plus-stencil8" [ Failure ]
-crbug.com/dawn/0000 webgpu:api,validation,resource_usages,texture,in_pass_encoder:subresources_and_binding_types_combination_for_aspect:compute=false;binding0InBundle=true;binding1InBundle=false;format="depth24unorm-stencil8" [ Failure ]
-crbug.com/dawn/0000 webgpu:api,validation,resource_usages,texture,in_pass_encoder:subresources_and_binding_types_combination_for_aspect:compute=false;binding0InBundle=true;binding1InBundle=false;format="depth32float-stencil8" [ Failure ]
-crbug.com/dawn/0000 worker_webgpu:api,operation,render_pass,storeOp:render_pass_store_op,depth_stencil_attachment_only:depthStencilFormat="stencil8";* [ Failure ]
-
-################################################################################
-# depth16unorm failures
-# KEEP
-################################################################################
-crbug.com/dawn/0000 webgpu:api,operation,command_buffer,copyTextureToTexture:copy_depth_stencil:format="depth16unorm" [ Failure ]
-crbug.com/dawn/0000 webgpu:api,operation,command_buffer,image_copy:offsets_and_sizes_copy_depth_stencil:format="depth16unorm";* [ Failure ]
-crbug.com/dawn/0000 webgpu:api,operation,command_buffer,image_copy:rowsPerImage_and_bytesPerRow_depth_stencil:format="depth16unorm";* [ Failure ]
-crbug.com/dawn/0000 webgpu:api,validation,encoding,cmds,buffer_texture_copies:depth_stencil_format,copy_usage_and_aspect:format="depth16unorm" [ Failure ]
-crbug.com/dawn/0000 webgpu:api,validation,image_copy,layout_related:required_bytes_in_copy:method="CopyB2T";format="depth16unorm";* [ Failure ]
-crbug.com/dawn/0000 webgpu:api,validation,image_copy,layout_related:required_bytes_in_copy:method="CopyT2B";format="depth16unorm";* [ Failure ]
 
 ################################################################################
 # depth24plus failures
@@ -224,7 +198,6 @@ crbug.com/dawn/0000 webgpu:api,validation,image_copy,layout_related:required_byt
 ################################################################################
 crbug.com/dawn/0000 [ mac ] webgpu:api,operation,command_buffer,copyTextureToTexture:copy_depth_stencil:format="depth24plus-stencil8" [ Failure ]
 crbug.com/dawn/0000 [ mac ] webgpu:api,operation,command_buffer,copyTextureToTexture:copy_depth_stencil:format="depth24plus" [ Failure ]
-crbug.com/dawn/0000 webgpu:api,validation,resource_usages,texture,in_pass_encoder:subresources_and_binding_types_combination_for_aspect:compute=false;binding0InBundle=false;binding1InBundle=false;format="depth24plus-stencil8" [ Failure ]
 
 ################################################################################
 # webgpu:api,operation,command_buffer,copyTextureToTexture compressed texture failures
@@ -486,12 +459,6 @@ crbug.com/dawn/0000 [ win ] webgpu:shader,execution,expression,call,builtin,ldex
 crbug.com/tint/1500 [ win nvidia release ] webgpu:shader,execution,shader_io,compute_builtins:inputs:* [ Failure ]
 
 ################################################################################
-# vertex_state failures
-# KEEP
-################################################################################
-crbug.com/dawn/0000 webgpu:api,validation,vertex_state:vertex_shader_input_location_limit: [ Failure ]
-
-################################################################################
 # webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed failures
 # KEEP
 ################################################################################
@@ -502,7 +469,6 @@ crbug.com/dawn/0000 [ win ] webgpu:api,operation,command_buffer,copyTextureToTex
 # untriaged failures
 # KEEP
 ################################################################################
-crbug.com/dawn/0000 webgpu:api,validation,createBindGroupLayout:max_resources_per_stage,in_bind_group_layout:* [ Failure ]
 crbug.com/dawn/0000 webgpu:api,validation,encoding,cmds,copyTextureToTexture:texture_format_compatibility: [ Failure ]
 crbug.com/dawn/0000 [ linux ] webgpu:api,operation,command_buffer,basic:* [ Failure ]
 crbug.com/dawn/0000 [ linux ] webgpu:api,operation,command_buffer,copyBufferToBuffer:* [ Failure ]
