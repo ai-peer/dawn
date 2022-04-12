@@ -69,6 +69,24 @@
       "parentUuid": "de23b508_2350f14f",
       "revId": "63600cb63836a974a3ed054e9536416b87352412",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f1a9792_f315797d",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-12T12:54:24Z",
+      "side": 1,
+      "message": "Done. Required a change in the DawnNative.cpp to explicitly construct the Adapter when putting into the vector.\n\n```\n--- a/src/dawn/native/DawnNative.cpp\n+++ b/src/dawn/native/DawnNative.cpp\n@@ -210,7 +210,7 @@ namespace dawn::native {\n         // Adapters are owned by mImpl so it is safe to return non RAII pointers to them\n         std::vector\u003cAdapter\u003e adapters;\n         for (const Ref\u003cAdapterBase\u003e\u0026 adapter : mImpl-\u003eGetAdapters()) {\n-            adapters.push_back({adapter.Get()});\n+            adapters.push_back(Adapter(adapter.Get()));\n         }\n         return adapters;\n     }\n```",
+      "parentUuid": "de23b508_2350f14f",
+      "revId": "63600cb63836a974a3ed054e9536416b87352412",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
