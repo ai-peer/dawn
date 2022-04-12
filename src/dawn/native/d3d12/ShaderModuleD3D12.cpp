@@ -194,6 +194,7 @@ namespace dawn::native::d3d12 {
             uint32_t numWorkgroupsRegisterSpace;
             uint32_t numWorkgroupsShaderRegister;
             tint::writer::ArrayLengthFromUniformOptions arrayLengthFromUniform;
+            tint::writer::MultiplanarExternalTextureOptions externalTexture;
             std::vector<std::pair<std::string, std::string>> defineStrings;
 
             // FXC/DXC common inputs
@@ -310,6 +311,8 @@ namespace dawn::native::d3d12 {
                 request.numWorkgroupsShaderRegister = layout->GetNumWorkgroupsShaderRegister();
                 request.numWorkgroupsRegisterSpace = layout->GetNumWorkgroupsRegisterSpace();
                 request.arrayLengthFromUniform = std::move(arrayLengthFromUniform);
+                request.externalTexture =
+                    ShaderModuleBase::BuildExternalTextureOptions(layout, false);
                 request.fxcVersion = compiler == Compiler::FXC ? GetD3DCompilerVersion() : 0;
                 request.dxcVersion = compiler == Compiler::DXC ? dxcVersion : 0;
                 request.deviceInfo = &device->GetDeviceInfo();
@@ -367,6 +370,8 @@ namespace dawn::native::d3d12 {
 
                 stream << " arrayLengthFromUniform=";
                 Serialize(stream, arrayLengthFromUniform);
+
+                // TODO: SERIALIZE externalTexture HERE
 
                 stream << " shaderModel=" << deviceInfo->shaderModel;
                 stream << " disableWorkgroupInit=" << disableWorkgroupInit;
@@ -667,6 +672,7 @@ namespace dawn::native::d3d12 {
             // them as well. This would allow us to only upload root constants that are actually
             // read by the shader.
             options.array_length_from_uniform = request.arrayLengthFromUniform;
+            options.multiplanar_external_texture = request.externalTexture;
             TRACE_EVENT0(platform, General, "tint::writer::hlsl::Generate");
             auto result = tint::writer::hlsl::Generate(&transformedProgram, options);
             DAWN_INVALID_IF(!result.success, "An error occured while generating HLSL: %s",
@@ -769,8 +775,6 @@ namespace dawn::native::d3d12 {
 
         const tint::Program* program = GetTintProgram();
         tint::Program programAsValue;
-
-        AddExternalTextureTransform(layout, &transformManager, &transformInputs);
 
         if (stage == SingleShaderStage::Vertex) {
             transformManager.Add<tint::transform::FirstIndexOffset>();

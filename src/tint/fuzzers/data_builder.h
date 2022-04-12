@@ -171,7 +171,7 @@ class DataBuilder {
       b->build(out.fixed_sample_mask);
       b->build(out.emit_vertex_point_size);
       b->build(out.disable_workgroup_init);
-      b->build(out.generate_external_texture_bindings);
+      b->build(out.multiplanar_external_texture);
       b->build(out.array_length_from_uniform);
       return out;
     }
@@ -187,6 +187,7 @@ class DataBuilder {
       writer::hlsl::Options out{};
       b->build(out.root_constant_binding_point);
       b->build(out.disable_workgroup_init);
+      b->build(out.multiplanar_external_texture);
       b->build(out.array_length_from_uniform);
       return out;
     }
@@ -202,6 +203,7 @@ class DataBuilder {
       writer::spirv::Options out{};
       b->build(out.emit_vertex_point_size);
       b->build(out.disable_workgroup_init);
+      b->build(out.multiplanar_external_texture);
       return out;
     }
   };
@@ -217,6 +219,15 @@ class DataBuilder {
       writer::ArrayLengthFromUniformOptions out{};
       b->build(out.ubo_binding);
       b->build(out.bindpoint_to_size_index);
+      return out;
+    }
+  };
+
+  template <>
+  struct BuildImpl<writer::MultiplanarExternalTextureOptions> {
+    static writer::MultiplanarExternalTextureOptions impl(DataBuilder* b) {
+      writer::MultiplanarExternalTextureOptions out{};
+      b->build(out.bindings_map);
       return out;
     }
   };
