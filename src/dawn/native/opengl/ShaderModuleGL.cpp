@@ -87,8 +87,6 @@ namespace dawn::native::opengl {
         tint::transform::Manager transformManager;
         tint::transform::DataMap transformInputs;
 
-        AddExternalTextureTransform(layout, &transformManager, &transformInputs);
-
         tint::Program program;
         DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, GetTintProgram(), transformInputs,
                                                nullptr, nullptr));
@@ -159,6 +157,7 @@ namespace dawn::native::opengl {
             }
             tintOptions.allow_collisions = true;
         }
+        tintOptions.multiplanar_external_texture_options = BuildExternalTextureOptions(layout);
         auto result = tint::writer::glsl::Generate(&program, tintOptions, entryPointName);
         DAWN_INVALID_IF(!result.success, "An error occured while generating GLSL: %s.",
                         result.error);

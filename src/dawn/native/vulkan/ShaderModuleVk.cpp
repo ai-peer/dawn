@@ -169,32 +169,27 @@ namespace dawn::native::vulkan {
 
         // Transform external textures into the binding locations specified in the bgl
         // TODO(dawn:1082): Replace this block with ShaderModuleBase::AddExternalTextureTransform.
-        tint::transform::MultiplanarExternalTexture::BindingsMap newBindingsMap;
-        for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
-            BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(i);
+        // tint::writer::MultiplanarExternalTextureOptions extTexOptions;
+        // for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+        //     BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(i);
 
-            ExternalTextureBindingExpansionMap expansions =
-                bgl->GetExternalTextureBindingExpansionMap();
+        //     ExternalTextureBindingExpansionMap expansions =
+        //         bgl->GetExternalTextureBindingExpansionMap();
 
-            std::map<BindingNumber, dawn_native::ExternalTextureBindingExpansion>::iterator it =
-                expansions.begin();
+        //     std::map<BindingNumber, dawn_native::ExternalTextureBindingExpansion>::iterator it =
+        //         expansions.begin();
 
-            while (it != expansions.end()) {
-                newBindingsMap[{static_cast<uint32_t>(i),
-                                static_cast<uint32_t>(bgl->GetBindingIndex(it->second.plane0))}] = {
-                    {static_cast<uint32_t>(i),
-                     static_cast<uint32_t>(bgl->GetBindingIndex(it->second.plane1))},
-                    {static_cast<uint32_t>(i),
-                     static_cast<uint32_t>(bgl->GetBindingIndex(it->second.params))}};
-                it++;
-            }
-        }
-
-        if (!newBindingsMap.empty()) {
-            transformManager.Add<tint::transform::MultiplanarExternalTexture>();
-            transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
-                newBindingsMap);
-        }
+        //     while (it != expansions.end()) {
+        //         extTexOptions.bindings_map[{
+        //             static_cast<uint32_t>(i),
+        //             static_cast<uint32_t>(bgl->GetBindingIndex(it->second.plane0))}] = {
+        //             {static_cast<uint32_t>(i),
+        //              static_cast<uint32_t>(bgl->GetBindingIndex(it->second.plane1))},
+        //             {static_cast<uint32_t>(i),
+        //              static_cast<uint32_t>(bgl->GetBindingIndex(it->second.params))}};
+        //         it++;
+        //     }
+        // }
 
         tint::Program program;
         {
@@ -209,6 +204,8 @@ namespace dawn::native::vulkan {
         options.disable_workgroup_init = GetDevice()->IsToggleEnabled(Toggle::DisableWorkgroupInit);
         options.use_zero_initialize_workgroup_memory_extension =
             GetDevice()->IsToggleEnabled(Toggle::VulkanUseZeroInitializeWorkgroupMemoryExtension);
+        // options.multiplanar_external_texture_options = std::move(extTexOptions);
+        options.multiplanar_external_texture_options = BuildExternalTextureOptions(layout);
 
         Spirv spirv;
         {

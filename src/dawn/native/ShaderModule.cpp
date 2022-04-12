@@ -1304,26 +1304,20 @@ namespace dawn::native {
     }
 
     // static
-    void ShaderModuleBase::AddExternalTextureTransform(const PipelineLayoutBase* layout,
-                                                       tint::transform::Manager* transformManager,
-                                                       tint::transform::DataMap* transformInputs) {
-        tint::transform::MultiplanarExternalTexture::BindingsMap newBindingsMap;
+    tint::writer::MultiplanarExternalTextureOptions ShaderModuleBase::BuildExternalTextureOptions(
+        const PipelineLayoutBase* layout) {
+        tint::writer::MultiplanarExternalTextureOptions extTexOptions;
         for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
             const BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(i);
 
             for (const auto& expansion : bgl->GetExternalTextureBindingExpansionMap()) {
-                newBindingsMap[{static_cast<uint32_t>(i),
-                                static_cast<uint32_t>(expansion.second.plane0)}] = {
+                extTexOptions.bindings_map[{static_cast<uint32_t>(i),
+                                            static_cast<uint32_t>(expansion.second.plane0)}] = {
                     {static_cast<uint32_t>(i), static_cast<uint32_t>(expansion.second.plane1)},
                     {static_cast<uint32_t>(i), static_cast<uint32_t>(expansion.second.params)}};
             }
         }
-
-        if (!newBindingsMap.empty()) {
-            transformManager->Add<tint::transform::MultiplanarExternalTexture>();
-            transformInputs->Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
-                newBindingsMap);
-        }
+        return extTexOptions;
     }
 
     MaybeError ShaderModuleBase::InitializeBase(ShaderModuleParseResult* parseResult) {

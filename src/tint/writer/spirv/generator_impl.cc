@@ -25,6 +25,7 @@
 #include "src/tint/transform/fold_constants.h"
 #include "src/tint/transform/for_loop_to_loop.h"
 #include "src/tint/transform/manager.h"
+#include "src/tint/transform/multiplanar_external_texture.h"
 #include "src/tint/transform/promote_side_effects_to_decl.h"
 #include "src/tint/transform/remove_unreachable_statements.h"
 #include "src/tint/transform/simplify_pointers.h"
@@ -33,7 +34,6 @@
 #include "src/tint/transform/var_for_dynamic_index.h"
 #include "src/tint/transform/vectorize_scalar_matrix_constructors.h"
 #include "src/tint/transform/zero_init_workgroup_memory.h"
-#include "src/tint/writer/generate_external_texture_bindings.h"
 
 namespace tint::writer::spirv {
 
@@ -54,11 +54,8 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
     manager.Add<transform::BuiltinPolyfill>();
   }
 
-  if (options.generate_external_texture_bindings) {
-    auto new_bindings_map = GenerateExternalTextureBindings(in);
-    data.Add<transform::MultiplanarExternalTexture::NewBindingPoints>(
-        new_bindings_map);
-  }
+  data.Add<transform::MultiplanarExternalTexture::NewBindingPoints>(
+      options.multiplanar_external_texture_options.bindings_map);
   manager.Add<transform::MultiplanarExternalTexture>();
 
   manager.Add<transform::Unshadow>();

@@ -46,6 +46,10 @@ namespace tint {
         class VertexPulling;
     }  // namespace transform
 
+    namespace writer {
+        struct MultiplanarExternalTextureOptions;
+    }  // namespace writer
+
 }  // namespace tint
 
 namespace dawn::native {
@@ -289,9 +293,8 @@ namespace dawn::native {
 
         MaybeError InitializeBase(ShaderModuleParseResult* parseResult);
 
-        static void AddExternalTextureTransform(const PipelineLayoutBase* layout,
-                                                tint::transform::Manager* transformManager,
-                                                tint::transform::DataMap* transformInputs);
+        static tint::writer::MultiplanarExternalTextureOptions BuildExternalTextureOptions(
+            const PipelineLayoutBase* layout);
 
       private:
         ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag);
