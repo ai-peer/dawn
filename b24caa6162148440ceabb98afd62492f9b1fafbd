@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "defa9024_cf4eb31f",
+        "filename": "tools/src/git/git.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-12T14:13:25Z",
+      "side": 1,
+      "message": "nit: --amend I think. Otherwise it would do -a -m -e -n -d",
+      "revId": "b24caa6162148440ceabb98afd62492f9b1fafbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
