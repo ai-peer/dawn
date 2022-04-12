@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e98ab1c_437186a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-12T21:02:54Z",
+      "side": 1,
+      "message": "Followup to https://dawn-review.googlesource.com/c/dawn/+/85843 to help ensure that we don\u0027t run into the same type of casting confusion again (which broke the Dawn-\u003eChromium roll initially).",
+      "revId": "89b2f20c4a36acbc7a6bb11f69abcae8e348fede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
