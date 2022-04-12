@@ -33,6 +33,24 @@
       "message": "This is a bit surprising that it would be an issue since that constructor can only be used by dawn_native, how hard is it to fix this one?",
       "revId": "63600cb63836a974a3ed054e9536416b87352412",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de23b508_2350f14f",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-12T12:42:53Z",
+      "side": 1,
+      "message": "I\u0027m not sure, I was concerned that changing it would cause issues downstream so went with just ignoring the error. If I change it, and the bots are happy, does that mean we\u0027re good?",
+      "parentUuid": "ddc8fd07_17198cb4",
+      "revId": "63600cb63836a974a3ed054e9536416b87352412",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
