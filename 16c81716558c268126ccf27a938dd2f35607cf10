@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b661f46_23fbc82c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-12T15:03:47Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "16c81716558c268126ccf27a938dd2f35607cf10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0f0b209_0d4c5ec3",
+        "filename": "tools/src/gitiles/gitiles.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-12T15:03:47Z",
+      "side": 1,
+      "message": "nit: unused, but maybe we want to have the context passed everywhere for regularity?",
+      "range": {
+        "startLine": 35,
+        "startChar": 9,
+        "endLine": 35,
+        "endChar": 12
+      },
+      "revId": "16c81716558c268126ccf27a938dd2f35607cf10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
