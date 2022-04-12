@@ -22,22 +22,15 @@
 #include "src/tint/sem/binding_point.h"
 #include "src/tint/sem/builtin_type.h"
 #include "src/tint/transform/transform.h"
+#include "src/tint/writer/multiplanar_external_texture_options.h"
 
 namespace tint::transform {
 
-/// BindingPoint is an alias to sem::BindingPoint
-using BindingPoint = sem::BindingPoint;
+/// BindingPoint alias
+using BindingPoint = writer::MultiplanarExternalTextureOptions::BindingPoint;
 
-/// This struct identifies the binding groups and locations for new bindings to
-/// use when transforming a texture_external instance.
-struct BindingPoints {
-  /// The desired binding location of the texture_2d representing plane #1 when
-  /// a texture_external binding is expanded.
-  BindingPoint plane_1;
-  /// The desired binding location of the ExternalTextureParams uniform when a
-  /// texture_external binding is expanded.
-  BindingPoint params;
-};
+// BindingPoints alias
+using BindingPoints = writer::MultiplanarExternalTextureOptions::BindingPoints;
 
 /// Within the MultiplanarExternalTexture transform, each instance of a
 /// texture_external binding is unpacked into two texture_2d<f32> bindings
@@ -50,10 +43,8 @@ struct BindingPoints {
 class MultiplanarExternalTexture
     : public Castable<MultiplanarExternalTexture, Transform> {
  public:
-  /// BindingsMap is a map where the key is the binding location of a
-  /// texture_external and the value is a struct containing the desired
-  /// locations for new bindings expanded from the texture_external instance.
-  using BindingsMap = std::unordered_map<BindingPoint, BindingPoints>;
+  /// BindingsMap alias
+  using BindingsMap = writer::MultiplanarExternalTextureOptions::BindingsMap;
 
   /// NewBindingPoints is consumed by the MultiplanarExternalTexture transform.
   /// Data holds information about location of each texture_external binding and

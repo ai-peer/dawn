@@ -26,6 +26,7 @@
 #include "src/tint/sem/binding_point.h"
 #include "src/tint/sem/sampler_texture_pair.h"
 #include "src/tint/writer/glsl/version.h"
+#include "src/tint/writer/multiplanar_external_texture_options.h"
 #include "src/tint/writer/text.h"
 
 // Forward declarations
@@ -73,8 +74,9 @@ struct Options {
   /// Set to `true` to disable workgroup memory zero initialization
   bool disable_workgroup_init = false;
 
-  /// Set to 'true' to generates binding mappings for external textures
-  bool generate_external_texture_bindings = false;
+  /// Options used to specify the mapping of external texture binding points to
+  /// the pair of binding points for the texture_2d plane #1 and the uniform.
+  MultiplanarExternalTextureOptions multiplanar_external_texture_options;
 
   /// The GLSL version to emit
   Version version;
