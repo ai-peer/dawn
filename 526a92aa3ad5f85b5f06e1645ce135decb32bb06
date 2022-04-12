@@ -161,6 +161,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a0a739e9_bb23c9a4",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-04-12T01:25:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68a3319a_d46711ae",
+      "range": {
+        "startLine": 1056,
+        "startChar": 50,
+        "endLine": 1056,
+        "endChar": 88
+      },
+      "revId": "526a92aa3ad5f85b5f06e1645ce135decb32bb06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1957dbbc_5475854a",
         "filename": "src/dawn/native/vulkan/QueueVk.cpp",
         "patchSetId": 2

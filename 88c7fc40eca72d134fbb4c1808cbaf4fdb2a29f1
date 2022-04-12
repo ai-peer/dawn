@@ -16,6 +16,23 @@
       "message": "Addressed feedback and updated the validation test.",
       "revId": "88c7fc40eca72d134fbb4c1808cbaf4fdb2a29f1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec2be408_05e03bb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-04-12T01:25:08Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "88c7fc40eca72d134fbb4c1808cbaf4fdb2a29f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
