@@ -50,6 +50,24 @@
       "message": "Corentin wanted to unify around mOwnsHandle. Since we\u0027re diverging here, could we add a comment that we\u0027re doing this to limit the number of scenarios where a separate texture handle is used for writing and would require copying back to the original texture ?",
       "revId": "01a23f302aa5b850ea0879d12ab8ab046e70c40d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2506d03_238e5c1f",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-04-12T00:47:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "548c2857_ec83dc0c",
+      "revId": "01a23f302aa5b850ea0879d12ab8ab046e70c40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
