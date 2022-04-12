@@ -25,6 +25,7 @@ constexpr static uint64_t kBytesPerRow = 256;
 constexpr static uint64_t kRowsPerImagePadding = 1;
 constexpr static uint64_t kRowsPerImage = kRowsPerImagePadding + kCopySize.height;
 constexpr static wgpu::TextureFormat kFormat = wgpu::TextureFormat::RGBA8Unorm;
+constexpr static uint32_t kBytesPerBlock = 4;
 
 // Tests in this file are used to expose an error on D3D12 about required minimum buffer size.
 // See detailed bug reports at crbug.com/dawn/1278, 1288, 1289.
@@ -71,51 +72,78 @@ class RequiredBufferSizeInCopyTests : public DawnTest {
         wgpu::ImageCopyBuffer imageCopyBuffer =
             utils::CreateImageCopyBuffer(buffer, kOffset, kBytesPerRow, kRowsPerImage);
 
+        // Initialize copied data and set expected data for buffer and texture.
+        ASSERT(sizeof(uint32_t) == kBytesPerBlock);
+        std::vector<uint32_t> data(bufferSize / kBytesPerBlock, 1);
+        std::vector<uint32_t> expectedBufferData(bufferSize / kBytesPerBlock, 0);
+        std::vector<uint32_t> expectedTextureData(kCopySize.depthOrArrayLayers, 0);
+        uint64_t imageSize = kBytesPerRow * kRowsPerImage;
+        // Initialize the first element on every image to be 0x80808080
+        ASSERT(bufferSize >= (imageSize * (kCopySize.depthOrArrayLayers - 1) + kBytesPerBlock));
+        for (uint32_t i = 0; i < kCopySize.depthOrArrayLayers; ++i) {
+            data[i * imageSize / kBytesPerBlock] = 0x80808080;
+            expectedBufferData[i * imageSize / kBytesPerBlock] = 0x80808080;
+            expectedTextureData[i] = 0x80808080;
+        }
+
+        // Do B2T copy or T2B copy
         wgpu::CommandEncoder encoder = this->device.CreateCommandEncoder();
         switch (copyType) {
             case Type::T2BCopy: {
-                std::vector<uint32_t> expectedData(bufferSize / 4, 1);
                 wgpu::TextureDataLayout textureDataLayout =
                     utils::CreateTextureDataLayout(kOffset, kBytesPerRow, kRowsPerImage);
 
-                queue.WriteTexture(&imageCopyTexture, expectedData.data(), bufferSize,
-                                   &textureDataLayout, &kCopySize);
+                queue.WriteTexture(&imageCopyTexture, data.data(), bufferSize, &textureDataLayout,
+                                   &kCopySize);
 
                 encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer, &kCopySize);
                 break;
             }
             case Type::B2TCopy:
+                queue.WriteBuffer(buffer, 0, data.data(), bufferSize);
                 encoder.CopyBufferToTexture(&imageCopyBuffer, &imageCopyTexture, &kCopySize);
                 break;
         }
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
+
+        // Verify the data in buffer (T2B copy) or texture (B2T copy)
+        switch (copyType) {
+            case Type::T2BCopy:
+                EXPECT_BUFFER_U32_RANGE_EQ(expectedBufferData.data(), buffer, 0, bufferSize / 4);
+                break;
+            case Type::B2TCopy:
+                EXPECT_TEXTURE_EQ(expectedTextureData.data(), texture, {0, 0, 0}, kCopySize);
+                break;
+        }
     }
 };
 
-TEST_P(RequiredBufferSizeInCopyTests, T2BCopyWithAbundantBufferSize) {
+TEST_P(RequiredBufferSizeInCopyTests, AbundantBufferSize) {
     uint64_t size = kOffset + kBytesPerRow * kRowsPerImage * kCopySize.depthOrArrayLayers;
     DoTest(size, Type::T2BCopy);
-}
-
-TEST_P(RequiredBufferSizeInCopyTests, B2TCopyWithAbundantBufferSize) {
-    uint64_t size = kOffset + kBytesPerRow * kRowsPerImage * kCopySize.depthOrArrayLayers;
     DoTest(size, Type::B2TCopy);
 }
 
-TEST_P(RequiredBufferSizeInCopyTests, T2BCopyWithMininumBufferSize) {
+TEST_P(RequiredBufferSizeInCopyTests, BufferSizeOnBoundary) {
+    uint64_t size = kOffset + kBytesPerRow * kRowsPerImage * (kCopySize.depthOrArrayLayers - 1) +
+                    kBytesPerRow * (kRowsPerImage - 1) + kBytesPerBlock * kCopySize.width;
+    DoTest(size, Type::T2BCopy);
+    DoTest(size, Type::B2TCopy);
+
+    // TODO(crbug.com/dawn/1278, 1288, 1289): Required buffer size for copy is wrong on D3D12.
+    DAWN_SUPPRESS_TEST_IF(IsD3D12());
+    size -= kBytesPerBlock;
+    DoTest(size, Type::T2BCopy);
+    DoTest(size, Type::B2TCopy);
+}
+
+TEST_P(RequiredBufferSizeInCopyTests, MininumBufferSize) {
     // TODO(crbug.com/dawn/1278, 1288, 1289): Required buffer size for copy is wrong on D3D12.
     DAWN_SUPPRESS_TEST_IF(IsD3D12());
     uint64_t size =
         kOffset + utils::RequiredBytesInCopy(kBytesPerRow, kRowsPerImage, kCopySize, kFormat);
     DoTest(size, Type::T2BCopy);
-}
-
-TEST_P(RequiredBufferSizeInCopyTests, B2TCopyWithMininumBufferSize) {
-    // TODO(crbug.com/dawn/1278, 1288, 1289): Required buffer size for copy is wrong on D3D12.
-    DAWN_SUPPRESS_TEST_IF(IsD3D12());
-    uint64_t size =
-        kOffset + utils::RequiredBytesInCopy(kBytesPerRow, kRowsPerImage, kCopySize, kFormat);
     DoTest(size, Type::B2TCopy);
 }
 
