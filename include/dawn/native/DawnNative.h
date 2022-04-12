@@ -69,7 +69,7 @@ namespace dawn::native {
     class DAWN_NATIVE_EXPORT Adapter {
       public:
         Adapter();
-        Adapter(AdapterBase* impl);
+        explicit Adapter(AdapterBase* impl);
         ~Adapter();
 
         Adapter(const Adapter& other);
@@ -124,7 +124,7 @@ namespace dawn::native {
         const WGPUBackendType backendType;
 
       protected:
-        AdapterDiscoveryOptionsBase(WGPUBackendType type);
+        explicit AdapterDiscoveryOptionsBase(WGPUBackendType type);
     };
 
     enum BackendValidationLevel { Full, Partial, Disabled };
@@ -222,7 +222,7 @@ namespace dawn::native {
         ExternalImageType GetType() const;
 
       protected:
-        ExternalImageDescriptor(ExternalImageType type);
+        explicit ExternalImageDescriptor(ExternalImageType type);
 
       private:
         ExternalImageType mType;
@@ -240,7 +240,7 @@ namespace dawn::native {
         ExternalImageType GetType() const;
 
       protected:
-        ExternalImageExportInfo(ExternalImageType type);
+        explicit ExternalImageExportInfo(ExternalImageType type);
 
       private:
         ExternalImageType mType;
