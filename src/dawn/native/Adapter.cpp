@@ -17,6 +17,7 @@
 #include "dawn/common/Constants.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/Instance.h"
+#include "dawn/native/PersistentCache.h"
 #include "dawn/native/ValidationUtils_autogen.h"
 #include "dawn/platform/DawnPlatform.h"
 
