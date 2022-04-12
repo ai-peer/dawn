@@ -89,6 +89,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14d7515b_4e920eaf",
+        "filename": "generator/templates/dawn/native/CacheKey.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-12T21:23:37Z",
+      "side": 1,
+      "message": "Yea, I agree! I usually only keep it if I had already implemented it (which was this case).",
+      "parentUuid": "646bec90_a5ea35aa",
+      "range": {
+        "startLine": 49,
+        "startChar": 48,
+        "endLine": 49,
+        "endChar": 56
+      },
+      "revId": "162c845ca73aa8ce3582c6e054de42c149b45085",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4825355e_43bbb4ae",
