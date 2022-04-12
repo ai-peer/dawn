@@ -16,6 +16,23 @@
       "message": "PTAL. This one touches on the public API. The bots all pass, which I believe means Chromium is happy. The two that I think could have been issues I just marked as NOLINT instead of making explicit.",
       "revId": "63600cb63836a974a3ed054e9536416b87352412",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddc8fd07_17198cb4",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-12T06:37:09Z",
+      "side": 1,
+      "message": "This is a bit surprising that it would be an issue since that constructor can only be used by dawn_native, how hard is it to fix this one?",
+      "revId": "63600cb63836a974a3ed054e9536416b87352412",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
