@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d9c3967_ea0813f1",
+        "filename": "src/dawn/node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 36
+      },
+      "lineNbr": 1251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-12T07:26:37Z",
+      "side": 1,
+      "message": "How does this function know to not stop writing data until everything is complete?",
+      "revId": "31650918f1400b23d39b720df68859b15dccd6bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
