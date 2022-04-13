@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "95d8b82eb6d6af8f6693b84146a2c9496656501a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "421c54b2_9daddc68",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-13T18:55:26Z",
+      "side": 1,
+      "message": "Jiawei FYI you should be able to remove this after your CL.",
+      "revId": "95d8b82eb6d6af8f6693b84146a2c9496656501a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
