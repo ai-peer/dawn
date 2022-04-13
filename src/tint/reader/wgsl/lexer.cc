@@ -26,12 +26,6 @@
 namespace tint::reader::wgsl {
 namespace {
 
-bool is_blankspace(char c) {
-  // See https://www.w3.org/TR/WGSL/#blankspace.
-  return c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' ||
-         c == '\r';
-}
-
 uint32_t dec_value(char c) {
   if (c >= '0' && c <= '9') {
     return static_cast<uint32_t>(c - '0');
@@ -53,6 +47,30 @@ uint32_t hex_value(char c) {
 }
 
 }  // namespace
+
+class Blankspace {
+ public:
+  enum class Type {
+    kNone,   // Not a blankspace
+    kValid,  // Is blankspace
+    kError,  // Bad byte
+  };
+
+  Blankspace(Type type = Type::kNone,
+             size_t size_bytes = 0,
+             bool same_line = false)
+      : type_(type), size_bytes_(size_bytes), same_line_(same_line) {}
+
+  bool IsError() const { return type_ == Type::kError; }
+  bool IsValid() const { return type_ == Type::kValid; }
+  bool IsSameLine() const { return same_line_; }
+  size_t SizeBytes() const { return size_bytes_; }
+
+ private:
+  Type type_ = Type::kNone;
+  size_t size_bytes_;
+  bool same_line_ = false;
+};
 
 Lexer::Lexer(const Source::File* file)
     : file_(file),
@@ -131,16 +149,25 @@ bool Lexer::matches(size_t pos, std::string_view substr) {
 Token Lexer::skip_blankspace_and_comments() {
   for (;;) {
     auto pos = pos_;
-    while (!is_eof() && is_blankspace(file_->content.data[pos_])) {
-      if (matches(pos_, "\n")) {
-        pos_++;
-        location_.line++;
-        location_.column = 1;
-        continue;
+    while (!is_eof()) {
+      auto bs = peek_blankspace();
+      if (bs.IsError()) {
+        pos_++;  // Skip the bad byte.
+        return {Token::Type::kError, begin_source(), "invalid UTF-8"};
       }
 
-      pos_++;
-      location_.column++;
+      if (!bs.IsValid()) {
+        break;
+      }
+
+      if (bs.IsSameLine()) {
+        pos_ += bs.SizeBytes();
+        location_.column += bs.SizeBytes();
+      } else {
+        pos_ += bs.SizeBytes();
+        location_.line++;
+        location_.column = 1;
+      }
     }
 
     auto t = skip_comment();
@@ -160,17 +187,71 @@ Token Lexer::skip_blankspace_and_comments() {
   return {};
 }
 
+Blankspace Lexer::peek_blankspace() const {
+  // See https://www.w3.org/TR/WGSL/#blankspace.
+
+  auto* utf8 = reinterpret_cast<const uint8_t*>(&file_->content.data[pos_]);
+  auto [code_point, n] =
+      text::utf8::Decode(utf8, file_->content.data.size() - pos_);
+
+  if (n == 0) {
+    return Blankspace::Type::kError;
+  }
+
+  static text::CodePoint same_line[] = {
+      text::CodePoint(0x0020),  // space (`U+0020`)
+      text::CodePoint(0x0009),  // horizontal tab (`U+0009`)
+      text::CodePoint(0x000D),  // carriage return (`U+000D`)
+      text::CodePoint(0x200E),  // left-to-right mark (`U+200E`)
+      text::CodePoint(0x200F),  // right-to-left mark (`U+200F`)
+  };
+  static text::CodePoint not_same_line[] = {
+      text::CodePoint(0x000A),  // line feed (`U+000A`)
+      text::CodePoint(0x000B),  // vertical tab (`U+000B`)
+      text::CodePoint(0x000C),  // form feed (`U+000C`)
+      text::CodePoint(0x0085),  // next line (`U+0085`)
+  };
+
+  if (auto it =
+          std::find(std::begin(same_line), std::end(same_line), code_point);
+      it != std::end(same_line)) {
+    return {Blankspace::Type::kValid, n, true};
+  }
+
+  if (auto it = std::find(std::begin(not_same_line), std::end(not_same_line),
+                          code_point);
+      it != std::end(not_same_line)) {
+    return {Blankspace::Type::kValid, n, false};
+  }
+
+  return Blankspace::Type::kNone;
+}
+
 Token Lexer::skip_comment() {
   if (matches(pos_, "//")) {
     // Line comment: ignore everything until the end of input or a blankspace
-    // character other than space or horizontal tab.
-    while (!is_eof() && !(is_blankspace(file_->content.data[pos_]) &&
-                          !matches(pos_, " ") && !matches(pos_, "\t"))) {
+    // character other than same-line space.
+    while (!is_eof()) {
       if (is_null()) {
         return {Token::Type::kError, begin_source(), "null character found"};
       }
-      pos_++;
-      location_.column++;
+
+      auto bs = peek_blankspace();
+      if (bs.IsError()) {
+        pos_++;  // Skip the bad byte.
+        return {Token::Type::kError, begin_source(), "invalid UTF-8"};
+      }
+
+      uint32_t size = 1;
+      if (bs.IsValid()) {
+        if (!bs.IsSameLine()) {
+          break;
+        }
+        size = bs.SizeBytes();
+      }
+
+      pos_ += size;
+      location_.column += size;
     }
     return {};
   }
@@ -726,14 +807,23 @@ Token Lexer::try_integer() {
   return build_token_from_int_if_possible(source, start, end, 10);
 }
 
+// static_assert(sizeof(decltype(file_->content.data[0])
+
+// Unicode parsing code assumes that the size of a single std::string element is
+// 1 byte.
+static_assert(sizeof(decltype(tint::Source::FileContent::data[0])) ==
+                  sizeof(uint8_t),
+              "tint::reader::wgsl requires the size of a std::string element "
+              "to be a single byte");
+
 Token Lexer::try_ident() {
   auto source = begin_source();
   auto start = pos_;
 
   // This below assumes that the size of a single std::string element is 1 byte.
-  static_assert(sizeof(file_->content.data[0]) == sizeof(uint8_t),
-                "tint::reader::wgsl requires the size of a std::string element "
-                "to be a single byte");
+  // static_assert(sizeof(file_->content.data[0]) == sizeof(uint8_t),
+  //              "tint::reader::wgsl requires the size of a std::string element
+  //              " "to be a single byte");
 
   // Must begin with an XID_Source unicode character, or underscore
   {
