@@ -14,6 +14,10 @@
 
 #include "dawn/native/Buffer.h"
 
+#include <cstdio>
+#include <cstring>
+#include <utility>
+
 #include "dawn/common/Alloc.h"
 #include "dawn/common/Assert.h"
 #include "dawn/native/Commands.h"
@@ -23,10 +27,6 @@
 #include "dawn/native/ObjectType_autogen.h"
 #include "dawn/native/Queue.h"
 #include "dawn/native/ValidationUtils_autogen.h"
-
-#include <cstdio>
-#include <cstring>
-#include <utility>
 
 namespace dawn::native {
 

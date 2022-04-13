@@ -345,6 +345,7 @@ source_set("end2end_tests_sources") {
 
     # Statically linked because the end2end white_box tests use Dawn internals.
     "${dawn_root}/src/dawn/native:static",
+    "${dawn_root}/src/dawn/platform:static",
     "${dawn_root}/src/dawn/utils",
     "${dawn_root}/src/dawn/wire",
   ]

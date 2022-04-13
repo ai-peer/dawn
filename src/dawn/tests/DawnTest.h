@@ -15,6 +15,10 @@
 #ifndef SRC_DAWN_TESTS_DAWNTEST_H_
 #define SRC_DAWN_TESTS_DAWNTEST_H_
 
+#include <memory>
+#include <unordered_map>
+#include <vector>
+
 #include "dawn/common/Log.h"
 #include "dawn/common/Platform.h"
 #include "dawn/common/Preprocessor.h"
@@ -27,13 +31,9 @@
 #include "dawn/webgpu_cpp.h"
 #include "dawn/webgpu_cpp_print.h"
 
-#include <dawn/platform/DawnPlatform.h>
-#include <gmock/gmock.h>
-#include <gtest/gtest.h>
-
-#include <memory>
-#include <unordered_map>
-#include <vector>
+#include "dawn/platform/DawnPlatform.h"
+#include "gmock/gmock.h"
+#include "gtest/gtest.h"
 
 // Getting data back from Dawn is done in an async manners so all expectations are "deferred"
 // until the end of the test. Also expectations use a copy to a MapRead buffer to get the data

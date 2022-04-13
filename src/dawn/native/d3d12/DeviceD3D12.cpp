@@ -14,6 +14,8 @@
 
 #include "dawn/native/d3d12/DeviceD3D12.h"
 
+#include <sstream>
+
 #include "dawn/common/GPUInfo.h"
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/Instance.h"
@@ -41,8 +43,6 @@
 #include "dawn/native/d3d12/StagingDescriptorAllocatorD3D12.h"
 #include "dawn/native/d3d12/SwapChainD3D12.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
-
-#include <sstream>
 
 namespace dawn::native::d3d12 {
 
