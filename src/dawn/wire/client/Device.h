@@ -15,7 +15,9 @@
 #ifndef SRC_DAWN_WIRE_CLIENT_DEVICE_H_
 #define SRC_DAWN_WIRE_CLIENT_DEVICE_H_
 
-#include <dawn/webgpu.h>
+#include <memory>
+
+#include "dawn/webgpu.h"
 
 #include "dawn/common/LinkedList.h"
 #include "dawn/wire/WireCmd_autogen.h"
@@ -23,8 +25,6 @@
 #include "dawn/wire/client/LimitsAndFeatures.h"
 #include "dawn/wire/client/ObjectBase.h"
 #include "dawn/wire/client/RequestTracker.h"
-
-#include <memory>
 
 namespace dawn::wire::client {
 

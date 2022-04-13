@@ -51,6 +51,9 @@
 //    - TODO can't be tested yet: check cycling the same window over multiple devices.
 //    - TODO can't be tested yet: check cycling the same window over multiple formats.
 
+#include <memory>
+#include <unordered_map>
+
 #include "dawn/common/Assert.h"
 #include "dawn/common/Log.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
@@ -58,13 +61,10 @@
 #include "dawn/utils/ScopedAutoreleasePool.h"
 #include "dawn/utils/WGPUHelpers.h"
 
-#include <dawn/dawn_proc.h>
-#include <dawn/native/DawnNative.h>
-#include <dawn/webgpu_cpp.h>
 #include "GLFW/glfw3.h"
-
-#include <memory>
-#include <unordered_map>
+#include "dawn/dawn_proc.h"
+#include "dawn/native/DawnNative.h"
+#include "dawn/webgpu_cpp.h"
 
 struct WindowData {
     GLFWwindow* window = nullptr;
