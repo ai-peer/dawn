@@ -43,7 +43,7 @@ namespace dawn::native::vulkan {
                                                        ShaderModuleParseResult* parseResult);
 
         ResultOrError<ModuleAndSpirv> GetHandleAndSpirv(const char* entryPointName,
-                                                        PipelineLayout* layout);
+                                                        const PipelineLayout* layout);
 
       private:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
