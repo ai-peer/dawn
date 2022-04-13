@@ -75,8 +75,10 @@ namespace dawn::native {
         void EnableBeginCaptureOnStartup(bool beginCaptureOnStartup);
         bool IsBeginCaptureOnStartupEnabled() const;
 
-        void SetPlatform(dawn::platform::Platform* platform);
+        // Setting the platform at runtime is NOT thread-safe and is reserved only for testing. Note
+        // that passing nullptr to SetPlatformForTesting will reset the platform to the default.
         dawn::platform::Platform* GetPlatform();
+        void SetPlatformForTesting(dawn::platform::Platform* platform);
 
         const std::vector<std::string>& GetRuntimeSearchPaths() const;
 
@@ -112,6 +114,8 @@ namespace dawn::native {
         bool mBeginCaptureOnStartup = false;
         BackendValidationLevel mBackendValidationLevel = BackendValidationLevel::Disabled;
 
+        // TODO(dawn:1374) We can probably just have the pointer which we will set to default if
+        // not passed via the descriptor after the changes.
         dawn::platform::Platform* mPlatform = nullptr;
         std::unique_ptr<dawn::platform::Platform> mDefaultPlatform;
 

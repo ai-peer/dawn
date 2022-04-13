@@ -22,14 +22,22 @@
 
 namespace dawn::native {
 
+    namespace {
+
+        dawn::platform::CachingInterface* GetCachingInterface(dawn::platform::Platform* platform) {
+            if (platform != nullptr) {
+                return platform->GetCachingInterface(/*fingerprint*/ nullptr,
+                                                     /*fingerprintSize*/ 0);
+            }
+            return nullptr;
+        }
+
+    }  // namespace
+
     AdapterBase::AdapterBase(InstanceBase* instance, wgpu::BackendType backend)
         : mInstance(instance), mBackend(backend) {
         // TODO(dawn:549): Re-evaluate fingerprint since it might be possible to just rely on key.
-        mBlobCache = std::make_unique<BlobCache>(
-            instance != nullptr && instance->GetPlatform() != nullptr
-                ? instance->GetPlatform()->GetCachingInterface(/*fingerprint*/ nullptr,
-                                                               /*fingerprintSize*/ 0)
-                : nullptr);
+        mBlobCache = std::make_unique<BlobCache>(GetCachingInterface(instance->GetPlatform()));
 
         mSupportedFeatures.EnableFeature(Feature::DawnNative);
         mSupportedFeatures.EnableFeature(Feature::DawnInternalUsages);
@@ -229,6 +237,10 @@ namespace dawn::native {
 
     void AdapterBase::ResetInternalDeviceForTesting() {
         mInstance->ConsumedError(ResetInternalDeviceForTestingImpl());
+    }
+
+    void AdapterBase::SetPlatformForTesting(dawn::platform::Platform* platform) {
+        mBlobCache = std::make_unique<BlobCache>(GetCachingInterface(platform));
     }
 
     MaybeError AdapterBase::ResetInternalDeviceForTestingImpl() {
