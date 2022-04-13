@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be4df8e1_47fa8c7f",
+        "filename": "src/dawn/tests/end2end/RequiredBufferSizeInCopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-13T23:00:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74db7e93_d31b291f",
+      "range": {
+        "startLine": 77,
+        "startChar": 35,
+        "endLine": 77,
+        "endChar": 62
+      },
+      "revId": "18f38ea067e05fb4c65ea36ea21688fbe07a030c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aba12e69_ca57fc46",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-04-13T14:42:48Z",
       "side": 1,
       "message": "nit: factor this out into a variable",
+      "range": {
+        "startLine": 84,
+        "startChar": 17,
+        "endLine": 84,
+        "endChar": 47
+      },
+      "revId": "18f38ea067e05fb4c65ea36ea21688fbe07a030c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7965d9ed_cf5fa496",
+        "filename": "src/dawn/tests/end2end/RequiredBufferSizeInCopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-13T23:00:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aba12e69_ca57fc46",
       "range": {
         "startLine": 84,
         "startChar": 17,
@@ -98,6 +146,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1267df0_5d68a995",
+        "filename": "src/dawn/tests/end2end/RequiredBufferSizeInCopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-13T23:00:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e58e6727_ec30330b",
+      "revId": "18f38ea067e05fb4c65ea36ea21688fbe07a030c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8aabcf5c_9f9ef572",
@@ -111,6 +177,24 @@
       "writtenOn": "2022-04-13T14:42:48Z",
       "side": 1,
       "message": "nit: comment describing the test, and the size that we\u0027re computing and why",
+      "revId": "18f38ea067e05fb4c65ea36ea21688fbe07a030c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5fcace5_42c68a07",
+        "filename": "src/dawn/tests/end2end/RequiredBufferSizeInCopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-13T23:00:18Z",
+      "side": 1,
+      "message": "Done.\n\nRegarding \"details about the size that we are computing and why\", there are detailed descriptions at the top of this file.",
+      "parentUuid": "8aabcf5c_9f9ef572",
       "revId": "18f38ea067e05fb4c65ea36ea21688fbe07a030c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -138,6 +222,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98c11a71_d0bf7f02",
+        "filename": "src/dawn/tests/end2end/RequiredBufferSizeInCopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-13T23:00:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a5c8e07_237dc388",
+      "range": {
+        "startLine": 137,
+        "startChar": 4,
+        "endLine": 138,
+        "endChar": 32
+      },
+      "revId": "18f38ea067e05fb4c65ea36ea21688fbe07a030c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b33cd6be_c6b16494",
@@ -151,6 +259,24 @@
       "writtenOn": "2022-04-13T14:42:48Z",
       "side": 1,
       "message": "nit: comment describing the test",
+      "revId": "18f38ea067e05fb4c65ea36ea21688fbe07a030c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3233bb81_37cbb475",
+        "filename": "src/dawn/tests/end2end/RequiredBufferSizeInCopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-13T23:00:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b33cd6be_c6b16494",
       "revId": "18f38ea067e05fb4c65ea36ea21688fbe07a030c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
