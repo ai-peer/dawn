@@ -55,7 +55,7 @@ namespace dawn::native::opengl {
 
     MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
         InitTogglesFromDriver();
-        mFormatTable = BuildGLFormatTable();
+        mFormatTable = BuildGLFormatTable(gl);
 
         return DeviceBase::Initialize(AcquireRef(new Queue(this, &descriptor->defaultQueue)));
     }
