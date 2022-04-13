@@ -16,6 +16,23 @@
       "message": "I find that this is the only place that EnsureDataInitialized lives near with the commandContext. So maybe the simple if here is enough.\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/BufferD3D12.cpp;l\u003d359\n\nWDYT?",
       "revId": "c07bcc9075fde52272eea56d2276b6ce822db022",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39c72051_b183a12a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-13T13:25:20Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "c07bcc9075fde52272eea56d2276b6ce822db022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
