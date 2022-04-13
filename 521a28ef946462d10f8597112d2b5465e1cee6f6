@@ -16,6 +16,23 @@
       "message": "ptal",
       "revId": "521a28ef946462d10f8597112d2b5465e1cee6f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e272eff_cd52ecae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-13T08:50:53Z",
+      "side": 1,
+      "message": "Kokoro failure seems unrelated\n\n   src/tint/fuzzers/tint_regex_fuzzer/wgsl_mutator.cc:20:  \u003cregex\u003e is an unapproved C++11 header.  [build/c++11] [5]\n",
+      "revId": "521a28ef946462d10f8597112d2b5465e1cee6f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
