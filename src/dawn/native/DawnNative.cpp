@@ -238,8 +238,9 @@ namespace dawn::native {
         mImpl->EnableBeginCaptureOnStartup(beginCaptureOnStartup);
     }
 
+    // TODO(dawn:1374) Deprecate this once it is passed via the descriptor.
     void Instance::SetPlatform(dawn::platform::Platform* platform) {
-        mImpl->SetPlatform(platform);
+        mImpl->SetPlatformForTesting(platform);
     }
 
     WGPUInstance Instance::Get() const {

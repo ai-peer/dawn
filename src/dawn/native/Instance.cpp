@@ -131,6 +131,11 @@ namespace dawn::native {
             mRuntimeSearchPaths.push_back(std::move(*p));
         }
         mRuntimeSearchPaths.push_back("");
+
+        // Initialize the platform to the default for now.
+        mDefaultPlatform = std::make_unique<dawn::platform::Platform>();
+        mPlatform = mDefaultPlatform.get();
+
         return {};
     }
 
@@ -398,19 +403,21 @@ namespace dawn::native {
         return mBeginCaptureOnStartup;
     }
 
-    void InstanceBase::SetPlatform(dawn::platform::Platform* platform) {
-        mPlatform = platform;
+    void InstanceBase::SetPlatformForTesting(dawn::platform::Platform* platform) {
+        if (platform != nullptr) {
+            mPlatform = platform;
+        } else {
+            mPlatform = mDefaultPlatform.get();
+        }
+
+        // Forward the platform down to the adapters.
+        for (Ref<AdapterBase>& adapter : mAdapters) {
+            adapter->SetPlatformForTesting(mPlatform);
+        }
     }
 
     dawn::platform::Platform* InstanceBase::GetPlatform() {
-        if (mPlatform != nullptr) {
-            return mPlatform;
-        }
-
-        if (mDefaultPlatform == nullptr) {
-            mDefaultPlatform = std::make_unique<dawn::platform::Platform>();
-        }
-        return mDefaultPlatform.get();
+        return mPlatform;
     }
 
     const std::vector<std::string>& InstanceBase::GetRuntimeSearchPaths() const {

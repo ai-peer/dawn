@@ -57,6 +57,7 @@ namespace dawn::native {
         BlobCache* GetBlobCache();
 
         void ResetInternalDeviceForTesting();
+        void SetPlatformForTesting(dawn::platform::Platform* platform);
 
         FeaturesSet GetSupportedFeatures() const;
         bool SupportsAllRequiredFeatures(
