@@ -36,6 +36,7 @@
 #include "dawn/native/InternalPipelineStore.h"
 #include "dawn/native/ObjectType_autogen.h"
 #include "dawn/native/PersistentCache.h"
+#include "dawn/native/PipelineCache.h"
 #include "dawn/native/QuerySet.h"
 #include "dawn/native/Queue.h"
 #include "dawn/native/RenderBundleEncoder.h"
@@ -982,6 +983,10 @@ namespace dawn::native {
         ASSERT(removedCount == 1);
     }
 
+    Ref<PipelineCacheBase> DeviceBase::GetOrCreatePipelineCache(PipelineBase* pipeline) {
+        return GetOrCreatePipelineCacheImpl(pipeline);
+    }
+
     // Object creation API methods
 
     BindGroupBase* DeviceBase::APICreateBindGroup(const BindGroupDescriptor* descriptor) {
@@ -1389,6 +1394,11 @@ namespace dawn::native {
             DAWN_TRY(ValidateCommandEncoderDescriptor(this, descriptor));
         }
         return CommandEncoder::Create(this, descriptor);
+    }
+
+    // Overwritten on the backends to return pipeline caches if supported.
+    Ref<PipelineCacheBase> DeviceBase::GetOrCreatePipelineCacheImpl(PipelineBase* pipeline) {
+        return nullptr;
     }
 
     MaybeError DeviceBase::CreateComputePipelineAsync(
