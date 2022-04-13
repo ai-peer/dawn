@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ea9ee36_dbfad639",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-13T19:18:55Z",
+      "side": 1,
+      "message": "include some detail about what changed",
+      "revId": "10382958d05beaf0921e80efae8d875ef6a10213",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5f1f744_b23edfd3",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-13T19:18:55Z",
+      "side": 1,
+      "message": "still need \"* N\" ?",
+      "range": {
+        "startLine": 176,
+        "startChar": 45,
+        "endLine": 176,
+        "endChar": 51
+      },
+      "revId": "10382958d05beaf0921e80efae8d875ef6a10213",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
