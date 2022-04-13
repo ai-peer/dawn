@@ -21,6 +21,9 @@
 
 namespace tint::reader::wgsl {
 
+/// Forward decl
+class Blankspace;
+
 /// Converts the input stream into a series of Tokens
 class Lexer {
  public:
@@ -79,6 +82,9 @@ class Lexer {
   /// @returns true if 'ch' is a hexadecimal digit
   bool is_hex(char ch) const;
   bool matches(size_t pos, std::string_view substr);
+
+  /// Attempts to read a blankspace code point without consuming it.
+  Blankspace peek_blankspace() const;
 
   /// The source file content
   Source::File const* const file_;

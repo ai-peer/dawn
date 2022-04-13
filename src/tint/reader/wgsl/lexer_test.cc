@@ -23,6 +23,31 @@ namespace {
 
 using LexerTest = testing::Test;
 
+struct UnicodeCase {
+  const char* utf8;
+  size_t count;
+
+  UnicodeCase(const char* s, size_t n) : utf8(s), count(n) {}
+
+  template <size_t N>
+  UnicodeCase(const char (&s)[N]) : utf8(s), count(N) {}
+};
+
+// Blankspace constants. These are macros on purpose to be able to easily build
+// up string literals with them.
+//
+// Same line
+#define kSpace " "
+#define kHTab "\t"
+#define kCR "\r"
+#define kL2R "\xE2\x80\x8E"
+#define kR2L "\xE2\x80\x8F"
+// Not same line, intepreted as line feed
+#define kLF "\n"
+#define kVTab "\x0B"
+#define kFF "\x0C"
+#define kNL "\xC2\x85"
+
 TEST_F(LexerTest, Empty) {
   Source::File file("", "");
   Lexer l(&file);
@@ -30,7 +55,7 @@ TEST_F(LexerTest, Empty) {
   EXPECT_TRUE(t.IsEof());
 }
 
-TEST_F(LexerTest, Skips_Blankspace) {
+TEST_F(LexerTest, Skips_Blankspace_Basic) {
   Source::File file("", "\t\r\n\t    ident\t\n\t  \r ");
   Lexer l(&file);
 
@@ -44,6 +69,56 @@ TEST_F(LexerTest, Skips_Blankspace) {
 
   t = l.next();
   EXPECT_TRUE(t.IsEof());
+}
+
+TEST_F(LexerTest, Skips_Blankspace_Exotic) {
+  Source::File file("",
+                    kVTab kFF kNL kL2R kR2L "ident" kVTab kFF kNL kL2R kR2L);
+  Lexer l(&file);
+
+  auto t = l.next();
+  EXPECT_TRUE(t.IsIdentifier());
+  EXPECT_EQ(t.source().range.begin.line, 4u);
+  EXPECT_EQ(t.source().range.begin.column, 7u);
+  EXPECT_EQ(t.source().range.end.line, 4u);
+  EXPECT_EQ(t.source().range.end.column, 12u);
+  EXPECT_EQ(t.to_str(), "ident");
+
+  t = l.next();
+  EXPECT_TRUE(t.IsEof());
+}
+
+TEST_F(LexerTest, SingleNewLine_LF_Yes) {
+  Source::File file("", kLF kSpace "ident");
+  Lexer l(&file);
+
+  auto t = l.next();
+  EXPECT_TRUE(t.IsIdentifier());
+  EXPECT_EQ(t.source().range.begin.line, 2u);
+  EXPECT_EQ(t.source().range.end.line, 2u);
+  EXPECT_EQ(t.to_str(), "ident");
+}
+
+TEST_F(LexerTest, SingleNewLine_CRLF_Yes) {
+  Source::File file("", kCR kLF kSpace "ident");
+  Lexer l(&file);
+
+  auto t = l.next();
+  EXPECT_TRUE(t.IsIdentifier());
+  EXPECT_EQ(t.source().range.begin.line, 2u);
+  EXPECT_EQ(t.source().range.end.line, 2u);
+  EXPECT_EQ(t.to_str(), "ident");
+}
+
+TEST_F(LexerTest, SingleNewLine_CR_Yes) {
+  Source::File file("", kCR kSpace "ident");
+  Lexer l(&file);
+
+  auto t = l.next();
+  EXPECT_TRUE(t.IsIdentifier());
+  EXPECT_EQ(t.source().range.begin.line, 2u);
+  EXPECT_EQ(t.source().range.end.line, 2u);
+  EXPECT_EQ(t.to_str(), "ident");
 }
 
 TEST_F(LexerTest, Skips_Comments_Line) {
@@ -73,11 +148,12 @@ ident1 //ends with comment
   EXPECT_TRUE(t.IsEof());
 }
 
-using LineCommentTerminatorTest = testing::TestWithParam<char>;
+using LineCommentTerminatorTest = testing::TestWithParam<UnicodeCase>;
 TEST_P(LineCommentTerminatorTest, Terminators) {
-  // Test that line comments are ended by blankspace characters other than space
-  // and horizontal tab.
-  char c = GetParam();
+  // Test that line comments are ended by blankspace characters other than
+  // space, horizontal tab, left-to-right mark, and right-to-left mark.
+  auto p = GetParam();
+  auto c = p.utf8;
   std::string src = "let// This is a comment";
   src += c;
   src += "ident";
@@ -91,9 +167,13 @@ TEST_P(LineCommentTerminatorTest, Terminators) {
   EXPECT_EQ(t.source().range.end.line, 1u);
   EXPECT_EQ(t.source().range.end.column, 4u);
 
-  if (c != ' ' && c != '\t') {
-    size_t line = c == '\n' ? 2u : 1u;
-    size_t col = c == '\n' ? 1u : 25u;
+  auto is_same_line = [](std::string v) {
+    return v == kSpace || v == kHTab || v == kCR || v == kL2R || v == kR2L;
+  };
+
+  if (!is_same_line(c)) {
+    size_t line = is_same_line(c) ? 1u : 2u;
+    size_t col = is_same_line(c) ? 25u : 1u;
     t = l.next();
     EXPECT_TRUE(t.IsIdentifier());
     EXPECT_EQ(t.source().range.begin.line, line);
@@ -106,9 +186,19 @@ TEST_P(LineCommentTerminatorTest, Terminators) {
   t = l.next();
   EXPECT_TRUE(t.IsEof());
 }
+
 INSTANTIATE_TEST_SUITE_P(LexerTest,
                          LineCommentTerminatorTest,
-                         testing::Values(' ', '\t', '\n', '\v', '\f', '\r'));
+                         // testing::Values(' ', '\t', '\n', '\v', '\f', '\r')
+                         testing::Values(UnicodeCase{kSpace},
+                                         UnicodeCase{kHTab},
+                                         UnicodeCase{kCR},
+                                         UnicodeCase{kL2R},
+                                         UnicodeCase{kR2L},
+                                         UnicodeCase{kLF},
+                                         UnicodeCase{kVTab},
+                                         UnicodeCase{kFF},
+                                         UnicodeCase{kNL}));
 
 TEST_F(LexerTest, Skips_Comments_Block) {
   Source::File file("", R"(/* comment
@@ -376,11 +466,6 @@ INSTANTIATE_TEST_SUITE_P(LexerTest,
                                          "abcdefghijklmnopqrstuvwxyz",
                                          "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
                                          "alldigits_0123456789"));
-
-struct UnicodeCase {
-  const char* utf8;
-  size_t count;
-};
 
 using ValidUnicodeIdentifierTest = testing::TestWithParam<UnicodeCase>;
 TEST_P(ValidUnicodeIdentifierTest, Parse) {
