@@ -40,7 +40,7 @@ namespace dawn::native {
 
       private:
         std::unique_ptr<uint8_t[]> mData = nullptr;
-        size_t mSize;
+        size_t mSize = 0;
     };
 
     // This class should always be thread-safe because it may be called asynchronously. Its purpose

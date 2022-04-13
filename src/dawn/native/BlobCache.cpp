@@ -72,10 +72,12 @@ namespace dawn::native {
             return result;
         }
         const size_t expectedSize = mCache->LoadData(nullptr, key.data(), key.size(), nullptr, 0);
-        result.Reset(expectedSize);
-        const size_t actualSize =
-            mCache->LoadData(nullptr, key.data(), key.size(), result.Get(), expectedSize);
-        ASSERT(expectedSize == actualSize);
+        if (expectedSize > 0) {
+            result.Reset(expectedSize);
+            const size_t actualSize =
+                mCache->LoadData(nullptr, key.data(), key.size(), result.Get(), expectedSize);
+            ASSERT(expectedSize == actualSize);
+        }
         return result;
     }
 
