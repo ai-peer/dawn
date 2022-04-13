@@ -16,6 +16,103 @@
       "message": "I\u0027ll find a linux machine to fix the compile issue.\nPls take a look for the overall ideal. Thanks!",
       "revId": "f7f7fef626a172cb181105700089fdbe18117cf7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0a28556_76626bbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-13T14:26:22Z",
+      "side": 1,
+      "message": "overall seems ok",
+      "revId": "f7f7fef626a172cb181105700089fdbe18117cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1382db05_285950dd",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-13T14:26:22Z",
+      "side": 1,
+      "message": "nit: capitalize \"Trace\"",
+      "range": {
+        "startLine": 43,
+        "startChar": 17,
+        "endLine": 43,
+        "endChar": 22
+      },
+      "revId": "f7f7fef626a172cb181105700089fdbe18117cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8933fac_af19a806",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-13T14:26:22Z",
+      "side": 1,
+      "message": "maybe instead we can use TRACE_EVENT_ASYNC_BEGIN/END to mark the entire range where the device is busy. So we would emit BEGIN on state transition from idle-\u003ebusy, and emit END on state transition from busy-\u003eidle. That might be easier to see than multiple individual events for isDeviceIdle",
+      "revId": "f7f7fef626a172cb181105700089fdbe18117cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c08744f7_81e1e759",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-13T14:26:22Z",
+      "side": 1,
+      "message": "why not just put trace inside Finish for whatever tasks we\u0027re interested in tracing? It doesn\u0027t seem like it needs to be a new virtual method.",
+      "range": {
+        "startLine": 261,
+        "startChar": 12,
+        "endLine": 263,
+        "endChar": 13
+      },
+      "revId": "f7f7fef626a172cb181105700089fdbe18117cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58e0a521_1612dbe3",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-13T14:26:22Z",
+      "side": 1,
+      "message": "did you measure a performance regression without adding this toggle? Trace events already are supposed to include a check about whether or not tracing is enabled. We shouldn\u0027t add this Toggle unless we need to.\nHowever, the current check is a virtual call, but I would be surprised if it were very very slow.\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/include/dawn/platform/DawnPlatform.h;l\u003d87;drc\u003d4b03575fc3a5f7e1fd5cde04d33c204572fd9c29;bpv\u003d1;bpt\u003d1",
+      "revId": "f7f7fef626a172cb181105700089fdbe18117cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
