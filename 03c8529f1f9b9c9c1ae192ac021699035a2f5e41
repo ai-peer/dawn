@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "916f38c0_ec6d3ab8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-13T15:01:35Z",
+      "side": 1,
+      "message": "Kokoro failures has been fixed on HEAD. This is safe to ignore.",
+      "revId": "03c8529f1f9b9c9c1ae192ac021699035a2f5e41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
