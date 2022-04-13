@@ -21,6 +21,7 @@
 #include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/FencedDeleter.h"
+#include "dawn/native/vulkan/PipelineCacheVk.h"
 #include "dawn/native/vulkan/PipelineLayoutVk.h"
 #include "dawn/native/vulkan/RenderPassCache.h"
 #include "dawn/native/vulkan/ShaderModuleVk.h"
@@ -564,13 +565,21 @@ namespace dawn::native::vulkan {
         createInfo.basePipelineIndex = -1;
 
         // Record cache key information now since createInfo is not stored.
-        GetCacheKey()->Record(createInfo,
-                              static_cast<const RenderPipeline*>(this)->GetLayout()->GetCacheKey());
+        const RenderPipeline* constThis = static_cast<const RenderPipeline*>(this);
+        GetCacheKey()->Record(createInfo, constThis->GetLayout()->GetCacheKey());
 
+        // Try to see if we have anything in the blob cache.
+        Ref<PipelineCacheBase> cache =
+            GetDevice()->GetOrCreatePipelineCache(constThis->GetCacheKey());
+        auto backendCache = ToBackend(cache);
         DAWN_TRY(CheckVkSuccess(
-            device->fn.CreateGraphicsPipelines(device->GetVkDevice(), VkPipelineCache{}, 1,
+            device->fn.CreateGraphicsPipelines(device->GetVkDevice(), backendCache->GetHandle(), 1,
                                                &createInfo, nullptr, &*mHandle),
-            "CreateGraphicsPipeline"));
+            "CreateGraphicsPipelines"));
+        if (!backendCache->CacheHit()) {
+            // TODO(dawn:549): Flush is currently in the same thread, but perhaps deferrable.
+            DAWN_TRY(cache->Flush());
+        }
 
         SetLabelImpl();
 
