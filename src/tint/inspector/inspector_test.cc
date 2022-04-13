@@ -145,6 +145,12 @@ class InspectorGetSamplerTextureUsesTest : public InspectorRunner,
 class InspectorGetWorkgroupStorageSizeTest : public InspectorBuilder,
                                              public testing::Test {};
 
+class InspectorCheckExtensionAllowlistTest : public InspectorRunner,
+                                             public testing::Test {};
+
+class InspectorGetUsedExtensionNamesTest : public InspectorRunner,
+                                           public testing::Test {};
+
 // This is a catch all for shaders that have demonstrated regressions/crashes in
 // the wild.
 class InspectorRegressionTest : public InspectorRunner, public testing::Test {};
@@ -3002,6 +3008,202 @@ TEST_F(InspectorGetWorkgroupStorageSizeTest, StructAlignment) {
 
   Inspector& inspector = Build();
   EXPECT_EQ(1024u, inspector.GetWorkgroupStorageSize("ep_func"));
+}
+
+// Test calling CheckExtensionAllowlist on a empty shader.
+TEST_F(InspectorCheckExtensionAllowlistTest, Empty) {
+  std::string shader = "";
+
+  Inspector& inspector = Initialize(shader);
+
+  // Check with empty allow list should pass.
+  {
+    auto result = inspector.CheckExtensionAllowlist({});
+    EXPECT_TRUE(result);
+  }
+
+  // Check with non-empty valid allow list should pass.
+  {
+    auto result =
+        inspector.CheckExtensionAllowlist({"InternalExtensionForTesting"});
+    EXPECT_TRUE(result);
+  }
+
+  // Check with non-empty allow list with unknown extension name should pass.
+  {
+    auto result = inspector.CheckExtensionAllowlist(
+        {"InternalExtensionForTesting", "NotAnValidExtensionName"});
+    EXPECT_TRUE(result);
+  }
+}
+
+// Test calling CheckExtensionAllowlist on a shader without any extension.
+TEST_F(InspectorCheckExtensionAllowlistTest, None) {
+  std::string shader = R"(
+@stage(fragment)
+fn main() {
+})";
+
+  Inspector& inspector = Initialize(shader);
+
+  // Check with empty allow list should pass.
+  {
+    auto result = inspector.CheckExtensionAllowlist({});
+    EXPECT_TRUE(result);
+  }
+
+  // Check with non-empty valid allow list should pass.
+  {
+    auto result =
+        inspector.CheckExtensionAllowlist({"InternalExtensionForTesting"});
+    EXPECT_TRUE(result);
+  }
+
+  // Check with non-empty allow list with unknown extension name should pass.
+  {
+    auto result = inspector.CheckExtensionAllowlist(
+        {"InternalExtensionForTesting", "NotAnValidExtensionName"});
+    EXPECT_TRUE(result);
+  }
+}
+
+// Test calling CheckExtensionAllowlist on a shader with extension.
+TEST_F(InspectorCheckExtensionAllowlistTest, Simple) {
+  std::string shader = R"(
+enable InternalExtensionForTesting;
+
+@stage(fragment)
+fn main() {
+})";
+
+  Inspector& inspector = Initialize(shader);
+
+  // Check with empty allow list should fail.
+  {
+    auto result = inspector.CheckExtensionAllowlist({});
+    EXPECT_FALSE(result);
+  }
+
+  // Check with allow list with unknown extension name only should fail.
+  {
+    auto result =
+        inspector.CheckExtensionAllowlist({"NotAnValidExtensionName"});
+    EXPECT_FALSE(result);
+  }
+
+  // Check with corresponding allow list should pass.
+  {
+    auto result =
+        inspector.CheckExtensionAllowlist({"InternalExtensionForTesting"});
+    EXPECT_TRUE(result);
+  }
+
+  // Check with allow list with corresponding and unknown extension name should
+  // pass.
+  {
+    auto result = inspector.CheckExtensionAllowlist(
+        {"InternalExtensionForTesting", "NotAnValidExtensionName"});
+    EXPECT_TRUE(result);
+  }
+}
+
+// Test calling CheckExtensionAllowlist on a shader with one extension enabled
+// for multiple times.
+TEST_F(InspectorCheckExtensionAllowlistTest, Duplicated) {
+  std::string shader = R"(
+enable InternalExtensionForTesting;
+enable InternalExtensionForTesting;
+
+@stage(fragment)
+fn main() {
+})";
+
+  Inspector& inspector = Initialize(shader);
+
+  // Check with empty allow list should fail.
+  {
+    auto result = inspector.CheckExtensionAllowlist({});
+    EXPECT_FALSE(result);
+  }
+
+  // Check with allow list with unknown extension name only should fail.
+  {
+    auto result =
+        inspector.CheckExtensionAllowlist({"NotAnValidExtensionName"});
+    EXPECT_FALSE(result);
+  }
+
+  // Check with corresponding allow list should pass.
+  {
+    auto result =
+        inspector.CheckExtensionAllowlist({"InternalExtensionForTesting"});
+    EXPECT_TRUE(result);
+  }
+
+  // Check with allow list with corresponding and unknown extension name should
+  // pass.
+  {
+    auto result = inspector.CheckExtensionAllowlist(
+        {"InternalExtensionForTesting", "NotAnValidExtensionName"});
+    EXPECT_TRUE(result);
+  }
+}
+
+// Test calling GetUsedExtensionNames on a empty shader.
+TEST_F(InspectorGetUsedExtensionNamesTest, Empty) {
+  std::string shader = "";
+
+  Inspector& inspector = Initialize(shader);
+
+  auto result = inspector.GetUsedExtensionNames();
+  EXPECT_EQ(result.size(), 0u);
+}
+
+// Test calling GetUsedExtensionNames on a shader with no extension.
+TEST_F(InspectorGetUsedExtensionNamesTest, None) {
+  std::string shader = R"(
+@stage(fragment)
+fn main() {
+})";
+
+  Inspector& inspector = Initialize(shader);
+
+  auto result = inspector.GetUsedExtensionNames();
+  EXPECT_EQ(result.size(), 0u);
+}
+
+// Test calling GetUsedExtensionNames on a shader with valid extension.
+TEST_F(InspectorGetUsedExtensionNamesTest, Simple) {
+  std::string shader = R"(
+enable InternalExtensionForTesting;
+
+@stage(fragment)
+fn main() {
+})";
+
+  Inspector& inspector = Initialize(shader);
+
+  auto result = inspector.GetUsedExtensionNames();
+  EXPECT_EQ(result.size(), 1u);
+  EXPECT_EQ(result[0], "InternalExtensionForTesting");
+}
+
+// Test calling GetUsedExtensionNames on a shader with a extension enabled for
+// multiple times.
+TEST_F(InspectorGetUsedExtensionNamesTest, Duplicated) {
+  std::string shader = R"(
+enable InternalExtensionForTesting;
+enable InternalExtensionForTesting;
+
+@stage(fragment)
+fn main() {
+})";
+
+  Inspector& inspector = Initialize(shader);
+
+  auto result = inspector.GetUsedExtensionNames();
+  EXPECT_EQ(result.size(), 1u);
+  EXPECT_EQ(result[0], "InternalExtensionForTesting");
 }
 
 // Crash was occuring in ::GenerateSamplerTargets, when
