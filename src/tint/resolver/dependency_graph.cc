@@ -162,6 +162,9 @@ class DependencyScanner {
             TraverseExpression(var->constructor);
           }
         },
+        [&](const ast::Extension* ext) {
+          // Extension derictive do not effect on dependency graph.
+        },
         [&](Default) { UnhandledNode(diagnostics_, global->node); });
   }
 
@@ -523,7 +526,10 @@ struct DependencyAnalysis {
   void GatherGlobals(const ast::Module& module) {
     for (auto* node : module.GlobalDeclarations()) {
       auto* global = allocator_.Create(node);
-      globals_.emplace(SymbolOf(node), global);
+      // Extension derictive does not form a symbol. Skip them.
+      if (!node->Is<ast::Extension>()) {
+        globals_.emplace(SymbolOf(node), global);
+      }
       declaration_order_.emplace_back(global);
     }
   }
@@ -592,6 +598,13 @@ struct DependencyAnalysis {
     if (diagnostics_.contains_errors()) {
       return;  // This code assumes there are no undeclared identifiers.
     }
+
+    /*
+    TODO(Zhaoming): Do we need to make sure that extension nodes are before any
+    other node? When generating GLSL, this is not necessary, as we can first
+    record all required extension, then generate all entension directives at
+    once and put it at the beginning.
+    */
 
     std::unordered_set<const Global*> visited;
     for (auto* global : declaration_order_) {

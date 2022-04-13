@@ -568,6 +568,32 @@ uint32_t Inspector::GetWorkgroupStorageSize(const std::string& entry_point) {
   return total_size;
 }
 
+bool Inspector::CheckExtensionAllowlist(
+    const std::vector<std::string>& extension_allowlist) {
+  ast::ExtensionSet set = program_->AST().Extensions();
+
+  for (const std::string& name : extension_allowlist) {
+    set.erase(ast::Extension::NameToKind(name));
+  }
+
+  return set.size() == 0;
+}
+
+std::vector<std::string> Inspector::GetUsedExtensionNames() {
+  std::vector<std::string> result;
+
+  ast::ExtensionSet set = program_->AST().Extensions();
+  result.reserve(set.size());
+  for (auto kind : set) {
+    std::string name = ast::Extension::KindToName(kind);
+    // All extension node in the ast tree must be valid and has a known name.
+    TINT_ASSERT(Inspector, !name.empty());
+    result.push_back(name);
+  }
+
+  return result;
+}
+
 const ast::Function* Inspector::FindEntryPointByName(const std::string& name) {
   auto* func = program_->AST().Functions().Find(program_->Symbols().Get(name));
   if (!func) {

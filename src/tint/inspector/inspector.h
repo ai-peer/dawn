@@ -143,6 +143,15 @@ class Inspector {
   /// referenced transitively by the entry point.
   uint32_t GetWorkgroupStorageSize(const std::string& entry_point);
 
+  /// @param extension_allowlist allowlist of extension names.
+  /// @returns boolean value indicating that if all extensions used by the
+  /// program (if any) are within the whitelist.
+  bool CheckExtensionAllowlist(
+      const std::vector<std::string>& extension_allowlist);
+
+  /// @returns vector of all valid extension names used by the program.
+  std::vector<std::string> GetUsedExtensionNames();
+
  private:
   const Program* program_;
   diag::List diagnostics_;
