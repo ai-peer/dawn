@@ -39,6 +39,30 @@
       },
       "revId": "8f407a7d155ce920e7aa0ee4c6fad4e6b58cd5fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1faffd98_d50d2fb9",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2022-04-13T21:18:27Z",
+      "side": 1,
+      "message": "Woops. Changed to combine each part of the logs together with some newlines.",
+      "parentUuid": "0eba9c6f_d4a13e97",
+      "range": {
+        "startLine": 65,
+        "startChar": 10,
+        "endLine": 65,
+        "endChar": 18
+      },
+      "revId": "8f407a7d155ce920e7aa0ee4c6fad4e6b58cd5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
