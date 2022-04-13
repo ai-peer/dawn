@@ -63,6 +63,30 @@
       },
       "revId": "581a9964eaa7eb456073619f691b0a336f00e4b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fff496a_0cd42e21",
+        "filename": "tools/lint",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-13T14:28:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "de47ea5d_6cf5a5c9",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 77
+      },
+      "revId": "581a9964eaa7eb456073619f691b0a336f00e4b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
