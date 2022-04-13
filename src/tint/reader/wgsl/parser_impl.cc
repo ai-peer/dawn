@@ -305,20 +305,95 @@ bool ParserImpl::Parse() {
 }
 
 // translation_unit
-//  : global_decl* EOF
+//  : enable_directive* global_decl* EOF
 void ParserImpl::translation_unit() {
+  bool foundGlobalDecl = false;
   while (continue_parsing()) {
     auto p = peek();
     if (p.IsEof()) {
       break;
     }
-    expect_global_decl();
-    if (builder_.Diagnostics().error_count() >= max_errors_) {
-      add_error(Source{{}, p.source().file},
-                "stopping after " + std::to_string(max_errors_) + " errors");
-      break;
+
+    {
+      auto ed = enable_directive();
+      if (ed.matched) {
+        if (foundGlobalDecl) {
+          add_error(
+              p,
+              "enable directive must go before any other global decleration");
+        }
+
+      } else {
+        auto gd = global_decl();
+
+        if (gd.matched) {
+          foundGlobalDecl = true;
+        }
+
+        if (!gd.matched && !gd.errored) {
+          add_error(p, "unexpected token");
+        }
+      }
+
+      if (builder_.Diagnostics().error_count() >= max_errors_) {
+        add_error(Source{{}, p.source().file},
+                  "stopping after " + std::to_string(max_errors_) + " errors");
+        break;
+      }
     }
   }
+}
+
+// enable_directive
+//  : enable name SEMICLON
+Maybe<bool> ParserImpl::enable_directive() {
+  if (match(Token::Type::kSemicolon) || match(Token::Type::kEOF)) {
+    return Failure::kNoMatch;
+  }
+
+  bool errored = false;
+
+  auto decl = sync(Token::Type::kSemicolon, [&]() -> Maybe<bool> {
+    if (!match(Token::Type::kEnable)) {
+      return Failure::kNoMatch;
+    }
+
+    auto extension = expect_extension_ident();
+    if (extension.errored) {
+      return Failure::kErrored;
+    }
+
+    if (!expect("enable directive", Token::Type::kSemicolon))
+      return Failure::kErrored;
+
+    if (ast::Extension::NameToType(extension.value) !=
+        ast::Extension::Type::kNotAnExtension) {
+      const ast::Extension* extensionNode =
+          create<ast::Extension>(extension.source, extension.value);
+      builder_.AST().AddExtension(extensionNode);
+    } else {
+      builder_.Diagnostics().add_warning(
+          diag::System::Reader,
+          "unsupported extension identifier: '" + extension.value + "'",
+          extension.source);
+    }
+
+    return true;
+  });
+
+  if (decl.errored) {
+    errored = true;
+  }
+  if (decl.matched) {
+    return true;
+  }
+
+  if (errored) {
+    auto t = peek();
+    return add_error(t, "unexpected token");
+  }
+
+  return Failure::kNoMatch;
 }
 
 // global_decl
@@ -328,7 +403,7 @@ void ParserImpl::translation_unit() {
 //  | type_alias SEMICOLON
 //  | struct_decl
 //  | function_decl
-Expect<bool> ParserImpl::expect_global_decl() {
+Maybe<bool> ParserImpl::global_decl() {
   if (match(Token::Type::kSemicolon) || match(Token::Type::kEOF))
     return true;
 
@@ -436,9 +511,9 @@ Expect<bool> ParserImpl::expect_global_decl() {
   }
 
   // Exhausted all attempts to make sense of where we're at.
-  // Spew a generic error.
+  // Return a no-match
 
-  return add_error(t, "unexpected token");
+  return Failure::kNoMatch;
 }
 
 // global_variable_decl
@@ -3150,6 +3225,27 @@ Expect<std::string> ParserImpl::expect_ident(std::string_view use) {
   }
   synchronized_ = false;
   return add_error(t.source(), "expected identifier", use);
+}
+
+Expect<std::string> ParserImpl::expect_extension_ident() {
+  auto t = peek();
+  if (t.IsIdentifier()) {
+    synchronized_ = true;
+    next();
+    return {t.to_str(), t.source()};
+  }
+  /*
+  TODO(Zhaoming): After `f16` keyword is added, the following code should
+  be added here to deal with the "f16" extension identifier.
+
+      if (t.Is(Token::Type::kF16)) {
+        synchronized_ = true;
+        next();
+        return {"f16", t.source()};
+      }
+  */
+  synchronized_ = false;
+  return add_error(t.source(), "expect a valid extension identifier");
 }
 
 template <typename F, typename T>

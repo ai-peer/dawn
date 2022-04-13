@@ -380,9 +380,12 @@ class ParserImpl {
   void deprecated(const Source& source, const std::string& msg);
   /// Parses the `translation_unit` grammar element
   void translation_unit();
+  /// Parses the `enable_directive` grammar element, erroring on parse failure.
+  /// @return true on parse success, otherwise an error or no-match.
+  Maybe<bool> enable_directive();
   /// Parses the `global_decl` grammar element, erroring on parse failure.
-  /// @return true on parse success, otherwise an error.
-  Expect<bool> expect_global_decl();
+  /// @return true on parse success, otherwise an error or no-match.
+  Maybe<bool> global_decl();
   /// Parses a `global_variable_decl` grammar element with the initial
   /// `variable_attribute_list*` provided as `attrs`
   /// @returns the variable parsed or nullptr
@@ -724,6 +727,10 @@ class ParserImpl {
   /// @param use a description of what was being parsed if an error was raised
   /// @returns the parsed identifier.
   Expect<std::string> expect_ident(std::string_view use);
+  /// Errors if the next token is not an valid extension identifier.
+  /// Consumes the next token on match.
+  /// @returns the parsed extension identifier.
+  Expect<std::string> expect_extension_ident();
   /// Parses a lexical block starting with the token `start` and ending with
   /// the token `end`. `body` is called to parse the lexical block body
   /// between the `start` and `end` tokens. If the `start` or `end` tokens
