@@ -122,7 +122,9 @@ namespace {
             descriptor.size.depthOrArrayLayers = GetParam().mDepthOrArrayLayers;
             descriptor.sampleCount = GetParam().mSampleCount;
             descriptor.format = GetParam().mFormat;
-            descriptor.usage = GetParam().mUsage;
+            descriptor.usage = GetParam().mDimension == wgpu::TextureDimension::e3D
+                                   ? wgpu::TextureUsage::CopySrc
+                                   : GetParam().mUsage;
             descriptor.mipLevelCount = GetParam().mMipCount;
 
             wgpu::Texture texture = device.CreateTexture(&descriptor);
