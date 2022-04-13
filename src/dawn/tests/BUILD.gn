@@ -333,11 +333,33 @@ dawn_test("dawn_unittests") {
 # Dawn end2end tests targets
 ###############################################################################
 
+# Source code for mocks used for end2end testing are separated from the rest of
+# sources so that they aren't included in non-test builds.
+source_set("end2end_mocks_sources") {
+  testonly = true
+
+  deps = [
+    ":gmock_and_gtest",
+    "${dawn_root}/src/dawn/native:sources",
+    "${dawn_root}/src/dawn/native:static",
+    "${dawn_root}/src/dawn/utils",
+  ]
+
+  # Add internal dawn native config for internal unittests.
+  configs += [ "${dawn_root}/src/dawn/native:internal" ]
+
+  sources = [
+    "end2end/mocks/CachingInterfaceMock.cpp",
+    "end2end/mocks/CachingInterfaceMock.h",
+  ]
+}
+
 source_set("end2end_tests_sources") {
   configs += [ "${dawn_root}/src/dawn/common:internal_config" ]
   testonly = true
 
   deps = [
+    ":end2end_mocks_sources",
     ":gmock_and_gtest",
     "${dawn_root}/src/dawn:cpp",
     "${dawn_root}/src/dawn:proc",
