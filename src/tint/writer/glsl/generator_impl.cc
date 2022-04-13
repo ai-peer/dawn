@@ -282,6 +282,11 @@ bool GeneratorImpl::Generate() {
           return false;
         }
       }
+    } else if (auto* ext = decl->As<ast::Enable>()) {
+      // Record the required extension for generating extension directive later
+      if (!RecordExtension(ext)) {
+        return false;
+      }
     } else {
       TINT_ICE(Writer, diagnostics_)
           << "unhandled module-scope declaration: " << decl->TypeInfo().name;
@@ -294,6 +299,14 @@ bool GeneratorImpl::Generate() {
   if (version_.IsES() && requires_oes_sample_variables_) {
     extensions.Append("#extension GL_OES_sample_variables : require");
   }
+
+  /*
+  TODO(Zhaoming): Deal with extension directive used by program.
+  For example:
+      if (requires_fp16_) {
+        extensions.Append("#extension AMD_gpu_shader_half_float : require");
+      }
+  */
 
   auto indent = current_buffer_->current_indent;
 
@@ -312,6 +325,21 @@ bool GeneratorImpl::Generate() {
     current_buffer_->Insert(helpers_, helpers_insertion_point, indent);
     helpers_insertion_point += helpers_.lines.size();
   }
+
+  return true;
+}
+
+bool GeneratorImpl::RecordExtension(const ast::Enable* ext) {
+  /*
+  Deal with extension node here, recording it within the generator for
+  later emition.
+  For example:
+  ```
+    if (ext->kind == ast::Enable::ExtensionKind::kF16) {
+    require_fp16_ = true;
+    }
+  ```
+  */
 
   return true;
 }
