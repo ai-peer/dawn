@@ -22,6 +22,30 @@
       },
       "revId": "365047c591167b8efac2194e7918499a43fc6f6b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b4b3b1d_1a0d37f8",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2022-04-13T21:28:01Z",
+      "side": 1,
+      "message": "The intention was to make it a bit clearer at a glance where each separate log begins - visible whitespace stands out a lot more than a single newline, at least to me. Feel free to change in the future if you find that it\u0027s too much, though.\n\nThe Chromium-side joining should be able to be removed once this lands since this should ensure that we\u0027re always sending over a string.",
+      "parentUuid": "6ef9670c_5ebf64aa",
+      "range": {
+        "startLine": 66,
+        "startChar": 32,
+        "endLine": 66,
+        "endChar": 39
+      },
+      "revId": "365047c591167b8efac2194e7918499a43fc6f6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
