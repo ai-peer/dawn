@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ef9670c_5ebf64aa",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-13T21:23:28Z",
+      "side": 1,
+      "message": "might be too many newlines? can always change it later, but Chromium-side currently has\n\\n\u0027.join(logs)",
+      "range": {
+        "startLine": 66,
+        "startChar": 32,
+        "endLine": 66,
+        "endChar": 39
+      },
+      "revId": "365047c591167b8efac2194e7918499a43fc6f6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
