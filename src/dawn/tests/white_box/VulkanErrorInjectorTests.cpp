@@ -47,7 +47,7 @@ TEST_P(VulkanErrorInjectorTests, InjectErrorOnCreateBuffer) {
 
     // Check that making a buffer works.
     {
-        VkBuffer buffer = VK_NULL_HANDLE;
+        VkBuffer buffer{};
         EXPECT_EQ(
             mDeviceVk->fn.CreateBuffer(mDeviceVk->GetVkDevice(), &createInfo, nullptr, &buffer),
             VK_SUCCESS);
@@ -55,7 +55,7 @@ TEST_P(VulkanErrorInjectorTests, InjectErrorOnCreateBuffer) {
     }
 
     auto CreateTestBuffer = [&]() -> bool {
-        VkBuffer buffer = VK_NULL_HANDLE;
+        VkBuffer buffer{};
         dawn::native::MaybeError err = CheckVkSuccess(
             mDeviceVk->fn.CreateBuffer(mDeviceVk->GetVkDevice(), &createInfo, nullptr, &buffer),
             "vkCreateBuffer");
