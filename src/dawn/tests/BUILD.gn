@@ -348,6 +348,7 @@ source_set("end2end_tests_sources") {
     "${dawn_root}/src/dawn/utils",
     "${dawn_root}/src/dawn/wire",
   ]
+  public_deps = [ "${dawn_root}/src/dawn/platform:static" ]
 
   sources = [
     "DawnTest.h",
