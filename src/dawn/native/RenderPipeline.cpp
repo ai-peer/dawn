@@ -631,7 +631,7 @@ namespace dawn::native {
         TrackInDevice();
 
         // Initialize the cache key to include the cache type and device information.
-        GetCacheKey()->Record(CacheKey::Type::RenderPipeline, device->GetCacheKey());
+        mCacheKey.Record(CacheKey::Type::RenderPipeline, device->GetCacheKey());
     }
 
     RenderPipelineBase::RenderPipelineBase(DeviceBase* device) : PipelineBase(device) {

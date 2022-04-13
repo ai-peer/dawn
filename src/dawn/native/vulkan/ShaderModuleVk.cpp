@@ -116,7 +116,7 @@ namespace dawn::native::vulkan {
 
     ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
         const char* entryPointName,
-        PipelineLayout* layout) {
+        const PipelineLayout* layout) {
         TRACE_EVENT0(GetDevice()->GetPlatform(), General, "ShaderModuleVk::GetHandleAndSpirv");
 
         // If the shader was destroyed, we should never call this function.
@@ -173,7 +173,7 @@ namespace dawn::native::vulkan {
         // TODO(dawn:1082): Replace this block with ShaderModuleBase::AddExternalTextureTransform.
         tint::transform::MultiplanarExternalTexture::BindingsMap newBindingsMap;
         for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
-            BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(i);
+            const BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(i);
 
             ExternalTextureBindingExpansionMap expansions =
                 bgl->GetExternalTextureBindingExpansionMap();

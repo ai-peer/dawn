@@ -39,12 +39,12 @@ namespace dawn::native {
         size_t GetContentHash() const;
         void SetContentHash(size_t contentHash);
 
-        // Returns the cache key for the object only, i.e. without device/adapter information.
+        // Returns the cache key for the object.
         const CacheKey& GetCacheKey() const;
 
       protected:
-        // Protected accessor for derived classes to access and modify the key.
-        CacheKey* GetCacheKey();
+        // Cache key member is protected so that derived classes can modify it.
+        CacheKey mCacheKey;
 
       private:
         friend class DeviceBase;
@@ -57,7 +57,6 @@ namespace dawn::native {
 
         size_t mContentHash = 0;
         bool mIsContentHashInitialized = false;
-        CacheKey mCacheKey;
     };
 
 }  // namespace dawn::native
