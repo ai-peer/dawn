@@ -34,6 +34,7 @@ namespace dawn::native::vulkan {
         void DeleteWhenUnused(VkFramebuffer framebuffer);
         void DeleteWhenUnused(VkImage image);
         void DeleteWhenUnused(VkImageView view);
+        void DeleteWhenUnused(VkPipelineCache layout);
         void DeleteWhenUnused(VkPipelineLayout layout);
         void DeleteWhenUnused(VkRenderPass renderPass);
         void DeleteWhenUnused(VkPipeline pipeline);
@@ -55,6 +56,7 @@ namespace dawn::native::vulkan {
         SerialQueue<ExecutionSerial, VkImage> mImagesToDelete;
         SerialQueue<ExecutionSerial, VkImageView> mImageViewsToDelete;
         SerialQueue<ExecutionSerial, VkPipeline> mPipelinesToDelete;
+        SerialQueue<ExecutionSerial, VkPipelineCache> mPipelineCachesToDelete;
         SerialQueue<ExecutionSerial, VkPipelineLayout> mPipelineLayoutsToDelete;
         SerialQueue<ExecutionSerial, VkQueryPool> mQueryPoolsToDelete;
         SerialQueue<ExecutionSerial, VkRenderPass> mRenderPassesToDelete;
