@@ -30,7 +30,7 @@ TEST_F(LexerTest, Empty) {
   EXPECT_TRUE(t.IsEof());
 }
 
-TEST_F(LexerTest, Skips_Blankspace) {
+TEST_F(LexerTest, Skips_Blankspace_Basic) {
   Source::File file("", "\t\r\n\t    ident\t\n\t  \r ");
   Lexer l(&file);
 
@@ -44,6 +44,39 @@ TEST_F(LexerTest, Skips_Blankspace) {
 
   t = l.next();
   EXPECT_TRUE(t.IsEof());
+}
+
+TEST_F(LexerTest, Skips_Blankspace_Exotic) {
+  // Same line
+#define kL2R "\xE2\x80\x8E"
+#define kR2L "\xE2\x80\x8F"
+  // Not same line, intepreted as line feed
+#define kVTab "\x0B"
+#define kFF "\x0C"
+#define kNL "\xC2\x85"
+
+  Source::File file("",
+                    kVTab kFF kNL kL2R kR2L "ident" kVTab kFF kNL kL2R kR2L);
+  Lexer l(&file);
+
+  auto t = l.next();
+  EXPECT_TRUE(t.IsIdentifier());
+  EXPECT_EQ(t.source().range.begin.line, 4u);
+  EXPECT_EQ(t.source().range.begin.column, 7u);
+  EXPECT_EQ(t.source().range.end.line, 4u);
+  EXPECT_EQ(t.source().range.end.column, 12u);
+  EXPECT_EQ(t.to_str(), "ident");
+
+  t = l.next();
+  EXPECT_TRUE(t.IsEof());
+
+#undef kCR
+#undef kL2R
+#undef kR2L
+#undef kLF
+#undef kVTab
+#undef kFF
+#undef kNL
 }
 
 TEST_F(LexerTest, Skips_Comments_Line) {
