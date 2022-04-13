@@ -21,6 +21,7 @@
 #include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/FencedDeleter.h"
+#include "dawn/native/vulkan/PipelineCacheVk.h"
 #include "dawn/native/vulkan/PipelineLayoutVk.h"
 #include "dawn/native/vulkan/ShaderModuleVk.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
@@ -41,7 +42,7 @@ namespace dawn::native::vulkan {
         createInfo.pNext = nullptr;
         createInfo.flags = 0;
         createInfo.layout = ToBackend(GetLayout())->GetHandle();
-        createInfo.basePipelineHandle = ::VK_NULL_HANDLE;
+        createInfo.basePipelineHandle = VkPipeline{};
         createInfo.basePipelineIndex = -1;
 
         createInfo.stage.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
@@ -84,10 +85,26 @@ namespace dawn::native::vulkan {
             ->Record(createInfo, static_cast<const ComputePipeline*>(this)->GetLayout())
             .RecordIterable(*spirv);
 
-        DAWN_TRY(CheckVkSuccess(
-            device->fn.CreateComputePipelines(device->GetVkDevice(), ::VK_NULL_HANDLE, 1,
-                                              &createInfo, nullptr, &*mHandle),
-            "CreateComputePipeline"));
+        // Try to see if we have anything in the blob cache.
+        Ref<PipelineCacheBase> cache = GetDevice()->GetOrCreatePipelineCache(this);
+        if (cache == nullptr) {
+            // If we don't have any cache hits, or something errors, create the pipeline without the
+            // cache.
+            DAWN_TRY(CheckVkSuccess(
+                device->fn.CreateComputePipelines(device->GetVkDevice(), VkPipelineCache{}, 1,
+                                                  &createInfo, nullptr, &*mHandle),
+                "CreateComputePipeline"));
+        } else {
+            auto backendCache = ToBackend(cache);
+            DAWN_TRY(CheckVkSuccess(
+                device->fn.CreateComputePipelines(device->GetVkDevice(), backendCache->GetHandle(),
+                                                  1, &createInfo, nullptr, &*mHandle),
+                "CreateComputePipeline"));
+            if (!backendCache->CacheHit()) {
+                // TODO(dawn:549): Flush is currently in the same thread, but perhaps deferrable.
+                DAWN_TRY(cache->Flush());
+            }
+        }
 
         SetLabelImpl();
 

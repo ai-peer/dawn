@@ -195,6 +195,8 @@ namespace dawn::native {
         Ref<AttachmentState> GetOrCreateAttachmentState(const RenderPassDescriptor* descriptor);
         void UncacheAttachmentState(AttachmentState* obj);
 
+        Ref<PipelineCacheBase> GetOrCreatePipelineCache(PipelineBase* pipeline);
+
         // Object creation methods that be used in a reentrant manner.
         ResultOrError<Ref<BindGroupBase>> CreateBindGroup(const BindGroupDescriptor* descriptor);
         ResultOrError<Ref<BindGroupLayoutBase>> CreateBindGroupLayout(
@@ -208,7 +210,6 @@ namespace dawn::native {
         MaybeError CreateComputePipelineAsync(const ComputePipelineDescriptor* descriptor,
                                               WGPUCreateComputePipelineAsyncCallback callback,
                                               void* userdata);
-
         ResultOrError<Ref<PipelineLayoutBase>> CreatePipelineLayout(
             const PipelineLayoutDescriptor* descriptor);
         ResultOrError<Ref<QuerySetBase>> CreateQuerySet(const QuerySetDescriptor* descriptor);
@@ -444,6 +445,7 @@ namespace dawn::native {
             Ref<ComputePipelineBase> computePipeline);
         Ref<RenderPipelineBase> AddOrGetCachedRenderPipeline(
             Ref<RenderPipelineBase> renderPipeline);
+        virtual Ref<PipelineCacheBase> GetOrCreatePipelineCacheImpl(PipelineBase* pipeline);
         virtual void InitializeComputePipelineAsyncImpl(
             Ref<ComputePipelineBase> computePipeline,
             WGPUCreateComputePipelineAsyncCallback callback,
