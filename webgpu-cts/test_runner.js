@@ -79,7 +79,7 @@ async function runCtsTest(query, use_worker) {
           }
         }
         // Didn't make any changes - all pieces are under the size limit.
-        if (logPieces == tempLogPieces) {
+        if (logPieces.every((value, index) => value == tempLogPieces[index])) {
           break;
         }
         logPieces = tempLogPieces;
