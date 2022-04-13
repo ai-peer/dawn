@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91452ca7_498af313",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-13T10:23:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1aed874_2aab6fbe",
+      "range": {
+        "startLine": 154,
+        "startChar": 12,
+        "endLine": 155,
+        "endChar": 42
+      },
+      "revId": "2fb2c043b26a5a845409a5e404daf44284af1e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "889e19db_62c8879d",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-04-12T15:10:54Z",
       "side": 1,
       "message": "Inject adds a ref. Are we currently leaking, and need to add a release call?",
+      "range": {
+        "startLine": 177,
+        "startChar": 12,
+        "endLine": 185,
+        "endChar": 56
+      },
+      "revId": "2fb2c043b26a5a845409a5e404daf44284af1e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c30bff99_7b8910d2",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-13T10:23:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "889e19db_62c8879d",
       "range": {
         "startLine": 177,
         "startChar": 12,
