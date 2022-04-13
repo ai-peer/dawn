@@ -17,6 +17,7 @@
 #include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/FencedDeleter.h"
+#include "dawn/native/vulkan/PipelineCacheVk.h"
 #include "dawn/native/vulkan/PipelineLayoutVk.h"
 #include "dawn/native/vulkan/ShaderModuleVk.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
@@ -82,10 +83,23 @@ namespace dawn::native::vulkan {
             ->Record(createInfo, static_cast<const ComputePipeline*>(this)->GetLayout())
             .RecordIterable(*spirv);
 
-        DAWN_TRY(CheckVkSuccess(
-            device->fn.CreateComputePipelines(device->GetVkDevice(), ::VK_NULL_HANDLE, 1,
-                                              &createInfo, nullptr, &*mHandle),
-            "CreateComputePipeline"));
+        // Try to see if we have anything in the blob cache.
+        VkPipelineCache cacheHandle = VK_NULL_HANDLE;
+        Ref<PipelineCacheBase> cache = GetDevice()->GetOrCreatePipelineCache(this);
+        if (cache != nullptr) {
+            cacheHandle = ToBackend(cache)->GetHandle();
+        }
+
+        DAWN_TRY(
+            CheckVkSuccess(device->fn.CreateComputePipelines(device->GetVkDevice(), cacheHandle, 1,
+                                                             &createInfo, nullptr, &*mHandle),
+                           "CreateComputePipeline"));
+
+        // TODO(dawn:549): This is currently done in the same thread, but maybe we can defer this.
+        if (cache != nullptr && !cache->CacheHit()) {
+            // Write the cache out when the cache wasn't a hit.
+            cache->Flush();
+        }
 
         SetLabelImpl();
 
