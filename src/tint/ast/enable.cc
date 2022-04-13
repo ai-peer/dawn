@@ -1,0 +1,73 @@
+// Copyright 2022 The Tint Authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#include "src/tint/ast/enable.h"
+
+#include "src/tint/program_builder.h"
+#include "src/tint/sem/variable.h"
+
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Enable);
+
+namespace tint::ast {
+
+Enable::ExtensionKind Enable::NameToKind(const std::string& name) {
+  /*
+  TODO(Zhaoming): Deal with each supported extension, convert its name to
+  corresponding kind. For example:
+  ```
+      if (name == "f16") {
+        return Enable::ExtensionKind::kF16;
+      }
+  ```
+  */
+  // The reserved internal extension name for testing
+  if (name == "InternalExtensionForTesting") {
+    return Enable::ExtensionKind::kInternalExtensionForTesting;
+  }
+
+  return Enable::ExtensionKind::kNotAnExtension;
+}
+
+std::string Enable::KindToName(ExtensionKind kind) {
+  switch (kind) {
+    /*
+    TODO(Zhaoming): Deal with each supported extension, convert its kind to
+    corresponding name. For example:
+    ```
+        case (ExtensionKind::kF16):
+          return "f16";
+    ```
+    */
+    // The reserved internal extension for testing
+    case ExtensionKind::kInternalExtensionForTesting:
+      return "InternalExtensionForTesting";
+    case ExtensionKind::kNotAnExtension:
+      // Return an empty string for kNotAnExtension
+      return {};
+      // No default, as this switch must cover all ExtensionKind values.
+  }
+}
+
+Enable::Enable(ProgramID pid, const Source& src, const std::string& ext_name)
+    : Base(pid, src), name(ext_name), kind(NameToKind(ext_name)) {}
+
+Enable::Enable(Enable&&) = default;
+
+Enable::~Enable() = default;
+
+const Enable* Enable::Clone(CloneContext* ctx) const {
+  auto src = ctx->Clone(source);
+  return ctx->dst->create<Enable>(src, name);
+}
+}  // namespace tint::ast
