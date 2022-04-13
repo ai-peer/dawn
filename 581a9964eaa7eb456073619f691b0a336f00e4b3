@@ -39,6 +39,30 @@
       },
       "revId": "581a9964eaa7eb456073619f691b0a336f00e4b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de47ea5d_6cf5a5c9",
+        "filename": "tools/lint",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-13T14:24:11Z",
+      "side": 1,
+      "message": "It should, PRESUBMIT is setting verbose_level\u003d1 which matches what is set here.",
+      "parentUuid": "7f88842d_230e1743",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 77
+      },
+      "revId": "581a9964eaa7eb456073619f691b0a336f00e4b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
