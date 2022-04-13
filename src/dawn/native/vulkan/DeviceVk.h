@@ -35,8 +35,6 @@
 
 namespace dawn::native::vulkan {
 
-    class Adapter;
-    class BindGroupLayout;
     class BufferUploader;
     class FencedDeleter;
     class RenderPassCache;
@@ -142,6 +140,7 @@ namespace dawn::native::vulkan {
             const ComputePipelineDescriptor* descriptor) override;
         Ref<RenderPipelineBase> CreateUninitializedRenderPipelineImpl(
             const RenderPipelineDescriptor* descriptor) override;
+        Ref<PipelineCacheBase> GetOrCreatePipelineCacheImpl(PipelineBase* pipeline) override;
         void InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> computePipeline,
                                                 WGPUCreateComputePipelineAsyncCallback callback,
                                                 void* userdata) override;
