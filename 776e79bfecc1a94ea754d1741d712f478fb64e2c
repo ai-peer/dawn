@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "589687d1_dc0dc971",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-13T17:37:57Z",
+      "side": 1,
+      "message": "This was a change I made in a separate PR and wasn\u0027t sure if I should change back or if this was a deeper GN setup issue. Is it expected that changing from:\n\n* `#include \u003cdawn/platform/DawnPlatform.h\u003e`\nto\n* `#include \"dawn/platform/DawnPlatform.h\"`\n\nis going to have missing dependencies? (As a note, I tried adding `src/dawn/platform:static` to the `deps` of `dawn_end2end_tests` and that causes link errors with duplicate `Platform` constructor and destructors.)\n\nSo, is this something that should be investigated deeper, or just leave as `\u003c\u003e` as this is expected?\n\n\n```\nERROR at //third_party/dawn/src/dawn/tests/DawnTest.h:32:11: Can\u0027t include this header from here.\n#include \"dawn/platform/DawnPlatform.h\"\n          ^---------------------------\nThe target:\n  //third_party/dawn/src/dawn/tests:dawn_end2end_tests\nis including a file from the target:\n  //third_party/dawn/src/dawn/platform:static\n```",
+      "revId": "776e79bfecc1a94ea754d1741d712f478fb64e2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
