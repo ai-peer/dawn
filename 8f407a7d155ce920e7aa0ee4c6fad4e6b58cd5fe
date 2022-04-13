@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "8f407a7d155ce920e7aa0ee4c6fad4e6b58cd5fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eba9c6f_d4a13e97",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-13T20:59:59Z",
+      "side": 1,
+      "message": "this is an array of strings which means `logPieces` is a `string[][]`\nand `piece` is a `string[]`\n\nI don\u0027t think piece.substring(..) will work?\n\nIt\u0027s probably still working correctly right now since each element of `fullLogs` is probably under the payload size, and the `forEach` loop that sends them is sending each line as it\u0027s own array of strings. i.e.\n - send([\u0027line1\u0027]), send([\u0027line2\u0027]), send([\u0027line3\u0027]), ...",
+      "range": {
+        "startLine": 65,
+        "startChar": 10,
+        "endLine": 65,
+        "endChar": 18
+      },
+      "revId": "8f407a7d155ce920e7aa0ee4c6fad4e6b58cd5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
