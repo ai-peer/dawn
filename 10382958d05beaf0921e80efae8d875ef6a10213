@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf6763eb_908d24ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-13T19:54:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ea9ee36_dbfad639",
+      "revId": "10382958d05beaf0921e80efae8d875ef6a10213",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5f1f744_b23edfd3",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-04-13T19:18:55Z",
       "side": 1,
       "message": "still need \"* N\" ?",
+      "range": {
+        "startLine": 176,
+        "startChar": 45,
+        "endLine": 176,
+        "endChar": 51
+      },
+      "revId": "10382958d05beaf0921e80efae8d875ef6a10213",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d337a1c_6b71c8c9",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-13T19:54:54Z",
+      "side": 1,
+      "message": "Since it\u0027s sizeof(t), where t is the actual array var, I think it should work as is, and we don\u0027t need to worry about padding anymore either.",
+      "parentUuid": "f5f1f744_b23edfd3",
       "range": {
         "startLine": 176,
         "startChar": 45,
