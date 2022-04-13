@@ -162,6 +162,11 @@ class DependencyScanner {
             TraverseExpression(var->constructor);
           }
         },
+        [&](const ast::Enable* ext) {
+          // Enable directives do not effect the dependency graph.
+          // Add a reference to suppress unreferenced formal parameter warning.
+          (void)ext;
+        },
         [&](Default) { UnhandledNode(diagnostics_, global->node); });
   }
 
@@ -523,7 +528,10 @@ struct DependencyAnalysis {
   void GatherGlobals(const ast::Module& module) {
     for (auto* node : module.GlobalDeclarations()) {
       auto* global = allocator_.Create(node);
-      globals_.emplace(SymbolOf(node), global);
+      // Enable directives do not form a symbol. Skip them.
+      if (!node->Is<ast::Enable>()) {
+        globals_.emplace(SymbolOf(node), global);
+      }
       declaration_order_.emplace_back(global);
     }
   }

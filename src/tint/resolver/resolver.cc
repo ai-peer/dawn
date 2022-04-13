@@ -55,6 +55,7 @@
 #include "src/tint/sem/call.h"
 #include "src/tint/sem/depth_multisampled_texture_type.h"
 #include "src/tint/sem/depth_texture_type.h"
+#include "src/tint/sem/extension.h"
 #include "src/tint/sem/for_loop_statement.h"
 #include "src/tint/sem/function.h"
 #include "src/tint/sem/if_statement.h"
@@ -126,6 +127,11 @@ bool Resolver::ResolveInternal() {
             [&](const ast::TypeDecl* td) { return TypeDecl(td); },
             [&](const ast::Function* func) { return Function(func); },
             [&](const ast::Variable* var) { return GlobalVariable(var); },
+            [&](const ast::Enable* ext) {
+              auto* s = builder_->create<sem::Extension>(ext);
+              builder_->Sem().Add(ext, s);
+              return s;
+            },
             [&](Default) {
               TINT_UNREACHABLE(Resolver, diagnostics_)
                   << "unhandled global declaration: " << decl->TypeInfo().name;
