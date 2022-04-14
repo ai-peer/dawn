@@ -77,6 +77,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7f5ca289_1531fc1e",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-04-14T00:42:16Z",
+      "side": 1,
+      "message": "That\u0027s great! Let me try this.",
+      "parentUuid": "b8933fac_af19a806",
+      "revId": "f7f7fef626a172cb181105700089fdbe18117cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c08744f7_81e1e759",
         "filename": "src/dawn/native/Queue.cpp",
         "patchSetId": 1
@@ -100,6 +118,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1578605f_9b94b1fd",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-04-14T00:42:16Z",
+      "side": 1,
+      "message": "My concern comes from that Finish() doesn\u0027t need the platform object to work. It is only for tracing. So I hesitate to add this in Finish() parameter list.",
+      "parentUuid": "c08744f7_81e1e759",
+      "range": {
+        "startLine": 261,
+        "startChar": 12,
+        "endLine": 263,
+        "endChar": 13
+      },
+      "revId": "f7f7fef626a172cb181105700089fdbe18117cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58e0a521_1612dbe3",
         "filename": "src/dawn/native/Toggles.cpp",
         "patchSetId": 1
@@ -111,6 +153,24 @@
       "writtenOn": "2022-04-13T14:26:22Z",
       "side": 1,
       "message": "did you measure a performance regression without adding this toggle? Trace events already are supposed to include a check about whether or not tracing is enabled. We shouldn\u0027t add this Toggle unless we need to.\nHowever, the current check is a virtual call, but I would be surprised if it were very very slow.\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/include/dawn/platform/DawnPlatform.h;l\u003d87;drc\u003d4b03575fc3a5f7e1fd5cde04d33c204572fd9c29;bpv\u003d1;bpt\u003d1",
+      "revId": "f7f7fef626a172cb181105700089fdbe18117cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4b81728_add63fc9",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-04-14T00:42:16Z",
+      "side": 1,
+      "message": "Good point. I\u0027ll do the compare on my sample to see whether there is some perf diff.",
+      "parentUuid": "58e0a521_1612dbe3",
       "revId": "f7f7fef626a172cb181105700089fdbe18117cf7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
