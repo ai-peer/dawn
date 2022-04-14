@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bad263b_a19c640b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-14T21:03:42Z",
+      "side": 1,
+      "message": "Removed the +2 as there were substantial changes into the gn/abseil-cpp file. Add bajones@ for the gn/abseil-cpp changes.",
+      "revId": "614fb24d6ff3a9847a13b281c3956ae5ae21b819",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
