@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c4c3760_dddaf24f",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-14T14:22:02Z",
+      "side": 1,
+      "message": "These are all POD. Could this just be a simple `struct` sans accessors?",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 26
+      },
+      "revId": "29ff31689834cab5ca962c79708bc151aee1253c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae516bb5_350b6b49",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-14T14:22:02Z",
+      "side": 1,
+      "message": "The two places you call this are incrementing `pos_` on match.\nI\u0027m wondering if it would be nicer to consolidate the logic into a `try_blankspace` method which deals with the position increment on match, including handling errors and newlines.\nIf you did this, I\u0027m not sure there\u0027s a need for the `Blankspace` class.",
+      "range": {
+        "startLine": 206,
+        "startChar": 16,
+        "endLine": 206,
+        "endChar": 31
+      },
+      "revId": "29ff31689834cab5ca962c79708bc151aee1253c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5823e72_20bb3593",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-14T14:22:02Z",
+      "side": 1,
+      "message": "I don\u0027t think this is going to work with unicode comments. Consider:\n\n`// 🙂` - `0x5c 0x5c 0x20 0xf0 0x9f 0x99 0x82`\n\n* `//` is matched at the top of this function.\n* ` ` is matched by `peek_blankspace()`\n* `🙂` is not matched by `peek_blankspace()`, so we get to here and `size` is 1.  We skip the first byte of the emoji (`0xf0`).\n* `0x9f 0x99 0x82` is not a valid UTF-8 sequence, and so the next call to `peek_blankspace()` errors.\n\nI think we need a `next_codepoint()` helper which can decode the next codepoint, and produce Token errors for invalid codepoints.\n\nPlease add a test for this case.",
+      "revId": "29ff31689834cab5ca962c79708bc151aee1253c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
