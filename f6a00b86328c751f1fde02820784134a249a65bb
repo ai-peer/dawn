@@ -87,6 +87,24 @@
       "parentUuid": "7134a60d_c31bd463",
       "revId": "f6a00b86328c751f1fde02820784134a249a65bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f66b1d0_9b9cfe46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-14T14:27:44Z",
+      "side": 1,
+      "message": "I could have `./tools/run` set up the symlinks, but I\u0027d expect most people to eventually run a tool, in which case you\u0027re no better off than checking them in.",
+      "parentUuid": "deb52f4d_23241e8b",
+      "revId": "f6a00b86328c751f1fde02820784134a249a65bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
