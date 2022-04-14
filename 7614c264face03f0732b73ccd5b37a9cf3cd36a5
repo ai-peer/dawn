@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7f309e5_8e2974df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-04-14T11:22:00Z",
+      "side": 1,
+      "message": "The failures on the bots will disappear after we roll the CTS to the latest version.",
+      "revId": "7614c264face03f0732b73ccd5b37a9cf3cd36a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
