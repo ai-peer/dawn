@@ -33,6 +33,24 @@
       "message": "IDK, this is more junk at the top level. The alternative I suggested of adding them .gitignore and doing symlinks doesn\u0027t work?",
       "revId": "f6a00b86328c751f1fde02820784134a249a65bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ce7dbc6_f11e6dcd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-14T14:23:57Z",
+      "side": 1,
+      "message": "What creates the symlinks?",
+      "parentUuid": "9e37a97a_7ac0811a",
+      "revId": "f6a00b86328c751f1fde02820784134a249a65bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
