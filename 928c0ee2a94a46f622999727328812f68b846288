@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a8b07b2_f979097d",
+        "filename": "tools/src/buildbucket/buildbucket.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-04-14T08:20:30Z",
+      "side": 1,
+      "message": "There\u0027s a few of reasons I don\u0027t want to do this:\n* The protobuf generated type smells. All fields are pointers, as most protobuf things are optional, there\u0027s getters for every field. It\u0027s just not a nice interface.\n* The protobuf structure is large, and it\u0027s typical for it to be sparsely populated. These `Builder`s are public API, and not knowing what fields are populated / in use is bad API.\n* Having our own type allows us to deviate from the protobuf form. We can have a cleaner String() method, helpers etc.",
+      "parentUuid": "edf42c08_1285e4b9",
+      "revId": "928c0ee2a94a46f622999727328812f68b846288",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f41122a_f7cf5666",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-04-14T07:23:21Z",
       "side": 1,
       "message": "Maybe this should be %+v or %#v, WDYT?",
+      "range": {
+        "startLine": 26,
+        "startChar": 32,
+        "endLine": 26,
+        "endChar": 34
+      },
+      "revId": "928c0ee2a94a46f622999727328812f68b846288",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bda957b_c53c252e",
+        "filename": "tools/src/utils/hash.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-04-14T08:20:30Z",
+      "side": 1,
+      "message": "Good idea (and yay, you\u0027re learning go!)\nI also whacked a unicode character in there to lessen the chance of other collisions.",
+      "parentUuid": "1f41122a_f7cf5666",
       "range": {
         "startLine": 26,
         "startChar": 32,
