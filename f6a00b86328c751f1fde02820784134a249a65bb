@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a661762_f9154e5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-14T13:33:37Z",
+      "side": 1,
+      "message": "Don\u0027t be afraid to -1 this if you feel strongly.",
+      "revId": "f6a00b86328c751f1fde02820784134a249a65bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
