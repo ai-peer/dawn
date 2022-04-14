@@ -86,6 +86,24 @@
       "parentUuid": "624403b4_b28c8478",
       "revId": "2b07f23593bd1a0f9e2fb8f504c45bc011cda2f8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f58380a0_fb7f7a4b",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-14T17:16:20Z",
+      "side": 1,
+      "message": "Fixed to use dawn_root in here and fixed dawn_angle_dir in https://dawn-review.googlesource.com/c/dawn/+/86862/ as it doesn\u0027t seem to block this gn fix.",
+      "parentUuid": "0f7c83fb_24c72efd",
+      "revId": "2b07f23593bd1a0f9e2fb8f504c45bc011cda2f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
