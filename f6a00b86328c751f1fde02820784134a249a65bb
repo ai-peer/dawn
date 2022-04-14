@@ -16,6 +16,23 @@
       "message": "Don\u0027t be afraid to -1 this if you feel strongly.",
       "revId": "f6a00b86328c751f1fde02820784134a249a65bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e37a97a_7ac0811a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-14T14:17:50Z",
+      "side": 1,
+      "message": "IDK, this is more junk at the top level. The alternative I suggested of adding them .gitignore and doing symlinks doesn\u0027t work?",
+      "revId": "f6a00b86328c751f1fde02820784134a249a65bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
