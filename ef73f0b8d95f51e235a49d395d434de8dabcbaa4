@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb61a12f_df3e3b56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-14T06:40:31Z",
+      "side": 1,
+      "message": "PTAL, Thanks!\n\nI used different approaches to work around B2T copy and T2B copy:\n  - For B2T Copy, it is efficient to use a temp buffer, because we can copy data into the temp buffer in one time from the original source buffer, then use the temp buffer to do B2T copy. Considering that we do relative complicated split for 3D texture copy, so I think it is better to do less Buffer-3DTexture copy if we can.\n  - However, for T2B copy, it is done via two separate T2B copies, because if we use T2B copy and copy texture data to a temp buffer, then it is not easy to copy the temp buffer into the destination buffer in one time because there are paddings and we cannot change the paddings. So I think two separate copies should be fine.",
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
