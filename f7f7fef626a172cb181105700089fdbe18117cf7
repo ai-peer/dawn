@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "876a63dd_2ccba9e3",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-04-14T06:57:31Z",
+      "side": 1,
+      "message": "Done. Abandon this trivial API.",
+      "parentUuid": "1382db05_285950dd",
+      "range": {
+        "startLine": 43,
+        "startChar": 17,
+        "endLine": 43,
+        "endChar": 22
+      },
+      "revId": "f7f7fef626a172cb181105700089fdbe18117cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8933fac_af19a806",
@@ -89,6 +113,24 @@
       "side": 1,
       "message": "That\u0027s great! Let me try this.",
       "parentUuid": "b8933fac_af19a806",
+      "revId": "f7f7fef626a172cb181105700089fdbe18117cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8548fce_adb10217",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-04-14T06:57:31Z",
+      "side": 1,
+      "message": "in IsDeviceIdle(), dawn compares mCompletedSerial with std::max(mLastSubmittedSerial, mFutureSerial). If they\u0027re equal, the device state is marked as Idle(And without any pending AsyncTask ).\nBut the mCompltedSerial, mLastSubmittedSerial and mFutureSerial are updated in the Tick() call.\nSo I think this line is the place where dawn could know whether device is idle and TRACE_EVENT_ASYNC_BEGIN/END might help with asyncTask but not that useful for tracing the serial update.",
+      "parentUuid": "7f5ca289_1531fc1e",
       "revId": "f7f7fef626a172cb181105700089fdbe18117cf7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -140,6 +182,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47451588_7d6349a3",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-04-14T06:57:31Z",
+      "side": 1,
+      "message": "Remove the extra Trace() and expand Finish parameter list. Done.",
+      "parentUuid": "1578605f_9b94b1fd",
+      "range": {
+        "startLine": 261,
+        "startChar": 12,
+        "endLine": 263,
+        "endChar": 13
+      },
+      "revId": "f7f7fef626a172cb181105700089fdbe18117cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58e0a521_1612dbe3",
@@ -171,6 +237,24 @@
       "side": 1,
       "message": "Good point. I\u0027ll do the compare on my sample to see whether there is some perf diff.",
       "parentUuid": "58e0a521_1612dbe3",
+      "revId": "f7f7fef626a172cb181105700089fdbe18117cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27054744_ab0011ff",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-04-14T06:57:31Z",
+      "side": 1,
+      "message": "Yes, only choose gpu.dawn in chrome://tracing record will trigger these traces. So adding them don\u0027t affect the performance.\nAnd I also checked that running chrome://tracing w/wo these additional traces doesn\u0027t affect the trace result a lot.\nSo I agree we don\u0027t need this toggle.\nIn future, if we have traces that might affect chrome://tracing result in perf, we could seperate them in gpu.dawn.debug(I think.)",
+      "parentUuid": "a4b81728_add63fc9",
       "revId": "f7f7fef626a172cb181105700089fdbe18117cf7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
