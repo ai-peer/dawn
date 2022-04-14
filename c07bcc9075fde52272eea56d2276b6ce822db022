@@ -33,6 +33,23 @@
       "message": "LGTM too",
       "revId": "c07bcc9075fde52272eea56d2276b6ce822db022",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e86a56ed_c7492a3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-04-14T00:45:26Z",
+      "side": 1,
+      "message": "It seems I cannot access below links to investigate the failure\nhttp://fusion/runanalysis/info/prod%3Adawn%2Fcommon%2Fpresubmit/prod%3Adawn%2Fcommon%2Fpresubmit/KOKORO/c9d2190f-ae04-4572-b301-ba545db07dab/0/prod%3Adawn%2Fcommon%2Fpresubmit/Targets\nhttp://sponge2.corp.google.com/c9d2190f-ae04-4572-b301-ba545db07dab\n\nWould you share the log/info?",
+      "revId": "c07bcc9075fde52272eea56d2276b6ce822db022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
