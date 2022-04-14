@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "87eb5e26_54856dac",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-14T15:48:11Z",
+      "side": 1,
+      "message": "Yes, possibly.",
+      "parentUuid": "9c4c3760_dddaf24f",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 26
+      },
+      "revId": "29ff31689834cab5ca962c79708bc151aee1253c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae516bb5_350b6b49",
         "filename": "src/tint/reader/wgsl/lexer.cc",
         "patchSetId": 3
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ea60bc5_36e5fb9e",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-14T15:48:11Z",
+      "side": 1,
+      "message": "Yeah, I thought of that. I went with this for now because it matched more the original code - we usually try for tokens, and peek for whitespace. I\u0027ll see about try_whitespace.",
+      "parentUuid": "ae516bb5_350b6b49",
+      "range": {
+        "startLine": 206,
+        "startChar": 16,
+        "endLine": 206,
+        "endChar": 31
+      },
+      "revId": "29ff31689834cab5ca962c79708bc151aee1253c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5823e72_20bb3593",
         "filename": "src/tint/reader/wgsl/lexer.cc",
         "patchSetId": 3
@@ -60,6 +108,24 @@
       "writtenOn": "2022-04-14T14:22:02Z",
       "side": 1,
       "message": "I don\u0027t think this is going to work with unicode comments. Consider:\n\n`// 🙂` - `0x5c 0x5c 0x20 0xf0 0x9f 0x99 0x82`\n\n* `//` is matched at the top of this function.\n* ` ` is matched by `peek_blankspace()`\n* `🙂` is not matched by `peek_blankspace()`, so we get to here and `size` is 1.  We skip the first byte of the emoji (`0xf0`).\n* `0x9f 0x99 0x82` is not a valid UTF-8 sequence, and so the next call to `peek_blankspace()` errors.\n\nI think we need a `next_codepoint()` helper which can decode the next codepoint, and produce Token errors for invalid codepoints.\n\nPlease add a test for this case.",
+      "revId": "29ff31689834cab5ca962c79708bc151aee1253c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fefc5a1_f646ccea",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-14T15:48:11Z",
+      "side": 1,
+      "message": "Yes, excellent point, I\u0027ll do that.",
+      "parentUuid": "a5823e72_20bb3593",
       "revId": "29ff31689834cab5ca962c79708bc151aee1253c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
