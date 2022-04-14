@@ -16,6 +16,23 @@
       "message": "The failures on the bots will disappear after we roll the CTS to the latest version.",
       "revId": "7614c264face03f0732b73ccd5b37a9cf3cd36a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c28a43f_f2de9f55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-14T14:16:33Z",
+      "side": 1,
+      "message": "lgtm too",
+      "revId": "7614c264face03f0732b73ccd5b37a9cf3cd36a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
