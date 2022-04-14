@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6431bf46_4bf3f96f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-04-14T02:19:51Z",
+      "side": 1,
+      "message": "The CTS failures will disappear after we roll CTS to the latest commit with Myles\u0027 fixes in api,validation,createTexture:* tests.\n\nPTAL, thanks!",
+      "revId": "3314a20aae4837aa3eacbb4107395dfe95df4cbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
