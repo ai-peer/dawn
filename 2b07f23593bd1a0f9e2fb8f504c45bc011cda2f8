@@ -50,6 +50,24 @@
       "message": "I think this needs to be ${dawn_root}/third_party/gn/abseil-cpp:str_format like in src/dawn/test/BUILD.gn",
       "revId": "2b07f23593bd1a0f9e2fb8f504c45bc011cda2f8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "624403b4_b28c8478",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-14T17:09:22Z",
+      "side": 1,
+      "message": "On line 561 we do:\n```\n    deps +\u003d [ \"//third_party/angle:libEGL\" ]\n```\n\nShould that also be `${dawn_root}` (and anywhere else third_party is used in here?)",
+      "parentUuid": "7641ae22_a73bd6ab",
+      "revId": "2b07f23593bd1a0f9e2fb8f504c45bc011cda2f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
