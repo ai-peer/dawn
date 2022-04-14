@@ -614,12 +614,22 @@ crbug.com/dawn/0000 [ win ] webgpu:api,validation,image_copy,texture_related:cop
 crbug.com/dawn/0000 [ win ] webgpu:api,validation,image_copy,texture_related:copy_rectangle:method="WriteTexture";dimension="3d" [ RetryOnFailure ]
 crbug.com/dawn/0000 [ win ] webgpu:shader,validation,variable_and_const:io_shareable_type:storageClass="in";type="array%3Cu32,%2012%3E" [ RetryOnFailure ]
 
+# New failures. Please triage:
+crbug.com/dawn/0000 [ angle-d3d11 dawn-no-backend-validation intel-0x5912 oop-c release-x64 skia-renderer-gl win10 ] webgpu:api,operation,memory_sync,texture,same_subresource:rw,* [ Slow ]
+
 # New flakes. Please triage:
-crbug.com/dawn/0000 [ angle-opengl dawn-backend-validation no-oop-c nvidia-0x2184 release skia-renderer-vulkan ubuntu ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rg16uint";dstFormat="rg16uint";dimension="3d" [ RetryOnFailure ]
-crbug.com/dawn/0000 [ angle-opengl dawn-backend-validation no-oop-c nvidia-0x2184 release skia-renderer-vulkan ubuntu ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rg32sint";dstFormat="rg32sint";dimension="2d" [ RetryOnFailure ]
-crbug.com/dawn/0000 [ angle-opengl dawn-backend-validation no-oop-c nvidia-0x2184 release skia-renderer-vulkan ubuntu ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rgba16float";dstFormat="rgba16float";dimension="3d" [ RetryOnFailure ]
+crbug.com/dawn/0000 [ angle-opengl dawn-backend-validation no-oop-c nvidia-0x2184 release skia-renderer-vulkan ubuntu ] webgpu:api,operation,vertex_state,correctness:setVertexBuffer_offset_and_attribute_offset:format="float32" [ RetryOnFailure ]
+crbug.com/dawn/0000 [ angle-opengl dawn-no-backend-validation intel-0x5912 no-oop-c release skia-renderer-vulkan ubuntu ] webgpu:shader,execution,expression,call,builtin,atan:f32:storageClass="uniform";vectorize=2 [ RetryOnFailure ]
 
 # New failures. Please triage:
-crbug.com/dawn/0000 [ angle-opengl dawn-no-backend-validation intel-0x5912 no-oop-c release skia-renderer-vulkan ubuntu ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,compressed,array:srcFormat="astc-8x5-unorm-srgb";dstFormat="astc-8x5-unorm-srgb";dimension="2d" [ Failure ]
-crbug.com/dawn/0000 [ angle-opengl dawn-no-backend-validation no-oop-c nvidia-0x2184 release skia-renderer-vulkan ubuntu ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,array:srcFormat="bgra8unorm";dstFormat="bgra8unorm";dimension="3d" [ Failure ]
-crbug.com/dawn/0000 [ angle-d3d11 dawn-no-backend-validation intel-0x5912 oop-c release-x64 skia-renderer-gl win10 ] webgpu:api,operation,memory_sync,texture,same_subresource:rw,* [ Slow ]
+crbug.com/dawn/0000 [ amd-0x6821 angle-opengl dawn-no-backend-validation monterey oop-c release skia-renderer-gl ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,compressed,non_array:srcFormat="bc2-rgba-unorm";dstFormat="bc2-rgba-unorm";dimension="2d" [ Slow ]
+crbug.com/dawn/0000 [ angle-opengl dawn-no-backend-validation no-oop-c nvidia-0x2184 release skia-renderer-vulkan ubuntu ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,array:srcFormat="r32uint";dstFormat="r32uint";dimension="2d" [ Slow ]
+crbug.com/dawn/0000 [ angle-d3d11 dawn-no-backend-validation intel-0x3e92 oop-c release-x64 skia-renderer-gl win10 ] webgpu:api,validation,createTexture:texture_size,3d_texture,* [ Slow ]
+crbug.com/dawn/0000 [ angle-d3d11 dawn-backend-validation nvidia-0x2184 oop-c release-x64 skia-renderer-gl win10 ] webgpu:shader,execution,expression,call,builtin,atan2:* [ Slow ]
+crbug.com/dawn/0000 [ angle-d3d11 dawn-no-backend-validation intel-0x3e92 oop-c release-x64 skia-renderer-gl win10 ] webgpu:shader,execution,expression,call,builtin,atan2:* [ Slow ]
+crbug.com/dawn/0000 [ angle-d3d11 dawn-no-backend-validation intel-0x5912 oop-c release-x64 skia-renderer-gl win10 ] webgpu:shader,execution,expression,call,builtin,atan2:* [ Slow ]
+crbug.com/dawn/0000 [ angle-d3d11 dawn-no-backend-validation nvidia-0x2184 oop-c release-x64 skia-renderer-gl win10 ] webgpu:shader,execution,expression,call,builtin,atan2:* [ Slow ]
+crbug.com/dawn/0000 [ angle-opengl dawn-backend-validation no-oop-c nvidia-0x2184 release skia-renderer-vulkan ubuntu ] webgpu:shader,execution,expression,call,builtin,atan2:* [ Failure ]
+crbug.com/dawn/0000 [ angle-opengl dawn-no-backend-validation intel-0x5912 no-oop-c release skia-renderer-vulkan ubuntu ] webgpu:shader,execution,expression,call,builtin,atan2:* [ Slow ]
+crbug.com/dawn/0000 [ angle-opengl dawn-no-backend-validation no-oop-c nvidia-0x2184 release skia-renderer-vulkan ubuntu ] webgpu:shader,execution,expression,call,builtin,atan2:* [ Slow ]
+crbug.com/dawn/0000 [ angle-opengl dawn-no-backend-validation intel-0x5912 no-oop-c release skia-renderer-vulkan ubuntu ] webgpu:shader,execution,expression,call,builtin,float_built_functions:* [ Failure ]
