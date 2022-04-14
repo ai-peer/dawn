@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edf42c08_1285e4b9",
+        "filename": "tools/src/buildbucket/buildbucket.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-14T07:23:21Z",
+      "side": 1,
+      "message": "nit: Builder and bbpb.BuilderID seem to have the same shape, maybe we can just use bbpb everywhere?",
+      "revId": "928c0ee2a94a46f622999727328812f68b846288",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f41122a_f7cf5666",
+        "filename": "tools/src/utils/hash.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-14T07:23:21Z",
+      "side": 1,
+      "message": "Maybe this should be %+v or %#v, WDYT?",
+      "range": {
+        "startLine": 26,
+        "startChar": 32,
+        "endLine": 26,
+        "endChar": 34
+      },
+      "revId": "928c0ee2a94a46f622999727328812f68b846288",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
