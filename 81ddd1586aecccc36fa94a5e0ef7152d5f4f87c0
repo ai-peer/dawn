@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51612640_d138a435",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-14T17:28:01Z",
+      "side": 1,
+      "message": "This broke the mac build because `dawn_angle_dir` isn\u0027t defined. I wrapped the block in an `\u0026\u0026 defined(dawn_angle_dir)` but wanted check this wasn\u0027t an issue with `dawn_enable_opengles` being defined without `dawn_angle_dir` being defined.",
+      "revId": "81ddd1586aecccc36fa94a5e0ef7152d5f4f87c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
