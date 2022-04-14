@@ -51,6 +51,24 @@
       "parentUuid": "9e37a97a_7ac0811a",
       "revId": "f6a00b86328c751f1fde02820784134a249a65bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7134a60d_c31bd463",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-14T14:24:35Z",
+      "side": 1,
+      "message": "You, using ln -s",
+      "parentUuid": "2ce7dbc6_f11e6dcd",
+      "revId": "f6a00b86328c751f1fde02820784134a249a65bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
