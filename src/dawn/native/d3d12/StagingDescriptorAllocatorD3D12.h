@@ -18,8 +18,8 @@
 #include <vector>
 
 #include "dawn/native/Error.h"
-
 #include "dawn/native/d3d12/CPUDescriptorHeapAllocationD3D12.h"
+#include "src/dawn/native/IntegerTypes.h"
 
 // |StagingDescriptorAllocator| allocates a fixed-size block of descriptors from a CPU
 // descriptor heap pool.
