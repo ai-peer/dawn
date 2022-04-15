@@ -135,6 +135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3742f31a_ba15006e",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-15T15:30:17Z",
+      "side": 1,
+      "message": "ok, sounds fine. we can always add it in the future if it\u0027s valuable.",
+      "parentUuid": "d8548fce_adb10217",
+      "revId": "f7f7fef626a172cb181105700089fdbe18117cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c08744f7_81e1e759",
