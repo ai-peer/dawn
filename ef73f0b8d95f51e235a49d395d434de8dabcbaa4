@@ -16,6 +16,120 @@
       "message": "PTAL, Thanks!\n\nI used different approaches to work around B2T copy and T2B copy:\n  - For B2T Copy, it is efficient to use a temp buffer, because we can copy data into the temp buffer in one time from the original source buffer, then use the temp buffer to do B2T copy. Considering that we do relative complicated split for 3D texture copy, so I think it is better to do less Buffer-3DTexture copy if we can.\n  - However, for T2B copy, it is done via two separate T2B copies, because if we use T2B copy and copy texture data to a temp buffer, then it is not easy to copy the temp buffer into the destination buffer in one time because there are paddings and we cannot change the paddings. So I think two separate copies should be fine.",
       "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccb649b1_1884c01d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-15T14:16:32Z",
+      "side": 1,
+      "message": "Thanks for putting this up. It looks like a good approach overall.",
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af66c9d7_f952d359",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-15T14:16:32Z",
+      "side": 1,
+      "message": "SplitLast3DCopySliceIfRowHeightOutOfBufferBounds? We should describe succintly what happens and how we work around in the description.",
+      "range": {
+        "startLine": 255,
+        "startChar": 21,
+        "endLine": 255,
+        "endChar": 70
+      },
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca1ffcbe_5969e11a",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-15T14:16:32Z",
+      "side": 1,
+      "message": "What we should explain is that this invariant is already checked in the frontend.",
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d59a0181_a683d7dd",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-15T14:16:32Z",
+      "side": 1,
+      "message": "Is it only for 3D textures or also for 2D array? It\u0027d be slightly surprising if it were just 3D. I think we could just check copySize.depthOrArrayLayers \u003c\u003d 1 and not the dimension.",
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14251ff2_2e33153e",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-15T14:16:32Z",
+      "side": 1,
+      "message": "nit: We don\u0027t need to do this overflow assert if we do bufferCopy.buffer-\u003eGetSize() - bufferCopy.offset \u003c requiredCopySizeByD3D12.\n\nWe no longer need the pointer argument if both workarounds use the last slice split method.",
+      "range": {
+        "startLine": 362,
+        "startChar": 0,
+        "endLine": 365,
+        "endChar": 1
+      },
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a44bb33_07f5978a",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-15T14:16:32Z",
+      "side": 1,
+      "message": "I think both the logic here and at [1] could be moved inside RecordBufferTextureCopy since that helper function is used in both cases.\n\nThe workarounds don\u0027t need to be different AFAIU, we can copy the last slice separately in B-\u003eT and it will fix the issue too.",
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
