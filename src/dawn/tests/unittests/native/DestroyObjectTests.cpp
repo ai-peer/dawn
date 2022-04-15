@@ -763,4 +763,5 @@ namespace dawn::native { namespace {
         EXPECT_FALSE(textureView->IsAlive());
     }
 
+    // NOLINTNEXTLINE(readability/namespace)
 }}  // namespace dawn::native::

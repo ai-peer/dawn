@@ -21,7 +21,7 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
-namespace dawn::native { namespace vulkan {
+namespace dawn::native::vulkan {
 
     using ExternalTexture = VulkanImageWrappingTestBackend::ExternalTexture;
     using ExternalSemaphore = VulkanImageWrappingTestBackend::ExternalSemaphore;
@@ -123,7 +123,7 @@ namespace dawn::native { namespace vulkan {
             std::unique_ptr<ExternalTexture> defaultTexture;
         };
 
-    }  // anonymous namespace
+    }  // namespace
 
     using VulkanImageWrappingValidationTests = VulkanImageWrappingTestBase;
 
@@ -884,4 +884,4 @@ namespace dawn::native { namespace vulkan {
     DAWN_INSTANTIATE_TEST(VulkanImageWrappingValidationTests, VulkanBackend());
     DAWN_INSTANTIATE_TEST(VulkanImageWrappingUsageTests, VulkanBackend());
 
-}}  // namespace dawn::native::vulkan
+}  // namespace dawn::native::vulkan
