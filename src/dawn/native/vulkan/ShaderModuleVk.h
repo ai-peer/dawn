@@ -18,6 +18,7 @@
 #include <memory>
 #include <mutex>
 #include <optional>  // NOLINT(build/include_order))
+#include <unordered_map>
 #include <utility>
 #include <vector>
 
