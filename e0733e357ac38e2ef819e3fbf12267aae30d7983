@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86c7d2c9_3c324788",
+        "filename": "src/dawn/native/BlobCache.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-15T23:09:09Z",
+      "side": 1,
+      "message": "nit: I remember having modernize make unique comment in chromium CLs\nhttps://clang.llvm.org/extra/clang-tidy/checks/modernize-make-unique.html",
+      "revId": "e0733e357ac38e2ef819e3fbf12267aae30d7983",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
