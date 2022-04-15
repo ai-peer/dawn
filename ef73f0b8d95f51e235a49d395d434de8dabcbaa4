@@ -118,6 +118,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e72a6141_94ec51e3",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2022-04-15T21:14:16Z",
+      "side": 1,
+      "message": "Nit: Instead of \n ASSERT(A \u0026\u0026 B)\n \ndo \n\n ASSERT(A); \n ASSERT(B);\n \nThe latter gives more useful logging output in test runs if B fails but A passes. For the former, you don\u0027t know which condition is the failure condition.",
+      "range": {
+        "startLine": 326,
+        "startChar": 12,
+        "endLine": 326,
+        "endChar": 66
+      },
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d59a0181_a683d7dd",
         "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4
@@ -210,6 +233,24 @@
       "side": 1,
       "message": "This would be great - then we don\u0027t need to make temporary allocations",
       "parentUuid": "3a44bb33_07f5978a",
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "498261eb_563ccb29",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2022-04-15T21:14:16Z",
+      "side": 1,
+      "message": "+1 to avoiding unnecessary, temporary allocations.",
+      "parentUuid": "1d5c0332_05e20630",
       "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
