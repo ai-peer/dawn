@@ -16,6 +16,23 @@
       "message": "Please take a look, thanks!\nIn this CL, enable directive is implemented in Tint, and also the unit tests and end2end tests.",
       "revId": "93ff33a1950b4d0b4e0bc8b1124cc0da9bbff438",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ea2df86_7c593a37",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-15T08:31:27Z",
+      "side": 1,
+      "message": "The `CheckExtensionAllowlist` method is currently implemented in Tint Inspector, which is used to check that all extension the program used is in a given allow list of extension names. This logic could be moved into Dawn if required.",
+      "revId": "93ff33a1950b4d0b4e0bc8b1124cc0da9bbff438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
