@@ -291,19 +291,23 @@ namespace dawn::native {
                 "Blending is enabled but color format (%s) is not blendable.", descriptor->format);
 
             if (fragmentWritten) {
-                DAWN_INVALID_IF(fragmentOutputVariable.baseType !=
+                if (descriptor->writeMask != wgpu::ColorWriteMask::None) {
+                    // The fragment output type must be compatible with the colorState format.
+                    DAWN_INVALID_IF(fragmentOutputVariable.baseType !=
+                                        format->GetAspectInfo(Aspect::Color).baseType,
+                                    "Color format (%s) base type (%s) doesn't match the fragment "
+                                    "module output type (%s).",
+                                    descriptor->format,
                                     format->GetAspectInfo(Aspect::Color).baseType,
-                                "Color format (%s) base type (%s) doesn't match the fragment "
-                                "module output type (%s).",
-                                descriptor->format, format->GetAspectInfo(Aspect::Color).baseType,
-                                fragmentOutputVariable.baseType);
+                                    fragmentOutputVariable.baseType);
 
-                DAWN_INVALID_IF(
-                    fragmentOutputVariable.componentCount < format->componentCount,
-                    "The fragment stage has fewer output components (%u) than the color format "
-                    "(%s) component count (%u).",
-                    fragmentOutputVariable.componentCount, descriptor->format,
-                    format->componentCount);
+                    DAWN_INVALID_IF(
+                        fragmentOutputVariable.componentCount < format->componentCount,
+                        "The fragment stage has fewer output components (%u) than the color format "
+                        "(%s) component count (%u).",
+                        fragmentOutputVariable.componentCount, descriptor->format,
+                        format->componentCount);
+                }
 
                 if (descriptor->blend) {
                     if (fragmentOutputVariable.componentCount < 4u) {

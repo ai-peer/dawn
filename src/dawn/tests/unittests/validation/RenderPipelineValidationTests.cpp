@@ -319,31 +319,37 @@ TEST_F(RenderPipelineValidationTest, NonBlendableFormat) {
 }
 
 // Tests that the format of the color state descriptor must match the output of the fragment shader.
+// Otherwise the write mask must be 0
 TEST_F(RenderPipelineValidationTest, FragmentOutputFormatCompatibility) {
-    std::array<const char*, 3> kScalarTypes = {{"f32", "i32", "u32"}};
-    std::array<wgpu::TextureFormat, 3> kColorFormats = {{wgpu::TextureFormat::RGBA8Unorm,
-                                                         wgpu::TextureFormat::RGBA8Sint,
-                                                         wgpu::TextureFormat::RGBA8Uint}};
+    constexpr std::array<const char*, 3> kScalarTypes = {"f32", "i32", "u32"};
+    constexpr std::array<wgpu::TextureFormat, 3> kColorFormats = {wgpu::TextureFormat::RGBA8Unorm,
+                                                                  wgpu::TextureFormat::RGBA8Sint,
+                                                                  wgpu::TextureFormat::RGBA8Uint};
+    constexpr std::array<wgpu::ColorWriteMask, 2> kWriteMasks = {wgpu::ColorWriteMask::None,
+                                                                 wgpu::ColorWriteMask::All};
 
-    for (size_t i = 0; i < kScalarTypes.size(); ++i) {
+    for (size_t m = 0; m < kWriteMasks.size(); ++m) {
         utils::ComboRenderPipelineDescriptor descriptor;
-        descriptor.vertex.module = vsModule;
-        std::ostringstream stream;
-        stream << R"(
+        descriptor.cTargets[0].writeMask = kWriteMasks[m];
+        for (size_t i = 0; i < kScalarTypes.size(); ++i) {
+            descriptor.vertex.module = vsModule;
+            std::ostringstream stream;
+            stream << R"(
             @stage(fragment) fn main() -> @location(0) vec4<)"
-               << kScalarTypes[i] << R"(> {
+                   << kScalarTypes[i] << R"(> {
                 var result : vec4<)"
-               << kScalarTypes[i] << R"(>;
+                   << kScalarTypes[i] << R"(>;
                 return result;
             })";
-        descriptor.cFragment.module = utils::CreateShaderModule(device, stream.str().c_str());
+            descriptor.cFragment.module = utils::CreateShaderModule(device, stream.str().c_str());
 
-        for (size_t j = 0; j < kColorFormats.size(); ++j) {
-            descriptor.cTargets[0].format = kColorFormats[j];
-            if (i == j) {
-                device.CreateRenderPipeline(&descriptor);
-            } else {
-                ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+            for (size_t j = 0; j < kColorFormats.size(); ++j) {
+                descriptor.cTargets[0].format = kColorFormats[j];
+                if (kWriteMasks[m] == wgpu::ColorWriteMask::None || (i == j)) {
+                    device.CreateRenderPipeline(&descriptor);
+                } else {
+                    ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+                }
             }
         }
     }
@@ -352,18 +358,18 @@ TEST_F(RenderPipelineValidationTest, FragmentOutputFormatCompatibility) {
 // Tests that the component count of the color state target format must be fewer than that of the
 // fragment shader output.
 TEST_F(RenderPipelineValidationTest, FragmentOutputComponentCountCompatibility) {
-    std::array<wgpu::TextureFormat, 3> kColorFormats = {wgpu::TextureFormat::R8Unorm,
-                                                        wgpu::TextureFormat::RG8Unorm,
-                                                        wgpu::TextureFormat::RGBA8Unorm};
+    constexpr std::array<wgpu::TextureFormat, 3> kColorFormats = {wgpu::TextureFormat::R8Unorm,
+                                                                  wgpu::TextureFormat::RG8Unorm,
+                                                                  wgpu::TextureFormat::RGBA8Unorm};
 
-    std::array<wgpu::BlendFactor, 8> kBlendFactors = {wgpu::BlendFactor::Zero,
-                                                      wgpu::BlendFactor::One,
-                                                      wgpu::BlendFactor::SrcAlpha,
-                                                      wgpu::BlendFactor::OneMinusSrcAlpha,
-                                                      wgpu::BlendFactor::Src,
-                                                      wgpu::BlendFactor::DstAlpha,
-                                                      wgpu::BlendFactor::OneMinusDstAlpha,
-                                                      wgpu::BlendFactor::Dst};
+    constexpr std::array<wgpu::BlendFactor, 8> kBlendFactors = {wgpu::BlendFactor::Zero,
+                                                                wgpu::BlendFactor::One,
+                                                                wgpu::BlendFactor::SrcAlpha,
+                                                                wgpu::BlendFactor::OneMinusSrcAlpha,
+                                                                wgpu::BlendFactor::Src,
+                                                                wgpu::BlendFactor::DstAlpha,
+                                                                wgpu::BlendFactor::OneMinusDstAlpha,
+                                                                wgpu::BlendFactor::Dst};
 
     for (size_t componentCount = 1; componentCount <= 4; ++componentCount) {
         utils::ComboRenderPipelineDescriptor descriptor;
