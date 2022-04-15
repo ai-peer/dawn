@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52b5eaf9_5d005398",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-15T22:55:38Z",
+      "side": 1,
+      "message": "I\u0027m leaning towards passing the YUV-to-RGB matrix in as a CreateExternalTexture param alongside other constants - just haven\u0027t gotten to it yet.\n\nAlso note that the media team told me BT.601 full range was important to support, however I can\u0027t find it inside SkYuvMath.cpp.",
+      "revId": "284a76f41cdf6c089d50c8427ee657be77338a2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73379f37_e3e2a2fa",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-15T22:55:38Z",
+      "side": 1,
+      "message": "The constants I used for conversion previously were slightly off, which is why I had to change the test. These new values were found manually using the SkYuvMath matrix.",
+      "revId": "284a76f41cdf6c089d50c8427ee657be77338a2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "188432e4_09b1bbef",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-15T22:55:38Z",
+      "side": 1,
+      "message": "@Ben - I think you mentioned we could get rid of this branch by extending the matrix. I assume you mean moving to a mat3x4 and always subtracting the additional constants from the y,u,v values. This sounds good, but I wasn\u0027t sure what the most eloquent way to get a mat3x3 out of a mat3x4 was - could you give me an example?",
+      "revId": "284a76f41cdf6c089d50c8427ee657be77338a2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
