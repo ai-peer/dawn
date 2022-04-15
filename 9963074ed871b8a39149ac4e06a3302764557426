@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f928d89_3ea034c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-15T20:04:00Z",
+      "side": 1,
+      "message": "You can conclude the new attachment_compatibility:* failures to \n\ncrbug.com/dawn/1325 webgpu:api,validation,attachment_compatibility:render_pass_or_bundle_and_pipeline,depth_stencil_read_only_write_state:* [ Failure ]",
+      "revId": "9963074ed871b8a39149ac4e06a3302764557426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
