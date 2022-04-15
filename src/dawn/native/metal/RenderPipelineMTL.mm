@@ -204,21 +204,27 @@ namespace dawn::native::metal {
         void ComputeBlendDesc(MTLRenderPipelineColorAttachmentDescriptor* attachment,
                               const ColorTargetState* state,
                               bool isDeclaredInFragmentShader) {
-            attachment.blendingEnabled = state->blend != nullptr;
-            if (attachment.blendingEnabled) {
-                attachment.sourceRGBBlendFactor =
-                    MetalBlendFactor(state->blend->color.srcFactor, false);
-                attachment.destinationRGBBlendFactor =
-                    MetalBlendFactor(state->blend->color.dstFactor, false);
-                attachment.rgbBlendOperation = MetalBlendOperation(state->blend->color.operation);
-                attachment.sourceAlphaBlendFactor =
-                    MetalBlendFactor(state->blend->alpha.srcFactor, true);
-                attachment.destinationAlphaBlendFactor =
-                    MetalBlendFactor(state->blend->alpha.dstFactor, true);
-                attachment.alphaBlendOperation = MetalBlendOperation(state->blend->alpha.operation);
-            }
             attachment.writeMask =
                 MetalColorWriteMask(state->writeMask, isDeclaredInFragmentShader);
+            if (attachment.writeMask == MTLColorWriteMaskNone) {
+                attachment.blendingEnabled = false;
+            } else {
+                attachment.blendingEnabled = state->blend != nullptr;
+                if (attachment.blendingEnabled) {
+                    attachment.sourceRGBBlendFactor =
+                        MetalBlendFactor(state->blend->color.srcFactor, false);
+                    attachment.destinationRGBBlendFactor =
+                        MetalBlendFactor(state->blend->color.dstFactor, false);
+                    attachment.rgbBlendOperation =
+                        MetalBlendOperation(state->blend->color.operation);
+                    attachment.sourceAlphaBlendFactor =
+                        MetalBlendFactor(state->blend->alpha.srcFactor, true);
+                    attachment.destinationAlphaBlendFactor =
+                        MetalBlendFactor(state->blend->alpha.dstFactor, true);
+                    attachment.alphaBlendOperation =
+                        MetalBlendOperation(state->blend->alpha.operation);
+                }
+            }
         }
 
         MTLStencilOperation MetalStencilOperation(wgpu::StencilOperation stencilOperation) {
