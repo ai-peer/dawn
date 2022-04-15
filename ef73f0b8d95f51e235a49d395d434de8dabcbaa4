@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fa58457_269970f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-15T15:16:33Z",
+      "side": 1,
+      "message": "Looking at the test results, it also looks like you\u0027ve transformed a bunch of expected failures into passes - yay!",
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af66c9d7_f952d359",
@@ -48,6 +65,30 @@
       "writtenOn": "2022-04-15T14:16:32Z",
       "side": 1,
       "message": "SplitLast3DCopySliceIfRowHeightOutOfBufferBounds? We should describe succintly what happens and how we work around in the description.",
+      "range": {
+        "startLine": 255,
+        "startChar": 21,
+        "endLine": 255,
+        "endChar": 70
+      },
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcafeb73_ea0b3711",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-15T15:16:33Z",
+      "side": 1,
+      "message": "Also, I think D3D12 (or whatever the platform is) should be the prefix on the toggle.\n\nSo also UseTempBufferInSmallFormatTextureToTextureCopyFromGreaterToLessMipLevel would be prefixed with D3D12",
+      "parentUuid": "af66c9d7_f952d359",
       "range": {
         "startLine": 255,
         "startChar": 21,
@@ -117,6 +158,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f72e9a2a_f6ab4b3c",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-15T15:16:33Z",
+      "side": 1,
+      "message": "curious - what if we use GetAllocatedSize() ?",
+      "range": {
+        "startLine": 365,
+        "startChar": 38,
+        "endLine": 365,
+        "endChar": 45
+      },
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a44bb33_07f5978a",
         "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4
@@ -128,6 +192,24 @@
       "writtenOn": "2022-04-15T14:16:32Z",
       "side": 1,
       "message": "I think both the logic here and at [1] could be moved inside RecordBufferTextureCopy since that helper function is used in both cases.\n\nThe workarounds don\u0027t need to be different AFAIU, we can copy the last slice separately in B-\u003eT and it will fix the issue too.",
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d5c0332_05e20630",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-15T15:16:33Z",
+      "side": 1,
+      "message": "This would be great - then we don\u0027t need to make temporary allocations",
+      "parentUuid": "3a44bb33_07f5978a",
       "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
