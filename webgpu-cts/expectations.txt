@@ -153,13 +153,6 @@ crbug.com/dawn/0000 [ win ] webgpu:shader,execution,robust_access:linear_memory:
 crbug.com/dawn/0000 [ win ] webgpu:shader,execution,robust_access:linear_memory:storageClass="uniform";access="read";dynamicOffset=true;containerType="matrix";isAtomic=false [ Slow ]
 
 ################################################################################
-# webgpu:shader,execution,robust_access
-# Failures - mac
-# KEEP
-################################################################################
-crbug.com/dawn/0000 [ mac ] webgpu:shader,execution,robust_access:linear_memory:* [ Failure ]
-
-################################################################################
 # windows 3D texture failures
 # KEEP
 ################################################################################
@@ -385,8 +378,6 @@ crbug.com/dawn/0000 webgpu:shader,validation,tokens:null_characters:contains_nul
 # request device limits failures
 # KEEP
 ################################################################################
-crbug.com/dawn/0000 webgpu:api,operation,adapter,requestDevice_limits:worse_than_default:limit="minStorageBufferOffsetAlignment" [ Failure ]
-crbug.com/dawn/0000 webgpu:api,operation,adapter,requestDevice_limits:worse_than_default:limit="minUniformBufferOffsetAlignment" [ Failure ]
 crbug.com/dawn/0000 [ linux ] webgpu:api,operation,adapter,requestDevice_limits:better_than_supported:* [ Failure ]
 crbug.com/dawn/0000 [ linux ] webgpu:api,operation,adapter,requestDevice_limits:supported_limits:* [ Failure ]
 crbug.com/dawn/0000 [ linux ] webgpu:api,operation,adapter,requestDevice_limits:worse_than_default:limit="maxComputeInvocationsPerWorkgroup" [ Failure ]
