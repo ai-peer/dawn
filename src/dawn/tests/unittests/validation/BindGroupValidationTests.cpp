@@ -1065,7 +1065,7 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimits) {
         for (uint32_t i = 0; i < info.maxCount; ++i) {
             wgpu::BindGroupLayoutEntry entry = info.entry;
             entry.binding = i;
-            maxBindings.push_back(entry);
+            maxBindings.push_back(utils::BindingLayoutEntryInitializationHelper(entry));
         }
 
         // Creating with the maxes works.
@@ -1076,7 +1076,7 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimits) {
             std::vector<utils::BindingLayoutEntryInitializationHelper> bindings = maxBindings;
             wgpu::BindGroupLayoutEntry entry = info.otherEntry;
             entry.binding = info.maxCount;
-            bindings.push_back(entry);
+            bindings.push_back(utils::BindingLayoutEntryInitializationHelper(entry));
             MakeBindGroupLayout(bindings.data(), bindings.size());
         }
 
@@ -1086,7 +1086,7 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimits) {
             wgpu::BindGroupLayoutEntry entry = info.entry;
             entry.binding = info.maxCount;
             entry.visibility = wgpu::ShaderStage::Fragment;
-            bindings.push_back(entry);
+            bindings.push_back(utils::BindingLayoutEntryInitializationHelper(entry));
             MakeBindGroupLayout(bindings.data(), bindings.size());
         }
 
@@ -1095,7 +1095,7 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimits) {
             std::vector<utils::BindingLayoutEntryInitializationHelper> bindings = maxBindings;
             wgpu::BindGroupLayoutEntry entry = info.entry;
             entry.binding = info.maxCount;
-            bindings.push_back(entry);
+            bindings.push_back(utils::BindingLayoutEntryInitializationHelper(entry));
             ASSERT_DEVICE_ERROR(MakeBindGroupLayout(bindings.data(), bindings.size()));
         }
 
@@ -1103,19 +1103,22 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimits) {
         TestCreatePipelineLayout(bgl, 1, true);
 
         // Adding an extra binding of a different type in a different BGL works
-        bgl[1] = utils::MakeBindGroupLayout(device, {info.otherEntry});
+        bgl[1] = utils::MakeBindGroupLayout(
+            device, {utils::BindingLayoutEntryInitializationHelper(info.otherEntry)});
         TestCreatePipelineLayout(bgl, 2, true);
 
         {
             // Adding an extra binding of the maxed type in a different stage works
             wgpu::BindGroupLayoutEntry entry = info.entry;
             entry.visibility = wgpu::ShaderStage::Fragment;
-            bgl[1] = utils::MakeBindGroupLayout(device, {entry});
+            bgl[1] = utils::MakeBindGroupLayout(
+                device, {utils::BindingLayoutEntryInitializationHelper(entry)});
             TestCreatePipelineLayout(bgl, 2, true);
         }
 
         // Adding an extra binding of the maxed type in a different BGL exceeds the per stage limit.
-        bgl[1] = utils::MakeBindGroupLayout(device, {info.entry});
+        bgl[1] = utils::MakeBindGroupLayout(
+            device, {utils::BindingLayoutEntryInitializationHelper(info.entry)});
         TestCreatePipelineLayout(bgl, 2, false);
     }
 }
@@ -1150,14 +1153,14 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimitsWithExternalTexture) {
         // Create an external texture binding layout entry
         wgpu::BindGroupLayoutEntry entry = BGLEntryType(&utils::kExternalTextureBindingLayout);
         entry.binding = 0;
-        maxBindings.push_back(entry);
+        maxBindings.push_back(utils::BindingLayoutEntryInitializationHelper(entry));
 
         // Create the other bindings such that we reach the max bindings per stage when including
         // the external texture.
         for (uint32_t i = 1; i <= info.maxCount - info.bindingsPerExternalTexture; ++i) {
             wgpu::BindGroupLayoutEntry entry = info.entry;
             entry.binding = i;
-            maxBindings.push_back(entry);
+            maxBindings.push_back(utils::BindingLayoutEntryInitializationHelper(entry));
         }
 
         // Ensure that creation without the external texture works.
@@ -1168,7 +1171,7 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimitsWithExternalTexture) {
             std::vector<utils::BindingLayoutEntryInitializationHelper> bindings = maxBindings;
             wgpu::BindGroupLayoutEntry entry = info.otherEntry;
             entry.binding = info.maxCount;
-            bindings.push_back(entry);
+            bindings.push_back(utils::BindingLayoutEntryInitializationHelper(entry));
             MakeBindGroupLayout(bindings.data(), bindings.size());
         }
 
@@ -1178,7 +1181,7 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimitsWithExternalTexture) {
             wgpu::BindGroupLayoutEntry entry = info.entry;
             entry.binding = info.maxCount;
             entry.visibility = wgpu::ShaderStage::Fragment;
-            bindings.push_back(entry);
+            bindings.push_back(utils::BindingLayoutEntryInitializationHelper(entry));
             MakeBindGroupLayout(bindings.data(), bindings.size());
         }
 
@@ -1187,7 +1190,7 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimitsWithExternalTexture) {
             std::vector<utils::BindingLayoutEntryInitializationHelper> bindings = maxBindings;
             wgpu::BindGroupLayoutEntry entry = info.entry;
             entry.binding = info.maxCount;
-            bindings.push_back(entry);
+            bindings.push_back(utils::BindingLayoutEntryInitializationHelper(entry));
             ASSERT_DEVICE_ERROR(MakeBindGroupLayout(bindings.data(), bindings.size()));
         }
 
@@ -1195,19 +1198,22 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimitsWithExternalTexture) {
         TestCreatePipelineLayout(bgl, 1, true);
 
         // Adding an extra binding of a different type in a different BGL works
-        bgl[1] = utils::MakeBindGroupLayout(device, {info.otherEntry});
+        bgl[1] = utils::MakeBindGroupLayout(
+            device, {utils::BindingLayoutEntryInitializationHelper(info.otherEntry)});
         TestCreatePipelineLayout(bgl, 2, true);
 
         {
             // Adding an extra binding of the maxed type in a different stage works
             wgpu::BindGroupLayoutEntry entry = info.entry;
             entry.visibility = wgpu::ShaderStage::Fragment;
-            bgl[1] = utils::MakeBindGroupLayout(device, {entry});
+            bgl[1] = utils::MakeBindGroupLayout(
+                device, {utils::BindingLayoutEntryInitializationHelper(entry)});
             TestCreatePipelineLayout(bgl, 2, true);
         }
 
         // Adding an extra binding of the maxed type in a different BGL exceeds the per stage limit.
-        bgl[1] = utils::MakeBindGroupLayout(device, {info.entry});
+        bgl[1] = utils::MakeBindGroupLayout(
+            device, {utils::BindingLayoutEntryInitializationHelper(info.entry)});
         TestCreatePipelineLayout(bgl, 2, false);
     }
 }
