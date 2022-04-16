@@ -16,36 +16,46 @@
 //* This generator is used to produce part of Emscripten's struct_info.json,
 //* which is a list of struct fields that it uses to generate field offset
 //* information for its own code generators.
-//* https://github.com/emscripten-core/emscripten/blob/master/src/struct_info.json
+//* https://github.com/emscripten-core/emscripten/blob/main/src/struct_info.json
 //*
-    {
-        {% set api = metadata.api.lower() %}
+{
+    {% set api = metadata.api.lower() %
+    }
         "file": "{api}/{api}.h",
-        "defines": [],
-        "structs": {
-            "{{metadata.c_prefix}}ChainedStruct": [
-                "next",
-                "sType"
-            ],
-            {% for type in by_category["structure"] %}
+    "defines": [],
+    "structs": {
+        "{{metadata.c_prefix}}ChainedStruct": [
+            "next",
+            "sType"
+        ],
+        {% for type in by_category[
+                "structure"
+            ] %
+        }
                 "{{as_cType(type.name)}}": [
-                    {% if type.chained %}
+            {% if type.chained %
+            }
                         "chain"
-                    {%- elif type.extensible %}
+                    {%- elif type.extensible %
+            }
                         "nextInChain"
-                    {%- endif %}
-                    {% for member in type.members -%}
-                        {%- if (type.chained or type.extensible) or not loop.first -%}
-                            ,
-                        {% endif %}
+                    {%- endif %
+            }
+                    {% for member in type.members -%
+            }
+                        {%- if (type.chained or type.extensible) or not loop.first -%
+            },
+            {% endif %
+            }
                         "{{as_varName(member.name)}}"
-                    {%- endfor %}
-
-                ]
-                {%- if not loop.last -%}
-                    ,
-                {% endif %}
-            {% endfor %}
-
+                    {%- endfor %
+            }
+        ]
+                {%- if not loop.last -%
+        },
+        {% endif %
+        }
+            {% endfor %
         }
     }
+}
