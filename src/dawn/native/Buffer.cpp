@@ -510,8 +510,8 @@ namespace dawn::native {
                 return true;
 
             case BufferState::Mapped:
-                ASSERT(bool(mMapMode & wgpu::MapMode::Read) ^
-                       bool(mMapMode & wgpu::MapMode::Write));
+                ASSERT(static_cast<bool>(mMapMode & wgpu::MapMode::Read) ^
+                       static_cast<bool>(mMapMode & wgpu::MapMode::Write));
                 return !writable || (mMapMode & wgpu::MapMode::Write);
 
             case BufferState::Unmapped:
