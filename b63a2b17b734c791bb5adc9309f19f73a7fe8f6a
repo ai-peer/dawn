@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b923b20_471541db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-18T15:29:54Z",
+      "side": 1,
+      "message": "fyi - \"Kokoro -1\" is already broken. still ok to submit",
+      "revId": "b63a2b17b734c791bb5adc9309f19f73a7fe8f6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
