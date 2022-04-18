@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13a1640b_9e2212da",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-18T21:00:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51479ff6_257756fa",
+      "range": {
+        "startLine": 312,
+        "startChar": 34,
+        "endLine": 312,
+        "endChar": 65
+      },
+      "revId": "7fabd3147c63d85114c8f9405e46258eb7055d08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70eb4724_18137578",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-04-18T20:18:31Z",
       "side": 1,
       "message": "`const ValidTypeStorageLayouts\u0026 layout` ?",
+      "range": {
+        "startLine": 314,
+        "startChar": 34,
+        "endLine": 314,
+        "endChar": 65
+      },
+      "revId": "7fabd3147c63d85114c8f9405e46258eb7055d08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31cf06a6_055b61b3",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-18T21:00:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70eb4724_18137578",
       "range": {
         "startLine": 314,
         "startChar": 34,
