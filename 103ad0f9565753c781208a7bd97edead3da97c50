@@ -110,6 +110,30 @@
       },
       "revId": "103ad0f9565753c781208a7bd97edead3da97c50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9580fe0e_97d46c88",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-18T23:36:03Z",
+      "side": 1,
+      "message": "Hmm, is that so that we can run unittests using emscripten? I think that avoiding native stuff in end2end makes sense, but unittests will inevitably use native stuff here and there. (In fact I would even say it SHOULD use native stuff since they are unit tests?). So while avoiding them now may be fine, I think that it would make more sense to eventually make sure that emscripten can compile our native build as is instead.",
+      "parentUuid": "2aff7462_d29cc04b",
+      "range": {
+        "startLine": 336,
+        "startChar": 12,
+        "endLine": 344,
+        "endChar": 98
+      },
+      "revId": "103ad0f9565753c781208a7bd97edead3da97c50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
