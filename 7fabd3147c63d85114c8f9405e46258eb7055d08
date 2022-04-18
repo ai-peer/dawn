@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51479ff6_257756fa",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-18T20:18:31Z",
+      "side": 1,
+      "message": "`const ValidTypeStorageLayouts\u0026 layout` ?",
+      "range": {
+        "startLine": 312,
+        "startChar": 34,
+        "endLine": 312,
+        "endChar": 65
+      },
+      "revId": "7fabd3147c63d85114c8f9405e46258eb7055d08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70eb4724_18137578",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-18T20:18:31Z",
+      "side": 1,
+      "message": "`const ValidTypeStorageLayouts\u0026 layout` ?",
+      "range": {
+        "startLine": 314,
+        "startChar": 34,
+        "endLine": 314,
+        "endChar": 65
+      },
+      "revId": "7fabd3147c63d85114c8f9405e46258eb7055d08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
