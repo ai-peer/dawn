@@ -109,6 +109,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7f823d7f_099e509c",
+        "filename": "src/tint/resolver/validator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-18T23:12:06Z",
+      "side": 1,
+      "message": "No, `ValidateSwitch` depends on https://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/resolver/resolver.cc#2156 which creates various sem nodes. If you make `ValidateSwitch` const then it picks the other `TypeOf` method and validation fails.",
+      "parentUuid": "8654f6c7_90e5e114",
+      "range": {
+        "startLine": 65,
+        "startChar": 6,
+        "endLine": 65,
+        "endChar": 15
+      },
+      "revId": "7d807cba165ab35cc7d38f58a26663eff1f67aaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "881969bf_da65c9ab",
         "filename": "src/tint/resolver/validator.h",
         "patchSetId": 3
