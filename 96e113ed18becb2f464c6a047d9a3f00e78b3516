@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b87df801_3425cd1f",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-04-18T06:55:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a7427ed_ab954937",
+      "range": {
+        "startLine": 34,
+        "startChar": 68,
+        "endLine": 34,
+        "endChar": 76
+      },
+      "revId": "96e113ed18becb2f464c6a047d9a3f00e78b3516",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c8c8307_0f960156",
@@ -88,6 +112,30 @@
       "writtenOn": "2022-04-15T08:05:16Z",
       "side": 1,
       "message": "That\u0027s a nice looking cast, can we use it in the other places in this CL?",
+      "range": {
+        "startLine": 345,
+        "startChar": 21,
+        "endLine": 345,
+        "endChar": 29
+      },
+      "revId": "96e113ed18becb2f464c6a047d9a3f00e78b3516",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "512a7dae_e780fc52",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-04-18T06:55:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c8c8307_0f960156",
       "range": {
         "startLine": 345,
         "startChar": 21,
