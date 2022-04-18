@@ -16,6 +16,70 @@
       "message": "PTAL. This is the last CL of a chain, but wanted to make sure the final result was in line with expectations before putting the rest of the chain up for review.",
       "revId": "7d807cba165ab35cc7d38f58a26663eff1f67aaa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec6fc1d6_90d17aa3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-18T20:13:08Z",
+      "side": 1,
+      "message": "\u003e wanted to make sure the final result was in line with expectations before putting the rest of the chain up for review\n\nWas not really expecting this at all :), but is something that Antonio and I have discussed in the past, so LGTM.",
+      "parentUuid": "4cf8a9da_5449b7cf",
+      "revId": "7d807cba165ab35cc7d38f58a26663eff1f67aaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b4b3e3f_4b0e1ac5",
+        "filename": "src/tint/resolver/validator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-18T20:13:08Z",
+      "side": 1,
+      "message": "Will need doxygen. Might be worth writing a general guide for these validate methods. The rule I had in mind for these is that each method validates \u0027shallowly\u0027 - i.e. the method validates the AST node, but no children (as these should already be resolved, then validated), and no parents (as these are yet to be resolved). Might also be worth mentioning that these methods assume that the node has been resolved before being called.",
+      "range": {
+        "startLine": 65,
+        "startChar": 6,
+        "endLine": 65,
+        "endChar": 15
+      },
+      "revId": "7d807cba165ab35cc7d38f58a26663eff1f67aaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "881969bf_da65c9ab",
+        "filename": "src/tint/resolver/validator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-18T20:13:08Z",
+      "side": 1,
+      "message": "Can drop the `Validate` prefix from all these methods, given that this is in the `Validator` class. This would then match the resolver.",
+      "range": {
+        "startLine": 100,
+        "startChar": 7,
+        "endLine": 100,
+        "endChar": 15
+      },
+      "revId": "7d807cba165ab35cc7d38f58a26663eff1f67aaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
