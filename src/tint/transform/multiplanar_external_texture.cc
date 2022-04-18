@@ -51,6 +51,9 @@ struct MultiplanarExternalTexture::State {
   /// as input into the transform.
   const NewBindingPoints* new_binding_points;
 
+  /// Symbol for the GammaTransferParams
+  Symbol gamma_transfer_struct_sym;
+
   /// Symbol for the ExternalTextureParams struct
   Symbol params_struct_sym;
 
@@ -59,6 +62,9 @@ struct MultiplanarExternalTexture::State {
 
   /// Symbol for the textureSampleExternal function
   Symbol texture_sample_external_sym;
+
+  /// Symbol for the gammaCorrection function
+  Symbol gamma_correction_sym;
 
   /// Storage for new bindings that have been created corresponding to an
   /// original texture_external binding.
@@ -96,7 +102,7 @@ struct MultiplanarExternalTexture::State {
       // If we find a texture_external binding, we know we must emit the
       // ExternalTextureParams struct.
       if (!params_struct_sym.IsValid()) {
-        createExtTexParamsStruct();
+        createExtTexParamsStructs();
       }
 
       // The binding points for the newly introduced bindings must have been
@@ -158,7 +164,7 @@ struct MultiplanarExternalTexture::State {
           // If we find a texture_external, we must ensure the
           // ExternalTextureParams struct exists.
           if (!params_struct_sym.IsValid()) {
-            createExtTexParamsStruct();
+            createExtTexParamsStructs();
           }
           // When a texture_external is found, we insert all components
           // the texture_external into the parameter list. We must also place
@@ -236,15 +242,63 @@ struct MultiplanarExternalTexture::State {
         });
   }
 
-  /// Creates the ExternalTextureParams struct.
-  void createExtTexParamsStruct() {
-    ast::StructMemberList member_list = {
+  /// Creates the parameter structs associated with the transform.
+  void createExtTexParamsStructs() {
+    // Create GammaTransferParams struct.
+    ast::StructMemberList gamma_transfer_member_list = {
+        b.Member("G", b.ty.f32()), b.Member("A", b.ty.f32()),
+        b.Member("B", b.ty.f32()), b.Member("C", b.ty.f32()),
+        b.Member("D", b.ty.f32()), b.Member("E", b.ty.f32()),
+        b.Member("F", b.ty.f32()), b.Member("padding", b.ty.u32())};
+
+    gamma_transfer_struct_sym = b.Symbols().New("GammaTransferParams");
+
+    b.Structure(gamma_transfer_struct_sym, gamma_transfer_member_list);
+
+    // Create ExternalTextureParams struct.
+    ast::StructMemberList ext_tex_params_member_list = {
         b.Member("numPlanes", b.ty.u32()),
-        b.Member("yuvToRgbConversionMatrix", b.ty.mat3x4(b.ty.f32()))};
+        b.Member("yuvToRgbConversionMatrix", b.ty.mat3x4(b.ty.f32())),
+        b.Member("gammaDecodeParams", b.ty.type_name("GammaTransferParams")),
+        b.Member("gammaEncodeParams", b.ty.type_name("GammaTransferParams")),
+        b.Member("gamutConversionMatrix", b.ty.mat3x3(b.ty.f32()))};
 
     params_struct_sym = b.Symbols().New("ExternalTextureParams");
 
-    b.Structure(params_struct_sym, member_list);
+    b.Structure(params_struct_sym, ext_tex_params_member_list);
+  }
+
+  /// Creates the gammaCorrection function if needed and returns a call
+  /// expression to it.
+  void createGammaCorrectionFn() {
+    ast::VariableList varList = {
+        b.Param("v", b.ty.f32()),
+        b.Param("params", b.ty.type_name(gamma_transfer_struct_sym))};
+
+    ast::StatementList statementList = {
+        // if ((abs(v) < params.D)){
+        //   return (sign(v) * ((params.C * abs(v)) + params.F));
+        // }
+        b.If(b.create<ast::BinaryExpression>(ast::BinaryOp::kLessThan,
+                                             b.Call("abs", "v"),
+                                             b.MemberAccessor("params", "D")),
+             b.Block(b.Return(b.Mul(b.Call("sign", "v"),
+                                    b.Add(b.Mul(b.MemberAccessor("params", "C"),
+                                                b.Call("abs", "v")),
+                                          b.MemberAccessor("params", "F")))))),
+        // return ((sign(v) * pow(((params.A * abs(v)) + params.B), params.G)) +
+        // params.E);
+        b.Return(b.Add(b.Mul(b.Call("sign", "v"),
+                             b.Call("pow",
+                                    b.Add(b.Mul(b.MemberAccessor("params", "A"),
+                                                b.Call("abs", "v")),
+                                          b.MemberAccessor("params", "B")),
+                                    b.MemberAccessor("params", "G"))),
+                       b.MemberAccessor("params", "E")))};
+
+    gamma_correction_sym = b.Symbols().New("gammaCorrection");
+
+    b.Func(gamma_correction_sym, varList, b.ty.f32(), statementList, {});
   }
 
   /// Constructs a StatementList containing all the statements making up the
@@ -297,6 +351,34 @@ struct MultiplanarExternalTexture::State {
                                     b.MemberAccessor(plane_1_call, "rg"), 1.0f),
                                 b.MemberAccessor(
                                     "params", "yuvToRgbConversionMatrix")))))),
+        // color.r = gammaConversion(color.r, gammaDecodeParams);
+        b.Assign(b.MemberAccessor("color", "r"),
+                 b.Call("gammaCorrection", b.MemberAccessor("color", "r"),
+                        b.MemberAccessor("params", "gammaDecodeParams"))),
+        // color.g = gammaConversion(color.g, gammaDecodeParams);
+        b.Assign(b.MemberAccessor("color", "g"),
+                 b.Call("gammaCorrection", b.MemberAccessor("color", "g"),
+                        b.MemberAccessor("params", "gammaDecodeParams"))),
+        // color.b = gammaConversion(color.b, gammaDecodeParams);
+        b.Assign(b.MemberAccessor("color", "b"),
+                 b.Call("gammaCorrection", b.MemberAccessor("color", "b"),
+                        b.MemberAccessor("params", "gammaDecodeParams"))),
+        // color = (params.gamutConversionMatrix * color);
+        b.Assign("color",
+                 b.Mul(b.MemberAccessor("params", "gamutConversionMatrix"),
+                       "color")),
+        // color.r = gammaConversion(color.r, gammaEncodeParams);
+        b.Assign(b.MemberAccessor("color", "r"),
+                 b.Call("gammaCorrection", b.MemberAccessor("color", "r"),
+                        b.MemberAccessor("params", "gammaEncodeParams"))),
+        // color.g = gammaConversion(color.g, gammaEncodeParams);
+        b.Assign(b.MemberAccessor("color", "g"),
+                 b.Call("gammaCorrection", b.MemberAccessor("color", "g"),
+                        b.MemberAccessor("params", "gammaEncodeParams"))),
+        // color.b = gammaConversion(color.b, gammaEncodeParams);
+        b.Assign(b.MemberAccessor("color", "b"),
+                 b.Call("gammaCorrection", b.MemberAccessor("color", "b"),
+                        b.MemberAccessor("params", "gammaEncodeParams"))),
         // return vec4<f32>(color, 1.0f);
         b.Return(b.vec4<f32>("color", 1.0f))};
   }
@@ -316,6 +398,12 @@ struct MultiplanarExternalTexture::State {
           << "expected textureSampleLevel call with a "
              "texture_external to have 3 parameters, found "
           << expr->args.size() << " parameters";
+    }
+
+    // TextureSampleExternal calls the gammaCorrection function, so ensure it
+    // exists.
+    if (!gamma_correction_sym.IsValid()) {
+      createGammaCorrectionFn();
     }
 
     if (!texture_sample_external_sym.IsValid()) {
@@ -360,6 +448,12 @@ struct MultiplanarExternalTexture::State {
           << "expected textureLoad call with a texture_external "
              "to have 2 parameters, found "
           << expr->args.size() << " parameters";
+    }
+
+    // TextureLoadExternal calls the gammaCorrection function, so ensure it
+    // exists.
+    if (!gamma_correction_sym.IsValid()) {
+      createGammaCorrectionFn();
     }
 
     if (!texture_load_external_sym.IsValid()) {
