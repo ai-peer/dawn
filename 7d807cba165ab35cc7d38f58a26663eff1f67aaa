@@ -61,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9e2954e_197cbe99",
+        "filename": "src/tint/resolver/validator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-18T20:52:02Z",
+      "side": 1,
+      "message": "One question for this, which came up in the `const` PR is, the `ValidateSwitch` method depends on the non-const `TypeOf` to create nodes for the types of the case statements, is that something which should have been resolved before `ValidateSwitch` was called?",
+      "parentUuid": "7b4b3e3f_4b0e1ac5",
+      "range": {
+        "startLine": 65,
+        "startChar": 6,
+        "endLine": 65,
+        "endChar": 15
+      },
+      "revId": "7d807cba165ab35cc7d38f58a26663eff1f67aaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "881969bf_da65c9ab",
         "filename": "src/tint/resolver/validator.h",
         "patchSetId": 3
@@ -72,6 +96,30 @@
       "writtenOn": "2022-04-18T20:13:08Z",
       "side": 1,
       "message": "Can drop the `Validate` prefix from all these methods, given that this is in the `Validator` class. This would then match the resolver.",
+      "range": {
+        "startLine": 100,
+        "startChar": 7,
+        "endLine": 100,
+        "endChar": 15
+      },
+      "revId": "7d807cba165ab35cc7d38f58a26663eff1f67aaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70dbe0a6_e2b15512",
+        "filename": "src/tint/resolver/validator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-18T20:52:02Z",
+      "side": 1,
+      "message": "I went both ways on this. I dropped it which is nice when called in the Resolve class, the question I had was, in the validator class you end with with things like `if (!Alias) {` which wasn\u0027t as clear as `if (!ValidateAlias) {`",
+      "parentUuid": "881969bf_da65c9ab",
       "range": {
         "startLine": 100,
         "startChar": 7,
