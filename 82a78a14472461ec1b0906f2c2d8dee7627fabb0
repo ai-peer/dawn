@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "570fcc5f_6f47d60b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-18T19:06:57Z",
+      "side": 1,
+      "message": "Thank you for the fix Aleksi - just to confirm; is this failure reproducible in Dawn\u0027s current dawn_end2end_tests, or did you need to test in Chrome?\n\nWould be great to have a test if there isn\u0027t one that would have failed already.\n\nAdding `-Wshorten-64-to-32` to `internal_config` in `dawn/src/dawn/common/BUILD.gn` we have a TON of truncation errors. Ideally we might even want to add all of `-Wconversion`. No need to do that in this CL though.\n\nFor indirect-stuff, I believe we also have a bug in https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/IndirectDrawMetadata.cpp;l\u003d28?q\u003dComputeMaxIndirectValidationBatchOffsetRange\u0026sq\u003d which would be great to address in this CL as well.\n",
+      "revId": "82a78a14472461ec1b0906f2c2d8dee7627fabb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
