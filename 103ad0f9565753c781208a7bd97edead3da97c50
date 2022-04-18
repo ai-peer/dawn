@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9b34df7_72d3841c",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-18T21:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32427f91_f1432197",
+      "range": {
+        "startLine": 324,
+        "startChar": 4,
+        "endLine": 329,
+        "endChar": 82
+      },
+      "revId": "103ad0f9565753c781208a7bd97edead3da97c50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09355a03_e8882fb1",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-04-18T19:13:16Z",
       "side": 1,
       "message": "nit. Might be easier to read if we use absl::StrFormat instead?",
+      "range": {
+        "startLine": 336,
+        "startChar": 12,
+        "endLine": 344,
+        "endChar": 98
+      },
+      "revId": "103ad0f9565753c781208a7bd97edead3da97c50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aff7462_d29cc04b",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-18T21:57:39Z",
+      "side": 1,
+      "message": "That seems to require including \"dawn/native/Format.h\" and when I was working on emscripten build dawn test I was trying to avoid using absl and native stuffs in end2end/unittests (There\u0027s only one occurance in another unittest and I planned to replace that as well)\nKeeping this as is",
+      "parentUuid": "09355a03_e8882fb1",
       "range": {
         "startLine": 336,
         "startChar": 12,
