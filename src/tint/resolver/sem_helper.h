@@ -19,11 +19,13 @@
 
 #include "src/tint/diagnostic/diagnostic.h"
 #include "src/tint/program_builder.h"
+#include "src/tint/resolver/dependency_graph.h"
+#include "src/tint/utils/map.h"
 
 namespace tint::resolver {
 class SemHelper {
  public:
-  explicit SemHelper(ProgramBuilder* builder);
+  SemHelper(ProgramBuilder* builder, DependencyGraph& dependencies);
   ~SemHelper();
 
   /// Sem is a helper for obtaining the semantic node for the given AST node.
@@ -39,6 +41,15 @@ class SemHelper {
           << "Pointer: " << ast;
     }
     return const_cast<T*>(As<T>(sem));
+  }
+
+  /// @returns the resolved symbol (function, type or variable) for the given
+  /// ast::Identifier or ast::TypeName cast to the given semantic type.
+  template <typename SEM = sem::Node>
+  SEM* ResolvedSymbol(const ast::Node* node) const {
+    auto* resolved = utils::Lookup(dependencies_.resolved_symbols, node);
+    return resolved ? const_cast<SEM*>(builder_->Sem().Get<SEM>(resolved))
+                    : nullptr;
   }
 
   /// @returns the resolved type of the ast::Expression `expr`
@@ -59,6 +70,7 @@ class SemHelper {
 
  private:
   ProgramBuilder* builder_;
+  DependencyGraph& dependencies_;
 };
 
 }  // namespace tint::resolver
