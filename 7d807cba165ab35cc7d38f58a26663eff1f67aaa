@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8654f6c7_90e5e114",
+        "filename": "src/tint/resolver/validator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-18T22:29:44Z",
+      "side": 1,
+      "message": "Is `TypeOf` non-const purely because it might add to the diagnostics?\nIf so, Antonio suggested using the dreaded `mutable` keyword on the diagnostics for this purpose.",
+      "parentUuid": "b9e2954e_197cbe99",
+      "range": {
+        "startLine": 65,
+        "startChar": 6,
+        "endLine": 65,
+        "endChar": 15
+      },
+      "revId": "7d807cba165ab35cc7d38f58a26663eff1f67aaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "881969bf_da65c9ab",
         "filename": "src/tint/resolver/validator.h",
         "patchSetId": 3
@@ -120,6 +144,30 @@
       "side": 1,
       "message": "I went both ways on this. I dropped it which is nice when called in the Resolve class, the question I had was, in the validator class you end with with things like `if (!Alias) {` which wasn\u0027t as clear as `if (!ValidateAlias) {`",
       "parentUuid": "881969bf_da65c9ab",
+      "range": {
+        "startLine": 100,
+        "startChar": 7,
+        "endLine": 100,
+        "endChar": 15
+      },
+      "revId": "7d807cba165ab35cc7d38f58a26663eff1f67aaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9195b73c_0933b52d",
+        "filename": "src/tint/resolver/validator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-18T22:29:44Z",
+      "side": 1,
+      "message": "\u003e in the validator class you end with with things like `if (!Alias) {` which wasn\u0027t as clear as `if (!ValidateAlias) {`\n\nFor booleany type methods like this, I tend to prefer `IsAlias()` - but still, given that validation should be shallow, most of these method calls should be coming from the `Resolver`, in which case it would be `if (!validator_.Alias()) {` which I don\u0027t think is ambiguous.",
+      "parentUuid": "70dbe0a6_e2b15512",
       "range": {
         "startLine": 100,
         "startChar": 7,
