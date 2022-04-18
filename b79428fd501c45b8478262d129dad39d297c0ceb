@@ -16,6 +16,23 @@
       "message": "ptal",
       "revId": "b79428fd501c45b8478262d129dad39d297c0ceb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "689cdf16_4a592f2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-18T19:50:29Z",
+      "side": 1,
+      "message": "LGTM, but I don\u0027t know python particularly well, nor this script.",
+      "revId": "b79428fd501c45b8478262d129dad39d297c0ceb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
