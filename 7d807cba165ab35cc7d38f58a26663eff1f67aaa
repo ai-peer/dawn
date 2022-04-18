@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cf8a9da_5449b7cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-18T15:20:44Z",
+      "side": 1,
+      "message": "PTAL. This is the last CL of a chain, but wanted to make sure the final result was in line with expectations before putting the rest of the chain up for review.",
+      "revId": "7d807cba165ab35cc7d38f58a26663eff1f67aaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
