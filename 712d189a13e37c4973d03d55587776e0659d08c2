@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f2f3122_f4bbb3e8",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-18T21:09:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ece5ec2a_b64260e1",
+      "range": {
+        "startLine": 513,
+        "startChar": 12,
+        "endLine": 513,
+        "endChar": 23
+      },
+      "revId": "712d189a13e37c4973d03d55587776e0659d08c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac3cb7f7_761fbeb2",
