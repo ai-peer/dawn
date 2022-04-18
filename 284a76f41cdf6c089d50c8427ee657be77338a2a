@@ -86,6 +86,24 @@
       "parentUuid": "69ef7efd_b46a47e5",
       "revId": "284a76f41cdf6c089d50c8427ee657be77338a2a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb84d064_3e0f9c14",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-18T22:16:56Z",
+      "side": 1,
+      "message": "Great. To make sure there\u0027s no confusion, the extra row would always be multiplied by `1.0`, so provides you a place to put `y`, `u` and `v` biases, condition free.",
+      "parentUuid": "5f0921ba_f8f926f4",
+      "revId": "284a76f41cdf6c089d50c8427ee657be77338a2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
