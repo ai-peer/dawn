@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f77eac7_c9edc139",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-18T17:03:19Z",
+      "side": 1,
+      "message": "Talked with Brandon offline. speculative revert",
+      "revId": "a6d446da496ceeef6e5eb7bc83526627556ee907",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
