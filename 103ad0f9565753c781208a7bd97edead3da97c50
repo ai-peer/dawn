@@ -39,6 +39,29 @@
       },
       "revId": "103ad0f9565753c781208a7bd97edead3da97c50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09355a03_e8882fb1",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-18T19:13:16Z",
+      "side": 1,
+      "message": "nit. Might be easier to read if we use absl::StrFormat instead?",
+      "range": {
+        "startLine": 336,
+        "startChar": 12,
+        "endLine": 344,
+        "endChar": 98
+      },
+      "revId": "103ad0f9565753c781208a7bd97edead3da97c50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
