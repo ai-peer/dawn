@@ -34,6 +34,23 @@
       "parentUuid": "c46c2b89_e86cd2a2",
       "revId": "23753332ed16d836419db92229bf4ac434bb448f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb62cab8_0cc5fdf8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-18T22:31:00Z",
+      "side": 1,
+      "message": "nice - looks like we caught a bug in the Metal backend",
+      "revId": "23753332ed16d836419db92229bf4ac434bb448f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
