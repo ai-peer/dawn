@@ -50,6 +50,24 @@
       "message": "@Ben - I think you mentioned we could get rid of this branch by extending the matrix. I assume you mean moving to a mat3x4 and always subtracting the additional constants from the y,u,v values. This sounds good, but I wasn\u0027t sure what the most eloquent way to get a mat3x3 out of a mat3x4 was - could you give me an example?",
       "revId": "284a76f41cdf6c089d50c8427ee657be77338a2a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69ef7efd_b46a47e5",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-18T19:37:30Z",
+      "side": 1,
+      "message": "Yes, that\u0027s pretty much what I was thinking. I\u0027m probably missing something, but why do you need to get the mat3x3 out of the mat3x4? I was thinking you\u0027d just multiply the matrix with a vec4 (the vec3 you have now, but with a `1.0` in the last component).",
+      "parentUuid": "188432e4_09b1bbef",
+      "revId": "284a76f41cdf6c089d50c8427ee657be77338a2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
