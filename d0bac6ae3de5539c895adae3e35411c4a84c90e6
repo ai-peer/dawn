@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3d926bb_f3092eef",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-18T17:12:17Z",
+      "side": 0,
+      "message": "did we lose the instance !\u003d nullptr check ? although i think it would have been impossible for it to be null.\n\nI think simplifying this ternary should be done in https://dawn-review.googlesource.com/c/dawn/+/86400/12",
+      "range": {
+        "startLine": 28,
+        "startChar": 8,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "d0bac6ae3de5539c895adae3e35411c4a84c90e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
