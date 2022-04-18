@@ -51,6 +51,24 @@
       "message": "nice - looks like we caught a bug in the Metal backend",
       "revId": "23753332ed16d836419db92229bf4ac434bb448f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05ab6036_2875fa06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-18T23:51:34Z",
+      "side": 1,
+      "message": "Does this indicate we need a shader patch for metal IIUC? (although predicted as no in https://github.com/gpuweb/gpuweb/pull/1918)\n\n\u003e Device lost during test: Error creating pipeline state output of type int4 is not compatible with a MTLPixelFormatRGBA8Unorm color attachement.\n\nWhich is renderTarget2: shader output is a vec4\u003ci32\u003e while color attachment is rgba8unorm. But the writeMask is set to 0. Meaning metal wouldn\u0027t allow this input.",
+      "parentUuid": "cb62cab8_0cc5fdf8",
+      "revId": "23753332ed16d836419db92229bf4ac434bb448f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

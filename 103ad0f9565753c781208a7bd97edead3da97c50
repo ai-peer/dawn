@@ -134,6 +134,30 @@
       },
       "revId": "103ad0f9565753c781208a7bd97edead3da97c50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4da3e3e8_df0938ab",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-18T23:51:34Z",
+      "side": 1,
+      "message": "I think it\u0027s emscripten build dawn unittests without dawn (running against another prebuilt dawn implementation like chromium) So the native specific tests are not planned to build there. This render pipeline validation tests is a general tests we want to include there so we want to avoid abseil stuff.",
+      "parentUuid": "9580fe0e_97d46c88",
+      "range": {
+        "startLine": 336,
+        "startChar": 12,
+        "endLine": 344,
+        "endChar": 98
+      },
+      "revId": "103ad0f9565753c781208a7bd97edead3da97c50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
