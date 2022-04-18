@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "336fabcd_f41e5fee",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-18T23:08:05Z",
+      "side": 1,
+      "message": "Addresed in https://dawn-review.googlesource.com/c/dawn/+/86400.",
+      "parentUuid": "31a51491_9f6e4429",
+      "revId": "2b5099f59654ec86f65bdd670e19584587d07e70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75a6054d_1cc46d18",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-04-18T17:12:17Z",
       "side": 1,
       "message": "Chromium still uses SetPlatform. Not sure if this presubmit is going to bite us\nhttps://chromium.googlesource.com/chromium/src/+/HEAD/styleguide/c++/c++.md#tests-and-test_only-code\n\nmaybe the check doesn\u0027t run in our repo. if not, we should add it at some point.",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 47
+      },
+      "revId": "2b5099f59654ec86f65bdd670e19584587d07e70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dc51ac2_f3aaae06",
+        "filename": "src/dawn/native/DawnNative.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-18T23:08:05Z",
+      "side": 1,
+      "message": "Reverted for now, will make these changes once platform is plumbed through descriptor and Chromium updated.",
+      "parentUuid": "75a6054d_1cc46d18",
       "range": {
         "startLine": 243,
         "startChar": 0,
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e7959db_b9b6e98a",
+        "filename": "src/dawn/tests/end2end/mocks/CachingInterfaceMock.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-18T23:08:05Z",
+      "side": 1,
+      "message": "Disable is used in the D3D12 test. Enable is not used, but feels weird to only have a disable and no enable option.",
+      "parentUuid": "0221b9c1_9fc764b9",
+      "range": {
+        "startLine": 39,
+        "startChar": 3,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "2b5099f59654ec86f65bdd670e19584587d07e70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b11e2699_6564e215",
@@ -94,6 +160,30 @@
       "writtenOn": "2022-04-18T17:12:17Z",
       "side": 1,
       "message": "capitalize - is it also unused ?\ndepending on where it is used, it might be more clear to call it NumEntries or EntryCount so it\u0027s not confused with the byte size of the cache",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 24
+      },
+      "revId": "2b5099f59654ec86f65bdd670e19584587d07e70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d469ded_2525c576",
+        "filename": "src/dawn/tests/end2end/mocks/CachingInterfaceMock.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-18T23:08:05Z",
+      "side": 1,
+      "message": "This was implicitly used by testing::SizeIs in the D3D12 test. Changed though so that it is clearer.",
+      "parentUuid": "b11e2699_6564e215",
       "range": {
         "startLine": 47,
         "startChar": 0,

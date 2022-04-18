@@ -22,6 +22,30 @@
       },
       "revId": "d0bac6ae3de5539c895adae3e35411c4a84c90e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1486e50_f3ec46d3",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-18T23:08:05Z",
+      "side": 0,
+      "message": "Addressed via changes in https://dawn-review.googlesource.com/c/dawn/+/86400",
+      "parentUuid": "b3d926bb_f3092eef",
+      "range": {
+        "startLine": 28,
+        "startChar": 8,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "d0bac6ae3de5539c895adae3e35411c4a84c90e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
