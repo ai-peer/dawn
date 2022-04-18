@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd78d76e_462f9915",
+        "filename": "src/dawn/common/ityp_bitset.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-18T19:33:45Z",
+      "side": 1,
+      "message": "Gotta love the Win32 API.",
+      "range": {
+        "startLine": 152,
+        "startChar": 28,
+        "endLine": 152,
+        "endChar": 45
+      },
+      "revId": "0fe0a6aed6187fc47a579e7cb28db5c819138a4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
