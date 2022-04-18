@@ -16,6 +16,24 @@
       "message": "Add an end2end tests to cover the empty attachment case, unmatched pipeline and shader output format case, and redundant component case to make sure they are rendered correctly.",
       "revId": "23753332ed16d836419db92229bf4ac434bb448f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b741c111_56248f70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-18T21:59:00Z",
+      "side": 1,
+      "message": "(full tests with all combinations of params will be added to CTS)",
+      "parentUuid": "c46c2b89_e86cd2a2",
+      "revId": "23753332ed16d836419db92229bf4ac434bb448f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
