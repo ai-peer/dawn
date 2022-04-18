@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a68f3b8a_beeafa51",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-18T17:37:22Z",
+      "side": 1,
+      "message": "nit: this is hard to read",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "e0733e357ac38e2ef819e3fbf12267aae30d7983",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b82b273_23b41d74",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-18T17:37:22Z",
+      "side": 1,
+      "message": "overall, I\u0027m wondering whether this should live here, or on the Instance.\n\nThe backend pipeline cache objects might live on the Adapter (for monolithic) or on the Device (for now), but can\u0027t those implementations still do GetInstance()-\u003eGetBlobCache()-\u003eLoad/Store ?",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 46
+      },
+      "revId": "e0733e357ac38e2ef819e3fbf12267aae30d7983",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "86c7d2c9_3c324788",
         "filename": "src/dawn/native/BlobCache.cpp",
         "patchSetId": 12
@@ -14,6 +60,63 @@
       "writtenOn": "2022-04-15T23:09:09Z",
       "side": 1,
       "message": "nit: I remember having modernize make unique comment in chromium CLs\nhttps://clang.llvm.org/extra/clang-tidy/checks/modernize-make-unique.html",
+      "revId": "e0733e357ac38e2ef819e3fbf12267aae30d7983",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d54f1ca_ee067b40",
+        "filename": "src/dawn/native/BlobCache.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-18T17:37:22Z",
+      "side": 1,
+      "message": "[1]\n\nif we have these, maybe they should be above the check for mCache, so we hit the ASSERT in all configurations of cache enabled/disabled.",
+      "revId": "e0733e357ac38e2ef819e3fbf12267aae30d7983",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77dd8b6a_6705874c",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-18T17:37:22Z",
+      "side": 1,
+      "message": "uint: minor preference for Data()",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 23
+      },
+      "revId": "e0733e357ac38e2ef819e3fbf12267aae30d7983",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdb0b791_6a4dc75c",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-18T17:37:22Z",
+      "side": 1,
+      "message": "nit: comment that the value must be non-empty / non-null since you put asserts at [1]",
       "revId": "e0733e357ac38e2ef819e3fbf12267aae30d7983",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
