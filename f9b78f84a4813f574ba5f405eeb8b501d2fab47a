@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96783a0b_9f4325db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-19T22:54:50Z",
+      "side": 1,
+      "message": "Hmm I made a test CL at https://dawn-review.googlesource.com/c/dawn/+/87305\nBut that one passed linux-dawn-rel. Not sure if it\u0027s a good example (cuz there\u0027s no ts_sources change after all)\nI\u0027m not sure if simply adding DEPS to the action input is enough\n(I was looking at some how to write gn template doc)",
+      "revId": "f9b78f84a4813f574ba5f405eeb8b501d2fab47a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
