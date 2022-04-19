@@ -16,6 +16,63 @@
       "message": "The new tests are used to guide and narrow down the upcoming workaround.\n\nPTAL. Thanks! ",
       "revId": "3b24606b1d42869ec60d5c970cfc3144add537e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74811a3f_67be7fba",
+        "filename": "src/dawn/tests/end2end/RequiredBufferSizeInCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:28:24Z",
+      "side": 1,
+      "message": "nit: this output is used passed through the GTest string sanitizer, so maybe we can just use _ as separator directly.",
+      "revId": "3b24606b1d42869ec60d5c970cfc3144add537e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5fd81c1_336da6f1",
+        "filename": "src/dawn/tests/end2end/RequiredBufferSizeInCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:28:24Z",
+      "side": 1,
+      "message": "u-nit: ExtraRowsPerImage maybe?",
+      "range": {
+        "startLine": 48,
+        "startChar": 10,
+        "endLine": 48,
+        "endChar": 34
+      },
+      "revId": "3b24606b1d42869ec60d5c970cfc3144add537e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3540b983_980235ac",
+        "filename": "src/dawn/tests/end2end/RequiredBufferSizeInCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:28:24Z",
+      "side": 1,
+      "message": "Doesn\u0027t {foo, bar, baz} work?",
+      "revId": "3b24606b1d42869ec60d5c970cfc3144add537e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
