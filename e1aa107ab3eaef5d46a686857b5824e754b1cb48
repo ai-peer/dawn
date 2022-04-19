@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "702e7e6d_4af341d2",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 8
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-19T16:13:39Z",
+      "side": 1,
+      "message": "This one should be related to crbug.com/dawn/1325 though.",
+      "revId": "e1aa107ab3eaef5d46a686857b5824e754b1cb48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
