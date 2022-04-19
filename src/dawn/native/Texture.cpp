@@ -454,7 +454,7 @@ namespace dawn::native {
         }
 
         // The default value for the view dimension depends on the texture's dimension with a
-        // special case for 2DArray being chosen automatically if arrayLayerCount is unspecified.
+        // special case for 2DArray being chosen if texture is 2D but has more than one array layer.
         if (desc.dimension == wgpu::TextureViewDimension::Undefined) {
             switch (texture->GetDimension()) {
                 case wgpu::TextureDimension::e1D:
@@ -462,7 +462,11 @@ namespace dawn::native {
                     break;
 
                 case wgpu::TextureDimension::e2D:
-                    desc.dimension = wgpu::TextureViewDimension::e2D;
+                    if (texture->GetArrayLayers() == 1) {
+                        desc.dimension = wgpu::TextureViewDimension::e2D;
+                    } else {
+                        desc.dimension = wgpu::TextureViewDimension::e2DArray;
+                    }
                     break;
 
                 case wgpu::TextureDimension::e3D:
