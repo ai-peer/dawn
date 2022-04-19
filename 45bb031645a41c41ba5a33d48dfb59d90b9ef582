@@ -16,6 +16,23 @@
       "message": "To unblock linux-dawn-rel try bot",
       "revId": "45bb031645a41c41ba5a33d48dfb59d90b9ef582",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "091e8fe5_17b88d4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-19T17:52:16Z",
+      "side": 1,
+      "message": "LGTM\n\ndo you think you could also address this TODO so this issue doesn\u0027t happen anymore? - could be a separate CL\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/third_party/gn/webgpu-cts/BUILD.gn;l\u003d91?q\u003dgen_ts_dep",
+      "revId": "45bb031645a41c41ba5a33d48dfb59d90b9ef582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
