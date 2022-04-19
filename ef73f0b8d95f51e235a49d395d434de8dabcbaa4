@@ -240,6 +240,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53d76492_f35864cd",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-19T06:00:44Z",
+      "side": 1,
+      "message": "I added more tests to this observation at https://dawn-review.googlesource.com/c/dawn/+/87162",
+      "parentUuid": "a39bed23_2faa1124",
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14251ff2_2e33153e",
