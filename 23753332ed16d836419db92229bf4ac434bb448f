@@ -69,6 +69,24 @@
       "parentUuid": "cb62cab8_0cc5fdf8",
       "revId": "23753332ed16d836419db92229bf4ac434bb448f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e020fb2_31b0b8c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-19T00:10:52Z",
+      "side": 1,
+      "message": "I don\u0027t think we need a shader patch. If we do, we should revisit the validation.\n\nI think that we should omit the blend descriptor from the pipeline for that attachment if the write mask is 0. Since you can\u0027t write it, it\u0027s effectively not there at all.\nAround here https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/RenderPipelineMTL.mm;l\u003d364;drc\u003dd138bd5bee710c5d3befd0c08f1949b99a837e06;bpv\u003d0;bpt\u003d0\n\nI\u0027m not actually sure if this will be valid in Metal - we would need to check.",
+      "parentUuid": "05ab6036_2875fa06",
+      "revId": "23753332ed16d836419db92229bf4ac434bb448f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
