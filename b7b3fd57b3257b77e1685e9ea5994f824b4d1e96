@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "853a70c7_e1b0971f",
+        "filename": "tools/src/cts/query/query.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-04-19T16:59:48Z",
+      "side": 1,
+      "message": "We can do, but these are just seat-belts for silly bad usage. If its code we want to test, then we should probably return a `(Query, error)` pair - but this isn\u0027t something I expect to ever happen.",
+      "parentUuid": "73ac4fed_8c5c28db",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27299464_c0a72fe8",
         "filename": "tools/src/cts/query/tree.go",
         "patchSetId": 2
