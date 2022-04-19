@@ -316,6 +316,17 @@ namespace dawn::native {
 
             return GetCachedPipeline(store, dstFormat);
         }
+
+        wgpu::TextureViewDimension GetCopyViewDimension(wgpu::TextureDimension dimension) {
+            switch (dimension) {
+                case wgpu::TextureDimension::e1D:
+                    return wgpu::TextureViewDimension::e1D;
+                case wgpu::TextureDimension::e2D:
+                    return wgpu::TextureViewDimension::e2D;
+                case wgpu::TextureDimension::e3D:
+                    return wgpu::TextureViewDimension::e3D;
+            }
+        }
     }  // anonymous namespace
 
     MaybeError ValidateCopyTextureForBrowser(DeviceBase* device,
@@ -541,6 +552,7 @@ namespace dawn::native {
 
         // Prepare binding 2 resource: sampled texture
         TextureViewDescriptor srcTextureViewDesc = {};
+        srcTextureViewDesc.dimension = GetCopyViewDimension(source->texture->GetDimension());
         srcTextureViewDesc.baseMipLevel = source->mipLevel;
         srcTextureViewDesc.mipLevelCount = 1;
         srcTextureViewDesc.arrayLayerCount = 1;
@@ -560,6 +572,7 @@ namespace dawn::native {
 
         // Prepare dst texture view as color Attachment.
         TextureViewDescriptor dstTextureViewDesc;
+        dstTextureViewDesc.dimension = GetCopyViewDimension(destination->texture->GetDimension());
         dstTextureViewDesc.baseMipLevel = destination->mipLevel;
         dstTextureViewDesc.mipLevelCount = 1;
         dstTextureViewDesc.baseArrayLayer = destination->origin.z;
