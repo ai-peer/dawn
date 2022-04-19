@@ -34,6 +34,24 @@
       "parentUuid": "317aceb1_77225045",
       "revId": "cefd390e8984939d418b76c901df92ee6158247d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f4d7587_f5c34924",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-19T15:19:10Z",
+      "side": 1,
+      "message": "Done. https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1379",
+      "parentUuid": "162f9165_20b1f68f",
+      "revId": "cefd390e8984939d418b76c901df92ee6158247d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
