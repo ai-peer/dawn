@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "73ac4fed_8c5c28db",
+        "filename": "tools/src/cts/query/query.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T15:46:08Z",
+      "side": 1,
+      "message": "Ok then, is it worth adding a test for this, or can we not test panics?",
+      "parentUuid": "ee8c87a0_ad0d37ee",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27299464_c0a72fe8",
         "filename": "tools/src/cts/query/tree.go",
         "patchSetId": 2
@@ -90,6 +108,30 @@
       "side": 1,
       "message": "\u003e nit: this means that the in-memory representation of a tree can have a node that has both a \"Foo\" node that is a File, and a \"Foo\" node that is a Test. I don\u0027t think that it is possible?\n\nI don\u0027t think there is anything stopping this from being possible. It\u0027s certainly possible to have a file (with `.spec.ts` extension) and directory with the same name. There\u0027s also no ambiguity in the query syntax, if you were to do this.",
       "parentUuid": "27299464_c0a72fe8",
+      "range": {
+        "startLine": 58,
+        "startChar": 36,
+        "endLine": 58,
+        "endChar": 52
+      },
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9763afe_768b1cc9",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T15:46:08Z",
+      "side": 1,
+      "message": "Ah ok, I need to reread all in the light of this.",
+      "parentUuid": "13756606_c04bb4bd",
       "range": {
         "startLine": 58,
         "startChar": 36,
@@ -288,6 +330,24 @@
       "side": 1,
       "message": "It is. It uses an anonymous field, which is similar to a mixin.",
       "parentUuid": "bc88e87d_5cd782cd",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77441de2_eb3c44d7",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T15:46:08Z",
+      "side": 1,
+      "message": "Thanks, I didn\u0027t realize that was a thing.",
+      "parentUuid": "ce041677_59a4b821",
       "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
