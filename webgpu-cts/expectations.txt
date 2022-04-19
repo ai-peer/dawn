@@ -449,6 +449,7 @@ crbug.com/dawn/0000 [ win ] webgpu:api,validation,createTexture:mipLevelCount,fo
 # KEEP
 ################################################################################
 crbug.com/dawn/0000 [ mac ] webgpu:shader,execution,expression,call,builtin,atan2:* [ Failure ]
+crbug.com/dawn/0000 [ linux ] webgpu:shader,execution,expression,call,builtin,atan2:* [ Failure ]
 crbug.com/dawn/0000 [ linux ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:* [ Failure ]
 crbug.com/dawn/0000 [ win ] webgpu:shader,execution,expression,call,builtin,extractBits:* [ Failure ]
 crbug.com/dawn/0000 [ linux ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:* [ Failure ]
@@ -474,6 +475,12 @@ crbug.com/dawn/1364 webgpu:api,validation,createTexture:texture_usage:* [ Failur
 # KEEP
 ################################################################################
 crbug.com/chromium/1315658 webgpu:api,validation,encoding,cmds,copyTextureToTexture:texture_format_compatibility:* [ Failure ]
+
+################################################################################
+# crbug.com/dawn/1376 Loosen CreateRenderPipeline output validation when writeMask is 0
+# KEEP
+################################################################################
+crbug.com/dawn/1376 webgpu:api,validation,attachment_compatibility:render_pass_or_bundle_and_pipeline,depth_stencil_read_only_write_state:* [ Failure ]
 
 ################################################################################
 # untriaged failures
@@ -522,6 +529,7 @@ crbug.com/dawn/0000 [ win ] webgpu:shader,execution,memory_model,* [ Failure ]
 ################################################################################
 crbug.com/dawn/0000 webgpu:api,validation,createRenderPipeline:pipeline_output_targets,blend_min_max:isAsync=true;component="alpha" [ Slow ]
 crbug.com/dawn/0000 webgpu:api,validation,createRenderPipeline:pipeline_output_targets,blend_min_max:isAsync=true;component="color" [ Slow ]
+crbug.com/dawn/0000 webgpu:api,validation,resource_usages,buffer,in_pass_encoder:subresources,buffer_usage_in_render_pass:* [ Slow ]
 crbug.com/dawn/0000 [ win ] webgpu:api,operation,adapter,requestDevice:* [ Slow ]
 crbug.com/dawn/0000 [ win ] webgpu:shader,execution,expression,binary,f32_arithmetic:* [ Slow ]
 crbug.com/dawn/0000 [ win ] webgpu:shader,execution,expression,binary,f32_logical:* [ Slow ]
