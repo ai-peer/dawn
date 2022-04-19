@@ -54,6 +54,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1d2b68be_6857e32f",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-19T15:05:47Z",
+      "side": 1,
+      "message": "Filed https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1378 so we can do it as a followup.",
+      "parentUuid": "53e53feb_c84ef0d7",
+      "revId": "edbb43ff18950f6c6c967ac10ceb81464baf79ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "88689b5e_176eba46",
         "filename": "PRESUBMIT.py",
         "patchSetId": 2
@@ -103,6 +121,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbeb5e01_c98b992f",
+        "filename": "scripts/extract.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-19T15:05:47Z",
+      "side": 1,
+      "message": "Yea, sorry. I\u0027ve been trying out VSCode and I have format on save turned on, which means when I edit a python file it likes to cleanup the formatting. I\u0027ll be more careful about splitting those reformattings from the actual changes in the future.",
+      "parentUuid": "71f346a0_4c56c1b3",
+      "revId": "edbb43ff18950f6c6c967ac10ceb81464baf79ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe6ff5ff_a3d1edd2",
@@ -116,6 +152,30 @@
       "writtenOn": "2022-04-19T07:17:13Z",
       "side": 1,
       "message": "nit: it checks that ... ?",
+      "range": {
+        "startLine": 28,
+        "startChar": 55,
+        "endLine": 29,
+        "endChar": 10
+      },
+      "revId": "edbb43ff18950f6c6c967ac10ceb81464baf79ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88506da9_8681519a",
+        "filename": "scripts/extract.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-19T15:05:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe6ff5ff_a3d1edd2",
       "range": {
         "startLine": 28,
         "startChar": 55,
