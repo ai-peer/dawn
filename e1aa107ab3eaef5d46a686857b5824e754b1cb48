@@ -34,6 +34,24 @@
       "parentUuid": "702e7e6d_4af341d2",
       "revId": "e1aa107ab3eaef5d46a686857b5824e754b1cb48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2740a68_b08c1c2d",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 8
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T16:17:57Z",
+      "side": 1,
+      "message": "You being Shrek or Jiawei, whoever gets to it first.",
+      "parentUuid": "f8153417_7bb09395",
+      "revId": "e1aa107ab3eaef5d46a686857b5824e754b1cb48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
