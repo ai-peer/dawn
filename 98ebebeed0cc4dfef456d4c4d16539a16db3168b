@@ -46,6 +46,30 @@
       },
       "revId": "98ebebeed0cc4dfef456d4c4d16539a16db3168b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "285f10a1_aecd79a6",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T07:32:57Z",
+      "side": 1,
+      "message": "Yeah +1 on keeping this one implicit.",
+      "parentUuid": "a8145b28_df6632b0",
+      "range": {
+        "startLine": 1068,
+        "startChar": 41,
+        "endLine": 1068,
+        "endChar": 79
+      },
+      "revId": "98ebebeed0cc4dfef456d4c4d16539a16db3168b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
