@@ -104,6 +104,24 @@
       "parentUuid": "5f0921ba_f8f926f4",
       "revId": "284a76f41cdf6c089d50c8427ee657be77338a2a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5236ac42_98c41ad0",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-19T00:06:31Z",
+      "side": 1,
+      "message": "You mean multiply by 0.0, right? If so, done. I did only use one constant for UV bias because it should always be the same for U and V.",
+      "parentUuid": "cb84d064_3e0f9c14",
+      "revId": "284a76f41cdf6c089d50c8427ee657be77338a2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
