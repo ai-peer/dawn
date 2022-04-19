@@ -460,6 +460,28 @@ namespace dawn::native::d3d12 {
         SetDebugName(ToBackend(GetDevice()), GetPipelineState(), "Dawn_RenderPipeline", GetLabel());
     }
 
+    ComPtr<ID3D12CommandSignature> RenderPipeline::GetDrawIndirectCommandSignature() {
+        // TODO(crbug.com/dawn/1197): add reference to usesInstanceIndex once we support non-zero
+        // firstInstance values.
+        if (mFirstOffsetInfo.usesVertexIndex) {
+            return ToBackend(GetLayout())
+                ->GetDrawIndirectCommandSignatureWithInstanceVertexOffsets();
+        }
+
+        return ToBackend(GetDevice())->GetDrawIndirectSignature();
+    }
+
+    ComPtr<ID3D12CommandSignature> RenderPipeline::GetDrawIndexedIndirectCommandSignature() {
+        // TODO(crbug.com/dawn/1197): add reference to usesInstanceIndex once we support non-zero
+        // firstInstance values.
+        if (mFirstOffsetInfo.usesVertexIndex) {
+            return ToBackend(GetLayout())
+                ->GetDrawIndexedIndirectCommandSignatureWithInstanceVertexOffsets();
+        }
+
+        return ToBackend(GetDevice())->GetDrawIndexedIndirectSignature();
+    }
+
     D3D12_INPUT_LAYOUT_DESC RenderPipeline::ComputeInputLayout(
         std::array<D3D12_INPUT_ELEMENT_DESC, kMaxVertexAttributes>* inputElementDescriptors) {
         unsigned int count = 0;

@@ -50,6 +50,10 @@ class FirstIndexOffsetTests : public DawnTest {
   protected:
     void SetUp() override {
         DawnTest::SetUp();
+        // TODO(crbug.com/dawn/1292): Some Intel OpenGL drivers don't seem to like
+        // the offsets that Tint/GLSL produces.
+        DAWN_SUPPRESS_TEST_IF(IsIntel() && IsOpenGL() && IsLinux());
+
         // TODO(tint:451): Remove once "flat" is supported under OpenGL(ES).
         DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
     }
@@ -228,11 +232,6 @@ struct FragInputs {
     queue.Submit(1, &commands);
 
     std::array<uint32_t, 2> expected = {firstVertex, firstInstance};
-    // TODO(dawn:548): remove this once builtins are emulated for indirect draws.
-    // Until then the expected values should always be {0, 0}.
-    if (IsD3D12() && (mode == DrawMode::NonIndexedIndirect || mode == DrawMode::IndexedIndirect)) {
-        expected = {0, 0};
-    }
     EXPECT_BUFFER_U32_RANGE_EQ(expected.data(), buffer, 0, expected.size());
 }
 
