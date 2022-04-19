@@ -482,6 +482,7 @@ crbug.com/dawn/0000 [ win ] webgpu:api,validation,createTexture:mipLevelCount,fo
 # KEEP
 ################################################################################
 crbug.com/dawn/0000 [ mac ] webgpu:shader,execution,expression,call,builtin,atan2:* [ Failure ]
+crbug.com/dawn/0000 [ linux ] webgpu:shader,execution,expression,call,builtin,atan2:* [ Failure ]
 crbug.com/dawn/0000 [ linux ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:* [ Failure ]
 crbug.com/dawn/0000 [ win ] webgpu:shader,execution,expression,call,builtin,extractBits:* [ Failure ]
 crbug.com/dawn/0000 [ linux ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:* [ Failure ]
@@ -507,6 +508,12 @@ crbug.com/dawn/0000 [ win ] webgpu:api,operation,command_buffer,copyTextureToTex
 # KEEP
 ################################################################################
 crbug.com/dawn/1364 webgpu:api,validation,createTexture:texture_usage:* [ Failure ]
+
+################################################################################
+# crbug.com/dawn/1376 Loosen CreateRenderPipeline output validation when writeMask is 0
+# KEEP
+################################################################################
+crbug.com/dawn/1376 webgpu:api,validation,attachment_compatibility:render_pass_or_bundle_and_pipeline,depth_stencil_read_only_write_state:* [ Failure ]
 
 ################################################################################
 # untriaged failures
