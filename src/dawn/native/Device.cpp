@@ -1820,4 +1820,13 @@ namespace dawn::native {
         return false;
     }
 
+    bool DeviceBase::MayRequireDuplicationOfIndirectParameters() const {
+        return false;
+    }
+
+    bool DeviceBase::ShouldDuplicateParametersForDrawIndirect(
+        const RenderPipelineBase* renderPipelineBase) const {
+        return false;
+    }
+
 }  // namespace dawn::native
