@@ -16,6 +16,40 @@
       "message": "Thanks for your review, Corentin, Austin and Rafael. Please take another look.",
       "revId": "1b8ed2d57d3c7bac49865b94d1af5ec30735260b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97b250e1_a0fb3a71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T07:56:54Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1b8ed2d57d3c7bac49865b94d1af5ec30735260b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c78374b_fa128580",
+        "filename": "src/dawn/native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T07:56:54Z",
+      "side": 1,
+      "message": "I think we might need to move this logic in RecordBufferTextureCopyWithBufferHandle because IIRC it is used directly in the WriteTexture case.\n\nAlso slight nit to first handle the special case by calling recursively, then handle the normal case.",
+      "revId": "1b8ed2d57d3c7bac49865b94d1af5ec30735260b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

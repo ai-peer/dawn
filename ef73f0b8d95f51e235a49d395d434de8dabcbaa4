@@ -125,6 +125,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "457a0caf_6497a0c5",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T07:56:54Z",
+      "side": 1,
+      "message": "D3D12SplitBufferTextureCopyForRowsPerImagePaddings is quite short and clear. Nice!\n\nI\u0027m not sure about adding the name of platform in all toggles. Several of them are for multiple backends because unsurprisingly something that\u0027s hard on one API (because if hardware quirks) is hard on others too. See for example the \"small format mip level\" issues that we have on Intel on all backends.\n\nMaybe we can prefix with the platform name while it is for a single backend, and remove it when it becomes a shared toggle?",
+      "parentUuid": "58f33a8b_8a783c49",
+      "range": {
+        "startLine": 255,
+        "startChar": 21,
+        "endLine": 255,
+        "endChar": 70
+      },
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca1ffcbe_5969e11a",
         "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4
