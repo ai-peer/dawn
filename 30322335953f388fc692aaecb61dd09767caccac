@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa06a32c_c92df893",
+        "filename": "src/dawn/native/IndirectDrawMetadata.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Looks better when using list-initialization.",
+      "parentUuid": "a1d111d7_f26e5f16",
+      "range": {
+        "startLine": 180,
+        "startChar": 67,
+        "endLine": 180,
+        "endChar": 71
+      },
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "858f06da_18ae8aaa",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-04-04T15:21:13Z",
       "side": 1,
       "message": "I think the std::move is unnecessary",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88142ff3_46ba4168",
+        "filename": "src/dawn/native/IndirectDrawMetadata.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "858f06da_18ae8aaa",
       "revId": "30322335953f388fc692aaecb61dd09767caccac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -58,6 +100,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "114aa23d_fe4760b8",
+        "filename": "src/dawn/native/IndirectDrawMetadata.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b1d75f6_5f12d6d4",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eeb94bfe_abe70e11",
@@ -75,6 +135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eafdf4e_9b5222ea",
+        "filename": "src/dawn/native/IndirectDrawMetadata.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eeb94bfe_abe70e11",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4655ff23_ec9dfc84",
@@ -88,6 +166,30 @@
       "writtenOn": "2022-04-04T15:21:13Z",
       "side": 1,
       "message": "Missing \u003d\u003d other.numIndexBufferElements ?",
+      "range": {
+        "startLine": 228,
+        "startChar": 69,
+        "endLine": 228,
+        "endChar": 91
+      },
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9e17e4f_07fa5230",
+        "filename": "src/dawn/native/IndirectDrawMetadata.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Done. Switched to std::tie.",
+      "parentUuid": "4655ff23_ec9dfc84",
       "range": {
         "startLine": 228,
         "startChar": 69,
@@ -117,6 +219,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e02663f9_2fbe2ab0",
+        "filename": "src/dawn/native/IndirectDrawMetadata.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "I\u0027m not sure I follow. Do you mean that we should duplicate values for all draw in the batch if one of the draws uses `vertex_index` or `instance_index`? If so, I\u0027m not sure that would help much. While it would mean that we don\u0027t have to keep track of it at a per-draw, the shader would still need both code paths. Also, it would significantly complicate the pipeline selection logic on the `d3d12::CommandBuffer`. Instead of just being able to pick the \"duplicated values pipeline\" based on the current draw, we would need check if any of the draws in the current batch use `vertex_index` or `instance_index` (logic that is not easily accessible from the CommandBuffer class).\n\nThe only way I see to simplify this logic is to always duplicate the data on D3D12, irrespective if it is needed by the shader.",
+      "parentUuid": "a9cd41dd_488eb7a6",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72f56dbb_ce7ef0f6",
         "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
         "patchSetId": 5
@@ -128,6 +248,24 @@
       "writtenOn": "2022-04-04T15:21:13Z",
       "side": 1,
       "message": "nit: We could use a bitmask to save on space. Or add a TODO if we don\u0027t want to do it now.",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfd5be77_cd00a959",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Done. Moved enableValidation to an override and compacted `duplicateBaseVertex` and  `indexedDraw`.",
+      "parentUuid": "72f56dbb_ce7ef0f6",
       "revId": "30322335953f388fc692aaecb61dd09767caccac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -149,6 +287,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f053b3f_de8b6cf7",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Awesome!",
+      "parentUuid": "cb389373_4f4e3411",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "378706f1_3a1753b5",
@@ -162,6 +318,24 @@
       "writtenOn": "2022-04-04T15:21:13Z",
       "side": 1,
       "message": "nit: Instead of copying just one more for this other type of draw, I think we could just get how many to copy for this draw type, then make a loop that copies that amount.",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db5f38a8_1efff31a",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "378706f1_3a1753b5",
       "revId": "30322335953f388fc692aaecb61dd09767caccac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -189,6 +363,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94040256_2596077a",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Done. Switched to bool().",
+      "parentUuid": "13da4aa7_f83be3df",
+      "range": {
+        "startLine": 99,
+        "startChar": 19,
+        "endLine": 99,
+        "endChar": 41
+      },
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4faba495_c16bb496",
@@ -202,6 +400,24 @@
       "writtenOn": "2022-04-04T15:21:13Z",
       "side": 1,
       "message": "ditto bool(), but also folding in the computation of how many things to zero out.",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca03b0ef_474c372e",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4faba495_c16bb496",
       "revId": "30322335953f388fc692aaecb61dd09767caccac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -223,6 +439,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c61306d_0ab07cb5",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12aac518_2a5735fc",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "319b7fc9_2c9d4a91",
@@ -236,6 +470,24 @@
       "writtenOn": "2022-04-04T15:21:13Z",
       "side": 1,
       "message": "ditto about making a loop to copy N.",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69545c25_e1cda908",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "319b7fc9_2c9d4a91",
       "revId": "30322335953f388fc692aaecb61dd09767caccac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -263,6 +515,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "549527c3_5dc319f0",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f623d93f_e56a786d",
+      "range": {
+        "startLine": 287,
+        "startChar": 27,
+        "endLine": 287,
+        "endChar": 44
+      },
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ddda32d_58690a63",
@@ -276,6 +552,24 @@
       "writtenOn": "2022-04-04T15:21:13Z",
       "side": 1,
       "message": "u-nit: we usually require braces to avoid future bugs.\n\nAlso this could be computed outside of the loop on batches.",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "931f3668_4b8b422f",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ddda32d_58690a63",
       "revId": "30322335953f388fc692aaecb61dd09767caccac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -297,6 +591,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "406e385b_b9c31d46",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "825d54f8_78d581d4",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8881d83_768fd2a3",
@@ -310,6 +622,30 @@
       "writtenOn": "2022-04-04T15:21:13Z",
       "side": 1,
       "message": "Why IsValidationEnabled() here? We don\u0027t need to fake the indirect draws when validation is enabled since RBA protects from OOB vertex buffers accesses.\n\nI think the comment also needs to be updated.",
+      "range": {
+        "startLine": 175,
+        "startChar": 20,
+        "endLine": 175,
+        "endChar": 45
+      },
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "155380f5_23fcef16",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "This is here to validate for `firstInstance \u003d\u003d 0`. We should be able to remove this check when we add \"indirect-first-instance\" and the feature is enabled.",
+      "parentUuid": "c8881d83_768fd2a3",
       "range": {
         "startLine": 175,
         "startChar": 20,
@@ -339,6 +675,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4bac3e8e_a0c2652c",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "The original code had a bug where `count` would always assume that vertex would always be first and values would always be packed. This bug would cause issues if `instanceIndexOffset` was not zero and only `instance_index` was used. My first pass on this CL was just fixing the bug.\n\nThat said, it is much easier to always write both values. Writing both values simplifies the compute shader on indirect draws. Also, per the D3D team at MS, there is be no performance difference between writing 1 or 2 32-bit ints.\n\nTo that end, I have also updated the tint transform pass to always emit both fields.",
+      "parentUuid": "d754b8a0_bf493017",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec83094d_5a8eb49f",
         "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 5
@@ -350,6 +704,24 @@
       "writtenOn": "2022-04-04T15:21:13Z",
       "side": 1,
       "message": "I a pipeline uses InstandIndex can we just make it use the duplicating code path? That will be needed when we have a first-instance feature in the future anyway. And would simplify the code here a bit.",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd912496_1edf8742",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1454,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec83094d_5a8eb49f",
       "revId": "30322335953f388fc692aaecb61dd09767caccac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -371,6 +743,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2213e419_ce393549",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6514bd92_0d4dc09c",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38a1554d_f2903f24",
@@ -384,6 +774,24 @@
       "writtenOn": "2022-04-04T15:21:13Z",
       "side": 1,
       "message": "nit: Why not IsLinux() on this one?",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc0b98bd_74eb36c9",
+        "filename": "src/dawn/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1263,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-19T00:59:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38a1554d_f2903f24",
       "revId": "30322335953f388fc692aaecb61dd09767caccac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
