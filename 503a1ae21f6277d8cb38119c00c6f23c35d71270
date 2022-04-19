@@ -16,6 +16,40 @@
       "message": "ptal",
       "revId": "503a1ae21f6277d8cb38119c00c6f23c35d71270",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "709b3c7d_8ef6e3cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T06:47:21Z",
+      "side": 1,
+      "message": "LGTM assuming we have a good rationale for disallowing constructor casts.",
+      "revId": "503a1ae21f6277d8cb38119c00c6f23c35d71270",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6db8af0_9dec79ea",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T06:47:21Z",
+      "side": 1,
+      "message": "I\u0027m not sure about this one. This type of cast is not a C-style cast, but an explicit cast using the constructor for the types. Do you know why it is considered bad practice?",
+      "revId": "503a1ae21f6277d8cb38119c00c6f23c35d71270",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
