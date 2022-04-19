@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8708afb0_f4a8c27d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:43:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ea624be6c3cfba4641fb0b8c38e1c0c165088c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b5660d3_a8f8a827",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:43:30Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "ea624be6c3cfba4641fb0b8c38e1c0c165088c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf689f6b_556bc9b5",
+        "filename": "src/dawn/native/Instance.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:43:30Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand this comment. What\u0027s the TODO?",
+      "revId": "ea624be6c3cfba4641fb0b8c38e1c0c165088c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed0d6832_8eabfac7",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:43:30Z",
+      "side": 1,
+      "message": "We should try as much as possible to prevent test code from accessing Dawn\u0027s internals unless it is completely required (this way we know what tests might be change detecting and which ones aren\u0027t). WDYT of adding a dawn::native::Instance::SetPlatformForTesting at [1] instead of only to Instance.h?\n\nTBH we could also just do the rename after dawn:1374 is implemented.",
+      "revId": "ea624be6c3cfba4641fb0b8c38e1c0c165088c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08dddcb3_a7a9f3e6",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:43:30Z",
+      "side": 1,
+      "message": "I think this needs to be public_deps to pass `gn check`. You\u0027ll need to cherry-pick https://dawn-review.googlesource.com/c/dawn/+/86861 because it got reverted (but will reland soon)",
+      "revId": "ea624be6c3cfba4641fb0b8c38e1c0c165088c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c2b9ef3_552e67df",
+        "filename": "src/dawn/tests/end2end/mocks/CachingInterfaceMock.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:43:30Z",
+      "side": 1,
+      "message": "Maybe we should validate (here or somewhere else) that we never store a cache entry that already exists.",
+      "revId": "ea624be6c3cfba4641fb0b8c38e1c0c165088c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77289064_643fd198",
+        "filename": "src/dawn/tests/end2end/mocks/CachingInterfaceMock.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:43:30Z",
+      "side": 1,
+      "message": "I think we need to call FlushWire() before the first GetHitCount() as well as we might be partially flushed for other reasons.",
+      "revId": "ea624be6c3cfba4641fb0b8c38e1c0c165088c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
