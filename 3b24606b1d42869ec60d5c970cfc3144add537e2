@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07f910b7_d082dee0",
+        "filename": "src/dawn/tests/end2end/RequiredBufferSizeInCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-19T18:21:30Z",
+      "side": 1,
+      "message": "Just realized that what I really care about is copyDepth. copyWidth and copyHeight are not the point for tests.",
+      "parentUuid": "74811a3f_67be7fba",
+      "revId": "3b24606b1d42869ec60d5c970cfc3144add537e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5fd81c1_336da6f1",
@@ -58,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "872e9d92_19392cb7",
+        "filename": "src/dawn/tests/end2end/RequiredBufferSizeInCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-19T18:21:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5fd81c1_336da6f1",
+      "range": {
+        "startLine": 48,
+        "startChar": 10,
+        "endLine": 48,
+        "endChar": 34
+      },
+      "revId": "3b24606b1d42869ec60d5c970cfc3144add537e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3540b983_980235ac",
@@ -71,6 +113,24 @@
       "writtenOn": "2022-04-19T12:28:24Z",
       "side": 1,
       "message": "Doesn\u0027t {foo, bar, baz} work?",
+      "revId": "3b24606b1d42869ec60d5c970cfc3144add537e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c18bb9e6_f12b99bf",
+        "filename": "src/dawn/tests/end2end/RequiredBufferSizeInCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-19T18:21:30Z",
+      "side": 1,
+      "message": "It works if we simply use {foo, bar, baz}. I found that a few tests use std::vector\u003cDataType\u003e({foo, bar, baz}), I felt like this is clearer.",
+      "parentUuid": "3540b983_980235ac",
       "revId": "3b24606b1d42869ec60d5c970cfc3144add537e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
