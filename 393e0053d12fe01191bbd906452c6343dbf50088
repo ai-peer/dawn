@@ -16,6 +16,23 @@
       "message": "I don\u0027t see any flakes in the problematic tests after two full runs! Doing one more run to be sure.",
       "revId": "393e0053d12fe01191bbd906452c6343dbf50088",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd1aa7e4_b222a904",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-19T19:09:11Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "393e0053d12fe01191bbd906452c6343dbf50088",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
