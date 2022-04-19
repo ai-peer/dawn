@@ -16,6 +16,24 @@
       "message": "Unfortunately the expectation parser currently drops the trailing expectation comments. Do you think it would be acceptable to move these to the \u0027chunk\u0027 comments, or shall I fix up the tooling to handle these?\n",
       "revId": "3ff3e5795373916f75e705e9a92f5d38fad9cf11",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfff975d_585fe073",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-19T20:02:28Z",
+      "side": 1,
+      "message": "fine with me to move them - though long term, I think we should either make the parser validate them out, or support trailing comments.\n\notherwise people manually editing the file will get their comments lost",
+      "parentUuid": "a767a092_aa4eb569",
+      "revId": "3ff3e5795373916f75e705e9a92f5d38fad9cf11",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
