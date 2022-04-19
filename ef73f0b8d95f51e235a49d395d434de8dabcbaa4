@@ -101,6 +101,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58f33a8b_8a783c49",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-19T05:58:57Z",
+      "side": 1,
+      "message": "RowHeight is not out of bound, actually. It is just smaller than rowsPerImage because there are pure padding rows. What about D3D12SplitBufferTextureCopyIfRowsPerImageGreaterThanCopyHeight? Or Maybe D3D12SplitBufferTextureCopyForRowsPerImagePaddings?\n\nTo Austin, I can add platform prefix for toggles in another patch.",
+      "parentUuid": "bcafeb73_ea0b3711",
+      "range": {
+        "startLine": 255,
+        "startChar": 21,
+        "endLine": 255,
+        "endChar": 70
+      },
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca1ffcbe_5969e11a",
         "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 4
@@ -112,6 +136,24 @@
       "writtenOn": "2022-04-15T14:16:32Z",
       "side": 1,
       "message": "What we should explain is that this invariant is already checked in the frontend.",
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8d8fa49_23df7b7f",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-19T05:58:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca1ffcbe_5969e11a",
       "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -139,6 +181,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "594ed893_9de5e1a4",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-19T05:58:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e72a6141_94ec51e3",
+      "range": {
+        "startLine": 326,
+        "startChar": 12,
+        "endLine": 326,
+        "endChar": 66
+      },
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d59a0181_a683d7dd",
@@ -152,6 +218,24 @@
       "writtenOn": "2022-04-15T14:16:32Z",
       "side": 1,
       "message": "Is it only for 3D textures or also for 2D array? It\u0027d be slightly surprising if it were just 3D. I think we could just check copySize.depthOrArrayLayers \u003c\u003d 1 and not the dimension.",
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a39bed23_2faa1124",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-19T05:58:57Z",
+      "side": 1,
+      "message": "Yes. It is only for 3D texture. D3D12\u0027s copyTextureRegion can copy one texture subresource only for each call. For 2D array, different array slices are different subresources. This is different from 3D texture, in which depth images are the same subresource. So each copyTextureRegion API can copy only one image of a 2DArray texture. However, the incorrect calculation happens on multi-images with rowsPerImage paddings. So 3D texture is the only texture type to be impacted.",
+      "parentUuid": "d59a0181_a683d7dd",
       "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -197,6 +281,54 @@
         "startChar": 38,
         "endLine": 365,
         "endChar": 45
+      },
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba702c3e_610bd38d",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-19T05:58:57Z",
+      "side": 1,
+      "message": "GetAllocatedSize() requires size to be aligned for uniform buffer, it may slightly bigger that GetSize() and it is the real buffer size on particular backend. \n\nCopy operation doesn\u0027t need Uniform usage, but maybe we can use GetAllocatedSize() here to replace GetSize() on D3D12?",
+      "parentUuid": "f72e9a2a_f6ab4b3c",
+      "range": {
+        "startLine": 365,
+        "startChar": 38,
+        "endLine": 365,
+        "endChar": 45
+      },
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1336a37f_fd05da93",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-19T05:58:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14251ff2_2e33153e",
+      "range": {
+        "startLine": 362,
+        "startChar": 0,
+        "endLine": 365,
+        "endChar": 1
       },
       "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
@@ -251,6 +383,24 @@
       "side": 1,
       "message": "+1 to avoiding unnecessary, temporary allocations.",
       "parentUuid": "1d5c0332_05e20630",
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6073adb_0835b5f0",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-19T05:58:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "498261eb_563ccb29",
       "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
