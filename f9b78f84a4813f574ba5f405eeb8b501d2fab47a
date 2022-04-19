@@ -51,6 +51,24 @@
       "parentUuid": "399b2717_6b9398da",
       "revId": "f9b78f84a4813f574ba5f405eeb8b501d2fab47a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ef5ab7a_d20b2e7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-19T23:37:09Z",
+      "side": 1,
+      "message": "ah. it\u0027s because ts_sources.txt tells it to depends on those sources. but since the file doesn\u0027t exist, it doesn\u0027t actually work and fails for a different reason.\n\nWe would need to actually create a new file upstream.\nLGTM since this is incrementally better than what we had before. I think it\u0027ll probably work and we can verify it in the future?",
+      "parentUuid": "02e7385c_e1ca4159",
+      "revId": "f9b78f84a4813f574ba5f405eeb8b501d2fab47a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
