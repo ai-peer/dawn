@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a767a092_aa4eb569",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:52:09Z",
+      "side": 1,
+      "message": "Unfortunately the expectation parser currently drops the trailing expectation comments. Do you think it would be acceptable to move these to the \u0027chunk\u0027 comments, or shall I fix up the tooling to handle these?\n",
+      "revId": "3ff3e5795373916f75e705e9a92f5d38fad9cf11",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
