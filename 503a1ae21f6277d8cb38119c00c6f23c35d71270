@@ -50,6 +50,24 @@
       "message": "I\u0027m not sure about this one. This type of cast is not a C-style cast, but an explicit cast using the constructor for the types. Do you know why it is considered bad practice?",
       "revId": "503a1ae21f6277d8cb38119c00c6f23c35d71270",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d367c54_5081b583",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-19T13:48:50Z",
+      "side": 1,
+      "message": "According to the style guide (https://google.github.io/styleguide/cppguide.html#Casting) that should only be done if `T` is a class type. But, I could possibly do brace initialization, so:\n\n`bool{mMapMode \u0026 wgpu::MapMode::Read} ^ bool{mMapMode \u0026 wgpu::MapMode::Write}`\n\nHere and in other places.",
+      "parentUuid": "e6db8af0_9dec79ea",
+      "revId": "503a1ae21f6277d8cb38119c00c6f23c35d71270",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
