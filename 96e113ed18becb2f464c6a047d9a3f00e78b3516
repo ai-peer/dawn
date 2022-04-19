@@ -144,6 +144,30 @@
       },
       "revId": "96e113ed18becb2f464c6a047d9a3f00e78b3516",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1bc659e_fb0f6935",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T07:58:00Z",
+      "side": 1,
+      "message": "Turns out Dan is adding CPPLINT to Dawn and it rejects it. So maybe Dan will go ahead and undo this comment. Let\u0027s see!",
+      "parentUuid": "512a7dae_e780fc52",
+      "range": {
+        "startLine": 345,
+        "startChar": 21,
+        "endLine": 345,
+        "endChar": 29
+      },
+      "revId": "96e113ed18becb2f464c6a047d9a3f00e78b3516",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
