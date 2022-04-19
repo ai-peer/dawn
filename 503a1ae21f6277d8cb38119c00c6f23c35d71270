@@ -68,6 +68,24 @@
       "parentUuid": "e6db8af0_9dec79ea",
       "revId": "503a1ae21f6277d8cb38119c00c6f23c35d71270",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8075627_b54f8d82",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T14:03:44Z",
+      "side": 1,
+      "message": "Ok I think we could do brace initialization, it would be less syntax overload than static_cast\u003c...\u003e in some cases.",
+      "parentUuid": "3d367c54_5081b583",
+      "revId": "503a1ae21f6277d8cb38119c00c6f23c35d71270",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
