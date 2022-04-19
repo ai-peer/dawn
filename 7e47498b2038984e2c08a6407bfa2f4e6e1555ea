@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7162afa6_eae08157",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-19T21:48:45Z",
+      "side": 1,
+      "message": "PTAL! Syncing up with spec changes at https://github.com/gpuweb/gpuweb/pull/2755 while I\u0027m thinking about them. 😊",
+      "revId": "7e47498b2038984e2c08a6407bfa2f4e6e1555ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
