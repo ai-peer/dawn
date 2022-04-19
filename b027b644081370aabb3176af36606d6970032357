@@ -16,6 +16,23 @@
       "message": "Please take another look when you have time. It should be OK to merge. Thanks!",
       "revId": "b027b644081370aabb3176af36606d6970032357",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a53cdae_ed09a6db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-19T18:23:17Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b027b644081370aabb3176af36606d6970032357",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
