@@ -151,6 +151,24 @@
       "parentUuid": "c18bb9e6_f12b99bf",
       "revId": "3b24606b1d42869ec60d5c970cfc3144add537e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec60fd73_c7c4518a",
+        "filename": "src/dawn/tests/end2end/RequiredBufferSizeInCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-19T18:44:33Z",
+      "side": 1,
+      "message": "OK, std::vector\u003cDataType\u003e stuff is removed now. It is rather trivial, but sounds like you both prefer the simpler one.",
+      "parentUuid": "b2ee985b_62f15cd3",
+      "revId": "3b24606b1d42869ec60d5c970cfc3144add537e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
