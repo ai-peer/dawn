@@ -133,6 +133,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11a705a7_cc1993be",
+        "filename": "src/tint/resolver/validator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T22:55:32Z",
+      "side": 1,
+      "message": "Thanks. Filed https://bugs.chromium.org/p/tint/issues/detail?id\u003d1510",
+      "parentUuid": "7f823d7f_099e509c",
+      "range": {
+        "startLine": 65,
+        "startChar": 6,
+        "endLine": 65,
+        "endChar": 15
+      },
+      "revId": "7d807cba165ab35cc7d38f58a26663eff1f67aaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "881969bf_da65c9ab",
         "filename": "src/tint/resolver/validator.h",
         "patchSetId": 3
