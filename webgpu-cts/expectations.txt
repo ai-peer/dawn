@@ -449,6 +449,7 @@ crbug.com/dawn/0000 [ win ] webgpu:api,validation,createTexture:mipLevelCount,fo
 # KEEP
 ################################################################################
 crbug.com/dawn/0000 [ mac ] webgpu:shader,execution,expression,call,builtin,atan2:* [ Failure ]
+crbug.com/dawn/0000 [ linux ] webgpu:shader,execution,expression,call,builtin,atan2:* [ Failure ]
 crbug.com/dawn/0000 [ linux ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:* [ Failure ]
 crbug.com/dawn/0000 [ win ] webgpu:shader,execution,expression,call,builtin,extractBits:* [ Failure ]
 crbug.com/dawn/0000 [ linux ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:* [ Failure ]
@@ -474,6 +475,12 @@ crbug.com/dawn/1364 webgpu:api,validation,createTexture:texture_usage:* [ Failur
 # KEEP
 ################################################################################
 crbug.com/chromium/1315658 webgpu:api,validation,encoding,cmds,copyTextureToTexture:texture_format_compatibility:* [ Failure ]
+
+################################################################################
+# crbug.com/dawn/1376 Loosen CreateRenderPipeline output validation when writeMask is 0
+# KEEP
+################################################################################
+crbug.com/dawn/1376 webgpu:api,validation,attachment_compatibility:render_pass_or_bundle_and_pipeline,depth_stencil_read_only_write_state:* [ Failure ]
 
 ################################################################################
 # untriaged failures
@@ -582,6 +589,7 @@ crbug.com/dawn/0000 [ win ] webgpu:api,validation,image_copy,texture_related:cop
 crbug.com/dawn/0000 [ win ] webgpu:shader,validation,variable_and_const:io_shareable_type:storageClass="in";type="array%3Cu32,%2012%3E" [ RetryOnFailure ]
 
 # New flakes. Please triage:
+crbug.com/dawn/0000 webgpu:api,validation,resource_usages,buffer,in_pass_encoder:subresources,buffer_usage_in_render_pass:* [ RetryOnFailure ]
 crbug.com/dawn/0000 [ angle-opengl dawn-backend-validation no-oop-c nvidia-0x2184 release skia-renderer-vulkan ubuntu ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rg16uint";dstFormat="rg16uint";dimension="3d" [ RetryOnFailure ]
 crbug.com/dawn/0000 [ angle-opengl dawn-backend-validation no-oop-c nvidia-0x2184 release skia-renderer-vulkan ubuntu ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rg32sint";dstFormat="rg32sint";dimension="2d" [ RetryOnFailure ]
 crbug.com/dawn/0000 [ angle-opengl dawn-backend-validation no-oop-c nvidia-0x2184 release skia-renderer-vulkan ubuntu ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rgba16float";dstFormat="rgba16float";dimension="3d" [ RetryOnFailure ]
