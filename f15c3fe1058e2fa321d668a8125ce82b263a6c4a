@@ -16,6 +16,40 @@
       "message": "ptal",
       "revId": "f15c3fe1058e2fa321d668a8125ce82b263a6c4a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d1be6d1_0ac70dcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T06:53:29Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f15c3fe1058e2fa321d668a8125ce82b263a6c4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26aa2a7f_22eb3a6c",
+        "filename": "src/dawn/node/interop/Core.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T06:53:29Z",
+      "side": 1,
+      "message": "Why does this change happen?",
+      "revId": "f15c3fe1058e2fa321d668a8125ce82b263a6c4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
