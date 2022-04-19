@@ -33,6 +33,24 @@
       "message": "if future revisions have no new files - could we roll back to before some files were added (so ts_sources.txt would be dirty since it should have deletions)",
       "revId": "f9b78f84a4813f574ba5f405eeb8b501d2fab47a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02e7385c_e1ca4159",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-19T23:32:17Z",
+      "side": 1,
+      "message": "The patchset 1 is rolled back to some commit before addition in ts_source.txt\nhttps://logs.chromium.org/logs/chromium/buildbucket/cr-buildbucket/8816426020706272145/+/u/compile__with_patch_/stdout\n\nBuild fails. So this indicate it didn\u0027t actually get refresh?",
+      "parentUuid": "399b2717_6b9398da",
+      "revId": "f9b78f84a4813f574ba5f405eeb8b501d2fab47a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
