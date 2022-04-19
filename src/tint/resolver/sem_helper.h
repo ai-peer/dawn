@@ -21,6 +21,8 @@
 #include "src/tint/program_builder.h"
 
 namespace tint::resolver {
+
+/// Helper class to retrieve sem information.
 class SemHelper {
  public:
   explicit SemHelper(ProgramBuilder* builder);
