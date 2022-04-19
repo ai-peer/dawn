@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0cb9634_1defdf06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T15:26:17Z",
+      "side": 1,
+      "message": "Kokoro failed on this change. Please fix.",
+      "revId": "bb62ef0d2c0f05f88024b9c384d8e8e5c76787b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f09d3250_2e82a755",
+        "filename": "src/tint/resolver/sem_helper.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T15:26:17Z",
+      "side": 1,
+      "message": "/dawn/src/src/tint/resolver/sem_helper.h:24: error: Compound tint::resolver::SemHelper is not documented. (warning treated as error, aborting now)",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "bb62ef0d2c0f05f88024b9c384d8e8e5c76787b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
