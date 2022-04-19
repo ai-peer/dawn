@@ -70,6 +70,30 @@
       },
       "revId": "98ebebeed0cc4dfef456d4c4d16539a16db3168b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1589edb_98f3a747",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-19T23:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "285f10a1_aecd79a6",
+      "range": {
+        "startLine": 1068,
+        "startChar": 41,
+        "endLine": 1068,
+        "endChar": 79
+      },
+      "revId": "98ebebeed0cc4dfef456d4c4d16539a16db3168b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
