@@ -237,6 +237,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "29c37dce_90ac712b",
+        "filename": "src/dawn/native/IndirectDrawMetadata.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:25:25Z",
+      "side": 1,
+      "message": "\u003e The only way I see to simplify this logic is to always duplicate the data on D3D12, irrespective if it is needed by the shader.\n\nYes, this is what I meant (but didn\u0027t explain clearly). We can always duplicate the two arguments, but the only difference would be that we wouldn\u0027t consume the data. But now I realize that we still need to track duplicateBaseVertexInstance per-draw because we\u0027d need to add 8 to the offset for duplicateBaseVertexInstance \u003d\u003d true.",
+      "parentUuid": "e02663f9_2fbe2ab0",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72f56dbb_ce7ef0f6",
         "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
         "patchSetId": 5
@@ -687,6 +705,24 @@
       "side": 1,
       "message": "The original code had a bug where `count` would always assume that vertex would always be first and values would always be packed. This bug would cause issues if `instanceIndexOffset` was not zero and only `instance_index` was used. My first pass on this CL was just fixing the bug.\n\nThat said, it is much easier to always write both values. Writing both values simplifies the compute shader on indirect draws. Also, per the D3D team at MS, there is be no performance difference between writing 1 or 2 32-bit ints.\n\nTo that end, I have also updated the tint transform pass to always emit both fields.",
       "parentUuid": "d754b8a0_bf493017",
+      "revId": "30322335953f388fc692aaecb61dd09767caccac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2899d6f_6d632a56",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:25:25Z",
+      "side": 1,
+      "message": "Makes sense, however I think we also need to update this code to emit both values all the times. Right now we might emit a single one.",
+      "parentUuid": "4bac3e8e_a0c2652c",
       "revId": "30322335953f388fc692aaecb61dd09767caccac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

@@ -16,6 +16,171 @@
       "message": "Sorry for the delay",
       "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "808350f7_de58bc8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:25:25Z",
+      "side": 1,
+      "message": "The CL looks much better, thank you. I think the use of pipeline-overridable constants might be causing issues.",
+      "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4a7f9c3_260186bf",
+        "filename": "src/dawn/native/IndirectDrawMetadata.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:25:25Z",
+      "side": 1,
+      "message": "nit: comment needs a rollback.",
+      "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b50b9d2_b91113f4",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:25:25Z",
+      "side": 1,
+      "message": "Sorry but this is very non-standard in Dawn / Chromium, can we use flag constants instead? I think the C standard also doesn\u0027t guarantee exactly  how the bitfields are laid out, while we rely on the exact layout for communication with the shader.",
+      "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9427cf57_6ed38a9d",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:25:25Z",
+      "side": 1,
+      "message": "nit: We could use input / output instead of client / validated. Same on the CPU side code. But let\u0027s do that as a follow up to avoid additional churn and noise in this CL.",
+      "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "103ab829_822283d5",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:25:25Z",
+      "side": 1,
+      "message": "nit: two",
+      "range": {
+        "startLine": 112,
+        "startChar": 74,
+        "endLine": 112,
+        "endChar": 76
+      },
+      "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ad77e1b_cb60bed7",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:25:25Z",
+      "side": 1,
+      "message": "u-u-nit: since this is a constant 2 we could just unroll the loop, it would be more clear.",
+      "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80d3e63a_e465b9a6",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:25:25Z",
+      "side": 1,
+      "message": "Pipeline overridable constants are still WIP. I don\u0027t think we can use them unfortunately. It could be an extra flag passed along with indexed and duplicate.",
+      "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bccdda36_c5fa9794",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:25:25Z",
+      "side": 1,
+      "message": "We could use the same flags here.",
+      "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec1553c4_e042c2f0",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T12:25:25Z",
+      "side": 1,
+      "message": "This is new logic but seems valid because we need to check firstInstance. Is there a test in Dawn or in the CTS that checks this new behavior?",
+      "range": {
+        "startLine": 175,
+        "startChar": 20,
+        "endLine": 175,
+        "endChar": 41
+      },
+      "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
