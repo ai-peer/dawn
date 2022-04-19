@@ -52,6 +52,24 @@
       "parentUuid": "f8153417_7bb09395",
       "revId": "e1aa107ab3eaef5d46a686857b5824e754b1cb48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4627aa06_7016b87c",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 8
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-19T16:34:30Z",
+      "side": 1,
+      "message": "Fixed at https://dawn-review.googlesource.com/c/dawn/+/87301",
+      "parentUuid": "f2740a68_b08c1c2d",
+      "revId": "e1aa107ab3eaef5d46a686857b5824e754b1cb48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
