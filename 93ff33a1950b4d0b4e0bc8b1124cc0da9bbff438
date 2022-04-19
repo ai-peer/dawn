@@ -33,6 +33,24 @@
       "message": "The `CheckExtensionAllowlist` method is currently implemented in Tint Inspector, which is used to check that all extension the program used is in a given allow list of extension names. This logic could be moved into Dawn if required.",
       "revId": "93ff33a1950b4d0b4e0bc8b1124cc0da9bbff438",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ad6cd5e_c1d926a8",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "+1. As discussed on https://dawn-review.googlesource.com/c/tint/+/85024/comments/23ac9720_babbe533, Tint should not be hard-coding which extensions are permitted - this belongs in Dawn.\nBy having the allowlist in dawn, this list can be made dynamic via dawn flags.\nNow that Tint lives in the Dawn repo, this should be easy to move.",
+      "parentUuid": "8ea2df86_7c593a37",
+      "revId": "93ff33a1950b4d0b4e0bc8b1124cc0da9bbff438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

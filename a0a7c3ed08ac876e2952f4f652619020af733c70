@@ -18,6 +18,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7de71adc_7423ce13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "Kokoro failure appears to be unrelated to this change. I suggest rebasing on to latest `main`.",
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e15c536a_9492386d",
+        "filename": "src/tint/ast/extension.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "nit: `tint::ast`",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 15
+      },
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "738c296e_a402968b",
@@ -31,6 +71,121 @@
       "writtenOn": "2022-04-19T17:13:07Z",
       "side": 1,
       "message": "nit: You don\u0027t need the braces here.",
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a618b8c7_e98f6af4",
+        "filename": "src/tint/ast/extension.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "nit: `namespace tint::ast {`",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 15
+      },
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f462992e_46af1292",
+        "filename": "src/tint/ast/extension.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "nit: `///` for doxygen",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 6
+      },
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2ce372f_ad478530",
+        "filename": "src/tint/ast/extension.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "Fine for now, but once we have a single extension added, we\u0027ll probably drop this and have the tests use the real extension.",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 32
+      },
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4f89e20_54045264",
+        "filename": "src/tint/ast/extension_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "nit: `tint::ast`",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 15
+      },
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbb0bcff_c40b479c",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "Once the extension allowlist is moved to Dawn, this will probably want to also return the enable\u0027s `tint::Source` locations, so that Dawn can produce a file:line:column error message on the relevant `enable` directive.",
+      "range": {
+        "startLine": 582,
+        "startChar": 36,
+        "endLine": 582,
+        "endChar": 57
+      },
       "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +209,70 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1bec6416_f9f30f90",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "David: See https://dawn-review.googlesource.com/c/tint/+/85024/comments/931dbf19_70e56cfb",
+      "parentUuid": "128685b5_2280cec7",
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97e2de15_1fce84a5",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "snake_case: `found_global_decl`. I think `after_global_decl` might be a better name.",
+      "range": {
+        "startLine": 310,
+        "startChar": 7,
+        "endLine": 310,
+        "endChar": 22
+      },
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56385a4f_d82e961a",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "Suggest: `enable directives must come before all global declarations`",
+      "range": {
+        "startLine": 321,
+        "startChar": 16,
+        "endLine": 321,
+        "endChar": 76
+      },
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad1d5391_000f0b28",
         "filename": "src/tint/reader/wgsl/parser_impl.cc",
         "patchSetId": 7
@@ -65,6 +284,29 @@
       "writtenOn": "2022-04-19T17:13:07Z",
       "side": 1,
       "message": "The naming here seems to be mixing semantic analysis into parsing.\n\nThe AST should represent what was parsed, so I would call the AST node an Enable rather than an Extension.",
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9956ebc_7b59b28a",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "`extension_node` or rename this to `extension` and `extension` to `name`.",
+      "range": {
+        "startLine": 362,
+        "startChar": 28,
+        "endLine": 362,
+        "endChar": 41
+      },
       "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +330,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f631d72_550ac6d6",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 3216,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "nit: I think this could be inlined in the place of its single use.",
+      "range": {
+        "startLine": 3216,
+        "startChar": 32,
+        "endLine": 3216,
+        "endChar": 54
+      },
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5ada613_cb6db4ca",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 3223,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "You\u0027ll want to add here:\n\n```\n  if (handle_error(t)) {\n    return Failure::kErrored;\n  }\n```",
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e5c9c67_a03f8f87",
         "filename": "src/tint/reader/wgsl/parser_impl.cc",
         "patchSetId": 7
@@ -99,6 +381,98 @@
       "writtenOn": "2022-04-19T17:13:07Z",
       "side": 1,
       "message": "I think this TODO is out of date.\nThe conversion will be handled above, at line 360, when calling NameToKind",
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76836237_c87eb573",
+        "filename": "src/tint/resolver/dependency_graph.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "directives do not effect the",
+      "range": {
+        "startLine": 166,
+        "startChar": 23,
+        "endLine": 166,
+        "endChar": 49
+      },
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3233ca5c_f4b74550",
+        "filename": "src/tint/resolver/dependency_graph.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "directive",
+      "range": {
+        "startLine": 529,
+        "startChar": 19,
+        "endLine": 529,
+        "endChar": 28
+      },
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d166487_8c4032df",
+        "filename": "src/tint/sem/extension.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "`tint::sem`",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 15
+      },
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8205db76_bb326019",
+        "filename": "src/tint/transform/single_entry_point.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-19T19:33:04Z",
+      "side": 1,
+      "message": "I don\u0027t quite follow. Please can you elaborate?",
+      "range": {
+        "startLine": 97,
+        "startChar": 6,
+        "endLine": 97,
+        "endChar": 48
+      },
       "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
