@@ -16,6 +16,23 @@
       "message": "ptal",
       "revId": "6f8cc88fb52b48337f5112e3966aa6c99a26970d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba488509_da47a061",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T06:49:10Z",
+      "side": 1,
+      "message": "nit: I think this can be fixed once Dawn is changed to not indent on namespaces. Maybe add a TODO with a tracking bug?",
+      "revId": "6f8cc88fb52b48337f5112e3966aa6c99a26970d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
