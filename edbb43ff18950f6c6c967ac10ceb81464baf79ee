@@ -16,6 +16,114 @@
       "message": "PTAL. One thing to note is this changes one of the Toggle names. I wasn\u0027t sure if that would have ripple effects.",
       "revId": "edbb43ff18950f6c6c967ac10ceb81464baf79ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9c2fb00_d243448c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T07:17:13Z",
+      "side": 1,
+      "message": "LGTM. TIL that \"dummy\" is not inclusive",
+      "revId": "edbb43ff18950f6c6c967ac10ceb81464baf79ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53e53feb_c84ef0d7",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T07:17:13Z",
+      "side": 1,
+      "message": "Would there be a way to associate a file to the number of failures (or inifinite for those we don\u0027t control) so we know we\u0027re not adding more non-inclusive language to these files?\n\nAlso if there\u0027s a failure, can we say that if it is unavoidable we should add an entry here?",
+      "revId": "edbb43ff18950f6c6c967ac10ceb81464baf79ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88689b5e_176eba46",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T07:17:13Z",
+      "side": 1,
+      "message": "The constant has actually been renamed, but only in macOS 12 I think.",
+      "revId": "edbb43ff18950f6c6c967ac10ceb81464baf79ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38ba51bc_a81e2e89",
+        "filename": "docs/dawn/testing.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T07:17:13Z",
+      "side": 1,
+      "message": "They finally changed it!",
+      "revId": "edbb43ff18950f6c6c967ac10ceb81464baf79ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71f346a0_4c56c1b3",
+        "filename": "scripts/extract.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T07:17:13Z",
+      "side": 1,
+      "message": "In general, can we split the general linting of Python file from the changes? It makes it hard to know what actually changed.\n\nIt\u0027s probably fine for this CL though, since it would be annoying to split the changes.",
+      "revId": "edbb43ff18950f6c6c967ac10ceb81464baf79ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe6ff5ff_a3d1edd2",
+        "filename": "scripts/extract.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T07:17:13Z",
+      "side": 1,
+      "message": "nit: it checks that ... ?",
+      "range": {
+        "startLine": 28,
+        "startChar": 55,
+        "endLine": 29,
+        "endChar": 10
+      },
+      "revId": "edbb43ff18950f6c6c967ac10ceb81464baf79ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
