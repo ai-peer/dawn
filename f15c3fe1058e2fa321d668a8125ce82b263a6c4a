@@ -50,6 +50,24 @@
       "message": "Why does this change happen?",
       "revId": "f15c3fe1058e2fa321d668a8125ce82b263a6c4a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3eccf8f_ffa16049",
+        "filename": "src/dawn/node/interop/Core.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-19T13:52:34Z",
+      "side": 1,
+      "message": "This seems to be some kind of fight between the clang-format in depot_tools and the one you get on a Mac. I don\u0027t actually know what the thing is that triggers it, but I\u0027ve definately seen it flpping back and forth.\n\nSo, hopefully after this change it won\u0027t happen again as `tools/format` and `git cl format` should be running the same formatter from depot_tools.",
+      "parentUuid": "26aa2a7f_22eb3a6c",
+      "revId": "f15c3fe1058e2fa321d668a8125ce82b263a6c4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
