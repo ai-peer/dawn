@@ -1,0 +1,163 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "723b2566_67eec42a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T13:09:26Z",
+      "side": 1,
+      "message": "Posting this partial review as I feel I\u0027m missing some things.",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0035d5ac_b60c8103",
+        "filename": "tools/src/cts/query/query.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T13:09:26Z",
+      "side": 1,
+      "message": "Do we have tests for this file?",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27299464_c0a72fe8",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T13:09:26Z",
+      "side": 1,
+      "message": "nit: this means that the in-memory representation of a tree can have a node that has both a \"Foo\" node that is a File, and a \"Foo\" node that is a Test. I don\u0027t think that it is possible?\n\nNote sure if it is worth the change, but we could maybe key only on strings and store the Target on the node? (or that\u0027s already implicitly part of the TreeNode.Query?)",
+      "range": {
+        "startLine": 58,
+        "startChar": 36,
+        "endLine": 58,
+        "endChar": 52
+      },
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c3401ba_19e7d7fd",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T13:09:26Z",
+      "side": 1,
+      "message": "nit: this is called a \"pre-order traversal\"",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac4e23dc_512ec423",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T13:09:26Z",
+      "side": 1,
+      "message": "Maybe mention that it starts from leaves and goes up?",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34e992eb_b9cf1533",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T13:09:26Z",
+      "side": 1,
+      "message": "Why do we merge per target type? I would have imagined that all target types at a node are the same, so we\u0027d try to map all childrens, map the ones that worked to new shallow nodes, and if all nodes were successfully mapped, then merge this node. So it would be:\n\n```\nmergedChildren :\u003d map[string]Data{}\nallChildrensMerged :\u003d true\nfor key,child {\n  childData :\u003d child.merge\n  if !childData {allChildrensMerged \u003d false}\n  mergedChildren[key] \u003d childData\n}\n\nif allChildrensMerged {\n  // Try to merged mergedChildren.keys()\n  // if success return the result of the merge\n}\n\nfor key :\u003d range.n.Children.keys() {\n  if mergedChildren[key] !\u003d nil {\n    // replace that child.\n  }\n}\n\nreturn nil;\n```",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "036dacc3_c775d9ce",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T13:09:26Z",
+      "side": 1,
+      "message": "nit: Can we always make sure that Children is initialized to the empty list? Or check that first and create the empty list? That way the creation of the TreeNode is done only in one place.",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7f3de8a_948d50f9",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T13:09:26Z",
+      "side": 1,
+      "message": "nit: why not return nil, err?",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc88e87d_5cd782cd",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T13:09:26Z",
+      "side": 1,
+      "message": "Why isn\u0027t Tree just a TreeNode with an empty query?",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
