@@ -158,6 +158,30 @@
       },
       "revId": "103ad0f9565753c781208a7bd97edead3da97c50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b9032ba_6b2984d0",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-19T00:06:54Z",
+      "side": 1,
+      "message": "Are we going to manually split the unit tests into \"using native\" and \"not using native\" later on then? Also, couldn\u0027t we run against the prebuilt abseil stuff from chromium as well?\n\n(I think the CL is fine as is btw, any further fixes can be deferred, but just for my understanding.)",
+      "parentUuid": "4da3e3e8_df0938ab",
+      "range": {
+        "startLine": 336,
+        "startChar": 12,
+        "endLine": 344,
+        "endChar": 98
+      },
+      "revId": "103ad0f9565753c781208a7bd97edead3da97c50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
