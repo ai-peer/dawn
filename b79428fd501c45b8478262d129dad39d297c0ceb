@@ -33,6 +33,40 @@
       "message": "LGTM, but I don\u0027t know python particularly well, nor this script.",
       "revId": "b79428fd501c45b8478262d129dad39d297c0ceb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95ea8860_ae17f4bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T06:59:31Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b79428fd501c45b8478262d129dad39d297c0ceb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8079ca59_a1afa63b",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-19T06:59:31Z",
+      "side": 1,
+      "message": "Don\u0027t tool like pylint actually prefer single-quote over double-quote?",
+      "revId": "b79428fd501c45b8478262d129dad39d297c0ceb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
