@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26c24281_af693b06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-04-19T17:13:07Z",
+      "side": 1,
+      "message": "I have some feedback on the AST node and the parsing.\nI suggest input from Ben for the AST and resolver changes, and Ben and James on the WGSL parsing changes.\n\nAlso, this is a very large change. I  would prefer to see it split into smaller parts:  \n\nFirst part:  AST, WGSL parser, resolver, and sem.\nSecond part: backends\n\n(But Ben should decide if that makes sense)\n\n",
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "738c296e_a402968b",
+        "filename": "src/tint/ast/extension.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-04-19T17:13:07Z",
+      "side": 1,
+      "message": "nit: You don\u0027t need the braces here.",
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "128685b5_2280cec7",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-04-19T17:13:07Z",
+      "side": 1,
+      "message": "It seems a little strange to have a loop around both kinds of declarations.\nThe simpler thing is to match the grammar more closely:  A loop for enable directives, then a loop for global declarations.\n\nI see how doing it the proposed way lets you generate a nicer error message when the user mixes two things.\n\nI defer to the WGSL parser owners: jrprice, bclayton on the style.",
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad1d5391_000f0b28",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-04-19T17:13:07Z",
+      "side": 1,
+      "message": "The naming here seems to be mixing semantic analysis into parsing.\n\nThe AST should represent what was parsed, so I would call the AST node an Enable rather than an Extension.",
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47472fe8_323bc6c2",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-04-19T17:13:07Z",
+      "side": 1,
+      "message": "Please remove word \"identifier\" here.  This is a muddy part of the WGSL spec where the form of the extension name is the same as the identifier pattern, but identifiers normally are the names used in a declaration.\n\nThe error message here works just as well saying only \"unsupported extension: \" ...\nAnd that avoids any confusion with WGSL declarations.",
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e5c9c67_a03f8f87",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 3224,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-04-19T17:13:07Z",
+      "side": 1,
+      "message": "I think this TODO is out of date.\nThe conversion will be handled above, at line 360, when calling NameToKind",
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
