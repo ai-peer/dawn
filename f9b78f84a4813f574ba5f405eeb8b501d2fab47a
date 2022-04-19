@@ -16,6 +16,23 @@
       "message": "Hmm I made a test CL at https://dawn-review.googlesource.com/c/dawn/+/87305\nBut that one passed linux-dawn-rel. Not sure if it\u0027s a good example (cuz there\u0027s no ts_sources change after all)\nI\u0027m not sure if simply adding DEPS to the action input is enough\n(I was looking at some how to write gn template doc)",
       "revId": "f9b78f84a4813f574ba5f405eeb8b501d2fab47a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "399b2717_6b9398da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-19T23:13:05Z",
+      "side": 1,
+      "message": "if future revisions have no new files - could we roll back to before some files were added (so ts_sources.txt would be dirty since it should have deletions)",
+      "revId": "f9b78f84a4813f574ba5f405eeb8b501d2fab47a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
