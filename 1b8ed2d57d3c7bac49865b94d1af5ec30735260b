@@ -86,6 +86,24 @@
       "parentUuid": "3411d06e_658bfe88",
       "revId": "1b8ed2d57d3c7bac49865b94d1af5ec30735260b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8b18d52_63c87e03",
+        "filename": "src/dawn/native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-20T14:36:03Z",
+      "side": 1,
+      "message": "Ack. It is more clear to put special case(s) in front of regular case. Otherwise, if regular case is at first, it might be too complicated (too many ifs) in order to filter out all special cases. I didn\u0027t think about that. Thanks. \n\nIt\u0027s done.",
+      "parentUuid": "7ba8875d_4291c334",
+      "revId": "1b8ed2d57d3c7bac49865b94d1af5ec30735260b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

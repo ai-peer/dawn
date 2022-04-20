@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b0c50ec_8bd49346",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-20T14:36:03Z",
+      "side": 1,
+      "message": "Thanks for your review, Corentin, Austin and Rafael! Merging now... ",
+      "revId": "a98cc746afdfd8a42cf09b01b08b036bd970f361",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
