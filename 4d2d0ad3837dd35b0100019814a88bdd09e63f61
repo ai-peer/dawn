@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec3c3901_39f80301",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-20T19:30:02Z",
+      "side": 1,
+      "message": "LGTM, but only downside is, IIUC, if we don\u0027t manage to create the window, then we may pass the test(s) silently without running any of the tests. (Not sure what was happening before...)",
+      "revId": "4d2d0ad3837dd35b0100019814a88bdd09e63f61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
