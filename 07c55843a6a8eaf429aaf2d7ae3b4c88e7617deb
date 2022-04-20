@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcfd8304_375ea39a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-20T21:23:32Z",
+      "side": 1,
+      "message": "LGTM for the most part. I\u0027m a bit concerned about this only because I am not sure if our window bots have git natively (and might have been getting it from depot_tools). Also, removing the print is fine, like Dan mentioned in the bug (but not the try/except).",
+      "revId": "07c55843a6a8eaf429aaf2d7ae3b4c88e7617deb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
