@@ -24,6 +24,7 @@ group("tests") {
     ":dawn_end2end_tests",
     ":dawn_perf_tests",
     ":dawn_unittests",
+    ":glfw_test",
   ]
 }
 
@@ -126,6 +127,19 @@ template("dawn_test") {
     }
 
     configs += [ "${dawn_root}/src/dawn/common:internal_config" ]
+  }
+}
+
+test("glfw_test") {
+  configs += [ "${dawn_root}/src/dawn/common:internal_config" ]
+  sources = [ "GLFWTest.cpp" ]
+  deps = [
+    "${dawn_root}/src/dawn/common",
+    "${dawn_root}/src/dawn/utils:glfw",
+  ]
+
+  if (defined(dawn_angle_dir)) {
+    deps += [ "${dawn_angle_dir}:libEGL" ]
   }
 }
 
