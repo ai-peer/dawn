@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09ede82a_416eb128",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-20T20:41:02Z",
+      "side": 1,
+      "message": "PTAL. This fixes the build/namespace error, but makes the CL sad due to the reformatting as I added a namespace.\n\nThoughts? Is this worth changing, or should it get left until after we reformat the namespaces to not indent in Dawn?",
+      "revId": "5431a2798e748fe8bd85e76e252d3ae7d4c3b4cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
