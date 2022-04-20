@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50654742_628d9f42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-20T16:28:49Z",
+      "side": 1,
+      "message": "now that the CTS lives inside dawn, we should be able to remove a bunch of lines from `expectations.txt` and see the tests pass",
+      "parentUuid": "6be1b655_0db561f7",
+      "revId": "c089abef9e8d3d66b6304f913118132421bc4596",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "083167c9_7ffe0f06",
         "filename": "src/dawn/native/IndirectDrawMetadata.cpp",
         "patchSetId": 4

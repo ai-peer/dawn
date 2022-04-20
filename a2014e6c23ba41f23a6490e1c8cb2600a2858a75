@@ -18,6 +18,69 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58a2fbc6_27bb78a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-20T16:28:49Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a2014e6c23ba41f23a6490e1c8cb2600a2858a75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1ac6a39_93a4ad0b",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-20T16:28:49Z",
+      "side": 1,
+      "message": "nit: factor this out in a variable?\n\nI don\u0027t think trying to short-circuit computation in if statement will help since it\u0027ll always need to get evaluated below when we call `AddIndirectDraw` anyway.",
+      "range": {
+        "startLine": 175,
+        "startChar": 45,
+        "endLine": 176,
+        "endChar": 89
+      },
+      "revId": "a2014e6c23ba41f23a6490e1c8cb2600a2858a75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbf90cc0_32e29d75",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-20T16:28:49Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 227,
+        "startChar": 41,
+        "endLine": 228,
+        "endChar": 89
+      },
+      "revId": "a2014e6c23ba41f23a6490e1c8cb2600a2858a75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5d6effd_e5f4f6d6",
