@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8e109f69_1160db26",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-20T19:30:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4d4d8b6_13cab6d7",
+      "range": {
+        "startLine": 145,
+        "startChar": 76,
+        "endLine": 145,
+        "endChar": 77
+      },
+      "revId": "22077c378a0ff75da83e8ed25402b8a14a55050a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "eb3c70ce_5cc18ad4",
         "filename": "src/dawn/native/ExternalTexture.cpp",
         "patchSetId": 7
@@ -54,6 +78,30 @@
       "writtenOn": "2022-04-20T19:21:48Z",
       "side": 1,
       "message": "note: I haven\u0027t checked the constants here. Assuming these are good.",
+      "range": {
+        "startLine": 156,
+        "startChar": 44,
+        "endLine": 158,
+        "endChar": 92
+      },
+      "revId": "22077c378a0ff75da83e8ed25402b8a14a55050a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "180a11f8_3bee288b",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-20T19:30:11Z",
+      "side": 1,
+      "message": "https://source.chromium.org/chromium/chromium/src/+/main:third_party/skia/src/core/SkYUVMath.cpp;l\u003d55\n\nThis is kind of just temporary anyway. Plan is to take the constants as params from Chromium and not to store them in Dawn.",
+      "parentUuid": "eb3c70ce_5cc18ad4",
       "range": {
         "startLine": 156,
         "startChar": 44,
@@ -77,6 +125,30 @@
       "writtenOn": "2022-04-20T19:21:48Z",
       "side": 1,
       "message": "This comment doesn\u0027t seem right. I think you mean:\n\n```\n// color \u003d vec4\u003cf32\u003e(plane_0_call.r, plane_1_call.rg, 1.0) *\n//         params.yuvToRgbConversionMatrix;\n```",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 63
+      },
+      "revId": "22077c378a0ff75da83e8ed25402b8a14a55050a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d09d728_a847b260",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-20T19:30:11Z",
+      "side": 1,
+      "message": "Right. Good catch.",
+      "parentUuid": "46fccde0_b24a4134",
       "range": {
         "startLine": 292,
         "startChar": 0,
