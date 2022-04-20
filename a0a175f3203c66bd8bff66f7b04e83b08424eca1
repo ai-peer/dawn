@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae061bcb_c53fdcde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-20T23:08:15Z",
+      "side": 1,
+      "message": "Sorry, it looks like there\u0027s one more test file that needs updating:\n\n`./test/tint/test-all.sh \u003cpath-to-tint-exe\u003e --generate-expected --filter builtins/textureLoad/texture_external_param.wgsl`\n\nYou can also try without the `--filter` flag - but with local testing, it appears that some files get deleted, which they shouldn\u0027t. I\u0027ll investigate.",
+      "revId": "a0a175f3203c66bd8bff66f7b04e83b08424eca1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
