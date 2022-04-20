@@ -16,6 +16,24 @@
       "message": "I\u0027ll need help figuring out the Kokoro error as well. ",
       "revId": "67cf90ca9385dcd559b4b2f785c8db075735a4af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c31c3ff7_fd5e443d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-20T19:40:58Z",
+      "side": 1,
+      "message": "You need to run:\n\n`./test/tint/test-all.sh \u003cpath-to-tint-exe\u003e --generate-expected --filter builtins/gen/**.wgsl`",
+      "parentUuid": "74539ffe_570aabe3",
+      "revId": "67cf90ca9385dcd559b4b2f785c8db075735a4af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
