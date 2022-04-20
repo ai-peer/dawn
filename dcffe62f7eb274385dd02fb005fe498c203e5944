@@ -16,6 +16,24 @@
       "message": "The commit should probably be updated.",
       "revId": "dcffe62f7eb274385dd02fb005fe498c203e5944",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b8f6858_fae8ba28",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-20T16:19:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae40bd25_69b8dda6",
+      "revId": "dcffe62f7eb274385dd02fb005fe498c203e5944",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
