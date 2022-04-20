@@ -16,6 +16,24 @@
       "message": "LGTM, but only downside is, IIUC, if we don\u0027t manage to create the window, then we may pass the test(s) silently without running any of the tests. (Not sure what was happening before...)",
       "revId": "4d2d0ad3837dd35b0100019814a88bdd09e63f61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5103c8a5_a0a83c4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-20T19:31:57Z",
+      "side": 1,
+      "message": "I think this shouldn\u0027t happen because this occurs in CreateInstanceAndDiscoverAdapters.\n\nThe adapters will never get discovered, so the tests won\u0027t get initializied on those adapters.\n\nSo it\u0027s not that they would pass silently, but rather, not run at all. It should be clear from the info printed though that those adapters failed to get discovered.",
+      "parentUuid": "ec3c3901_39f80301",
+      "revId": "4d2d0ad3837dd35b0100019814a88bdd09e63f61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
