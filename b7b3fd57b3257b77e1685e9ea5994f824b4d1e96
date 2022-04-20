@@ -843,6 +843,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9026344c_f4e1b74d",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-20T17:38:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45fa9a72_0b8d974d",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56c31556_553ea3d6",
@@ -931,6 +949,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "589e2512_9dc72f42",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-20T17:38:43Z",
+      "side": 1,
+      "message": "It\u0027s mentioned on L25 and L42",
+      "parentUuid": "2452ef92_929a0061",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e062df86_d992f268",
@@ -962,6 +998,24 @@
       "side": 1,
       "message": "Due to cases. Added a comment.",
       "parentUuid": "e062df86_d992f268",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8d830a9_1c8b23bd",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-20T17:38:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64fe2395_f9367b56",
       "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
