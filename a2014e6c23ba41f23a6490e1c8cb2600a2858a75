@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f1d4820_a5c88472",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-20T22:39:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1ac6a39_93a4ad0b",
+      "range": {
+        "startLine": 175,
+        "startChar": 45,
+        "endLine": 176,
+        "endChar": 89
+      },
+      "revId": "a2014e6c23ba41f23a6490e1c8cb2600a2858a75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbf90cc0_32e29d75",
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c0fb1c5_1a657af3",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-20T22:39:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbf90cc0_32e29d75",
+      "range": {
+        "startLine": 227,
+        "startChar": 41,
+        "endLine": 228,
+        "endChar": 89
+      },
+      "revId": "a2014e6c23ba41f23a6490e1c8cb2600a2858a75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5d6effd_e5f4f6d6",
@@ -94,6 +142,24 @@
       "writtenOn": "2022-04-20T11:48:06Z",
       "side": 1,
       "message": "Also in a follow-up CL it might make sense to merges these two into usesVertexOrInstanceOffset because right now we have the OR of them everywhere so they don\u0027t need to be separated.",
+      "revId": "a2014e6c23ba41f23a6490e1c8cb2600a2858a75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e14167e2_3f7796a0",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-20T22:39:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f5d6effd_e5f4f6d6",
       "revId": "a2014e6c23ba41f23a6490e1c8cb2600a2858a75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
