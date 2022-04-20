@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88abb096_4dc933b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-20T22:14:52Z",
+      "side": 1,
+      "message": "LGTM. I agree with Loko\u0027s assessment of what stuff is in public_deps/deps and in general, making dawn_end2end_tests not depend on any internal things, but letting only files like DawnTest.cpp have the internal config. I think we could reorganize later if Corentin still has concerns",
+      "revId": "1db09ba369e59c1931bfd62c1a9cd517b4c529c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
