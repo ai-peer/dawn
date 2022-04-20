@@ -145,7 +145,7 @@ namespace dawn::native::vulkan {
         constexpr size_t kAlignment = 4u;
 
         uint32_t extraBytes = 0u;
-        if (GetUsage() & (wgpu::BufferUsage::Vertex | wgpu::BufferUsage::Index)) {
+        if (GetInternalUsage() & (wgpu::BufferUsage::Vertex | wgpu::BufferUsage::Index)) {
             // vkCmdSetIndexBuffer and vkCmdSetVertexBuffer are invalid if the offset
             // is equal to the whole buffer size. Allocate at least one more byte so it
             // is valid to setVertex/IndexBuffer with a zero-sized range at the end
@@ -187,7 +187,7 @@ namespace dawn::native::vulkan {
         createInfo.size = mAllocatedSize;
         // Add CopyDst for non-mappable buffer initialization with mappedAtCreation
         // and robust resource initialization.
-        createInfo.usage = VulkanBufferUsage(GetUsage() | wgpu::BufferUsage::CopyDst);
+        createInfo.usage = VulkanBufferUsage(GetInternalUsage() | wgpu::BufferUsage::CopyDst);
         createInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
         createInfo.queueFamilyIndexCount = 0;
         createInfo.pQueueFamilyIndices = 0;
@@ -202,7 +202,7 @@ namespace dawn::native::vulkan {
         device->fn.GetBufferMemoryRequirements(device->GetVkDevice(), mHandle, &requirements);
 
         MemoryKind requestKind = MemoryKind::Linear;
-        if (GetUsage() & kMappableBufferUsages) {
+        if (GetInternalUsage() & kMappableBufferUsages) {
             requestKind = MemoryKind::LinearMappable;
         }
         DAWN_TRY_ASSIGN(mMemoryAllocation,

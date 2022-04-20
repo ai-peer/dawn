@@ -295,7 +295,7 @@ namespace dawn::native {
         Ref<BufferBase> validatedIndirectBuffer = scratchBuffer.GetBuffer();
 
         Ref<BindGroupBase> validationBindGroup;
-        ASSERT(indirectBuffer->GetUsage() & kInternalStorageBuffer);
+        ASSERT(indirectBuffer->GetInternalUsage() & kInternalStorageBuffer);
         DAWN_TRY_ASSIGN(validationBindGroup,
                         utils::MakeBindGroup(device, layout,
                                              {

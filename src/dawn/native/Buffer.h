@@ -56,7 +56,12 @@ namespace dawn::native {
 
         uint64_t GetSize() const;
         uint64_t GetAllocatedSize() const;
+
+        // |GetUsage| returns the usage with which the buffer was created using the base WebGPU
+        // API. Dawn may add additional usages for internal state tracking. |GetInternalUsage|
+        // returns the union of base usage and the usages added internally.
         wgpu::BufferUsage GetUsage() const;
+        wgpu::BufferUsage GetInternalUsage() const;
 
         MaybeError MapAtCreation();
         void OnMapRequestCompleted(MapRequestID mapID, WGPUBufferMapAsyncStatus status);
@@ -117,6 +122,7 @@ namespace dawn::native {
 
         uint64_t mSize = 0;
         wgpu::BufferUsage mUsage = wgpu::BufferUsage::None;
+        wgpu::BufferUsage mInternalUsage = wgpu::BufferUsage::None;
         BufferState mState;
         bool mIsDataInitialized = false;
 
