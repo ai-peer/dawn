@@ -52,6 +52,24 @@
       "parentUuid": "5103c8a5_a0a83c4e",
       "revId": "4d2d0ad3837dd35b0100019814a88bdd09e63f61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dca93e3c_c769d9c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-20T19:57:45Z",
+      "side": 1,
+      "message": "mm true - though I don\u0027t know if we can avoid this. By default we try to run tests on all the available adapters. But there\u0027s no safeguards that would find out if the vulkan driver was completely uninstalled on some system and no tests ran at all. I guess I can make these ASSERTs instead? But not sure how much it helps since creation of the context can also fail somewhere else as well (and in this case, it does fail after making the window on our bots where GL is unavailable).",
+      "parentUuid": "ede3a6f9_9930294b",
+      "revId": "4d2d0ad3837dd35b0100019814a88bdd09e63f61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
