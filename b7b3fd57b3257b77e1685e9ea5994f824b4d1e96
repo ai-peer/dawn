@@ -91,6 +91,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "26be152d_cedd7814",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T13:22:38Z",
+      "side": 1,
+      "message": "nit: Given the other review comment can we explain that this case can actually happen with a directory and a .spec.ts?",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27299464_c0a72fe8",
         "filename": "tools/src/cts/query/tree.go",
         "patchSetId": 2
@@ -162,6 +179,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96f439a6_14f7376a",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T13:22:38Z",
+      "side": 1,
+      "message": "[1] Following up on the conversation offline, I re-read this CL assuming that Nodes can have mixed Target children. However I think it should be possible to prevent it by making sure no spec.ts file in the cts has the same name a a subdirectory of its directory. We have access to the listings in cts/tools/presubmit.ts so that should be relatively easy to add and would simplify the code heavily. Likewise for making the CTS query parsing strict (or at least what this tool supports).",
+      "parentUuid": "d9763afe_768b1cc9",
+      "range": {
+        "startLine": 58,
+        "startChar": 36,
+        "endLine": 58,
+        "endChar": 52
+      },
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c3401ba_19e7d7fd",
         "filename": "tools/src/cts/query/tree.go",
         "patchSetId": 2
@@ -191,6 +232,24 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "3c3401ba_19e7d7fd",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a653c2fd_18344983",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T13:22:38Z",
+      "side": 1,
+      "message": "This comment was meant to suggest replacing the manual description of the visit with that term ;)",
+      "parentUuid": "13bdacbd_b88196be",
       "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -232,6 +291,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d54f5357_1b5d18f8",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T13:22:38Z",
+      "side": 1,
+      "message": "nit: Returns the merge data if this node is completely merged, nil otherwise.",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "34e992eb_b9cf1533",
         "filename": "tools/src/cts/query/tree.go",
         "patchSetId": 2
@@ -261,6 +337,29 @@
       "side": 1,
       "message": "\u003e Why do we merge per target type?\n\nBecause a merged node needs to end in a wildcard, and a wildcard needs to have a target delimiter. So only target types can be merged.\n\nExample: `a:b:*` is a merged tree, not `a:b`.",
       "parentUuid": "34e992eb_b9cf1533",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68b13490_5488399e",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T13:22:38Z",
+      "side": 1,
+      "message": "Why is this conversion necessary? The type of the key is lost?",
+      "range": {
+        "startLine": 176,
+        "startChar": 2,
+        "endLine": 176,
+        "endChar": 21
+      },
       "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -317,6 +416,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aae21428_172a3cf8",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T13:22:38Z",
+      "side": 1,
+      "message": "That\u0027s pretty cool.",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc88e87d_5cd782cd",
@@ -366,6 +482,125 @@
       "side": 1,
       "message": "Thanks, I didn\u0027t realize that was a thing.",
       "parentUuid": "ce041677_59a4b821",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c38dd158_754ed66b",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T13:22:38Z",
+      "side": 1,
+      "message": "u-nit: Shouldn\u0027t this whole function be root.merge(t.TreeNode) and if it returns non-nil then we create a new TreeNode(*)?\n\nThat might  never happen in practice so feel free to ignore.",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3b05cd6_06cd94ff",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T13:22:38Z",
+      "side": 1,
+      "message": "Don\u0027t we have the invariant that a node called * can\u0027t have children because it is already merged? So in this case we\u0027d just stop and do nothing.",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b12313a_8d7790ed",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T13:22:38Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the merged child be replaced in the parent? My understanding of the comment for ReduceTo is that it reduces the whole subtree including the node pointed by the query.",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56c31556_553ea3d6",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T13:22:38Z",
+      "side": 1,
+      "message": "This looks correct but would also get simplified by [1]",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34e3a393_8e6310d2",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T13:22:38Z",
+      "side": 1,
+      "message": "I\u0027m not sure why we special case Cases, aren\u0027t subtree for cases also making a tree of nodes?",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e062df86_d992f268",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T13:22:38Z",
+      "side": 1,
+      "message": "When does that happen? It seems that if a query gets us to a node, then all children of that node should be contained in that query, no?",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48c7845f_09edf005",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T13:22:38Z",
+      "side": 1,
+      "message": "That\u0027s [1] again :)",
       "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
