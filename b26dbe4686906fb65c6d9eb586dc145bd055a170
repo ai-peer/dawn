@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04a406f6_8c0dddfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T11:24:37Z",
+      "side": 1,
+      "message": "+1 on Ben\u0027s comment too.",
+      "revId": "b26dbe4686906fb65c6d9eb586dc145bd055a170",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00015d5a_fc816d90",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T11:24:37Z",
+      "side": 1,
+      "message": "nit: Why -0.000000f instead of just 0.0?",
+      "range": {
+        "startLine": 154,
+        "startChar": 57,
+        "endLine": 154,
+        "endChar": 66
+      },
+      "revId": "b26dbe4686906fb65c6d9eb586dc145bd055a170",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b69a83d0_c82b1f9a",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T11:24:37Z",
+      "side": 1,
+      "message": "Why did the result change, shouldn\u0027t we still be doing the same conversion as the previous code since it also referenced constants in Skia?",
+      "revId": "b26dbe4686906fb65c6d9eb586dc145bd055a170",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
