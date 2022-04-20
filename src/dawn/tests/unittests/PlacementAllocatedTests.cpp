@@ -18,8 +18,6 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
-using namespace testing;
-
 namespace {
 
     enum class DestructedClass {
@@ -32,11 +30,11 @@ namespace {
         MOCK_METHOD(void, Call, (void*, DestructedClass));
     };
 
-    std::unique_ptr<StrictMock<MockDestructor>> mockDestructor;
+    std::unique_ptr<testing::StrictMock<MockDestructor>> mockDestructor;
 
-    class PlacementAllocatedTests : public Test {
+    class PlacementAllocatedTests : public testing::Test {
         void SetUp() override {
-            mockDestructor = std::make_unique<StrictMock<MockDestructor>>();
+            mockDestructor = std::make_unique<testing::StrictMock<MockDestructor>>();
         }
 
         void TearDown() override {
@@ -81,7 +79,7 @@ TEST_F(PlacementAllocatedTests, DeletingDerivedClassCallsBaseDestructor) {
     Bar* bar = new (ptr) Bar();
 
     {
-        InSequence s;
+        testing::InSequence s;
         EXPECT_CALL(*mockDestructor, Call(bar, DestructedClass::Bar));
         EXPECT_CALL(*mockDestructor, Call(bar, DestructedClass::Foo));
         delete bar;
@@ -102,7 +100,7 @@ TEST_F(PlacementAllocatedTests, DeletingBaseClassCallsDerivedDestructor) {
     Foo* foo = new (ptr) Bar();
 
     {
-        InSequence s;
+        testing::InSequence s;
         EXPECT_CALL(*mockDestructor, Call(foo, DestructedClass::Bar));
         EXPECT_CALL(*mockDestructor, Call(foo, DestructedClass::Foo));
         delete foo;

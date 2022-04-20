@@ -17,8 +17,6 @@
 #include "dawn/tests/DawnTest.h"
 #include "gmock/gmock.h"
 
-using namespace testing;
-
 class MockMapCallback {
   public:
     MOCK_METHOD(void, Call, (WGPUBufferMapAsyncStatus status, void* userdata));

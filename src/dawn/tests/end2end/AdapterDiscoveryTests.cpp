@@ -45,8 +45,6 @@
 
 namespace {
 
-    using namespace testing;
-
     class AdapterDiscoveryTests : public ::testing::Test {};
 
 #if defined(DAWN_ENABLE_BACKEND_VULKAN)
@@ -313,11 +311,11 @@ namespace {
     TEST_F(AdapterCreationTest, DefaultAdapter) {
         wgpu::RequestAdapterOptions options = {};
 
-        MockCallback<WGPURequestAdapterCallback> cb;
+        testing::MockCallback<WGPURequestAdapterCallback> cb;
 
         WGPUAdapter cAdapter = nullptr;
-        EXPECT_CALL(cb, Call(WGPURequestAdapterStatus_Success, _, nullptr, this))
-            .WillOnce(SaveArg<1>(&cAdapter));
+        EXPECT_CALL(cb, Call(WGPURequestAdapterStatus_Success, testing::_, nullptr, this))
+            .WillOnce(testing::SaveArg<1>(&cAdapter));
         instance.RequestAdapter(&options, cb.Callback(), cb.MakeUserdata(this));
 
         wgpu::Adapter adapter = wgpu::Adapter::Acquire(cAdapter);
@@ -328,18 +326,18 @@ namespace {
     TEST_F(AdapterCreationTest, NullGivesDefaultAdapter) {
         wgpu::RequestAdapterOptions options = {};
 
-        MockCallback<WGPURequestAdapterCallback> cb;
+        testing::MockCallback<WGPURequestAdapterCallback> cb;
 
         WGPUAdapter cAdapter = nullptr;
-        EXPECT_CALL(cb, Call(WGPURequestAdapterStatus_Success, _, nullptr, this))
-            .WillOnce(SaveArg<1>(&cAdapter));
+        EXPECT_CALL(cb, Call(WGPURequestAdapterStatus_Success, testing::_, nullptr, this))
+            .WillOnce(testing::SaveArg<1>(&cAdapter));
         instance.RequestAdapter(&options, cb.Callback(), cb.MakeUserdata(this));
 
         wgpu::Adapter adapter = wgpu::Adapter::Acquire(cAdapter);
         EXPECT_EQ(adapter != nullptr, anyAdapterAvailable);
 
-        EXPECT_CALL(cb, Call(WGPURequestAdapterStatus_Success, _, nullptr, this + 1))
-            .WillOnce(SaveArg<1>(&cAdapter));
+        EXPECT_CALL(cb, Call(WGPURequestAdapterStatus_Success, testing::_, nullptr, this + 1))
+            .WillOnce(testing::SaveArg<1>(&cAdapter));
         instance.RequestAdapter(nullptr, cb.Callback(), cb.MakeUserdata(this + 1));
 
         wgpu::Adapter adapter2 = wgpu::Adapter::Acquire(cAdapter);
@@ -351,11 +349,11 @@ namespace {
         wgpu::RequestAdapterOptions options = {};
         options.forceFallbackAdapter = true;
 
-        MockCallback<WGPURequestAdapterCallback> cb;
+        testing::MockCallback<WGPURequestAdapterCallback> cb;
 
         WGPUAdapter cAdapter = nullptr;
-        EXPECT_CALL(cb, Call(WGPURequestAdapterStatus_Success, _, nullptr, this))
-            .WillOnce(SaveArg<1>(&cAdapter));
+        EXPECT_CALL(cb, Call(WGPURequestAdapterStatus_Success, testing::_, nullptr, this))
+            .WillOnce(testing::SaveArg<1>(&cAdapter));
         instance.RequestAdapter(&options, cb.Callback(), cb.MakeUserdata(this));
 
         wgpu::Adapter adapter = wgpu::Adapter::Acquire(cAdapter);
@@ -374,11 +372,11 @@ namespace {
         wgpu::RequestAdapterOptions options = {};
         options.powerPreference = wgpu::PowerPreference::HighPerformance;
 
-        MockCallback<WGPURequestAdapterCallback> cb;
+        testing::MockCallback<WGPURequestAdapterCallback> cb;
 
         WGPUAdapter cAdapter = nullptr;
-        EXPECT_CALL(cb, Call(WGPURequestAdapterStatus_Success, _, nullptr, this))
-            .WillOnce(SaveArg<1>(&cAdapter));
+        EXPECT_CALL(cb, Call(WGPURequestAdapterStatus_Success, testing::_, nullptr, this))
+            .WillOnce(testing::SaveArg<1>(&cAdapter));
         instance.RequestAdapter(&options, cb.Callback(), cb.MakeUserdata(this));
 
         wgpu::Adapter adapter = wgpu::Adapter::Acquire(cAdapter);
@@ -395,11 +393,11 @@ namespace {
         wgpu::RequestAdapterOptions options = {};
         options.powerPreference = wgpu::PowerPreference::LowPower;
 
-        MockCallback<WGPURequestAdapterCallback> cb;
+        testing::MockCallback<WGPURequestAdapterCallback> cb;
 
         WGPUAdapter cAdapter = nullptr;
-        EXPECT_CALL(cb, Call(WGPURequestAdapterStatus_Success, _, nullptr, this))
-            .WillOnce(SaveArg<1>(&cAdapter));
+        EXPECT_CALL(cb, Call(WGPURequestAdapterStatus_Success, testing::_, nullptr, this))
+            .WillOnce(testing::SaveArg<1>(&cAdapter));
         instance.RequestAdapter(&options, cb.Callback(), cb.MakeUserdata(this));
 
         wgpu::Adapter adapter = wgpu::Adapter::Acquire(cAdapter);
