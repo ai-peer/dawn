@@ -50,6 +50,24 @@
       "message": "I think we might need to move this logic in RecordBufferTextureCopyWithBufferHandle because IIRC it is used directly in the WriteTexture case.\n\nAlso slight nit to first handle the special case by calling recursively, then handle the normal case.",
       "revId": "1b8ed2d57d3c7bac49865b94d1af5ec30735260b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3411d06e_658bfe88",
+        "filename": "src/dawn/native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-20T06:53:14Z",
+      "side": 1,
+      "message": "WriteTexture is always correct. If there are rowsPerImage paddings, writeTexture actually compacts the data and removes the pure padding rows in order to save staging buffer. The call stack is WriteTextureImpl -\u003e UploadTextureDataAligningBytesPerRowAndOffset -\u003e CopyTextureData. So there are no rowsPerImage paddings for WriteTexture\u0027s buffer to texture copy (from Staging buffer to texture), and it works fine on D3D12.\n\nIn CTS tests, a lot WriteTexture calls are followed by T2BCopy in order to verify the data in texture. It is the T2BCopy lead to failures on D3D12, not WriteTexture itself. \n\nSo, I feel like we should keep the workaround code here? \n\nWhat do you mean call it recursively, do we still need to do this after the fact I explained above? Any examples if it is still needed?",
+      "parentUuid": "8c78374b_fa128580",
+      "revId": "1b8ed2d57d3c7bac49865b94d1af5ec30735260b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

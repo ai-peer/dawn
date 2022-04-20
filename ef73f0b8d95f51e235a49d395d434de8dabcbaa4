@@ -147,6 +147,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eba17d80_d75eb4be",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-20T06:53:14Z",
+      "side": 1,
+      "message": "It\u0027s done for the toggle name.\n\nRegarding the prefix for existing toggles, I will do that in follow-up patch according to your suggestion, Corentin and Austin.",
+      "parentUuid": "457a0caf_6497a0c5",
+      "range": {
+        "startLine": 255,
+        "startChar": 21,
+        "endLine": 255,
+        "endChar": 70
+      },
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca1ffcbe_5969e11a",
@@ -371,6 +395,30 @@
         "startChar": 0,
         "endLine": 365,
         "endChar": 1
+      },
+      "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5e41d0d_1fff352b",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-04-20T06:53:14Z",
+      "side": 1,
+      "message": "I used GetAllocatedSize() instead. It makes more sense because it is the real buffer size on a specific platform like D3D12. And the error message is the allocated size (it might be the same with GetSize). I tried to add Uniform usage and tested it via the new tests at RequiredBufferSizeInCopyTests.cpp. \n\nHowever, it doesn\u0027t change the judgement whether the buffer is big enough. Because allocated size just make the size a little bigger and to be aligned to 256 if it is not aligned (because of data on the last row), however, D3D12 requires storage for pure rowsPerImage paddings, which is a multiple of 256. So the allocated size is always smaller than D3D12\u0027s requirement, just like GetSize().",
+      "parentUuid": "ba702c3e_610bd38d",
+      "range": {
+        "startLine": 365,
+        "startChar": 38,
+        "endLine": 365,
+        "endChar": 45
       },
       "revId": "ef73f0b8d95f51e235a49d395d434de8dabcbaa4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
