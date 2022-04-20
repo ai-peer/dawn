@@ -138,11 +138,12 @@ namespace dawn::native {
         : ApiObjectBase(device, descriptor->label),
           mSize(descriptor->size),
           mUsage(descriptor->usage),
+          mInternalUsage(descriptor->usage),
           mState(BufferState::Unmapped) {
         // Add readonly storage usage if the buffer has a storage usage. The validation rules in
         // ValidateSyncScopeResourceUsage will make sure we don't use both at the same time.
-        if (mUsage & wgpu::BufferUsage::Storage) {
-            mUsage |= kReadOnlyStorageBuffer;
+        if (mInternalUsage & wgpu::BufferUsage::Storage) {
+            mInternalUsage |= kReadOnlyStorageBuffer;
         }
 
         // The query resolve buffer need to be used as a storage buffer in the internal compute
@@ -151,16 +152,16 @@ namespace dawn::native {
         // only compatible with InternalStorageBuffer binding type in BGL. It shouldn't be
         // compatible with StorageBuffer binding type and the query resolve buffer cannot be bound
         // as storage buffer if it's created without Storage usage.
-        if (mUsage & wgpu::BufferUsage::QueryResolve) {
-            mUsage |= kInternalStorageBuffer;
+        if (mInternalUsage & wgpu::BufferUsage::QueryResolve) {
+            mInternalUsage |= kInternalStorageBuffer;
         }
 
         // We also add internal storage usage for Indirect buffers for some transformations before
         // DispatchIndirect calls on the backend (e.g. validations, support of [[num_workgroups]] on
         // D3D12), since these transformations involve binding them as storage buffers for use in a
         // compute pass.
-        if (mUsage & wgpu::BufferUsage::Indirect) {
-            mUsage |= kInternalStorageBuffer;
+        if (mInternalUsage & wgpu::BufferUsage::Indirect) {
+            mInternalUsage |= kInternalStorageBuffer;
         }
 
         TrackInDevice();
@@ -223,6 +224,11 @@ namespace dawn::native {
     wgpu::BufferUsage BufferBase::GetUsage() const {
         ASSERT(!IsError());
         return mUsage;
+    }
+
+    wgpu::BufferUsage BufferBase::GetInternalUsage() const {
+        ASSERT(!IsError());
+        return mInternalUsage;
     }
 
     MaybeError BufferBase::MapAtCreation() {
