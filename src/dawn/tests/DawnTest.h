@@ -100,15 +100,21 @@
 #define EXPECT_TEXTURE_FLOAT16_EQ(...) \
     AddTextureExpectation<float, uint16_t>(__FILE__, __LINE__, __VA_ARGS__)
 
-#define ASSERT_DEVICE_ERROR_MSG(statement, matcher)             \
-    StartExpectDeviceError(matcher);                            \
+#define ASSERT_DEVICE_ERROR_MSG_ON(device, statement, matcher)  \
+    StartExpectDeviceError(device, matcher);                    \
     statement;                                                  \
     FlushWire();                                                \
-    if (!EndExpectDeviceError()) {                              \
+    if (!EndExpectDeviceError(device)) {                        \
         FAIL() << "Expected device error in:\n " << #statement; \
     }                                                           \
     do {                                                        \
     } while (0)
+
+#define ASSERT_DEVICE_ERROR_MSG(statement, matcher) \
+    ASSERT_DEVICE_ERROR_MSG_ON(this->device, statement, matcher)
+
+#define ASSERT_DEVICE_ERROR_ON(device, statement) \
+    ASSERT_DEVICE_ERROR_MSG_ON(device, statement, testing::_)
 
 #define ASSERT_DEVICE_ERROR(statement) ASSERT_DEVICE_ERROR_MSG(statement, testing::_)
 
@@ -311,10 +317,11 @@ class DawnTestBase {
 
     bool HasToggleEnabled(const char* workaround) const;
 
-    void StartExpectDeviceError(testing::Matcher<std::string> errorMatcher = testing::_);
-    bool EndExpectDeviceError();
+    void StartExpectDeviceError(wgpu::Device device = nullptr,
+                                testing::Matcher<std::string> errorMatcher = testing::_);
+    bool EndExpectDeviceError(wgpu::Device device = nullptr);
 
-    void ExpectDeviceDestruction();
+    void ExpectDeviceDestruction(wgpu::Device device = nullptr);
 
     bool HasVendorIdFilter() const;
     uint32_t GetVendorIdFilter() const;
@@ -512,6 +519,9 @@ class DawnTestBase {
 
     bool SupportsFeatures(const std::vector<wgpu::FeatureName>& features);
 
+    // Exposed device creation helper for tests to use when needing more than 1 device.
+    wgpu::Device CreateDevice(std::string isolationKey = "");
+
     // Called in SetUp() to get the features required to be enabled in the tests. The tests must
     // check if the required features are supported by the adapter in this function and guarantee
     // the returned features are all supported by the adapter. The tests may provide different
@@ -532,9 +542,26 @@ class DawnTestBase {
     AdapterTestParam mParam;
     std::unique_ptr<utils::WireHelper> mWireHelper;
 
+    // Internal device creation function for default device creation with some optional overrides.
+    std::pair<wgpu::Device, WGPUDevice> CreateDeviceImpl(std::string isolationKey = "");
+
     // Tracking for validation errors
+    struct DeviceCallbackData {
+        DawnTestBase* testFixture;
+        // Use the raw pointer type of the device so we don't cause an extra reference.
+        WGPUDevice device;
+    };
+    struct DeviceCallbackHandler {
+        bool expectError = false;
+        bool errored = false;
+        testing::Matcher<std::string> errorMatcher;
+        bool expectDestruction = false;
+    };
     static void OnDeviceError(WGPUErrorType type, const char* message, void* userdata);
     static void OnDeviceLost(WGPUDeviceLostReason reason, const char* message, void* userdata);
+    std::unordered_map<WGPUDevice, std::unique_ptr<DeviceCallbackData>> mDeviceCallbackData;
+    std::unordered_map<WGPUDevice, DeviceCallbackHandler> mDeviceCallbackHandlers;
+
     bool mExpectError = false;
     bool mError = false;
     testing::Matcher<std::string> mErrorMatcher;
