@@ -68,6 +68,24 @@
       "parentUuid": "8c78374b_fa128580",
       "revId": "1b8ed2d57d3c7bac49865b94d1af5ec30735260b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ba8875d_4291c334",
+        "filename": "src/dawn/native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T11:31:16Z",
+      "side": 1,
+      "message": "Gotcha I forgot that WriteTexture compacts stuff. Ok to keep the code like this because RecordBufferTextureCopyWithBufferHandle\u0027s other caller in zero init does packed copies.\n\nStylistically I have a slight preference for doing\n\n```\n void DoStuff() {\n \n    // Handle the special case that blah blah\n    if (special case) {\n      mess with the arguments\n      DoStuff();\n      return;\n    }\n \n    // regular case\n }\n```\n\nThis makes things more clear when adding more workarounds in the future [1], and removes mental context as you go along the function. But since the rest of the CL is good, happy to land this way.\n\n[1] for example https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/CommandBufferMTL.mm;drc\u003de1f2dcd3b356eaa20bc1aaa977ca670838ec28c0;l\u003d1195",
+      "parentUuid": "3411d06e_658bfe88",
+      "revId": "1b8ed2d57d3c7bac49865b94d1af5ec30735260b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
