@@ -34,6 +34,24 @@
       "parentUuid": "ec3c3901_39f80301",
       "revId": "4d2d0ad3837dd35b0100019814a88bdd09e63f61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ede3a6f9_9930294b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-20T19:55:20Z",
+      "side": 1,
+      "message": "Right, but what I mean is that CQ will mark that as pass even though it was never ran, and we would have to check the logs manually.",
+      "parentUuid": "5103c8a5_a0a83c4e",
+      "revId": "4d2d0ad3837dd35b0100019814a88bdd09e63f61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
