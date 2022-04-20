@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f33118ed_abc1000b",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-20T20:11:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1b5660d3_a8f8a827",
+      "revId": "ea624be6c3cfba4641fb0b8c38e1c0c165088c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf689f6b_556bc9b5",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-04-19T12:43:30Z",
       "side": 1,
       "message": "I\u0027m not sure I understand this comment. What\u0027s the TODO?",
+      "revId": "ea624be6c3cfba4641fb0b8c38e1c0c165088c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53ca5033_d612d2ab",
+        "filename": "src/dawn/native/Instance.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-20T20:11:16Z",
+      "side": 1,
+      "message": "Ah, sorry removed. Was an artifact.",
+      "parentUuid": "cf689f6b_556bc9b5",
       "revId": "ea624be6c3cfba4641fb0b8c38e1c0c165088c54",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "092be1d2_11910b15",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-20T20:11:16Z",
+      "side": 1,
+      "message": "So actually, IIUC, this change actually restricts the dawn internals more than before. The source files in this set were already implicitly requiring internal, but was actually exposing the internals to the e2e tests also. With this change, only this set of files (which are all internal test infra) can see dawn internals and the e2e tests (aside from white box tests) cannot.\n\nAlso, I wanted to avoid adding SetPlatformForTesting in DawnNative to avoid polluting the native header for only testing purposes.",
+      "parentUuid": "ed0d6832_8eabfac7",
+      "revId": "ea624be6c3cfba4641fb0b8c38e1c0c165088c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08dddcb3_a7a9f3e6",
@@ -82,6 +136,24 @@
       "writtenOn": "2022-04-19T12:43:30Z",
       "side": 1,
       "message": "I think this needs to be public_deps to pass `gn check`. You\u0027ll need to cherry-pick https://dawn-review.googlesource.com/c/dawn/+/86861 because it got reverted (but will reland soon)",
+      "revId": "ea624be6c3cfba4641fb0b8c38e1c0c165088c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "385d0812_b9fca9fe",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-20T20:11:16Z",
+      "side": 1,
+      "message": "I think they can be private because the necessary ones are redeclared in the subsequent e2e/whitebox sets. Declaring them public here would mean that the e2e tests would have access to dawn internals which is what we are trying to avoid.",
+      "parentUuid": "08dddcb3_a7a9f3e6",
       "revId": "ea624be6c3cfba4641fb0b8c38e1c0c165088c54",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8190a8eb_97af0c41",
+        "filename": "src/dawn/tests/end2end/mocks/CachingInterfaceMock.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-20T20:11:16Z",
+      "side": 1,
+      "message": "I don\u0027t want to do that because although right now we should never re-store an entry, that is not the case later on because we may have some monolithic caches that would be overwriting.",
+      "parentUuid": "3c2b9ef3_552e67df",
+      "revId": "ea624be6c3cfba4641fb0b8c38e1c0c165088c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77289064_643fd198",
@@ -116,6 +206,24 @@
       "writtenOn": "2022-04-19T12:43:30Z",
       "side": 1,
       "message": "I think we need to call FlushWire() before the first GetHitCount() as well as we might be partially flushed for other reasons.",
+      "revId": "ea624be6c3cfba4641fb0b8c38e1c0c165088c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f0fcbf0_8532b7dd",
+        "filename": "src/dawn/tests/end2end/mocks/CachingInterfaceMock.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-20T20:11:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77289064_643fd198",
       "revId": "ea624be6c3cfba4641fb0b8c38e1c0c165088c54",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
