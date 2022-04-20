@@ -86,6 +86,24 @@
       "parentUuid": "3d367c54_5081b583",
       "revId": "503a1ae21f6277d8cb38119c00c6f23c35d71270",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "164a5b37_7852a32a",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-20T16:46:59Z",
+      "side": 1,
+      "message": "Done. Did brace initialization in most places, a few of them needed to be static_casts due to triggering other warnings.",
+      "parentUuid": "b8075627_b54f8d82",
+      "revId": "503a1ae21f6277d8cb38119c00c6f23c35d71270",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
