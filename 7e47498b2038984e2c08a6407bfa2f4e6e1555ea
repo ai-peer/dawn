@@ -16,6 +16,23 @@
       "message": "PTAL! Syncing up with spec changes at https://github.com/gpuweb/gpuweb/pull/2755 while I\u0027m thinking about them. 😊",
       "revId": "7e47498b2038984e2c08a6407bfa2f4e6e1555ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c93a743_6bd67199",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T06:55:27Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure that the texture dimension is always 2d because of https://dawn-review.googlesource.com/c/dawn/+/86622 so we can just hardcode wgpu::TExtureViewDimension::e2d.",
+      "revId": "7e47498b2038984e2c08a6407bfa2f4e6e1555ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
