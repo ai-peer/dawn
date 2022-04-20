@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "168c889d_48d73fe6",
+        "filename": "src/dawn/native/IndirectDrawMetadata.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-20T08:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4a7f9c3_260186bf",
+      "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b50b9d2_b91113f4",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba92c7bb_5c9e6ffc",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-20T08:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b50b9d2_b91113f4",
+      "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9427cf57_6ed38a9d",
@@ -82,6 +118,24 @@
       "writtenOn": "2022-04-19T12:25:25Z",
       "side": 1,
       "message": "nit: We could use input / output instead of client / validated. Same on the CPU side code. But let\u0027s do that as a follow up to avoid additional churn and noise in this CL.",
+      "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4ce0593_c3680474",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-20T08:13:39Z",
+      "side": 1,
+      "message": "Ack. I\u0027ll start a new CL after this one.",
+      "parentUuid": "9427cf57_6ed38a9d",
       "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +163,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f413584c_fffb3754",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-20T08:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "103ab829_822283d5",
+      "range": {
+        "startLine": 112,
+        "startChar": 74,
+        "endLine": 112,
+        "endChar": 76
+      },
+      "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ad77e1b_cb60bed7",
@@ -122,6 +200,24 @@
       "writtenOn": "2022-04-19T12:25:25Z",
       "side": 1,
       "message": "u-u-nit: since this is a constant 2 we could just unroll the loop, it would be more clear.",
+      "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "574e01ba_d3430298",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-20T08:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ad77e1b_cb60bed7",
       "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -143,6 +239,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7626766_393f4d59",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-20T08:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80d3e63a_e465b9a6",
+      "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bccdda36_c5fa9794",
@@ -160,6 +274,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1c2762b_666a547e",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-20T08:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bccdda36_c5fa9794",
+      "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec1553c4_e042c2f0",
@@ -173,6 +305,30 @@
       "writtenOn": "2022-04-19T12:25:25Z",
       "side": 1,
       "message": "This is new logic but seems valid because we need to check firstInstance. Is there a test in Dawn or in the CTS that checks this new behavior?",
+      "range": {
+        "startLine": 175,
+        "startChar": 20,
+        "endLine": 175,
+        "endChar": 41
+      },
+      "revId": "6669c51a41e2d12ec39a478b43a8e3a404f4e37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b7b0db1_a7039836",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-20T08:13:39Z",
+      "side": 1,
+      "message": "I have updated the Dawn tests to check for this behavior. I\u0027ll also be adding a CTS test.",
+      "parentUuid": "ec1553c4_e042c2f0",
       "range": {
         "startLine": 175,
         "startChar": 20,
