@@ -19,20 +19,17 @@
 #include "dawn/wire/WireClient.h"
 #include "dawn/wire/WireServer.h"
 
-using namespace testing;
-using namespace dawn::wire;
-
 WireTest::WireTest() {
 }
 
 WireTest::~WireTest() {
 }
 
-client::MemoryTransferService* WireTest::GetClientMemoryTransferService() {
+dawn::wire::client::MemoryTransferService* WireTest::GetClientMemoryTransferService() {
     return nullptr;
 }
 
-server::MemoryTransferService* WireTest::GetServerMemoryTransferService() {
+dawn::wire::server::MemoryTransferService* WireTest::GetServerMemoryTransferService() {
     return nullptr;
 }
 
@@ -42,27 +39,30 @@ void WireTest::SetUp() {
     WGPUDevice mockDevice = api.GetNewDevice();
 
     // This SetCallback call cannot be ignored because it is done as soon as we start the server
-    EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(_, _, _)).Times(Exactly(1));
-    EXPECT_CALL(api, OnDeviceSetLoggingCallback(_, _, _)).Times(Exactly(1));
-    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(_, _, _)).Times(Exactly(1));
+    EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(testing::_, testing::_, testing::_))
+        .Times(testing::Exactly(1));
+    EXPECT_CALL(api, OnDeviceSetLoggingCallback(testing::_, testing::_, testing::_))
+        .Times(testing::Exactly(1));
+    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(testing::_, testing::_, testing::_))
+        .Times(testing::Exactly(1));
     SetupIgnoredCallExpectations();
 
     mS2cBuf = std::make_unique<utils::TerribleCommandBuffer>();
     mC2sBuf = std::make_unique<utils::TerribleCommandBuffer>(mWireServer.get());
 
-    WireServerDescriptor serverDesc = {};
+    dawn::wire::WireServerDescriptor serverDesc = {};
     serverDesc.procs = &mockProcs;
     serverDesc.serializer = mS2cBuf.get();
     serverDesc.memoryTransferService = GetServerMemoryTransferService();
 
-    mWireServer.reset(new WireServer(serverDesc));
+    mWireServer.reset(new dawn::wire::WireServer(serverDesc));
     mC2sBuf->SetHandler(mWireServer.get());
 
-    WireClientDescriptor clientDesc = {};
+    dawn::wire::WireClientDescriptor clientDesc = {};
     clientDesc.serializer = mC2sBuf.get();
     clientDesc.memoryTransferService = GetClientMemoryTransferService();
 
-    mWireClient.reset(new WireClient(clientDesc));
+    mWireClient.reset(new dawn::wire::WireClient(clientDesc));
     mS2cBuf->SetHandler(mWireClient.get());
 
     dawnProcSetProcs(&dawn::wire::client::GetProcs());
@@ -77,7 +77,7 @@ void WireTest::SetUp() {
     // The GetQueue is done on WireClient startup so we expect it now.
     queue = wgpuDeviceGetQueue(device);
     apiQueue = api.GetNewQueue();
-    EXPECT_CALL(api, DeviceGetQueue(apiDevice)).WillOnce(Return(apiQueue));
+    EXPECT_CALL(api, DeviceGetQueue(apiDevice)).WillOnce(testing::Return(apiQueue));
     FlushClient();
 }
 
@@ -95,10 +95,11 @@ void WireTest::TearDown() {
         // These are called on server destruction to clear the callbacks. They must not be
         // called after the server is destroyed.
         EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, nullptr, nullptr))
-            .Times(Exactly(1));
-        EXPECT_CALL(api, OnDeviceSetLoggingCallback(apiDevice, nullptr, nullptr)).Times(Exactly(1));
+            .Times(testing::Exactly(1));
+        EXPECT_CALL(api, OnDeviceSetLoggingCallback(apiDevice, nullptr, nullptr))
+            .Times(testing::Exactly(1));
         EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, nullptr, nullptr))
-            .Times(Exactly(1));
+            .Times(testing::Exactly(1));
     }
     mWireServer = nullptr;
 }
@@ -112,7 +113,7 @@ void WireTest::DefaultApiDeviceWasReleased() {
 void WireTest::FlushClient(bool success) {
     ASSERT_EQ(mC2sBuf->Flush(), success);
 
-    Mock::VerifyAndClearExpectations(&api);
+    testing::Mock::VerifyAndClearExpectations(&api);
     SetupIgnoredCallExpectations();
 }
 
@@ -136,10 +137,11 @@ void WireTest::DeleteServer() {
         // These are called on server destruction to clear the callbacks. They must not be
         // called after the server is destroyed.
         EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, nullptr, nullptr))
-            .Times(Exactly(1));
-        EXPECT_CALL(api, OnDeviceSetLoggingCallback(apiDevice, nullptr, nullptr)).Times(Exactly(1));
+            .Times(testing::Exactly(1));
+        EXPECT_CALL(api, OnDeviceSetLoggingCallback(apiDevice, nullptr, nullptr))
+            .Times(testing::Exactly(1));
         EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, nullptr, nullptr))
-            .Times(Exactly(1));
+            .Times(testing::Exactly(1));
     }
     mWireServer = nullptr;
 }
@@ -149,5 +151,5 @@ void WireTest::DeleteClient() {
 }
 
 void WireTest::SetupIgnoredCallExpectations() {
-    EXPECT_CALL(api, DeviceTick(_)).Times(AnyNumber());
+    EXPECT_CALL(api, DeviceTick(testing::_)).Times(testing::AnyNumber());
 }

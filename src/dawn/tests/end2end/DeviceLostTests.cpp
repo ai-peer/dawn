@@ -22,8 +22,6 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
-using namespace testing;
-
 class MockDeviceLostCallback {
   public:
     MOCK_METHOD(void, Call, (WGPUDeviceLostReason reason, const char* message, void* userdata));
@@ -70,7 +68,7 @@ class DeviceLostTest : public DawnTest {
     }
 
     void LoseForTesting() {
-        EXPECT_CALL(*mockDeviceLostCallback, Call(WGPUDeviceLostReason_Undefined, _, this))
+        EXPECT_CALL(*mockDeviceLostCallback, Call(WGPUDeviceLostReason_Undefined, testing::_, this))
             .Times(1);
         device.LoseForTesting();
     }
@@ -424,13 +422,14 @@ TEST_P(DeviceLostTest, QueueOnSubmittedWorkDoneBeforeLossFails) {
 // Test that LostForTesting can only be called on one time
 TEST_P(DeviceLostTest, LoseForTestingOnce) {
     // First LoseForTesting call should occur normally. The callback is already set in SetUp.
-    EXPECT_CALL(*mockDeviceLostCallback, Call(WGPUDeviceLostReason_Undefined, _, this)).Times(1);
+    EXPECT_CALL(*mockDeviceLostCallback, Call(WGPUDeviceLostReason_Undefined, testing::_, this))
+        .Times(1);
     device.LoseForTesting();
 
     // Second LoseForTesting call should result in no callbacks. The LoseForTesting will return
     // without doing anything when it sees that device has already been lost.
     device.SetDeviceLostCallback(ToMockDeviceLostCallback, this);
-    EXPECT_CALL(*mockDeviceLostCallback, Call(_, _, this)).Times(0);
+    EXPECT_CALL(*mockDeviceLostCallback, Call(testing::_, testing::_, this)).Times(0);
     device.LoseForTesting();
 }
 
@@ -440,10 +439,11 @@ TEST_P(DeviceLostTest, DeviceLostDoesntCallUncapturedError) {
 
     // Set the uncaptured error callback which should not be called on
     // device lost.
-    MockCallback<WGPUErrorCallback> mockErrorCallback;
+    testing::MockCallback<WGPUErrorCallback> mockErrorCallback;
     device.SetUncapturedErrorCallback(mockErrorCallback.Callback(),
                                       mockErrorCallback.MakeUserdata(nullptr));
-    EXPECT_CALL(mockErrorCallback, Call(_, _, _)).Times(Exactly(0));
+    EXPECT_CALL(mockErrorCallback, Call(testing::_, testing::_, testing::_))
+        .Times(testing::Exactly(0));
     device.LoseForTesting();
 }
 

@@ -16,8 +16,6 @@
 
 #include "dawn/tests/MockCallback.h"
 
-using namespace testing;
-
 class MultipleDeviceTest : public ValidationTest {};
 
 // Test that it is invalid to submit a command buffer created on a different device.
@@ -48,10 +46,11 @@ TEST_F(MultipleDeviceTest, ValidatesSameDeviceCreatePipelineAsync) {
         pipelineDesc.compute.module = shaderModule;
         pipelineDesc.compute.entryPoint = "main";
 
-        StrictMock<MockCallback<WGPUCreateComputePipelineAsyncCallback>> creationCallback;
-        EXPECT_CALL(creationCallback,
-                    Call(WGPUCreatePipelineAsyncStatus_Success, NotNull(), _, this))
-            .WillOnce(WithArg<1>(Invoke(
+        testing::StrictMock<testing::MockCallback<WGPUCreateComputePipelineAsyncCallback>>
+            creationCallback;
+        EXPECT_CALL(creationCallback, Call(WGPUCreatePipelineAsyncStatus_Success,
+                                           testing::NotNull(), testing::_, this))
+            .WillOnce(testing::WithArg<1>(testing::Invoke(
                 [](WGPUComputePipeline pipeline) { wgpu::ComputePipeline::Acquire(pipeline); })));
         device.CreateComputePipelineAsync(&pipelineDesc, creationCallback.Callback(),
                                           creationCallback.MakeUserdata(this));
@@ -68,9 +67,10 @@ TEST_F(MultipleDeviceTest, ValidatesSameDeviceCreatePipelineAsync) {
         pipelineDesc.compute.module = shaderModule;
         pipelineDesc.compute.entryPoint = "main";
 
-        StrictMock<MockCallback<WGPUCreateComputePipelineAsyncCallback>> creationCallback;
+        testing::StrictMock<testing::MockCallback<WGPUCreateComputePipelineAsyncCallback>>
+            creationCallback;
         EXPECT_CALL(creationCallback,
-                    Call(WGPUCreatePipelineAsyncStatus_Error, nullptr, _, this + 1))
+                    Call(WGPUCreatePipelineAsyncStatus_Error, nullptr, testing::_, this + 1))
             .Times(1);
         device.CreateComputePipelineAsync(&pipelineDesc, creationCallback.Callback(),
                                           creationCallback.MakeUserdata(this + 1));

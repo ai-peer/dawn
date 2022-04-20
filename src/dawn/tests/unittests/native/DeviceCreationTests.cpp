@@ -25,9 +25,7 @@
 
 namespace {
 
-    using namespace testing;
-
-    class DeviceCreationTest : public Test {
+    class DeviceCreationTest : public testing::Test {
       protected:
         void SetUp() override {
             dawnProcSetProcs(&dawn::native::GetProcs());
@@ -143,9 +141,10 @@ namespace {
     TEST_F(DeviceCreationTest, RequestDeviceSuccess) {
         WGPUDevice cDevice;
         {
-            MockCallback<WGPURequestDeviceCallback> cb;
-            EXPECT_CALL(cb, Call(WGPURequestDeviceStatus_Success, NotNull(), nullptr, this))
-                .WillOnce(SaveArg<1>(&cDevice));
+            testing::MockCallback<WGPURequestDeviceCallback> cb;
+            EXPECT_CALL(cb,
+                        Call(WGPURequestDeviceStatus_Success, testing::NotNull(), nullptr, this))
+                .WillOnce(testing::SaveArg<1>(&cDevice));
 
             wgpu::DeviceDescriptor desc = {};
             adapter.RequestDevice(&desc, cb.Callback(), cb.MakeUserdata(this));
@@ -159,9 +158,10 @@ namespace {
     TEST_F(DeviceCreationTest, RequestDeviceNullDescriptorSuccess) {
         WGPUDevice cDevice;
         {
-            MockCallback<WGPURequestDeviceCallback> cb;
-            EXPECT_CALL(cb, Call(WGPURequestDeviceStatus_Success, NotNull(), nullptr, this))
-                .WillOnce(SaveArg<1>(&cDevice));
+            testing::MockCallback<WGPURequestDeviceCallback> cb;
+            EXPECT_CALL(cb,
+                        Call(WGPURequestDeviceStatus_Success, testing::NotNull(), nullptr, this))
+                .WillOnce(testing::SaveArg<1>(&cDevice));
 
             adapter.RequestDevice(nullptr, cb.Callback(), cb.MakeUserdata(this));
         }
@@ -172,8 +172,9 @@ namespace {
 
     // Test failing call to RequestDevice with invalid feature
     TEST_F(DeviceCreationTest, RequestDeviceFailure) {
-        MockCallback<WGPURequestDeviceCallback> cb;
-        EXPECT_CALL(cb, Call(WGPURequestDeviceStatus_Error, nullptr, NotNull(), this)).Times(1);
+        testing::MockCallback<WGPURequestDeviceCallback> cb;
+        EXPECT_CALL(cb, Call(WGPURequestDeviceStatus_Error, nullptr, testing::NotNull(), this))
+            .Times(1);
 
         wgpu::DeviceDescriptor desc = {};
         wgpu::FeatureName invalidFeature = static_cast<wgpu::FeatureName>(WGPUFeatureName_Force32);

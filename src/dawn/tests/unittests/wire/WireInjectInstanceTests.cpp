@@ -17,10 +17,7 @@
 #include "dawn/wire/WireClient.h"
 #include "dawn/wire/WireServer.h"
 
-using namespace testing;
-using namespace dawn::wire;
-
-namespace {
+namespace dawn::wire { namespace {
 
     class WireInjectInstanceTests : public WireTest {
       public:
@@ -42,8 +39,8 @@ namespace {
         WGPUSurfaceDescriptor surfaceDesc = {};
         wgpuInstanceCreateSurface(reservation.instance, &surfaceDesc);
         WGPUSurface serverSurface = api.GetNewSurface();
-        EXPECT_CALL(api, InstanceCreateSurface(serverInstance, NotNull()))
-            .WillOnce(Return(serverSurface));
+        EXPECT_CALL(api, InstanceCreateSurface(serverInstance, testing::NotNull()))
+            .WillOnce(testing::Return(serverSurface));
         FlushClient();
     }
 
@@ -87,7 +84,7 @@ namespace {
 
         // Deleting the server doesn't release a second reference.
         DeleteServer();
-        Mock::VerifyAndClearExpectations(&api);
+        testing::Mock::VerifyAndClearExpectations(&api);
     }
 
     // Test that a device reservation can be reclaimed. This is necessary to
@@ -116,4 +113,6 @@ namespace {
         }
     }
 
-}  // anonymous namespace
+    // TODO(https://crbug.com/dawn/1381) Remove when namespaces are not indented.
+    // NOLINTNEXTLINE(readability/namespace)
+}}  // namespace dawn::wire::
