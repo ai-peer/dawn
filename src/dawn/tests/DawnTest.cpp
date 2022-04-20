@@ -903,31 +903,9 @@ bool DawnTestBase::SupportsFeatures(const std::vector<wgpu::FeatureName>& featur
     return true;
 }
 
-void DawnTestBase::SetUp() {
-    {
-        // Find the adapter that exactly matches our adapter properties.
-        const auto& adapters = gTestEnv->GetInstance()->GetAdapters();
-        const auto& it = std::find_if(
-            adapters.begin(), adapters.end(), [&](const dawn::native::Adapter& adapter) {
-                wgpu::AdapterProperties properties;
-                adapter.GetProperties(&properties);
-
-                return (mParam.adapterProperties.selected &&
-                        properties.deviceID == mParam.adapterProperties.deviceID &&
-                        properties.vendorID == mParam.adapterProperties.vendorID &&
-                        properties.adapterType == mParam.adapterProperties.adapterType &&
-                        properties.backendType == mParam.adapterProperties.backendType &&
-                        strcmp(properties.name, mParam.adapterProperties.adapterName.c_str()) == 0);
-            });
-        ASSERT(it != adapters.end());
-        mBackendAdapter = *it;
-    }
-
-    // Setup the per-test platform. Tests can provide one by overloading CreateTestPlatform. This is
-    // NOT a thread-safe operation and is allowed here for testing only.
-    mTestPlatform = CreateTestPlatform();
-    dawn::native::FromAPI(gTestEnv->GetInstance()->Get())
-        ->SetPlatformForTesting(mTestPlatform.get());
+std::pair<wgpu::Device, WGPUDevice> DawnTestBase::CreateDeviceImpl(std::string isolationKey) {
+    // Always flush wire before creating a new device to avoid reuse of the same handle.
+    FlushWire();
 
     // Create the device from the adapter
     for (const char* forceEnabledWorkaround : mParam.forceEnabledWorkarounds) {
@@ -975,30 +953,18 @@ void DawnTestBase::SetUp() {
     togglesDesc.forceDisabledToggles = forceDisabledToggles.data();
     togglesDesc.forceDisabledTogglesCount = forceDisabledToggles.size();
 
-    std::tie(device, backendDevice) =
-        mWireHelper->RegisterDevice(mBackendAdapter.CreateDevice(&deviceDescriptor));
-    ASSERT_NE(nullptr, backendDevice);
+    wgpu::DawnCacheDeviceDescriptor cacheDesc = {};
+    togglesDesc.nextInChain = &cacheDesc;
+    cacheDesc.isolationKey = isolationKey.c_str();
 
-    std::string traceName =
-        std::string(::testing::UnitTest::GetInstance()->current_test_info()->test_suite_name()) +
-        "_" + ::testing::UnitTest::GetInstance()->current_test_info()->name();
-    mWireHelper->BeginWireTrace(traceName.c_str());
+    auto devices = mWireHelper->RegisterDevice(mBackendAdapter.CreateDevice(&deviceDescriptor));
+    wgpu::Device device = devices.first;
+    mDeviceCallbackData[device.Get()] =
+        std::unique_ptr<DeviceCallbackData>(new DeviceCallbackData{this, device.Get()});
+    mDeviceCallbackHandlers[device.Get()] = {};
 
-    queue = device.GetQueue();
-
-    device.SetUncapturedErrorCallback(OnDeviceError, this);
-    device.SetDeviceLostCallback(OnDeviceLost, this);
-#if defined(DAWN_ENABLE_BACKEND_DESKTOP_GL)
-    if (IsOpenGL()) {
-        glfwMakeContextCurrent(gTestEnv->GetOpenGLWindow());
-    }
-#endif  // defined(DAWN_ENABLE_BACKEND_DESKTOP_GL)
-#if defined(DAWN_ENABLE_BACKEND_OPENGLES)
-    if (IsOpenGLES()) {
-        glfwMakeContextCurrent(gTestEnv->GetOpenGLESWindow());
-    }
-#endif  // defined(DAWN_ENABLE_BACKEND_OPENGLES)
-
+    device.SetUncapturedErrorCallback(OnDeviceError, mDeviceCallbackData[device.Get()].get());
+    device.SetDeviceLostCallback(OnDeviceLost, mDeviceCallbackData[device.Get()].get());
     device.SetLoggingCallback(
         [](WGPULoggingType type, char const* message, void*) {
             switch (type) {
@@ -1017,6 +983,60 @@ void DawnTestBase::SetUp() {
             }
         },
         nullptr);
+    return devices;
+}
+
+wgpu::Device DawnTestBase::CreateDevice(std::string isolationKey) {
+    return CreateDeviceImpl(isolationKey).first;
+}
+
+void DawnTestBase::SetUp() {
+    {
+        // Find the adapter that exactly matches our adapter properties.
+        const auto& adapters = gTestEnv->GetInstance()->GetAdapters();
+        const auto& it = std::find_if(
+            adapters.begin(), adapters.end(), [&](const dawn::native::Adapter& adapter) {
+                wgpu::AdapterProperties properties;
+                adapter.GetProperties(&properties);
+
+                return (mParam.adapterProperties.selected &&
+                        properties.deviceID == mParam.adapterProperties.deviceID &&
+                        properties.vendorID == mParam.adapterProperties.vendorID &&
+                        properties.adapterType == mParam.adapterProperties.adapterType &&
+                        properties.backendType == mParam.adapterProperties.backendType &&
+                        strcmp(properties.name, mParam.adapterProperties.adapterName.c_str()) == 0);
+            });
+        ASSERT(it != adapters.end());
+        mBackendAdapter = *it;
+    }
+
+    // Setup the per-test platform. Tests can provide one by overloading CreateTestPlatform. This is
+    // NOT a thread-safe operation and is allowed here for testing only.
+    mTestPlatform = CreateTestPlatform();
+    dawn::native::FromAPI(gTestEnv->GetInstance()->Get())
+        ->SetPlatformForTesting(mTestPlatform.get());
+
+    std::string traceName =
+        std::string(::testing::UnitTest::GetInstance()->current_test_info()->test_suite_name()) +
+        "_" + ::testing::UnitTest::GetInstance()->current_test_info()->name();
+    mWireHelper->BeginWireTrace(traceName.c_str());
+
+    // Create the device from the adapter
+    std::tie(device, backendDevice) = CreateDeviceImpl();
+    ASSERT_NE(nullptr, backendDevice);
+
+    queue = device.GetQueue();
+
+#if defined(DAWN_ENABLE_BACKEND_DESKTOP_GL)
+    if (IsOpenGL()) {
+        glfwMakeContextCurrent(gTestEnv->GetOpenGLWindow());
+    }
+#endif  // defined(DAWN_ENABLE_BACKEND_DESKTOP_GL)
+#if defined(DAWN_ENABLE_BACKEND_OPENGLES)
+    if (IsOpenGLES()) {
+        glfwMakeContextCurrent(gTestEnv->GetOpenGLESWindow());
+    }
+#endif  // defined(DAWN_ENABLE_BACKEND_OPENGLES)
 }
 
 void DawnTestBase::TearDown() {
@@ -1038,38 +1058,44 @@ void DawnTestBase::TearDown() {
     ExpectDeviceDestruction();
 }
 
-void DawnTestBase::StartExpectDeviceError(testing::Matcher<std::string> errorMatcher) {
-    mExpectError = true;
-    mError = false;
-    mErrorMatcher = errorMatcher;
+void DawnTestBase::StartExpectDeviceError(wgpu::Device device,
+                                          testing::Matcher<std::string> errorMatcher) {
+    wgpu::Device resolvedDevice = device == nullptr ? this->device : device;
+    mDeviceCallbackHandlers[resolvedDevice.Get()].expectError = true;
+    mDeviceCallbackHandlers[resolvedDevice.Get()].errored = false;
+    mDeviceCallbackHandlers[resolvedDevice.Get()].errorMatcher = errorMatcher;
 }
 
-bool DawnTestBase::EndExpectDeviceError() {
-    mExpectError = false;
-    mErrorMatcher = testing::_;
-    return mError;
+bool DawnTestBase::EndExpectDeviceError(wgpu::Device device) {
+    wgpu::Device resolvedDevice = device == nullptr ? this->device : device;
+    mDeviceCallbackHandlers[resolvedDevice.Get()].expectError = false;
+    mDeviceCallbackHandlers[resolvedDevice.Get()].errorMatcher = testing::_;
+    return mDeviceCallbackHandlers[resolvedDevice.Get()].errored;
 }
 
-void DawnTestBase::ExpectDeviceDestruction() {
-    mExpectDestruction = true;
+void DawnTestBase::ExpectDeviceDestruction(wgpu::Device device) {
+    wgpu::Device resolvedDevice = device == nullptr ? this->device : device;
+    mDeviceCallbackHandlers[resolvedDevice.Get()].expectDestruction = true;
 }
 
 // static
 void DawnTestBase::OnDeviceError(WGPUErrorType type, const char* message, void* userdata) {
     ASSERT(type != WGPUErrorType_NoError);
-    DawnTestBase* self = static_cast<DawnTestBase*>(userdata);
+    auto& [self, device] = *static_cast<DeviceCallbackData*>(userdata);
+    DeviceCallbackHandler& handler = self->mDeviceCallbackHandlers[device];
 
-    ASSERT_TRUE(self->mExpectError) << "Got unexpected device error: " << message;
-    ASSERT_FALSE(self->mError) << "Got two errors in expect block";
-    if (self->mExpectError) {
-        ASSERT_THAT(message, self->mErrorMatcher);
+    ASSERT_TRUE(handler.expectError) << "Got unexpected device error: " << message;
+    ASSERT_FALSE(handler.errored) << "Got two errors in expect block";
+    if (handler.expectError) {
+        ASSERT_THAT(message, handler.errorMatcher);
     }
-    self->mError = true;
+    handler.errored = true;
 }
 
 void DawnTestBase::OnDeviceLost(WGPUDeviceLostReason reason, const char* message, void* userdata) {
-    DawnTestBase* self = static_cast<DawnTestBase*>(userdata);
-    if (self->mExpectDestruction) {
+    auto& [self, device] = *static_cast<DeviceCallbackData*>(userdata);
+    DeviceCallbackHandler& handler = self->mDeviceCallbackHandlers[device];
+    if (handler.expectDestruction) {
         EXPECT_EQ(reason, WGPUDeviceLostReason_Destroyed);
         return;
     }
