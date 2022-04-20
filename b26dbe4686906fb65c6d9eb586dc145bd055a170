@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56fa65f7_fe3f0f7c",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-20T18:36:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd1769c6_f56539f4",
+      "range": {
+        "startLine": 154,
+        "startChar": 57,
+        "endLine": 154,
+        "endChar": 66
+      },
+      "revId": "b26dbe4686906fb65c6d9eb586dc145bd055a170",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b69a83d0_c82b1f9a",
@@ -96,6 +120,24 @@
       "side": 1,
       "message": "I put in incorrect values for the original conversion matrix - I must have been looking at the wrong spot on the page because it was part values from BT.709 and part from BT.601. This made the conversion very slightly different. I had used a color picker to get the test expectation values the first time and surprisingly they worked with the incorrect matrix. The test didn\u0027t pass after correcting the matrix values, so this time I calculated them by hand using the BT.709 constants.",
       "parentUuid": "b69a83d0_c82b1f9a",
+      "revId": "b26dbe4686906fb65c6d9eb586dc145bd055a170",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb4c5528_224bac69",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-20T18:36:19Z",
+      "side": 1,
+      "message": "Resolving.",
+      "parentUuid": "9288e0bf_93bc4c5d",
       "revId": "b26dbe4686906fb65c6d9eb586dc145bd055a170",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

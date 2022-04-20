@@ -140,6 +140,24 @@
       "parentUuid": "5236ac42_98c41ad0",
       "revId": "284a76f41cdf6c089d50c8427ee657be77338a2a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c91f16a7_e1022855",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-20T18:36:19Z",
+      "side": 1,
+      "message": "Thanks for the explanation. With this change I was able to get the conversion down to a single line.",
+      "parentUuid": "2ac5a29b_281c4bdc",
+      "revId": "284a76f41cdf6c089d50c8427ee657be77338a2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
