@@ -70,6 +70,24 @@
       "parentUuid": "ede3a6f9_9930294b",
       "revId": "4d2d0ad3837dd35b0100019814a88bdd09e63f61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5f5e0a0_3b4204b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-20T19:59:22Z",
+      "side": 1,
+      "message": "ex.) this task https://chromium-swarm.appspot.com/task?id\u003d5a60af930a78d210 the window was created, but GL isn\u0027t available so we don\u0027t run tests on it.",
+      "parentUuid": "dca93e3c_c769d9c2",
+      "revId": "4d2d0ad3837dd35b0100019814a88bdd09e63f61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
