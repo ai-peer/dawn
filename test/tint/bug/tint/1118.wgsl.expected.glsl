@@ -11,9 +11,9 @@ struct Scene {
 struct Material {
   vec4 vDiffuseColor;
   vec3 vAmbientColor;
-  float placeholder;
+  float dummy;
   vec3 vEmissiveColor;
-  float placeholder2;
+  float dummy2;
 };
 
 struct Mesh {
@@ -29,9 +29,9 @@ layout(binding = 0) uniform Scene_1 {
 layout(binding = 1) uniform Material_1 {
   vec4 vDiffuseColor;
   vec3 vAmbientColor;
-  float placeholder;
+  float dummy;
   vec3 vEmissiveColor;
-  float placeholder2;
+  float dummy2;
 } x_49;
 
 layout(binding = 2) uniform Mesh_1 {

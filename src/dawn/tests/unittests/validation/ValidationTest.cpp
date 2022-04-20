@@ -252,7 +252,7 @@ void ValidationTest::OnDeviceLost(WGPUDeviceLostReason reason,
     ASSERT(false);
 }
 
-ValidationTest::PlaceholderRenderPass::PlaceholderRenderPass(const wgpu::Device& device)
+ValidationTest::DummyRenderPass::DummyRenderPass(const wgpu::Device& device)
     : attachmentFormat(wgpu::TextureFormat::RGBA8Unorm), width(400), height(400) {
     wgpu::TextureDescriptor descriptor;
     descriptor.dimension = wgpu::TextureDimension::e2D;

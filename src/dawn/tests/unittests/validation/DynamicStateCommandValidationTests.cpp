@@ -203,7 +203,7 @@ class SetBlendConstantTest : public ValidationTest {};
 
 // Test to check basic use of SetBlendConstantTest
 TEST_F(SetBlendConstantTest, Success) {
-    PlaceholderRenderPass renderPass(device);
+    DummyRenderPass renderPass(device);
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     {
@@ -217,7 +217,7 @@ TEST_F(SetBlendConstantTest, Success) {
 
 // Test that SetBlendConstant allows any value, large, small or negative
 TEST_F(SetBlendConstantTest, AnyValueAllowed) {
-    PlaceholderRenderPass renderPass(device);
+    DummyRenderPass renderPass(device);
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     {
@@ -233,7 +233,7 @@ class SetStencilReferenceTest : public ValidationTest {};
 
 // Test to check basic use of SetStencilReferenceTest
 TEST_F(SetStencilReferenceTest, Success) {
-    PlaceholderRenderPass renderPass(device);
+    DummyRenderPass renderPass(device);
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     {
@@ -246,7 +246,7 @@ TEST_F(SetStencilReferenceTest, Success) {
 
 // Test that SetStencilReference allows any bit to be set
 TEST_F(SetStencilReferenceTest, AllBitsAllowed) {
-    PlaceholderRenderPass renderPass(device);
+    DummyRenderPass renderPass(device);
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     {

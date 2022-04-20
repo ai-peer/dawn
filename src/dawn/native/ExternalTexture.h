@@ -66,7 +66,7 @@ namespace dawn::native {
         ExternalTextureBase(DeviceBase* device, ObjectBase::ErrorTag tag);
         MaybeError Initialize(DeviceBase* device, const ExternalTextureDescriptor* descriptor);
 
-        Ref<TextureBase> mPlaceholderTexture;
+        Ref<TextureBase> mDummyTexture;
         Ref<BufferBase> mParamsBuffer;
         std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat> mTextureViews;
 

@@ -535,11 +535,10 @@ fn IsEqualTo(pixel : vec4<f32>, expected : vec4<f32>) -> bool {
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
-        wgpu::Texture placeholderOutputTexture = CreateTexture(
+        wgpu::Texture dummyOutputTexture = CreateTexture(
             kRenderAttachmentFormat,
             wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc, {1, 1});
-        utils::ComboRenderPassDescriptor renderPassDescriptor(
-            {placeholderOutputTexture.CreateView()});
+        utils::ComboRenderPassDescriptor renderPassDescriptor({dummyOutputTexture.CreateView()});
         wgpu::RenderPassEncoder renderPassEncoder = encoder.BeginRenderPass(&renderPassDescriptor);
         renderPassEncoder.SetBindGroup(0, bindGroup);
         renderPassEncoder.SetPipeline(pipeline);

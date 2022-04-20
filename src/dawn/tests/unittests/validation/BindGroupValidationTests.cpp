@@ -1499,7 +1499,7 @@ class SetBindGroupValidationTest : public ValidationTest {
                                  uint32_t count,
                                  bool expectation) {
         wgpu::RenderPipeline renderPipeline = CreateRenderPipeline();
-        PlaceholderRenderPass renderPass(device);
+        DummyRenderPass renderPass(device);
 
         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder renderPassEncoder = commandEncoder.BeginRenderPass(&renderPass);
@@ -1602,7 +1602,7 @@ TEST_F(SetBindGroupValidationTest, VerifyGroupIfChangedAfterAction) {
     }
     {
         wgpu::RenderPipeline renderPipeline = CreateRenderPipeline();
-        PlaceholderRenderPass renderPass(device);
+        DummyRenderPass renderPass(device);
 
         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder renderPassEncoder = commandEncoder.BeginRenderPass(&renderPass);
@@ -1966,7 +1966,7 @@ TEST_F(SetBindGroupPersistenceValidationTest, BindGroupBeforePipeline) {
         device, bindGroupLayouts[1],
         {{0, storageBuffer, 0, kBindingSize}, {1, uniformBuffer, 0, kBindingSize}});
 
-    PlaceholderRenderPass renderPass(device);
+    DummyRenderPass renderPass(device);
     wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
     wgpu::RenderPassEncoder renderPassEncoder = commandEncoder.BeginRenderPass(&renderPass);
 
@@ -2020,7 +2020,7 @@ TEST_F(SetBindGroupPersistenceValidationTest, NotVulkanInheritance) {
         device, bindGroupLayoutsB[0],
         {{0, storageBuffer, 0, kBindingSize}, {1, uniformBuffer, 0, kBindingSize}});
 
-    PlaceholderRenderPass renderPass(device);
+    DummyRenderPass renderPass(device);
     wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
     wgpu::RenderPassEncoder renderPassEncoder = commandEncoder.BeginRenderPass(&renderPass);
 
@@ -2270,8 +2270,8 @@ class BindingsValidationTest : public BindGroupLayoutCompatibilityTest {
                                 wgpu::RenderPipeline pipeline,
                                 bool expectation) {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        PlaceholderRenderPass PlaceholderRenderPass(device);
-        wgpu::RenderPassEncoder rp = encoder.BeginRenderPass(&PlaceholderRenderPass);
+        DummyRenderPass dummyRenderPass(device);
+        wgpu::RenderPassEncoder rp = encoder.BeginRenderPass(&dummyRenderPass);
         for (uint32_t i = 0; i < count; ++i) {
             rp.SetBindGroup(i, bg[i]);
         }

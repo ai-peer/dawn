@@ -41,7 +41,7 @@ namespace dawn::native {
         Ref<ComputePipelineBase> timestampComputePipeline;
         Ref<ShaderModuleBase> timestampCS;
 
-        Ref<ShaderModuleBase> placeholderFragmentShader;
+        Ref<ShaderModuleBase> dummyFragmentShader;
 
         // A scratch buffer suitable for use as a copy destination and storage binding.
         ScratchBuffer scratchStorage;

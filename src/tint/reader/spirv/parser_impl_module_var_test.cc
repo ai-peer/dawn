@@ -3410,8 +3410,8 @@ TEST_F(SpvModuleScopeVarParserTest, RegisterInputOutputVars) {
 
     %300 = OpFunction %void None %voidfn
     %entry_300 = OpLabel
-    %placeholder_300_1 = OpFunctionCall %void %100
-    %placeholder_300_2 = OpFunctionCall %void %200
+    %dummy_300_1 = OpFunctionCall %void %100
+    %dummy_300_2 = OpFunctionCall %void %200
     OpReturn
     OpFunctionEnd
 
@@ -3424,21 +3424,21 @@ TEST_F(SpvModuleScopeVarParserTest, RegisterInputOutputVars) {
     ; Call %100
     %1100 = OpFunction %void None %voidfn
     %entry_1100 = OpLabel
-    %placeholder_1100_1 = OpFunctionCall %void %100
+    %dummy_1100_1 = OpFunctionCall %void %100
     OpReturn
     OpFunctionEnd
 
     ; Call %200
     %1200 = OpFunction %void None %voidfn
     %entry_1200 = OpLabel
-    %placeholder_1200_1 = OpFunctionCall %void %200
+    %dummy_1200_1 = OpFunctionCall %void %200
     OpReturn
     OpFunctionEnd
 
     ; Call %300
     %1300 = OpFunction %void None %voidfn
     %entry_1300 = OpLabel
-    %placeholder_1300_1 = OpFunctionCall %void %300
+    %dummy_1300_1 = OpFunctionCall %void %300
     OpReturn
     OpFunctionEnd
 

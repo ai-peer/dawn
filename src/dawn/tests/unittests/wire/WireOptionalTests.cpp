@@ -49,7 +49,7 @@ TEST_F(WireOptionalTests, OptionalObjectValue) {
 
     wgpuDeviceCreateBindGroup(device, &bgDesc);
 
-    WGPUBindGroup apiPlaceholderBindGroup = api.GetNewBindGroup();
+    WGPUBindGroup apiDummyBindGroup = api.GetNewBindGroup();
     EXPECT_CALL(api, DeviceCreateBindGroup(
                          apiDevice, MatchesLambda([](const WGPUBindGroupDescriptor* desc) -> bool {
                              return desc->nextInChain == nullptr && desc->entryCount == 1 &&
@@ -58,7 +58,7 @@ TEST_F(WireOptionalTests, OptionalObjectValue) {
                                     desc->entries[0].buffer == nullptr &&
                                     desc->entries[0].textureView == nullptr;
                          })))
-        .WillOnce(Return(apiPlaceholderBindGroup));
+        .WillOnce(Return(apiDummyBindGroup));
 
     FlushClient();
 }
@@ -138,7 +138,7 @@ TEST_F(WireOptionalTests, OptionalStructPointer) {
     pipelineDescriptor.depthStencil = &depthStencilState;
     wgpuDeviceCreateRenderPipeline(device, &pipelineDescriptor);
 
-    WGPURenderPipeline apiPlaceholderPipeline = api.GetNewRenderPipeline();
+    WGPURenderPipeline apiDummyPipeline = api.GetNewRenderPipeline();
     EXPECT_CALL(
         api,
         DeviceCreateRenderPipeline(
@@ -161,7 +161,7 @@ TEST_F(WireOptionalTests, OptionalStructPointer) {
                        desc->depthStencil->depthBiasSlopeScale == 0.0 &&
                        desc->depthStencil->depthBiasClamp == 0.0;
             })))
-        .WillOnce(Return(apiPlaceholderPipeline));
+        .WillOnce(Return(apiDummyPipeline));
 
     FlushClient();
 
@@ -173,7 +173,7 @@ TEST_F(WireOptionalTests, OptionalStructPointer) {
                     apiDevice, MatchesLambda([](const WGPURenderPipelineDescriptor* desc) -> bool {
                         return desc->depthStencil == nullptr;
                     })))
-        .WillOnce(Return(apiPlaceholderPipeline));
+        .WillOnce(Return(apiDummyPipeline));
 
     FlushClient();
 }

@@ -61,7 +61,7 @@ namespace dawn::native {
         DisableSymbolRenaming,
         UseUserDefinedLabelsInBackend,
         DisableR8RG8Mipmaps,
-        UsePlaceholderFragmentInVertexOnlyPipeline,
+        UseDummyFragmentInVertexOnlyPipeline,
         FxcOptimizations,
         RecordDetailedTimingInTraceEvents,
         DisableTimestampQueryConversion,

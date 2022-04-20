@@ -22,7 +22,7 @@
 namespace utils {
 
     // The returned CALayer is autoreleased.
-    void* CreatePlaceholderCALayer();
+    void* CreateDummyCALayer();
 
 }  // namespace utils
 

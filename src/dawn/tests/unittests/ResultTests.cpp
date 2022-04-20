@@ -42,9 +42,9 @@ namespace {
         EXPECT_FALSE(result->IsSuccess());
     }
 
-    static int placeholderError = 0xbeef;
-    static float placeholderSuccess = 42.0f;
-    static const float placeholderConstSuccess = 42.0f;
+    static int dummyError = 0xbeef;
+    static float dummySuccess = 42.0f;
+    static const float dummyConstSuccess = 42.0f;
 
     class AClass : public RefCounted {
       public:
@@ -52,9 +52,9 @@ namespace {
     };
 
     // Tests using the following overload of TestSuccess make
-    // local Ref instances to placeholderSuccessObj. Tests should
+    // local Ref instances to dummySuccessObj. Tests should
     // ensure any local Ref objects made along the way continue
-    // to point to placeholderSuccessObj.
+    // to point to dummySuccessObj.
     template <typename T, typename E>
     void TestSuccess(Result<Ref<T>, E>* result, T* expectedSuccess) {
         EXPECT_FALSE(result->IsError());
@@ -83,25 +83,25 @@ namespace {
 
     // Test constructing an error Result<void, E>
     TEST(ResultOnlyPointerError, ConstructingError) {
-        Result<void, int> result(std::make_unique<int>(placeholderError));
-        TestError(&result, placeholderError);
+        Result<void, int> result(std::make_unique<int>(dummyError));
+        TestError(&result, dummyError);
     }
 
     // Test moving an error Result<void, E>
     TEST(ResultOnlyPointerError, MovingError) {
-        Result<void, int> result(std::make_unique<int>(placeholderError));
+        Result<void, int> result(std::make_unique<int>(dummyError));
         Result<void, int> movedResult(std::move(result));
-        TestError(&movedResult, placeholderError);
+        TestError(&movedResult, dummyError);
     }
 
     // Test returning an error Result<void, E>
     TEST(ResultOnlyPointerError, ReturningError) {
         auto CreateError = []() -> Result<void, int> {
-            return {std::make_unique<int>(placeholderError)};
+            return {std::make_unique<int>(dummyError)};
         };
 
         Result<void, int> result = CreateError();
-        TestError(&result, placeholderError);
+        TestError(&result, dummyError);
     }
 
     // Test constructing a success Result<void, E>
@@ -132,46 +132,46 @@ namespace {
 
     // Test constructing an error Result<T*, E>
     TEST(ResultBothPointer, ConstructingError) {
-        Result<float*, int> result(std::make_unique<int>(placeholderError));
-        TestError(&result, placeholderError);
+        Result<float*, int> result(std::make_unique<int>(dummyError));
+        TestError(&result, dummyError);
     }
 
     // Test moving an error Result<T*, E>
     TEST(ResultBothPointer, MovingError) {
-        Result<float*, int> result(std::make_unique<int>(placeholderError));
+        Result<float*, int> result(std::make_unique<int>(dummyError));
         Result<float*, int> movedResult(std::move(result));
-        TestError(&movedResult, placeholderError);
+        TestError(&movedResult, dummyError);
     }
 
     // Test returning an error Result<T*, E>
     TEST(ResultBothPointer, ReturningError) {
         auto CreateError = []() -> Result<float*, int> {
-            return {std::make_unique<int>(placeholderError)};
+            return {std::make_unique<int>(dummyError)};
         };
 
         Result<float*, int> result = CreateError();
-        TestError(&result, placeholderError);
+        TestError(&result, dummyError);
     }
 
     // Test constructing a success Result<T*, E>
     TEST(ResultBothPointer, ConstructingSuccess) {
-        Result<float*, int> result(&placeholderSuccess);
-        TestSuccess(&result, &placeholderSuccess);
+        Result<float*, int> result(&dummySuccess);
+        TestSuccess(&result, &dummySuccess);
     }
 
     // Test moving a success Result<T*, E>
     TEST(ResultBothPointer, MovingSuccess) {
-        Result<float*, int> result(&placeholderSuccess);
+        Result<float*, int> result(&dummySuccess);
         Result<float*, int> movedResult(std::move(result));
-        TestSuccess(&movedResult, &placeholderSuccess);
+        TestSuccess(&movedResult, &dummySuccess);
     }
 
     // Test returning a success Result<T*, E>
     TEST(ResultBothPointer, ReturningSuccess) {
-        auto CreateSuccess = []() -> Result<float*, int*> { return {&placeholderSuccess}; };
+        auto CreateSuccess = []() -> Result<float*, int*> { return {&dummySuccess}; };
 
         Result<float*, int*> result = CreateSuccess();
-        TestSuccess(&result, &placeholderSuccess);
+        TestSuccess(&result, &dummySuccess);
     }
 
     // Tests converting from a Result<TChild*, E>
@@ -203,73 +203,71 @@ namespace {
 
     // Test constructing an error Result<const T*, E>
     TEST(ResultBothPointerWithConstResult, ConstructingError) {
-        Result<const float*, int> result(std::make_unique<int>(placeholderError));
-        TestError(&result, placeholderError);
+        Result<const float*, int> result(std::make_unique<int>(dummyError));
+        TestError(&result, dummyError);
     }
 
     // Test moving an error Result<const T*, E>
     TEST(ResultBothPointerWithConstResult, MovingError) {
-        Result<const float*, int> result(std::make_unique<int>(placeholderError));
+        Result<const float*, int> result(std::make_unique<int>(dummyError));
         Result<const float*, int> movedResult(std::move(result));
-        TestError(&movedResult, placeholderError);
+        TestError(&movedResult, dummyError);
     }
 
     // Test returning an error Result<const T*, E*>
     TEST(ResultBothPointerWithConstResult, ReturningError) {
         auto CreateError = []() -> Result<const float*, int> {
-            return {std::make_unique<int>(placeholderError)};
+            return {std::make_unique<int>(dummyError)};
         };
 
         Result<const float*, int> result = CreateError();
-        TestError(&result, placeholderError);
+        TestError(&result, dummyError);
     }
 
     // Test constructing a success Result<const T*, E*>
     TEST(ResultBothPointerWithConstResult, ConstructingSuccess) {
-        Result<const float*, int> result(&placeholderConstSuccess);
-        TestSuccess(&result, &placeholderConstSuccess);
+        Result<const float*, int> result(&dummyConstSuccess);
+        TestSuccess(&result, &dummyConstSuccess);
     }
 
     // Test moving a success Result<const T*, E*>
     TEST(ResultBothPointerWithConstResult, MovingSuccess) {
-        Result<const float*, int> result(&placeholderConstSuccess);
+        Result<const float*, int> result(&dummyConstSuccess);
         Result<const float*, int> movedResult(std::move(result));
-        TestSuccess(&movedResult, &placeholderConstSuccess);
+        TestSuccess(&movedResult, &dummyConstSuccess);
     }
 
     // Test returning a success Result<const T*, E*>
     TEST(ResultBothPointerWithConstResult, ReturningSuccess) {
-        auto CreateSuccess = []() -> Result<const float*, int> {
-            return {&placeholderConstSuccess};
-        };
+        auto CreateSuccess = []() -> Result<const float*, int> { return {&dummyConstSuccess}; };
 
         Result<const float*, int> result = CreateSuccess();
-        TestSuccess(&result, &placeholderConstSuccess);
+        TestSuccess(&result, &dummyConstSuccess);
     }
 
     // Result<Ref<T>, E>
 
     // Test constructing an error Result<Ref<T>, E>
     TEST(ResultRefT, ConstructingError) {
-        Result<Ref<AClass>, int> result(std::make_unique<int>(placeholderError));
-        TestError(&result, placeholderError);
+        Result<Ref<AClass>, int> result(std::make_unique<int>(dummyError));
+        TestError(&result, dummyError);
     }
 
     // Test moving an error Result<Ref<T>, E>
     TEST(ResultRefT, MovingError) {
-        Result<Ref<AClass>, int> result(std::make_unique<int>(placeholderError));
+        Result<Ref<AClass>, int> result(std::make_unique<int>(dummyError));
         Result<Ref<AClass>, int> movedResult(std::move(result));
-        TestError(&movedResult, placeholderError);
+        TestError(&movedResult, dummyError);
     }
 
     // Test returning an error Result<Ref<T>, E>
     TEST(ResultRefT, ReturningError) {
         auto CreateError = []() -> Result<Ref<AClass>, int> {
-            return {std::make_unique<int>(placeholderError)};
+            return {std::make_unique<int>(dummyError)};
         };
 
         Result<Ref<AClass>, int> result = CreateError();
-        TestError(&result, placeholderError);
+        TestError(&result, dummyError);
     }
 
     // Test constructing a success Result<Ref<T>, E>
@@ -342,25 +340,25 @@ namespace {
 
     // Test constructing an error Result<T, E>
     TEST(ResultGeneric, ConstructingError) {
-        Result<std::vector<float>, int> result(std::make_unique<int>(placeholderError));
-        TestError(&result, placeholderError);
+        Result<std::vector<float>, int> result(std::make_unique<int>(dummyError));
+        TestError(&result, dummyError);
     }
 
     // Test moving an error Result<T, E>
     TEST(ResultGeneric, MovingError) {
-        Result<std::vector<float>, int> result(std::make_unique<int>(placeholderError));
+        Result<std::vector<float>, int> result(std::make_unique<int>(dummyError));
         Result<std::vector<float>, int> movedResult(std::move(result));
-        TestError(&movedResult, placeholderError);
+        TestError(&movedResult, dummyError);
     }
 
     // Test returning an error Result<T, E>
     TEST(ResultGeneric, ReturningError) {
         auto CreateError = []() -> Result<std::vector<float>, int> {
-            return {std::make_unique<int>(placeholderError)};
+            return {std::make_unique<int>(dummyError)};
         };
 
         Result<std::vector<float>, int> result = CreateError();
-        TestError(&result, placeholderError);
+        TestError(&result, dummyError);
     }
 
     // Test constructing a success Result<T, E>

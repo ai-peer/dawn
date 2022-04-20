@@ -58,10 +58,10 @@ namespace dawn::native::opengl {
         GLuint mProgram;
         std::vector<std::vector<SamplerUnit>> mUnitsForSamplers;
         std::vector<std::vector<GLuint>> mUnitsForTextures;
-        std::vector<GLuint> mPlaceholderSamplerUnits;
+        std::vector<GLuint> mDummySamplerUnits;
         // TODO(enga): This could live on the Device, or elsewhere, but currently it makes Device
         // destruction complex as it requires the sampler to be destroyed before the sampler cache.
-        Ref<Sampler> mPlaceholderSampler;
+        Ref<Sampler> mDummySampler;
     };
 
 }  // namespace dawn::native::opengl

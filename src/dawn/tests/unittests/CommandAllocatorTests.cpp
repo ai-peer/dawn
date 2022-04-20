@@ -368,7 +368,7 @@ TEST(CommandAllocator, EmptyIterator) {
 
 template <size_t A>
 struct alignas(A) AlignedStruct {
-    char placeholder;
+    char dummy;
 };
 
 // Test for overflows in Allocate's computations, size 1 variant

@@ -473,7 +473,7 @@ namespace dawn::native {
         return {};
     }
 
-    std::vector<StageAndDescriptor> GetRenderStagesAndSetPlaceholderShader(
+    std::vector<StageAndDescriptor> GetRenderStagesAndSetDummyShader(
         DeviceBase* device,
         const RenderPipelineDescriptor* descriptor) {
         std::vector<StageAndDescriptor> stages;
@@ -484,13 +484,13 @@ namespace dawn::native {
             stages.push_back({SingleShaderStage::Fragment, descriptor->fragment->module,
                               descriptor->fragment->entryPoint, descriptor->fragment->constantCount,
                               descriptor->fragment->constants});
-        } else if (device->IsToggleEnabled(Toggle::UsePlaceholderFragmentInVertexOnlyPipeline)) {
+        } else if (device->IsToggleEnabled(Toggle::UseDummyFragmentInVertexOnlyPipeline)) {
             InternalPipelineStore* store = device->GetInternalPipelineStore();
-            // The placeholder fragment shader module should already be initialized
-            DAWN_ASSERT(store->placeholderFragmentShader != nullptr);
-            ShaderModuleBase* placeholderFragmentShader = store->placeholderFragmentShader.Get();
-            stages.push_back({SingleShaderStage::Fragment, placeholderFragmentShader,
-                              "fs_empty_main", 0, nullptr});
+            // The dummy fragment shader module should already be initialized
+            DAWN_ASSERT(store->dummyFragmentShader != nullptr);
+            ShaderModuleBase* dummyFragmentShader = store->dummyFragmentShader.Get();
+            stages.push_back(
+                {SingleShaderStage::Fragment, dummyFragmentShader, "fs_empty_main", 0, nullptr});
         }
         return stages;
     }
@@ -513,7 +513,7 @@ namespace dawn::native {
         : PipelineBase(device,
                        descriptor->layout,
                        descriptor->label,
-                       GetRenderStagesAndSetPlaceholderShader(device, descriptor)),
+                       GetRenderStagesAndSetDummyShader(device, descriptor)),
           mAttachmentState(device->GetOrCreateAttachmentState(descriptor)) {
         mVertexBufferCount = descriptor->vertex.bufferCount;
         const VertexBufferLayout* buffers = descriptor->vertex.buffers;
