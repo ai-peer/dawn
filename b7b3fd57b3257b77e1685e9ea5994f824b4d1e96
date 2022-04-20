@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f030368_c3863572",
+        "filename": "tools/src/cts/query/query.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T14:29:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "853a70c7_e1b0971f",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26be152d_cedd7814",
@@ -233,6 +251,30 @@
       "side": 1,
       "message": "Understood. I\u0027d prefer to do this as a followup if possible. This is pretty well tested and soak tested.",
       "parentUuid": "96f439a6_14f7376a",
+      "range": {
+        "startLine": 58,
+        "startChar": 36,
+        "endLine": 58,
+        "endChar": 52
+      },
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe058c04_3e8293e1",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T14:29:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4c6e3c21_bf4fdf9a",
       "range": {
         "startLine": 58,
         "startChar": 36,
@@ -537,6 +579,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99337162_b8aa7d67",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T14:29:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5f1a1e59_8f36959e",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7f3de8a_948d50f9",
@@ -712,6 +772,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5b786a0_914876d8",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T14:29:17Z",
+      "side": 1,
+      "message": "Whoops, I kept getting confused between what was the query and what was the tree in these functions. Ack.",
+      "parentUuid": "0f84bc79_ceb6061f",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b12313a_8d7790ed",
@@ -743,6 +821,24 @@
       "side": 1,
       "message": "I don\u0027t think so.\n\n`merge()` will merge all the children, and possibly create wildcards under itself.\n\nIf I understand you correctly, you\u0027d suggest changing this to:\n\n```\nif q \u003d\u003d to {\n\tnode.merge(f)\n\treturn nil\n}\nnode \u003d child\n```\n\nThis would mean that the `to` node could be folded into a wildcard at the parent, which isn\u0027t desirable.\n\nRelevant test:\n\n```\n{\n\tlocation: utils.ThisLine(),\n\tto:       Q(`suite:a`),\n\tin: []QueryData{\n\t\t{Query: Q(`suite:a,b,*`), Data: pass},\n\t\t{Query: Q(`suite:a,c,*`), Data: pass},\n\t},\n\texpect: []QueryData{\n\t\t{Query: Q(`suite:a,*`), Data: pass},\n\t},\n},\n```",
       "parentUuid": "8b12313a_8d7790ed",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45fa9a72_0b8d974d",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T14:29:17Z",
+      "side": 1,
+      "message": "Ack, that wildcards are a single child below the path is a bit weird, I was wondering is we could make all nodes implicitly wildcards for their query, but I\u0027m sure this would break other stuff. Maybe we should call this `ReduceUnder`?",
+      "parentUuid": "34172f75_c9e928f1",
       "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -813,6 +909,24 @@
       "side": 1,
       "message": "No. Cases are special, as they\u0027re not describable as a simple tree (they\u0027re a bunch of key-value pairs), so the tree has all the Cases as a single node.\n\nWe do however want glob to filter based on the the case keys provided, hence the special casing here.",
       "parentUuid": "34e3a393_8e6310d2",
+      "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2452ef92_929a0061",
+        "filename": "tools/src/cts/query/tree.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T14:29:17Z",
+      "side": 1,
+      "message": "Can this special-casing of Cases be described somewhere? I didn\u0027t see it anywhere.",
+      "parentUuid": "ccebfe22_3f69f028",
       "revId": "b7b3fd57b3257b77e1685e9ea5994f824b4d1e96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
