@@ -29,11 +29,18 @@ type Content struct {
 	Chunks []Chunk
 	// Map of tag name to tag set and priority
 	Tags map[string]TagSetAndPriority
+	// Map of tag set name to tags
+	TagSets []TagSet
 }
 
 type Chunk struct {
 	Comments     []string
 	Expectations []Expectation
+}
+
+type TagSet struct {
+	Name string
+	Tags result.Tags
 }
 
 type TagSetAndPriority struct {
@@ -71,7 +78,12 @@ func (c Content) Clone() Content {
 	for n, t := range c.Tags {
 		tags[n] = t
 	}
-	return Content{chunks, tags}
+	var tagSets []TagSet
+	if c.TagSets != nil {
+		tagSets = make([]TagSet, len(c.TagSets))
+		copy(tagSets, c.TagSets)
+	}
+	return Content{chunks, tags, tagSets}
 }
 
 func (c Content) Save(path string) error {

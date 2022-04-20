@@ -61,7 +61,7 @@ func Parse(body string) (Content, error) {
 	content := Content{}
 	var pending Chunk
 	flush := func() {
-		parseTags(&content.Tags, pending.Comments)
+		parseTags(&content.Tags, &content.TagSets, pending.Comments)
 		content.Chunks = append(content.Chunks, pending)
 		pending = Chunk{}
 	}
@@ -169,14 +169,16 @@ func Parse(body string) (Content, error) {
 	return content, nil
 }
 
-func parseTags(tags *map[string]TagSetAndPriority, lines []string) {
+func parseTags(tags *map[string]TagSetAndPriority, tagSets *[]TagSet, lines []string) {
 	inTagsHeader, inList := false, false
-	tagSet, priority := "", 0
+	tagSet := TagSet{}
+	priority := 0
 	for _, line := range lines {
 		line = strings.TrimSpace(strings.TrimLeft(strings.TrimSpace(line), "#"))
 		if strings.Contains(line, `BEGIN TAG HEADER`) {
 			if *tags == nil {
 				*tags = map[string]TagSetAndPriority{}
+				*tagSets = []TagSet{}
 			}
 			inTagsHeader = true
 			continue
@@ -192,17 +194,21 @@ func parseTags(tags *map[string]TagSetAndPriority, lines []string) {
 		for len(tokens) > 0 {
 			switch {
 			case inList && tokens[0] == "]":
+				*tagSets = append(*tagSets, tagSet)
 				inList = false
 			case inList:
-				(*tags)[tokens[0]] = TagSetAndPriority{Set: tagSet, Priority: priority}
+				tag := tokens[0]
+				tagSet.Tags.Add(tag)
+				(*tags)[tag] = TagSetAndPriority{Set: tagSet.Name, Priority: priority}
 				priority++
 			case !inList && len(tokens) > 2 && tokens[0] == "tags:" && tokens[1] == "[":
 				inList = true
+				tagSet.Tags = result.NewTags()
 				tokens = tokens[2:]
 				priority = 0
 				continue
 			case !inList:
-				tagSet = strings.Join(tokens, " ")
+				tagSet.Name = strings.Join(tokens, " ")
 				break loop
 			}
 			tokens = tokens[1:]

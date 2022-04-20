@@ -7,15 +7,15 @@ import (
 )
 
 // ReduceTags returns the reduced list by combining results that have redundant tags.
-func (l List) MinimalVariantTags(variantTags []Tags) []Tags {
+func (l List) MinimalVariantTags(tagSets []Tags) []Tags {
 	type Variant struct {
 		tags          Tags
 		queryToStatus map[query.Query]Status
 	}
 
 	// Build the set of variants from the input list
-	variants := make([]Variant, len(variantTags))
-	for i, tags := range variantTags {
+	variants := []Variant{}
+	for i, tags := range l.UniqueTags() {
 		variant := Variant{
 			tags:          tags,
 			queryToStatus: map[query.Query]Status{},
@@ -42,12 +42,12 @@ func (l List) MinimalVariantTags(variantTags []Tags) []Tags {
 		return true
 	}
 
-	tryToRemoveTag := func(tag string) {
+	tryToRemoveTags := func(tags Tags) {
 		newVariants := make([]Variant, 0, len(variants))
 
 		for _, variant := range variants {
-			// Does the variant even contain the tag?
-			if !variant.tags.Contains(tag) {
+			// Does the variant even contain these tags?
+			if !variant.tags.ContainsAny(tags) {
 				// Nope. Skip the canReduce() call, and keep the variant.
 				newVariants = append(newVariants, variant)
 				continue
@@ -55,11 +55,11 @@ func (l List) MinimalVariantTags(variantTags []Tags) []Tags {
 
 			// Build the new tag set with 'tag' removed.
 			tags := variant.tags.Clone()
-			tags.Remove(tag)
+			tags.RemoveAll(tags)
 
-			// Check wether this tag was important.
+			// Check wether removal of these tags affected the outcome.
 			if !canReduce(variant, tags) {
-				// Removing this tag resulted in differences.
+				// Removing these tags resulted in differences.
 				return // Abort
 			}
 			newVariants = append(newVariants, Variant{tags, variant.queryToStatus})
@@ -87,13 +87,8 @@ func (l List) MinimalVariantTags(variantTags []Tags) []Tags {
 		}
 	}
 
-	// Gather all the tags
-	allTags := NewTags()
-	for _, tags := range variantTags {
-		allTags.AddAll(tags)
-	}
-	for _, tag := range allTags.List() {
-		tryToRemoveTag(tag)
+	for _, tags := range tagSets {
+		tryToRemoveTags(tags)
 	}
 
 	out := make([]Tags, len(variants))

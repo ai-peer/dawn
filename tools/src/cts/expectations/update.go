@@ -126,6 +126,11 @@ func (c *Content) Update(results result.List, cfg *Config) ([]Diagnostic, error)
 
 	simplifyStatuses(results)
 
+	tagSets := make([]result.Tags, len(c.TagSets))
+	for i, s := range c.TagSets {
+		tagSets[i] = s.Tags
+	}
+
 	u := updater{
 		in:       *c,
 		out:      Content{},
@@ -148,6 +153,7 @@ type updater struct {
 	qt       queryTree
 	variants []result.Tags
 	diags    []Diagnostic
+	tagSets  []result.Tags
 }
 
 func gatherVariants(results result.List, tagSets map[string]TagSetAndPriority) []result.Tags {
@@ -429,7 +435,7 @@ func (u *updater) reduceTags(resultsByQuery map[query.Query]result.List) (result
 		if err != nil {
 			return nil, fmt.Errorf("unexpected error: %w", err)
 		}
-		for _, tags := range glob.MinimalVariantTags(u.variants) {
+		for _, tags := range glob.MinimalVariantTags(u.tagSets) {
 			for _, r := range l {
 				if r.Tags.ContainsAll(tags) {
 					out = append(out, result.Result{
