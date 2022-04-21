@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46ed2ed6_71a9a9b5",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-21T14:42:25Z",
+      "side": 1,
+      "message": "I\u0027m not sure that monterey or bigsur are more useful than just \"mac\". Why does the tool change them like that?",
+      "revId": "40a696538010f6f0878d43df1be979798e3e4bad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
