@@ -16,6 +16,23 @@
       "message": "PTAL. Patchset 1 is the setup (update .clang-format, remove CPPLINT.cfg files, couple lint ignores that showup after formatting). Patchset 2 is the result of running `./tools/format`.",
       "revId": "9ac7a797b0334ac0feca831b5e7b6b8391b36d8a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "878ba46e_fb2773fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-21T18:19:20Z",
+      "side": 1,
+      "message": "Random sample set LGTM",
+      "revId": "9ac7a797b0334ac0feca831b5e7b6b8391b36d8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
