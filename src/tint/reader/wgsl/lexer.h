@@ -67,8 +67,24 @@ class Lexer {
   Source begin_source() const;
   void end_source(Source&) const;
 
+  /// @returns view of current line
+  const std::string_view line() const;
+  /// @returns reference to character at `pos` within current line
+  const char& at(size_t pos) const;
+  /// @returns substring at `offset` within current line of length `count`
+  std::string substr(size_t offset, size_t count);
+  /// @returns substring view at `offset` within current line of length `count`
+  std::string_view substr_view(size_t offset, size_t count);
+  /// advances current position by `offset` within current line
+  void advance(size_t offset = 1);
+  /// sets current position to `pos` within current line
+  void set_pos(size_t pos);
+  /// advances current position to next line
+  void newline();
   /// @returns true if the end of the input has been reached.
   bool is_eof() const;
+  /// @returns true if the end of the current line has been reached.
+  bool is_eol() const;
   /// @returns true if there is another character on the input and
   /// it is not null.
   bool is_null() const;
@@ -78,16 +94,17 @@ class Lexer {
   /// @param ch a character
   /// @returns true if 'ch' is a hexadecimal digit
   bool is_hex(char ch) const;
+  /// @returns true if string at `pos` matches `substr`
   bool matches(size_t pos, std::string_view substr);
 
   /// The source file content
   Source::File const* const file_;
-  /// The length of the input
-  uint32_t len_ = 0;
-  /// The current position in utf-8 code units (bytes) within the input
-  uint32_t pos_ = 0;
   /// The current location within the input
   Source::Location location_;
+  /// The current position in utf-8 code units (bytes) within the current line
+  uint32_t pos_ = 0;
+  /// The length of the current line
+  uint32_t len_ = 0;
 };
 
 }  // namespace tint::reader::wgsl
