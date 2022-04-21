@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64996d4c_ee9f51ca",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-21T19:06:33Z",
+      "side": 1,
+      "message": "I removed \u0027\\n\u0027 here as it\u0027s no longer necessary. In the next change, \u0027\\r\u0027 will also be removed as I implement the new line break spec change.",
+      "range": {
+        "startLine": 31,
+        "startChar": 69,
+        "endLine": 31,
+        "endChar": 70
+      },
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b7c4393_09899ff5",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-21T19:06:33Z",
+      "side": 1,
+      "message": "This was fun. I was hitting an assert in MSVC STL in Debug because our lexer indexes at the null terminator. Before, we would do so in a std::string, which is fine, but with std::string_view it\u0027s not (because std::string_view may point to a non-null-terminated string).",
+      "range": {
+        "startLine": 71,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 52
+      },
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6429e778_a9fe8a0a",
+        "filename": "src/tint/reader/wgsl/lexer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-21T19:06:33Z",
+      "side": 1,
+      "message": "I added these initially to factor out all the code that directly accessed `file_-\u003econtent.data` directly. This made it easier to update these to read from `file_-\u003econtent.lines` instead. In the end, I think the code is cleaner regardless.",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 17
+      },
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04a0d174_28217833",
+        "filename": "src/tint/reader/wgsl/lexer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-21T19:06:33Z",
+      "side": 1,
+      "message": "Note that I now use location_ as the primary cursor, as it stores both the column and line already.",
+      "range": {
+        "startLine": 103,
+        "startChar": 19,
+        "endLine": 103,
+        "endChar": 28
+      },
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
