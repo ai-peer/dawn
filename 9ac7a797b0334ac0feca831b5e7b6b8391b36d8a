@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27ecc50c_fff4c602",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T18:10:24Z",
+      "side": 1,
+      "message": "PTAL. Patchset 1 is the setup (update .clang-format, remove CPPLINT.cfg files, couple lint ignores that showup after formatting). Patchset 2 is the result of running `./tools/format`.",
+      "revId": "9ac7a797b0334ac0feca831b5e7b6b8391b36d8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
