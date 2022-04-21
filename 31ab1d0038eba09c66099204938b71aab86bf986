@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3cdef21e_705a85be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T12:38:18Z",
+      "side": 1,
+      "message": "I tried doing `using _ \u003d testing::_` and the compiler was unhappy with me. (But then, it\u0027s also possible I was holding it wrong as importing with using statements isn\u0027t something I do often)",
+      "parentUuid": "ee34332a_b52e02a5",
+      "revId": "31ab1d0038eba09c66099204938b71aab86bf986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67d3198e_cd51cc77",
         "filename": "src/dawn/tests/unittests/ErrorTests.cpp",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2022-04-21T07:59:30Z",
       "side": 1,
       "message": "I think we could just remove that anonymous namespace. Either way.",
+      "revId": "31ab1d0038eba09c66099204938b71aab86bf986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "553f76a6_33f946e7",
+        "filename": "src/dawn/tests/unittests/ErrorTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T12:38:18Z",
+      "side": 1,
+      "message": "If memory serves, it\u0027s actually recommended practice to wrap the tests in the same namespace as the thing they\u0027re testing and then an anonymous namespace. (My guess being, if the tests accidentally end up in your non-test build then the methods won\u0027t be visible anywhere)",
+      "parentUuid": "67d3198e_cd51cc77",
       "revId": "31ab1d0038eba09c66099204938b71aab86bf986",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
