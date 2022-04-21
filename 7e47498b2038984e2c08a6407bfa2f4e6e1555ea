@@ -33,6 +33,24 @@
       "message": "I\u0027m pretty sure that the texture dimension is always 2d because of https://dawn-review.googlesource.com/c/dawn/+/86622 so we can just hardcode wgpu::TExtureViewDimension::e2d.",
       "revId": "7e47498b2038984e2c08a6407bfa2f4e6e1555ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8405a29_a764d38f",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-21T17:38:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c93a743_6bd67199",
+      "revId": "7e47498b2038984e2c08a6407bfa2f4e6e1555ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
