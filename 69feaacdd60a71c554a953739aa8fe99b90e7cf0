@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66a5ab7c_6c0eb685",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T17:47:34Z",
+      "side": 1,
+      "message": "Found a couple more when doing the reformat, suggestion for bug numbers?",
+      "revId": "69feaacdd60a71c554a953739aa8fe99b90e7cf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ad1b60e_d65a0db7",
+        "filename": "src/dawn/native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T17:47:34Z",
+      "side": 1,
+      "message": "Bug suggestion?",
+      "revId": "69feaacdd60a71c554a953739aa8fe99b90e7cf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fd152ae_ce2754be",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T17:47:34Z",
+      "side": 1,
+      "message": "Bug suggestion?",
+      "revId": "69feaacdd60a71c554a953739aa8fe99b90e7cf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
