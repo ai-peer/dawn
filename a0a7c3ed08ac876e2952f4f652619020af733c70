@@ -895,6 +895,30 @@
       },
       "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9a95c23_79f51e87",
+        "filename": "src/tint/transform/single_entry_point.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-21T14:10:09Z",
+      "side": 1,
+      "message": "Please can you add a bit more info to the TODO, or remove it and file a bug instead?",
+      "parentUuid": "34889e8e_5a16eeaf",
+      "range": {
+        "startLine": 97,
+        "startChar": 6,
+        "endLine": 97,
+        "endChar": 48
+      },
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

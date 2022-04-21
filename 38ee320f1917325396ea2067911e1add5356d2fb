@@ -16,6 +16,69 @@
       "message": "PTAL, thanks",
       "revId": "38ee320f1917325396ea2067911e1add5356d2fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44e37923_78f81945",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-21T14:10:09Z",
+      "side": 1,
+      "message": "Looking good! Just a couple of minor things.",
+      "revId": "38ee320f1917325396ea2067911e1add5356d2fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af97dc3c_2d8aa2a6",
+        "filename": "src/tint/inspector/inspector.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-21T14:10:09Z",
+      "side": 1,
+      "message": "It\u0027s more common to use a `tint::Source`, as this includes the `Range` and a pointer to the file.",
+      "range": {
+        "startLine": 157,
+        "startChar": 37,
+        "endLine": 157,
+        "endChar": 49
+      },
+      "revId": "38ee320f1917325396ea2067911e1add5356d2fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab4b60e2_c34eb9e3",
+        "filename": "src/tint/inspector/inspector_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 3109,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-21T14:10:09Z",
+      "side": 1,
+      "message": "nit: Once you move to `Source`, this can just be `Source{{2,8}, {2,35}}`.\nNote you don\u0027t need the `tint::` prefix.",
+      "range": {
+        "startLine": 3108,
+        "startChar": 12,
+        "endLine": 3109,
+        "endChar": 61
+      },
+      "revId": "38ee320f1917325396ea2067911e1add5356d2fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
