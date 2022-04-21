@@ -20,22 +20,22 @@
 
 namespace dawn::native::opengl {
 
-    class BindGroup;
-    class Device;
+class BindGroup;
+class Device;
 
-    class BindGroupLayout final : public BindGroupLayoutBase {
-      public:
-        BindGroupLayout(DeviceBase* device,
-                        const BindGroupLayoutDescriptor* descriptor,
-                        PipelineCompatibilityToken pipelineCompatibilityToken);
+class BindGroupLayout final : public BindGroupLayoutBase {
+  public:
+    BindGroupLayout(DeviceBase* device,
+                    const BindGroupLayoutDescriptor* descriptor,
+                    PipelineCompatibilityToken pipelineCompatibilityToken);
 
-        Ref<BindGroup> AllocateBindGroup(Device* device, const BindGroupDescriptor* descriptor);
-        void DeallocateBindGroup(BindGroup* bindGroup);
+    Ref<BindGroup> AllocateBindGroup(Device* device, const BindGroupDescriptor* descriptor);
+    void DeallocateBindGroup(BindGroup* bindGroup);
 
-      private:
-        ~BindGroupLayout() override = default;
-        SlabAllocator<BindGroup> mBindGroupAllocator;
-    };
+  private:
+    ~BindGroupLayout() override = default;
+    SlabAllocator<BindGroup> mBindGroupAllocator;
+};
 
 }  // namespace dawn::native::opengl
 

@@ -25,18 +25,18 @@ namespace tint::resolver {
 
 /// Helper class for testing
 class TestHelper : public ProgramBuilder {
- public:
-  /// Constructor
-  TestHelper();
+  public:
+    /// Constructor
+    TestHelper();
 
-  /// Destructor
-  ~TestHelper() override;
+    /// Destructor
+    ~TestHelper() override;
 
-  /// @return a pointer to the Validator
-  Validator* v() const { return validator_.get(); }
+    /// @return a pointer to the Validator
+    Validator* v() const { return validator_.get(); }
 
- private:
-  std::unique_ptr<Validator> validator_;
+  private:
+    std::unique_ptr<Validator> validator_;
 };
 
 class ValidatorTest : public TestHelper, public testing::Test {};

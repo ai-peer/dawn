@@ -23,69 +23,68 @@ namespace {
 using ElseStatementTest = TestHelper;
 
 TEST_F(ElseStatementTest, Creation) {
-  auto* cond = Expr(true);
-  auto* body = create<BlockStatement>(StatementList{
-      create<DiscardStatement>(),
-  });
-  auto* discard = body->statements[0];
+    auto* cond = Expr(true);
+    auto* body = create<BlockStatement>(StatementList{
+        create<DiscardStatement>(),
+    });
+    auto* discard = body->statements[0];
 
-  auto* e = create<ElseStatement>(cond, body);
-  EXPECT_EQ(e->condition, cond);
-  ASSERT_EQ(e->body->statements.size(), 1u);
-  EXPECT_EQ(e->body->statements[0], discard);
+    auto* e = create<ElseStatement>(cond, body);
+    EXPECT_EQ(e->condition, cond);
+    ASSERT_EQ(e->body->statements.size(), 1u);
+    EXPECT_EQ(e->body->statements[0], discard);
 }
 
 TEST_F(ElseStatementTest, Creation_WithSource) {
-  auto* e = create<ElseStatement>(Source{Source::Location{20, 2}}, Expr(true),
-                                  Block());
-  auto src = e->source;
-  EXPECT_EQ(src.range.begin.line, 20u);
-  EXPECT_EQ(src.range.begin.column, 2u);
+    auto* e = create<ElseStatement>(Source{Source::Location{20, 2}}, Expr(true), Block());
+    auto src = e->source;
+    EXPECT_EQ(src.range.begin.line, 20u);
+    EXPECT_EQ(src.range.begin.column, 2u);
 }
 
 TEST_F(ElseStatementTest, IsElse) {
-  auto* e = create<ElseStatement>(nullptr, Block());
-  EXPECT_TRUE(e->Is<ElseStatement>());
+    auto* e = create<ElseStatement>(nullptr, Block());
+    EXPECT_TRUE(e->Is<ElseStatement>());
 }
 
 TEST_F(ElseStatementTest, HasCondition) {
-  auto* cond = Expr(true);
-  auto* e = create<ElseStatement>(cond, Block());
-  EXPECT_TRUE(e->condition);
+    auto* cond = Expr(true);
+    auto* e = create<ElseStatement>(cond, Block());
+    EXPECT_TRUE(e->condition);
 }
 
 TEST_F(ElseStatementTest, HasContition_NullCondition) {
-  auto* e = create<ElseStatement>(nullptr, Block());
-  EXPECT_FALSE(e->condition);
+    auto* e = create<ElseStatement>(nullptr, Block());
+    EXPECT_FALSE(e->condition);
 }
 
 TEST_F(ElseStatementTest, Assert_Null_Body) {
-  EXPECT_FATAL_FAILURE(
-      {
-        ProgramBuilder b;
-        b.create<ElseStatement>(b.Expr(true), nullptr);
-      },
-      "internal compiler error");
+    EXPECT_FATAL_FAILURE(
+        {
+            ProgramBuilder b;
+            b.create<ElseStatement>(b.Expr(true), nullptr);
+        },
+        "internal compiler error");
 }
 
 TEST_F(ElseStatementTest, Assert_DifferentProgramID_Condition) {
-  EXPECT_FATAL_FAILURE(
-      {
-        ProgramBuilder b1;
-        ProgramBuilder b2;
-        b1.create<ElseStatement>(b2.Expr(true), b1.Block());
-      },
-      "internal compiler error");
+    EXPECT_FATAL_FAILURE(
+        {
+            ProgramBuilder b1;
+            ProgramBuilder b2;
+            b1.create<ElseStatement>(b2.Expr(true), b1.Block());
+        },
+        "internal compiler error");
 }
 
 TEST_F(ElseStatementTest, Assert_DifferentProgramID_Body) {
-  EXPECT_FATAL_FAILURE(
-      {
-        ProgramBuilder b1;
-        ProgramBuilder b2;
-        b1.create<ElseStatement>(b1.Expr(true), b2.Block());
-      },
-      "internal compiler error");
+    EXPECT_FATAL_FAILURE(
+        {
+            ProgramBuilder b1;
+            ProgramBuilder b2;
+            b1.create<ElseStatement>(b1.Expr(true), b2.Block());
+        },
+        "internal compiler error");
 }
 
 }  // namespace

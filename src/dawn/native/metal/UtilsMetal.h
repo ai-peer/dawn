@@ -23,63 +23,59 @@
 #import <Metal/Metal.h>
 
 namespace dawn::native {
-    struct ProgrammableStage;
-    struct EntryPointMetadata;
-    enum class SingleShaderStage;
+struct ProgrammableStage;
+struct EntryPointMetadata;
+enum class SingleShaderStage;
 }
 
 namespace dawn::native::metal {
 
-    MTLCompareFunction ToMetalCompareFunction(wgpu::CompareFunction compareFunction);
+MTLCompareFunction ToMetalCompareFunction(wgpu::CompareFunction compareFunction);
 
-    struct TextureBufferCopySplit {
-        static constexpr uint32_t kMaxTextureBufferCopyRegions = 3;
+struct TextureBufferCopySplit {
+    static constexpr uint32_t kMaxTextureBufferCopyRegions = 3;
 
-        struct CopyInfo {
-            NSUInteger bufferOffset;
-            NSUInteger bytesPerRow;
-            NSUInteger bytesPerImage;
-            Origin3D textureOrigin;
-            Extent3D copyExtent;
-        };
-
-        uint32_t count = 0;
-        std::array<CopyInfo, kMaxTextureBufferCopyRegions> copies;
-
-        auto begin() const {
-            return copies.begin();
-        }
-
-        auto end() const {
-            return copies.begin() + count;
-        }
+    struct CopyInfo {
+        NSUInteger bufferOffset;
+        NSUInteger bytesPerRow;
+        NSUInteger bytesPerImage;
+        Origin3D textureOrigin;
+        Extent3D copyExtent;
     };
 
-    TextureBufferCopySplit ComputeTextureBufferCopySplit(const Texture* texture,
-                                                         uint32_t mipLevel,
-                                                         Origin3D origin,
-                                                         Extent3D copyExtent,
-                                                         uint64_t bufferSize,
-                                                         uint64_t bufferOffset,
-                                                         uint32_t bytesPerRow,
-                                                         uint32_t rowsPerImage,
-                                                         Aspect aspect);
+    uint32_t count = 0;
+    std::array<CopyInfo, kMaxTextureBufferCopyRegions> copies;
 
-    void EnsureDestinationTextureInitialized(CommandRecordingContext* commandContext,
-                                             Texture* texture,
-                                             const TextureCopy& dst,
-                                             const Extent3D& size);
+    auto begin() const { return copies.begin(); }
 
-    MTLBlitOption ComputeMTLBlitOption(const Format& format, Aspect aspect);
+    auto end() const { return copies.begin() + count; }
+};
 
-    // Helper function to create function with constant values wrapped in
-    // if available branch
-    MaybeError CreateMTLFunction(const ProgrammableStage& programmableStage,
-                                 SingleShaderStage singleShaderStage,
-                                 PipelineLayout* pipelineLayout,
-                                 ShaderModule::MetalFunctionData* functionData,
-                                 uint32_t sampleMask = 0xFFFFFFFF,
-                                 const RenderPipeline* renderPipeline = nullptr);
+TextureBufferCopySplit ComputeTextureBufferCopySplit(const Texture* texture,
+                                                     uint32_t mipLevel,
+                                                     Origin3D origin,
+                                                     Extent3D copyExtent,
+                                                     uint64_t bufferSize,
+                                                     uint64_t bufferOffset,
+                                                     uint32_t bytesPerRow,
+                                                     uint32_t rowsPerImage,
+                                                     Aspect aspect);
+
+void EnsureDestinationTextureInitialized(CommandRecordingContext* commandContext,
+                                         Texture* texture,
+                                         const TextureCopy& dst,
+                                         const Extent3D& size);
+
+MTLBlitOption ComputeMTLBlitOption(const Format& format, Aspect aspect);
+
+// Helper function to create function with constant values wrapped in
+// if available branch
+MaybeError CreateMTLFunction(const ProgrammableStage& programmableStage,
+                             SingleShaderStage singleShaderStage,
+                             PipelineLayout* pipelineLayout,
+                             ShaderModule::MetalFunctionData* functionData,
+                             uint32_t sampleMask = 0xFFFFFFFF,
+                             const RenderPipeline* renderPipeline = nullptr);
 
 }  // namespace dawn::native::metal
 
