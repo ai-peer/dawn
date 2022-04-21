@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "102199cc_d925e581",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-21T21:55:06Z",
+      "side": 1,
+      "message": "Couple of nits, but looks great!",
+      "revId": "b448772013be205e7c18c5338278b81383589144",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a98809c_9cc3ae77",
+        "filename": "src/tint/resolver/source_variable_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-21T21:55:06Z",
+      "side": 1,
+      "message": "I was half expecting `b`\u0027s source variable to be `a`.\nThe original code we wrote for the inspector did this, when trying to resolve originating textures / samplers - but we can\u0027t put them in lets anymore, so okay.",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 56
+      },
+      "revId": "b448772013be205e7c18c5338278b81383589144",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfd0f084_17ffc906",
+        "filename": "src/tint/resolver/source_variable_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-21T21:55:06Z",
+      "side": 1,
+      "message": "Can we have a couple of tests for binary / unary expressions too? e.g. `a + 1.0`",
+      "revId": "b448772013be205e7c18c5338278b81383589144",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c71ebbdd_3ff3e76e",
+        "filename": "src/tint/sem/expression.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-21T21:55:06Z",
+      "side": 1,
+      "message": "nit: I like to annotate defaults in the .cpp with `source_var /* \u003d nullptr */`",
+      "revId": "b448772013be205e7c18c5338278b81383589144",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
