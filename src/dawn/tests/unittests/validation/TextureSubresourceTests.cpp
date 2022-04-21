@@ -133,7 +133,7 @@ namespace {
         TestRenderPass(samplerView, renderView);
     }
 
-    // TODO (yunchao.he@intel.com):
+    // TODO(yunchao.he@intel.com):
     //  * Add tests for compute, in which texture subresource is traced per dispatch.
     //
     //  * Add tests for multiple encoders upon the same resource simultaneously. This situation fits

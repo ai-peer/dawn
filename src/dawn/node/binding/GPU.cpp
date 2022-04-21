@@ -60,7 +60,7 @@ namespace wgpu::binding {
     // wgpu::bindings::GPU
     ////////////////////////////////////////////////////////////////////////////////
     GPU::GPU(Flags flags) : flags_(std::move(flags)) {
-        // TODO: Disable in 'release'
+        // TODO(bclayton): Disable in 'release'
         instance_.EnableBackendValidation(true);
         instance_.SetBackendValidationLevel(dawn::native::BackendValidationLevel::Full);
 

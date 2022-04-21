@@ -97,7 +97,7 @@ namespace wgpu::binding {
                         break;
                     case WGPUBufferMapAsyncStatus_Unknown:
                     case WGPUBufferMapAsyncStatus_DeviceLost:
-                        // TODO: The spec is a bit vague around what the promise should do
+                        // TODO(bclayton): The spec is a bit vague around what the promise should do
                         // here.
                         c->promise.Reject(Errors::UnknownError(c->env));
                         break;

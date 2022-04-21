@@ -668,7 +668,7 @@ namespace dawn::native::vulkan {
                                                   copy->copySize.depthOrArrayLayers));
                     }
 
-                    // TODO after Yunchao's CL
+                    // TODO(cwallez): after Yunchao's CL
                     ToBackend(src.texture)
                         ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopySrc,
                                              srcRange);

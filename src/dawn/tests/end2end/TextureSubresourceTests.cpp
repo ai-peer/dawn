@@ -188,7 +188,7 @@ TEST_P(TextureSubresourceTest, ArrayLayersTest) {
     EXPECT_TEXTURE_EQ(&bottomLeft, texture, {0, kSize - 1, 1}, {1, 1});
 }
 
-// TODO (yunchao.he@intel.com):
+// TODO(yunchao.he@intel.com):
 // * add tests for storage texture and sampler across miplevel or
 // arraylayer dimensions in the same texture
 //

@@ -126,7 +126,7 @@ std::optional<std::string> GetExecutablePath() {
 }
 #elif defined(DAWN_PLATFORM_FUCHSIA)
 std::optional<std::string> GetExecutablePath() {
-    // TODO: Implement on Fuchsia
+    // TODO(hao.x.li): Implement on Fuchsia
     return {};
 }
 #elif defined(DAWN_PLATFORM_EMSCRIPTEN)

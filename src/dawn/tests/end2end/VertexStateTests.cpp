@@ -648,7 +648,7 @@ DAWN_INSTANTIATE_TEST(VertexStateTest,
                       OpenGLESBackend(),
                       VulkanBackend());
 
-// TODO for the input state:
+// TODO(yunchao.he) for the input state:
 //  - Add more vertex formats
 //  - Add checks that the stride is enough to contain all attributes
 //  - Add checks stride less than some limit
