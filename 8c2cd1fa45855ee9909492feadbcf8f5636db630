@@ -16,6 +16,24 @@
       "message": "I don\u0027t have access to Kokoro, can anyone tell me why it failed please?",
       "revId": "8c2cd1fa45855ee9909492feadbcf8f5636db630",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05541f04_b4b604a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-21T15:44:49Z",
+      "side": 1,
+      "message": "It was on patchset 1 where there the try/except was removed:\n\n-- Dawn: Using jinja2 at /dawn/src/third_party/jinja2\nTraceback (most recent call last):\n  File \"/dawn/src/generator/dawn_version_generator.py\", line 113, in \u003cmodule\u003e\n    sys.exit(run_generator(DawnVersionGenerator()))\n  File \"/dawn/src/generator/generator_lib.py\", line 290, in run_generator\n    dependencies \u003d generator.get_dependencies(args)\n  File \"/dawn/src/generator/dawn_version_generator.py\", line 100, in get_dependencies\n    return [get_gitHead(dawnDir)] + get_gitResolvedHead(dawnDir)\n  File \"/dawn/src/generator/dawn_version_generator.py\", line 64, in get_gitResolvedHead\n    raise Exception(\"Failed to execute git rev-parse to resolve git head.\")\nException: Failed to execute git rev-parse to resolve git head.\nCMake Error at generator/CMakeLists.txt:65 (message):\n  Dawn: Failed to get the dependencies for Dawn version based utilities.\n  Base args are\n  \u0027/usr/bin/python3;/dawn/src/generator/dawn_version_generator.py;--template-dir;/dawn/src/generator/templates;--root-dir;/dawn/src;--output-dir;/dawn/build/gen;--dawn-dir;/dawn/src;--jinja2-path;/dawn/src/third_party/jinja2\u0027.\nCall Stack (most recent call first):\n  src/dawn/common/CMakeLists.txt:15 (DawnGenerator)\n\n\nI think Patchset 2 will be OK",
+      "parentUuid": "15b784a5_1dc69ed7",
+      "revId": "8c2cd1fa45855ee9909492feadbcf8f5636db630",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
