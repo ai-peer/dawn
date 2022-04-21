@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "880b9795_5080188f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-21T22:52:17Z",
+      "side": 1,
+      "message": "I love this cleanup. Just some minor suggestions.",
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64996d4c_ee9f51ca",
@@ -49,6 +66,99 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "387db2bd_5a9fc30c",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-21T22:52:17Z",
+      "side": 1,
+      "message": "Would it be better to have a `static const char zero \u003d 0` that you can return if  `pos` is OOB? You\u0027d then reduce the chance of `pos` being `\u003e\u003d l.size()`, which is a bit of a security risk.",
+      "parentUuid": "1b7c4393_09899ff5",
+      "range": {
+        "startLine": 71,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 52
+      },
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61992cae_dc18313c",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-21T22:52:17Z",
+      "side": 1,
+      "message": "Why can\u0027t we always use a `string_view` ? Because of the null terminator?",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 1
+      },
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53e25673_5b27f81d",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-21T22:52:17Z",
+      "side": 1,
+      "message": "`newline()` sounds like it is trying to match a new line instead of advancing to the next line. Howzabout `next_line()` or `advance_line()`?",
+      "range": {
+        "startLine": 95,
+        "startChar": 12,
+        "endLine": 95,
+        "endChar": 19
+      },
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8531fff_c712fc3c",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-21T22:52:17Z",
+      "side": 1,
+      "message": "I like this a lot. Good job.",
+      "range": {
+        "startLine": 227,
+        "startChar": 4,
+        "endLine": 227,
+        "endChar": 15
+      },
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6429e778_a9fe8a0a",
         "filename": "src/tint/reader/wgsl/lexer.h",
         "patchSetId": 1
@@ -83,6 +193,30 @@
       "writtenOn": "2022-04-21T19:06:33Z",
       "side": 1,
       "message": "Note that I now use location_ as the primary cursor, as it stores both the column and line already.",
+      "range": {
+        "startLine": 103,
+        "startChar": 19,
+        "endLine": 103,
+        "endChar": 28
+      },
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b46e9e57_87535b8b",
+        "filename": "src/tint/reader/wgsl/lexer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-21T22:52:17Z",
+      "side": 1,
+      "message": "Do we still need `pos_` and `len_` then?",
+      "parentUuid": "04a0d174_28217833",
       "range": {
         "startLine": 103,
         "startChar": 19,
