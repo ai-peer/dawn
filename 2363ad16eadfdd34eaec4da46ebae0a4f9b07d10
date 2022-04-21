@@ -16,6 +16,24 @@
       "message": "Please don\u0027t remove the try/except here as it causes the script to fail if `get_gitResolvedHead` fails which then causes the entire build to fail. This needs to properly handle the get commands not working correctly so the build can continue.",
       "revId": "2363ad16eadfdd34eaec4da46ebae0a4f9b07d10",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a863d5c1_333d6362",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1001616
+      },
+      "writtenOn": "2022-04-21T15:09:19Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "527d7b49_82c6e09c",
+      "revId": "2363ad16eadfdd34eaec4da46ebae0a4f9b07d10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

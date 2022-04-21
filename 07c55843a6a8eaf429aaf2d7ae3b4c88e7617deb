@@ -16,6 +16,24 @@
       "message": "LGTM for the most part. I\u0027m a bit concerned about this only because I am not sure if our window bots have git natively (and might have been getting it from depot_tools). Also, removing the print is fine, like Dan mentioned in the bug (but not the try/except).",
       "revId": "07c55843a6a8eaf429aaf2d7ae3b4c88e7617deb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f27746e_c5fb1528",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001616
+      },
+      "writtenOn": "2022-04-21T15:09:19Z",
+      "side": 1,
+      "message": "Using shell\u003dTrue, \"git\" should allow matching different extensions, including \"git.exe\" and \"git.bat\", so depot_tools git should work.",
+      "parentUuid": "bcfd8304_375ea39a",
+      "revId": "07c55843a6a8eaf429aaf2d7ae3b4c88e7617deb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
