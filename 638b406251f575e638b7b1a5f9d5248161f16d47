@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "199ea415_8a42c8f6",
+        "filename": "src/dawn/common/StackContainer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T15:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9400221c_2fd30bec",
+      "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7ccc92b_e7795776",
@@ -83,6 +101,24 @@
       "writtenOn": "2022-04-21T14:54:51Z",
       "side": 1,
       "message": "Maybe replace with UNIMPLEMENTED() from common/Assert.h?",
+      "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "513cc12d_4f90ff1d",
+        "filename": "src/dawn/common/SystemUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T15:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7ccc92b_e7795776",
       "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -104,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "676a0926_fc9f54b1",
+        "filename": "src/dawn/native/d3d12/RenderPassBuilderD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T15:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19b67b83_e2f70306",
+      "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ea88daf_912d5fe6",
@@ -117,6 +171,24 @@
       "writtenOn": "2022-04-21T14:54:51Z",
       "side": 1,
       "message": "I have no idea what should be done with this one. Let\u0027s just remove it.",
+      "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "222e7fe3_af31bd9c",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T15:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ea88daf_912d5fe6",
       "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -138,6 +210,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "692f7ed1_dec000a2",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T15:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43e3137f_6c803956",
+      "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9a04cc1_c36f97e7",
@@ -151,6 +241,24 @@
       "writtenOn": "2022-04-21T14:54:51Z",
       "side": 1,
       "message": "nit: dawn:269",
+      "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "151ab700_1314b17a",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T15:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9a04cc1_c36f97e7",
       "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -172,6 +280,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11fde272_72e816d7",
+        "filename": "src/dawn/node/binding/GPU.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T15:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "974c5f57_b33d7ef0",
+      "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44a224f8_dcbb70fe",
@@ -185,6 +311,24 @@
       "writtenOn": "2022-04-21T14:54:51Z",
       "side": 1,
       "message": "ditto",
+      "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ffd9a03_a315c01b",
+        "filename": "src/dawn/node/binding/GPUBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T15:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44a224f8_dcbb70fe",
       "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -206,6 +350,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60bb39ca_318206c6",
+        "filename": "src/dawn/samples/ManualSwapChainTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T15:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3a0043c_ad911fd0",
+      "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94b86359_446a97b3",
@@ -219,6 +381,24 @@
       "writtenOn": "2022-04-21T14:54:51Z",
       "side": 1,
       "message": "Maybe dawn:929? Not sure",
+      "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e76b17a_43f43c65",
+        "filename": "src/dawn/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T15:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94b86359_446a97b3",
       "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -240,6 +420,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01b57a7c_6a30bcc5",
+        "filename": "src/dawn/tests/end2end/SamplerTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T15:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b769786_7a693a96",
+      "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e5e6a21_81bfe36a",
@@ -253,6 +451,24 @@
       "writtenOn": "2022-04-21T14:54:51Z",
       "side": 1,
       "message": "ditto here and in other files below",
+      "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1798867f_5014dce6",
+        "filename": "src/dawn/tests/end2end/TextureSubresourceTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T15:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e5e6a21_81bfe36a",
       "revId": "638b406251f575e638b7b1a5f9d5248161f16d47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
