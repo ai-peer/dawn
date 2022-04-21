@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "135e77ed_daa30fe2",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-21T12:51:54Z",
+      "side": 1,
+      "message": "I think this could be a bit more complicated than it needs to be. WDYT of a `GetUsageExternalOnly()` that\u0027s `return GetUsage() \u0026 ~kAllInternalBufferUsages` and use that in the creation of the error messages?",
+      "revId": "621d0a65ed803673229a3e3ec5c5deeb180f3f0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
