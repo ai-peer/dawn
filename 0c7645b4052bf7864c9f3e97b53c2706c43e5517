@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d56e5135_b5456877",
+        "filename": "src/dawn/native/PipelineCache.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-21T03:11:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b105cc5_70eff80d",
+      "range": {
+        "startLine": 21,
+        "startChar": 8,
+        "endLine": 21,
+        "endChar": 35
+      },
+      "revId": "0c7645b4052bf7864c9f3e97b53c2706c43e5517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34c6d913_af4293f1",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9d2f2e1_8625cdd3",
+        "filename": "src/dawn/native/PipelineCache.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-21T03:11:24Z",
+      "side": 1,
+      "message": "We don\u0027t need it around since it can change throughout it\u0027s time. Also removed mBlob entirely.",
+      "parentUuid": "34c6d913_af4293f1",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 25
+      },
+      "revId": "0c7645b4052bf7864c9f3e97b53c2706c43e5517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d837d338_e87fd644",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-04-18T17:57:56Z",
       "side": 1,
       "message": "so maybe it should just be RefCounted, not ObjectBase? - or can it just be unique_ptr ?",
+      "range": {
+        "startLine": 24,
+        "startChar": 75,
+        "endLine": 26,
+        "endChar": 98
+      },
+      "revId": "0c7645b4052bf7864c9f3e97b53c2706c43e5517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a4bfe12_a0c789f4",
+        "filename": "src/dawn/native/PipelineCache.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-21T03:11:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d837d338_e87fd644",
       "range": {
         "startLine": 24,
         "startChar": 75,
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e017b1d_4fedd0e0",
+        "filename": "src/dawn/native/vulkan/PipelineCacheVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-21T03:11:24Z",
+      "side": 1,
+      "message": "Hmm maybe there\u0027s a better way to do this, but the try with cleanup overload is trying to return nothing here instead of the default error and the `(void)0` gets rid of the compiler errors. Idea is that cache initialization shouldn\u0027t really cause an error.",
+      "parentUuid": "e7fa633c_b3bb334d",
+      "range": {
+        "startLine": 80,
+        "startChar": 43,
+        "endLine": 80,
+        "endChar": 50
+      },
+      "revId": "0c7645b4052bf7864c9f3e97b53c2706c43e5517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d3f328f7_e1c9ff67",
         "filename": "src/dawn/native/vulkan/PipelineCacheVk.cpp",
         "patchSetId": 14
@@ -106,6 +202,30 @@
       "writtenOn": "2022-04-18T17:57:56Z",
       "side": 1,
       "message": "do we need deferred deletion? IIUC, the cache should only be used on the CPU for the duration of the call to vkCreateGraphicsPipelines or vkCreateComputePipelines",
+      "range": {
+        "startLine": 86,
+        "startChar": 12,
+        "endLine": 86,
+        "endChar": 66
+      },
+      "revId": "0c7645b4052bf7864c9f3e97b53c2706c43e5517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5919563_cfcb732a",
+        "filename": "src/dawn/native/vulkan/PipelineCacheVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-21T03:11:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3f328f7_e1c9ff67",
       "range": {
         "startLine": 86,
         "startChar": 12,
@@ -129,6 +249,30 @@
       "writtenOn": "2022-04-18T17:57:56Z",
       "side": 1,
       "message": "It looks like `GetOrCreate...` always creates, so we may as well call `PipelineCache::Create`\n\nAlso, I don\u0027t think currently it makes sense to have a method like GetOrCreate in the frontend since the cache both gets created and used in the backend; we don\u0027t need it in the frontend.\nI think the frontend bit makes sense in a future where we use the monolithic cache objects and it lives on the Device/Adapter, but right now, the cache\u0027s lifetime is scoped to this function call.\n\nTo make things simpler, I think the cache could even be just some simple stack-allocated object in this function which loads/stores to the blob cache",
+      "range": {
+        "startLine": 569,
+        "startChar": 52,
+        "endLine": 569,
+        "endChar": 76
+      },
+      "revId": "0c7645b4052bf7864c9f3e97b53c2706c43e5517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac20e19c_5d92145f",
+        "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-21T03:11:24Z",
+      "side": 1,
+      "message": "Hmm thought about this some more, and while I agree that we don\u0027t NEED it in the frontend for this change, I think it would be best to have the skeleton here for it. This way if we parallelize work, we sort of lock in general flow early on so its easier to modify later.",
+      "parentUuid": "38576a6b_8f2c36a9",
       "range": {
         "startLine": 569,
         "startChar": 52,
