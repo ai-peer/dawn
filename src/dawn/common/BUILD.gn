@@ -215,6 +215,7 @@ if (is_win || is_linux || is_chromeos || is_mac || is_fuchsia || is_android) {
       "SerialMap.h",
       "SerialQueue.h",
       "SerialStorage.h",
+      "Size.h",
       "SlabAllocator.cpp",
       "SlabAllocator.h",
       "StackContainer.h",
