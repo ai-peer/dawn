@@ -414,12 +414,15 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
 }
 
 std::unique_ptr<dawn::native::Instance> DawnTestEnvironment::CreateInstanceAndDiscoverAdapters() {
+    { DAWN_DEBUG() << "making instance"; }
     auto instance = std::make_unique<dawn::native::Instance>();
     instance->EnableBeginCaptureOnStartup(mBeginCaptureOnStartup);
     instance->SetBackendValidationLevel(mBackendValidationLevel);
+    { DAWN_DEBUG() << "discovering default adapters"; }
     instance->DiscoverDefaultAdapters();
 
 #ifdef DAWN_ENABLE_BACKEND_DESKTOP_GL
+    { DAWN_DEBUG() << "glfwInit"; }
     if (!glfwInit()) {
         return instance;
     }
@@ -430,12 +433,17 @@ std::unique_ptr<dawn::native::Instance> DawnTestEnvironment::CreateInstanceAndDi
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
+    { DAWN_DEBUG() << "glfwCreateWindow"; }
     mOpenGLWindow = glfwCreateWindow(400, 400, "Dawn OpenGL test window", nullptr, nullptr);
     if (mOpenGLWindow != nullptr) {
+        { DAWN_DEBUG() << "glfwMakeContextCurrent"; }
         glfwMakeContextCurrent(mOpenGLWindow);
         dawn::native::opengl::AdapterDiscoveryOptions adapterOptions;
         adapterOptions.getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
+         { DAWN_DEBUG() << "discovering GL adapters"; }
         instance->DiscoverAdapters(&adapterOptions);
+    } else {
+        { DAWN_DEBUG() << "glfwCreateWindow (failed)"; }
     }
 #endif  // DAWN_ENABLE_BACKEND_DESKTOP_GL
 
@@ -446,6 +454,7 @@ std::unique_ptr<dawn::native::Instance> DawnTestEnvironment::CreateInstanceAndDi
         angleDefaultPlatform.Set("ANGLE_DEFAULT_PLATFORM", "swiftshader");
     }
 
+    { DAWN_DEBUG() << "glfwInit"; }
     if (!glfwInit()) {
         return instance;
     }
@@ -456,13 +465,18 @@ std::unique_ptr<dawn::native::Instance> DawnTestEnvironment::CreateInstanceAndDi
     glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
+    { DAWN_DEBUG() << "glfwCreateWindow"; }
     mOpenGLESWindow = glfwCreateWindow(400, 400, "Dawn OpenGLES test window", nullptr, nullptr);
     if (mOpenGLESWindow != nullptr) {
+        { DAWN_DEBUG() << "glfwMakeContextCurrent"; }
         glfwMakeContextCurrent(mOpenGLESWindow);
         dawn::native::opengl::AdapterDiscoveryOptionsES adapterOptionsES;
         adapterOptionsES.getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
+        { DAWN_DEBUG() << "discovering GLES adapters"; }
         instance->DiscoverAdapters(&adapterOptionsES);
         glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE);
+    } else {
+        { DAWN_DEBUG() << "glfwCreateWindow (failed)"; }
     }
 #endif  // DAWN_ENABLE_BACKEND_OPENGLES
 
