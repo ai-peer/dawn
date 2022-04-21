@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee34332a_b52e02a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-21T07:59:30Z",
+      "side": 1,
+      "message": "I\u0027d like second opinions on this. That we can no longer `using namespace testing` seems really unfortunate, but maybe we can import names one by one.",
+      "revId": "31ab1d0038eba09c66099204938b71aab86bf986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67d3198e_cd51cc77",
+        "filename": "src/dawn/tests/unittests/ErrorTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-21T07:59:30Z",
+      "side": 1,
+      "message": "I think we could just remove that anonymous namespace. Either way.",
+      "revId": "31ab1d0038eba09c66099204938b71aab86bf986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9c6c06d_67866abf",
+        "filename": "src/dawn/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-21T07:59:30Z",
+      "side": 1,
+      "message": "ditto here and maybe in other places",
+      "revId": "31ab1d0038eba09c66099204938b71aab86bf986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
