@@ -1209,7 +1209,8 @@ sem::Expression* Resolver::IndexAccessor(
   auto val = EvaluateConstantValue(expr, ty);
   bool has_side_effects = idx->HasSideEffects() || obj->HasSideEffects();
   auto* sem = builder_->create<sem::Expression>(expr, ty, current_statement_,
-                                                val, has_side_effects);
+                                                val, has_side_effects,
+                                                obj->SourceVariable());
   sem->Behaviors() = idx->Behaviors() + obj->Behaviors();
   return sem;
 }
@@ -1731,6 +1732,7 @@ sem::Expression* Resolver::MemberAccessor(
     const ast::MemberAccessorExpression* expr) {
   auto* structure = sem_.TypeOf(expr->structure);
   auto* storage_ty = structure->UnwrapRef();
+  auto* source_var = sem_.Get(expr->structure)->SourceVariable();
 
   const sem::Type* ret = nullptr;
   std::vector<uint32_t> swizzle;
@@ -1766,7 +1768,7 @@ sem::Expression* Resolver::MemberAccessor(
     }
 
     return builder_->create<sem::StructMemberAccess>(
-        expr, ret, current_statement_, member, has_side_effects);
+        expr, ret, current_statement_, member, has_side_effects, source_var);
   }
 
   if (auto* vec = storage_ty->As<sem::Vector>()) {
@@ -1839,7 +1841,8 @@ sem::Expression* Resolver::MemberAccessor(
                                           static_cast<uint32_t>(size));
     }
     return builder_->create<sem::Swizzle>(expr, ret, current_statement_,
-                                          std::move(swizzle), has_side_effects);
+                                          std::move(swizzle), has_side_effects,
+                                          source_var);
   }
 
   AddError(
@@ -2126,7 +2129,8 @@ sem::Expression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
 
   auto val = EvaluateConstantValue(unary, ty);
   auto* sem = builder_->create<sem::Expression>(unary, ty, current_statement_,
-                                                val, expr->HasSideEffects());
+                                                val, expr->HasSideEffects(),
+                                                expr->SourceVariable());
   sem->Behaviors() = expr->Behaviors();
   return sem;
 }
