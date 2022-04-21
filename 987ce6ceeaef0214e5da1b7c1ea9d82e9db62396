@@ -16,6 +16,24 @@
       "message": "Second attempt. I think it\u0027s a better solution then using shell\u003dTrue.",
       "revId": "987ce6ceeaef0214e5da1b7c1ea9d82e9db62396",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62be2059_913d6df4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-21T19:14:03Z",
+      "side": 1,
+      "message": "Seems fine. I triggered a CQ run to make sure that it is working.",
+      "parentUuid": "f55b1b8d_57d72fc0",
+      "revId": "987ce6ceeaef0214e5da1b7c1ea9d82e9db62396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
