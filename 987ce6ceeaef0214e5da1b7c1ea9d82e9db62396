@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f55b1b8d_57d72fc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001616
+      },
+      "writtenOn": "2022-04-21T19:02:51Z",
+      "side": 1,
+      "message": "Second attempt. I think it\u0027s a better solution then using shell\u003dTrue.",
+      "revId": "987ce6ceeaef0214e5da1b7c1ea9d82e9db62396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
