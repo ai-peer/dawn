@@ -76,7 +76,7 @@ class Builder {
   /// @param program the program
   /// @param zero_initialize_workgroup_memory `true` to initialize all the
   /// variables in the Workgroup storage class with OpConstantNull
-  Builder(const Program* program,
+  explicit Builder(const Program* program,
           bool zero_initialize_workgroup_memory = false);
   ~Builder();
 

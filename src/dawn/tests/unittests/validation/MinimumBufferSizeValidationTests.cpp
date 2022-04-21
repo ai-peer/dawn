@@ -112,6 +112,7 @@ namespace {
     }
 
     // Used for adding custom types available throughout the tests
+    // NOLINTNEXTLINE(runtime/string)
     static const std::string kStructs = "struct ThreeFloats {f1 : f32, f2 : f32, f3 : f32,}\n";
 
     // Creates a compute shader with given bindings

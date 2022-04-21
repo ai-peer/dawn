@@ -27,6 +27,7 @@
 namespace {
 
     bool gUseWire = false;
+    // NOLINTNEXTLINE(runtime/string)
     std::string gWireTraceDir = "";
     std::unique_ptr<ToggleParser> gToggleParser = nullptr;
 
