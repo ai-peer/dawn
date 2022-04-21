@@ -25,6 +25,8 @@ namespace {
     using ::testing::NiceMock;
 }  // namespace
 
+// TODO(dawn:1341) Re-enable tests once shader caching is re-implemented.
+
 class D3D12CachingTests : public DawnTest {
   protected:
     std::unique_ptr<dawn::platform::Platform> CreateTestPlatform() override {
@@ -173,5 +175,3 @@ TEST_P(D3D12CachingTests, ReuseShaderWithMultipleEntryPoints) {
     }
     EXPECT_EQ(mMockCache.GetNumEntries(), 2u);
 }
-
-DAWN_INSTANTIATE_TEST(D3D12CachingTests, D3D12Backend());
