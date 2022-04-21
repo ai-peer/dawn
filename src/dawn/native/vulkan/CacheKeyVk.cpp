@@ -229,12 +229,16 @@ namespace dawn::native {
     void CacheKeySerializer<vulkan::RenderPassCacheQuery>::Serialize(
         CacheKey* key,
         const vulkan::RenderPassCacheQuery& t) {
-        key->Record(t.colorMask.to_ulong(), t.resolveTargetMask.to_ulong())
-            .RecordIterable(t.colorFormats)
-            .RecordIterable(t.colorLoadOp)
-            .RecordIterable(t.colorStoreOp)
-            .Record(t.hasDepthStencil, t.depthStencilFormat, t.depthLoadOp, t.depthStoreOp,
-                    t.stencilLoadOp, t.stencilStoreOp, t.readOnlyDepthStencil, t.sampleCount);
+        key->Record(t.colorMask.to_ulong(), t.resolveTargetMask.to_ulong(), t.hasDepthStencil,
+                    t.depthStencilFormat, t.depthLoadOp, t.depthStoreOp, t.stencilLoadOp,
+                    t.stencilStoreOp, t.readOnlyDepthStencil, t.sampleCount);
+
+        // Manually iterate the color attachment indices and their corresponding format/load/store
+        // ops because the data is sparse and may be uninitialized. Since we record the colorMask
+        // member above, recording sparse data should be fine here.
+        for (ColorAttachmentIndex i : IterateBitSet(t.colorMask)) {
+            key->Record(t.colorFormats[i], t.colorLoadOp[i], t.colorStoreOp[i]);
+        }
     }
 
     template <>
