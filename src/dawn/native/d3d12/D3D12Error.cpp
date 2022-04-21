@@ -19,33 +19,33 @@
 #include <string>
 
 namespace dawn::native::d3d12 {
-    MaybeError CheckHRESULTImpl(HRESULT result, const char* context) {
-        if (DAWN_LIKELY(SUCCEEDED(result))) {
-            return {};
-        }
-
-        std::ostringstream messageStream;
-        messageStream << context << " failed with ";
-        if (result == E_FAKE_ERROR_FOR_TESTING) {
-            messageStream << "E_FAKE_ERROR_FOR_TESTING";
-        } else {
-            messageStream << "0x" << std::uppercase << std::setfill('0') << std::setw(8) << std::hex
-                          << result;
-        }
-
-        if (result == DXGI_ERROR_DEVICE_REMOVED) {
-            return DAWN_DEVICE_LOST_ERROR(messageStream.str());
-        } else {
-            return DAWN_INTERNAL_ERROR(messageStream.str());
-        }
+MaybeError CheckHRESULTImpl(HRESULT result, const char* context) {
+    if (DAWN_LIKELY(SUCCEEDED(result))) {
+        return {};
     }
 
-    MaybeError CheckOutOfMemoryHRESULTImpl(HRESULT result, const char* context) {
-        if (result == E_OUTOFMEMORY || result == E_FAKE_OUTOFMEMORY_ERROR_FOR_TESTING) {
-            return DAWN_OUT_OF_MEMORY_ERROR(context);
-        }
-
-        return CheckHRESULTImpl(result, context);
+    std::ostringstream messageStream;
+    messageStream << context << " failed with ";
+    if (result == E_FAKE_ERROR_FOR_TESTING) {
+        messageStream << "E_FAKE_ERROR_FOR_TESTING";
+    } else {
+        messageStream << "0x" << std::uppercase << std::setfill('0') << std::setw(8) << std::hex
+                      << result;
     }
+
+    if (result == DXGI_ERROR_DEVICE_REMOVED) {
+        return DAWN_DEVICE_LOST_ERROR(messageStream.str());
+    } else {
+        return DAWN_INTERNAL_ERROR(messageStream.str());
+    }
+}
+
+MaybeError CheckOutOfMemoryHRESULTImpl(HRESULT result, const char* context) {
+    if (result == E_OUTOFMEMORY || result == E_FAKE_OUTOFMEMORY_ERROR_FOR_TESTING) {
+        return DAWN_OUT_OF_MEMORY_ERROR(context);
+    }
+
+    return CheckHRESULTImpl(result, context);
+}
 
 }  // namespace dawn::native::d3d12
