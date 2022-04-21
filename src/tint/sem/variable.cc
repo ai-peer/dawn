@@ -68,9 +68,7 @@ Parameter::Parameter(const ast::Variable* declaration,
                      ast::StorageClass storage_class,
                      ast::Access access,
                      const ParameterUsage usage /* = ParameterUsage::kNone */)
-    : Base(declaration, type, storage_class, access, Constant{}),
-      index_(index),
-      usage_(usage) {}
+    : Base(declaration, type, storage_class, access, Constant{}), index_(index), usage_(usage) {}
 
 Parameter::~Parameter() = default;
 

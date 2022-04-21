@@ -29,7 +29,7 @@ IfStatement::IfStatement(const ast::IfStatement* declaration,
 IfStatement::~IfStatement() = default;
 
 const ast::IfStatement* IfStatement::Declaration() const {
-  return static_cast<const ast::IfStatement*>(Base::Declaration());
+    return static_cast<const ast::IfStatement*>(Base::Declaration());
 }
 
 ElseStatement::ElseStatement(const ast::ElseStatement* declaration,
@@ -40,7 +40,7 @@ ElseStatement::ElseStatement(const ast::ElseStatement* declaration,
 ElseStatement::~ElseStatement() = default;
 
 const ast::ElseStatement* ElseStatement::Declaration() const {
-  return static_cast<const ast::ElseStatement*>(Base::Declaration());
+    return static_cast<const ast::ElseStatement*>(Base::Declaration());
 }
 
 }  // namespace tint::sem

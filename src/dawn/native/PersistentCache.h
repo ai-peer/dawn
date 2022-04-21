@@ -23,72 +23,71 @@
 #include "dawn/native/Error.h"
 
 namespace dawn::platform {
-    class CachingInterface;
+class CachingInterface;
 }
 
 namespace dawn::native {
 
-    using PersistentCacheKey = std::vector<uint8_t>;
+using PersistentCacheKey = std::vector<uint8_t>;
 
-    struct ScopedCachedBlob {
-        std::unique_ptr<uint8_t[]> buffer;
-        size_t bufferSize = 0;
-    };
+struct ScopedCachedBlob {
+    std::unique_ptr<uint8_t[]> buffer;
+    size_t bufferSize = 0;
+};
 
-    class DeviceBase;
+class DeviceBase;
 
-    enum class PersistentKeyType { Shader };
+enum class PersistentKeyType { Shader };
 
-    // This class should always be thread-safe as it is used in Create*PipelineAsync() where it is
-    // called asynchronously.
-    // The thread-safety of any access to mCache (the function LoadData() and StoreData()) is
-    // protected by mMutex.
-    class PersistentCache {
-      public:
-        explicit PersistentCache(DeviceBase* device);
+// This class should always be thread-safe as it is used in Create*PipelineAsync() where it is
+// called asynchronously.
+// The thread-safety of any access to mCache (the function LoadData() and StoreData()) is
+// protected by mMutex.
+class PersistentCache {
+  public:
+    explicit PersistentCache(DeviceBase* device);
 
-        // Combines load/store operations into a single call.
-        // If the load was successful, a non-empty blob is returned to the caller.
-        // Else, the creation callback |createFn| gets invoked with a callback
-        // |doCache| to store the newly created blob back in the cache.
-        //
-        // Example usage:
-        //
-        // ScopedCachedBlob cachedBlob = {};
-        // DAWN_TRY_ASSIGN(cachedBlob, GetOrCreate(key, [&](auto doCache)) {
-        //      // Create a new blob to be stored
-        //      doCache(newBlobPtr, newBlobSize); // store
-        // }));
-        //
-        template <typename CreateFn>
-        ResultOrError<ScopedCachedBlob> GetOrCreate(const PersistentCacheKey& key,
-                                                    CreateFn&& createFn) {
-            // Attempt to load an existing blob from the cache.
-            ScopedCachedBlob blob = LoadData(key);
-            if (blob.bufferSize > 0) {
-                return std::move(blob);
-            }
-
-            // Allow the caller to create a new blob to be stored for the given key.
-            DAWN_TRY(createFn([this, key](const void* value, size_t size) {
-                this->StoreData(key, value, size);
-            }));
-
+    // Combines load/store operations into a single call.
+    // If the load was successful, a non-empty blob is returned to the caller.
+    // Else, the creation callback |createFn| gets invoked with a callback
+    // |doCache| to store the newly created blob back in the cache.
+    //
+    // Example usage:
+    //
+    // ScopedCachedBlob cachedBlob = {};
+    // DAWN_TRY_ASSIGN(cachedBlob, GetOrCreate(key, [&](auto doCache)) {
+    //      // Create a new blob to be stored
+    //      doCache(newBlobPtr, newBlobSize); // store
+    // }));
+    //
+    template <typename CreateFn>
+    ResultOrError<ScopedCachedBlob> GetOrCreate(const PersistentCacheKey& key,
+                                                CreateFn&& createFn) {
+        // Attempt to load an existing blob from the cache.
+        ScopedCachedBlob blob = LoadData(key);
+        if (blob.bufferSize > 0) {
             return std::move(blob);
         }
 
-      private:
-        // PersistentCache impl
-        ScopedCachedBlob LoadData(const PersistentCacheKey& key);
-        void StoreData(const PersistentCacheKey& key, const void* value, size_t size);
+        // Allow the caller to create a new blob to be stored for the given key.
+        DAWN_TRY(createFn(
+            [this, key](const void* value, size_t size) { this->StoreData(key, value, size); }));
 
-        dawn::platform::CachingInterface* GetPlatformCache();
+        return std::move(blob);
+    }
 
-        DeviceBase* mDevice = nullptr;
+  private:
+    // PersistentCache impl
+    ScopedCachedBlob LoadData(const PersistentCacheKey& key);
+    void StoreData(const PersistentCacheKey& key, const void* value, size_t size);
 
-        std::mutex mMutex;
-        dawn::platform::CachingInterface* mCache = nullptr;
-    };
+    dawn::platform::CachingInterface* GetPlatformCache();
+
+    DeviceBase* mDevice = nullptr;
+
+    std::mutex mMutex;
+    dawn::platform::CachingInterface* mCache = nullptr;
+};
 }  // namespace dawn::native
 
 #endif  // SRC_DAWN_NATIVE_PERSISTENTCACHE_H_

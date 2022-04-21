@@ -19,8 +19,7 @@
 namespace tint::resolver {
 
 TestHelper::TestHelper()
-    : validator_(
-          std::make_unique<Validator>(this->Symbols(), this->Diagnostics())) {}
+    : validator_(std::make_unique<Validator>(this->Symbols(), this->Diagnostics())) {}
 
 TestHelper::~TestHelper() = default;
 
