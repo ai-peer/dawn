@@ -428,6 +428,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc38a11d_25d198b9",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-04-21T22:15:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1bec6416_f9f30f90",
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56385a4f_d82e961a",
@@ -705,6 +723,24 @@
       "side": 1,
       "message": "After the f16 extension is implemented, the \"f16\" will be parsed as a specific token of type `Token::Kind::kF16`, rather than a identifier named \"f16\", so it will not fall into the first `if` path above. This `if` path is proposed to deal with this specific case.",
       "parentUuid": "5e5c9c67_a03f8f87",
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d7eb543_c734af03",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 3224,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-04-21T22:15:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cd3ddd23_38f429e9",
       "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

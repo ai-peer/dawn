@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2364eba8_01b1bf2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-04-21T22:15:38Z",
+      "side": 1,
+      "message": "Thanks!\nBen can +2.\nI think he still has one concern about stripping extensions.",
+      "revId": "38ee320f1917325396ea2067911e1add5356d2fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af97dc3c_2d8aa2a6",
@@ -77,6 +94,40 @@
         "endLine": 3109,
         "endChar": 61
       },
+      "revId": "38ee320f1917325396ea2067911e1add5356d2fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74279e41_80c0b727",
+        "filename": "src/tint/reader/wgsl/parser_impl_global_decl_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-04-21T22:15:38Z",
+      "side": 1,
+      "message": "nit: I think it\u0027s still a good idea to check the ASSERT_TRUE(p-\u003ehas_error())\nThe message is not so important to check.",
+      "revId": "38ee320f1917325396ea2067911e1add5356d2fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "918a38bb_368abb6d",
+        "filename": "test/tint/extensions/InternalExtensionForTesting/simple_with_duplicated_InternalExtensionForTesting.wgsl.expected.wgsl",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-04-21T22:15:38Z",
+      "side": 1,
+      "message": "Nice.",
       "revId": "38ee320f1917325396ea2067911e1add5356d2fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
