@@ -51,6 +51,24 @@
       "parentUuid": "8ea2df86_7c593a37",
       "revId": "93ff33a1950b4d0b4e0bc8b1124cc0da9bbff438",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12368469_ad86a27b",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-21T13:57:05Z",
+      "side": 1,
+      "message": "Removed. This logic will be implemented in Dawn in a future CL.",
+      "parentUuid": "9ad6cd5e_c1d926a8",
+      "revId": "93ff33a1950b4d0b4e0bc8b1124cc0da9bbff438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
