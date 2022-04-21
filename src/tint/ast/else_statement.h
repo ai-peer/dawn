@@ -24,31 +24,31 @@ namespace tint::ast {
 
 /// An else statement
 class ElseStatement final : public Castable<ElseStatement, Statement> {
- public:
-  /// Constructor
-  /// @param pid the identifier of the program that owns this node
-  /// @param src the source of this node
-  /// @param condition the else condition
-  /// @param body the else body
-  ElseStatement(ProgramID pid,
-                const Source& src,
-                const Expression* condition,
-                const BlockStatement* body);
-  /// Move constructor
-  ElseStatement(ElseStatement&&);
-  ~ElseStatement() override;
+  public:
+    /// Constructor
+    /// @param pid the identifier of the program that owns this node
+    /// @param src the source of this node
+    /// @param condition the else condition
+    /// @param body the else body
+    ElseStatement(ProgramID pid,
+                  const Source& src,
+                  const Expression* condition,
+                  const BlockStatement* body);
+    /// Move constructor
+    ElseStatement(ElseStatement&&);
+    ~ElseStatement() override;
 
-  /// Clones this node and all transitive child nodes using the `CloneContext`
-  /// `ctx`.
-  /// @param ctx the clone context
-  /// @return the newly cloned node
-  const ElseStatement* Clone(CloneContext* ctx) const override;
+    /// Clones this node and all transitive child nodes using the `CloneContext`
+    /// `ctx`.
+    /// @param ctx the clone context
+    /// @return the newly cloned node
+    const ElseStatement* Clone(CloneContext* ctx) const override;
 
-  /// The else condition or nullptr if none set
-  const Expression* const condition;
+    /// The else condition or nullptr if none set
+    const Expression* const condition;
 
-  /// The else body
-  const BlockStatement* const body;
+    /// The else body
+    const BlockStatement* const body;
 };
 
 /// A list of else statements

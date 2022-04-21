@@ -167,8 +167,7 @@ class SlabAllocator : public SlabAllocatorImpl {
     SlabAllocator(size_t totalObjectBytes,
                   uint32_t objectSize = sizeof(T),
                   uint32_t objectAlignment = alignof(T))
-        : SlabAllocatorImpl(totalObjectBytes / objectSize, objectSize, objectAlignment) {
-    }
+        : SlabAllocatorImpl(totalObjectBytes / objectSize, objectSize, objectAlignment) {}
 
     template <typename... Args>
     T* Allocate(Args&&... args) {
@@ -176,9 +175,7 @@ class SlabAllocator : public SlabAllocatorImpl {
         return new (ptr) T(std::forward<Args>(args)...);
     }
 
-    void Deallocate(T* object) {
-        SlabAllocatorImpl::Deallocate(object);
-    }
+    void Deallocate(T* object) { SlabAllocatorImpl::Deallocate(object); }
 };
 
 #endif  // SRC_DAWN_COMMON_SLABALLOCATOR_H_
