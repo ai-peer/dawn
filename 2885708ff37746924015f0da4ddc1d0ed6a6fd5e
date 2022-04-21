@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1474bd78_f1403ba3",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-21T21:23:38Z",
+      "side": 1,
+      "message": "FYI: These failure will be fixed by https://dawn-review.googlesource.com/c/dawn/+/87306",
+      "revId": "2885708ff37746924015f0da4ddc1d0ed6a6fd5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
