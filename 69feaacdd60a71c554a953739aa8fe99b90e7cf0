@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed0f99f_6e437aee",
+        "filename": "src/dawn/native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T18:35:38Z",
+      "side": 1,
+      "message": "Done. https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1384",
+      "parentUuid": "eca300f9_2273240b",
+      "revId": "69feaacdd60a71c554a953739aa8fe99b90e7cf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fd152ae_ce2754be",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Probably drop it - format reinterpretation, outside of sRGB which doesn\u0027t require the flag, is disallowed in the spec.",
       "parentUuid": "0fd152ae_ce2754be",
+      "revId": "69feaacdd60a71c554a953739aa8fe99b90e7cf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "656bb315_eb402edb",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-21T18:35:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "724579db_0a6d3db1",
       "revId": "69feaacdd60a71c554a953739aa8fe99b90e7cf0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
