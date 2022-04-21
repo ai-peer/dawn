@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f210376f_0ea9a61a",
+        "filename": "src/dawn/native/vulkan/CacheKeyVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-21T23:08:07Z",
+      "side": 1,
+      "message": "if hasDepthStencil is false, all the other depth/stencil members are undefined too.\n\nWe will need to be sure to have tests of this.",
+      "revId": "a281a95b13806a9f996ba35ec2f71d4d4cc837b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
