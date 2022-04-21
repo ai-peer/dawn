@@ -382,7 +382,8 @@ namespace utils {
 
         wgpu::BindGroupDescriptor descriptor;
         descriptor.layout = layout;
-        descriptor.entryCount = entries.size();
+        ASSERT(entries.size() <= std::numeric_limits<uint32_t>::max());
+        descriptor.entryCount = static_cast<uint32_t>(entries.size());
         descriptor.entries = entries.data();
 
         return device.CreateBindGroup(&descriptor);
