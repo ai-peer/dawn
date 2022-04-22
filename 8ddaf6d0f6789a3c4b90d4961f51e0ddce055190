@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22d4af99_e90dd116",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-22T11:25:08Z",
+      "side": 1,
+      "message": "PTAL, thanks!\n(Sorry for so many Kokoro failures, finally...)",
+      "revId": "8ddaf6d0f6789a3c4b90d4961f51e0ddce055190",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

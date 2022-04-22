@@ -87,6 +87,30 @@
       },
       "revId": "f270d052930b00d451772c0758912da0f66cf506",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de2842fa_6590bcf3",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 12
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-22T11:25:08Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "1c4f77c9_7a0196ad",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 19
+      },
+      "revId": "f270d052930b00d451772c0758912da0f66cf506",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
