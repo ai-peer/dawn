@@ -101,9 +101,9 @@ namespace dawn::native {
                             "Offset (%u) does not satisfy the minimum %s alignment (%u).",
                             entry.offset, bindingInfo.buffer.type, requiredBindingAlignment);
 
-            DAWN_INVALID_IF(!(entry.buffer->GetUsage() & requiredUsage),
+            DAWN_INVALID_IF(!(entry.buffer->GetUsageExternalOnly() & requiredUsage),
                             "Binding usage (%s) of %s doesn't match expected usage (%s).",
-                            entry.buffer->GetUsage(), entry.buffer, requiredUsage);
+                            entry.buffer->GetUsageExternalOnly(), entry.buffer, requiredUsage);
 
             DAWN_INVALID_IF(bindingSize < bindingInfo.buffer.minBindingSize,
                             "Binding size (%u) is smaller than the minimum binding size (%u).",
