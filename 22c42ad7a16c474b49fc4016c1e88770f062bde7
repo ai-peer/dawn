@@ -209,6 +209,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3badca0_c6d64421",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-22T14:19:08Z",
+      "side": 1,
+      "message": "Yeah, agreed. I removed the version that returns std::string and did explicit casts in code to make it obvious. Note that the version before my changes was calling std::string::substr() and returning temporary strings already, so it\u0027s not that my changes made this less efficient. But I like making it more obvious.",
+      "parentUuid": "b803c78a_438a5f50",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 1
+      },
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53e25673_5b27f81d",
         "filename": "src/tint/reader/wgsl/lexer.cc",
         "patchSetId": 1
