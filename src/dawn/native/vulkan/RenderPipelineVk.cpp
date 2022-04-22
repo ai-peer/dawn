@@ -18,6 +18,7 @@
 #include <utility>
 #include <vector>
 
+#include "dawn/common/Numeric.h"
 #include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/FencedDeleter.h"
@@ -590,7 +591,8 @@ namespace dawn::native::vulkan {
 
             VkVertexInputBindingDescription* bindingDesc = &tempAllocations->bindings[bindingCount];
             bindingDesc->binding = static_cast<uint8_t>(slot);
-            bindingDesc->stride = bindingInfo.arrayStride;
+            // This is checked against the maxVertexBufferArrayStride limit.
+            bindingDesc->stride = checked_cast<uint32_t>(bindingInfo.arrayStride);
             bindingDesc->inputRate = VulkanInputRate(bindingInfo.stepMode);
 
             bindingCount++;

@@ -16,6 +16,7 @@
 
 #include <utility>
 
+#include "dawn/common/Numeric.h"
 #include "dawn/native/vulkan/BindGroupLayoutVk.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/FencedDeleter.h"
@@ -180,7 +181,7 @@ namespace dawn::native::vulkan {
             freeSetIndices.push_back(i);
         }
 
-        mAvailableDescriptorPoolIndices.push_back(mDescriptorPools.size());
+        mAvailableDescriptorPoolIndices.push_back(checked_cast<PoolIndex>(mDescriptorPools.size()));
         mDescriptorPools.emplace_back(
             DescriptorPool{descriptorPool, std::move(sets), std::move(freeSetIndices)});
 

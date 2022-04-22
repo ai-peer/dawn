@@ -578,10 +578,6 @@ namespace dawn::native {
         return mBindingCounts.unverifiedBufferCount;
     }
 
-    uint32_t BindGroupLayoutBase::GetExternalTextureBindingCount() const {
-        return mExternalTextureBindingExpansionMap.size();
-    }
-
     const BindingCounts& BindGroupLayoutBase::GetBindingCountInfo() const {
         return mBindingCounts;
     }

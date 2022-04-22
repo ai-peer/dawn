@@ -589,12 +589,14 @@ namespace dawn::native::metal {
             limits->v1.minUniformBufferOffsetAlignment = mtlLimits.minBufferOffsetAlignment;
             limits->v1.minStorageBufferOffsetAlignment = mtlLimits.minBufferOffsetAlignment;
 
-            uint64_t maxBufferSize = Buffer::QueryMaxBufferLength(*mDevice);
-
             // Metal has no documented limit on the size of a binding. Use the maximum
-            // buffer size.
-            limits->v1.maxUniformBufferBindingSize = maxBufferSize;
-            limits->v1.maxStorageBufferBindingSize = maxBufferSize;
+            // buffer size. Buffer bindings must also be at most the largest 32-bit integer
+            // because Tint stores the binding size as a 32-bit number.
+            uint32_t maxBindingSize =
+                static_cast<uint32_t>(std::max(uint64_t(std::numeric_limits<uint32_t>::max()),
+                                               Buffer::QueryMaxBufferLength(*mDevice)));
+            limits->v1.maxUniformBufferBindingSize = maxBindingSize;
+            limits->v1.maxStorageBufferBindingSize = maxBindingSize;
 
             // TODO(crbug.com/dawn/685):
             // LIMITS NOT SET:
