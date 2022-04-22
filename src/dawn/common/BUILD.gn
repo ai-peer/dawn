@@ -117,6 +117,7 @@ config("internal_config") {
       "-Wrange-loop-analysis",
       "-Wredundant-move",
       "-Wshadow-field",
+      "-Wshorten-64-to-32",
       "-Wstrict-prototypes",
       "-Wtautological-unsigned-zero-compare",
       "-Wunreachable-code-aggressive",
