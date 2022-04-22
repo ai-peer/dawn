@@ -45,7 +45,7 @@ namespace dawn::native::vulkan {
 
     class ResourceMemoryAllocator::SingleTypeAllocator : public ResourceHeapAllocator {
       public:
-        SingleTypeAllocator(Device* device, size_t memoryTypeIndex, VkDeviceSize memoryHeapSize)
+        SingleTypeAllocator(Device* device, uint32_t memoryTypeIndex, VkDeviceSize memoryHeapSize)
             : mDevice(device),
               mMemoryTypeIndex(memoryTypeIndex),
               mMemoryHeapSize(memoryHeapSize),
@@ -105,7 +105,7 @@ namespace dawn::native::vulkan {
 
       private:
         Device* mDevice;
-        size_t mMemoryTypeIndex;
+        uint32_t mMemoryTypeIndex;
         VkDeviceSize mMemoryHeapSize;
         PooledResourceMemoryAllocator mPooledMemoryAllocator;
         BuddyMemoryAllocator mBuddySystem;
@@ -115,9 +115,12 @@ namespace dawn::native::vulkan {
 
     ResourceMemoryAllocator::ResourceMemoryAllocator(Device* device) : mDevice(device) {
         const VulkanDeviceInfo& info = mDevice->GetDeviceInfo();
-        mAllocatorsPerType.reserve(info.memoryTypes.size());
+        uint32_t memoryTypeCount =
+            static_cast<decltype(VkPhysicalDeviceMemoryProperties::memoryTypeCount)>(
+                info.memoryTypes.size());
+        mAllocatorsPerType.reserve(memoryTypeCount);
 
-        for (size_t i = 0; i < info.memoryTypes.size(); i++) {
+        for (uint32_t i = 0; i < memoryTypeCount; i++) {
             mAllocatorsPerType.emplace_back(std::make_unique<SingleTypeAllocator>(
                 mDevice, i, info.memoryHeaps[info.memoryTypes[i].heapIndex].size));
         }
