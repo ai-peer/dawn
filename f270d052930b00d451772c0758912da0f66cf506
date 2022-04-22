@@ -63,6 +63,30 @@
       },
       "revId": "f270d052930b00d451772c0758912da0f66cf506",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c4f77c9_7a0196ad",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 12
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-22T08:28:35Z",
+      "side": 1,
+      "message": "```\n[ 58%] Building CXX object third_party/spirv-tools/source/fuzz/CMakeFiles/SPIRV-Tools-fuzz.dir/transformation_add_image_sample_unused_components.cpp.o\n../liblibtint-fuzz.a(module.cc.o): In function `tint::TypeInfo const\u0026 tint::TypeInfo::Of\u003ctint::ast::Enable const\u003e()\u0027:\n/dawn/src/src/tint/castable.h:150: undefined reference to `tint::detail::TypeInfoOf\u003ctint::ast::Enable\u003e::info\u0027\n../liblibtint-fuzz.a(inspector.cc.o): In function `tint::inspector::Inspector::GetUsedExtensionNames[abi:cxx11]()\u0027:\n/dawn/src/src/tint/inspector/inspector.cc:577: undefined reference to `tint::ast::Enable::KindToName[abi:cxx11](tint::ast::Enable::ExtensionKind)\u0027\n../liblibtint-fuzz.a(inspector.cc.o): In function `tint::TypeInfo const\u0026 tint::TypeInfo::Of\u003ctint::ast::Enable\u003e()\u0027:\n/dawn/src/src/tint/castable.h:150: undefined reference to `tint::detail::TypeInfoOf\u003ctint::ast::Enable\u003e::info\u0027\n[ 58%] Building CXX object third_party/spirv-tools/source/fuzz/CMakeFiles/SPIRV-Tools-fuzz.dir/transformation_add_local_variable.cpp.o\n../liblibtint-fuzz.a(resolver.cc.o): In function `tint::sem::Extension* tint::utils::BlockAllocator\u003ctint::sem::Node, 65536ul, 16ul\u003e::Create\u003ctint::sem::Extension, tint::ast::Enable const*\u0026\u003e(tint::ast::Enable const*\u0026)\u0027:\n/dawn/src/src/tint/utils/block_allocator.h:186: undefined reference to `tint::sem::Extension::Extension(tint::ast::Enable const*)\u0027\n../liblibtint-fuzz.a(parser_impl.cc.o): In function `operator()\u0027:\n/dawn/src/src/tint/reader/wgsl/parser_impl.cc:385: undefined reference to `tint::ast::Enable::NameToKind(std::__cxx11::basic_string\u003cchar, std::char_traits\u003cchar\u003e, std::allocator\u003cchar\u003e \u003e const\u0026)\u0027\n../liblibtint-fuzz.a(parser_impl.cc.o): In function `tint::ast::Enable* tint::utils::BlockAllocator\u003ctint::ast::Node, 65536ul, 16ul\u003e::Create\u003ctint::ast::Enable, tint::ProgramID\u0026, tint::Source const\u0026, std::__cxx11::basic_string\u003cchar, std::char_traits\u003cchar\u003e, std::allocator\u003cchar\u003e \u003e\u0026\u003e(tint::ProgramID\u0026, tint::Source const\u0026, std::__cxx11::basic_string\u003cchar, std::char_traits\u003cchar\u003e, std::allocator\u003cchar\u003e \u003e\u0026)\u0027:\n/dawn/src/src/tint/utils/block_allocator.h:186: undefined reference to `tint::ast::Enable::Enable(tint::ProgramID, tint::Source const\u0026, std::__cxx11::basic_string\u003cchar, std::char_traits\u003cchar\u003e, std::allocator\u003cchar\u003e \u003e const\u0026)\u0027\n../liblibtint-fuzz.a(generator_impl.cc.o): In function `tint::writer::wgsl::GeneratorImpl::EmitEnableDirective(tint::ast::Enable::ExtensionKind)\u0027:\n/dawn/src/src/tint/writer/wgsl/generator_impl.cc:101: undefined reference to `tint::ast::Enable::KindToName[abi:cxx11](tint::ast::Enable::ExtensionKind)\u0027\n```\n\nThese are linker errors, suggesting that the `enable.cc` just wasn\u0027t linked.",
+      "parentUuid": "ead7a430_2c9f5eb5",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 19
+      },
+      "revId": "f270d052930b00d451772c0758912da0f66cf506",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
