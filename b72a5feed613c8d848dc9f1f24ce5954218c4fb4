@@ -79,6 +79,30 @@
       },
       "revId": "b72a5feed613c8d848dc9f1f24ce5954218c4fb4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6484698_d036a22b",
+        "filename": "src/tint/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-22T16:53:51Z",
+      "side": 1,
+      "message": "What did you have in mind? Seems like any solution would just make gammaCorrection  more complicated.\n\n fn gammaConversion(v: vec3\u003cf32\u003e, params: GammaTransferParams) -\u003e vec3\u003cf32\u003e {\n   var color : vec3\u003cf32\u003e;\n   if (abs(v.r) \u003c params.D) {\n     color.r \u003d sign(v.r) * (params.C * abs(v.r));\n   } else {\n     color.r \u003d sign(v.r) * (pow(params.A * abs(v.r) + params.B, params.G) + \n     params.E);\n   }\n   if (abs(v.g) \u003c params.D) {\n     color.g \u003d sign(v.g) * (params.C * abs(v.g));\n   } else {\n    color.g \u003d sign(v.g) * (pow(params.A * abs(v.g) + params.B, params.G) + \n    params.E);\n   }\n   if (abs(v.r) \u003c params.D) {\n    color.g \u003d sign(v.b) * (params.C * abs(v.b));\n   } else {\n    color.g \u003d sign(v.b) * (pow(params.A * abs(v.b) + params.B, params.G) + \n    params.E);\n   }\n   return color;\n}\n\nOr it seems like I might be able to condense this into a for loop by using pointers to address each component.",
+      "parentUuid": "f5278fb4_d6c68aff",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 63
+      },
+      "revId": "b72a5feed613c8d848dc9f1f24ce5954218c4fb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
