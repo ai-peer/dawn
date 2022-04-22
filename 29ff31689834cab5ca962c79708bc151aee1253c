@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df5fb4bd_3ce8f4ce",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-22T19:09:27Z",
+      "side": 1,
+      "message": "Reworked. This is gone.",
+      "parentUuid": "87eb5e26_54856dac",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 26
+      },
+      "revId": "29ff31689834cab5ca962c79708bc151aee1253c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae516bb5_350b6b49",
@@ -95,6 +119,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa13d822_c58b51fb",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-22T19:09:27Z",
+      "side": 1,
+      "message": "Reworked, this is no longer needed.",
+      "parentUuid": "6ea60bc5_36e5fb9e",
+      "range": {
+        "startLine": 206,
+        "startChar": 16,
+        "endLine": 206,
+        "endChar": 31
+      },
+      "revId": "29ff31689834cab5ca962c79708bc151aee1253c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5823e72_20bb3593",
@@ -126,6 +174,24 @@
       "side": 1,
       "message": "Yes, excellent point, I\u0027ll do that.",
       "parentUuid": "a5823e72_20bb3593",
+      "revId": "29ff31689834cab5ca962c79708bc151aee1253c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d6e0d53_83d8c76a",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-22T19:09:27Z",
+      "side": 1,
+      "message": "Added test. This code became simpler since we now parse line breaks entirely in Source::File.",
+      "parentUuid": "2fefc5a1_f646ccea",
       "revId": "29ff31689834cab5ca962c79708bc151aee1253c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
