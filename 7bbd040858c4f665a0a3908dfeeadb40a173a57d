@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "166bc5b3_5c013a75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-22T23:17:27Z",
+      "side": 1,
+      "message": "• Includes the results of `luci.chromium.try:dawn-try-win10-x86-rel` - crbug.com/dawn/1386\n• Merges the results of `intel-0x3e92` with `intel-0x5912` - crbug.com/dawn/1387",
+      "revId": "7bbd040858c4f665a0a3908dfeeadb40a173a57d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
