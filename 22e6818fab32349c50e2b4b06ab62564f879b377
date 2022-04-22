@@ -16,6 +16,24 @@
       "message": "Uuuh do you really aim to land this change like that? Or is there a way to minimize disruption to in-flight CLs a bit? (for example doing directory by directory or something else).\n\nAlso for sweeping changes like that, I\u0027d like to review by having instructions on how to reproduce the mechanical part of the change so it\u0027s easy to see the manual part of the changes.",
       "revId": "22e6818fab32349c50e2b4b06ab62564f879b377",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31ad5cec_f29a16f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-22T10:12:55Z",
+      "side": 1,
+      "message": "From past experience, separating bulk-reformatting into multiple changes just produces more pain than doing it in one hit.",
+      "parentUuid": "e1a4e37b_9ef05c8b",
+      "revId": "22e6818fab32349c50e2b4b06ab62564f879b377",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
