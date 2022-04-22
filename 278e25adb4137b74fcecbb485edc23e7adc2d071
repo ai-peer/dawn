@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5f2cdb0_38d34a56",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-22T21:23:58Z",
+      "side": 1,
+      "message": "It\u0027s not that it thinks it\u0027s a c header, it\u0027s that cpplint doesn\u0027t recognise C++17 headers.\nWhat you\u0027ve done is fine. We\u0027ll clean them all up once the linter is fixed.\n(crbug.com/dawn/1379)",
+      "parentUuid": "a5abae80_efa6c4c1",
+      "range": {
+        "startLine": 21,
+        "startChar": 21,
+        "endLine": 21,
+        "endChar": 51
+      },
+      "revId": "278e25adb4137b74fcecbb485edc23e7adc2d071",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b878092_3c19b5a2",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-04-22T20:52:46Z",
       "side": 1,
       "message": "I\u0027m going to guess you won\u0027t like this, bclayton. Alternatively, I could make the function return bool for pass/fail, and add two output params for is_blankspace, blankspace_size.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 13
+      },
+      "revId": "278e25adb4137b74fcecbb485edc23e7adc2d071",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6bd3d3b_75cf4e99",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-22T21:23:58Z",
+      "side": 1,
+      "message": "I don\u0027t like the non-obvious return type. What does `bool` represent, what does `optional` represent?\nThere is only one caller of this function - would it be cleaner to just inline?",
+      "parentUuid": "3b878092_3c19b5a2",
       "range": {
         "startLine": 38,
         "startChar": 0,
