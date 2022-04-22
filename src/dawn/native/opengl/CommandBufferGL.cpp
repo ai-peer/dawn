@@ -267,7 +267,7 @@ namespace dawn::native::opengl {
                             BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
                             GLuint buffer = ToBackend(binding.buffer)->GetHandle();
                             GLuint index = indices[bindingIndex];
-                            GLuint offset = binding.offset;
+                            uint64_t offset = binding.offset;
 
                             if (bindingInfo.buffer.hasDynamicOffset) {
                                 offset += dynamicOffsets[currentDynamicOffsetIndex];
@@ -288,7 +288,8 @@ namespace dawn::native::opengl {
                                     UNREACHABLE();
                             }
 
-                            gl.BindBufferRange(target, index, buffer, offset, binding.size);
+                            gl.BindBufferRange(target, index, buffer, checked_cast<GLuint>(offset),
+                                               binding.size);
                             break;
                         }
 
@@ -1259,7 +1260,7 @@ namespace dawn::native::opengl {
         uint32_t y = destination.origin.y;
         uint32_t z = destination.origin.z;
         if (texture->GetFormat().isCompressed) {
-            size_t rowSize = copySize.width / blockInfo.width * blockInfo.byteSize;
+            GLsizei rowSize = copySize.width / blockInfo.width * blockInfo.byteSize;
             Extent3D virtSize = texture->GetMipLevelVirtualSize(destination.mipLevel);
             uint32_t width = std::min(copySize.width, virtSize.width - x);
 
@@ -1270,7 +1271,7 @@ namespace dawn::native::opengl {
             // Buffer Objects" for more details. For Desktop GL, we use row-by-row
             // copies only for uploads where bytesPerRow is not a multiple of byteSize.
             if (dataLayout.bytesPerRow % blockInfo.byteSize == 0 && gl.GetVersion().IsDesktop()) {
-                size_t imageSize =
+                GLsizei imageSize =
                     rowSize * (copySize.height / blockInfo.height) * copySize.depthOrArrayLayers;
 
                 uint32_t height = std::min(copySize.height, virtSize.height - y);
