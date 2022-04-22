@@ -50,6 +50,7 @@ namespace dawn::native {
             wgpu::BufferUsage requiredUsage;
             uint64_t maxBindingSize;
             uint64_t requiredBindingAlignment;
+            bool validateInternalUsage = false;
             switch (bindingInfo.buffer.type) {
                 case wgpu::BufferBindingType::Uniform:
                     requiredUsage = wgpu::BufferUsage::Uniform;
@@ -69,6 +70,7 @@ namespace dawn::native {
                     maxBindingSize = device->GetLimits().v1.maxStorageBufferBindingSize;
                     requiredBindingAlignment =
                         device->GetLimits().v1.minStorageBufferOffsetAlignment;
+                    validateInternalUsage = true;
                     break;
                 case wgpu::BufferBindingType::Undefined:
                     UNREACHABLE();
@@ -101,9 +103,12 @@ namespace dawn::native {
                             "Offset (%u) does not satisfy the minimum %s alignment (%u).",
                             entry.offset, bindingInfo.buffer.type, requiredBindingAlignment);
 
-            DAWN_INVALID_IF(!(entry.buffer->GetUsage() & requiredUsage),
+            wgpu::BufferUsage bufferUsageToValidate = validateInternalUsage
+                                                          ? entry.buffer->GetUsage()
+                                                          : entry.buffer->GetUsageExternalOnly();
+            DAWN_INVALID_IF(!(bufferUsageToValidate & requiredUsage),
                             "Binding usage (%s) of %s doesn't match expected usage (%s).",
-                            entry.buffer->GetUsage(), entry.buffer, requiredUsage);
+                            bufferUsageToValidate, entry.buffer, requiredUsage);
 
             DAWN_INVALID_IF(bindingSize < bindingInfo.buffer.minBindingSize,
                             "Binding size (%u) is smaller than the minimum binding size (%u).",
