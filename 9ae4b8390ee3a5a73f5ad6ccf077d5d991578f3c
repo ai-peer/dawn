@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66ecaec6_597d2718",
+        "filename": "src/tint/source.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-22T20:31:16Z",
+      "side": 1,
+      "message": "We don\u0027t really have any error handling in Source::File, so I\u0027m not sure what to do with this. One thing I was thinking is that at worst, the invalid data remains in the File contents, and the parser will choke on it later, so maybe it\u0027s okay.",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 48
+      },
+      "revId": "9ae4b8390ee3a5a73f5ad6ccf077d5d991578f3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
