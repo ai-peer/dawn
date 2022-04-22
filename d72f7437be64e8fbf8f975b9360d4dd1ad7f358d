@@ -22,6 +22,30 @@
       },
       "revId": "d72f7437be64e8fbf8f975b9360d4dd1ad7f358d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c03f6ccc_3a5ab7d5",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-04-22T17:36:13Z",
+      "side": 0,
+      "message": "Yes, you can\u0027t capture texture or sampler handles in local variables any more.",
+      "parentUuid": "eb301cc7_b9b3f972",
+      "range": {
+        "startLine": 879,
+        "startChar": 0,
+        "endLine": 889,
+        "endChar": 0
+      },
+      "revId": "d72f7437be64e8fbf8f975b9360d4dd1ad7f358d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
