@@ -132,7 +132,7 @@ deps = {
   },
 
   'third_party/swiftshader': {
-    'url': '{swiftshader_git}/SwiftShader@71f3089b729c0bd3383905ae43080af1e7946e40',
+    'url': '{swiftshader_git}/SwiftShader@f13461dbb23cf87b264cd98ec7189525c24b2dfc',
     'condition': 'dawn_standalone',
   },
 
@@ -153,7 +153,7 @@ deps = {
 
   # WebGPU CTS - not used directly by Dawn, only transitively by Chromium.
   'third_party/webgpu-cts': {
-    'url': '{chromium_git}/external/github.com/gpuweb/cts@45d2ccd250b736d686a1f251bc4b8484d50e17de',
+    'url': '{chromium_git}/external/github.com/gpuweb/cts@f6b6dd54874538895f161a53795dab29f1173d7d',
     'condition': 'build_with_chromium',
   },
 
@@ -171,7 +171,7 @@ deps = {
     'condition': 'dawn_node',
   },
   'third_party/gpuweb-cts': {
-    'url': '{chromium_git}/external/github.com/gpuweb/cts@45d2ccd250b736d686a1f251bc4b8484d50e17de',
+    'url': '{chromium_git}/external/github.com/gpuweb/cts@f6b6dd54874538895f161a53795dab29f1173d7d',
     'condition': 'dawn_standalone',
   },
 
