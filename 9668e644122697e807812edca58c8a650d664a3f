@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "44503e16_b932cee6",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-04-22T09:14:03Z",
+      "side": 1,
+      "message": "Oh currently the validation can\u0027t be skipped as we are calling APIBindGroup() internally in the transform of dispatch indirect buffer:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/ComputePassEncoder.cpp;l\u003d310\n\nWe can refactor the code there to skip all the validations in the next patch.",
+      "parentUuid": "ab444d3e_5683d85a",
+      "revId": "9668e644122697e807812edca58c8a650d664a3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed2836f2_032908e9",
         "filename": "src/dawn/native/CommandValidation.cpp",
         "patchSetId": 8
@@ -31,6 +49,24 @@
       "writtenOn": "2022-04-22T09:01:23Z",
       "side": 1,
       "message": "nit: Maybe this can be replaced with return ValidateCanUseAs(buffer, wgpu::BufferUsage::CopyDst)?",
+      "revId": "9668e644122697e807812edca58c8a650d664a3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bec3c46_29099211",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-04-22T09:14:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed2836f2_032908e9",
       "revId": "9668e644122697e807812edca58c8a650d664a3f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
