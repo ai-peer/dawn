@@ -156,7 +156,7 @@ crbug.com/dawn/0000 [ monterey ] webgpu:shader,execution,robust_access:linear_me
 crbug.com/dawn/0000 [ monterey ] webgpu:shader,execution,robust_access:linear_memory:storageClass="function";access="write";containerType="matrix";isAtomic=false [ Failure ]
 crbug.com/dawn/0000 [ monterey ] webgpu:shader,execution,robust_access:linear_memory:storageClass="private";access="write";containerType="array";isAtomic=false [ Failure ]
 crbug.com/dawn/0000 [ monterey ] webgpu:shader,execution,robust_access:linear_memory:storageClass="private";access="write";containerType="matrix";isAtomic=false [ Failure ]
-crbug.com/dawn/0000 [ intel-0x5912 ] webgpu:shader,execution,robust_access:linear_memory:storageClass="workgroup";access="read";containerType="vector";isAtomic=false [ Failure ]
+crbug.com/dawn/0000 [ intel-0x5912 ubuntu ] webgpu:shader,execution,robust_access:linear_memory:storageClass="workgroup";access="read";containerType="vector";isAtomic=false [ Failure ]
 crbug.com/dawn/0000 [ intel-0x5912 ubuntu ] webgpu:shader,execution,robust_access:linear_memory:storageClass="workgroup";access="write";containerType="vector";isAtomic=false [ Failure ]
 
 ################################################################################
@@ -224,13 +224,6 @@ crbug.com/dawn/0000 [ bigsur intel-0x3e9b ] webgpu:api,validation,image_copy,tex
 # KEEP
 ################################################################################
 crbug.com/dawn/0000 webgpu:api,validation,encoding,cmds,copyTextureToTexture:texture_format_compatibility: [ Failure ]
-
-################################################################################
-# webgpu:shader,validation,tokens failures
-################################################################################
-crbug.com/dawn/0000 webgpu:shader,validation,tokens:identifiers:ident="enable" [ Failure ]
-crbug.com/dawn/0000 webgpu:shader,validation,tokens:null_characters:contains_null=true;placement="comment" [ Failure ]
-crbug.com/dawn/0000 webgpu:shader,validation,tokens:null_characters:contains_null=true;placement="eol" [ Failure ]
 
 ################################################################################
 # texel_data failures
@@ -355,11 +348,30 @@ crbug.com/dawn/0000 [ win ] webgpu:shader,execution,expression,binary,f32_arithm
 crbug.com/dawn/0000 [ win ] webgpu:shader,execution,expression,binary,f32_logical:* [ Slow ]
 
 # New flakes. Please triage:
-crbug.com/dawn/0000 [ amd-0x6821 dawn-backend-validation monterey ] webgpu:api,operation,command_buffer,image_copy:rowsPerImage_and_bytesPerRow:initMethod="CopyB2T";checkMethod="FullCopyT2B";format="rg16sint";dimension="2d" [ RetryOnFailure ]
-crbug.com/dawn/0000 [ dawn-no-backend-validation nvidia-0x2184 ubuntu ] webgpu:api,operation,vertex_state,correctness:non_zero_array_stride_and_attribute_offset:format="sint16x2" [ RetryOnFailure ]
-crbug.com/dawn/0000 [ dawn-no-backend-validation nvidia-0x2184 ubuntu ] webgpu:api,validation,attachment_compatibility:render_pass_or_bundle_and_pipeline,color_format:encoderType="render%20bundle" [ RetryOnFailure ]
-crbug.com/dawn/0000 [ dawn-no-backend-validation nvidia-0x2184 ubuntu ] webgpu:api,validation,createTexture:texture_usage:dimension="2d" [ RetryOnFailure ]
-crbug.com/dawn/0000 [ bigsur dawn-backend-validation intel-0x3e9b ] webgpu:api,validation,image_copy,layout_related:required_bytes_in_copy:method="WriteTexture";format="bc2-rgba-unorm";dimension="2d" [ RetryOnFailure ]
+crbug.com/dawn/0000 [ dawn-no-backend-validation nvidia-0x2184 win10 ] webgpu:api,operation,command_buffer,image_copy:origins_and_extents:initMethod="CopyB2T";checkMethod="FullCopyT2B";format="r8sint";dimension="3d" [ RetryOnFailure ]
 
 # New failures. Please triage:
-crbug.com/dawn/0000 webgpu:api,validation,createView:array_layers:textureDimension="2d";viewDimension="_undef_" [ Failure ]
+crbug.com/dawn/0000 [ amd-0x6821 monterey ] webgpu:api,validation,createView:array_layers:textureDimension="2d";viewDimension="_undef_" [ Failure ]
+crbug.com/dawn/0000 [ bigsur intel-0x3e9b ] webgpu:api,validation,createView:array_layers:textureDimension="2d";viewDimension="_undef_" [ Failure ]
+crbug.com/dawn/0000 [ intel-0x5912 ubuntu ] webgpu:api,validation,createView:array_layers:textureDimension="2d";viewDimension="_undef_" [ Failure ]
+crbug.com/dawn/0000 [ intel-0x5912 win10 ] webgpu:api,validation,createView:array_layers:textureDimension="2d";viewDimension="_undef_" [ Failure ]
+crbug.com/dawn/0000 [ nvidia-0x2184 ubuntu ] webgpu:api,validation,createView:array_layers:textureDimension="2d";viewDimension="_undef_" [ Failure ]
+crbug.com/dawn/0000 [ nvidia-0x2184 win10 ] webgpu:api,validation,createView:array_layers:textureDimension="2d";viewDimension="_undef_" [ Failure ]
+crbug.com/dawn/0000 [ amd-0x6821 monterey ] webgpu:shader,validation,parse,identifiers:identifiers:ident="enable" [ Failure ]
+crbug.com/dawn/0000 [ bigsur intel-0x3e9b ] webgpu:shader,validation,parse,identifiers:identifiers:ident="enable" [ Failure ]
+crbug.com/dawn/0000 [ intel-0x3e92 win10 ] webgpu:shader,validation,parse,identifiers:identifiers:ident="enable" [ Failure ]
+crbug.com/dawn/0000 [ intel-0x5912 ubuntu ] webgpu:shader,validation,parse,identifiers:identifiers:ident="enable" [ Failure ]
+crbug.com/dawn/0000 [ nvidia-0x2184 ubuntu ] webgpu:shader,validation,parse,identifiers:identifiers:ident="enable" [ Failure ]
+crbug.com/dawn/0000 [ nvidia-0x2184 win10 ] webgpu:shader,validation,parse,identifiers:identifiers:ident="enable" [ Failure ]
+crbug.com/dawn/0000 [ amd-0x6821 monterey ] webgpu:shader,validation,parse,whitespace:null_characters:contains_null=true;placement="comment" [ Failure ]
+crbug.com/dawn/0000 [ bigsur intel-0x3e9b ] webgpu:shader,validation,parse,whitespace:null_characters:contains_null=true;placement="comment" [ Failure ]
+crbug.com/dawn/0000 [ intel-0x5912 ubuntu ] webgpu:shader,validation,parse,whitespace:null_characters:contains_null=true;placement="comment" [ Failure ]
+crbug.com/dawn/0000 [ intel-0x5912 win10 ] webgpu:shader,validation,parse,whitespace:null_characters:contains_null=true;placement="comment" [ Failure ]
+crbug.com/dawn/0000 [ nvidia-0x2184 ubuntu ] webgpu:shader,validation,parse,whitespace:null_characters:contains_null=true;placement="comment" [ Failure ]
+crbug.com/dawn/0000 [ nvidia-0x2184 win10 ] webgpu:shader,validation,parse,whitespace:null_characters:contains_null=true;placement="comment" [ Failure ]
+crbug.com/dawn/0000 [ amd-0x6821 monterey ] webgpu:shader,validation,parse,whitespace:null_characters:contains_null=true;placement="eol" [ Failure ]
+crbug.com/dawn/0000 [ bigsur intel-0x3e9b ] webgpu:shader,validation,parse,whitespace:null_characters:contains_null=true;placement="eol" [ Failure ]
+crbug.com/dawn/0000 [ intel-0x5912 ubuntu ] webgpu:shader,validation,parse,whitespace:null_characters:contains_null=true;placement="eol" [ Failure ]
+crbug.com/dawn/0000 [ intel-0x5912 win10 ] webgpu:shader,validation,parse,whitespace:null_characters:contains_null=true;placement="eol" [ Failure ]
+crbug.com/dawn/0000 [ nvidia-0x2184 ubuntu ] webgpu:shader,validation,parse,whitespace:null_characters:contains_null=true;placement="eol" [ Failure ]
+crbug.com/dawn/0000 [ nvidia-0x2184 win10 ] webgpu:shader,validation,parse,whitespace:null_characters:contains_null=true;placement="eol" [ Failure ]
