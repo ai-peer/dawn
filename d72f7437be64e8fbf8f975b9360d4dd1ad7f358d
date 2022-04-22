@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dcb1b6f_2df9165e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-22T17:09:39Z",
+      "side": 1,
+      "message": "I also reviewed the parent CL (https://dawn-review.googlesource.com/c/dawn/+/87606) to understand this change. Looks great! Thanks for doing this.",
+      "revId": "d72f7437be64e8fbf8f975b9360d4dd1ad7f358d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
