@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dcc32c7_d1453e74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-22T10:06:46Z",
+      "side": 1,
+      "message": "Wow this is an amazing find! Thanks for investigating.\n\nI\u0027m surprised we still have this mechanism around, but it certainly saved us some pain during the Dawn/Tint merge (and directory shuffle). Let\u0027s discuss offline how long we should keep it.",
+      "revId": "eed6da7822adc69fcecb0ea180641b45ca5c2f63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
