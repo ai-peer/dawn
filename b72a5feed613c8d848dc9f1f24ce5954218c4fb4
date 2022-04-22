@@ -103,6 +103,30 @@
       },
       "revId": "b72a5feed613c8d848dc9f1f24ce5954218c4fb4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48737f0c_704a44e2",
+        "filename": "src/tint/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-22T16:58:35Z",
+      "side": 1,
+      "message": "```\nfn gammaCorrection(v : vec3\u003cf32\u003e, params : GammaTransferParams) -\u003e vec3\u003cf32\u003e {\n  let cond \u003d abs(v) \u003c vec3(params.D);\n  let t \u003d sign(v) * ((params.C * abs(v)) + params.F);\n  let f \u003d (sign(v) * pow(((params.A * abs(v)) + params.B), vec3(params.G))) + params.E;\n  return select(f, t, cond);\n}\n\n```",
+      "parentUuid": "f6484698_d036a22b",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 63
+      },
+      "revId": "b72a5feed613c8d848dc9f1f24ce5954218c4fb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
