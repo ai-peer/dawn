@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a94dc168_9f423bde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-22T07:44:59Z",
+      "side": 1,
+      "message": "PTAL, thanks (Although still working with Kokoro)",
+      "revId": "f270d052930b00d451772c0758912da0f66cf506",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e1d97d0_42435c25",
@@ -14,6 +31,30 @@
       "writtenOn": "2022-04-22T07:41:41Z",
       "side": 1,
       "message": "You also need to update the `CMakeLists.txt` file, which is why Kokoro us moaning.\nNote: The Kokoro logs have recently been made public.",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 19
+      },
+      "revId": "f270d052930b00d451772c0758912da0f66cf506",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ead7a430_2c9f5eb5",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 12
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-22T07:44:59Z",
+      "side": 1,
+      "message": "Thanks, I have read the logs of previous patches and fix some comment issue, but just find confusing of compiling failure of the latest patch.",
+      "parentUuid": "1e1d97d0_42435c25",
       "range": {
         "startLine": 227,
         "startChar": 0,

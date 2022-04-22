@@ -955,6 +955,30 @@
       },
       "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "109e5d8b_a26ab9ee",
+        "filename": "src/tint/transform/single_entry_point.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-22T07:44:59Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "b9a95c23_79f51e87",
+      "range": {
+        "startLine": 97,
+        "startChar": 6,
+        "endLine": 97,
+        "endChar": 48
+      },
+      "revId": "a0a7c3ed08ac876e2952f4f652619020af733c70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

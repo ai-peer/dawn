@@ -77,6 +77,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d960adc8_38dbff9c",
+        "filename": "src/tint/inspector/inspector.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-22T07:44:59Z",
+      "side": 1,
+      "message": "Done, but I am a little concerned about exposing file pointer to Dawn (outside of Tint).",
+      "parentUuid": "af97dc3c_2d8aa2a6",
+      "range": {
+        "startLine": 157,
+        "startChar": 37,
+        "endLine": 157,
+        "endChar": 49
+      },
+      "revId": "38ee320f1917325396ea2067911e1add5356d2fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab4b60e2_c34eb9e3",
         "filename": "src/tint/inspector/inspector_test.cc",
         "patchSetId": 8
@@ -100,6 +124,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5f6f938_a773d86b",
+        "filename": "src/tint/inspector/inspector_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 3109,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-22T07:44:59Z",
+      "side": 1,
+      "message": "If I get it right, I can directly use `\u003d\u003d` on `Source`, so I test its range.",
+      "parentUuid": "ab4b60e2_c34eb9e3",
+      "range": {
+        "startLine": 3108,
+        "startChar": 12,
+        "endLine": 3109,
+        "endChar": 61
+      },
+      "revId": "38ee320f1917325396ea2067911e1add5356d2fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74279e41_80c0b727",
         "filename": "src/tint/reader/wgsl/parser_impl_global_decl_test.cc",
         "patchSetId": 8
@@ -111,6 +159,24 @@
       "writtenOn": "2022-04-21T22:15:38Z",
       "side": 1,
       "message": "nit: I think it\u0027s still a good idea to check the ASSERT_TRUE(p-\u003ehas_error())\nThe message is not so important to check.",
+      "revId": "38ee320f1917325396ea2067911e1add5356d2fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bd4fc1f_bfe96668",
+        "filename": "src/tint/reader/wgsl/parser_impl_global_decl_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-22T07:44:59Z",
+      "side": 1,
+      "message": "Currently after modify the WGSL parser, this test case will result in a NoMatch in `global_decl` method, and this NoMatch will cause a general error (\"unexpected token\") in `translation_unit`. I modify the test to check these two behaviors.",
+      "parentUuid": "74279e41_80c0b727",
       "revId": "38ee320f1917325396ea2067911e1add5356d2fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
