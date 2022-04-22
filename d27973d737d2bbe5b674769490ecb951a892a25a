@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c23620b3_8a81c153",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-22T07:51:35Z",
+      "side": 1,
+      "message": "I\u0027d go `\u003e\u003d`. Same cost, but safer. Also matches `is_eol()`",
+      "range": {
+        "startLine": 80,
+        "startChar": 10,
+        "endLine": 80,
+        "endChar": 12
+      },
+      "revId": "d27973d737d2bbe5b674769490ecb951a892a25a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

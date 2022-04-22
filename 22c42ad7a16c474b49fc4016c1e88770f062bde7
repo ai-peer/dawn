@@ -185,6 +185,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b803c78a_438a5f50",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-22T07:51:35Z",
+      "side": 1,
+      "message": "Slightly concerned that the shorter-named version is more appealing to use (less to type) but performs expensive heap allocations.\nCan we just fix up the 6 or more uses to cast to `std::string`? I\u0027d even be happy with a `std::string S(std::string_view)` helper at the top of the file to make this easy to do.",
+      "parentUuid": "32963a18_17bac60c",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 1
+      },
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53e25673_5b27f81d",
         "filename": "src/tint/reader/wgsl/lexer.cc",
         "patchSetId": 1
