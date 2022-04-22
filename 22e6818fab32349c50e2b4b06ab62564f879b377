@@ -34,6 +34,24 @@
       "parentUuid": "e1a4e37b_9ef05c8b",
       "revId": "22e6818fab32349c50e2b4b06ab62564f879b377",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07dc0fdc_8e1687ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-22T12:14:22Z",
+      "side": 1,
+      "message": "The manual part is in Patchset 1. The other patchsets are from me running `./tools/format` on Patchset 1. (I just revert the format change, rerun format and upload again so I don\u0027t have to resolve conflicts).\n\nAs to landing, I can do it either way, I thought this might be less disruptive. I can also send out a PSA and plan to land it next weekend if that would make things easier? If we wanted to d the dir-by-dir route I\u0027ll have to add `.clang-format` files to each dir as I go and then delete them at the end.",
+      "parentUuid": "31ad5cec_f29a16f0",
+      "revId": "22e6818fab32349c50e2b4b06ab62564f879b377",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
