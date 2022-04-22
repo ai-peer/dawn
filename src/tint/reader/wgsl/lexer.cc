@@ -18,6 +18,7 @@
 #include <cmath>
 #include <cstring>
 #include <limits>
+#include <tuple>
 #include <utility>
 
 #include "src/tint/debug.h"
@@ -26,9 +27,33 @@
 namespace tint::reader::wgsl {
 namespace {
 
-bool is_blankspace(char c) {
-  // See https://www.w3.org/TR/WGSL/#blankspace.
-  return c == ' ' || c == '\t' || c == '\v' || c == '\f' || c == '\r';
+// Unicode parsing code assumes that the size of a single std::string element is
+// 1 byte.
+static_assert(sizeof(decltype(tint::Source::FileContent::data[0])) ==
+                  sizeof(uint8_t),
+              "tint::reader::wgsl requires the size of a std::string element "
+              "to be a single byte");
+
+std::tuple<bool, size_t> read_blankspace(std::string_view str, size_t i) {
+  // See https://www.w3.org/TR/WGSL/#blankspace
+
+  auto* utf8 = reinterpret_cast<const uint8_t*>(&str[i]);
+  auto [cp, n] = text::utf8::Decode(utf8, str.size() - i);
+
+  if (n == 0) {
+    // TODO(amaiorano): handle decode errors
+    return {false, 0};
+  }
+
+  static const auto kSpace = text::CodePoint(0x0020);  // space
+  static const auto kHTab = text::CodePoint(0x0009);   // horizontal tab
+  static const auto kL2R = text::CodePoint(0x200E);    // left-to-right mark
+  static const auto kR2L = text::CodePoint(0x200F);    // right-to-left mark
+
+  if (cp == kSpace || cp == kHTab || cp == kL2R || cp == kR2L) {
+    return {true, n};
+  }
+  return {false, 0};
 }
 
 uint32_t dec_value(char c) {
@@ -181,11 +206,12 @@ Token Lexer::skip_blankspace_and_comments() {
         continue;
       }
 
-      if (!is_blankspace(at(pos()))) {
+      auto [is_blankspace, size] = read_blankspace(line(), pos());
+      if (!is_blankspace) {
         break;
       }
 
-      advance();
+      advance(size);
     }
 
     auto t = skip_comment();
@@ -207,10 +233,8 @@ Token Lexer::skip_blankspace_and_comments() {
 
 Token Lexer::skip_comment() {
   if (matches(pos(), "//")) {
-    // Line comment: ignore everything until the end of input or a blankspace
-    // character other than space or horizontal tab.
-    while (!is_eol() && !(is_blankspace(at(pos())) && !matches(pos(), " ") &&
-                          !matches(pos(), "\t"))) {
+    // Line comment: ignore everything until the end of line.
+    while (!is_eol()) {
       if (is_null()) {
         return {Token::Type::kError, begin_source(), "null character found"};
       }
@@ -757,11 +781,6 @@ Token Lexer::try_integer() {
 Token Lexer::try_ident() {
   auto source = begin_source();
   auto start = pos();
-
-  // This below assumes that the size of a single std::string element is 1 byte.
-  static_assert(sizeof(at(0)) == sizeof(uint8_t),
-                "tint::reader::wgsl requires the size of a std::string element "
-                "to be a single byte");
 
   // Must begin with an XID_Source unicode character, or underscore
   {

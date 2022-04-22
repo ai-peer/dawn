@@ -19,21 +19,70 @@
 #include <string_view>
 #include <utility>
 
+#include "src/tint/text/unicode.h"
+
 namespace tint {
 namespace {
+
+std::tuple<bool, size_t> ReadLineBreak(std::string_view str, size_t i) {
+  // See https://www.w3.org/TR/WGSL/#blankspace
+
+  auto* utf8 = reinterpret_cast<const uint8_t*>(&str[i]);
+  auto [cp, n] = text::utf8::Decode(utf8, str.size() - i);
+
+  if (n == 0) {
+    // TODO(amaiorano): handle decode errors
+    return {false, 0};
+  }
+
+  static const auto kLF = text::CodePoint(0x000A);    // line feed
+  static const auto kVTab = text::CodePoint(0x000B);  // vertical tab
+  static const auto kFF = text::CodePoint(0x000C);    // form feed
+  static const auto kNL = text::CodePoint(0x0085);    // next line
+  static const auto kCR = text::CodePoint(0x000D);    // carriage return
+  static const auto kLS = text::CodePoint(0x2028);    // line separator
+  static const auto kPS = text::CodePoint(0x2029);    // parargraph separator
+
+  if (cp == kLF || cp == kVTab || cp == kFF || cp == kNL || cp == kPS ||
+      cp == kLS) {
+    return {true, n};
+  }
+
+  // Handle CRLF as one line break, and CR alone as one line break
+  if (cp == kCR) {
+    if (auto next_i = i + n; next_i < str.size()) {
+      auto* next_utf8 = reinterpret_cast<const uint8_t*>(&str[next_i]);
+      auto [next_cp, next_n] =
+          text::utf8::Decode(next_utf8, str.size() - next_i);
+
+      if (next_n == 0) {
+        // TODO(amaiorano): handle decode errors
+        return {false, 0};
+      }
+
+      if (next_cp == kLF) {
+        // CRLF as one break
+        return {true, n + next_n};
+      }
+    }
+    return {true, n};
+  }
+
+  return {false, 0};
+}
+
 std::vector<std::string_view> SplitLines(std::string_view str) {
   std::vector<std::string_view> lines;
 
   size_t lineStart = 0;
-  for (size_t i = 0; i < str.size(); ++i) {
-    if (str[i] == '\n') {
-      // Handle CRLF on Windows
-      size_t curr = i;
-      if (i > 0 && str[i - 1] == '\r') {
-        --curr;
-      }
-      lines.push_back(str.substr(lineStart, curr - lineStart));
-      lineStart = i + 1;
+  for (size_t i = 0; i < str.size();) {
+    auto [is_line_break, size] = ReadLineBreak(str, i);
+    if (is_line_break) {
+      lines.push_back(str.substr(lineStart, i - lineStart));
+      i += size;
+      lineStart = i;
+    } else {
+      ++i;
     }
   }
   if (lineStart < str.size()) {
