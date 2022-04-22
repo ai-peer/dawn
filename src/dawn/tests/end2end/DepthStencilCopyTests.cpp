@@ -437,6 +437,9 @@ TEST_P(DepthCopyTests, FromDepthAspect) {
     DAWN_TEST_UNSUPPORTED_IF(GetParam().mTextureFormat == wgpu::TextureFormat::Depth16Unorm &&
                              (IsOpenGL() || IsOpenGLES()));
 
+    // TODO(crbug.com/dawn/XXXX): Remove this suppression.
+    DAWN_SUPPRESS_TEST_IF(IsANGLE() && IsWindows() && IsIntel());
+
     // TODO(crbug.com/dawn/1291): These tests are failing on NVidia GLES
     // when using Tint/GLSL.
     DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES() && IsNvidia());
@@ -479,6 +482,9 @@ TEST_P(DepthCopyTests, FromNonZeroMipDepthAspect) {
     // Invalid format and type combination in glReadPixels
     DAWN_TEST_UNSUPPORTED_IF(GetParam().mTextureFormat == wgpu::TextureFormat::Depth16Unorm &&
                              (IsOpenGL() || IsOpenGLES()));
+
+    // TODO(crbug.com/dawn/XXXX): Remove this suppression.
+    DAWN_SUPPRESS_TEST_IF(IsANGLE() && IsWindows() && IsIntel());
 
     // TODO(crbug.com/dawn/1291): These tests are failing on NVidia GLES
     // when using Tint/GLSL.

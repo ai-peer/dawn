@@ -440,7 +440,11 @@ std::unique_ptr<dawn::native::Instance> DawnTestEnvironment::CreateInstanceAndDi
 
     ScopedEnvironmentVar angleDefaultPlatform;
     if (GetEnvironmentVar("ANGLE_DEFAULT_PLATFORM").first.empty()) {
+#if defined(DAWN_PLATFORM_WINDOWS)
+        angleDefaultPlatform.Set("ANGLE_DEFAULT_PLATFORM", "d3d11");
+#else
         angleDefaultPlatform.Set("ANGLE_DEFAULT_PLATFORM", "swiftshader");
+#endif
     }
 
     if (!glfwInit()) {
