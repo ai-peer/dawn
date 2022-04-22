@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5abae80_efa6c4c1",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-22T20:52:46Z",
+      "side": 1,
+      "message": "The linter things \u003coptional\u003e is a c header for some reason. Dawn uses \u003coptional\u003e and does the same thing.",
+      "range": {
+        "startLine": 21,
+        "startChar": 21,
+        "endLine": 21,
+        "endChar": 51
+      },
+      "revId": "278e25adb4137b74fcecbb485edc23e7adc2d071",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b878092_3c19b5a2",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-22T20:52:46Z",
+      "side": 1,
+      "message": "I\u0027m going to guess you won\u0027t like this, bclayton. Alternatively, I could make the function return bool for pass/fail, and add two output params for is_blankspace, blankspace_size.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 13
+      },
+      "revId": "278e25adb4137b74fcecbb485edc23e7adc2d071",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
