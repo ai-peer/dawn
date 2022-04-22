@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0405af6_26fa00b6",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-22T00:46:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64996d4c_ee9f51ca",
+      "range": {
+        "startLine": 31,
+        "startChar": 69,
+        "endLine": 31,
+        "endChar": 70
+      },
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b7c4393_09899ff5",
@@ -88,6 +112,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec8d2f97_f50bdd9d",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-22T00:46:32Z",
+      "side": 1,
+      "message": "Yeah, I like that, good call.",
+      "parentUuid": "387db2bd_5a9fc30c",
+      "range": {
+        "startLine": 71,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 52
+      },
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61992cae_dc18313c",
@@ -113,6 +161,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32963a18_17bac60c",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-22T00:46:32Z",
+      "side": 1,
+      "message": "A bunch of call sites (6 or more) use this for error messages where we add a literal string to the result of calling `substr()`. Unfortunately, there is no operator+(const char*, string_view), so you\u0027re forced to explicitly convert it to a std::string.",
+      "parentUuid": "61992cae_dc18313c",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 1
+      },
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53e25673_5b27f81d",
         "filename": "src/tint/reader/wgsl/lexer.cc",
         "patchSetId": 1
@@ -124,6 +196,30 @@
       "writtenOn": "2022-04-21T22:52:17Z",
       "side": 1,
       "message": "`newline()` sounds like it is trying to match a new line instead of advancing to the next line. Howzabout `next_line()` or `advance_line()`?",
+      "range": {
+        "startLine": 95,
+        "startChar": 12,
+        "endLine": 95,
+        "endChar": 19
+      },
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "955c254c_99d0995a",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-22T00:46:32Z",
+      "side": 1,
+      "message": "Agreed, went with advance_line.",
+      "parentUuid": "53e25673_5b27f81d",
       "range": {
         "startLine": 95,
         "startChar": 12,
@@ -180,6 +276,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "140a7583_25cc57e9",
+        "filename": "src/tint/reader/wgsl/lexer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-22T00:46:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6429e778_a9fe8a0a",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 17
+      },
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04a0d174_28217833",
@@ -217,6 +337,30 @@
       "side": 1,
       "message": "Do we still need `pos_` and `len_` then?",
       "parentUuid": "04a0d174_28217833",
+      "range": {
+        "startLine": 103,
+        "startChar": 19,
+        "endLine": 103,
+        "endChar": 28
+      },
+      "revId": "22c42ad7a16c474b49fc4016c1e88770f062bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4881e5dd_73f5436e",
+        "filename": "src/tint/reader/wgsl/lexer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-22T00:46:32Z",
+      "side": 1,
+      "message": "We sure don\u0027t! Cleaned up a bunch more code.",
+      "parentUuid": "b46e9e57_87535b8b",
       "range": {
         "startLine": 103,
         "startChar": 19,
