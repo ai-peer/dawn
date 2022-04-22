@@ -221,6 +221,14 @@ func (l List) FilterByTags(tags Tags) List {
 	})
 }
 
+// FilterByVariant returns the results that the exact tags
+func (l List) FilterByVariant(tags Tags) List {
+	str := TagsToString(tags)
+	return l.Filter(func(r Result) bool {
+		return len(r.Tags) == len(tags) && TagsToString(r.Tags) == str
+	})
+}
+
 // Statuses is a set of Status
 type Statuses = container.Set[Status]
 
