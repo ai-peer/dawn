@@ -38,7 +38,7 @@ namespace dawn::native {
         DeviceBase* device,
         const RenderPipelineDescriptor* descriptor);
 
-    size_t IndexFormatSize(wgpu::IndexFormat format);
+    uint32_t IndexFormatSize(wgpu::IndexFormat format);
 
     bool IsStripPrimitiveTopology(wgpu::PrimitiveTopology primitiveTopology);
 

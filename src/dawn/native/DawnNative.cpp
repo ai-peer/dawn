@@ -41,11 +41,11 @@ namespace dawn::native {
                     desc->nextInChain = &mTogglesDesc;
                     mTogglesDesc.forceEnabledToggles = deviceDescriptor->forceEnabledToggles.data();
                     mTogglesDesc.forceEnabledTogglesCount =
-                        deviceDescriptor->forceEnabledToggles.size();
+                        static_cast<uint32_t>(deviceDescriptor->forceEnabledToggles.size());
                     mTogglesDesc.forceDisabledToggles =
                         deviceDescriptor->forceDisabledToggles.data();
                     mTogglesDesc.forceDisabledTogglesCount =
-                        deviceDescriptor->forceDisabledToggles.size();
+                        static_cast<uint32_t>(deviceDescriptor->forceDisabledToggles.size());
 
                     desc->requiredLimits =
                         reinterpret_cast<const RequiredLimits*>(deviceDescriptor->requiredLimits);
@@ -55,7 +55,7 @@ namespace dawn::native {
                         mRequiredFeatures.push_back(featuresInfo.FeatureNameToAPIEnum(featureStr));
                     }
                     desc->requiredFeatures = mRequiredFeatures.data();
-                    desc->requiredFeaturesCount = mRequiredFeatures.size();
+                    desc->requiredFeaturesCount = static_cast<uint32_t>(mRequiredFeatures.size());
                 }
             }
 

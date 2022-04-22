@@ -18,7 +18,7 @@
 
 #import <Foundation/NSProcessInfo.h>
 
-void GetMacOSVersion(int32_t* majorVersion, int32_t* minorVersion) {
+void GetMacOSVersion(long* majorVersion, long* minorVersion) {
     NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
     ASSERT(majorVersion != nullptr);
     *majorVersion = version.majorVersion;
