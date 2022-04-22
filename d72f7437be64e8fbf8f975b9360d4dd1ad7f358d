@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb301cc7_b9b3f972",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-22T17:34:37Z",
+      "side": 0,
+      "message": "I assume this was dead code, right?",
+      "range": {
+        "startLine": 879,
+        "startChar": 0,
+        "endLine": 889,
+        "endChar": 0
+      },
+      "revId": "d72f7437be64e8fbf8f975b9360d4dd1ad7f358d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
