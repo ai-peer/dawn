@@ -17,11 +17,10 @@
 #include <algorithm>
 #include <string>
 
+#include "dawn/common/GPUInfo.h"
 #include "dawn/native/Limits.h"
 #include "dawn/native/vulkan/BackendVk.h"
 #include "dawn/native/vulkan/DeviceVk.h"
-
-#include "dawn/common/GPUInfo.h"
 
 namespace dawn::native::vulkan {
 
@@ -177,16 +176,16 @@ namespace dawn::native::vulkan {
 
         const VkPhysicalDeviceLimits& vkLimits = mDeviceInfo.properties.limits;
 
-#define CHECK_AND_SET_V1_LIMIT_IMPL(vulkanName, webgpuName, compareOp, msgSegment)   \
-    do {                                                                             \
-        if (vkLimits.vulkanName compareOp baseLimits.v1.webgpuName) {                \
-            return DAWN_INTERNAL_ERROR("Insufficient Vulkan limits for " #webgpuName \
-                                       "."                                           \
-                                       " VkPhysicalDeviceLimits::" #vulkanName       \
-                                       " must be at " msgSegment " " +               \
-                                       std::to_string(baseLimits.v1.webgpuName));    \
-        }                                                                            \
-        limits->v1.webgpuName = vkLimits.vulkanName;                                 \
+#define CHECK_AND_SET_V1_LIMIT_IMPL(vulkanName, webgpuName, compareOp, msgSegment)                 \
+    do {                                                                                           \
+        if (vkLimits.vulkanName compareOp baseLimits.v1.webgpuName) {                              \
+            return DAWN_INTERNAL_ERROR("Insufficient Vulkan limits for " #webgpuName               \
+                                       "."                                                         \
+                                       " VkPhysicalDeviceLimits::" #vulkanName                     \
+                                       " must be at " msgSegment " " +                             \
+                                       std::to_string(baseLimits.v1.webgpuName));                  \
+        }                                                                                          \
+        limits->v1.webgpuName = static_cast<decltype(limits->v1.webgpuName)>(vkLimits.vulkanName); \
     } while (false)
 
 #define CHECK_AND_SET_V1_MAX_LIMIT(vulkanName, webgpuName) \

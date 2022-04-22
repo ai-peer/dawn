@@ -19,6 +19,7 @@
 #include <sstream>
 
 #include "dawn/common/BitSetIterator.h"
+#include "dawn/common/Numeric.h"
 #include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/Device.h"
@@ -420,12 +421,12 @@ namespace dawn::native {
     }  // anonymous namespace
 
     // Helper functions
-    size_t IndexFormatSize(wgpu::IndexFormat format) {
+    uint32_t IndexFormatSize(wgpu::IndexFormat format) {
         switch (format) {
             case wgpu::IndexFormat::Uint16:
-                return sizeof(uint16_t);
+                return u32_sizeof<uint16_t>;
             case wgpu::IndexFormat::Uint32:
-                return sizeof(uint32_t);
+                return u32_sizeof<uint32_t>;
             case wgpu::IndexFormat::Undefined:
                 break;
         }

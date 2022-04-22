@@ -174,7 +174,7 @@ namespace dawn::native::d3d12 {
         // Initialize the padding bytes to zero.
         if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse) &&
             !mappedAtCreation) {
-            uint32_t paddingBytes = GetAllocatedSize() - GetSize();
+            uint32_t paddingBytes = static_cast<uint32_t>(GetAllocatedSize() - GetSize());
             if (paddingBytes > 0) {
                 CommandRecordingContext* commandRecordingContext;
                 DAWN_TRY_ASSIGN(commandRecordingContext,
