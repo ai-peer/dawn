@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1a4e37b_9ef05c8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-22T10:02:35Z",
+      "side": 1,
+      "message": "Uuuh do you really aim to land this change like that? Or is there a way to minimize disruption to in-flight CLs a bit? (for example doing directory by directory or something else).\n\nAlso for sweeping changes like that, I\u0027d like to review by having instructions on how to reproduce the mechanical part of the change so it\u0027s easy to see the manual part of the changes.",
+      "revId": "22e6818fab32349c50e2b4b06ab62564f879b377",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
