@@ -626,13 +626,13 @@ namespace dawn::native::metal {
         DAWN_INVALID_IF(descriptor->sampleCount != 1, "Sample count (%u) is not 1.",
                         descriptor->sampleCount);
 
-        uint32_t surfaceWidth = IOSurfaceGetWidth(ioSurface);
-        uint32_t surfaceHeight = IOSurfaceGetHeight(ioSurface);
+        size_t surfaceWidth = IOSurfaceGetWidth(ioSurface);
+        size_t surfaceHeight = IOSurfaceGetHeight(ioSurface);
 
         DAWN_INVALID_IF(
             descriptor->size.width != surfaceWidth || descriptor->size.height != surfaceHeight ||
                 descriptor->size.depthOrArrayLayers != 1,
-            "IOSurface size (width: %u, height %u, depth: 1) doesn't match descriptor size %s.",
+            "IOSurface size (width: %zu, height %zu, depth: 1) doesn't match descriptor size %s.",
             surfaceWidth, surfaceHeight, &descriptor->size);
 
         wgpu::TextureFormat ioSurfaceFormat;

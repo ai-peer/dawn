@@ -1041,7 +1041,8 @@ namespace dawn::native::vulkan {
     }
 
     uint32_t Device::GetOptimalBytesPerRowAlignment() const {
-        return mDeviceInfo.properties.limits.optimalBufferCopyRowPitchAlignment;
+        return static_cast<uint32_t>(
+            mDeviceInfo.properties.limits.optimalBufferCopyRowPitchAlignment);
     }
 
     uint64_t Device::GetOptimalBufferToTextureCopyOffsetAlignment() const {

@@ -20,6 +20,7 @@
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/BitSetIterator.h"
+#include "dawn/common/Numeric.h"
 #include "dawn/common/ityp_stack_vec.h"
 #include "dawn/native/BindGroupLayout.h"
 #include "dawn/native/Device.h"
@@ -245,7 +246,7 @@ namespace dawn::native {
 
             BindGroupLayoutDescriptor desc = {};
             desc.entries = entryVec.data();
-            desc.entryCount = entryVec.size();
+            desc.entryCount = checked_cast<uint32_t>(entryVec.size());
 
             if (device->IsValidationEnabled()) {
                 DAWN_TRY_CONTEXT(ValidateBindGroupLayoutDescriptor(device, &desc), "validating %s",

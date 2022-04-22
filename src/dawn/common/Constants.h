@@ -39,9 +39,9 @@ static constexpr uint32_t kMaxDynamicUniformBuffersPerPipelineLayout = 8u;
 static constexpr uint32_t kMaxDynamicStorageBuffersPerPipelineLayout = 4u;
 
 // Indirect command sizes
-static constexpr uint64_t kDispatchIndirectSize = 3 * sizeof(uint32_t);
-static constexpr uint64_t kDrawIndirectSize = 4 * sizeof(uint32_t);
-static constexpr uint64_t kDrawIndexedIndirectSize = 5 * sizeof(uint32_t);
+static constexpr uint32_t kDispatchIndirectSize = 3 * sizeof(uint32_t);
+static constexpr uint32_t kDrawIndirectSize = 4 * sizeof(uint32_t);
+static constexpr uint32_t kDrawIndexedIndirectSize = 5 * sizeof(uint32_t);
 
 // Non spec defined constants.
 static constexpr float kLodMin = 0.0;

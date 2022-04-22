@@ -17,6 +17,7 @@
 #include <algorithm>
 #include <vector>
 
+#include "dawn/common/Numeric.h"
 #include "dawn/native/BindGroupTracker.h"
 #include "dawn/native/CommandEncoder.h"
 #include "dawn/native/CommandValidation.h"
@@ -192,10 +193,10 @@ namespace dawn::native::vulkan {
             }
 
             if (bufferBarriers.size() || imageBarriers.size()) {
-                device->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages,
-                                              0, 0, nullptr, bufferBarriers.size(),
-                                              bufferBarriers.data(), imageBarriers.size(),
-                                              imageBarriers.data());
+                device->fn.CmdPipelineBarrier(
+                    recordingContext->commandBuffer, srcStages, dstStages, 0, 0, nullptr,
+                    checked_cast<uint32_t>(bufferBarriers.size()), bufferBarriers.data(),
+                    checked_cast<uint32_t>(imageBarriers.size()), imageBarriers.data());
             }
         }
 
@@ -369,8 +370,10 @@ namespace dawn::native::vulkan {
 
                 auto nextFalseIt = std::find(firstTrueIt, lastIt, false);
 
-                uint32_t queryIndex = std::distance(availability.begin(), firstTrueIt);
-                uint32_t queryCount = std::distance(firstTrueIt, nextFalseIt);
+                uint32_t queryIndex =
+                    checked_cast<uint32_t>(std::distance(availability.begin(), firstTrueIt));
+                uint32_t queryCount =
+                    checked_cast<uint32_t>(std::distance(firstTrueIt, nextFalseIt));
 
                 // Reset the queries between firstTrueIt and nextFalseIt (which is at most
                 // lastIt)
@@ -414,12 +417,14 @@ namespace dawn::native::vulkan {
                 auto nextFalseIt = std::find(firstTrueIt, lastIt, false);
 
                 // The query index of firstTrueIt where the resolving starts
-                uint32_t resolveQueryIndex = std::distance(availability.begin(), firstTrueIt);
+                uint32_t resolveQueryIndex =
+                    checked_cast<uint32_t>(std::distance(availability.begin(), firstTrueIt));
                 // The queries count between firstTrueIt and nextFalseIt need to be resolved
-                uint32_t resolveQueryCount = std::distance(firstTrueIt, nextFalseIt);
+                uint32_t resolveQueryCount =
+                    checked_cast<uint32_t>(std::distance(firstTrueIt, nextFalseIt));
 
                 // Calculate destinationOffset based on the current resolveQueryIndex and firstQuery
-                uint32_t resolveDestinationOffset =
+                uint64_t resolveDestinationOffset =
                     destinationOffset + (resolveQueryIndex - firstQuery) * sizeof(uint64_t);
 
                 // Resolve the queries between firstTrueIt and nextFalseIt (which is at most lastIt)

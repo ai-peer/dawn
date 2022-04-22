@@ -18,6 +18,7 @@
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/Math.h"
+#include "dawn/common/Numeric.h"
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/EnumMaskIterator.h"
 #include "dawn/native/Error.h"
@@ -679,7 +680,7 @@ namespace dawn::native::vulkan {
                     viewFormats.push_back(VulkanImageFormat(device, viewFormat.format));
                 }
 
-                imageFormatListInfo.viewFormatCount = viewFormats.size();
+                imageFormatListInfo.viewFormatCount = checked_cast<uint32_t>(viewFormats.size());
                 imageFormatListInfo.pViewFormats = viewFormats.data();
             }
         }
@@ -773,7 +774,7 @@ namespace dawn::native::vulkan {
                     viewFormats.push_back(VulkanImageFormat(device, viewFormat.format));
                 }
 
-                imageFormatListInfo.viewFormatCount = viewFormats.size();
+                imageFormatListInfo.viewFormatCount = checked_cast<uint32_t>(viewFormats.size());
                 imageFormatListInfo.pViewFormats = viewFormats.data();
             }
         }
@@ -1136,7 +1137,8 @@ namespace dawn::native::vulkan {
             ASSERT(srcStages != 0 && dstStages != 0);
             ToBackend(GetDevice())
                 ->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
-                                        nullptr, 0, nullptr, barriers.size(), barriers.data());
+                                        nullptr, 0, nullptr,
+                                        checked_cast<uint32_t>(barriers.size()), barriers.data());
         }
     }
 
@@ -1252,7 +1254,8 @@ namespace dawn::native::vulkan {
             device->fn.CmdCopyBufferToImage(
                 recordingContext->commandBuffer,
                 ToBackend(uploadHandle.stagingBuffer)->GetBufferHandle(), GetHandle(),
-                VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, regions.size(), regions.data());
+                VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, checked_cast<uint32_t>(regions.size()),
+                regions.data());
         } else {
             for (uint32_t level = range.baseMipLevel; level < range.baseMipLevel + range.levelCount;
                  ++level) {
