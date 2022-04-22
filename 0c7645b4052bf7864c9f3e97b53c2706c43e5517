@@ -191,6 +191,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1cefc8b5_52e6f72a",
+        "filename": "src/dawn/native/vulkan/PipelineCacheVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-22T03:03:42Z",
+      "side": 1,
+      "message": "mm.. that seems like quite a bit of magic. Do we really need it?\n\nA few thoughts: \n 1. It\u0027s super not clear that this can fail, and that\u0027s actually OK because GetHandle() will return VK_NULL_HANDLE which is valid to pass to vkCreate*Pipelines. However, I don\u0027t know if this is the best design - it depends on how D3D12 will work. But silently failing and having the behavior of failed-to-create-cache look just like no-cache-at-all might not be as ergonomic in D3D12 (or maybe it will)\n 2. We should just assign mHandle to VK_NULL_HANDLE before the call instead of doing it in the {} block. Vulkan spec requires it to not be set if the call fails.\n 3. We could do: device-\u003eConsumeError(CheckVkSuccess(..)) without the DAWN_TRY. no need for the void(0) thing.",
+      "parentUuid": "6e017b1d_4fedd0e0",
+      "range": {
+        "startLine": 80,
+        "startChar": 43,
+        "endLine": 80,
+        "endChar": 50
+      },
+      "revId": "0c7645b4052bf7864c9f3e97b53c2706c43e5517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d3f328f7_e1c9ff67",
         "filename": "src/dawn/native/vulkan/PipelineCacheVk.cpp",
         "patchSetId": 14
@@ -273,6 +297,30 @@
       "side": 1,
       "message": "Hmm thought about this some more, and while I agree that we don\u0027t NEED it in the frontend for this change, I think it would be best to have the skeleton here for it. This way if we parallelize work, we sort of lock in general flow early on so its easier to modify later.",
       "parentUuid": "38576a6b_8f2c36a9",
+      "range": {
+        "startLine": 569,
+        "startChar": 52,
+        "endLine": 569,
+        "endChar": 76
+      },
+      "revId": "0c7645b4052bf7864c9f3e97b53c2706c43e5517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c829e9a_79936bfe",
+        "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-22T03:03:42Z",
+      "side": 1,
+      "message": "ok I still kinda disagree though because if we modify this for a monolithic cache, we won\u0027t be calling GetOrCreate with a pipeline. it\u0027ll just be something like device-\u003eGetPipelineCache().\n\nAnd, it\u0027s not clear to me right now that we will need to simultaneously support both monolithic and disjoint pipeline caches. But if we do, I don\u0027t think calling GetOrCreatePipelineCache(nullptr) would be the most intuitive way to get the monolithic cache. It\u0027s not clearly obvious from the interface that that is what it does.\n\nWould probably be preferable to instead so something like:\n```\nif (monolithic) {\n  cache \u003d device-\u003eGetOrCreatePipelineCache()\n} else {\n  cache \u003d PipelineCache::Create(device, pipeline-\u003eGetCacheKey());\n}\n```",
+      "parentUuid": "ac20e19c_5d92145f",
       "range": {
         "startLine": 569,
         "startChar": 52,

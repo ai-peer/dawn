@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b27e83e_618016d4",
+        "filename": "src/dawn/native/vulkan/ComputePipelineVk.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-22T03:03:42Z",
+      "side": 1,
+      "message": "does it ever return null? perhaps we can simply some of the duplicated code.\nIf it\u0027s never null, then I think we only need the contents of the else branch.\n\nor, is this intended to be the indicator that caching is disabled?\n\nif so, it might be more clear to do `if (GetDevice()-\u003eIsToggleEnabled(Toggle::PipelineCaching))`",
+      "range": {
+        "startLine": 90,
+        "startChar": 12,
+        "endLine": 90,
+        "endChar": 28
+      },
+      "revId": "f5790efa0699a027396295e7d353b59508f08dc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbf37e2a_23c2375e",
+        "filename": "src/dawn/native/vulkan/PipelineCacheVk.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-22T03:03:42Z",
+      "side": 1,
+      "message": "we don\u0027t need these bits here. The function can just return ResultOrError\u003cCachedBlob\u003e and PipelineCacheBase::Flush can handle the error",
+      "range": {
+        "startLine": 67,
+        "startChar": 12,
+        "endLine": 67,
+        "endChar": 25
+      },
+      "revId": "f5790efa0699a027396295e7d353b59508f08dc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbc3b85d_b6866f32",
+        "filename": "src/dawn/native/vulkan/PipelineCacheVk.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-22T03:03:42Z",
+      "side": 1,
+      "message": "why do we need DeleteThis versus regular virtual destructor? Generally, we only want to use DeleteThis when there\u0027s some funny business going on with destruction ordering.\n\nThe only case I know of is when the BindGroup gets destroyed, we want its layout to outlive it. So we assign the layout to a temp variable, and then delete the bind group. Then, after that, the layout will fall out of scope",
+      "range": {
+        "startLine": 97,
+        "startChar": 9,
+        "endLine": 97,
+        "endChar": 34
+      },
+      "revId": "f5790efa0699a027396295e7d353b59508f08dc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98dfe421_802ddb67",
+        "filename": "src/dawn/tests/white_box/VulkanErrorInjectorTests.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-22T03:03:42Z",
+      "side": 1,
+      "message": "any changes or was this just formatting?",
+      "revId": "f5790efa0699a027396295e7d353b59508f08dc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
