@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "92f920b4_64c01624",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-22T09:52:56Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand. That we switch between GetUsage and GetUsageExternalOnly changes the logic and is new to this CL. It seems unnecessary.\n\nGetUsage() as used previously here works because it contains the external usages.",
+      "parentUuid": "44503e16_b932cee6",
+      "revId": "9668e644122697e807812edca58c8a650d664a3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed2836f2_032908e9",
         "filename": "src/dawn/native/CommandValidation.cpp",
         "patchSetId": 8
