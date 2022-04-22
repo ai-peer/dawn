@@ -138,12 +138,12 @@ namespace dawn::native {
     }
 
     const WGPUCompilationInfo* OwnedCompilationMessages::GetCompilationInfo() {
-        mCompilationInfo.messageCount = mMessages.size();
+        mCompilationInfo.messageCount = static_cast<uint32_t>(mMessages.size());
         mCompilationInfo.messages = mMessages.data();
 
         // Ensure every message points at the correct message string. Cannot do this earlier, since
         // vector reallocations may move the pointers around.
-        for (size_t i = 0; i < mCompilationInfo.messageCount; ++i) {
+        for (uint32_t i = 0; i < mCompilationInfo.messageCount; ++i) {
             WGPUCompilationMessage& message = mMessages[i];
             std::string& messageString = mMessageStrings[i];
             message.message = messageString.c_str();

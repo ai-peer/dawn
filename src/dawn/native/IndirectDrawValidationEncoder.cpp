@@ -23,6 +23,7 @@
 
 #include "dawn/common/Constants.h"
 #include "dawn/common/Math.h"
+#include "dawn/common/Numeric.h"
 #include "dawn/native/BindGroup.h"
 #include "dawn/native/BindGroupLayout.h"
 #include "dawn/native/CommandEncoder.h"
@@ -278,12 +279,12 @@ namespace dawn::native {
             device->GetLimits().v1.minStorageBufferOffsetAlignment;
 
         for (auto& [config, validationInfo] : bufferInfoMap) {
-            const uint64_t indirectDrawCommandSize =
+            const uint32_t indirectDrawCommandSize =
                 config.drawType == IndirectDrawMetadata::DrawType::Indexed
                     ? kDrawIndexedIndirectSize
                     : kDrawIndirectSize;
 
-            uint64_t outputIndirectSize = indirectDrawCommandSize;
+            uint32_t outputIndirectSize = indirectDrawCommandSize;
             if (config.duplicateBaseVertexInstance) {
                 outputIndirectSize += 2 * sizeof(uint32_t);
             }
@@ -298,7 +299,7 @@ namespace dawn::native {
                 Batch newBatch;
                 newBatch.metadata = &batch;
                 newBatch.numIndexBufferElements = config.numIndexBufferElements;
-                newBatch.dataSize = GetBatchDataSize(batch.draws.size());
+                newBatch.dataSize = GetBatchDataSize(checked_cast<uint32_t>(batch.draws.size()));
                 newBatch.inputIndirectOffset = minOffsetAlignedDown;
                 newBatch.inputIndirectSize =
                     batch.maxOffset + indirectDrawCommandSize - minOffsetAlignedDown;
