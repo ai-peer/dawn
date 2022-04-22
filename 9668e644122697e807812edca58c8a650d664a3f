@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab444d3e_5683d85a",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-22T09:01:23Z",
+      "side": 1,
+      "message": "I think changes to this file can be rolled back as well? It\u0027s ok if internal usages are not shown in the error message.",
+      "revId": "9668e644122697e807812edca58c8a650d664a3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed2836f2_032908e9",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-22T09:01:23Z",
+      "side": 1,
+      "message": "nit: Maybe this can be replaced with return ValidateCanUseAs(buffer, wgpu::BufferUsage::CopyDst)?",
+      "revId": "9668e644122697e807812edca58c8a650d664a3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
