@@ -96,8 +96,6 @@ namespace dawn::native {
         // should be used to get typed integer counts.
         const BindingCounts& GetBindingCountInfo() const;
 
-        uint32_t GetExternalTextureBindingCount() const;
-
         // Used to specify unpacked external texture binding slots when transforming shader modules.
         const ExternalTextureBindingExpansionMap& GetExternalTextureBindingExpansionMap() const;
 
@@ -123,9 +121,9 @@ namespace dawn::native {
         // Compute the amount of space / alignment required to store bindings for a bind group of
         // this layout.
         size_t GetBindingDataSize() const;
-        static constexpr size_t GetBindingDataAlignment() {
+        static constexpr uint32_t GetBindingDataAlignment() {
             static_assert(alignof(Ref<ObjectBase>) <= alignof(BufferBindingData));
-            return alignof(BufferBindingData);
+            return u32_alignof<BufferBindingData>;
         }
 
         BindingDataPointers ComputeBindingDataPointers(void* dataStart) const;
@@ -144,8 +142,9 @@ namespace dawn::native {
         SlabAllocator<BindGroup> MakeFrontendBindGroupAllocator(size_t size) {
             return SlabAllocator<BindGroup>(
                 size,  // bytes
-                Align(sizeof(BindGroup), GetBindingDataAlignment()) + GetBindingDataSize(),  // size
-                std::max(alignof(BindGroup), GetBindingDataAlignment())  // alignment
+                Align(u32_sizeof<BindGroup>, GetBindingDataAlignment()) +
+                    GetBindingDataSize(),                                    // size
+                std::max(u32_alignof<BindGroup>, GetBindingDataAlignment())  // alignment
             );
         }
 

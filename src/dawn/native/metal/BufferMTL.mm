@@ -127,7 +127,7 @@ namespace dawn::native::metal {
         // Initialize the padding bytes to zero.
         if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse) &&
             !mappedAtCreation) {
-            uint32_t paddingBytes = GetAllocatedSize() - GetSize();
+            uint32_t paddingBytes = static_cast<uint32_t>(GetAllocatedSize() - GetSize());
             if (paddingBytes > 0) {
                 uint32_t clearSize = Align(paddingBytes, 4);
                 uint64_t clearOffset = GetAllocatedSize() - clearSize;

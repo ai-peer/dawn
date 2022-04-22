@@ -22,6 +22,7 @@
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/Constants.h"
+#include "dawn/common/Numeric.h"
 #include "dawn/native/BindGroup.h"
 #include "dawn/native/BindGroupLayout.h"
 #include "dawn/native/Buffer.h"
@@ -179,7 +180,7 @@ namespace dawn::native::utils {
 
         BindGroupDescriptor descriptor;
         descriptor.layout = layout.Get();
-        descriptor.entryCount = entries.size();
+        descriptor.entryCount = checked_cast<uint32_t>(entries.size());
         descriptor.entries = entries.data();
 
         return device->CreateBindGroup(&descriptor);

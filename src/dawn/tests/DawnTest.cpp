@@ -795,13 +795,13 @@ bool DawnTestBase::IsLinux() const {
 
 bool DawnTestBase::IsMacOS(int32_t majorVersion, int32_t minorVersion) const {
 #ifdef DAWN_PLATFORM_MACOS
-    if (majorVersion == -1 && minorVersion == -1) {
+    if (majorVersion < 0 && minorVersion < 0) {
         return true;
     }
-    int32_t majorVersionOut, minorVersionOut = 0;
+    long majorVersionOut, minorVersionOut = 0;
     GetMacOSVersion(&majorVersionOut, &minorVersionOut);
-    return (majorVersion != -1 && majorVersion == majorVersionOut) &&
-           (minorVersion != -1 && minorVersion == minorVersionOut);
+    return (majorVersion >= 0 && majorVersion == majorVersionOut) &&
+           (minorVersion >= 0 && minorVersion == minorVersionOut);
 #else
     return false;
 #endif
