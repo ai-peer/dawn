@@ -34,7 +34,7 @@ std::optional<std::string> GetExecutableDirectory();
 std::optional<std::string> GetModuleDirectory();
 
 #ifdef DAWN_PLATFORM_MACOS
-void GetMacOSVersion(int32_t* majorVersion, int32_t* minorVersion = nullptr);
+void GetMacOSVersion(long* majorVersion, long* minorVersion = nullptr);
 bool IsMacOSVersionAtLeast(uint32_t majorVersion, uint32_t minorVersion = 0);
 #endif
 
