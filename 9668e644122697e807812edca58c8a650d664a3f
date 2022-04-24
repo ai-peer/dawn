@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2ca6648_0e01b263",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-04-24T00:45:26Z",
+      "side": 1,
+      "message": "\u003e GetUsage() as used previously here works because it contains the external usages.\n\nThat\u0027s right. The problem is when we call APISetBindGroup() internally, we don\u0027t skip the validation here, while this internal call requires the buffer have kInternalStorageBufferBinding usage, and with this CL such internal usage isn\u0027t in GetUsageExternalOnly().",
+      "parentUuid": "92f920b4_64c01624",
+      "revId": "9668e644122697e807812edca58c8a650d664a3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed2836f2_032908e9",
         "filename": "src/dawn/native/CommandValidation.cpp",
         "patchSetId": 8
