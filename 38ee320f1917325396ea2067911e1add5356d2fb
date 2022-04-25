@@ -255,6 +255,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "73d11f41_2da4e7c6",
+        "filename": "src/tint/reader/wgsl/parser_impl_global_decl_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-25T12:30:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0bd4fc1f_bfe96668",
+      "revId": "38ee320f1917325396ea2067911e1add5356d2fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "918a38bb_368abb6d",
         "filename": "test/tint/extensions/InternalExtensionForTesting/simple_with_duplicated_InternalExtensionForTesting.wgsl.expected.wgsl",
         "patchSetId": 8

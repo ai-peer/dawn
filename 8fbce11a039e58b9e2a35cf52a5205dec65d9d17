@@ -16,6 +16,86 @@
       "message": "PTAL, thanks!",
       "revId": "8fbce11a039e58b9e2a35cf52a5205dec65d9d17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b758527_d717704a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-25T12:30:27Z",
+      "side": 1,
+      "message": "+2 - feel free to submit after addressing the nits.\n\nAdded a few nits about TODO comments, which I think should be tracked as issues instead of littering the codebase.\n\nI\u0027m also unsure about the new `sem` code - I don\u0027t think this is needed.\n",
+      "revId": "8fbce11a039e58b9e2a35cf52a5205dec65d9d17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb96829a_c1dfe395",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-25T12:30:27Z",
+      "side": 1,
+      "message": "This code doesn\u0027t seem right - extensions are not tokens. Suggest removing this comment block.\nTODOs like this have a tendency of hanging around longer than authors expect. I\u0027d prefer this sort of thing to be tracked in issues rather than the codebase itself.",
+      "range": {
+        "startLine": 354,
+        "startChar": 0,
+        "endLine": 364,
+        "endChar": 6
+      },
+      "revId": "8fbce11a039e58b9e2a35cf52a5205dec65d9d17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "331e9603_c269cb76",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-25T12:30:27Z",
+      "side": 1,
+      "message": "remove?",
+      "range": {
+        "startLine": 368,
+        "startChar": 0,
+        "endLine": 370,
+        "endChar": 41
+      },
+      "revId": "8fbce11a039e58b9e2a35cf52a5205dec65d9d17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0e063de_a2639b3a",
+        "filename": "src/tint/sem/extension.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-25T12:30:27Z",
+      "side": 1,
+      "message": "Is this used anywhere? Does it need to exist in the semantic tree, if not, can we remove these new files in `src/tint/sem`?",
+      "revId": "8fbce11a039e58b9e2a35cf52a5205dec65d9d17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
