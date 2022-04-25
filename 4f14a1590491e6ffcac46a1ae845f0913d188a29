@@ -33,6 +33,24 @@
       "message": "/dawn/src/src/tint/transform/first_index_offset.h:86: error: argument \u0027has_vtx_index\u0027 of command @param is not found in the argument list of tint::transform::FirstIndexOffset::Data::Data(bool has_vtx_or_inst_index) (warning treated as error, aborting now)",
       "revId": "4f14a1590491e6ffcac46a1ae845f0913d188a29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b11501b_a6626a1d",
+        "filename": "src/tint/transform/first_index_offset.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-04-25T21:57:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "937fa5eb_f9f6ad61",
+      "revId": "4f14a1590491e6ffcac46a1ae845f0913d188a29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
