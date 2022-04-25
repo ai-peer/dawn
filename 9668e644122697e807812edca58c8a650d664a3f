@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8c5a4d7_ede014cd",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-25T07:22:02Z",
+      "side": 1,
+      "message": "I don\u0027t get it: can\u0027t we just do\n\n            DAWN_INVALID_IF(!(GetUsage() \u0026 requiredUsage),\n                            \"Binding usage (%s) of %s doesn\u0027t match expected usage (%s).\",\n                            GetUsageExternalOnly(), entry.buffer, requiredUsage);\n                            \n?",
+      "parentUuid": "a2ca6648_0e01b263",
+      "revId": "9668e644122697e807812edca58c8a650d664a3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed2836f2_032908e9",
         "filename": "src/dawn/native/CommandValidation.cpp",
         "patchSetId": 8
