@@ -68,6 +68,24 @@
       "parentUuid": "566a846f_a918f2ef",
       "revId": "4d18a646af3b1dbbd94c9562c154ed1ee06e1462",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "662006a9_dd6ac5f0",
+        "filename": "src/tint/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-25T15:31:30Z",
+      "side": 1,
+      "message": "Sure expressing as vectors is good, but why is this better than\n\n```\n  if (abs(v) \u003c vec3\u003cf32\u003e(params.D)) {\n    return (sign(v) * ((params.C * abs(v)) + params.F));\n  } else {\n    return (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3\u003cf32\u003e(params.G)) + params.E))\n  }\n```",
+      "parentUuid": "536eca1c_58ff4340",
+      "revId": "4d18a646af3b1dbbd94c9562c154ed1ee06e1462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
