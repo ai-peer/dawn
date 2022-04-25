@@ -86,6 +86,24 @@
       "parentUuid": "536eca1c_58ff4340",
       "revId": "4d18a646af3b1dbbd94c9562c154ed1ee06e1462",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfb18e66_ac3c97ae",
+        "filename": "src/tint/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-25T15:48:03Z",
+      "side": 1,
+      "message": "Because `if` only works on a scalar bool, and your condition is `vec3\u003cbool\u003e`?",
+      "parentUuid": "662006a9_dd6ac5f0",
+      "revId": "4d18a646af3b1dbbd94c9562c154ed1ee06e1462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
