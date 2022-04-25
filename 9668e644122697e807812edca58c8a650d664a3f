@@ -90,6 +90,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ad0acc1_cf30337c",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-04-25T07:42:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8c5a4d7_ede014cd",
+      "revId": "9668e644122697e807812edca58c8a650d664a3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed2836f2_032908e9",
