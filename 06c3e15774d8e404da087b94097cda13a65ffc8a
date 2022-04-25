@@ -22,6 +22,30 @@
       },
       "revId": "06c3e15774d8e404da087b94097cda13a65ffc8a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d322f0ae_1083d47e",
+        "filename": "tools/src/cmd/perfmon/main.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-25T20:19:40Z",
+      "side": 1,
+      "message": "It\u0027s a tag (metadata) on the field that can be picked up by go\u0027s reflection.\nIt\u0027s used by the JSON package to either override the JSON name (the bit before the `,`, which is blank in this case \u003d\u003d no change), the `omitempty` means don\u0027t emit JSON if the field is zero-value.",
+      "parentUuid": "ba897b15_d72e0fa4",
+      "range": {
+        "startLine": 190,
+        "startChar": 13,
+        "endLine": 190,
+        "endChar": 32
+      },
+      "revId": "06c3e15774d8e404da087b94097cda13a65ffc8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
