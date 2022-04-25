@@ -1658,7 +1658,7 @@ Maybe<const ast::VariableDeclStatement*> ParserImpl::variable_stmt() {
 }
 
 // if_stmt
-//   : IF expression compound_stmt ( ELSE else_stmts ) ?
+//   : IF expression compound_stmt ( ELSE else_stmt ) ?
 Maybe<const ast::IfStatement*> ParserImpl::if_stmt() {
   Source source;
   if (!match(Token::Type::kIf, &source))
@@ -1675,53 +1675,34 @@ Maybe<const ast::IfStatement*> ParserImpl::if_stmt() {
   if (body.errored)
     return Failure::kErrored;
 
-  auto el = else_stmts();
-  if (el.errored) {
-    return Failure::kErrored;
-  }
-
-  return create<ast::IfStatement>(source, condition.value, body.value,
-                                  std::move(el.value));
-}
-
-// else_stmts
-//  : body_stmt
-//  | if_stmt
-Expect<ast::ElseStatementList> ParserImpl::else_stmts() {
-  ast::ElseStatementList stmts;
-  while (continue_parsing()) {
-    Source start;
-
-    bool else_if = false;
-    if (match(Token::Type::kElse, &start)) {
-      else_if = match(Token::Type::kIf);
-    } else {
-      break;
-    }
-
-    const ast::Expression* cond = nullptr;
-    if (else_if) {
-      auto condition = logical_or_expression();
-      if (condition.errored) {
-        return Failure::kErrored;
-      }
-      if (!condition.matched) {
-        return add_error(peek(), "unable to parse condition expression");
-      }
-
-      cond = condition.value;
-    }
-
-    auto body = expect_body_stmt();
-    if (body.errored) {
+  const ast::Statement* el_stmt = nullptr;
+  if (match(Token::Type::kElse)) {
+    auto el = else_stmt();
+    if (el.errored) {
       return Failure::kErrored;
     }
-
-    Source source = make_source_range_from(start);
-    stmts.emplace_back(create<ast::ElseStatement>(source, cond, body.value));
+    el_stmt = std::move(el.value);
   }
 
-  return stmts;
+  return create<ast::IfStatement>(source, condition.value, body.value, el_stmt);
+}
+
+// else_stmt
+//  : body_stmt
+//  | if_stmt
+Expect<const ast::Statement*> ParserImpl::else_stmt() {
+  auto elseif = if_stmt();
+  if (elseif.errored) {
+    return Failure::kErrored;
+  } else if (elseif.matched) {
+    return elseif.value;
+  }
+
+  auto body = expect_body_stmt();
+  if (body.errored) {
+    return Failure::kErrored;
+  }
+  return body.value;
 }
 
 // switch_stmt
