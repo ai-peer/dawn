@@ -16,6 +16,23 @@
       "message": "ptal",
       "revId": "bd136086c81ef6e9317a6d0c4249fe3b624d50ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bebe0b4_e9df4b7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-25T11:26:23Z",
+      "side": 1,
+      "message": "I actually liked everything as a single color as it let me visually distinguish failing blocks.\nIf its hard to read though, fair enough.\n\nWhy is blue showing up as red in your terminal?!",
+      "revId": "bd136086c81ef6e9317a6d0c4249fe3b624d50ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
