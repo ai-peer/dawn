@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba897b15_d72e0fa4",
+        "filename": "tools/src/cmd/perfmon/main.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-25T20:17:47Z",
+      "side": 1,
+      "message": "What does this mean?",
+      "range": {
+        "startLine": 190,
+        "startChar": 13,
+        "endLine": 190,
+        "endChar": 32
+      },
+      "revId": "06c3e15774d8e404da087b94097cda13a65ffc8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
