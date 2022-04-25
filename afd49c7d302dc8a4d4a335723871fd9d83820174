@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8acc10f3_c0ec2d02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-25T18:16:40Z",
+      "side": 1,
+      "message": "Note that I ran Dan\u0027s CTS tests for this:\n\n\n```\nBefore my changes:\n\namaiorano@amaiorano:~/src/dawn$ wgpu-cts webgpu:shader,validation,parse,blankspace:*\n    PASS: 10        (58.8%)\n    FAIL: 7         (41.2%)\n\n\namaiorano@amaiorano:~/src/dawn$ wgpu-cts webgpu:shader,validation,parse,comments:*\n    PASS: 10        (76.9%)\n    FAIL: 3         (23.1%)\n\n\n\nAfter my changes:\n\namaiorano@amaiorano:~/src/dawn$ wgpu-cts webgpu:shader,validation,parse,blankspace:*\n    PASS: 15        (88.2%)\n    FAIL: 2         (11.8%)\n\nFailed cases:\nwebgpu:shader,validation,parse,blankspace:null_characters:contains_null\u003dtrue;placement\u003d\"comment\" - fail:\nwebgpu:shader,validation,parse,blankspace:null_characters:contains_null\u003dtrue;placement\u003d\"eol\" - fail:\n\namaiorano@amaiorano:~/src/dawn$ wgpu-cts webgpu:shader,validation,parse,comments:*\nRunning in parallel with server...\n    PASS: 13        (100.0%)\n\n```\n\nBasically everything passes now except for null characters in comment and eol. This is a known issue in Dawn: https://crbug.com/dawn/1345.\n",
+      "revId": "afd49c7d302dc8a4d4a335723871fd9d83820174",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
