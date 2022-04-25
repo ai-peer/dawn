@@ -16,6 +16,40 @@
       "message": "CQ failure:\n\n```\n[ RUN      ] ExternalTextureTests.SampleExternalTexture/Metal_Intel_R_UHD_Graphics_630\nvalidateFunctionArguments:3727: failed assertion `Fragment Function(tint_symbol_29): argument tint_symbol_39[0] from buffer(0) with offset(0) and length(176) has space for 176 bytes, but argument has a length(192).\u0027\nReceived signal 6\n0   dawn_end2end_tests                  0x000000010f93a4d9 base::debug::CollectStackTrace(void**, unsigned long) + 9\n1   dawn_end2end_tests                  0x000000010f8b1dc3 base::debug::StackTrace::StackTrace() + 19\n2   dawn_end2end_tests                  0x000000010f93a431 base::debug::(anonymous namespace)::StackDumpSignalHandler(int, __siginfo*, void*) + 1393\n3   libsystem_platform.dylib            0x00007fff20500d7d _sigtramp + 29\n4   ???                                 0x0000000000000020 0x0 + 32\n5   libsystem_c.dylib                   0x00007fff20410406 abort + 125\n6   libsystem_c.dylib                   0x00007fff2040f7d8 err + 0\n7   Metal                               0x00007fff284ffec4 bool MTLGetEnvCase\u003cMTLErrorModeType\u003e(char const*, MTLErrorModeType\u0026, std::initializer_list\u003cstd::__1::pair\u003cchar const*, MTLErrorModeType\u003e \u003e const\u0026).cold.1 + 0\n8   Metal                               0x00007fff284ee45a MTLReportFailure + 538\n9   MetalTools                          0x00007fff20c8fdc5 validateFunctionArguments(id\u003cMTLDevice\u003e, NSString*, NSString, NSArray*, MTLDebugFunctionArgument*, unsigned long, MTLDebugFunctionArgument, unsigned long, MTLDebugFunctionArgument, unsigned long, MTLRenderPassColorAttachmentDescriptorArray*, MTLRenderPipelineColorAttachmentDescriptorArray*, unsigned long, MTLDepthStencilDescriptor*, NSMutableSet\u003cMTLDebugRenderTargetAttachmentInfo*\u003e*, unsigned long long, MTLDebugFunctionArgument, unsigned long) + 3978\n10  MetalTools                          0x00007fff20c95565 -[MTLDebugRenderCommandEncoder validateCommonDrawErrors:instanceCount:baseInstance:maxVertexID:] + 1513\n11  MetalTools                          0x00007fff20c960f0 -[MTLDebugRenderCommandEncoder validateDrawPrimitives:vertexStart:vertexCount:instanceCount:function:] + 111\n12  MetalTools                          0x00007fff20c961f1 -[MTLDebugRenderCommandEncoder drawPrimitives:vertexStart:vertexCount:instanceCount:] + 53\n13  dawn_end2end_tests                  0x000000010f5ef638 dawn::native::metal::CommandBuffer::EncodeRenderPassInternal(dawn::native::metal::CommandRecordingContext*, MTLRenderPassDescriptor*, unsigned int, unsigned int) + 520\n14  dawn_end2end_tests                  0x000000010f5ee55b dawn::native::metal::CommandBuffer::EncodeRenderPass(dawn::native::metal::CommandRecordingContext*, MTLRenderPassDescriptor*, unsigned int, unsigned int) + 2107\n15  dawn_end2end_tests                  0x000000010f5eceb9 dawn::native::metal::CommandBuffer::FillCommands(dawn::native::metal::CommandRecordingContext*) + 6569\n16  dawn_end2end_tests                  0x000000010f5f5da1 dawn::native::metal::Queue::SubmitImpl(unsigned int, dawn::native::CommandBufferBase* const*) + 289\n17  dawn_end2end_tests                  0x000000010f5bd626 dawn::native::QueueBase::SubmitInternal(unsigned int, dawn::native::CommandBufferBase* const*) + 358\n18  dawn_end2end_tests                  0x000000010f5bd495 dawn::native::QueueBase::APISubmit(unsigned int, dawn::native::CommandBufferBase* const*) + 21\n19  dawn_end2end_tests                  0x000000010f3171ad ExternalTextureTests_SampleExternalTexture_Test::TestBody() + 1837\n20  dawn_end2end_tests                  0x000000010f529f5f testing::Test::Run() + 255\n21  dawn_end2end_tests                  0x000000010f52b12d testing::TestInfo::Run() + 285\n22  dawn_end2end_tests                  0x000000010f52be97 testing::TestSuite::Run() + 919\n23  dawn_end2end_tests                  0x000000010f53e847 testing::internal::UnitTestImpl::RunAllTests() + 1607\n24  dawn_end2end_tests                  0x000000010f53e1da testing::UnitTest::Run() + 218\n25  dawn_end2end_tests                  0x000000010f9761a8 base::TestSuite::Run() + 184\n26  dawn_end2end_tests                  0x000000010f4ebd17 (anonymous namespace)::RunHelper(base::TestSuite*) + 55\n27  dawn_end2end_tests                  0x000000010f997237 base::(anonymous namespace)::LaunchUnitTestsInternal(base::OnceCallback\u003cint ()\u003e, unsigned long, int, unsigned long, bool, base::OnceCallback\u003cvoid ()\u003e) + 359\n28  dawn_end2end_tests                  0x000000010f9978bf base::LaunchUnitTestsWithOptions(int, char**, unsigned long, int, bool, base::OnceCallback\u003cint ()\u003e) + 159\n29  dawn_end2end_tests                  0x000000010f4ebcb8 main + 200\n30  libdyld.dylib                       0x00007fff204d6f3d start + 1\n31  ???                                 0x000000000000000c 0x0 + 12\n```\n\nSmells like to the structure layout is wrong.",
       "revId": "4d18a646af3b1dbbd94c9562c154ed1ee06e1462",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e47ce3d_1c6b7a2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-25T15:25:28Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4d18a646af3b1dbbd94c9562c154ed1ee06e1462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "566a846f_a918f2ef",
+        "filename": "src/tint/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-25T15:25:28Z",
+      "side": 1,
+      "message": "Can\u0027t this be a proper if statement? It is completely uniform so it will be faster than this select.",
+      "revId": "4d18a646af3b1dbbd94c9562c154ed1ee06e1462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
