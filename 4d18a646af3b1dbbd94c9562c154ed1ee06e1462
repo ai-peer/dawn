@@ -104,6 +104,24 @@
       "parentUuid": "662006a9_dd6ac5f0",
       "revId": "4d18a646af3b1dbbd94c9562c154ed1ee06e1462",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30daa16a_add0c08f",
+        "filename": "src/tint/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-25T15:51:29Z",
+      "side": 1,
+      "message": "Duh \u003e_\u003e thanks for the explanation, I thought this was uniform.",
+      "parentUuid": "bfb18e66_ac3c97ae",
+      "revId": "4d18a646af3b1dbbd94c9562c154ed1ee06e1462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
