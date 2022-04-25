@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16277908_d5cd6fb9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-25T20:21:34Z",
+      "side": 1,
+      "message": "Ah...I think I should have used the size attribute. Anyways I just reverted to explicit padding instead.",
+      "parentUuid": "2f1215b7_9242fee7",
+      "revId": "4d18a646af3b1dbbd94c9562c154ed1ee06e1462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "566a846f_a918f2ef",
