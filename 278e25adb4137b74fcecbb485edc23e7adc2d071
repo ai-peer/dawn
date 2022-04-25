@@ -117,6 +117,30 @@
       },
       "revId": "278e25adb4137b74fcecbb485edc23e7adc2d071",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be8be9cb_4bfe9053",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-25T14:55:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2ad55db3_93718a2e",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 13
+      },
+      "revId": "278e25adb4137b74fcecbb485edc23e7adc2d071",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
