@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb00d0b7_92ced9c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-25T17:56:04Z",
+      "side": 1,
+      "message": "PTAL! Failure is from the bottom most patch in the stack and should be unrelated.",
+      "revId": "d2f25e55a83d738628928e226110b1e065073786",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
