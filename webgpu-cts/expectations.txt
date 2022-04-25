@@ -156,8 +156,6 @@ crbug.com/dawn/0000 [ monterey ] webgpu:shader,execution,robust_access:linear_me
 crbug.com/dawn/0000 [ monterey ] webgpu:shader,execution,robust_access:linear_memory:storageClass="function";access="write";containerType="matrix";isAtomic=false [ Failure ]
 crbug.com/dawn/0000 [ monterey ] webgpu:shader,execution,robust_access:linear_memory:storageClass="private";access="write";containerType="array";isAtomic=false [ Failure ]
 crbug.com/dawn/0000 [ monterey ] webgpu:shader,execution,robust_access:linear_memory:storageClass="private";access="write";containerType="matrix";isAtomic=false [ Failure ]
-crbug.com/dawn/0000 [ intel-0x5912 ubuntu ] webgpu:shader,execution,robust_access:linear_memory:storageClass="workgroup";access="read";containerType="vector";isAtomic=false [ Failure ]
-crbug.com/dawn/0000 [ intel-0x5912 ubuntu ] webgpu:shader,execution,robust_access:linear_memory:storageClass="workgroup";access="write";containerType="vector";isAtomic=false [ Failure ]
 
 ################################################################################
 # stencil8 failures
