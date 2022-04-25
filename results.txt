@@ -1,0 +1,1950 @@
+[
+  {
+    "Testcase": "webgpu:shader,validation,parse,blankspace:blankspace:blankspace=[\"%20\",\"space\"]",
+    "Status": "pass"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,blankspace:blankspace:blankspace=[\"%5Cf\",\"form_feed\"]",
+    "Status": "pass"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,blankspace:blankspace:blankspace=[\"%5Cn\",\"line_feed\"]",
+    "Status": "pass"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,blankspace:blankspace:blankspace=[\"%5Cr\",\"carriage_return\"]",
+    "Status": "pass"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,blankspace:blankspace:blankspace=[\"%5Ct\",\"horizontal_tab\"]",
+    "Status": "pass"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,blankspace:blankspace:blankspace=[\"%5Cu000b\",\"vertical_tab\"]",
+    "Status": "pass"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,blankspace:blankspace:blankspace=[\"%C2%85\",\"next_line\"]",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,blankspace:blankspace:blankspace=[\"%E2%80%8E\",\"left_to_right_mark\"]",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,blankspace:blankspace:blankspace=[\"%E2%80%8F\",\"right_to_left_mark\"]",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,blankspace:blankspace:blankspace=[\"%E2%80%A8\",\"line_separator\"]",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,blankspace:blankspace:blankspace=[\"%E2%80%A9\",\"paragraph_separator\"]",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,blankspace:null_characters:contains_null=false;placement=\"comment\"",
+    "Status": "pass"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,blankspace:null_characters:contains_null=false;placement=\"delimiter\"",
+    "Status": "pass"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,blankspace:null_characters:contains_null=false;placement=\"eol\"",
+    "Status": "pass"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,blankspace:null_characters:contains_null=true;placement=\"comment\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,blankspace:null_characters:contains_null=true;placement=\"delimiter\"",
+    "Status": "pass"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,blankspace:null_characters:contains_null=true;placement=\"eol\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,comments:comments:",
+    "Status": "pass"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,comments:line_comment_terminators:blankspace=[\"%20\",\"space\"]",
+    "Status": "pass"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,comments:line_comment_terminators:blankspace=[\"%5Cf\",\"form_feed\"]",
+    "Status": "pass"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,comments:line_comment_terminators:blankspace=[\"%5Cn\",\"line_feed\"]",
+    "Status": "pass"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,comments:line_comment_terminators:blankspace=[\"%5Cr\",\"carriage_return\"]",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,comments:line_comment_terminators:blankspace=[\"%5Cr%5Cn\",\"carriage_return_line_feed\"]",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,comments:line_comment_terminators:blankspace=[\"%5Ct\",\"tab\"]",
+    "Status": "pass"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,comments:line_comment_terminators:blankspace=[\"%5Cu000b\",\"vertical_tab\"]",
+    "Status": "pass"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,comments:line_comment_terminators:blankspace=[\"%C2%85\",\"next_line\"]",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,comments:line_comment_terminators:blankspace=[\"%E2%80%A8\",\"line_separator\"]",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,comments:line_comment_terminators:blankspace=[\"%E2%80%A9\",\"paragraph_separator\"]",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,comments:unterminated_block_comment:terminated=false",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,comments:unterminated_block_comment:terminated=true",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"%CE%94%CE%AD%CE%BB%CF%84%CE%B1\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"%D0%9A%D1%8B%D0%B7%D1%8B%D0%BB\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"%D6%83%D5%AB%D6%80%D5%B8%D6%82%D5%A6\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"%D7%A9%D6%B8%D7%81%D7%9C%D7%95%D6%B9%D7%9D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"%D8%B3%D9%84%D8%A7%D9%85\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"%E0%A4%97%E0%A5%81%E0%A4%B2%E0%A4%BE%E0%A4%AC%E0%A5%80\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"%E6%9C%9D%E7%84%BC%E3%81%91\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"%EA%B2%80%EC%A0%95\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"%F0%90%B0%93%F0%90%B0%8F%F0%90%B0%87\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"0foo\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"AppendStructuredBuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"BlendState\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"Buffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"ByteAddressBuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"CompileShader\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"ComputeShader\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"ConsumeStructuredBuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"DepthStencilState\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"DepthStencilView\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"DomainShader\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"FOO\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"Foo\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"GeometryShader\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"Hullshader\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"InputPatch\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"LineStream\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"NULL\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"OutputPatch\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"PixelShader\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"PointStream\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"RWBuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"RWByteAddressBuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"RWStructuredBuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"RWTexture1D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"RWTexture1DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"RWTexture2D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"RWTexture2DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"RWTexture3D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"RasterizerState\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"RenderTargetView\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"SamplerComparisonState\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"SamplerState\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"Self\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"StructuredBuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"Texture1D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"Texture1DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"Texture2D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"Texture2DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"Texture2DMS\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"Texture2DMSArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"Texture3D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"TextureCube\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"TextureCubeArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"TriangleStream\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"VertexShader\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"_\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"_0\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"_0foo\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"__\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"__foo\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"_foo0\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"abstract\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"active\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"alignas\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"alignof\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"array\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"as\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"asm\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"asm_fragment\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"async\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"atomic\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"atomic_uint\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"attribute\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"auto\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"await\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"become\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"bf16\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"bitcast\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"bool\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"break\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"buffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"case\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"cast\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"catch\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"cbuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"centroid\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"char\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"class\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"co_await\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"co_return\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"co_yield\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"coherent\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"column_major\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"common\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"compile\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"compile_fragment\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"concept\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"const\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"const_cast\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"consteval\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"constexpr\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"constinit\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"continue\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"continuing\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"crate\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"debugger\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"decltype\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"default\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"delete\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"demote\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"demote_to_helper\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"discard\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"do\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"dword\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"dynamic_cast\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"else\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"enable\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"enum\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"explicit\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"export\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"extends\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"extern\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"external\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"f16\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"f32\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"f64\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"fallthrough\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"false\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"filter\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"final\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"finally\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"fixed\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"flat\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"fn\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"foo!bar\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"foo\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"foo%23bar\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"foo%2Bbar\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"foo%2Fbar\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"foo%40bar\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"foo%5C%5Cbar\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"foo,bar\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"foo-bar\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"foo.bar\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"foo::bar\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"foo__0\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"for\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"friend\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"from\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"function\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"fvec2\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"fvec3\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"fvec4\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"fxgroup\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"get\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"goto\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"groupshared\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"handle\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"highp\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"hvec2\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"hvec3\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"hvec4\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"i16\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"i32\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"i64\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"i8\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"if\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"iimage1D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"iimage1DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"iimage2D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"iimage2DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"iimage2DMS\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"iimage2DMSArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"iimage2DRect\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"iimage3D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"iimageBuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"iimageCube\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"iimageCubeArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"image1D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"image1DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"image2D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"image2DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"image2DMS\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"image2DMSArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"image2DRect\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"image3D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"imageBuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"imageCube\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"imageCubeArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"impl\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"implements\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"import\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"in\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"inline\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"inout\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"input\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"instanceof\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"interface\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"invariant\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"isampler1D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"isampler1DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"isampler2D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"isampler2DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"isampler2DMS\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"isampler2DMSArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"isampler2DRect\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"isampler3D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"isamplerBuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"isamplerCube\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"isamplerCubeArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"isubpassInput\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"isubpassInputMS\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"itexture1D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"itexture1DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"itexture2D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"itexture2DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"itexture2DMS\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"itexture2DMSArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"itexture2DRect\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"itexture3D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"itextureBuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"itextureCube\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"itextureCubeArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"layout\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"let\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"line\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"lineadj\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"linear\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"loop\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"lowp\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"macro\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"macro_rules\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"mat\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"mat2x2\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"mat2x3\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"mat2x4\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"mat3x2\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"mat3x3\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"mat3x4\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"mat4x2\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"mat4x3\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"mat4x4\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"match\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"matrix\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"mediump\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"meta\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"mod\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"module\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"move\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"mut\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"mutable\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"namespace\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"new\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"nil\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"noexcept\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"noinline\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"nointerpolation\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"noperspective\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"null\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"nullptr\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"of\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"operator\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"out\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"output\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"override\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"package\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"packoffset\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"partition\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"pass\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"patch\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"pixelfragment\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"point\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"precise\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"precision\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"premerge\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"priv\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"private\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"protected\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"ptr\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"pub\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"public\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"r%C3%A9flexion\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"readonly\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"ref\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"regardless\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"register\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"reinterpret_cast\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"requires\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"resource\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"restrict\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"return\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"row_major\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"samper\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sample\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sampler\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sampler1D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sampler1DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sampler1DArrayShadow\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sampler1DShadow\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sampler2D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sampler2DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sampler2DArrayShadow\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sampler2DMS\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sampler2DMSArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sampler2DRect\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sampler2DRectShadow\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sampler2DShadow\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sampler3D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sampler3DRect\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"samplerBuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"samplerCube\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"samplerCubeArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"samplerCubeArrayShadow\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"samplerCubeShadow\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"samplerShadow\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sampler_comparison\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"self\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"set\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"shared\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"signed\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"sizeof\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"smooth\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"snorm\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"stateblock\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"stateblock_state\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"static\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"static_assert\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"static_cast\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"std\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"storage\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"string\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"struct\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"subpassInput\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"subpassInputMS\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"subroutine\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"super\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"superp\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"switch\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"target\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"tbuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"technique\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"technique10\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"technique11\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"template\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture1D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture1DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture2D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture2DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture2DMS\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture2DMSArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture2DRect\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture3D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"textureBuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"textureCube\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"textureCubeArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture_1d\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture_2d\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture_2d_array\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture_3d\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture_cube\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture_cube_array\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture_depth_2d\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture_depth_2d_array\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture_depth_cube\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture_depth_cube_array\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture_depth_multisampled_2d\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture_multisampled_2d\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture_storage_1d\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture_storage_2d\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture_storage_2d_array\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"texture_storage_3d\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"this\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"thread_local\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"throw\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"trait\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"triangle\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"triangleadj\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"true\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"try\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"type\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"typedef\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"typeid\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"typename\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"typeof\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"u16\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"u32\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"u64\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"u8\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"uimage1D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"uimage1DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"uimage2D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"uimage2DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"uimage2DMS\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"uimage2DMSArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"uimage2DRect\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"uimage3D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"uimageBuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"uimageCube\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"uimageCubeArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"uniform\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"union\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"unless\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"unorm\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"unsafe\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"unsigned\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"unsized\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"usampler1D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"usampler1DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"usampler2D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"usampler2DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"usampler2DMS\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"usampler2DMSArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"usampler2DRect\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"usampler3D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"usamplerBuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"usamplerCube\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"usamplerCubeArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"use\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"using\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"usubpassInput\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"usubpassInputMS\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"utexture1D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"utexture1DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"utexture2D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"utexture2DArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"utexture2DMS\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"utexture2DMSArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"utexture2DRect\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"utexture3D\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"utextureBuffer\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"utextureCube\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"utextureCubeArray\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"var\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"varying\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"vec\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"vec2\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"vec3\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"vec4\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"vector\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"vertexfragment\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"virtual\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"void\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"volatile\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"wchar_t\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"wgsl\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"where\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"while\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"with\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"workgroup\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"writeonly\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,identifiers:identifiers:ident=\"yield\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,source:empty:",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,source:invalid_source:",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,source:valid_source:",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,var_and_let:initializer_type:variableOrConstant=\"let\"",
+    "Status": "fail"
+  },
+  {
+    "Testcase": "webgpu:shader,validation,parse,var_and_let:initializer_type:variableOrConstant=\"var\"",
+    "Status": "fail"
+  }
+]
