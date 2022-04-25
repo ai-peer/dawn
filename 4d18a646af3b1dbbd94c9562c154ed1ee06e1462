@@ -50,6 +50,24 @@
       "message": "Can\u0027t this be a proper if statement? It is completely uniform so it will be faster than this select.",
       "revId": "4d18a646af3b1dbbd94c9562c154ed1ee06e1462",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "536eca1c_58ff4340",
+        "filename": "src/tint/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-25T15:29:31Z",
+      "side": 1,
+      "message": "This is the low-end conditional on the gamma curve. This function is run once for the R, G, B channels. Expressing this as a vector is cleaner, and the compiler is free to optimize this as it sees fit.",
+      "parentUuid": "566a846f_a918f2ef",
+      "revId": "4d18a646af3b1dbbd94c9562c154ed1ee06e1462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
