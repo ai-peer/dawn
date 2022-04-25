@@ -22,6 +22,30 @@
       },
       "revId": "9ae4b8390ee3a5a73f5ad6ccf077d5d991578f3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33513e34_ce8bb25a",
+        "filename": "src/tint/source.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-25T14:30:52Z",
+      "side": 1,
+      "message": "Removed the TODO and put a note about the Lexer failing on decode errors for line breaks.",
+      "parentUuid": "66ecaec6_597d2718",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 48
+      },
+      "revId": "9ae4b8390ee3a5a73f5ad6ccf077d5d991578f3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

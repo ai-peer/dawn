@@ -93,6 +93,30 @@
       },
       "revId": "278e25adb4137b74fcecbb485edc23e7adc2d071",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ad55db3_93718a2e",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-25T14:30:52Z",
+      "side": 1,
+      "message": "I decided to keep it a function because of its similarity to ReadLineBreak in source.cc. I went for output params and a bool return in both cases.",
+      "parentUuid": "d6bd3d3b_75cf4e99",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 13
+      },
+      "revId": "278e25adb4137b74fcecbb485edc23e7adc2d071",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
