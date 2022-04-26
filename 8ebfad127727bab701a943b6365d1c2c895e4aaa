@@ -16,6 +16,24 @@
       "message": "looks ok, but why do we need to remove it instead of just migrating it (later) to the blob cache?",
       "revId": "8ebfad127727bab701a943b6365d1c2c895e4aaa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8859fd7_d0dfb0f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-26T21:21:05Z",
+      "side": 1,
+      "message": "I wanted to delete it because it interferes with me making any changes to the CachingInterface, i.e. I would need to update this code path to get things to build properly. By removing it, I can just go back and add it back in to fix later instead of maintaining this at the same time.",
+      "parentUuid": "c79936bc_28a5fd89",
+      "revId": "8ebfad127727bab701a943b6365d1c2c895e4aaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
