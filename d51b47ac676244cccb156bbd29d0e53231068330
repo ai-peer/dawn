@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2a29895_d55a27f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003186
+      },
+      "writtenOn": "2022-04-26T19:27:29Z",
+      "side": 1,
+      "message": "this CL has caused log spam when building\n\nc:\\src\\chromium\\src\u003eautoninja -C out\\goma64 browser_tests\n\"C:\\src\\depot_tools\\ninja.exe\" -C out\\goma64 browser_tests -j 1000\nninja: Entering directory `out\\goma64\u0027\n[0/1] Regenerating ninja files\n[2443/55524] ACTION //third_party/dawn/generator:remove_stale_autogen_files(//build/toolchain/win:win_clang_x64)\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\dawn_proc.c\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\dawn_thread_dispatch_proc.cpp\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\webgpu_cpp.cpp\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\common\\Version_autogen.h\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\native\\CacheKey_autogen.cpp\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\native\\ChainUtils_autogen.cpp\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\native\\ChainUtils_autogen.h\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\native\\dawn_platform_autogen.h\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\native\\ObjectType_autogen.cpp\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\native\\ObjectType_autogen.h\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\native\\ProcTable.cpp\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\native\\ValidationUtils_autogen.cpp\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\native\\ValidationUtils_autogen.h\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\native\\webgpu_absl_format_autogen.cpp\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\native\\webgpu_absl_format_autogen.h\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\native\\wgpu_structs_autogen.cpp\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\native\\wgpu_structs_autogen.h\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\native\\opengl\\OpenGLFunctionsBase_autogen.cpp\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\native\\opengl\\OpenGLFunctionsBase_autogen.h\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\native\\opengl\\opengl_platform_autogen.h\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\wire\\ObjectType_autogen.h\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\wire\\WireCmd_autogen.cpp\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\wire\\WireCmd_autogen.h\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\wire\\client\\ApiObjects_autogen.h\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\wire\\client\\ApiProcs_autogen.cpp\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\wire\\client\\ClientBase_autogen.h\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\wire\\client\\ClientHandlers_autogen.cpp\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\wire\\client\\ClientPrototypes_autogen.inc\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\wire\\server\\ServerBase_autogen.h\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\wire\\server\\ServerDoers_autogen.cpp\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\wire\\server\\ServerHandlers_autogen.cpp\nWarning: remove_files.py removed gen/third_party/dawn\\src\\dawn\\wire\\server\\ServerPrototypes_autogen.inc\n\nis this necessary output for the build?",
+      "revId": "d51b47ac676244cccb156bbd29d0e53231068330",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
