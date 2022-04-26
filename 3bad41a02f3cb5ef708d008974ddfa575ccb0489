@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddee40dc_3448bb80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2022-04-26T21:06:51Z",
+      "side": 1,
+      "message": "PTAL! Vulkan/Metal will be a separate patch, but I\u0027m hopeful that this will make debugging a certain class of errors from CTS bot failures much easier.",
+      "revId": "3bad41a02f3cb5ef708d008974ddfa575ccb0489",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
