@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bacad12_c4756b36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-26T23:47:24Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "66036c5b8397083eae0be6225126bebadae40804",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61c4043c_b41d0b0e",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-26T23:47:24Z",
+      "side": 1,
+      "message": "this would only be correct if !UseWire() - otherwise we can\u0027t actually perform this cast with FromAPI. Looks like it\u0027s OK for now since the only test that uses this is DeviceLostTests which are skipped using the wire.\n\nWe should add an ASSERT here about UseWire.\n\nOr - do we need the call to IsLost() at all? are there situations where we call LoseDeviceForTesting after it has already been lost?\nEdit: oh - I see there\u0027s a test that calls LostDeviceForTesting twice.\nWhat if we make the double device lost handling local to that test?",
+      "range": {
+        "startLine": 1084,
+        "startChar": 8,
+        "endLine": 1084,
+        "endChar": 61
+      },
+      "revId": "66036c5b8397083eae0be6225126bebadae40804",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
