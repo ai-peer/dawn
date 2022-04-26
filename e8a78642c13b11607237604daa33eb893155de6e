@@ -16,6 +16,23 @@
       "message": "Rubber stamper didn\u0027t stamp :( Austin PTAL!",
       "revId": "e8a78642c13b11607237604daa33eb893155de6e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42dd1baa_4dd88f34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-26T17:13:23Z",
+      "side": 1,
+      "message": ":( I think it has a problem if Auto-Submit+1 is enabled (perhaps because it doesn\u0027t have CQ+2 permissions?)\n\nwhat happens if you remove autosubmit?",
+      "revId": "e8a78642c13b11607237604daa33eb893155de6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
