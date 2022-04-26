@@ -288,11 +288,12 @@ namespace dawn::native {
     }
 
     void DeviceBase::DestroyObjects() {
-        // List of object types in reverse "dependency" order so we can iterate and delete the
-        // objects safely starting at leaf objects. We define dependent here such that if B has
-        // a ref to A, then B depends on A. We therefore try to destroy B before destroying A. Note
-        // that this only considers the immediate frontend dependencies, while backend objects could
-        // add complications and extra dependencies.
+        // List of object types in "dependency" order so we can iterate and delete the objects
+        // safely starting at leaf objects. Deleting from the leaf first is necessary because the
+        // algorithm below first consolidates all objects in a single list and then iterates and
+        // deletes each object. If non-leaf objects were to be deleted first, they could potentially
+        // be holding the last reference to a leaf object which could then modify the list as we are
+        // iterating causing issues as seen in https://crbug.com/chromium/1318792.
         //
         // Note that AttachmentState is not an ApiObject so it cannot be eagerly destroyed. However,
         // since AttachmentStates are cached by the device, objects that hold references to
@@ -301,25 +302,25 @@ namespace dawn::native {
 
         // clang-format off
         static constexpr std::array<ObjectType, 19> kObjectTypeDependencyOrder = {
-            ObjectType::ComputePassEncoder,
-            ObjectType::RenderPassEncoder,
-            ObjectType::RenderBundleEncoder,
-            ObjectType::RenderBundle,
-            ObjectType::CommandEncoder,
-            ObjectType::CommandBuffer,
-            ObjectType::RenderPipeline,
-            ObjectType::ComputePipeline,
-            ObjectType::PipelineLayout,
-            ObjectType::SwapChain,
-            ObjectType::BindGroup,
-            ObjectType::BindGroupLayout,
-            ObjectType::ShaderModule,
-            ObjectType::ExternalTexture,
-            ObjectType::TextureView,
-            ObjectType::Texture,
-            ObjectType::QuerySet,
-            ObjectType::Sampler,
             ObjectType::Buffer,
+            ObjectType::Sampler,
+            ObjectType::QuerySet,
+            ObjectType::Texture,
+            ObjectType::TextureView,
+            ObjectType::ExternalTexture,
+            ObjectType::ShaderModule,
+            ObjectType::BindGroupLayout,
+            ObjectType::BindGroup,
+            ObjectType::SwapChain,
+            ObjectType::PipelineLayout,
+            ObjectType::ComputePipeline,
+            ObjectType::RenderPipeline,
+            ObjectType::CommandBuffer,
+            ObjectType::CommandEncoder,
+            ObjectType::RenderBundle,
+            ObjectType::RenderBundleEncoder,
+            ObjectType::RenderPassEncoder,
+            ObjectType::ComputePassEncoder,
         };
         // clang-format on
 
