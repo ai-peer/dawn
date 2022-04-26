@@ -859,6 +859,14 @@ TEST_F(BufferValidationTest, GetMappedRange_OffsetSizeOOB) {
         EXPECT_NE(buffer.GetMappedRange(0, 8), nullptr);
     }
 
+    // Valid case: full range is ok with defaulted MapAsync size and defaulted GetMappedRangeSize
+    {
+        wgpu::Buffer buffer = CreateMapWriteBuffer(8);
+        buffer.MapAsync(wgpu::MapMode::Write, 0, wgpu::kWholeMapSize, nullptr, nullptr);
+        WaitForAllOperations(device);
+        EXPECT_NE(buffer.GetMappedRange(0, wgpu::kWholeMapSize), nullptr);
+    }
+
     // Valid case: empty range at the end is ok
     {
         wgpu::Buffer buffer = CreateMapWriteBuffer(8);
@@ -898,7 +906,16 @@ TEST_F(BufferValidationTest, GetMappedRange_OffsetSizeOOB) {
         wgpu::Buffer buffer = CreateMapWriteBuffer(12);
         buffer.MapAsync(wgpu::MapMode::Write, 0, 12, nullptr, nullptr);
         WaitForAllOperations(device);
-        EXPECT_EQ(buffer.GetMappedRange(8, std::numeric_limits<size_t>::max()), nullptr);
+        // set size to (max - 1) to avoid being equal to kWholeMapSize
+        EXPECT_EQ(buffer.GetMappedRange(8, std::numeric_limits<size_t>::max() - 1), nullptr);
+    }
+
+    // Error case: size is larger than the mapped range when using default kWholeMapSize
+    {
+        wgpu::Buffer buffer = CreateMapWriteBuffer(12);
+        buffer.MapAsync(wgpu::MapMode::Write, 0, 8, nullptr, nullptr);
+        WaitForAllOperations(device);
+        EXPECT_EQ(buffer.GetMappedRange(0), nullptr);
     }
 
     // Error case: offset is before the start of the range

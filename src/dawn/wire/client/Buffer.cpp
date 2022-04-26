@@ -377,16 +377,21 @@ namespace dawn::wire::client {
     }
 
     bool Buffer::CheckGetMappedRangeOffsetSize(size_t offset, size_t size) const {
-        if (offset % 8 != 0 || size % 4 != 0) {
+        if (offset % 8 != 0 || offset < mMapOffset) {
             return false;
         }
 
-        if (size > mMapSize || offset < mMapOffset) {
+        // So that we know (mSize - offset) must be greater than or equal to 0
+        ASSERT(mMapOffset <= mSize);
+
+        size_t rangeSize = size == WGPU_WHOLE_MAP_SIZE ? mSize - offset : size;
+
+        if (rangeSize % 4 != 0 || rangeSize > mMapSize) {
             return false;
         }
 
         size_t offsetInMappedRange = offset - mMapOffset;
-        return offsetInMappedRange <= mMapSize - size;
+        return offsetInMappedRange <= mMapSize - rangeSize;
     }
 
     void Buffer::FreeMappedData() {
