@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b75737bd_4c1242ed",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-26T02:50:51Z",
+      "side": 1,
+      "message": "I haven\u0027t dug into it enough, but without it, I am definitely getting issues when trying to create multiple devices on the wire. I may investigate this a bit more and I\u0027ll let you know if I find anything.",
+      "parentUuid": "e93cc2b1_5a0207e2",
+      "range": {
+        "startLine": 907,
+        "startChar": 4,
+        "endLine": 909,
+        "endChar": 0
+      },
+      "revId": "143124cb683560b13f99e8516c500a326b8511b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7dc97936_032436f2",
         "filename": "src/dawn/tests/DawnTest.cpp",
         "patchSetId": 6
@@ -37,6 +61,30 @@
       "writtenOn": "2022-04-21T19:59:26Z",
       "side": 1,
       "message": "maybe keying on this pointer is the reason we need the wire flush. If the handle is reused then we end up with a reused key.\n\nOne way we could avoid this is by not using maps and instead having CreateDevice return the error handler as well. std::tuple\u003cwgpu::Device, WGPUDevice, DeviceCallbackHandler*\u003e. (though at this point maybe a struct is warranted).\n\n`ASSERT_DEVICE_ERROR_MSG` would pass `this-\u003edeviceCallbackHandler` instead of `this-\u003edevice` to `ASSERT_DEVICE_ERROR_MSG_ON`\n\n\nTests in your following CL might look more like:\n\n```\n            auto [device, callbackHandler] \u003d CreateDevice();\n            wgpu::ComputePipelineDescriptor desc;\n            desc.compute.module \u003d utils::CreateShaderModule(device, kComputeShader.data());\n            desc.compute.entryPoint \u003d \"main\";\n            EXPECT_CACHE_HIT(mMockCache, 0u, device.CreateComputePipeline(\u0026desc));\n            callbackHandler-\u003eExpectDestruction();\n```\n\n\nOR...\n\n\nSeparately, I still think that using MockCallback would be the better way to do these expectations instead of the boolean state variables. I think it would ultimately be the more proper way and would give us better error messages when something fails.\n\nwe could have\n\n```\n// Just one of each - not per-device. Stored in DawnTest.\nMockCallback\u003cWGPUDeviceLostCallback\u003e deviceLostCallback;\nMockCallback\u003cWGPUErrorCallback\u003e deviceErrorCallback;\n\n// pass device in as userdata - no need for maps\ndevice.SetLostCallback(deviceLostCallback.Callback(), deviceLostCallback-\u003eMakeUserdata(device.Get()));\n```\n\n`ExpectDeviceDestruction` could do `EXPECT_CALL(deviceLostCallback, Call(_, _, device.Get()));` so that current code doesn\u0027t need to change.\nBut the rest of code can just use `EXPECT_CALL` directly ?\n\nASSERT_DEVICE_ERROR can do\n```\nEXPECT_CALL(deviceErrorCallback, Call(_, matcher, device.Get()));\nstatement;\nFlushWire();\n// so the expectation is scoped tightly\nMock::VerifyAndClearExpectations(deviceErrorCallback);\n```",
+      "range": {
+        "startLine": 962,
+        "startChar": 24,
+        "endLine": 962,
+        "endChar": 36
+      },
+      "revId": "143124cb683560b13f99e8516c500a326b8511b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9d22a2c_04fc08fc",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-26T02:50:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7dc97936_032436f2",
       "range": {
         "startLine": 962,
         "startChar": 24,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96a4aa8a_24c83f27",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1082,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-26T02:50:51Z",
+      "side": 1,
+      "message": "Using mock callback seems sufficient.",
+      "parentUuid": "e91e72be_e87d4155",
+      "range": {
+        "startLine": 1061,
+        "startChar": 5,
+        "endLine": 1082,
+        "endChar": 91
+      },
+      "revId": "143124cb683560b13f99e8516c500a326b8511b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e34df060_d73c60ed",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-04-21T19:59:26Z",
       "side": 1,
       "message": "why can\u0027t we store the handler /  the data in the handler on DeviceCallbackData instead? then we don\u0027t need to do the lookup keyed on device again.\n\nAdding error expectations would operate on mDeviceCallbackData instead of mDeviceCallbackHandlers",
+      "range": {
+        "startLine": 1085,
+        "startChar": 4,
+        "endLine": 1085,
+        "endChar": 75
+      },
+      "revId": "143124cb683560b13f99e8516c500a326b8511b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f7ddf25_f8852354",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1085,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-26T02:50:51Z",
+      "side": 1,
+      "message": "No longer applicable",
+      "parentUuid": "e34df060_d73c60ed",
       "range": {
         "startLine": 1085,
         "startChar": 4,
