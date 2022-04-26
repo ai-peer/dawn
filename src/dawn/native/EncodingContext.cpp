@@ -85,6 +85,7 @@ namespace dawn::native {
                 mError = std::move(error);
             }
         } else {
+            mDevice->AppendDebugLayerMessages(*error);
             mDevice->HandleError(error->GetType(), error->GetFormattedMessage().c_str());
         }
     }
