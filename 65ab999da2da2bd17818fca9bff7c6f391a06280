@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "109766ab_d9f14828",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-04-26T20:04:22Z",
+      "side": 1,
+      "message": "if we choose to do this - could this be `static const` instead of just `static` (non-const)?",
+      "revId": "65ab999da2da2bd17818fca9bff7c6f391a06280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
