@@ -13,10 +13,11 @@
 // limitations under the License.
 
 #include "dawn/native/opengl/GLFormat.h"
+#include "dawn/native/opengl/OpenGLFunctions.h"
 
 namespace dawn::native::opengl {
 
-    GLFormatTable BuildGLFormatTable() {
+    GLFormatTable BuildGLFormatTable(const OpenGLFunctions& gl) {
         GLFormatTable table;
 
         using Type = GLFormat::ComponentType;
@@ -71,8 +72,12 @@ namespace dawn::native::opengl {
         AddFormat(wgpu::TextureFormat::RGBA8Uint, GL_RGBA8UI, GL_RGBA_INTEGER, GL_UNSIGNED_BYTE, Type::Uint);
         AddFormat(wgpu::TextureFormat::RGBA8Sint, GL_RGBA8I, GL_RGBA_INTEGER, GL_BYTE, Type::Int);
 
-        // This doesn't have an enum for the internal format in OpenGL, so use RGBA8.
-        AddFormat(wgpu::TextureFormat::BGRA8Unorm, GL_RGBA8, GL_BGRA, GL_UNSIGNED_BYTE, Type::Float);
+        if (gl.IsGLExtensionSupported("GL_EXT_texture_format_BGRA8888") || gl.IsGLExtensionSupported("GL_APPLE_texture_format_BGRA8888")) {
+          AddFormat(wgpu::TextureFormat::BGRA8Unorm, GL_BGRA8_EXT, GL_BGRA, GL_UNSIGNED_BYTE, Type::Float);
+        } else if (gl.GetVersion().IsDesktop()) {
+          // Desktop GL allows the driver to swizzle to GL_RGBA8.
+          AddFormat(wgpu::TextureFormat::BGRA8Unorm, GL_RGBA8, GL_BGRA, GL_UNSIGNED_BYTE, Type::Float);
+        }
         AddFormat(wgpu::TextureFormat::RGB10A2Unorm, GL_RGB10_A2, GL_RGBA, GL_UNSIGNED_INT_2_10_10_10_REV, Type::Float);
         AddFormat(wgpu::TextureFormat::RG11B10Ufloat, GL_R11F_G11F_B10F, GL_RGB, GL_UNSIGNED_INT_10F_11F_11F_REV, Type::Float);
         AddFormat(wgpu::TextureFormat::RGB9E5Ufloat, GL_RGB9_E5, GL_RGB, GL_UNSIGNED_INT_5_9_9_9_REV, Type::Float);
