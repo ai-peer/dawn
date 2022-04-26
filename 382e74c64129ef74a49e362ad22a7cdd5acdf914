@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a8de2826_61674e60",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-26T21:44:26Z",
+      "side": 1,
+      "message": "Is that right? I thought the point of this order flip is that any object can hold a reference to something higher in the list than it, but not lower. (IE: Encoders and CommandBuffers are lower than just about everything.) If so then it would follow that a texture view should come after a texture, since it holds a reference to the texture.\n\nIs that right Loko?",
+      "parentUuid": "7212a57e_d74d1780",
+      "range": {
+        "startLine": 308,
+        "startChar": 12,
+        "endLine": 309,
+        "endChar": 36
+      },
+      "revId": "382e74c64129ef74a49e362ad22a7cdd5acdf914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a77d931b_31792aa2",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 1
