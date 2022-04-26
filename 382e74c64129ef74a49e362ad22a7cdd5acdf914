@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cf79c85_bfe608f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-26T22:58:47Z",
+      "side": 1,
+      "message": "yes, I think so. We don\u0027t need to worry about it in earlier versions if the GPU process had validation that prevented you from calling DestroyObjects. An attacker would need a GPU process exploit to get around that, at which point we\u0027re already compromised.",
+      "parentUuid": "95c5cea3_0ff83fa8",
+      "revId": "382e74c64129ef74a49e362ad22a7cdd5acdf914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7212a57e_d74d1780",
