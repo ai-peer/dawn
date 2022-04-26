@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6376f42_de08850e",
+        "filename": "src/dawn/native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-26T19:58:57Z",
+      "side": 1,
+      "message": "nit. Probably don\u0027t need to forward declare then since you are including the header.",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 20
+      },
+      "revId": "e5da61352c18e9738f1e37b6ae690d32737ace56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
