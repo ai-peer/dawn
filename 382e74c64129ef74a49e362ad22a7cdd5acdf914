@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "780d40a8_f68af62c",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-26T21:58:12Z",
+      "side": 1,
+      "message": "ah, I think you\u0027re right - I read this backward",
+      "parentUuid": "a8de2826_61674e60",
+      "range": {
+        "startLine": 308,
+        "startChar": 12,
+        "endLine": 309,
+        "endChar": 36
+      },
+      "revId": "382e74c64129ef74a49e362ad22a7cdd5acdf914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a77d931b_31792aa2",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 1
@@ -84,6 +108,30 @@
       "writtenOn": "2022-04-26T21:18:40Z",
       "side": 1,
       "message": "bind group before BGL?",
+      "range": {
+        "startLine": 312,
+        "startChar": 11,
+        "endLine": 313,
+        "endChar": 34
+      },
+      "revId": "382e74c64129ef74a49e362ad22a7cdd5acdf914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b14a2c0b_d5c7dac1",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-26T21:58:12Z",
+      "side": 1,
+      "message": "hmm this one might be tricky. BindGroupLayout is an allocator for BindGroup - is this ok?",
+      "parentUuid": "0a12ce8e_eed826d4",
       "range": {
         "startLine": 312,
         "startChar": 11,
