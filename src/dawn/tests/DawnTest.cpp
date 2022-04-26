@@ -1086,6 +1086,7 @@ std::ostringstream& DawnTestBase::AddBufferExpectation(const char* file,
                                                        uint64_t size,
                                                        detail::Expectation* expectation) {
     uint64_t alignedSize = Align(size, uint64_t(4));
+    DAWN_DEBUG() << "size " << size << " alignedSize " << alignedSize;
     auto readback = ReserveReadback(alignedSize);
 
     // We need to enqueue the copy immediately because by the time we resolve the expectation,
@@ -1646,6 +1647,7 @@ namespace detail {
 
     template <typename T, typename U>
     testing::AssertionResult ExpectEq<T, U>::Check(const void* data, size_t size) {
+        DAWN_DEBUG() << "size " << size << " == " << sizeof(U) * mExpected.size();
         DAWN_ASSERT(size == sizeof(U) * mExpected.size());
         const U* actual = static_cast<const U*>(data);
 
