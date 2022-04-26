@@ -259,6 +259,8 @@ set(TINT_LIB_SRCS
   resolver/resolver.h
   resolver/sem_helper.cc
   resolver/sem_helper.h
+  resolver/uniformity.cc
+  resolver/uniformity.h
   resolver/validator.cc
   resolver/validator.h
   scope_stack.h
@@ -779,6 +781,7 @@ if(TINT_BUILD_TESTS)
     resolver/struct_storage_class_use_test.cc
     resolver/type_constructor_validation_test.cc
     resolver/type_validation_test.cc
+    resolver/uniformity_test.cc
     resolver/validation_test.cc
     resolver/validator_is_storeable_test.cc
     resolver/var_let_test.cc
