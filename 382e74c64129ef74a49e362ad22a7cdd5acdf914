@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7212a57e_d74d1780",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-26T21:18:40Z",
+      "side": 1,
+      "message": "TextureView before Texture?",
+      "range": {
+        "startLine": 308,
+        "startChar": 12,
+        "endLine": 309,
+        "endChar": 36
+      },
+      "revId": "382e74c64129ef74a49e362ad22a7cdd5acdf914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a77d931b_31792aa2",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-26T21:18:40Z",
+      "side": 1,
+      "message": "ExternalTexture refs multiple TextureViews. put that one first?",
+      "range": {
+        "startLine": 310,
+        "startChar": 12,
+        "endLine": 310,
+        "endChar": 40
+      },
+      "revId": "382e74c64129ef74a49e362ad22a7cdd5acdf914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a12ce8e_eed826d4",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-26T21:18:40Z",
+      "side": 1,
+      "message": "bind group before BGL?",
+      "range": {
+        "startLine": 312,
+        "startChar": 11,
+        "endLine": 313,
+        "endChar": 34
+      },
+      "revId": "382e74c64129ef74a49e362ad22a7cdd5acdf914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
