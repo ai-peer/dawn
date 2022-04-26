@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fece0e8_048f44df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-26T19:04:34Z",
+      "side": 1,
+      "message": "One high level concern. the details I mostly skimmed since I assume this is predominantly shuffling code around",
+      "revId": "7f77b6a81c6fabf8ca4a610cfb59b10d97ae37fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93d7b57f_28ecc30f",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-26T19:04:34Z",
+      "side": 1,
+      "message": "hm - the previous code here would recursively call itself for both the AlwaysResolveIntoZeroLevelAndLayer and EmulateStoreAndMSAAResolve toggles - essentially transforming the render pass until the workarounds are no longer needed.\n\nI think this change drops that behavior such that if AlwaysResolveIntoZeroLevelAndLayer is applied, it prevents EmulateStoreAndMSAAResolve from being applied.\n\nShould we instead be recursing into EncodeMetalRenderPass ? Same concern for the subsequent CL.",
+      "range": {
+        "startLine": 413,
+        "startChar": 16,
+        "endLine": 415,
+        "endChar": 0
+      },
+      "revId": "7f77b6a81c6fabf8ca4a610cfb59b10d97ae37fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
