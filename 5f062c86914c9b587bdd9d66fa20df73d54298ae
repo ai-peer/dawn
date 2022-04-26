@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d1b8270_364e85f0",
+        "filename": "src/tint/ast/if_statement_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-04-26T20:07:36Z",
+      "side": 1,
+      "message": "Done, and fixed the bug that this test found.",
+      "parentUuid": "64248ed2_cf69f8b8",
+      "revId": "5f062c86914c9b587bdd9d66fa20df73d54298ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7903323a_6ea345aa",
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "73eb0e61_d7acfd2c",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1678,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-04-26T20:07:36Z",
+      "side": 1,
+      "message": "I\u0027ve changed this to use a loop again, and opened an issue for the resolver:\ncrbug.com/tint/1518",
+      "parentUuid": "7903323a_6ea345aa",
+      "revId": "5f062c86914c9b587bdd9d66fa20df73d54298ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a7cc6c3_b370c5f6",
         "filename": "src/tint/transform/loop_to_for_loop.cc",
         "patchSetId": 2
@@ -65,6 +101,30 @@
       "writtenOn": "2022-04-26T12:52:32Z",
       "side": 1,
       "message": "This looks a little suspicious\n\nThe old logic was `if_stmt-\u003eelse_statements.empty()`, but the new logic is: if the else is null *or an `else if`*.",
+      "range": {
+        "startLine": 89,
+        "startChar": 49,
+        "endLine": 89,
+        "endChar": 69
+      },
+      "revId": "5f062c86914c9b587bdd9d66fa20df73d54298ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a45a0f3_7bc364b2",
+        "filename": "src/tint/transform/loop_to_for_loop.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-04-26T20:07:36Z",
+      "side": 1,
+      "message": "Good catch, we were missing test coverage for these cases. Fixed this and added a couple of tests.",
+      "parentUuid": "0a7cc6c3_b370c5f6",
       "range": {
         "startLine": 89,
         "startChar": 49,
