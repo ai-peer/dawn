@@ -236,6 +236,30 @@
       },
       "revId": "382e74c64129ef74a49e362ad22a7cdd5acdf914",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "519122ed_dc07a327",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-26T22:15:23Z",
+      "side": 1,
+      "message": "So I think that it should be fine in this order. Only destroy is called on the BGL which doesn\u0027t necessarily call the objects dtor. The dtor operations happen when all refs are lost, and that can\u0027t happen until all the BGs are destroyed after.",
+      "parentUuid": "fe69840b_2a615fb4",
+      "range": {
+        "startLine": 312,
+        "startChar": 11,
+        "endLine": 313,
+        "endChar": 34
+      },
+      "revId": "382e74c64129ef74a49e362ad22a7cdd5acdf914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
