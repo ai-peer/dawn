@@ -21,6 +21,7 @@
 namespace dawn::native::opengl {
 
     class Device;
+    struct OpenGLFunctions;
 
     struct GLFormat {
         GLenum internalFormat = 0;
@@ -35,7 +36,7 @@ namespace dawn::native::opengl {
     };
 
     using GLFormatTable = ityp::array<FormatIndex, GLFormat, kKnownFormatCount>;
-    GLFormatTable BuildGLFormatTable();
+    GLFormatTable BuildGLFormatTable(GLenum internalFormatForBGRA);
 
 }  // namespace dawn::native::opengl
 
