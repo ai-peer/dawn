@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c79936bc_28a5fd89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-26T17:21:30Z",
+      "side": 1,
+      "message": "looks ok, but why do we need to remove it instead of just migrating it (later) to the blob cache?",
+      "revId": "8ebfad127727bab701a943b6365d1c2c895e4aaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
