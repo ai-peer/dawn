@@ -494,16 +494,27 @@ namespace dawn::native {
     }
 
     bool BufferBase::CanGetMappedRange(bool writable, size_t offset, size_t size) const {
-        if (offset % 8 != 0 || size % 4 != 0) {
+        if (offset % 8 != 0 || offset < mMapOffset || offset > mSize) {
             return false;
         }
 
-        if (size > mMapSize || offset < mMapOffset) {
+        if (size == 0) {
+            // TODO(dawn:1159): Remove this after chromium side calls are updated
+            size = wgpu::kWholeMapSize;
+            GetDevice()->EmitDeprecationWarning(
+                "Using size=0 to indicate default mapping size for getMappedRange "
+                "is deprecated. In the future it will result in a zero-size mapping. "
+                "Use `undefined` (wgpu::kWholeMapSize) or just omit the parameter instead.");
+        }
+
+        size_t rangeSize = size == WGPU_WHOLE_MAP_SIZE ? mSize - offset : size;
+
+        if (rangeSize % 4 != 0 || rangeSize > mMapSize) {
             return false;
         }
 
         size_t offsetInMappedRange = offset - mMapOffset;
-        if (offsetInMappedRange > mMapSize - size) {
+        if (offsetInMappedRange > mMapSize - rangeSize) {
             return false;
         }
 
