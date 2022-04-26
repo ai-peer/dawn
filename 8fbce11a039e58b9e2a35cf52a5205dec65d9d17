@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "703ef177_ecbb4916",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-26T10:22:39Z",
+      "side": 1,
+      "message": "I will mention this in the F16 extension implementing issue https://bugs.chromium.org/p/tint/issues/detail?id\u003d1473. (BTW, I think https://bugs.chromium.org/p/tint/issues/detail?id\u003d1502 is duplicated to it)\n\nExplanations for the code: This is a typo, it should be `Token::Type::kF16`.If I get it right, after the f16 extension is implemented as proposed (https://github.com/gpuweb/gpuweb/pull/2696), `f16` will become a valid token (just like `f32`), rather than a identifier or reserved word (currently it is). On the other hand, the proposed WGSL extension name is exactly `f16`, i.e. we will use `enable f16;` for this f16 extension. Here, after the extension is implemented, we will get a `Token::Type::kF16` token in the enable directive, and it should be the case.",
+      "parentUuid": "eb96829a_c1dfe395",
+      "range": {
+        "startLine": 354,
+        "startChar": 0,
+        "endLine": 364,
+        "endChar": 6
+      },
+      "revId": "8fbce11a039e58b9e2a35cf52a5205dec65d9d17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "331e9603_c269cb76",
         "filename": "src/tint/reader/wgsl/parser_impl.cc",
         "patchSetId": 16
@@ -71,6 +95,30 @@
       "writtenOn": "2022-04-25T12:30:27Z",
       "side": 1,
       "message": "remove?",
+      "range": {
+        "startLine": 368,
+        "startChar": 0,
+        "endLine": 370,
+        "endChar": 41
+      },
+      "revId": "8fbce11a039e58b9e2a35cf52a5205dec65d9d17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a361832c_d3d888e8",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-26T10:22:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "331e9603_c269cb76",
       "range": {
         "startLine": 368,
         "startChar": 0,
@@ -94,6 +142,41 @@
       "writtenOn": "2022-04-25T12:30:27Z",
       "side": 1,
       "message": "Is this used anywhere? Does it need to exist in the semantic tree, if not, can we remove these new files in `src/tint/sem`?",
+      "revId": "8fbce11a039e58b9e2a35cf52a5205dec65d9d17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07e7ae12_8320b6a9",
+        "filename": "src/tint/sem/extension.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-26T10:22:39Z",
+      "side": 1,
+      "message": "Removed. BTW, I am thinking that in the future we may want to record some extension-specific information for some certain specific extension, and these information could be changed by some transform. I am not sure how to deal with this usage.",
+      "parentUuid": "a0e063de_a2639b3a",
+      "revId": "8fbce11a039e58b9e2a35cf52a5205dec65d9d17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e84e05c5_9e2b35e8",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-26T10:22:39Z",
+      "side": 1,
+      "message": "Changed this to a normal comment rather than TODO.",
       "revId": "8fbce11a039e58b9e2a35cf52a5205dec65d9d17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
