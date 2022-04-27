@@ -213,6 +213,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e03c4ab4_278a8e4a",
+        "filename": "src/dawn/native/vulkan/PipelineCacheVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-27T23:02:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cefc8b5_52e6f72a",
+      "range": {
+        "startLine": 80,
+        "startChar": 43,
+        "endLine": 80,
+        "endChar": 50
+      },
+      "revId": "0c7645b4052bf7864c9f3e97b53c2706c43e5517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3f328f7_e1c9ff67",
@@ -321,6 +345,30 @@
       "side": 1,
       "message": "ok I still kinda disagree though because if we modify this for a monolithic cache, we won\u0027t be calling GetOrCreate with a pipeline. it\u0027ll just be something like device-\u003eGetPipelineCache().\n\nAnd, it\u0027s not clear to me right now that we will need to simultaneously support both monolithic and disjoint pipeline caches. But if we do, I don\u0027t think calling GetOrCreatePipelineCache(nullptr) would be the most intuitive way to get the monolithic cache. It\u0027s not clearly obvious from the interface that that is what it does.\n\nWould probably be preferable to instead so something like:\n```\nif (monolithic) {\n  cache \u003d device-\u003eGetOrCreatePipelineCache()\n} else {\n  cache \u003d PipelineCache::Create(device, pipeline-\u003eGetCacheKey());\n}\n```",
       "parentUuid": "ac20e19c_5d92145f",
+      "range": {
+        "startLine": 569,
+        "startChar": 52,
+        "endLine": 569,
+        "endChar": 76
+      },
+      "revId": "0c7645b4052bf7864c9f3e97b53c2706c43e5517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5288b512_b983398d",
+        "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-27T23:02:31Z",
+      "side": 1,
+      "message": "Modified to take the cache key as we discussed offline.",
+      "parentUuid": "7c829e9a_79936bfe",
       "range": {
         "startLine": 569,
         "startChar": 52,

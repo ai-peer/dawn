@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b22e2ee2_d2203bec",
+        "filename": "src/dawn/native/vulkan/ComputePipelineVk.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-27T23:02:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b27e83e_618016d4",
+      "range": {
+        "startLine": 90,
+        "startChar": 12,
+        "endLine": 90,
+        "endChar": 28
+      },
+      "revId": "f5790efa0699a027396295e7d353b59508f08dc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbf37e2a_23c2375e",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-04-22T03:03:42Z",
       "side": 1,
       "message": "we don\u0027t need these bits here. The function can just return ResultOrError\u003cCachedBlob\u003e and PipelineCacheBase::Flush can handle the error",
+      "range": {
+        "startLine": 67,
+        "startChar": 12,
+        "endLine": 67,
+        "endChar": 25
+      },
+      "revId": "f5790efa0699a027396295e7d353b59508f08dc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d204fa58_ffea614c",
+        "filename": "src/dawn/native/vulkan/PipelineCacheVk.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-27T23:02:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbf37e2a_23c2375e",
       "range": {
         "startLine": 67,
         "startChar": 12,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be343872_91c3df88",
+        "filename": "src/dawn/native/vulkan/PipelineCacheVk.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-27T23:02:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbc3b85d_b6866f32",
+      "range": {
+        "startLine": 97,
+        "startChar": 9,
+        "endLine": 97,
+        "endChar": 34
+      },
+      "revId": "f5790efa0699a027396295e7d353b59508f08dc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98dfe421_802ddb67",
@@ -83,6 +155,24 @@
       "writtenOn": "2022-04-22T03:03:42Z",
       "side": 1,
       "message": "any changes or was this just formatting?",
+      "revId": "f5790efa0699a027396295e7d353b59508f08dc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd07ab60_a7634925",
+        "filename": "src/dawn/tests/white_box/VulkanErrorInjectorTests.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-27T23:02:31Z",
+      "side": 1,
+      "message": "Just formatting, but the main reason for the change is so that it uses the correct VK_NULL_HANDLE with the changes.",
+      "parentUuid": "98dfe421_802ddb67",
       "revId": "f5790efa0699a027396295e7d353b59508f08dc5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
