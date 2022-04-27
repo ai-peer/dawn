@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85d3d394_58f39f77",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-27T14:32:12Z",
+      "side": 1,
+      "message": "That\u0027s a great name suggestion. Done, and made the comments more precise.",
+      "parentUuid": "e0a2333c_18adee3a",
+      "revId": "59df7c953d95fb84217e195d6e23362c37e3b76d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16db0974_ebf914d7",
@@ -60,6 +78,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a9d13b7a_dd8dc501",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-27T14:32:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16db0974_ebf914d7",
+      "range": {
+        "startLine": 161,
+        "startChar": 12,
+        "endLine": 162,
+        "endChar": 40
+      },
+      "revId": "59df7c953d95fb84217e195d6e23362c37e3b76d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4a3a9ae7_28bbb65e",
         "filename": "src/dawn/native/metal/UtilsMetal.mm",
         "patchSetId": 7
@@ -71,6 +113,30 @@
       "writtenOn": "2022-04-26T19:21:34Z",
       "side": 1,
       "message": "\u003c 1, or \u003d\u003d 0 ?\nor does rendering to both level index 0 and 1 actually work, and only beyond that is broken\n\nedit: nevermind - I read the Toggle description. That\u0027s weird. so it works with mipCount \u003d 2 but not mipCount \u003d 3?",
+      "range": {
+        "startLine": 521,
+        "startChar": 60,
+        "endLine": 521,
+        "endChar": 63
+      },
+      "revId": "59df7c953d95fb84217e195d6e23362c37e3b76d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca003a11_4c16a935",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-27T14:32:12Z",
+      "side": 1,
+      "message": "Yep it works with mipCount 2 and not 3. I\u0027m really not sure what\u0027s going on in the driver.",
+      "parentUuid": "4a3a9ae7_28bbb65e",
       "range": {
         "startLine": 521,
         "startChar": 60,
