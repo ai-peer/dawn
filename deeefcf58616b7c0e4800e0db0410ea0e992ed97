@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d6fe033_469be917",
+        "filename": "src/dawn/native/opengl/DeviceGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-04-27T16:17:25Z",
+      "side": 1,
+      "message": "Check the name of the extension carefully. This isn\u0027t for the Intel driver. It\u0027s for the NVidia ES driver that supports GL_EXT_texture_format_BGRA8888 but not GL_EXT_read_format_bgra (so you can create GL_BGRA8_EXT but can\u0027t read from them.. sigh). Sadly we\u0027ll probably have to deal with this a lot, since while GL_EXT_texture_format_BGRA8888 has 99% coverage, GL_EXT_read_format_bgra only has ~38%.",
+      "parentUuid": "63b39f59_5c828f62",
+      "revId": "deeefcf58616b7c0e4800e0db0410ea0e992ed97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e82b521_628631ce",
         "filename": "src/dawn/native/opengl/GLFormat.h",
         "patchSetId": 9
@@ -60,6 +78,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7471873d_49809a4a",
+        "filename": "src/dawn/native/opengl/GLFormat.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-04-27T16:17:25Z",
+      "side": 1,
+      "message": "We could. Initially I just passed the OpenGLFunctions here, but it seemed cleaner to just pass the enum until we need to do otherwise.",
+      "parentUuid": "5e82b521_628631ce",
+      "range": {
+        "startLine": 38,
+        "startChar": 37,
+        "endLine": 38,
+        "endChar": 65
+      },
+      "revId": "deeefcf58616b7c0e4800e0db0410ea0e992ed97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c3b0f799_715df10c",
         "filename": "src/dawn/tests/end2end/BindGroupTests.cpp",
         "patchSetId": 9
@@ -71,6 +113,24 @@
       "writtenOn": "2022-04-27T14:57:07Z",
       "side": 1,
       "message": "nit: stray change?",
+      "revId": "deeefcf58616b7c0e4800e0db0410ea0e992ed97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "540ca169_7b33f172",
+        "filename": "src/dawn/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1604,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-04-27T16:17:25Z",
+      "side": 1,
+      "message": "See the CL desc: \"modify another test to not use BGRA textures\". If I don\u0027t do this, this test will try to create a GL_BGRA8_EXT texture on Intel, and fail (their buggy) validation.\n\nIn an earlier version, I just forced Intel ES to create GL_RGBA8 textures for BGRAUnorm, but this means you can\u0027t upload to them. Seems better to just force Intel to do the \"right\" thing (in the hopes that some driver will fix this) and put the exceptions in the tests.",
+      "parentUuid": "c3b0f799_715df10c",
       "revId": "deeefcf58616b7c0e4800e0db0410ea0e992ed97",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
