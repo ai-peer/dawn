@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c530509_de3cfe04",
+        "filename": "src/dawn/common/Numeric.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-27T17:25:36Z",
+      "side": 1,
+      "message": "CHECK is in Chrome but we use ASSERT so maybe assert_cast? Not sure.",
+      "range": {
+        "startLine": 48,
+        "startChar": 11,
+        "endLine": 48,
+        "endChar": 23
+      },
+      "revId": "d804eeef31398628053a641632c455f29d432eaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
