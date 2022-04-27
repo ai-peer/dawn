@@ -119,11 +119,6 @@ namespace dawn::native::opengl {
     }
 
     GLenum Device::GetBGRAInternalFormat() const {
-        // Intel claims to implement GL_EXT_texture_format_BGRA8888, but doesn't support GL_BGRA or
-        // GL_BGRA8_EXT as internalFormat.
-        if (gl.GetVersion().IsES() && gpu_info::IsIntel(GetAdapter()->GetVendorId())) {
-            return GL_RGBA8;
-        }
         if (gl.IsGLExtensionSupported("GL_EXT_texture_format_BGRA8888") ||
             gl.IsGLExtensionSupported("GL_APPLE_texture_format_BGRA8888")) {
             return GL_BGRA8_EXT;
