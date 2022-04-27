@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21c269ea_ec032682",
+        "filename": "src/dawn/native/opengl/DeviceGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-27T16:39:27Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "8d6fe033_469be917",
+      "revId": "deeefcf58616b7c0e4800e0db0410ea0e992ed97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e82b521_628631ce",
@@ -100,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36e2e4ae_c5da176e",
+        "filename": "src/dawn/native/opengl/GLFormat.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-27T16:39:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7471873d_49809a4a",
+      "range": {
+        "startLine": 38,
+        "startChar": 37,
+        "endLine": 38,
+        "endChar": 65
+      },
+      "revId": "deeefcf58616b7c0e4800e0db0410ea0e992ed97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3b0f799_715df10c",
@@ -131,6 +173,24 @@
       "side": 1,
       "message": "See the CL desc: \"modify another test to not use BGRA textures\". If I don\u0027t do this, this test will try to create a GL_BGRA8_EXT texture on Intel, and fail (their buggy) validation.\n\nIn an earlier version, I just forced Intel ES to create GL_RGBA8 textures for BGRAUnorm, but this means you can\u0027t upload to them. Seems better to just force Intel to do the \"right\" thing (in the hopes that some driver will fix this) and put the exceptions in the tests.",
       "parentUuid": "c3b0f799_715df10c",
+      "revId": "deeefcf58616b7c0e4800e0db0410ea0e992ed97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f68b3bc2_a4d0c0b6",
+        "filename": "src/dawn/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1604,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-27T16:39:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "540ca169_7b33f172",
       "revId": "deeefcf58616b7c0e4800e0db0410ea0e992ed97",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
