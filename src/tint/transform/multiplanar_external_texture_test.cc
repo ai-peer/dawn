@@ -109,6 +109,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -149,6 +150,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -188,6 +190,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -205,6 +208,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -237,6 +241,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -250,6 +255,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -285,6 +291,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -300,6 +307,7 @@ fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord
   } else {
     color = (vec4<f32>(textureLoad(plane0, coord, 0).r, textureLoad(plane1, coord, 0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -331,6 +339,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -344,6 +353,7 @@ fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord
   } else {
     color = (vec4<f32>(textureLoad(plane0, coord, 0).r, textureLoad(plane1, coord, 0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -379,6 +389,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -396,6 +407,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -406,6 +418,7 @@ fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord
   } else {
     color = (vec4<f32>(textureLoad(plane0, coord, 0).r, textureLoad(plane1, coord, 0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -439,6 +452,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -452,6 +466,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -462,6 +477,7 @@ fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord
   } else {
     color = (vec4<f32>(textureLoad(plane0, coord, 0).r, textureLoad(plane1, coord, 0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -501,6 +517,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(4) var ext_tex_plane_1 : texture_2d<f32>;
@@ -536,6 +553,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -578,6 +596,7 @@ fn main() {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -591,6 +610,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -638,6 +658,7 @@ fn f(t : texture_external, s : sampler) {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -656,6 +677,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -697,6 +719,7 @@ fn main() {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -710,6 +733,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -758,6 +782,7 @@ fn main() {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(3) var ext_tex_plane_1 : texture_2d<f32>;
@@ -775,6 +800,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -829,6 +855,7 @@ fn f(t : texture_external, s : sampler, t2 : texture_external) {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(3) var ext_tex_plane_1 : texture_2d<f32>;
@@ -851,6 +878,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -900,6 +928,7 @@ fn main() {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -913,6 +942,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -968,6 +998,7 @@ fn main() {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -981,6 +1012,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -1024,6 +1056,7 @@ fn f(ext_tex : texture_external) -> vec2<i32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 fn f(ext_tex : texture_2d<f32>, ext_tex_plane_1 : texture_2d<f32>, ext_tex_params : ExternalTextureParams) -> vec2<i32> {
@@ -1060,6 +1093,7 @@ fn main() {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1075,6 +1109,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -1122,6 +1157,7 @@ type ET = texture_external;
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1140,6 +1176,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (params.gamutConversionMatrix * color);
   return vec4<f32>(color, 1.0);
 }
 
