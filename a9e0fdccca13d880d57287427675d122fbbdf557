@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e80a7c34_6e1b3dbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-27T21:47:19Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a9e0fdccca13d880d57287427675d122fbbdf557",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef2da3fe_61ad2121",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-27T21:47:19Z",
+      "side": 1,
+      "message": "unit: prefer to pass mutable things by pointer, not reference",
+      "range": {
+        "startLine": 386,
+        "startChar": 46,
+        "endLine": 386,
+        "endChar": 62
+      },
+      "revId": "a9e0fdccca13d880d57287427675d122fbbdf557",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99c9a402_3db4cc33",
+        "filename": "src/dawn/native/EncodingContext.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-27T21:47:19Z",
+      "side": 1,
+      "message": "Addin a check for backend errors on the EncodingContext probably isn\u0027t the right spot because the EncodingContext is a frontend-only concept. It should only yield validation errors and it doesn\u0027t make any calls into the backend. We would just end up capturing errors that happened before that point, but unrelated to actually encoding.",
+      "revId": "a9e0fdccca13d880d57287427675d122fbbdf557",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bb3a182_d979d77d",
+        "filename": "src/dawn/native/d3d12/D3D12Error.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-27T21:47:19Z",
+      "side": 1,
+      "message": "do you think we could use _com_error::ErrorMessage ?\n\nhttps://docs.microsoft.com/en-us/cpp/cpp/com-error-class?redirectedfrom\u003dMSDN\u0026view\u003dmsvc-170\n\n\u003e Retrieves the string message for HRESULT stored in the _com_error object.\n\n\nthis basic switch statement is ok too though - better than what we have now",
+      "revId": "a9e0fdccca13d880d57287427675d122fbbdf557",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2035c9a_f80755c5",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-27T21:47:19Z",
+      "side": 1,
+      "message": "stray include?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 28
+      },
+      "revId": "a9e0fdccca13d880d57287427675d122fbbdf557",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
