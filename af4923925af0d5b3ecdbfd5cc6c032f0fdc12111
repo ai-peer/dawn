@@ -16,6 +16,23 @@
       "message": "Changed to just a while loop instead since that also avoids the double free-ing problem while changing the order had some impact on Vulkan BGL allocations.",
       "revId": "af4923925af0d5b3ecdbfd5cc6c032f0fdc12111",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a618ea2a_153e2cb7",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2022-04-27T22:11:40Z",
+      "side": 1,
+      "message": "This seems to be where the bots are failing now. Does this list still need to be inverted now that you\u0027re no longer flipping the kObjectTypeDependencyOrder?",
+      "revId": "af4923925af0d5b3ecdbfd5cc6c032f0fdc12111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
