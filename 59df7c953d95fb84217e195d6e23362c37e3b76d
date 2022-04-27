@@ -102,6 +102,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "24e2d70f_8ad0eb5b",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-27T15:50:01Z",
+      "side": 1,
+      "message": "no change - is it unnecessary?",
+      "parentUuid": "a9d13b7a_dd8dc501",
+      "range": {
+        "startLine": 161,
+        "startChar": 12,
+        "endLine": 162,
+        "endChar": 40
+      },
+      "revId": "59df7c953d95fb84217e195d6e23362c37e3b76d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4a3a9ae7_28bbb65e",
         "filename": "src/dawn/native/metal/UtilsMetal.mm",
         "patchSetId": 7
