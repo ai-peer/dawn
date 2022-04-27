@@ -33,6 +33,24 @@
       "message": "This seems to be where the bots are failing now. Does this list still need to be inverted now that you\u0027re no longer flipping the kObjectTypeDependencyOrder?",
       "revId": "af4923925af0d5b3ecdbfd5cc6c032f0fdc12111",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5a3454e_bb5bd5c1",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-27T22:20:02Z",
+      "side": 1,
+      "message": "Yea, fixed, sorry!",
+      "parentUuid": "a618ea2a_153e2cb7",
+      "revId": "af4923925af0d5b3ecdbfd5cc6c032f0fdc12111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
