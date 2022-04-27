@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "041127cf_5f6221de",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-27T17:43:01Z",
+      "side": 0,
+      "message": "Seeing this, and so many other blocks of code deleted makes this change feel very much like it\u0027s the right thing. Good job.",
+      "range": {
+        "startLine": 891,
+        "startChar": 0,
+        "endLine": 897,
+        "endChar": 8
+      },
+      "revId": "f49fbbfb88fe731273cdf29a5e065c2cc68ce234",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6f89891_d000d26c",
+        "filename": "src/tint/transform/unwind_discard_functions.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-27T17:43:01Z",
+      "side": 0,
+      "message": "Seeing this code go away makes me so happy 😊",
+      "range": {
+        "startLine": 329,
+        "startChar": 9,
+        "endLine": 342,
+        "endChar": 0
+      },
+      "revId": "f49fbbfb88fe731273cdf29a5e065c2cc68ce234",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
