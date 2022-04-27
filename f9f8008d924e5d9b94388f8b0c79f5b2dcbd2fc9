@@ -22,6 +22,30 @@
       },
       "revId": "f9f8008d924e5d9b94388f8b0c79f5b2dcbd2fc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6eff4ed_86c0c095",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-27T22:25:36Z",
+      "side": 1,
+      "message": "We didn\u0027t have it before, but from a comment Corentin made before in the refactoring caching tests CL, I think it\u0027s a good idea to add it since it scopes the error to the actual call. Otherwise, it is possible that some previous call caused the error and we pick it up here.",
+      "parentUuid": "5533594d_3fb70371",
+      "range": {
+        "startLine": 105,
+        "startChar": 4,
+        "endLine": 105,
+        "endChar": 82
+      },
+      "revId": "f9f8008d924e5d9b94388f8b0c79f5b2dcbd2fc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
