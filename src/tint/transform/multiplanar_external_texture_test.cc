@@ -106,9 +106,23 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -146,9 +160,23 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -185,9 +213,23 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -198,6 +240,13 @@ struct ExternalTextureParams {
 
 @group(0) @binding(1) var ext_tex : texture_2d<f32>;
 
+fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
+  let cond = (abs(v) < vec3<f32>(params.D));
+  let t = (sign(v) * ((params.C * abs(v)) + params.F));
+  let f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3<f32>(params.G)) + params.E));
+  return select(f, t, cond);
+}
+
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
   var color : vec3<f32>;
   if ((params.numPlanes == 1u)) {
@@ -205,6 +254,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -234,14 +284,35 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
 
 @group(0) @binding(3) var<uniform> ext_tex_params : ExternalTextureParams;
+
+fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
+  let cond = (abs(v) < vec3<f32>(params.D));
+  let t = (sign(v) * ((params.C * abs(v)) + params.F));
+  let f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3<f32>(params.G)) + params.E));
+  return select(f, t, cond);
+}
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
   var color : vec3<f32>;
@@ -250,6 +321,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -282,9 +354,23 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -293,6 +379,13 @@ struct ExternalTextureParams {
 
 @group(0) @binding(0) var ext_tex : texture_2d<f32>;
 
+fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
+  let cond = (abs(v) < vec3<f32>(params.D));
+  let t = (sign(v) * ((params.C * abs(v)) + params.F));
+  let f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3<f32>(params.G)) + params.E));
+  return select(f, t, cond);
+}
+
 fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord : vec2<i32>, params : ExternalTextureParams) -> vec4<f32> {
   var color : vec3<f32>;
   if ((params.numPlanes == 1u)) {
@@ -300,6 +393,7 @@ fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord
   } else {
     color = (vec4<f32>(textureLoad(plane0, coord, 0).r, textureLoad(plane1, coord, 0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -328,14 +422,35 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
 
 @group(0) @binding(2) var<uniform> ext_tex_params : ExternalTextureParams;
+
+fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
+  let cond = (abs(v) < vec3<f32>(params.D));
+  let t = (sign(v) * ((params.C * abs(v)) + params.F));
+  let f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3<f32>(params.G)) + params.E));
+  return select(f, t, cond);
+}
 
 fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord : vec2<i32>, params : ExternalTextureParams) -> vec4<f32> {
   var color : vec3<f32>;
@@ -344,6 +459,7 @@ fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord
   } else {
     color = (vec4<f32>(textureLoad(plane0, coord, 0).r, textureLoad(plane1, coord, 0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -376,9 +492,23 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -389,6 +519,13 @@ struct ExternalTextureParams {
 
 @group(0) @binding(1) var ext_tex : texture_2d<f32>;
 
+fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
+  let cond = (abs(v) < vec3<f32>(params.D));
+  let t = (sign(v) * ((params.C * abs(v)) + params.F));
+  let f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3<f32>(params.G)) + params.E));
+  return select(f, t, cond);
+}
+
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
   var color : vec3<f32>;
   if ((params.numPlanes == 1u)) {
@@ -396,6 +533,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -406,6 +544,7 @@ fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord
   } else {
     color = (vec4<f32>(textureLoad(plane0, coord, 0).r, textureLoad(plane1, coord, 0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -436,14 +575,35 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
 
 @group(0) @binding(3) var<uniform> ext_tex_params : ExternalTextureParams;
+
+fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
+  let cond = (abs(v) < vec3<f32>(params.D));
+  let t = (sign(v) * ((params.C * abs(v)) + params.F));
+  let f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3<f32>(params.G)) + params.E));
+  return select(f, t, cond);
+}
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
   var color : vec3<f32>;
@@ -452,6 +612,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -462,6 +623,7 @@ fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord
   } else {
     color = (vec4<f32>(textureLoad(plane0, coord, 0).r, textureLoad(plane1, coord, 0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -498,9 +660,23 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(4) var ext_tex_plane_1 : texture_2d<f32>;
@@ -529,6 +705,13 @@ struct ExternalTextureParams {
 
 @group(1) @binding(0) var ext_tex_3 : texture_2d<f32>;
 
+fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
+  let cond = (abs(v) < vec3<f32>(params.D));
+  let t = (sign(v) * ((params.C * abs(v)) + params.F));
+  let f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3<f32>(params.G)) + params.E));
+  return select(f, t, cond);
+}
+
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
   var color : vec3<f32>;
   if ((params.numPlanes == 1u)) {
@@ -536,6 +719,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -575,14 +759,35 @@ fn main() {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
 
 @group(0) @binding(3) var<uniform> ext_tex_params : ExternalTextureParams;
+
+fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
+  let cond = (abs(v) < vec3<f32>(params.D));
+  let t = (sign(v) * ((params.C * abs(v)) + params.F));
+  let f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3<f32>(params.G)) + params.E));
+  return select(f, t, cond);
+}
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
   var color : vec3<f32>;
@@ -591,6 +796,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -635,9 +841,23 @@ fn f(t : texture_external, s : sampler) {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -649,6 +869,13 @@ fn main() {
   f(ext_tex, ext_tex_plane_1, ext_tex_params, smp);
 }
 
+fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
+  let cond = (abs(v) < vec3<f32>(params.D));
+  let t = (sign(v) * ((params.C * abs(v)) + params.F));
+  let f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3<f32>(params.G)) + params.E));
+  return select(f, t, cond);
+}
+
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
   var color : vec3<f32>;
   if ((params.numPlanes == 1u)) {
@@ -656,6 +883,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -694,14 +922,35 @@ fn main() {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
 
 @group(0) @binding(3) var<uniform> ext_tex_params : ExternalTextureParams;
+
+fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
+  let cond = (abs(v) < vec3<f32>(params.D));
+  let t = (sign(v) * ((params.C * abs(v)) + params.F));
+  let f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3<f32>(params.G)) + params.E));
+  return select(f, t, cond);
+}
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
   var color : vec3<f32>;
@@ -710,6 +959,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -755,9 +1005,23 @@ fn main() {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(3) var ext_tex_plane_1 : texture_2d<f32>;
@@ -768,6 +1032,13 @@ struct ExternalTextureParams {
 
 @group(0) @binding(6) var<uniform> ext_tex_params_1 : ExternalTextureParams;
 
+fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
+  let cond = (abs(v) < vec3<f32>(params.D));
+  let t = (sign(v) * ((params.C * abs(v)) + params.F));
+  let f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3<f32>(params.G)) + params.E));
+  return select(f, t, cond);
+}
+
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
   var color : vec3<f32>;
   if ((params.numPlanes == 1u)) {
@@ -775,6 +1046,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -826,9 +1098,23 @@ fn f(t : texture_external, s : sampler, t2 : texture_external) {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(3) var ext_tex_plane_1 : texture_2d<f32>;
@@ -844,6 +1130,13 @@ fn main() {
   f(ext_tex, ext_tex_plane_1, ext_tex_params, smp, ext_tex2, ext_tex_plane_1_1, ext_tex_params_1);
 }
 
+fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
+  let cond = (abs(v) < vec3<f32>(params.D));
+  let t = (sign(v) * ((params.C * abs(v)) + params.F));
+  let f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3<f32>(params.G)) + params.E));
+  return select(f, t, cond);
+}
+
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
   var color : vec3<f32>;
   if ((params.numPlanes == 1u)) {
@@ -851,6 +1144,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -897,14 +1191,35 @@ fn main() {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
 
 @group(0) @binding(3) var<uniform> ext_tex_params : ExternalTextureParams;
+
+fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
+  let cond = (abs(v) < vec3<f32>(params.D));
+  let t = (sign(v) * ((params.C * abs(v)) + params.F));
+  let f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3<f32>(params.G)) + params.E));
+  return select(f, t, cond);
+}
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
   var color : vec3<f32>;
@@ -913,6 +1228,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -965,14 +1281,35 @@ fn main() {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
 
 @group(0) @binding(3) var<uniform> ext_tex_params : ExternalTextureParams;
+
+fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
+  let cond = (abs(v) < vec3<f32>(params.D));
+  let t = (sign(v) * ((params.C * abs(v)) + params.F));
+  let f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3<f32>(params.G)) + params.E));
+  return select(f, t, cond);
+}
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
   var color : vec3<f32>;
@@ -981,6 +1318,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -1021,9 +1359,23 @@ fn f(ext_tex : texture_external) -> vec2<i32> {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 fn f(ext_tex : texture_2d<f32>, ext_tex_plane_1 : texture_2d<f32>, ext_tex_params : ExternalTextureParams) -> vec2<i32> {
@@ -1057,9 +1409,23 @@ fn main() {
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1068,6 +1434,13 @@ struct ExternalTextureParams {
 
 type ET = texture_external;
 
+fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
+  let cond = (abs(v) < vec3<f32>(params.D));
+  let t = (sign(v) * ((params.C * abs(v)) + params.F));
+  let f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3<f32>(params.G)) + params.E));
+  return select(f, t, cond);
+}
+
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
   var color : vec3<f32>;
   if ((params.numPlanes == 1u)) {
@@ -1075,6 +1448,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
@@ -1119,9 +1493,23 @@ type ET = texture_external;
 )";
 
   auto* expect = R"(
+struct GammaTransferParams {
+  G : f32,
+  A : f32,
+  B : f32,
+  C : f32,
+  D : f32,
+  E : f32,
+  F : f32,
+  padding : u32,
+}
+
 struct ExternalTextureParams {
   numPlanes : u32,
+  gamutConversionMatrix : mat3x3<f32>,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gammaDecodeParams : GammaTransferParams,
+  gammaEncodeParams : GammaTransferParams,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1133,6 +1521,13 @@ fn main() {
   f(ext_tex, ext_tex_plane_1, ext_tex_params, smp);
 }
 
+fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
+  let cond = (abs(v) < vec3<f32>(params.D));
+  let t = (sign(v) * ((params.C * abs(v)) + params.F));
+  let f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3<f32>(params.G)) + params.E));
+  return select(f, t, cond);
+}
+
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
   var color : vec3<f32>;
   if ((params.numPlanes == 1u)) {
@@ -1140,6 +1535,7 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
   } else {
     color = (vec4<f32>(textureSampleLevel(plane0, smp, coord, 0.0).r, textureSampleLevel(plane1, smp, coord, 0.0).rg, 1.0) * params.yuvToRgbConversionMatrix);
   }
+  color = (mat3x3<f32>(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0) * color);
   return vec4<f32>(color, 1.0);
 }
 
