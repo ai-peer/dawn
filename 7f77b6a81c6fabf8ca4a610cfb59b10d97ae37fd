@@ -63,6 +63,30 @@
       },
       "revId": "7f77b6a81c6fabf8ca4a610cfb59b10d97ae37fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3a9bc12_38c714ff",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-27T14:32:34Z",
+      "side": 1,
+      "message": "Great catch. Done.",
+      "parentUuid": "e9cc62f2_4d080a7e",
+      "range": {
+        "startLine": 413,
+        "startChar": 16,
+        "endLine": 415,
+        "endChar": 0
+      },
+      "revId": "7f77b6a81c6fabf8ca4a610cfb59b10d97ae37fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
