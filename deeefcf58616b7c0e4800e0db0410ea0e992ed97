@@ -16,6 +16,63 @@
       "message": "Austin, Corentin: PTAL. Thanks!",
       "revId": "deeefcf58616b7c0e4800e0db0410ea0e992ed97",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63b39f59_5c828f62",
+        "filename": "src/dawn/native/opengl/DeviceGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-27T14:57:07Z",
+      "side": 1,
+      "message": "What about Apple? Also we could put the detection of the bad Intel driver here.",
+      "revId": "deeefcf58616b7c0e4800e0db0410ea0e992ed97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e82b521_628631ce",
+        "filename": "src/dawn/native/opengl/GLFormat.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-27T14:57:07Z",
+      "side": 1,
+      "message": "Note that in the future we might want to pass the list of GL extensions here because there will be much more logic.",
+      "range": {
+        "startLine": 38,
+        "startChar": 37,
+        "endLine": 38,
+        "endChar": 65
+      },
+      "revId": "deeefcf58616b7c0e4800e0db0410ea0e992ed97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3b0f799_715df10c",
+        "filename": "src/dawn/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1604,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-27T14:57:07Z",
+      "side": 1,
+      "message": "nit: stray change?",
+      "revId": "deeefcf58616b7c0e4800e0db0410ea0e992ed97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
