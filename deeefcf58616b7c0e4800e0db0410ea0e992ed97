@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcfa1d43_8ed8302e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-04-27T14:17:48Z",
+      "side": 1,
+      "message": "Austin, Corentin: PTAL. Thanks!",
+      "revId": "deeefcf58616b7c0e4800e0db0410ea0e992ed97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
