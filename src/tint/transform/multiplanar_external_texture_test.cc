@@ -109,6 +109,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -149,6 +150,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -188,6 +190,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -237,6 +240,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -285,6 +289,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -331,6 +336,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -379,6 +385,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -439,6 +446,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -501,6 +509,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(4) var ext_tex_plane_1 : texture_2d<f32>;
@@ -578,6 +587,7 @@ fn main() {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -638,6 +648,7 @@ fn f(t : texture_external, s : sampler) {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -697,6 +708,7 @@ fn main() {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -758,6 +770,7 @@ fn main() {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(3) var ext_tex_plane_1 : texture_2d<f32>;
@@ -829,6 +842,7 @@ fn f(t : texture_external, s : sampler, t2 : texture_external) {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(3) var ext_tex_plane_1 : texture_2d<f32>;
@@ -900,6 +914,7 @@ fn main() {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -968,6 +983,7 @@ fn main() {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1024,6 +1040,7 @@ fn f(ext_tex : texture_external) -> vec2<i32> {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 fn f(ext_tex : texture_2d<f32>, ext_tex_plane_1 : texture_2d<f32>, ext_tex_params : ExternalTextureParams) -> vec2<i32> {
@@ -1060,6 +1077,7 @@ fn main() {
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1122,6 +1140,7 @@ type ET = texture_external;
 struct ExternalTextureParams {
   numPlanes : u32,
   yuvToRgbConversionMatrix : mat3x4<f32>,
+  gamutConversionMatrix : mat3x3<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
