@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4109d74_c2029a88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-27T16:37:44Z",
+      "side": 1,
+      "message": "fyi it appears there are some flakes on Windows Intel after this CL :-/ \n\nhttps://ci.chromium.org/ui/p/chromium/builders/ci/Dawn%20Win10%20x86%20Release%20(Intel%20HD%20630)/60753/test-results\n\nhttps://ci.chromium.org/ui/p/chromium/builders/ci/Dawn%20Win10%20x64%20Release%20(Intel%20HD%20630)/64506/test-results",
+      "revId": "46bef8aae6a0b0b611167a9506893c30f1ca1c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
