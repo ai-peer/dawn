@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "456492b4_4bcb8139",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-27T21:11:33Z",
+      "side": 1,
+      "message": "Changed to just a while loop instead since that also avoids the double free-ing problem while changing the order had some impact on Vulkan BGL allocations.",
+      "revId": "af4923925af0d5b3ecdbfd5cc6c032f0fdc12111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
