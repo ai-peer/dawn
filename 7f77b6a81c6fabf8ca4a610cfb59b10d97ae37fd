@@ -39,6 +39,30 @@
       },
       "revId": "7f77b6a81c6fabf8ca4a610cfb59b10d97ae37fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9cc62f2_4d080a7e",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-04-27T02:25:28Z",
+      "side": 1,
+      "message": "+1. It seems if useTemporaryResolveTexture \u003d\u003d true, there is no chance to apply the toggle EmulateStoreAndMSAAResolve.",
+      "parentUuid": "93d7b57f_28ecc30f",
+      "range": {
+        "startLine": 413,
+        "startChar": 16,
+        "endLine": 415,
+        "endChar": 0
+      },
+      "revId": "7f77b6a81c6fabf8ca4a610cfb59b10d97ae37fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
