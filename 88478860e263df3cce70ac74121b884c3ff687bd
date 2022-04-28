@@ -16,6 +16,63 @@
       "message": "ptal",
       "revId": "88478860e263df3cce70ac74121b884c3ff687bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c04ebb1_ef5f2fcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-04-28T14:27:44Z",
+      "side": 1,
+      "message": "overall looks good, couple of questions though",
+      "revId": "88478860e263df3cce70ac74121b884c3ff687bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "181a0b28_3bae50c9",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-04-28T14:27:44Z",
+      "side": 1,
+      "message": "Should there be a link to the Tint repo indicating that it is a mirror/intended for standalone usage?",
+      "revId": "88478860e263df3cce70ac74121b884c3ff687bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d554cfaf_8e48dc6e",
+        "filename": "docs/building.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-04-28T14:27:44Z",
+      "side": 1,
+      "message": "Is this section accurate/still needed?",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 3
+      },
+      "revId": "88478860e263df3cce70ac74121b884c3ff687bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
