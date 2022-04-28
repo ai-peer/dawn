@@ -139,6 +139,24 @@
       "parentUuid": "e633ceb5_3175d695",
       "revId": "4ff56d4785aac42fd92b17a3cc8b54a69d382986",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0558c258_204ec3fa",
+        "filename": "tools/src/cts/result/mvt.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T20:31:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "18a4e887_44b035d1",
+      "revId": "4ff56d4785aac42fd92b17a3cc8b54a69d382986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
