@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ae7e61b_372dcf97",
+        "filename": "src/tint/writer/spirv/builder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-04-28T13:53:37Z",
+      "side": 1,
+      "message": "Couple of reasons:\n* Gives the map a name, which is helpful for readability.\n* Let\u0027s us have somewhere to put other scoped things (if we hit one, I suspect there\u0027s similar bugs lurking).",
+      "parentUuid": "310a23c8_9420b56d",
+      "revId": "3dd285f913cdb8ffea83fd9a5aabe73c2796caad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8ed0c3c_948f8fd5",
         "filename": "src/tint/writer/spirv/builder_constructor_expression_test.cc",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2022-04-28T12:52:03Z",
       "side": 1,
       "message": "I don\u0027t think this is quite right. We can deduplicate the `OpConstantComposite` as they\u0027re constants, declared in the preamble. It\u0027s the `OpCompositeConstruct` that needs to be checked for scoping.",
+      "revId": "3dd285f913cdb8ffea83fd9a5aabe73c2796caad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a11b139_a78107f5",
+        "filename": "src/tint/writer/spirv/builder_constructor_expression_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1876,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-04-28T13:53:37Z",
+      "side": 1,
+      "message": "Good spot. Done.",
+      "parentUuid": "f8ed0c3c_948f8fd5",
       "revId": "3dd285f913cdb8ffea83fd9a5aabe73c2796caad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
