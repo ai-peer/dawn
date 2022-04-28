@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33634b7e_0aa81106",
+        "filename": "src/tint/ast/if_statement_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T16:59:57Z",
+      "side": 1,
+      "message": "I was fine with the lack of `else`, however I agree that it might be easy to confuse an else-if with a trailing if in the true-block, but I think you can structure the code in ways to make this obvious.\n\nIf we really want to add some way to enforce an else, how about:\n\nCreate a new ProgramBuilder wrapper type, called `Else`. Something like:\n\n```\nstruct Else {\n  explicit Else(const ast::IfStatement*);\n  explicit Else(const ast::BlockStatement*);\n  \n  const ast::Statement* stmt;\n};\n```\n\nAnd then change the else parameter of the `If()` to take this `Else` as the past parameter. Then this code would look like:\n\n```\nb1.If(b1.Expr(true), b1.Block(), Else(b2.If(b2.Expr(\"ident\"), b2.Block())));\n```\n\nWhich at least puts the `Else()` in the most obvious place.\n\nI\u0027m not overly fussed about this, and I\u0027m happy for this to be done as a followup, or not at all.",
+      "parentUuid": "ef39d26b_e5524af9",
+      "range": {
+        "startLine": 92,
+        "startChar": 41,
+        "endLine": 92,
+        "endChar": 46
+      },
+      "revId": "099cdbe6cfe7c005f5b16651ebdb8c811f715c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1bebf1f1_cff9a225",
         "filename": "src/tint/transform/utils/hoist_to_decl_before.cc",
         "patchSetId": 3
