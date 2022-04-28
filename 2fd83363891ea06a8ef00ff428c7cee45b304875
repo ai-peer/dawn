@@ -97,6 +97,30 @@
       },
       "revId": "2fd83363891ea06a8ef00ff428c7cee45b304875",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0d4bb8d_18336a54",
+        "filename": "src/dawn/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-28T19:14:45Z",
+      "side": 1,
+      "message": "ah ok - sounds fine since the only format in this test is depth32float",
+      "parentUuid": "8e0f344e_9e8f40f0",
+      "range": {
+        "startLine": 376,
+        "startChar": 25,
+        "endLine": 376,
+        "endChar": 55
+      },
+      "revId": "2fd83363891ea06a8ef00ff428c7cee45b304875",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
