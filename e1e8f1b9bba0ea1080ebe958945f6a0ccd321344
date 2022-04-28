@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51534a9c_1ac73ae7",
+        "filename": "tools/src/cts/expectations/expectations.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T18:38:16Z",
+      "side": 1,
+      "message": "Correct.",
+      "parentUuid": "88a0387a_129df75c",
+      "revId": "e1e8f1b9bba0ea1080ebe958945f6a0ccd321344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1559e29_496b31da",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-04-28T18:27:01Z",
       "side": 1,
       "message": "nit: Drop the `An`",
+      "revId": "e1e8f1b9bba0ea1080ebe958945f6a0ccd321344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0a1b085_20274230",
+        "filename": "tools/src/cts/expectations/expectations.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T18:38:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1559e29_496b31da",
       "revId": "e1e8f1b9bba0ea1080ebe958945f6a0ccd321344",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe5eb3a0_4421f23e",
+        "filename": "tools/src/cts/expectations/expectations.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T18:38:16Z",
+      "side": 1,
+      "message": "Good spot. `Tags` and `Status` were shallow-cloned. Made these truly deep copies.",
+      "parentUuid": "ec1ec601_8e4aff3e",
+      "revId": "e1e8f1b9bba0ea1080ebe958945f6a0ccd321344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85244202_937e18df",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-04-28T18:27:01Z",
       "side": 1,
       "message": "Is a line which starts with spaces then a `#` still considered as starting with the `#`?\n\nThis trims and then checks which means `    #` will \"start with\" a `#` character",
+      "revId": "e1e8f1b9bba0ea1080ebe958945f6a0ccd321344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1e4e55c_c57e28ef",
+        "filename": "tools/src/cts/expectations/parse.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T18:38:16Z",
+      "side": 1,
+      "message": "That\u0027s correct.",
+      "parentUuid": "85244202_937e18df",
       "revId": "e1e8f1b9bba0ea1080ebe958945f6a0ccd321344",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7814deac_d34bb9be",
+        "filename": "tools/src/cts/expectations/parse.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T18:38:16Z",
+      "side": 1,
+      "message": "Added comment.",
+      "parentUuid": "b0816e36_d6f97414",
+      "revId": "e1e8f1b9bba0ea1080ebe958945f6a0ccd321344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8573a89_e8d249ec",
@@ -99,6 +189,24 @@
       "writtenOn": "2022-04-28T18:27:01Z",
       "side": 1,
       "message": "nit: `expected test query` ? We seem to call it the query as opposed to the name?",
+      "revId": "e1e8f1b9bba0ea1080ebe958945f6a0ccd321344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be1ca5f0_03e7cf97",
+        "filename": "tools/src/cts/expectations/parse.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T18:38:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8573a89_e8d249ec",
       "revId": "e1e8f1b9bba0ea1080ebe958945f6a0ccd321344",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
