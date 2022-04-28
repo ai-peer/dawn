@@ -16,6 +16,29 @@
       "message": "I\u0027m not fussed on whether we land this or drop it.",
       "revId": "556de8d2b5a24f89e21d9b5985d45471964be45e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e31e1dce_e4409c0f",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2196,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T20:28:35Z",
+      "side": 1,
+      "message": "Any reason you went with `ast::Statement` instead of `ast::IfStatement` and `ast::BlockStatement` ? The latter would prevent some silly bugs before testing.",
+      "range": {
+        "startLine": 2196,
+        "startChar": 28,
+        "endLine": 2196,
+        "endChar": 42
+      },
+      "revId": "556de8d2b5a24f89e21d9b5985d45471964be45e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
