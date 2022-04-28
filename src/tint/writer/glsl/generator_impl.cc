@@ -1928,7 +1928,7 @@ bool GeneratorImpl::EmitGlobalVariable(const ast::Variable* global) {
       return EmitUniformVariable(sem);
     case ast::StorageClass::kStorage:
       return EmitStorageVariable(sem);
-    case ast::StorageClass::kUniformConstant:
+    case ast::StorageClass::kHandle:
       return EmitHandleVariable(sem);
     case ast::StorageClass::kPrivate:
       return EmitPrivateVariable(sem);
@@ -2590,7 +2590,7 @@ bool GeneratorImpl::EmitType(std::ostream& out,
       break;
     }
     case ast::StorageClass::kUniform:
-    case ast::StorageClass::kUniformConstant: {
+    case ast::StorageClass::kHandle: {
       out << "uniform ";
       break;
     }

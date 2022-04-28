@@ -2846,7 +2846,7 @@ bool GeneratorImpl::EmitGlobalVariable(const ast::Variable* global) {
       return EmitUniformVariable(sem);
     case ast::StorageClass::kStorage:
       return EmitStorageVariable(sem);
-    case ast::StorageClass::kUniformConstant:
+    case ast::StorageClass::kHandle:
       return EmitHandleVariable(sem);
     case ast::StorageClass::kPrivate:
       return EmitPrivateVariable(sem);
