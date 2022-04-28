@@ -347,7 +347,7 @@ struct MultiplanarExternalTexture::State {
              b.Block(
                  // color = textureLoad(plane0, coord, 0).rgb;
                  b.Assign("color", b.MemberAccessor(single_plane_call, "rgb"))),
-             b.Block(
+             b.Else(b.Block(
                  // color = vec4<f32>(plane_0_call.r, plane_1_call.rg, 1.0) *
                  //         params.yuvToRgbConversionMatrix;
                  b.Assign("color",
@@ -355,7 +355,7 @@ struct MultiplanarExternalTexture::State {
                                     b.MemberAccessor(plane_0_call, "r"),
                                     b.MemberAccessor(plane_1_call, "rg"), 1.0f),
                                 b.MemberAccessor(
-                                    "params", "yuvToRgbConversionMatrix"))))),
+                                    "params", "yuvToRgbConversionMatrix")))))),
         // color = gammaConversion(color, gammaDecodeParams);
         b.Assign("color",
                  b.Call("gammaCorrection", "color",
