@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3526e66_0352ac07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-04-28T19:08:06Z",
+      "side": 1,
+      "message": "Thanks for your review!",
+      "revId": "2fd83363891ea06a8ef00ff428c7cee45b304875",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2afab572_96278fb2",
@@ -48,6 +65,30 @@
       "writtenOn": "2022-04-28T17:39:23Z",
       "side": 1,
       "message": "why this change?",
+      "range": {
+        "startLine": 376,
+        "startChar": 25,
+        "endLine": 376,
+        "endChar": 55
+      },
+      "revId": "2fd83363891ea06a8ef00ff428c7cee45b304875",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e0f344e_9e8f40f0",
+        "filename": "src/dawn/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-04-28T19:08:06Z",
+      "side": 1,
+      "message": "It makes it easier to detect and filter out the depth-extracting tests above.\n\nOtherwise, we have to use (format \u003d\u003d depth \u0026\u0026 aspect \u003d\u003d all) || aspect \u003d\u003d depth))",
+      "parentUuid": "2afab572_96278fb2",
       "range": {
         "startLine": 376,
         "startChar": 25,
