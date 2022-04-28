@@ -1610,6 +1610,9 @@ uint32_t Builder::GenerateLiteralIfNeeded(const ast::Variable* var,
         [&](const ast::IntLiteralExpression* i) {
             switch (i->suffix) {
                 case ast::IntLiteralExpression::Suffix::kNone:
+                    TINT_ICE(Writer, builder_.Diagnostics())
+                        << "TODO(crbug.com/tint/1504): Support abstract int";
+                    return;
                 case ast::IntLiteralExpression::Suffix::kI:
                     constant.kind = ScalarConstant::Kind::kI32;
                     constant.value.i32 = static_cast<int32_t>(i->value);

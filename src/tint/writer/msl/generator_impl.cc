@@ -1524,6 +1524,9 @@ bool GeneratorImpl::EmitLiteral(std::ostream& out, const ast::LiteralExpression*
         [&](const ast::IntLiteralExpression* i) {
             switch (i->suffix) {
                 case ast::IntLiteralExpression::Suffix::kNone:
+                    TINT_ICE(Writer, diagnostics_)
+                        << "TODO(crbug.com/tint/1504): Support abstract int";
+                    return false;
                 case ast::IntLiteralExpression::Suffix::kI: {
                     // MSL (and C++) parse `-2147483648` as a `long` because it parses
                     // unary minus and `2147483648` as separate tokens, and the latter
