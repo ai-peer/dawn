@@ -39,13 +39,13 @@ namespace wgpu::binding {
         // interop::GPUComputePassEncoder interface compliance
         void setPipeline(Napi::Env,
                          interop::Interface<interop::GPUComputePipeline> pipeline) override;
-        void dispatch(Napi::Env,
-                      interop::GPUSize32 workgroupCountX,
-                      interop::GPUSize32 workgroupCountY,
-                      interop::GPUSize32 workgroupCountZ) override;
-        void dispatchIndirect(Napi::Env,
-                              interop::Interface<interop::GPUBuffer> indirectBuffer,
-                              interop::GPUSize64 indirectOffset) override;
+        void dispatchWorkgroups(Napi::Env,
+                                interop::GPUSize32 workgroupCountX,
+                                interop::GPUSize32 workgroupCountY,
+                                interop::GPUSize32 workgroupCountZ) override;
+        void dispatchWorkgroupsIndirect(Napi::Env,
+                                        interop::Interface<interop::GPUBuffer> indirectBuffer,
+                                        interop::GPUSize64 indirectOffset) override;
         void end(Napi::Env) override;
         void setBindGroup(Napi::Env,
                           interop::GPUIndex32 index,
