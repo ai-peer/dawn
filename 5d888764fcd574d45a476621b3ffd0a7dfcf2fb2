@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69242c74_e09a2cfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-04-28T18:22:16Z",
+      "side": 1,
+      "message": "Can you briefly explain why these types are needed in the semantic tree?\n\nHaving given very little thought to how this is all going to be implemented, I had (maybe naively) assumed that these types would materialized by the Resolver, and that creation-time constants would essentially be folded away.",
+      "revId": "5d888764fcd574d45a476621b3ffd0a7dfcf2fb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
