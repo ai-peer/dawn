@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7ff74ed_2cbaf16c",
+        "filename": "src/tint/writer/spirv/binary_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T13:01:37Z",
+      "side": 1,
+      "message": "This would be a bit nicer as `std::visit` and lambda\u0027s.  See first answer in https://stackoverflow.com/questions/63482070/how-can-i-code-something-like-a-switch-for-stdvariant",
+      "revId": "3a394ea62160def4800b0df5b9a31e7cdac0bc3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

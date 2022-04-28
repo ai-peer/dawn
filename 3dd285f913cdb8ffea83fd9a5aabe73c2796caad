@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e16f001e_63d1fe06",
+        "filename": "src/tint/writer/spirv/operand.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T13:01:37Z",
+      "side": 0,
+      "message": "Keep the comment? Seems useful as to where the +4 comes from.",
+      "revId": "3dd285f913cdb8ffea83fd9a5aabe73c2796caad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
