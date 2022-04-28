@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea2282ef_38a1d7c7",
+        "filename": "src/tint/writer/spirv/builder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T14:03:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2ae7e61b_372dcf97",
+      "revId": "3dd285f913cdb8ffea83fd9a5aabe73c2796caad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8ed0c3c_948f8fd5",
