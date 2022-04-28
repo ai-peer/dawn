@@ -34,6 +34,24 @@
       "parentUuid": "894eccf2_b5c7c542",
       "revId": "1d882f55b7f47dd06fe57efdf286100bf2a3ad6b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ecaa12c_c4e7daf0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-28T20:19:52Z",
+      "side": 1,
+      "message": "Nevermind - I figured it out. The test wasn\u0027t initializing the destination color space values as expected.",
+      "parentUuid": "60e355c9_da988c54",
+      "revId": "1d882f55b7f47dd06fe57efdf286100bf2a3ad6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
