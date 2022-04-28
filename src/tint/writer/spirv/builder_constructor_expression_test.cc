@@ -1850,5 +1850,33 @@ TEST_F(SpvBuilderConstructorTest,
   EXPECT_FALSE(b.has_error());
 }
 
+TEST_F(SpvBuilderConstructorTest, Scoping) {
+  // if (true) {
+  //    let x = vec3<f32>(1.0, 2.0, 3.0);
+  // }
+  // let y = vec3<f32>(1.0, 2.0, 3.0); // Mustn't reuse the ID 'x'
+
+  WrapInFunction(
+      If(true, Block(Decl(Const("x", nullptr, vec3<f32>(1.f, 2.f, 3.f))))),
+      Decl(Const("y", nullptr, vec3<f32>(1.f, 2.f, 3.f))));
+
+  spirv::Builder& b = SanitizeAndBuild();
+  ASSERT_TRUE(b.Build());
+
+  EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeVoid
+%1 = OpTypeFunction %2
+%5 = OpTypeBool
+%6 = OpConstantTrue %5
+%10 = OpTypeFloat 32
+%9 = OpTypeVector %10 3
+%11 = OpConstant %10 1
+%12 = OpConstant %10 2
+%13 = OpConstant %10 3
+%14 = OpConstantComposite %9 %11 %12 %13
+%15 = OpConstantComposite %9 %11 %12 %13
+)");
+  Validate(b);
+}
+
 }  // namespace
 }  // namespace tint::writer::spirv
