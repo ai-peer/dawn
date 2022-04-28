@@ -18,6 +18,57 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91985bc1_74c5fe1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-28T17:02:21Z",
+      "side": 1,
+      "message": "LGTM overall with some questions / suggestions. I think the structure could be overkill for now, but we\u0027ll see how it works when we add the other backends.",
+      "revId": "4e465345a93e57aa024d019db191355a805b6073",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8d4cdb6_c05a70ec",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-28T17:02:21Z",
+      "side": 1,
+      "message": "Question: are we going to add more logic in the frontend eventually? If not, we could remove the indirection and do this on the vulkan::Device directly (or even create the cache directly in pipelines?)",
+      "revId": "4e465345a93e57aa024d019db191355a805b6073",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "858b72d6_7261d7ae",
+        "filename": "src/dawn/native/vulkan/ComputePipelineVk.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-28T17:02:21Z",
+      "side": 1,
+      "message": "We do we need constThis?",
+      "revId": "4e465345a93e57aa024d019db191355a805b6073",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bdd6b79_32b6962b",
@@ -37,6 +88,57 @@
         "endLine": 89,
         "endChar": 12
       },
+      "revId": "4e465345a93e57aa024d019db191355a805b6073",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2efc6479_5d38d890",
+        "filename": "src/dawn/native/vulkan/ComputePipelineVk.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-28T17:02:21Z",
+      "side": 1,
+      "message": "This logic will also be present all the time. Maybe it could just be hidden in Flush (or FlushIfNeeded).",
+      "revId": "4e465345a93e57aa024d019db191355a805b6073",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "037ac9c0_cff4666a",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-28T17:02:21Z",
+      "side": 1,
+      "message": "Is https://www.khronos.org/registry/vulkan/specs/1.3/html/vkspec.html#:~:text\u003ddeviceName%5BVK_MAX_PHYSICAL_DEVICE_NAME_SIZE%5D%3B%0A%20%20%20%20uint8_t-,pipelineCacheUUID%5BVK_UUID_SIZE%5D%3B,-VkPhysicalDeviceLimits%20%20%20%20%20%20%20%20%20%20%20%20%20%20limits%3B%0A%20%20%20%20VkPhysicalDeviceSparseProperties used as part of the CacheKey? Vulkan requires that we do.",
+      "revId": "4e465345a93e57aa024d019db191355a805b6073",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01c0eb59_1727a063",
+        "filename": "src/dawn/native/vulkan/PipelineCacheVk.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-28T17:02:21Z",
+      "side": 1,
+      "message": "It seems that this could be in PIpelineCacheBase::InitializeBase since other backends will likely have the same logic of trying to load and getting a hit or not.",
       "revId": "4e465345a93e57aa024d019db191355a805b6073",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
