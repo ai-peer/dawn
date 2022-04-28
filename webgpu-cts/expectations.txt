@@ -82,7 +82,6 @@ crbug.com/dawn/1111 [ intel-0x5912 ] webgpu:shader,execution,zero_init:compute,z
 # Partial failures on all platforms
 # KEEP
 ################################################################################
-crbug.com/dawn/0000 webgpu:api,operation,command_buffer,image_copy:mip_levels:* [ Failure ]
 
 ################################################################################
 # webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero
