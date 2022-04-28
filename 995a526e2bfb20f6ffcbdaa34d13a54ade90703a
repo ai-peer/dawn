@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9ff5ee3_44992c70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-28T15:56:40Z",
+      "side": 1,
+      "message": "Chromium is still using \"0\" to mean the default. Do we need to temporarily allow both 0 and WGPU_WHOLE_MAP_SIZE to both mean \"whole size\".\nsome callsites https://source.chromium.org/search?q\u003dbufferGet(Const)%3FMappedRange%5C(.%2B%3F0%5C)%20-f:dawn%20f:webgpu\u0026sq\u003d",
+      "revId": "995a526e2bfb20f6ffcbdaa34d13a54ade90703a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "119cdaff_4d8db8e3",
