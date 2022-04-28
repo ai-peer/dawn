@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "786eb6a1_0bcb7c02",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T20:25:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acf1f071_62c7cd20",
+      "revId": "bfaf1b249b74c448d885a8a7f964b5519855b61c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f93dcf64_37f144af",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-04-28T20:13:22Z",
       "side": 1,
       "message": "Didn\u0027t we keep `result.Slow` in the case above?",
+      "revId": "bfaf1b249b74c448d885a8a7f964b5519855b61c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89268541_357f3e67",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T20:25:32Z",
+      "side": 1,
+      "message": "Good spot. Stale comment. Removed",
+      "parentUuid": "f93dcf64_37f144af",
       "revId": "bfaf1b249b74c448d885a8a7f964b5519855b61c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49e6ed97_c60f3b5b",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T20:25:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6e1456e_0d505e36",
+      "revId": "bfaf1b249b74c448d885a8a7f964b5519855b61c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4f090c7_5d8abb26",
@@ -82,6 +136,24 @@
       "writtenOn": "2022-04-28T20:13:22Z",
       "side": 1,
       "message": "I think this comment is incomplete?",
+      "revId": "bfaf1b249b74c448d885a8a7f964b5519855b61c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37b0ac9d_ac1231de",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T20:25:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4f090c7_5d8abb26",
       "revId": "bfaf1b249b74c448d885a8a7f964b5519855b61c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
