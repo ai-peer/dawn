@@ -34,6 +34,91 @@
       "parentUuid": "69242c74_e09a2cfb",
       "revId": "5d888764fcd574d45a476621b3ffd0a7dfcf2fb2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "953c36bd_e3b04e46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T20:21:05Z",
+      "side": 1,
+      "message": "lgtm w/ nits",
+      "revId": "5d888764fcd574d45a476621b3ffd0a7dfcf2fb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f728a47_8582eb20",
+        "filename": "src/tint/sem/abstract_float.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T20:21:05Z",
+      "side": 1,
+      "message": "nit: `abstract-float`",
+      "revId": "5d888764fcd574d45a476621b3ffd0a7dfcf2fb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "409c746a_76a0c734",
+        "filename": "src/tint/sem/abstract_float.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T20:21:05Z",
+      "side": 1,
+      "message": "nit: s/the this/this\n\n(and below)",
+      "revId": "5d888764fcd574d45a476621b3ffd0a7dfcf2fb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dba4d47_c478077e",
+        "filename": "src/tint/sem/abstract_float.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T20:21:05Z",
+      "side": 1,
+      "message": "This comment doesn\u0027t really make sense as this type can\u0027t be declared in WGSL as a name. So, this is really just _a_ name. Unless you mean declared in the WGSL spec?\n\n(and below)",
+      "revId": "5d888764fcd574d45a476621b3ffd0a7dfcf2fb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e81d987_31be4c9b",
+        "filename": "src/tint/sem/abstract_numeric.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T20:21:05Z",
+      "side": 1,
+      "message": "nit: s/0, // as this just returns false, not (false, 0)",
+      "revId": "5d888764fcd574d45a476621b3ffd0a7dfcf2fb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
