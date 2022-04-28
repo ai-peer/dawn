@@ -167,6 +167,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8547fbb2_cf3e22f2",
+        "filename": "src/tint/ast/if_statement_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-28T20:27:38Z",
+      "side": 1,
+      "message": "I personally find it more readable.",
+      "parentUuid": "2f5d4881_24e1eec0",
+      "range": {
+        "startLine": 92,
+        "startChar": 41,
+        "endLine": 92,
+        "endChar": 46
+      },
+      "revId": "099cdbe6cfe7c005f5b16651ebdb8c811f715c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bebf1f1_cff9a225",
@@ -252,6 +276,30 @@
       "side": 1,
       "message": "Had to go back to ReplaceAll, otherwise chained else-ifs don\u0027t work properly.",
       "parentUuid": "0b6c5d3d_3ca87e86",
+      "range": {
+        "startLine": 120,
+        "startChar": 2,
+        "endLine": 120,
+        "endChar": 37
+      },
+      "revId": "099cdbe6cfe7c005f5b16651ebdb8c811f715c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8afa9389_65a4c99a",
+        "filename": "src/tint/transform/utils/hoist_to_decl_before.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-28T20:27:38Z",
+      "side": 1,
+      "message": "I was wondering about that why you had to use Replace and not ReplaceAll.",
+      "parentUuid": "af9470f2_65b33b93",
       "range": {
         "startLine": 120,
         "startChar": 2,
