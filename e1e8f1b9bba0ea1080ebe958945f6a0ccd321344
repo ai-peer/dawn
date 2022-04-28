@@ -178,6 +178,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0204304_ef8e4333",
+        "filename": "tools/src/cts/expectations/parse.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T18:54:46Z",
+      "side": 1,
+      "message": "But isn\u0027t this still the wrong side of the token? Like the `columnIdx` points to the index _after_ the token, but when you report the error, don\u0027t you want to point to the _start_ of the token?",
+      "parentUuid": "7814deac_d34bb9be",
+      "revId": "e1e8f1b9bba0ea1080ebe958945f6a0ccd321344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8573a89_e8d249ec",
         "filename": "tools/src/cts/expectations/parse.go",
         "patchSetId": 2
