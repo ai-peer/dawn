@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "894eccf2_b5c7c542",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-28T19:08:06Z",
+      "side": 1,
+      "message": "Ben - It\u0027s very odd that this failure was cause because all of the functionality introduced was tested and passed in the Dawn e2e tests.\n\nI\u0027ve been experimenting with the mac-rel chromium bot and I\u0027m under the impression something odd is going on with the memory layout of the ExternalTextureParams struct.\n\nFirst thing I did was removed gamma correction functionality so the only new functionality introduced by the patch was the unity gamut matrix multiplication - but the tests still failed. I was then able to get the tests to pass by hardcoding the unity matrix used in the gamut matrix multiplication. This suggests that the values in params.gamutConversionMatrix are not the ones I wanted to pass in.\n\nI went back through the struct and size/alignment appears to be spec compliant. I\u0027m not sure where to look further - unfortunately I don\u0027t have a MacOS environment readily available for deeper debugging.\n\nDo you have any insight into what could be happening?\n\n\n\n",
+      "revId": "1d882f55b7f47dd06fe57efdf286100bf2a3ad6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
