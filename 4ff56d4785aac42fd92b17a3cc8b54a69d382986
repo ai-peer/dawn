@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c30ac8b1_bb774562",
+        "filename": "tools/src/cts/result/mvt.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T20:21:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a6bef9b_79a23823",
+      "revId": "4ff56d4785aac42fd92b17a3cc8b54a69d382986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "814a3d12_250014e2",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-04-28T18:52:06Z",
       "side": 1,
       "message": "nit: `\u0027tags\u0027 removed`",
+      "revId": "4ff56d4785aac42fd92b17a3cc8b54a69d382986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4152f187_880225e1",
+        "filename": "tools/src/cts/result/mvt.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T20:21:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "814a3d12_250014e2",
       "revId": "4ff56d4785aac42fd92b17a3cc8b54a69d382986",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5752a488_68b9e068",
+        "filename": "tools/src/cts/result/mvt.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T20:21:16Z",
+      "side": 1,
+      "message": "Good spot. You\u0027re right that this was wrong, but it was the other way around.\nThe sort above ensures that the variants with the fewer tags (supersets) come before the variants with more tags (subsets). Fixed the comment.",
+      "parentUuid": "311b9578_44940220",
+      "revId": "4ff56d4785aac42fd92b17a3cc8b54a69d382986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e633ceb5_3175d695",
         "filename": "tools/src/cts/result/mvt.go",
         "patchSetId": 3
@@ -65,6 +119,24 @@
       "writtenOn": "2022-04-28T18:52:06Z",
       "side": 1,
       "message": "Oh, this is a bit tricky. The `[:i]` is easy to miss and fail to understand that `v2` is the set of things _before_ `v1`. (This then made me think the check below was wrong as I was thinking about the lists the wrong way round).\n\nSo, 2 things:\n\n1. Can you add a comment to point out v2 is the list of strings _before_ v1\n2. What does go do when i \u003d\u003d 0? Does that mean v2 will be the first entry from variants and v1 \u003d\u003d v2?",
+      "revId": "4ff56d4785aac42fd92b17a3cc8b54a69d382986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18a4e887_44b035d1",
+        "filename": "tools/src/cts/result/mvt.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T20:21:16Z",
+      "side": 1,
+      "message": "\u003e 1. Can you add a comment to point out v2 is the list of strings _before_ v1\n\nDone.\n\n\u003e 2. What does go do when i \u003d\u003d 0? Does that mean v2 will be the first entry from variants and v1 \u003d\u003d v2?\n\nWhen `i` is `0`, you get a slice of `newVariants[0:0]`, which is an empty slice.\nSo first iteration is always doing nothing. We can\u0027t change the outer loop to range over `newVariants[1:]`, as that might cause an OOB indexing.",
+      "parentUuid": "e633ceb5_3175d695",
       "revId": "4ff56d4785aac42fd92b17a3cc8b54a69d382986",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
