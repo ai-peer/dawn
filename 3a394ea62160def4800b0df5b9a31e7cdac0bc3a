@@ -70,6 +70,24 @@
       "parentUuid": "fc92e715_c350dcbc",
       "revId": "3a394ea62160def4800b0df5b9a31e7cdac0bc3a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77e86c2c_8a908654",
+        "filename": "src/tint/writer/spirv/binary_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T15:14:52Z",
+      "side": 1,
+      "message": "Nope, already +2\u0027d so feel free to commit.",
+      "parentUuid": "626ebea0_e5940e48",
+      "revId": "3a394ea62160def4800b0df5b9a31e7cdac0bc3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
