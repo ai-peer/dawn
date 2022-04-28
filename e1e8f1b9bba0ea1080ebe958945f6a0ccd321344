@@ -196,6 +196,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5318b908_1563b844",
+        "filename": "tools/src/cts/expectations/parse.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T20:22:43Z",
+      "side": 1,
+      "message": "Yeah, it was funky. Fixed by removing `columnIdx`, and adding a `at` parameter for the `syntaxErr` helper",
+      "parentUuid": "e0204304_ef8e4333",
+      "revId": "e1e8f1b9bba0ea1080ebe958945f6a0ccd321344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8573a89_e8d249ec",
         "filename": "tools/src/cts/expectations/parse.go",
         "patchSetId": 2
