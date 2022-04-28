@@ -16,6 +16,97 @@
       "message": "PTAL, thanks",
       "revId": "88fedaebcdd2151bb16b9e68e0480be13f610dac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37c8b8b2_7e71af22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-28T15:40:33Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "88fedaebcdd2151bb16b9e68e0480be13f610dac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fbadfe3_aa656f27",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-28T15:40:33Z",
+      "side": 1,
+      "message": "nit: This can do\n\n```\nreturn ValidateWGSLProgramExtensions(...);\n```",
+      "revId": "88fedaebcdd2151bb16b9e68e0480be13f610dac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "302bad04_ddc9aef8",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-28T15:40:33Z",
+      "side": 1,
+      "message": "How cheap is it to make an inspector? I think we could move this logic in ReflectShaderUsingTint and store the list of used extensions somewhere in ShaderModuleBase. We\u0027ll most likely need to use them at some point in Dawn to do backend-dependent things (enable FXC options, pipeline instrumentation etc). We could start with an unordered_map but over time I\u0027d expect we\u0027d use a wrapped bitset like ToggleSet.\n\nWDYT?",
+      "revId": "88fedaebcdd2151bb16b9e68e0480be13f610dac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0113123_2162ddfc",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1086,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-28T15:40:33Z",
+      "side": 1,
+      "message": "u-u-nit: uses an extension that\u0027s not enabled maybe? (it\u0027s not disallowed, just not enabled when creating the device).",
+      "range": {
+        "startLine": 1086,
+        "startChar": 55,
+        "endLine": 1086,
+        "endChar": 65
+      },
+      "revId": "88fedaebcdd2151bb16b9e68e0480be13f610dac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be10080e_f8a2c124",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-28T15:40:33Z",
+      "side": 1,
+      "message": "nit: this doesn\u0027t need to be exposed in the header since it is an implementation detail of ValidateAndParseShaderModule",
+      "revId": "88fedaebcdd2151bb16b9e68e0480be13f610dac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
