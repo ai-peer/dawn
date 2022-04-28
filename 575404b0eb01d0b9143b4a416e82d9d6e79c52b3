@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eed08e5_d7597c42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T12:55:03Z",
+      "side": 1,
+      "message": "And kokoro shows me why these got deleted. Sigh... windows.",
+      "revId": "575404b0eb01d0b9143b4a416e82d9d6e79c52b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
