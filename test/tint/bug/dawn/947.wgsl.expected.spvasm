@@ -1,10 +1,10 @@
 ; SPIR-V
 ; Version: 1.3
 ; Generator: Google Tint Compiler; 0
-; Bound: 140
+; Bound: 143
 ; Schema: 0
                OpCapability Shader
-        %118 = OpExtInstImport "GLSL.std.450"
+        %120 = OpExtInstImport "GLSL.std.450"
                OpMemoryModel Logical GLSL450
                OpEntryPoint Vertex %vs_main "vs_main" %VertexIndex_1 %texcoords_1 %position_1 %vertex_point_size
                OpEntryPoint Fragment %fs_main "fs_main" %texcoord_1 %value
@@ -113,12 +113,15 @@
    %float_n1 = OpConstant %float -1
          %87 = OpConstantComposite %v2float %float_1 %float_n1
          %89 = OpConstantComposite %v2float %float_0 %float_1
+         %94 = OpConstantComposite %v2float %float_1 %float_n1
+         %96 = OpConstantComposite %v2float %float_0 %float_1
        %void = OpTypeVoid
-        %103 = OpTypeFunction %void
-        %113 = OpTypeFunction %v4float %v2float
-        %119 = OpConstantComposite %v2float %float_0 %float_0
+        %105 = OpTypeFunction %void
+        %115 = OpTypeFunction %v4float %v2float
+        %121 = OpConstantComposite %v2float %float_0 %float_0
+        %122 = OpConstantComposite %v2float %float_1 %float_1
      %v2bool = OpTypeVector %bool 2
-        %132 = OpTypeSampledImage %27
+        %135 = OpTypeSampledImage %27
 %vs_main_inner = OpFunction %VertexOutputs None %28
 %VertexIndex = OpFunctionParameter %uint
          %32 = OpLabel
@@ -160,64 +163,64 @@
          %91 = OpAccessChain %_ptr_Function_v2float %output %uint_0
          %92 = OpAccessChain %_ptr_Function_v2float %texcoord %VertexIndex
          %93 = OpLoad %v2float %92
-         %94 = OpFMul %v2float %93 %87
-         %95 = OpFAdd %v2float %94 %89
-         %96 = OpAccessChain %_ptr_Uniform_v2float %uniforms %uint_0
-         %97 = OpLoad %v2float %96
-         %98 = OpFMul %v2float %95 %97
-         %99 = OpAccessChain %_ptr_Uniform_v2float %uniforms %uint_1
-        %100 = OpLoad %v2float %99
-        %101 = OpFAdd %v2float %98 %100
-               OpStore %91 %101
+         %95 = OpFMul %v2float %93 %94
+         %97 = OpFAdd %v2float %95 %96
+         %98 = OpAccessChain %_ptr_Uniform_v2float %uniforms %uint_0
+         %99 = OpLoad %v2float %98
+        %100 = OpFMul %v2float %97 %99
+        %101 = OpAccessChain %_ptr_Uniform_v2float %uniforms %uint_1
+        %102 = OpLoad %v2float %101
+        %103 = OpFAdd %v2float %100 %102
+               OpStore %91 %103
                OpBranch %73
          %73 = OpLabel
-        %102 = OpLoad %VertexOutputs %output
-               OpReturnValue %102
+        %104 = OpLoad %VertexOutputs %output
+               OpReturnValue %104
                OpFunctionEnd
-    %vs_main = OpFunction %void None %103
-        %106 = OpLabel
-        %108 = OpLoad %uint %VertexIndex_1
-        %107 = OpFunctionCall %VertexOutputs %vs_main_inner %108
-        %109 = OpCompositeExtract %v2float %107 0
-               OpStore %texcoords_1 %109
-        %110 = OpCompositeExtract %v4float %107 1
-               OpStore %position_1 %110
+    %vs_main = OpFunction %void None %105
+        %108 = OpLabel
+        %110 = OpLoad %uint %VertexIndex_1
+        %109 = OpFunctionCall %VertexOutputs %vs_main_inner %110
+        %111 = OpCompositeExtract %v2float %109 0
+               OpStore %texcoords_1 %111
+        %112 = OpCompositeExtract %v4float %109 1
+               OpStore %position_1 %112
                OpStore %vertex_point_size %float_1
                OpReturn
                OpFunctionEnd
-%tint_discard_func = OpFunction %void None %103
-        %112 = OpLabel
+%tint_discard_func = OpFunction %void None %105
+        %114 = OpLabel
                OpKill
                OpFunctionEnd
-%fs_main_inner = OpFunction %v4float None %113
+%fs_main_inner = OpFunction %v4float None %115
  %texcoord_0 = OpFunctionParameter %v2float
-        %116 = OpLabel
+        %118 = OpLabel
 %clampedTexcoord = OpVariable %_ptr_Function_v2float Function %8
    %srcColor = OpVariable %_ptr_Function_v4float Function %12
-        %117 = OpExtInst %v2float %118 NClamp %texcoord_0 %119 %58
-               OpStore %clampedTexcoord %117
-        %123 = OpLoad %v2float %clampedTexcoord
-        %124 = OpFOrdEqual %v2bool %123 %texcoord_0
-        %122 = OpAll %bool %124
-        %121 = OpLogicalNot %bool %122
-               OpSelectionMerge %126 None
-               OpBranchConditional %121 %127 %126
-        %127 = OpLabel
-        %128 = OpFunctionCall %void %tint_discard_func
+        %119 = OpExtInst %v2float %120 NClamp %texcoord_0 %121 %122
+               OpStore %clampedTexcoord %119
+        %126 = OpLoad %v2float %clampedTexcoord
+        %127 = OpFOrdEqual %v2bool %126 %texcoord_0
+        %125 = OpAll %bool %127
+        %124 = OpLogicalNot %bool %125
+               OpSelectionMerge %129 None
+               OpBranchConditional %124 %130 %129
+        %130 = OpLabel
+        %131 = OpFunctionCall %void %tint_discard_func
                OpReturnValue %12
-        %126 = OpLabel
-        %130 = OpLoad %24 %mySampler
-        %131 = OpLoad %27 %myTexture
-        %133 = OpSampledImage %132 %131 %130
-        %129 = OpImageSampleImplicitLod %v4float %133 %texcoord_0
-               OpStore %srcColor %129
-        %135 = OpLoad %v4float %srcColor
-               OpReturnValue %135
+        %129 = OpLabel
+        %133 = OpLoad %24 %mySampler
+        %134 = OpLoad %27 %myTexture
+        %136 = OpSampledImage %135 %134 %133
+        %132 = OpImageSampleImplicitLod %v4float %136 %texcoord_0
+               OpStore %srcColor %132
+        %138 = OpLoad %v4float %srcColor
+               OpReturnValue %138
                OpFunctionEnd
-    %fs_main = OpFunction %void None %103
-        %137 = OpLabel
-        %139 = OpLoad %v2float %texcoord_1
-        %138 = OpFunctionCall %v4float %fs_main_inner %139
-               OpStore %value %138
+    %fs_main = OpFunction %void None %105
+        %140 = OpLabel
+        %142 = OpLoad %v2float %texcoord_1
+        %141 = OpFunctionCall %v4float %fs_main_inner %142
+               OpStore %value %141
                OpReturn
                OpFunctionEnd
