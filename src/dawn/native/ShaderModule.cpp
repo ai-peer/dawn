@@ -981,10 +981,10 @@ namespace dawn::native {
         tint::Source::File file;
     };
 
-    MaybeError ValidateShaderModuleDescriptor(DeviceBase* device,
-                                              const ShaderModuleDescriptor* descriptor,
-                                              ShaderModuleParseResult* parseResult,
-                                              OwnedCompilationMessages* outMessages) {
+    MaybeError ValidateAndParseShaderModule(DeviceBase* device,
+                                            const ShaderModuleDescriptor* descriptor,
+                                            ShaderModuleParseResult* parseResult,
+                                            OwnedCompilationMessages* outMessages) {
         ASSERT(parseResult != nullptr);
 
         const ChainedStruct* chainedDescriptor = descriptor->nextInChain;
@@ -1049,6 +1049,41 @@ namespace dawn::native {
             DAWN_TRY_ASSIGN(program, ParseWGSL(&tintSource->file, outMessages));
             parseResult->tintProgram = std::make_unique<tint::Program>(std::move(program));
             parseResult->tintSource = std::move(tintSource);
+        }
+
+        // Validations on parsed Tint program.
+        DAWN_TRY(ValidateWGSLProgramExtension(device, parseResult->tintProgram.get(), outMessages));
+
+        return {};
+    }
+
+    MaybeError ValidateWGSLProgramExtension(DeviceBase* device,
+                                            tint::Program* program,
+                                            OwnedCompilationMessages* outMessages) {
+        DAWN_ASSERT(program->IsValid());
+        tint::inspector::Inspector inspector(program);
+        auto enableDirectives = inspector.GetEnableDirectives();
+
+        auto extensionAllowList = device->GetWGSLExtensionAllowList();
+
+        bool hasDisallowedExtension = false;
+        tint::diag::List messages;
+
+        for (auto enable : enableDirectives) {
+            if (extensionAllowList.count(enable.first)) {
+                continue;
+            }
+            hasDisallowedExtension = true;
+            messages.add_error(tint::diag::System::Program,
+                               "Extension " + enable.first + " is not allowed.", enable.second);
+        }
+
+        if (hasDisallowedExtension) {
+            if (outMessages != nullptr) {
+                outMessages->AddMessages(messages);
+            }
+            return DAWN_MAKE_ERROR(InternalErrorType::Validation,
+                                   "Shader module uses disallowed extension.");
         }
 
         return {};

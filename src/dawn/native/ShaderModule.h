@@ -99,10 +99,13 @@ namespace dawn::native {
         std::unique_ptr<TintSource> tintSource;
     };
 
-    MaybeError ValidateShaderModuleDescriptor(DeviceBase* device,
-                                              const ShaderModuleDescriptor* descriptor,
-                                              ShaderModuleParseResult* parseResult,
-                                              OwnedCompilationMessages* outMessages);
+    MaybeError ValidateAndParseShaderModule(DeviceBase* device,
+                                            const ShaderModuleDescriptor* descriptor,
+                                            ShaderModuleParseResult* parseResult,
+                                            OwnedCompilationMessages* outMessages);
+    MaybeError ValidateWGSLProgramExtension(DeviceBase* device,
+                                            tint::Program* program,
+                                            OwnedCompilationMessages* outMessages);
     MaybeError ValidateCompatibilityWithPipelineLayout(DeviceBase* device,
                                                        const EntryPointMetadata& entryPoint,
                                                        const PipelineLayoutBase* layout);

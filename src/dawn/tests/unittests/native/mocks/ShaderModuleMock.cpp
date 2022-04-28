@@ -32,7 +32,7 @@ namespace dawn::native {
         desc.nextInChain = &wgslDesc;
 
         ShaderModuleParseResult parseResult;
-        DAWN_TRY(ValidateShaderModuleDescriptor(device, &desc, &parseResult, nullptr));
+        DAWN_TRY(ValidateAndParseShaderModule(device, &desc, &parseResult, nullptr));
         DAWN_TRY(mock->InitializeBase(&parseResult));
         return AcquireRef(mock);
     }
