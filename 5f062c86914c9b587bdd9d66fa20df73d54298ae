@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31963eb8_a6bb973e",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1678,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T17:01:00Z",
+      "side": 1,
+      "message": "Thanks",
+      "parentUuid": "73eb0e61_d7acfd2c",
+      "revId": "5f062c86914c9b587bdd9d66fa20df73d54298ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a7cc6c3_b370c5f6",
