@@ -2190,6 +2190,13 @@ class ProgramBuilder {
         ast::StatementList{std::forward<STATEMENTS>(statements)...});
   }
 
+  /// A wrapper type for the Else statement used to create If statements.
+  struct ElseStmt {
+    ElseStmt() : stmt(nullptr) {}
+    explicit ElseStmt(const ast::Statement* s) : stmt(s) {}
+    const ast::Statement* stmt;
+  };
+
   /// Creates a ast::IfStatement with input condition, body, and optional
   /// else statement
   /// @param source the source information for the if statement
@@ -2201,9 +2208,9 @@ class ProgramBuilder {
   const ast::IfStatement* If(const Source& source,
                              CONDITION&& condition,
                              const ast::BlockStatement* body,
-                             const ast::Statement* else_stmt = nullptr) {
+                             const ElseStmt else_stmt = ElseStmt()) {
     return create<ast::IfStatement>(
-        source, Expr(std::forward<CONDITION>(condition)), body, else_stmt);
+        source, Expr(std::forward<CONDITION>(condition)), body, else_stmt.stmt);
   }
 
   /// Creates a ast::IfStatement with input condition, body, and optional
@@ -2215,10 +2222,15 @@ class ProgramBuilder {
   template <typename CONDITION>
   const ast::IfStatement* If(CONDITION&& condition,
                              const ast::BlockStatement* body,
-                             const ast::Statement* else_stmt = nullptr) {
+                             const ElseStmt else_stmt = ElseStmt()) {
     return create<ast::IfStatement>(Expr(std::forward<CONDITION>(condition)),
-                                    body, else_stmt);
+                                    body, else_stmt.stmt);
   }
+
+  /// Creates an Else object.
+  /// @param stmt else statement
+  /// @returns the Else object
+  ElseStmt Else(const ast::Statement* stmt) { return ElseStmt(stmt); }
 
   /// Creates a ast::AssignmentStatement with input lhs and rhs expressions
   /// @param source the source information
