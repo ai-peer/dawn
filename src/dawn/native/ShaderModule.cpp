@@ -933,17 +933,23 @@ namespace dawn::native {
             return std::move(metadata);
         }
 
-        ResultOrError<EntryPointMetadataTable> ReflectShaderUsingTint(
-            const DeviceBase* device,
-            const tint::Program* program) {
+        MaybeError ReflectShaderUsingTint(const DeviceBase* device,
+                                          const tint::Program* program,
+                                          EntryPointMetadataTable& entryPointMetadataTable,
+                                          WGSLExtensionsSet& enabledWGSLExtensions) {
             ASSERT(program->IsValid());
 
             tint::inspector::Inspector inspector(program);
+
+            ASSERT(enabledWGSLExtensions.empty());
+            auto usedExtensionNames = inspector.GetUsedExtensionNames();
+            for (std::string name : usedExtensionNames) {
+                enabledWGSLExtensions.insert(name);
+            }
+
             std::vector<tint::inspector::EntryPoint> entryPoints = inspector.GetEntryPoints();
             DAWN_INVALID_IF(inspector.has_error(), "Tint Reflection failure: Inspector: %s\n",
                             inspector.error());
-
-            EntryPointMetadataTable result;
 
             for (const tint::inspector::EntryPoint& entryPoint : entryPoints) {
                 std::unique_ptr<EntryPointMetadata> metadata;
@@ -951,10 +957,10 @@ namespace dawn::native {
                                         ReflectEntryPointUsingTint(device, &inspector, entryPoint),
                                         "processing entry point \"%s\".", entryPoint.name);
 
-                ASSERT(result.count(entryPoint.name) == 0);
-                result[entryPoint.name] = std::move(metadata);
+                ASSERT(entryPointMetadataTable.count(entryPoint.name) == 0);
+                entryPointMetadataTable[entryPoint.name] = std::move(metadata);
             }
-            return std::move(result);
+            return {};
         }
     }  // anonymous namespace
 
@@ -981,10 +987,42 @@ namespace dawn::native {
         tint::Source::File file;
     };
 
-    MaybeError ValidateShaderModuleDescriptor(DeviceBase* device,
-                                              const ShaderModuleDescriptor* descriptor,
-                                              ShaderModuleParseResult* parseResult,
-                                              OwnedCompilationMessages* outMessages) {
+    MaybeError ValidateWGSLProgramExtension(DeviceBase* device,
+                                            tint::Program* program,
+                                            OwnedCompilationMessages* outMessages) {
+        DAWN_ASSERT(program->IsValid());
+        tint::inspector::Inspector inspector(program);
+        auto enableDirectives = inspector.GetEnableDirectives();
+
+        auto extensionAllowList = device->GetWGSLExtensionAllowList();
+
+        bool hasDisallowedExtension = false;
+        tint::diag::List messages;
+
+        for (auto enable : enableDirectives) {
+            if (extensionAllowList.count(enable.first)) {
+                continue;
+            }
+            hasDisallowedExtension = true;
+            messages.add_error(tint::diag::System::Program,
+                               "Extension " + enable.first + " is not allowed.", enable.second);
+        }
+
+        if (hasDisallowedExtension) {
+            if (outMessages != nullptr) {
+                outMessages->AddMessages(messages);
+            }
+            return DAWN_MAKE_ERROR(InternalErrorType::Validation,
+                                   "Shader module uses extension(s) not enabled for its device.");
+        }
+
+        return {};
+    }
+
+    MaybeError ValidateAndParseShaderModule(DeviceBase* device,
+                                            const ShaderModuleDescriptor* descriptor,
+                                            ShaderModuleParseResult* parseResult,
+                                            OwnedCompilationMessages* outMessages) {
         ASSERT(parseResult != nullptr);
 
         const ChainedStruct* chainedDescriptor = descriptor->nextInChain;
@@ -1051,7 +1089,8 @@ namespace dawn::native {
             parseResult->tintSource = std::move(tintSource);
         }
 
-        return {};
+        // Validations on parsed Tint program.
+        return ValidateWGSLProgramExtension(device, parseResult->tintProgram.get(), outMessages);
     }
 
     RequiredBufferSizes ComputeRequiredBufferSizesForLayout(const EntryPointMetadata& entryPoint,
@@ -1331,7 +1370,8 @@ namespace dawn::native {
         mTintProgram = std::move(parseResult->tintProgram);
         mTintSource = std::move(parseResult->tintSource);
 
-        DAWN_TRY_ASSIGN(mEntryPoints, ReflectShaderUsingTint(GetDevice(), mTintProgram.get()));
+        DAWN_TRY(ReflectShaderUsingTint(GetDevice(), mTintProgram.get(), mEntryPoints,
+                                        mEnabledWGSLExtensions));
         return {};
     }
 

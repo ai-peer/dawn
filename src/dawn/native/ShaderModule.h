@@ -53,6 +53,7 @@ namespace tint {
 
 namespace dawn::native {
 
+    using WGSLExtensionsSet = std::unordered_set<std::string>;
     struct EntryPointMetadata;
 
     // Base component type of an inter-stage variable
@@ -99,10 +100,10 @@ namespace dawn::native {
         std::unique_ptr<TintSource> tintSource;
     };
 
-    MaybeError ValidateShaderModuleDescriptor(DeviceBase* device,
-                                              const ShaderModuleDescriptor* descriptor,
-                                              ShaderModuleParseResult* parseResult,
-                                              OwnedCompilationMessages* outMessages);
+    MaybeError ValidateAndParseShaderModule(DeviceBase* device,
+                                            const ShaderModuleDescriptor* descriptor,
+                                            ShaderModuleParseResult* parseResult,
+                                            OwnedCompilationMessages* outMessages);
     MaybeError ValidateCompatibilityWithPipelineLayout(DeviceBase* device,
                                                        const EntryPointMetadata& entryPoint,
                                                        const PipelineLayoutBase* layout);
@@ -306,6 +307,7 @@ namespace dawn::native {
         std::string mWgsl;
 
         EntryPointMetadataTable mEntryPoints;
+        WGSLExtensionsSet mEnabledWGSLExtensions;
         std::unique_ptr<tint::Program> mTintProgram;
         std::unique_ptr<TintSource> mTintSource;  // Keep the tint::Source::File alive
 

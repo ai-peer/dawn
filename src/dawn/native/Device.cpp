@@ -204,6 +204,8 @@ namespace dawn::native {
         mFormatTable = BuildFormatTable(this);
         SetDefaultToggles();
 
+        SetWGSLExtensionAllowList();
+
         if (descriptor->label != nullptr && strlen(descriptor->label) != 0) {
             mLabel = descriptor->label;
         }
@@ -917,11 +919,10 @@ namespace dawn::native {
             if (!parseResult->HasParsedShader()) {
                 // We skip the parse on creation if validation isn't enabled which let's us quickly
                 // lookup in the cache without validating and parsing. We need the parsed module
-                // now, so call validate. Most of |ValidateShaderModuleDescriptor| is parsing, but
-                // we can consider splitting it if additional validation is added.
+                // now.
                 ASSERT(!IsValidationEnabled());
-                DAWN_TRY(ValidateShaderModuleDescriptor(this, descriptor, parseResult,
-                                                        compilationMessages));
+                DAWN_TRY(ValidateAndParseShaderModule(this, descriptor, parseResult,
+                                                      compilationMessages));
             }
             DAWN_TRY_ASSIGN(result, CreateShaderModuleImpl(descriptor, parseResult));
             result->SetIsCachedReference();
@@ -1228,6 +1229,16 @@ namespace dawn::native {
 
     bool DeviceBase::IsFeatureEnabled(Feature feature) const {
         return mEnabledFeatures.IsEnabled(feature);
+    }
+
+    void DeviceBase::SetWGSLExtensionAllowList() {
+        // Set the WGSL extensions allow list based on device's enabled features and other
+        // propority. For example:
+        //     mWGSLExtensionAllowList.insert("InternalExtensionForTesting");
+    }
+
+    WGSLExtensionsSet DeviceBase::GetWGSLExtensionAllowList() const {
+        return mWGSLExtensionAllowList;
     }
 
     bool DeviceBase::IsValidationEnabled() const {
@@ -1594,7 +1605,7 @@ namespace dawn::native {
 
         if (IsValidationEnabled()) {
             DAWN_TRY_CONTEXT(
-                ValidateShaderModuleDescriptor(this, descriptor, &parseResult, compilationMessages),
+                ValidateAndParseShaderModule(this, descriptor, &parseResult, compilationMessages),
                 "validating %s", descriptor);
         }
 

@@ -18,6 +18,7 @@
 #include <memory>
 #include <mutex>
 #include <string>
+#include <unordered_set>
 #include <utility>
 #include <vector>
 
@@ -53,6 +54,8 @@ namespace dawn::native {
     struct CallbackTask;
     struct InternalPipelineStore;
     struct ShaderModuleParseResult;
+
+    using WGSLExtensionsSet = std::unordered_set<std::string>;
 
     class DeviceBase : public RefCounted {
       public:
@@ -317,6 +320,7 @@ namespace dawn::native {
         std::mutex* GetObjectListMutex(ObjectType type);
 
         std::vector<const char*> GetTogglesUsed() const;
+        WGSLExtensionsSet GetWGSLExtensionAllowList() const;
         bool IsFeatureEnabled(Feature feature) const;
         bool IsToggleEnabled(Toggle toggle) const;
         bool IsValidationEnabled() const;
@@ -461,6 +465,8 @@ namespace dawn::native {
 
         void SetDefaultToggles();
 
+        void SetWGSLExtensionAllowList();
+
         void ConsumeError(std::unique_ptr<ErrorData> error);
 
         // Each backend should implement to check their passed fences if there are any and return a
@@ -547,6 +553,7 @@ namespace dawn::native {
 
         CombinedLimits mLimits;
         FeaturesSet mEnabledFeatures;
+        WGSLExtensionsSet mWGSLExtensionAllowList;
 
         std::unique_ptr<InternalPipelineStore> mInternalPipelineStore;
 
