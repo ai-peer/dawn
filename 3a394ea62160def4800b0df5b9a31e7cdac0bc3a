@@ -34,6 +34,24 @@
       "parentUuid": "d7ff74ed_2cbaf16c",
       "revId": "3a394ea62160def4800b0df5b9a31e7cdac0bc3a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc92e715_c350dcbc",
+        "filename": "src/tint/writer/spirv/binary_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T14:34:01Z",
+      "side": 1,
+      "message": "It does require the helper class, but it isn\u0027t specific to this call site, so add it once and all std::visit with lambdas can use it.",
+      "parentUuid": "7c6fd4a4_6dfe18e0",
+      "revId": "3a394ea62160def4800b0df5b9a31e7cdac0bc3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
