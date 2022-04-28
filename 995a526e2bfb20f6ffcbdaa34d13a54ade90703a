@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "119cdaff_4d8db8e3",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-28T10:14:52Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s correct: we know offset \u003e\u003d mMapOffset and mMapOffset \u003c\u003d mSize. That doesn\u0027t tell us anything about offset in relation to mSize.\n\nI suggest checking offset \u003c\u003d mMapSize in the first if of the function.\n\nCan we add a test that would have found this issue?",
+      "revId": "995a526e2bfb20f6ffcbdaa34d13a54ade90703a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2850ff1e_0951d765",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-28T10:14:52Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "995a526e2bfb20f6ffcbdaa34d13a54ade90703a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
