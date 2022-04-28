@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a6bef9b_79a23823",
+        "filename": "tools/src/cts/result/mvt.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T18:52:06Z",
+      "side": 1,
+      "message": "Can a sentence be added here around what happens if a variant can\u0027t be removed? Does the algorithm stop, or does it skip that variant and continue trying to remove following variants?",
+      "revId": "4ff56d4785aac42fd92b17a3cc8b54a69d382986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "814a3d12_250014e2",
+        "filename": "tools/src/cts/result/mvt.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T18:52:06Z",
+      "side": 1,
+      "message": "nit: `\u0027tags\u0027 removed`",
+      "revId": "4ff56d4785aac42fd92b17a3cc8b54a69d382986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "311b9578_44940220",
+        "filename": "tools/src/cts/result/mvt.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T18:52:06Z",
+      "side": 1,
+      "message": "Just to check I\u0027m thinking about this right. When you say `subset` you actually mean the longer set of tags, and `superset` is the shorter list of tags because that shorter list covers a larger number of tests?\n\nIf that\u0027s right maybe `that subsets (more tags) come after the supersets (less tags)` ?",
+      "revId": "4ff56d4785aac42fd92b17a3cc8b54a69d382986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e633ceb5_3175d695",
+        "filename": "tools/src/cts/result/mvt.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T18:52:06Z",
+      "side": 1,
+      "message": "Oh, this is a bit tricky. The `[:i]` is easy to miss and fail to understand that `v2` is the set of things _before_ `v1`. (This then made me think the check below was wrong as I was thinking about the lists the wrong way round).\n\nSo, 2 things:\n\n1. Can you add a comment to point out v2 is the list of strings _before_ v1\n2. What does go do when i \u003d\u003d 0? Does that mean v2 will be the first entry from variants and v1 \u003d\u003d v2?",
+      "revId": "4ff56d4785aac42fd92b17a3cc8b54a69d382986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
