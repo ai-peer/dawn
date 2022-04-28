@@ -16,6 +16,24 @@
       "message": "Can you briefly explain why these types are needed in the semantic tree?\n\nHaving given very little thought to how this is all going to be implemented, I had (maybe naively) assumed that these types would materialized by the Resolver, and that creation-time constants would essentially be folded away.",
       "revId": "5d888764fcd574d45a476621b3ffd0a7dfcf2fb2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9aec396_d3147c5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T18:47:54Z",
+      "side": 1,
+      "message": "TL;DR: They\u0027re not going to get folded away. Abstract integer literals will exist in the AST and will need mapping to these abstract integer semantic types.\n\nConsider: `const C \u003d 12 + 5 - 4;`\n\n`12`, `5`, `4` are all AST integer literals that need to map to a `sem::Expression`, and that `sem::Expression` will need a sem type. As they don\u0027t have suffixes, that type needs to be the new `sem::AbstractInteger` type.\n\n`C` will be a `ast::Variable` which will map to a `sem::Variable`, which will also need an abstract integer type. There\u0027s no way we can map these to a concrete type early, as `C` may be used in multiple places that resolve down to different concrete types.\n\nMuch like what we\u0027ve been doing for `let`, the resolver will track the compile time values for all of this, which are obtainable via the `sem::Constant` on the expression.\n\nYes - unfortunately, this means that everything downstream of the resolver will have to handle these abstract types. I\u0027m hoping that this won\u0027t be too bad though. I might regret saying this though.",
+      "parentUuid": "69242c74_e09a2cfb",
+      "revId": "5d888764fcd574d45a476621b3ffd0a7dfcf2fb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
