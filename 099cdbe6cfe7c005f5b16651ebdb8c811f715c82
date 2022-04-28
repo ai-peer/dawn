@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd0713ea_3ce1eda6",
+        "filename": "src/tint/ast/if_statement.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-04-28T16:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84db215f_12ad1d7e",
+      "range": {
+        "startLine": 31,
+        "startChar": 21,
+        "endLine": 31,
+        "endChar": 30
+      },
+      "revId": "099cdbe6cfe7c005f5b16651ebdb8c811f715c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7834286f_cd15ae9c",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-04-27T17:43:01Z",
       "side": 1,
       "message": "Everything about this change is great and feels right, except for the fact that our ProgramBuilder DSL is less clear now for building if-elseif-else chains. Maybe we can improve this by adding an `IfElseChain` function that takes a series of conditions and statements, something like:\n\n```\nstruct IfCond { const ast::IfStatement* if_stmt, const ast::Expression* cond };\nast::IfStatement* IfElseChain(std::initializer_list\u003cIfCond\u003e if_conds);\n```\n\nThen code like this would look like:\n\n```\nb1.IfElseChain({\n    {b1.Expr(true), b1.Block()},\n    {b2.If(b2.Expr(\"ident\"), b2.Block())}\n});\n```\n\nIf we want just an \u0027else\u0027 branch, I guess we\u0027d make the condition nullptr. Maybe we could do this in the future, though we\u0027d have more trouble back-porting the existing cases.",
+      "range": {
+        "startLine": 92,
+        "startChar": 41,
+        "endLine": 92,
+        "endChar": 46
+      },
+      "revId": "099cdbe6cfe7c005f5b16651ebdb8c811f715c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef39d26b_e5524af9",
+        "filename": "src/tint/ast/if_statement_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-04-28T16:49:34Z",
+      "side": 1,
+      "message": "An alternative approach would be to have some aliased builder function names:\n```\nElseIf() \u003d\u003e If()\nElse() \u003d\u003e Block()\n```\n\nThat way, you could write code for if-else chains like this:\n```\nb.If(b.Expr(\"a\"), b.Block(), //\n     b.ElseIf(b.Expr(\"b\"), b.Block(), //\n              b.ElseIf(b.Expr(\"c\"), b.Block(), //\n                       b.Else())));\n```\n\nDiscussed briefly offline with Antonio, who raised concerns about having aliased functions in the builder.\n\nWDYT, Ben?",
+      "parentUuid": "7834286f_cd15ae9c",
       "range": {
         "startLine": 92,
         "startChar": 41,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a88877c0_cdafadc2",
+        "filename": "src/tint/transform/utils/hoist_to_decl_before.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-04-28T16:49:34Z",
+      "side": 1,
+      "message": "You\u0027re right, I\u0027ve done this simplification. I had to use `Replace` on each else-if instead of `ReplaceAll`.\n\nPTAL!",
+      "parentUuid": "1bebf1f1_cff9a225",
+      "range": {
+        "startLine": 120,
+        "startChar": 2,
+        "endLine": 120,
+        "endChar": 37
+      },
+      "revId": "099cdbe6cfe7c005f5b16651ebdb8c811f715c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "df2d5d9d_3a46ef68",
         "filename": "src/tint/transform/utils/hoist_to_decl_before.cc",
         "patchSetId": 3
@@ -83,6 +155,30 @@
       "writtenOn": "2022-04-27T17:43:01Z",
       "side": 1,
       "message": "Yeah, these comments make a bit less sense now. Should be reworded to:\n\nThis if statement has an \"else if\" that need to be converted to \"else { if }\"",
+      "range": {
+        "startLine": 139,
+        "startChar": 6,
+        "endLine": 140,
+        "endChar": 17
+      },
+      "revId": "099cdbe6cfe7c005f5b16651ebdb8c811f715c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33e55621_81554ac0",
+        "filename": "src/tint/transform/utils/hoist_to_decl_before.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-04-28T16:49:34Z",
+      "side": 1,
+      "message": "Done - deleted with further simplification.",
+      "parentUuid": "df2d5d9d_3a46ef68",
       "range": {
         "startLine": 139,
         "startChar": 6,
@@ -116,6 +212,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a731d9e5_11fe436d",
+        "filename": "src/tint/transform/utils/hoist_to_decl_before.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-04-28T16:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4285de94_7816f2af",
+      "range": {
+        "startLine": 160,
+        "startChar": 6,
+        "endLine": 161,
+        "endChar": 22
+      },
+      "revId": "099cdbe6cfe7c005f5b16651ebdb8c811f715c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80c81306_71a8c5f9",
@@ -139,6 +259,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ab6f3df_69cc2b1b",
+        "filename": "src/tint/transform/utils/hoist_to_decl_before.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-04-28T16:49:34Z",
+      "side": 1,
+      "message": "Done - deleted with further simplification.",
+      "parentUuid": "80c81306_71a8c5f9",
+      "range": {
+        "startLine": 164,
+        "startChar": 6,
+        "endLine": 164,
+        "endChar": 57
+      },
+      "revId": "099cdbe6cfe7c005f5b16651ebdb8c811f715c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a164213_aef1b017",
@@ -152,6 +296,30 @@
       "writtenOn": "2022-04-27T17:43:01Z",
       "side": 1,
       "message": "We\u0027re duplicating the type checks here with both `Is` calls in the if condition above, and both `As` calls here. Replace with something like:\n\n```\nauto* else_if \u003d before_stmt-\u003eAs\u003csem::IfStatement\u003e();\nauto* else_if_parent \u003d else_if ? else_if-\u003eParent()-\u003eAs\u003csem::IfStatement\u003e() :  nullptr;\nif (else_if \u0026\u0026 else_if_parent) {\n    auto\u0026 if_info \u003d ifs[else_if_parent];\n}\n```",
+      "range": {
+        "startLine": 219,
+        "startChar": 6,
+        "endLine": 220,
+        "endChar": 69
+      },
+      "revId": "099cdbe6cfe7c005f5b16651ebdb8c811f715c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f8e0569_78d424de",
+        "filename": "src/tint/transform/utils/hoist_to_decl_before.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-04-28T16:49:34Z",
+      "side": 1,
+      "message": "Done. Did something similar.",
+      "parentUuid": "5a164213_aef1b017",
       "range": {
         "startLine": 219,
         "startChar": 6,
