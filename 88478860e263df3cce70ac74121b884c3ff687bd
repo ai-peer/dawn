@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7130fa6c_a8909fe4",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T15:00:02Z",
+      "side": 1,
+      "message": "Is the mirror best effort, or will it always be kept buildable and up to date?",
+      "parentUuid": "181a0b28_3bae50c9",
+      "revId": "88478860e263df3cce70ac74121b884c3ff687bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d554cfaf_8e48dc6e",
         "filename": "docs/building.md",
         "patchSetId": 1
@@ -65,6 +83,30 @@
       "writtenOn": "2022-04-28T14:27:44Z",
       "side": 1,
       "message": "Is this section accurate/still needed?",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 3
+      },
+      "revId": "88478860e263df3cce70ac74121b884c3ff687bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa8f086c_7a322b10",
+        "filename": "docs/building.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T15:00:02Z",
+      "side": 1,
+      "message": "Good question, I don\u0027t know. I can remove it if that\u0027s the concensus.",
+      "parentUuid": "d554cfaf_8e48dc6e",
       "range": {
         "startLine": 91,
         "startChar": 0,
