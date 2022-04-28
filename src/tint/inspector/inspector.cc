@@ -249,6 +249,9 @@ std::map<uint32_t, Scalar> Inspector::GetConstantIDs() {
         if (auto* l = literal->As<ast::IntLiteralExpression>()) {
             switch (l->suffix) {
                 case ast::IntLiteralExpression::Suffix::kNone:
+                    TINT_ICE(Inspector, diagnostics_)
+                        << "TODO(crbug.com/tint/1504): Support abstract int";
+                    continue;
                 case ast::IntLiteralExpression::Suffix::kI:
                     result[constant_id] = Scalar(static_cast<int32_t>(l->value));
                     continue;
