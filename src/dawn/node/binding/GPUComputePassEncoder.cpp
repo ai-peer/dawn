@@ -38,6 +38,20 @@ namespace wgpu::binding {
         enc_.SetPipeline(*pipeline.As<GPUComputePipeline>());
     }
 
+    void GPUComputePassEncoder::dispatchWorkgroups(Napi::Env,
+                                                   interop::GPUSize32 workgroupCountX,
+                                                   interop::GPUSize32 workgroupCountY,
+                                                   interop::GPUSize32 workgroupCountZ) {
+        enc_.DispatchWorkgroups(workgroupCountX, workgroupCountY, workgroupCountZ);
+    }
+
+    void GPUComputePassEncoder::dispatchWorkgroupsIndirect(
+        Napi::Env,
+        interop::Interface<interop::GPUBuffer> indirectBuffer,
+        interop::GPUSize64 indirectOffset) {
+        enc_.DispatchWorkgroupsIndirect(*indirectBuffer.As<GPUBuffer>(), indirectOffset);
+    }
+
     void GPUComputePassEncoder::dispatch(Napi::Env,
                                          interop::GPUSize32 workgroupCountX,
                                          interop::GPUSize32 workgroupCountY,
