@@ -594,12 +594,12 @@ TEST_P(IntegerTest_HexSigned, Matches) {
     Lexer l(&file);
 
     auto t = l.next();
-    EXPECT_TRUE(t.Is(Token::Type::kSintLiteral));
+    EXPECT_TRUE(t.Is(Token::Type::kIntLiteral));
     EXPECT_EQ(t.source().range.begin.line, 1u);
     EXPECT_EQ(t.source().range.begin.column, 1u);
     EXPECT_EQ(t.source().range.end.line, 1u);
     EXPECT_EQ(t.source().range.end.column, 1u + strlen(params.input));
-    EXPECT_EQ(t.to_i32(), params.result);
+    EXPECT_EQ(t.to_i64(), params.result);
 }
 INSTANTIATE_TEST_SUITE_P(
     LexerTest,
@@ -709,12 +709,12 @@ TEST_P(IntegerTest_HexUnsigned, Matches) {
     Lexer l(&file);
 
     auto t = l.next();
-    EXPECT_TRUE(t.Is(Token::Type::kUintLiteral));
+    EXPECT_TRUE(t.Is(Token::Type::kIntLiteral));
     EXPECT_EQ(t.source().range.begin.line, 1u);
     EXPECT_EQ(t.source().range.begin.column, 1u);
     EXPECT_EQ(t.source().range.end.line, 1u);
     EXPECT_EQ(t.source().range.end.column, 1u + strlen(params.input));
-    EXPECT_EQ(t.to_u32(), params.result);
+    EXPECT_EQ(t.to_i64(), params.result);
 
     t = l.next();
     EXPECT_TRUE(t.IsEof());
@@ -752,8 +752,8 @@ TEST_P(IntegerTest_Unsigned, Matches) {
     Lexer l(&file);
 
     auto t = l.next();
-    EXPECT_TRUE(t.Is(Token::Type::kUintLiteral));
-    EXPECT_EQ(t.to_u32(), params.result);
+    EXPECT_TRUE(t.Is(Token::Type::kIntULiteral));
+    EXPECT_EQ(t.to_i64(), params.result);
     EXPECT_EQ(t.source().range.begin.line, 1u);
     EXPECT_EQ(t.source().range.begin.column, 1u);
     EXPECT_EQ(t.source().range.end.line, 1u);
@@ -789,8 +789,8 @@ TEST_P(IntegerTest_Signed, Matches) {
     Lexer l(&file);
 
     auto t = l.next();
-    EXPECT_TRUE(t.Is(Token::Type::kSintLiteral));
-    EXPECT_EQ(t.to_i32(), params.result);
+    EXPECT_TRUE(t.Is(Token::Type::kIntLiteral));
+    EXPECT_EQ(t.to_i64(), params.result);
     EXPECT_EQ(t.source().range.begin.line, 1u);
     EXPECT_EQ(t.source().range.begin.column, 1u);
     EXPECT_EQ(t.source().range.end.line, 1u);
@@ -820,8 +820,9 @@ TEST_P(IntegerTest_Invalid, Parses) {
     Lexer l(&file);
 
     auto t = l.next();
-    EXPECT_FALSE(t.Is(Token::Type::kSintLiteral));
-    EXPECT_FALSE(t.Is(Token::Type::kUintLiteral));
+    EXPECT_FALSE(t.Is(Token::Type::kIntLiteral));
+    EXPECT_FALSE(t.Is(Token::Type::kIntULiteral));
+    EXPECT_FALSE(t.Is(Token::Type::kIntILiteral));
 }
 INSTANTIATE_TEST_SUITE_P(
     LexerTest,

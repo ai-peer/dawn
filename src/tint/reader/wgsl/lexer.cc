@@ -79,6 +79,23 @@ uint32_t hex_value(char c) {
     return 0;
 }
 
+enum class LimitCheck {
+    kWithinLimits,
+    kTooSmall,
+    kTooLarge,
+};
+
+template <typename T>
+LimitCheck check_limits(T value) {
+    if (value < static_cast<T>(std::numeric_limits<T>::min())) {
+        return LimitCheck::kTooSmall;
+    }
+    if (value > static_cast<T>(std::numeric_limits<T>::max())) {
+        return LimitCheck::kTooLarge;
+    }
+    return LimitCheck::kWithinLimits;
+}
+
 }  // namespace
 
 Lexer::Lexer(const Source::File* file) : file_(file), location_{1, 1} {}
@@ -667,35 +684,43 @@ Token Lexer::build_token_from_int_if_possible(Source source,
                                               int32_t base) {
     auto res = strtoll(&at(start), nullptr, base);
 
+    auto str = [&] { return std::string{substr(start, end - start)}; };
+
     if (matches(pos(), "u")) {
-        if (res < 0) {
-            return {Token::Type::kError, source,
-                    "u32 (" + std::string{substr(start, end - start)} + ") must not be negative"};
+        switch (check_limits<uint32_t>(res)) {
+            case LimitCheck::kTooSmall:
+                return {Token::Type::kError, source, "u32 cannot be negative"};
+            case LimitCheck::kTooLarge:
+                return {Token::Type::kError, source, str() + " too large for u32"};
+            default:
+                advance(1);
+                end_source(source);
+                return {Token::Type::kIntULiteral, source, res};
         }
-        if (static_cast<uint64_t>(res) >
-            static_cast<uint64_t>(std::numeric_limits<uint32_t>::max())) {
-            return {Token::Type::kError, source,
-                    "u32 (" + std::string{substr(start, end - start)} + ") too large"};
-        }
-        advance(1);
-        end_source(source);
-        return {source, static_cast<uint32_t>(res)};
     }
 
     if (matches(pos(), "i")) {
-        advance(1);
+        switch (check_limits<int32_t>(res)) {
+            case LimitCheck::kTooSmall:
+                return {Token::Type::kError, source, str() + " too small for i32"};
+            case LimitCheck::kTooLarge:
+                return {Token::Type::kError, source, str() + " too large for i32"};
+            default:
+                advance(1);
+                end_source(source);
+                return {Token::Type::kIntILiteral, source, res};
+        }
     }
 
-    if (res < static_cast<int64_t>(std::numeric_limits<int32_t>::min())) {
-        return {Token::Type::kError, source,
-                "i32 (" + std::string{substr(start, end - start)} + ") too small"};
+    switch (check_limits<int64_t>(res)) {
+        case LimitCheck::kTooSmall:
+            return {Token::Type::kError, source, str() + " too small for abstract int"};
+        case LimitCheck::kTooLarge:
+            return {Token::Type::kError, source, str() + " too large for abstract int"};
+        default:
+            end_source(source);
+            return {Token::Type::kIntLiteral, source, res};
     }
-    if (res > static_cast<int64_t>(std::numeric_limits<int32_t>::max())) {
-        return {Token::Type::kError, source,
-                "i32 (" + std::string{substr(start, end - start)} + ") too large"};
-    }
-    end_source(source);
-    return {source, static_cast<int32_t>(res)};
 }
 
 Token Lexer::try_hex_integer() {

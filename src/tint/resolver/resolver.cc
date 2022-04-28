@@ -1525,10 +1525,28 @@ sem::Call* Resolver::TypeConstructor(const ast::CallExpression* expr,
 }
 
 sem::Expression* Resolver::Literal(const ast::LiteralExpression* literal) {
-    auto* ty = sem_.TypeOf(literal);
-    if (!ty) {
-        return nullptr;
-    }
+    auto* ty = Switch(
+        literal,
+        [&](const ast::IntLiteralExpression* i) -> sem::Type* {
+            switch (i->suffix) {
+                case ast::IntLiteralExpression::Suffix::kNone:
+                    TINT_ICE(Resolver, diagnostics_)
+                        << "TODO(crbug.com/tint/1504): Support abstract int";
+                    return nullptr;
+                case ast::IntLiteralExpression::Suffix::kI:
+                    break;
+                case ast::IntLiteralExpression::Suffix::kU:
+                    return builder_->create<sem::U32>();
+            }
+            return builder_->create<sem::I32>();
+        },
+        [&](const ast::FloatLiteralExpression*) { return builder_->create<sem::F32>(); },
+        [&](const ast::BoolLiteralExpression*) { return builder_->create<sem::Bool>(); },
+        [&](Default) {
+            TINT_UNREACHABLE(Resolver, builder_->Diagnostics())
+                << "Unhandled literal type: " << literal->TypeInfo().name;
+            return nullptr;
+        });
 
     auto val = EvaluateConstantValue(literal, ty);
     return builder_->create<sem::Expression>(literal, ty, current_statement_, val,

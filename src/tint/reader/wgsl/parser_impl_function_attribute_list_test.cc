@@ -37,8 +37,12 @@ TEST_F(ParserImplTest, AttributeList_Parses) {
     auto* x_literal = x->As<ast::LiteralExpression>();
     ASSERT_NE(x_literal, nullptr);
     ASSERT_TRUE(x_literal->Is<ast::IntLiteralExpression>());
-    EXPECT_EQ(x_literal->As<ast::IntLiteralExpression>()->ValueAsU32(), 2u);
-
+    EXPECT_EQ(x_literal->As<ast::IntLiteralExpression>()->value, 2);
+    // TODO(crbug.com/tint/1504): Support abstract int
+    // EXPECT_EQ(x_literal->As<ast::IntLiteralExpression>()->suffix,
+    //           ast::IntLiteralExpression::Suffix::kNone);
+    EXPECT_EQ(x_literal->As<ast::IntLiteralExpression>()->suffix,
+              ast::IntLiteralExpression::Suffix::kI);
     ASSERT_TRUE(attr_1->Is<ast::StageAttribute>());
     EXPECT_EQ(attr_1->As<ast::StageAttribute>()->stage, ast::PipelineStage::kCompute);
 }
