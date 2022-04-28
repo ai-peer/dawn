@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08e03d69_9b11c8c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-28T16:25:48Z",
+      "side": 1,
+      "message": "LGTM - Corentin, could you take a look as well?",
+      "revId": "4e465345a93e57aa024d019db191355a805b6073",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bdd6b79_32b6962b",
+        "filename": "src/dawn/native/vulkan/ComputePipelineVk.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-28T16:25:48Z",
+      "side": 1,
+      "message": "nit: I think you could do Ref\u003cPipelineCache\u003e cache \u003d ToBackend(GetDevice()-\u003e...);",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 89,
+        "endChar": 12
+      },
+      "revId": "4e465345a93e57aa024d019db191355a805b6073",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
