@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56131692_2ceb780f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T20:13:22Z",
+      "side": 1,
+      "message": "lgtm w/ nits",
+      "revId": "bfaf1b249b74c448d885a8a7f964b5519855b61c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acf1f071_62c7cd20",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T20:13:22Z",
+      "side": 1,
+      "message": "nit: `have been removed`",
+      "revId": "bfaf1b249b74c448d885a8a7f964b5519855b61c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f93dcf64_37f144af",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T20:13:22Z",
+      "side": 1,
+      "message": "Didn\u0027t we keep `result.Slow` in the case above?",
+      "revId": "bfaf1b249b74c448d885a8a7f964b5519855b61c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6e1456e_0d505e36",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T20:13:22Z",
+      "side": 1,
+      "message": "nit: the the",
+      "revId": "bfaf1b249b74c448d885a8a7f964b5519855b61c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4f090c7_5d8abb26",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T20:13:22Z",
+      "side": 1,
+      "message": "I think this comment is incomplete?",
+      "revId": "bfaf1b249b74c448d885a8a7f964b5519855b61c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
