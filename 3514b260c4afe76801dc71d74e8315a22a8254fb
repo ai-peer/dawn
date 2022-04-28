@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7efdd854_6f201eac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T15:01:11Z",
+      "side": 1,
+      "message": "LGTM. The std::visit can be skipped if desired, wasn\u0027t sure from your comment if you were looking into it and asking questions or preferring to not do it.",
+      "revId": "3514b260c4afe76801dc71d74e8315a22a8254fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
