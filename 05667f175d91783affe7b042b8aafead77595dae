@@ -16,6 +16,23 @@
       "message": "PTAL! I thought this had already been updated, but I guess not?\n\nAlso, I\u0027m unsure what the best practice is for deprecations the node bindings, so pointers there would be welcome!",
       "revId": "05667f175d91783affe7b042b8aafead77595dae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e8e74e9_098de43c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-28T18:13:05Z",
+      "side": 1,
+      "message": "LGTM. I defer to Ben for the deprecation policy for dawn/node\n\nI would think we need to keep both until CTS is updated (maybe it already is) and the .idl file from which the bindings are generated gets rolled (I think)",
+      "revId": "05667f175d91783affe7b042b8aafead77595dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
