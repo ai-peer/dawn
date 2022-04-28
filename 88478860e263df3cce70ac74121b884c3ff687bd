@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "838a29ac_7ab39a08",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T15:18:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b07052dc_c834e48b",
+      "revId": "88478860e263df3cce70ac74121b884c3ff687bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d554cfaf_8e48dc6e",
@@ -125,6 +143,30 @@
       "side": 1,
       "message": "Good question, I don\u0027t know. I can remove it if that\u0027s the concensus.",
       "parentUuid": "d554cfaf_8e48dc6e",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 3
+      },
+      "revId": "88478860e263df3cce70ac74121b884c3ff687bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d985b9b_998229a9",
+        "filename": "docs/building.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-04-28T15:18:55Z",
+      "side": 1,
+      "message": "Removed the section as this can be checked with the GN build if we want.",
+      "parentUuid": "aa8f086c_7a322b10",
       "range": {
         "startLine": 91,
         "startChar": 0,
