@@ -126,6 +126,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "19fab4d0_747e35dc",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-28T11:54:30Z",
+      "side": 1,
+      "message": "Whoops, done. PTAL again.",
+      "parentUuid": "24e2d70f_8ad0eb5b",
+      "range": {
+        "startLine": 161,
+        "startChar": 12,
+        "endLine": 162,
+        "endChar": 40
+      },
+      "revId": "59df7c953d95fb84217e195d6e23362c37e3b76d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4a3a9ae7_28bbb65e",
         "filename": "src/dawn/native/metal/UtilsMetal.mm",
         "patchSetId": 7
