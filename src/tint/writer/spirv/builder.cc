@@ -754,11 +754,9 @@ bool Builder::GenerateGlobalVariable(const ast::Variable* var) {
       if (type->Is<sem::F32>()) {
         ast::FloatLiteralExpression l(ProgramID(), Source{}, 0.0f);
         init_id = GenerateLiteralIfNeeded(var, &l);
-      } else if (type->Is<sem::U32>()) {
-        ast::UintLiteralExpression l(ProgramID(), Source{}, 0);
-        init_id = GenerateLiteralIfNeeded(var, &l);
-      } else if (type->Is<sem::I32>()) {
-        ast::SintLiteralExpression l(ProgramID(), Source{}, 0);
+      } else if (type->IsAnyOf<sem::U32, sem::I32>()) {
+        ast::IntLiteralExpression l(ProgramID(), Source{}, 0,
+                                    ast::IntLiteralExpression::Suffix::kNone);
         init_id = GenerateLiteralIfNeeded(var, &l);
       } else if (type->Is<sem::Bool>()) {
         ast::BoolLiteralExpression l(ProgramID(), Source{}, false);
@@ -1590,20 +1588,14 @@ uint32_t Builder::GenerateCastOrCopyOrPassthrough(
     uint32_t one_id;
     uint32_t zero_id;
     if (to_elem_type->Is<sem::F32>()) {
-      ast::FloatLiteralExpression one(ProgramID(), Source{}, 1.0f);
-      ast::FloatLiteralExpression zero(ProgramID(), Source{}, 0.0f);
-      one_id = GenerateLiteralIfNeeded(nullptr, &one);
-      zero_id = GenerateLiteralIfNeeded(nullptr, &zero);
+      one_id = GenerateConstantIfNeeded(ScalarConstant::F32(0));
+      zero_id = GenerateConstantIfNeeded(ScalarConstant::F32(1));
     } else if (to_elem_type->Is<sem::U32>()) {
-      ast::UintLiteralExpression one(ProgramID(), Source{}, 1);
-      ast::UintLiteralExpression zero(ProgramID(), Source{}, 0);
-      one_id = GenerateLiteralIfNeeded(nullptr, &one);
-      zero_id = GenerateLiteralIfNeeded(nullptr, &zero);
+      one_id = GenerateConstantIfNeeded(ScalarConstant::U32(0));
+      zero_id = GenerateConstantIfNeeded(ScalarConstant::U32(1));
     } else if (to_elem_type->Is<sem::I32>()) {
-      ast::SintLiteralExpression one(ProgramID(), Source{}, 1);
-      ast::SintLiteralExpression zero(ProgramID(), Source{}, 0);
-      one_id = GenerateLiteralIfNeeded(nullptr, &one);
-      zero_id = GenerateLiteralIfNeeded(nullptr, &zero);
+      one_id = GenerateConstantIfNeeded(ScalarConstant::I32(0));
+      zero_id = GenerateConstantIfNeeded(ScalarConstant::I32(1));
     } else {
       error_ = "invalid destination type for bool conversion";
       return false;
@@ -1661,17 +1653,22 @@ uint32_t Builder::GenerateLiteralIfNeeded(const ast::Variable* var,
         constant.kind = ScalarConstant::Kind::kBool;
         constant.value.b = l->value;
       },
-      [&](const ast::SintLiteralExpression* sl) {
-        constant.kind = ScalarConstant::Kind::kI32;
-        constant.value.i32 = sl->value;
+      [&](const ast::IntLiteralExpression* i) {
+        switch (i->suffix) {
+          case ast::IntLiteralExpression::Suffix::kI:
+          case ast::IntLiteralExpression::Suffix::kNone:
+            constant.kind = ScalarConstant::Kind::kI32;
+            constant.value.i32 = static_cast<int32_t>(i->value);
+            return;
+          case ast::IntLiteralExpression::Suffix::kU:
+            constant.kind = ScalarConstant::Kind::kU32;
+            constant.value.u32 = static_cast<uint32_t>(i->value);
+            return;
+        }
       },
-      [&](const ast::UintLiteralExpression* ul) {
-        constant.kind = ScalarConstant::Kind::kU32;
-        constant.value.u32 = ul->value;
-      },
-      [&](const ast::FloatLiteralExpression* fl) {
+      [&](const ast::FloatLiteralExpression* f) {
         constant.kind = ScalarConstant::Kind::kF32;
-        constant.value.f32 = fl->value;
+        constant.value.f32 = f->value;
       },
       [&](Default) { error_ = "unknown literal type"; });
 
@@ -2790,10 +2787,9 @@ bool Builder::GenerateTextureBuiltin(const sem::Call* call,
         op = spv::Op::OpImageQuerySizeLod;
         spirv_params.emplace_back(gen(level));
       } else {
-        ast::SintLiteralExpression i32_0(ProgramID(), Source{}, 0);
         op = spv::Op::OpImageQuerySizeLod;
         spirv_params.emplace_back(
-            Operand::Int(GenerateLiteralIfNeeded(nullptr, &i32_0)));
+            Operand::Int(GenerateConstantIfNeeded(ScalarConstant::I32(0))));
       }
       break;
     }
@@ -2822,10 +2818,9 @@ bool Builder::GenerateTextureBuiltin(const sem::Call* call,
           texture_type->Is<sem::StorageTexture>()) {
         op = spv::Op::OpImageQuerySize;
       } else {
-        ast::SintLiteralExpression i32_0(ProgramID(), Source{}, 0);
         op = spv::Op::OpImageQuerySizeLod;
         spirv_params.emplace_back(
-            Operand::Int(GenerateLiteralIfNeeded(nullptr, &i32_0)));
+            Operand::Int(GenerateConstantIfNeeded(ScalarConstant::I32(0))));
       }
       break;
     }
@@ -3525,7 +3520,7 @@ bool Builder::GenerateSwitchStatement(const ast::SwitchStatement* stmt) {
         return false;
       }
 
-      params.push_back(Operand::Int(int_literal->ValueAsU32()));
+      params.push_back(Operand::Int(static_cast<uint32_t>(int_literal->value)));
       params.push_back(Operand::Int(block_id));
     }
   }

@@ -3145,12 +3145,16 @@ bool GeneratorImpl::EmitLiteral(std::ostream& out,
         }
         return true;
       },
-      [&](const ast::SintLiteralExpression* sl) {
-        out << sl->value;
-        return true;
-      },
-      [&](const ast::UintLiteralExpression* ul) {
-        out << ul->value << "u";
+      [&](const ast::IntLiteralExpression* i) {
+        out << i->value;
+        switch (i->suffix) {
+          case ast::IntLiteralExpression::Suffix::kNone:
+          case ast::IntLiteralExpression::Suffix::kI:
+            break;
+          case ast::IntLiteralExpression::Suffix::kU:
+            out << "u";
+            break;
+        }
         return true;
       },
       [&](Default) {

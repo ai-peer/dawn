@@ -1379,11 +1379,13 @@ bool ParserImpl::EmitScalarSpecConstants() {
         ast_type = ConvertType(inst.type_id());
         const uint32_t literal_value = inst.GetSingleWordInOperand(0);
         if (ast_type->Is<I32>()) {
-          ast_expr = create<ast::SintLiteralExpression>(
-              Source{}, static_cast<int32_t>(literal_value));
+          ast_expr = create<ast::IntLiteralExpression>(
+              Source{}, static_cast<int64_t>(literal_value),
+              ast::IntLiteralExpression::Suffix::kI);
         } else if (ast_type->Is<U32>()) {
-          ast_expr = create<ast::UintLiteralExpression>(
-              Source{}, static_cast<uint32_t>(literal_value));
+          ast_expr = create<ast::IntLiteralExpression>(
+              Source{}, static_cast<uint64_t>(literal_value),
+              ast::IntLiteralExpression::Suffix::kU);
         } else if (ast_type->Is<F32>()) {
           float float_value;
           // Copy the bits so we can read them as a float.
@@ -1970,12 +1972,14 @@ TypedExpression ParserImpl::MakeConstantExpressionForScalarSpirvConstant(
   // Currently "null<type>" is missing from the WGSL parser.
   // See https://bugs.chromium.org/p/tint/issues/detail?id=34
   if (ast_type->Is<U32>()) {
-    return {ty_.U32(),
-            create<ast::UintLiteralExpression>(source, spirv_const->GetU32())};
+    return {ty_.U32(), create<ast::IntLiteralExpression>(
+                           source, spirv_const->GetU32(),
+                           ast::IntLiteralExpression::Suffix::kU)};
   }
   if (ast_type->Is<I32>()) {
-    return {ty_.I32(),
-            create<ast::SintLiteralExpression>(source, spirv_const->GetS32())};
+    return {ty_.I32(), create<ast::IntLiteralExpression>(
+                           source, spirv_const->GetS32(),
+                           ast::IntLiteralExpression::Suffix::kI)};
   }
   if (ast_type->Is<F32>()) {
     return {ty_.F32(), create<ast::FloatLiteralExpression>(
@@ -2009,10 +2013,12 @@ const ast::Expression* ParserImpl::MakeNullValue(const Type* type) {
     return create<ast::BoolLiteralExpression>(Source{}, false);
   }
   if (type->Is<U32>()) {
-    return create<ast::UintLiteralExpression>(Source{}, 0u);
+    return create<ast::IntLiteralExpression>(
+        Source{}, 0, ast::IntLiteralExpression::Suffix::kU);
   }
   if (type->Is<I32>()) {
-    return create<ast::SintLiteralExpression>(Source{}, 0);
+    return create<ast::IntLiteralExpression>(
+        Source{}, 0, ast::IntLiteralExpression::Suffix::kI);
   }
   if (type->Is<F32>()) {
     return create<ast::FloatLiteralExpression>(Source{}, 0.0f);
