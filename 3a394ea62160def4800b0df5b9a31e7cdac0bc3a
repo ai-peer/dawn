@@ -52,6 +52,24 @@
       "parentUuid": "7c6fd4a4_6dfe18e0",
       "revId": "3a394ea62160def4800b0df5b9a31e7cdac0bc3a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "626ebea0_e5940e48",
+        "filename": "src/tint/writer/spirv/binary_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-28T15:09:21Z",
+      "side": 1,
+      "message": "I was under the impression that the visit pattern was very poorly optimized for most compilers. Can do it if you feel strongly.",
+      "parentUuid": "fc92e715_c350dcbc",
+      "revId": "3a394ea62160def4800b0df5b9a31e7cdac0bc3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
