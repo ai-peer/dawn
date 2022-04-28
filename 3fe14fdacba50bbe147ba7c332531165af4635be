@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "3fe14fdacba50bbe147ba7c332531165af4635be",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a6a0b80_181a875c",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-28T23:47:22Z",
+      "side": 1,
+      "message": "This workaround has side-effect for cts.\nAlternatively we can change the chromium callsites to use explicit map size (buffer size) first(https://chromium-review.googlesource.com/c/chromium/src/+/3615789), land the dawn change, and change chromium callsites back to use WGPU_WHOLE_MAP_SIZE",
+      "revId": "3fe14fdacba50bbe147ba7c332531165af4635be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
