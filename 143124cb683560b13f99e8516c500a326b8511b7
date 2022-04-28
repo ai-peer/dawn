@@ -120,6 +120,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d65faeb_d8f4ad66",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-28T18:11:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9822ca4f_348dcf61",
+      "range": {
+        "startLine": 907,
+        "startChar": 4,
+        "endLine": 909,
+        "endChar": 0
+      },
+      "revId": "143124cb683560b13f99e8516c500a326b8511b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7dc97936_032436f2",
