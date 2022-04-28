@@ -33,6 +33,24 @@
       "message": "nit: Comment is out of date, `// Reuses the ID \u0027x\u0027`",
       "revId": "351ad94c2d65a3f336a4daecc4b8704bc9119421",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15ebe6ed_b6097a45",
+        "filename": "src/tint/writer/spirv/builder_constructor_expression_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1857,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-04-28T14:28:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc6b4228_dc156f45",
+      "revId": "351ad94c2d65a3f336a4daecc4b8704bc9119421",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
