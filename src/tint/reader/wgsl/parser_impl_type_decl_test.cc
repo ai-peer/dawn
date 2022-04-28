@@ -392,9 +392,10 @@ TEST_F(ParserImplTest, TypeDecl_Array_SintLiteralSize) {
   EXPECT_EQ(a->attributes.size(), 0u);
   EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 14u}}));
 
-  auto* size = a->count->As<ast::SintLiteralExpression>();
+  auto* size = a->count->As<ast::IntLiteralExpression>();
   ASSERT_NE(size, nullptr);
-  EXPECT_EQ(size->ValueAsI32(), 5);
+  EXPECT_EQ(size->value, 5);
+  EXPECT_EQ(size->suffix, ast::IntLiteralExpression::Suffix::kNone);
 }
 
 TEST_F(ParserImplTest, TypeDecl_Array_UintLiteralSize) {
@@ -412,9 +413,9 @@ TEST_F(ParserImplTest, TypeDecl_Array_UintLiteralSize) {
   EXPECT_EQ(a->attributes.size(), 0u);
   EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 15u}}));
 
-  auto* size = a->count->As<ast::UintLiteralExpression>();
+  auto* size = a->count->As<ast::IntLiteralExpression>();
   ASSERT_NE(size, nullptr);
-  EXPECT_EQ(size->ValueAsU32(), 5u);
+  EXPECT_EQ(size->suffix, ast::IntLiteralExpression::Suffix::kU);
 }
 
 TEST_F(ParserImplTest, TypeDecl_Array_ConstantSize) {
