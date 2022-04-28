@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5700950e_1e379afd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-28T19:25:02Z",
+      "side": 1,
+      "message": "Put a temp change to kWholeMapsize if size \u003d\u003d 0 in dawn/native/Buffer.cpp, (not in wire/client/Buffer.cpp). Will remove \n(Likely I\u0027ve asked this before, ) but why do we have two piece of map range validation in native and wire here, given dawn_wire \" is meant to do as little state-tracking as possible\"? (security concern to limit the code set offset to point to some out-of-range evil cmd in the cmd buffer?)",
+      "parentUuid": "d9ff5ee3_44992c70",
+      "revId": "995a526e2bfb20f6ffcbdaa34d13a54ade90703a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "119cdaff_4d8db8e3",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c1ac051_40dde6f2",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-28T19:25:02Z",
+      "side": 1,
+      "message": "Oops.. I didn\u0027t negate the `offset \u003c mMapOffset` condition in my mind when writing this assert. Fixed",
+      "parentUuid": "119cdaff_4d8db8e3",
+      "revId": "995a526e2bfb20f6ffcbdaa34d13a54ade90703a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2850ff1e_0951d765",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-04-28T10:14:52Z",
       "side": 1,
       "message": "ditto",
+      "revId": "995a526e2bfb20f6ffcbdaa34d13a54ade90703a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00ab7ec0_2f64833c",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-28T19:25:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2850ff1e_0951d765",
       "revId": "995a526e2bfb20f6ffcbdaa34d13a54ade90703a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
