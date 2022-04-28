@@ -1,35 +1,39 @@
-# Tint
+# Building Dawn
 
-Tint is a compiler for the WebGPU Shader Language (WGSL).
+## System requirements
 
-This is not an officially supported Google product.
-
-## Requirements
  * Git
- * CMake (3.10.2 or later)
+ * CMake (3.10.2 or later) (if desired)
+ * GN (if desired)
  * Ninja (or other build tool)
  * Python, for fetching dependencies
  * [depot_tools] in your path
 
-## Build options
- * `TINT_BUILD_SPV_READER` : enable the SPIR-V input reader (off by default)
- * `TINT_BUILD_WGSL_READER` : enable the WGSL input reader (on by default)
- * `TINT_BUILD_SPV_WRITER` : enable the SPIR-V output writer (on by default)
- * `TINT_BUILD_WGSL_WRITER` : enable the WGSL output writer (on by default)
- * `TINT_BUILD_FUZZERS` : enable building fuzzzers (off by default)
+- Linux
+  - The `pkg-config` command:
+    ```sh
+    # Install pkg-config on Ubuntu
+    sudo apt-get install pkg-config
+    ```
 
-## Building
-Tint uses Chromium dependency management so you need to install [depot_tools]
-and add it to your PATH.
+- Mac
+  - [Xcode](https://developer.apple.com/xcode/) 12.2+.
+  - The macOS 11.0 SDK. Run `xcode-select` to check whether you have it.
+    ```sh
+    ls `xcode-select -p`/Platforms/MacOSX.platform/Developer/SDKs
+    ```
 
-[depot_tools]: http://commondatastorage.googleapis.com/chrome-infra-docs/flat/depot_tools/docs/html/depot_tools_tutorial.html#_setting_up
+## Install `depot_tools`
 
-### Getting source & dependencies
+Dawn uses the Chromium build system and dependency management so you need to [install depot_tools] and add it to the PATH.
+
+[install depot_tools]: http://commondatastorage.googleapis.com/chrome-infra-docs/flat/depot_tools/docs/html/depot_tools_tutorial.html#_setting_up
+
+## Get the code
 
 ```sh
-# Clone the repo as "tint"
-git clone https://dawn.googlesource.com/tint tint
-cd tint
+# Clone the repo as "dawn"
+git clone https://dawn.googlesource.com/dawn dawn && cd dawn
 
 # Bootstrap the gclient configuration
 cp scripts/standalone.gclient .gclient
@@ -37,6 +41,8 @@ cp scripts/standalone.gclient .gclient
 # Fetch external dependencies and toolchains with gclient
 gclient sync
 ```
+
+## Build Dawn
 
 ### Compiling using CMake + Ninja
 ```sh
@@ -60,6 +66,13 @@ mkdir -p out/Debug
 gn gen out/Debug
 autoninja -C out/Debug
 ```
+
+The most common GN build option is `is_debug=true/false`; otherwise
+`gn args out/Debug --list` shows all the possible options.
+
+On macOS you'll want to add the `use_system_xcode=true` in most cases.
+(and if you're a googler please get XCode from go/xcode).
+
 
 ### Fuzzers on MacOS
 If you are attempting fuzz, using `TINT_BUILD_FUZZERS=ON`, the version of llvm
@@ -94,13 +107,3 @@ cd out/style
 cmake ../..
 CC=../../third_party/llvm-build/Release+Asserts/bin/clang cmake -DTINT_CHECK_CHROMIUM_STYLE=ON ../../ # add -GNinja for ninja builds
 ```
-
-## Issues
-Please file any issues or feature requests at
-https://bugs.chromium.org/p/tint/issues/entry
-
-## Contributing
-Please see the CONTRIBUTING and CODE_OF_CONDUCT files on how to contribute to
-Tint.
-
-Tint has a process for supporting [experimental extensions](docs/tint/experimental_extensions.md).
