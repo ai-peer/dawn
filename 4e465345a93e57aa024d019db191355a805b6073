@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4217d382_ad9b237d",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-28T20:06:35Z",
+      "side": 1,
+      "message": "Yea, eventually I was hoping to move the flushing of theses caches to the device-side so that we could do periodic flushes or something instead of flushing in the same thread/time as creation. (That logic could be shared across all backends, hence the reasoning to plumb it through to the frontend.)\n\nThe idea would be that the device side GetOrCreatePipelineCache could also record the cache before returning it, and then it would be straightforwards from there.\n\nPeriodic flushing would become even more important if we later on deal with monolithic caches also.",
+      "parentUuid": "c8d4cdb6_c05a70ec",
+      "revId": "4e465345a93e57aa024d019db191355a805b6073",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "858b72d6_7261d7ae",
@@ -65,6 +83,24 @@
       "writtenOn": "2022-04-28T17:02:21Z",
       "side": 1,
       "message": "We do we need constThis?",
+      "revId": "4e465345a93e57aa024d019db191355a805b6073",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9386492_ab8383b6",
+        "filename": "src/dawn/native/vulkan/ComputePipelineVk.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-28T20:06:35Z",
+      "side": 1,
+      "message": "We did before because we had an overloaded version of GetLayout and GetCacheKey, and the resolver hides the const version since we are in a non-const function. I updated the layout code to use a const ref which fixes that side, and changed the CachedObject to expose the cache key member directly to derived classes who need to modify it.",
+      "parentUuid": "858b72d6_7261d7ae",
       "revId": "4e465345a93e57aa024d019db191355a805b6073",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +128,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72b70354_01c009e9",
+        "filename": "src/dawn/native/vulkan/ComputePipelineVk.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-28T20:06:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bdd6b79_32b6962b",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 89,
+        "endChar": 12
+      },
+      "revId": "4e465345a93e57aa024d019db191355a805b6073",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2efc6479_5d38d890",
@@ -105,6 +165,24 @@
       "writtenOn": "2022-04-28T17:02:21Z",
       "side": 1,
       "message": "This logic will also be present all the time. Maybe it could just be hidden in Flush (or FlushIfNeeded).",
+      "revId": "4e465345a93e57aa024d019db191355a805b6073",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e9364de_e9ebfbc8",
+        "filename": "src/dawn/native/vulkan/ComputePipelineVk.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-28T20:06:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2efc6479_5d38d890",
       "revId": "4e465345a93e57aa024d019db191355a805b6073",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -126,6 +204,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1c9a68b_3004d3a7",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-28T20:06:35Z",
+      "side": 1,
+      "message": "Austin mentioned this before, and we had chatted about it and thought maybe we could leave it out at the time since device id + vendor id seemed like it should be sufficient. I took a look and seemed like we already had it easily available though, so added it to the key now.",
+      "parentUuid": "037ac9c0_cff4666a",
+      "revId": "4e465345a93e57aa024d019db191355a805b6073",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01c0eb59_1727a063",
@@ -139,6 +235,24 @@
       "writtenOn": "2022-04-28T17:02:21Z",
       "side": 1,
       "message": "It seems that this could be in PIpelineCacheBase::InitializeBase since other backends will likely have the same logic of trying to load and getting a hit or not.",
+      "revId": "4e465345a93e57aa024d019db191355a805b6073",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d70085d9_0c0dbaa0",
+        "filename": "src/dawn/native/vulkan/PipelineCacheVk.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-04-28T20:06:35Z",
+      "side": 1,
+      "message": "I actually had it like that before and had the CachedBlob as a member in PipelineCacheBase, but Austin mentioned that it was sort of confusing to keep the blob around when it isn\u0027t needed anymore and the flushing logic doesn\u0027t use it (in a previous comment).\n\nI tried to compromise here so that the logic is in the base class now, but we don\u0027t keep a CachedBlob alive with the data either. PTAL.",
+      "parentUuid": "01c0eb59_1727a063",
       "revId": "4e465345a93e57aa024d019db191355a805b6073",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
