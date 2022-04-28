@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3177f339_a4e53a46",
+        "filename": "src/tint/ast/if_statement_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-28T17:33:52Z",
+      "side": 1,
+      "message": "Ben: To be clear, after James and I discussed offline, I asked him to bring it up here to get your decision.\n\nJames: I like Ben\u0027s suggestion. Totally up to you.",
+      "parentUuid": "33634b7e_0aa81106",
+      "range": {
+        "startLine": 92,
+        "startChar": 41,
+        "endLine": 92,
+        "endChar": 46
+      },
+      "revId": "099cdbe6cfe7c005f5b16651ebdb8c811f715c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1bebf1f1_cff9a225",
         "filename": "src/tint/transform/utils/hoist_to_decl_before.cc",
         "patchSetId": 3
@@ -156,6 +180,30 @@
       "side": 1,
       "message": "You\u0027re right, I\u0027ve done this simplification. I had to use `Replace` on each else-if instead of `ReplaceAll`.\n\nPTAL!",
       "parentUuid": "1bebf1f1_cff9a225",
+      "range": {
+        "startLine": 120,
+        "startChar": 2,
+        "endLine": 120,
+        "endChar": 37
+      },
+      "revId": "099cdbe6cfe7c005f5b16651ebdb8c811f715c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b6c5d3d_3ca87e86",
+        "filename": "src/tint/transform/utils/hoist_to_decl_before.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-04-28T17:33:52Z",
+      "side": 1,
+      "message": "Love it.",
+      "parentUuid": "a88877c0_cdafadc2",
       "range": {
         "startLine": 120,
         "startChar": 2,
