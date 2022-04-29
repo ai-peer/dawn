@@ -142,6 +142,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce5d0afa_734c5602",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-29T15:51:02Z",
+      "side": 1,
+      "message": "Removed the `if len(indices) \u003e 1 {` condition, kept the `if len(statuses) \u003e 1 {` check. It\u0027s weird and inefficient to call a merge function if there\u0027s only one thing in the set.",
+      "parentUuid": "092a7074_916c98b3",
+      "revId": "50c930a760247a53b849ff3ecc7b6a47d90f4b8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16c15290_f3872c1a",
@@ -191,6 +209,24 @@
       "side": 1,
       "message": "I\u0027m not sure what the aggregated duration is used for, so IDK.",
       "parentUuid": "8912a695_31eb2bd6",
+      "revId": "50c930a760247a53b849ff3ecc7b6a47d90f4b8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51a52b6c_12529f7d",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-29T15:51:02Z",
+      "side": 1,
+      "message": "We get duplicates when we\u0027re looping in the runner (multi-pass expectation generation). Average seems okay, no?",
+      "parentUuid": "274048df_27ce94a7",
       "revId": "50c930a760247a53b849ff3ecc7b6a47d90f4b8f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
