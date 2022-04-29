@@ -52,6 +52,7 @@
 #include "src/tint/transform/calculate_array_length.h"
 #include "src/tint/transform/canonicalize_entry_point_io.h"
 #include "src/tint/transform/decompose_memory_access.h"
+#include "src/tint/transform/disable_uniformity_analysis.h"
 #include "src/tint/transform/expand_compound_assignment.h"
 #include "src/tint/transform/fold_trivial_single_use_lets.h"
 #include "src/tint/transform/localize_struct_array_assignment.h"
@@ -137,6 +138,8 @@ SanitizedResult::SanitizedResult(SanitizedResult&&) = default;
 SanitizedResult Sanitize(const Program* in, const Options& options) {
   transform::Manager manager;
   transform::DataMap data;
+
+  manager.Add<transform::DisableUniformityAnalysis>();
 
   {  // Builtin polyfills
     transform::BuiltinPolyfill::Builtins polyfills;

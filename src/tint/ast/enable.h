@@ -32,6 +32,8 @@ class Enable : public Castable<Enable, Node> {
  public:
   ///  The enum class identifing each supported WGSL extension
   enum class ExtensionKind {
+    /// A Chromium-specific extension for disabling uniformity analysis.
+    kChromiumDisableUniformityAnalysis,
     /// An internal reserved extension for test, named
     /// "InternalExtensionForTesting"
     kInternalExtensionForTesting = -2,
