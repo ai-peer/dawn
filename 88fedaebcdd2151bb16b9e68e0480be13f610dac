@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7479d6e8_b3172637",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-29T10:10:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fbadfe3_aa656f27",
+      "revId": "88fedaebcdd2151bb16b9e68e0480be13f610dac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "302bad04_ddc9aef8",
@@ -65,6 +83,24 @@
       "writtenOn": "2022-04-28T15:40:33Z",
       "side": 1,
       "message": "How cheap is it to make an inspector? I think we could move this logic in ReflectShaderUsingTint and store the list of used extensions somewhere in ShaderModuleBase. We\u0027ll most likely need to use them at some point in Dawn to do backend-dependent things (enable FXC options, pipeline instrumentation etc). We could start with an unordered_map but over time I\u0027d expect we\u0027d use a wrapped bitset like ToggleSet.\n\nWDYT?",
+      "revId": "88fedaebcdd2151bb16b9e68e0480be13f610dac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae01031e_06830d24",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-29T10:10:11Z",
+      "side": 1,
+      "message": "For now making a inspector is very cheap, it does nothing but just store the program pointer. I do some refactoring on `ReflectShaderUsingTint` to make it records both entry-point-wise metadatas and shader-wise extensions information, but still leave the validation code here.\n\nFor the wrapped bitset, currently we do have a enum class for all Tint-supported WGSL extension, namely `tint::ast::enable::ExtensionKind`, and a `tint::ast::ExtensionSet` (which is currently a `std::unordered_set\u003ctint::ast::Enable::ExtensionKind\u003e`). Maybe I can change it into a wrapped bitset, and use it in both Tint and Dawn here.",
+      "parentUuid": "302bad04_ddc9aef8",
       "revId": "88fedaebcdd2151bb16b9e68e0480be13f610dac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -94,6 +130,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1bfc3283_ff70a9a5",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1086,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-29T10:10:11Z",
+      "side": 1,
+      "message": "Changed to \"Shader module uses extension(s) not enabled for its device.\".",
+      "parentUuid": "e0113123_2162ddfc",
+      "range": {
+        "startLine": 1086,
+        "startChar": 55,
+        "endLine": 1086,
+        "endChar": 65
+      },
+      "revId": "88fedaebcdd2151bb16b9e68e0480be13f610dac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be10080e_f8a2c124",
         "filename": "src/dawn/native/ShaderModule.h",
         "patchSetId": 1
@@ -105,6 +165,24 @@
       "writtenOn": "2022-04-28T15:40:33Z",
       "side": 1,
       "message": "nit: this doesn\u0027t need to be exposed in the header since it is an implementation detail of ValidateAndParseShaderModule",
+      "revId": "88fedaebcdd2151bb16b9e68e0480be13f610dac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65f00c43_319314d4",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-04-29T10:10:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be10080e_f8a2c124",
       "revId": "88fedaebcdd2151bb16b9e68e0480be13f610dac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
