@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8ec8db1_1decd991",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-29T18:38:55Z",
+      "side": 1,
+      "message": "PTAL. Only new change from the initial commit is in ExternalTexture.cpp. A few tests were failing skia-gold because the test did not set the ExternalTextureDescriptor colorSpace field - which meant constants weren\u0027t being set on external texture creation. I tried to just use the same set of constants regardless of the colorSpace param, but the minor differences caused by gamma correcton seem to still cause a failure. I added more constants to not do any gamma correction when colorSpace is undefined. This is a little messy, but my next couple patches will add configurability of constants through the ExternalTextureDescriptor, so we should be able to get things cleaned up quickly. Let me know what you think.",
+      "revId": "e430f966574b94bfe86009a52ab73ad861003592",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
