@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db557178_7ccabbb5",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T15:27:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "53fdda8d_f65a22ab",
+      "revId": "50c930a760247a53b849ff3ecc7b6a47d90f4b8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a3a4cbc_8cdf0484",
@@ -108,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "092a7074_916c98b3",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T15:27:20Z",
+      "side": 1,
+      "message": "It could probably be simplified by removing the len(indices) \u003e 1 and calling f unconditionally.\n```\n\n                    for key, indices :\u003d range keyToIndices {\n                        statuses :\u003d NewStatuses()\n\t\t\tduration :\u003d time.Duration(0)\n\t\t\tfor _, i :\u003d range indices {\n\t\t\t\tr :\u003d l[i]\n\t\t\t\tstatuses.Add(r.Status)\n\t\t\t\tduration +\u003d r.Duration\n\t\t\t}\n\n\t\t\tduration \u003d duration / time.Duration(len(indices))\n\t\t\tmerged[key] \u003d StatusAndDuration{\n\t\t\t\tStatus:   f(statuses),\n\t\t\t\tDuration: duration,\n\t\t\t}\n                     }\n                     ```",
+      "parentUuid": "97b87e3b_5df1060f",
+      "revId": "50c930a760247a53b849ff3ecc7b6a47d90f4b8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "16c15290_f3872c1a",
         "filename": "tools/src/cts/result/result.go",
         "patchSetId": 1
@@ -137,6 +173,24 @@
       "side": 1,
       "message": "Seemed slightly more robust for outliers than `max`. You have better suggestions?\nAdded a comment to the function.",
       "parentUuid": "16c15290_f3872c1a",
+      "revId": "50c930a760247a53b849ff3ecc7b6a47d90f4b8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "274048df_27ce94a7",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T15:27:20Z",
+      "side": 1,
+      "message": "I\u0027m not sure what the aggregated duration is used for, so IDK.",
+      "parentUuid": "8912a695_31eb2bd6",
       "revId": "50c930a760247a53b849ff3ecc7b6a47d90f4b8f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
