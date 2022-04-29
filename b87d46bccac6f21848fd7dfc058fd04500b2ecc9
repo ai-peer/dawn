@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "370340dc_3e3c8368",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-29T20:37:59Z",
+      "side": 1,
+      "message": "I interpret the spec incorrectly. The added failing end2end test itself should be invalid. Abandon this.",
+      "revId": "b87d46bccac6f21848fd7dfc058fd04500b2ecc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

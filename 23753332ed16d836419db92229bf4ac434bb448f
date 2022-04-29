@@ -87,6 +87,24 @@
       "parentUuid": "05ab6036_2875fa06",
       "revId": "23753332ed16d836419db92229bf4ac434bb448f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6d91438_a350869f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-29T20:37:59Z",
+      "side": 1,
+      "message": "setting blendingEnabled of MTLRenderPipelineColorAttachmentDescriptor doesn\u0027t seem to make it valid.\nMade a comment on the spec discussion thread:\nhttps://github.com/gpuweb/gpuweb/pull/1918#issuecomment-1102940792",
+      "parentUuid": "6e020fb2_31b0b8c5",
+      "revId": "23753332ed16d836419db92229bf4ac434bb448f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
