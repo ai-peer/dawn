@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be985196_f96f54b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-29T16:15:21Z",
+      "side": 1,
+      "message": "Thanks all!\n\nBen mentioned offline that backwards compat is not a concern for the node bindings at this time, so I\u0027ve removed the deprecated entry points.",
+      "revId": "b9f67bb2f39e71eac4df2c32b72f18ee396df61e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
