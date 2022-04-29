@@ -81,6 +81,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48d89287_145ef48f",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-04-29T22:06:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b319d2a_02d3f685",
+      "range": {
+        "startLine": 280,
+        "startChar": 8,
+        "endLine": 280,
+        "endChar": 12
+      },
+      "revId": "7e6d1abc075f4417a62b0c3546aa17c9c15147d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e84d776_a03e2057",
@@ -94,6 +118,30 @@
       "writtenOn": "2022-04-29T20:02:06Z",
       "side": 1,
       "message": "Please write this as:\n\n```\n// Forward declarations.\nnamespace tint {\nclass ProgramBuilder;\n}  // namespace tint\n\n\nnamespace tint::resolver {\n...\n```",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 20
+      },
+      "revId": "7e6d1abc075f4417a62b0c3546aa17c9c15147d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e5d2107_fc2bd867",
+        "filename": "src/tint/resolver/uniformity.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-04-29T22:06:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e84d776_a03e2057",
       "range": {
         "startLine": 18,
         "startChar": 0,
