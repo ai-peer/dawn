@@ -22,6 +22,10 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::Enable);
 namespace tint::ast {
 
 Enable::ExtensionKind Enable::NameToKind(const std::string& name) {
+  if (name == "chromium_disable_uniformity_analysis") {
+    return Enable::ExtensionKind::kChromiumDisableUniformityAnalysis;
+  }
+
   // The reserved internal extension name for testing
   if (name == "InternalExtensionForTesting") {
     return Enable::ExtensionKind::kInternalExtensionForTesting;
@@ -32,6 +36,9 @@ Enable::ExtensionKind Enable::NameToKind(const std::string& name) {
 
 std::string Enable::KindToName(ExtensionKind kind) {
   switch (kind) {
+    case ExtensionKind::kChromiumDisableUniformityAnalysis:
+      return "chromium_disable_uniformity_analysis";
+
     // The reserved internal extension for testing
     case ExtensionKind::kInternalExtensionForTesting:
       return "InternalExtensionForTesting";
