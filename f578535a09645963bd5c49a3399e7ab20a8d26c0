@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3a4d960_7dad1c97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 36
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T14:15:39Z",
+      "side": 1,
+      "message": "Still LGTM. Thanks for the iteration.",
+      "revId": "f578535a09645963bd5c49a3399e7ab20a8d26c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0f2dc48_db272a17",
+        "filename": "src/dawn/native/PipelineCache.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T14:15:39Z",
+      "side": 1,
+      "message": "u-nit: Maybe we can ASSERT(mInitialized) here too.",
+      "revId": "f578535a09645963bd5c49a3399e7ab20a8d26c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
