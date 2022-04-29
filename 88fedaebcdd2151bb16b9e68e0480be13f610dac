@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "271b7116_6e4fbbca",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-29T12:59:12Z",
+      "side": 1,
+      "message": "Please keep them separate. Tint cannot depend on Dawn code.\nWe don\u0027t really want to expose the `tint::ast` as public API, so a list of strings (as exposed by the Tint API) is fine for now. If we find this is too fragile, we can look at exposing an extension symbol list as a later followup.",
+      "parentUuid": "9f72d221_d32e8f80",
+      "revId": "88fedaebcdd2151bb16b9e68e0480be13f610dac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0113123_2162ddfc",
         "filename": "src/dawn/native/ShaderModule.cpp",
         "patchSetId": 1
