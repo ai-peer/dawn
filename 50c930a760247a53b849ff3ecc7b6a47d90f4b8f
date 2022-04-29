@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d5a0c76_79aa0f4d",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T13:49:11Z",
+      "side": 1,
+      "message": "Can we call out that the duration is not taken into account for the comparison?",
+      "revId": "50c930a760247a53b849ff3ecc7b6a47d90f4b8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb1c0f0d_314b62e4",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T13:49:11Z",
+      "side": 1,
+      "message": "Same comment as last time that it\u0027s weird to have the optional field in the middle. If it\u0027s only used internally in the tool we should probably put it at the end.",
+      "revId": "50c930a760247a53b849ff3ecc7b6a47d90f4b8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a3a4cbc_8cdf0484",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T13:49:11Z",
+      "side": 1,
+      "message": "u-nit: This code seems to handle a lot of special cases, which would be handled just as well in the general case. Is perf here important such that we need to special cases or can we simplify?",
+      "revId": "50c930a760247a53b849ff3ecc7b6a47d90f4b8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16c15290_f3872c1a",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T13:49:11Z",
+      "side": 1,
+      "message": "Question: Why do we do the mean of the duration?",
+      "revId": "50c930a760247a53b849ff3ecc7b6a47d90f4b8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
