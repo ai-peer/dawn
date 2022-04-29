@@ -16,6 +16,24 @@
       "message": "nit: unused?",
       "revId": "c0c678641694c52c03a2f2e7d11ab1569a985ec4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb7cd689_be3cdebd",
+        "filename": "tools/src/cmd/cts/merge/merge.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-29T15:52:33Z",
+      "side": 1,
+      "message": "Good spot. Removed.",
+      "parentUuid": "146047d4_1f44aec3",
+      "revId": "c0c678641694c52c03a2f2e7d11ab1569a985ec4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
