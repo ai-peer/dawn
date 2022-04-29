@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b38714d1_8bb487fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T13:35:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "567bc6bedd66344414401571cbcc3b3bbcf1af1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a73490c_8f049b5b",
+        "filename": "tools/src/subcmd/subcmd.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T13:35:11Z",
+      "side": 1,
+      "message": "I read this as invalid contributor license agreement xD",
+      "range": {
+        "startLine": 31,
+        "startChar": 3,
+        "endLine": 31,
+        "endChar": 16
+      },
+      "revId": "567bc6bedd66344414401571cbcc3b3bbcf1af1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9da31ac8_4189fd2f",
+        "filename": "tools/src/subcmd/subcmd.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T13:35:11Z",
+      "side": 1,
+      "message": "Nice",
+      "revId": "567bc6bedd66344414401571cbcc3b3bbcf1af1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a6a85c0_a6f9cfb1",
+        "filename": "tools/src/subcmd/subcmd.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T13:35:11Z",
+      "side": 1,
+      "message": "u-u-nit: this could do an early out to dedent the rest of the code.",
+      "revId": "567bc6bedd66344414401571cbcc3b3bbcf1af1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
