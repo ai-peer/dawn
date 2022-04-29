@@ -16,6 +16,46 @@
       "message": "PTAL. Only new change from the initial commit is in ExternalTexture.cpp. A few tests were failing skia-gold because the test did not set the ExternalTextureDescriptor colorSpace field - which meant constants weren\u0027t being set on external texture creation. I tried to just use the same set of constants regardless of the colorSpace param, but the minor differences caused by gamma correcton seem to still cause a failure. I added more constants to not do any gamma correction when colorSpace is undefined. This is a little messy, but my next couple patches will add configurability of constants through the ExternalTextureDescriptor, so we should be able to get things cleaned up quickly. Let me know what you think.",
       "revId": "e430f966574b94bfe86009a52ab73ad861003592",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcdbd3fc_0f885617",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-29T20:49:19Z",
+      "side": 1,
+      "message": "Looks good to me, but I\u0027d like someone from the Dawn side to approve the Dawn change. Corentin is now OOO, so I\u0027d like Austin to approve.",
+      "revId": "e430f966574b94bfe86009a52ab73ad861003592",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bbb3b0c_4c58c351",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-29T20:49:19Z",
+      "side": 1,
+      "message": "Dawn reviewer:\n\nI\u0027ve diffed this to the reverted code. This is the only relevant change between the reverted code and the re-land. There\u0027s one other change in Tint code, which was required due to a helper rename.",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 9
+      },
+      "revId": "e430f966574b94bfe86009a52ab73ad861003592",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
