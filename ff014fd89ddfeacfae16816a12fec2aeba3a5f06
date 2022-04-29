@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8c280f8_ac3907c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-04-29T18:49:58Z",
+      "side": 1,
+      "message": "LGTM % the outstanding discussion",
+      "revId": "ff014fd89ddfeacfae16816a12fec2aeba3a5f06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e531b25_37688e4e",
@@ -65,6 +82,30 @@
       "writtenOn": "2022-04-29T12:04:06Z",
       "side": 1,
       "message": "ni: enabled.",
+      "range": {
+        "startLine": 1008,
+        "startChar": 70,
+        "endLine": 1008,
+        "endChar": 77
+      },
+      "revId": "ff014fd89ddfeacfae16816a12fec2aeba3a5f06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aca84059_8bbf1b3f",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-04-29T18:49:58Z",
+      "side": 1,
+      "message": "either the shader or the device can have extensions \"enabled\" so this should be disambiguated like \"is not enabled on the Device\" or \"requires the corresponding Device feature to be enabled\"\n\nIdeally we\u0027d like to report somewhere _which_ device feature flag must be enabled (e.g. \"shader-f16\" for \"enable f16;\"), but that can come later.",
+      "parentUuid": "6efd086b_c99f28bf",
       "range": {
         "startLine": 1008,
         "startChar": 70,
