@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d287476_fcbf47ae",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-29T23:20:23Z",
+      "side": 1,
+      "message": "You\u0027re kind of right, but we also use 3 extra values to allow for limited/full range color spaces. The plan is to extract the normal 3x3 and the 1x3 range bias values in column 5 from these matrices: https://source.chromium.org/chromium/chromium/src/+/main:third_party/skia/src/core/SkYUVMath.cpp;l\u003d31;bpv\u003d1;bpt\u003d1?q\u003dskyuvmath\u0026ss\u003dchromium",
+      "parentUuid": "1d7a415b_8bf39218",
+      "revId": "ea4922f487c026bcf0bd88a9059c6aad1d36ed7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f433c480_0ba03713",
         "filename": "dawn.json",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2022-04-29T22:48:47Z",
       "side": 1,
       "message": "If landing this without implementation, you should leave a TODO at the place where these new unhandled fields would come into the C++ code.",
+      "revId": "ea4922f487c026bcf0bd88a9059c6aad1d36ed7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b8413d2_ca0990cd",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1343,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-04-29T23:20:23Z",
+      "side": 1,
+      "message": "I put in some TODOs in my recent commit: https://dawn.googlesource.com/dawn/+/41cbf0279c46f66aee1ca50c13c15fa23db753ff%5E%21/#F0",
+      "parentUuid": "f433c480_0ba03713",
       "revId": "ea4922f487c026bcf0bd88a9059c6aad1d36ed7e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
