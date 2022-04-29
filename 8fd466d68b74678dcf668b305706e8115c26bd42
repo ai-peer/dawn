@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "588c82cd_42a7d58c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-04-29T16:34:53Z",
+      "side": 1,
+      "message": "Okay, after some further discussion I\u0027ve reverted node bindings changes because they wouldn\u0027t have built properly. (Changed the internal method called to avoid deprecation warnings surfacing.) I\u0027ll do a followup CL to roll the node bindings to the latest IDL version.",
+      "revId": "8fd466d68b74678dcf668b305706e8115c26bd42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
