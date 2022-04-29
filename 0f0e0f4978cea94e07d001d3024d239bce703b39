@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89d957ef_07559e21",
+        "filename": "tools/src/cmd/cts/format/format.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T15:33:59Z",
+      "side": 1,
+      "message": "init runs automatically?",
+      "revId": "0f0e0f4978cea94e07d001d3024d239bce703b39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
