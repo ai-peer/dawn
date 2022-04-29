@@ -34,6 +34,24 @@
       "parentUuid": "9e121fbc_4e4756d2",
       "revId": "1febca5157de76a3d9361118713fe8aa19d06072",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff35d05e_5606b3c0",
+        "filename": "tools/src/cmd/cts/config.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T15:27:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f551681d_e729cc16",
+      "revId": "1febca5157de76a3d9361118713fe8aa19d06072",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
