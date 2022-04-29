@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca9b925a_9690f46f",
+        "filename": "tools/src/cmd/cts/common/build.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T20:18:58Z",
+      "side": 1,
+      "message": "u-u-nit: Since we get the build from a buildbucket client, maybe it should be the first argument to be more method-like?\n\nDitto below",
+      "revId": "1c8b1aeb7e584adf2af9597f78ef2b09f2459e28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbda96c0_0aecbde7",
+        "filename": "tools/src/cmd/cts/common/build.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T20:18:58Z",
+      "side": 1,
+      "message": "nit: It\u0027s a bit weird that we get some builds from the outside of the function, but also modify them inside this function. Why do we do this? Could we do the QueryBuild then build.Status.Running check in the same loop?",
+      "revId": "1c8b1aeb7e584adf2af9597f78ef2b09f2459e28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c911420_4a05b164",
+        "filename": "tools/src/cmd/cts/common/build.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T20:18:58Z",
+      "side": 1,
+      "message": "nit: We do this non-trivial code twice. Is it worth putting in a helper?",
+      "revId": "1c8b1aeb7e584adf2af9597f78ef2b09f2459e28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "957a586b_bcb4a0b2",
         "filename": "tools/src/cmd/cts/common/results.go",
         "patchSetId": 3
@@ -44,6 +95,23 @@
         "endLine": 56,
         "endChar": 42
       },
+      "revId": "1c8b1aeb7e584adf2af9597f78ef2b09f2459e28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "268c43dd_d01d7aa6",
+        "filename": "tools/src/cmd/cts/common/results.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T20:18:58Z",
+      "side": 1,
+      "message": "Didn\u0027t I review this conversion function previously? Maybe it was in the other direction though.",
       "revId": "1c8b1aeb7e584adf2af9597f78ef2b09f2459e28",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
