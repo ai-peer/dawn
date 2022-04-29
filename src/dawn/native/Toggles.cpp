@@ -283,6 +283,11 @@ namespace dawn::native {
               "before "
               "and after if needed).",
               "https://crbug.com/dawn/1071"}},
+            {Toggle::EnableBlobCache,
+             {"enable_blob_cache",
+              "Enables usage of the blob cache (backed by the platform cache if set/passed). "
+              "Necessary for any persistent caching capabilities, i.e. pipeline caching.",
+              "https://crbug.com/dawn/549"}},
             // Comment to separate the }} so it is clearer what to copy-paste to add a toggle.
         }};
     }  // anonymous namespace

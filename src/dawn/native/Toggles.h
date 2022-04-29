@@ -71,6 +71,7 @@ namespace dawn::native {
         VulkanUseZeroInitializeWorkgroupMemoryExtension,
         D3D12SplitBufferTextureCopyForRowsPerImagePaddings,
         MetalRenderR8RG8UnormSmallMipToTempTexture,
+        EnableBlobCache,
 
         EnumCount,
         InvalidEnum = EnumCount,

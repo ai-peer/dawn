@@ -264,6 +264,6 @@ namespace {
         EXPECT_EQ(mMockCache.GetNumEntries(), 2u);
     }
 
-    DAWN_INSTANTIATE_TEST(SinglePipelineCachingTests, VulkanBackend());
+    DAWN_INSTANTIATE_TEST(SinglePipelineCachingTests, VulkanBackend({"enable_blob_cache"}));
 
 }  // namespace
