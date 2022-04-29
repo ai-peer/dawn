@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83745962_923118e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-04-29T15:58:49Z",
+      "side": 1,
+      "message": "Hi Vasyl and Ryan - this was a tint CL that was good to go except for some comments from Vasyl, which I have addressed in this revised CL. Unfortunately we can\u0027t continue the previous discussion as I had to open a new CL in dawn. I\u0027d appreciate it if you could take a look - thanks.",
+      "revId": "fbbf0d639f9b8d2637c15417c44837974734ddf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
