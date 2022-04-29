@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56919cb4_7d90f2b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T20:05:47Z",
+      "side": 1,
+      "message": "Is this roll stalled for some reason? It should be possible to land a variant of https://dawn-review.googlesource.com/c/dawn/+/88307 afterwards.",
+      "revId": "92e533f6a98b5c32edd3cd005bedfb1727939e62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
