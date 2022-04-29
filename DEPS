@@ -132,12 +132,12 @@ deps = {
   },
 
   'third_party/swiftshader': {
-    'url': '{swiftshader_git}/SwiftShader@adef92e7b4c63b0c00300635dfbf4c37dab3c5b9',
+    'url': '{swiftshader_git}/SwiftShader@e617219743aaba9cf3bd8ec9bad2447f7a236996',
     'condition': 'dawn_standalone',
   },
 
   'third_party/vulkan-deps': {
-    'url': '{chromium_git}/vulkan-deps@c9e605688988f5de4499ee2fabeb93f00ee97dda',
+    'url': '{chromium_git}/vulkan-deps@88693e6bf86c861b6c930ad1b7916746834c0220',
     'condition': 'dawn_standalone',
   },
 
@@ -153,7 +153,7 @@ deps = {
 
   # WebGPU CTS - not used directly by Dawn, only transitively by Chromium.
   'third_party/webgpu-cts': {
-    'url': '{chromium_git}/external/github.com/gpuweb/cts@21af43c62ac7c0bb183ea1970d17ca392254f7f6',
+    'url': '{chromium_git}/external/github.com/gpuweb/cts@fd45c77b21f1ddb02917f79a28a8b6ab76d4b24c',
     'condition': 'build_with_chromium',
   },
 
@@ -171,7 +171,7 @@ deps = {
     'condition': 'dawn_node',
   },
   'third_party/gpuweb-cts': {
-    'url': '{chromium_git}/external/github.com/gpuweb/cts@21af43c62ac7c0bb183ea1970d17ca392254f7f6',
+    'url': '{chromium_git}/external/github.com/gpuweb/cts@fd45c77b21f1ddb02917f79a28a8b6ab76d4b24c',
     'condition': 'dawn_standalone',
   },
 
