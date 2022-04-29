@@ -20,6 +20,7 @@ Texture2D<float4> ext_tex_plane_1 : register(t2, space1);
 cbuffer cbuffer_ext_tex_params : register(b3, space1) {
   uint4 ext_tex_params[11];
 };
+
 Texture2D<float4> arg_0 : register(t0, space1);
 SamplerState arg_1 : register(s1, space1);
 
