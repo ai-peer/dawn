@@ -16,6 +16,24 @@
       "message": "I interpret the spec incorrectly. The added failing end2end test itself should be invalid. Abandon this.",
       "revId": "b87d46bccac6f21848fd7dfc058fd04500b2ecc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "489e7824_819465d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-29T21:04:18Z",
+      "side": 1,
+      "message": "discussion at https://github.com/gpuweb/gpuweb/pull/1918#issuecomment-1113676136",
+      "parentUuid": "370340dc_3e3c8368",
+      "revId": "b87d46bccac6f21848fd7dfc058fd04500b2ecc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
