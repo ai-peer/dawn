@@ -881,7 +881,9 @@ namespace dawn::native::vulkan {
                     VkBufferCopy copy;
                     copy.srcOffset = uploadHandle.startOffset;
                     copy.dstOffset = offset;
-                    copy.size = size;
+                    copy.size =
+                        size *
+                        4;  // FIXME: Provoke a validation error to test the message handling.
 
                     device->fn.CmdCopyBuffer(
                         commands, ToBackend(uploadHandle.stagingBuffer)->GetBufferHandle(),

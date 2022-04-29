@@ -142,6 +142,8 @@ namespace dawn::native::vulkan {
                              label);
     }
 
+    uint64_t GetDeviceMessageIdFromDebugName(std::string debugName);
+
     // Returns nullptr or &specializationInfo
     // specializationInfo, specializationDataEntries, specializationMapEntries needs to
     // be alive at least until VkSpecializationInfo is passed into Vulkan Create*Pipelines

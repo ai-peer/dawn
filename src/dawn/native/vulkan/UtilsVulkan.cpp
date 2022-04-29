@@ -217,18 +217,27 @@ namespace dawn::native::vulkan {
             objectNameInfo.objectType = objectType;
             objectNameInfo.objectHandle = objectHandle;
 
-            if (label.empty() || !device->IsToggleEnabled(Toggle::UseUserDefinedLabelsInBackend)) {
-                objectNameInfo.pObjectName = prefix;
-                device->fn.SetDebugUtilsObjectNameEXT(device->GetVkDevice(), &objectNameInfo);
-                return;
+            std::ostringstream objectName;
+            // Prefix with the device's message ID so that if this label appears in a validation
+            // message it can be parsed out and the message can be associated with the right device.
+            objectName << "[D:" << device->GetMessageId() << "]" << prefix;
+            if (!label.empty() && device->IsToggleEnabled(Toggle::UseUserDefinedLabelsInBackend)) {
+                objectName << "_" << label;
             }
 
-            std::string objectName = prefix;
-            objectName += "_";
-            objectName += label;
-            objectNameInfo.pObjectName = objectName.c_str();
+            objectNameInfo.pObjectName = objectName.str().c_str();
             device->fn.SetDebugUtilsObjectNameEXT(device->GetVkDevice(), &objectNameInfo);
         }
+    }
+
+    uint64_t GetDeviceMessageIdFromDebugName(std::string debugName) {
+        if (debugName.find("[D:") == 0) {
+            size_t messageIdEnd = debugName.find("]", 3);
+            if (messageIdEnd != std::string::npos) {
+                return std::stoull(debugName.substr(3, messageIdEnd));
+            }
+        }
+        return 0;
     }
 
     VkSpecializationInfo* GetVkSpecializationInfo(

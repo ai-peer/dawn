@@ -23,6 +23,7 @@
 #include "dawn/native/Instance.h"
 #include "dawn/native/VulkanBackend.h"
 #include "dawn/native/vulkan/AdapterVk.h"
+#include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
 #include "dawn/native/vulkan/VulkanError.h"
 
@@ -104,14 +105,36 @@ namespace dawn::native::vulkan {
             return true;
         }
 
+        uint64_t FindDeviceMessageId(const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData) {
+            for (uint32_t i = 0; i < pCallbackData->objectCount; ++i) {
+                const VkDebugUtilsObjectNameInfoEXT& object = pCallbackData->pObjects[i];
+                uint64_t messageId = GetDeviceMessageIdFromDebugName(object.pObjectName);
+                if (messageId != 0) {
+                    return messageId;
+                }
+            }
+
+            // 0 is a reserved messageId that indicates no Device was found.
+            return 0;
+        }
+
         VKAPI_ATTR VkBool32 VKAPI_CALL
         OnDebugUtilsCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
                              VkDebugUtilsMessageTypeFlagsEXT /* messageTypes */,
                              const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
-                             void* /* pUserData */) {
+                             void* pUserData) {
             if (ShouldReportDebugMessage(pCallbackData->pMessageIdName, pCallbackData->pMessage)) {
                 dawn::WarningLog() << pCallbackData->pMessage;
+
                 ASSERT((messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT) == 0);
+
+                if (pUserData != nullptr) {
+                    uint64_t messageId = FindDeviceMessageId(pCallbackData);
+                    if (messageId) {
+                        VulkanInstance* instance = reinterpret_cast<VulkanInstance*>(pUserData);
+                        instance->HandleDeviceMessage(messageId, pCallbackData->pMessage);
+                    }
+                }
             }
             return VK_FALSE;
         }
@@ -133,6 +156,8 @@ namespace dawn::native::vulkan {
     VulkanInstance::VulkanInstance() = default;
 
     VulkanInstance::~VulkanInstance() {
+        ASSERT(mMessageListenerDevices.empty());
+
         if (mDebugUtilsMessenger != VK_NULL_HANDLE) {
             mFunctions.DestroyDebugUtilsMessengerEXT(mInstance, mDebugUtilsMessenger, nullptr);
             mDebugUtilsMessenger = VK_NULL_HANDLE;
@@ -376,11 +401,24 @@ namespace dawn::native::vulkan {
         createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
                                  VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT;
         createInfo.pfnUserCallback = OnDebugUtilsCallback;
-        createInfo.pUserData = nullptr;
+        createInfo.pUserData = this;
 
         return CheckVkSuccess(mFunctions.CreateDebugUtilsMessengerEXT(
                                   mInstance, &createInfo, nullptr, &*mDebugUtilsMessenger),
                               "vkCreateDebugUtilsMessengerEXT");
+    }
+
+    void VulkanInstance::StartListeningForDeviceMessages(Device* device) {
+        mMessageListenerDevices.insert({device->GetMessageId(), device});
+    }
+    void VulkanInstance::StopListeningForDeviceMessages(Device* device) {
+        mMessageListenerDevices.erase(device->GetMessageId());
+    }
+    void VulkanInstance::HandleDeviceMessage(uint64_t deviceMessageId, std::string message) {
+        auto it = mMessageListenerDevices.find(deviceMessageId);
+        if (it != mMessageListenerDevices.end()) {
+            it->second->OnDebugMessage(std::move(message));
+        }
     }
 
     Backend::Backend(InstanceBase* instance)

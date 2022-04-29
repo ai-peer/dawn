@@ -15,6 +15,8 @@
 #ifndef SRC_DAWN_NATIVE_VULKAN_BACKENDVK_H_
 #define SRC_DAWN_NATIVE_VULKAN_BACKENDVK_H_
 
+#include <map>
+#include <string>
 #include <vector>
 
 #include "dawn/native/BackendConnection.h"
@@ -31,6 +33,8 @@ namespace dawn::native::vulkan {
         None,
         SwiftShader,
     };
+
+    class Device;
 
     // VulkanInstance holds the reference to the Vulkan library, the VkInstance, VkPhysicalDevices
     // on that instance, Vulkan functions loaded from the library, and global information
@@ -50,6 +54,10 @@ namespace dawn::native::vulkan {
         const VulkanGlobalInfo& GetGlobalInfo() const;
         const std::vector<VkPhysicalDevice>& GetPhysicalDevices() const;
 
+        void StartListeningForDeviceMessages(Device* device);
+        void StopListeningForDeviceMessages(Device* device);
+        void HandleDeviceMessage(uint64_t deviceMessageId, std::string message);
+
       private:
         VulkanInstance();
 
@@ -66,6 +74,8 @@ namespace dawn::native::vulkan {
         VkDebugUtilsMessengerEXT mDebugUtilsMessenger = VK_NULL_HANDLE;
 
         std::vector<VkPhysicalDevice> mPhysicalDevices;
+
+        std::map<uint64_t, Device*> mMessageListenerDevices;
     };
 
     class Backend : public BackendConnection {
