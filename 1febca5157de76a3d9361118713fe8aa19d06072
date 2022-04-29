@@ -16,6 +16,24 @@
       "message": "https://source.chromium.org/chromium/chromium/src/+/main:content/test/gpu/gpu_tests/webgpu_cts_integration_test.py;drc\u003dacaac515483669e5030f207912bc7633cce5f56d;l\u003d30 says 5seconds.",
       "revId": "1febca5157de76a3d9361118713fe8aa19d06072",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f551681d_e729cc16",
+        "filename": "tools/src/cmd/cts/config.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-04-29T15:23:00Z",
+      "side": 1,
+      "message": "I know, but when I used this, I found that the CTS runner and my tooling were disagreeing about classification - possibly because of the interval measured.\n\nThe results also become *very* messy if we reduce this much further. As we have so many tests over the 5 second mark, the test reduction becomes a RNG when this is small.\n\nI\u0027d like to keep this as-is, and reduce once we\u0027ve got the test times under control.",
+      "parentUuid": "9e121fbc_4e4756d2",
+      "revId": "1febca5157de76a3d9361118713fe8aa19d06072",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
