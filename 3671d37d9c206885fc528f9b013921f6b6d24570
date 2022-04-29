@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee7fc7fa_29af6d3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-04-29T23:24:10Z",
+      "side": 1,
+      "message": "load op should be in emscripten gen headers (library_webgpu_enum_tables.js)\n\nThis code is added on 2021-09\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/dawn.json;l\u003d1451?q\u003ddawn.json\u0026ss\u003dchromium\nhttps://dawn-review.googlesource.com/c/dawn/+/62580\n\nI have no idea why it didn\u0027t break my previous emscripten webgpu update but broke this time...",
+      "revId": "3671d37d9c206885fc528f9b013921f6b6d24570",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
