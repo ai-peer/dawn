@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f72d221_d32e8f80",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T12:04:06Z",
+      "side": 1,
+      "message": "I\u0027m not 100% sure if we want to shared Dawn and Tint types directly like this. I\u0027m thinking we probably need to keep the separation because Tint needs to build standalone. Ben WDYT?\n\nThe top comment was not exactly clear. What I meant is that we can also move the validation to ReflectShaderUsingTint. There\u0027s already a lot of error cases there that result in an error shader module if not validated. It would mean that the extensions not present would be in a validation error instead of compilation messages, but that\u0027s probably ok.",
+      "parentUuid": "ae01031e_06830d24",
+      "revId": "88fedaebcdd2151bb16b9e68e0480be13f610dac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0113123_2162ddfc",
         "filename": "src/dawn/native/ShaderModule.cpp",
         "patchSetId": 1
@@ -142,6 +160,30 @@
       "side": 1,
       "message": "Changed to \"Shader module uses extension(s) not enabled for its device.\".",
       "parentUuid": "e0113123_2162ddfc",
+      "range": {
+        "startLine": 1086,
+        "startChar": 55,
+        "endLine": 1086,
+        "endChar": 65
+      },
+      "revId": "88fedaebcdd2151bb16b9e68e0480be13f610dac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5c96c77_742b0398",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1086,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-29T12:04:06Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1bfc3283_ff70a9a5",
       "range": {
         "startLine": 1086,
         "startChar": 55,
