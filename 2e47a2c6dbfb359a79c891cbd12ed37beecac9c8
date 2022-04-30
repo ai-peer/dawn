@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16d24fb7_7295b82d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-30T01:09:36Z",
+      "side": 1,
+      "message": "https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Device.h;l\u003d512?q\u003dDeviceBase%20f:dawn\n\nDevice keeps the instance alive - are there other lifetime things you\u0027re concerned about?",
+      "revId": "2e47a2c6dbfb359a79c891cbd12ed37beecac9c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a889e7ee_48e822ec",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-30T01:09:36Z",
+      "side": 1,
+      "message": "else `dawn::ErrorLog() \u003c\u003c message;` ?",
+      "range": {
+        "startLine": 421,
+        "startChar": 0,
+        "endLine": 421,
+        "endChar": 9
+      },
+      "revId": "2e47a2c6dbfb359a79c891cbd12ed37beecac9c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f46f643d_fcf2dad7",
+        "filename": "src/dawn/native/vulkan/BackendVk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-30T01:09:36Z",
+      "side": 1,
+      "message": "unordered_map ?",
+      "revId": "2e47a2c6dbfb359a79c891cbd12ed37beecac9c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d038a5f7_7c802049",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-30T01:09:36Z",
+      "side": 1,
+      "message": "maybe here and the rest of the CL, rename MessageeId -\u003e DeviceDebugId ?",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 38
+      },
+      "revId": "2e47a2c6dbfb359a79c891cbd12ed37beecac9c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72387901_97acdd88",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-30T01:09:36Z",
+      "side": 1,
+      "message": "we could consider just storing the string on the device so we don\u0027t redo these string concatenation operations all the time.",
+      "range": {
+        "startLine": 223,
+        "startChar": 26,
+        "endLine": 223,
+        "endChar": 64
+      },
+      "revId": "2e47a2c6dbfb359a79c891cbd12ed37beecac9c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfa701a6_fbc9562b",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-30T01:09:36Z",
+      "side": 1,
+      "message": "does the result of .str() live long enough?",
+      "range": {
+        "startLine": 228,
+        "startChar": 41,
+        "endLine": 228,
+        "endChar": 66
+      },
+      "revId": "2e47a2c6dbfb359a79c891cbd12ed37beecac9c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02129d8b_ceeb060b",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-04-30T01:09:36Z",
+      "side": 1,
+      "message": "nit: find needs to look through the whole string if it doesn\u0027t find it.\nInstead we should check just that this is a prefix at the front of the string",
+      "range": {
+        "startLine": 234,
+        "startChar": 12,
+        "endLine": 234,
+        "endChar": 33
+      },
+      "revId": "2e47a2c6dbfb359a79c891cbd12ed37beecac9c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
