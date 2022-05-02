@@ -243,6 +243,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5144c9dc_c6ca5d70",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-02T18:58:24Z",
+      "side": 1,
+      "message": "my concern is more about ostringstream::str\n\nhttps://www.cplusplus.com/reference/sstream/ostringstream/str/\n\nit returns a std::string copy. I don\u0027t recall if this copy is guaranteed to live  for the duration of the function it\u0027s called in - or if here, c_str() may be giving us a dangling pointer because the std::string is freed by the time we get to line 229\n\nClang should issue a warning - I wonder why we\u0027re not getting it\nhttps://godbolt.org/z/xb9z6nhns",
+      "parentUuid": "50761730_fb80bd1f",
+      "range": {
+        "startLine": 228,
+        "startChar": 41,
+        "endLine": 228,
+        "endChar": 66
+      },
+      "revId": "2e47a2c6dbfb359a79c891cbd12ed37beecac9c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02129d8b_ceeb060b",
         "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
         "patchSetId": 1

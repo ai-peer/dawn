@@ -16,6 +16,86 @@
       "message": "Thanks for the review! Rebased over the formatting change, and updated to take the feedback into account. I feel it\u0027s a bit simpler to follow now.",
       "revId": "cb1377986e5bce07d962427b8f3b5a99910ad62f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9db0b18e_4ecb9fc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-02T18:58:24Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "cb1377986e5bce07d962427b8f3b5a99910ad62f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edd8af85_13d91ac2",
+        "filename": "src/dawn/native/vulkan/BackendVk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-02T18:58:24Z",
+      "side": 1,
+      "message": "could you add a comment here about why the lifetime is OK?\nAnd perhaps also add a reference to crbug.com/dawn/831. This won\u0027t be safe once we support more multithreading if the device gets removed from the map at the same time a callback is performing the lookup.\n\nI also realized another consideration: some stuff like async pipeline creation *does* occur on another thread. https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDebugUtilsMessengerCreateInfoEXT.html says:\n\u003e A callback can be called from multiple threads simultaneously (if the application is making Vulkan calls from multiple threads).\n\nIn terms of existence inside the map - we\u0027re ok. The device is added before you can call createPipelineAsync. And, removal makes sure that all async tasks are completed before removing the device from the map.\n\nBut, we could still have the main thread adding/removing a device, while some other thread is creating a pipeline asynchronously and performing a lookup due to VVL error.\n\nSo tldr; I think we need to have a mutex on accesses to this map",
+      "range": {
+        "startLine": 78,
+        "startChar": 36,
+        "endLine": 78,
+        "endChar": 44
+      },
+      "revId": "cb1377986e5bce07d962427b8f3b5a99910ad62f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d41ac223_a3108b0a",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-02T18:58:24Z",
+      "side": 1,
+      "message": "unit: now, I think this could be static, but declared inside the function GetNextDebugPrefix",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 38
+      },
+      "revId": "cb1377986e5bce07d962427b8f3b5a99910ad62f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "102c5d8e_3c27a15f",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-02T18:58:24Z",
+      "side": 1,
+      "message": "unit: if we do\n```\nconstexpr char[] kDebugPrefix \u003d \"DawnDbg\u003d\";\nstrncmp(kDebugPrefix, debugName.c_str(), sizeof(kDebugPrefix));\n```\n\nbefore doing .find(), we can early out after only checking 9 bytes if DawnDbg\u003d is not present",
+      "revId": "cb1377986e5bce07d962427b8f3b5a99910ad62f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
