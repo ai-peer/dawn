@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5c34292_d8246182",
+        "filename": "tools/src/cmd/cts/common/deps.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-02T18:52:32Z",
+      "side": 1,
+      "message": "If there are multiple matches then we get a warning (L66), and it splats over all the hashes with `newCTSHash`.",
+      "parentUuid": "5fab5db3_c6778eda",
+      "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37a0d652_b756289e",
         "filename": "tools/src/cmd/cts/export/export.go",
         "patchSetId": 8
@@ -31,6 +49,24 @@
       "writtenOn": "2022-05-02T13:56:07Z",
       "side": 1,
       "message": "What happens if no cts roll has happened, does this just return the last one? Will we end up with duplicate information in the spreadsheet?",
+      "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1df3f9ce_526f56cc",
+        "filename": "tools/src/cmd/cts/export/export.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-02T18:52:32Z",
+      "side": 1,
+      "message": "Currently yes. I\u0027ve been considering the pros and cons to having it bail if the hash hasn\u0027t changed, and I think this implementation is probably the best option. Why:\n\nThe goal here is to produce charts that PM and exec folks can look at and see burndown charts. They primarily care about time vs work remaining. If I hook this up to a cron job that runs daily, then duplicate results are likely fine.",
+      "parentUuid": "37a0d652_b756289e",
       "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1eb57c96_e89713be",
+        "filename": "tools/src/cmd/cts/export/export.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-02T18:52:32Z",
+      "side": 1,
+      "message": "Yes. See https://pkg.go.dev/time#pkg-constants\n\nThe numbers used are special codes to denote YEAR-MONTH-DAY.\n\nCompletely unintuitive, I know. But standard for this package.",
+      "parentUuid": "907318cd_f72b8285",
+      "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84240702_7bf60f91",
         "filename": "tools/src/cmd/cts/export/export.go",
         "patchSetId": 8
@@ -65,6 +119,24 @@
       "writtenOn": "2022-05-02T13:56:07Z",
       "side": 1,
       "message": "Maybe `ci` instead of `install` so it uses the deps from the package-lock.json file instead of installing potentially different versions?",
+      "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "731a566b_df67c4b9",
+        "filename": "tools/src/cmd/cts/export/export.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-02T18:52:32Z",
+      "side": 1,
+      "message": "I was under the impression that `npm install` used the package-lock versions?\nDoes it really fetch latest?",
+      "parentUuid": "84240702_7bf60f91",
       "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
