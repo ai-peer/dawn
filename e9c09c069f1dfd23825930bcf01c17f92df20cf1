@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5583183_71e29e3e",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-02T19:46:15Z",
+      "side": 1,
+      "message": "Good spot. I had this the other way around, then flipped it, forgot to update the comment. I actually find the old behaviour better, so kept the comment the same and negated the verb.",
+      "parentUuid": "dde4f1f7_883fca8a",
+      "revId": "e9c09c069f1dfd23825930bcf01c17f92df20cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7b8499a8_18ba7e3b",
         "filename": "tools/src/cmd/cts/roll/roll.go",
         "patchSetId": 9
