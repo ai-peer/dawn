@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37e856c5_270c3f4e",
+        "filename": "tools/src/cmd/cts/common/deps.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T18:57:22Z",
+      "side": 1,
+      "message": "But doesn\u0027t `b` end up getting a bunch of stuff into it?",
+      "parentUuid": "e5c34292_d8246182",
+      "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37a0d652_b756289e",
         "filename": "tools/src/cmd/cts/export/export.go",
         "patchSetId": 8
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Currently yes. I\u0027ve been considering the pros and cons to having it bail if the hash hasn\u0027t changed, and I think this implementation is probably the best option. Why:\n\nThe goal here is to produce charts that PM and exec folks can look at and see burndown charts. They primarily care about time vs work remaining. If I hook this up to a cron job that runs daily, then duplicate results are likely fine.",
       "parentUuid": "37a0d652_b756289e",
+      "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68efc099_a453783b",
+        "filename": "tools/src/cmd/cts/export/export.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T18:57:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1df3f9ce_526f56cc",
       "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -106,6 +142,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad39a17_f418ffa2",
+        "filename": "tools/src/cmd/cts/export/export.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T18:57:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1eb57c96_e89713be",
+      "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84240702_7bf60f91",
@@ -137,6 +191,24 @@
       "side": 1,
       "message": "I was under the impression that `npm install` used the package-lock versions?\nDoes it really fetch latest?",
       "parentUuid": "84240702_7bf60f91",
+      "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab791ed8_a480377d",
+        "filename": "tools/src/cmd/cts/export/export.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T18:57:22Z",
+      "side": 1,
+      "message": "It does:\n\n```\nnpm i: The npm i (or npm install) is used to install all dependencies or devDependencies from a package.json file. npm ci: CI stands for continuous integration and npm ci is used to install all exact version dependencies or devDependencies from a package-lock.\n```",
+      "parentUuid": "731a566b_df67c4b9",
       "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
