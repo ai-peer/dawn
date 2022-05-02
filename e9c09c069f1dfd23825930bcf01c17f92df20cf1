@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dde4f1f7_883fca8a",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T14:17:36Z",
+      "side": 1,
+      "message": "The description doesn\u0027t match what I expected here. Does this mean if I pass `--abandon` that it _doesn\u0027t_ abandon?",
+      "revId": "e9c09c069f1dfd23825930bcf01c17f92df20cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b8499a8_18ba7e3b",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T14:17:36Z",
+      "side": 1,
+      "message": "I guess it isn\u0027t really possible to identify the header comments with the tags from random other comments in the file? Is this going to output some thing strange where we have the header comments and then a bunch of random comments after and then the new expectations?",
+      "revId": "e9c09c069f1dfd23825930bcf01c17f92df20cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e696a006_368a6c2a",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T14:17:36Z",
+      "side": 1,
+      "message": "Maybe `maxAttempts` ? My first thought was passing tests when I saw `maxPasses` which was weird.",
+      "revId": "e9c09c069f1dfd23825930bcf01c17f92df20cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9493721d_3b476e0c",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T14:17:36Z",
+      "side": 1,
+      "message": "nit: as above s/pass/attempt/",
+      "revId": "e9c09c069f1dfd23825930bcf01c17f92df20cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8be947fd_44bd7e67",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T14:17:36Z",
+      "side": 1,
+      "message": "YYYY-MM-DD ? Can this be `2006-01-20` for clarity?",
+      "revId": "e9c09c069f1dfd23825930bcf01c17f92df20cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da34fd6a_2ef02d82",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T14:17:36Z",
+      "side": 1,
+      "message": "Does this mean if the expectation file is empty we never inject the comment chunk?",
+      "revId": "e9c09c069f1dfd23825930bcf01c17f92df20cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2856bf2c_d51a3a9a",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T14:17:36Z",
+      "side": 1,
+      "message": "This means this script will only ever be run by one person? If the gardener changes before the previous roll lands this won\u0027t return the correct results",
+      "revId": "e9c09c069f1dfd23825930bcf01c17f92df20cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5ee97ea_87862d3a",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T14:17:36Z",
+      "side": 1,
+      "message": "nit: `(failed to fetch project %v hash %v: %v\", project, hash, err)`",
+      "revId": "e9c09c069f1dfd23825930bcf01c17f92df20cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baee3b63_b1422159",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T14:17:36Z",
+      "side": 1,
+      "message": "Nit: `(failed to checkout projec %v hash %v: %v\", project, hash, err)` ?",
+      "revId": "e9c09c069f1dfd23825930bcf01c17f92df20cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
