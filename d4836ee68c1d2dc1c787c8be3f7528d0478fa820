@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fab5db3_c6778eda",
+        "filename": "tools/src/cmd/cts/common/deps.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T13:56:07Z",
+      "side": 1,
+      "message": "What does it mean if there are multiple matches? This seems like it\u0027s going to do weird things with appending the `newCTSHash` after the hash if a second entry is found?",
+      "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37a0d652_b756289e",
+        "filename": "tools/src/cmd/cts/export/export.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T13:56:07Z",
+      "side": 1,
+      "message": "What happens if no cts roll has happened, does this just return the last one? Will we end up with duplicate information in the spreadsheet?",
+      "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "907318cd_f72b8285",
+        "filename": "tools/src/cmd/cts/export/export.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T13:56:07Z",
+      "side": 1,
+      "message": "Is this format YYYY-MM-DD ? can we change the 02 to 20 or something for clarity?",
+      "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84240702_7bf60f91",
+        "filename": "tools/src/cmd/cts/export/export.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T13:56:07Z",
+      "side": 1,
+      "message": "Maybe `ci` instead of `install` so it uses the deps from the package-lock.json file instead of installing potentially different versions?",
+      "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
