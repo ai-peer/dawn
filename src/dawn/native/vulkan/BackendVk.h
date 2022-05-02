@@ -15,6 +15,8 @@
 #ifndef SRC_DAWN_NATIVE_VULKAN_BACKENDVK_H_
 #define SRC_DAWN_NATIVE_VULKAN_BACKENDVK_H_
 
+#include <string>
+#include <unordered_map>
 #include <vector>
 
 #include "dawn/native/BackendConnection.h"
@@ -31,6 +33,8 @@ enum class ICD {
     None,
     SwiftShader,
 };
+
+class Device;
 
 // VulkanInstance holds the reference to the Vulkan library, the VkInstance, VkPhysicalDevices
 // on that instance, Vulkan functions loaded from the library, and global information
@@ -50,6 +54,10 @@ class VulkanInstance : public RefCounted {
     const VulkanGlobalInfo& GetGlobalInfo() const;
     const std::vector<VkPhysicalDevice>& GetPhysicalDevices() const;
 
+    void StartListeningForDeviceMessages(Device* device);
+    void StopListeningForDeviceMessages(Device* device);
+    Device* GetDeviceForDebugPrefix(std::string deviceDebugPrefix);
+
   private:
     VulkanInstance();
 
@@ -66,6 +74,8 @@ class VulkanInstance : public RefCounted {
     VkDebugUtilsMessengerEXT mDebugUtilsMessenger = VK_NULL_HANDLE;
 
     std::vector<VkPhysicalDevice> mPhysicalDevices;
+
+    std::unordered_map<std::string, Device*> mMessageListenerDevices;
 };
 
 class Backend : public BackendConnection {
