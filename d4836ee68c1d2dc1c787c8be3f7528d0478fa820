@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90816714_06713284",
+        "filename": "tools/src/cmd/cts/common/deps.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-02T19:05:06Z",
+      "side": 1,
+      "message": "`matches` returns a list of index pairs - start and end indices of the regex matches.\nSo this loop writes out everything from 0 to first match start, replaces the middle, then writes out `end` to next match, replaces the middle, and so on...\n\nSo the end result is that all the hashes are replaced, and everything else is preserved.",
+      "parentUuid": "37e856c5_270c3f4e",
+      "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37a0d652_b756289e",
         "filename": "tools/src/cmd/cts/export/export.go",
         "patchSetId": 8
@@ -209,6 +227,24 @@
       "side": 1,
       "message": "It does:\n\n```\nnpm i: The npm i (or npm install) is used to install all dependencies or devDependencies from a package.json file. npm ci: CI stands for continuous integration and npm ci is used to install all exact version dependencies or devDependencies from a package-lock.\n```",
       "parentUuid": "731a566b_df67c4b9",
+      "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5483bc02_25ff5597",
+        "filename": "tools/src/cmd/cts/export/export.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-02T19:05:06Z",
+      "side": 1,
+      "message": "Wow okay. Will change.",
+      "parentUuid": "ab791ed8_a480377d",
       "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
