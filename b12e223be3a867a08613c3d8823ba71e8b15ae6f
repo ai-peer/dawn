@@ -51,6 +51,24 @@
       "parentUuid": "257280ef_3071cdfc",
       "revId": "b12e223be3a867a08613c3d8823ba71e8b15ae6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdbe14fe_4cf8707b",
+        "filename": "src/tint/writer/flatten_bindings_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-02T18:58:07Z",
+      "side": 1,
+      "message": "Looks good, thanks!",
+      "parentUuid": "acf6ebf1_92992f41",
+      "revId": "b12e223be3a867a08613c3d8823ba71e8b15ae6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
