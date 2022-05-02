@@ -216,18 +216,25 @@ void SetDebugNameInternal(Device* device,
         objectNameInfo.objectType = objectType;
         objectNameInfo.objectHandle = objectHandle;
 
-        if (label.empty() || !device->IsToggleEnabled(Toggle::UseUserDefinedLabelsInBackend)) {
-            objectNameInfo.pObjectName = prefix;
-            device->fn.SetDebugUtilsObjectNameEXT(device->GetVkDevice(), &objectNameInfo);
-            return;
+        std::ostringstream objectName;
+        // Prefix with the device's message ID so that if this label appears in a validation
+        // message it can be parsed out and the message can be associated with the right device.
+        objectName << device->GetDebugPrefix() << ";" << prefix;
+        if (!label.empty() && device->IsToggleEnabled(Toggle::UseUserDefinedLabelsInBackend)) {
+            objectName << "_" << label;
         }
 
-        std::string objectName = prefix;
-        objectName += "_";
-        objectName += label;
-        objectNameInfo.pObjectName = objectName.c_str();
+        objectNameInfo.pObjectName = objectName.str().c_str();
         device->fn.SetDebugUtilsObjectNameEXT(device->GetVkDevice(), &objectNameInfo);
     }
+}
+
+std::string GetDeviceDebugPrefixFromDebugName(std::string debugName) {
+    size_t messageIdEnd = debugName.find(";");
+    if (messageIdEnd != std::string::npos) {
+        return debugName.substr(0, messageIdEnd);
+    }
+    return {};
 }
 
 VkSpecializationInfo* GetVkSpecializationInfo(
