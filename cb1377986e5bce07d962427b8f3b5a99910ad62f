@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fb69620_d3b0bac0",
+        "filename": "src/dawn/native/vulkan/BackendVk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-02T20:46:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edd8af85_13d91ac2",
+      "range": {
+        "startLine": 78,
+        "startChar": 36,
+        "endLine": 78,
+        "endChar": 44
+      },
+      "revId": "cb1377986e5bce07d962427b8f3b5a99910ad62f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d41ac223_a3108b0a",
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "255df16b_add72571",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-02T20:46:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d41ac223_a3108b0a",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 38
+      },
+      "revId": "cb1377986e5bce07d962427b8f3b5a99910ad62f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "102c5d8e_3c27a15f",
@@ -94,6 +142,24 @@
       "writtenOn": "2022-05-02T18:58:24Z",
       "side": 1,
       "message": "unit: if we do\n```\nconstexpr char[] kDebugPrefix \u003d \"DawnDbg\u003d\";\nstrncmp(kDebugPrefix, debugName.c_str(), sizeof(kDebugPrefix));\n```\n\nbefore doing .find(), we can early out after only checking 9 bytes if DawnDbg\u003d is not present",
+      "revId": "cb1377986e5bce07d962427b8f3b5a99910ad62f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72cba01b_a1bb25ce",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-02T20:46:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "102c5d8e_3c27a15f",
       "revId": "cb1377986e5bce07d962427b8f3b5a99910ad62f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

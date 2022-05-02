@@ -265,6 +265,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8da23b9_30aacb48",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-02T20:46:29Z",
+      "side": 1,
+      "message": "Ah, got it. I\u0027ve updated it to make the std::string lifespan more explicit.",
+      "parentUuid": "5144c9dc_c6ca5d70",
+      "range": {
+        "startLine": 228,
+        "startChar": 41,
+        "endLine": 228,
+        "endChar": 66
+      },
+      "revId": "2e47a2c6dbfb359a79c891cbd12ed37beecac9c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02129d8b_ceeb060b",
