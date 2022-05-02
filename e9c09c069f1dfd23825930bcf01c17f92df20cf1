@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea0b7250_d547c524",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T19:49:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b5583183_71e29e3e",
+      "revId": "e9c09c069f1dfd23825930bcf01c17f92df20cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b8499a8_18ba7e3b",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Yeah, theoretically you\u0027re right. In reality this will only affect the top most tags header, and the `Last rolled` comment, which\u0027ll be replaced later. If there\u0027s other stuff out there that has comments, then it\u0027ll be preserved.\nThis flag was mostly for debugging. I could probably remove it, but I still use it on occasion to just test how far the full-regeneration is from current expectations.",
       "parentUuid": "7b8499a8_18ba7e3b",
+      "revId": "e9c09c069f1dfd23825930bcf01c17f92df20cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2f39845_56aaa26e",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T19:49:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "54b79443_47f5eef4",
       "revId": "e9c09c069f1dfd23825930bcf01c17f92df20cf1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -176,6 +212,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "237609c2_6828b428",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T19:49:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7e52e28c_67dd733d",
+      "revId": "e9c09c069f1dfd23825930bcf01c17f92df20cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da34fd6a_2ef02d82",
@@ -211,6 +265,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1c717cd_e572ed97",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T19:49:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f7d732f2_d2b19fe7",
+      "revId": "e9c09c069f1dfd23825930bcf01c17f92df20cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2856bf2c_d51a3a9a",
@@ -242,6 +314,24 @@
       "side": 1,
       "message": "This is just to either update or abandon existing changes owned by the invoker.\nIf the gardener changes, we\u0027ll end up with multiple roll CLs, yes. But abandoning (intentionally or unintentionally) someone else\u0027s change seems likely to cause upset.",
       "parentUuid": "2856bf2c_d51a3a9a",
+      "revId": "e9c09c069f1dfd23825930bcf01c17f92df20cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "665051f1_695d36c2",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 9
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T19:49:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "95199249_cd0c24a7",
       "revId": "e9c09c069f1dfd23825930bcf01c17f92df20cf1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
