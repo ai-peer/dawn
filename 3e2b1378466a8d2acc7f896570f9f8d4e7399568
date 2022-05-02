@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a96af969_92d37ca4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T20:59:11Z",
+      "side": 1,
+      "message": "PTAL. This is the second attempt.\n\nI removed the third_party/gn/abseil-cpp folder in favour of using the BUILD.gn from third_party/abseil-cpp. This required moving the googletest sources to match chromium as third_party/googlestest/src and copying the third_party/googletest/BUILD.gn from Chromium (which a bunch of edits to make work with dawn/tint).\n\nThis built locally for Dawn standalone with both GN and CMake. I was also able to build `dawn_unittests` in a chromium checkout.",
+      "revId": "3e2b1378466a8d2acc7f896570f9f8d4e7399568",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
