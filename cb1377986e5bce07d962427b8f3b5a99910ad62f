@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44f189d9_3db4f385",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-02T17:58:09Z",
+      "side": 1,
+      "message": "Thanks for the review! Rebased over the formatting change, and updated to take the feedback into account. I feel it\u0027s a bit simpler to follow now.",
+      "revId": "cb1377986e5bce07d962427b8f3b5a99910ad62f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

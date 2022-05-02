@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fed5753_5db915d8",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-02T17:58:09Z",
+      "side": 1,
+      "message": "This already happens in OnDebugUtilsCallback, which is a better place for it since that will ensure that even messages that don\u0027t end up having an associated device (if there are any) will still be echoed to the console.",
+      "parentUuid": "a889e7ee_48e822ec",
+      "range": {
+        "startLine": 421,
+        "startChar": 0,
+        "endLine": 421,
+        "endChar": 9
+      },
+      "revId": "2e47a2c6dbfb359a79c891cbd12ed37beecac9c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f46f643d_fcf2dad7",
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c70c6f4_f04a04fa",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-02T17:58:09Z",
+      "side": 1,
+      "message": "Changed to std::string {Device}DebugPrefix",
+      "parentUuid": "d038a5f7_7c802049",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 38
+      },
+      "revId": "2e47a2c6dbfb359a79c891cbd12ed37beecac9c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72387901_97acdd88",
@@ -94,6 +142,30 @@
       "writtenOn": "2022-04-30T01:09:36Z",
       "side": 1,
       "message": "we could consider just storing the string on the device so we don\u0027t redo these string concatenation operations all the time.",
+      "range": {
+        "startLine": 223,
+        "startChar": 26,
+        "endLine": 223,
+        "endChar": 64
+      },
+      "revId": "2e47a2c6dbfb359a79c891cbd12ed37beecac9c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08d53cbc_4df806ae",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-02T17:58:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72387901_97acdd88",
       "range": {
         "startLine": 223,
         "startChar": 26,
@@ -127,6 +199,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50761730_fb80bd1f",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-02T17:58:09Z",
+      "side": 1,
+      "message": "From the Vulkan spec (https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#fundamentals-objectmodel-lifetime):\n\n\"The ownership of application-owned memory is immediately acquired by any Vulkan command it is passed into. Ownership of such memory must be released back to the application at the end of the duration of the command, so that the application can alter or free this memory as soon as all the commands that acquired it have returned.\"\n\nSo the memory should only needs to be valid for the etDebugUtilsObjectNameEXT() call.",
+      "parentUuid": "cfa701a6_fbc9562b",
+      "range": {
+        "startLine": 228,
+        "startChar": 41,
+        "endLine": 228,
+        "endChar": 66
+      },
+      "revId": "2e47a2c6dbfb359a79c891cbd12ed37beecac9c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02129d8b_ceeb060b",
@@ -140,6 +236,30 @@
       "writtenOn": "2022-04-30T01:09:36Z",
       "side": 1,
       "message": "nit: find needs to look through the whole string if it doesn\u0027t find it.\nInstead we should check just that this is a prefix at the front of the string",
+      "range": {
+        "startLine": 234,
+        "startChar": 12,
+        "endLine": 234,
+        "endChar": 33
+      },
+      "revId": "2e47a2c6dbfb359a79c891cbd12ed37beecac9c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd0b69c5_7addc9d7",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-02T17:58:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02129d8b_ceeb060b",
       "range": {
         "startLine": 234,
         "startChar": 12,
