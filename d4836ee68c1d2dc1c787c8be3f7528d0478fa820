@@ -72,6 +72,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8f1f3e0_26b8b4ee",
+        "filename": "tools/src/cmd/cts/common/deps.go",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-02T19:12:40Z",
+      "side": 1,
+      "message": "Ahh, so `end \u003d match[1]` sets end to the beginning of the next match? I was thinking it set it to the end of this match which is wat seemed weird.",
+      "parentUuid": "90816714_06713284",
+      "revId": "d4836ee68c1d2dc1c787c8be3f7528d0478fa820",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37a0d652_b756289e",
