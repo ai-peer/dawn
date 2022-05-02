@@ -15,7 +15,7 @@
 /third_party/clang-format
 /third_party/cpplint
 /third_party/glfw
-/third_party/googletest
+/third_party/googletest/src
 /third_party/gpuweb
 /third_party/gpuweb-cts
 /third_party/jinja2
