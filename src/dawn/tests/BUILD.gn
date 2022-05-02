@@ -174,11 +174,21 @@ source_set("native_mocks_sources") {
   ]
 }
 
+config("absl_config") {
+  if (dawn_standalone && is_clang) {
+    cflags = [
+      # Allow the use of enable_if()
+      "-Wno-gcc-compat",
+    ]
+  }
+}
+
 dawn_test("dawn_unittests") {
   deps = [
     ":gmock_and_gtest",
     ":mock_webgpu_gen",
     ":native_mocks_sources",
+    "${dawn_abseil_dir}/absl/strings",
     "${dawn_root}/src/dawn:cpp",
     "${dawn_root}/src/dawn:proc",
     "${dawn_root}/src/dawn/common",
@@ -189,7 +199,10 @@ dawn_test("dawn_unittests") {
   ]
 
   # Add internal dawn native config for internal unittests.
-  configs = [ "${dawn_root}/src/dawn/native:internal" ]
+  configs = [
+    "${dawn_root}/src/dawn/native:internal",
+    ":absl_config",
+  ]
 
   sources = get_target_outputs(":mock_webgpu_gen")
   sources += [

@@ -111,5 +111,5 @@ endif()
 
 if (${TINT_BUILD_TESTS} AND NOT TARGET gmock)
   set(gtest_force_shared_crt ON CACHE BOOL "Controls whether a shared run-time library should be used even when Google Test is built as static library" FORCE)
-  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/googletest EXCLUDE_FROM_ALL)
+  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/googletest/src EXCLUDE_FROM_ALL)
 endif()
