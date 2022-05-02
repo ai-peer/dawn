@@ -95,7 +95,7 @@ deps = {
     'url': '{chromium_git}/chromium/src/testing@d485ae97b7900c1fb7edfbe2901ae5adcb120865',
     'condition': 'dawn_standalone',
   },
-  'third_party/googletest': {
+  'third_party/googletest/src': {
     'url': '{chromium_git}/external/github.com/google/googletest@6b74da4757a549563d7c37c8fae3e704662a043b',
     'condition': 'dawn_standalone',
   },
@@ -147,7 +147,7 @@ deps = {
   },
 
   'third_party/abseil-cpp': {
-    'url': '{chromium_git}/chromium/src/third_party/abseil-cpp@789af048b388657987c59d4da406859034fe310f',
+    'url': '{chromium_git}/chromium/src/third_party/abseil-cpp@ae9f091e950df26eed5135867d6a6acfa74506c7',
     'condition': 'dawn_standalone',
   },
 
