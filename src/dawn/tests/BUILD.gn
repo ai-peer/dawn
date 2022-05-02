@@ -31,48 +31,12 @@ group("tests") {
 # Gtest Gmock - Handle building inside and outside of Chromium.
 ###############################################################################
 
-# When building outside of Chromium we need to define our own targets for GTest
-# and GMock. However when compiling inside of Chromium we need to reuse the
-# existing targets, both because Chromium has a special harness for swarming
-# and because otherwise the "gn check" fails.
-
 if (!build_with_chromium) {
-  # When we aren't in Chromium we define out own targets based on the location
-  # of the googletest repo.
-  googletest_dir = dawn_googletest_dir
-
-  config("gtest_config") {
-    include_dirs = [
-      "${googletest_dir}/googletest",
-      "${googletest_dir}/googletest/include",
-    ]
-  }
-
-  static_library("gtest") {
-    testonly = true
-    sources = [ "${googletest_dir}/googletest/src/gtest-all.cc" ]
-    public_configs = [ ":gtest_config" ]
-  }
-
-  config("gmock_config") {
-    include_dirs = [
-      "${googletest_dir}/googlemock",
-      "${googletest_dir}/googlemock/include",
-      "${googletest_dir}/googletest/include",
-    ]
-  }
-
-  static_library("gmock") {
-    testonly = true
-    sources = [ "${googletest_dir}/googlemock/src/gmock-all.cc" ]
-    public_configs = [ ":gmock_config" ]
-  }
-
   group("gmock_and_gtest") {
     testonly = true
     public_deps = [
-      ":gmock",
-      ":gtest",
+      "//third_party/googletest:gmock",
+      "//third_party/googletest:gtest",
     ]
   }
 } else {
@@ -174,11 +138,21 @@ source_set("native_mocks_sources") {
   ]
 }
 
+config("absl_config") {
+  if (dawn_standalone && is_clang) {
+    cflags = [
+      # Allow the use of enable_if()
+      "-Wno-gcc-compat",
+    ]
+  }
+}
+
 dawn_test("dawn_unittests") {
   deps = [
     ":gmock_and_gtest",
     ":mock_webgpu_gen",
     ":native_mocks_sources",
+    "${dawn_abseil_dir}:absl",
     "${dawn_root}/src/dawn:cpp",
     "${dawn_root}/src/dawn:proc",
     "${dawn_root}/src/dawn/common",

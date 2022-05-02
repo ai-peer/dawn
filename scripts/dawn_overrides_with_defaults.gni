@@ -42,7 +42,7 @@ if (!defined(dawn_glfw_dir)) {
 }
 
 if (!defined(dawn_googletest_dir)) {
-  dawn_googletest_dir = "//third_party/googletest"
+  dawn_googletest_dir = "//third_party/googletest/src"
 }
 
 if (!defined(dawn_spirv_tools_dir)) {
