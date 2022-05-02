@@ -44,19 +44,24 @@ if (dawn_enable_vulkan) {
       dawn_enable_vulkan_loader && dawn_vulkan_loader_dir != ""
 }
 
-group("abseil") {
-  # When build_with_chromium=true we need to include "//third_party/abseil-cpp:absl" while
-  # it's beneficial to be more specific with standalone Dawn, especially when it comes to
-  # including it as a dependency in other projects (such as Skia).
-  if (build_with_chromium) {
-    public_deps = [ "$dawn_abseil_dir:absl" ]
-  } else {
-    public_deps = [ "${dawn_root}/third_party/gn/abseil-cpp:str_format" ]
+config("absl_config") {
+  if (dawn_standalone && is_clang) {
+    cflags = [
+      # Allow the use of enable_if()
+      "-Wno-gcc-compat",
+    ]
   }
 }
 
+group("abseil") {
+  public_deps = [ "${dawn_abseil_dir}:absl" ]
+}
+
 config("internal") {
-  configs = [ "${dawn_root}/src/dawn/common:internal_config" ]
+  configs = [
+    "${dawn_root}/src/dawn/common:internal_config",
+    ":absl_config",
+  ]
 }
 
 config("weak_framework") {
