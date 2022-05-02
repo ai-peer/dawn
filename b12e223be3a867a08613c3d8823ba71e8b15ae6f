@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6637f7ca_6ab0e002",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-02T16:20:49Z",
+      "side": 1,
+      "message": "LGTM - maybe worth adding another test.",
+      "revId": "b12e223be3a867a08613c3d8823ba71e8b15ae6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "257280ef_3071cdfc",
+        "filename": "src/tint/writer/flatten_bindings_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-02T16:20:49Z",
+      "side": 1,
+      "message": "Nit: I think it\u0027d also be good to have a test that ensures different types of resources have different namespaces (e.g. a sampler and a buffer both get index 0). That also covers that `may_collide \u003d true` setting, which isn\u0027t otherwise tested here.",
+      "revId": "b12e223be3a867a08613c3d8823ba71e8b15ae6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
