@@ -51,6 +51,29 @@
       "parentUuid": "d0f2dc48_db272a17",
       "revId": "f578535a09645963bd5c49a3399e7ab20a8d26c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc621b01_dd79af0d",
+        "filename": "src/dawn/native/vulkan/ComputePipelineVk.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-02T18:17:40Z",
+      "side": 1,
+      "message": "stray comment",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 88
+      },
+      "revId": "f578535a09645963bd5c49a3399e7ab20a8d26c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
