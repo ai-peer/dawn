@@ -311,6 +311,8 @@ class DawnTestBase {
 
     bool HasToggleEnabled(const char* workaround) const;
 
+    void Swap();
+
     void StartExpectDeviceError(testing::Matcher<std::string> errorMatcher = testing::_);
     bool EndExpectDeviceError();
 

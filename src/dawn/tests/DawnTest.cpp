@@ -1021,6 +1021,7 @@ void DawnTestBase::SetUp() {
 
 void DawnTestBase::TearDown() {
     FlushWire();
+    Swap();
 
     MapSlotsSynchronously();
     ResolveExpectations();
@@ -1036,6 +1037,16 @@ void DawnTestBase::TearDown() {
 
     // The device will be destroyed soon after, so we want to set the expectation.
     ExpectDeviceDestruction();
+}
+
+void DawnTestBase::Swap() {
+#if defined(DAWN_ENABLE_BACKEND_OPENGL)
+    if (IsOpenGL()) {
+        glfwSwapBuffers(gTestEnv->GetOpenGLWindow());
+    } else if (IsOpenGLES()) {
+        glfwSwapBuffers(gTestEnv->GetOpenGLESWindow());
+    }
+#endif
 }
 
 void DawnTestBase::StartExpectDeviceError(testing::Matcher<std::string> errorMatcher) {
