@@ -15,6 +15,7 @@
 #include "dawn/native/vulkan/UtilsVulkan.h"
 
 #include "dawn/common/Assert.h"
+#include "dawn/common/Log.h"
 #include "dawn/native/EnumMaskIterator.h"
 #include "dawn/native/Format.h"
 #include "dawn/native/Pipeline.h"
@@ -25,6 +26,9 @@
 #include "dawn/native/vulkan/VulkanError.h"
 
 namespace dawn::native::vulkan {
+
+constexpr char kDeviceDebugPrefix[] = "DawnDbg=";
+constexpr char kDeviceDebugSeparator[] = ";";
 
 #define VK_OBJECT_TYPE_GETTER(object, objectType)         \
     template <>                                           \
@@ -216,18 +220,34 @@ void SetDebugNameInternal(Device* device,
         objectNameInfo.objectType = objectType;
         objectNameInfo.objectHandle = objectHandle;
 
-        if (label.empty() || !device->IsToggleEnabled(Toggle::UseUserDefinedLabelsInBackend)) {
-            objectNameInfo.pObjectName = prefix;
-            device->fn.SetDebugUtilsObjectNameEXT(device->GetVkDevice(), &objectNameInfo);
-            return;
+        std::ostringstream objectNameStream;
+        // Prefix with the device's message ID so that if this label appears in a validation
+        // message it can be parsed out and the message can be associated with the right device.
+        objectNameStream << device->GetDebugPrefix() << kDeviceDebugSeparator << prefix;
+        if (!label.empty() && device->IsToggleEnabled(Toggle::UseUserDefinedLabelsInBackend)) {
+            objectNameStream << "_" << label;
         }
-
-        std::string objectName = prefix;
-        objectName += "_";
-        objectName += label;
+        std::string objectName = objectNameStream.str();
         objectNameInfo.pObjectName = objectName.c_str();
         device->fn.SetDebugUtilsObjectNameEXT(device->GetVkDevice(), &objectNameInfo);
     }
+}
+
+std::string GetNextDeviceDebugPrefix() {
+    static uint64_t nextDeviceDebugId = 1;
+    std::ostringstream objectName;
+    objectName << kDeviceDebugPrefix << nextDeviceDebugId++;
+    return objectName.str();
+}
+
+std::string GetDeviceDebugPrefixFromDebugName(std::string debugName) {
+    if (strncmp(debugName.c_str(), kDeviceDebugPrefix, sizeof(kDeviceDebugPrefix) - 1) == 0) {
+        size_t messageIdEnd = debugName.find(kDeviceDebugSeparator);
+        if (messageIdEnd != std::string::npos) {
+            return debugName.substr(0, messageIdEnd);
+        }
+    }
+    return {};
 }
 
 VkSpecializationInfo* GetVkSpecializationInfo(
