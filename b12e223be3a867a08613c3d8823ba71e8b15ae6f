@@ -33,6 +33,24 @@
       "message": "Nit: I think it\u0027d also be good to have a test that ensures different types of resources have different namespaces (e.g. a sampler and a buffer both get index 0). That also covers that `may_collide \u003d true` setting, which isn\u0027t otherwise tested here.",
       "revId": "b12e223be3a867a08613c3d8823ba71e8b15ae6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acf6ebf1_92992f41",
+        "filename": "src/tint/writer/flatten_bindings_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-02T18:13:55Z",
+      "side": 1,
+      "message": "Great point. I added NotFlat_MultipleNamespaces, and also added NoBindings to test when there are no bindings. PTAL.",
+      "parentUuid": "257280ef_3071cdfc",
+      "revId": "b12e223be3a867a08613c3d8823ba71e8b15ae6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
