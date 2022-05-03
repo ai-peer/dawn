@@ -35,16 +35,17 @@ void GPUComputePassEncoder::setPipeline(Napi::Env,
     enc_.SetPipeline(*pipeline.As<GPUComputePipeline>());
 }
 
-void GPUComputePassEncoder::dispatch(Napi::Env,
-                                     interop::GPUSize32 workgroupCountX,
-                                     interop::GPUSize32 workgroupCountY,
-                                     interop::GPUSize32 workgroupCountZ) {
+void GPUComputePassEncoder::dispatchWorkgroups(Napi::Env,
+                                               interop::GPUSize32 workgroupCountX,
+                                               interop::GPUSize32 workgroupCountY,
+                                               interop::GPUSize32 workgroupCountZ) {
     enc_.Dispatch(workgroupCountX, workgroupCountY, workgroupCountZ);
 }
 
-void GPUComputePassEncoder::dispatchIndirect(Napi::Env,
-                                             interop::Interface<interop::GPUBuffer> indirectBuffer,
-                                             interop::GPUSize64 indirectOffset) {
+void GPUComputePassEncoder::dispatchWorkgroupsIndirect(
+    Napi::Env,
+    interop::Interface<interop::GPUBuffer> indirectBuffer,
+    interop::GPUSize64 indirectOffset) {
     enc_.DispatchIndirect(*indirectBuffer.As<GPUBuffer>(), indirectOffset);
 }
 
@@ -112,12 +113,11 @@ void GPUComputePassEncoder::insertDebugMarker(Napi::Env, std::string markerLabel
     enc_.InsertDebugMarker(markerLabel.c_str());
 }
 
-std::variant<std::string, interop::UndefinedType> GPUComputePassEncoder::getLabel(Napi::Env) {
+std::string GPUComputePassEncoder::getLabel(Napi::Env) {
     UNIMPLEMENTED();
 }
 
-void GPUComputePassEncoder::setLabel(Napi::Env,
-                                     std::variant<std::string, interop::UndefinedType> value) {
+void GPUComputePassEncoder::setLabel(Napi::Env, std::string value) {
     UNIMPLEMENTED();
 }
 
