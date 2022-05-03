@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a03768a2_830ec566",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-03T22:36:13Z",
+      "side": 1,
+      "message": "Done, and made it const. Had to wrap the initialization too.",
+      "parentUuid": "21b862bf_235a1d69",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 20
+      },
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b1d4e40_2f0bf864",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df3014e8_e3d57e96",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-03T22:36:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b1d4e40_2f0bf864",
+      "range": {
+        "startLine": 100,
+        "startChar": 25,
+        "endLine": 100,
+        "endChar": 35
+      },
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48ba9b62_f3354b77",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-05-03T17:29:10Z",
       "side": 1,
       "message": "I\u0027d recommend traversing the functions in the order described by the dependency graph, like the resolver does. Means you don\u0027t have to recurse at L212.",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 9
+      },
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71df7f0d_678bd2de",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-03T22:36:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48ba9b62_f3354b77",
       "range": {
         "startLine": 134,
         "startChar": 0,
@@ -123,6 +195,24 @@
       "writtenOn": "2022-05-03T17:29:10Z",
       "side": 1,
       "message": "Could also be a benchmark 😊",
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6f41c36_8c4a1903",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 2532,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-03T22:36:13Z",
+      "side": 1,
+      "message": "I\u0027ve added this as a benchmark but without the error, since E2E tests currently can\u0027t expect a test to fail validation. So I\u0027ve also left the unit test in as well, since it tests that the analysis actually does the right thing in this scenario.\n\nAlso, I tweaked it so that it actually produces a full 255x255 matrix of tags, rather than just 1 tag per parameter.",
+      "parentUuid": "368593a6_7f14f66a",
       "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
