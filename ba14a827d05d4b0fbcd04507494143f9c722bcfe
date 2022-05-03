@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da3d71dc_3d9c68a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-03T17:29:10Z",
+      "side": 1,
+      "message": "Looking great. I\u0027ve asked Alan if he could take a look, as he\u0027s far more familiar with the UA rules than I am.",
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21b862bf_235a1d69",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-03T17:29:10Z",
+      "side": 1,
+      "message": "If the tag is only for debugging, should this be wrapped in a `#if TINT_DUMP_UNIFORMITY_GRAPH` ?\n\nGiven that it\u0027s non-const, does it need to be a constructor arg?",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 20
+      },
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b1d4e40_2f0bf864",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-03T17:29:10Z",
+      "side": 1,
+      "message": "You\u0027re missing the header for this. The \"C++ way\" of writing this is: `std::numeric_limits\u003cuint32_t\u003e::max()`",
+      "range": {
+        "startLine": 100,
+        "startChar": 25,
+        "endLine": 100,
+        "endChar": 35
+      },
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48ba9b62_f3354b77",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-03T17:29:10Z",
+      "side": 1,
+      "message": "I\u0027d recommend traversing the functions in the order described by the dependency graph, like the resolver does. Means you don\u0027t have to recurse at L212.",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 9
+      },
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4152d0b6_09535d57",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 925,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-03T17:29:10Z",
+      "side": 1,
+      "message": "Note: the heavy use of recursion here is a little scary. We may want to use vectors much like `ast::TraverseExpression` to avoid the risk of stack-overflows.\n\nCan be done as a followup, if when we encounter issues.",
+      "range": {
+        "startLine": 919,
+        "startChar": 0,
+        "endLine": 925,
+        "endChar": 9
+      },
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "368593a6_7f14f66a",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 2532,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-03T17:29:10Z",
+      "side": 1,
+      "message": "Could also be a benchmark 😊",
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
