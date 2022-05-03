@@ -34,6 +34,24 @@
       "parentUuid": "580ba774_f35df470",
       "revId": "34862eab5e5d92b408b86991e52a87a2ec7f9287",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a005e43_d8b669f5",
+        "filename": "test/tint/builtins/gen/textureDimensions/ba1481.wgsl.expected.hlsl",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-03T14:26:12Z",
+      "side": 1,
+      "message": "Ack, thanks.",
+      "parentUuid": "9d0a982b_07977586",
+      "revId": "34862eab5e5d92b408b86991e52a87a2ec7f9287",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
