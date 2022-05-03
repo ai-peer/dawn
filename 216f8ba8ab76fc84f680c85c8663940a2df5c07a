@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0395b9be_b5b4b0ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-03T17:56:01Z",
+      "side": 1,
+      "message": "Thank you!",
+      "revId": "216f8ba8ab76fc84f680c85c8663940a2df5c07a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07d525bb_2ff4124d",
+        "filename": "src/dawn/node/binding/GPUBindGroup.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-03T17:56:01Z",
+      "side": 1,
+      "message": "This makes me glad we made the change away from `string or undefined`. 😊",
+      "revId": "216f8ba8ab76fc84f680c85c8663940a2df5c07a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ed1b9bd_272b99be",
+        "filename": "src/dawn/node/binding/GPUComputePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-03T17:56:01Z",
+      "side": 1,
+      "message": "This should be able to call `enc_.DispatchWorkgroups()` now.",
+      "revId": "216f8ba8ab76fc84f680c85c8663940a2df5c07a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "879b7ad3_fc98602e",
+        "filename": "src/dawn/node/binding/GPUComputePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-03T17:56:01Z",
+      "side": 1,
+      "message": "Ditto with `enc_.DispatchWorkgroupsIndirect()`.",
+      "revId": "216f8ba8ab76fc84f680c85c8663940a2df5c07a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
