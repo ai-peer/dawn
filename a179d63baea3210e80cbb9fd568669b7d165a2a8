@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "899b9783_d5d80dc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-03T14:20:24Z",
+      "side": 1,
+      "message": "PTAL. Went with a different approach. Turned this on for all but the unittests target which was complaining about missing absl dep. Filed a separate bug for someone to try to untangle the absl problem.",
+      "revId": "a179d63baea3210e80cbb9fd568669b7d165a2a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
