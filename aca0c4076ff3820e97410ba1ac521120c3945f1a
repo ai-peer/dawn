@@ -16,6 +16,24 @@
       "message": "You only add to the average if the `Duration \u003e longest` but you always divide by results size. That seems ... wrong?",
       "revId": "aca0c4076ff3820e97410ba1ac521120c3945f1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6851c33_38d71f65",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-03T13:41:03Z",
+      "side": 1,
+      "message": "Sure does. Fixed.",
+      "parentUuid": "bd6d3a15_782dd6f4",
+      "revId": "aca0c4076ff3820e97410ba1ac521120c3945f1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
