@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "949d4c7c_d8b11e0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-03T17:30:56Z",
+      "side": 1,
+      "message": "Doing another roll. Will assign reviewers again when it\u0027s ready for review.",
+      "revId": "c5c9bb9aed03a232b92fdfd3abe00cc5887c5886",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
