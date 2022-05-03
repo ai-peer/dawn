@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "580ba774_f35df470",
+        "filename": "test/tint/builtins/gen/textureDimensions/ba1481.wgsl.expected.hlsl",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-03T12:19:01Z",
+      "side": 1,
+      "message": "Where have these started coming from? If stuff is broken on ToT, can we move these out to a separate CL, please?",
+      "revId": "34862eab5e5d92b408b86991e52a87a2ec7f9287",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
