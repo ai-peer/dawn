@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90d99518_246d7b23",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-05-03T04:30:11Z",
+      "side": 1,
+      "message": "nit: Looks like this constructs a `const char*` into a `std::string` every time even if the message isn\u0027t used. HandleDeviceMessage could just take a `const char*`, I think?",
+      "range": {
+        "startLine": 132,
+        "startChar": 50,
+        "endLine": 132,
+        "endChar": 73
+      },
+      "revId": "5b3d03c1323d89ce44643a42186190976513d2c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
