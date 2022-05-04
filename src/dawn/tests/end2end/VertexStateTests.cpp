@@ -540,7 +540,7 @@ TEST_P(VertexStateTest, LastAllowedVertexBuffer) {
     constexpr uint32_t kBufferIndex = kMaxVertexBuffers - 1;
 
     utils::ComboVertexState vertexState;
-    // All the other vertex buffers default to no attributes
+    // All the other vertex buffers default to no attributes and zero arrayStride
     vertexState.vertexBufferCount = kMaxVertexBuffers;
     vertexState.cVertexBuffers[kBufferIndex].arrayStride = 4 * sizeof(float);
     vertexState.cVertexBuffers[kBufferIndex].stepMode = VertexStepMode::Vertex;
@@ -553,8 +553,19 @@ TEST_P(VertexStateTest, LastAllowedVertexBuffer) {
     wgpu::RenderPipeline pipeline =
         MakeTestPipeline(vertexState, 1, {{0, VertexFormat::Float32x4, VertexStepMode::Vertex}});
 
+    std::vector<DrawVertexBuffer> vertexBuffers;
+
     wgpu::Buffer buffer0 = MakeVertexBuffer<float>({0, 1, 2, 3, 1, 2, 3, 4, 2, 3, 4, 5});
-    DoTestDraw(pipeline, 1, 1, {DrawVertexBuffer{kMaxVertexBuffers - 1, &buffer0}});
+    wgpu::Buffer emptyBuffer = MakeVertexBuffer<float>({});
+
+    // vertexBuffers[slot] must not be null where 0 <= slot < vertexBufferCount
+    for (uint32_t i = 0; i < kMaxVertexBuffers - 1; i++) {
+        vertexBuffers.push_back(DrawVertexBuffer{i, &emptyBuffer});
+    }
+
+    vertexBuffers.push_back(DrawVertexBuffer{kMaxVertexBuffers - 1, &buffer0});
+
+    DoTestDraw(pipeline, 1, 1, vertexBuffers);
 }
 
 // Test that overlapping vertex attributes are permitted and load data correctly
