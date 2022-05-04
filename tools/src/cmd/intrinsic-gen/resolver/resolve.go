@@ -29,7 +29,8 @@ type resolver struct {
 
 	globals           scope
 	builtins          map[string]*sem.Intrinsic
-	operators         map[string]*sem.Intrinsic
+	unaryOperators    map[string]*sem.Intrinsic
+	binaryOperators   map[string]*sem.Intrinsic
 	enumEntryMatchers map[*sem.EnumEntry]*sem.EnumMatcher
 }
 
@@ -40,7 +41,8 @@ func Resolve(a *ast.AST) (*sem.Sem, error) {
 		s:                 sem.New(),
 		globals:           newScope(nil),
 		builtins:          map[string]*sem.Intrinsic{},
-		operators:         map[string]*sem.Intrinsic{},
+		unaryOperators:    map[string]*sem.Intrinsic{},
+		binaryOperators:   map[string]*sem.Intrinsic{},
 		enumEntryMatchers: map[*sem.EnumEntry]*sem.EnumMatcher{},
 	}
 	// Declare and resolve all the enumerators
@@ -67,10 +69,19 @@ func Resolve(a *ast.AST) (*sem.Sem, error) {
 			return nil, err
 		}
 	}
-	// Declare and resolve the operators
+	// Declare and resolve the unary and binary operators
 	for _, o := range a.Operators {
-		if err := r.intrinsic(o, r.operators, &r.s.Operators); err != nil {
-			return nil, err
+		switch len(o.Parameters) {
+		case 1:
+			if err := r.intrinsic(o, r.unaryOperators, &r.s.UnaryOperators); err != nil {
+				return nil, err
+			}
+		case 2:
+			if err := r.intrinsic(o, r.binaryOperators, &r.s.BinaryOperators); err != nil {
+				return nil, err
+			}
+		default:
+			return nil, fmt.Errorf("%v operators must have either 1 or 2 parameters", o.Source)
 		}
 	}
 
@@ -316,10 +327,6 @@ func (r *resolver) intrinsic(
 	}
 	if r.s.MaxOpenNumbers < len(overload.OpenNumbers) {
 		r.s.MaxOpenNumbers = len(overload.OpenNumbers)
-	}
-
-	if a.Kind == ast.Operator && (len(a.Parameters) < 1 || len(a.Parameters) > 2) {
-		return fmt.Errorf("%v operators must have either 1 or 2 parameters", a.Source)
 	}
 
 	// Resolve the parameters
