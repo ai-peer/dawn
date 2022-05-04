@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "928ffb87_467ee49e",
+        "filename": "src/tint/number.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-04T20:25:25Z",
+      "side": 1,
+      "message": "Because, according to this (https://en.cppreference.com/w/cpp/language/user_literal#Literal_operators) it\u0027s the only allowed integer parameter type.",
+      "parentUuid": "19d929d9_ca2ee171",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d12cae97_6cf621c4",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-05-04T19:43:31Z",
       "side": 1,
       "message": "The description to the CL made me think these were just for tests? Can we avoid having these appear in places outside tests?",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de5503e2_7a70b10f",
+        "filename": "src/tint/program_builder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-04T20:25:25Z",
+      "side": 1,
+      "message": "What do you prefer? `u32(blah)` and `i32(blah)` everywhere outside of tests?\nThe suffixes give you the same thing, but look less like its going to emit a WGSL cast (which it doesn\u0027t).\nI\u0027m happy to change the CL description.",
+      "parentUuid": "d12cae97_6cf621c4",
       "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
