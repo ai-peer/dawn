@@ -1,0 +1,276 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e1f71d5_f5c78c0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T19:43:31Z",
+      "side": 1,
+      "message": "The `_i` and `_u` are kinda bleh, but limiting them to tests seems ok. There are a bunch of places where they leak out into code outside tests which didn\u0027t seem to match the CL description (I marked the various places).\n\nCan we constrain the `_i` and `_u` to test files?",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19d929d9_ca2ee171",
+        "filename": "src/tint/number.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T19:43:31Z",
+      "side": 1,
+      "message": "Why `unsigned long long` instead of `uint64_t` ?\n\nAnd, why `unsigned` for the `i32` value?",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d12cae97_6cf621c4",
+        "filename": "src/tint/program_builder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T19:43:31Z",
+      "side": 1,
+      "message": "The description to the CL made me think these were just for tests? Can we avoid having these appear in places outside tests?",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3f44408_0bfb71b1",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T19:43:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b3a51f1_07c36139",
+        "filename": "src/tint/transform/add_empty_entry_point.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T19:43:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e98a05d8_1c8f8341",
+        "filename": "src/tint/transform/builtin_polyfill.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T19:43:31Z",
+      "side": 1,
+      "message": "Is this just for the _i bit?",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d75b0536_d08c8c7a",
+        "filename": "src/tint/transform/builtin_polyfill.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T19:43:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11cf5073_6ce152dc",
+        "filename": "src/tint/transform/calculate_array_length.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T19:43:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b0dacca_c2969d47",
+        "filename": "src/tint/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T19:43:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "100a91f1_1587c0dd",
+        "filename": "src/tint/transform/decompose_memory_access.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T19:43:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eb5d937_eec3c109",
+        "filename": "src/tint/transform/expand_compound_assignment.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T19:43:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87e10285_10c37a70",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T19:43:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3354f80_78368514",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T19:43:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5327d17_05e5a4f9",
+        "filename": "src/tint/transform/vertex_pulling.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T19:43:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffe4e206_e67f875f",
+        "filename": "src/tint/writer/append_vector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T19:43:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a124a016_ee4bd64b",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2334,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T19:43:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
