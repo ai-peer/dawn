@@ -1470,7 +1470,8 @@
         "category": "enum",
         "values": [
             {"value": 0, "name": "vertex"},
-            {"value": 1, "name": "instance"}
+            {"value": 1, "name": "instance"},
+            {"value": 2, "name": "vertex buffer not used"}
         ]
     },
     "load op": {
