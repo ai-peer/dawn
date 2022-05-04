@@ -37,13 +37,10 @@ sem::Constant Resolver::EvaluateConstantValue(const ast::LiteralExpression* lite
     return Switch(
         literal,
         [&](const ast::IntLiteralExpression* lit) {
-            if (lit->suffix == ast::IntLiteralExpression::Suffix::kU) {
-                return sem::Constant{type, {u32(static_cast<uint32_t>(lit->value))}};
-            }
-            return sem::Constant{type, {i32(static_cast<int32_t>(lit->value))}};
+            return sem::Constant{type, {AInt(lit->value)}};
         },
         [&](const ast::FloatLiteralExpression* lit) {
-            return sem::Constant{type, {lit->value}};
+            return sem::Constant{type, {AFloat(lit->value)}};
         },
         [&](const ast::BoolLiteralExpression* lit) {
             return sem::Constant{type, {lit->value}};
@@ -64,17 +61,15 @@ sem::Constant Resolver::EvaluateConstantValue(const ast::CallExpression* call,
 
     // For zero value init, return 0s
     if (call->args.empty()) {
-        if (elem_type->Is<sem::I32>()) {
-            return sem::Constant(type, sem::Constant::Scalars(result_size, 0_i));
-        }
-        if (elem_type->Is<sem::U32>()) {
-            return sem::Constant(type, sem::Constant::Scalars(result_size, 0_u));
-        }
-        if (elem_type->Is<sem::F32>()) {
-            return sem::Constant(type, sem::Constant::Scalars(result_size, 0.f));
-        }
-        if (elem_type->Is<sem::Bool>()) {
-            return sem::Constant(type, sem::Constant::Scalars(result_size, false));
+        using Scalars = sem::Constant::Scalars;
+        auto constant = Switch(
+            elem_type,
+            [&](const sem::I32*) { return sem::Constant(type, Scalars(result_size, AInt(0))); },
+            [&](const sem::U32*) { return sem::Constant(type, Scalars(result_size, AInt(0))); },
+            [&](const sem::F32*) { return sem::Constant(type, Scalars(result_size, AFloat(0))); },
+            [&](const sem::Bool*) { return sem::Constant(type, Scalars(result_size, false)); });
+        if (constant.IsValid()) {
+            return constant;
         }
     }
 
@@ -108,28 +103,13 @@ sem::Constant Resolver::ConstantCast(const sem::Constant& value,
 
     sem::Constant::Scalars elems;
     for (size_t i = 0; i < value.Elements().size(); ++i) {
+        // TODO: Check that value fits in new type
         elems.emplace_back(Switch<sem::Constant::Scalar>(
-            target_elem_type,
-            [&](const sem::I32*) {
-                return value.WithScalarAt(i, [](auto&& s) {  //
-                    return i32(static_cast<int32_t>(s));
-                });
-            },
-            [&](const sem::U32*) {
-                return value.WithScalarAt(i, [](auto&& s) {  //
-                    return u32(static_cast<uint32_t>(s));
-                });
-            },
-            [&](const sem::F32*) {
-                return value.WithScalarAt(i, [](auto&& s) {  //
-                    return static_cast<f32>(s);
-                });
-            },
-            [&](const sem::Bool*) {
-                return value.WithScalarAt(i, [](auto&& s) {  //
-                    return static_cast<bool>(s);
-                });
-            },
+            target_elem_type,  //
+            [&](const sem::I32*) { return value.ElementAs<AInt>(i); },
+            [&](const sem::U32*) { return value.ElementAs<AInt>(i); },
+            [&](const sem::F32*) { return value.ElementAs<AFloat>(i); },
+            [&](const sem::Bool*) { return value.ElementAs<bool>(i); },
             [&](Default) {
                 diag::List diags;
                 TINT_UNREACHABLE(Semantic, diags)

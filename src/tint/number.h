@@ -16,6 +16,7 @@
 #define SRC_TINT_NUMBER_H_
 
 #include <stdint.h>
+#include <functional>
 
 namespace tint {
 
@@ -27,7 +28,8 @@ struct Number {
 
     /// Constructor.
     /// @param v the value to initialize this Number to
-    explicit Number(T v) : value(v) {}
+    template <typename U>
+    explicit Number(U v) : value(static_cast<T>(v)) {}
 
     /// Conversion operator
     /// @returns the value as T
@@ -47,18 +49,24 @@ struct Number {
 
 template <typename A, typename B>
 bool operator==(Number<A> a, Number<B> b) {
-    return a.value == b.value;
+    using T = decltype(a.value + b.value);
+    return std::equal_to<T>()(a.value, b.value);
 }
 
 template <typename A, typename B>
 bool operator==(Number<A> a, B b) {
-    return a.value == b;
+    return a.value == Number<B>(b);
 }
 
 template <typename A, typename B>
 bool operator==(A a, Number<B> b) {
-    return a == b.value;
+    return Number<A>(a) == b.value;
 }
+
+/// `AInt` is a type alias to `Number<int64_t>`.
+using AInt = Number<int64_t>;
+/// `AFloat` is a type alias to `Number<double>`.
+using AFloat = Number<double>;
 
 /// `i32` is a type alias to `Number<int32_t>`.
 using i32 = Number<int32_t>;
@@ -70,6 +78,11 @@ using f32 = float;
 }  // namespace tint
 
 namespace tint::number_suffixes {
+
+/// Literal suffix for abstract integer literals
+inline AInt operator"" _ai(unsigned long long int value) {  // NOLINT
+    return AInt(static_cast<int32_t>(value));
+}
 
 /// Literal suffix for i32 literals
 inline i32 operator"" _i(unsigned long long int value) {  // NOLINT

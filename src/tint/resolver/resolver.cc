@@ -50,6 +50,8 @@
 #include "src/tint/ast/variable_decl_statement.h"
 #include "src/tint/ast/vector.h"
 #include "src/tint/ast/workgroup_attribute.h"
+#include "src/tint/sem/abstract_float.h"
+#include "src/tint/sem/abstract_int.h"
 #include "src/tint/sem/array.h"
 #include "src/tint/sem/atomic.h"
 #include "src/tint/sem/call.h"
@@ -59,6 +61,7 @@
 #include "src/tint/sem/function.h"
 #include "src/tint/sem/if_statement.h"
 #include "src/tint/sem/loop_statement.h"
+#include "src/tint/sem/materialize.h"
 #include "src/tint/sem/member_accessor_expression.h"
 #include "src/tint/sem/module.h"
 #include "src/tint/sem/multisampled_texture.h"
@@ -81,12 +84,13 @@
 
 namespace tint::resolver {
 
-Resolver::Resolver(ProgramBuilder* builder)
+Resolver::Resolver(ProgramBuilder* builder, bool enable_abstract_int)
     : builder_(builder),
       diagnostics_(builder->Diagnostics()),
       intrinsic_table_(IntrinsicTable::Create(*builder)),
       sem_(builder, dependencies_),
-      validator_(builder, sem_) {}
+      validator_(builder, sem_),
+      enable_abstract_int_(enable_abstract_int) {}
 
 Resolver::~Resolver() = default;
 
@@ -302,7 +306,7 @@ sem::Variable* Resolver::Variable(const ast::Variable* var,
 
     // Does the variable have a constructor?
     if (var->constructor) {
-        rhs = Expression(var->constructor);
+        rhs = Materialize(var->constructor, storage_ty);
         if (!rhs) {
             return nullptr;
         }
@@ -780,13 +784,12 @@ bool Resolver::WorkgroupSize(const ast::Function* func) {
             continue;
         }
         // validator_.Validate and set the default value for this dimension.
-        if (is_i32 ? value.Elements()[0].i32 < 1 : value.Elements()[0].u32 < 1) {
+        if (value.Element<AInt>(0).value < 1) {
             AddError("workgroup_size argument must be at least 1", values[i]->source);
             return false;
         }
 
-        ws[i].value =
-            is_i32 ? static_cast<uint32_t>(value.Elements()[0].i32) : value.Elements()[0].u32;
+        ws[i].value = static_cast<uint32_t>(value.Element<AInt>(0).value);
     }
 
     current_function_->SetWorkgroupSize(std::move(ws));
@@ -1074,6 +1077,28 @@ sem::Expression* Resolver::Expression(const ast::Expression* root) {
 
     TINT_ICE(Resolver, diagnostics_) << "Expression() did not find root node";
     return nullptr;
+}
+
+sem::Expression* Resolver::Materialize(const ast::Expression* expr, const sem::Type* target_type) {
+    auto* sem = Expression(expr);
+    if (!sem) {
+        return nullptr;
+    }
+    auto materialize = [&](const sem::Type* target) {
+        auto val = ConstantCast(EvaluateConstantValue(expr, sem->Type()), target);
+        sem = builder_->create<sem::Materialize>(sem, current_statement_, val);
+        builder_->Sem().Replace(expr, sem);
+        return sem;
+    };
+    return Switch<sem::Expression*>(
+        sem->Type(),  //
+        [&](const sem::AbstractInt*) {
+            return materialize(target_type ? target_type : builder_->create<sem::I32>());
+        },
+        [&](const sem::AbstractFloat*) {
+            return materialize(target_type ? target_type : builder_->create<sem::F32>());
+        },
+        [&](Default) { return sem; });
 }
 
 sem::Expression* Resolver::IndexAccessor(const ast::IndexAccessorExpression* expr) {
@@ -1532,8 +1557,10 @@ sem::Expression* Resolver::Literal(const ast::LiteralExpression* literal) {
         [&](const ast::IntLiteralExpression* i) -> sem::Type* {
             switch (i->suffix) {
                 case ast::IntLiteralExpression::Suffix::kNone:
-                // TODO(crbug.com/tint/1504): This will need to become abstract-int.
-                // For now, treat as 'i32'.
+                    if (enable_abstract_int_) {
+                        return builder_->create<sem::AbstractInt>();
+                    }
+                    return builder_->create<sem::I32>();
                 case ast::IntLiteralExpression::Suffix::kI:
                     return builder_->create<sem::I32>();
                 case ast::IntLiteralExpression::Suffix::kU:
@@ -1928,13 +1955,12 @@ sem::Array* Resolver::Array(const ast::Array* arr) {
             return nullptr;
         }
 
-        if (ty->is_signed_integer_scalar() ? count_val.Elements()[0].i32 < 1
-                                           : count_val.Elements()[0].u32 < 1u) {
+        if (count_val.Element<AInt>(0).value < 1) {
             AddError("array size must be at least 1", size_source);
             return nullptr;
         }
 
-        count = count_val.Elements()[0].u32;
+        count = static_cast<uint32_t>(count_val.Element<AInt>(0).value);
     }
 
     auto size = std::max<uint64_t>(count, 1) * stride;

@@ -74,7 +74,8 @@ class Resolver {
   public:
     /// Constructor
     /// @param builder the program builder
-    explicit Resolver(ProgramBuilder* builder);
+    /// @param enable_abstract_int if true, then treat unsuffixed integers as abstract integers
+    explicit Resolver(ProgramBuilder* builder, bool enable_abstract_int = false);
 
     /// Destructor
     ~Resolver();
@@ -203,6 +204,10 @@ class Resolver {
                                const std::vector<const sem::Type*> arg_tys);
     sem::Expression* UnaryOp(const ast::UnaryOpExpression*);
 
+    // Resolves the expression, possibly emitting a semantic cast to a concrete type if the
+    // expression is an abstract numeric.
+    sem::Expression* Materialize(const ast::Expression*, const sem::Type* target_type);
+
     // Statement resolving methods
     // Each return true on success, false on failure.
     sem::Statement* AssignmentStatement(const ast::AssignmentStatement*);
@@ -225,7 +230,6 @@ class Resolver {
     sem::SwitchStatement* SwitchStatement(const ast::SwitchStatement* s);
     sem::Statement* VariableDeclStatement(const ast::VariableDeclStatement*);
     bool Statements(const ast::StatementList&);
-
 
     /// Resolves the WorkgroupSize for the given function, assigning it to
     /// current_function_
@@ -390,6 +394,8 @@ class Resolver {
     sem::Statement* current_statement_ = nullptr;
     sem::CompoundStatement* current_compound_statement_ = nullptr;
     sem::BlockStatement* current_block_ = nullptr;
+
+    bool enable_abstract_int_ = false;
 };
 
 }  // namespace tint::resolver
