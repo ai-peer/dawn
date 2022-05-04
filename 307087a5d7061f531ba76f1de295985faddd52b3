@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b36ec2b_9f28ae30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-04T16:51:01Z",
+      "side": 1,
+      "message": "Looks like this needs a fix in the VertexStateTest.LastAllowedVertexBuffer test",
+      "revId": "307087a5d7061f531ba76f1de295985faddd52b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ba8ddbe_d460f6a9",
