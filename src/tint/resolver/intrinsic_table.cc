@@ -836,10 +836,15 @@ class Impl : public IntrinsicTable {
   private:
     // Candidate holds information about an overload considered for a call.
     struct Candidate {
+        /// The candidate overload
         const OverloadInfo& overload;
+        /// The closed types and numbers
         ClosedState closed;
+        /// The parameter types for the candidate overload
         std::vector<IntrinsicPrototype::Parameter> parameters;
+        /// True if the candidate is a viable match for the call
         bool matched;
+        /// The
         int score;
     };
 
