@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19362b56_14c0b146",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T14:47:41Z",
+      "side": 1,
+      "message": "There is no way to create a `Suffix::kI`?",
+      "revId": "9980d04f596c38e6df9d3d89019cfd623f227c4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d589cea6_84142373",
+        "filename": "src/tint/reader/wgsl/parser_impl_function_attribute_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T14:47:41Z",
+      "side": 1,
+      "message": "This value is no longer unsigned is it? So `4`? (and some other tests)",
+      "revId": "9980d04f596c38e6df9d3d89019cfd623f227c4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae0c1308_96472fc9",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1536,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T14:47:41Z",
+      "side": 1,
+      "message": "Does this need to change when `abstract_int` is added? Maybe a TODO?",
+      "revId": "9980d04f596c38e6df9d3d89019cfd623f227c4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d11a8b3_b2695db2",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T14:47:41Z",
+      "side": 1,
+      "message": "Doesn\u0027t this treat `kNone` as `u32` when we should be treating it as `i32` and re-evaluating with `abstract_int` ?",
+      "revId": "9980d04f596c38e6df9d3d89019cfd623f227c4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
