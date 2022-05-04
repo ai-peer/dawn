@@ -27,7 +27,7 @@ namespace {
 
 const Type* ElemType(const Type* ty, size_t num_elements) {
     diag::List diag;
-    if (ty->is_scalar()) {
+    if (ty->is_scalar_or_abstract()) {
         if (num_elements != 1) {
             TINT_ICE(Semantic, diag) << "sem::Constant() type <-> num_element mismatch. type: '"
                                      << ty->TypeInfo().name << "' num_elements: " << num_elements;
@@ -60,16 +60,14 @@ Constant::~Constant() = default;
 Constant& Constant::operator=(const Constant& rhs) = default;
 
 bool Constant::AnyZero() const {
-    for (size_t i = 0; i < Elements().size(); ++i) {
-        if (WithScalarAt(i, [&](auto&& s) {
-                // Use std::equal_to to work around -Wfloat-equal warnings
-                using T = std::remove_reference_t<decltype(s)>;
-                auto equal_to = std::equal_to<T>{};
-                if (equal_to(s, T(0))) {
-                    return true;
-                }
-                return false;
-            })) {
+    for (auto scalar : elems_) {
+        auto is_zero = [&](auto&& s) {
+            // Use std::equal_to to work around -Wfloat-equal warnings
+            using T = std::remove_reference_t<decltype(s)>;
+            auto equal_to = std::equal_to<T>{};
+            return equal_to(s, T(0));
+        };
+        if (std::visit(is_zero, scalar)) {
             return true;
         }
     }
