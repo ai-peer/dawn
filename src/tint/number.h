@@ -60,6 +60,11 @@ bool operator==(A a, Number<B> b) {
     return a == b.value;
 }
 
+/// `AInt` is a type alias to `Number<int64_t>`.
+using AInt = Number<int64_t>;
+/// `AFloat` is a type alias to `Number<double>`.
+using AFloat = Number<double>;
+
 /// `i32` is a type alias to `Number<int32_t>`.
 using i32 = Number<int32_t>;
 /// `u32` is a type alias to `Number<uint32_t>`.
@@ -70,6 +75,11 @@ using f32 = float;
 }  // namespace tint
 
 namespace tint::number_suffixes {
+
+/// Literal suffix for abstract integer literals
+inline AInt operator"" _ai(unsigned long long int value) {  // NOLINT
+    return AInt(static_cast<int32_t>(value));
+}
 
 /// Literal suffix for i32 literals
 inline i32 operator"" _i(unsigned long long int value) {  // NOLINT

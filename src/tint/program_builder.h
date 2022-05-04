@@ -999,6 +999,33 @@ class ProgramBuilder {
 
     /// @param source the source information
     /// @param value the integer value
+    /// @return a no-suffixed IntLiteralExpression for the given value
+    const ast::IntLiteralExpression* Expr(const Source& source, AInt value) {
+        return create<ast::IntLiteralExpression>(source, value,
+                                                 ast::IntLiteralExpression::Suffix::kNone);
+    }
+
+    /// @param value the integer value
+    /// @return a no-suffixed IntLiteralExpression for the given value
+    const ast::IntLiteralExpression* Expr(AInt value) {
+        return create<ast::IntLiteralExpression>(value, ast::IntLiteralExpression::Suffix::kNone);
+    }
+
+    /// @param source the source information
+    /// @param value the integer value
+    /// @return a no-suffixed FloatLiteralExpression for the given value
+    const ast::FloatLiteralExpression* Expr(const Source& source, AFloat value) {
+        return create<ast::FloatLiteralExpression>(source, value);
+    }
+
+    /// @param value the integer value
+    /// @return a no-suffixed FloatLiteralExpression for the given value
+    const ast::FloatLiteralExpression* Expr(AFloat value) {
+        return create<ast::FloatLiteralExpression>(value);
+    }
+
+    /// @param source the source information
+    /// @param value the integer value
     /// @return a 'i'-suffixed IntLiteralExpression for the given value
     const ast::IntLiteralExpression* Expr(const Source& source, i32 value) {
         return create<ast::IntLiteralExpression>(source, value,
