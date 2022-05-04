@@ -791,21 +791,18 @@ struct IntrinsicPrototype {
             for (auto& p : i.parameters) {
                 utils::HashCombine(&hash, p.type, p.usage);
             }
-            return utils::Hash(hash, i.index, i.return_type, i.supported_stages, i.is_deprecated);
+            return utils::Hash(hash, i.overload, i.return_type);
         }
     };
 
-    uint32_t index = 0;  // Index of the intrinsic (builtin or operator)
-    std::vector<Parameter> parameters;
+    const OverloadInfo* overload = nullptr;
     sem::Type const* return_type = nullptr;
-    PipelineStageSet supported_stages;
-    bool is_deprecated = false;
+    std::vector<Parameter> parameters;
 };
 
 /// Equality operator for IntrinsicPrototype
 bool operator==(const IntrinsicPrototype& a, const IntrinsicPrototype& b) {
-    if (a.index != b.index || a.supported_stages != b.supported_stages ||
-        a.return_type != b.return_type || a.is_deprecated != b.is_deprecated ||
+    if (a.overload != b.overload || a.return_type != b.return_type ||
         a.parameters.size() != b.parameters.size()) {
         return false;
     }
@@ -840,15 +837,23 @@ class Impl : public IntrinsicTable {
     // Candidate holds information about a mismatched overload that could be what the user intended
     // to call.
     struct Candidate {
-        const OverloadInfo* overload;
+        const OverloadInfo& overload;
+        ClosedState closed;
+        std::vector<IntrinsicPrototype::Parameter> parameters;
+        bool matched;
         int score;
     };
 
-    const IntrinsicPrototype Match(const char* intrinsic_name,
-                                   uint32_t intrinsic_index,
-                                   const OverloadInfo& overload,
-                                   const std::vector<const sem::Type*>& args,
-                                   int& match_score);
+    using Candidates = std::vector<Candidate>;
+
+    using OnNoMatch = std::function<void(Candidates)>;
+
+    IntrinsicPrototype MatchIntrinsic(const IntrinsicInfo& intrinsic,
+                                      const std::vector<const sem::Type*>& args,
+                                      OnNoMatch on_no_match) const;
+
+    Candidate MatchOverload(const OverloadInfo& overload,
+                            const std::vector<const sem::Type*>& args) const;
 
     MatchState Match(ClosedState& closed,
                      const OverloadInfo& overload,
@@ -896,110 +901,83 @@ Impl::Impl(ProgramBuilder& b) : builder(b) {}
 const sem::Builtin* Impl::Lookup(sem::BuiltinType builtin_type,
                                  const std::vector<const sem::Type*>& args,
                                  const Source& source) {
-    // The list of failed matches that had promise.
-    std::vector<Candidate> candidates;
-
-    uint32_t intrinsic_index = static_cast<uint32_t>(builtin_type);
-    const char* intrinsic_name = sem::str(builtin_type);
-    auto& builtin = kBuiltins[intrinsic_index];
-    for (uint32_t o = 0; o < builtin.num_overloads; o++) {
-        int match_score = 1000;
-        auto& overload = builtin.overloads[o];
-        auto match = Match(intrinsic_name, intrinsic_index, overload, args, match_score);
-        if (match.return_type) {
-            // De-duplicate builtins that are identical.
-            return utils::GetOrCreate(builtins, match, [&] {
-                std::vector<sem::Parameter*> params;
-                params.reserve(match.parameters.size());
-                for (auto& p : match.parameters) {
-                    params.emplace_back(builder.create<sem::Parameter>(
-                        nullptr, static_cast<uint32_t>(params.size()), p.type,
-                        ast::StorageClass::kNone, ast::Access::kUndefined, p.usage));
-                }
-                return builder.create<sem::Builtin>(builtin_type, match.return_type,
-                                                    std::move(params), match.supported_stages,
-                                                    match.is_deprecated);
-            });
-        }
-        if (match_score > 0) {
-            candidates.emplace_back(Candidate{&overload, match_score});
-        }
-    }
-
-    // Sort the candidates with the most promising first
-    std::stable_sort(candidates.begin(), candidates.end(),
-                     [](const Candidate& a, const Candidate& b) { return a.score > b.score; });
-
-    // Generate an error message
-    std::stringstream ss;
-    ss << "no matching call to " << CallSignature(builder, intrinsic_name, args) << std::endl;
-    if (!candidates.empty()) {
-        ss << std::endl;
-        ss << candidates.size() << " candidate function" << (candidates.size() > 1 ? "s:" : ":")
-           << std::endl;
-        for (auto& candidate : candidates) {
-            ss << "  ";
-            PrintOverload(ss, *candidate.overload, intrinsic_name);
+    auto on_no_match = [&](Candidates candidates) {
+        // Generate an error message
+        const char* name = sem::str(builtin_type);
+        std::stringstream ss;
+        ss << "no matching call to " << CallSignature(builder, name, args) << std::endl;
+        if (!candidates.empty()) {
             ss << std::endl;
+            ss << candidates.size() << " candidate function" << (candidates.size() > 1 ? "s:" : ":")
+               << std::endl;
+            for (auto& candidate : candidates) {
+                ss << "  ";
+                PrintOverload(ss, candidate.overload, name);
+                ss << std::endl;
+            }
         }
+        builder.Diagnostics().add_error(diag::System::Resolver, ss.str(), source);
+    };
+
+    auto match = MatchIntrinsic(kBuiltins[static_cast<uint32_t>(builtin_type)], args, on_no_match);
+    if (!match.overload) {
+        return {};
     }
-    builder.Diagnostics().add_error(diag::System::Resolver, ss.str(), source);
-    return nullptr;
+
+    // De-duplicate builtins that are identical.
+    return utils::GetOrCreate(builtins, match, [&] {
+        std::vector<sem::Parameter*> params;
+        params.reserve(match.parameters.size());
+        for (auto& p : match.parameters) {
+            params.emplace_back(builder.create<sem::Parameter>(
+                nullptr, static_cast<uint32_t>(params.size()), p.type, ast::StorageClass::kNone,
+                ast::Access::kUndefined, p.usage));
+        }
+        return builder.create<sem::Builtin>(builtin_type, match.return_type, std::move(params),
+                                            match.overload->supported_stages,
+                                            match.overload->is_deprecated);
+    });
 }
 
 IntrinsicTable::UnaryOperator Impl::Lookup(ast::UnaryOp op,
                                            const sem::Type* arg,
                                            const Source& source) {
-    // The list of failed matches that had promise.
-    std::vector<Candidate> candidates;
-
     auto [intrinsic_index, intrinsic_name] = [&]() -> std::pair<uint32_t, const char*> {
         switch (op) {
             case ast::UnaryOp::kComplement:
-                return {kOperatorComplement, "operator ~ "};
+                return {kUnaryOperatorComplement, "operator ~ "};
             case ast::UnaryOp::kNegation:
-                return {kOperatorMinus, "operator - "};
+                return {kUnaryOperatorMinus, "operator - "};
             case ast::UnaryOp::kNot:
-                return {kOperatorNot, "operator ! "};
+                return {kUnaryOperatorNot, "operator ! "};
             default:
                 return {0, "<unknown>"};
         }
     }();
 
-    auto& builtin = kOperators[intrinsic_index];
-    for (uint32_t o = 0; o < builtin.num_overloads; o++) {
-        int match_score = 1000;
-        auto& overload = builtin.overloads[o];
-        if (overload.num_parameters == 1) {
-            auto match = Match(intrinsic_name, intrinsic_index, overload, {arg}, match_score);
-            if (match.return_type) {
-                return UnaryOperator{match.return_type, match.parameters[0].type};
-            }
-            if (match_score > 0) {
-                candidates.emplace_back(Candidate{&overload, match_score});
-            }
-        }
-    }
-
-    // Sort the candidates with the most promising first
-    std::stable_sort(candidates.begin(), candidates.end(),
-                     [](const Candidate& a, const Candidate& b) { return a.score > b.score; });
-
-    // Generate an error message
-    std::stringstream ss;
-    ss << "no matching overload for " << CallSignature(builder, intrinsic_name, {arg}) << std::endl;
-    if (!candidates.empty()) {
-        ss << std::endl;
-        ss << candidates.size() << " candidate operator" << (candidates.size() > 1 ? "s:" : ":")
-           << std::endl;
-        for (auto& candidate : candidates) {
-            ss << "  ";
-            PrintOverload(ss, *candidate.overload, intrinsic_name);
+    auto on_no_match = [&, name = intrinsic_name](Candidates candidates) {
+        // Generate an error message
+        std::stringstream ss;
+        ss << "no matching overload for " << CallSignature(builder, name, {arg}) << std::endl;
+        if (!candidates.empty()) {
             ss << std::endl;
+            ss << candidates.size() << " candidate operator" << (candidates.size() > 1 ? "s:" : ":")
+               << std::endl;
+            for (auto& candidate : candidates) {
+                ss << "  ";
+                PrintOverload(ss, candidate.overload, name);
+                ss << std::endl;
+            }
         }
+        builder.Diagnostics().add_error(diag::System::Resolver, ss.str(), source);
+    };
+
+    auto match = MatchIntrinsic(kUnaryOperators[intrinsic_index], {arg}, on_no_match);
+    if (!match.overload) {
+        return {};
     }
-    builder.Diagnostics().add_error(diag::System::Resolver, ss.str(), source);
-    return {};
+
+    return UnaryOperator{match.return_type, match.parameters[0].type};
 }
 
 IntrinsicTable::BinaryOperator Impl::Lookup(ast::BinaryOp op,
@@ -1007,109 +985,144 @@ IntrinsicTable::BinaryOperator Impl::Lookup(ast::BinaryOp op,
                                             const sem::Type* rhs,
                                             const Source& source,
                                             bool is_compound) {
-    // The list of failed matches that had promise.
-    std::vector<Candidate> candidates;
-
     auto [intrinsic_index, intrinsic_name] = [&]() -> std::pair<uint32_t, const char*> {
         switch (op) {
             case ast::BinaryOp::kAnd:
-                return {kOperatorAnd, is_compound ? "operator &= " : "operator & "};
+                return {kBinaryOperatorAnd, is_compound ? "operator &= " : "operator & "};
             case ast::BinaryOp::kOr:
-                return {kOperatorOr, is_compound ? "operator |= " : "operator | "};
+                return {kBinaryOperatorOr, is_compound ? "operator |= " : "operator | "};
             case ast::BinaryOp::kXor:
-                return {kOperatorXor, is_compound ? "operator ^= " : "operator ^ "};
+                return {kBinaryOperatorXor, is_compound ? "operator ^= " : "operator ^ "};
             case ast::BinaryOp::kLogicalAnd:
-                return {kOperatorLogicalAnd, "operator && "};
+                return {kBinaryOperatorLogicalAnd, "operator && "};
             case ast::BinaryOp::kLogicalOr:
-                return {kOperatorLogicalOr, "operator || "};
+                return {kBinaryOperatorLogicalOr, "operator || "};
             case ast::BinaryOp::kEqual:
-                return {kOperatorEqual, "operator == "};
+                return {kBinaryOperatorEqual, "operator == "};
             case ast::BinaryOp::kNotEqual:
-                return {kOperatorNotEqual, "operator != "};
+                return {kBinaryOperatorNotEqual, "operator != "};
             case ast::BinaryOp::kLessThan:
-                return {kOperatorLessThan, "operator < "};
+                return {kBinaryOperatorLessThan, "operator < "};
             case ast::BinaryOp::kGreaterThan:
-                return {kOperatorGreaterThan, "operator > "};
+                return {kBinaryOperatorGreaterThan, "operator > "};
             case ast::BinaryOp::kLessThanEqual:
-                return {kOperatorLessThanEqual, "operator <= "};
+                return {kBinaryOperatorLessThanEqual, "operator <= "};
             case ast::BinaryOp::kGreaterThanEqual:
-                return {kOperatorGreaterThanEqual, "operator >= "};
+                return {kBinaryOperatorGreaterThanEqual, "operator >= "};
             case ast::BinaryOp::kShiftLeft:
-                return {kOperatorShiftLeft, is_compound ? "operator <<= " : "operator << "};
+                return {kBinaryOperatorShiftLeft, is_compound ? "operator <<= " : "operator << "};
             case ast::BinaryOp::kShiftRight:
-                return {kOperatorShiftRight, is_compound ? "operator >>= " : "operator >> "};
+                return {kBinaryOperatorShiftRight, is_compound ? "operator >>= " : "operator >> "};
             case ast::BinaryOp::kAdd:
-                return {kOperatorPlus, is_compound ? "operator += " : "operator + "};
+                return {kBinaryOperatorPlus, is_compound ? "operator += " : "operator + "};
             case ast::BinaryOp::kSubtract:
-                return {kOperatorMinus, is_compound ? "operator -= " : "operator - "};
+                return {kBinaryOperatorMinus, is_compound ? "operator -= " : "operator - "};
             case ast::BinaryOp::kMultiply:
-                return {kOperatorStar, is_compound ? "operator *= " : "operator * "};
+                return {kBinaryOperatorStar, is_compound ? "operator *= " : "operator * "};
             case ast::BinaryOp::kDivide:
-                return {kOperatorDivide, is_compound ? "operator /= " : "operator / "};
+                return {kBinaryOperatorDivide, is_compound ? "operator /= " : "operator / "};
             case ast::BinaryOp::kModulo:
-                return {kOperatorModulo, is_compound ? "operator %= " : "operator % "};
+                return {kBinaryOperatorModulo, is_compound ? "operator %= " : "operator % "};
             default:
                 return {0, "<unknown>"};
         }
     }();
 
-    auto& builtin = kOperators[intrinsic_index];
-    for (uint32_t o = 0; o < builtin.num_overloads; o++) {
-        int match_score = 1000;
-        auto& overload = builtin.overloads[o];
-        if (overload.num_parameters == 2) {
-            auto match = Match(intrinsic_name, intrinsic_index, overload, {lhs, rhs}, match_score);
-            if (match.return_type) {
-                return BinaryOperator{match.return_type, match.parameters[0].type,
-                                      match.parameters[1].type};
-            }
-            if (match_score > 0) {
-                candidates.emplace_back(Candidate{&overload, match_score});
+    auto on_no_match = [&, name = intrinsic_name](Candidates candidates) {
+        // Generate an error message
+        std::stringstream ss;
+        ss << "no matching overload for " << CallSignature(builder, name, {lhs, rhs}) << std::endl;
+        if (!candidates.empty()) {
+            ss << std::endl;
+            ss << candidates.size() << " candidate operator" << (candidates.size() > 1 ? "s:" : ":")
+               << std::endl;
+            for (auto& candidate : candidates) {
+                ss << "  ";
+                PrintOverload(ss, candidate.overload, name);
+                ss << std::endl;
             }
         }
+        builder.Diagnostics().add_error(diag::System::Resolver, ss.str(), source);
+    };
+
+    auto match = MatchIntrinsic(kBinaryOperators[intrinsic_index], {lhs, rhs}, on_no_match);
+    if (!match.overload) {
+        return {};
+    }
+
+    return BinaryOperator{match.return_type, match.parameters[0].type, match.parameters[1].type};
+}
+
+IntrinsicPrototype Impl::MatchIntrinsic(const IntrinsicInfo& intrinsic,
+                                        const std::vector<const sem::Type*>& args,
+                                        OnNoMatch on_no_match) const {
+    Candidates candidates;
+    candidates.reserve(intrinsic.num_overloads);
+    for (uint8_t overload_idx = 0; overload_idx < intrinsic.num_overloads; overload_idx++) {
+        candidates.emplace_back(MatchOverload(intrinsic.overloads[overload_idx], args));
     }
 
     // Sort the candidates with the most promising first
-    std::stable_sort(candidates.begin(), candidates.end(),
-                     [](const Candidate& a, const Candidate& b) { return a.score > b.score; });
-
-    // Generate an error message
-    std::stringstream ss;
-    ss << "no matching overload for " << CallSignature(builder, intrinsic_name, {lhs, rhs})
-       << std::endl;
-    if (!candidates.empty()) {
-        ss << std::endl;
-        ss << candidates.size() << " candidate operator" << (candidates.size() > 1 ? "s:" : ":")
-           << std::endl;
-        for (auto& candidate : candidates) {
-            ss << "  ";
-            PrintOverload(ss, *candidate.overload, intrinsic_name);
-            ss << std::endl;
+    {
+        std::vector<size_t> candidate_indices(candidates.size());
+        for (size_t i = 0; i < candidate_indices.size(); i++) {
+            candidate_indices[i] = i;
         }
+        std::stable_sort(candidate_indices.begin(), candidate_indices.end(),
+                         [&](size_t a, size_t b) {
+                             if (candidates[a].matched && !candidates[b].matched) {
+                                 return true;
+                             }
+                             return candidates[a].score > candidates[b].score;
+                         });
+        Candidates candidates_sorted;
+        candidates_sorted.reserve(candidate_indices.size());
+        for (size_t idx : candidate_indices) {
+            candidates_sorted.emplace_back(std::move(candidates[idx]));
+        }
+        std::swap(candidates, candidates_sorted);
     }
-    builder.Diagnostics().add_error(diag::System::Resolver, ss.str(), source);
-    return {};
+
+    auto top = candidates[0];
+    if (!top.matched) {
+        on_no_match(std::move(candidates));
+        return {};
+    }
+
+    // Build the return type
+    const sem::Type* return_type = nullptr;
+    if (auto* indices = top.overload.return_matcher_indices) {
+        Any any;
+        return_type = Match(top.closed, top.overload, indices).Type(&any);
+        if (!return_type) {
+            TINT_ICE(Resolver, builder.Diagnostics()) << "MatchState.Match() returned null";
+            return {};
+        }
+    } else {
+        return_type = builder.create<sem::Void>();
+    }
+
+    return IntrinsicPrototype{&top.overload, return_type, std::move(top.parameters)};
 }
 
-const IntrinsicPrototype Impl::Match(const char* intrinsic_name,
-                                     uint32_t intrinsic_index,
-                                     const OverloadInfo& overload,
-                                     const std::vector<const sem::Type*>& args,
-                                     int& match_score) {
+Impl::Candidate Impl::MatchOverload(const OverloadInfo& overload,
+                                    const std::vector<const sem::Type*>& args) const {
     // Score wait for argument <-> parameter count matches / mismatches
     constexpr int kScorePerParamArgMismatch = -1;
     constexpr int kScorePerMatchedParam = 2;
     constexpr int kScorePerMatchedOpenType = 1;
     constexpr int kScorePerMatchedOpenNumber = 1;
 
-    auto num_parameters = overload.num_parameters;
-    auto num_arguments = static_cast<decltype(num_parameters)>(args.size());
+    using ParamCountTy = std::remove_const_t<decltype(overload.num_parameters)>;
+    const ParamCountTy num_parameters = overload.num_parameters;
+    const ParamCountTy num_arguments = static_cast<ParamCountTy>(args.size());
 
     bool overload_matched = true;
+    int overload_score = 0;
 
     if (num_parameters != num_arguments) {
-        match_score += kScorePerParamArgMismatch * (std::max(num_parameters, num_arguments) -
-                                                    std::min(num_parameters, num_arguments));
+        overload_score += kScorePerParamArgMismatch * (std::max(num_parameters, num_arguments) -
+                                                       std::min(num_parameters, num_arguments));
         overload_matched = false;
     }
 
@@ -1124,7 +1137,7 @@ const IntrinsicPrototype Impl::Match(const char* intrinsic_name,
         auto* type = Match(closed, overload, indices).Type(args[p]->UnwrapRef());
         if (type) {
             parameters.emplace_back(IntrinsicPrototype::Parameter{type, parameter.usage});
-            match_score += kScorePerMatchedParam;
+            overload_score += kScorePerMatchedParam;
         } else {
             overload_matched = false;
         }
@@ -1137,7 +1150,7 @@ const IntrinsicPrototype Impl::Match(const char* intrinsic_name,
             if (open_type.matcher_index != kNoMatcher) {
                 auto* index = &open_type.matcher_index;
                 if (Match(closed, overload, index).Type(closed.Type(ot))) {
-                    match_score += kScorePerMatchedOpenType;
+                    overload_score += kScorePerMatchedOpenType;
                 } else {
                     overload_matched = false;
                 }
@@ -1152,7 +1165,7 @@ const IntrinsicPrototype Impl::Match(const char* intrinsic_name,
             if (open_number.matcher_index != kNoMatcher) {
                 auto* index = &open_number.matcher_index;
                 if (Match(closed, overload, index).Num(closed.Num(on)).IsValid()) {
-                    match_score += kScorePerMatchedOpenNumber;
+                    overload_score += kScorePerMatchedOpenNumber;
                 } else {
                     overload_matched = false;
                 }
@@ -1160,33 +1173,7 @@ const IntrinsicPrototype Impl::Match(const char* intrinsic_name,
         }
     }
 
-    if (!overload_matched) {
-        return {};
-    }
-
-    // Build the return type
-    const sem::Type* return_type = nullptr;
-    if (auto* indices = overload.return_matcher_indices) {
-        Any any;
-        return_type = Match(closed, overload, indices).Type(&any);
-        if (!return_type) {
-            std::stringstream ss;
-            PrintOverload(ss, overload, intrinsic_name);
-            TINT_ICE(Resolver, builder.Diagnostics())
-                << "MatchState.Match() returned null for " << ss.str();
-            return {};
-        }
-    } else {
-        return_type = builder.create<sem::Void>();
-    }
-
-    IntrinsicPrototype builtin;
-    builtin.index = intrinsic_index;
-    builtin.return_type = return_type;
-    builtin.parameters = std::move(parameters);
-    builtin.supported_stages = overload.supported_stages;
-    builtin.is_deprecated = overload.is_deprecated;
-    return builtin;
+    return Candidate{overload, closed, parameters, overload_matched, overload_score};
 }
 
 MatchState Impl::Match(ClosedState& closed,
