@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "016a1670_87e2e5ce",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-04T22:04:17Z",
+      "side": 1,
+      "message": "Why do we need both? Couldn\u0027t we have `--hlsl-defines` ?",
+      "range": {
+        "startLine": 123,
+        "startChar": 3,
+        "endLine": 124,
+        "endChar": 28
+      },
+      "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
