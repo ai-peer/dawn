@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ee0d8df_36f30da3",
+        "filename": "src/tint/program_builder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-04T20:40:17Z",
+      "side": 1,
+      "message": "I have reservations about using the looks-like-an-explicit-cast expressions in code that\u0027s already imitating WGSL with the `ProgramBuilder` helpers. We already use vector and matrix constructor helpers (e.g. `vec2\u003cf32\u003e(blah)`) in transforms, and these produce the equivalent type constructor in WGSL. The `_i` and `_u` C++ literal suffixes match the WGSL suffixes (with exception of the additional `_`, which is unfortunately unavoidable).\n\nLet\u0027s chat about this tomorrow.",
+      "parentUuid": "947308d5_1c73687b",
+      "revId": "36635e280df3e0d16c70c293ab7590b4060d4742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3f44408_0bfb71b1",
         "filename": "src/tint/resolver/resolver_constants.cc",
         "patchSetId": 4
