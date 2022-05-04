@@ -57,7 +57,7 @@ constexpr Params ParamsFor() {
 }
 
 TEST_F(ResolverTypeConstructorValidationTest, InferTypeTest_Simple) {
-    // var a = 1;
+    // var a = 1i;
     // var b = a;
     auto* a = Var("a", nullptr, ast::StorageClass::kNone, Expr(1_i));
     auto* b = Var("b", nullptr, ast::StorageClass::kNone, Expr("a"));
@@ -147,15 +147,16 @@ TEST_P(InferTypeTest_FromArithmeticExpression, All) {
                              << "expected: " << FriendlyName(expected) << "\n";
 }
 static constexpr Params from_arithmetic_expression_cases[] = {
-    ParamsFor<i32>(),       ParamsFor<u32>(),         ParamsFor<f32>(),
-    ParamsFor<vec3<f32>>(), ParamsFor<mat3x3<f32>>(),
-
-    // TODO(amaiorano): Uncomment once https://crbug.com/tint/680 is fixed
-    // ParamsFor<alias<ty_i32>>(),
-    // ParamsFor<alias<ty_u32>>(),
-    // ParamsFor<alias<ty_f32>>(),
-    // ParamsFor<alias<ty_vec3<f32>>>(),
-    // ParamsFor<alias<ty_mat3x3<f32>>>(),
+    ParamsFor<i32>(),
+    ParamsFor<u32>(),
+    ParamsFor<f32>(),
+    ParamsFor<vec3<f32>>(),
+    ParamsFor<mat3x3<f32>>(),
+    ParamsFor<alias<i32>>(),
+    ParamsFor<alias<u32>>(),
+    ParamsFor<alias<f32>>(),
+    ParamsFor<alias<vec3<f32>>>(),
+    ParamsFor<alias<mat3x3<f32>>>(),
 };
 INSTANTIATE_TEST_SUITE_P(ResolverTypeConstructorValidationTest,
                          InferTypeTest_FromArithmeticExpression,
