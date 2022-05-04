@@ -14,6 +14,8 @@
 
 #include "src/tint/writer/wgsl/test_helper.h"
 
+using namespace tint::number_suffixes;
+
 namespace tint::writer::wgsl {
 namespace {
 
@@ -63,11 +65,11 @@ TEST_F(WgslGeneratorImplTest, Emit_LoopWithContinuing) {
 
 TEST_F(WgslGeneratorImplTest, Emit_ForLoopWithMultiStmtInit) {
     // var<workgroup> a : atomic<i32>;
-    // for({ignore(1); ignore(2);}; ; ) {
+    // for({ignore(1i); ignore(2i);}; ; ) {
     //   return;
     // }
     Global("a", ty.atomic<i32>(), ast::StorageClass::kWorkgroup);
-    auto* multi_stmt = Block(Ignore(1), Ignore(2));
+    auto* multi_stmt = Block(Ignore(1_i), Ignore(2_i));
     auto* f = For(multi_stmt, nullptr, nullptr, Block(Return()));
     WrapInFunction(f);
 
@@ -105,12 +107,12 @@ TEST_F(WgslGeneratorImplTest, Emit_ForLoopWithSimpleCond) {
 }
 
 TEST_F(WgslGeneratorImplTest, Emit_ForLoopWithSimpleCont) {
-    // for(; ; i = i + 1) {
+    // for(; ; i = i + 1i) {
     //   return;
     // }
 
     auto* v = Decl(Var("i", ty.i32()));
-    auto* f = For(nullptr, nullptr, Assign("i", Add("i", 1)), Block(Return()));
+    auto* f = For(nullptr, nullptr, Assign("i", Add("i", 1_i)), Block(Return()));
     WrapInFunction(v, f);
 
     GeneratorImpl& gen = Build();
@@ -126,12 +128,12 @@ TEST_F(WgslGeneratorImplTest, Emit_ForLoopWithSimpleCont) {
 
 TEST_F(WgslGeneratorImplTest, Emit_ForLoopWithMultiStmtCont) {
     // var<workgroup> a : atomic<i32>;
-    // for(; ; { ignore(1); ignore(2); }) {
+    // for(; ; { ignore(1i); ignore(2i); }) {
     //   return;
     // }
 
     Global("a", ty.atomic<i32>(), ast::StorageClass::kWorkgroup);
-    auto* multi_stmt = Block(Ignore(1), Ignore(2));
+    auto* multi_stmt = Block(Ignore(1_i), Ignore(2_i));
     auto* f = For(nullptr, nullptr, multi_stmt, Block(Return()));
     WrapInFunction(f);
 
@@ -150,11 +152,11 @@ TEST_F(WgslGeneratorImplTest, Emit_ForLoopWithMultiStmtCont) {
 }
 
 TEST_F(WgslGeneratorImplTest, Emit_ForLoopWithSimpleInitCondCont) {
-    // for(var i : i32; true; i = i + 1) {
+    // for(var i : i32; true; i = i + 1i) {
     //   return;
     // }
 
-    auto* f = For(Decl(Var("i", ty.i32())), true, Assign("i", Add("i", 1)), Block(Return()));
+    auto* f = For(Decl(Var("i", ty.i32())), true, Assign("i", Add("i", 1_i)), Block(Return()));
     WrapInFunction(f);
 
     GeneratorImpl& gen = Build();
@@ -170,12 +172,12 @@ TEST_F(WgslGeneratorImplTest, Emit_ForLoopWithSimpleInitCondCont) {
 
 TEST_F(WgslGeneratorImplTest, Emit_ForLoopWithMultiStmtInitCondCont) {
     // var<workgroup> a : atomic<i32>;
-    // for({ ignore(1); ignore(2); }; true; { ignore(3); ignore(4); }) {
+    // for({ ignore(1i); ignore(2i); }; true; { ignore(3i); ignore(4i); }) {
     //   return;
     // }
     Global("a", ty.atomic<i32>(), ast::StorageClass::kWorkgroup);
-    auto* multi_stmt_a = Block(Ignore(1), Ignore(2));
-    auto* multi_stmt_b = Block(Ignore(3), Ignore(4));
+    auto* multi_stmt_a = Block(Ignore(1_i), Ignore(2_i));
+    auto* multi_stmt_b = Block(Ignore(3_i), Ignore(4_i));
     auto* f = For(multi_stmt_a, Expr(true), multi_stmt_b, Block(Return()));
     WrapInFunction(f);
 

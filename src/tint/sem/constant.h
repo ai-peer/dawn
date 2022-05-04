@@ -25,34 +25,30 @@ namespace tint::sem {
 /// A Constant is compile-time known expression value, expressed as a flattened
 /// list of scalar values. Value may be of a scalar or vector type.
 class Constant {
-    using i32 = ProgramBuilder::i32;
-    using u32 = ProgramBuilder::u32;
-    using f32 = ProgramBuilder::f32;
-
   public:
     /// Scalar holds a single constant scalar value, as a union of an i32, u32,
     /// f32 or boolean.
     union Scalar {
         /// The scalar value as a i32
-        int32_t i32;
+        tint::i32 i32;
         /// The scalar value as a u32
-        uint32_t u32;
+        tint::u32 u32;
         /// The scalar value as a f32
-        float f32;
+        tint::f32 f32;
         /// The scalar value as a bool
         bool bool_;
 
         /// Constructs the scalar with the i32 value `v`
         /// @param v the value of the Scalar
-        Scalar(ProgramBuilder::i32 v) : i32(v) {}  // NOLINT
+        Scalar(tint::i32 v) : i32(v) {}  // NOLINT
 
         /// Constructs the scalar with the u32 value `v`
         /// @param v the value of the Scalar
-        Scalar(ProgramBuilder::u32 v) : u32(v) {}  // NOLINT
+        Scalar(tint::u32 v) : u32(v) {}  // NOLINT
 
         /// Constructs the scalar with the f32 value `v`
         /// @param v the value of the Scalar
-        Scalar(ProgramBuilder::f32 v) : f32(v) {}  // NOLINT
+        Scalar(tint::f32 v) : f32(v) {}  // NOLINT
 
         /// Constructs the scalar with the bool value `v`
         /// @param v the value of the Scalar
@@ -121,7 +117,7 @@ class Constant {
         }
         diag::List diags;
         TINT_UNREACHABLE(Semantic, diags) << "invalid scalar type " << type_->TypeInfo().name;
-        return func(~0);
+        return func(u32(~0));
     }
 
     /// @param index the index of the scalar value

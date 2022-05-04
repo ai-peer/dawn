@@ -17,6 +17,8 @@
 #include "src/tint/ast/workgroup_attribute.h"
 #include "src/tint/writer/wgsl/test_helper.h"
 
+using namespace tint::number_suffixes;
+
 namespace tint::writer::wgsl {
 namespace {
 
@@ -63,7 +65,7 @@ TEST_F(WgslGeneratorImplTest, Emit_Function_WithAttribute_WorkgroupSize) {
     auto* func = Func("my_func", ast::VariableList{}, ty.void_(), ast::StatementList{Return()},
                       ast::AttributeList{
                           Stage(ast::PipelineStage::kCompute),
-                          WorkgroupSize(2, 4, 6),
+                          WorkgroupSize(2_i, 4_i, 6_i),
                       });
 
     GeneratorImpl& gen = Build();
@@ -79,11 +81,11 @@ TEST_F(WgslGeneratorImplTest, Emit_Function_WithAttribute_WorkgroupSize) {
 }
 
 TEST_F(WgslGeneratorImplTest, Emit_Function_WithAttribute_WorkgroupSize_WithIdent) {
-    GlobalConst("height", ty.i32(), Expr(2));
+    GlobalConst("height", ty.i32(), Expr(2_i));
     auto* func = Func("my_func", ast::VariableList{}, ty.void_(), ast::StatementList{Return()},
                       ast::AttributeList{
                           Stage(ast::PipelineStage::kCompute),
-                          WorkgroupSize(2, "height"),
+                          WorkgroupSize(2_i, "height"),
                       });
 
     GeneratorImpl& gen = Build();
@@ -177,7 +179,7 @@ TEST_F(WgslGeneratorImplTest, Emit_Function_Multiple_EntryPoint_With_Same_Module
              },
              ast::AttributeList{
                  Stage(ast::PipelineStage::kCompute),
-                 WorkgroupSize(1),
+                 WorkgroupSize(1_i),
              });
     }
 
@@ -191,7 +193,7 @@ TEST_F(WgslGeneratorImplTest, Emit_Function_Multiple_EntryPoint_With_Same_Module
              },
              ast::AttributeList{
                  Stage(ast::PipelineStage::kCompute),
-                 WorkgroupSize(1),
+                 WorkgroupSize(1_i),
              });
     }
 

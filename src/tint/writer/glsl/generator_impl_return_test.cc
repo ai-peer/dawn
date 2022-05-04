@@ -14,6 +14,8 @@
 
 #include "src/tint/writer/glsl/test_helper.h"
 
+using namespace tint::number_suffixes;
+
 namespace tint::writer::glsl {
 namespace {
 
@@ -32,7 +34,7 @@ TEST_F(GlslGeneratorImplTest_Return, Emit_Return) {
 }
 
 TEST_F(GlslGeneratorImplTest_Return, Emit_ReturnWithValue) {
-    auto* r = Return(123);
+    auto* r = Return(123_i);
     Func("f", {}, ty.i32(), {r});
 
     GeneratorImpl& gen = Build();
@@ -40,7 +42,7 @@ TEST_F(GlslGeneratorImplTest_Return, Emit_ReturnWithValue) {
     gen.increment_indent();
 
     ASSERT_TRUE(gen.EmitStatement(r)) << gen.error();
-    EXPECT_EQ(gen.result(), "  return 123;\n");
+    EXPECT_EQ(gen.result(), "  return 123i;\n");
 }
 
 }  // namespace

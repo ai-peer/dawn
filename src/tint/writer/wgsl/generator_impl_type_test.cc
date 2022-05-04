@@ -17,6 +17,8 @@
 #include "src/tint/sem/sampled_texture.h"
 #include "src/tint/writer/wgsl/test_helper.h"
 
+using namespace tint::number_suffixes;
+
 namespace tint::writer::wgsl {
 namespace {
 
@@ -46,7 +48,7 @@ TEST_F(WgslGeneratorImplTest, EmitType_Array) {
 }
 
 TEST_F(WgslGeneratorImplTest, EmitType_Array_Attribute) {
-    auto* a = ty.array(ty.bool_(), 4, 16u);
+    auto* a = ty.array(ty.bool_(), 4_u, 16u);
     Alias("make_type_reachable", a);
 
     GeneratorImpl& gen = Build();

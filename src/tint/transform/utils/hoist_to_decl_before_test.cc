@@ -21,6 +21,8 @@
 #include "src/tint/transform/test_helper.h"
 #include "src/tint/transform/utils/hoist_to_decl_before.h"
 
+using namespace tint::number_suffixes;
+
 namespace tint::transform {
 namespace {
 
@@ -31,7 +33,7 @@ TEST_F(HoistToDeclBeforeTest, VarInit) {
     //     var a = 1;
     // }
     ProgramBuilder b;
-    auto* expr = b.Expr(1);
+    auto* expr = b.Expr(1_i);
     auto* var = b.Decl(b.Var("a", nullptr, expr));
     b.Func("f", {}, b.ty.void_(), {var});
 
@@ -59,11 +61,11 @@ fn f() {
 
 TEST_F(HoistToDeclBeforeTest, ForLoopInit) {
     // fn f() {
-    //     for(var a = 1; true; ) {
+    //     for(var a = 1i; true; ) {
     //     }
     // }
     ProgramBuilder b;
-    auto* expr = b.Expr(1);
+    auto* expr = b.Expr(1_i);
     auto* s = b.For(b.Decl(b.Var("a", nullptr, expr)), b.Expr(true), {}, b.Block());
     b.Func("f", {}, b.ty.void_(), {s});
 
@@ -133,11 +135,11 @@ fn f() {
 
 TEST_F(HoistToDeclBeforeTest, ForLoopCont) {
     // fn f() {
-    //     for(; true; var a = 1) {
+    //     for(; true; var a = 1i) {
     //     }
     // }
     ProgramBuilder b;
-    auto* expr = b.Expr(1);
+    auto* expr = b.Expr(1_i);
     auto* s = b.For({}, b.Expr(true), b.Decl(b.Var("a", nullptr, expr)), b.Block());
     b.Func("f", {}, b.ty.void_(), {s});
 
@@ -223,8 +225,8 @@ TEST_F(HoistToDeclBeforeTest, Array1D) {
     //     var b = a[0];
     // }
     ProgramBuilder b;
-    auto* var1 = b.Decl(b.Var("a", b.ty.array<ProgramBuilder::i32, 10>()));
-    auto* expr = b.IndexAccessor("a", 0);
+    auto* var1 = b.Decl(b.Var("a", b.ty.array<i32, 10>()));
+    auto* expr = b.IndexAccessor("a", 0_i);
     auto* var2 = b.Decl(b.Var("b", nullptr, expr));
     b.Func("f", {}, b.ty.void_(), {var1, var2});
 
@@ -258,8 +260,8 @@ TEST_F(HoistToDeclBeforeTest, Array2D) {
     // }
     ProgramBuilder b;
 
-    auto* var1 = b.Decl(b.Var("a", b.ty.array(b.ty.array<ProgramBuilder::i32, 10>(), 10)));
-    auto* expr = b.IndexAccessor(b.IndexAccessor("a", 0), 0);
+    auto* var1 = b.Decl(b.Var("a", b.ty.array(b.ty.array<i32, 10>(), 10_i)));
+    auto* expr = b.IndexAccessor(b.IndexAccessor("a", 0_i), 0_i);
     auto* var2 = b.Decl(b.Var("b", nullptr, expr));
     b.Func("f", {}, b.ty.void_(), {var1, var2});
 
@@ -328,11 +330,11 @@ fn f() {
 
 TEST_F(HoistToDeclBeforeTest, Prepare_ForLoopCont) {
     // fn f() {
-    //     for(; true; var a = 1) {
+    //     for(; true; var a = 1i) {
     //     }
     // }
     ProgramBuilder b;
-    auto* expr = b.Expr(1);
+    auto* expr = b.Expr(1_i);
     auto* s = b.For({}, b.Expr(true), b.Decl(b.Var("a", nullptr, expr)), b.Block());
     b.Func("f", {}, b.ty.void_(), {s});
 
@@ -414,11 +416,11 @@ TEST_F(HoistToDeclBeforeTest, InsertBefore_Block) {
     // fn foo() {
     // }
     // fn f() {
-    //     var a = 1;
+    //     var a = 1i;
     // }
     ProgramBuilder b;
     b.Func("foo", {}, b.ty.void_(), {});
-    auto* var = b.Decl(b.Var("a", nullptr, b.Expr(1)));
+    auto* var = b.Decl(b.Var("a", nullptr, b.Expr(1_i)));
     b.Func("f", {}, b.ty.void_(), {var});
 
     Program original(std::move(b));
@@ -451,12 +453,12 @@ TEST_F(HoistToDeclBeforeTest, InsertBefore_ForLoopInit) {
     // fn foo() {
     // }
     // fn f() {
-    //     for(var a = 1; true;) {
+    //     for(var a = 1i; true;) {
     //     }
     // }
     ProgramBuilder b;
     b.Func("foo", {}, b.ty.void_(), {});
-    auto* var = b.Decl(b.Var("a", nullptr, b.Expr(1)));
+    auto* var = b.Decl(b.Var("a", nullptr, b.Expr(1_i)));
     auto* s = b.For(var, b.Expr(true), {}, b.Block());
     b.Func("f", {}, b.ty.void_(), {s});
 
@@ -491,14 +493,14 @@ TEST_F(HoistToDeclBeforeTest, InsertBefore_ForLoopCont) {
     // fn foo() {
     // }
     // fn f() {
-    //     var a = 1;
-    //     for(; true; a+=1) {
+    //     var a = 1i;
+    //     for(; true; a+=1i) {
     //     }
     // }
     ProgramBuilder b;
     b.Func("foo", {}, b.ty.void_(), {});
-    auto* var = b.Decl(b.Var("a", nullptr, b.Expr(1)));
-    auto* cont = b.CompoundAssign("a", b.Expr(1), ast::BinaryOp::kAdd);
+    auto* var = b.Decl(b.Var("a", nullptr, b.Expr(1_i)));
+    auto* cont = b.CompoundAssign("a", b.Expr(1_i), ast::BinaryOp::kAdd);
     auto* s = b.For({}, b.Expr(true), cont, b.Block());
     b.Func("f", {}, b.ty.void_(), {var, s});
 

@@ -17,6 +17,8 @@
 #include "src/tint/sem/sampled_texture.h"
 #include "src/tint/writer/wgsl/test_helper.h"
 
+using namespace tint::number_suffixes;
+
 namespace tint::writer::wgsl {
 namespace {
 
@@ -65,7 +67,7 @@ TEST_F(WgslGeneratorImplTest, Emit_GlobalsInterleaved) {
          },
          ast::AttributeList{
              Stage(ast::PipelineStage::kCompute),
-             WorkgroupSize(1),
+             WorkgroupSize(1_i),
          });
 
     GeneratorImpl& gen = Build();
