@@ -71,6 +71,8 @@ class Type : public Castable<Type, Node> {
 
     /// @returns true if this type is a scalar
     bool is_scalar() const;
+    /// @returns true if this type is a scalar or an abstract numeric
+    bool is_scalar_or_abstract() const;
     /// @returns true if this type is a numeric scalar
     bool is_numeric_scalar() const;
     /// @returns true if this type is a float scalar
