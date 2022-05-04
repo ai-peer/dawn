@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c9de729_e7b57686",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T14:11:05Z",
+      "side": 1,
+      "message": "Does this need some kind of check to make sure you pass in an integral number? What happens if I pass a `f32` or `f16` into this?\n\n(Or, even just name it `check_integral_limits` or something?)",
+      "revId": "5bc78ae6851b7b608e36706daeb37ce332272320",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7774548_6c6298a6",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2782,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-04T14:11:05Z",
+      "side": 1,
+      "message": "Does this need a comment about updating for `abstract_int` similar to the above?",
+      "revId": "5bc78ae6851b7b608e36706daeb37ce332272320",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
