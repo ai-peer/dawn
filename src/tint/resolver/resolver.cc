@@ -50,6 +50,7 @@
 #include "src/tint/ast/variable_decl_statement.h"
 #include "src/tint/ast/vector.h"
 #include "src/tint/ast/workgroup_attribute.h"
+#include "src/tint/sem/abstract_int.h"
 #include "src/tint/sem/array.h"
 #include "src/tint/sem/atomic.h"
 #include "src/tint/sem/call.h"
@@ -81,12 +82,13 @@
 
 namespace tint::resolver {
 
-Resolver::Resolver(ProgramBuilder* builder)
+Resolver::Resolver(ProgramBuilder* builder, bool enable_abstract_int)
     : builder_(builder),
       diagnostics_(builder->Diagnostics()),
       builtin_table_(BuiltinTable::Create(*builder)),
       sem_(builder, dependencies_),
-      validator_(builder, sem_) {}
+      validator_(builder, sem_),
+      enable_abstract_int_(enable_abstract_int) {}
 
 Resolver::~Resolver() = default;
 
@@ -1532,8 +1534,10 @@ sem::Expression* Resolver::Literal(const ast::LiteralExpression* literal) {
         [&](const ast::IntLiteralExpression* i) -> sem::Type* {
             switch (i->suffix) {
                 case ast::IntLiteralExpression::Suffix::kNone:
-                // TODO(crbug.com/tint/1504): This will need to become abstract-int.
-                // For now, treat as 'i32'.
+                    if (enable_abstract_int_) {
+                        return builder_->create<sem::AbstractInt>();
+                    }
+                    return builder_->create<sem::I32>();
                 case ast::IntLiteralExpression::Suffix::kI:
                     return builder_->create<sem::I32>();
                 case ast::IntLiteralExpression::Suffix::kU:
