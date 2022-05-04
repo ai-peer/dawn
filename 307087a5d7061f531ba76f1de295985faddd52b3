@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ba8ddbe_d460f6a9",
+        "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-05-04T10:00:26Z",
+      "side": 1,
+      "message": "Do you folks think we also need a zero-attribute vertex buffer OOB test for DrawIndexed?",
+      "revId": "307087a5d7061f531ba76f1de295985faddd52b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
