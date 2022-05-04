@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44094ce9_66c73074",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-04T19:21:49Z",
+      "side": 1,
+      "message": "Not yet. A later change will switch to only creating `i` or `u` suffixed integers. Baby steps.",
+      "parentUuid": "19362b56_14c0b146",
+      "revId": "9980d04f596c38e6df9d3d89019cfd623f227c4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d589cea6_84142373",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-05-04T14:47:41Z",
       "side": 1,
       "message": "This value is no longer unsigned is it? So `4`? (and some other tests)",
+      "revId": "9980d04f596c38e6df9d3d89019cfd623f227c4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bedaa2d9_fadc3cb8",
+        "filename": "src/tint/reader/wgsl/parser_impl_function_attribute_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-04T19:21:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d589cea6_84142373",
       "revId": "9980d04f596c38e6df9d3d89019cfd623f227c4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b85d409f_3f637590",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1536,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-04T19:21:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae0c1308_96472fc9",
+      "revId": "9980d04f596c38e6df9d3d89019cfd623f227c4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d11a8b3_b2695db2",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-05-04T14:47:41Z",
       "side": 1,
       "message": "Doesn\u0027t this treat `kNone` as `u32` when we should be treating it as `i32` and re-evaluating with `abstract_int` ?",
+      "revId": "9980d04f596c38e6df9d3d89019cfd623f227c4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abb31602_4c0fd514",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-04T19:21:49Z",
+      "side": 1,
+      "message": "Good spot.\nFlipped the logic so `u` suffix is `u32`, both `i` and unsuffixed is `i32`",
+      "parentUuid": "5d11a8b3_b2695db2",
       "revId": "9980d04f596c38e6df9d3d89019cfd623f227c4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
