@@ -22,6 +22,30 @@
       },
       "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9589fb8_c7e85344",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-04T22:07:23Z",
+      "side": 1,
+      "message": "Maybe a better question: Should this be a more general `--pipeline-overrides` ?\nIt seems like we\u0027re going to need to do something similar for GLSL and MSL.",
+      "parentUuid": "016a1670_87e2e5ce",
+      "range": {
+        "startLine": 123,
+        "startChar": 3,
+        "endLine": 124,
+        "endChar": 28
+      },
+      "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
