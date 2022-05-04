@@ -1,3 +1,4 @@
+// flags: --dxc-defines WGSL_SPEC_CONSTANT_1234=0 --fxc-defines WGSL_SPEC_CONSTANT_1234=0
 @id(1234) override o : f32;
 
 @stage(compute) @workgroup_size(1)
