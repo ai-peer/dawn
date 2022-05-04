@@ -419,6 +419,18 @@ TEST_F(DrawVertexAndIndexBufferOOBValidationTests, DrawVertexBufferOutOfBoundWit
     }
 }
 
+// Verify zero-attribute vertex buffer OOB for non-instanced Draw are caught in command encoder
+TEST_F(DrawVertexAndIndexBufferOOBValidationTests, ZeroAttribute) {
+    // Create a render pipeline with zero-attribute vertex buffer description
+    wgpu::RenderPipeline pipeline = CreateRenderPipelineWithBufferDesc(
+        {{kFloat32x4Stride, wgpu::VertexStepMode::Vertex, {}}});
+
+    wgpu::Buffer vertexBuffer = CreateBuffer(3 * kFloat32x4Stride);
+
+    VertexBufferList vertexBufferList = {{0, vertexBuffer, 0, 0}};
+    TestRenderPassDraw(pipeline, vertexBufferList, 3, 1, 0, 0, false);
+}
+
 // Control case for DrawIndexed
 TEST_F(DrawVertexAndIndexBufferOOBValidationTests, DrawIndexedBasic) {
     wgpu::RenderPipeline pipeline = CreateBasicRenderPipeline();
