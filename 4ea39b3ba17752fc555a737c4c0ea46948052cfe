@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "4ea39b3ba17752fc555a737c4c0ea46948052cfe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc4a11e8_30b41eac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-04T17:53:14Z",
+      "side": 1,
+      "message": "*-dawn-rel CQ bots won\u0027t work on this branch (I think)\n\nYou can put \"No-Try: true\" in the commit description after the other bots pass",
+      "revId": "4ea39b3ba17752fc555a737c4c0ea46948052cfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
