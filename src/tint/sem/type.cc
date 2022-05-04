@@ -14,6 +14,8 @@
 
 #include "src/tint/sem/type.h"
 
+#include "src/tint/sem/abstract_float.h"
+#include "src/tint/sem/abstract_int.h"
 #include "src/tint/sem/bool.h"
 #include "src/tint/sem/f32.h"
 #include "src/tint/sem/i32.h"
@@ -65,6 +67,10 @@ bool Type::IsConstructible() const {
 
 bool Type::is_scalar() const {
     return IsAnyOf<F32, U32, I32, Bool>();
+}
+
+bool Type::is_scalar_or_abstract() const {
+    return IsAnyOf<F32, U32, I32, Bool, AbstractInt, AbstractFloat>();
 }
 
 bool Type::is_numeric_scalar() const {
