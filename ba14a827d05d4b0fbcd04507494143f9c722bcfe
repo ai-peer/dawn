@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b44c2d2_74611244",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002266
+      },
+      "writtenOn": "2022-05-05T18:38:29Z",
+      "side": 1,
+      "message": "Looks very good overall. Couple questions about in the comments.",
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21b862bf_235a1d69",
@@ -155,6 +172,125 @@
         "endLine": 143,
         "endChar": 9
       },
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0979abb_82ce908a",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1002266
+      },
+      "writtenOn": "2022-05-05T18:38:29Z",
+      "side": 1,
+      "message": "Are the visited nodes reset just to capture the interactions with other parameters? I would have thought this would be similar to the Value_return traversal (which would have to not mark visited).",
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c309dd2_628bdc92",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1002266
+      },
+      "writtenOn": "2022-05-05T18:38:29Z",
+      "side": 1,
+      "message": "Probably would be useful to add a comment about the desugaring being performed here.",
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e79c402f_f205ea50",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1002266
+      },
+      "writtenOn": "2022-05-05T18:38:29Z",
+      "side": 1,
+      "message": "Pedantically, it seems wrong to use cfx instead of cf here. When you add the loop edge later, I would expect the initializer to not be included in that cycle. I\u0027m not sure this makes a material difference though.",
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1bfb618_08038e46",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1002266
+      },
+      "writtenOn": "2022-05-05T18:38:29Z",
+      "side": 1,
+      "message": "Comment about the desugaring would be useful here.",
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45ee2024_bf721577",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1002266
+      },
+      "writtenOn": "2022-05-05T18:38:29Z",
+      "side": 1,
+      "message": "This is clever.",
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2130ea1f_629c2d9e",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1002266
+      },
+      "writtenOn": "2022-05-05T18:38:29Z",
+      "side": 1,
+      "message": "How does this work in the following situation?\n```\nvar x \u003d 0;\nif (uniform_cond) {\n  x \u003d non_uniform_value;\n} else {\n  if (x \u003e 5) { // Is \"x\" considered uniform here?\n    ...\n  }\n}\n```\n\nIt seems like you\u0027d need to track the value of each local variable as a state heading into each statement rather than globally in the function to be accurate. Is this a case of the spec being unclear?",
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3b64455_b75eea9f",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1002266
+      },
+      "writtenOn": "2022-05-05T18:38:29Z",
+      "side": 1,
+      "message": "Nit: perhaps better described as there currently being no way to have a non-uniform return value.",
       "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
