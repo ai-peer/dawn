@@ -72,6 +72,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6e6112d_b8443545",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-05T15:15:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e51659bb_6a239c6d",
+      "range": {
+        "startLine": 123,
+        "startChar": 3,
+        "endLine": 124,
+        "endChar": 28
+      },
+      "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0388d3a2_14928f30",
@@ -103,6 +127,24 @@
       "side": 1,
       "message": "Will do.",
       "parentUuid": "0388d3a2_14928f30",
+      "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04c01eb5_21329b16",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-05T15:15:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08a211e8_2eb23677",
       "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
