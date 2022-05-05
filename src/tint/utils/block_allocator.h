@@ -180,9 +180,10 @@ class BlockAllocator {
 
         auto* ptr = Allocate<TYPE>();
         new (ptr) TYPE(std::forward<ARGS>(args)...);
-        AddObjectPointer(ptr);
+        auto* ptrTyped = static_cast<TYPE*>(ptr);
+        AddObjectPointer(ptrTyped);
 
-        return ptr;
+        return ptrTyped;
     }
 
     /// Frees all allocations from the allocator.
@@ -207,7 +208,7 @@ class BlockAllocator {
     /// Allocates an instance of TYPE from the current block, or from a newly
     /// allocated block if the current block is full.
     template <typename TYPE>
-    TYPE* Allocate() {
+    void* Allocate() {
         static_assert(sizeof(TYPE) <= BLOCK_SIZE,
                       "Cannot construct TYPE with size greater than BLOCK_SIZE");
         static_assert(alignof(TYPE) <= BLOCK_ALIGNMENT, "alignof(TYPE) is greater than ALIGNMENT");
@@ -230,7 +231,7 @@ class BlockAllocator {
         }
 
         auto* base = &block_.current->data[0];
-        auto* ptr = reinterpret_cast<TYPE*>(base + block_.current_offset);
+        auto* ptr = static_cast<void*>(base + block_.current_offset);
         block_.current_offset += sizeof(TYPE);
         return ptr;
     }
@@ -241,7 +242,7 @@ class BlockAllocator {
     void AddObjectPointer(T* ptr) {
         if (pointers_.current_index >= Pointers::kMax) {
             auto* prev_pointers = pointers_.current;
-            pointers_.current = Allocate<Pointers>();
+            pointers_.current = new (Allocate<Pointers>()) Pointers;
             if (!pointers_.current) {
                 return;  // out of memory
             }
