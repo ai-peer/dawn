@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08a211e8_2eb23677",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-05T13:50:38Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "0388d3a2_14928f30",
+      "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "873a233d_9978165b",
         "filename": "src/tint/cmd/main.cc",
         "patchSetId": 1
@@ -108,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77a581ff_6bb48f54",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-05T13:50:38Z",
+      "side": 1,
+      "message": "Maybe, but I think we should keep it simple for now. Same code used for `--transforms`.",
+      "parentUuid": "873a233d_9978165b",
+      "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "86758373_c7d15104",
         "filename": "src/tint/val/hlsl.cc",
         "patchSetId": 1
@@ -119,6 +155,24 @@
       "writtenOn": "2022-05-05T13:34:37Z",
       "side": 1,
       "message": "Do we ever expect there to be a bunch of these such that we\u0027d want to use a `stringstream` here?",
+      "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37cbc276_e75fbcde",
+        "filename": "src/tint/val/hlsl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-05T13:50:38Z",
+      "side": 1,
+      "message": "I don\u0027t suspect so. I could call std::string::reserve() with some arbitrary capacity to avoid reallocs, if that\u0027s the concern. Maybe with `defines.size() * 20` or something.",
+      "parentUuid": "86758373_c7d15104",
       "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
