@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6129288d_e7d06b6a",
+        "filename": "src/tint/utils/block_allocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-05T13:25:30Z",
+      "side": 1,
+      "message": "Ah, okay, I had tried going via `void*` as a work-around for the CFI check, but no dice.",
+      "parentUuid": "8ab714cf_172b3255",
+      "range": {
+        "startLine": 236,
+        "startChar": 40,
+        "endLine": 236,
+        "endChar": 51
+      },
+      "revId": "f7737b6d913634cd0a4ff869654811109664065d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58250670_4372f45f",
         "filename": "src/tint/utils/block_allocator.h",
         "patchSetId": 3
