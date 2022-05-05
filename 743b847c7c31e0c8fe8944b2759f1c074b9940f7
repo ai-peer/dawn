@@ -70,6 +70,57 @@
       },
       "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0388d3a2_14928f30",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-05T13:34:37Z",
+      "side": 1,
+      "message": "maybe `split_on_comma`. Took a bit to figure out what `csvs` was.",
+      "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "873a233d_9978165b",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-05T13:34:37Z",
+      "side": 1,
+      "message": "Should this trim? What happens if I do `--fxc-defines \"THING1,     THING2\" ?",
+      "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86758373_c7d15104",
+        "filename": "src/tint/val/hlsl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-05T13:34:37Z",
+      "side": 1,
+      "message": "Do we ever expect there to be a bunch of these such that we\u0027d want to use a `stringstream` here?",
+      "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
