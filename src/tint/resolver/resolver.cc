@@ -30,6 +30,7 @@
 #include "src/tint/ast/depth_texture.h"
 #include "src/tint/ast/disable_validation_attribute.h"
 #include "src/tint/ast/discard_statement.h"
+#include "src/tint/ast/enable.h"
 #include "src/tint/ast/fallthrough_statement.h"
 #include "src/tint/ast/for_loop_statement.h"
 #include "src/tint/ast/id_attribute.h"
@@ -1277,6 +1278,19 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
             auto name = builder_->Symbols().NameFor(ident->symbol);
             auto builtin_type = sem::ParseBuiltinType(name);
             if (builtin_type != sem::BuiltinType::kNone) {
+                if (builtin_type == sem::BuiltinType::kDot4I8Packed ||
+                    builtin_type == sem::BuiltinType::kDot4U8Packed) {
+                    const auto& extensionSet = builder_->AST().Extensions();
+                    if (extensionSet.find(ast::Enable::ExtensionKind::kGoogleExperimentalDP4a) ==
+                        extensionSet.cend()) {
+                        AddError("cannot call built-in function '" + name + "' without extension " +
+                                     ast::Enable::KindToName(
+                                         ast::Enable::ExtensionKind::kGoogleExperimentalDP4a),
+                                 ident->source);
+                        return nullptr;
+                    }
+                }
+
                 return BuiltinCall(expr, builtin_type, std::move(args), std::move(arg_tys));
             }
 
