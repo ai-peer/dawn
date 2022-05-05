@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc1d9a83_4d66b302",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-05T10:57:22Z",
+      "side": 1,
+      "message": "Thank you very much for taking the time to investigate and identify this issue and for posting this fix.\n\nI was able to reproduce the problem locally, and I have a slightly simpler fix that I\u0027ve posted for review at: https://dawn-review.googlesource.com/c/dawn/+/89020",
+      "revId": "3b3ae3bf3d3eac4db3ae930f6cbdc9a6533b5825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
