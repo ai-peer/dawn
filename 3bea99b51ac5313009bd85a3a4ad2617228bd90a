@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b408c983_5f4d62f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-05T19:59:11Z",
+      "side": 1,
+      "message": "Updated to make it so that Vulkan warnings don\u0027t cause a context loss, but still echo to the console. Errors still cause a context loss.",
+      "revId": "3bea99b51ac5313009bd85a3a4ad2617228bd90a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
