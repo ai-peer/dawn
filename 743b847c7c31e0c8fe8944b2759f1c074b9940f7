@@ -46,6 +46,30 @@
       },
       "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e51659bb_6a239c6d",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-05T13:06:08Z",
+      "side": 1,
+      "message": "\u003e Why do we need both? Couldn\u0027t we have  --hlsl-defines  ?\n\nMy original implementation used `hlsl-defines`, but then I thought that maybe we\u0027d want to add `msl-defines`, `glsl-defines`, etc. and that ultimately we\u0027d want the flexibility to set any defines for any of the actual compilers. So I split them this way, per HLSL compiler.\n\n\u003e Maybe a better question: Should this be a more general  --pipeline-overrides ?\n\nWe could do that. It\u0027s less flexible in a way, but perhaps better as setting overrides might be different depending on compilers. I\u0027ll go with that.",
+      "parentUuid": "d9589fb8_c7e85344",
+      "range": {
+        "startLine": 123,
+        "startChar": 3,
+        "endLine": 124,
+        "endChar": 28
+      },
+      "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
