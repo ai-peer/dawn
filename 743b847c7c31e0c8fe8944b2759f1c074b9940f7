@@ -142,6 +142,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b99176e2_5882b6a9",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-05T13:59:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "77a581ff_6bb48f54",
+      "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86758373_c7d15104",
@@ -173,6 +191,24 @@
       "side": 1,
       "message": "I don\u0027t suspect so. I could call std::string::reserve() with some arbitrary capacity to avoid reallocs, if that\u0027s the concern. Maybe with `defines.size() * 20` or something.",
       "parentUuid": "86758373_c7d15104",
+      "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "803a7cb5_c0ee169f",
+        "filename": "src/tint/val/hlsl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-05T13:59:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "37cbc276_e75fbcde",
       "revId": "743b847c7c31e0c8fe8944b2759f1c074b9940f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
