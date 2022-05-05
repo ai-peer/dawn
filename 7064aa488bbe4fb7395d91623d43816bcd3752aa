@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13176604_9247d0e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-05T10:55:56Z",
+      "side": 1,
+      "message": "This is an alternative to https://dawn-review.googlesource.com/c/dawn/+/88980, which I think is a little cleaner.",
+      "revId": "7064aa488bbe4fb7395d91623d43816bcd3752aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
