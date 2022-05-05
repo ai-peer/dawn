@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "786780bf_8f5edf45",
+        "filename": "src/tint/castable.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-05T15:28:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a9cdc27_58f1a59b",
+      "range": {
+        "startLine": 593,
+        "startChar": 16,
+        "endLine": 593,
+        "endChar": 24
+      },
+      "revId": "ca0b63b7b3cb887473a02ee08796e9a427e90280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd276e50_25ff92fa",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-05T13:45:28Z",
       "side": 1,
       "message": "I think you could also use:\n```\nusing ReturnStorage \u003d alignas(alignof(ReturnType)) std::array\u003cuint8_t, sizeof(ReturnType)\u003e;\n```\n\nAnd if we need this everywhere, we can generalize with:\n```\ntemplate \u003ctypename T, size_t size\u003e\nstruct alignas(alignof(T)) AlignedArray : std::array\u003cT, size\u003e {};\n```\n(like this: https://godbolt.org/z/KoTx5xEPj)",
+      "range": {
+        "startLine": 789,
+        "startChar": 8,
+        "endLine": 791,
+        "endChar": 10
+      },
+      "revId": "ca0b63b7b3cb887473a02ee08796e9a427e90280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0be575fd_0e0365ab",
+        "filename": "src/tint/castable.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-05T15:28:23Z",
+      "side": 1,
+      "message": "Ack. I considered moving this out, but decided it wasn\u0027t worth it. At least not yet.\n\n`std::array` - yeah could do. Using a c-array feels a little bit more reassuring that STL implementations can\u0027t go screwing stuff up?",
+      "parentUuid": "bd276e50_25ff92fa",
       "range": {
         "startLine": 789,
         "startChar": 8,
