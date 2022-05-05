@@ -43,7 +43,7 @@ enum class ICD {
 class VulkanInstance : public RefCounted {
   public:
     static ResultOrError<Ref<VulkanInstance>> Create(const InstanceBase* instance, ICD icd);
-    ~VulkanInstance();
+    ~VulkanInstance() override;
 
     const VulkanFunctions& GetFunctions() const;
     VkInstance GetVkInstance() const;
