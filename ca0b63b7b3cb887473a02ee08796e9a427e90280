@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a9cdc27_58f1a59b",
+        "filename": "src/tint/castable.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-05T13:45:28Z",
+      "side": 1,
+      "message": "Don\u0027t need this bit",
+      "range": {
+        "startLine": 593,
+        "startChar": 16,
+        "endLine": 593,
+        "endChar": 24
+      },
+      "revId": "ca0b63b7b3cb887473a02ee08796e9a427e90280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd276e50_25ff92fa",
+        "filename": "src/tint/castable.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-05T13:45:28Z",
+      "side": 1,
+      "message": "I think you could also use:\n```\nusing ReturnStorage \u003d alignas(alignof(ReturnType)) std::array\u003cuint8_t, sizeof(ReturnType)\u003e;\n```\n\nAnd if we need this everywhere, we can generalize with:\n```\ntemplate \u003ctypename T, size_t size\u003e\nstruct alignas(alignof(T)) AlignedArray : std::array\u003cT, size\u003e {};\n```\n(like this: https://godbolt.org/z/KoTx5xEPj)",
+      "range": {
+        "startLine": 789,
+        "startChar": 8,
+        "endLine": 791,
+        "endChar": 10
+      },
+      "revId": "ca0b63b7b3cb887473a02ee08796e9a427e90280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
