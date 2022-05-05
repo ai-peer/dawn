@@ -19,8 +19,8 @@ import (
 	"strings"
 	"testing"
 
-	"dawn.googlesource.com/dawn/tools/src/cmd/builtin-gen/parser"
-	"dawn.googlesource.com/dawn/tools/src/cmd/builtin-gen/resolver"
+	"dawn.googlesource.com/dawn/tools/src/cmd/intrinsic-gen/parser"
+	"dawn.googlesource.com/dawn/tools/src/cmd/intrinsic-gen/resolver"
 )
 
 func TestResolver(t *testing.T) {
@@ -139,7 +139,7 @@ fn f<E: m>()`,
 			`
 type f32
 type T<x>
-fn f(T<T<f32>>)`,
+fn f(T< T<f32> >)`,
 			success,
 		}, {
 			`enum E {A A}`,

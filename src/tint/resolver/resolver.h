@@ -22,9 +22,9 @@
 #include <utility>
 #include <vector>
 
-#include "src/tint/builtin_table.h"
 #include "src/tint/program_builder.h"
 #include "src/tint/resolver/dependency_graph.h"
+#include "src/tint/resolver/intrinsic_table.h"
 #include "src/tint/resolver/sem_helper.h"
 #include "src/tint/resolver/validator.h"
 #include "src/tint/scope_stack.h"
@@ -226,11 +226,6 @@ class Resolver {
     sem::Statement* VariableDeclStatement(const ast::VariableDeclStatement*);
     bool Statements(const ast::StatementList&);
 
-    // Resolve the result type of a binary operator.
-    // Returns nullptr if the types are not valid for this operator.
-    const sem::Type* BinaryOpType(const sem::Type* lhs_ty,
-                                  const sem::Type* rhs_ty,
-                                  ast::BinaryOp op);
 
     /// Resolves the WorkgroupSize for the given function, assigning it to
     /// current_function_
@@ -378,7 +373,7 @@ class Resolver {
 
     ProgramBuilder* const builder_;
     diag::List& diagnostics_;
-    std::unique_ptr<BuiltinTable> const builtin_table_;
+    std::unique_ptr<IntrinsicTable> const intrinsic_table_;
     DependencyGraph dependencies_;
     SemHelper sem_;
     Validator validator_;

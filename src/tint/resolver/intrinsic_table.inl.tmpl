@@ -4,7 +4,7 @@ Template file for use with tools/builtin-gen to generate builtin_table.inl
 Used by BuiltinTable.cc for builtin overload resolution.
 
 See:
-* tools/cmd/builtin-gen/gen for structures used by this template
+* tools/cmd/intrinsic-gen/gen for structures used by this template
 * https://golang.org/pkg/text/template/ for documentation on the template syntax
 --------------------------------------------------------------------------------
 */ -}}
@@ -23,7 +23,7 @@ See:
 {{    end -}}
 {{- end -}}
 
-{{- with BuiltinTable -}}
+{{- with IntrinsicTable -}}
 {{- template "Matchers" . }}
 
 constexpr MatcherIndex kMatcherIndices[] = {
@@ -106,18 +106,35 @@ constexpr OverloadInfo kOverloads[] = {
 {{- end }}
 };
 
-constexpr BuiltinInfo kBuiltins[] = {
-{{- range $i, $f := .Functions }}
+constexpr IntrinsicInfo kBuiltins[] = {
+{{- range $i, $b := .Builtins }}
   {
     /* [{{$i}}] */
-{{-   range $f.OverloadDescriptions }}
+{{-   range $b.OverloadDescriptions }}
     /* {{.}} */
 {{-   end }}
-    /* num overloads */ {{$f.NumOverloads}},
-    /* overloads */ &kOverloads[{{$f.OverloadsOffset}}],
+    /* num overloads */ {{$b.NumOverloads}},
+    /* overloads */ &kOverloads[{{$b.OverloadsOffset}}],
   },
 {{- end }}
 };
+
+constexpr IntrinsicInfo kOperators[] = {
+{{- range $i, $o := .Operators }}
+  {
+    /* [{{$i}}] */
+{{-   range $o.OverloadDescriptions }}
+    /* {{.}} */
+{{-   end }}
+    /* num overloads */ {{$o.NumOverloads}},
+    /* overloads */ &kOverloads[{{$o.OverloadsOffset}}],
+  },
+{{- end }}
+};
+
+{{- range $i, $o := .Operators }}
+constexpr uint8_t kOperator{{template "OperatorName" $o.Name}} = {{$i}};
+{{- end }}
 
 // clang-format on
 {{ end -}}
@@ -397,5 +414,31 @@ Matchers::~Matchers() = default;
 {{-     if $i }} + ", " + {{.Name}}
 {{-     else }} + {{.Name}}
 {{-     end -}}
+{{-   end -}}
+{{- end -}}
+
+{{- /* ------------------------------------------------------------------ */ -}}
+{{-                          define "OperatorName"                           -}}
+{{- /* ------------------------------------------------------------------ */ -}}
+{{-        if eq . "<<" -}}ShiftLeft
+{{-   else if eq . "&"  -}}And
+{{-   else if eq . "|"  -}}Or
+{{-   else if eq . "^"  -}}Xor
+{{-   else if eq . "&&" -}}LogicalAnd
+{{-   else if eq . "||" -}}LogicalOr
+{{-   else if eq . "==" -}}Equal
+{{-   else if eq . "!=" -}}NotEqual
+{{-   else if eq . "<"  -}}LessThan
+{{-   else if eq . ">"  -}}GreaterThan
+{{-   else if eq . "<=" -}}LessThanEqual
+{{-   else if eq . ">=" -}}GreaterThanEqual
+{{-   else if eq . "<<" -}}ShiftLeft
+{{-   else if eq . ">>" -}}ShiftRight
+{{-   else if eq . "+"  -}}Plus
+{{-   else if eq . "-"  -}}Minus
+{{-   else if eq . "*"  -}}Star
+{{-   else if eq . "/"  -}}Divide
+{{-   else if eq . "%"  -}}Modulo
+{{-   else -}}<unknown-{{.}}>
 {{-   end -}}
 {{- end -}}
