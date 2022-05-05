@@ -141,6 +141,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd1e47df_85ee7fde",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1064,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-05-05T09:50:34Z",
+      "side": 1,
+      "message": "\u003e we can also move the validation to ReflectShaderUsingTint\n\nDone. Several modifications are made in order to add (possible) error messages into the compilation messages.\n\n\u003e If we find this is too fragile, we can look at exposing an extension symbol list as a later followup.\n\nMaybe in the future I can add a header for WGSL extension, like what we have for Toggles.",
+      "parentUuid": "271b7116_6e4fbbca",
+      "revId": "88fedaebcdd2151bb16b9e68e0480be13f610dac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0113123_2162ddfc",
