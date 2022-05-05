@@ -34,6 +34,14 @@ See:
 {{-   $permutation := printf "%v_%v" $function .Hash -}}
 {{-   $args        := Map -}}
 
+
+{{- /* TODO(crbug.com/tint/1497): Remove the bodge below after we can generate arbitrary extension names */}}
+{{- if or (eq $function "dot4I8Packed") (eq $function "dot4U8Packed") }}
+enable google_experimental_dp4a;
+{{/*new line*/ -}}
+{{- end  }}
+
+
 {{- /* Generate RW storage buffer parameters */ -}}
 {{-   $sb_rw_fields := Eval "EmitBufferFields" "overload"    .
                                                "var_name"    "sb_rw"
