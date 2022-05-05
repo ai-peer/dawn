@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"testing"
 
-	"dawn.googlesource.com/dawn/tools/src/cmd/builtin-gen/lexer"
-	"dawn.googlesource.com/dawn/tools/src/cmd/builtin-gen/tok"
+	"dawn.googlesource.com/dawn/tools/src/cmd/intrinsic-gen/lexer"
+	"dawn.googlesource.com/dawn/tools/src/cmd/intrinsic-gen/tok"
 )
 
 func TestLexTokens(t *testing.T) {
@@ -50,6 +50,9 @@ func TestLexTokens(t *testing.T) {
 			S: loc(1, 1, 0), E: loc(1, 6, 5),
 		}}},
 		{"fn", tok.Token{Kind: tok.Function, Runes: []rune("fn"), Source: tok.Source{
+			S: loc(1, 1, 0), E: loc(1, 3, 2),
+		}}},
+		{"op", tok.Token{Kind: tok.Operator, Runes: []rune("op"), Source: tok.Source{
 			S: loc(1, 1, 0), E: loc(1, 3, 2),
 		}}},
 		{"type", tok.Token{Kind: tok.Type, Runes: []rune("type"), Source: tok.Source{
@@ -89,6 +92,9 @@ func TestLexTokens(t *testing.T) {
 			S: loc(1, 1, 0), E: loc(1, 2, 1),
 		}}},
 		{"|", tok.Token{Kind: tok.Or, Runes: []rune("|"), Source: tok.Source{
+			S: loc(1, 1, 0), E: loc(1, 2, 1),
+		}}},
+		{"*", tok.Token{Kind: tok.Star, Runes: []rune("*"), Source: tok.Source{
 			S: loc(1, 1, 0), E: loc(1, 2, 1),
 		}}},
 		{"->", tok.Token{Kind: tok.Arrow, Runes: []rune("->"), Source: tok.Source{
@@ -134,10 +140,14 @@ func TestErrors(t *testing.T) {
 	for _, test := range []test{
 		{" \"abc", "test.txt:1:2 unterminated string"},
 		{" \"abc\n", "test.txt:1:2 unterminated string"},
-		{"*", "test.txt:1:1: unexpected '*'"},
+		{"£", "test.txt:1:1: unexpected '£'"},
 	} {
 		got, err := lexer.Lex([]rune(test.src), "test.txt")
-		if gotErr := err.Error(); test.expect != gotErr {
+		gotErr := "<nil>"
+		if err != nil {
+			gotErr = err.Error()
+		}
+		if test.expect != gotErr {
 			t.Errorf(`Lex() returned error "%+v", expected error "%+v"`, gotErr, test.expect)
 		}
 		if got != nil {
