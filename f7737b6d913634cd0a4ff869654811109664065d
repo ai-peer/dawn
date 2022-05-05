@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ab714cf_172b3255",
+        "filename": "src/tint/utils/block_allocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-05T13:23:26Z",
+      "side": 1,
+      "message": "The before code uses a reinterpret_cast, so I\u0027m confused.",
+      "parentUuid": "b4e166d2_c6dfbf17",
+      "range": {
+        "startLine": 236,
+        "startChar": 40,
+        "endLine": 236,
+        "endChar": 51
+      },
+      "revId": "f7737b6d913634cd0a4ff869654811109664065d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58250670_4372f45f",
         "filename": "src/tint/utils/block_allocator.h",
         "patchSetId": 3
