@@ -80,6 +80,12 @@ class Module final : public Castable<Module, Node> {
     /// @returns the extension set for the module
     const ExtensionSet& Extensions() const { return extensions_; }
 
+    /// @returns if the given extension is set for the module
+    /// @param extension the extension to query
+    bool HasExtension(Enable::ExtensionKind extension) const {
+        return extensions_.find(extension) != extensions_.cend();
+    }
+
     /// Adds a type declaration to the Builder.
     /// @param decl the type declaration to add
     void AddTypeDecl(const TypeDecl* decl);
