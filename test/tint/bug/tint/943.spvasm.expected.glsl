@@ -1,5 +1,6 @@
 warning: parameter 'dimInner' of 'mm_matMul_i1_i1_i1_' must be uniform
 note: 'workgroupBarrier' must only be called from uniform control flow
+note: access to 'dimInner_1' may result in a non-uniform value
 #version 310 es
 
 struct Uniforms {
