@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// builtin-gen parses the <tint>/src/tint/builtins.def file, then scans the
+// builtin-gen parses the <tint>/src/tint/resolver/intrinsics.def file, then scans the
 // project directory for '<file>.tmpl' files, to produce '<file>' source code
 // files.
 package main
@@ -25,14 +25,14 @@ import (
 	"path/filepath"
 	"strings"
 
-	"dawn.googlesource.com/dawn/tools/src/cmd/builtin-gen/gen"
-	"dawn.googlesource.com/dawn/tools/src/cmd/builtin-gen/parser"
-	"dawn.googlesource.com/dawn/tools/src/cmd/builtin-gen/resolver"
+	"dawn.googlesource.com/dawn/tools/src/cmd/intrinsic-gen/gen"
+	"dawn.googlesource.com/dawn/tools/src/cmd/intrinsic-gen/parser"
+	"dawn.googlesource.com/dawn/tools/src/cmd/intrinsic-gen/resolver"
 	"dawn.googlesource.com/dawn/tools/src/fileutils"
 	"dawn.googlesource.com/dawn/tools/src/glob"
 )
 
-const defProjectRelPath = "src/tint/builtins.def"
+const defProjectRelPath = "src/tint/resolver/intrinsics.def"
 
 func main() {
 	if err := run(); err != nil {
@@ -43,13 +43,13 @@ func main() {
 
 func showUsage() {
 	fmt.Println(`
-builtin-gen generates the builtin table for the Tint compiler
+intrinsic-gen generates the intrinsic table for the Tint compiler
 
-builtin-gen parses the <tint>/src/tint/builtins.def file, then scans the project
+intrinsic-gen parses the <tint>/src/tint/resolver/intrinsics.def file, then scans the project
 directory for '<file>.tmpl' files, to produce '<file>' source code files.
 
 usage:
-  builtin-gen
+  intrinsic-gen
 
 optional flags:`)
 	flag.PrintDefaults()

@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"strings"
 
-	"dawn.googlesource.com/dawn/tools/src/cmd/builtin-gen/sem"
+	"dawn.googlesource.com/dawn/tools/src/cmd/intrinsic-gen/sem"
 	"dawn.googlesource.com/dawn/tools/src/fileutils"
 )
 
@@ -74,7 +74,7 @@ func (p *Permuter) Permute(overload *sem.Overload) ([]Permutation, error) {
 	permutate := func() error {
 		o := sem.Overload{
 			Decl:             overload.Decl,
-			Function:         overload.Function,
+			Intrinsic:        overload.Intrinsic,
 			CanBeUsedInStage: overload.CanBeUsedInStage,
 		}
 		for i, p := range overload.Parameters {
