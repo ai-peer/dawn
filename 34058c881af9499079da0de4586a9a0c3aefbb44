@@ -16,6 +16,24 @@
       "message": "I would call this bit_cast (or BitCast) and just mimic the one from C++20: https://en.cppreference.com/w/cpp/numeric/bit_cast",
       "revId": "34058c881af9499079da0de4586a9a0c3aefbb44",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5e1ad53_adc88229",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-05T13:33:00Z",
+      "side": 1,
+      "message": "Done - except kept as one word: `Bitcast`, as I consider this a verb.",
+      "parentUuid": "4bcd36ec_3b00b47d",
+      "revId": "34058c881af9499079da0de4586a9a0c3aefbb44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
