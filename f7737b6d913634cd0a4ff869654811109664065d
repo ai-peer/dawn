@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "539f9e5c_cbae156f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-05T13:22:17Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "f7737b6d913634cd0a4ff869654811109664065d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9dc6d84f_7558f40d",
@@ -24,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4e166d2_c6dfbf17",
+        "filename": "src/tint/utils/block_allocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-05T13:22:17Z",
+      "side": 1,
+      "message": "You can static cast via `void*`, which is what we were doing before.",
+      "parentUuid": "9dc6d84f_7558f40d",
+      "range": {
+        "startLine": 236,
+        "startChar": 40,
+        "endLine": 236,
+        "endChar": 51
+      },
+      "revId": "f7737b6d913634cd0a4ff869654811109664065d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58250670_4372f45f",
@@ -37,6 +78,24 @@
       "writtenOn": "2022-05-05T13:14:18Z",
       "side": 1,
       "message": "It has always been UB to reinterpret_cast between unrelated pointer types in C++, but only recently have some compilers started complaining or optimizing these, so the modern way is to use memcpy as you do here. In fact, if you read the cppreference page on reinterpret_cast, it\u0027s quite complex in which scenarios it can actually safely be used: https://en.cppreference.com/w/cpp/language/reinterpret_cast\n\nIn C++20, we can use std::bit_cast: https://en.cppreference.com/w/cpp/numeric/bit_cast",
+      "revId": "f7737b6d913634cd0a4ff869654811109664065d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f55ffe0_94c706ce",
+        "filename": "src/tint/utils/block_allocator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-05T13:22:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "58250670_4372f45f",
       "revId": "f7737b6d913634cd0a4ff869654811109664065d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
