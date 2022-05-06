@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f2b156f_d4427500",
+        "filename": "src/tint/resolver/resolver_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1573,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-06T18:04:15Z",
+      "side": 1,
+      "message": "Nit: the use of \"call\" for operators is maybe a little confusing for users? Maybe \"no matching overload for operator...\"?\n\nMeh, probably doesn\u0027t make much difference.",
+      "revId": "8984e47b52e2208b91b4136be3cff5d86b5b4c07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
