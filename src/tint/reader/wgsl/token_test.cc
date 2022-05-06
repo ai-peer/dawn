@@ -23,39 +23,42 @@ namespace {
 
 using TokenTest = testing::Test;
 
-TEST_F(TokenTest, ReturnsF32) {
-    Token t1(Source{}, -2.345f);
-    EXPECT_EQ(t1.to_f32(), -2.345f);
+TEST_F(TokenTest, ReturnsF64) {
+    Token t1(Token::Type::kFloatFLiteral, Source{}, -2.345);
+    EXPECT_EQ(t1.to_f64(), -2.345);
 
-    Token t2(Source{}, 2.345f);
-    EXPECT_EQ(t2.to_f32(), 2.345f);
+    Token t2(Token::Type::kFloatFLiteral, Source{}, 2.345);
+    EXPECT_EQ(t2.to_f64(), 2.345);
 }
 
 TEST_F(TokenTest, ReturnsI32) {
-    Token t1(Token::Type::kIntILiteral, Source{}, -2345);
+    Token t1(Token::Type::kIntILiteral, Source{}, static_cast<int64_t>(-2345));
     EXPECT_EQ(t1.to_i64(), -2345);
 
-    Token t2(Token::Type::kIntILiteral, Source{}, 2345);
+    Token t2(Token::Type::kIntILiteral, Source{}, static_cast<int64_t>(2345));
     EXPECT_EQ(t2.to_i64(), 2345);
 }
 
 TEST_F(TokenTest, HandlesMaxI32) {
-    Token t1(Token::Type::kIntILiteral, Source{}, std::numeric_limits<int32_t>::max());
+    Token t1(Token::Type::kIntILiteral, Source{},
+             static_cast<int64_t>(std::numeric_limits<int32_t>::max()));
     EXPECT_EQ(t1.to_i64(), std::numeric_limits<int32_t>::max());
 }
 
 TEST_F(TokenTest, HandlesMinI32) {
-    Token t1(Token::Type::kIntILiteral, Source{}, std::numeric_limits<int32_t>::min());
+    Token t1(Token::Type::kIntILiteral, Source{},
+             static_cast<int64_t>(std::numeric_limits<int32_t>::min()));
     EXPECT_EQ(t1.to_i64(), std::numeric_limits<int32_t>::min());
 }
 
 TEST_F(TokenTest, ReturnsU32) {
-    Token t2(Token::Type::kIntULiteral, Source{}, 2345u);
+    Token t2(Token::Type::kIntULiteral, Source{}, static_cast<int64_t>(2345u));
     EXPECT_EQ(t2.to_i64(), 2345u);
 }
 
 TEST_F(TokenTest, ReturnsMaxU32) {
-    Token t1(Token::Type::kIntULiteral, Source{}, std::numeric_limits<uint32_t>::max());
+    Token t1(Token::Type::kIntULiteral, Source{},
+             static_cast<int64_t>(std::numeric_limits<uint32_t>::max()));
     EXPECT_EQ(t1.to_i64(), std::numeric_limits<uint32_t>::max());
 }
 
