@@ -204,6 +204,30 @@
       },
       "revId": "ff014fd89ddfeacfae16816a12fec2aeba3a5f06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c77bd0d2_9b58563e",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-05-06T08:48:57Z",
+      "side": 1,
+      "message": "The issue is filed as https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1408",
+      "parentUuid": "c555092a_a84a450f",
+      "range": {
+        "startLine": 1008,
+        "startChar": 70,
+        "endLine": 1008,
+        "endChar": 77
+      },
+      "revId": "ff014fd89ddfeacfae16816a12fec2aeba3a5f06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
