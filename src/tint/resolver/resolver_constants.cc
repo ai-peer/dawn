@@ -38,12 +38,12 @@ sem::Constant Resolver::EvaluateConstantValue(const ast::LiteralExpression* lite
         literal,
         [&](const ast::IntLiteralExpression* lit) {
             if (lit->suffix == ast::IntLiteralExpression::Suffix::kU) {
-                return sem::Constant{type, {u32(static_cast<uint32_t>(lit->value))}};
+                return sem::Constant{type, {u32(lit->value)}};
             }
-            return sem::Constant{type, {i32(static_cast<int32_t>(lit->value))}};
+            return sem::Constant{type, {i32(lit->value)}};
         },
         [&](const ast::FloatLiteralExpression* lit) {
-            return sem::Constant{type, {lit->value}};
+            return sem::Constant{type, {f32(lit->value)}};
         },
         [&](const ast::BoolLiteralExpression* lit) {
             return sem::Constant{type, {lit->value}};

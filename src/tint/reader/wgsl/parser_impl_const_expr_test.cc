@@ -32,9 +32,13 @@ TEST_F(ParserImplTest, ConstExpr_TypeDecl) {
 
     ASSERT_TRUE(t->args[0]->Is<ast::FloatLiteralExpression>());
     EXPECT_FLOAT_EQ(t->args[0]->As<ast::FloatLiteralExpression>()->value, 1.);
+    EXPECT_EQ(t->args[0]->As<ast::FloatLiteralExpression>()->suffix,
+              ast::FloatLiteralExpression::Suffix::kNone);
 
     ASSERT_TRUE(t->args[1]->Is<ast::FloatLiteralExpression>());
     EXPECT_FLOAT_EQ(t->args[1]->As<ast::FloatLiteralExpression>()->value, 2.);
+    EXPECT_EQ(t->args[1]->As<ast::FloatLiteralExpression>()->suffix,
+              ast::FloatLiteralExpression::Suffix::kNone);
 }
 
 TEST_F(ParserImplTest, ConstExpr_TypeDecl_Empty) {
