@@ -180,6 +180,30 @@
       },
       "revId": "ff014fd89ddfeacfae16816a12fec2aeba3a5f06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c555092a_a84a450f",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-06T08:38:18Z",
+      "side": 1,
+      "message": "SGTM - seems like something that can be done as a followup.",
+      "parentUuid": "41241fee_6eacf1a0",
+      "range": {
+        "startLine": 1008,
+        "startChar": 70,
+        "endLine": 1008,
+        "endChar": 77
+      },
+      "revId": "ff014fd89ddfeacfae16816a12fec2aeba3a5f06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
