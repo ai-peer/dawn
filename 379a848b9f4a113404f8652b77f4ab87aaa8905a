@@ -16,6 +16,23 @@
       "message": "ptal",
       "revId": "379a848b9f4a113404f8652b77f4ab87aaa8905a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0461c611_8fb6f4e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-06T08:38:56Z",
+      "side": 1,
+      "message": "+1 but you have an error:\n\n```\n../../src\\dawn/native/Commands.h(151,5): error: definition of implicit copy constructor for \u0027TextureCopy\u0027 is deprecated because it has a user-provided destructor [-Werror,-Wdeprecated-copy-with-user-provided-dtor]\n    ~TextureCopy();\n    ^\n../../src/dawn/native/d3d12/UtilsD3D12.cpp(356,50): note: in implicit copy constructor for \u0027dawn::native::TextureCopy\u0027 first required here\n        TextureCopy textureCopyForTheLastImage \u003d textureCopy;\n                                                 ^\n1 error generated.\n```",
+      "revId": "379a848b9f4a113404f8652b77f4ab87aaa8905a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
