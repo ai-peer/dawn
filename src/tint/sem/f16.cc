@@ -28,27 +28,27 @@ F16::F16(F16&&) = default;
 F16::~F16() = default;
 
 size_t F16::Hash() const {
-  return static_cast<size_t>(TypeInfo::Of<F16>().full_hashcode);
+    return static_cast<size_t>(TypeInfo::Of<F16>().full_hashcode);
 }
 
 bool F16::Equals(const Type& other) const {
-  return other.Is<F16>();
+    return other.Is<F16>();
 }
 
 std::string F16::FriendlyName(const SymbolTable&) const {
-  return "f16";
+    return "f16";
 }
 
 bool F16::IsConstructible() const {
-  return true;
+    return true;
 }
 
 uint32_t F16::Size() const {
-  return 2;
+    return 2;
 }
 
 uint32_t F16::Align() const {
-  return 2;
+    return 2;
 }
 
 }  // namespace sem

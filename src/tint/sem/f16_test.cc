@@ -40,8 +40,8 @@ TEST_F(F16Test, Equals) {
 }
 
 TEST_F(F16Test, FriendlyName) {
-  F16 f;
-  EXPECT_EQ(f.FriendlyName(Symbols()), "f16");
+    F16 f;
+    EXPECT_EQ(f.FriendlyName(Symbols()), "f16");
 }
 
 }  // namespace

@@ -301,11 +301,11 @@ const sem::Bool* build_bool(MatchState& state) {
 }
 
 bool match_f16(const sem::Type* ty) {
-  return ty->IsAnyOf<Any, sem::F16>();
+    return ty->IsAnyOf<Any, sem::F16>();
 }
 
 const sem::F16* build_f16(MatchState& state) {
-  return state.builder.create<sem::F16>();
+    return state.builder.create<sem::F16>();
 }
 
 bool match_f32(const sem::Type* ty) {

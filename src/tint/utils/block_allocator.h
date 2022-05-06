@@ -16,8 +16,10 @@
 #define SRC_TINT_UTILS_BLOCK_ALLOCATOR_H_
 
 #include <array>
+#include <cstring>
 #include <utility>
 
+#include "src/tint/utils/bitcast.h"
 #include "src/tint/utils/math.h"
 
 namespace tint::utils {
@@ -230,7 +232,7 @@ class BlockAllocator {
         }
 
         auto* base = &block_.current->data[0];
-        auto* ptr = reinterpret_cast<TYPE*>(base + block_.current_offset);
+        auto* ptr = utils::Bitcast<TYPE*>(base + block_.current_offset);
         block_.current_offset += sizeof(TYPE);
         return ptr;
     }

@@ -28,12 +28,12 @@ F16::F16(F16&&) = default;
 F16::~F16() = default;
 
 std::string F16::FriendlyName(const SymbolTable&) const {
-  return "f16";
+    return "f16";
 }
 
 const F16* F16::Clone(CloneContext* ctx) const {
-  auto src = ctx->Clone(source);
-  return ctx->dst->create<F16>(src);
+    auto src = ctx->Clone(source);
+    return ctx->dst->create<F16>(src);
 }
 
 }  // namespace ast

@@ -127,12 +127,12 @@ deps = {
   },
 
   'third_party/angle': {
-    'url': '{chromium_git}/angle/angle@9053a641bf5d58b3365a398d4bfbb6c0c3f0d6d6',
+    'url': '{chromium_git}/angle/angle@1d5d09e4191a23f25a0dc0b33aaa7b5c52dd2fe6',
     'condition': 'dawn_standalone',
   },
 
   'third_party/swiftshader': {
-    'url': '{swiftshader_git}/SwiftShader@2e793ae0800255ec73c23fc89da2526ccf5361e7',
+    'url': '{swiftshader_git}/SwiftShader@62c1af08ea4d205e87536b50dfa775cc5bbe6a0b',
     'condition': 'dawn_standalone',
   },
 

@@ -169,8 +169,7 @@ sem::Type* Resolver::Type(const ast::Type* ty) {
         [&](const ast::U32*) { return builder_->create<sem::U32>(); },
         // Add F16 ast->sem here
         [&](const ast::F16* t) -> sem::F16* {
-            if (builder_->AST().Extensions().count(
-                ast::Enable::ExtensionKind::kF16) == 0) {
+            if (builder_->AST().Extensions().count(ast::Enable::ExtensionKind::kF16) == 0) {
                 AddError("f16 used without 'f16' extension enabled", t->source);
                 return nullptr;
             }
