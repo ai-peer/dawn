@@ -16,6 +16,93 @@
       "message": "Oh I don\u0027t meet any errors when running kokoro tests locally on my Windows machine.\n\nPTAL, thanks!",
       "revId": "f3cec0e11a5345c858fb5c3a1c8d8d4a782c8ec6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8252946_4a415a54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-06T08:23:15Z",
+      "side": 1,
+      "message": "FYI we recently made the Kokoro logs public. You should be able to access these by clicking on the bottom link (source.cloud.google...)\n\nAn error is:\n\n```\n/dawn/src/src/dawn/native/vulkan/DeviceVk.cpp:898:12: error: call to deleted constructor of \u0027std::unique_ptr\u003cErrorData\u003e\u0027\n    return error;\n           ^~~~~\n/usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/unique_ptr.h:414:7: note: \u0027unique_ptr\u0027 has been explicitly marked deleted here\n      unique_ptr(const unique_ptr\u0026) \u003d delete;\n      ^\n/dawn/src/src/dawn/common/Result.h:64:31: note: passing argument to parameter \u0027error\u0027 here\n    Result(std::unique_ptr\u003cE\u003e error);\n                              ^\n1 error generated.\n```\n\nGiven that this is in Dawn code, and you haven\u0027t touched Dawn code - it looks like this is broken in the parent change. Maybe try rebasing.",
+      "parentUuid": "0ed904eb_131872e3",
+      "revId": "f3cec0e11a5345c858fb5c3a1c8d8d4a782c8ec6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89cd1457_754203b3",
+        "filename": "src/tint/ast/enable.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-06T08:23:15Z",
+      "side": 1,
+      "message": "In https://dawn-review.googlesource.com/c/dawn/+/88464/7/src/tint/ast/enable.cc, we are proposing adding a `chromium_` prefixed extension. I think this is preferable, as this is coupled with Chromium, not Google the company.",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 31
+      },
+      "revId": "f3cec0e11a5345c858fb5c3a1c8d8d4a782c8ec6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d7d8ef3_eede7892",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1291,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-06T08:23:15Z",
+      "side": 1,
+      "message": "This is validation, which belongs in src/tint/resolver/validator.cc",
+      "range": {
+        "startLine": 1281,
+        "startChar": 0,
+        "endLine": 1291,
+        "endChar": 17
+      },
+      "revId": "f3cec0e11a5345c858fb5c3a1c8d8d4a782c8ec6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58c31459_94dcda2e",
+        "filename": "test/tint/builtins/builtins.wgsl.tmpl",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-06T08:23:15Z",
+      "side": 1,
+      "message": "Maybe file an issue to add support for `[[extension(blah)]]` in the builtins.def file.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 93
+      },
+      "revId": "f3cec0e11a5345c858fb5c3a1c8d8d4a782c8ec6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
