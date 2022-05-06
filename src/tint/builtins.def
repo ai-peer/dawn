@@ -66,6 +66,7 @@ enum texel_format {
 
 // https://gpuweb.github.io/gpuweb/wgsl/#plain-types-section
 type bool
+type f16
 type f32
 type i32
 type u32
@@ -108,9 +109,12 @@ type __frexp_result
 // A type matcher that can match one or more types.                           //
 ////////////////////////////////////////////////////////////////////////////////
 
+match fiu32f16: f16 | f32 | i32 | u32
 match fiu32: f32 | i32 | u32
 match iu32: i32 | u32
-match scalar: f32 | i32 | u32 | bool
+match f16f32: f16 | f32
+// match scalar: f32 | i32 | u32 | bool
+match scalar: f16 | f32 | i32 | u32 | bool
 
 ////////////////////////////////////////////////////////////////////////////////
 // Enum matchers                                                              //
@@ -282,8 +286,10 @@ fn ceil(f32) -> f32
 fn ceil<N: num>(vec<N, f32>) -> vec<N, f32>
 fn clamp<T: fiu32>(T, T, T) -> T
 fn clamp<N: num, T: fiu32>(vec<N, T>, vec<N, T>, vec<N, T>) -> vec<N, T>
-fn cos(f32) -> f32
-fn cos<N: num>(vec<N, f32>) -> vec<N, f32>
+// fn cos(f32) -> f32
+fn cos<T: f16f32>(T) -> T
+// fn cos<N: num>(vec<N, f32>) -> vec<N, f32>
+fn cos<N: num, T: f16f32>(vec<N, T>) -> vec<N, T>
 fn cosh(f32) -> f32
 fn cosh<N: num>(vec<N, f32>) -> vec<N, f32>
 fn countLeadingZeros<T: iu32>(T) -> T

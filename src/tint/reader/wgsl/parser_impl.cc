@@ -124,8 +124,8 @@ const char kWorkgroupSizeAttribute[] = "workgroup_size";
 
 // https://gpuweb.github.io/gpuweb/wgsl.html#reserved-keywords
 bool is_reserved(Token t) {
-    return t == "asm" || t == "bf16" || t == "const" || t == "do" || t == "enum" || t == "f16" ||
-           t == "f64" || t == "handle" || t == "i8" || t == "i16" || t == "i64" || t == "mat" ||
+    return t == "asm" || t == "bf16" || t == "const" || t == "do" || t == "enum" || t == "f64" ||
+           t == "handle" || t == "i8" || t == "i16" || t == "i64" || t == "mat" ||
            t == "premerge" || t == "regardless" || t == "typedef" || t == "u8" || t == "u16" ||
            t == "u64" || t == "unless" || t == "using" || t == "vec" || t == "void" || t == "while";
 }
@@ -975,6 +975,10 @@ Maybe<const ast::Type*> ParserImpl::type_decl() {
 
     if (match(Token::Type::kBool, &source))
         return builder_.ty.bool_(source);
+
+    // Add f16 type here
+    if (match(Token::Type::kF16, &source))
+        return builder_.ty.f16(source);
 
     if (match(Token::Type::kF32, &source))
         return builder_.ty.f32(source);

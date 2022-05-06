@@ -66,6 +66,8 @@ using i32 = Number<int32_t>;
 using u32 = Number<uint32_t>;
 /// `f32` is a type alias to `float`
 using f32 = float;
+/// `f16` should be IEEE 754 binary16. However we treat it as `float` internally.
+using f16 = struct { float v; };
 
 }  // namespace tint
 

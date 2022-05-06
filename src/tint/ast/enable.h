@@ -36,6 +36,7 @@ class Enable : public Castable<Enable, Node> {
         /// "InternalExtensionForTesting"
         kInternalExtensionForTesting = -2,
         kNotAnExtension = -1,
+        kF16,
     };
 
     /// Convert a string of extension name into one of ExtensionKind enum value,
