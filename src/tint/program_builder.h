@@ -986,15 +986,32 @@ class ProgramBuilder {
 
     /// @param source the source information
     /// @param value the float value
-    /// @return a Scalar constructor for the given value
-    const ast::FloatLiteralExpression* Expr(const Source& source, f32 value) {
-        return create<ast::FloatLiteralExpression>(source, value);
+    /// @return a no-suffixed FloatLiteralExpression for the given value
+    const ast::FloatLiteralExpression* Expr(const Source& source, float value) {
+        return create<ast::FloatLiteralExpression>(source, static_cast<double>(value),
+                                                   ast::FloatLiteralExpression::Suffix::kF);
     }
 
     /// @param value the float value
-    /// @return a Scalar constructor for the given value
+    /// @return a no-suffixed FloatLiteralExpression for the given value
+    const ast::FloatLiteralExpression* Expr(float value) {
+        return create<ast::FloatLiteralExpression>(static_cast<double>(value),
+                                                   ast::FloatLiteralExpression::Suffix::kF);
+    }
+
+    /// @param source the source information
+    /// @param value the float value
+    /// @return a 'f'-suffixed FloatLiteralExpression for the given value
+    const ast::FloatLiteralExpression* Expr(const Source& source, f32 value) {
+        return create<ast::FloatLiteralExpression>(source, static_cast<double>(value.value),
+                                                   ast::FloatLiteralExpression::Suffix::kF);
+    }
+
+    /// @param value the float value
+    /// @return a 'f'-suffixed FloatLiteralExpression for the given value
     const ast::FloatLiteralExpression* Expr(f32 value) {
-        return create<ast::FloatLiteralExpression>(value);
+        return create<ast::FloatLiteralExpression>(static_cast<double>(value.value),
+                                                   ast::FloatLiteralExpression::Suffix::kF);
     }
 
     /// @param source the source information
