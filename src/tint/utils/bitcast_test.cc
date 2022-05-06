@@ -1,4 +1,4 @@
-// Copyright 2020 The Tint Authors.
+// Copyright 2022 The Tint Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,25 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/writer/msl/test_helper.h"
+#include "src/tint/utils/bitcast.h"
 
-using namespace tint::number_suffixes;  // NOLINT
+#include <stdint.h>
 
-namespace tint::writer::msl {
+#include "gtest/gtest.h"
+
+namespace tint::utils {
 namespace {
 
-using MslGeneratorImplTest = TestHelper;
+TEST(Bitcast, Integer) {
+    uint32_t a = 123;
+    int32_t b = Bitcast<int32_t>(a);
+    EXPECT_EQ(a, static_cast<uint32_t>(b));
+}
 
-TEST_F(MslGeneratorImplTest, EmitExpression_Bitcast) {
-    auto* bitcast = create<ast::BitcastExpression>(ty.f32(), Expr(1_i));
-    WrapInFunction(bitcast);
-
-    GeneratorImpl& gen = Build();
-
-    std::stringstream out;
-    ASSERT_TRUE(gen.EmitExpression(out, bitcast)) << gen.error();
-    EXPECT_EQ(out.str(), "as_type<float>(1)");
+TEST(Bitcast, Pointer) {
+    uint32_t a = 123;
+    void* b = Bitcast<void*>(&a);
+    EXPECT_EQ(&a, static_cast<uint32_t*>(b));
 }
 
 }  // namespace
-}  // namespace tint::writer::msl
+}  // namespace tint::utils

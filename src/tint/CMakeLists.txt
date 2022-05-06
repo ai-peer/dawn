@@ -232,6 +232,7 @@ set(TINT_LIB_SRCS
   clone_context.h
   demangler.cc
   demangler.h
+  number.h
   inspector/entry_point.cc
   inspector/entry_point.h
   inspector/inspector.cc
@@ -440,6 +441,7 @@ set(TINT_LIB_SRCS
   sem/vector.h
   sem/void.cc
   sem/void.h
+  utils/bitcast.h
   utils/block_allocator.h
   utils/crc32.h
   utils/enum_set.h
@@ -806,6 +808,7 @@ if(TINT_BUILD_TESTS)
     text/unicode_test.cc
     traits_test.cc
     transform/transform_test.cc
+    utils/bitcast_test.cc
     utils/block_allocator_test.cc
     utils/crc32_test.cc
     utils/defer_test.cc
@@ -1041,6 +1044,7 @@ if(TINT_BUILD_TESTS)
       transform/decompose_memory_access_test.cc
       transform/decompose_strided_array_test.cc
       transform/decompose_strided_matrix_test.cc
+      transform/expand_compound_assignment_test.cc
       transform/first_index_offset_test.cc
       transform/fold_constants_test.cc
       transform/fold_trivial_single_use_lets_test.cc
