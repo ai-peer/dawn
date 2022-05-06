@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "2f5f86dec9028a6837320dae45552fcd211af35c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "572c4019_e269109c",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-06T08:27:20Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think you need the const here.",
+      "range": {
+        "startLine": 157,
+        "startChar": 15,
+        "endLine": 157,
+        "endChar": 20
+      },
+      "revId": "2f5f86dec9028a6837320dae45552fcd211af35c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
