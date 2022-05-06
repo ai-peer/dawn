@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ed904eb_131872e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-06T07:28:47Z",
+      "side": 1,
+      "message": "Oh I don\u0027t meet any errors when running kokoro tests locally on my Windows machine.\n\nPTAL, thanks!",
+      "revId": "f3cec0e11a5345c858fb5c3a1c8d8d4a782c8ec6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
