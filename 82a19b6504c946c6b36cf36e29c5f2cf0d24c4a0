@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "413676bf_84ef7b63",
+        "filename": "src/dawn/tests/end2end/VertexStateTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-05-07T07:20:38Z",
+      "side": 1,
+      "message": "I needed this change to pass this test because of\n\nhttps://www.w3.org/TR/webgpu/#render-pass-encoder-drawing\n\n\u003e   For each GPUIndex32 slot 0 to pipelineDescriptor.vertex.buffers.length:\n\u003e     encoder.[[vertex_buffers]][slot] must not be null.\n\nWe may say that with this CL the validation will be more correct.",
+      "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33684069_c456b6bd",
+        "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-05-07T07:20:38Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/88880/comments/5ba8ddbe_d460f6a9\n\n\u003e if it\u0027s as concise as this test, would be great to test all combinations of (indexed, non-indexed) x (valid, oob)\n\nI will work on it next",
+      "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
