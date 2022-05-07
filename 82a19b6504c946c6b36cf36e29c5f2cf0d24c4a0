@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1aa93692_4f62bf62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-05-07T09:16:41Z",
+      "side": 1,
+      "message": "It turns out that at least one failed CTS (`gwebgpu:api,operation,vertex_state,correctness:discontiguous_location_and_attribs:`, code [here](https://github.com/gpuweb/cts/blob/main/src/webgpu/api/operation/vertex_state/correctness.spec.ts#L1049) and [here](https://github.com/gpuweb/cts/blob/main/src/webgpu/api/operation/vertex_state/correctness.spec.ts#L229)) use discontinuous buffer slot in `GPUBufferState.buffers` (which is a `sequence\u003cGPUVertexBufferLayout?\u003e`), leaving some elements in the `buffers` being `undefined`. \nI am not very sure how these unused and `undefined` elements are treated in Dawn, but it is possible to be represented as a normal `VertexBufferLayout` with all field default-initialized, i.e. `attributeCount \u003d\u003d 0` and `stepMode \u003d\u003d vertex`. If I get it right, the removed `if` statement filter away these unused buffer by checking `attributeCount \u003d\u003d 0`, together with used buffer with zero attribute. Removing the `if` statement in RenderPipeline.cpp may resulting in all those unused slots before the last used slot be misrecognized as used buffer with zero attribute.\nI am not very sure about how to distinguish between these unused buffer slots (before the last used slot) and used slot with zero attribute yet.",
+      "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "413676bf_84ef7b63",
         "filename": "src/dawn/tests/end2end/VertexStateTests.cpp",
         "patchSetId": 1
