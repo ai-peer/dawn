@@ -594,7 +594,7 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
     tint::inspector::Inspector* inspector,
     const tint::inspector::EntryPoint& entryPoint) {
     const CombinedLimits& limits = device->GetLimits();
-    constexpr uint32_t kMaxInterStageShaderLocation = kMaxInterStageShaderVariables - 1;
+    const uint32_t kMaxInterStageShaderLocation = limits.v1.maxInterStageShaderComponents / 4;
 
     std::unique_ptr<EntryPointMetadata> metadata = std::make_unique<EntryPointMetadata>();
 
@@ -708,7 +708,7 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
 
         // [[position]] must be declared in a vertex shader but is not exposed as an
         // output variable by Tint so we directly add its components to the total.
-        uint32_t totalInterStageShaderComponents = 4;
+        uint32_t totalInterStageShaderComponents = 0;
         for (const auto& outputVar : entryPoint.output_variables) {
             EntryPointMetadata::InterStageVariableInfo variable;
             DAWN_TRY_ASSIGN(variable.baseType,
@@ -734,9 +734,9 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
             metadata->interStageVariables[location] = variable;
         }
 
-        DelayedInvalidIf(totalInterStageShaderComponents > kMaxInterStageShaderComponents,
+        DelayedInvalidIf(totalInterStageShaderComponents > limits.v1.maxInterStageShaderComponents,
                          "Total vertex output components count (%u) exceeds the maximum (%u).",
-                         totalInterStageShaderComponents, kMaxInterStageShaderComponents);
+                         totalInterStageShaderComponents, limits.v1.maxInterStageShaderComponents);
     }
 
     if (metadata->stage == SingleShaderStage::Fragment) {
@@ -775,13 +775,13 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
         if (entryPoint.sample_index_used) {
             totalInterStageShaderComponents += 1;
         }
-        if (entryPoint.input_position_used) {
-            totalInterStageShaderComponents += 4;
-        }
+        // if (entryPoint.input_position_used) {
+        //     totalInterStageShaderComponents += 4;
+        // }
 
-        DelayedInvalidIf(totalInterStageShaderComponents > kMaxInterStageShaderComponents,
+        DelayedInvalidIf(totalInterStageShaderComponents > limits.v1.maxInterStageShaderComponents,
                          "Total fragment input components count (%u) exceeds the maximum (%u).",
-                         totalInterStageShaderComponents, kMaxInterStageShaderComponents);
+                         totalInterStageShaderComponents, limits.v1.maxInterStageShaderComponents);
 
         for (const auto& outputVar : entryPoint.output_variables) {
             EntryPointMetadata::FragmentOutputVariableInfo variable;
