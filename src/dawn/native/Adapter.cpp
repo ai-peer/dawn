@@ -51,8 +51,8 @@ MaybeError AdapterBase::Initialize() {
         std::min(mLimits.v1.maxVertexAttributes, uint32_t(kMaxVertexAttributes));
     mLimits.v1.maxVertexBuffers =
         std::min(mLimits.v1.maxVertexBuffers, uint32_t(kMaxVertexBuffers));
-    mLimits.v1.maxInterStageShaderComponents =
-        std::min(mLimits.v1.maxInterStageShaderComponents, kMaxInterStageShaderComponents);
+    // mLimits.v1.maxInterStageShaderComponents =
+    //    std::min(mLimits.v1.maxInterStageShaderComponents, kMaxInterStageShaderComponents);
     mLimits.v1.maxSampledTexturesPerShaderStage =
         std::min(mLimits.v1.maxSampledTexturesPerShaderStage, kMaxSampledTexturesPerShaderStage);
     mLimits.v1.maxSamplersPerShaderStage =

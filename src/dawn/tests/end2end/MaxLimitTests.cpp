@@ -19,6 +19,7 @@
 #include "dawn/common/Math.h"
 #include "dawn/common/Platform.h"
 #include "dawn/tests/DawnTest.h"
+#include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
 class MaxLimitTests : public DawnTest {
@@ -240,6 +241,396 @@ TEST_P(MaxLimitTests, MaxBufferBindingSize) {
 }
 
 DAWN_INSTANTIATE_TEST(MaxLimitTests,
+                      D3D12Backend(),
+                      MetalBackend(),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
+                      VulkanBackend());
+
+// Tested on Nvidia 2080Ti
+// maxInterStageShaderComponents == 128 on D3D12 and Vulkan
+
+class MaxInterStageShaderComponentsTests : public MaxLimitTests {
+  public:
+    void SetUp() {
+        MaxLimitTests::SetUp();
+        device.SetUncapturedErrorCallback(MaxInterStageShaderComponentsTests::OnDeviceError,
+                                          nullptr);
+    }
+
+    static void OnDeviceError(WGPUErrorType type, const char* message, void* userdata) {
+        ASSERT(type != WGPUErrorType_NoError);
+        FAIL() << "Unexpected error: " << message;
+    }
+
+    wgpu::RenderPipeline CreateRenderPipeline(const std::string& vertexShader,
+                                              const std::string& fragmentShader) {
+        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, vertexShader.c_str());
+        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragmentShader.c_str());
+
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        descriptor.vertex.bufferCount = 0;
+        descriptor.cBuffers[0].attributeCount = 0;
+        descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
+        descriptor.primitive.topology = wgpu::PrimitiveTopology::LineList;
+        return device.CreateRenderPipeline(&descriptor);
+    }
+};
+
+// #1: 30x vec4<f32> + vec2<f32> + f32 (+ position + "PointSize" in vertex shader)
+// D3D12: Pass
+// Vulkan: Pass
+TEST_P(MaxInterStageShaderComponentsTests, vec4x30_vec2_f32) {
+    DAWN_TEST_UNSUPPORTED_IF(IsSwiftshader() || IsWARP() || IsANGLE());
+
+    uint32_t maxInterStageComponentCount =
+        GetSupportedLimits().limits.maxInterStageShaderComponents;
+    DAWN_TEST_UNSUPPORTED_IF(maxInterStageComponentCount != 128);
+
+    constexpr uint32_t kVec4Count = 30;
+
+    std::stringstream stream;
+    for (uint32_t i = 0; i < kVec4Count; ++i) {
+        stream << "    @location(" << i << ") color" << i << ": vec4<f32>, " << std::endl;
+    }
+    stream << "    @location(30) color30 : vec2<f32>, " << std::endl
+           << "    @location(31) color31 : f32, " << std::endl;
+
+    std::string vertexShader = R"(
+        struct VertexOut {
+)" + stream.str() + R"(
+            @builtin(position) position : vec4<f32>,
+        }
+        @stage(vertex)
+        fn main(@builtin(vertex_index) vertexIndex : u32) -> VertexOut {
+            var pos = array<vec2<f32>, 3>(
+                vec2<f32>(-1.0, -1.0),
+                vec2<f32>( 2.0,  0.0),
+                vec2<f32>( 0.0,  2.0));
+            var output : VertexOut;
+            output.position = vec4<f32>(pos[vertexIndex], 0.0, 1.0);
+            return output;
+        })";
+
+    std::string fragmentShader = R"(
+        struct VertexOut {
+)" + stream.str() + R"(
+        }
+        @stage(fragment)
+        fn main(input: VertexOut) -> @location(0) vec4<f32> {
+            return input.color0;
+        })";
+
+    wgpu::RenderPipeline pipeline = CreateRenderPipeline(vertexShader, fragmentShader);
+    EXPECT_NE(nullptr, pipeline.Get());
+}
+
+// #2: 28x vec4<f32> + vec2<f32> + 4x f32 (+ position + "PointSize" in vertex shader)
+// D3D12: Pass
+// Vulkan: Error [ VUID-RuntimeSpirv-Location-06272 ]
+// Vertex shader output variable uses location that exceeds component limit
+// VkPhysicalDeviceLimits::maxVertexOutputComponents (128)
+// Fragment shader input variable uses location that exceeds component limit
+// VkPhysicalDeviceLimits::maxFragmentInputComponents (128)
+TEST_P(MaxInterStageShaderComponentsTests, vec4x28_vec2_f32x4) {
+    DAWN_TEST_UNSUPPORTED_IF(IsSwiftshader() || IsWARP() || IsANGLE());
+
+    uint32_t maxInterStageComponentCount =
+        GetSupportedLimits().limits.maxInterStageShaderComponents;
+    DAWN_TEST_UNSUPPORTED_IF(maxInterStageComponentCount != 128);
+
+    constexpr uint32_t kVec4Count = 28;
+
+    std::stringstream stream;
+    for (uint32_t i = 0; i < kVec4Count; ++i) {
+        stream << "    @location(" << i << ") color" << i << ": vec4<f32>, " << std::endl;
+    }
+    stream << "    @location(28) color28 : vec2<f32>, " << std::endl
+           << "    @location(29) color29 : f32, " << std::endl
+           << "    @location(30) color30 : f32, " << std::endl
+           << "    @location(31) color31 : f32, " << std::endl
+           << "    @location(32) color32 : f32, " << std::endl;
+
+    std::string vertexShader = R"(
+        struct VertexOut {
+)" + stream.str() + R"(
+            @builtin(position) position : vec4<f32>,
+        }
+        @stage(vertex)
+        fn main(@builtin(vertex_index) vertexIndex : u32) -> VertexOut {
+            var pos = array<vec2<f32>, 3>(
+                vec2<f32>(-1.0, -1.0),
+                vec2<f32>( 2.0,  0.0),
+                vec2<f32>( 0.0,  2.0));
+            var output : VertexOut;
+            output.position = vec4<f32>(pos[vertexIndex], 0.0, 1.0);
+            return output;
+        })";
+
+    std::string fragmentShader = R"(
+        struct VertexOut {
+)" + stream.str() + R"(
+        }
+        @stage(fragment)
+        fn main(input: VertexOut) -> @location(0) vec4<f32> {
+            return input.color0;
+        })";
+
+    wgpu::RenderPipeline pipeline = CreateRenderPipeline(vertexShader, fragmentShader);
+    EXPECT_NE(nullptr, pipeline.Get());
+}
+
+// #3: 27x vec4<f32> + 5x vec3<f32> (+ position + "PointSize" in vertex shader)
+// D3D12: error X4571: vs_5_1 output limit (32) exceeded, shader uses 33 outputs.
+// Vulkan: Pass
+TEST_P(MaxInterStageShaderComponentsTests, vec4x27_vec3x5) {
+    DAWN_TEST_UNSUPPORTED_IF(IsSwiftshader() || IsWARP() || IsANGLE());
+
+    uint32_t maxInterStageComponentCount =
+        GetSupportedLimits().limits.maxInterStageShaderComponents;
+    DAWN_TEST_UNSUPPORTED_IF(maxInterStageComponentCount != 128);
+
+    constexpr uint32_t kVec4Count = 27;
+
+    std::stringstream stream;
+    for (uint32_t i = 0; i < kVec4Count; ++i) {
+        stream << "    @location(" << i << ") color" << i << ": vec4<f32>, " << std::endl;
+    }
+    for (uint32_t i = kVec4Count; i < maxInterStageComponentCount / 4; ++i) {
+        stream << "    @location(" << i << ") color" << i << " : vec3<f32>, " << std::endl;
+    }
+
+    std::string vertexShader = R"(
+        struct VertexOut {
+)" + stream.str() + R"(
+            @builtin(position) position : vec4<f32>,
+        }
+        @stage(vertex)
+        fn main(@builtin(vertex_index) vertexIndex : u32) -> VertexOut {
+            var pos = array<vec2<f32>, 3>(
+                vec2<f32>(-1.0, -1.0),
+                vec2<f32>( 2.0,  0.0),
+                vec2<f32>( 0.0,  2.0));
+            var output : VertexOut;
+            output.position = vec4<f32>(pos[vertexIndex], 0.0, 1.0);
+            return output;
+        })";
+
+    std::string fragmentShader = R"(
+        struct VertexOut {
+)" + stream.str() + R"(
+        }
+        @stage(fragment)
+        fn main(input: VertexOut) -> @location(0) vec4<f32> {
+            return input.color0;
+        })";
+
+    wgpu::RenderPipeline pipeline = CreateRenderPipeline(vertexShader, fragmentShader);
+    EXPECT_NE(nullptr, pipeline.Get());
+}
+
+// #5: 31x vec4<f32> + sample_mask (+ position + "PointSize" in vertex shader)
+// D3D12: Pass
+// Vulkan: [ VUID-RuntimeSpirv-Location-06272 ]
+// Vertex shader exceeds VkPhysicalDeviceLimits::maxVertexOutputComponents of 128 components by 1
+// components
+TEST_P(MaxInterStageShaderComponentsTests, vec4x31_sample_mask) {
+    DAWN_TEST_UNSUPPORTED_IF(IsSwiftshader() || IsWARP() || IsANGLE());
+
+    uint32_t maxInterStageComponentCount =
+        GetSupportedLimits().limits.maxInterStageShaderComponents;
+    DAWN_TEST_UNSUPPORTED_IF(maxInterStageComponentCount != 128);
+
+    constexpr uint32_t kVec4Count = 31;
+
+    std::stringstream stream;
+    for (uint32_t i = 0; i < kVec4Count; ++i) {
+        stream << "    @location(" << i << ") color" << i << ": vec4<f32>, " << std::endl;
+    }
+
+    std::string vertexShader = R"(
+        struct VertexOut {
+)" + stream.str() + R"(
+            @builtin(position) position : vec4<f32>,
+        }
+        @stage(vertex)
+        fn main(@builtin(vertex_index) vertexIndex : u32) -> VertexOut {
+            var pos = array<vec2<f32>, 3>(
+                vec2<f32>(-1.0, -1.0),
+                vec2<f32>( 2.0,  0.0),
+                vec2<f32>( 0.0,  2.0));
+            var output : VertexOut;
+            output.position = vec4<f32>(pos[vertexIndex], 0.0, 1.0);
+            return output;
+        })";
+
+    std::string fragmentShader = R"(
+        struct VertexOut {
+)" + stream.str() + R"(
+            @builtin(sample_mask) sample_mask : u32,
+        }
+        @stage(fragment)
+        fn main(input: VertexOut) -> @location(0) vec4<f32> {
+            return input.color0;
+        })";
+
+    wgpu::RenderPipeline pipeline = CreateRenderPipeline(vertexShader, fragmentShader);
+    EXPECT_NE(nullptr, pipeline.Get());
+}
+
+// #6: 27x vec4<f32> + 4x vec3<f32> + position + front_facing (+ "PointSize" in vertex shader)
+// D3D12: error X4506: ps_5_1 input limit (32) exceeded, shader uses 33 inputs.
+// Vulkan: Pass
+TEST_P(MaxInterStageShaderComponentsTests, vec4x27_vec3x4_position_front_facing) {
+    DAWN_TEST_UNSUPPORTED_IF(IsSwiftshader() || IsWARP() || IsANGLE());
+
+    uint32_t maxInterStageComponentCount =
+        GetSupportedLimits().limits.maxInterStageShaderComponents;
+    DAWN_TEST_UNSUPPORTED_IF(maxInterStageComponentCount != 128);
+
+    constexpr uint32_t kVec4Count = 27;
+
+    std::stringstream stream;
+    for (uint32_t i = 0; i < kVec4Count; ++i) {
+        stream << "    @location(" << i << ") color" << i << ": vec4<f32>, " << std::endl;
+    }
+    for (uint32_t i = kVec4Count; i < 31; ++i) {
+        stream << "    @location(" << i << ") color" << i << ": vec3<f32>, " << std::endl;
+    }
+    stream << "   @builtin(position) position : vec4<f32>," << std::endl;
+
+    std::string vertexShader = R"(
+        struct VertexOut {
+)" + stream.str() + R"(
+        }
+        @stage(vertex)
+        fn main(@builtin(vertex_index) vertexIndex : u32) -> VertexOut {
+            var pos = array<vec2<f32>, 3>(
+                vec2<f32>(-1.0, -1.0),
+                vec2<f32>( 2.0,  0.0),
+                vec2<f32>( 0.0,  2.0));
+            var output : VertexOut;
+            output.position = vec4<f32>(pos[vertexIndex], 0.0, 1.0);
+            return output;
+        })";
+
+    std::string fragmentShader = R"(
+        struct VertexOut {
+)" + stream.str() + R"(
+            @builtin(front_facing) frontFacing : bool,
+        }
+        @stage(fragment)
+        fn main(input: VertexOut) -> @location(0) vec4<f32> {
+            return input.color0;
+        })";
+
+    wgpu::RenderPipeline pipeline = CreateRenderPipeline(vertexShader, fragmentShader);
+    EXPECT_NE(nullptr, pipeline.Get());
+}
+
+// #7: 27x vec4<f32> + 4x vec3<f32> + position + sample_index (+ "PointSize" in vertex shader)
+// D3D12: error X4506: ps_5_1 input limit (32) exceeded, shader uses 33 inputs.
+// Vulkan: Pass
+TEST_P(MaxInterStageShaderComponentsTests, vec4x27_vec3x4_position_sample_index) {
+    DAWN_TEST_UNSUPPORTED_IF(IsSwiftshader() || IsWARP() || IsANGLE());
+
+    uint32_t maxInterStageComponentCount =
+        GetSupportedLimits().limits.maxInterStageShaderComponents;
+    DAWN_TEST_UNSUPPORTED_IF(maxInterStageComponentCount != 128);
+
+    constexpr uint32_t kVec4Count = 27;
+
+    std::stringstream stream;
+    for (uint32_t i = 0; i < kVec4Count; ++i) {
+        stream << "    @location(" << i << ") color" << i << ": vec4<f32>, " << std::endl;
+    }
+    for (uint32_t i = kVec4Count; i < 31; ++i) {
+        stream << "    @location(" << i << ") color" << i << ": vec3<f32>, " << std::endl;
+    }
+    stream << "   @builtin(position) position : vec4<f32>," << std::endl;
+
+    std::string vertexShader = R"(
+        struct VertexOut {
+)" + stream.str() + R"(
+        }
+        @stage(vertex)
+        fn main(@builtin(vertex_index) vertexIndex : u32) -> VertexOut {
+            var pos = array<vec2<f32>, 3>(
+                vec2<f32>(-1.0, -1.0),
+                vec2<f32>( 2.0,  0.0),
+                vec2<f32>( 0.0,  2.0));
+            var output : VertexOut;
+            output.position = vec4<f32>(pos[vertexIndex], 0.0, 1.0);
+            return output;
+        })";
+
+    std::string fragmentShader = R"(
+        struct VertexOut {
+)" + stream.str() + R"(
+            @builtin(sample_index) sampleIndex : u32,
+        }
+        @stage(fragment)
+        fn main(input: VertexOut) -> @location(0) vec4<f32> {
+            return input.color0;
+        })";
+
+    wgpu::RenderPipeline pipeline = CreateRenderPipeline(vertexShader, fragmentShader);
+    EXPECT_NE(nullptr, pipeline.Get());
+}
+
+// #8: 30x vec4<f32> + position + front_facing + sample_index + sample_mask (+ "PointSize" in vertex
+// shader)
+// D3D12: Pass
+// Vulkan: Pass
+TEST_P(MaxInterStageShaderComponentsTests, vec4x30_position_front_facing_sample_index_sample_mask) {
+    DAWN_TEST_UNSUPPORTED_IF(IsSwiftshader() || IsWARP() || IsANGLE());
+
+    uint32_t maxInterStageComponentCount =
+        GetSupportedLimits().limits.maxInterStageShaderComponents;
+    DAWN_TEST_UNSUPPORTED_IF(maxInterStageComponentCount != 128);
+
+    constexpr uint32_t kVec4Count = 30;
+
+    std::stringstream stream;
+    for (uint32_t i = 0; i < kVec4Count; ++i) {
+        stream << "    @location(" << i << ") color" << i << ": vec4<f32>, " << std::endl;
+    }
+    stream << "   @builtin(position) position : vec4<f32>," << std::endl;
+
+    std::string vertexShader = R"(
+        struct VertexOut {
+)" + stream.str() + R"(
+        }
+        @stage(vertex)
+        fn main(@builtin(vertex_index) vertexIndex : u32) -> VertexOut {
+            var pos = array<vec2<f32>, 3>(
+                vec2<f32>(-1.0, -1.0),
+                vec2<f32>( 2.0,  0.0),
+                vec2<f32>( 0.0,  2.0));
+            var output : VertexOut;
+            output.position = vec4<f32>(pos[vertexIndex], 0.0, 1.0);
+            return output;
+        })";
+
+    std::string fragmentShader = R"(
+        struct VertexOut {
+)" + stream.str() + R"(
+            @builtin(front_facing) frontFacing: bool,
+            @builtin(sample_index) sampleIndex : u32,
+            @builtin(sample_mask) sampleMask: u32,
+        }
+        @stage(fragment)
+        fn main(input: VertexOut) -> @location(0) vec4<f32> {
+            return input.color0;
+        })";
+
+    wgpu::RenderPipeline pipeline = CreateRenderPipeline(vertexShader, fragmentShader);
+    EXPECT_NE(nullptr, pipeline.Get());
+}
+
+DAWN_INSTANTIATE_TEST(MaxInterStageShaderComponentsTests,
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
