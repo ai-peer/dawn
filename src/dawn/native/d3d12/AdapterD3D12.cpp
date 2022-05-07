@@ -292,6 +292,9 @@ MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
     // - maxInterStageShaderComponents
     // - maxVertexBufferArrayStride
 
+    limits->v1.maxInterStageShaderComponents =
+        D3D12_VS_OUTPUT_REGISTER_COMPONENTS * D3D12_VS_OUTPUT_REGISTER_COUNT;
+
     return {};
 }
 

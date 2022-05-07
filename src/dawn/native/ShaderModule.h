@@ -207,8 +207,8 @@ struct EntryPointMetadata {
     };
     // Now that we only support vertex and fragment stages, there can't be both inter-stage
     // inputs and outputs in one shader stage.
-    std::bitset<kMaxInterStageShaderVariables> usedInterStageVariables;
-    std::array<InterStageVariableInfo, kMaxInterStageShaderVariables> interStageVariables;
+    std::bitset<kMaxInterStageShaderVariables * 4> usedInterStageVariables;
+    std::array<InterStageVariableInfo, kMaxInterStageShaderVariables * 4> interStageVariables;
 
     // The local workgroup size declared for a compute entry point (or 0s otehrwise).
     Origin3D localWorkgroupSize;
