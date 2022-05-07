@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "95418f29_9398ba4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-05-07T11:15:32Z",
+      "side": 1,
+      "message": "Sorry, the `undefined` I mentioned should be `empty`.\nThe CTS test I looked at make a `GPUVertexBufferLayout[]` that is of this form (I printed it into Chrome console):\n\u003e `[empty, {slot: 1, arrayStride: 16, stepMode: \u0027instance\u0027, vbOffset: 1000, attributes: Array(1)}, empty x 5, {slot: 7, arrayStride: 4, stepMode: \u0027vertex\u0027, attributes: Array(2)}]`\nThis is an array of length 8, but 6 of its elements are empty.\n\nI am going to raise a WebGPU Spec issue to discuss if the validation rule\n\u003e `encoder.[[vertex_buffers]][slot]` must not be null.\nshould be clearified.",
+      "parentUuid": "1aa93692_4f62bf62",
+      "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "413676bf_84ef7b63",
