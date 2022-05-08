@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "090abec3_ee9e2d1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-05-08T06:55:28Z",
+      "side": 1,
+      "message": "\u003e it is possible to be represented as a normal `VertexBufferLayout` with all field default-initialized, i.e. `attributeCount \u003d\u003d 0` and `stepMode \u003d\u003d vertex`.\n\nI speculate so, too.\n\n\u003e If I get it right, the removed `if` statement filter away these unused buffer by checking `attributeCount \u003d\u003d 0`, together with used buffer with zero attribute.\n\nIt seems right [1]. `mVertexBufferSlotsUsed` is used in validation [2][3].\n\n\u003e Removing the  if  statement in RenderPipeline.cpp may resulting in all those unused slots before the last used slot be misrecognized as used buffer with zero attribute.\n\nSounds like yes.\n\n\u003e I am not very sure about how to distinguish between these unused buffer slots (before the last used slot) and used slot with zero attribute yet.\n\n`mVertexBufferSlotsUsed` in `RenderPipelineBase` saves only used buffer slots. We need a way to know used slots with the descriptor in the native. If it is ok to update `RenderPipelineDescriptor` (`VertexBufferLayout`), adding `slot` to `VertexBufferLayout` might be a simple solution.\n\n\u003e I am going to raise a WebGPU Spec issue to discuss if the validation rule\n\u003e \u003e `encoder.[[vertex_buffers]][slot]` must not be null.\n\u003e should be clearified.\n\nI think it is a good direction. Need of setting buffers to unused slots sounds weird. Thanks for opening the issue and PR there [4].\n\nSo, should we wait for the spec update?\n\n[1]: https://source.chromium.org/chromium/_/dawn/dawn.git/+/680f513bda0bdb3e843d68f2b0b6a348c2fb83c7:src/dawn/native/RenderPipeline.cpp;l\u003d505-511;drc\u003dd181a3cf55dbf76a0f9dbd780b6cc578354dfed3;bpv\u003d1;bpt\u003d0\n[2]: https://source.chromium.org/chromium/_/dawn/dawn.git/+/680f513bda0bdb3e843d68f2b0b6a348c2fb83c7:src/dawn/native/RenderPipeline.cpp;l\u003d672-676;drc\u003dd181a3cf55dbf76a0f9dbd780b6cc578354dfed3;bpv\u003d1;bpt\u003d0\n[3]: https://source.chromium.org/chromium/_/dawn/dawn.git/+/680f513bda0bdb3e843d68f2b0b6a348c2fb83c7:src/dawn/native/CommandBufferStateTracker.cpp;l\u003d225-233;drc\u003d41e4d9a34c1d9dcb2eef3ff39ff9c1f987bfa02a;bpv\u003d1;bpt\u003d0\n[4]: https://github.com/gpuweb/gpuweb/pull/2844",
+      "parentUuid": "95418f29_9398ba4f",
+      "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "413676bf_84ef7b63",
