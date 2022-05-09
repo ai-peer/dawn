@@ -16,6 +16,24 @@
       "message": "Nit: the use of \"call\" for operators is maybe a little confusing for users? Maybe \"no matching overload for operator...\"?\n\nMeh, probably doesn\u0027t make much difference.",
       "revId": "8984e47b52e2208b91b4136be3cff5d86b5b4c07",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3f38259_e15c8e2d",
+        "filename": "src/tint/resolver/resolver_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1573,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-09T10:44:49Z",
+      "side": 1,
+      "message": "No, I agree. Done",
+      "parentUuid": "5f2b156f_d4427500",
+      "revId": "8984e47b52e2208b91b4136be3cff5d86b5b4c07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
