@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0967a41c_41c14a8b",
+        "filename": "src/dawn/tests/end2end/VertexStateTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-09T13:10:25Z",
+      "side": 1,
+      "message": "I think Dawn already implements the fix in https://github.com/gpuweb/gpuweb/issues/2843 so we might not need this part of the change? Or did you find that the test was failing without it?\n\nAh! It is because in Dawn\u0027s webgpu.h we currently don\u0027t have a way to know whether a slot is used or not. Previously \"attributeCount \u003d\u003d 0\" meant that it was unused but that\u0027s no longer the case. We could repurpose stepMode for that by adding an \"undefined\" enum value to it in dawn.json, but that\u0027s a bit ugly.\n\nThis would be a three-sided patch (otherwise we risk breaking Chrome by using an uninitialized value):\n - Add the \"undefined\" enum value with 0 in dawn.json (and make it the default value in the wgpu::VertexBufferDescriptor)\n - Set the value undefined for all buffers in https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/webgpu/gpu_render_pipeline.cc;l\u003d196;bpv\u003d0;bpt\u003d1\n - Use undefined to continue the loop before setting mVertexBufferSlotsUsed.\n\nMaybe it\u0027s worth changing the spec to only validate if there is at least one attribute. The current behavior has been there since the text was introduced in https://github.com/gpuweb/gpuweb/pull/1866/files\n\nWe should raise an issue to the group to see if they would be amenable to relaxing the validation, but can start doing the implementation using stepMode::undefined in parallel, as you wish.\n\nIt seems that every \"starter\" issue I suggest both in Chromium and Dawn are much more complicated than they seem.",
+      "parentUuid": "413676bf_84ef7b63",
+      "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33684069_c456b6bd",
         "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
         "patchSetId": 1
@@ -84,6 +102,24 @@
       "writtenOn": "2022-05-07T07:20:38Z",
       "side": 1,
       "message": "https://dawn-review.googlesource.com/c/dawn/+/88880/comments/5ba8ddbe_d460f6a9\n\n\u003e if it\u0027s as concise as this test, would be great to test all combinations of (indexed, non-indexed) x (valid, oob)\n\nI will work on it next",
+      "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5413f9e2_d3b2a1b5",
+        "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-09T13:10:25Z",
+      "side": 1,
+      "message": "(imho we could defer to the CTS, as you wish)",
+      "parentUuid": "33684069_c456b6bd",
       "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
