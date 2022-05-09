@@ -1,0 +1,293 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97278276_46ce72f9",
+        "filename": "src/tint/ast/float_literal_expression_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T23:02:14Z",
+      "side": 1,
+      "message": "Would it be useful to do `42.` to force it to double instead of depending on the int conversion? (and below?)",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "174667a4_b16e83e1",
+        "filename": "src/tint/number.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T23:02:14Z",
+      "side": 1,
+      "message": "Where does the second template get used?",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d294244_4ed7c6d4",
+        "filename": "src/tint/number.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T23:02:14Z",
+      "side": 1,
+      "message": "wow....",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "044ba30e_1c631022",
+        "filename": "src/tint/number.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T23:02:14Z",
+      "side": 1,
+      "message": "`std::equal_to` compares with `\u003d\u003d`. Do we need to worry about float comparison tolerance here?",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7182f7c_0122fb2a",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T23:02:14Z",
+      "side": 1,
+      "message": "nit: `unsuffixed` instead of `no-suffixed` ?",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "279fa3d9_45d8ab53",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T23:02:14Z",
+      "side": 1,
+      "message": "The description says no-suffix ...",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62a63fca_ff071fe2",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T23:02:14Z",
+      "side": 1,
+      "message": "nit: unsuffixed",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b7d9538_205b0f23",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T23:02:14Z",
+      "side": 1,
+      "message": "ditto, no suffix?",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "330a0ace_59347521",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T23:02:14Z",
+      "side": 1,
+      "message": "Oh, that\u0027s subtle. I missed that this was a `f32` instead of a `float`. Maybe call that out in the doc comment to make it clearer this is a `Number`?",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29d0b6d0_134903fd",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T23:02:14Z",
+      "side": 1,
+      "message": "TODO for AbstractFloat change?",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e17f731a_eb046273",
+        "filename": "src/tint/reader/wgsl/lexer_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T23:02:14Z",
+      "side": 1,
+      "message": "TODO?",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74713ea1_5f9989d2",
+        "filename": "src/tint/reader/wgsl/parser_impl_const_literal_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T23:02:14Z",
+      "side": 1,
+      "message": "Do we care about comparison tolerance?",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a576f12_3c4d41ac",
+        "filename": "src/tint/reader/wgsl/token.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T23:02:14Z",
+      "side": 1,
+      "message": "\u0027abstract float literal\u0027 ?",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b7ad88e_6fe72ea4",
+        "filename": "src/tint/reader/wgsl/token.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T23:02:14Z",
+      "side": 1,
+      "message": "FloatFLiteral?",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffb0c332_7b373e22",
+        "filename": "src/tint/reader/wgsl/token.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T23:02:14Z",
+      "side": 1,
+      "message": "nit: \u0027f\u0027 suffix",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b37253a3_e830b482",
+        "filename": "src/tint/reader/wgsl/token.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T23:02:14Z",
+      "side": 1,
+      "message": "For some reason I find this much harder to differentiate then I did with the Int variants for some reason.",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "709f036c_b7ab1e5b",
+        "filename": "src/tint/resolver/resolver_constants_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T23:02:14Z",
+      "side": 1,
+      "message": "EXPECT_FLOAT_EQ ?",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
