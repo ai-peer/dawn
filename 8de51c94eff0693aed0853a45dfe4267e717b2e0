@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2d18ef4_99f9dc17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-09T15:58:17Z",
+      "side": 1,
+      "message": "PTAL! Vulkan was the only backend with that issue.\n\nI\u0027m not 100% sure what is the exact chain of events that make the test case fail, but it fails before the fix and not after. So, good enough?",
+      "revId": "8de51c94eff0693aed0853a45dfe4267e717b2e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
