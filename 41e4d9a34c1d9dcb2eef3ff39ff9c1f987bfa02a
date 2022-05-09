@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecd61aa4_5154e962",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-09T14:12:06Z",
+      "side": 1,
+      "message": "LGTM again. I replicated the .clang-format changes, ran tools/format and looked at the diff with the commit that was landed. There were some minor changes around linting (an explicit was added, a file path was updated in PRESUBMIT.py) but it could have been a bad manipulation on my part.",
+      "revId": "41e4d9a34c1d9dcb2eef3ff39ff9c1f987bfa02a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
