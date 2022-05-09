@@ -16,6 +16,23 @@
       "message": "PTAL! Looking at the landed version of Zhaoming\u0027s CL I had so many nits that I decided to fix them.",
       "revId": "acd600b326022477551100097eaeabf79c368104",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8937f0d6_8833cedf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-09T16:51:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "acd600b326022477551100097eaeabf79c368104",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
