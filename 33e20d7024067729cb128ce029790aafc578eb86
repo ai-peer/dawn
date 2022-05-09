@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "477d751d_597decd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T15:31:03Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "33e20d7024067729cb128ce029790aafc578eb86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4941304_f573d51f",
+        "filename": "tools/src/cmd/intrinsic-gen/lexer/lexer.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-09T15:31:03Z",
+      "side": 1,
+      "message": "What does peek do if `l` is only 1 char long? (so `1` is out of bounds?)",
+      "revId": "33e20d7024067729cb128ce029790aafc578eb86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
