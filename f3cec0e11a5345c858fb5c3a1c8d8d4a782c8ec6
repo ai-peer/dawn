@@ -193,6 +193,30 @@
       },
       "revId": "f3cec0e11a5345c858fb5c3a1c8d8d4a782c8ec6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ed5d63e_fa84a9e4",
+        "filename": "test/tint/builtins/builtins.wgsl.tmpl",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-09T08:37:03Z",
+      "side": 1,
+      "message": "That\u0027ll be quite involved. While I\u0027m happy for you to attempt to implement this, just having a tracking issues filed is good for now.",
+      "parentUuid": "3bae1e59_9a8af288",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 93
+      },
+      "revId": "f3cec0e11a5345c858fb5c3a1c8d8d4a782c8ec6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
