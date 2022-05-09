@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "641afe76_e7405df5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-09T08:22:14Z",
+      "side": 1,
+      "message": "Got it. Thanks!",
+      "parentUuid": "c8252946_4a415a54",
+      "revId": "f3cec0e11a5345c858fb5c3a1c8d8d4a782c8ec6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89cd1457_754203b3",
@@ -49,6 +67,30 @@
       "writtenOn": "2022-05-06T08:23:15Z",
       "side": 1,
       "message": "In https://dawn-review.googlesource.com/c/dawn/+/88464/7/src/tint/ast/enable.cc, we are proposing adding a `chromium_` prefixed extension. I think this is preferable, as this is coupled with Chromium, not Google the company.",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 31
+      },
+      "revId": "f3cec0e11a5345c858fb5c3a1c8d8d4a782c8ec6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2643525c_7ed8839b",
+        "filename": "src/tint/ast/enable.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-09T08:22:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89cd1457_754203b3",
       "range": {
         "startLine": 38,
         "startChar": 8,
@@ -82,6 +124,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02e7d256_c825b3a6",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1291,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-09T08:22:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d7d8ef3_eede7892",
+      "range": {
+        "startLine": 1281,
+        "startChar": 0,
+        "endLine": 1291,
+        "endChar": 17
+      },
+      "revId": "f3cec0e11a5345c858fb5c3a1c8d8d4a782c8ec6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58c31459_94dcda2e",
@@ -95,6 +161,30 @@
       "writtenOn": "2022-05-06T08:23:15Z",
       "side": 1,
       "message": "Maybe file an issue to add support for `[[extension(blah)]]` in the builtins.def file.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 93
+      },
+      "revId": "f3cec0e11a5345c858fb5c3a1c8d8d4a782c8ec6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bae1e59_9a8af288",
+        "filename": "test/tint/builtins/builtins.wgsl.tmpl",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-09T08:22:14Z",
+      "side": 1,
+      "message": "Done\n\nNext step I will work on [[extension(extension_name)]] in intrinsics.def.",
+      "parentUuid": "58c31459_94dcda2e",
       "range": {
         "startLine": 15,
         "startChar": 0,
