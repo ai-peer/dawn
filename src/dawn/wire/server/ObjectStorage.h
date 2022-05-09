@@ -94,11 +94,11 @@ struct ObjectData<WGPUDevice> : public ObjectDataBase<WGPUDevice> {
 
 // Keeps track of the mapping between client IDs and backend objects.
 template <typename T>
-class KnownObjects {
+class KnownObjectsBase {
   public:
     using Data = ObjectData<T>;
 
-    KnownObjects() {
+    KnownObjectsBase() {
         // Reserve ID 0 so that it can be used to represent nullptr for optional object values
         // in the wire format. However don't tag it as allocated so that it is an error to ask
         // KnownObjects for ID 0.
@@ -181,9 +181,9 @@ class KnownObjects {
         return objects;
     }
 
-    std::vector<T> GetAllHandles() {
+    std::vector<T> GetAllHandles() const {
         std::vector<T> objects;
-        for (Data& data : mKnown) {
+        for (const Data& data : mKnown) {
             if (data.state == AllocationState::Allocated && data.handle != nullptr) {
                 objects.push_back(data.handle);
             }
@@ -192,8 +192,39 @@ class KnownObjects {
         return objects;
     }
 
-  private:
+  protected:
     std::vector<Data> mKnown;
+};
+
+template <typename T>
+class KnownObjects : public KnownObjectsBase<T> {
+  public:
+    KnownObjects() = default;
+};
+
+template <>
+class KnownObjects<WGPUDevice> : public KnownObjectsBase<WGPUDevice> {
+  public:
+    KnownObjects() = default;
+
+    Data* Allocate(uint32_t id, AllocationState state = AllocationState::Allocated) {
+        Data* data = KnownObjectsBase<WGPUDevice>::Allocate(id, state);
+        if (data != nullptr && data->state == AllocationState::Allocated &&
+            data->handle != nullptr) {
+            mKnownSet.insert(data->handle);
+        }
+        return data;
+    }
+
+    void Free(uint32_t id) {
+        mKnownSet.erase(mKnown[id].handle);
+        KnownObjectsBase<WGPUDevice>::Free(id);
+    }
+
+    bool IsKnown(WGPUDevice device) const { return mKnownSet.count(device) != 0; }
+
+  private:
+    std::unordered_set<WGPUDevice> mKnownSet;
 };
 
 // ObjectIds are lost in deserialization. Store the ids of deserialized
