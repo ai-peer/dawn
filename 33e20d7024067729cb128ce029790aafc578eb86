@@ -33,6 +33,24 @@
       "message": "What does peek do if `l` is only 1 char long? (so `1` is out of bounds?)",
       "revId": "33e20d7024067729cb128ce029790aafc578eb86",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6ba6dc4_d985ea81",
+        "filename": "tools/src/cmd/intrinsic-gen/lexer/lexer.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-09T16:20:39Z",
+      "side": 1,
+      "message": "Returns a `0` rune:\n\n```\nfunc (l *lexer) peek(i int) rune {\n\tif i \u003e\u003d len(l.runes) {\n\t\treturn 0\n\t}\n\treturn l.runes[i]\n}\n```",
+      "parentUuid": "b4941304_f573d51f",
+      "revId": "33e20d7024067729cb128ce029790aafc578eb86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
