@@ -23,17 +23,9 @@ void HandleCreateRenderPipelineAsyncCallbackResult(KnownObjects<Pipeline>* known
                                                    WGPUCreatePipelineAsyncStatus status,
                                                    Pipeline pipeline,
                                                    CreatePipelineAsyncUserData* data) {
-    // May be null if the device was destroyed. Device destruction destroys child
-    // objects on the wire.
-    auto* pipelineObject = knownObjects->Get(data->pipelineObjectID, AllocationState::Reserved);
-    // Should be impossible to fail. ObjectIds can't be freed by a destroy command until
-    // they move from Reserved to Allocated, or if they are destroyed here.
-    ASSERT(pipelineObject != nullptr);
-
     if (status == WGPUCreatePipelineAsyncStatus_Success) {
-        // Assign the handle and allocated status if the pipeline is created successfully.
-        pipelineObject->state = AllocationState::Allocated;
-        pipelineObject->handle = pipeline;
+        auto* pipelineObject = knownObjects->FillReservation(data->pipelineObjectID, pipeline);
+        ASSERT(pipelineObject != nullptr);
 
         // This should be impossible to fail. It would require a command to be sent that
         // creates a duplicate ObjectId, which would fail validation.
