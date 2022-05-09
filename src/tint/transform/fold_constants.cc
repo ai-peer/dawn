@@ -63,7 +63,7 @@ void FoldConstants::Run(CloneContext& ctx, const DataMap&, DataMap&) const {
             // constructor args that the original node had, but after folding
             // constants, cases like the following are problematic:
             //
-            // vec3<f32> = vec3<f32>(vec2<f32>, 1.0) // vec_size=3, ctor_size=2
+            // vec3<f32> = vec3<f32>(2<_f32>, 1.0) // vec_size=3, ctor_size=2
             //
             // In this case, creating a vec3 with 2 args is invalid, so we should
             // create it with 3. So what we do is construct with vec_size args,
