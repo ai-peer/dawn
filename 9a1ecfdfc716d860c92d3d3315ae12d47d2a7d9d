@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94fc8127_aabfa350",
+        "filename": "src/tint/number.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-09T21:02:19Z",
+      "side": 1,
+      "message": "Should this be casting to `int64_t`?",
+      "revId": "9a1ecfdfc716d860c92d3d3315ae12d47d2a7d9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
