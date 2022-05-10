@@ -23,8 +23,39 @@
 namespace tint::sem {
 
 namespace {
+size_t CountScalars(const Constant::Scalars& scalars) {
+    return std::visit([](auto&& vec) { return vec.size(); }, scalars);
+}
+}  // namespace
 
-const Type* CheckElemType(const Type* ty, size_t num_scalars) {
+Constant::Constant() {}
+
+Constant::Constant(const sem::Type* ty, Scalars els)
+    : type_(ty), elem_type_(CheckElemType(ty, CountScalars(els))), elems_(std::move(els)) {}
+
+Constant::Constant(const sem::Type* ty, AInts vec) : Constant(ty, Scalars{std::move(vec)}) {}
+
+Constant::Constant(const sem::Type* ty, AFloats vec) : Constant(ty, Scalars{std::move(vec)}) {}
+
+Constant::Constant(const Constant&) = default;
+
+Constant::~Constant() = default;
+
+Constant& Constant::operator=(const Constant& rhs) = default;
+
+bool Constant::AnyZero() const {
+    return WithElements([&](auto&& vec) {
+        for (auto scalar : vec) {
+            using T = std::remove_reference_t<decltype(scalar)>;
+            if (scalar == T(0)) {
+                return true;
+            }
+        }
+        return false;
+    });
+}
+
+const Type* Constant::CheckElemType(const sem::Type* ty, size_t num_scalars) {
     diag::List diag;
     if (ty->is_abstract_or_scalar() || ty->IsAnyOf<Vector, Matrix>()) {
         uint32_t count = 0;
@@ -40,30 +71,5 @@ const Type* CheckElemType(const Type* ty, size_t num_scalars) {
     return nullptr;
 }
 
-}  // namespace
-
-Constant::Constant() {}
-
-Constant::Constant(const sem::Type* ty, Scalars els)
-    : type_(ty), elem_type_(CheckElemType(ty, els.size())), elems_(std::move(els)) {}
-
-Constant::Constant(const Constant&) = default;
-
-Constant::~Constant() = default;
-
-Constant& Constant::operator=(const Constant& rhs) = default;
-
-bool Constant::AnyZero() const {
-    for (auto scalar : elems_) {
-        auto is_zero = [&](auto&& s) {
-            using T = std::remove_reference_t<decltype(s)>;
-            return s == T(0);
-        };
-        if (std::visit(is_zero, scalar)) {
-            return true;
-        }
-    }
-    return false;
-}
 
 }  // namespace tint::sem

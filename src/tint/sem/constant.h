@@ -15,6 +15,7 @@
 #ifndef SRC_TINT_SEM_CONSTANT_H_
 #define SRC_TINT_SEM_CONSTANT_H_
 
+#include <ostream>
 #include <variant>
 #include <vector>
 
@@ -27,11 +28,9 @@ namespace tint::sem {
 /// list of scalar values. Value may be of a scalar or vector type.
 class Constant {
   public:
-    /// Scalar holds a single constant scalar value - one of: AInt, AFloat or bool.
-    using Scalar = std::variant<AInt, AFloat, bool>;
-
-    /// Scalars is a list of scalar values
-    using Scalars = std::vector<Scalar>;
+    using AInts = std::vector<AInt>;
+    using AFloats = std::vector<AFloat>;
+    using Scalars = std::variant<AInts, AFloats>;
 
     /// Constructs an invalid Constant
     Constant();
@@ -39,7 +38,23 @@ class Constant {
     /// Constructs a Constant of the given type and element values
     /// @param ty the Constant type
     /// @param els the Constant element values
-    Constant(const Type* ty, Scalars els);
+    Constant(const sem::Type* ty, Scalars els);
+
+    /// Constructs a Constant of the given type and element values
+    /// @param ty the Constant type
+    /// @param vec the Constant element values
+    Constant(const sem::Type* ty, AInts vec);
+
+    /// Constructs a Constant of the given type and element values
+    /// @param ty the Constant type
+    /// @param vec the Constant element values
+    Constant(const sem::Type* ty, AFloats vec);
+
+    /// Constructs a Constant of the given type and element values
+    /// @param ty the Constant type
+    /// @param els the Constant element values
+    template <typename T>
+    Constant(const sem::Type* ty, std::initializer_list<T> els);
 
     /// Copy constructor
     Constant(const Constant&);
@@ -61,11 +76,34 @@ class Constant {
     /// @returns the type of the Constant
     const sem::Type* Type() const { return type_; }
 
+    /// @returns the number of elements
+    inline size_t ElementCount() const {
+        return std::visit([](auto&& v) { return v.size(); }, elems_);
+    }
+
     /// @returns the element type of the Constant
     const sem::Type* ElementType() const { return elem_type_; }
 
     /// @returns the constant's scalar elements
     const Scalars& Elements() const { return elems_; }
+
+    /// WithElements calls the function `f` with the element vector as either AFloats or AInts
+    template <typename F>
+    auto WithElements(F&& f) const {
+        return std::visit(std::forward<F>(f), elems_);
+    }
+
+    /// WithElements calls the function `f` with the element vector as either AFloats or AInts
+    template <typename F>
+    auto WithElements(F&& f) {
+        return std::visit(std::forward<F>(f), elems_);
+    }
+
+    /// @returns the scalar elements as a vector of AInt
+    inline const AInts& IElements() const { return std::get<AInts>(elems_); }
+
+    /// @returns the scalar elements as a vector of AFloat
+    inline const AFloats& FElements() const { return std::get<AFloats>(elems_); }
 
     /// @returns true if any scalar element is zero
     bool AnyZero() const;
@@ -73,29 +111,34 @@ class Constant {
     /// @param index the index of the scalar value
     /// @return the value of the scalar at `index`, which must be of type `T`.
     template <typename T>
-    T Element(size_t index) const {
-        return std::get<T>(elems_[index]);
-    }
-
-    /// @param index the index of the scalar value
-    /// @return the value of the scalar `static_cast` to type T.
-    template <typename T>
-    T ElementAs(size_t index) const {
-        return Cast<T>(elems_[index]);
-    }
-
-    /// @param s the input scalar
-    /// @returns the scalar `s` cast to the type `T`.
-    template <typename T>
-    static T Cast(Scalar s) {
-        return std::visit([](auto v) { return static_cast<T>(v); }, s);
-    }
+    T Element(size_t index) const;
 
   private:
+    const sem::Type* CheckElemType(const sem::Type* ty, size_t num_scalars);
+
     const sem::Type* type_ = nullptr;
     const sem::Type* elem_type_ = nullptr;
     Scalars elems_;
 };
+
+template <typename T>
+Constant::Constant(const sem::Type* ty, std::initializer_list<T> els)
+    : type_(ty), elem_type_(CheckElemType(type_, els.size())) {
+    if constexpr (std::is_floating_point_v<UnwrapNumber<T>>) {
+        elems_ = Scalars{AFloats(els)};
+    } else {
+        elems_ = Scalars{AInts(els)};
+    }
+}
+
+template <typename T>
+T Constant::Element(size_t index) const {
+    if constexpr (std::is_floating_point_v<UnwrapNumber<T>>) {
+        return static_cast<T>(FElements()[index].value);
+    } else {
+        return static_cast<T>(IElements()[index].value);
+    }
+}
 
 }  // namespace tint::sem
 
