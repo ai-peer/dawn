@@ -30,6 +30,16 @@
 
 namespace tint::resolver {
 
+/// Helper macro for testing that a semantic type was as expected
+#define EXPECT_TYPE(GOT, EXPECT)                              \
+    if ((GOT) != (EXPECT)) {                                  \
+        FAIL() << #GOT " != " #EXPECT "\n"                    \
+               << "  " #GOT ": " << FriendlyName(GOT) << "\n" \
+               << "  " #EXPECT ": " << FriendlyName(EXPECT);  \
+    }                                                         \
+    do {                                                      \
+    } while (false)
+
 /// Helper class for testing
 class TestHelper : public ProgramBuilder {
   public:
@@ -262,6 +272,26 @@ struct DataType<f32> {
     /// @return a new AST f32 literal value expression
     static inline const ast::Expression* Expr(ProgramBuilder& b, int elem_value) {
         return b.Expr(static_cast<f32>(elem_value));
+    }
+};
+
+/// Helper for building f16 types and expressions
+template <>
+struct DataType<f16> {
+    /// false as f16 is not a composite type
+    static constexpr bool is_composite = false;
+
+    /// @param b the ProgramBuilder
+    /// @return a new AST f16 type
+    static inline const ast::Type* AST(ProgramBuilder& b) { return b.ty.f16(); }
+    /// @param b the ProgramBuilder
+    /// @return the semantic f16 type
+    static inline const sem::Type* Sem(ProgramBuilder& b) { return b.create<sem::F16>(); }
+    /// @param b the ProgramBuilder
+    /// @param elem_value the value f16 will be initialized with
+    /// @return a new AST f16 literal value expression
+    static inline const ast::Expression* Expr(ProgramBuilder& b, int elem_value) {
+        return b.Expr(static_cast<f16>(elem_value));
     }
 };
 
