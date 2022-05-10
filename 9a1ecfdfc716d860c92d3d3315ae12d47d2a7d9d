@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b044bd2_f125dad4",
+        "filename": "src/tint/number.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-10T14:41:00Z",
+      "side": 1,
+      "message": "I clearly cannot work in the office.",
+      "parentUuid": "43ea582a_e8d4f66c",
+      "revId": "9a1ecfdfc716d860c92d3d3315ae12d47d2a7d9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a61c3733_c15f979c",
