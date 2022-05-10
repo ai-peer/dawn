@@ -633,6 +633,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "003bb7e5_10a1f58a",
+        "filename": "src/tint/reader/wgsl/token.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-10T12:26:50Z",
+      "side": 1,
+      "message": "Oh, good idea. I like that the `_F`, `_I` and `_U` are all suffixes, just like the thing they\u0027re modeling.",
+      "parentUuid": "b093120f_b379445a",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "709f036c_b7ab1e5b",
