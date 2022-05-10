@@ -20,6 +20,9 @@
 #include <utility>
 
 #include "src/tint/program_builder.h"
+#include "src/tint/sem/abstract_float.h"
+#include "src/tint/sem/abstract_int.h"
+#include "src/tint/sem/abstract_numeric.h"
 #include "src/tint/sem/atomic.h"
 #include "src/tint/sem/depth_multisampled_texture.h"
 #include "src/tint/sem/depth_texture.h"
@@ -107,9 +110,25 @@ class ClosedState {
     /// If the type with index `idx` is open, then it is closed with type `ty` and
     /// Type() returns true. If the type is closed, then `Type()` returns true iff
     /// it is equal to `ty`.
-    bool Type(size_t idx, const sem::Type* ty) {
+    const sem::Type* Type(size_t idx, const sem::Type* ty) {
         auto res = types_.emplace(idx, ty);
-        return res.second || res.first->second == ty;
+        if (res.second) {
+            return ty;
+        }
+        auto* closed = res.first->second;
+        if (closed == ty) {
+            return ty;
+        }
+        if (sem::Type::ConversionRank(ty, closed) != sem::Type::kNoConversion) {
+            // ty can be converted to the closed type. Keep the closed type.
+            return closed;
+        }
+        if (sem::Type::ConversionRank(closed, ty) != sem::Type::kNoConversion) {
+            // closed type can be converted to ty. Constrain the closed type.
+            types_[idx] = ty;
+            return ty;
+        }
+        return nullptr;
     }
 
     /// If the number with index `idx` is open, then it is closed with number
@@ -125,6 +144,9 @@ class ClosedState {
         auto it = types_.find(idx);
         return (it != types_.end()) ? it->second : nullptr;
     }
+
+    /// SetType replaces the closed type with index `idx` with type `ty`.
+    void SetType(size_t idx, const sem::Type* ty) { types_[idx] = ty; }
 
     /// Type returns the number type with index `idx`.
     /// An ICE is raised if the number is not closed.
@@ -238,7 +260,10 @@ class OpenTypeMatcher : public TypeMatcher {
         if (type->Is<Any>()) {
             return state.closed.Type(index_);
         }
-        return state.closed.Type(index_, type) ? type : nullptr;
+        if (auto* closed = state.closed.Type(index_, type)) {
+            return closed;
+        }
+        return nullptr;
     }
 
     std::string String(MatchState& state) const override;
@@ -301,8 +326,12 @@ const sem::Bool* build_bool(MatchState& state) {
     return state.builder.create<sem::Bool>();
 }
 
+const sem::F32* build_f32(MatchState& state) {
+    return state.builder.create<sem::F32>();
+}
+
 bool match_f32(const sem::Type* ty) {
-    return ty->IsAnyOf<Any, sem::F32>();
+    return ty->IsAnyOf<Any, sem::F32, sem::AbstractNumeric>();
 }
 
 const sem::I32* build_i32(MatchState& state) {
@@ -310,7 +339,7 @@ const sem::I32* build_i32(MatchState& state) {
 }
 
 bool match_i32(const sem::Type* ty) {
-    return ty->IsAnyOf<Any, sem::I32>();
+    return ty->IsAnyOf<Any, sem::I32, sem::AbstractInt>();
 }
 
 const sem::U32* build_u32(MatchState& state) {
@@ -318,11 +347,7 @@ const sem::U32* build_u32(MatchState& state) {
 }
 
 bool match_u32(const sem::Type* ty) {
-    return ty->IsAnyOf<Any, sem::U32>();
-}
-
-const sem::F32* build_f32(MatchState& state) {
-    return state.builder.create<sem::F32>();
+    return ty->IsAnyOf<Any, sem::U32, sem::AbstractInt>();
 }
 
 bool match_vec(const sem::Type* ty, Number& N, const sem::Type*& T) {
@@ -1291,16 +1316,11 @@ Impl::Candidate Impl::ScoreOverload(const OverloadInfo* overload,
                                                  std::min(num_parameters, num_arguments));
     }
 
-    std::vector<IntrinsicPrototype::Parameter> parameters;
-
     auto num_params = std::min(num_parameters, num_arguments);
     for (size_t p = 0; p < num_params; p++) {
         auto& parameter = overload->parameters[p];
         auto* indices = parameter.matcher_indices;
-        auto* type = Match(closed, overload, indices).Type(args[p]->UnwrapRef());
-        if (type) {
-            parameters.emplace_back(IntrinsicPrototype::Parameter{type, parameter.usage});
-        } else {
+        if (!Match(closed, overload, indices).Type(args[p]->UnwrapRef())) {
             score += kMismatchedParamTypePenalty;
         }
     }
@@ -1310,11 +1330,14 @@ Impl::Candidate Impl::ScoreOverload(const OverloadInfo* overload,
         for (size_t ot = 0; ot < overload->num_open_types; ot++) {
             auto& open_type = overload->open_types[ot];
             if (open_type.matcher_index != kNoMatcher) {
-                auto* closed_type = closed.Type(ot);
                 auto* matcher_index = &open_type.matcher_index;
-                if (!closed_type || !Match(closed, overload, matcher_index).Type(closed_type)) {
-                    score += kMismatchedOpenTypePenalty;
+                if (auto* closed_type = closed.Type(ot)) {
+                    if (auto* ty = Match(closed, overload, matcher_index).Type(closed_type)) {
+                        closed.SetType(ot, ty);
+                        continue;
+                    }
                 }
+                score += kMismatchedOpenTypePenalty;
             }
         }
     }
@@ -1331,6 +1354,17 @@ Impl::Candidate Impl::ScoreOverload(const OverloadInfo* overload,
                     score += kMismatchedOpenNumberPenalty;
                 }
             }
+        }
+    }
+
+    std::vector<IntrinsicPrototype::Parameter> parameters;
+    if (score == 0) {
+        parameters.reserve(num_params);
+        for (size_t p = 0; p < num_params; p++) {
+            auto& parameter = overload->parameters[p];
+            auto* indices = parameter.matcher_indices;
+            auto* ty = Match(closed, overload, indices).Type(args[p]->UnwrapRef());
+            parameters.emplace_back(IntrinsicPrototype::Parameter{ty, parameter.usage});
         }
     }
 
