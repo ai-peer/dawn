@@ -233,6 +233,7 @@ tint_unittests_source_set("tint_unittests_inspector_src") {
 
 tint_unittests_source_set("tint_unittests_resolver_src") {
   sources = [
+    "../../src/tint/resolver/abstract_numeric_test.cc",
     "../../src/tint/resolver/array_accessor_test.cc",
     "../../src/tint/resolver/assignment_validation_test.cc",
     "../../src/tint/resolver/atomics_test.cc",

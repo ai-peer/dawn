@@ -1,0 +1,37 @@
+{{- /*
+--------------------------------------------------------------------------------
+Template file for use with tools/builtin-gen to generate constructable_type.cc
+
+See:
+* tools/cmd/intrinsic-gen/gen for structures used by this template
+* https://golang.org/pkg/text/template/ for documentation on the template syntax
+--------------------------------------------------------------------------------
+*/ -}}
+
+#include "src/tint/resolver/constructable_type.h"
+
+namespace tint::resolver {
+
+ConstructableType ParseConstructableType(const std::string& name) {
+{{- range .Sem.ConstructorsAndConverters  }}
+    if (name == "{{.Name}}") {
+        return ConstructableType::k{{Title .Name}};
+    }
+{{- end  }}
+    return ConstructableType::kNone;
+}
+
+const char* str(ConstructableType i) {
+    switch (i) {
+        case ConstructableType::kNone:
+            return "<none>";
+{{- range .Sem.ConstructorsAndConverters  }}
+        case ConstructableType::k{{Title .Name}}:
+            return "{{.Name}}";
+{{- end  }}
+    }
+    return "<unknown>";
+}
+
+}  // namespace tint::resolver
+

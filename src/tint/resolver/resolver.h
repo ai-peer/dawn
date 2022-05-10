@@ -74,7 +74,9 @@ class Resolver {
   public:
     /// Constructor
     /// @param builder the program builder
-    explicit Resolver(ProgramBuilder* builder);
+    /// @param enable_abstract_numerics if true, then treat unsuffixed integers as abstract integers
+    /// and unsuffixed floats as abstract floats
+    explicit Resolver(ProgramBuilder* builder, bool enable_abstract_numerics = false);
 
     /// Destructor
     ~Resolver();
@@ -193,15 +195,11 @@ class Resolver {
                            const std::vector<const sem::Type*> arg_tys);
     sem::Expression* Literal(const ast::LiteralExpression*);
     sem::Expression* MemberAccessor(const ast::MemberAccessorExpression*);
-    sem::Call* TypeConversion(const ast::CallExpression* expr,
-                              const sem::Type* ty,
-                              const sem::Expression* arg,
-                              const sem::Type* arg_ty);
-    sem::Call* TypeConstructor(const ast::CallExpression* expr,
-                               const sem::Type* ty,
-                               const std::vector<const sem::Expression*> args,
-                               const std::vector<const sem::Type*> arg_tys);
     sem::Expression* UnaryOp(const ast::UnaryOpExpression*);
+
+    // Resolves the expression, possibly emitting a semantic cast to a concrete type if the
+    // expression is an abstract numeric.
+    sem::Expression* Materialize(const ast::Expression*, const sem::Type* target_type);
 
     // Statement resolving methods
     // Each return true on success, false on failure.
@@ -225,7 +223,6 @@ class Resolver {
     sem::SwitchStatement* SwitchStatement(const ast::SwitchStatement* s);
     sem::Statement* VariableDeclStatement(const ast::VariableDeclStatement*);
     bool Statements(const ast::StatementList&);
-
 
     /// Resolves the WorkgroupSize for the given function, assigning it to
     /// current_function_
@@ -337,23 +334,6 @@ class Resolver {
     /// @returns true if the symbol is the name of a builtin function.
     bool IsBuiltin(Symbol) const;
 
-    /// @returns true if `expr` is the current CallStatement's CallExpression
-    bool IsCallStatement(const ast::Expression* expr) const;
-
-    struct TypeConversionSig {
-        const sem::Type* target;
-        const sem::Type* source;
-
-        bool operator==(const TypeConversionSig&) const;
-
-        /// Hasher provides a hash function for the TypeConversionSig
-        struct Hasher {
-            /// @param sig the TypeConversionSig to create a hash for
-            /// @return the hash value
-            std::size_t operator()(const TypeConversionSig& sig) const;
-        };
-    };
-
     struct TypeConstructorSig {
         const sem::Type* type;
         const std::vector<const sem::Type*> parameters;
@@ -381,8 +361,6 @@ class Resolver {
     std::unordered_map<const sem::Type*, const Source&> atomic_composite_info_;
     std::unordered_set<const ast::Node*> marked_;
     std::unordered_map<uint32_t, const sem::Variable*> constant_ids_;
-    std::unordered_map<TypeConversionSig, sem::CallTarget*, TypeConversionSig::Hasher>
-        type_conversions_;
     std::unordered_map<TypeConstructorSig, sem::CallTarget*, TypeConstructorSig::Hasher>
         type_ctors_;
 
@@ -390,6 +368,8 @@ class Resolver {
     sem::Statement* current_statement_ = nullptr;
     sem::CompoundStatement* current_compound_statement_ = nullptr;
     sem::BlockStatement* current_block_ = nullptr;
+
+    bool enable_abstract_numerics_ = false;
 };
 
 }  // namespace tint::resolver
