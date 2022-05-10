@@ -248,6 +248,8 @@ set(TINT_LIB_SRCS
   program.h
   reader/reader.cc
   reader/reader.h
+  resolver/constructable_type.cc
+  resolver/constructable_type.h
   resolver/dependency_graph.cc
   resolver/dependency_graph.h
   resolver/intrinsic_table.cc
@@ -417,6 +419,8 @@ set(TINT_LIB_SRCS
   sem/if_statement.h
   sem/loop_statement.cc
   sem/loop_statement.h
+  sem/materialize.cc
+  sem/materialize.h
   sem/matrix.cc
   sem/matrix.h
   sem/multisampled_texture.cc
@@ -744,6 +748,7 @@ if(TINT_BUILD_TESTS)
     diagnostic/formatter_test.cc
     diagnostic/printer_test.cc
     program_test.cc
+    resolver/abstract_numeric_test.cc
     resolver/array_accessor_test.cc
     resolver/assignment_validation_test.cc
     resolver/atomics_test.cc

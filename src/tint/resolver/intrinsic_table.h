@@ -19,6 +19,7 @@
 #include <string>
 #include <vector>
 
+#include "src/tint/resolver/constructable_type.h"
 #include "src/tint/sem/builtin.h"
 
 // Forward declarations
@@ -89,6 +90,17 @@ class IntrinsicTable {
                                   const sem::Type* rhs,
                                   const Source& source,
                                   bool is_compound) = 0;
+
+    /// Lookup looks for the type constructor for the given constructable type.
+    /// @param type the type being constructed
+    /// @param template_arg the optional template argument
+    /// @param args the argument types passed to the constructor call
+    /// @param source the source of the constructor call
+    /// @return a sem::TypeConstructor, sem::TypeConversion or nullptr if nothing matched
+    virtual const sem::CallTarget* Lookup(ConstructableType type,
+                                          const sem::Type* template_arg,
+                                          const std::vector<const sem::Type*>& args,
+                                          const Source& source) = 0;
 };
 
 }  // namespace tint::resolver
