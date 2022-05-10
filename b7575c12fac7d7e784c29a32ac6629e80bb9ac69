@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1744dad1_3c73bcae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-10T02:40:22Z",
+      "side": 1,
+      "message": "Hi Ben and David, I\u0027ve rebased this CL. PTAL, thanks!",
+      "revId": "b7575c12fac7d7e784c29a32ac6629e80bb9ac69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
