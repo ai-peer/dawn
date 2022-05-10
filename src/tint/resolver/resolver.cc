@@ -51,6 +51,8 @@
 #include "src/tint/ast/vector.h"
 #include "src/tint/ast/workgroup_attribute.h"
 #include "src/tint/resolver/uniformity.h"
+#include "src/tint/sem/abstract_float.h"
+#include "src/tint/sem/abstract_int.h"
 #include "src/tint/sem/array.h"
 #include "src/tint/sem/atomic.h"
 #include "src/tint/sem/call.h"
@@ -60,6 +62,7 @@
 #include "src/tint/sem/function.h"
 #include "src/tint/sem/if_statement.h"
 #include "src/tint/sem/loop_statement.h"
+#include "src/tint/sem/materialize.h"
 #include "src/tint/sem/member_accessor_expression.h"
 #include "src/tint/sem/module.h"
 #include "src/tint/sem/multisampled_texture.h"
@@ -82,12 +85,13 @@
 
 namespace tint::resolver {
 
-Resolver::Resolver(ProgramBuilder* builder)
+Resolver::Resolver(ProgramBuilder* builder, bool enable_abstract_numerics)
     : builder_(builder),
       diagnostics_(builder->Diagnostics()),
       intrinsic_table_(IntrinsicTable::Create(*builder)),
       sem_(builder, dependencies_),
-      validator_(builder, sem_) {}
+      validator_(builder, sem_),
+      enable_abstract_numerics_(enable_abstract_numerics) {}
 
 Resolver::~Resolver() = default;
 
@@ -315,7 +319,7 @@ sem::Variable* Resolver::Variable(const ast::Variable* var,
 
     // Does the variable have a constructor?
     if (var->constructor) {
-        rhs = Expression(var->constructor);
+        rhs = Materialize(var->constructor, storage_ty);
         if (!rhs) {
             return nullptr;
         }
@@ -1094,6 +1098,28 @@ sem::Expression* Resolver::Expression(const ast::Expression* root) {
     return nullptr;
 }
 
+sem::Expression* Resolver::Materialize(const ast::Expression* expr, const sem::Type* target_type) {
+    auto* sem = Expression(expr);
+    if (!sem) {
+        return nullptr;
+    }
+    auto materialize = [&](const sem::Type* target) {
+        auto val = ConstantCast(EvaluateConstantValue(expr, sem->Type()), target);
+        auto* m = builder_->create<sem::Materialize>(sem, current_statement_, val);
+        builder_->Sem().Replace(expr, m);
+        return validator_.Materialize(m) ? m : nullptr;
+    };
+    return Switch<sem::Expression*>(
+        sem->Type(),  //
+        [&](const sem::AbstractInt*) {
+            return materialize(target_type ? target_type : builder_->create<sem::I32>());
+        },
+        [&](const sem::AbstractFloat*) {
+            return materialize(target_type ? target_type : builder_->create<sem::F32>());
+        },
+        [&](Default) { return sem; });
+}
+
 sem::Expression* Resolver::IndexAccessor(const ast::IndexAccessorExpression* expr) {
     auto* idx = sem_.Get(expr->index);
     auto* obj = sem_.Get(expr->object);
@@ -1458,8 +1484,10 @@ sem::Expression* Resolver::Literal(const ast::LiteralExpression* literal) {
         [&](const ast::IntLiteralExpression* i) -> sem::Type* {
             switch (i->suffix) {
                 case ast::IntLiteralExpression::Suffix::kNone:
-                // TODO(crbug.com/tint/1504): This will need to become abstract-int.
-                // For now, treat as 'i32'.
+                    if (enable_abstract_numerics_) {
+                        return builder_->create<sem::AbstractInt>();
+                    }
+                    return builder_->create<sem::I32>();
                 case ast::IntLiteralExpression::Suffix::kI:
                     return builder_->create<sem::I32>();
                 case ast::IntLiteralExpression::Suffix::kU:
@@ -1467,7 +1495,13 @@ sem::Expression* Resolver::Literal(const ast::LiteralExpression* literal) {
             }
             return nullptr;
         },
-        [&](const ast::FloatLiteralExpression*) { return builder_->create<sem::F32>(); },
+        [&](const ast::FloatLiteralExpression* f) -> sem::Type* {
+            if (f->suffix == ast::FloatLiteralExpression::Suffix::kNone &&
+                enable_abstract_numerics_) {
+                return builder_->create<sem::AbstractFloat>();
+            }
+            return builder_->create<sem::F32>();
+        },
         [&](const ast::BoolLiteralExpression*) { return builder_->create<sem::Bool>(); },
         [&](Default) { return nullptr; });
 
