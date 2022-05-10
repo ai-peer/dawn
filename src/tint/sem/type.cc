@@ -70,6 +70,10 @@ bool Type::is_scalar() const {
     return IsAnyOf<F16, F32, U32, I32, Bool>();
 }
 
+bool Type::is_scalar_or_abstract() const {
+    return IsAnyOf<F32, U32, I32, Bool, AbstractNumeric>();
+}
+
 bool Type::is_numeric_scalar() const {
     return IsAnyOf<F16, F32, U32, I32>();
 }

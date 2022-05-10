@@ -205,8 +205,9 @@ match workgroup_or_storage: workgroup | storage
 // Prior to matching an overload, all template types are undefined.           //
 //                                                                            //
 // Template types become defined on the first attempt to match an argument to //
-// that template type. Once template types are defined, they remain that type //
-// for the rest of the overload evaluation.                                   //
+// that template type.                                                        //
+// Once template types are defined, they remain that type for the rest of the //
+// overload evaluation.                                                       //
 //                                                                            //
 // To better understand, let's consider the following hypothetical overload   //
 // declaration:                                                               //
