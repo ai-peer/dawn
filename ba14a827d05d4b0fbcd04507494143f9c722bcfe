@@ -195,6 +195,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82312eeb_8b445c98",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-10T22:50:27Z",
+      "side": 1,
+      "message": "Yes, there are cases where if you \"remove\" the node in an earlier traversal (as stated by the spec right now), you\u0027ll miss a relationship between pointer parameters when doing these later traversals.",
+      "parentUuid": "c0979abb_82ce908a",
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c309dd2_628bdc92",
         "filename": "src/tint/resolver/uniformity.cc",
         "patchSetId": 11
@@ -206,6 +224,24 @@
       "writtenOn": "2022-05-05T18:38:29Z",
       "side": 1,
       "message": "Probably would be useful to add a comment about the desugaring being performed here.",
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b90c6d7_af2e388e",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-10T22:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c309dd2_628bdc92",
       "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -227,6 +263,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f525a27_77e463ba",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-10T22:50:27Z",
+      "side": 1,
+      "message": "Good catch - done.",
+      "parentUuid": "e79c402f_f205ea50",
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1bfb618_08038e46",
@@ -240,6 +294,24 @@
       "writtenOn": "2022-05-05T18:38:29Z",
       "side": 1,
       "message": "Comment about the desugaring would be useful here.",
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "046402ac_8d8a1e66",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-10T22:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1bfb618_08038e46",
       "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -263,6 +335,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6db810a9_2799a6ed",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-10T22:50:27Z",
+      "side": 1,
+      "message": "Isn\u0027t this exactly what the spec says? I think this case falls under:\n\n\u003e reference to uniform built-in value \"x\"\nwhich says that the result is `CF,CF`.\n\nIf I\u0027m doing something weird let me know, and I\u0027ll change it or add a comment.",
+      "parentUuid": "45ee2024_bf721577",
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2130ea1f_629c2d9e",
         "filename": "src/tint/resolver/uniformity.cc",
         "patchSetId": 11
@@ -280,6 +370,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "053fc5d0_68e9ccf1",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-10T22:50:27Z",
+      "side": 1,
+      "message": "As mentioned offline, I\u0027ve updated how variable values are tracked to make it handle these sorts of cases correctly. Here\u0027s the key parts of the new code:\n\n1. Use the `ScopeStack` to scope variable assignments to the block statement that they happen inside.\n\n2. If the behavior of the block statement contains `Next`, propagate those values to the outer scope when the block exits.\n\n3. If/Else statements: push additional scopes for the `if` and `else` blocks to capture their assignments (to avoid values in one block being visible in the other), and then propagate their values to `{var}_if_exit` nodes if the behavior of those blocks contains `Next`.\n\n4. Loop statements: add nodes to represent the value of any given local variable at the start of the loop, and at exit. When a `break` or `continue` is encountered, add edges from each variable\u0027s value at the point to the corresponding loop exit or loop start variable nodes.\n\n5. Switch statements: similar to the loops case above, but just with exit nodes.\n\n6. Do similar things for pointer parameters when a `return` statement is encountered.\n\nI\u0027ve added *many* more tests to cover the various cases that this new logic now handles.\n\nThis is somewhat complicated, and likely impacts readability and maintainability (sorry!). There may be a simpler implementation that tracks the variable nodes for each control flow node instead of using the scope stack, but we can explore that later.\n\nPTAL!",
+      "parentUuid": "2130ea1f_629c2d9e",
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3b64455_b75eea9f",
         "filename": "src/tint/resolver/uniformity.cc",
         "patchSetId": 11
@@ -291,6 +399,24 @@
       "writtenOn": "2022-05-05T18:38:29Z",
       "side": 1,
       "message": "Nit: perhaps better described as there currently being no way to have a non-uniform return value.",
+      "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "806add03_2e2c5627",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-10T22:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3b64455_b75eea9f",
       "revId": "ba14a827d05d4b0fbcd04507494143f9c722bcfe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
