@@ -14,6 +14,8 @@
 
 #include "src/tint/sem/type.h"
 
+#include "src/tint/sem/abstract_float.h"
+#include "src/tint/sem/abstract_int.h"
 #include "src/tint/sem/bool.h"
 #include "src/tint/sem/f16.h"
 #include "src/tint/sem/f32.h"
@@ -66,6 +68,10 @@ bool Type::IsConstructible() const {
 
 bool Type::is_scalar() const {
     return IsAnyOf<F16, F32, U32, I32, Bool>();
+}
+
+bool Type::is_scalar_or_abstract() const {
+    return IsAnyOf<F32, U32, I32, Bool, AbstractInt, AbstractFloat>();
 }
 
 bool Type::is_numeric_scalar() const {
@@ -151,6 +157,34 @@ bool Type::is_numeric_scalar_or_vector() const {
 
 bool Type::is_handle() const {
     return IsAnyOf<Sampler, Texture>();
+}
+
+uint32_t Type::ConversionRank(const Type* from, const Type* to) {
+    if (from->UnwrapRef() == to) {
+        return 0;
+    }
+    return Switch(
+        from,
+        [&](const AbstractFloat*) {
+            return Switch(
+                to,  //
+                [&](const F32*) { return 1; },
+                // TODO(crbug.com/tint/1502): f16 support
+                // [&](const F16*) { return 2; }
+                [&](Default) { return kNoConversion; });
+        },
+        [&](const AbstractInt*) {
+            return Switch(
+                to,                                       //
+                [&](const I32*) { return 3; },            //
+                [&](const U32*) { return 4; },            //
+                [&](const AbstractFloat*) { return 5; },  //
+                [&](const F32*) { return 6; },
+                // TODO(crbug.com/tint/1502): f16 support
+                // [&](const F16*) { return 7; },
+                [&](Default) { return kNoConversion; });
+        },
+        [&](Default) { return kNoConversion; });
 }
 
 }  // namespace tint::sem
