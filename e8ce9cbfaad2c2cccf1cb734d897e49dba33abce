@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf13189a_7c4c0826",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-05-10T23:17:21Z",
+      "side": 1,
+      "message": "Attempting to fix instead of revert",
+      "revId": "e8ce9cbfaad2c2cccf1cb734d897e49dba33abce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
