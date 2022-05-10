@@ -198,6 +198,12 @@ class Resolver {
     sem::Expression* MemberAccessor(const ast::MemberAccessorExpression*);
     sem::Expression* UnaryOp(const ast::UnaryOpExpression*);
 
+    // Resolves the expression, possibly emitting a semantic cast to a concrete type if the
+    // expression is an abstract numeric.
+    const sem::Expression* Materialize(const sem::Expression*, const sem::Type* target_type);
+    bool MaterializeArguments(std::vector<const sem::Expression*>& args,
+                              const sem::CallTarget* target);
+
     // Statement resolving methods
     // Each return true on success, false on failure.
     sem::Statement* AssignmentStatement(const ast::AssignmentStatement*);
