@@ -63,7 +63,7 @@
 # tags: [ webgpu-adapter-default webgpu-adapter-swiftshader ]
 # END TAG HEADER
 
-# Last rolled: 2022-05-04 08:43:24AM
+# Last rolled: 2022-05-10 10:07:35PM
 
 ################################################################################
 # webgpu:shader,execution,zero_init:compute,zero_init failures on intel-0x5912
@@ -144,7 +144,7 @@ crbug.com/1236130 [ linux ] webgpu:web_platform,canvas,readbackFromWebGPUCanvas:
 # copyToTexture failures. Needs investigation
 # KEEP
 ################################################################################
-crbug.com/dawn/0000 [ mac intel ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,* [ Failure ]
+crbug.com/dawn/0000 [ intel mac ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,* [ Failure ]
 crbug.com/dawn/1319 [ win ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,array:* [ Failure ]
 
 ################################################################################
@@ -160,7 +160,7 @@ crbug.com/dawn/1398 [ mac ] webgpu:web_platform,copyToTexture,canvas:copy_conten
 crbug.com/dawn/1398 [ win ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_gl_context_canvas:* [ Slow ]
 crbug.com/dawn/1398 [ mac ] webgpu:web_platform,copyToTexture,canvas:color_space_conversion:* [ Slow ]
 crbug.com/dawn/1398 [ win ] webgpu:web_platform,copyToTexture,canvas:color_space_conversion:* [ Slow ]
-crbug.com/dawn/1398 [ mac amd ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,* [ Slow ]
+crbug.com/dawn/1398 [ amd mac ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,* [ Slow ]
 crbug.com/dawn/1398 [ win ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:* [ Slow ]
 
 ################################################################################
