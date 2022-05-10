@@ -37,13 +37,14 @@ type IntrinsicTable struct {
 	NMatchers     []sem.Named
 	NMatcherIndex map[sem.Named]int // [object -> index] in NMatchers
 
-	MatcherIndices []int        // kMatcherIndices table content
-	OpenTypes      []OpenType   // kOpenTypes table content
-	OpenNumbers    []OpenNumber // kOpenNumbers table content
-	Parameters     []Parameter  // kParameters table content
-	Overloads      []Overload   // kOverloads table content
-	Builtins       []Intrinsic  // kBuiltins table content
-	Operators      []Intrinsic  // kOperators table content
+	MatcherIndices  []int        // kMatcherIndices table content
+	OpenTypes       []OpenType   // kOpenTypes table content
+	OpenNumbers     []OpenNumber // kOpenNumbers table content
+	Parameters      []Parameter  // kParameters table content
+	Overloads       []Overload   // kOverloads table content
+	Builtins        []Intrinsic  // kBuiltins table content
+	UnaryOperators  []Intrinsic  // kUnaryOperators table content
+	BinaryOperators []Intrinsic  // kBinaryOperators table content
 }
 
 // OpenType is used to create the C++ OpenTypeInfo structure
@@ -387,7 +388,10 @@ func buildIntrinsicTable(s *sem.Sem) (*IntrinsicTable, error) {
 	if b.Builtins, err = buildIntrinsics(s.Builtins); err != nil {
 		return nil, err
 	}
-	if b.Operators, err = buildIntrinsics(s.Operators); err != nil {
+	if b.UnaryOperators, err = buildIntrinsics(s.UnaryOperators); err != nil {
+		return nil, err
+	}
+	if b.BinaryOperators, err = buildIntrinsics(s.BinaryOperators); err != nil {
 		return nil, err
 	}
 
