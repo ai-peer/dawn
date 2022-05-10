@@ -615,6 +615,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b093120f_b379445a",
+        "filename": "src/tint/reader/wgsl/token.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-05-10T12:24:03Z",
+      "side": 1,
+      "message": "Another choice may be `kFloatLiteral_F`, `kIntLiteral_I`, and `kIntLiteral_U`, if I may suggest",
+      "parentUuid": "5dc8509e_701438aa",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "709f036c_b7ab1e5b",
