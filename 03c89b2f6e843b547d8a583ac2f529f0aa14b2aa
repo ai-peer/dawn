@@ -351,6 +351,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e924d4a2_e458c9e1",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-10T12:14:16Z",
+      "side": 1,
+      "message": "I missed the `F` again, sigh, though you\u0027d written `kFloatLiteral` twice.",
+      "parentUuid": "c5fff524_fbba685f",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e17f731a_eb046273",
@@ -382,6 +400,24 @@
       "side": 1,
       "message": "Nope?",
       "parentUuid": "e17f731a_eb046273",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb7566a1_26b58d31",
+        "filename": "src/tint/reader/wgsl/lexer_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-10T12:14:16Z",
+      "side": 1,
+      "message": "\u0027F\u0027, sigh.",
+      "parentUuid": "86aec128_2d5c517d",
       "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -557,6 +593,24 @@
       "side": 1,
       "message": "Ack. Suggestions welcome.",
       "parentUuid": "b37253a3_e830b482",
+      "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dc8509e_701438aa",
+        "filename": "src/tint/reader/wgsl/token.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-10T12:14:16Z",
+      "side": 1,
+      "message": "This one\u0027s tricky. I\u0027ve managed to mis-read it 3 times in this CL which doesn\u0027t bode well. I wonder if using `_` would help?\n\n* `kFloatLiteral`\n* `kFloat_FLiteral`\n* `kIntLiteral`\n* `kInt_ILiteral`\n* `kInt_ULiteral`\n\nOr even `kFloat_F_Literal` ? At least adds a bit of separation.",
+      "parentUuid": "4baca54a_61556a80",
       "revId": "03c89b2f6e843b547d8a583ac2f529f0aa14b2aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

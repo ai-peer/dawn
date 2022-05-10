@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7e2be71_cc36933f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-10T12:14:16Z",
+      "side": 1,
+      "message": "lgtm. Added a comment about naming but we can skip that for this CL and figure it out later.",
+      "revId": "493b93edaa8f4cd6469184c2e028d2562e2bc5b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
