@@ -74,7 +74,9 @@ class Resolver {
   public:
     /// Constructor
     /// @param builder the program builder
-    explicit Resolver(ProgramBuilder* builder);
+    /// @param enable_abstract_numerics if true, then treat unsuffixed integers as abstract integers
+    /// and unsuffixed floats as abstract floats
+    explicit Resolver(ProgramBuilder* builder, bool enable_abstract_numerics = false);
 
     /// Destructor
     ~Resolver();
@@ -194,6 +196,10 @@ class Resolver {
     sem::Expression* Literal(const ast::LiteralExpression*);
     sem::Expression* MemberAccessor(const ast::MemberAccessorExpression*);
     sem::Expression* UnaryOp(const ast::UnaryOpExpression*);
+
+    // Resolves the expression, possibly emitting a semantic cast to a concrete type if the
+    // expression is an abstract numeric.
+    sem::Expression* Materialize(const ast::Expression*, const sem::Type* target_type);
 
     // Statement resolving methods
     // Each return true on success, false on failure.
@@ -362,6 +368,8 @@ class Resolver {
     sem::Statement* current_statement_ = nullptr;
     sem::CompoundStatement* current_compound_statement_ = nullptr;
     sem::BlockStatement* current_block_ = nullptr;
+
+    bool enable_abstract_numerics_ = false;
 };
 
 }  // namespace tint::resolver
