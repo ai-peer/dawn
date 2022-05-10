@@ -16,6 +16,23 @@
       "message": "Attempting to fix instead of revert",
       "revId": "e8ce9cbfaad2c2cccf1cb734d897e49dba33abce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f49e349_4f74067e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-05-10T23:29:28Z",
+      "side": 1,
+      "message": "Fix is not as easy as I hoped; reverting.",
+      "revId": "e8ce9cbfaad2c2cccf1cb734d897e49dba33abce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
