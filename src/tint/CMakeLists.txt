@@ -421,6 +421,8 @@ set(TINT_LIB_SRCS
   sem/if_statement.h
   sem/loop_statement.cc
   sem/loop_statement.h
+  sem/materialize.cc
+  sem/materialize.h
   sem/matrix.cc
   sem/matrix.h
   sem/multisampled_texture.cc
@@ -772,6 +774,7 @@ if(TINT_BUILD_TESTS)
     resolver/intrinsic_table_test.cc
     resolver/is_host_shareable_test.cc
     resolver/is_storeable_test.cc
+    resolver/materialize_test.cc
     resolver/pipeline_overridable_constant_test.cc
     resolver/ptr_ref_test.cc
     resolver/ptr_ref_validation_test.cc

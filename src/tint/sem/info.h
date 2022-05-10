@@ -81,6 +81,13 @@ class Info {
         map_.emplace(node, sem_node);
     }
 
+    /// @param node the AST or type node
+    /// @param sem_node the new semantic node
+    template <typename AST_OR_TYPE>
+    void Replace(const AST_OR_TYPE* node, const SemanticNodeTypeFor<AST_OR_TYPE>* sem_node) {
+        map_[node] = sem_node;
+    }
+
     /// Wrap returns a new Info created with the contents of `inner`.
     /// The Info returned by Wrap is intended to temporarily extend the contents
     /// of an existing immutable Info.

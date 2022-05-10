@@ -18,6 +18,7 @@
 #include <stdint.h>
 #include <cstdio>
 #include <functional>
+#include <tuple>
 #include <utility>
 #include <vector>
 
@@ -45,6 +46,10 @@ struct HashCombineOffset<8> {
 
 }  // namespace detail
 
+// Forward declaration
+template <typename... ARGS>
+size_t Hash(ARGS... args);
+
 /// HashCombine "hashes" together an existing hash and hashable values.
 template <typename T>
 void HashCombine(size_t* hash, const T& value) {
@@ -62,6 +67,13 @@ void HashCombine(size_t* hash, const std::vector<T>& vector) {
 }
 
 /// HashCombine "hashes" together an existing hash and hashable values.
+template <typename... TYPES>
+void HashCombine(size_t* hash, const std::tuple<TYPES...>& tuple) {
+    HashCombine(hash, sizeof...(TYPES));
+    HashCombine(hash, std::apply(Hash<TYPES...>, tuple));
+}
+
+/// HashCombine "hashes" together an existing hash and hashable values.
 template <typename T, typename... ARGS>
 void HashCombine(size_t* hash, const T& value, const ARGS&... args) {
     HashCombine(hash, value);
@@ -71,7 +83,7 @@ void HashCombine(size_t* hash, const T& value, const ARGS&... args) {
 /// @returns a hash of the combined arguments. The returned hash is dependent on
 /// the order of the arguments.
 template <typename... ARGS>
-size_t Hash(const ARGS&... args) {
+size_t Hash(ARGS... args) {
     size_t hash = 102931;  // seed with an arbitrary prime
     HashCombine(&hash, args...);
     return hash;

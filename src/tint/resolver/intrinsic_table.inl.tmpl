@@ -256,15 +256,16 @@ const sem::Type* {{$class}}::Match(MatchState& state, const sem::Type* ty) const
   return nullptr;
 }
 
-std::string {{$class}}::String(MatchState&) const {
-  return "
+std::string {{$class}}::String(MatchState& state) const {
+  std::stringstream ss;
+  ss
 {{- range .Types -}}
-{{-   if      IsFirstIn . $.Types }}{{.Name}}
-{{-   else if IsLastIn  . $.Types }} or {{.Name}}
-{{-   else                        }}, {{.Name}}
+{{-   if      IsFirstIn . $.Types }} << {{PascalCase .Name}}().String(state)
+{{-   else if IsLastIn  . $.Types }} << " or " << {{PascalCase .Name}}().String(state)
+{{-   else                        }} << ", " << {{PascalCase .Name}}().String(state)
 {{-   end -}}
-{{- end -}}
-  ";
+{{- end -}};
+  return ss.str();
 }
 {{  end -}}
 
