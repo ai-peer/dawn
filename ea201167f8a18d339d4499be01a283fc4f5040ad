@@ -68,6 +68,24 @@
       "parentUuid": "0a514a0c_64eb4a55",
       "revId": "ea201167f8a18d339d4499be01a283fc4f5040ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d067de80_732b17e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-10T12:03:29Z",
+      "side": 1,
+      "message": "I\u0027m not sure if we do run the chromium gn check on our bots as last time I bounced on the chromium roll. We can land this and see what happens but you might want to keep an eye on the roll.",
+      "parentUuid": "2956f98d_4564cf23",
+      "revId": "ea201167f8a18d339d4499be01a283fc4f5040ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
