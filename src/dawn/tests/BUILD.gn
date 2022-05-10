@@ -42,6 +42,10 @@ if (!build_with_chromium) {
   googletest_dir = dawn_googletest_dir
 
   config("gtest_config") {
+    if (dawn_standalone && is_clang) {
+      # Flags enabled in Dawn which trip in googletest
+      cflags = [ "-Wno-suggest-destructor-override" ]
+    }
     include_dirs = [
       "${googletest_dir}/googletest",
       "${googletest_dir}/googletest/include",
