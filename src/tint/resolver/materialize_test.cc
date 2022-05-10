@@ -137,32 +137,44 @@ struct Data {
     builder::ast_type_func_ptr target_ast_ty;
     builder::sem_type_func_ptr target_sem_ty;
     builder::ast_expr_func_ptr target_expr;
-    std::string literal_type_name;
-    builder::ast_expr_func_ptr literal_value;
+    std::string source_type_name;
+    builder::ast_expr_func_ptr source_builder;
     std::variant<AInt, AFloat> materialized_value;
+    double literal_value;
 };
 
-template <typename TARGET_TYPE, typename LITERAL_TYPE, typename MATERIALIZED_TYPE = AInt>
-Data Types(MATERIALIZED_TYPE materialized_value = 0_a) {
+template <typename TARGET_TYPE,
+          typename SOURCE_TYPE,
+          typename MATERIALIZED_TYPE = AInt,
+          typename LITERAL_TYPE = AInt>
+Data Types(MATERIALIZED_TYPE materialized_value = 1_a, double literal_value = 1) {
     return {
-        builder::DataType<TARGET_TYPE>::Name(),   //
-        builder::DataType<TARGET_TYPE>::AST,      //
-        builder::DataType<TARGET_TYPE>::Sem,      //
-        builder::DataType<TARGET_TYPE>::Expr,     //
-        builder::DataType<LITERAL_TYPE>::Name(),  //
-        builder::DataType<LITERAL_TYPE>::Expr,    //
+        builder::DataType<TARGET_TYPE>::Name(),  // target_type_name
+        builder::DataType<TARGET_TYPE>::AST,     // target_ast_ty
+        builder::DataType<TARGET_TYPE>::Sem,     // target_sem_ty
+        builder::DataType<TARGET_TYPE>::Expr,    // target_expr
+        builder::DataType<SOURCE_TYPE>::Name(),  // literal_type_name
+        builder::DataType<SOURCE_TYPE>::Expr,    // literal_builder
         materialized_value,
+        literal_value,
     };
 }
 
 static std::ostream& operator<<(std::ostream& o, const Data& c) {
-    return o << "[" << c.target_type_name << " <- " << c.literal_type_name << "]";
+    auto print_value = [&](auto&& v) { o << v; };
+    o << "[" << c.target_type_name << " <- " << c.source_type_name << "] [";
+    std::visit(print_value, c.materialized_value);
+    o << " <- " << c.literal_value << "]";
+    return o;
 }
 
 enum class Expectation {
     kMaterialize,
     kNoMaterialize,
     kInvalidCast,
+    kValueTooLow,
+    kValueTooHigh,
+    kValueTooSmall,
 };
 
 static std::ostream& operator<<(std::ostream& o, Expectation m) {
@@ -173,6 +185,12 @@ static std::ostream& operator<<(std::ostream& o, Expectation m) {
             return o << "no-materialize";
         case Expectation::kInvalidCast:
             return o << "invalid-cast";
+        case Expectation::kValueTooLow:
+            return o << "value too low";
+        case Expectation::kValueTooHigh:
+            return o << "value too high";
+        case Expectation::kValueTooSmall:
+            return o << "value too small";
     }
     return o << "<unknown>";
 }
@@ -191,7 +209,7 @@ TEST_P(MaterializeAbstractNumeric, Test) {
 
     auto target_ty = [&] { return data.target_ast_ty(*this); };
     auto target_expr = [&] { return data.target_expr(*this, 42); };
-    auto* literal = data.literal_value(*this, 1);
+    auto* literal = data.source_builder(*this, data.literal_value);
     switch (method) {
         case Method::kVar:
             WrapInFunction(Decl(Var("a", target_ty(), literal)));
@@ -283,20 +301,35 @@ TEST_P(MaterializeAbstractNumeric, Test) {
             switch (method) {
                 case Method::kBuiltinArg:
                     expect = "error: no matching call to min(" + data.target_type_name + ", " +
-                             data.literal_type_name + ")";
+                             data.source_type_name + ")";
                     break;
                 case Method::kBinaryOp:
                     expect = "error: no matching overload for operator + (" +
-                             data.target_type_name + ", " + data.literal_type_name + ")";
+                             data.target_type_name + ", " + data.source_type_name + ")";
                     break;
                 default:
-                    expect = "error: cannot convert value of type '" + data.literal_type_name +
+                    expect = "error: cannot convert value of type '" + data.source_type_name +
                              "' to type '" + data.target_type_name + "'";
                     break;
             }
             EXPECT_THAT(r()->error(), testing::StartsWith(expect));
             break;
         }
+        case Expectation::kValueTooLow:
+            ASSERT_FALSE(r()->Resolve());
+            EXPECT_THAT(r()->error(), testing::HasSubstr("cannot be represented as '" +
+                                                         data.target_type_name + "'"));
+            break;
+        case Expectation::kValueTooHigh:
+            ASSERT_FALSE(r()->Resolve());
+            EXPECT_THAT(r()->error(), testing::HasSubstr("cannot be represented as '" +
+                                                         data.target_type_name + "'"));
+            break;
+        case Expectation::kValueTooSmall:
+            ASSERT_FALSE(r()->Resolve());
+            EXPECT_THAT(r()->error(), testing::HasSubstr("cannot be represented as '" +
+                                                         data.target_type_name + "'"));
+            break;
     }
 }
 
@@ -386,6 +419,23 @@ INSTANTIATE_TEST_SUITE_P(InvalidCast,
                                                           Types<u32, AFloat>(),        //
                                                           Types<i32V, AFloatV>(),      //
                                                           Types<u32V, AFloatV>())));
+INSTANTIATE_TEST_SUITE_P(
+    ValueTooLow,
+    MaterializeAbstractNumeric,                                                 //
+    testing::Combine(testing::Values(Expectation::kValueTooLow),                //
+                     testing::Values(Method::kLet,                              //
+                                     Method::kVar,                              //
+                                     Method::kFnArg,                            //
+                                     Method::kBuiltinArg,                       //
+                                     Method::kReturn,                           //
+                                     Method::kArray,                            //
+                                     Method::kStruct,                           //
+                                     Method::kBinaryOp),                        //
+                     testing::Values(Types<i32, AInt>(AInt(0), -2147483649.0),  //
+                                     Types<u32, AInt>(AInt(0), -1.0),           //
+                                     Types<f32, AFloat>(AFloat(0), -3.5e+38)    //
+                                     /* Types<f16, AFloat>(f16::kLowest-1), */  //
+                                     /* Types<f16, AFloat>(f16::kLowest-1), */)));
 
 }  // namespace MaterializeTests
 
