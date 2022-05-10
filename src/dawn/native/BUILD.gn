@@ -57,6 +57,7 @@ group("abseil") {
 
 config("internal") {
   configs = [ "${dawn_root}/src/dawn/common:internal_config" ]
+  configs += [ "//build/config/compiler:wglobal_constructors" ]
 }
 
 config("weak_framework") {
@@ -153,6 +154,7 @@ source_set("sources") {
   data_deps = []
 
   configs += [ ":internal" ]
+  configs += [ "//build/config/compiler:wglobal_constructors" ]
 
   # Dependencies that are needed to compile dawn native entry points in
   # FooBackend.cpp need to be public deps so they are propagated to the
@@ -704,6 +706,7 @@ dawn_component("native") {
   ]
   sources = [ "DawnNative.cpp" ]
   configs = [ ":internal" ]
+  configs += [ "//build/config/compiler:wglobal_constructors" ]
   public_configs = [
     ":weak_framework",
     ":vulkan_rpath",
