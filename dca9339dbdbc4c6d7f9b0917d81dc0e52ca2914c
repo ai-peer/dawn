@@ -56,6 +56,30 @@
       },
       "revId": "dca9339dbdbc4c6d7f9b0917d81dc0e52ca2914c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fc0e452_35541383",
+        "filename": "src/dawn/common/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-10T17:57:50Z",
+      "side": 1,
+      "message": "Change rolled into googletest, so I rolled googletest and removed the todo. The warnings are now enabled.",
+      "parentUuid": "201a7814_16557299",
+      "range": {
+        "startLine": 122,
+        "startChar": 13,
+        "endLine": 122,
+        "endChar": 22
+      },
+      "revId": "dca9339dbdbc4c6d7f9b0917d81dc0e52ca2914c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
