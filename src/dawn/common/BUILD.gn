@@ -118,6 +118,10 @@ config("internal_config") {
       "-Wredundant-move",
       "-Wshadow-field",
       "-Wstrict-prototypes",
+
+      # TODO(dsinclair): Enable when googletest issue is fixed.
+      #"-Wsuggest-destructor-override",
+      #"-Wsuggest-override",
       "-Wtautological-unsigned-zero-compare",
       "-Wunreachable-code-aggressive",
       "-Wunused-but-set-variable",
