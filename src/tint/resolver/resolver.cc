@@ -51,6 +51,8 @@
 #include "src/tint/ast/vector.h"
 #include "src/tint/ast/workgroup_attribute.h"
 #include "src/tint/resolver/uniformity.h"
+#include "src/tint/sem/abstract_float.h"
+#include "src/tint/sem/abstract_int.h"
 #include "src/tint/sem/array.h"
 #include "src/tint/sem/atomic.h"
 #include "src/tint/sem/call.h"
@@ -60,6 +62,7 @@
 #include "src/tint/sem/function.h"
 #include "src/tint/sem/if_statement.h"
 #include "src/tint/sem/loop_statement.h"
+#include "src/tint/sem/materialize.h"
 #include "src/tint/sem/member_accessor_expression.h"
 #include "src/tint/sem/module.h"
 #include "src/tint/sem/multisampled_texture.h"
@@ -82,12 +85,13 @@
 
 namespace tint::resolver {
 
-Resolver::Resolver(ProgramBuilder* builder)
+Resolver::Resolver(ProgramBuilder* builder, bool enable_abstract_numerics)
     : builder_(builder),
       diagnostics_(builder->Diagnostics()),
       intrinsic_table_(IntrinsicTable::Create(*builder)),
       sem_(builder, dependencies_),
-      validator_(builder, sem_) {}
+      validator_(builder, sem_),
+      enable_abstract_numerics_(enable_abstract_numerics) {}
 
 Resolver::~Resolver() = default;
 
@@ -315,7 +319,11 @@ sem::Variable* Resolver::Variable(const ast::Variable* var,
 
     // Does the variable have a constructor?
     if (var->constructor) {
-        rhs = Expression(var->constructor);
+        auto* ctor = Expression(var->constructor);
+        if (!ctor) {
+            return nullptr;
+        }
+        rhs = Materialize(ctor, storage_ty);
         if (!rhs) {
             return nullptr;
         }
@@ -1094,6 +1102,55 @@ sem::Expression* Resolver::Expression(const ast::Expression* root) {
     return nullptr;
 }
 
+const sem::Expression* Resolver::Materialize(const sem::Expression* expr,
+                                             const sem::Type* target_type) {
+    auto materialize = [&](const sem::Type* target_ty) {
+        auto target_el_ty = sem::Type::ElementOf(target_ty);
+        auto val =
+            ConstantCast(EvaluateConstantValue(expr->Declaration(), expr->Type()), target_el_ty);
+        auto* m = builder_->create<sem::Materialize>(expr, current_statement_, val);
+        builder_->Sem().Replace(expr->Declaration(), m);
+        return validator_.Materialize(m) ? m : nullptr;
+    };
+    auto* i32 = builder_->create<sem::I32>();
+    auto* f32 = builder_->create<sem::F32>();
+    auto i32v = [&](uint32_t width) { return builder_->create<sem::Vector>(i32, width); };
+    auto f32v = [&](uint32_t width) { return builder_->create<sem::Vector>(f32, width); };
+    auto i32m = [&](uint32_t columns, uint32_t rows) {
+        return builder_->create<sem::Matrix>(i32v(columns), rows);
+    };
+    auto f32m = [&](uint32_t columns, uint32_t rows) {
+        return builder_->create<sem::Matrix>(f32v(columns), rows);
+    };
+    return Switch<sem::Expression*>(
+        expr->Type(),  //
+        [&](const sem::AbstractInt*) { return materialize(target_type ? target_type : i32); },
+        [&](const sem::AbstractFloat*) { return materialize(target_type ? target_type : f32); },
+        [&](const sem::Vector* v) {
+            return Switch(
+                v->type(),  //
+                [&](const sem::AbstractInt*) {
+                    return materialize(target_type ? target_type : i32v(v->Width()));
+                },
+                [&](const sem::AbstractFloat*) {
+                    return materialize(target_type ? target_type : f32v(v->Width()));
+                },
+                [&](Default) { return expr; });
+        },
+        [&](const sem::Matrix* m) {
+            return Switch(
+                m->type(),  //
+                [&](const sem::AbstractInt*) {
+                    return materialize(target_type ? target_type : i32m(m->columns(), m->rows()));
+                },
+                [&](const sem::AbstractFloat*) {
+                    return materialize(target_type ? target_type : f32m(m->columns(), m->rows()));
+                },
+                [&](Default) { return expr; });
+        },
+        [&](Default) { return expr; });
+}
+
 sem::Expression* Resolver::IndexAccessor(const ast::IndexAccessorExpression* expr) {
     auto* idx = sem_.Get(expr->index);
     auto* obj = sem_.Get(expr->object);
@@ -1301,7 +1358,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
             resolved,  //
             [&](sem::Type* ty) {
                 // A type constructor or conversions.
-                // Note: Unlike the codepath where we're resolving the call target from an
+                // Note: Unlike the code path where we're resolving the call target from an
                 // ast::Type, all types must already have the element type explicitly specified, so
                 // there's no need to infer element types.
                 return ty_ctor_or_conv(ty);
@@ -1394,15 +1451,24 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
 
 sem::Call* Resolver::FunctionCall(const ast::CallExpression* expr,
                                   sem::Function* target,
-                                  const std::vector<const sem::Expression*> args,
+                                  std::vector<const sem::Expression*> args,
                                   sem::Behaviors arg_behaviors) {
     auto sym = expr->target.name->symbol;
     auto name = builder_->Symbols().NameFor(sym);
 
+    // Materialize all arguments.
+    for (size_t i = 0, n = std::min(args.size(), target->Parameters().size()); i < n; i++) {
+        auto* materialized = Materialize(args[i], target->Parameters()[i]->Type());
+        if (!materialized) {
+            return nullptr;
+        }
+        args[i] = materialized;
+    }
+
     // TODO(crbug.com/tint/1420): For now, assume all function calls have side
     // effects.
     bool has_side_effects = true;
-    auto* call = builder_->create<sem::Call>(expr, target, std::move(args), current_statement_,
+    auto* call = builder_->create<sem::Call>(expr, target, args, current_statement_,
                                              sem::Constant{}, has_side_effects);
 
     if (current_function_) {
@@ -1430,11 +1496,15 @@ sem::Call* Resolver::FunctionCall(const ast::CallExpression* expr,
             const sem::Variable* texture = pair.first;
             const sem::Variable* sampler = pair.second;
             if (auto* param = texture->As<sem::Parameter>()) {
-                texture = args[param->Index()]->As<sem::VariableUser>()->Variable();
+                texture =
+                    args[param->Index()]->UnwrapMaterialize()->As<sem::VariableUser>()->Variable();
             }
             if (sampler) {
                 if (auto* param = sampler->As<sem::Parameter>()) {
-                    sampler = args[param->Index()]->As<sem::VariableUser>()->Variable();
+                    sampler = args[param->Index()]
+                                  ->UnwrapMaterialize()
+                                  ->As<sem::VariableUser>()
+                                  ->Variable();
                 }
             }
             current_function_->AddTextureSamplerPair(texture, sampler);
@@ -1458,8 +1528,10 @@ sem::Expression* Resolver::Literal(const ast::LiteralExpression* literal) {
         [&](const ast::IntLiteralExpression* i) -> sem::Type* {
             switch (i->suffix) {
                 case ast::IntLiteralExpression::Suffix::kNone:
-                // TODO(crbug.com/tint/1504): This will need to become abstract-int.
-                // For now, treat as 'i32'.
+                    if (enable_abstract_numerics_) {
+                        return builder_->create<sem::AbstractInt>();
+                    }
+                    return builder_->create<sem::I32>();
                 case ast::IntLiteralExpression::Suffix::kI:
                     return builder_->create<sem::I32>();
                 case ast::IntLiteralExpression::Suffix::kU:
@@ -1467,7 +1539,13 @@ sem::Expression* Resolver::Literal(const ast::LiteralExpression* literal) {
             }
             return nullptr;
         },
-        [&](const ast::FloatLiteralExpression*) { return builder_->create<sem::F32>(); },
+        [&](const ast::FloatLiteralExpression* f) -> sem::Type* {
+            if (f->suffix == ast::FloatLiteralExpression::Suffix::kNone &&
+                enable_abstract_numerics_) {
+                return builder_->create<sem::AbstractFloat>();
+            }
+            return builder_->create<sem::F32>();
+        },
         [&](const ast::BoolLiteralExpression*) { return builder_->create<sem::Bool>(); },
         [&](Default) { return nullptr; });
 
