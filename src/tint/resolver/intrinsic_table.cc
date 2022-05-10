@@ -107,12 +107,33 @@ const Number Number::invalid{Number::kInvalid};
 /// Used by the MatchState.
 class TemplateState {
   public:
-    /// If the type with index `idx` is undefined, then it is defined with type `ty` and Type()
-    /// returns true. If the template type is defined, then `Type()` returns true iff it is equal to
-    /// `ty`.
-    bool Type(size_t idx, const sem::Type* ty) {
+    /// If the template type with index `idx` is undefined, then it is defined with the `ty` and
+    /// Type() returns `ty`.
+    /// If the template type is defined, and `ty` can be converted to the template type then the
+    /// template type is returned.
+    /// If the template type is defined, and the template type can be converted to `ty`, then the
+    /// template type is replaced with `ty`, and `ty` is returned.
+    /// If none of the above applies, then `ty` is a type mismatch for the template type, and
+    /// nullptr is returned.
+    const sem::Type* Type(size_t idx, const sem::Type* ty) {
         auto res = types_.emplace(idx, ty);
-        return res.second || res.first->second == ty;
+        if (res.second) {
+            return ty;
+        }
+        auto* existing = res.first->second;
+        if (existing == ty) {
+            return ty;
+        }
+        if (sem::Type::ConversionRank(ty, existing) != sem::Type::kNoConversion) {
+            // ty can be converted to the existing type. Keep the existing type.
+            return existing;
+        }
+        if (sem::Type::ConversionRank(existing, ty) != sem::Type::kNoConversion) {
+            // template type can be converted to ty. Constrain the existing type.
+            types_[idx] = ty;
+            return ty;
+        }
+        return nullptr;
     }
 
     /// If the number with index `idx` is undefined, then it is defined with the number `number` and
@@ -128,6 +149,9 @@ class TemplateState {
         auto it = types_.find(idx);
         return (it != types_.end()) ? it->second : nullptr;
     }
+
+    /// SetType replaces the template type with index `idx` with type `ty`.
+    void SetType(size_t idx, const sem::Type* ty) { types_[idx] = ty; }
 
     /// Type returns the number type with index `idx`.
     Number Num(size_t idx) const {
@@ -200,7 +224,7 @@ class TypeMatcher {
 
     /// Checks whether the given type matches the matcher rules, and returns the
     /// expected, canonicalized type on success.
-    /// Match may define template types and numbers in state.
+    /// Match may adjust the template types and numbers in state.
     /// @param type the type to match
     /// @returns the canonicalized type on match, otherwise nullptr
     virtual const sem::Type* Match(MatchState& state, const sem::Type* type) const = 0;
@@ -229,8 +253,8 @@ class NumberMatcher {
 };
 
 /// TemplateTypeMatcher is a Matcher for a template type.
-/// The TemplateTypeMatcher will initially match against any type (so long as it is
-/// consistent for all uses in the overload)
+/// The TemplateTypeMatcher will initially match against any type, and then will only be further
+/// constrained based on the conversion rules defined at https://www.w3.org/TR/WGSL/#conversion-rank
 class TemplateTypeMatcher : public TypeMatcher {
   public:
     /// Constructor
@@ -240,7 +264,10 @@ class TemplateTypeMatcher : public TypeMatcher {
         if (type->Is<Any>()) {
             return state.templates.Type(index_);
         }
-        return state.templates.Type(index_, type) ? type : nullptr;
+        if (auto* templates = state.templates.Type(index_, type)) {
+            return templates;
+        }
+        return nullptr;
     }
 
     std::string String(MatchState& state) const override;
@@ -308,7 +335,7 @@ const sem::F32* build_f32(MatchState& state) {
 }
 
 bool match_f32(const sem::Type* ty) {
-    return ty->IsAnyOf<Any, sem::F32>();
+    return ty->IsAnyOf<Any, sem::F32, sem::AbstractNumeric>();
 }
 
 const sem::I32* build_i32(MatchState& state) {
@@ -316,7 +343,7 @@ const sem::I32* build_i32(MatchState& state) {
 }
 
 bool match_i32(const sem::Type* ty) {
-    return ty->IsAnyOf<Any, sem::I32>();
+    return ty->IsAnyOf<Any, sem::I32, sem::AbstractInt>();
 }
 
 const sem::U32* build_u32(MatchState& state) {
@@ -324,7 +351,7 @@ const sem::U32* build_u32(MatchState& state) {
 }
 
 bool match_u32(const sem::Type* ty) {
-    return ty->IsAnyOf<Any, sem::U32>();
+    return ty->IsAnyOf<Any, sem::U32, sem::AbstractInt>();
 }
 
 bool match_vec(const sem::Type* ty, Number& N, const sem::Type*& T) {
@@ -1293,16 +1320,18 @@ Impl::Candidate Impl::ScoreOverload(const OverloadInfo* overload,
                                                  std::min(num_parameters, num_arguments));
     }
 
-    std::vector<IntrinsicPrototype::Parameter> parameters;
-
+    // Invoke the matchers for each parameter <-> argument pair.
+    // If any arguments cannot be matched, then the score will be increased.
+    // If the overload has any template types or numbers then these will be set based on the
+    // argument types. Template types may be refined by constraining with later argument types. For
+    // example calling `F<T>(T, T)` with the argument types (abstract-int, i32) will first set T to
+    // abstract-int when matching the first argument, and then constrained down to i32 when matching
+    // the second argument.
     auto num_params = std::min(num_parameters, num_arguments);
     for (size_t p = 0; p < num_params; p++) {
         auto& parameter = overload->parameters[p];
         auto* indices = parameter.matcher_indices;
-        auto* type = Match(templates, overload, indices).Type(args[p]->UnwrapRef());
-        if (type) {
-            parameters.emplace_back(IntrinsicPrototype::Parameter{type, parameter.usage});
-        } else {
+        if (!Match(templates, overload, indices).Type(args[p]->UnwrapRef())) {
             score += kMismatchedParamTypePenalty;
         }
     }
@@ -1312,11 +1341,13 @@ Impl::Candidate Impl::ScoreOverload(const OverloadInfo* overload,
         for (size_t ot = 0; ot < overload->num_template_types; ot++) {
             auto* matcher_index = &overload->template_types[ot].matcher_index;
             if (*matcher_index != kNoMatcher) {
-                auto* template_type = templates.Type(ot);
-                if (!template_type ||
-                    !Match(templates, overload, matcher_index).Type(template_type)) {
-                    score += kMismatchedTemplateTypePenalty;
+                if (auto* template_type = templates.Type(ot)) {
+                    if (auto* ty = Match(templates, overload, matcher_index).Type(template_type)) {
+                        templates.SetType(ot, ty);
+                        continue;
+                    }
                 }
+                score += kMismatchedTemplateTypePenalty;
             }
         }
     }
@@ -1332,6 +1363,17 @@ Impl::Candidate Impl::ScoreOverload(const OverloadInfo* overload,
                     score += kMismatchedTemplateNumberPenalty;
                 }
             }
+        }
+    }
+
+    std::vector<IntrinsicPrototype::Parameter> parameters;
+    if (score == 0) {
+        parameters.reserve(num_params);
+        for (size_t p = 0; p < num_params; p++) {
+            auto& parameter = overload->parameters[p];
+            auto* indices = parameter.matcher_indices;
+            auto* ty = Match(templates, overload, indices).Type(args[p]->UnwrapRef());
+            parameters.emplace_back(IntrinsicPrototype::Parameter{ty, parameter.usage});
         }
     }
 
