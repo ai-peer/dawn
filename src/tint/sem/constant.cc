@@ -14,7 +14,6 @@
 
 #include "src/tint/sem/constant.h"
 
-#include <functional>
 #include <utility>
 
 #include "src/tint/debug.h"
@@ -27,7 +26,7 @@ namespace {
 
 const Type* ElemType(const Type* ty, size_t num_elements) {
     diag::List diag;
-    if (ty->is_scalar()) {
+    if (ty->is_scalar_or_abstract()) {
         if (num_elements != 1) {
             TINT_ICE(Semantic, diag) << "sem::Constant() type <-> num_element mismatch. type: '"
                                      << ty->TypeInfo().name << "' num_elements: " << num_elements;
@@ -42,7 +41,7 @@ const Type* ElemType(const Type* ty, size_t num_elements) {
         TINT_ASSERT(Semantic, vec->type()->is_scalar());
         return vec->type();
     }
-    TINT_UNREACHABLE(Semantic, diag) << "Unsupported sem::Constant type";
+    TINT_UNREACHABLE(Semantic, diag) << "Unsupported sem::Constant type: " << ty->TypeInfo().name;
     return nullptr;
 }
 

@@ -33,15 +33,6 @@
 namespace tint::resolver {
 namespace {
 
-#define EXPECT_TYPE(GOT, EXPECT)                        \
-    if ((GOT) != (EXPECT)) {                            \
-        FAIL() << #GOT " != " #EXPECT "\n"              \
-               << "  " #GOT ": " << NameOf(GOT) << "\n" \
-               << "  " #EXPECT ": " << NameOf(EXPECT);  \
-    }                                                   \
-    do {                                                \
-    } while (false)
-
 using ::testing::HasSubstr;
 
 using BuiltinType = sem::BuiltinType;
@@ -830,13 +821,7 @@ struct Case {
     builder::sem_type_func_ptr arg_rhs;
 };
 
-class IntrinsicTableAbstractBinaryTest : public testing::TestWithParam<Case>,
-                                         public ProgramBuilder {
-  public:
-    std::string NameOf(const sem::Type* type) {
-        return type ? type->FriendlyName(Symbols()) : "<null>";
-    }
-
+struct IntrinsicTableAbstractBinaryTest : public ResolverTestWithParam<Case> {
     std::unique_ptr<IntrinsicTable> table = IntrinsicTable::Create(*this);
 };
 
@@ -1017,13 +1002,7 @@ struct Case {
     builder::sem_type_func_ptr arg_c;
 };
 
-class IntrinsicTableAbstractTernaryTest : public testing::TestWithParam<Case>,
-                                          public ProgramBuilder {
-  public:
-    std::string NameOf(const sem::Type* type) {
-        return type ? type->FriendlyName(Symbols()) : "<null>";
-    }
-
+struct IntrinsicTableAbstractTernaryTest : public ResolverTestWithParam<Case> {
     std::unique_ptr<IntrinsicTable> table = IntrinsicTable::Create(*this);
 };
 
