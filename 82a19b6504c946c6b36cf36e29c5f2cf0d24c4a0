@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "575e0579_af677991",
+        "filename": "src/dawn/tests/end2end/VertexStateTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-05-10T06:28:22Z",
+      "side": 1,
+      "message": "This comment thread would help.\n\nhttps://dawn-review.googlesource.com/c/dawn/+/89340/comments/1aa93692_4f62bf62\n\n\u003e we might not need this part of the change?\n\nIf this spec change https://github.com/gpuweb/gpuweb/pull/2844 lands and we update the dawn native code to follow it, right, we won\u0027t need the change.\n\n\u003e Or did you find that the test was failing without it?\n\nYes, the test fails without it.\n\n\u003e It is because in Dawn\u0027s webgpu.h we currently don\u0027t have a way to know whether a slot is used or not. Previously \"attributeCount \u003d\u003d 0\" meant that it was unused but that\u0027s no longer the case.\n\nAbsolutely yes.\n\n\u003e We could repurpose stepMode for that by adding an \"undefined\" enum value to it in dawn.json, but that\u0027s a bit ugly.\n\nI suggested to add `slot` to `VertexBufferLayout` in that comment thread if it is ok to update `RenderPipelineDescriptor` (`VertexBufferLayout`) definition. But `undefined` `stepMode` enum would work, too, although yes it is a bit ugly.\n\n\u003e This would be a three-sided patch (otherwise we risk breaking Chrome by using an uninitialized value):\n\nOK, it seems we need to update the both Dawn and Blink code. Should we first make a CL for dawn, and then make a CL for blink (Chromium) immediately after the change of dawn is reflected to `chromium/third_party/dawn`? (I\u0027m not sure how Chromium repo follows the upstream of Dawn repo yet.)\n\n\u003e Maybe it\u0027s worth changing the spec to only validate if there is at least one attribute.\n\nYeah, the need of setting buffers with `.setVertexBuffer()` to zero-attribute vertex buffer slots may sound a bit weird to me. Do you mind if I try to open an issue and make a PR on GitHub WebGPU repo?\n\n\u003e We should raise an issue to the group to see if they would be amenable to relaxing the validation, but can start doing the implementation using stepMode::undefined in parallel, as you wish.\n\nI feel like first knowing their reaction to the relaxing idea on GitHUb. If we won\u0027t get any response for a few days, I may start the implementation `using stepMode::undefined`.",
+      "parentUuid": "0967a41c_41c14a8b",
+      "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33684069_c456b6bd",
         "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
         "patchSetId": 1
