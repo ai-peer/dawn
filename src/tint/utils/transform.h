@@ -41,6 +41,23 @@ auto Transform(const std::vector<IN>& in, TRANSFORMER&& transform)
 
 /// Transform performs an element-wise transformation of a vector.
 /// @param in the input vector.
+/// @param limit the maximum size of the resulting vector. Elements after this count are omitted.
+/// @param transform the transformation function with signature: `OUT(IN)`
+/// @returns a new vector with each element of the source vector transformed by
+/// `transform`.
+template <typename IN, typename TRANSFORMER>
+auto Transform(const std::vector<IN>& in, size_t limit, TRANSFORMER&& transform)
+    -> std::vector<decltype(transform(in[0]))> {
+    const auto count = std::min(limit, in.size());
+    std::vector<decltype(transform(in[0]))> result(count);
+    for (size_t i = 0; i < count; ++i) {
+        result[i] = transform(in[i]);
+    }
+    return result;
+}
+
+/// Transform performs an element-wise transformation of a vector.
+/// @param in the input vector.
 /// @param transform the transformation function with signature:
 /// `OUT(IN, size_t)`
 /// @returns a new vector with each element of the source vector transformed by

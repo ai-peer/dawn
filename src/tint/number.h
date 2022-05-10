@@ -18,10 +18,32 @@
 #include <stdint.h>
 #include <functional>
 
+// Forward declaration
+namespace tint {
+/// Number wraps a integer or floating point number, enforcing explicit casting.
+template <typename T>
+struct Number;
+}  // namespace tint
+
 namespace tint::detail {
 /// An empty structure used as a unique template type for Number when
 /// specializing for the f16 type.
 struct NumberKindF16 {};
+
+/// Helper for obtaining the underlying type for a Number.
+template <typename T>
+struct NumberUnwrapper {
+    /// When T is not a Number, then type defined to be T.
+    using type = T;
+};
+
+/// NumberUnwrapper specialization for Number<T>.
+template <typename T>
+struct NumberUnwrapper<Number<T>> {
+    /// The Number's underlying type.
+    using type = typename Number<T>::type;
+};
+
 }  // namespace tint::detail
 
 namespace tint {
@@ -29,6 +51,9 @@ namespace tint {
 /// Number wraps a integer or floating point number, enforcing explicit casting.
 template <typename T>
 struct Number {
+    /// type is the underlying type of the Number
+    using type = T;
+
     /// Constructor. The value is zero-initialized.
     Number() = default;
 
@@ -59,13 +84,23 @@ struct Number {
     }
 
     /// The number value
-    T value = {};
+    type value = {};
 };
+
+template <typename T>
+inline std::ostream& operator<<(std::ostream& o, Number<T> num) {
+    return o << num.value;
+}
 
 template <typename A, typename B>
 bool operator==(Number<A> a, Number<B> b) {
     using T = decltype(a.value + b.value);
-    return std::equal_to<T>()(a.value, b.value);
+    return std::equal_to<T>()(static_cast<T>(a.value), static_cast<T>(b.value));
+}
+
+template <typename A, typename B>
+bool operator!=(Number<A> a, Number<B> b) {
+    return !(a == b);
 }
 
 template <typename A, typename B>
@@ -74,14 +109,27 @@ bool operator==(Number<A> a, B b) {
 }
 
 template <typename A, typename B>
+bool operator!=(Number<A> a, B b) {
+    return !(a == b);
+}
+
+template <typename A, typename B>
 bool operator==(A a, Number<B> b) {
     return Number<A>(a) == b;
+}
+
+template <typename A, typename B>
+bool operator!=(A a, Number<B> b) {
+    return !(a == b);
 }
 
 /// The partial specification of Number for f16 type, storing the f16 value as float,
 /// and enforcing proper explicit casting.
 template <>
 struct Number<detail::NumberKindF16> {
+    /// C++ does not have a native float16 type, so we use a 32-bit float instead.
+    using type = float;
+
     /// Constructor. The value is zero-initialized.
     Number() = default;
 
@@ -112,7 +160,7 @@ struct Number<detail::NumberKindF16> {
     }
 
     /// The number value, stored as float
-    float value = {};
+    type value = {};
 };
 
 /// `AInt` is a type alias to `Number<int64_t>`.
@@ -129,6 +177,9 @@ using f32 = Number<float>;
 /// `f16` is a type alias to `Number<detail::NumberKindF16>`, which should be IEEE 754 binary16.
 /// However since C++ don't have native binary16 type, the value is stored as float.
 using f16 = Number<detail::NumberKindF16>;
+
+template <typename T>
+using UnwrapNumber = typename detail::NumberUnwrapper<T>::type;
 
 }  // namespace tint
 

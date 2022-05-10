@@ -657,7 +657,7 @@ bool GeneratorImpl::EmitExpressionOrOneIfZero(std::ostream& out, const ast::Expr
             }
 
             out << "(";
-            for (size_t i = 0; i < val.Elements().size(); ++i) {
+            for (size_t i = 0; i < val.ElementCount(); ++i) {
                 if (i != 0) {
                     out << ", ";
                 }
