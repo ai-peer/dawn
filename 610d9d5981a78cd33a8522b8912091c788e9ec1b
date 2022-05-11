@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce3e9c5a_d2f1ee3e",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-11T20:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "608ade3f_7efd8829",
+      "range": {
+        "startLine": 478,
+        "startChar": 16,
+        "endLine": 478,
+        "endChar": 25
+      },
+      "revId": "610d9d5981a78cd33a8522b8912091c788e9ec1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f977182c_14f13fe4",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-11T19:13:52Z",
       "side": 1,
       "message": "nit: `reading from builtin ` \u003cblah\u003e, I think is more accurate and clarifying.",
+      "range": {
+        "startLine": 658,
+        "startChar": 16,
+        "endLine": 658,
+        "endChar": 25
+      },
+      "revId": "610d9d5981a78cd33a8522b8912091c788e9ec1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0c3d956_e3fa8e16",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-11T20:47:07Z",
+      "side": 1,
+      "message": "Done partially - you won\u0027t get this detail for aggregates but they\u0027re awkward anyway (since the builtin you\u0027re reading might in fact be uniform, but you get a non-uniform result anyway for reasons).",
+      "parentUuid": "f977182c_14f13fe4",
       "range": {
         "startLine": 658,
         "startChar": 16,
