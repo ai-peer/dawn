@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b43ea309_a8c8beec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-11T18:25:02Z",
+      "side": 1,
+      "message": "nit. requestAdapter",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 14
+      },
+      "revId": "d6d39b5a702264fa7af87bccdcf5872ec2fc797f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "457f181c_ed284bf6",
@@ -14,6 +37,52 @@
       "writtenOn": "2022-05-11T10:41:25Z",
       "side": 1,
       "message": "LGTM",
+      "revId": "d6d39b5a702264fa7af87bccdcf5872ec2fc797f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78a03bde_463a6dd9",
+        "filename": "src/dawn/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-11T18:25:02Z",
+      "side": 1,
+      "message": "nit. remove",
+      "range": {
+        "startLine": 210,
+        "startChar": 51,
+        "endLine": 210,
+        "endChar": 54
+      },
+      "revId": "d6d39b5a702264fa7af87bccdcf5872ec2fc797f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb66d714_4295d0b9",
+        "filename": "src/dawn/wire/server/ServerDevice.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-11T18:25:02Z",
+      "side": 1,
+      "message": "nit. Maybe we can rename this to `HandleCreatePipelineAsyncCallback` since I see that it is used both for Render and Compute pipelines.",
+      "range": {
+        "startLine": 22,
+        "startChar": 5,
+        "endLine": 22,
+        "endChar": 50
+      },
       "revId": "d6d39b5a702264fa7af87bccdcf5872ec2fc797f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
