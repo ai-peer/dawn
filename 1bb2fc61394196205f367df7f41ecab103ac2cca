@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b161219_c84c8cc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-11T18:53:42Z",
+      "side": 1,
+      "message": "Approving. Feel free to land and iterate when you\u0027re confident things are stable.",
+      "revId": "1bb2fc61394196205f367df7f41ecab103ac2cca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3761eb80_34c9ae68",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-11T18:53:42Z",
+      "side": 1,
+      "message": "Probably safer to use `TINT_DEFER(variables_.Pop());`, so we can\u0027t accidentally return without popping. Can be done as followup.",
+      "revId": "1bb2fc61394196205f367df7f41ecab103ac2cca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6fe28b2_5247dda6",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-11T18:53:42Z",
+      "side": 1,
+      "message": "nit: `if (auto* x \u003d variables_.Get(local)) {`",
+      "range": {
+        "startLine": 909,
+        "startChar": 16,
+        "endLine": 909,
+        "endChar": 24
+      },
+      "revId": "1bb2fc61394196205f367df7f41ecab103ac2cca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
