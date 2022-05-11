@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "907970f2_dc599462",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-11T14:13:32Z",
+      "side": 1,
+      "message": "In general I\u0027m not sure that the logic in this function makes sense, but the ExecutionSerial logic is complicated. I filed a bug to revisit it one day.",
+      "parentUuid": "68985d90_c9bf1229",
+      "revId": "61eb3bfee14a50b7f834bde17af1419d84542d0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8205ae1f_9dcc884d",
