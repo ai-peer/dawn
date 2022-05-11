@@ -41,6 +41,15 @@ class ExternalTextureTests : public DawnTest {
     static constexpr uint32_t kHeight = 4;
     static constexpr wgpu::TextureFormat kFormat = wgpu::TextureFormat::RGBA8Unorm;
     static constexpr wgpu::TextureUsage kSampledUsage = wgpu::TextureUsage::TextureBinding;
+    std::array<float, 12> kYuvToRGBMatrixBT709 = {1.164384f, 0.0f,       1.792741f,  -0.972945f,
+                                                  1.164384f, -0.213249f, -0.532909f, 0.301483f,
+                                                  1.164384f, 2.112402f,  0.0f,       -1.133402f};
+    std::array<float, 9> kGamutConversionMatrixBT709ToSrgb = {1.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+                                                              0.0f, 0.0f, 0.0f, 1.0f};
+    std::array<float, 7> kGammaDecodeBT709 = {2.2, 1.0 / 1.099, 0.099 / 1.099, 1 / 4.5, 0.081,
+                                              0.0, 0.0};
+    std::array<float, 7> kGammaEncodeSrgb = {
+        1 / 2.4, 1.137119 /*1.055^2.4*/, 0.0, 12.92, 0.0031308, -0.055, 0.0};
 };
 }  // anonymous namespace
 
@@ -53,6 +62,10 @@ TEST_P(ExternalTextureTests, CreateExternalTextureSuccess) {
     // Create an ExternalTextureDescriptor from the texture view
     wgpu::ExternalTextureDescriptor externalDesc;
     externalDesc.plane0 = view;
+    externalDesc.yuvToRgbConversionMatrix = kYuvToRGBMatrixBT709.data();
+    externalDesc.gamutConversionMatrix = kGamutConversionMatrixBT709ToSrgb.data();
+    externalDesc.srcTransferFunctionParameters = kGammaDecodeBT709.data();
+    externalDesc.dstTransferFunctionParameters = kGammaEncodeSrgb.data();
 
     // Import the external texture
     wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
@@ -116,6 +129,10 @@ TEST_P(ExternalTextureTests, SampleExternalTexture) {
     // Create an ExternalTextureDescriptor from the texture view
     wgpu::ExternalTextureDescriptor externalDesc;
     externalDesc.plane0 = externalView;
+    externalDesc.yuvToRgbConversionMatrix = kYuvToRGBMatrixBT709.data();
+    externalDesc.gamutConversionMatrix = kGamutConversionMatrixBT709ToSrgb.data();
+    externalDesc.srcTransferFunctionParameters = kGammaDecodeBT709.data();
+    externalDesc.dstTransferFunctionParameters = kGammaEncodeSrgb.data();
 
     // Import the external texture
     wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
@@ -228,6 +245,10 @@ TEST_P(ExternalTextureTests, SampleMultiplanarExternalTexture) {
         wgpu::ExternalTextureDescriptor externalDesc;
         externalDesc.plane0 = externalViewPlane0;
         externalDesc.plane1 = externalViewPlane1;
+        externalDesc.yuvToRgbConversionMatrix = kYuvToRGBMatrixBT709.data();
+        externalDesc.gamutConversionMatrix = kGamutConversionMatrixBT709ToSrgb.data();
+        externalDesc.srcTransferFunctionParameters = kGammaDecodeBT709.data();
+        externalDesc.dstTransferFunctionParameters = kGammaEncodeSrgb.data();
 
         // Import the external texture
         wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
