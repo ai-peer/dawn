@@ -16,6 +16,23 @@
       "message": "ptal",
       "revId": "c46e8d51694c4f79c10f4bcd942a3f33bc72d4f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30b8158b_851b08d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-05-11T20:37:54Z",
+      "side": 1,
+      "message": "LGTM, but is it not possible to make kUnusedFormat constexpr? (I had trouble trying to do that, so maybe not.)",
+      "revId": "c46e8d51694c4f79c10f4bcd942a3f33bc72d4f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
