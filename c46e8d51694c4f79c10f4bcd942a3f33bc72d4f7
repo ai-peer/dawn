@@ -51,6 +51,24 @@
       "parentUuid": "30b8158b_851b08d7",
       "revId": "c46e8d51694c4f79c10f4bcd942a3f33bc72d4f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7f8ac7c_f7a0e294",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-05-11T22:24:11Z",
+      "side": 1,
+      "message": "Does it need to be non-const? `TextureBase::mFormat` is `const Format\u0026`.\n\nI revived my branch and somehow got it building where I couldn\u0027t before (needed to move the `\u003d default` for the destructor into the header, I think).\n\nI didn\u0027t know if it actually avoided a static initializer so I googled it and found this extremely relevant doc:\nhttps://chromium.googlesource.com/chromium/src.git/+/HEAD/docs/static_initializers.md#Step-1-Use-objdump-to-report-them\nbut unfortunately it didn\u0027t discover the static initializer even when I stuck a printf inside it to prevent optimization.\n\nso instead I hacked `\"//build/config/compiler:wglobal_constructors\"` into `src/dawn/native/BUILD.gn` and got it to report the issue building target `libdawn_native.dylib`. This seems to confirm my patch works.\n\nhttps://dawn-review.googlesource.com/c/dawn/+/89863",
+      "parentUuid": "b1d34f6a_c561a7d0",
+      "revId": "c46e8d51694c4f79c10f4bcd942a3f33bc72d4f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
