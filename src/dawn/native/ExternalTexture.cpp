@@ -139,45 +139,44 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
 
     DAWN_TRY_ASSIGN(mParamsBuffer, device->CreateBuffer(&bufferDesc));
 
-    // Dawn & Tint's YUV-to-RGB conversion implementation is a simple 3x4 matrix multiplication
-    // using a standard conversion matrix. These matrices can be found in
-    // chromium/src/third_party/skia/src/core/SkYUVMath.cpp
     ExternalTextureParams params;
     params.numPlanes = descriptor->plane1 == nullptr ? 1 : 2;
 
-    // TODO(dawn:1082): Make this field configurable from outside of Dawn.
-    // Conversion matrix for BT.709 limited range. Columns 1, 2 and 3 are copied
-    // directly from the corresponding matrix in SkYUVMath.cpp. Column 4 is the range
-    // bias (for RGB) found in column 5 of the same SkYUVMath.cpp matrix.
-    params.yuvToRgbConversionMatrix = {1.164384f, 0.0f,       1.792741f,  -0.972945f,
-                                       1.164384f, -0.213249f, -0.532909f, 0.301483f,
-                                       1.164384f, 2.112402f,  0.0f,       -1.133402f};
+    // YUV-to-RGB conversion is performed by multiplying the source YUV values with a 4x3 matrix
+    // passed from Chromium. The matrix was originally sourced from /skia/src/core/SkYUVMath.cpp.
+    const float* yMat = descriptor->yuvToRgbConversionMatrix;
+    if (yMat) {
+        params.yuvToRgbConversionMatrix = {yMat[0], yMat[1], yMat[2],  yMat[3],  //
+                                           yMat[4], yMat[5], yMat[6],  yMat[7],  //
+                                           yMat[8], yMat[9], yMat[10], yMat[11]};
+    }
 
-    // TODO(dawn:1082): Make this field configurable from outside of Dawn.
-    // Use an identity matrix when converting BT.709 to sRGB because they shared the
-    // same primaries.
-    params.gamutConversionMatrix = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
-                                    0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f};
+    // Gamut correction is performed by multiplying a 3x3 matrix passed from Chromium. The
+    // matrix was computed by multiplying the appropriate source and destination gamut
+    // matrices sourced from ui/gfx/color_space.cc.
+    const float* gMat = descriptor->gamutConversionMatrix;
+    if (gMat) {
+        params.gamutConversionMatrix = {gMat[0], gMat[1], gMat[2], 0.0f,  //
+                                        gMat[3], gMat[4], gMat[5], 0.0f,  //
+                                        gMat[6], gMat[7], gMat[8], 0.0f};
+    }
 
-    switch (descriptor->colorSpace) {
-        case wgpu::PredefinedColorSpace::Undefined:
-            // Undefined color space should eventually produce an error. For now, these
-            // constants will effectively perform no gamma correction so tests can continue
-            // passing.
-            params.gammaDecodingParams = {1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0};
-            params.gammaEncodingParams = {1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0};
-            break;
-        case wgpu::PredefinedColorSpace::Srgb:
-            // TODO(dawn:1082): Make this field configurable from outside of Dawn.
-            // These are the inverted parameters as specified by Rec. ITU-R BT.1886 for BT.709
-            params.gammaDecodingParams = {2.2, 1.0 / 1.099, 0.099 / 1.099, 1 / 4.5, 0.081,
-                                          0.0, 0.0};
-
-            // Constants for sRGB transfer function pulled from
-            // https://en.wikipedia.org/wiki/SRGB
-            params.gammaEncodingParams = {
-                1 / 2.4, 1.137119 /*1.055^2.4*/, 0.0, 12.92, 0.0031308, -0.055, 0.0};
-            break;
+    // Gamma decode/encode is performed by the logic:
+    //    if (abs(v) < params.D) {
+    //        return sign(v) * (params.C * abs(v) + params.F);
+    //    }
+    //    return pow(A * x + B, G) + E
+    //
+    // Constants are passed from Chromium and originally sourced from ui/gfx/color_space.cc
+    const float* srcFn = descriptor->srcTransferFunctionParameters;
+    if (srcFn) {
+        params.gammaDecodingParams = {srcFn[0], srcFn[1], srcFn[2], srcFn[3],
+                                      srcFn[4], srcFn[5], srcFn[6]};
+    }
+    const float* dstFn = descriptor->dstTransferFunctionParameters;
+    if (dstFn) {
+        params.gammaEncodingParams = {dstFn[0], dstFn[1], dstFn[2], dstFn[3],
+                                      dstFn[4], dstFn[5], dstFn[6]};
     }
 
     DAWN_TRY(device->GetQueue()->WriteBuffer(mParamsBuffer.Get(), 0, &params,
