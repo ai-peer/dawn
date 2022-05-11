@@ -33,6 +33,46 @@
       "message": "ptal.",
       "revId": "e84d991df7f83f20ef460fecc3ae05ba81a22f1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad2dbdb1_0ad0bc86",
+        "filename": "docs/clang-tidy.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-11T15:36:15Z",
+      "side": 1,
+      "message": "nit: --jobs not necessary?",
+      "range": {
+        "startLine": 11,
+        "startChar": 15,
+        "endLine": 11,
+        "endChar": 25
+      },
+      "revId": "e84d991df7f83f20ef460fecc3ae05ba81a22f1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a03f2297_875b9997",
+        "filename": "docs/clang-tidy.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-11T15:36:15Z",
+      "side": 1,
+      "message": "Can\u0027t it be done in the DEPS if you set checkout_clang_tidy?",
+      "revId": "e84d991df7f83f20ef460fecc3ae05ba81a22f1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
