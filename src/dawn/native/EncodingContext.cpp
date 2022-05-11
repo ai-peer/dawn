@@ -32,7 +32,7 @@ EncodingContext::~EncodingContext() {
 }
 
 void EncodingContext::Destroy() {
-    if (mDestroyed) {
+    if (mDevice->IsLost()) {
         return;
     }
     if (!mWereCommandsAcquired) {
@@ -43,7 +43,6 @@ void EncodingContext::Destroy() {
     if (!IsFinished()) {
         HandleError(DAWN_FORMAT_VALIDATION_ERROR("Destroyed encoder cannot be finished."));
     }
-    mDestroyed = true;
     mCurrentEncoder = nullptr;
 }
 

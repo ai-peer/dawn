@@ -21,6 +21,7 @@
 #include <vector>
 
 #include "dawn/native/CommandAllocator.h"
+#include "dawn/native/Device.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/ErrorData.h"
 #include "dawn/native/IndirectDrawMetadata.h"
@@ -30,7 +31,6 @@
 namespace dawn::native {
 
 class CommandEncoder;
-class DeviceBase;
 class ApiObjectBase;
 
 // Base class for allocating/iterating commands.
@@ -80,7 +80,7 @@ class EncodingContext {
 
     inline bool CheckCurrentEncoder(const ApiObjectBase* encoder) {
         if (DAWN_UNLIKELY(encoder != mCurrentEncoder)) {
-            if (mDestroyed) {
+            if (mDevice->IsLost()) {
                 HandleError(DAWN_FORMAT_VALIDATION_ERROR("Recording in a destroyed %s.", encoder));
             } else if (mCurrentEncoder != mTopLevelEncoder) {
                 // The top level encoder was used when a pass encoder was current.
@@ -171,7 +171,6 @@ class EncodingContext {
     CommandIterator mIterator;
     bool mWasMovedToIterator = false;
     bool mWereCommandsAcquired = false;
-    bool mDestroyed = false;
 
     std::unique_ptr<ErrorData> mError;
     std::vector<std::string> mDebugGroupLabels;

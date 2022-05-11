@@ -692,6 +692,7 @@ Ref<ComputePassEncoder> CommandEncoder::BeginComputePass(const ComputePassDescri
     bool success = mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_TRY(device->ValidateIsAlive());
             DAWN_TRY(ValidateComputePassDescriptor(device, descriptor));
 
             BeginComputePassCmd* cmd =
@@ -760,6 +761,8 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
     bool success = mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_TRY(device->ValidateIsAlive());
+
             uint32_t sampleCount = 0;
 
             DAWN_TRY(ValidateRenderPassDescriptor(device, descriptor, &width, &height, &sampleCount,
@@ -914,6 +917,7 @@ void CommandEncoder::APICopyBufferToBuffer(BufferBase* source,
     mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_TRY(GetDevice()->ValidateIsAlive());
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(source));
                 DAWN_TRY(GetDevice()->ValidateObject(destination));
@@ -956,6 +960,7 @@ void CommandEncoder::APICopyBufferToTexture(const ImageCopyBuffer* source,
     mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_TRY(GetDevice()->ValidateIsAlive());
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(ValidateImageCopyBuffer(GetDevice(), *source));
                 DAWN_TRY_CONTEXT(ValidateCanUseAs(source->buffer, wgpu::BufferUsage::CopySrc),
@@ -1015,6 +1020,7 @@ void CommandEncoder::APICopyTextureToBuffer(const ImageCopyTexture* source,
     mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_TRY(GetDevice()->ValidateIsAlive());
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(ValidateImageCopyTexture(GetDevice(), *source, *copySize));
                 DAWN_TRY_CONTEXT(ValidateCanUseAs(source->texture, wgpu::TextureUsage::CopySrc,
@@ -1086,6 +1092,7 @@ void CommandEncoder::APICopyTextureToTextureHelper(const ImageCopyTexture* sourc
     mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_TRY(GetDevice()->ValidateIsAlive());
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(source->texture));
                 DAWN_TRY(GetDevice()->ValidateObject(destination->texture));
@@ -1144,6 +1151,7 @@ void CommandEncoder::APIClearBuffer(BufferBase* buffer, uint64_t offset, uint64_
     mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_TRY(GetDevice()->ValidateIsAlive());
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(buffer));
 
@@ -1201,6 +1209,7 @@ void CommandEncoder::APIInsertDebugMarker(const char* groupLabel) {
     mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_TRY(GetDevice()->ValidateIsAlive());
             InsertDebugMarkerCmd* cmd =
                 allocator->Allocate<InsertDebugMarkerCmd>(Command::InsertDebugMarker);
             cmd->length = strlen(groupLabel);
@@ -1217,6 +1226,7 @@ void CommandEncoder::APIPopDebugGroup() {
     mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_TRY(GetDevice()->ValidateIsAlive());
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_INVALID_IF(mDebugGroupStackSize == 0,
                                 "PopDebugGroup called when no debug groups are currently pushed.");
@@ -1234,6 +1244,7 @@ void CommandEncoder::APIPushDebugGroup(const char* groupLabel) {
     mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_TRY(GetDevice()->ValidateIsAlive());
             PushDebugGroupCmd* cmd =
                 allocator->Allocate<PushDebugGroupCmd>(Command::PushDebugGroup);
             cmd->length = strlen(groupLabel);
@@ -1257,6 +1268,7 @@ void CommandEncoder::APIResolveQuerySet(QuerySetBase* querySet,
     mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_TRY(GetDevice()->ValidateIsAlive());
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(querySet));
                 DAWN_TRY(GetDevice()->ValidateObject(destination));
@@ -1298,6 +1310,7 @@ void CommandEncoder::APIWriteBuffer(BufferBase* buffer,
     mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_TRY(GetDevice()->ValidateIsAlive());
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(ValidateWriteBuffer(GetDevice(), buffer, bufferOffset, size));
             }
@@ -1321,6 +1334,7 @@ void CommandEncoder::APIWriteTimestamp(QuerySetBase* querySet, uint32_t queryInd
     mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_TRY(GetDevice()->ValidateIsAlive());
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(ValidateTimestampQuery(GetDevice(), querySet, queryIndex));
             }
