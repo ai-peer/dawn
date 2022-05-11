@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "51952b15_d670f6b3",
+        "filename": ".clang-tidy",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-11T16:34:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "545208e7_8acd4d8d",
+      "revId": "e84d991df7f83f20ef460fecc3ae05ba81a22f1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "10763d0d_fea87b34",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -58,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f87bd405_e02016eb",
+        "filename": "docs/clang-tidy.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-11T16:34:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad2dbdb1_0ad0bc86",
+      "range": {
+        "startLine": 11,
+        "startChar": 15,
+        "endLine": 11,
+        "endChar": 25
+      },
+      "revId": "e84d991df7f83f20ef460fecc3ae05ba81a22f1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a03f2297_875b9997",
@@ -71,6 +113,24 @@
       "writtenOn": "2022-05-11T15:36:15Z",
       "side": 1,
       "message": "Can\u0027t it be done in the DEPS if you set checkout_clang_tidy?",
+      "revId": "e84d991df7f83f20ef460fecc3ae05ba81a22f1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6920ea08_b46a3743",
+        "filename": "docs/clang-tidy.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-11T16:34:48Z",
+      "side": 1,
+      "message": "I think it could, but I\u0027ve set this up the same as chrome. I\u0027m guessing it\u0027s this way because build/ would already be on the bots and it\u0027s duplicate check for them.\n\nThere are also ways you can run clang-tidy without tricium which don\u0027t require this folder. I\u0027ll probably expand this doc with those as I figure out more.",
+      "parentUuid": "a03f2297_875b9997",
       "revId": "e84d991df7f83f20ef460fecc3ae05ba81a22f1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
