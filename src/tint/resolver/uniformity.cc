@@ -83,6 +83,7 @@ struct Node {
     /// information.
     enum Type {
         kRegular,
+        kControlFlow,
         kFunctionCallArgument,
         kFunctionCallPointerArgumentResult,
         kFunctionCallReturnValue,
@@ -587,7 +588,8 @@ class UniformityGraph {
                 // Insert the condition at the start of the loop body.
                 if (f->condition) {
                     auto [cf_cond, v] = ProcessExpression(cfx, f->condition);
-                    auto* cf_condition_end = CreateNode("for_condition_CFend");
+                    auto* cf_condition_end = CreateNode("for_condition_CFend", f);
+                    cf_condition_end->type = Node::kControlFlow;
                     cf_condition_end->AddEdge(v);
                     cf_start = cf_condition_end;
 
@@ -636,7 +638,12 @@ class UniformityGraph {
 
             [&](const ast::IfStatement* i) {
                 auto* sem_if = sem_.Get(i);
-                auto [cfx, v] = ProcessExpression(cf, i->condition);
+                auto [_, v_cond] = ProcessExpression(cf, i->condition);
+
+                // Add a diagnostic node to capture the control flow change.
+                auto* v = current_function_->CreateNode("if_stmt", i);
+                v->type = Node::kControlFlow;
+                v->AddEdge(v_cond);
 
                 std::unordered_map<const sem::Variable*, Node*> true_vars;
                 std::unordered_map<const sem::Variable*, Node*> false_vars;
@@ -799,7 +806,12 @@ class UniformityGraph {
             },
             [&](const ast::SwitchStatement* s) {
                 auto* sem_switch = sem_.Get(s);
-                auto [cfx, v] = ProcessExpression(cf, s->condition);
+                auto [cfx, v_cond] = ProcessExpression(cf, s->condition);
+
+                // Add a diagnostic node to capture the control flow change.
+                auto* v = current_function_->CreateNode("switch_stmt", s);
+                v->type = Node::kControlFlow;
+                v->AddEdge(v_cond);
 
                 Node* cf_end = nullptr;
                 if (sem_switch->Behaviors() != sem::Behaviors{sem::Behavior::kNext}) {
@@ -1263,6 +1275,22 @@ class UniformityGraph {
         }
     }
 
+    /// Trace back along a path from `start` until finding a node that matches a predicate.
+    /// @param start the starting node
+    /// @param pred the predicate function
+    /// @returns the first node found that matches the predicate, or nullptr
+    template <typename F>
+    Node* TraceBackAlongPathUntil(Node* start, F&& pred) {
+        auto* current = start;
+        while (current) {
+            if (pred(current)) {
+                break;
+            }
+            current = current->visited_from;
+        }
+        return current;
+    }
+
     /// Recursively descend through the function called by `call` and the functions that it calls in
     /// order to find a call to a builtin function that requires uniformity.
     const ast::CallExpression* FindBuiltinThatRequiresUniformity(const ast::CallExpression* call) {
@@ -1287,6 +1315,108 @@ class UniformityGraph {
         return nullptr;
     }
 
+    /// Add diagnostic notes to show where control flow became non-uniform on the way to a node.
+    /// @param function the function being analyzed
+    /// @param source_node the node to traverse from
+    void ShowCauseOfNonUniformity(FunctionInfo& function, Node* source_node) {
+        // Traverse the graph to generate a path from the node to the source of non-uniformity.
+        function.ResetVisited();
+        Traverse(source_node);
+
+        // Get the source of the non-uniform value.
+        auto* non_uniform_source = function.may_be_non_uniform->visited_from;
+        TINT_ASSERT(Resolver, non_uniform_source);
+
+        // Show where the non-uniform value results in non-uniform control flow.
+        auto* control_flow = TraceBackAlongPathUntil(
+            non_uniform_source, [](Node* node) { return node->type == Node::kControlFlow; });
+        if (control_flow) {
+            diagnostics_.add_note(diag::System::Resolver,
+                                  "control flow depends on non-uniform value",
+                                  control_flow->ast->source);
+            // TODO(jrprice): There are cases the function with uniformity requirements is actually
+            // not inside this control flow statement, and we could potentially improve the
+            // diagnostics by point to the control flow interruption statement that is causing
+            // non-uniformity instead.
+        }
+
+        // Show the source of the non-uniform value.
+        Switch(
+            non_uniform_source->ast,
+            [&](const ast::IdentifierExpression* ident) {
+                std::string var_type = "";
+                auto* var = sem_.Get<sem::VariableUser>(ident)->Variable();
+                switch (var->StorageClass()) {
+                    case ast::StorageClass::kStorage:
+                        var_type = "read_write storage buffer ";
+                        break;
+                    case ast::StorageClass::kWorkgroup:
+                        var_type = "workgroup storage variable ";
+                        break;
+                    case ast::StorageClass::kPrivate:
+                        var_type = "module-scope private variable ";
+                        break;
+                    default:
+                        if (ast::HasAttribute<ast::BuiltinAttribute>(
+                                var->Declaration()->attributes)) {
+                            var_type = "builtin ";
+                        } else if (ast::HasAttribute<ast::LocationAttribute>(
+                                       var->Declaration()->attributes)) {
+                            var_type = "user-defined input ";
+                        } else {
+                            // TODO(jrprice): Provide more info for this case.
+                        }
+                        break;
+                }
+                diagnostics_.add_note(diag::System::Resolver,
+                                      "reading from " + var_type + "'" +
+                                          builder_->Symbols().NameFor(ident->symbol) +
+                                          "' may result in a non-uniform value",
+                                      ident->source);
+            },
+            [&](const ast::CallExpression* c) {
+                auto target_name = builder_->Symbols().NameFor(
+                    c->target.name->As<ast::IdentifierExpression>()->symbol);
+                switch (non_uniform_source->type) {
+                    case Node::kRegular: {
+                        diagnostics_.add_note(
+                            diag::System::Resolver,
+                            "calling '" + target_name +
+                                "' may cause subsequent control flow to be non-uniform",
+                            c->source);
+
+                        // Recurse into the target function.
+                        if (auto* user = sem_.Get(c)->Target()->As<sem::Function>()) {
+                            auto& next_function = functions_.at(user->Declaration());
+                            ShowCauseOfNonUniformity(next_function, next_function.cf_return);
+                        }
+                        break;
+                    }
+                    case Node::kFunctionCallReturnValue: {
+                        diagnostics_.add_note(
+                            diag::System::Resolver,
+                            "return value of '" + target_name + "' may be non-uniform", c->source);
+                        break;
+                    }
+                    case Node::kFunctionCallPointerArgumentResult: {
+                        diagnostics_.add_note(
+                            diag::System::Resolver,
+                            "pointer contents may become non-uniform after calling '" +
+                                target_name + "'",
+                            c->args[non_uniform_source->arg_index]->source);
+                        break;
+                    }
+                    default: {
+                        TINT_ICE(Resolver, diagnostics_) << "unhandled source of non-uniformity";
+                        break;
+                    }
+                }
+            },
+            [&](Default) {
+                TINT_ICE(Resolver, diagnostics_) << "unhandled source of non-uniformity";
+            });
+    }
+
     /// Generate an error message for a uniformity issue.
     /// @param function the function that the diagnostic is being produced for
     /// @param source_node the node that has caused a uniformity issue in `function`
@@ -1309,15 +1439,10 @@ class UniformityGraph {
         Traverse(function.required_to_be_uniform);
         TINT_ASSERT(Resolver, source_node->visited_from);
 
-        // Trace back through the graph to find a node that is required to be uniform that has
-        // a path to the source node.
-        Node* cause = source_node;
-        while (cause) {
-            if (cause->visited_from == function.required_to_be_uniform) {
-                break;
-            }
-            cause = cause->visited_from;
-        }
+        // Find a node that is required to be uniform that has a path to the source node.
+        auto* cause = TraceBackAlongPathUntil(source_node, [&](Node* node) {
+            return node->visited_from == function.required_to_be_uniform;
+        });
 
         // The node will always have a corresponding call expression.
         auto* call = cause->ast->As<ast::CallExpression>();
@@ -1370,89 +1495,9 @@ class UniformityGraph {
             }
         }
 
-        // Show the source of non-uniformity.
+        // Show the cause of non-uniformity (starting at the top-level error).
         if (!note) {
-            // Traverse the graph to generate a path from RequiredToBeUniform to MayBeNonUniform.
-            function.ResetVisited();
-            Traverse(function.required_to_be_uniform);
-
-            // Get the source of the non-uniform value.
-            auto* non_uniform_source = function.may_be_non_uniform->visited_from;
-            TINT_ASSERT(Resolver, non_uniform_source);
-
-            // TODO(jrprice): Show where the non-uniform value results in non-uniform control flow.
-
-            Switch(
-                non_uniform_source->ast,
-                [&](const ast::IdentifierExpression* ident) {
-                    std::string var_type = "";
-                    auto* var = sem_.Get<sem::VariableUser>(ident)->Variable();
-                    switch (var->StorageClass()) {
-                        case ast::StorageClass::kStorage:
-                            var_type = "read_write storage buffer ";
-                            break;
-                        case ast::StorageClass::kWorkgroup:
-                            var_type = "workgroup storage variable ";
-                            break;
-                        case ast::StorageClass::kPrivate:
-                            var_type = "module-scope private variable ";
-                            break;
-                        default:
-                            if (ast::HasAttribute<ast::BuiltinAttribute>(
-                                    var->Declaration()->attributes)) {
-                                var_type = "builtin ";
-                            } else if (ast::HasAttribute<ast::LocationAttribute>(
-                                           var->Declaration()->attributes)) {
-                                var_type = "user-defined input ";
-                            } else {
-                                // TODO(jrprice): Provide more info for this case.
-                            }
-                            break;
-                    }
-                    diagnostics_.add_note(diag::System::Resolver,
-                                          "reading from " + var_type + "'" +
-                                              builder_->Symbols().NameFor(ident->symbol) +
-                                              "' may result in a non-uniform value",
-                                          ident->source);
-                },
-                [&](const ast::CallExpression* c) {
-                    auto target_name = builder_->Symbols().NameFor(
-                        c->target.name->As<ast::IdentifierExpression>()->symbol);
-                    switch (non_uniform_source->type) {
-                        case Node::kRegular: {
-                            diagnostics_.add_note(
-                                diag::System::Resolver,
-                                "calling '" + target_name +
-                                    "' may cause subsequent control flow to be non-uniform",
-                                c->source);
-                            // TODO(jrprice): Descend into the function and show the reason why.
-                            break;
-                        }
-                        case Node::kFunctionCallReturnValue: {
-                            diagnostics_.add_note(
-                                diag::System::Resolver,
-                                "return value of '" + target_name + "' may be non-uniform",
-                                c->source);
-                            break;
-                        }
-                        case Node::kFunctionCallPointerArgumentResult: {
-                            diagnostics_.add_note(
-                                diag::System::Resolver,
-                                "pointer contents may become non-uniform after calling '" +
-                                    target_name + "'",
-                                c->args[non_uniform_source->arg_index]->source);
-                            break;
-                        }
-                        default: {
-                            TINT_ICE(Resolver, diagnostics_)
-                                << "unhandled source of non-uniformity";
-                            break;
-                        }
-                    }
-                },
-                [&](Default) {
-                    TINT_ICE(Resolver, diagnostics_) << "unhandled source of non-uniformity";
-                });
+            ShowCauseOfNonUniformity(function, function.required_to_be_uniform);
         }
     }
 };
