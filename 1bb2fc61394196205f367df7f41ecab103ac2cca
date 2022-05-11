@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42b9e37f_f962a4a5",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-11T20:47:50Z",
+      "side": 1,
+      "message": "Done. Had to introduce a new lexical scope though as we need the pop to happen midway through this case.",
+      "parentUuid": "3761eb80_34c9ae68",
+      "revId": "1bb2fc61394196205f367df7f41ecab103ac2cca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6fe28b2_5247dda6",
@@ -65,6 +83,30 @@
       "writtenOn": "2022-05-11T18:53:42Z",
       "side": 1,
       "message": "nit: `if (auto* x \u003d variables_.Get(local)) {`",
+      "range": {
+        "startLine": 909,
+        "startChar": 16,
+        "endLine": 909,
+        "endChar": 24
+      },
+      "revId": "1bb2fc61394196205f367df7f41ecab103ac2cca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "462ee913_9965a03c",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-11T20:47:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6fe28b2_5247dda6",
       "range": {
         "startLine": 909,
         "startChar": 16,
