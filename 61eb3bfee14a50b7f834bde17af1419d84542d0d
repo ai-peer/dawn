@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68985d90_c9bf1229",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-11T14:06:53Z",
+      "side": 1,
+      "message": "Do you mean why in this case, or why in general? In this case there is a definate, repeatable race condition being triggered by dawn.node. This comes down to this variable getting updated on two threads at the same time.\n\nIf you mean why is it designed that way, the impression I got is one of these threads is running on GCD (or maybe both)?",
+      "parentUuid": "37a3647d_bf6d5576",
+      "revId": "61eb3bfee14a50b7f834bde17af1419d84542d0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8205ae1f_9dcc884d",
@@ -65,6 +83,30 @@
       "writtenOn": "2022-05-11T03:42:53Z",
       "side": 1,
       "message": "uint64_t to be more clear this is a plain old number",
+      "range": {
+        "startLine": 305,
+        "startChar": 4,
+        "endLine": 305,
+        "endChar": 8
+      },
+      "revId": "61eb3bfee14a50b7f834bde17af1419d84542d0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1296b19_20183325",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-11T14:06:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8205ae1f_9dcc884d",
       "range": {
         "startLine": 305,
         "startChar": 4,
