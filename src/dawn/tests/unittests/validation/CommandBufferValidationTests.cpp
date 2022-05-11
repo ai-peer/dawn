@@ -369,3 +369,32 @@ TEST_F(CommandBufferValidationTest, DestroyEncoder) {
         ASSERT_DEVICE_ERROR(encoder.Finish(), HasSubstr("Destroyed encoder cannot be finished."));
     }
 }
+
+TEST_F(CommandBufferValidationTest, EncodeAfterDeviceDestroyed) {
+    PlaceholderRenderPass PlaceholderRenderPass(device);
+
+    // Device destroyed before encoding.
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        ExpectDeviceDestruction();
+        device.Destroy();
+        // The encoder should not accessing any device info if device is destroyed when try
+        // encoding.
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&PlaceholderRenderPass);
+        pass.End();
+        ASSERT_DEVICE_ERROR(encoder.Finish(), HasSubstr("Destroyed encoder cannot be finished."));
+    }
+
+    // Device destroyed after encoding.
+    {
+        ExpectDeviceDestruction();
+        device.Destroy();
+        ASSERT_DEVICE_ERROR(wgpu::CommandEncoder encoder = device.CreateCommandEncoder(),
+                            HasSubstr("[Device] is lost"));
+        // The encoder should not accessing any device info if device is destroyed when try
+        // encoding.
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&PlaceholderRenderPass);
+        pass.End();
+        ASSERT_DEVICE_ERROR(encoder.Finish(), HasSubstr("[Invalid CommandEncoder] is invalid."));
+    }
+}
