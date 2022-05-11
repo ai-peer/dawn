@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "608ade3f_7efd8829",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-11T19:13:52Z",
+      "side": 1,
+      "message": "nit: `reading from read_write storage buffer` ?",
+      "range": {
+        "startLine": 478,
+        "startChar": 16,
+        "endLine": 478,
+        "endChar": 25
+      },
+      "revId": "610d9d5981a78cd33a8522b8912091c788e9ec1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f977182c_14f13fe4",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-11T19:13:52Z",
+      "side": 1,
+      "message": "nit: `reading from builtin ` \u003cblah\u003e, I think is more accurate and clarifying.",
+      "range": {
+        "startLine": 658,
+        "startChar": 16,
+        "endLine": 658,
+        "endChar": 25
+      },
+      "revId": "610d9d5981a78cd33a8522b8912091c788e9ec1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
