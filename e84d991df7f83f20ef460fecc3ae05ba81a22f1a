@@ -133,6 +133,24 @@
       "parentUuid": "a03f2297_875b9997",
       "revId": "e84d991df7f83f20ef460fecc3ae05ba81a22f1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e758caa_8abcd393",
+        "filename": "docs/clang-tidy.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-11T16:36:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6920ea08_b46a3743",
+      "revId": "e84d991df7f83f20ef460fecc3ae05ba81a22f1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
