@@ -324,6 +324,11 @@ MaybeError ValidateTextureUsage(const TextureDescriptor* descriptor,
     return {};
 }
 
+Format& GetUnusedFormat() {
+    static Format kUnusedFormat{};
+    return kUnusedFormat;
+}
+
 }  // anonymous namespace
 
 MaybeError ValidateTextureDescriptor(const DeviceBase* device,
@@ -548,15 +553,13 @@ TextureBase::TextureBase(DeviceBase* device,
 
 TextureBase::~TextureBase() = default;
 
-static Format kUnusedFormat;
-
 TextureBase::TextureBase(DeviceBase* device, TextureState state)
-    : ApiObjectBase(device, kLabelNotImplemented), mFormat(kUnusedFormat), mState(state) {
+    : ApiObjectBase(device, kLabelNotImplemented), mFormat(GetUnusedFormat()), mState(state) {
     TrackInDevice();
 }
 
 TextureBase::TextureBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-    : ApiObjectBase(device, tag), mFormat(kUnusedFormat) {}
+    : ApiObjectBase(device, tag), mFormat(GetUnusedFormat()) {}
 
 void TextureBase::DestroyImpl() {
     mState = TextureState::Destroyed;
@@ -784,12 +787,12 @@ TextureViewBase::TextureViewBase(TextureBase* texture, const TextureViewDescript
 TextureViewBase::TextureViewBase(TextureBase* texture)
     : ApiObjectBase(texture->GetDevice(), kLabelNotImplemented),
       mTexture(texture),
-      mFormat(kUnusedFormat) {
+      mFormat(GetUnusedFormat()) {
     TrackInDevice();
 }
 
 TextureViewBase::TextureViewBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-    : ApiObjectBase(device, tag), mFormat(kUnusedFormat) {}
+    : ApiObjectBase(device, tag), mFormat(GetUnusedFormat()) {}
 
 TextureViewBase::~TextureViewBase() = default;
 
