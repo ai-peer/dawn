@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b22bc97_a1266ed6",
+        "filename": "src/dawn/tests/end2end/VertexStateTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-05-11T08:22:09Z",
+      "side": 1,
+      "message": "Filed an issue and sent a PR. Let\u0027s wait for their responses.\n\nhttps://github.com/gpuweb/gpuweb/pull/2865",
+      "parentUuid": "575e0579_af677991",
+      "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33684069_c456b6bd",
         "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
         "patchSetId": 1
