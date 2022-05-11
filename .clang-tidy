@@ -1,0 +1,12 @@
+FormatStyle: file
+Checks: "-*,\
+          bugprone-*,\
+          cert-*,\
+          clang-analyzer-*,\
+          concurrency-*,\
+          google-*,\
+          misc-*,\
+          modernize-*,\
+          performance-*,\
+          portability-*,\
+          readability-*"
