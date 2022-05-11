@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "545208e7_8acd4d8d",
+        "filename": ".clang-tidy",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-11T14:50:06Z",
+      "side": 1,
+      "message": "This is just a random list of turning things on. Will need to be cleaned up and made correct in a subsequent PR.",
+      "revId": "e84d991df7f83f20ef460fecc3ae05ba81a22f1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10763d0d_fea87b34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-11T14:50:06Z",
+      "side": 1,
+      "message": "ptal.",
+      "revId": "e84d991df7f83f20ef460fecc3ae05ba81a22f1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
