@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09586b11_a0a04522",
+        "filename": "src/dawn/tests/end2end/VertexStateTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-11T14:21:49Z",
+      "side": 1,
+      "message": "Thanks a lot for filing the spec issue. That would be ideal if we could change the spec. Otherwise we might have to do the stepMode thing. Adding a slot would be quite a lot of work to handle the deprecations and all, though I guess it may be workable??",
+      "parentUuid": "575e0579_af677991",
+      "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33684069_c456b6bd",
         "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
         "patchSetId": 1
