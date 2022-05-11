@@ -33,6 +33,24 @@
       "message": "LGTM, but is it not possible to make kUnusedFormat constexpr? (I had trouble trying to do that, so maybe not.)",
       "revId": "c46e8d51694c4f79c10f4bcd942a3f33bc72d4f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1d34f6a_c561a7d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-11T20:41:59Z",
+      "side": 1,
+      "message": "Doesn\u0027t making it `constexpr` mean that the `kUnusedFormat` will be `const`? In which case, I\u0027ll have to cast off the const to do the assigment to `Format\u0026`?\n\n(I have not spent a lot of time looking into constexpr so I just maybe wrong here. bclayton@ any insight?)",
+      "parentUuid": "30b8158b_851b08d7",
+      "revId": "c46e8d51694c4f79c10f4bcd942a3f33bc72d4f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
