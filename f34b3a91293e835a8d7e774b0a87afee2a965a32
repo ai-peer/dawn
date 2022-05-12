@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a87b0de_96a5f8e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-12T01:44:11Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "f34b3a91293e835a8d7e774b0a87afee2a965a32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0fdc677_7e83e355",
+        "filename": "src/dawn/native/Format.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-12T01:44:11Z",
+      "side": 1,
+      "message": "This will probably upset `chromium-style` again with the `\u003d default` in the headers. But, that\u0027s probably fine.",
+      "revId": "f34b3a91293e835a8d7e774b0a87afee2a965a32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
