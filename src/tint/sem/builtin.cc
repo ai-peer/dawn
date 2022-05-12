@@ -83,6 +83,10 @@ bool IsAtomicBuiltin(BuiltinType i) {
            i == sem::BuiltinType::kAtomicCompareExchangeWeak;
 }
 
+bool IsDP4aBuiltin(BuiltinType i) {
+    return i == sem::BuiltinType::kDot4I8Packed || i == sem::BuiltinType::kDot4U8Packed;
+}
+
 Builtin::Builtin(BuiltinType type,
                  const sem::Type* return_type,
                  std::vector<Parameter*> parameters,
@@ -133,6 +137,10 @@ bool Builtin::IsBarrier() const {
 
 bool Builtin::IsAtomic() const {
     return IsAtomicBuiltin(type_);
+}
+
+bool Builtin::IsDP4a() const {
+    return IsDP4aBuiltin(type_);
 }
 
 bool Builtin::HasSideEffects() const {
