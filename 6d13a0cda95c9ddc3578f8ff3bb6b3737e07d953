@@ -22,6 +22,30 @@
       },
       "revId": "6d13a0cda95c9ddc3578f8ff3bb6b3737e07d953",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46ae1482_66569d93",
+        "filename": "src/tint/number.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-12T23:05:08Z",
+      "side": 1,
+      "message": "Done - I think we only need to do this for Clang?",
+      "parentUuid": "ace5f37d_b8a160b7",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 29
+      },
+      "revId": "6d13a0cda95c9ddc3578f8ff3bb6b3737e07d953",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
