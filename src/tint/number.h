@@ -134,6 +134,12 @@ using f16 = Number<detail::NumberKindF16>;
 
 namespace tint::number_suffixes {
 
+// Clang doesn't accept the leading underscores at the moment (see crbug.com/tint/1535).
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+#endif
+
 /// Literal suffix for abstract integer literals
 inline AInt operator"" _a(unsigned long long int value) {  // NOLINT
     return AInt(static_cast<int64_t>(value));
@@ -173,6 +179,10 @@ inline f16 operator"" _h(long double value) {  // NOLINT
 inline f16 operator"" _h(unsigned long long int value) {  // NOLINT
     return f16(static_cast<double>(value));
 }
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif
 
 }  // namespace tint::number_suffixes
 
