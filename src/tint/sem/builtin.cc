@@ -151,7 +151,7 @@ ast::Enable::ExtensionKind Builtin::RequiredExtension() const {
         case sem::BuiltinType::kDot4U8Packed:
             return ast::Enable::ExtensionKind::kChromiumExperimentalDP4a;
         default:
-            return ast::Enable::ExtensionKind::kNotAnExtension;
+            return ast::Enable::ExtensionKind::kNoExtension;
     }
 }
 
