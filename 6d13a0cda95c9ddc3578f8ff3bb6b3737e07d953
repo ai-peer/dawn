@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace5f37d_b8a160b7",
+        "filename": "src/tint/number.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-12T20:26:01Z",
+      "side": 1,
+      "message": "Going to need to wrap this in:\n\n```\n#if defined(__clang__) || defined(__GNUC__)\n```\n\nor something to keep MSVC happy.\n\nPredefined macros: https://blog.kowalczyk.info/article/j/guide-to-predefined-macros-in-c-compilers-gcc-clang-msvc-etc..html",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 29
+      },
+      "revId": "6d13a0cda95c9ddc3578f8ff3bb6b3737e07d953",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
