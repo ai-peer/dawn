@@ -104,6 +104,24 @@
       "parentUuid": "b7f8ac7c_f7a0e294",
       "revId": "c46e8d51694c4f79c10f4bcd942a3f33bc72d4f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecfc0a15_1faa93b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-12T20:41:01Z",
+      "side": 1,
+      "message": "Kai, I\u0027m fine either way, if you prefer your constexpr path I can close this.",
+      "parentUuid": "fb3161a6_12e26625",
+      "revId": "c46e8d51694c4f79c10f4bcd942a3f33bc72d4f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
