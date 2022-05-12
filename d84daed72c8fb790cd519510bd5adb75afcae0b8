@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cec4c9c_82f567b3",
+        "filename": "src/dawn/native/EncodingContext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-12T23:38:06Z",
+      "side": 0,
+      "message": "Hmm slight concern about removing this state. So since the EncodingContext isn\u0027t a full on ApiObjectBase, there is no way to guarantee that it\u0027s Destroy isn\u0027t called multiple times. Right now, it is, and that is because EncodingContext is always owned by an ApiObject (which destroys the EncodingContext in the ApiObject::DestroyImpl thereby making sure it only happens once.)\n\nIf we don\u0027t keep the state, then we are sort of hiding this fact. Maybe it is fine though since I think nothing happens if we call destroy again on it? But maybe worthwhile to double check that assumption and at least leave a comment in case?",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 28
+      },
+      "revId": "d84daed72c8fb790cd519510bd5adb75afcae0b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
