@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "335ce3e6_5096ddca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-12T00:32:37Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "793f642f8e0a1f488e543b51629495962aac90ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74395d29_25a7bab8",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-12T00:32:37Z",
+      "side": 1,
+      "message": "couldn\u0027t we do this check inside TryEncode?",
+      "revId": "793f642f8e0a1f488e543b51629495962aac90ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f07339e6_2cd248d1",
+        "filename": "src/dawn/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-12T00:32:37Z",
+      "side": 1,
+      "message": "nit: lowercase",
+      "range": {
+        "startLine": 374,
+        "startChar": 26,
+        "endLine": 374,
+        "endChar": 47
+      },
+      "revId": "793f642f8e0a1f488e543b51629495962aac90ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
