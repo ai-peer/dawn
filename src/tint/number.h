@@ -88,6 +88,10 @@ using f32 = Number<float>;
 
 namespace tint::number_suffixes {
 
+// Clang doesn't accept the leading underscores at the moment (see crbug.com/tint/1535).
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+
 /// Literal suffix for abstract integer literals
 inline AInt operator"" _a(unsigned long long int value) {  // NOLINT
     return AInt(static_cast<int64_t>(value));
@@ -117,6 +121,8 @@ inline f32 operator"" _f(long double value) {  // NOLINT
 inline f32 operator"" _f(unsigned long long int value) {  // NOLINT
     return f32(static_cast<double>(value));
 }
+
+#pragma clang diagnostic pop
 
 }  // namespace tint::number_suffixes
 
