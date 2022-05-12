@@ -22,6 +22,30 @@
       },
       "revId": "d84daed72c8fb790cd519510bd5adb75afcae0b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dd1f123_bbb2d302",
+        "filename": "src/dawn/native/EncodingContext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-12T23:44:39Z",
+      "side": 0,
+      "message": "good point Loko - actually right now, do we potentially have a leak on device lost?\n\nDevice is lost, then EncodingContext::Destroy() is called, and we never call FreeCommands?\n\nThat could be reason to keep mDestroyed around and just initialize it correctly in the EncodingContext constructor.",
+      "parentUuid": "6cec4c9c_82f567b3",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 28
+      },
+      "revId": "d84daed72c8fb790cd519510bd5adb75afcae0b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
