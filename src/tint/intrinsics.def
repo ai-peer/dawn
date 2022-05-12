@@ -66,6 +66,7 @@ enum texel_format {
 
 // https://gpuweb.github.io/gpuweb/wgsl/#plain-types-section
 type bool
+type f16
 type f32
 type i32
 type u32
