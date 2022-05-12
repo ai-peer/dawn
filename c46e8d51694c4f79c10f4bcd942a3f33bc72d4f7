@@ -86,6 +86,24 @@
       "message": "LGTM too",
       "revId": "c46e8d51694c4f79c10f4bcd942a3f33bc72d4f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb3161a6_12e26625",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-12T08:59:30Z",
+      "side": 1,
+      "message": "It should be possible to make the static disappear with a constexpr default constructor. Either approach sounds good.",
+      "parentUuid": "b7f8ac7c_f7a0e294",
+      "revId": "c46e8d51694c4f79c10f4bcd942a3f33bc72d4f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
