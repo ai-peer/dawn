@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54aeecdb_0998f295",
+        "filename": "src/dawn/native/EncodingContext.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-12T18:22:47Z",
+      "side": 1,
+      "message": "is this still needed now?\n\nNote that the error messages here change slightly - I think it is ok though",
+      "range": {
+        "startLine": 87,
+        "startChar": 12,
+        "endLine": 89,
+        "endChar": 19
+      },
+      "revId": "429d1987f35a4ab4b2904855b2d1c9771e16d169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
