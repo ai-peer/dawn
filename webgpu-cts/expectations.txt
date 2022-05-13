@@ -96,17 +96,13 @@ crbug.com/dawn/1388 [ win ] webgpu:api,operation,resource_init,texture_zero:unin
 # Unexpected failures on mac.
 # KEEP
 ################################################################################
-crbug.com/dawn/1389 [ mac ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToBuffer";format="depth16unorm" [ Failure ]
-crbug.com/dawn/1389 [ mac ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToBuffer";format="depth32float-stencil8" [ Failure ]
-crbug.com/dawn/1389 [ mac ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToBuffer";format="stencil8" [ Failure ]
-crbug.com/dawn/1389 [ mac ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToTexture";format="depth16unorm" [ Failure ]
-crbug.com/dawn/1389 [ mac ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToTexture";format="depth32float-stencil8" [ Failure ]
-crbug.com/dawn/1389 [ mac ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToTexture";format="stencil8" [ Failure ]
-crbug.com/dawn/1389 [ mac ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="DepthTest";format="depth16unorm" [ Failure ]
-crbug.com/dawn/1389 [ mac ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="StencilTest";format="depth24plus-stencil8" [ Failure ]
-crbug.com/dawn/1389 [ mac ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="StencilTest";format="depth24unorm-stencil8" [ Failure ]
-crbug.com/dawn/1389 [ mac ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="StencilTest";format="depth32float-stencil8" [ Failure ]
-crbug.com/dawn/1389 [ mac ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="StencilTest";format="stencil8" [ Failure ]
+crbug.com/dawn/1389 [ mac intel ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToBuffer";format="depth16unorm" [ Failure ]
+crbug.com/dawn/1389 [ mac intel ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToBuffer";format="depth32float-stencil8" [ Failure ]
+crbug.com/dawn/1389 [ mac intel ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToBuffer";format="stencil8" [ Failure ]
+crbug.com/dawn/1389 [ mac intel ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToTexture";format="depth16unorm" [ Failure ]
+crbug.com/dawn/1389 [ mac intel ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToTexture";format="stencil8" [ Failure ]
+crbug.com/dawn/1389 [ mac intel ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="DepthTest";format="depth16unorm" [ Failure ]
+crbug.com/dawn/1389 [ mac intel ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="StencilTest";format="stencil8" [ Failure ]
 
 ################################################################################
 # webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero
