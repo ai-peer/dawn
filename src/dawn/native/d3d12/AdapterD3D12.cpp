@@ -140,6 +140,20 @@ MaybeError Adapter::InitializeSupportedFeaturesImpl() {
     return {};
 }
 
+ResultOrError<bool> Adapter::SupportsExperimentalDP4a() {
+    if (GetBackend()->GetFunctions()->IsDXCAvailable()) {
+        uint64_t dxcVersion = 0;
+        DAWN_TRY_ASSIGN(dxcVersion, GetBackend()->GetDXCompilerVersion());
+        constexpr uint64_t kLeastMajorVersionForDP4a = 1;
+        constexpr uint64_t kLeastMinorVersionForDP4a = 4;
+        if (mDeviceInfo.supportsDP4a &&
+            dxcVersion >= ((kLeastMajorVersionForDP4a << 32) + kLeastMinorVersionForDP4a)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
     D3D12_FEATURE_DATA_D3D12_OPTIONS featureData = {};
 

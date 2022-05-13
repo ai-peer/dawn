@@ -399,6 +399,8 @@ class DeviceBase : public RefCounted {
     // Incrememt mLastSubmittedSerial when we submit the next serial
     void IncrementLastSubmittedCommandSerial();
 
+    void EnableWGSLExtension(const char* wgslExtensionName);
+
   private:
     virtual ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) = 0;

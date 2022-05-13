@@ -39,6 +39,8 @@ class Adapter : public AdapterBase {
     ComPtr<ID3D12Device> GetDevice() const;
     const gpu_info::D3DDriverVersion& GetDriverVersion() const;
 
+    ResultOrError<bool> SupportsExperimentalDP4a();
+
   private:
     ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(const DeviceDescriptor* descriptor) override;
     MaybeError ResetInternalDeviceForTestingImpl() override;

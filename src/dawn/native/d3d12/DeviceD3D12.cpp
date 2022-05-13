@@ -222,6 +222,20 @@ MaybeError Device::ApplyUseDxcToggle() {
         ForceSetToggle(Toggle::UseDXC, true);
     }
 
+    if (IsToggleEnabled(Toggle::EnableChromiumExperimentalDP4a)) {
+        bool supportsExperimentalDP4a = false;
+        DAWN_TRY_ASSIGN(supportsExperimentalDP4a,
+                        ToBackend(GetAdapter())->SupportsExperimentalDP4a());
+        if (supportsExperimentalDP4a) {
+            // Currently we can only use DXC to compile HLSL shaders using DP4a functions.
+            ForceSetToggle(Toggle::UseDXC, true);
+            EnableWGSLExtension("chromium_experimental_dp4a");
+        } else {
+            // Clear the toggle as the request failed.
+            ForceSetToggle(Toggle::EnableChromiumExperimentalDP4a, false);
+        }
+    }
+
     if (IsToggleEnabled(Toggle::UseDXC)) {
         DAWN_TRY(ToBackend(GetAdapter())->GetBackend()->EnsureDxcCompiler());
         DAWN_TRY(ToBackend(GetAdapter())->GetBackend()->EnsureDxcLibrary());

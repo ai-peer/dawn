@@ -268,6 +268,9 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "Enables usage of the blob cache (backed by the platform cache if set/passed). Necessary for "
       "any persistent caching capabilities, i.e. pipeline caching.",
       "https://crbug.com/dawn/549"}},
+    {Toggle::EnableChromiumExperimentalDP4a,
+     {"enable_chromium_experimental_dp4a",
+      "Enables the experimental DP4a built-in functions in WGSL.", "https://crbug.com/tint/1497"}},
     // Comment to separate the }} so it is clearer what to copy-paste to add a toggle.
 }};
 }  // anonymous namespace

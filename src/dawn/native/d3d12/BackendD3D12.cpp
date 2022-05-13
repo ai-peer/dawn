@@ -141,6 +141,21 @@ ComPtr<IDxcValidator> Backend::GetDxcValidator() const {
     return mDxcValidator;
 }
 
+ResultOrError<uint64_t> Backend::GetDXCompilerVersion() {
+    DAWN_TRY(EnsureDxcValidator());
+
+    ComPtr<IDxcVersionInfo> versionInfo;
+    DAWN_TRY(CheckHRESULT(mDxcValidator.As(&versionInfo),
+                          "D3D12 QueryInterface IDxcValidator to IDxcVersionInfo"));
+
+    uint32_t compilerMajor, compilerMinor;
+    DAWN_TRY(CheckHRESULT(versionInfo->GetVersion(&compilerMajor, &compilerMinor),
+                          "IDxcVersionInfo::GetVersion"));
+
+    // Pack both into a single version number.
+    return (uint64_t(compilerMajor) << uint64_t(32)) + compilerMinor;
+}
+
 const PlatformFunctions* Backend::GetFunctions() const {
     return mFunctions.get();
 }

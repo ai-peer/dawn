@@ -1234,8 +1234,14 @@ bool DeviceBase::IsFeatureEnabled(Feature feature) const {
 
 void DeviceBase::SetWGSLExtensionAllowList() {
     // Set the WGSL extensions allow list based on device's enabled features and other
-    // propority. For example:
+    // proporities. For example:
     //     mWGSLExtensionAllowList.insert("InternalExtensionForTesting");
+    // Note that as this function is called in the constructor of DeviceBase, we can enable more
+    // WGSL extensions with EnableWGSLExtension() in the initialization of backend Device objects.
+}
+
+void DeviceBase::EnableWGSLExtension(const char* wgslExtensionName) {
+    mWGSLExtensionAllowList.insert(wgslExtensionName);
 }
 
 WGSLExtensionSet DeviceBase::GetWGSLExtensionAllowList() const {
