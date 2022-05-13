@@ -936,8 +936,16 @@ std::pair<wgpu::Device, WGPUDevice> DawnTestBase::CreateDeviceImpl(std::string i
     mBackendAdapter.GetLimits(reinterpret_cast<WGPUSupportedLimits*>(&supportedLimits));
     wgpu::RequiredLimits requiredLimits = GetRequiredLimits(supportedLimits);
 
-    // Disabled disallowing unsafe APIs so we can test them.
-    forceDisabledToggles.push_back("disallow_unsafe_apis");
+    // Disabled disallowing unsafe APIs so we can test them unless the toggle "disallow_unsafe_apis"
+    // is explicitly set.
+    bool ForceEnableDisallowUnsafeAPIs =
+        std::find_if(forceEnabledToggles.begin(), forceEnabledToggles.end(),
+                     [](const char* toggle) {
+                         return strcmp(toggle, "disallow_unsafe_apis") == 0;
+                     }) != forceEnabledToggles.cend();
+    if (!ForceEnableDisallowUnsafeAPIs) {
+        forceDisabledToggles.push_back("disallow_unsafe_apis");
+    }
 
     for (const std::string& toggle : gTestEnv->GetEnabledToggles()) {
         const dawn::native::ToggleInfo* info =
