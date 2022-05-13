@@ -46,6 +46,30 @@
       },
       "revId": "471f33109685acf9cb8cf74553431f612ec573b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92fafbb2_4eccb6d9",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-13T16:02:57Z",
+      "side": 1,
+      "message": "I think this is the only place where we don\u0027t pass compilation messages\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Device.cpp;l\u003d279;drc\u003db772e1991d8d03a455905b6ec524981ce5c7ac66;bpv\u003d1;bpt\u003d1\n\nwhich is internal and should really never fail",
+      "parentUuid": "ca69f740_d1ba4428",
+      "range": {
+        "startLine": 384,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 73
+      },
+      "revId": "471f33109685acf9cb8cf74553431f612ec573b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
