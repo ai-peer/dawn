@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa4240d3_065d8975",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1290,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T09:23:23Z",
+      "side": 1,
+      "message": "Unchanged by this CL, but it is a bit odd that a `Traverse` function is actually updating stuff. At the very least, we should document this.",
+      "range": {
+        "startLine": 1285,
+        "startChar": 12,
+        "endLine": 1290,
+        "endChar": 13
+      },
+      "revId": "4056e2454e6c3459b4d963a6ac0e6c7203339519",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
