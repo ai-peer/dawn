@@ -182,6 +182,8 @@ DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor)
     if (togglesDesc != nullptr) {
         ApplyToggleOverrides(togglesDesc);
     }
+
+    SetDefaultToggles();
     ApplyFeatures(descriptor);
 
     DawnCacheDeviceDescriptor defaultCacheDesc = {};
@@ -198,7 +200,6 @@ DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor)
     }
 
     mFormatTable = BuildFormatTable(this);
-    SetDefaultToggles();
 
     SetWGSLExtensionAllowList();
 
@@ -1234,13 +1235,28 @@ void DeviceBase::ApplyFeatures(const DeviceDescriptor* deviceDescriptor) {
 }
 
 bool DeviceBase::IsFeatureEnabled(Feature feature) const {
-    return mEnabledFeatures.IsEnabled(feature);
+    if (mEnabledFeatures.IsEnabled(feature)) {
+        // ChromiumExperimentalDp4a is an experimental feature which can only be enabled with toggle
+        // "use_dxc" and without toggle "disallow_unsafe_apis".
+        if (feature == Feature::ChromiumExperimentalDp4a) {
+            return IsToggleEnabled(Toggle::UseDXC) && !IsToggleEnabled(Toggle::DisallowUnsafeAPIs);
+        }
+        if (feature == Feature::ShaderFloat16) {
+            // Currently we can only use DXC to compile HLSL shaders using float16.
+            return IsToggleEnabled(Toggle::UseDXC);
+        }
+        return true;
+    }
+    return false;
 }
 
 void DeviceBase::SetWGSLExtensionAllowList() {
     // Set the WGSL extensions allow list based on device's enabled features and other
     // propority. For example:
     //     mWGSLExtensionAllowList.insert("InternalExtensionForTesting");
+    if (IsFeatureEnabled(Feature::ChromiumExperimentalDp4a)) {
+        mWGSLExtensionAllowList.insert("chromium_experimental_dp4a");
+    }
 }
 
 WGSLExtensionSet DeviceBase::GetWGSLExtensionAllowList() const {
@@ -1296,10 +1312,14 @@ bool DeviceBase::APIGetLimits(SupportedLimits* limits) const {
     return true;
 }
 
+// Note that we should not use this function to query the features which can only be enabled behind
+// toggles (use IsFeatureEnabled() instead).
 bool DeviceBase::APIHasFeature(wgpu::FeatureName feature) const {
     return mEnabledFeatures.IsEnabled(feature);
 }
 
+// Note that we should not use this function to query the features which can only be enabled behind
+// toggles (use IsFeatureEnabled() instead).
 size_t DeviceBase::APIEnumerateFeatures(wgpu::FeatureName* features) const {
     return mEnabledFeatures.EnumerateFeatures(features);
 }
