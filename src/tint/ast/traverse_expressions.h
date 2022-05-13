@@ -54,30 +54,53 @@ enum class TraverseOrder {
 /// @param root the root expression node
 /// @param diags the diagnostics used for error messages
 /// @param callback the callback function. Must be of the signature:
-///        `TraverseAction(const T*)` where T is an ast::Expression type.
+///        `TraverseAction(const T* expr)` or `TraverseAction(const T* expr, size_t depth)` where T
+///        is an ast::Expression type.
 /// @return true on success, false on error
 template <TraverseOrder ORDER = TraverseOrder::LeftToRight, typename CALLBACK>
 bool TraverseExpressions(const ast::Expression* root, diag::List& diags, CALLBACK&& callback) {
     using EXPR_TYPE = std::remove_pointer_t<traits::ParameterType<CALLBACK, 0>>;
-    std::vector<const ast::Expression*> to_visit{root};
+    constexpr bool HAS_DEPTH_ARG = traits::SignatureOfT<CALLBACK>::parameter_count == 2;
 
-    auto push_pair = [&](const ast::Expression* left, const ast::Expression* right) {
-        if (ORDER == TraverseOrder::LeftToRight) {
-            to_visit.push_back(right);
-            to_visit.push_back(left);
-        } else {
-            to_visit.push_back(left);
-            to_visit.push_back(right);
+    std::vector<const ast::Expression*> to_visit{root};
+    std::unordered_map<const ast::Expression*, size_t> depth;
+
+    if constexpr (HAS_DEPTH_ARG) {
+        depth[root] = 0;
+    }
+
+    auto set_depth = [&](const ast::Expression* parent, const ast::Expression* expr) {
+        if constexpr (HAS_DEPTH_ARG) {
+            depth[expr] = depth[parent] + 1;
         }
     };
-    auto push_list = [&](const std::vector<const ast::Expression*>& exprs) {
+    auto push_single = [&](const ast::Expression* parent, const ast::Expression* expr) {
+        set_depth(parent, expr);
+        to_visit.emplace_back(expr);
+    };
+    auto push_pair = [&](const ast::Expression* parent, const ast::Expression* left,
+                         const ast::Expression* right) {
+        set_depth(parent, left);
+        set_depth(parent, right);
+        if (ORDER == TraverseOrder::LeftToRight) {
+            to_visit.emplace_back(right);
+            to_visit.emplace_back(left);
+        } else {
+            to_visit.emplace_back(left);
+            to_visit.emplace_back(right);
+        }
+    };
+    auto push_list = [&](const ast::Expression* parent,
+                         const std::vector<const ast::Expression*>& exprs) {
         if (ORDER == TraverseOrder::LeftToRight) {
             for (auto* expr : utils::Reverse(exprs)) {
-                to_visit.push_back(expr);
+                set_depth(parent, expr);
+                to_visit.emplace_back(expr);
             }
         } else {
             for (auto* expr : exprs) {
-                to_visit.push_back(expr);
+                set_depth(parent, expr);
+                to_visit.emplace_back(expr);
             }
         }
     };
@@ -87,7 +110,14 @@ bool TraverseExpressions(const ast::Expression* root, diag::List& diags, CALLBAC
         to_visit.pop_back();
 
         if (auto* filtered = expr->As<EXPR_TYPE>()) {
-            switch (callback(filtered)) {
+            TraverseAction result;
+            if constexpr (HAS_DEPTH_ARG) {
+                result = callback(filtered, depth[filtered]);
+            } else {
+                result = callback(filtered);
+            }
+
+            switch (result) {
                 case TraverseAction::Stop:
                     return true;
                 case TraverseAction::Skip:
@@ -100,32 +130,32 @@ bool TraverseExpressions(const ast::Expression* root, diag::List& diags, CALLBAC
         bool ok = Switch(
             expr,
             [&](const IndexAccessorExpression* idx) {
-                push_pair(idx->object, idx->index);
+                push_pair(idx, idx->object, idx->index);
                 return true;
             },
             [&](const BinaryExpression* bin_op) {
-                push_pair(bin_op->lhs, bin_op->rhs);
+                push_pair(bin_op, bin_op->lhs, bin_op->rhs);
                 return true;
             },
             [&](const BitcastExpression* bitcast) {
-                to_visit.push_back(bitcast->expr);
+                push_single(bitcast, bitcast->expr);
                 return true;
             },
             [&](const CallExpression* call) {
                 // TODO(crbug.com/tint/1257): Resolver breaks if we actually include
-                // the function name in the traversal. to_visit.push_back(call->func);
-                push_list(call->args);
+                // the function name in the traversal. push_single(call->func);
+                push_list(call, call->args);
                 return true;
             },
             [&](const MemberAccessorExpression* member) {
                 // TODO(crbug.com/tint/1257): Resolver breaks if we actually include
                 // the member name in the traversal. push_pair(member->structure,
                 // member->member);
-                to_visit.push_back(member->structure);
+                push_single(member, member->structure);
                 return true;
             },
             [&](const UnaryOpExpression* unary) {
-                to_visit.push_back(unary->expr);
+                push_single(unary, unary->expr);
                 return true;
             },
             [&](Default) {
