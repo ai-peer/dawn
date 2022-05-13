@@ -620,6 +620,7 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
     NSRef<NSArray<id<MTLDevice>>> devices = AcquireNSRef(MTLCopyAllDevices());
 
     for (id<MTLDevice> device in devices.Get()) {
+        if (![device hasUnifiedMemory]) {continue;}
         Ref<Adapter> adapter = AcquireRef(new Adapter(GetInstance(), device));
         if (!GetInstance()->ConsumedError(adapter->Initialize())) {
             adapters.push_back(std::move(adapter));
