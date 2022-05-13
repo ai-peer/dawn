@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37f021f0_92f1b869",
+        "filename": "tools/src/cmd/intrinsic-gen/resolver/resolve.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-13T14:09:51Z",
+      "side": 0,
+      "message": "Why were these removed?",
+      "range": {
+        "startLine": 526,
+        "startChar": 0,
+        "endLine": 527,
+        "endChar": 22
+      },
+      "revId": "572ac463c1c7dcf073d30c78264b63114a8c5281",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
