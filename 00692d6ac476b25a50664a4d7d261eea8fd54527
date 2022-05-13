@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "434b4cb1_7284a5b9",
+        "filename": "src/tint/number.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-05-13T10:18:58Z",
+      "side": 1,
+      "message": "Done, thanks",
+      "parentUuid": "bac9075c_3adcb8d3",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 2
+      },
+      "revId": "00692d6ac476b25a50664a4d7d261eea8fd54527",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ba01044_34a559f0",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-13T09:12:46Z",
       "side": 1,
       "message": "stored",
+      "range": {
+        "startLine": 38,
+        "startChar": 50,
+        "endLine": 38,
+        "endChar": 58
+      },
+      "revId": "00692d6ac476b25a50664a4d7d261eea8fd54527",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6635f77_4b391b8d",
+        "filename": "src/tint/sem/constant.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-05-13T10:18:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ba01044_34a559f0",
       "range": {
         "startLine": 38,
         "startChar": 50,
