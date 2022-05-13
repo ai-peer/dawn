@@ -122,6 +122,24 @@
       "parentUuid": "fb3161a6_12e26625",
       "revId": "c46e8d51694c4f79c10f4bcd942a3f33bc72d4f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c4d039e_cbeeb625",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-05-13T17:54:26Z",
+      "side": 1,
+      "message": "I personally prefer it because it seems more straightforward to me than a static local. I\u0027ll figure out how to make that CL actually apply (currently it depends on your reverted patch).",
+      "parentUuid": "ecfc0a15_1faa93b4",
+      "revId": "c46e8d51694c4f79c10f4bcd942a3f33bc72d4f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
