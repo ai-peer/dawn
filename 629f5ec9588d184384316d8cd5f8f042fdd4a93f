@@ -50,6 +50,24 @@
       "message": "nit: do a ASSERT(largestMipBytesPerRow \u003e 64u)?",
       "revId": "629f5ec9588d184384316d8cd5f8f042fdd4a93f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4312b1ce_983a3d3b",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 942,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-13T18:40:05Z",
+      "side": 1,
+      "message": "That\u0027s not actually necessary. I think someone saw the error message from the Metal debug device and thought it said that in general the largestMipBytesPerRow must be bigger than 64, when it said: for this compressed texture, you used virtualSize / 4 * 16 \u003d 48 when you should have used physicalSize / 4 * 16 which is 64.",
+      "parentUuid": "57a75463_12dacb39",
+      "revId": "629f5ec9588d184384316d8cd5f8f042fdd4a93f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
