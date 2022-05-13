@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80288bff_f4c6458f",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1416,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T14:44:02Z",
+      "side": 1,
+      "message": "As `ast::CallExpression` is used for functions, builtins, type constructors and type conversions, could any of the non-function kinds end up here? If so, do the messages make sense?",
+      "range": {
+        "startLine": 1416,
+        "startChar": 29,
+        "endLine": 1416,
+        "endChar": 36
+      },
+      "revId": "d5497366b118d7daa18b0bad897edda880a1c535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9af9bc67_d8a3d1b6",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T14:44:02Z",
+      "side": 1,
+      "message": "Given the message text, perhaps the condition expression would be better to highlight?",
+      "range": {
+        "startLine": 403,
+        "startChar": 6,
+        "endLine": 403,
+        "endChar": 13
+      },
+      "revId": "d5497366b118d7daa18b0bad897edda880a1c535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
