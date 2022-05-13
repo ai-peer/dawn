@@ -22,6 +22,30 @@
       },
       "revId": "4056e2454e6c3459b4d963a6ac0e6c7203339519",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f44df51_1d7e8ce4",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1290,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-13T14:37:10Z",
+      "side": 1,
+      "message": "Mentioned this in the function description.",
+      "parentUuid": "fa4240d3_065d8975",
+      "range": {
+        "startLine": 1285,
+        "startChar": 12,
+        "endLine": 1290,
+        "endChar": 13
+      },
+      "revId": "4056e2454e6c3459b4d963a6ac0e6c7203339519",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
