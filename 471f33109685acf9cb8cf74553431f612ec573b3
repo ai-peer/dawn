@@ -22,6 +22,30 @@
       },
       "revId": "471f33109685acf9cb8cf74553431f612ec573b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca69f740_d1ba4428",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-13T15:06:48Z",
+      "side": 1,
+      "message": "Yeah, I was unsure whether we could just remove this or not, given that the Dawn native path doesn\u0027t use `outMessages` (I think). Maybe this only needs to be done if `outMessages \u003d\u003d nullptr`? I\u0027ll land this because it fixes my Halide use case, and then we can figure out what else needs to change.",
+      "parentUuid": "9f933ecc_eca52ae4",
+      "range": {
+        "startLine": 384,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 73
+      },
+      "revId": "471f33109685acf9cb8cf74553431f612ec573b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
