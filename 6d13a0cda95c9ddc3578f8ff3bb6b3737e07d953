@@ -46,6 +46,30 @@
       },
       "revId": "6d13a0cda95c9ddc3578f8ff3bb6b3737e07d953",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f8242ce_dab6db02",
+        "filename": "src/tint/number.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T08:30:06Z",
+      "side": 1,
+      "message": "The associated bug says: `Build dawn using GCC or (Apple) Clang`",
+      "parentUuid": "46ae1482_66569d93",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 29
+      },
+      "revId": "6d13a0cda95c9ddc3578f8ff3bb6b3737e07d953",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
