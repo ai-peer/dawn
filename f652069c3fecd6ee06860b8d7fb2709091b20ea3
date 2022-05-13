@@ -170,6 +170,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3c4d71f_a8689349",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1253,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T20:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edad210f_7a54b9a8",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93d3b776_5f116da5",
@@ -252,6 +270,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9de258b9_9852ef38",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1298,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T20:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "130fe6e9_e2e1672d",
+      "range": {
+        "startLine": 1298,
+        "startChar": 13,
+        "endLine": 1298,
+        "endChar": 17
+      },
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "250707fd_15c25943",
@@ -283,6 +325,24 @@
       "side": 1,
       "message": "It\u0027s a bit hand-wavey and the weights were picked by experimentation.\nNone of the scoring affects the behaviour, except for the order in which overloads are printed in diagnostic messages.\nI can add comments.",
       "parentUuid": "250707fd_15c25943",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9277375a_91e9d651",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1300,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T20:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34970447_fcf6f7c4",
       "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
