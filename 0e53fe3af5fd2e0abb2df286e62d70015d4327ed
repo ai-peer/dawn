@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "750cac0f_f9b6767b",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T18:56:48Z",
+      "side": 1,
+      "message": "https://en.cppreference.com/w/cpp/types/numeric_limits/max returns the max as the template type",
+      "parentUuid": "f6e96e75_bdcf4f88",
+      "range": {
+        "startLine": 1121,
+        "startChar": 8,
+        "endLine": 1122,
+        "endChar": 67
+      },
+      "revId": "0e53fe3af5fd2e0abb2df286e62d70015d4327ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d3eb0424_fc6d6aa7",
         "filename": "src/tint/resolver/intrinsic_table_test.cc",
         "patchSetId": 2
