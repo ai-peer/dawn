@@ -71,6 +71,12 @@ TEST_F(FeatureTests, GetEnabledFeatures) {
     dawn::native::Adapter adapter(&mAdapterBase);
     for (size_t i = 0; i < kTotalFeaturesCount; ++i) {
         dawn::native::Feature feature = static_cast<dawn::native::Feature>(i);
+        // ChromiumExperimentalDp4a is an experimental feature which can only be enabled without
+        // toggle "disallow_unsafe_apis".
+        if (feature == dawn::native::Feature::ChromiumExperimentalDp4a) {
+            continue;
+        }
+
         wgpu::FeatureName featureName = FeatureEnumToAPIFeature(feature);
 
         wgpu::DeviceDescriptor deviceDescriptor;

@@ -181,6 +181,8 @@ DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor)
     if (togglesDesc != nullptr) {
         ApplyToggleOverrides(togglesDesc);
     }
+
+    SetDefaultToggles();
     ApplyFeatures(descriptor);
 
     DawnCacheDeviceDescriptor defaultCacheDesc = {};
@@ -197,7 +199,6 @@ DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor)
     }
 
     mFormatTable = BuildFormatTable(this);
-    SetDefaultToggles();
 
     SetWGSLExtensionAllowList();
 
@@ -1224,6 +1225,12 @@ void DeviceBase::ApplyFeatures(const DeviceDescriptor* deviceDescriptor) {
         {deviceDescriptor->requiredFeatures, deviceDescriptor->requiredFeaturesCount}));
 
     for (uint32_t i = 0; i < deviceDescriptor->requiredFeaturesCount; ++i) {
+        // ChromiumExperimentalDp4a is an experimental feature which can only be enabled without
+        // toggle "disallow_unsafe_apis".
+        if (deviceDescriptor->requiredFeatures[i] == wgpu::FeatureName::ChromiumExperimentalDp4a &&
+            IsToggleEnabled(Toggle::DisallowUnsafeAPIs)) {
+            continue;
+        }
         mEnabledFeatures.EnableFeature(deviceDescriptor->requiredFeatures[i]);
     }
 }
@@ -1236,6 +1243,9 @@ void DeviceBase::SetWGSLExtensionAllowList() {
     // Set the WGSL extensions allow list based on device's enabled features and other
     // propority. For example:
     //     mWGSLExtensionAllowList.insert("InternalExtensionForTesting");
+    if (IsFeatureEnabled(Feature::ChromiumExperimentalDp4a)) {
+        mWGSLExtensionAllowList.insert("chromium_experimental_dp4a");
+    }
 }
 
 WGSLExtensionSet DeviceBase::GetWGSLExtensionAllowList() const {

@@ -137,6 +137,17 @@ MaybeError Adapter::InitializeSupportedFeaturesImpl() {
     mSupportedFeatures.EnableFeature(Feature::Depth24UnormStencil8);
     mSupportedFeatures.EnableFeature(Feature::Depth32FloatStencil8);
 
+    if (GetBackend()->GetFunctions()->IsDXCAvailable()) {
+        uint64_t dxcVersion = 0;
+        DAWN_TRY_ASSIGN(dxcVersion, GetBackend()->GetDXCompilerVersion());
+        constexpr uint64_t kLeastMajorVersionForDP4a = 1;
+        constexpr uint64_t kLeastMinorVersionForDP4a = 4;
+        if (mDeviceInfo.supportsDP4a &&
+            dxcVersion >= ((kLeastMajorVersionForDP4a << 32) + kLeastMinorVersionForDP4a)) {
+            mSupportedFeatures.EnableFeature(Feature::ChromiumExperimentalDp4a);
+        }
+    }
+
     return {};
 }
 
