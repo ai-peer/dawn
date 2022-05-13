@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6e96e75_bdcf4f88",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-13T18:47:28Z",
+      "side": 1,
+      "message": "Just to be clear, both functions return `size_t`, so there should never be a compiler warning about this. Also, like I said, this actually obscures the fact that this won\u0027t do what you think on 32-bit platforms.",
+      "parentUuid": "9ce73eab_ae805b9e",
+      "range": {
+        "startLine": 1121,
+        "startChar": 8,
+        "endLine": 1122,
+        "endChar": 67
+      },
+      "revId": "0e53fe3af5fd2e0abb2df286e62d70015d4327ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d3eb0424_fc6d6aa7",
         "filename": "src/tint/resolver/intrinsic_table_test.cc",
         "patchSetId": 2
