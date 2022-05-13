@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b98bb25_2df3e7fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-13T11:54:09Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin,\n\nBesides the method I use in this PR (treat DP4a as a normal extension, and disable it without the toggle), I am wondering if I can just treat DP4a as a toggle (with the toggle and DP4a available on the platform I can always use DP4a, otherwise I can\u0027t). What do you think?",
+      "revId": "413fa821778b5bb78671843f1eefa0974064e358",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
