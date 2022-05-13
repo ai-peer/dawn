@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95a62398_390c34db",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1416,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-13T15:12:22Z",
+      "side": 1,
+      "message": "Type constructors and conversions can never directly cause non-uniform control flow, and if in the future a builtin did, the error message would make sense. Return values for all of these things will have a different node type.",
+      "parentUuid": "80288bff_f4c6458f",
+      "range": {
+        "startLine": 1416,
+        "startChar": 29,
+        "endLine": 1416,
+        "endChar": 36
+      },
+      "revId": "d5497366b118d7daa18b0bad897edda880a1c535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9af9bc67_d8a3d1b6",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-13T14:44:02Z",
       "side": 1,
       "message": "Given the message text, perhaps the condition expression would be better to highlight?",
+      "range": {
+        "startLine": 403,
+        "startChar": 6,
+        "endLine": 403,
+        "endChar": 13
+      },
+      "revId": "d5497366b118d7daa18b0bad897edda880a1c535",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42dd8285_fb3d9e1c",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-13T15:12:22Z",
+      "side": 1,
+      "message": "Maybe? Although right now the way we do source underlining for AST nodes means we\u0027d only underline the `\u003d\u003d` operator, which isn\u0027t really helpful? Also, the note below highlights the part of the condition expression that is non-uniform in most of these cases.",
+      "parentUuid": "9af9bc67_d8a3d1b6",
       "range": {
         "startLine": 403,
         "startChar": 6,
