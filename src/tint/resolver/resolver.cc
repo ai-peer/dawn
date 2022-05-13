@@ -1042,17 +1042,43 @@ sem::Expression* Resolver::Expression(const ast::Expression* root) {
         return nullptr;
     }
 
+    constexpr size_t kMaxExpressionDepth = 1024U;
+    auto add_expr_depth = [&, depth = size_t(0)](const ast::Expression* expr) mutable {
+        if (depth++ >= kMaxExpressionDepth) {
+            AddError("reached max expression depth of " + std::to_string(kMaxExpressionDepth),
+                     expr->source);
+            return false;
+        }
+        return true;
+    };
+
     for (auto* expr : utils::Reverse(sorted)) {
         auto* sem_expr = Switch(
             expr,
             [&](const ast::IndexAccessorExpression* array) -> sem::Expression* {
+                if (!add_expr_depth(array)) {
+                    return nullptr;
+                }
                 return IndexAccessor(array);
             },
-            [&](const ast::BinaryExpression* bin_op) -> sem::Expression* { return Binary(bin_op); },
+            [&](const ast::BinaryExpression* bin_op) -> sem::Expression* {
+                if (!add_expr_depth(bin_op)) {
+                    return nullptr;
+                }
+                return Binary(bin_op);
+            },
             [&](const ast::BitcastExpression* bitcast) -> sem::Expression* {
+                if (!add_expr_depth(bitcast)) {
+                    return nullptr;
+                }
                 return Bitcast(bitcast);
             },
-            [&](const ast::CallExpression* call) -> sem::Expression* { return Call(call); },
+            [&](const ast::CallExpression* call) -> sem::Expression* {
+                if (!add_expr_depth(call)) {
+                    return nullptr;
+                }
+                return Call(call);
+            },
             [&](const ast::IdentifierExpression* ident) -> sem::Expression* {
                 return Identifier(ident);
             },
@@ -1060,9 +1086,17 @@ sem::Expression* Resolver::Expression(const ast::Expression* root) {
                 return Literal(literal);
             },
             [&](const ast::MemberAccessorExpression* member) -> sem::Expression* {
+                if (!add_expr_depth(member)) {
+                    return nullptr;
+                }
                 return MemberAccessor(member);
             },
-            [&](const ast::UnaryOpExpression* unary) -> sem::Expression* { return UnaryOp(unary); },
+            [&](const ast::UnaryOpExpression* unary) -> sem::Expression* {
+                if (!add_expr_depth(unary)) {
+                    return nullptr;
+                }
+                return UnaryOp(unary);
+            },
             [&](const ast::PhonyExpression*) -> sem::Expression* {
                 return builder_->create<sem::Expression>(expr, builder_->create<sem::Void>(),
                                                          current_statement_, sem::Constant{},
