@@ -16,6 +16,23 @@
       "message": "Clean reland is patchset 1, so patchset 1-\u003e2 shows my diff.\n\nIs it possible to run chromium-style locally? There are a bunch of ways we might still be able to make it happy while solving this. Wondering if:\n- it actually wants a constructor/destructor now that the type is constexpr-constructible\n- it would want a constructor/destructor if Format was an aggregate type (I\u0027m not exactly sure whether it is now or not)\n- it would consider `\u003d default` OK if the constructor were constexpr",
       "revId": "ce67430c6512b53138d17a2ebbed8e2194c9d325",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "214245e4_92f5079b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-13T21:40:35Z",
+      "side": 1,
+      "message": "LGTM, but will we hav issues when chromium style checks that you define the constructor/destructor in the cpp file? Or is it ok because this one should be trivial/not-complex",
+      "revId": "ce67430c6512b53138d17a2ebbed8e2194c9d325",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
