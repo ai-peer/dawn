@@ -1,0 +1,169 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09f26867_201b67f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-13T17:33:49Z",
+      "side": 1,
+      "message": "This is dense stuff.  Great going!",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27b2cf75_b39b4501",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-13T17:33:49Z",
+      "side": 1,
+      "message": "Parameterization by T is not doing anything here.",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59721b56_04a2d21d",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-13T17:33:49Z",
+      "side": 1,
+      "message": "Incomplete comment.\n\nIn general the score should be a vector of ints, one for each parameter.\nThen you\u0027d need a comparator between those kinds of vectors.\n\nI *think* you\u0027re getting away with a single int because the current batch of builtins/exprs are monotonic in a certain sense, with respect to each other.\n\n\nAlso, is lower better than higher?",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c84ffc8d_4b840e33",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-13T17:33:49Z",
+      "side": 1,
+      "message": "Seems risky to have only 256 values.    For example, if we offered full flexibility for signed/unsigned on texture integral arguments it might get dicy?\nWhy not plain unsigned? or int",
+      "range": {
+        "startLine": 1237,
+        "startChar": 9,
+        "endLine": 1237,
+        "endChar": 16
+      },
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db20bbad_d78898d8",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1253,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-13T17:33:49Z",
+      "side": 1,
+      "message": "Should this also do\n     if (b matched \u0026\u0026 a not matched) { return false ; }",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93d3b776_5f116da5",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1256,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-13T17:33:49Z",
+      "side": 1,
+      "message": "I think this is the case, but higher score is better, right?",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3be4f5e3_3cf7253b",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1298,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-13T17:33:49Z",
+      "side": 1,
+      "message": "Is this \"weight\" instead of \"wait\" ?",
+      "range": {
+        "startLine": 1298,
+        "startChar": 13,
+        "endLine": 1298,
+        "endChar": 17
+      },
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "250707fd_15c25943",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1300,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-13T17:33:49Z",
+      "side": 1,
+      "message": "I\u0027m confused by the scoring system.\n\nI guess if there is a param count mismatch then the scores are not really  comparable anyway.  So negative makes sense?  Are you making it negative so that you try to surface the valid candidate that has the closest number of arguments?  Because you pick the max-score first?  \n\nWhen there *are* matches, then it seems you are prioritizing those with exact matches with this sore-per-matched-param being 2 and larger magnitude than the other valid ones.\n\n*And* if you have the right number of params, then the linearization like this is ok. \n\nPlease explain.",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68f64779_cd8f3607",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-13T17:33:49Z",
+      "side": 1,
+      "message": "FYI.  It\u0027s ok to ignore the result of a function call.\n\nhttps://gpuweb.github.io/gpuweb/wgsl/#function-call-statement\n\n\u003e Note: If the function returns a value, that value is ignored.",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
