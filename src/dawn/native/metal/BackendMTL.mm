@@ -153,22 +153,14 @@ MaybeError GetDevicePCIInfo(id<MTLDevice> device, PCIIDs* ids) {
     }
 }
 
-bool IsMetalSupported() {
-    // Metal was first introduced in macOS 10.11
-    // WebGPU is targeted at macOS 10.12+
-    // TODO(dawn:1181): Dawn native should allow non-conformant WebGPU on macOS 10.11
-    return IsMacOSVersionAtLeast(10, 12);
-}
 #elif defined(DAWN_PLATFORM_IOS)
+
 MaybeError GetDevicePCIInfo(id<MTLDevice> device, PCIIDs* ids) {
     DAWN_UNUSED(device);
     *ids = PCIIDs{0, 0};
     return {};
 }
 
-bool IsMetalSupported() {
-    return true;
-}
 #else
 #error "Unsupported Apple platform."
 #endif
@@ -440,10 +432,8 @@ class Adapter : public AdapterBase {
                 return MTLGPUFamily::Mac2;
             }
         }
-        if (@available(macOS 10.11, *)) {
-            if ([*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v1]) {
-                return MTLGPUFamily::Mac1;
-            }
+        if ([*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v1]) {
+            return MTLGPUFamily::Mac1;
         }
 #elif TARGET_OS_IOS
         if (@available(iOS 10.11, *)) {
@@ -625,43 +615,31 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
     ASSERT(optionsBase->backendType == WGPUBackendType_Metal);
 
     std::vector<Ref<AdapterBase>> adapters;
-    BOOL supportedVersion = NO;
+
 #if defined(DAWN_PLATFORM_MACOS)
-    if (@available(macOS 10.11, *)) {
-        supportedVersion = YES;
+    NSRef<NSArray<id<MTLDevice>>> devices = AcquireNSRef(MTLCopyAllDevices());
 
-        NSRef<NSArray<id<MTLDevice>>> devices = AcquireNSRef(MTLCopyAllDevices());
-
-        for (id<MTLDevice> device in devices.Get()) {
-            Ref<Adapter> adapter = AcquireRef(new Adapter(GetInstance(), device));
-            if (!GetInstance()->ConsumedError(adapter->Initialize())) {
-                adapters.push_back(std::move(adapter));
-            }
-        }
-    }
-#endif
-
-#if defined(DAWN_PLATFORM_IOS)
-    if (@available(iOS 8.0, *)) {
-        supportedVersion = YES;
-        // iOS only has a single device so MTLCopyAllDevices doesn't exist there.
-        Ref<Adapter> adapter =
-            AcquireRef(new Adapter(GetInstance(), MTLCreateSystemDefaultDevice()));
+    for (id<MTLDevice> device in devices.Get()) {
+        Ref<Adapter> adapter = AcquireRef(new Adapter(GetInstance(), device));
         if (!GetInstance()->ConsumedError(adapter->Initialize())) {
             adapters.push_back(std::move(adapter));
         }
     }
 #endif
-    if (!supportedVersion) {
-        UNREACHABLE();
+
+    // iOS only has a single device so MTLCopyAllDevices doesn't exist there.
+#if defined(DAWN_PLATFORM_IOS)
+    Ref<Adapter> adapter =
+        AcquireRef(new Adapter(GetInstance(), MTLCreateSystemDefaultDevice()));
+    if (!GetInstance()->ConsumedError(adapter->Initialize())) {
+        adapters.push_back(std::move(adapter));
     }
+#endif
+
     return adapters;
 }
 
 BackendConnection* Connect(InstanceBase* instance) {
-    if (!IsMetalSupported()) {
-        return nullptr;
-    }
     return new Backend(instance);
 }
 
