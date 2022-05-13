@@ -70,6 +70,30 @@
       },
       "revId": "6d13a0cda95c9ddc3578f8ff3bb6b3737e07d953",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a2d9753_b7b4550a",
+        "filename": "src/tint/number.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-13T12:48:03Z",
+      "side": 1,
+      "message": "It does, but a later comment says: \"This seems to only be an issue with Clang from the LLVM Homebrew cask\"\n\nI haven\u0027t reproduced this with GCC myself, and until we know what the GCC warning we need to suppress is, we won\u0027t know what pragma we need to use for GCC (I\u0027m assuming this clang-specific pragma won\u0027t work).",
+      "parentUuid": "5f8242ce_dab6db02",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 29
+      },
+      "revId": "6d13a0cda95c9ddc3578f8ff3bb6b3737e07d953",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
