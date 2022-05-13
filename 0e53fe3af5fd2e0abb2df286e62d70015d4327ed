@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa9a7032_4fce94fe",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T18:45:43Z",
+      "side": 1,
+      "message": "This is a security fix for an issue caused by lack of type visibility. Attempting to be extra explicit.",
+      "parentUuid": "55ad5269_eedb75e0",
+      "range": {
+        "startLine": 1116,
+        "startChar": 4,
+        "endLine": 1116,
+        "endChar": 12
+      },
+      "revId": "0e53fe3af5fd2e0abb2df286e62d70015d4327ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74c9691a_90fea2e1",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-13T17:21:24Z",
       "side": 1,
       "message": "Hmm, casting to uint64_t here isn\u0027t really necessary, whether we\u0027re building on 64-bit or 32-bit platforms (in the latter case, this check will never succeed, we\u0027d overflow instead if there really are more than 2^32 args). Since this check will only make sense on 64-bit platforms, I\u0027d just go for `if (args.size() \u003e td::numeric_limits\u003cuint32_t\u003e::max())`.",
+      "range": {
+        "startLine": 1121,
+        "startChar": 8,
+        "endLine": 1122,
+        "endChar": 67
+      },
+      "revId": "0e53fe3af5fd2e0abb2df286e62d70015d4327ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ce73eab_ae805b9e",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T18:45:43Z",
+      "side": 1,
+      "message": "The explicit casts to the largest supported integer types for both sides is to:\n* make it explicit that the comparison is done in 64 bits for all platforms (improve readability, architecture variation risks)\n* prevent any potential compiler warnings that you\u0027re comparing two different bit-widths. This kind of thing has broken the x86 clusterfuzz builds multiple times in the past.",
+      "parentUuid": "74c9691a_90fea2e1",
       "range": {
         "startLine": 1121,
         "startChar": 8,
