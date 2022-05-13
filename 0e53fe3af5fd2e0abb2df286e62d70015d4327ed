@@ -143,6 +143,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be800abc_73fee4f5",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-13T18:58:24Z",
+      "side": 1,
+      "message": "I didn\u0027t know that! Okay, then, this makes more sense.",
+      "parentUuid": "750cac0f_f9b6767b",
+      "range": {
+        "startLine": 1121,
+        "startChar": 8,
+        "endLine": 1122,
+        "endChar": 67
+      },
+      "revId": "0e53fe3af5fd2e0abb2df286e62d70015d4327ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3eb0424_fc6d6aa7",
