@@ -217,7 +217,8 @@ ComPtr<IDXGIFactory4> Device::GetFactory() const {
 MaybeError Device::ApplyUseDxcToggle() {
     if (!ToBackend(GetAdapter())->GetBackend()->GetFunctions()->IsDXCAvailable()) {
         ForceSetToggle(Toggle::UseDXC, false);
-    } else if (IsFeatureEnabled(Feature::ShaderFloat16)) {
+    } else if (IsFeatureEnabled(Feature::ShaderFloat16) ||
+               IsFeatureEnabled(Feature::ChromiumExperimentalDp4a)) {
         // Currently we can only use DXC to compile HLSL shaders using float16.
         ForceSetToggle(Toggle::UseDXC, true);
     }

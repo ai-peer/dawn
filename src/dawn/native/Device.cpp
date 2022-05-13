@@ -1224,6 +1224,10 @@ void DeviceBase::ApplyFeatures(const DeviceDescriptor* deviceDescriptor) {
         {deviceDescriptor->requiredFeatures, deviceDescriptor->requiredFeaturesCount}));
 
     for (uint32_t i = 0; i < deviceDescriptor->requiredFeaturesCount; ++i) {
+        if (deviceDescriptor->requiredFeatures[i] == wgpu::FeatureName::ChromiumExperimentalDp4a &&
+            !IsToggleEnabled(Toggle::EnableChromiumExperimentalDP4a)) {
+            continue;
+        }
         mEnabledFeatures.EnableFeature(deviceDescriptor->requiredFeatures[i]);
     }
 }
@@ -1236,6 +1240,9 @@ void DeviceBase::SetWGSLExtensionAllowList() {
     // Set the WGSL extensions allow list based on device's enabled features and other
     // propority. For example:
     //     mWGSLExtensionAllowList.insert("InternalExtensionForTesting");
+    if (IsFeatureEnabled(Feature::ChromiumExperimentalDp4a)) {
+        mWGSLExtensionAllowList.insert("chromium_experimental_dp4a");
+    }
 }
 
 WGSLExtensionSet DeviceBase::GetWGSLExtensionAllowList() const {
