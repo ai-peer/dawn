@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48ee392f_c28bf094",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T19:43:06Z",
+      "side": 1,
+      "message": "It is. This is what I was referring to in the meeting earlier.\nTo distinguish between identity *constructors* and *conversions* we need to ensure here that `T` and `U` are different types.\nHere we have a bunch of explicit overloads, where the first template type (which can be explicitly specified by the user) must be `f32`",
+      "parentUuid": "27b2cf75_b39b4501",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59721b56_04a2d21d",
         "filename": "src/tint/resolver/intrinsic_table.cc",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2022-05-13T17:33:49Z",
       "side": 1,
       "message": "Incomplete comment.\n\nIn general the score should be a vector of ints, one for each parameter.\nThen you\u0027d need a comparator between those kinds of vectors.\n\nI *think* you\u0027re getting away with a single int because the current batch of builtins/exprs are monotonic in a certain sense, with respect to each other.\n\n\nAlso, is lower better than higher?",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7be41ba_1d8c1112",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T19:43:06Z",
+      "side": 1,
+      "message": "This scoring is just the old algorithm for trying to sort the suggested overloads based on what is most likely what you wanted to call. This doesn\u0027t feature any of the new ranking stuff as we\u0027re still not resolving abstract types (yet).\nThis may change in future CLs",
+      "parentUuid": "59721b56_04a2d21d",
       "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -77,6 +113,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "43b254da_6ef67176",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T19:43:06Z",
+      "side": 1,
+      "message": "It\u0027s to reduce binary size. These tables are big. I\u0027ve confirmed the build will fail if we exceed the uint32_t limits.",
+      "parentUuid": "c84ffc8d_4b840e33",
+      "range": {
+        "startLine": 1237,
+        "startChar": 9,
+        "endLine": 1237,
+        "endChar": 16
+      },
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db20bbad_d78898d8",
         "filename": "src/tint/resolver/intrinsic_table.cc",
         "patchSetId": 1
@@ -94,6 +154,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "edad210f_7a54b9a8",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1253,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T19:43:06Z",
+      "side": 1,
+      "message": "yes it should - good spot. Will fix.",
+      "parentUuid": "db20bbad_d78898d8",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "93d3b776_5f116da5",
         "filename": "src/tint/resolver/intrinsic_table.cc",
         "patchSetId": 1
@@ -105,6 +183,24 @@
       "writtenOn": "2022-05-13T17:33:49Z",
       "side": 1,
       "message": "I think this is the case, but higher score is better, right?",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6884d4c_f6cad47c",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1256,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T19:43:06Z",
+      "side": 1,
+      "message": "Yes. Will likely flip when I implement abstract ranking.",
+      "parentUuid": "93d3b776_5f116da5",
       "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -134,6 +230,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "130fe6e9_e2e1672d",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1298,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T19:43:06Z",
+      "side": 1,
+      "message": "Yes. will fix",
+      "parentUuid": "3be4f5e3_3cf7253b",
+      "range": {
+        "startLine": 1298,
+        "startChar": 13,
+        "endLine": 1298,
+        "endChar": 17
+      },
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "250707fd_15c25943",
         "filename": "src/tint/resolver/intrinsic_table.cc",
         "patchSetId": 1
@@ -151,6 +271,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34970447_fcf6f7c4",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1300,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T19:43:06Z",
+      "side": 1,
+      "message": "It\u0027s a bit hand-wavey and the weights were picked by experimentation.\nNone of the scoring affects the behaviour, except for the order in which overloads are printed in diagnostic messages.\nI can add comments.",
+      "parentUuid": "250707fd_15c25943",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68f64779_cd8f3607",
         "filename": "src/tint/resolver/validator.cc",
         "patchSetId": 1
@@ -162,6 +300,24 @@
       "writtenOn": "2022-05-13T17:33:49Z",
       "side": 1,
       "message": "FYI.  It\u0027s ok to ignore the result of a function call.\n\nhttps://gpuweb.github.io/gpuweb/wgsl/#function-call-statement\n\n\u003e Note: If the function returns a value, that value is ignored.",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ddb601d_6700fa08",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-13T19:43:06Z",
+      "side": 1,
+      "message": "Sure, but I\u0027m slightly confused what you\u0027re getting at here. Please can you elaborate how this refers to this code?",
+      "parentUuid": "68f64779_cd8f3607",
       "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
