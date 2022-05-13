@@ -2098,5 +2098,30 @@ TEST_F(ResolverTest, ModuleDependencyOrderedDeclarations) {
                 ElementsAre(f0, v0, a0, s0, f1, v1, a1, s1, f2, v2, a2, s2));
 }
 
+TEST_F(ResolverTest, MaxExpressionDepth_Pass) {
+    auto* b = Var("b", ty.i32());
+    const ast::Expression* chain = nullptr;
+    for (int i = 0; i < 1024; ++i) {
+        chain = Add(chain ? chain : Expr("b"), Expr("b"));
+    }
+    auto* a = Let("a", nullptr, chain);
+    WrapInFunction(b, a);
+
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+}
+
+TEST_F(ResolverTest, MaxExpressionDepth_Fail) {
+    auto* b = Var("b", ty.i32());
+    const ast::Expression* chain = nullptr;
+    for (int i = 0; i < 1025; ++i) {
+        chain = Add(chain ? chain : Expr("b"), Expr("b"));
+    }
+    auto* a = Let("a", nullptr, chain);
+    WrapInFunction(b, a);
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_THAT(r()->error(), HasSubstr("error: reached max expression depth of 1024"));
+}
+
 }  // namespace
 }  // namespace tint::resolver
