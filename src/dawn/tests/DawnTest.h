@@ -257,6 +257,7 @@ class DawnTestEnvironment : public testing::Environment {
     bool mUseWire = false;
     dawn::native::BackendValidationLevel mBackendValidationLevel =
         dawn::native::BackendValidationLevel::Disabled;
+    std::string mAngleBackend;
     bool mBeginCaptureOnStartup = false;
     bool mHasVendorIdFilter = false;
     uint32_t mVendorIdFilter = 0;
