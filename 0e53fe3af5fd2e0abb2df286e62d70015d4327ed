@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55ad5269_eedb75e0",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-13T17:21:24Z",
+      "side": 1,
+      "message": "nit: these could have remained `auto`",
+      "range": {
+        "startLine": 1116,
+        "startChar": 4,
+        "endLine": 1116,
+        "endChar": 12
+      },
+      "revId": "0e53fe3af5fd2e0abb2df286e62d70015d4327ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74c9691a_90fea2e1",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-13T17:21:24Z",
+      "side": 1,
+      "message": "Hmm, casting to uint64_t here isn\u0027t really necessary, whether we\u0027re building on 64-bit or 32-bit platforms (in the latter case, this check will never succeed, we\u0027d overflow instead if there really are more than 2^32 args). Since this check will only make sense on 64-bit platforms, I\u0027d just go for `if (args.size() \u003e td::numeric_limits\u003cuint32_t\u003e::max())`.",
+      "range": {
+        "startLine": 1121,
+        "startChar": 8,
+        "endLine": 1122,
+        "endChar": 67
+      },
+      "revId": "0e53fe3af5fd2e0abb2df286e62d70015d4327ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3eb0424_fc6d6aa7",
+        "filename": "src/tint/resolver/intrinsic_table_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-13T17:21:24Z",
+      "side": 1,
+      "message": "nit: could use the vector ctor that takes `size, value`:\n\n```\n    auto* f32 \u003d create\u003csem::F32\u003e();\n    std::vector\u003cconst sem::Type*\u003e arg_tys(256, f32);\n    ...\n```",
+      "range": {
+        "startLine": 670,
+        "startChar": 4,
+        "endLine": 672,
+        "endChar": 5
+      },
+      "revId": "0e53fe3af5fd2e0abb2df286e62d70015d4327ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
