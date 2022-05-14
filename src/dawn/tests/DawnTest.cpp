@@ -106,7 +106,24 @@ void printBuffer(testing::AssertionResult& result, const T* buffer, const size_t
     result << std::endl;
 }
 
+// Counter for the number of live devices to check we
+// didn't leak any.
+unsigned int sDeviceCount = 0;
+
 }  // anonymous namespace
+
+namespace dawn::native {
+
+void DeviceConstructedTestingCallback() {
+    ++sDeviceCount;
+}
+
+void DeviceDestructedTestingCallback() {
+    ASSERT(sDeviceCount > 0);
+    --sDeviceCount;
+}
+
+}  // namespace dawn::native
 
 const RGBA8 RGBA8::kZero = RGBA8(0, 0, 0, 0);
 const RGBA8 RGBA8::kBlack = RGBA8(0, 0, 0, 255);
@@ -710,6 +727,8 @@ DawnTestBase::~DawnTestBase() {
         mBackendAdapter.ResetInternalDeviceForTesting();
     }
     mWireHelper.reset();
+
+    EXPECT_EQ(sDeviceCount, 0u);
 }
 
 bool DawnTestBase::IsD3D12() const {
