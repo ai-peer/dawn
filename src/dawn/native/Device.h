@@ -25,6 +25,7 @@
 #include "dawn/native/CacheKey.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/ComputePipeline.h"
+#include "dawn/native/DeviceCycleBreakingRefCounted.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Features.h"
 #include "dawn/native/Format.h"
@@ -57,7 +58,7 @@ struct ShaderModuleParseResult;
 
 using WGSLExtensionSet = std::unordered_set<std::string>;
 
-class DeviceBase : public RefCounted {
+class DeviceBase : public DeviceCycleBreakingRefCounted {
   public:
     DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor);
     ~DeviceBase() override;
@@ -400,6 +401,8 @@ class DeviceBase : public RefCounted {
     void IncrementLastSubmittedCommandSerial();
 
   private:
+    void WillDropLastExternalRef() override;
+
     virtual ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) = 0;
     virtual ResultOrError<Ref<BindGroupLayoutBase>> CreateBindGroupLayoutImpl(

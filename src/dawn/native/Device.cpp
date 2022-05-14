@@ -167,10 +167,22 @@ ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetRenderPipelineDescrip
 
 }  // anonymous namespace
 
+#if defined(DAWN_COMPILER_CLANG)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgcc-compat"
+void DeviceConstructedTestingCallback() __attribute__((weak)) {}
+void DeviceDestructedTestingCallback() __attribute__((weak)) {}
+#pragma clang diagnostic pop
+#endif
+
 // DeviceBase
 
 DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor)
     : mInstance(adapter->GetInstance()), mAdapter(adapter), mNextPipelineCompatibilityToken(1) {
+#if defined(DAWN_COMPILER_CLANG)
+    if (DeviceConstructedTestingCallback)
+        DeviceConstructedTestingCallback();
+#endif
     ASSERT(descriptor != nullptr);
 
     AdapterProperties adapterProperties;
@@ -214,9 +226,17 @@ DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor)
 
 DeviceBase::DeviceBase() : mState(State::Alive) {
     mCaches = std::make_unique<DeviceBase::Caches>();
+#if defined(DAWN_COMPILER_CLANG)
+    if (DeviceConstructedTestingCallback)
+        DeviceConstructedTestingCallback();
+#endif
 }
 
 DeviceBase::~DeviceBase() {
+#if defined(DAWN_COMPILER_CLANG)
+    if (DeviceDestructedTestingCallback)
+        DeviceDestructedTestingCallback();
+#endif
     // We need to explicitly release the Queue before we complete the destructor so that the
     // Queue does not get destroyed after the Device.
     mQueue = nullptr;
@@ -280,6 +300,16 @@ MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
     }
 
     return {};
+}
+
+void DeviceBase::WillDropLastExternalRef() {
+    // Destroy the device to cease all in-flight work and clear all references to internal objects.
+    // We may want to lift this in the future, but it would make things more complex because
+    // there might be pending tasks which hold a ref back to the device - either directly or
+    // indirectly. We would need to ensure those tasks don't create new reference
+    // cycles, and we would need to continuously try draining the pending tasks
+    // to clear out all remaining refs.
+    Destroy();
 }
 
 void DeviceBase::DestroyObjects() {
@@ -412,6 +442,7 @@ void DeviceBase::Destroy() {
     mEmptyBindGroupLayout = nullptr;
     mInternalPipelineStore = nullptr;
     mExternalTexturePlaceholderView = nullptr;
+    mQueue = nullptr;
 
     AssumeCommandsComplete();
 
@@ -1316,6 +1347,7 @@ void DeviceBase::APIInjectError(wgpu::ErrorType type, const char* message) {
 }
 
 QueueBase* DeviceBase::GetQueue() const {
+    ASSERT(mQueue != nullptr);
     return mQueue.Get();
 }
 
