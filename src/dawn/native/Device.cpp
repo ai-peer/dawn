@@ -287,6 +287,28 @@ MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
     return {};
 }
 
+void DeviceBase::WillDropLastExternalRef() {
+    // DeviceBase uses RefCountedWithExternalCount to break refcycles.
+    // DeviceBase holds multiple Refs to various API objects (pipelines, buffers, etc.)
+    // which are used to implement various device-level facilities.
+    // These objects are cached on the device, so we want to keep them
+    // around instead of making transient allocations.
+    // However, the objects also hold a Ref<Device> back to their parent
+    // device.
+    //    In order to break this cycle and prevent leaks, when the application
+    // drops the last external ref and WillDropLastExternalRef is called,
+    // the device clears out any member Refs to API objects that are hold back-refs to
+    // the device - thus breaking any reference cycles.
+    //    Currently, this is done by callying Destroy on the device to cease all in-flight work
+    // and drop references to internal objects.
+    // We may want to lift this in the future, but it would make things more complex because
+    // there might be pending tasks which hold a ref back to the device - either directly or
+    // indirectly. We would need to ensure those tasks don't create new reference
+    // cycles, and we would need to continuously try draining the pending tasks
+    // to clear out all remaining refs.
+    Destroy();
+}
+
 void DeviceBase::DestroyObjects() {
     // List of object types in reverse "dependency" order so we can iterate and delete the
     // objects safely. We define dependent here such that if B has a ref to A, then B depends on
@@ -417,6 +439,7 @@ void DeviceBase::Destroy() {
     mEmptyBindGroupLayout = nullptr;
     mInternalPipelineStore = nullptr;
     mExternalTexturePlaceholderView = nullptr;
+    mQueue = nullptr;
 
     AssumeCommandsComplete();
 
@@ -1321,6 +1344,7 @@ void DeviceBase::APIInjectError(wgpu::ErrorType type, const char* message) {
 }
 
 QueueBase* DeviceBase::GetQueue() const {
+    ASSERT(mQueue != nullptr);
     return mQueue.Get();
 }
 
