@@ -220,6 +220,8 @@ source_set("sources") {
     "CreatePipelineAsyncTask.h",
     "Device.cpp",
     "Device.h",
+    "DeviceCycleBreakingRefCounted.cpp",
+    "DeviceCycleBreakingRefCounted.h",
     "DynamicUploader.cpp",
     "DynamicUploader.h",
     "EncodingContext.cpp",
