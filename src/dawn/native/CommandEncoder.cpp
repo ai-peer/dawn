@@ -405,6 +405,30 @@ MaybeError ValidateRenderPassDepthStencilAttachment(
     return {};
 }
 
+MaybeError ValidateTimestampLocationOnRenderPass(
+    wgpu::RenderPassTimestampLocation location,
+    const std::set<wgpu::RenderPassTimestampLocation>* writtenLocations) {
+    DAWN_TRY(ValidateRenderPassTimestampLocation(location));
+
+    DAWN_INVALID_IF(writtenLocations->find(location) != writtenLocations->end(),
+                    "There are two same RenderPassTimestampLocation %u in a render pass.",
+                    location);
+
+    return {};
+}
+
+MaybeError ValidateTimestampLocationOnComputePass(
+    wgpu::ComputePassTimestampLocation location,
+    const std::set<wgpu::ComputePassTimestampLocation>* writtenLocations) {
+    DAWN_TRY(ValidateComputePassTimestampLocation(location));
+
+    DAWN_INVALID_IF(writtenLocations->find(location) != writtenLocations->end(),
+                    "There are two same ComputePassTimestampLocation %u in a compute pass.",
+                    location);
+
+    return {};
+}
+
 MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
                                         const RenderPassDescriptor* descriptor,
                                         uint32_t* width,
@@ -456,15 +480,17 @@ MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
         // not validated and encoded one by one, but encoded together after passing the
         // validation.
         QueryAvailabilityMap usedQueries;
+        std::set<wgpu::RenderPassTimestampLocation> writtenLocations;
         for (uint32_t i = 0; i < descriptor->timestampWriteCount; ++i) {
             QuerySetBase* querySet = descriptor->timestampWrites[i].querySet;
             DAWN_ASSERT(querySet != nullptr);
             uint32_t queryIndex = descriptor->timestampWrites[i].queryIndex;
             DAWN_TRY_CONTEXT(ValidateTimestampQuery(device, querySet, queryIndex),
                              "validating querySet and queryIndex of timestampWrites[%u].", i);
-            DAWN_TRY_CONTEXT(
-                ValidateRenderPassTimestampLocation(descriptor->timestampWrites[i].location),
-                "validating location of timestampWrites[%u].", i);
+            DAWN_TRY_CONTEXT(ValidateTimestampLocationOnRenderPass(
+                                 descriptor->timestampWrites[i].location, &writtenLocations),
+                             "validating location of timestampWrites[%u].", i);
+            writtenLocations.insert(descriptor->timestampWrites[i].location);
 
             auto checkIt = usedQueries.find(querySet);
             DAWN_INVALID_IF(checkIt != usedQueries.end() && checkIt->second[queryIndex],
@@ -494,14 +520,16 @@ MaybeError ValidateComputePassDescriptor(const DeviceBase* device,
     if (descriptor->timestampWriteCount > 0) {
         DAWN_ASSERT(descriptor->timestampWrites != nullptr);
 
+        std::set<wgpu::ComputePassTimestampLocation> writtenLocations;
         for (uint32_t i = 0; i < descriptor->timestampWriteCount; ++i) {
             DAWN_ASSERT(descriptor->timestampWrites[i].querySet != nullptr);
             DAWN_TRY_CONTEXT(ValidateTimestampQuery(device, descriptor->timestampWrites[i].querySet,
                                                     descriptor->timestampWrites[i].queryIndex),
                              "validating querySet and queryIndex of timestampWrites[%u].", i);
-            DAWN_TRY_CONTEXT(
-                ValidateComputePassTimestampLocation(descriptor->timestampWrites[i].location),
-                "validating location of timestampWrites[%u].", i);
+            DAWN_TRY_CONTEXT(ValidateTimestampLocationOnComputePass(
+                                 descriptor->timestampWrites[i].location, &writtenLocations),
+                             "validating location of timestampWrites[%u].", i);
+            writtenLocations.insert(descriptor->timestampWrites[i].location);
         }
     }
 
