@@ -80,6 +80,30 @@
       },
       "revId": "944ced7fb7ac5d3569ac1edb8f52b807c1a95715",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad37ce11_49963f51",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-05-16T15:14:52Z",
+      "side": 1,
+      "message": "nit: after an \u0027npm ci\u0027",
+      "parentUuid": "bf9974e3_4fe2924f",
+      "range": {
+        "startLine": 103,
+        "startChar": 55,
+        "endLine": 103,
+        "endChar": 156
+      },
+      "revId": "944ced7fb7ac5d3569ac1edb8f52b807c1a95715",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
