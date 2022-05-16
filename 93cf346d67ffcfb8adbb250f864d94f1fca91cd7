@@ -22,6 +22,30 @@
       },
       "revId": "93cf346d67ffcfb8adbb250f864d94f1fca91cd7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65ac33d5_3d442dd5",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-16T15:13:59Z",
+      "side": 0,
+      "message": "Done.",
+      "parentUuid": "851819c3_099ec0e4",
+      "range": {
+        "startLine": 100,
+        "startChar": 13,
+        "endLine": 100,
+        "endChar": 19
+      },
+      "revId": "93cf346d67ffcfb8adbb250f864d94f1fca91cd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

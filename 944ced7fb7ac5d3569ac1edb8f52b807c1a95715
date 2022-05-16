@@ -56,6 +56,30 @@
       },
       "revId": "944ced7fb7ac5d3569ac1edb8f52b807c1a95715",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf9974e3_4fe2924f",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-16T15:13:59Z",
+      "side": 1,
+      "message": "npm is surely more likely to be installed, but then we need to decide where to run npm, which is also not a trivial operation that can fail for many reasons. Went with keeping the check for TSC (also because it was simpler.)",
+      "parentUuid": "85266a4d_439c9ecd",
+      "range": {
+        "startLine": 103,
+        "startChar": 55,
+        "endLine": 103,
+        "endChar": 156
+      },
+      "revId": "944ced7fb7ac5d3569ac1edb8f52b807c1a95715",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
