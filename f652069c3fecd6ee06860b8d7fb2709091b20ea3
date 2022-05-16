@@ -548,6 +548,24 @@
       "parentUuid": "8ddb601d_6700fa08",
       "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f46ba3d4_960c8910",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-16T17:17:23Z",
+      "side": 1,
+      "message": "Looking again, you\u0027re right.\nType constructors and conversions are *expressions*, not function calls.",
+      "parentUuid": "fc927907_96b7eab1",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
