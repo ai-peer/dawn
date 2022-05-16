@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bb1e8cf_189ca9a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-16T16:04:06Z",
+      "side": 1,
+      "message": "Still +2",
+      "revId": "7bb1512ed93a3c6df6432a8340a3be55e97b4d7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76e2f37e_6519437f",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-16T16:04:06Z",
+      "side": 1,
+      "message": "nit: named fields are optional, so it\u0027s more idiomatic to just omit this.",
+      "range": {
+        "startLine": 102,
+        "startChar": 37,
+        "endLine": 102,
+        "endChar": 47
+      },
+      "revId": "7bb1512ed93a3c6df6432a8340a3be55e97b4d7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
