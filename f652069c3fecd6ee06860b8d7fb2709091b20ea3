@@ -219,6 +219,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42674b3d_abfcc8c2",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-16T16:50:12Z",
+      "side": 1,
+      "message": "Ok, got it.  But that\u0027s roughly non-local information about the structure of the program.\nWould be more defensive to declare with a bigger type.\n\nI won\u0027t die on this hill.",
+      "parentUuid": "ebd91e2c_69c15c59",
+      "range": {
+        "startLine": 1237,
+        "startChar": 9,
+        "endLine": 1237,
+        "endChar": 16
+      },
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db20bbad_d78898d8",
@@ -480,6 +504,24 @@
       "side": 1,
       "message": "Sure, but I\u0027m slightly confused what you\u0027re getting at here. Please can you elaborate how this refers to this code?",
       "parentUuid": "68f64779_cd8f3607",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc927907_96b7eab1",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-16T16:50:12Z",
+      "side": 1,
+      "message": "By my reading this update will issue these errors for this program:\n\n```\nfn foo() {\n  i32(0i);   // type constructor evaluated but not used\n  i32(1.0f); // type conversion evaluated but not used\n}\n```\n\nI don\u0027t think this should be an error (or even warning maybe)",
+      "parentUuid": "8ddb601d_6700fa08",
       "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
