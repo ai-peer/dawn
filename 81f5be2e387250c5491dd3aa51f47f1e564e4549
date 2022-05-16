@@ -16,6 +16,57 @@
       "message": "PTAL, thanks!",
       "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e313e5d_2e41d5ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-16T11:35:50Z",
+      "side": 1,
+      "message": "Overall logic looks good, except that I think we could add a wgpu::FeatureName in dawn.json that\u0027s ChromiumExperimentalDP4A and just gate behind !DisallowUnsafeAPIs. This would simplify code a bunch because on the device side we would know that the extension is to be enabled only if the DeviceDescriptor requests it (and that descriptor is also validated against the features exposed by the adapter.)\n\nIs there a reason why this is using a new toggle instead?",
+      "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "296e1f24_462b2c4b",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-16T11:35:50Z",
+      "side": 1,
+      "message": "Why a new toggle and not just behind !DisallowUnsafeAPIs?",
+      "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "580ef2e8_02ff6c23",
+        "filename": "src/dawn/native/d3d12/D3D12Info.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-16T11:35:50Z",
+      "side": 1,
+      "message": "nit: 6.3 doesn\u0027t exist?",
+      "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
