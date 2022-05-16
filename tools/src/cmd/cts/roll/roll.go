@@ -96,15 +96,11 @@ func (c *cmd) Run(ctx context.Context, cfg common.Config) error {
 	}
 
 	// Check tools can be found
-	for _, tool := range []struct {
-		name, path string
-	}{
-		{name: "git", path: c.flags.gitPath},
-		{name: "tsc", path: c.flags.tscPath},
-	} {
-		if _, err := os.Stat(tool.path); err != nil {
-			return fmt.Errorf("failed to find path to %v: %v", tool.name, err)
-		}
+	if _, err := os.Stat(c.flags.gitPath); err != nil {
+		return fmt.Errorf("failed to find path to git: '%v'", err)
+	}
+	if _, err := os.Stat(c.flags.tscPath); err != nil {
+		return fmt.Errorf("failed to find path to tsc: '%v'. Try setting the -tsc flag to 'third_party/webgpu-cts/node_modules/.bin/tsc (after an 'npm install')'.", err)
 	}
 
 	// Create a temporary directory for local checkouts
