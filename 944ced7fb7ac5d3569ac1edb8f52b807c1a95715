@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc792a30_f6fd9999",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-16T13:41:40Z",
+      "side": 1,
+      "message": "PTAL! Weirdly gofmt didn\u0027t wrap the line.",
+      "revId": "944ced7fb7ac5d3569ac1edb8f52b807c1a95715",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
