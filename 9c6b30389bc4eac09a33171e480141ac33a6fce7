@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95cda79a_8af5b618",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-16T11:49:19Z",
+      "side": 1,
+      "message": "note: I\u0027ve refactored this as `f16` development is coming along quickly. This will make it easier for `f16` matrices to be supported.",
+      "range": {
+        "startLine": 635,
+        "startChar": 0,
+        "endLine": 638,
+        "endChar": 50
+      },
+      "revId": "9c6b30389bc4eac09a33171e480141ac33a6fce7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
