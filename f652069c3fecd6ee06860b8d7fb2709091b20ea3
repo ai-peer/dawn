@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7178d79d_4d732b82",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-16T16:25:01Z",
+      "side": 1,
+      "message": "Ah!  I didn\u0027t even see that T was constrained to f32.  My misread.",
+      "parentUuid": "48ee392f_c28bf094",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59721b56_04a2d21d",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "This scoring is just the old algorithm for trying to sort the suggested overloads based on what is most likely what you wanted to call. This doesn\u0027t feature any of the new ranking stuff as we\u0027re still not resolving abstract types (yet).\nThis may change in future CLs",
       "parentUuid": "59721b56_04a2d21d",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e724d2e_edcbee50",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-16T16:25:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7be41ba_1d8c1112",
       "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -125,6 +161,30 @@
       "side": 1,
       "message": "It\u0027s to reduce binary size. These tables are big. I\u0027ve confirmed the build will fail if we exceed the uint32_t limits.",
       "parentUuid": "c84ffc8d_4b840e33",
+      "range": {
+        "startLine": 1237,
+        "startChar": 9,
+        "endLine": 1237,
+        "endChar": 16
+      },
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae482efc_d5cfe6d7",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-16T16:25:01Z",
+      "side": 1,
+      "message": "? I don\u0027t see how this affects table size.  I\u0027m focused on the iteration.\n\nI mean, if there end up being 300 overloads then this becomes an infinite loop.\n\nIf you want to keep overload_idx a uint8_t then I\u0027d like an assert that intrinsics.num_overloads \u003c 255",
+      "parentUuid": "43b254da_6ef67176",
       "range": {
         "startLine": 1237,
         "startChar": 9,
@@ -219,6 +279,24 @@
       "side": 1,
       "message": "Yes. Will likely flip when I implement abstract ranking.",
       "parentUuid": "93d3b776_5f116da5",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d73f8fd_ed5ad842",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1256,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-16T16:25:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a6884d4c_f6cad47c",
       "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
