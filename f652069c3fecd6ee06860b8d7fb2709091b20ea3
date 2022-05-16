@@ -243,6 +243,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eed60d05_5a7c837d",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-16T17:14:50Z",
+      "side": 1,
+      "message": "A type mismatch here will cause compiler warnings which might break builds. I could use `decltype(intrinsic.num_overloads)` or declare a typedef for this.\nI\u0027ll do the latter in a followup CL.",
+      "parentUuid": "42674b3d_abfcc8c2",
+      "range": {
+        "startLine": 1237,
+        "startChar": 9,
+        "endLine": 1237,
+        "endChar": 16
+      },
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db20bbad_d78898d8",
