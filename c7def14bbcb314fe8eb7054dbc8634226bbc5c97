@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e807972_8ced35ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-16T16:42:35Z",
+      "side": 1,
+      "message": "Welp. I think I\u0027m going to try to get the client code fuzzed. Right now we only fuzz the server side.",
+      "revId": "c7def14bbcb314fe8eb7054dbc8634226bbc5c97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
