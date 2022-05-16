@@ -197,6 +197,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ebd91e2c_69c15c59",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-16T16:32:33Z",
+      "side": 1,
+      "message": "`num_overloads` is `uint8_t`. If we attempted to assign 300 overloads to this in the template generated `src/tint/resolver/intrinsic_table.inl` file, then the compiler will error.",
+      "parentUuid": "ae482efc_d5cfe6d7",
+      "range": {
+        "startLine": 1237,
+        "startChar": 9,
+        "endLine": 1237,
+        "endChar": 16
+      },
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db20bbad_d78898d8",
         "filename": "src/tint/resolver/intrinsic_table.cc",
         "patchSetId": 1

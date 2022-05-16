@@ -16,6 +16,24 @@
       "message": "I think you meant to check   overload.num_parameters  instead of args.size() a second time.",
       "revId": "310f66b0ad68355a93479afd6b74931f25a91b35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ebbc904_3aeba107",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-16T16:32:33Z",
+      "side": 1,
+      "message": "Rebase failure. Fixed.",
+      "parentUuid": "d66920f0_8b2d7fc3",
+      "revId": "310f66b0ad68355a93479afd6b74931f25a91b35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
