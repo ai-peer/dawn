@@ -22,6 +22,30 @@
       },
       "revId": "352bb26bddfd17a973767c6eda6c834043208737",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0facd8dc_5dd6b742",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-16T18:15:34Z",
+      "side": 1,
+      "message": "Expanded TraverseExpressions to be able to optionally compute and pass in depth. It now really does measure depth.",
+      "parentUuid": "e0282359_12f52cb8",
+      "range": {
+        "startLine": 1047,
+        "startChar": 12,
+        "endLine": 1047,
+        "endChar": 19
+      },
+      "revId": "352bb26bddfd17a973767c6eda6c834043208737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
