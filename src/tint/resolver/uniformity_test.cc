@@ -406,7 +406,7 @@ TEST_F(UniformityAnalysisTest, SubsequentControlFlowMayBeNonUniform_Nested_Fail)
     // call another function that requires uniformity.
     // The lack of return statement in `foo()` requires that we implicitly add an edge from
     // CF_return to that last control flow node of the function.
-    auto src = R"(
+    std::string src = R"(
 @group(0) @binding(0) var<storage, read_write> rw : i32;
 
 var<private> p : i32;
