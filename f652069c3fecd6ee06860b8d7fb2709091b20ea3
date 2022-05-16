@@ -566,6 +566,24 @@
       "parentUuid": "fc927907_96b7eab1",
       "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afd86410_453f32e2",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-16T17:19:12Z",
+      "side": 1,
+      "message": "Great, thanks. This validation has been around for a long time:\nhttps://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/resolver/type_constructor_validation_test.cc#2721",
+      "parentUuid": "fc927907_96b7eab1",
+      "revId": "f652069c3fecd6ee06860b8d7fb2709091b20ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
