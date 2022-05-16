@@ -16,6 +16,23 @@
       "message": "Cherry picking to M103 release branch so that uniformity diagnostics show up.",
       "revId": "702f486988ce05a98a13f933abdf0ae65494ae94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5a54f24_5fb9e532",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-16T21:20:15Z",
+      "side": 1,
+      "message": "hm, I think technically we need to make a merge request for this and get it approved\n\nshould be approved though since Dev says \"Acceptable merges include fixes for polish issues for Finch-gated features (no workflow changes), any new regressions, any release blockers, any security issues, any string issues (.GRD changes).\"",
+      "revId": "702f486988ce05a98a13f933abdf0ae65494ae94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
