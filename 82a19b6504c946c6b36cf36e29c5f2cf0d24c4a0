@@ -145,6 +145,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "347130e7_329d1daa",
+        "filename": "src/dawn/tests/end2end/VertexStateTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-05-16T04:36:15Z",
+      "side": 1,
+      "message": "https://github.com/gpuweb/gpuweb/pull/2844 has been merged.\n\nWe are waiting for comments for https://github.com/gpuweb/gpuweb/pull/2865",
+      "parentUuid": "09586b11_a0a04522",
+      "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33684069_c456b6bd",
         "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
         "patchSetId": 1
