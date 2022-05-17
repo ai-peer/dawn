@@ -102,6 +102,24 @@
       "message": "nit: 6.3 doesn\u0027t exist?",
       "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9751ef4e_d329deea",
+        "filename": "src/dawn/native/d3d12/D3D12Info.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-17T00:51:26Z",
+      "side": 1,
+      "message": "6.3 (that supports DirectX Ray Tracing) is not useful in Dawn right now. Shall we add it later when we need it?",
+      "parentUuid": "580ef2e8_02ff6c23",
+      "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
