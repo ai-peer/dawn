@@ -350,6 +350,10 @@ source_set("sources") {
     libs += [ "dxgi.lib" ]
   }
 
+  if (is_debug && is_clang) {
+    defines += [ "DAWN_DEBUG_LIFETIMES" ]
+  }
+
   # TODO(dawn:766):
   # Should link dxcompiler.lib and WinPixEventRuntime_UAP.lib in UWP
   # Somehow use dxcompiler.lib makes CoreApp unable to activate

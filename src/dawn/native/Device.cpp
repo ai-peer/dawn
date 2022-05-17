@@ -167,10 +167,24 @@ ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetRenderPipelineDescrip
 
 }  // anonymous namespace
 
+#if defined(DAWN_DEBUG_LIFETIMES)
+#if !defined(DAWN_COMPILER_CLANG)
+static_assert(false, "DAWN_DEBUG_LIFETIMES must be used with clang.");
+#endif  // !defined(DAWN_COMPILER_CLANG)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgcc-compat"
+void DeviceConstructedTestingCallback() __attribute__((weak)) {}
+void DeviceDestructedTestingCallback() __attribute__((weak)) {}
+#pragma clang diagnostic pop
+#endif  // defined(DAWN_DEBUG_LIFETIMES)
+
 // DeviceBase
 
 DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor)
     : mInstance(adapter->GetInstance()), mAdapter(adapter), mNextPipelineCompatibilityToken(1) {
+#if defined(DAWN_DEBUG_LIFETIMES)
+    DeviceConstructedTestingCallback();
+#endif
     ASSERT(descriptor != nullptr);
 
     AdapterProperties adapterProperties;
@@ -214,9 +228,15 @@ DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor)
 
 DeviceBase::DeviceBase() : mState(State::Alive) {
     mCaches = std::make_unique<DeviceBase::Caches>();
+#if defined(DAWN_DEBUG_LIFETIMES)
+    DeviceConstructedTestingCallback();
+#endif
 }
 
 DeviceBase::~DeviceBase() {
+#if defined(DAWN_DEBUG_LIFETIMES)
+    DeviceDestructedTestingCallback();
+#endif
     // We need to explicitly release the Queue before we complete the destructor so that the
     // Queue does not get destroyed after the Device.
     mQueue = nullptr;

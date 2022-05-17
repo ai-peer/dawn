@@ -31,7 +31,24 @@ bool gUseWire = false;
 std::string gWireTraceDir = "";
 std::unique_ptr<ToggleParser> gToggleParser = nullptr;
 
+// Counter for the number of live devices to check we
+// didn't leak any.
+unsigned int sDeviceCount = 0;
+
 }  // namespace
+
+namespace dawn::native {
+
+void DeviceConstructedTestingCallback() {
+    ++sDeviceCount;
+}
+
+void DeviceDestructedTestingCallback() {
+    ASSERT(sDeviceCount > 0);
+    --sDeviceCount;
+}
+
+}  // namespace dawn::native
 
 void InitDawnValidationTestEnvironment(int argc, char** argv) {
     gToggleParser = std::make_unique<ToggleParser>();
@@ -118,6 +135,8 @@ ValidationTest::~ValidationTest() {
     // will call a nullptr
     device = wgpu::Device();
     mWireHelper.reset();
+
+    EXPECT_EQ(sDeviceCount, 0u);
 }
 
 void ValidationTest::TearDown() {
