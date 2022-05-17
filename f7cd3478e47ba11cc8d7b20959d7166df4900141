@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ce098ba_3c0dd1f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-17T19:19:56Z",
+      "side": 1,
+      "message": "Thanks!\nThat spec PR has landed. 😊",
+      "revId": "f7cd3478e47ba11cc8d7b20959d7166df4900141",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
