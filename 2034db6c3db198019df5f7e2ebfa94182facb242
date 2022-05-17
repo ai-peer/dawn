@@ -16,6 +16,24 @@
       "message": "Should take into account vectors and matrices over abstract types.\nSee the extra paragraph after the table.\n\nOr the new and improved table in https://github.com/gpuweb/gpuweb/pull/2851",
       "revId": "2034db6c3db198019df5f7e2ebfa94182facb242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34aeec92_12239104",
+        "filename": "src/tint/sem/type.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-17T18:18:13Z",
+      "side": 1,
+      "message": "That\u0027s cheating 😊\nDone.",
+      "parentUuid": "19223172_70d3bedd",
+      "revId": "2034db6c3db198019df5f7e2ebfa94182facb242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
