@@ -16,6 +16,24 @@
       "message": "There\u0027s already out/ do you really care about using build_asan instead of out/asan?",
       "revId": "a0e8dd6b472fd90d5d1c3b396452bac9ca3dea94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d66eda0_be6a704b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-17T13:22:04Z",
+      "side": 1,
+      "message": "/build*/ is common for CMake, whereas I use out/ for GN builds. I will get confused if I mix the two in the same folder.",
+      "parentUuid": "cd417579_9f6077ef",
+      "revId": "a0e8dd6b472fd90d5d1c3b396452bac9ca3dea94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
