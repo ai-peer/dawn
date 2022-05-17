@@ -232,6 +232,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5de36d8_a1698067",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-17T11:00:17Z",
+      "side": 1,
+      "message": "I should have been more clear in the comment above. I think you both made good points, so ChromiumExperimentalDP4 could just be a regular optional feature and not even behind disallow-unsafe-apis. Then Chromium would do the filtering of extensions so all is good security-wise.",
+      "parentUuid": "0ac90a55_f5397d70",
+      "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "296e1f24_462b2c4b",
