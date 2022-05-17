@@ -70,6 +70,24 @@
       "parentUuid": "a364ac01_99a533e3",
       "revId": "a0e8dd6b472fd90d5d1c3b396452bac9ca3dea94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab403d1e_3cb6c0b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-17T13:59:42Z",
+      "side": 1,
+      "message": "IMHO it\u0027s a bit weird to have each individual dev\u0027s workflow encoded in the code but I feel that the Tint team is used to the opposite.\n\nCan you make this build_* to scope it better and move it to around [1] so it\u0027s not under the headline \"gclient and GN stuff\"?",
+      "parentUuid": "df112b32_7a1540a6",
+      "revId": "a0e8dd6b472fd90d5d1c3b396452bac9ca3dea94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
