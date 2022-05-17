@@ -33,6 +33,58 @@
       "message": "(going to separate out the real leak fixes)",
       "revId": "6736e64d17c03a49818aceb9213af0866f1d6f68",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a11a303_f286b472",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-17T12:35:55Z",
+      "side": 1,
+      "message": "The CL needs a massive cleanup but I think the approach is sound.\n\nI was concerned that there could be cycles left in other places in the object graph, but device destruction calls destroy on all objects, and we have the same problem with the replacing of the device with a lost device so this approach is just as good, and simpler.\n\nCould the same thing be used for instance?",
+      "parentUuid": "a6b0a311_84c592fa",
+      "revId": "6736e64d17c03a49818aceb9213af0866f1d6f68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10fd0832_62355c9d",
+        "filename": "src/dawn/native/DeviceCycleBreakingRefCounted.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-17T12:35:55Z",
+      "side": 1,
+      "message": "Maybe we should have a class RefCount that\u0027s used for both this and RefCounted so we can keep all the comments. Release would return a boolean to say if destruction needs to happen (the hope being that LTO inlines stuff?)",
+      "revId": "6736e64d17c03a49818aceb9213af0866f1d6f68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "213dbed8_2b2352ac",
+        "filename": "src/dawn/native/DeviceCycleBreakingRefCounted.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-17T12:35:55Z",
+      "side": 1,
+      "message": "nit: the name of the class says what it is used for, not what it does. DualRefCounted? RefCountedWithExternalCount? Not sure.",
+      "revId": "6736e64d17c03a49818aceb9213af0866f1d6f68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
