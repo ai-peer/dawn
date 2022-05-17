@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f86933db_b4fbe387",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1240,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-17T15:04:21Z",
+      "side": 1,
+      "message": "Very nice",
+      "revId": "4fae40a3f76822230a0bb10f7a2a195f0a367f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
