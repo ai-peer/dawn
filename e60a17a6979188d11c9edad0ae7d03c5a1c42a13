@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5044c2fd_df24918a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-17T16:31:35Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e60a17a6979188d11c9edad0ae7d03c5a1c42a13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd5f0f3d_7603dc07",
+        "filename": "src/dawn/tests/unittests/validation/ToggleValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-17T16:31:35Z",
+      "side": 1,
+      "message": "Did these tests with wire before?",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 38
+      },
+      "revId": "e60a17a6979188d11c9edad0ae7d03c5a1c42a13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
