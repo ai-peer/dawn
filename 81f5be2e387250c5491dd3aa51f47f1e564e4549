@@ -214,6 +214,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ac90a55_f5397d70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-17T08:32:36Z",
+      "side": 1,
+      "message": "In fact I think this test is correct - currently no features exposed by adapter are \"optional\", and when the adapter claims the support of the feature, the creation of the device with that feature must succeed.\n\nIf we decide to follow what you said, then the rule would be broken. I just want to double check - are you intended to do so?",
+      "parentUuid": "0a4e38b3_0b18fbb8",
+      "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "296e1f24_462b2c4b",
