@@ -16,6 +16,23 @@
       "message": "This is going to need some targeted tests to check we aren\u0027t leaking various things - but thoughts on the overall idea?\n\nWe have preivously had two thoughts on a high-level approach:\n A) some sort of cycle breaking (this CL attempts that)\n B) replace Device* with some pointer to \"already lost\" device.\n\nI don\u0027t like B as much because it\u0027s going to be super racy when we want to have multithreading. It also locks us into the idea that dropping the last external ref to wgpu::Device is an implicit device.destroy(). I don\u0027t like this because it doesn\u0027t match JS semantics. It\u0027s probably not super likely native users will do this anyway - but I think it would be a small wart in the native API.\nThis current implementation of A has the same wart where we do an implicit device.destroy() - but! I do think it could be modified in the future if we have a separate \"submit/tick thread\" such that we continuously flush the pending work until everything is complete. No pending work means there should be no tasks with back-refs to the device.",
       "revId": "6736e64d17c03a49818aceb9213af0866f1d6f68",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6ed050e_a0b86922",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-17T00:38:31Z",
+      "side": 1,
+      "message": "(going to separate out the real leak fixes)",
+      "revId": "6736e64d17c03a49818aceb9213af0866f1d6f68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
