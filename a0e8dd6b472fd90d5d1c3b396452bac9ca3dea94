@@ -52,6 +52,24 @@
       "parentUuid": "1d66eda0_be6a704b",
       "revId": "a0e8dd6b472fd90d5d1c3b396452bac9ca3dea94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df112b32_7a1540a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-17T13:47:04Z",
+      "side": 1,
+      "message": "I mean, sure, but there\u0027s something to be said about idiomatic use-cases. Are you worried about extending ignore from `/build` to `/build*`? It\u0027s fairly common, and it would only affect build directories at the root.",
+      "parentUuid": "a364ac01_99a533e3",
+      "revId": "a0e8dd6b472fd90d5d1c3b396452bac9ca3dea94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
