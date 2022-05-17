@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd417579_9f6077ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-17T13:13:38Z",
+      "side": 1,
+      "message": "There\u0027s already out/ do you really care about using build_asan instead of out/asan?",
+      "revId": "a0e8dd6b472fd90d5d1c3b396452bac9ca3dea94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
