@@ -30,6 +30,11 @@ else
     TMP_DIR=/tmp
 fi
 
+echo "*****************************************************************"
+echo "* build.sh"
+echo "* df: "
+df
+echo "*****************************************************************"
 
 # --privileged is required for some sanitizer builds, as they seem to require PTRACE privileges
 docker run --rm -i \
