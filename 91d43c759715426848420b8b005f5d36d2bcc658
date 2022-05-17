@@ -62,6 +62,30 @@
       },
       "revId": "91d43c759715426848420b8b005f5d36d2bcc658",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95a12ca5_577c4b92",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-17T08:10:09Z",
+      "side": 1,
+      "message": "I assume you meant Validate it is non-null? +1",
+      "parentUuid": "719c673f_b98486ea",
+      "range": {
+        "startLine": 152,
+        "startChar": 3,
+        "endLine": 152,
+        "endChar": 5
+      },
+      "revId": "91d43c759715426848420b8b005f5d36d2bcc658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
