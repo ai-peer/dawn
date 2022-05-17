@@ -16,6 +16,126 @@
       "message": "Please take a look, thanks",
       "revId": "76c98b88d4f42fa49a7a17ff8221e08219edbe8d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "908de1ad_62f217c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-17T23:36:12Z",
+      "side": 1,
+      "message": "LGTM with comments on the tests",
+      "revId": "76c98b88d4f42fa49a7a17ff8221e08219edbe8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "287a17ce_114c4a47",
+        "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-17T23:36:12Z",
+      "side": 1,
+      "message": "nit: it may be helpful to comment just once at the start of these cases on what the arguments mean. That way, it\u0027s easy to understand without scrolling to the definition of TestRenderPassDraw",
+      "revId": "76c98b88d4f42fa49a7a17ff8221e08219edbe8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03128a72_df30a836",
+        "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-17T23:36:12Z",
+      "side": 1,
+      "message": "should this comment be \"vertex\", and the former \"instance\" ?",
+      "range": {
+        "startLine": 606,
+        "startChar": 0,
+        "endLine": 606,
+        "endChar": 99
+      },
+      "revId": "76c98b88d4f42fa49a7a17ff8221e08219edbe8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a30c3b84_c0ba4ca3",
+        "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-17T23:36:12Z",
+      "side": 1,
+      "message": "could these two tests be merged? they look extremely identical except that instead of using values in the set (100, 12, 0), the second one uses values in the set (1, 0) - basically I think they\u0027re both using 1 or max, and 0.",
+      "revId": "76c98b88d4f42fa49a7a17ff8221e08219edbe8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2b57b68_afa38714",
+        "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-17T23:36:12Z",
+      "side": 1,
+      "message": "use wgpu::IndexFormat and size_t as these type names are short and more clear",
+      "range": {
+        "startLine": 653,
+        "startChar": 12,
+        "endLine": 653,
+        "endChar": 16
+      },
+      "revId": "76c98b88d4f42fa49a7a17ff8221e08219edbe8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12edf5df_b33cd472",
+        "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-17T23:36:12Z",
+      "side": 1,
+      "message": "unit: \"index\"",
+      "range": {
+        "startLine": 656,
+        "startChar": 40,
+        "endLine": 656,
+        "endChar": 47
+      },
+      "revId": "76c98b88d4f42fa49a7a17ff8221e08219edbe8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
