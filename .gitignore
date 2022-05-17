@@ -4,7 +4,7 @@
 /.cipd
 /.gclient
 /.gclient_entries
-/build
+/build*
 /buildtools
 /testing
 /third_party/abseil-cpp/
