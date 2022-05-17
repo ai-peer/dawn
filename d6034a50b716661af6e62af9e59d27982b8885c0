@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "660cb39e_83554e9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-17T15:53:42Z",
+      "side": 1,
+      "message": "Let\u0027s see if Kokoro is happy now...",
+      "revId": "d6034a50b716661af6e62af9e59d27982b8885c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
