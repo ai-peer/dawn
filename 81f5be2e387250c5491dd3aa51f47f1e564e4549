@@ -196,6 +196,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a4e38b3_0b18fbb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-17T08:28:19Z",
+      "side": 1,
+      "message": "Now that we decide to expose DP4a as a feature of adapter. This test tries to create a device with DP4a extension, then the test fail because we can only use DP4a with another toggle \"UnsafeAPI\" or some other things.",
+      "parentUuid": "6b5ceb18_96b22288",
+      "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "296e1f24_462b2c4b",
