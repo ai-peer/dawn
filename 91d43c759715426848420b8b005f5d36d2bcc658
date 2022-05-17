@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de71b006_f55dad26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-17T00:34:13Z",
+      "side": 1,
+      "message": "LGTM with comments",
+      "revId": "91d43c759715426848420b8b005f5d36d2bcc658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ef435e9_f4086f4c",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-17T00:34:13Z",
+      "side": 1,
+      "message": "could we memcpy into .data() or std::copy(yMat, yMat + 12, matrix.begin()));\n\nsame for the other matrices",
+      "range": {
+        "startLine": 149,
+        "startChar": 15,
+        "endLine": 149,
+        "endChar": 39
+      },
+      "revId": "91d43c759715426848420b8b005f5d36d2bcc658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "719c673f_b98486ea",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-17T00:34:13Z",
+      "side": 1,
+      "message": "is it intentional that there\u0027s no else block so the matrix defaults to all zeros?\n\nI feel like either the default should be the identity matrix, or we should make the field non-optional in dawn.json and ASSERT it is non-null",
+      "range": {
+        "startLine": 152,
+        "startChar": 3,
+        "endLine": 152,
+        "endChar": 5
+      },
+      "revId": "91d43c759715426848420b8b005f5d36d2bcc658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
