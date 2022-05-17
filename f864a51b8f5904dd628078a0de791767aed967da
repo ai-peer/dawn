@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "453983b1_dc814b87",
+        "filename": ".gitignore",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-17T13:24:59Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "f864a51b8f5904dd628078a0de791767aed967da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
