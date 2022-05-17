@@ -124,6 +124,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "918905af_72275ca8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-17T01:25:39Z",
+      "side": 1,
+      "message": "\u003e in Dawn I see we still assume if a \"feature\" is supported by adapter, we can always use it when creating devices\n\nyes, and for native applications, I think this should be OK because unlike JS, I don\u0027t think we need to \"hide\" things from the developer.\n\nI do see what you mean about DisallowUnsafeAPIs though - it\u0027s almost as if that should be a toggle that is present on the Adapter instead of the Device. Perhaps we should move it there eventually, but not necessary now.",
+      "parentUuid": "294a8fbc_d4b9eada",
+      "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "296e1f24_462b2c4b",
