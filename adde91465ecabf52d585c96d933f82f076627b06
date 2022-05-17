@@ -16,6 +16,57 @@
       "message": "PTAL",
       "revId": "adde91465ecabf52d585c96d933f82f076627b06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83abd987_c0342ab6",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-17T08:19:36Z",
+      "side": 1,
+      "message": "Maybe comment as to why we add this? Also that things are ok when we don\u0027t link against a lib that doesn\u0027t have the functions because there are default implementations that do nothing.\n\nBut also why not have Instance-\u003eGetDeviceCountForTesting?",
+      "revId": "adde91465ecabf52d585c96d933f82f076627b06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82591960_7a6f93ff",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-17T08:19:36Z",
+      "side": 1,
+      "message": "Does this need to be an atomic int / TLS for multithreaded GTest runs? Or does GTest use multiple processes?",
+      "revId": "adde91465ecabf52d585c96d933f82f076627b06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4f75e06_3803dd6f",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-17T08:19:36Z",
+      "side": 1,
+      "message": "Maybe explain the magic weak symbol thing happening?",
+      "revId": "adde91465ecabf52d585c96d933f82f076627b06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
