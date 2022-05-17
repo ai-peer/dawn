@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04574dc6_023175e7",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-17T16:33:08Z",
+      "side": 1,
+      "message": "ok removed the weak stuff",
+      "parentUuid": "8a65bcde_5f5e1eee",
+      "revId": "adde91465ecabf52d585c96d933f82f076627b06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82591960_7a6f93ff",
@@ -88,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8839ded0_f5b98668",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-17T16:33:08Z",
+      "side": 1,
+      "message": "made it atomic on the instance to be safe in the future for multithreaded testing",
+      "parentUuid": "6b9a1131_d2b18ced",
+      "revId": "adde91465ecabf52d585c96d933f82f076627b06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4f75e06_3803dd6f",
@@ -101,6 +137,24 @@
       "writtenOn": "2022-05-17T08:19:36Z",
       "side": 1,
       "message": "Maybe explain the magic weak symbol thing happening?",
+      "revId": "adde91465ecabf52d585c96d933f82f076627b06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85c13983_17748d7a",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-17T16:33:08Z",
+      "side": 1,
+      "message": "not applicable now",
+      "parentUuid": "e4f75e06_3803dd6f",
       "revId": "adde91465ecabf52d585c96d933f82f076627b06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
