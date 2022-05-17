@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18785811_c953ce7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-17T01:02:06Z",
+      "side": 1,
+      "message": "Thanks Austin. Then in chromium we can filter the non-official features to make them invisible to Javascript.\n\nBut in Dawn I see we still assume if a \"feature\" is supported by adapter, we can always use it when creating devices. Do you mean we should introduce a concept that some \"features\" are \"optional\" and can only be available with a toggle? (like DisallowUnsafeAPIs or some other things)",
+      "parentUuid": "79138394_0f564208",
+      "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "296e1f24_462b2c4b",
