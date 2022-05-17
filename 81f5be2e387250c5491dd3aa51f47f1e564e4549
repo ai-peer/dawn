@@ -142,6 +142,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26a81775_f358d389",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-17T08:12:25Z",
+      "side": 1,
+      "message": "Maybe we can just not have it behind a toggle and use Chromium\u0027s filtering of extensions to make it not visible to the renderer process. Other native users would be warned that it is unsafe because there\u0027s \"experimental\" in the name?",
+      "parentUuid": "918905af_72275ca8",
+      "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "296e1f24_462b2c4b",
@@ -190,6 +208,24 @@
       "side": 1,
       "message": "6.3 (that supports DirectX Ray Tracing) is not useful in Dawn right now. Shall we add it later when we need it?",
       "parentUuid": "580ef2e8_02ff6c23",
+      "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14cb1d72_be363839",
+        "filename": "src/dawn/native/d3d12/D3D12Info.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-17T08:12:25Z",
+      "side": 1,
+      "message": "IMHO we might as well do it now, there\u0027s basically no cost to that and we\u0027re just updating the list of known shader models in this CL. As you wish.",
+      "parentUuid": "9751ef4e_d329deea",
       "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
