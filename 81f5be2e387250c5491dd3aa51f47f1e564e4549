@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1c945a2_7afada6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-17T00:49:42Z",
+      "side": 1,
+      "message": "I just don\u0027t want to always expose this \"feature\" by the adapter.getProperties() without any optional flags guarded.\n\n\"DisallowUnsafeAPIs\" is a toggle and can only be set when creating devices, so DP4a can still be queried by adapter.getProperties().\n\nI found this issue when I met the failures of FeatureTests/GetEnabledFeatures:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/unittests/FeatureTests.cpp;l\u003d69\n\nThis test will fail if I don\u0027t filter out the DP4a \"feature\" in the test because DP4a \"feature\" cannot be used in the creation of device without an optional flag (DisallowUnsafeAPIs or EnableDP4a or some other things).\n\n\nInstead I think a \"toggle\" may be more suitable for DP4a as DP4a behind a toggle won\u0027t be available by any WebGPU APIs unless we explicitly set that toggle, while it seems \"features\" are something that is always available on the adapter.",
+      "parentUuid": "8e313e5d_2e41d5ee",
+      "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "296e1f24_462b2c4b",
