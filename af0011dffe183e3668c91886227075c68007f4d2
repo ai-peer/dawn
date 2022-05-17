@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c629f2f_6b6a50de",
+        "filename": "src/tint/ast/traverse_expressions.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-17T12:40:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf564e9e_1766e791",
+      "range": {
+        "startLine": 64,
+        "startChar": 26,
+        "endLine": 64,
+        "endChar": 39
+      },
+      "revId": "af0011dffe183e3668c91886227075c68007f4d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0b70103_cdf57c9b",
@@ -54,6 +78,24 @@
       "writtenOn": "2022-05-17T08:14:00Z",
       "side": 1,
       "message": "Loving the interface, but I think we can do away with this map, if you change the `to_visit` vector to take a structure:\n\n```\nstruct Pending {\n   const ast::Expression* expr;\n   size_t depth;\n};\n```\n\nYou can make this second field conditional on `HAS_DEPTH_ARG`, but the performance hit is probably negligible.\n\nI think this change would clean up the implementation, and regain some performance.",
+      "revId": "af0011dffe183e3668c91886227075c68007f4d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd330fc0_33101157",
+        "filename": "src/tint/ast/traverse_expressions.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-17T12:40:22Z",
+      "side": 1,
+      "message": "My first iteration actually was something like this (I used a std::pair), but admittedly I was too tired to figure out how to implement it. Thanks for pushing, it\u0027s so much better now. Agree that the performance hit is negligible for keeping the depth around, so am leaving it there.",
+      "parentUuid": "a0b70103_cdf57c9b",
       "revId": "af0011dffe183e3668c91886227075c68007f4d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

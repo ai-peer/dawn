@@ -16,6 +16,24 @@
       "message": "I didn\u0027t add similar tests for all cases, only for binary here. I wanted to first make sure you were happy with this change as it is.",
       "revId": "34af0e9e14e6ae98beb7ce5be65df9436cac3764",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3349add9_aceecd26",
+        "filename": "src/tint/resolver/resolver_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2101,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-17T12:40:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98dbce30_2c5a443b",
+      "revId": "34af0e9e14e6ae98beb7ce5be65df9436cac3764",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
