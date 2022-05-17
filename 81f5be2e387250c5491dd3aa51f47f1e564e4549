@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "294a8fbc_d4b9eada",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-17T01:05:22Z",
+      "side": 1,
+      "message": "Instead I feel that guarding DP4a behind a toggle seems more reasonable as a toggle is always optional and cannot be available if the toggle is disabled, while it seems we never say a \"feature\" is optional right now.",
+      "parentUuid": "18785811_c953ce7c",
+      "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "296e1f24_462b2c4b",
