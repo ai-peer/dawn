@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d61fcc7_16079a6f",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1443,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-17T17:10:19Z",
+      "side": 1,
+      "message": "I guess this is the typo fix.",
+      "range": {
+        "startLine": 1441,
+        "startChar": 0,
+        "endLine": 1443,
+        "endChar": 13
+      },
+      "revId": "6371e2198f6a3f393f8cce813090c312d5636fd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
