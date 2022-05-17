@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97b6cd58_faf9a9a1",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-05-17T18:20:04Z",
+      "side": 1,
+      "message": "Done, but not for the gamut matrix due to the additional padding needed.",
+      "parentUuid": "6ef435e9_f4086f4c",
+      "range": {
+        "startLine": 149,
+        "startChar": 15,
+        "endLine": 149,
+        "endChar": 39
+      },
+      "revId": "91d43c759715426848420b8b005f5d36d2bcc658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "719c673f_b98486ea",
@@ -78,6 +102,30 @@
       "side": 1,
       "message": "I assume you meant Validate it is non-null? +1",
       "parentUuid": "719c673f_b98486ea",
+      "range": {
+        "startLine": 152,
+        "startChar": 3,
+        "endLine": 152,
+        "endChar": 5
+      },
+      "revId": "91d43c759715426848420b8b005f5d36d2bcc658",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "507c4691_6249fc51",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-05-17T18:20:04Z",
+      "side": 1,
+      "message": "Added validation.",
+      "parentUuid": "95a12ca5_577c4b92",
       "range": {
         "startLine": 152,
         "startChar": 3,
