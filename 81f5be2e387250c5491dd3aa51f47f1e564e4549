@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79138394_0f564208",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-17T00:56:30Z",
+      "side": 1,
+      "message": "See CL that will be re-landing once Dawn rolls into chromium.\nhttps://chromium-review.googlesource.com/c/chromium/src/+/3650935\n\nthere\u0027s an include list of allowed features, so it won\u0027t be visible to Javascript.\nIt\u0027s also guarded here https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/webgpu/gpu_adapter.cc;l\u003d127",
+      "parentUuid": "d1c945a2_7afada6b",
+      "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "296e1f24_462b2c4b",
