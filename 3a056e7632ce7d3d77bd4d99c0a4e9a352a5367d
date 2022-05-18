@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb506424_fb39a3e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-18T14:10:44Z",
+      "side": 1,
+      "message": "Do we have tests still that the deduplication happens? I didn\u0027t notice them reading through the PR.",
+      "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cebc3677_e50cc0f9",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-18T14:10:44Z",
+      "side": 1,
+      "message": "duplicate?",
+      "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84a3f61f_50141c12",
+        "filename": "src/tint/ast/extension.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-18T14:10:44Z",
+      "side": 1,
+      "message": "The doc comment says this would be a blank string",
+      "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ddf9280_f367436d",
+        "filename": "src/tint/ast/extension.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-18T14:10:44Z",
+      "side": 1,
+      "message": "Doc comment says this should be a blank string",
+      "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9248d2e3_93eb4d24",
+        "filename": "src/tint/ast/extension.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-18T14:10:44Z",
+      "side": 1,
+      "message": "Why `const char*` and not `std::string`?",
+      "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2445f5c1_95da87f4",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-18T14:10:44Z",
+      "side": 1,
+      "message": "Why do we return these as strings instead of an enum?",
+      "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9238e19b_35586e98",
+        "filename": "src/tint/sem/builtin.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-18T14:10:44Z",
+      "side": 1,
+      "message": "s/kNoExtension/kNone ?",
+      "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76e8dace_db321a3b",
+        "filename": "src/tint/sem/module.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-18T14:10:44Z",
+      "side": 1,
+      "message": "std::move(extensions) ?",
+      "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
