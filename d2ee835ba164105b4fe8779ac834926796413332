@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30471aba_0494e35c",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-18T09:54:44Z",
+      "side": 1,
+      "message": "Ah sorry, I think there has been a conflict between multiple comments.\n\nSince the list of extensions is filtered by Chromium, we can expose this extension unconditionnally and the WebGPUCommandDecoder can do the filtering that it wants. It simplifies some of the code in the CL.\n\nSorry for the back and forth.",
+      "revId": "d2ee835ba164105b4fe8779ac834926796413332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a68a9332_b8a9a6f8",
+        "filename": "src/dawn/native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-18T09:54:44Z",
+      "side": 1,
+      "message": "nit: Maybe we could have a helper that\u0027s MakeDXCVersion so that each place in the code doesn\u0027t have to replicate the shifting logic.\n\nThis might also help collapse both ifs in a single one.",
+      "revId": "d2ee835ba164105b4fe8779ac834926796413332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9acd652d_c1039e28",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-18T09:54:44Z",
+      "side": 1,
+      "message": "Mmmh I\u0027m a bit worried this if might allow renderer processes to force usage of DXC even when it is an untested code path. Austin, Jiawei WDYT of removing this? It would just require adding --enable-dawn-features\u003duse_dxc to the command line. \n\nThe GPU process filters the list of extensions, but even if float16 is not exposed yet, it might be in the future so we need to be careful.",
+      "revId": "d2ee835ba164105b4fe8779ac834926796413332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
