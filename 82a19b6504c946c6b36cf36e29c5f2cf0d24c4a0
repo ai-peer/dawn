@@ -163,6 +163,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69ff21b8_82d9d893",
+        "filename": "src/dawn/tests/end2end/VertexStateTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-05-18T07:46:21Z",
+      "side": 1,
+      "message": "I got a comment there. Unlikely we change the spec. Instead probably we will enable to express a hole in vertex buffer array. We are still waiting for comments but I assume `StepMode::VertexBufferNotUsed \u003d\u003d StepMode::Undefined \u003d\u003d 0` will be used for it and will update the code in this CL so far.",
+      "parentUuid": "347130e7_329d1daa",
+      "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33684069_c456b6bd",
         "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
         "patchSetId": 1
