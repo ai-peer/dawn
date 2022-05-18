@@ -160,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20ba59f8_605ebba8",
+        "filename": "src/tint/ast/extension.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-18T14:52:35Z",
+      "side": 1,
+      "message": "Do we use this outside of the error paths (or wgsl writer)?",
+      "parentUuid": "3d1a578f_bb096d6d",
+      "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2445f5c1_95da87f4",
         "filename": "src/tint/inspector/inspector.cc",
         "patchSetId": 3
