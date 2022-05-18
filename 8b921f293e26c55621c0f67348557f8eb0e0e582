@@ -1,0 +1,221 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdb0419a_cabd638a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T16:04:12Z",
+      "side": 1,
+      "message": "Suggest some comment updates that would have helped me a lot.\nSuggested text provided.",
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7ea583d_e825c613",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T16:04:12Z",
+      "side": 1,
+      "message": "I was somewhat confused about the algorithm until I realized that matching is about whether the call matches a *particular* overload.\n\nSuggest adding the following text here:\n\nThe goal of matching is to compare a function call in the program source against a possibly-templated overload declaration, and:\n- determines if the call site satisfies the form and type constraints of the overload\n- and if so, computes a numeric cost, where a higher cost requires more extensive (and less preferable) set of feasible automatic conversions.\n\nA given function call may match more than one templated overload.  Eventually, resolution picks the matched overload with lowest cost.",
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2763cbb_4ea5f1da",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T16:04:12Z",
+      "side": 1,
+      "message": "suggest \"...will either reject the overload or refine the template:\"",
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "857315c9_ae2ca488",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T16:04:12Z",
+      "side": 1,
+      "message": "suggest \"not-yet-defined template type\" here.\nI was confused for a while about the difference between b and c.",
+      "range": {
+        "startLine": 213,
+        "startChar": 44,
+        "endLine": 213,
+        "endChar": 52
+      },
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7a1152d_7f766a5e",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T16:04:12Z",
+      "side": 1,
+      "message": "Probably worth saying: \n\nThis algorithm is less general than the overload resolution described in the WGSL spec.  But it makes the same decisions because the overloads defined by WGSL are monotonic in the sense that once a template parameter has been refined, there is never a need to backtrack and unrefine it to match a later argument.\n\nFor example, there is no WGSL with this as its complete set of overloads, where a decision to refine to \"f32\" would have to be reversed to refine to \"i32\" instead.\n       fn foo(i32,f32)\n       fn foo(f32,i32)",
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce58f107_b8c3620d",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T16:04:12Z",
+      "side": 1,
+      "message": "nit:  Conversion rank of a type to itself is 0, so this could be left to the next if-test on line 127.",
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c426778_08a42ec0",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T16:04:12Z",
+      "side": 1,
+      "message": "nit:  SetType(idx,ty)",
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6caeb4a_64f1fb5c",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T16:04:12Z",
+      "side": 1,
+      "message": "nit: suggest \"refine\" ?",
+      "range": {
+        "startLine": 227,
+        "startChar": 18,
+        "endLine": 227,
+        "endChar": 24
+      },
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a6d095f_b2f34fd0",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T16:04:12Z",
+      "side": 1,
+      "message": "nit:  suggest \"refined\" ?",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 257,
+        "endChar": 15
+      },
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14e04aed_fed6498f",
+        "filename": "src/tint/resolver/intrinsic_table.inl",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T16:04:12Z",
+      "side": 1,
+      "message": "\"refine\" is more suggestive of what\u0027s going on.",
+      "range": {
+        "startLine": 32,
+        "startChar": 16,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d0a4830_780860d7",
+        "filename": "src/tint/resolver/intrinsic_table.inl.tmpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T16:04:12Z",
+      "side": 1,
+      "message": "suggest \"refine\" instead",
+      "range": {
+        "startLine": 183,
+        "startChar": 16,
+        "endLine": 183,
+        "endChar": 22
+      },
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
