@@ -16,6 +16,40 @@
       "message": "You might want to look at the child change first to better understand what\u0027s going on here.",
       "revId": "c8e868463eef28c6088f475a69189fa0f7319d30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68ce15ac_a784630f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T15:16:30Z",
+      "side": 1,
+      "message": "Seems weird to have precedence ordering being opposite to conversion-rank ",
+      "revId": "c8e868463eef28c6088f475a69189fa0f7319d30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45e272f6_d428e8d8",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T15:16:30Z",
+      "side": 1,
+      "message": "This is like a locally-relevant ConversionRank.\n\nIt seems confusion-prone to have precedence \"higher is better\" be in opposition to \"lower rank is better\".",
+      "revId": "c8e868463eef28c6088f475a69189fa0f7319d30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
