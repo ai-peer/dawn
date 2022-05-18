@@ -22,6 +22,30 @@
       },
       "revId": "5eeef7c47fd263b5aa13d6e1245dd16d4fc8b98d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19b29e84_5982692f",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-18T15:00:57Z",
+      "side": 1,
+      "message": "Put up https://dawn-review.googlesource.com/c/dawn/+/90524 to fix it.",
+      "parentUuid": "7eb06c2a_2c7cebc5",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 51
+      },
+      "revId": "5eeef7c47fd263b5aa13d6e1245dd16d4fc8b98d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
