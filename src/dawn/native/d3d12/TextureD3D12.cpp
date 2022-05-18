@@ -1091,8 +1091,15 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
             uint32_t bytesPerRow =
                 Align((largestMipSize.width / blockInfo.width) * blockInfo.byteSize,
                       kTextureBytesPerRowAlignment);
-            uint64_t bufferSize = bytesPerRow * (largestMipSize.height / blockInfo.height) *
-                                  largestMipSize.depthOrArrayLayers;
+            uint32_t height = largestMipSize.height;
+            // If we are clearing multiple-depth 3D texture, there might be padding rows in each
+            // depth slices. We need to take those padding rows into consideration during clear.
+            if (GetDimension() == wgpu::TextureDimension::e3D &&
+                largestMipSize.depthOrArrayLayers > 1) {
+                height = GetHeight();
+            }
+            uint64_t bufferSize =
+                bytesPerRow * (height / blockInfo.height) * largestMipSize.depthOrArrayLayers;
             DynamicUploader* uploader = device->GetDynamicUploader();
             UploadHandle uploadHandle;
             DAWN_TRY_ASSIGN(uploadHandle,
