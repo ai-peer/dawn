@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca91b28d_7ad16246",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-05-18T15:15:57Z",
+      "side": 1,
+      "message": "Please take a look, and we can discuss it during the biweekly WebGPU/Dawn meeting. Thank you!",
+      "revId": "42e9845d9629e27c5870ac384ce37d40b4f9c4d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
