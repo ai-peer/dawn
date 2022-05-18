@@ -194,6 +194,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d25726fe_a96a6396",
+        "filename": "src/tint/ast/extension.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-18T15:24:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6ef91fb4_f2710f68",
+      "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2445f5c1_95da87f4",
