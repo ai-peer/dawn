@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d59935f_669f1dae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-18T20:41:30Z",
+      "side": 1,
+      "message": "LGTM with comments",
+      "revId": "7eb54bb40a17b93068734863621c86dfded3eb8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dfb61ab_28c9346c",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-18T20:41:30Z",
+      "side": 1,
+      "message": "pass this as const\u0026 instead of a pointer\n\nalso, generally prefer to use std::unordered_set unless you need to rely on the ordering of the elements - in this case we don\u0027t.",
+      "range": {
+        "startLine": 410,
+        "startChar": 4,
+        "endLine": 410,
+        "endChar": 71
+      },
+      "revId": "7eb54bb40a17b93068734863621c86dfded3eb8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
