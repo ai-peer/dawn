@@ -60,6 +60,13 @@ group("abseil") {
 
 config("internal") {
   configs = [ "${dawn_root}/src/dawn/common:internal_config" ]
+
+  if (is_linux) {
+    import("//build/config/linux/pkg_config.gni")
+    pkg_config("x11-xcb") {
+      packages = [ "x11-xcb" ]
+    }
+  }
 }
 
 config("weak_framework") {
@@ -337,6 +344,7 @@ source_set("sources") {
       "XlibXcbFunctions.cpp",
       "XlibXcbFunctions.h",
     ]
+    configs += [ ":x11-xcb" ]
   }
 
   # Only win32 app needs to link with user32.lib
@@ -717,6 +725,10 @@ dawn_component("native") {
     ":weak_framework",
     ":vulkan_rpath",
   ]
+
+  if (dawn_use_x11) {
+    configs += [ ":x11-xcb" ]
+  }
 
   if (dawn_enable_d3d12) {
     sources += [ "d3d12/D3D12Backend.cpp" ]
