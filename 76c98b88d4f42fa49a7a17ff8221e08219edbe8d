@@ -152,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90a94c0f_8c37d07d",
+        "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-18T20:54:20Z",
+      "side": 1,
+      "message": "got it - thanks for the clarification",
+      "parentUuid": "c42ff460_f656ba22",
+      "range": {
+        "startLine": 606,
+        "startChar": 0,
+        "endLine": 606,
+        "endChar": 99
+      },
+      "revId": "76c98b88d4f42fa49a7a17ff8221e08219edbe8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a30c3b84_c0ba4ca3",
@@ -183,6 +207,24 @@
       "side": 1,
       "message": "I have re-arranged the tests, now all tests for zero stride count are implemented in the second test (`ZeroStrideCountVertexBufferNeverOOB`).\n\nFor the previous patchset:\nThese two tests use different render pipeline.\nThe first one (`ZeroArrayStrideVertexBuffer`) tests vertex buffers with with zero array stride, so it uses a render pipeline with vertex buffer layout that all buffer slot has zero array stride. \nThe second one (`ZeroStrideCountVertexBufferNeverOOB`) test with zero stride count, i.e. calling draw or drawIndex with parameters `(vertexCount + firstVertex) \u003d\u003d 0` and/or `(instanceCount + firstInstance) \u003d\u003d 0`. It should test both cases of non-zero and zero array stride for render pipeline layout, but currently the zero array stride cases are tested in the first tests, so it only do the non-zero array stride cases, and use a corresponding render pipeline.",
       "parentUuid": "a30c3b84_c0ba4ca3",
+      "revId": "76c98b88d4f42fa49a7a17ff8221e08219edbe8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6722680e_1b8f0a09",
+        "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-18T20:54:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "48f35294_01697cc8",
       "revId": "76c98b88d4f42fa49a7a17ff8221e08219edbe8d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
