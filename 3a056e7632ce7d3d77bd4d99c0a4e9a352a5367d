@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "631bc548_59bad996",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-18T14:44:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cebc3677_e50cc0f9",
+      "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84a3f61f_50141c12",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4e2975e_01ec109e",
+        "filename": "src/tint/ast/extension.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-18T14:44:25Z",
+      "side": 1,
+      "message": "removed the incorrect bit from the docs.",
+      "parentUuid": "84a3f61f_50141c12",
+      "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ddf9280_f367436d",
@@ -65,6 +101,24 @@
       "writtenOn": "2022-05-18T14:10:44Z",
       "side": 1,
       "message": "Doc comment says this should be a blank string",
+      "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f82eb3c_b9c62e08",
+        "filename": "src/tint/ast/extension.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-18T14:44:25Z",
+      "side": 1,
+      "message": "removed the incorrect bit from the docs.",
+      "parentUuid": "0ddf9280_f367436d",
       "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3d1a578f_bb096d6d",
+        "filename": "src/tint/ast/extension.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-18T14:44:25Z",
+      "side": 1,
+      "message": "Over 80% of our entire execution time is in small heap allocations. When dealing with immutable data like this, `const char*` is fine.",
+      "parentUuid": "9248d2e3_93eb4d24",
+      "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2445f5c1_95da87f4",
         "filename": "src/tint/inspector/inspector.cc",
         "patchSetId": 3
@@ -99,6 +171,24 @@
       "writtenOn": "2022-05-18T14:10:44Z",
       "side": 1,
       "message": "Why do we return these as strings instead of an enum?",
+      "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93a58f02_50553585",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-18T14:44:25Z",
+      "side": 1,
+      "message": "Because the AST definition is Tint-private. We could duplicate it for the inspector, but not for this change.",
+      "parentUuid": "2445f5c1_95da87f4",
       "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +210,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09f8299d_6a34c8f7",
+        "filename": "src/tint/sem/builtin.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-18T14:44:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9238e19b_35586e98",
+      "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76e8dace_db321a3b",
@@ -133,6 +241,24 @@
       "writtenOn": "2022-05-18T14:10:44Z",
       "side": 1,
       "message": "std::move(extensions) ?",
+      "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0317655b_e0f05850",
+        "filename": "src/tint/sem/module.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-18T14:44:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76e8dace_db321a3b",
       "revId": "3a056e7632ce7d3d77bd4d99c0a4e9a352a5367d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
