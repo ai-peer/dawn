@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3ade5b2_a9b54614",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-18T16:51:51Z",
+      "side": 1,
+      "message": "I\u0027ve taken everything up to and including the first bullet. The text below is not quite right. There\u0027s no cost calculation for the overload, at least not for overload resolution. We simply pick the first overload that matches. We ICE if more than one overload matches.",
+      "parentUuid": "d7ea583d_e825c613",
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2763cbb_4ea5f1da",
         "filename": "src/tint/intrinsics.def",
         "patchSetId": 4
@@ -48,6 +66,24 @@
       "writtenOn": "2022-05-18T16:04:12Z",
       "side": 1,
       "message": "suggest \"...will either reject the overload or refine the template:\"",
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b969b494_fedd6ee5",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-18T16:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2763cbb_4ea5f1da",
       "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -77,6 +113,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3395d9e9_19f6aa14",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-18T16:51:51Z",
+      "side": 1,
+      "message": "In my terminology it is defined, just not finalized (it can be further refined). Updated the text. Let me know if its still not clear.",
+      "parentUuid": "857315c9_ae2ca488",
+      "range": {
+        "startLine": 213,
+        "startChar": 44,
+        "endLine": 213,
+        "endChar": 52
+      },
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7a1152d_7f766a5e",
         "filename": "src/tint/intrinsics.def",
         "patchSetId": 4
@@ -94,6 +154,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed191069_8fc14187",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-18T16:51:51Z",
+      "side": 1,
+      "message": "I took the first paragraph. The second paragraph is a bit head-scratching, because Tint defines an template overload as a single entity. When you say `complete set of overloads` I\u0027m assuming you\u0027re decomposing Tint\u0027s single templated overload into a number of spec-overloads.\nI think the first paragraph is good enough at reducing any confusion here.",
+      "parentUuid": "a7a1152d_7f766a5e",
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce58f107_b8c3620d",
         "filename": "src/tint/resolver/intrinsic_table.cc",
         "patchSetId": 4
@@ -105,6 +183,24 @@
       "writtenOn": "2022-05-18T16:04:12Z",
       "side": 1,
       "message": "nit:  Conversion rank of a type to itself is 0, so this could be left to the next if-test on line 127.",
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c468270_a12c699e",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-18T16:51:51Z",
+      "side": 1,
+      "message": "Ack. This is an optimization for the most common path. Removes the function call overhead, and the `UnwrapRef()` overhead within `ConversionRank()`.",
+      "parentUuid": "ce58f107_b8c3620d",
       "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -128,6 +224,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5095ac3d_bb72b557",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-18T16:51:51Z",
+      "side": 1,
+      "message": "Meh. That should optimize away, but this is super hot code. I\u0027d rather not introduce potential slowdowns unless there\u0027s a reason to.",
+      "parentUuid": "2c426778_08a42ec0",
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d6caeb4a_64f1fb5c",
         "filename": "src/tint/resolver/intrinsic_table.cc",
         "patchSetId": 4
@@ -139,6 +253,30 @@
       "writtenOn": "2022-05-18T16:04:12Z",
       "side": 1,
       "message": "nit: suggest \"refine\" ?",
+      "range": {
+        "startLine": 227,
+        "startChar": 18,
+        "endLine": 227,
+        "endChar": 24
+      },
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4b22ab4_b5a4154b",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-18T16:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6caeb4a_64f1fb5c",
       "range": {
         "startLine": 227,
         "startChar": 18,
@@ -172,6 +310,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e4ddb64_e286fe5e",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-18T16:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a6d095f_b2f34fd0",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 257,
+        "endChar": 15
+      },
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14e04aed_fed6498f",
@@ -195,6 +357,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c9e535e_9f7257d9",
+        "filename": "src/tint/resolver/intrinsic_table.inl",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-18T16:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14e04aed_fed6498f",
+      "range": {
+        "startLine": 32,
+        "startChar": 16,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d0a4830_780860d7",
@@ -208,6 +394,30 @@
       "writtenOn": "2022-05-18T16:04:12Z",
       "side": 1,
       "message": "suggest \"refine\" instead",
+      "range": {
+        "startLine": 183,
+        "startChar": 16,
+        "endLine": 183,
+        "endChar": 22
+      },
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfbdab9d_5b16e6b4",
+        "filename": "src/tint/resolver/intrinsic_table.inl.tmpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-18T16:51:51Z",
+      "side": 1,
+      "message": "I like. Done.",
+      "parentUuid": "1d0a4830_780860d7",
       "range": {
         "startLine": 183,
         "startChar": 16,
