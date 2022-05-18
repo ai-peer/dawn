@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa0947c6_02397881",
+        "filename": "src/tint/resolver/type_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-05-18T13:36:33Z",
+      "side": 1,
+      "message": "nit: I am unclear on why there is a comment marker here and in the block below",
+      "range": {
+        "startLine": 756,
+        "startChar": 43,
+        "endLine": 756,
+        "endChar": 45
+      },
+      "revId": "be050dfd9c819c83bd15623ee0aba1a4a799f626",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
