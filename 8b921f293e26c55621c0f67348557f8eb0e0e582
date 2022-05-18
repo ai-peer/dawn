@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26fdadac_28aa6e94",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T18:00:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c3ade5b2_a9b54614",
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2763cbb_4ea5f1da",
@@ -135,6 +153,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cb1edfe_52b5fced",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T18:00:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3395d9e9_19f6aa14",
+      "range": {
+        "startLine": 213,
+        "startChar": 44,
+        "endLine": 213,
+        "endChar": 52
+      },
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7a1152d_7f766a5e",
@@ -166,6 +208,24 @@
       "side": 1,
       "message": "I took the first paragraph. The second paragraph is a bit head-scratching, because Tint defines an template overload as a single entity. When you say `complete set of overloads` I\u0027m assuming you\u0027re decomposing Tint\u0027s single templated overload into a number of spec-overloads.\nI think the first paragraph is good enough at reducing any confusion here.",
       "parentUuid": "a7a1152d_7f766a5e",
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd26a0db_117b5bdd",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T18:00:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ed191069_8fc14187",
       "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -236,6 +296,24 @@
       "side": 1,
       "message": "Meh. That should optimize away, but this is super hot code. I\u0027d rather not introduce potential slowdowns unless there\u0027s a reason to.",
       "parentUuid": "2c426778_08a42ec0",
+      "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ff2592c_5466df53",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T18:00:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5095ac3d_bb72b557",
       "revId": "8b921f293e26c55621c0f67348557f8eb0e0e582",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

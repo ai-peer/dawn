@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2b6d158_9f7a2efa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T18:00:28Z",
+      "side": 1,
+      "message": "Thanks. This helps a lot.",
+      "revId": "8d0911fb92623b2f69b051252b8403d6ec12367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "603e4990_dd21a53a",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 6
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-18T18:00:28Z",
+      "side": 1,
+      "message": "Inserting the \"first\" here to make it \"first defined\" helps a lot.",
+      "range": {
+        "startLine": 215,
+        "startChar": 22,
+        "endLine": 215,
+        "endChar": 27
+      },
+      "revId": "8d0911fb92623b2f69b051252b8403d6ec12367d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
