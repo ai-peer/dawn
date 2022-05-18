@@ -267,6 +267,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "642d49cc_9d70e7ea",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-18T07:04:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "296e1f24_462b2c4b",
+      "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "580ef2e8_02ff6c23",
@@ -316,6 +334,24 @@
       "side": 1,
       "message": "IMHO we might as well do it now, there\u0027s basically no cost to that and we\u0027re just updating the list of known shader models in this CL. As you wish.",
       "parentUuid": "9751ef4e_d329deea",
+      "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9df5650_90503407",
+        "filename": "src/dawn/native/d3d12/D3D12Info.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-18T07:04:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14cb1d72_be363839",
       "revId": "81f5be2e387250c5491dd3aa51f47f1e564e4549",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
