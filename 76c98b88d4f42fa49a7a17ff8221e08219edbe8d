@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a36c157_0091587a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-05-18T09:56:11Z",
+      "side": 1,
+      "message": "I notice this defect when implementing CTS.\nSince the `strideCount` concept is introduced at https://github.com/gpuweb/gpuweb/pull/2554, a related issue is https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1287.",
+      "parentUuid": "4e88a10c_513f3f9a",
+      "revId": "76c98b88d4f42fa49a7a17ff8221e08219edbe8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2f1a0a4b_bb4b8dd0",
