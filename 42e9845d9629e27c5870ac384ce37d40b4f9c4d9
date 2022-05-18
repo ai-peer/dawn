@@ -16,6 +16,46 @@
       "message": "Please take a look, and we can discuss it during the biweekly WebGPU/Dawn meeting. Thank you!",
       "revId": "42e9845d9629e27c5870ac384ce37d40b4f9c4d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8d89bba_b349b81e",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1094,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-18T17:20:37Z",
+      "side": 1,
+      "message": "Nice work investigating this and tracing to the copy here going outside of the buffer.\n\nThe fix currently is to make what\u0027s used to compute the size of the buffer match the rowsPerImage used at [1]. However I think that what\u0027s used at [1] is too much: here we could be copying to only the lower mips of a texture so we really want to use largestMipSize.\n\nSo I think the proper fix is to use largestMipSize in [1] instead.\n\nAs a side note, this code is also allocating too much data for 2d array textures since largestMipSize.depthOrArrayLayers will be \u003e 1 but we only use a singly slice for the copy. Might be worth fixing later.",
+      "revId": "42e9845d9629e27c5870ac384ce37d40b4f9c4d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b9b0a0e_1b22e294",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-18T17:20:37Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 1132,
+        "startChar": 63,
+        "endLine": 1132,
+        "endChar": 74
+      },
+      "revId": "42e9845d9629e27c5870ac384ce37d40b4f9c4d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
