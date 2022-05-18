@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82eb280f_48b4c6eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-18T15:00:43Z",
+      "side": 1,
+      "message": "PTAL! This is to fix the Skia roll",
+      "revId": "912bf4cbf3482e4b078506c50dd7a8f7281da457",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
