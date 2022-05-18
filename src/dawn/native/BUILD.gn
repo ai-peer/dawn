@@ -60,6 +60,12 @@ group("abseil") {
 
 config("internal") {
   configs = [ "${dawn_root}/src/dawn/common:internal_config" ]
+
+  # Enable -Wglobal-constructors here only, instead of in internal_config,
+  # because gtest and some other targets don't build with it.
+  if (is_clang) {
+    cflags = [ "-Wglobal-constructors" ]
+  }
 }
 
 config("weak_framework") {
@@ -157,10 +163,6 @@ source_set("sources") {
 
   configs += [
     ":internal",
-
-    # Enable -Wglobal-constructors here only, instead of in internal_config,
-    # because gtest and some other targets don't build with it.
-    "//build/config/compiler:wglobal_constructors",
   ]
 
   # Dependencies that are needed to compile dawn native entry points in
