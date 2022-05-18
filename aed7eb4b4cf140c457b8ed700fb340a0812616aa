@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "387f0a39_4e02db57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-18T19:53:37Z",
+      "side": 1,
+      "message": "fyi, they are no longer flaky after the changes to adapter/device creation chrome-side. So we don\u0027t need to restore it to RetryOnFailure",
+      "revId": "aed7eb4b4cf140c457b8ed700fb340a0812616aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
