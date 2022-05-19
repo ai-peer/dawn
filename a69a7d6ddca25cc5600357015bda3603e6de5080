@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acbc6784_69bff269",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-19T19:49:34Z",
+      "side": 1,
+      "message": "LGTM with nits.",
+      "revId": "a69a7d6ddca25cc5600357015bda3603e6de5080",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7f78a2b_e5429743",
+        "filename": "src/tint/sem/type.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-19T19:49:34Z",
+      "side": 1,
+      "message": "nit:   const auto* ?",
+      "revId": "a69a7d6ddca25cc5600357015bda3603e6de5080",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c55af4e_d2dd4995",
+        "filename": "src/tint/sem/type_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-19T19:49:34Z",
+      "side": 1,
+      "message": "Would be nice to spot check that (concrete) scalar type don\u0027t convert to other onese.\n\n\nCommon({u32,i32}) -\u003e nullptr\nDo a cycle\n   i32, u32\n   u32, f32\n   f32, f16\n   f16, i32",
+      "revId": "a69a7d6ddca25cc5600357015bda3603e6de5080",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
