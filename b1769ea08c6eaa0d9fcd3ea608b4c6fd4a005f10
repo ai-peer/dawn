@@ -110,6 +110,30 @@
       },
       "revId": "b1769ea08c6eaa0d9fcd3ea608b4c6fd4a005f10",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a410853d_5eecf51b",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-19T22:05:41Z",
+      "side": 1,
+      "message": "Right, I was expecting TINT_ASSERT instead of this, and I know you often ask not to use it 😊",
+      "parentUuid": "86fb1150_5d245371",
+      "range": {
+        "startLine": 43,
+        "startChar": 16,
+        "endLine": 43,
+        "endChar": 33
+      },
+      "revId": "b1769ea08c6eaa0d9fcd3ea608b4c6fd4a005f10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
