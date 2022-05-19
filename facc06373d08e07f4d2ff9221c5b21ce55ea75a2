@@ -85,6 +85,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f9afc14_32537761",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-19T18:29:53Z",
+      "side": 1,
+      "message": "Yea, I was talking about native/internal. My thought was that the whole point of holding a Ref\u003cDeviceBase\u003e instead of a DeviceBase* in the native/internal implementation was so that we could make native/internal have the same behavior in terms of object lifetime w.r.t the device as the API. Otherwise this change doesn\u0027t really change any functionality, but adds complexity with an extra ref counter.\n\nBut yea, to have it recurse would require overriding the DropDeviceRef/WeakDeviceRefs in all derived classes, though maybe that\u0027s not too bad?",
+      "parentUuid": "b4dd8134_4f61a951",
+      "revId": "facc06373d08e07f4d2ff9221c5b21ce55ea75a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "610f3f34_03eacd07",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 5
