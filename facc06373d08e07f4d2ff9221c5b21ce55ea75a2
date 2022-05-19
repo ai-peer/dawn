@@ -103,6 +103,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a852c416_1f4d6eb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T21:40:58Z",
+      "side": 1,
+      "message": "hm, the goal isn\u0027t for internal lifetimes to Dawn - the goal is so that the external lifetimes are more robust so that if the renderer process drops the device first, it can\u0027t cause a use-after-free and security issues. Right now we have a bunch of hacks to prevent this which are now removed in the following CL.\n\nI think something like you\u0027ve suggested like WeakDeviceRefs could help the native API match match JavaScript more where even if the device is GC\u0027ed your application keeps working, but I don\u0027t think it solves a real need right now for the complexity it would add; and, I don\u0027t see a good way we can enforce that is was implemented recursively - correctly. Blink has a Clang plugin which actually checks your code using static analysis that you call Trace on all your GC-tracked Member variables. Maybe we could do something like that one day.",
+      "parentUuid": "0f9afc14_32537761",
+      "revId": "facc06373d08e07f4d2ff9221c5b21ce55ea75a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "610f3f34_03eacd07",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 5
