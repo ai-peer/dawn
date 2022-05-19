@@ -1384,9 +1384,6 @@ TEST_P(BindGroupTests, EmptyLayout) {
 // This is a regression test for crbug.com/dawn/410 which tests that it can successfully compile and
 // execute the shader.
 TEST_P(BindGroupTests, ReadonlyStorage) {
-    // TODO(anglebug.com/7226): fix failure in ANGLE/D3D11
-    DAWN_SUPPRESS_TEST_IF(IsANGLE() && IsWindows());
-
     utils::ComboRenderPipelineDescriptor pipelineDescriptor;
 
     pipelineDescriptor.vertex.module = utils::CreateShaderModule(device, R"(
