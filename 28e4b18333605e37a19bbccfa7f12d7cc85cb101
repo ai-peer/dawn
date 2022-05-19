@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e2d2575_a811694a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-19T19:23:25Z",
+      "side": 1,
+      "message": "lgtm with nit.",
+      "revId": "28e4b18333605e37a19bbccfa7f12d7cc85cb101",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77d24af1_16058486",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-19T19:23:25Z",
+      "side": 1,
+      "message": "Maybe add a comment that currently this only handles single argument builtins in case we need this later for multi-argument.",
+      "revId": "28e4b18333605e37a19bbccfa7f12d7cc85cb101",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
