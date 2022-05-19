@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "529d32c0_bd28743f",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc5acd41_9aec4357",
+      "range": {
+        "startLine": 31,
+        "startChar": 13,
+        "endLine": 31,
+        "endChar": 21
+      },
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "096aa627_2895c1cc",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-05-19T10:53:37Z",
       "side": 1,
       "message": "nit: reference.",
+      "range": {
+        "startLine": 34,
+        "startChar": 60,
+        "endLine": 34,
+        "endChar": 68
+      },
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9656452a_8d0d8753",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "096aa627_2895c1cc",
       "range": {
         "startLine": 34,
         "startChar": 60,
@@ -98,6 +146,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6510055b_42ffbb99",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1626575e_95ab094a",
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef4443ce_a2476b51",
@@ -111,6 +177,30 @@
       "writtenOn": "2022-05-19T10:53:37Z",
       "side": 1,
       "message": "Why proper noun?",
+      "range": {
+        "startLine": 292,
+        "startChar": 33,
+        "endLine": 292,
+        "endChar": 37
+      },
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87a37eb7_3df94d7e",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef4443ce_a2476b51",
       "range": {
         "startLine": 292,
         "startChar": 33,
@@ -144,6 +234,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e68a4201_e46b042a",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3e8a6e8_ded85626",
+      "range": {
+        "startLine": 302,
+        "startChar": 37,
+        "endLine": 302,
+        "endChar": 45
+      },
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae914a12_bb541ba3",
@@ -157,6 +271,30 @@
       "writtenOn": "2022-05-19T03:07:18Z",
       "side": 1,
       "message": "I\u0027m thinking instead of this check and the one down at [1], we just don\u0027t clear these members out to nullptr inside Destroy(). WDYT?\n\nDestroy already waits for them to all finish and drains all the tasks and callbacks so they should be empty.\n\nProblem I ran into is when Tick happens, we call callbacks - and inside those callbacks, someone might drop the last external device ref which will call device.destroy(). So basically, inside APITick, the device might get destroyed from under you.\n\nThis problem is not new to this code though - you can already call device.destroy() inside some callback today.",
+      "range": {
+        "startLine": 699,
+        "startChar": 4,
+        "endLine": 701,
+        "endChar": 5
+      },
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7d59e3b_e2c2f17a",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae914a12_bb541ba3",
       "range": {
         "startLine": 699,
         "startChar": 4,
@@ -190,6 +328,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27b20c3d_04e1663b",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1773,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0c7e853_25760ec7",
+      "range": {
+        "startLine": 1773,
+        "startChar": 8,
+        "endLine": 1773,
+        "endChar": 40
+      },
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1196dc28_6acfb5df",
@@ -203,6 +365,24 @@
       "writtenOn": "2022-05-19T10:53:37Z",
       "side": 1,
       "message": "u-u-nit: braces?",
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce302fd5_85be6553",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1458,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1196dc28_6acfb5df",
       "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -277,6 +457,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef725cd0_aa757033",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "I was just lazy once and then the copy-paste propagated it. I prefer the braces to - can make a separate CL to add the .clang-format rule and see what others think.",
+      "parentUuid": "a2f2f230_7805f440",
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fc4feb1_9c8fbffc",
@@ -290,6 +488,24 @@
       "writtenOn": "2022-05-19T10:53:37Z",
       "side": 1,
       "message": "Doesn\u0027t this have the same issue as DroppedInsideQueueOnSubmittedWorkDone so we need to tick the device manually?",
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa3d6789_2be5a88a",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fc4feb1_9c8fbffc",
       "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -313,6 +529,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77f8988a_e1940c18",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "this one doesn\u0027t need. it\u0027s just for the cases where we have moved the device from the fixture to the userdata",
+      "parentUuid": "5020192f_cf861c32",
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85730896_871039fb",
         "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
         "patchSetId": 6
@@ -324,6 +558,24 @@
       "writtenOn": "2022-05-19T10:53:37Z",
       "side": 1,
       "message": "ditto",
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9aac9553_85d5ef79",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85730896_871039fb",
       "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -345,6 +597,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5380d5ab_8897386a",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab709aa2_c0e54eda",
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5fdc58ca_8c8f103c",
@@ -358,6 +628,24 @@
       "writtenOn": "2022-05-19T10:53:37Z",
       "side": 1,
       "message": "ditto",
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46d659df_a8e5a8c5",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fdc58ca_8c8f103c",
       "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -379,6 +667,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebd3e59d_63f1ace7",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04d067ea_9ccb94fb",
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afba51f0_0437f0d3",
@@ -392,6 +698,24 @@
       "writtenOn": "2022-05-19T10:53:37Z",
       "side": 1,
       "message": "ditto",
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bae627d_475a0127",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afba51f0_0437f0d3",
       "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

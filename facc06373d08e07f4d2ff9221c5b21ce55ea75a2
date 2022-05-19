@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29eaf5a0_166ba388",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e9728bc_5d0d92c2",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 11
+      },
+      "revId": "facc06373d08e07f4d2ff9221c5b21ce55ea75a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54b0985d_c6422b42",
@@ -72,6 +96,30 @@
       "writtenOn": "2022-05-19T00:15:03Z",
       "side": 1,
       "message": "nit. hold",
+      "range": {
+        "startLine": 300,
+        "startChar": 65,
+        "endLine": 300,
+        "endChar": 73
+      },
+      "revId": "facc06373d08e07f4d2ff9221c5b21ce55ea75a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17e4ef6c_87fcafeb",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "610f3f34_03eacd07",
       "range": {
         "startLine": 300,
         "startChar": 65,
