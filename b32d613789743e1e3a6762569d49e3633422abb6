@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5a93c50_f4dff9ee",
+        "filename": "src/tint/resolver/resolver_test_helper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-19T19:41:42Z",
+      "side": 1,
+      "message": "nit: enable_abstract_numerics",
+      "range": {
+        "startLine": 22,
+        "startChar": 68,
+        "endLine": 22,
+        "endChar": 71
+      },
+      "revId": "b32d613789743e1e3a6762569d49e3633422abb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c166c15_94c7366c",
+        "filename": "src/tint/resolver/resolver_test_helper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-19T19:41:42Z",
+      "side": 1,
+      "message": "I would have thought you wanted this false by default?",
+      "range": {
+        "startLine": 22,
+        "startChar": 75,
+        "endLine": 22,
+        "endChar": 79
+      },
+      "revId": "b32d613789743e1e3a6762569d49e3633422abb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
