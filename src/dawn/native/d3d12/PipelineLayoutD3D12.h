@@ -81,6 +81,9 @@ class PipelineLayout final : public PipelineLayoutBase {
 
     const DynamicStorageBufferLengthInfo& GetDynamicStorageBufferLengthInfo() const;
 
+  protected:
+    void DestroyImpl() override;
+
   private:
     ~PipelineLayout() override = default;
     using PipelineLayoutBase::PipelineLayoutBase;

@@ -275,6 +275,23 @@ MaybeError PipelineLayout::Initialize() {
     return {};
 }
 
+void PipelineLayout::DestroyImpl() {
+    PipelineLayoutBase::DestroyImpl();
+
+    Device* device = ToBackend(GetDevice());
+    device->ReferenceUntilUnused(mRootSignature);
+
+    if (mDispatchIndirectCommandSignatureWithNumWorkgroups.Get()) {
+        device->ReferenceUntilUnused(mDispatchIndirectCommandSignatureWithNumWorkgroups);
+    }
+    if (mDrawIndirectCommandSignatureWithInstanceVertexOffsets.Get()) {
+        device->ReferenceUntilUnused(mDrawIndirectCommandSignatureWithInstanceVertexOffsets);
+    }
+    if (mDrawIndexedIndirectCommandSignatureWithInstanceVertexOffsets.Get()) {
+        device->ReferenceUntilUnused(mDrawIndexedIndirectCommandSignatureWithInstanceVertexOffsets);
+    }
+}
+
 uint32_t PipelineLayout::GetCbvUavSrvRootParameterIndex(BindGroupIndex group) const {
     ASSERT(group < kMaxBindGroupsTyped);
     return mCbvUavSrvRootParameterInfo[group];
