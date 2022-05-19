@@ -163,6 +163,10 @@ MaybeError Adapter::InitializeSupportedFeaturesImpl() {
         mSupportedFeatures.EnableFeature(Feature::Depth32FloatStencil8);
     }
 
+    if (mDeviceInfo.features.drawIndirectFirstInstance == VK_TRUE) {
+        mSupportedFeatures.EnableFeature(Feature::IndirectFirstInstance);
+    }
+
 #if defined(DAWN_USE_SYNC_FDS)
     // TODO(chromium:1258986): Precisely enable the feature by querying the device's format
     // features.
