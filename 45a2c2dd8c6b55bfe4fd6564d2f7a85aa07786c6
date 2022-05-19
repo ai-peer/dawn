@@ -86,6 +86,24 @@
       "parentUuid": "6dff5bbd_2c97baef",
       "revId": "45a2c2dd8c6b55bfe4fd6564d2f7a85aa07786c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ab43c15_672b5d79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-05-19T17:11:04Z",
+      "side": 1,
+      "message": "All tests at api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,array:dimension\u003d\"3d\";* failed on D3D12. Now they can pass (on my local machine).\n\nLooks like third_party/webgpu-cts/expectations.txt is gone. I guess I need to update third_party/blink/web_tests/WebGPUExpectations and let bots try these tests. Is that correct?",
+      "parentUuid": "668eb5f5_082339dc",
+      "revId": "45a2c2dd8c6b55bfe4fd6564d2f7a85aa07786c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
