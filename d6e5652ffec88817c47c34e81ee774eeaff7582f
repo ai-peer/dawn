@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd771aa0_c7eef849",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T03:07:18Z",
+      "side": 1,
+      "message": "added a bunch of tests",
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae914a12_bb541ba3",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T03:07:18Z",
+      "side": 1,
+      "message": "I\u0027m thinking instead of this check and the one down at [1], we just don\u0027t clear these members out to nullptr inside Destroy(). WDYT?\n\nDestroy already waits for them to all finish and drains all the tasks and callbacks so they should be empty.\n\nProblem I ran into is when Tick happens, we call callbacks - and inside those callbacks, someone might drop the last external device ref which will call device.destroy(). So basically, inside APITick, the device might get destroyed from under you.\n\nThis problem is not new to this code though - you can already call device.destroy() inside some callback today.",
+      "range": {
+        "startLine": 699,
+        "startChar": 4,
+        "endLine": 701,
+        "endChar": 5
+      },
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0c7e853_25760ec7",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1773,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T03:07:18Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 1773,
+        "startChar": 8,
+        "endLine": 1773,
+        "endChar": 40
+      },
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
