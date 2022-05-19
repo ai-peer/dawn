@@ -408,6 +408,24 @@
       "parentUuid": "0593f3f4_4da39d89",
       "revId": "aed7eb4b4cf140c457b8ed700fb340a0812616aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2db5e12_2b800383",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-19T10:55:56Z",
+      "side": 0,
+      "message": "I didn\u0027t remove it. I\u0027ll do it after this CL lands.",
+      "parentUuid": "bfccf487_c0d31fd5",
+      "revId": "aed7eb4b4cf140c457b8ed700fb340a0812616aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
