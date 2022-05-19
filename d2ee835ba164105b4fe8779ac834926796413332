@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c36300d0_b17cd2b3",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-19T03:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30471aba_0494e35c",
+      "revId": "d2ee835ba164105b4fe8779ac834926796413332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a68a9332_b8a9a6f8",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16feec32_64dda647",
+        "filename": "src/dawn/native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-19T03:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a68a9332_b8a9a6f8",
+      "revId": "d2ee835ba164105b4fe8779ac834926796413332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9acd652d_c1039e28",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-05-18T09:54:44Z",
       "side": 1,
       "message": "Mmmh I\u0027m a bit worried this if might allow renderer processes to force usage of DXC even when it is an untested code path. Austin, Jiawei WDYT of removing this? It would just require adding --enable-dawn-features\u003duse_dxc to the command line. \n\nThe GPU process filters the list of extensions, but even if float16 is not exposed yet, it might be in the future so we need to be careful.",
+      "revId": "d2ee835ba164105b4fe8779ac834926796413332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e20b4763_9a893252",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-19T03:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9acd652d_c1039e28",
       "revId": "d2ee835ba164105b4fe8779ac834926796413332",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
