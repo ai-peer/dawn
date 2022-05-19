@@ -261,6 +261,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2f2f230_7805f440",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-19T10:59:33Z",
+      "side": 1,
+      "message": "Link doesn\u0027t work :( Search for InsertBraces, it\u0027s new in clang-format 15",
+      "parentUuid": "c61c7f01_79f3aaeb",
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7fc4feb1_9c8fbffc",
         "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
         "patchSetId": 6
