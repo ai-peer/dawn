@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <memory>
 #include <vector>
 
 #include "dawn/wire/SupportedFeatures.h"
@@ -98,6 +99,7 @@ void Server::OnRequestDeviceCallback(RequestDeviceUserdata* data,
     // Assign the handle and allocated status if the device is created successfully.
     auto* deviceObject = DeviceObjects().FillReservation(data->deviceObjectId, device);
     ASSERT(deviceObject != nullptr);
+    deviceObject->info = std::make_unique<DeviceInfo>();
     deviceObject->info->server = this;
     deviceObject->info->self = ObjectHandle{data->deviceObjectId, deviceObject->generation};
     SetForwardingDeviceCallbacks(deviceObject);
