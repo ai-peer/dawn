@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc52dd34_c0989725",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-19T19:58:17Z",
+      "side": 1,
+      "message": "LGTM with nit. Wrong bug number in the TODO?",
+      "revId": "0dda4e5d5f609f6cfc68ab06a6d8e54ba8f135e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2db748c_c5a8894c",
+        "filename": "src/tint/transform/remove_phonies.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-19T19:58:17Z",
+      "side": 1,
+      "message": "slick.\n\nnit: prefer \"creation-time\" to \"compile time\".  Former is more precise",
+      "revId": "0dda4e5d5f609f6cfc68ab06a6d8e54ba8f135e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7f2f9cd_84d9e143",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-19T19:58:17Z",
+      "side": 1,
+      "message": "wrong bug number?  \n1472 is implementing \"enable\" directive.",
+      "range": {
+        "startLine": 696,
+        "startChar": 16,
+        "endLine": 696,
+        "endChar": 35
+      },
+      "revId": "0dda4e5d5f609f6cfc68ab06a6d8e54ba8f135e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb11637c_f4c45ab5",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-19T19:58:17Z",
+      "side": 1,
+      "message": "bug numbe?\nShould this be https://bugs.chromium.org/p/tint/issues/detail?id\u003d1504  ?",
+      "range": {
+        "startLine": 930,
+        "startChar": 31,
+        "endLine": 930,
+        "endChar": 35
+      },
+      "revId": "0dda4e5d5f609f6cfc68ab06a6d8e54ba8f135e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42d25b4a_6111f17e",
+        "filename": "src/tint/writer/msl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-19T19:58:17Z",
+      "side": 1,
+      "message": "1504?",
+      "range": {
+        "startLine": 556,
+        "startChar": 31,
+        "endLine": 556,
+        "endChar": 35
+      },
+      "revId": "0dda4e5d5f609f6cfc68ab06a6d8e54ba8f135e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a968995_f0f80a2f",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-19T19:58:17Z",
+      "side": 1,
+      "message": "Right.",
+      "revId": "0dda4e5d5f609f6cfc68ab06a6d8e54ba8f135e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afbcfcb4_3d0f90f9",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2165,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-19T19:58:17Z",
+      "side": 1,
+      "message": "1504?",
+      "range": {
+        "startLine": 2165,
+        "startChar": 31,
+        "endLine": 2165,
+        "endChar": 35
+      },
+      "revId": "0dda4e5d5f609f6cfc68ab06a6d8e54ba8f135e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
