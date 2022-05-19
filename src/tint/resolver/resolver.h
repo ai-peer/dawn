@@ -198,6 +198,22 @@ class Resolver {
     sem::Expression* MemberAccessor(const ast::MemberAccessorExpression*);
     sem::Expression* UnaryOp(const ast::UnaryOpExpression*);
 
+    /// If `expr` is of an abstract-numeric type:
+    /// * Materialize will create and return a sem::Materialize node wrapping `expr`.
+    /// * The AST -> Sem binding will be updated to point to the new sem::Materialize node.
+    /// * The sem::Materialize node will have a new concrete type, which will be `target_type` if
+    ///   not nullptr, otherwise of a type with the scalar type of `i32` or `f32`.
+    /// * The sem::Materialize constant value will be the value of `expr` type-casted to the
+    ///   materialized type.
+    /// If `expr` is not of an abstract-numeric type, then Materialize() simply returns `expr`.
+    const sem::Expression* Materialize(const sem::Expression* expr,
+                                       const sem::Type* target_type = nullptr);
+
+    /// Materializes all the arguments in `args` to the parameter types of `target`.
+    /// @returns true on success, false on failure.
+    bool MaterializeArguments(std::vector<const sem::Expression*>& args,
+                              const sem::CallTarget* target);
+
     // Statement resolving methods
     // Each return true on success, false on failure.
     sem::Statement* AssignmentStatement(const ast::AssignmentStatement*);
