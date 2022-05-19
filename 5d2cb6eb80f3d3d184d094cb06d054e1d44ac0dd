@@ -16,6 +16,24 @@
       "message": "This assert seems to have been lost?",
       "revId": "5d2cb6eb80f3d3d184d094cb06d054e1d44ac0dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "581f15f4_755fac8a",
+        "filename": "src/tint/sem/constant.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-19T17:34:21Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "b04f32fc_9f33aa86",
+      "revId": "5d2cb6eb80f3d3d184d094cb06d054e1d44ac0dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
