@@ -21,6 +21,7 @@ import("../../../scripts/dawn_overrides_with_defaults.gni")
 group("webgpu-cts") {
   public_deps = [
     ":compile_src",
+    ":copy_html",
     ":copy_resources",
     ":verify_gen_ts_dep_list",
   ]
@@ -62,6 +63,27 @@ action("compile_src") {
   data = js_outputs
 
   args = [ rebase_path("$target_gen_dir/../../webgpu-cts", root_build_dir) ]
+}
+
+list_from_html_sources_txt = read_file("html_sources.txt", "list lines")
+html_source_inputs = []
+foreach(file, list_from_html_sources_txt) {
+  html_source_inputs += [ "$file" ]
+}
+
+copy("copy_html") {
+  # compile_src wipes the generated src directory, so it needs to run first
+  deps = [ ":compile_src" ]
+
+  sources = []
+  data = []
+  foreach(html_source, html_source_inputs) {
+    sources += [ "../../webgpu-cts/src/$html_source" ]
+
+    data += [ "$target_gen_dir/../../webgpu-cts/src/$html_source" ]
+  }
+
+  outputs = [ "$root_gen_dir/{{source}}" ]
 }
 
 list_from_resource_files_txt = read_file("resource_files.txt", "list lines")

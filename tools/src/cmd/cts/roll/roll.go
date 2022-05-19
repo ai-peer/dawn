@@ -48,7 +48,8 @@ func init() {
 const (
 	depsRelPath      = "DEPS"
 	tsSourcesRelPath = "third_party/gn/webgpu-cts/ts_sources.txt"
-	webTestsPath	 = "webgpu-cts/webtests"
+	htmlSourcesRelPath = "third_party/gn/webgpu-cts/html_sources.txt"
+	webTestsPath	 = "webgpu-cts/webtests/webgpu"
 	refMain          = "refs/heads/main"
 	noExpectations   = `# Clear all expectations to obtain full list of results`
 )
@@ -239,10 +240,10 @@ func (r *roller) roll(ctx context.Context) error {
 		return fmt.Errorf("failed to generate ts_sources.txt: %v", err)
 	}
 
-	// Regenerate web tests HTML files
-	err = r.genWebTestSources(ctx, generatedFiles)
+	// Regenerate the HTML dependency list
+	htmlSources, err := r.genHTMLDepList(ctx)
 	if err != nil {
-		return fmt.Errorf("failed to generate web tests: %v", err)
+		return fmt.Errorf("failed to generate html_sources.txt: %v", err)
 	}
 
 	// Look for an existing gerrit change to update
@@ -284,6 +285,7 @@ func (r *roller) roll(ctx context.Context) error {
 	generatedFiles[depsRelPath] = updatedDEPS
 	generatedFiles[common.RelativeExpectationsPath] = ex.String()
 	generatedFiles[tsSourcesRelPath] = tsSources
+	generatedFiles[htmlSourcesRelPath] = htmlSources
 
 	msg := r.rollCommitMessage(oldCTSHash, newCTSHash, ctsLog, changeID)
 	ps, err := r.gerrit.EditFiles(changeID, msg, generatedFiles)
@@ -605,7 +607,9 @@ func (r *roller) genTSDepList(ctx context.Context) (string, error) {
 	return strings.Join(deps, "\n") + "\n", nil
 }
 
-func (r *roller) genWebTestSources(ctx context.Context, generatedFiles map[string]string) (error) {
+func (r *roller) genHTMLDepList(ctx context.Context) (string, error) {
+	deps := []string{}
+
 	htmlSearchDir := filepath.Join(r.ctsDir, "src", "webgpu")
 	err := filepath.Walk(htmlSearchDir,
 		func(path string, info os.FileInfo, err error) error {
@@ -620,22 +624,48 @@ func (r *roller) genWebTestSources(ctx context.Context, generatedFiles map[strin
 			return err
 		}
 
-		data, err := os.ReadFile(path)
-		if err != nil {
-			return err
-		}
-		contents := string(data)
-
-		// Find the index after the starting html tag.
-		i := strings.Index(contents, "<html")
-		i = i + strings.Index(contents[i:], ">")
-		i = i + 1
-
-		// Insert a base tag so the fetched resources will come from the generated CTS JavaScript sources.
-		contents = contents[:i] + "\n  <base ref=\"/gen/third_party/dawn/webgpu-cts/src/webgpu\" />" + contents[i:]
-
-		generatedFiles[filepath.Join(webTestsPath, relPath)] = contents
+		deps = append(deps, relPath)
 		return nil
 	})
-	return err
+	if err != nil {
+		return "", err
+	}
+
+	return strings.Join(deps, "\n") + "\n", nil
 }
+
+
+// func (r *roller) genWebTestSources(ctx context.Context, generatedFiles map[string]string) (error) {
+// 	htmlSearchDir := filepath.Join(r.ctsDir, "src", "webgpu")
+// 	err := filepath.Walk(htmlSearchDir,
+// 		func(path string, info os.FileInfo, err error) error {
+// 		if err != nil {
+// 			return err
+// 		}
+// 		if !strings.HasSuffix(info.Name(), ".html") || info.IsDir() {
+// 			return nil
+// 		}
+// 		relPath, err := filepath.Rel(htmlSearchDir, path)
+// 		if err != nil {
+// 			return err
+// 		}
+
+// 		data, err := os.ReadFile(path)
+// 		if err != nil {
+// 			return err
+// 		}
+// 		contents := string(data)
+
+// 		// Find the index after the starting html tag.
+// 		i := strings.Index(contents, "<html")
+// 		i = i + strings.Index(contents[i:], ">")
+// 		i = i + 1
+
+// 		// Insert a base tag so the fetched resources will come from the generated CTS JavaScript sources.
+// 		contents = contents[:i] + "\n  <base ref=\"/gen/third_party/dawn/webgpu-cts/src/webgpu\" />" + contents[i:]
+
+// 		generatedFiles[filepath.Join(webTestsPath, relPath)] = contents
+// 		return nil
+// 	})
+// 	return err
+// }
