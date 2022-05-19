@@ -37,6 +37,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "120d8dc3_d9de32ef",
+        "filename": "src/tint/sem/materialize.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-19T17:57:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bcd24ac_6833579e",
+      "revId": "b3478958dfbb9a7771b4e1ab6a2e57616c1d6a78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5ae1ce02_ae8785d3",
         "filename": "src/tint/sem/materialize.h",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2022-05-19T15:40:17Z",
       "side": 1,
       "message": "These two are very good reminders to the reader. Perfectly said.",
+      "revId": "b3478958dfbb9a7771b4e1ab6a2e57616c1d6a78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c5caa42_7f4a7dee",
+        "filename": "src/tint/sem/materialize.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-19T17:57:19Z",
+      "side": 1,
+      "message": "Thanks.",
+      "parentUuid": "5ae1ce02_ae8785d3",
       "revId": "b3478958dfbb9a7771b4e1ab6a2e57616c1d6a78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
