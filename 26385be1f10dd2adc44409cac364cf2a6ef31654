@@ -105,6 +105,24 @@
       "parentUuid": "7b27be1c_f3346835",
       "revId": "26385be1f10dd2adc44409cac364cf2a6ef31654",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b8a7b31_ad5a1f7d",
+        "filename": "src/tint/sem/type.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-19T18:00:58Z",
+      "side": 1,
+      "message": "*shrug* I don\u0027t see how `ElementTypeOf` is clearer than `Type::ElementOf`.\n\nI\u0027m not keen on `ElementInfo`, as it makes me think of `TypeInfo`, which is something entirely different.\n\nGot any other suggestions?",
+      "parentUuid": "ea77f323_8596f144",
+      "revId": "26385be1f10dd2adc44409cac364cf2a6ef31654",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
