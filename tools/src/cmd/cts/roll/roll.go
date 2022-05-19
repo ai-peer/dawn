@@ -49,6 +49,7 @@ const (
 	depsRelPath          = "DEPS"
 	tsSourcesRelPath     = "third_party/gn/webgpu-cts/ts_sources.txt"
 	resourceFilesRelPath = "third_party/gn/webgpu-cts/resource_files.txt"
+	webTestsPath         = "webgpu-cts/webtests"
 	refMain              = "refs/heads/main"
 	noExpectations       = `# Clear all expectations to obtain full list of results`
 )
@@ -230,6 +231,9 @@ func (r *roller) roll(ctx context.Context) error {
 		ex = rebuilt
 	}
 
+	// Map of relative file path to content of generated files
+	generatedFiles := make(map[string]string)
+
 	// Regenerate the typescript dependency list
 	tsSources, err := r.genTSDepList(ctx)
 	if err != nil {
@@ -240,6 +244,12 @@ func (r *roller) roll(ctx context.Context) error {
 	resources, err := r.genResourceFilesList(ctx)
 	if err != nil {
 		return fmt.Errorf("failed to generate resource_files.txt: %v", err)
+	}
+
+	// Regenerate web tests HTML files
+	err = r.genWebTestSources(ctx, generatedFiles)
+	if err != nil {
+		return fmt.Errorf("failed to generate web tests: %v", err)
 	}
 
 	// Look for an existing gerrit change to update
@@ -276,15 +286,15 @@ func (r *roller) roll(ctx context.Context) error {
 
 	// Update the DEPS, and ts-sources file.
 	// Update the expectations with the re-formatted content, and updated
-	//timestamp.
+	// timestamp.
 	updateExpectationUpdateTimestamp(&ex)
+	generatedFiles[depsRelPath] = updatedDEPS
+	generatedFiles[common.RelativeExpectationsPath] = ex.String()
+	generatedFiles[tsSourcesRelPath] = tsSources
+	generatedFiles[resourceFilesRelPath] = resources
+
 	msg := r.rollCommitMessage(oldCTSHash, newCTSHash, ctsLog, changeID)
-	ps, err := r.gerrit.EditFiles(changeID, msg, map[string]string{
-		depsRelPath:                     updatedDEPS,
-		common.RelativeExpectationsPath: ex.String(),
-		tsSourcesRelPath:                tsSources,
-		resourceFilesRelPath:            resources,
-	})
+	ps, err := r.gerrit.EditFiles(changeID, msg, generatedFiles)
 	if err != nil {
 		return fmt.Errorf("failed to update change '%v': %v", changeID, err)
 	}
@@ -626,4 +636,40 @@ func (r *roller) genResourceFilesList(ctx context.Context) (string, error) {
 		files[i] = file
 	}
 	return strings.Join(files, "\n") + "\n", nil
+}
+
+// genWebTestSources populates a map of generated reftest file names to contents, for the CTS checkout at r.ctsDir
+func (r *roller) genWebTestSources(ctx context.Context, generatedFiles map[string]string) error {
+	htmlSearchDir := filepath.Join(r.ctsDir, "src", "webgpu")
+	err := filepath.Walk(htmlSearchDir,
+		func(path string, info os.FileInfo, err error) error {
+			if err != nil {
+				return err
+			}
+			if !strings.HasSuffix(info.Name(), ".html") || info.IsDir() {
+				return nil
+			}
+			relPath, err := filepath.Rel(htmlSearchDir, path)
+			if err != nil {
+				return err
+			}
+
+			data, err := os.ReadFile(path)
+			if err != nil {
+				return err
+			}
+			contents := string(data)
+
+			// Find the index after the starting html tag.
+			i := strings.Index(contents, "<html")
+			i = i + strings.Index(contents[i:], ">")
+			i = i + 1
+
+			// Insert a base tag so the fetched resources will come from the generated CTS JavaScript sources.
+			contents = contents[:i] + "\n  <base ref=\"/gen/third_party/dawn/webgpu-cts/src/webgpu\" />" + contents[i:]
+
+			generatedFiles[filepath.Join(webTestsPath, relPath)] = contents
+			return nil
+		})
+	return err
 }
