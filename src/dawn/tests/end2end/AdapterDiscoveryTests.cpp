@@ -321,6 +321,15 @@ TEST_F(AdapterCreationTest, DefaultAdapter) {
 
     wgpu::Adapter adapter = wgpu::Adapter::Acquire(cAdapter);
     EXPECT_EQ(adapter != nullptr, anyAdapterAvailable);
+
+    wgpu::AdapterProperties properties;
+    adapter.GetProperties(&properties);
+
+    dawn::InfoLog() << "Vendor: " << properties.vendor;
+    dawn::InfoLog() << "Architecture: " << properties.architecture;
+    dawn::InfoLog() << "Device: " << properties.device;
+    dawn::InfoLog() << "Name: " << properties.name;
+    dawn::InfoLog() << "Driver Description: " << properties.driverDescription;
 }
 
 // Test that passing nullptr for the options gets the default adapter
