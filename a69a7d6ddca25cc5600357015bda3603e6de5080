@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2a642c4_813001a3",
+        "filename": "src/tint/sem/type.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-19T20:25:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7f78a2b_e5429743",
+      "revId": "a69a7d6ddca25cc5600357015bda3603e6de5080",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c55af4e_d2dd4995",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-05-19T19:49:34Z",
       "side": 1,
       "message": "Would be nice to spot check that (concrete) scalar type don\u0027t convert to other onese.\n\n\nCommon({u32,i32}) -\u003e nullptr\nDo a cycle\n   i32, u32\n   u32, f32\n   f32, f16\n   f16, i32",
+      "revId": "a69a7d6ddca25cc5600357015bda3603e6de5080",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2895bff_e8ae6416",
+        "filename": "src/tint/sem/type_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-19T20:25:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c55af4e_d2dd4995",
       "revId": "a69a7d6ddca25cc5600357015bda3603e6de5080",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
