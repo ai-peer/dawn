@@ -34,6 +34,24 @@
       "parentUuid": "5832c2de_b16e8fbc",
       "revId": "05de3ab9d2ed1701c0d0075711c753a046705e73",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c18ce55a_97af3c62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-05-19T16:40:21Z",
+      "side": 1,
+      "message": "I guess the difference is this requires braces always where Chromium follows Google (https://google.github.io/styleguide/cppguide.html#Conditionals) and it seems if it\u0027s a single statement they\u0027re optional otherwise required.\n\nDoes this change anything if you run `tools/format` to force it to run over everything?",
+      "parentUuid": "266a16d6_55c625ec",
+      "revId": "05de3ab9d2ed1701c0d0075711c753a046705e73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
