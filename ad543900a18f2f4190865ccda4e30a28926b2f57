@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6f50711_ec40ad4a",
+        "filename": "generator/templates/dawn/wire/server/ServerHandlers.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T17:15:14Z",
+      "side": 0,
+      "message": "it is - that\u0027s how we known the receiver of the function call\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/generator/templates/dawn/wire/server/ServerDoers.cpp;l\u003d21?q\u003df:dawn%20f:wire%20derived_object\n\nthough maybe we should rename it to \"receiver\" since that terminology is more clear (to me)",
+      "parentUuid": "7100f92f_8ae6b995",
+      "range": {
+        "startLine": 59,
+        "startChar": 30,
+        "endLine": 59,
+        "endChar": 44
+      },
+      "revId": "ad543900a18f2f4190865ccda4e30a28926b2f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f43dbde_d39e89fe",
         "filename": "src/dawn/wire/server/ServerQueue.cpp",
         "patchSetId": 4
