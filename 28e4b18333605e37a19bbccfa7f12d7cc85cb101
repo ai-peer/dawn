@@ -33,6 +33,24 @@
       "message": "Maybe add a comment that currently this only handles single argument builtins in case we need this later for multi-argument.",
       "revId": "28e4b18333605e37a19bbccfa7f12d7cc85cb101",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59381c98_7964947a",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-19T21:29:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77d24af1_16058486",
+      "revId": "28e4b18333605e37a19bbccfa7f12d7cc85cb101",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
