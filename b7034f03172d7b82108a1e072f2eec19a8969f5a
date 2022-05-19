@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bdd03b8_51e04397",
+        "filename": "src/dawn/wire/server/ObjectStorage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:51:35Z",
+      "side": 1,
+      "message": "Ah, I can inline the info into struct instead of having a separate allocation\n\nlast usage should be this one\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/wire/server/Server.cpp;l\u003d167;drc\u003d8a609a649e36c8099c6801d41aca1ec3b0b3af73 where we can",
+      "revId": "b7034f03172d7b82108a1e072f2eec19a8969f5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
