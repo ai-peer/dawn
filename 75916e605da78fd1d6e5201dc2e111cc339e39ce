@@ -22,6 +22,30 @@
       },
       "revId": "75916e605da78fd1d6e5201dc2e111cc339e39ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7580bd8c_b257640b",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1242,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-19T07:55:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e50fa74_ddab2a91",
+      "range": {
+        "startLine": 1242,
+        "startChar": 50,
+        "endLine": 1242,
+        "endChar": 98
+      },
+      "revId": "75916e605da78fd1d6e5201dc2e111cc339e39ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
