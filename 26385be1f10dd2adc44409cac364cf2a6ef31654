@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aefb28e_06086bd1",
+        "filename": "src/tint/sem/type.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-19T15:27:43Z",
+      "side": 1,
+      "message": "This name is a bit confusing, as I\u0027d assumed it was about getting an element out of a vector or matrix.\n\n`ElementTypeOf` ? `ElementInfo` ?",
+      "revId": "26385be1f10dd2adc44409cac364cf2a6ef31654",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41c328b3_998b5572",
+        "filename": "src/tint/sem/type.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-19T15:27:43Z",
+      "side": 1,
+      "message": "nit: /\u003d 0/\u003d nullptr",
+      "revId": "26385be1f10dd2adc44409cac364cf2a6ef31654",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
