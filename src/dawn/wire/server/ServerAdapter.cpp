@@ -98,8 +98,8 @@ void Server::OnRequestDeviceCallback(RequestDeviceUserdata* data,
     // Assign the handle and allocated status if the device is created successfully.
     auto* deviceObject = DeviceObjects().FillReservation(data->deviceObjectId, device);
     ASSERT(deviceObject != nullptr);
-    deviceObject->info->server = this;
-    deviceObject->info->self = ObjectHandle{data->deviceObjectId, deviceObject->generation};
+    deviceObject->server = this;
+    deviceObject->selfId = data->deviceObjectId;
     SetForwardingDeviceCallbacks(deviceObject);
 
     SerializeCommand(cmd);

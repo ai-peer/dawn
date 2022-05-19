@@ -62,11 +62,6 @@ bool Server::InjectTexture(WGPUTexture texture,
     data->handle = texture;
     data->generation = generation;
     data->state = AllocationState::Allocated;
-    data->deviceInfo = device->info.get();
-
-    if (!TrackDeviceChild(data->deviceInfo, ObjectType::Texture, id)) {
-        return false;
-    }
 
     // The texture is externally owned so it shouldn't be destroyed when we receive a destroy
     // message from the client. Add a reference to counterbalance the eventual release.
@@ -94,11 +89,6 @@ bool Server::InjectSwapChain(WGPUSwapChain swapchain,
     data->handle = swapchain;
     data->generation = generation;
     data->state = AllocationState::Allocated;
-    data->deviceInfo = device->info.get();
-
-    if (!TrackDeviceChild(data->deviceInfo, ObjectType::SwapChain, id)) {
-        return false;
-    }
 
     // The texture is externally owned so it shouldn't be destroyed when we receive a destroy
     // message from the client. Add a reference to counterbalance the eventual release.
@@ -117,8 +107,8 @@ bool Server::InjectDevice(WGPUDevice device, uint32_t id, uint32_t generation) {
     data->handle = device;
     data->generation = generation;
     data->state = AllocationState::Allocated;
-    data->info->server = this;
-    data->info->self = ObjectHandle{id, generation};
+    data->server = this;
+    data->selfId = id;
 
     // The device is externally owned so it shouldn't be destroyed when we receive a destroy
     // message from the client. Add a reference to counterbalance the eventual release.
@@ -164,29 +154,35 @@ void Server::SetForwardingDeviceCallbacks(ObjectData<WGPUDevice>* deviceObject) 
     // free their userdata. Also unlike other callbacks, these are cleared and unset when
     // the server is destroyed, so we don't need to check if the server is still alive
     // inside them.
+    // Also, the device is special-cased in Server::DoDestroyObject to call
+    // ClearDeviceCallbacks. This ensures that callbacks will not fire after |deviceObject|
+    // is freed.
     mProcs.deviceSetUncapturedErrorCallback(
         deviceObject->handle,
         [](WGPUErrorType type, const char* message, void* userdata) {
-            DeviceInfo* info = static_cast<DeviceInfo*>(userdata);
-            info->server->OnUncapturedError(info->self, type, message);
+            auto* device = static_cast<ObjectData<WGPUDevice>*>(userdata);
+            device->server->OnUncapturedError(ObjectHandle{device->selfId, device->generation},
+                                              type, message);
         },
-        deviceObject->info.get());
+        deviceObject);
     // Set callback to post warning and other infomation to client.
     // Almost the same with UncapturedError.
     mProcs.deviceSetLoggingCallback(
         deviceObject->handle,
         [](WGPULoggingType type, const char* message, void* userdata) {
-            DeviceInfo* info = static_cast<DeviceInfo*>(userdata);
-            info->server->OnLogging(info->self, type, message);
+            auto* device = static_cast<ObjectData<WGPUDevice>*>(userdata);
+            device->server->OnLogging(ObjectHandle{device->selfId, device->generation}, type,
+                                      message);
         },
-        deviceObject->info.get());
+        deviceObject);
     mProcs.deviceSetDeviceLostCallback(
         deviceObject->handle,
         [](WGPUDeviceLostReason reason, const char* message, void* userdata) {
-            DeviceInfo* info = static_cast<DeviceInfo*>(userdata);
-            info->server->OnDeviceLost(info->self, reason, message);
+            auto* device = static_cast<ObjectData<WGPUDevice>*>(userdata);
+            device->server->OnDeviceLost(ObjectHandle{device->selfId, device->generation}, reason,
+                                         message);
         },
-        deviceObject->info.get());
+        deviceObject);
 }
 
 void Server::ClearDeviceCallbacks(WGPUDevice device) {
@@ -195,26 +191,6 @@ void Server::ClearDeviceCallbacks(WGPUDevice device) {
     mProcs.deviceSetUncapturedErrorCallback(device, nullptr, nullptr);
     mProcs.deviceSetLoggingCallback(device, nullptr, nullptr);
     mProcs.deviceSetDeviceLostCallback(device, nullptr, nullptr);
-}
-
-bool TrackDeviceChild(DeviceInfo* info, ObjectType type, ObjectId id) {
-    auto [_, inserted] = info->childObjectTypesAndIds.insert(PackObjectTypeAndId(type, id));
-    if (!inserted) {
-        // An object of this type and id already exists.
-        return false;
-    }
-    return true;
-}
-
-bool UntrackDeviceChild(DeviceInfo* info, ObjectType type, ObjectId id) {
-    auto& children = info->childObjectTypesAndIds;
-    auto it = children.find(PackObjectTypeAndId(type, id));
-    if (it == children.end()) {
-        // An object of this type and id was already deleted.
-        return false;
-    }
-    children.erase(it);
-    return true;
 }
 
 }  // namespace dawn::wire::server
