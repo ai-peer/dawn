@@ -69,6 +69,42 @@
       "parentUuid": "1aefb28e_06086bd1",
       "revId": "26385be1f10dd2adc44409cac364cf2a6ef31654",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bf20636_7419ddee",
+        "filename": "src/tint/sem/type.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-19T17:42:15Z",
+      "side": 1,
+      "message": "Forgot to upload change?",
+      "parentUuid": "45fe01e8_55177da3",
+      "revId": "26385be1f10dd2adc44409cac364cf2a6ef31654",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea77f323_8596f144",
+        "filename": "src/tint/sem/type.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-19T17:42:15Z",
+      "side": 1,
+      "message": "Heh, I\u0027d disagree on that one, as I read it in context above `el_ty \u003d Type::ElementOf(ty, \u0026count)` and took a while to figure out what was going on.",
+      "parentUuid": "7b27be1c_f3346835",
+      "revId": "26385be1f10dd2adc44409cac364cf2a6ef31654",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
