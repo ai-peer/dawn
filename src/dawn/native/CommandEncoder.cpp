@@ -693,8 +693,7 @@ ComputePassEncoder* CommandEncoder::APIBeginComputePass(const ComputePassDescrip
 Ref<ComputePassEncoder> CommandEncoder::BeginComputePass(const ComputePassDescriptor* descriptor) {
     DeviceBase* device = GetDevice();
 
-    std::vector<TimestampWrite> timestampWritesAtBeginning;
-    std::vector<TimestampWrite> timestampWritesAtEnd;
+    std::unordered_map<wgpu::ComputePassTimestampLocation, TimestampWrite> timestampWrites;
     bool success = mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
@@ -707,26 +706,20 @@ Ref<ComputePassEncoder> CommandEncoder::BeginComputePass(const ComputePassDescri
                 return {};
             }
 
-            // Split the timestampWrites used in BeginComputePassCmd and EndComputePassCmd
+            // Record the timestampWrites used in BeginComputePassCmd
             for (uint32_t i = 0; i < descriptor->timestampWriteCount; i++) {
                 QuerySetBase* querySet = descriptor->timestampWrites[i].querySet;
                 uint32_t queryIndex = descriptor->timestampWrites[i].queryIndex;
 
-                switch (descriptor->timestampWrites[i].location) {
-                    case wgpu::ComputePassTimestampLocation::Beginning:
-                        timestampWritesAtBeginning.push_back({querySet, queryIndex});
-                        break;
-                    case wgpu::ComputePassTimestampLocation::End:
-                        timestampWritesAtEnd.push_back({querySet, queryIndex});
-                        break;
-                    default:
-                        break;
-                }
+                timestampWrites.emplace(
+                    std::piecewise_construct,
+                    std::forward_as_tuple(descriptor->timestampWrites[i].location),
+                    std::forward_as_tuple(querySet, queryIndex));
 
                 TrackQueryAvailability(querySet, queryIndex);
             }
 
-            cmd->timestampWrites = std::move(timestampWritesAtBeginning);
+            cmd->timestampWrites = std::move(timestampWrites);
 
             return {};
         },
@@ -738,8 +731,8 @@ Ref<ComputePassEncoder> CommandEncoder::BeginComputePass(const ComputePassDescri
             descriptor = &defaultDescriptor;
         }
 
-        Ref<ComputePassEncoder> passEncoder = ComputePassEncoder::Create(
-            device, descriptor, this, &mEncodingContext, std::move(timestampWritesAtEnd));
+        Ref<ComputePassEncoder> passEncoder =
+            ComputePassEncoder::Create(device, descriptor, this, &mEncodingContext);
         mEncodingContext.EnterPass(passEncoder.Get());
         return passEncoder;
     }
@@ -761,8 +754,7 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
     bool depthReadOnly = false;
     bool stencilReadOnly = false;
     Ref<AttachmentState> attachmentState;
-    std::vector<TimestampWrite> timestampWritesAtBeginning;
-    std::vector<TimestampWrite> timestampWritesAtEnd;
+    std::unordered_map<wgpu::RenderPassTimestampLocation, TimestampWrite> timestampWrites;
     bool success = mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
@@ -780,21 +772,14 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
             cmd->attachmentState = device->GetOrCreateAttachmentState(descriptor);
             attachmentState = cmd->attachmentState;
 
-            // Split the timestampWrites used in BeginRenderPassCmd and EndRenderPassCmd
+            // Record the timestampWrites used in BeginRenderPassCmd
             for (uint32_t i = 0; i < descriptor->timestampWriteCount; i++) {
                 QuerySetBase* querySet = descriptor->timestampWrites[i].querySet;
                 uint32_t queryIndex = descriptor->timestampWrites[i].queryIndex;
-
-                switch (descriptor->timestampWrites[i].location) {
-                    case wgpu::RenderPassTimestampLocation::Beginning:
-                        timestampWritesAtBeginning.push_back({querySet, queryIndex});
-                        break;
-                    case wgpu::RenderPassTimestampLocation::End:
-                        timestampWritesAtEnd.push_back({querySet, queryIndex});
-                        break;
-                    default:
-                        break;
-                }
+                timestampWrites.emplace(
+                    std::piecewise_construct,
+                    std::forward_as_tuple(descriptor->timestampWrites[i].location),
+                    std::forward_as_tuple(querySet, queryIndex));
 
                 TrackQueryAvailability(querySet, queryIndex);
                 // Track the query availability with true on render pass again for rewrite
@@ -894,7 +879,7 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
 
             cmd->occlusionQuerySet = descriptor->occlusionQuerySet;
 
-            cmd->timestampWrites = std::move(timestampWritesAtBeginning);
+            cmd->timestampWrites = std::move(timestampWrites);
 
             return {};
         },
@@ -903,8 +888,7 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
     if (success) {
         Ref<RenderPassEncoder> passEncoder = RenderPassEncoder::Create(
             device, descriptor, this, &mEncodingContext, std::move(usageTracker),
-            std::move(attachmentState), std::move(timestampWritesAtEnd), width, height,
-            depthReadOnly, stencilReadOnly);
+            std::move(attachmentState), width, height, depthReadOnly, stencilReadOnly);
         mEncodingContext.EnterPass(passEncoder.Get());
         return passEncoder;
     }

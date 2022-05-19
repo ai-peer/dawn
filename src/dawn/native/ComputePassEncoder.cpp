@@ -111,23 +111,24 @@ ResultOrError<ComputePipelineBase*> GetOrCreateIndirectDispatchValidationPipelin
 ComputePassEncoder::ComputePassEncoder(DeviceBase* device,
                                        const ComputePassDescriptor* descriptor,
                                        CommandEncoder* commandEncoder,
-                                       EncodingContext* encodingContext,
-                                       std::vector<TimestampWrite> timestampWritesAtEnd)
+                                       EncodingContext* encodingContext)
     : ProgrammableEncoder(device, descriptor->label, encodingContext),
-      mCommandEncoder(commandEncoder),
-      mTimestampWritesAtEnd(std::move(timestampWritesAtEnd)) {
+      mCommandEncoder(commandEncoder) {
+    for (uint32_t i = 0; i < descriptor->timestampWriteCount; i++) {
+        if (descriptor->timestampWrites[i].location == wgpu::ComputePassTimestampLocation::End) {
+            mTimestampQuerySetAtEnd = descriptor->timestampWrites[i].querySet;
+            mTimestampQueryIndexAtEnd = descriptor->timestampWrites[i].queryIndex;
+        }
+    }
     TrackInDevice();
 }
 
 // static
-Ref<ComputePassEncoder> ComputePassEncoder::Create(
-    DeviceBase* device,
-    const ComputePassDescriptor* descriptor,
-    CommandEncoder* commandEncoder,
-    EncodingContext* encodingContext,
-    std::vector<TimestampWrite> timestampWritesAtEnd) {
-    return AcquireRef(new ComputePassEncoder(device, descriptor, commandEncoder, encodingContext,
-                                             std::move(timestampWritesAtEnd)));
+Ref<ComputePassEncoder> ComputePassEncoder::Create(DeviceBase* device,
+                                                   const ComputePassDescriptor* descriptor,
+                                                   CommandEncoder* commandEncoder,
+                                                   EncodingContext* encodingContext) {
+    return AcquireRef(new ComputePassEncoder(device, descriptor, commandEncoder, encodingContext));
 }
 
 ComputePassEncoder::ComputePassEncoder(DeviceBase* device,
@@ -166,7 +167,8 @@ void ComputePassEncoder::APIEnd() {
                     allocator->Allocate<EndComputePassCmd>(Command::EndComputePass);
                 // The query availability has already been updated at the beginning of compute
                 // pass, and no need to do update here.
-                cmd->timestampWrites = std::move(mTimestampWritesAtEnd);
+                cmd->querySet = mTimestampQuerySetAtEnd.Get();
+                cmd->queryIndex = mTimestampQueryIndexAtEnd;
 
                 return {};
             },

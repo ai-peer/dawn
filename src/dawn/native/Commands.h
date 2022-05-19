@@ -17,6 +17,7 @@
 
 #include <array>
 #include <bitset>
+#include <unordered_map>
 #include <vector>
 
 #include "dawn/common/Constants.h"
@@ -82,7 +83,7 @@ struct BeginComputePassCmd {
     BeginComputePassCmd();
     ~BeginComputePassCmd();
 
-    std::vector<TimestampWrite> timestampWrites;
+    std::unordered_map<wgpu::ComputePassTimestampLocation, TimestampWrite> timestampWrites;
 };
 
 struct BeginOcclusionQueryCmd {
@@ -133,7 +134,7 @@ struct BeginRenderPassCmd {
     uint32_t height;
 
     Ref<QuerySetBase> occlusionQuerySet;
-    std::vector<TimestampWrite> timestampWrites;
+    std::unordered_map<wgpu::RenderPassTimestampLocation, TimestampWrite> timestampWrites;
 };
 
 struct BufferCopy {
@@ -229,7 +230,8 @@ struct EndComputePassCmd {
     EndComputePassCmd();
     ~EndComputePassCmd();
 
-    std::vector<TimestampWrite> timestampWrites;
+    Ref<QuerySetBase> querySet;
+    uint32_t queryIndex;
 };
 
 struct EndOcclusionQueryCmd {
@@ -244,7 +246,8 @@ struct EndRenderPassCmd {
     EndRenderPassCmd();
     ~EndRenderPassCmd();
 
-    std::vector<TimestampWrite> timestampWrites;
+    Ref<QuerySetBase> querySet;
+    uint32_t queryIndex;
 };
 
 struct ExecuteBundlesCmd {
