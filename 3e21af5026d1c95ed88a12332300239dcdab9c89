@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b139cd5a_114cb191",
+        "filename": "src/tint/utils/hash.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-19T17:36:27Z",
+      "side": 1,
+      "message": "Out of curiousity, why is the number of items hashed in?",
+      "revId": "3e21af5026d1c95ed88a12332300239dcdab9c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
