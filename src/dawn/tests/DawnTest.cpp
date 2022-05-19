@@ -712,9 +712,7 @@ DawnTestBase::DawnTestBase(const AdapterTestParam& param)
       mWireHelper(utils::CreateWireHelper(gTestEnv->UsesWire(), gTestEnv->GetWireTraceDir())) {}
 
 DawnTestBase::~DawnTestBase() {
-    // We need to destroy child objects before the Device
     mReadbackSlots.clear();
-    queue = wgpu::Queue();
     device = wgpu::Device();
 
     // D3D12's GPU-based validation will accumulate objects over time if the backend device is not
