@@ -43,6 +43,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4dd8134_4f61a951",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T00:33:55Z",
+      "side": 1,
+      "message": "Native does call APIReference/Release\nhttps://source.chromium.org/chromium/chromium/src/+/main:out/Debug/gen/third_party/dawn/src/dawn/native/ProcTable.cpp;l\u003d746?q\u003dAPIReference%20f:dawn\u0026ss\u003dchromium%2Fchromium%2Fsrc\n\nNot sure what you mean by native/external. Native users of the WebGPU API still will go through API* functions so they are external. If you mean native and internal to Dawn, then yea - objects still cannot outlive the device. That\u0027s why they all hold Ref\u003cDeviceBase\u003e now instead of a raw DeviceBase*\n\nre DropDeviceRef / WeakDeviceRef:\nYea, I think we could do something like that - though it would need to do it recursively. Some of those objects are containers for other objects.",
+      "parentUuid": "54b0985d_c6422b42",
+      "revId": "facc06373d08e07f4d2ff9221c5b21ce55ea75a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "610f3f34_03eacd07",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 5
