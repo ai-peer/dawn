@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9813ba6_e3975eb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-19T15:36:51Z",
+      "side": 1,
+      "message": "Baby steps are great!\n\nBreaking big jobs down into small pieces is vastly under-rated.  (As in it\u0027s way more important than widely recognized)",
+      "revId": "a1d828302dc484f2407545e631d965c92070f61e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
