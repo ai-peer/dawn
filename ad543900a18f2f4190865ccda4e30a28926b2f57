@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f43dbde_d39e89fe",
+        "filename": "src/dawn/wire/server/ServerQueue.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:48:56Z",
+      "side": 0,
+      "message": "I removed this since we don\u0027t need the added complexity of knowing the parent device right now. It\u0027ll only matter if we have a 64-bit client and a 32-bit server - and the client is making \u003e 2GB uploads which is rather discouraged.",
+      "revId": "ad543900a18f2f4190865ccda4e30a28926b2f57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
