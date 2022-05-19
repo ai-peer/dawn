@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86885576_71cd15ea",
+        "filename": "src/tint/transform/remove_phonies.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-19T20:25:30Z",
+      "side": 1,
+      "message": "Added both. \"creation-time\" makes sense in the WebGPU / Dawn world. Less so as an offline compiler.",
+      "parentUuid": "b2db748c_c5a8894c",
+      "revId": "0dda4e5d5f609f6cfc68ab06a6d8e54ba8f135e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7f2f9cd_84d9e143",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-05-19T19:58:17Z",
       "side": 1,
       "message": "wrong bug number?  \n1472 is implementing \"enable\" directive.",
+      "range": {
+        "startLine": 696,
+        "startChar": 16,
+        "endLine": 696,
+        "endChar": 35
+      },
+      "revId": "0dda4e5d5f609f6cfc68ab06a6d8e54ba8f135e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e519019_aa833c36",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-19T20:25:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7f2f9cd_84d9e143",
       "range": {
         "startLine": 696,
         "startChar": 16,
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2cbe5a3_17866657",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-19T20:25:30Z",
+      "side": 1,
+      "message": "Great spot. Fixed.",
+      "parentUuid": "eb11637c_f4c45ab5",
+      "range": {
+        "startLine": 930,
+        "startChar": 31,
+        "endLine": 930,
+        "endChar": 35
+      },
+      "revId": "0dda4e5d5f609f6cfc68ab06a6d8e54ba8f135e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42d25b4a_6111f17e",
@@ -94,6 +160,30 @@
       "writtenOn": "2022-05-19T19:58:17Z",
       "side": 1,
       "message": "1504?",
+      "range": {
+        "startLine": 556,
+        "startChar": 31,
+        "endLine": 556,
+        "endChar": 35
+      },
+      "revId": "0dda4e5d5f609f6cfc68ab06a6d8e54ba8f135e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eff1a7db_69191447",
+        "filename": "src/tint/writer/msl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-19T20:25:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42d25b4a_6111f17e",
       "range": {
         "startLine": 556,
         "startChar": 31,
@@ -134,6 +224,30 @@
       "writtenOn": "2022-05-19T19:58:17Z",
       "side": 1,
       "message": "1504?",
+      "range": {
+        "startLine": 2165,
+        "startChar": 31,
+        "endLine": 2165,
+        "endChar": 35
+      },
+      "revId": "0dda4e5d5f609f6cfc68ab06a6d8e54ba8f135e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a65551ba_f2bd6ea3",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2165,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-19T20:25:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afbcfcb4_3d0f90f9",
       "range": {
         "startLine": 2165,
         "startChar": 31,
