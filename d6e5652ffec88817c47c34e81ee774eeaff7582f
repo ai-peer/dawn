@@ -475,6 +475,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d45461b_49184b60",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-19T16:25:38Z",
+      "side": 1,
+      "message": "Please do, Ben is ok adding braces to Tint as well.",
+      "parentUuid": "ef725cd0_aa757033",
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fc4feb1_9c8fbffc",
@@ -541,6 +559,24 @@
       "side": 1,
       "message": "this one doesn\u0027t need. it\u0027s just for the cases where we have moved the device from the fixture to the userdata",
       "parentUuid": "5020192f_cf861c32",
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a058c88e_92a3eb3a",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-19T16:25:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "77f8988a_e1940c18",
       "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
