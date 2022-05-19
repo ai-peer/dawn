@@ -390,6 +390,24 @@
       "message": "error: webgpu:api,operation,adapter,requestDevice_limits:supported_limits:limit\u003d\"maxComputeWorkgroupStorageSize\" collides with expectation at line 158",
       "revId": "aed7eb4b4cf140c457b8ed700fb340a0812616aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfccf487_c0d31fd5",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-19T10:51:00Z",
+      "side": 0,
+      "message": "So this is back again?",
+      "parentUuid": "0593f3f4_4da39d89",
+      "revId": "aed7eb4b4cf140c457b8ed700fb340a0812616aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
