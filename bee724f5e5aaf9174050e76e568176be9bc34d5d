@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "bee724f5e5aaf9174050e76e568176be9bc34d5d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4654ef83_951c8371",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-19T12:35:50Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "bee724f5e5aaf9174050e76e568176be9bc34d5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5817ce2c_2eb04e4b",
+        "filename": "src/dawn/native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-19T12:35:50Z",
+      "side": 1,
+      "message": "Can we have a comment explaining that the D3D12 validation requires that. (also do we know why it requires it? It\u0027s a bit weird, but I don\u0027t know how this is implemented in HW).",
+      "revId": "bee724f5e5aaf9174050e76e568176be9bc34d5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
