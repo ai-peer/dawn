@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "619bc10a_98c3d122",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-19T21:45:57Z",
+      "side": 1,
+      "message": "Nice change!",
+      "revId": "b1769ea08c6eaa0d9fcd3ea608b4c6fd4a005f10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71a3cd6e_140a8733",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-19T21:45:57Z",
+      "side": 1,
+      "message": "nit: use range-based for loop: `for (auto* v : in) {`",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 42
+      },
+      "revId": "b1769ea08c6eaa0d9fcd3ea608b4c6fd4a005f10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea4b7cc5_d855457c",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-19T21:45:57Z",
+      "side": 1,
+      "message": "What happens with this? Will we see the error message in the output?",
+      "range": {
+        "startLine": 43,
+        "startChar": 16,
+        "endLine": 43,
+        "endChar": 33
+      },
+      "revId": "b1769ea08c6eaa0d9fcd3ea608b4c6fd4a005f10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
