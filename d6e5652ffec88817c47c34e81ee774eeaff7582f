@@ -243,6 +243,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c61c7f01_79f3aaeb",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-19T10:55:23Z",
+      "side": 1,
+      "message": "https://clang.llvm.org/docs/ClangFormatStyleOptions.html#:~:text\u003dLoooooooooooooooooooooooooooooooooooooooongReturnType%0ALoooooooooooooooooooooooooooooooongFunctionDeclaration()%3B-,InsertBraces,-(Boolean)",
+      "parentUuid": "334df676_613fb94f",
+      "revId": "d6e5652ffec88817c47c34e81ee774eeaff7582f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7fc4feb1_9c8fbffc",
         "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
         "patchSetId": 6
