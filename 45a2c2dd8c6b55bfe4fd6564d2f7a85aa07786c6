@@ -68,6 +68,24 @@
       "parentUuid": "255ad696_c8ef1dd9",
       "revId": "45a2c2dd8c6b55bfe4fd6564d2f7a85aa07786c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "668eb5f5_082339dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-19T16:35:57Z",
+      "side": 1,
+      "message": "do you know which CTS failures it is responsible for?",
+      "parentUuid": "6dff5bbd_2c97baef",
+      "revId": "45a2c2dd8c6b55bfe4fd6564d2f7a85aa07786c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
