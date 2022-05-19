@@ -63,11 +63,23 @@ class FirstIndexOffsetTests : public DawnTest {
         DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
     }
 
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        if (!SupportsFeatures({wgpu::FeatureName::IndirectFirstInstance})) {
+            mIndirectFirstInstanceEnabled = false;
+            return {};
+        }
+        mIndirectFirstInstanceEnabled = true;
+        return {wgpu::FeatureName::IndirectFirstInstance};
+    }
+
   private:
     void TestImpl(DrawMode mode,
                   CheckIndex checkIndex,
                   uint32_t vertexIndex,
                   uint32_t instanceIndex);
+
+    // TODO(dawn:689): Device::HasFeature is currently broken on wire devices
+    bool mIndirectFirstInstanceEnabled;
 };
 
 void FirstIndexOffsetTests::TestVertexIndex(DrawMode mode, uint32_t firstVertex) {
@@ -238,8 +250,7 @@ struct FragInputs {
     // Per the specification, if validation is enabled and indirect-first-instance is not enabled,
     // Draw[Indexed]Indirect with firstInstance > 0 will be a no-op. The buffer should still have
     // the values from the first draw.
-    if (firstInstance > 0 && IsIndirectDraw(mode) &&
-        !device.HasFeature(wgpu::FeatureName::IndirectFirstInstance) &&
+    if (firstInstance > 0 && IsIndirectDraw(mode) && !mIndirectFirstInstanceEnabled &&
         !HasToggleEnabled("skip_validation")) {
         expected = {checkIndex & CheckIndex::Vertex ? firstDrawValues[0] : 0, firstDrawValues[1]};
     }
