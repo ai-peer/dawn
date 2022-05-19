@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e50fa74_ddab2a91",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1242,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-19T06:42:49Z",
+      "side": 1,
+      "message": "nit: I still don\u0027t think that gating DP4 behind unsafe APIs is necessary but either way is find I guess.",
+      "range": {
+        "startLine": 1242,
+        "startChar": 50,
+        "endLine": 1242,
+        "endChar": 98
+      },
+      "revId": "75916e605da78fd1d6e5201dc2e111cc339e39ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
