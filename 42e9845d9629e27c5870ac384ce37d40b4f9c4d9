@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f51082f_76299b80",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1094,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-05-19T04:34:23Z",
+      "side": 1,
+      "message": "Ack. I misunderstood some parameters in copy API.\n\nParameters like rowsPerImage in dataLayout(https://gpuweb.github.io/gpuweb/#dictdef-gpuimagedatalayout) for B2T copy(and T2B copy and WriteTexture) are used to view the 1D linear buffer as a 3D data storage. They are used for addressing the buffer. They are not used for addressing the texture. The buffer here has compacted zeros for the subrect of copied texture, and we don\u0027t need to introduce rowsPerImage (and padding rows) during B2T copy. We can just use largestMipSize.height for the height of each depth image as you suggested.\n\nHmm, I can take a look about saving buffer size for 2D array textures after issue 1288 is fixed.",
+      "parentUuid": "e8d89bba_b349b81e",
+      "revId": "42e9845d9629e27c5870ac384ce37d40b4f9c4d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b9b0a0e_1b22e294",
