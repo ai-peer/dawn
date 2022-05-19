@@ -141,6 +141,24 @@
       "parentUuid": "2b8a7b31_ad5a1f7d",
       "revId": "26385be1f10dd2adc44409cac364cf2a6ef31654",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bf7e524_ef3bee1e",
+        "filename": "src/tint/sem/type.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-19T18:46:01Z",
+      "side": 1,
+      "message": "`Intrinsic` means something completely different 😊\nWill land with this. If we think of anything better, I\u0027m happy to rename.",
+      "parentUuid": "85a271f5_6c3d78d9",
+      "revId": "26385be1f10dd2adc44409cac364cf2a6ef31654",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
