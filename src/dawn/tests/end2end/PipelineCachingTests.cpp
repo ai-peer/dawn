@@ -36,6 +36,12 @@ static constexpr std::string_view kVertexShader = R"(
         }
     )";
 
+static constexpr std::string_view kVertexShader2 = R"(
+        @stage(vertex) fn main() -> @builtin(position) vec4<f32> {
+            return vec4<f32>(1.0, 1.0, 1.0, 1.0);
+        }
+    )";
+
 static constexpr std::string_view kFragmentShader = R"(
         @stage(fragment) fn main() {}
     )";
@@ -234,6 +240,51 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCache) {
     EXPECT_EQ(mMockCache.GetNumEntries(), 1u);
 }
 
+// Tests that pipeline creation wouldn't hit the cache if the pipelines are not exactly the same.
+TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheNegativeCases) {
+    size_t numCacheEntries = 0u;
+    // First time should create and write out to the cache.
+    {
+        wgpu::Device device = CreateDevice();
+        utils::ComboRenderPipelineDescriptor desc;
+        desc.cTargets[0].writeMask = wgpu::ColorWriteMask::None;
+        desc.vertex.module = utils::CreateShaderModule(device, kVertexShader.data());
+        desc.vertex.entryPoint = "main";
+        desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShader.data());
+        desc.cFragment.entryPoint = "main";
+        EXPECT_CACHE_HIT(mMockCache, 0u, device.CreateRenderPipeline(&desc));
+    }
+    EXPECT_EQ(mMockCache.GetNumEntries(), ++numCacheEntries);
+
+    // Cache should not hit: different pipeline descriptor
+    {
+        wgpu::Device device = CreateDevice();
+        utils::ComboRenderPipelineDescriptor desc;
+        desc.cTargets[0].writeMask = wgpu::ColorWriteMask::None;
+        // desc.primitive.topology = wgpu::PrimitiveTopology::PointList;
+        desc.primitive.cullMode = wgpu::CullMode::Back;
+        desc.vertex.module = utils::CreateShaderModule(device, kVertexShader.data());
+        desc.vertex.entryPoint = "main";
+        desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShader.data());
+        desc.cFragment.entryPoint = "main";
+        EXPECT_CACHE_HIT(mMockCache, 0u, device.CreateRenderPipeline(&desc));
+    }
+    EXPECT_EQ(mMockCache.GetNumEntries(), ++numCacheEntries);
+
+    // Cache should not hit: different shader module
+    {
+        wgpu::Device device = CreateDevice();
+        utils::ComboRenderPipelineDescriptor desc;
+        desc.cTargets[0].writeMask = wgpu::ColorWriteMask::None;
+        desc.vertex.module = utils::CreateShaderModule(device, kVertexShader2.data());
+        desc.vertex.entryPoint = "main";
+        desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShader.data());
+        desc.cFragment.entryPoint = "main";
+        EXPECT_CACHE_HIT(mMockCache, 0u, device.CreateRenderPipeline(&desc));
+    }
+    EXPECT_EQ(mMockCache.GetNumEntries(), ++numCacheEntries);
+}
+
 // Tests that pipeline creation does not hits the cache when it is enabled but we use different
 // isolation keys.
 TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheIsolationKey) {
@@ -264,6 +315,9 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheIsolationKey) {
     EXPECT_EQ(mMockCache.GetNumEntries(), 2u);
 }
 
-DAWN_INSTANTIATE_TEST(SinglePipelineCachingTests, VulkanBackend({"enable_blob_cache"}));
+// DAWN_INSTANTIATE_TEST(SinglePipelineCachingTests, VulkanBackend({"enable_blob_cache"}));
+DAWN_INSTANTIATE_TEST(SinglePipelineCachingTests,
+                      VulkanBackend({"enable_blob_cache"}),
+                      D3D12Backend({"enable_blob_cache"}));
 
 }  // namespace

@@ -24,6 +24,7 @@
 #include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/d3d12/D3D12Error.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
+#include "dawn/native/d3d12/PipelineCacheD3D12.h"
 #include "dawn/native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn/native/d3d12/PlatformFunctions.h"
 #include "dawn/native/d3d12/ShaderModuleD3D12.h"
@@ -361,6 +362,10 @@ MaybeError RenderPipeline::Initialize() {
                                                    ->Compile(pipelineStages[stage], stage,
                                                              ToBackend(GetLayout()), compileFlags));
         *shaders[stage] = compiledShader[stage].GetD3D12ShaderBytecode();
+        // mCacheKey.Record(stage).RecordIterable(
+        //     reinterpret_cast<const uint8_t *>(shaders[stage]->pShaderBytecode),
+        //     shaders[stage]->BytecodeLength);
+        mCacheKey.Record(stage).Record(*shaders[stage]);
     }
 
     mUsesVertexOrInstanceIndex =
@@ -427,9 +432,26 @@ MaybeError RenderPipeline::Initialize() {
 
     mD3d12PrimitiveTopology = D3D12PrimitiveTopology(GetPrimitiveTopology());
 
+    mCacheKey.Record(descriptorD3D12, layout->GetCacheKey());
+    // mCacheKey.Record(descriptorD3D12);
+    // mCacheKey.Record(layout->GetCacheKey());
+
+    // Try to see if we have anything in the blob cache.
+    Ref<PipelineCache> cache = ToBackend(GetDevice()->GetOrCreatePipelineCache(GetCacheKey()));
+
+    const CachedBlob* blob = cache->GetBlob();
+    if (!blob->Empty()) {
+        // Cache is hit
+        descriptorD3D12.CachedPSO.pCachedBlob = blob->Data();
+        descriptorD3D12.CachedPSO.CachedBlobSizeInBytes = blob->Size();
+    }
+
     DAWN_TRY(CheckHRESULT(device->GetD3D12Device()->CreateGraphicsPipelineState(
                               &descriptorD3D12, IID_PPV_ARGS(&mPipelineState)),
                           "D3D12 create graphics pipeline state"));
+
+    cache->SetRenderPipeline(this);
+    DAWN_TRY(cache->FlushIfNeeded());
 
     SetLabelImpl();
 
