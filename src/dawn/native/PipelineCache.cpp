@@ -37,6 +37,8 @@ MaybeError PipelineCacheBase::Flush() {
         return {};
     }
     // Try to write the data out to the persistent cache.
+    // CachedBlob& blob;
+    // DAWN_TRY_ASSIGN(CachedBlob& blob, SerializeToBlobImpl());
     CachedBlob blob;
     DAWN_TRY_ASSIGN(blob, SerializeToBlobImpl());
     if (blob.Size() > 0) {

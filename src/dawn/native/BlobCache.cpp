@@ -27,10 +27,32 @@ CachedBlob::CachedBlob(size_t size) {
     }
 }
 
+// Temp
+CachedBlob::CachedBlob(const CachedBlob& blob) {
+    if (blob.mSize != 0) {
+        Reset(blob.mSize);
+        // memcpy(mData.get(), blob.mData, blob.mSize);
+        std::copy(blob.mData.get(), blob.mData.get() + blob.mSize, mData.get());
+    }
+}
+
+// CachedBlob::CachedBlob(ComPtr<ID3DBlob>): mSize(size), mData(std::move()) {
+
+// // memcpy? is move possible?
+// CachedBlob::CachedBlob(ID3DBlob* pBlob) {
+//     if (pBlob->GetBufferSize() != 0) {
+//         Reset(pBlob->GetBufferSize());
+//     }
+//     memcpy(mData.get(), pBlob->GetBufferPointer(), pBlob->GetBufferSize());
+// }
+
+// CachedBlob::CachedBlob(const CachedBlob&) = default;
+
 CachedBlob::CachedBlob(CachedBlob&&) = default;
 
 CachedBlob::~CachedBlob() = default;
 
+// CachedBlob& CachedBlob::operator=(const CachedBlob&) = default;
 CachedBlob& CachedBlob::operator=(CachedBlob&&) = default;
 
 bool CachedBlob::Empty() const {

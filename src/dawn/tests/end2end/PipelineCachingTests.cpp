@@ -264,6 +264,9 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheIsolationKey) {
     EXPECT_EQ(mMockCache.GetNumEntries(), 2u);
 }
 
-DAWN_INSTANTIATE_TEST(SinglePipelineCachingTests, VulkanBackend({"enable_blob_cache"}));
+// DAWN_INSTANTIATE_TEST(SinglePipelineCachingTests, VulkanBackend({"enable_blob_cache"}));
+DAWN_INSTANTIATE_TEST(SinglePipelineCachingTests,
+                      VulkanBackend({"enable_blob_cache"}),
+                      D3D12Backend({"enable_blob_cache"}));
 
 }  // namespace

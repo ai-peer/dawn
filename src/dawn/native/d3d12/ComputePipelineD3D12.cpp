@@ -20,6 +20,7 @@
 #include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/d3d12/D3D12Error.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
+#include "dawn/native/d3d12/PipelineCacheD3D12.h"
 #include "dawn/native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn/native/d3d12/PlatformFunctions.h"
 #include "dawn/native/d3d12/ShaderModuleD3D12.h"
@@ -55,6 +56,25 @@ MaybeError ComputePipeline::Initialize() {
     D3D12_COMPUTE_PIPELINE_STATE_DESC d3dDesc = {};
     d3dDesc.pRootSignature = ToBackend(GetLayout())->GetRootSignature();
 
+    // Try to see if we have anything in the blob cache.
+    Ref<PipelineCache> cache = ToBackend(GetDevice()->GetOrCreatePipelineCache(GetCacheKey()));
+    // d3dDesc.CachedPSO = cache->GetCachedPSO();
+
+    // ComPtr<ID3DBlob> cahceBlob = cache->GetBlobObject();
+    // ComPtr<ID3DBlob> d3dBlob;
+    // ComPtr<ID3DBlob> d3dBlob = cache->GetBlobObject();
+
+    // temp
+    // d3dDesc.CachedPSO.pCachedBlob = cache->GetBlob();
+
+    const CachedBlob* blob = cache->GetBlob();
+    if (!blob->Empty()) {
+        // cache is hit
+        d3dDesc.CachedPSO.pCachedBlob = blob->Data();
+        d3dDesc.CachedPSO.CachedBlobSizeInBytes = blob->Size();
+    }
+
+    // TODO: add compiledShader into cache key & blob
     CompiledShader compiledShader;
     DAWN_TRY_ASSIGN(compiledShader, module->Compile(computeStage, SingleShaderStage::Compute,
                                                     ToBackend(GetLayout()), compileFlags));
@@ -63,6 +83,22 @@ MaybeError ComputePipeline::Initialize() {
     DAWN_TRY(CheckHRESULT(
         d3d12Device->CreateComputePipelineState(&d3dDesc, IID_PPV_ARGS(&mPipelineState)),
         "D3D12 creating pipeline state"));
+
+    // mCacheKey.Record(mPipelineState->GetCachedBlob());
+    // mCachekey.Record(d3dDesc.CachedPSO).Record(d3dDesc.CS);
+    // mCachekey.Record(d3dDesc.CachedPSO);
+
+    // if (d3dBlob->GetBufferPointer() == nullptr || d3dBlob->GetBufferSize() == 0) {
+    //     // no cache hit
+    //     DAWN_TRY(CheckHRESULT(
+    //         // GetPipelineState()->GetCachedBlob(cache->GetBlob()),
+    //         // GetPipelineState()->GetCachedBlob(&cache->GetBlobObject()),
+    //         GetPipelineState()->GetCachedBlob(&d3dBlob),
+    //         "D3D12 pipeline state get cached blob"
+    //     ));
+    // }
+    cache->SetComputePipeline(this);
+    DAWN_TRY(cache->FlushIfNeeded());
 
     SetLabelImpl();
 

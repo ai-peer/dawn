@@ -18,6 +18,8 @@
 #include <memory>
 #include <mutex>
 
+#include "dawn/native/d3d12/d3d12_platform.h"
+
 namespace dawn::platform {
 class CachingInterface;
 }
@@ -31,9 +33,12 @@ class InstanceBase;
 class CachedBlob {
   public:
     explicit CachedBlob(size_t size = 0);
+    explicit CachedBlob(const CachedBlob& blob);
+    // explicit CachedBlob(ID3DBlob* pBlob);
     CachedBlob(CachedBlob&&);
     ~CachedBlob();
 
+    // CachedBlob& operator=(const CachedBlob&);
     CachedBlob& operator=(CachedBlob&&);
 
     bool Empty() const;

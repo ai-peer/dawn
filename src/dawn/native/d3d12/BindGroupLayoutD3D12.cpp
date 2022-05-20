@@ -118,6 +118,10 @@ BindGroupLayout::BindGroupLayout(Device* device,
         descriptorRanges.push_back(range);
     }
 
+    // mCacheKey.RecordIterable(mSamplerDescriptorRanges.data(), mSamplerDescriptorRanges.size());
+    // mCacheKey.RecordIterable(mCbvUavSrvDescriptorRanges.data(),
+    // mCbvUavSrvDescriptorRanges.size());
+
     mViewAllocator = device->GetViewStagingDescriptorAllocator(GetCbvUavSrvDescriptorCount());
     mSamplerAllocator = device->GetSamplerStagingDescriptorAllocator(GetSamplerDescriptorCount());
 }
