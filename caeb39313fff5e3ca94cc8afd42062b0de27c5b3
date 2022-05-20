@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a056240_a68b8704",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-20T13:12:12Z",
+      "side": 1,
+      "message": "nit: on Windows\n\nDo you have a Bug associated with this?",
+      "revId": "caeb39313fff5e3ca94cc8afd42062b0de27c5b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "cf8b1cbf_bcdd30e1",
@@ -14,6 +31,23 @@
       "writtenOn": "2022-05-19T16:41:44Z",
       "side": 1,
       "message": "Austin, Corentin: PTAL. Thanks!",
+      "revId": "caeb39313fff5e3ca94cc8afd42062b0de27c5b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18c4cf0d_03a5ea5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-20T13:12:12Z",
+      "side": 1,
+      "message": "LGTM",
       "revId": "caeb39313fff5e3ca94cc8afd42062b0de27c5b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
