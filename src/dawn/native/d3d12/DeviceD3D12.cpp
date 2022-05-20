@@ -31,6 +31,7 @@
 #include "dawn/native/d3d12/ComputePipelineD3D12.h"
 #include "dawn/native/d3d12/D3D11on12Util.h"
 #include "dawn/native/d3d12/D3D12Error.h"
+#include "dawn/native/d3d12/PipelineCacheD3D12.h"
 #include "dawn/native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn/native/d3d12/PlatformFunctions.h"
 #include "dawn/native/d3d12/QuerySetD3D12.h"
@@ -443,6 +444,9 @@ ResultOrError<Ref<TextureViewBase>> Device::CreateTextureViewImpl(
     TextureBase* texture,
     const TextureViewDescriptor* descriptor) {
     return TextureView::Create(texture, descriptor);
+}
+Ref<PipelineCacheBase> Device::GetOrCreatePipelineCacheImpl(const CacheKey& key) {
+    return PipelineCache::Create(this, key);
 }
 void Device::InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> computePipeline,
                                                 WGPUCreateComputePipelineAsyncCallback callback,

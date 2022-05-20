@@ -31,6 +31,7 @@ class InstanceBase;
 class CachedBlob {
   public:
     explicit CachedBlob(size_t size = 0);
+    explicit CachedBlob(const CachedBlob& blob);
     CachedBlob(CachedBlob&&);
     ~CachedBlob();
 

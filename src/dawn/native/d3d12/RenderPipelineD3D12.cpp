@@ -24,6 +24,7 @@
 #include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/d3d12/D3D12Error.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
+#include "dawn/native/d3d12/PipelineCacheD3D12.h"
 #include "dawn/native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn/native/d3d12/PlatformFunctions.h"
 #include "dawn/native/d3d12/ShaderModuleD3D12.h"
@@ -370,6 +371,16 @@ MaybeError RenderPipeline::Initialize() {
 
     descriptorD3D12.pRootSignature = layout->GetRootSignature();
 
+    // Try to see if we have anything in the blob cache.
+    Ref<PipelineCache> cache = ToBackend(GetDevice()->GetOrCreatePipelineCache(GetCacheKey()));
+
+    const CachedBlob* blob = cache->GetBlob();
+    if (!blob->Empty()) {
+        // Cache is hit
+        descriptorD3D12.CachedPSO.pCachedBlob = blob->Data();
+        descriptorD3D12.CachedPSO.CachedBlobSizeInBytes = blob->Size();
+    }
+
     // D3D12 logs warnings if any empty input state is used
     std::array<D3D12_INPUT_ELEMENT_DESC, kMaxVertexAttributes> inputElementDescriptors;
     if (GetAttributeLocationsUsed().any()) {
@@ -430,6 +441,9 @@ MaybeError RenderPipeline::Initialize() {
     DAWN_TRY(CheckHRESULT(device->GetD3D12Device()->CreateGraphicsPipelineState(
                               &descriptorD3D12, IID_PPV_ARGS(&mPipelineState)),
                           "D3D12 create graphics pipeline state"));
+
+    cache->SetRenderPipeline(this);
+    DAWN_TRY(cache->FlushIfNeeded());
 
     SetLabelImpl();
 
