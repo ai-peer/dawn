@@ -16,6 +16,24 @@
       "message": "nit: Can we also have a test that if the extension is not enabled, then it is disallowed to have wgsl with \"enable chromium_experimental_dp4a;\"? (I know this is already proxy tested with use_dxc but it would be better tested standalone too).\n\nCan be a follow-up to stop iterating on this CL. Feel free to CQ now.",
       "revId": "e66bb7dc4fd83a64667d9ec2f21330e539046cab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0ab350b_6520dd25",
+        "filename": "src/dawn/tests/end2end/ExperimentalDP4aTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-20T04:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b992f7a2_28a3c1bc",
+      "revId": "e66bb7dc4fd83a64667d9ec2f21330e539046cab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
