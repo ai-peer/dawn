@@ -90,7 +90,8 @@ class VideoViewsTestBackendWin : public VideoViewsTestBackend {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> CreateVideoTextureForTest(
         wgpu::TextureFormat format,
         wgpu::TextureUsage usage,
-        bool isCheckerboard) override {
+        bool isCheckerboard,
+        bool initialized) override {
         wgpu::TextureDescriptor textureDesc;
         textureDesc.format = format;
         textureDesc.dimension = wgpu::TextureDimension::e2D;
