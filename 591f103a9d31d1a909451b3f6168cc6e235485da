@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c3ef24a_165084c3",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-20T17:55:38Z",
+      "side": 1,
+      "message": "I want to get rid of this enum and make some kind of unique, stable, compile-time identifier for each callsite - any ideas on how to do this?",
+      "revId": "591f103a9d31d1a909451b3f6168cc6e235485da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "487ad212_8d857438",
+        "filename": "src/dawn/native/Memoize.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-20T17:55:38Z",
+      "side": 1,
+      "message": "this thing prevents you from having other stuff bound into the lambda that doesn\u0027t become part of the key. Though, I\u0027d like to split up the check so you get better compile errors for mismatched argument types.",
+      "revId": "591f103a9d31d1a909451b3f6168cc6e235485da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
