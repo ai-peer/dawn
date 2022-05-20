@@ -34,6 +34,24 @@
       "parentUuid": "6ac80089_c268b2f2",
       "revId": "2c7a6321d57af1ffd3399046bd5fb35542adec7e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "229c908c_5d7254d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-20T22:52:53Z",
+      "side": 1,
+      "message": "third_party/dawn/webgpu-cts/README.md ? I believe it should take the expectations into account too. Though you made need some local changes to roll the CTS locally",
+      "parentUuid": "0a0afa1c_dc95b4a4",
+      "revId": "2c7a6321d57af1ffd3399046bd5fb35542adec7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
