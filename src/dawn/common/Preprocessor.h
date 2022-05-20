@@ -29,7 +29,7 @@
 #define DAWN_PP_EXPAND(...) __VA_ARGS__
 
 // Implementation of DAWN_PP_FOR_EACH, called by concatenating DAWN_PP_FOR_EACH_ with a number.
-#define DAWN_PP_FOR_EACH_1(func, x) func(x)
+#define DAWN_PP_FOR_EACH_1(func, x, ...) func(x)
 #define DAWN_PP_FOR_EACH_2(func, x, ...) \
     func(x) DAWN_PP_EXPAND(DAWN_PP_EXPAND(DAWN_PP_FOR_EACH_1)(func, __VA_ARGS__))
 #define DAWN_PP_FOR_EACH_3(func, x, ...) \
@@ -44,27 +44,50 @@
     func(x) DAWN_PP_EXPAND(DAWN_PP_EXPAND(DAWN_PP_FOR_EACH_6)(func, __VA_ARGS__))
 #define DAWN_PP_FOR_EACH_8(func, x, ...) \
     func(x) DAWN_PP_EXPAND(DAWN_PP_EXPAND(DAWN_PP_FOR_EACH_7)(func, __VA_ARGS__))
+#define DAWN_PP_FOR_EACH_9(func, x, ...) \
+    func(x) DAWN_PP_EXPAND(DAWN_PP_EXPAND(DAWN_PP_FOR_EACH_8)(func, __VA_ARGS__))
+#define DAWN_PP_FOR_EACH_10(func, x, ...) \
+    func(x) DAWN_PP_EXPAND(DAWN_PP_EXPAND(DAWN_PP_FOR_EACH_9)(func, __VA_ARGS__))
 
-// Implementation for DAWN_PP_FOR_EACH. Get the number of args in __VA_ARGS__ so we can concat
-// DAWN_PP_FOR_EACH_ and N.
-// ex.) DAWN_PP_FOR_EACH_NARG(a, b, c) ->
-//      DAWN_PP_FOR_EACH_NARG(a, b, c, DAWN_PP_FOR_EACH_RSEQ()) ->
-//      DAWN_PP_FOR_EACH_NARG_(a, b, c, 8, 7, 6, 5, 4, 3, 2, 1, 0) ->
-//      DAWN_PP_FOR_EACH_ARG_N(a, b, c, 8, 7, 6, 5, 4, 3, 2, 1, 0) ->
-//      DAWN_PP_FOR_EACH_ARG_N( ,  ,  ,  ,  ,  ,  , ,  N) ->
+// Get the number of args in __VA_ARGS__ so we can concat
+// some macro like DAWN_PP_FOR_EACH_ and N.
+// ex.) DAWN_PP_NARG(a, b, c) ->
+//      DAWN_PP_NARG(a, b, c, DAWN_PP_RSEQ()) ->
+//      DAWN_PP_NARG_(a, b, c, 8, 7, 6, 5, 4, 3, 2, 1, 0) ->
+//      DAWN_PP_ARG_N(a, b, c, 8, 7, 6, 5, 4, 3, 2, 1, 0) ->
+//      DAWN_PP_ARG_N( ,  ,  ,  ,  ,  ,  , ,  N) ->
 //      3
-#define DAWN_PP_FOR_EACH_NARG(...) DAWN_PP_FOR_EACH_NARG_(__VA_ARGS__, DAWN_PP_FOR_EACH_RSEQ())
-#define DAWN_PP_FOR_EACH_NARG_(...) \
-    DAWN_PP_EXPAND(DAWN_PP_EXPAND(DAWN_PP_FOR_EACH_ARG_N)(__VA_ARGS__))
-#define DAWN_PP_FOR_EACH_ARG_N(_1, _2, _3, _4, _5, _6, _7, _8, N, ...) N
-#define DAWN_PP_FOR_EACH_RSEQ() 8, 7, 6, 5, 4, 3, 2, 1, 0
+#define DAWN_PP_NARG(...) DAWN_PP_NARG_(__VA_ARGS__, DAWN_PP_RSEQ())
+#define DAWN_PP_NARG_(...) DAWN_PP_EXPAND(DAWN_PP_EXPAND(DAWN_PP_ARG_N)(__VA_ARGS__))
+#define DAWN_PP_ARG_N(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, N, ...) N
+#define DAWN_PP_RSEQ() 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
 
 // Implementation for DAWN_PP_FOR_EACH.
 // Creates a call to DAWN_PP_FOR_EACH_X where X is 1, 2, ..., etc.
 #define DAWN_PP_FOR_EACH_(N, func, ...) DAWN_PP_CONCATENATE(DAWN_PP_FOR_EACH_, N)(func, __VA_ARGS__)
 
 // DAWN_PP_FOR_EACH: Apply |func| to each argument in |x| and __VA_ARGS__
+// Includes extra unused args to avoid empty __VA_ARGS__ later on.
 #define DAWN_PP_FOR_EACH(func, ...) \
-    DAWN_PP_FOR_EACH_(DAWN_PP_FOR_EACH_NARG(__VA_ARGS__), func, __VA_ARGS__)
+    DAWN_PP_FOR_EACH_(DAWN_PP_NARG(__VA_ARGS__), func, __VA_ARGS__, _)
+
+// DAWN_PP_GET_INDEX: Get the Nth argument in __VA_ARGS__
+#define DAWN_PP_GET_INDEX(N, ...) DAWN_PP_CONCATENATE(DAWN_PP_GET_INDEX_, N)(__VA_ARGS__)
+#define DAWN_PP_GET_INDEX_0(_0, ...) _0
+#define DAWN_PP_GET_INDEX_1(_0, _1, ...) _1
+#define DAWN_PP_GET_INDEX_2(_0, _1, _2, ...) _2
+#define DAWN_PP_GET_INDEX_3(_0, _1, _2, _3, ...) _3
+#define DAWN_PP_GET_INDEX_4(_0, _1, _2, _3, _4, ...) _4
+#define DAWN_PP_GET_INDEX_5(_0, _1, _2, _3, _4, _5, ...) _5
+#define DAWN_PP_GET_INDEX_6(_0, _1, _2, _3, _4, _5, _6, ...) _6
+#define DAWN_PP_GET_INDEX_7(_0, _1, _2, _3, _4, _5, _6, _7, ...) _7
+#define DAWN_PP_GET_INDEX_8(_0, _1, _2, _3, _4, _5, _6, _7, _8, ...) _8
+#define DAWN_PP_GET_INDEX_9(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, ...) _9
+#define DAWN_PP_GET_INDEX_10(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, ...) _10
+
+// DAWN_PP_GET_TAIL: Get the last element of __VA_ARGS__
+// Includes extra unused arguments to avoid an empty __VA_ARGS__ list
+#define DAWN_PP_GET_TAIL(...) \
+    DAWN_PP_GET_INDEX(DAWN_PP_NARG(__VA_ARGS__), _, __VA_ARGS__, _, _, _, _, _, _, _, _, _, _, _)
 
 #endif  // SRC_DAWN_COMMON_PREPROCESSOR_H_
