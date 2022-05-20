@@ -142,7 +142,7 @@ crbug.com/1309194 [ linux ] webgpu:web_platform,copyToTexture,canvas:copy_conten
 # KEEP
 ################################################################################
 crbug.com/dawn/0000 [ intel mac ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,* [ Failure ]
-crbug.com/dawn/1319 [ win ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,array:* [ Failure ]
+crbug.com/dawn/1319 [ win ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,array:srcFormat=*;dstFormat=*;dimension="2d";* [ Failure ]
 
 ################################################################################
 # General test slowness because of https://github.com/gpuweb/cts/issues/1162
