@@ -827,6 +827,10 @@ bool DawnTestBase::IsBackendValidationEnabled() const {
     return gTestEnv->GetBackendValidationLevel() != dawn::native::BackendValidationLevel::Disabled;
 }
 
+bool DawnTestBase::IsFullBackendValidationEnabled() const {
+    return gTestEnv->GetBackendValidationLevel() != dawn::native::BackendValidationLevel::Full;
+}
+
 bool DawnTestBase::RunSuppressedTests() const {
     return gTestEnv->RunSuppressedTests();
 }
