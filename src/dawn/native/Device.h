@@ -537,6 +537,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     struct DeprecationWarnings;
     std::unique_ptr<DeprecationWarnings> mDeprecationWarnings;
 
+    std::unique_ptr<BlobCache> mNoopBlobCache;
+
     State mState = State::BeingCreated;
 
     // Encompasses the mutex and the actual list that contains all live objects "owned" by the

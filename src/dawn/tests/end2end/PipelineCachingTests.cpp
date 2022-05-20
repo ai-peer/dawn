@@ -88,7 +88,7 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineFrontedCache) {
     // First creation should create a cache entry.
     wgpu::ComputePipeline pipeline;
     EXPECT_CACHE_HIT(mMockCache, 0u, pipeline = device.CreateComputePipeline(&desc));
-    EXPECT_EQ(mMockCache.GetNumEntries(), 1u);
+    EXPECT_EQ(mMockCache.GetNumEntries(), 2u);
 
     // Second creation on the same device should just return from frontend cache and should not
     // call out to the blob cache.
@@ -110,7 +110,7 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineBlobCache) {
         desc.compute.entryPoint = "main";
         EXPECT_CACHE_HIT(mMockCache, 0u, device.CreateComputePipeline(&desc));
     }
-    EXPECT_EQ(mMockCache.GetNumEntries(), 1u);
+    EXPECT_EQ(mMockCache.GetNumEntries(), 2u);
 
     // Second time should create using the cache.
     {
@@ -118,9 +118,9 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineBlobCache) {
         wgpu::ComputePipelineDescriptor desc;
         desc.compute.module = utils::CreateShaderModule(device, kComputeShader.data());
         desc.compute.entryPoint = "main";
-        EXPECT_CACHE_HIT(mMockCache, 1u, device.CreateComputePipeline(&desc));
+        EXPECT_CACHE_HIT(mMockCache, 2u, device.CreateComputePipeline(&desc));
     }
-    EXPECT_EQ(mMockCache.GetNumEntries(), 1u);
+    EXPECT_EQ(mMockCache.GetNumEntries(), 2u);
 }
 
 // Tests that pipeline creation does not hits the cache when it is enabled but we use different
@@ -134,7 +134,7 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineBlobCacheIsolationKey) {
         desc.compute.entryPoint = "main";
         EXPECT_CACHE_HIT(mMockCache, 0u, device.CreateComputePipeline(&desc));
     }
-    EXPECT_EQ(mMockCache.GetNumEntries(), 1u);
+    EXPECT_EQ(mMockCache.GetNumEntries(), 2u);
 
     // Second time should also create and write out to the cache.
     {
@@ -144,7 +144,7 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineBlobCacheIsolationKey) {
         desc.compute.entryPoint = "main";
         EXPECT_CACHE_HIT(mMockCache, 0u, device.CreateComputePipeline(&desc));
     }
-    EXPECT_EQ(mMockCache.GetNumEntries(), 2u);
+    EXPECT_EQ(mMockCache.GetNumEntries(), 4u);
 }
 
 // Tests that pipeline creation works fine even if the cache is disabled.
@@ -193,7 +193,7 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineFrontedCache) {
     // First creation should create a cache entry.
     wgpu::RenderPipeline pipeline;
     EXPECT_CACHE_HIT(mMockCache, 0u, pipeline = device.CreateRenderPipeline(&desc));
-    EXPECT_EQ(mMockCache.GetNumEntries(), 1u);
+    EXPECT_EQ(mMockCache.GetNumEntries(), 3u);
 
     // Second creation on the same device should just return from frontend cache and should not
     // call out to the blob cache.
@@ -218,7 +218,7 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCache) {
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_HIT(mMockCache, 0u, device.CreateRenderPipeline(&desc));
     }
-    EXPECT_EQ(mMockCache.GetNumEntries(), 1u);
+    EXPECT_EQ(mMockCache.GetNumEntries(), 3u);
 
     // Second time should create using the cache.
     {
@@ -229,9 +229,9 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCache) {
         desc.vertex.entryPoint = "main";
         desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShader.data());
         desc.cFragment.entryPoint = "main";
-        EXPECT_CACHE_HIT(mMockCache, 1u, device.CreateRenderPipeline(&desc));
+        EXPECT_CACHE_HIT(mMockCache, 3u, device.CreateRenderPipeline(&desc));
     }
-    EXPECT_EQ(mMockCache.GetNumEntries(), 1u);
+    EXPECT_EQ(mMockCache.GetNumEntries(), 3u);
 }
 
 // Tests that pipeline creation does not hits the cache when it is enabled but we use different
@@ -248,7 +248,7 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheIsolationKey) {
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_HIT(mMockCache, 0u, device.CreateRenderPipeline(&desc));
     }
-    EXPECT_EQ(mMockCache.GetNumEntries(), 1u);
+    EXPECT_EQ(mMockCache.GetNumEntries(), 3u);
 
     // Second time should also create and write out to the cache.
     {
@@ -261,7 +261,7 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheIsolationKey) {
         desc.cFragment.entryPoint = "main";
         EXPECT_CACHE_HIT(mMockCache, 0u, device.CreateRenderPipeline(&desc));
     }
-    EXPECT_EQ(mMockCache.GetNumEntries(), 2u);
+    EXPECT_EQ(mMockCache.GetNumEntries(), 6u);
 }
 
 DAWN_INSTANTIATE_TEST(SinglePipelineCachingTests, VulkanBackend({"enable_blob_cache"}));

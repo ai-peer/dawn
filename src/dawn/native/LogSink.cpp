@@ -1,4 +1,4 @@
-// Copyright 2021 The Dawn Authors
+// Copyright 2022 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,19 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_NATIVE_SPIRVVALIDATION_H_
-#define SRC_DAWN_NATIVE_SPIRVVALIDATION_H_
-
-#include <vector>
-
 #include "dawn/native/LogSink.h"
+
+#include "dawn/native/CacheKey.h"
+#include "dawn/native/Device.h"
 
 namespace dawn::native {
 
-class DeviceBase;
+LogSink::LogSink(DeviceBase* device) : mDevice(device) {}
 
-bool ValidateSpirv(LogSink sink, const uint32_t* spirv, size_t spirvWordCount, bool dumpSpirv);
+void LogSink::Emit(const char* message) {
+    mDevice->EmitLog(message);
+}
+void LogSink::Emit(WGPULoggingType loggingType, const char* message) {
+    mDevice->EmitLog(loggingType, message);
+}
 
 }  // namespace dawn::native
-
-#endif  // SRC_DAWN_NATIVE_SPIRVVALIDATION_H_

@@ -625,7 +625,10 @@ BlobCache* DeviceBase::GetBlobCache() {
     if (IsToggleEnabled(Toggle::EnableBlobCache)) {
         return mInstance->GetBlobCache();
     }
-    return nullptr;
+    if (!mNoopBlobCache) {
+        mNoopBlobCache = std::make_unique<BlobCache>(nullptr);
+    }
+    return mNoopBlobCache.get();
 }
 
 MaybeError DeviceBase::ValidateObject(const ApiObjectBase* object) const {

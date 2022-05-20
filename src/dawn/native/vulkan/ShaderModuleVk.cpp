@@ -18,6 +18,8 @@
 
 #include <map>
 
+#include "dawn/native/CacheRequestBuilder.h"
+#include "dawn/native/LogSink.h"
 #include "dawn/native/SpirvValidation.h"
 #include "dawn/native/TintUtils.h"
 #include "dawn/native/vulkan/BindGroupLayoutVk.h"
@@ -31,6 +33,84 @@
 #include "tint/tint.h"
 
 namespace dawn::native::vulkan {
+
+ShaderModule::Spirv::Spirv() = default;
+ShaderModule::Spirv::~Spirv() {
+    if (mDataDeleter) {
+        mDataDeleter();
+    }
+}
+ShaderModule::Spirv::Spirv(std::vector<uint32_t> data) : Spirv() {
+    *this = std::move(data);
+}
+
+ShaderModule::Spirv::Spirv(CachedBlob data) : Spirv() {
+    *this = std::move(data);
+}
+
+ShaderModule::Spirv::Spirv(const Spirv& rhs) : Spirv() {
+    *this = rhs;
+}
+
+ShaderModule::Spirv::Spirv(Spirv&& rhs) : Spirv() {
+    *this = std::forward<Spirv>(rhs);
+}
+
+ShaderModule::Spirv& ShaderModule::Spirv::operator=(const Spirv& rhs) {
+    std::vector<uint32_t> data(rhs.mData, rhs.mData + rhs.mDataCount);
+    return Spirv::operator=(std::move(data));
+}
+
+ShaderModule::Spirv& ShaderModule::Spirv::operator=(Spirv&& rhs) {
+    mData = rhs.mData;
+    mDataCount = rhs.mDataCount;
+    mDataDeleter = std::move(rhs.mDataDeleter);
+    return *this;
+}
+
+ShaderModule::Spirv& ShaderModule::Spirv::operator=(std::vector<uint32_t> data) {
+    mData = data.data();
+    mDataCount = data.size();
+    mDataDeleter = [data = std::move(data)]() { auto local = std::move(data); };
+    return *this;
+}
+
+ShaderModule::Spirv& ShaderModule::Spirv::operator=(CachedBlob data) {
+    mDataCount = data.Size() / sizeof(uint32_t);
+    // We should never have stored a blob of the wrong size.
+    ASSERT(mDataCount * sizeof(uint32_t) == data.Size());
+
+    if (IsPtrAligned(data.Data(), alignof(uint32_t))) {
+        mData = reinterpret_cast<uint32_t*>(data.Data());
+        mDataDeleter = [data = new CachedBlob(std::move(data))]() { delete data; };
+        return *this;
+    }
+
+    // Unaligned data. Copy into std::vector<uint32_t>.
+    std::vector<uint32_t> vec(mDataCount);
+    memcpy(vec.data(), data.Data(), sizeof(uint32_t) * mDataCount);
+    return Spirv::operator=(std::move(vec));
+}
+
+const uint32_t* ShaderModule::Spirv::Data() const {
+    return mData;
+}
+
+size_t ShaderModule::Spirv::SizeInBytes() const {
+    return mDataCount * sizeof(uint32_t);
+}
+
+const uint32_t* ShaderModule::Spirv::begin() const {
+    return Data();
+}
+
+const uint32_t* ShaderModule::Spirv::end() const {
+    return Data() + mDataCount;
+}
+
+size_t ShaderModule::Spirv::size() const {
+    return mDataCount;
+}
 
 ShaderModule::ConcurrentTransformedShaderModuleCache::ConcurrentTransformedShaderModuleCache(
     Device* device)
@@ -57,7 +137,7 @@ ShaderModule::ConcurrentTransformedShaderModuleCache::Find(
 ShaderModule::ModuleAndSpirv ShaderModule::ConcurrentTransformedShaderModuleCache::AddOrGet(
     const PipelineLayoutEntryPointPair& key,
     VkShaderModule module,
-    std::vector<uint32_t>&& spirv) {
+    Spirv&& spirv) {
     ASSERT(module != VK_NULL_HANDLE);
     std::lock_guard<std::mutex> lock(mMutex);
     auto iter = mTransformedShaderModuleCache.find(key);
@@ -114,6 +194,20 @@ void ShaderModule::DestroyImpl() {
 
 ShaderModule::~ShaderModule() = default;
 
+#define SPIRV_COMPILATION_REQUEST_MEMBERS(X)                                    \
+    X(const tint::Program*, inputProgram)                                       \
+    X(tint::transform::BindingRemapper::BindingPoints, bindingPoints)           \
+    X(tint::transform::MultiplanarExternalTexture::BindingsMap, newBindingsMap) \
+    X(const char*, entryPointName)                                              \
+    X(bool, disableWorkgroupInit)                                               \
+    X(bool, useZeroInitializeWorkgroupMemoryExtension)                          \
+    X(bool, dumpShaders)                                                        \
+    X(CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*>, tracePlatform)   \
+    X(LogSink, logSink)
+
+DAWN_MAKE_CACHE_REQUEST_BUILDER(SpirvCompilationRequest, SPIRV_COMPILATION_REQUEST_MEMBERS);
+#undef SPIRV_COMPILATION_REQUEST_MEMBERS
+
 ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     const char* entryPointName,
     const PipelineLayout* layout) {
@@ -137,15 +231,13 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     using BindingRemapper = tint::transform::BindingRemapper;
     using BindingPoint = tint::transform::BindingPoint;
     BindingRemapper::BindingPoints bindingPoints;
-    BindingRemapper::AccessControls accessControls;
 
     const BindingInfoArray& moduleBindingInfo = GetEntryPoint(entryPointName).bindings;
 
     for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
         const BindGroupLayout* bgl = ToBackend(layout->GetBindGroupLayout(group));
         const auto& groupBindingInfo = moduleBindingInfo[group];
-        for (const auto& it : groupBindingInfo) {
-            BindingNumber binding = it.first;
+        for (const auto& [binding, _] : groupBindingInfo) {
             BindingIndex bindingIndex = bgl->GetBindingIndex(binding);
             BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
                                          static_cast<uint32_t>(binding)};
@@ -158,79 +250,96 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
         }
     }
 
-    tint::transform::Manager transformManager;
-    // Many Vulkan drivers can't handle multi-entrypoint shader modules.
-    transformManager.append(std::make_unique<tint::transform::SingleEntryPoint>());
-    // Run the binding remapper after SingleEntryPoint to avoid collisions with unused entryPoints.
-    transformManager.append(std::make_unique<tint::transform::BindingRemapper>());
-
-    tint::transform::DataMap transformInputs;
-    transformInputs.Add<tint::transform::SingleEntryPoint::Config>(entryPointName);
-    transformInputs.Add<BindingRemapper::Remappings>(std::move(bindingPoints),
-                                                     std::move(accessControls),
-                                                     /* mayCollide */ false);
-
     // Transform external textures into the binding locations specified in the bgl
     // TODO(dawn:1082): Replace this block with ShaderModuleBase::AddExternalTextureTransform.
     tint::transform::MultiplanarExternalTexture::BindingsMap newBindingsMap;
     for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
         const BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(i);
 
-        ExternalTextureBindingExpansionMap expansions =
-            bgl->GetExternalTextureBindingExpansionMap();
-
-        std::map<BindingNumber, dawn_native::ExternalTextureBindingExpansion>::iterator it =
-            expansions.begin();
-
-        while (it != expansions.end()) {
+        for (const auto& [_, expansion] : bgl->GetExternalTextureBindingExpansionMap()) {
             newBindingsMap[{static_cast<uint32_t>(i),
-                            static_cast<uint32_t>(bgl->GetBindingIndex(it->second.plane0))}] = {
+                            static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane0))}] = {
                 {static_cast<uint32_t>(i),
-                 static_cast<uint32_t>(bgl->GetBindingIndex(it->second.plane1))},
+                 static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane1))},
                 {static_cast<uint32_t>(i),
-                 static_cast<uint32_t>(bgl->GetBindingIndex(it->second.params))}};
-            it++;
+                 static_cast<uint32_t>(bgl->GetBindingIndex(expansion.params))}};
         }
     }
 
-    if (!newBindingsMap.empty()) {
-        transformManager.Add<tint::transform::MultiplanarExternalTexture>();
-        transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
-            newBindingsMap);
-    }
-
-    tint::Program program;
-    {
-        TRACE_EVENT0(GetDevice()->GetPlatform(), General, "RunTransforms");
-        DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, GetTintProgram(), transformInputs,
-                                               nullptr, nullptr));
-    }
-
-#if TINT_BUILD_SPV_WRITER
-    tint::writer::spirv::Options options;
-    options.emit_vertex_point_size = true;
-    options.disable_workgroup_init = GetDevice()->IsToggleEnabled(Toggle::DisableWorkgroupInit);
-    options.use_zero_initialize_workgroup_memory_extension =
-        GetDevice()->IsToggleEnabled(Toggle::VulkanUseZeroInitializeWorkgroupMemoryExtension);
-
     Spirv spirv;
-    {
-        TRACE_EVENT0(GetDevice()->GetPlatform(), General, "tint::writer::spirv::Generate()");
-        auto result = tint::writer::spirv::Generate(&program, options);
-        DAWN_INVALID_IF(!result.success, "An error occured while generating SPIR-V: %s.",
-                        result.error);
+#if TINT_BUILD_SPV_WRITER
+    auto req = MakeSpirvCompilationRequest()
+                   .inputProgram(GetTintProgram())
+                   .bindingPoints(std::move(bindingPoints))
+                   .newBindingsMap(std::move(newBindingsMap))
+                   .entryPointName(entryPointName)
+                   .disableWorkgroupInit(GetDevice()->IsToggleEnabled(Toggle::DisableWorkgroupInit))
+                   .useZeroInitializeWorkgroupMemoryExtension(GetDevice()->IsToggleEnabled(
+                       Toggle::VulkanUseZeroInitializeWorkgroupMemoryExtension))
+                   .dumpShaders(GetDevice()->IsToggleEnabled(Toggle::DumpShaders))
+                   .tracePlatform(UnsafeUnkeyedValue(GetDevice()->GetPlatform()))
+                   .logSink(LogSink(GetDevice()));
 
-        spirv = std::move(result.spirv);
+    CacheKey key = req.CreateCacheKey();
+    auto blob = GetDevice()->GetBlobCache()->Load(key);
+    if (!blob.Empty()) {
+        spirv = std::move(blob);
+    } else {
+        DAWN_TRY_ASSIGN(spirv, std::move(req).Call([](SpirvCompilationRequest r)
+                                                       -> ResultOrError<Spirv> {
+            tint::transform::Manager transformManager;
+            // Many Vulkan drivers can't handle multi-entrypoint shader modules.
+            transformManager.append(std::make_unique<tint::transform::SingleEntryPoint>());
+            // Run the binding remapper after SingleEntryPoint to avoid collisions with
+            // unused entryPoints.
+            transformManager.append(std::make_unique<tint::transform::BindingRemapper>());
+            tint::transform::DataMap transformInputs;
+            transformInputs.Add<tint::transform::SingleEntryPoint::Config>(r.entryPointName);
+            transformInputs.Add<BindingRemapper::Remappings>(std::move(r.bindingPoints),
+                                                             BindingRemapper::AccessControls{},
+                                                             /* mayCollide */ false);
+            if (!r.newBindingsMap.empty()) {
+                transformManager.Add<tint::transform::MultiplanarExternalTexture>();
+                transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
+                    r.newBindingsMap);
+            }
+            tint::Program program;
+            {
+                TRACE_EVENT0(r.tracePlatform.UnsafeGetValue(), General, "RunTransforms");
+                DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, r.inputProgram,
+                                                       transformInputs, nullptr, nullptr));
+            }
+            tint::writer::spirv::Options options;
+            options.emit_vertex_point_size = true;
+            options.disable_workgroup_init = r.disableWorkgroupInit;
+            options.use_zero_initialize_workgroup_memory_extension =
+                r.useZeroInitializeWorkgroupMemoryExtension;
+
+            Spirv spirv;
+            {
+                TRACE_EVENT0(r.tracePlatform.UnsafeGetValue(), General,
+                             "tint::writer::spirv::Generate()");
+                auto result = tint::writer::spirv::Generate(&program, options);
+                DAWN_INVALID_IF(!result.success, "An error occured while generating SPIR-V: %s.",
+                                result.error);
+                spirv = std::move(result.spirv);
+            }
+            DAWN_INVALID_IF(
+                !ValidateSpirv(std::move(r.logSink), spirv.Data(), spirv.size(), r.dumpShaders),
+                "Produced invalid SPIRV. Please file a bug at https://crbug.com/tint.");
+            return spirv;
+        }));
     }
-
-    DAWN_TRY(ValidateSpirv(GetDevice(), spirv, GetDevice()->IsToggleEnabled(Toggle::DumpShaders)));
+#else
+    return DAWN_INTERNAL_ERROR("TINT_BUILD_SPV_WRITER is not defined.");
+#endif
 
     VkShaderModuleCreateInfo createInfo;
     createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
     createInfo.pNext = nullptr;
     createInfo.flags = 0;
-    createInfo.codeSize = spirv.size() * sizeof(uint32_t);
-    createInfo.pCode = spirv.data();
+    createInfo.codeSize = spirv.SizeInBytes();
+    createInfo.pCode = spirv.Data();
 
     Device* device = ToBackend(GetDevice());
 
@@ -250,9 +359,6 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     SetDebugName(ToBackend(GetDevice()), moduleAndSpirv.first, "Dawn_ShaderModule", GetLabel());
 
     return std::move(moduleAndSpirv);
-#else
-    return DAWN_INTERNAL_ERROR("TINT_BUILD_SPV_WRITER is not defined.");
-#endif
 }
 
 }  // namespace dawn::native::vulkan
