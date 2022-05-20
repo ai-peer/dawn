@@ -208,6 +208,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96e42fca_49101840",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1161,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-20T18:40:51Z",
+      "side": 1,
+      "message": "What about mat2x2\u003cf32\u003e(1)   \nThen it would become an error?\n\nIt shouldn\u0027t.  It should be the same as   mat2x2\u003cf32\u003e(1.0f)",
+      "parentUuid": "1d8c0af8_f5feaf2d",
+      "range": {
+        "startLine": 1161,
+        "startChar": 67,
+        "endLine": 1161,
+        "endChar": 71
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f674dcfa_3e82310f",
         "filename": "src/tint/resolver/resolver.cc",
         "patchSetId": 3
@@ -272,6 +296,24 @@
       "side": 1,
       "message": "It doesn\u0027t, but I don\u0027t think there\u0027s any operators that can materialize. Can you think of any?",
       "parentUuid": "d0c97669_77339ba3",
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "596deb99_f8321253",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1891,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-20T18:40:51Z",
+      "side": 1,
+      "message": "Right.  Anything operator dealing with numerics can take fully abstract forms.\n\nFor unary, only logical negation (!)  requires concrete, and that won\u0027t kick in here.\n\n\nSo it seems that we should *not* Materialize here ?",
+      "parentUuid": "8272c1f9_e020d670",
       "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -459,6 +501,30 @@
       "side": 1,
       "message": "I\u0027d like to stress the fact that there\u0027s no other actions are taken in this case.\nMoved this up to the top. Replaced `simply` with `just`.",
       "parentUuid": "f829fc28_eb577689",
+      "range": {
+        "startLine": 208,
+        "startChar": 73,
+        "endLine": 208,
+        "endChar": 79
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "daeb52f4_c60210af",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-20T18:40:51Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "ae04e8d6_79b92c2c",
       "range": {
         "startLine": 208,
         "startChar": 73,
