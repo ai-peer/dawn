@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed60c130_6177d71f",
+        "filename": "src/dawn/native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-20T02:54:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5817ce2c_2eb04e4b",
+      "revId": "bee724f5e5aaf9174050e76e568176be9bc34d5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0db51f3_796e1bac",
@@ -82,6 +100,30 @@
       "writtenOn": "2022-05-19T16:48:40Z",
       "side": 1,
       "message": "nit: I think this can be private?",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 32
+      },
+      "revId": "bee724f5e5aaf9174050e76e568176be9bc34d5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e64c340_b6ea93b6",
+        "filename": "src/dawn/native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-20T02:54:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0db51f3_796e1bac",
       "range": {
         "startLine": 85,
         "startChar": 0,
