@@ -27,6 +27,13 @@ CachedBlob::CachedBlob(size_t size) {
     }
 }
 
+CachedBlob::CachedBlob(const uint8_t* data, size_t size) {
+    if (size != 0) {
+        Reset(size);
+        memcpy(mData.get(), data, size);
+    }
+}
+
 CachedBlob::CachedBlob(CachedBlob&&) = default;
 
 CachedBlob::~CachedBlob() = default;
