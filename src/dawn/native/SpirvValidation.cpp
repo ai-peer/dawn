@@ -19,14 +19,15 @@
 #include <sstream>
 #include <string>
 
-#include "dawn/native/Device.h"
+#include "dawn/native/LogSink.h"
 
 namespace dawn::native {
 
-MaybeError ValidateSpirv(DeviceBase* device, const std::vector<uint32_t>& spirv, bool dumpSpirv) {
+bool ValidateSpirv(LogSink sink, const std::vector<uint32_t>& spirv, bool dumpSpirv) {
     spvtools::SpirvTools spirvTools(SPV_ENV_VULKAN_1_1);
-    spirvTools.SetMessageConsumer([device](spv_message_level_t level, const char*,
-                                           const spv_position_t& position, const char* message) {
+    spirvTools.SetMessageConsumer([sink](spv_message_level_t level, const char*,
+                                         const spv_position_t& position,
+                                         const char* message) mutable {
         WGPULoggingType wgpuLogLevel;
         switch (level) {
             case SPV_MSG_FATAL:
@@ -47,7 +48,7 @@ MaybeError ValidateSpirv(DeviceBase* device, const std::vector<uint32_t>& spirv,
 
         std::ostringstream ss;
         ss << "SPIRV line " << position.index << ": " << message << std::endl;
-        device->EmitLog(wgpuLogLevel, ss.str().c_str());
+        sink.Emit(wgpuLogLevel, ss.str().c_str());
     });
 
     const bool valid = spirvTools.Validate(spirv);
@@ -61,12 +62,10 @@ MaybeError ValidateSpirv(DeviceBase* device, const std::vector<uint32_t>& spirv,
         } else {
             dumpedMsg << "/* Failed to disassemble generated SPIRV */";
         }
-        device->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+        sink.Emit(WGPULoggingType_Info, dumpedMsg.str().c_str());
     }
 
-    DAWN_INVALID_IF(!valid, "Produced invalid SPIRV. Please file a bug at https://crbug.com/tint.");
-
-    return {};
+    return valid;
 }
 
 }  // namespace dawn::native

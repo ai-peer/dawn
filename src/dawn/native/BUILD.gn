@@ -155,9 +155,7 @@ source_set("sources") {
   libs = []
   data_deps = []
 
-  configs += [
-    ":internal",
-  ]
+  configs += [ ":internal" ]
 
   # Enable -Wglobal-constructors here only, instead of in internal_config,
   # because gtest and some other targets don't build with it.
@@ -200,6 +198,7 @@ source_set("sources") {
     "Buffer.h",
     "CacheKey.cpp",
     "CacheKey.h",
+    "CacheKeyImplTint.cpp",
     "CachedObject.cpp",
     "CachedObject.h",
     "CallbackTaskManager.cpp",
@@ -260,6 +259,8 @@ source_set("sources") {
     "InternalPipelineStore.h",
     "Limits.cpp",
     "Limits.h",
+    "LogSink.cpp",
+    "LogSink.h",
     "ObjectBase.cpp",
     "ObjectBase.h",
     "ObjectContentHasher.cpp",
