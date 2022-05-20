@@ -199,6 +199,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "325eed30_d62938bc",
+        "filename": "src/dawn/tests/end2end/VertexStateTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-05-20T15:46:58Z",
+      "side": 1,
+      "message": "We got a comment from Kai in https://github.com/gpuweb/gpuweb/issues/2864#issuecomment-1130371206\n\n\u003e I generally think webgpu.h should use \"Undefined\" \u003d 0 to mean \"use the default as specified in JS\" so the APIs match more closely. That way if we ever add more defaulting behavior to WebGPU (e.g. moving the default from IDL into our own text so that we can describe more complex defaulting for future added features) then there\u0027s API surface for it.\n\nIf I understand it correctly, we should add \"undefined\" enum value with non-zero to \"vertex step mode\" in dawn.json, and also we shouldn\u0027t make it the default value in the \"vertex buffer layout\" because the default in WebGPU spec is \"vertex\". Is my understanding correct?",
+      "parentUuid": "2acd42c3_ce698f9d",
+      "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33684069_c456b6bd",
         "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
         "patchSetId": 1
