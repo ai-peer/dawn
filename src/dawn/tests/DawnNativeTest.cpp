@@ -34,6 +34,7 @@ void AddFatalDawnFailure(const char* expression, const ErrorData* error) {
 
 DawnNativeTest::DawnNativeTest() {
     dawnProcSetProcs(&dawn::native::GetProcs());
+    instance = std::make_unique<dawn::native::Instance>();
 }
 
 DawnNativeTest::~DawnNativeTest() {
@@ -42,7 +43,6 @@ DawnNativeTest::~DawnNativeTest() {
 }
 
 void DawnNativeTest::SetUp() {
-    instance = std::make_unique<dawn::native::Instance>();
     instance->DiscoverDefaultAdapters();
 
     std::vector<dawn::native::Adapter> adapters = instance->GetAdapters();
@@ -66,7 +66,9 @@ void DawnNativeTest::SetUp() {
     device.SetUncapturedErrorCallback(DawnNativeTest::OnDeviceError, nullptr);
 }
 
-void DawnNativeTest::TearDown() {}
+void DawnNativeTest::TearDown() {
+    device = nullptr;
+}
 
 WGPUDevice DawnNativeTest::CreateTestDevice() {
     // Disabled disallowing unsafe APIs so we can test them.
