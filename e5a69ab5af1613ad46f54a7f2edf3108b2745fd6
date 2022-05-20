@@ -64,6 +64,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1af1cce7_96c5c707",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-20T16:33:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5c75e31_fea49105",
+      "range": {
+        "startLine": 1122,
+        "startChar": 13,
+        "endLine": 1122,
+        "endChar": 20
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ae8e587_573e15d2",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-20T16:33:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0170f7be_9380a46c",
+      "range": {
+        "startLine": 1122,
+        "startChar": 23,
+        "endLine": 1122,
+        "endChar": 35
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db22721a_184d2be4",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-05-20T15:42:27Z",
       "side": 1,
       "message": "WGSL doesn\u0027t have matrices over i32.",
+      "range": {
+        "startLine": 1134,
+        "startChar": 0,
+        "endLine": 1136,
+        "endChar": 5
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fa48103_e67f1040",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-20T16:33:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db22721a_184d2be4",
       "range": {
         "startLine": 1134,
         "startChar": 0,
@@ -110,6 +182,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d8c0af8_f5feaf2d",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1161,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-20T16:33:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e6ec274_b226c427",
+      "range": {
+        "startLine": 1161,
+        "startChar": 67,
+        "endLine": 1161,
+        "endChar": 71
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f674dcfa_3e82310f",
@@ -123,6 +219,24 @@
       "writtenOn": "2022-05-20T15:42:27Z",
       "side": 1,
       "message": "nit: TODO abstract vectors and abstract matrices.  You raised this offline.",
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b8f3ceb_917cba8c",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1175,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-20T16:33:16Z",
+      "side": 1,
+      "message": "Just fixed it. Still currently untestable.",
+      "parentUuid": "f674dcfa_3e82310f",
       "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -146,6 +260,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8272c1f9_e020d670",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1891,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-20T16:33:16Z",
+      "side": 1,
+      "message": "It doesn\u0027t, but I don\u0027t think there\u0027s any operators that can materialize. Can you think of any?",
+      "parentUuid": "d0c97669_77339ba3",
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c5e7577_dfa1d7a8",
         "filename": "src/tint/resolver/resolver.cc",
         "patchSetId": 3
@@ -157,6 +289,24 @@
       "writtenOn": "2022-05-20T15:42:27Z",
       "side": 1,
       "message": "(I guess it\u0027s still future work to make this an override expr. ok.)",
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fc1ec9d_9b866811",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1972,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-20T16:33:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2c5e7577_dfa1d7a8",
       "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -203,6 +353,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ff0c149_7d77a67d",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-20T16:33:16Z",
+      "side": 1,
+      "message": "Updated the comment. Let me know if this makes sense.",
+      "parentUuid": "485325a2_c40645b4",
+      "range": {
+        "startLine": 205,
+        "startChar": 67,
+        "endLine": 205,
+        "endChar": 81
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "818aade6_bfedbbb2",
         "filename": "src/tint/resolver/resolver.h",
         "patchSetId": 3
@@ -214,6 +388,30 @@
       "writtenOn": "2022-05-20T15:42:27Z",
       "side": 1,
       "message": "prefer \"value-converted\"",
+      "range": {
+        "startLine": 206,
+        "startChar": 74,
+        "endLine": 206,
+        "endChar": 85
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ad67d0d_9a0d3fb3",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-20T16:33:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "818aade6_bfedbbb2",
       "range": {
         "startLine": 206,
         "startChar": 74,
@@ -247,6 +445,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae04e8d6_79b92c2c",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-20T16:33:16Z",
+      "side": 1,
+      "message": "I\u0027d like to stress the fact that there\u0027s no other actions are taken in this case.\nMoved this up to the top. Replaced `simply` with `just`.",
+      "parentUuid": "f829fc28_eb577689",
+      "range": {
+        "startLine": 208,
+        "startChar": 73,
+        "endLine": 208,
+        "endChar": 79
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "008fa243_79184ae7",
@@ -260,6 +482,24 @@
       "writtenOn": "2022-05-20T15:42:27Z",
       "side": 1,
       "message": "nit: needs a method comment.....",
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "292d4b08_9d44dc2f",
+        "filename": "src/tint/sem/info.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-20T16:33:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "008fa243_79184ae7",
       "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
