@@ -232,6 +232,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b1abc6c_4126598f",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1161,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-20T19:39:22Z",
+      "side": 1,
+      "message": "No. For `mat2x2\u003cf32\u003e(1)` the type constructor first goes via the intrinsic table, resolving to the `mat2x2\u003cabstract-float\u003e(1)` constructor. There should be no way to construct a `mat2x2\u003cabstract-int\u003e(1)`, so this type switch is unreachable.",
+      "parentUuid": "96e42fca_49101840",
+      "range": {
+        "startLine": 1161,
+        "startChar": 67,
+        "endLine": 1161,
+        "endChar": 71
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f674dcfa_3e82310f",
         "filename": "src/tint/resolver/resolver.cc",
         "patchSetId": 3
@@ -314,6 +338,24 @@
       "side": 1,
       "message": "Right.  Anything operator dealing with numerics can take fully abstract forms.\n\nFor unary, only logical negation (!)  requires concrete, and that won\u0027t kick in here.\n\n\nSo it seems that we should *not* Materialize here ?",
       "parentUuid": "8272c1f9_e020d670",
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb1ebad9_a2b41b19",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1891,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-20T19:39:22Z",
+      "side": 1,
+      "message": "Yes, I think you\u0027re right. Will fix.",
+      "parentUuid": "596deb99_f8321253",
       "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
