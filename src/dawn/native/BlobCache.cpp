@@ -27,6 +27,15 @@ CachedBlob::CachedBlob(size_t size) {
     }
 }
 
+// Temp
+CachedBlob::CachedBlob(const CachedBlob& blob) {
+    if (blob.mSize != 0) {
+        Reset(blob.mSize);
+        // memcpy(mData.get(), blob.mData, blob.mSize);
+        std::copy(blob.mData.get(), blob.mData.get() + blob.mSize, mData.get());
+    }
+}
+
 CachedBlob::CachedBlob(CachedBlob&&) = default;
 
 CachedBlob::~CachedBlob() = default;
