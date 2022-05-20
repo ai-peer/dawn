@@ -15,15 +15,31 @@
 #ifndef SRC_DAWN_NATIVE_CACHEKEY_H_
 #define SRC_DAWN_NATIVE_CACHEKEY_H_
 
+#include <algorithm>
 #include <bitset>
+#include <functional>
 #include <iostream>
 #include <limits>
 #include <string>
 #include <type_traits>
+#include <unordered_map>
+#include <utility>
 #include <vector>
 
 #include "dawn/common/TypedInteger.h"
 #include "dawn/common/ityp_array.h"
+
+namespace tint {
+class Program;
+
+namespace transform {
+struct BindingPoints;
+}
+
+namespace sem {
+struct BindingPoint;
+}
+}  // namespace tint
 
 namespace dawn::native {
 
@@ -46,7 +62,20 @@ class CacheKey : public std::vector<uint8_t> {
   public:
     using std::vector<uint8_t>::vector;
 
-    enum class Type { ComputePipeline, RenderPipeline, Shader };
+    enum class Type { ComputePipeline, RenderPipeline, Shader, WgslToSpirv };
+
+    struct IgnoredValue {};
+
+    template <typename T>
+    class UnsafeUnkeyedValue {
+      public:
+        explicit UnsafeUnkeyedValue(T&& value) : mValue(std::forward<T>(value)) {}
+
+        const T& UnsafeGetValue() const { return mValue; }
+
+      private:
+        T mValue;
+    };
 
     template <typename T>
     CacheKey& Record(const T& t) {
@@ -87,6 +116,25 @@ class CacheKey : public std::vector<uint8_t> {
         }
         return *this;
     }
+};
+
+template <typename T>
+CacheKey::UnsafeUnkeyedValue<T> UnsafeUnkeyedValue(T&& value) {
+    return CacheKey::UnsafeUnkeyedValue<T>(std::forward<T>(value));
+}
+
+// Specialized overload for CacheKey::IgnoredValue which does nothing.
+template <>
+class CacheKeySerializer<CacheKey::IgnoredValue> {
+  public:
+    constexpr static void Serialize(CacheKey* key, CacheKey::IgnoredValue) {}
+};
+
+// Specialized overload for CacheKey::UnsafeIgnoredValue which does nothing.
+template <typename T>
+class CacheKeySerializer<CacheKey::UnsafeUnkeyedValue<T>> {
+  public:
+    constexpr static void Serialize(CacheKey* key, const CacheKey::UnsafeUnkeyedValue<T>&) {}
 };
 
 // Specialized overload for fundamental types.
@@ -195,6 +243,56 @@ template <typename T>
 class CacheKeySerializer<T, std::enable_if_t<std::is_base_of_v<CachedObject, T>>> {
   public:
     static void Serialize(CacheKey* key, const T& t) { key->Record(t.GetCacheKey()); }
+};
+
+// Specialized overload for std::pair<A, B>
+template <typename A, typename B>
+class CacheKeySerializer<std::pair<A, B>> {
+  public:
+    static void Serialize(CacheKey* key, const std::pair<A, B>& p) {
+        key->Record(p.first, p.second);
+    }
+};
+
+// Specialized overload for std::unordered_map<K, V>
+template <typename K, typename V>
+class CacheKeySerializer<std::unordered_map<K, V>> {
+  public:
+    static void Serialize(CacheKey* key, const std::unordered_map<K, V>& m) {
+        std::vector<std::pair<K, V>> ordered(m.begin(), m.end());
+        std::sort(ordered.begin(), ordered.end(),
+                  [](const std::pair<K, V>& a, const std::pair<K, V>& b) {
+                      return std::less<K>{}(a.first, b.first);
+                  });
+        key->RecordIterable(ordered);
+    }
+};
+
+// Specialized overload for LogSink that does nothing since the LogSink does not affect cached
+// computations.
+template <>
+class CacheKeySerializer<class LogSink> {
+  public:
+    static void Serialize(CacheKey* key, const LogSink&) {}
+};
+
+// Forward declarations of Tint serializations.
+template <>
+class CacheKeySerializer<tint::Program> {
+  public:
+    static void Serialize(CacheKey* key, const tint::Program& p);
+};
+
+template <>
+class CacheKeySerializer<tint::transform::BindingPoints> {
+  public:
+    static void Serialize(CacheKey* key, const tint::transform::BindingPoints& points);
+};
+
+template <>
+class CacheKeySerializer<tint::sem::BindingPoint> {
+  public:
+    static void Serialize(CacheKey* key, const tint::sem::BindingPoint& p);
 };
 
 }  // namespace dawn::native

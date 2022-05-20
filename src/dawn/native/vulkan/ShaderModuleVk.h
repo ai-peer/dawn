@@ -23,6 +23,7 @@
 #include <utility>
 #include <vector>
 
+#include "dawn/native/BlobCache.h"
 #include "dawn/native/ShaderModule.h"
 
 #include "dawn/common/vulkan_platform.h"
@@ -35,7 +36,39 @@ class PipelineLayout;
 
 class ShaderModule final : public ShaderModuleBase {
   public:
-    using Spirv = std::vector<uint32_t>;
+    // Spirv is a wrapper around a blob of data which is passed to
+    // vkCreateShaderModule. The size in bytes must be a multiple of four.
+    // It uses type erasure so that it can be constructed from multiple
+    // data types, taking ownership of the memory, and provide access to
+    // the data without copying.
+    class Spirv {
+      public:
+        Spirv();
+        ~Spirv();
+        explicit Spirv(std::vector<uint32_t> data);
+        explicit Spirv(CachedBlob data);
+        Spirv(const Spirv& rhs);
+        Spirv(Spirv&& rhs);
+
+        Spirv& operator=(const Spirv& rhs);
+        Spirv& operator=(Spirv&& rhs);
+        Spirv& operator=(std::vector<uint32_t> data);
+        Spirv& operator=(CachedBlob data);
+
+        const uint32_t* Data() const;
+        size_t SizeInBytes() const;
+
+        // Iterator compatibility.
+        const uint32_t* begin() const;
+        const uint32_t* end() const;
+        size_t size() const;
+
+      private:
+        uint32_t* mData = nullptr;
+        size_t mDataCount = 0;
+        std::function<void()> mDataDeleter = []() {};
+    };
+
     using ModuleAndSpirv = std::pair<VkShaderModule, const Spirv*>;
 
     static ResultOrError<Ref<ShaderModule>> Create(Device* device,
@@ -62,7 +95,7 @@ class ShaderModule final : public ShaderModuleBase {
         std::optional<ModuleAndSpirv> Find(const PipelineLayoutEntryPointPair& key);
         ModuleAndSpirv AddOrGet(const PipelineLayoutEntryPointPair& key,
                                 VkShaderModule module,
-                                std::vector<uint32_t>&& spirv);
+                                Spirv&& spirv);
 
       private:
         using Entry = std::pair<VkShaderModule, std::unique_ptr<Spirv>>;
