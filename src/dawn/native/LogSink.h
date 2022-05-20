@@ -1,4 +1,4 @@
-// Copyright 2021 The Dawn Authors
+// Copyright 2022 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,19 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_NATIVE_SPIRVVALIDATION_H_
-#define SRC_DAWN_NATIVE_SPIRVVALIDATION_H_
+#ifndef SRC_DAWN_NATIVE_LOGSINK_H_
+#define SRC_DAWN_NATIVE_LOGSINK_H_
 
-#include <vector>
-
-#include "dawn/native/LogSink.h"
+#include "dawn/common/RefCounted.h"
+#include "dawn/native/Device.h"
+#include "dawn/webgpu.h"
 
 namespace dawn::native {
 
 class DeviceBase;
 
-bool ValidateSpirv(LogSink sink, const uint32_t* spirv, size_t spirvWordCount, bool dumpSpirv);
+// LogSink is a simple class which provides a log-only view of the device.
+// It should not be extended to do more than logging, or provide direct
+// access to the device.
+class LogSink {
+  public:
+    explicit LogSink(DeviceBase* device);
+    void Emit(const char* message);
+    void Emit(WGPULoggingType loggingType, const char* message);
+
+  private:
+    Ref<DeviceBase> mDevice;
+};
 
 }  // namespace dawn::native
 
-#endif  // SRC_DAWN_NATIVE_SPIRVVALIDATION_H_
+#endif  // SRC_DAWN_NATIVE_LOGSINK_H_
