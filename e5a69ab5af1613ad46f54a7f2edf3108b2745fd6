@@ -1,0 +1,267 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1a20267_b53e70e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-20T15:42:27Z",
+      "side": 1,
+      "message": "Mostly there.\nBut WGSL doesn\u0027t have matrices over integral component types.",
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0170f7be_9380a46c",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-20T15:42:27Z",
+      "side": 1,
+      "message": "nit:  pre-existing problem:  \"ConstantCast\" is a confusing term. It\u0027s a value-preserving (or approximating) conversion from one type to another.  I\u0027d prefer \"ValueConversion\". But this would be for another CL.",
+      "range": {
+        "startLine": 1122,
+        "startChar": 23,
+        "endLine": 1122,
+        "endChar": 35
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5c75e31_fea49105",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-20T15:42:27Z",
+      "side": 1,
+      "message": "nit: \"mat_val\" might be read as \"matrix value\".\nSuggest \"materialized_val\".  It\u0027s only used 2 times.",
+      "range": {
+        "startLine": 1122,
+        "startChar": 13,
+        "endLine": 1122,
+        "endChar": 20
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db22721a_184d2be4",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-20T15:42:27Z",
+      "side": 1,
+      "message": "WGSL doesn\u0027t have matrices over i32.",
+      "range": {
+        "startLine": 1134,
+        "startChar": 0,
+        "endLine": 1136,
+        "endChar": 5
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e6ec274_b226c427",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1161,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-20T15:42:27Z",
+      "side": 1,
+      "message": "should be f32m",
+      "range": {
+        "startLine": 1161,
+        "startChar": 67,
+        "endLine": 1161,
+        "endChar": 71
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f674dcfa_3e82310f",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1175,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-20T15:42:27Z",
+      "side": 1,
+      "message": "nit: TODO abstract vectors and abstract matrices.  You raised this offline.",
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0c97669_77339ba3",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1891,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-20T15:42:27Z",
+      "side": 1,
+      "message": "Unary negation does not materialize its argument.\nI guess that\u0027s TODO, as part of constexpr.",
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c5e7577_dfa1d7a8",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1972,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-20T15:42:27Z",
+      "side": 1,
+      "message": "(I guess it\u0027s still future work to make this an override expr. ok.)",
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fab8e80_69dd2227",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2293,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-20T15:42:27Z",
+      "side": 1,
+      "message": "Alternatively, if common_ty is nullptr, then issue the error here.  \nWhat you have is fine.",
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "485325a2_c40645b4",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-20T15:42:27Z",
+      "side": 1,
+      "message": "How do you choose between i32 or f32?\nWhat\u0027s the intent here?\n\nI suspect:\n\n     ...  otherwise the concrete type with lowest-rank conversion from the expr\u0027s current type\n\nAnd I guess later this will handle materialization to abstract vectors and matrices.\nI think you noted in offline discussion that those can\u0027t be exercised yet(?)",
+      "range": {
+        "startLine": 205,
+        "startChar": 67,
+        "endLine": 205,
+        "endChar": 81
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "818aade6_bfedbbb2",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-20T15:42:27Z",
+      "side": 1,
+      "message": "prefer \"value-converted\"",
+      "range": {
+        "startLine": 206,
+        "startChar": 74,
+        "endLine": 206,
+        "endChar": 85
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f829fc28_eb577689",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-20T15:42:27Z",
+      "side": 1,
+      "message": "nit: I\u0027d remove \"simply\"",
+      "range": {
+        "startLine": 208,
+        "startChar": 73,
+        "endLine": 208,
+        "endChar": 79
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "008fa243_79184ae7",
+        "filename": "src/tint/sem/info.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-20T15:42:27Z",
+      "side": 1,
+      "message": "nit: needs a method comment.....",
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
