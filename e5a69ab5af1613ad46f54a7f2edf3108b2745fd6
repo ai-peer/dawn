@@ -280,6 +280,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "090e3017_0245cf2b",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1161,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-21T00:04:51Z",
+      "side": 1,
+      "message": "Sorry, that made no sense. Let\u0027s try again:\n\nFor a `mat2x2`  constructor, we go to the intrinsic table. If the user passes the  `\u003cf32\u003e` explicit template, then we\u0027ll pick the `mat2x2\u003cf32\u003e` overload (a), otherwise we\u0027ll pick the `mat2x2\u003cabstract-float\u003e` constructor (b).\n\nfor (a), `Materialize()` will be called for the argument, which will materialize the  `abstract-int` literal to `f32`. This change doesn\u0027t affect anything, as we\u0027re dealing with a scalar argument, not a matrix.\n\nfor (b), we\u0027re not going to materialize, as the parameter type is abstract, and `MaterializeArguments` will not call `Materialize()` if the parameter type is abstract.\n\nThe only way this would have changed things is if the matrix had an abstract-integer element type. There\u0027s no way to construct this, so we\u0027re good.",
+      "parentUuid": "bdb466c7_c937bf9d",
+      "range": {
+        "startLine": 1161,
+        "startChar": 67,
+        "endLine": 1161,
+        "endChar": 71
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f674dcfa_3e82310f",
         "filename": "src/tint/resolver/resolver.cc",
         "patchSetId": 3
@@ -380,6 +404,24 @@
       "side": 1,
       "message": "Yes, I think you\u0027re right. Will fix.",
       "parentUuid": "596deb99_f8321253",
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25645127_af724035",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1891,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-21T00:04:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb1ebad9_a2b41b19",
       "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
