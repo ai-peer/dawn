@@ -550,11 +550,14 @@ TEST_P(VertexStateTest, LastAllowedVertexBuffer) {
     vertexState.cAttributes[0].offset = 0;
     vertexState.cAttributes[0].format = VertexFormat::Float32x4;
 
+    for (uint32_t i = 0; i < kBufferIndex; i++) {
+      vertexState.cVertexBuffers[i].stepMode = VertexStepMode::Undefined;
+    }
+
     wgpu::RenderPipeline pipeline =
         MakeTestPipeline(vertexState, 1, {{0, VertexFormat::Float32x4, VertexStepMode::Vertex}});
 
     wgpu::Buffer buffer0 = MakeVertexBuffer<float>({0, 1, 2, 3, 1, 2, 3, 4, 2, 3, 4, 5});
-
     DoTestDraw(pipeline, 1, 1, {DrawVertexBuffer{kMaxVertexBuffers - 1, &buffer0}});
 }
 
