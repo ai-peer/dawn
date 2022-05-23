@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "957f81e2_3c123d1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-23T22:40:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6a5734d953bd9807c65b305116d26aba77ab74ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be41ea0a_60485166",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_gbm.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-23T22:40:42Z",
+      "side": 1,
+      "message": "nit: could you also explain in this comment how the flag pertains to initialization and the tests? it\u0027s not obvious from looking at this function why we only use GBM_BO_USE_SW_WRITE_RARELY if the content is to be initialized.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 9
+      },
+      "revId": "6a5734d953bd9807c65b305116d26aba77ab74ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
