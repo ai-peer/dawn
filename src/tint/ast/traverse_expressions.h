@@ -83,7 +83,11 @@ bool TraverseExpressions(const ast::Expression* root, diag::List& diags, CALLBAC
     };
 
     while (!to_visit.empty()) {
+<<<<<<< HEAD   (6b926e Validate if device is alive in EncodeFunction of EncodingCon)
         auto* expr = to_visit.back();
+=======
+        auto p = to_visit.back();
+>>>>>>> CHANGE (2e6810 tint: Fix use-after-free)
         to_visit.pop_back();
 
         if (auto* filtered = expr->As<EXPR_TYPE>()) {
