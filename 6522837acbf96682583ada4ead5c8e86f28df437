@@ -70,6 +70,30 @@
       },
       "revId": "6522837acbf96682583ada4ead5c8e86f28df437",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab1dfbbe_a5d9034d",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-23T22:25:23Z",
+      "side": 0,
+      "message": "If you click into one of the failures, you can see the bot dimensions on the task page. For example: https://chromium-swarm.appspot.com/task?id\u003d5b0b21ca63dddb11\n\ngpu:Intel (8086)Intel Kaby Lake HD Graphics 630 (8086:5912)Intel Kaby Lake HD Graphics 630 (8086:5912-26.20.100.8141)\n\nos:WindowsWindows-10Windows 10 version 1909 (Windows-10-18363)Windows 10 version 1909 (Windows-10-18363.476)",
+      "parentUuid": "afb495bc_ade13992",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 122
+      },
+      "revId": "6522837acbf96682583ada4ead5c8e86f28df437",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
