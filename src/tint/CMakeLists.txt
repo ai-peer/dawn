@@ -233,6 +233,7 @@ set(TINT_LIB_SRCS
   clone_context.h
   demangler.cc
   demangler.h
+  number.cc
   number.h
   inspector/entry_point.cc
   inspector/entry_point.h
@@ -750,6 +751,8 @@ if(TINT_BUILD_TESTS)
     diagnostic/diagnostic_test.cc
     diagnostic/formatter_test.cc
     diagnostic/printer_test.cc
+    number_test.cc
+    program_builder_test.cc
     program_test.cc
     resolver/array_accessor_test.cc
     resolver/assignment_validation_test.cc
