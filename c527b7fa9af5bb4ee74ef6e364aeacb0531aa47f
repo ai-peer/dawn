@@ -16,6 +16,24 @@
       "message": "I discovered my last patch breaks single plane external textures - this fixes it. I was surprised I was able to get breaking patch merged, but upon further investigation we have zero CTS test coverage for external textures - the tests have been disabled for timeout issues.\n\nAdditionally the Pixel_WebGPUImportVideoFrame* tests are having issues when I attempt to re-enable them. The issue does not appear to be with any of my changes, but instead with creation of the frame source.\n\n",
       "revId": "c527b7fa9af5bb4ee74ef6e364aeacb0531aa47f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f3999c4_d5dc2023",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-05-23T21:35:32Z",
+      "side": 1,
+      "message": "I think the Additionally the Pixel_WebGPUImportVideoFrame* may have just been due to a url param that I was unaware of - so nevermind there.\n\nFiled a bug to document the CTS issue.",
+      "parentUuid": "72d6496c_7acd22f6",
+      "revId": "c527b7fa9af5bb4ee74ef6e364aeacb0531aa47f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
