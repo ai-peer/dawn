@@ -98,7 +98,7 @@ MTLVertexStepFunction VertexStepModeFunction(wgpu::VertexStepMode mode) {
             return MTLVertexStepFunctionPerVertex;
         case wgpu::VertexStepMode::Instance:
             return MTLVertexStepFunctionPerInstance;
-        default:
+        case wgpu::VertexStepMode::Undefined:
             UNREACHABLE();
     }
 }

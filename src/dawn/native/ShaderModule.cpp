@@ -112,7 +112,7 @@ tint::transform::VertexStepMode ToTintVertexStepMode(wgpu::VertexStepMode mode) 
             return tint::transform::VertexStepMode::kVertex;
         case wgpu::VertexStepMode::Instance:
             return tint::transform::VertexStepMode::kInstance;
-        default:
+        case wgpu::VertexStepMode::Undefined:
             UNREACHABLE();
     }
 }
