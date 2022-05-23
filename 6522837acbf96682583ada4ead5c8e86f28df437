@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c14b4c47_c6d5f7a5",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-05-23T22:03:17Z",
+      "side": 0,
+      "message": "Hey Corentin and Austin, I tried to update the WebGPU CTS expectation file for my patch at https://dawn-review.googlesource.com/c/dawn/+/90780, it turned out that the expectation file has already been updated by this change. I believe the other passing tests below in this change are also fixed by that patch because they are all 3D texture copy related tests.\n\nHowever, some 2D texture copy tests under webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,array:* still fail on my local machine (those tests are listed at Dawn issue 1319), but they can pass on Dawn bots. Are Dawn webgpu-releated bots the same with Chromium webgpu-related bots? I remember that Chromium bots include a Windows Intel machine which is exactly the same with my local machine.",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 122
+      },
+      "revId": "6522837acbf96682583ada4ead5c8e86f28df437",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
