@@ -46,6 +46,30 @@
       },
       "revId": "6522837acbf96682583ada4ead5c8e86f28df437",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afb495bc_ade13992",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-05-23T22:21:35Z",
+      "side": 0,
+      "message": "Thank you Austin! That makes sense. My local machine is also Intel HD 630. Btw, how do I know the windows driver version (OS build number) for this bot? My local machine is Windows 10 19042.1706. My local machine has more 2D texture copy related failures under that category than the bot you listed above.",
+      "parentUuid": "a8e60fb3_e5643d4a",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 122
+      },
+      "revId": "6522837acbf96682583ada4ead5c8e86f28df437",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c05c767d_b3e37105",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-05-23T22:21:35Z",
+      "side": 1,
+      "message": "I feel like it should be 1288, which is fixed by patch at https://dawn-review.googlesource.com/c/dawn/+/90780. Dawn issue 1319 has not been fixed yet.",
+      "range": {
+        "startLine": 9,
+        "startChar": 10,
+        "endLine": 9,
+        "endChar": 14
+      },
+      "revId": "a4216e72d46b75cadff02d630262889b0b26488f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
