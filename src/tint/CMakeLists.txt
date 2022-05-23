@@ -803,6 +803,7 @@ if(TINT_BUILD_TESTS)
     sem/atomic.cc
     sem/bool_test.cc
     sem/builtin_test.cc
+    sem/constant_test.cc
     sem/depth_multisampled_texture_test.cc
     sem/depth_texture_test.cc
     sem/expression_test.cc
