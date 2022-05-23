@@ -551,7 +551,7 @@ TEST_P(VertexStateTest, LastAllowedVertexBuffer) {
     vertexState.cAttributes[0].format = VertexFormat::Float32x4;
 
     for (uint32_t i = 0; i < kBufferIndex; i++) {
-      vertexState.cVertexBuffers[i].stepMode = VertexStepMode::Undefined;
+        vertexState.cVertexBuffers[i].stepMode = VertexStepMode::Undefined;
     }
 
     wgpu::RenderPipeline pipeline =
