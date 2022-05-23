@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "697daf61_a1338cba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-05-23T08:17:28Z",
+      "side": 1,
+      "message": "As a note, this change will make Visual Studio Version 16.11.5 (VS2019) report an error (\"unknown key \u0027InsertBraces\u0027\"), and setting \"Use custom clang-format.exe file\" to an up-to-date version clang-format.exe (e.g., the one in dawn/buildtools/win) in Tools-\u003eOpinion, Text Editor-\u003eC/C++-\u003eCode Style-\u003eFormatting-\u003eGeneral will fix it.",
+      "revId": "86a617f1108cbfa49c8c1faebc7b4af8acd36588",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
