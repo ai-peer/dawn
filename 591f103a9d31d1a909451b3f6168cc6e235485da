@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7beab75b_125d95ca",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-23T23:41:41Z",
+      "side": 1,
+      "message": "I\u0027m thinking something like taking __function__ __FILE__ __LINE__ __COUNTER__ and doing a super simple constexpr hash (or dumb concatenation but that\u0027s more space) of those strings/integers - paired with either some debug-only thing which checks the uniqueness, or some custom test executable that checks all the callsites linked in dawn::native and asserts their ids are unique. Anyway, I\u0027ll make that a separate change.",
+      "parentUuid": "5c3ef24a_165084c3",
+      "revId": "591f103a9d31d1a909451b3f6168cc6e235485da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "487ad212_8d857438",
         "filename": "src/dawn/native/Memoize.h",
         "patchSetId": 2

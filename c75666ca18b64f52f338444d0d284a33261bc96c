@@ -16,6 +16,24 @@
       "message": "this doesn\u0027t work yet, and there\u0027s no tests - but what do ya\u0027ll think about the macro magic going on?",
       "revId": "c75666ca18b64f52f338444d0d284a33261bc96c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c7071ba_3b2c8164",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-23T23:41:41Z",
+      "side": 1,
+      "message": "ok it mostly works now - except for presubmit and msvc\n\nat a high level we have:\n - A Memoize helper function which takes in Args and a Function. It builds a key from Args, and tries to load from cache. Otherwise it calls the function\n - Compile-time checks to make sure the Function strictly uses the Args, and nothing else\n - Two ways to allow-list stuff that isn\u0027t part of the key.\n   1. Specifically making classes that need to be careful to not contribute to computation.\n   2. Passing stuff as UnsafeUnkeyed(foo)\n - per-type specialization for how to \"view\" a memoized result. View gives you the same interface whether the backing is the result of calling the function, or the backing is CachedBlob\n - Macro magic for calling Memoize so you don\u0027t need to pass the arg list twice (which is verbose and risks getting things in the wrong order)",
+      "parentUuid": "bbeb1b7a_843b4ca4",
+      "revId": "c75666ca18b64f52f338444d0d284a33261bc96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
