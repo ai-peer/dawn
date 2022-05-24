@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39d3725b_7c20c2a5",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-24T21:42:29Z",
+      "side": 1,
+      "message": "I\u0027m learning C++17 I guess...\nThat fact that f is in scope here was. ..surprising to me.",
+      "range": {
+        "startLine": 367,
+        "startChar": 16,
+        "endLine": 367,
+        "endChar": 17
+      },
+      "revId": "bc02b4952a1c07d8583d8430fa10ddccf3b67023",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc54b1af_bce77761",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-24T21:42:29Z",
+      "side": 1,
+      "message": "This replicates the behaviour of the existing code\nBut I think it\u0027s wrong, so I filed a followup bug https://bugs.chromium.org/p/tint/issues/detail?id\u003d1564",
+      "revId": "bc02b4952a1c07d8583d8430fa10ddccf3b67023",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
