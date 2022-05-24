@@ -52,6 +52,24 @@
       "parentUuid": "de9ac479_2e15aed4",
       "revId": "aa11b5fabf73b8aa01cbe26a87f6649aef326b67",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6022d5f_960d5b23",
+        "filename": "src/dawn/native/Memoize.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-24T22:11:29Z",
+      "side": 1,
+      "message": "ok I updated this to an alternative prototype implementation.\nBasically, did a builder pattern which has static asserts that you pass every member exactly once. Static asserts help not miss members, and builder pattern helps make it clear what you\u0027re setting.\n\nCan look mostly at src/dawn/native/CacheRequestBuilder.h and how it\u0027s used in ShaderModuleVk.cpp.",
+      "parentUuid": "6dd3d4e6_3562f6b4",
+      "revId": "aa11b5fabf73b8aa01cbe26a87f6649aef326b67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
