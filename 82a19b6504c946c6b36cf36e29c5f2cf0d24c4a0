@@ -284,6 +284,24 @@
       "parentUuid": "33684069_c456b6bd",
       "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d73c15b_cc16c99e",
+        "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-05-24T08:36:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5413f9e2_d3b2a1b5",
+      "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
