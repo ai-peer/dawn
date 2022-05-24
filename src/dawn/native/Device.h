@@ -22,6 +22,7 @@
 #include <utility>
 #include <vector>
 
+#include "dawn/native/BlobCache.h"
 #include "dawn/native/CacheKey.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/ComputePipeline.h"
@@ -46,7 +47,6 @@ namespace dawn::native {
 class AsyncTaskManager;
 class AttachmentState;
 class AttachmentStateBlueprint;
-class BlobCache;
 class CallbackTaskManager;
 class DynamicUploader;
 class ErrorScopeStack;
@@ -279,6 +279,8 @@ class DeviceBase : public RefCounted {
     MaybeError ValidateIsAlive() const;
 
     BlobCache* GetBlobCache();
+    CachedBlob LoadCachedBlob(const CacheKey& key);
+    void StoreCachedBlob(const CacheKey& key, const CachedBlob& blob);
 
     virtual ResultOrError<std::unique_ptr<StagingBufferBase>> CreateStagingBuffer(size_t size) = 0;
     virtual MaybeError CopyFromStagingToBuffer(StagingBufferBase* source,
