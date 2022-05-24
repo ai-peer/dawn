@@ -235,6 +235,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8b103cf_b9b0e1ed",
+        "filename": "src/dawn/tests/end2end/VertexStateTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-24T02:10:37Z",
+      "side": 1,
+      "message": "My reading of Kai\u0027s comment is that we should have a *separate* enum `VertexBufferNotUsed` which has a different value from Undefined. This would allow Undefined to mean \"use the default\" which is currently `wgpu::StepMode::Vertex`.\n\nIn Dawn, we would implement the defaulting similar to [CreateTextureViewDescriptorWithDefaults](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Texture.cpp;l\u003d433;bpv\u003d1;bpt\u003d1?q\u003df:dawn%20f:native%20%22::Undefined%22%20-f:node%20Default) (except it would be much simpler). We would still have it be UNREACHABLE in most of the other switch statements since we convert the value in the frontend.\n\nGenerally, we have `Undefined` be 0 in webgpu.h so that zero-initialization of the struct will make it do the default. Not caring about the value in native does the same thing as not caring about the value in JS.",
+      "parentUuid": "d2fef7ff_85f8a615",
+      "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33684069_c456b6bd",
         "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
         "patchSetId": 1

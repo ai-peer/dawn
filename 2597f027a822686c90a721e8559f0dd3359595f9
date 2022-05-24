@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d7ca684_f2a2db01",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-24T02:10:37Z",
+      "side": 1,
+      "message": "nit: comment that this is continuing out of the for-loop, not the switch statement. Wasn\u0027t super obvious when initially reading this",
+      "range": {
+        "startLine": 511,
+        "startChar": 16,
+        "endLine": 511,
+        "endChar": 25
+      },
+      "revId": "2597f027a822686c90a721e8559f0dd3359595f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
