@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9968fc0d_f61d2557",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 9
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-24T13:49:22Z",
+      "side": 1,
+      "message": "Missing entry for materialize.h?",
+      "revId": "118b1796a60d7976245539f269a9bba17e246c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aaf380c_1caac23d",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 2306,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-24T13:49:22Z",
+      "side": 1,
+      "message": "`auto*\u0026` ? This is a reference to a pointer?",
+      "revId": "118b1796a60d7976245539f269a9bba17e246c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddf3b2bb_2bc69e54",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-24T13:49:22Z",
+      "side": 1,
+      "message": "The `otherwise of a type with the scalar type` reads ... strange? Maybe just `otherwise the scalar type of `i32` if ...`",
+      "revId": "118b1796a60d7976245539f269a9bba17e246c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc776c23_32345744",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-24T13:49:22Z",
+      "side": 1,
+      "message": "What is `value` in this sentence? There is no `value ` in the signature?",
+      "revId": "118b1796a60d7976245539f269a9bba17e246c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
