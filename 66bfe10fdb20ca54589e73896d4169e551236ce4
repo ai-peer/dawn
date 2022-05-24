@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72dc2628_d426acef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-24T15:37:55Z",
+      "side": 1,
+      "message": "LGTM! Thanks for the iterrations and the back and forth with the spec. The final solution looks great. Feel free to CQ+2 when ready.",
+      "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
