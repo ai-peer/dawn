@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4949deaa_daca72c8",
+        "filename": "src/dawn/native/Memoize.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-24T12:57:33Z",
+      "side": 1,
+      "message": "IDK, this seems like a huge amount of magic for what we\u0027re trying to do. There are ton of layers of variadic (up to 10 only) macros and variadic templates, special casing of function arguments like LogSink etc.\n\nCouldn\u0027t a simpler version be made with X macros if we really want to define things only once?\n\n```\n#define SPIRV_COMPILATION_REQUEST_MEMBERS(X) \\\n   X(const tint::Program*, inputProgram) \\\n   X(BindingPoints, bindingPoints) \\\n   X(BindingsMap, bindingsMap) \\\n   X(const char*, entryPointName) \\\n   X(bool, disableWorkgroupInit)\n\n// ...\n\nDAWN_MAKE_CACHE_REQUEST_STRUCT(\n        SpirvCompilationRequest, SPIRV_COMPILATION_REQUEST_MEMBERS);\n#undef SPIRV_COMPILATION_REQUEST_MEMBERS\n\n// This makes a struct SpirvCompilationRequest with members for serialization / comparison etc, that can later be used with a Cache system (or memoize or w/e).\n```\n\nIt is more verbose to define and use, but also what you get is just a dumb structure that can be passed around, filled by helper functions, etc. Instead of trying to stuff N arguments in Memoize in a way that will stay under the macro argument count.",
+      "revId": "aa11b5fabf73b8aa01cbe26a87f6649aef326b67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
