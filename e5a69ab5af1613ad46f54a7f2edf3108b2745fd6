@@ -302,6 +302,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "932dac23_3394f73f",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1161,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-24T20:49:57Z",
+      "side": 1,
+      "message": "Ok, LGTM now that the AbstractInt case is gone.",
+      "parentUuid": "090e3017_0245cf2b",
+      "range": {
+        "startLine": 1161,
+        "startChar": 67,
+        "endLine": 1161,
+        "endChar": 71
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f674dcfa_3e82310f",
@@ -515,6 +539,30 @@
       "side": 1,
       "message": "Updated the comment. Let me know if this makes sense.",
       "parentUuid": "485325a2_c40645b4",
+      "range": {
+        "startLine": 205,
+        "startChar": 67,
+        "endLine": 205,
+        "endChar": 81
+      },
+      "revId": "e5a69ab5af1613ad46f54a7f2edf3108b2745fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1046625a_2058079a",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-24T20:49:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7ff0c149_7d77a67d",
       "range": {
         "startLine": 205,
         "startChar": 67,
