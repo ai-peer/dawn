@@ -20,6 +20,7 @@
 #include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/d3d12/D3D12Error.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
+#include "dawn/native/d3d12/PipelineCacheD3D12.h"
 #include "dawn/native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn/native/d3d12/PlatformFunctions.h"
 #include "dawn/native/d3d12/ShaderModuleD3D12.h"
@@ -55,14 +56,38 @@ MaybeError ComputePipeline::Initialize() {
     D3D12_COMPUTE_PIPELINE_STATE_DESC d3dDesc = {};
     d3dDesc.pRootSignature = ToBackend(GetLayout())->GetRootSignature();
 
+    // TODO(dawn:549): Compile shader everytime before we implement compiled shader cache
     CompiledShader compiledShader;
     DAWN_TRY_ASSIGN(compiledShader, module->Compile(computeStage, SingleShaderStage::Compute,
                                                     ToBackend(GetLayout()), compileFlags));
     d3dDesc.CS = compiledShader.GetD3D12ShaderBytecode();
+
+    mCacheKey.Record(d3dDesc, ToBackend(GetLayout())->GetRootSignatureBlob());
+
+    // Try to see if we have anything in the blob cache.
+    Ref<PipelineCache> cache = ToBackend(GetDevice()->GetOrCreatePipelineCache(GetCacheKey()));
+    const bool cacheHit = cache->CacheHit();
+    if (cacheHit) {
+        // Cache hits, attach cached blob to descriptor.
+        d3dDesc.CachedPSO.pCachedBlob = cache->GetBlobData();
+        d3dDesc.CachedPSO.CachedBlobSizeInBytes = cache->GetBlobSize();
+    }
+
     auto* d3d12Device = device->GetD3D12Device();
     DAWN_TRY(CheckHRESULT(
         d3d12Device->CreateComputePipelineState(&d3dDesc, IID_PPV_ARGS(&mPipelineState)),
         "D3D12 creating pipeline state"));
+
+    if (!cacheHit) {
+        // Cache misses, need to get pipeline cache blob.
+        ComPtr<ID3DBlob> d3dBlob;
+        DAWN_TRY(CheckHRESULT(GetPipelineState()->GetCachedBlob(&d3dBlob),
+                              "D3D12 copmute pipeline state get cached blob"));
+        if (d3dBlob->GetBufferSize() > 0) {
+            cache->SetBlob(d3dBlob);
+        }
+    }
+    DAWN_TRY(cache->FlushIfNeeded());
 
     SetLabelImpl();
 

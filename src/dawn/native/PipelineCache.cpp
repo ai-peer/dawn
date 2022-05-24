@@ -17,14 +17,16 @@
 namespace dawn::native {
 
 PipelineCacheBase::PipelineCacheBase(BlobCache* cache, const CacheKey& key)
-    : mCache(cache), mKey(key) {}
+    : mBlob(CachedBlob::Create(0)), mCache(cache), mKey(key) {}
 
-CachedBlob PipelineCacheBase::Initialize() {
+bool PipelineCacheBase::Initialize() {
     ASSERT(!mInitialized);
-    CachedBlob blob = mCache != nullptr ? mCache->Load(mKey) : CachedBlob();
-    mCacheHit = !blob.Empty();
+    if (mCache != nullptr) {
+        mBlob = mCache->Load(mKey);
+    }
+    mCacheHit = !mBlob.Empty();
     mInitialized = true;
-    return blob;
+    return mCacheHit;
 }
 
 bool PipelineCacheBase::CacheHit() const {
@@ -37,12 +39,11 @@ MaybeError PipelineCacheBase::Flush() {
         return {};
     }
     // Try to write the data out to the persistent cache.
-    CachedBlob blob;
-    DAWN_TRY_ASSIGN(blob, SerializeToBlobImpl());
-    if (blob.Size() > 0) {
+    DAWN_TRY(SerializeToBlobImpl());
+    if (GetBlobSize() > 0) {
         // Using a simple heuristic to decide whether to write out the blob right now. May need
         // smarter tracking when we are dealing with monolithic caches.
-        mCache->Store(mKey, blob);
+        mCache->Store(mKey, GetBlobSize(), GetBlobData());
     }
     return {};
 }
@@ -53,6 +54,14 @@ MaybeError PipelineCacheBase::FlushIfNeeded() {
         return Flush();
     }
     return {};
+}
+
+const void* PipelineCacheBase::GetBlobData() const {
+    return mBlob.Data();
+}
+
+size_t PipelineCacheBase::GetBlobSize() const {
+    return mBlob.Size();
 }
 
 }  // namespace dawn::native
