@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dc5fdac_96635641",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-24T21:24:30Z",
+      "side": 1,
+      "message": "Worth saying here that mantissa bits are truncated.  This does not do the rounding.",
+      "revId": "9b2645890366c553cdfd047234733709746623d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1493c935_d265f3c9",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-24T21:24:30Z",
+      "side": 1,
+      "message": "ok, so this yields float\u0027s infinity.  got it.",
+      "revId": "9b2645890366c553cdfd047234733709746623d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcdb25e6_3d1b44d9",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-24T21:24:30Z",
+      "side": 1,
+      "message": "Yep.\n\nnit: Might be nice to explain what\u0027s going on here:\n \n f32 is :  1 sign,  8 exponent, 23 mantissa\n f16 is :  1 sign,  5 exponent, 10 manitssa\n \n The range checks above ensure the value is within the finite range, so the exponent is ok.   \n \n So when \u0027value\u0027 is already in f32 value, you want to preserve:\n     1 sign, 8 exponent,  and 10 mantissa\n or the top 19 bits.\n     \n  which would mean a mask of  0xFFFFE000u",
+      "range": {
+        "startLine": 50,
+        "startChar": 15,
+        "endLine": 50,
+        "endChar": 27
+      },
+      "revId": "9b2645890366c553cdfd047234733709746623d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50e5337a_835fbef2",
+        "filename": "src/tint/number.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-24T21:24:30Z",
+      "side": 1,
+      "message": "I had to look this up.  Oh my C++ did it in a very confusing way.\n\nYour names are good.",
+      "range": {
+        "startLine": 84,
+        "startChar": 39,
+        "endLine": 84,
+        "endChar": 71
+      },
+      "revId": "9b2645890366c553cdfd047234733709746623d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71298267_79201388",
+        "filename": "src/tint/number.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-24T21:24:30Z",
+      "side": 1,
+      "message": "nit: this is bool.\n\nAnd the C/C++ coercion of bool to 0 or 1 applies here?",
+      "range": {
+        "startLine": 162,
+        "startChar": 21,
+        "endLine": 162,
+        "endChar": 27
+      },
+      "revId": "9b2645890366c553cdfd047234733709746623d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a7b85de_38f81a54",
+        "filename": "src/tint/number.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-24T21:24:30Z",
+      "side": 1,
+      "message": "nit: bool",
+      "range": {
+        "startLine": 171,
+        "startChar": 21,
+        "endLine": 171,
+        "endChar": 27
+      },
+      "revId": "9b2645890366c553cdfd047234733709746623d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f59b61fb_4f9d8fac",
+        "filename": "src/tint/number.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-24T21:24:30Z",
+      "side": 1,
+      "message": "dup of lines 160-167?",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 1
+      },
+      "revId": "9b2645890366c553cdfd047234733709746623d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91121992_104915e1",
+        "filename": "src/tint/number.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-24T21:24:30Z",
+      "side": 1,
+      "message": "This is not justified by the spec.\nThese cases are allowed to yield either 0 or the kSmallest of the same sign as value.\n\nThe rules in the spec are:\n\n- A hexadecimal floating point literal with a f or h suffix overflows or cannot be exactly represented by the target type.\n\n-  A decimal floating point literal with a f or h suffix overflows the target type.\n\n\nThe hex float rule should probably not be enforced here anyway.",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 9
+      },
+      "revId": "9b2645890366c553cdfd047234733709746623d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
