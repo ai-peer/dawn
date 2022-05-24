@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3bf5475_cbb92dcf",
+        "filename": "src/tint/utils/transform.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-24T17:35:52Z",
+      "side": 1,
+      "message": "Am curious why you need this.\n\nIn C++20, we would be able to use std::ranges::take or take_view instead: https://en.cppreference.com/w/cpp/ranges/take_view. Maybe something to inspire a future solution if we need to generalize this further.",
+      "revId": "949a8f4ab1b76c81127aa15d39e8f46eb0e6fcb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
