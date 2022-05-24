@@ -767,6 +767,97 @@ TEST_P(ShaderTests, ConflictingBindingsDueToTransformOrder) {
 
 // TODO(tint:1155): Test overridable constants used for workgroup size
 
+TEST_P(ShaderTests, HelperInvocationStuff) {
+    // Create a pipeline that will have both helper and non-helper invocations, testing that helper
+    // invocations do the same memory loads as non-helpers.
+    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+        @stage(vertex) fn vs(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4<f32> {
+            let positions = array<vec2<f32>, 3>(
+                vec2(-1.0,  1.0),
+                vec2( 1.1,  1.0),
+                vec2(-1.0, -1.1),
+            );
+            return vec4(positions[VertexIndex], 0.0, 1.0);
+        }
+
+        fn quadsAll(b : bool) -> bool {
+            let sameOverX = dpdxFine(f32(b)) == 0.0;
+            let sameOverQuad = dpdyFine(f32(sameOverX)) == 0.0;
+            return sameOverQuad & b;
+        }
+
+        @group(0) @binding(0) var<uniform> oneUbo : u32;
+        @group(0) @binding(1) var<storage> oneStorage : u32;
+        @group(0) @binding(2) var oneTexSampled : texture_2d<u32>;
+
+        @stage(fragment) fn fs() -> @location(0) vec4<f32> {
+            let r = quadsAll(oneUbo == 1u);
+            let g = quadsAll(oneStorage == 1u);
+            let b = quadsAll(textureLoad(oneTexSampled, vec2(0, 0), 0).x == 1u);
+            let a = quadsAll(true);
+            // No storage texture reading in WebGPU v1 :(
+            return vec4<f32>(f32(r), f32(g), f32(b), f32(a));
+        }
+    )");
+
+    utils::ComboRenderPipelineDescriptor desc;
+    desc.vertex.module = module;
+    desc.vertex.entryPoint = "vs";
+    desc.cFragment.module = module;
+    desc.cFragment.entryPoint = "fs";
+    desc.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&desc);
+
+    // Resources used by the pipeline that contain ones (discarded reads in helpers could be
+    // zeroes).
+    wgpu::Buffer oneBuffer = utils::CreateBufferFromData<uint32_t>(
+        device,
+        wgpu::BufferUsage::Uniform | wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc,
+        {uint32_t(1)});
+
+    wgpu::TextureDescriptor oneTexDesc;
+    oneTexDesc.size = {1, 1};
+    oneTexDesc.usage = wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::CopyDst;
+    oneTexDesc.format = wgpu::TextureFormat::R32Uint;
+    wgpu::Texture oneTex = device.CreateTexture(&oneTexDesc);
+
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                     {
+                                                         {0, oneBuffer},
+                                                         {1, oneBuffer},
+                                                         {2, oneTex.CreateView()},
+                                                     });
+
+    // Start by copying the one into the texture.
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+
+    wgpu::ImageCopyBuffer copySrc = utils::CreateImageCopyBuffer(oneBuffer);
+    wgpu::ImageCopyTexture copyDst = utils::CreateImageCopyTexture(oneTex);
+    wgpu::Extent3D copySize = {1, 1, 1};
+    encoder.CopyBufferToTexture(&copySrc, &copyDst, &copySize);
+
+    // Render in a 2x2 render target. One fragment will be a helper.
+    utils::BasicRenderPass rp =
+        utils::CreateBasicRenderPass(device, 2, 2, wgpu::TextureFormat::RGBA8Unorm);
+    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&rp.renderPassInfo);
+    pass.SetPipeline(pipeline);
+    pass.SetBindGroup(0, bindGroup);
+    pass.Draw(3);
+    pass.End();
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    // All the non-helper fragments see that calls to quadsAll return all the same value (so that
+    // the helper correctly did the laod).
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(255, 255, 255, 255), rp.color, 0, 0);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(255, 255, 255, 255), rp.color, 1, 0);
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(255, 255, 255, 255), rp.color, 0, 1);
+
+    // Check that there is a helper fragment.
+    EXPECT_PIXEL_RGBA8_EQ(RGBA8(0, 0, 0, 0), rp.color, 1, 1);
+}
+
 DAWN_INSTANTIATE_TEST(ShaderTests,
                       D3D12Backend(),
                       MetalBackend(),
