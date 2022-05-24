@@ -171,7 +171,6 @@ class CacheKeySerializer<T[N], std::enable_if_t<std::is_fundamental_v<T>>> {
   public:
     static void Serialize(CacheKey* key, const T (&t)[N]) {
         static_assert(N > 0);
-        key->Record(static_cast<size_t>(N));
         const char* it = reinterpret_cast<const char*>(t);
         key->insert(key->end(), it, it + sizeof(t));
     }
@@ -183,7 +182,6 @@ class CacheKeySerializer<T[N], std::enable_if_t<!std::is_fundamental_v<T>>> {
   public:
     static void Serialize(CacheKey* key, const T (&t)[N]) {
         static_assert(N > 0);
-        key->Record(static_cast<size_t>(N));
         for (size_t i = 0; i < N; i++) {
             key->Record(t[i]);
         }
