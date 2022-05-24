@@ -820,6 +820,10 @@ class MultiGeneratorFromDawnJSON(Generator):
                 FileRender('dawn_proc_table.h',
                            'include/dawn/' + prefix + '_proc_table.h',
                            [RENDER_PARAMS_BASE, params_dawn]))
+            renders.append(
+                FileRender('api_proc_def_inl.h',
+                           'include/dawn/' + prefix + '_proc_def_inl.h',
+                           [RENDER_PARAMS_BASE, params_dawn]))
 
         if 'cpp_headers' in targets:
             renders.append(

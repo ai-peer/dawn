@@ -28,36 +28,6 @@ void {{prefix}}ProcSetProcs(const {{Prefix}}ProcTable* procs_) {
     }
 }
 
-{% for function in by_category["function"] %}
-    {{as_cType(function.return_type.name)}} {{as_cMethod(None, function.name)}}(
-        {%- for arg in function.arguments -%}
-            {% if not loop.first %}, {% endif %}{{as_annotated_cType(arg)}}
-        {%- endfor -%}
-    ) {
-        {% if function.return_type.name.canonical_case() != "void" %}return {% endif %}
-        procs.{{as_varName(function.name)}}(
-            {%- for arg in function.arguments -%}
-                {% if not loop.first %}, {% endif %}{{as_varName(arg.name)}}
-            {%- endfor -%}
-        );
-    }
-{% endfor %}
+#define DAWN_PROC_DEFINITION_IMPL(name, ...) procs.name(__VA_ARGS__)
 
-{% for type in by_category["object"] %}
-    {% for method in c_methods(type) %}
-        {{as_cType(method.return_type.name)}} {{as_cMethod(type.name, method.name)}}(
-            {{-as_cType(type.name)}} {{as_varName(type.name)}}
-            {%- for arg in method.arguments -%}
-                , {{as_annotated_cType(arg)}}
-            {%- endfor -%}
-        ) {
-            {% if method.return_type.name.canonical_case() != "void" %}return {% endif %}
-            procs.{{as_varName(type.name, method.name)}}({{as_varName(type.name)}}
-                {%- for arg in method.arguments -%}
-                    , {{as_varName(arg.name)}}
-                {%- endfor -%}
-            );
-        }
-    {% endfor %}
-
-{% endfor %}
+#include "dawn/{{prefix}}_proc_def_inl.h"

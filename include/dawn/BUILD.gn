@@ -25,6 +25,7 @@ dawn_json_generator("headers_gen") {
   target = "headers"
   outputs = [
     "include/dawn/dawn_proc_table.h",
+    "include/dawn/dawn_proc_def_inl.h",
     "include/dawn/webgpu.h",
   ]
 }

@@ -21,9 +21,11 @@
 #ifndef {{API}}_CPP_H_
 #define {{API}}_CPP_H_
 
+#include <cmath>
+#include <functional>
+
 #include "dawn/{{api}}.h"
 #include "dawn/EnumClassBitmasks.h"
-#include <cmath>
 
 namespace {{metadata.namespace}} {
 
@@ -117,11 +119,11 @@ namespace {{metadata.namespace}} {
             return static_cast<Derived&>(*this);
         }
 
-        bool operator==(std::nullptr_t) const {
-            return mHandle == nullptr;
+        bool operator==(const ObjectBase& rhs) const {
+            return mHandle == rhs.mHandle;
         }
-        bool operator!=(std::nullptr_t) const {
-            return mHandle != nullptr;
+        bool operator!=(const ObjectBase& rhs) const {
+            return mHandle != rhs.mHandle;
         }
 
         explicit operator bool() const {
@@ -256,5 +258,20 @@ namespace dawn {
 
     {% endfor %}
 } // namespace dawn
+
+namespace std {
+    {% for type in by_category["object"] %}
+        {% set CppType = as_cppType(type.name) %}
+        {% set CType = as_cType(type.name) %}
+
+        template <>
+        struct hash<{{metadata.namespace}}::{{CppType}}>
+        {
+            size_t operator()(const {{metadata.namespace}}::{{CppType}}& o) const {
+                return std::hash<{{CType}}>{}(o.Get());
+            }
+        };
+    {% endfor %}
+}
 
 #endif // {{API}}_CPP_H_
