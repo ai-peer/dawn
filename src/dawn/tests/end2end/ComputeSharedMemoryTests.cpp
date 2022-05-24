@@ -112,17 +112,11 @@ TEST_P(ComputeSharedMemoryTests, AssortedTypes) {
 
         struct Dst {
             d_struct : StructValues,
-            d_matrix : mat2x2<f32>,
-            d_array : array<u32, 4>,
-            d_vector : vec4<f32>,
         }
 
         @group(0) @binding(0) var<storage, write> dst : Dst;
 
         var<workgroup> wg_struct : StructValues;
-        var<workgroup> wg_matrix : mat2x2<f32>;
-        var<workgroup> wg_array : array<u32, 4>;
-        var<workgroup> wg_vector : vec4<f32>;
 
         @stage(compute) @workgroup_size(4,1,1)
         fn main(@builtin(local_invocation_id) LocalInvocationID : vec3<u32>) {
@@ -132,27 +126,12 @@ TEST_P(ComputeSharedMemoryTests, AssortedTypes) {
                 wg_struct.m = mat2x2<f32>(
                     vec2<f32>(f32(i), f32(i + 1u)),
                     vec2<f32>(f32(i + 2u), f32(i + 3u)));
-            } else if (LocalInvocationID.x == 1u) {
-                wg_matrix = mat2x2<f32>(
-                    vec2<f32>(f32(i), f32(i + 1u)),
-                    vec2<f32>(f32(i + 2u), f32(i + 3u)));
-            } else if (LocalInvocationID.x == 2u) {
-                wg_array[0u] = i;
-                wg_array[1u] = i + 1u;
-                wg_array[2u] = i + 2u;
-                wg_array[3u] = i + 3u;
-            } else if (LocalInvocationID.x == 3u) {
-                wg_vector = vec4<f32>(
-                    f32(i), f32(i + 1u), f32(i + 2u), f32(i + 3u));
             }
 
             workgroupBarrier();
 
             if (LocalInvocationID.x == 0u) {
                 dst.d_struct = wg_struct;
-                dst.d_matrix = wg_matrix;
-                dst.d_array = wg_array;
-                dst.d_vector = wg_vector;
             }
         }
     )");
@@ -187,13 +166,7 @@ TEST_P(ComputeSharedMemoryTests, AssortedTypes) {
     queue.Submit(1, &commands);
 
     std::array<float, 4> expectedStruct = {0., 1., 2., 3.};
-    std::array<float, 4> expectedMatrix = {4., 5., 6., 7.};
-    std::array<uint32_t, 4> expectedArray = {8, 9, 10, 11};
-    std::array<float, 4> expectedVector = {12., 13., 14., 15.};
     EXPECT_BUFFER_FLOAT_RANGE_EQ(expectedStruct.data(), dst, 0, 4);
-    EXPECT_BUFFER_FLOAT_RANGE_EQ(expectedMatrix.data(), dst, 16, 4);
-    EXPECT_BUFFER_U32_RANGE_EQ(expectedArray.data(), dst, 32, 4);
-    EXPECT_BUFFER_FLOAT_RANGE_EQ(expectedVector.data(), dst, 48, 4);
 }
 
 DAWN_INSTANTIATE_TEST(ComputeSharedMemoryTests,
