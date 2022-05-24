@@ -50,10 +50,10 @@ VkPipelineCache PipelineCache::GetHandle() const {
     return mHandle;
 }
 
-ResultOrError<CachedBlob> PipelineCache::SerializeToBlobImpl() {
-    CachedBlob emptyBlob;
+MaybeError PipelineCache::SerializeToBlobImpl() {
     if (mHandle == VK_NULL_HANDLE) {
-        return emptyBlob;
+        // Pipeline cache isn't created successfully
+        return {};
     }
 
     size_t bufferSize;
@@ -62,22 +62,25 @@ ResultOrError<CachedBlob> PipelineCache::SerializeToBlobImpl() {
         device->fn.GetPipelineCacheData(device->GetVkDevice(), mHandle, &bufferSize, nullptr),
         "GetPipelineCacheData"));
 
-    CachedBlob blob(bufferSize);
-    DAWN_TRY(CheckVkSuccess(
-        device->fn.GetPipelineCacheData(device->GetVkDevice(), mHandle, &bufferSize, blob.Data()),
-        "GetPipelineCacheData"));
-    return blob;
+    if (bufferSize > 0) {
+        mBlob = CachedBlob::Create(bufferSize);
+        DAWN_TRY(CheckVkSuccess(device->fn.GetPipelineCacheData(device->GetVkDevice(), mHandle,
+                                                                &bufferSize, mBlob.Data()),
+                                "GetPipelineCacheData"));
+    }
+
+    return {};
 }
 
 void PipelineCache::Initialize() {
-    CachedBlob blob = PipelineCacheBase::Initialize();
+    PipelineCacheBase::Initialize();
 
     VkPipelineCacheCreateInfo createInfo;
     createInfo.flags = 0;
     createInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO;
     createInfo.pNext = nullptr;
-    createInfo.initialDataSize = blob.Size();
-    createInfo.pInitialData = blob.Data();
+    createInfo.initialDataSize = mBlob.Size();
+    createInfo.pInitialData = mBlob.Data();
 
     Device* device = ToBackend(GetDevice());
     mHandle = VK_NULL_HANDLE;
