@@ -16,6 +16,23 @@
       "message": "Loko, PTAL!",
       "revId": "7d3c4418ef619921a3192d5f074508b60643c3c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b62f7dc0_d5a749c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-24T04:57:25Z",
+      "side": 1,
+      "message": "LGTM! Sorry for the delay!",
+      "revId": "7d3c4418ef619921a3192d5f074508b60643c3c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
