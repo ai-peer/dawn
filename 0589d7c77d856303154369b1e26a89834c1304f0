@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c861732_a1ddedd3",
+        "filename": "src/tint/utils/result.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-24T18:53:43Z",
+      "side": 1,
+      "message": "I really would prefer to avoid returning pointers here, as I don\u0027t think this grants you any additional safety - you\u0027re just pushing the problem out to all the callers, and now you have a bunch of `*` smell for dereferencing.\n\nThe shape of this type is based on Tint\u0027s existing `wgsl::ParserImpl::Expect` and `wgsl::ParserImpl::Maybe`:\nhttps://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/reader/wgsl/parser_impl.h\n\nand matches the general shape of `std::optional`.\n\nFWIW, for most of our builds, doing the Wrong Thing™ will immediately explode as a `std::bad_variant_access` (or the no-exception alternative). The error given is obvious, pointing you at the place where you\u0027ve done the wrong thing (i.e. `Get()` is on the callstack). The pointer approach means `Get()` is not on the callstack, and you may have propagated the pointer somewhere else (passed to a function, etc).\n\nTo revisit another point you make:\n\n\u003e  I would make these safely return pointers, instead so we can write conditionals like:\n\nThat\u0027s what the `operator bool()` and `operator !()` is for. Examples:\n\n```\nif (auto val \u003d FunctionThatReturnsResult()) {\n  // Success\n} else {\n  // Failure\n}\n```\n\n\n```\nauto val \u003d FunctionThatReturnsResult();\nif (!val) {\n  return;  // Failure\n}\n// Success\n```",
+      "parentUuid": "65068eb2_dc825e1d",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "0589d7c77d856303154369b1e26a89834c1304f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef08198e_32d1ae8c",
         "filename": "src/tint/utils/result.h",
         "patchSetId": 5
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-24T17:33:28Z",
       "side": 1,
       "message": "Although unlikely to occur, should add a static_assert that these two are not the same type.",
+      "range": {
+        "startLine": 85,
+        "startChar": 17,
+        "endLine": 85,
+        "endChar": 43
+      },
+      "revId": "0589d7c77d856303154369b1e26a89834c1304f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91a3ff9a_03fd8425",
+        "filename": "src/tint/utils/result.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-24T18:53:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef08198e_32d1ae8c",
       "range": {
         "startLine": 85,
         "startChar": 17,
