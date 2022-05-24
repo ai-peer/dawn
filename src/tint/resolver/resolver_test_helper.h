@@ -188,6 +188,9 @@ struct DataType<void> {
 /// Helper for building bool types and expressions
 template <>
 struct DataType<bool> {
+    /// The element type
+    using ElementType = bool;
+
     /// false as bool is not a composite type
     static constexpr bool is_composite = false;
 
@@ -210,6 +213,9 @@ struct DataType<bool> {
 /// Helper for building i32 types and expressions
 template <>
 struct DataType<i32> {
+    /// The element type
+    using ElementType = i32;
+
     /// false as i32 is not a composite type
     static constexpr bool is_composite = false;
 
@@ -232,6 +238,9 @@ struct DataType<i32> {
 /// Helper for building u32 types and expressions
 template <>
 struct DataType<u32> {
+    /// The element type
+    using ElementType = u32;
+
     /// false as u32 is not a composite type
     static constexpr bool is_composite = false;
 
@@ -254,6 +263,9 @@ struct DataType<u32> {
 /// Helper for building f32 types and expressions
 template <>
 struct DataType<f32> {
+    /// The element type
+    using ElementType = f32;
+
     /// false as f32 is not a composite type
     static constexpr bool is_composite = false;
 
@@ -276,6 +288,9 @@ struct DataType<f32> {
 /// Helper for building f16 types and expressions
 template <>
 struct DataType<f16> {
+    /// The element type
+    using ElementType = f16;
+
     /// false as f16 is not a composite type
     static constexpr bool is_composite = false;
 
@@ -298,6 +313,9 @@ struct DataType<f16> {
 /// Helper for building abstract float types and expressions
 template <>
 struct DataType<AFloat> {
+    /// The element type
+    using ElementType = AFloat;
+
     /// false as AFloat is not a composite type
     static constexpr bool is_composite = false;
 
@@ -319,6 +337,9 @@ struct DataType<AFloat> {
 /// Helper for building abstract integer types and expressions
 template <>
 struct DataType<AInt> {
+    /// The element type
+    using ElementType = AInt;
+
     /// false as AFloat is not a composite type
     static constexpr bool is_composite = false;
 
@@ -340,6 +361,9 @@ struct DataType<AInt> {
 /// Helper for building vector types and expressions
 template <uint32_t N, typename T>
 struct DataType<vec<N, T>> {
+    /// The element type
+    using ElementType = T;
+
     /// true as vectors are a composite type
     static constexpr bool is_composite = true;
 
@@ -380,6 +404,9 @@ struct DataType<vec<N, T>> {
 /// Helper for building matrix types and expressions
 template <uint32_t N, uint32_t M, typename T>
 struct DataType<mat<N, M, T>> {
+    /// The element type
+    using ElementType = T;
+
     /// true as matrices are a composite type
     static constexpr bool is_composite = true;
 
@@ -422,6 +449,9 @@ struct DataType<mat<N, M, T>> {
 /// Helper for building alias types and expressions
 template <typename T, int ID>
 struct DataType<alias<T, ID>> {
+    /// The element type
+    using ElementType = T;
+
     /// true if the aliased type is a composite type
     static constexpr bool is_composite = DataType<T>::is_composite;
 
@@ -465,6 +495,9 @@ struct DataType<alias<T, ID>> {
 /// Helper for building pointer types and expressions
 template <typename T>
 struct DataType<ptr<T>> {
+    /// The element type
+    using ElementType = T;
+
     /// true if the pointer type is a composite type
     static constexpr bool is_composite = false;
 
@@ -495,6 +528,9 @@ struct DataType<ptr<T>> {
 /// Helper for building array types and expressions
 template <uint32_t N, typename T>
 struct DataType<array<N, T>> {
+    /// The element type
+    using ElementType = T;
+
     /// true as arrays are a composite type
     static constexpr bool is_composite = true;
 
