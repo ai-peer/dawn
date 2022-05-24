@@ -22,6 +22,30 @@
       },
       "revId": "2597f027a822686c90a721e8559f0dd3359595f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6530c260_56654159",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-05-24T07:50:22Z",
+      "side": 1,
+      "message": "OK, readability is important. Updated, thanks.",
+      "parentUuid": "1d7ca684_f2a2db01",
+      "range": {
+        "startLine": 511,
+        "startChar": 16,
+        "endLine": 511,
+        "endChar": 25
+      },
+      "revId": "2597f027a822686c90a721e8559f0dd3359595f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
