@@ -1091,8 +1091,15 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
             uint32_t bytesPerRow =
                 Align((largestMipSize.width / blockInfo.width) * blockInfo.byteSize,
                       kTextureBytesPerRowAlignment);
-            uint64_t bufferSize = bytesPerRow * (largestMipSize.height / blockInfo.height) *
-                                  largestMipSize.depthOrArrayLayers;
+            uint32_t copyDepth = largestMipSize.depthOrArrayLayers;
+            // We only use a single array slice for 2D array textures for the copy even its
+            // largestMipSize.depthOrArrayLayers > 1, so it's unnecessary to allocate multi-layer
+            // storage for the src buffer.
+            if (GetDimension() == wgpu::TextureDimension::e2D) {
+                copyDepth = 1;
+            }
+            uint64_t bufferSize =
+                bytesPerRow * (largestMipSize.height / blockInfo.height) * copyDepth;
             DynamicUploader* uploader = device->GetDynamicUploader();
             UploadHandle uploadHandle;
             DAWN_TRY_ASSIGN(uploadHandle,
@@ -1104,6 +1111,7 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                  ++level) {
                 // compute d3d12 texture copy locations for texture and buffer
                 Extent3D copySize = GetMipLevelPhysicalSize(level);
+                Extent3D singleMipAndArraySize = {copySize.width, copySize.height, 1};
 
                 for (uint32_t layer = range.baseArrayLayer;
                      layer < range.baseArrayLayer + range.layerCount; ++layer) {
@@ -1123,7 +1131,7 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                         BufferTextureCopyDirection::B2T, commandList,
                         ToBackend(uploadHandle.stagingBuffer)->GetResource(),
                         uploadHandle.startOffset, bytesPerRow, largestMipSize.height, textureCopy,
-                        copySize);
+                        singleMipAndArraySize);
                 }
             }
         }
