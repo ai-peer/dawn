@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "110079e7_93293a75",
+        "filename": "src/tint/utils/result.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-24T21:46:46Z",
+      "side": 1,
+      "message": "\u003e This is very much like our RTTI  Is  and  As  functions: you don\u0027t call `Is\u003cType\u003e()` followed  `As\u003cType\u003e()`.\n\nTrue - there might be overhead here, but I\u0027d _hope_ it\u0027s at least an order of magnitude cheaper than the RTTI cost of N vtable hits, as this is an inlined integer check, and I\u0027d really hope that the compiler would remove the redundant repeat tests. I admit I haven\u0027t looked at the disassembly though.\n\nAs you might have guessed, I\u0027m not massively fond of `std::get_if`. I feel the resort to pointers is a C-API version of `std::optional`.\n\nIdeally, we have a construct where you could say:\n\n`if(success_type val \u003d result) {`\n\nwhere `success_type` is the true unboxed type, and somehow the conditional operated on an intermediate was-it-a-success, but yeah, not doable directly.\n\n`if(success_type success; result.is(success)) {`\n\nis possible, but you\u0027ve now lost the ability to call a result-returning function in the `if` and store it to a `if`-scoped variable for the `else` / failure block.\n\n\u003e If you really insist on this design, then I won\u0027t say more. Just wanted to put the information out there.\n\nI\u0027m not going to stick my heels in the ground over this, but I\u0027m unconvinced that pointers make a substantially better API. I suspect you feel more strongly than I do, so I can try as you suggest to find compromise.",
+      "parentUuid": "72b06869_93484788",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "0589d7c77d856303154369b1e26a89834c1304f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef08198e_32d1ae8c",
         "filename": "src/tint/utils/result.h",
         "patchSetId": 5
