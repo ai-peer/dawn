@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b7024fb_e5fd4742",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-24T01:58:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "678b10de_837bad9f",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 0
+      },
+      "revId": "30bcda0223f7e003175ec334d704b84e1a242f7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15ca09fb_8d5ea05d",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-05-23T07:33:54Z",
       "side": 1,
       "message": "ditto, this could use \u0026subres or nullptr I believe.",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 0
+      },
+      "revId": "30bcda0223f7e003175ec334d704b84e1a242f7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46643b10_fd30ebd6",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_win.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-24T01:58:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15ca09fb_8d5ea05d",
       "range": {
         "startLine": 120,
         "startChar": 0,
