@@ -12,26 +12,36 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_NATIVE_VULKAN_PIPELINECACHEVK_H_
-#define SRC_DAWN_NATIVE_VULKAN_PIPELINECACHEVK_H_
+#ifndef SRC_DAWN_NATIVE_D3D12_PIPELINECACHED3D12_H_
+#define SRC_DAWN_NATIVE_D3D12_PIPELINECACHED3D12_H_
+
+#include <vector>
+
+#include "dawn/common/Constants.h"
+#include "dawn/common/ityp_array.h"
+#include "dawn/native/BindingInfo.h"
+#include "dawn/native/BlobCache.h"
+#include "dawn/native/PipelineLayout.h"
 
 #include "dawn/native/ObjectBase.h"
 #include "dawn/native/PipelineCache.h"
 
-#include "dawn/common/vulkan_platform.h"
+#include "dawn/native/d3d12/d3d12_platform.h"
 
-namespace dawn::native {
-class DeviceBase;
-}
+namespace dawn::native::d3d12 {
 
-namespace dawn::native::vulkan {
+class Device;
+class ComputePipeline;
+class RenderPipeline;
 
 class PipelineCache final : public PipelineCacheBase {
   public:
     static Ref<PipelineCache> Create(DeviceBase* device, const CacheKey& key);
 
     DeviceBase* GetDevice() const;
-    VkPipelineCache GetHandle() const;
+
+    void SetComputePipeline(ComputePipeline* pipeline) { mComputePipeline = pipeline; }
+    void SetRenderPipeline(RenderPipeline* pipeline) { mRenderPipeline = pipeline; }
 
   private:
     explicit PipelineCache(DeviceBase* device, const CacheKey& key);
@@ -41,9 +51,12 @@ class PipelineCache final : public PipelineCacheBase {
     MaybeError SerializeToBlobImpl() override;
 
     DeviceBase* mDevice;
-    VkPipelineCache mHandle = VK_NULL_HANDLE;
+
+    // Pipeline object are stored to call GetCachedBlob
+    ComputePipeline* mComputePipeline = nullptr;
+    RenderPipeline* mRenderPipeline = nullptr;
 };
 
-}  // namespace dawn::native::vulkan
+}  // namespace dawn::native::d3d12
 
-#endif  // SRC_DAWN_NATIVE_VULKAN_PIPELINECACHEVK_H_
+#endif  // SRC_DAWN_NATIVE_D3D12_PIPELINECACHED3D12_H_

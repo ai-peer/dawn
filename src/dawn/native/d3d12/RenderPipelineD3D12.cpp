@@ -24,6 +24,7 @@
 #include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/d3d12/D3D12Error.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
+#include "dawn/native/d3d12/PipelineCacheD3D12.h"
 #include "dawn/native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn/native/d3d12/PlatformFunctions.h"
 #include "dawn/native/d3d12/ShaderModuleD3D12.h"
@@ -427,9 +428,24 @@ MaybeError RenderPipeline::Initialize() {
 
     mD3d12PrimitiveTopology = D3D12PrimitiveTopology(GetPrimitiveTopology());
 
+    mCacheKey.Record(descriptorD3D12, *layout->GetRootSignatureBlob());
+
+    // Try to see if we have anything in the blob cache.
+    Ref<PipelineCache> cache = ToBackend(GetDevice()->GetOrCreatePipelineCache(GetCacheKey()));
+
+    const size_t blobSize = cache->GetBlobSize();
+    if (blobSize > 0u) {
+        // Cache hits
+        descriptorD3D12.CachedPSO.pCachedBlob = cache->GetBlobData();
+        descriptorD3D12.CachedPSO.CachedBlobSizeInBytes = blobSize;
+    }
+
     DAWN_TRY(CheckHRESULT(device->GetD3D12Device()->CreateGraphicsPipelineState(
                               &descriptorD3D12, IID_PPV_ARGS(&mPipelineState)),
                           "D3D12 create graphics pipeline state"));
+
+    cache->SetRenderPipeline(this);
+    DAWN_TRY(cache->FlushIfNeeded());
 
     SetLabelImpl();
 
