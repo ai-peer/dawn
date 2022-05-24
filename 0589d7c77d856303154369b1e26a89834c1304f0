@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65068eb2_dc825e1d",
+        "filename": "src/tint/utils/result.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-24T17:33:28Z",
+      "side": 1,
+      "message": "This reminds me a lot of llvm::Expected (which is based on many other proposals). See: https://weliveindetail.github.io/blog/post/2017/10/22/llvm-expected.html\n\nI think there are some design ideas from there that we should consider. For example, llvm::Expected::takeError() returns a pointer to the error object, if it\u0027s an error, or nullptr. I\u0027m not a fan of the UB Get() and Failure() functions in this class. I would make these safely return pointers, instead so we can write conditionals like:\n\n```\nif (auto* g \u003d r.Get()) {\n  ...\n}\n```\nor\n```\nif (auto* f \u003d r.Failure()*) {\n  ...\n}\n```\n\nWith that, we wouldn\u0027t need `operator-\u003e`, and `operator bool()` can be written in terms of `Get() !\u003d nullptr`.\n\nIn other words, let\u0027s not make this type too smart. Also, I\u0027m not sure about calling it `Result`. I like `Expected` because it conveys that we expect it to be a certain value type, otherwise it\u0027s an error. There\u0027s also `llvm::ErrorOr\u003c\u003e` which is similar, but puts the idea that it might be an error first.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "0589d7c77d856303154369b1e26a89834c1304f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef08198e_32d1ae8c",
+        "filename": "src/tint/utils/result.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-24T17:33:28Z",
+      "side": 1,
+      "message": "Although unlikely to occur, should add a static_assert that these two are not the same type.",
+      "range": {
+        "startLine": 85,
+        "startChar": 17,
+        "endLine": 85,
+        "endChar": 43
+      },
+      "revId": "0589d7c77d856303154369b1e26a89834c1304f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
