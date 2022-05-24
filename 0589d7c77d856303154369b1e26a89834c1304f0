@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "72b06869_93484788",
+        "filename": "src/tint/utils/result.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-24T20:01:27Z",
+      "side": 1,
+      "message": "In your examples, you don\u0027t show how after calling `operator bool()` you then need to call `operator-\u003e` or `Get()` to get at the value, which is basically doing the operation twice. This is very much like our RTTI `Is` and `As` functions: you don\u0027t call `Is\u003cType\u003e()` followed `As\u003cType\u003e()`.\n\nHaving said that, you\u0027re right that `std::optional` does offer a similar interface, though I never liked the double-access usage myself. `std::variant`, on the other hand, which is what you actually use for storage here, offers `std::get_if\u003cT\u003e` which returns a pointer, and allows the single call pattern (https://en.cppreference.com/w/cpp/utility/variant/get_if).\n\nIf you really insist on this design, then I won\u0027t say more. Just wanted to put the information out there.",
+      "parentUuid": "9c861732_a1ddedd3",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "0589d7c77d856303154369b1e26a89834c1304f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef08198e_32d1ae8c",
         "filename": "src/tint/utils/result.h",
         "patchSetId": 5
