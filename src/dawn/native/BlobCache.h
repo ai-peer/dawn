@@ -18,6 +18,8 @@
 #include <memory>
 #include <mutex>
 
+#include "dawn/native/d3d12/d3d12_platform.h"
+
 namespace dawn::platform {
 class CachingInterface;
 }
@@ -30,11 +32,18 @@ class InstanceBase;
 
 class CachedBlob {
   public:
-    explicit CachedBlob(size_t size = 0);
-    CachedBlob(CachedBlob&&);
-    ~CachedBlob();
+    static CachedBlob Create(size_t size);
 
-    CachedBlob& operator=(CachedBlob&&);
+    // need forward declare for this one.
+    static CachedBlob Create(ComPtr<ID3DBlob> blob);
+
+    CachedBlob(const CachedBlob&) = delete;
+    CachedBlob& operator=(const CachedBlob&) = delete;
+
+    CachedBlob(CachedBlob&&) = default;
+    CachedBlob& operator=(CachedBlob&&) = default;
+
+    ~CachedBlob();
 
     bool Empty() const;
     const uint8_t* Data() const;
@@ -43,8 +52,11 @@ class CachedBlob {
     void Reset(size_t size);
 
   private:
-    std::unique_ptr<uint8_t[]> mData = nullptr;
-    size_t mSize = 0;
+    explicit CachedBlob(uint8_t* data, size_t size, std::function<void()> deleter);
+
+    uint8_t* mData;
+    size_t mSize;
+    std::function<void()> mDeleter;
 };
 
 // This class should always be thread-safe because it may be called asynchronously. Its purpose

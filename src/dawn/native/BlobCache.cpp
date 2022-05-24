@@ -21,37 +21,52 @@
 
 namespace dawn::native {
 
-CachedBlob::CachedBlob(size_t size) {
-    if (size != 0) {
-        Reset(size);
+// static
+CachedBlob CachedBlob::Create(size_t size) {
+    if (size > 0) {
+        uint8_t* data = new uint8_t[size];
+        return CachedBlob(data, size, [=]() { delete[] data; });
+    } else {
+        return CachedBlob(nullptr, size, {});
     }
 }
 
-CachedBlob::CachedBlob(CachedBlob&&) = default;
+// staic
+CachedBlob CachedBlob::Create(ComPtr<ID3DBlob> blob) {
+    // detach so the deleter callback can "own" the reference
+    ID3DBlob* ptr = blob.Detach();
+    return CachedBlob(reinterpret_cast<uint8_t*>(ptr->GetBufferPointer()), ptr->GetBufferSize(),
+                      [=]() {
+                          // Reattach and drop to delete it.
+                          ComPtr<ID3DBlob> b;
+                          b.Attach(ptr);
+                          b = nullptr;
+                      });
+}
 
-CachedBlob::~CachedBlob() = default;
+CachedBlob::CachedBlob(uint8_t* data, size_t size, std::function<void()> deleter)
+    : mData(data), mSize(size), mDeleter(deleter) {}
 
-CachedBlob& CachedBlob::operator=(CachedBlob&&) = default;
+CachedBlob::~CachedBlob() {
+    if (mDeleter) {
+        mDeleter();
+    }
+}
 
 bool CachedBlob::Empty() const {
     return mSize == 0;
 }
 
 const uint8_t* CachedBlob::Data() const {
-    return mData.get();
+    return mData;
 }
 
 uint8_t* CachedBlob::Data() {
-    return mData.get();
+    return mData;
 }
 
 size_t CachedBlob::Size() const {
     return mSize;
-}
-
-void CachedBlob::Reset(size_t size) {
-    mSize = size;
-    mData = std::make_unique<uint8_t[]>(size);
 }
 
 BlobCache::BlobCache(dawn::platform::CachingInterface* cachingInterface)
@@ -72,13 +87,12 @@ void BlobCache::Store(const CacheKey& key, const CachedBlob& value) {
 }
 
 CachedBlob BlobCache::LoadInternal(const CacheKey& key) {
-    CachedBlob result;
     if (mCache == nullptr) {
-        return result;
+        return CachedBlob::Create(0);
     }
     const size_t expectedSize = mCache->LoadData(key.data(), key.size(), nullptr, 0);
+    CachedBlob result = CachedBlob::Create(expectedSize);
     if (expectedSize > 0) {
-        result.Reset(expectedSize);
         const size_t actualSize =
             mCache->LoadData(key.data(), key.size(), result.Data(), expectedSize);
         ASSERT(expectedSize == actualSize);
