@@ -37,6 +37,12 @@ class PipelineCacheBase : public RefCounted {
     // blob cache iff the initial read from the backend cache did not result in a hit.
     MaybeError FlushIfNeeded();
 
+    // Get the cached blob data pointer.
+    const void* GetBlobData() const;
+    // Get the cached blob size. This is also used as an simple indicator of if cache is hit for
+    // now.
+    size_t GetBlobSize() const;
+
   protected:
     PipelineCacheBase(BlobCache* cache, const CacheKey& key);
 
@@ -44,10 +50,11 @@ class PipelineCacheBase : public RefCounted {
     // implementations to get the cache and set the cache hit state. Should only be called once.
     CachedBlob Initialize();
 
+    CachedBlob mBlob;
+
   private:
-    // Backend implementation of serialization of the cache into a blob. Note that an empty
-    // blob may be returned.
-    virtual ResultOrError<CachedBlob> SerializeToBlobImpl() = 0;
+    // Backend implementation of serialization of the cache into a blob.
+    virtual MaybeError SerializeToBlobImpl() = 0;
 
     // The blob cache is owned by the Adapter and pipeline caches are owned/created by devices
     // or adapters. Since the device owns a reference to the Instance which owns the Adapter,
