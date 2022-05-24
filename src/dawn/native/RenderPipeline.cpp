@@ -498,8 +498,18 @@ RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
     mVertexBufferCount = descriptor->vertex.bufferCount;
     const VertexBufferLayout* buffers = descriptor->vertex.buffers;
     for (uint8_t slot = 0; slot < mVertexBufferCount; ++slot) {
+        // Skip unused slots
+        if (buffers[slot].stepMode == wgpu::VertexStepMode::Undefined) {
+            continue;
+        }
+
         VertexBufferSlot typedSlot(slot);
 
+        mVertexBufferSlotsUsed.set(typedSlot);
+        mVertexBufferInfos[typedSlot].arrayStride = buffers[slot].arrayStride;
+        mVertexBufferInfos[typedSlot].stepMode = buffers[slot].stepMode;
+        mVertexBufferInfos[typedSlot].usedBytesInStride = 0;
+        mVertexBufferInfos[typedSlot].lastStride = 0;
         switch (buffers[slot].stepMode) {
             case wgpu::VertexStepMode::Vertex:
                 mVertexBufferSlotsUsedAsVertexBuffer.set(typedSlot);
@@ -507,15 +517,9 @@ RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
             case wgpu::VertexStepMode::Instance:
                 mVertexBufferSlotsUsedAsInstanceBuffer.set(typedSlot);
                 break;
-            case wgpu::VertexStepMode::Undefined:
-                continue;
+            default:
+                DAWN_UNREACHABLE();
         }
-
-        mVertexBufferSlotsUsed.set(typedSlot);
-        mVertexBufferInfos[typedSlot].arrayStride = buffers[slot].arrayStride;
-        mVertexBufferInfos[typedSlot].stepMode = buffers[slot].stepMode;
-        mVertexBufferInfos[typedSlot].usedBytesInStride = 0;
-        mVertexBufferInfos[typedSlot].lastStride = 0;
 
         for (uint32_t i = 0; i < buffers[slot].attributeCount; ++i) {
             VertexAttributeLocation location = VertexAttributeLocation(
