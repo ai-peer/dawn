@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3840a164_829dab4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-24T21:35:19Z",
+      "side": 1,
+      "message": "I filed a followup issue.\nAll that remains are nits.  So +2",
+      "revId": "9b2645890366c553cdfd047234733709746623d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2dc5fdac_96635641",
@@ -163,6 +180,30 @@
       "writtenOn": "2022-05-24T21:24:30Z",
       "side": 1,
       "message": "This is not justified by the spec.\nThese cases are allowed to yield either 0 or the kSmallest of the same sign as value.\n\nThe rules in the spec are:\n\n- A hexadecimal floating point literal with a f or h suffix overflows or cannot be exactly represented by the target type.\n\n-  A decimal floating point literal with a f or h suffix overflows the target type.\n\n\nThe hex float rule should probably not be enforced here anyway.",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 9
+      },
+      "revId": "9b2645890366c553cdfd047234733709746623d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70c52133_18c1bef7",
+        "filename": "src/tint/number.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-24T21:35:19Z",
+      "side": 1,
+      "message": "I see you\u0027re replicating the existing logic in the lexer.\nBut I think the lexer is wrongly erroring out. \n\n\nI filed this issue: https://bugs.chromium.org/p/tint/issues/detail?id\u003d1564",
+      "parentUuid": "91121992_104915e1",
       "range": {
         "startLine": 213,
         "startChar": 0,
