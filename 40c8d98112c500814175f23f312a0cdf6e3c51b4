@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "660d13c6_9ef985c5",
+        "filename": ".gitattributes",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-05-24T23:31:27Z",
+      "side": 1,
+      "message": "This is to solve python presubmit found CR character error when developing on windows.",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7258b3a3_564c94ae",
+        "filename": "src/dawn/native/PipelineCache.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-05-24T23:31:27Z",
+      "side": 1,
+      "message": "This refactoring (Storing CachedBlob mBlob in PipelineCache, returning pointer to blob instead of Cachedblob) is to try to remove an extra copy for d3d12 pipelince cache at [1].\nBut I\u0027m not so sure if this is the right thing to do.",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7186f3ea_5282f79e",
+        "filename": "src/dawn/native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-05-24T23:31:27Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "9fbfcf2af70a34e780badc91a3426bc311e33c6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
