@@ -37,12 +37,11 @@ MaybeError PipelineCacheBase::Flush() {
         return {};
     }
     // Try to write the data out to the persistent cache.
-    CachedBlob blob;
-    DAWN_TRY_ASSIGN(blob, SerializeToBlobImpl());
-    if (blob.Size() > 0) {
+    DAWN_TRY(SerializeToBlobImpl());
+    if (GetBlobSize() > 0) {
         // Using a simple heuristic to decide whether to write out the blob right now. May need
         // smarter tracking when we are dealing with monolithic caches.
-        mCache->Store(mKey, blob);
+        mCache->Store(mKey, GetBlobSize(), GetBlobData());
     }
     return {};
 }
@@ -53,6 +52,14 @@ MaybeError PipelineCacheBase::FlushIfNeeded() {
         return Flush();
     }
     return {};
+}
+
+const void* PipelineCacheBase::GetBlobData() const {
+    return mBlob.Data();
+}
+
+size_t PipelineCacheBase::GetBlobSize() const {
+    return mBlob.Size();
 }
 
 }  // namespace dawn::native
