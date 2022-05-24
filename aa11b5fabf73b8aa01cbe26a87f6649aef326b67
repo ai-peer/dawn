@@ -34,6 +34,24 @@
       "parentUuid": "4949deaa_daca72c8",
       "revId": "aa11b5fabf73b8aa01cbe26a87f6649aef326b67",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dd3d4e6_3562f6b4",
+        "filename": "src/dawn/native/Memoize.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-24T15:31:11Z",
+      "side": 1,
+      "message": "Generating struct from a JSON description might not work well because a lot of internal types are used like const tint::transform::BindingsMap* which could be difficult to represent maybe. But otherwise it seems fine as well.\n\nI agree that the D3D12 request structure was kinda bad, but I think it might be because the code was overall missing default initializers, splits in helper functions, lack of asserts, etc.",
+      "parentUuid": "de9ac479_2e15aed4",
+      "revId": "aa11b5fabf73b8aa01cbe26a87f6649aef326b67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
