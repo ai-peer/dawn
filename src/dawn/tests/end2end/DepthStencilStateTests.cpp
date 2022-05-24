@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <algorithm>
 #include <vector>
 
 #include "dawn/common/Assert.h"
@@ -836,3 +837,80 @@ DAWN_INSTANTIATE_TEST(DepthStencilStateTest,
                       OpenGLESBackend(),
                       VulkanBackend({"vulkan_use_d32s8"}, {}),
                       VulkanBackend({}, {"vulkan_use_d32s8"}));
+
+class StencilClearGreaterThan255Test : public DepthStencilStateTest {
+  public:
+    void RunTest(uint32_t stencilClearValue, uint32_t stencilReferenceValue) {
+        DAWN_SUPPRESS_TEST_IF(IsSwiftshader());
+        utils::ComboRenderPassDescriptor renderPassDescriptor({renderTargetView}, depthTextureView);
+        renderPassDescriptor.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
+        renderPassDescriptor.cDepthStencilAttachmentInfo.depthClearValue = 0;
+        renderPassDescriptor.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
+        renderPassDescriptor.cDepthStencilAttachmentInfo.stencilClearValue = stencilClearValue;
+        renderPassDescriptor.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
+        renderPassDescriptor.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Store;
+
+        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+        const char* vs = R"(
+        @stage(vertex)
+            fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4<f32> {
+                var pos = array<vec2<f32>, 6>(
+                    vec2<f32>(-1.0, -1.0),
+                    vec2<f32>(-1.0,  1.0),
+                    vec2<f32>( 1.0, -1.0),
+                    vec2<f32>( 1.0,  1.0),
+                    vec2<f32>(-1.0,  1.0),
+                    vec2<f32>( 1.0, -1.0)
+                );
+                return vec4<f32>(pos[VertexIndex], 0.0, 1.0);
+            })";
+        const char* fs = R"(
+            @stage(fragment) fn main() -> @location(0) vec4<f32> {
+               return vec4<f32>(1.0, 0.0, 0.0, 1.0);
+            })";
+        pipelineDescriptor.vertex.module = utils::CreateShaderModule(device, vs);
+        pipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, fs);
+        wgpu::DepthStencilState* depthStencil = pipelineDescriptor.EnableDepthStencil();
+        depthStencil->depthCompare = wgpu::CompareFunction::Always;
+        depthStencil->stencilReadMask = 255;
+        depthStencil->stencilFront.compare = wgpu::CompareFunction::Equal;
+        depthStencil->stencilBack.compare = wgpu::CompareFunction::Equal;
+        wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDescriptor);
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        auto pass = encoder.BeginRenderPass(&renderPassDescriptor);
+        pass.SetPipeline(pipeline);
+        pass.SetStencilReference(stencilReferenceValue);
+        pass.Draw(6);
+        pass.End();
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+
+        queue.Submit(1, &commandBuffer);
+
+        std::vector<RGBA8> expected(kRTSize * kRTSize, {255, 0, 0, 255});
+        EXPECT_TEXTURE_EQ(expected.data(), renderTarget, {0, 0}, {kRTSize, kRTSize});
+    }
+};
+
+TEST_P(StencilClearGreaterThan255Test, StencilClearGreaterThan255_StencilReferenceTo0) {
+    constexpr uint32_t kStencilClearValue = 257;
+    constexpr uint32_t kStencilReferenceValue = 0;
+    RunTest(kStencilClearValue, kStencilReferenceValue);
+}
+
+TEST_P(StencilClearGreaterThan255Test, StencilClearGreaterThan255_StencilReferenceAnd255) {
+    constexpr uint32_t kStencilClearValue = 257;
+    constexpr uint32_t kStencilReferenceValue = kStencilClearValue & 255;
+    RunTest(kStencilClearValue, kStencilReferenceValue);
+}
+
+TEST_P(StencilClearGreaterThan255Test, StencilClearGreaterThan255_StencilReferenceClamp255) {
+    constexpr uint32_t kStencilClearValue = 257;
+    constexpr uint32_t kStencilReferenceValue = std::min(kStencilClearValue, 255u);
+    RunTest(kStencilClearValue, kStencilReferenceValue);
+}
+
+DAWN_INSTANTIATE_TEST(StencilClearGreaterThan255Test,
+                      D3D12Backend(),
+                      MetalBackend(),
+                      VulkanBackend());
