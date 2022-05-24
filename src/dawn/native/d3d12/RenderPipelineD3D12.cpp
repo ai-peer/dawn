@@ -24,6 +24,7 @@
 #include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/d3d12/D3D12Error.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
+#include "dawn/native/d3d12/PipelineCacheD3D12.h"
 #include "dawn/native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn/native/d3d12/PlatformFunctions.h"
 #include "dawn/native/d3d12/ShaderModuleD3D12.h"
@@ -427,9 +428,28 @@ MaybeError RenderPipeline::Initialize() {
 
     mD3d12PrimitiveTopology = D3D12PrimitiveTopology(GetPrimitiveTopology());
 
+    mCacheKey.Record(descriptorD3D12, *layout->GetRootSignatureBlob());
+
+    // Try to see if we have anything in the blob cache.
+    CachedBlob blob = LoadCachedBlob(GetDevice(), GetCacheKey());
+    const bool cacheHit = !blob.Empty();
+    if (cacheHit) {
+        // Cache hits, attach cached blob to descriptor.
+        descriptorD3D12.CachedPSO.pCachedBlob = blob.Data();
+        descriptorD3D12.CachedPSO.CachedBlobSizeInBytes = blob.Size();
+    }
+
     DAWN_TRY(CheckHRESULT(device->GetD3D12Device()->CreateGraphicsPipelineState(
                               &descriptorD3D12, IID_PPV_ARGS(&mPipelineState)),
                           "D3D12 create graphics pipeline state"));
+
+    if (!cacheHit) {
+        // Cache misses, need to get pipeline cached blob and store.
+        ComPtr<ID3DBlob> d3dBlob;
+        DAWN_TRY(CheckHRESULT(GetPipelineState()->GetCachedBlob(&d3dBlob),
+                              "D3D12 render pipeline state get cached blob"));
+        StoreCachedBlob(GetDevice(), GetCacheKey(), d3dBlob);
+    }
 
     SetLabelImpl();
 
