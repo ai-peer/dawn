@@ -16,6 +16,24 @@
       "message": "IDK, this seems like a huge amount of magic for what we\u0027re trying to do. There are ton of layers of variadic (up to 10 only) macros and variadic templates, special casing of function arguments like LogSink etc.\n\nCouldn\u0027t a simpler version be made with X macros if we really want to define things only once?\n\n```\n#define SPIRV_COMPILATION_REQUEST_MEMBERS(X) \\\n   X(const tint::Program*, inputProgram) \\\n   X(BindingPoints, bindingPoints) \\\n   X(BindingsMap, bindingsMap) \\\n   X(const char*, entryPointName) \\\n   X(bool, disableWorkgroupInit)\n\n// ...\n\nDAWN_MAKE_CACHE_REQUEST_STRUCT(\n        SpirvCompilationRequest, SPIRV_COMPILATION_REQUEST_MEMBERS);\n#undef SPIRV_COMPILATION_REQUEST_MEMBERS\n\n// This makes a struct SpirvCompilationRequest with members for serialization / comparison etc, that can later be used with a Cache system (or memoize or w/e).\n```\n\nIt is more verbose to define and use, but also what you get is just a dumb structure that can be passed around, filled by helper functions, etc. Instead of trying to stuff N arguments in Memoize in a way that will stay under the macro argument count.",
       "revId": "aa11b5fabf73b8aa01cbe26a87f6649aef326b67",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de9ac479_2e15aed4",
+        "filename": "src/dawn/native/Memoize.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-24T13:27:04Z",
+      "side": 1,
+      "message": "yea, Loko had similiar feedback, so I\u0027m convinced it\u0027s too much magic. instead of the x macro, he aslo suggested just generating said struct from a .json description of it so it would also do the serialization bits.\n\noverall I didn\u0027t love the D3D12 shader module request struct because I didn\u0027t think it was foolproof to use. it grew to have a lot of members which made it easy to forget to assign one of them. so then, we added a constructor so you must pass all the args - but then it became easy to put them in the wrong order. ( we had bugs for both these problems )\n\nso I\u0027ll think about it and try to make something less magic - but maybe I\u0027ll wind up with just a dumb struct again. maybe a builder pattern with named setters and requires all fields to be set?",
+      "parentUuid": "4949deaa_daca72c8",
+      "revId": "aa11b5fabf73b8aa01cbe26a87f6649aef326b67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
