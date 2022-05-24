@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "dc64323e_8ab9d31d",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-24T22:02:19Z",
+      "side": 1,
+      "message": "It\u0027s a pre C++17 thing - and one of the reasons for `Switch()`. `if`-`else` chains all have visibility of variable declared in the `if` parentheses. Major cause of bugs, especially if the `if` is for a pointer variable declaration, as the `else` chain has scope of a `nullptr`",
+      "parentUuid": "39d3725b_7c20c2a5",
+      "range": {
+        "startLine": 367,
+        "startChar": 16,
+        "endLine": 367,
+        "endChar": 17
+      },
+      "revId": "bc02b4952a1c07d8583d8430fa10ddccf3b67023",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bc54b1af_bce77761",
         "filename": "src/tint/reader/wgsl/lexer.cc",
         "patchSetId": 3
@@ -37,6 +61,24 @@
       "writtenOn": "2022-05-24T21:42:29Z",
       "side": 1,
       "message": "This replicates the behaviour of the existing code\nBut I think it\u0027s wrong, so I filed a followup bug https://bugs.chromium.org/p/tint/issues/detail?id\u003d1564",
+      "revId": "bc02b4952a1c07d8583d8430fa10ddccf3b67023",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30fdf864_8ea187fb",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-24T22:02:19Z",
+      "side": 1,
+      "message": "Hex floats not exactly being representable raising an error, I agree.\nSmall, non-zero, suffixed literals, silently being quantised to 0... what\u0027s the use case for *not* erroring here? Especially when we do error for materialisation of un-suffixed.",
+      "parentUuid": "bc54b1af_bce77761",
       "revId": "bc02b4952a1c07d8583d8430fa10ddccf3b67023",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
