@@ -139,6 +139,24 @@
       "parentUuid": "ddf3b2bb_2bc69e54",
       "revId": "118b1796a60d7976245539f269a9bba17e246c93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a72876d4_aa079c6b",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-24T19:45:10Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "be771170_5e2bab96",
+      "revId": "118b1796a60d7976245539f269a9bba17e246c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
