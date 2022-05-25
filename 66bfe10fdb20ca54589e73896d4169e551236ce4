@@ -123,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6ce795a_f8f9358f",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1464,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-05-25T07:02:35Z",
+      "side": 1,
+      "message": "OK, let\u0027s mark this thread as resolved. Thanks.",
+      "parentUuid": "90d85e56_eaebb349",
+      "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "130ec06a_9bb8a1a9",
