@@ -392,17 +392,6 @@ FloatLiteralTestCaseList HexFloatCases() {
         {"-0x1.01ep+1024", NegInf},
         {"-0x1.fffffep+1024", NegInf},
 
-        {"0x1.8p+128f", PosInf},
-        {"0x1.0002p+128f", PosInf},
-        {"0x1.0018p+128f", PosInf},
-        {"0x1.01ep+128f", PosInf},
-        {"0x1.fffffep+128f", PosInf},
-        {"-0x1.8p+128f", NegInf},
-        {"-0x1.0002p+128f", NegInf},
-        {"-0x1.0018p+128f", NegInf},
-        {"-0x1.01ep+128f", NegInf},
-        {"-0x1.fffffep+128f", NegInf},
-
         // Overflow -> Infinity
         {"0x1p+1024", PosInf},
         {"-0x1p+1024", NegInf},
@@ -417,17 +406,6 @@ FloatLiteralTestCaseList HexFloatCases() {
         {"0x1.0p9223372036854774784", PosInf},  // INT64_MAX - 1023 (largest valid exponent)
         {"-0x1.0p9223372036854774784", NegInf},
 
-        {"0x1p+128f", PosInf},
-        {"-0x1p+128f", NegInf},
-        {"0x1.1p+128f", PosInf},
-        {"-0x1.1p+128f", NegInf},
-        {"0x1p+129f", PosInf},
-        {"-0x1p+129f", NegInf},
-        {"0x32p+127f", PosInf},
-        {"-0x32p+127f", NegInf},
-        {"0x32p+500f", PosInf},
-        {"-0x32p+500f", NegInf},
-
         // Underflow -> Zero
         {"0x1p-1074", 0.0},  // Exponent underflows
         {"-0x1p-1074", 0.0},
@@ -438,14 +416,6 @@ FloatLiteralTestCaseList HexFloatCases() {
         {"0x0.01p-1073", -0.0},
         {"-0x0.01p-1073", -0.0},  // Fraction causes additional underflow
 
-        {"0x1p-150f", 0.0},  // Exponent underflows
-        {"-0x1p-150f", 0.0},
-        {"0x1p-500f", 0.0},
-        {"-0x1p-500f", -0.0},
-        {"0x0.00000000001p-126f", 0.0},  // Fraction causes underflow
-        {"-0x0.0000000001p-127f", -0.0},
-        {"0x0.01p-142f", 0.0},
-        {"-0x0.01p-142f", -0.0},            // Fraction causes additional underflow
         {"0x1.0p-9223372036854774784", 0},  // -(INT64_MAX - 1023) (smallest valid exponent)
 
         // Zero with non-zero exponent -> Zero
@@ -564,6 +534,41 @@ TEST_P(ParserImplInvalidLiteralTest, Parse) {
     EXPECT_EQ(p->error(), params.error_msg);
     ASSERT_EQ(c.value, nullptr);
 }
+
+InvalidLiteralTestCase invalid_hexfloat_number_not_representable[] = {
+    {"0x1.0002p+128f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"0x1.0018p+128f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"0x1.01ep+128f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"0x1.fffffep+128f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"-0x1.8p+128f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"-0x1.0002p+128f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"-0x1.0018p+128f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"-0x1.01ep+128f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"-0x1.fffffep+128f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"0x1p+128f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"-0x1p+128f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"0x32p+127f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"0x32p+500f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"-0x32p+127f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"-0x32p+500f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"0x1p+128f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"0x1p+129f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"0x1.1p+128f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"-0x1p+128f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"-0x1p+129f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"-0x1.1p+128f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"0x1p-150f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"-0x1p-150f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"0x1p-500f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"-0x1p-500f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"0x0.00000000001p-126f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"-0x0.0000000001p-127f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"0x0.01p-142f", "1:1: value cannot be exactly represented as 'f32'"},
+    {"-0x0.01p-142f", "1:1: value cannot be exactly represented as 'f32'"},
+};
+INSTANTIATE_TEST_SUITE_P(ParserImplInvalidLiteralTest_HexFloatNumberNotRepresentable,
+                         ParserImplInvalidLiteralTest,
+                         testing::ValuesIn(invalid_hexfloat_number_not_representable));
 
 InvalidLiteralTestCase invalid_hexfloat_mantissa_too_large_cases[] = {
     {"0x1.ffffffffffffffff8p0", "1:1: mantissa is too large for hex float"},
