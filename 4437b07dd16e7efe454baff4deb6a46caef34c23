@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73a3fa68_e6a25545",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-25T20:05:02Z",
+      "side": 1,
+      "message": "LGTM with nit.",
+      "revId": "4437b07dd16e7efe454baff4deb6a46caef34c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1268bfe7_cce28eb1",
+        "filename": "src/tint/reader/wgsl/parser_impl_const_literal_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-25T20:05:02Z",
+      "side": 1,
+      "message": "nit: suggest adding tiny-float negative cases for with and without f suffix",
+      "revId": "4437b07dd16e7efe454baff4deb6a46caef34c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
