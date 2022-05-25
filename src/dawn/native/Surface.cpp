@@ -41,6 +41,9 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
         case Surface::Type::MetalLayer:
             s->Append("MetalLayer");
             break;
+        case Surface::Type::WaylandSurface:
+            s->Append("WaylandSurface");
+            break;
         case Surface::Type::WindowsHWND:
             s->Append("WindowsHWND");
             break;
@@ -128,6 +131,18 @@ MaybeError ValidateSurfaceDescriptor(const InstanceBase* instance,
     }
 #endif  // defined(DAWN_PLATFORM_WINDOWS)
 
+#if defined(DAWN_USE_WAYLAND)
+    const SurfaceDescriptorFromWaylandSurface* waylandDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &waylandDesc);
+    if (waylandDesc) {
+        // Unfortunately we can't check the validity of wayland objects. Only that they
+        // aren't nullptr.
+        DAWN_INVALID_IF(waylandDesc->display == nullptr, "Wayland display is nullptr.");
+        DAWN_INVALID_IF(waylandDesc->surface == nullptr, "Wayland surface is nullptr.");
+        return {};
+    }
+#endif  // defined(DAWN_USE_X11)
+
 #if defined(DAWN_USE_X11)
     const SurfaceDescriptorFromXlibWindow* xDesc = nullptr;
     FindInChain(descriptor->nextInChain, &xDesc);
@@ -158,6 +173,7 @@ Surface::Surface(InstanceBase* instance, const SurfaceDescriptor* descriptor)
     const SurfaceDescriptorFromWindowsHWND* hwndDesc = nullptr;
     const SurfaceDescriptorFromWindowsCoreWindow* coreWindowDesc = nullptr;
     const SurfaceDescriptorFromWindowsSwapChainPanel* swapChainPanelDesc = nullptr;
+    const SurfaceDescriptorFromWaylandSurface* waylandDesc = nullptr;
     const SurfaceDescriptorFromXlibWindow* xDesc = nullptr;
     FindInChain(descriptor->nextInChain, &androidDesc);
     FindInChain(descriptor->nextInChain, &metalDesc);
@@ -171,6 +187,10 @@ Surface::Surface(InstanceBase* instance, const SurfaceDescriptor* descriptor)
     } else if (androidDesc) {
         mType = Type::AndroidWindow;
         mAndroidNativeWindow = androidDesc->window;
+    } else if (waylandDesc) {
+        mType = Type::WaylandSurface;
+        mWaylandDisplay = waylandDesc->display;
+        mWaylandSurface = waylandDesc->surface;
     } else if (hwndDesc) {
         mType = Type::WindowsHWND;
         mHInstance = hwndDesc->hinstance;
@@ -225,6 +245,16 @@ void* Surface::GetAndroidNativeWindow() const {
 void* Surface::GetMetalLayer() const {
     ASSERT(mType == Type::MetalLayer);
     return mMetalLayer;
+}
+
+void* Surface::GetWaylandDisplay() const {
+    ASSERT(mType == Type::WaylandSurface);
+    return mWaylandDisplay;
+}
+
+void* Surface::GetWaylandSurface() const {
+    ASSERT(mType == Type::WaylandSurface);
+    return mWaylandSurface;
 }
 
 void* Surface::GetHInstance() const {
