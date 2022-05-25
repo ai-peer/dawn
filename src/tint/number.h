@@ -188,7 +188,6 @@ std::enable_if_t<IsNumeric<A>, bool> operator!=(A a, Number<B> b) {
 enum class ConversionFailure {
     kExceedsPositiveLimit,  // The value was too big (+'ve) to fit in the target type
     kExceedsNegativeLimit,  // The value was too big (-'ve) to fit in the target type
-    kTooSmall,              // The value was too small to fit in the target type
 };
 
 /// Writes the conversion failure message to the ostream.
@@ -210,9 +209,12 @@ utils::Result<TO, ConversionFailure> CheckedConvert(Number<FROM> num) {
         return ConversionFailure::kExceedsNegativeLimit;
     }
     if constexpr (IsFloatingPoint<UnwrapNumber<TO>>) {
-        if ((value < T(0) && value > static_cast<T>(-TO::kSmallest)) ||
-            (value > T(0) && value < static_cast<T>(TO::kSmallest))) {
-            return ConversionFailure::kTooSmall;
+        // Flush sub-normals to zero
+        if ((value < T(0) && value > static_cast<T>(-TO::kSmallest))) {
+            return TO(-0.0);
+        }
+        if ((value > T(0) && value < static_cast<T>(TO::kSmallest))) {
+            return TO(0.0);
         }
     }
     return TO(value);  // Success
