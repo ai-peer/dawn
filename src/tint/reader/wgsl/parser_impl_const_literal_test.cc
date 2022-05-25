@@ -327,14 +327,6 @@ FloatLiteralTestCaseList HexFloatCases() {
         {"0x0.01p-1073", -0.0},
         {"-0x0.01p-1073", -0.0},  // Fraction causes additional underflow
 
-        {"0x1p-150f", 0.0},  // Exponent underflows
-        {"-0x1p-150f", 0.0},
-        {"0x1p-500f", 0.0},
-        {"-0x1p-500f", -0.0},
-        {"0x0.00000000001p-126f", 0.0},  // Fraction causes underflow
-        {"-0x0.0000000001p-127f", -0.0},
-        {"0x0.01p-142f", 0.0},
-        {"-0x0.01p-142f", -0.0},            // Fraction causes additional underflow
         {"0x1.0p-9223372036854774784", 0},  // -(INT64_MAX - 1023) (smallest valid exponent)
 
         // Zero with non-zero exponent -> Zero
