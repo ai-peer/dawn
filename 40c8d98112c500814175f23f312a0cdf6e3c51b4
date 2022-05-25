@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "40532fae_c782a826",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-25T00:41:30Z",
+      "side": 1,
+      "message": "(partial review)",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7258b3a3_564c94ae",
         "filename": "src/dawn/native/PipelineCache.h",
         "patchSetId": 8
@@ -31,6 +48,75 @@
       "writtenOn": "2022-05-24T23:31:27Z",
       "side": 1,
       "message": "This refactoring (Storing CachedBlob mBlob in PipelineCache, returning pointer to blob instead of Cachedblob) is to try to remove an extra copy for d3d12 pipelince cache at [1].\nBut I\u0027m not so sure if this is the right thing to do.",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b093f96_52b479b3",
+        "filename": "src/dawn/native/PipelineCache.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-25T00:41:30Z",
+      "side": 1,
+      "message": "I think it\u0027s ok, but maybe mBlob can just be in the backend?\nthen D3D12::PipelineCache can hold a std::variant\u003cCachedBlob, ComPtr\u003cID3DBlob\u003e\u003e so we never have to do extra copies. the PipelineCache will give you an interface to get data/size regardless of which one we\u0027re holding.\n\nSerializeToBlobImpl could return a pair of pointer and size pointing to the backing storage.",
+      "parentUuid": "7258b3a3_564c94ae",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0383b81b_2f6851b8",
+        "filename": "src/dawn/native/d3d12/CacheKeyD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-25T00:41:30Z",
+      "side": 1,
+      "message": "could RecordIterable have a specialization for an array like T[N] ? then we don\u0027t need the size here",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5201b92f_2057bfe1",
+        "filename": "src/dawn/native/d3d12/CacheKeyD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-25T00:41:30Z",
+      "side": 1,
+      "message": "would it be wrong to record the shader bytecode here instead of RenderPipelineD3D12?",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f93d999_18a93ca7",
+        "filename": "src/dawn/native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-25T00:41:30Z",
+      "side": 1,
+      "message": "I think the signature is the only thing that matters for the pipeline cache.\nperhaps instead of using all of GetLayout()-\u003eGetCacheKey() we can just get the serialized signature blob?",
       "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
