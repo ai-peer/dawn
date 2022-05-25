@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5048ddd2_5567ba34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-25T20:22:51Z",
+      "side": 1,
+      "message": "Don\u0027t go out of your way to flush subnormals.",
+      "revId": "c450ff0760a20da0f68aea84fc015da2929e3aa3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f794b890_b4bde82d",
+        "filename": "src/tint/number.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-25T20:22:51Z",
+      "side": 1,
+      "message": "We should preserve the denormal. No reason not to.\nI\u0027d delete lines 211 to",
+      "revId": "c450ff0760a20da0f68aea84fc015da2929e3aa3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
