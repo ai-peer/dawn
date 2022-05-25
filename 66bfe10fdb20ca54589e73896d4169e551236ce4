@@ -174,6 +174,24 @@
       "parentUuid": "130ec06a_9bb8a1a9",
       "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7673ba82_1a25c4b9",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-05-25T07:35:22Z",
+      "side": 1,
+      "message": "Some CTS tests will be broken until we apply a patch to Blink. I have been thinking if there is a better way to reduce the risk of exposing the broken test results than quickly making and reviewing the patch to Blink.\n\nZhaoming\u0027s and Austin\u0027s suggestion sounds good to me. I will try it if it sounds ok to you folks.\n\nLet me clarify what we will do.\n\n1. Temporarily change the enum value of `wgpu::VertesStepMode::VertexBufferNotUsed` to 0 in this CL and merge\n2. Make a CL to Blink to explicitly set `wgpu::VertesStepMode::VertexBufferNotUsed` to unused slots and merge\n3. Make a CL to Dawn to change the enum value of `wgpu::VertesStepMode::VertexBufferNotUsed` back to 2",
+      "parentUuid": "eec73179_b3986c2f",
+      "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
