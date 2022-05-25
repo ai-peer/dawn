@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20744bad_f210ecd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-25T19:13:14Z",
+      "side": 1,
+      "message": "Looks great.",
+      "revId": "df8d0586921db914e70311ffb61e1c4b882926fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4247075b_67eb178f",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1857,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-25T19:13:14Z",
+      "side": 1,
+      "message": "I checked to make sure that in general the Resolver methods return nullptr on failure.  So callers already know to expect failure cases like this.\n\nOtherwise I\u0027d ask for the method comment to be updated.",
+      "revId": "df8d0586921db914e70311ffb61e1c4b882926fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
