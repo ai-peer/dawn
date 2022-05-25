@@ -33,6 +33,23 @@
       "message": "+1 from me. David for +2",
       "revId": "8270f9a44436077a69c0abd21a85410e3c4a5028",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ebe6fcd_46fed1c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-25T15:44:42Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "8270f9a44436077a69c0abd21a85410e3c4a5028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
