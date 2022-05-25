@@ -33,6 +33,23 @@
       "message": "LGTM! Thanks for the iterrations and the back and forth with the spec. The final solution looks great. Feel free to CQ+2 when ready.",
       "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa6e57e9_d2fef30d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-05-25T01:30:14Z",
+      "side": 1,
+      "message": "`dawn/dawn.json` should also be changed to modify the JavaScript interface. Please try update the \"vertex step mode\" enum definition (around line 1467), and change the default \"step mode\" value in \"vertex buffer layout\" (around line 1462).",
+      "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
