@@ -61,6 +61,8 @@ class VulkanInstance : public RefCounted {
     void StopListeningForDeviceMessages(Device* device);
     bool HandleDeviceMessage(std::string deviceDebugPrefix, std::string message);
 
+    uint32_t GetAPIVersion() const;
+
   private:
     VulkanInstance();
 
@@ -76,6 +78,7 @@ class VulkanInstance : public RefCounted {
 
     VkDebugUtilsMessengerEXT mDebugUtilsMessenger = VK_NULL_HANDLE;
 
+    uint32_t mAPIVersion;
     std::vector<VkPhysicalDevice> mPhysicalDevices;
 
     // Devices keep the VulkanInstance alive, so as long as devices remove themselves from this

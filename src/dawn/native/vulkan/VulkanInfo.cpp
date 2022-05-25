@@ -14,6 +14,7 @@
 
 #include "dawn/native/vulkan/VulkanInfo.h"
 
+#include <algorithm>
 #include <cstring>
 #include <string>
 #include <unordered_map>
@@ -147,6 +148,12 @@ ResultOrError<VulkanDeviceInfo> GatherDeviceInfo(const Adapter& adapter) {
 
     // Query the device properties first to get the ICD's `apiVersion`
     vkFunctions.GetPhysicalDeviceProperties(physicalDevice, &info.properties);
+
+    // In Vulkan SPEC, the value of apiVersion may be different than the version returned by
+    // vkEnumerateInstanceVersion; either higher or lower. In such cases, the application must not
+    // use functionality that exceeds the version of Vulkan associated with a given object.
+    info.properties.apiVersion =
+        std::min(info.properties.apiVersion, adapter.GetVulkanInstance()->GetAPIVersion());
 
     // Gather info about device memory.
     {

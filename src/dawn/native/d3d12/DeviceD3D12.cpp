@@ -783,6 +783,19 @@ bool Device::ShouldDuplicateNumWorkgroupsForDispatchIndirect(
     return ToBackend(computePipeline)->UsesNumWorkgroups();
 }
 
+bool Device::IsFeatureEnabled(Feature feature) const {
+    if (DeviceBase::IsFeatureEnabled(feature)) {
+        // Currently we can only use DXC to compile HLSL shaders using float16, and
+        // ChromiumExperimentalDp4a is an experimental feature which can only be enabled with toggle
+        // "use_dxc".
+        if (feature == Feature::ChromiumExperimentalDp4a || feature == Feature::ShaderFloat16) {
+            return IsToggleEnabled(Toggle::UseDXC);
+        }
+        return true;
+    }
+    return false;
+}
+
 void Device::SetLabelImpl() {
     SetDebugName(this, mD3d12Device.Get(), "Dawn_Device", GetLabel());
 }

@@ -339,6 +339,7 @@ ResultOrError<VulkanGlobalKnobs> VulkanInstance::CreateVkInstance(const Instance
     } else {
         appInfo.apiVersion = VK_MAKE_VERSION(1, 2, 0);
     }
+    mAPIVersion = appInfo.apiVersion;
 
     VkInstanceCreateInfo createInfo;
     createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
@@ -387,6 +388,10 @@ ResultOrError<VulkanGlobalKnobs> VulkanInstance::CreateVkInstance(const Instance
                             "vkCreateInstance"));
 
     return usedKnobs;
+}
+
+uint32_t VulkanInstance::GetAPIVersion() const {
+    return mAPIVersion;
 }
 
 MaybeError VulkanInstance::RegisterDebugUtils() {

@@ -325,7 +325,6 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     std::vector<const char*> GetTogglesUsed() const;
     WGSLExtensionSet GetWGSLExtensionAllowList() const;
-    bool IsFeatureEnabled(Feature feature) const;
     bool IsToggleEnabled(Toggle toggle) const;
     bool IsValidationEnabled() const;
     bool IsRobustnessEnabled() const;
@@ -365,6 +364,8 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     virtual bool ShouldDuplicateParametersForDrawIndirect(
         const RenderPipelineBase* renderPipelineBase) const;
+
+    virtual bool IsFeatureEnabled(Feature feature) const;
 
     const CombinedLimits& GetLimits() const;
 
