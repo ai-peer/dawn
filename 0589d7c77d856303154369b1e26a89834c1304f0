@@ -216,6 +216,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55b6feae_3fcb31b9",
+        "filename": "src/tint/utils/result.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-25T14:16:18Z",
+      "side": 1,
+      "message": "\u003e I picked  Result  as this matches the name of Dawn\u0027s similar utility \nOkay then.",
+      "parentUuid": "f695dbd8_f07770fa",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "0589d7c77d856303154369b1e26a89834c1304f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef08198e_32d1ae8c",
