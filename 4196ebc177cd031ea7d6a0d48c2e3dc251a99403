@@ -47,6 +47,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26d651f4_72993f9b",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-25T17:13:40Z",
+      "side": 1,
+      "message": "Good points - stuff I hadn\u0027t considered.\nGiven that this CL is a no-op refactor, I\u0027ve addressed this in:\nhttps://dawn-review.googlesource.com/c/dawn/+/91621",
+      "parentUuid": "9d12e399_60f1c64c",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 47
+      },
+      "revId": "4196ebc177cd031ea7d6a0d48c2e3dc251a99403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0019f79c_a62e139a",
@@ -70,6 +94,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28125b39_15bf7772",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-25T17:13:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0019f79c_a62e139a",
+      "range": {
+        "startLine": 123,
+        "startChar": 41,
+        "endLine": 123,
+        "endChar": 58
+      },
+      "revId": "4196ebc177cd031ea7d6a0d48c2e3dc251a99403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "295d1061_3f049c77",
@@ -83,6 +131,30 @@
       "writtenOn": "2022-05-25T14:07:28Z",
       "side": 1,
       "message": "Convert?",
+      "range": {
+        "startLine": 157,
+        "startChar": 11,
+        "endLine": 157,
+        "endChar": 16
+      },
+      "revId": "4196ebc177cd031ea7d6a0d48c2e3dc251a99403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4710655b_882da043",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-25T17:13:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "295d1061_3f049c77",
       "range": {
         "startLine": 157,
         "startChar": 11,
@@ -164,6 +236,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3860b90_14181739",
+        "filename": "src/tint/sem/constant.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-25T17:13:40Z",
+      "side": 1,
+      "message": "It\u0027s on my optimization TODO list.",
+      "parentUuid": "6d798c0c_80e38cfc",
+      "range": {
+        "startLine": 40,
+        "startChar": 18,
+        "endLine": 40,
+        "endChar": 36
+      },
+      "revId": "4196ebc177cd031ea7d6a0d48c2e3dc251a99403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7affdeb8_ff03d535",
@@ -177,6 +273,30 @@
       "writtenOn": "2022-05-25T14:07:28Z",
       "side": 1,
       "message": "Can use `emplace` here: `elems_.emplace(std::move(elements));`",
+      "range": {
+        "startLine": 158,
+        "startChar": 4,
+        "endLine": 158,
+        "endChar": 43
+      },
+      "revId": "4196ebc177cd031ea7d6a0d48c2e3dc251a99403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e3365c7_c498bb2e",
+        "filename": "src/tint/sem/constant.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-25T17:13:40Z",
+      "side": 1,
+      "message": "That doesn\u0027t compile. `elems_` is a `std::variant`, which needs to be constructed with their the `AInts` or `AFloats`. `Elements{...}` is constructing the variant.",
+      "parentUuid": "7affdeb8_ff03d535",
       "range": {
         "startLine": 158,
         "startChar": 4,
