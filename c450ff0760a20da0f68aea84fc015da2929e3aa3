@@ -33,6 +33,24 @@
       "message": "We should preserve the denormal. No reason not to.\nI\u0027d delete lines 211 to",
       "revId": "c450ff0760a20da0f68aea84fc015da2929e3aa3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06f768b5_60626563",
+        "filename": "src/tint/number.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-25T20:34:38Z",
+      "side": 1,
+      "message": "I thought subnormal support was not guaranteed, and so is a portability hazard.\n\nSee `FLT_HAS_SUBNORM`",
+      "parentUuid": "f794b890_b4bde82d",
+      "revId": "c450ff0760a20da0f68aea84fc015da2929e3aa3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
