@@ -210,6 +210,24 @@
       "parentUuid": "7673ba82_1a25c4b9",
       "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b46b98f_19f1296d",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-05-25T20:12:50Z",
+      "side": 1,
+      "message": "I changed the enum value to 0. The CTS tests passed.\n\nJust in case I want to wait for hours. If I don\u0027t get any objections for temporarily setting 0, I will click \"Submit to CQ\".",
+      "parentUuid": "f36277dd_eab8ee93",
+      "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
