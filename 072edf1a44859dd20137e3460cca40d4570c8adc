@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c961dc64_0c88bfb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-25T22:12:57Z",
+      "side": 1,
+      "message": "PTAL! Main focus of this change in the GPUInfo generation, but since adding the vendor/architecture to AdapterProperties was pretty trivial I\u0027ve thrown that in here too. I think we may want to eventually refactor those out into something that more closely matches the web-facing GPUAdapterInfo, but for now this will give us the data that we need on the Blink side using an existing mechanism.",
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
