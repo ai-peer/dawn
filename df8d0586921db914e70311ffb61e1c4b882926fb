@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6cab87bc_43957440",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-25T19:44:05Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "df8d0586921db914e70311ffb61e1c4b882926fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4247075b_67eb178f",
         "filename": "src/tint/resolver/resolver.cc",
         "patchSetId": 7
@@ -31,6 +48,24 @@
       "writtenOn": "2022-05-25T19:13:14Z",
       "side": 1,
       "message": "I checked to make sure that in general the Resolver methods return nullptr on failure.  So callers already know to expect failure cases like this.\n\nOtherwise I\u0027d ask for the method comment to be updated.",
+      "revId": "df8d0586921db914e70311ffb61e1c4b882926fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6908fe58_e529c3cc",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1857,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-25T19:44:05Z",
+      "side": 1,
+      "message": "Yes, `nullptr` or `false` is the common pattern for error.\nI\u0027d like to migrate this over to the new, more explicit `tint::util::Result` in the future though.",
+      "parentUuid": "4247075b_67eb178f",
       "revId": "df8d0586921db914e70311ffb61e1c4b882926fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
