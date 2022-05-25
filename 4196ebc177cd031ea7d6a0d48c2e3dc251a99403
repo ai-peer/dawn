@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a2d17a7_9178217a",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-25T13:49:17Z",
+      "side": 1,
+      "message": "Thanks for the rename.  :-)",
+      "range": {
+        "startLine": 360,
+        "startChar": 18,
+        "endLine": 360,
+        "endChar": 30
+      },
+      "revId": "4196ebc177cd031ea7d6a0d48c2e3dc251a99403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d12e399_60f1c64c",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-25T13:49:17Z",
+      "side": 1,
+      "message": "Consider f32 to i32 conversion.\n\nC++14 floating-integral conversions says\n\n\u003e The behavior is undefined if the truncated value cannot be\nrepresented in the destination type.\n\nBut WGSL requires clamping of the truncated value.\n\n\nConsider u32 to f16:  \nwhen the value is (much) outside the normal range of f16, the result must be the infinity.\n\nOr am I misunderstanding the context entirely?",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 47
+      },
+      "revId": "4196ebc177cd031ea7d6a0d48c2e3dc251a99403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f6ba182_358e1da1",
+        "filename": "src/tint/sem/constant.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-25T13:49:17Z",
+      "side": 1,
+      "message": "I sure hope std::vector is tuned for the small vector case.  :-)",
+      "range": {
+        "startLine": 40,
+        "startChar": 18,
+        "endLine": 40,
+        "endChar": 36
+      },
+      "revId": "4196ebc177cd031ea7d6a0d48c2e3dc251a99403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
