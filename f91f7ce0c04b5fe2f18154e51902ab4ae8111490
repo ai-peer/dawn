@@ -16,6 +16,24 @@
       "message": "I temporarily got side tracked here.  I got concerened about CheckedConvert from i32 to u32 or vice versa. Those conversions wrap (i.e. modulo 2**32)).\n\nBut I think this constant evaluation will only ever take effect\nwhen the validator says it\u0027s ok to perform that conversion. And therefore it consults the ConversionRank to see if its ok; and it\u0027s not ok to do those conversions i32 \u003c-\u003e u32.   That is, the permissible conversions are those that are clamped / snapped in the way that CheckedConvert does it.",
       "revId": "f91f7ce0c04b5fe2f18154e51902ab4ae8111490",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f0ceae7_02dc8749",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-25T19:48:25Z",
+      "side": 1,
+      "message": "It\u0027s a fair concern. I\u0027ll followup with tests (and any necessary fixes) to handle `i32` \u003c-\u003e `u32` casts.",
+      "parentUuid": "275eeda5_2e0b9a19",
+      "revId": "f91f7ce0c04b5fe2f18154e51902ab4ae8111490",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
