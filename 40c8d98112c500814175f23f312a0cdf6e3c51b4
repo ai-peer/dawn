@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19f72b28_56114ca2",
+        "filename": "src/dawn/native/PipelineCache.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-25T01:48:59Z",
+      "side": 1,
+      "message": "^ scratch that.\n\nI think the best way to do this would be to change CachedBlob itself such that it\u0027s members are `mData`, `mSize` and `mDeleter`. And then, have different `Create` methods that populate those correctly.\n\nBasically, so CachedBlob because some opaque container for data and size, and can pass it any other kind of container and transfer ownership into the CachedBlob.\n\nsomething like:\n```\n\nclass CachedBlob {\n public:\n  static CachedBlob Create(size_t size);\n  \n  // need forward declare for this one.\n  static CachedBlob Create(ComPtr\u003cID3DBlob\u003e blob);\n\n private:\n  CachedBlob(uint8_t* data, size_t size, std::function\u003cvoid()\u003e deleter);\n\n  uint8_t* mData;\n  size_t mSize;\n  std::function\u003cvoid()\u003e mDeleter;\n};\n\nCachedBlob CachedBlob::Create(size_t size) {\n  uint8_t[] data \u003d new uint8_t[size];\n  return CachedBlob(data, size, [\u003d]() { delete[] data; });\n}\n\nCachedBlob CachedBlob::Create(ComPtr\u003cID3DBlob\u003e blob) {\n  // detach so the deleter callback can \"own\" the reference\n  ID3DBlob* ptr \u003d blob.Detach();\n  return CachedBlob(blob-\u003eGetBufferPointer(), blob-\u003eGetBufferSize(), [\u003d]() {\n    // Reattach and drop to delete it.\n    ComPtr\u003cID3DBlob\u003e blob;\n    blob.Attach(ptr);\n    blob \u003d nullptr;\n  });\n}\n```",
+      "parentUuid": "9b093f96_52b479b3",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0383b81b_2f6851b8",
         "filename": "src/dawn/native/d3d12/CacheKeyD3D12.cpp",
         "patchSetId": 8
