@@ -124,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e96ab4d9_2105fb79",
+        "filename": "src/dawn/native/d3d12/CacheKeyD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-05-25T18:26:19Z",
+      "side": 1,
+      "message": "The for (auto stage : IterateStages(GetStageMask())) at https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/RenderPipelineD3D12.cpp;l\u003d359?q\u003drenderpipelined3d12\u0026ss\u003dchromium\nindicate we might have only certain shader stage enabled.\nBut for WebGPU I think it\u0027s good to always only record VS and FS.",
+      "parentUuid": "5201b92f_2057bfe1",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f93d999_18a93ca7",
         "filename": "src/dawn/native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 8
