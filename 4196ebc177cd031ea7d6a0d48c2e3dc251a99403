@@ -140,6 +140,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d798c0c_80e38cfc",
+        "filename": "src/tint/sem/constant.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-25T15:00:04Z",
+      "side": 1,
+      "message": "oof.",
+      "parentUuid": "a84c4787_79328938",
+      "range": {
+        "startLine": 40,
+        "startChar": 18,
+        "endLine": 40,
+        "endChar": 36
+      },
+      "revId": "4196ebc177cd031ea7d6a0d48c2e3dc251a99403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7affdeb8_ff03d535",
