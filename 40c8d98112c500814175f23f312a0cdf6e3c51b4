@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0316687d_a56d1815",
+        "filename": "src/dawn/native/d3d12/CacheKeyD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-25T18:45:29Z",
+      "side": 1,
+      "message": "Actually though, looking at it, it records the size, but maybe we can remove that?",
+      "parentUuid": "acd84581_597a39f9",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5201b92f_2057bfe1",
         "filename": "src/dawn/native/d3d12/CacheKeyD3D12.cpp",
         "patchSetId": 8
