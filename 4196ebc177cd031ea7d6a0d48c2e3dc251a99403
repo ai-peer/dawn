@@ -305,6 +305,30 @@
       },
       "revId": "4196ebc177cd031ea7d6a0d48c2e3dc251a99403",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99ac033f_ca185cc4",
+        "filename": "src/tint/sem/constant.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-25T17:26:32Z",
+      "side": 1,
+      "message": "Ah, right, nevermind. I forgot that emplace wants you to specify the location to emplace into, either by index or type.",
+      "parentUuid": "0e3365c7_c498bb2e",
+      "range": {
+        "startLine": 158,
+        "startChar": 4,
+        "endLine": 158,
+        "endChar": 43
+      },
+      "revId": "4196ebc177cd031ea7d6a0d48c2e3dc251a99403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
