@@ -253,6 +253,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c04b1d17_7600706a",
+        "filename": "src/dawn/tests/end2end/VertexStateTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-05-25T06:56:20Z",
+      "side": 1,
+      "message": "Thanks for the explanation. I added non-zero `wgpu::StepMode::VertexBufferNotUsed`. It should be fine, shouldn\u0027t it.\n\nI didn\u0027t add `wgpu::StepMode::Undefined` (and `CreateVertexBufferLayoutWithDefaults()`?) in this CL. Let\u0027s make another CL (if needed).",
+      "parentUuid": "b8b103cf_b9b0e1ed",
+      "revId": "82a19b6504c946c6b36cf36e29c5f2cf0d24c4a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33684069_c456b6bd",
         "filename": "src/dawn/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
         "patchSetId": 1
