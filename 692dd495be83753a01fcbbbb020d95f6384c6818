@@ -41,6 +41,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a44abb5d_837c015b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-05-25T22:40:42Z",
+      "side": 1,
+      "message": "Added Kai in case you have some comments about the understanding of GetMipLevelSize() related stuff and its definition in WebGPU spec.",
+      "revId": "692dd495be83753a01fcbbbb020d95f6384c6818",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19c1e93d_c727674d",
@@ -125,6 +142,30 @@
       "side": 1,
       "message": "hmm, TBH I like Dawn\u0027s definition more since it\u0027s closer to meaning \"size of a subresource at this mip level\" where different array layers are different subresources.\n\nI see that the spec language calls it a physical miplevel-specific extent which sounds different from MipLevelPhysicalSize.\n\nperhaps we can have similar naming in the spec? make a new function called MipLevelSpecificPhysicalSize, and rename the current one to MipLevelSubresourcePhysicalSize ?",
       "parentUuid": "8e86ab90_4c2060ca",
+      "range": {
+        "startLine": 1137,
+        "startChar": 24,
+        "endLine": 1137,
+        "endChar": 45
+      },
+      "revId": "692dd495be83753a01fcbbbb020d95f6384c6818",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cecff4ee_a69f8f6d",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1137,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-05-25T22:40:42Z",
+      "side": 1,
+      "message": "I think the spec\u0027s definition makes sense. For a {8, 8, 8} texture, if it is a 3D texture, MipLevelSize at level 1 should be {4, 4, 4}, and if should be {4, 4, 8} for a 2D array texture. It goes on and on for other mipmap levels. This is the traditional definition about mipmap level. Graphics related introduction books are telling readers this differences when talking about mipmap levels for a very long time, forming a gut feeling for many folks when reading code like \"Extent3D GetMipLevelSize(mipLevel)\". And we are not talking about subresource at all. The virtual/physical naming stuff is used for non-compressed/compressed formats.\n\nFor Dawn\u0027s implementation, it makes sense to change the current names to GetMipLevelSingleSubresource{Virtual|Physical}Size, just as you suggested.\n\nAnd we can introduce functions like GetMipLevel{Virtual|Physical}Size (or GetMipLevelSpecific{Virtual|Physical}Size as your suggested) for some call sites.",
+      "parentUuid": "e39e81df_ee3962f5",
       "range": {
         "startLine": 1137,
         "startChar": 24,
