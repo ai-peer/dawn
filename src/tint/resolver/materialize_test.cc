@@ -377,7 +377,7 @@ constexpr double kPiF64 = 3.141592653589793;
 constexpr double kPiF32 = 3.1415927410125732;  // kPiF64 quantized to f32
 
 // (2^-127)×(1+(0xfffffffffffff÷0x10000000000000))
-constexpr double kTooSmallF32 = 1.1754943508222874e-38;
+constexpr double kSubnormalF32 = 1.1754943508222874e-38;
 
 INSTANTIATE_TEST_SUITE_P(
     MaterializeScalar,
@@ -393,8 +393,8 @@ INSTANTIATE_TEST_SUITE_P(
                                      Types<f32, AFloat>(AFloat(kMaxF32), kMaxF32),    //
                                      Types<f32, AFloat>(AFloat(-kMaxF32), -kMaxF32),  //
                                      Types<f32, AFloat>(AFloat(kPiF32), kPiF64),      //
-                                     Types<f32, AFloat>(0.0_a, kTooSmallF32),         //
-                                     Types<f32, AFloat>(-0.0_a, -kTooSmallF32)        //
+                                     Types<f32, AFloat>(0.0_a, kSubnormalF32),        //
+                                     Types<f32, AFloat>(-0.0_a, -kSubnormalF32)       //
                                      /* Types<f16, AFloat>(1.0_a), */                 //
                                      /* Types<f16, AFloat>(1.0_a), */)));
 
@@ -412,8 +412,8 @@ INSTANTIATE_TEST_SUITE_P(
                                      Types<f32V, AFloatV>(AFloat(kMaxF32), kMaxF32),    //
                                      Types<f32V, AFloatV>(AFloat(-kMaxF32), -kMaxF32),  //
                                      Types<f32V, AFloatV>(AFloat(kPiF32), kPiF64),      //
-                                     Types<f32V, AFloatV>(0.0_a, kTooSmallF32),         //
-                                     Types<f32V, AFloatV>(-0.0_a, -kTooSmallF32)        //
+                                     Types<f32V, AFloatV>(0.0_a, kSubnormalF32),        //
+                                     Types<f32V, AFloatV>(-0.0_a, -kSubnormalF32)       //
                                      /* Types<f16V, AFloatV>(1.0_a), */                 //
                                      /* Types<f16V, AFloatV>(1.0_a), */)));
 
@@ -426,8 +426,8 @@ INSTANTIATE_TEST_SUITE_P(
                                      Types<f32M, AFloatM>(AFloat(kMaxF32), kMaxF32),    //
                                      Types<f32M, AFloatM>(AFloat(-kMaxF32), -kMaxF32),  //
                                      Types<f32M, AFloatM>(AFloat(kPiF32), kPiF64),      //
-                                     Types<f32M, AFloatM>(0.0_a, kTooSmallF32),         //
-                                     Types<f32M, AFloatM>(-0.0_a, -kTooSmallF32)        //
+                                     Types<f32M, AFloatM>(0.0_a, kSubnormalF32),        //
+                                     Types<f32M, AFloatM>(-0.0_a, -kSubnormalF32)       //
                                      /* Types<f16V, AFloatM>(1.0_a), */                 //
                                      )));
 
