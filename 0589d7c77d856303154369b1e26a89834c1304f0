@@ -170,6 +170,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8be3c0f_483edf36",
+        "filename": "src/tint/utils/result.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-25T13:51:52Z",
+      "side": 1,
+      "message": "I picked `Result` as this matches the name of Dawn\u0027s similar utility (https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn/common/Result.h), and we\u0027re in discussions to try merging utility libraries (but not right now).",
+      "parentUuid": "e40fdb01_c85ac2fd",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "0589d7c77d856303154369b1e26a89834c1304f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef08198e_32d1ae8c",
         "filename": "src/tint/utils/result.h",
         "patchSetId": 5
