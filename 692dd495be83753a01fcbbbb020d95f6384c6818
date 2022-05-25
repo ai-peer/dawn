@@ -85,6 +85,30 @@
       },
       "revId": "692dd495be83753a01fcbbbb020d95f6384c6818",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e39e81df_ee3962f5",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-25T17:56:49Z",
+      "side": 1,
+      "message": "hmm, TBH I like Dawn\u0027s definition more since it\u0027s closer to meaning \"size of a subresource at this mip level\" where different array layers are different subresources.\n\nI see that the spec language calls it a physical miplevel-specific extent which sounds different from MipLevelPhysicalSize.\n\nperhaps we can have similar naming in the spec? make a new function called MipLevelSpecificPhysicalSize, and rename the current one to MipLevelSubresourcePhysicalSize ?",
+      "parentUuid": "8e86ab90_4c2060ca",
+      "range": {
+        "startLine": 1137,
+        "startChar": 24,
+        "endLine": 1137,
+        "endChar": 45
+      },
+      "revId": "692dd495be83753a01fcbbbb020d95f6384c6818",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
