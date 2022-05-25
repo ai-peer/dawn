@@ -22,7 +22,12 @@ class ToggleValidationTest : public ValidationTest {
     void SetUp() override {
         ValidationTest::SetUp();
         DAWN_SKIP_TEST_IF(UsesWire());
+        dawnAdapter =
+            dawn::native::Adapter(reinterpret_cast<dawn::native::AdapterBase*>(adapter.Get()));
     }
+
+  protected:
+    dawn::native::Adapter dawnAdapter;
 };
 
 // Tests querying the detail of a toggle from dawn::native::InstanceBase works correctly.
@@ -30,7 +35,7 @@ TEST_F(ToggleValidationTest, QueryToggleInfo) {
     // Query with a valid toggle name
     {
         const char* kValidToggleName = "emulate_store_and_msaa_resolve";
-        const dawn::native::ToggleInfo* toggleInfo = instance->GetToggleInfo(kValidToggleName);
+        const dawn::native::ToggleInfo* toggleInfo = dawnInstance->GetToggleInfo(kValidToggleName);
         ASSERT_NE(nullptr, toggleInfo);
         ASSERT_NE(nullptr, toggleInfo->name);
         ASSERT_NE(nullptr, toggleInfo->description);
@@ -40,7 +45,8 @@ TEST_F(ToggleValidationTest, QueryToggleInfo) {
     // Query with an invalid toggle name
     {
         const char* kInvalidToggleName = "!@#$%^&*";
-        const dawn::native::ToggleInfo* toggleInfo = instance->GetToggleInfo(kInvalidToggleName);
+        const dawn::native::ToggleInfo* toggleInfo =
+            dawnInstance->GetToggleInfo(kInvalidToggleName);
         ASSERT_EQ(nullptr, toggleInfo);
     }
 }
@@ -56,7 +62,8 @@ TEST_F(ToggleValidationTest, OverrideToggleUsage) {
         togglesDesc.forceEnabledToggles = &kValidToggleName;
         togglesDesc.forceEnabledTogglesCount = 1;
 
-        wgpu::Device deviceWithToggle = wgpu::Device::Acquire(adapter.CreateDevice(&descriptor));
+        wgpu::Device deviceWithToggle =
+            wgpu::Device::Acquire(dawnAdapter.CreateDevice(&descriptor));
         std::vector<const char*> toggleNames = dawn::native::GetTogglesUsed(deviceWithToggle.Get());
         bool validToggleExists = false;
         for (const char* toggle : toggleNames) {
@@ -76,7 +83,8 @@ TEST_F(ToggleValidationTest, OverrideToggleUsage) {
         togglesDesc.forceEnabledToggles = &kInvalidToggleName;
         togglesDesc.forceEnabledTogglesCount = 1;
 
-        wgpu::Device deviceWithToggle = wgpu::Device::Acquire(adapter.CreateDevice(&descriptor));
+        wgpu::Device deviceWithToggle =
+            wgpu::Device::Acquire(dawnAdapter.CreateDevice(&descriptor));
         std::vector<const char*> toggleNames = dawn::native::GetTogglesUsed(deviceWithToggle.Get());
         bool InvalidToggleExists = false;
         for (const char* toggle : toggleNames) {
@@ -96,7 +104,7 @@ TEST_F(ToggleValidationTest, TurnOffVsyncWithToggle) {
     togglesDesc.forceEnabledToggles = &kValidToggleName;
     togglesDesc.forceEnabledTogglesCount = 1;
 
-    wgpu::Device deviceWithToggle = wgpu::Device::Acquire(adapter.CreateDevice(&descriptor));
+    wgpu::Device deviceWithToggle = wgpu::Device::Acquire(dawnAdapter.CreateDevice(&descriptor));
     std::vector<const char*> toggleNames = dawn::native::GetTogglesUsed(deviceWithToggle.Get());
     bool validToggleExists = false;
     for (const char* toggle : toggleNames) {

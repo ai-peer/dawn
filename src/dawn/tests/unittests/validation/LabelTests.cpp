@@ -18,10 +18,19 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
-class LabelTest : public ValidationTest {};
+class LabelTest : public ValidationTest {
+    void SetUp() override {
+        ValidationTest::SetUp();
+        DAWN_SKIP_TEST_IF(UsesWire());
+        dawnAdapter =
+            dawn::native::Adapter(reinterpret_cast<dawn::native::AdapterBase*>(adapter.Get()));
+    }
+
+  protected:
+    dawn::native::Adapter dawnAdapter;
+};
 
 TEST_F(LabelTest, BindGroup) {
-    DAWN_SKIP_TEST_IF(UsesWire());
     std::string label = "test";
     wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(device, {});
 
@@ -55,7 +64,6 @@ TEST_F(LabelTest, BindGroup) {
 }
 
 TEST_F(LabelTest, BindGroupLayout) {
-    DAWN_SKIP_TEST_IF(UsesWire());
     std::string label = "test";
 
     wgpu::BindGroupLayoutDescriptor descriptor = {};
@@ -87,7 +95,6 @@ TEST_F(LabelTest, BindGroupLayout) {
 }
 
 TEST_F(LabelTest, Buffer) {
-    DAWN_SKIP_TEST_IF(UsesWire());
     std::string label = "test";
     wgpu::BufferDescriptor descriptor;
     descriptor.size = 4;
@@ -118,7 +125,6 @@ TEST_F(LabelTest, Buffer) {
 }
 
 TEST_F(LabelTest, CommandBuffer) {
-    DAWN_SKIP_TEST_IF(UsesWire());
     std::string label = "test";
     wgpu::CommandBufferDescriptor descriptor;
 
@@ -150,7 +156,6 @@ TEST_F(LabelTest, CommandBuffer) {
 }
 
 TEST_F(LabelTest, CommandEncoder) {
-    DAWN_SKIP_TEST_IF(UsesWire());
     std::string label = "test";
     wgpu::CommandEncoderDescriptor descriptor;
 
@@ -179,7 +184,6 @@ TEST_F(LabelTest, CommandEncoder) {
 }
 
 TEST_F(LabelTest, ComputePassEncoder) {
-    DAWN_SKIP_TEST_IF(UsesWire());
     std::string label = "test";
     wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
 
@@ -213,7 +217,6 @@ TEST_F(LabelTest, ComputePassEncoder) {
 }
 
 TEST_F(LabelTest, ExternalTexture) {
-    DAWN_SKIP_TEST_IF(UsesWire());
     std::string label = "test";
     wgpu::TextureDescriptor textureDescriptor;
     textureDescriptor.size.width = 1;
@@ -260,7 +263,6 @@ TEST_F(LabelTest, ExternalTexture) {
 }
 
 TEST_F(LabelTest, PipelineLayout) {
-    DAWN_SKIP_TEST_IF(UsesWire());
     std::string label = "test";
     wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(device, {});
 
@@ -324,13 +326,12 @@ TEST_F(LabelTest, QuerySet) {
 }
 
 TEST_F(LabelTest, Queue) {
-    DAWN_SKIP_TEST_IF(UsesWire());
     std::string label = "test";
 
     // The label should be empty if one was not set.
     {
         wgpu::DeviceDescriptor descriptor;
-        wgpu::Device labelDevice = wgpu::Device::Acquire(adapter.CreateDevice(&descriptor));
+        wgpu::Device labelDevice = wgpu::Device::Acquire(dawnAdapter.CreateDevice(&descriptor));
         std::string readbackLabel =
             dawn::native::GetObjectLabelForTesting(labelDevice.GetQueue().Get());
         ASSERT_TRUE(readbackLabel.empty());
@@ -339,7 +340,7 @@ TEST_F(LabelTest, Queue) {
     // Test setting a label through API
     {
         wgpu::DeviceDescriptor descriptor;
-        wgpu::Device labelDevice = wgpu::Device::Acquire(adapter.CreateDevice(&descriptor));
+        wgpu::Device labelDevice = wgpu::Device::Acquire(dawnAdapter.CreateDevice(&descriptor));
         labelDevice.GetQueue().SetLabel(label.c_str());
         std::string readbackLabel =
             dawn::native::GetObjectLabelForTesting(labelDevice.GetQueue().Get());
@@ -350,7 +351,7 @@ TEST_F(LabelTest, Queue) {
     {
         wgpu::DeviceDescriptor descriptor;
         descriptor.defaultQueue.label = label.c_str();
-        wgpu::Device labelDevice = wgpu::Device::Acquire(adapter.CreateDevice(&descriptor));
+        wgpu::Device labelDevice = wgpu::Device::Acquire(dawnAdapter.CreateDevice(&descriptor));
         std::string readbackLabel =
             dawn::native::GetObjectLabelForTesting(labelDevice.GetQueue().Get());
         ASSERT_EQ(label, readbackLabel);
@@ -358,7 +359,6 @@ TEST_F(LabelTest, Queue) {
 }
 
 TEST_F(LabelTest, RenderBundleEncoder) {
-    DAWN_SKIP_TEST_IF(UsesWire());
     std::string label = "test";
 
     utils::ComboRenderBundleEncoderDescriptor descriptor = {};
@@ -390,7 +390,6 @@ TEST_F(LabelTest, RenderBundleEncoder) {
 }
 
 TEST_F(LabelTest, RenderPassEncoder) {
-    DAWN_SKIP_TEST_IF(UsesWire());
     std::string label = "test";
     wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
 
@@ -430,7 +429,6 @@ TEST_F(LabelTest, RenderPassEncoder) {
 }
 
 TEST_F(LabelTest, Sampler) {
-    DAWN_SKIP_TEST_IF(UsesWire());
     std::string label = "test";
     wgpu::SamplerDescriptor descriptor;
 
@@ -459,7 +457,6 @@ TEST_F(LabelTest, Sampler) {
 }
 
 TEST_F(LabelTest, Texture) {
-    DAWN_SKIP_TEST_IF(UsesWire());
     std::string label = "test";
     wgpu::TextureDescriptor descriptor;
     descriptor.size.width = 1;
@@ -496,7 +493,6 @@ TEST_F(LabelTest, Texture) {
 }
 
 TEST_F(LabelTest, TextureView) {
-    DAWN_SKIP_TEST_IF(UsesWire());
     std::string label = "test";
     wgpu::TextureDescriptor descriptor;
     descriptor.size.width = 1;
@@ -536,7 +532,6 @@ TEST_F(LabelTest, TextureView) {
 }
 
 TEST_F(LabelTest, RenderPipeline) {
-    DAWN_SKIP_TEST_IF(UsesWire());
     std::string label = "test";
 
     wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
@@ -578,7 +573,6 @@ TEST_F(LabelTest, RenderPipeline) {
 }
 
 TEST_F(LabelTest, ComputePipeline) {
-    DAWN_SKIP_TEST_IF(UsesWire());
     std::string label = "test";
 
     wgpu::ShaderModule computeModule = utils::CreateShaderModule(device, R"(
@@ -615,7 +609,6 @@ TEST_F(LabelTest, ComputePipeline) {
 }
 
 TEST_F(LabelTest, ShaderModule) {
-    DAWN_SKIP_TEST_IF(UsesWire());
     std::string label = "test";
 
     const char* source = R"(
