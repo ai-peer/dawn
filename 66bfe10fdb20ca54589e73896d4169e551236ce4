@@ -50,6 +50,41 @@
       "message": "`dawn/dawn.json` should also be changed to modify the JavaScript interface. Please try update the \"vertex step mode\" enum definition (around line 1467), and change the default \"step mode\" value in \"vertex buffer layout\" (around line 1462).",
       "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af617c1f_9dc284f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-05-25T01:33:48Z",
+      "side": 1,
+      "message": "Sorry I missed it, the \"vertex step mode\" enum definition is already updated.",
+      "parentUuid": "fa6e57e9_d2fef30d",
+      "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3ec5dcf_fa48df80",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1464,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-05-25T01:33:48Z",
+      "side": 1,
+      "message": "Please change the default value to \"vertex buffer not used\"",
+      "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
