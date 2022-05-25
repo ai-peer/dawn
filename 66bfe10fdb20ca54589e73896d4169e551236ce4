@@ -85,6 +85,41 @@
       "message": "Please change the default value to \"vertex buffer not used\"",
       "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90d85e56_eaebb349",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1464,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-05-25T01:49:17Z",
+      "side": 1,
+      "message": "After second thought default shouldn\u0027t be changed, sorry. It should be kept as \"vertex\" to be aligned with WebGPU spec.",
+      "parentUuid": "f3ec5dcf_fa48df80",
+      "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "130ec06a_9bb8a1a9",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-05-25T01:49:17Z",
+      "side": 1,
+      "message": "If the null elements are considered filled with zero, I think the \"vertex buffer not used\" enum may have value 0. Hoping this could help the patch pass the CTS.",
+      "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
