@@ -28,6 +28,15 @@
 #pragma GCC diagnostic ignored "-Winvalid-offsetof"
 #endif
 
+// Suppress warnings from this file when fuzzing to reduce logging from the fuzzer.
+#if defined(ADDRESS_SANITIZER) || defined(LEAK_SANITIZER) || defined(MEMORY_SANITIZER) || \
+      defined(THREAD_SANITIZER) || defined(UNDEFINED_SANITIZER)
+#define DAWN_SUPPRESS_WIRECMD_WARNINGS 1
+#else
+#define DAWN_SUPPRESS_WIRECMD_WARNINGS 0
+#endif
+
+
 //* Helper macros so that the main [de]serialization functions can be written in a generic manner.
 
 //* Outputs an rvalue that's the number of elements a pointer member points to.
@@ -565,7 +574,9 @@
                         // Invalid enum. Serialize just the transfer header with Invalid as the sType.
                         // TODO(crbug.com/dawn/369): Unknown sTypes are silently discarded.
                         if (chainedStruct->sType != WGPUSType_Invalid) {
+#if !DAWN_SUPPRESS_WIRECMD_WARNINGS
                             dawn::WarningLog() << "Unknown sType " << chainedStruct->sType << " discarded.";
+#endif
                         }
 
                         WGPUChainedStructTransfer* transfer;
@@ -625,7 +636,9 @@
                         // Invalid enum. Deserialize just the transfer header with Invalid as the sType.
                         // TODO(crbug.com/dawn/369): Unknown sTypes are silently discarded.
                         if (sType != WGPUSType_Invalid) {
+#if !DAWN_SUPPRESS_WIRECMD_WARNINGS
                             dawn::WarningLog() << "Unknown sType " << sType << " discarded.";
+#endif
                         }
 
                         const volatile WGPUChainedStructTransfer* transfer;
