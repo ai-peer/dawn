@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a55b4e5f_44c508e0",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-25T19:55:18Z",
+      "side": 1,
+      "message": "nit: The bit counts should be able to stay as smaller int sizes.\nthat would be everything from line 390  to 395, I think, and kSignBit, kExponentLeftShift\n\nOn the other hand, expanding all the fields is easier to read.",
+      "revId": "2485c6f998ea26d5327d3a9e194704077a52189e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
