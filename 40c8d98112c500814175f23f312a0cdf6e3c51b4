@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "532cb06a_26d3eb24",
+        "filename": "src/dawn/native/PipelineCache.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-05-25T22:51:20Z",
+      "side": 1,
+      "message": "Q: for usage in BlobCache::Load, do we delete copy constructor of CachedBlob and change that to return unique_ptr?\n\n(IIUC we call mDeleter in destructor, and we can only call it once per data chunk)",
+      "parentUuid": "19f72b28_56114ca2",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0383b81b_2f6851b8",
         "filename": "src/dawn/native/d3d12/CacheKeyD3D12.cpp",
         "patchSetId": 8
@@ -177,6 +195,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47734748_e7046227",
+        "filename": "src/dawn/native/d3d12/CacheKeyD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-05-25T22:51:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be908682_70c8ecdc",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5201b92f_2057bfe1",
@@ -230,6 +266,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3e73c6b_dcf50657",
+        "filename": "src/dawn/native/d3d12/CacheKeyD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-05-25T22:51:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b2d3c75_3606cc87",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f93d999_18a93ca7",
@@ -243,6 +297,24 @@
       "writtenOn": "2022-05-25T00:41:30Z",
       "side": 1,
       "message": "I think the signature is the only thing that matters for the pipeline cache.\nperhaps instead of using all of GetLayout()-\u003eGetCacheKey() we can just get the serialized signature blob?",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57709e30_0746ad7e",
+        "filename": "src/dawn/native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-05-25T22:51:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f93d999_18a93ca7",
       "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
