@@ -43,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19c1e93d_c727674d",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-05-25T17:39:18Z",
+      "side": 1,
+      "message": "Btw, \"copyDepth\" exactly equals to \"largestMipSize.depthOrArrayLayers\" for 2D array textures, even though the fact contradicts with our common sense about GetMipLevelPhysicalSize() for 2D array textures. So this CL is more like a code-refactoring.",
+      "range": {
+        "startLine": 1102,
+        "startChar": 75,
+        "endLine": 1102,
+        "endChar": 84
+      },
+      "revId": "692dd495be83753a01fcbbbb020d95f6384c6818",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e86ab90_4c2060ca",
         "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
         "patchSetId": 2
