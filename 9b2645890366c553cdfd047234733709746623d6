@@ -37,6 +37,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9ae38db0_cf8597aa",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-25T12:26:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2dc5fdac_96635641",
+      "revId": "9b2645890366c553cdfd047234733709746623d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1493c935_d265f3c9",
         "filename": "src/tint/number.cc",
         "patchSetId": 7
@@ -65,6 +83,30 @@
       "writtenOn": "2022-05-24T21:24:30Z",
       "side": 1,
       "message": "Yep.\n\nnit: Might be nice to explain what\u0027s going on here:\n \n f32 is :  1 sign,  8 exponent, 23 mantissa\n f16 is :  1 sign,  5 exponent, 10 manitssa\n \n The range checks above ensure the value is within the finite range, so the exponent is ok.   \n \n So when \u0027value\u0027 is already in f32 value, you want to preserve:\n     1 sign, 8 exponent,  and 10 mantissa\n or the top 19 bits.\n     \n  which would mean a mask of  0xFFFFE000u",
+      "range": {
+        "startLine": 50,
+        "startChar": 15,
+        "endLine": 50,
+        "endChar": 27
+      },
+      "revId": "9b2645890366c553cdfd047234733709746623d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ae0be4e_316db90e",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-25T12:26:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcdb25e6_3d1b44d9",
       "range": {
         "startLine": 50,
         "startChar": 15,
@@ -121,6 +163,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b93aa5b2_1ef32e68",
+        "filename": "src/tint/number.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-25T12:26:43Z",
+      "side": 1,
+      "message": "No it\u0027s a `Number`. \n\nThe `std::enable_if_t` ensures that `B` is numeric:\n* If `B` is numeric, `std::enable_if_t` resolves to a `bool` (the expected return type for an equality operator)\n* If `B` is not-numeric, `std::enable_if_t` resolves to an invalid type, and the overload is removed from the candidate set (SFINAE).",
+      "parentUuid": "71298267_79201388",
+      "range": {
+        "startLine": 162,
+        "startChar": 21,
+        "endLine": 162,
+        "endChar": 27
+      },
+      "revId": "9b2645890366c553cdfd047234733709746623d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a7b85de_38f81a54",
@@ -144,6 +210,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "946b2683_da8cf7fd",
+        "filename": "src/tint/number.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-25T12:26:43Z",
+      "side": 1,
+      "message": "Nope.",
+      "parentUuid": "9a7b85de_38f81a54",
+      "range": {
+        "startLine": 171,
+        "startChar": 21,
+        "endLine": 171,
+        "endChar": 27
+      },
+      "revId": "9b2645890366c553cdfd047234733709746623d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f59b61fb_4f9d8fac",
@@ -157,6 +247,30 @@
       "writtenOn": "2022-05-24T21:24:30Z",
       "side": 1,
       "message": "dup of lines 160-167?",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 1
+      },
+      "revId": "9b2645890366c553cdfd047234733709746623d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e0a389c_af0cc876",
+        "filename": "src/tint/number.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-25T12:26:43Z",
+      "side": 1,
+      "message": "This is  `!\u003d(A, Number\u003cB\u003e)`.\nL160-167 is `!\u003d(Number\u003cA\u003e, B)`",
+      "parentUuid": "f59b61fb_4f9d8fac",
       "range": {
         "startLine": 178,
         "startChar": 0,
