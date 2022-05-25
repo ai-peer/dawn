@@ -565,7 +565,9 @@
                         // Invalid enum. Serialize just the transfer header with Invalid as the sType.
                         // TODO(crbug.com/dawn/369): Unknown sTypes are silently discarded.
                         if (chainedStruct->sType != WGPUSType_Invalid) {
+#if !defined(DAWN_IS_FUZZING)
                             dawn::WarningLog() << "Unknown sType " << chainedStruct->sType << " discarded.";
+#endif
                         }
 
                         WGPUChainedStructTransfer* transfer;
@@ -625,7 +627,9 @@
                         // Invalid enum. Deserialize just the transfer header with Invalid as the sType.
                         // TODO(crbug.com/dawn/369): Unknown sTypes are silently discarded.
                         if (sType != WGPUSType_Invalid) {
+#if !defined(DAWN_IS_FUZZING)
                             dawn::WarningLog() << "Unknown sType " << sType << " discarded.";
+#endif
                         }
 
                         const volatile WGPUChainedStructTransfer* transfer;

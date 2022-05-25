@@ -64,6 +64,7 @@ if (build_with_chromium) {
         configs += invoker.additional_configs
       }
 
+      defines += [ "DAWN_IS_FUZZING" ]
       sources += [ "StandaloneFuzzerMain.cpp" ]
     }
   }
