@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20baa5d1_9020abce",
+        "filename": "src/dawn/native/PipelineCache.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-25T23:01:31Z",
+      "side": 1,
+      "message": "sounds right to me to delete copy constructor and only have move constructor/assignment. And yes, mDeleter would be called in the destructor.\n\nBut - do we need to return CachedBlob as unique_ptr\u003cCachedBlob\u003e? I think it should be sufficient to return CachedBlob as long as it is moveable",
+      "parentUuid": "cb86c0da_20f1fc4c",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0383b81b_2f6851b8",
         "filename": "src/dawn/native/d3d12/CacheKeyD3D12.cpp",
         "patchSetId": 8
