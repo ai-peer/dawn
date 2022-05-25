@@ -139,7 +139,35 @@ TEST_F(ParserImplTest, ConstLiteral_FloatF) {
     EXPECT_FALSE(p->has_error()) << p->error();
     ASSERT_NE(c.value, nullptr);
     ASSERT_TRUE(c->Is<ast::FloatLiteralExpression>());
-    EXPECT_DOUBLE_EQ(c->As<ast::FloatLiteralExpression>()->value, 234e12);
+    EXPECT_DOUBLE_EQ(c->As<ast::FloatLiteralExpression>()->value, static_cast<double>(234e12f));
+    EXPECT_EQ(c->As<ast::FloatLiteralExpression>()->suffix,
+              ast::FloatLiteralExpression::Suffix::kF);
+    EXPECT_EQ(c->source.range, (Source::Range{{1u, 1u}, {1u, 9u}}));
+}
+
+TEST_F(ParserImplTest, ConstLiteral_TinyFloat) {
+    auto p = parser("1e-5000");
+    auto c = p->const_literal();
+    EXPECT_TRUE(c.matched);
+    EXPECT_FALSE(c.errored);
+    EXPECT_FALSE(p->has_error()) << p->error();
+    ASSERT_NE(c.value, nullptr);
+    ASSERT_TRUE(c->Is<ast::FloatLiteralExpression>());
+    EXPECT_DOUBLE_EQ(c->As<ast::FloatLiteralExpression>()->value, 0.0);
+    EXPECT_EQ(c->As<ast::FloatLiteralExpression>()->suffix,
+              ast::FloatLiteralExpression::Suffix::kNone);
+    EXPECT_EQ(c->source.range, (Source::Range{{1u, 1u}, {1u, 8u}}));
+}
+
+TEST_F(ParserImplTest, ConstLiteral_TinyFloatF) {
+    auto p = parser("1e-5000f");
+    auto c = p->const_literal();
+    EXPECT_TRUE(c.matched);
+    EXPECT_FALSE(c.errored);
+    EXPECT_FALSE(p->has_error()) << p->error();
+    ASSERT_NE(c.value, nullptr);
+    ASSERT_TRUE(c->Is<ast::FloatLiteralExpression>());
+    EXPECT_DOUBLE_EQ(c->As<ast::FloatLiteralExpression>()->value, 0.0);
     EXPECT_EQ(c->As<ast::FloatLiteralExpression>()->suffix,
               ast::FloatLiteralExpression::Suffix::kF);
     EXPECT_EQ(c->source.range, (Source::Range{{1u, 1u}, {1u, 9u}}));
@@ -154,17 +182,17 @@ TEST_F(ParserImplTest, ConstLiteral_InvalidFloat_IncompleteExponent) {
     ASSERT_EQ(c.value, nullptr);
 }
 
-TEST_F(ParserImplTest, ConstLiteral_InvalidFloat_TooSmallMagnitude) {
-    auto p = parser("1e-256");
+TEST_F(ParserImplTest, ConstLiteral_InvalidFloat_TooLargeNegative) {
+    auto p = parser("-1.2e+5000");
     auto c = p->const_literal();
     EXPECT_FALSE(c.matched);
     EXPECT_TRUE(c.errored);
-    EXPECT_EQ(p->error(), "1:1: value magnitude too small to be represented as 'f32'");
+    EXPECT_EQ(p->error(), "1:1: value cannot be represented as 'abstract-float'");
     ASSERT_EQ(c.value, nullptr);
 }
 
-TEST_F(ParserImplTest, ConstLiteral_InvalidFloat_TooLargeNegative) {
-    auto p = parser("-1.2e+256");
+TEST_F(ParserImplTest, ConstLiteral_InvalidFloatF_TooLargeNegative) {
+    auto p = parser("-1.2e+256f");
     auto c = p->const_literal();
     EXPECT_FALSE(c.matched);
     EXPECT_TRUE(c.errored);
@@ -173,7 +201,15 @@ TEST_F(ParserImplTest, ConstLiteral_InvalidFloat_TooLargeNegative) {
 }
 
 TEST_F(ParserImplTest, ConstLiteral_InvalidFloat_TooLargePositive) {
-    auto p = parser("1.2e+256");
+    auto p = parser("1.2e+5000");
+    auto c = p->const_literal();
+    EXPECT_FALSE(c.matched);
+    EXPECT_TRUE(c.errored);
+    EXPECT_EQ(p->error(), "1:1: value cannot be represented as 'abstract-float'");
+    ASSERT_EQ(c.value, nullptr);
+}
+TEST_F(ParserImplTest, ConstLiteral_InvalidFloatF_TooLargePositive) {
+    auto p = parser("1.2e+256f");
     auto c = p->const_literal();
     EXPECT_FALSE(c.matched);
     EXPECT_TRUE(c.errored);
