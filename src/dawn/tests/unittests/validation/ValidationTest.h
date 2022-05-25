@@ -108,8 +108,6 @@ class ValidationTest : public testing::Test {
 
     void ExpectDeviceDestruction();
 
-    wgpu::Device RegisterDevice(WGPUDevice backendDevice);
-
     bool UsesWire() const;
 
     void FlushWire();
@@ -130,17 +128,16 @@ class ValidationTest : public testing::Test {
     };
 
     bool HasToggleEnabled(const char* toggle) const;
-
-    // TODO(crbug.com/dawn/689): Use limits returned from the wire
-    // This is implemented here because tests need to always query
-    // the |backendDevice| since limits are not implemented in the wire.
-    wgpu::SupportedLimits GetSupportedLimits();
+    wgpu::SupportedLimits GetSupportedLimits() const;
 
   protected:
-    virtual WGPUDevice CreateTestDevice();
+    virtual WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter);
 
-    std::unique_ptr<dawn::native::Instance> instance;
-    dawn::native::Adapter adapter;
+    wgpu::Device RequestDeviceSync(const wgpu::DeviceDescriptor& deviceDesc);
+
+    std::unique_ptr<dawn::native::Instance> dawnInstance;
+    wgpu::Instance instance;
+    wgpu::Adapter adapter;
     wgpu::Device device;
     WGPUDevice backendDevice;
 
@@ -148,6 +145,7 @@ class ValidationTest : public testing::Test {
 
   private:
     std::unique_ptr<utils::WireHelper> mWireHelper;
+    WGPUDevice mLastCreatedBackendDevice;
 
     static void OnDeviceError(WGPUErrorType type, const char* message, void* userdata);
     static void OnDeviceLost(WGPUDeviceLostReason reason, const char* message, void* userdata);
