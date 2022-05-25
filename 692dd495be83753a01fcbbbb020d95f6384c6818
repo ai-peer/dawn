@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a25abc13_6629c6c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-05-25T17:23:53Z",
+      "side": 1,
+      "message": "This is a follow-up patch from Corentin\u0027s comment at https://dawn-review.googlesource.com/c/dawn/+/90780/2/src/dawn/native/d3d12/TextureD3D12.cpp for issue 1288. So I attached this change to issue 1288, too.",
+      "range": {
+        "startLine": 16,
+        "startChar": 5,
+        "endLine": 16,
+        "endChar": 14
+      },
+      "revId": "692dd495be83753a01fcbbbb020d95f6384c6818",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "246e5a8a_4b161f8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-05-25T17:23:53Z",
+      "side": 1,
+      "message": "PTAL. Thank you!",
+      "revId": "692dd495be83753a01fcbbbb020d95f6384c6818",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e86ab90_4c2060ca",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1137,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-05-25T17:23:53Z",
+      "side": 1,
+      "message": "I am very curious that if we use copySize here  (which is the current code snippet), it will access to out-of-bounds of the texture because we iterate each array layer but copySize (GetMipLevelPhysicalSize) has multiple (all) layers for each iteration. But it\u0027s very weird that no tests fail...\n\nSo I looked into the implementation, I found that singleMipAndArraySize actually is the same with copySize, see the implementation about GetMipLevelLogicalSize() at https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn/native/Texture.cpp#698 and GetMipLevelPhysicalSize() at https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn/native/Texture.cpp#713. \n\nHowever, it contradicts with our common sense about a sub-resource\u0027s size. The differences are the definitions about depthOrArrayLayers for 2D array textures. And it also contradicts with WebGPU\u0027s definition about logical size (https://gpuweb.github.io/gpuweb/#logical-miplevel-specific-texture-extent) and physical size (https://gpuweb.github.io/gpuweb/#physical-miplevel-specific-texture-extent).\n\nDawn\u0027s tests don\u0027t fail because we do remedy for the wrong calculation when we call it, see an example of the code snippet at line 300 - 305 at https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn/native/CommandValidation.cpp#300. \n\nI think it\u0027s better to change those 2 functions (and their call sites), WDYT?",
+      "range": {
+        "startLine": 1137,
+        "startChar": 24,
+        "endLine": 1137,
+        "endChar": 45
+      },
+      "revId": "692dd495be83753a01fcbbbb020d95f6384c6818",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
