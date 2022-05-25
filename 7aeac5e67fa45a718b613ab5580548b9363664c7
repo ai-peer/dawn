@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3adb074c_cd57e89d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-25T17:35:39Z",
+      "side": 1,
+      "message": "Thanks for getting the CTS to a state where this could land! What a pleasant surprise to come back from a few days off to!",
+      "revId": "7aeac5e67fa45a718b613ab5580548b9363664c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
