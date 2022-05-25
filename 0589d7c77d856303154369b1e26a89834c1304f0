@@ -146,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e40fdb01_c85ac2fd",
+        "filename": "src/tint/utils/result.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-25T13:36:38Z",
+      "side": 1,
+      "message": "Btw, I am actually happy to see a type like this get added to the codebase. I wanted one of these recently when working on the parser, and had to resort to the clumsy \"return bool for success/fail and output params as args\" method.",
+      "parentUuid": "68fc70d0_a59ab993",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "0589d7c77d856303154369b1e26a89834c1304f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef08198e_32d1ae8c",
         "filename": "src/tint/utils/result.h",
         "patchSetId": 5
