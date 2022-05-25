@@ -120,9 +120,11 @@ TEST(NumberTest, CheckedConvertExceedsNegativeLimit) {
               ConversionFailure::kExceedsNegativeLimit);
 }
 
-TEST(NumberTest, CheckedConvertTooSmall) {
-    EXPECT_EQ(CheckedConvert<f32>(AFloat(kSmallestF32PrevULP)), ConversionFailure::kTooSmall);
-    EXPECT_EQ(CheckedConvert<f16>(AFloat(kSmallestF16PrevULP)), ConversionFailure::kTooSmall);
+TEST(NumberTest, CheckedConvertSubnormals) {
+    EXPECT_EQ(CheckedConvert<f32>(AFloat(kSmallestF32PrevULP)), f32(kSmallestF32PrevULP));
+    EXPECT_EQ(CheckedConvert<f16>(AFloat(kSmallestF16PrevULP)), f16(kSmallestF16PrevULP));
+    EXPECT_EQ(CheckedConvert<f32>(AFloat(-kSmallestF32PrevULP)), f32(-kSmallestF32PrevULP));
+    EXPECT_EQ(CheckedConvert<f16>(AFloat(-kSmallestF16PrevULP)), f16(-kSmallestF16PrevULP));
 }
 
 TEST(NumberTest, QuantizeF16) {

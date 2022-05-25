@@ -112,9 +112,6 @@ sem::Constant::Elements ConvertElements(const sem::Constant::Elements& in, const
                 case ConversionFailure::kExceedsPositiveLimit:
                     el_out = IsFloatingPoint<UnwrapNumber<OUT>> ? OUT(kInf) : OUT::kHighest;
                     break;
-                case ConversionFailure::kTooSmall:
-                    el_out = OUT(el_in < 0 ? -0.0 : 0.0);
-                    break;
             }
         }
     });
@@ -137,8 +134,6 @@ utils::Result<sem::Constant::Elements> MaterializeElements(const sem::Constant::
         using OUT = std::decay_t<decltype(el_out)>;
         if (auto conv = CheckedConvert<OUT>(el_in)) {
             el_out = conv.Get();
-        } else if (conv.Failure() == ConversionFailure::kTooSmall) {
-            el_out = OUT(el_in < 0 ? -0.0 : 0.0);
         } else if (!failure.has_value()) {
             std::stringstream ss;
             ss << "value " << el_in << " cannot be represented as ";
