@@ -34,6 +34,24 @@
       "parentUuid": "275eeda5_2e0b9a19",
       "revId": "f91f7ce0c04b5fe2f18154e51902ab4ae8111490",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f33fda58_3b20dad8",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-26T08:29:03Z",
+      "side": 1,
+      "message": "I tried looking up this rule in the spec, AFAICT a `i32` \u003c-\u003e `u32` conversion is a bitcast.\n\nI\u0027ve created crbug.com/tint/1565 so we can continue this discussion.",
+      "parentUuid": "0f0ceae7_02dc8749",
+      "revId": "f91f7ce0c04b5fe2f18154e51902ab4ae8111490",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
