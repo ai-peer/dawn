@@ -58,7 +58,7 @@ TEST_F(WgslGeneratorImplTest, EmitConstructor_Float) {
     GeneratorImpl& gen = Build();
 
     ASSERT_TRUE(gen.Generate()) << gen.error();
-    EXPECT_THAT(gen.result(), HasSubstr("1073741824.0"));
+    EXPECT_THAT(gen.result(), HasSubstr("1073741824.0f"));
 }
 
 TEST_F(WgslGeneratorImplTest, EmitConstructor_Type_Float) {
