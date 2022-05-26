@@ -51,6 +51,24 @@
       "parentUuid": "f794b890_b4bde82d",
       "revId": "c450ff0760a20da0f68aea84fc015da2929e3aa3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "254161eb_c100ddfd",
+        "filename": "src/tint/number.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-26T13:55:20Z",
+      "side": 1,
+      "message": "It is a portability hazard. But WGSL still allows them.\nIMHO we shouldn\u0027t get in the way of a high fidelity experience on good hardware.\nAnd so the spec doesn\u0027t forbid them.",
+      "parentUuid": "06f768b5_60626563",
+      "revId": "c450ff0760a20da0f68aea84fc015da2929e3aa3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
