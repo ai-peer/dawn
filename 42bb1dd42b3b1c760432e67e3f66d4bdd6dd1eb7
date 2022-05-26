@@ -53,6 +53,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8157923_6d0edfb5",
+        "filename": "src/dawn/native/vulkan/VulkanFunctions.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-05-26T23:26:25Z",
+      "side": 1,
+      "message": "Shame C++ still requires putting stuff on structs when in principle it seems like you could just specialize the `using` itself.",
+      "revId": "42bb1dd42b3b1c760432e67e3f66d4bdd6dd1eb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae62193b_eab741fc",
