@@ -16,6 +16,46 @@
       "message": "PTAL! let me know if you have any better ideas about working around this problem. Right now, this approach uses an entirely different type to store the vulkan functions when fuzzing, which is a little unfortunate.",
       "revId": "42bb1dd42b3b1c760432e67e3f66d4bdd6dd1eb7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3a85982_28e86e99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-26T21:10:01Z",
+      "side": 1,
+      "message": "Seems fine, but just for my understanding, is there a drawback to not using the proxy through the std::function? Wondering since maybe we could just do it by default?",
+      "revId": "42bb1dd42b3b1c760432e67e3f66d4bdd6dd1eb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae62193b_eab741fc",
+        "filename": "src/dawn/native/vulkan/VulkanFunctions.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-26T21:10:01Z",
+      "side": 1,
+      "message": "nit. Maybe include some comment about why we needed this? Or a link to the bug for future ref. (btw I don\u0027t have access to the bug for some reason?)",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 40
+      },
+      "revId": "42bb1dd42b3b1c760432e67e3f66d4bdd6dd1eb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
