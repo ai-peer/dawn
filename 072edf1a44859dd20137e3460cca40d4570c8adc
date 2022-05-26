@@ -20,6 +20,97 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cb73b709_1913fbc6",
+        "filename": "generator/dawn_gpu_info_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-26T07:29:42Z",
+      "side": 1,
+      "message": "nit: Could this be moved to a file shared between generators?",
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62841b31_ac15d593",
+        "filename": "generator/dawn_gpu_info_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-26T07:29:42Z",
+      "side": 1,
+      "message": "nit: You can do self.deviceMask \u003d json_data.get(\u0027deviceMask\u0027, None) to have a default value of None.\n\nAlso maybe we could assert that the device IDs all have the bits outside of the deviceMask to 0.",
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc8775d7_b296d703",
+        "filename": "generator/templates/dawn/common/GPUInfo.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-26T07:29:42Z",
+      "side": 1,
+      "message": "optional: IMHO the enum class like that is better than the current interface of gpu_info. We could change the interface in a follow up if that\u0027s interesting to you.",
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "532030c2_8439d979",
+        "filename": "gpu_info.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-26T07:29:42Z",
+      "side": 1,
+      "message": "nit: I\u0027ve been thinking we should move dawn.json in src/dawn at some point. Maybe we can do this directly for gpu_info.json?",
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d98eb570_dfaca63a",
+        "filename": "gpu_info.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-26T07:29:42Z",
+      "side": 1,
+      "message": "Aren\u0027t hex numbers supported without strings in JSON?",
+      "range": {
+        "startLine": 21,
+        "startChar": 13,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d33ebe39_a70dd431",
         "filename": "gpu_info.json",
         "patchSetId": 8
@@ -31,6 +122,41 @@
       "writtenOn": "2022-05-26T01:11:12Z",
       "side": 1,
       "message": "I know this doesn\u0027t need to be futureproof yet, but at some point I can imagine we might end up needing different device masks for different ranges of ids. I wonder if it might make sense to just build the masks into the values, like \"660?\", \"661?\", etc.? Unfortunately it makes the code generation for GetArchitecture harder.",
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39807ba7_d8d05914",
+        "filename": "gpu_info.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-26T07:29:42Z",
+      "side": 1,
+      "message": "I imagine that the logic for device IDs will become more complicated over time, but we can figure out what that happens.",
+      "parentUuid": "d33ebe39_a70dd431",
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd542936_7f5aba0a",
+        "filename": "gpu_info.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-26T07:29:42Z",
+      "side": 1,
+      "message": "I\u0027ve been wondering if we should have hierarchical architectures, here all generations of GCN are very similar so it could make sense. But probably overkill for now.",
       "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
