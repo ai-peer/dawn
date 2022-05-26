@@ -929,6 +929,12 @@ class Impl : public IntrinsicTable {
     /// Callback function when no overloads match.
     using OnNoMatch = std::function<void(Candidates)>;
 
+    /// Sorts the candidates based on their score, with the lowest (best-ranking) scores first.
+    static inline void SortCandidates(Candidates& candidates) {
+        std::stable_sort(candidates.begin(), candidates.end(),
+                         [&](const Candidate& a, const Candidate& b) { return a.score < b.score; });
+    }
+
     /// Attempts to find a single intrinsic overload that matches the provided argument types.
     /// @param intrinsic the intrinsic being called
     /// @param intrinsic_name the name of the intrinsic
@@ -976,12 +982,11 @@ class Impl : public IntrinsicTable {
                          const Candidates& candidates,
                          const char* intrinsic_name) const;
 
-    /// Raises an ICE when multiple overload candidates match, as this should never happen.
-    void ErrMultipleOverloadsMatched(size_t num_matched,
-                                     const char* intrinsic_name,
-                                     const std::vector<const sem::Type*>& args,
-                                     TemplateState templates,
-                                     Candidates candidates) const;
+    /// Raises an an error when no overload is a clear winner of overload resolution
+    void ErrAmbiguousOverload(const char* intrinsic_name,
+                              const std::vector<const sem::Type*>& args,
+                              TemplateState templates,
+                              Candidates candidates) const;
 
     ProgramBuilder& builder;
     Matchers matchers;
@@ -1277,32 +1282,66 @@ IntrinsicPrototype Impl::MatchIntrinsic(const IntrinsicInfo& intrinsic,
     }
 
     // Sort the candidates with the most promising first
-    std::stable_sort(candidates.begin(), candidates.end(),
-                     [&](const Candidate& a, const Candidate& b) { return a.score < b.score; });
+    SortCandidates(candidates);
 
     // How many candidates matched?
-    switch (num_matched) {
-        case 0:
-            on_no_match(std::move(candidates));
-            return {};
-        case 1:
-            break;
-        default:
-            // Note: Currently the intrinsic table does not contain any overloads which may result
-            // in ambiguities, so here we call ErrMultipleOverloadsMatched() which will produce and
-            // ICE. If we end up in the situation where this is unavoidable, we'll need to perform
-            // further overload resolution as described in
-            // https://www.w3.org/TR/WGSL/#overload-resolution-section.
-            ErrMultipleOverloadsMatched(num_matched, intrinsic_name, args, templates, candidates);
+    if (num_matched == 0) {
+        on_no_match(std::move(candidates));
+        return {};
     }
 
-    auto match = candidates[0];
+    Candidate* match = nullptr;
+
+    if (num_matched == 1) {
+        match = &candidates[0];
+    } else {
+        std::vector<uint32_t> best_ranks(args.size(), 0xffffffff);
+
+        for (auto& candidate : candidates) {
+            if (candidate.score > 0) {
+                break;  // Candidates are sorted by score, so we can break here.
+            }
+            bool some_won = false;   // An argument ranked less than the 'best' overload's argument
+            bool some_lost = false;  // An argument ranked more than the 'best' overload's argument
+            for (size_t i = 0; i < args.size(); i++) {
+                auto rank = sem::Type::ConversionRank(args[i], candidate.parameters[i].type);
+                if (best_ranks[i] > rank) {
+                    best_ranks[i] = rank;
+                    some_won = true;
+                } else if (best_ranks[i] < rank) {
+                    some_lost = true;
+                }
+            }
+            if (some_won) {
+                if (!some_lost) {
+                    if (match) {
+                        // Mark the previous best candidate as no longer being in the running
+                        match->score = 1;
+                        num_matched--;
+                    }
+                    match = &candidate;  // This candidate is the new best
+                }
+            } else {
+                // This candidate is no longer in the running
+                candidate.score = 1;
+                num_matched--;
+            }
+        }
+
+        if (num_matched > 1) {
+            // Re-sort the candidates with the most promising first
+            SortCandidates(candidates);
+            // Raise an error
+            ErrAmbiguousOverload(intrinsic_name, args, templates, candidates);
+            return {};
+        }
+    }
 
     // Build the return type
     const sem::Type* return_type = nullptr;
-    if (auto* indices = match.overload->return_matcher_indices) {
+    if (auto* indices = match->overload->return_matcher_indices) {
         Any any;
-        return_type = Match(match.templates, match.overload, indices).Type(&any);
+        return_type = Match(match->templates, match->overload, indices).Type(&any);
         if (!return_type) {
             TINT_ICE(Resolver, builder.Diagnostics()) << "MatchState.Match() returned null";
             return {};
@@ -1311,7 +1350,7 @@ IntrinsicPrototype Impl::MatchIntrinsic(const IntrinsicInfo& intrinsic,
         return_type = builder.create<sem::Void>();
     }
 
-    return IntrinsicPrototype{match.overload, return_type, std::move(match.parameters)};
+    return IntrinsicPrototype{match->overload, return_type, std::move(match->parameters)};
 }
 
 Impl::Candidate Impl::ScoreOverload(const OverloadInfo* overload,
@@ -1497,13 +1536,12 @@ std::string MatchState::NumName() {
     return matcher->String(this);
 }
 
-void Impl::ErrMultipleOverloadsMatched(size_t num_matched,
-                                       const char* intrinsic_name,
-                                       const std::vector<const sem::Type*>& args,
-                                       TemplateState templates,
-                                       Candidates candidates) const {
+void Impl::ErrAmbiguousOverload(const char* intrinsic_name,
+                                const std::vector<const sem::Type*>& args,
+                                TemplateState templates,
+                                Candidates candidates) const {
     std::stringstream ss;
-    ss << num_matched << " overloads matched " << intrinsic_name;
+    ss << "ambiguous overload while attempting to match " << intrinsic_name;
     for (size_t i = 0; i < std::numeric_limits<size_t>::max(); i++) {
         if (auto* ty = templates.Type(i)) {
             ss << ((i == 0) ? "<" : ", ") << ty->FriendlyName(builder.Symbols());

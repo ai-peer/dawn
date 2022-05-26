@@ -85,13 +85,12 @@
 
 namespace tint::resolver {
 
-Resolver::Resolver(ProgramBuilder* builder, bool enable_abstract_numerics)
+Resolver::Resolver(ProgramBuilder* builder)
     : builder_(builder),
       diagnostics_(builder->Diagnostics()),
       intrinsic_table_(IntrinsicTable::Create(*builder)),
       sem_(builder, dependencies_),
-      validator_(builder, sem_),
-      enable_abstract_numerics_(enable_abstract_numerics) {}
+      validator_(builder, sem_) {}
 
 Resolver::~Resolver() = default;
 
@@ -1632,10 +1631,7 @@ sem::Expression* Resolver::Literal(const ast::LiteralExpression* literal) {
         [&](const ast::IntLiteralExpression* i) -> sem::Type* {
             switch (i->suffix) {
                 case ast::IntLiteralExpression::Suffix::kNone:
-                    if (enable_abstract_numerics_) {
-                        return builder_->create<sem::AbstractInt>();
-                    }
-                    return builder_->create<sem::I32>();
+                    return builder_->create<sem::AbstractInt>();
                 case ast::IntLiteralExpression::Suffix::kI:
                     return builder_->create<sem::I32>();
                 case ast::IntLiteralExpression::Suffix::kU:
@@ -1644,8 +1640,7 @@ sem::Expression* Resolver::Literal(const ast::LiteralExpression* literal) {
             return nullptr;
         },
         [&](const ast::FloatLiteralExpression* f) -> sem::Type* {
-            if (f->suffix == ast::FloatLiteralExpression::Suffix::kNone &&
-                enable_abstract_numerics_) {
+            if (f->suffix == ast::FloatLiteralExpression::Suffix::kNone) {
                 return builder_->create<sem::AbstractFloat>();
             }
             return builder_->create<sem::F32>();
@@ -2030,7 +2025,7 @@ sem::Array* Resolver::Array(const ast::Array* arr) {
     // sem::Array uses a size of 0 for a runtime-sized array.
     uint32_t count = 0;
     if (auto* count_expr = arr->count) {
-        auto* count_sem = Expression(count_expr);
+        const auto* count_sem = Materialize(Expression(count_expr));
         if (!count_sem) {
             return nullptr;
         }
@@ -2409,14 +2404,23 @@ sem::Statement* Resolver::AssignmentStatement(const ast::AssignmentStatement* st
             return false;
         }
 
-        auto* rhs = Expression(stmt->rhs);
+        const bool is_phony_assignment = stmt->lhs->Is<ast::PhonyExpression>();
+
+        const auto* rhs = Expression(stmt->rhs);
         if (!rhs) {
             return false;
         }
 
+        if (!is_phony_assignment) {
+            rhs = Materialize(rhs, lhs->Type()->UnwrapRef());
+            if (!rhs) {
+                return false;
+            }
+        }
+
         auto& behaviors = sem->Behaviors();
         behaviors = rhs->Behaviors();
-        if (!stmt->lhs->Is<ast::PhonyExpression>()) {
+        if (!is_phony_assignment) {
             behaviors.Add(lhs->Behaviors());
         }
 
