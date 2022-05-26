@@ -43,7 +43,9 @@ class Lexer {
     /// @returns uninitialized token on success, or error
     Token skip_comment();
 
-    Token build_token_from_int_if_possible(Source source, size_t start, int32_t base);
+    enum class IntegerBase { kDec, kHex };
+
+    Token build_token_from_int_if_possible(Source source, bool negative, IntegerBase base);
 
     Token check_keyword(const Source&, std::string_view);
 
