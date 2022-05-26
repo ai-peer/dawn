@@ -258,7 +258,7 @@ utils::Result<sem::Constant> Resolver::ConvertValue(const sem::Constant& value,
         return value;
     }
 
-    auto* el_ty = sem::Type::ElementOf(ty);
+    auto* el_ty = sem::Type::ElementOf(ty->UnwrapRef());
     if (el_ty == nullptr) {
         return sem::Constant{};
     }
