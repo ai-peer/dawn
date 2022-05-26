@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61326d6b_407d29a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-26T05:36:32Z",
+      "side": 1,
+      "message": "Will do another more thorough review next week after the initial batch of comments are resolved!",
+      "revId": "4025e7c7bb078b9a599137f8aa683a4de7f6b17c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41c223c4_304d4452",
@@ -99,6 +116,52 @@
       "writtenOn": "2022-05-26T01:17:54Z",
       "side": 1,
       "message": "mmm... looking at this again, it\u0027s awkward to need to set this just to perform the flush. feels like the frontend PipelineCache interface is not the best fit for what we\u0027re doing for D3D12. could we just load from the cache directly here and use it to set the blob data in the descriptor?\n\nI think this would be both a lot less code, and simpler and easier to understand.",
+      "revId": "4025e7c7bb078b9a599137f8aa683a4de7f6b17c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77411262_e3bafe39",
+        "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-26T05:36:32Z",
+      "side": 1,
+      "message": "nit. maybe call the kComputeShaderMultipleEntryPoints and rename the simple one to kComputeShaderDefault?\n\nIdeally I wanted to move these to a central location/file for testing purposes in general. I haven\u0027t figured out a nice way to do it yet so this is fine!",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 7
+      },
+      "revId": "4025e7c7bb078b9a599137f8aa683a4de7f6b17c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ec7c568_fd8f1df3",
+        "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-26T05:36:32Z",
+      "side": 1,
+      "message": "nit. These all look shader related so maybe adding shader somewhere in the name?",
+      "range": {
+        "startLine": 352,
+        "startChar": 35,
+        "endLine": 352,
+        "endChar": 71
+      },
       "revId": "4025e7c7bb078b9a599137f8aa683a4de7f6b17c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
