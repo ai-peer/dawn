@@ -91,6 +91,30 @@
       },
       "revId": "42bb1dd42b3b1c760432e67e3f66d4bdd6dd1eb7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "546cb2c9_d7a74658",
+        "filename": "src/dawn/native/vulkan/VulkanFunctions.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-26T23:47:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae62193b_eab741fc",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 40
+      },
+      "revId": "42bb1dd42b3b1c760432e67e3f66d4bdd6dd1eb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
