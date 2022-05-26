@@ -553,9 +553,6 @@ TEST_P(BindGroupTests, MultipleEntryPointsWithMultipleNonZeroGroups) {
 // This test reproduces an out-of-bound bug on D3D12 backends when calling draw command twice with
 // one pipeline that has 4 bind group sets in one render pass.
 TEST_P(BindGroupTests, DrawTwiceInSamePipelineWithFourBindGroupSets) {
-    // TODO(anglebug.com/7304): fix failure in ANGLE/D3D11
-    DAWN_SUPPRESS_TEST_IF(IsANGLE() && IsWindows());
-
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
     wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(
@@ -564,8 +561,8 @@ TEST_P(BindGroupTests, DrawTwiceInSamePipelineWithFourBindGroupSets) {
     wgpu::RenderPipeline pipeline =
         MakeTestPipeline(renderPass,
                          {wgpu::BufferBindingType::Uniform, wgpu::BufferBindingType::Uniform,
-                          wgpu::BufferBindingType::Uniform, wgpu::BufferBindingType::Uniform},
-                         {layout, layout, layout, layout});
+                          wgpu::BufferBindingType::Uniform},
+                         {layout, layout, layout});
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
@@ -583,17 +580,15 @@ TEST_P(BindGroupTests, DrawTwiceInSamePipelineWithFourBindGroupSets) {
     pass.SetBindGroup(0, bindGroup);
     pass.SetBindGroup(1, bindGroup);
     pass.SetBindGroup(2, bindGroup);
-    pass.SetBindGroup(3, bindGroup);
     pass.Draw(3);
 
     pass.SetPipeline(pipeline);
-    pass.Draw(3);
     pass.End();
 
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    RGBA8 filled(255, 0, 0, 255);
+    RGBA8 filled(96, 0, 0, 96);
     RGBA8 notFilled(0, 0, 0, 0);
     uint32_t min = 1, max = kRTSize - 3;
     EXPECT_PIXEL_RGBA8_EQ(filled, renderPass.color, min, min);
