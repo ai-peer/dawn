@@ -677,45 +677,87 @@ Token Lexer::try_hex_float() {
             result_f64};
 }
 
-Token Lexer::build_token_from_int_if_possible(Source source, size_t start, int32_t base) {
-    int64_t res = strtoll(&at(start), nullptr, base);
+Token Lexer::build_token_from_int_if_possible(Source source, bool negative, IntegerBase base) {
+    AInt value;
+    bool overflowed = false;
 
-    if (matches(pos(), "u")) {
-        if (CheckedConvert<u32>(AInt(res))) {
-            advance(1);
-            end_source(source);
-            return {Token::Type::kIntLiteral_U, source, res};
-        }
-        return {Token::Type::kError, source, "value cannot be represented as 'u32'"};
-    }
-
-    if (matches(pos(), "i")) {
-        if (CheckedConvert<i32>(AInt(res))) {
-            advance(1);
-            end_source(source);
-            return {Token::Type::kIntLiteral_I, source, res};
-        }
-        return {Token::Type::kError, source, "value cannot be represented as 'i32'"};
-    }
-
-    // TODO(crbug.com/tint/1504): Properly support abstract int:
-    // Change `AbstractIntType` to `int64_t`, update errors to say 'abstract int'.
-    using AbstractIntType = i32;
-    if (CheckedConvert<AbstractIntType>(AInt(res))) {
+    auto abstract_int = [&]() -> Token {
         end_source(source);
-        return {Token::Type::kIntLiteral, source, res};
+        if (overflowed) {
+            return {Token::Type::kError, source, "value cannot be represented as 'abstract-int'"};
+        }
+        return {Token::Type::kIntLiteral, source, value};
+    };
+
+    while (auto c = at(pos())) {
+        switch (c) {
+            case 'u': {
+                advance(1);
+                end_source(source);
+                if (CheckedConvert<u32>(AInt(value))) {
+                    return {Token::Type::kIntLiteral_U, source, value};
+                }
+                return {Token::Type::kError, source, "value cannot be represented as 'u32'"};
+            }
+            case 'i': {
+                advance(1);
+                end_source(source);
+                if (CheckedConvert<i32>(AInt(value))) {
+                    return {Token::Type::kIntLiteral_I, source, value};
+                }
+                return {Token::Type::kError, source, "value cannot be represented as 'i32'"};
+            }
+            default: {
+                switch (base) {
+                    case IntegerBase::kHex: {
+                        AInt nibble;
+                        if (c >= '0' && c <= '9') {
+                            nibble = AInt(c - static_cast<int64_t>('0'));
+                        } else if (c >= 'a' && c <= 'f') {
+                            nibble = AInt(10 + (c - static_cast<int64_t>('a')));
+                        } else if (c >= 'A' && c <= 'F') {
+                            nibble = AInt(10 + (c - static_cast<int64_t>('A')));
+                        } else {
+                            return abstract_int();
+                        }
+                        advance(1);
+                        if (auto v = CheckedMadd(value, AInt(16), negative ? -nibble : nibble)) {
+                            value = v.value();
+                        } else {
+                            overflowed = true;
+                        }
+                        break;
+                    }
+                    case IntegerBase::kDec: {
+                        if (c < '0' || c > '9') {
+                            return abstract_int();
+                        }
+                        advance(1);
+                        auto dec = AInt(c - static_cast<int64_t>('0'));
+                        if (auto v = CheckedMadd(value, AInt(10), negative ? -dec : dec)) {
+                            value = v.value();
+                        } else {
+                            overflowed = true;
+                        }
+                        break;
+                    }
+                }
+                break;
+            }
+        }
     }
-    return {Token::Type::kError, source, "value cannot be represented as 'i32'"};
+    return abstract_int();
 }
 
 Token Lexer::try_hex_integer() {
-    constexpr size_t kMaxDigits = 8;  // Valid for both 32-bit integer types
     auto start = pos();
     auto end = pos();
 
     auto source = begin_source();
 
+    bool negative = false;
     if (matches(end, "-")) {
+        negative = true;
         end++;
     }
 
@@ -725,35 +767,25 @@ Token Lexer::try_hex_integer() {
         return {};
     }
 
-    auto first = end;
-    while (!is_eol() && is_hex(at(end))) {
-        end++;
+    advance(end - start);
 
-        auto digits = end - first;
-        if (digits > kMaxDigits) {
-            return {Token::Type::kError, source,
-                    "integer literal (" + std::string{substr(start, end - 1 - start)} +
-                        "...) has too many digits"};
-        }
-    }
-    if (first == end) {
+    if (!is_hex(at(end))) {
         return {Token::Type::kError, source,
                 "integer or float hex literal has no significant digits"};
     }
 
-    advance(end - start);
-
-    return build_token_from_int_if_possible(source, start, 16);
+    return build_token_from_int_if_possible(source, negative, IntegerBase::kHex);
 }
 
 Token Lexer::try_integer() {
-    constexpr size_t kMaxDigits = 10;  // Valid for both 32-bit integer types
     auto start = pos();
     auto end = start;
 
     auto source = begin_source();
 
+    bool negative = false;
     if (matches(end, "-")) {
+        negative = true;
         end++;
     }
 
@@ -767,26 +799,13 @@ Token Lexer::try_integer() {
     auto next = first + 1;
     if (next < length()) {
         if (at(first) == '0' && is_digit(at(next))) {
-            return {Token::Type::kError, source,
-                    "integer literal (" + std::string{substr(start, end - 1 - start)} +
-                        "...) has leading 0s"};
+            return {Token::Type::kError, source, "integer literal cannot have leading 0s"};
         }
-    }
-
-    while (end < length() && is_digit(at(end))) {
-        auto digits = end - first;
-        if (digits > kMaxDigits) {
-            return {Token::Type::kError, source,
-                    "integer literal (" + std::string{substr(start, end - 1 - start)} +
-                        "...) has too many digits"};
-        }
-
-        end++;
     }
 
     advance(end - start);
 
-    return build_token_from_int_if_possible(source, start, 10);
+    return build_token_from_int_if_possible(source, negative, IntegerBase::kDec);
 }
 
 Token Lexer::try_ident() {
