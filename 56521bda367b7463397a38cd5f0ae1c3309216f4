@@ -39,6 +39,30 @@
       },
       "revId": "56521bda367b7463397a38cd5f0ae1c3309216f4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e7ffb47_96c4cd67",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-26T20:38:53Z",
+      "side": 1,
+      "message": "Done, though with an alternative approach now - all LogMessages are suppressed which also helps reduce log spam about injected errors",
+      "parentUuid": "e33291fa_95187151",
+      "range": {
+        "startLine": 568,
+        "startChar": 0,
+        "endLine": 569,
+        "endChar": 64
+      },
+      "revId": "56521bda367b7463397a38cd5f0ae1c3309216f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
