@@ -13,6 +13,8 @@
 // limitations under the License.
 
 #include <cmath>
+#include <tuple>
+#include <vector>
 
 #include "src/tint/program_builder.h"
 
@@ -142,6 +144,93 @@ TEST(NumberTest, QuantizeF16) {
     EXPECT_EQ(f16(-inf), -inf);
     EXPECT_TRUE(std::isnan(f16(nan)));
 }
+
+using BinaryCheckedCase = std::tuple<std::optional<AInt>, AInt, AInt>;
+
+#define OVERFLOW \
+    {}
+
+using CheckedAddTest = testing::TestWithParam<BinaryCheckedCase>;
+TEST_P(CheckedAddTest, Test) {
+    auto expect = std::get<0>(GetParam());
+    auto a = std::get<1>(GetParam());
+    auto b = std::get<2>(GetParam());
+    EXPECT_EQ(CheckedAdd(a, b), expect) << std::hex << "0x" << a << " * 0x" << b;
+    EXPECT_EQ(CheckedAdd(b, a), expect) << std::hex << "0x" << a << " * 0x" << b;
+}
+INSTANTIATE_TEST_SUITE_P(
+    CheckedAddTest,
+    CheckedAddTest,
+    testing::ValuesIn(std::vector<BinaryCheckedCase>{
+        {AInt(0), AInt(0), AInt(0)},
+        {AInt(1), AInt(1), AInt(0)},
+        {AInt(2), AInt(1), AInt(1)},
+        {AInt(0), AInt(-1), AInt(1)},
+        {AInt(3), AInt(2), AInt(1)},
+        {AInt(-1), AInt(-2), AInt(1)},
+        {AInt(0x300), AInt(0x100), AInt(0x200)},
+        {AInt(0x100), AInt(-0x100), AInt(0x200)},
+        {AInt(AInt::kHighest), AInt(1), AInt(AInt::kHighest - 1)},
+        {AInt(AInt::kLowest), AInt(-1), AInt(AInt::kLowest + 1)},
+        {AInt(AInt::kHighest), AInt(0x7fffffff00000000ll), AInt(0x00000000ffffffffll)},
+        {AInt(AInt::kHighest), AInt(AInt::kHighest), AInt(0)},
+        {AInt(AInt::kLowest), AInt(AInt::kLowest), AInt(0)},
+        {OVERFLOW, AInt(1), AInt(AInt::kHighest)},
+        {OVERFLOW, AInt(-1), AInt(AInt::kLowest)},
+        {OVERFLOW, AInt(2), AInt(AInt::kHighest)},
+        {OVERFLOW, AInt(-2), AInt(AInt::kLowest)},
+        {OVERFLOW, AInt(10000), AInt(AInt::kHighest)},
+        {OVERFLOW, AInt(-10000), AInt(AInt::kLowest)},
+        {OVERFLOW, AInt(AInt::kHighest), AInt(AInt::kHighest)},
+        {OVERFLOW, AInt(AInt::kLowest), AInt(AInt::kLowest)},
+        ////////////////////////////////////////////////////////////////////////
+    }));
+
+using CheckedMulTest = testing::TestWithParam<BinaryCheckedCase>;
+TEST_P(CheckedMulTest, Test) {
+    auto expect = std::get<0>(GetParam());
+    auto a = std::get<1>(GetParam());
+    auto b = std::get<2>(GetParam());
+    EXPECT_EQ(CheckedMul(a, b), expect) << std::hex << "0x" << a << " * 0x" << b;
+    EXPECT_EQ(CheckedMul(b, a), expect) << std::hex << "0x" << a << " * 0x" << b;
+}
+INSTANTIATE_TEST_SUITE_P(
+    CheckedMulTest,
+    CheckedMulTest,
+    testing::ValuesIn(std::vector<BinaryCheckedCase>{
+        {AInt(0), AInt(0), AInt(0)},
+        {AInt(0), AInt(1), AInt(0)},
+        {AInt(1), AInt(1), AInt(1)},
+        {AInt(-1), AInt(-1), AInt(1)},
+        {AInt(2), AInt(2), AInt(1)},
+        {AInt(-2), AInt(-2), AInt(1)},
+        {AInt(0x20000), AInt(0x100), AInt(0x200)},
+        {AInt(-0x20000), AInt(-0x100), AInt(0x200)},
+        {AInt(0x4000000000000000ll), AInt(0x80000000ll), AInt(0x80000000ll)},
+        {AInt(0x4000000000000000ll), AInt(-0x80000000ll), AInt(-0x80000000ll)},
+        {AInt(0x1000000000000000ll), AInt(0x40000000ll), AInt(0x40000000ll)},
+        {AInt(-0x1000000000000000ll), AInt(-0x40000000ll), AInt(0x40000000ll)},
+        {AInt(0x100000000000000ll), AInt(0x1000000), AInt(0x100000000ll)},
+        {AInt(0x2000000000000000ll), AInt(0x1000000000000000ll), AInt(2)},
+        {AInt(-0x2000000000000000ll), AInt(0x1000000000000000ll), AInt(-2)},
+        {AInt(-0x2000000000000000ll), AInt(-0x1000000000000000ll), AInt(2)},
+        {AInt(-0x2000000000000000ll), AInt(0x1000000000000000ll), AInt(-2)},
+        {AInt(0x4000000000000000ll), AInt(0x1000000000000000ll), AInt(4)},
+        {AInt(-0x4000000000000000ll), AInt(0x1000000000000000ll), AInt(-4)},
+        {AInt(-0x4000000000000000ll), AInt(-0x1000000000000000ll), AInt(4)},
+        {AInt(-0x4000000000000000ll), AInt(0x1000000000000000ll), AInt(-4)},
+        {AInt(-0x8000000000000000ll), AInt(0x1000000000000000ll), AInt(-8)},
+        {AInt(-0x8000000000000000ll), AInt(-0x1000000000000000ll), AInt(8)},
+        {AInt(0), AInt(AInt::kHighest), AInt(0)},
+        {AInt(0), AInt(AInt::kLowest), AInt(0)},
+        {OVERFLOW, AInt(0x1000000000000000ll), AInt(8)},
+        {OVERFLOW, AInt(-0x1000000000000000ll), AInt(-8)},
+        {OVERFLOW, AInt(0x800000000000000ll), AInt(0x10)},
+        {OVERFLOW, AInt(0x80000000ll), AInt(0x100000000ll)},
+        {OVERFLOW, AInt(AInt::kHighest), AInt(AInt::kHighest)},
+        {OVERFLOW, AInt(AInt::kHighest), AInt(AInt::kLowest)},
+        ////////////////////////////////////////////////////////////////////////
+    }));
 
 }  // namespace
 }  // namespace tint
