@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dfa069c_4c114180",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-26T15:09:54Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb73b709_1913fbc6",
@@ -65,6 +82,29 @@
       "writtenOn": "2022-05-26T07:29:42Z",
       "side": 1,
       "message": "optional: IMHO the enum class like that is better than the current interface of gpu_info. We could change the interface in a follow up if that\u0027s interesting to you.",
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "898561e9_108cb8e4",
+        "filename": "generator/templates/dawn/common/GPUInfo.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-26T15:09:54Z",
+      "side": 1,
+      "message": "unit: these return strings that are compile-time constants - so I think we could have it return const char* to save an allocation",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 76
+      },
       "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
