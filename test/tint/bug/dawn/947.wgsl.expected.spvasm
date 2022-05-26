@@ -145,11 +145,11 @@ bug/dawn/947.wgsl:55:33 note: reading from user-defined input 'texcoord' may res
          %59 = OpFSub %v2float %56 %58
          %60 = OpCompositeExtract %float %59 0
          %61 = OpCompositeExtract %float %59 1
-         %62 = OpCompositeConstruct %v4float %60 %61 %float_0 %float_1
+         %62 = OpCompositeConstruct %v4float %60 %61 %15 %float_1
                OpStore %52 %62
          %65 = OpAccessChain %_ptr_Uniform_float %uniforms %uint_0 %uint_1
          %66 = OpLoad %float %65
-         %67 = OpFOrdLessThan %bool %66 %float_0
+         %67 = OpFOrdLessThan %bool %66 %15
                OpStore %flipY %67
          %72 = OpLoad %bool %flipY
                OpSelectionMerge %73 None
