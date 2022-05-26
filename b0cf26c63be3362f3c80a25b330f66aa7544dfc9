@@ -16,6 +16,23 @@
       "message": "Austin, Corentin: PTAL. Thanks!",
       "revId": "b0cf26c63be3362f3c80a25b330f66aa7544dfc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6321e5c1_d3959a69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-26T14:59:33Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b0cf26c63be3362f3c80a25b330f66aa7544dfc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
