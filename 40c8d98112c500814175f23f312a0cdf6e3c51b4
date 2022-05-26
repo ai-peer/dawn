@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b6a6288_3cbcd61b",
+        "filename": "src/dawn/native/PipelineCache.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-05-26T00:10:02Z",
+      "side": 1,
+      "message": "Hmm I\u0027m seeing an unexpected ~CachedBlob call at the last return. I assume the local object should be optimized to use copy elision here to use move and destructor shouldn\u0027t be called. I don\u0027t know what else is missing.\n```\nCachedBlob BlobCache::LoadInternal(const CacheKey\u0026 key) {\n    if (mCache \u003d\u003d nullptr) {\n        return CachedBlob::Create(0);\n    }\n    const size_t expectedSize \u003d mCache-\u003eLoadData(key.data(), key.size(), nullptr, 0);\n    CachedBlob result \u003d CachedBlob::Create(expectedSize);\n    if (expectedSize \u003e 0) {\n        const size_t actualSize \u003d\n            mCache-\u003eLoadData(key.data(), key.size(), result.Data(), expectedSize);\n        ASSERT(expectedSize \u003d\u003d actualSize);\n    }\n    return result;\n}\n```\n\nHere are the copy constructor modifiers of CachedBlob:\n```\nCachedBlob(const CachedBlob\u0026) \u003d delete;\nCachedBlob\u0026 operator\u003d(const CachedBlob\u0026) \u003d delete;\n\nCachedBlob(CachedBlob\u0026\u0026) \u003d default;\nCachedBlob\u0026 operator\u003d(CachedBlob\u0026\u0026) \u003d default;\n```",
+      "parentUuid": "20baa5d1_9020abce",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0383b81b_2f6851b8",
         "filename": "src/dawn/native/d3d12/CacheKeyD3D12.cpp",
         "patchSetId": 8
