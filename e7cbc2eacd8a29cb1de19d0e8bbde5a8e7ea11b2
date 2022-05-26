@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9adff16a_00bef888",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-26T16:35:07Z",
+      "side": 1,
+      "message": "Thanks.\nAs discussed, we want this functional change in the spec.\nSee https://github.com/gpuweb/gpuweb/issues/2953 ",
+      "revId": "e7cbc2eacd8a29cb1de19d0e8bbde5a8e7ea11b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
