@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "455257fa_125985e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-26T21:11:53Z",
+      "side": 1,
+      "message": "std::function has a bit higher memory footprint than a plain old pointer. And, proxying through it makes every vk* call slightly slower.",
+      "parentUuid": "c3a85982_28e86e99",
+      "revId": "42bb1dd42b3b1c760432e67e3f66d4bdd6dd1eb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae62193b_eab741fc",
         "filename": "src/dawn/native/vulkan/VulkanFunctions.h",
         "patchSetId": 4
