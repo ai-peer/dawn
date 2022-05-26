@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c492a88f_18011e40",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-26T02:19:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e578fb71_4e11f8b5",
+      "revId": "2bc97484f2ecfd36d8c65c113bf716e5bff8bda9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49cb4b42_967b4d18",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-05-25T13:38:32Z",
       "side": 1,
       "message": "u-u-nit: we can have an early out if !IsFeatureEnabled. or even\n\n if ((feature \u003d\u003d DP4A || F16) \u0026\u0026 !DXC) {return false;}\n return DeviceBase::IsFeatureEnabled();",
+      "revId": "2bc97484f2ecfd36d8c65c113bf716e5bff8bda9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf1e5ebe_d6a5617c",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-26T02:19:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49cb4b42_967b4d18",
       "revId": "2bc97484f2ecfd36d8c65c113bf716e5bff8bda9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f234de36_2466287a",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-26T02:19:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6476129d_c4340ee5",
+      "revId": "2bc97484f2ecfd36d8c65c113bf716e5bff8bda9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b93157dd_a4d6301c",
@@ -86,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "591a2b86_a1fd62eb",
+        "filename": "src/dawn/native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-26T02:19:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b93157dd_a4d6301c",
+      "revId": "2bc97484f2ecfd36d8c65c113bf716e5bff8bda9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "849be235_addf2141",
@@ -99,6 +171,24 @@
       "writtenOn": "2022-05-25T13:38:32Z",
       "side": 1,
       "message": "Did you mean to also add querying to fill shaderIntegerDotProductFeatures ?",
+      "revId": "2bc97484f2ecfd36d8c65c113bf716e5bff8bda9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6941481_09388231",
+        "filename": "src/dawn/native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-05-26T02:19:57Z",
+      "side": 1,
+      "message": "Done\n\nDo you mean shaderIntegerDotProductProperties?",
+      "parentUuid": "849be235_addf2141",
       "revId": "2bc97484f2ecfd36d8c65c113bf716e5bff8bda9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
