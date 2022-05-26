@@ -85,13 +85,12 @@
 
 namespace tint::resolver {
 
-Resolver::Resolver(ProgramBuilder* builder, bool enable_abstract_numerics)
+Resolver::Resolver(ProgramBuilder* builder)
     : builder_(builder),
       diagnostics_(builder->Diagnostics()),
       intrinsic_table_(IntrinsicTable::Create(*builder)),
       sem_(builder, dependencies_),
-      validator_(builder, sem_),
-      enable_abstract_numerics_(enable_abstract_numerics) {}
+      validator_(builder, sem_) {}
 
 Resolver::~Resolver() = default;
 
@@ -319,11 +318,7 @@ sem::Variable* Resolver::Variable(const ast::Variable* var,
 
     // Does the variable have a constructor?
     if (var->constructor) {
-        auto* ctor = Expression(var->constructor);
-        if (!ctor) {
-            return nullptr;
-        }
-        rhs = Materialize(ctor, storage_ty);
+        rhs = Materialize(Expression(var->constructor), storage_ty);
         if (!rhs) {
             return nullptr;
         }
@@ -737,7 +732,7 @@ bool Resolver::WorkgroupSize(const ast::Function* func) {
             continue;
         }
 
-        auto* expr_sem = Expression(expr);
+        const auto* expr_sem = Materialize(Expression(expr));
         if (!expr_sem) {
             return false;
         }
@@ -1107,6 +1102,10 @@ sem::Expression* Resolver::Expression(const ast::Expression* root) {
 
 const sem::Expression* Resolver::Materialize(const sem::Expression* expr,
                                              const sem::Type* target_type /* = nullptr */) {
+    if (!expr) {
+        return nullptr;  // Allow for Materialize(Expression(blah))
+    }
+
     // Helper for actually creating the the materialize node, performing the constant cast, updating
     // the ast -> sem binding, and performing validation.
     auto materialize = [&](const sem::Type* target_ty) -> sem::Materialize* {
@@ -1118,13 +1117,18 @@ const sem::Expression* Resolver::Materialize(const sem::Expression* expr,
         if (!expr_val->IsValid()) {
             TINT_ICE(Resolver, builder_->Diagnostics())
                 << decl->source
-                << " EvaluateConstantValue() returned invalid value for materialized "
-                   "value of type: "
-                << (expr->Type() ? expr->Type()->FriendlyName(builder_->Symbols()) : "<null>");
+                << "EvaluateConstantValue() returned invalid value for materialized value of type: "
+                << builder_->FriendlyName(expr->Type());
             return nullptr;
         }
         auto materialized_val = ConvertValue(expr_val.Get(), target_ty, decl->source);
         if (!materialized_val) {
+            return nullptr;
+        }
+        if (!materialized_val->IsValid()) {
+            TINT_ICE(Resolver, builder_->Diagnostics())
+                << decl->source << "ConvertValue(" << builder_->FriendlyName(expr_val->Type())
+                << " -> " << builder_->FriendlyName(target_ty) << ") returned invalid value";
             return nullptr;
         }
         auto* m =
@@ -1191,7 +1195,7 @@ bool Resolver::ShouldMaterializeArgument(const sem::Type* parameter_ty) const {
 }
 
 sem::Expression* Resolver::IndexAccessor(const ast::IndexAccessorExpression* expr) {
-    auto* idx = sem_.Get(expr->index);
+    auto* idx = Materialize(sem_.Get(expr->index));
     auto* obj = sem_.Get(expr->object);
     auto* obj_raw_ty = obj->Type();
     auto* obj_ty = obj_raw_ty->UnwrapRef();
@@ -1234,7 +1238,7 @@ sem::Expression* Resolver::IndexAccessor(const ast::IndexAccessorExpression* exp
 }
 
 sem::Expression* Resolver::Bitcast(const ast::BitcastExpression* expr) {
-    auto* inner = sem_.Get(expr->expr);
+    auto* inner = Materialize(sem_.Get(expr->expr));
     auto* ty = Type(expr->type);
     if (!ty) {
         return nullptr;
@@ -1611,10 +1615,7 @@ sem::Expression* Resolver::Literal(const ast::LiteralExpression* literal) {
         [&](const ast::IntLiteralExpression* i) -> sem::Type* {
             switch (i->suffix) {
                 case ast::IntLiteralExpression::Suffix::kNone:
-                    if (enable_abstract_numerics_) {
-                        return builder_->create<sem::AbstractInt>();
-                    }
-                    return builder_->create<sem::I32>();
+                    return builder_->create<sem::AbstractInt>();
                 case ast::IntLiteralExpression::Suffix::kI:
                     return builder_->create<sem::I32>();
                 case ast::IntLiteralExpression::Suffix::kU:
@@ -1623,8 +1624,7 @@ sem::Expression* Resolver::Literal(const ast::LiteralExpression* literal) {
             return nullptr;
         },
         [&](const ast::FloatLiteralExpression* f) -> sem::Type* {
-            if (f->suffix == ast::FloatLiteralExpression::Suffix::kNone &&
-                enable_abstract_numerics_) {
+            if (f->suffix == ast::FloatLiteralExpression::Suffix::kNone) {
                 return builder_->create<sem::AbstractFloat>();
             }
             return builder_->create<sem::F32>();
@@ -2009,7 +2009,7 @@ sem::Array* Resolver::Array(const ast::Array* arr) {
     // sem::Array uses a size of 0 for a runtime-sized array.
     uint32_t count = 0;
     if (auto* count_expr = arr->count) {
-        auto* count_sem = Expression(count_expr);
+        const auto* count_sem = Materialize(Expression(count_expr));
         if (!count_sem) {
             return nullptr;
         }
@@ -2268,11 +2268,7 @@ sem::Statement* Resolver::ReturnStatement(const ast::ReturnStatement* stmt) {
 
         const sem::Type* value_ty = nullptr;
         if (auto* value = stmt->value) {
-            const auto* expr = Expression(value);
-            if (!expr) {
-                return false;
-            }
-            expr = Materialize(expr, current_function_->ReturnType());
+            const auto* expr = Materialize(Expression(value), current_function_->ReturnType());
             if (!expr) {
                 return false;
             }
@@ -2392,14 +2388,23 @@ sem::Statement* Resolver::AssignmentStatement(const ast::AssignmentStatement* st
             return false;
         }
 
-        auto* rhs = Expression(stmt->rhs);
+        const bool is_phony_assignment = stmt->lhs->Is<ast::PhonyExpression>();
+
+        const auto* rhs = Expression(stmt->rhs);
         if (!rhs) {
             return false;
         }
 
+        if (!is_phony_assignment) {
+            rhs = Materialize(rhs, lhs->Type()->UnwrapRef());
+            if (!rhs) {
+                return false;
+            }
+        }
+
         auto& behaviors = sem->Behaviors();
         behaviors = rhs->Behaviors();
-        if (!stmt->lhs->Is<ast::PhonyExpression>()) {
+        if (!is_phony_assignment) {
             behaviors.Add(lhs->Behaviors());
         }
 
