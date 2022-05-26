@@ -178,6 +178,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da3fb889_14304179",
+        "filename": "src/dawn/native/PipelineCache.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-05-26T00:56:38Z",
+      "side": 1,
+      "message": "Some article says compiler has limitations on copy elision optimization: https://wolchok.org/posts/sad-truth-about-cxx-copy-elision/\n\nTurns out changing to this could get rid of the unwanted destruction:\n```\nCachedBlob BlobCache::LoadInternal(const CacheKey\u0026 key) {\n    if (mCache \u003d\u003d nullptr) {\n        return CachedBlob::Create(0);\n    }\n    const size_t expectedSize \u003d mCache-\u003eLoadData(key.data(), key.size(), nullptr, 0);\n    if (expectedSize \u003e 0) {\n        // Need to put this inside to trigger copy elision.\n        CachedBlob result \u003d CachedBlob::Create(expectedSize);\n        const size_t actualSize \u003d\n            mCache-\u003eLoadData(key.data(), key.size(), result.Data(), expectedSize);\n        ASSERT(expectedSize \u003d\u003d actualSize);\n        return result;\n    }\n    return CachedBlob::Create(0);\n}\n```",
+      "parentUuid": "9f3d838d_d12b1f51",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0383b81b_2f6851b8",
