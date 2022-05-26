@@ -162,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f3d838d_d12b1f51",
+        "filename": "src/dawn/native/PipelineCache.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-26T00:33:34Z",
+      "side": 1,
+      "message": "hm I\u0027m not sure - it looks OK to me. Perhaps it\u0027s calling the destructor on a moved-from variable? Should still be okay though since the moved-from variable should have had the deleter moved out as well",
+      "parentUuid": "5b6a6288_3cbcd61b",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0383b81b_2f6851b8",
         "filename": "src/dawn/native/d3d12/CacheKeyD3D12.cpp",
         "patchSetId": 8
