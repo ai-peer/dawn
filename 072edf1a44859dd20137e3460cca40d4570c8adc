@@ -122,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7166cdd_73c89cb2",
+        "filename": "generator/templates/dawn/common/GPUInfo.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-26T22:43:28Z",
+      "side": 1,
+      "message": "Took me a moment to understand what you\u0027re saying here, but I understand it to mean you\u0027d like to replace any current uses of `gpu_info::IsSomeArchitecture()` with `gpu_info::GetArchitecture() \u003d\u003d gpu_info::Architecture::SomeArchitecture`? If so, I agree that it would be a nice simplification but I would want to leave that for a follow-up.",
+      "parentUuid": "bc8775d7_b296d703",
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "898561e9_108cb8e4",
