@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41c223c4_304d4452",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-05-26T01:23:59Z",
+      "side": 1,
+      "message": "Oops, struggling with the platform specific forward declaration here. Will fix it next week...",
+      "revId": "4025e7c7bb078b9a599137f8aa683a4de7f6b17c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f99f493c_25631b87",
         "filename": "src/dawn/native/BlobCache.h",
         "patchSetId": 11
