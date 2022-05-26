@@ -246,6 +246,24 @@
       "parentUuid": "4b46b98f_19f1296d",
       "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "329a2bed_50e5d9ba",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-05-26T01:30:50Z",
+      "side": 1,
+      "message": "Submitted and merged, thanks all! I will create follow up CLs next.",
+      "parentUuid": "b36cd35a_c3ebc9b4",
+      "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
