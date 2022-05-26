@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a71a818d_d108163c",
+        "filename": "generator/dawn_gpu_info_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-26T22:40:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb73b709_1913fbc6",
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62841b31_ac15d593",
@@ -65,6 +83,24 @@
       "writtenOn": "2022-05-26T07:29:42Z",
       "side": 1,
       "message": "nit: You can do self.deviceMask \u003d json_data.get(\u0027deviceMask\u0027, None) to have a default value of None.\n\nAlso maybe we could assert that the device IDs all have the bits outside of the deviceMask to 0.",
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df1f04bc_ed8e5f16",
+        "filename": "generator/dawn_gpu_info_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-26T22:40:59Z",
+      "side": 1,
+      "message": "This is a great idea! I\u0027ve added asserts to the generator to check for bits being set outside the mask value and duplicate values.",
+      "parentUuid": "62841b31_ac15d593",
       "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +145,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc69c9f6_d96ac8ae",
+        "filename": "generator/templates/dawn/common/GPUInfo.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-26T22:40:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "898561e9_108cb8e4",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 76
+      },
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "532030c2_8439d979",
@@ -126,6 +186,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecab4ad2_77d72a1a",
+        "filename": "gpu_info.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-26T22:40:59Z",
+      "side": 1,
+      "message": "Done! Though I\u0027ll point out that my end goal is still to have it pulled in as an external dependency from a more public repo.",
+      "parentUuid": "532030c2_8439d979",
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d98eb570_dfaca63a",
@@ -139,6 +217,30 @@
       "writtenOn": "2022-05-26T07:29:42Z",
       "side": 1,
       "message": "Aren\u0027t hex numbers supported without strings in JSON?",
+      "range": {
+        "startLine": 21,
+        "startChar": 13,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f187b1c_3a483876",
+        "filename": "gpu_info.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-26T22:40:59Z",
+      "side": 1,
+      "message": "No, and I will never not be mad about that! 😡\n\nJSON5, which we use in Chromium, supports it. I was thinking about advocating for using it in Dawn for our JSON files. https://json5.org/",
+      "parentUuid": "d98eb570_dfaca63a",
       "range": {
         "startLine": 21,
         "startChar": 13,
@@ -180,6 +282,24 @@
       "side": 1,
       "message": "I imagine that the logic for device IDs will become more complicated over time, but we can figure out what that happens.",
       "parentUuid": "d33ebe39_a70dd431",
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1026a27_1eca1fd0",
+        "filename": "gpu_info.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-05-26T22:40:59Z",
+      "side": 1,
+      "message": "Right now this pattern covers all the devices I\u0027ve seen and does so without too much complexity. I\u0027m inclined to not make it more complicated till we see that it needs it.",
+      "parentUuid": "39807ba7_d8d05914",
       "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
