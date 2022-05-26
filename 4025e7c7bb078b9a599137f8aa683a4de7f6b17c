@@ -16,6 +16,74 @@
       "message": "Did the new Cachedblob refactor. Good for review now",
       "revId": "4025e7c7bb078b9a599137f8aa683a4de7f6b17c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b2f272a_bef87644",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-26T01:17:54Z",
+      "side": 1,
+      "message": "LGTM overall, but a suggestion for further simplification. feel free to just come back to this after the long weekend!",
+      "revId": "4025e7c7bb078b9a599137f8aa683a4de7f6b17c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f99f493c_25631b87",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-26T01:17:54Z",
+      "side": 1,
+      "message": "you\u0027ll need to forward declare these templates and classes, and then in the cpp file, only include d3d12_platform if that backend is enabled. Or - put it in a separate cpp file that\u0027s only included in the build on windows",
+      "revId": "4025e7c7bb078b9a599137f8aa683a4de7f6b17c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe9d2285_ca2cc68c",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-26T01:17:54Z",
+      "side": 1,
+      "message": "nit: declare these here, but put the `\u003d default` in the cpp file",
+      "revId": "4025e7c7bb078b9a599137f8aa683a4de7f6b17c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f75f4501_a47d923e",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-26T01:17:54Z",
+      "side": 1,
+      "message": "mmm... looking at this again, it\u0027s awkward to need to set this just to perform the flush. feels like the frontend PipelineCache interface is not the best fit for what we\u0027re doing for D3D12. could we just load from the cache directly here and use it to set the blob data in the descriptor?\n\nI think this would be both a lot less code, and simpler and easier to understand.",
+      "revId": "4025e7c7bb078b9a599137f8aa683a4de7f6b17c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
