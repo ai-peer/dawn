@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31e6362b_8c7485c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-26T15:16:50Z",
+      "side": 1,
+      "message": "whoops I tested this locally on the wrong target. It won\u0027t work as-is anyway since the define needs to be on the target that compiles WireCmd.",
+      "revId": "9ee8828375c13e13ff7721e92e892d1370c988c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
