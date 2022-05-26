@@ -60,7 +60,7 @@
       %v3int = OpTypeVector %int 3
       %v2int = OpTypeVector %int 2
      %v2uint = OpTypeVector %uint 2
-      %int_0 = OpConstant %int 0
+         %47 = OpConstantNull %int
 %_ptr_Function_v4float = OpTypePointer Function %v4float
          %51 = OpConstantNull %v4float
      %uint_0 = OpConstant %uint 0
@@ -91,8 +91,8 @@
          %41 = OpBitcast %v2int %44
          %45 = OpCompositeExtract %int %41 0
          %46 = OpCompositeExtract %int %41 1
-         %48 = OpCompositeConstruct %v3int %45 %46 %int_0
-         %37 = OpImageFetch %v4float %39 %48 Lod %int_0
+         %48 = OpCompositeConstruct %v3int %45 %46 %47
+         %37 = OpImageFetch %v4float %39 %48 Lod %47
                OpStore %texel %37
                OpStore %i %uint_0
                OpBranch %54

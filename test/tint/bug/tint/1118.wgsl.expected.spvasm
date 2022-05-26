@@ -124,11 +124,11 @@ bug/tint/1118.wgsl:46:19 note: reading from module-scope private variable 'fClip
     %v2float = OpTypeVector %float 2
 %_ptr_Function_v2float = OpTypePointer Function %v2float
          %45 = OpConstantNull %v2float
-    %float_0 = OpConstant %float 0
        %true = OpConstantTrue %bool
        %uint = OpTypeInt 32 0
      %uint_0 = OpConstant %uint 0
 %_ptr_Uniform_v4float = OpTypePointer Uniform %v4float
+    %float_0 = OpConstant %float 0
          %71 = OpConstantComposite %v3float %float_0 %float_0 %float_0
     %float_1 = OpConstant %float 1
          %80 = OpConstantComposite %v4float %float_1 %float_1 %float_1 %float_1
@@ -162,26 +162,26 @@ bug/tint/1118.wgsl:46:19 note: reading from module-scope private variable 'fClip
 %finalSpecular = OpVariable %_ptr_Function_v3float Function %35
       %color = OpVariable %_ptr_Function_v4float Function %8
          %56 = OpLoad %float %fClipDistance3
-         %58 = OpFOrdGreaterThan %bool %56 %float_0
-               OpSelectionMerge %59 None
-               OpBranchConditional %58 %60 %59
-         %60 = OpLabel
-               OpStore %tint_discard %true
-               OpReturn
+         %57 = OpFOrdGreaterThan %bool %56 %11
+               OpSelectionMerge %58 None
+               OpBranchConditional %57 %59 %58
          %59 = OpLabel
-         %62 = OpLoad %float %fClipDistance4
-         %63 = OpFOrdGreaterThan %bool %62 %float_0
-               OpSelectionMerge %64 None
-               OpBranchConditional %63 %65 %64
-         %65 = OpLabel
                OpStore %tint_discard %true
                OpReturn
+         %58 = OpLabel
+         %61 = OpLoad %float %fClipDistance4
+         %62 = OpFOrdGreaterThan %bool %61 %11
+               OpSelectionMerge %63 None
+               OpBranchConditional %62 %64 %63
          %64 = OpLabel
-         %69 = OpAccessChain %_ptr_Uniform_v4float %x_29 %uint_0
-         %70 = OpLoad %v4float %69
-         %74 = OpCompositeExtract %float %70 0
-         %75 = OpCompositeExtract %float %70 1
-         %76 = OpCompositeExtract %float %70 2
+               OpStore %tint_discard %true
+               OpReturn
+         %63 = OpLabel
+         %68 = OpAccessChain %_ptr_Uniform_v4float %x_29 %uint_0
+         %69 = OpLoad %v4float %68
+         %74 = OpCompositeExtract %float %69 0
+         %75 = OpCompositeExtract %float %69 1
+         %76 = OpCompositeExtract %float %69 2
          %77 = OpCompositeConstruct %v3float %74 %75 %76
          %78 = OpFSub %v3float %77 %71
          %72 = OpExtInst %v3float %73 Normalize %78
@@ -222,7 +222,7 @@ bug/tint/1118.wgsl:46:19 note: reading from module-scope private variable 'fClip
         %113 = OpCompositeConstruct %v4float %109 %110 %111 %112
                OpStore %baseColor %113
                OpStore %baseAmbientColor %114
-               OpStore %glossiness %float_0
+               OpStore %glossiness %11
                OpStore %diffuseBase %71
                OpStore %shadow %float_1
                OpStore %refractionColor %115

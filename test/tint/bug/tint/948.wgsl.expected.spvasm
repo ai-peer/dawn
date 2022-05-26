@@ -13,7 +13,7 @@ bug/tint/948.wgsl:137:27 note: reading from module-scope private variable 'mt' m
 ; SPIR-V
 ; Version: 1.3
 ; Generator: Google Tint Compiler; 0
-; Bound: 386
+; Bound: 385
 ; Schema: 0
                OpCapability Shader
         %138 = OpExtInstImport "GLSL.std.450"
@@ -181,9 +181,9 @@ bug/tint/948.wgsl:137:27 note: reading from module-scope private variable 'mt' m
      %uint_7 = OpConstant %uint 7
 %_ptr_Uniform_float = OpTypePointer Uniform %float
          %66 = OpTypeSampledImage %23
-    %float_0 = OpConstant %float 0
  %float_0_25 = OpConstant %float 0.25
   %float_0_5 = OpConstant %float 0.5
+    %float_0 = OpConstant %float 0
          %99 = OpConstantComposite %v4float %float_0 %float_0 %float_0 %float_0
        %void = OpTypeVoid
         %106 = OpTypeFunction %void
@@ -201,10 +201,9 @@ bug/tint/948.wgsl:137:27 note: reading from module-scope private variable 'mt' m
 %_ptr_Uniform_v2float = OpTypePointer Uniform %v2float
         %151 = OpConstantComposite %v2float %float_1 %float_1
      %uint_4 = OpConstant %uint 4
-      %int_0 = OpConstant %int 0
       %int_2 = OpConstant %int 2
        %bool = OpTypeBool
-        %184 = OpConstantComposite %v2float %float_0_5 %float_0_5
+        %183 = OpConstantComposite %v2float %float_0_5 %float_0_5
      %uint_0 = OpConstant %uint 0
      %uint_2 = OpConstant %uint 2
     %float_8 = OpConstant %float 8
@@ -214,7 +213,7 @@ bug/tint/948.wgsl:137:27 note: reading from module-scope private variable 'mt' m
      %uint_8 = OpConstant %uint 8
 %_ptr_Uniform_v3float = OpTypePointer Uniform %v3float
    %main_out = OpTypeStruct %v4float
-        %363 = OpTypeFunction %main_out %v2float %v2float %v2float %v2float %v3float %v2float
+        %362 = OpTypeFunction %main_out %v2float %v2float %v2float %v2float %v3float %v2float
 %getFrameData_f1_ = OpFunction %mat4v4float None %49
     %frameID = OpFunctionParameter %_ptr_Function_float
          %53 = OpLabel
@@ -228,41 +227,41 @@ bug/tint/948.wgsl:137:27 note: reading from module-scope private variable 'mt' m
          %64 = OpLoad %26 %frameMapSampler
          %65 = OpLoad %23 %frameMapTexture
          %67 = OpSampledImage %66 %65 %64
-         %69 = OpCompositeConstruct %v2float %62 %float_0
-         %63 = OpImageSampleImplicitLod %v4float %67 %69 Bias %float_0
-         %70 = OpLoad %float %fX
-         %72 = OpLoad %26 %frameMapSampler
-         %73 = OpLoad %23 %frameMapTexture
-         %74 = OpSampledImage %66 %73 %72
-         %76 = OpCompositeConstruct %v2float %70 %float_0_25
-         %71 = OpImageSampleImplicitLod %v4float %74 %76 Bias %float_0
-         %77 = OpLoad %float %fX
-         %79 = OpLoad %26 %frameMapSampler
-         %80 = OpLoad %23 %frameMapTexture
-         %81 = OpSampledImage %66 %80 %79
-         %83 = OpCompositeConstruct %v2float %77 %float_0_5
-         %78 = OpImageSampleImplicitLod %v4float %81 %83 Bias %float_0
-         %84 = OpCompositeExtract %float %63 0
-         %85 = OpCompositeExtract %float %63 1
-         %86 = OpCompositeExtract %float %63 2
-         %87 = OpCompositeExtract %float %63 3
-         %88 = OpCompositeConstruct %v4float %84 %85 %86 %87
-         %89 = OpCompositeExtract %float %71 0
-         %90 = OpCompositeExtract %float %71 1
-         %91 = OpCompositeExtract %float %71 2
-         %92 = OpCompositeExtract %float %71 3
-         %93 = OpCompositeConstruct %v4float %89 %90 %91 %92
-         %94 = OpCompositeExtract %float %78 0
-         %95 = OpCompositeExtract %float %78 1
-         %96 = OpCompositeExtract %float %78 2
-         %97 = OpCompositeExtract %float %78 3
-         %98 = OpCompositeConstruct %v4float %94 %95 %96 %97
+         %68 = OpCompositeConstruct %v2float %62 %37
+         %63 = OpImageSampleImplicitLod %v4float %67 %68 Bias %37
+         %69 = OpLoad %float %fX
+         %71 = OpLoad %26 %frameMapSampler
+         %72 = OpLoad %23 %frameMapTexture
+         %73 = OpSampledImage %66 %72 %71
+         %75 = OpCompositeConstruct %v2float %69 %float_0_25
+         %70 = OpImageSampleImplicitLod %v4float %73 %75 Bias %37
+         %76 = OpLoad %float %fX
+         %78 = OpLoad %26 %frameMapSampler
+         %79 = OpLoad %23 %frameMapTexture
+         %80 = OpSampledImage %66 %79 %78
+         %82 = OpCompositeConstruct %v2float %76 %float_0_5
+         %77 = OpImageSampleImplicitLod %v4float %80 %82 Bias %37
+         %83 = OpCompositeExtract %float %63 0
+         %84 = OpCompositeExtract %float %63 1
+         %85 = OpCompositeExtract %float %63 2
+         %86 = OpCompositeExtract %float %63 3
+         %87 = OpCompositeConstruct %v4float %83 %84 %85 %86
+         %88 = OpCompositeExtract %float %70 0
+         %89 = OpCompositeExtract %float %70 1
+         %90 = OpCompositeExtract %float %70 2
+         %91 = OpCompositeExtract %float %70 3
+         %92 = OpCompositeConstruct %v4float %88 %89 %90 %91
+         %93 = OpCompositeExtract %float %77 0
+         %94 = OpCompositeExtract %float %77 1
+         %95 = OpCompositeExtract %float %77 2
+         %96 = OpCompositeExtract %float %77 3
+         %97 = OpCompositeConstruct %v4float %93 %94 %95 %96
         %100 = OpCompositeExtract %float %99 0
         %101 = OpCompositeExtract %float %99 1
         %102 = OpCompositeExtract %float %99 2
         %103 = OpCompositeExtract %float %99 3
         %104 = OpCompositeConstruct %v4float %100 %101 %102 %103
-        %105 = OpCompositeConstruct %mat4v4float %88 %93 %98 %104
+        %105 = OpCompositeConstruct %mat4v4float %87 %92 %97 %104
                OpReturnValue %105
                OpFunctionEnd
      %main_1 = OpFunction %void None %106
@@ -309,286 +308,286 @@ bug/tint/948.wgsl:137:27 note: reading from module-scope private variable 'mt' m
         %158 = OpLoad %v2float %157
         %159 = OpFDiv %v2float %151 %158
                OpStore %stageUnits %159
-               OpStore %i %int_0
-               OpBranch %161
-        %161 = OpLabel
-               OpLoopMerge %162 %163 None
-               OpBranch %164
-        %164 = OpLabel
-        %165 = OpLoad %int %i
-        %167 = OpSLessThan %bool %165 %int_2
-               OpSelectionMerge %169 None
-               OpBranchConditional %167 %170 %171
-        %170 = OpLabel
-               OpBranch %169
-        %171 = OpLabel
-               OpBranch %162
-        %169 = OpLabel
-        %172 = OpLoad %int %i
-               OpSelectionMerge %173 None
-               OpSwitch %172 %174 1 %175 0 %176
-        %175 = OpLabel
-        %177 = OpLoad %v2float %tileID
-        %178 = OpAccessChain %_ptr_Uniform_v2float %x_20 %uint_4
-        %179 = OpLoad %v2float %178
-        %181 = OpLoad %26 %tileMapsSampler
-        %182 = OpLoad %23 %tileMapsTexture1
-        %183 = OpSampledImage %66 %182 %181
-        %185 = OpFAdd %v2float %177 %184
-        %186 = OpFDiv %v2float %185 %179
-        %180 = OpImageSampleImplicitLod %v4float %183 %186 Bias %float_0
-        %187 = OpCompositeExtract %float %180 0
-               OpStore %frameID_1 %187
-               OpBranch %173
-        %176 = OpLabel
-        %188 = OpLoad %v2float %tileID
-        %189 = OpAccessChain %_ptr_Uniform_v2float %x_20 %uint_4
-        %190 = OpLoad %v2float %189
-        %192 = OpLoad %26 %tileMapsSampler
-        %193 = OpLoad %23 %tileMapsTexture0
-        %194 = OpSampledImage %66 %193 %192
-        %195 = OpFAdd %v2float %188 %184
-        %196 = OpFDiv %v2float %195 %190
-        %191 = OpImageSampleImplicitLod %v4float %194 %196 Bias %float_0
-        %197 = OpCompositeExtract %float %191 0
-               OpStore %frameID_1 %197
-               OpBranch %173
-        %174 = OpLabel
-               OpBranch %173
-        %173 = OpLabel
-        %198 = OpLoad %float %frameID_1
-        %199 = OpAccessChain %_ptr_Uniform_float %x_20 %uint_7
-        %200 = OpLoad %float %199
-        %202 = OpLoad %26 %animationMapSampler
-        %203 = OpLoad %23 %animationMapTexture
-        %204 = OpSampledImage %66 %203 %202
-        %205 = OpFAdd %float %198 %float_0_5
-        %206 = OpFDiv %float %205 %200
-        %207 = OpCompositeConstruct %v2float %206 %float_0
-        %201 = OpImageSampleImplicitLod %v4float %204 %207 Bias %float_0
-               OpStore %animationData %201
-        %208 = OpAccessChain %_ptr_Function_float %animationData %uint_1
-        %209 = OpLoad %float %208
-        %210 = OpFOrdGreaterThan %bool %209 %float_0
-               OpSelectionMerge %211 None
-               OpBranchConditional %210 %212 %211
-        %212 = OpLabel
-        %214 = OpAccessChain %_ptr_Uniform_float %x_20 %uint_0
-        %215 = OpLoad %float %214
-        %217 = OpAccessChain %_ptr_Function_float %animationData %uint_2
-        %218 = OpLoad %float %217
-        %219 = OpFMul %float %215 %218
-        %220 = OpFRem %float %219 %float_1
-               OpStore %mt %220
-               OpStore %f %float_0
-               OpBranch %221
-        %221 = OpLabel
-               OpLoopMerge %222 %223 None
-               OpBranch %224
-        %224 = OpLabel
-        %225 = OpLoad %float %f
-        %227 = OpFOrdLessThan %bool %225 %float_8
-               OpSelectionMerge %228 None
-               OpBranchConditional %227 %229 %230
-        %229 = OpLabel
-               OpBranch %228
-        %230 = OpLabel
-               OpBranch %222
-        %228 = OpLabel
-        %231 = OpAccessChain %_ptr_Function_float %animationData %uint_1
-        %232 = OpLoad %float %231
-        %233 = OpLoad %float %mt
-        %234 = OpFOrdGreaterThan %bool %232 %233
-               OpSelectionMerge %235 None
-               OpBranchConditional %234 %236 %235
-        %236 = OpLabel
-        %237 = OpAccessChain %_ptr_Function_float %animationData %uint_0
-        %238 = OpLoad %float %237
-               OpStore %frameID_1 %238
-               OpBranch %222
-        %235 = OpLabel
-        %239 = OpLoad %float %frameID_1
-        %240 = OpAccessChain %_ptr_Uniform_float %x_20 %uint_7
-        %241 = OpLoad %float %240
-        %242 = OpLoad %float %f
-        %244 = OpLoad %26 %animationMapSampler
-        %245 = OpLoad %23 %animationMapTexture
-        %246 = OpSampledImage %66 %245 %244
-        %247 = OpFAdd %float %239 %float_0_5
-        %248 = OpFDiv %float %247 %241
-        %250 = OpFMul %float %float_0_125 %242
-        %251 = OpCompositeConstruct %v2float %248 %250
-        %243 = OpImageSampleImplicitLod %v4float %246 %251 Bias %float_0
-               OpStore %animationData %243
-               OpBranch %223
-        %223 = OpLabel
-        %252 = OpLoad %float %f
-        %253 = OpFAdd %float %252 %float_1
-               OpStore %f %253
-               OpBranch %221
-        %222 = OpLabel
-               OpBranch %211
-        %211 = OpLabel
-        %254 = OpLoad %float %frameID_1
-        %255 = OpFAdd %float %254 %float_0_5
-               OpStore %param %255
-        %256 = OpFunctionCall %mat4v4float %getFrameData_f1_ %param
-               OpStore %frameData %256
-        %258 = OpAccessChain %_ptr_Function_v4float %frameData %int_0
-        %259 = OpLoad %v4float %258
-        %260 = OpAccessChain %_ptr_Uniform_v2float %x_20 %uint_5
-        %261 = OpLoad %v2float %260
-        %262 = OpCompositeExtract %float %259 3
-        %263 = OpCompositeExtract %float %259 2
-        %264 = OpCompositeConstruct %v2float %262 %263
-        %265 = OpFDiv %v2float %264 %261
-               OpStore %frameSize %265
-        %266 = OpAccessChain %_ptr_Function_v4float %frameData %int_0
-        %267 = OpLoad %v4float %266
-        %268 = OpLoad %v2float %sheetUnits
-        %269 = OpCompositeExtract %float %267 0
-        %270 = OpCompositeExtract %float %267 1
-        %271 = OpCompositeConstruct %v2float %269 %270
-        %272 = OpFMul %v2float %271 %268
-               OpStore %offset_1 %272
-        %273 = OpAccessChain %_ptr_Function_v4float %frameData %int_2
-        %274 = OpLoad %v4float %273
-        %275 = OpAccessChain %_ptr_Function_v4float %frameData %int_0
-        %276 = OpLoad %v4float %275
-        %277 = OpCompositeExtract %float %274 0
-        %278 = OpCompositeExtract %float %274 1
-        %279 = OpCompositeConstruct %v2float %277 %278
-        %280 = OpCompositeExtract %float %276 3
-        %281 = OpCompositeExtract %float %276 2
-        %282 = OpCompositeConstruct %v2float %280 %281
-        %283 = OpFDiv %v2float %279 %282
-               OpStore %ratio %283
-        %284 = OpAccessChain %_ptr_Function_float %frameData %int_2 %uint_2
-        %285 = OpLoad %float %284
-        %286 = OpFOrdEqual %bool %285 %float_1
-               OpSelectionMerge %287 None
-               OpBranchConditional %286 %288 %287
-        %288 = OpLabel
-        %289 = OpLoad %v2float %tileUV
-        %290 = OpCompositeExtract %float %289 1
-        %291 = OpCompositeExtract %float %289 0
-        %292 = OpCompositeConstruct %v2float %290 %291
-               OpStore %tileUV %292
-               OpBranch %287
-        %287 = OpLabel
-        %293 = OpLoad %int %i
-        %294 = OpIEqual %bool %293 %int_0
-               OpSelectionMerge %295 None
-               OpBranchConditional %294 %296 %297
-        %296 = OpLabel
-        %298 = OpLoad %v2float %tileUV
-        %299 = OpLoad %v2float %frameSize
-        %300 = OpLoad %v2float %offset_1
-        %302 = OpLoad %26 %spriteSheetSampler
-        %303 = OpLoad %23 %spriteSheetTexture
-        %304 = OpSampledImage %66 %303 %302
-        %305 = OpFMul %v2float %298 %299
-        %306 = OpFAdd %v2float %305 %300
-        %301 = OpImageSampleImplicitLod %v4float %304 %306
-               OpStore %color %301
-               OpBranch %295
-        %297 = OpLabel
-        %307 = OpLoad %v2float %tileUV
-        %308 = OpLoad %v2float %frameSize
-        %309 = OpLoad %v2float %offset_1
-        %311 = OpLoad %26 %spriteSheetSampler
-        %312 = OpLoad %23 %spriteSheetTexture
-        %313 = OpSampledImage %66 %312 %311
-        %314 = OpFMul %v2float %307 %308
-        %315 = OpFAdd %v2float %314 %309
-        %310 = OpImageSampleImplicitLod %v4float %313 %315
-               OpStore %nc %310
-        %317 = OpAccessChain %_ptr_Function_float %color %uint_3
-        %318 = OpLoad %float %317
-        %319 = OpAccessChain %_ptr_Function_float %nc %uint_3
-        %320 = OpLoad %float %319
-        %322 = OpFAdd %float %318 %320
-        %321 = OpExtInst %float %138 NMin %322 %float_1
-               OpStore %alpha %321
-        %323 = OpLoad %v4float %color
-        %324 = OpLoad %v4float %nc
-        %325 = OpAccessChain %_ptr_Function_float %nc %uint_3
-        %326 = OpLoad %float %325
-        %328 = OpCompositeExtract %float %323 0
-        %329 = OpCompositeExtract %float %323 1
-        %330 = OpCompositeExtract %float %323 2
-        %331 = OpCompositeConstruct %v3float %328 %329 %330
-        %332 = OpCompositeExtract %float %324 0
-        %333 = OpCompositeExtract %float %324 1
-        %334 = OpCompositeExtract %float %324 2
-        %335 = OpCompositeConstruct %v3float %332 %333 %334
-        %336 = OpCompositeConstruct %v3float %326 %326 %326
-        %327 = OpExtInst %v3float %138 FMix %331 %335 %336
-               OpStore %mixed %327
-        %337 = OpLoad %v3float %mixed
-        %338 = OpLoad %float %alpha
-        %339 = OpCompositeExtract %float %337 0
-        %340 = OpCompositeExtract %float %337 1
-        %341 = OpCompositeExtract %float %337 2
-        %342 = OpCompositeConstruct %v4float %339 %340 %341 %338
-               OpStore %color %342
-               OpBranch %295
-        %295 = OpLabel
+               OpStore %i %121
+               OpBranch %160
+        %160 = OpLabel
+               OpLoopMerge %161 %162 None
                OpBranch %163
         %163 = OpLabel
-        %343 = OpLoad %int %i
-        %345 = OpIAdd %int %343 %int_1
-               OpStore %i %345
+        %164 = OpLoad %int %i
+        %166 = OpSLessThan %bool %164 %int_2
+               OpSelectionMerge %168 None
+               OpBranchConditional %166 %169 %170
+        %169 = OpLabel
+               OpBranch %168
+        %170 = OpLabel
                OpBranch %161
+        %168 = OpLabel
+        %171 = OpLoad %int %i
+               OpSelectionMerge %172 None
+               OpSwitch %171 %173 1 %174 0 %175
+        %174 = OpLabel
+        %176 = OpLoad %v2float %tileID
+        %177 = OpAccessChain %_ptr_Uniform_v2float %x_20 %uint_4
+        %178 = OpLoad %v2float %177
+        %180 = OpLoad %26 %tileMapsSampler
+        %181 = OpLoad %23 %tileMapsTexture1
+        %182 = OpSampledImage %66 %181 %180
+        %184 = OpFAdd %v2float %176 %183
+        %185 = OpFDiv %v2float %184 %178
+        %179 = OpImageSampleImplicitLod %v4float %182 %185 Bias %37
+        %186 = OpCompositeExtract %float %179 0
+               OpStore %frameID_1 %186
+               OpBranch %172
+        %175 = OpLabel
+        %187 = OpLoad %v2float %tileID
+        %188 = OpAccessChain %_ptr_Uniform_v2float %x_20 %uint_4
+        %189 = OpLoad %v2float %188
+        %191 = OpLoad %26 %tileMapsSampler
+        %192 = OpLoad %23 %tileMapsTexture0
+        %193 = OpSampledImage %66 %192 %191
+        %194 = OpFAdd %v2float %187 %183
+        %195 = OpFDiv %v2float %194 %189
+        %190 = OpImageSampleImplicitLod %v4float %193 %195 Bias %37
+        %196 = OpCompositeExtract %float %190 0
+               OpStore %frameID_1 %196
+               OpBranch %172
+        %173 = OpLabel
+               OpBranch %172
+        %172 = OpLabel
+        %197 = OpLoad %float %frameID_1
+        %198 = OpAccessChain %_ptr_Uniform_float %x_20 %uint_7
+        %199 = OpLoad %float %198
+        %201 = OpLoad %26 %animationMapSampler
+        %202 = OpLoad %23 %animationMapTexture
+        %203 = OpSampledImage %66 %202 %201
+        %204 = OpFAdd %float %197 %float_0_5
+        %205 = OpFDiv %float %204 %199
+        %206 = OpCompositeConstruct %v2float %205 %37
+        %200 = OpImageSampleImplicitLod %v4float %203 %206 Bias %37
+               OpStore %animationData %200
+        %207 = OpAccessChain %_ptr_Function_float %animationData %uint_1
+        %208 = OpLoad %float %207
+        %209 = OpFOrdGreaterThan %bool %208 %37
+               OpSelectionMerge %210 None
+               OpBranchConditional %209 %211 %210
+        %211 = OpLabel
+        %213 = OpAccessChain %_ptr_Uniform_float %x_20 %uint_0
+        %214 = OpLoad %float %213
+        %216 = OpAccessChain %_ptr_Function_float %animationData %uint_2
+        %217 = OpLoad %float %216
+        %218 = OpFMul %float %214 %217
+        %219 = OpFRem %float %218 %float_1
+               OpStore %mt %219
+               OpStore %f %37
+               OpBranch %220
+        %220 = OpLabel
+               OpLoopMerge %221 %222 None
+               OpBranch %223
+        %223 = OpLabel
+        %224 = OpLoad %float %f
+        %226 = OpFOrdLessThan %bool %224 %float_8
+               OpSelectionMerge %227 None
+               OpBranchConditional %226 %228 %229
+        %228 = OpLabel
+               OpBranch %227
+        %229 = OpLabel
+               OpBranch %221
+        %227 = OpLabel
+        %230 = OpAccessChain %_ptr_Function_float %animationData %uint_1
+        %231 = OpLoad %float %230
+        %232 = OpLoad %float %mt
+        %233 = OpFOrdGreaterThan %bool %231 %232
+               OpSelectionMerge %234 None
+               OpBranchConditional %233 %235 %234
+        %235 = OpLabel
+        %236 = OpAccessChain %_ptr_Function_float %animationData %uint_0
+        %237 = OpLoad %float %236
+               OpStore %frameID_1 %237
+               OpBranch %221
+        %234 = OpLabel
+        %238 = OpLoad %float %frameID_1
+        %239 = OpAccessChain %_ptr_Uniform_float %x_20 %uint_7
+        %240 = OpLoad %float %239
+        %241 = OpLoad %float %f
+        %243 = OpLoad %26 %animationMapSampler
+        %244 = OpLoad %23 %animationMapTexture
+        %245 = OpSampledImage %66 %244 %243
+        %246 = OpFAdd %float %238 %float_0_5
+        %247 = OpFDiv %float %246 %240
+        %249 = OpFMul %float %float_0_125 %241
+        %250 = OpCompositeConstruct %v2float %247 %249
+        %242 = OpImageSampleImplicitLod %v4float %245 %250 Bias %37
+               OpStore %animationData %242
+               OpBranch %222
+        %222 = OpLabel
+        %251 = OpLoad %float %f
+        %252 = OpFAdd %float %251 %float_1
+               OpStore %f %252
+               OpBranch %220
+        %221 = OpLabel
+               OpBranch %210
+        %210 = OpLabel
+        %253 = OpLoad %float %frameID_1
+        %254 = OpFAdd %float %253 %float_0_5
+               OpStore %param %254
+        %255 = OpFunctionCall %mat4v4float %getFrameData_f1_ %param
+               OpStore %frameData %255
+        %257 = OpAccessChain %_ptr_Function_v4float %frameData %121
+        %258 = OpLoad %v4float %257
+        %259 = OpAccessChain %_ptr_Uniform_v2float %x_20 %uint_5
+        %260 = OpLoad %v2float %259
+        %261 = OpCompositeExtract %float %258 3
+        %262 = OpCompositeExtract %float %258 2
+        %263 = OpCompositeConstruct %v2float %261 %262
+        %264 = OpFDiv %v2float %263 %260
+               OpStore %frameSize %264
+        %265 = OpAccessChain %_ptr_Function_v4float %frameData %121
+        %266 = OpLoad %v4float %265
+        %267 = OpLoad %v2float %sheetUnits
+        %268 = OpCompositeExtract %float %266 0
+        %269 = OpCompositeExtract %float %266 1
+        %270 = OpCompositeConstruct %v2float %268 %269
+        %271 = OpFMul %v2float %270 %267
+               OpStore %offset_1 %271
+        %272 = OpAccessChain %_ptr_Function_v4float %frameData %int_2
+        %273 = OpLoad %v4float %272
+        %274 = OpAccessChain %_ptr_Function_v4float %frameData %121
+        %275 = OpLoad %v4float %274
+        %276 = OpCompositeExtract %float %273 0
+        %277 = OpCompositeExtract %float %273 1
+        %278 = OpCompositeConstruct %v2float %276 %277
+        %279 = OpCompositeExtract %float %275 3
+        %280 = OpCompositeExtract %float %275 2
+        %281 = OpCompositeConstruct %v2float %279 %280
+        %282 = OpFDiv %v2float %278 %281
+               OpStore %ratio %282
+        %283 = OpAccessChain %_ptr_Function_float %frameData %int_2 %uint_2
+        %284 = OpLoad %float %283
+        %285 = OpFOrdEqual %bool %284 %float_1
+               OpSelectionMerge %286 None
+               OpBranchConditional %285 %287 %286
+        %287 = OpLabel
+        %288 = OpLoad %v2float %tileUV
+        %289 = OpCompositeExtract %float %288 1
+        %290 = OpCompositeExtract %float %288 0
+        %291 = OpCompositeConstruct %v2float %289 %290
+               OpStore %tileUV %291
+               OpBranch %286
+        %286 = OpLabel
+        %292 = OpLoad %int %i
+        %293 = OpIEqual %bool %292 %121
+               OpSelectionMerge %294 None
+               OpBranchConditional %293 %295 %296
+        %295 = OpLabel
+        %297 = OpLoad %v2float %tileUV
+        %298 = OpLoad %v2float %frameSize
+        %299 = OpLoad %v2float %offset_1
+        %301 = OpLoad %26 %spriteSheetSampler
+        %302 = OpLoad %23 %spriteSheetTexture
+        %303 = OpSampledImage %66 %302 %301
+        %304 = OpFMul %v2float %297 %298
+        %305 = OpFAdd %v2float %304 %299
+        %300 = OpImageSampleImplicitLod %v4float %303 %305
+               OpStore %color %300
+               OpBranch %294
+        %296 = OpLabel
+        %306 = OpLoad %v2float %tileUV
+        %307 = OpLoad %v2float %frameSize
+        %308 = OpLoad %v2float %offset_1
+        %310 = OpLoad %26 %spriteSheetSampler
+        %311 = OpLoad %23 %spriteSheetTexture
+        %312 = OpSampledImage %66 %311 %310
+        %313 = OpFMul %v2float %306 %307
+        %314 = OpFAdd %v2float %313 %308
+        %309 = OpImageSampleImplicitLod %v4float %312 %314
+               OpStore %nc %309
+        %316 = OpAccessChain %_ptr_Function_float %color %uint_3
+        %317 = OpLoad %float %316
+        %318 = OpAccessChain %_ptr_Function_float %nc %uint_3
+        %319 = OpLoad %float %318
+        %321 = OpFAdd %float %317 %319
+        %320 = OpExtInst %float %138 NMin %321 %float_1
+               OpStore %alpha %320
+        %322 = OpLoad %v4float %color
+        %323 = OpLoad %v4float %nc
+        %324 = OpAccessChain %_ptr_Function_float %nc %uint_3
+        %325 = OpLoad %float %324
+        %327 = OpCompositeExtract %float %322 0
+        %328 = OpCompositeExtract %float %322 1
+        %329 = OpCompositeExtract %float %322 2
+        %330 = OpCompositeConstruct %v3float %327 %328 %329
+        %331 = OpCompositeExtract %float %323 0
+        %332 = OpCompositeExtract %float %323 1
+        %333 = OpCompositeExtract %float %323 2
+        %334 = OpCompositeConstruct %v3float %331 %332 %333
+        %335 = OpCompositeConstruct %v3float %325 %325 %325
+        %326 = OpExtInst %v3float %138 FMix %330 %334 %335
+               OpStore %mixed %326
+        %336 = OpLoad %v3float %mixed
+        %337 = OpLoad %float %alpha
+        %338 = OpCompositeExtract %float %336 0
+        %339 = OpCompositeExtract %float %336 1
+        %340 = OpCompositeExtract %float %336 2
+        %341 = OpCompositeConstruct %v4float %338 %339 %340 %337
+               OpStore %color %341
+               OpBranch %294
+        %294 = OpLabel
+               OpBranch %162
         %162 = OpLabel
-        %348 = OpAccessChain %_ptr_Uniform_v3float %x_20 %uint_8
-        %349 = OpLoad %v3float %348
-        %350 = OpLoad %v4float %color
-        %351 = OpCompositeExtract %float %350 0
-        %352 = OpCompositeExtract %float %350 1
-        %353 = OpCompositeExtract %float %350 2
-        %354 = OpCompositeConstruct %v3float %351 %352 %353
-        %355 = OpFMul %v3float %354 %349
-        %356 = OpLoad %v4float %color
-        %357 = OpCompositeExtract %float %355 0
-        %358 = OpCompositeExtract %float %355 1
-        %359 = OpCompositeExtract %float %355 2
-        %360 = OpCompositeExtract %float %356 3
-        %361 = OpCompositeConstruct %v4float %357 %358 %359 %360
-               OpStore %color %361
-        %362 = OpLoad %v4float %color
-               OpStore %glFragColor %362
+        %342 = OpLoad %int %i
+        %344 = OpIAdd %int %342 %int_1
+               OpStore %i %344
+               OpBranch %160
+        %161 = OpLabel
+        %347 = OpAccessChain %_ptr_Uniform_v3float %x_20 %uint_8
+        %348 = OpLoad %v3float %347
+        %349 = OpLoad %v4float %color
+        %350 = OpCompositeExtract %float %349 0
+        %351 = OpCompositeExtract %float %349 1
+        %352 = OpCompositeExtract %float %349 2
+        %353 = OpCompositeConstruct %v3float %350 %351 %352
+        %354 = OpFMul %v3float %353 %348
+        %355 = OpLoad %v4float %color
+        %356 = OpCompositeExtract %float %354 0
+        %357 = OpCompositeExtract %float %354 1
+        %358 = OpCompositeExtract %float %354 2
+        %359 = OpCompositeExtract %float %355 3
+        %360 = OpCompositeConstruct %v4float %356 %357 %358 %359
+               OpStore %color %360
+        %361 = OpLoad %v4float %color
+               OpStore %glFragColor %361
                OpReturn
                OpFunctionEnd
- %main_inner = OpFunction %main_out None %363
+ %main_inner = OpFunction %main_out None %362
   %tUV_param = OpFunctionParameter %v2float
 %tileID_1_param = OpFunctionParameter %v2float
 %levelUnits_param = OpFunctionParameter %v2float
 %stageUnits_1_param = OpFunctionParameter %v2float
 %vPosition_param = OpFunctionParameter %v3float
   %vUV_param = OpFunctionParameter %v2float
-        %372 = OpLabel
+        %371 = OpLabel
                OpStore %tUV %tUV_param
                OpStore %tileID_1 %tileID_1_param
                OpStore %levelUnits %levelUnits_param
                OpStore %stageUnits_1 %stageUnits_1_param
                OpStore %vPosition %vPosition_param
                OpStore %vUV %vUV_param
-        %373 = OpFunctionCall %void %main_1
-        %374 = OpLoad %v4float %glFragColor
-        %375 = OpCompositeConstruct %main_out %374
-               OpReturnValue %375
+        %372 = OpFunctionCall %void %main_1
+        %373 = OpLoad %v4float %glFragColor
+        %374 = OpCompositeConstruct %main_out %373
+               OpReturnValue %374
                OpFunctionEnd
        %main = OpFunction %void None %106
-        %377 = OpLabel
-        %379 = OpLoad %v2float %tUV_param_1
-        %380 = OpLoad %v2float %tileID_1_param_1
-        %381 = OpLoad %v2float %levelUnits_param_1
-        %382 = OpLoad %v2float %stageUnits_1_param_1
-        %383 = OpLoad %v3float %vPosition_param_1
-        %384 = OpLoad %v2float %vUV_param_1
-        %378 = OpFunctionCall %main_out %main_inner %379 %380 %381 %382 %383 %384
-        %385 = OpCompositeExtract %v4float %378 0
-               OpStore %glFragColor_1_1 %385
+        %376 = OpLabel
+        %378 = OpLoad %v2float %tUV_param_1
+        %379 = OpLoad %v2float %tileID_1_param_1
+        %380 = OpLoad %v2float %levelUnits_param_1
+        %381 = OpLoad %v2float %stageUnits_1_param_1
+        %382 = OpLoad %v3float %vPosition_param_1
+        %383 = OpLoad %v2float %vUV_param_1
+        %377 = OpFunctionCall %main_out %main_inner %378 %379 %380 %381 %382 %383
+        %384 = OpCompositeExtract %v4float %377 0
+               OpStore %glFragColor_1_1 %384
                OpReturn
                OpFunctionEnd
