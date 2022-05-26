@@ -16,6 +16,23 @@
       "message": "PTAL! Main focus of this change in the GPUInfo generation, but since adding the vendor/architecture to AdapterProperties was pretty trivial I\u0027ve thrown that in here too. I think we may want to eventually refactor those out into something that more closely matches the web-facing GPUAdapterInfo, but for now this will give us the data that we need on the Blink side using an existing mechanism.",
       "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d33ebe39_a70dd431",
+        "filename": "gpu_info.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-05-26T01:11:12Z",
+      "side": 1,
+      "message": "I know this doesn\u0027t need to be futureproof yet, but at some point I can imagine we might end up needing different device masks for different ranges of ids. I wonder if it might make sense to just build the masks into the values, like \"660?\", \"661?\", etc.? Unfortunately it makes the code generation for GetArchitecture harder.",
+      "revId": "072edf1a44859dd20137e3460cca40d4570c8adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
