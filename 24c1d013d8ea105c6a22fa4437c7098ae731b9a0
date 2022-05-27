@@ -16,6 +16,23 @@
       "message": "Austin and/or Corentin: PTAL. Thanks!\n\n(Because the autoroller won\u0027t run for 8 hours and I\u0027m impatient.)",
       "revId": "24c1d013d8ea105c6a22fa4437c7098ae731b9a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16f9b062_f7daf7f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-27T16:17:31Z",
+      "side": 1,
+      "message": "LGTM - there\u0027s a button you can click in the UI to unthrottle too :) ",
+      "revId": "24c1d013d8ea105c6a22fa4437c7098ae731b9a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
