@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "07eb52c988837b84629c732903fc2b2a27353674",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "069c6cee_eb250696",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-27T05:43:44Z",
+      "side": 1,
+      "message": "LGTM - looks like Kokoro build failure is due to Brandon\u0027s change.\nhttps://dawn-review.googlesource.com/c/dawn/+/90962\n\nit should be non-blocking though.",
+      "revId": "07eb52c988837b84629c732903fc2b2a27353674",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
