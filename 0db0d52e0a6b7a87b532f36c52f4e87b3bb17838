@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96d64a6e_cd8ca53c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-27T18:32:23Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "0db0d52e0a6b7a87b532f36c52f4e87b3bb17838",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16998c6f_7f4284d1",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-27T18:32:23Z",
+      "side": 1,
+      "message": "Ok, I see this is where the concrete target type is forced.",
+      "range": {
+        "startLine": 242,
+        "startChar": 12,
+        "endLine": 242,
+        "endChar": 70
+      },
+      "revId": "0db0d52e0a6b7a87b532f36c52f4e87b3bb17838",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ffefae4_a9cd87aa",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-27T18:32:23Z",
+      "side": 1,
+      "message": "And correspondingly, where the concrete type is *not* forced. Hence the defaulting to the best-ranked concrete type.",
+      "range": {
+        "startLine": 627,
+        "startChar": 41,
+        "endLine": 627,
+        "endChar": 48
+      },
+      "revId": "0db0d52e0a6b7a87b532f36c52f4e87b3bb17838",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b98801b_fbcc92c6",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1148,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-27T18:32:23Z",
+      "side": 1,
+      "message": "subtle, as always",
+      "range": {
+        "startLine": 1148,
+        "startChar": 45,
+        "endLine": 1148,
+        "endChar": 64
+      },
+      "revId": "0db0d52e0a6b7a87b532f36c52f4e87b3bb17838",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
