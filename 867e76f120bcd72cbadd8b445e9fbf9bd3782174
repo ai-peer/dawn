@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f28144b3_2cf614b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-27T18:10:50Z",
+      "side": 1,
+      "message": "This ends up being a nice simplification because of the generalization to larger types.  You leverage the ERANGE return code from stroll\n",
+      "revId": "867e76f120bcd72cbadd8b445e9fbf9bd3782174",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c32c884_5ea3907d",
+        "filename": "src/tint/reader/wgsl/lexer_test.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-27T18:10:50Z",
+      "side": 1,
+      "message": "Eventually, we have to remove support for a leading minus for numeric integers.\n\nI filed https://bugs.chromium.org/p/tint/issues/detail?id\u003d1570 to ensure it\u0027s updated later.",
+      "range": {
+        "startLine": 635,
+        "startChar": 48,
+        "endLine": 635,
+        "endChar": 50
+      },
+      "revId": "867e76f120bcd72cbadd8b445e9fbf9bd3782174",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
