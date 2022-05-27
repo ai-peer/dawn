@@ -2496,8 +2496,14 @@ fn tint_symbol_8(@internal(disable_validation__ignore_constructible_function_par
 @internal(intrinsic_atomic_exchange_storage_i32) @internal(disable_validation__function_has_no_body)
 fn tint_symbol_9(@internal(disable_validation__ignore_constructible_function_parameter) buffer : SB, offset : u32, param_1 : i32) -> i32
 
+@internal(intrinsic_atomic_compare_exchange_weak_storage_i32)
+struct atomic_compare_exchange_weak_ret_type {
+  old_value : i32,
+  exchanged : bool,
+}
+
 @internal(intrinsic_atomic_compare_exchange_weak_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_10(@internal(disable_validation__ignore_constructible_function_parameter) buffer : SB, offset : u32, param_1 : i32, param_2 : i32) -> vec2<i32>
+fn tint_symbol_10(@internal(disable_validation__ignore_constructible_function_parameter) buffer : SB, offset : u32, param_1 : i32, param_2 : i32) -> atomic_compare_exchange_weak_ret_type
 
 @internal(intrinsic_atomic_store_storage_u32) @internal(disable_validation__function_has_no_body)
 fn tint_symbol_11(@internal(disable_validation__ignore_constructible_function_parameter) buffer : SB, offset : u32, param_1 : u32)
@@ -2529,8 +2535,14 @@ fn tint_symbol_19(@internal(disable_validation__ignore_constructible_function_pa
 @internal(intrinsic_atomic_exchange_storage_u32) @internal(disable_validation__function_has_no_body)
 fn tint_symbol_20(@internal(disable_validation__ignore_constructible_function_parameter) buffer : SB, offset : u32, param_1 : u32) -> u32
 
+@internal(intrinsic_atomic_compare_exchange_weak_storage_u32)
+struct atomic_compare_exchange_weak_ret_type_1 {
+  old_value : i32,
+  exchanged : bool,
+}
+
 @internal(intrinsic_atomic_compare_exchange_weak_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_21(@internal(disable_validation__ignore_constructible_function_parameter) buffer : SB, offset : u32, param_1 : u32, param_2 : u32) -> vec2<u32>
+fn tint_symbol_21(@internal(disable_validation__ignore_constructible_function_parameter) buffer : SB, offset : u32, param_1 : u32, param_2 : u32) -> atomic_compare_exchange_weak_ret_type_1
 
 @stage(compute) @workgroup_size(1)
 fn main() {
@@ -2633,8 +2645,14 @@ fn tint_symbol_8(@internal(disable_validation__ignore_constructible_function_par
 @internal(intrinsic_atomic_exchange_storage_i32) @internal(disable_validation__function_has_no_body)
 fn tint_symbol_9(@internal(disable_validation__ignore_constructible_function_parameter) buffer : SB, offset : u32, param_1 : i32) -> i32
 
+@internal(intrinsic_atomic_compare_exchange_weak_storage_i32)
+struct atomic_compare_exchange_weak_ret_type {
+  old_value : i32,
+  exchanged : bool,
+}
+
 @internal(intrinsic_atomic_compare_exchange_weak_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_10(@internal(disable_validation__ignore_constructible_function_parameter) buffer : SB, offset : u32, param_1 : i32, param_2 : i32) -> vec2<i32>
+fn tint_symbol_10(@internal(disable_validation__ignore_constructible_function_parameter) buffer : SB, offset : u32, param_1 : i32, param_2 : i32) -> atomic_compare_exchange_weak_ret_type
 
 @internal(intrinsic_atomic_store_storage_u32) @internal(disable_validation__function_has_no_body)
 fn tint_symbol_11(@internal(disable_validation__ignore_constructible_function_parameter) buffer : SB, offset : u32, param_1 : u32)
@@ -2666,8 +2684,14 @@ fn tint_symbol_19(@internal(disable_validation__ignore_constructible_function_pa
 @internal(intrinsic_atomic_exchange_storage_u32) @internal(disable_validation__function_has_no_body)
 fn tint_symbol_20(@internal(disable_validation__ignore_constructible_function_parameter) buffer : SB, offset : u32, param_1 : u32) -> u32
 
+@internal(intrinsic_atomic_compare_exchange_weak_storage_u32)
+struct atomic_compare_exchange_weak_ret_type_1 {
+  old_value : i32,
+  exchanged : bool,
+}
+
 @internal(intrinsic_atomic_compare_exchange_weak_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_21(@internal(disable_validation__ignore_constructible_function_parameter) buffer : SB, offset : u32, param_1 : u32, param_2 : u32) -> vec2<u32>
+fn tint_symbol_21(@internal(disable_validation__ignore_constructible_function_parameter) buffer : SB, offset : u32, param_1 : u32, param_2 : u32) -> atomic_compare_exchange_weak_ret_type_1
 
 @stage(compute) @workgroup_size(1)
 fn main() {

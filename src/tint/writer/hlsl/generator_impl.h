@@ -187,6 +187,12 @@ class GeneratorImpl : public TextGenerator {
     bool EmitStorageAtomicCall(std::ostream& out,
                                const ast::CallExpression* expr,
                                const transform::DecomposeMemoryAccess::Intrinsic* intrinsic);
+    /// Handles generating the helper function for the atomic intrinsic function
+    /// @param func the function
+    /// @intrinsic the atomic intrinsic
+    /// @returns true if the function is emitted
+    bool EmitStorageAtomicHelper(const ast::Function* func,
+                                 const transform::DecomposeMemoryAccess::Intrinsic* intrinsic);
     /// Handles generating an atomic intrinsic call for a workgroup variable
     /// @param out the output of the expression stream
     /// @param expr the call expression
