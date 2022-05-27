@@ -2,24 +2,6 @@ uint value_or_one_if_zero_uint(uint value) {
   return value == 0u ? 1u : value;
 }
 
-uint atomicLoad_1(RWByteAddressBuffer buffer, uint offset) {
-  uint value = 0;
-  buffer.InterlockedOr(offset, 0, value);
-  return value;
-}
-
-int atomicLoad_2(RWByteAddressBuffer buffer, uint offset) {
-  int value = 0;
-  buffer.InterlockedOr(offset, 0, value);
-  return value;
-}
-
-int atomicAdd_1(RWByteAddressBuffer buffer, uint offset, int value) {
-  int original_value = 0;
-  buffer.InterlockedAdd(offset, value, original_value);
-  return original_value;
-}
-
 void marg8uintin() {
 }
 
@@ -61,6 +43,20 @@ float3 loadPosition(uint vertexIndex) {
   return position;
 }
 
+uint atomicLoad_1(RWByteAddressBuffer buffer, uint offset) {
+  uint value = 0;
+  buffer.InterlockedOr(offset, 0, value);
+  return value;
+}
+
+
+int atomicLoad_2(RWByteAddressBuffer buffer, uint offset) {
+  int value = 0;
+  buffer.InterlockedOr(offset, 0, value);
+  return value;
+}
+
+
 void doIgnore() {
   uint g43 = uniforms[0].x;
   uint kj6 = dbg.Load(20u);
@@ -73,6 +69,13 @@ void doIgnore() {
 struct tint_symbol_1 {
   uint3 GlobalInvocationID : SV_DispatchThreadID;
 };
+
+int atomicAdd_1(RWByteAddressBuffer buffer, uint offset, int value) {
+  int original_value = 0;
+  buffer.InterlockedAdd(offset, value, original_value);
+  return original_value;
+}
+
 
 void main_count_inner(uint3 GlobalInvocationID) {
   uint triangleIndex = GlobalInvocationID.x;
