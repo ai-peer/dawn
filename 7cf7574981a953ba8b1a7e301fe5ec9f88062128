@@ -16,6 +16,29 @@
       "message": "Thanks",
       "revId": "7cf7574981a953ba8b1a7e301fe5ec9f88062128",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8bb6a13_abf09b1c",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-27T08:33:28Z",
+      "side": 1,
+      "message": "note: this mask was wrong, as the exponents are different lengths for f32 and f64, so you need to compensate for the fact they\u0027re not aligned on the LHS.\nThe correct mask is the low 29 bits (`f64`\u0027s 52 mantissa bits - `f32`\u0027s 23 mantissa bits)",
+      "range": {
+        "startLine": 673,
+        "startChar": 25,
+        "endLine": 673,
+        "endChar": 35
+      },
+      "revId": "7cf7574981a953ba8b1a7e301fe5ec9f88062128",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

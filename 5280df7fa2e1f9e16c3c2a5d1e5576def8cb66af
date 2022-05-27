@@ -34,6 +34,24 @@
       "parentUuid": "b5af104c_967ac87d",
       "revId": "5280df7fa2e1f9e16c3c2a5d1e5576def8cb66af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "847cd4c8_24b5f87b",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-27T08:33:28Z",
+      "side": 1,
+      "message": "Actually added the tests now.",
+      "parentUuid": "3f2439a2_d9060801",
+      "revId": "5280df7fa2e1f9e16c3c2a5d1e5576def8cb66af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
