@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3a4a78e_7dd9999c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-27T05:42:22Z",
+      "side": 1,
+      "message": "Brandon, I think this broke the Kokoro build FYI\n\nhttps://source.cloud.google.com/results/invocations/48ef3c37-1948-4e29-8a22-40d2998cf9d9/targets/dawn%2Flinux%2Fcmake-clang-debug-asan%2Fpresubmit/log\n\n/dawn/src/src/dawn/common/GPUInfo.cpp:56:17: error: no member named \u0027find\u0027 in namespace \u0027std\u0027\n    return std::find(Skylake.cbegin(), Skylake.cend(), deviceId) !\u003d Skylake.cend();",
+      "revId": "8cb8c7add770b92bf889bef6aedf017c0be7c477",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
