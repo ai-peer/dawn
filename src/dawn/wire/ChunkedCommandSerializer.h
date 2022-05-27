@@ -79,14 +79,19 @@ class ChunkedCommandSerializer {
 
         if (requiredSize <= mMaxAllocationSize) {
             char* allocatedBuffer = static_cast<char*>(mSerializer->GetCmdSpace(requiredSize));
-            if (allocatedBuffer != nullptr) {
-                SerializeBuffer serializeBuffer(allocatedBuffer, requiredSize);
-                WireResult r1 = SerializeCmd(cmd, requiredSize, &serializeBuffer);
-                WireResult r2 = SerializeExtraSize(&serializeBuffer);
-                if (DAWN_UNLIKELY(r1 != WireResult::Success || r2 != WireResult::Success)) {
-                    mSerializer->OnSerializeError();
-                }
+            if (DAWN_UNLIKELY(allocatedBuffer == nullptr)) {
+                mSerializer->DidWriteCmds(0);
+                return;
             }
+            SerializeBuffer serializeBuffer(allocatedBuffer, requiredSize);
+            WireResult r1 = SerializeCmd(cmd, requiredSize, &serializeBuffer);
+            WireResult r2 = SerializeExtraSize(&serializeBuffer);
+            if (DAWN_UNLIKELY(r1 != WireResult::Success || r2 != WireResult::Success)) {
+                mSerializer->DidWriteCmds(0);
+                mSerializer->OnSerializeError();
+                return;
+            }
+            mSerializer->DidWriteCmds(requiredSize);
             return;
         }
 
