@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "997867b9_2a0d0e37",
+        "filename": "src/tint/number.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-27T18:20:47Z",
+      "side": 1,
+      "message": "I\u0027m glad someone has worked this out and documented it well.\nThat\u0027s a good page!",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 126
+      },
+      "revId": "3bc8db38c0a7e082d5a384d4efb51e486d7cc126",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97a787e4_25084ede",
+        "filename": "src/tint/number_test.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-27T18:20:47Z",
+      "side": 1,
+      "message": "nit: should spot check CheckedMadd to make sure it\u0027s all wired together correctly.",
+      "revId": "3bc8db38c0a7e082d5a384d4efb51e486d7cc126",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
