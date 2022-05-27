@@ -1465,20 +1465,21 @@ bool GeneratorImpl::EmitStorageBufferAccess(
     return false;
 }
 
-bool GeneratorImpl::EmitStorageAtomicCall(
-    std::ostream& out,
-    const ast::CallExpression* expr,
+bool GeneratorImpl::EmitStorageAtomicHelper(
+    const ast::Function* func,
     const transform::DecomposeMemoryAccess::Intrinsic* intrinsic) {
     using Op = transform::DecomposeMemoryAccess::Intrinsic::Op;
 
-    auto* result_ty = TypeOf(expr);
+    const sem::Function* sem_func = builder_.Sem().Get(func);
+    auto* result_ty = sem_func->ReturnType();
+    const auto& params = sem_func->Parameters();
 
-    auto& buf = helpers_;
-
-    // generate_helper() generates a helper function that translates the
+    // Generate the helper function that translates the
     // DecomposeMemoryAccess::Intrinsic call into the corresponding HLSL
     // atomic intrinsic function.
     auto generate_helper = [&]() -> std::string {
+        auto& buf = *current_buffer_;
+
         auto rmw = [&](const char* wgsl, const char* hlsl) -> std::string {
             auto name = UniqueIdentifier(wgsl);
             {
@@ -1584,7 +1585,7 @@ bool GeneratorImpl::EmitStorageAtomicCall(
             case Op::kAtomicStore: {
                 // HLSL does not have an InterlockedStore, so we emulate it with
                 // InterlockedExchange and discard the returned value
-                auto* value_ty = TypeOf(expr->args[2])->UnwrapRef();
+                auto* value_ty = params[2]->Type()->UnwrapRef();
                 auto name = UniqueIdentifier("atomicStore");
                 {
                     auto fn = line(&buf);
@@ -1615,7 +1616,10 @@ bool GeneratorImpl::EmitStorageAtomicCall(
                 return name;
             }
             case Op::kAtomicCompareExchangeWeak: {
-                auto* value_ty = TypeOf(expr->args[2])->UnwrapRef();
+                // NOTE: We don't need to emit the return type struct here as DecomposeMemoryAccess
+                // already created it, and it should have already been emitted by now.
+
+                auto* value_ty = params[2]->Type()->UnwrapRef();
 
                 auto name = UniqueIdentifier("atomicCompareExchangeWeak");
                 {
@@ -1644,18 +1648,24 @@ bool GeneratorImpl::EmitStorageAtomicCall(
                     line(&buf);
                 });
 
-                {  // T result = {0, 0};
+                {  // T result = {0};
                     auto l = line(&buf);
                     if (!EmitTypeAndName(l, result_ty, ast::StorageClass::kNone,
                                          ast::Access::kUndefined, "result")) {
                         return "";
                     }
-                    l << " = {0, 0};";
+                    l << "=";
+                    if (!EmitZeroValue(l, result_ty)) {
+                        return "";
+                    }
+                    l << ";";
                 }
-                line(&buf) << "buffer.InterlockedCompareExchange(offset, compare, "
-                              "value, result.x);";
-                line(&buf) << "result.y = result.x == compare;";
+
+                line(&buf) << "buffer.InterlockedCompareExchange(offset, compare, value, "
+                              "result.old_value);";
+                line(&buf) << "result.exchanged = result.old_value == compare;";
                 line(&buf) << "return result;";
+
                 return name;
             }
             default:
@@ -1667,11 +1677,27 @@ bool GeneratorImpl::EmitStorageAtomicCall(
         return "";
     };
 
-    auto func = utils::GetOrCreate(dma_intrinsics_, DMAIntrinsic{intrinsic->op, intrinsic->type},
-                                   generate_helper);
-    if (func.empty()) {
+    auto func_name = utils::GetOrCreate(
+        dma_intrinsics_, DMAIntrinsic{intrinsic->op, intrinsic->type}, generate_helper);
+    if (func_name.empty()) {
         return false;
     }
+    return true;
+}
+
+bool GeneratorImpl::EmitStorageAtomicCall(
+    std::ostream& out,
+    const ast::CallExpression* expr,
+    const transform::DecomposeMemoryAccess::Intrinsic* intrinsic) {
+    auto key = DMAIntrinsic{intrinsic->op, intrinsic->type};
+    auto it = dma_intrinsics_.find(key);
+    if (it == dma_intrinsics_.end()) {
+        TINT_ICE(Writer, diagnostics_)
+            << "Expected storage atomic call helper to have been created for intrinsic op: "
+            << static_cast<int>(key.op) << ", type: " << static_cast<int>(key.type);
+        return false;
+    }
+    auto func = it->second;
 
     out << func;
     {
@@ -1788,6 +1814,12 @@ bool GeneratorImpl::EmitWorkgroupAtomicCall(std::ostream& out,
             return true;
         }
         case sem::BuiltinType::kAtomicCompareExchangeWeak: {
+            // Emit the builtin return type unique to this overload. This does not
+            // exist in the AST, so it will not be generated in Generate().
+            if (!EmitStructType(&helpers_, builtin->ReturnType()->As<sem::Struct>())) {
+                return false;
+            }
+
             auto* dest = expr->args[0];
             auto* compare_value = expr->args[1];
             auto* value = expr->args[2];
@@ -1807,7 +1839,7 @@ bool GeneratorImpl::EmitWorkgroupAtomicCall(std::ostream& out,
                 pre << ";";
             }
 
-            {  // InterlockedCompareExchange(dst, compare, value, result.x);
+            {  // InterlockedCompareExchange(dst, compare, value, result.old_value);
                 auto pre = line();
                 pre << "InterlockedCompareExchange";
                 {
@@ -1819,14 +1851,13 @@ bool GeneratorImpl::EmitWorkgroupAtomicCall(std::ostream& out,
                     if (!EmitExpression(pre, value)) {
                         return false;
                     }
-                    pre << ", " << result << ".x";
+                    pre << ", " << result << ".old_value";
                 }
                 pre << ";";
             }
 
-            {  // result.y = result.x == compare;
-                line() << result << ".y = " << result << ".x == " << compare << ";";
-            }
+            // result.exchanged = result.old_value == compare;
+            line() << result << ".exchanged = " << result << ".old_value == " << compare << ";";
 
             out << result;
             return true;
@@ -2739,6 +2770,17 @@ bool GeneratorImpl::EmitIf(const ast::IfStatement* stmt) {
 
 bool GeneratorImpl::EmitFunction(const ast::Function* func) {
     auto* sem = builder_.Sem().Get(func);
+
+    // Emit storage atomic helpers
+    if (auto* intrinsic =
+            ast::GetAttribute<transform::DecomposeMemoryAccess::Intrinsic>(func->attributes)) {
+        if (intrinsic->storage_class == ast::StorageClass::kStorage && intrinsic->IsAtomic()) {
+            if (!EmitStorageAtomicHelper(func, intrinsic)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     if (ast::HasAttribute<ast::InternalAttribute>(func->attributes)) {
         // An internal function. Do not emit.
@@ -3755,13 +3797,9 @@ bool GeneratorImpl::EmitStructType(TextBuffer* b, const sem::Struct* str) {
         ScopedIndent si(b);
         for (auto* mem : str->Members()) {
             auto mem_name = builder_.Symbols().NameFor(mem->Name());
-
             auto* ty = mem->Type();
-
             auto out = line(b);
-
             std::string pre, post;
-
             if (auto* decl = mem->Declaration()) {
                 for (auto* attr : decl->attributes) {
                     if (auto* location = attr->As<ast::LocationAttribute>()) {
@@ -3826,7 +3864,6 @@ bool GeneratorImpl::EmitStructType(TextBuffer* b, const sem::Struct* str) {
     }
 
     line(b) << "};";
-
     return true;
 }
 
