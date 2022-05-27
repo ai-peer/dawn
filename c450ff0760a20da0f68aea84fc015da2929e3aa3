@@ -69,6 +69,24 @@
       "parentUuid": "06f768b5_60626563",
       "revId": "c450ff0760a20da0f68aea84fc015da2929e3aa3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef866d98_365ec757",
+        "filename": "src/tint/number.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-27T09:29:03Z",
+      "side": 1,
+      "message": "I was referring to the host CPU. I admit that I don\u0027t think I\u0027ve ever used a CPU that doesn\u0027t support subnormals, so done.",
+      "parentUuid": "254161eb_c100ddfd",
+      "revId": "c450ff0760a20da0f68aea84fc015da2929e3aa3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
