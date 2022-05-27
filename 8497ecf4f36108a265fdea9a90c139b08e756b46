@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6e59ce1_a92a41e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-27T16:30:59Z",
+      "side": 1,
+      "message": "LGTM - we may need to worry about subdirectories in the future so filepath.Walk may be preferred.",
+      "revId": "8497ecf4f36108a265fdea9a90c139b08e756b46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
