@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "834c83fb_a8d41e5b",
+        "filename": "src/dawn/fuzzers/DawnWireServerFuzzer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-27T22:20:53Z",
+      "side": 1,
+      "message": "eh, I like the semantic of passing the adapter directly better. You could perform queries on it that aren\u0027t AdapterProperties",
+      "parentUuid": "09c076ee_316f1b6f",
+      "range": {
+        "startLine": 35,
+        "startChar": 33,
+        "endLine": 35,
+        "endChar": 61
+      },
+      "revId": "f02957a09e40c5fa887b4f0bcf098fb2b3f3938e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "256f61cc_69945e83",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e73801d3_ca33bc16",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-27T22:20:53Z",
+      "side": 1,
+      "message": "Yea, we should think about how we can make this better so we can more easily bind \"this\" to the function.",
+      "parentUuid": "256f61cc_69945e83",
+      "range": {
+        "startLine": 716,
+        "startChar": 4,
+        "endLine": 716,
+        "endChar": 24
+      },
+      "revId": "f02957a09e40c5fa887b4f0bcf098fb2b3f3938e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d4d3ca4_c112be44",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-05-27T19:52:58Z",
       "side": 1,
       "message": "WDYT about creating the dawnAdapter in ValidationTest as long as we are not using wire? Then we don\u0027t need to do it in the different tests here? If we expose a getter also, like GetDawnAdapter or something, we could make sure test writers can\u0027t get the dawn adapter when using wire.",
+      "range": {
+        "startLine": 27,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 95
+      },
+      "revId": "f02957a09e40c5fa887b4f0bcf098fb2b3f3938e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52808707_7e6057a1",
+        "filename": "src/dawn/tests/unittests/validation/DeviceValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-27T22:20:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d4d3ca4_c112be44",
       "range": {
         "startLine": 27,
         "startChar": 8,
