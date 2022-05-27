@@ -25,9 +25,11 @@ void ChunkedCommandSerializer::SerializeChunkedCommand(const char* allocatedBuff
         size_t chunkSize = std::min(remainingSize, mMaxAllocationSize);
         void* dst = mSerializer->GetCmdSpace(chunkSize);
         if (dst == nullptr) {
+            mSerializer->DidWriteCmds(0);
             return;
         }
         memcpy(dst, allocatedBuffer, chunkSize);
+        mSerializer->DidWriteCmds(chunkSize);
 
         allocatedBuffer += chunkSize;
         remainingSize -= chunkSize;

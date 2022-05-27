@@ -19,6 +19,7 @@ namespace dawn::wire {
 CommandSerializer::CommandSerializer() = default;
 CommandSerializer::~CommandSerializer() = default;
 
+void CommandSerializer::DidWriteCmds(size_t) {}
 void CommandSerializer::OnSerializeError() {}
 
 CommandHandler::CommandHandler() = default;

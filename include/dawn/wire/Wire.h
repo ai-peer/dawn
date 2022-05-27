@@ -35,6 +35,10 @@ class DAWN_WIRE_EXPORT CommandSerializer {
     // what GetMaximumAllocationSize returns. Return nullptr to indicate
     // a fatal error.
     virtual void* GetCmdSpace(size_t size) = 0;
+    // Indicate that command space reserved with GetCmdSpace was written.
+    // May be called with 0 if allocation of the space failed, or if there
+    // was a serialization error.
+    virtual void DidWriteCmds(size_t size);
     virtual bool Flush() = 0;
     virtual size_t GetMaximumAllocationSize() const = 0;
     virtual void OnSerializeError();
