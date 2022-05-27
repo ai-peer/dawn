@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "897560f1_ce618351",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-27T17:58:40Z",
+      "side": 1,
+      "message": "Great. Thanks!",
+      "revId": "3a5eac5192338a4435c87a1d8e5422021b8dd6d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b182535_699d9ab7",
+        "filename": "test/tint/bug/tint/1564.wgsl",
+        "patchSetId": 12
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-27T17:58:40Z",
+      "side": 1,
+      "message": "nice. thanks",
+      "range": {
+        "startLine": 2,
+        "startChar": 4,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "3a5eac5192338a4435c87a1d8e5422021b8dd6d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
