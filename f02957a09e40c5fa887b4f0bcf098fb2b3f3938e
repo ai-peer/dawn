@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "453bcfb3_2d2720ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-27T19:52:58Z",
+      "side": 1,
+      "message": "Overall LGTM, sorry for the delay!",
+      "revId": "f02957a09e40c5fa887b4f0bcf098fb2b3f3938e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09c076ee_316f1b6f",
+        "filename": "src/dawn/fuzzers/DawnWireServerFuzzer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-27T19:52:58Z",
+      "side": 1,
+      "message": "[optional] Maybe this could just take the AdapterProperties?",
+      "range": {
+        "startLine": 35,
+        "startChar": 33,
+        "endLine": 35,
+        "endChar": 61
+      },
+      "revId": "f02957a09e40c5fa887b4f0bcf098fb2b3f3938e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "256f61cc_69945e83",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-27T19:52:58Z",
+      "side": 1,
+      "message": "I assume this is because we are using c-style func ptrs, and not something like std::function where we could bind partial args... \n\nNot necessarily for now, but for DawnNative, WDYT about somehow allowing users to register a static void* proctabledata or something that the proc tables could later cast and use? Not sure about the details for that yet, but I remember there was another issue at some point because we couldn\u0027t bind anything to the func ptrs so maybe this could be a workaround?",
+      "range": {
+        "startLine": 716,
+        "startChar": 4,
+        "endLine": 716,
+        "endChar": 24
+      },
+      "revId": "f02957a09e40c5fa887b4f0bcf098fb2b3f3938e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d4d3ca4_c112be44",
+        "filename": "src/dawn/tests/unittests/validation/DeviceValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-27T19:52:58Z",
+      "side": 1,
+      "message": "WDYT about creating the dawnAdapter in ValidationTest as long as we are not using wire? Then we don\u0027t need to do it in the different tests here? If we expose a getter also, like GetDawnAdapter or something, we could make sure test writers can\u0027t get the dawn adapter when using wire.",
+      "range": {
+        "startLine": 27,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 95
+      },
+      "revId": "f02957a09e40c5fa887b4f0bcf098fb2b3f3938e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
