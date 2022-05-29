@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96782b59_a913759f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-29T17:31:32Z",
+      "side": 1,
+      "message": "PTAL again, trying to get this out of my WIP CLs list.",
+      "revId": "56f84753a487f65690e5c8a9a9f413f38a73406b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
