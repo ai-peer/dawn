@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23754dd3_93507ba1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-05-30T11:43:30Z",
+      "side": 1,
+      "message": "Thanks for the review!",
+      "parentUuid": "66f18190_1c281343",
+      "revId": "22bf10c2364d037b3a8b1dfccb01407ab1d75523",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bded486_d83a90cb",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-05-30T11:19:49Z",
       "side": 1,
       "message": "nit: IMHO we could just always use planeLayouts and have plane[0] for single-planar images.\n\nTo avoid breaking Chromium compilation we could leave stride defaulting to 0 for now, if it isn\u0027t 0 use it otherwise use planeLayouts[0].stride. Then switch Chromium over, then remove stride.",
+      "revId": "22bf10c2364d037b3a8b1dfccb01407ab1d75523",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34f6bd14_f9a0b84e",
+        "filename": "include/dawn/native/VulkanBackend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-05-30T11:43:30Z",
+      "side": 1,
+      "message": "Makes senses. I also had the same thoughts for such switch.",
+      "parentUuid": "4bded486_d83a90cb",
       "revId": "22bf10c2364d037b3a8b1dfccb01407ab1d75523",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
