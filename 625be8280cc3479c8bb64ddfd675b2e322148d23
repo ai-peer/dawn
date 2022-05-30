@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09974e18_879af6a0",
+        "filename": "src/tint/transform/decompose_memory_access.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-30T20:39:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af3c86e5_c4c90d37",
+      "range": {
+        "startLine": 669,
+        "startChar": 56,
+        "endLine": 669,
+        "endChar": 72
+      },
+      "revId": "625be8280cc3479c8bb64ddfd675b2e322148d23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf108efb_39749886",
@@ -88,6 +112,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f8b71c5_8da33b5d",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1452,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-30T20:39:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf108efb_39749886",
+      "range": {
+        "startLine": 1452,
+        "startChar": 14,
+        "endLine": 1452,
+        "endChar": 44
+      },
+      "revId": "625be8280cc3479c8bb64ddfd675b2e322148d23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97bffa14_462f223d",
@@ -101,6 +149,30 @@
       "writtenOn": "2022-05-30T19:56:19Z",
       "side": 1,
       "message": "added it to the AST",
+      "range": {
+        "startLine": 1606,
+        "startChar": 23,
+        "endLine": 1606,
+        "endChar": 33
+      },
+      "revId": "625be8280cc3479c8bb64ddfd675b2e322148d23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "077ba915_8b8eb4ce",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1606,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-30T20:39:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97bffa14_462f223d",
       "range": {
         "startLine": 1606,
         "startChar": 23,
