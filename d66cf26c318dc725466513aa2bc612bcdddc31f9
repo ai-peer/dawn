@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dfe2f683_7db368bc",
+        "filename": "src/tint/transform/decompose_memory_access.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-30T19:07:21Z",
+      "side": 1,
+      "message": "Good catch, vestige of my original attempt to address this. Will remove.",
+      "parentUuid": "1f95ae5f_64323926",
+      "range": {
+        "startLine": 664,
+        "startChar": 20,
+        "endLine": 664,
+        "endChar": 77
+      },
+      "revId": "d66cf26c318dc725466513aa2bc612bcdddc31f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f1ffe9a_2b22e8d4",
         "filename": "src/tint/writer/glsl/generator_impl.cc",
         "patchSetId": 3
@@ -70,6 +94,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "211d9932_01155311",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-30T19:07:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04290214_ca9830b4",
+      "range": {
+        "startLine": 971,
+        "startChar": 23,
+        "endLine": 971,
+        "endChar": 46
+      },
+      "revId": "d66cf26c318dc725466513aa2bc612bcdddc31f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "416a9465_057dc0f9",
@@ -93,6 +141,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfbd56d5_8405ce2e",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-30T19:07:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "416a9465_057dc0f9",
+      "range": {
+        "startLine": 1468,
+        "startChar": 20,
+        "endLine": 1468,
+        "endChar": 43
+      },
+      "revId": "d66cf26c318dc725466513aa2bc612bcdddc31f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0691e90_19e78344",
@@ -106,6 +178,30 @@
       "writtenOn": "2022-05-30T17:28:09Z",
       "side": 1,
       "message": "See above - I\u0027m not sure we need this function, nor any of the `dma_intrinsics_` tracking stuff in here.",
+      "range": {
+        "startLine": 1688,
+        "startChar": 0,
+        "endLine": 1688,
+        "endChar": 42
+      },
+      "revId": "d66cf26c318dc725466513aa2bc612bcdddc31f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c1d12ea_d050b4d2",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1688,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-30T19:07:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0691e90_19e78344",
       "range": {
         "startLine": 1688,
         "startChar": 0,
