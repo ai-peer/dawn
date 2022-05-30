@@ -27,6 +27,7 @@
 #include "src/tint/sem/atomic.h"
 #include "src/tint/sem/builtin.h"
 #include "src/tint/sem/call.h"
+#include "src/tint/sem/constant.h"
 #include "src/tint/sem/depth_multisampled_texture.h"
 #include "src/tint/sem/depth_texture.h"
 #include "src/tint/sem/function.h"
@@ -566,8 +567,12 @@ bool Builder::GenerateExecutionModes(const ast::Function* func, uint32_t id) {
 }
 
 uint32_t Builder::GenerateExpression(const ast::Expression* expr) {
+    if (auto* m = builder_.Sem().Get<sem::Materialize>(expr)) {
+        return GenerateConstantIfNeeded(m->ConstantValue());
+    }
     return Switch(
-        expr, [&](const ast::IndexAccessorExpression* a) { return GenerateAccessorExpression(a); },
+        expr,  //
+        [&](const ast::IndexAccessorExpression* a) { return GenerateAccessorExpression(a); },
         [&](const ast::BinaryExpression* b) { return GenerateBinaryExpression(b); },
         [&](const ast::BitcastExpression* b) { return GenerateBitcastExpression(b); },
         [&](const ast::CallExpression* c) { return GenerateCallExpression(c); },
@@ -743,7 +748,11 @@ bool Builder::GenerateGlobalVariable(const ast::Variable* var) {
 
     uint32_t init_id = 0;
     if (var->constructor) {
-        init_id = GenerateConstructorExpression(var, var->constructor);
+        if (auto constant = sem->ConstantValue()) {
+            init_id = GenerateConstantIfNeeded(std::move(constant));
+        } else {
+            init_id = GenerateConstructorExpression(var, var->constructor);
+        }
         if (init_id == 0) {
             return false;
         }
@@ -1662,6 +1671,115 @@ uint32_t Builder::GenerateLiteralIfNeeded(const ast::Variable* var,
     return GenerateConstantIfNeeded(constant);
 }
 
+uint32_t Builder::GenerateConstantIfNeeded(const sem::Constant& constant) {
+    if (constant.AllZero()) {
+        return GenerateConstantNullIfNeeded(constant.Type());
+    }
+
+    static constexpr size_t kOpsResultIdx = 1;  // operand index of the result
+    auto& global_scope = scope_stack_[0];
+
+    auto gen_bool = [&](size_t element_idx) {
+        bool val = constant.Element<AInt>(element_idx);
+        return GenerateConstantIfNeeded(ScalarConstant::Bool(val));
+    };
+    auto gen_f32 = [&](size_t element_idx) {
+        auto val = f32(constant.Element<AFloat>(element_idx));
+        return GenerateConstantIfNeeded(ScalarConstant::F32(val.value));
+    };
+    auto gen_i32 = [&](size_t element_idx) {
+        auto val = i32(constant.Element<AInt>(element_idx));
+        return GenerateConstantIfNeeded(ScalarConstant::I32(val.value));
+    };
+    auto gen_u32 = [&](size_t element_idx) {
+        auto val = u32(constant.Element<AInt>(element_idx));
+        return GenerateConstantIfNeeded(ScalarConstant::U32(val.value));
+    };
+    auto gen_els = [&](std::vector<Operand>& ids, size_t start, size_t end, auto gen_el) {
+        for (size_t i = start; i < end; i++) {
+            auto id = gen_el(i);
+            if (!id) {
+                return false;
+            }
+            ids.emplace_back(id);
+        }
+        return true;
+    };
+    auto gen_vector = [&](const sem::Vector* ty, size_t start, size_t end) -> uint32_t {
+        auto type_id = GenerateTypeIfNeeded(ty);
+        if (!type_id) {
+            return 0;
+        }
+
+        std::vector<Operand> ops;
+        ops.reserve(end - start + 2);
+        ops.emplace_back(type_id);
+        ops.push_back(Operand(0u));  // Placeholder for the result ID
+        auto ok = Switch(
+            constant.ElementType(),                                                //
+            [&](const sem::Bool*) { return gen_els(ops, start, end, gen_bool); },  //
+            [&](const sem::F32*) { return gen_els(ops, start, end, gen_f32); },    //
+            [&](const sem::I32*) { return gen_els(ops, start, end, gen_i32); },    //
+            [&](const sem::U32*) { return gen_els(ops, start, end, gen_u32); },    //
+            [&](Default) {
+                error_ = "unhandled constant element type: " + builder_.FriendlyName(ty);
+                return false;
+            });
+        if (!ok) {
+            return 0;
+        }
+
+        return utils::GetOrCreate(global_scope.type_ctor_to_id_, OperandListKey{ops},
+                                  [&]() -> uint32_t {
+                                      auto result = result_op();
+                                      ops[kOpsResultIdx] = result;
+                                      push_type(spv::Op::OpConstantComposite, std::move(ops));
+                                      return std::get<uint32_t>(result);
+                                  });
+    };
+
+    return Switch(
+        constant.Type(),                                                                  //
+        [&](const sem::Bool*) { return gen_bool(0); },                                    //
+        [&](const sem::F32*) { return gen_f32(0); },                                      //
+        [&](const sem::I32*) { return gen_i32(0); },                                      //
+        [&](const sem::U32*) { return gen_u32(0); },                                      //
+        [&](const sem::Vector* v) { return gen_vector(v, 0, constant.ElementCount()); },  //
+        [&](const sem::Matrix* m) -> uint32_t {
+            auto mat_type_id = GenerateTypeIfNeeded(m);
+            if (!mat_type_id) {
+                return 0;
+            }
+
+            std::vector<Operand> ops;
+            ops.reserve(m->columns() + 2);
+            ops.emplace_back(mat_type_id);
+            ops.push_back(Operand(0u));  // Placeholder for the result ID
+
+            for (size_t column_idx = 0; column_idx < m->columns(); column_idx++) {
+                size_t start = m->rows() * column_idx;
+                size_t end = m->rows() * (column_idx + 1);
+                auto column_id = gen_vector(m->ColumnType(), start, end);
+                if (!column_id) {
+                    return 0;
+                }
+                ops.emplace_back(column_id);
+            }
+
+            return utils::GetOrCreate(global_scope.type_ctor_to_id_, OperandListKey{ops},
+                                      [&]() -> uint32_t {
+                                          auto result = result_op();
+                                          ops[kOpsResultIdx] = result;
+                                          push_type(spv::Op::OpConstantComposite, std::move(ops));
+                                          return std::get<uint32_t>(result);
+                                      });
+        },
+        [&](Default) {
+            error_ = "unhandled constant type: " + builder_.FriendlyName(constant.Type());
+            return false;
+        });
+}
+
 uint32_t Builder::GenerateConstantIfNeeded(const ScalarConstant& constant) {
     auto it = const_to_id_.find(constant);
     if (it != const_to_id_.end()) {
@@ -2174,12 +2292,7 @@ bool Builder::GenerateBlockStatementWithoutScoping(const ast::BlockStatement* st
 }
 
 uint32_t Builder::GenerateCallExpression(const ast::CallExpression* expr) {
-    auto* sem = builder_.Sem().Get(expr);
-    if (auto* m = sem->As<sem::Materialize>()) {
-        // TODO(crbug.com/tint/1504): Just emit the constant value.
-        sem = m->Expr();
-    }
-    auto* call = sem->As<sem::Call>();
+    auto* call = builder_.Sem().Get<sem::Call>(expr);
     auto* target = call->Target();
     return Switch(
         target, [&](const sem::Function* func) { return GenerateFunctionCall(call, func); },
