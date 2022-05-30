@@ -282,6 +282,24 @@
       "parentUuid": "329a2bed_50e5d9ba",
       "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d36afa27_ccaa89cf",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-05-30T00:31:55Z",
+      "side": 1,
+      "message": "The CL to Blink has been merged. I made a follow up CL to Dawn to set the default enum value back to non-zero.\n\nhttps://dawn-review.googlesource.com/c/dawn/+/91920",
+      "parentUuid": "c8b3ae49_eab6a2b5",
+      "revId": "66bfe10fdb20ca54589e73896d4169e551236ce4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
