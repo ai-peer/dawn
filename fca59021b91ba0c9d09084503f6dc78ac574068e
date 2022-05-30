@@ -16,6 +16,23 @@
       "message": "I find it hard to skim the messages and see which are info, warning or error. This should help.",
       "revId": "fca59021b91ba0c9d09084503f6dc78ac574068e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74d6de04_e80ac2c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-30T14:05:18Z",
+      "side": 1,
+      "message": "This is why we need unicode support in programming languages!",
+      "revId": "fca59021b91ba0c9d09084503f6dc78ac574068e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
