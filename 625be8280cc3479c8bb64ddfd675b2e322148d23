@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af3c86e5_c4c90d37",
+        "filename": "src/tint/transform/decompose_memory_access.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-30T20:03:23Z",
+      "side": 1,
+      "message": "Yeah, I actually was wondering whether I should prefix this with \"tint_\" to make sure it was obvious that we generated it. What do you think?",
+      "parentUuid": "d5ebea18_28496537",
+      "range": {
+        "startLine": 669,
+        "startChar": 56,
+        "endLine": 669,
+        "endChar": 72
+      },
+      "revId": "625be8280cc3479c8bb64ddfd675b2e322148d23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bf108efb_39749886",
         "filename": "src/tint/writer/hlsl/generator_impl.cc",
         "patchSetId": 5
