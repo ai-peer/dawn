@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "238c039f_c842c1fc",
+        "filename": "src/tint/transform/decompose_memory_access.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-30T19:33:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfe2f683_7db368bc",
+      "range": {
+        "startLine": 664,
+        "startChar": 20,
+        "endLine": 664,
+        "endChar": 77
+      },
+      "revId": "d66cf26c318dc725466513aa2bc612bcdddc31f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f1ffe9a_2b22e8d4",
