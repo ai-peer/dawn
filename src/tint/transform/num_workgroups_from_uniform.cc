@@ -14,7 +14,9 @@
 
 #include "src/tint/transform/num_workgroups_from_uniform.h"
 
+#include <functional>
 #include <memory>
+#include <set>
 #include <string>
 #include <unordered_set>
 #include <utility>
@@ -122,10 +124,38 @@ void NumWorkgroupsFromUniform::Run(CloneContext& ctx, const DataMap& inputs, Dat
             auto* num_workgroups_struct = ctx.dst->Structure(
                 ctx.dst->Sym(),
                 {ctx.dst->Member(kNumWorkgroupsMemberName, ctx.dst->ty.vec3(ctx.dst->ty.u32()))});
+
+            uint32_t group, binding;
+            if (cfg->ubo_binding.has_value()) {
+                // If cfg->ubo_binding holds a value, use the specified binding point.
+                group = cfg->ubo_binding->group;
+                binding = cfg->ubo_binding->binding;
+            } else {
+                // If cfg->ubo_binding holds no value, use the binding 0 of the largest used group
+                // plus 1.
+
+                std::set<uint64_t, std::less<uint64_t>> used_groups;
+
+                for (auto* var : ctx.src->AST().GlobalVariables()) {
+                    if (auto binding_point = var->BindingPoint()) {
+                        used_groups.insert(binding_point.group->value);
+                    }
+                }
+
+                if (used_groups.empty()) {
+                    // Use group 0 if no binding point is used.
+                    group = 0;
+                } else {
+                    // Set the binding group to the largest used group plus 1.
+                    group = *used_groups.crbegin() + 1;
+                }
+
+                binding = 0;
+            }
+
             num_workgroups_ubo = ctx.dst->Global(
                 ctx.dst->Sym(), ctx.dst->ty.Of(num_workgroups_struct), ast::StorageClass::kUniform,
-                ast::AttributeList{
-                    ctx.dst->GroupAndBinding(cfg->ubo_binding.group, cfg->ubo_binding.binding)});
+                ast::AttributeList{ctx.dst->GroupAndBinding(group, binding)});
         }
         return num_workgroups_ubo;
     };
@@ -151,7 +181,8 @@ void NumWorkgroupsFromUniform::Run(CloneContext& ctx, const DataMap& inputs, Dat
     ctx.Clone();
 }
 
-NumWorkgroupsFromUniform::Config::Config(sem::BindingPoint ubo_bp) : ubo_binding(ubo_bp) {}
+NumWorkgroupsFromUniform::Config::Config(std::optional<sem::BindingPoint> ubo_bp)
+    : ubo_binding(ubo_bp) {}
 NumWorkgroupsFromUniform::Config::Config(const Config&) = default;
 NumWorkgroupsFromUniform::Config::~Config() = default;
 
