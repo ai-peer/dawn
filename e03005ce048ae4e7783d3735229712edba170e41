@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7742e8d_55989486",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-31T20:15:12Z",
+      "side": 1,
+      "message": "Great job! Just one nit about the transform\u0027s tests.",
+      "revId": "e03005ce048ae4e7783d3735229712edba170e41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d694244_fdeeef00",
+        "filename": "src/tint/transform/num_workgroups_from_uniform_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-31T20:15:12Z",
+      "side": 1,
+      "message": "nit: it might have been more interesting to have a gap in the groups (e.g. remove both `@group(2) @binding(0)` and `@group(2) @binding(1)`) to check that the transform doesn\u0027t just fill the first hole it finds.",
+      "range": {
+        "startLine": 567,
+        "startChar": 0,
+        "endLine": 567,
+        "endChar": 68
+      },
+      "revId": "e03005ce048ae4e7783d3735229712edba170e41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
