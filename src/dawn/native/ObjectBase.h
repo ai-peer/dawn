@@ -25,16 +25,25 @@ namespace dawn::native {
 
 class DeviceBase;
 
-class ObjectBase : public RefCounted {
+class ErrorMonad : public RefCounted {
   public:
     struct ErrorTag {};
     static constexpr ErrorTag kError = {};
+
+    ErrorMonad();
+    explicit ErrorMonad(ErrorTag tag);
+
+    bool IsError() const;
+};
+
+class ObjectBase : public ErrorMonad {
+  public:
+    using ErrorTag = ErrorMonad::ErrorTag;
 
     explicit ObjectBase(DeviceBase* device);
     ObjectBase(DeviceBase* device, ErrorTag tag);
 
     DeviceBase* GetDevice() const;
-    bool IsError() const;
 
   private:
     // Ref to owning device.
