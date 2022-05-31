@@ -16,6 +16,29 @@
       "message": "LGTM",
       "revId": "27fbf30868c192ec85052c7a9214a24eca9bfb9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "110802c7_40ae0fdc",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-31T20:46:01Z",
+      "side": 1,
+      "message": "Do we have a specific bug for this? Might be worthwhile to file one otherwise and add the TODO for the bug here instead of this comment. (Or just use the one in the CL description?)",
+      "range": {
+        "startLine": 324,
+        "startChar": 4,
+        "endLine": 324,
+        "endChar": 61
+      },
+      "revId": "27fbf30868c192ec85052c7a9214a24eca9bfb9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
