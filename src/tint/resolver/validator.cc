@@ -76,6 +76,7 @@
 #include "src/tint/utils/math.h"
 #include "src/tint/utils/reverse.h"
 #include "src/tint/utils/scoped_assignment.h"
+#include "src/tint/utils/string.h"
 #include "src/tint/utils/transform.h"
 
 namespace tint::resolver {
@@ -282,8 +283,8 @@ bool Validator::Materialize(const sem::Materialize* m) const {
     auto* to = m->Type();
 
     if (sem::Type::ConversionRank(from, to) == sem::Type::kNoConversion) {
-        AddError("cannot convert value of type '" + sem_.TypeNameOf(from) + "' to type '" +
-                     sem_.TypeNameOf(to) + "'",
+        AddError(utils::Join("cannot convert value of type", utils::Quote(sem_.TypeNameOf(from)),
+                             "to type", utils::Quote(sem_.TypeNameOf(to))),
                  m->Expr()->Declaration()->source);
         return false;
     }
@@ -299,8 +300,9 @@ bool Validator::VariableConstructorOrCast(const ast::Variable* var,
     // Value type has to match storage type
     if (storage_ty != value_type) {
         std::string decl = var->is_const ? "let" : "var";
-        AddError("cannot initialize " + decl + " of type '" + sem_.TypeNameOf(storage_ty) +
-                     "' with value of type '" + sem_.TypeNameOf(rhs_ty) + "'",
+        AddError(utils::Join("cannot initialize", decl, "of type",
+                             utils::Quote(sem_.TypeNameOf(storage_ty)), "with value of type",
+                             utils::Quote(sem_.TypeNameOf(rhs_ty))),
                  var->source);
         return false;
     }
@@ -314,11 +316,11 @@ bool Validator::VariableConstructorOrCast(const ast::Variable* var,
                 // https://gpuweb.github.io/gpuweb/wgsl/#var-and-let
                 // Optionally has an initializer expression, if the variable is in the
                 // private or function storage classes.
-                AddError("var of storage class '" + std::string(ast::ToString(storage_class)) +
-                             "' cannot have an initializer. var initializers are only "
-                             "supported for the storage classes "
-                             "'private' and 'function'",
-                         var->source);
+                AddError(
+                    utils::Join("var of storage class", utils::Quote(ast::ToString(storage_class)),
+                                "cannot have an initializer. var initializers are only supported "
+                                "for the storage classes 'private' and 'function'"),
+                    var->source);
                 return false;
         }
     }
@@ -376,13 +378,14 @@ bool Validator::StorageClassLayout(const sem::Type* store_ty,
 
             // Validate that member is at a valid byte offset
             if (m->Offset() % required_align != 0) {
-                AddError("the offset of a struct member of type '" +
-                             m->Type()->UnwrapRef()->FriendlyName(symbols_) +
-                             "' in storage class '" + ast::ToString(sc) +
-                             "' must be a multiple of " + std::to_string(required_align) +
-                             " bytes, but '" + member_name_of(m) + "' is currently at offset " +
-                             std::to_string(m->Offset()) + ". Consider setting @align(" +
-                             std::to_string(required_align) + ") on this member",
+                AddError(utils::Join("the offset of a struct member of type",
+                                     utils::Quote(m->Type()->UnwrapRef()->FriendlyName(symbols_)),
+                                     "in storage class", utils::Quote(ast::ToString(sc)),
+                                     "must be a multiple of", std::to_string(required_align),
+                                     "bytes, but", utils::Quote(member_name_of(m)),
+                                     "is currently at offset", std::to_string(m->Offset()) + ".",
+                                     "Consider setting @align(" + std::to_string(required_align) +
+                                         ") on this member"),
                          m->Declaration()->source);
 
                 AddNote("see layout of struct:\n" + str->Layout(symbols_),
@@ -1581,8 +1584,8 @@ bool Validator::RequiredExtensionForBuiltinFunction(
     }
 
     if (!enabled_extensions.contains(extension)) {
-        AddError("cannot call built-in function '" + std::string(builtin->str()) +
-                     "' without extension " + ast::str(extension),
+        AddError(utils::Join("cannot call built-in function", utils::Quote(builtin->str()),
+                             "without extension", ast::str(extension)),
                  call->Declaration()->source);
         return false;
     }
@@ -1605,10 +1608,9 @@ bool Validator::FunctionCall(const sem::Call* call, sem::Statement* current_stat
 
     if (decl->args.size() != target->Parameters().size()) {
         bool more = decl->args.size() > target->Parameters().size();
-        AddError("too " + (more ? std::string("many") : std::string("few")) +
-                     " arguments in call to '" + name + "', expected " +
-                     std::to_string(target->Parameters().size()) + ", got " +
-                     std::to_string(call->Arguments().size()),
+        AddError(utils::Concat("too ", more ? "many" : "few", " arguments in call to '", name,
+                               "', expected ", std::to_string(target->Parameters().size()),
+                               ", got ", std::to_string(call->Arguments().size())),
                  decl->source);
         return false;
     }

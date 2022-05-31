@@ -15,7 +15,10 @@
 #ifndef SRC_TINT_UTILS_STRING_H_
 #define SRC_TINT_UTILS_STRING_H_
 
+#include <array>  // for std::size
+#include <cstring>
 #include <string>
+#include <type_traits>
 
 namespace tint::utils {
 
@@ -32,6 +35,59 @@ inline std::string ReplaceAll(std::string str,
         pos += replacement.length();
     }
     return str;
+}
+
+template <typename Sep, typename Arg1, typename... Args>
+std::string JoinWith(Sep&& sep, Arg1&& arg1, Args&&... args) {
+    auto len = [&](auto& a) {
+        // Do not std::decay_t otherise const char[N] will decay to const char*, and strlen will be
+        // invoked unnecessarily.
+        using T = std::remove_reference_t<decltype(a)>;
+        if constexpr (std::is_same_v<T, const char*>) {
+            return strlen(a);
+        } else {
+            // For const char[N], std::string, and std::string_view
+            return std::size(a);
+        }
+    };
+
+    std::string result;
+    result.reserve((len(args) + ...) + (len(sep) * sizeof...(Args)));
+    result.append(std::forward<Arg1>(arg1));
+    ((result.append(sep), result.append(std::forward<Args>(args))), ...);
+
+    return result;
+}
+
+template <typename Arg1, typename... Args>
+std::string Join(Arg1&& arg1, Args&&... args) {
+    return JoinWith(" ", std::forward<Arg1>(arg1), std::forward<Args>(args)...);
+}
+
+template <typename... Args>
+std::string Concat(Args&&... args) {
+    auto len = [&](auto& a) {
+        // Do not std::decay_t otherise const char[N] will decay to const char*, and strlen will be
+        // invoked unnecessarily.
+        using T = std::remove_reference_t<decltype(a)>;
+        if constexpr (std::is_same_v<T, const char*>) {
+            return strlen(a);
+        } else {
+            // For const char[N], std::string, and std::string_view
+            return std::size(a);
+        }
+    };
+
+    std::string result;
+    result.reserve((len(args) + ...));
+    (result.append(std::forward<Args>(args)), ...);
+
+    return result;
+}
+
+template <typename T>
+std::string Quote(T&& s) {
+    return Concat("'", std::forward<T>(s), "'");
 }
 
 }  // namespace tint::utils
