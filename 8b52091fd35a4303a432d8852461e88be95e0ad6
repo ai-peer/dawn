@@ -16,6 +16,29 @@
       "message": "Thanks, James.",
       "revId": "8b52091fd35a4303a432d8852461e88be95e0ad6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cd63df6_bc3e9dd5",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3166,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-31T20:48:59Z",
+      "side": 1,
+      "message": "No request for change, but this might be cleaner to write by using the parameter type instead of the argument type, as the parameter type is not a ref.",
+      "range": {
+        "startLine": 3164,
+        "startChar": 12,
+        "endLine": 3166,
+        "endChar": 80
+      },
+      "revId": "8b52091fd35a4303a432d8852461e88be95e0ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
