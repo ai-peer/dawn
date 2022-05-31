@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a3f6684_fb8fb709",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-31T17:31:09Z",
+      "side": 1,
+      "message": "lgtm w/ nit. Skimmed the test files ....",
+      "revId": "0d158dc00c0e915e4d8d231ea36e6d632dbd2021",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc5287b6_1ae63582",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1759,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-31T17:31:09Z",
+      "side": 1,
+      "message": "Move to a helper lambda to be consistent with all others?",
+      "revId": "0d158dc00c0e915e4d8d231ea36e6d632dbd2021",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
