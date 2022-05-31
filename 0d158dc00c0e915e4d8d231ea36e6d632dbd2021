@@ -33,6 +33,24 @@
       "message": "Move to a helper lambda to be consistent with all others?",
       "revId": "0d158dc00c0e915e4d8d231ea36e6d632dbd2021",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb4e37cf_94214158",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1759,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-31T18:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc5287b6_1ae63582",
+      "revId": "0d158dc00c0e915e4d8d231ea36e6d632dbd2021",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
