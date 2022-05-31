@@ -391,6 +391,42 @@ class Adapter : public AdapterBase {
         return {};
     }
 
+    void InitializeVendorArchitectureImpl() override {
+        if (@available(macOS 10.15, iOS 13.0, *)) {
+            // Set the GPU vendor to Apple if no vendor ID was found using other methods and
+            // any of the Apple GPU family is listed as supported.
+            if (mVendorId == 0) {
+                // TODO(dawn:1443): It's unclear if only testing for the 'apple1' family will
+                // detect all Apple GPUs now and in the future. Verify with Apple if possible.
+                if ([*mDevice supportsFamily:MTLGPUFamilyApple1] ||
+                    [*mDevice supportsFamily:MTLGPUFamilyApple7]) {
+                    mVendorId = gpu_info::kVendorID_Apple;
+                }
+            }
+
+            // According to Apple's documentation:
+            // https://developer.apple.com/documentation/metal/gpu_devices_and_work_submission/detecting_gpu_features_and_metal_software_versions
+            // - "Use the Common family to create apps that target a range of GPUs on multiple
+            //   platforms.""
+            // - "A GPU can be a member of more than one family; in most cases, a GPU supports one
+            //   of the Common families and then one or more families specific to the build target."
+            // So we'll use the highest supported common family as the reported "architecture" on
+            // devices where a deviceID isn't available.
+            if ([*mDevice supportsFamily:MTLGPUFamilyCommon3]) {
+                mArchitectureName = "common-3";
+            } else if ([*mDevice supportsFamily:MTLGPUFamilyCommon2]) {
+                mArchitectureName = "common-2";
+            } else if ([*mDevice supportsFamily:MTLGPUFamilyCommon1]) {
+                mArchitectureName = "common-1";
+            }
+        }
+
+        mVendorName = gpu_info::GetVendorName(mVendorId);
+        if (mDeviceId != 0) {
+            mArchitectureName = gpu_info::GetArchitectureName(mVendorId, mDeviceId);
+        }
+    };
+
     enum class MTLGPUFamily {
         Apple1,
         Apple2,
