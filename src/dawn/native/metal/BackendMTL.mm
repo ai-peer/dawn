@@ -293,6 +293,28 @@ class Adapter : public AdapterBase {
 
         NSString* osVersion = [[NSProcessInfo processInfo] operatingSystemVersionString];
         mDriverDescription = "Metal driver on " + std::string(systemName) + [osVersion UTF8String];
+
+        if (@available(macOS 10.15, iOS 13.0, *)) {
+            // Set the GPU vendor to Apple if no vendor ID was found using other methods and
+            // any of the Apple GPU family is listed as supported.
+            if (mVendorId == 0) {
+                if ([*mDevice supportsFamily:MTLGPUFamilyApple1]) {
+                    mVendorId = 0x106B;
+                }
+            }
+
+            // If a deviceID isn't available, check which of the common GPU family is support
+            // and report that as the architecture.
+            if (mDeviceId == 0) {
+                if ([*mDevice supportsFamily:MTLGPUFamilyCommon3]) {
+                    mArchitectureName = "common-3";
+                } else if ([*mDevice supportsFamily:MTLGPUFamilyCommon2]) {
+                    mArchitectureName = "common-2";
+                } else if ([*mDevice supportsFamily:MTLGPUFamilyCommon1]) {
+                    mArchitectureName = "common-1";
+                }
+            }
+        }
     }
 
     // AdapterBase Implementation
