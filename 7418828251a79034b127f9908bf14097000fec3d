@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be48a219_ae7aecd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-31T17:02:06Z",
+      "side": 1,
+      "message": "lgtm w/ nits",
+      "revId": "7418828251a79034b127f9908bf14097000fec3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd58ca6b_49aedde0",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-31T17:02:06Z",
+      "side": 1,
+      "message": "nit: an an",
+      "revId": "7418828251a79034b127f9908bf14097000fec3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8e05909_95f5e607",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-05-31T17:02:06Z",
+      "side": 1,
+      "message": "This if chain could use a comment, if I undertand correctly:\n\n```\nWe\u0027ve checked the next candidate and it scored better then our previous best candidate. If all other parameters have the same or better rank then the previous ranks then this is the new best candidate.\n\nIf there was a previous best candidate we set the rank so it is no longer considered.\n```",
+      "revId": "7418828251a79034b127f9908bf14097000fec3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
