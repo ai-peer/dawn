@@ -3163,7 +3163,7 @@ bool Builder::GenerateAtomicBuiltin(const sem::Call* call,
 
             auto* value_sem_type = TypeOf(call->Arguments()[2]->Declaration());
 
-            auto value_type = GenerateTypeIfNeeded(value_sem_type);
+            auto value_type = GenerateTypeIfNeeded(value_sem_type->UnwrapRef());
             if (value_type == 0) {
                 return false;
             }
