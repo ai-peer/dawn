@@ -39,6 +39,30 @@
       },
       "revId": "8b52091fd35a4303a432d8852461e88be95e0ad6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7853c502_5dd4e4a1",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3166,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-05-31T20:55:28Z",
+      "side": 1,
+      "message": "Yeah, you\u0027re right. Done.",
+      "parentUuid": "0cd63df6_bc3e9dd5",
+      "range": {
+        "startLine": 3164,
+        "startChar": 12,
+        "endLine": 3166,
+        "endChar": 80
+      },
+      "revId": "8b52091fd35a4303a432d8852461e88be95e0ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
