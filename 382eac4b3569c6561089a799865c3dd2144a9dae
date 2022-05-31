@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c9f0ad3_221aaec7",
+        "filename": "src/tint/writer/msl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-31T20:01:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f332fa54_7a964670",
+      "range": {
+        "startLine": 105,
+        "startChar": 58,
+        "endLine": 105,
+        "endChar": 68
+      },
+      "revId": "382eac4b3569c6561089a799865c3dd2144a9dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c277ce5b_b8f930dd",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-05-31T19:08:21Z",
       "side": 1,
       "message": "Isn\u0027t ScopedParen for this? Maybe we need `TINT_SCOPED_PAREN(out);` to generate a variable name.",
+      "range": {
+        "startLine": 1588,
+        "startChar": 8,
+        "endLine": 1589,
+        "endChar": 31
+      },
+      "revId": "382eac4b3569c6561089a799865c3dd2144a9dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65b93aed_8836c477",
+        "filename": "src/tint/writer/msl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1589,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-05-31T20:01:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c277ce5b_b8f930dd",
       "range": {
         "startLine": 1588,
         "startChar": 8,
