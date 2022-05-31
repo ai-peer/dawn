@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "143de16c_4ede6976",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-31T07:14:03Z",
+      "side": 1,
+      "message": "In general yes, after addressing any remaining comments.\n\nSometimes for regular contributors we also +2 as a signal that things are looking good even if some refactor is needed, but trust contributors will ask for a re-review if they did significant changes (like structural or logic changes) before landing.\n\nAlso re: https://twitter.com/superhoge/status/1531427467310731264 you have \"tryjobs access\" which is a trusted contributor status that lets you CQ+1 to test your changes, and CQ+2 (land) when the CL has CR+2 from a committer. (no need to fix the tweet). Also I know moving to the US etc can be stressful/exhausting, so just to be clear this is in no way meant to force additional responsibility onto you.",
+      "parentUuid": "06531fca_96317931",
+      "revId": "76a96aa653176be56ec56b5c4bb51f00c0ed4757",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "01f8c902_08a17024",
