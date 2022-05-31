@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7a80502_cde4f0f3",
+        "filename": "src/dawn/native/PipelineCache.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-31T22:36:39Z",
+      "side": 1,
+      "message": "Hmm I think I still agree with the decision in https://dawn-review.googlesource.com/c/dawn/+/86581 comment#21 and comment#78 to keep the blob in the backend one (if necessary, or just temporal). Mainly because in the future, these blobs may be monolithic caches that changes between accesses, i.e. two different serializeToBlob calls may return different things.\n\nIf we have them write to the internal member we would potentially have to deal with race cases, but if we just return a cachedblob then I think it would be easier to handle. WDYT?",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 21
+      },
+      "revId": "d2f358682ece131f923d8c2440ec38f5c6f2e51d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
