@@ -303,6 +303,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "590d9d5a_09aa73ee",
+        "filename": "src/dawn/native/d3d12/CacheKeyD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-05-31T21:59:55Z",
+      "side": 1,
+      "message": "https://logs.chromium.org/logs/dawn/buildbucket/cr-buildbucket/8812620466354183105/+/u/Run_the_Dawn_unittests/stdout indicates it might not be a good idea to emit size here. compiler can overoptimize a std::string to fixed size array at compiletime and lead to different result.\n\nKeep recording size here.",
+      "parentUuid": "47734748_e7046227",
+      "revId": "40c8d98112c500814175f23f312a0cdf6e3c51b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5201b92f_2057bfe1",
