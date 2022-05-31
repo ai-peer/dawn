@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d11c9c10_571e30f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-31T19:08:21Z",
+      "side": 1,
+      "message": "Minor nits. LGTM!",
+      "revId": "382eac4b3569c6561089a799865c3dd2144a9dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f332fa54_7a964670",
+        "filename": "src/tint/writer/msl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-31T19:08:21Z",
+      "side": 1,
+      "message": "should be `-2147483647` right? (missing the negative sign) -- I know you copy-pasted this from below.",
+      "range": {
+        "startLine": 105,
+        "startChar": 58,
+        "endLine": 105,
+        "endChar": 68
+      },
+      "revId": "382eac4b3569c6561089a799865c3dd2144a9dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c277ce5b_b8f930dd",
+        "filename": "src/tint/writer/msl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1589,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-31T19:08:21Z",
+      "side": 1,
+      "message": "Isn\u0027t ScopedParen for this? Maybe we need `TINT_SCOPED_PAREN(out);` to generate a variable name.",
+      "range": {
+        "startLine": 1588,
+        "startChar": 8,
+        "endLine": 1589,
+        "endChar": 31
+      },
+      "revId": "382eac4b3569c6561089a799865c3dd2144a9dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
