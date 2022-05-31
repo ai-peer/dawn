@@ -44,8 +44,16 @@ MaybeError AdapterBase::Initialize() {
         "backend=%s type=%s)",
         mName, mDriverDescription, mVendorId, mDeviceId, mBackend, mAdapterType);
 
-    mVendorName = gpu_info::GetVendorName(mVendorId);
-    mArchitectureName = gpu_info::GetArchitectureName(mVendorId, mDeviceId);
+    // If a vendor and architecture name wasn't supplied in any of the above methods, do a lookup
+    // based on the vendor/device ID here.
+    if (mVendorId != 0) {
+        if (mVendorName.empty()) {
+            mVendorName = gpu_info::GetVendorName(mVendorId);
+        }
+        if (mArchitectureName.empty() && mDeviceId != 0) {
+            mArchitectureName = gpu_info::GetArchitectureName(mVendorId, mDeviceId);
+        }
+    }
 
     // Enforce internal Dawn constants.
     mLimits.v1.maxVertexBufferArrayStride =
