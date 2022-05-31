@@ -21,6 +21,7 @@
 #include "src/tint/program_builder.h"
 #include "src/tint/utils/hash.h"
 #include "src/tint/utils/map.h"
+#include "src/tint/utils/string.h"
 #include "src/tint/utils/unique_allocator.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Type);
@@ -511,15 +512,11 @@ std::string I32::String() const {
 }
 
 std::string Pointer::String() const {
-    std::stringstream ss;
-    ss << "ptr<" << std::string(ast::ToString(storage_class)) << ", " << type->String() + ">";
-    return ss.str();
+    return utils::Join("ptr<", ast::ToString(storage_class), ", ", type->String(), ">");
 }
 
 std::string Reference::String() const {
-    std::stringstream ss;
-    ss << "ref<" + std::string(ast::ToString(storage_class)) << ", " << type->String() << ">";
-    return ss.str();
+    return utils::Join("ref<", ast::ToString(storage_class), ", ", type->String(), ">");
 }
 
 std::string Vector::String() const {

@@ -28,6 +28,7 @@
 #include "src/tint/utils/defer.h"
 #include "src/tint/utils/map.h"
 #include "src/tint/utils/scoped_assignment.h"
+#include "src/tint/utils/string.h"
 #include "src/tint/utils/unique_vector.h"
 
 #define TINT_DUMP_DEPENDENCY_GRAPH 0
@@ -409,7 +410,7 @@ class DependencyScanner {
     /// Appends an error to the diagnostics that the given symbol cannot be
     /// resolved.
     void UnknownSymbol(Symbol name, Source source, const char* use) {
-        AddError(diagnostics_, "unknown " + std::string(use) + ": '" + symbols_.NameFor(name) + "'",
+        AddError(diagnostics_, utils::Concat("unknown ", use, ": '", symbols_.NameFor(name), "'"),
                  source);
     }
 

@@ -43,6 +43,7 @@
 #include "src/tint/sem/external_texture.h"
 #include "src/tint/sem/multisampled_texture.h"
 #include "src/tint/sem/sampled_texture.h"
+#include "src/tint/utils/string.h"
 
 namespace tint::reader::wgsl {
 namespace {
@@ -2452,8 +2453,8 @@ Maybe<const ast::Expression*> ParserImpl::unary_expression() {
         return Failure::kErrored;
     }
     if (!expr.matched) {
-        return add_error(
-            peek(), "unable to parse right side of " + std::string(t.to_name()) + " expression");
+        return add_error(peek(),
+                         utils::Join("unable to parse right side of", t.to_name(), "expression"));
     }
 
     return create<ast::UnaryOpExpression>(t.source(), op, expr.value);
@@ -2487,7 +2488,7 @@ Expect<const ast::Expression*> ParserImpl::expect_multiplicative_expr(const ast:
         }
         if (!rhs.matched) {
             return add_error(peek(),
-                             "unable to parse right side of " + std::string(name) + " expression");
+                             utils::Join("unable to parse right side of", name, "expression"));
         }
 
         lhs = create<ast::BinaryExpression>(source, op, lhs, rhs.value);
@@ -2633,7 +2634,7 @@ Expect<const ast::Expression*> ParserImpl::expect_relational_expr(const ast::Exp
         }
         if (!rhs.matched) {
             return add_error(peek(),
-                             "unable to parse right side of " + std::string(name) + " expression");
+                             utils::Join("unable to parse right side of", name, "expression"));
         }
 
         lhs = create<ast::BinaryExpression>(source, op, lhs, rhs.value);
@@ -2680,7 +2681,7 @@ Expect<const ast::Expression*> ParserImpl::expect_equality_expr(const ast::Expre
         }
         if (!rhs.matched) {
             return add_error(peek(),
-                             "unable to parse right side of " + std::string(name) + " expression");
+                             utils::Join("unable to parse right side of", name, "expression"));
         }
 
         lhs = create<ast::BinaryExpression>(source, op, lhs, rhs.value);
@@ -3388,7 +3389,7 @@ Expect<uint32_t> ParserImpl::expect_positive_sint(std::string_view use) {
     }
 
     if (sint.value < 0) {
-        return add_error(sint.source, std::string(use) + " must be positive");
+        return add_error(sint.source, utils::Join(use, "must be positive"));
     }
 
     return {static_cast<uint32_t>(sint.value), sint.source};
@@ -3401,7 +3402,7 @@ Expect<uint32_t> ParserImpl::expect_nonzero_positive_sint(std::string_view use) 
     }
 
     if (sint.value <= 0) {
-        return add_error(sint.source, std::string(use) + " must be greater than 0");
+        return add_error(sint.source, utils::Join(use, "must be greater than 0"));
     }
 
     return {static_cast<uint32_t>(sint.value), sint.source};
