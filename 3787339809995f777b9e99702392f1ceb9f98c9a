@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "754bbbf6_97f8ac4a",
+        "filename": "src/tint/writer/wgsl/generator_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-31T14:19:11Z",
+      "side": 1,
+      "message": "Ah there it is! Was having a hard time finding this file in the list of test files.",
+      "revId": "3787339809995f777b9e99702392f1ceb9f98c9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
