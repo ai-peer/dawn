@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e6f33a3_6f29978f",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-05-31T21:09:05Z",
+      "side": 1,
+      "message": "This seems unrelated?",
+      "range": {
+        "startLine": 261,
+        "startChar": 39,
+        "endLine": 261,
+        "endChar": 54
+      },
+      "revId": "c38714669ddc730e0a550f3cc73e9fe5966c788f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
