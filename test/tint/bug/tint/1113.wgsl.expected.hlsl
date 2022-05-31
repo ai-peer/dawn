@@ -72,10 +72,10 @@ float3 loadPosition(uint vertexIndex) {
 void doIgnore() {
   uint g42 = uniforms[0].x;
   uint kj6 = dbg.Load(20u);
-  uint b53 = atomicLoad_1(counters, (4u * uint(0)));
-  uint rwg = indices.Load((4u * uint(0)));
-  float rb5 = asfloat(positions.Load((4u * uint(0))));
-  int g55 = atomicLoad_2(LUT, (4u * uint(0)));
+  uint b53 = atomicLoad_1(counters, (4u * 0u));
+  uint rwg = indices.Load((4u * 0u));
+  float rb5 = asfloat(positions.Load((4u * 0u)));
+  int g55 = atomicLoad_2(LUT, (4u * 0u));
 }
 
 struct tint_symbol_1 {
