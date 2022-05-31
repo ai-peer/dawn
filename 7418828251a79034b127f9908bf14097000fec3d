@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ded35ca_5347a1f4",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-31T18:12:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd58ca6b_49aedde0",
+      "revId": "7418828251a79034b127f9908bf14097000fec3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8e05909_95f5e607",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-05-31T17:02:06Z",
       "side": 1,
       "message": "This if chain could use a comment, if I undertand correctly:\n\n```\nWe\u0027ve checked the next candidate and it scored better then our previous best candidate. If all other parameters have the same or better rank then the previous ranks then this is the new best candidate.\n\nIf there was a previous best candidate we set the rank so it is no longer considered.\n```",
+      "revId": "7418828251a79034b127f9908bf14097000fec3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dd8e1b6_ade138c2",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-05-31T18:12:02Z",
+      "side": 1,
+      "message": "Updated the comments. Please let me know if this is still confusing.",
+      "parentUuid": "a8e05909_95f5e607",
       "revId": "7418828251a79034b127f9908bf14097000fec3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
