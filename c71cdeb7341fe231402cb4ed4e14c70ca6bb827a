@@ -16,6 +16,69 @@
       "message": "LGTM!",
       "revId": "c71cdeb7341fe231402cb4ed4e14c70ca6bb827a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0b39884_96a147f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-31T20:42:46Z",
+      "side": 1,
+      "message": "Overall LGTM. Comments are just food for thought, not necessarily for this CL in particular. (In fact, probably best handled in another CL if handling.)",
+      "revId": "c71cdeb7341fe231402cb4ed4e14c70ca6bb827a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bbeab02_e500abfb",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-31T20:42:46Z",
+      "side": 1,
+      "message": "Not sure how many cases where we have functions that strictly cannot have this assert. If not that many, maybe we could consider overriding the -\u003e operator or something in the ErrorMonad to do this assert now that we have pulled the ErrorMonad out? Would be nice to not have to remember to add this assert every time we implement a function in an object.",
+      "range": {
+        "startLine": 212,
+        "startChar": 4,
+        "endLine": 212,
+        "endChar": 23
+      },
+      "revId": "c71cdeb7341fe231402cb4ed4e14c70ca6bb827a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05ac8e6f_344f9b01",
+        "filename": "src/dawn/tests/end2end/SwapChainValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-05-31T20:42:46Z",
+      "side": 1,
+      "message": "Just wondering if it would make sense to have instance level/adapter level errors later on? No need to address/fix here, but if we do it would be nicer to just be able to do an ASSERT_INSTANCE_ERROR_MSG or something like that here or in the test below, instead of needing to use the CheckIsErrorForTesting.",
+      "range": {
+        "startLine": 115,
+        "startChar": 28,
+        "endLine": 115,
+        "endChar": 39
+      },
+      "revId": "c71cdeb7341fe231402cb4ed4e14c70ca6bb827a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
