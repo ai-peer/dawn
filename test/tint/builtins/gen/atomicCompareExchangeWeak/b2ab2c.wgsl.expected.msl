@@ -15,7 +15,7 @@ void atomicCompareExchangeWeak_b2ab2c(threadgroup atomic_uint* const tint_symbol
 
 void compute_main_inner(uint local_invocation_index, threadgroup atomic_uint* const tint_symbol_1) {
   {
-    atomic_store_explicit(tint_symbol_1, uint(), memory_order_relaxed);
+    atomic_store_explicit(tint_symbol_1, 0u, memory_order_relaxed);
   }
   threadgroup_barrier(mem_flags::mem_threadgroup);
   atomicCompareExchangeWeak_b2ab2c(tint_symbol_1);
