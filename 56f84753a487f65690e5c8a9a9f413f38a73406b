@@ -16,6 +16,23 @@
       "message": "PTAL again, trying to get this out of my WIP CLs list.",
       "revId": "56f84753a487f65690e5c8a9a9f413f38a73406b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45613f92_2fb15009",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-31T14:47:21Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "56f84753a487f65690e5c8a9a9f413f38a73406b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
