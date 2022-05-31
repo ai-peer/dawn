@@ -24,6 +24,7 @@ builtins in non-uniform control flow [tint:880](crbug.com/tint/880)
 * The `@stride` attribute has been removed. [tint:1381](crbug.com/tint/1381)
 * Attributes using `[[attribute]]` syntax are no longer supported. [tint:1382](crbug.com/tint/1382)
 * The `elseif` keyword is no longer supported. [tint:1289](crbug.com/tint/1289)
+* Builtin `atomicCompareExchangeWeak` returns a struct instead of a vec2. [tint:1185](crbug.com/tint/1185)
 
 ### Deprecated Features
 
