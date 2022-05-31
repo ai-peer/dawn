@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae3f6aa8_86bff88f",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-31T20:53:30Z",
+      "side": 1,
+      "message": "That would be pretty neat - we do have this kind of ASSERT in a ton of the frontend functions so it would be nice to structure things so it\u0027s either not required at all, or it happens for you. Maybe one day we can make objects more like \"handles\" so you don\u0027t get the actual object behind the handle until it first goes through validation. Then, it should be pretty hard to even do -\u003e on an invalid object",
+      "parentUuid": "3bbeab02_e500abfb",
+      "range": {
+        "startLine": 212,
+        "startChar": 4,
+        "endLine": 212,
+        "endChar": 23
+      },
+      "revId": "c71cdeb7341fe231402cb4ed4e14c70ca6bb827a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "05ac8e6f_344f9b01",
         "filename": "src/dawn/tests/end2end/SwapChainValidationTests.cpp",
         "patchSetId": 2
@@ -71,6 +95,30 @@
       "writtenOn": "2022-05-31T20:42:46Z",
       "side": 1,
       "message": "Just wondering if it would make sense to have instance level/adapter level errors later on? No need to address/fix here, but if we do it would be nicer to just be able to do an ASSERT_INSTANCE_ERROR_MSG or something like that here or in the test below, instead of needing to use the CheckIsErrorForTesting.",
+      "range": {
+        "startLine": 115,
+        "startChar": 28,
+        "endLine": 115,
+        "endChar": 39
+      },
+      "revId": "c71cdeb7341fe231402cb4ed4e14c70ca6bb827a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f946c58b_65ed11b6",
+        "filename": "src/dawn/tests/end2end/SwapChainValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-05-31T20:53:30Z",
+      "side": 1,
+      "message": "we\u0027ll have to see; the Surface API still is in flux and we don\u0027t care that much since it\u0027s not exposed to JS. Something to think about post V1",
+      "parentUuid": "05ac8e6f_344f9b01",
       "range": {
         "startLine": 115,
         "startChar": 28,
