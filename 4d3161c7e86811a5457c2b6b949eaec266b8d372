@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f13e88d_71541e51",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3133,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-05-31T20:32:41Z",
+      "side": 1,
+      "message": "Maybe in the future, we can try to factor out this code for the 3 backends into something generic with callbacks for the emit_bool/f32/i32 bits.",
+      "range": {
+        "startLine": 3133,
+        "startChar": 20,
+        "endLine": 3133,
+        "endChar": 32
+      },
+      "revId": "4d3161c7e86811a5457c2b6b949eaec266b8d372",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
