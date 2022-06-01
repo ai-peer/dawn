@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bc46000_6ff0c21e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-06-01T15:43:13Z",
+      "side": 1,
+      "message": "Per the discussions at https://dawn-review.googlesource.com/c/dawn/+/91480, PTAL. Thanks!",
+      "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
