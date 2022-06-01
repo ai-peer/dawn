@@ -33,6 +33,24 @@
       "message": "Should this be `u32(u32::kHighest)`?",
       "revId": "82120c4e709de841443cdafb1e6b4f65e842466b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34b1330e_a919564b",
+        "filename": "src/tint/sem/constant_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-01T10:08:07Z",
+      "side": 1,
+      "message": "doh! yes.",
+      "parentUuid": "88d175a3_1c18ef85",
+      "revId": "82120c4e709de841443cdafb1e6b4f65e842466b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
