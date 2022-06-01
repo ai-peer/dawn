@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b1aca69_5accf71d",
+        "filename": "src/dawn/native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-01T21:30:06Z",
+      "side": 1,
+      "message": "Hmm, I think this is fine for now, but it is unfortunate that this code is both repeated for both compute/render and also (sort of) duplicated in PipelineCache where we have FlushIfNeeded and stuff. \n\nI think if we wanted to reuse the stuff from PipelineCache we could have a PipelineCacheD3D12 with a GetPipelineState accessor and pass that to the Create*PipelineState function instead of the mPipelineState member. Then afterwards set mPipelineState \u003d cache.GetPipelineState(). Maybe that could work also? Then we could implement the entire PipelineCache interface and reuse the FlushIfNeeded stuff. Ideally reusing it might be better in case we wanted to defer or move flushing to another thread later on.\n\nThoughts?",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 87,
+        "endChar": 5
+      },
+      "revId": "848726b1d5d23d762ec547b67b5c6c046f94d995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
