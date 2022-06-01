@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e7d5fd2_fc85dcfe",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-06-01T17:53:20Z",
+      "side": 1,
+      "message": "I\u0027m not sure what the logic was when constructing this string. It\u0027s not something that was updated as part of this CL, though.",
+      "parentUuid": "8aec5a21_1979220c",
+      "revId": "32fb70fb000d6941732f6fc31bc816e20ddfd043",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73c95512_593f14ed",
         "filename": "src/dawn/native/metal/BackendMTL.mm",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2022-05-31T23:24:42Z",
       "side": 1,
       "message": "I think it\u0027s very likely this will continue returning true for future Apple GPUs, but if we want to be a little safer we could do \"|| supports Apple7\" or something.",
+      "revId": "32fb70fb000d6941732f6fc31bc816e20ddfd043",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e99caf9e_d1c7dfb4",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-06-01T17:53:20Z",
+      "side": 1,
+      "message": "Done, and added a comment to verify the behavior if we can.",
+      "parentUuid": "73c95512_593f14ed",
       "revId": "32fb70fb000d6941732f6fc31bc816e20ddfd043",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
