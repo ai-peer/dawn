@@ -16,6 +16,24 @@
       "message": "IMHO given the small number of possible values, this could just be a bitset. But let\u0027s add a TODO and care about it later. Same for renderpass.",
       "revId": "4b3d7ee6f534375d7eb5a83e2fb5c36e14dab8f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66fa3572_70740e2d",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-06-01T11:32:17Z",
+      "side": 1,
+      "message": "I updated it to use bitset here, please take a look again.",
+      "parentUuid": "d0492ca6_6d53b0dd",
+      "revId": "4b3d7ee6f534375d7eb5a83e2fb5c36e14dab8f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
