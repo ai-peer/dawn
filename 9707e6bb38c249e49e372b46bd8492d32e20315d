@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9af8dcb8_02d532f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-01T04:24:58Z",
+      "side": 1,
+      "message": "A tiny question when reading the code...",
+      "revId": "9707e6bb38c249e49e372b46bd8492d32e20315d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79b3bdfe_30d6a051",
+        "filename": "src/tint/sem/constant.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-01T04:24:58Z",
+      "side": 1,
+      "message": "Sorry for interrupting, but I wonder if it is intended to convert all types of (could be `AFloat` or `AInt` I think) elements into `AFloat` first when calling emplace_back. If `AFloat` is double and `AInt` is int64_t, will it possibly lose some precision when converting a large int64 to double?",
+      "revId": "9707e6bb38c249e49e372b46bd8492d32e20315d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
