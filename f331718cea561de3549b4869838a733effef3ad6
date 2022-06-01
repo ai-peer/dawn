@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fc1cd39_80e8bc98",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-01T21:12:01Z",
+      "side": 1,
+      "message": "remove?",
+      "range": {
+        "startLine": 32,
+        "startChar": 18,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "f331718cea561de3549b4869838a733effef3ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
