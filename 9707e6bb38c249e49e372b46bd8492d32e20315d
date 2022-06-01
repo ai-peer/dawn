@@ -33,6 +33,24 @@
       "message": "Sorry for interrupting, but I wonder if it is intended to convert all types of (could be `AFloat` or `AInt` I think) elements into `AFloat` first when calling emplace_back. If `AFloat` is double and `AInt` is int64_t, will it possibly lose some precision when converting a large int64 to double?",
       "revId": "9707e6bb38c249e49e372b46bd8492d32e20315d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8685182_77d7d6eb",
+        "filename": "src/tint/sem/constant.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-01T08:53:50Z",
+      "side": 1,
+      "message": "Great spot - this was wrong. Fix up for review here:\nhttps://dawn-review.googlesource.com/c/dawn/+/92240",
+      "parentUuid": "79b3bdfe_30d6a051",
+      "revId": "9707e6bb38c249e49e372b46bd8492d32e20315d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
