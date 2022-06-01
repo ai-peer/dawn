@@ -826,16 +826,16 @@ bool GeneratorImpl::EmitAtomicCall(std::ostream& out,
             return call("atomic_exchange_explicit", true);
 
         case sem::BuiltinType::kAtomicCompareExchangeWeak: {
-            // Emit the builtin return type unique to this overload. This does not
-            // exist in the AST, so it will not be generated in Generate().
-            if (!EmitStructType(&helpers_, builtin->ReturnType()->As<sem::Struct>())) {
-                return false;
-            }
-
             auto* ptr_ty = TypeOf(expr->args[0])->UnwrapRef()->As<sem::Pointer>();
             auto sc = ptr_ty->StorageClass();
 
             auto func = utils::GetOrCreate(atomicCompareExchangeWeak_, sc, [&]() -> std::string {
+                // Emit the builtin return type unique to this overload. This does not
+                // exist in the AST, so it will not be generated in Generate().
+                if (!EmitStructType(&helpers_, builtin->ReturnType()->As<sem::Struct>())) {
+                    return "";
+                }
+
                 auto name = UniqueIdentifier("atomicCompareExchangeWeak");
                 auto& buf = helpers_;
 
@@ -866,6 +866,9 @@ bool GeneratorImpl::EmitAtomicCall(std::ostream& out,
                 return name;
             });
 
+            if (func.empty()) {
+                return false;
+            }
             return call(func, false);
         }
 
