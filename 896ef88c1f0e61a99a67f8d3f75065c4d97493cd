@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bce014f5_7b5bbbad",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-01T17:41:14Z",
+      "side": 1,
+      "message": "For GLSL, like for HLSL, we can\u0027t wrap up this code in a helper function because we need the variable to be accessed directly, so we inline it here. The difference with HLSL is that we rely on DecomposeMemoryAccess to add the AST node for the struct. So for GLSL, using a std::unordered_set is the simplest solution.",
+      "range": {
+        "startLine": 923,
+        "startChar": 17,
+        "endLine": 923,
+        "endChar": 35
+      },
+      "revId": "896ef88c1f0e61a99a67f8d3f75065c4d97493cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
