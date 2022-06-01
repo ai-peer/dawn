@@ -16,6 +16,23 @@
       "message": "Ben PTAL so I can stack more CLs on top!",
       "revId": "7dfd830532d553abab2e2c49809cd28b400c8e62",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57a5bb46_a64cf25b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-01T12:55:44Z",
+      "side": 1,
+      "message": "Thank you",
+      "revId": "7dfd830532d553abab2e2c49809cd28b400c8e62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
