@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c950ba7_ca3ce188",
+        "filename": "src/dawn/native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-01T22:11:04Z",
+      "side": 1,
+      "message": "I think it\u0027s better after we have metal implementation so we know better what the abstract interface should be like.\n\nFrom the experience of writing vulkan \u0026 d3d12, our PipelineCache only needs these operation\n\n- load the blob with cache key\n- store the blob with cache key (either save a new one or update an existing one)\n\nThe thing really matters for vulkan api to use the cache is the handle. We don\u0027t really need to store that. If the blob is empty we just return a VK_NULL_HANDLE. If not we then call createPipelineCache at pipeline callsite. We don\u0027t really need to call createPipelineCache in Initialize. And we only need the serialization steps if the blob needs update (for now it\u0027s just cache misses).\n\nFor d3d12 it\u0027s just pointer to the data. We can directly use the pointer from the Cachedblob. The \"serialization\" is only creating a cachedblob from ID3DBlob, which is gracefully done by the create func Austin made, avoiding extra copy.\n\nAlso seems that we don\u0027t really need to check if the cache hit. Pipeline implementation just check if blob is empty to know if there\u0027s cache to attach to the backend api.\n\nSo seems that PipelineCache doesn\u0027t need to store any state. All it needs to do is load and store the blob. All the other work should be left to the pipeline implementation. It should be pretty specific to the backend impl.",
+      "parentUuid": "0b1aca69_5accf71d",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 87,
+        "endChar": 5
+      },
+      "revId": "848726b1d5d23d762ec547b67b5c6c046f94d995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c793bda_cce5a356",
         "filename": "src/dawn/native/d3d12/PipelineCacheD3D12.cpp",
         "patchSetId": 21
