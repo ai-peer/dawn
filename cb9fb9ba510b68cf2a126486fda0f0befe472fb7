@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b981fae9_a61ad349",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-06-01T06:10:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3dfe31a_fc6e23ef",
+      "range": {
+        "startLine": 68,
+        "startChar": 16,
+        "endLine": 68,
+        "endChar": 46
+      },
+      "revId": "cb9fb9ba510b68cf2a126486fda0f0befe472fb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c90a8d0_1e30a73c",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-05-31T23:01:05Z",
       "side": 1,
       "message": "it should actually be fixed now!",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 77
+      },
+      "revId": "cb9fb9ba510b68cf2a126486fda0f0befe472fb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e0c4850_3e3f4692",
+        "filename": "src/dawn/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2022-06-01T06:10:56Z",
+      "side": 1,
+      "message": "Awesome! Workaround removed!",
+      "parentUuid": "0c90a8d0_1e30a73c",
       "range": {
         "startLine": 81,
         "startChar": 0,
