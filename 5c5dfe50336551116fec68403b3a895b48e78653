@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea9a2046_f70fb602",
+        "filename": "src/tint/writer/msl/generator_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-06-01T22:32:17Z",
+      "side": 1,
+      "message": "I don\u0027t think this quite works, because we need a different struct definition for each integer type, whereas the helper function is only unique over address spaces. Can you add some calls to the i32 overload to the test to check please?\n\nProbably worth also having it test using both storage classes in the same module too, since we likely don\u0027t have any other test coverage for that either.",
+      "range": {
+        "startLine": 833,
+        "startChar": 0,
+        "endLine": 837,
+        "endChar": 17
+      },
+      "revId": "5c5dfe50336551116fec68403b3a895b48e78653",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
