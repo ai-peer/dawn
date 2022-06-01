@@ -22,6 +22,30 @@
       },
       "revId": "c38714669ddc730e0a550f3cc73e9fe5966c788f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2780098f_376498e2",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-01T12:24:32Z",
+      "side": 1,
+      "message": "Yup, not needed. Removed.",
+      "parentUuid": "3e6f33a3_6f29978f",
+      "range": {
+        "startLine": 261,
+        "startChar": 39,
+        "endLine": 261,
+        "endChar": 54
+      },
+      "revId": "c38714669ddc730e0a550f3cc73e9fe5966c788f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
