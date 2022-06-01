@@ -22,6 +22,53 @@
       },
       "revId": "848726b1d5d23d762ec547b67b5c6c046f94d995",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90547a33_76296759",
+        "filename": "src/dawn/native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-01T22:06:24Z",
+      "side": 1,
+      "message": "idk :-/ In my opinion, I don\u0027t really think PipelineCache is the right abstraction to use, and I think it would only slightly improve code duplication at the cost of more mental indirection. PipelineCache makes more sense when there is a real native handle behind it like VkPipelineCache, or ID3D12PipelineLibrary for newer versions of Windows (for later).\n\nI think flushing on another thread is over-engineering this for something I\u0027m not sure we even need yet. Getting the d3d blob should be relatively cheap since the driver just created it, and storing that to disk is already performed by another thread in Chromium. Thread makes more sense for flushing monolithic caches in the background, but the D3D API we\u0027re using here is entirely different from ID3D12PipelineLibrary for when we want to do a monolithic cache.\n\nIn terms of code complexity, these are pretty much equivalent :\n- LoadCachedBlob would turn into PipelineCache::Create\n- if (cacheHit) would turn into if(cache-\u003eCacheHit())\n- blob.Data() and blob.Size() would turn into cache-\u003eGetData() and cache-\u003eGetDataSize()\n\nso the only thing we would gain is FlushIfNeeded is slightly simpler than `if (!hit) \nStore(GetCachedBlob(...))`.",
+      "parentUuid": "0b1aca69_5accf71d",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 87,
+        "endChar": 5
+      },
+      "revId": "848726b1d5d23d762ec547b67b5c6c046f94d995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c793bda_cce5a356",
+        "filename": "src/dawn/native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-01T22:06:24Z",
+      "side": 1,
+      "message": "nit: we could move these to the frontend Device.cpp, and change the call site to use it like `device-\u003eStoreCachedBlob(key, CachedBlob::Create(std::move(d3dBlob));`.\n\nLoading and storing blobs without needing to check if the blob cache is nullptr should be pretty useful for other code.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 1
+      },
+      "revId": "848726b1d5d23d762ec547b67b5c6c046f94d995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
