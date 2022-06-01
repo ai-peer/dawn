@@ -412,8 +412,8 @@ fn log(f32) -> f32
 fn log<N: num>(vec<N, f32>) -> vec<N, f32>
 fn log2(f32) -> f32
 fn log2<N: num>(vec<N, f32>) -> vec<N, f32>
-fn max<T: fiu32>(T, T) -> T
-fn max<N: num, T: fiu32>(vec<N, T>, vec<N, T>) -> vec<N, T>
+@const fn max<T: fiu32>(T, T) -> T
+@const fn max<N: num, T: fiu32>(vec<N, T>, vec<N, T>) -> vec<N, T>
 fn min<T: fiu32>(T, T) -> T
 fn min<N: num, T: fiu32>(vec<N, T>, vec<N, T>) -> vec<N, T>
 fn mix(f32, f32, f32) -> f32

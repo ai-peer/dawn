@@ -844,6 +844,8 @@ struct OverloadInfo {
     MatcherIndex const* const return_matcher_indices;
     /// The flags for the overload
     OverloadFlags flags;
+    /// The function used to evaluate the overload at shader-creation time.
+    ConstEvalFunction const_eval_fn;
 };
 
 /// IntrinsicInfo describes a builtin function or operator overload
