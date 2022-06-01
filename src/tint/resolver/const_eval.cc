@@ -16,4 +16,51 @@
 
 #include "src/tint/sem/constant.h"
 
-namespace tint::resolver::const_eval {}  // namespace tint::resolver::const_eval
+namespace tint::resolver::const_eval {
+
+namespace {
+
+bool CheckNumArgs(ProgramBuilder& b, size_t num_args, size_t count) {
+    if (num_args != 2) {
+        TINT_ICE(Resolver, b.Diagnostics())
+            << "unexpected number of arguments for constant evaluation function.\nExpected "
+            << count << ", got " << num_args;
+        return false;
+    }
+    return true;
+}
+
+template <typename F>
+sem::Constant Binary(ProgramBuilder& b, const sem::Constant* args, size_t num_args, const F&& f) {
+    if (!CheckNumArgs(b, num_args, 2)) {
+        return {};
+    }
+    return args[0].WithElements([&](auto&& lhs) {
+        auto& rhs = std::get<std::decay_t<decltype(lhs)>>(args[1].GetElements());
+        return f(lhs, rhs);
+    });
+}
+
+template <typename T, typename F>
+sem::Constant ElementWise(const sem::Type* ty,
+                          const std::vector<T>& vec_a,
+                          const std::vector<T>& vec_b,
+                          F&& f) {
+    size_t n = std::min(vec_a.size(), vec_b.size());
+    std::vector<T> out(n);
+    for (size_t i = 0; i < n; i++) {
+        out[i] = f(vec_a[i], vec_b[i]);
+    }
+    return sem::Constant(ty, std::move(out));
+}
+
+}  // namespace
+
+sem::Constant max(ProgramBuilder& builder, const sem::Constant* args, size_t num_args) {
+    return Binary(builder, args, num_args, [&](auto&& vec_a, auto&& vec_b) {
+        return ElementWise(args[0].Type(), vec_a, vec_b,
+                           [&](auto&& a, auto&& b) { return std::max(a.value, b.value); });
+    });
+}
+
+}  // namespace tint::resolver::const_eval
