@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7d5f912_b5ddf413",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-01T15:29:56Z",
+      "side": 1,
+      "message": "nit: if we forward declare `struct ID3DBlob` or maybe `class ID3DBlob`, I *think* we should be able to not have `template\u003ctypename T\u003e` and just use\n\n`static CachedBlob Create(Microsoft::WRL::ComPtr\u003cID3DBlob\u003e blob);`",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 61
+      },
+      "revId": "6db8fe798516456c67676706c7dff2f8bc35567a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb4ac635_d973ad42",
         "filename": "src/dawn/native/PipelineCache.h",
         "patchSetId": 17
