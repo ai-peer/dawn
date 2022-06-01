@@ -14,6 +14,7 @@
 
 #include "src/tint/sem/constant.h"
 
+#include <cmath>
 #include <utility>
 
 #include "src/tint/debug.h"
@@ -47,7 +48,7 @@ bool Constant::AnyZero() const {
     return WithElements([&](auto&& vec) {
         using T = typename std::decay_t<decltype(vec)>::value_type;
         for (auto el : vec) {
-            if (el == T(0)) {
+            if (el == T(0) && !std::signbit(el.value)) {
                 return true;
             }
         }
@@ -59,7 +60,7 @@ bool Constant::AllZero() const {
     return WithElements([&](auto&& vec) {
         using T = typename std::decay_t<decltype(vec)>::value_type;
         for (auto el : vec) {
-            if (el != T(0)) {
+            if (el != T(0) || std::signbit(el.value)) {
                 return false;
             }
         }
@@ -71,8 +72,9 @@ bool Constant::AllEqual(size_t start, size_t end) const {
     return WithElements([&](auto&& vec) {
         if (!vec.empty()) {
             auto value = vec[start];
+            bool sign = std::signbit(vec[start].value);
             for (size_t i = start + 1; i < end; i++) {
-                if (vec[i] != value) {
+                if (vec[i] != value || sign != std::signbit(vec[i].value)) {
                     return false;
                 }
             }
