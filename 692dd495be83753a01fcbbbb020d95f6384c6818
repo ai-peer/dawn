@@ -198,6 +198,30 @@
       },
       "revId": "692dd495be83753a01fcbbbb020d95f6384c6818",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf6619b6_10ca2f12",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1137,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-06-01T15:41:08Z",
+      "side": 1,
+      "message": "Agreed. I submitted a patch to rename GetMipLevel*Size to GetMipLevelSingleSubresource*Size at https://dawn-review.googlesource.com/c/dawn/+/92124, PTAL.",
+      "parentUuid": "058b69cf_82c66335",
+      "range": {
+        "startLine": 1137,
+        "startChar": 24,
+        "endLine": 1137,
+        "endChar": 45
+      },
+      "revId": "692dd495be83753a01fcbbbb020d95f6384c6818",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
