@@ -100,6 +100,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da253ce8_0e6e42ca",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-01T20:36:10Z",
+      "side": 1,
+      "message": "Oops seems to fail MSVC. Not sure how to fix that. Will just change back to using template",
+      "parentUuid": "6890769e_116fd3c1",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 61
+      },
+      "revId": "6db8fe798516456c67676706c7dff2f8bc35567a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb4ac635_d973ad42",
