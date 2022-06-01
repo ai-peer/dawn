@@ -72,6 +72,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b0b0d6e_179f0087",
+        "filename": "src/dawn/native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-01T22:34:22Z",
+      "side": 1,
+      "message": "I agree with Shrek that we should probably wait until we have something for Metal before doing any other optimizations.\n\nI do think there is value to using the same tools/interfaces as much as possible for maintenance purposes though. Especially since as Austin mentioned, we can pretty much map what we added here 1:1 to what we already had. It is nice to read the pipeline code between backends and easily understand that we are using the same cache infrastructure instead of having to go one layer deeper to understand, oh, it\u0027s the same, just that Vulkan has one more wrapper over it.\n\nBut as I mentioned, I think this is fine since there are still areas where we are unsure of so deferring is fine!",
+      "parentUuid": "2c950ba7_ca3ce188",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 87,
+        "endChar": 5
+      },
+      "revId": "848726b1d5d23d762ec547b67b5c6c046f94d995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c793bda_cce5a356",
@@ -85,6 +109,30 @@
       "writtenOn": "2022-06-01T22:06:24Z",
       "side": 1,
       "message": "nit: we could move these to the frontend Device.cpp, and change the call site to use it like `device-\u003eStoreCachedBlob(key, CachedBlob::Create(std::move(d3dBlob));`.\n\nLoading and storing blobs without needing to check if the blob cache is nullptr should be pretty useful for other code.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 1
+      },
+      "revId": "848726b1d5d23d762ec547b67b5c6c046f94d995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b49feef_2971ecdb",
+        "filename": "src/dawn/native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-01T22:34:22Z",
+      "side": 1,
+      "message": "+1. If we do this, maybe we don\u0027t even need GetBlobCache to be exposed?",
+      "parentUuid": "2c793bda_cce5a356",
       "range": {
         "startLine": 44,
         "startChar": 0,
