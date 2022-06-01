@@ -32,6 +32,8 @@ namespace tint::resolver::const_eval {
 /// Typedef for a constant evaluation function
 using Function = sem::Constant(ProgramBuilder& builder, const sem::Constant* args, size_t num_args);
 
+sem::Constant max(ProgramBuilder& builder, const sem::Constant* args, size_t num_args);
+
 }  // namespace tint::resolver::const_eval
 
 #endif  // SRC_TINT_RESOLVER_CONST_EVAL_H_
