@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98a60dce_0263570d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-01T19:57:36Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "326c3467_b1b1600b",
+      "revId": "6db8fe798516456c67676706c7dff2f8bc35567a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7d5f912_b5ddf413",
@@ -58,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6890769e_116fd3c1",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-01T19:57:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7d5f912_b5ddf413",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 61
+      },
+      "revId": "6db8fe798516456c67676706c7dff2f8bc35567a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb4ac635_d973ad42",
@@ -71,6 +113,24 @@
       "writtenOn": "2022-06-01T15:23:53Z",
       "side": 1,
       "message": "are these changes still needed?",
+      "revId": "6db8fe798516456c67676706c7dff2f8bc35567a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92a2ff16_e91fa0ac",
+        "filename": "src/dawn/native/PipelineCache.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-01T19:57:36Z",
+      "side": 1,
+      "message": "Yep mentioned in https://dawn-review.googlesource.com/c/dawn/+/91180/comments/a7a80502_cde4f0f3.\nUnfortunately The DAWN_TRY macro has scopes {} that prevent the compiler from copy ellision which is strictly needed now (we cannot call destructor of temp local CachedBlob because the ownership of the data pointer is unique).",
+      "parentUuid": "cb4ac635_d973ad42",
       "revId": "6db8fe798516456c67676706c7dff2f8bc35567a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
