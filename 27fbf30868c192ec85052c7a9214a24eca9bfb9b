@@ -39,6 +39,30 @@
       },
       "revId": "27fbf30868c192ec85052c7a9214a24eca9bfb9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eb0ec03_75026e27",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-06-01T01:03:16Z",
+      "side": 1,
+      "message": "It would be a simple and quick switch in chromium https://chromium-review.googlesource.com/c/chromium/src/+/3676538/2/gpu/command_buffer/service/shared_image_representation_dawn_ozone.cc.\nI will remove these code lines in Dawn, which just are for purpose of not breaking Chromium CQ bots because of the Dawn roll, right after it\u0027s landed in Chromium. Essentially we don\u0027t need to pay much attention on them.",
+      "parentUuid": "110802c7_40ae0fdc",
+      "range": {
+        "startLine": 324,
+        "startChar": 4,
+        "endLine": 324,
+        "endChar": 61
+      },
+      "revId": "27fbf30868c192ec85052c7a9214a24eca9bfb9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
