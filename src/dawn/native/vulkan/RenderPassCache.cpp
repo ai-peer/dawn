@@ -36,9 +36,14 @@ VkAttachmentLoadOp VulkanAttachmentLoadOp(wgpu::LoadOp op) {
     UNREACHABLE();
 }
 
-VkAttachmentStoreOp VulkanAttachmentStoreOp(wgpu::StoreOp op) {
-    // TODO(crbug.com/dawn/485): return STORE_OP_STORE_NONE_QCOM if the device has required
-    // extension.
+VkAttachmentStoreOp VulkanAttachmentStoreOp(wgpu::StoreOp op, bool readOnlyAttachment = false) {
+    // Depth/stencil attachment can be readonly for one aspect or both aspects. If an aspect is
+    // readonly, its image layout will be set to READ_ONLY_OPTIMAL, which requires the storeOp of
+    // corresponding aspect to be VK_ATTACHMENT_STORE_OP_NONE.
+    if (readOnlyAttachment) {
+        return VK_ATTACHMENT_STORE_OP_NONE;
+    }
+
     switch (op) {
         case wgpu::StoreOp::Store:
             return VK_ATTACHMENT_STORE_OP_STORE;
@@ -176,9 +181,11 @@ ResultOrError<VkRenderPass> RenderPassCache::CreateRenderPassForQuery(
         attachmentDesc.samples = vkSampleCount;
 
         attachmentDesc.loadOp = VulkanAttachmentLoadOp(query.depthLoadOp);
-        attachmentDesc.storeOp = VulkanAttachmentStoreOp(query.depthStoreOp);
+        attachmentDesc.storeOp =
+            VulkanAttachmentStoreOp(query.depthStoreOp, query.readOnlyDepthStencil);
         attachmentDesc.stencilLoadOp = VulkanAttachmentLoadOp(query.stencilLoadOp);
-        attachmentDesc.stencilStoreOp = VulkanAttachmentStoreOp(query.stencilStoreOp);
+        attachmentDesc.stencilStoreOp =
+            VulkanAttachmentStoreOp(query.stencilStoreOp, query.readOnlyDepthStencil);
 
         // There is only one subpass, so it is safe to set both initialLayout and finalLayout to
         // the only subpass's layout.
