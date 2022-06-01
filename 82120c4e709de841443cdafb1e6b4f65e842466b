@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56cd7e0a_ebdba4ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-01T08:59:08Z",
+      "side": 1,
+      "message": "Thanks for quickly response!",
+      "revId": "82120c4e709de841443cdafb1e6b4f65e842466b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88d175a3_1c18ef85",
+        "filename": "src/tint/sem/constant_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-01T08:59:08Z",
+      "side": 1,
+      "message": "Should this be `u32(u32::kHighest)`?",
+      "revId": "82120c4e709de841443cdafb1e6b4f65e842466b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
