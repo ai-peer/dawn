@@ -43,6 +43,11 @@ Server::~Server() {
     DestroyAllObjects(mProcs);
 }
 
+void Server::DeferCurrentAndSubsequentCommands() {
+    ASSERT(mCommandHandlingState == CommandHandlingState::Active);
+    mCommandHandlingState = CommandHandlingState::DeferCommand;
+}
+
 bool Server::InjectTexture(WGPUTexture texture,
                            uint32_t id,
                            uint32_t generation,

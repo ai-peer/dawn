@@ -41,6 +41,10 @@ class DAWN_WIRE_EXPORT WireServer : public CommandHandler {
 
     const volatile char* HandleCommands(const volatile char* commands, size_t size) override;
 
+    // Defer the current command and commands after this. Must be called at most once while inside
+    // HandleCommands.
+    void DeferCurrentAndSubsequentCommands();
+
     bool InjectTexture(WGPUTexture texture,
                        uint32_t id,
                        uint32_t generation,

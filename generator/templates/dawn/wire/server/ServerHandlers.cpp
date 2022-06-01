@@ -89,6 +89,20 @@ namespace dawn::wire::server {
     {% endfor %}
 
     const volatile char* Server::HandleCommandsImpl(const volatile char* commands, size_t size) {
+        struct HandleCommandsScope {
+            explicit HandleCommandsScope(Server* server) : server(server) {
+                ASSERT(server->mCommandHandlingState == CommandHandlingState::Idle);
+                server->mCommandHandlingState = CommandHandlingState::Active;
+            }
+
+            ~HandleCommandsScope() {
+                server->mCommandHandlingState = CommandHandlingState::Idle;
+            }
+
+            Server* server;
+        };
+
+        HandleCommandsScope scope(this);
         DeserializeBuffer deserializeBuffer(commands, size);
 
         while (deserializeBuffer.AvailableSize() >= sizeof(CmdHeader) + sizeof(WireCmd)) {
@@ -103,9 +117,10 @@ namespace dawn::wire::server {
                     break;
             }
 
+            const volatile char* start = deserializeBuffer.Buffer();
             WireCmd cmdId = *static_cast<const volatile WireCmd*>(static_cast<const volatile void*>(
-                deserializeBuffer.Buffer() + sizeof(CmdHeader)));
-            bool success = false;
+                start + sizeof(CmdHeader)));
+            bool success = true;
             switch (cmdId) {
                 {% for command in cmd_records["command"] %}
                     case WireCmd::{{command.name.CamelCase()}}:
@@ -119,6 +134,15 @@ namespace dawn::wire::server {
             if (!success) {
                 return nullptr;
             }
+
+            switch (mCommandHandlingState) {
+                case CommandHandlingState::DeferCommand:
+                    return start;
+                case CommandHandlingState::Active:
+                    break;
+                default:
+                    UNREACHABLE();
+            }
             mAllocator.Reset();
         }
 
@@ -126,7 +150,7 @@ namespace dawn::wire::server {
             return nullptr;
         }
 
-        return commands;
+        return deserializeBuffer.Buffer();
     }
 
 }  // namespace dawn::wire::server

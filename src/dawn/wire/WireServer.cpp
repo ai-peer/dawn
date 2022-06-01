@@ -30,6 +30,10 @@ const volatile char* WireServer::HandleCommands(const volatile char* commands, s
     return mImpl->HandleCommands(commands, size);
 }
 
+void WireServer::DeferCurrentAndSubsequentCommands() {
+    mImpl->DeferCurrentAndSubsequentCommands();
+}
+
 bool WireServer::InjectTexture(WGPUTexture texture,
                                uint32_t id,
                                uint32_t generation,

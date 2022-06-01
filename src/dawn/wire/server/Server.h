@@ -153,6 +153,8 @@ class Server : public ServerBase {
     // ChunkedCommandHandler implementation
     const volatile char* HandleCommandsImpl(const volatile char* commands, size_t size) override;
 
+    void DeferCurrentAndSubsequentCommands();
+
     bool InjectTexture(WGPUTexture texture,
                        uint32_t id,
                        uint32_t generation,
@@ -225,11 +227,18 @@ class Server : public ServerBase {
 
 #include "dawn/wire/server/ServerPrototypes_autogen.inc"
 
+    enum class CommandHandlingState {
+        Active,
+        Idle,
+        DeferCommand,
+    };
+
     WireDeserializeAllocator mAllocator;
     ChunkedCommandSerializer mSerializer;
     DawnProcTable mProcs;
     std::unique_ptr<MemoryTransferService> mOwnedMemoryTransferService = nullptr;
     MemoryTransferService* mMemoryTransferService = nullptr;
+    CommandHandlingState mCommandHandlingState = CommandHandlingState::Idle;
 
     std::shared_ptr<bool> mIsAlive;
 };
