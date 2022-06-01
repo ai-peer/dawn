@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2357ba76_ad60033f",
+        "filename": "src/dawn/native/PipelineCache.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-01T01:02:18Z",
+      "side": 1,
+      "message": "Done. Now we get rid of PipelineCacheD3D12 class. Refactor of PipelineCache/PipelineCacheVk is removed. The only interface change is SerializeToBlobImpl to pass in CachedBlob as a pointer instead of return a ResultOrError\u003cCachedBlob\u003e due to we don\u0027t want any destruction of temp CachedBlob and the scopes in DAWN_TRY_ASSIGN seem to untrigger copy elision.",
+      "parentUuid": "a7a80502_cde4f0f3",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 21
+      },
+      "revId": "d2f358682ece131f923d8c2440ec38f5c6f2e51d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fca7718_30e715d1",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-05-31T22:47:34Z",
       "side": 1,
       "message": "here, I meant I think we should just directly do:\n\n```\nCachedBlob blob \u003d GetDevice()-\u003eGetBlobCache()-\u003eLoad(mCacheKey);\nif (!blob.Empty()) {\n  // set pCachedBlob\n}\n\n// create pipeline\n\nif (blob.Empty()) {\n  GetCachedBlob(...);\n  // store\n  GetDevice()-\u003eGetBlobCache()-\u003eStore(...);\n}\n```\n\nit is just as concise as the existing code and more clear what\u0027s happening. I don\u0027t think the PipelineCache abstraction is helping us here because the shape of the D3D12 API directly uses blobs.\n\nThen, we wouldn\u0027t need `cache-\u003eSetBlob` either which resolves Loko\u0027s concern.\n\nThe only thing you\u0027ll need to worry about is that GetBlobCache() may return null (so we should have a check for that, or hide it behind Load/Store that noop).",
+      "revId": "d2f358682ece131f923d8c2440ec38f5c6f2e51d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "592ad480_aa8dbe58",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-01T01:02:18Z",
+      "side": 1,
+      "message": "Done. Now we get rid of the PipelineCacheD3D12 class. I keep the PipelineCacheD3D12.h/.cpp to have 2 static functions to slightly avoid duplicate code and keep symmetry with other backend.",
+      "parentUuid": "7fca7718_30e715d1",
       "revId": "d2f358682ece131f923d8c2440ec38f5c6f2e51d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
