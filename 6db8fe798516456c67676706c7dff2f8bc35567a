@@ -124,6 +124,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eadc93b6_7e8daf3d",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-01T20:47:11Z",
+      "side": 1,
+      "message": "on MSVC it is `struct ID3D10Blob` instead of `class`. What about we just include dawn/common/Platform.h and the required header (\"dawn/common/windows_with_undefs.h\" or maybe \"dawn/native/d3d12/d3d12_platform.h\") in BlobCache.h behind an `#if defined(DAWN_PLATFORM_WINDOWS)`. Also, we can put the `Create(Microsoft::WRL::ComPtr\u003cID3DBlob\u003e blob);` behind that guard as well?",
+      "parentUuid": "da253ce8_0e6e42ca",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 61
+      },
+      "revId": "6db8fe798516456c67676706c7dff2f8bc35567a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb4ac635_d973ad42",
