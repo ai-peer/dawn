@@ -68,6 +68,24 @@
       "parentUuid": "92f70028_37271f33",
       "revId": "f7fed0b3712c2029bf4dd747e75f556aa17c1e05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab95cb3b_1c55fb5e",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3264,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-02T20:37:19Z",
+      "side": 1,
+      "message": "\u003e (But, that means I have to make it actually compile in the first place, heh)\nExactly :)",
+      "parentUuid": "deaa4aaa_4a02babe",
+      "revId": "f7fed0b3712c2029bf4dd747e75f556aa17c1e05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
