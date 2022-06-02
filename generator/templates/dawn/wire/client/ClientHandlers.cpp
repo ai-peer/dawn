@@ -11,13 +11,17 @@
 //* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //* See the License for the specific language governing permissions and
 //* limitations under the License.
+{% set prefix = metadata.proc_table_prefix.lower() %}
+{% set namespace_name = Name(metadata.wire_namespace) %}
+{% set wire_namespace = namespace_name.namespace_case() %}
+{% set wire_dir = namespace_name.Dirs() %}
 
 #include "dawn/common/Assert.h"
-#include "dawn/wire/client/Client.h"
+#include "{{wire_dir}}/client/Client.h"
 
 #include <string>
 
-namespace dawn::wire::client {
+namespace {{wire_namespace}}::client {
     {% for command in cmd_records["return command"] %}
         bool Client::Handle{{command.name.CamelCase()}}(DeserializeBuffer* deserializeBuffer) {
             Return{{command.name.CamelCase()}}Cmd cmd;
@@ -94,4 +98,4 @@ namespace dawn::wire::client {
 
         return commands;
     }
-}  // namespace dawn::wire::client
+}  // namespace {{webnn_namespace}}::client

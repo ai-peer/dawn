@@ -11,11 +11,13 @@
 //* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //* See the License for the specific language governing permissions and
 //* limitations under the License.
-
+{% set namespace_name = Name(metadata.wire_namespace) %}
+{% set wire_dir = namespace_name.Dirs() %}
+{% set wire_namespace = namespace_name.namespace_case() %}
 #include "dawn/common/Assert.h"
-#include "dawn/wire/server/Server.h"
+#include "{{wire_dir}}/server/Server.h"
 
-namespace dawn::wire::server {
+namespace {{wire_namespace}}::server {
     //* Implementation of the command doers
     {% for command in cmd_records["command"] %}
         {% set type = command.derived_object %}
@@ -77,17 +79,37 @@ namespace dawn::wire::server {
                     if (data == nullptr) {
                         return false;
                     }
+                    //* if (data->deviceInfo != nullptr) {
+                    if (data->contextInfo != nullptr) {
+                        //* if (!UntrackDeviceChild(data->deviceInfo, objectType, objectId)) {
+                        if (!UntrackContextChild(data->contextInfo, objectType, objectId)) {
+                            return false;
+                        }
+                    }
                     if (data->state == AllocationState::Allocated) {
                         ASSERT(data->handle != nullptr);
                         {% if type.name.CamelCase() in server_reverse_lookup_objects %}
                             {{type.name.CamelCase()}}ObjectIdTable().Remove(data->handle);
                         {% endif %}
 
-                        {% if type.name.get() == "device" %}
+                        //* {% if type.name.get() == "device" %}
+                        {% if type.name.get() == "context" %}
+                            //* TODO(crbug.com/dawn/384): This is a hack to make sure that all child objects
+                            //* are destroyed before their device. We should have a solution in
+                            //* Dawn native that makes all child objects internally null if their
+                            //* Device is destroyed.
+                            while (data->info->childObjectTypesAndIds.size() > 0) {
+                                auto [childObjectType, childObjectId] = UnpackObjectTypeAndId(
+                                    *data->info->childObjectTypesAndIds.begin());
+                                if (!DoDestroyObject(childObjectType, childObjectId)) {
+                                    return false;
+                                }
+                            }
                             if (data->handle != nullptr) {
                                 //* Deregisters uncaptured error and device lost callbacks since
                                 //* they should not be forwarded if the device no longer exists on the wire.
-                                ClearDeviceCallbacks(data->handle);
+                                //* ClearDeviceCallbacks(data->handle);
+                                ClearContextCallbacks(data->handle);
                             }
                         {% endif %}
 
@@ -102,4 +124,4 @@ namespace dawn::wire::server {
         }
     }
 
-}  // namespace dawn::wire::server
+}  // namespace {{wire_namespace}}::server
