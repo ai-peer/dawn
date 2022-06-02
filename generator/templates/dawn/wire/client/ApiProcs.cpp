@@ -11,16 +11,18 @@
 //* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //* See the License for the specific language governing permissions and
 //* limitations under the License.
-
-#include "dawn/wire/client/ApiObjects.h"
-#include "dawn/wire/client/Client.h"
+{% set namespace_name = Name(metadata.wire_namespace) %}
+{% set wire_dir = namespace_name.Dirs() %}
+#include "{{wire_dir}}/client/ApiObjects.h"
+#include "{{wire_dir}}/client/Client.h"
 
 #include <algorithm>
 #include <cstring>
 #include <string>
 #include <vector>
 
-namespace dawn::wire::client {
+{% set wire_namespace = namespace_name.namespace_case() %}
+namespace {{wire_namespace}}::client {
 
     //* Outputs an rvalue that's the number of elements a pointer member points to.
     {% macro member_length(member, accessor) -%}
@@ -106,25 +108,30 @@ namespace dawn::wire::client {
         }
     {% endfor %}
 
+    {% set c_prefix = metadata.c_prefix %}
     namespace {
-        WGPUInstance ClientCreateInstance(WGPUInstanceDescriptor const* descriptor) {
+        {{c_prefix}}Instance ClientCreateInstance({{c_prefix}}InstanceDescriptor const* descriptor) {
             UNREACHABLE();
             return nullptr;
         }
 
         struct ProcEntry {
-            WGPUProc proc;
+            {{c_prefix}}Proc proc;
             const char* name;
         };
         static const ProcEntry sProcMap[] = {
             {% for (type, method) in c_methods_sorted_by_name %}
-                { reinterpret_cast<WGPUProc>(Client{{as_MethodSuffix(type.name, method.name)}}), "{{as_cMethod(type.name, method.name)}}" },
+                { reinterpret_cast<{{c_prefix}}Proc>(Client{{as_MethodSuffix(type.name, method.name)}}), "{{as_cMethod(type.name, method.name)}}" },
             {% endfor %}
         };
         static constexpr size_t sProcMapSize = sizeof(sProcMap) / sizeof(sProcMap[0]);
     }  // anonymous namespace
 
-    WGPUProc ClientGetProcAddress(WGPUDevice, const char* procName) {
+    {% set variable = "Device" %}
+    {% if c_prefix == "WNN" %}
+        {% set variable = "Context" %}
+    {% endif %} 
+    {{c_prefix}}Proc ClientGetProcAddress({{c_prefix}}{{variable}}, const char* procName) {
         if (procName == nullptr) {
             return nullptr;
         }
@@ -140,12 +147,12 @@ namespace dawn::wire::client {
         }
 
         // Special case the two free-standing functions of the API.
-        if (strcmp(procName, "wgpuGetProcAddress") == 0) {
-            return reinterpret_cast<WGPUProc>(ClientGetProcAddress);
+        if (strcmp(procName, "{{c_prefix.lower()}}GetProcAddress") == 0) {
+            return reinterpret_cast<{{c_prefix}}Proc>(ClientGetProcAddress);
         }
 
-        if (strcmp(procName, "wgpuCreateInstance") == 0) {
-            return reinterpret_cast<WGPUProc>(ClientCreateInstance);
+        if (strcmp(procName, "{{c_prefix.lower()}}CreateInstance") == 0) {
+            return reinterpret_cast<{{c_prefix}}Proc>(ClientCreateInstance);
         }
 
         return nullptr;
@@ -175,4 +182,4 @@ namespace dawn::wire::client {
     const {{Prefix}}ProcTable& GetProcs() {
         return gProcTable;
     }
-}  // namespace dawn::wire::client
+}  // namespace {{wire_namespaces}}::client

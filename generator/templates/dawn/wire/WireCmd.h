@@ -11,17 +11,21 @@
 //* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //* See the License for the specific language governing permissions and
 //* limitations under the License.
+{% set namespace_name = Name(metadata.wire_namespace) %}
+{% set DIR = namespace_name.concatcase().upper() %}
+#ifndef {{DIR}}_WIRECMD_AUTOGEN_H_
+#define {{DIR}}_WIRECMD_AUTOGEN_H_
 
-#ifndef DAWNWIRE_WIRECMD_AUTOGEN_H_
-#define DAWNWIRE_WIRECMD_AUTOGEN_H_
+{% set api = metadata.api.lower() %}
+#include "dawn/{{api}}.h"
 
-#include "dawn/webgpu.h"
+{% set wire_dir = namespace_name.Dirs() %}
+{% set wire_namespace = namespace_name.namespace_case() %}
+#include "{{wire_dir}}/ObjectType_autogen.h"
+#include "{{wire_dir}}/BufferConsumer.h"
+#include "{{wire_dir}}/WireResult.h"
 
-#include "dawn/wire/BufferConsumer.h"
-#include "dawn/wire/ObjectType_autogen.h"
-#include "dawn/wire/WireResult.h"
-
-namespace dawn::wire {
+namespace {{wire_namespace}} {
 
     using ObjectId = uint32_t;
     using ObjectGeneration = uint32_t;
@@ -133,6 +137,6 @@ namespace dawn::wire {
         {{write_command_struct(command, True)}}
     {% endfor %}
 
-}  // namespace dawn::wire
+}  // namespace {{wire_namesacpe}}
 
-#endif // DAWNWIRE_WIRECMD_AUTOGEN_H_
+#endif // {{DIR}}_WIRECMD_AUTOGEN_H_

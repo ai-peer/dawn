@@ -11,11 +11,13 @@
 //* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //* See the License for the specific language governing permissions and
 //* limitations under the License.
-
+{% set namespace_name = Name(metadata.wire_namespace) %}
+{% set wire_dir = namespace_name.Dirs() %}
+{% set wire_namespace = namespace_name.namespace_case() %}
 #include "dawn/common/Assert.h"
-#include "dawn/wire/server/Server.h"
+#include "{{wire_dir}}/server/Server.h"
 
-namespace dawn::wire::server {
+namespace {{wire_namespace}}::server {
     //* Implementation of the command doers
     {% for command in cmd_records["command"] %}
         {% set type = command.derived_object %}
@@ -77,6 +79,7 @@ namespace dawn::wire::server {
                     if (data == nullptr) {
                         return false;
                     }
+                   
                     if (data->state == AllocationState::Allocated) {
                         ASSERT(data->handle != nullptr);
                         {% if type.name.CamelCase() in server_reverse_lookup_objects %}
@@ -87,7 +90,8 @@ namespace dawn::wire::server {
                             if (data->handle != nullptr) {
                                 //* Deregisters uncaptured error and device lost callbacks since
                                 //* they should not be forwarded if the device no longer exists on the wire.
-                                ClearDeviceCallbacks(data->handle);
+                                //* ClearDeviceCallbacks(data->handle);
+                                ClearContextCallbacks(data->handle);
                             }
                         {% endif %}
 
@@ -102,4 +106,4 @@ namespace dawn::wire::server {
         }
     }
 
-}  // namespace dawn::wire::server
+}  // namespace {{wire_namespace}}::server
