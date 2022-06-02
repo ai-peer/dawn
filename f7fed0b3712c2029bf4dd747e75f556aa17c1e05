@@ -16,6 +16,40 @@
       "message": "PTAL.",
       "revId": "f7fed0b3712c2029bf4dd747e75f556aa17c1e05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c3060a8_64d6ca9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-02T17:51:46Z",
+      "side": 1,
+      "message": "One minor nit, otherwise lgtm.",
+      "revId": "f7fed0b3712c2029bf4dd747e75f556aa17c1e05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92f70028_37271f33",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3264,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-02T17:51:46Z",
+      "side": 1,
+      "message": "nit: For disabled code, I normally prefer to wrap it in `if (false) { \u003cdisabled code\u003e }` as the compiler will continue to compile the code, and thus fail if, say, we were to modify the enum or whatever.",
+      "revId": "f7fed0b3712c2029bf4dd747e75f556aa17c1e05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
