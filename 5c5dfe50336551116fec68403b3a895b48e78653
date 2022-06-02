@@ -166,6 +166,30 @@
       },
       "revId": "5c5dfe50336551116fec68403b3a895b48e78653",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "390325b5_7fec40f6",
+        "filename": "src/tint/writer/msl/generator_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-02T20:04:09Z",
+      "side": 1,
+      "message": "I tried `EmitType` into a stringstream, etc. but I actually found it clunkier in a way, especially once I added emitting the atomic type. Using EmitTypeAndName is more idiomatic, anyway, in our backends. I think it looks good now.",
+      "parentUuid": "c87a148c_a68f7e64",
+      "range": {
+        "startLine": 833,
+        "startChar": 0,
+        "endLine": 837,
+        "endChar": 17
+      },
+      "revId": "5c5dfe50336551116fec68403b3a895b48e78653",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
