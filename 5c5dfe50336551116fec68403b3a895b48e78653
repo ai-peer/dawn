@@ -118,6 +118,30 @@
       },
       "revId": "5c5dfe50336551116fec68403b3a895b48e78653",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe85cd38_08489c89",
+        "filename": "src/tint/writer/msl/generator_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-02T18:00:02Z",
+      "side": 1,
+      "message": "I made the change to emit the actual type instead of using T. It makes the backend code a bit clunkier, but the output is better, I think.",
+      "parentUuid": "b1a48e01_a90d38e6",
+      "range": {
+        "startLine": 833,
+        "startChar": 0,
+        "endLine": 837,
+        "endChar": 17
+      },
+      "revId": "5c5dfe50336551116fec68403b3a895b48e78653",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
