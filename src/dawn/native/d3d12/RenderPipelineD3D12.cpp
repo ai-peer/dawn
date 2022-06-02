@@ -432,12 +432,12 @@ MaybeError RenderPipeline::Initialize() {
     mCacheKey.Record(descriptorD3D12, *layout->GetRootSignatureBlob());
 
     // Try to see if we have anything in the blob cache.
-    CachedBlob blob = device->LoadCachedBlob(GetCacheKey());
+    Blob blob = device->LoadBlob(GetCacheKey());
     const bool cacheHit = !blob.Empty();
     if (cacheHit) {
         // Cache hits, attach cached blob to descriptor.
-        descriptorD3D12.CachedPSO.pCachedBlob = blob.Data();
-        descriptorD3D12.CachedPSO.CachedBlobSizeInBytes = blob.Size();
+        descriptorD3D12.CachedPSO.pBlob = blob.Data();
+        descriptorD3D12.CachedPSO.BlobSizeInBytes = blob.Size();
     }
 
     DAWN_TRY(CheckHRESULT(device->GetD3D12Device()->CreateGraphicsPipelineState(
@@ -447,9 +447,9 @@ MaybeError RenderPipeline::Initialize() {
     if (!cacheHit) {
         // Cache misses, need to get pipeline cached blob and store.
         ComPtr<ID3DBlob> d3dBlob;
-        DAWN_TRY(CheckHRESULT(GetPipelineState()->GetCachedBlob(&d3dBlob),
+        DAWN_TRY(CheckHRESULT(GetPipelineState()->GetBlob(&d3dBlob),
                               "D3D12 render pipeline state get cached blob"));
-        device->StoreCachedBlob(GetCacheKey(), CachedBlob::Create(std::move(d3dBlob)));
+        device->StoreBlob(GetCacheKey(), Blob::Create(std::move(d3dBlob)));
     }
 
     SetLabelImpl();
