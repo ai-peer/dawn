@@ -16,6 +16,23 @@
       "message": "Still need enga@ owner approve for .gitattributes\nThe mac failure should be fixed in another CL.",
       "revId": "ad6dc60aa116c12ca94512a8e4f33ca64358eaec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54abea2c_cba33d89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-02T00:25:50Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ad6dc60aa116c12ca94512a8e4f33ca64358eaec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
