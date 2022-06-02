@@ -33,6 +33,24 @@
       "message": "This, and the templates at [1] are really overkill imho.\n\n - The template is not needed because we could have a constexpr size somewhere that we use. Even better a type alias for the std::bitset.\n - The use of End + 1 is very error prone because when we add new values, someone will have to remember to change that definition otherwise we\u0027ll have out of bounds accesses.\n \nSo I think we should either defer to later and file an issue (keeping patchset 1) or:\n\n - Add an enum that\u0027s TimestampLocationMask and has bit values.\n - Add a function with a switch that converts from one to the other.\n - type alias the ityp::bitset for that to call it TimestampLocationSet.\n - Use it here.\n \n It\u0027s a lot, which is why I think we can defer.",
       "revId": "df25a7821d169d33a27d04b60a541c9844907b1b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd808df6_fb920341",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-06-02T06:42:58Z",
+      "side": 1,
+      "message": "OK, I will add it as a TODO.",
+      "parentUuid": "4b0ece61_e99b21aa",
+      "revId": "df25a7821d169d33a27d04b60a541c9844907b1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
