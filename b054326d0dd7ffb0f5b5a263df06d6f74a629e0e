@@ -192,6 +192,30 @@
       },
       "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7de22c0b_f9176af3",
+        "filename": "src/dawn/native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-02T17:20:33Z",
+      "side": 1,
+      "message": "I think the current name is fine. {Virtual|Physical}SingleSubresourceSize(level) is OK too.\n\nI prefer \"Subresource\" over \"layer\" because 3D texture depth slices IMO are different from \"layers\"",
+      "parentUuid": "2a0acfee_1dab5412",
+      "range": {
+        "startLine": 76,
+        "startChar": 31,
+        "endLine": 76,
+        "endChar": 71
+      },
+      "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
