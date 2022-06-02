@@ -12,12 +12,15 @@
 //* See the License for the specific language governing permissions and
 //* limitations under the License.
 
-#ifndef DAWNWIRE_OBJECTTPYE_AUTOGEN_H_
-#define DAWNWIRE_OBJECTTPYE_AUTOGEN_H_
+{% set namespace_name = Name(metadata.wire_namespace) %}
+{% set DIR = namespace_name.concatcase().upper() %}
+#ifndef {{DIR}}_OBJECTTPYE_AUTOGEN_H_
+#define {{DIR}}_OBJECTTPYE_AUTOGEN_H_
 
 #include "dawn/common/ityp_array.h"
 
-namespace dawn::wire {
+{% set wire_namespace = namespace_name.namespace_case() %}
+namespace {{wire_namespace}} {
 
     enum class ObjectType : uint32_t {
         {% for type in by_category["object"] %}
@@ -28,7 +31,7 @@ namespace dawn::wire {
     template <typename T>
     using PerObjectType = ityp::array<ObjectType, T, {{len(by_category["object"])}}>;
 
-} // namespace dawn::wire
+} // namespace {{wire_namespace}}
 
 
-#endif  // DAWNWIRE_OBJECTTPYE_AUTOGEN_H_
+#endif  // {{DIR}}_OBJECTTPYE_AUTOGEN_H_

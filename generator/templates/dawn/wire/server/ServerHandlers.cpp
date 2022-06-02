@@ -11,11 +11,13 @@
 //* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //* See the License for the specific language governing permissions and
 //* limitations under the License.
-
+{% set namespace_name = Name(metadata.wire_namespace) %}
+{% set wire_dir = namespace_name.Dirs() %}
+{% set wire_namespace = namespace_name.namespace_case() %}
 #include "dawn/common/Assert.h"
-#include "dawn/wire/server/Server.h"
+#include "{{wire_dir}}/server/Server.h"
 
-namespace dawn::wire::server {
+namespace {{wire_namespace}}::server {
     {% for command in cmd_records["command"] %}
         {% set method = command.derived_method %}
         {% set is_method = method != None %}
@@ -129,4 +131,4 @@ namespace dawn::wire::server {
         return commands;
     }
 
-}  // namespace dawn::wire::server
+}  // namespace {{wire_namespace}}::server
