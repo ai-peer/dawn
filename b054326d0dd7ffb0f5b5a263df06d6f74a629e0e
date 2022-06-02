@@ -216,6 +216,30 @@
       },
       "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfb84280_4a713f23",
+        "filename": "src/dawn/native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-06-02T17:47:49Z",
+      "side": 1,
+      "message": "OK. It looks like we don\u0027t have strong preferences and consensuses upon the new name. And the current change is fine. Then I am going to land this renaming patch as what it is.",
+      "parentUuid": "7de22c0b_f9176af3",
+      "range": {
+        "startLine": 76,
+        "startChar": 31,
+        "endLine": 76,
+        "endChar": 71
+      },
+      "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
