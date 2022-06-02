@@ -70,6 +70,30 @@
       },
       "revId": "5c5dfe50336551116fec68403b3a895b48e78653",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "265df8f0_6d8d2c8b",
+        "filename": "src/tint/writer/msl/generator_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-02T15:43:18Z",
+      "side": 1,
+      "message": "Updated the test and fixed the backends to do the right thing. MSL needs to key on both the storage class and the returned struct type.",
+      "parentUuid": "fdb244f6_af102a6f",
+      "range": {
+        "startLine": 833,
+        "startChar": 0,
+        "endLine": 837,
+        "endChar": 17
+      },
+      "revId": "5c5dfe50336551116fec68403b3a895b48e78653",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
