@@ -168,6 +168,30 @@
       },
       "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a0acfee_1dab5412",
+        "filename": "src/dawn/native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-06-02T05:25:45Z",
+      "side": 1,
+      "message": "Ack.\nI feel like that we can use\n`\n{Virtual|Physical}SizeForOneLayerAtMipLevel\n`\nIt is clearer.\n\nWDYT, Corentin and Austin?\n\nBTW, the `ForAllLayers` counterpart is only called once (the only potential usage could be PhysicalSizeForAllLayersAtMipLevel() for texture copy validation from line 300 to 305 at https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn/native/CommandValidation.cpp#300), so I don\u0027t want to wrap a function for it.",
+      "parentUuid": "99d6e67a_025c615d",
+      "range": {
+        "startLine": 76,
+        "startChar": 31,
+        "endLine": 76,
+        "endChar": 71
+      },
+      "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
