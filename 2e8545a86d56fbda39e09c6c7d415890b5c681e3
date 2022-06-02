@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "2e8545a86d56fbda39e09c6c7d415890b5c681e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6938bbcf_fc0aba4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-06-02T18:44:59Z",
+      "side": 1,
+      "message": "lgtm, I was about to comment on needing to wait on the roll of Tint into Dawn that implements this... then I remembered I had spent a bit of time getting rid of that roll 😂",
+      "revId": "2e8545a86d56fbda39e09c6c7d415890b5c681e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
