@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "57d35a00b40a94ab73ff081415a20bcd2f42f47d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a653ea9d_a34f6c42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-06-02T18:40:24Z",
+      "side": 1,
+      "message": "lgtm, spot checked some files, not doing them all since this is a trivial change, that I assume was scripted and there is like ~4k files check",
+      "revId": "57d35a00b40a94ab73ff081415a20bcd2f42f47d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
