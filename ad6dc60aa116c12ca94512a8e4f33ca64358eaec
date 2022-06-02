@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c98f644e_b0a5f48c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-02T00:23:19Z",
+      "side": 1,
+      "message": "Still need enga@ owner approve for .gitattributes\nThe mac failure should be fixed in another CL.",
+      "revId": "ad6dc60aa116c12ca94512a8e4f33ca64358eaec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -141,6 +141,30 @@
       },
       "revId": "848726b1d5d23d762ec547b67b5c6c046f94d995",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8a506a1_c007a19d",
+        "filename": "src/dawn/native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-02T00:23:19Z",
+      "side": 1,
+      "message": "Done. (Kept GetBlobCache for Vk impl)",
+      "parentUuid": "3b49feef_2971ecdb",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 1
+      },
+      "revId": "848726b1d5d23d762ec547b67b5c6c046f94d995",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
