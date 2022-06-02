@@ -94,6 +94,30 @@
       },
       "revId": "5c5dfe50336551116fec68403b3a895b48e78653",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1a48e01_a90d38e6",
+        "filename": "src/tint/writer/msl/generator_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-06-02T16:04:18Z",
+      "side": 1,
+      "message": "Looks good, thanks for the update.\n\nNow that the type is part of the key, the helper function that we generate doesn\u0027t need to be templated, and could just use the target type. The templated version works fine too though, so feel free to leave this or change it at your own discretion.",
+      "parentUuid": "265df8f0_6d8d2c8b",
+      "range": {
+        "startLine": 833,
+        "startChar": 0,
+        "endLine": 837,
+        "endChar": 17
+      },
+      "revId": "5c5dfe50336551116fec68403b3a895b48e78653",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
