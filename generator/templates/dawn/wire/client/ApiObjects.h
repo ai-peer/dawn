@@ -11,14 +11,17 @@
 //* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //* See the License for the specific language governing permissions and
 //* limitations under the License.
+{% set namespace_name = Name(metadata.wire_namespace) %}
+{% set DIR = namespace_name.concatcase().upper() %}
+#ifndef {{DIR}}_CLIENT_APIOBJECTS_AUTOGEN_H_
+#define {{DIR}}_CLIENT_APIOBJECTS_AUTOGEN_H_
 
-#ifndef DAWNWIRE_CLIENT_APIOBJECTS_AUTOGEN_H_
-#define DAWNWIRE_CLIENT_APIOBJECTS_AUTOGEN_H_
+{% set wire_dir = namespace_name.Dirs() %}
+{% set wire_namespace = namespace_name.namespace_case() %}
+#include "{{wire_dir}}/ObjectType_autogen.h"
+#include "{{wire_dir}}/client/ObjectBase.h"
 
-#include "dawn/wire/ObjectType_autogen.h"
-#include "dawn/wire/client/ObjectBase.h"
-
-namespace dawn::wire::client {
+namespace {{wire_namespace}}::client {
 
     template <typename T>
     struct ObjectTypeToTypeEnum {
@@ -35,11 +38,12 @@ namespace dawn::wire::client {
             };
         {% endif %}
 
-        inline {{Type}}* FromAPI(WGPU{{Type}} obj) {
+        {% set PREFIX = metadata.c_prefix %}
+        inline {{Type}}* FromAPI({{PREFIX}}{{Type}} obj) {
             return reinterpret_cast<{{Type}}*>(obj);
         }
-        inline WGPU{{Type}} ToAPI({{Type}}* obj) {
-            return reinterpret_cast<WGPU{{Type}}>(obj);
+        inline {{PREFIX}}{{Type}} ToAPI({{Type}}* obj) {
+            return reinterpret_cast<{{PREFIX}}{{Type}}>(obj);
         }
 
         template <>
@@ -48,6 +52,6 @@ namespace dawn::wire::client {
         };
 
     {% endfor %}
-}  // namespace dawn::wire::client
+}  // namespace {{wire_namespace}}::client
 
-#endif  // DAWNWIRE_CLIENT_APIOBJECTS_AUTOGEN_H_
+#endif  // {{DIR}}_CLIENT_APIOBJECTS_AUTOGEN_H_

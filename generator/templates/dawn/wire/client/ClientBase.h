@@ -11,16 +11,20 @@
 //* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //* See the License for the specific language governing permissions and
 //* limitations under the License.
+{% set PREFIX = metadata.proc_table_prefix.upper() %}
+{% set namespace_name = Name(metadata.wire_namespace) %}
+{% set wire_namespace = namespace_name.namespace_case() %}
+{% set wire_dir = namespace_name.Dirs() %}
 
-#ifndef DAWNWIRE_CLIENT_CLIENTBASE_AUTOGEN_H_
-#define DAWNWIRE_CLIENT_CLIENTBASE_AUTOGEN_H_
+#ifndef {{PREFIX}}WIRE_CLIENT_CLIENTBASE_AUTOGEN_H_
+#define {{PREFIX}}WIRE_CLIENT_CLIENTBASE_AUTOGEN_H_
 
-#include "dawn/wire/ChunkedCommandHandler.h"
-#include "dawn/wire/WireCmd_autogen.h"
-#include "dawn/wire/client/ApiObjects.h"
-#include "dawn/wire/client/ObjectAllocator.h"
+#include "{{wire_dir}}/ChunkedCommandHandler.h"
+#include "{{wire_dir}}/WireCmd_autogen.h"
+#include "{{wire_dir}}/client/ApiObjects.h"
+#include "{{wire_dir}}/client/ObjectAllocator.h"
 
-namespace dawn::wire::client {
+namespace {{wire_namespace}}::client {
 
     class ClientBase : public ChunkedCommandHandler, public ObjectIdProvider {
       public:

@@ -11,13 +11,15 @@
 //* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //* See the License for the specific language governing permissions and
 //* limitations under the License.
-
-#include "dawn/wire/WireCmd_autogen.h"
+{% set namespace_name = Name(metadata.wire_namespace) %}
+{% set wire_dir = namespace_name.Dirs() %}
+{% set wire_namespace = namespace_name.namespace_case() %}
+#include "{{wire_dir}}/WireCmd_autogen.h"
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/Log.h"
-#include "dawn/wire/BufferConsumer_impl.h"
-#include "dawn/wire/Wire.h"
+#include "{{wire_dir}}/BufferConsumer_impl.h"
+#include "{{wire_dir}}/Wire.h"
 
 #include <algorithm>
 #include <cstring>
@@ -102,6 +104,7 @@
 //* Methods are very similar to structures that have one member corresponding to each arguments.
 //* This macro takes advantage of the similarity to output [de]serialization code for a record
 //* that is either a structure or a method, with some special cases for each.
+{% set PREFIX = metadata.c_prefix %}
 {% macro write_record_serialization_helpers(record, name, members, is_cmd=False, is_return_command=False) %}
     {% set Return = "Return" if is_return_command else "" %}
     {% set Cmd = "Cmd" if is_cmd else "" %}
@@ -119,7 +122,7 @@
         {% elif record.extensible %}
             bool hasNextInChain;
         {% elif record.chained %}
-            WGPUChainedStructTransfer chain;
+            {{PREFIX}}ChainedStructTransfer chain;
         {% endif %}
 
         //* Value types are directly in the command, objects being replaced with their IDs.
@@ -498,8 +501,8 @@
 {% endmacro %}
 
 {% macro make_chained_struct_serialization_helpers(out=None) %}
-        {% set ChainedStructPtr = "WGPUChainedStructOut*" if out else "const WGPUChainedStruct*" %}
-        {% set ChainedStruct = "WGPUChainedStructOut" if out else "WGPUChainedStruct" %}
+        {% set ChainedStructPtr = PREFIX~"ChainedStructOut*" if out else "const "~PREFIX~"ChainedStruct*" %}
+        {% set ChainedStruct = PREFIX~"ChainedStructOut" if out else PREFIX~"ChainedStruct" %}
         size_t GetChainedStructExtraRequiredSize({{ChainedStructPtr}} chainedStruct) {
             ASSERT(chainedStruct != nullptr);
             size_t result = 0;
@@ -519,10 +522,10 @@
                         }
                     {% endfor %}
                     // Explicitly list the Invalid enum. MSVC complains about no case labels.
-                    case WGPUSType_Invalid:
+                    case {{PREFIX}}SType_Invalid:
                     default:
                         // Invalid enum. Reserve space just for the transfer header (sType and hasNext).
-                        result += sizeof(WGPUChainedStructTransfer);
+                        result += sizeof({{PREFIX}}ChainedStructTransfer);
                         chainedStruct = chainedStruct->next;
                         break;
                 }
@@ -560,17 +563,17 @@
                         } break;
                     {% endfor %}
                     // Explicitly list the Invalid enum. MSVC complains about no case labels.
-                    case WGPUSType_Invalid:
+                    case {{PREFIX}}SType_Invalid:
                     default: {
                         // Invalid enum. Serialize just the transfer header with Invalid as the sType.
                         // TODO(crbug.com/dawn/369): Unknown sTypes are silently discarded.
-                        if (chainedStruct->sType != WGPUSType_Invalid) {
+                        if (chainedStruct->sType != {{PREFIX}}SType_Invalid) {
                             dawn::WarningLog() << "Unknown sType " << chainedStruct->sType << " discarded.";
                         }
 
-                        WGPUChainedStructTransfer* transfer;
+                        {{PREFIX}}ChainedStructTransfer* transfer;
                         WIRE_TRY(buffer->Next(&transfer));
-                        transfer->sType = WGPUSType_Invalid;
+                        transfer->sType = {{PREFIX}}SType_Invalid;
                         transfer->hasNext = chainedStruct->next != nullptr;
 
                         // Still move on in case there are valid structs after this.
@@ -588,9 +591,9 @@
                                             const ObjectIdResolver& resolver) {
             bool hasNext;
             do {
-                const volatile WGPUChainedStructTransfer* header;
+                const volatile {{PREFIX}}ChainedStructTransfer* header;
                 WIRE_TRY(deserializeBuffer->Peek(&header));
-                WGPUSType sType = header->sType;
+                {{PREFIX}}SType sType = header->sType;
                 switch (sType) {
                     {% for sType in types["s type"].values if (
                             sType.valid and
@@ -620,20 +623,20 @@
                         } break;
                     {% endfor %}
                     // Explicitly list the Invalid enum. MSVC complains about no case labels.
-                    case WGPUSType_Invalid:
+                    case {{PREFIX}}SType_Invalid:
                     default: {
                         // Invalid enum. Deserialize just the transfer header with Invalid as the sType.
                         // TODO(crbug.com/dawn/369): Unknown sTypes are silently discarded.
-                        if (sType != WGPUSType_Invalid) {
+                        if (sType != {{PREFIX}}SType_Invalid) {
                             dawn::WarningLog() << "Unknown sType " << sType << " discarded.";
                         }
 
-                        const volatile WGPUChainedStructTransfer* transfer;
+                        const volatile {{PREFIX}}ChainedStructTransfer* transfer;
                         WIRE_TRY(deserializeBuffer->Read(&transfer));
 
                         {{ChainedStruct}}* outStruct;
                         WIRE_TRY(GetSpace(allocator, sizeof({{ChainedStruct}}), &outStruct));
-                        outStruct->sType = WGPUSType_Invalid;
+                        outStruct->sType = {{PREFIX}}SType_Invalid;
                         outStruct->next = nullptr;
 
                         // Still move on in case there are valid structs after this.
@@ -649,7 +652,7 @@
         }
 {% endmacro %}
 
-namespace dawn::wire {
+namespace {{wire_namespace}} {
 
     ObjectHandle::ObjectHandle() = default;
     ObjectHandle::ObjectHandle(ObjectId id, ObjectGeneration generation)
@@ -696,25 +699,25 @@ namespace dawn::wire {
             return WireResult::Success;
         }
 
-        struct WGPUChainedStructTransfer {
-            WGPUSType sType;
+        struct {{PREFIX}}ChainedStructTransfer {
+            {{PREFIX}}SType sType;
             bool hasNext;
         };
 
-        size_t GetChainedStructExtraRequiredSize(const WGPUChainedStruct* chainedStruct);
-        [[nodiscard]] WireResult SerializeChainedStruct(const WGPUChainedStruct* chainedStruct,
+        size_t GetChainedStructExtraRequiredSize(const {{PREFIX}}ChainedStruct* chainedStruct);
+        [[nodiscard]] WireResult SerializeChainedStruct(const {{PREFIX}}ChainedStruct* chainedStruct,
                                                           SerializeBuffer* buffer,
                                                           const ObjectIdProvider& provider);
-        WireResult DeserializeChainedStruct(const WGPUChainedStruct** outChainNext,
+        WireResult DeserializeChainedStruct(const {{PREFIX}}ChainedStruct** outChainNext,
                                             DeserializeBuffer* deserializeBuffer,
                                             DeserializeAllocator* allocator,
                                             const ObjectIdResolver& resolver);
 
-        size_t GetChainedStructExtraRequiredSize(WGPUChainedStructOut* chainedStruct);
-        [[nodiscard]] WireResult SerializeChainedStruct(WGPUChainedStructOut* chainedStruct,
+        size_t GetChainedStructExtraRequiredSize({{PREFIX}}ChainedStructOut* chainedStruct);
+        [[nodiscard]] WireResult SerializeChainedStruct({{PREFIX}}ChainedStructOut* chainedStruct,
                                                           SerializeBuffer* buffer,
                                                           const ObjectIdProvider& provider);
-        WireResult DeserializeChainedStruct(WGPUChainedStructOut** outChainNext,
+        WireResult DeserializeChainedStruct({{PREFIX}}ChainedStructOut** outChainNext,
                                             DeserializeBuffer* deserializeBuffer,
                                             DeserializeAllocator* allocator,
                                             const ObjectIdResolver& resolver);
@@ -784,4 +787,4 @@ namespace dawn::wire {
         {{ write_command_serialization_methods(command, True) }}
     {% endfor %}
 
-}  // namespace dawn::wire
+}  // namespace {{wire_namespace}}
