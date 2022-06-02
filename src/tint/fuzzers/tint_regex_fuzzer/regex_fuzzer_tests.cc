@@ -172,16 +172,16 @@ TEST(GetIdentifierTest, GetIdentifierTest1) {
         R"(fn clamp_0acf8f() {
         var res: vec2<f32> = clamp(vec2<f32>(), vec2<f32>(), vec2<f32>());
       }
-      @stage(vertex)
+      @vertex
       fn vertex_main() -> @builtin(position) vec4<f32> {
          clamp_0acf8f();"
          return vec4<f32>();
       }
-      @stage(fragment)
+      @fragment
       fn fragment_main() {
         clamp_0acf8f();
       }
-      @stage(compute) @workgroup_size(1)
+      @compute @workgroup_size(1)
       fn compute_main() {"
         var<private> foo: f32 = 0.0;
         clamp_0acf8f();
@@ -208,17 +208,17 @@ TEST(TestGetLiteralsValues, TestGetLiteralsValues1) {
         R"(fn clamp_0acf8f() {
         var res: vec2<f32> = clamp(vec2<f32>(), vec2<f32>(), vec2<f32>());
       }
-      @stage(vertex)
+      @vertex
       fn vertex_main() -> @builtin(position) vec4<f32> {
         clamp_0acf8f();
         var foo_1: i32 = 3;
         return vec4<f32>();
       }
-      @stage(fragment)
+      @fragment
       fn fragment_main() {
         clamp_0acf8f();
       }
-      @stage(compute) @workgroup_size(1)
+      @compute @workgroup_size(1)
       fn compute_main() {
         var<private> foo: f32 = 0.0;
         var foo_2: i32 = 10;
@@ -249,17 +249,17 @@ TEST(InsertReturnTest, FindClosingBrace) {
           var res: vec2<f32> = clamp(vec2<f32>(), vec2<f32>(), vec2<f32>());
           }
         }
-        @stage(vertex)
+        @vertex
         fn vertex_main() -> @builtin(position) vec4<f32> {
           clamp_0acf8f();
           var foo_1: i32 = 3;
           return vec4<f32>();
         }
-        @stage(fragment)
+        @fragment
         fn fragment_main() {
           clamp_0acf8f();
         }
-        @stage(compute) @workgroup_size(1)
+        @compute @workgroup_size(1)
         fn compute_main() {
           var<private> foo: f32 = 0.0;
           var foo_2: i32 = 10;
@@ -295,17 +295,17 @@ TEST(InsertReturnTest, FindClosingBraceFailing) {
         var res: vec2<f32> = clamp(vec2<f32>(), vec2<f32>(), vec2<f32>());
         }
       }
-      @stage(vertex)
+      @vertex
       fn vertex_main() -> @builtin(position) vec4<f32> {
         clamp_0acf8f();
         var foo_1: i32 = 3;
         return vec4<f32>();
       }
-      @stage(fragment)
+      @fragment
       fn fragment_main() {
         clamp_0acf8f();
       }
-      @stage(compute) @workgroup_size(1)
+      @compute @workgroup_size(1)
       fn compute_main() {
         var<private> foo: f32 = 0.0;
         var foo_2: i32 = 10;
@@ -334,17 +334,17 @@ TEST(TestInsertReturn, TestInsertReturn1) {
         R"(fn clamp_0acf8f() {
         var res: vec2<f32> = clamp(vec2<f32>(), vec2<f32>(), vec2<f32>());
       }
-      @stage(vertex)
+      @vertex
       fn vertex_main() -> @builtin(position) vec4<f32> {
         clamp_0acf8f();
         var foo_1: i32 = 3;
         return vec4<f32>();
       }
-      @stage(fragment)
+      @fragment
       fn fragment_main() {
         clamp_0acf8f();
       }
-      @stage(compute) @workgroup_size(1)
+      @compute @workgroup_size(1)
       fn compute_main() {
         var<private> foo: f32 = 0.0;
         var foo_2: i32 = 10;
@@ -367,17 +367,17 @@ TEST(TestInsertReturn, TestInsertReturn1) {
         R"(fn clamp_0acf8f() {
         var res: vec2<f32> = clamp(vec2<f32>(), vec2<f32>(), vec2<f32>());return true;
       }
-      @stage(vertex)
+      @vertex
       fn vertex_main() -> @builtin(position) vec4<f32> {
         clamp_0acf8f();
         var foo_1: i32 = 3;
         return vec4<f32>();
       }
-      @stage(fragment)
+      @fragment
       fn fragment_main() {
         clamp_0acf8f();
       }
-      @stage(compute) @workgroup_size(1)
+      @compute @workgroup_size(1)
       fn compute_main() {
         var<private> foo: f32 = 0.0;
         var foo_2: i32 = 10;
@@ -394,17 +394,17 @@ TEST(TestInsertReturn, TestFunctionPositions) {
         R"(fn clamp_0acf8f() {
           var res: vec2<f32> = clamp(vec2<f32>(), vec2<f32>(), vec2<f32>());
         }
-        @stage(vertex)
+        @vertex
         fn vertex_main() -> @builtin(position) vec4<f32> {
           clamp_0acf8f();
           var foo_1: i32 = 3;
           return vec4<f32>();
         }
-        @stage(fragment)
+        @fragment
         fn fragment_main() {
           clamp_0acf8f();
         }
-        @stage(compute) @workgroup_size(1)
+        @compute @workgroup_size(1)
         fn compute_main() {
           var<private> foo: f32 = 0.0;
           var foo_2: i32 = 10;
@@ -428,17 +428,17 @@ TEST(TestInsertReturn, TestMissingSemicolon) {
         R"(fn clamp_0acf8f() {
           var res: vec2<f32> = clamp(vec2<f32>(), vec2<f32>(), vec2<f32>())
         }
-        @stage(vertex)
+        @vertex
         fn vertex_main() -> @builtin(position) vec4<f32> {
           clamp_0acf8f()
           var foo_1: i32 = 3
           return vec4<f32>()
         }
-        @stage(fragment)
+        @fragment
         fn fragment_main() {
           clamp_0acf8f();
         }
-        @stage(compute) @workgroup_size(1)
+        @compute @workgroup_size(1)
         fn compute_main() {
           var<private> foo: f32 = 0.0;
           var foo_2: i32 = 10;
@@ -461,17 +461,17 @@ TEST(TestInsertReturn, TestMissingSemicolon) {
         R"(fn clamp_0acf8f() {
           var res: vec2<f32> = clamp(vec2<f32>(), vec2<f32>(), vec2<f32>())
         }
-        @stage(vertex)
+        @vertex
         fn vertex_main() -> @builtin(position) vec4<f32> {
           clamp_0acf8f()
           var foo_1: i32 = 3
           return vec4<f32>()
         }
-        @stage(fragment)
+        @fragment
         fn fragment_main() {
           clamp_0acf8f();
         }
-        @stage(compute) @workgroup_size(1)
+        @compute @workgroup_size(1)
         fn compute_main() {
           var<private> foo: f32 = 0.0;
           var foo_2: i32 = 10;
