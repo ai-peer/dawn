@@ -940,3 +940,58 @@ TEST_F(BufferValidationTest, GetMappedRange_OffsetSizeOOB) {
         EXPECT_EQ(buffer.GetMappedRange(0, 0), nullptr);
     }
 }
+
+// Test that the buffer creation parameters are correctly reflected
+TEST_F(BufferValidationTest, CreationParameterReflection) {
+    // Test reflection on two succesfully created but different buffers
+    {
+        wgpu::BufferDescriptor desc;
+        desc.size = 16;
+        desc.usage = wgpu::BufferUsage::Uniform;
+        wgpu::Buffer buf = device.CreateBuffer(&desc);
+
+        EXPECT_EQ(wgpu::BufferUsage::Uniform, buf.GetUsage());
+        EXPECT_EQ(16u, buf.GetSize());
+    }
+    {
+        wgpu::BufferDescriptor desc;
+        desc.size = 32;
+        desc.usage = wgpu::BufferUsage::Storage;
+        wgpu::Buffer buf = device.CreateBuffer(&desc);
+
+        EXPECT_EQ(wgpu::BufferUsage::Storage, buf.GetUsage());
+        EXPECT_EQ(32u, buf.GetSize());
+    }
+
+    // Test reflection on an invalid buffer (validation error case).
+    {
+        wgpu::BufferDescriptor desc;
+        desc.usage = wgpu::BufferUsage::Uniform;
+        desc.size = 19;
+        desc.mappedAtCreation = true;
+
+        // Error! MappedAtCreation requires size % 4 == 0.
+        wgpu::Buffer buf;
+        ASSERT_DEVICE_ERROR(buf = device.CreateBuffer(&desc));
+
+        // Reflection data is still exactly what was in the descriptor.
+        EXPECT_EQ(wgpu::BufferUsage::Uniform, buf.GetUsage());
+        EXPECT_EQ(19u, buf.GetSize());
+    }
+
+    // Test reflection on an invalid buffer (oom error case).
+    {
+        constexpr uint64_t kAmazinglyLargeSize = 0x1234'5678'90AB'CDEF;
+        wgpu::BufferDescriptor desc;
+        desc.usage = wgpu::BufferUsage::Storage;
+        desc.size = kAmazinglyLargeSize;
+
+        // OOM!
+        wgpu::Buffer buf;
+        ASSERT_DEVICE_ERROR(buf = device.CreateBuffer(&desc));
+
+        // Reflection data is still exactly what was in the descriptor.
+        EXPECT_EQ(wgpu::BufferUsage::Storage, buf.GetUsage());
+        EXPECT_EQ(kAmazinglyLargeSize, buf.GetSize());
+    }
+}
