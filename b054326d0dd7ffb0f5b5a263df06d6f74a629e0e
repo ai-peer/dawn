@@ -144,6 +144,30 @@
       },
       "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99d6e67a_025c615d",
+        "filename": "src/dawn/native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-06-02T02:35:58Z",
+      "side": 1,
+      "message": "I have no strong feelings about the length of the name, but FWIW I do think something like the naming I proposed reads more clearly.\n\n {Virtual|Physical}SizeForAllLayersAtMipLevel\n {Virtual|Physical}SizeForOneLayerAtMipLevel\n\nor\n\n {Virtual|Physical}MipSizeAllLayers\n {Virtual|Physical}MipSizeOneLayer\n\nif you want something shorter.\n\nAnd maybe you want to s/Layer/Subresource/, idk.",
+      "parentUuid": "7d3ca489_31470c58",
+      "range": {
+        "startLine": 76,
+        "startChar": 31,
+        "endLine": 76,
+        "endChar": 71
+      },
+      "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
