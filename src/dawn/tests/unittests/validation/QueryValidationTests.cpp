@@ -78,6 +78,45 @@ TEST_F(QuerySetValidationTest, DestroyDestroyedQuerySet) {
     querySet.Destroy();
 }
 
+// Test that the query set creation parameters are correctly reflected
+TEST_F(QuerySetValidationTest, CreationParameterReflection) {
+    // Test reflection on two succesfully created but different query sets
+    {
+        wgpu::QuerySetDescriptor desc;
+        desc.type = wgpu::QueryType::Occlusion;
+        desc.count = 18;
+        wgpu::QuerySet set = device.CreateQuerySet(&desc);
+
+        EXPECT_EQ(wgpu::QueryType::Occlusion, set.GetType());
+        EXPECT_EQ(18u, set.GetCount());
+    }
+    {
+        wgpu::QuerySetDescriptor desc;
+        // Unfortunately without extensions we can't check a different type.
+        desc.type = wgpu::QueryType::Occlusion;
+        desc.count = 1;
+        wgpu::QuerySet set = device.CreateQuerySet(&desc);
+
+        EXPECT_EQ(wgpu::QueryType::Occlusion, set.GetType());
+        EXPECT_EQ(1u, set.GetCount());
+    }
+
+    // Test reflection on an invalid query set
+    {
+        wgpu::QuerySetDescriptor desc;
+        desc.type = static_cast<wgpu::QueryType>(0xFFFF);
+        desc.count = 76;
+
+        // Error! We have a garbage type.
+        wgpu::QuerySet set;
+        ASSERT_DEVICE_ERROR(set = device.CreateQuerySet(&desc));
+
+        // Reflection data is still exactly what was in the descriptor.
+        EXPECT_EQ(desc.type, set.GetType());
+        EXPECT_EQ(76u, set.GetCount());
+    }
+}
+
 class OcclusionQueryValidationTest : public QuerySetValidationTest {};
 
 // Test the occlusionQuerySet in RenderPassDescriptor

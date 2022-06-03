@@ -908,7 +908,8 @@ TEST_F(CompressedTextureFormatsValidationTests, TextureSize) {
 
 // Test that the texture creation parameters are correctly reflected
 TEST_F(TextureValidationTest, CreationParameterReflection) {
-    auto CheckTextureMatchesDescriptor = [](const wgpu::Texture& tex, const wgpu::TextureDescriptor& desc) {
+    auto CheckTextureMatchesDescriptor = [](const wgpu::Texture& tex,
+                                            const wgpu::TextureDescriptor& desc) {
         EXPECT_EQ(desc.size.width, tex.GetSize().width);
         EXPECT_EQ(desc.size.height, tex.GetSize().height);
         EXPECT_EQ(desc.size.depthOrArrayLayers, tex.GetSize().depthOrArrayLayers);
