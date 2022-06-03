@@ -138,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b461b864_0693fb99",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-03T22:49:51Z",
+      "side": 1,
+      "message": "Eh let me try again. How do you config MSVC to be the compiler? I don\u0027t find one with ninja. Use CMake?",
+      "parentUuid": "d3bbfc5b_a0d54204",
+      "range": {
+        "startLine": 39,
+        "startChar": 46,
+        "endLine": 39,
+        "endChar": 48
+      },
+      "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0c1c940_35fc87aa",
         "filename": "src/dawn/native/Blob.h",
         "patchSetId": 6
