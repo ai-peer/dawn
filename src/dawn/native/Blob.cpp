@@ -33,9 +33,19 @@ Blob::Blob() : mData(nullptr), mSize(0), mDeleter({}) {}
 Blob::Blob(uint8_t* data, size_t size, std::function<void()> deleter)
     : mData(data), mSize(size), mDeleter(std::move(deleter)) {}
 
-Blob::Blob(Blob&&) = default;
+Blob::Blob(Blob&& rhs) : mData(rhs.mData), mSize(rhs.mSize) {
+    mDeleter = std::move(rhs.mDeleter);
+}
 
-Blob& Blob::operator=(Blob&&) = default;
+Blob& Blob::operator=(Blob&& rhs) {
+    mData = rhs.mData;
+    mSize = rhs.mSize;
+    if (mDeleter) {
+        mDeleter();
+    }
+    mDeleter = std::move(rhs.mDeleter);
+    return *this;
+}
 
 Blob::~Blob() {
     if (mDeleter) {

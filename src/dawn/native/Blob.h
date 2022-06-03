@@ -20,9 +20,19 @@
 
 #include "dawn/common/Platform.h"
 
-#if defined(DAWN_PLATFORM_WINDOWS)
+#if defined(DAWN_ENABLE_BACKEND_D3D12)
 #include "dawn/native/d3d12/d3d12_platform.h"
-#endif  // DAWN_PLATFORM_WINDOWS
+#endif  // DAWN_ENABLE_BACKEND_D3D12
+
+namespace testing {
+
+template <typename T>
+class StrictMock;
+
+template <typename F>
+class MockFunction;
+
+}  // namespace testing
 
 namespace dawn::native {
 
@@ -33,9 +43,14 @@ class Blob {
   public:
     static Blob Create(size_t size);
 
-#if defined(DAWN_PLATFORM_WINDOWS)
+    // Create a blob from a mock deleter for testing. Pass by unowned pointer so
+    // we don't need the definition available in this header, and the test
+    // can retain ownership and track calls to the deleter.
+    static Blob CreateForTesting(testing::StrictMock<testing::MockFunction<void()>>* deleter);
+
+#if defined(DAWN_ENABLE_BACKEND_D3D12)
     static Blob Create(Microsoft::WRL::ComPtr<ID3DBlob> blob);
-#endif  // DAWN_PLATFORM_WINDOWS
+#endif  // DAWN_ENABLE_BACKEND_D3D12
 
     Blob();
     ~Blob();
@@ -52,6 +67,10 @@ class Blob {
     size_t Size() const;
 
   private:
+    // Create a blob from data and size. Takes ownership of the |deleter| which
+    // should own |data| and free it when called. This function is private because it
+    // should not be called directly as it would be easy to incorrectly pass a deleter
+    // that leaks memory or double frees.
     explicit Blob(uint8_t* data, size_t size, std::function<void()> deleter);
 
     uint8_t* mData;
