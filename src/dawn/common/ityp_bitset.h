@@ -126,7 +126,7 @@ Index GetHighestBitIndexPlusOne(const ityp::bitset<Index, N>& bitset) {
     using I = UnderlyingType<Index>;
 #if defined(DAWN_COMPILER_MSVC)
     if constexpr (N > 32) {
-#if defined(DAWN_PLATFORM_64_BIT)
+#if DAWN_PLATFORM_IS(64_BIT)
         // NOLINTNEXTLINE(runtime/int)
         unsigned long firstBitIndex = 0ul;
         unsigned char ret = _BitScanReverse64(&firstBitIndex, bitset.to_ullong());
@@ -134,7 +134,7 @@ Index GetHighestBitIndexPlusOne(const ityp::bitset<Index, N>& bitset) {
             return Index(static_cast<I>(0));
         }
         return Index(static_cast<I>(firstBitIndex + 1));
-#else   // defined(DAWN_PLATFORM_64_BIT)
+#else   // DAWN_PLATFORM_IS(64_BIT)
         if (bitset.none()) {
             return Index(static_cast<I>(0));
         }
@@ -144,7 +144,7 @@ Index GetHighestBitIndexPlusOne(const ityp::bitset<Index, N>& bitset) {
             }
         }
         UNREACHABLE();
-#endif  // defined(DAWN_PLATFORM_64_BIT)
+#endif  // DAWN_PLATFORM_IS(64_BIT)
     } else {
         // NOLINTNEXTLINE(runtime/int)
         unsigned long firstBitIndex = 0ul;
