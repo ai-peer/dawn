@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85530f6c_2b56cc8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-03T20:30:26Z",
+      "side": 1,
+      "message": "Addressing review comments at https://dawn-review.googlesource.com/c/dawn/+/91180/24#message-a30d4e609c92d583d5a276e90f8822fa787a0ad9",
+      "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
