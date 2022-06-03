@@ -49,6 +49,7 @@ class Buffer final : public ObjectBase {
 
     void Destroy();
 
+    // Note that these values can be arbitrary since they aren't validated in the wire client.
     WGPUBufferUsage GetUsage() const;
     uint64_t GetSize() const;
 
