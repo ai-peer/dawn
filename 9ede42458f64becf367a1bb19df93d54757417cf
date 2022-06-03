@@ -16,6 +16,69 @@
       "message": "Addressing review comments at https://dawn-review.googlesource.com/c/dawn/+/91180/24#message-a30d4e609c92d583d5a276e90f8822fa787a0ad9",
       "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f24136db_a4f7a04a",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T21:11:42Z",
+      "side": 1,
+      "message": "nit: no longer needed",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 33
+      },
+      "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "959968ad_70eaebf5",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T21:11:42Z",
+      "side": 1,
+      "message": "are you sure we need this \"::\"? IIRC, you had `class` in a previous CL, but this one has `struct`",
+      "range": {
+        "startLine": 39,
+        "startChar": 46,
+        "endLine": 39,
+        "endChar": 48
+      },
+      "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0c1c940_35fc87aa",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T21:11:42Z",
+      "side": 1,
+      "message": "it also should be called in the move assignment operator. found a bug there and fixing in https://dawn-review.googlesource.com/c/dawn/+/92600\n\nanyway, what\u0027s important to say is probably that this constructor takes ownership of |data| and releases ownership by calling |deleter|.",
+      "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
