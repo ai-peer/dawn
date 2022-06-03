@@ -52,6 +52,8 @@ class Blob {
     size_t Size() const;
 
   private:
+    // The deleter is called at ~Blob() and should be responsible for ownership management of the
+    // data pointer.
     explicit Blob(uint8_t* data, size_t size, std::function<void()> deleter);
 
     uint8_t* mData;

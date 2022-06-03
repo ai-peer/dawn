@@ -61,12 +61,10 @@ MaybeError PipelineCache::SerializeToBlobImpl(Blob* blob) {
     DAWN_TRY(CheckVkSuccess(
         device->fn.GetPipelineCacheData(device->GetVkDevice(), mHandle, &bufferSize, nullptr),
         "GetPipelineCacheData"));
-    if (bufferSize > 0) {
-        *blob = Blob::Create(bufferSize);
-        DAWN_TRY(CheckVkSuccess(device->fn.GetPipelineCacheData(device->GetVkDevice(), mHandle,
-                                                                &bufferSize, blob->Data()),
-                                "GetPipelineCacheData"));
-    }
+    *blob = Blob::Create(bufferSize);
+    DAWN_TRY(CheckVkSuccess(
+        device->fn.GetPipelineCacheData(device->GetVkDevice(), mHandle, &bufferSize, blob->Data()),
+        "GetPipelineCacheData"));
     return {};
 }
 
