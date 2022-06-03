@@ -264,6 +264,30 @@
       },
       "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17cf0e61_b61f98e9",
+        "filename": "src/dawn/native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-06-03T18:07:20Z",
+      "side": 1,
+      "message": "Other folks may have different opinions, but I don\u0027t like resource vs subresources (just a \"s\" for plural to represent multiple subresources) in function names for discrimination. The difference is too subtle/small. IIRC, Dawn has a lot such usages. \n\nI strongly defend {Single|One}Subresource or {Single|One}layer in names. Especially for this one where its third parameter of Extent3D is depthOrArrayLayers but we don\u0027t count array layers in its returned value. So the `single/one` together with subresource or layer is a very clear indication that array layers are not counted.\n\nRegarding potential parameter `aspect` (in addition to mipLevel), you mentioned twice, I negated twice. But I didn\u0027t see any further explanation why it is needed. I would like to say this again: Aspect info is only useful for depth/stencil formats, which are not compressed formats. So I feel like aspect info (which impact byteSize of each texel) doesn\u0027t impact the returned Extent3D and we don\u0027t need aspect in future. I am not 100% sure though.\n\nSo, why we need to add aspect info? You mentioned the potential addition of aspect, again.",
+      "parentUuid": "83528f58_cef63295",
+      "range": {
+        "startLine": 76,
+        "startChar": 31,
+        "endLine": 76,
+        "endChar": 71
+      },
+      "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
