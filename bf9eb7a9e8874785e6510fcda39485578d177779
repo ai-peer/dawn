@@ -16,6 +16,23 @@
       "message": "Thanks for the review, Kai!",
       "revId": "bf9eb7a9e8874785e6510fcda39485578d177779",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b6e4142_21394dba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-06-03T22:30:42Z",
+      "side": 1,
+      "message": "Review ping? Thanks!",
+      "revId": "bf9eb7a9e8874785e6510fcda39485578d177779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
