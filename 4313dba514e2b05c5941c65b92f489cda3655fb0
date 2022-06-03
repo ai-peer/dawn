@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89eed99e_3b3a3c41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-03T18:18:49Z",
+      "side": 1,
+      "message": "Thanks for the review! Will address them in https://dawn-review.googlesource.com/c/dawn/+/92680",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed96198b_86330eb5",
@@ -54,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08702966_6b337350",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-03T18:18:49Z",
+      "side": 1,
+      "message": "\u003e just exposing the constructor publicly and making a helper function that uses it in the D3D12 backend?\nThe main reason is we cannot have temp CachedBlob (now named Blob) with actual data (size \u003e 0) as the ownership of it\u0027s data are handled. So we don\u0027t want to expose constructor with size \u003e 0 that actually allocates the data.\n\nThe backend-specifc compilation gated is to solve the MSVC compile issue where it seems to cannot handle typedef ID3DBlob10 ID3DBlob in the typename without a constructor. We can change back to the general template forward declaration in Patch 17 https://dawn-review.googlesource.com/c/dawn/+/91180/17",
+      "parentUuid": "ea52c550_13174728",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bcd340d1_99302eaf",
         "filename": "src/dawn/native/BlobCache.h",
         "patchSetId": 24
@@ -65,6 +100,24 @@
       "writtenOn": "2022-06-03T12:26:34Z",
       "side": 1,
       "message": "nit: comment whether it acquires the pointer or copies the data?",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3a445e6_b84aa779",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-03T18:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcd340d1_99302eaf",
       "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +156,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec1a7da2_49bbefdb",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-03T18:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e79be69d_2c337ddc",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "324a1816_58cb8d66",
@@ -120,6 +191,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2658e364_fa165433",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-03T18:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "324a1816_58cb8d66",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4abe53e6_229d7b5e",
@@ -133,6 +222,24 @@
       "writtenOn": "2022-06-03T12:26:34Z",
       "side": 1,
       "message": "nit: doesn\u0027t have a respective header, that\u0027s weird. Also could be a freestanding function in D3D12Utils",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f199cff_58de67ba",
+        "filename": "src/dawn/native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-03T18:18:49Z",
+      "side": 1,
+      "message": "Now in BlobD3D12.cpp if that\u0027s better.",
+      "parentUuid": "4abe53e6_229d7b5e",
       "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -167,6 +274,24 @@
       "writtenOn": "2022-06-03T12:26:34Z",
       "side": 1,
       "message": "When does this happen? Why do we need to guard for storing an empty blob if that\u0027s what Vulkan gives us given that blobs support being 0-sized?",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a122d007_5240efaf",
+        "filename": "src/dawn/native/vulkan/PipelineCacheVk.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-03T18:18:49Z",
+      "side": 1,
+      "message": "Done. (I thought when bufferSize is 0 we can skip allocating the blob again and calling device-\u003efn.GetPipelineCacheData (I assume it will just returned VK_NULL_HANDLE to mHandle))",
+      "parentUuid": "4582e6f0_77e314d1",
       "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
