@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8de81daa_d631631d",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T17:19:19Z",
+      "side": 1,
+      "message": "which `if constexpr`? if you mean the existing one - no, we still need it even with that. Not sure if you mean adding a new one.\n\nI think we may be able to remove it if CreateFn always returns ErrorOrResult though",
+      "parentUuid": "110ed2d0_064eb65a",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3fd9a4f1_b86bbb17",
         "filename": "src/dawn/native/CacheRequest.h",
         "patchSetId": 10
@@ -65,6 +83,30 @@
       "writtenOn": "2022-06-03T16:38:13Z",
       "side": 1,
       "message": "Q: is RV RightValue?",
+      "range": {
+        "startLine": 55,
+        "startChar": 16,
+        "endLine": 55,
+        "endChar": 18
+      },
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3f3fe63_fac88621",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T17:19:19Z",
+      "side": 1,
+      "message": "\"ReturnValue\" - though I can expand it out. And here, it should be more like \"UnwrappedReturnValue\"",
+      "parentUuid": "3fd9a4f1_b86bbb17",
       "range": {
         "startLine": 55,
         "startChar": 16,
@@ -94,6 +136,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "afb54f53_3325219d",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T17:19:19Z",
+      "side": 1,
+      "message": "It is actually compile-time impossible for CreateFn to capture anything, though I will expand this comment to say it is not allowed",
+      "parentUuid": "dbbdf95f_b6ab931f",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f5c8083_203d817c",
         "filename": "src/dawn/native/CacheRequest.h",
         "patchSetId": 10
@@ -111,6 +171,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a3c5d12_7da60ddf",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T17:19:19Z",
+      "side": 1,
+      "message": "sounds reasonable",
+      "parentUuid": "7f5c8083_203d817c",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ab27714_f35bd582",
         "filename": "src/dawn/native/CacheRequest.h",
         "patchSetId": 10
@@ -122,6 +200,24 @@
       "writtenOn": "2022-06-03T16:38:13Z",
       "side": 1,
       "message": "By what kind of magic does this function get into the scope enclosing the CacheRequestImpl class ???",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e19ad41_5c3c9a4b",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T17:19:19Z",
+      "side": 1,
+      "message": "because it is `friend` - it\u0027s like defining a `friend std::ostream\u0026 operator\u003c\u003c (std::ostream\u0026 os, T);`\n\n\"ADL can find a friend function (typically, an overloaded operator) that is defined entirely within a class or class template, even if it was never declared at namespace level.\"\nhttps://en.cppreference.com/w/cpp/language/adl",
+      "parentUuid": "6ab27714_f35bd582",
       "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -185,6 +281,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "81820e9e_d65a71be",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T17:19:19Z",
+      "side": 1,
+      "message": "seems ok - I\u0027ll do that as it saves needing to list all the enums out. the enum is not guaranteed to be unique either so :-/\n\nthe current approach also does not save us from calling LoadOrCreate with the same request type, with functors that compute different results. Technically it should be typed on both the request type and the functor types, but idk why we would need that right now. Maybe one day we\u0027ll have some other magic identifier for the callsite.",
+      "parentUuid": "35665913_c89af340",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "daae898f_5672c473",
         "filename": "src/dawn/native/CacheResult.h",
         "patchSetId": 10
@@ -219,6 +333,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e2c083f_1a6634b1",
+        "filename": "src/dawn/tests/DawnNativeTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T17:19:19Z",
+      "side": 1,
+      "message": "because device is a member of DawnNativeTest, but mPlatform is a member of derived class CacheRequestTests. Without this, mPlatform is destructed first, then when device is destructed in the base class, it tries to access mPlatform due to usage of TRACE_EVENT calling Tick.\n\nI can comment about this",
+      "parentUuid": "4303cd95_d197305c",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "175098ae_c03e50b4",
         "filename": "src/dawn/tests/unittests/native/CacheRequestTests.cpp",
         "patchSetId": 10
@@ -230,6 +362,24 @@
       "writtenOn": "2022-06-03T16:38:13Z",
       "side": 1,
       "message": "nit: these are used in a single test, can they be defined there or is it not possible to do the same thing with lambdas?",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab5cbdde_8177228e",
+        "filename": "src/dawn/tests/unittests/native/CacheRequestTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T17:19:19Z",
+      "side": 1,
+      "message": "can\u0027t define a template inside the inner scope of another function",
+      "parentUuid": "175098ae_c03e50b4",
       "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
