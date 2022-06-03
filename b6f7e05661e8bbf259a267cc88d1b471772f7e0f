@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f3125f1_256115e4",
+        "filename": "src/dawn/native/Blob.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T16:50:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "002d9de6_45a9782c",
+      "revId": "b6f7e05661e8bbf259a267cc88d1b471772f7e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cccb07c_c76f8fb3",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-06-03T12:09:17Z",
       "side": 1,
       "message": "Can we have a test that the deleter is called in this case? This is what the changes to Blob.cpp fix.\n\nditto for the destructor.",
+      "revId": "b6f7e05661e8bbf259a267cc88d1b471772f7e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e144538_db2b2792",
+        "filename": "src/dawn/tests/unittests/native/BlobTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T16:50:07Z",
+      "side": 1,
+      "message": "done, but what do you mean \"ditto for the destructor\" ?",
+      "parentUuid": "8cccb07c_c76f8fb3",
       "revId": "b6f7e05661e8bbf259a267cc88d1b471772f7e0f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

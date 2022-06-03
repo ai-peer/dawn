@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6425d182_f93e31ca",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T16:50:07Z",
+      "side": 1,
+      "message": "I also addressed some of the other comments on the other CL about this #defined. However, I really don\u0027t think we should make the constructor public as that ruins the safety of this abstraction. It would be far to easy to use incorrectly.",
+      "revId": "9165b0c0ed7dd31cd575fa5a593571fac837a255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
