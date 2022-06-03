@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c997277_b99cd7a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T05:29:27Z",
+      "side": 1,
+      "message": "PTAL! Simplified this to not have the complex builder type-checking and added tests!\n\nalso, boohoo - https://developercommunity.visualstudio.com/t/template-class-friend-declaration-ignored/431551\n\nI\u0027ll just need to make the function public.",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
