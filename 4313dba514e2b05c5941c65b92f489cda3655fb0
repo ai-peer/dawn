@@ -195,6 +195,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91609842_ee18fcaa",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T21:16:16Z",
+      "side": 1,
+      "message": "I think the suggestion to return a dummy blob cache here is preferable instead of adding another wrapper. The dummy could live on the device and would be returned instead of the instance\u0027s blob cache is the toggle is disabled",
+      "parentUuid": "8d19a419_db61c060",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e79be69d_2c337ddc",
         "filename": "src/dawn/native/Device.h",
         "patchSetId": 24
