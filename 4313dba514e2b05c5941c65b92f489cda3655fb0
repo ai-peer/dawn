@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15cd747c_c584ec8c",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-03T20:29:44Z",
+      "side": 1,
+      "message": "Done. (Removed)",
+      "parentUuid": "ed96198b_86330eb5",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea52c550_13174728",
@@ -83,6 +101,24 @@
       "side": 1,
       "message": "\u003e just exposing the constructor publicly and making a helper function that uses it in the D3D12 backend?\nThe main reason is we cannot have temp CachedBlob (now named Blob) with actual data (size \u003e 0) as the ownership of it\u0027s data are handled. So we don\u0027t want to expose constructor with size \u003e 0 that actually allocates the data.\n\nThe backend-specifc compilation gated is to solve the MSVC compile issue where it seems to cannot handle typedef ID3DBlob10 ID3DBlob in the typename without a constructor. We can change back to the general template forward declaration in Patch 17 https://dawn-review.googlesource.com/c/dawn/+/91180/17",
       "parentUuid": "ea52c550_13174728",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c4954ec_755bd958",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-03T20:29:44Z",
+      "side": 1,
+      "message": "For the forward declaration, managed to make msvc happy without include (use root level namespace ::ID3DBlob).",
+      "parentUuid": "08702966_6b337350",
       "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -135,6 +171,24 @@
       "writtenOn": "2022-06-03T12:26:34Z",
       "side": 1,
       "message": "u-nit: IMHO the DeviceBase should be holder of \"services\" of which the Blob Cache is one. This approach where the device has a lot of sub-objects for specific services but no functions that act on them directly helps avoid DeviceBase from growing into a monstruous god object. (it already kinda is, but let\u0027s keep it under control).\n\nHere this could be improved by always having a blob cache, just one that uses a noop caching interface when the toggles aren\u0027t present.",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d19a419_db61c060",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-03T20:29:44Z",
+      "side": 1,
+      "message": "ACK. Sounds like we need another wrapper around BlobCache (BlobCacheService?). And have a Load and a Store function.\nWill put in a new CL.",
+      "parentUuid": "7d18a400_daa95e1a",
       "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
