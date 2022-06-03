@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32a652f8_94151b66",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-03T21:52:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f24136db_a4f7a04a",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 33
+      },
+      "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "959968ad_70eaebf5",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-06-03T21:11:42Z",
       "side": 1,
       "message": "are you sure we need this \"::\"? IIRC, you had `class` in a previous CL, but this one has `struct`",
+      "range": {
+        "startLine": 39,
+        "startChar": 46,
+        "endLine": 39,
+        "endChar": 48
+      },
+      "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8d97df3_39f80498",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-03T21:52:02Z",
+      "side": 1,
+      "message": "Yep. :: is needed to make MSVC happy. \n\nhttps://logs.chromium.org/logs/dawn/buildbucket/cr-buildbucket/8812529757973991297/+/u/compile_with_ninja/stdout\n\n[2216/2232] LINK dawn_perf_tests.exe dawn_perf_tests.exe.pdb\nFAILED: dawn_perf_tests.exe dawn_perf_tests.exe.pdb \nC:/b/s/w/ir/cipd_bin_packages/cpython3/bin/python3.exe ../../build/toolchain/win/tool_wrapper.py link-wrapper environment.x64 False link.exe /OUT:./dawn_perf_tests.exe /nologo  /PDB:./dawn_perf_tests.exe.pdb @./dawn_perf_tests.exe.rsp\nb\u0027ComputePipelineD3D12.obj : error LNK2019: unresolved external symbol \"void __cdecl dawn::native::d3d12::StoreCachedBlob(class dawn::native::DeviceBase *,class dawn::native::CacheKey const \u0026,class Microsoft::WRL::ComPtr\u003cstruct ID3D10Blob\u003e)\" (?StoreCachedBlob@d3d12@native@dawn@@YAXPEAVDeviceBase@23@AEBVCacheKey@23@V?$ComPtr@UID3D10Blob@@@WRL@Microsoft@@@Z) referenced in function \"public: virtual class Result\u003cvoid,class dawn::native::ErrorData\u003e __cdecl dawn::native::d3d12::ComputePipeline::Initialize(void)\" (?Initialize@ComputePipeline@d3d12@native@dawn@@UEAA?AV?$Result@XVErrorData@native@dawn@@@@XZ)\\r\\n\u0027\nb\u0027RenderPipelineD3D12.obj : error LNK2001: unresolved external symbol \"void __cdecl dawn::native::d3d12::StoreCachedBlob(class dawn::native::DeviceBase *,class dawn::native::CacheKey const \u0026,class Microsoft::WRL::ComPtr\u003cstruct ID3D10Blob\u003e)\" (?StoreCachedBlob@d3d12@native@dawn@@YAXPEAVDeviceBase@23@AEBVCacheKey@23@V?$ComPtr@UID3D10Blob@@@WRL@Microsoft@@@Z)\\r\\n\u0027\nb\u0027.\\\\dawn_perf_tests.exe : fatal error LNK1120: 1 unresolved externals\\r\\n\u0027",
+      "parentUuid": "959968ad_70eaebf5",
       "range": {
         "startLine": 39,
         "startChar": 46,
@@ -81,6 +129,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efad089c_d2ae37c7",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-03T21:52:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0c1c940_35fc87aa",
+      "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b35a38f3_320a651f",
@@ -94,6 +160,30 @@
       "writtenOn": "2022-06-03T21:39:11Z",
       "side": 1,
       "message": "Hmm I saw Corentin\u0027s comment on this in the other CL, but looking at this, it\u0027s true that we will just be making the same call twice... (blob-\u003eData() will return nullptr in this case when bufferSize \u003d\u003d 0). Would be nice to just skip it?\n\nDepending on what is preferred we could also do an early return instead if that is easier to follow?",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 33
+      },
+      "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a056c387_a02af974",
+        "filename": "src/dawn/native/vulkan/PipelineCacheVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-03T21:52:02Z",
+      "side": 1,
+      "message": "Done (Added an early return)",
+      "parentUuid": "b35a38f3_320a651f",
       "range": {
         "startLine": 64,
         "startChar": 4,
