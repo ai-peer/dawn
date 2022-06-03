@@ -33,6 +33,47 @@
       "message": "Review ping? Thanks!",
       "revId": "bf9eb7a9e8874785e6510fcda39485578d177779",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4f95374_900976dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T22:40:27Z",
+      "side": 1,
+      "message": "Sorry - missed this!",
+      "parentUuid": "0b6e4142_21394dba",
+      "revId": "bf9eb7a9e8874785e6510fcda39485578d177779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc54187d_8975bde0",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T22:40:27Z",
+      "side": 1,
+      "message": "instead of needing to know when the backend might have set mVendorName / mArchitectureName, how about we make a virtual method to set the names which does what the original code did by default, and then the Mac version can simply override it ?",
+      "range": {
+        "startLine": 47,
+        "startChar": 7,
+        "endLine": 47,
+        "endChar": 84
+      },
+      "revId": "bf9eb7a9e8874785e6510fcda39485578d177779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
