@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20282a32_69bcc9ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T12:26:34Z",
+      "side": 1,
+      "message": "Austin, sorry I\u0027m performing a post-review. Here are several comments that I\u0027m surprised where not raised during the review.",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed96198b_86330eb5",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T12:26:34Z",
+      "side": 1,
+      "message": "This should be DAWN_ENABLE_D3D12 if it is kept because the d3d12 backend compilation can be controlled separately.",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea52c550_13174728",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T12:26:34Z",
+      "side": 1,
+      "message": "Adding backend-specific compilation in the frontend breaks the relatively strict layering that we have between frontend and backend. If it is absolutely needed than maybe we can do it, but here what prevented just exposing the constructor publicly and making a helper function that uses it in the D3D12 backend?",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcd340d1_99302eaf",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T12:26:34Z",
+      "side": 1,
+      "message": "nit: comment whether it acquires the pointer or copies the data?",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d18a400_daa95e1a",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T12:26:34Z",
+      "side": 1,
+      "message": "u-nit: IMHO the DeviceBase should be holder of \"services\" of which the Blob Cache is one. This approach where the device has a lot of sub-objects for specific services but no functions that act on them directly helps avoid DeviceBase from growing into a monstruous god object. (it already kinda is, but let\u0027s keep it under control).\n\nHere this could be improved by always having a blob cache, just one that uses a noop caching interface when the toggles aren\u0027t present.",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e79be69d_2c337ddc",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T12:26:34Z",
+      "side": 1,
+      "message": "nit: Ideally we should use forward declarations when possible to try and keep build times low (it\u0027s gotten progressively worse but we should still try to be good about forward declarations). Here CachedBlob is taken by reference so it only needs to be forward declared, not included.",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "324a1816_58cb8d66",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T12:26:34Z",
+      "side": 1,
+      "message": "That\u0027s the default implementation so why do we duplicate it here? We could just add the function whenever we\u0027re ready to implement it.",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4abe53e6_229d7b5e",
+        "filename": "src/dawn/native/d3d12/PipelineCacheD3D12.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T12:26:34Z",
+      "side": 1,
+      "message": "nit: doesn\u0027t have a respective header, that\u0027s weird. Also could be a freestanding function in D3D12Utils",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12e46967_c3bae8a6",
+        "filename": "src/dawn/native/metal/BufferMTL.mm",
+        "patchSetId": 24
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T12:26:34Z",
+      "side": 1,
+      "message": "Seems like this change should have been separated if it came up early in the review.",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4582e6f0_77e314d1",
+        "filename": "src/dawn/native/vulkan/PipelineCacheVk.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T12:26:34Z",
+      "side": 1,
+      "message": "When does this happen? Why do we need to guard for storing an empty blob if that\u0027s what Vulkan gives us given that blobs support being 0-sized?",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
