@@ -16,6 +16,222 @@
       "message": "PTAL! Simplified this to not have the complex builder type-checking and added tests!\n\nalso, boohoo - https://developercommunity.visualstudio.com/t/template-class-friend-declaration-ignored/431551\n\nI\u0027ll just need to make the function public.",
       "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5416cd1_d75d8dbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T16:38:13Z",
+      "side": 1,
+      "message": "Approach LGTM, thanks for trying it.",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "110ed2d0_064eb65a",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T16:38:13Z",
+      "side": 1,
+      "message": "Is this class needed with the if constexpr below?",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fd9a4f1_b86bbb17",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T16:38:13Z",
+      "side": 1,
+      "message": "Q: is RV RightValue?",
+      "range": {
+        "startLine": 55,
+        "startChar": 16,
+        "endLine": 55,
+        "endChar": 18
+      },
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbbdf95f_b6ab931f",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T16:38:13Z",
+      "side": 1,
+      "message": "nit: can we write down somewhere that it is VERY MUCH best practice that CreateFn doesn\u0027t capture anything?",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f5c8083_203d817c",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T16:38:13Z",
+      "side": 1,
+      "message": "WDYT of forcing that CreateFn returns an ErrorOrResult? It seems that in the vast majority of cases we are going to call a driver or Tint in ways that can fail so we\u0027ll need to handle the failure anyway.",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ab27714_f35bd582",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T16:38:13Z",
+      "side": 1,
+      "message": "By what kind of magic does this function get into the scope enclosing the CacheRequestImpl class ???",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "930ad10d_f5ac4621",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T16:38:13Z",
+      "side": 1,
+      "message": "nit: Request\u0026\u0026 ?",
+      "range": {
+        "startLine": 115,
+        "startChar": 29,
+        "endLine": 115,
+        "endChar": 36
+      },
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c65e0fad_fdd14adc",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T16:38:13Z",
+      "side": 1,
+      "message": "nit: Maybe write doc on how to use that macro with an example?",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35665913_c89af340",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T16:38:13Z",
+      "side": 1,
+      "message": "WDYT of recording #Request instead? It would be a short string, that should be unique? But it wouldn\u0027t be machine checked that it is unique so IDK.",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daae898f_5672c473",
+        "filename": "src/dawn/native/CacheResult.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T16:38:13Z",
+      "side": 1,
+      "message": "nit: Why not static member functions CacheResult::CacheHit(key, value) and CacheResult::CacheMiss(key)?",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4303cd95_d197305c",
+        "filename": "src/dawn/tests/DawnNativeTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T16:38:13Z",
+      "side": 1,
+      "message": "Q: Why is this needed?",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "175098ae_c03e50b4",
+        "filename": "src/dawn/tests/unittests/native/CacheRequestTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T16:38:13Z",
+      "side": 1,
+      "message": "nit: these are used in a single test, can they be defined there or is it not possible to do the same thing with lambdas?",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
