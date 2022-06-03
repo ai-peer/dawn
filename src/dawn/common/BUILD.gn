@@ -132,6 +132,7 @@ config("internal_config") {
       "-Wunreachable-code-aggressive",
       "-Wunused-but-set-variable",
       "-Wunused-macros",
+      "-Werror=undef",
     ]
 
     if (is_win) {
