@@ -162,6 +162,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e333f6c_bd9221bd",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T23:15:45Z",
+      "side": 1,
+      "message": "On windows, you should be able to do `is_clang\u003dfalse` and `use_goma\u003dfalse` to make it use MSVC",
+      "parentUuid": "b461b864_0693fb99",
+      "range": {
+        "startLine": 39,
+        "startChar": 46,
+        "endLine": 39,
+        "endChar": 48
+      },
+      "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0c1c940_35fc87aa",
         "filename": "src/dawn/native/Blob.h",
         "patchSetId": 6
