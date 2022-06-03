@@ -16,6 +16,24 @@
       "message": "nit: we could remove the block, it\u0027s not longer useful",
       "revId": "2a72bc2d82dc380ecf69cd93cd7c0b55bb17f644",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3400a1c_c7ad0d6d",
+        "filename": "src/dawn/tests/unittests/RefBaseTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-06-03T19:42:50Z",
+      "side": 1,
+      "message": "I thought of it but I left it for the consistency in the file so far, for example see the line 110 or 122.",
+      "parentUuid": "62d38452_425c974a",
+      "revId": "2a72bc2d82dc380ecf69cd93cd7c0b55bb17f644",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
