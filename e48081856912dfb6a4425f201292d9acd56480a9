@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f66357c_ea00d7b0",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T20:46:22Z",
+      "side": 1,
+      "message": "unfortunate this is kinda duplicated since we don\u0027t have a valid dawn::Format in the error texture case. Don\u0027t have a better suggestion at the moment though :-/",
+      "range": {
+        "startLine": 533,
+        "startChar": 6,
+        "endLine": 533,
+        "endChar": 30
+      },
+      "revId": "e48081856912dfb6a4425f201292d9acd56480a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61df96c3_762e5923",
+        "filename": "src/dawn/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T20:46:22Z",
+      "side": 1,
+      "message": "we should also test that internal usages from  wgpu::DawnTextureInternalUsageDescriptor are not reflected",
+      "revId": "e48081856912dfb6a4425f201292d9acd56480a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55c75fd6_c6c4bc54",
+        "filename": "src/dawn/wire/client/Buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T20:46:22Z",
+      "side": 1,
+      "message": "should be in the buffer CL",
+      "revId": "e48081856912dfb6a4425f201292d9acd56480a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
