@@ -156,16 +156,16 @@ struct VulkanFunctions {
         GetPhysicalDeviceWaylandPresentationSupportKHR = nullptr;
 #endif  // defined(DAWN_USE_WAYLAND)
 
-#if defined(DAWN_PLATFORM_WINDOWS)
+#if DAWN_OS_IS(WINDOWS)
     // KHR_win32_surface
     VkFn<PFN_vkCreateWin32SurfaceKHR> CreateWin32SurfaceKHR = nullptr;
     VkFn<PFN_vkGetPhysicalDeviceWin32PresentationSupportKHR>
         GetPhysicalDeviceWin32PresentationSupportKHR = nullptr;
-#endif  // defined(DAWN_PLATFORM_WINDOWS)
+#endif  // DAWN_OS_IS(WINDOWS)
 
-#if defined(DAWN_PLATFORM_ANDROID)
+#if DAWN_OS_IS(ANDROID)
     VkFn<PFN_vkCreateAndroidSurfaceKHR> CreateAndroidSurfaceKHR = nullptr;
-#endif  // defined(DAWN_PLATFORM_ANDROID)
+#endif  // DAWN_OS_IS(ANDROID)
 
 #if defined(DAWN_USE_X11)
     // KHR_xlib_surface

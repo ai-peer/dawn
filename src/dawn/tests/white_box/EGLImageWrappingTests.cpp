@@ -29,9 +29,9 @@ namespace {
 class EGLFunctions {
   public:
     EGLFunctions() {
-#if defined(DAWN_PLATFORM_WINDOWS)
+#if DAWN_OS_IS(WINDOWS)
         const char* eglLib = "libEGL.dll";
-#elif defined(DAWN_PLATFORM_MACOS)
+#elif DAWN_OS_IS(MACOS)
         const char* eglLib = "libEGL.dylib";
 #else
         const char* eglLib = "libEGL.so";
