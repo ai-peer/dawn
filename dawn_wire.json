@@ -205,12 +205,19 @@
             "ShaderModuleGetCompilationInfo",
             "QueueOnSubmittedWorkDone",
             "QueueWriteBuffer",
-            "QueueWriteTexture"
+            "QueueWriteTexture",
+            "TextureGetSize",
+            "TextureGetMipLevelCount",
+            "TextureGetSampleCount",
+            "TextureGetDimension",
+            "TextureGetFormat",
+            "TextureGetUsage"
         ],
         "client_handwritten_commands": [
             "BufferDestroy",
             "BufferUnmap",
             "DeviceCreateErrorBuffer",
+            "DeviceCreateTexture",
             "DeviceGetQueue",
             "DeviceInjectError"
         ],
@@ -220,7 +227,8 @@
             "Device",
             "Instance",
             "Queue",
-            "ShaderModule"
+            "ShaderModule",
+            "Texture"
         ],
         "server_custom_pre_handler_commands": [
             "BufferDestroy",

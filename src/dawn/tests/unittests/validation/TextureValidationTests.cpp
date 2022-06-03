@@ -906,4 +906,62 @@ TEST_F(CompressedTextureFormatsValidationTests, TextureSize) {
     }
 }
 
+// Test that the texture creation parameters are correctly reflected
+TEST_F(TextureValidationTest, CreationParameterReflection) {
+    auto CheckTextureMatchesDescriptor = [](const wgpu::Texture& tex, const wgpu::TextureDescriptor& desc) {
+        EXPECT_EQ(desc.size.width, tex.GetSize().width);
+        EXPECT_EQ(desc.size.height, tex.GetSize().height);
+        EXPECT_EQ(desc.size.depthOrArrayLayers, tex.GetSize().depthOrArrayLayers);
+        EXPECT_EQ(desc.mipLevelCount, tex.GetMipLevelCount());
+        EXPECT_EQ(desc.sampleCount, tex.GetSampleCount());
+        EXPECT_EQ(desc.dimension, tex.GetDimension());
+        EXPECT_EQ(desc.usage, tex.GetUsage());
+        EXPECT_EQ(desc.format, tex.GetFormat());
+    };
+
+    // Test reflection on two succesfully created but different buffers
+    {
+        wgpu::TextureDescriptor desc;
+        desc.size = {3, 2, 1};
+        desc.mipLevelCount = 1;
+        desc.sampleCount = 4;
+        desc.dimension = wgpu::TextureDimension::e2D;
+        desc.usage = wgpu::TextureUsage::RenderAttachment;
+        desc.format = wgpu::TextureFormat::RGBA8Unorm;
+        wgpu::Texture tex = device.CreateTexture(&desc);
+
+        CheckTextureMatchesDescriptor(tex, desc);
+    }
+    {
+        wgpu::TextureDescriptor desc;
+        desc.size = {47, 32, 19};
+        desc.mipLevelCount = 3;
+        desc.sampleCount = 1;
+        desc.dimension = wgpu::TextureDimension::e3D;
+        desc.usage = wgpu::TextureUsage::TextureBinding;
+        desc.format = wgpu::TextureFormat::R32Float;
+        wgpu::Texture tex = device.CreateTexture(&desc);
+
+        CheckTextureMatchesDescriptor(tex, desc);
+    }
+
+    // Test reflection on an invalid texture.
+    {
+        // Fill a descriptor with a bunch of garbage values.
+        wgpu::TextureDescriptor desc;
+        desc.size = {0, 0xFFFF'FFFF, 1};
+        desc.mipLevelCount = 0;
+        desc.sampleCount = 42;
+        desc.dimension = static_cast<wgpu::TextureDimension>(0xFFFF'FF00);
+        desc.usage = static_cast<wgpu::TextureUsage>(0xFFFF'FFFF);
+        desc.format = static_cast<wgpu::TextureFormat>(0xFFFF'FFF0);
+
+        // Error! Because the texture width is 0.
+        wgpu::Texture tex;
+        ASSERT_DEVICE_ERROR(tex = device.CreateTexture(&desc));
+
+        CheckTextureMatchesDescriptor(tex, desc);
+    }
+}
+
 }  // namespace
