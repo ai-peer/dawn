@@ -288,6 +288,30 @@
       },
       "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "048430a8_7e79b088",
+        "filename": "src/dawn/native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-06-03T18:09:07Z",
+      "side": 1,
+      "message": "sorry, I meant to say \"subresource vs subresources\" in functions names.",
+      "parentUuid": "17cf0e61_b61f98e9",
+      "range": {
+        "startLine": 76,
+        "startChar": 31,
+        "endLine": 76,
+        "endChar": 71
+      },
+      "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
