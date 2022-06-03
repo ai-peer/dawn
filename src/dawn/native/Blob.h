@@ -20,9 +20,9 @@
 
 #include "dawn/common/Platform.h"
 
-#if defined(DAWN_PLATFORM_WINDOWS)
+#if DAWN_PLATFORM_IS(WINDOWS)
 #include "dawn/native/d3d12/d3d12_platform.h"
-#endif  // DAWN_PLATFORM_WINDOWS
+#endif  // DAWN_PLATFORM_IS(WINDOWS)
 
 namespace dawn::native {
 
@@ -33,9 +33,9 @@ class Blob {
   public:
     static Blob Create(size_t size);
 
-#if defined(DAWN_PLATFORM_WINDOWS)
+#if DAWN_PLATFORM_IS(WINDOWS)
     static Blob Create(Microsoft::WRL::ComPtr<ID3DBlob> blob);
-#endif  // DAWN_PLATFORM_WINDOWS
+#endif  // DAWN_PLATFORM_IS(WINDOWS)
 
     Blob();
     ~Blob();
