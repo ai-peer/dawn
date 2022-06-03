@@ -20,9 +20,9 @@
 
 #include "dawn/common/Platform.h"
 
-#if defined(DAWN_PLATFORM_WINDOWS)
+#if defined(DAWN_ENABLE_BACKEND_D3D12)
 #include "dawn/native/d3d12/d3d12_platform.h"
-#endif  // DAWN_PLATFORM_WINDOWS
+#endif  // DAWN_ENABLE_BACKEND_D3D12
 
 namespace dawn::native {
 
@@ -33,9 +33,9 @@ class Blob {
   public:
     static Blob Create(size_t size);
 
-#if defined(DAWN_PLATFORM_WINDOWS)
+#if defined(DAWN_ENABLE_BACKEND_D3D12)
     static Blob Create(Microsoft::WRL::ComPtr<ID3DBlob> blob);
-#endif  // DAWN_PLATFORM_WINDOWS
+#endif  // DAWN_ENABLE_BACKEND_D3D12
 
     Blob();
     ~Blob();
@@ -52,6 +52,8 @@ class Blob {
     size_t Size() const;
 
   private:
+    // The deleter is called at ~Blob() and should be responsible for ownership management of the
+    // mData pointer.
     explicit Blob(uint8_t* data, size_t size, std::function<void()> deleter);
 
     uint8_t* mData;
