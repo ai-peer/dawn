@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62d38452_425c974a",
+        "filename": "src/dawn/tests/unittests/RefBaseTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T08:24:53Z",
+      "side": 1,
+      "message": "nit: we could remove the block, it\u0027s not longer useful",
+      "revId": "2a72bc2d82dc380ecf69cd93cd7c0b55bb17f644",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
