@@ -33,6 +33,23 @@
       "message": "lgtm, I was about to comment on needing to wait on the roll of Tint into Dawn that implements this... then I remembered I had spent a bit of time getting rid of that roll 😂",
       "revId": "2e8545a86d56fbda39e09c6c7d415890b5c681e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fa2dec4_ca942efe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T08:22:21Z",
+      "side": 1,
+      "message": "LGTM but there are more places where this is used in Dawn. Also in Chromium.",
+      "revId": "2e8545a86d56fbda39e09c6c7d415890b5c681e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
