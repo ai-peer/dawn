@@ -16,6 +16,23 @@
       "message": "PTAL at the whole stack! This is assuming https://github.com/gpuweb/gpuweb/pull/2919 lands as is (Texture::GetSize() vs. GetWidth() GetHeight() GetDepthOrArrayLayers() is still up in the air)",
       "revId": "d6f2f643240429f91bfae91dee60e53c7f481bb3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "907c8347_94655e6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T20:46:46Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "d6f2f643240429f91bfae91dee60e53c7f481bb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
