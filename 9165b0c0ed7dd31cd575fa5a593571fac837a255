@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95388099_0d6d19a2",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T18:22:25Z",
+      "side": 1,
+      "message": "Shrek is making some additional changes in https://dawn-review.googlesource.com/c/dawn/+/92680, so we can defer further changes to that CL if you don\u0027t mind.",
+      "parentUuid": "cbbc31f3_41446993",
+      "revId": "9165b0c0ed7dd31cd575fa5a593571fac837a255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4daf6d4c_dab95827",
         "filename": "src/dawn/tests/unittests/native/BlobTests.cpp",
         "patchSetId": 3
@@ -49,6 +67,30 @@
       "writtenOn": "2022-06-03T18:14:18Z",
       "side": 1,
       "message": "Should we check that the original one doesn\u0027t hold it anymore?",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 28
+      },
+      "revId": "9165b0c0ed7dd31cd575fa5a593571fac837a255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16810fbc_432e5b54",
+        "filename": "src/dawn/tests/unittests/native/BlobTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T18:22:25Z",
+      "side": 1,
+      "message": "clang-tidy will error that you touched a moved object again.",
+      "parentUuid": "4daf6d4c_dab95827",
       "range": {
         "startLine": 69,
         "startChar": 4,
@@ -72,6 +114,30 @@
       "writtenOn": "2022-06-03T18:14:18Z",
       "side": 1,
       "message": "ditto here.",
+      "range": {
+        "startLine": 87,
+        "startChar": 4,
+        "endLine": 87,
+        "endChar": 28
+      },
+      "revId": "9165b0c0ed7dd31cd575fa5a593571fac837a255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af83b172_bf7f9731",
+        "filename": "src/dawn/tests/unittests/native/BlobTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T18:22:25Z",
+      "side": 1,
+      "message": "clang-tidy will error that you touched a moved object again.",
+      "parentUuid": "9576f1ab_7b4c50bc",
       "range": {
         "startLine": 87,
         "startChar": 4,
