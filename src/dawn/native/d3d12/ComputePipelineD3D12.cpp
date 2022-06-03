@@ -17,6 +17,7 @@
 #include <memory>
 #include <utility>
 
+#include "dawn/native/Blob.h"
 #include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/d3d12/BlobD3D12.h"
 #include "dawn/native/d3d12/D3D12Error.h"
