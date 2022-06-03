@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3bbfc5b_a0d54204",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-03T22:38:18Z",
+      "side": 1,
+      "message": "ok but those are coming from StoreCachedBlob, not CachedBlob::Create ?\n\nI was able to reproduce the linker error with MSVC if the forward declaration is `class`, but it\u0027s OK when it is `struct` (even without \"::\").",
+      "parentUuid": "c8d97df3_39f80498",
+      "range": {
+        "startLine": 39,
+        "startChar": 46,
+        "endLine": 39,
+        "endChar": 48
+      },
+      "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0c1c940_35fc87aa",
         "filename": "src/dawn/native/Blob.h",
         "patchSetId": 6
