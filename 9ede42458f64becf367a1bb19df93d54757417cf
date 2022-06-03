@@ -79,6 +79,29 @@
       "message": "it also should be called in the move assignment operator. found a bug there and fixing in https://dawn-review.googlesource.com/c/dawn/+/92600\n\nanyway, what\u0027s important to say is probably that this constructor takes ownership of |data| and releases ownership by calling |deleter|.",
       "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b35a38f3_320a651f",
+        "filename": "src/dawn/native/vulkan/PipelineCacheVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-03T21:39:11Z",
+      "side": 1,
+      "message": "Hmm I saw Corentin\u0027s comment on this in the other CL, but looking at this, it\u0027s true that we will just be making the same call twice... (blob-\u003eData() will return nullptr in this case when bufferSize \u003d\u003d 0). Would be nice to just skip it?\n\nDepending on what is preferred we could also do an early return instead if that is easier to follow?",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 33
+      },
+      "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
