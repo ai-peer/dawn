@@ -240,6 +240,30 @@
       },
       "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83528f58_cef63295",
+        "filename": "src/dawn/native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-03T12:05:19Z",
+      "side": 1,
+      "message": "I really hate to do this and be this guy. There is subjectivity in naming things, but this function name is objectively sub-par, and this whole interaction is problematic.\n\nFirst on semantic minimalism and the role of OWNERs/TLs\n\nA really important property to uphold when writing code in general, and in Dawn in particular, is to keep things minimalist semantically. This mean that code needs to be just as complex as it needs to be and no more, code should be written so as to not only be correct, but be easy to read and understand (this might mean not using intermediate variables, but sometimes it might mean having some) and of course the object graph and function spaghetti should be limited to what\u0027s strictly necessary. Implementation details shouldn\u0027t leak from behind clean interfaces etc.\n\nSemantic minimalism is what makes Dawn\u0027s code approachable and look like it is \"easy\" to implement WebGPU. We should not forget that it is not. Dawn codebase has been repeatedly praised as being easy to get into and work with because of this minimalism. Of course that notion is somewhat subjective, and that\u0027s where the role of OWNERs and TLs come. They have the responsibility to uphold this property through their subjective point of view. It is an advantage because they can ask for changes that should be done by default. But it is also a curse because (at least for me) it makes reviewing code 2x slower, produce a lot more comments and have more back and forth that can be emotionally draining (like this one). It doesn\u0027t make me happy that I have 20 comments and spend an hour reviewing a CL that\u0027s only 200 loc. But it\u0027s what\u0027s right for the project, and it is my job.\n\nThe role of contributors are to address comments. By default, unless there is a correctness problem, comments from OWNERs and TLs should be addressed without questions. Sometimes when contributing code I think something is better my way but what\u0027s most important is that it is coherent with the rest of the projects, and the OWNERs know that better. So just do it.\n\nAustin, as OWNER and TL of Dawn, you should start caring about this semantic minimalism. This CL is a small example (I\u0027ll explain below why it should have resolved to something else) but overall you should start reviewing code more critically to make sure it is coherent with the current codebase and only adds the necessary complexity (semantic or otherwise). It takes a lot of effort to do so, but it is better for everyone (and it gets a bit more efficient over time).\n\nSo why is this function name not great. `GetMipLevelSingleSubresourcePhysicalSize`\n\nWhen developers will read it, Single stands out. Are there methods to gets the size of all subresources? When is a subresource not single? A subresource singular so no need to say single. It is always what the WebGPU spec defines as subresource, and \"single\" is noise for reading and for the understanding.\n\n\"MipLevel\" is again noise. In most cases the call is `resource-\u003eGetMipLevelSingleSubresourcePhysicalSize(desc-\u003emipLevel)`. The argument is clearly a mip level and a number there couldn\u0027t be anything else given the WebGPU definition of subresource. So \"miplevel\" is noise. The function will also later have to be extended to require an aspect as soon as we support copies or rendering for YUV textures. (because subresource size will depend on miplevel and aspect). So `GetMipLevelAndAspectSingleSubresourcePhysicalSize`? No, just `GetSubresourcePhysicalSize()`.\n\nThe general idea is that longer names aren\u0027t always better if they bring more context in the head of the developer reading the code. This is subjective but see the first section above.\n\nSo. This CL has been handled in a sub-par manner in multiple ways and we should know to do things better in the future. Since it is landed, no need to do a follow-up and we\u0027ll change the name when we add an aspect to it anyway.",
+      "parentUuid": "dfb84280_4a713f23",
+      "range": {
+        "startLine": 76,
+        "startChar": 31,
+        "endLine": 76,
+        "endChar": 71
+      },
+      "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
