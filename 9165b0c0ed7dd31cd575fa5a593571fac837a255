@@ -16,6 +16,70 @@
       "message": "I also addressed some of the other comments on the other CL about this #defined. However, I really don\u0027t think we should make the constructor public as that ruins the safety of this abstraction. It would be far to easy to use incorrectly.",
       "revId": "9165b0c0ed7dd31cd575fa5a593571fac837a255",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbbc31f3_41446993",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-03T18:14:18Z",
+      "side": 1,
+      "message": "Hmm, maybe another option is to extend this class (BlobD3D12) and expose the ctor as protected from here and hide it in the impl. Then we can use the device impl to decide what type of blob should be returned.\n\nDepending on how we want to handle Corentin\u0027s suggestion about not returning blobs on the device and only returning the blob cache though, we would potentially have to have to create a d3d12 specific BlobCache impl as well. Maybe that is reasonable since the blobs are actually different though? WDYT?\n\nIf the ctor is protected, we could also create a BlobTest or BlobMock whose ctor exposes the protected one for testing. Then we don\u0027t need the CreateForTesting in this header.",
+      "parentUuid": "6425d182_f93e31ca",
+      "revId": "9165b0c0ed7dd31cd575fa5a593571fac837a255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4daf6d4c_dab95827",
+        "filename": "src/dawn/tests/unittests/native/BlobTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-03T18:14:18Z",
+      "side": 1,
+      "message": "Should we check that the original one doesn\u0027t hold it anymore?",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 28
+      },
+      "revId": "9165b0c0ed7dd31cd575fa5a593571fac837a255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9576f1ab_7b4c50bc",
+        "filename": "src/dawn/tests/unittests/native/BlobTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-03T18:14:18Z",
+      "side": 1,
+      "message": "ditto here.",
+      "range": {
+        "startLine": 87,
+        "startChar": 4,
+        "endLine": 87,
+        "endChar": 28
+      },
+      "revId": "9165b0c0ed7dd31cd575fa5a593571fac837a255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
