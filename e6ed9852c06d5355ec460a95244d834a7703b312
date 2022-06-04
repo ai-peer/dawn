@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f8409c6_ec345cbe",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-04T02:06:33Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "8de81daa_d631631d",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3fd9a4f1_b86bbb17",
@@ -107,6 +125,30 @@
       "side": 1,
       "message": "\"ReturnValue\" - though I can expand it out. And here, it should be more like \"UnwrappedReturnValue\"",
       "parentUuid": "3fd9a4f1_b86bbb17",
+      "range": {
+        "startLine": 55,
+        "startChar": 16,
+        "endLine": 55,
+        "endChar": 18
+      },
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ffac223_c95b402d",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-04T02:06:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3f3fe63_fac88621",
       "range": {
         "startLine": 55,
         "startChar": 16,
@@ -187,6 +229,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53376e6d_e207da72",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-04T02:06:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a3c5d12_7da60ddf",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ab27714_f35bd582",
@@ -245,6 +305,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b40687b_16c0dcfc",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-04T02:06:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "930ad10d_f5ac4621",
+      "range": {
+        "startLine": 115,
+        "startChar": 29,
+        "endLine": 115,
+        "endChar": 36
+      },
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c65e0fad_fdd14adc",
@@ -258,6 +342,24 @@
       "writtenOn": "2022-06-03T16:38:13Z",
       "side": 1,
       "message": "nit: Maybe write doc on how to use that macro with an example?",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1e24dac_e0882a56",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-04T02:06:33Z",
+      "side": 1,
+      "message": "Done, in the DAWN_MAKE_CACHE_REQUEST macro",
+      "parentUuid": "c65e0fad_fdd14adc",
       "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -297,6 +399,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "165356f0_1dc0124c",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-04T02:06:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81820e9e_d65a71be",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "daae898f_5672c473",
@@ -310,6 +430,24 @@
       "writtenOn": "2022-06-03T16:38:13Z",
       "side": 1,
       "message": "nit: Why not static member functions CacheResult::CacheHit(key, value) and CacheResult::CacheMiss(key)?",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "689c7efe_c0a276a0",
+        "filename": "src/dawn/native/CacheResult.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-04T02:06:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "daae898f_5672c473",
       "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -345,6 +483,24 @@
       "side": 1,
       "message": "because device is a member of DawnNativeTest, but mPlatform is a member of derived class CacheRequestTests. Without this, mPlatform is destructed first, then when device is destructed in the base class, it tries to access mPlatform due to usage of TRACE_EVENT calling Tick.\n\nI can comment about this",
       "parentUuid": "4303cd95_d197305c",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2e0a00f_10e4896d",
+        "filename": "src/dawn/tests/DawnNativeTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-04T02:06:33Z",
+      "side": 1,
+      "message": "instead, I moved the platform to DawnNativeTest",
+      "parentUuid": "0e2c083f_1a6634b1",
       "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
