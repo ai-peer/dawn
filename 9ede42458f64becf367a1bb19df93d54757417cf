@@ -256,6 +256,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7a59442_7a93469a",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-06T18:47:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "993dea22_db467278",
+      "range": {
+        "startLine": 39,
+        "startChar": 46,
+        "endLine": 39,
+        "endChar": 48
+      },
+      "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0c1c940_35fc87aa",
