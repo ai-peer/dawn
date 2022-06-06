@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8089bf0a_e759e6b0",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-06T17:20:39Z",
+      "side": 1,
+      "message": "We don\u0027t want to have temporary Blobs that have size \u003e 0\n(When size \u003d\u003d 0 the deleter is a no op function so it\u0027s okay for the temp object to destruct)\n\nfor temporary Blobs with size \u003e 0\nIf created by Create(size_t size)\nwe are allocating a uint8 * data \u003d new uint8[size]. We assign this temp object to some object with long lifetime. When it goes out of scope, the deleter of this temp object will be called which is \"delete[] data; But it will be called again when the object that is actually kept leading to a memory access violation.\n\nWe delete copy assignment operator and copy constructor to make sure there\u0027s only move operation happening. And we make constructor private to better make sure there\u0027s no easy allocation of a temp Blob object. Because you call static Create function explicitly and it can only destructed or move.\n\nAll these efforts are just trying to remove unnecessary memcpy between blob.",
+      "parentUuid": "335bb9be_b6aa2d74",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bcd340d1_99302eaf",
         "filename": "src/dawn/native/BlobCache.h",
         "patchSetId": 24
