@@ -234,6 +234,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "993dea22_db467278",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-06T18:12:50Z",
+      "side": 1,
+      "message": "Shouldn\u0027t need to make the Blob constructor public. It can still be private if we have `static Blob::UnsafeCreateWithDeleter`. Because UnsafeCreateWithDeleter is a static method of the class, it can access the class\u0027s private methods. I think we should name it as such so it\u0027s clear it should be used carefully - with a comment about how it should be used.",
+      "parentUuid": "e72d28dc_37169c55",
+      "range": {
+        "startLine": 39,
+        "startChar": 46,
+        "endLine": 39,
+        "endChar": 48
+      },
+      "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0c1c940_35fc87aa",
         "filename": "src/dawn/native/Blob.h",
         "patchSetId": 6
