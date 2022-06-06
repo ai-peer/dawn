@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66e182bc_84a9f741",
+        "filename": "src/dawn/tests/unittests/native/BlobTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-06T18:21:19Z",
+      "side": 1,
+      "message": "Given the conversation in Shrek\u0027s CL, I assume we might be exposing an UnsafeCreateWithDeleter or something that we can just directly use and remove all the testing deps.",
+      "parentUuid": "4174b28e_7ab23fac",
+      "revId": "9165b0c0ed7dd31cd575fa5a593571fac837a255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4daf6d4c_dab95827",
         "filename": "src/dawn/tests/unittests/native/BlobTests.cpp",
         "patchSetId": 3
