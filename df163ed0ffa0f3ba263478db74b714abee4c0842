@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "008e0cde_80149a9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-06T21:10:26Z",
+      "side": 1,
+      "message": "Sorry for the delay! Some high level questions (and optional suggestions):\n\n1) WDYT about actually having the LoadOrCreate function be a member of the BlobCache? Not sure how hard that would be with the templating, but I think logically it makes more sense for it to be on the BlobCache than for it to be a free function that implicitly uses the BlobCache pointed to by the device passed in. If that would be too hard, I would be fine with some comments to note this behavior too.\n\n2) IIUC, this design implies that we will need to set every member of the created struct? (and potentially need to move or make copies?) I think this means it\u0027d still be possible to forget to set one of the members and potentially cause a hidden bug? Idk if it\u0027d be possible to check it at compile time using this design, but we could have a runtime check if the struct members were optionals and we checked all of them as we serialize the key?",
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6303be19_894924d7",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-06T21:10:26Z",
+      "side": 1,
+      "message": "Hmm... would it be bad to have this not as an explicit? Just to avoid having to add the UnsafeUnkeyedValue ctor before assigning. Past the struct declaration part, it would be nice to not have to worry about this when assigning stuff to the struct? (Not sure if clang will like that or if you\u0027ll need to suppress something though?)",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 46
+      },
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30354dcf_9a4e86aa",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-06T21:10:26Z",
+      "side": 1,
+      "message": "I like this overall, but it can be a bit hard to read depending on the formatting because of the double lambdas. WDYT about a consistent style for us where the CacheHitFn/CreateFn should be declared as lambdas separately above and then passed in? I don\u0027t feel too strongly about this though.",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 11
+      },
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9f8480c_6bd8d4d5",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-06T21:10:26Z",
+      "side": 1,
+      "message": "I\u0027m wondering if this is necessary? I feel like always returning a ResultOrError feels reasonable as well (for both CachHit/Create)? I think this might simplify things a bit more since then I don\u0027t think we need to unwrap the types and stuff? (Not sure though?)",
+      "range": {
+        "startLine": 71,
+        "startChar": 34,
+        "endLine": 72,
+        "endChar": 50
+      },
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8758c43c_39592ab5",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-06T21:10:26Z",
+      "side": 1,
+      "message": "WDYT about just naming HitFn and MissFn? In theory the Miss one doesn\u0027t HAVE to create something? Could just return an error or a default value as well?\n\nI say that because rn the description isn\u0027t too clear about whether the result of the MissFn is saved into the cache (I don\u0027t think it is atm?), but the \"Create\" name in the function suggests that it might. So maybe LoadOrRun or something would be a slightly better name?",
+      "range": {
+        "startLine": 92,
+        "startChar": 29,
+        "endLine": 93,
+        "endChar": 46
+      },
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c564a041_609b7809",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-06T21:10:26Z",
+      "side": 1,
+      "message": "Hmm, not opposed to this, but in google3 there is something similar (see https://source.corp.google.com/piper///depot/google3/util/tuple/struct.h?q\u003dtuple_define_struct) which has what I think is a slightly nicer API/usage since we don\u0027t need to do this def/undef thing. You could try to take a look and see what you think / how hard it would be to adapt.",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 27
+      },
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
