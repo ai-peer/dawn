@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9bf8957_0600be11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-06T23:10:56Z",
+      "side": 1,
+      "message": "(1) so it would look like `device-\u003eGetBlobCache()-\u003eLoadOrCreate(device, ...)` ? since we have to pass the device anyway for the isolation key, I don\u0027t really see that much benefit from putting it on the blob cache. I could see it be nice though if we used a cache interface which encapsulated the logic to prepend the isolation key to its requests.\n\n(2) Yea - I had the compile-time check in Patchset 8. and maybe it could be brought back in the future if we\u0027re OK with the complexity. It should be a pure extension to the current code since it only adds a builder for the existing struct. \nGenerally, the argument against it was that if you forgot to set a member, then surely that would have been caught by a test that depended on that member. Undefined behavior should be ruled out since the struct default constructs all the members. The only case we can\u0027t handle right now are members that can\u0027t be default constructed. We could deal with that if we need to in the future by doing the compile-time thing - or as you suggested by having a runtime check. Right now, idk if it\u0027s worth having all the members be optional and checking all of them - we\u0027re also going to need to differentiate between actually-optional and checked-and-not-actually-optional which sounds like more boilerplate than it\u0027s worth if test coverage should be sufficient.",
+      "parentUuid": "008e0cde_80149a9d",
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6303be19_894924d7",
         "filename": "src/dawn/native/CacheKey.h",
         "patchSetId": 12
@@ -31,6 +49,30 @@
       "writtenOn": "2022-06-06T21:10:26Z",
       "side": 1,
       "message": "Hmm... would it be bad to have this not as an explicit? Just to avoid having to add the UnsafeUnkeyedValue ctor before assigning. Past the struct declaration part, it would be nice to not have to worry about this when assigning stuff to the struct? (Not sure if clang will like that or if you\u0027ll need to suppress something though?)",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 46
+      },
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30e3a1af_1b10f0c1",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-06T23:10:56Z",
+      "side": 1,
+      "message": "personally, I prefer that you need to be very explicit when you\u0027re doing things that are potentially unsafe. I believe there are magic comments that can suppress the linter though. IMO it\u0027s not worth going against the style guide to make something that is not recommended more concise.",
+      "parentUuid": "6303be19_894924d7",
       "range": {
         "startLine": 57,
         "startChar": 8,
@@ -66,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb91cd62_d155eadd",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-06T23:10:56Z",
+      "side": 1,
+      "message": "I think in many cases it won\u0027t even be lambdas and instead you\u0027ll pass normal free functions like:\n\n```\nSpirv ParseBlobToSpirv(Blob b) {\n  // stuff\n}\n\nResultOrError\u003cSpirv\u003e CompileSpirv(SpirvCompilationRequest r) {\n  // stuff\n}\n\nLoadOrRun(...., ParseBlobToSpirv, CompileWgslToSpirv);\n```\n\nI can add alternative examples like that. I\u0027m not sure about consistent style yet because it\u0027ll probably depend on what\u0027s most readable and I don\u0027t have the implementations done yet",
+      "parentUuid": "30354dcf_9a4e86aa",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 11
+      },
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c9f8480c_6bd8d4d5",
         "filename": "src/dawn/native/CacheRequest.h",
         "patchSetId": 12
@@ -77,6 +143,30 @@
       "writtenOn": "2022-06-06T21:10:26Z",
       "side": 1,
       "message": "I\u0027m wondering if this is necessary? I feel like always returning a ResultOrError feels reasonable as well (for both CachHit/Create)? I think this might simplify things a bit more since then I don\u0027t think we need to unwrap the types and stuff? (Not sure though?)",
+      "range": {
+        "startLine": 71,
+        "startChar": 34,
+        "endLine": 72,
+        "endChar": 50
+      },
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15c42845_7b5f9893",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-06T23:10:56Z",
+      "side": 1,
+      "message": "both SPIRV and DXC/FXC can use the blob directly so it feels the wrapper type would be extraneous there.",
+      "parentUuid": "c9f8480c_6bd8d4d5",
       "range": {
         "startLine": 71,
         "startChar": 34,
@@ -112,6 +202,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b147d6d7_1c2b8f1a",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-06T23:10:56Z",
+      "side": 1,
+      "message": "Correct, it is not saved. Create-\u003eMiss and LoadOrRun SGTM though, I\u0027ll do that rename",
+      "parentUuid": "8758c43c_39592ab5",
+      "range": {
+        "startLine": 92,
+        "startChar": 29,
+        "endLine": 93,
+        "endChar": 46
+      },
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c564a041_609b7809",
         "filename": "src/dawn/native/CacheRequest.h",
         "patchSetId": 12
@@ -123,6 +237,30 @@
       "writtenOn": "2022-06-06T21:10:26Z",
       "side": 1,
       "message": "Hmm, not opposed to this, but in google3 there is something similar (see https://source.corp.google.com/piper///depot/google3/util/tuple/struct.h?q\u003dtuple_define_struct) which has what I think is a slightly nicer API/usage since we don\u0027t need to do this def/undef thing. You could try to take a look and see what you think / how hard it would be to adapt.",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 27
+      },
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b1a7493_b8143eba",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-06T23:10:56Z",
+      "side": 1,
+      "message": "This is roughly the same concept used in Patchset 6. Corentin\u0027s feedback though was that it was too much magic and runs into issues where your macro needs to get bigger and bigger to support more arguments.",
+      "parentUuid": "c564a041_609b7809",
       "range": {
         "startLine": 147,
         "startChar": 0,
