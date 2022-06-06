@@ -92,6 +92,24 @@
       "parentUuid": "1241a963_004887b0",
       "revId": "5b9ecef3e26b90a12a1d7435c425551f98fe03c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20d712e1_019852cf",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-06T22:28:08Z",
+      "side": 1,
+      "message": "+1 for this eventually also! But resolving for now since we are deferring.",
+      "parentUuid": "a409c7e6_85e55cd7",
+      "revId": "5b9ecef3e26b90a12a1d7435c425551f98fe03c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
