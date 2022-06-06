@@ -312,6 +312,30 @@
       },
       "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c47658ca_402c3f4b",
+        "filename": "src/dawn/native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-06T08:45:06Z",
+      "side": 1,
+      "message": "I think you missed the overall point of this comment which was that I expect all people on this review to handle things better. The important part of the comment are the first two thirds, the last third about naming is to better explain rationale. I explicitly said we can keep this name as is as it is merged now and will be changed in the future anyways\n\n\u003e Regarding potential parameter  aspect  (in addition to mipLevel), you mentioned twice, I negated twice. But I didn\u0027t see any further explanation why it is needed.\n\n\u003e The function will also later have to be extended to require an aspect as soon as we support copies or rendering for YUV textures. (because subresource size will depend on miplevel and aspect)\n\nThis is because the UV plane of YUV texture with formats R8GB8Biplanar420Unorm are a quarter the size of the Y plane of the same texture (w/2 and h/2).",
+      "parentUuid": "048430a8_7e79b088",
+      "range": {
+        "startLine": 76,
+        "startChar": 31,
+        "endLine": 76,
+        "endChar": 71
+      },
+      "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
