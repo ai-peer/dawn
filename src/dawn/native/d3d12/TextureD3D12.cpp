@@ -77,24 +77,15 @@ D3D12_RESOURCE_STATES D3D12TextureUsage(wgpu::TextureUsage usage, const Format& 
     return resourceState;
 }
 
-D3D12_RESOURCE_FLAGS D3D12ResourceFlags(wgpu::TextureUsage usage,
-                                        const Format& format,
-                                        bool isMultisampledTexture) {
+D3D12_RESOURCE_FLAGS D3D12ResourceFlags(wgpu::TextureUsage usage, const Format& format) {
     D3D12_RESOURCE_FLAGS flags = D3D12_RESOURCE_FLAG_NONE;
 
     if (usage & wgpu::TextureUsage::StorageBinding) {
         flags |= D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
     }
 
-    // A multisampled resource must have either D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET or
-    // D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL set in D3D12_RESOURCE_DESC::Flags.
-    // https://docs.microsoft.com/en-us/windows/desktop/api/d3d12/ns-d3d12-d3d12_resource_desc
-    if ((usage & wgpu::TextureUsage::RenderAttachment) != 0 || isMultisampledTexture) {
-        if (format.HasDepthOrStencil()) {
-            flags |= D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
-        } else {
-            flags |= D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
-        }
+    if (format.HasDepthOrStencil()) {
+        flags |= D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
     }
 
     ASSERT(!(flags & D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL) ||
@@ -591,8 +582,7 @@ MaybeError Texture::InitializeAsInternalTexture() {
     resourceDescriptor.SampleDesc.Count = GetSampleCount();
     resourceDescriptor.SampleDesc.Quality = 0;
     resourceDescriptor.Layout = D3D12_TEXTURE_LAYOUT_UNKNOWN;
-    resourceDescriptor.Flags =
-        D3D12ResourceFlags(GetInternalUsage(), GetFormat(), IsMultisampledTexture());
+    resourceDescriptor.Flags = D3D12ResourceFlags(GetInternalUsage(), GetFormat());
     mD3D12ResourceFlags = resourceDescriptor.Flags;
 
     DAWN_TRY_ASSIGN(mResourceAllocation,
@@ -1080,6 +1070,8 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
             }
         }
     } else {
+        ASSERT(!IsMultisampledTexture());
+
         // create temp buffer with clear color to copy to the texture image
         TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_COPY_DEST, range);
 
