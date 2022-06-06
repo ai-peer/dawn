@@ -186,6 +186,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "751be890_e61dc971",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-06T13:16:15Z",
+      "side": 1,
+      "message": "IMHO we\u0027re running into problems because we are breaking the layering. Why not make CreateWithDeleter be a public API that\u0027s non-trivial to use but still public and tested? This way the D3D12 backend can do whatever it wants internally and we keep the layering.",
+      "parentUuid": "0e333f6c_bd9221bd",
+      "range": {
+        "startLine": 39,
+        "startChar": 46,
+        "endLine": 39,
+        "endChar": 48
+      },
+      "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0c1c940_35fc87aa",
         "filename": "src/dawn/native/Blob.h",
         "patchSetId": 6
