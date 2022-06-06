@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8621914f_5d65aeb2",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-06T08:53:08Z",
+      "side": 1,
+      "message": "Uuuh I don\u0027t know the best practices with GMock too much, but adding references to GMock in production code seems like an anti-pattern because it mixes concerns together too much. Why not use an std::function in CreateForTesting?",
+      "revId": "9165b0c0ed7dd31cd575fa5a593571fac837a255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6425d182_f93e31ca",
         "filename": "src/dawn/native/Blob.h",
         "patchSetId": 3
@@ -50,6 +67,41 @@
       "side": 1,
       "message": "Shrek is making some additional changes in https://dawn-review.googlesource.com/c/dawn/+/92680, so we can defer further changes to that CL if you don\u0027t mind.",
       "parentUuid": "cbbc31f3_41446993",
+      "revId": "9165b0c0ed7dd31cd575fa5a593571fac837a255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32925a2d_eff8e0d4",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-06T08:53:08Z",
+      "side": 1,
+      "message": "No concerns about deferring.",
+      "parentUuid": "95388099_0d6d19a2",
+      "revId": "9165b0c0ed7dd31cd575fa5a593571fac837a255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4174b28e_7ab23fac",
+        "filename": "src/dawn/tests/unittests/native/BlobTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-06T08:53:08Z",
+      "side": 1,
+      "message": "And this makes that dawn_native declares a symbol that\u0027s actually implemented by a different lib. Usually we keep all the code in the .h implemented in the .cpp. It has many advantages for the developers because they know where the code is, it helps the compilers produce warnings about private members because they see all uses of them, etc. Same suggestion about making CreateForTesting take an std::function.",
       "revId": "9165b0c0ed7dd31cd575fa5a593571fac837a255",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

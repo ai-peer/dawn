@@ -69,6 +69,24 @@
       "parentUuid": "8cccb07c_c76f8fb3",
       "revId": "b6f7e05661e8bbf259a267cc88d1b471772f7e0f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c7babcc_a7a6fe3a",
+        "filename": "src/dawn/tests/unittests/native/BlobTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-06T08:53:08Z",
+      "side": 1,
+      "message": "The other case where the deleter can get called is when the data hasn\u0027t been previously moved. We don\u0027t have a test for this where we create a blob and then just check that the deleter is called in ~Blob.",
+      "parentUuid": "0e144538_db2b2792",
+      "revId": "b6f7e05661e8bbf259a267cc88d1b471772f7e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
