@@ -282,6 +282,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "93f95f63_53dac27b",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-06T18:47:05Z",
+      "side": 1,
+      "message": "fwiw though, I don\u0027t think this is meaningfully breaking the layering. I think layering violations are more a problem when they result in dirtying an interface such that it is unusable without the other layer, or has strict dependencies on some code from another layer. It hurts reusability and composability of the interface.\n\nHowever, I don\u0027t see this forward declaration the same way. Nothing in Blob is taking a dependency on ID3DBlob, but rather we\u0027re forward declaring a permissive conversion from one to the other. So instead of depending on specific details ID3DBlob, I see it as erasing those details by converting from a more specific type to a general, abstract one - and not depending on those internal detail in the Blob class. I think this improves reusability and composability.\n\nIt\u0027s like having Foo\u003cT\u003e and someone goes and defines `Foo\u003cID3DBlob\u003e` elsewhere - just that here, we have an explicit include list of containers that are permitted, instead of allowing any T.\n\nIMO, not having the forward declaration and using CreateWithDeleter effectively does the same exact thing, but weakens the memory safety of the abstraction. So I\u0027m a bit -1 about it, but I guess it\u0027s fine since we can audit usages.",
+      "parentUuid": "993dea22_db467278",
+      "range": {
+        "startLine": 39,
+        "startChar": 46,
+        "endLine": 39,
+        "endChar": 48
+      },
+      "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0c1c940_35fc87aa",
         "filename": "src/dawn/native/Blob.h",
         "patchSetId": 6
