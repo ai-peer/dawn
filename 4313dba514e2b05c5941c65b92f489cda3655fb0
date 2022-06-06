@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "335bb9be_b6aa2d74",
+        "filename": "src/dawn/native/BlobCache.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-06T13:26:00Z",
+      "side": 1,
+      "message": "\u003e The main reason is we cannot have temp CachedBlob (now named Blob) with actual data (size \u003e 0) as the ownership of it\u0027s data are handled. So we don\u0027t want to expose constructor with size \u003e 0 that actually allocates the data.\n\nI\u0027m not sure I understood. We don\u0027t want to have temporary Blobs that have size \u003d\u003d 0 because deletion would be UB? I feel I\u0027m missing something: if we have a static creation method then there are no temporary blobs no?",
+      "parentUuid": "3c4954ec_755bd958",
+      "revId": "4313dba514e2b05c5941c65b92f489cda3655fb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bcd340d1_99302eaf",
         "filename": "src/dawn/native/BlobCache.h",
         "patchSetId": 24
