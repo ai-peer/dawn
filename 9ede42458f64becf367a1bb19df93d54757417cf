@@ -306,6 +306,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "836ffd1b_7b24b854",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-06T19:53:03Z",
+      "side": 1,
+      "message": "Just to mention another minor gain for using CreateWithDeleter, we now have a BlobD3D12.h which is better symmetric 😊",
+      "parentUuid": "93f95f63_53dac27b",
+      "range": {
+        "startLine": 39,
+        "startChar": 46,
+        "endLine": 39,
+        "endChar": 48
+      },
+      "revId": "9ede42458f64becf367a1bb19df93d54757417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0c1c940_35fc87aa",
         "filename": "src/dawn/native/Blob.h",
         "patchSetId": 6
