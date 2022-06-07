@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49cbcc28_6d1f3ad9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-06-07T23:38:07Z",
+      "side": 1,
+      "message": "Done!",
+      "parentUuid": "1f51082d_57c63518",
+      "revId": "51a40746ed09a35bb816532f9aebf2affcfa88f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eae0767d_03c42737",
@@ -104,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a5d49da_5f4c51a5",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-06-07T23:38:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eae0767d_03c42737",
+      "revId": "51a40746ed09a35bb816532f9aebf2affcfa88f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32200064_6859223a",
@@ -117,6 +153,30 @@
       "writtenOn": "2022-06-07T23:07:20Z",
       "side": 1,
       "message": "0 is the default for ExpectEq, so we should be able to just remove this variable",
+      "range": {
+        "startLine": 633,
+        "startChar": 0,
+        "endLine": 633,
+        "endChar": 27
+      },
+      "revId": "51a40746ed09a35bb816532f9aebf2affcfa88f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ec9e1db_93949f4d",
+        "filename": "src/dawn/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-06-07T23:38:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32200064_6859223a",
       "range": {
         "startLine": 633,
         "startChar": 0,
