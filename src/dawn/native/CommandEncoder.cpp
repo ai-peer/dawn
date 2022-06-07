@@ -891,6 +891,17 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                     cmd->depthStencilAttachment.clearStencil =
                         descriptor->depthStencilAttachment->stencilClearValue;
                 }
+                if (view->GetFormat().HasStencil()) {
+                    // GPURenderPassDepthStencilAttachment.stencilClearValue will be converted to
+                    // the type of the stencil aspect of view by taking the same number of LSBs as
+                    // the number of bits in the stencil aspect of one texel block of view
+                    uint32_t stencilBitLength = view->GetFormat()
+                                                    .GetAspectInfo(dawn::native::Aspect::Stencil)
+                                                    .block.byteSize *
+                                                8;
+                    cmd->depthStencilAttachment.clearStencil =
+                        cmd->depthStencilAttachment.clearStencil & ((1 << stencilBitLength) - 1);
+                }
 
                 cmd->depthStencilAttachment.depthReadOnly =
                     descriptor->depthStencilAttachment->depthReadOnly;

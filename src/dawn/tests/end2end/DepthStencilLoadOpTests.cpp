@@ -255,9 +255,37 @@ TEST_P(DepthStencilLoadOpTests, ClearBothMip1Then0) {
     CheckMipLevel(1u);
 }
 
+class StencilClearValueOverflowTest : public DepthStencilLoadOpTests {};
+
+TEST_P(StencilClearValueOverflowTest, StencilClearValueOverFlowUint8) {
+    constexpr uint32_t kOverflowedStencilValue = kStencilValues[0] + (1 << (sizeof(uint8_t) * 8));
+    renderPassDescriptors[0].cDepthStencilAttachmentInfo.stencilClearValue =
+        kOverflowedStencilValue;
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.BeginRenderPass(&renderPassDescriptors[0]).End();
+    wgpu::CommandBuffer commandBuffer = encoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    CheckMipLevel(0u);
+}
+
+TEST_P(StencilClearValueOverflowTest, StencilClearValueOverFlowUint16) {
+    constexpr uint32_t kOverflowedStencilValue = kStencilValues[0] + (1 << (sizeof(uint16_t) * 8));
+    renderPassDescriptors[0].cDepthStencilAttachmentInfo.stencilClearValue =
+        kOverflowedStencilValue;
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.BeginRenderPass(&renderPassDescriptors[0]).End();
+    wgpu::CommandBuffer commandBuffer = encoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    CheckMipLevel(0u);
+}
+
 namespace {
 
-auto GenerateParams() {
+auto GenerateParamForDepthStencilLoadOpTest() {
     auto params1 = MakeParamGenerator<DepthStencilLoadOpTestParams>(
         {D3D12Backend(), D3D12Backend({}, {"use_d3d12_render_pass"}), MetalBackend(),
          OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
@@ -280,8 +308,24 @@ auto GenerateParams() {
 
 INSTANTIATE_TEST_SUITE_P(,
                          DepthStencilLoadOpTests,
-                         ::testing::ValuesIn(GenerateParams()),
+                         ::testing::ValuesIn(GenerateParamForDepthStencilLoadOpTest()),
                          DawnTestBase::PrintToStringParamName("DepthStencilLoadOpTests"));
 GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(DepthStencilLoadOpTests);
+
+auto GenerateParamsForStencilClearValueOverflowTest() {
+    auto params = MakeParamGenerator<DepthStencilLoadOpTestParams>(
+        {D3D12Backend(), D3D12Backend({}, {"use_d3d12_render_pass"}), MetalBackend(),
+         OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
+        {wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureFormat::Depth24UnormStencil8,
+         wgpu::TextureFormat::Depth32FloatStencil8, wgpu::TextureFormat::Stencil8},
+        {Check::CopyStencil, Check::StencilTest});
+    return params;
+}
+
+INSTANTIATE_TEST_SUITE_P(,
+                         StencilClearValueOverflowTest,
+                         ::testing::ValuesIn(GenerateParamsForStencilClearValueOverflowTest()),
+                         DawnTestBase::PrintToStringParamName("StencilClearValueOverflowTest"));
+GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(StencilClearValueOverflowTest);
 
 }  // namespace
