@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e2235ad_3a896ffa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-07T19:01:06Z",
+      "side": 1,
+      "message": "LGTM with nits",
+      "revId": "a8bb865a89de9b270a25c1e7721c38404904aa30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d638b7c6_bb078e5c",
@@ -65,6 +82,52 @@
       "writtenOn": "2022-06-07T10:40:40Z",
       "side": 1,
       "message": "u-nit: Can we have a comment describing what this test does?",
+      "revId": "a8bb865a89de9b270a25c1e7721c38404904aa30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bed68d2_67bcc2ed",
+        "filename": "src/dawn/tests/end2end/DepthStencilLoadOpTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-07T19:01:06Z",
+      "side": 1,
+      "message": "if we hardcode, 0xFF above, perhaps also hardcode 0x100 here too.",
+      "range": {
+        "startLine": 261,
+        "startChar": 69,
+        "endLine": 261,
+        "endChar": 96
+      },
+      "revId": "a8bb865a89de9b270a25c1e7721c38404904aa30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "454db084_54ce20af",
+        "filename": "src/dawn/tests/end2end/DepthStencilLoadOpTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-07T19:01:06Z",
+      "side": 1,
+      "message": "nit: because we only use this generator once, we should be able to use the `DAWN_INSTANTIATE_TEST_P` macro.\n\n```\nDAWN_INSTANTIATE_TEST_P(StencilClearValueOverflowTest, {...params}, {...otherParams})\n```",
+      "range": {
+        "startLine": 315,
+        "startChar": 5,
+        "endLine": 315,
+        "endChar": 51
+      },
       "revId": "a8bb865a89de9b270a25c1e7721c38404904aa30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
