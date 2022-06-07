@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "458e409d_9064f87b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-06-07T02:11:50Z",
+      "side": 1,
+      "message": "Hi Ben,\n\nCould you help rolling the latest WebGPU CTS? I need these fixes in WebGPU CTS to land https://dawn-review.googlesource.com/c/dawn/+/92700.\n\nThanks!",
+      "revId": "a71b5b28e703a5710ea2e337401b8882dc2c578d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
