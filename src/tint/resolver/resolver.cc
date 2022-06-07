@@ -1150,6 +1150,7 @@ const sem::Expression* Resolver::Materialize(const sem::Expression* expr,
     // Helpers for constructing semantic types
     auto i32 = [&] { return builder_->create<sem::I32>(); };
     auto f32 = [&] { return builder_->create<sem::F32>(); };
+    // F16 unnecessary as AFloat will be convert into f32
     auto i32v = [&](uint32_t width) { return builder_->create<sem::Vector>(i32(), width); };
     auto f32v = [&](uint32_t width) { return builder_->create<sem::Vector>(f32(), width); };
     auto f32m = [&](uint32_t columns, uint32_t rows) {
@@ -1331,6 +1332,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
             },
             [&](const sem::I32*) { return ct_ctor_or_conv(CtorConvIntrinsic::kI32, nullptr); },
             [&](const sem::U32*) { return ct_ctor_or_conv(CtorConvIntrinsic::kU32, nullptr); },
+            [&](const sem::F16*) { return ct_ctor_or_conv(CtorConvIntrinsic::kF16, nullptr); },
             [&](const sem::F32*) { return ct_ctor_or_conv(CtorConvIntrinsic::kF32, nullptr); },
             [&](const sem::Bool*) { return ct_ctor_or_conv(CtorConvIntrinsic::kBool, nullptr); },
             [&](const sem::Array* arr) -> sem::Call* {
