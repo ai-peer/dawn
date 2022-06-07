@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1379086_1e556cc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-06-07T21:43:31Z",
+      "side": 1,
+      "message": "PTAL! Will require that https://chromium-review.googlesource.com/c/chromium/src/+/3692684 lands first in order to roll cleanly.",
+      "revId": "51a40746ed09a35bb816532f9aebf2affcfa88f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
