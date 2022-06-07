@@ -384,6 +384,30 @@
       },
       "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbd55709_99d667b4",
+        "filename": "src/dawn/native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-06-07T18:08:54Z",
+      "side": 1,
+      "message": "Corentin, I really appreciate your understanding and your considerate feedback for my straightforward comments. I myself was very direct and forthright too. I also apologize for that if it hurt anyone. I think everyone understand that we all intend to improve the Dawn project and WebGPU community, not deliberately hurt anyone, nor try to win a quarrel unilaterally. \n\nRegarding a better channel for collaborations and discussions on WebGPU/Dawn, I don\u0027t have a good idea. Maybe it is very hard by nature considering that the collaboration is cross multiple companies and multiple geolocations and quite different time zones. And you folks have already made a lot of efforts on that and I also appreciate for that.",
+      "parentUuid": "2061edc3_94033f42",
+      "range": {
+        "startLine": 76,
+        "startChar": 31,
+        "endLine": 76,
+        "endChar": 71
+      },
+      "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
