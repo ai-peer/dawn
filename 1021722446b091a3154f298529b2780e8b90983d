@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b699541_2058c7dd",
+        "filename": "src/dawn/common/Platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-07T19:46:58Z",
+      "side": 1,
+      "message": "I don\u0027t get how DAWN_PLATFORM_IS_DETAIL_FOO can let the compiler block using the naked defines. Is it just a literal thing to remind users when they look at Platform.h?\n\nI think if all appearances of the platform macro are correctly used (#if DAWN_PLATFORM_IS(XXX)), new appearances will follow the same pattern since it will be copy n paste.",
+      "parentUuid": "e8e689d0_3d8b4d89",
+      "revId": "1021722446b091a3154f298529b2780e8b90983d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c4542c8_dab8ed98",
         "filename": "src/dawn/common/Platform.h",
         "patchSetId": 13
