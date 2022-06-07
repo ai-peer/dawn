@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fab3346_2593f08c",
+        "filename": "src/dawn/common/Platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-07T20:09:10Z",
+      "side": 1,
+      "message": "Yes it\u0027s a reminder for people. But maybe if all occurences are replaced then people will not add more. Let\u0027s see!",
+      "parentUuid": "9b699541_2058c7dd",
+      "revId": "1021722446b091a3154f298529b2780e8b90983d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c4542c8_dab8ed98",
