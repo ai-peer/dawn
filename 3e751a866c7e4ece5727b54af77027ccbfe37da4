@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eba4486_a69d5d87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-07T16:00:25Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3e751a866c7e4ece5727b54af77027ccbfe37da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc81f7d5_43161f49",
+        "filename": "tools/src/cmd/cts/common/build.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-07T16:00:25Z",
+      "side": 1,
+      "message": "this indentation looks weird because you have to parse the commas at the end to realize it\u0027s not missing a `case` label. But, I\u0027m assuming this is how `gofmt` wants it to be.",
+      "revId": "3e751a866c7e4ece5727b54af77027ccbfe37da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
