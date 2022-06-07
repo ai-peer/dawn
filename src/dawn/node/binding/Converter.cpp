@@ -295,9 +295,6 @@ bool Converter::Convert(wgpu::TextureFormat& out, const interop::GPUTextureForma
         case interop::GPUTextureFormat::kDepth32Float:
             out = wgpu::TextureFormat::Depth32Float;
             return true;
-        case interop::GPUTextureFormat::kDepth24UnormStencil8:
-            out = wgpu::TextureFormat::Depth24UnormStencil8;
-            return true;
         case interop::GPUTextureFormat::kDepth32FloatStencil8:
             out = wgpu::TextureFormat::Depth32FloatStencil8;
             return true;

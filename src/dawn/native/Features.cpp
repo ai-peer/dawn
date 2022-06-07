@@ -66,10 +66,6 @@ static constexpr FeatureEnumAndInfoList kFeatureNameAndInfoList = {{
      {"depth-clamping", "Clamp depth to [0, 1] in NDC space instead of clipping",
       "https://bugs.chromium.org/p/dawn/issues/detail?id=716"},
      &WGPUDeviceProperties::depthClamping},
-    {Feature::Depth24UnormStencil8,
-     {"depth24unorm-stencil8", "Support depth24unorm-stencil8 texture format",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=690"},
-     &WGPUDeviceProperties::depth24UnormStencil8},
     {Feature::Depth32FloatStencil8,
      {"depth32float-stencil8", "Support depth32float-stencil8 texture format",
       "https://bugs.chromium.org/p/dawn/issues/detail?id=690"},
@@ -117,8 +113,6 @@ Feature FromAPIFeature(wgpu::FeatureName feature) {
             return Feature::TextureCompressionASTC;
         case wgpu::FeatureName::DepthClamping:
             return Feature::DepthClamping;
-        case wgpu::FeatureName::Depth24UnormStencil8:
-            return Feature::Depth24UnormStencil8;
         case wgpu::FeatureName::Depth32FloatStencil8:
             return Feature::Depth32FloatStencil8;
         case wgpu::FeatureName::IndirectFirstInstance:
@@ -151,8 +145,6 @@ wgpu::FeatureName ToAPIFeature(Feature feature) {
             return wgpu::FeatureName::TimestampQuery;
         case Feature::DepthClamping:
             return wgpu::FeatureName::DepthClamping;
-        case Feature::Depth24UnormStencil8:
-            return wgpu::FeatureName::Depth24UnormStencil8;
         case Feature::Depth32FloatStencil8:
             return wgpu::FeatureName::Depth32FloatStencil8;
         case Feature::IndirectFirstInstance:

@@ -403,9 +403,6 @@ FormatTable BuildFormatTable(const DeviceBase* device) {
         AddDepthFormat(wgpu::TextureFormat::Depth24Plus, 4, true);
         AddMultiAspectFormat(wgpu::TextureFormat::Depth24PlusStencil8,
                               Aspect::Depth | Aspect::Stencil, wgpu::TextureFormat::Depth24Plus, wgpu::TextureFormat::Stencil8, true, true, true, 2);
-        bool isD24S8Supported = device->IsFeatureEnabled(Feature::Depth24UnormStencil8);
-        AddMultiAspectFormat(wgpu::TextureFormat::Depth24UnormStencil8,
-                              Aspect::Depth | Aspect::Stencil, wgpu::TextureFormat::Depth24Plus, wgpu::TextureFormat::Stencil8, true, isD24S8Supported, true, 2);
         AddDepthFormat(wgpu::TextureFormat::Depth32Float, 4, true);
         bool isD32S8Supported = device->IsFeatureEnabled(Feature::Depth32FloatStencil8);
         AddMultiAspectFormat(wgpu::TextureFormat::Depth32FloatStencil8,

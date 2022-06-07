@@ -92,9 +92,6 @@ namespace {
 class Features : public interop::GPUSupportedFeatures {
   public:
     explicit Features(WGPUDeviceProperties properties) {
-        if (properties.depth24UnormStencil8) {
-            enabled_.emplace(interop::GPUFeatureName::kDepth24UnormStencil8);
-        }
         if (properties.depth32FloatStencil8) {
             enabled_.emplace(interop::GPUFeatureName::kDepth32FloatStencil8);
         }
@@ -204,9 +201,6 @@ interop::Promise<interop::Interface<interop::GPUDevice>> GPUAdapter::requestDevi
                 continue;
             case interop::GPUFeatureName::kTimestampQuery:
                 requiredFeatures.emplace_back(wgpu::FeatureName::TimestampQuery);
-                continue;
-            case interop::GPUFeatureName::kDepth24UnormStencil8:
-                requiredFeatures.emplace_back(wgpu::FeatureName::Depth24UnormStencil8);
                 continue;
             case interop::GPUFeatureName::kDepth32FloatStencil8:
                 requiredFeatures.emplace_back(wgpu::FeatureName::Depth32FloatStencil8);
