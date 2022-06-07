@@ -16,6 +16,24 @@
       "message": "LGTM when presubmit is happy",
       "revId": "c2eccec0c3aebcdc5724c08d11a7ba1000e4386c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f6d3dcc_d698b6d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-07T21:06:10Z",
+      "side": 1,
+      "message": "Done (I hope)",
+      "parentUuid": "5146b347_a45ebfd7",
+      "revId": "c2eccec0c3aebcdc5724c08d11a7ba1000e4386c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
