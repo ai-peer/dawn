@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97b92091_ae7a92fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-07T17:54:42Z",
+      "side": 1,
+      "message": "Review note:\nsrc/dawn/common/Platform.h, src/dawn/common/Compiler.h: main macro improvement\nother files: renaming\n\nsrc/dawn/native/metal/BufferMTL.mm: additionally include missing Platform.h\n\n\nQuestion:\nI\u0027m not sure where to add the compiler flags (e.g. -Werror\u003dundef).\n\nI tried adding one in src/dawn/common/BUILD.gn under if (dawn_standalone \u0026\u0026 is_clang) but seems to affect non dawn stuff (gtest).\n\nAlso looking at the dry runs, it seems some platform already has this -Wundef flags. Maybe only some of them are missing. (MSVC may need an extra /we4668)\n\nBut anyway would like to hear your suggestions.",
+      "revId": "1021722446b091a3154f298529b2780e8b90983d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
