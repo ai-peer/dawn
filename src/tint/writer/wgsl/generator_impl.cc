@@ -402,9 +402,12 @@ bool GeneratorImpl::EmitType(std::ostream& out, const ast::Type* ty) {
             return true;
         },
         [&](const ast::F16*) {
+            /*
             diagnostics_.add_error(diag::System::Writer,
                                    "Type f16 is not completely implemented yet.");
-            return false;
+            */
+            out << "f16";
+            return true;
         },
         [&](const ast::I32*) {
             out << "i32";
