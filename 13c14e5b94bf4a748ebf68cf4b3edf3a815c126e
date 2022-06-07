@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5090eb8f_c63036dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-07T17:09:52Z",
+      "side": 1,
+      "message": "LGTM, one more nit on the error handling.\n\nKai, I\u0027ll let you +2 since you have access to an M1 - could you test this CL to verify it\u0027s doing what we expect?",
+      "revId": "13c14e5b94bf4a748ebf68cf4b3edf3a815c126e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b36d84c3_31ab952d",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-07T17:09:52Z",
+      "side": 1,
+      "message": "nit: I think this would read better as `result.IsSuccess() \u0026\u0026 ids-\u003evendorId !\u003d 0`\n\nthen, in the error case, you need to acquire the error. MaybeError requires that you acquire the result - its payload must be empty on destruction. See\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/common/Result.h;l\u003d322;drc\u003d1946212ac0100668f14eb9e2843bdd846e510a1e\n\nAfter acquiring the error, WDYT about putting it in dawn::WarningLog() ? Not sure - in practice I don\u0027t think I\u0027ve ever seen GetDeviceIORegistryPCIInfo fail, so if it does, having a log might be informative",
+      "range": {
+        "startLine": 150,
+        "startChar": 8,
+        "endLine": 152,
+        "endChar": 9
+      },
+      "revId": "13c14e5b94bf4a748ebf68cf4b3edf3a815c126e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
