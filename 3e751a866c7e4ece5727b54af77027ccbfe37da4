@@ -33,6 +33,24 @@
       "message": "this indentation looks weird because you have to parse the commas at the end to realize it\u0027s not missing a `case` label. But, I\u0027m assuming this is how `gofmt` wants it to be.",
       "revId": "3e751a866c7e4ece5727b54af77027ccbfe37da4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de6947e0_d360cf3d",
+        "filename": "tools/src/cmd/cts/common/build.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-07T16:04:10Z",
+      "side": 1,
+      "message": "Yup. One does not argue with `gofmt`. Nobody likes the format of `gofmt`, but everyone loves the fact there is only one official formatter. 😊",
+      "parentUuid": "dc81f7d5_43161f49",
+      "revId": "3e751a866c7e4ece5727b54af77027ccbfe37da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
