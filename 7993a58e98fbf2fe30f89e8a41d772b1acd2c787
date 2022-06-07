@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fe0346a_d9755e7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-07T15:41:35Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7993a58e98fbf2fe30f89e8a41d772b1acd2c787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4da389a8_3e534ed1",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-07T15:41:35Z",
+      "side": 1,
+      "message": "fyi, bajones@ please remove these expectations after your Chromium CL lands",
+      "revId": "7993a58e98fbf2fe30f89e8a41d772b1acd2c787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
