@@ -39,6 +39,30 @@
       },
       "revId": "13c14e5b94bf4a748ebf68cf4b3edf3a815c126e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82cab5e6_83f7640f",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-06-07T17:32:25Z",
+      "side": 1,
+      "message": "Thanks for reminding me that the error needs to be acquired! Refactored to output a warning log if this method ever returns an error. (That happened to make it easier to keep using IsError() instead of switching to IsSuccess(), FWIW).",
+      "parentUuid": "b36d84c3_31ab952d",
+      "range": {
+        "startLine": 150,
+        "startChar": 8,
+        "endLine": 152,
+        "endChar": 9
+      },
+      "revId": "13c14e5b94bf4a748ebf68cf4b3edf3a815c126e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
