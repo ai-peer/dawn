@@ -50,6 +50,24 @@
       "message": "LGTM after merge approval",
       "revId": "702f486988ce05a98a13f933abdf0ae65494ae94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5058b47b_a2c19dca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-06-07T19:05:24Z",
+      "side": 1,
+      "message": "Approved via crbug.com/1326286",
+      "parentUuid": "90dc0991_520bd2c6",
+      "revId": "702f486988ce05a98a13f933abdf0ae65494ae94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
