@@ -3152,6 +3152,13 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const sem::Constant& constan
         PrintF32(out, static_cast<float>(constant.Element<AFloat>(element_idx)));
         return true;
     };
+    auto emit_f16 = [&](size_t element_idx) {
+        // emit a f16 scalar literal by emit a f32 literal and cast it into f16
+        out << "float16_t(";
+        PrintF32(out, static_cast<float>(constant.Element<AFloat>(element_idx)));
+        out << ")";
+        return true;
+    };
     auto emit_i32 = [&](size_t element_idx) {
         out << constant.Element<AInt>(element_idx).value;
         return true;
@@ -3168,6 +3175,7 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const sem::Constant& constan
                     vec_ty->type(),                                      //
                     [&](const sem::Bool*) { return emit_bool(start); },  //
                     [&](const sem::F32*) { return emit_f32(start); },    //
+                    [&](const sem::F16*) { return emit_f16(start); },    //
                     [&](const sem::I32*) { return emit_i32(start); },    //
                     [&](const sem::U32*) { return emit_u32(start); }     //
                 );
@@ -3203,6 +3211,7 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const sem::Constant& constan
             vec_ty->type(),                                         //
             [&](const sem::Bool*) { return emit_els(emit_bool); },  //
             [&](const sem::F32*) { return emit_els(emit_f32); },    //
+            [&](const sem::F16*) { return emit_els(emit_f16); },    //
             [&](const sem::I32*) { return emit_els(emit_i32); },    //
             [&](const sem::U32*) { return emit_els(emit_u32); },    //
             [&](Default) {
@@ -3236,6 +3245,7 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const sem::Constant& constan
         constant.Type(),                                                                   //
         [&](const sem::Bool*) { return emit_bool(0); },                                    //
         [&](const sem::F32*) { return emit_f32(0); },                                      //
+        [&](const sem::F16*) { return emit_f16(0); },                                      //
         [&](const sem::I32*) { return emit_i32(0); },                                      //
         [&](const sem::U32*) { return emit_u32(0); },                                      //
         [&](const sem::Vector* v) { return emit_vector(v, 0, constant.ElementCount()); },  //
@@ -3287,6 +3297,10 @@ bool GeneratorImpl::EmitValue(std::ostream& out, const sem::Type* type, int valu
         },
         [&](const sem::F32*) {
             out << value << ".0f";
+            return true;
+        },
+        [&](const sem::F16*) {
+            out << "float16_t(" << value << ".0h)";
             return true;
         },
         [&](const sem::I32*) {
@@ -3759,15 +3773,27 @@ bool GeneratorImpl::EmitType(std::ostream& out,
             return true;
         },
         [&](const sem::F16*) {
+            /*
             diagnostics_.add_error(diag::System::Writer,
                                    "Type f16 is not completely implemented yet.");
-            return false;
+            */
+            out << "float16_t";
+            return true;
         },
         [&](const sem::I32*) {
             out << "int";
             return true;
         },
         [&](const sem::Matrix* mat) {
+            if (mat->type()->Is<sem::F16>()) {
+                // Use matrix<type, N, M> for f16 matrix
+                out << "matrix<";
+                if (!EmitType(out, mat->type(), storage_class, access, "")) {
+                    return false;
+                }
+                out << ", " << mat->columns() << ", " << mat->rows() << ">";
+                return true;
+            }
             if (!EmitType(out, mat->type(), storage_class, access, "")) {
                 return false;
             }
@@ -3883,6 +3909,7 @@ bool GeneratorImpl::EmitType(std::ostream& out,
             } else if (vec->type()->Is<sem::Bool>() && width >= 1 && width <= 4) {
                 out << "bool" << width;
             } else {
+                // For example, use "vector<float16_t, N>" for f16 vector.
                 out << "vector<";
                 if (!EmitType(out, vec->type(), storage_class, access, "")) {
                     return false;
