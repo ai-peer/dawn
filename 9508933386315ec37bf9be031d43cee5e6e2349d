@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "382156d2_88614c7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-06-07T16:54:42Z",
+      "side": 1,
+      "message": "Thanks for the reviews, all! Still need a +2.\n\nWe discussed this with Myles briefly on the last editors call, and he was a bit cagey about wether or not this was the right approach. (In general it seems Apple\u0027s stance is \"You shouldn\u0027t be looking to see if it\u0027s Apple Silicon at all.\") He did mention that looking at the device.name was probably the right place to determine if the vendor is Apple or not, so I\u0027ve updated this CL to fall back to parsing the vendor from the device.name if it\u0027s not found via the registry. I don\u0027t have an M1 device to test against, though, so I\u0027d appreciate some validation that this is doing the right thing on the intended hardware.\n\nAlso, I updated the output of the \"System Adapters\" list that displays when running the end2end tests to also include the vendor name and architecture when available, just to make it easier to verify.",
+      "revId": "9508933386315ec37bf9be031d43cee5e6e2349d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
