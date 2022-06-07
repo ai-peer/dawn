@@ -16,6 +16,57 @@
       "message": "PTAL, thanks!",
       "revId": "a8bb865a89de9b270a25c1e7721c38404904aa30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f85a5997_a510a33d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-07T10:40:40Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a8bb865a89de9b270a25c1e7721c38404904aa30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d638b7c6_bb078e5c",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-07T10:40:40Z",
+      "side": 1,
+      "message": "optional nit: What do you think of ASSERTing that the byteSize is 1 and use the 0xFF constant? It\u0027s not clear if there will ever be stencil buffers with more than 1 byte.",
+      "revId": "a8bb865a89de9b270a25c1e7721c38404904aa30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9496c0ae_989785ca",
+        "filename": "src/dawn/tests/end2end/DepthStencilLoadOpTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-07T10:40:40Z",
+      "side": 1,
+      "message": "u-nit: Can we have a comment describing what this test does?",
+      "revId": "a8bb865a89de9b270a25c1e7721c38404904aa30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
