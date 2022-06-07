@@ -35,6 +35,41 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3dbf933_873185ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-07T23:07:20Z",
+      "side": 1,
+      "message": "LGTM, one comment",
+      "revId": "51a40746ed09a35bb816532f9aebf2affcfa88f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdcbc3ae_c78233ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-07T23:07:20Z",
+      "side": 1,
+      "message": "right - I\u0027m refreshing myself on the gpuweb discussion. It seems like it would be added back but we need some implementation experience implementing the copies to be sure it works. So maybe, we could keep the code around (behind enable_unsafe_apis), and post-v1 we can experiment with enabling copies with this format.\n\nHowever, there\u0027s not a lot of code here though and we always have git history, so bringing it back is also not too hard (except for those merge conflicts). That\u0027s a weak vote in favor of removal from me.",
+      "parentUuid": "4e099c49_bfbc8625",
+      "revId": "51a40746ed09a35bb816532f9aebf2affcfa88f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eae0767d_03c42737",
@@ -48,6 +83,29 @@
       "writtenOn": "2022-06-07T22:25:20Z",
       "side": 1,
       "message": "nit: R24G8 doesn\u0027t technically have stencil. Maybe \"is the typeless version of D24_UNORM_S8_UINT (see D3D12TextureFormat())\"",
+      "revId": "51a40746ed09a35bb816532f9aebf2affcfa88f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32200064_6859223a",
+        "filename": "src/dawn/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-07T23:07:20Z",
+      "side": 1,
+      "message": "0 is the default for ExpectEq, so we should be able to just remove this variable",
+      "range": {
+        "startLine": 633,
+        "startChar": 0,
+        "endLine": 633,
+        "endChar": 27
+      },
       "revId": "51a40746ed09a35bb816532f9aebf2affcfa88f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
