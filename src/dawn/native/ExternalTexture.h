@@ -28,7 +28,8 @@ class TextureViewBase;
 
 struct ExternalTextureParams {
     uint32_t numPlanes;
-    std::array<uint32_t, 3> padding;
+    uint32_t sameGamutAndGamma;
+    std::array<uint32_t, 2> padding;
     std::array<float, 12> yuvToRgbConversionMatrix;
     std::array<float, 8> gammaDecodingParams = {};
     std::array<float, 8> gammaEncodingParams = {};

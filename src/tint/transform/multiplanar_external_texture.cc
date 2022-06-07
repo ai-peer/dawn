@@ -251,6 +251,7 @@ struct MultiplanarExternalTexture::State {
         // Create ExternalTextureParams struct.
         ast::StructMemberList ext_tex_params_member_list = {
             b.Member("numPlanes", b.ty.u32()),
+            b.Member("sameGamutAndGamma", b.ty.u32()),
             b.Member("yuvToRgbConversionMatrix", b.ty.mat3x4(b.ty.f32())),
             b.Member("gammaDecodeParams", b.ty.type_name("GammaTransferParams")),
             b.Member("gammaEncodeParams", b.ty.type_name("GammaTransferParams")),
@@ -337,14 +338,20 @@ struct MultiplanarExternalTexture::State {
                               b.Mul(b.vec4<f32>(b.MemberAccessor(plane_0_call, "r"),
                                                 b.MemberAccessor(plane_1_call, "rg"), 1_f),
                                     b.MemberAccessor("params", "yuvToRgbConversionMatrix")))))),
-            // color = gammaConversion(color, gammaDecodeParams);
-            b.Assign("color", b.Call("gammaCorrection", "color",
-                                     b.MemberAccessor("params", "gammaDecodeParams"))),
-            // color = (params.gamutConversionMatrix * color);
-            b.Assign("color", b.Mul(b.MemberAccessor("params", "gamutConversionMatrix"), "color")),
-            // color = gammaConversion(color, gammaEncodeParams);
-            b.Assign("color", b.Call("gammaCorrection", "color",
-                                     b.MemberAccessor("params", "gammaEncodeParams"))),
+            // if (params.sameGamutAndGamma != 1u)
+            b.If(b.create<ast::BinaryExpression>(ast::BinaryOp::kNotEqual,
+                                                 b.MemberAccessor("params", "sameGamutAndGamma"),
+                                                 b.Expr(1_u)),
+                 b.Block(
+                     // color = gammaConversion(color, gammaDecodeParams);
+                     b.Assign("color", b.Call("gammaCorrection", "color",
+                                              b.MemberAccessor("params", "gammaDecodeParams"))),
+                     // color = (params.gamutConversionMatrix * color);
+                     b.Assign("color",
+                              b.Mul(b.MemberAccessor("params", "gamutConversionMatrix"), "color")),
+                     // color = gammaConversion(color, gammaEncodeParams);
+                     b.Assign("color", b.Call("gammaCorrection", "color",
+                                              b.MemberAccessor("params", "gammaEncodeParams"))))),
             // return vec4<f32>(color, 1.f);
             b.Return(b.vec4<f32>("color", 1_f))};
     }

@@ -1355,7 +1355,8 @@
                 "length": 7},
             {"name": "gamut conversion matrix", "type": "float", "annotation": "const*",
                 "length": 9},
-            {"name": "color space", "type": "predefined color space", "default": "srgb"}
+            {"name": "color space", "type": "predefined color space", "default": "srgb"},
+            {"name": "same gamut and gamma", "type": "bool", "default": "false"}
         ]
     },
     "feature name": {

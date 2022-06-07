@@ -114,6 +114,34 @@ void ShaderModule::DestroyImpl() {
 
 ShaderModule::~ShaderModule() = default;
 
+std::string tintProgramWGSL(const tint::Program& program) {
+    tint::diag::Formatter::Style style;
+    style.print_newline_at_end = false;
+
+    if (!program.IsValid()) {
+        return tint::diag::Formatter(style).format(program.Diagnostics());
+    }
+
+    tint::writer::wgsl::Options options;
+    auto result = tint::writer::wgsl::Generate(&program, options);
+    if (!result.success) {
+        return "WGSL writer failed:\n" + result.error;
+    }
+
+    auto res = result.wgsl;
+    if (res.empty()) {
+        return res;
+    }
+    // The WGSL sometimes has two trailing newlines. Strip them
+    while (res.back() == '\n') {
+        res.pop_back();
+    }
+    if (res.empty()) {
+        return res;
+    }
+    return "\n" + res + "\n";
+}
+
 ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     const char* entryPointName,
     const PipelineLayout* layout) {
@@ -204,6 +232,11 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
         TRACE_EVENT0(GetDevice()->GetPlatform(), General, "RunTransforms");
         DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, GetTintProgram(), transformInputs,
                                                nullptr, nullptr));
+    }
+    if (GetDevice()->IsToggleEnabled(Toggle::DumpShaders)) {
+        std::ostringstream dumpedMsg;
+        dumpedMsg << "// Pared WGSL:" << std::endl << tintProgramWGSL(program);
+        GetDevice()->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
     }
 
 #if TINT_BUILD_SPV_WRITER

@@ -152,6 +152,9 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
     ExternalTextureParams params;
     params.numPlanes = descriptor->plane1 == nullptr ? 1 : 2;
 
+    params.sameGamutAndGamma = (descriptor->sameGamutAndGamma ? 1 : 0);
+    fprintf(stderr, "param:%u, desc:%u\n", params.sameGamutAndGamma, descriptor->sameGamutAndGamma);
+
     // YUV-to-RGB conversion is performed by multiplying the source YUV values with a 4x3 matrix
     // passed from Chromium. The matrix was originally sourced from /skia/src/core/SkYUVMath.cpp.
     // This matrix is only used in multiplanar scenarios.
