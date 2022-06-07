@@ -16,6 +16,108 @@
       "message": "Review note:\nsrc/dawn/common/Platform.h, src/dawn/common/Compiler.h: main macro improvement\nother files: renaming\n\nsrc/dawn/native/metal/BufferMTL.mm: additionally include missing Platform.h\n\n\nQuestion:\nI\u0027m not sure where to add the compiler flags (e.g. -Werror\u003dundef).\n\nI tried adding one in src/dawn/common/BUILD.gn under if (dawn_standalone \u0026\u0026 is_clang) but seems to affect non dawn stuff (gtest).\n\nAlso looking at the dry runs, it seems some platform already has this -Wundef flags. Maybe only some of them are missing. (MSVC may need an extra /we4668)\n\nBut anyway would like to hear your suggestions.",
       "revId": "1021722446b091a3154f298529b2780e8b90983d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2713f91c_a85837e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-07T18:27:51Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1021722446b091a3154f298529b2780e8b90983d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8e689d0_3d8b4d89",
+        "filename": "src/dawn/common/Platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-07T18:27:51Z",
+      "side": 1,
+      "message": "I wonder if we could somehow prevent people from using these naked defines. WDYT of DAWN_PLATFORM_IS_DETAIL_FOO or similar to let them know they should use the naked defines?",
+      "revId": "1021722446b091a3154f298529b2780e8b90983d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c4542c8_dab8ed98",
+        "filename": "src/dawn/common/Platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-07T18:27:51Z",
+      "side": 1,
+      "message": "nit: Maybe we could have a small comment explaining why we have this. Ditto for the defaulting above and in Compiler.h",
+      "revId": "1021722446b091a3154f298529b2780e8b90983d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58ead74e_33fe8049",
+        "filename": "src/dawn/native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-07T18:27:51Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "1021722446b091a3154f298529b2780e8b90983d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf54c441_af00f34a",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-07T18:27:51Z",
+      "side": 1,
+      "message": "This seems like a stray change from a different CL?",
+      "revId": "1021722446b091a3154f298529b2780e8b90983d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79ea6e66_6b991d0e",
+        "filename": "src/dawn/native/vulkan/VulkanFunctions.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-07T18:27:51Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "1021722446b091a3154f298529b2780e8b90983d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
