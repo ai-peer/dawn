@@ -122,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65402bbf_ba093942",
+        "filename": "src/dawn/common/Platform.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-07T21:59:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c4542c8_dab8ed98",
+      "revId": "1021722446b091a3154f298529b2780e8b90983d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58ead74e_33fe8049",
@@ -139,6 +157,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7c4e127_675659d4",
+        "filename": "src/dawn/native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-07T21:59:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58ead74e_33fe8049",
+      "revId": "1021722446b091a3154f298529b2780e8b90983d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf54c441_af00f34a",
@@ -152,6 +188,24 @@
       "writtenOn": "2022-06-07T18:27:51Z",
       "side": 1,
       "message": "This seems like a stray change from a different CL?",
+      "revId": "1021722446b091a3154f298529b2780e8b90983d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9336dd3b_2f49a938",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-07T21:59:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf54c441_af00f34a",
       "revId": "1021722446b091a3154f298529b2780e8b90983d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
