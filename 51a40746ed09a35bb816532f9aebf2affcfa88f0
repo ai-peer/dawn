@@ -16,6 +16,40 @@
       "message": "PTAL! Will require that https://chromium-review.googlesource.com/c/chromium/src/+/3692684 lands first in order to roll cleanly.",
       "revId": "51a40746ed09a35bb816532f9aebf2affcfa88f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e099c49_bfbc8625",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-06-07T22:25:20Z",
+      "side": 1,
+      "message": "LGTM unless we want to keep some of this code alive in anticipation of adding this format back later",
+      "revId": "51a40746ed09a35bb816532f9aebf2affcfa88f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eae0767d_03c42737",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-06-07T22:25:20Z",
+      "side": 1,
+      "message": "nit: R24G8 doesn\u0027t technically have stencil. Maybe \"is the typeless version of D24_UNORM_S8_UINT (see D3D12TextureFormat())\"",
+      "revId": "51a40746ed09a35bb816532f9aebf2affcfa88f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
