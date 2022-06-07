@@ -360,6 +360,30 @@
       },
       "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2061edc3_94033f42",
+        "filename": "src/dawn/native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-07T14:54:42Z",
+      "side": 1,
+      "message": "Everyone, I\u0027d like to apologize for the comment above. It was inappropriate, unprofessional and uncharacteristic. I am reflecting on reasons why I exploded like this and can find multiple, though none of that excuses that I wrote such a hurtful and dismissive comment.\n\nI\u0027m reflecting on this and will reach out to you all independently.\n\nBefore I answer your last comment Yunchao, I\u0027d like to point out things that are very wrong in what I commented above.\n\n\u003e The role of contributors are to address comments. By default, unless there is a correctness problem, comments from OWNERs and TLs should be addressed without questions.\n\nThis is an extreme statement and certainly not true. While OWNERs tend to the consistency of the code, there is a lot of subjectivity to it, and multiple good ways to solve each thing both at the architectural level and in the details of the code. A diversity of viewpoints helps identify the tradeoffs, which the projects better overall.\n\n\u003e Diatrib about semantic minimalism.\n\nWhile it is an interesting and reasonably important property, however the way I wrote it is really extreme and single-minded. There are a lot more tradeoffs there, especially as the project get contribute to by more people, gets running in the real world, etc.\n\n\u003e Austin, ...\n\nThis feedback was in an inappropriate place and not constructive at all. I reached out separately about it.\n\n\u003e So. This CL has been handled in a sub-par manner in multiple ways and we should know to do things better in the future\n\nCertainly I added to that statement by making this awful comment. I should have known better indeed.\n\n---\n\nYunchao, thank you for the constructive feedback as well in the face of this extreme comment. I would like to discuss ways to better work together in person as well. I\u0027ll reach out separately.\n\n\u003e For code review, I really hate that reviewers have different opinions and I don\u0027t know which one to follow.\n\nYeah this is definitely frustrating, and in this case since you had +2 it\u0027s fair to choose whichever comment you agree with most. If reviewers don\u0027t seem like they can agree then it is fair to ask them to come to agreement and then post the consensus.\n\n\u003e Compromising a little bit and respecting other owners and long-time contributors are also important for keeping the morale and momentum for a project.\n\nThis is a good reminder and I\u0027ve definitely been terrible at this on this CL.\n\n\u003e I really don\u0027t like an authoritative leader who think his own solution is always the best\n\nI\u0027ve been a bit too much this (and increasingly recently). I\u0027m still reflecting on why, but I think a large part may be due to various stress factors (pressure to ship, scaling of the project, sky-high expectations for WebGPU etc).\n\n\u003e Taking myself as an example, I think I definitely feel good if I am cc-ed for some changes I contributed a lot before for that issue.\n\nThanks for raising this. It makes complete sense, but at the same time I have never thought about it such concretely before. It is a great concrete improvement. Apologies I didn\u0027t do it before in the CLs and I\u0027ll strive to make it better in the future.\n\nOverall I would LOVE to be able to have a better sense of community between all contributors to Dawn. I was hoping that the Slack channel would help for this, but it\u0027s been very silent. Maybe the Matrix channel could be this? I don\u0027t know if Intel Shanghai folks would be able to access it. The webgpu-weekly worked a bit but were additional overhead and didn\u0027t spin discussions. Happy to take any suggestions for this, and I\u0027ll think about it separately as well.",
+      "parentUuid": "fddafcb0_2ed78455",
+      "range": {
+        "startLine": 76,
+        "startChar": 31,
+        "endLine": 76,
+        "endChar": 71
+      },
+      "revId": "b054326d0dd7ffb0f5b5a263df06d6f74a629e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
