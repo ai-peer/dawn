@@ -103,5 +103,15 @@ TEST_F(ResolverPipelineOverridableConstantTest, IdTooLarge) {
     EXPECT_EQ(r()->error(), "12:34 error: pipeline constant IDs must be between 0 and 65535");
 }
 
+TEST_F(ResolverPipelineOverridableConstantTest, F16_TemporallyBan) {
+    Enable(ast::Extension::kF16);
+
+    Override("a", ty.f16(), Expr(1_h), {Id(Source{{12, 34}}, 1u)});
+
+    EXPECT_FALSE(r()->Resolve());
+
+    EXPECT_EQ(r()->error(), "error: 'override' of type f16 is not implemented yet");
+}
+
 }  // namespace
 }  // namespace tint::resolver

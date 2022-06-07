@@ -392,6 +392,27 @@ bool Validator::StorageClassLayout(const sem::Type* store_ty,
         return true;
     }
 
+    // Temporally forbid using f16 types in "uniform" and "storage" storage class.
+    // TODO(tint:1473, tint:1502): Remove this error after f16 is supported in "uniform" and
+    // "storage" storage class.
+    auto is_f16_scalar_vector_matrix = [](const sem::Type* store_ty) {
+        if (store_ty->Is<sem::F16>()) {
+            return true;
+        }
+        if (auto* vec = store_ty->As<sem::Vector>()) {
+            return vec->type()->Is<sem::F16>();
+        }
+        if (auto* mat = store_ty->As<sem::Matrix>()) {
+            return mat->type()->Is<sem::F16>();
+        }
+        return false;
+    };
+    if (is_f16_scalar_vector_matrix(store_ty)) {
+        AddError("using f16 types in 'uniform' or 'storage' storage class is not implemented yet",
+                 source);
+        return false;
+    }
+
     if (auto* str = store_ty->As<sem::Struct>()) {
         for (size_t i = 0; i < str->Members().size(); ++i) {
             auto* const m = str->Members()[i];
@@ -801,6 +822,12 @@ bool Validator::Override(const sem::Variable* v) const {
                  decl->source);
         return false;
     }
+
+    if (storage_ty->Is<sem::F16>()) {
+        AddError("'override' of type f16 is not implemented yet", decl->source);
+        return false;
+    }
+
     return true;
 }
 
@@ -1102,6 +1129,25 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                                                      const sem::Type* ty, Source source,
                                                      ParamOrRetType param_or_ret,
                                                      bool is_struct_member) {
+        // Temporally forbid using f16 types in entry point IO.
+        // TODO(tint:1473, tint:1502): Remove this error after f16 is supported in entry point IO.
+        auto is_f16_scalar_vector_matrix = [](const sem::Type* store_ty) {
+            if (store_ty->Is<sem::F16>()) {
+                return true;
+            }
+            if (auto* vec = store_ty->As<sem::Vector>()) {
+                return vec->type()->Is<sem::F16>();
+            }
+            if (auto* mat = store_ty->As<sem::Matrix>()) {
+                return mat->type()->Is<sem::F16>();
+            }
+            return false;
+        };
+        if (is_f16_scalar_vector_matrix(ty)) {
+            AddError("entry point IO of f16 types is not implemented yet", source);
+            return false;
+        }
+
         // Scan attributes for pipeline IO attributes.
         // Check for overlap with attributes that have been seen previously.
         const ast::Attribute* pipeline_io_attribute = nullptr;
