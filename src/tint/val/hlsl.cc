@@ -53,13 +53,16 @@ Result HlslUsingDXC(const std::string& dxc_path,
                 result.failed = true;
                 return result;
             case ast::PipelineStage::kVertex:
-                profile = "-T vs_6_0";
+                // profile = "-T vs_6_0";
+                profile = "-T vs_6_2 -enable-16bit-types";
                 break;
             case ast::PipelineStage::kFragment:
-                profile = "-T ps_6_0";
+                // profile = "-T ps_6_0";
+                profile = "-T ps_6_2 -enable-16bit-types";
                 break;
             case ast::PipelineStage::kCompute:
-                profile = "-T cs_6_0";
+                // profile = "-T cs_6_0";
+                profile = "-T cs_6_2 -enable-16bit-types";
                 break;
         }
 
