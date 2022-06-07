@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8f89a5e_3859d162",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-07T21:11:26Z",
+      "side": 1,
+      "message": "+1 from me. This is my favourite solution out of the variants we discussed.",
+      "revId": "1021722446b091a3154f298529b2780e8b90983d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8e689d0_3d8b4d89",
