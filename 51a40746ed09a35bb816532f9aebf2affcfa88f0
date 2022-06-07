@@ -70,6 +70,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f51082d_57c63518",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-07T23:10:22Z",
+      "side": 1,
+      "message": "in this CL, could we also prune expectations.txt? https://source.chromium.org/search?q\u003ddepth24unorm%20f:expectations.txt\u0026sq\u003d ",
+      "revId": "51a40746ed09a35bb816532f9aebf2affcfa88f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eae0767d_03c42737",
