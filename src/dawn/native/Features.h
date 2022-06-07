@@ -34,7 +34,6 @@ enum class Feature {
     PipelineStatisticsQuery,
     TimestampQuery,
     DepthClamping,
-    Depth24UnormStencil8,
     Depth32FloatStencil8,
     ChromiumExperimentalDp4a,
     IndirectFirstInstance,

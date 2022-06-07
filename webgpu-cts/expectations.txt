@@ -81,18 +81,6 @@ crbug.com/dawn/1111 [ intel ] webgpu:shader,execution,zero_init:compute,zero_ini
 
 ################################################################################
 # webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero
-# Spec / CTS bugs because depth24unorm-stencil8 depth-specific format is depth24plus
-# KEEP
-################################################################################
-crbug.com/dawn/1388 [ linux ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToBuffer";format="depth24unorm-stencil8" [ Failure ]
-crbug.com/dawn/1388 [ mac ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToBuffer";format="depth24unorm-stencil8" [ Failure ]
-crbug.com/dawn/1388 [ win ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToBuffer";format="depth24unorm-stencil8" [ Failure ]
-crbug.com/dawn/1388 [ linux ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToTexture";format="depth24unorm-stencil8" [ Failure ]
-crbug.com/dawn/1388 [ mac ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToTexture";format="depth24unorm-stencil8" [ Failure ]
-crbug.com/dawn/1388 [ win ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToTexture";format="depth24unorm-stencil8" [ Failure ]
-
-################################################################################
-# webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero
 # Unexpected failures on mac.
 # KEEP
 ################################################################################
@@ -207,7 +195,6 @@ crbug.com/dawn/0000 [ intel ubuntu ] webgpu:shader,execution,robust_access:linea
 # stencil8 failures
 # KEEP
 ################################################################################
-crbug.com/dawn/0000 [ win ] webgpu:api,operation,command_buffer,copyTextureToTexture:copy_depth_stencil:format="depth24unorm-stencil8" [ Failure ]
 crbug.com/dawn/0000 [ mac ] webgpu:api,operation,command_buffer,copyTextureToTexture:copy_depth_stencil:format="depth32float-stencil8" [ Failure ]
 crbug.com/dawn/0000 [ mac ] webgpu:api,operation,command_buffer,copyTextureToTexture:copy_depth_stencil:format="stencil8" [ Failure ]
 crbug.com/dawn/0000 [ mac ] webgpu:api,operation,command_buffer,image_copy:offsets_and_sizes_copy_depth_stencil:format="stencil8";* [ Failure ]
