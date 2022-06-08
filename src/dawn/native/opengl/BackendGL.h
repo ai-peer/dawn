@@ -15,15 +15,19 @@
 #ifndef SRC_DAWN_NATIVE_OPENGL_BACKENDGL_H_
 #define SRC_DAWN_NATIVE_OPENGL_BACKENDGL_H_
 
+#include <EGL/egl.h>
+
 #include <vector>
 
 #include "dawn/native/BackendConnection.h"
+#include "dawn/native/OpenGL/EGLFunctions.h"
 
 namespace dawn::native::opengl {
 
 class Backend : public BackendConnection {
   public:
     Backend(InstanceBase* instance, wgpu::BackendType backendType);
+    ~Backend() override;
 
     std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters() override;
     ResultOrError<std::vector<Ref<AdapterBase>>> DiscoverAdapters(
@@ -31,6 +35,8 @@ class Backend : public BackendConnection {
 
   private:
     bool mCreatedAdapter = false;
+    EGLContext mContext = nullptr;
+    EGLFunctions egl;
 };
 
 }  // namespace dawn::native::opengl
