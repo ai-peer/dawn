@@ -237,6 +237,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9384b3c1_1828903e",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-08T19:04:04Z",
+      "side": 1,
+      "message": "Thank you for your great explanation - I think I follow this now.\nI agree with David here - a bit more info would be helpful for people to understand this.",
+      "parentUuid": "487c486b_39b866bc",
+      "revId": "9143647f790420296bb5dd6b4994b5c7e9967bbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d17bc21_295d605f",
         "filename": "src/tint/number_test.cc",
         "patchSetId": 3
