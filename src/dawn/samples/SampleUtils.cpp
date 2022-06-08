@@ -28,6 +28,7 @@
 #include "dawn/dawn_proc.h"
 #include "dawn/dawn_wsi.h"
 #include "dawn/native/DawnNative.h"
+#include "dawn/utils/BackendBinding.h"
 #include "dawn/utils/GLFWUtils.h"
 #include "dawn/utils/TerribleCommandBuffer.h"
 #include "dawn/wire/WireClient.h"
@@ -269,15 +270,6 @@ bool InitSample(int argc, const char** argv) {
             printf("  COMMAND_BUFFER is one of: none, terrible\n");
             return false;
         }
-    }
-
-    // TODO(dawn:810): Reenable once the OpenGL(ES) backend is able to create its own context such
-    // that it can use surface-based swapchains.
-    if (backendType == wgpu::BackendType::OpenGL || backendType == wgpu::BackendType::OpenGLES) {
-        fprintf(stderr,
-                "The OpenGL(ES) backend is temporarily not supported for samples. See "
-                "https://crbug.com/dawn/810");
-        return false;
     }
 
     return true;

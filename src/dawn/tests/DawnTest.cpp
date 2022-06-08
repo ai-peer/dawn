@@ -467,8 +467,9 @@ std::unique_ptr<dawn::native::Instance> DawnTestEnvironment::CreateInstanceAndDi
     glfwDefaultWindowHints();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
     glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
+
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
     mOpenGLESWindow = glfwCreateWindow(400, 400, "Dawn OpenGLES test window", nullptr, nullptr);
