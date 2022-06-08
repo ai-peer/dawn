@@ -30,11 +30,11 @@ void GPUQuerySet::destroy(Napi::Env) {
 }
 
 interop::GPUQueryType GPUQuerySet::getType(Napi::Env) {
-    UNIMPLEMENTED();
+    return query_set_.GetType();
 }
 
 interop::GPUSize32 GPUQuerySet::getCount(Napi::Env) {
-    UNIMPLEMENTED();
+    return query_set_.GetCount();
 }
 
 std::string GPUQuerySet::getLabel(Napi::Env) {
