@@ -67,10 +67,7 @@ class Client : public ClientBase {
     void Disconnect();
     bool IsDisconnected() const;
 
-    template <typename T>
-    void TrackObject(T* object) {
-        mObjects[ObjectTypeToTypeEnum<T>::value].Append(object);
-    }
+    void TrackObject(ObjectBase* object, ObjectType type);
 
   private:
     void DestroyAllObjects();

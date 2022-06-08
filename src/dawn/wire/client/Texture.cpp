@@ -44,7 +44,8 @@ WGPUTexture Texture::Create(Device* device, const WGPUTextureDescriptor* descrip
     return ToAPI(texture);
 }
 
-Texture::Texture(Client* c, uint32_t r, uint32_t i) : ObjectBase(c, r, i) {}
+Texture::Texture(uint32_t idIn, Client* clientIn)
+    : ObjectBase(idIn, clientIn, ObjectType::Texture) {}
 Texture::~Texture() = default;
 
 uint32_t Texture::GetWidth() const {

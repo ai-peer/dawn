@@ -24,8 +24,8 @@
 
 namespace dawn::wire::client {
 
-Device::Device(Client* clientIn, uint32_t initialRefcount, uint32_t initialId)
-    : ObjectBase(clientIn, initialRefcount, initialId), mIsAlive(std::make_shared<bool>()) {
+Device::Device(uint32_t idIn, Client* clientIn)
+    : ObjectBase(idIn, clientIn, ObjectType::Device), mIsAlive(std::make_shared<bool>()) {
 #if defined(DAWN_ENABLE_ASSERTS)
     mErrorCallback = [](WGPUErrorType, char const*, void*) {
         static bool calledOnce = false;
@@ -241,7 +241,7 @@ void Device::CreateComputePipelineAsync(WGPUComputePipelineDescriptor const* des
                         "GPU device disconnected", userdata);
     }
 
-    auto* allocation = client->ComputePipelineAllocator().New(client);
+    auto* allocation = client->ComputePipelineAllocator().New(client, ObjectType::ComputePipeline);
 
     CreatePipelineAsyncRequest request = {};
     request.createComputePipelineAsyncCallback = callback;
@@ -292,7 +292,7 @@ void Device::CreateRenderPipelineAsync(WGPURenderPipelineDescriptor const* descr
                         "GPU device disconnected", userdata);
     }
 
-    auto* allocation = client->RenderPipelineAllocator().New(client);
+    auto* allocation = client->RenderPipelineAllocator().New(client, ObjectType::RenderPipeline);
 
     CreatePipelineAsyncRequest request = {};
     request.createRenderPipelineAsyncCallback = callback;

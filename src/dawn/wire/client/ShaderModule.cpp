@@ -14,11 +14,15 @@
 
 #include "dawn/wire/client/ShaderModule.h"
 
+#include "dawn/common/Assert.h"
 #include "dawn/wire/client/Client.h"
 
 namespace dawn::wire::client {
 
-ShaderModule::ShaderModule(Client* c, uint32_t r, uint32_t i) : ObjectBase(c, r, i) {}
+ShaderModule::ShaderModule(uint32_t idIn, Client* clientIn, ObjectType type)
+    : ObjectBase(idIn, clientIn, type) {
+    ASSERT(type == ObjectType::ShaderModule);
+}
 
 ShaderModule::~ShaderModule() {
     ClearAllCallbacks(WGPUCompilationInfoRequestStatus_Unknown);
