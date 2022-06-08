@@ -162,6 +162,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e59b949_efbd91c9",
+        "filename": "src/dawn/wire/client/ObjectAllocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-08T23:50:17Z",
+      "side": 1,
+      "message": "(sorry multi-comment)\nnow that I\u0027m looking at it though, we could probably completely hide away \"BufferAllocator()\"\n\n```\ntemplate \u003ctypename T, typename... Args\u003e\nObjectAllocator\u003cT\u003e::ObjectAndSerial Client::New(Args\u0026\u0026...args) {\n  auto* allocator \u003d AllocatorFor\u003cT\u003e;\n  this-\u003e*allocator.New(this, args...);\n}\n\nvoid Client::Free(T* object);\n```\nfeel free to not actually do this change though because though it might be nice and concise, it\u0027s a bunch more complexity to go from type T to the member allocator.\nI think just always having the Client* argument first is good enough for now",
+      "parentUuid": "ad9cd6ea_d588f647",
+      "range": {
+        "startLine": 47,
+        "startChar": 25,
+        "endLine": 47,
+        "endChar": 37
+      },
+      "revId": "c915315dbc778a088fec46a0161adb507ec36ec3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ae8fa19_7b669036",
         "filename": "src/dawn/wire/client/ObjectAllocator.h",
         "patchSetId": 2
