@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b57609da_2adc5747",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-06-08T05:01:45Z",
+      "side": 1,
+      "message": "PTAL, thanks!\n\nAs I don\u0027t roll the CTS to the latest, I will rebase this CL after Austin rolled the CTS to the latest (https://dawn-review.googlesource.com/c/dawn/+/93040 is landed).",
+      "revId": "116c51349c456465715f8bfd92cce3cadf6e425d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
