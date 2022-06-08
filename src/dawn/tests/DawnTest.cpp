@@ -422,6 +422,24 @@ std::unique_ptr<dawn::native::Instance> DawnTestEnvironment::CreateInstanceAndDi
     auto instance = std::make_unique<dawn::native::Instance>();
     instance->EnableBeginCaptureOnStartup(mBeginCaptureOnStartup);
     instance->SetBackendValidationLevel(mBackendValidationLevel);
+
+#ifdef DAWN_ENABLE_BACKEND_OPENGLES
+    ScopedEnvironmentVar angleDefaultPlatform;
+    if (GetEnvironmentVar("ANGLE_DEFAULT_PLATFORM").first.empty()) {
+        const char* platform;
+        if (!mANGLEBackend.empty()) {
+            platform = mANGLEBackend.c_str();
+        } else {
+#if DAWN_PLATFORM_IS(WINDOWS)
+            platform = "d3d11";
+#else
+            platform = "swiftshader";
+#endif
+        }
+        angleDefaultPlatform.Set("ANGLE_DEFAULT_PLATFORM", platform);
+    }
+#endif  // DAWN_ENABLE_BACKEND_OPENGLES
+
     instance->DiscoverDefaultAdapters();
 
 #ifdef DAWN_ENABLE_BACKEND_DESKTOP_GL
@@ -444,52 +462,11 @@ std::unique_ptr<dawn::native::Instance> DawnTestEnvironment::CreateInstanceAndDi
     }
 #endif  // DAWN_ENABLE_BACKEND_DESKTOP_GL
 
-#ifdef DAWN_ENABLE_BACKEND_OPENGLES
-
-    ScopedEnvironmentVar angleDefaultPlatform;
-    if (GetEnvironmentVar("ANGLE_DEFAULT_PLATFORM").first.empty()) {
-        const char* platform;
-        if (!mANGLEBackend.empty()) {
-            platform = mANGLEBackend.c_str();
-        } else {
-#if DAWN_PLATFORM_IS(WINDOWS)
-            platform = "d3d11";
-#else
-            platform = "swiftshader";
-#endif
-        }
-        angleDefaultPlatform.Set("ANGLE_DEFAULT_PLATFORM", platform);
-    }
-
-    if (!glfwInit()) {
-        return instance;
-    }
-    glfwDefaultWindowHints();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
-    glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
-    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-
-    mOpenGLESWindow = glfwCreateWindow(400, 400, "Dawn OpenGLES test window", nullptr, nullptr);
-    if (mOpenGLESWindow != nullptr) {
-        glfwMakeContextCurrent(mOpenGLESWindow);
-        dawn::native::opengl::AdapterDiscoveryOptionsES adapterOptionsES;
-        adapterOptionsES.getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
-        instance->DiscoverAdapters(&adapterOptionsES);
-        glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE);
-    }
-#endif  // DAWN_ENABLE_BACKEND_OPENGLES
-
     return instance;
 }
 
 GLFWwindow* DawnTestEnvironment::GetOpenGLWindow() const {
     return mOpenGLWindow;
-}
-
-GLFWwindow* DawnTestEnvironment::GetOpenGLESWindow() const {
-    return mOpenGLESWindow;
 }
 
 void DawnTestEnvironment::SelectPreferredAdapterProperties(const dawn::native::Instance* instance) {
@@ -1125,11 +1102,6 @@ void DawnTestBase::SetUp() {
         glfwMakeContextCurrent(gTestEnv->GetOpenGLWindow());
     }
 #endif  // defined(DAWN_ENABLE_BACKEND_DESKTOP_GL)
-#if defined(DAWN_ENABLE_BACKEND_OPENGLES)
-    if (IsOpenGLES()) {
-        glfwMakeContextCurrent(gTestEnv->GetOpenGLESWindow());
-    }
-#endif  // defined(DAWN_ENABLE_BACKEND_OPENGLES)
 }
 
 void DawnTestBase::TearDown() {
