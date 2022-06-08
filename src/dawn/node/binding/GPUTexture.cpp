@@ -55,35 +55,35 @@ void GPUTexture::destroy(Napi::Env) {
 }
 
 interop::GPUIntegerCoordinate GPUTexture::getWidth(Napi::Env) {
-    UNIMPLEMENTED();
+    return texture_.GetWidth();
 }
 
 interop::GPUIntegerCoordinate GPUTexture::getHeight(Napi::Env) {
-    UNIMPLEMENTED();
+    return texture_.GetHeight();
 }
 
 interop::GPUIntegerCoordinate GPUTexture::getDepthOrArrayLayers(Napi::Env) {
-    UNIMPLEMENTED();
+    return texture_.GetDepthOrArrayLayers();
 }
 
 interop::GPUIntegerCoordinate GPUTexture::getMipLevelCount(Napi::Env) {
-    UNIMPLEMENTED();
+    return texture_.GetMipLevelCount();
 }
 
 interop::GPUSize32 GPUTexture::getSampleCount(Napi::Env) {
-    UNIMPLEMENTED();
+    return texture_.GetSampleCount();
 }
 
 interop::GPUTextureDimension GPUTexture::getDimension(Napi::Env) {
-    UNIMPLEMENTED();
+    return texture_.GetDimension();
 }
 
 interop::GPUTextureFormat GPUTexture::getFormat(Napi::Env) {
-    UNIMPLEMENTED();
+    return texture_.GetFormat();
 }
 
 interop::GPUTextureUsageFlags GPUTexture::getUsage(Napi::Env) {
-    UNIMPLEMENTED();
+    return texture_.GetUsage();
 }
 
 std::string GPUTexture::getLabel(Napi::Env) {
