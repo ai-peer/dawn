@@ -51,6 +51,8 @@ struct DAWN_NATIVE_EXPORT ExternalImageDescriptorEGLImage : ExternalImageDescrip
 DAWN_NATIVE_EXPORT WGPUTexture
 WrapExternalEGLImage(WGPUDevice device, const ExternalImageDescriptorEGLImage* descriptor);
 
+DAWN_NATIVE_EXPORT void MakeCurrent(WGPUDevice device);
+
 }  // namespace dawn::native::opengl
 
 #endif  // INCLUDE_DAWN_NATIVE_OPENGLBACKEND_H_

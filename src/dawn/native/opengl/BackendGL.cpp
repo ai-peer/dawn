@@ -16,6 +16,8 @@
 
 #include <utility>
 
+#include "dawn/common/SystemUtils.h"
+#include "dawn/native/Instance.h"
 #include "dawn/native/OpenGLBackend.h"
 #include "dawn/native/opengl/AdapterGL.h"
 
@@ -27,8 +29,38 @@ Backend::Backend(InstanceBase* instance, wgpu::BackendType backendType)
     : BackendConnection(instance, backendType) {}
 
 std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters() {
-    // The OpenGL backend needs at least "getProcAddress" to discover an adapter.
-    return {};
+    std::vector<Ref<AdapterBase>> adapters;
+#ifdef DAWN_ENABLE_BACKEND_OPENGLES
+    if (GetType() == wgpu::BackendType::OpenGLES) {
+#if DAWN_PLATFORM_IS(WINDOWS)
+        const char* eglLib = "libEGL.dll";
+#elif DAWN_PLATFORM_IS(MACOS)
+        const char* eglLib = "libEGL.dylib";
+#else
+        const char* eglLib = "libEGL.so";
+#endif
+        DynamicLib libEGL;
+        if (!libEGL.Open(eglLib)) {
+            return {};
+        }
+
+        AdapterDiscoveryOptionsES options;
+        options.getProc =
+            reinterpret_cast<void* (*)(const char*)>(libEGL.GetProc("eglGetProcAddress"));
+        if (!options.getProc) {
+            return {};
+        }
+
+        auto result = DiscoverAdapters(&options);
+        if (result.IsError()) {
+            GetInstance()->ConsumedError(result.AcquireError());
+        } else {
+            auto value = result.AcquireSuccess();
+            adapters.insert(adapters.end(), value.begin(), value.end());
+        }
+    }
+#endif
+    return adapters;
 }
 
 ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(

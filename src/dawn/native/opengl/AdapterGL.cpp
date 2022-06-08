@@ -14,7 +14,12 @@
 
 #include "dawn/native/opengl/AdapterGL.h"
 
+#include <EGL/egl.h>
+
+#include <memory>
 #include <string>
+#include <utility>
+#include <vector>
 
 #include "dawn/common/GPUInfo.h"
 #include "dawn/common/Log.h"
@@ -112,12 +117,90 @@ void KHRONOS_APIENTRY OnGLDebugMessage(GLenum source,
     }
 }
 
+class ContextEGL : public Device::Context {
+  public:
+    static std::unique_ptr<ContextEGL> Make(const EGLFunctions& functions);
+
+    ContextEGL(EGLDisplay display, EGLContext context, const EGLFunctions& functions);
+    ~ContextEGL() override;
+    void MakeCurrent() override;
+
+  private:
+    EGLDisplay mDisplay;
+    EGLContext mContext;
+    const EGLFunctions egl;
+};
+
+std::unique_ptr<ContextEGL> ContextEGL::Make(const EGLFunctions& egl) {
+    EGLDisplay display = egl.GetDisplay(EGL_DEFAULT_DISPLAY);
+    EGLint num_config;
+    egl.Initialize(display, nullptr, nullptr);
+    EGLint config_attribs[] = {EGL_RED_SIZE,
+                               8,
+                               EGL_GREEN_SIZE,
+                               8,
+                               EGL_BLUE_SIZE,
+                               8,
+                               EGL_ALPHA_SIZE,
+                               8,
+                               EGL_RENDERABLE_TYPE,
+                               EGL_OPENGL_ES3_BIT,
+                               EGL_SURFACE_TYPE,
+                               EGL_WINDOW_BIT | EGL_PBUFFER_BIT,
+                               EGL_NONE};
+
+    if (egl.ChooseConfig(display, config_attribs, nullptr, 0, &num_config) == EGL_FALSE) {
+        return nullptr;
+    }
+
+    if (num_config == 0) {
+        return nullptr;
+    }
+
+    std::vector<EGLConfig> configs(num_config);
+    if (egl.ChooseConfig(display, config_attribs, configs.data(), num_config, &num_config) ==
+        EGL_FALSE) {
+        return nullptr;
+    }
+
+    EGLConfig config = configs[0];  // FIXME
+    EGLint attrib_list[] = {
+        EGL_CONTEXT_MAJOR_VERSION, 3, EGL_CONTEXT_MINOR_VERSION, 1, EGL_NONE, EGL_NONE,
+    };
+    EGLContext context = egl.CreateContext(display, config, EGL_NO_CONTEXT, attrib_list);
+    if (!context) {
+        return nullptr;
+    }
+
+    if (egl.MakeCurrent(display, EGL_NO_SURFACE, EGL_NO_SURFACE, context) == EGL_FALSE) {
+        return nullptr;
+    }
+
+    return std::make_unique<ContextEGL>(display, context, egl);
+}
+
+ContextEGL::ContextEGL(EGLDisplay display, EGLContext context, const EGLFunctions& functions)
+    : mDisplay(display), mContext(context), egl(functions) {}
+
+ContextEGL::~ContextEGL() {
+    egl.MakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+    egl.DestroyContext(mDisplay, mContext);
+}
+
+void ContextEGL::MakeCurrent() {
+    egl.MakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, mContext);
+}
+
 }  // anonymous namespace
 
 Adapter::Adapter(InstanceBase* instance, wgpu::BackendType backendType)
     : AdapterBase(instance, backendType) {}
 
 MaybeError Adapter::InitializeGLFunctions(void* (*getProc)(const char*)) {
+    if (GetBackendType() == wgpu::BackendType::OpenGLES) {
+        egl.Init(reinterpret_cast<PFNEGLGETPROCADDRESSPROC>(getProc));
+        mContext = ContextEGL::Make(egl);
+    }
     // Use getProc to populate the dispatch table
     return mFunctions.Initialize(getProc);
 }
@@ -254,7 +337,7 @@ MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
 ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor) {
     // There is no limit on the number of devices created from this adapter because they can
     // all share the same backing OpenGL context.
-    return Device::Create(this, descriptor, mFunctions);
+    return Device::Create(this, descriptor, mFunctions, mContext.get());
 }
 
 }  // namespace dawn::native::opengl
