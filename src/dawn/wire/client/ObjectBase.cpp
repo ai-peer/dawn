@@ -14,10 +14,14 @@
 
 #include "dawn/wire/client/ObjectBase.h"
 
+#include "dawn/wire/client/Client.h"
+
 namespace dawn::wire::client {
 
-ObjectBase::ObjectBase(Client* client, uint32_t refcount, uint32_t id)
-    : client(client), refcount(refcount), id(id) {}
+ObjectBase::ObjectBase(uint32_t id, Client* client, ObjectType type)
+    : client(client), refcount(1), id(id) {
+    client->TrackObject(this, type);
+}
 
 ObjectBase::~ObjectBase() {
     RemoveFromList();

@@ -14,6 +14,7 @@
 
 #include "dawn/wire/client/ApiObjects.h"
 #include "dawn/wire/client/Client.h"
+#include "dawn/wire/ObjectType_autogen.h"
 
 #include <algorithm>
 #include <cstring>
@@ -58,7 +59,8 @@ namespace dawn::wire::client {
 
                     //* For object creation, store the object ID the client will use for the result.
                     {% if method.return_type.category == "object" %}
-                        auto* allocation = self->client->{{method.return_type.name.CamelCase()}}Allocator().New(self->client);
+                        {% set ResultType = method.return_type.name.CamelCase() %}
+                        auto* allocation = self->client->{{ResultType}}Allocator().New(self->client, ObjectType::{{ResultType}});
                         cmd.result = ObjectHandle{allocation->object->id, allocation->generation};
                     {% endif %}
 

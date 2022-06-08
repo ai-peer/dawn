@@ -27,7 +27,7 @@ class QuerySet final : public ObjectBase {
   public:
     static WGPUQuerySet Create(Device* device, const WGPUQuerySetDescriptor* descriptor);
 
-    QuerySet(Client* client, uint32_t refcount, uint32_t id);
+    QuerySet(uint32_t idIn, Client* clientIn);
     ~QuerySet();
 
     // Note that these values can be arbitrary since they aren't validated in the wire client.

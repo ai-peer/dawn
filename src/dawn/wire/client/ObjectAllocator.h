@@ -26,6 +26,8 @@
 
 namespace dawn::wire::client {
 
+class Client;
+
 template <typename T>
 class ObjectAllocator {
   public:
@@ -41,11 +43,10 @@ class ObjectAllocator {
         mObjects.emplace_back(nullptr, 0);
     }
 
-    template <typename Client>
-    ObjectAndSerial* New(Client* client) {
+    template <typename... Args>
+    ObjectAndSerial* New(Args... args) {
         uint32_t id = GetNewId();
-        auto object = std::make_unique<T>(client, 1, id);
-        client->TrackObject(object.get());
+        auto object = std::make_unique<T>(id, std::forward<Args>(args)...);
 
         if (id >= mObjects.size()) {
             ASSERT(id == mObjects.size());

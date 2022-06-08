@@ -19,7 +19,8 @@
 
 namespace dawn::wire::client {
 
-Adapter::Adapter(Client* c, uint32_t r, uint32_t i) : ObjectBase(c, r, i) {}
+Adapter::Adapter(uint32_t idIn, Client* clientIn)
+    : ObjectBase(idIn, clientIn, ObjectType::Adapter) {}
 
 Adapter::~Adapter() {
     mRequestDeviceRequests.CloseAll([](RequestDeviceData* request) {
