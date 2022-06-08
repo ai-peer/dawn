@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df637638_d01b2ed0",
+        "filename": "generator/templates/dawn/wire/client/ApiProcs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-08T21:44:17Z",
+      "side": 1,
+      "message": "Ah, maybe ignore this suggestion actually... I think this would require changing all the ctors for the derived types to take the type enum also so probably doesn\u0027t accomplish much.",
+      "parentUuid": "d6c81b9c_256b3114",
+      "range": {
+        "startLine": 63,
+        "startChar": 24,
+        "endLine": 63,
+        "endChar": 129
+      },
+      "revId": "c915315dbc778a088fec46a0161adb507ec36ec3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ae8fa19_7b669036",
         "filename": "src/dawn/wire/client/ObjectAllocator.h",
         "patchSetId": 2
