@@ -16,6 +16,75 @@
       "message": "PTAL!",
       "revId": "c915315dbc778a088fec46a0161adb507ec36ec3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6c81b9c_256b3114",
+        "filename": "generator/templates/dawn/wire/client/ApiProcs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-08T21:39:27Z",
+      "side": 1,
+      "message": "Hmm, not sure if it\u0027s worth it (or work), but I think we could avoid having to pass the type if we add generated templates that map the types in the ObjectAllocators to the enums. Then in the ObjectAllocator header, we could use those templates to get the type? See [1] for where I imagine this would be.",
+      "range": {
+        "startLine": 63,
+        "startChar": 24,
+        "endLine": 63,
+        "endChar": 129
+      },
+      "revId": "c915315dbc778a088fec46a0161adb507ec36ec3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ae8fa19_7b669036",
+        "filename": "src/dawn/wire/client/ObjectAllocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-08T21:39:27Z",
+      "side": 1,
+      "message": "[1] After re-ordering the arguments in [2]:\n\n```\n  auto object \u003d std::make_unique\u003cT\u003e(id, ObjectToEnum\u003cT\u003e::type, std::forward\u003cArgs\u003e(args)...);\n```",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 75
+      },
+      "revId": "c915315dbc778a088fec46a0161adb507ec36ec3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "495cd7ba_2f545d5f",
+        "filename": "src/dawn/wire/client/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-08T21:39:27Z",
+      "side": 1,
+      "message": "[2] Re-order such that client is the last arg.",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 61
+      },
+      "revId": "c915315dbc778a088fec46a0161adb507ec36ec3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
