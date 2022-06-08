@@ -214,6 +214,10 @@ class WireClient;
 class WireServer;
 }  // namespace dawn::wire
 
+namespace dawn::native::opengl {
+class EGLFunctions;
+}  // namespace dawn::native::opengl
+
 void InitDawnEnd2EndTestEnvironment(int argc, char** argv);
 
 class DawnTestEnvironment : public testing::Environment {
@@ -275,6 +279,7 @@ class DawnTestEnvironment : public testing::Environment {
     std::unique_ptr<utils::PlatformDebugLogger> mPlatformDebugLogger;
     GLFWwindow* mOpenGLWindow;
     GLFWwindow* mOpenGLESWindow;
+    dawn::native::opengl::EGLFunctions* mEGLFunctions;
 };
 
 class DawnTestBase {
