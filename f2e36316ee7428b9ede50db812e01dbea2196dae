@@ -18,6 +18,92 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8968a7d_b7d0f19d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-08T08:52:52Z",
+      "side": 1,
+      "message": "A bunch of readability nits, but LGTM.",
+      "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f4d5ad1_691d1c51",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-08T08:52:52Z",
+      "side": 1,
+      "message": "nit: we (I) construct maps with `map[string]string{}`",
+      "range": {
+        "startLine": 235,
+        "startChar": 19,
+        "endLine": 235,
+        "endChar": 42
+      },
+      "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87ad8c52_f835350e",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-08T08:52:52Z",
+      "side": 1,
+      "message": "nit: when the function only returns an `error` it\u0027s more idiomatic to do:\n\n`if err :\u003d r.genWebTestSources(ctx, generatedFiles); err !\u003d nil {`",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 251,
+        "endChar": 16
+      },
+      "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b49fd15b_c7766fe9",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-08T08:52:52Z",
+      "side": 1,
+      "message": "nit: This is (even more) out of date now.\n\nShould probably say something like:\n\n```\nUpdate:\n• expectations.txt\n• ts_sources.txt\n• resource_files.txt\n• webtest .html files.\n```\n\nor something. Ideally it would only list the things it actually touched, but that is a fair bit of work and not for this CL.",
+      "range": {
+        "startLine": 429,
+        "startChar": 18,
+        "endLine": 429,
+        "endChar": 52
+      },
+      "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b05f86d8_a01bfa28",
@@ -41,6 +127,29 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c658362_176a4307",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-08T08:52:52Z",
+      "side": 1,
+      "message": "nit: could just `return filepath.Walk(`...",
+      "range": {
+        "startLine": 644,
+        "startChar": 1,
+        "endLine": 644,
+        "endChar": 7
+      },
+      "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b064678f_17cbba98",
@@ -59,6 +168,52 @@
         "startChar": 0,
         "endLine": 669,
         "endChar": 110
+      },
+      "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f7a04c6_3d6f1ecc",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-08T08:52:52Z",
+      "side": 1,
+      "message": "nit: you can use backticks to avoid the quoting:\n\n```\n`\\n  \u003cbase ref\u003d\"/gen/third_party/dawn/webgpu-cts/src/webgpu\" /\u003e`\n```",
+      "range": {
+        "startLine": 669,
+        "startChar": 29,
+        "endLine": 669,
+        "endChar": 95
+      },
+      "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05fd5a31_09b173f1",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-08T08:52:52Z",
+      "side": 1,
+      "message": "So this will update / add files, but do we want to also remove files that have been deleted?",
+      "range": {
+        "startLine": 671,
+        "startChar": 1,
+        "endLine": 671,
+        "endChar": 55
       },
       "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
