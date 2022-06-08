@@ -16,6 +16,7 @@
 
 #include <utility>
 
+#include "src/dawn/node/binding/Converter.h"
 #include "src/dawn/node/utils/Debug.h"
 
 namespace wgpu::binding {
@@ -29,12 +30,18 @@ void GPUQuerySet::destroy(Napi::Env) {
     query_set_.Destroy();
 }
 
-interop::GPUQueryType GPUQuerySet::getType(Napi::Env) {
-    UNIMPLEMENTED();
+interop::GPUQueryType GPUQuerySet::getType(Napi::Env env) {
+    interop::GPUQueryType result;
+
+    Converter conv(env);
+    bool success = conv(result, query_set_.GetType());
+    assert(success);
+
+    return result;
 }
 
 interop::GPUSize32 GPUQuerySet::getCount(Napi::Env) {
-    UNIMPLEMENTED();
+    return query_set_.GetCount();
 }
 
 std::string GPUQuerySet::getLabel(Napi::Env) {

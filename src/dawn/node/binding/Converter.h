@@ -245,6 +245,17 @@ class Converter {
 
     [[nodiscard]] bool Convert(wgpu::PipelineLayout& out, const interop::GPUAutoLayoutMode& in);
 
+    // Below are the various overloads of Convert() used to convert the Dawn types -> interop.
+    bool Convert(interop::GPUTextureDimension& out, wgpu::TextureDimension in);
+
+    bool Convert(interop::GPUTextureFormat& out, wgpu::TextureFormat in);
+
+    bool Convert(interop::GPUTextureUsageFlags& out, wgpu::TextureUsage in);
+
+    bool Convert(interop::GPUBufferUsageFlags& out, wgpu::BufferUsage in);
+
+    bool Convert(interop::GPUQueryType& out, wgpu::QueryType in);
+
     // std::string to C string
     inline bool Convert(const char*& out, const std::string& in) {
         out = in.c_str();

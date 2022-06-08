@@ -163,11 +163,17 @@ void GPUBuffer::destroy(Napi::Env) {
 }
 
 interop::GPUSize64 GPUBuffer::getSize(Napi::Env) {
-    UNIMPLEMENTED();
+    return buffer_.GetSize();
 }
 
-interop::GPUBufferUsageFlags GPUBuffer::getUsage(Napi::Env) {
-    UNIMPLEMENTED();
+interop::GPUBufferUsageFlags GPUBuffer::getUsage(Napi::Env env) {
+    interop::GPUBufferUsageFlags result;
+
+    Converter conv(env);
+    bool success = conv(result, buffer_.GetUsage());
+    assert(success);
+
+    return result;
 }
 
 void GPUBuffer::DetachMappings() {
