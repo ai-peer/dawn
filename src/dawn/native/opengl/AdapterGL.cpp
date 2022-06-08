@@ -14,11 +14,16 @@
 
 #include "dawn/native/opengl/AdapterGL.h"
 
+#include <EGL/egl.h>
+
+#include <memory>
 #include <string>
+#include <utility>
 
 #include "dawn/common/GPUInfo.h"
 #include "dawn/common/Log.h"
 #include "dawn/native/Instance.h"
+#include "dawn/native/opengl/ContextEGL.h"
 #include "dawn/native/opengl/DeviceGL.h"
 
 namespace dawn::native::opengl {
@@ -118,6 +123,9 @@ Adapter::Adapter(InstanceBase* instance, wgpu::BackendType backendType)
     : AdapterBase(instance, backendType) {}
 
 MaybeError Adapter::InitializeGLFunctions(void* (*getProc)(const char*)) {
+    if (GetBackendType() == wgpu::BackendType::OpenGLES) {
+        egl.Init(reinterpret_cast<PFNEGLGETPROCADDRESSPROC>(getProc));
+    }
     // Use getProc to populate the dispatch table
     return mFunctions.Initialize(getProc);
 }
@@ -254,7 +262,11 @@ MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
 ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor) {
     // There is no limit on the number of devices created from this adapter because they can
     // all share the same backing OpenGL context.
-    return Device::Create(this, descriptor, mFunctions);
+    std::unique_ptr<Device::Context> context;
+    if (GetBackendType() == wgpu::BackendType::OpenGLES) {
+        context = ContextEGL::Make(egl);
+    }
+    return Device::Create(this, descriptor, mFunctions, std::move(context));
 }
 
 }  // namespace dawn::native::opengl

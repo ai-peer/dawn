@@ -58,4 +58,9 @@ WGPUTexture WrapExternalEGLImage(WGPUDevice device,
     return ToAPI(texture);
 }
 
+void MakeCurrent(WGPUDevice device) {
+    Device* backendDevice = ToBackend(FromAPI(device));
+    backendDevice->MakeCurrent();
+}
+
 }  // namespace dawn::native::opengl

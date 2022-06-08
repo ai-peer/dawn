@@ -39,9 +39,15 @@ namespace dawn::native::opengl {
 
 class Device final : public DeviceBase {
   public:
+    class Context {
+      public:
+        virtual void MakeCurrent() = 0;
+        virtual ~Context() {}
+    };
     static ResultOrError<Ref<Device>> Create(AdapterBase* adapter,
                                              const DeviceDescriptor* descriptor,
-                                             const OpenGLFunctions& functions);
+                                             const OpenGLFunctions& functions,
+                                             std::unique_ptr<Context> context);
     ~Device() override;
 
     MaybeError Initialize(const DeviceDescriptor* descriptor);
@@ -56,6 +62,7 @@ class Device final : public DeviceBase {
     MaybeError ValidateEGLImageCanBeWrapped(const TextureDescriptor* descriptor, ::EGLImage image);
     TextureBase* CreateTextureWrappingEGLImage(const ExternalImageDescriptor* descriptor,
                                                ::EGLImage image);
+    void MakeCurrent();
 
     ResultOrError<Ref<CommandBufferBase>> CreateCommandBuffer(
         CommandEncoder* encoder,
@@ -83,7 +90,8 @@ class Device final : public DeviceBase {
   private:
     Device(AdapterBase* adapter,
            const DeviceDescriptor* descriptor,
-           const OpenGLFunctions& functions);
+           const OpenGLFunctions& functions,
+           std::unique_ptr<Context> context);
 
     ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) override;
@@ -124,6 +132,7 @@ class Device final : public DeviceBase {
     std::queue<std::pair<GLsync, ExecutionSerial>> mFencesInFlight;
 
     GLFormatTable mFormatTable;
+    std::unique_ptr<Context> mContext;
 };
 
 }  // namespace dawn::native::opengl

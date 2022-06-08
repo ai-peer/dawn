@@ -14,10 +14,17 @@
 
 #include "dawn/native/opengl/BackendGL.h"
 
+#include <memory>
 #include <utility>
 
+#include "dawn/common/SystemUtils.h"
+#include "dawn/native/Instance.h"
 #include "dawn/native/OpenGLBackend.h"
 #include "dawn/native/opengl/AdapterGL.h"
+#include "dawn/native/opengl/ContextEGL.h"
+#ifdef DAWN_ENABLE_BACKEND_OPENGLES
+#include "dawn/native/opengl/EGLFunctions.h"
+#endif
 
 namespace dawn::native::opengl {
 
@@ -27,8 +34,38 @@ Backend::Backend(InstanceBase* instance, wgpu::BackendType backendType)
     : BackendConnection(instance, backendType) {}
 
 std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters() {
-    // The OpenGL backend needs at least "getProcAddress" to discover an adapter.
-    return {};
+    std::vector<Ref<AdapterBase>> adapters;
+#ifdef DAWN_ENABLE_BACKEND_OPENGLES
+    if (GetType() == wgpu::BackendType::OpenGLES) {
+#if DAWN_PLATFORM_IS(WINDOWS)
+        const char* eglLib = "libEGL.dll";
+#elif DAWN_PLATFORM_IS(MACOS)
+        const char* eglLib = "libEGL.dylib";
+#else
+        const char* eglLib = "libEGL.so";
+#endif
+        DynamicLib libEGL;
+        if (!libEGL.Open(eglLib)) {
+            return {};
+        }
+
+        AdapterDiscoveryOptionsES options;
+        options.getProc =
+            reinterpret_cast<void* (*)(const char*)>(libEGL.GetProc("eglGetProcAddress"));
+        if (!options.getProc) {
+            return {};
+        }
+
+        auto result = DiscoverAdapters(&options);
+        if (result.IsError()) {
+            GetInstance()->ConsumedError(result.AcquireError());
+        } else {
+            auto value = result.AcquireSuccess();
+            adapters.insert(adapters.end(), value.begin(), value.end());
+        }
+    }
+#endif
+    return adapters;
 }
 
 ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
@@ -45,6 +82,15 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
 
     Ref<Adapter> adapter = AcquireRef(
         new Adapter(GetInstance(), static_cast<wgpu::BackendType>(optionsBase->backendType)));
+    std::unique_ptr<Device::Context> context;
+    if (GetType() == wgpu::BackendType::OpenGLES) {
+        EGLFunctions egl;
+        egl.Init(reinterpret_cast<PFNEGLGETPROCADDRESSPROC>(options->getProc));
+        context = ContextEGL::Make(egl);
+        if (context) {
+            context->MakeCurrent();
+        }
+    }
     DAWN_TRY(adapter->InitializeGLFunctions(options->getProc));
     DAWN_TRY(adapter->Initialize());
 

@@ -415,6 +415,8 @@ if (DAWN_ENABLE_OPENGL)
         "opengl/CommandBufferGL.h"
         "opengl/ComputePipelineGL.cpp"
         "opengl/ComputePipelineGL.h"
+        "opengl/ContextEGL.cpp"
+        "opengl/ContextEGL.h"
         "opengl/DeviceGL.cpp"
         "opengl/DeviceGL.h"
         "opengl/Forward.h"

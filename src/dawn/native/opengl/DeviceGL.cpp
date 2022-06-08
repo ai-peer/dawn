@@ -37,16 +37,18 @@ namespace dawn::native::opengl {
 // static
 ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
                                           const DeviceDescriptor* descriptor,
-                                          const OpenGLFunctions& functions) {
-    Ref<Device> device = AcquireRef(new Device(adapter, descriptor, functions));
+                                          const OpenGLFunctions& functions,
+                                          std::unique_ptr<Context> context) {
+    Ref<Device> device = AcquireRef(new Device(adapter, descriptor, functions, std::move(context)));
     DAWN_TRY(device->Initialize(descriptor));
     return device;
 }
 
 Device::Device(AdapterBase* adapter,
                const DeviceDescriptor* descriptor,
-               const OpenGLFunctions& functions)
-    : DeviceBase(adapter, descriptor), gl(functions) {}
+               const OpenGLFunctions& functions,
+               std::unique_ptr<Context> context)
+    : DeviceBase(adapter, descriptor), gl(functions), mContext(std::move(context)) {}
 
 Device::~Device() {
     Destroy();
@@ -256,6 +258,10 @@ TextureBase* Device::CreateTextureWrappingEGLImage(const ExternalImageDescriptor
     // TODO(dawn:803): Validate the OpenGL texture format from the EGLImage against the format
     // in the passed-in TextureDescriptor.
     return new Texture(this, textureDescriptor, tex, TextureBase::TextureState::OwnedInternal);
+}
+
+void Device::MakeCurrent() {
+    mContext->MakeCurrent();
 }
 
 MaybeError Device::TickImpl() {
