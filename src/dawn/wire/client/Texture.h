@@ -27,7 +27,7 @@ class Texture final : public ObjectBase {
   public:
     static WGPUTexture Create(Device* device, const WGPUTextureDescriptor* descriptor);
 
-    Texture(uint32_t id, Client* client);
+    Texture(uint32_t id, Device* device, const WGPUTextureDescriptor* descriptor);
     ~Texture();
 
     // Note that these values can be arbitrary since they aren't validated in the wire client.

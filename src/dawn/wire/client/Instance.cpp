@@ -43,7 +43,7 @@ void Instance::RequestAdapter(const WGPURequestAdapterOptions* options,
         return;
     }
 
-    auto* allocation = client->AdapterAllocator().New(client);
+    auto* allocation = client->AdapterAllocator().New(this);
     uint64_t serial = mRequestAdapterRequests.Add({callback, allocation->object->id, userdata});
 
     InstanceRequestAdapterCmd cmd;

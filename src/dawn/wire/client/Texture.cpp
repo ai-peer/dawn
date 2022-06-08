@@ -21,17 +21,8 @@ namespace dawn::wire::client {
 
 // static
 WGPUTexture Texture::Create(Device* device, const WGPUTextureDescriptor* descriptor) {
-    Client* wireClient = device->client;
-    auto* textureObjectAndSerial = wireClient->TextureAllocator().New(wireClient);
-
-    // Copy over descriptor data for reflection.
+    auto* textureObjectAndSerial = device->client->TextureAllocator().New(device, descriptor);
     Texture* texture = textureObjectAndSerial->object.get();
-    texture->mSize = descriptor->size;
-    texture->mMipLevelCount = descriptor->mipLevelCount;
-    texture->mSampleCount = descriptor->sampleCount;
-    texture->mDimension = descriptor->dimension;
-    texture->mFormat = descriptor->format;
-    texture->mUsage = static_cast<WGPUTextureUsage>(descriptor->usage);
 
     // Send the Device::CreateTexture command without modifications.
     DeviceCreateTextureCmd cmd;
@@ -39,13 +30,20 @@ WGPUTexture Texture::Create(Device* device, const WGPUTextureDescriptor* descrip
     cmd.selfId = device->id;
     cmd.descriptor = descriptor;
     cmd.result = ObjectHandle{texture->id, textureObjectAndSerial->generation};
-    wireClient->SerializeCommand(cmd);
+    device->client->SerializeCommand(cmd);
 
     return ToAPI(texture);
 }
 
-Texture::Texture(uint32_t idIn, Client* clientIn)
-    : ObjectBase(idIn, clientIn, ObjectType::Texture) {}
+Texture::Texture(uint32_t idIn, Device* device, const WGPUTextureDescriptor* descriptor)
+    : ObjectBase(idIn, device->client, ObjectType::Texture),
+      mSize(descriptor->size),
+      mMipLevelCount(descriptor->mipLevelCount),
+      mSampleCount(descriptor->sampleCount),
+      mDimension(descriptor->dimension),
+      mFormat(descriptor->format),
+      mUsage(static_cast<WGPUTextureUsage>(descriptor->usage)) {}
+
 Texture::~Texture() = default;
 
 uint32_t Texture::GetWidth() const {
