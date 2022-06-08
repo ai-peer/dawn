@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "691113e9_8c73a94b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-08T13:28:10Z",
+      "side": 1,
+      "message": "Sorry for the CTS and Kokoro issues, I am dealing with them.",
+      "revId": "9143647f790420296bb5dd6b4994b5c7e9967bbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b0a4241_2d09c273",
@@ -14,6 +31,30 @@
       "writtenOn": "2022-06-08T12:12:48Z",
       "side": 1,
       "message": "Shouldn\u0027t this be `0x0.ff8p-14`?",
+      "range": {
+        "startLine": 58,
+        "startChar": 10,
+        "endLine": 58,
+        "endChar": 21
+      },
+      "revId": "9143647f790420296bb5dd6b4994b5c7e9967bbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "453ce0d0_61a72c17",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-08T13:28:10Z",
+      "side": 1,
+      "message": "Oh, it should be 0x0.ffcp-14 or 0x1.ff8p-15.",
+      "parentUuid": "1b0a4241_2d09c273",
       "range": {
         "startLine": 58,
         "startChar": 10,
@@ -47,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f54c25b_06b70f91",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-08T13:28:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "921ea42b_f0d182c1",
+      "range": {
+        "startLine": 75,
+        "startChar": 19,
+        "endLine": 75,
+        "endChar": 28
+      },
+      "revId": "9143647f790420296bb5dd6b4994b5c7e9967bbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84b692ce_ba0f9b57",
@@ -60,6 +125,30 @@
       "writtenOn": "2022-06-08T12:12:48Z",
       "side": 1,
       "message": "`mantissa` here and below.",
+      "range": {
+        "startLine": 76,
+        "startChar": 50,
+        "endLine": 76,
+        "endChar": 59
+      },
+      "revId": "9143647f790420296bb5dd6b4994b5c7e9967bbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a52e59a_eff5d5ef",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-08T13:28:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84b692ce_ba0f9b57",
       "range": {
         "startLine": 76,
         "startChar": 50,
@@ -89,6 +178,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ce2922b_38766636",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-08T13:28:10Z",
+      "side": 1,
+      "message": "If we are going to actually store the quantized result in a `f16` type, i.e. store the quantized subnormal mantissa into the lower 10 bits of a certain 16 bits type, than we do need the shifting (and I implement it that way at first). \nThen I realized that we still storage the quantized *value* as float, which means that we are still going to shit left again to put the 10 bits of mantissa (actually 9 bits, as the leading 1 of subnormal mantissa shall be omitted in normal floating point number) on the high bits of f32\u0027s mantissa, leave the rest mantissa bits 0, and set the exponent correctly (or to say, it is already correct).\n\nIn other words, when quantize f32 to f16 (result in a 10 bits mantissa), we could do the following steps:\n1. Extract the 23 mantissa bits in f32, add the omitted leading bit 1, then do the corresponding shifting right, getting 10 mantissa bits with proper leading 0s and 1. \n2. Since we store the quantized result (value!) in a f32, we should find a f32 representation of this value. And subnormal f16 values are always normal f32 values, so what we do is omit the leading 1 again, shifting left to put the second significant bit of the 10 mantissa bits we get in step 1 into the most significant mantissa bit of f32 and so on.\nSo we can see that we just shift right and then shift left the mantissa bits of f32 (in the same bit counts, I am trying to make it clear), which is identical to discard the same number of least significant bits.\n\nFor example, let\u0027s try `0x1.2468fap-19`. For subnormal f16, it must have a form of `0x0.xxxp-14`, where `xxx` is the mantissa part and only the 10 most significant bits are used (that is, `xxx` must be ended with 0, 4, 8, or c). \nFor step 1, we transform the representation of value `0x1.2468fap-19` \u003d `0x0.92347dp-18` (here is a leading 1 moved into mantissa) \u003d `0x0.092347dp-14` (here is shifting right for 4 bits, but keep the overflow bits unremoved) -\u003e `0x0.090p-14` (here remove the overflow bits, only keep the 10 most significant mantissa bits), then we have the quantized subnormal f16 value `0x0.090p-14` in step 1. \nFor step 2, we transform it back to a common form, `0x0.090p-14` \u003d `0x0.90p-18` (shifting left for 4 bits) \u003d `0x1.20p-19` (move out the leading bit 1 in mantissa), and get a normal f32 number `0x1.20p-19`, which is identical to the quantized value `0x0.090p-14`. Compared with the original f32 value `0x1.2468fap-19`, we can see it is equal to just discard 13(f32\u0027s 23 mantissa bits - f16\u0027s 10 mantissa bits)+1(leading bit 1)+4(shifting right)\u003d18 least significant mantissa bits. Following the same step we can see `0x1.2c68fap-19` is quantized into `0x1.28p-19`.",
+      "parentUuid": "b5ae1f71_9b7483dd",
+      "revId": "9143647f790420296bb5dd6b4994b5c7e9967bbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d17bc21_295d605f",
         "filename": "src/tint/number_test.cc",
         "patchSetId": 3
@@ -100,6 +207,30 @@
       "writtenOn": "2022-06-08T12:12:48Z",
       "side": 1,
       "message": "`quantization`",
+      "range": {
+        "startLine": 145,
+        "startChar": 26,
+        "endLine": 145,
+        "endChar": 40
+      },
+      "revId": "9143647f790420296bb5dd6b4994b5c7e9967bbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e5c653b_f7f6743e",
+        "filename": "src/tint/number_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-08T13:28:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d17bc21_295d605f",
       "range": {
         "startLine": 145,
         "startChar": 26,
