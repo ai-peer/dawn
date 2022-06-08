@@ -23,9 +23,11 @@
 
 namespace dawn::wire::client {
 
+class Device;
+
 class Queue final : public ObjectBase {
   public:
-    Queue(uint32_t id, Client* client);
+    Queue(uint32_t id, Device* client);
     ~Queue();
 
     bool OnWorkDoneCallback(uint64_t requestSerial, WGPUQueueWorkDoneStatus status);

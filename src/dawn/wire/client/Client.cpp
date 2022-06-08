@@ -85,8 +85,23 @@ void Client::TrackObject(ObjectBase* object, ObjectType type) {
     mObjects[type].Append(object);
 }
 
-ReservedTexture Client::ReserveTexture(WGPUDevice device) {
-    auto* allocation = TextureAllocator().New(this);
+ReservedTexture Client::ReserveTexture(WGPUDevice device, const WGPUTextureDescriptor* descriptor) {
+    WGPUTextureDescriptor defaultDescriptor = {};
+
+    // Make a fake descriptor so that data returned by wgpu::Texture getters isn't garbage.
+    // TODO(dawn:1451): Remove this defaulting once the descriptor is required for ReserveTexture.
+    if (descriptor == nullptr) {
+        defaultDescriptor.size = {1, 1, 1};
+        defaultDescriptor.mipLevelCount = 1;
+        defaultDescriptor.sampleCount = 1;
+        defaultDescriptor.dimension = WGPUTextureDimension_1D;
+        defaultDescriptor.format = WGPUTextureFormat_RGBA8Unorm;
+        defaultDescriptor.usage = 0;
+
+        descriptor = &defaultDescriptor;
+    }
+
+    auto* allocation = TextureAllocator().New(FromAPI(device), descriptor);
 
     ReservedTexture result;
     result.texture = ToAPI(allocation->object.get());

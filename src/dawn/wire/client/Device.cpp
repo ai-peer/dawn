@@ -219,7 +219,7 @@ WGPUQueue Device::GetQueue() {
     // on construction.
     if (mQueue == nullptr) {
         // Get the primary queue for this device.
-        auto* allocation = client->QueueAllocator().New(client);
+        auto* allocation = client->QueueAllocator().New(this);
         mQueue = allocation->object.get();
 
         DeviceGetQueueCmd cmd;
