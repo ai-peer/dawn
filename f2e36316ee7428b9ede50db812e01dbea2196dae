@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d66dba18_8ff3b131",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-08T02:04:30Z",
+      "side": 1,
+      "message": "Ben, PTAL!\nThis generates the changes in https://dawn-review.googlesource.com/c/dawn/+/93040",
+      "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b05f86d8_a01bfa28",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-08T02:04:30Z",
+      "side": 1,
+      "message": "reftest -\u003e webtest",
+      "range": {
+        "startLine": 641,
+        "startChar": 50,
+        "endLine": 641,
+        "endChar": 57
+      },
+      "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b064678f_17cbba98",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-08T02:04:30Z",
+      "side": 1,
+      "message": "not sure if this is the correct path yet - but I\u0027d like to start generating these files so I can test pointing Chromium at it.",
+      "range": {
+        "startLine": 669,
+        "startChar": 0,
+        "endLine": 669,
+        "endChar": 110
+      },
+      "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
