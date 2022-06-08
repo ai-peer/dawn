@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d42505c3_37b23195",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-08T13:15:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6eed47c_e3bad33f",
+      "range": {
+        "startLine": 945,
+        "startChar": 0,
+        "endLine": 945,
+        "endChar": 59
+      },
+      "revId": "5b9ecef3e26b90a12a1d7435c425551f98fe03c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "613dfd45_cc4e358b",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-06-03T20:45:54Z",
       "side": 1,
       "message": "nit: could use a comment that this also tests the masking of internal usages. (and, for that, using QueryResolve might be more obvious that internal usages are added)\n\nif not wire, we could also cast and that kInternalStorageUsage is actually there - but that could become a bit change-detecting.",
+      "revId": "5b9ecef3e26b90a12a1d7435c425551f98fe03c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd02373c_63569205",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-08T13:15:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "613dfd45_cc4e358b",
       "revId": "5b9ecef3e26b90a12a1d7435c425551f98fe03c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
