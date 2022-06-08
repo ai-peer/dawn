@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b0a4241_2d09c273",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-08T12:12:48Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be `0x0.ff8p-14`?",
+      "range": {
+        "startLine": 58,
+        "startChar": 10,
+        "endLine": 58,
+        "endChar": 21
+      },
+      "revId": "9143647f790420296bb5dd6b4994b5c7e9967bbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "921ea42b_f0d182c1",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-08T12:12:48Z",
+      "side": 1,
+      "message": "`quantizing`",
+      "range": {
+        "startLine": 75,
+        "startChar": 19,
+        "endLine": 75,
+        "endChar": 28
+      },
+      "revId": "9143647f790420296bb5dd6b4994b5c7e9967bbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84b692ce_ba0f9b57",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-08T12:12:48Z",
+      "side": 1,
+      "message": "`mantissa` here and below.",
+      "range": {
+        "startLine": 76,
+        "startChar": 50,
+        "endLine": 76,
+        "endChar": 59
+      },
+      "revId": "9143647f790420296bb5dd6b4994b5c7e9967bbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5ae1f71_9b7483dd",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-08T12:12:48Z",
+      "side": 1,
+      "message": "The comment above is great, and aligns with what I\u0027m seeing with https://evanw.github.io/float-toy/.\nHowever - I don\u0027t see how this can be implemented with just a mask of the LSBs.\nDon\u0027t we need to extract the mantissa bits from the `f32`, and then shift based on the exponent?",
+      "revId": "9143647f790420296bb5dd6b4994b5c7e9967bbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d17bc21_295d605f",
+        "filename": "src/tint/number_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-08T12:12:48Z",
+      "side": 1,
+      "message": "`quantization`",
+      "range": {
+        "startLine": 145,
+        "startChar": 26,
+        "endLine": 145,
+        "endChar": 40
+      },
+      "revId": "9143647f790420296bb5dd6b4994b5c7e9967bbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
