@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ba80258_c1fc3991",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-06-08T22:03:32Z",
+      "side": 1,
+      "message": "Shaobo: FYI - this is the Dawn part of the fence changes we discussed previously - I\u0027ll also work on the Chromium side shared image backing changes required for this, but not on any media specific changes at the moment - the primary objective is to make concurrent read for RGB images work so that stuff like toDataURL in an async task doesn\u0027t cause issues.",
+      "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
