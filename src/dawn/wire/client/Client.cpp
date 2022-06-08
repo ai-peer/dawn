@@ -81,6 +81,10 @@ void Client::DestroyAllObjects() {
     }
 }
 
+void Client::TrackObject(ObjectBase* object, ObjectType type) {
+    mObjects[type].Append(object);
+}
+
 ReservedTexture Client::ReserveTexture(WGPUDevice device) {
     auto* allocation = TextureAllocator().New(this);
 
@@ -94,7 +98,7 @@ ReservedTexture Client::ReserveTexture(WGPUDevice device) {
 }
 
 ReservedSwapChain Client::ReserveSwapChain(WGPUDevice device) {
-    auto* allocation = SwapChainAllocator().New(this);
+    auto* allocation = SwapChainAllocator().New(this, ObjectType::SwapChain);
 
     ReservedSwapChain result;
     result.swapchain = ToAPI(allocation->object.get());

@@ -19,7 +19,7 @@
 
 namespace dawn::wire::client {
 
-Queue::Queue(Client* c, uint32_t r, uint32_t i) : ObjectBase(c, r, i) {}
+Queue::Queue(uint32_t idIn, Client* clientIn) : ObjectBase(idIn, clientIn, ObjectType::Queue) {}
 
 Queue::~Queue() {
     ClearAllCallbacks(WGPUQueueWorkDoneStatus_Unknown);
