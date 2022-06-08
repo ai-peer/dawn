@@ -293,6 +293,30 @@
       },
       "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80d89c8f_0c7af1b3",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-08T22:25:04Z",
+      "side": 1,
+      "message": "Also, now that it looks like this, I actually think generating the code via a JSON is much more equivalent. Before, the benefit was that we were setting the fields in-line, but if we need to explicitly specify the members anyways, a JSON would work fine (I think?).",
+      "parentUuid": "2f9ef93a_c24f1aed",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 27
+      },
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
