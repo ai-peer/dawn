@@ -74,12 +74,8 @@ WGPUBuffer Buffer::Create(Device* device, const WGPUBufferDescriptor* descriptor
     // Create the buffer and send the creation command.
     // This must happen after any potential device->CreateErrorBuffer()
     // as server expects allocating ids to be monotonically increasing
-    auto* bufferObjectAndSerial = wireClient->BufferAllocator().New(wireClient);
+    auto* bufferObjectAndSerial = wireClient->BufferAllocator().New(device, descriptor);
     Buffer* buffer = bufferObjectAndSerial->object.get();
-    buffer->mDevice = device;
-    buffer->mDeviceIsAlive = device->GetAliveWeakPtr();
-    buffer->mSize = descriptor->size;
-    buffer->mUsage = static_cast<WGPUBufferUsage>(descriptor->usage);
     buffer->mDestructWriteHandleOnUnmap = false;
 
     if (descriptor->mappedAtCreation) {
@@ -126,11 +122,7 @@ WGPUBuffer Buffer::Create(Device* device, const WGPUBufferDescriptor* descriptor
 
 // static
 WGPUBuffer Buffer::CreateError(Device* device, const WGPUBufferDescriptor* descriptor) {
-    auto* allocation = device->client->BufferAllocator().New(device->client);
-    allocation->object->mDevice = device;
-    allocation->object->mDeviceIsAlive = device->GetAliveWeakPtr();
-    allocation->object->mSize = descriptor->size;
-    allocation->object->mUsage = static_cast<WGPUBufferUsage>(descriptor->usage);
+    auto* allocation = device->client->BufferAllocator().New(device, descriptor);
 
     DeviceCreateErrorBufferCmd cmd;
     cmd.self = ToAPI(device);
@@ -140,7 +132,11 @@ WGPUBuffer Buffer::CreateError(Device* device, const WGPUBufferDescriptor* descr
     return ToAPI(allocation->object.get());
 }
 
-Buffer::Buffer(uint32_t idIn, Client* clientIn) : ObjectBase(idIn, clientIn, ObjectType::Buffer) {}
+Buffer::Buffer(uint32_t idIn, Device* device, const WGPUBufferDescriptor* descriptor)
+    : ObjectBase(idIn, device->client, ObjectType::Buffer),
+      mSize(descriptor->size),
+      mUsage(static_cast<WGPUBufferUsage>(descriptor->usage)),
+      mDeviceIsAlive(device->GetAliveWeakPtr()) {}
 
 Buffer::~Buffer() {
     ClearAllCallbacks(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);

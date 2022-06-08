@@ -25,9 +25,11 @@
 
 namespace dawn::wire::client {
 
+class Instance;
+
 class Adapter final : public ObjectBase {
   public:
-    Adapter(uint32_t id, Client* client);
+    Adapter(uint32_t id, Instance* instance);
     ~Adapter();
 
     void CancelCallbacksForDisconnect() override;

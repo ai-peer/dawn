@@ -21,13 +21,8 @@ namespace dawn::wire::client {
 
 // static
 WGPUQuerySet QuerySet::Create(Device* device, const WGPUQuerySetDescriptor* descriptor) {
-    Client* wireClient = device->client;
-    auto* objectAndSerial = wireClient->QuerySetAllocator().New(wireClient);
-
-    // Copy over descriptor data for reflection.
+    auto* objectAndSerial = device->client->QuerySetAllocator().New(device, descriptor);
     QuerySet* querySet = objectAndSerial->object.get();
-    querySet->mType = descriptor->type;
-    querySet->mCount = descriptor->count;
 
     // Send the Device::CreateQuerySet command without modifications.
     DeviceCreateQuerySetCmd cmd;
@@ -35,13 +30,15 @@ WGPUQuerySet QuerySet::Create(Device* device, const WGPUQuerySetDescriptor* desc
     cmd.selfId = device->id;
     cmd.descriptor = descriptor;
     cmd.result = ObjectHandle{querySet->id, objectAndSerial->generation};
-    wireClient->SerializeCommand(cmd);
+    device->client->SerializeCommand(cmd);
 
     return ToAPI(querySet);
 }
 
-QuerySet::QuerySet(uint32_t idIn, Client* clientIn)
-    : ObjectBase(idIn, clientIn, ObjectType::QuerySet) {}
+QuerySet::QuerySet(uint32_t idIn, Device* device, const WGPUQuerySetDescriptor* descriptor)
+    : ObjectBase(idIn, device->client, ObjectType::QuerySet),
+      mType(descriptor->type),
+      mCount(descriptor->count) {}
 QuerySet::~QuerySet() = default;
 
 WGPUQueryType QuerySet::GetType() const {
