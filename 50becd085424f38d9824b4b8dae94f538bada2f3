@@ -33,6 +33,24 @@
       "message": "nit: you\u0027ll need to update CMakeLists.txt as well",
       "revId": "50becd085424f38d9824b4b8dae94f538bada2f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4829ae7b_6ee6dd84",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-08T23:05:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2aa73d95_ac33b71b",
+      "revId": "50becd085424f38d9824b4b8dae94f538bada2f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
