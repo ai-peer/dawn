@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3299cc3a_e455aca1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-06-08T18:02:54Z",
+      "side": 1,
+      "message": "I took some time to trace through your examples.\nI agree with the high level concept that you can store denormalized f16s as floats precisely and that you should be able to achieve this via massaging the bits. I get lost in understanding the specific bit banging that is going on, but is sounds like David has a more solid grasp on this, so I will defer to him.",
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e24b15c_5f670e5a",
