@@ -50,6 +50,24 @@
       "message": "nit: Aren\u0027t all multisampled formats supposed to support rendering? so this check is redundant?",
       "revId": "116c51349c456465715f8bfd92cce3cadf6e425d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0be09dd_3b443411",
+        "filename": "src/dawn/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-06-08T07:08:51Z",
+      "side": 1,
+      "message": "No. According to the SPEC(https://gpuweb.github.io/gpuweb/#plain-color-formats), below formats support multisampling but don\u0027t support rendering:\n- r8snorm\n- rg8snorm\n- rgba8snorm\n- rg11b10ufloat",
+      "parentUuid": "f648a295_e585645b",
+      "revId": "116c51349c456465715f8bfd92cce3cadf6e425d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
