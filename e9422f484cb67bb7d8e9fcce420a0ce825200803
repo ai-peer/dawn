@@ -1,0 +1,233 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e4b5adf_8d44ef82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-08T17:07:18Z",
+      "side": 1,
+      "message": "I think there is one bug, in detecting unrepresentable number with h-suffix.\n\nThe quantization algorithm is very tricky. Please update the comments to include the further explanation given in the code review reply.",
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e24b15c_5f670e5a",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-08T17:07:18Z",
+      "side": 1,
+      "message": "nit: Please parenthesize this:\n   (2^-14)*(2^-10)*1023",
+      "range": {
+        "startLine": 58,
+        "startChar": 43,
+        "endLine": 58,
+        "endChar": 59
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a214334b_abe88c70",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-08T17:07:18Z",
+      "side": 1,
+      "message": "nit: Please parnethesize:   (2^-14)*(2^-10)",
+      "range": {
+        "startLine": 60,
+        "startChar": 7,
+        "endLine": 60,
+        "endChar": 19
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54f496ce_bf83b1e3",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-08T17:07:18Z",
+      "side": 1,
+      "message": "You could calculate biased_exponent_original here, explain its possible values:\n\n  f32 exponent bias is 127\n  f16 exponent bias is 15.\n  So for a denormal f16 number, its f16 biased exponent is 0, and therefore\n  its biased exponent in f32 is 127-15, or 112.\n  Therefore we can break down the cases like this, based on the f32 biased exponent:\n  \n    more than 112:  value is normal in f16\n    112 or less:  value is denormal or zero in f16",
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0863378_86b1c8b2",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-08T17:07:18Z",
+      "side": 1,
+      "message": "nit:  Alternate:  we find all 0s where the mantissa bits of f16 mapped to where they come from in f32.\n\n   0 \u003d\u003d (u32 \u0026 ((0x3ff) \u003c\u003c (23-10)))\n   \nMaybe that\u0027s less readable. :-)",
+      "range": {
+        "startLine": 70,
+        "startChar": 12,
+        "endLine": 70,
+        "endChar": 51
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8beb1406_f63341e0",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-08T17:07:18Z",
+      "side": 1,
+      "message": "Explain the range of possible values here, something like this:\n\nWe know the original f32 value is normal, so its biased exponent is more than 0.\n\nFor f16, the exponent bias is 15, so 0 recorded exponent is actually an exponent of -15.\nFor f32, the exponent bias is 127, so the biased representation of exponent -15 is 127-15 \u003d 112.\n\nThe mantissa of a subnormal f16 is 10 bits wide.\n\nbiggest f16 subnormal:\n    f16 (as fields):  (s,0,0x3ff)   as f32: (s,112, 1023 \u003c\u003c (23-10))\n  \nsmallest (f16 mantissa shifted right 9 bit positions):\n    f16 (as fields):  (s,0,0x001)   as f32: (s,112-9, 1 \u003c\u003c (23-10))  \n                                            (s,  103, 1 \u003c\u003c (23-10))",
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe814052_9c2370c8",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-08T17:07:18Z",
+      "side": 1,
+      "message": "When I see this subtraction, I worry that the actual result will go negative, and you would get a nonsense result.\n\nBut we know biased_exponent_original is at most 112.  But I had to write out the cases. Eventually I wrote out the explanation in my comment at line 61, and 74.",
+      "range": {
+        "startLine": 84,
+        "startChar": 21,
+        "endLine": 84,
+        "endChar": 67
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af8e8b6f_a3ec7200",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-08T17:07:18Z",
+      "side": 1,
+      "message": "Please assert that discard_bits is between 14 and 23.\nThat helps me see that this shift will not overflow, and the subtraction by 1 will not underflow.",
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "422ca59d_307f07d1",
+        "filename": "src/tint/number_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-08T17:07:18Z",
+      "side": 1,
+      "message": "This confused me.  This is one f32-based ULP above 1p-14.\nI think it needs a comment to say so.  At first I thought the ULP was in terms of f16.",
+      "range": {
+        "startLine": 148,
+        "startChar": 43,
+        "endLine": 148,
+        "endChar": 50
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b7e79a4_5497acb6",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-08T17:07:18Z",
+      "side": 1,
+      "message": "nit: Please parenthesize this last ternary expression.",
+      "range": {
+        "startLine": 667,
+        "startChar": 50,
+        "endLine": 667,
+        "endChar": 89
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "184e2646_6d3a864a",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-08T17:07:18Z",
+      "side": 1,
+      "message": "This should have 3 instead of 2 here.\n\nPlease add a test for cases where the bottom 42 bits are: \n   1 \u003c\u003c 41\n   1 \u003c\u003c 40\n   \nand if you don\u0027t have it, then also a case for:\n   1 \u003c\u003c 0",
+      "range": {
+        "startLine": 698,
+        "startChar": 27,
+        "endLine": 698,
+        "endChar": 28
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

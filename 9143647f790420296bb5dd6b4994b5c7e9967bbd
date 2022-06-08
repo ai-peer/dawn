@@ -219,6 +219,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "487c486b_39b866bc",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-08T17:07:18Z",
+      "side": 1,
+      "message": "Your first two paragraphs in your reply here are very helpful, particularly the facts that:\n- denormal f16 is normal in f32\n- the implied significand 1 bit therefore already present, and will be left untouched\n\nPlease copy the two paragraphs into the code comments.",
+      "parentUuid": "3ce2922b_38766636",
+      "revId": "9143647f790420296bb5dd6b4994b5c7e9967bbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d17bc21_295d605f",
         "filename": "src/tint/number_test.cc",
         "patchSetId": 3
