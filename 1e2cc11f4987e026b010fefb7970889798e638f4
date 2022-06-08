@@ -16,6 +16,23 @@
       "message": "+cc Shrek fyi since you worked on this very recently",
       "revId": "1e2cc11f4987e026b010fefb7970889798e638f4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d6dc8a4_9e55b92b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-08T04:34:59Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1e2cc11f4987e026b010fefb7970889798e638f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
