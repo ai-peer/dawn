@@ -282,6 +282,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10d0395e_cdc3e3e5",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-08T15:27:20Z",
+      "side": 1,
+      "message": "Gotcha, TIL.",
+      "parentUuid": "8e19ad41_5c3c9a4b",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "930ad10d_f5ac4621",
@@ -536,6 +554,24 @@
       "side": 1,
       "message": "can\u0027t define a template inside the inner scope of another function",
       "parentUuid": "175098ae_c03e50b4",
+      "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e70db8df_7f6c5466",
+        "filename": "src/dawn/tests/unittests/native/CacheRequestTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-08T15:27:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ab5cbdde_8177228e",
       "revId": "e6ed9852c06d5355ec460a95244d834a7703b312",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
