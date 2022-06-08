@@ -201,7 +201,7 @@ struct Number<detail::NumberKindF16> {
     static constexpr type kLowest = -65504.0f;
 
     /// Smallest positive normal value of this type.
-    static constexpr type kSmallest = 0.00006103515625f;  // 2⁻¹⁴
+    static constexpr type kSmallest = 0x1p-14f;  // 2⁻¹⁴
 
     /// Constructor. The value is zero-initialized.
     Number() = default;
