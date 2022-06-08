@@ -343,12 +343,16 @@ Token Lexer::try_float() {
     }
 
     bool has_f_suffix = false;
+    bool has_h_suffix = false;
     if (end < length() && matches(end, "f")) {
         end++;
         has_f_suffix = true;
+    } else if (end < length() && matches(end, "h")) {
+        end++;
+        has_h_suffix = true;
     }
 
-    if (!has_point && !has_exponent && !has_f_suffix) {
+    if (!has_point && !has_exponent && !has_f_suffix && !has_h_suffix) {
         // If it only has digits then it's an integer.
         return {};
     }
@@ -366,6 +370,14 @@ Token Lexer::try_float() {
             return {Token::Type::kFloatLiteral_F, source, static_cast<double>(f.Get())};
         } else {
             return {Token::Type::kError, source, "value cannot be represented as 'f32'"};
+        }
+    }
+
+    if (has_h_suffix) {
+        if (auto f = CheckedConvert<f16>(AFloat(value))) {
+            return {Token::Type::kFloatLiteral_H, source, static_cast<double>(f.Get())};
+        } else {
+            return {Token::Type::kError, source, "value cannot be represented as 'f16'"};
         }
     }
 
@@ -547,6 +559,7 @@ Token Lexer::try_hex_float() {
     int64_t exponent_sign = 1;
     // If the 'p' part is present, the rest of the exponent must exist.
     bool has_f_suffix = false;
+    bool has_h_suffix = false;
     if (has_exponent) {
         // Parse the rest of the exponent.
         // (+|-)?
@@ -574,11 +587,14 @@ Token Lexer::try_hex_float() {
             end++;
         }
 
-        // Parse optional 'f' suffix.  For a hex float, it can only exist
+        // Parse optional 'f' or 'h' suffix.  For a hex float, it can only exist
         // when the exponent is present. Otherwise it will look like
         // one of the mantissa digits.
         if (end < length() && matches(end, "f")) {
             has_f_suffix = true;
+            end++;
+        } else if (end < length() && matches(end, "h")) {
+            has_h_suffix = true;
             end++;
         }
 
@@ -648,7 +664,7 @@ Token Lexer::try_hex_float() {
     }
 
     if (signed_exponent >= kExponentMax || (signed_exponent == kExponentMax && mantissa != 0)) {
-        std::string type = has_f_suffix ? "f32" : "abstract-float";
+        std::string type = has_f_suffix ? "f32" : has_h_suffix ? "f16" : "abstract-float";
         return {Token::Type::kError, source, "value cannot be represented as '" + type + "'"};
     }
 
@@ -671,10 +687,21 @@ Token Lexer::try_hex_float() {
         if (result_u64 & 0x1fffffff) {
             return {Token::Type::kError, source, "value cannot be exactly represented as 'f32'"};
         }
+        return {Token::Type::kFloatLiteral_F, source, result_f64};
+    } else if (has_h_suffix) {
+        // Check value fits in f16
+        if (result_f64 < static_cast<double>(f16::kLowest) ||
+            result_f64 > static_cast<double>(f16::kHighest)) {
+            return {Token::Type::kError, source, "value cannot be represented as 'f16'"};
+        }
+        // Check the value can be exactly represented (low 42 mantissa bits must be 0)
+        if (result_u64 & 0x2ffffffffff) {
+            return {Token::Type::kError, source, "value cannot be exactly represented as 'f16'"};
+        }
+        return {Token::Type::kFloatLiteral_H, source, result_f64};
     }
 
-    return {has_f_suffix ? Token::Type::kFloatLiteral_F : Token::Type::kFloatLiteral, source,
-            result_f64};
+    return {Token::Type::kFloatLiteral, source, result_f64};
 }
 
 Token Lexer::build_token_from_int_if_possible(Source source, size_t start, int32_t base) {
