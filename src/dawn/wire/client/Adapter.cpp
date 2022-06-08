@@ -16,11 +16,12 @@
 
 #include "dawn/common/Log.h"
 #include "dawn/wire/client/Client.h"
+#include "dawn/wire/client/Instance.h"
 
 namespace dawn::wire::client {
 
-Adapter::Adapter(uint32_t idIn, Client* clientIn)
-    : ObjectBase(idIn, clientIn, ObjectType::Adapter) {}
+Adapter::Adapter(uint32_t idIn, Instance* instance)
+    : ObjectBase(idIn, instance->client, ObjectType::Adapter) {}
 
 Adapter::~Adapter() {
     mRequestDeviceRequests.CloseAll([](RequestDeviceData* request) {
