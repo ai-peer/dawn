@@ -317,7 +317,7 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
         constexpr const char kUseAngleArg[] = "--use-angle=";
         argLen = sizeof(kUseAngleArg) - 1;
         if (strncmp(argv[i], kUseAngleArg, argLen) == 0) {
-            mANGLEBackend = argv[i] + argLen;
+            SetEnvironmentVar("ANGLE_DEFAULT_PLATFORM", argv[i] + argLen);
             continue;
         }
 
@@ -443,43 +443,6 @@ std::unique_ptr<dawn::native::Instance> DawnTestEnvironment::CreateInstanceAndDi
         instance->DiscoverAdapters(&adapterOptions);
     }
 #endif  // DAWN_ENABLE_BACKEND_DESKTOP_GL
-
-#ifdef DAWN_ENABLE_BACKEND_OPENGLES
-
-    ScopedEnvironmentVar angleDefaultPlatform;
-    if (GetEnvironmentVar("ANGLE_DEFAULT_PLATFORM").first.empty()) {
-        const char* platform;
-        if (!mANGLEBackend.empty()) {
-            platform = mANGLEBackend.c_str();
-        } else {
-#if defined(DAWN_PLATFORM_WINDOWS)
-            platform = "d3d11";
-#else
-            platform = "swiftshader";
-#endif
-        }
-        angleDefaultPlatform.Set("ANGLE_DEFAULT_PLATFORM", platform);
-    }
-
-    if (!glfwInit()) {
-        return instance;
-    }
-    glfwDefaultWindowHints();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
-    glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
-    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-
-    mOpenGLESWindow = glfwCreateWindow(400, 400, "Dawn OpenGLES test window", nullptr, nullptr);
-    if (mOpenGLESWindow != nullptr) {
-        glfwMakeContextCurrent(mOpenGLESWindow);
-        dawn::native::opengl::AdapterDiscoveryOptionsES adapterOptionsES;
-        adapterOptionsES.getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
-        instance->DiscoverAdapters(&adapterOptionsES);
-        glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE);
-    }
-#endif  // DAWN_ENABLE_BACKEND_OPENGLES
 
     return instance;
 }

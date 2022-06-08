@@ -16,8 +16,13 @@
 
 #include <utility>
 
+#include "dawn/common/SystemUtils.h"
+#include "dawn/native/Instance.h"
 #include "dawn/native/OpenGLBackend.h"
 #include "dawn/native/opengl/AdapterGL.h"
+#ifdef DAWN_ENABLE_BACKEND_OPENGLES
+#include "dawn/native/opengl/EGLFunctions.h"
+#endif
 
 namespace dawn::native::opengl {
 
@@ -27,8 +32,75 @@ Backend::Backend(InstanceBase* instance, wgpu::BackendType backendType)
     : BackendConnection(instance, backendType) {}
 
 std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters() {
-    // The OpenGL backend needs at least "getProcAddress" to discover an adapter.
-    return {};
+    std::vector<Ref<AdapterBase>> adapters;
+#ifdef DAWN_ENABLE_BACKEND_OPENGLES
+    if (GetType() == wgpu::BackendType::OpenGLES) {
+        ScopedEnvironmentVar angleDefaultPlatform;
+        if (GetEnvironmentVar("ANGLE_DEFAULT_PLATFORM").first.empty()) {
+#if defined(DAWN_PLATFORM_WINDOWS)
+            const char* platform = "d3d11";
+#else
+            const char* platform = "swiftshader";
+#endif
+            angleDefaultPlatform.Set("ANGLE_DEFAULT_PLATFORM", platform);
+        }
+
+        EGLFunctions egl;
+
+        AdapterDiscoveryOptionsES options;
+        options.getProc = reinterpret_cast<void* (*)(const char*)>(egl.GetProcAddress);
+        // Create an EGLContext for the purpose of getting renderer strings, etc.
+        EGLDisplay display = egl.GetDisplay(EGL_DEFAULT_DISPLAY);
+        EGLint num_config;
+        egl.Initialize(display, nullptr, nullptr);
+        EGLint config_attribs[] = {EGL_RED_SIZE,
+                                   8,
+                                   EGL_GREEN_SIZE,
+                                   8,
+                                   EGL_BLUE_SIZE,
+                                   8,
+                                   EGL_ALPHA_SIZE,
+                                   8,
+                                   EGL_RENDERABLE_TYPE,
+                                   EGL_OPENGL_ES3_BIT,
+                                   EGL_SURFACE_TYPE,
+                                   EGL_WINDOW_BIT | EGL_PBUFFER_BIT,
+                                   EGL_NONE};
+
+        if (!egl.ChooseConfig(display, config_attribs, nullptr, 0, &num_config)) {
+            /* error */
+        }
+        std::vector<EGLConfig> configs(num_config);
+        if (!egl.ChooseConfig(display, config_attribs, configs.data(), num_config, &num_config)) {
+            /* error */
+        }
+        EGLint attrib_list[] = {
+            EGL_CONTEXT_MAJOR_VERSION, 3, EGL_CONTEXT_MINOR_VERSION, 1, EGL_NONE, EGL_NONE,
+        };
+        EGLConfig config = configs[0];  // FIXME
+        EGLContext context = egl.CreateContext(display, config, EGL_NO_CONTEXT, attrib_list);
+
+        static const int pbufferWidth = 9;
+        static const int pbufferHeight = 9;
+
+        static const EGLint pbufferAttribs[] = {
+            EGL_WIDTH, pbufferWidth, EGL_HEIGHT, pbufferHeight, EGL_NONE,
+        };
+
+        EGLSurface surface = egl.CreatePbufferSurface(display, config, pbufferAttribs);
+
+        egl.MakeCurrent(display, surface, surface, context);
+
+        auto result = DiscoverAdapters(&options);
+        if (result.IsError()) {
+            GetInstance()->ConsumedError(result.AcquireError());
+        } else {
+            auto value = result.AcquireSuccess();
+            adapters.insert(adapters.end(), value.begin(), value.end());
+        }
+    }
+#endif
+    return adapters;
 }
 
 ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
