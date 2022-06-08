@@ -343,12 +343,16 @@ Token Lexer::try_float() {
     }
 
     bool has_f_suffix = false;
+    bool has_h_suffix = false;
     if (end < length() && matches(end, "f")) {
         end++;
         has_f_suffix = true;
+    } else if (end < length() && matches(end, "h")) {
+        end++;
+        has_h_suffix = true;
     }
 
-    if (!has_point && !has_exponent && !has_f_suffix) {
+    if (!has_point && !has_exponent && !has_f_suffix && !has_h_suffix) {
         // If it only has digits then it's an integer.
         return {};
     }
@@ -366,6 +370,14 @@ Token Lexer::try_float() {
             return {Token::Type::kFloatLiteral_F, source, static_cast<double>(f.Get())};
         } else {
             return {Token::Type::kError, source, "value cannot be represented as 'f32'"};
+        }
+    }
+
+    if (has_h_suffix) {
+        if (auto f = CheckedConvert<f16>(AFloat(value))) {
+            return {Token::Type::kFloatLiteral_H, source, static_cast<double>(f.Get())};
+        } else {
+            return {Token::Type::kError, source, "value cannot be represented as 'f16'"};
         }
     }
 
@@ -547,6 +559,7 @@ Token Lexer::try_hex_float() {
     int64_t exponent_sign = 1;
     // If the 'p' part is present, the rest of the exponent must exist.
     bool has_f_suffix = false;
+    bool has_h_suffix = false;
     if (has_exponent) {
         // Parse the rest of the exponent.
         // (+|-)?
@@ -574,11 +587,14 @@ Token Lexer::try_hex_float() {
             end++;
         }
 
-        // Parse optional 'f' suffix.  For a hex float, it can only exist
+        // Parse optional 'f' or 'h' suffix.  For a hex float, it can only exist
         // when the exponent is present. Otherwise it will look like
         // one of the mantissa digits.
         if (end < length() && matches(end, "f")) {
             has_f_suffix = true;
+            end++;
+        } else if (end < length() && matches(end, "h")) {
+            has_h_suffix = true;
             end++;
         }
 
@@ -648,7 +664,7 @@ Token Lexer::try_hex_float() {
     }
 
     if (signed_exponent >= kExponentMax || (signed_exponent == kExponentMax && mantissa != 0)) {
-        std::string type = has_f_suffix ? "f32" : "abstract-float";
+        std::string type = has_f_suffix ? "f32" : (has_h_suffix ? "f16" : "abstract-float");
         return {Token::Type::kError, source, "value cannot be represented as '" + type + "'"};
     }
 
@@ -667,14 +683,85 @@ Token Lexer::try_hex_float() {
             result_f64 > static_cast<double>(f32::kHighest)) {
             return {Token::Type::kError, source, "value cannot be represented as 'f32'"};
         }
-        // Check the value can be exactly represented (low 29 mantissa bits must be 0)
-        if (result_u64 & 0x1fffffff) {
+        // Check the value can be exactly represented, i.e. only high 23 mantissa bits are valid for
+        // normal f32 values, and less for subnormal f32 values. The rest low mantissa bits must be
+        // 0.
+        uint64_t valid_mantissa_bits = 0;
+        double abs_result_f64 = std::fabs(result_f64);
+        if (abs_result_f64 >= f32::kSmallest) {
+            // The result shall be represented as a normal f32 value.
+            valid_mantissa_bits = 23;
+        } else if (abs_result_f64 >= f32::kSmallestSubnormal) {
+            // The result shall be represented as a subnormal f32 value if possible.
+            // The smallest poositive normal f32 is f32::kSmallest = 2^-126 = 0x1.0p-126.
+            // A value v, if 2^-126 > v >= 2^-127, its binary32 representation will have binary form
+            // s_00000000_1xxxxxxxxxxxxxxxxxxxxxx, thus having 22 valid mantissa bits.
+            // 2^-127 > v >= 2^-128, binary32 s_00000000_01xxxxxxxxxxxxxxxxxxxxx, 21 valid bits.
+            // 2^-128 > v >= 2^-129, binary32 s_00000000_001xxxxxxxxxxxxxxxxxxxx, 20 valid bits.
+            // ...
+            // 2^-147 > v >= 2^-148, binary32 s_00000000_0000000000000000000001x, 1 valid bits.
+            // 2^-148 > v >= 2^-149, binary32 s_00000000_00000000000000000000001, 0 valid bits.
+            // Note the 2^-126 is f32::kSmallest and 2^-149 is f32::kSmallestSubnormal, so we can
+            // ensure that -127 >= signed_exponent >= -149
+            int64_t unbiased_exponent = signed_exponent - kExponentBias;
+            TINT_ASSERT(Reader, (unbiased_exponent <= -127) && (unbiased_exponent >= -149));
+            valid_mantissa_bits = unbiased_exponent + 149;  // 0 for -149, and 22 for -127
+
+        } else if (abs_result_f64 != 0.0) {
+            // The result is smaller the the smallest subnormal f32 value, but not equal to zero.
+            // Such value will never be exactly represented by f32.
             return {Token::Type::kError, source, "value cannot be exactly represented as 'f32'"};
         }
+        // Check the low 52-valid_mantissa_bits mantissa bits must be 0.
+        TINT_ASSERT(Reader, valid_mantissa_bits <= 23);
+        if (result_u64 & ((1ull << (52 - valid_mantissa_bits)) - 1)) {
+            return {Token::Type::kError, source, "value cannot be exactly represented as 'f32'"};
+        }
+        return {Token::Type::kFloatLiteral_F, source, result_f64};
+    } else if (has_h_suffix) {
+        // Check value fits in f16
+        if (result_f64 < static_cast<double>(f16::kLowest) ||
+            result_f64 > static_cast<double>(f16::kHighest)) {
+            return {Token::Type::kError, source, "value cannot be represented as 'f16'"};
+        }
+        // Check the value can be exactly represented, i.e. only high 10 mantissa bits are valid for
+        // normal f16 values, and less for subnormal f16 values. The rest low mantissa bits must be
+        // 0.
+        uint64_t valid_mantissa_bits = 0;
+        double abs_result_f64 = std::fabs(result_f64);
+        if (abs_result_f64 >= f16::kSmallest) {
+            // The result shall be represented as a normal f16 value.
+            valid_mantissa_bits = 10;
+        } else if (abs_result_f64 >= f16::kSmallestSubnormal) {
+            // The result shall be represented as a subnormal f16 value if possible.
+            // The smallest poositive normal f16 is f16::kSmallest = 2^-14 = 0x1.0p-14.
+            // A value v, if 2^-14 > v >= 2^-15, its binary16 representation will have binary form
+            // s_00000_1xxxxxxxxx, thus having 9 valid mantissa bits.
+            // 2^-15 > v >= 2^-16, binary32 s_00000_01xxxxxxxx, 8 valid bits.
+            // 2^-16 > v >= 2^-17, binary32 s_00000_001xxxxxxx, 7 valid bits.
+            // ...
+            // 2^-22 > v >= 2^-23, binary32 s_00000_000000001x, 1 valid bits.
+            // 2^-23 > v >= 2^-24, binary32 s_00000_0000000001, 0 valid bits.
+            // Note the 2^-14 is f32::kSmallest and 2^-24 is f32::kSmallestSubnormal, so we can
+            // ensure that -15 >= signed_exponent >= -24
+            int64_t unbiased_exponent = signed_exponent - kExponentBias;
+            TINT_ASSERT(Reader, (unbiased_exponent <= -15) && (unbiased_exponent >= -24));
+            valid_mantissa_bits = unbiased_exponent + 24;  // 0 for -24, and 9 for -15
+
+        } else if (abs_result_f64 != 0.0) {
+            // The result is smaller the the smallest subnormal f16 value, but not equal to zero.
+            // Such value will never be exactly represented by f16.
+            return {Token::Type::kError, source, "value cannot be exactly represented as 'f16'"};
+        }
+        // Check the low 52-valid_mantissa_bits mantissa bits must be 0.
+        TINT_ASSERT(Reader, valid_mantissa_bits <= 10);
+        if (result_u64 & ((1ull << (52 - valid_mantissa_bits)) - 1)) {
+            return {Token::Type::kError, source, "value cannot be exactly represented as 'f16'"};
+        }
+        return {Token::Type::kFloatLiteral_H, source, result_f64};
     }
 
-    return {has_f_suffix ? Token::Type::kFloatLiteral_F : Token::Type::kFloatLiteral, source,
-            result_f64};
+    return {Token::Type::kFloatLiteral, source, result_f64};
 }
 
 Token Lexer::build_token_from_int_if_possible(Source source, size_t start, int32_t base) {
