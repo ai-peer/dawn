@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09347696_29fa1b13",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-08T13:29:08Z",
+      "side": 1,
+      "message": "Yeah I didn\u0027t have a better idea either. We could own a dummy format, but keeping it alive would take a pointer in Texture.cpp so I went with the enum.",
+      "parentUuid": "7f66357c_ea00d7b0",
+      "range": {
+        "startLine": 533,
+        "startChar": 6,
+        "endLine": 533,
+        "endChar": 30
+      },
+      "revId": "e48081856912dfb6a4425f201292d9acd56480a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61df96c3_762e5923",
@@ -41,6 +65,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74ae43d0_0a129bbb",
+        "filename": "src/dawn/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-08T13:29:08Z",
+      "side": 1,
+      "message": "Done, added to src/dawn/tests/unittests/validation/InternalUsageValidationTests.cpp",
+      "parentUuid": "61df96c3_762e5923",
+      "revId": "e48081856912dfb6a4425f201292d9acd56480a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55c75fd6_c6c4bc54",
@@ -54,6 +96,24 @@
       "writtenOn": "2022-06-03T20:46:22Z",
       "side": 1,
       "message": "should be in the buffer CL",
+      "revId": "e48081856912dfb6a4425f201292d9acd56480a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9567b9d_e6b49b6e",
+        "filename": "src/dawn/wire/client/Buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-08T13:29:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55c75fd6_c6c4bc54",
       "revId": "e48081856912dfb6a4425f201292d9acd56480a9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
