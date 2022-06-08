@@ -264,8 +264,10 @@ void InstanceBase::DiscoverDefaultAdapters() {
     // Query and merge all default adapters for all backends
     for (std::unique_ptr<BackendConnection>& backend : mBackends) {
         std::vector<Ref<AdapterBase>> backendAdapters = backend->DiscoverDefaultAdapters();
+        printf("calling DiscoverDefaultAdapters() on backend %08x\n", backend->GetType());
 
         for (Ref<AdapterBase>& adapter : backendAdapters) {
+            printf("got adapter\n");
             ASSERT(adapter->GetBackendType() == backend->GetType());
             ASSERT(adapter->GetInstance() == this);
             mAdapters.push_back(std::move(adapter));

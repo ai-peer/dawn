@@ -48,6 +48,12 @@
 #include "dawn/native/OpenGLBackend.h"
 #endif  // DAWN_ENABLE_BACKEND_OPENGL
 
+#if defined(DAWN_ENABLE_BACKEND_OPENGLES)
+#define GLFW_EXPOSE_NATIVE_EGL
+#include "GLFW/glfw3native.h"
+#include "dawn/native/opengl/EGLFunctions.h"
+#endif
+
 namespace {
 
 std::string ParamName(wgpu::BackendType type) {
@@ -239,6 +245,10 @@ DawnTestEnvironment::DawnTestEnvironment(int argc, char** argv) {
         mPlatformDebugLogger =
             std::unique_ptr<utils::PlatformDebugLogger>(utils::CreatePlatformDebugLogger());
     }
+
+#ifdef DAWN_ENABLE_BACKEND_OPENGLES
+    mEGLFunctions = new dawn::native::opengl::EGLFunctions();
+#endif
 
     // Create a temporary instance to select available and preferred adapters. This is done before
     // test instantiation so GetAvailableAdapterTestParamsForBackends can generate test
@@ -467,12 +477,27 @@ std::unique_ptr<dawn::native::Instance> DawnTestEnvironment::CreateInstanceAndDi
     glfwDefaultWindowHints();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
     glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
+
+    dawn::native::opengl::EGLFunctions& egl = *mEGLFunctions;
+    EGLDisplay display = egl.GetDisplay(EGL_DEFAULT_DISPLAY);
+    EGLint num_config;
+    egl.Initialize(display, nullptr, nullptr);
+    egl.GetConfigs(display, nullptr, 0, &num_config);
+    std::vector<EGLConfig> configs(num_config);
+    egl.GetConfigs(display, configs.data(), num_config, &num_config);
+    EGLint attrib_list[] = {
+        EGL_CONTEXT_MAJOR_VERSION, 3, EGL_CONTEXT_MINOR_VERSION, 1, EGL_NONE, EGL_NONE,
+    };
+    EGLContext context = egl.CreateContext(display, configs[0], EGL_NO_CONTEXT, attrib_list);
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
     mOpenGLESWindow = glfwCreateWindow(400, 400, "Dawn OpenGLES test window", nullptr, nullptr);
+    EGLSurface surface = egl.CreatePlatformWindowSurface(
+        display, configs[0], glfwGetEGLSurface(mOpenGLESWindow), nullptr);
     if (mOpenGLESWindow != nullptr) {
+        egl.MakeCurrent(display, surface, surface, context);
         glfwMakeContextCurrent(mOpenGLESWindow);
         dawn::native::opengl::AdapterDiscoveryOptionsES adapterOptionsES;
         adapterOptionsES.getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
