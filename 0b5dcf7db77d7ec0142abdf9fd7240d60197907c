@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bdb1c92_19eedc81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-08T22:13:51Z",
+      "side": 1,
+      "message": "LGTM, but Cmake build is broken",
+      "revId": "0b5dcf7db77d7ec0142abdf9fd7240d60197907c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

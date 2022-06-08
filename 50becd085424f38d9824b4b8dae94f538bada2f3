@@ -16,6 +16,23 @@
       "message": "Corentin \u0026| Austin: PTAL. Thanks!",
       "revId": "50becd085424f38d9824b4b8dae94f538bada2f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aa73d95_ac33b71b",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-08T22:13:51Z",
+      "side": 1,
+      "message": "nit: you\u0027ll need to update CMakeLists.txt as well",
+      "revId": "50becd085424f38d9824b4b8dae94f538bada2f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
