@@ -86,6 +86,24 @@
       "parentUuid": "c0be09dd_3b443411",
       "revId": "116c51349c456465715f8bfd92cce3cadf6e425d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3181c626_c913d573",
+        "filename": "src/dawn/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-06-08T07:30:31Z",
+      "side": 1,
+      "message": "Although I feel it weird... Do you think we should disallow multisampling on these formats in the SPEC?",
+      "parentUuid": "1f2963e7_e1e7cca7",
+      "revId": "116c51349c456465715f8bfd92cce3cadf6e425d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
