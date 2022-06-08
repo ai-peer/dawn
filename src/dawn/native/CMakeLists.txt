@@ -417,6 +417,8 @@ if (DAWN_ENABLE_OPENGL)
         "opengl/ComputePipelineGL.h"
         "opengl/DeviceGL.cpp"
         "opengl/DeviceGL.h"
+        "opengl/EGLFunctions.cpp"
+        "opengl/EGLFunctions.h"
         "opengl/Forward.h"
         "opengl/GLFormat.cpp"
         "opengl/GLFormat.h"
