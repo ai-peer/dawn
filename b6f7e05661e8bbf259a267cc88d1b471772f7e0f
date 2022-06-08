@@ -87,6 +87,24 @@
       "parentUuid": "0e144538_db2b2792",
       "revId": "b6f7e05661e8bbf259a267cc88d1b471772f7e0f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b9acf53_e02f5423",
+        "filename": "src/dawn/tests/unittests/native/BlobTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-08T01:28:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c7babcc_a7a6fe3a",
+      "revId": "b6f7e05661e8bbf259a267cc88d1b471772f7e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

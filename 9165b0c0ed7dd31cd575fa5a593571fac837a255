@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a60aed5_ea4d39ad",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-08T01:28:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8621914f_5d65aeb2",
+      "revId": "9165b0c0ed7dd31cd575fa5a593571fac837a255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6425d182_f93e31ca",
@@ -89,6 +107,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94cb8eb8_0d0ed691",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-08T01:28:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32925a2d_eff8e0d4",
+      "revId": "9165b0c0ed7dd31cd575fa5a593571fac837a255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4174b28e_7ab23fac",
@@ -120,6 +156,24 @@
       "side": 1,
       "message": "Given the conversation in Shrek\u0027s CL, I assume we might be exposing an UnsafeCreateWithDeleter or something that we can just directly use and remove all the testing deps.",
       "parentUuid": "4174b28e_7ab23fac",
+      "revId": "9165b0c0ed7dd31cd575fa5a593571fac837a255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f377fa6d_07be90c6",
+        "filename": "src/dawn/tests/unittests/native/BlobTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-08T01:28:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66e182bc_84a9f741",
       "revId": "9165b0c0ed7dd31cd575fa5a593571fac837a255",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
