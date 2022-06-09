@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "314bfb6d_b4c04936",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-06-09T20:53:18Z",
+      "side": 1,
+      "message": "@enga: Can I get an owners LGTM for the change to gpu_info.json? (Again?) As a previously top-level file Kai wasn\u0027t an owner of it.\n\nWorth noting that @cwallez previously asked me to move it to dawn/src (https://dawn-review.googlesource.com/c/dawn/+/90962/comments/532030c2_8439d979) and *I could have sworn that I did!* But apparently that got lost in a rebase somewhere? In any case, I\u0027ve really actually for-reals-this-time moved it to the right directory in the latest patch so we won\u0027t have this problem again.",
+      "revId": "7f2d03d5c2efe7a5444cee261376da13a9148887",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
