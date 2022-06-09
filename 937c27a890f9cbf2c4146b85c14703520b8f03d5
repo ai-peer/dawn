@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e99a5fac_bdaa0a4e",
+        "filename": "src/dawn/utils/GLFWUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-06-09T20:53:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9586fcdc_aaee9b7a",
+      "revId": "937c27a890f9cbf2c4146b85c14703520b8f03d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "092fc9c6_10af7549",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-06-09T20:20:11Z",
       "side": 1,
       "message": "nit: I think our style allows this to be \"indented\" by writing `#    if`, maybe use that for clarity?",
+      "revId": "937c27a890f9cbf2c4146b85c14703520b8f03d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "643e852e_eda7b547",
+        "filename": "src/dawn/utils/GLFWUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-06-09T20:53:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "092fc9c6_10af7549",
       "revId": "937c27a890f9cbf2c4146b85c14703520b8f03d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
