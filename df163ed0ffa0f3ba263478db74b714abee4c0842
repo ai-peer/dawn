@@ -109,6 +109,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32912942_f0f06269",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-09T16:30:08Z",
+      "side": 1,
+      "message": "actually, I think the implicit might be OK since you need to declare it both on the struct, but also whenever you use it you need to call UnsafeGetValue, so it should already be clear at the callsite",
+      "parentUuid": "de57ffdd_f819dca5",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 46
+      },
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30354dcf_9a4e86aa",
         "filename": "src/dawn/native/CacheRequest.h",
         "patchSetId": 12

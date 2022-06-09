@@ -134,6 +134,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "312ef087_6f41cf56",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-09T16:30:08Z",
+      "side": 1,
+      "message": "the thought was that if your Chrome cache gets corrupted which can sometimes happen, we wouldn\u0027t want to completely fail but instead fallback to not using the cache. Then, re-storing later will eventually overwrite the bad entries.\n\nTBH I don\u0027t understand what happens when the cache goes wrong too much. Most of the issue reports say that Chrome hangs or does nothing entirely on startup, so maybe the issue is that it fails to open the cache at all, and doesn\u0027t yield bad entries. I have run into issues in the past though where the browser mostly works but some profile stuff is broken - and you need to wipe user-data-dir to fix it.\n\nNot sure if it\u0027s worth doing now though since we\u0027re not always able to detect a bad cache blob anyway. like FXC blobs/D3D blobs are opaque and we don\u0027t get a success result until we pass it to pipeline creation.\nOther bits of reflection data could be more error-detectable cause we would have the deserialize it from the blob.\n\nWDYT?",
+      "parentUuid": "dd239fd4_99322345",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b4df38b_696f235b",
         "filename": "src/dawn/native/CacheRequest.h",
         "patchSetId": 13
@@ -151,6 +169,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "876ddb57_d2b3a669",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-09T16:30:08Z",
+      "side": 1,
+      "message": "I don\u0027t think so because we return ResultOrError\u003cCacheResult\u003cT\u003e\u003e, not ResultOrError\u003cT\u003e\n\nMaybe it can work with an implicit conversion though?",
+      "parentUuid": "9b4df38b_696f235b",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96c0adf4_4c626676",
         "filename": "src/dawn/native/CacheRequest.h",
         "patchSetId": 13
@@ -162,6 +198,24 @@
       "writtenOn": "2022-06-09T15:26:40Z",
       "side": 1,
       "message": "note: I was mildly expecting that we would try to store the result in the cache at this point. Do we want to keep that outside for some reason?",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f216104_33e9fc90",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-09T16:30:08Z",
+      "side": 1,
+      "message": "may add it later but wasn\u0027t sure without finishing up usages of LoadOrRun in the various backends.\n\nThere were some unclear lifetime concerns about usage of the computed result and storing it. We want to be able to defer the store till later, so it doesn\u0027t block immediate usage of the pipeline/shader.\n\nIf we store immediately, then I think we need to do a copy to do that, because whoever is using the CacheResult\u003cT\u003e after LoadOrRun could drop it immediately after and we\u0027ll have a use-after-free.\nDeferred storage could look more like you do `CacheResult\u003cT\u003e::EnsureStored(BlobCache*);` once you\u0027re done using it so we don\u0027t need to copy.\nMetal shaders especially, since in order to store, we need to serialize the string, and a few reflection booleans as well. That serialization shouldn\u0027t need to happen before you can use the MTLFunction.\n\nNot sure yet though tbh",
+      "parentUuid": "96c0adf4_4c626676",
       "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
