@@ -317,6 +317,30 @@
       },
       "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26485354_a801b208",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-09T00:26:31Z",
+      "side": 1,
+      "message": "google3 one eventually bottoms out to a FOR_EACH macro which is hardcoded up to 64 args, so it\u0027s pretty similar. It is indeed a ton of macros though, so I think this X macro thing is fine?\n\nI think a JSON generator would be nice if it really generated for you actual usable struct definitions - but to do that, it needs to magically figure out what to forward declare, and what to #include. If the JSON generator is just pasting stuff together, then it doesn\u0027t seem as nice to me since it\u0027s giving us the same functionality as the macro, but you have to work harder (IMO) to use it. Each struct needs to have its own file generated, and you need to specify what the name of that file name is in the generator.py and BUILD.gn.",
+      "parentUuid": "80d89c8f_0c7af1b3",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 27
+      },
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
