@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "de57ffdd_f819dca5",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T15:26:40Z",
+      "side": 1,
+      "message": "I have a slight worry about verbosity as well, but it also makes sense to keep unsafe stuff very explicitly typed. We could try with this UnsafeUnkeyedValue approach, and revisit if it becomes too verbose/annoying.",
+      "parentUuid": "30e3a1af_1b10f0c1",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 46
+      },
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30354dcf_9a4e86aa",
         "filename": "src/dawn/native/CacheRequest.h",
         "patchSetId": 12

@@ -1,0 +1,237 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f8c93b3_b60be982",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T15:26:40Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dc9d43e_ccf71418",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T15:26:40Z",
+      "side": 1,
+      "message": "nit: -\u003e T maybe to help readers see what the type of the functions should be?",
+      "range": {
+        "startLine": 66,
+        "startChar": 32,
+        "endLine": 66,
+        "endChar": 33
+      },
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1242c62a_ced9f538",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T15:26:40Z",
+      "side": 1,
+      "message": "nit: ResultOrError\u003cT\u003e",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 6
+      },
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aefdd58_bac66fe2",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T15:26:40Z",
+      "side": 1,
+      "message": "u-nit: WDYT of moving all the type aliases and static asserts at the top so the logic with the blob is closer to [a]?",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69fec932_ced414ea",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T15:26:40Z",
+      "side": 1,
+      "message": "optional-nit: it must return either T or ResultOrError\u003cT\u003e, not sure how to phrase this tersely.",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6fa5228_3c8703b4",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T15:26:40Z",
+      "side": 1,
+      "message": "[a]",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd239fd4_99322345",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T15:26:40Z",
+      "side": 1,
+      "message": "Why do we need to log? If we didn\u0027t have this I think we could use DAWN_TRY",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b4df38b_696f235b",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T15:26:40Z",
+      "side": 1,
+      "message": "nit: Would DAWN_TRY_ASSIGN work?",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96c0adf4_4c626676",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T15:26:40Z",
+      "side": 1,
+      "message": "note: I was mildly expecting that we would try to store the result in the cache at this point. Do we want to keep that outside for some reason?",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eecb477_94adb5a7",
+        "filename": "src/dawn/native/CacheResult.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T15:26:40Z",
+      "side": 1,
+      "message": "nit: leftover? I\u0027m not sure what this forward declaration is for.",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ce44f91_114e938f",
+        "filename": "src/dawn/native/CacheResult.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T15:26:40Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "607959c8_4e9ece0f",
+        "filename": "src/dawn/native/CacheResult.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T15:26:40Z",
+      "side": 1,
+      "message": "nit: I\u0027m not sure why we need the whole panoply of conversions etc. Maybe we can come back later to trim the unused ones we know which are used.",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52e70dac_969f7336",
+        "filename": "src/dawn/tests/unittests/native/CacheRequestTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T15:26:40Z",
+      "side": 1,
+      "message": "nit: Maybe we should test that UnsafeUnkeyed values are also passed.",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
