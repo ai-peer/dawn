@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cddb42d_26f2f581",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-09T05:37:35Z",
+      "side": 0,
+      "message": "we removed this clearing to blue part because it requires simultaneous read+write wrappings. Is there something in the implementation that prevents that from working correctly (barriers?), or is it just that we don\u0027t care about supporting read+write right now?",
+      "range": {
+        "startLine": 659,
+        "startChar": 0,
+        "endLine": 659,
+        "endChar": 36
+      },
+      "revId": "84bf4226d8bcd5e70ca40c0888eb717a61aab592",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

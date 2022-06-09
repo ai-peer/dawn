@@ -50,6 +50,121 @@
       "message": "Actually cc Shaobo - please see above comment.",
       "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9861e6a9_f85c3375",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-09T05:37:35Z",
+      "side": 1,
+      "message": "could we defer this until the first time we need to use the texture? basically we either AcquireKeyedMutex, or we wait on the fence just before submitting to the queue.",
+      "range": {
+        "startLine": 579,
+        "startChar": 55,
+        "endLine": 579,
+        "endChar": 59
+      },
+      "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7ff6f4c_99d1f248",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-09T05:37:35Z",
+      "side": 1,
+      "message": "hm, the name \"External\" is not new to this CL, but adding a getter like this could be confusing, especially since it can be called with no args. WebGPU already has multiple concepts of \"external\" with wgpu::ExternalTexture and GPUQueue::copyExternalImageToTexture\n\nwhat about we call this getter something like `IsExternalImageDXGI`? Or, maybe even rename AllocationMethod::kExternal to AllocationMethod::kImported, and name is `IsImportedTexture` ?\n\nbut also, I don\u0027t think your usage of this getter matches the pre-existing functionality. kExternal is also used for the texture [created from the D3D12 swapchain](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/SwapChainD3D12.cpp;l\u003d109?q\u003d%20Texture::Create%20f:d3d12). what was wrong with\n\n```\nif (mD3D11on12Resource !\u003d nullptr) {\n    commandContext-\u003eAddToSharedTextureList(this);\n}\n```\n?\nI think keeping the same logic would make it so we don\u0027t need to do `if (mD3D11On12Resource` in AcquireKeyedMutex",
+      "range": {
+        "startLine": 585,
+        "startChar": 14,
+        "endLine": 585,
+        "endChar": 31
+      },
+      "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83bfce19_6acae6a2",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-09T05:37:35Z",
+      "side": 1,
+      "message": "why these values?",
+      "range": {
+        "startLine": 464,
+        "startChar": 0,
+        "endLine": 466,
+        "endChar": 52
+      },
+      "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b3b9735_c0784f9c",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-09T05:37:35Z",
+      "side": 1,
+      "message": "why did we make it so that we now right the fence information out, and not the keyed mutex information. And then in ExpectPixelRGBA8EQ we do `d3d11Texture.As(\u0026dxgiKeyedMutex);` once again? I would have expected the manner of getting/passing the fence/keyedMutex to be consistent\n\nit\u0027s also tough to tell what arguments here are inputs and which are outputs. It\u0027s somewhat clear that the d3d11Fence and friends are outputs because they were just declared. But, it\u0027s not clear if the descriptors are being populated by the Wrap call (for compatible usage later or something like that). Perhaps we can pass the descriptors as const\u0026 so that the callsite doesn\u0027t need to use \u0026 the way it does on the outputs.",
+      "range": {
+        "startLine": 614,
+        "startChar": 3,
+        "endLine": 617,
+        "endChar": 82
+      },
+      "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "021798fe_13a9ad1c",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-09T05:37:35Z",
+      "side": 1,
+      "message": "in these tests, it\u0027s hard to know why we\u0027re using what fence values. I think this one is because WrapSharedHandle is using (0, 1). Would it be possible to have the sequence of fence values evident from looking only at the test body?\n\nProduceTexture is where the fence values are needed. Maybe we can pull that part out of WrapShareHandle and WrapAndClearD3D11Texture.",
+      "range": {
+        "startLine": 711,
+        "startChar": 4,
+        "endLine": 712,
+        "endChar": 44
+      },
+      "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
