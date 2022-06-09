@@ -1,5 +1,11 @@
 # Tint changes during Origin Trial
 
+## Changes for M104
+
+### New features
+
+* Tint now supports abstract-numerics, removing the need to always suffix unsigned integers with `u` [tint:1504](crbug.com/tint/1504)
+
 ## Changes for M103
 
 ### New features
@@ -9,6 +15,7 @@ builtins in non-uniform control flow [tint:880](crbug.com/tint/880)
 * Matrix identity constructors and constructors for a single scalar value are now supported [tint:1545](crbug.com/tint/1545)
 
 ### Breaking changes
+
 * Builtin `atomicCompareExchangeWeak` returns a struct instead of a vec2. [tint:1185](crbug.com/tint/1185)
 
 ## Changes for M102
