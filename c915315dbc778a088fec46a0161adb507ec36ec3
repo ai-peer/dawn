@@ -137,6 +137,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c98e1273_f225fbd0",
+        "filename": "generator/templates/dawn/wire/client/ApiProcs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-09T18:49:41Z",
+      "side": 1,
+      "message": "See conversation in other thread.",
+      "parentUuid": "feb27649_ec46c061",
+      "range": {
+        "startLine": 63,
+        "startChar": 24,
+        "endLine": 63,
+        "endChar": 129
+      },
+      "revId": "c915315dbc778a088fec46a0161adb507ec36ec3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4ee57da_a39526e0",
@@ -246,6 +270,30 @@
       "side": 1,
       "message": "(2, 3, 4) SGTM\n\n(1) unit: perhaps call it `ObjectBaseParams`\nbut, why do we need the type? if stuff is created via NewBuffer, then we can do client-\u003eTrackObject immediately after creation. I think the tracking only needs to be done before destruction of the object itself, so it should be OK if it\u0027s not done immediately in the constructor. Client* and id we do need in the constructor since as you said, some constructors may start generating some commands.\n\nWe\u0027re not storing the type though, and it would get set from autogen code so you can\u0027t do it wrong, so sounds OK with me though.\nI guess it is a bit nice in that we would have one TrackObject symbol in the binary instead of a bunch of TrackObject\u003cT\u003e which effectively do the same thing. dunno if they would dedup.",
       "parentUuid": "1c46733a_58e8df8f",
+      "range": {
+        "startLine": 47,
+        "startChar": 25,
+        "endLine": 47,
+        "endChar": 37
+      },
+      "revId": "c915315dbc778a088fec46a0161adb507ec36ec3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00918f53_0f0a4def",
+        "filename": "src/dawn/wire/client/ObjectAllocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-09T18:49:41Z",
+      "side": 1,
+      "message": "I think the suggested way would work but seems more verbose than necessary. I don\u0027t think we need both a `New` and a `New[ObjectType]`. It would be more concise to just have `New` forwards all its arguments to the ctors.\n\nSo regarding the other comment I had, yes, I was suggesting having a Client[Base]* member as a part of the allocators, this would effectively hide all of this into the current New functions since we can just call the TrackObjects there now and infer the type through the templating. Downside being that we would need to move some of the functions/members between Client and ClientBase, and potentially rewriting the ctor to forward `this` to all the allocators.",
+      "parentUuid": "af50b5c8_0149a4c6",
       "range": {
         "startLine": 47,
         "startChar": 25,
