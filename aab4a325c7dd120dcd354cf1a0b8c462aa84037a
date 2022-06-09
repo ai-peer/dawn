@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec53ba15_d8fd3b02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-09T23:49:10Z",
+      "side": 1,
+      "message": "Here\u0027s another idunno-how-to-go CL :) ",
+      "revId": "aab4a325c7dd120dcd354cf1a0b8c462aa84037a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
