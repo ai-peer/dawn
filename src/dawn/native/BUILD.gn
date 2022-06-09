@@ -574,6 +574,7 @@ source_set("sources") {
       "opengl/UtilsGL.h",
       "opengl/opengl_platform.h",
     ]
+    include_dirs = [ "${dawn_angle_dir}/include" ]
   }
 
   if (dawn_enable_vulkan) {
