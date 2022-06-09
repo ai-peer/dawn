@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e99f2a23_feeb9622",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-09T00:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24447f98_c83ef846",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 27
+      },
+      "revId": "5aa10b5b8aa2db7689bbe9c75fe7f885d495480b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "735451f6_b329fcda",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-24T22:11:29Z",
       "side": 1,
       "message": "probably also pass in the CacheKey::Type here somewhere",
+      "range": {
+        "startLine": 271,
+        "startChar": 15,
+        "endLine": 271,
+        "endChar": 42
+      },
+      "revId": "5aa10b5b8aa2db7689bbe9c75fe7f885d495480b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12fa45ad_e4fda4cc",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-09T00:45:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "735451f6_b329fcda",
       "range": {
         "startLine": 271,
         "startChar": 15,
