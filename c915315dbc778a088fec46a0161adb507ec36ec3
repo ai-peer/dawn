@@ -234,6 +234,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af50b5c8_0149a4c6",
+        "filename": "src/dawn/wire/client/ObjectAllocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-09T16:40:10Z",
+      "side": 1,
+      "message": "(2, 3, 4) SGTM\n\n(1) unit: perhaps call it `ObjectBaseParams`\nbut, why do we need the type? if stuff is created via NewBuffer, then we can do client-\u003eTrackObject immediately after creation. I think the tracking only needs to be done before destruction of the object itself, so it should be OK if it\u0027s not done immediately in the constructor. Client* and id we do need in the constructor since as you said, some constructors may start generating some commands.\n\nWe\u0027re not storing the type though, and it would get set from autogen code so you can\u0027t do it wrong, so sounds OK with me though.\nI guess it is a bit nice in that we would have one TrackObject symbol in the binary instead of a bunch of TrackObject\u003cT\u003e which effectively do the same thing. dunno if they would dedup.",
+      "parentUuid": "1c46733a_58e8df8f",
+      "range": {
+        "startLine": 47,
+        "startChar": 25,
+        "endLine": 47,
+        "endChar": 37
+      },
+      "revId": "c915315dbc778a088fec46a0161adb507ec36ec3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ae8fa19_7b669036",
         "filename": "src/dawn/wire/client/ObjectAllocator.h",
         "patchSetId": 2
