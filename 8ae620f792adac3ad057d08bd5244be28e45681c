@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c69b282_c6f68e1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-06-09T21:13:04Z",
+      "side": 1,
+      "message": "LGTM but need to run `git cl format`. (If it undoes the indenting, then that\u0027s fine.)",
+      "revId": "8ae620f792adac3ad057d08bd5244be28e45681c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
