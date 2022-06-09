@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "feb27649_ec46c061",
+        "filename": "generator/templates/dawn/wire/client/ApiProcs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T16:14:08Z",
+      "side": 1,
+      "message": "Correct, ClientBase is used to separate autogen vs. not. Is the suggestion to add a Client[Base]* member to ObjectAllocator so it can reference back to it? That could be possible. See the other comment thread for an alternative idea.",
+      "parentUuid": "f4a3a15d_42a650d2",
+      "range": {
+        "startLine": 63,
+        "startChar": 24,
+        "endLine": 63,
+        "endChar": 129
+      },
+      "revId": "c915315dbc778a088fec46a0161adb507ec36ec3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d4ee57da_a39526e0",
         "filename": "src/dawn/wire/client/ObjectAllocator.h",
         "patchSetId": 2
@@ -174,6 +198,30 @@
       "side": 1,
       "message": "(sorry multi-comment)\nnow that I\u0027m looking at it though, we could probably completely hide away \"BufferAllocator()\"\n\n```\ntemplate \u003ctypename T, typename... Args\u003e\nObjectAllocator\u003cT\u003e::ObjectAndSerial Client::New(Args\u0026\u0026...args) {\n  auto* allocator \u003d AllocatorFor\u003cT\u003e;\n  this-\u003e*allocator.New(this, args...);\n}\n\nvoid Client::Free(T* object);\n```\nfeel free to not actually do this change though because though it might be nice and concise, it\u0027s a bunch more complexity to go from type T to the member allocator.\nI think just always having the Client* argument first is good enough for now",
       "parentUuid": "ad9cd6ea_d588f647",
+      "range": {
+        "startLine": 47,
+        "startChar": 25,
+        "endLine": 47,
+        "endChar": 37
+      },
+      "revId": "c915315dbc778a088fec46a0161adb507ec36ec3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c46733a_58e8df8f",
+        "filename": "src/dawn/wire/client/ObjectAllocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T16:14:08Z",
+      "side": 1,
+      "message": "No worries about multi-comment. I wasn\u0027t sure what approach to take either.\n\nWhat do you think of having\n\n1. A `struct ObjectBaseData {uint32_t id; Client* client; ObjectType type}`\n2. Making ObjectAllocator::New be `New(Client*, ObjectType, Args...args)`\n3. Adding `NewBuffer(Args ... args)` and friends to the autogened code of ClientBase, that forwards to a variadic `ObjectAllocator::New` like in this current iteration with \n4. Changing all the constructors to pipe `ObjectBaseData` around.",
+      "parentUuid": "6e59b949_efbd91c9",
       "range": {
         "startLine": 47,
         "startChar": 25,
