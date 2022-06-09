@@ -16,6 +16,91 @@
       "message": "PTAL!",
       "revId": "24291dbe6ec4afdb1b82418cd4f0488d1197b79f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc3ffafd_bb63c2d4",
+        "filename": "src/dawn/node/binding/Converter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-09T14:41:21Z",
+      "side": 1,
+      "message": "nit: what do you think about pushing this lot at the very bottom? Then we\u0027ll have clean separation between `interop -\u003e dawn` vs `dawn -\u003e interop`",
+      "revId": "24291dbe6ec4afdb1b82418cd4f0488d1197b79f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3ded338_3e3f6879",
+        "filename": "src/dawn/node/binding/Converter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-09T14:41:21Z",
+      "side": 1,
+      "message": "nit: `[[nodiscard]]`?",
+      "revId": "24291dbe6ec4afdb1b82418cd4f0488d1197b79f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5173282d_41f25568",
+        "filename": "src/dawn/node/binding/GPUBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-09T14:41:21Z",
+      "side": 1,
+      "message": "nit: you _might_ want to `(void)success;` here. `assert` may nop out, leading to unused variable warnings.\nAlternatively, should we trigger a JS exception instead?",
+      "revId": "24291dbe6ec4afdb1b82418cd4f0488d1197b79f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d42459a_6c9e83f5",
+        "filename": "src/dawn/node/binding/GPUQuerySet.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-09T14:41:21Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "24291dbe6ec4afdb1b82418cd4f0488d1197b79f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa122103_8af6eff4",
+        "filename": "src/dawn/node/binding/GPUTexture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-09T14:41:21Z",
+      "side": 1,
+      "message": "ditto, here and below.",
+      "revId": "24291dbe6ec4afdb1b82418cd4f0488d1197b79f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
