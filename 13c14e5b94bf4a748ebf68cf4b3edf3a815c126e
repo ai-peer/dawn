@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bfa1773_53618590",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-06-09T20:29:57Z",
+      "side": 1,
+      "message": "Yes, that\u0027s what I would expect from this patch! Thanks!",
+      "parentUuid": "bc8e052d_9fe78a37",
+      "revId": "13c14e5b94bf4a748ebf68cf4b3edf3a815c126e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b36d84c3_31ab952d",
