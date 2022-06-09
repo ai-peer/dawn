@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc8e052d_9fe78a37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-06-09T19:01:20Z",
+      "side": 1,
+      "message": "Sorry, I totally missed this request since I\u0027d already reviewed.\n\n```\n - \"Apple M1 Pro\" - \"Metal driver on macOS Version 12.4 (Build 21F79)\"\n   type: Discrete GPU, backend: Metal\n   vendorId: 0x106B, deviceId: 0x0000 [Selected]\n   vendorName: apple, architecture: common-3\n```\n\nI think this looks right?",
+      "parentUuid": "5090eb8f_c63036dd",
+      "revId": "13c14e5b94bf4a748ebf68cf4b3edf3a815c126e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b36d84c3_31ab952d",
