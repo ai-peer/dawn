@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21ac726e_a417b164",
+        "filename": "include/dawn/native/D3D12Backend.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T14:00:20Z",
+      "side": 1,
+      "message": "nit: Maybe comment that this can stay nullptr in which case KeyedMutex is used. (and what that must imply for the texture.)",
+      "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9861e6a9_f85c3375",
         "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
         "patchSetId": 11
@@ -65,6 +82,30 @@
       "writtenOn": "2022-06-09T05:37:35Z",
       "side": 1,
       "message": "could we defer this until the first time we need to use the texture? basically we either AcquireKeyedMutex, or we wait on the fence just before submitting to the queue.",
+      "range": {
+        "startLine": 579,
+        "startChar": 55,
+        "endLine": 579,
+        "endChar": 59
+      },
+      "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26f0fc37_54519c92",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T14:00:20Z",
+      "side": 1,
+      "message": "+1, it would happen here, and this code would call EnsureSynchronizationForImport or some name like that which is a function waiting on the fence or acquiring the keyed mutex. https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/CommandRecordingContext.cpp;drc\u003d41e4d9a34c1d9dcb2eef3ff39ff9c1f987bfa02a;l\u003d74\n\nThat said, while we can make sure the fence wait happens only once, we can\u0027t do the equivalent change for ReleaseKeyedMutex because it can be called more than once. Having it in destroy seems good.",
+      "parentUuid": "9861e6a9_f85c3375",
       "range": {
         "startLine": 579,
         "startChar": 55,
@@ -94,6 +135,47 @@
         "endLine": 585,
         "endChar": 31
       },
+      "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d353631_1c6588d5",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T14:00:20Z",
+      "side": 1,
+      "message": "I had a similar comment, I\u0027ll move it here.\noptional nit: IsImported?",
+      "parentUuid": "e7ff6f4c_99d1f248",
+      "range": {
+        "startLine": 585,
+        "startChar": 14,
+        "endLine": 585,
+        "endChar": 31
+      },
+      "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfdfd04a_ed16f23a",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-09T14:00:20Z",
+      "side": 1,
+      "message": "nit: This is starting to be a lot of information in all textures just for ExternalTextures. Maybe we could file an issue in Dawn with Type-Enhancement-TechDebt to consider reducing this to a unique_ptr\u003cExternalImportInfo\u003e or soemthing like that that\u0027s only present for externally imported textures?",
       "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
