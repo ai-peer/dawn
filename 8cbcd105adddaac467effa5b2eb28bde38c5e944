@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cedc2509_05ec6d4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-10T20:44:21Z",
+      "side": 1,
+      "message": "Overall LGTM from me. I do think that Austin\u0027s suggestion to re-use ObjectHandle for some of this change makes a lot of sense though.",
+      "revId": "8cbcd105adddaac467effa5b2eb28bde38c5e944",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d874f354_e3dea820",
@@ -31,6 +48,30 @@
       "writtenOn": "2022-06-10T17:16:40Z",
       "side": 1,
       "message": "this could use an explanation about why we do +1 here. You would think - I\u0027m freeing my object so I should pass my object id and gen directly. But no, really you\u0027re putting the id back into the pool but tagging it with the next generation.\n\nBut also, maybe `FreeId` should be inlined here directly because it\u0027s tiny and would probably be more clear inlined given the above comment.",
+      "range": {
+        "startLine": 63,
+        "startChar": 12,
+        "endLine": 63,
+        "endChar": 49
+      },
+      "revId": "8cbcd105adddaac467effa5b2eb28bde38c5e944",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "963c0eaa_96b245c5",
+        "filename": "src/dawn/wire/client/ObjectAllocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-10T20:44:21Z",
+      "side": 1,
+      "message": "Could also rename it as FreeHandle if you do the other change that Austin suggested in ObjectBase.h. Then the addition can be done in the impl instead of at the arguments which would make a bit more sense.",
+      "parentUuid": "d874f354_e3dea820",
       "range": {
         "startLine": 63,
         "startChar": 12,
