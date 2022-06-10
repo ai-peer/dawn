@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2c4000a_cf4486f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T16:05:13Z",
+      "side": 1,
+      "message": "Build failures are:\n\n[ 52%] Building CXX object src/tint/CMakeFiles/libtint-fuzz.dir/reader/wgsl/lexer.cc.o\n/dawn/src/src/tint/reader/wgsl/lexer.cc:691:31: error: implicit conversion increases floating-point precision: \u0027const tint::Number\u003cfloat\u003e::type\u0027 (aka \u0027const float\u0027) to \u0027double\u0027 [-Werror,-Wdouble-promotion]\n        if (abs_result_f64 \u003e\u003d f32::kSmallest) {\n                           ~~ ^~~~~~~~~~~~~~\n/dawn/src/src/tint/reader/wgsl/lexer.cc:694:38: error: implicit conversion increases floating-point precision: \u0027const tint::Number\u003cfloat\u003e::type\u0027 (aka \u0027const float\u0027) to \u0027double\u0027 [-Werror,-Wdouble-promotion]\n        } else if (abs_result_f64 \u003e\u003d f32::kSmallestSubnormal) {\n                                  ~~ ^~~~~~~~~~~~~~~~~~~~~~~\n/dawn/src/src/tint/reader/wgsl/lexer.cc:732:31: error: implicit conversion increases floating-point precision: \u0027const tint::Number\u003ctint::detail::NumberKindF16\u003e::type\u0027 (aka \u0027const float\u0027) to \u0027double\u0027 [-Werror,-Wdouble-promotion]\n        if (abs_result_f64 \u003e\u003d f16::kSmallest) {\n                           ~~ ^~~~~~~~~~~~~~\n/dawn/src/src/tint/reader/wgsl/lexer.cc:735:38: error: implicit conversion increases floating-point precision: \u0027const tint::Number\u003ctint::detail::NumberKindF16\u003e::type\u0027 (aka \u0027const float\u0027) to \u0027double\u0027 [-Werror,-Wdouble-promotion]\n        } else if (abs_result_f64 \u003e\u003d f16::kSmallestSubnormal) {\n                                  ~~ ^~~~~~~~~~~~~~~~~~~~~~~\n4 errors generated.\nsrc/tint/CMakeFiles/libtint-fuzz.dir/build.make:2864: recipe for target \u0027src/tint/CMakeFiles/libtint-fuzz.dir/reader/wgsl/lexer.cc.o\u0027 failed\nmake[2]: *** [src/tint/CMakeFiles/libtint-fuzz.dir/reader/wgsl/lexer.cc.o] Error 1",
+      "revId": "25f0da04b04d51857c1951bda186dec07f828c7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
