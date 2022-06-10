@@ -129,6 +129,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ecce3337_9a558ed5",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T02:02:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b05f86d8_a01bfa28",
+      "range": {
+        "startLine": 641,
+        "startChar": 50,
+        "endLine": 641,
+        "endChar": 57
+      },
+      "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5c658362_176a4307",
         "filename": "tools/src/cmd/cts/roll/roll.go",
         "patchSetId": 2
@@ -209,6 +233,30 @@
       "writtenOn": "2022-06-08T08:52:52Z",
       "side": 1,
       "message": "So this will update / add files, but do we want to also remove files that have been deleted?",
+      "range": {
+        "startLine": 671,
+        "startChar": 1,
+        "endLine": 671,
+        "endChar": 55
+      },
+      "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfb32265_6a432433",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T02:02:09Z",
+      "side": 1,
+      "message": "Added deletion, but I didn\u0027t test it since there are no files to delete yet - PTAL again!",
+      "parentUuid": "05fd5a31_09b173f1",
       "range": {
         "startLine": 671,
         "startChar": 1,
