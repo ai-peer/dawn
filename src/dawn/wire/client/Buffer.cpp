@@ -74,8 +74,7 @@ WGPUBuffer Buffer::Create(Device* device, const WGPUBufferDescriptor* descriptor
     // Create the buffer and send the creation command.
     // This must happen after any potential device->CreateErrorBuffer()
     // as server expects allocating ids to be monotonically increasing
-    auto* bufferObjectAndSerial = wireClient->BufferAllocator().New(wireClient);
-    Buffer* buffer = bufferObjectAndSerial->object.get();
+    Buffer* buffer = wireClient->BufferAllocator().New(wireClient);
     buffer->mDevice = device;
     buffer->mDeviceIsAlive = device->GetAliveWeakPtr();
     buffer->mSize = descriptor->size;
@@ -98,7 +97,7 @@ WGPUBuffer Buffer::Create(Device* device, const WGPUBufferDescriptor* descriptor
         buffer->mMappedData = writeHandle->GetData();
     }
 
-    cmd.result = ObjectHandle{buffer->id, bufferObjectAndSerial->generation};
+    cmd.result = buffer->GetWireHandle();
 
     wireClient->SerializeCommand(
         cmd, cmd.readHandleCreateInfoLength + cmd.writeHandleCreateInfoLength,
@@ -126,18 +125,18 @@ WGPUBuffer Buffer::Create(Device* device, const WGPUBufferDescriptor* descriptor
 
 // static
 WGPUBuffer Buffer::CreateError(Device* device, const WGPUBufferDescriptor* descriptor) {
-    auto* allocation = device->client->BufferAllocator().New(device->client);
-    allocation->object->mDevice = device;
-    allocation->object->mDeviceIsAlive = device->GetAliveWeakPtr();
-    allocation->object->mSize = descriptor->size;
-    allocation->object->mUsage = static_cast<WGPUBufferUsage>(descriptor->usage);
+    Buffer* buffer = device->client->BufferAllocator().New(device->client);
+    buffer->mDevice = device;
+    buffer->mDeviceIsAlive = device->GetAliveWeakPtr();
+    buffer->mSize = descriptor->size;
+    buffer->mUsage = static_cast<WGPUBufferUsage>(descriptor->usage);
 
     DeviceCreateErrorBufferCmd cmd;
     cmd.self = ToAPI(device);
-    cmd.result = ObjectHandle{allocation->object->id, allocation->generation};
+    cmd.result = buffer->GetWireHandle();
     device->client->SerializeCommand(cmd);
 
-    return ToAPI(allocation->object.get());
+    return ToAPI(buffer);
 }
 
 Buffer::~Buffer() {

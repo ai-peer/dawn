@@ -23,86 +23,75 @@
 #include "dawn/common/Assert.h"
 #include "dawn/common/Compiler.h"
 #include "dawn/wire/WireCmd_autogen.h"
+#include "dawn/wire/client/ObjectBase.h"
 
 namespace dawn::wire::client {
 
 template <typename T>
 class ObjectAllocator {
   public:
-    struct ObjectAndSerial {
-        ObjectAndSerial(std::unique_ptr<T> object, uint32_t generation)
-            : object(std::move(object)), generation(generation) {}
-        std::unique_ptr<T> object;
-        uint32_t generation;
-    };
-
     ObjectAllocator() {
         // ID 0 is nullptr
-        mObjects.emplace_back(nullptr, 0);
+        mObjects.emplace_back(nullptr);
     }
 
     template <typename Client>
-    ObjectAndSerial* New(Client* client) {
-        uint32_t id = GetNewId();
-        ObjectBaseParams params = {client, id};
+    T* New(Client* client) {
+        FreeSlot slot = GetNewId();
+        ObjectBaseParams params = {client, slot.id, slot.generation};
         auto object = std::make_unique<T>(params);
         client->TrackObject(object.get());
 
-        if (id >= mObjects.size()) {
-            ASSERT(id == mObjects.size());
-            mObjects.emplace_back(std::move(object), 0);
+        if (slot.id >= mObjects.size()) {
+            ASSERT(slot.id == mObjects.size());
+            mObjects.emplace_back(std::move(object));
         } else {
-            ASSERT(mObjects[id].object == nullptr);
-
-            mObjects[id].generation++;
             // The generation should never overflow. We don't recycle ObjectIds that would
             // overflow their next generation.
-            ASSERT(mObjects[id].generation != 0);
-
-            mObjects[id].object = std::move(object);
+            ASSERT(slot.generation != 0);
+            ASSERT(mObjects[slot.id] == nullptr);
+            mObjects[slot.id] = std::move(object);
         }
 
-        return &mObjects[id];
+        return mObjects[slot.id].get();
     }
     void Free(T* obj) {
         ASSERT(obj->IsInList());
-        if (DAWN_LIKELY(mObjects[obj->id].generation != std::numeric_limits<uint32_t>::max())) {
+        if (DAWN_LIKELY(obj->generation != std::numeric_limits<uint32_t>::max())) {
             // Only recycle this ObjectId if the generation won't overflow on the next
             // allocation.
-            FreeId(obj->id);
+            FreeId(obj->id, obj->generation + 1);
         }
-        mObjects[obj->id].object = nullptr;
+        mObjects[obj->id] = nullptr;
     }
 
     T* GetObject(uint32_t id) {
         if (id >= mObjects.size()) {
             return nullptr;
         }
-        return mObjects[id].object.get();
-    }
-
-    uint32_t GetGeneration(uint32_t id) {
-        if (id >= mObjects.size()) {
-            return 0;
-        }
-        return mObjects[id].generation;
+        return mObjects[id].get();
     }
 
   private:
-    uint32_t GetNewId() {
-        if (mFreeIds.empty()) {
-            return mCurrentId++;
+    struct FreeSlot {
+        uint32_t id;
+        uint32_t generation;
+    };
+
+    FreeSlot GetNewId() {
+        if (mFreeSlots.empty()) {
+            return {mCurrentId++, 0};
         }
-        uint32_t id = mFreeIds.back();
-        mFreeIds.pop_back();
-        return id;
+        FreeSlot slot = mFreeSlots.back();
+        mFreeSlots.pop_back();
+        return slot;
     }
-    void FreeId(uint32_t id) { mFreeIds.push_back(id); }
+    void FreeId(uint32_t id, uint32_t generation) { mFreeSlots.push_back({id, generation}); }
 
     // 0 is an ID reserved to represent nullptr
     uint32_t mCurrentId = 1;
-    std::vector<uint32_t> mFreeIds;
-    std::vector<ObjectAndSerial> mObjects;
+    std::vector<FreeSlot> mFreeSlots;
+    std::vector<std::unique_ptr<T>> mObjects;
 };
 }  // namespace dawn::wire::client
 
