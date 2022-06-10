@@ -16,6 +16,40 @@
       "message": "PTAL",
       "revId": "df6361fcaec8111d83cffdab15f647c2ec6be2a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d05d775a_b6dcae26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T18:34:40Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "df6361fcaec8111d83cffdab15f647c2ec6be2a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec430177_31860f9d",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T18:34:40Z",
+      "side": 1,
+      "message": "since we don\u0027t run this configuration in rolls yet, you need to put # KEEP in the comment header or the tool might remove it later automatically",
+      "revId": "df6361fcaec8111d83cffdab15f647c2ec6be2a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
