@@ -4624,6 +4624,67 @@ test:12:11 note: reading from read_write storage buffer 'non_uniform' may result
 )");
 }
 
+TEST_F(UniformityAnalysisTest, PointerParamBecomesNonUniform) {
+    std::string src = R"(
+@binding(0) @group(0) var<storage, read_write> non_uniform_global : i32;
+
+fn foo(p : ptr<function, i32>, c : bool) {
+  if (c) {
+    *p = 42;
+  }
+}
+
+@stage(compute) @workgroup_size(64)
+fn main() {
+  var a : i32;
+  foo(&a, non_uniform_global == 0);
+
+  if (a == 0) {
+    workgroupBarrier();
+  }
+}
+)";
+
+    RunTest(src, false);
+    EXPECT_EQ(error_,
+              R"(test:16:5 warning: 'workgroupBarrier' must only be called from uniform control flow
+    workgroupBarrier();
+    ^^^^^^^^^^^^^^^^
+
+test:15:3 note: control flow depends on non-uniform value
+  if (a == 0) {
+  ^^
+
+test:13:11 note: reading from read_write storage buffer 'non_uniform_global' may result in a non-uniform value
+  foo(&a, non_uniform_global == 0);
+          ^^^^^^^^^^^^^^^^^^
+)");
+}
+
+TEST_F(UniformityAnalysisTest, PointerParamRemainsUniform) {
+    std::string src = R"(
+@binding(0) @group(0) var<uniform> uniform_global : i32;
+
+fn foo(p : ptr<function, i32>, c : bool) {
+  if (c) {
+    *p = 42;
+  }
+}
+
+@stage(compute) @workgroup_size(64)
+fn main() {
+  var a : i32;
+  foo(&a, uniform_global == 0);
+
+  if (a == 0) {
+    workgroupBarrier();
+  }
+}
+)";
+
+    RunTest(src, true);
+}
+
 TEST_F(UniformityAnalysisTest, NonUniformPointerParameterBecomesUniform_AfterUse) {
     std::string src = R"(
 @group(0) @binding(0) var<storage, read_write> non_uniform : i32;
