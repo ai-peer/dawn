@@ -39,6 +39,30 @@
       },
       "revId": "7acf128f16e5c02c9e68bae63ee52fd0ba870eb0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1145cbe0_e6f9cfa2",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1252,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-10T15:40:46Z",
+      "side": 1,
+      "message": "Great ideas. Both done.",
+      "parentUuid": "1cb093bc_531bcf35",
+      "range": {
+        "startLine": 1251,
+        "startChar": 0,
+        "endLine": 1252,
+        "endChar": 32
+      },
+      "revId": "7acf128f16e5c02c9e68bae63ee52fd0ba870eb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
