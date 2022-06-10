@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d602929_6da38a06",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-10T13:27:42Z",
+      "side": 1,
+      "message": "I have move the smallest subnormal value into a constant in Number\u003c*\u003e class in number.h.",
+      "parentUuid": "1e24b15c_5f670e5a",
+      "range": {
+        "startLine": 58,
+        "startChar": 43,
+        "endLine": 58,
+        "endChar": 59
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a214334b_abe88c70",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-06-08T17:07:18Z",
       "side": 1,
       "message": "nit: Please parnethesize:   (2^-14)*(2^-10)",
+      "range": {
+        "startLine": 60,
+        "startChar": 7,
+        "endLine": 60,
+        "endChar": 19
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7891111c_c0d093a1",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-10T13:27:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a214334b_abe88c70",
       "range": {
         "startLine": 60,
         "startChar": 7,
@@ -111,6 +159,30 @@
       "writtenOn": "2022-06-08T17:07:18Z",
       "side": 1,
       "message": "nit:  Alternate:  we find all 0s where the mantissa bits of f16 mapped to where they come from in f32.\n\n   0 \u003d\u003d (u32 \u0026 ((0x3ff) \u003c\u003c (23-10)))\n   \nMaybe that\u0027s less readable. :-)",
+      "range": {
+        "startLine": 70,
+        "startChar": 12,
+        "endLine": 70,
+        "endChar": 51
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a19d48f_6c2fa0db",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-10T13:27:42Z",
+      "side": 1,
+      "message": "I rephrase the condition for quantize to normal f16 value, subnormal f16 value and zero, hoping it would be more clear.\nSince all subnormal f16 values are strictly smaller (in absolute value) than any normal f16 values, comparing absolute value of input f32 and the smallest normal\\subnormal f16 value will work properly.",
+      "parentUuid": "a0863378_86b1c8b2",
       "range": {
         "startLine": 70,
         "startChar": 12,
@@ -201,6 +273,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fd0af8b_33e613f2",
+        "filename": "src/tint/number_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-10T13:27:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "422ca59d_307f07d1",
+      "range": {
+        "startLine": 148,
+        "startChar": 43,
+        "endLine": 148,
+        "endChar": 50
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b7e79a4_5497acb6",
@@ -224,6 +320,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dea1c9f_988f879a",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-10T13:27:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b7e79a4_5497acb6",
+      "range": {
+        "startLine": 667,
+        "startChar": 50,
+        "endLine": 667,
+        "endChar": 89
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "184e2646_6d3a864a",
@@ -237,6 +357,30 @@
       "writtenOn": "2022-06-08T17:07:18Z",
       "side": 1,
       "message": "This should have 3 instead of 2 here.\n\nPlease add a test for cases where the bottom 42 bits are: \n   1 \u003c\u003c 41\n   1 \u003c\u003c 40\n   \nand if you don\u0027t have it, then also a case for:\n   1 \u003c\u003c 0",
+      "range": {
+        "startLine": 698,
+        "startChar": 27,
+        "endLine": 698,
+        "endChar": 28
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be44a0fb_7b273607",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-10T13:27:42Z",
+      "side": 1,
+      "message": "Done. However as is shown in this CL, valid mantissa bits are less than 23 (for f32) and 10 (for f16) in the subnormal cases. I add the logic to check for these cases.",
+      "parentUuid": "184e2646_6d3a864a",
       "range": {
         "startLine": 698,
         "startChar": 27,

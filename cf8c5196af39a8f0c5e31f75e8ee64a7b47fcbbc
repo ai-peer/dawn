@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dea2bbb8_9ee3afee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-10T13:27:42Z",
+      "side": 1,
+      "message": "Hi, please take a look, thanks.\nI tried my best to rewrite the comment for f16::Quantize, making the point we discussed in previous reviewing explicit, hoping it would be more clear and helpful.\nI add hex floating literal exactly-representable validation of subnormal cases for f16 and also f32 in the new patchset, and add/fix some testcases for them.",
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
