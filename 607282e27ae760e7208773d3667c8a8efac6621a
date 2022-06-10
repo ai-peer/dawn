@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4447d710_562ece43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-10T08:22:25Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "607282e27ae760e7208773d3667c8a8efac6621a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e864e73_3852a113",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-10T08:22:25Z",
+      "side": 1,
+      "message": "Please add a go-doc comment. They start with the method name:\n\n`/// FilterByQuery returns the results that match the given query` or something.",
+      "revId": "607282e27ae760e7208773d3667c8a8efac6621a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
