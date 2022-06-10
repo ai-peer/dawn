@@ -5,6 +5,7 @@
 ### Breaking changes
 
 * The `smoothStep()` builtin has been removed (use `smoothstep` instead). [tint:1483](crbug.com/tint/1483)
+* Struct members can no longer be separated with semicolons (use commas instead). [tint:1475](crbug.com/tint/1475)
 
 ### Deprecated Features
 
