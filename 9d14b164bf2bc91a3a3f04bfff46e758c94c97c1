@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56f06b28_fab82f91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-10T16:37:52Z",
+      "side": 1,
+      "message": "Looks like the go unit tests are now failing.\nTo test, type the following in directory between the repo root and the directory holding the tests you care about.\n\n`go test ./...`",
+      "revId": "9d14b164bf2bc91a3a3f04bfff46e758c94c97c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
