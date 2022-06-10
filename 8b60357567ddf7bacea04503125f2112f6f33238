@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "632506e8_fa7d0fd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-06-10T21:51:21Z",
+      "side": 1,
+      "message": "Needs https://github.com/gpuweb/cts/pull/1526 to land and roll to fix the Blink WPT failures.",
+      "revId": "8b60357567ddf7bacea04503125f2112f6f33238",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
