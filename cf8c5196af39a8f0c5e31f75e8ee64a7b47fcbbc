@@ -16,6 +16,494 @@
       "message": "Hi, please take a look, thanks.\nI tried my best to rewrite the comment for f16::Quantize, making the point we discussed in previous reviewing explicit, hoping it would be more clear and helpful.\nI add hex floating literal exactly-representable validation of subnormal cases for f16 and also f32 in the new patchset, and add/fix some testcases for them.",
       "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d83e8b93_a73a6663",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "I have some nits about comments.\nBut I do want to see uint64_t(1) instead of 1ull",
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b3caeb4_bb5f5214",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "nit: It would be slightly helpful to say:  \n\nThe maximum finite f16 value has a biased exponent of 11110 in binary, or 30 decimal, and so unbiased exponent of 30 - 15 \u003d 15.\nThe minimum normal f16 value has biased exponent 000001 in binary, or 1 decimal, and unbiased exponent of 1 - 15 \u003d -14",
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67a44538_c478ff69",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "nit: \"finite\"",
+      "range": {
+        "startLine": 73,
+        "startChar": 87,
+        "endLine": 73,
+        "endChar": 93
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5186b01f_468da15f",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Because 143 \u003d 127 + 16 \u003d (f32 exponent bias) + (unbiased exponent of max f16 finite value) + 1\nGot it.",
+      "range": {
+        "startLine": 81,
+        "startChar": 22,
+        "endLine": 81,
+        "endChar": 25
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d519a4d1_8b98ac75",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "nit: \"finite\"",
+      "range": {
+        "startLine": 82,
+        "startChar": 9,
+        "endLine": 82,
+        "endChar": 15
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4811a50_72794f01",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Because 113 \u003d 127 - 14 \u003d (f32 exponent bias) + (unbiased exponent of min f16 normal value)\n\nGot it.  And this work is shown below in the proof for 2.2",
+      "range": {
+        "startLine": 83,
+        "startChar": 29,
+        "endLine": 83,
+        "endChar": 32
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29aa155a_a16635f6",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Right, 103 because f16 has 10 mantissa bits, and \n   103 \u003d 113 - 10\n       \u003d (min biased exponent in f32 of min normal f16 number)\n         - (number of mantissa bits in f16)\n         \nOr another way for my thinking is 112 is the max biased exponent, and all the actual mantissa bits will be explicitly represented in the f16 form. You can shift 9 more times and still be non-zero normal in f16. So that\u0027s 10 valid cases for the exponent.\n         \n         \nMakes sense.  And your 2.3 proof very explicitly shows the details.",
+      "range": {
+        "startLine": 88,
+        "startChar": 29,
+        "endLine": 88,
+        "endChar": 32
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35332ee1_8c7e9666",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "This is a very nice step-wise transformation of the f16 form to the f32 form.\nGreat!",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 54
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d6ab6ca_69d60d52",
+        "filename": "src/tint/number.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Not for you to fix, but I wish this was named kSmallestNormal",
+      "range": {
+        "startLine": 209,
+        "startChar": 26,
+        "endLine": 209,
+        "endChar": 35
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b2b4981_f0f31b62",
+        "filename": "src/tint/number.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Thanks for showing this representation.  It\u0027s much clearer to see the relationship between the -14 exponent and the -24 exponent.",
+      "range": {
+        "startLine": 212,
+        "startChar": 7,
+        "endLine": 212,
+        "endChar": 36
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de06a80d_3c5ed142",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "This section has great comments, thank you!",
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20c75d6e_36e3c027",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "nit: This could be int.",
+      "range": {
+        "startLine": 689,
+        "startChar": 8,
+        "endLine": 689,
+        "endChar": 16
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b8447be_7c4c2965",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "nit: There are 23 mantissa bits, but we know the most significant bit would be 1.\nIn other words, there are 22 x\u0027s.\n\nBut the point is that all these subnormal values in \u0027float\u0027 will be normal values in \u0027double\u0027. So that top 1 bit becomes the implied 1 bit in the normal double.  So up to 22 bits in the \u0027double\u0027 representation are allowed, and no more.",
+      "range": {
+        "startLine": 698,
+        "startChar": 63,
+        "endLine": 698,
+        "endChar": 85
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32b0b1b4_c8f99d00",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "nit: This could be int.",
+      "range": {
+        "startLine": 706,
+        "startChar": 12,
+        "endLine": 706,
+        "endChar": 19
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "feea2519_76f8e5b7",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Nice.",
+      "range": {
+        "startLine": 707,
+        "startChar": 12,
+        "endLine": 707,
+        "endChar": 92
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "317c8b3b_c2adf79a",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "nit: \"smaller than the smallest subnormal...\"",
+      "range": {
+        "startLine": 711,
+        "startChar": 28,
+        "endLine": 711,
+        "endChar": 40
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ac38d51_67949b78",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Please use uint64_t(1) here. It\u0027s clearer, and avoids a potential portability hazard.\n\nThe \u0027ull\u0027 indicates unsigned long long, but C++ does not guarantee a specific bit size for that.",
+      "range": {
+        "startLine": 717,
+        "startChar": 27,
+        "endLine": 717,
+        "endChar": 31
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbf264ca_692afffa",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "nit: This can be int",
+      "range": {
+        "startLine": 747,
+        "startChar": 12,
+        "endLine": 747,
+        "endChar": 19
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4c96c23_feb2a073",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Please use uint64_t(1) here also.",
+      "range": {
+        "startLine": 758,
+        "startChar": 27,
+        "endLine": 758,
+        "endChar": 31
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fcdc4dd_5e5a3914",
+        "filename": "src/tint/reader/wgsl/parser_impl_const_literal_test.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Nice catch!",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 42
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e38a11c_1c64237c",
+        "filename": "src/tint/reader/wgsl/parser_impl_const_literal_test.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Nice. Thanks for making these variations that don\u0027t always start with 1",
+      "range": {
+        "startLine": 345,
+        "startChar": 9,
+        "endLine": 345,
+        "endChar": 62
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e882808a_a1780bd2",
+        "filename": "src/tint/reader/wgsl/parser_impl_const_literal_test.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "These are all good comments.\nThank you.",
+      "range": {
+        "startLine": 741,
+        "startChar": 25,
+        "endLine": 741,
+        "endChar": 92
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

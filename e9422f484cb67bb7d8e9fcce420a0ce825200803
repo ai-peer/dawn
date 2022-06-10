@@ -82,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7948a64_fd5d8017",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e24b15c_5f670e5a",
+      "range": {
+        "startLine": 58,
+        "startChar": 43,
+        "endLine": 58,
+        "endChar": 59
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a214334b_abe88c70",
@@ -129,6 +153,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f41b9bc_ab265887",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a214334b_abe88c70",
+      "range": {
+        "startLine": 60,
+        "startChar": 7,
+        "endLine": 60,
+        "endChar": 19
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54f496ce_bf83b1e3",
@@ -142,6 +190,24 @@
       "writtenOn": "2022-06-08T17:07:18Z",
       "side": 1,
       "message": "You could calculate biased_exponent_original here, explain its possible values:\n\n  f32 exponent bias is 127\n  f16 exponent bias is 15.\n  So for a denormal f16 number, its f16 biased exponent is 0, and therefore\n  its biased exponent in f32 is 127-15, or 112.\n  Therefore we can break down the cases like this, based on the f32 biased exponent:\n  \n    more than 112:  value is normal in f16\n    112 or less:  value is denormal or zero in f16",
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a54658e_3b6ce2b0",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54f496ce_bf83b1e3",
       "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -193,6 +259,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aca26bf_ef7b9935",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0863378_86b1c8b2",
+      "range": {
+        "startLine": 70,
+        "startChar": 12,
+        "endLine": 70,
+        "endChar": 51
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8beb1406_f63341e0",
@@ -206,6 +296,24 @@
       "writtenOn": "2022-06-08T17:07:18Z",
       "side": 1,
       "message": "Explain the range of possible values here, something like this:\n\nWe know the original f32 value is normal, so its biased exponent is more than 0.\n\nFor f16, the exponent bias is 15, so 0 recorded exponent is actually an exponent of -15.\nFor f32, the exponent bias is 127, so the biased representation of exponent -15 is 127-15 \u003d 112.\n\nThe mantissa of a subnormal f16 is 10 bits wide.\n\nbiggest f16 subnormal:\n    f16 (as fields):  (s,0,0x3ff)   as f32: (s,112, 1023 \u003c\u003c (23-10))\n  \nsmallest (f16 mantissa shifted right 9 bit positions):\n    f16 (as fields):  (s,0,0x001)   as f32: (s,112-9, 1 \u003c\u003c (23-10))  \n                                            (s,  103, 1 \u003c\u003c (23-10))",
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "530a0690_5d7a1891",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8beb1406_f63341e0",
       "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -233,6 +341,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "123b2ccd_aea837e8",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe814052_9c2370c8",
+      "range": {
+        "startLine": 84,
+        "startChar": 21,
+        "endLine": 84,
+        "endChar": 67
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af8e8b6f_a3ec7200",
@@ -246,6 +378,24 @@
       "writtenOn": "2022-06-08T17:07:18Z",
       "side": 1,
       "message": "Please assert that discard_bits is between 14 and 23.\nThat helps me see that this shift will not overflow, and the subtraction by 1 will not underflow.",
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7df78ef_d6a335c1",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af8e8b6f_a3ec7200",
       "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -286,6 +436,30 @@
       "writtenOn": "2022-06-10T13:27:42Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "422ca59d_307f07d1",
+      "range": {
+        "startLine": 148,
+        "startChar": 43,
+        "endLine": 148,
+        "endChar": 50
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "730b805b_d9383c5d",
+        "filename": "src/tint/number_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "I think I missed reading the comment at lines 145-146!  Sorry about that.",
       "parentUuid": "422ca59d_307f07d1",
       "range": {
         "startLine": 148,
@@ -344,6 +518,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "385afa2e_a7e216be",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b7e79a4_5497acb6",
+      "range": {
+        "startLine": 667,
+        "startChar": 50,
+        "endLine": 667,
+        "endChar": 89
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "184e2646_6d3a864a",
@@ -380,6 +578,30 @@
       "writtenOn": "2022-06-10T13:27:42Z",
       "side": 1,
       "message": "Done. However as is shown in this CL, valid mantissa bits are less than 23 (for f32) and 10 (for f16) in the subnormal cases. I add the logic to check for these cases.",
+      "parentUuid": "184e2646_6d3a864a",
+      "range": {
+        "startLine": 698,
+        "startChar": 27,
+        "endLine": 698,
+        "endChar": 28
+      },
+      "revId": "e9422f484cb67bb7d8e9fcce420a0ce825200803",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c3aa0cb_852f9677",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-10T14:25:03Z",
+      "side": 1,
+      "message": "This code has been replaced with a different algorithm.",
       "parentUuid": "184e2646_6d3a864a",
       "range": {
         "startLine": 698,
