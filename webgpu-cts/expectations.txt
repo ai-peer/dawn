@@ -61,7 +61,7 @@
 # tags: [ webgpu-adapter-default webgpu-adapter-swiftshader ]
 # END TAG HEADER
 
-# Last rolled: 2022-06-08 10:23:15PM
+# Last rolled: 2022-06-10 03:17:56PM
 
 ################################################################################
 # webgpu:shader,execution,zero_init:compute,zero_init failures on intel
