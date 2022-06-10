@@ -268,6 +268,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99484a70_b4551755",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T15:20:02Z",
+      "side": 1,
+      "message": "Hm, I opted to keep this the way it is because I think? it would mess up the indenting in the output file such that the \u003cbase\u003e tag would be indented much more than I would like it to be",
+      "parentUuid": "26d9c5ac_a923e476",
+      "range": {
+        "startLine": 669,
+        "startChar": 29,
+        "endLine": 669,
+        "endChar": 95
+      },
+      "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05fd5a31_09b173f1",
