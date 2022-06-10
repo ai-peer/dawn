@@ -150,6 +150,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f9ce386_eae9418d",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-10T09:25:48Z",
+      "side": 1,
+      "message": "Ah, I see, this is defensive programming for the cache not working, thanks for the explanation. Yeah I think it makes sense for Dawn to be somewhat resilient to that external factor. We can always change this later as well.",
+      "parentUuid": "312ef087_6f41cf56",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b4df38b_696f235b",
@@ -187,6 +205,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7f9cb45c_89b939b3",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-10T09:25:48Z",
+      "side": 1,
+      "message": "Ah gotcha, it would be nice to no handle ResultOrError manually if we can avoid it, but if it\u0027s not possible, well that\u0027s ok too :)",
+      "parentUuid": "876ddb57_d2b3a669",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96c0adf4_4c626676",
         "filename": "src/dawn/native/CacheRequest.h",
         "patchSetId": 13
@@ -216,6 +252,24 @@
       "side": 1,
       "message": "may add it later but wasn\u0027t sure without finishing up usages of LoadOrRun in the various backends.\n\nThere were some unclear lifetime concerns about usage of the computed result and storing it. We want to be able to defer the store till later, so it doesn\u0027t block immediate usage of the pipeline/shader.\n\nIf we store immediately, then I think we need to do a copy to do that, because whoever is using the CacheResult\u003cT\u003e after LoadOrRun could drop it immediately after and we\u0027ll have a use-after-free.\nDeferred storage could look more like you do `CacheResult\u003cT\u003e::EnsureStored(BlobCache*);` once you\u0027re done using it so we don\u0027t need to copy.\nMetal shaders especially, since in order to store, we need to serialize the string, and a few reflection booleans as well. That serialization shouldn\u0027t need to happen before you can use the MTLFunction.\n\nNot sure yet though tbh",
       "parentUuid": "96c0adf4_4c626676",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c2e9d19_c0e81285",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-10T09:25:48Z",
+      "side": 1,
+      "message": "Thanks for the explanation. Agreed that it is not clear yet what should happen on the various backends, we can always see later.",
+      "parentUuid": "8f216104_33e9fc90",
       "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
