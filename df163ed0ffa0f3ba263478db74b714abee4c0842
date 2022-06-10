@@ -131,6 +131,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6543c493_984797fc",
+        "filename": "src/dawn/native/CacheKey.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T15:27:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32912942_f0f06269",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 46
+      },
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30354dcf_9a4e86aa",
@@ -453,6 +477,30 @@
       "side": 1,
       "message": "Ah.. the includes/forward declares are a bit troublesome. I can imagine those as input in the JSON though, and if they are a pointer type then we can forward declare in header, otherwise it probably needs it in the header.\n\nFor the file thing, I was naively considering just generating all the structs in the same file... But now that I think about it that would probably be overkill / we would probably need to add ifdefs here and there for platform dependent structs... Though maybe we could have like labels for the structs and use the ifdefs and just have 1 file. Not sure.\n\nI think this is ok as well though and we can always iterate, but I do think there is some value in keeping all the CacheRequest information in one place (the JSON) so it is easy to know what we are caching and what we are not.",
       "parentUuid": "26485354_a801b208",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 27
+      },
+      "revId": "df163ed0ffa0f3ba263478db74b714abee4c0842",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04feeea8_c4fd3a7d",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T15:27:27Z",
+      "side": 1,
+      "message": "ok, let\u0027s use the macro for now, and we can see if we can make the JSON thing nice to use in the future",
+      "parentUuid": "43742ffd_d471881e",
       "range": {
         "startLine": 147,
         "startChar": 0,

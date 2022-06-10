@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37f1de27_a6ffbdc7",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T15:27:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dc9d43e_ccf71418",
+      "range": {
+        "startLine": 66,
+        "startChar": 32,
+        "endLine": 66,
+        "endChar": 33
+      },
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1242c62a_ced9f538",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-06-09T15:26:40Z",
       "side": 1,
       "message": "nit: ResultOrError\u003cT\u003e",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 6
+      },
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "870aa9b4_445ef33b",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T15:27:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1242c62a_ced9f538",
       "range": {
         "startLine": 71,
         "startChar": 4,
@@ -81,6 +129,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0b41b76_dbcccffe",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T15:27:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8aefdd58_bac66fe2",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69fec932_ced414ea",
@@ -98,6 +164,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e47cbe69_51a6399a",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T15:27:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69fec932_ced414ea",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6fa5228_3c8703b4",
@@ -111,6 +195,24 @@
       "writtenOn": "2022-06-09T15:26:40Z",
       "side": 1,
       "message": "[a]",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca12a1ca_8706a8fc",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T15:27:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6fa5228_3c8703b4",
       "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -221,6 +323,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85279ce8_d51937c0",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T15:27:27Z",
+      "side": 1,
+      "message": "I gave this a shot but it was hard to make nice since the return type of the function is `auto`. using DAWN_TRY or DAWN_TRY_ASSIGN would require us to have an explicit return type so the compiler tries to implicitly construct ResultOrError\u003cT\u003e\n\nBut, not using auto would mean wrapping all the type helpers and `using` stuff around so we can get to it earlier.\n\nSo, keeping as is",
+      "parentUuid": "7f9cb45c_89b939b3",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96c0adf4_4c626676",
@@ -291,6 +411,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79d39333_cab50422",
+        "filename": "src/dawn/native/CacheResult.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T15:27:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eecb477_94adb5a7",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ce44f91_114e938f",
@@ -304,6 +442,24 @@
       "writtenOn": "2022-06-09T15:26:40Z",
       "side": 1,
       "message": "ditto",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "752d2202_8fab073c",
+        "filename": "src/dawn/native/CacheResult.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T15:27:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ce44f91_114e938f",
       "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -325,6 +481,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d7eea70_a115b069",
+        "filename": "src/dawn/native/CacheResult.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T15:27:27Z",
+      "side": 1,
+      "message": "removed one, but keeping the others since wip stuff is using it",
+      "parentUuid": "607959c8_4e9ece0f",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52e70dac_969f7336",
@@ -338,6 +512,24 @@
       "writtenOn": "2022-06-09T15:26:40Z",
       "side": 1,
       "message": "nit: Maybe we should test that UnsafeUnkeyed values are also passed.",
+      "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e1d6374_040fd1fa",
+        "filename": "src/dawn/tests/unittests/native/CacheRequestTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T15:27:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52e70dac_969f7336",
       "revId": "8c24118d7287baf271d907d2733c4ca1c579853e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
