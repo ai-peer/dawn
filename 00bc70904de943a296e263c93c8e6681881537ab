@@ -16,6 +16,144 @@
       "message": "LGTM",
       "revId": "00bc70904de943a296e263c93c8e6681881537ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d1ee7db_4ea01d07",
+        "filename": "src/dawn/native/CacheRequest.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-10T20:53:26Z",
+      "side": 1,
+      "message": "nit. BlobCache from the device.",
+      "range": {
+        "startLine": 76,
+        "startChar": 70,
+        "endLine": 76,
+        "endChar": 79
+      },
+      "revId": "00bc70904de943a296e263c93c8e6681881537ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbab06f4_8839c0d6",
+        "filename": "src/dawn/native/CacheResult.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-10T20:53:26Z",
+      "side": 1,
+      "message": "nit. formatting",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 48,
+        "endChar": 46
+      },
+      "revId": "00bc70904de943a296e263c93c8e6681881537ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d5dd841_0d422ae1",
+        "filename": "src/dawn/tests/unittests/native/CacheRequestTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-10T20:53:26Z",
+      "side": 1,
+      "message": "nit formatting",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 48
+      },
+      "revId": "00bc70904de943a296e263c93c8e6681881537ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11ae914f_adec3c48",
+        "filename": "src/dawn/tests/unittests/native/CacheRequestTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-10T20:53:26Z",
+      "side": 1,
+      "message": "nit formatting",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 57
+      },
+      "revId": "00bc70904de943a296e263c93c8e6681881537ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8316e62a_422f7ad2",
+        "filename": "src/dawn/tests/unittests/native/CacheRequestTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-10T20:53:26Z",
+      "side": 1,
+      "message": "nit formatting",
+      "range": {
+        "startLine": 192,
+        "startChar": 8,
+        "endLine": 193,
+        "endChar": 55
+      },
+      "revId": "00bc70904de943a296e263c93c8e6681881537ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14327382_29953c77",
+        "filename": "src/dawn/tests/unittests/native/CacheRequestTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-10T20:53:26Z",
+      "side": 1,
+      "message": "nit formatting",
+      "range": {
+        "startLine": 295,
+        "startChar": 8,
+        "endLine": 296,
+        "endChar": 55
+      },
+      "revId": "00bc70904de943a296e263c93c8e6681881537ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
