@@ -306,6 +306,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3702f5d2_d13dd90e",
+        "filename": "src/dawn/wire/client/ObjectAllocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-10T14:52:06Z",
+      "side": 1,
+      "message": "I\u0027m still thinking about how to make this nice. In the end it would be ideal if the code to create objects could just be something like:\n\n  client-\u003eGetAllocator()-\u003eMake\u003cBuffer\u003e(a, bunch, of, args);\n  \nAnd that the user just has to define something like\n\n  client::Buffer::Initialize(A a, Bunch bunch, Of of, Args args) {...}\n  \nThis way the only boilerplate on the client objects is that 1) you need to do `using ObjectBase::ObjectBase` and 2) you can\u0027t do things in the constructor but have to do them inside an Initialize method. WDYT of this idea in general? Then the `ObjectAllocator` would have a `PerObjectType\u003cObjectBaseAllocator\u003e mAllocators` which would act on `unique_ptr\u003cObjectBase\u003e` (we already have a vtable so making the destructor virtual is cheap). Then ObjectAllocator would just be a type-safe wrapper around the type erased allocators acting on ObjectBase.\n\nAlso I\u0027m thinking of moving the generation counter in ObjectBase.",
+      "parentUuid": "00918f53_0f0a4def",
+      "range": {
+        "startLine": 47,
+        "startChar": 25,
+        "endLine": 47,
+        "endChar": 37
+      },
+      "revId": "c915315dbc778a088fec46a0161adb507ec36ec3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ae8fa19_7b669036",
         "filename": "src/dawn/wire/client/ObjectAllocator.h",
         "patchSetId": 2
