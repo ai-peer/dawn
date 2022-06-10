@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "519aee6e_3d6b755e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-10T08:27:26Z",
+      "side": 1,
+      "message": "Good stuff! A bunch of minor nits.",
+      "revId": "68f2243a335d8ba2595a04774f12161d35b818aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d1b65ed_26ef414a",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-10T08:27:26Z",
+      "side": 1,
+      "message": "should be able to use `nil` here",
+      "range": {
+        "startLine": 383,
+        "startChar": 5,
+        "endLine": 383,
+        "endChar": 15
+      },
+      "revId": "68f2243a335d8ba2595a04774f12161d35b818aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

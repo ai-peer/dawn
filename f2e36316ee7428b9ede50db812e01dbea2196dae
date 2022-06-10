@@ -220,6 +220,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26d9c5ac_a923e476",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-10T08:27:26Z",
+      "side": 1,
+      "message": "Sorry, I forgot escape sequences aren\u0027t handled with the backticks. They do, however, support multi-line strings. So you could write:\n\n```\ncontents \u003d contents[:i] + `\n\u003cbase ref\u003d\"/gen/third_party/dawn/webgpu-cts/src/webgpu\" /\u003e` + contents[i:]\n```\n\nübernit. Feel free to ignore",
+      "parentUuid": "6f7a04c6_3d6f1ecc",
+      "range": {
+        "startLine": 669,
+        "startChar": 29,
+        "endLine": 669,
+        "endChar": 95
+      },
+      "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddcf9560_458443dd",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-10T08:27:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b064678f_17cbba98",
+      "range": {
+        "startLine": 669,
+        "startChar": 0,
+        "endLine": 669,
+        "endChar": 110
+      },
+      "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05fd5a31_09b173f1",
@@ -257,6 +305,30 @@
       "side": 1,
       "message": "Added deletion, but I didn\u0027t test it since there are no files to delete yet - PTAL again!",
       "parentUuid": "05fd5a31_09b173f1",
+      "range": {
+        "startLine": 671,
+        "startChar": 1,
+        "endLine": 671,
+        "endChar": 55
+      },
+      "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e988127_a9a18ede",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-10T08:27:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bfb32265_6a432433",
       "range": {
         "startLine": 671,
         "startChar": 1,
