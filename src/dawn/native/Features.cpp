@@ -115,6 +115,8 @@ Feature FromAPIFeature(wgpu::FeatureName feature) {
             return Feature::TextureCompressionETC2;
         case wgpu::FeatureName::TextureCompressionASTC:
             return Feature::TextureCompressionASTC;
+        case wgpu::FeatureName::DepthClipControl:
+            return Feature::DepthClipControl;
         case wgpu::FeatureName::DepthClamping:
             return Feature::DepthClamping;
         case wgpu::FeatureName::Depth24UnormStencil8:
@@ -149,6 +151,8 @@ wgpu::FeatureName ToAPIFeature(Feature feature) {
             return wgpu::FeatureName::PipelineStatisticsQuery;
         case Feature::TimestampQuery:
             return wgpu::FeatureName::TimestampQuery;
+        case Feature::DepthClipControl:
+            return wgpu::FeatureName::DepthClipControl;
         case Feature::DepthClamping:
             return wgpu::FeatureName::DepthClamping;
         case Feature::Depth24UnormStencil8:

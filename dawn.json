@@ -1369,7 +1369,7 @@
         "category": "enum",
         "values": [
             {"value": 0, "name": "undefined", "jsrepr": "undefined"},
-            {"value": 1, "name": "depth clip control", "tags": ["upstream", "emscripten"]},
+            {"value": 1, "name": "depth clip control"},
             {"value": 2, "name": "depth24 unorm stencil8"},
             {"value": 3, "name": "depth32 float stencil8"},
             {"value": 4, "name": "timestamp query"},
