@@ -292,6 +292,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f713a503_6fa45512",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-10T16:06:28Z",
+      "side": 1,
+      "message": "That\u0027s fine. For future reference, this isn\u0027t an issue, as `gofmt` doesn\u0027t force the indentation for a backtick block. You just use newlines and whitespace as you\u0027d like it formatted.",
+      "parentUuid": "99484a70_b4551755",
+      "range": {
+        "startLine": 669,
+        "startChar": 29,
+        "endLine": 669,
+        "endChar": 95
+      },
+      "revId": "f2e36316ee7428b9ede50db812e01dbea2196dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05fd5a31_09b173f1",
