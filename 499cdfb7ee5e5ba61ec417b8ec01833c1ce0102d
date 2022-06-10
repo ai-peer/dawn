@@ -68,6 +68,24 @@
       "parentUuid": "a9bb6008_38bc8767",
       "revId": "499cdfb7ee5e5ba61ec417b8ec01833c1ce0102d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0401dd9_2fcece8c",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-06-10T17:03:32Z",
+      "side": 1,
+      "message": "Changed it to wait on the first call only using a sentinel value.",
+      "parentUuid": "f1601f8a_353a3d20",
+      "revId": "499cdfb7ee5e5ba61ec417b8ec01833c1ce0102d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
