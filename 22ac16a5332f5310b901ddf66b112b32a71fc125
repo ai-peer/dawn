@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95bfba48_5abd4c09",
+        "filename": "include/dawn/native/D3D12Backend.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-06-10T00:20:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21ac726e_a417b164",
+      "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9861e6a9_f85c3375",
@@ -106,6 +124,30 @@
       "side": 1,
       "message": "+1, it would happen here, and this code would call EnsureSynchronizationForImport or some name like that which is a function waiting on the fence or acquiring the keyed mutex. https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/CommandRecordingContext.cpp;drc\u003d41e4d9a34c1d9dcb2eef3ff39ff9c1f987bfa02a;l\u003d74\n\nThat said, while we can make sure the fence wait happens only once, we can\u0027t do the equivalent change for ReleaseKeyedMutex because it can be called more than once. Having it in destroy seems good.",
       "parentUuid": "9861e6a9_f85c3375",
+      "range": {
+        "startLine": 579,
+        "startChar": 55,
+        "endLine": 579,
+        "endChar": 59
+      },
+      "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80d28874_96aea7c2",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-06-10T00:20:28Z",
+      "side": 1,
+      "message": "I moved the fence wait and keyed mutex acquire to a SynchronizeImportedTextureBeforeUse method called from ExecuteCommandLists, but note that we can\u0027t signal the fence until we\u0027re fully done with the texture i.e. until destroy so I added a SynchronizeImportedTextureAfterUse method that only releases the keyed mutex.",
+      "parentUuid": "26f0fc37_54519c92",
       "range": {
         "startLine": 579,
         "startChar": 55,
@@ -163,6 +205,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ee6ae1c_f3c2029d",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-06-10T00:20:28Z",
+      "side": 1,
+      "message": "I got rid of the IsExternalTexture method - I think I had added it in a previous iteration of this CL to be called from outside TextureD3D12, but now since it\u0027s called in exactly one place inside TextureD3D12, removing it is fine.\n\nI don\u0027t have strong opinions on what the nomenclature for externally imported textures should be, but I\u0027d prefer changing all of the names at once in a follow-up CL rather than change a few in this CL. Does that sound reasonable - happy to add a TODO for follow-up, but maybe it\u0027s a moot point now that this CL doesn\u0027t add a new IsExternalTexture method?",
+      "parentUuid": "3d353631_1c6588d5",
+      "range": {
+        "startLine": 585,
+        "startChar": 14,
+        "endLine": 585,
+        "endChar": 31
+      },
+      "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfdfd04a_ed16f23a",
@@ -180,6 +246,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4e5676a_aeba29a9",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-06-10T00:20:28Z",
+      "side": 1,
+      "message": "Added a TODO.",
+      "parentUuid": "bfdfd04a_ed16f23a",
+      "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83bfce19_6acae6a2",
@@ -193,6 +277,30 @@
       "writtenOn": "2022-06-09T05:37:35Z",
       "side": 1,
       "message": "why these values?",
+      "range": {
+        "startLine": 464,
+        "startChar": 0,
+        "endLine": 466,
+        "endChar": 52
+      },
+      "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "883e6a71_47415a1c",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-06-10T00:20:28Z",
+      "side": 1,
+      "message": "it\u0027s so that Dawn waits on fence value 1 signaled above to synchronize with the D3D11 render target view clear - added a comment",
+      "parentUuid": "83bfce19_6acae6a2",
       "range": {
         "startLine": 464,
         "startChar": 0,
@@ -226,6 +334,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db215f21_d5539ff7",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-06-10T00:20:28Z",
+      "side": 1,
+      "message": "The rationale for returning the fence but not the keyed mutex is that the keyed mutex is always attached to the texture whereas the fence is a separate object. Returning the keyed mutex was a convenience whereas returning the fence is necessary.\n\nI changed it to also return the keyed mutex for consistency and also to pass the descriptors as const\u0026.",
+      "parentUuid": "6b3b9735_c0784f9c",
+      "range": {
+        "startLine": 614,
+        "startChar": 3,
+        "endLine": 617,
+        "endChar": 82
+      },
+      "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "021798fe_13a9ad1c",
@@ -239,6 +371,30 @@
       "writtenOn": "2022-06-09T05:37:35Z",
       "side": 1,
       "message": "in these tests, it\u0027s hard to know why we\u0027re using what fence values. I think this one is because WrapSharedHandle is using (0, 1). Would it be possible to have the sequence of fence values evident from looking only at the test body?\n\nProduceTexture is where the fence values are needed. Maybe we can pull that part out of WrapShareHandle and WrapAndClearD3D11Texture.",
+      "range": {
+        "startLine": 711,
+        "startChar": 4,
+        "endLine": 712,
+        "endChar": 44
+      },
+      "revId": "22ac16a5332f5310b901ddf66b112b32a71fc125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c97fd3b_9838bdb3",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-06-10T00:20:28Z",
+      "side": 1,
+      "message": "I made these changes:\n\n1) WrapSharedHandle takes a fenceSignalValue parameter that makes it clear in the test which values are used for wait/signal from the beginning.\n\n2) WrapAndClearD3D11Texture returns a nextFenceWaitValue as an output param - it signals with a value of 2 by default since it needs to synchronize between D3D11 and D3D12 internally so it wasn\u0027t a great idea to allow the caller to specify this.\n\n3) ExpectPixelEq... takes a fenceWaitValue parameter.\n\nHopefully this makes it more readable - but happy to implement other suggestions too.",
+      "parentUuid": "021798fe_13a9ad1c",
       "range": {
         "startLine": 711,
         "startChar": 4,

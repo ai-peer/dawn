@@ -22,6 +22,30 @@
       },
       "revId": "84bf4226d8bcd5e70ca40c0888eb717a61aab592",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa7bcb6f_90d2f02e",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-06-10T00:20:28Z",
+      "side": 0,
+      "message": "Read+write seemed to work fine, but that might be just us getting lucky with timing. Fundamentally, getting read+write working means coordinating between the devices issuing reads/writes to insert the correct resource barriers which might be possible if all the devices are in Dawn, but extremely difficult if the other device is external to Dawn.\n\nAlso, we don\u0027t allow concurrent read+write in Chromium shared images so it\u0027s not something we care about.",
+      "parentUuid": "3cddb42d_26f2f581",
+      "range": {
+        "startLine": 659,
+        "startChar": 0,
+        "endLine": 659,
+        "endChar": 36
+      },
+      "revId": "84bf4226d8bcd5e70ca40c0888eb717a61aab592",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
