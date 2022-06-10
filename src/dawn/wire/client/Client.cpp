@@ -82,46 +82,46 @@ void Client::DestroyAllObjects() {
 }
 
 ReservedTexture Client::ReserveTexture(WGPUDevice device) {
-    auto* allocation = TextureAllocator().New(this);
+    Texture* texture = TextureAllocator().New(this);
 
     ReservedTexture result;
-    result.texture = ToAPI(allocation->object.get());
-    result.id = allocation->object->id;
-    result.generation = allocation->generation;
+    result.texture = ToAPI(texture);
+    result.id = texture->id;
+    result.generation = texture->generation;
     result.deviceId = FromAPI(device)->id;
-    result.deviceGeneration = DeviceAllocator().GetGeneration(FromAPI(device)->id);
+    result.deviceGeneration = FromAPI(device)->generation;
     return result;
 }
 
 ReservedSwapChain Client::ReserveSwapChain(WGPUDevice device) {
-    auto* allocation = SwapChainAllocator().New(this);
+    SwapChain* swapChain = SwapChainAllocator().New(this);
 
     ReservedSwapChain result;
-    result.swapchain = ToAPI(allocation->object.get());
-    result.id = allocation->object->id;
-    result.generation = allocation->generation;
+    result.swapchain = ToAPI(swapChain);
+    result.id = swapChain->id;
+    result.generation = swapChain->generation;
     result.deviceId = FromAPI(device)->id;
-    result.deviceGeneration = DeviceAllocator().GetGeneration(FromAPI(device)->id);
+    result.deviceGeneration = FromAPI(device)->generation;
     return result;
 }
 
 ReservedDevice Client::ReserveDevice() {
-    auto* allocation = DeviceAllocator().New(this);
+    Device* device = DeviceAllocator().New(this);
 
     ReservedDevice result;
-    result.device = ToAPI(allocation->object.get());
-    result.id = allocation->object->id;
-    result.generation = allocation->generation;
+    result.device = ToAPI(device);
+    result.id = device->id;
+    result.generation = device->generation;
     return result;
 }
 
 ReservedInstance Client::ReserveInstance() {
-    auto* allocation = InstanceAllocator().New(this);
+    Instance* instance = InstanceAllocator().New(this);
 
     ReservedInstance result;
-    result.instance = ToAPI(allocation->object.get());
-    result.id = allocation->object->id;
-    result.generation = allocation->generation;
+    result.instance = ToAPI(instance);
+    result.id = instance->id;
+    result.generation = instance->generation;
     return result;
 }
 
