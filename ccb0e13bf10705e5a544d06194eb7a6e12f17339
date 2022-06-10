@@ -33,6 +33,24 @@
       "message": "LGTM (Does chromium side needs CL as well?)",
       "revId": "ccb0e13bf10705e5a544d06194eb7a6e12f17339",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c160e3b1_f9425d88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-10T20:19:12Z",
+      "side": 1,
+      "message": "yes, it will need one to hook it up to blink",
+      "parentUuid": "00e1358c_a6efabc6",
+      "revId": "ccb0e13bf10705e5a544d06194eb7a6e12f17339",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
