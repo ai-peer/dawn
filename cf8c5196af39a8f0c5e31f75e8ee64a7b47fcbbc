@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a6dccdd_29672875",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-10T16:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b3caeb4_bb5f5214",
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67a44538_c478ff69",
@@ -65,6 +83,30 @@
       "writtenOn": "2022-06-10T14:25:03Z",
       "side": 1,
       "message": "nit: \"finite\"",
+      "range": {
+        "startLine": 73,
+        "startChar": 87,
+        "endLine": 73,
+        "endChar": 93
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6135fb98_e2339da4",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-10T16:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67a44538_c478ff69",
       "range": {
         "startLine": 73,
         "startChar": 87,
@@ -111,6 +153,30 @@
       "writtenOn": "2022-06-10T14:25:03Z",
       "side": 1,
       "message": "nit: \"finite\"",
+      "range": {
+        "startLine": 82,
+        "startChar": 9,
+        "endLine": 82,
+        "endChar": 15
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60873f2f_b5135f8e",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-10T16:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d519a4d1_8b98ac75",
       "range": {
         "startLine": 82,
         "startChar": 9,
@@ -276,6 +342,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f42c7fc3_f30eb623",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-10T16:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20c75d6e_36e3c027",
+      "range": {
+        "startLine": 689,
+        "startChar": 8,
+        "endLine": 689,
+        "endChar": 16
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b8447be_7c4c2965",
@@ -299,6 +389,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83d44d58_17f658ab",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-10T16:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b8447be_7c4c2965",
+      "range": {
+        "startLine": 698,
+        "startChar": 63,
+        "endLine": 698,
+        "endChar": 85
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32b0b1b4_c8f99d00",
@@ -312,6 +426,30 @@
       "writtenOn": "2022-06-10T14:25:03Z",
       "side": 1,
       "message": "nit: This could be int.",
+      "range": {
+        "startLine": 706,
+        "startChar": 12,
+        "endLine": 706,
+        "endChar": 19
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b3a2d68_de622792",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-10T16:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32b0b1b4_c8f99d00",
       "range": {
         "startLine": 706,
         "startChar": 12,
@@ -368,6 +506,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "191f2efc_2dcd8db2",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-10T16:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "317c8b3b_c2adf79a",
+      "range": {
+        "startLine": 711,
+        "startChar": 28,
+        "endLine": 711,
+        "endChar": 40
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ac38d51_67949b78",
@@ -381,6 +543,30 @@
       "writtenOn": "2022-06-10T14:25:03Z",
       "side": 1,
       "message": "Please use uint64_t(1) here. It\u0027s clearer, and avoids a potential portability hazard.\n\nThe \u0027ull\u0027 indicates unsigned long long, but C++ does not guarantee a specific bit size for that.",
+      "range": {
+        "startLine": 717,
+        "startChar": 27,
+        "endLine": 717,
+        "endChar": 31
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85d9c887_286f677c",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-10T16:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ac38d51_67949b78",
       "range": {
         "startLine": 717,
         "startChar": 27,
@@ -414,6 +600,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c8050a7_df622c7f",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-10T16:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbf264ca_692afffa",
+      "range": {
+        "startLine": 747,
+        "startChar": 12,
+        "endLine": 747,
+        "endChar": 19
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4c96c23_feb2a073",
@@ -427,6 +637,30 @@
       "writtenOn": "2022-06-10T14:25:03Z",
       "side": 1,
       "message": "Please use uint64_t(1) here also.",
+      "range": {
+        "startLine": 758,
+        "startChar": 27,
+        "endLine": 758,
+        "endChar": 31
+      },
+      "revId": "cf8c5196af39a8f0c5e31f75e8ee64a7b47fcbbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f97f9d22_1e4f331e",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-10T16:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4c96c23_feb2a073",
       "range": {
         "startLine": 758,
         "startChar": 27,
