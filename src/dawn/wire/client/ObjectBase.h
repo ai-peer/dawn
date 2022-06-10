@@ -18,7 +18,6 @@
 #include "dawn/webgpu.h"
 
 #include "dawn/common/LinkedList.h"
-#include "dawn/wire/ObjectType_autogen.h"
 #include "dawn/wire/ObjectHandle.h"
 
 namespace dawn::wire::client {
@@ -28,6 +27,7 @@ class Client;
 struct ObjectBaseParams {
     Client* client;
     ObjectId id;
+    ObjectGeneration generation;
 };
 
 // All objects on the client side have:
@@ -41,9 +41,12 @@ struct ObjectBase : public LinkNode<ObjectBase> {
 
     virtual void CancelCallbacksForDisconnect() {}
 
+    ObjectHandle GetWireHandle() const;
+
     Client* const client;
     uint32_t refcount;
     const ObjectId id;
+    const ObjectGeneration generation;
 };
 
 }  // namespace dawn::wire::client
