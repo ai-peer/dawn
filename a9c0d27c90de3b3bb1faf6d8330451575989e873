@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d32c3f63_c7d885ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-10T15:53:32Z",
+      "side": 1,
+      "message": "PTAL at the stack! I\u0027m not 100% sure yet what the right direction is for https://dawn-review.googlesource.com/c/dawn/+/93141 but these changes seem like they will go in the right direction, whichever solution we choose.",
+      "revId": "a9c0d27c90de3b3bb1faf6d8330451575989e873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
