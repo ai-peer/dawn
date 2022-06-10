@@ -518,6 +518,7 @@ class Adapter : public AdapterBase {
             uint32_t max3DTextureSize;
             uint32_t maxTextureArrayLayers;
             uint32_t minBufferOffsetAlignment;
+            uint32_t maxColorRenderTargets;
         };
 
         struct LimitsForFamily {
@@ -542,6 +543,7 @@ class Adapter : public AdapterBase {
                 {&MTLDeviceLimits::max3DTextureSize,                      {  2048u,  2048u,  2048u,  2048u,  2048u,  2048u,  2048u,   2048u,  2048u }},
                 {&MTLDeviceLimits::maxTextureArrayLayers,                 {  2048u,  2048u,  2048u,  2048u,  2048u,  2048u,  2048u,   2048u,  2048u }},
                 {&MTLDeviceLimits::minBufferOffsetAlignment,              {     4u,     4u,     4u,     4u,     4u,     4u,     4u,    256u,   256u }},
+                {&MTLDeviceLimits::maxColorRenderTargets,                 {     4u,     8u,     8u,     8u,     8u,     8u,     8u,      8u,     8u }},
             };
         // clang-format on
 
@@ -559,6 +561,7 @@ class Adapter : public AdapterBase {
         limits->v1.maxTextureDimension2D = mtlLimits.max2DTextureSize;
         limits->v1.maxTextureDimension3D = mtlLimits.max3DTextureSize;
         limits->v1.maxTextureArrayLayers = mtlLimits.maxTextureArrayLayers;
+        limits->v1.maxColorAttachments = mtlLimits.maxColorRenderTargets;
 
         uint32_t maxBuffersPerStage = mtlLimits.maxBufferArgumentEntriesPerFunc;
         maxBuffersPerStage -= 1;  // One slot is reserved to store buffer lengths.
@@ -624,7 +627,7 @@ class Adapter : public AdapterBase {
         limits->v1.maxStorageBufferBindingSize = maxBufferSize;
 
         // TODO(crbug.com/dawn/685):
-        // LIMITS NOT SET:
+        // Using base limits for:
         // - maxBindGroups
         // - maxVertexBufferArrayStride
 
