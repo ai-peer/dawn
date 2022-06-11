@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b1eb73c_ca723a41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-11T02:15:57Z",
+      "side": 1,
+      "message": "PTAL. Sorry for the issue. CCed the people I thought may see the Kokoro failure.",
+      "revId": "e48215740bfca0061a7d4d61842cf3dda7167818",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
