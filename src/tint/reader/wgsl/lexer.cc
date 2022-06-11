@@ -711,7 +711,7 @@ Token Lexer::try_hex_float() {
             // ...
             // 2^-147 > v >= 2^-148, binary32 s_00000000_0000000000000000000001x, 1 arbitrary bit.
             // 2^-148 > v >= 2^-149, binary32 s_00000000_00000000000000000000001, 0 arbitrary bit.
-            int unbiased_exponent = signed_exponent - kExponentBias;
+            int unbiased_exponent = signed_exponent - static_cast<int>(kExponentBias);
             TINT_ASSERT(Reader, (unbiased_exponent <= -127) && (unbiased_exponent >= -149));
             valid_mantissa_bits = unbiased_exponent + 149;  // 0 for -149, and 22 for -127
         } else if (abs_result_f64 != 0.0) {
@@ -758,7 +758,7 @@ Token Lexer::try_hex_float() {
             // ...
             // 2^-22 > v >= 2^-23, binary16 s_00000_000000001x, 1 arbitrary bits.
             // 2^-23 > v >= 2^-24, binary16 s_00000_0000000001, 0 arbitrary bits.
-            int unbiased_exponent = signed_exponent - kExponentBias;
+            int unbiased_exponent = signed_exponent - static_cast<int>(kExponentBias);
             TINT_ASSERT(Reader, (unbiased_exponent <= -15) && (unbiased_exponent >= -24));
             valid_mantissa_bits = unbiased_exponent + 24;  // 0 for -24, and 9 for -15
         } else if (abs_result_f64 != 0.0) {
