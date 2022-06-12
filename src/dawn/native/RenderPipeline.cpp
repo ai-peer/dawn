@@ -498,18 +498,17 @@ RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
     mVertexBufferCount = descriptor->vertex.bufferCount;
     const VertexBufferLayout* buffers = descriptor->vertex.buffers;
     for (uint8_t slot = 0; slot < mVertexBufferCount; ++slot) {
-        // Skip unused slots
-        if (buffers[slot].stepMode == wgpu::VertexStepMode::VertexBufferNotUsed) {
-            continue;
-        }
-
         VertexBufferSlot typedSlot(slot);
 
-        mVertexBufferSlotsUsed.set(typedSlot);
         mVertexBufferInfos[typedSlot].arrayStride = buffers[slot].arrayStride;
         mVertexBufferInfos[typedSlot].stepMode = buffers[slot].stepMode;
         mVertexBufferInfos[typedSlot].usedBytesInStride = 0;
         mVertexBufferInfos[typedSlot].lastStride = 0;
+
+        if (buffers[slot].stepMode != wgpu::VertexStepMode::VertexBufferNotUsed) {
+            mVertexBufferSlotsUsed.set(typedSlot);
+        }
+
         switch (buffers[slot].stepMode) {
             case wgpu::VertexStepMode::Vertex:
                 mVertexBufferSlotsUsedAsVertexBuffer.set(typedSlot);
@@ -518,7 +517,7 @@ RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
                 mVertexBufferSlotsUsedAsInstanceBuffer.set(typedSlot);
                 break;
             default:
-                DAWN_UNREACHABLE();
+                break;
         }
 
         for (uint32_t i = 0; i < buffers[slot].attributeCount; ++i) {
