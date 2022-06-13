@@ -22,74 +22,78 @@
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/Compiler.h"
-#include "dawn/wire/WireCmd_autogen.h"
+#include "dawn/wire/ObjectType_autogen.h"
+#include "dawn/wire/client/ApiObjects_autogen.h"
 #include "dawn/wire/client/ObjectBase.h"
 
 namespace dawn::wire::client {
 
-template <typename T>
+class Client;
+
+// A helper class used in ObjectAllocator, ObjectBaseStore owns the association of some ObjectBase
+// and ObjectHandles. The lifetime of the ObjectBase is then owned by the ObjectBaseStore,
+// destruction happening when Free is called.
+//
+// Since the wire has one "ID" namespace per type of object, each ObjectBaseStore should contain a
+// single type of objects. However no templates are used because ObjectAllocator wraps
+// ObjectStoreBase and is type-generic, so ObjectStoreBase is type-erased to only work on
+// ObjectBase.
+class ObjectBaseStore {
+  public:
+    ObjectBaseStore();
+
+    ObjectHandle ReserveHandle();
+    void Insert(std::unique_ptr<ObjectBase> obj);
+    void Free(ObjectBase* obj);
+    ObjectBase* Get(ObjectId id) const;
+
+  private:
+    uint32_t mCurrentId;
+    std::vector<ObjectHandle> mFreeHandles;
+    std::vector<std::unique_ptr<ObjectBase>> mObjects;
+};
+
+// ObjectAllocator is a service of the Client that handles the allocation of API objects, both
+// regular C++ memory allocation, but also the allocation of their wire handles.
 class ObjectAllocator {
   public:
-    ObjectAllocator() {
-        // ID 0 is nullptr
-        mObjects.emplace_back(nullptr);
+    explicit ObjectAllocator(Client* client);
+
+    // Make<T>(arg1, arg2, arg3) creates a new T, calling a constructor of the form:
+    //
+    //   T::T(ObjectBaseParams, arg1, arg2, arg3)
+    template <typename T, typename... Args>
+    T* Make(Args&&... args) {
+        constexpr ObjectType type = ObjectTypeToTypeEnum<T>::value;
+        ObjectBaseParams params = {mClient, mPerTypeStores[type].ReserveHandle()};
+
+        auto objectOwned = std::make_unique<T>(params, std::forward<Args>(args)...);
+        T* object = objectOwned.get();
+
+        Track(std::move(objectOwned), type);
+        return object;
     }
 
-    template <typename Client>
-    T* New(Client* client) {
-        ObjectHandle handle = GetFreeHandle();
-        ObjectBaseParams params = {client, handle};
-        auto object = std::make_unique<T>(params);
-        client->TrackObject(object.get());
-
-        if (handle.id >= mObjects.size()) {
-            ASSERT(handle.id == mObjects.size());
-            mObjects.emplace_back(std::move(object));
-        } else {
-            // The generation should never overflow. We don't recycle ObjectIds that would
-            // overflow their next generation.
-            ASSERT(handle.generation != 0);
-            ASSERT(mObjects[handle.id] == nullptr);
-            mObjects[handle.id] = std::move(object);
-        }
-
-        return mObjects[handle.id].get();
-    }
+    template <typename T>
     void Free(T* obj) {
-        ASSERT(obj->IsInList());
-        // The wire reuses ID for objects to keep them in a packed array starting from 0.
-        // To avoid issues with asynchronous server->client communication referring to an ID that's
-        // already reused, each handle also has a generation that's increment by one on each reuse.
-        // Avoid overflows by only reusing the ID if the increment of the generation won't overflow.
-        ObjectHandle currentHandle = obj->GetWireHandle();
-        if (DAWN_LIKELY(currentHandle.generation != std::numeric_limits<ObjectGeneration>::max())) {
-            mFreeHandles.push_back({currentHandle.id, currentHandle.generation + 1});
-        }
-        mObjects[currentHandle.id] = nullptr;
+        Free(obj, ObjectTypeToTypeEnum<T>::value);
     }
+    void Free(ObjectBase* obj, ObjectType type);
 
-    T* GetObject(uint32_t id) {
-        if (id >= mObjects.size()) {
-            return nullptr;
-        }
-        return mObjects[id].get();
+    template <typename T>
+    T* Get(ObjectId id) {
+        return static_cast<T*>(mPerTypeStores[ObjectTypeToTypeEnum<T>::value].Get(id));
     }
 
   private:
-    ObjectHandle GetFreeHandle() {
-        if (mFreeHandles.empty()) {
-            return {mCurrentId++, 0};
-        }
-        ObjectHandle handle = mFreeHandles.back();
-        mFreeHandles.pop_back();
-        return handle;
-    }
+    // Tracking is separate so that calls to the Client are done in the .cpp file. Otherwise there
+    // is an unresolvable cyclic dependency.
+    void Track(std::unique_ptr<ObjectBase> obj, ObjectType type);
 
-    // 0 is an ID reserved to represent nullptr
-    uint32_t mCurrentId = 1;
-    std::vector<ObjectHandle> mFreeHandles;
-    std::vector<std::unique_ptr<T>> mObjects;
+    dawn::wire::client::Client* mClient;
+    PerObjectType<ObjectBaseStore> mPerTypeStores;
 };
+
 }  // namespace dawn::wire::client
 
 #endif  // SRC_DAWN_WIRE_CLIENT_OBJECTALLOCATOR_H_

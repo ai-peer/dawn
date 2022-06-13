@@ -63,6 +63,7 @@ target_sources(dawn_wire PRIVATE
     "client/Instance.h"
     "client/LimitsAndFeatures.cpp"
     "client/LimitsAndFeatures.h"
+    "client/ObjectAllocator.cpp"
     "client/ObjectAllocator.h"
     "client/ObjectBase.cpp"
     "client/ObjectBase.h"

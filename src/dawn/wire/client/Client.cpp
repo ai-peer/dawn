@@ -38,7 +38,10 @@ class NoopCommandSerializer final : public CommandSerializer {
 }  // anonymous namespace
 
 Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTransferService)
-    : ClientBase(), mSerializer(serializer), mMemoryTransferService(memoryTransferService) {
+    : ClientBase(),
+      mSerializer(serializer),
+      mAllocator(this),
+      mMemoryTransferService(memoryTransferService) {
     if (mMemoryTransferService == nullptr) {
         // If a MemoryTransferService is not provided, fall back to inline memory.
         mOwnedMemoryTransferService = CreateInlineMemoryTransferService();
@@ -48,6 +51,10 @@ Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTrans
 
 Client::~Client() {
     DestroyAllObjects();
+}
+
+ObjectAllocator* Client::GetAllocator() {
+    return &mAllocator;
 }
 
 void Client::DestroyAllObjects() {
@@ -61,7 +68,7 @@ void Client::DestroyAllObjects() {
         cmd.objectType = ObjectType::Device;
         cmd.objectId = object->GetWireId();
         SerializeCommand(cmd);
-        FreeObject(ObjectType::Device, object);
+        mAllocator.Free(object, ObjectType::Device);
     }
 
     for (auto& objectList : mObjects) {
@@ -76,13 +83,13 @@ void Client::DestroyAllObjects() {
             cmd.objectType = objectType;
             cmd.objectId = object->GetWireId();
             SerializeCommand(cmd);
-            FreeObject(objectType, object);
+            mAllocator.Free(object, objectType);
         }
     }
 }
 
 ReservedTexture Client::ReserveTexture(WGPUDevice device) {
-    Texture* texture = TextureAllocator().New(this);
+    Texture* texture = mAllocator.Make<Texture>();
 
     ReservedTexture result;
     result.texture = ToAPI(texture);
@@ -94,7 +101,7 @@ ReservedTexture Client::ReserveTexture(WGPUDevice device) {
 }
 
 ReservedSwapChain Client::ReserveSwapChain(WGPUDevice device) {
-    SwapChain* swapChain = SwapChainAllocator().New(this);
+    SwapChain* swapChain = mAllocator.Make<SwapChain>();
 
     ReservedSwapChain result;
     result.swapchain = ToAPI(swapChain);
@@ -106,7 +113,7 @@ ReservedSwapChain Client::ReserveSwapChain(WGPUDevice device) {
 }
 
 ReservedDevice Client::ReserveDevice() {
-    Device* device = DeviceAllocator().New(this);
+    Device* device = mAllocator.Make<Device>();
 
     ReservedDevice result;
     result.device = ToAPI(device);
@@ -116,7 +123,7 @@ ReservedDevice Client::ReserveDevice() {
 }
 
 ReservedInstance Client::ReserveInstance() {
-    Instance* instance = InstanceAllocator().New(this);
+    Instance* instance = mAllocator.Make<Instance>();
 
     ReservedInstance result;
     result.instance = ToAPI(instance);
@@ -126,19 +133,19 @@ ReservedInstance Client::ReserveInstance() {
 }
 
 void Client::ReclaimTextureReservation(const ReservedTexture& reservation) {
-    TextureAllocator().Free(FromAPI(reservation.texture));
+    mAllocator.Free(FromAPI(reservation.texture));
 }
 
 void Client::ReclaimSwapChainReservation(const ReservedSwapChain& reservation) {
-    SwapChainAllocator().Free(FromAPI(reservation.swapchain));
+    mAllocator.Free(FromAPI(reservation.swapchain));
 }
 
 void Client::ReclaimDeviceReservation(const ReservedDevice& reservation) {
-    DeviceAllocator().Free(FromAPI(reservation.device));
+    mAllocator.Free(FromAPI(reservation.device));
 }
 
 void Client::ReclaimInstanceReservation(const ReservedInstance& reservation) {
-    InstanceAllocator().Free(FromAPI(reservation.instance));
+    mAllocator.Free(FromAPI(reservation.instance));
 }
 
 void Client::Disconnect() {
@@ -163,6 +170,10 @@ void Client::Disconnect() {
 
 bool Client::IsDisconnected() const {
     return mDisconnected;
+}
+
+void Client::TrackObject(ObjectBase* object, ObjectType type) {
+    mObjects[type].Append(object);
 }
 
 }  // namespace dawn::wire::client
