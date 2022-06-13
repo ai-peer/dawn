@@ -70,20 +70,20 @@ void SingleEntryPoint::Run(CloneContext& ctx, const DataMap& inputs, DataMap&) c
         if (auto* ty = decl->As<ast::TypeDecl>()) {
             // TODO(jrprice): Strip unused types.
             ctx.dst->AST().AddTypeDecl(ctx.Clone(ty));
-        } else if (auto* var = decl->As<ast::Variable>()) {
-            if (referenced_vars.count(var)) {
-                if (var->is_overridable) {
+        } else if (auto* v = decl->As<ast::Variable>()) {
+            if (referenced_vars.count(v)) {
+                if (auto* override = v->As<ast::Override>()) {
                     // It is an overridable constant
-                    if (!ast::HasAttribute<ast::IdAttribute>(var->attributes)) {
+                    if (!ast::HasAttribute<ast::IdAttribute>(v->attributes)) {
                         // If the constant doesn't already have an @id() attribute, add one
                         // so that its allocated ID so that it won't be affected by other
                         // stripped away constants
-                        auto* global = sem.Get(var)->As<sem::GlobalVariable>();
+                        auto* global = sem.Get(override);
                         const auto* id = ctx.dst->Id(global->ConstantId());
-                        ctx.InsertFront(var->attributes, id);
+                        ctx.InsertFront(v->attributes, id);
                     }
                 }
-                ctx.dst->AST().AddGlobalVariable(ctx.Clone(var));
+                ctx.dst->AST().AddGlobalVariable(ctx.Clone(v));
             }
         } else if (auto* func = decl->As<ast::Function>()) {
             if (sem.Get(func)->HasAncestorEntryPoint(entry_point->symbol)) {

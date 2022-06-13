@@ -18,30 +18,21 @@
 #include "src/tint/sem/variable.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ast::Variable);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Var);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Let);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Override);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Parameter);
 
 namespace tint::ast {
 
 Variable::Variable(ProgramID pid,
                    const Source& src,
                    const Symbol& sym,
-                   StorageClass dsc,
-                   Access da,
                    const ast::Type* ty,
-                   bool constant,
-                   bool overridable,
                    const Expression* ctor,
                    AttributeList attrs)
-    : Base(pid, src),
-      symbol(sym),
-      type(ty),
-      is_const(constant),
-      is_overridable(overridable),
-      constructor(ctor),
-      attributes(std::move(attrs)),
-      declared_storage_class(dsc),
-      declared_access(da) {
+    : Base(pid, src), symbol(sym), type(ty), constructor(ctor), attributes(std::move(attrs)) {
     TINT_ASSERT(AST, symbol.IsValid());
-    TINT_ASSERT(AST, is_overridable ? is_const : true);
     TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(AST, symbol, program_id);
     TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(AST, constructor, program_id);
 }
@@ -63,14 +54,93 @@ VariableBindingPoint Variable::BindingPoint() const {
     return VariableBindingPoint{group, binding};
 }
 
-const Variable* Variable::Clone(CloneContext* ctx) const {
+Var::Var(ProgramID pid,
+         const Source& src,
+         const Symbol& sym,
+         StorageClass storage_class,
+         Access access,
+         const ast::Type* ty,
+         const Expression* ctor,
+         AttributeList attrs)
+    : Base(pid, src, sym, ty, ctor, attrs),
+      declared_storage_class(storage_class),
+      declared_access(access) {}
+
+Var::Var(Var&&) = default;
+
+Var::~Var() = default;
+
+const Var* Var::Clone(CloneContext* ctx) const {
     auto src = ctx->Clone(source);
     auto sym = ctx->Clone(symbol);
     auto* ty = ctx->Clone(type);
     auto* ctor = ctx->Clone(constructor);
     auto attrs = ctx->Clone(attributes);
-    return ctx->dst->create<Variable>(src, sym, declared_storage_class, declared_access, ty,
-                                      is_const, is_overridable, ctor, attrs);
+    return ctx->dst->create<Var>(src, sym, declared_storage_class, declared_access, ty, ctor,
+                                 attrs);
+}
+
+Let::Let(ProgramID pid,
+         const Source& src,
+         const Symbol& sym,
+         const ast::Type* ty,
+         const Expression* ctor,
+         AttributeList attrs)
+    : Base(pid, src, sym, ty, ctor, attrs) {
+    TINT_ASSERT(AST, ctor != nullptr);
+}
+
+Let::Let(Let&&) = default;
+
+Let::~Let() = default;
+
+const Let* Let::Clone(CloneContext* ctx) const {
+    auto src = ctx->Clone(source);
+    auto sym = ctx->Clone(symbol);
+    auto* ty = ctx->Clone(type);
+    auto* ctor = ctx->Clone(constructor);
+    auto attrs = ctx->Clone(attributes);
+    return ctx->dst->create<Let>(src, sym, ty, ctor, attrs);
+}
+
+Override::Override(ProgramID pid,
+                   const Source& src,
+                   const Symbol& sym,
+                   const ast::Type* ty,
+                   const Expression* ctor,
+                   AttributeList attrs)
+    : Base(pid, src, sym, ty, ctor, attrs) {}
+
+Override::Override(Override&&) = default;
+
+Override::~Override() = default;
+
+const Override* Override::Clone(CloneContext* ctx) const {
+    auto src = ctx->Clone(source);
+    auto sym = ctx->Clone(symbol);
+    auto* ty = ctx->Clone(type);
+    auto* ctor = ctx->Clone(constructor);
+    auto attrs = ctx->Clone(attributes);
+    return ctx->dst->create<Override>(src, sym, ty, ctor, attrs);
+}
+
+Parameter::Parameter(ProgramID pid,
+                     const Source& src,
+                     const Symbol& sym,
+                     const ast::Type* ty,
+                     AttributeList attrs)
+    : Base(pid, src, sym, ty, nullptr, attrs) {}
+
+Parameter::Parameter(Parameter&&) = default;
+
+Parameter::~Parameter() = default;
+
+const Parameter* Parameter::Clone(CloneContext* ctx) const {
+    auto src = ctx->Clone(source);
+    auto sym = ctx->Clone(symbol);
+    auto* ty = ctx->Clone(type);
+    auto attrs = ctx->Clone(attributes);
+    return ctx->dst->create<Parameter>(src, sym, ty, attrs);
 }
 
 }  // namespace tint::ast
