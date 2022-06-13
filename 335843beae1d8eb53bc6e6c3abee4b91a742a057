@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb520f88_40c67e6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-06-13T08:03:34Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin, I found in Dawn we have already forbidden the creation of multisampled textures with R8Snorm, RG8Snorm, RGBA8Snorm and RG11B10Ufloat:\n\nIn Dawn:\nR8Snorm\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Format.cpp;l\u003d352\nRG8Snorm\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Format.cpp;l\u003d361\nRGBA8Snorm\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Format.cpp;l\u003d374\nRG11B10Ufloat\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Format.cpp;l\u003d381\n\nIn dawn_unittests:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/utils/TextureUtils.cpp;l\u003d149\n\nSorry for my misunderstanding before.\n\nPTAL, thanks!",
+      "revId": "335843beae1d8eb53bc6e6c3abee4b91a742a057",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
