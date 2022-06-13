@@ -87,16 +87,6 @@ TEST_F(ResolverTypeValidationTest, GlobalVariableWithStorageClass_Pass) {
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 
-TEST_F(ResolverTypeValidationTest, GlobalLetWithStorageClass_Fail) {
-    // let<private> global_var: f32;
-    AST().AddGlobalVariable(create<ast::Variable>(
-        Source{{12, 34}}, Symbols().Register("global_var"), ast::StorageClass::kPrivate,
-        ast::Access::kUndefined, ty.f32(), true, false, Expr(1.23_f), ast::AttributeList{}));
-
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: global constants shouldn't have a storage class");
-}
-
 TEST_F(ResolverTypeValidationTest, GlobalConstNoStorageClass_Pass) {
     // let global_var: f32;
     GlobalConst(Source{{12, 34}}, "global_var", ty.f32(), Construct(ty.f32()));
