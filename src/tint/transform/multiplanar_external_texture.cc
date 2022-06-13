@@ -86,7 +86,7 @@ struct MultiplanarExternalTexture::State {
         // binding and create two additional bindings (one texture_2d<f32> to
         // represent the secondary plane and one uniform buffer for the
         // ExternalTextureParams struct).
-        for (auto* var : ctx.src->AST().GlobalVariables()) {
+        for (auto* var : ctx.src->AST().Globals<ast::Var>()) {
             auto* sem_var = sem.Get(var);
             if (!sem_var->Type()->UnwrapRef()->Is<sem::ExternalTexture>()) {
                 continue;
@@ -265,7 +265,6 @@ struct MultiplanarExternalTexture::State {
     /// expression to it.
     void createGammaCorrectionFn() {
         gamma_correction_sym = b.Symbols().New("gammaCorrection");
-
         b.Func(
             gamma_correction_sym,
             {

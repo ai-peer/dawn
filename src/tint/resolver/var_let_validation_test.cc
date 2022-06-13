@@ -45,9 +45,7 @@ TEST_F(ResolverVarLetValidationTest, VarNoInitializerNoType) {
     WrapInFunction(Var(Source{{12, 34}}, "a", nullptr));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "12:34 error: function scope var declaration requires a type or "
-              "initializer");
+    EXPECT_EQ(r()->error(), "12:34 error: function-scope 'var' requires a type or initializer");
 }
 
 TEST_F(ResolverVarLetValidationTest, GlobalVarNoInitializerNoType) {
@@ -55,9 +53,7 @@ TEST_F(ResolverVarLetValidationTest, GlobalVarNoInitializerNoType) {
     Global(Source{{12, 34}}, "a", nullptr);
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "12:34 error: module scope var declaration requires a type and "
-              "initializer");
+    EXPECT_EQ(r()->error(), "12:34 error: module-scope 'var' requires a type and initializer");
 }
 
 TEST_F(ResolverVarLetValidationTest, VarTypeNotStorable) {

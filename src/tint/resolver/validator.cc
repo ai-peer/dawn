@@ -291,7 +291,7 @@ bool Validator::Materialize(const sem::Materialize* m) const {
     return true;
 }
 
-bool Validator::VariableConstructorOrCast(const ast::Variable* var,
+bool Validator::VariableConstructorOrCast(const ast::Variable* v,
                                           ast::StorageClass storage_class,
                                           const sem::Type* storage_ty,
                                           const sem::Type* rhs_ty) const {
@@ -299,14 +299,14 @@ bool Validator::VariableConstructorOrCast(const ast::Variable* var,
 
     // Value type has to match storage type
     if (storage_ty != value_type) {
-        std::string decl = var->is_const ? "let" : "var";
+        std::string decl = v->Is<ast::Let>() ? "let" : "var";
         AddError("cannot initialize " + decl + " of type '" + sem_.TypeNameOf(storage_ty) +
                      "' with value of type '" + sem_.TypeNameOf(rhs_ty) + "'",
-                 var->source);
+                 v->source);
         return false;
     }
 
-    if (!var->is_const) {
+    if (v->Is<ast::Var>()) {
         switch (storage_class) {
             case ast::StorageClass::kPrivate:
             case ast::StorageClass::kFunction:
@@ -319,7 +319,7 @@ bool Validator::VariableConstructorOrCast(const ast::Variable* var,
                              "' cannot have an initializer. var initializers are only "
                              "supported for the storage classes "
                              "'private' and 'function'",
-                         var->source);
+                         v->source);
                 return false;
         }
     }
@@ -496,25 +496,24 @@ bool Validator::StorageClassLayout(const sem::Variable* var,
 }
 
 bool Validator::GlobalVariable(
-    const sem::Variable* var,
+    const sem::GlobalVariable* global,
     std::unordered_map<uint32_t, const sem::Variable*> constant_ids,
     std::unordered_map<const sem::Type*, const Source&> atomic_composite_info) const {
-    auto* decl = var->Declaration();
+    auto* decl = global->Declaration();
     if (!NoDuplicateAttributes(decl->attributes)) {
         return false;
     }
 
-    for (auto* attr : decl->attributes) {
-        if (decl->is_const) {
+    if (auto* override = decl->As<ast::Override>()) {
+        for (auto* attr : decl->attributes) {
             if (auto* id_attr = attr->As<ast::IdAttribute>()) {
                 uint32_t id = id_attr->value;
                 auto it = constant_ids.find(id);
-                if (it != constant_ids.end() && it->second != var) {
+                if (it != constant_ids.end() && it->second != global) {
                     AddError("pipeline constant IDs must be unique", attr->source);
                     AddNote(
                         "a pipeline constant with an ID of " + std::to_string(id) +
-                            " was previously declared "
-                            "here:",
+                            " was previously declared here:",
                         ast::GetAttribute<ast::IdAttribute>(it->second->Declaration()->attributes)
                             ->source);
                     return false;
@@ -524,17 +523,19 @@ bool Validator::GlobalVariable(
                     return false;
                 }
             } else {
-                AddError("attribute is not valid for constants", attr->source);
+                AddError("attribute is not valid for overrides", attr->source);
                 return false;
             }
-        } else {
+        }
+    } else {
+        for (auto* attr : decl->attributes) {
             bool is_shader_io_attribute =
                 attr->IsAnyOf<ast::BuiltinAttribute, ast::InterpolateAttribute,
                               ast::InvariantAttribute, ast::LocationAttribute>();
-            bool has_io_storage_class = var->StorageClass() == ast::StorageClass::kInput ||
-                                        var->StorageClass() == ast::StorageClass::kOutput;
-            if (!(attr->IsAnyOf<ast::BindingAttribute, ast::GroupAttribute,
-                                ast::InternalAttribute>()) &&
+            bool has_io_storage_class = global->StorageClass() == ast::StorageClass::kInput ||
+                                        global->StorageClass() == ast::StorageClass::kOutput;
+            if (!attr->IsAnyOf<ast::BindingAttribute, ast::GroupAttribute,
+                               ast::InternalAttribute>() &&
                 (!is_shader_io_attribute || !has_io_storage_class)) {
                 AddError("attribute is not valid for variables", attr->source);
                 return false;
@@ -542,16 +543,13 @@ bool Validator::GlobalVariable(
         }
     }
 
-    if (var->StorageClass() == ast::StorageClass::kFunction) {
-        AddError(
-            "variables declared at module scope must not be in the function "
-            "storage class",
-            decl->source);
+    if (global->StorageClass() == ast::StorageClass::kFunction) {
+        AddError("module-scope 'var' must not use storage class 'function'", decl->source);
         return false;
     }
 
     auto binding_point = decl->BindingPoint();
-    switch (var->StorageClass()) {
+    switch (global->StorageClass()) {
         case ast::StorageClass::kUniform:
         case ast::StorageClass::kStorage:
         case ast::StorageClass::kHandle: {
@@ -559,10 +557,7 @@ bool Validator::GlobalVariable(
             // Each resource variable must be declared with both group and binding
             // attributes.
             if (!binding_point) {
-                AddError(
-                    "resource variables require @group and @binding "
-                    "attributes",
-                    decl->source);
+                AddError("resource variables require @group and @binding attributes", decl->source);
                 return false;
             }
             break;
@@ -571,31 +566,29 @@ bool Validator::GlobalVariable(
             if (binding_point.binding || binding_point.group) {
                 // https://gpuweb.github.io/gpuweb/wgsl/#attribute-binding
                 // Must only be applied to a resource variable
-                AddError(
-                    "non-resource variables must not have @group or @binding "
-                    "attributes",
-                    decl->source);
+                AddError("non-resource variables must not have @group or @binding attributes",
+                         decl->source);
                 return false;
             }
     }
 
-    // https://gpuweb.github.io/gpuweb/wgsl/#variable-declaration
-    // The access mode always has a default, and except for variables in the
-    // storage storage class, must not be written.
-    if (var->StorageClass() != ast::StorageClass::kStorage &&
-        decl->declared_access != ast::Access::kUndefined) {
-        AddError("only variables in <storage> storage class may declare an access mode",
-                 decl->source);
-        return false;
-    }
+    if (auto* var = decl->As<ast::Var>()) {
+        // https://gpuweb.github.io/gpuweb/wgsl/#variable-declaration
+        // The access mode always has a default, and except for variables in the
+        // storage storage class, must not be written.
+        if (global->StorageClass() != ast::StorageClass::kStorage &&
+            var->declared_access != ast::Access::kUndefined) {
+            AddError("only variables in <storage> storage class may declare an access mode",
+                     var->source);
+            return false;
+        }
 
-    if (!decl->is_const) {
-        if (!AtomicVariable(var, atomic_composite_info)) {
+        if (!AtomicVariable(global, atomic_composite_info)) {
             return false;
         }
     }
 
-    return Variable(var);
+    return Variable(global);
 }
 
 // https://gpuweb.github.io/gpuweb/wgsl/#atomic-types
@@ -639,14 +632,17 @@ bool Validator::AtomicVariable(
     return true;
 }
 
-bool Validator::Variable(const sem::Variable* var) const {
-    auto* decl = var->Declaration();
-    auto* storage_ty = var->Type()->UnwrapRef();
+bool Validator::Variable(const sem::Variable* v) const {
+    auto* decl = v->Declaration();
+    auto* storage_ty = v->Type()->UnwrapRef();
 
-    if (var->Is<sem::GlobalVariable>()) {
+    auto* as_let = decl->As<ast::Let>();
+    auto* as_var = decl->As<ast::Var>();
+
+    if (v->Is<sem::GlobalVariable>()) {
         auto name = symbols_.NameFor(decl->symbol);
         if (sem::ParseBuiltinType(name) != sem::BuiltinType::kNone) {
-            auto* kind = var->Declaration()->is_const ? "let" : "var";
+            auto* kind = as_let ? "let" : "var";
             AddError(
                 "'" + name + "' is a builtin and cannot be redeclared as a module-scope " + kind,
                 decl->source);
@@ -654,14 +650,13 @@ bool Validator::Variable(const sem::Variable* var) const {
         }
     }
 
-    if (!decl->is_const && !IsStorable(storage_ty)) {
+    if (as_var && !IsStorable(storage_ty)) {
         AddError(sem_.TypeNameOf(storage_ty) + " cannot be used as the type of a var",
                  decl->source);
         return false;
     }
 
-    if (decl->is_const && !var->Is<sem::Parameter>() &&
-        !(storage_ty->IsConstructible() || storage_ty->Is<sem::Pointer>())) {
+    if (as_let && !(storage_ty->IsConstructible() || storage_ty->Is<sem::Pointer>())) {
         AddError(sem_.TypeNameOf(storage_ty) + " cannot be used as the type of a let",
                  decl->source);
         return false;
@@ -686,16 +681,17 @@ bool Validator::Variable(const sem::Variable* var) const {
         }
     }
 
-    if (var->Is<sem::LocalVariable>() && !decl->is_const &&
+    if (v->Is<sem::LocalVariable>() && as_var &&
         IsValidationEnabled(decl->attributes, ast::DisabledValidation::kIgnoreStorageClass)) {
-        if (!var->Type()->UnwrapRef()->IsConstructible()) {
+        if (!v->Type()->UnwrapRef()->IsConstructible()) {
             AddError("function variable must have a constructible type",
                      decl->type ? decl->type->source : decl->source);
             return false;
         }
     }
 
-    if (storage_ty->is_handle() && decl->declared_storage_class != ast::StorageClass::kNone) {
+    if (as_var && storage_ty->is_handle() &&
+        as_var->declared_storage_class != ast::StorageClass::kNone) {
         // https://gpuweb.github.io/gpuweb/wgsl/#module-scope-variables
         // If the store type is a texture type or a sampler type, then the
         // variable declaration must not have a storage class attribute. The
@@ -707,9 +703,10 @@ bool Validator::Variable(const sem::Variable* var) const {
     }
 
     if (IsValidationEnabled(decl->attributes, ast::DisabledValidation::kIgnoreStorageClass) &&
-        (decl->declared_storage_class == ast::StorageClass::kInput ||
-         decl->declared_storage_class == ast::StorageClass::kOutput)) {
-        AddError("invalid use of input/output storage class", decl->source);
+        as_var &&
+        (as_var->declared_storage_class == ast::StorageClass::kInput ||
+         as_var->declared_storage_class == ast::StorageClass::kOutput)) {
+        AddError("invalid use of input/output storage class", as_var->source);
         return false;
     }
     return true;
@@ -1221,12 +1218,12 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
 
     // Validate there are no resource variable binding collisions
     std::unordered_map<sem::BindingPoint, const ast::Variable*> binding_points;
-    for (auto* var : func->TransitivelyReferencedGlobals()) {
-        auto* var_decl = var->Declaration();
-        if (!var_decl->BindingPoint()) {
+    for (auto* global : func->TransitivelyReferencedGlobals()) {
+        auto* var_decl = global->Declaration()->As<ast::Var>();
+        if (!var_decl || !var_decl->BindingPoint()) {
             continue;
         }
-        auto bp = var->BindingPoint();
+        auto bp = global->BindingPoint();
         auto res = binding_points.emplace(bp, var_decl);
         if (!res.second &&
             IsValidationEnabled(decl->attributes,
@@ -1643,12 +1640,6 @@ bool Validator::FunctionCall(const sem::Call* call, sem::Statement* current_stat
                         auto* var = sem_.ResolvedSymbol<sem::Variable>(ident_unary);
                         if (!var) {
                             TINT_ICE(Resolver, diagnostics_) << "failed to resolve identifier";
-                            return false;
-                        }
-                        if (var->Declaration()->is_const) {
-                            TINT_ICE(Resolver, diagnostics_)
-                                << "Resolver::FunctionCall() encountered an address-of "
-                                   "expression of a constant identifier expression";
                             return false;
                         }
                         is_valid = true;
@@ -2154,16 +2145,16 @@ bool Validator::Assignment(const ast::Statement* a, const sem::Type* rhs_ty) con
     // https://gpuweb.github.io/gpuweb/wgsl/#assignment-statement
     auto const* lhs_ty = sem_.TypeOf(lhs);
 
-    if (auto* var = sem_.ResolvedSymbol<sem::Variable>(lhs)) {
-        auto* decl = var->Declaration();
-        if (var->Is<sem::Parameter>()) {
-            AddError("cannot assign to function parameter", lhs->source);
-            AddNote("'" + symbols_.NameFor(decl->symbol) + "' is declared here:", decl->source);
-            return false;
-        }
-        if (decl->is_const) {
-            AddError("cannot assign to const", lhs->source);
-            AddNote("'" + symbols_.NameFor(decl->symbol) + "' is declared here:", decl->source);
+    if (auto* variable = sem_.ResolvedSymbol<sem::Variable>(lhs)) {
+        auto* v = variable->Declaration();
+        const char* err = Switch(
+            v,  //
+            [&](const ast::Parameter*) { return "cannot assign to function parameter"; },
+            [&](const ast::Let*) { return "cannot assign to let"; },
+            [&](const ast::Override*) { return "cannot assign to override"; });
+        if (err) {
+            AddError(err, lhs->source);
+            AddNote("'" + symbols_.NameFor(v->symbol) + "' is declared here:", v->source);
             return false;
         }
     }
@@ -2202,16 +2193,16 @@ bool Validator::IncrementDecrementStatement(const ast::IncrementDecrementStateme
 
     // https://gpuweb.github.io/gpuweb/wgsl/#increment-decrement
 
-    if (auto* var = sem_.ResolvedSymbol<sem::Variable>(lhs)) {
-        auto* decl = var->Declaration();
-        if (var->Is<sem::Parameter>()) {
-            AddError("cannot modify function parameter", lhs->source);
-            AddNote("'" + symbols_.NameFor(decl->symbol) + "' is declared here:", decl->source);
-            return false;
-        }
-        if (decl->is_const) {
-            AddError("cannot modify constant value", lhs->source);
-            AddNote("'" + symbols_.NameFor(decl->symbol) + "' is declared here:", decl->source);
+    if (auto* variable = sem_.ResolvedSymbol<sem::Variable>(lhs)) {
+        auto* v = variable->Declaration();
+        const char* err = Switch(
+            v,  //
+            [&](const ast::Parameter*) { return "cannot modify function parameter"; },
+            [&](const ast::Let*) { return "cannot modify let"; },
+            [&](const ast::Override*) { return "cannot modify override"; });
+        if (err) {
+            AddError(err, lhs->source);
+            AddNote("'" + symbols_.NameFor(v->symbol) + "' is declared here:", v->source);
             return false;
         }
     }
