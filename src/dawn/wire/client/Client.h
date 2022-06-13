@@ -26,6 +26,7 @@
 #include "dawn/wire/WireCmd_autogen.h"
 #include "dawn/wire/WireDeserializeAllocator.h"
 #include "dawn/wire/client/ClientBase_autogen.h"
+#include "dawn/wire/client/ObjectStore.h"
 
 namespace dawn::wire::client {
 
@@ -36,6 +37,32 @@ class Client : public ClientBase {
   public:
     Client(CommandSerializer* serializer, MemoryTransferService* memoryTransferService);
     ~Client() override;
+
+    // Make<T>(arg1, arg2, arg3) creates a new T, calling a constructor of the form:
+    //
+    //   T::T(ObjectBaseParams, arg1, arg2, arg3)
+    template <typename T, typename... Args>
+    T* Make(Args&&... args) {
+        constexpr ObjectType type = ObjectTypeToTypeEnum<T>::value;
+        ObjectBaseParams params = {this, mObjectStores[type].ReserveHandle()};
+
+        auto objectOwned = std::make_unique<T>(params, std::forward<Args>(args)...);
+        T* object = objectOwned.get();
+
+        TrackObject(std::move(objectOwned), type);
+        return object;
+    }
+
+    template <typename T>
+    void Free(T* obj) {
+        Free(obj, ObjectTypeToTypeEnum<T>::value);
+    }
+    void Free(ObjectBase* obj, ObjectType type);
+
+    template <typename T>
+    T* Get(ObjectId id) {
+        return static_cast<T*>(mObjectStores[ObjectTypeToTypeEnum<T>::value].Get(id));
+    }
 
     // ChunkedCommandHandler implementation
     const volatile char* HandleCommandsImpl(const volatile char* commands, size_t size) override;
@@ -67,21 +94,17 @@ class Client : public ClientBase {
     void Disconnect();
     bool IsDisconnected() const;
 
-    template <typename T>
-    void TrackObject(T* object) {
-        mObjects[ObjectTypeToTypeEnum<T>::value].Append(object);
-    }
-
   private:
     void DestroyAllObjects();
+    void TrackObject(std::unique_ptr<ObjectBase> object, ObjectType type);
 
 #include "dawn/wire/client/ClientPrototypes_autogen.inc"
 
     ChunkedCommandSerializer mSerializer;
-    WireDeserializeAllocator mAllocator;
+    WireDeserializeAllocator mWireCommandAllocator;
+    PerObjectType<ObjectStore> mObjectStores;
     MemoryTransferService* mMemoryTransferService = nullptr;
     std::unique_ptr<MemoryTransferService> mOwnedMemoryTransferService = nullptr;
-
     PerObjectType<LinkedList<ObjectBase>> mObjects;
     bool mDisconnected = false;
 };
