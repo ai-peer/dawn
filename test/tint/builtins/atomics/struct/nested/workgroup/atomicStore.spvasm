@@ -1,0 +1,47 @@
+                     OpCapability Shader
+                     OpMemoryModel Logical GLSL450
+                     OpEntryPoint GLCompute %main "main"
+                     OpExecutionMode %main LocalSize 1 1 1
+                     OpName %S2 "S2"
+                     OpMemberName %S2 0 "x"
+                     OpMemberName %S2 1 "y"
+                     OpMemberName %S2 2 "z"
+                     OpMemberName %S2 3 "a"
+                     OpName %S1 "S1"
+                     OpMemberName %S1 0 "x"
+                     OpMemberName %S1 1 "a"
+                     OpName %S0 "S0"
+                     OpMemberName %S0 0 "a"
+                     OpMemberName %S1 2 "y"
+                     OpMemberName %S1 3 "z"
+                     OpName %wg "wg"
+                     OpName %main "main"
+                     OpMemberDecorate %S2 0 Offset 0
+                     OpMemberDecorate %S2 1 Offset 4
+                     OpMemberDecorate %S2 2 Offset 8
+                     OpMemberDecorate %S2 3 Offset 12
+                     OpMemberDecorate %S1 0 Offset 0
+                     OpMemberDecorate %S1 1 Offset 4
+                     OpMemberDecorate %S0 0 Offset 0
+                     OpMemberDecorate %S1 2 Offset 8
+                     OpMemberDecorate %S1 3 Offset 12
+              %u32 = OpTypeInt 32 0
+              %i32 = OpTypeInt 32 1
+               %S0 = OpTypeStruct %u32
+               %S1 = OpTypeStruct %i32 %S0 %i32 %i32
+               %S2 = OpTypeStruct %i32 %i32 %i32 %S1
+ %S2_workgroup_ptr = OpTypePointer Workgroup %S2
+               %wg = OpVariable %S2_workgroup_ptr Workgroup
+             %void = OpTypeVoid
+            %u32_0 = OpConstant %u32 0
+            %u32_1 = OpConstant %u32 1
+            %u32_2 = OpConstant %u32 2
+            %u32_3 = OpConstant %u32 3
+%u32_workgroup_ptr = OpTypePointer Workgroup %u32
+          %main_ty = OpTypeFunction %void
+             %main = OpFunction %void None %main_ty
+               %39 = OpLabel
+               %36 = OpAccessChain %u32_workgroup_ptr %wg %u32_3 %u32_1 %u32_0
+                     OpAtomicStore %36 %u32_2 %u32_0 %u32_1
+                     OpReturn
+                     OpFunctionEnd

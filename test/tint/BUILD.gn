@@ -350,6 +350,7 @@ tint_unittests_source_set("tint_unittests_transform_src") {
     "../../src/tint/transform/robustness_test.cc",
     "../../src/tint/transform/simplify_pointers_test.cc",
     "../../src/tint/transform/single_entry_point_test.cc",
+    "../../src/tint/transform/spirv_atomic_test.cc",
     "../../src/tint/transform/test_helper.h",
     "../../src/tint/transform/transform_test.cc",
     "../../src/tint/transform/unshadow_test.cc",

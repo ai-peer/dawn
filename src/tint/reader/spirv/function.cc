@@ -36,6 +36,7 @@
 #include "src/tint/sem/builtin_type.h"
 #include "src/tint/sem/depth_texture.h"
 #include "src/tint/sem/sampled_texture.h"
+#include "src/tint/transform/spirv_atomic.h"
 
 // Terms:
 //    CFG: the control flow graph of the function, where basic blocks are the
@@ -493,6 +494,33 @@ bool IsSampledImageAccess(SpvOp opcode) {
         case SpvOpImageGather:
         case SpvOpImageDrefGather:
         case SpvOpImageQueryLod:
+            return true;
+        default:
+            break;
+    }
+    return false;
+}
+
+// @param opcode a SPIR-V opcode
+// @returns true if the given instruction is an atomic operation.
+bool IsAtomicOp(SpvOp opcode) {
+    switch (opcode) {
+        case SpvOpAtomicLoad:
+        case SpvOpAtomicStore:
+        case SpvOpAtomicExchange:
+        case SpvOpAtomicCompareExchange:
+        case SpvOpAtomicCompareExchangeWeak:
+        case SpvOpAtomicIIncrement:
+        case SpvOpAtomicIDecrement:
+        case SpvOpAtomicIAdd:
+        case SpvOpAtomicISub:
+        case SpvOpAtomicSMin:
+        case SpvOpAtomicUMin:
+        case SpvOpAtomicSMax:
+        case SpvOpAtomicUMax:
+        case SpvOpAtomicAnd:
+        case SpvOpAtomicOr:
+        case SpvOpAtomicXor:
             return true;
         default:
             break;
@@ -3487,6 +3515,10 @@ bool FunctionEmitter::EmitStatement(const spvtools::opt::Instruction& inst) {
         return EmitImageAccess(inst);
     }
 
+    if (IsAtomicOp(inst.opcode())) {
+        return EmitAtomicOp(inst);
+    }
+
     switch (inst.opcode()) {
         case SpvOpNop:
             return true;
@@ -5407,6 +5439,57 @@ bool FunctionEmitter::EmitImageQuery(const spvtools::opt::Instruction& inst) {
             break;
     }
     return Fail() << "unhandled image query: " << inst.PrettyPrint();
+}
+
+bool FunctionEmitter::EmitAtomicOp(const spvtools::opt::Instruction& inst) {
+    auto emit_write = [&](sem::BuiltinType builtin) {
+        auto atomic_var = MakeOperand(inst, 0);
+        auto value = MakeOperand(inst, 3);
+        if (!atomic_var || !value) {
+            return false;
+        }
+        // TODO: Check scope?
+        // auto scope = inst.GetOperand(2).AsLiteralUint64();
+
+        auto sym = builder_.Symbols().New(std::string("stub_") + sem::str(builtin));
+        auto* stub_deco = builder_.ASTNodes().Create<transform::SpirvAtomic::Stub>(
+            builder_.ID(), sem::BuiltinType::kAtomicStore);
+        auto* stub =
+            create<ast::Function>(Source{}, sym,
+                                  ast::VariableList{
+                                      builder_.Param("p0", atomic_var.type->Build(builder_)),
+                                      builder_.Param("p1", value.type->Build(builder_)),
+                                  },
+                                  builder_.ty.void_(),
+                                  /* body */ nullptr,
+                                  ast::AttributeList{
+                                      stub_deco,
+                                      builder_.Disable(ast::DisabledValidation::kFunctionHasNoBody),
+                                  },
+                                  ast::AttributeList{});
+        builder_.AST().AddFunction(stub);
+
+        auto* call = builder_.Call(Source{}, sym, atomic_var.expr, value.expr);
+
+        if (inst.type_id() != 0) {
+            auto* result_type = parser_impl_.ConvertType(inst.type_id());
+            TypedExpression expr{result_type, call};
+            return EmitConstDefOrWriteToHoistedVar(inst, expr);
+        }
+
+        AddStatement(create<ast::CallStatement>(call));
+        return true;
+    };
+
+    switch (inst.opcode()) {
+        case SpvOpAtomicXor:
+            return emit_write(sem::BuiltinType::kAtomicXor);
+        case SpvOpAtomicStore:
+            return emit_write(sem::BuiltinType::kAtomicStore);
+        default:
+            break;
+    }
+    return Fail() << "unhandled atomic op: " << inst.PrettyPrint();
 }
 
 ast::ExpressionList FunctionEmitter::MakeCoordinateOperandsForImageAccess(
