@@ -221,7 +221,7 @@ WGPUQueue Device::GetQueue() {
     if (mQueue == nullptr) {
         // Get the primary queue for this device.
         Client* client = GetClient();
-        mQueue = client->QueueAllocator().New(client);
+        mQueue = client->GetAllocator()->Make<Queue>();
 
         DeviceGetQueueCmd cmd;
         cmd.self = ToAPI(this);
@@ -243,7 +243,7 @@ void Device::CreateComputePipelineAsync(WGPUComputePipelineDescriptor const* des
                         "GPU device disconnected", userdata);
     }
 
-    ComputePipeline* pipeline = client->ComputePipelineAllocator().New(client);
+    ComputePipeline* pipeline = client->GetAllocator()->Make<ComputePipeline>();
 
     CreatePipelineAsyncRequest request = {};
     request.createComputePipelineAsyncCallback = callback;
@@ -270,20 +270,18 @@ bool Device::OnCreateComputePipelineAsyncCallback(uint64_t requestSerial,
     }
 
     Client* client = GetClient();
-    auto* pipelineAllocation =
-        client->ComputePipelineAllocator().GetObject(request.pipelineObjectID);
+    ComputePipeline* pipeline =
+        client->GetAllocator()->Get<ComputePipeline>(request.pipelineObjectID);
 
     // If the return status is a failure we should give a null pipeline to the callback and
     // free the allocation.
     if (status != WGPUCreatePipelineAsyncStatus_Success) {
-        client->ComputePipelineAllocator().Free(pipelineAllocation);
+        client->GetAllocator()->Free(pipeline);
         request.createComputePipelineAsyncCallback(status, nullptr, message, request.userdata);
         return true;
     }
 
-    WGPUComputePipeline pipeline = reinterpret_cast<WGPUComputePipeline>(pipelineAllocation);
-    request.createComputePipelineAsyncCallback(status, pipeline, message, request.userdata);
-
+    request.createComputePipelineAsyncCallback(status, ToAPI(pipeline), message, request.userdata);
     return true;
 }
 
@@ -296,7 +294,7 @@ void Device::CreateRenderPipelineAsync(WGPURenderPipelineDescriptor const* descr
                         "GPU device disconnected", userdata);
     }
 
-    RenderPipeline* pipeline = client->RenderPipelineAllocator().New(client);
+    RenderPipeline* pipeline = client->GetAllocator()->Make<RenderPipeline>();
 
     CreatePipelineAsyncRequest request = {};
     request.createRenderPipelineAsyncCallback = callback;
@@ -323,20 +321,18 @@ bool Device::OnCreateRenderPipelineAsyncCallback(uint64_t requestSerial,
     }
 
     Client* client = GetClient();
-    auto* pipelineAllocation =
-        client->RenderPipelineAllocator().GetObject(request.pipelineObjectID);
+    RenderPipeline* pipeline =
+        client->GetAllocator()->Get<RenderPipeline>(request.pipelineObjectID);
 
     // If the return status is a failure we should give a null pipeline to the callback and
     // free the allocation.
     if (status != WGPUCreatePipelineAsyncStatus_Success) {
-        client->RenderPipelineAllocator().Free(pipelineAllocation);
+        client->GetAllocator()->Free(pipeline);
         request.createRenderPipelineAsyncCallback(status, nullptr, message, request.userdata);
         return true;
     }
 
-    WGPURenderPipeline pipeline = reinterpret_cast<WGPURenderPipeline>(pipelineAllocation);
-    request.createRenderPipelineAsyncCallback(status, pipeline, message, request.userdata);
-
+    request.createRenderPipelineAsyncCallback(status, ToAPI(pipeline), message, request.userdata);
     return true;
 }
 
