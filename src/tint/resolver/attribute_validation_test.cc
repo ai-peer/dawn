@@ -721,7 +721,7 @@ TEST_P(VariableAttributeTest, IsValid) {
     } else {
         EXPECT_FALSE(r()->Resolve());
         if (!IsBindingAttribute(params.kind)) {
-            EXPECT_EQ(r()->error(), "12:34 error: attribute is not valid for variables");
+            EXPECT_EQ(r()->error(), "12:34 error: attribute is not valid for module-scope 'var'");
         }
     }
 }
@@ -783,7 +783,7 @@ TEST_P(ConstantAttributeTest, IsValid) {
         EXPECT_TRUE(r()->Resolve()) << r()->error();
     } else {
         EXPECT_FALSE(r()->Resolve());
-        EXPECT_EQ(r()->error(), "12:34 error: attribute is not valid for constants");
+        EXPECT_EQ(r()->error(), "12:34 error: attribute is not valid for module-scope 'let'");
     }
 }
 INSTANTIATE_TEST_SUITE_P(ResolverAttributeValidationTest,
@@ -792,7 +792,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverAttributeValidationTest,
                                          TestParams{AttributeKind::kBinding, false},
                                          TestParams{AttributeKind::kBuiltin, false},
                                          TestParams{AttributeKind::kGroup, false},
-                                         TestParams{AttributeKind::kId, true},
+                                         TestParams{AttributeKind::kId, false},
                                          TestParams{AttributeKind::kInterpolate, false},
                                          TestParams{AttributeKind::kInvariant, false},
                                          TestParams{AttributeKind::kLocation, false},

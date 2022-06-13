@@ -87,16 +87,6 @@ TEST_F(ResolverTypeValidationTest, GlobalVariableWithStorageClass_Pass) {
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 
-TEST_F(ResolverTypeValidationTest, GlobalLetWithStorageClass_Fail) {
-    // let<private> global_var: f32;
-    AST().AddGlobalVariable(create<ast::Variable>(
-        Source{{12, 34}}, Symbols().Register("global_var"), ast::StorageClass::kPrivate,
-        ast::Access::kUndefined, ty.f32(), true, false, Expr(1.23_f), ast::AttributeList{}));
-
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: global constants shouldn't have a storage class");
-}
-
 TEST_F(ResolverTypeValidationTest, GlobalConstNoStorageClass_Pass) {
     // let global_var: f32;
     GlobalConst(Source{{12, 34}}, "global_var", ty.f32(), Construct(ty.f32()));
@@ -334,7 +324,8 @@ TEST_F(ResolverTypeValidationTest, ArraySize_Overridable) {
     Override("size", nullptr, Expr(10_i));
     Global("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, "size")), ast::StorageClass::kPrivate);
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: array size expression must not be pipeline-overridable");
+    EXPECT_EQ(r()->error(),
+              "12:34 error: array size identifier must be a literal or a module-scope 'let'");
 }
 
 TEST_F(ResolverTypeValidationTest, ArraySize_ModuleVar) {
@@ -343,7 +334,8 @@ TEST_F(ResolverTypeValidationTest, ArraySize_ModuleVar) {
     Global("size", ty.i32(), Expr(10_i), ast::StorageClass::kPrivate);
     Global("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, "size")), ast::StorageClass::kPrivate);
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: array size identifier must be a module-scope constant");
+    EXPECT_EQ(r()->error(),
+              "12:34 error: array size identifier must be a literal or a module-scope 'let'");
 }
 
 TEST_F(ResolverTypeValidationTest, ArraySize_FunctionLet) {
@@ -355,7 +347,8 @@ TEST_F(ResolverTypeValidationTest, ArraySize_FunctionLet) {
     auto* a = Var("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, "size")));
     WrapInFunction(Block(Decl(size), Decl(a)));
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: array size identifier must be a module-scope constant");
+    EXPECT_EQ(r()->error(),
+              "12:34 error: array size identifier must be a literal or a module-scope 'let'");
 }
 
 TEST_F(ResolverTypeValidationTest, ArraySize_InvalidExpr) {
@@ -364,8 +357,7 @@ TEST_F(ResolverTypeValidationTest, ArraySize_InvalidExpr) {
     WrapInFunction(Block(Decl(a)));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: array size expression must be either a literal or a "
-              "module-scope constant");
+              "12:34 error: array size identifier must be a literal or a module-scope 'let'");
 }
 
 TEST_F(ResolverTypeValidationTest, RuntimeArrayInFunction_Fail) {

@@ -24,30 +24,12 @@ namespace {
 
 struct ResolverVarLetValidationTest : public resolver::TestHelper, public testing::Test {};
 
-TEST_F(ResolverVarLetValidationTest, LetNoInitializer) {
-    // let a : i32;
-    WrapInFunction(Let(Source{{12, 34}}, "a", ty.i32(), nullptr));
-
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: let declaration must have an initializer");
-}
-
-TEST_F(ResolverVarLetValidationTest, GlobalLetNoInitializer) {
-    // let a : i32;
-    GlobalConst(Source{{12, 34}}, "a", ty.i32(), nullptr);
-
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: let declaration must have an initializer");
-}
-
 TEST_F(ResolverVarLetValidationTest, VarNoInitializerNoType) {
     // var a;
     WrapInFunction(Var(Source{{12, 34}}, "a", nullptr));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "12:34 error: function scope var declaration requires a type or "
-              "initializer");
+    EXPECT_EQ(r()->error(), "12:34 error: function-scope 'var' requires a type or initializer");
 }
 
 TEST_F(ResolverVarLetValidationTest, GlobalVarNoInitializerNoType) {
@@ -55,9 +37,7 @@ TEST_F(ResolverVarLetValidationTest, GlobalVarNoInitializerNoType) {
     Global(Source{{12, 34}}, "a", nullptr);
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "12:34 error: module scope var declaration requires a type and "
-              "initializer");
+    EXPECT_EQ(r()->error(), "12:34 error: module-scope 'var' requires a type and initializer");
 }
 
 TEST_F(ResolverVarLetValidationTest, VarTypeNotStorable) {
