@@ -98,13 +98,8 @@ void CalculateArrayLength::Run(CloneContext& ctx, const DataMap&, DataMap&) cons
                 ctx.dst->Disable(ast::DisabledValidation::kIgnoreConstructibleFunctionParameter);
             ctx.dst->AST().AddFunction(ctx.dst->create<ast::Function>(
                 name,
-                ast::VariableList{
-                    // Note: The buffer parameter requires the kStorage StorageClass
-                    // in order for HLSL to emit this as a ByteAddressBuffer.
-                    ctx.dst->create<ast::Variable>(ctx.dst->Sym("buffer"),
-                                                   ast::StorageClass::kStorage,
-                                                   ast::Access::kUndefined, type, true, false,
-                                                   nullptr, ast::AttributeList{disable_validation}),
+                ast::ParameterList{
+                    ctx.dst->Param("buffer", type, {disable_validation}),
                     ctx.dst->Param("result", ctx.dst->ty.pointer(ctx.dst->ty.u32(),
                                                                  ast::StorageClass::kFunction)),
                 },

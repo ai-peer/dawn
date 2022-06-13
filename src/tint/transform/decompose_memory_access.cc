@@ -434,16 +434,8 @@ struct DecomposeMemoryAccess::State {
         auto storage_class = var_user->Variable()->StorageClass();
         return utils::GetOrCreate(load_funcs, LoadStoreKey{storage_class, buf_ty, el_ty}, [&] {
             auto* buf_ast_ty = CreateASTTypeFor(ctx, buf_ty);
-            auto* disable_validation =
-                b.Disable(ast::DisabledValidation::kIgnoreConstructibleFunctionParameter);
-
-            ast::VariableList params = {
-                // Note: The buffer parameter requires the StorageClass in
-                // order for HLSL to emit this as a ByteAddressBuffer or cbuffer
-                // array.
-                b.create<ast::Variable>(b.Sym("buffer"), storage_class,
-                                        var_user->Variable()->Access(), buf_ast_ty, true, false,
-                                        nullptr, ast::AttributeList{disable_validation}),
+            ast::ParameterList params = {
+                b.Param("buffer", buf_ast_ty),
                 b.Param("offset", b.ty.u32()),
             };
 
@@ -524,19 +516,11 @@ struct DecomposeMemoryAccess::State {
                      const sem::VariableUser* var_user) {
         auto storage_class = var_user->Variable()->StorageClass();
         return utils::GetOrCreate(store_funcs, LoadStoreKey{storage_class, buf_ty, el_ty}, [&] {
-            auto* buf_ast_ty = CreateASTTypeFor(ctx, buf_ty);
-            auto* el_ast_ty = CreateASTTypeFor(ctx, el_ty);
-            auto* disable_validation =
-                b.Disable(ast::DisabledValidation::kIgnoreConstructibleFunctionParameter);
-            ast::VariableList params{
-                // Note: The buffer parameter requires the StorageClass in
-                // order for HLSL to emit this as a ByteAddressBuffer.
-
-                b.create<ast::Variable>(b.Sym("buffer"), storage_class,
-                                        var_user->Variable()->Access(), buf_ast_ty, true, false,
-                                        nullptr, ast::AttributeList{disable_validation}),
+            (void)var_user->Variable()->Access();  // TODO(bclayton): Likely needed by backend.
+            ast::ParameterList params{
+                b.Param("buffer", CreateASTTypeFor(ctx, buf_ty)),
                 b.Param("offset", b.ty.u32()),
-                b.Param("value", el_ast_ty),
+                b.Param("value", CreateASTTypeFor(ctx, el_ty)),
             };
 
             auto name = b.Sym();
@@ -615,18 +599,11 @@ struct DecomposeMemoryAccess::State {
                       const sem::VariableUser* var_user) {
         auto op = intrinsic->Type();
         return utils::GetOrCreate(atomic_funcs, AtomicKey{buf_ty, el_ty, op}, [&] {
-            auto* buf_ast_ty = CreateASTTypeFor(ctx, buf_ty);
-            auto* disable_validation =
-                b.Disable(ast::DisabledValidation::kIgnoreConstructibleFunctionParameter);
+            (void)var_user->Variable()->Access();  // TODO(bclayton): Likely needed by backend.
             // The first parameter to all WGSL atomics is the expression to the
             // atomic. This is replaced with two parameters: the buffer and offset.
-
-            ast::VariableList params = {
-                // Note: The buffer parameter requires the kStorage StorageClass in
-                // order for HLSL to emit this as a ByteAddressBuffer.
-                b.create<ast::Variable>(b.Sym("buffer"), ast::StorageClass::kStorage,
-                                        var_user->Variable()->Access(), buf_ast_ty, true, false,
-                                        nullptr, ast::AttributeList{disable_validation}),
+            ast::ParameterList params = {
+                b.Param("buffer", CreateASTTypeFor(ctx, buf_ty)),
                 b.Param("offset", b.ty.u32()),
             };
 

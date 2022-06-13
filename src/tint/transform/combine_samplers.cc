@@ -147,7 +147,7 @@ struct CombineSamplers::State {
 
         // Remove all texture and sampler global variables. These will be replaced
         // by combined samplers.
-        for (auto* var : ctx.src->AST().GlobalVariables()) {
+        for (auto* var : ctx.src->AST().Globals<ast::Var>()) {
             auto* type = sem.Get(var->type);
             if (type && type->IsAnyOf<sem::Texture, sem::Sampler>() &&
                 !type->Is<sem::StorageTexture>()) {
@@ -169,7 +169,7 @@ struct CombineSamplers::State {
                 if (pairs.empty()) {
                     return nullptr;
                 }
-                ast::VariableList params;
+                ast::ParameterList params;
                 for (auto pair : func->TextureSamplerPairs()) {
                     const sem::Variable* texture_var = pair.first;
                     const sem::Variable* sampler_var = pair.second;
@@ -188,9 +188,8 @@ struct CombineSamplers::State {
                     } else {
                         // Either texture or sampler (or both) is a function parameter;
                         // add a new function parameter to represent the combined sampler.
-                        const ast::Type* type = CreateCombinedASTTypeFor(texture_var, sampler_var);
-                        const ast::Variable* var =
-                            ctx.dst->Param(ctx.dst->Symbols().New(name), type);
+                        auto* type = CreateCombinedASTTypeFor(texture_var, sampler_var);
+                        auto* var = ctx.dst->Param(ctx.dst->Symbols().New(name), type);
                         params.push_back(var);
                         function_combined_texture_samplers_[func][pair] = var;
                     }

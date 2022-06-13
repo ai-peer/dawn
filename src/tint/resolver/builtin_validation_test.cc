@@ -38,7 +38,7 @@ TEST_F(ResolverBuiltinValidationTest, InvalidPipelineStageDirect) {
 
     auto* dpdx =
         create<ast::CallExpression>(Source{{3, 4}}, Expr("dpdx"), ast::ExpressionList{Expr(1_f)});
-    Func(Source{{1, 2}}, "func", ast::VariableList{}, ty.void_(), {CallStmt(dpdx)},
+    Func(Source{{1, 2}}, "func", {}, ty.void_(), {CallStmt(dpdx)},
          {Stage(ast::PipelineStage::kCompute), WorkgroupSize(1_i)});
 
     EXPECT_FALSE(r()->Resolve());

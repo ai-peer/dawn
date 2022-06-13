@@ -87,16 +87,6 @@ TEST_F(ResolverTypeValidationTest, GlobalVariableWithStorageClass_Pass) {
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 
-TEST_F(ResolverTypeValidationTest, GlobalLetWithStorageClass_Fail) {
-    // let<private> global_var: f32;
-    AST().AddGlobalVariable(create<ast::Variable>(
-        Source{{12, 34}}, Symbols().Register("global_var"), ast::StorageClass::kPrivate,
-        ast::Access::kUndefined, ty.f32(), true, false, Expr(1.23_f), ast::AttributeList{}));
-
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: global constants shouldn't have a storage class");
-}
-
 TEST_F(ResolverTypeValidationTest, GlobalConstNoStorageClass_Pass) {
     // let global_var: f32;
     GlobalConst(Source{{12, 34}}, "global_var", ty.f32(), Construct(ty.f32()));
@@ -123,7 +113,7 @@ TEST_F(ResolverTypeValidationTest, GlobalVariableFunctionVariableNotUnique_Pass)
 
     auto* var = Var("a", ty.f32(), ast::StorageClass::kNone, Expr(2_f));
 
-    Func("my_func", ast::VariableList{}, ty.void_(), {Decl(var)});
+    Func("my_func", {}, ty.void_(), {Decl(var)});
 
     Global("a", ty.f32(), ast::StorageClass::kPrivate, Expr(2.1_f));
 
@@ -172,14 +162,14 @@ TEST_F(ResolverTypeValidationTest, RedeclaredIdentifierDifferentFunctions_Pass) 
 
     auto* var1 = Var("a", ty.f32(), ast::StorageClass::kNone, Expr(1_f));
 
-    Func("func0", ast::VariableList{}, ty.void_(),
+    Func("func0", {}, ty.void_(),
          ast::StatementList{
              Decl(Source{{12, 34}}, var0),
              Return(),
          },
          ast::AttributeList{});
 
-    Func("func1", ast::VariableList{}, ty.void_(),
+    Func("func1", {}, ty.void_(),
          ast::StatementList{
              Decl(Source{{13, 34}}, var1),
              Return(),
@@ -374,7 +364,7 @@ TEST_F(ResolverTypeValidationTest, RuntimeArrayInFunction_Fail) {
 
     auto* var = Var(Source{{12, 34}}, "a", ty.array<i32>(), ast::StorageClass::kNone);
 
-    Func("func", ast::VariableList{}, ty.void_(),
+    Func("func", {}, ty.void_(),
          ast::StatementList{
              Decl(var),
          },
@@ -556,13 +546,13 @@ TEST_F(ResolverTypeValidationTest, RuntimeArrayAsParameter_Fail) {
 
     auto* param = Param(Source{{12, 34}}, "a", ty.array<i32>());
 
-    Func("func", ast::VariableList{param}, ty.void_(),
+    Func("func", {param}, ty.void_(),
          ast::StatementList{
              Return(),
          },
          ast::AttributeList{});
 
-    Func("main", ast::VariableList{}, ty.void_(),
+    Func("main", {}, ty.void_(),
          ast::StatementList{
              Return(),
          },
@@ -582,7 +572,7 @@ TEST_F(ResolverTypeValidationTest, PtrToRuntimeArrayAsParameter_Fail) {
     auto* param =
         Param(Source{{12, 34}}, "a", ty.pointer(ty.array<i32>(), ast::StorageClass::kWorkgroup));
 
-    Func("func", ast::VariableList{param}, ty.void_(),
+    Func("func", {param}, ty.void_(),
          ast::StatementList{
              Return(),
          },

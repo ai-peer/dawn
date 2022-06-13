@@ -4862,7 +4862,7 @@ TEST_F(UniformityAnalysisTest, MaximumNumberOfPointerParameters) {
     //   ...
     //   *p254 = rhs;
     // }
-    ast::VariableList params;
+    ast::ParameterList params;
     ast::StatementList foo_body;
     const ast::Expression* rhs_init = b.Deref("p0");
     for (int i = 1; i < 255; i++) {

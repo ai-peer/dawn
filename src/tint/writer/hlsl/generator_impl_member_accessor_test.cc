@@ -100,7 +100,7 @@ class HlslGeneratorImplTest_MemberAccessorBase : public BASE {
 
     void SetupFunction(ast::StatementList statements) {
         ProgramBuilder& b = *this;
-        b.Func("main", ast::VariableList{}, b.ty.void_(), statements,
+        b.Func("main", {}, b.ty.void_(), statements,
                ast::AttributeList{
                    b.Stage(ast::PipelineStage::kFragment),
                });
