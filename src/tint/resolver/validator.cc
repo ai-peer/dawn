@@ -582,11 +582,19 @@ bool Validator::GlobalVariable(
     // https://gpuweb.github.io/gpuweb/wgsl/#variable-declaration
     // The access mode always has a default, and except for variables in the
     // storage storage class, must not be written.
-    if (var->StorageClass() != ast::StorageClass::kStorage &&
-        decl->declared_access != ast::Access::kUndefined) {
-        AddError("only variables in <storage> storage class may declare an access mode",
-                 decl->source);
-        return false;
+    if (decl->declared_access != ast::Access::kUndefined) {
+        if (var->StorageClass() == ast::StorageClass::kStorage) {
+            // The access mode for the storage address space can only be 'read' or 'read_write'.
+            if (decl->declared_access == ast::Access::kWrite) {
+                AddError("access mode 'write' is not valid for the 'storage' address space",
+                         decl->source);
+                return false;
+            }
+        } else {
+            AddError("only variables in <storage> storage class may declare an access mode",
+                     decl->source);
+            return false;
+        }
     }
 
     if (!decl->is_const) {
