@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a55cc2f_673d145b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-06-13T21:41:00Z",
+      "side": 1,
+      "message": "Needs https://github.com/gpuweb/cts/pull/1527 to land and roll to fixup some CTS tests.",
+      "revId": "45675acd54608a147ff4f21bf9475969226b9e08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
