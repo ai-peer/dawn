@@ -521,7 +521,7 @@ TEST_F(GlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_With_WO_Storage
                                     Member("b", ty.f32()),
                                 });
 
-    Global("coord", ty.Of(s), ast::StorageClass::kStorage, ast::Access::kWrite,
+    Global("coord", ty.Of(s), ast::StorageClass::kStorage, ast::Access::kReadWrite,
            ast::AttributeList{
                create<ast::BindingAttribute>(0),
                create<ast::GroupAttribute>(1),
