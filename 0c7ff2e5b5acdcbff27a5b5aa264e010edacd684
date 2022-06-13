@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e21bbad_245e4a3c",
+        "filename": "src/dawn/wire/client/ObjectAllocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-13T21:57:13Z",
+      "side": 1,
+      "message": "Hmm on its own, I don\u0027t think this is bad, and encapsulating all the ObjectBaseParams makes sense (especially if we foresee having to add more, i.e. a generation). My thoughts though are that this will become a required argument in all the ctors of deriving classes which is a little bit annoying/verbose.\n\nI was thinking that given the idea that was proposed in the other CL where the arguments here can be forwarded to the ctor of the derived object, what if we had a private/friended member func on `ObjectBase`, call it `SetBaseParams` which is called in this `New` factory function instead (after all it\u0027s a factory function so we could do more than just construct the object)? That way, the ctors on the derived classes don\u0027t need to be updated to all include the `ObjectBaseParams`, and the logic is encapsulated to the allocator?\n\nBasically, the argument is that it would be nice to keep the derived class\u0027 ctors very concise to what the actual derived class needs, and the auxiliary bookkeeping stuff can be hidden in the factory/allocator impl. WDYT? Tbh, I\u0027m not TOO against having the `ObjectBaseParams` as an explicit arg to every derived class though, so I leave the judgement call to you or Austin.",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 50
+      },
+      "revId": "0c7ff2e5b5acdcbff27a5b5aa264e010edacd684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8030e7fe_c3a00926",
+        "filename": "src/dawn/wire/client/ObjectBase.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-13T21:57:13Z",
+      "side": 1,
+      "message": "We could probably unify the client/id to become a ObjectBaseParam?",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 22
+      },
+      "revId": "0c7ff2e5b5acdcbff27a5b5aa264e010edacd684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
