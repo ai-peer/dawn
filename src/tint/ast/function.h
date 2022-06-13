@@ -31,9 +31,6 @@
 
 namespace tint::ast {
 
-/// ParameterList is a list of function parameters
-using ParameterList = std::vector<const Variable*>;
-
 /// A Function statement.
 class Function final : public Castable<Function, Node> {
   public:
