@@ -26,6 +26,7 @@
 #include "dawn/wire/WireCmd_autogen.h"
 #include "dawn/wire/WireDeserializeAllocator.h"
 #include "dawn/wire/client/ClientBase_autogen.h"
+#include "dawn/wire/client/ObjectAllocator.h"
 
 namespace dawn::wire::client {
 
@@ -41,6 +42,7 @@ class Client : public ClientBase {
     const volatile char* HandleCommandsImpl(const volatile char* commands, size_t size) override;
 
     MemoryTransferService* GetMemoryTransferService() const { return mMemoryTransferService; }
+    ObjectAllocator* GetAllocator();
 
     ReservedTexture ReserveTexture(WGPUDevice device);
     ReservedSwapChain ReserveSwapChain(WGPUDevice device);
@@ -67,10 +69,7 @@ class Client : public ClientBase {
     void Disconnect();
     bool IsDisconnected() const;
 
-    template <typename T>
-    void TrackObject(T* object) {
-        mObjects[ObjectTypeToTypeEnum<T>::value].Append(object);
-    }
+    void TrackObject(ObjectBase* object, ObjectType type);
 
   private:
     void DestroyAllObjects();
@@ -78,10 +77,10 @@ class Client : public ClientBase {
 #include "dawn/wire/client/ClientPrototypes_autogen.inc"
 
     ChunkedCommandSerializer mSerializer;
-    WireDeserializeAllocator mAllocator;
+    WireDeserializeAllocator mWireCommandAllocator;
+    ObjectAllocator mAllocator;
     MemoryTransferService* mMemoryTransferService = nullptr;
     std::unique_ptr<MemoryTransferService> mOwnedMemoryTransferService = nullptr;
-
     PerObjectType<LinkedList<ObjectBase>> mObjects;
     bool mDisconnected = false;
 };
