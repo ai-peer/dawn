@@ -132,7 +132,7 @@ TEST_F(ResolverBuiltinsValidationTest, FragDepthIsInput_Fail) {
     // ) -> @location(0) f32 { return 1.0; }
     auto* fd = Param("fd", ty.f32(),
                      ast::AttributeList{Builtin(Source{{12, 34}}, ast::Builtin::kFragDepth)});
-    Func("fs_main", ast::VariableList{fd}, ty.f32(), {Return(1_f)},
+    Func("fs_main", {fd}, ty.f32(), {Return(1_f)},
          ast::AttributeList{Stage(ast::PipelineStage::kFragment)}, {Location(0)});
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
@@ -256,7 +256,7 @@ TEST_F(ResolverBuiltinsValidationTest, SampleMaskIsNotU32_Fail) {
     // ) -> @location(0) f32 { return 1.0; }
     auto* arg = Param("arg", ty.bool_(),
                       ast::AttributeList{Builtin(Source{{12, 34}}, ast::Builtin::kSampleMask)});
-    Func("fs_main", ast::VariableList{arg}, ty.f32(), {Return(1_f)},
+    Func("fs_main", {arg}, ty.f32(), {Return(1_f)},
          ast::AttributeList{Stage(ast::PipelineStage::kFragment)}, {Location(0)});
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: store type of builtin(sample_mask) must be 'u32'");
@@ -287,7 +287,7 @@ TEST_F(ResolverBuiltinsValidationTest, SampleIndexIsNotU32_Fail) {
     // ) -> @location(0) f32 { return 1.0; }
     auto* arg = Param("arg", ty.bool_(),
                       ast::AttributeList{Builtin(Source{{12, 34}}, ast::Builtin::kSampleIndex)});
-    Func("fs_main", ast::VariableList{arg}, ty.f32(), {Return(1_f)},
+    Func("fs_main", {arg}, ty.f32(), {Return(1_f)},
          ast::AttributeList{Stage(ast::PipelineStage::kFragment)}, {Location(0)});
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: store type of builtin(sample_index) must be 'u32'");
@@ -300,7 +300,7 @@ TEST_F(ResolverBuiltinsValidationTest, PositionIsNotF32_Fail) {
     // ) -> @location(0) f32 { return 1.0; }
     auto* p = Param("p", ty.vec3<f32>(),
                     ast::AttributeList{Builtin(Source{{12, 34}}, ast::Builtin::kPosition)});
-    Func("fs_main", ast::VariableList{p}, ty.f32(), {Return(1_f)},
+    Func("fs_main", {p}, ty.f32(), {Return(1_f)},
          ast::AttributeList{Stage(ast::PipelineStage::kFragment)}, {Location(0)});
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: store type of builtin(position) must be 'vec4<f32>'");
@@ -326,7 +326,7 @@ TEST_F(ResolverBuiltinsValidationTest, VertexIndexIsNotU32_Fail) {
     auto* p = Param("p", ty.vec4<f32>(), ast::AttributeList{Builtin(ast::Builtin::kPosition)});
     auto* vi = Param("vi", ty.f32(),
                      ast::AttributeList{Builtin(Source{{12, 34}}, ast::Builtin::kVertexIndex)});
-    Func("main", ast::VariableList{vi, p}, ty.vec4<f32>(), {Return(Expr("p"))},
+    Func("main", {vi, p}, ty.vec4<f32>(), {Return(Expr("p"))},
          ast::AttributeList{Stage(ast::PipelineStage::kVertex)},
          ast::AttributeList{Builtin(ast::Builtin::kPosition)});
     EXPECT_FALSE(r()->Resolve());
@@ -342,7 +342,7 @@ TEST_F(ResolverBuiltinsValidationTest, InstanceIndexIsNotU32) {
     auto* p = Param("p", ty.vec4<f32>(), ast::AttributeList{Builtin(ast::Builtin::kPosition)});
     auto* ii = Param("ii", ty.f32(),
                      ast::AttributeList{Builtin(Source{{12, 34}}, ast::Builtin::kInstanceIndex)});
-    Func("main", ast::VariableList{ii, p}, ty.vec4<f32>(), {Return(Expr("p"))},
+    Func("main", {ii, p}, ty.vec4<f32>(), {Return(Expr("p"))},
          ast::AttributeList{Stage(ast::PipelineStage::kVertex)},
          ast::AttributeList{Builtin(ast::Builtin::kPosition)});
     EXPECT_FALSE(r()->Resolve());
@@ -362,7 +362,7 @@ TEST_F(ResolverBuiltinsValidationTest, FragmentBuiltin_Pass) {
     auto* si = Param("si", ty.u32(), ast::AttributeList{Builtin(ast::Builtin::kSampleIndex)});
     auto* sm = Param("sm", ty.u32(), ast::AttributeList{Builtin(ast::Builtin::kSampleMask)});
     auto* var_fd = Var("fd", ty.f32());
-    Func("fs_main", ast::VariableList{p, ff, si, sm}, ty.f32(), {Decl(var_fd), Return(var_fd)},
+    Func("fs_main", {p, ff, si, sm}, ty.f32(), {Decl(var_fd), Return(var_fd)},
          ast::AttributeList{Stage(ast::PipelineStage::kFragment)},
          ast::AttributeList{Builtin(ast::Builtin::kFragDepth)});
     EXPECT_TRUE(r()->Resolve()) << r()->error();
@@ -380,7 +380,7 @@ TEST_F(ResolverBuiltinsValidationTest, VertexBuiltin_Pass) {
     auto* ii = Param("ii", ty.u32(),
                      ast::AttributeList{Builtin(Source{{12, 34}}, ast::Builtin::kInstanceIndex)});
     auto* p = Var("p", ty.vec4<f32>());
-    Func("main", ast::VariableList{vi, ii}, ty.vec4<f32>(),
+    Func("main", {vi, ii}, ty.vec4<f32>(),
          {
              Decl(p),
              Return(p),
@@ -411,7 +411,7 @@ TEST_F(ResolverBuiltinsValidationTest, ComputeBuiltin_Pass) {
     auto* nwgs =
         Param("nwgs", ty.vec3<u32>(), ast::AttributeList{Builtin(ast::Builtin::kNumWorkgroups)});
 
-    Func("main", ast::VariableList{li_id, li_index, gi, wi, nwgs}, ty.void_(), {},
+    Func("main", {li_id, li_index, gi, wi, nwgs}, ty.void_(), {},
          ast::AttributeList{Stage(ast::PipelineStage::kCompute),
                             WorkgroupSize(Expr(Source{Source::Location{12, 34}}, 2_i))});
 
@@ -421,7 +421,7 @@ TEST_F(ResolverBuiltinsValidationTest, ComputeBuiltin_Pass) {
 TEST_F(ResolverBuiltinsValidationTest, ComputeBuiltin_WorkGroupIdNotVec3U32) {
     auto* wi = Param("wi", ty.f32(),
                      ast::AttributeList{Builtin(Source{{12, 34}}, ast::Builtin::kWorkgroupId)});
-    Func("main", ast::VariableList{wi}, ty.void_(), {},
+    Func("main", {wi}, ty.void_(), {},
          ast::AttributeList{Stage(ast::PipelineStage::kCompute),
                             WorkgroupSize(Expr(Source{Source::Location{12, 34}}, 2_i))});
 
@@ -434,7 +434,7 @@ TEST_F(ResolverBuiltinsValidationTest, ComputeBuiltin_WorkGroupIdNotVec3U32) {
 TEST_F(ResolverBuiltinsValidationTest, ComputeBuiltin_NumWorkgroupsNotVec3U32) {
     auto* nwgs = Param("nwgs", ty.f32(),
                        ast::AttributeList{Builtin(Source{{12, 34}}, ast::Builtin::kNumWorkgroups)});
-    Func("main", ast::VariableList{nwgs}, ty.void_(), {},
+    Func("main", {nwgs}, ty.void_(), {},
          ast::AttributeList{Stage(ast::PipelineStage::kCompute),
                             WorkgroupSize(Expr(Source{Source::Location{12, 34}}, 2_i))});
 
@@ -448,7 +448,7 @@ TEST_F(ResolverBuiltinsValidationTest, ComputeBuiltin_GlobalInvocationNotVec3U32
     auto* gi =
         Param("gi", ty.vec3<i32>(),
               ast::AttributeList{Builtin(Source{{12, 34}}, ast::Builtin::kGlobalInvocationId)});
-    Func("main", ast::VariableList{gi}, ty.void_(), {},
+    Func("main", {gi}, ty.void_(), {},
          ast::AttributeList{Stage(ast::PipelineStage::kCompute),
                             WorkgroupSize(Expr(Source{Source::Location{12, 34}}, 2_i))});
 
@@ -462,7 +462,7 @@ TEST_F(ResolverBuiltinsValidationTest, ComputeBuiltin_LocalInvocationIndexNotU32
     auto* li_index =
         Param("li_index", ty.vec3<u32>(),
               ast::AttributeList{Builtin(Source{{12, 34}}, ast::Builtin::kLocalInvocationIndex)});
-    Func("main", ast::VariableList{li_index}, ty.void_(), {},
+    Func("main", {li_index}, ty.void_(), {},
          ast::AttributeList{Stage(ast::PipelineStage::kCompute),
                             WorkgroupSize(Expr(Source{Source::Location{12, 34}}, 2_i))});
 
@@ -476,7 +476,7 @@ TEST_F(ResolverBuiltinsValidationTest, ComputeBuiltin_LocalInvocationNotVec3U32)
     auto* li_id =
         Param("li_id", ty.vec2<u32>(),
               ast::AttributeList{Builtin(Source{{12, 34}}, ast::Builtin::kLocalInvocationId)});
-    Func("main", ast::VariableList{li_id}, ty.void_(), {},
+    Func("main", {li_id}, ty.void_(), {},
          ast::AttributeList{Stage(ast::PipelineStage::kCompute),
                             WorkgroupSize(Expr(Source{Source::Location{12, 34}}, 2_i))});
 
@@ -517,7 +517,7 @@ TEST_F(ResolverBuiltinsValidationTest, FrontFacingParamIsNotBool_Fail) {
     auto* is_front =
         Param("is_front", ty.i32(),
               ast::AttributeList{Builtin(Source{{12, 34}}, ast::Builtin::kFrontFacing)});
-    Func("fs_main", ast::VariableList{is_front}, ty.f32(), {Return(1_f)},
+    Func("fs_main", {is_front}, ty.f32(), {Return(1_f)},
          ast::AttributeList{Stage(ast::PipelineStage::kFragment)}, {Location(0)});
 
     EXPECT_FALSE(r()->Resolve());

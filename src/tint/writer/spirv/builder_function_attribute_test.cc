@@ -25,7 +25,7 @@ namespace {
 using BuilderTest = TestHelper;
 
 TEST_F(BuilderTest, Attribute_Stage) {
-    auto* func = Func("main", {}, ty.void_(), ast::StatementList{},
+    auto* func = Func("main", {}, ty.void_(), {},
                       ast::AttributeList{
                           Stage(ast::PipelineStage::kFragment),
                       });
@@ -91,7 +91,7 @@ INSTANTIATE_TEST_SUITE_P(
                     FunctionStageData{ast::PipelineStage::kCompute, SpvExecutionModelGLCompute}));
 
 TEST_F(BuilderTest, Decoration_ExecutionMode_Fragment_OriginUpperLeft) {
-    auto* func = Func("main", {}, ty.void_(), ast::StatementList{},
+    auto* func = Func("main", {}, ty.void_(), {},
                       ast::AttributeList{
                           Stage(ast::PipelineStage::kFragment),
                       });
@@ -105,7 +105,7 @@ TEST_F(BuilderTest, Decoration_ExecutionMode_Fragment_OriginUpperLeft) {
 }
 
 TEST_F(BuilderTest, Decoration_ExecutionMode_WorkgroupSize_Default) {
-    auto* func = Func("main", {}, ty.void_(), ast::StatementList{},
+    auto* func = Func("main", {}, ty.void_(), {},
                       ast::AttributeList{Stage(ast::PipelineStage::kCompute), WorkgroupSize(1_i)});
 
     spirv::Builder& b = Build();
@@ -117,7 +117,7 @@ TEST_F(BuilderTest, Decoration_ExecutionMode_WorkgroupSize_Default) {
 }
 
 TEST_F(BuilderTest, Decoration_ExecutionMode_WorkgroupSize_Literals) {
-    auto* func = Func("main", {}, ty.void_(), ast::StatementList{},
+    auto* func = Func("main", {}, ty.void_(), {},
                       ast::AttributeList{
                           WorkgroupSize(2_i, 4_i, 6_i),
                           Stage(ast::PipelineStage::kCompute),
@@ -135,7 +135,7 @@ TEST_F(BuilderTest, Decoration_ExecutionMode_WorkgroupSize_Const) {
     GlobalConst("width", ty.i32(), Construct(ty.i32(), 2_i));
     GlobalConst("height", ty.i32(), Construct(ty.i32(), 3_i));
     GlobalConst("depth", ty.i32(), Construct(ty.i32(), 4_i));
-    auto* func = Func("main", {}, ty.void_(), ast::StatementList{},
+    auto* func = Func("main", {}, ty.void_(), {},
                       ast::AttributeList{
                           WorkgroupSize("width", "height", "depth"),
                           Stage(ast::PipelineStage::kCompute),
@@ -153,7 +153,7 @@ TEST_F(BuilderTest, Decoration_ExecutionMode_WorkgroupSize_OverridableConst) {
     Override("width", ty.i32(), Construct(ty.i32(), 2_i), {Id(7u)});
     Override("height", ty.i32(), Construct(ty.i32(), 3_i), {Id(8u)});
     Override("depth", ty.i32(), Construct(ty.i32(), 4_i), {Id(9u)});
-    auto* func = Func("main", {}, ty.void_(), ast::StatementList{},
+    auto* func = Func("main", {}, ty.void_(), {},
                       ast::AttributeList{
                           WorkgroupSize("width", "height", "depth"),
                           Stage(ast::PipelineStage::kCompute),
@@ -182,7 +182,7 @@ OpDecorate %3 BuiltIn WorkgroupSize
 TEST_F(BuilderTest, Decoration_ExecutionMode_WorkgroupSize_LiteralAndConst) {
     Override("height", ty.i32(), Construct(ty.i32(), 2_i), {Id(7u)});
     GlobalConst("depth", ty.i32(), Construct(ty.i32(), 3_i));
-    auto* func = Func("main", {}, ty.void_(), ast::StatementList{},
+    auto* func = Func("main", {}, ty.void_(), {},
                       ast::AttributeList{
                           WorkgroupSize(4_i, "height", "depth"),
                           Stage(ast::PipelineStage::kCompute),
@@ -207,12 +207,12 @@ OpDecorate %3 BuiltIn WorkgroupSize
 }
 
 TEST_F(BuilderTest, Decoration_ExecutionMode_MultipleFragment) {
-    auto* func1 = Func("main1", {}, ty.void_(), ast::StatementList{},
+    auto* func1 = Func("main1", {}, ty.void_(), {},
                        ast::AttributeList{
                            Stage(ast::PipelineStage::kFragment),
                        });
 
-    auto* func2 = Func("main2", {}, ty.void_(), ast::StatementList{},
+    auto* func2 = Func("main2", {}, ty.void_(), {},
                        ast::AttributeList{
                            Stage(ast::PipelineStage::kFragment),
                        });
@@ -242,8 +242,8 @@ OpFunctionEnd
 }
 
 TEST_F(BuilderTest, Decoration_ExecutionMode_FragDepth) {
-    Func("main", ast::VariableList{}, ty.f32(),
-         ast::StatementList{
+    Func("main", {}, ty.f32(),
+         {
              Return(Expr(1_f)),
          },
          ast::AttributeList{Stage(ast::PipelineStage::kFragment)},

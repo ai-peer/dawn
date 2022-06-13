@@ -185,7 +185,7 @@ class Parameter final : public Castable<Parameter, Variable> {
     /// @param storage_class the variable storage class
     /// @param access the variable access control type
     /// @param usage the semantic usage for the parameter
-    Parameter(const ast::Variable* declaration,
+    Parameter(const ast::Parameter* declaration,
               uint32_t index,
               const sem::Type* type,
               ast::StorageClass storage_class,

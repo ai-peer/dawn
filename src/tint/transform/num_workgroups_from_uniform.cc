@@ -133,7 +133,7 @@ void NumWorkgroupsFromUniform::Run(CloneContext& ctx, const DataMap& inputs, Dat
                 // plus 1, or group 0 if no resource bound.
                 group = 0;
 
-                for (auto* var : ctx.src->AST().GlobalVariables()) {
+                for (auto* var : ctx.src->AST().Globals<ast::Var>()) {
                     if (auto binding_point = var->BindingPoint()) {
                         if (binding_point.group->value >= group) {
                             group = binding_point.group->value + 1;

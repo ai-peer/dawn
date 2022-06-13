@@ -228,7 +228,7 @@ struct State {
     Symbol pulling_position_name;
     Symbol struct_buffer_name;
     std::unordered_map<uint32_t, Symbol> vertex_buffer_names;
-    ast::VariableList new_function_parameters;
+    ast::ParameterList new_function_parameters;
 
     /// Generate the vertex buffer binding name
     /// @param index index to append to buffer name
@@ -695,7 +695,7 @@ struct State {
     /// vertex_index and instance_index builtins if present.
     /// @param func the entry point function
     /// @param param the parameter to process
-    void ProcessNonStructParameter(const ast::Function* func, const ast::Variable* param) {
+    void ProcessNonStructParameter(const ast::Function* func, const ast::Parameter* param) {
         if (auto* location = ast::GetAttribute<ast::LocationAttribute>(param->attributes)) {
             // Create a function-scope variable to replace the parameter.
             auto func_var_sym = ctx.Clone(param->symbol);
@@ -733,7 +733,7 @@ struct State {
     /// @param param the parameter to process
     /// @param struct_ty the structure type
     void ProcessStructParameter(const ast::Function* func,
-                                const ast::Variable* param,
+                                const ast::Parameter* param,
                                 const ast::Struct* struct_ty) {
         auto param_sym = ctx.Clone(param->symbol);
 

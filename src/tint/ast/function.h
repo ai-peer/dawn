@@ -46,7 +46,7 @@ class Function final : public Castable<Function, Node> {
     Function(ProgramID program_id,
              const Source& source,
              Symbol symbol,
-             VariableList params,
+             ParameterList params,
              const Type* return_type,
              const BlockStatement* body,
              AttributeList attributes,
@@ -72,7 +72,7 @@ class Function final : public Castable<Function, Node> {
     const Symbol symbol;
 
     /// The function params
-    const VariableList params;
+    const ParameterList params;
 
     /// The function return type
     const Type* const return_type;

@@ -65,7 +65,7 @@ TEST_F(ResolverValidationTest, WorkgroupMemoryUsedInVertexStage) {
     Global("dst", ty.vec4<f32>(), ast::StorageClass::kPrivate);
     auto* stmt = Assign(Expr("dst"), Expr(Source{{3, 4}}, "wg"));
 
-    Func(Source{{9, 10}}, "f0", ast::VariableList{}, ty.vec4<f32>(), {stmt, Return(Expr("dst"))},
+    Func(Source{{9, 10}}, "f0", {}, ty.vec4<f32>(), {stmt, Return(Expr("dst"))},
          ast::AttributeList{Stage(ast::PipelineStage::kVertex)},
          ast::AttributeList{Builtin(ast::Builtin::kPosition)});
 
@@ -215,7 +215,7 @@ TEST_F(ResolverValidationTest, UsingUndefinedVariableGlobalVariable_Pass) {
 
     Global("global_var", ty.f32(), ast::StorageClass::kPrivate, Expr(2.1_f));
 
-    Func("my_func", ast::VariableList{}, ty.void_(),
+    Func("my_func", {}, ty.void_(),
          {
              Assign(Expr(Source{{12, 34}}, "global_var"), 3.14_f),
              Return(),
@@ -290,7 +290,7 @@ TEST_F(ResolverValidationTest, StorageClass_FunctionVariableWorkgroupClass) {
     auto* var = Var("var", ty.i32(), ast::StorageClass::kWorkgroup);
 
     auto* stmt = Decl(var);
-    Func("func", ast::VariableList{}, ty.void_(), {stmt}, ast::AttributeList{});
+    Func("func", {}, ty.void_(), {stmt}, ast::AttributeList{});
 
     EXPECT_FALSE(r()->Resolve());
 
@@ -301,7 +301,7 @@ TEST_F(ResolverValidationTest, StorageClass_FunctionVariableI32) {
     auto* var = Var("s", ty.i32(), ast::StorageClass::kPrivate);
 
     auto* stmt = Decl(var);
-    Func("func", ast::VariableList{}, ty.void_(), {stmt}, ast::AttributeList{});
+    Func("func", {}, ty.void_(), {stmt}, ast::AttributeList{});
 
     EXPECT_FALSE(r()->Resolve());
 

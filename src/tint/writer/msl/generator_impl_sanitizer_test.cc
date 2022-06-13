@@ -33,8 +33,8 @@ TEST_F(MslSanitizerTest, Call_ArrayLength) {
                create<ast::GroupAttribute>(2),
            });
 
-    Func("a_func", ast::VariableList{}, ty.void_(),
-         ast::StatementList{
+    Func("a_func", {}, ty.void_(),
+         {
              Decl(Var("len", ty.u32(), ast::StorageClass::kNone,
                       Call("arrayLength", AddressOf(MemberAccessor("b", "a"))))),
          },
@@ -78,8 +78,8 @@ TEST_F(MslSanitizerTest, Call_ArrayLength_OtherMembersInStruct) {
                create<ast::GroupAttribute>(2),
            });
 
-    Func("a_func", ast::VariableList{}, ty.void_(),
-         ast::StatementList{
+    Func("a_func", {}, ty.void_(),
+         {
              Decl(Var("len", ty.u32(), ast::StorageClass::kNone,
                       Call("arrayLength", AddressOf(MemberAccessor("b", "a"))))),
          },
@@ -125,8 +125,8 @@ TEST_F(MslSanitizerTest, Call_ArrayLength_ViaLets) {
     auto* p = Let("p", nullptr, AddressOf("b"));
     auto* p2 = Let("p2", nullptr, AddressOf(MemberAccessor(Deref(p), "a")));
 
-    Func("a_func", ast::VariableList{}, ty.void_(),
-         ast::StatementList{
+    Func("a_func", {}, ty.void_(),
+         {
              Decl(p),
              Decl(p2),
              Decl(Var("len", ty.u32(), ast::StorageClass::kNone, Call("arrayLength", p2))),
@@ -174,8 +174,8 @@ TEST_F(MslSanitizerTest, Call_ArrayLength_ArrayLengthFromUniform) {
                create<ast::GroupAttribute>(0),
            });
 
-    Func("a_func", ast::VariableList{}, ty.void_(),
-         ast::StatementList{
+    Func("a_func", {}, ty.void_(),
+         {
              Decl(Var("len", ty.u32(), ast::StorageClass::kNone,
                       Add(Call("arrayLength", AddressOf(MemberAccessor("b", "a"))),
                           Call("arrayLength", AddressOf(MemberAccessor("c", "a")))))),
@@ -226,8 +226,8 @@ TEST_F(MslSanitizerTest, Call_ArrayLength_ArrayLengthFromUniformMissingBinding) 
                create<ast::GroupAttribute>(0),
            });
 
-    Func("a_func", ast::VariableList{}, ty.void_(),
-         ast::StatementList{
+    Func("a_func", {}, ty.void_(),
+         {
              Decl(Var("len", ty.u32(), ast::StorageClass::kNone,
                       Add(Call("arrayLength", AddressOf(MemberAccessor("b", "a"))),
                           Call("arrayLength", AddressOf(MemberAccessor("c", "a")))))),
