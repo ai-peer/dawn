@@ -74,11 +74,7 @@ WGPUBuffer Buffer::Create(Device* device, const WGPUBufferDescriptor* descriptor
     // Create the buffer and send the creation command.
     // This must happen after any potential device->CreateErrorBuffer()
     // as server expects allocating ids to be monotonically increasing
-    Buffer* buffer = wireClient->GetAllocator()->Make<Buffer>();
-    buffer->mDevice = device;
-    buffer->mDeviceIsAlive = device->GetAliveWeakPtr();
-    buffer->mSize = descriptor->size;
-    buffer->mUsage = static_cast<WGPUBufferUsage>(descriptor->usage);
+    Buffer* buffer = wireClient->GetAllocator()->Make<Buffer>(device, descriptor);
     buffer->mDestructWriteHandleOnUnmap = false;
 
     if (descriptor->mappedAtCreation) {
@@ -126,12 +122,7 @@ WGPUBuffer Buffer::Create(Device* device, const WGPUBufferDescriptor* descriptor
 // static
 WGPUBuffer Buffer::CreateError(Device* device, const WGPUBufferDescriptor* descriptor) {
     Client* client = device->GetClient();
-
-    Buffer* buffer = client->GetAllocator()->Make<Buffer>();
-    buffer->mDevice = device;
-    buffer->mDeviceIsAlive = device->GetAliveWeakPtr();
-    buffer->mSize = descriptor->size;
-    buffer->mUsage = static_cast<WGPUBufferUsage>(descriptor->usage);
+    Buffer* buffer = client->GetAllocator()->Make<Buffer>(device, descriptor);
 
     DeviceCreateErrorBufferCmd cmd;
     cmd.self = ToAPI(device);
@@ -139,6 +130,11 @@ WGPUBuffer Buffer::CreateError(Device* device, const WGPUBufferDescriptor* descr
     client->SerializeCommand(cmd);
 
     return ToAPI(buffer);
+}
+
+Buffer::Buffer(const ObjectBaseParams& params, Device* device, const WGPUBufferDescriptor* descriptor): ObjectBase(params),      mSize(descriptor->size),
+      mUsage(static_cast<WGPUBufferUsage>(descriptor->usage)),
+      mDeviceIsAlive(device->GetAliveWeakPtr()) {
 }
 
 Buffer::~Buffer() {
