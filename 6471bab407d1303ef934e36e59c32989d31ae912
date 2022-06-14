@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "6471bab407d1303ef934e36e59c32989d31ae912",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d4ed325_48a70e56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-14T01:00:58Z",
+      "side": 1,
+      "message": "LGTM too\n\nI thought about whether it may be good to bring Ref\u003cT\u003e to the wire but at least right now, it doesn\u0027t seem necessary. There\u0027s a single object that we need to manually ref - the default queue. However, could be worth considering in the future (as well as issuing DestroyObject inside Release())",
+      "revId": "6471bab407d1303ef934e36e59c32989d31ae912",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
