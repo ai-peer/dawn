@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9a7e6b7_447a72de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-14T02:22:53Z",
+      "side": 1,
+      "message": "PTAL.\n\nI went the easy route and just pretend it\u0027s a `ForLoopStatement`. So, I didn\u0027t add a new AST node. The `while` is pretty simple syntactic sugar on top of the for loop.\n\nI know we have LoopStatement and ForLoopStatement nodes. Is the preference to add an AST node for WhileStatement and update all the places needed? ",
+      "revId": "019be34447d4a6aa0cca58ca92a9bddc006a0b63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
