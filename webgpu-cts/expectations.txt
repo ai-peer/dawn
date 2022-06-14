@@ -61,7 +61,7 @@
 # tags: [ webgpu-adapter-default webgpu-adapter-swiftshader ]
 # END TAG HEADER
 
-# Last rolled: 2022-06-08 10:23:15PM
+# Last rolled: 2022-06-14 12:14:00PM
 
 ################################################################################
 # webgpu:shader,execution,zero_init:compute,zero_init failures on intel
@@ -303,9 +303,9 @@ crbug.com/tint/1525 webgpu:shader,validation,parse,literal:u32:val="-2147483648"
 # Failures from upgrading Intel Mac Minis to 12.4
 # KEEP
 ################################################################################
-crbug.com/dawn/1461 [ monterey intel ] webgpu:api,operation,command_buffer,copyTextureToTexture:copy_depth_stencil:format="depth16unorm" [ Failure ]
-crbug.com/dawn/1461 [ monterey intel ] webgpu:api,operation,command_buffer,copyTextureToTexture:copy_depth_stencil:format="depth24plus" [ Failure ]
-crbug.com/dawn/1461 [ monterey intel ] webgpu:api,operation,command_buffer,copyTextureToTexture:copy_depth_stencil:format="depth24plus-stencil8" [ Failure ]
+crbug.com/dawn/1461 [ intel monterey ] webgpu:api,operation,command_buffer,copyTextureToTexture:copy_depth_stencil:format="depth16unorm" [ Failure ]
+crbug.com/dawn/1461 [ intel monterey ] webgpu:api,operation,command_buffer,copyTextureToTexture:copy_depth_stencil:format="depth24plus" [ Failure ]
+crbug.com/dawn/1461 [ intel monterey ] webgpu:api,operation,command_buffer,copyTextureToTexture:copy_depth_stencil:format="depth24plus-stencil8" [ Failure ]
 
 ################################################################################
 # untriaged failures
