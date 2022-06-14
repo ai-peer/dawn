@@ -68,6 +68,24 @@
       "parentUuid": "f145273d_9bc93bdc",
       "revId": "335843beae1d8eb53bc6e6c3abee4b91a742a057",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee43f2d8_4f4bebd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-14T02:02:24Z",
+      "side": 1,
+      "message": "Hm, I see - thanks for pointing that out. Sounds like it might be more clear there to filter out `!IsDepthStencilFormat(format)` then since that exactly conveys what we want. Feel free to do this as a separate change though.",
+      "parentUuid": "2c33a3e7_39d5802d",
+      "revId": "335843beae1d8eb53bc6e6c3abee4b91a742a057",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
