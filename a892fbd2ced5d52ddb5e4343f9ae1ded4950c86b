@@ -16,6 +16,23 @@
       "message": "PTAL again!",
       "revId": "a892fbd2ced5d52ddb5e4343f9ae1ded4950c86b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0bc03f3_7f86c9a3",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-14T18:51:29Z",
+      "side": 1,
+      "message": "nit: odd whitespace?",
+      "revId": "a892fbd2ced5d52ddb5e4343f9ae1ded4950c86b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
