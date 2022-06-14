@@ -64,7 +64,7 @@ class ObjectAllocator {
     //   T::T(ObjectBaseParams, arg1, arg2, arg3)
     template <typename T, typename... Args>
     T* Make(Args&&... args) {
-        constexpr ObjectType type = ObjectTypeToTypeEnum<T>::value;
+        constexpr ObjectType type = ObjectTypeToTypeEnum<T>;
         ObjectBaseParams params = {mClient, mPerTypeStores[type].ReserveHandle()};
 
         auto objectOwned = std::make_unique<T>(params, std::forward<Args>(args)...);
@@ -76,13 +76,13 @@ class ObjectAllocator {
 
     template <typename T>
     void Free(T* obj) {
-        Free(obj, ObjectTypeToTypeEnum<T>::value);
+        Free(obj, ObjectTypeToTypeEnum<T>);
     }
     void Free(ObjectBase* obj, ObjectType type);
 
     template <typename T>
     T* Get(ObjectId id) {
-        return static_cast<T*>(mPerTypeStores[ObjectTypeToTypeEnum<T>::value].Get(id));
+        return static_cast<T*>(mPerTypeStores[ObjectTypeToTypeEnum<T>].Get(id));
     }
 
   private:
