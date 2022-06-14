@@ -50,6 +50,24 @@
       "message": "would it make sense to remove utils::TextureFormatSupportsRendering entirely?\n\nthe only other usage is [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp;l\u003d723?q\u003df:dawn%20TextureFormatSupportsRendering) which I also think is redundant. If the texture does not  support multisampling, it is also definitely not renderable - so no need to check.",
       "revId": "335843beae1d8eb53bc6e6c3abee4b91a742a057",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c33a3e7_39d5802d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-06-14T01:42:03Z",
+      "side": 1,
+      "message": "Here we also need to filter out all depth stencil formats, which supports multisampling but not color rendering, so I think we still need this function here?",
+      "parentUuid": "f145273d_9bc93bdc",
+      "revId": "335843beae1d8eb53bc6e6c3abee4b91a742a057",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
