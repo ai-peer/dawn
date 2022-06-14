@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eee2b86_91d2e053",
+        "filename": "src/dawn/wire/client/ObjectAllocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-14T08:41:39Z",
+      "side": 1,
+      "message": "Yeah I thought to do exactly what you suggested Loko, but run into the issue Austin mentioned. I\u0027ll tentatively mark both this thread and the other one resolved, but feel free to reopen if needed and I can do a follow-up.",
+      "parentUuid": "158e56e5_38f18d73",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 50
+      },
+      "revId": "0c7ff2e5b5acdcbff27a5b5aa264e010edacd684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8030e7fe_c3a00926",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Maybe, but here, it is semantically no longer a \"param\"? Also, a later CL changes id -\u003e ObjectHandle",
       "parentUuid": "8030e7fe_c3a00926",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 22
+      },
+      "revId": "0c7ff2e5b5acdcbff27a5b5aa264e010edacd684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1abcc0d_a28cfaa5",
+        "filename": "src/dawn/wire/client/ObjectBase.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-14T08:41:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "357a499e_7adf4d6b",
       "range": {
         "startLine": 43,
         "startChar": 4,
