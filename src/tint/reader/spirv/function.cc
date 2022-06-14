@@ -945,7 +945,7 @@ bool FunctionEmitter::EmitPipelineInput(std::string var_name,
                                         std::vector<int> index_prefix,
                                         const Type* tip_type,
                                         const Type* forced_param_type,
-                                        ast::VariableList* params,
+                                        ast::ParameterList* params,
                                         ast::StatementList* statements) {
     // TODO(dneto): Handle structs where the locations are annotated on members.
     tip_type = tip_type->UnwrapAlias();
@@ -1395,7 +1395,7 @@ bool FunctionEmitter::ParseFunctionDeclaration(FunctionDeclaration* decl) {
                       << function_.result_id();
     }
 
-    ast::VariableList ast_params;
+    ast::ParameterList ast_params;
     function_.ForEachParam([this, &ast_params](const spvtools::opt::Instruction* param) {
         auto* type = parser_impl_.ConvertType(param->type_id());
         if (type != nullptr) {
