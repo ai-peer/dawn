@@ -987,6 +987,7 @@ if(TINT_BUILD_TESTS)
       reader/wgsl/parser_impl_variable_ident_decl_test.cc
       reader/wgsl/parser_impl_variable_stmt_test.cc
       reader/wgsl/parser_impl_variable_qualifier_test.cc
+      reader/wgsl/parser_impl_while_stmt_test.cc
       reader/wgsl/token_test.cc
     )
   endif()
