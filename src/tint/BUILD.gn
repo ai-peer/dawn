@@ -483,6 +483,8 @@ libtint_source_set("libtint_core_all_src") {
     "transform/loop_to_for_loop.h",
     "transform/manager.cc",
     "transform/manager.h",
+    "transform/merge_return.cc",
+    "transform/merge_return.h",
     "transform/module_scope_var_to_entry_point_param.cc",
     "transform/module_scope_var_to_entry_point_param.h",
     "transform/multiplanar_external_texture.cc",
