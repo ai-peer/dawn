@@ -57,7 +57,7 @@ class ObjectBaseStore {
 // regular C++ memory allocation, but also the allocation of their wire handles.
 class ObjectAllocator {
   public:
-    ObjectAllocator(Client* client);
+    explicit ObjectAllocator(Client* client);
 
     // Make<T>(arg1, arg2, arg3) creates a new T, calling a constructor of the form:
     //
