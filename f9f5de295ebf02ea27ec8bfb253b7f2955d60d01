@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4134262_4a2cefd8",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-14T18:39:56Z",
+      "side": 1,
+      "message": "nit: would be nice and convenient to define\n```\ntemplate \u003ctypename T, typename Args...\u003e\nT* Make(Args\u0026\u0026... args)\n```\nand `Get` on Client so you don\u0027t need to do `GetAllocator`",
+      "revId": "f9f5de295ebf02ea27ec8bfb253b7f2955d60d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7846641_1594fecf",
+        "filename": "src/dawn/wire/client/ObjectAllocator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-14T18:39:56Z",
+      "side": 1,
+      "message": "unit: maybe \"Arena\" or \"Pool\" ?",
+      "revId": "f9f5de295ebf02ea27ec8bfb253b7f2955d60d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d4bdea5_84d8f7bc",
+        "filename": "src/dawn/wire/client/ObjectAllocator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-14T18:39:56Z",
+      "side": 1,
+      "message": "I (still) might prefer the client to be passed in as an arg here. Mostly because I think that allocation of the objects shouldn\u0027t need to concern itself with needing to call client-\u003eTrackObject. Track/Untrack isn\u0027t a feature of the allocator, it\u0027s a layer added by the client to ensure everything gets promptly deallocated when the client goes away.\n\nHowever, most code won\u0027t need to explicitly pass Client* if we have a wrapper Client::Make around ObjectAllocator::Make that can pass the client, and then take care of calling Track",
+      "revId": "f9f5de295ebf02ea27ec8bfb253b7f2955d60d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
