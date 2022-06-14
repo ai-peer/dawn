@@ -20,6 +20,64 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ce9be20_ddf26fee",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-14T21:07:35Z",
+      "side": 1,
+      "message": "I also think I like the idea of having `Make` on the client.",
+      "parentUuid": "c4134262_4a2cefd8",
+      "revId": "f9f5de295ebf02ea27ec8bfb253b7f2955d60d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2f799ee_46b11344",
+        "filename": "src/dawn/wire/client/Client.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-14T21:07:35Z",
+      "side": 1,
+      "message": "nit. I think we should be explicit and call it mObjectAllocator, especially since mAllocator was previously used for something else also.",
+      "range": {
+        "startLine": 81,
+        "startChar": 20,
+        "endLine": 81,
+        "endChar": 30
+      },
+      "revId": "f9f5de295ebf02ea27ec8bfb253b7f2955d60d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7353f8cb_01063810",
+        "filename": "src/dawn/wire/client/ObjectAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-14T21:07:35Z",
+      "side": 1,
+      "message": "nit. 2022",
+      "revId": "f9f5de295ebf02ea27ec8bfb253b7f2955d60d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7846641_1594fecf",
         "filename": "src/dawn/wire/client/ObjectAllocator.h",
         "patchSetId": 5
@@ -48,6 +106,24 @@
       "writtenOn": "2022-06-14T18:39:56Z",
       "side": 1,
       "message": "I (still) might prefer the client to be passed in as an arg here. Mostly because I think that allocation of the objects shouldn\u0027t need to concern itself with needing to call client-\u003eTrackObject. Track/Untrack isn\u0027t a feature of the allocator, it\u0027s a layer added by the client to ensure everything gets promptly deallocated when the client goes away.\n\nHowever, most code won\u0027t need to explicitly pass Client* if we have a wrapper Client::Make around ObjectAllocator::Make that can pass the client, and then take care of calling Track",
+      "revId": "f9f5de295ebf02ea27ec8bfb253b7f2955d60d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8840b95f_4ad113d0",
+        "filename": "src/dawn/wire/client/ObjectAllocator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-14T21:07:35Z",
+      "side": 1,
+      "message": "Assuming that\u0027s the case, that means this class doesn\u0027t need to be passed the client at ctor then right? And then the track method gets moved into the client `Make`. I think I like that approach also.",
+      "parentUuid": "9d4bdea5_84d8f7bc",
       "revId": "f9f5de295ebf02ea27ec8bfb253b7f2955d60d01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
