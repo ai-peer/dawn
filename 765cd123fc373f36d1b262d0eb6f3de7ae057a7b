@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1699cd1_055051bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-14T08:22:30Z",
+      "side": 1,
+      "message": "LGTM. Austin PTAL too!",
+      "revId": "765cd123fc373f36d1b262d0eb6f3de7ae057a7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "886c9eec_059dd7b3",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-14T08:22:30Z",
+      "side": 1,
+      "message": "Can we have a small validation test for this as a regression test?",
+      "revId": "765cd123fc373f36d1b262d0eb6f3de7ae057a7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b52fdba_3ad06a0b",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-14T08:22:30Z",
+      "side": 1,
+      "message": "nit: can you use %s and add StepMode::VertexBufferNotUsed? It will keeping formatting consistent and make sure that if the enum name changes, then we don\u0027t forget to update the message.",
+      "range": {
+        "startLine": 104,
+        "startChar": 76,
+        "endLine": 104,
+        "endChar": 95
+      },
+      "revId": "765cd123fc373f36d1b262d0eb6f3de7ae057a7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
