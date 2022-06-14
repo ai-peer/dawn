@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "158e56e5_38f18d73",
+        "filename": "src/dawn/wire/client/ObjectAllocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-14T01:12:33Z",
+      "side": 1,
+      "message": "The issue was that some object constructors use the `Client*`, so constructing, and then calling `SetBaseParams` wouldn\u0027t always work. Corentin looked into the reverse - always use the ObjectBase constructor, and then derived objects override virtual Initialize(args, for, derived, ...).\nI think this latter option would work, but I have a preference for not splitting the constructor in half when we don\u0027t really have a reason to do it aside from ergonomics. In dawn::native, we split it in half because `Initialize` may fail and return an error. Partial construction is messy because you need to care about not using the uninitialized bits of an object in some of its implementation.",
+      "parentUuid": "3e21bbad_245e4a3c",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 50
+      },
+      "revId": "0c7ff2e5b5acdcbff27a5b5aa264e010edacd684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8030e7fe_c3a00926",
         "filename": "src/dawn/wire/client/ObjectBase.h",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2022-06-13T21:57:13Z",
       "side": 1,
       "message": "We could probably unify the client/id to become a ObjectBaseParam?",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 22
+      },
+      "revId": "0c7ff2e5b5acdcbff27a5b5aa264e010edacd684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "357a499e_7adf4d6b",
+        "filename": "src/dawn/wire/client/ObjectBase.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-14T01:12:33Z",
+      "side": 1,
+      "message": "Maybe, but here, it is semantically no longer a \"param\"? Also, a later CL changes id -\u003e ObjectHandle",
+      "parentUuid": "8030e7fe_c3a00926",
       "range": {
         "startLine": 43,
         "startChar": 4,
