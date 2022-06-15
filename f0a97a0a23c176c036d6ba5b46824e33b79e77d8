@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea10fb4_c96cb29d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-06-15T17:40:15Z",
+      "side": 1,
+      "message": "Apologies for missing this in the original CL, thanks for the fix!",
+      "revId": "f0a97a0a23c176c036d6ba5b46824e33b79e77d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
