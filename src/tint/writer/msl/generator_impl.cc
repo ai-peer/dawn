@@ -251,9 +251,8 @@ bool GeneratorImpl::Generate() {
             [&](const ast::Alias*) {
                 return true;  // folded away by the writer
             },
-            [&](const ast::Let* let) {
-                TINT_DEFER(line());
-                return EmitProgramConstVariable(let);
+            [&](const ast::Const*) {
+                return true;  // Constants are embedded at their use
             },
             [&](const ast::Override* override) {
                 TINT_DEFER(line());
@@ -1657,6 +1656,29 @@ bool GeneratorImpl::EmitConstantRange(std::ostream& out,
             }
             return true;
         },
+        [&](const sem::Array* a) {
+            out << "{";
+            TINT_DEFER(out << "}");
+
+            if (constant.AllZero(start, end)) {
+                return true;
+            }
+
+            auto* el_ty = a->ElemType();
+
+            uint32_t step = 0;
+            sem::Type::DeepestElementOf(el_ty, &step);
+            for (size_t i = start; i < end; i += step) {
+                if (i > start) {
+                    out << ", ";
+                }
+                if (!EmitConstantRange(out, constant, el_ty, i, i + step)) {
+                    return false;
+                }
+            }
+
+            return true;
+        },
         [&](Default) {
             diagnostics_.add_error(
                 diag::System::Writer,
@@ -1699,19 +1721,8 @@ bool GeneratorImpl::EmitLiteral(std::ostream& out, const ast::LiteralExpression*
 
 bool GeneratorImpl::EmitExpression(std::ostream& out, const ast::Expression* expr) {
     if (auto* sem = builder_.Sem().Get(expr)) {
-        if (auto* user = sem->As<sem::VariableUser>();
-            !user || !user->Variable()->Declaration()->Is<ast::Let>()) {
-            // Disable constant inlining if the constant expression is from a 'let' declaration.
-            // TODO(crbug.com/tint/1580): Once 'const' is implemented, 'let' will no longer resolve
-            // to a shader-creation time constant value, and this can be removed.
-            if (auto constant = sem->ConstantValue()) {
-                // We do not want to inline array constants, as this will undo the work of
-                // PromoteInitializersToConstVar, which ensures that arrays are declarated in 'let's
-                // before their usage.
-                if (!constant.Type()->Is<sem::Array>()) {
-                    return EmitConstant(out, constant);
-                }
-            }
+        if (auto constant = sem->ConstantValue()) {
+            return EmitConstant(out, constant);
         }
     }
     return Switch(
@@ -2353,6 +2364,9 @@ bool GeneratorImpl::EmitStatement(const ast::Statement* stmt) {
                 v->variable,  //
                 [&](const ast::Var* var) { return EmitVar(var); },
                 [&](const ast::Let* let) { return EmitLet(let); },
+                [&](const ast::Const*) {
+                    return true;  // Constants are embedded at their use
+                },
                 [&](Default) {  //
                     TINT_ICE(Writer, diagnostics_)
                         << "unknown statement type: " << stmt->TypeInfo().name;
@@ -2987,28 +3001,6 @@ bool GeneratorImpl::EmitLet(const ast::Let* let) {
     out << " = ";
     if (!EmitExpression(out, let->constructor)) {
         return false;
-    }
-    out << ";";
-
-    return true;
-}
-
-bool GeneratorImpl::EmitProgramConstVariable(const ast::Let* let) {
-    auto* global = program_->Sem().Get<sem::GlobalVariable>(let);
-    auto* type = global->Type();
-
-    auto out = line();
-    out << "constant ";
-    if (!EmitType(out, type, program_->Symbols().NameFor(let->symbol))) {
-        return false;
-    }
-    out << " " << program_->Symbols().NameFor(let->symbol);
-
-    if (let->constructor != nullptr) {
-        out << " = ";
-        if (!EmitExpression(out, let->constructor)) {
-            return false;
-        }
     }
     out << ";";
 
