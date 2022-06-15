@@ -34,6 +34,24 @@
       "parentUuid": "226b2ebb_3f89bc03",
       "revId": "7d4ad96d514a1ccccec9c4c8ea43d3554b4bab0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f837be58_a0c0a51d",
+        "filename": "src/tint/transform/calculate_array_length.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-15T19:20:04Z",
+      "side": 1,
+      "message": "\u003cmarking-as-resolved\u003e",
+      "parentUuid": "6ecb4f02_f24304fb",
+      "revId": "7d4ad96d514a1ccccec9c4c8ea43d3554b4bab0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
