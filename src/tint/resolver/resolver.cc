@@ -49,6 +49,7 @@
 #include "src/tint/ast/unary_op_expression.h"
 #include "src/tint/ast/variable_decl_statement.h"
 #include "src/tint/ast/vector.h"
+#include "src/tint/ast/while_statement.h"
 #include "src/tint/ast/workgroup_attribute.h"
 #include "src/tint/resolver/uniformity.h"
 #include "src/tint/sem/abstract_float.h"
@@ -77,6 +78,7 @@
 #include "src/tint/sem/type_constructor.h"
 #include "src/tint/sem/type_conversion.h"
 #include "src/tint/sem/variable.h"
+#include "src/tint/sem/while_statement.h"
 #include "src/tint/utils/defer.h"
 #include "src/tint/utils/math.h"
 #include "src/tint/utils/reverse.h"
@@ -852,6 +854,7 @@ sem::Statement* Resolver::Statement(const ast::Statement* stmt) {
         [&](const ast::BlockStatement* b) { return BlockStatement(b); },
         [&](const ast::ForLoopStatement* l) { return ForLoopStatement(l); },
         [&](const ast::LoopStatement* l) { return LoopStatement(l); },
+        [&](const ast::WhileStatement* w) { return WhileStatement(w); },
         [&](const ast::IfStatement* i) { return IfStatement(i); },
         [&](const ast::SwitchStatement* s) { return SwitchStatement(s); },
 
@@ -1034,6 +1037,37 @@ sem::ForLoopStatement* Resolver::ForLoopStatement(const ast::ForLoopStatement* s
         behaviors.Remove(sem::Behavior::kBreak, sem::Behavior::kContinue);
 
         return validator_.ForLoopStatement(sem);
+    });
+}
+
+sem::WhileStatement* Resolver::WhileStatement(const ast::WhileStatement* stmt) {
+    auto* sem =
+        builder_->create<sem::WhileStatement>(stmt, current_compound_statement_, current_function_);
+    return StatementScope(stmt, sem, [&] {
+        auto& behaviors = sem->Behaviors();
+
+        auto* cond = Expression(stmt->condition);
+        if (!cond) {
+            return false;
+        }
+        sem->SetCondition(cond);
+        behaviors.Add(cond->Behaviors());
+
+        Mark(stmt->body);
+
+        auto* body = builder_->create<sem::LoopBlockStatement>(
+            stmt->body, current_compound_statement_, current_function_);
+        if (!StatementScope(stmt->body, body, [&] { return Statements(stmt->body->statements); })) {
+            return false;
+        }
+
+        behaviors.Add(body->Behaviors());
+        // This seems odd, but it matches what is done for for-loop that has
+        // a condition always has kNext added.
+        behaviors.Add(sem::Behavior::kNext);
+        behaviors.Remove(sem::Behavior::kBreak, sem::Behavior::kContinue);
+
+        return validator_.WhileStatement(sem);
     });
 }
 

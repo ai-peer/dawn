@@ -34,6 +34,7 @@ class SwitchStatement;
 class Type;
 class TypeDecl;
 class Variable;
+class WhileStatement;
 }  // namespace tint::ast
 namespace tint::sem {
 class Array;
@@ -50,6 +51,7 @@ class StructMember;
 class SwitchStatement;
 class Type;
 class Variable;
+class WhileStatement;
 }  // namespace tint::sem
 
 namespace tint::sem {
@@ -63,6 +65,7 @@ struct TypeMappings {
     Array* operator()(ast::Array*);
     Expression* operator()(ast::Expression*);
     ForLoopStatement* operator()(ast::ForLoopStatement*);
+    WhileStatement* operator()(ast::WhileStatement*);
     Function* operator()(ast::Function*);
     IfStatement* operator()(ast::IfStatement*);
     MemberAccessorExpression* operator()(ast::MemberAccessorExpression*);
