@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e10a38f_4d2e756c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-06-15T17:43:08Z",
+      "side": 1,
+      "message": "Fairly surprised that neither of these were causing compilation errors with my original CL! Thanks for the fixes.",
+      "revId": "6d200d53eebe92cc23d358d9cd8b378cabc5ce15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
