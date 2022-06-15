@@ -317,6 +317,7 @@ sem::Variable* Resolver::Variable(const ast::Variable* v, bool is_global) {
         [&](const ast::Var* var) { return Var(var, is_global); },
         [&](const ast::Let* let) { return Let(let, is_global); },
         [&](const ast::Override* override) { return Override(override); },
+        [&](const ast::Const* const_) { return Const(const_, is_global); },
         [&](Default) {
             TINT_ICE(Resolver, diagnostics_)
                 << "Resolver::GlobalVariable() called with a unknown variable type: "
@@ -364,13 +365,13 @@ sem::Variable* Resolver::Let(const ast::Let* v, bool is_global) {
 
     sem::Variable* sem = nullptr;
     if (is_global) {
-        sem = builder_->create<sem::GlobalVariable>(
-            v, ty, ast::StorageClass::kNone, ast::Access::kUndefined,
-            rhs ? rhs->ConstantValue() : sem::Constant{}, sem::BindingPoint{});
+        sem = builder_->create<sem::GlobalVariable>(v, ty, ast::StorageClass::kNone,
+                                                    ast::Access::kUndefined, sem::Constant{},
+                                                    sem::BindingPoint{});
     } else {
         sem = builder_->create<sem::LocalVariable>(v, ty, ast::StorageClass::kNone,
                                                    ast::Access::kUndefined, current_statement_,
-                                                   rhs ? rhs->ConstantValue() : sem::Constant{});
+                                                   sem::Constant{});
     }
 
     sem->SetConstructor(rhs);
@@ -429,6 +430,59 @@ sem::Variable* Resolver::Override(const ast::Override* v) {
 
     sem->SetConstructor(rhs);
     builder_->Sem().Add(v, sem);
+    return sem;
+}
+
+sem::Variable* Resolver::Const(const ast::Const* c, bool is_global) {
+    const sem::Type* ty = nullptr;
+
+    // If the variable has a declared type, resolve it.
+    if (c->type) {
+        ty = Type(c->type);
+        if (!ty) {
+            return nullptr;
+        }
+    }
+
+    if (!c->constructor) {
+        AddError("'const' declaration must have an initializer", c->source);
+        return nullptr;
+    }
+
+    const auto* rhs = Expression(c->constructor);
+    if (!rhs) {
+        return nullptr;
+    }
+
+    if (ty) {
+        // If an explicit type was specified, materialize to that type
+        rhs = Materialize(rhs, ty);
+    } else {
+        // If no type was specified, infer it from the RHS
+        ty = rhs->Type();
+    }
+
+    const auto value = rhs->ConstantValue();
+    if (!value) {
+        AddError("'const' initializer must be constant expression", c->constructor->source);
+        return nullptr;
+    }
+
+    if (!ApplyStorageClassUsageToType(ast::StorageClass::kNone, const_cast<sem::Type*>(ty),
+                                      c->source)) {
+        AddNote("while instantiating 'const' " + builder_->Symbols().NameFor(c->symbol), c->source);
+        return nullptr;
+    }
+
+    auto* sem = is_global ? static_cast<sem::Variable*>(builder_->create<sem::GlobalVariable>(
+                                c, ty, ast::StorageClass::kNone, ast::Access::kUndefined, value,
+                                sem::BindingPoint{}))
+                          : static_cast<sem::Variable*>(builder_->create<sem::LocalVariable>(
+                                c, ty, ast::StorageClass::kNone, ast::Access::kUndefined,
+                                current_statement_, value));
+
+    sem->SetConstructor(rhs);
+    builder_->Sem().Add(c, sem);
     return sem;
 }
 
@@ -2174,51 +2228,41 @@ sem::Array* Resolver::Array(const ast::Array* arr) {
 
     uint64_t stride = explicit_stride ? explicit_stride : implicit_stride;
 
+    uint32_t count = 0;  // sem::Array uses a size of 0 for a runtime-sized array.
+
     // Evaluate the constant array size expression.
-    // sem::Array uses a size of 0 for a runtime-sized array.
-    uint32_t count = 0;
     if (auto* count_expr = arr->count) {
         const auto* count_sem = Materialize(Expression(count_expr));
         if (!count_sem) {
             return nullptr;
         }
 
-        auto size_source = count_expr->source;
-
-        auto* ty = count_sem->Type()->UnwrapRef();
-        if (!ty->is_integer_scalar()) {
-            AddError("array size must be integer scalar", size_source);
-            return nullptr;
-        }
-
-        constexpr const char* kErrInvalidExpr =
-            "array size identifier must be a literal or a module-scope 'let'";
-
-        if (auto* ident = count_expr->As<ast::IdentifierExpression>()) {
-            // Make sure the identifier is a non-overridable module-scope 'let'.
-            auto* global = sem_.ResolvedSymbol<sem::GlobalVariable>(ident);
-            if (!global || !global->Declaration()->Is<ast::Let>()) {
-                AddError(kErrInvalidExpr, size_source);
-                return nullptr;
-            }
-            count_expr = global->Declaration()->constructor;
-        } else if (!count_expr->Is<ast::LiteralExpression>()) {
-            AddError(kErrInvalidExpr, size_source);
-            return nullptr;
-        }
-
         auto count_val = count_sem->ConstantValue();
         if (!count_val) {
-            TINT_ICE(Resolver, diagnostics_) << "could not resolve array size expression";
+            AddError("array size must be a constant positive integer", count_expr->source);
             return nullptr;
         }
 
-        if (count_val.Element<AInt>(0).value < 1) {
-            AddError("array size must be at least 1", size_source);
+        if (auto* ty = count_val.Type(); !ty->is_integer_scalar()) {
+            AddError("array size must be a constant positive integer, but is type '" +
+                         builder_->FriendlyName(ty) + "'",
+                     count_expr->source);
             return nullptr;
         }
 
-        count = count_val.Element<uint32_t>(0);
+        auto acount = count_val.Element<AInt>(0);
+        if (acount.value < 1) {
+            AddError("array size must be at least 1, but is " + std::to_string(acount),
+                     count_expr->source);
+            return nullptr;
+        }
+        if (acount.value > 0xffffffff) {
+            AddError("array size must be at most 0xffffffff, but is " + std::to_string(acount),
+                     count_expr->source);
+            return nullptr;
+        }
+
+        count = static_cast<uint32_t>(acount);
     }
 
     auto size = std::max<uint64_t>(count, 1) * stride;

@@ -23,11 +23,14 @@ namespace {
 using MslGeneratorImplTest = TestHelper;
 
 TEST_F(MslGeneratorImplTest, Emit_ModuleConstant) {
-    auto* var = GlobalConst("pos", ty.array<f32, 3>(), array<f32, 3>(1_f, 2_f, 3_f));
+    GlobalConst("pos", ty.array<f32, 3>(), array<f32, 3>(1_f, 2_f, 3_f));
+
+    auto* let = Let("l", nullptr, Expr("pos"));
+    WrapInFunction(let);
 
     GeneratorImpl& gen = Build();
 
-    ASSERT_TRUE(gen.EmitProgramConstVariable(var)) << gen.error();
+    ASSERT_TRUE(gen.EmitLet(let)) << gen.error();
     EXPECT_EQ(gen.result(), "constant float pos[3] = {1.0f, 2.0f, 3.0f};\n");
 }
 

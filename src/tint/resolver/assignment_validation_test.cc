@@ -61,7 +61,7 @@ TEST_F(ResolverAssignmentValidationTest, AssignIncompatibleTypes) {
 }
 
 TEST_F(ResolverAssignmentValidationTest, AssignArraysWithDifferentSizeExpressions_Pass) {
-    // let len = 4u;
+    // const len = 4u;
     // {
     //   var a : array<f32, 4u>;
     //   var b : array<f32, len>;
