@@ -46,7 +46,7 @@ TEST_F(HlslGeneratorImplTest_Assign, Emit_Vector_Assign_ConstantIndex) {
          {
              Decl(Var("lhs", ty.vec3<f32>())),
              Decl(Var("rhs", ty.f32())),
-             Decl(Let("index", ty.u32(), Expr(0_u))),
+             Decl(Const("index", ty.u32(), Expr(0_u))),
              Assign(IndexAccessor("lhs", "index"), "rhs"),
          });
 
@@ -94,7 +94,7 @@ TEST_F(HlslGeneratorImplTest_Assign, Emit_Matrix_Assign_Vector_ConstantIndex) {
          {
              Decl(Var("lhs", ty.mat4x2<f32>())),
              Decl(Var("rhs", ty.vec2<f32>())),
-             Decl(Let("index", ty.u32(), Expr(0_u))),
+             Decl(Const("index", ty.u32(), Expr(0_u))),
              Assign(IndexAccessor("lhs", "index"), "rhs"),
          });
 
@@ -147,7 +147,7 @@ TEST_F(HlslGeneratorImplTest_Assign, Emit_Matrix_Assign_Scalar_ConstantIndex) {
          {
              Decl(Var("lhs", ty.mat4x2<f32>())),
              Decl(Var("rhs", ty.f32())),
-             Decl(Let("index", ty.u32(), Expr(0_u))),
+             Decl(Const("index", ty.u32(), Expr(0_u))),
              Assign(IndexAccessor(IndexAccessor("lhs", "index"), "index"), "rhs"),
          });
 
