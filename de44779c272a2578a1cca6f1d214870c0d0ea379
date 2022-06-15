@@ -16,6 +16,46 @@
       "message": "PTAL again! hopefully this is the last complete rework 😊",
       "revId": "de44779c272a2578a1cca6f1d214870c0d0ea379",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68883b65_7fe497cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-15T14:22:00Z",
+      "side": 1,
+      "message": "LGTM! one nit",
+      "revId": "de44779c272a2578a1cca6f1d214870c0d0ea379",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83193fa3_ffb157eb",
+        "filename": "src/dawn/wire/client/Client.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-15T14:22:00Z",
+      "side": 1,
+      "message": "nit: it\u0027s a bit weird we insert the object into the store, which is really the last step of performing an allocation, in `TrackObject`.\n\nA few ideas:\n - use a name that\u0027s more clear\n - move the `Insert` part of it into `Make`\n - sort-of merge `Reserve` and `Insert` so that `Reserve` returns to you both the Handle, AND the slot it reserved for you into the store. Like `Reserve` could default allocate the slot and return `std::unique_ptr\u003cObjectBase\u003e*`. Then, `Make` does `slot-\u003ereset(new T(params, args...))`;",
+      "range": {
+        "startLine": 174,
+        "startChar": 4,
+        "endLine": 174,
+        "endChar": 47
+      },
+      "revId": "de44779c272a2578a1cca6f1d214870c0d0ea379",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
