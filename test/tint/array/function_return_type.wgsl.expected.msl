@@ -15,7 +15,7 @@ struct tint_array {
 };
 
 tint_array<float, 4> f1() {
-  tint_array<float, 4> const tint_symbol_6 = tint_array<float, 4>{};
+  tint_array<float, 4> const tint_symbol_6 = {};
   return tint_symbol_6;
 }
 

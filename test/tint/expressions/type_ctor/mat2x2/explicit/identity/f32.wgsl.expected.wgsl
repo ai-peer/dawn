@@ -1,1 +1,1 @@
-let m = mat2x2<f32>();
+const m = mat2x2<f32>();

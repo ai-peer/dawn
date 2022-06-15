@@ -50,7 +50,7 @@ void tint_symbol_inner(uint idx, device S* const tint_symbol_2) {
   (*(tint_symbol_2)).arr[idx].f = 0.0f;
   (*(tint_symbol_2)).arr[idx].g = float2x3(float3(0.0f), float3(0.0f));
   (*(tint_symbol_2)).arr[idx].h = float3x2(float2(0.0f), float2(0.0f), float2(0.0f));
-  tint_array<int4, 4> const tint_symbol_1 = tint_array<int4, 4>{};
+  tint_array<int4, 4> const tint_symbol_1 = {};
   (*(tint_symbol_2)).arr[idx].i = tint_symbol_1;
 }
 

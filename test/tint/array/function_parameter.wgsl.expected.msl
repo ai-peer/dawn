@@ -27,9 +27,9 @@ float f3(tint_array<tint_array<tint_array<float, 4>, 3>, 2> a) {
 }
 
 kernel void tint_symbol() {
-  tint_array<float, 4> const a1 = tint_array<float, 4>{};
-  tint_array<tint_array<float, 4>, 3> const a2 = tint_array<tint_array<float, 4>, 3>{};
-  tint_array<tint_array<tint_array<float, 4>, 3>, 2> const a3 = tint_array<tint_array<tint_array<float, 4>, 3>, 2>{};
+  tint_array<float, 4> const a1 = {};
+  tint_array<tint_array<float, 4>, 3> const a2 = {};
+  tint_array<tint_array<tint_array<float, 4>, 3>, 2> const a3 = {};
   float const v1 = f1(a1);
   float const v2 = f2(a2);
   float const v3 = f3(a3);

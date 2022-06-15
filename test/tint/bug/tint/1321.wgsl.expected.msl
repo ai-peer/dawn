@@ -19,7 +19,7 @@ int foo() {
 }
 
 fragment void tint_symbol() {
-  tint_array<float, 4> arr = tint_array<float, 4>{};
+  tint_array<float, 4> arr = {};
   int const tint_symbol_1 = foo();
   int const a_save = tint_symbol_1;
   for(; ; ) {
