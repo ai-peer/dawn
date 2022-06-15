@@ -20,6 +20,7 @@
 TINT_INSTANTIATE_TYPEINFO(tint::ast::Variable);
 TINT_INSTANTIATE_TYPEINFO(tint::ast::Var);
 TINT_INSTANTIATE_TYPEINFO(tint::ast::Let);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Const);
 TINT_INSTANTIATE_TYPEINFO(tint::ast::Override);
 TINT_INSTANTIATE_TYPEINFO(tint::ast::Parameter);
 
@@ -110,6 +111,32 @@ const Let* Let::Clone(CloneContext* ctx) const {
     auto* ctor = ctx->Clone(constructor);
     auto attrs = ctx->Clone(attributes);
     return ctx->dst->create<Let>(src, sym, ty, ctor, attrs);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Const
+////////////////////////////////////////////////////////////////////////////////
+Const::Const(ProgramID pid,
+             const Source& src,
+             const Symbol& sym,
+             const ast::Type* ty,
+             const Expression* ctor,
+             AttributeList attrs)
+    : Base(pid, src, sym, ty, ctor, attrs) {
+    TINT_ASSERT(AST, ctor != nullptr);
+}
+
+Const::Const(Const&&) = default;
+
+Const::~Const() = default;
+
+const Const* Const::Clone(CloneContext* ctx) const {
+    auto src = ctx->Clone(source);
+    auto sym = ctx->Clone(symbol);
+    auto* ty = ctx->Clone(type);
+    auto* ctor = ctx->Clone(constructor);
+    auto attrs = ctx->Clone(attributes);
+    return ctx->dst->create<Const>(src, sym, ty, ctor, attrs);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

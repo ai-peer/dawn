@@ -185,7 +185,6 @@ class Let final : public Castable<Let, Variable> {
     const Let* Clone(CloneContext* ctx) const override;
 };
 
-#if 0
 /// A "const" declaration is a name for a module-scoped or function-scoped creation-time value.
 ///
 /// Examples:
@@ -224,7 +223,6 @@ class Const final : public Castable<Const, Variable> {
     /// @return the newly cloned node
     const Const* Clone(CloneContext* ctx) const override;
 };
-#endif
 
 /// An "override" declaration - a name for a pipeline-overridable constant.
 /// Examples:
