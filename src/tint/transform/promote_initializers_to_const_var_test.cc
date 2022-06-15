@@ -571,20 +571,16 @@ struct S1 {
 
 TEST_F(PromoteInitializersToConstVarTest, NoChangeOnVarDecl) {
     auto* src = R"(
-struct S {
-  a : i32,
-  b : f32,
-  c : i32,
-}
+type F = f32;
 
 fn f() {
   var local_arr = array<f32, 4u>(0.0, 1.0, 2.0, 3.0);
-  var local_str = S(1, 2.0, 3);
+  var local_str = F(3.0);
 }
 
-let module_arr : array<f32, 4u> = array<f32, 4u>(0.0, 1.0, 2.0, 3.0);
+const module_arr : array<f32, 4u> = array<f32, 4u>(0.0, 1.0, 2.0, 3.0);
 
-let module_str : S = S(1, 2.0, 3);
+const module_str : F = F(2.0);
 )";
 
     auto* expect = src;
@@ -599,18 +595,14 @@ TEST_F(PromoteInitializersToConstVarTest, NoChangeOnVarDecl_OutOfOrder) {
     auto* src = R"(
 fn f() {
   var local_arr = array<f32, 4u>(0.0, 1.0, 2.0, 3.0);
-  var local_str = S(1, 2.0, 3);
+  var local_str = F(3.0);
 }
 
-let module_str : S = S(1, 2.0, 3);
+const module_str : F = F(2.0);
 
-struct S {
-  a : i32,
-  b : f32,
-  c : i32,
-}
+type F = f32;
 
-let module_arr : array<f32, 4u> = array<f32, 4u>(0.0, 1.0, 2.0, 3.0);
+const module_arr : array<f32, 4u> = array<f32, 4u>(0.0, 1.0, 2.0, 3.0);
 )";
 
     auto* expect = src;
