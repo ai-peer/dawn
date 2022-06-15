@@ -781,7 +781,7 @@ TEST_F(ResolverDependencyGraphDeclSelfUse, GlobalConst) {
     const Symbol symbol = Sym("SYMBOL");
     GlobalConst(symbol, ty.i32(), Mul(Expr(Source{{12, 34}}, symbol), 123_i));
     Build(R"(error: cyclic dependency found: 'SYMBOL' -> 'SYMBOL'
-12:34 note: let 'SYMBOL' references let 'SYMBOL' here)");
+12:34 note: const 'SYMBOL' references const 'SYMBOL' here)");
 }
 
 TEST_F(ResolverDependencyGraphDeclSelfUse, LocalVar) {
@@ -915,7 +915,7 @@ TEST_F(ResolverDependencyGraphCyclicRefTest, GlobalLet_Direct) {
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
               R"(12:34 error: cyclic dependency found: 'V' -> 'V'
-56:78 note: let 'V' references let 'V' here)");
+56:78 note: const 'V' references const 'V' here)");
 }
 
 TEST_F(ResolverDependencyGraphCyclicRefTest, GlobalVar_Indirect) {
@@ -947,9 +947,9 @@ TEST_F(ResolverDependencyGraphCyclicRefTest, GlobalLet_Indirect) {
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
               R"(1:1 error: cyclic dependency found: 'Y' -> 'Z' -> 'X' -> 'Y'
-1:10 note: let 'Y' references let 'Z' here
-3:10 note: let 'Z' references let 'X' here
-2:10 note: let 'X' references let 'Y' here)");
+1:10 note: const 'Y' references const 'Z' here
+3:10 note: const 'Z' references const 'X' here
+2:10 note: const 'X' references const 'Y' here)");
 }
 
 TEST_F(ResolverDependencyGraphCyclicRefTest, Mixed_RecursiveDependencies) {
@@ -958,7 +958,7 @@ TEST_F(ResolverDependencyGraphCyclicRefTest, Mixed_RecursiveDependencies) {
     // 3: struct S { a : A };
     // 4: var Z = L;
     // 5: type R = A;
-    // 6: let L : S = Z;
+    // 6: const L : S = Z;
 
     Func(Source{{1, 1}}, "F", {}, ty.type_name(Source{{1, 5}}, "R"),
          {Return(Expr(Source{{1, 10}}, "Z"))});
@@ -974,8 +974,8 @@ TEST_F(ResolverDependencyGraphCyclicRefTest, Mixed_RecursiveDependencies) {
 2:10 note: alias 'A' references struct 'S' here
 3:10 note: struct 'S' references alias 'A' here
 4:1 error: cyclic dependency found: 'Z' -> 'L' -> 'Z'
-4:10 note: var 'Z' references let 'L' here
-5:10 note: let 'L' references var 'Z' here)");
+4:10 note: var 'Z' references const 'L' here
+5:10 note: const 'L' references var 'Z' here)");
 }
 
 }  // namespace recursive_tests

@@ -1,1 +1,1 @@
-let m = mat4x4<f32>();
+const m = mat4x4<f32>();

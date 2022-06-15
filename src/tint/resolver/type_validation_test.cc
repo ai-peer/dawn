@@ -216,28 +216,28 @@ TEST_F(ResolverTypeValidationTest, ArraySize_AIntLiteral_Zero) {
     // var<private> a : array<f32, 0>;
     Global("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, 0_a)), ast::StorageClass::kPrivate);
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: array size must be at least 1");
+    EXPECT_EQ(r()->error(), "12:34 error: array size must be at least 1, but is 0");
 }
 
 TEST_F(ResolverTypeValidationTest, ArraySize_UnsignedLiteral_Zero) {
     // var<private> a : array<f32, 0u>;
     Global("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, 0_u)), ast::StorageClass::kPrivate);
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: array size must be at least 1");
+    EXPECT_EQ(r()->error(), "12:34 error: array size must be at least 1, but is 0");
 }
 
 TEST_F(ResolverTypeValidationTest, ArraySize_SignedLiteral_Zero) {
     // var<private> a : array<f32, 0i>;
     Global("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, 0_i)), ast::StorageClass::kPrivate);
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: array size must be at least 1");
+    EXPECT_EQ(r()->error(), "12:34 error: array size must be at least 1, but is 0");
 }
 
 TEST_F(ResolverTypeValidationTest, ArraySize_SignedLiteral_Negative) {
     // var<private> a : array<f32, -10i>;
     Global("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, -10_i)), ast::StorageClass::kPrivate);
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: array size must be at least 1");
+    EXPECT_EQ(r()->error(), "12:34 error: array size must be at least 1, but is -10");
 }
 
 TEST_F(ResolverTypeValidationTest, ArraySize_UnsignedLet_Zero) {
@@ -246,7 +246,7 @@ TEST_F(ResolverTypeValidationTest, ArraySize_UnsignedLet_Zero) {
     GlobalConst("size", nullptr, Expr(0_u));
     Global("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, "size")), ast::StorageClass::kPrivate);
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: array size must be at least 1");
+    EXPECT_EQ(r()->error(), "12:34 error: array size must be at least 1, but is 0");
 }
 
 TEST_F(ResolverTypeValidationTest, ArraySize_SignedLet_Zero) {
@@ -255,7 +255,7 @@ TEST_F(ResolverTypeValidationTest, ArraySize_SignedLet_Zero) {
     GlobalConst("size", nullptr, Expr(0_i));
     Global("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, "size")), ast::StorageClass::kPrivate);
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: array size must be at least 1");
+    EXPECT_EQ(r()->error(), "12:34 error: array size must be at least 1, but is 0");
 }
 
 TEST_F(ResolverTypeValidationTest, ArraySize_SignedLet_Negative) {
@@ -264,14 +264,15 @@ TEST_F(ResolverTypeValidationTest, ArraySize_SignedLet_Negative) {
     GlobalConst("size", nullptr, Expr(-10_i));
     Global("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, "size")), ast::StorageClass::kPrivate);
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: array size must be at least 1");
+    EXPECT_EQ(r()->error(), "12:34 error: array size must be at least 1, but is -10");
 }
 
 TEST_F(ResolverTypeValidationTest, ArraySize_FloatLiteral) {
     // var<private> a : array<f32, 10.0>;
     Global("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, 10_f)), ast::StorageClass::kPrivate);
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: array size must be integer scalar");
+    EXPECT_EQ(r()->error(),
+              "12:34 error: array size must be a constant positive integer, but is type 'f32'");
 }
 
 TEST_F(ResolverTypeValidationTest, ArraySize_IVecLiteral) {
@@ -279,7 +280,9 @@ TEST_F(ResolverTypeValidationTest, ArraySize_IVecLiteral) {
     Global("a", ty.array(ty.f32(), Construct(Source{{12, 34}}, ty.vec2<i32>(), 10_i, 10_i)),
            ast::StorageClass::kPrivate);
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: array size must be integer scalar");
+    EXPECT_EQ(
+        r()->error(),
+        "12:34 error: array size must be a constant positive integer, but is type 'vec2<i32>'");
 }
 
 TEST_F(ResolverTypeValidationTest, ArraySize_FloatLet) {
@@ -288,7 +291,8 @@ TEST_F(ResolverTypeValidationTest, ArraySize_FloatLet) {
     GlobalConst("size", nullptr, Expr(10_f));
     Global("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, "size")), ast::StorageClass::kPrivate);
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: array size must be integer scalar");
+    EXPECT_EQ(r()->error(),
+              "12:34 error: array size must be a constant positive integer, but is type 'f32'");
 }
 
 TEST_F(ResolverTypeValidationTest, ArraySize_IVecLet) {
@@ -297,7 +301,9 @@ TEST_F(ResolverTypeValidationTest, ArraySize_IVecLet) {
     GlobalConst("size", nullptr, Construct(ty.vec2<i32>(), 100_i, 100_i));
     Global("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, "size")), ast::StorageClass::kPrivate);
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: array size must be integer scalar");
+    EXPECT_EQ(
+        r()->error(),
+        "12:34 error: array size must be a constant positive integer, but is type 'vec2<i32>'");
 }
 
 TEST_F(ResolverTypeValidationTest, ArraySize_TooBig_ImplicitStride) {
@@ -324,8 +330,7 @@ TEST_F(ResolverTypeValidationTest, ArraySize_Overridable) {
     Override("size", nullptr, Expr(10_i));
     Global("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, "size")), ast::StorageClass::kPrivate);
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "12:34 error: array size identifier must be a literal or a module-scope 'let'");
+    EXPECT_EQ(r()->error(), "12:34 error: array size must be a constant positive integer");
 }
 
 TEST_F(ResolverTypeValidationTest, ArraySize_ModuleVar) {
@@ -334,8 +339,7 @@ TEST_F(ResolverTypeValidationTest, ArraySize_ModuleVar) {
     Global("size", ty.i32(), Expr(10_i), ast::StorageClass::kPrivate);
     Global("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, "size")), ast::StorageClass::kPrivate);
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "12:34 error: array size identifier must be a literal or a module-scope 'let'");
+    EXPECT_EQ(r()->error(), "12:34 error: array size must be a constant positive integer");
 }
 
 TEST_F(ResolverTypeValidationTest, ArraySize_FunctionLet) {
@@ -347,17 +351,14 @@ TEST_F(ResolverTypeValidationTest, ArraySize_FunctionLet) {
     auto* a = Var("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, "size")));
     WrapInFunction(Block(Decl(size), Decl(a)));
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "12:34 error: array size identifier must be a literal or a module-scope 'let'");
+    EXPECT_EQ(r()->error(), "12:34 error: array size must be a constant positive integer");
 }
 
-TEST_F(ResolverTypeValidationTest, ArraySize_InvalidExpr) {
+TEST_F(ResolverTypeValidationTest, ArraySize_ComplexExpr) {
     // var a : array<f32, i32(4i)>;
     auto* a = Var("a", ty.array(ty.f32(), Construct(Source{{12, 34}}, ty.i32(), 4_i)));
     WrapInFunction(Block(Decl(a)));
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "12:34 error: array size identifier must be a literal or a module-scope 'let'");
+    EXPECT_TRUE(r()->Resolve());
 }
 
 TEST_F(ResolverTypeValidationTest, RuntimeArrayInFunction_Fail) {

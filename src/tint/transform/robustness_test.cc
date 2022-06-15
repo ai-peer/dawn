@@ -35,7 +35,7 @@ fn f() {
     auto* expect = R"(
 var<private> a : array<f32, 3>;
 
-let c : u32 = 1u;
+const c : u32 = 1u;
 
 fn f() {
   let b : f32 = a[1u];
@@ -63,7 +63,7 @@ fn f() {
   let b : f32 = a[1u];
 }
 
-let c : u32 = 1u;
+const c : u32 = 1u;
 
 var<private> a : array<f32, 3>;
 )";
@@ -1409,7 +1409,7 @@ struct S {
 
 @group(0) @binding(0) var<storage, read> s : S;
 
-let c : u32 = 1u;
+const c : u32 = 1u;
 
 fn f() {
   let b : f32 = s.b[min(1u, (arrayLength(&(s.b)) - 1u))];

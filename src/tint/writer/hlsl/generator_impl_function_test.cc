@@ -718,11 +718,7 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_Compute_WithWor
     GeneratorImpl& gen = Build();
 
     ASSERT_TRUE(gen.Generate()) << gen.error();
-    EXPECT_EQ(gen.result(), R"(static const int width = 2;
-static const int height = 3;
-static const int depth = 4;
-
-[numthreads(2, 3, 4)]
+    EXPECT_EQ(gen.result(), R"([numthreads(2, 3, 4)]
 void main() {
   return;
 }
