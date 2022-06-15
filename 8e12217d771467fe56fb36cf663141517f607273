@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96844286_164fa9be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-15T03:31:53Z",
+      "side": 1,
+      "message": "Note, the build failures appear to be Dawn related.\n\n```\n../../src/dawn/utils/TextureUtils.cpp:139:35: error: no member named \u0027Depth24UnormStencil8\u0027 in \u0027wgpu::TextureFormat\u0027; did you mean \u0027Depth24PlusStencil8\u0027?\n        case wgpu::TextureFormat::Depth24UnormStencil8:\n             ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~\n```",
+      "revId": "8e12217d771467fe56fb36cf663141517f607273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
