@@ -16,6 +16,24 @@
       "message": "Was this an existing bug where the Access was undefined previously?",
       "revId": "7d4ad96d514a1ccccec9c4c8ea43d3554b4bab0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ecb4f02_f24304fb",
+        "filename": "src/tint/transform/calculate_array_length.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-15T18:31:46Z",
+      "side": 1,
+      "message": "No, I\u0027ve changed the signature to go from a buffer to a pointer-to-buffer.\nThe reason being that a parameter doesn\u0027t have access or storage class, and we were (ab)using the fact that `ast::Variable` held this stuff. We got away with it by disabling validation.\n\nA pointer does have these things, but to ensure that we pass validation, the pointer type now has to correctly match types. Hence why we now pass in more info.",
+      "parentUuid": "226b2ebb_3f89bc03",
+      "revId": "7d4ad96d514a1ccccec9c4c8ea43d3554b4bab0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
