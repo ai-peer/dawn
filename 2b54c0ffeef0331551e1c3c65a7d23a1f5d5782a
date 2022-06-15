@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ee78fe7_fbf62636",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-15T11:09:38Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "2b54c0ffeef0331551e1c3c65a7d23a1f5d5782a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14e334bd_14141680",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-15T11:09:38Z",
+      "side": 1,
+      "message": "u-nit: instead of an if and INVALID_IF we could have INVALID_IF(alphaToCoverage \u0026\u0026 outputSamepleMaskUsed).",
+      "revId": "2b54c0ffeef0331551e1c3c65a7d23a1f5d5782a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db16f059_0f5e06f9",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-15T11:09:38Z",
+      "side": 1,
+      "message": "nit: this error message doesn\u0027t follow the conventions that we try to use. https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/errors.md#error-message-formatting see the second to last item for example.\n\nThe module an entryPoint is also in the context already so we don\u0027t need to add them.",
+      "revId": "2b54c0ffeef0331551e1c3c65a7d23a1f5d5782a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95efeb66_e649b18c",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-15T11:09:38Z",
+      "side": 1,
+      "message": "u-nit: we could group it with usesNumWorkgroups at [1] and use the same type of name.",
+      "revId": "2b54c0ffeef0331551e1c3c65a7d23a1f5d5782a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a852b04_dcb3f466",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-15T11:09:38Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "2b54c0ffeef0331551e1c3c65a7d23a1f5d5782a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
