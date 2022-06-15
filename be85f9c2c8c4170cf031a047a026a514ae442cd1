@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca77b8e5_cc3fc991",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-15T18:40:06Z",
+      "side": 1,
+      "message": "Should this be \"\u0027override\u0027 declaration\"?",
+      "revId": "be85f9c2c8c4170cf031a047a026a514ae442cd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eea0425_4b25f9e9",
+        "filename": "src/tint/reader/wgsl/parser_impl_global_decl_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-15T18:40:06Z",
+      "side": 1,
+      "message": "Well, now i have to scroll back and delete the comment asking for this test to be added .....",
+      "revId": "be85f9c2c8c4170cf031a047a026a514ae442cd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
