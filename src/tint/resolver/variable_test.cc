@@ -260,30 +260,6 @@ TEST_F(ResolverVariableTest, LocalVar_ShadowsGlobalConst) {
     EXPECT_EQ(user_v->Variable(), global);
 }
 
-// TODO(crbug.com/tint/1580): Remove when module-scope 'let' is removed
-TEST_F(ResolverVariableTest, LocalVar_ShadowsGlobalLet) {
-    // let a : i32 = 1i;
-    //
-    // fn X() {
-    //   var a = (a == 123);
-    // }
-
-    auto* g = GlobalLet("a", ty.i32(), Expr(1_i));
-    auto* v = Var("a", nullptr, Expr("a"));
-    Func("F", {}, ty.void_(), {Decl(v)});
-
-    ASSERT_TRUE(r()->Resolve()) << r()->error();
-
-    auto* global = Sem().Get(g);
-    auto* local = Sem().Get<sem::LocalVariable>(v);
-    ASSERT_NE(local, nullptr);
-    EXPECT_EQ(local->Shadows(), global);
-
-    auto* user_v = Sem().Get<sem::VariableUser>(local->Declaration()->constructor);
-    ASSERT_NE(user_v, nullptr);
-    EXPECT_EQ(user_v->Variable(), global);
-}
-
 TEST_F(ResolverVariableTest, LocalVar_ShadowsLocalVar) {
     // fn F() {
     //   var a : i32 = 1i; // x
@@ -593,30 +569,6 @@ TEST_F(ResolverVariableTest, LocalLet_ShadowsGlobalConst) {
     EXPECT_EQ(user->Variable(), global);
 }
 
-// TODO(crbug.com/tint/1580): Remove when module-scope 'let' is removed
-TEST_F(ResolverVariableTest, LocalLet_ShadowsGlobalLet) {
-    // let a : i32 = 1i;
-    //
-    // fn F() {
-    //   let a = a;
-    // }
-
-    auto* g = GlobalLet("a", ty.i32(), Expr(1_i));
-    auto* l = Let("a", nullptr, Expr("a"));
-    Func("F", {}, ty.void_(), {Decl(l)});
-
-    ASSERT_TRUE(r()->Resolve()) << r()->error();
-
-    auto* global = Sem().Get(g);
-    auto* local = Sem().Get<sem::LocalVariable>(l);
-    ASSERT_NE(local, nullptr);
-    EXPECT_EQ(local->Shadows(), global);
-
-    auto* user = Sem().Get<sem::VariableUser>(local->Declaration()->constructor);
-    ASSERT_NE(user, nullptr);
-    EXPECT_EQ(user->Variable(), global);
-}
-
 TEST_F(ResolverVariableTest, LocalLet_ShadowsLocalVar) {
     // fn F() {
     //   var a : i32 = 1i;
@@ -821,26 +773,6 @@ TEST_F(ResolverVariableTest, LocalConst_ShadowsGlobalConst) {
     auto* user = Sem().Get<sem::VariableUser>(local->Declaration()->constructor);
     ASSERT_NE(user, nullptr);
     EXPECT_EQ(user->Variable(), global);
-}
-
-// TODO(crbug.com/tint/1580): Remove when module-scope 'let' is removed
-TEST_F(ResolverVariableTest, LocalConst_ShadowsGlobalLet) {
-    // let a : i32 = 1i;
-    //
-    // fn F() {
-    //   const a = 1i;
-    // }
-
-    auto* g = GlobalLet("a", ty.i32(), Expr(1_i));
-    auto* c = Const("a", nullptr, Expr("a"));
-    Func("F", {}, ty.void_(), {Decl(c)});
-
-    ASSERT_TRUE(r()->Resolve()) << r()->error();
-
-    auto* global = Sem().Get(g);
-    auto* local = Sem().Get<sem::LocalVariable>(c);
-    ASSERT_NE(local, nullptr);
-    EXPECT_EQ(local->Shadows(), global);
 }
 
 TEST_F(ResolverVariableTest, LocalConst_ShadowsLocalVar) {
@@ -1052,13 +984,12 @@ TEST_F(ResolverVariableTest, LocalConst_ImplicitType_Decls) {
     EXPECT_EQ(Sem().Get(c_maf32)->ConstantValue().ElementCount(), 9u);
 }
 
-// Enable when constants propagate between 'const' variables
-TEST_F(ResolverVariableTest, DISABLED_LocalConst_PropagateConstValue) {
+TEST_F(ResolverVariableTest, LocalConst_PropagateConstValue) {
+    auto* a = Const("a", nullptr, Expr(42_i));
     auto* b = Const("b", nullptr, Expr("a"));
     auto* c = Const("c", nullptr, Expr("b"));
-    auto* a = Const("a", nullptr, Expr(42_i));
 
-    WrapInFunction(b, c, a);
+    WrapInFunction(a, b, c);
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
@@ -1256,8 +1187,7 @@ TEST_F(ResolverVariableTest, GlobalConst_ImplicitType_Decls) {
     EXPECT_EQ(Sem().Get(c_maf32)->ConstantValue().ElementCount(), 9u);
 }
 
-// Enable when constants propagate between 'const' variables
-TEST_F(ResolverVariableTest, DISABLED_GlobalConst_PropagateConstValue) {
+TEST_F(ResolverVariableTest, GlobalConst_PropagateConstValue) {
     GlobalConst("b", nullptr, Expr("a"));
     auto* c = GlobalConst("c", nullptr, Expr("b"));
     GlobalConst("a", nullptr, Expr(42_i));
@@ -1331,28 +1261,6 @@ TEST_F(ResolverVariableTest, Param_ShadowsGlobalConst) {
     // }
 
     auto* g = GlobalConst("a", ty.i32(), Expr(1_i));
-    auto* p = Param("a", ty.bool_());
-    Func("F", {p}, ty.void_(), {});
-
-    ASSERT_TRUE(r()->Resolve()) << r()->error();
-
-    auto* global = Sem().Get(g);
-    auto* param = Sem().Get<sem::Parameter>(p);
-
-    ASSERT_NE(global, nullptr);
-    ASSERT_NE(param, nullptr);
-
-    EXPECT_EQ(param->Shadows(), global);
-}
-
-// TODO(crbug.com/tint/1580): Remove when module-scope 'let' is removed
-TEST_F(ResolverVariableTest, Param_ShadowsGlobalLet) {
-    // let a : i32 = 1i;
-    //
-    // fn F(a : bool) {
-    // }
-
-    auto* g = GlobalLet("a", ty.i32(), Expr(1_i));
     auto* p = Param("a", ty.bool_());
     Func("F", {p}, ty.void_(), {});
 

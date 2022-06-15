@@ -241,8 +241,8 @@ TEST_F(ResolverFunctionValidationTest, VoidFunctionReturnsAInt) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: return statement type must match its function return "
-              "type, returned 'abstract-int', expected 'void'");
+              "12:34 error: return statement type must match its function return type, returned "
+              "'abstract-int', expected 'void'");
 }
 
 TEST_F(ResolverFunctionValidationTest, VoidFunctionReturnsAFloat) {
@@ -251,8 +251,8 @@ TEST_F(ResolverFunctionValidationTest, VoidFunctionReturnsAFloat) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: return statement type must match its function return "
-              "type, returned 'abstract-float', expected 'void'");
+              "12:34 error: return statement type must match its function return type, returned "
+              "'abstract-float', expected 'void'");
 }
 
 TEST_F(ResolverFunctionValidationTest, VoidFunctionReturnsI32) {
@@ -261,8 +261,8 @@ TEST_F(ResolverFunctionValidationTest, VoidFunctionReturnsI32) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: return statement type must match its function return "
-              "type, returned 'i32', expected 'void'");
+              "12:34 error: return statement type must match its function return type, returned "
+              "'i32', expected 'void'");
 }
 
 TEST_F(ResolverFunctionValidationTest, FunctionTypeMustMatchReturnStatementType_void_fail) {
@@ -287,8 +287,8 @@ TEST_F(ResolverFunctionValidationTest, FunctionTypeMustMatchReturnStatementTypeM
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: return statement type must match its function return "
-              "type, returned 'void', expected 'f32'");
+              "12:34 error: return statement type must match its function return type, returned "
+              "'void', expected 'f32'");
 }
 
 TEST_F(ResolverFunctionValidationTest, FunctionTypeMustMatchReturnStatementTypeF32_pass) {
@@ -310,8 +310,8 @@ TEST_F(ResolverFunctionValidationTest, FunctionTypeMustMatchReturnStatementTypeF
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: return statement type must match its function return "
-              "type, returned 'i32', expected 'f32'");
+              "12:34 error: return statement type must match its function return type, returned "
+              "'i32', expected 'f32'");
 }
 
 TEST_F(ResolverFunctionValidationTest, FunctionTypeMustMatchReturnStatementTypeF32Alias_pass) {
@@ -337,8 +337,8 @@ TEST_F(ResolverFunctionValidationTest, FunctionTypeMustMatchReturnStatementTypeF
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: return statement type must match its function return "
-              "type, returned 'u32', expected 'f32'");
+              "12:34 error: return statement type must match its function return type, returned "
+              "'u32', expected 'f32'");
 }
 
 TEST_F(ResolverFunctionValidationTest, CannotCallEntryPoint) {
@@ -451,31 +451,6 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_GoodType_ConstU32) {
     EXPECT_TRUE(sem_func->DirectlyReferencedGlobals().contains(sem_y));
 }
 
-// TODO(crbug.com/tint/1580): Remove when module-scope 'let' is removed
-TEST_F(ResolverFunctionValidationTest, WorkgroupSize_GoodType_LetU32) {
-    // let x = 4u;
-    // let x = 8u;
-    // @compute @workgroup_size(x, y, 16u)
-    // fn main() {}
-    auto* x = GlobalLet("x", ty.u32(), Expr(4_u));
-    auto* y = GlobalLet("y", ty.u32(), Expr(8_u));
-    auto* func = Func("main", {}, ty.void_(), {},
-                      {Stage(ast::PipelineStage::kCompute), WorkgroupSize("x", "y", 16_u)});
-
-    ASSERT_TRUE(r()->Resolve()) << r()->error();
-
-    auto* sem_func = Sem().Get(func);
-    auto* sem_x = Sem().Get<sem::GlobalVariable>(x);
-    auto* sem_y = Sem().Get<sem::GlobalVariable>(y);
-
-    ASSERT_NE(sem_func, nullptr);
-    ASSERT_NE(sem_x, nullptr);
-    ASSERT_NE(sem_y, nullptr);
-
-    EXPECT_TRUE(sem_func->DirectlyReferencedGlobals().contains(sem_x));
-    EXPECT_TRUE(sem_func->DirectlyReferencedGlobals().contains(sem_y));
-}
-
 TEST_F(ResolverFunctionValidationTest, WorkgroupSize_GoodType_I32) {
     // @compute @workgroup_size(1i, 2i, 3i)
     // fn main() {}
@@ -553,20 +528,6 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Const_TypeMismatch) {
               "12:34 error: workgroup_size arguments must be of the same type, either i32 or u32");
 }
 
-// TODO(crbug.com/tint/1580): Remove when module-scope 'let' is removed
-TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Let_TypeMismatch) {
-    // let x = 64u;
-    // @compute @workgroup_size(1i, x)
-    // fn main() {}
-    GlobalLet("x", ty.u32(), Expr(64_u));
-    Func("main", {}, ty.void_(), {},
-         {Stage(ast::PipelineStage::kCompute), WorkgroupSize(Source{{12, 34}}, 1_i, "x")});
-
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "12:34 error: workgroup_size arguments must be of the same type, either i32 or u32");
-}
-
 TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Const_TypeMismatch2) {
     // const x = 64u;
     // const y = 32i;
@@ -574,22 +535,6 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Const_TypeMismatch2) {
     // fn main() {}
     GlobalConst("x", ty.u32(), Expr(64_u));
     GlobalConst("y", ty.i32(), Expr(32_i));
-    Func("main", {}, ty.void_(), {},
-         {Stage(ast::PipelineStage::kCompute), WorkgroupSize(Source{{12, 34}}, "x", "y")});
-
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "12:34 error: workgroup_size arguments must be of the same type, either i32 or u32");
-}
-
-// TODO(crbug.com/tint/1580): Remove when module-scope 'let' is removed
-TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Let_TypeMismatch2) {
-    // let x = 64u;
-    // let y = 32i;
-    // @compute @workgroup_size(x, y)
-    // fn main() {}
-    GlobalLet("x", ty.u32(), Expr(64_u));
-    GlobalLet("y", ty.i32(), Expr(32_i));
     Func("main", {}, ty.void_(), {},
          {Stage(ast::PipelineStage::kCompute), WorkgroupSize(Source{{12, 34}}, "x", "y")});
 
@@ -613,22 +558,6 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Mismatch_ConstU32) {
               "12:34 error: workgroup_size arguments must be of the same type, either i32 or u32");
 }
 
-// TODO(crbug.com/tint/1580): Remove when module-scope 'let' is removed
-TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Mismatch_LetU32) {
-    // let x = 4u;
-    // let x = 8u;
-    // @compute @workgroup_size(x, y, 16i)
-    // fn main() {}
-    GlobalLet("x", ty.u32(), Expr(4_u));
-    GlobalLet("y", ty.u32(), Expr(8_u));
-    Func("main", {}, ty.void_(), {},
-         {Stage(ast::PipelineStage::kCompute), WorkgroupSize(Source{{12, 34}}, "x", "y", 16_i)});
-
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "12:34 error: workgroup_size arguments must be of the same type, either i32 or u32");
-}
-
 TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Literal_BadType) {
     // @compute @workgroup_size(64.0)
     // fn main() {}
@@ -638,8 +567,8 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Literal_BadType) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: workgroup_size argument must be either literal or "
-              "module-scope constant of type i32 or u32");
+              "12:34 error: workgroup_size argument must be either a literal, constant or "
+              "overridable of type abstract-integer, i32 or u32");
 }
 
 TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Literal_Negative) {
@@ -674,23 +603,8 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Const_BadType) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: workgroup_size argument must be either literal or "
-              "module-scope constant of type i32 or u32");
-}
-
-// TODO(crbug.com/tint/1580): Remove when module-scope 'let' is removed
-TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Let_BadType) {
-    // let x = 64.0;
-    // @compute @workgroup_size(x)
-    // fn main() {}
-    GlobalLet("x", ty.f32(), Expr(64_f));
-    Func("main", {}, ty.void_(), {},
-         {Stage(ast::PipelineStage::kCompute), WorkgroupSize(Expr(Source{{12, 34}}, "x"))});
-
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "12:34 error: workgroup_size argument must be either literal or "
-              "module-scope constant of type i32 or u32");
+              "12:34 error: workgroup_size argument must be either a literal, constant or "
+              "overridable of type abstract-integer, i32 or u32");
 }
 
 TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Const_Negative) {
@@ -698,19 +612,6 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Const_Negative) {
     // @compute @workgroup_size(x)
     // fn main() {}
     GlobalConst("x", ty.i32(), Expr(-2_i));
-    Func("main", {}, ty.void_(), {},
-         {Stage(ast::PipelineStage::kCompute), WorkgroupSize(Expr(Source{{12, 34}}, "x"))});
-
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: workgroup_size argument must be at least 1");
-}
-
-// TODO(crbug.com/tint/1580): Remove when module-scope 'let' is removed
-TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Let_Negative) {
-    // let x = -2i;
-    // @compute @workgroup_size(x)
-    // fn main() {}
-    GlobalLet("x", ty.i32(), Expr(-2_i));
     Func("main", {}, ty.void_(), {},
          {Stage(ast::PipelineStage::kCompute), WorkgroupSize(Expr(Source{{12, 34}}, "x"))});
 
@@ -730,37 +631,11 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Const_Zero) {
     EXPECT_EQ(r()->error(), "12:34 error: workgroup_size argument must be at least 1");
 }
 
-// TODO(crbug.com/tint/1580): Remove when module-scope 'let' is removed
-TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Let_Zero) {
-    // let x = 0i;
-    // @compute @workgroup_size(x)
-    // fn main() {}
-    GlobalLet("x", ty.i32(), Expr(0_i));
-    Func("main", {}, ty.void_(), {},
-         {Stage(ast::PipelineStage::kCompute), WorkgroupSize(Expr(Source{{12, 34}}, "x"))});
-
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: workgroup_size argument must be at least 1");
-}
-
 TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Const_NestedZeroValueConstructor) {
     // const x = i32(i32(i32()));
     // @compute @workgroup_size(x)
     // fn main() {}
     GlobalConst("x", ty.i32(), Construct(ty.i32(), Construct(ty.i32(), Construct(ty.i32()))));
-    Func("main", {}, ty.void_(), {},
-         {Stage(ast::PipelineStage::kCompute), WorkgroupSize(Expr(Source{{12, 34}}, "x"))});
-
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: workgroup_size argument must be at least 1");
-}
-
-// TODO(crbug.com/tint/1580): Remove when module-scope 'let' is removed
-TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Let_NestedZeroValueConstructor) {
-    // let x = i32(i32(i32()));
-    // @compute @workgroup_size(x)
-    // fn main() {}
-    GlobalLet("x", ty.i32(), Construct(ty.i32(), Construct(ty.i32(), Construct(ty.i32()))));
     Func("main", {}, ty.void_(), {},
          {Stage(ast::PipelineStage::kCompute), WorkgroupSize(Expr(Source{{12, 34}}, "x"))});
 
@@ -778,8 +653,8 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_NonConst) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: workgroup_size argument must be either literal or "
-              "module-scope constant of type i32 or u32");
+              "12:34 error: workgroup_size argument must be either a literal, constant or "
+              "overridable of type abstract-integer, i32 or u32");
 }
 
 TEST_F(ResolverFunctionValidationTest, WorkgroupSize_InvalidExpr) {
@@ -791,8 +666,8 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_InvalidExpr) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: workgroup_size argument must be either a literal or "
-              "a module-scope constant");
+              "12:34 error: workgroup_size argument must be either a literal, constant or "
+              "overridable of type abstract-integer, i32 or u32");
 }
 
 TEST_F(ResolverFunctionValidationTest, ReturnIsConstructible_NonPlain) {
