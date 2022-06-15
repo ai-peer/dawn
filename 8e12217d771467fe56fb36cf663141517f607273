@@ -16,6 +16,75 @@
       "message": "Note, the build failures appear to be Dawn related.\n\n```\n../../src/dawn/utils/TextureUtils.cpp:139:35: error: no member named \u0027Depth24UnormStencil8\u0027 in \u0027wgpu::TextureFormat\u0027; did you mean \u0027Depth24PlusStencil8\u0027?\n        case wgpu::TextureFormat::Depth24UnormStencil8:\n             ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~\n```",
       "revId": "8e12217d771467fe56fb36cf663141517f607273",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4886ff4_5ccd8c90",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2206,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-15T14:23:24Z",
+      "side": 1,
+      "message": "ubernit: `while condition` ?",
+      "range": {
+        "startLine": 2206,
+        "startChar": 50,
+        "endLine": 2206,
+        "endChar": 59
+      },
+      "revId": "8e12217d771467fe56fb36cf663141517f607273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fbfbc58_d926821d",
+        "filename": "src/tint/resolver/compound_statement_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-15T14:23:24Z",
+      "side": 1,
+      "message": "Please can we add a test to check that `Sem().Get(body)-\u003eParent() \u003d\u003d s` ?",
+      "range": {
+        "startLine": 251,
+        "startChar": 10,
+        "endLine": 251,
+        "endChar": 14
+      },
+      "revId": "8e12217d771467fe56fb36cf663141517f607273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3bb119a_dc8956f9",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-15T14:23:24Z",
+      "side": 1,
+      "message": "Do you think this is incorrect?",
+      "range": {
+        "startLine": 1065,
+        "startChar": 0,
+        "endLine": 1066,
+        "endChar": 46
+      },
+      "revId": "8e12217d771467fe56fb36cf663141517f607273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
