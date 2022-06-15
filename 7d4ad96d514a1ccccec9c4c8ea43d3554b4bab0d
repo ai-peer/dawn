@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "226b2ebb_3f89bc03",
+        "filename": "src/tint/transform/calculate_array_length.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-15T18:26:48Z",
+      "side": 1,
+      "message": "Was this an existing bug where the Access was undefined previously?",
+      "revId": "7d4ad96d514a1ccccec9c4c8ea43d3554b4bab0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
