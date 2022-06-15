@@ -190,7 +190,7 @@ TEST(AdapterDiscoveryTests, OnlyDesktopGL) {
 }
 #endif  // defined(DAWN_ENABLE_BACKEND_DESKTOP_GL)
 
-#if defined(DAWN_ENABLE_BACKEND_OPENGLES)
+#if 0
 // Test discovering only OpenGLES adapters
 TEST(AdapterDiscoveryTests, OnlyOpenGLES) {
     ScopedEnvironmentVar angleDefaultPlatform;
