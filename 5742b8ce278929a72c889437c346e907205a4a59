@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43f62d60_8184686d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-15T16:48:09Z",
+      "side": 1,
+      "message": "Apologies about the size of this change.\nThis is as small as I could sensibly make it, without going via all sorts of wonky intermediate stages.",
+      "revId": "5742b8ce278929a72c889437c346e907205a4a59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
