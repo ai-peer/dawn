@@ -249,6 +249,8 @@ struct EntryPointMetadata {
     std::unordered_set<std::string> initializedOverridableConstants;
 
     bool usesNumWorkgroups = false;
+    // Used at render pipeline validation.
+    bool outputSampleMaskUsed = false;
 };
 
 class ShaderModuleBase : public ApiObjectBase, public CachedObject {
