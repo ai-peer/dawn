@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd54bf5e_35e5fa2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-15T13:58:55Z",
+      "side": 1,
+      "message": "Adding James to give a scan over the uniformity code. (It\u0027s mostly a copy of the for-loop code with some bits removed.)",
+      "revId": "3f3e448c209ff95a014e2f7acc811c0a3f46aa45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
