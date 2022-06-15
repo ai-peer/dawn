@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b0cce0e_815d8156",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-06-15T08:45:29Z",
+      "side": 1,
+      "message": "Done, thanks.",
+      "parentUuid": "886c9eec_059dd7b3",
+      "revId": "765cd123fc373f36d1b262d0eb6f3de7ae057a7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b52fdba_3ad06a0b",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-06-14T08:22:30Z",
       "side": 1,
       "message": "nit: can you use %s and add StepMode::VertexBufferNotUsed? It will keeping formatting consistent and make sure that if the enum name changes, then we don\u0027t forget to update the message.",
+      "range": {
+        "startLine": 104,
+        "startChar": 76,
+        "endLine": 104,
+        "endChar": 95
+      },
+      "revId": "765cd123fc373f36d1b262d0eb6f3de7ae057a7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6c6ae1a_c87e87fb",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-06-15T08:45:29Z",
+      "side": 1,
+      "message": "Done, thanks.",
+      "parentUuid": "6b52fdba_3ad06a0b",
       "range": {
         "startLine": 104,
         "startChar": 76,
