@@ -582,9 +582,9 @@ fn f() {
   var local_str = S(1, 2.0, 3);
 }
 
-let module_arr : array<f32, 4u> = array<f32, 4u>(0.0, 1.0, 2.0, 3.0);
+const module_arr : array<f32, 4u> = array<f32, 4u>(0.0, 1.0, 2.0, 3.0);
 
-let module_str : S = S(1, 2.0, 3);
+const module_str : S = S(1, 2.0, 3);
 )";
 
     auto* expect = src;
@@ -602,7 +602,7 @@ fn f() {
   var local_str = S(1, 2.0, 3);
 }
 
-let module_str : S = S(1, 2.0, 3);
+const module_str : S = S(1, 2.0, 3);
 
 struct S {
   a : i32,
@@ -610,7 +610,7 @@ struct S {
   c : i32,
 }
 
-let module_arr : array<f32, 4u> = array<f32, 4u>(0.0, 1.0, 2.0, 3.0);
+const module_arr : array<f32, 4u> = array<f32, 4u>(0.0, 1.0, 2.0, 3.0);
 )";
 
     auto* expect = src;

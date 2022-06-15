@@ -19,7 +19,7 @@ namespace tint::reader::wgsl {
 namespace {
 
 TEST_F(ParserImplTest, GlobalConstantDecl) {
-    auto p = parser("let a : f32 = 1.");
+    auto p = parser("const a : f32 = 1.");
     auto attrs = p->attribute_list();
     EXPECT_FALSE(attrs.errored);
     EXPECT_FALSE(attrs.matched);
@@ -44,7 +44,7 @@ TEST_F(ParserImplTest, GlobalConstantDecl) {
 }
 
 TEST_F(ParserImplTest, GlobalConstantDecl_Inferred) {
-    auto p = parser("let a = 1.");
+    auto p = parser("const a = 1.");
     auto attrs = p->attribute_list();
     EXPECT_FALSE(attrs.errored);
     EXPECT_FALSE(attrs.matched);
@@ -68,7 +68,7 @@ TEST_F(ParserImplTest, GlobalConstantDecl_Inferred) {
 }
 
 TEST_F(ParserImplTest, GlobalConstantDecl_InvalidExpression) {
-    auto p = parser("let a : f32 = if (a) {}");
+    auto p = parser("const a : f32 = if (a) {}");
     auto attrs = p->attribute_list();
     EXPECT_FALSE(attrs.errored);
     EXPECT_FALSE(attrs.matched);
@@ -77,11 +77,11 @@ TEST_F(ParserImplTest, GlobalConstantDecl_InvalidExpression) {
     EXPECT_TRUE(e.errored);
     EXPECT_FALSE(e.matched);
     EXPECT_EQ(e.value, nullptr);
-    EXPECT_EQ(p->error(), "1:15: invalid type for const_expr");
+    EXPECT_EQ(p->error(), "1:17: invalid type for const_expr");
 }
 
 TEST_F(ParserImplTest, GlobalConstantDecl_MissingExpression) {
-    auto p = parser("let a : f32 =");
+    auto p = parser("const a : f32 =");
     auto attrs = p->attribute_list();
     EXPECT_FALSE(attrs.errored);
     EXPECT_FALSE(attrs.matched);
@@ -90,7 +90,7 @@ TEST_F(ParserImplTest, GlobalConstantDecl_MissingExpression) {
     EXPECT_TRUE(e.errored);
     EXPECT_FALSE(e.matched);
     EXPECT_EQ(e.value, nullptr);
-    EXPECT_EQ(p->error(), "1:14: unable to parse const_expr");
+    EXPECT_EQ(p->error(), "1:16: unable to parse const_expr");
 }
 
 TEST_F(ParserImplTest, GlobalConstantDec_Override_WithId) {
