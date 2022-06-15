@@ -301,9 +301,7 @@ sem::Type* Resolver::Type(const ast::Type* ty) {
     return s;
 }
 
-sem::Variable* Resolver::Variable(const ast::Variable* v,
-                                  bool is_global,
-                                  uint32_t index /* = 0 */) {
+sem::Variable* Resolver::Variable(const ast::Variable* v, bool is_global) {
     const sem::Type* storage_ty = nullptr;
 
     // If the variable has a declared type, resolve it.
@@ -317,7 +315,6 @@ sem::Variable* Resolver::Variable(const ast::Variable* v,
     auto* as_var = v->As<ast::Var>();
     auto* as_let = v->As<ast::Let>();
     auto* as_override = v->As<ast::Override>();
-    auto* as_param = v->As<ast::Parameter>();
 
     const sem::Expression* rhs = nullptr;
 
@@ -392,27 +389,9 @@ sem::Variable* Resolver::Variable(const ast::Variable* v,
     }
 
     if (!ApplyStorageClassUsageToType(storage_class, const_cast<sem::Type*>(var_ty), v->source)) {
-        AddNote(std::string("while instantiating ") + ((as_param) ? "parameter " : "variable ") +
-                    builder_->Symbols().NameFor(v->symbol),
+        AddNote("while instantiating variable " + builder_->Symbols().NameFor(v->symbol),
                 v->source);
         return nullptr;
-    }
-
-    if (as_param) {
-        if (auto* ptr = var_ty->As<sem::Pointer>()) {
-            // For MSL, we push module-scope variables into the entry point as pointer
-            // parameters, so we also need to handle their store type.
-            if (!ApplyStorageClassUsageToType(
-                    ptr->StorageClass(), const_cast<sem::Type*>(ptr->StoreType()), v->source)) {
-                AddNote("while instantiating parameter " + builder_->Symbols().NameFor(v->symbol),
-                        v->source);
-                return nullptr;
-            }
-        }
-        auto* param =
-            builder_->create<sem::Parameter>(as_param, index, var_ty, storage_class, access);
-        builder_->Sem().Add(as_param, param);
-        return param;
     }
 
     if (is_global) {
@@ -445,6 +424,29 @@ sem::Variable* Resolver::Variable(const ast::Variable* v,
     builder_->Sem().Add(v, local);
     local->SetConstructor(rhs);
     return local;
+}
+
+sem::Parameter* Resolver::Parameter(const ast::Parameter* param, uint32_t index) {
+    const sem::Type* ty = Type(param->type);
+    if (!ty) {
+        return nullptr;
+    }
+
+    if (auto* ptr = ty->As<sem::Pointer>()) {
+        // For MSL, we push module-scope variables into the entry point as pointer
+        // parameters, so we also need to handle their store type.
+        if (!ApplyStorageClassUsageToType(
+                ptr->StorageClass(), const_cast<sem::Type*>(ptr->StoreType()), param->source)) {
+            AddNote("while instantiating parameter " + builder_->Symbols().NameFor(param->symbol),
+                    param->source);
+            return nullptr;
+        }
+    }
+
+    auto* sem = builder_->create<sem::Parameter>(param, index, ty, ast::StorageClass::kNone,
+                                                 ast::Access::kUndefined);
+    builder_->Sem().Add(param, sem);
+    return sem;
 }
 
 ast::Access Resolver::DefaultAccessForStorageClass(ast::StorageClass storage_class) {
@@ -564,7 +566,7 @@ sem::Function* Resolver::Function(const ast::Function* decl) {
             }
         }
 
-        auto* p = As<sem::Parameter>(Variable(param, false, parameter_index++));
+        auto* p = Parameter(param, parameter_index++);
         if (!p) {
             return nullptr;
         }
