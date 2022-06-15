@@ -90,15 +90,16 @@ TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsGlobalLet) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(12:34 error: 'mix' is a builtin and cannot be redeclared as a 'let')");
+              R"(12:34 error: 'mix' is a builtin and cannot be redeclared as a 'const')");
 }
 
 TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsGlobalVar) {
     Global(Source{{12, 34}}, "mix", ty.i32(), Expr(1_i), ast::StorageClass::kPrivate);
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              R"(12:34 error: 'mix' is a builtin and cannot be redeclared as a module-scope 'var')");
+    EXPECT_EQ(
+        r()->error(),
+        R"(12:34 error: 'mix' is a builtin and cannot be redeclared as a module-scope 'var')");
 }
 
 TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsAlias) {
