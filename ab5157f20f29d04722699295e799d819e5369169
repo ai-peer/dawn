@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f0d794f_5c550ae2",
+        "filename": "src/tint/resolver/dependency_graph_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-15T08:35:00Z",
+      "side": 1,
+      "message": "nit: you can just put `\"SYMBOL1\"` here.",
+      "range": {
+        "startLine": 1089,
+        "startChar": 11,
+        "endLine": 1089,
+        "endChar": 19
+      },
+      "revId": "ab5157f20f29d04722699295e799d819e5369169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a81603f_9573d308",
+        "filename": "src/tint/resolver/dependency_graph_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1096,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-15T08:35:00Z",
+      "side": 1,
+      "message": "nit: `Enable()` and `Global()` return their respective AST nodes, so this could all bake down to:\n\n```\nauto* var_1 \u003d Global(\"SYMBOL1\", ty.i32(), nullptr);\nauto* enable_1 \u003d Enable(ast::Extension::kF16);\nauto* var_2 \u003d Global(\"SYMBOL2\", ty.f32(), nullptr);\nauto* enable_2 \u003d Enable(ast::Extension::kF16);\nEXPECT_THAT(Build().ordered_globals, ElementsAre(enable_1, enable_2, var_1, var_2));\n```",
+      "range": {
+        "startLine": 1096,
+        "startChar": 18,
+        "endLine": 1096,
+        "endChar": 48
+      },
+      "revId": "ab5157f20f29d04722699295e799d819e5369169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
