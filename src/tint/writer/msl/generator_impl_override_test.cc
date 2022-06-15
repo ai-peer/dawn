@@ -22,15 +22,6 @@ namespace {
 
 using MslGeneratorImplTest = TestHelper;
 
-TEST_F(MslGeneratorImplTest, Emit_ModuleConstant) {
-    auto* var = GlobalConst("pos", ty.array<f32, 3>(), array<f32, 3>(1_f, 2_f, 3_f));
-
-    GeneratorImpl& gen = Build();
-
-    ASSERT_TRUE(gen.EmitProgramConstVariable(var)) << gen.error();
-    EXPECT_EQ(gen.result(), "constant tint_array<float, 3> pos = {1.0f, 2.0f, 3.0f};\n");
-}
-
 TEST_F(MslGeneratorImplTest, Emit_SpecConstant) {
     auto* var = Override("pos", ty.f32(), Expr(3_f),
                          ast::AttributeList{

@@ -1,1 +1,1 @@
-let v = vec2<bool>(false, true);
+const v = vec2<bool>(false, true);

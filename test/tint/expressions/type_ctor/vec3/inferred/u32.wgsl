@@ -1,1 +1,1 @@
-let v = vec3(0u, 1u, 2u);
+const v = vec3(0u, 1u, 2u);
