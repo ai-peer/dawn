@@ -217,7 +217,7 @@ fn comp_main2() {
 )";
 
     auto* expect = R"(
-let c : f32 = 1.0;
+const c : f32 = 1.0;
 
 @compute @workgroup_size(1)
 fn comp_main1() {
@@ -236,7 +236,7 @@ fn comp_main1() {
 
 TEST_F(SingleEntryPointTest, WorkgroupSizeLetPreserved) {
     auto* src = R"(
-let size : i32 = 1;
+const size : i32 = 1;
 
 @compute @workgroup_size(size)
 fn main() {

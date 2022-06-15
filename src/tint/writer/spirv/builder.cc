@@ -693,6 +693,12 @@ uint32_t Builder::GenerateFunctionTypeIfNeeded(const sem::Function* func) {
 }
 
 bool Builder::GenerateFunctionVariable(const ast::Variable* v) {
+    if (v->Is<ast::Const>()) {
+        // Constants are generated at their use. This is required as the 'const' declaration may be
+        // abstract-numeric, which has no SPIR-V type.
+        return true;
+    }
+
     uint32_t init_id = 0;
     if (v->constructor) {
         init_id = GenerateExpressionWithLoadIfNeeded(v->constructor);
@@ -703,9 +709,9 @@ bool Builder::GenerateFunctionVariable(const ast::Variable* v) {
 
     auto* sem = builder_.Sem().Get(v);
 
-    if (auto* let = v->As<ast::Let>()) {
-        if (!let->constructor) {
-            error_ = "missing constructor for constant";
+    if (v->Is<ast::Let>()) {
+        if (!v->constructor) {
+            error_ = "missing constructor for let";
             return false;
         }
         RegisterVariable(sem, init_id);
@@ -748,20 +754,18 @@ bool Builder::GenerateStore(uint32_t to, uint32_t from) {
 }
 
 bool Builder::GenerateGlobalVariable(const ast::Variable* v) {
+    if (v->Is<ast::Const>()) {
+        // Constants are generated at their use. This is required as the 'const' declaration may be
+        // abstract-numeric, which has no SPIR-V type.
+        return true;
+    }
+
     auto* sem = builder_.Sem().Get(v);
     auto* type = sem->Type()->UnwrapRef();
 
     uint32_t init_id = 0;
     if (auto* ctor = v->constructor) {
-        if (!v->Is<ast::Override>()) {
-            auto* ctor_sem = builder_.Sem().Get(ctor);
-            if (auto constant = ctor_sem->ConstantValue()) {
-                init_id = GenerateConstantIfNeeded(std::move(constant));
-            }
-        }
-        if (init_id == 0) {
-            init_id = GenerateConstructorExpression(v, v->constructor);
-        }
+        init_id = GenerateConstructorExpression(v, ctor);
         if (init_id == 0) {
             return false;
         }
@@ -799,7 +803,7 @@ bool Builder::GenerateGlobalVariable(const ast::Variable* v) {
         }
     }
 
-    if (v->IsAnyOf<ast::Let, ast::Override>()) {
+    if (v->Is<ast::Override>()) {
         push_debug(spv::Op::OpName,
                    {Operand(init_id), Operand(builder_.Symbols().NameFor(v->symbol))});
 
@@ -1280,8 +1284,10 @@ uint32_t Builder::GetGLSLstd450Import() {
 
 uint32_t Builder::GenerateConstructorExpression(const ast::Variable* var,
                                                 const ast::Expression* expr) {
-    if (auto* literal = expr->As<ast::LiteralExpression>()) {
-        return GenerateLiteralIfNeeded(var, literal);
+    if (auto* sem = builder_.Sem().Get(expr)) {
+        if (auto constant = sem->ConstantValue()) {
+            return GenerateConstantIfNeeded(constant);
+        }
     }
     if (auto* call = builder_.Sem().Get<sem::Call>(expr)) {
         if (call->Target()->IsAnyOf<sem::TypeConstructor, sem::TypeConversion>()) {

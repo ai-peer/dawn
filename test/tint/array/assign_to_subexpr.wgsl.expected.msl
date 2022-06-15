@@ -19,7 +19,7 @@ struct S {
 };
 
 void foo() {
-  tint_array<int, 4> const src = tint_array<int, 4>{};
+  tint_array<int, 4> const src = {};
   tint_array<int, 4> dst = {};
   S dst_struct = {};
   tint_array<tint_array<int, 4>, 2> dst_array = {};

@@ -1,1 +1,1 @@
-let v = vec4(0u, 1u, 2u, 3u);
+const v = vec4(0u, 1u, 2u, 3u);

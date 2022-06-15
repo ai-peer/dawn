@@ -639,7 +639,7 @@ struct tint_array {
 };
 
   tint_array<float, 5> my_func() {
-    tint_array<float, 5> const tint_symbol = tint_array<float, 5>{};
+    tint_array<float, 5> const tint_symbol = {};
     return tint_symbol;
   }
 
