@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "807e916e_082a7bcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-15T13:10:29Z",
+      "side": 1,
+      "message": "PTAL again! hopefully this is the last complete rework 😊",
+      "revId": "de44779c272a2578a1cca6f1d214870c0d0ea379",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
