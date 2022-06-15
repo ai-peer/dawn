@@ -199,6 +199,9 @@ struct EntryPointMetadata {
         fragmentOutputVariables;
     ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments> fragmentOutputsWritten;
 
+    // Used at render pipeline validation.
+    bool outputSampleMaskUsed = false;
+
     struct InterStageVariableInfo {
         InterStageComponentType baseType;
         uint32_t componentCount;
