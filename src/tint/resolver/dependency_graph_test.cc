@@ -1231,6 +1231,9 @@ TEST_F(ResolverDependencyGraphTraversalTest, SymbolsReached) {
                  Assign(V, V),                          //
                  Block(                                 //
                      Assign(V, V))),                    //
+             While(Equal(V, V),                         //
+                   Block(                               //
+                       Assign(V, V))),                  //
              Loop(Block(Assign(V, V)),                  //
                   Block(Assign(V, V))),                 //
              Switch(V,                                  //
