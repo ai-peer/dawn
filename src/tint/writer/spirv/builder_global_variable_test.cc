@@ -71,13 +71,14 @@ TEST_F(BuilderTest, GlobalVar_Const) {
     EXPECT_TRUE(b.GenerateGlobalVariable(v)) << b.error();
     ASSERT_FALSE(b.has_error()) << b.error();
 
-    EXPECT_EQ(DumpInstructions(b.debug()), R"(OpName %5 "var"
+    EXPECT_EQ(DumpInstructions(b.debug()), R"(OpName %6 "var"
 )");
     EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeFloat 32
 %1 = OpTypeVector %2 3
 %3 = OpConstant %2 1
 %4 = OpConstant %2 3
 %5 = OpConstantComposite %1 %3 %3 %4
+%6 = OpVariable %1 Private %5
 )");
 }
 
@@ -97,6 +98,7 @@ TEST_F(BuilderTest, GlobalVar_Complex_Constructor) {
 %4 = OpConstant %2 2
 %5 = OpConstant %2 3
 %6 = OpConstantComposite %1 %3 %4 %5
+%7 = OpVariable %1 Private %6
 )");
 }
 
@@ -116,6 +118,7 @@ TEST_F(BuilderTest, GlobalVar_Complex_ConstructorNestedVector) {
 %4 = OpConstant %2 2
 %5 = OpConstant %2 3
 %6 = OpConstantComposite %1 %3 %4 %5
+%7 = OpVariable %1 Private %6
 )");
 }
 

@@ -494,6 +494,7 @@ struct DependencyAnalysis {
             [&](const ast::Let*) { return "let"; },            //
             [&](const ast::Var*) { return "var"; },            //
             [&](const ast::Override*) { return "override"; },  //
+            [&](const ast::Const*) { return "const"; },        //
             [&](Default) {
                 UnhandledNode(diagnostics_, node);
                 return "<error>";

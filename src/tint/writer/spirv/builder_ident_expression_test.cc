@@ -40,9 +40,10 @@ TEST_F(BuilderTest, IdentifierExpression_GlobalConst) {
 %3 = OpConstant %2 1
 %4 = OpConstant %2 3
 %5 = OpConstantComposite %1 %3 %3 %4
+%6 = OpVariable %1 Private %5
 )");
 
-    EXPECT_EQ(b.GenerateIdentifierExpression(expr), 5u);
+    EXPECT_EQ(b.GenerateIdentifierExpression(expr), 6u);
 }
 
 TEST_F(BuilderTest, IdentifierExpression_GlobalVar) {
@@ -115,7 +116,6 @@ TEST_F(BuilderTest, IdentifierExpression_FunctionVar) {
 
 TEST_F(BuilderTest, IdentifierExpression_Load) {
     auto* var = Global("var", ty.i32(), ast::StorageClass::kPrivate);
-
     auto* expr = Add("var", "var");
     WrapInFunction(expr);
 
@@ -138,15 +138,14 @@ TEST_F(BuilderTest, IdentifierExpression_Load) {
 }
 
 TEST_F(BuilderTest, IdentifierExpression_NoLoadConst) {
-    auto* var = GlobalConst("var", ty.i32(), Expr(2_i));
-
-    auto* expr = Add("var", "var");
-    WrapInFunction(expr);
+    auto* let = Let("let", ty.i32(), Expr(2_i));
+    auto* expr = Add("let", "let");
+    WrapInFunction(let, expr);
 
     spirv::Builder& b = Build();
 
     b.push_function(Function{});
-    ASSERT_TRUE(b.GenerateGlobalVariable(var)) << b.error();
+    ASSERT_TRUE(b.GenerateFunctionVariable(let)) << b.error();
 
     EXPECT_EQ(b.GenerateBinaryExpression(expr->As<ast::BinaryExpression>()), 3u) << b.error();
     EXPECT_EQ(DumpInstructions(b.types()), R"(%1 = OpTypeInt 32 1

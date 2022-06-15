@@ -2650,18 +2650,12 @@ bool GeneratorImpl::EmitDiscard(const ast::DiscardStatement*) {
 
 bool GeneratorImpl::EmitExpression(std::ostream& out, const ast::Expression* expr) {
     if (auto* sem = builder_.Sem().Get(expr)) {
-        if (auto* user = sem->As<sem::VariableUser>();
-            !user || !user->Variable()->Declaration()->Is<ast::Let>()) {
-            // Disable constant inlining if the constant expression is from a 'let' declaration.
-            // TODO(crbug.com/tint/1580): Once 'const' is implemented, 'let' will no longer resolve
-            // to a shader-creation time constant value, and this can be removed.
-            if (auto constant = sem->ConstantValue()) {
-                // We do not want to inline array constants, as this will undo the work of
-                // PromoteInitializersToConstVar, which ensures that arrays are declarated in 'let's
-                // before their usage.
-                if (!constant.Type()->Is<sem::Array>()) {
-                    return EmitConstant(out, constant);
-                }
+        if (auto constant = sem->ConstantValue()) {
+            // We do not want to inline array constants, as this will undo the work of
+            // PromoteInitializersToConstVar, which ensures that arrays are declarated in 'let's
+            // before their usage.
+            if (!constant.Type()->Is<sem::Array>()) {
+                return EmitConstant(out, constant);
             }
         }
     }
@@ -2893,8 +2887,10 @@ bool GeneratorImpl::EmitGlobalVariable(const ast::Variable* global) {
                     return false;
             }
         },
-        [&](const ast::Let* let) { return EmitProgramConstVariable(let); },
         [&](const ast::Override* override) { return EmitOverride(override); },
+        [&](const ast::Const*) {
+            return true;  // Constants are embedded at their use
+        },
         [&](Default) {
             TINT_ICE(Writer, diagnostics_)
                 << "unhandled global variable type " << global->TypeInfo().name;
@@ -3610,6 +3606,9 @@ bool GeneratorImpl::EmitStatement(const ast::Statement* stmt) {
                 v->variable,  //
                 [&](const ast::Var* var) { return EmitVar(var); },
                 [&](const ast::Let* let) { return EmitLet(let); },
+                [&](const ast::Const*) {
+                    return true;  // Constants are embedded at their use
+                },
                 [&](Default) {  //
                     TINT_ICE(Writer, diagnostics_)
                         << "unknown variable type: " << v->variable->TypeInfo().name;
@@ -4052,25 +4051,6 @@ bool GeneratorImpl::EmitLet(const ast::Let* let) {
 
     auto out = line();
     out << "const ";
-    if (!EmitTypeAndName(out, type, ast::StorageClass::kNone, ast::Access::kUndefined,
-                         builder_.Symbols().NameFor(let->symbol))) {
-        return false;
-    }
-    out << " = ";
-    if (!EmitExpression(out, let->constructor)) {
-        return false;
-    }
-    out << ";";
-
-    return true;
-}
-
-bool GeneratorImpl::EmitProgramConstVariable(const ast::Let* let) {
-    auto* sem = builder_.Sem().Get(let);
-    auto* type = sem->Type();
-
-    auto out = line();
-    out << "static const ";
     if (!EmitTypeAndName(out, type, ast::StorageClass::kNone, ast::Access::kUndefined,
                          builder_.Symbols().NameFor(let->symbol))) {
         return false;
