@@ -56,6 +56,29 @@
       },
       "revId": "de44779c272a2578a1cca6f1d214870c0d0ea379",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc450f70_9aa7e15d",
+        "filename": "src/dawn/wire/client/ObjectStore.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-15T18:20:16Z",
+      "side": 1,
+      "message": "nit. 2022",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "de44779c272a2578a1cca6f1d214870c0d0ea379",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
