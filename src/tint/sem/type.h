@@ -135,6 +135,12 @@ class Type : public Castable<Type, Node> {
     /// or array, otherwise nullptr.
     static const Type* ElementOf(const Type* ty, uint32_t* count = nullptr);
 
+    /// @param ty the type to obtain the deepest element type from
+    /// @param count if not null, then this is assigned the number of elements in the type
+    /// @returns `ty` if `ty` is an abstract or scalar, the element type if ty is a vector, matrix,
+    /// or the deepest element type if ty is an array, otherwise nullptr.
+    static const Type* DeepestElementOf(const Type* ty, uint32_t* count = nullptr);
+
     /// @param types a pointer to a list of `const Type*`.
     /// @param count the number of types in `types`.
     /// @returns the lowest-ranking type that all types in `types` can be implicitly converted to,

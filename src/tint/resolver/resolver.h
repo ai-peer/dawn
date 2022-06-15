@@ -313,6 +313,14 @@ class Resolver {
     /// @param override the variable
     sem::Variable* Override(const ast::Override* override);
 
+    /// @returns the semantic info for an `ast::Const` `v`. If an error is raised, nullptr is
+    /// returned.
+    /// @note this method does not resolve the attributes as these are context-dependent (global,
+    /// local)
+    /// @param const_ the variable
+    /// @param is_global true if this is module scope, otherwise function scope
+    sem::Variable* Const(const ast::Const* const_, bool is_global);
+
     /// @returns the semantic info for the `ast::Var` `var`. If an error is raised, nullptr is
     /// returned.
     /// @note this method does not resolve the attributes as these are context-dependent (global,
@@ -391,10 +399,10 @@ class Resolver {
     ConstantResult ConvertValue(const sem::Constant& value,
                                 const sem::Type* target_type,
                                 const Source& source);
-    ConstantResult EvaluateConstantValue(const ast::Expression* expr, const sem::Type* type);
-    ConstantResult EvaluateConstantValue(const ast::LiteralExpression* literal,
-                                         const sem::Type* type);
-    ConstantResult EvaluateConstantValue(const ast::CallExpression* call, const sem::Type* type);
+    sem::Constant EvaluateConstantValue(const ast::Expression* expr, const sem::Type* type);
+    sem::Constant EvaluateConstantValue(const ast::LiteralExpression* literal,
+                                        const sem::Type* type);
+    sem::Constant EvaluateConstantValue(const ast::CallExpression* call, const sem::Type* type);
 
     /// @returns true if the symbol is the name of a builtin function.
     bool IsBuiltin(Symbol) const;
