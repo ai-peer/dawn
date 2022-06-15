@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ddb796a_3326bde2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-15T03:05:28Z",
+      "side": 1,
+      "message": "PTAL. Added sem and ast nodes for WhileStatement and updated all the places I could find we had special handling for ForLoops. It\u0027s only an order of magnitude increase in CL size ...",
+      "revId": "f2ba12ca31f7b953f1b24412b55e28018a3f8d99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
