@@ -34,7 +34,7 @@ TEST_F(UnshadowTest, Noop) {
     auto* src = R"(
 var<private> a : i32;
 
-let b : i32 = 1;
+const b : i32 = 1;
 
 fn F(c : i32) {
   var d : i32;
@@ -305,7 +305,7 @@ var<private> a : i32;
 
 TEST_F(UnshadowTest, LocalShadowsGlobalLet) {
     auto* src = R"(
-let a : i32 = 1;
+const a : i32 = 1;
 
 fn X() {
   var a = (a == 123);
@@ -317,7 +317,7 @@ fn Y() {
 )";
 
     auto* expect = R"(
-let a : i32 = 1;
+const a : i32 = 1;
 
 fn X() {
   var a_1 = (a == 123);
@@ -343,7 +343,7 @@ fn Y() {
   let a = (a == 321);
 }
 
-let a : i32 = 1;
+const a : i32 = 1;
 )";
 
     auto* expect = R"(
@@ -355,7 +355,7 @@ fn Y() {
   let a_2 = (a == 321);
 }
 
-let a : i32 = 1;
+const a : i32 = 1;
 )";
 
     auto got = Run<Unshadow>(src);
@@ -501,14 +501,14 @@ fn F(a_1 : bool) {
 
 TEST_F(UnshadowTest, ParamShadowsGlobalLet) {
     auto* src = R"(
-let a : i32 = 1;
+const a : i32 = 1;
 
 fn F(a : bool) {
 }
 )";
 
     auto* expect = R"(
-let a : i32 = 1;
+const a : i32 = 1;
 
 fn F(a_1 : bool) {
 }
@@ -524,14 +524,14 @@ TEST_F(UnshadowTest, ParamShadowsGlobalLet_OutOfOrder) {
 fn F(a : bool) {
 }
 
-let a : i32 = 1;
+const a : i32 = 1;
 )";
 
     auto* expect = R"(
 fn F(a_1 : bool) {
 }
 
-let a : i32 = 1;
+const a : i32 = 1;
 )";
 
     auto got = Run<Unshadow>(src);

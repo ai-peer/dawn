@@ -820,9 +820,6 @@ TEST_F(GlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_Compute_WithWor
     ASSERT_TRUE(gen.Generate()) << gen.error();
     EXPECT_EQ(gen.result(), R"(#version 310 es
 
-const int width = 2;
-const int height = 3;
-const int depth = 4;
 layout(local_size_x = 2, local_size_y = 3, local_size_z = 4) in;
 void main() {
   return;
