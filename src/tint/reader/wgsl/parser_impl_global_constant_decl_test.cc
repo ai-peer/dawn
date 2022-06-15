@@ -19,7 +19,7 @@ namespace tint::reader::wgsl {
 namespace {
 
 TEST_F(ParserImplTest, GlobalConstantDecl) {
-    auto p = parser("let a : f32 = 1.");
+    auto p = parser("const a : f32 = 1.");
     auto attrs = p->attribute_list();
     EXPECT_FALSE(attrs.errored);
     EXPECT_FALSE(attrs.matched);
@@ -27,24 +27,24 @@ TEST_F(ParserImplTest, GlobalConstantDecl) {
     EXPECT_FALSE(p->has_error()) << p->error();
     EXPECT_TRUE(e.matched);
     EXPECT_FALSE(e.errored);
-    auto* let = e.value->As<ast::Let>();
-    ASSERT_NE(let, nullptr);
+    auto* const_ = e.value->As<ast::Const>();
+    ASSERT_NE(const_, nullptr);
 
-    EXPECT_EQ(let->symbol, p->builder().Symbols().Get("a"));
-    ASSERT_NE(let->type, nullptr);
-    EXPECT_TRUE(let->type->Is<ast::F32>());
+    EXPECT_EQ(const_->symbol, p->builder().Symbols().Get("a"));
+    ASSERT_NE(const_->type, nullptr);
+    EXPECT_TRUE(const_->type->Is<ast::F32>());
 
-    EXPECT_EQ(let->source.range.begin.line, 1u);
-    EXPECT_EQ(let->source.range.begin.column, 5u);
-    EXPECT_EQ(let->source.range.end.line, 1u);
-    EXPECT_EQ(let->source.range.end.column, 6u);
+    EXPECT_EQ(const_->source.range.begin.line, 1u);
+    EXPECT_EQ(const_->source.range.begin.column, 7u);
+    EXPECT_EQ(const_->source.range.end.line, 1u);
+    EXPECT_EQ(const_->source.range.end.column, 8u);
 
-    ASSERT_NE(let->constructor, nullptr);
-    EXPECT_TRUE(let->constructor->Is<ast::LiteralExpression>());
+    ASSERT_NE(const_->constructor, nullptr);
+    EXPECT_TRUE(const_->constructor->Is<ast::LiteralExpression>());
 }
 
 TEST_F(ParserImplTest, GlobalConstantDecl_Inferred) {
-    auto p = parser("let a = 1.");
+    auto p = parser("const a = 1.");
     auto attrs = p->attribute_list();
     EXPECT_FALSE(attrs.errored);
     EXPECT_FALSE(attrs.matched);
@@ -52,23 +52,23 @@ TEST_F(ParserImplTest, GlobalConstantDecl_Inferred) {
     EXPECT_FALSE(p->has_error()) << p->error();
     EXPECT_TRUE(e.matched);
     EXPECT_FALSE(e.errored);
-    auto* let = e.value->As<ast::Let>();
-    ASSERT_NE(let, nullptr);
+    auto* const_ = e.value->As<ast::Const>();
+    ASSERT_NE(const_, nullptr);
 
-    EXPECT_EQ(let->symbol, p->builder().Symbols().Get("a"));
-    EXPECT_EQ(let->type, nullptr);
+    EXPECT_EQ(const_->symbol, p->builder().Symbols().Get("a"));
+    EXPECT_EQ(const_->type, nullptr);
 
-    EXPECT_EQ(let->source.range.begin.line, 1u);
-    EXPECT_EQ(let->source.range.begin.column, 5u);
-    EXPECT_EQ(let->source.range.end.line, 1u);
-    EXPECT_EQ(let->source.range.end.column, 6u);
+    EXPECT_EQ(const_->source.range.begin.line, 1u);
+    EXPECT_EQ(const_->source.range.begin.column, 7u);
+    EXPECT_EQ(const_->source.range.end.line, 1u);
+    EXPECT_EQ(const_->source.range.end.column, 8u);
 
-    ASSERT_NE(let->constructor, nullptr);
-    EXPECT_TRUE(let->constructor->Is<ast::LiteralExpression>());
+    ASSERT_NE(const_->constructor, nullptr);
+    EXPECT_TRUE(const_->constructor->Is<ast::LiteralExpression>());
 }
 
 TEST_F(ParserImplTest, GlobalConstantDecl_InvalidExpression) {
-    auto p = parser("let a : f32 = if (a) {}");
+    auto p = parser("const a : f32 = if (a) {}");
     auto attrs = p->attribute_list();
     EXPECT_FALSE(attrs.errored);
     EXPECT_FALSE(attrs.matched);
@@ -77,11 +77,11 @@ TEST_F(ParserImplTest, GlobalConstantDecl_InvalidExpression) {
     EXPECT_TRUE(e.errored);
     EXPECT_FALSE(e.matched);
     EXPECT_EQ(e.value, nullptr);
-    EXPECT_EQ(p->error(), "1:15: invalid type for const_expr");
+    EXPECT_EQ(p->error(), "1:17: invalid type for const_expr");
 }
 
 TEST_F(ParserImplTest, GlobalConstantDecl_MissingExpression) {
-    auto p = parser("let a : f32 =");
+    auto p = parser("const a : f32 =");
     auto attrs = p->attribute_list();
     EXPECT_FALSE(attrs.errored);
     EXPECT_FALSE(attrs.matched);
@@ -90,7 +90,7 @@ TEST_F(ParserImplTest, GlobalConstantDecl_MissingExpression) {
     EXPECT_TRUE(e.errored);
     EXPECT_FALSE(e.matched);
     EXPECT_EQ(e.value, nullptr);
-    EXPECT_EQ(p->error(), "1:14: unable to parse const_expr");
+    EXPECT_EQ(p->error(), "1:16: unable to parse const_expr");
 }
 
 TEST_F(ParserImplTest, GlobalConstantDec_Override_WithId) {

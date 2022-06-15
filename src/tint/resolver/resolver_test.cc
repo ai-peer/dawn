@@ -449,7 +449,7 @@ TEST_F(ResolverTest, ArraySize_SignedLiteral) {
 }
 
 TEST_F(ResolverTest, ArraySize_UnsignedConstant) {
-    // let size = 0u;
+    // const size = 0u;
     // var<private> a : array<f32, size>;
     GlobalConst("size", nullptr, Expr(10_u));
     auto* a = Global("a", ty.array(ty.f32(), Expr("size")), ast::StorageClass::kPrivate);
@@ -464,7 +464,7 @@ TEST_F(ResolverTest, ArraySize_UnsignedConstant) {
 }
 
 TEST_F(ResolverTest, ArraySize_SignedConstant) {
-    // let size = 0;
+    // const size = 0;
     // var<private> a : array<f32, size>;
     GlobalConst("size", nullptr, Expr(10_i));
     auto* a = Global("a", ty.array(ty.f32(), Expr("size")), ast::StorageClass::kPrivate);
