@@ -126,6 +126,24 @@
       "parentUuid": "9d4bdea5_84d8f7bc",
       "revId": "f9f5de295ebf02ea27ec8bfb253b7f2955d60d01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c070b8d2_8488356b",
+        "filename": "src/dawn/wire/client/ObjectAllocator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-15T12:42:35Z",
+      "side": 1,
+      "message": "We discussed this briefly with Austin yesterday, and overall all the comments point at merging ObjectAllocator in Client but keepin ObjectBaseStore separate. I\u0027ll do that.",
+      "parentUuid": "8840b95f_4ad113d0",
+      "revId": "f9f5de295ebf02ea27ec8bfb253b7f2955d60d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
