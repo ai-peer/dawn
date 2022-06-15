@@ -22,16 +22,6 @@ namespace {
 
 using HlslGeneratorImplTest_ModuleConstant = TestHelper;
 
-TEST_F(HlslGeneratorImplTest_ModuleConstant, Emit_ModuleConstant) {
-    auto* var = Let("pos", ty.array<f32, 3>(), array<f32, 3>(1_f, 2_f, 3_f));
-    WrapInFunction(Decl(var));
-
-    GeneratorImpl& gen = Build();
-
-    ASSERT_TRUE(gen.EmitProgramConstVariable(var)) << gen.error();
-    EXPECT_EQ(gen.result(), "static const float pos[3] = {1.0f, 2.0f, 3.0f};\n");
-}
-
 TEST_F(HlslGeneratorImplTest_ModuleConstant, Emit_SpecConstant) {
     auto* var = Override("pos", ty.f32(), Expr(3_f),
                          ast::AttributeList{

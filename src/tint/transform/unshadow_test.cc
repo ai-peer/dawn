@@ -402,7 +402,7 @@ fn Z() {
 )";
 
     auto* expect = R"(
-let a : i32 = 1;
+const a : i32 = 1;
 
 fn X() {
   var a_1 = (a == 123);
@@ -452,7 +452,7 @@ fn Z() {
   const a_3 = 321;
 }
 
-let a : i32 = 1;
+const a : i32 = 1;
 )";
 
     auto got = Run<Unshadow>(src);
@@ -741,7 +741,7 @@ fn F(a : bool) {
 )";
 
     auto* expect = R"(
-let a : i32 = 1;
+const a : i32 = 1;
 
 fn F(a_1 : bool) {
 }
@@ -764,7 +764,7 @@ let a : i32 = 1;
 fn F(a_1 : bool) {
 }
 
-let a : i32 = 1;
+const a : i32 = 1;
 )";
 
     auto got = Run<Unshadow>(src);

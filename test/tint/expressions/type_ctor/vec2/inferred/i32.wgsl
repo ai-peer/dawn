@@ -1,1 +1,1 @@
-let v = vec2(0i, 1i);
+const v = vec2(0i, 1i);

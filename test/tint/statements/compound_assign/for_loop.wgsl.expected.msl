@@ -36,7 +36,7 @@ int idx3(thread uint* const tint_symbol_7) {
 }
 
 void foo(thread uint* const tint_symbol_8) {
-  tint_array<float, 4> a = tint_array<float, 4>{};
+  tint_array<float, 4> a = {};
   int const tint_symbol_2 = idx1(tint_symbol_8);
   int const tint_symbol_save = tint_symbol_2;
   {
