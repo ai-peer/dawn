@@ -317,6 +317,7 @@ sem::Variable* Resolver::Variable(const ast::Variable* v, bool is_global) {
         [&](const ast::Var* var) { return Var(var, is_global); },
         [&](const ast::Let* let) { return Let(let, is_global); },
         [&](const ast::Override* override) { return Override(override); },
+        [&](const ast::Const* const_) { return Const(const_, is_global); },
         [&](Default) {
             TINT_ICE(Resolver, diagnostics_)
                 << "Resolver::GlobalVariable() called with a unknown variable type: "
@@ -364,13 +365,13 @@ sem::Variable* Resolver::Let(const ast::Let* v, bool is_global) {
 
     sem::Variable* sem = nullptr;
     if (is_global) {
-        sem = builder_->create<sem::GlobalVariable>(
-            v, ty, ast::StorageClass::kNone, ast::Access::kUndefined,
-            rhs ? rhs->ConstantValue() : sem::Constant{}, sem::BindingPoint{});
+        sem = builder_->create<sem::GlobalVariable>(v, ty, ast::StorageClass::kNone,
+                                                    ast::Access::kUndefined, sem::Constant{},
+                                                    sem::BindingPoint{});
     } else {
         sem = builder_->create<sem::LocalVariable>(v, ty, ast::StorageClass::kNone,
                                                    ast::Access::kUndefined, current_statement_,
-                                                   rhs ? rhs->ConstantValue() : sem::Constant{});
+                                                   sem::Constant{});
     }
 
     sem->SetConstructor(rhs);
@@ -429,6 +430,59 @@ sem::Variable* Resolver::Override(const ast::Override* v) {
 
     sem->SetConstructor(rhs);
     builder_->Sem().Add(v, sem);
+    return sem;
+}
+
+sem::Variable* Resolver::Const(const ast::Const* c, bool is_global) {
+    const sem::Type* ty = nullptr;
+
+    // If the variable has a declared type, resolve it.
+    if (c->type) {
+        ty = Type(c->type);
+        if (!ty) {
+            return nullptr;
+        }
+    }
+
+    if (!c->constructor) {
+        AddError("'const' declaration must have an initializer", c->source);
+        return nullptr;
+    }
+
+    const auto* rhs = Expression(c->constructor);
+    if (!rhs) {
+        return nullptr;
+    }
+
+    if (ty) {
+        // If an explicit type was specified, materialize to that type
+        rhs = Materialize(rhs, ty);
+    } else {
+        // If no type was specified, infer it from the RHS
+        ty = rhs->Type();
+    }
+
+    const auto value = rhs->ConstantValue();
+    if (!value) {
+        AddError("'const' initializer must be constant expression", c->constructor->source);
+        return nullptr;
+    }
+
+    if (!ApplyStorageClassUsageToType(ast::StorageClass::kNone, const_cast<sem::Type*>(ty),
+                                      c->source)) {
+        AddNote("while instantiating 'const' " + builder_->Symbols().NameFor(c->symbol), c->source);
+        return nullptr;
+    }
+
+    auto* sem = is_global ? static_cast<sem::Variable*>(builder_->create<sem::GlobalVariable>(
+                                c, ty, ast::StorageClass::kNone, ast::Access::kUndefined, value,
+                                sem::BindingPoint{}))
+                          : static_cast<sem::Variable*>(builder_->create<sem::LocalVariable>(
+                                c, ty, ast::StorageClass::kNone, ast::Access::kUndefined,
+                                current_statement_, value));
+
+    sem->SetConstructor(rhs);
+    builder_->Sem().Add(c, sem);
     return sem;
 }
 
@@ -815,9 +869,9 @@ bool Resolver::WorkgroupSize(const ast::Function* func) {
     std::array<const sem::Type*, 3> arg_tys = {};
     size_t arg_count = 0;
 
-    constexpr const char* kErrBadType =
-        "workgroup_size argument must be either literal or module-scope constant of type i32 "
-        "or u32";
+    constexpr const char* kErrBadExpr =
+        "workgroup_size argument must be either a literal, constant or overridable of type "
+        "abstract-integer, i32 or u32";
 
     for (int i = 0; i < 3; i++) {
         // Each argument to this attribute can either be a literal, an identifier for a module-scope
@@ -832,7 +886,7 @@ bool Resolver::WorkgroupSize(const ast::Function* func) {
         }
         auto* ty = expr->Type();
         if (!ty->IsAnyOf<sem::I32, sem::U32, sem::AbstractInt>()) {
-            AddError(kErrBadType, value->source);
+            AddError(kErrBadExpr, value->source);
             return false;
         }
 
@@ -864,8 +918,8 @@ bool Resolver::WorkgroupSize(const ast::Function* func) {
         if (auto* user = args[i]->As<sem::VariableUser>()) {
             // We have an variable of a module-scope constant.
             auto* decl = user->Variable()->Declaration();
-            if (!decl->IsAnyOf<ast::Let, ast::Override>()) {
-                AddError(kErrBadType, values[i]->source);
+            if (!decl->IsAnyOf<ast::Const, ast::Override>()) {
+                AddError(kErrBadExpr, values[i]->source);
                 return false;
             }
             // Capture the constant if it is pipeline-overridable.
@@ -883,10 +937,7 @@ bool Resolver::WorkgroupSize(const ast::Function* func) {
         } else if (values[i]->Is<ast::LiteralExpression>()) {
             value = materialized->ConstantValue();
         } else {
-            AddError(
-                "workgroup_size argument must be either a literal or a "
-                "module-scope constant",
-                values[i]->source);
+            AddError(kErrBadExpr, values[i]->source);
             return false;
         }
 
@@ -1249,6 +1300,12 @@ const sem::Expression* Resolver::Materialize(const sem::Expression* expr,
             return nullptr;
         }
         auto expr_val = EvaluateConstantValue(decl, expr->Type());
+        if (!expr_val) {
+            TINT_ICE(Resolver, builder_->Diagnostics())
+                << decl->source << "EvaluateConstantValue(" << decl->TypeInfo().name
+                << ") returned invalid value";
+            return nullptr;
+        }
         auto materialized_val = ConvertValue(std::move(expr_val), target_ty, decl->source);
         if (!materialized_val) {
             return nullptr;
@@ -2152,17 +2209,6 @@ sem::Array* Resolver::Array(const ast::Array* arr) {
     if (auto* count_expr = arr->count) {
         const auto* count_sem = Materialize(Expression(count_expr));
         if (!count_sem) {
-            return nullptr;
-        }
-
-        // TODO(crbug.com/tint/1580): Temporary seatbelt to used to ensure that a function-scope
-        // `let` cannot be used to propagate a constant expression to an array size. Once we
-        // implement `const`, this can be removed.
-        if (auto* user = count_sem->UnwrapMaterialize()->As<sem::VariableUser>();
-            user && user->Variable()->Is<sem::LocalVariable>() &&
-            user->Variable()->Declaration()->Is<ast::Let>()) {
-            AddError("array size must evaluate to a constant integer expression",
-                     count_expr->source);
             return nullptr;
         }
 

@@ -32,12 +32,8 @@ void PromoteInitializersToConstVar::Run(CloneContext& ctx, const DataMap&, DataM
 
     // Hoists array and structure initializers to a constant variable, declared
     // just before the statement of usage.
-    auto type_ctor_to_let = [&](const ast::CallExpression* expr) {
-        auto* ctor = ctx.src->Sem().Get(expr)->UnwrapMaterialize()->As<sem::Call>();
-        if (!ctor->Target()->Is<sem::TypeConstructor>()) {
-            return true;
-        }
-        auto* sem_stmt = ctor->Stmt();
+    auto promote = [&](const sem::Expression* expr) {
+        auto* sem_stmt = expr->Stmt();
         if (!sem_stmt) {
             // Expression is outside of a statement. This usually means the
             // expression is part of a global (module-scope) constant declaration.
@@ -49,7 +45,7 @@ void PromoteInitializersToConstVar::Run(CloneContext& ctx, const DataMap&, DataM
         auto* stmt = sem_stmt->Declaration();
 
         if (auto* src_var_decl = stmt->As<ast::VariableDeclStatement>()) {
-            if (src_var_decl->variable->constructor == expr) {
+            if (src_var_decl->variable->constructor == expr->Declaration()) {
                 // This statement is just a variable declaration with the
                 // initializer as the constructor value. This is what we're
                 // attempting to transform to, and so ignore.
@@ -57,20 +53,39 @@ void PromoteInitializersToConstVar::Run(CloneContext& ctx, const DataMap&, DataM
             }
         }
 
-        auto* src_ty = ctor->Type();
+        auto* src_ty = expr->Type();
         if (!src_ty->IsAnyOf<sem::Array, sem::Struct>()) {
             // We only care about array and struct initializers
             return true;
         }
 
-        return hoist_to_decl_before.Add(ctor, expr, true);
+        return hoist_to_decl_before.Add(expr, expr->Declaration(), true);
     };
 
     for (auto* node : ctx.src->ASTNodes().Objects()) {
-        if (auto* call_expr = node->As<ast::CallExpression>()) {
-            if (!type_ctor_to_let(call_expr)) {
-                return;
-            }
+        bool ok = Switch(
+            node,  //
+            [&](const ast::CallExpression* expr) {
+                if (auto* sem = ctx.src->Sem().Get(expr)) {
+                    auto* ctor = sem->UnwrapMaterialize()->As<sem::Call>();
+                    if (ctor->Target()->Is<sem::TypeConstructor>()) {
+                        return promote(sem);
+                    }
+                }
+                return true;
+            },
+            [&](const ast::IdentifierExpression* expr) {
+                if (auto* user = ctx.src->Sem().Get<sem::VariableUser>(expr)) {
+                    if (user->Variable()->Declaration()->Is<ast::Const>()) {
+                        return promote(user);
+                    }
+                }
+                return true;
+            },
+            [&](Default) { return true; });
+
+        if (!ok) {
+            return;
         }
     }
 
