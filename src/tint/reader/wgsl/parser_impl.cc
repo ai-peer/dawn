@@ -576,11 +576,12 @@ Maybe<const ast::Variable*> ParserImpl::global_constant_decl(ast::AttributeList&
     bool is_const = false;
     bool is_overridable = false;
     const char* use = nullptr;
-    if (match(Token::Type::kLet)) {
-        use = "'let' declaration";
-    } else if (const_enabled && match(Token::Type::kConst)) {
+    Source source;
+    if (match(Token::Type::kConst)) {
         use = "'const' declaration";
-        is_const = true;
+    } else if (match(Token::Type::kLet, &source)) {
+        use = "'let' declaration";
+        deprecated(source, "module-scope 'let' has been replaced with 'const'");
     } else if (match(Token::Type::kOverride)) {
         use = "'override' declaration";
         is_overridable = true;
@@ -626,11 +627,11 @@ Maybe<const ast::Variable*> ParserImpl::global_constant_decl(ast::AttributeList&
                                      initializer,                              // constructor
                                      std::move(attrs));                        // attributes
     }
-    return create<ast::Let>(decl->source,                             // source
-                            builder_.Symbols().Register(decl->name),  // symbol
-                            decl->type,                               // type
-                            initializer,                              // constructor
-                            std::move(attrs));                        // attributes
+    return create<ast::Const>(decl->source,                             // source
+                              builder_.Symbols().Register(decl->name),  // symbol
+                              decl->type,                               // type
+                              initializer,                              // constructor
+                              std::move(attrs));                        // attributes
 }
 
 // variable_decl
@@ -1846,6 +1847,34 @@ Maybe<const ast::VariableDeclStatement*> ParserImpl::variable_stmt() {
                                      ast::AttributeList{});                    // attributes
 
         return create<ast::VariableDeclStatement>(decl->source, let);
+    }
+
+    if (match(Token::Type::kConst)) {
+        auto decl = expect_variable_ident_decl("'const' declaration",
+                                               /*allow_inferred = */ true);
+        if (decl.errored) {
+            return Failure::kErrored;
+        }
+
+        if (!expect("'const' declaration", Token::Type::kEqual)) {
+            return Failure::kErrored;
+        }
+
+        auto constructor = logical_or_expression();
+        if (constructor.errored) {
+            return Failure::kErrored;
+        }
+        if (!constructor.matched) {
+            return add_error(peek(), "missing constructor for 'const' declaration");
+        }
+
+        auto* c = create<ast::Const>(decl->source,                             // source
+                                     builder_.Symbols().Register(decl->name),  // symbol
+                                     decl->type,                               // type
+                                     constructor.value,                        // constructor
+                                     ast::AttributeList{});                    // attributes
+
+        return create<ast::VariableDeclStatement>(decl->source, c);
     }
 
     auto decl = variable_decl(/*allow_inferred = */ true);

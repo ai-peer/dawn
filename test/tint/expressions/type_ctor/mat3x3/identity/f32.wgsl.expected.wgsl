@@ -1,1 +1,1 @@
-let m = mat3x3<f32>();
+const m = mat3x3<f32>();

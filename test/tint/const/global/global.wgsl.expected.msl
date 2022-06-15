@@ -14,33 +14,19 @@ struct tint_array {
     T elements[N];
 };
 
-struct MyStruct {
-  float f1;
-};
-
-constant int v1 = 1;
-
-constant uint v2 = 1u;
-
-constant float v3 = 1.0f;
-
-constant int3 v4 = int3(1);
-
-constant uint3 v5 = uint3(1u);
-
-constant float3 v6 = float3(1.0f);
-
-constant float3x3 v7 = float3x3(float3(1.0f), float3(1.0f), float3(1.0f));
-
-constant MyStruct v8 = {};
-
-constant tint_array<float, 10> v9 = {};
-
 struct tint_symbol_1 {
   float4 value [[color(0)]];
 };
 
 float4 tint_symbol_inner() {
+  int v1 = 1;
+  uint v2 = 1u;
+  float v3 = 1.0f;
+  int3 v4 = int3(1);
+  uint3 v5 = uint3(1u);
+  float3 v6 = float3(1.0f);
+  float3x3 v7 = float3x3(float3(1.0f), float3(1.0f), float3(1.0f));
+  tint_array<float, 10> v9 = {};
   return float4(0.0f);
 }
 
