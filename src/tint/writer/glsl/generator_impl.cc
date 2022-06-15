@@ -1938,6 +1938,9 @@ bool GeneratorImpl::EmitGlobalVariable(const ast::Variable* global) {
         },
         [&](const ast::Let* let) { return EmitProgramConstVariable(let); },
         [&](const ast::Override* override) { return EmitOverride(override); },
+        [&](const ast::Const*) {
+            return true;  // Constants are embedded at their use
+        },
         [&](Default) {
             TINT_ICE(Writer, diagnostics_)
                 << "unhandled global variable type " << global->TypeInfo().name;
@@ -2656,6 +2659,9 @@ bool GeneratorImpl::EmitStatement(const ast::Statement* stmt) {
             v->variable,  //
             [&](const ast::Var* var) { return EmitVar(var); },
             [&](const ast::Let* let) { return EmitLet(let); },
+            [&](const ast::Const*) {
+                return true;  // Constants are embedded at their use
+            },
             [&](Default) {  //
                 TINT_ICE(Writer, diagnostics_)
                     << "unknown variable type: " << v->variable->TypeInfo().name;

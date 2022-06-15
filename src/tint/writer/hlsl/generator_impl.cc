@@ -2893,8 +2893,10 @@ bool GeneratorImpl::EmitGlobalVariable(const ast::Variable* global) {
                     return false;
             }
         },
-        [&](const ast::Let* let) { return EmitProgramConstVariable(let); },
         [&](const ast::Override* override) { return EmitOverride(override); },
+        [&](const ast::Const*) {
+            return true;  // Constants are embedded at their use
+        },
         [&](Default) {
             TINT_ICE(Writer, diagnostics_)
                 << "unhandled global variable type " << global->TypeInfo().name;
@@ -3610,6 +3612,9 @@ bool GeneratorImpl::EmitStatement(const ast::Statement* stmt) {
                 v->variable,  //
                 [&](const ast::Var* var) { return EmitVar(var); },
                 [&](const ast::Let* let) { return EmitLet(let); },
+                [&](const ast::Const*) {
+                    return true;  // Constants are embedded at their use
+                },
                 [&](Default) {  //
                     TINT_ICE(Writer, diagnostics_)
                         << "unknown variable type: " << v->variable->TypeInfo().name;
@@ -4052,25 +4057,6 @@ bool GeneratorImpl::EmitLet(const ast::Let* let) {
 
     auto out = line();
     out << "const ";
-    if (!EmitTypeAndName(out, type, ast::StorageClass::kNone, ast::Access::kUndefined,
-                         builder_.Symbols().NameFor(let->symbol))) {
-        return false;
-    }
-    out << " = ";
-    if (!EmitExpression(out, let->constructor)) {
-        return false;
-    }
-    out << ";";
-
-    return true;
-}
-
-bool GeneratorImpl::EmitProgramConstVariable(const ast::Let* let) {
-    auto* sem = builder_.Sem().Get(let);
-    auto* type = sem->Type();
-
-    auto out = line();
-    out << "static const ";
     if (!EmitTypeAndName(out, type, ast::StorageClass::kNone, ast::Access::kUndefined,
                          builder_.Symbols().NameFor(let->symbol))) {
         return false;
