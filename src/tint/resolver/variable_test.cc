@@ -237,14 +237,14 @@ TEST_F(ResolverVariableTest, LocalVar_ShadowsGlobalVar) {
     EXPECT_EQ(user_v->Variable(), global);
 }
 
-TEST_F(ResolverVariableTest, LocalVar_ShadowsGlobalLet) {
-    // let a : i32 = 1;
+TEST_F(ResolverVariableTest, LocalVar_ShadowsGlobalConst) {
+    // const a : i32 = 1;
     //
     // fn X() {
     //   var a = (a == 123);
     // }
 
-    auto* g = GlobalLet("a", ty.i32(), Expr(1_i));
+    auto* g = GlobalConst("a", ty.i32(), Expr(1_i));
     auto* v = Var("a", nullptr, Expr("a"));
     Func("F", {}, ty.void_(), {Decl(v)});
 
@@ -520,14 +520,14 @@ TEST_F(ResolverVariableTest, LocalLet_ShadowsGlobalVar) {
     EXPECT_EQ(user->Variable(), global);
 }
 
-TEST_F(ResolverVariableTest, LocalLet_ShadowsGlobalLet) {
-    // let a : i32 = 1;
+TEST_F(ResolverVariableTest, LocalLet_ShadowsGlobalConst) {
+    // const a : i32 = 1;
     //
     // fn F() {
     //   let a = (a == 321);
     // }
 
-    auto* g = GlobalLet("a", ty.i32(), Expr(1_i));
+    auto* g = GlobalConst("a", ty.i32(), Expr(1_i));
     auto* l = Let("a", nullptr, Expr("a"));
     Func("F", {}, ty.void_(), {Decl(l)});
 
@@ -720,13 +720,13 @@ TEST_F(ResolverVariableTest, Param_ShadowsGlobalVar) {
     EXPECT_EQ(param->Shadows(), global);
 }
 
-TEST_F(ResolverVariableTest, Param_ShadowsGlobalLet) {
-    // let a : i32 = 1;
+TEST_F(ResolverVariableTest, Param_ShadowsGlobalConst) {
+    // const a : i32 = 1;
     //
     // fn F(a : bool) {
     // }
 
-    auto* g = GlobalLet("a", ty.i32(), Expr(1_i));
+    auto* g = GlobalConst("a", ty.i32(), Expr(1_i));
     auto* p = Param("a", ty.bool_());
     Func("F", {p}, ty.void_(), {});
 

@@ -61,14 +61,14 @@ TEST_F(ResolverAssignmentValidationTest, AssignIncompatibleTypes) {
 }
 
 TEST_F(ResolverAssignmentValidationTest, AssignArraysWithDifferentSizeExpressions_Pass) {
-    // let len = 4u;
+    // const len = 4u;
     // {
     //   var a : array<f32, 4u>;
     //   var b : array<f32, len>;
     //   a = b;
     // }
 
-    GlobalLet("len", nullptr, Expr(4_u));
+    GlobalConst("len", nullptr, Expr(4_u));
 
     auto* a = Var("a", ty.array(ty.f32(), 4_u));
     auto* b = Var("b", ty.array(ty.f32(), "len"));
@@ -80,14 +80,14 @@ TEST_F(ResolverAssignmentValidationTest, AssignArraysWithDifferentSizeExpression
 }
 
 TEST_F(ResolverAssignmentValidationTest, AssignArraysWithDifferentSizeExpressions_Fail) {
-    // let len = 5u;
+    // const len = 5u;
     // {
     //   var a : array<f32, 4u>;
     //   var b : array<f32, len>;
     //   a = b;
     // }
 
-    GlobalLet("len", nullptr, Expr(5_u));
+    GlobalConst("len", nullptr, Expr(5_u));
 
     auto* a = Var("a", ty.array(ty.f32(), 4_u));
     auto* b = Var("b", ty.array(ty.f32(), "len"));

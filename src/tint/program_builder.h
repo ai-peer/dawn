@@ -33,6 +33,7 @@
 #include "src/tint/ast/call_statement.h"
 #include "src/tint/ast/case_statement.h"
 #include "src/tint/ast/compound_assignment_statement.h"
+#include "src/tint/ast/const.h"
 #include "src/tint/ast/continue_statement.h"
 #include "src/tint/ast/depth_multisampled_texture.h"
 #include "src/tint/ast/depth_texture.h"
@@ -1367,6 +1368,35 @@ class ProgramBuilder {
     /// @param type the variable type
     /// @param constructor constructor expression
     /// @param attributes optional variable attributes
+    /// @returns an `ast::Const` with the given name and type
+    template <typename NAME>
+    const ast::Const* Const(NAME&& name,
+                            const ast::Type* type,
+                            const ast::Expression* constructor,
+                            ast::AttributeList attributes = {}) {
+        return create<ast::Const>(Sym(std::forward<NAME>(name)), type, constructor, attributes);
+    }
+
+    /// @param source the variable source
+    /// @param name the variable name
+    /// @param type the variable type
+    /// @param constructor constructor expression
+    /// @param attributes optional variable attributes
+    /// @returns an `ast::Const` with the given name and type
+    template <typename NAME>
+    const ast::Const* Const(const Source& source,
+                            NAME&& name,
+                            const ast::Type* type,
+                            const ast::Expression* constructor,
+                            ast::AttributeList attributes = {}) {
+        return create<ast::Const>(source, Sym(std::forward<NAME>(name)), type, constructor,
+                                  attributes);
+    }
+
+    /// @param name the variable name
+    /// @param type the variable type
+    /// @param constructor constructor expression
+    /// @param attributes optional variable attributes
     /// @returns an `ast::Let` with the given name and type
     template <typename NAME>
     const ast::Let* Let(NAME&& name,
@@ -1463,14 +1493,14 @@ class ProgramBuilder {
     /// @param type the variable type
     /// @param constructor constructor expression
     /// @param attributes optional variable attributes
-    /// @returns an `ast::Let` constructed by calling Let() with the arguments of `args`, which is
-    /// automatically registered as a global variable with the ast::Module.
+    /// @returns an `ast::Const` constructed by calling Const() with the arguments of `args`, which
+    /// is automatically registered as a global variable with the ast::Module.
     template <typename NAME>
-    const ast::Let* GlobalLet(NAME&& name,
-                              const ast::Type* type,
-                              const ast::Expression* constructor,
-                              ast::AttributeList attributes = {}) {
-        auto* var = Let(std::forward<NAME>(name), type, constructor, std::move(attributes));
+    const ast::Const* GlobalConst(NAME&& name,
+                                  const ast::Type* type,
+                                  const ast::Expression* constructor,
+                                  ast::AttributeList attributes = {}) {
+        auto* var = Const(std::forward<NAME>(name), type, constructor, std::move(attributes));
         AST().AddGlobalVariable(var);
         return var;
     }
@@ -1480,16 +1510,17 @@ class ProgramBuilder {
     /// @param type the variable type
     /// @param constructor constructor expression
     /// @param attributes optional variable attributes
-    /// @returns a const `ast::Let` constructed by calling Var() with the
+    /// @returns a const `ast::Const` constructed by calling Var() with the
     /// arguments of `args`, which is automatically registered as a global
     /// variable with the ast::Module.
     template <typename NAME>
-    const ast::Let* GlobalLet(const Source& source,
-                              NAME&& name,
-                              const ast::Type* type,
-                              const ast::Expression* constructor,
-                              ast::AttributeList attributes = {}) {
-        auto* var = Let(source, std::forward<NAME>(name), type, constructor, std::move(attributes));
+    const ast::Const* GlobalConst(const Source& source,
+                                  NAME&& name,
+                                  const ast::Type* type,
+                                  const ast::Expression* constructor,
+                                  ast::AttributeList attributes = {}) {
+        auto* var =
+            Const(source, std::forward<NAME>(name), type, constructor, std::move(attributes));
         AST().AddGlobalVariable(var);
         return var;
     }

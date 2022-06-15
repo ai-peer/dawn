@@ -75,18 +75,18 @@ Params all_cases[] = {
 
 using ResolverInferredTypeParamTest = ResolverTestWithParam<Params>;
 
-TEST_P(ResolverInferredTypeParamTest, GlobalLet_Pass) {
+TEST_P(ResolverInferredTypeParamTest, GlobalConst_Pass) {
     auto& params = GetParam();
 
     auto* expected_type = params.create_expected_type(*this);
 
     // let a = <type constructor>;
     auto* ctor_expr = params.create_value(*this, 0);
-    auto* var = GlobalLet("a", nullptr, ctor_expr);
+    auto* a = GlobalConst("a", nullptr, ctor_expr);
     WrapInFunction();
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
-    EXPECT_EQ(TypeOf(var), expected_type);
+    EXPECT_EQ(TypeOf(a), expected_type);
 }
 
 TEST_P(ResolverInferredTypeParamTest, GlobalVar_Pass) {

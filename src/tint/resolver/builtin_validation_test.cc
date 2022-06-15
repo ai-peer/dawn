@@ -85,12 +85,12 @@ TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsFunction) {
               R"(12:34 error: 'mix' is a builtin and cannot be redeclared as a function)");
 }
 
-TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsGlobalLet) {
-    GlobalLet(Source{{12, 34}}, "mix", ty.i32(), Expr(1_i));
+TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsGlobalConst) {
+    GlobalConst(Source{{12, 34}}, "mix", ty.i32(), Expr(1_i));
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(12:34 error: 'mix' is a builtin and cannot be redeclared as a 'let')");
+              R"(12:34 error: 'mix' is a builtin and cannot be redeclared as a 'const')");
 }
 
 TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsGlobalVar) {
@@ -267,7 +267,7 @@ TEST_P(BuiltinTextureConstExprArgValidationTest, Immediate) {
     }
 }
 
-TEST_P(BuiltinTextureConstExprArgValidationTest, GlobalLet) {
+TEST_P(BuiltinTextureConstExprArgValidationTest, GlobalConst) {
     auto& p = GetParam();
     auto overload = std::get<0>(p);
     auto param = std::get<1>(p);
@@ -277,8 +277,8 @@ TEST_P(BuiltinTextureConstExprArgValidationTest, GlobalLet) {
     overload.BuildTextureVariable(this);
     overload.BuildSamplerVariable(this);
 
-    // Build the module-scope let 'G' with the offset value
-    GlobalLet("G", nullptr, expr({}, *this));
+    // Build the module-scope const 'G' with the offset value
+    GlobalConst("G", nullptr, expr({}, *this));
 
     auto args = overload.args(this);
     auto*& arg_to_replace = (param.position == Position::kFirst) ? args.front() : args.back();
