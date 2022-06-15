@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1d6cad4_fdb179bc",
+        "filename": "src/tint/sem/type_mappings.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-15T14:31:21Z",
+      "side": 1,
+      "message": "note: this was alphabetically sorted.",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 53
+      },
+      "revId": "f10b80adff663ab56baf2a17bff0e1b578dc827b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5c1d0b4_36b84203",
+        "filename": "src/tint/transform/while_to_loop.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-15T14:31:21Z",
+      "side": 1,
+      "message": "nit: Probably could be combined with the `ForLoopToLoop` transform. Running these separately is expensive. Might want to file a bug so it isn\u0027t forgotten.",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "f10b80adff663ab56baf2a17bff0e1b578dc827b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
