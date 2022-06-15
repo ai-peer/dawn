@@ -689,6 +689,7 @@ bool Validator::Variable(const sem::Variable* v) const {
         [&](const ast::Var*) { return Var(v); },            //
         [&](const ast::Let*) { return Let(v); },            //
         [&](const ast::Override*) { return Override(v); },  //
+        [&](const ast::Const*) { return true; },            //
         [&](Default) {
             TINT_ICE(Resolver, diagnostics_)
                 << "Validator::Variable() called with a unknown variable type: "
