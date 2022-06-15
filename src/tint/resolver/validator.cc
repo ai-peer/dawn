@@ -552,7 +552,7 @@ bool Validator::GlobalVariable(
                     return false;
                 }
             }
-            return Variable(global);
+            return Override(global);
         },
         [&](const ast::Let*) {
             if (!decl->attributes.empty()) {
@@ -560,7 +560,7 @@ bool Validator::GlobalVariable(
                          decl->attributes[0]->source);
                 return false;
             }
-            return Variable(global);
+            return Let(global);
         },
         [&](const ast::Var* var) {
             if (global->StorageClass() == ast::StorageClass::kNone) {
@@ -678,27 +678,58 @@ bool Validator::AtomicVariable(
 
 bool Validator::Variable(const sem::Variable* v) const {
     auto* decl = v->Declaration();
-    auto* storage_ty = v->Type()->UnwrapRef();
+    return Switch(
+        decl,                                               //
+        [&](const ast::Var*) { return Var(v); },            //
+        [&](const ast::Let*) { return Let(v); },            //
+        [&](const ast::Override*) { return Override(v); },  //
+        [&](Default) {
+            TINT_ICE(Resolver, diagnostics_)
+                << "Validator::Variable() called with a unknown variable type: "
+                << decl->TypeInfo().name;
+            return false;
+        });
+}
 
-    auto* kind = decl->Is<ast::Override>() ? "'override'" : "'let'";
+bool Validator::Let(const sem::Variable* v) const {
+    auto* decl = v->Declaration();
+    auto* storage_ty = v->Type()->UnwrapRef();
 
     if (v->Is<sem::GlobalVariable>()) {
         auto name = symbols_.NameFor(decl->symbol);
         if (sem::ParseBuiltinType(name) != sem::BuiltinType::kNone) {
-            AddError("'" + name + "' is a builtin and cannot be redeclared as a " + kind,
+            AddError("'" + name + "' is a builtin and cannot be redeclared as a 'let'",
                      decl->source);
             return false;
         }
     }
 
     if (!(storage_ty->IsConstructible() || storage_ty->Is<sem::Pointer>())) {
-        AddError(sem_.TypeNameOf(storage_ty) + " cannot be used as the type of a " + kind,
+        AddError(sem_.TypeNameOf(storage_ty) + " cannot be used as the type of a 'let'",
                  decl->source);
         return false;
     }
     return true;
 }
 
+bool Validator::Override(const sem::Variable* v) const {
+    auto* decl = v->Declaration();
+    auto* storage_ty = v->Type()->UnwrapRef();
+
+    auto name = symbols_.NameFor(decl->symbol);
+    if (sem::ParseBuiltinType(name) != sem::BuiltinType::kNone) {
+        AddError("'" + name + "' is a builtin and cannot be redeclared as a 'override'",
+                 decl->source);
+        return false;
+    }
+
+    if (!storage_ty->is_scalar()) {
+        AddError(sem_.TypeNameOf(storage_ty) + " cannot be used as the type of a 'override'",
+                 decl->source);
+        return false;
+    }
+    return true;
+}
 bool Validator::Var(const sem::Variable* v) const {
     auto* var = v->Declaration()->As<ast::Var>();
     auto* storage_ty = v->Type()->UnwrapRef();
