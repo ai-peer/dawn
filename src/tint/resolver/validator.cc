@@ -72,7 +72,6 @@
 #include "src/tint/sem/type_constructor.h"
 #include "src/tint/sem/type_conversion.h"
 #include "src/tint/sem/variable.h"
-#include "src/tint/sem/while_statement.h"
 #include "src/tint/utils/defer.h"
 #include "src/tint/utils/map.h"
 #include "src/tint/utils/math.h"
@@ -234,11 +233,6 @@ const ast::Statement* Validator::ClosestContinuing(bool stop_at_loop,
             if (f->Declaration()->continuing == s->Declaration()) {
                 return s->Declaration();
             }
-            if (stop_at_loop) {
-                break;
-            }
-        }
-        if (Is<sem::WhileStatement>(s->Parent())) {
             if (stop_at_loop) {
                 break;
             }
@@ -558,7 +552,7 @@ bool Validator::GlobalVariable(
                     return false;
                 }
             }
-            return Variable(global);
+            return Override(global);
         },
         [&](const ast::Let*) {
             if (!decl->attributes.empty()) {
@@ -566,7 +560,7 @@ bool Validator::GlobalVariable(
                          decl->attributes[0]->source);
                 return false;
             }
-            return Variable(global);
+            return Let(global);
         },
         [&](const ast::Var* var) {
             if (global->StorageClass() == ast::StorageClass::kNone) {
@@ -684,21 +678,53 @@ bool Validator::AtomicVariable(
 
 bool Validator::Variable(const sem::Variable* v) const {
     auto* decl = v->Declaration();
-    auto* storage_ty = v->Type()->UnwrapRef();
+    return Switch(
+        decl,                                               //
+        [&](const ast::Var*) { return Var(v); },            //
+        [&](const ast::Let*) { return Let(v); },            //
+        [&](const ast::Override*) { return Override(v); },  //
+        [&](Default) {
+            TINT_ICE(Resolver, diagnostics_)
+                << "Validator::Variable() called with a unknown variable type: "
+                << decl->TypeInfo().name;
+            return false;
+        });
+}
 
-    auto* kind = decl->Is<ast::Override>() ? "'override'" : "'let'";
+bool Validator::Let(const sem::Variable* v) const {
+    auto* decl = v->Declaration();
+    auto* storage_ty = v->Type()->UnwrapRef();
 
     if (v->Is<sem::GlobalVariable>()) {
         auto name = symbols_.NameFor(decl->symbol);
         if (sem::ParseBuiltinType(name) != sem::BuiltinType::kNone) {
-            AddError("'" + name + "' is a builtin and cannot be redeclared as a " + kind,
+            AddError("'" + name + "' is a builtin and cannot be redeclared as a 'let'",
                      decl->source);
             return false;
         }
     }
 
     if (!(storage_ty->IsConstructible() || storage_ty->Is<sem::Pointer>())) {
-        AddError(sem_.TypeNameOf(storage_ty) + " cannot be used as the type of a " + kind,
+        AddError(sem_.TypeNameOf(storage_ty) + " cannot be used as the type of a 'let'",
+                 decl->source);
+        return false;
+    }
+    return true;
+}
+
+bool Validator::Override(const sem::Variable* v) const {
+    auto* decl = v->Declaration();
+    auto* storage_ty = v->Type()->UnwrapRef();
+
+    auto name = symbols_.NameFor(decl->symbol);
+    if (sem::ParseBuiltinType(name) != sem::BuiltinType::kNone) {
+        AddError("'" + name + "' is a builtin and cannot be redeclared as a 'override'",
+                 decl->source);
+        return false;
+    }
+
+    if (!storage_ty->is_scalar()) {
+        AddError(sem_.TypeNameOf(storage_ty) + " cannot be used as the type of a 'override'",
                  decl->source);
         return false;
     }
@@ -1484,22 +1510,6 @@ bool Validator::ForLoopStatement(const sem::ForLoopStatement* stmt) const {
         auto* cond_ty = cond->Type()->UnwrapRef();
         if (!cond_ty->Is<sem::Bool>()) {
             AddError("for-loop condition must be bool, got " + sem_.TypeNameOf(cond_ty),
-                     stmt->Condition()->Declaration()->source);
-            return false;
-        }
-    }
-    return true;
-}
-
-bool Validator::WhileStatement(const sem::WhileStatement* stmt) const {
-    if (stmt->Behaviors().Empty()) {
-        AddError("while does not exit", stmt->Declaration()->source.Begin());
-        return false;
-    }
-    if (auto* cond = stmt->Condition()) {
-        auto* cond_ty = cond->Type()->UnwrapRef();
-        if (!cond_ty->Is<sem::Bool>()) {
-            AddError("while condition must be bool, got " + sem_.TypeNameOf(cond_ty),
                      stmt->Condition()->Declaration()->source);
             return false;
         }
