@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddb44127_9724406d",
+        "filename": "src/tint/resolver/attribute_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-15T10:03:20Z",
+      "side": 1,
+      "message": "note: This is due to a bug-fix. Due to the bool-heavy use of `ast::Variable` `override` and `let` were being conflated here. We incorrectly allowed a `@id` on a `let`.",
+      "range": {
+        "startLine": 796,
+        "startChar": 72,
+        "endLine": 796,
+        "endChar": 77
+      },
+      "revId": "7a7fd1586051bc9ac0857192621404818a1c1c89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
