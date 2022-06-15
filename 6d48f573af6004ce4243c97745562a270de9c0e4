@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "676e0bee_76cae541",
+        "filename": "src/dawn/utils/TextureUtils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-06-15T03:06:07Z",
+      "side": 1,
+      "message": "This number should be 94 after the removal of Depth24UnormStencil8 and I\u0027ve removed it in https://dawn-review.googlesource.com/c/dawn/+/93740.",
+      "range": {
+        "startLine": 25,
+        "startChar": 49,
+        "endLine": 25,
+        "endChar": 51
+      },
+      "revId": "6d48f573af6004ce4243c97745562a270de9c0e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
