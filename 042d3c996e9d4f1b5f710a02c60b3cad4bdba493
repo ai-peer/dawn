@@ -33,6 +33,24 @@
       "message": "nit: maybe just \"fragment stage of %s\"\n? no need for parentheses around the module.",
       "revId": "042d3c996e9d4f1b5f710a02c60b3cad4bdba493",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a72300a_37e5a1c0",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-15T19:40:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64e1a0e3_c85ff9fb",
+      "revId": "042d3c996e9d4f1b5f710a02c60b3cad4bdba493",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
