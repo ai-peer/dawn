@@ -85,6 +85,30 @@
       },
       "revId": "8e12217d771467fe56fb36cf663141517f607273",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "673cf58d_1aa8515b",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-15T14:26:46Z",
+      "side": 1,
+      "message": "No, I just though it was odd. James explained it in the bug I filed and I\u0027ll update this comment to match.",
+      "parentUuid": "f3bb119a_dc8956f9",
+      "range": {
+        "startLine": 1065,
+        "startChar": 0,
+        "endLine": 1066,
+        "endChar": 46
+      },
+      "revId": "8e12217d771467fe56fb36cf663141517f607273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
