@@ -115,17 +115,17 @@ class Var final : public Castable<Var, Variable> {
     /// @param program_id the identifier of the program that owns this node
     /// @param source the variable source
     /// @param sym the variable symbol
+    /// @param type the declared variable type
     /// @param declared_storage_class the declared storage class
     /// @param declared_access the declared access control
-    /// @param type the declared variable type
     /// @param constructor the constructor expression
     /// @param attributes the variable attributes
     Var(ProgramID program_id,
         const Source& source,
         const Symbol& sym,
+        const ast::Type* type,
         StorageClass declared_storage_class,
         Access declared_access,
-        const ast::Type* type,
         const Expression* constructor,
         AttributeList attributes);
 

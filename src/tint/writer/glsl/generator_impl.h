@@ -440,15 +440,15 @@ class GeneratorImpl : public TextGenerator {
     /// @param var the variable to generate
     /// @returns true if the variable was emitted
     bool EmitVar(const ast::Var* var);
-    /// Handles generating a 'let' declaration
+    /// Handles generating a function-scope 'let' declaration
     /// @param let the variable to generate
     /// @returns true if the variable was emitted
     bool EmitLet(const ast::Let* let);
-    /// Handles generating a module-scope 'let' variable
+    /// Handles generating a module-scope 'let' declaration
     /// @param let the 'let' to emit
     /// @returns true if the variable was emitted
     bool EmitProgramConstVariable(const ast::Variable* let);
-    /// Handles generating a module-scope 'override' variable
+    /// Handles generating a module-scope 'override' declaration
     /// @param override the 'override' to emit
     /// @returns true if the variable was emitted
     bool EmitOverride(const ast::Override* override);

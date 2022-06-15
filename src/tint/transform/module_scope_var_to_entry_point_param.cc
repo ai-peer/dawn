@@ -155,13 +155,13 @@ struct ModuleScopeVarToEntryPointParam::State {
                 return workgroup_parameter_symbol;
             };
 
-            for (auto* v : func_sem->TransitivelyReferencedGlobals()) {
-                auto* var = v->Declaration()->As<ast::Var>();
+            for (auto* global : func_sem->TransitivelyReferencedGlobals()) {
+                auto* var = global->Declaration()->As<ast::Var>();
                 if (!var) {
                     continue;
                 }
-                auto sc = v->StorageClass();
-                auto* ty = v->Type()->UnwrapRef();
+                auto sc = global->StorageClass();
+                auto* ty = global->Type()->UnwrapRef();
                 if (sc == ast::StorageClass::kNone) {
                     continue;
                 }
@@ -186,7 +186,7 @@ struct ModuleScopeVarToEntryPointParam::State {
                 bool is_wrapped = false;
 
                 if (is_entry_point) {
-                    if (v->Type()->UnwrapRef()->is_handle()) {
+                    if (global->Type()->UnwrapRef()->is_handle()) {
                         // For a texture or sampler variable, redeclare it as an entry point
                         // parameter. Disable entry point parameter validation.
                         auto* disable_validation =
@@ -222,7 +222,8 @@ struct ModuleScopeVarToEntryPointParam::State {
                         auto* param = ctx.dst->Param(new_var_symbol, param_type, attributes);
                         ctx.InsertFront(func_ast->params, param);
                         is_pointer = true;
-                    } else if (sc == ast::StorageClass::kWorkgroup && ContainsMatrix(v->Type())) {
+                    } else if (sc == ast::StorageClass::kWorkgroup &&
+                               ContainsMatrix(global->Type())) {
                         // Due to a bug in the MSL compiler, we use a threadgroup memory
                         // argument for any workgroup allocation that contains a matrix.
                         // See crbug.com/tint/938.
@@ -232,7 +233,7 @@ struct ModuleScopeVarToEntryPointParam::State {
                         auto member = ctx.Clone(var->symbol);
                         workgroup_parameter_members.push_back(
                             ctx.dst->Member(member, store_type()));
-                        CloneStructTypes(v->Type()->UnwrapRef());
+                        CloneStructTypes(global->Type()->UnwrapRef());
 
                         // Create a function-scope variable that is a pointer to the member.
                         auto* member_ptr = ctx.dst->AddressOf(
@@ -260,7 +261,7 @@ struct ModuleScopeVarToEntryPointParam::State {
                     // Use a pointer for non-handle types.
                     auto* param_type = store_type();
                     ast::AttributeList attributes;
-                    if (!v->Type()->UnwrapRef()->is_handle()) {
+                    if (!global->Type()->UnwrapRef()->is_handle()) {
                         param_type = ctx.dst->ty.pointer(param_type, sc, var->declared_access);
                         is_pointer = true;
 
@@ -277,7 +278,7 @@ struct ModuleScopeVarToEntryPointParam::State {
 
                 // Replace all uses of the module-scope variable.
                 // For non-entry points, dereference non-handle pointer parameters.
-                for (auto* user : v->Users()) {
+                for (auto* user : global->Users()) {
                     if (user->Stmt()->Function()->Declaration() == func_ast) {
                         const ast::Expression* expr = ctx.dst->Expr(new_var_symbol);
                         if (is_pointer) {
@@ -300,7 +301,7 @@ struct ModuleScopeVarToEntryPointParam::State {
                     }
                 }
 
-                var_to_newvar[v] = {new_var_symbol, is_pointer, is_wrapped};
+                var_to_newvar[global] = {new_var_symbol, is_pointer, is_wrapped};
             }
 
             if (!workgroup_parameter_members.empty()) {

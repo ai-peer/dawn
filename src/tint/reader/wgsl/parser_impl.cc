@@ -548,9 +548,9 @@ Maybe<const ast::Variable*> ParserImpl::global_variable_decl(ast::AttributeList&
 
     return create<ast::Var>(decl->source,                             // source
                             builder_.Symbols().Register(decl->name),  // symbol
+                            decl->type,                               // type
                             decl->storage_class,                      // storage class
                             decl->access,                             // access control
-                            decl->type,                               // type
                             constructor,                              // constructor
                             std::move(attrs));                        // attributes
 }
@@ -1815,9 +1815,9 @@ Maybe<const ast::VariableDeclStatement*> ParserImpl::variable_stmt() {
 
     auto* var = create<ast::Var>(decl->source,                             // source
                                  builder_.Symbols().Register(decl->name),  // symbol
+                                 decl->type,                               // type
                                  decl->storage_class,                      // storage class
                                  decl->access,                             // access control
-                                 decl->type,                               // type
                                  constructor,                              // constructor
                                  ast::AttributeList{});                    // attributes
 

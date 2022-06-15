@@ -1332,7 +1332,7 @@ class ProgramBuilder {
     template <typename NAME, typename... OPTIONAL>
     const ast::Var* Var(NAME&& name, const ast::Type* type, OPTIONAL&&... optional) {
         VarOptionals opts(std::forward<OPTIONAL>(optional)...);
-        return create<ast::Var>(Sym(std::forward<NAME>(name)), opts.storage, opts.access, type,
+        return create<ast::Var>(Sym(std::forward<NAME>(name)), type, opts.storage, opts.access,
                                 opts.constructor, std::move(opts.attributes));
     }
 
@@ -1354,8 +1354,8 @@ class ProgramBuilder {
                         const ast::Type* type,
                         OPTIONAL&&... optional) {
         VarOptionals opts(std::forward<OPTIONAL>(optional)...);
-        return create<ast::Var>(source, Sym(std::forward<NAME>(name)), opts.storage, opts.access,
-                                type, opts.constructor, std::move(opts.attributes));
+        return create<ast::Var>(source, Sym(std::forward<NAME>(name)), type, opts.storage,
+                                opts.access, opts.constructor, std::move(opts.attributes));
     }
 
     /// @param name the variable name

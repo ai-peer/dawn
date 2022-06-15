@@ -68,21 +68,19 @@ void BindingRemapper::Run(CloneContext& ctx, const DataMap& inputs, DataMap&) co
             auto* func = ctx.src->Sem().Get(func_ast);
             std::unordered_map<sem::BindingPoint, int> binding_point_counts;
             for (auto* global : func->TransitivelyReferencedGlobals()) {
-                if (auto* var = global->Declaration()->As<ast::Var>()) {
-                    if (auto binding_point = var->BindingPoint()) {
-                        BindingPoint from{binding_point.group->value, binding_point.binding->value};
-                        auto bp_it = remappings->binding_points.find(from);
-                        if (bp_it != remappings->binding_points.end()) {
-                            // Remapped
-                            BindingPoint to = bp_it->second;
-                            if (binding_point_counts[to]++) {
-                                add_collision_attr.emplace(to);
-                            }
-                        } else {
-                            // No remapping
-                            if (binding_point_counts[from]++) {
-                                add_collision_attr.emplace(from);
-                            }
+                if (auto binding_point = global->Declaration()->BindingPoint()) {
+                    BindingPoint from{binding_point.group->value, binding_point.binding->value};
+                    auto bp_it = remappings->binding_points.find(from);
+                    if (bp_it != remappings->binding_points.end()) {
+                        // Remapped
+                        BindingPoint to = bp_it->second;
+                        if (binding_point_counts[to]++) {
+                            add_collision_attr.emplace(to);
+                        }
+                    } else {
+                        // No remapping
+                        if (binding_point_counts[from]++) {
+                            add_collision_attr.emplace(from);
                         }
                     }
                 }
@@ -132,9 +130,10 @@ void BindingRemapper::Run(CloneContext& ctx, const DataMap& inputs, DataMap&) co
                 }
                 auto* ty = sem->Type()->UnwrapRef();
                 const ast::Type* inner_ty = CreateASTTypeFor(ctx, ty);
-                auto* new_var = ctx.dst->create<ast::Var>(
-                    ctx.Clone(var->source), ctx.Clone(var->symbol), var->declared_storage_class, ac,
-                    inner_ty, ctx.Clone(var->constructor), ctx.Clone(var->attributes));
+                auto* new_var =
+                    ctx.dst->Var(ctx.Clone(var->source), ctx.Clone(var->symbol), inner_ty,
+                                 var->declared_storage_class, ac, ctx.Clone(var->constructor),
+                                 ctx.Clone(var->attributes));
                 ctx.Replace(var, new_var);
             }
 

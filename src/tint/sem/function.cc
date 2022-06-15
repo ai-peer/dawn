@@ -63,10 +63,8 @@ Function::VariableBindings Function::TransitivelyReferencedUniformVariables() co
             continue;
         }
 
-        if (auto* var = global->Declaration()->As<ast::Var>()) {
-            if (auto binding_point = var->BindingPoint()) {
-                ret.push_back({global, binding_point});
-            }
+        if (auto binding_point = global->Declaration()->BindingPoint()) {
+            ret.push_back({global, binding_point});
         }
     }
     return ret;
@@ -80,10 +78,8 @@ Function::VariableBindings Function::TransitivelyReferencedStorageBufferVariable
             continue;
         }
 
-        if (auto* var = global->Declaration()->As<ast::Var>()) {
-            if (auto binding_point = var->BindingPoint()) {
-                ret.push_back({global, binding_point});
-            }
+        if (auto binding_point = global->Declaration()->BindingPoint()) {
+            ret.push_back({global, binding_point});
         }
     }
     return ret;
@@ -124,12 +120,10 @@ Function::VariableBindings Function::TransitivelyReferencedVariablesOfType(
     const tint::TypeInfo* type) const {
     VariableBindings ret;
     for (auto* global : TransitivelyReferencedGlobals()) {
-        if (auto* var = global->Declaration()->As<ast::Var>()) {
-            auto* unwrapped_type = global->Type()->UnwrapRef();
-            if (unwrapped_type->TypeInfo().Is(type)) {
-                if (auto binding_point = var->BindingPoint()) {
-                    ret.push_back({global, binding_point});
-                }
+        auto* unwrapped_type = global->Type()->UnwrapRef();
+        if (unwrapped_type->TypeInfo().Is(type)) {
+            if (auto binding_point = global->Declaration()->BindingPoint()) {
+                ret.push_back({global, binding_point});
             }
         }
     }
@@ -150,16 +144,14 @@ Function::VariableBindings Function::TransitivelyReferencedSamplerVariablesImpl(
     VariableBindings ret;
 
     for (auto* global : TransitivelyReferencedGlobals()) {
-        if (auto* var = global->Declaration()->As<ast::Var>()) {
-            auto* unwrapped_type = global->Type()->UnwrapRef();
-            auto* sampler = unwrapped_type->As<sem::Sampler>();
-            if (sampler == nullptr || sampler->kind() != kind) {
-                continue;
-            }
+        auto* unwrapped_type = global->Type()->UnwrapRef();
+        auto* sampler = unwrapped_type->As<sem::Sampler>();
+        if (sampler == nullptr || sampler->kind() != kind) {
+            continue;
+        }
 
-            if (auto binding_point = var->BindingPoint()) {
-                ret.push_back({global, binding_point});
-            }
+        if (auto binding_point = global->Declaration()->BindingPoint()) {
+            ret.push_back({global, binding_point});
         }
     }
     return ret;
@@ -170,23 +162,21 @@ Function::VariableBindings Function::TransitivelyReferencedSampledTextureVariabl
     VariableBindings ret;
 
     for (auto* global : TransitivelyReferencedGlobals()) {
-        if (auto* var = global->Declaration()->As<ast::Var>()) {
-            auto* unwrapped_type = global->Type()->UnwrapRef();
-            auto* texture = unwrapped_type->As<sem::Texture>();
-            if (texture == nullptr) {
-                continue;
-            }
+        auto* unwrapped_type = global->Type()->UnwrapRef();
+        auto* texture = unwrapped_type->As<sem::Texture>();
+        if (texture == nullptr) {
+            continue;
+        }
 
-            auto is_multisampled = texture->Is<sem::MultisampledTexture>();
-            auto is_sampled = texture->Is<sem::SampledTexture>();
+        auto is_multisampled = texture->Is<sem::MultisampledTexture>();
+        auto is_sampled = texture->Is<sem::SampledTexture>();
 
-            if ((multisampled && !is_multisampled) || (!multisampled && !is_sampled)) {
-                continue;
-            }
+        if ((multisampled && !is_multisampled) || (!multisampled && !is_sampled)) {
+            continue;
+        }
 
-            if (auto binding_point = var->BindingPoint()) {
-                ret.push_back({global, binding_point});
-            }
+        if (auto binding_point = global->Declaration()->BindingPoint()) {
+            ret.push_back({global, binding_point});
         }
     }
 

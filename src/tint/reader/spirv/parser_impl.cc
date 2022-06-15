@@ -1586,7 +1586,7 @@ ast::Var* ParserImpl::MakeVar(uint32_t id,
     }
 
     auto sym = builder_.Symbols().Register(namer_.Name(id));
-    return create<ast::Var>(Source{}, sym, sc, access, storage_type->Build(builder_), constructor,
+    return create<ast::Var>(Source{}, sym, storage_type->Build(builder_), sc, access, constructor,
                             decorations);
 }
 

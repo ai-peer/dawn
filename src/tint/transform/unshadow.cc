@@ -57,15 +57,14 @@ struct Unshadow::State {
             return Switch(
                 decl,  //
                 [&](const ast::Var* var) {
-                    return ctx.dst->create<ast::Var>(source, symbol, var->declared_storage_class,
-                                                     var->declared_access, type, constructor,
-                                                     attributes);
+                    return ctx.dst->Var(source, symbol, type, var->declared_storage_class,
+                                        var->declared_access, constructor, attributes);
                 },
                 [&](const ast::Let*) {
-                    return ctx.dst->create<ast::Let>(source, symbol, type, constructor, attributes);
+                    return ctx.dst->Let(source, symbol, type, constructor, attributes);
                 },
                 [&](const ast::Parameter*) {
-                    return ctx.dst->create<ast::Parameter>(source, symbol, type, attributes);
+                    return ctx.dst->Param(source, symbol, type, attributes);
                 },
                 [&](Default) {
                     TINT_ICE(Transform, ctx.dst->Diagnostics())

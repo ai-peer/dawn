@@ -25,6 +25,9 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::Parameter);
 
 namespace tint::ast {
 
+////////////////////////////////////////////////////////////////////////////////
+// Variable
+////////////////////////////////////////////////////////////////////////////////
 Variable::Variable(ProgramID pid,
                    const Source& src,
                    const Symbol& sym,
@@ -54,12 +57,15 @@ VariableBindingPoint Variable::BindingPoint() const {
     return VariableBindingPoint{group, binding};
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// Var
+////////////////////////////////////////////////////////////////////////////////
 Var::Var(ProgramID pid,
          const Source& src,
          const Symbol& sym,
+         const ast::Type* ty,
          StorageClass storage_class,
          Access access,
-         const ast::Type* ty,
          const Expression* ctor,
          AttributeList attrs)
     : Base(pid, src, sym, ty, ctor, attrs),
@@ -76,10 +82,13 @@ const Var* Var::Clone(CloneContext* ctx) const {
     auto* ty = ctx->Clone(type);
     auto* ctor = ctx->Clone(constructor);
     auto attrs = ctx->Clone(attributes);
-    return ctx->dst->create<Var>(src, sym, declared_storage_class, declared_access, ty, ctor,
+    return ctx->dst->create<Var>(src, sym, ty, declared_storage_class, declared_access, ctor,
                                  attrs);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// Let
+////////////////////////////////////////////////////////////////////////////////
 Let::Let(ProgramID pid,
          const Source& src,
          const Symbol& sym,
@@ -103,6 +112,9 @@ const Let* Let::Clone(CloneContext* ctx) const {
     return ctx->dst->create<Let>(src, sym, ty, ctor, attrs);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// Override
+////////////////////////////////////////////////////////////////////////////////
 Override::Override(ProgramID pid,
                    const Source& src,
                    const Symbol& sym,
@@ -124,6 +136,9 @@ const Override* Override::Clone(CloneContext* ctx) const {
     return ctx->dst->create<Override>(src, sym, ty, ctor, attrs);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// Parameter
+////////////////////////////////////////////////////////////////////////////////
 Parameter::Parameter(ProgramID pid,
                      const Source& src,
                      const Symbol& sym,
