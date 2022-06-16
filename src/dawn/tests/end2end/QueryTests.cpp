@@ -539,6 +539,118 @@ class TimestampQueryTests : public QueryTests {
         descriptor.type = wgpu::QueryType::Timestamp;
         return device.CreateQuerySet(&descriptor);
     }
+
+    void TestTimestampWritesOnComputePass(
+        const std::vector<wgpu::ComputePassTimestampWrite>& timestampWrites,
+        const std::vector<wgpu::ComputePassTimestampWrite>& timestampWritesOnAnotherPass = {}) {
+        // The timestampWrites may contain different query set at the beginning and end of a pass,
+        // we need to resolve them to buffer seperately. But it fails to resolve them to same buffer
+        // with offset on Intel Windows Vulkan due to a driver issue that vkCmdFillBuffer and
+        // vkCmdCopyQueryPoolResults are not executed in order when resolving queries. As a
+        // workaround, we resolve each query set in timestampWrites to different buffers, and always
+        // check the first value of each buffer.
+        size_t queryCount = timestampWrites.size() + timestampWritesOnAnotherPass.size();
+        std::vector<wgpu::Buffer> destinations;
+        for (size_t i = 0; i < queryCount; i++) {
+            destinations.push_back(CreateResolveBuffer(sizeof(uint64_t)));
+        }
+
+        wgpu::ComputePassDescriptor descriptor;
+        descriptor.timestampWriteCount = timestampWrites.size();
+        descriptor.timestampWrites = timestampWrites.data();
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ComputePassEncoder pass = encoder.BeginComputePass(&descriptor);
+        pass.End();
+
+        // Resolve queries one by one because the query set at the beginning of pass may be
+        // different with the one at the end of pass.
+        for (size_t i = 0; i < timestampWrites.size(); i++) {
+            encoder.ResolveQuerySet(timestampWrites[i].querySet, timestampWrites[i].queryIndex, 1,
+                                    destinations[i], 0);
+        }
+
+        // Begin another compute pass if the timestampWritesOnAnotherPass is set.
+        if (!timestampWritesOnAnotherPass.empty()) {
+            wgpu::ComputePassDescriptor descriptor2;
+            descriptor2.timestampWriteCount = timestampWritesOnAnotherPass.size();
+            descriptor2.timestampWrites = timestampWritesOnAnotherPass.data();
+
+            wgpu::ComputePassEncoder pass2 = encoder.BeginComputePass(&descriptor2);
+            pass2.End();
+
+            for (size_t i = 0; i < timestampWritesOnAnotherPass.size(); i++) {
+                // Resolve queries one by one because the query set at the beginning of pass may be
+                // different with the one at the end of pass.
+                encoder.ResolveQuerySet(timestampWritesOnAnotherPass[i].querySet,
+                                        timestampWritesOnAnotherPass[i].queryIndex, 1,
+                                        destinations[timestampWrites.size() + i], 0);
+            }
+        }
+
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+
+        for (size_t i = 0; i < queryCount; i++) {
+            EXPECT_BUFFER(destinations[i], 0, sizeof(uint64_t), new TimestampExpectation);
+        }
+    }
+
+    void TestTimestampWritesOnRenderPass(
+        const std::vector<wgpu::RenderPassTimestampWrite>& timestampWrites,
+        const std::vector<wgpu::RenderPassTimestampWrite>& timestampWritesOnAnotherPass = {}) {
+        // The timestampWrites may contain different query set at the beginning and end of a pass,
+        // we need to resolve them to buffer seperately. But it fails to resolve them to same buffer
+        // with offset on Intel Windows Vulkan due to a driver issue that vkCmdFillBuffer and
+        // vkCmdCopyQueryPoolResults are not executed in order when resolving queries. As a
+        // workaround, we resolve each query set in timestampWrites to different buffers, and always
+        // check the first value of each buffer.
+        size_t queryCount = timestampWrites.size() + timestampWritesOnAnotherPass.size();
+        std::vector<wgpu::Buffer> destinations;
+        for (size_t i = 0; i < queryCount; i++) {
+            destinations.push_back(CreateResolveBuffer(sizeof(uint64_t)));
+        }
+
+        utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+        renderPass.renderPassInfo.timestampWriteCount = timestampWrites.size();
+        renderPass.renderPassInfo.timestampWrites = timestampWrites.data();
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.End();
+
+        // Resolve queries one by one because the query set at the beginning of pass may be
+        // different with the one at the end of pass.
+        for (size_t i = 0; i < timestampWrites.size(); i++) {
+            encoder.ResolveQuerySet(timestampWrites[i].querySet, timestampWrites[i].queryIndex, 1,
+                                    destinations[i], 0);
+        }
+
+        // Begin another render pass if the timestampWritesOnAnotherPass is set.
+        if (!timestampWritesOnAnotherPass.empty()) {
+            utils::BasicRenderPass renderPass2 = utils::CreateBasicRenderPass(device, 1, 1);
+            renderPass2.renderPassInfo.timestampWriteCount = timestampWritesOnAnotherPass.size();
+            renderPass2.renderPassInfo.timestampWrites = timestampWritesOnAnotherPass.data();
+
+            wgpu::RenderPassEncoder pass2 = encoder.BeginRenderPass(&renderPass2.renderPassInfo);
+            pass2.End();
+
+            for (size_t i = 0; i < timestampWritesOnAnotherPass.size(); i++) {
+                // Resolve queries one by one because the query set at the beginning of pass may be
+                // different with the one at the end of pass.
+                encoder.ResolveQuerySet(timestampWritesOnAnotherPass[i].querySet,
+                                        timestampWritesOnAnotherPass[i].queryIndex, 1,
+                                        destinations[timestampWrites.size() + i], 0);
+            }
+        }
+
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+
+        for (size_t i = 0; i < queryCount; i++) {
+            EXPECT_BUFFER(destinations[i], 0, sizeof(uint64_t), new TimestampExpectation);
+        }
+    }
 };
 
 // Test creating query set with the type of Timestamp
@@ -691,6 +803,108 @@ TEST_P(TimestampQueryTests, TimestampOnComputePass) {
         queue.Submit(1, &commands);
 
         EXPECT_BUFFER(destination, 0, kQueryCount * sizeof(uint64_t), new TimestampExpectation);
+    }
+}
+
+// Test timestampWrites setting in compute pass descriptor
+TEST_P(TimestampQueryTests, TimestampWritesOnComputePass) {
+    constexpr uint32_t kQueryCount = 2;
+
+    // Set timestampWrites with different query indexes and locations on same compute pass
+    {
+        wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+
+        TestTimestampWritesOnComputePass(
+            {{querySet, 0, wgpu::ComputePassTimestampLocation::Beginning},
+             {querySet, 1, wgpu::ComputePassTimestampLocation::End}});
+    }
+
+    // Set timestampWrites with different query set on same compute pass
+    {
+        wgpu::QuerySet querySet0 = CreateQuerySetForTimestamp(1);
+        wgpu::QuerySet querySet1 = CreateQuerySetForTimestamp(1);
+
+        TestTimestampWritesOnComputePass(
+            {{querySet0, 0, wgpu::ComputePassTimestampLocation::Beginning},
+             {querySet1, 0, wgpu::ComputePassTimestampLocation::End}});
+    }
+
+    // Set timestampWrites with only one value of ComputePassTimestampLocation
+    {
+        wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+
+        TestTimestampWritesOnComputePass(
+            {{querySet, 0, wgpu::ComputePassTimestampLocation::Beginning}});
+
+        TestTimestampWritesOnComputePass({{querySet, 1, wgpu::ComputePassTimestampLocation::End}});
+    }
+
+    // Set timestampWrites with same query set and query index on same compute pass
+    {
+        wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+
+        TestTimestampWritesOnComputePass(
+            {{querySet, 0, wgpu::ComputePassTimestampLocation::Beginning},
+             {querySet, 0, wgpu::ComputePassTimestampLocation::End}});
+    }
+
+    // Set timestampWrites with same query indexes and locations on different compute pass
+    {
+        wgpu::QuerySet querySet0 = CreateQuerySetForTimestamp(kQueryCount);
+        wgpu::QuerySet querySet1 = CreateQuerySetForTimestamp(kQueryCount);
+
+        TestTimestampWritesOnComputePass(
+            {{querySet0, 0, wgpu::ComputePassTimestampLocation::Beginning},
+             {querySet0, 1, wgpu::ComputePassTimestampLocation::End}},
+            {{querySet1, 0, wgpu::ComputePassTimestampLocation::Beginning},
+             {querySet1, 1, wgpu::ComputePassTimestampLocation::End}});
+    }
+}
+
+// Test timestampWrites setting in render pass descriptor
+TEST_P(TimestampQueryTests, TimestampWritesOnRenderPass) {
+    constexpr uint32_t kQueryCount = 2;
+
+    // Set timestampWrites with different query indexes and locations, not need test write same
+    // query index due to it's not allowed on render pass.
+    {
+        wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+
+        TestTimestampWritesOnRenderPass(
+            {{querySet, 0, wgpu::RenderPassTimestampLocation::Beginning},
+             {querySet, 1, wgpu::RenderPassTimestampLocation::End}});
+    }
+
+    // Set timestampWrites with different query set on same render pass
+    {
+        wgpu::QuerySet querySet0 = CreateQuerySetForTimestamp(1);
+        wgpu::QuerySet querySet1 = CreateQuerySetForTimestamp(1);
+
+        TestTimestampWritesOnRenderPass(
+            {{querySet0, 0, wgpu::RenderPassTimestampLocation::Beginning},
+             {querySet1, 0, wgpu::RenderPassTimestampLocation::End}});
+    }
+
+    // Set timestampWrites with only one value of RenderPassTimestampLocation
+    {
+        wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+
+        TestTimestampWritesOnRenderPass(
+            {{querySet, 0, wgpu::RenderPassTimestampLocation::Beginning}});
+
+        TestTimestampWritesOnRenderPass({{querySet, 1, wgpu::RenderPassTimestampLocation::End}});
+    }
+
+    // Set timestampWrites with same query indexes and locations on different render pass
+    {
+        wgpu::QuerySet querySet0 = CreateQuerySetForTimestamp(kQueryCount);
+        wgpu::QuerySet querySet1 = CreateQuerySetForTimestamp(kQueryCount);
+
+        TestTimestampWritesOnRenderPass(
+            {{querySet0, 0, wgpu::RenderPassTimestampLocation::Beginning},
+             {querySet0, 1, wgpu::RenderPassTimestampLocation::End}},
+            {{querySet1, 0, wgpu::RenderPassTimestampLocation::Beginning},
+             {querySet1, 1, wgpu::RenderPassTimestampLocation::End}});
     }
 }
 
