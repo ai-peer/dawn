@@ -98,6 +98,20 @@ id<MTLComputeCommandEncoder> CommandRecordingContext::BeginCompute() {
     return mCompute.Get();
 }
 
+id<MTLComputeCommandEncoder> CommandRecordingContext::BeginCompute(
+    MTLComputePassDescriptor* descriptor) API_AVAILABLE(macos(11.0), ios(14.0)) {
+    ASSERT(descriptor);
+    ASSERT(mCommands != nullptr);
+    ASSERT(mCompute == nullptr);
+    ASSERT(!mInEncoder);
+
+    mInEncoder = true;
+    // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from
+    // draining from under us.
+    mCompute.Acquire([[*mCommands computeCommandEncoderWithDescriptor:descriptor] retain]);
+    return mCompute.Get();
+}
+
 void CommandRecordingContext::EndCompute() {
     ASSERT(mCommands != nullptr);
     ASSERT(mCompute != nullptr);

@@ -49,7 +49,34 @@ MTLIndexType MTLIndexFormat(wgpu::IndexFormat format) {
     }
 }
 
-NSRef<MTLRenderPassDescriptor> CreateMTLRenderPassDescriptor(BeginRenderPassCmd* renderPass) {
+NSRef<MTLComputePassDescriptor> CreateMTLComputePassDescriptor(BeginComputePassCmd* computePass)
+    API_AVAILABLE(macos(11.0), ios(14.0)) {
+    // Note that this creates a descriptor that's autoreleased so we don't use AcquireNSRef
+    NSRef<MTLComputePassDescriptor> descriptorRef =
+        [MTLComputePassDescriptor computePassDescriptor];
+    MTLComputePassDescriptor* descriptor = descriptorRef.Get();
+    descriptor.dispatchType = MTLDispatchTypeSerial;
+
+    for (uint32_t i = 0; i < computePass->timestampWrites.size(); i++) {
+        descriptor.sampleBufferAttachments[i].sampleBuffer =
+            ToBackend(computePass->timestampWrites[i].querySet)->GetCounterSampleBuffer();
+        descriptor.sampleBufferAttachments[i].startOfEncoderSampleIndex =
+            computePass->timestampWrites[i].location ==
+                    wgpu::ComputePassTimestampLocation::Beginning
+                ? NSUInteger(computePass->timestampWrites[i].queryIndex)
+                : MTLCounterDontSample;
+        descriptor.sampleBufferAttachments[i].endOfEncoderSampleIndex =
+            computePass->timestampWrites[i].location == wgpu::ComputePassTimestampLocation::End
+                ? NSUInteger(computePass->timestampWrites[i].queryIndex)
+                : MTLCounterDontSample;
+    }
+
+    return descriptorRef;
+}
+
+NSRef<MTLRenderPassDescriptor> CreateMTLRenderPassDescriptor(
+    BeginRenderPassCmd* renderPass,
+    bool supportCounterSamplingAtStageBoundary) {
     // Note that this creates a descriptor that's autoreleased so we don't use AcquireNSRef
     NSRef<MTLRenderPassDescriptor> descriptorRef = [MTLRenderPassDescriptor renderPassDescriptor];
     MTLRenderPassDescriptor* descriptor = descriptorRef.Get();
@@ -195,6 +222,28 @@ NSRef<MTLRenderPassDescriptor> CreateMTLRenderPassDescriptor(BeginRenderPassCmd*
     if (renderPass->occlusionQuerySet.Get() != nullptr) {
         descriptor.visibilityResultBuffer =
             ToBackend(renderPass->occlusionQuerySet.Get())->GetVisibilityBuffer();
+    }
+
+    if (@available(macOS 11.0, iOS 14.0, *)) {
+        if (supportCounterSamplingAtStageBoundary) {
+            for (uint32_t i = 0; i < renderPass->timestampWrites.size(); i++) {
+                descriptor.sampleBufferAttachments[i].sampleBuffer =
+                    ToBackend(renderPass->timestampWrites[i].querySet)->GetCounterSampleBuffer();
+
+                descriptor.sampleBufferAttachments[i].startOfVertexSampleIndex =
+                    renderPass->timestampWrites[i].location ==
+                            wgpu::RenderPassTimestampLocation::Beginning
+                        ? NSUInteger(renderPass->timestampWrites[i].queryIndex)
+                        : NSUInteger(0);
+                descriptor.sampleBufferAttachments[i].endOfVertexSampleIndex = NSUInteger(0);
+                descriptor.sampleBufferAttachments[i].startOfFragmentSampleIndex = NSUInteger(0);
+                descriptor.sampleBufferAttachments[i].endOfFragmentSampleIndex =
+                    renderPass->timestampWrites[i].location ==
+                            wgpu::RenderPassTimestampLocation::End
+                        ? NSUInteger(renderPass->timestampWrites[i].queryIndex)
+                        : NSUInteger(0);
+            }
+        }
     }
 
     return descriptorRef;
@@ -578,7 +627,12 @@ Ref<CommandBuffer> CommandBuffer::Create(CommandEncoder* encoder,
 }
 
 CommandBuffer::CommandBuffer(CommandEncoder* enc, const CommandBufferDescriptor* desc)
-    : CommandBufferBase(enc, desc) {}
+    : CommandBufferBase(enc, desc) {
+    if (@available(macOS 11.0, iOS 14.0, *)) {
+        mSupportCounterSamplingAtStageBoundary =
+            SupportCounterSamplingAtStageBoundary(ToBackend(GetDevice())->GetMTLDevice());
+    }
+}
 
 CommandBuffer::~CommandBuffer() = default;
 
@@ -610,7 +664,7 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
     while (mCommands.NextCommandId(&type)) {
         switch (type) {
             case Command::BeginComputePass: {
-                mCommands.NextCommand<BeginComputePassCmd>();
+                BeginComputePassCmd* cmd = mCommands.NextCommand<BeginComputePassCmd>();
 
                 for (const SyncScopeResourceUsage& scope :
                      GetResourceUsages().computePasses[nextComputePassNumber].dispatchUsages) {
@@ -618,7 +672,7 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                 }
                 commandContext->EndBlit();
 
-                DAWN_TRY(EncodeComputePass(commandContext));
+                DAWN_TRY(EncodeComputePass(commandContext, cmd));
 
                 nextComputePassNumber++;
                 break;
@@ -632,12 +686,14 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                 commandContext->EndBlit();
 
                 LazyClearRenderPassAttachments(cmd);
-                NSRef<MTLRenderPassDescriptor> descriptor = CreateMTLRenderPassDescriptor(cmd);
+                NSRef<MTLRenderPassDescriptor> descriptor =
+                    CreateMTLRenderPassDescriptor(cmd, mSupportCounterSamplingAtStageBoundary);
                 DAWN_TRY(EncodeMetalRenderPass(
                     ToBackend(GetDevice()), commandContext, descriptor.Get(), cmd->width,
-                    cmd->height, [this](id<MTLRenderCommandEncoder> encoder) -> MaybeError {
-                        return this->EncodeRenderPass(encoder);
-                    }));
+                    cmd->height,
+                    [this](id<MTLRenderCommandEncoder> encoder, BeginRenderPassCmd* cmd)
+                        -> MaybeError { return this->EncodeRenderPass(encoder, cmd); },
+                    cmd));
 
                 nextRenderPassNumber++;
                 break;
@@ -975,18 +1031,66 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
     return {};
 }
 
-MaybeError CommandBuffer::EncodeComputePass(CommandRecordingContext* commandContext) {
+MaybeError CommandBuffer::EncodeComputePass(CommandRecordingContext* commandContext,
+                                            BeginComputePassCmd* computePassCmd) {
     ComputePipeline* lastPipeline = nullptr;
     StorageBufferLengthTracker storageBufferLengths = {};
     BindGroupTracker bindGroups(&storageBufferLengths);
 
-    id<MTLComputeCommandEncoder> encoder = commandContext->BeginCompute();
+    id<MTLComputeCommandEncoder> encoder;
+    // When counter sampling is supported at stage boundary, begin a configurable compute pass
+    // encoder which is supported since macOS 11.0+ and iOS 14.0+ and set timestamp writes to
+    // compute pass descriptor, otherwise begin a default compute pass encoder, and simulate
+    // timestamp writes using sampleCountersInBuffer API at the beginning and end of compute pass.
+    if (mSupportCounterSamplingAtStageBoundary) {
+        if (@available(macOS 11.0, iOS 14.0, *)) {
+            NSRef<MTLComputePassDescriptor> descriptor =
+                CreateMTLComputePassDescriptor(computePassCmd);
+            encoder = commandContext->BeginCompute(descriptor.Get());
+        } else {
+            UNREACHABLE();
+        }
+    } else {
+        encoder = commandContext->BeginCompute();
+
+        if (@available(macos 10.15, iOS 14.0, *)) {
+            for (uint32_t i = 0; i < computePassCmd->timestampWrites.size(); i++) {
+                if (computePassCmd->timestampWrites[i].location ==
+                    wgpu::ComputePassTimestampLocation::Beginning) {
+                    [encoder
+                        sampleCountersInBuffer:ToBackend(
+                                                   computePassCmd->timestampWrites[i].querySet)
+                                                   ->GetCounterSampleBuffer()
+                                 atSampleIndex:NSUInteger(
+                                                   computePassCmd->timestampWrites[i].queryIndex)
+                                   withBarrier:YES];
+                    // There is at most one timestamp write at the beginning of compute pass.
+                    break;
+                }
+            }
+        }
+    }
 
     Command type;
     while (mCommands.NextCommandId(&type)) {
         switch (type) {
             case Command::EndComputePass: {
-                mCommands.NextCommand<EndComputePassCmd>();
+                EndComputePassCmd* cmd = mCommands.NextCommand<EndComputePassCmd>();
+
+                if (@available(macos 10.15, iOS 14.0, *)) {
+                    // Simulate timestamp write at the end of render pass if it does not support
+                    // counter sampling at stage boundary.
+                    if (!mSupportCounterSamplingAtStageBoundary &&
+                        cmd->timestampWrite.querySet != nullptr) {
+                        ASSERT(cmd->timestampWrite.location ==
+                               wgpu::ComputePassTimestampLocation::End);
+                        [encoder sampleCountersInBuffer:ToBackend(cmd->timestampWrite.querySet)
+                                                            ->GetCounterSampleBuffer()
+                                          atSampleIndex:NSUInteger(cmd->timestampWrite.queryIndex)
+                                            withBarrier:YES];
+                    }
+                }
+
                 commandContext->EndCompute();
                 return {};
             }
@@ -1094,7 +1198,8 @@ MaybeError CommandBuffer::EncodeComputePass(CommandRecordingContext* commandCont
     UNREACHABLE();
 }
 
-MaybeError CommandBuffer::EncodeRenderPass(id<MTLRenderCommandEncoder> encoder) {
+MaybeError CommandBuffer::EncodeRenderPass(id<MTLRenderCommandEncoder> encoder,
+                                           BeginRenderPassCmd* renderPassCmd) {
     bool enableVertexPulling = GetDevice()->IsToggleEnabled(Toggle::MetalEnableVertexPulling);
     RenderPipeline* lastPipeline = nullptr;
     id<MTLBuffer> indexBuffer = nullptr;
@@ -1105,6 +1210,27 @@ MaybeError CommandBuffer::EncodeRenderPass(id<MTLRenderCommandEncoder> encoder) 
     StorageBufferLengthTracker storageBufferLengths = {};
     VertexBufferTracker vertexBuffers(&storageBufferLengths);
     BindGroupTracker bindGroups(&storageBufferLengths);
+
+    if (@available(macos 10.15, iOS 14.0, *)) {
+        // Simulate timestamp write at the beginning of render pass by
+        // sampleCountersInBuffer if it does not support counter sampling at stage boundary.
+        if (!mSupportCounterSamplingAtStageBoundary && renderPassCmd != nullptr) {
+            for (uint32_t i = 0; i < renderPassCmd->timestampWrites.size(); i++) {
+                if (renderPassCmd->timestampWrites[i].location ==
+                    wgpu::RenderPassTimestampLocation::Beginning) {
+                    [encoder
+                        sampleCountersInBuffer:ToBackend(renderPassCmd->timestampWrites[i].querySet)
+                                                   ->GetCounterSampleBuffer()
+                                 atSampleIndex:NSUInteger(
+                                                   renderPassCmd->timestampWrites[i].queryIndex)
+                                   withBarrier:YES];
+
+                    // There is at most one timestamp write at the beginning of render pass.
+                    break;
+                }
+            }
+        }
+    }
 
     auto EncodeRenderBundleCommand = [&](CommandIterator* iter, Command type) {
         switch (type) {
@@ -1293,7 +1419,22 @@ MaybeError CommandBuffer::EncodeRenderPass(id<MTLRenderCommandEncoder> encoder) 
     while (mCommands.NextCommandId(&type)) {
         switch (type) {
             case Command::EndRenderPass: {
-                mCommands.NextCommand<EndRenderPassCmd>();
+                EndRenderPassCmd* cmd = mCommands.NextCommand<EndRenderPassCmd>();
+
+                if (@available(macos 10.15, iOS 14.0, *)) {
+                    // Simulate timestamp write at the end of render pass if it does not support
+                    // counter sampling at stage boundary.
+                    if (!mSupportCounterSamplingAtStageBoundary &&
+                        cmd->timestampWrite.querySet != nullptr) {
+                        ASSERT(cmd->timestampWrite.location ==
+                               wgpu::RenderPassTimestampLocation::End);
+                        [encoder sampleCountersInBuffer:ToBackend(cmd->timestampWrite.querySet)
+                                                            ->GetCounterSampleBuffer()
+                                          atSampleIndex:NSUInteger(cmd->timestampWrite.queryIndex)
+                                            withBarrier:YES];
+                    }
+                }
+
                 return {};
             }
 

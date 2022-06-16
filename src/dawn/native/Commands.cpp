@@ -361,11 +361,6 @@ void SkipCommand(CommandIterator* commands, Command type) {
     }
 }
 
-TimestampWrite::TimestampWrite(const Ref<QuerySetBase>& set, uint32_t idx)
-    : querySet(set), queryIndex(idx) {}
-TimestampWrite::TimestampWrite(TimestampWrite&&) = default;
-TimestampWrite::~TimestampWrite() = default;
-
 BeginComputePassCmd::BeginComputePassCmd() = default;
 BeginComputePassCmd::~BeginComputePassCmd() = default;
 

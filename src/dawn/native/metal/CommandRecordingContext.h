@@ -39,7 +39,12 @@ class CommandRecordingContext : NonMovable {
     id<MTLBlitCommandEncoder> EnsureBlit();
     void EndBlit();
 
+    // Create a sequential compute pass by default.
     id<MTLComputeCommandEncoder> BeginCompute();
+    // Create configurable compute pass from a descriptor with serial dispatch type which commands
+    // are executed sequentially.
+    id<MTLComputeCommandEncoder> BeginCompute(MTLComputePassDescriptor* descriptor)
+        API_AVAILABLE(macos(11.0), ios(14.0));
     void EndCompute();
 
     id<MTLRenderCommandEncoder> BeginRender(MTLRenderPassDescriptor* descriptor);

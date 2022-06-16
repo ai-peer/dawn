@@ -112,22 +112,21 @@ ComputePassEncoder::ComputePassEncoder(DeviceBase* device,
                                        const ComputePassDescriptor* descriptor,
                                        CommandEncoder* commandEncoder,
                                        EncodingContext* encodingContext,
-                                       std::vector<TimestampWrite> timestampWritesAtEnd)
+                                       ComputePassTimestampWrite timestampWriteEnd)
     : ProgrammableEncoder(device, descriptor->label, encodingContext),
       mCommandEncoder(commandEncoder),
-      mTimestampWritesAtEnd(std::move(timestampWritesAtEnd)) {
+      mTimestampWriteEnd(std::move(timestampWriteEnd)) {
     TrackInDevice();
 }
 
 // static
-Ref<ComputePassEncoder> ComputePassEncoder::Create(
-    DeviceBase* device,
-    const ComputePassDescriptor* descriptor,
-    CommandEncoder* commandEncoder,
-    EncodingContext* encodingContext,
-    std::vector<TimestampWrite> timestampWritesAtEnd) {
+Ref<ComputePassEncoder> ComputePassEncoder::Create(DeviceBase* device,
+                                                   const ComputePassDescriptor* descriptor,
+                                                   CommandEncoder* commandEncoder,
+                                                   EncodingContext* encodingContext,
+                                                   ComputePassTimestampWrite timestampWriteEnd) {
     return AcquireRef(new ComputePassEncoder(device, descriptor, commandEncoder, encodingContext,
-                                             std::move(timestampWritesAtEnd)));
+                                             std::move(timestampWriteEnd)));
 }
 
 ComputePassEncoder::ComputePassEncoder(DeviceBase* device,
@@ -166,7 +165,7 @@ void ComputePassEncoder::APIEnd() {
                     allocator->Allocate<EndComputePassCmd>(Command::EndComputePass);
                 // The query availability has already been updated at the beginning of compute
                 // pass, and no need to do update here.
-                cmd->timestampWrites = std::move(mTimestampWritesAtEnd);
+                cmd->timestampWrite = std::move(mTimestampWriteEnd);
 
                 return {};
             },

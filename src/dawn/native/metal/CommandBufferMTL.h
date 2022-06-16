@@ -16,12 +16,15 @@
 #define SRC_DAWN_NATIVE_METAL_COMMANDBUFFERMTL_H_
 
 #include "dawn/native/CommandBuffer.h"
+#include "dawn/native/Commands.h"
 #include "dawn/native/Error.h"
 
 #import <Metal/Metal.h>
 
 namespace dawn::native {
 class CommandEncoder;
+struct BeginComputePassCmd;
+struct BeginRenderPassCmd;
 }
 
 namespace dawn::native::metal {
@@ -55,8 +58,15 @@ class CommandBuffer final : public CommandBufferBase {
   private:
     using CommandBufferBase::CommandBufferBase;
 
-    MaybeError EncodeComputePass(CommandRecordingContext* commandContext);
-    MaybeError EncodeRenderPass(id<MTLRenderCommandEncoder> encoder);
+    MaybeError EncodeComputePass(CommandRecordingContext* commandContext,
+                                 BeginComputePassCmd* computePassCmd);
+    MaybeError EncodeRenderPass(id<MTLRenderCommandEncoder> encoder,
+                                BeginRenderPassCmd* renderPassCmd);
+
+    // Check if counter sampling is allowed at stage boundary (the start and end of vertex/fragment
+    // stages, compute pass and blit pass) or command boundary (between draw/dispatch/blit
+    // commands).
+    bool mSupportCounterSamplingAtStageBoundary = false;
 };
 
 }  // namespace dawn::native::metal
