@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31999bfe_8321d57b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-16T13:56:26Z",
+      "side": 1,
+      "message": "Note to self: current theory is that these crashes/failures are because DiscoverDefaultAdapters() is now discovering and running these tests on the OpenGLES backend. This is somehow interfering with results for the other backends. This is using dlopen to find libEGL.so, which might be the wrong one for Chrome tests and cause havoc within ANGLE.",
+      "revId": "45b2cb17b1b9959b6f283a8a6f438b2b9d62abc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
