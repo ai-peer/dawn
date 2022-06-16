@@ -16,6 +16,46 @@
       "message": "PTAL, currently SwiftShader rolls are broken by needing a wayland.gni, which I have added here.\n\nYuly, I have added you to this review, since I think handled this for ANGLE and I wanted to confirm this is correct.",
       "revId": "835e84140f3a135a1457b2d9f054b21fa9f4bd65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21ffe561_6672916e",
+        "filename": "build_overrides/wayland.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-16T22:41:55Z",
+      "side": 1,
+      "message": "nit: \"has no third_party/wayland\"",
+      "range": {
+        "startLine": 5,
+        "startChar": 7,
+        "endLine": 5,
+        "endChar": 14
+      },
+      "revId": "835e84140f3a135a1457b2d9f054b21fa9f4bd65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2ce5363_83693005",
+        "filename": "build_overrides/wayland.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-16T22:41:55Z",
+      "side": 1,
+      "message": "Given this line:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/swiftshader/src/WSI/BUILD.gn;l\u003d19?q\u003dWSI%2FBUILD.gn\u0026ss\u003dchromium%2Fchromium%2Fsrc\n\nwouldn\u0027t we use ozone_platform_wayland \u003d false? because we don\u0027t have wayland so we shouldn\u0027t `import(\"//third_party/wayland/features.gni\")`\n\nIt looks like the roll is working though - so maybe I am wrong.",
+      "revId": "835e84140f3a135a1457b2d9f054b21fa9f4bd65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
