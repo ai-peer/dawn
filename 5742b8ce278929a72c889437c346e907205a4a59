@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abff684b_7be5e49b",
+        "filename": "src/tint/ast/function.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-16T16:35:27Z",
+      "side": 1,
+      "message": "There is no `is_const` any more. It\u0027s now part of the C++ type.",
+      "parentUuid": "bacb035b_bd6d77db",
+      "revId": "5742b8ce278929a72c889437c346e907205a4a59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f655c056_571e252b",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-06-16T03:14:20Z",
       "side": 1,
       "message": "Split into files instead of comments.",
+      "revId": "5742b8ce278929a72c889437c346e907205a4a59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec839270_f0b2d3b8",
+        "filename": "src/tint/ast/variable.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-16T16:35:27Z",
+      "side": 1,
+      "message": "While I don\u0027t really agree with the need to split everything into thousands of files, and there are real benefits to globbing them (build times, compiler optimizations) I agree this is the standard for this directory. Done.",
+      "parentUuid": "f655c056_571e252b",
       "revId": "5742b8ce278929a72c889437c346e907205a4a59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "896133a0_f51f0de5",
+        "filename": "src/tint/ast/variable.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-16T16:35:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98917198_0e5fc77e",
+      "revId": "5742b8ce278929a72c889437c346e907205a4a59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85b33558_7e9a714f",
@@ -86,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2303d95_31229e6e",
+        "filename": "src/tint/ast/variable.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-16T16:35:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85b33558_7e9a714f",
+      "revId": "5742b8ce278929a72c889437c346e907205a4a59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04def26e_3b219b9e",
@@ -99,6 +171,24 @@
       "writtenOn": "2022-06-16T03:14:20Z",
       "side": 1,
       "message": "nit; \"\u0027let\u0027 declaration\"",
+      "revId": "5742b8ce278929a72c889437c346e907205a4a59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae6d1dda_f8142860",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-16T16:35:27Z",
+      "side": 1,
+      "message": "Removed as it\u0027s unreachable. The code above enforces there a `\u003d` followed by an expression.",
+      "parentUuid": "04def26e_3b219b9e",
       "revId": "5742b8ce278929a72c889437c346e907205a4a59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

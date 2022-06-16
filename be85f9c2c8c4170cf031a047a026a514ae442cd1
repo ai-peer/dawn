@@ -16,6 +16,24 @@
       "message": "Is this no longer valid?",
       "revId": "be85f9c2c8c4170cf031a047a026a514ae442cd1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87692f2e_315616ba",
+        "filename": "src/tint/ast/function_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-16T16:35:27Z",
+      "side": 0,
+      "message": "Correct. This was asserting that the variable type was const. That field no longer exists, as it is inferred by the C++ type. `ParameterList` is now a list of `Parameter*` so there\u0027s fewer runtime tripping hazards",
+      "parentUuid": "ea087861_4848cf6b",
+      "revId": "be85f9c2c8c4170cf031a047a026a514ae442cd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
