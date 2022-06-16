@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f6d1895_8e676229",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-16T09:55:41Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "cdb0e120ddb97c3798860519e24e684b9b3ae6b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d069f6a_6c94f7ac",
+        "filename": "build_overrides/wayland.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-16T09:55:41Z",
+      "side": 1,
+      "message": "These should probably default to false in Dawn standalone because we don\u0027t have the wayland libraries and build files.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 28
+      },
+      "revId": "cdb0e120ddb97c3798860519e24e684b9b3ae6b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
