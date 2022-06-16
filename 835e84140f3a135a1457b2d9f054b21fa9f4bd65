@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5135629f_af97efe4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-06-16T17:18:02Z",
+      "side": 1,
+      "message": "PTAL, currently SwiftShader rolls are broken by needing a wayland.gni, which I have added here.\n\nYuly, I have added you to this review, since I think handled this for ANGLE and I wanted to confirm this is correct.",
+      "revId": "835e84140f3a135a1457b2d9f054b21fa9f4bd65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
