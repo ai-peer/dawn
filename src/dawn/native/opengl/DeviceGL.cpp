@@ -118,7 +118,7 @@ Device::Device(AdapterBase* adapter,
                const DeviceDescriptor* descriptor,
                const OpenGLFunctions& functions,
                std::unique_ptr<Context> context)
-    : DeviceBase(adapter, descriptor), gl(functions), mContext(std::move(context)) {}
+    : DeviceBase(adapter, descriptor), mGL(functions), mContext(std::move(context)) {}
 
 Device::~Device() {
     Destroy();
@@ -139,22 +139,22 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
         gl.Enable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
 
         // Any GL error; dangerous undefined behavior; any shader compiler and linker errors
-        gl.DebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_HIGH, 0,
-                                       nullptr, GL_TRUE);
+        gl.DebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_HIGH, 0, nullptr,
+                               GL_TRUE);
 
         // Severe performance warnings; GLSL or other shader compiler and linker warnings;
         // use of currently deprecated behavior
-        gl.DebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_MEDIUM, 0,
-                                       nullptr, GL_TRUE);
+        gl.DebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_MEDIUM, 0, nullptr,
+                               GL_TRUE);
 
         // Performance warnings from redundant state changes; trivial undefined behavior
         // This is disabled because we do an incredible amount of redundant state changes.
-        gl.DebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_LOW, 0,
-                                       nullptr, GL_FALSE);
+        gl.DebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_LOW, 0, nullptr,
+                               GL_FALSE);
 
         // Any message which is not an error or performance concern
-        gl.DebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION,
-                                       0, nullptr, GL_FALSE);
+        gl.DebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0,
+                               nullptr, GL_FALSE);
         gl.DebugMessageCallback(&OnGLDebugMessage, nullptr);
     }
 
@@ -174,6 +174,7 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
 }
 
 void Device::InitTogglesFromDriver() {
+    const OpenGLFunctions& gl = GetGL();
     bool supportsBaseVertex = gl.IsAtLeastGLES(3, 2) || gl.IsAtLeastGL(3, 2);
 
     bool supportsBaseInstance = gl.IsAtLeastGLES(3, 2) || gl.IsAtLeastGL(4, 2);
@@ -238,6 +239,7 @@ const GLFormat& Device::GetGLFormat(const Format& format) {
 }
 
 GLenum Device::GetBGRAInternalFormat() const {
+    const OpenGLFunctions& gl = GetGL();
     if (gl.IsGLExtensionSupported("GL_EXT_texture_format_BGRA8888") ||
         gl.IsGLExtensionSupported("GL_APPLE_texture_format_BGRA8888")) {
         return GL_BGRA8_EXT;
@@ -309,6 +311,7 @@ ResultOrError<Ref<TextureViewBase>> Device::CreateTextureViewImpl(
 }
 
 void Device::SubmitFenceSync() {
+    const OpenGLFunctions& gl = GetGL();
     GLsync sync = gl.FenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
     IncrementLastSubmittedCommandSerial();
     mFencesInFlight.emplace(sync, GetLastSubmittedCommandSerial());
@@ -338,6 +341,7 @@ MaybeError Device::ValidateEGLImageCanBeWrapped(const TextureDescriptor* descrip
 }
 TextureBase* Device::CreateTextureWrappingEGLImage(const ExternalImageDescriptor* descriptor,
                                                    ::EGLImage image) {
+    const OpenGLFunctions& gl = GetGL();
     const TextureDescriptor* textureDescriptor = FromAPI(descriptor->cTextureDescriptor);
 
     if (ConsumedError(ValidateTextureDescriptor(this, textureDescriptor))) {
@@ -378,6 +382,7 @@ MaybeError Device::TickImpl() {
 
 ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
     ExecutionSerial fenceSerial{0};
+    const OpenGLFunctions& gl = GetGL();
     while (!mFencesInFlight.empty()) {
         auto [sync, tentativeSerial] = mFencesInFlight.front();
 
@@ -428,6 +433,7 @@ void Device::DestroyImpl() {
 }
 
 MaybeError Device::WaitForIdleForDestruction() {
+    const OpenGLFunctions& gl = GetGL();
     gl.Finish();
     DAWN_TRY(CheckPassedSerials());
     ASSERT(mFencesInFlight.empty());
@@ -445,6 +451,13 @@ uint64_t Device::GetOptimalBufferToTextureCopyOffsetAlignment() const {
 
 float Device::GetTimestampPeriodInNS() const {
     return 1.0f;
+}
+
+const OpenGLFunctions& Device::GetGL() const {
+    if (mContext) {
+        mContext->MakeCurrent();
+    }
+    return mGL;
 }
 
 }  // namespace dawn::native::opengl

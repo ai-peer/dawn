@@ -48,8 +48,8 @@ class Device final : public DeviceBase {
 
     MaybeError Initialize(const DeviceDescriptor* descriptor);
 
-    // Contains all the OpenGL entry points, glDoFoo is called via device->gl.DoFoo.
-    const OpenGLFunctions gl;
+    // Contains all the OpenGL entry points, glDoFoo is called via gl.DoFoo.
+    const OpenGLFunctions& GetGL() const;
 
     const GLFormat& GetGLFormat(const Format& format);
 
@@ -81,6 +81,7 @@ class Device final : public DeviceBase {
     uint64_t GetOptimalBufferToTextureCopyOffsetAlignment() const override;
 
     float GetTimestampPeriodInNS() const override;
+
     class Context {
       public:
         virtual ~Context() {}
@@ -129,10 +130,12 @@ class Device final : public DeviceBase {
     void DestroyImpl() override;
     MaybeError WaitForIdleForDestruction() override;
 
+    const OpenGLFunctions mGL;
+
     std::queue<std::pair<GLsync, ExecutionSerial>> mFencesInFlight;
 
     GLFormatTable mFormatTable;
-    std::unique_ptr<Context> mContext;
+    std::unique_ptr<Context> mContext = nullptr;
 };
 
 }  // namespace dawn::native::opengl

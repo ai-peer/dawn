@@ -28,7 +28,9 @@ class ContextEGL : public Device::Context {
   public:
     static std::unique_ptr<ContextEGL> Create(EGLFunctions& functions);
     void MakeCurrent() override;
-    ContextEGL(EGLFunctions& functions, EGLDisplay display, EGLContext context) : egl(functions), mDisplay(display), mContext(context) {}
+    ContextEGL(EGLFunctions& functions, EGLDisplay display, EGLContext context)
+        : egl(functions), mDisplay(display), mContext(context) {}
+
   private:
     EGLFunctions& egl;
     EGLDisplay mDisplay;
