@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cec50d4_36b36bd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-16T03:06:13Z",
+      "side": 1,
+      "message": "lgtm w/ nit",
+      "revId": "834573ac9a0ad75fba272a9a44fa59298be86ee1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c30e4e6_2d65090f",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-16T03:06:13Z",
+      "side": 1,
+      "message": "Intesting, c++ does context aware parsing. (Although the syntax highlighter doesn\u0027t and marks `override` strangely, heh)",
+      "revId": "834573ac9a0ad75fba272a9a44fa59298be86ee1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "764d9c4f_c1d784c2",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-16T03:06:13Z",
+      "side": 1,
+      "message": "nit: newline above. I\u0027m surprised the formatter didn\u0027t complain",
+      "revId": "834573ac9a0ad75fba272a9a44fa59298be86ee1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
