@@ -783,6 +783,10 @@ bool DawnTestBase::IsAMD() const {
     return gpu_info::IsAMD(mParam.adapterProperties.vendorID);
 }
 
+bool DawnTestBase::IsApple() const {
+    return gpu_info::IsApple(mParam.adapterProperties.vendorID);
+}
+
 bool DawnTestBase::IsARM() const {
     return gpu_info::IsARM(mParam.adapterProperties.vendorID);
 }

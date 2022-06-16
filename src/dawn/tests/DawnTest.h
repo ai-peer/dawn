@@ -293,6 +293,7 @@ class DawnTestBase {
     bool IsVulkan() const;
 
     bool IsAMD() const;
+    bool IsApple() const;
     bool IsARM() const;
     bool IsImgTec() const;
     bool IsIntel() const;
