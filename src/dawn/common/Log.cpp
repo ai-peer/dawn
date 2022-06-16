@@ -73,8 +73,9 @@ LogMessage& LogMessage::operator=(LogMessage&& other) = default;
 LogMessage::~LogMessage() {
 #if defined(DAWN_DISABLE_LOGGING)
     // Don't print logs to make fuzzing more efficient. Implemented as
-    // an early return to avoid warnings about unused member variables.
-    return;
+    // resetting the stream to an empty one to avoid warnings about unused member
+    // variables or unreachable code.
+    mStream = std::ostringstream();
 #endif
     std::string fullMessage = mStream.str();
 
