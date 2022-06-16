@@ -34,6 +34,24 @@
       "parentUuid": "bea0f800_03474623",
       "revId": "fb1f8e82477d67908f8be3376bb7046e308e2c87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "239b8eb3_d9502697",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-16T13:31:13Z",
+      "side": 1,
+      "message": "Not as part of CQ, but as part of Kokoro. David likes both unit and integration (e2e tests)",
+      "parentUuid": "eb94a53f_03fc4f4e",
+      "revId": "fb1f8e82477d67908f8be3376bb7046e308e2c87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
