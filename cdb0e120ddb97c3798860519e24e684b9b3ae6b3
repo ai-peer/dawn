@@ -39,6 +39,30 @@
       },
       "revId": "cdb0e120ddb97c3798860519e24e684b9b3ae6b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21d132a2_20cbb7c5",
+        "filename": "build_overrides/wayland.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003276
+      },
+      "writtenOn": "2022-06-16T10:18:18Z",
+      "side": 1,
+      "message": "I replaced `ozone_platform_wayland` with `//build/config/ozone.gni`, which provides it.\n\nI did not change `use_system_libwayland`: setting this to `false` means there is a `third_party/wayland` available.",
+      "parentUuid": "6d069f6a_6c94f7ac",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 28
+      },
+      "revId": "cdb0e120ddb97c3798860519e24e684b9b3ae6b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
