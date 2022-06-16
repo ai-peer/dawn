@@ -16,6 +16,29 @@
       "message": "Loko/Shrek PTAL!",
       "revId": "0832efc5523cf491afaa27522c1104bb5dfb2ee8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d43ae62_06a6f441",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-16T23:01:26Z",
+      "side": 1,
+      "message": "Fine for now, but I think it would be nice to consider reworking this helper so that the call looks something like:\n\n```\nValidateSTypeIsExactlyOneOf\u003cType1, Type2, ...\u003e(descriptor-\u003enextInChain)\n```\n\nMainly because it\u0027s a bit weird to read it right now? Doesn\u0027t need to be in this CL.",
+      "range": {
+        "startLine": 151,
+        "startChar": 13,
+        "endLine": 151,
+        "endChar": 32
+      },
+      "revId": "0832efc5523cf491afaa27522c1104bb5dfb2ee8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
