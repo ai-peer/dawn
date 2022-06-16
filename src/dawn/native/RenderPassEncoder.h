@@ -33,7 +33,7 @@ class RenderPassEncoder final : public RenderEncoderBase {
                                          EncodingContext* encodingContext,
                                          RenderPassResourceUsageTracker usageTracker,
                                          Ref<AttachmentState> attachmentState,
-                                         std::vector<TimestampWrite> timestampWritesAtEnd,
+                                         const RenderPassTimestampWrite& timestampWriteEnd,
                                          uint32_t renderTargetWidth,
                                          uint32_t renderTargetHeight,
                                          bool depthReadOnly,
@@ -70,7 +70,7 @@ class RenderPassEncoder final : public RenderEncoderBase {
                       EncodingContext* encodingContext,
                       RenderPassResourceUsageTracker usageTracker,
                       Ref<AttachmentState> attachmentState,
-                      std::vector<TimestampWrite> timestampWritesAtEnd,
+                      const RenderPassTimestampWrite& timestampWriteEnd,
                       uint32_t renderTargetWidth,
                       uint32_t renderTargetHeight,
                       bool depthReadOnly,
@@ -97,7 +97,8 @@ class RenderPassEncoder final : public RenderEncoderBase {
     uint32_t mCurrentOcclusionQueryIndex = 0;
     bool mOcclusionQueryActive = false;
 
-    std::vector<TimestampWrite> mTimestampWritesAtEnd;
+    // The timestamp write at the end of render pass
+    RenderPassTimestampWrite mTimestampWriteEnd;
 };
 
 }  // namespace dawn::native

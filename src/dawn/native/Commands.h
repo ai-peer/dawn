@@ -69,20 +69,11 @@ enum class Command {
     WriteTimestamp,
 };
 
-struct TimestampWrite {
-    TimestampWrite(const Ref<QuerySetBase>& set, uint32_t idx);
-    TimestampWrite(TimestampWrite&&);
-    ~TimestampWrite();
-
-    Ref<QuerySetBase> querySet;
-    uint32_t queryIndex;
-};
-
 struct BeginComputePassCmd {
     BeginComputePassCmd();
     ~BeginComputePassCmd();
 
-    std::vector<TimestampWrite> timestampWrites;
+    std::vector<ComputePassTimestampWrite> timestampWrites;
 };
 
 struct BeginOcclusionQueryCmd {
@@ -133,7 +124,7 @@ struct BeginRenderPassCmd {
     uint32_t height;
 
     Ref<QuerySetBase> occlusionQuerySet;
-    std::vector<TimestampWrite> timestampWrites;
+    std::vector<RenderPassTimestampWrite> timestampWrites;
 };
 
 struct BufferCopy {
@@ -229,7 +220,7 @@ struct EndComputePassCmd {
     EndComputePassCmd();
     ~EndComputePassCmd();
 
-    std::vector<TimestampWrite> timestampWrites;
+    ComputePassTimestampWrite timestampWrite;
 };
 
 struct EndOcclusionQueryCmd {
@@ -244,7 +235,7 @@ struct EndRenderPassCmd {
     EndRenderPassCmd();
     ~EndRenderPassCmd();
 
-    std::vector<TimestampWrite> timestampWrites;
+    RenderPassTimestampWrite timestampWrite;
 };
 
 struct ExecuteBundlesCmd {

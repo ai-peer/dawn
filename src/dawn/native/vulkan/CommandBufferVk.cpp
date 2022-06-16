@@ -377,12 +377,19 @@ void ResetUsedQuerySetsOnRenderPass(Device* device,
 
 void RecordWriteTimestampCmd(CommandRecordingContext* recordingContext,
                              Device* device,
-                             WriteTimestampCmd* cmd) {
+                             QuerySetBase* querySet,
+                             uint32_t queryIndex,
+                             bool isRenderPass) {
     VkCommandBuffer commands = recordingContext->commandBuffer;
-    QuerySet* querySet = ToBackend(cmd->querySet.Get());
+
+    // The queries must be reset between uses, and the reset command cannot be called in render
+    // pass.
+    if (!isRenderPass) {
+        device->fn.CmdResetQueryPool(commands, ToBackend(querySet)->GetHandle(), queryIndex, 1);
+    }
 
     device->fn.CmdWriteTimestamp(commands, VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
-                                 querySet->GetHandle(), cmd->queryIndex);
+                                 ToBackend(querySet)->GetHandle(), queryIndex);
 }
 
 void RecordResolveQuerySetCmd(VkCommandBuffer commands,
@@ -735,7 +742,17 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* recordingConte
             }
 
             case Command::BeginComputePass: {
-                mCommands.NextCommand<BeginComputePassCmd>();
+                BeginComputePassCmd* cmd = mCommands.NextCommand<BeginComputePassCmd>();
+
+                // Write timestamp at the beginning of compute pass if it's set
+                for (uint32_t i = 0; i < cmd->timestampWrites.size(); i++) {
+                    if (cmd->timestampWrites[i].location ==
+                        wgpu::ComputePassTimestampLocation::Beginning) {
+                        RecordWriteTimestampCmd(recordingContext, device,
+                                                cmd->timestampWrites[i].querySet,
+                                                cmd->timestampWrites[i].queryIndex, false);
+                    }
+                }
 
                 DAWN_TRY(RecordComputePass(
                     recordingContext, GetResourceUsages().computePasses[nextComputePassNumber]));
@@ -777,11 +794,8 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* recordingConte
             case Command::WriteTimestamp: {
                 WriteTimestampCmd* cmd = mCommands.NextCommand<WriteTimestampCmd>();
 
-                // The query must be reset between uses.
-                device->fn.CmdResetQueryPool(commands, ToBackend(cmd->querySet)->GetHandle(),
-                                             cmd->queryIndex, 1);
-
-                RecordWriteTimestampCmd(recordingContext, device, cmd);
+                RecordWriteTimestampCmd(recordingContext, device, cmd->querySet.Get(),
+                                        cmd->queryIndex, false);
                 break;
             }
 
@@ -889,7 +903,14 @@ MaybeError CommandBuffer::RecordComputePass(CommandRecordingContext* recordingCo
     while (mCommands.NextCommandId(&type)) {
         switch (type) {
             case Command::EndComputePass: {
-                mCommands.NextCommand<EndComputePassCmd>();
+                EndComputePassCmd* cmd = mCommands.NextCommand<EndComputePassCmd>();
+
+                // Write timestamp at the end of compute pass if it's set.
+                if (cmd->timestampWrite.querySet != nullptr) {
+                    ASSERT(cmd->timestampWrite.location == wgpu::ComputePassTimestampLocation::End);
+                    RecordWriteTimestampCmd(recordingContext, device, cmd->timestampWrite.querySet,
+                                            cmd->timestampWrite.queryIndex, false);
+                }
                 return {};
             }
 
@@ -996,11 +1017,8 @@ MaybeError CommandBuffer::RecordComputePass(CommandRecordingContext* recordingCo
             case Command::WriteTimestamp: {
                 WriteTimestampCmd* cmd = mCommands.NextCommand<WriteTimestampCmd>();
 
-                // The query must be reset between uses.
-                device->fn.CmdResetQueryPool(commands, ToBackend(cmd->querySet)->GetHandle(),
-                                             cmd->queryIndex, 1);
-
-                RecordWriteTimestampCmd(recordingContext, device, cmd);
+                RecordWriteTimestampCmd(recordingContext, device, cmd->querySet.Get(),
+                                        cmd->queryIndex, false);
                 break;
             }
 
@@ -1019,6 +1037,16 @@ MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingCon
     VkCommandBuffer commands = recordingContext->commandBuffer;
 
     DAWN_TRY(RecordBeginRenderPass(recordingContext, device, renderPassCmd));
+
+    // Write timestamp at the beginning of render pass if it's set.
+    for (uint32_t i = 0; i < renderPassCmd->timestampWrites.size(); i++) {
+        if (renderPassCmd->timestampWrites[i].location ==
+            wgpu::RenderPassTimestampLocation::Beginning) {
+            RecordWriteTimestampCmd(recordingContext, device,
+                                    renderPassCmd->timestampWrites[i].querySet,
+                                    renderPassCmd->timestampWrites[i].queryIndex, true);
+        }
+    }
 
     // Set the default value for the dynamic state
     {
@@ -1202,7 +1230,15 @@ MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingCon
     while (mCommands.NextCommandId(&type)) {
         switch (type) {
             case Command::EndRenderPass: {
-                mCommands.NextCommand<EndRenderPassCmd>();
+                EndRenderPassCmd* cmd = mCommands.NextCommand<EndRenderPassCmd>();
+
+                // Write timestamp at the end of render pass if it's set.
+                if (cmd->timestampWrite.querySet != nullptr) {
+                    ASSERT(cmd->timestampWrite.location == wgpu::RenderPassTimestampLocation::End);
+                    RecordWriteTimestampCmd(recordingContext, device, cmd->timestampWrite.querySet,
+                                            cmd->timestampWrite.queryIndex, true);
+                }
+
                 device->fn.CmdEndRenderPass(commands);
                 return {};
             }
@@ -1290,7 +1326,8 @@ MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingCon
             case Command::WriteTimestamp: {
                 WriteTimestampCmd* cmd = mCommands.NextCommand<WriteTimestampCmd>();
 
-                RecordWriteTimestampCmd(recordingContext, device, cmd);
+                RecordWriteTimestampCmd(recordingContext, device, cmd->querySet.Get(),
+                                        cmd->queryIndex, true);
                 break;
             }
 
