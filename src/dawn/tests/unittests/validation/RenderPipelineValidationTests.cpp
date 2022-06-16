@@ -934,7 +934,8 @@ TEST_F(RenderPipelineValidationTest, ClampDepthWithoutFeature) {
         wgpu::PrimitiveDepthClampingState clampingState;
         clampingState.clampDepth = true;
         descriptor.primitive.nextInChain = &clampingState;
-        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor),
+                            testing::HasSubstr("not supported"));
     }
     {
         utils::ComboRenderPipelineDescriptor descriptor;
@@ -943,8 +944,51 @@ TEST_F(RenderPipelineValidationTest, ClampDepthWithoutFeature) {
         wgpu::PrimitiveDepthClampingState clampingState;
         clampingState.clampDepth = false;
         descriptor.primitive.nextInChain = &clampingState;
-        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor),
+                            testing::HasSubstr("not supported"));
     }
+}
+
+// Test that specifying an unclippedDepth value results in an error if the feature is not enabled.
+TEST_F(RenderPipelineValidationTest, DepthClipControlWithoutFeature) {
+    {
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        wgpu::PrimitiveDepthClipControl depthClipControl;
+        depthClipControl.unclippedDepth = true;
+        descriptor.primitive.nextInChain = &depthClipControl;
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor),
+                            testing::HasSubstr("not supported"));
+    }
+    {
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        wgpu::PrimitiveDepthClipControl depthClipControl;
+        depthClipControl.unclippedDepth = false;
+        descriptor.primitive.nextInChain = &depthClipControl;
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor),
+                            testing::HasSubstr("not supported"));
+    }
+}
+
+// Test that using both DepthClipControl and DepthClamp features is invalid.
+TEST_F(RenderPipelineValidationTest, DepthClipControlAndDepthClampInvalid) {
+    utils::ComboRenderPipelineDescriptor descriptor;
+    descriptor.vertex.module = vsModule;
+    descriptor.cFragment.module = fsModule;
+
+    wgpu::PrimitiveDepthClipControl depthClipControl;
+    depthClipControl.unclippedDepth = false;
+    descriptor.primitive.nextInChain = &depthClipControl;
+
+    wgpu::PrimitiveDepthClampingState clampingState;
+    clampingState.clampDepth = false;
+    depthClipControl.nextInChain = &clampingState;
+
+    ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor),
+                        testing::HasSubstr("only contain a single chained struct"));
 }
 
 // Test that depthStencil.depthCompare must not be undefiend.
