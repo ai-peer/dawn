@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8bf572c_8bc2c471",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-16T22:12:24Z",
+      "side": 1,
+      "message": "PTAL!\nI couldn\u0027t #else out the rest of the body because then the compiler complained about unused member variables.\nHoping this alternative works instead.",
+      "revId": "9c0c05ef3cc5f568183fc851b82dc48a1dfaeb2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
