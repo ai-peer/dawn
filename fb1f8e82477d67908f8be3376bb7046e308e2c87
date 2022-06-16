@@ -16,6 +16,24 @@
       "message": "David would ask for unit tests here, but I\u0027m more cowboy about unit testing. So +2.",
       "revId": "fb1f8e82477d67908f8be3376bb7046e308e2c87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb94a53f_03fc4f4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-16T12:52:26Z",
+      "side": 1,
+      "message": "Do the `test/tint` files not get run as part of the CQ? (I assumed they did and that those were my unittests)",
+      "parentUuid": "bea0f800_03474623",
+      "revId": "fb1f8e82477d67908f8be3376bb7046e308e2c87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
