@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b639cfa_51c5f7b4",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2206,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-16T03:24:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4886ff4_5ccd8c90",
+      "range": {
+        "startLine": 2206,
+        "startChar": 50,
+        "endLine": 2206,
+        "endChar": 59
+      },
+      "revId": "8e12217d771467fe56fb36cf663141517f607273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fbfbc58_d926821d",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-06-15T14:23:24Z",
       "side": 1,
       "message": "Please can we add a test to check that `Sem().Get(body)-\u003eParent() \u003d\u003d s` ?",
+      "range": {
+        "startLine": 251,
+        "startChar": 10,
+        "endLine": 251,
+        "endChar": 14
+      },
+      "revId": "8e12217d771467fe56fb36cf663141517f607273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95a4b8f9_23e13bda",
+        "filename": "src/tint/resolver/compound_statement_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-16T03:24:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fbfbc58_d926821d",
       "range": {
         "startLine": 251,
         "startChar": 10,
@@ -101,6 +149,30 @@
       "side": 1,
       "message": "No, I just though it was odd. James explained it in the bug I filed and I\u0027ll update this comment to match.",
       "parentUuid": "f3bb119a_dc8956f9",
+      "range": {
+        "startLine": 1065,
+        "startChar": 0,
+        "endLine": 1066,
+        "endChar": 46
+      },
+      "revId": "8e12217d771467fe56fb36cf663141517f607273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85d3496b_837e3deb",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-16T03:24:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "673cf58d_1aa8515b",
       "range": {
         "startLine": 1065,
         "startChar": 0,
