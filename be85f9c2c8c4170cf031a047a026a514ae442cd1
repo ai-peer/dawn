@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea087861_4848cf6b",
+        "filename": "src/tint/ast/function_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-16T03:14:20Z",
+      "side": 0,
+      "message": "Is this no longer valid?",
+      "revId": "be85f9c2c8c4170cf031a047a026a514ae442cd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

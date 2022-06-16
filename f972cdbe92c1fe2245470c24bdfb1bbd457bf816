@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fd18c82_af3dd885",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2865,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-16T03:14:20Z",
+      "side": 1,
+      "message": "Is `Switch` one of your favorite things? heh.",
+      "revId": "f972cdbe92c1fe2245470c24bdfb1bbd457bf816",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
