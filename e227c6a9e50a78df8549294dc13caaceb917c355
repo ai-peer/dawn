@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdf4c26f_7b308820",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002967
+      },
+      "writtenOn": "2022-06-17T01:00:57Z",
+      "side": 1,
+      "message": "Please enrich the commit messages following the guide\n\nhttps://chromium.googlesource.com/chromium/src/+/master/docs/contributing.md#uploading-a-change-for-review",
+      "revId": "e227c6a9e50a78df8549294dc13caaceb917c355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b5baf279_d9fb665c",
@@ -14,6 +31,23 @@
       "writtenOn": "2022-06-17T00:51:44Z",
       "side": 1,
       "message": "Good job, please take a look below comments.",
+      "revId": "e227c6a9e50a78df8549294dc13caaceb917c355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "831fbecc_f41743b3",
+        "filename": "generator/templates/dawn/wire/client/ApiObjects.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002967
+      },
+      "writtenOn": "2022-06-17T01:00:57Z",
+      "side": 1,
+      "message": "You need add the metadata of wire_namespace in dawn.json [1]\n\n\"_metadata\": {\n        \"api\": \"WebGPU\",\n        \"c_prefix\": \"WGPU\",\n        \"namespace\": \"wgpu\",\n        \"proc_table_prefix\": \"Dawn\",\n        \"native_namespace\": \"dawn native\",\n        \"copyright_year\": \"2019\"\n    },\n\n[1] https://dawn.googlesource.com/dawn/+/refs/heads/main/dawn.json",
       "revId": "e227c6a9e50a78df8549294dc13caaceb917c355",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
