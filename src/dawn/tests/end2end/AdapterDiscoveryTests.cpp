@@ -155,7 +155,7 @@ TEST(AdapterDiscoveryTests, OnlyMetal) {
 }
 #endif  // defined(DAWN_ENABLE_BACKEND_METAL)
 
-#if defined(DAWN_ENABLE_BACKEND_DESKTOP_GL)
+#if 0
 // Test discovering only desktop OpenGL adapters
 TEST(AdapterDiscoveryTests, OnlyDesktopGL) {
     if (!glfwInit()) {
@@ -190,7 +190,7 @@ TEST(AdapterDiscoveryTests, OnlyDesktopGL) {
 }
 #endif  // defined(DAWN_ENABLE_BACKEND_DESKTOP_GL)
 
-#if defined(DAWN_ENABLE_BACKEND_OPENGLES)
+#if 0
 // Test discovering only OpenGLES adapters
 TEST(AdapterDiscoveryTests, OnlyOpenGLES) {
     ScopedEnvironmentVar angleDefaultPlatform;

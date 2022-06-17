@@ -274,7 +274,6 @@ class DawnTestEnvironment : public testing::Environment {
 
     std::unique_ptr<utils::PlatformDebugLogger> mPlatformDebugLogger;
     GLFWwindow* mOpenGLWindow;
-    GLFWwindow* mOpenGLESWindow;
 };
 
 class DawnTestBase {
