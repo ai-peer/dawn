@@ -33,6 +33,24 @@
       "message": "Can you add a unittest to show that this is fixed?",
       "revId": "6a1a0a4dc2a615ca88009934fb158a19cc9d83f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68563c3f_69b07257",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-17T07:58:04Z",
+      "side": 1,
+      "message": "Done, I add a unit test in `HlslGeneratorImplTest_Constructor`, where the value in constructor may trigger the bug before this fix.",
+      "parentUuid": "a6c23fe2_3b30ea54",
+      "revId": "6a1a0a4dc2a615ca88009934fb158a19cc9d83f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
