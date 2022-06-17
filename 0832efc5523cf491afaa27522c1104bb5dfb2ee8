@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a53fe7c_0daceea4",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-17T16:07:13Z",
+      "side": 1,
+      "message": "Indeed - or we could even do a fancy compile-time bloom filter ;-) \n(probably not worth unless there are more types of STypes)",
+      "parentUuid": "7d43ae62_06a6f441",
+      "range": {
+        "startLine": 151,
+        "startChar": 13,
+        "endLine": 151,
+        "endChar": 32
+      },
+      "revId": "0832efc5523cf491afaa27522c1104bb5dfb2ee8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcfd6d6a_d96f4ad3",
@@ -58,6 +82,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65bbbc0f_f3febaac",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-17T16:07:13Z",
+      "side": 1,
+      "message": "Yes, but I won\u0027t do it until the new feature is actually implemented.",
+      "parentUuid": "bcfd6d6a_d96f4ad3",
+      "revId": "0832efc5523cf491afaa27522c1104bb5dfb2ee8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e2c8f0c_270eec8a",
@@ -71,6 +113,24 @@
       "writtenOn": "2022-06-16T23:45:50Z",
       "side": 1,
       "message": "nit: \"is an error\"\nsame for upper appearances",
+      "revId": "0832efc5523cf491afaa27522c1104bb5dfb2ee8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1955353_38f40c87",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 952,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-17T16:07:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2c8f0c_270eec8a",
       "revId": "0832efc5523cf491afaa27522c1104bb5dfb2ee8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
