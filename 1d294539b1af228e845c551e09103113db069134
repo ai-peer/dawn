@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5659576_f66a7c0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-06-17T01:18:49Z",
+      "side": 1,
+      "message": "Looks like the new E2E test is timing out on Kokoro, might need to remove it or cut it down to something smaller.",
+      "revId": "1d294539b1af228e845c551e09103113db069134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
