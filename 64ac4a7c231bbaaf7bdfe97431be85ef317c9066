@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbfad936_ad8dcfc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-17T16:05:26Z",
+      "side": 1,
+      "message": "LGTM with nit.\nNothing that should block landing this.",
+      "revId": "64ac4a7c231bbaaf7bdfe97431be85ef317c9066",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ca64d33_71e71e33",
+        "filename": "src/tint/transform/module_scope_var_to_entry_point_param.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-17T16:05:26Z",
+      "side": 1,
+      "message": "Alternately\n\n switch(sc) {\n    case ast::StoargeClass:kPrivate:\n    ..\n    case ast::kWorkgroup;\n       break;\n    default:\n        .. issue error here\n  }\n  \n  Fine either way.",
+      "range": {
+        "startLine": 214,
+        "startChar": 8,
+        "endLine": 216,
+        "endChar": 50
+      },
+      "revId": "64ac4a7c231bbaaf7bdfe97431be85ef317c9066",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04ef6f6c_0e055eb9",
+        "filename": "src/tint/transform/module_scope_var_to_entry_point_param.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-17T16:05:26Z",
+      "side": 1,
+      "message": "nit: These two bools could have been return values of the helper functions.",
+      "revId": "64ac4a7c231bbaaf7bdfe97431be85ef317c9066",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "257558f1_62777f8d",
+        "filename": "src/tint/transform/module_scope_var_to_entry_point_param.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-17T16:05:26Z",
+      "side": 1,
+      "message": "I guess Tint style allows non-const references now...\nsigh.  :-)",
+      "range": {
+        "startLine": 357,
+        "startChar": 77,
+        "endLine": 357,
+        "endChar": 87
+      },
+      "revId": "64ac4a7c231bbaaf7bdfe97431be85ef317c9066",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "310d6dca_649c9c8e",
+        "filename": "src/tint/transform/module_scope_var_to_entry_point_param.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-17T16:05:26Z",
+      "side": 1,
+      "message": "nit: Please give the definition of this member here.\n\nKeep the processing guidance up at line 117:  \"Build the ....\"\nBut the data definition should mostly stand on its own here too.  \"Maps blah to blork...\"",
+      "revId": "64ac4a7c231bbaaf7bdfe97431be85ef317c9066",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
