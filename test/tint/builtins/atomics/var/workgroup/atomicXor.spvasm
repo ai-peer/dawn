@@ -1,0 +1,47 @@
+; SPIR-V
+; Version: 1.3
+; Generator: Google Tint Compiler; 0
+; Bound: 25
+; Schema: 0
+               OpCapability Shader
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint GLCompute %unused_entry_point "unused_entry_point"
+               OpExecutionMode %unused_entry_point LocalSize 1 1 1
+               OpName %wg "wg"
+               OpName %wg_u32 "wg_u32"
+               OpName %wg_i32 "wg_i32"
+               OpName %wg_f32 "wg_f32"
+               OpName %unused_entry_point "unused_entry_point"
+               OpName %compute_main_2 "compute_main_2"
+               OpName %__atomic_compare_exchange_resultu32 "__atomic_compare_exchange_resultu32"
+               OpMemberName %__atomic_compare_exchange_resultu32 0 "old_value"
+               OpMemberName %__atomic_compare_exchange_resultu32 1 "exchanged"
+               OpMemberDecorate %__atomic_compare_exchange_resultu32 0 Offset 0
+               OpMemberDecorate %__atomic_compare_exchange_resultu32 1 Offset 4
+       %uint = OpTypeInt 32 0
+%_ptr_Workgroup_uint = OpTypePointer Workgroup %uint
+         %wg = OpVariable %_ptr_Workgroup_uint Workgroup
+     %wg_u32 = OpVariable %_ptr_Workgroup_uint Workgroup
+        %int = OpTypeInt 32 1
+%_ptr_Workgroup_int = OpTypePointer Workgroup %int
+     %wg_i32 = OpVariable %_ptr_Workgroup_int Workgroup
+     %wg_f32 = OpVariable %_ptr_Workgroup_int Workgroup
+       %void = OpTypeVoid
+          %9 = OpTypeFunction %void
+       %bool = OpTypeBool
+%__atomic_compare_exchange_resultu32 = OpTypeStruct %uint %bool
+     %uint_2 = OpConstant %uint 2
+     %uint_0 = OpConstant %uint 0
+   %uint_456 = OpConstant %uint 456
+   %uint_123 = OpConstant %uint 123
+%unused_entry_point = OpFunction %void None %9
+         %12 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%compute_main_2 = OpFunction %void None %9
+         %14 = OpLabel
+         %23 = OpAtomicCompareExchange %uint %wg_u32 %uint_2 %uint_0 %uint_0 %uint_456 %uint_123
+         %24 = OpIEqual %bool %23 %uint_456
+         %15 = OpCompositeConstruct %__atomic_compare_exchange_resultu32 %23 %24
+               OpReturn
+               OpFunctionEnd

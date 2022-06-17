@@ -16,6 +16,7 @@
 
 #include <algorithm>
 #include <array>
+#include <type_traits>
 
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/bitcast_expression.h"
@@ -36,6 +37,7 @@
 #include "src/tint/sem/builtin_type.h"
 #include "src/tint/sem/depth_texture.h"
 #include "src/tint/sem/sampled_texture.h"
+#include "src/tint/transform/spirv_atomic.h"
 
 // Terms:
 //    CFG: the control flow graph of the function, where basic blocks are the
@@ -493,6 +495,33 @@ bool IsSampledImageAccess(SpvOp opcode) {
         case SpvOpImageGather:
         case SpvOpImageDrefGather:
         case SpvOpImageQueryLod:
+            return true;
+        default:
+            break;
+    }
+    return false;
+}
+
+// @param opcode a SPIR-V opcode
+// @returns true if the given instruction is an atomic operation.
+bool IsAtomicOp(SpvOp opcode) {
+    switch (opcode) {
+        case SpvOpAtomicLoad:
+        case SpvOpAtomicStore:
+        case SpvOpAtomicExchange:
+        case SpvOpAtomicCompareExchange:
+        case SpvOpAtomicCompareExchangeWeak:
+        case SpvOpAtomicIIncrement:
+        case SpvOpAtomicIDecrement:
+        case SpvOpAtomicIAdd:
+        case SpvOpAtomicISub:
+        case SpvOpAtomicSMin:
+        case SpvOpAtomicUMin:
+        case SpvOpAtomicSMax:
+        case SpvOpAtomicUMax:
+        case SpvOpAtomicAnd:
+        case SpvOpAtomicOr:
+        case SpvOpAtomicXor:
             return true;
         default:
             break;
@@ -3487,6 +3516,10 @@ bool FunctionEmitter::EmitStatement(const spvtools::opt::Instruction& inst) {
         return EmitImageAccess(inst);
     }
 
+    if (IsAtomicOp(inst.opcode())) {
+        return EmitAtomicOp(inst);
+    }
+
     switch (inst.opcode()) {
         case SpvOpNop:
             return true;
@@ -5407,6 +5440,117 @@ bool FunctionEmitter::EmitImageQuery(const spvtools::opt::Instruction& inst) {
             break;
     }
     return Fail() << "unhandled image query: " << inst.PrettyPrint();
+}
+
+bool FunctionEmitter::EmitAtomicOp(const spvtools::opt::Instruction& inst) {
+    auto emit_atomic = [&](sem::BuiltinType builtin, std::initializer_list<TypedExpression> args) {
+        // Split args into params and expressions
+        ast::VariableList params;
+        params.reserve(args.size());
+        ast::ExpressionList exprs;
+        exprs.reserve(args.size());
+        size_t i = 0;
+        for (auto& a : args) {
+            params.emplace_back(builder_.Param("p" + std::to_string(i++), a.type->Build(builder_)));
+            exprs.emplace_back(a.expr);
+        }
+
+        // Function return type
+        const ast::Type* ret_type = nullptr;
+        if (inst.type_id() != 0) {
+            ret_type = parser_impl_.ConvertType(inst.type_id())->Build(builder_);
+        } else {
+            ret_type = builder_.ty.void_();
+        }
+
+        // Emit stub, will be removed by transform::SpirvAtomic
+        auto sym = builder_.Symbols().New(std::string("stub_") + sem::str(builtin));
+        auto* stub_deco =
+            builder_.ASTNodes().Create<transform::SpirvAtomic::Stub>(builder_.ID(), builtin);
+        auto* stub =
+            create<ast::Function>(Source{}, sym, std::move(params), ret_type,
+                                  /* body */ nullptr,
+                                  ast::AttributeList{
+                                      stub_deco,
+                                      builder_.Disable(ast::DisabledValidation::kFunctionHasNoBody),
+                                  },
+                                  ast::AttributeList{});
+        builder_.AST().AddFunction(stub);
+
+        // Emit call to stub, will be replaced with call to atomic builtin by transform::SpirvAtomic
+        auto* call = builder_.Call(Source{}, sym, exprs);
+        if (inst.type_id() != 0) {
+            auto* result_type = parser_impl_.ConvertType(inst.type_id());
+            TypedExpression expr{result_type, call};
+            return EmitConstDefOrWriteToHoistedVar(inst, expr);
+        }
+        AddStatement(create<ast::CallStatement>(call));
+
+        return true;
+    };
+
+    auto op = [&](size_t index) -> TypedExpression { return MakeOperand(inst, index); };
+
+    auto lit = [&](int v) -> TypedExpression {
+        auto* result_type = parser_impl_.ConvertType(inst.type_id());
+        if (result_type->Is<I32>()) {
+            return TypedExpression(result_type, builder_.Expr(i32(v)));
+        } else if (result_type->Is<U32>()) {
+            return TypedExpression(result_type, builder_.Expr(u32(v)));
+        }
+        return {};
+    };
+
+    constexpr size_t kPtr = 0;
+    constexpr size_t kVal = 3;
+    constexpr size_t kComp = 4;
+
+    switch (inst.opcode()) {
+        case SpvOpAtomicLoad:
+            return emit_atomic(sem::BuiltinType::kAtomicLoad, {op(kPtr)});
+        case SpvOpAtomicStore:
+            return emit_atomic(sem::BuiltinType::kAtomicStore, {op(kPtr), op(kVal)});
+        case SpvOpAtomicExchange:
+            return emit_atomic(sem::BuiltinType::kAtomicExchange, {op(kPtr), op(kVal)});
+        case SpvOpAtomicCompareExchange:
+        case SpvOpAtomicCompareExchangeWeak:
+            return emit_atomic(sem::BuiltinType::kAtomicCompareExchangeWeak,
+                               {op(kPtr), op(kVal), op(kComp)});
+        case SpvOpAtomicIIncrement:
+            return emit_atomic(sem::BuiltinType::kAtomicAdd, {op(kPtr), lit(1)});
+        case SpvOpAtomicIDecrement:
+            return emit_atomic(sem::BuiltinType::kAtomicSub, {op(kPtr), lit(1)});
+        case SpvOpAtomicIAdd:
+            return emit_atomic(sem::BuiltinType::kAtomicAdd, {op(kPtr), op(kVal)});
+        case SpvOpAtomicISub:
+            return emit_atomic(sem::BuiltinType::kAtomicSub, {op(kPtr), op(kVal)});
+        case SpvOpAtomicSMin:
+            return emit_atomic(sem::BuiltinType::kAtomicMin, {op(kPtr), op(kVal)});
+        case SpvOpAtomicUMin:
+            return emit_atomic(sem::BuiltinType::kAtomicMin, {op(kPtr), op(kVal)});
+        case SpvOpAtomicSMax:
+            return emit_atomic(sem::BuiltinType::kAtomicMax, {op(kPtr), op(kVal)});
+        case SpvOpAtomicUMax:
+            return emit_atomic(sem::BuiltinType::kAtomicMax, {op(kPtr), op(kVal)});
+        case SpvOpAtomicAnd:
+            return emit_atomic(sem::BuiltinType::kAtomicAnd, {op(kPtr), op(kVal)});
+        case SpvOpAtomicOr:
+            return emit_atomic(sem::BuiltinType::kAtomicOr, {op(kPtr), op(kVal)});
+        case SpvOpAtomicXor:
+            return emit_atomic(sem::BuiltinType::kAtomicXor, {op(kPtr), op(kVal)});
+
+            // Unsupported
+        case SpvOpAtomicFlagTestAndSet:
+        case SpvOpAtomicFlagClear:
+        case SpvOpAtomicFMinEXT:
+        case SpvOpAtomicFMaxEXT:
+        case SpvOpAtomicFAddEXT:
+            break;
+
+        default:
+            break;
+    }
+    return Fail() << "unhandled atomic op: " << inst.PrettyPrint();
 }
 
 ast::ExpressionList FunctionEmitter::MakeCoordinateOperandsForImageAccess(

@@ -1,0 +1,27 @@
+                     OpCapability Shader
+                     OpMemoryModel Logical GLSL450
+                     OpEntryPoint GLCompute %main "main"
+                     OpExecutionMode %main LocalSize 1 1 1
+                     OpName %S "S"
+                     OpMemberName %S 1 "a"
+                     OpName %wg "wg"
+                     OpName %main "main"
+                     OpMemberDecorate %S 0 Offset 0
+                     OpMemberDecorate %S 1 Offset 4
+                     OpMemberDecorate %S 2 Offset 8
+              %u32 = OpTypeInt 32 0
+                %S = OpTypeStruct %u32 %u32 %u32
+  %S_workgroup_ptr = OpTypePointer Workgroup %S
+               %wg = OpVariable %S_workgroup_ptr Workgroup
+             %void = OpTypeVoid
+            %u32_0 = OpConstant %u32 0
+            %u32_1 = OpConstant %u32 1
+            %u32_2 = OpConstant %u32 2
+%u32_workgroup_ptr = OpTypePointer Workgroup %u32
+          %main_ty = OpTypeFunction %void
+             %main = OpFunction %void None %main_ty
+               %27 = OpLabel
+              %ptr = OpAccessChain %u32_workgroup_ptr %wg %u32_1
+                     OpAtomicStore %ptr %u32_2 %u32_0 %u32_1
+                     OpReturn
+                     OpFunctionEnd
