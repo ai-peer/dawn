@@ -16,6 +16,23 @@
       "message": "Please take a look, thanks",
       "revId": "beb00530d6b9ac80428c3017155e7ddc17213047",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69fb002b_3bcd14f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-17T10:49:00Z",
+      "side": 1,
+      "message": "That\u0027s an embarrassing bug!\nThank you for identifying, fixing and testing this. Great job!",
+      "revId": "beb00530d6b9ac80428c3017155e7ddc17213047",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
