@@ -16,6 +16,24 @@
       "message": "What happens in this case. The address space changes from private to function, and that mucks up parameter passing, no?\n\n\nvar\u003cprivate\u003e i: i32;\n\nfn helper(p: ptr\u003cprivate,i32\u003e) { *p \u003d 1; }\n\n@compute @workgroup_size(8)\nfn entry() {\n   helper(\u0026i);\n}",
       "revId": "347f03b1604c527cd9eaea53087968212a0498aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a6a7802_6fe5ae22",
+        "filename": "src/tint/transform/module_scope_var_to_entry_point_param.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-06-17T18:31:12Z",
+      "side": 1,
+      "message": "We actually don\u0027t change the address space here. Although we move the variable declaration to function scope, we keep is as `private` to avoid issues with that sort of thing. There\u0027s a validation override that allows us to do this. In MSL `private` and `function` are both the same thing (`thread`).",
+      "parentUuid": "850a9ad7_900ae009",
+      "revId": "347f03b1604c527cd9eaea53087968212a0498aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
