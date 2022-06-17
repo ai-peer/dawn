@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0ab2348_01e3ffc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-17T22:25:11Z",
+      "side": 1,
+      "message": "Will run dry-run CQ after https://chromium-review.googlesource.com/c/chromium/src/+/3711140 goes in since it will fail atm.",
+      "revId": "f5ead8dcf395a8204890fb6fba131edd2146e36f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
