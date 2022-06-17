@@ -190,8 +190,6 @@ BackendTestConfig OpenGLESBackend(std::initializer_list<const char*> forceEnable
 BackendTestConfig VulkanBackend(std::initializer_list<const char*> forceEnabledWorkarounds = {},
                                 std::initializer_list<const char*> forceDisabledWorkarounds = {});
 
-struct GLFWwindow;
-
 namespace utils {
 class PlatformDebugLogger;
 class TerribleCommandBuffer;
@@ -238,8 +236,6 @@ class DawnTestEnvironment : public testing::Environment {
     bool HasBackendTypeFilter() const;
     wgpu::BackendType GetBackendTypeFilter() const;
     const char* GetWireTraceDir() const;
-    GLFWwindow* GetOpenGLWindow() const;
-    GLFWwindow* GetOpenGLESWindow() const;
 
     const std::vector<std::string>& GetEnabledToggles() const;
     const std::vector<std::string>& GetDisabledToggles() const;
@@ -273,8 +269,6 @@ class DawnTestEnvironment : public testing::Environment {
     std::vector<TestAdapterProperties> mAdapterProperties;
 
     std::unique_ptr<utils::PlatformDebugLogger> mPlatformDebugLogger;
-    GLFWwindow* mOpenGLWindow;
-    GLFWwindow* mOpenGLESWindow;
 };
 
 class DawnTestBase {

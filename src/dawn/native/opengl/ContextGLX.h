@@ -1,4 +1,4 @@
-// Copyright 2019 The Dawn Authors
+// Copyright 2022 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,35 +12,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_NATIVE_OPENGL_BACKENDGL_H_
-#define SRC_DAWN_NATIVE_OPENGL_BACKENDGL_H_
+#ifndef SRC_DAWN_NATIVE_OPENGL_CONTEXTGLX_H_
+#define SRC_DAWN_NATIVE_OPENGL_CONTEXTGLX_H_
 
-#include <EGL/egl.h>
+#include <memory>
 
-#include <vector>
+#include "src/dawn/common/xlib_with_undefs.h"
 
-#include "dawn/native/BackendConnection.h"
-#include "dawn/native/opengl/EGLFunctions.h"
+#include "dawn/native/opengl/DeviceGL.h"
 #include "dawn/native/opengl/GLXFunctions.h"
 
 namespace dawn::native::opengl {
 
-class Backend : public BackendConnection {
+class ContextGLX : public Device::Context {
   public:
-    Backend(InstanceBase* instance, wgpu::BackendType backendType);
-
-    std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters() override;
-    ResultOrError<std::vector<Ref<AdapterBase>>> DiscoverAdapters(
-        const AdapterDiscoveryOptionsBase* options) override;
+    static std::unique_ptr<ContextGLX> Create(GLXFunctions& functions);
+    void MakeCurrent() override;
+    ContextGLX(GLXFunctions& functions, Display* display, GLXDrawable drawable, GLXContext context);
+    ~ContextGLX() override;
 
   private:
-    bool mCreatedAdapter = false;
-    EGLFunctions egl;
     GLXFunctions glX;
-    DynamicLib mLibEGL;
-    DynamicLib mLibGLX;
+    Display* mDisplay;
+    GLXDrawable mDrawable;
+    GLXContext mContext;
 };
 
 }  // namespace dawn::native::opengl
 
-#endif  // SRC_DAWN_NATIVE_OPENGL_BACKENDGL_H_
+#endif  // SRC_DAWN_NATIVE_OPENGL_CONTEXTEGL_H_

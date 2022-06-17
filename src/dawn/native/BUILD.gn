@@ -540,11 +540,19 @@ source_set("sources") {
       "opengl/CommandBufferGL.h",
       "opengl/ComputePipelineGL.cpp",
       "opengl/ComputePipelineGL.h",
+      "opengl/ContextEGL.cpp",
+      "opengl/ContextEGL.h",
+      "opengl/ContextGLX.cpp",
+      "opengl/ContextGLX.h",
       "opengl/DeviceGL.cpp",
       "opengl/DeviceGL.h",
+      "opengl/EGLFunctions.cpp",
+      "opengl/EGLFunctions.h",
       "opengl/Forward.h",
       "opengl/GLFormat.cpp",
       "opengl/GLFormat.h",
+      "opengl/GLXFunctions.cpp",
+      "opengl/GLXFunctions.h",
       "opengl/NativeSwapChainImplGL.cpp",
       "opengl/NativeSwapChainImplGL.h",
       "opengl/OpenGLFunctions.cpp",
@@ -575,6 +583,10 @@ source_set("sources") {
       "opengl/UtilsGL.h",
       "opengl/opengl_platform.h",
     ]
+    include_dirs = [ "//third_party/khronos" ]
+    if (dawn_enable_desktop_gl) {
+      public_deps += [ "${dawn_root}/src/dawn/utils:glfw" ]
+    }
   }
 
   if (dawn_enable_vulkan) {
