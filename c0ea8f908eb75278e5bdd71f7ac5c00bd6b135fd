@@ -16,6 +16,23 @@
       "message": "Note, this needs to go in after https://chromium-review.googlesource.com/c/chromium/src/+/3711140 which resolves the failures.",
       "revId": "c0ea8f908eb75278e5bdd71f7ac5c00bd6b135fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f10cf8cd_914639fb",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-17T22:52:40Z",
+      "side": 1,
+      "message": "hm, instead of hard-coding this header\n\nDawn\u0027s BUILD.gn has a `build_with_chromium` variable.\n\nWDYT of instead making the build do `dawn_version_generator.py --version-header path/to/generated/version/header`.\n\nThen, maybe we could even put the version inside Chromium\u0027s source tree instead of Dawn\u0027s. Basically, so Dawn isn\u0027t restricted to a hard-coded version path both in this generator file and in the .gitignore. Other embedders of Dawn could more easily pass in their own file.",
+      "revId": "c0ea8f908eb75278e5bdd71f7ac5c00bd6b135fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
