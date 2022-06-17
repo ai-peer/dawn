@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28ccc5f0_e3a34b10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-17T21:03:26Z",
+      "side": 1,
+      "message": "PTAL. The Chrome side of this has landed so it should be safe to remove these paths from Dawn now.  (https://chromium-review.googlesource.com/c/chromium/src/+/3711016)",
+      "revId": "cdbe2862f59f811300da59d547eee00ab395cd09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
