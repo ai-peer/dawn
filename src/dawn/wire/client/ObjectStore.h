@@ -1,4 +1,4 @@
-// Copyright 2019 The Dawn Authors
+// Copyright 2022 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,8 +35,13 @@ class ObjectStore {
   public:
     ObjectStore();
 
-    ObjectHandle ReserveHandle();
-    void Insert(std::unique_ptr<ObjectBase> obj);
+    // ObjectBase's constructor require the ObjectHandle and child classes of ObjectBase have
+    // additional constructor argument, so we can't atomically 1) reserve the slot 2) create
+    // the ObjectBase and 3) insert it in mObjects (because 2) is made by the user of this class).
+    // So instead 1) is done and the data for 3) is returned to the caller so it can insert the
+    // constructed object in the correct place immediately.
+    // AAAAnd we return a pointer to a vector storage that can be invalidated so it's not great.
+    std::pair<ObjectHandle, std::unique_ptr<ObjectBase>*> ReserveSlot();
     void Free(ObjectBase* obj);
     ObjectBase* Get(ObjectId id) const;
 

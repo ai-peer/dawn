@@ -44,12 +44,12 @@ class Client : public ClientBase {
     template <typename T, typename... Args>
     T* Make(Args&&... args) {
         constexpr ObjectType type = ObjectTypeToTypeEnum<T>;
-        ObjectBaseParams params = {this, mObjectStores[type].ReserveHandle()};
+        auto [handle, reservedSlot] = mObjectStores[type].ReserveSlot();
 
-        auto objectOwned = std::make_unique<T>(params, std::forward<Args>(args)...);
-        T* object = objectOwned.get();
+        T* object = new T({this, handle}, std::forward<Args>(args)...);
 
-        TrackObject(std::move(objectOwned), type);
+        reservedSlot->reset(object);
+        mObjects[type].Append(object);
         return object;
     }
 
@@ -96,7 +96,6 @@ class Client : public ClientBase {
 
   private:
     void DestroyAllObjects();
-    void TrackObject(std::unique_ptr<ObjectBase> object, ObjectType type);
 
 #include "dawn/wire/client/ClientPrototypes_autogen.inc"
 

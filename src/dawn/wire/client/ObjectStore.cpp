@@ -24,32 +24,23 @@ ObjectStore::ObjectStore() {
     mCurrentId = 1;
 }
 
-ObjectHandle ObjectStore::ReserveHandle() {
+std::pair<ObjectHandle, std::unique_ptr<ObjectBase>*> ObjectStore::ReserveSlot() {
+    // TODO comments
     if (mFreeHandles.empty()) {
-        return {mCurrentId++, 0};
+        ASSERT(mCurrentId == mObjects.size());
+        ObjectHandle handle = {mCurrentId++, 0};
+        mObjects.emplace_back(nullptr);
+        return {handle, &mObjects.back()};
     }
+
     ObjectHandle handle = mFreeHandles.back();
     mFreeHandles.pop_back();
-    return handle;
-}
-
-void ObjectStore::Insert(std::unique_ptr<ObjectBase> obj) {
-    ObjectId id = obj->GetWireId();
-
-    if (id >= mObjects.size()) {
-        ASSERT(id == mObjects.size());
-        mObjects.emplace_back(std::move(obj));
-    } else {
-        // The generation should never overflow. We don't recycle ObjectIds that would
-        // overflow their next generation.
-        ASSERT(obj->GetWireGeneration() != 0);
-        ASSERT(mObjects[id] == nullptr);
-        mObjects[id] = std::move(obj);
-    }
+    return {handle, &mObjects[handle.id]};
 }
 
 void ObjectStore::Free(ObjectBase* obj) {
     ASSERT(obj->IsInList());
+    ASSERT(mObjects[obj->GetWireId()].get() == obj);
     // The wire reuses ID for objects to keep them in a packed array starting from 0.
     // To avoid issues with asynchronous server->client communication referring to an ID that's
     // already reused, each handle also has a generation that's increment by one on each reuse.

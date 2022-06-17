@@ -183,9 +183,4 @@ void Client::Free(ObjectBase* obj, ObjectType type) {
     mObjectStores[type].Free(obj);
 }
 
-void Client::TrackObject(std::unique_ptr<ObjectBase> obj, ObjectType type) {
-    mObjects[type].Append(obj.get());
-    mObjectStores[type].Insert(std::move(obj));
-}
-
 }  // namespace dawn::wire::client
