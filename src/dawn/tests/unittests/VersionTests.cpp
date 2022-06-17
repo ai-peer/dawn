@@ -24,8 +24,8 @@ namespace {
 using ::testing::SizeIs;
 
 TEST(VersionTests, GitCommitHashLength) {
-    // Git hashes should be 40 characters long.
-    EXPECT_THAT(std::string(kGitHash), SizeIs(40));
+    // Dawn version should be a git hash which should be 40 characters long.
+    EXPECT_THAT(kDawnVersion, SizeIs(40));
 }
 
 }  // namespace

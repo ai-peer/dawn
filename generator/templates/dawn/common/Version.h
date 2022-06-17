@@ -18,9 +18,7 @@
 #include <string_view>
 
 namespace dawn {
-
-static constexpr std::string_view kGitHash("{{get_gitHash()}}");
-
+static constexpr std::string_view kDawnVersion("{{get_version()}}");
 } // namespace dawn
 
 #endif  // COMMON_VERISON_AUTOGEN_H_
