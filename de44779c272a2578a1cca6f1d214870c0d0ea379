@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a1727fb_a98fb557",
+        "filename": "src/dawn/wire/client/Client.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-17T16:09:43Z",
+      "side": 1,
+      "message": "sounds OK to me",
+      "parentUuid": "9fbcb9df_d3e6ff89",
+      "range": {
+        "startLine": 174,
+        "startChar": 4,
+        "endLine": 174,
+        "endChar": 47
+      },
+      "revId": "de44779c272a2578a1cca6f1d214870c0d0ea379",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dc450f70_9aa7e15d",
         "filename": "src/dawn/wire/client/ObjectStore.h",
         "patchSetId": 6
