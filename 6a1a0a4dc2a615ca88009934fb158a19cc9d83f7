@@ -16,6 +16,23 @@
       "message": "Please take a look, thanks",
       "revId": "6a1a0a4dc2a615ca88009934fb158a19cc9d83f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6c23fe2_3b30ea54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-17T03:36:48Z",
+      "side": 1,
+      "message": "Can you add a unittest to show that this is fixed?",
+      "revId": "6a1a0a4dc2a615ca88009934fb158a19cc9d83f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
