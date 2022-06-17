@@ -15,11 +15,19 @@
 #ifndef COMMON_VERISON_AUTOGEN_H_
 #define COMMON_VERISON_AUTOGEN_H_
 
+{% if version_header_exists() %}
+    #include "{{get_version_header()}}"
+{% endif %}
+
 #include <string_view>
 
 namespace dawn {
 
-static constexpr std::string_view kGitHash("{{get_gitHash()}}");
+{% if version_header_exists() %}
+    static constexpr std::string_view kDawnVersion(DAWN_VERSION);
+{% else %}
+    static constexpr std::string_view kDawnVersion("{{get_git_hash()}}");
+{% endif %}
 
 } // namespace dawn
 

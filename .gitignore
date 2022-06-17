@@ -111,6 +111,9 @@ $RECYCLE.BIN/
 ### Dawn node tools binaries
 src/dawn/node/tools/bin/
 
+### Dawn version file (either local for testing or Chromium generated)
+src/dawn/dawn_version.h
+
 ### Cached node transpiled tools
 /.node_transpile_work_dir
 

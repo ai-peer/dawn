@@ -23,10 +23,16 @@ namespace {
 
 using ::testing::SizeIs;
 
+#ifndef DAWN_VERSION
 TEST(VersionTests, GitCommitHashLength) {
-    // Git hashes should be 40 characters long.
-    EXPECT_THAT(std::string(kGitHash), SizeIs(40));
+    // When an explicit Dawn version is not set, version should be a git hash which are length 40.
+    EXPECT_THAT(kDawnVersion, SizeIs(40));
 }
+#else
+TEST(VersionTests, ExplicitDawnVersion) {
+    EXPECT_EQ(kDawnVersion, DAWN_VERSION);
+}
+#endif
 
 }  // namespace
 }  // namespace dawn
