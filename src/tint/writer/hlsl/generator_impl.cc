@@ -1110,53 +1110,56 @@ bool GeneratorImpl::EmitTypeConstructor(std::ostream& out,
         return EmitZeroValue(out, type);
     }
 
-    if (auto* mat = call->Type()->As<sem::Matrix>()) {
-        if (ctor->Parameters().size() == 1) {
-            // Matrix constructor with single scalar.
-            auto fn = utils::GetOrCreate(matrix_scalar_ctors_, mat, [&]() -> std::string {
-                TextBuffer b;
-                TINT_DEFER(helpers_.Append(b));
+    // For single-scalar-value matrix initializers, use a helper function.
+    const bool is_single_value_matrix_init = type->Is<sem::Matrix>() &&
+                                             call->Arguments().size() == 1 &&
+                                             ctor->Parameters()[0]->Type()->is_scalar();
+    if (is_single_value_matrix_init) {
+        // Matrix constructor with single scalar.
+        auto* mat = call->Type()->As<sem::Matrix>();
+        auto fn = utils::GetOrCreate(matrix_scalar_ctors_, mat, [&]() -> std::string {
+            TextBuffer b;
+            TINT_DEFER(helpers_.Append(b));
 
-                auto name = UniqueIdentifier("build_mat" + std::to_string(mat->columns()) + "x" +
-                                             std::to_string(mat->rows()));
-                {
-                    auto l = line(&b);
-                    if (!EmitType(l, mat, ast::StorageClass::kNone, ast::Access::kUndefined, "")) {
-                        return "";
-                    }
-                    l << " " << name << "(";
-                    if (!EmitType(l, mat->type(), ast::StorageClass::kNone, ast::Access::kUndefined,
-                                  "")) {
-                        return "";
-                    }
-                    l << " value) {";
+            auto name = UniqueIdentifier("build_mat" + std::to_string(mat->columns()) + "x" +
+                                         std::to_string(mat->rows()));
+            {
+                auto l = line(&b);
+                if (!EmitType(l, mat, ast::StorageClass::kNone, ast::Access::kUndefined, "")) {
+                    return "";
                 }
-                {
-                    ScopedIndent si(&b);
-                    auto l = line(&b);
-                    l << "return ";
-                    if (!EmitType(l, mat, ast::StorageClass::kNone, ast::Access::kUndefined, "")) {
-                        return "";
-                    }
-                    l << "(";
-                    for (uint32_t i = 0; i < mat->columns() * mat->rows(); i++) {
-                        l << ((i > 0) ? ", value" : "value");
-                    }
-                    l << ");";
+                l << " " << name << "(";
+                if (!EmitType(l, mat->type(), ast::StorageClass::kNone, ast::Access::kUndefined,
+                              "")) {
+                    return "";
                 }
-                line(&b) << "}";
-                return name;
-            });
-            if (fn.empty()) {
-                return false;
+                l << " value) {";
             }
-            out << fn << "(";
-            if (!EmitExpression(out, call->Arguments()[0]->Declaration())) {
-                return false;
+            {
+                ScopedIndent si(&b);
+                auto l = line(&b);
+                l << "return ";
+                if (!EmitType(l, mat, ast::StorageClass::kNone, ast::Access::kUndefined, "")) {
+                    return "";
+                }
+                l << "(";
+                for (uint32_t i = 0; i < mat->columns() * mat->rows(); i++) {
+                    l << ((i > 0) ? ", value" : "value");
+                }
+                l << ");";
             }
-            out << ")";
-            return true;
+            line(&b) << "}";
+            return name;
+        });
+        if (fn.empty()) {
+            return false;
         }
+        out << fn << "(";
+        if (!EmitExpression(out, call->Arguments()[0]->Declaration())) {
+            return false;
+        }
+        out << ")";
+        return true;
     }
 
     bool brackets = type->IsAnyOf<sem::Array, sem::Struct>();
