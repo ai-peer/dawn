@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "852c5d19_61199600",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-17T15:53:04Z",
+      "side": 1,
+      "message": "I don\u0027t know how to retry the build.  The \"retry build\" button was grayed out",
+      "revId": "168f2c3f9ba3c866779f22a38bc3ae042634a186",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
