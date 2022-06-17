@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21cd8ced_2a70791d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2022-06-17T12:45:31Z",
+      "side": 1,
+      "message": "I prefer to land\nhttps://dawn-review.googlesource.com/c/dawn/+/93788\nI think it also addresses Austin\u0027s comments.\nSo maybe you could review and land it instead?",
+      "revId": "835e84140f3a135a1457b2d9f054b21fa9f4bd65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21ffe561_6672916e",
