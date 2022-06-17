@@ -118,6 +118,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d18717f2_54e92c8e",
+        "filename": "src/dawn/wire/client/ObjectAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-17T18:39:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7353f8cb_01063810",
+      "revId": "f9f5de295ebf02ea27ec8bfb253b7f2955d60d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7846641_1594fecf",
@@ -149,6 +167,24 @@
       "side": 1,
       "message": "These names sound like we\u0027re doing linear allocation of objects, when we\u0027re just doing the association with the ObjectHandles (and keeping lifetime). WDYT?",
       "parentUuid": "c7846641_1594fecf",
+      "revId": "f9f5de295ebf02ea27ec8bfb253b7f2955d60d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c26e666_254a490b",
+        "filename": "src/dawn/wire/client/ObjectAllocator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-17T18:39:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "828aa5d6_da55d9fd",
       "revId": "f9f5de295ebf02ea27ec8bfb253b7f2955d60d01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
