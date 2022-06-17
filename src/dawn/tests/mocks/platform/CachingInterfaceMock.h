@@ -63,6 +63,9 @@ class CachingInterfaceMock : public dawn::platform::CachingInterface {
 class DawnCachingMockPlatform : public dawn::platform::Platform {
   public:
     explicit DawnCachingMockPlatform(dawn::platform::CachingInterface* cachingInterface);
+
+    // TODO(dawn:549) Deprecate overload with fingerprint once references in Chromium are removed.
+    dawn::platform::CachingInterface* GetCachingInterface() override;
     dawn::platform::CachingInterface* GetCachingInterface(const void* fingerprint,
                                                           size_t fingerprintSize) override;
 

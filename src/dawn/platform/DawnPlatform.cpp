@@ -53,8 +53,13 @@ uint64_t Platform::AddTraceEvent(char phase,
     return 0;
 }
 
+// TODO(dawn:549) Deprecate overload with fingerprint once references in Chromium are removed.
 dawn::platform::CachingInterface* Platform::GetCachingInterface(const void* fingerprint,
                                                                 size_t fingerprintSize) {
+    return nullptr;
+}
+
+dawn::platform::CachingInterface* Platform::GetCachingInterface() {
     return nullptr;
 }
 

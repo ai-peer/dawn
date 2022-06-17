@@ -96,7 +96,10 @@ class DAWN_PLATFORM_EXPORT Platform {
     // The |fingerprint| is provided by Dawn to inform the client to discard the Dawn caches
     // when the fingerprint changes. The returned CachingInterface is expected to outlive the
     // device which uses it to persistently cache objects.
+    // TODO(dawn:549) Deprecate overload with fingerprint once references in Chromium are removed.
     virtual CachingInterface* GetCachingInterface(const void* fingerprint, size_t fingerprintSize);
+    virtual CachingInterface* GetCachingInterface();
+
     virtual std::unique_ptr<WorkerTaskPool> CreateWorkerTaskPool();
 
   private:
