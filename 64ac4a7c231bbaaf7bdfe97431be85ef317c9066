@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72854f65_dc009fd1",
+        "filename": "src/tint/transform/module_scope_var_to_entry_point_param.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-06-17T20:59:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ca64d33_71e71e33",
+      "range": {
+        "startLine": 214,
+        "startChar": 8,
+        "endLine": 216,
+        "endChar": 50
+      },
+      "revId": "64ac4a7c231bbaaf7bdfe97431be85ef317c9066",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04ef6f6c_0e055eb9",
@@ -54,6 +78,24 @@
       "writtenOn": "2022-06-17T16:05:26Z",
       "side": 1,
       "message": "nit: These two bools could have been return values of the helper functions.",
+      "revId": "64ac4a7c231bbaaf7bdfe97431be85ef317c9066",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c1fc794_15e4e14a",
+        "filename": "src/tint/transform/module_scope_var_to_entry_point_param.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-06-17T20:59:27Z",
+      "side": 1,
+      "message": "They already are output parameters (one of the helpers sets both). Are you suggesting we should remove the default values here? Not sure that helps much with the later patch that does the module-\u003efunction promotion and leaves them as default false.",
+      "parentUuid": "04ef6f6c_0e055eb9",
       "revId": "64ac4a7c231bbaaf7bdfe97431be85ef317c9066",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c34c1053_607859ea",
+        "filename": "src/tint/transform/module_scope_var_to_entry_point_param.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-06-17T20:59:27Z",
+      "side": 1,
+      "message": "I can never remember whether we prefer output params to be references or pointers. Happy to switch to pointers if that\u0027s the preferred style.",
+      "parentUuid": "257558f1_62777f8d",
+      "range": {
+        "startLine": 357,
+        "startChar": 77,
+        "endLine": 357,
+        "endChar": 87
+      },
+      "revId": "64ac4a7c231bbaaf7bdfe97431be85ef317c9066",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "310d6dca_649c9c8e",
@@ -94,6 +160,24 @@
       "writtenOn": "2022-06-17T16:05:26Z",
       "side": 1,
       "message": "nit: Please give the definition of this member here.\n\nKeep the processing guidance up at line 117:  \"Build the ....\"\nBut the data definition should mostly stand on its own here too.  \"Maps blah to blork...\"",
+      "revId": "64ac4a7c231bbaaf7bdfe97431be85ef317c9066",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e5e09a0_82cb07be",
+        "filename": "src/tint/transform/module_scope_var_to_entry_point_param.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-06-17T20:59:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "310d6dca_649c9c8e",
       "revId": "64ac4a7c231bbaaf7bdfe97431be85ef317c9066",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
