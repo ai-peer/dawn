@@ -33,6 +33,23 @@
       "message": "That\u0027s an embarrassing bug!\nThank you for identifying, fixing and testing this. Great job!",
       "revId": "beb00530d6b9ac80428c3017155e7ddc17213047",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34edae82_2aae8a8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-17T12:46:38Z",
+      "side": 1,
+      "message": "Thanks for reviewing!",
+      "revId": "beb00530d6b9ac80428c3017155e7ddc17213047",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
