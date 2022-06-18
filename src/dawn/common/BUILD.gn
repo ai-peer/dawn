@@ -131,7 +131,9 @@ config("internal_config") {
       "-Wtautological-unsigned-zero-compare",
       "-Wunreachable-code-aggressive",
       "-Wunused-but-set-variable",
+      "-Wunused-function",
       "-Wunused-macros",
+      "-Wunused-private-field",
     ]
 
     if (is_win) {
