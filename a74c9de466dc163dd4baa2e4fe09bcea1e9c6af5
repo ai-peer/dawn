@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bcb1d1b_bb3e000c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-18T13:58:12Z",
+      "side": 1,
+      "message": "PTAL.\n\nHopefully this should unblock the dawn roll:\n\n```\n[783/2723] CXX obj/third_party/dawn/src/dawn/common/common/Log.o\nFAILED: obj/third_party/dawn/src/dawn/common/common/Log.o\n/b/s/w/ir/cache/goma/client/gomacc ../../third_party/llvm-build/Release+Asserts/bin/clang++ -MMD -MF...(too long)\n../../third_party/dawn/src/dawn/common/Log.cpp:31:13: error: unused function \u0027SeverityName\u0027 [-Werror,-Wunused-function]\nconst char* SeverityName(LogSeverity severity) {\n^\nIn file included from ../../third_party/dawn/src/dawn/common/Log.cpp:15:\n../../third_party/dawn/src/dawn/common/Log.h:78:17: error: private field \u0027mSeverity\u0027 is not used [-Werror,-Wunused-private-field]\nLogSeverity mSeverity;\n^\n2 errors generated.\n```",
+      "revId": "a74c9de466dc163dd4baa2e4fe09bcea1e9c6af5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
