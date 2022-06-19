@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfe92d84_c2a7c51a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-19T17:58:04Z",
+      "side": 1,
+      "message": "LGTM, thank you for doing that! It\u0027s been bothering me for a while too 😊",
+      "revId": "369b0b4618f05878167fa4d0ddda027b72fa79c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
