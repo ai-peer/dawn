@@ -16,6 +16,69 @@
       "message": "PTAL",
       "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f01686b3_91cc1047",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-20T11:30:36Z",
+      "side": 1,
+      "message": "You also need to update the end-to-end tests in `\u003cdawn\u003e/test/tint`",
+      "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bfd8d46_5e201a5d",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-20T11:30:36Z",
+      "side": 1,
+      "message": "nit: It would be nice if all of this were documented in `src/tint/transform/multiplanar_external_texture.h`, as this is a Tint-public transform. We currently have an undocumented contract between Tint and Dawn, which is icky.",
+      "range": {
+        "startLine": 252,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 72
+      },
+      "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95164cdb_c7390635",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-20T11:30:36Z",
+      "side": 1,
+      "message": "nit: I\u0027d suggest `\u003d\u003d 0`. It\u0027s a little uncommon to have `0` be `false`, `1` be `true`, `2` be `false`, `0xffffffff` be `false`.",
+      "range": {
+        "startLine": 346,
+        "startChar": 21,
+        "endLine": 347,
+        "endChar": 90
+      },
+      "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
