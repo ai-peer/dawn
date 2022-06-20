@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39dc8cb3_96811255",
+        "filename": "src/tint/ast/const.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-20T19:03:31Z",
+      "side": 1,
+      "message": "Is it worthwhile here or in the header to specify that `constructor` is required?",
+      "revId": "114e92eadc4bab0cf78997c21ccf9e6dd679f94a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
