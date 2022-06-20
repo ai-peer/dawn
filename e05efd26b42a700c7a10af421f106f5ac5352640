@@ -33,6 +33,24 @@
       "message": "Can we turn the warning on in clang so we catch this on the bots?",
       "revId": "e05efd26b42a700c7a10af421f106f5ac5352640",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e87ff54c_ac33f58f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-20T14:06:48Z",
+      "side": 1,
+      "message": "I\u0027m not aware of warning. Clang should simply not be compiling this.",
+      "parentUuid": "73a1f1cf_99f5f81f",
+      "revId": "e05efd26b42a700c7a10af421f106f5ac5352640",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
