@@ -39,6 +39,30 @@
       },
       "revId": "ede1a01be90ce99bf47b95a71abfb26bc30f43ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e833bbc4_c7d137bd",
+        "filename": "src/tint/transform/module_scope_var_to_entry_point_param.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-06-20T13:06:03Z",
+      "side": 1,
+      "message": "I remember it being a bit awkward to do this, but I can\u0027t remember why. Something to do with having array index expressions acting directly on pointers perhaps? I\u0027ll have another go to see if there\u0027s another way to do it.",
+      "parentUuid": "17dcc2b0_ef2692e4",
+      "range": {
+        "startLine": 139,
+        "startChar": 20,
+        "endLine": 141,
+        "endChar": 51
+      },
+      "revId": "ede1a01be90ce99bf47b95a71abfb26bc30f43ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
