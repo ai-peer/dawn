@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88615efd_25f46865",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-20T11:25:37Z",
+      "side": 1,
+      "message": "I\u0027m fairly sure `override` is an identifier not a keyword: https://en.cppreference.com/w/cpp/language/override\n\nGerrit is just doing the simple thing here.",
+      "parentUuid": "2c30e4e6_2d65090f",
+      "revId": "834573ac9a0ad75fba272a9a44fa59298be86ee1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "764d9c4f_c1d784c2",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-06-16T03:06:13Z",
       "side": 1,
       "message": "nit: newline above. I\u0027m surprised the formatter didn\u0027t complain",
+      "revId": "834573ac9a0ad75fba272a9a44fa59298be86ee1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4575621_db74defe",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-20T11:25:37Z",
+      "side": 1,
+      "message": "Done. I don\u0027t think the formatter cares about this.",
+      "parentUuid": "764d9c4f_c1d784c2",
       "revId": "834573ac9a0ad75fba272a9a44fa59298be86ee1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
