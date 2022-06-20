@@ -147,6 +147,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff19c33c_72e8cddd",
+        "filename": "src/tint/transform/module_scope_var_to_entry_point_param.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-20T12:55:29Z",
+      "side": 1,
+      "message": "Most the team prefer outputs as non-const ref, if the argument is guaranteed to be non-nullptr. The C++ style guide dropped the outputs-must-be-pointer rule.",
+      "parentUuid": "c34c1053_607859ea",
+      "range": {
+        "startLine": 357,
+        "startChar": 77,
+        "endLine": 357,
+        "endChar": 87
+      },
+      "revId": "64ac4a7c231bbaaf7bdfe97431be85ef317c9066",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "310d6dca_649c9c8e",
