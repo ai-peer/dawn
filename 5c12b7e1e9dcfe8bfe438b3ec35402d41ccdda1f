@@ -16,6 +16,23 @@
       "message": "This just removes a bunch of warning spam that annoys me",
       "revId": "5c12b7e1e9dcfe8bfe438b3ec35402d41ccdda1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0697ef8_52c00921",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-20T13:22:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5c12b7e1e9dcfe8bfe438b3ec35402d41ccdda1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
