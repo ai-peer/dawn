@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8d19b9a_c1c7c99b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-20T12:53:24Z",
+      "side": 1,
+      "message": "This just removes a bunch of warning spam that annoys me",
+      "revId": "5c12b7e1e9dcfe8bfe438b3ec35402d41ccdda1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
