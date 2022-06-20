@@ -35,6 +35,57 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdd71c7f_e579b138",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-20T12:34:10Z",
+      "side": 1,
+      "message": "LGTM overall too. How hard would it be to make / update and end2end test for this?",
+      "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "991eacac_abb4ee21",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-20T12:34:10Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2ee9d7f_b1ff1b70",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1333,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-20T12:34:10Z",
+      "side": 1,
+      "message": "nit: for consistency we could use the same name as for copyTextureForBrowser at [1]",
+      "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bfd8d46_5e201a5d",
