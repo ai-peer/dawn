@@ -33,6 +33,24 @@
       "message": "I\u0027m not sure I understand what this means. Does this mean, if you have a `vec3\u003cf32\u003e` and you search for `f32` it returns 3?\n\nWhat about if `ty` is a struct? does it walk to the deepest struct in the chain looking for the type? And, if so, does the count include the number of times that type apeared in parent structs?",
       "revId": "6e8d559759bdb45fd2cdb64f6a0b8733999382ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2fa568b_72e51936",
+        "filename": "src/tint/sem/type.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-20T19:54:09Z",
+      "side": 1,
+      "message": "Updated docs to clarify. (note: structs aren\u0027t supported).",
+      "parentUuid": "b9beefe6_20b53375",
+      "revId": "6e8d559759bdb45fd2cdb64f6a0b8733999382ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
