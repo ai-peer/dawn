@@ -2,6 +2,10 @@
 
 ## Changes for M105
 
+### New features
+
+* The `acosh`, `asinh`, and `atanh` builtin functions are now supported [tint:1465](crbug.com/tint/1465)
+
 ### Breaking changes
 
 * The `smoothStep()` builtin has been removed (use `smoothstep` instead). [tint:1483](crbug.com/tint/1483)
