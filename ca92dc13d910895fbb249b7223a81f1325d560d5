@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aa1f968_3272b8a5",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-21T12:56:31Z",
+      "side": 1,
+      "message": "ENABLE_DESKTOP_GL? But also I think you want to use DAWN_ENABLE_OPENGLES OR DAWN_ENABLE_DESKTOP_GL",
+      "range": {
+        "startLine": 138,
+        "startChar": 23,
+        "endLine": 138,
+        "endChar": 32
+      },
+      "revId": "ca92dc13d910895fbb249b7223a81f1325d560d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
