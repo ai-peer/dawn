@@ -49,12 +49,17 @@ struct UniqueVector {
     /// @param item the item to append to the end of the vector
     /// @returns true if the item was added, otherwise false.
     bool add(const T& item) {
-        if (set.count(item) == 0) {
+        auto [_, inserted] = set.emplace(item);
+        if (inserted) {
             vector.emplace_back(item);
-            set.emplace(item);
-            return true;
         }
-        return false;
+        return inserted;
+        // if (set.count(item) == 0) {
+        //     vector.emplace_back(item);
+        //     set.emplace(item);
+        //     return true;
+        // }
+        // return false;
     }
 
     /// @returns true if the vector contains `item`
