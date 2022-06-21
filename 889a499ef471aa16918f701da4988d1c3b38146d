@@ -87,6 +87,24 @@
       "parentUuid": "bc782d53_99eaa5e9",
       "revId": "889a499ef471aa16918f701da4988d1c3b38146d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85e40673_ed2a46e5",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-21T15:34:29Z",
+      "side": 1,
+      "message": "Hm, that doesn\u0027t work as well for tint as we don\u0027t have a src/tint/tests folder like Dawn does. Tint puts the test files in the same location as the files under test. If we go that route we\u0027ll end up with a src/tint/test folder which only has a BUILD.gn file which references files in the parent folder, which is odd.\n\nCould we add a tint_disable_test gn flag that wraps the import and the adding of the tint unittests? Defaults to true and Skia can override to false?",
+      "parentUuid": "e895cf84_6a7b0697",
+      "revId": "889a499ef471aa16918f701da4988d1c3b38146d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
