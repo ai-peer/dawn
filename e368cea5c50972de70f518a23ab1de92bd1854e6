@@ -196,6 +196,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aaeeb8bd_62bc2a3c",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1333,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-21T13:38:38Z",
+      "side": 1,
+      "message": "My worry is that we will grow a lot more special cases in the future and it\u0027s not clear yet how to handle them. But I guess we can always see later.\n\nAnother option is to detect that the matrices are the identity matrices but IDK how convenient that is to use.\n\nAny option is fine.",
+      "parentUuid": "99ddb3c3_8c6463fe",
+      "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0bfd8d46_5e201a5d",
         "filename": "src/tint/transform/multiplanar_external_texture.cc",
         "patchSetId": 2
