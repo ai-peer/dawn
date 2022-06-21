@@ -395,6 +395,8 @@ class Resolver {
     sem::Constant EvaluateConstantValue(const ast::LiteralExpression* literal,
                                         const sem::Type* type);
     sem::Constant EvaluateConstantValue(const ast::CallExpression* call, const sem::Type* type);
+    sem::Constant EvaluateConstantValue(const ast::IndexAccessorExpression* call,
+                                        const sem::Type* type);
 
     /// @returns true if the symbol is the name of a builtin function.
     bool IsBuiltin(Symbol) const;
