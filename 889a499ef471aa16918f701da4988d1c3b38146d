@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aadddce6_f8475686",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002886
+      },
+      "writtenOn": "2022-06-21T14:03:45Z",
+      "side": 1,
+      "message": "This import is causing an issue with the Skia build of Dawn. We don\u0027t have a //testing/test.gni",
+      "revId": "889a499ef471aa16918f701da4988d1c3b38146d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
