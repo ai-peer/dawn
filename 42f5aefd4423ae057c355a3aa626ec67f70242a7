@@ -16,6 +16,40 @@
       "message": "PTAL. As far as I can tell, the BackendBinding code in utils/ isn\u0027t used anymore.",
       "revId": "42f5aefd4423ae057c355a3aa626ec67f70242a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52a9336a_0137e0f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-21T12:58:50Z",
+      "side": 1,
+      "message": "Looks fine, but there\u0027s a lot more to remove with the \"old\" swapchains: all the NativeSwapChain*, All the OldSwapChain*, Renaming NewSwapChain* to SwapChain* etc. Are you sure you want to take a shot at that?\n\nAlso this is the tracking bug https://bugs.chromium.org/p/dawn/issues/detail?id\u003d269\u0026q\u003dswapchain\u0026can\u003d2",
+      "revId": "42f5aefd4423ae057c355a3aa626ec67f70242a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a57d9d68_8c062727",
+        "filename": "src/dawn/samples/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-21T12:58:50Z",
+      "side": 1,
+      "message": "nit: this is no longer needed.",
+      "revId": "42f5aefd4423ae057c355a3aa626ec67f70242a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
