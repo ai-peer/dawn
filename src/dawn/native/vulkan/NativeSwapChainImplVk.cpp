@@ -66,7 +66,7 @@ bool ChooseSurfaceConfig(const VulkanSurfaceInfo& info,
 
 NativeSwapChainImpl::NativeSwapChainImpl(Device* device, VkSurfaceKHR surface)
     : mSurface(surface), mDevice(device) {
-    // Call this immediately, so that BackendBinding::GetPreferredSwapChainTextureFormat
+    // Call this immediately, so that GetPreferredSwapChainTextureFormat
     // will return a correct result before a SwapChain is created.
     UpdateSurfaceConfig();
 }
