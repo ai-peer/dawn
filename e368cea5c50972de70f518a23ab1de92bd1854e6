@@ -52,6 +52,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c84b45f6_403ffe8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-06-21T06:59:15Z",
+      "side": 1,
+      "message": "Done, thanks for the review.",
+      "parentUuid": "f01686b3_91cc1047",
+      "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5019a27_bfdb5e36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-06-21T06:59:15Z",
+      "side": 1,
+      "message": "I followed this doc for the tint end2end test -- https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/docs/tint/end-to-end-tests.md.\nI got sidetracked by some go import errors on Ubuntu. I had to seek help from Zhaoming, and managed to update the tests automatically on Win. It would have been much easier for me if there was a more detailed doc on how to setup the environment and run the tool on various OSes.",
+      "parentUuid": "cdd71c7f_e579b138",
+      "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "991eacac_abb4ee21",
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f10a27a5_5c5e4e88",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-06-21T06:59:15Z",
+      "side": 1,
+      "message": "If I understand correctly, color space conversion here means the all conversion steps including yuv-\u003ergb matrix, gamma, and gamut.",
+      "parentUuid": "991eacac_abb4ee21",
+      "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2ee9d7f_b1ff1b70",
         "filename": "dawn.json",
         "patchSetId": 2
@@ -82,6 +136,24 @@
       "writtenOn": "2022-06-20T12:34:10Z",
       "side": 1,
       "message": "nit: for consistency we could use the same name as for copyTextureForBrowser at [1]",
+      "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99ddb3c3_8c6463fe",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1333,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-06-21T06:59:15Z",
+      "side": 1,
+      "message": "Here we only want the yuv-\u003ergb matrix conversion step. Probably they should not use the same name.",
+      "parentUuid": "d2ee9d7f_b1ff1b70",
       "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +181,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91af6e6e_03e46c92",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-06-21T06:59:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bfd8d46_5e201a5d",
+      "range": {
+        "startLine": 252,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 72
+      },
+      "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95164cdb_c7390635",
@@ -122,6 +218,30 @@
       "writtenOn": "2022-06-20T11:30:36Z",
       "side": 1,
       "message": "nit: I\u0027d suggest `\u003d\u003d 0`. It\u0027s a little uncommon to have `0` be `false`, `1` be `true`, `2` be `false`, `0xffffffff` be `false`.",
+      "range": {
+        "startLine": 346,
+        "startChar": 21,
+        "endLine": 347,
+        "endChar": 90
+      },
+      "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "591be18b_f5d30d25",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-06-21T06:59:15Z",
+      "side": 1,
+      "message": "Makes sense, thanks!",
+      "parentUuid": "95164cdb_c7390635",
       "range": {
         "startLine": 346,
         "startChar": 21,
