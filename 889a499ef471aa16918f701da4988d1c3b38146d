@@ -69,6 +69,24 @@
       "parentUuid": "0c4973c2_d069975d",
       "revId": "889a499ef471aa16918f701da4988d1c3b38146d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e895cf84_6a7b0697",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-21T14:56:42Z",
+      "side": 1,
+      "message": "Oh I should have caught this during the review. What we had to do in the past for this is split the GN files in multiple directories so that the GN build of Skia doesn\u0027t find the tests. So in this case the Tint test GN rules would be in src/tint/tests. src/tint/BUILD.gn wouldn\u0027t have any link to src/tint/tests/BUILD.gn, such that Skia doesn\u0027t discover it. That\u0027s what happens with Dawn at the moment.",
+      "parentUuid": "bc782d53_99eaa5e9",
+      "revId": "889a499ef471aa16918f701da4988d1c3b38146d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
