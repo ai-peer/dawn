@@ -123,6 +123,24 @@
       "parentUuid": "85e40673_ed2a46e5",
       "revId": "889a499ef471aa16918f701da4988d1c3b38146d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "984bcfdb_2028a18d",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000076
+      },
+      "writtenOn": "2022-06-21T15:40:47Z",
+      "side": 1,
+      "message": "Yup, this is fine. At this point, and yes - I\u0027d lean towards using an GN arg vs. a global variable. I think the cross-project configuration started out with lots of loose variables in the build_overrides, but that tends to cause churn in all downstream dependencies. Now that I learned about the .gn file, it\u0027s easy enough for us to change a default argument for all skia users.",
+      "parentUuid": "ede58394_a4eb14f4",
+      "revId": "889a499ef471aa16918f701da4988d1c3b38146d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
