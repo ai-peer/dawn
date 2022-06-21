@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50a82c90_fa79ced6",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1692,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-21T17:50:31Z",
+      "side": 1,
+      "message": "This was turned into an ASSERT, previously it fell back to the OldSwapChain implementations.",
+      "revId": "9f1c47a64329c2f03312ad430b9849e91c10ccbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e423c172_dc9e4f02",
+        "filename": "src/dawn/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-21T17:50:31Z",
+      "side": 1,
+      "message": "Wasn\u0027t sure what to do here, do I need to create a Surface as otherwise the `CreateSwapChain` asserts. Do we have a mock surface somewhere that could be used or does it need a mock added?",
+      "revId": "9f1c47a64329c2f03312ad430b9849e91c10ccbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed7238d7_6815b4bb",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-21T17:50:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "9f1c47a64329c2f03312ad430b9849e91c10ccbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdd4f439_bb303b78",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-21T17:50:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "9f1c47a64329c2f03312ad430b9849e91c10ccbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
