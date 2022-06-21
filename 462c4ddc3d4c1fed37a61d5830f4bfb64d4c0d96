@@ -33,6 +33,23 @@
       "message": "LGTM, thanks!",
       "revId": "462c4ddc3d4c1fed37a61d5830f4bfb64d4c0d96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8ef0b6e_565f3a20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2022-06-21T19:27:16Z",
+      "side": 1,
+      "message": "Should I be paying attention to Kokoro being angry?",
+      "revId": "462c4ddc3d4c1fed37a61d5830f4bfb64d4c0d96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
