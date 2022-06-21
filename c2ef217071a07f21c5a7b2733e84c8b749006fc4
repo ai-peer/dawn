@@ -33,6 +33,24 @@
       "message": "In this case, does Switch auto-return the `{}` if none match?",
       "revId": "c2ef217071a07f21c5a7b2733e84c8b749006fc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5e41a5d_a418f757",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-21T21:35:26Z",
+      "side": 1,
+      "message": "Yes. When there\u0027s no default case, and none of the cases match, `Switch` returns the zero-initialized value for the inferred return type.",
+      "parentUuid": "4931337d_2e5713dd",
+      "revId": "c2ef217071a07f21c5a7b2733e84c8b749006fc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
