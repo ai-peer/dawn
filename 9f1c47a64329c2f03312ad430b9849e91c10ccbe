@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07e2b468_665e32cb",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1692,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-21T18:28:11Z",
+      "side": 1,
+      "message": "then, since this argument is no longer optional, we need to change it in `dawn.json` to not have `optional: true`",
+      "parentUuid": "50a82c90_fa79ced6",
+      "revId": "9f1c47a64329c2f03312ad430b9849e91c10ccbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e423c172_dc9e4f02",
         "filename": "src/dawn/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2022-06-21T17:50:31Z",
       "side": 1,
       "message": "Wasn\u0027t sure what to do here, do I need to create a Surface as otherwise the `CreateSwapChain` asserts. Do we have a mock surface somewhere that could be used or does it need a mock added?",
+      "revId": "9f1c47a64329c2f03312ad430b9849e91c10ccbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54a9745b_47f11efd",
+        "filename": "src/dawn/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-21T18:28:11Z",
+      "side": 1,
+      "message": "I don\u0027t think we have a mock currently, but we can certainly add one",
+      "parentUuid": "e423c172_dc9e4f02",
       "revId": "9f1c47a64329c2f03312ad430b9849e91c10ccbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
