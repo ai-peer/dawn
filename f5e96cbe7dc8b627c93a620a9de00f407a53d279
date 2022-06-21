@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afc1b566_5acc079e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-21T17:10:42Z",
+      "side": 1,
+      "message": "some of this code is still being used [here](https://source.corp.google.com/piper///depot/google3/geo/render/mirth/apps/BUILD;bpv\u003d1;bpt\u003d1;rcl\u003d455974351;l\u003d272?q\u003dsrc%2Fdawn%2Futils%2FBackendBinding.h\u0026sq\u003dpackage:piper%20file:%2F%2Fdepot%2Fgoogle3%20-file:google3%2Fexperimental)\n\nwe should check with that team and see if they still need it. If not, we could delete it in google3 as well - or if they do, we would need to help them migrate over to the new swap chain\n\nLGTM otherwise though - ok with me to remove this and remove OldSwapChain as a follow-up.",
+      "revId": "f5e96cbe7dc8b627c93a620a9de00f407a53d279",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
