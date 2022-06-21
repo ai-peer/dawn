@@ -51,6 +51,24 @@
       "parentUuid": "f10cf8cd_914639fb",
       "revId": "c0ea8f908eb75278e5bdd71f7ac5c00bd6b135fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11342948_5bd3df97",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-21T23:16:20Z",
+      "side": 1,
+      "message": "LGTM with nits - good call with build_overrides",
+      "parentUuid": "8eb68296_d0866a87",
+      "revId": "c0ea8f908eb75278e5bdd71f7ac5c00bd6b135fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
