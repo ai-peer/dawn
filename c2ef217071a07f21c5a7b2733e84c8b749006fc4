@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4da3d6e4_75910b39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-21T20:09:24Z",
+      "side": 1,
+      "message": "lgtm w/ question",
+      "revId": "c2ef217071a07f21c5a7b2733e84c8b749006fc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4931337d_2e5713dd",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-21T20:09:24Z",
+      "side": 1,
+      "message": "In this case, does Switch auto-return the `{}` if none match?",
+      "revId": "c2ef217071a07f21c5a7b2733e84c8b749006fc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
