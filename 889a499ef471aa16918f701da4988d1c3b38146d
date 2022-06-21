@@ -159,6 +159,24 @@
       "parentUuid": "984bcfdb_2028a18d",
       "revId": "889a499ef471aa16918f701da4988d1c3b38146d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42efd803_85ead9d3",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002886
+      },
+      "writtenOn": "2022-06-21T16:53:37Z",
+      "side": 1,
+      "message": "I\u0027m trying it here: https://skia-review.googlesource.com/c/skia/+/551857/3/DEPS#17 (I\u0027m pretty sure I can patch in your CL that way)",
+      "parentUuid": "972c4305_0aa3490c",
+      "revId": "889a499ef471aa16918f701da4988d1c3b38146d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
