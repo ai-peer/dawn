@@ -22,19 +22,16 @@
 
 namespace dawn::native {
 
-class SwapChainMock : public SwapChainBase {
+class SwapChainMock : public NewSwapChainBase {
   public:
-    explicit SwapChainMock(DeviceBase* device);
+    SwapChainMock(DeviceBase* device, Surface* surface, const SwapChainDescriptor* descriptor);
     ~SwapChainMock() override;
 
     MOCK_METHOD(void, DestroyImpl, (), (override));
 
-    MOCK_METHOD(void,
-                APIConfigure,
-                (wgpu::TextureFormat, wgpu::TextureUsage, uint32_t, uint32_t),
-                (override));
-    MOCK_METHOD(TextureViewBase*, APIGetCurrentTextureView, (), (override));
-    MOCK_METHOD(void, APIPresent, (), (override));
+    MOCK_METHOD(ResultOrError<Ref<TextureViewBase>>, GetCurrentTextureViewImpl, (), (override));
+    MOCK_METHOD(MaybeError, PresentImpl, (), (override));
+    MOCK_METHOD(void, DetachFromSurfaceImpl, (), (override));
 };
 
 }  // namespace dawn::native

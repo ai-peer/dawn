@@ -161,10 +161,6 @@ ResultOrError<Ref<ShaderModuleBase>> Device::CreateShaderModuleImpl(
     DAWN_TRY(module->Initialize(parseResult, compilationMessages));
     return module;
 }
-ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(
-    const SwapChainDescriptor* descriptor) {
-    return AcquireRef(new OldSwapChain(this, descriptor));
-}
 ResultOrError<Ref<NewSwapChainBase>> Device::CreateSwapChainImpl(
     Surface* surface,
     NewSwapChainBase* previousSwapChain,

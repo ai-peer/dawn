@@ -183,12 +183,14 @@ TEST_P(DeviceLostTest, CreateShaderModuleFails) {
 }
 
 // Tests that CreateSwapChain fails when device is lost
+#if 0
 TEST_P(DeviceLostTest, CreateSwapChainFails) {
     LoseDeviceForTesting();
 
     wgpu::SwapChainDescriptor descriptor = {};
     ASSERT_DEVICE_ERROR(device.CreateSwapChain(nullptr, &descriptor));
 }
+#endif
 
 // Tests that CreateTexture fails when device is lost
 TEST_P(DeviceLostTest, CreateTextureFails) {
