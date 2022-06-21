@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4a75891_09a97e58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-21T08:37:44Z",
+      "side": 1,
+      "message": "Sorry about that. Do you know what the import errors were? Was the solution to update go to 1.18 or later?",
+      "parentUuid": "f5019a27_bfdb5e36",
+      "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "991eacac_abb4ee21",
