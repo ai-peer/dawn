@@ -83,6 +83,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b187bebb_25a29d16",
+        "filename": "src/dawn/common/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-21T23:45:19Z",
+      "side": 1,
+      "message": "ah, you\u0027re right. if it\u0027s returned from get_dependencies, it will be included in the depfile which is used as the list of inputs to the script.",
+      "parentUuid": "24aa9df1_a668c77d",
+      "revId": "53099a6c2120f50856406580e82bd8f169925ca3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62e9d1d7_ce1cfa0d",
