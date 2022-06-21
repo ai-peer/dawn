@@ -50,6 +50,24 @@
       "message": "Should I be paying attention to Kokoro being angry?",
       "revId": "462c4ddc3d4c1fed37a61d5830f4bfb64d4c0d96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "264e9499_8d2c9d13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-21T19:38:41Z",
+      "side": 1,
+      "message": "We should care, but Kokoro is also non-blocking. In this case, it looks like `rsync` died in the middle of something. It\u0027s very likely a flake or not related to your change since it\u0027s only on `cmake-clang-debug-ubsan` and all the other configurations succeeded.",
+      "parentUuid": "b8ef0b6e_565f3a20",
+      "revId": "462c4ddc3d4c1fed37a61d5830f4bfb64d4c0d96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
