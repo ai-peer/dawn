@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84ba9a38_f3a8c146",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-21T23:40:09Z",
+      "side": 1,
+      "message": "Done. Was sorta just copying the file reading stuff from above.",
+      "parentUuid": "17b6dcc3_affb527e",
+      "range": {
+        "startLine": 91,
+        "startChar": 35,
+        "endLine": 91,
+        "endChar": 38
+      },
+      "revId": "53099a6c2120f50856406580e82bd8f169925ca3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0c6e8a5_797c8f72",
@@ -43,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "24aa9df1_a668c77d",
+        "filename": "src/dawn/common/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-21T23:40:09Z",
+      "side": 1,
+      "message": "Hmm is that necessary? I see that for the dawn_json_generator, we don\u0027t need to add the json files as input, and the python file just makes sure that the json is returned in `get_dependencies`, which I think is being done here already.",
+      "parentUuid": "c0c6e8a5_797c8f72",
+      "revId": "53099a6c2120f50856406580e82bd8f169925ca3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "62e9d1d7_ce1cfa0d",
         "filename": "src/dawn/tests/unittests/VersionTests.cpp",
         "patchSetId": 2
@@ -54,6 +96,24 @@
       "writtenOn": "2022-06-21T23:16:20Z",
       "side": 1,
       "message": "nit: instead of this test, could we more simply static_assert in Version.h that the std::string_view is either empty or 40 chars long? dawn_unittests is not run in Chromium checkouts.",
+      "revId": "53099a6c2120f50856406580e82bd8f169925ca3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fae7d9c1_4846384f",
+        "filename": "src/dawn/tests/unittests/VersionTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-21T23:40:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62e9d1d7_ce1cfa0d",
       "revId": "53099a6c2120f50856406580e82bd8f169925ca3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
