@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2333eab7_72f72220",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-21T03:02:28Z",
+      "side": 1,
+      "message": "PTAL. As far as I can tell, the BackendBinding code in utils/ isn\u0027t used anymore.",
+      "revId": "42f5aefd4423ae057c355a3aa626ec67f70242a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
