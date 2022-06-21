@@ -101,6 +101,10 @@
 		<DisplayString>{*variable};</DisplayString>
 	</Type>
 
+	<Type Name="tint::ast::IntLiteralExpression">
+		<DisplayString>{value}</DisplayString>
+	</Type>
+
 	<Type Name="tint::ast::UintLiteralExpression">
 		<DisplayString>{value}</DisplayString>
 	</Type>
