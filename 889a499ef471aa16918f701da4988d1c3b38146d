@@ -141,6 +141,24 @@
       "parentUuid": "ede58394_a4eb14f4",
       "revId": "889a499ef471aa16918f701da4988d1c3b38146d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "972c4305_0aa3490c",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-21T16:02:00Z",
+      "side": 1,
+      "message": "I\u0027ve copied how our other build flags work in https://dawn-review.googlesource.com/c/dawn/+/94481 to create a tint_build_unittests. Would it be possible for you to test it against Skia to see if it will work?",
+      "parentUuid": "984bcfdb_2028a18d",
+      "revId": "889a499ef471aa16918f701da4988d1c3b38146d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
