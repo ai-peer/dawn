@@ -51,6 +51,24 @@
       "parentUuid": "aadddce6_f8475686",
       "revId": "889a499ef471aa16918f701da4988d1c3b38146d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc782d53_99eaa5e9",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000076
+      },
+      "writtenOn": "2022-06-21T14:52:33Z",
+      "side": 1,
+      "message": "No, Skia (unlike many of the other chromium-adjacent projects), doesn\u0027t pull in //build (or //testing, which is a new one to me). Our GN build is more-or-less self-contained. Chromium doesn\u0027t directly use our top-level GN files/rules. There is a separate GN files that control how Skia is built into chromium checked into that repo (https://source.chromium.org/chromium/chromium/src/+/main:skia/BUILD.gn). That file just relies on Skia\u0027s GN files to declare lists of source files for various components.\n\nWe\u0027ve hit some similar issues to this with ANGLE, because we had a push to use ANGLE\u0027s GN files when compiling it in (standalone) Skia. Those GN files have a similar dependence on chromium\u0027s //build, so they added a GN variable (set via build_overrides), called `angle_has_build`. That\u0027s used to guard all imports of things in //build, and to choose reasonable stand-alone defaults when set to false.",
+      "parentUuid": "0c4973c2_d069975d",
+      "revId": "889a499ef471aa16918f701da4988d1c3b38146d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
