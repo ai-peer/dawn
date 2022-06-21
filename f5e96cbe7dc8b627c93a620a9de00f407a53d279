@@ -34,6 +34,24 @@
       "parentUuid": "afc1b566_5acc079e",
       "revId": "f5e96cbe7dc8b627c93a620a9de00f407a53d279",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2619b3dd_2f90d093",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-21T18:22:06Z",
+      "side": 1,
+      "message": "the import into google3 is somewhat manual so we can indeed fix it up in the next import. However, it may not be trivial to remove the old backend binding code and migrate to the new swap chain and configure the glfw window accordingly. And, doing that work would block the import. So I have a slight preference for updating g3 first to not introduce dependencies on the next import - unless you think it will be easy to do?",
+      "parentUuid": "d56cc7bb_b7d7f739",
+      "revId": "f5e96cbe7dc8b627c93a620a9de00f407a53d279",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
