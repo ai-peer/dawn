@@ -16,6 +16,24 @@
       "message": "This import is causing an issue with the Skia build of Dawn. We don\u0027t have a //testing/test.gni",
       "revId": "889a499ef471aa16918f701da4988d1c3b38146d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c4973c2_d069975d",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-21T14:11:24Z",
+      "side": 1,
+      "message": "Does skia have the equivalent file somewhere else or just does without it? What does it use when integrating into Chromium? As far as I know we got the file from Chromium and it\u0027s what provides the `test` template.",
+      "parentUuid": "aadddce6_f8475686",
+      "revId": "889a499ef471aa16918f701da4988d1c3b38146d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
