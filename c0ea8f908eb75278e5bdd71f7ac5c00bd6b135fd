@@ -33,6 +33,24 @@
       "message": "hm, instead of hard-coding this header\n\nDawn\u0027s BUILD.gn has a `build_with_chromium` variable.\n\nWDYT of instead making the build do `dawn_version_generator.py --version-header path/to/generated/version/header`.\n\nThen, maybe we could even put the version inside Chromium\u0027s source tree instead of Dawn\u0027s. Basically, so Dawn isn\u0027t restricted to a hard-coded version path both in this generator file and in the .gitignore. Other embedders of Dawn could more easily pass in their own file.",
       "revId": "c0ea8f908eb75278e5bdd71f7ac5c00bd6b135fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eb68296_d0866a87",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-21T23:08:35Z",
+      "side": 1,
+      "message": "I ended up plumbing the path to the version file via the build_overrides since I felt like it made more sense to have Chromium specify it instead of us hard-coding the Chromium path here. PTAL and lmk what you think about this new approach.",
+      "parentUuid": "f10cf8cd_914639fb",
+      "revId": "c0ea8f908eb75278e5bdd71f7ac5c00bd6b135fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
