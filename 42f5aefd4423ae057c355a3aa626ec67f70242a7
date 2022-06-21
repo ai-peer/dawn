@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "222d6093_8099179d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-21T13:28:18Z",
+      "side": 1,
+      "message": "I didn\u0027t know there was more to remove, so I didn\u0027t have plans to remove it. Taking it out piece by piece seems fine though? This gets the code out of the way for other cleanups.",
+      "parentUuid": "52a9336a_0137e0f3",
+      "revId": "42f5aefd4423ae057c355a3aa626ec67f70242a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a57d9d68_8c062727",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-06-21T12:58:50Z",
       "side": 1,
       "message": "nit: this is no longer needed.",
+      "revId": "42f5aefd4423ae057c355a3aa626ec67f70242a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b95a5a86_4b1c2781",
+        "filename": "src/dawn/samples/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-21T13:28:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a57d9d68_8c062727",
       "revId": "42f5aefd4423ae057c355a3aa626ec67f70242a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
