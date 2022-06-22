@@ -539,8 +539,6 @@ libtint_source_set("libtint_core_all_src") {
     "transform/vertex_pulling.h",
     "transform/while_to_loop.cc",
     "transform/while_to_loop.h",
-    "transform/wrap_arrays_in_structs.cc",
-    "transform/wrap_arrays_in_structs.h",
     "transform/zero_init_workgroup_memory.cc",
     "transform/zero_init_workgroup_memory.h",
     "utils/bitcast.h",
@@ -1194,7 +1192,6 @@ tint_unittests_source_set("tint_unittests_transform_src") {
     "transform/vectorize_scalar_matrix_constructors_test.cc",
     "transform/vertex_pulling_test.cc",
     "transform/while_to_loop_test.cc",
-    "transform/wrap_arrays_in_structs_test.cc",
     "transform/zero_init_workgroup_memory_test.cc",
   ]
 }
