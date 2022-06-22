@@ -16,6 +16,57 @@
       "message": "PTAL, thanks!\n",
       "revId": "30e54ad19f82df8ea45928a64476d816a0fe576b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ea131a4_283bad62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-22T15:26:48Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "30e54ad19f82df8ea45928a64476d816a0fe576b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25a78ff1_0b7c610e",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-22T15:26:48Z",
+      "side": 1,
+      "message": "If the formats are normalized, do we need to clamp to [0, 1] or [-1, 1] or do drivers handle it correctly already? Aaand you added tests for it already. Great!",
+      "revId": "30e54ad19f82df8ea45928a64476d816a0fe576b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c3a9f26_7d09a203",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-22T15:26:48Z",
+      "side": 1,
+      "message": "nit: clamping all the components doesn\u0027t really hurt: even if it does a bit more computations, the looping + branching is also expensive. And it would make the code very slightly simpler (for example with `return {clamp(r), clamp(g), ...};`)",
+      "revId": "30e54ad19f82df8ea45928a64476d816a0fe576b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
