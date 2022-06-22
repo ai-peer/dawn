@@ -22,6 +22,30 @@
       },
       "revId": "7d2b9d9e8344b54677ce7079a2bb16066b60dfda",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed672555_5ab2f3cd",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-22T18:41:05Z",
+      "side": 1,
+      "message": "Ah! Good catch thanks! Fixed in https://dawn-review.googlesource.com/c/dawn/+/94528",
+      "parentUuid": "930a0fa4_41421ef4",
+      "range": {
+        "startLine": 136,
+        "startChar": 8,
+        "endLine": 136,
+        "endChar": 14
+      },
+      "revId": "7d2b9d9e8344b54677ce7079a2bb16066b60dfda",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
