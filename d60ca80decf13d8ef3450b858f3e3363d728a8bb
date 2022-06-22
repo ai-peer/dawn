@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "199ab0c2_6508305d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-22T23:22:24Z",
+      "side": 1,
+      "message": "Kai, PTAL - this helps local builds a ton, but unfortunately not Swarming jobs. Still helpful regardless",
+      "revId": "d60ca80decf13d8ef3450b858f3e3363d728a8bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
