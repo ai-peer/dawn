@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "930a0fa4_41421ef4",
+        "filename": "generator/dawn_version_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1002886
+      },
+      "writtenOn": "2022-06-22T17:33:30Z",
+      "side": 1,
+      "message": "This indentation is incorrect, or deps needs to be initialized outside the if statement.",
+      "range": {
+        "startLine": 136,
+        "startChar": 8,
+        "endLine": 136,
+        "endChar": 14
+      },
+      "revId": "7d2b9d9e8344b54677ce7079a2bb16066b60dfda",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
