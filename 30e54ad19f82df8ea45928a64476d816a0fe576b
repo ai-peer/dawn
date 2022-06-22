@@ -37,6 +37,46 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "67dde8a4_0bc31231",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-22T17:03:52Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "30e54ad19f82df8ea45928a64476d816a0fe576b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e76b3cf_65b639bb",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-22T17:03:52Z",
+      "side": 1,
+      "message": "nit: this could be passed as `const Color\u0026`",
+      "range": {
+        "startLine": 648,
+        "startChar": 39,
+        "endLine": 648,
+        "endChar": 58
+      },
+      "revId": "30e54ad19f82df8ea45928a64476d816a0fe576b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "25a78ff1_0b7c610e",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 1
