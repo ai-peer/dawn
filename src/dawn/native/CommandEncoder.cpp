@@ -645,6 +645,58 @@ bool IsReadOnlyDepthStencilAttachment(
     return true;
 }
 
+Color ClampClearColorValueToLegalRange(Color originalColor, const Format& format) {
+    const AspectInfo& aspectInfo = format.GetAspectInfo(Aspect::Color);
+    double minValue = 0;
+    double maxValue = 0;
+    switch (aspectInfo.baseType) {
+        case wgpu::TextureComponentType::Float: {
+            return originalColor;
+        }
+        case wgpu::TextureComponentType::Sint: {
+            const uint32_t bitsPerComponent =
+                (aspectInfo.block.byteSize * 8 / format.componentCount);
+            maxValue =
+                static_cast<double>((static_cast<uint64_t>(1) << (bitsPerComponent - 1)) - 1);
+            minValue = -static_cast<double>(static_cast<uint64_t>(1) << (bitsPerComponent - 1));
+            break;
+        }
+        case wgpu::TextureComponentType::Uint: {
+            const uint32_t bitsPerComponent =
+                (aspectInfo.block.byteSize * 8 / format.componentCount);
+            maxValue = static_cast<double>((static_cast<uint64_t>(1) << bitsPerComponent) - 1);
+            break;
+        }
+        case wgpu::TextureComponentType::DepthComparison:
+        default:
+            UNREACHABLE();
+            break;
+    }
+
+    Color outputColor = {};
+    for (uint32_t componentIndex = 0; componentIndex < format.componentCount; ++componentIndex) {
+        switch (componentIndex) {
+            case 0:
+                outputColor.r = std::clamp(originalColor.r, minValue, maxValue);
+                break;
+            case 1:
+                outputColor.g = std::clamp(originalColor.g, minValue, maxValue);
+                break;
+            case 2:
+                outputColor.b = std::clamp(originalColor.b, minValue, maxValue);
+                break;
+            case 3:
+                outputColor.a = std::clamp(originalColor.a, minValue, maxValue);
+                break;
+            default:
+                UNREACHABLE();
+                break;
+        }
+    }
+
+    return outputColor;
+}
+
 }  // namespace
 
 MaybeError ValidateCommandEncoderDescriptor(const DeviceBase* device,
@@ -855,10 +907,12 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                 cmd->colorAttachments[index].loadOp = descriptor->colorAttachments[i].loadOp;
                 cmd->colorAttachments[index].storeOp = descriptor->colorAttachments[i].storeOp;
 
+                Color color = HasDeprecatedColor(descriptor->colorAttachments[i])
+                                  ? descriptor->colorAttachments[i].clearColor
+                                  : descriptor->colorAttachments[i].clearValue;
+
                 cmd->colorAttachments[index].clearColor =
-                    HasDeprecatedColor(descriptor->colorAttachments[i])
-                        ? descriptor->colorAttachments[i].clearColor
-                        : descriptor->colorAttachments[i].clearValue;
+                    ClampClearColorValueToLegalRange(color, view->GetFormat());
 
                 usageTracker.TextureViewUsedAs(view, wgpu::TextureUsage::RenderAttachment);
 
