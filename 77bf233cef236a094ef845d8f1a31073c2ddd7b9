@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4cea811_6de1b9d7",
+        "filename": "test/tint/access/let/matrix.wgsl.expected.spvasm",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-22T15:02:45Z",
+      "side": 0,
+      "message": "Hah, free dead code elimination ....\n\nMaybe we should change the example to return the value so we show the spv is doing the right thing instead of just ... being empty?",
+      "revId": "77bf233cef236a094ef845d8f1a31073c2ddd7b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de0b5896_0b759719",
+        "filename": "test/tint/bug/tint/764.wgsl.expected.spvasm",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-22T15:02:45Z",
+      "side": 0,
+      "message": "ditto",
+      "revId": "77bf233cef236a094ef845d8f1a31073c2ddd7b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

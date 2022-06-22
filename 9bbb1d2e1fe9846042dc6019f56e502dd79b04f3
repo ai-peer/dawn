@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83da00a6_4e5ed998",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-22T15:02:45Z",
+      "side": 1,
+      "message": "Can we add a comment about this one that it is evaluating the value at the index, not the index itself as the index is already evaluated?\n\n(But said in a way that makes sense, heh)",
+      "revId": "9bbb1d2e1fe9846042dc6019f56e502dd79b04f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f605c3a_a6b1a4ef",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-22T15:02:45Z",
+      "side": 1,
+      "message": "nit: element count by type ? this doesn\u0027t actually return the type",
+      "revId": "9bbb1d2e1fe9846042dc6019f56e502dd79b04f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "219db294_3c005b4a",
+        "filename": "test/tint/access/let/matrix.wgsl.expected.msl",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-22T15:02:45Z",
+      "side": 1,
+      "message": "Is this going to trigger a dead code warning in MSL now? (We artifically disable all warnings in MSL when building through dawn but that isn\u0027t great)\n\n(Same question for GLSL and HLSL as we end up with a dead `v` in all three)",
+      "revId": "9bbb1d2e1fe9846042dc6019f56e502dd79b04f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
