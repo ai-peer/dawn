@@ -50,6 +50,24 @@
       "message": "nit: could be inside the `if` block",
       "revId": "bec4bf5afe6fd19339aad046959a5c510f0b4a45",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b03fd179_81270823",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-22T22:29:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b4f286c_3cf6dc36",
+      "revId": "bec4bf5afe6fd19339aad046959a5c510f0b4a45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
