@@ -195,6 +195,24 @@
       "parentUuid": "42efd803_85ead9d3",
       "revId": "889a499ef471aa16918f701da4988d1c3b38146d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8a1b387_e8f5b8f8",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-22T17:06:40Z",
+      "side": 1,
+      "message": "The followup change has landed on the Dawn side, so hopefully that will resolve the Skia roll.",
+      "parentUuid": "e715a877_80a07159",
+      "revId": "889a499ef471aa16918f701da4988d1c3b38146d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
