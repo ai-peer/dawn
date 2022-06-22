@@ -214,6 +214,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "786463e9_25b19556",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1333,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-06-22T01:44:13Z",
+      "side": 1,
+      "message": "Your worry is valid. I added a TODO and filed an issue to handle these more special cases. As Bt709-\u003eSRGB probably is most common case, for now let\u0027s just handle that only and see how it will turn out later. Anyway too many \u0027if\u0027 branches in shader also introduce extra overhead.",
+      "parentUuid": "aaeeb8bd_62bc2a3c",
+      "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0bfd8d46_5e201a5d",
         "filename": "src/tint/transform/multiplanar_external_texture.cc",
         "patchSetId": 2
