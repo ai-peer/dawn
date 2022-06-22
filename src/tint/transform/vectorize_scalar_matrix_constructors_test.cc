@@ -31,7 +31,61 @@ TEST_F(VectorizeScalarMatrixConstructorsTest, ShouldRunEmptyModule) {
     EXPECT_FALSE(ShouldRun<VectorizeScalarMatrixConstructors>(src));
 }
 
-TEST_P(VectorizeScalarMatrixConstructorsTest, SingleScalars) {
+TEST_P(VectorizeScalarMatrixConstructorsTest, SingleScalarsConstant) {
+    uint32_t cols = GetParam().first;
+    uint32_t rows = GetParam().second;
+    std::string matrix_no_type = "mat" + std::to_string(cols) + "x" + std::to_string(rows);
+    std::string matrix = matrix_no_type + "<f32>";
+    std::string vector = "vec" + std::to_string(rows) + "<f32>";
+    auto vectorized_parameter = [&](std::string scalar) -> std::string {
+        std::string parameter;
+        for (uint32_t c = 0; c < cols; c++) {
+            if (c > 0) {
+                parameter += ", ";
+            }
+            parameter += vector + "(";
+            for (uint32_t r = 0; r < rows; r++) {
+                if (r > 0) {
+                    parameter += ", ";
+                }
+                parameter += scalar;
+            }
+            parameter += ")";
+        }
+        return parameter;
+    };
+
+    std::string src = R"(
+var<private> m : ${matrix} = ${matrix}(f32(8.0f));
+
+@fragment
+fn main() {
+  let m = ${matrix}(42.0);
+}
+)";
+
+    std::string expect = R"(
+var<private> m : ${matrix} = ${matrix}(${vectorized_parameter_1});
+
+@fragment
+fn main() {
+  let m = ${matrix}(${vectorized_parameter_2});
+}
+)";
+    src = utils::ReplaceAll(src, "${matrix}", matrix);
+    expect = utils::ReplaceAll(expect, "${matrix}", matrix);
+    expect =
+        utils::ReplaceAll(expect, "${vectorized_parameter_1}", vectorized_parameter("f32(8.0f)"));
+    expect = utils::ReplaceAll(expect, "${vectorized_parameter_2}", vectorized_parameter("42.0"));
+
+    EXPECT_TRUE(ShouldRun<VectorizeScalarMatrixConstructors>(src));
+
+    auto got = Run<VectorizeScalarMatrixConstructors>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(VectorizeScalarMatrixConstructorsTest, SingleScalarsNonConstant) {
     uint32_t cols = GetParam().first;
     uint32_t rows = GetParam().second;
     std::string matrix_no_type = "mat" + std::to_string(cols) + "x" + std::to_string(rows);
@@ -55,7 +109,8 @@ TEST_P(VectorizeScalarMatrixConstructorsTest, SingleScalars) {
     std::string src = R"(
 @fragment
 fn main() {
-  let m = ${matrix}(42.0);
+  var f : f32 = 1.0f + 2.0f;
+  let m = ${matrix}(f + 3.0f);
 }
 )";
 
@@ -66,7 +121,8 @@ fn build_${matrix_no_type}(value : f32) -> ${matrix} {
 
 @fragment
 fn main() {
-  let m = build_${matrix_no_type}(42.0);
+  var f : f32 = (1.0f + 2.0f);
+  let m = build_${matrix_no_type}((f + 3.0f));
 }
 )";
     src = utils::ReplaceAll(src, "${matrix}", matrix);

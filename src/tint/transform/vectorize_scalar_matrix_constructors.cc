@@ -17,9 +17,11 @@
 #include <unordered_map>
 #include <utility>
 
+#include "src/tint/ast/traverse_expressions.h"
 #include "src/tint/program_builder.h"
 #include "src/tint/sem/call.h"
 #include "src/tint/sem/expression.h"
+#include "src/tint/sem/materialize.h"
 #include "src/tint/sem/type_constructor.h"
 #include "src/tint/utils/map.h"
 
@@ -86,6 +88,44 @@ void VectorizeScalarMatrixConstructors::Run(CloneContext& ctx, const DataMap&, D
         };
 
         if (args.size() == 1) {
+            // Helper function to determine whether the scalar parameter of constructor is a
+            // const_expr. Currently initializer of module scope constant and module scope variable
+            // is expected to be const_expr, and currently const_expr only allow literal and type
+            // constructor. When using such const_expr as the parameter of single-scalar matrix
+            // constructor, we can safely duplicate the scalar parameter of single-scalar matrix
+            // constructor, rather than making a function call which is not allowed to be
+            // initializer for constants and global variables in SPIRV.
+            auto isConstantExpr = [&ctx](const ast::Expression* param) -> bool {
+                bool is_const = true;
+                diag::List diagnostics;
+                ast::TraverseExpressions(param, diagnostics, [&](const ast::Expression* e) {
+                    if (e->Is<ast::LiteralExpression>()) {
+                        return ast::TraverseAction::Descend;
+                    }
+                    if (auto* ce = e->As<ast::CallExpression>()) {
+                        auto* sem = ctx.src->Sem().Get(ce);
+                        if (sem->Is<sem::Materialize>()) {
+                            // Materialize can only occur on compile time expressions, so this
+                            // sub-tree must be constant.
+                            return ast::TraverseAction::Skip;
+                        }
+                        auto* call = sem->As<sem::Call>();
+                        if (call->Target()->Is<sem::TypeConstructor>()) {
+                            return ast::TraverseAction::Descend;
+                        }
+                    }
+
+                    is_const = false;
+                    return ast::TraverseAction::Stop;
+                });
+                return is_const;
+            };
+            if (isConstantExpr(args[0]->Declaration())) {
+                // If the single scalalr parameter is const_expr, duplicate it rather than make a
+                // function call.
+                return build_mat(
+                    [&](uint32_t, uint32_t) { return ctx.Clone(args[0]->Declaration()); });
+            }
             // Generate a helper function for constructing the matrix.
             // This is done to ensure that the single argument value is only evaluated once, and
             // with the correct expression evaluation order.
