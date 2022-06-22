@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70fe4f43_8dea035a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-22T20:20:54Z",
+      "side": 1,
+      "message": "testing this in https://chromium-review.googlesource.com/c/chromium/src/+/3715768\n\nLocally it seems to help significantly",
+      "revId": "d08856595f0414a90e265d13f81eb364e588c57c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
