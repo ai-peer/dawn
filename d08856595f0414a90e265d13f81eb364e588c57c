@@ -16,6 +16,23 @@
       "message": "testing this in https://chromium-review.googlesource.com/c/chromium/src/+/3715768\n\nLocally it seems to help significantly",
       "revId": "d08856595f0414a90e265d13f81eb364e588c57c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3016c2a_79d59be9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2022-06-22T20:26:14Z",
+      "side": 1,
+      "message": "LGTM assuming Chromium is happy.",
+      "revId": "d08856595f0414a90e265d13f81eb364e588c57c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
