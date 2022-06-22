@@ -23,15 +23,13 @@ typedef void* EGLImage;
 namespace dawn::native::opengl {
 
 struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptions : public AdapterDiscoveryOptionsBase {
-    AdapterDiscoveryOptions();
+    explicit AdapterDiscoveryOptions(WGPUBackendType type);
 
     void* (*getProc)(const char*);
 };
 
-struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptionsES : public AdapterDiscoveryOptionsBase {
+struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptionsES : public AdapterDiscoveryOptions {
     AdapterDiscoveryOptionsES();
-
-    void* (*getProc)(const char*);
 };
 
 using PresentCallback = void (*)(void*);
