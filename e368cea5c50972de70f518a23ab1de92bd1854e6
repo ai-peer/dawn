@@ -232,6 +232,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e30328d3_d89b8adf",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1333,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-06-22T03:13:04Z",
+      "side": 1,
+      "message": "As ref,\nCopyToTexture handles such exceptions through a \"step_mask\"(https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/CopyTextureForBrowserHelper.cpp;l\u003d55). The great things is that we we could generate all of the shader steps that color space conversion could used and choose which step we want to use. And the step_mask value is generated through the source/dst alpha states and color space states\nThe implementation here: https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/CopyTextureForBrowserHelper.cpp;l\u003d439",
+      "parentUuid": "786463e9_25b19556",
+      "revId": "e368cea5c50972de70f518a23ab1de92bd1854e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0bfd8d46_5e201a5d",
         "filename": "src/tint/transform/multiplanar_external_texture.cc",
         "patchSetId": 2
