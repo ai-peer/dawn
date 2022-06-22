@@ -17,22 +17,22 @@
 #include <memory>
 #include <vector>
 
+#include "dawn/native/opengl/UtilsEGL.h"
+
 namespace dawn::native::opengl {
 
-std::unique_ptr<ContextEGL> ContextEGL::Create(EGLFunctions& egl, EGLenum api) {
+ResultOrError<std::unique_ptr<ContextEGL>> ContextEGL::Create(EGLFunctions& egl, EGLenum api) {
     EGLDisplay display = egl.GetCurrentDisplay();
 
     if (display == EGL_NO_DISPLAY) {
         display = egl.GetDisplay(EGL_DEFAULT_DISPLAY);
     }
 
-    if (display == EGL_NO_DISPLAY) {
-        return nullptr;
-    }
+    DAWN_TRY(CheckEGL(egl, display != EGL_NO_DISPLAY, "eglGetDisplay"));
 
     EGLint renderableType = api == EGL_OPENGL_ES_API ? EGL_OPENGL_ES3_BIT : EGL_OPENGL_BIT;
 
-    egl.Initialize(display, nullptr, nullptr);
+    DAWN_TRY(CheckEGL(egl, egl.Initialize(display, nullptr, nullptr), "eglInitialize"));
     EGLint config_attribs[] = {EGL_RED_SIZE,
                                8,
                                EGL_GREEN_SIZE,
@@ -51,13 +51,10 @@ std::unique_ptr<ContextEGL> ContextEGL::Create(EGLFunctions& egl, EGLenum api) {
 
     EGLint num_config;
     EGLConfig config;
-    if (egl.ChooseConfig(display, config_attribs, &config, 1, &num_config) == EGL_FALSE) {
-        return nullptr;
-    }
+    DAWN_TRY(CheckEGL(egl, egl.ChooseConfig(display, config_attribs, &config, 1, &num_config),
+                      "eglChooseConfig"));
 
-    if (!egl.BindAPI(api)) {
-        return nullptr;
-    }
+    DAWN_TRY(CheckEGL(egl, egl.BindAPI(api), "eglBindAPI"));
 
     EGLint major, minor;
     if (api == EGL_OPENGL_ES_API) {
@@ -71,9 +68,7 @@ std::unique_ptr<ContextEGL> ContextEGL::Create(EGLFunctions& egl, EGLenum api) {
         EGL_CONTEXT_MAJOR_VERSION, major, EGL_CONTEXT_MINOR_VERSION, minor, EGL_NONE, EGL_NONE,
     };
     EGLContext context = egl.CreateContext(display, config, EGL_NO_CONTEXT, attrib_list);
-    if (!context) {
-        return nullptr;
-    }
+    DAWN_TRY(CheckEGL(egl, context != EGL_NO_CONTEXT, "eglCreateContext"));
 
     return std::make_unique<ContextEGL>(egl, display, context);
 }
