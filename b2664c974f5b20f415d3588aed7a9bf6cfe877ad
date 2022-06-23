@@ -1,0 +1,199 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d45f89c8_3b823ff1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-23T09:12:44Z",
+      "side": 1,
+      "message": "Appreciate the gesture, but not needed here.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 60
+      },
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ac6ccc3_2719fbd3",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 5510,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-23T09:12:44Z",
+      "side": 1,
+      "message": "uberdoober nit:\n\n```\nreturn Switch(parser_impl_.ConvertType(inst.type_id()),\n       [\u0026](const I32*) { return TypedExpression(result_type, builder_.Expr(i32(v))); },\n       [\u0026](const U32*) { return TypedExpression(result_type, builder_.Expr(u32(v))); });\n```\n\nIs equivalent and removes a second vtable hit when `result_type-\u003eIs\u003cU32\u003e()`.",
+      "range": {
+        "startLine": 5505,
+        "startChar": 0,
+        "endLine": 5510,
+        "endChar": 18
+      },
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dc8269a_d8b92475",
+        "filename": "src/tint/tint.natvis",
+        "patchSetId": 7
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-23T09:12:44Z",
+      "side": 1,
+      "message": "note: these no longer exist.",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 8
+      },
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8877403_afb199b6",
+        "filename": "src/tint/transform/spirv_atomic.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-23T09:12:44Z",
+      "side": 1,
+      "message": "...",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 15
+      },
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7587325_a51daa90",
+        "filename": "src/tint/transform/spirv_atomic.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-23T09:12:44Z",
+      "side": 1,
+      "message": "nit: `SPIR-V reader`. (yup, I\u0027m aware I wrote this 😊)",
+      "range": {
+        "startLine": 39,
+        "startChar": 45,
+        "endLine": 39,
+        "endChar": 57
+      },
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0abe49db_7a2d919e",
+        "filename": "src/tint/transform/spirv_atomic_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-23T09:12:44Z",
+      "side": 1,
+      "message": "We\u0027ve got coverage of `atomicStore` and `atomicCompareExchangeWeak`. Please can we have at least one unit test for:\n\n* `atomicLoad`\n* `atomicExchange`\n* `atomicAdd`\n* `atomicSub`\n* `atomicMin`\n* `atomicMax`\n* `atomicAnd`\n* `atomicOr`\n* `atomicXor`",
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca7d8b51_0ac4a439",
+        "filename": "src/tint/utils/unique_vector.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-23T09:12:44Z",
+      "side": 1,
+      "message": "Nice change, but belongs in a separate CL.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 24
+      },
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f5a2d87_fabb8673",
+        "filename": "src/tint/utils/unique_vector.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-23T09:12:44Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 24
+      },
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "091f847a_bd640ba2",
+        "filename": "test/tint/builtins/atomics/array/aliased_arrays.wgsl",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-23T09:12:44Z",
+      "side": 1,
+      "message": "Please move these `atomicStore` tests to:\n\n`test/tint/builtins/atomicStore/array/aliased_arrays.wgsl`",
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
