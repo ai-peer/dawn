@@ -16,6 +16,24 @@
       "message": "Just a heads up that I\u0027ll try and set aside some time to clean up the spir-v for all of these, and I\u0027ll likely end up moving them to `test/tint/builtins/atomicXXX/...`",
       "revId": "50c83e8c113548177a0898cf04a32fa9148ef77e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69ee3002_69b59580",
+        "filename": "test/tint/builtins/atomics/from_gen/literal/atomicAdd/storage_i32.spvasm",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T17:41:32Z",
+      "side": 1,
+      "message": "ACK.",
+      "parentUuid": "e39f0102_7ac286e4",
+      "revId": "50c83e8c113548177a0898cf04a32fa9148ef77e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

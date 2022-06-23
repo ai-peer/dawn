@@ -602,6 +602,24 @@
       "parentUuid": "ed2f2d2e_660aa438",
       "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72d6d01b_44e8754c",
+        "filename": "test/tint/builtins/atomics/array/aliased_arrays.wgsl",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T17:41:32Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "63c5801b_95f37826",
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
