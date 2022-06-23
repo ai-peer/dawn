@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76c64fd8_84b83bb4",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-23T13:08:42Z",
+      "side": 1,
+      "message": "Right, the name of the expression was throwing me off, I was reading it as this was the accessor expression so, from `arr[2 + 2]` this would be `2+2`, but it\u0027s not that, it\u0027s the whole `arr[4]` as we\u0027ve already resolved the `2+2`.",
+      "parentUuid": "374f0f05_527dd3ba",
+      "revId": "9bbb1d2e1fe9846042dc6019f56e502dd79b04f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f605c3a_a6b1a4ef",
