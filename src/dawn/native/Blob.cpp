@@ -15,14 +15,60 @@
 #include <utility>
 
 #include "dawn/common/Assert.h"
+#include "dawn/common/Math.h"
 #include "dawn/native/Blob.h"
 
 namespace dawn::native {
 
-Blob CreateBlob(size_t size) {
+namespace {
+
+template <typename T>
+std::pair<void*, std::function<void()>> AllocDataAsArray(size_t byteLength) {
+    static_assert(alignof(T) == sizeof(T));
+    T* data = new T[Align(byteLength, alignof(T)) / sizeof(T)];
+    std::function<void()> deleter = [=]() { delete[] data; };
+    return {data, std::move(deleter)};
+}
+
+}  // namespace
+
+Blob CreateBlob(size_t size, size_t alignment) {
+    ASSERT(IsPowerOfTwo(alignment));
+    ASSERT(alignment != 0);
     if (size > 0) {
-        uint8_t* data = new uint8_t[size];
-        return Blob::UnsafeCreateWithDeleter(data, size, [=]() { delete[] data; });
+        void* ptr;
+        std::function<void()> deleter;
+        switch (alignment) {
+            case 1: {
+                uint8_t* data = new uint8_t[size];
+                ptr = data;
+                deleter = [=]() { delete[] data; };
+                break;
+            }
+            case alignof(uint16_t): {
+                std::tie(ptr, deleter) = AllocDataAsArray<uint16_t>(size);
+                break;
+            }
+            case alignof(uint32_t): {
+                std::tie(ptr, deleter) = AllocDataAsArray<uint32_t>(size);
+                break;
+            }
+            case alignof(uint64_t): {
+                std::tie(ptr, deleter) = AllocDataAsArray<uint64_t>(size);
+                break;
+            }
+            default: {
+                // Allocate extra space so that there will be sufficient space for |size| even after
+                // the |data| pointer is aligned.
+                // TODO(crbug.com/dawn/824): Use aligned_alloc when possible. It should be available
+                // with C++17 but on macOS it also requires macOS 10.15 to work.
+                size_t allocatedSize = size + alignment - 1;
+                uint8_t* data = new uint8_t[allocatedSize];
+                ptr = AlignPtr(data, alignment);
+                deleter = [=]() { delete[] data; };
+            }
+        }
+        return Blob::UnsafeCreateWithDeleter(static_cast<uint8_t*>(ptr), size, std::move(deleter));
     } else {
         return Blob();
     }
@@ -75,6 +121,16 @@ uint8_t* Blob::Data() {
 
 size_t Blob::Size() const {
     return mSize;
+}
+
+void Blob::AlignTo(size_t alignment) {
+    if (IsPtrAligned(mData, alignment)) {
+        return;
+    }
+
+    Blob blob = CreateBlob(mSize, alignment);
+    memcpy(blob.Data(), mData, mSize);
+    *this = std::move(blob);
 }
 
 }  // namespace dawn::native
