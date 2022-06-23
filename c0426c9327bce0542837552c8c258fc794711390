@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b052a6a_5e6a474d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-23T09:46:08Z",
+      "side": 1,
+      "message": "Please take a look, thanks! This patch is based on https://dawn-review.googlesource.com/c/dawn/+/94525, which allow using single-scalar matrix constructor as module scope constant/variable initializer when generating SPIRV.",
+      "revId": "c0426c9327bce0542837552c8c258fc794711390",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
