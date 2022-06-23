@@ -1221,6 +1221,10 @@ BufferBase* DeviceBase::APICreateErrorBuffer() {
     return BufferBase::MakeError(this, &desc);
 }
 
+ExternalTextureBase* DeviceBase::APICreateErrorExternalTexture() {
+    return ExternalTextureBase::MakeError(this);
+}
+
 // Other Device API methods
 
 // Returns true if future ticking is needed.
