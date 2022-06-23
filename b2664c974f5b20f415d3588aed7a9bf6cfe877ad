@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6023db22_804b2ca5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T15:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d45f89c8_3b823ff1",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 60
+      },
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "883eb7b8_b54b4e17",
@@ -41,6 +65,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74976a9d_0f180b1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T15:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "883eb7b8_b54b4e17",
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0fe9bf8_a3095509",
@@ -54,6 +96,24 @@
       "writtenOn": "2022-06-23T13:29:55Z",
       "side": 1,
       "message": "Spirv-tools has a `spvOpcodeIsAtomicOp` (https://github.com/KhronosGroup/SPIRV-Tools/blob/7014be600c7a588ef1886c1a1356f3fc0fea2ebb/source/opcode.cpp#L407) that seems to mention a couple more.\n\nDon\u0027t know if we expose that through the tools api, but if not we should probably make the lists the same.",
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9fe00cb_0d94467f",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T15:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0fe9bf8_a3095509",
       "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -98,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c72bf9fb_263fbd86",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 5518,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T15:42:01Z",
+      "side": 1,
+      "message": "These refer to the spir-v op parameters. Technically \u0027ptr\u0027 is \u0027\u003cid\u003e Pointer\u0027 and \u0027value\u0027 is \u0027\u003cid\u003e Value\u0027, etc. I wanted to keep these formatted to a single line, hence the shorter names. I think it\u0027s more useful to see the operand indices next to each other than have better names for the params.",
+      "parentUuid": "bb74c758_c7e38807",
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2a7c057_7f33a194",
@@ -111,6 +189,24 @@
       "writtenOn": "2022-06-23T13:29:55Z",
       "side": 1,
       "message": "Just break as you have this same error reported below?",
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aceeec7d_36d617ab",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 5553,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T15:42:01Z",
+      "side": 1,
+      "message": "It\u0027s not the same error. This is \"unsupported\", and the other is \"unhandled\". If more ops were added in the future, we\u0027d be able to distinguish which case it is based on the error message.",
+      "parentUuid": "e2a7c057_7f33a194",
       "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -138,6 +234,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e8a71ef_8de3909e",
+        "filename": "src/tint/tint.natvis",
+        "patchSetId": 7
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T15:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8dc8269a_d8b92475",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 8
+      },
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25d4f9cf_dcf02de9",
@@ -151,6 +271,24 @@
       "writtenOn": "2022-06-23T13:29:55Z",
       "side": 1,
       "message": "This private -\u003e public -\u003e private ordering is weird, can we move most of this down to the private section below?",
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b57181dc_13058795",
+        "filename": "src/tint/transform/spirv_atomic.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T15:42:01Z",
+      "side": 1,
+      "message": "I understand, but this is the way we\u0027ve been writing our state structs for transforms. If this one private bothers you, I can make the struct a class and get rid of this one. Honestly, though, I don\u0027t think it\u0027s a big deal.",
+      "parentUuid": "25d4f9cf_dcf02de9",
       "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -172,6 +310,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba959bcd_08cb6e47",
+        "filename": "src/tint/transform/spirv_atomic.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T15:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a203ba1f_4c26ad9b",
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8877403_afb199b6",
@@ -185,6 +341,30 @@
       "writtenOn": "2022-06-23T09:12:44Z",
       "side": 1,
       "message": "...",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 15
+      },
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8de977d4_b3a17ff3",
+        "filename": "src/tint/transform/spirv_atomic.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T15:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8877403_afb199b6",
       "range": {
         "startLine": 31,
         "startChar": 4,
@@ -218,6 +398,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "980a4781_aacaf68c",
+        "filename": "src/tint/transform/spirv_atomic.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T15:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7587325_a51daa90",
+      "range": {
+        "startLine": 39,
+        "startChar": 45,
+        "endLine": 39,
+        "endChar": 57
+      },
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0abe49db_7a2d919e",
@@ -235,6 +439,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b20f14a7_9bfc5a10",
+        "filename": "src/tint/transform/spirv_atomic_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T15:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0abe49db_7a2d919e",
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca7d8b51_0ac4a439",
@@ -248,6 +470,30 @@
       "writtenOn": "2022-06-23T09:12:44Z",
       "side": 1,
       "message": "Nice change, but belongs in a separate CL.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 24
+      },
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45e73033_0677b56e",
+        "filename": "src/tint/utils/unique_vector.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T15:42:01Z",
+      "side": 1,
+      "message": "Accidentally included this. Removed.",
+      "parentUuid": "ca7d8b51_0ac4a439",
       "range": {
         "startLine": 52,
         "startChar": 0,
@@ -281,6 +527,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51eb2c9d_41b9220d",
+        "filename": "src/tint/utils/unique_vector.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T15:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f5a2d87_fabb8673",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 24
+      },
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "091f847a_bd640ba2",
@@ -294,6 +564,24 @@
       "writtenOn": "2022-06-23T09:12:44Z",
       "side": 1,
       "message": "Please move these `atomicStore` tests to:\n\n`test/tint/builtins/atomicStore/array/aliased_arrays.wgsl`",
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed2f2d2e_660aa438",
+        "filename": "test/tint/builtins/atomics/array/aliased_arrays.wgsl",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T15:42:01Z",
+      "side": 1,
+      "message": "I would rather leave this here. This test isn\u0027t about atomicStore, but about any atomic operation on aliased arrays. We have atomicStore tests (though not for arrays) under `test/tint/builtins/atomics/from_gen/**/atomicStore/`, for example, in `test/tint/builtins/atomics/from_gen/var/atomicStore`.",
+      "parentUuid": "091f847a_bd640ba2",
       "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
