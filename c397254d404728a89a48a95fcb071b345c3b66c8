@@ -81,6 +81,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4806fa02_c38971b8",
+        "filename": "src/dawn/native/CacheKey.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-23T22:18:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24f812b7_9a7d072c",
+      "range": {
+        "startLine": 40,
+        "startChar": 16,
+        "endLine": 40,
+        "endChar": 36
+      },
+      "revId": "c397254d404728a89a48a95fcb071b345c3b66c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af6fa7a3_5e3a211e",
@@ -94,6 +118,30 @@
       "writtenOn": "2022-06-23T04:06:03Z",
       "side": 1,
       "message": "WDYT about adding ASSERTs into BlobCache::Load/Store which check that the Dawn version is indeed at the front of the key. Right now, you could begin using the blob cache and we wouldn\u0027t be resilient to changes in Dawn version if you forgot to include the device cache key in the key.",
+      "range": {
+        "startLine": 212,
+        "startChar": 27,
+        "endLine": 212,
+        "endChar": 39
+      },
+      "revId": "c397254d404728a89a48a95fcb071b345c3b66c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f1ac3ad_adc5a0ef",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-23T22:18:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af6fa7a3_5e3a211e",
       "range": {
         "startLine": 212,
         "startChar": 27,
@@ -127,6 +175,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2600e8e_2d74f09e",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-23T22:18:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd6d0293_c23a6971",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 40
+      },
+      "revId": "c397254d404728a89a48a95fcb071b345c3b66c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8a28250_1e4307d2",
@@ -140,6 +212,30 @@
       "writtenOn": "2022-06-23T04:06:03Z",
       "side": 1,
       "message": "uunit: prefer `size_t(6)`",
+      "range": {
+        "startLine": 176,
+        "startChar": 20,
+        "endLine": 176,
+        "endChar": 29
+      },
+      "revId": "c397254d404728a89a48a95fcb071b345c3b66c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58216071_eddbaeb0",
+        "filename": "src/dawn/tests/unittests/native/CacheKeyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-23T22:18:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8a28250_1e4307d2",
       "range": {
         "startLine": 176,
         "startChar": 20,
