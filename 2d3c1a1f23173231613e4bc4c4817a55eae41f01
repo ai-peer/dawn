@@ -50,6 +50,23 @@
       "message": "oh Corentin is OOO - adding another reviewer",
       "revId": "2d3c1a1f23173231613e4bc4c4817a55eae41f01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c017e026_16534c73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-23T19:40:12Z",
+      "side": 1,
+      "message": "LGTM for this CL, but I noticed that Chromium has an equivalent `third_party/khronos` directory which we could consider using in the future. IIUC though, rn that directory is not updated (and not in the DEPS file) as it does not have an auto-roller fetching from (what I think would be) https://github.com/KhronosGroup/EGL-Registry/tree/main/api.\n\nMaybe setting up rollers and relying on DEPS is something we could clean up later on since it will allow us to keep up to date without having to manually add them.",
+      "revId": "2d3c1a1f23173231613e4bc4c4817a55eae41f01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
