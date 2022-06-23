@@ -52,6 +52,24 @@
       "parentUuid": "ae462605_4ee086bd",
       "revId": "6c7b8beadf7a955c12b632d4a4365cf818929520",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e2b7c14_f63213f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-23T13:41:13Z",
+      "side": 1,
+      "message": "Filed https://bugs.chromium.org/p/tint/issues/detail?id\u003d1597 so we can figure out what to do with single scalar constructor. We either remove it or bring it up with the WG.",
+      "parentUuid": "2aa1370e_b8ef9c4a",
+      "revId": "6c7b8beadf7a955c12b632d4a4365cf818929520",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
