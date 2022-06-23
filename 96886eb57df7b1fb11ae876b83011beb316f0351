@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f60d7a_a407be39",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1363,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T14:09:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eaaec0fd_7e59aeea",
+      "range": {
+        "startLine": 1363,
+        "startChar": 33,
+        "endLine": 1363,
+        "endChar": 61
+      },
+      "revId": "96886eb57df7b1fb11ae876b83011beb316f0351",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10af65f7_192849a3",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-06-23T08:32:10Z",
       "side": 1,
       "message": "Likewise, please can we test that `sem::StructMemberAccess::Object()` returns the right thing in `src/tint/resolver/resolver_test.cc` for the `Expr_MemberAccessor_*` tests?",
+      "range": {
+        "startLine": 1905,
+        "startChar": 88,
+        "endLine": 1905,
+        "endChar": 94
+      },
+      "revId": "96886eb57df7b1fb11ae876b83011beb316f0351",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f574e424_3ef137cc",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1905,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T14:09:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10af65f7_192849a3",
       "range": {
         "startLine": 1905,
         "startChar": 88,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c4988aa_1241ca2e",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1972,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T14:09:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a31ae7b3_42951bf6",
+      "range": {
+        "startLine": 1972,
+        "startChar": 77,
+        "endLine": 1972,
+        "endChar": 83
+      },
+      "revId": "96886eb57df7b1fb11ae876b83011beb316f0351",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c72d366_ca58e808",
@@ -93,6 +165,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "859798e9_fecf42f1",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2390,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T14:09:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c72d366_ca58e808",
+      "range": {
+        "startLine": 2390,
+        "startChar": 56,
+        "endLine": 2390,
+        "endChar": 65
+      },
+      "revId": "96886eb57df7b1fb11ae876b83011beb316f0351",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6091b51d_54842316",
@@ -106,6 +202,30 @@
       "writtenOn": "2022-06-23T08:32:10Z",
       "side": 1,
       "message": "Please drop the `Get` to fit with all other accessors. Requires changing the return type to be `sem::Struct*`",
+      "range": {
+        "startLine": 205,
+        "startChar": 18,
+        "endLine": 205,
+        "endChar": 21
+      },
+      "revId": "96886eb57df7b1fb11ae876b83011beb316f0351",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c8526eb_3cb730df",
+        "filename": "src/tint/sem/struct.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-23T14:09:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6091b51d_54842316",
       "range": {
         "startLine": 205,
         "startChar": 18,
