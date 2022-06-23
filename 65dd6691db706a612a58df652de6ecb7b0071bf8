@@ -33,6 +33,75 @@
       "message": "LGTM. \n(looks like some advanced C++ manual memory management technique)",
       "revId": "65dd6691db706a612a58df652de6ecb7b0071bf8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d02215fb_5261e535",
+        "filename": "src/dawn/tests/unittests/native/BlobTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-23T19:18:48Z",
+      "side": 1,
+      "message": "Hmm, I\u0027m wondering if this is a bit too specific of a test w.r.t the impl. I think that just checking that the deleter is called exactly once at the end should be enough. WDYT?",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 13
+      },
+      "revId": "65dd6691db706a612a58df652de6ecb7b0071bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a0c4703_15483386",
+        "filename": "src/dawn/tests/unittests/native/BlobTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-23T19:18:48Z",
+      "side": 1,
+      "message": "nit. I think just checking the size should be sufficient.",
+      "range": {
+        "startLine": 208,
+        "startChar": 12,
+        "endLine": 209,
+        "endChar": 38
+      },
+      "revId": "65dd6691db706a612a58df652de6ecb7b0071bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aac42dab_077c2a38",
+        "filename": "src/dawn/tests/unittests/native/BlobTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-23T19:18:48Z",
+      "side": 1,
+      "message": "I think that for all the expects, it would be nice to do something like:\n```\nEXPECT_TRUE(...) \u003c\u003c \"alignment \u003d \" \u003c\u003c alignment \u003c\u003c \" offset \u003d \" \u003c\u003c offset;\n```\nMainly because otherwise if a test fails it\u0027ll only tell you the line where the expectation fails, but not the arguments from the for loop.\n\nThe other alternative would be to make it a parameterized test but that\u0027s a lot more boilerplate...",
+      "range": {
+        "startLine": 210,
+        "startChar": 12,
+        "endLine": 215,
+        "endChar": 65
+      },
+      "revId": "65dd6691db706a612a58df652de6ecb7b0071bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
