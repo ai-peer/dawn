@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b19fdb54_4e33c071",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-23T09:16:50Z",
+      "side": 1,
+      "message": "Thank you for this fix.\nI\u0027m in the process of reviewing and landing my mega-stack of CLs to support shader creation-time expressions (const-expr).\n\nI suspect that my changes would also fix this. Would you be happy to wait until my changes have landed (ETA mid next week) and then we can re-access whether this change is necessary?",
+      "revId": "6c7b8beadf7a955c12b632d4a4365cf818929520",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
