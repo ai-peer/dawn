@@ -34,6 +34,24 @@
       "parentUuid": "b19fdb54_4e33c071",
       "revId": "6c7b8beadf7a955c12b632d4a4365cf818929520",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aa1370e_b8ef9c4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-23T13:00:25Z",
+      "side": 1,
+      "message": "It looks like https://dawn-review.googlesource.com/c/dawn/+/90502 added the single var constructor but goes a bit further then the spec does. It seems like the test/tint/expressions/splat/call/mat.wgsl shouldn\u0027t be permitted as the only single value constructor takes a matrix, not a scalar.",
+      "parentUuid": "ae462605_4ee086bd",
+      "revId": "6c7b8beadf7a955c12b632d4a4365cf818929520",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
