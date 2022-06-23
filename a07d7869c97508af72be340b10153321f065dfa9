@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c32c0cd1_1a6729f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-23T15:16:05Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "a07d7869c97508af72be340b10153321f065dfa9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca7c3240_024cecab",
+        "filename": "src/tint/writer/spirv/builder_accessor_expression_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-23T15:16:05Z",
+      "side": 1,
+      "message": "nit: This is \u0027one + 2i\u0027, I think",
+      "range": {
+        "startLine": 206,
+        "startChar": 19,
+        "endLine": 206,
+        "endChar": 26
+      },
+      "revId": "a07d7869c97508af72be340b10153321f065dfa9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
