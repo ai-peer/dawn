@@ -24,6 +24,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "883eb7b8_b54b4e17",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-23T13:29:55Z",
+      "side": 1,
+      "message": "Can you add a couple more words here, `are not and never will be`, `are not and are comming in a followup`, `are not and require WGSL changes` ...?",
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0fe9bf8_a3095509",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-23T13:29:55Z",
+      "side": 1,
+      "message": "Spirv-tools has a `spvOpcodeIsAtomicOp` (https://github.com/KhronosGroup/SPIRV-Tools/blob/7014be600c7a588ef1886c1a1356f3fc0fea2ebb/source/opcode.cpp#L407) that seems to mention a couple more.\n\nDon\u0027t know if we expose that through the tools api, but if not we should probably make the lists the same.",
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3ac6ccc3_2719fbd3",
@@ -49,6 +83,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb74c758_c7e38807",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 5518,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-23T13:29:55Z",
+      "side": 1,
+      "message": "Not sure I undertand the comments here, what do `ptr` and `value` mean? We\u0027re storing to the null pointer and always storing 3?",
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2a7c057_7f33a194",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 5553,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-23T13:29:55Z",
+      "side": 1,
+      "message": "Just break as you have this same error reported below?",
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8dc8269a_d8b92475",
         "filename": "src/tint/tint.natvis",
         "patchSetId": 7
@@ -66,6 +134,40 @@
         "endLine": 114,
         "endChar": 8
       },
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25d4f9cf_dcf02de9",
+        "filename": "src/tint/transform/spirv_atomic.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-23T13:29:55Z",
+      "side": 1,
+      "message": "This private -\u003e public -\u003e private ordering is weird, can we move most of this down to the private section below?",
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a203ba1f_4c26ad9b",
+        "filename": "src/tint/transform/spirv_atomic.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-23T13:29:55Z",
+      "side": 1,
+      "message": "Maybe something like: `Check if the structure we\u0027re forking is the result of a fork` ?",
       "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
