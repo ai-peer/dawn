@@ -16,6 +16,40 @@
       "message": "I haven\u0027t reviewed in detail.\n\nBut I\u0027m quite impressed this could be done with such ease.  I was dreading doing this all in the SPIR-V domain, and kept on putting it off.  This is really nice work!",
       "revId": "604bc09747a0d43dd4912c6bfcd5fccd6bdf0230",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fc9d54b_0a922cd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-23T22:13:02Z",
+      "side": 1,
+      "message": "FYI only",
+      "revId": "604bc09747a0d43dd4912c6bfcd5fccd6bdf0230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5562acd_d33d4819",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 5510,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-23T22:13:02Z",
+      "side": 1,
+      "message": "FYI, there is a utility Function::ToI32 that you could use here, e.g.\n\n      if (result_type-\u003eIs\u003cI32\u003e()) { return ToI32(v); }\n      \nIt only adds the i32(.) constructor if the value is not already i32.\n      \nAnd a ToU32 could also be created that would be analogous.\nHeh.  I guess they could be abstracted to To\u003cTYPE\u003e(.).  :-)",
+      "revId": "604bc09747a0d43dd4912c6bfcd5fccd6bdf0230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
