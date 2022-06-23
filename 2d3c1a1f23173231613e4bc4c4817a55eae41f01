@@ -67,6 +67,41 @@
       "message": "LGTM for this CL, but I noticed that Chromium has an equivalent `third_party/khronos` directory which we could consider using in the future. IIUC though, rn that directory is not updated (and not in the DEPS file) as it does not have an auto-roller fetching from (what I think would be) https://github.com/KhronosGroup/EGL-Registry/tree/main/api.\n\nMaybe setting up rollers and relying on DEPS is something we could clean up later on since it will allow us to keep up to date without having to manually add them.",
       "revId": "2d3c1a1f23173231613e4bc4c4817a55eae41f01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3270c41_699c2c36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001961
+      },
+      "writtenOn": "2022-06-23T21:55:27Z",
+      "side": 1,
+      "message": "Thanks for your review!",
+      "revId": "2d3c1a1f23173231613e4bc4c4817a55eae41f01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6953bdce_99679c78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001961
+      },
+      "writtenOn": "2022-06-23T21:55:27Z",
+      "side": 1,
+      "message": "I honestly don\u0027t think EGL is going to be changing very much any more. But yeah, we could do that.",
+      "parentUuid": "c017e026_16534c73",
+      "revId": "2d3c1a1f23173231613e4bc4c4817a55eae41f01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
