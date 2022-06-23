@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "374f0f05_527dd3ba",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-23T09:44:54Z",
+      "side": 1,
+      "message": "The evaluation of the single expression node is the model the whole `Resolver` takes. This behaviour is not specific to this method, and so putting a comment on this specific method would be odd. I\u0027ve shuffled things and added relevant comments to the whole chunk of methods.",
+      "parentUuid": "83da00a6_4e5ed998",
+      "revId": "9bbb1d2e1fe9846042dc6019f56e502dd79b04f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f605c3a_a6b1a4ef",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b750d73d_8e2cffa4",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-23T09:44:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f605c3a_a6b1a4ef",
+      "revId": "9bbb1d2e1fe9846042dc6019f56e502dd79b04f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "219db294_3c005b4a",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-06-22T15:02:45Z",
       "side": 1,
       "message": "Is this going to trigger a dead code warning in MSL now? (We artifically disable all warnings in MSL when building through dawn but that isn\u0027t great)\n\n(Same question for GLSL and HLSL as we end up with a dead `v` in all three)",
+      "revId": "9bbb1d2e1fe9846042dc6019f56e502dd79b04f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa357cbc_c8440f24",
+        "filename": "test/tint/access/let/matrix.wgsl.expected.msl",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-23T09:44:54Z",
+      "side": 1,
+      "message": "Might do, but warnings aren\u0027t treated as errors, and this is transitory.\nOnce we add `const`, `let` will no longer carry the constant value, and the `let`s will no longer be inlined. `const` variable declarations will not be emitted at all.",
+      "parentUuid": "219db294_3c005b4a",
       "revId": "9bbb1d2e1fe9846042dc6019f56e502dd79b04f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

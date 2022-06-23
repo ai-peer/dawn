@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff88e25e_f1ffe1a3",
+        "filename": "test/tint/access/let/matrix.wgsl.expected.spvasm",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-23T09:44:54Z",
+      "side": 0,
+      "message": "Inlining of `let` constant values is transitory. When `const` is introduced (prepping for review right now), this will likely go back to before.",
+      "parentUuid": "c4cea811_6de1b9d7",
+      "revId": "77bf233cef236a094ef845d8f1a31073c2ddd7b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de0b5896_0b759719",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-06-22T15:02:45Z",
       "side": 0,
       "message": "ditto",
+      "revId": "77bf233cef236a094ef845d8f1a31073c2ddd7b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e7ba70d_b14c63cf",
+        "filename": "test/tint/bug/tint/764.wgsl.expected.spvasm",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-23T09:44:54Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "de0b5896_0b759719",
       "revId": "77bf233cef236a094ef845d8f1a31073c2ddd7b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
