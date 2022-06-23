@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e160bf6_b31ab91c",
+        "filename": "test/tint/expressions/splat/call/mat.wgsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-23T12:59:08Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem right, the spec doesn\u0027t have a single element constructor for matrix except for providing another matrix. Did we add this in anticipation of adding it to the spec?",
+      "revId": "3b5edf143505f6b97f065e83de0d63f647fd3e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
