@@ -16,6 +16,24 @@
       "message": "Thank you for this fix.\nI\u0027m in the process of reviewing and landing my mega-stack of CLs to support shader creation-time expressions (const-expr).\n\nI suspect that my changes would also fix this. Would you be happy to wait until my changes have landed (ETA mid next week) and then we can re-access whether this change is necessary?",
       "revId": "6c7b8beadf7a955c12b632d4a4365cf818929520",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae462605_4ee086bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-23T09:46:00Z",
+      "side": 1,
+      "message": "Thanks for your reply! There is another patch (94533) adding end-to-end tests for single-scalar matrix constructor, please let me know what do you think about it too, thanks.\nI have another concern, that currently in WGSL spec it seems not having a single-scalar constructor for matrix (if I get it right), though I think it should be helpful and we already implement it in Tint, so should I raise this issue in WGSL spec\u0027s github or WG meeting?",
+      "parentUuid": "b19fdb54_4e33c071",
+      "revId": "6c7b8beadf7a955c12b632d4a4365cf818929520",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
