@@ -584,6 +584,24 @@
       "parentUuid": "091f847a_bd640ba2",
       "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63c5801b_95f37826",
+        "filename": "test/tint/builtins/atomics/array/aliased_arrays.wgsl",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-23T15:51:17Z",
+      "side": 1,
+      "message": "But this is an end-to-end test, which isn\u0027t about implementation specifics, and something we intend to share with other implementors. I\u0027m actively trying to reduce the inconsistent directory structure of `test/tint/`.\nPlease move.",
+      "parentUuid": "ed2f2d2e_660aa438",
+      "revId": "b2664c974f5b20f415d3588aed7a9bf6cfe877ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
