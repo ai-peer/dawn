@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76b45b99_8efb7d00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-23T17:35:54Z",
+      "side": 1,
+      "message": "oh Corentin is OOO - adding another reviewer",
+      "revId": "7a9447f18b74ab5b6d5b4433b74b7e81e327a6c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
