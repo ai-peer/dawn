@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e021fe19_4246f250",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-23T04:06:03Z",
+      "side": 1,
+      "message": "nit: maybe also say why this change is being made. IIUC, it\u0027s because Chromium isn\u0027t going to do special cache-busting when the Dawn version changes, and instead will rely on a simpler solution which just prefixes the key with the Dawn version. The LRU will handle expiring stale entries over time.",
+      "revId": "c397254d404728a89a48a95fcb071b345c3b66c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86274040_ebc1daed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-23T04:06:03Z",
+      "side": 1,
+      "message": "slightly more clear: to the device\u0027s cache key",
+      "range": {
+        "startLine": 10,
+        "startChar": 51,
+        "endLine": 10,
+        "endChar": 86
+      },
+      "revId": "c397254d404728a89a48a95fcb071b345c3b66c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb963ade_536fbdde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-23T04:06:03Z",
+      "side": 1,
+      "message": "LGTM with some comments",
+      "revId": "c397254d404728a89a48a95fcb071b345c3b66c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24f812b7_9a7d072c",
+        "filename": "src/dawn/native/CacheKey.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-23T04:06:03Z",
+      "side": 1,
+      "message": "isn\u0027t length already size_t? same for the above std::string::length()",
+      "range": {
+        "startLine": 40,
+        "startChar": 16,
+        "endLine": 40,
+        "endChar": 36
+      },
+      "revId": "c397254d404728a89a48a95fcb071b345c3b66c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af6fa7a3_5e3a211e",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-23T04:06:03Z",
+      "side": 1,
+      "message": "WDYT about adding ASSERTs into BlobCache::Load/Store which check that the Dawn version is indeed at the front of the key. Right now, you could begin using the blob cache and we wouldn\u0027t be resilient to changes in Dawn version if you forgot to include the device cache key in the key.",
+      "range": {
+        "startLine": 212,
+        "startChar": 27,
+        "endLine": 212,
+        "endChar": 39
+      },
+      "revId": "c397254d404728a89a48a95fcb071b345c3b66c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8a28250_1e4307d2",
+        "filename": "src/dawn/tests/unittests/native/CacheKeyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-23T04:06:03Z",
+      "side": 1,
+      "message": "uunit: prefer `size_t(6)`",
+      "range": {
+        "startLine": 176,
+        "startChar": 20,
+        "endLine": 176,
+        "endChar": 29
+      },
+      "revId": "c397254d404728a89a48a95fcb071b345c3b66c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
