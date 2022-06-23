@@ -16,6 +16,23 @@
       "message": "oh Corentin is OOO - adding another reviewer",
       "revId": "7a9447f18b74ab5b6d5b4433b74b7e81e327a6c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6aa51c43_c109ab26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001961
+      },
+      "writtenOn": "2022-06-23T21:54:28Z",
+      "side": 1,
+      "message": "Thanks, Loko!",
+      "revId": "7a9447f18b74ab5b6d5b4433b74b7e81e327a6c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
