@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "65dd6691db706a612a58df652de6ecb7b0071bf8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52e74d94_dc6ea0b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-23T18:05:30Z",
+      "side": 1,
+      "message": "LGTM. \n(looks like some advanced C++ manual memory management technique)",
+      "revId": "65dd6691db706a612a58df652de6ecb7b0071bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
