@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fec073bd_7a83a9de",
+        "filename": "src/dawn/tests/unittests/native/BlobTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-23T20:14:34Z",
+      "side": 1,
+      "message": "At the end wouldn\u0027t work though, right? Because in this case it\u0027s called much earlier than the end.\n\nWe could record the expectation earlier though, but I do like that this is testing exactly when we expect the reallocation to occur.",
+      "parentUuid": "d02215fb_5261e535",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 13
+      },
+      "revId": "65dd6691db706a612a58df652de6ecb7b0071bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1a0c4703_15483386",
         "filename": "src/dawn/tests/unittests/native/BlobTests.cpp",
         "patchSetId": 5
