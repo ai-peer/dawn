@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "2d3c1a1f23173231613e4bc4c4817a55eae41f01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d777345e_423f4e81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-23T17:35:44Z",
+      "side": 1,
+      "message": "oh Corentin is OOO - adding another reviewer",
+      "revId": "2d3c1a1f23173231613e4bc4c4817a55eae41f01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
