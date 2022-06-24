@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a16766ea_e8361453",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-24T18:10:44Z",
+      "side": 1,
+      "message": "Please take a look, thanks! This CL add support for f16 scalar/vector/matrix types, their constructor, and conversions in intrinsic table and resolver, and implement a number of relating unit tests. Ops (like + or *) and built-ins are not support yet.",
+      "revId": "9bd15536ba9f6df5653a73b60e7c3b6125859083",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
