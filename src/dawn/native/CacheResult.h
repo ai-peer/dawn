@@ -19,8 +19,11 @@
 #include <utility>
 
 #include "dawn/common/Assert.h"
+#include "dawn/native/CacheKey.h"
 
 namespace dawn::native {
+
+class BlobCache;
 
 template <typename T>
 class CacheResult {
@@ -39,7 +42,7 @@ class CacheResult {
         ASSERT(mIsValid);
         return mIsCached;
     }
-    const CacheKey& GetCacheKey() {
+    const CacheKey& GetCacheKey() const {
         ASSERT(mIsValid);
         return mKey;
     }
@@ -62,6 +65,9 @@ class CacheResult {
     }
 
   private:
+    // Blob cache is a friend since it can mutate |mIsCached|.
+    friend class BlobCache;
+
     CacheResult(CacheKey key, T value, bool isCached)
         : mKey(std::move(key)), mValue(std::move(value)), mIsCached(isCached), mIsValid(true) {}
 
