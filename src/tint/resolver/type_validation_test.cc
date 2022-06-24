@@ -1025,6 +1025,9 @@ using ValidMatrixTypes = ResolverTestWithParam<Params>;
 TEST_P(ValidMatrixTypes, Okay) {
     // var a : matNxM<EL_TY>;
     auto& params = GetParam();
+
+    Enable(ast::Extension::kF16);
+
     Global("a", ty.mat(params.elem_ty(*this), params.columns, params.rows),
            ast::StorageClass::kPrivate);
     EXPECT_TRUE(r()->Resolve()) << r()->error();
@@ -1042,16 +1045,31 @@ INSTANTIATE_TEST_SUITE_P(ResolverTypeValidationTest,
                                          ParamsFor<f32>(4, 4),
                                          ParamsFor<alias<f32>>(4, 2),
                                          ParamsFor<alias<f32>>(4, 3),
-                                         ParamsFor<alias<f32>>(4, 4)));
+                                         ParamsFor<alias<f32>>(4, 4),
+                                         ParamsFor<f16>(2, 2),
+                                         ParamsFor<f16>(2, 3),
+                                         ParamsFor<f16>(2, 4),
+                                         ParamsFor<f16>(3, 2),
+                                         ParamsFor<f16>(3, 3),
+                                         ParamsFor<f16>(3, 4),
+                                         ParamsFor<f16>(4, 2),
+                                         ParamsFor<f16>(4, 3),
+                                         ParamsFor<f16>(4, 4),
+                                         ParamsFor<alias<f16>>(4, 2),
+                                         ParamsFor<alias<f16>>(4, 3),
+                                         ParamsFor<alias<f16>>(4, 4)));
 
 using InvalidMatrixElementTypes = ResolverTestWithParam<Params>;
 TEST_P(InvalidMatrixElementTypes, InvalidElementType) {
     // var a : matNxM<EL_TY>;
     auto& params = GetParam();
+
+    Enable(ast::Extension::kF16);
+
     Global("a", ty.mat(Source{{12, 34}}, params.elem_ty(*this), params.columns, params.rows),
            ast::StorageClass::kPrivate);
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: matrix element type must be 'f32'");
+    EXPECT_EQ(r()->error(), "12:34 error: matrix element type must be 'f32' or 'f16'");
 }
 INSTANTIATE_TEST_SUITE_P(ResolverTypeValidationTest,
                          InvalidMatrixElementTypes,
@@ -1059,12 +1077,17 @@ INSTANTIATE_TEST_SUITE_P(ResolverTypeValidationTest,
                                          ParamsFor<i32>(4, 3),
                                          ParamsFor<u32>(4, 4),
                                          ParamsFor<vec2<f32>>(2, 2),
+                                         ParamsFor<vec2<f16>>(2, 2),
                                          ParamsFor<vec3<i32>>(2, 3),
                                          ParamsFor<vec4<u32>>(2, 4),
                                          ParamsFor<mat2x2<f32>>(3, 2),
                                          ParamsFor<mat3x3<f32>>(3, 3),
                                          ParamsFor<mat4x4<f32>>(3, 4),
-                                         ParamsFor<array<2, f32>>(4, 2)));
+                                         ParamsFor<mat2x2<f16>>(3, 2),
+                                         ParamsFor<mat3x3<f16>>(3, 3),
+                                         ParamsFor<mat4x4<f16>>(3, 4),
+                                         ParamsFor<array<2, f32>>(4, 2),
+                                         ParamsFor<array<2, f16>>(4, 2)));
 }  // namespace MatrixTests
 
 namespace VectorTests {
@@ -1082,6 +1105,9 @@ using ValidVectorTypes = ResolverTestWithParam<Params>;
 TEST_P(ValidVectorTypes, Okay) {
     // var a : vecN<EL_TY>;
     auto& params = GetParam();
+
+    Enable(ast::Extension::kF16);
+
     Global("a", ty.vec(params.elem_ty(*this), params.width), ast::StorageClass::kPrivate);
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
@@ -1089,18 +1115,22 @@ INSTANTIATE_TEST_SUITE_P(ResolverTypeValidationTest,
                          ValidVectorTypes,
                          testing::Values(ParamsFor<bool>(2),
                                          ParamsFor<f32>(2),
+                                         ParamsFor<f16>(2),
                                          ParamsFor<i32>(2),
                                          ParamsFor<u32>(2),
                                          ParamsFor<bool>(3),
                                          ParamsFor<f32>(3),
+                                         ParamsFor<f16>(3),
                                          ParamsFor<i32>(3),
                                          ParamsFor<u32>(3),
                                          ParamsFor<bool>(4),
                                          ParamsFor<f32>(4),
+                                         ParamsFor<f16>(4),
                                          ParamsFor<i32>(4),
                                          ParamsFor<u32>(4),
                                          ParamsFor<alias<bool>>(4),
                                          ParamsFor<alias<f32>>(4),
+                                         ParamsFor<alias<f16>>(4),
                                          ParamsFor<alias<i32>>(4),
                                          ParamsFor<alias<u32>>(4)));
 
@@ -1108,11 +1138,15 @@ using InvalidVectorElementTypes = ResolverTestWithParam<Params>;
 TEST_P(InvalidVectorElementTypes, InvalidElementType) {
     // var a : vecN<EL_TY>;
     auto& params = GetParam();
+
+    Enable(ast::Extension::kF16);
+
     Global("a", ty.vec(Source{{12, 34}}, params.elem_ty(*this), params.width),
            ast::StorageClass::kPrivate);
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: vector element type must be 'bool', 'f32', 'i32' or 'u32'");
+              "12:34 error: vector element type must be 'bool', 'f32', 'f16', 'i32' "
+              "or 'u32'");
 }
 INSTANTIATE_TEST_SUITE_P(ResolverTypeValidationTest,
                          InvalidVectorElementTypes,
@@ -1120,7 +1154,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverTypeValidationTest,
                                          ParamsFor<vec3<i32>>(2),
                                          ParamsFor<vec4<u32>>(2),
                                          ParamsFor<mat2x2<f32>>(2),
-                                         ParamsFor<mat3x3<f32>>(2),
+                                         ParamsFor<mat3x3<f16>>(2),
                                          ParamsFor<mat4x4<f32>>(2),
                                          ParamsFor<array<2, f32>>(2)));
 }  // namespace VectorTests
