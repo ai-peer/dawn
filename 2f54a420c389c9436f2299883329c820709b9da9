@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24734b50_407c6879",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-06-24T01:55:51Z",
+      "side": 1,
+      "message": "PTAL. Along with Blink companion CL will help some CTS tests pass due to the limit no longer being undefined (resulting in shaders with `@location(NaN)` in them.) Anything that tries to rigorously test the limit will still fail, though.",
+      "revId": "2f54a420c389c9436f2299883329c820709b9da9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
