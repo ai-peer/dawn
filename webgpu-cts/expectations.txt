@@ -341,6 +341,20 @@ crbug.com/dawn/0000 [ win ] webgpu:shader,execution,expression,binary,f32_arithm
 crbug.com/dawn/0000 [ win ] webgpu:shader,execution,expression,binary,f32_logical:* [ Slow ]
 
 ################################################################################
+# Tests that are slow enough when run in parallel to flake, but work fine when
+# run serially
+# KEEP
+################################################################################
+crbug.com/dawn/0000 [ mac amd ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="Sample";format="r8uint" [ Slow ]
+crbug.com/dawn/0000 [ mac amd ] webgpu:shader,execution,zero_init:compute,zero_init:storageClass="function";workgroupSize=[1,1,1];batch__=* [ Slow ]
+crbug.com/dawn/0000 [ mac amd ] webgpu:shader,execution,zero_init:compute,zero_init:storageClass="private";workgroupSize=[1,1,1];batch__=* [ Slow ]
+crbug.com/dawn/0000 [ mac amd ] webgpu:shader,execution,zero_init:compute,zero_init:storageClass="workgroup";* [ Slow ]
+crbug.com/dawn/0000 [ mac amd ] webgpu:shader,execution,evaluation_order:assignment:name="ToArray2D" [ Slow ]
+crbug.com/dawn/0000 [ mac amd ] webgpu:shader,execution,evaluation_order:assignment:name="ToArrayFromArray" [ Slow ]
+crbug.com/dawn/0000 [ mac amd ] webgpu:shader,execution,expression,call,builtin,textureSampleLevel:depth_array_2d_coords: [ Slow ]
+crbug.com/dawn/0000 [ mac amd ] webgpu:shader,execution,expression,call,builtin,textureSampleLevel:sampled_array_3d_coords: [ Slow ]
+
+################################################################################
 # Bclayton@ indicates that these timeout on Win/Intel
 ################################################################################
 crbug.com/dawn/0000 [ intel win ] webgpu:shader,execution,expression,binary,f32_arithmetic:addition:inputSource="const";* [ Skip ]
