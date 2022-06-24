@@ -145,7 +145,8 @@ class CacheRequestImpl {
         // Cache miss, or the CacheHitFn failed.
         auto result = cacheMissFn(std::move(r));
         if (DAWN_LIKELY(result.IsSuccess())) {
-            return ReturnType(CacheResultType::CacheMiss(std::move(key), result.AcquireSuccess()));
+            return ReturnType(
+                CacheResultType::CacheMiss(std::move(key), result.AcquireSuccess(), cache));
         }
         return ReturnType(result.AcquireError());
     }

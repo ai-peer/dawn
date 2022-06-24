@@ -26,11 +26,11 @@ template <typename T>
 class CacheResult {
   public:
     static CacheResult CacheHit(CacheKey key, T value) {
-        return CacheResult(std::move(key), std::move(value), true);
+        return CacheResult(std::move(key), std::move(value), true, nullptr);
     }
 
-    static CacheResult CacheMiss(CacheKey key, T value) {
-        return CacheResult(std::move(key), std::move(value), false);
+    static CacheResult CacheMiss(CacheKey key, T value, BlobCache* cache) {
+        return CacheResult(std::move(key), std::move(value), false, cache);
     }
 
     CacheResult() : mKey(), mValue(), mIsCached(false), mIsValid(false) {}
@@ -55,6 +55,18 @@ class CacheResult {
         return mValue;
     }
 
+    // Types should define static void CacheResult<T>::Store to customize how T is serialized
+    // into the BlobCache.
+    static void Store(BlobCache* cache, const CacheKey& key, const T& value);
+
+    void EnsureStored() {
+        if (!IsCached() && mCache != nullptr) {
+            Store(mCache, mKey, mValue);
+            // After calling Store, the CacheResult is now cached.
+            mIsCached = true;
+        }
+    }
+
     T Acquire() {
         ASSERT(mIsValid);
         mIsValid = false;
@@ -62,13 +74,18 @@ class CacheResult {
     }
 
   private:
-    CacheResult(CacheKey key, T value, bool isCached)
-        : mKey(std::move(key)), mValue(std::move(value)), mIsCached(isCached), mIsValid(true) {}
+    CacheResult(CacheKey key, T value, bool isCached, BlobCache* cache)
+        : mKey(std::move(key)),
+          mValue(std::move(value)),
+          mIsCached(isCached),
+          mIsValid(true),
+          mCache(cache) {}
 
     CacheKey mKey;
     T mValue;
     bool mIsCached;
     bool mIsValid;
+    BlobCache* mCache;
 };
 
 }  // namespace dawn::native
