@@ -55,6 +55,14 @@ class CacheResult {
         return mValue;
     }
 
+    static void Store(BlobCache* cache, const CacheKey& key, const T& value);
+
+    void EnsureStored(BlobCache* cache) {
+        if (!IsCached() && cache != nullptr) {
+            Store(cache, mKey, mValue);
+        }
+    }
+
     T Acquire() {
         ASSERT(mIsValid);
         mIsValid = false;

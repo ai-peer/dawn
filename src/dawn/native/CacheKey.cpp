@@ -18,6 +18,8 @@
 #include <string>
 #include <string_view>
 
+#include "dawn/native/Blob.h"
+
 namespace dawn::native {
 
 std::ostream& operator<<(std::ostream& os, const CacheKey& key) {
