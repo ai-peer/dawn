@@ -37,6 +37,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "bf0402c8_55daa3f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-24T20:47:05Z",
+      "side": 1,
+      "message": "Credit where credit is due: Ben did the initial work for this, including the clever struct-forking and expression unfolding in the transform.",
+      "parentUuid": "57610c97_ba9a07bc",
+      "revId": "604bc09747a0d43dd4912c6bfcd5fccd6bdf0230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e5562acd_d33d4819",
         "filename": "src/tint/reader/spirv/function.cc",
         "patchSetId": 11
@@ -48,6 +66,24 @@
       "writtenOn": "2022-06-23T22:13:02Z",
       "side": 1,
       "message": "FYI, there is a utility Function::ToI32 that you could use here, e.g.\n\n      if (result_type-\u003eIs\u003cI32\u003e()) { return ToI32(v); }\n      \nIt only adds the i32(.) constructor if the value is not already i32.\n      \nAnd a ToU32 could also be created that would be analogous.\nHeh.  I guess they could be abstracted to To\u003cTYPE\u003e(.).  :-)",
+      "revId": "604bc09747a0d43dd4912c6bfcd5fccd6bdf0230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccc1177a_cbbcf88f",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 5510,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-24T20:47:05Z",
+      "side": 1,
+      "message": "Thanks, yeah, I\u0027ll try to do that in a future CL.",
+      "parentUuid": "e5562acd_d33d4819",
       "revId": "604bc09747a0d43dd4912c6bfcd5fccd6bdf0230",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
