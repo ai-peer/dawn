@@ -15,17 +15,16 @@
 #ifndef SRC_DAWN_NATIVE_VULKAN_SHADERMODULEVK_H_
 #define SRC_DAWN_NATIVE_VULKAN_SHADERMODULEVK_H_
 
+#include <optional>
+
 #include <memory>
 #include <mutex>
-#include <optional>
 #include <unordered_map>
 #include <utility>
-#include <vector>
-
-#include "dawn/native/ShaderModule.h"
 
 #include "dawn/common/vulkan_platform.h"
 #include "dawn/native/Error.h"
+#include "dawn/native/ShaderModule.h"
 
 namespace dawn::native::vulkan {
 
@@ -34,8 +33,12 @@ class PipelineLayout;
 
 class ShaderModule final : public ShaderModuleBase {
   public:
-    using Spirv = std::vector<uint32_t>;
-    using ModuleAndSpirv = std::pair<VkShaderModule, const Spirv*>;
+    class Spirv;
+    struct ModuleAndSpirv {
+        VkShaderModule module;
+        const uint32_t* spirv;
+        size_t wordCount;
+    };
 
     static ResultOrError<Ref<ShaderModule>> Create(Device* device,
                                                    const ShaderModuleDescriptor* descriptor,
@@ -61,10 +64,10 @@ class ShaderModule final : public ShaderModuleBase {
         std::optional<ModuleAndSpirv> Find(const PipelineLayoutEntryPointPair& key);
         ModuleAndSpirv AddOrGet(const PipelineLayoutEntryPointPair& key,
                                 VkShaderModule module,
-                                std::vector<uint32_t>&& spirv);
+                                Spirv&& spirv);
 
       private:
-        using Entry = std::pair<VkShaderModule, std::unique_ptr<Spirv>>;
+        using Entry = std::pair<VkShaderModule, Spirv>;
 
         Device* mDevice;
         std::mutex mMutex;
