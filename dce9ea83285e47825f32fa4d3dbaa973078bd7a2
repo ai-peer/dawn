@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd1366a4_855a2b57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-24T16:27:03Z",
+      "side": 1,
+      "message": "PTAL - I might land this one instead of the other CL if the bots look happy",
+      "revId": "dce9ea83285e47825f32fa4d3dbaa973078bd7a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
