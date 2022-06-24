@@ -51,6 +51,57 @@ TEST_F(ResolverStructLayoutTest, Scalars) {
     EXPECT_EQ(sem->Members()[2]->Size(), 4u);
 }
 
+TEST_F(ResolverStructLayoutTest, ScalarsWithF16) {
+    Enable(ast::Extension::kF16);
+
+    auto* s = Structure("S", {
+                                 Member("a", ty.f32()),
+                                 Member("b", ty.f16()),
+                                 Member("c", ty.u32()),
+                                 Member("d", ty.f16()),
+                                 Member("e", ty.f16()),
+                                 Member("f", ty.i32()),
+                                 Member("g", ty.f16()),
+                             });
+
+    ASSERT_TRUE(r()->Resolve()) << r()->error();
+
+    auto* sem = TypeOf(s)->As<sem::Struct>();
+    ASSERT_NE(sem, nullptr);
+    EXPECT_EQ(sem->Size(), 24u);
+    EXPECT_EQ(sem->SizeNoPadding(), 22u);
+    EXPECT_EQ(sem->Align(), 4u);
+    ASSERT_EQ(sem->Members().size(), 7u);
+    // f32
+    EXPECT_EQ(sem->Members()[0]->Offset(), 0u);
+    EXPECT_EQ(sem->Members()[0]->Align(), 4u);
+    EXPECT_EQ(sem->Members()[0]->Size(), 4u);
+    // f16
+    EXPECT_EQ(sem->Members()[1]->Offset(), 4u);
+    EXPECT_EQ(sem->Members()[1]->Align(), 2u);
+    EXPECT_EQ(sem->Members()[1]->Size(), 2u);
+    // u32
+    EXPECT_EQ(sem->Members()[2]->Offset(), 8u);
+    EXPECT_EQ(sem->Members()[2]->Align(), 4u);
+    EXPECT_EQ(sem->Members()[2]->Size(), 4u);
+    // f16
+    EXPECT_EQ(sem->Members()[3]->Offset(), 12u);
+    EXPECT_EQ(sem->Members()[3]->Align(), 2u);
+    EXPECT_EQ(sem->Members()[3]->Size(), 2u);
+    // f16
+    EXPECT_EQ(sem->Members()[4]->Offset(), 14u);
+    EXPECT_EQ(sem->Members()[4]->Align(), 2u);
+    EXPECT_EQ(sem->Members()[4]->Size(), 2u);
+    // i32
+    EXPECT_EQ(sem->Members()[5]->Offset(), 16u);
+    EXPECT_EQ(sem->Members()[5]->Align(), 4u);
+    EXPECT_EQ(sem->Members()[5]->Size(), 4u);
+    // f16
+    EXPECT_EQ(sem->Members()[6]->Offset(), 20u);
+    EXPECT_EQ(sem->Members()[6]->Align(), 2u);
+    EXPECT_EQ(sem->Members()[6]->Size(), 2u);
+}
+
 TEST_F(ResolverStructLayoutTest, Alias) {
     auto* alias_a = Alias("a", ty.f32());
     auto* alias_b = Alias("b", ty.f32());
