@@ -16,6 +16,63 @@
       "message": "Looks like CTS is not happy with this change. Will investigate and fix.",
       "revId": "cc3aa8d5dc40b4dabaf78248459c41313c12939a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2667780d_8432f637",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-24T15:54:45Z",
+      "side": 1,
+      "message": "I\u0027m happy with this so far.\nReserving the +2 until CTS is fixed.",
+      "revId": "cc3aa8d5dc40b4dabaf78248459c41313c12939a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a291a746_6dfba2a1",
+        "filename": "src/tint/writer/msl/generator_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2424,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-24T15:54:45Z",
+      "side": 1,
+      "message": "Some nice cleanups along the way.",
+      "revId": "cc3aa8d5dc40b4dabaf78248459c41313c12939a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f5ed0d0_34710e61",
+        "filename": "src/tint/writer/msl/generator_impl_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-24T15:54:45Z",
+      "side": 1,
+      "message": "heh.  Making MSL look like WGSL since 2022.",
+      "range": {
+        "startLine": 205,
+        "startChar": 1,
+        "endLine": 205,
+        "endChar": 28
+      },
+      "revId": "cc3aa8d5dc40b4dabaf78248459c41313c12939a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
