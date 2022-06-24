@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8750e1c2_c28efc0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-24T07:02:28Z",
+      "side": 1,
+      "message": "This patch is now independent from single-scalar matrix constructor (and remove it from HLSL writer), please take a look, thanks",
+      "revId": "ecc5215159fa94627dd263464e944c09485d488b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
