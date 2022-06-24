@@ -16,6 +16,23 @@
       "message": "PTAL - I might land this one instead of the other CL if the bots look happy",
       "revId": "dce9ea83285e47825f32fa4d3dbaa973078bd7a2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18bf5ba9_ab8bd5e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-06-24T18:46:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "dce9ea83285e47825f32fa4d3dbaa973078bd7a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
