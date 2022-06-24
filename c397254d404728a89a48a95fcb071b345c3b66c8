@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cc270b5_426a109d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-24T23:36:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e021fe19_4246f250",
+      "revId": "c397254d404728a89a48a95fcb071b345c3b66c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86274040_ebc1daed",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-06-23T04:06:03Z",
       "side": 1,
       "message": "slightly more clear: to the device\u0027s cache key",
+      "range": {
+        "startLine": 10,
+        "startChar": 51,
+        "endLine": 10,
+        "endChar": 86
+      },
+      "revId": "c397254d404728a89a48a95fcb071b345c3b66c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbcef4b9_a01b6b35",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-24T23:36:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86274040_ebc1daed",
       "range": {
         "startLine": 10,
         "startChar": 51,
