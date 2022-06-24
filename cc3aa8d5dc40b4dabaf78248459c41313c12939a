@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42c4ae4e_e52d3336",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-24T15:32:00Z",
+      "side": 1,
+      "message": "Looks like CTS is not happy with this change. Will investigate and fix.",
+      "revId": "cc3aa8d5dc40b4dabaf78248459c41313c12939a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
