@@ -39,6 +39,30 @@
       },
       "revId": "a07d7869c97508af72be340b10153321f065dfa9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61c04794_d406788e",
+        "filename": "src/tint/writer/spirv/builder_accessor_expression_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-24T08:09:19Z",
+      "side": 1,
+      "message": "Right you are. Done",
+      "parentUuid": "ca7c3240_024cecab",
+      "range": {
+        "startLine": 206,
+        "startChar": 19,
+        "endLine": 206,
+        "endChar": 26
+      },
+      "revId": "a07d7869c97508af72be340b10153321f065dfa9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
