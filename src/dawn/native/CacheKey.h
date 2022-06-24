@@ -15,17 +15,32 @@
 #ifndef SRC_DAWN_NATIVE_CACHEKEY_H_
 #define SRC_DAWN_NATIVE_CACHEKEY_H_
 
+#include <algorithm>
 #include <bitset>
+#include <functional>
 #include <iostream>
 #include <limits>
 #include <memory>
 #include <string>
 #include <type_traits>
+#include <unordered_map>
 #include <utility>
 #include <vector>
 
 #include "dawn/common/TypedInteger.h"
 #include "dawn/common/ityp_array.h"
+
+namespace tint {
+class Program;
+
+namespace transform {
+struct BindingPoints;
+}
+
+namespace sem {
+struct BindingPoint;
+}
+}  // namespace tint
 
 namespace dawn::native {
 
@@ -229,6 +244,48 @@ template <typename T>
 class CacheKeySerializer<std::vector<T>> {
   public:
     static void Serialize(CacheKey* key, const std::vector<T>& t) { key->RecordIterable(t); }
+};
+
+// Specialized overload for std::pair<A, B>
+template <typename A, typename B>
+class CacheKeySerializer<std::pair<A, B>> {
+  public:
+    static void Serialize(CacheKey* key, const std::pair<A, B>& p) {
+        key->Record(p.first, p.second);
+    }
+};
+
+// Specialized overload for std::unordered_map<K, V>
+template <typename K, typename V>
+class CacheKeySerializer<std::unordered_map<K, V>> {
+  public:
+    static void Serialize(CacheKey* key, const std::unordered_map<K, V>& m) {
+        std::vector<std::pair<K, V>> ordered(m.begin(), m.end());
+        std::sort(ordered.begin(), ordered.end(),
+                  [](const std::pair<K, V>& a, const std::pair<K, V>& b) {
+                      return std::less<K>{}(a.first, b.first);
+                  });
+        key->RecordIterable(ordered);
+    }
+};
+
+// Forward declarations of Tint serializations.
+template <>
+class CacheKeySerializer<tint::Program> {
+  public:
+    static void Serialize(CacheKey* key, const tint::Program& p);
+};
+
+template <>
+class CacheKeySerializer<tint::transform::BindingPoints> {
+  public:
+    static void Serialize(CacheKey* key, const tint::transform::BindingPoints& points);
+};
+
+template <>
+class CacheKeySerializer<tint::sem::BindingPoint> {
+  public:
+    static void Serialize(CacheKey* key, const tint::sem::BindingPoint& p);
 };
 
 }  // namespace dawn::native
