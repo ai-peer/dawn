@@ -16,6 +16,23 @@
       "message": "PTAL. Along with Blink companion CL will help some CTS tests pass due to the limit no longer being undefined (resulting in shaders with `@location(NaN)` in them.) Anything that tries to rigorously test the limit will still fail, though.",
       "revId": "2f54a420c389c9436f2299883329c820709b9da9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55fe3191_60ae5b26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-24T15:24:34Z",
+      "side": 1,
+      "message": "this adds a single bucket of 16, but we usually try to populate the limits in the backends in InitializeSupportedLimitsImpl based on what they actually are. \n\nIs that possible based on information we know from the various APIs? Or is it truly a constant?",
+      "revId": "2f54a420c389c9436f2299883329c820709b9da9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
