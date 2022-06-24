@@ -218,13 +218,21 @@ func GetResults(
 		status := toStatus(rpb.Status)
 		tags := result.NewTags()
 
+		duration := rpb.GetDuration().AsDuration()
+
 		for _, sp := range rpb.Tags {
 			if sp.Key == "typ_tag" {
 				tags.Add(sp.Value)
 			}
+			if sp.Key == "javascript_duration" {
+				parsed, err := time.ParseDuration(sp.Value)
+				duration = parsed
+				if err != nil {
+					return err
+				}
+			}
 		}
 
-		duration := rpb.GetDuration().AsDuration()
 		if status == result.Pass && duration > cfg.Test.SlowThreshold {
 			status = result.Slow
 		}
