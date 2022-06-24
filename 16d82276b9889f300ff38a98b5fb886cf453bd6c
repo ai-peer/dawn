@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc8c9fa9_ca4bede2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-24T21:21:53Z",
+      "side": 1,
+      "message": "Rebased and fixed expectations of end-to-end tests that were added today.",
+      "revId": "16d82276b9889f300ff38a98b5fb886cf453bd6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
