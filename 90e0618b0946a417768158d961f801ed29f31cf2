@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "300fd101_e544bb24",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-24T23:58:51Z",
+      "side": 1,
+      "message": "I\u0027m confused if / why this is not causing a validation error.\nIt was my understanding that you couldn\u0027t have overlapping expectations (query, tag filter), so I don\u0027t understand how you can have this wildcard expectation here, and more targeted expectations below.",
+      "range": {
+        "startLine": 340,
+        "startChar": 20,
+        "endLine": 340,
+        "endChar": 56
+      },
+      "revId": "90e0618b0946a417768158d961f801ed29f31cf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
