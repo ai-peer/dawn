@@ -33,6 +33,24 @@
       "message": "this adds a single bucket of 16, but we usually try to populate the limits in the backends in InitializeSupportedLimitsImpl based on what they actually are. \n\nIs that possible based on information we know from the various APIs? Or is it truly a constant?",
       "revId": "2f54a420c389c9436f2299883329c820709b9da9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75364f96_81d42931",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-06-24T15:46:15Z",
+      "side": 1,
+      "message": "It\u0027s... complicated. https://github.com/gpuweb/gpuweb/issues/1962#issuecomment-1136316791\n\nThere\u0027s definitely some additional work that needs to be done here, but there\u0027s a subset of tests that are failing currently simply because we lack the attribute. Wanted to add it with the base value now to narrow the scope of the suppressions needed to only the tests that actually highlight the lack of the limit enforcement.",
+      "parentUuid": "55fe3191_60ae5b26",
+      "revId": "2f54a420c389c9436f2299883329c820709b9da9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
