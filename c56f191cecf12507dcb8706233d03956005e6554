@@ -16,6 +16,24 @@
       "message": "I think we have IsASAN()",
       "revId": "c56f191cecf12507dcb8706233d03956005e6554",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec96ee68_4c672136",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-24T19:40:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7425ef92_f60fa81a",
+      "revId": "c56f191cecf12507dcb8706233d03956005e6554",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
