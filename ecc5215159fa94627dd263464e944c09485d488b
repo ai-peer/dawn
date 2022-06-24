@@ -1,6 +1,75 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b02fb7d_65a7992d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-24T08:21:50Z",
+      "side": 1,
+      "message": "`identity`",
+      "range": {
+        "startLine": 7,
+        "startChar": 19,
+        "endLine": 7,
+        "endChar": 28
+      },
+      "revId": "ecc5215159fa94627dd263464e944c09485d488b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d97a416_1069ef2c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-24T08:21:50Z",
+      "side": 1,
+      "message": "`identity`",
+      "range": {
+        "startLine": 9,
+        "startChar": 28,
+        "endLine": 9,
+        "endChar": 37
+      },
+      "revId": "ecc5215159fa94627dd263464e944c09485d488b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41d7a9db_0d918b07",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-24T08:21:50Z",
+      "side": 1,
+      "message": "`identity`",
+      "range": {
+        "startLine": 10,
+        "startChar": 34,
+        "endLine": 10,
+        "endChar": 43
+      },
+      "revId": "ecc5215159fa94627dd263464e944c09485d488b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8750e1c2_c28efc0f",
@@ -14,6 +83,23 @@
       "writtenOn": "2022-06-24T07:02:28Z",
       "side": 1,
       "message": "This patch is now independent from single-scalar matrix constructor (and remove it from HLSL writer), please take a look, thanks",
+      "revId": "ecc5215159fa94627dd263464e944c09485d488b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1c96400_7fbe55af",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-24T08:21:50Z",
+      "side": 1,
+      "message": "note: At some point in the future, this will need to support `matNxM\u003cf16\u003e` \u003c-\u003e `matNxM\u003cf32\u003e` conversions.",
       "revId": "ecc5215159fa94627dd263464e944c09485d488b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
