@@ -102,6 +102,24 @@
       "message": "note: At some point in the future, this will need to support `matNxM\u003cf16\u003e` \u003c-\u003e `matNxM\u003cf32\u003e` conversions.",
       "revId": "ecc5215159fa94627dd263464e944c09485d488b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0eb326d_6631e742",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-24T08:42:14Z",
+      "side": 1,
+      "message": "Thanks, I add a comment here.",
+      "parentUuid": "b1c96400_7fbe55af",
+      "revId": "ecc5215159fa94627dd263464e944c09485d488b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
