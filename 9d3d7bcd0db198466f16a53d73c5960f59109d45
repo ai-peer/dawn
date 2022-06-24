@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2518a96_00ec00f6",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1770,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-24T16:01:41Z",
+      "side": 1,
+      "message": "I didn\u0027t even know this was possible.  I\u0027m learning C++17 I guess.",
+      "range": {
+        "startLine": 1769,
+        "startChar": 11,
+        "endLine": 1770,
+        "endChar": 70
+      },
+      "revId": "9d3d7bcd0db198466f16a53d73c5960f59109d45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
