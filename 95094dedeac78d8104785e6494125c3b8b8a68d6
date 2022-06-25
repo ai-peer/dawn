@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66bd69a0_330e38bc",
+        "filename": "src/tint/resolver/dependency_graph_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-25T22:29:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f66673fd_2db680ec",
+      "range": {
+        "startLine": 1031,
+        "startChar": 10,
+        "endLine": 1031,
+        "endChar": 13
+      },
+      "revId": "95094dedeac78d8104785e6494125c3b8b8a68d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c24b96d7_d05539be",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-06-25T13:57:40Z",
       "side": 1,
       "message": "nit: const",
+      "range": {
+        "startLine": 83,
+        "startChar": 7,
+        "endLine": 83,
+        "endChar": 10
+      },
+      "revId": "95094dedeac78d8104785e6494125c3b8b8a68d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e696340_c4c066e1",
+        "filename": "src/tint/resolver/inferred_type_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-25T22:29:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c24b96d7_d05539be",
       "range": {
         "startLine": 83,
         "startChar": 7,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c6b523d_315619ee",
+        "filename": "src/tint/resolver/resolver_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-25T22:29:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e34bca7_b0ce7365",
+      "range": {
+        "startLine": 452,
+        "startChar": 20,
+        "endLine": 452,
+        "endChar": 22
+      },
+      "revId": "95094dedeac78d8104785e6494125c3b8b8a68d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce5045fc_6e7bd2c9",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-06-25T13:57:40Z",
       "side": 1,
       "message": "nit: 10i",
+      "range": {
+        "startLine": 483,
+        "startChar": 20,
+        "endLine": 483,
+        "endChar": 21
+      },
+      "revId": "95094dedeac78d8104785e6494125c3b8b8a68d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e792987b_920d1841",
+        "filename": "src/tint/resolver/resolver_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-25T22:29:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce5045fc_6e7bd2c9",
       "range": {
         "startLine": 483,
         "startChar": 20,
@@ -133,6 +229,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7144efb5_fbf13784",
+        "filename": "src/tint/resolver/resolver_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-25T22:29:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7533d358_fedcb063",
+      "range": {
+        "startLine": 1170,
+        "startChar": 7,
+        "endLine": 1170,
+        "endChar": 10
+      },
+      "revId": "95094dedeac78d8104785e6494125c3b8b8a68d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5afd6bcd_1059704d",
@@ -146,6 +266,24 @@
       "writtenOn": "2022-06-25T13:57:40Z",
       "side": 1,
       "message": "nit: The comment is wrong.  Should be:\n\n   const global_const: f32 \u003d f32();",
+      "revId": "95094dedeac78d8104785e6494125c3b8b8a68d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8541084_b9eb7ca2",
+        "filename": "src/tint/resolver/type_validation_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-25T22:29:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5afd6bcd_1059704d",
       "revId": "95094dedeac78d8104785e6494125c3b8b8a68d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
