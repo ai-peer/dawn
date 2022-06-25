@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01054630_0436f416",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-25T22:40:12Z",
+      "side": 1,
+      "message": "I considered adding a form that took a `printf` style variadic. I decided to not go off on even more of a tangent. We\u0027ll want to evaluate more optimal string stuff anyway. LLVM\u0027s Twine might be a good fit here.",
+      "parentUuid": "2a0fce78_361661d0",
+      "range": {
+        "startLine": 448,
+        "startChar": 13,
+        "endLine": 448,
+        "endChar": 83
+      },
+      "revId": "ef2837d593991f1176b570f87074762feeb0c36a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e9ba090_d0768ebe",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-06-25T15:48:15Z",
       "side": 1,
       "message": "nit:  This has drifted from what\u0027s in the spec.\nIn the spec there is   ( ident | variable_ident_decl )\nbut here that\u0027s handled with expect_variable_ident_decl(..., true /* infer type */) \n\nas a cleanup maybe Tint should have  ident_with_optional_type\nor   ident_or_variable_ident_decl\n\nHeck, maybe WGSL should get that too, for clarity.",
+      "range": {
+        "startLine": 1793,
+        "startChar": 13,
+        "endLine": 1793,
+        "endChar": 32
+      },
+      "revId": "ef2837d593991f1176b570f87074762feeb0c36a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3087d637_6f33c8ed",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1793,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-25T22:40:12Z",
+      "side": 1,
+      "message": "The whole parser has significantly drifted from the spec. I think James said he\u0027d like to try re-working things to better match the spec, but this is not high priority right now.",
+      "parentUuid": "9e9ba090_d0768ebe",
       "range": {
         "startLine": 1793,
         "startChar": 13,
@@ -83,6 +131,30 @@
       "writtenOn": "2022-06-25T15:48:15Z",
       "side": 1,
       "message": "nit: This should probably be updated.",
+      "range": {
+        "startLine": 507,
+        "startChar": 52,
+        "endLine": 507,
+        "endChar": 62
+      },
+      "revId": "ef2837d593991f1176b570f87074762feeb0c36a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b850b3cd_b9dfe2b0",
+        "filename": "src/tint/reader/wgsl/parser_impl_error_msg_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-25T22:40:12Z",
+      "side": 1,
+      "message": "See next change in the stack",
+      "parentUuid": "3803c281_10df5abb",
       "range": {
         "startLine": 507,
         "startChar": 52,
