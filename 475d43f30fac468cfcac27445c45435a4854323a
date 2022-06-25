@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19bba4ab_ab0a03d7",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-25T14:00:34Z",
+      "side": 1,
+      "message": "nit: I believe in the Oxford comma, or the serial comma.\n\nCoder\u0027s choice though.",
+      "range": {
+        "startLine": 889,
+        "startChar": 67,
+        "endLine": 889,
+        "endChar": 68
+      },
+      "revId": "475d43f30fac468cfcac27445c45435a4854323a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
