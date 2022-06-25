@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a0fce78_361661d0",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-25T15:48:15Z",
+      "side": 1,
+      "message": "nit:  Alternately add an \u0027expect3\u0027 where you pass in 3 const char* and only assemble the return string (by concatenating the three string args) in the error case.",
+      "range": {
+        "startLine": 448,
+        "startChar": 13,
+        "endLine": 448,
+        "endChar": 83
+      },
+      "revId": "ef2837d593991f1176b570f87074762feeb0c36a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e9ba090_d0768ebe",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1793,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-25T15:48:15Z",
+      "side": 1,
+      "message": "nit:  This has drifted from what\u0027s in the spec.\nIn the spec there is   ( ident | variable_ident_decl )\nbut here that\u0027s handled with expect_variable_ident_decl(..., true /* infer type */) \n\nas a cleanup maybe Tint should have  ident_with_optional_type\nor   ident_or_variable_ident_decl\n\nHeck, maybe WGSL should get that too, for clarity.",
+      "range": {
+        "startLine": 1793,
+        "startChar": 13,
+        "endLine": 1793,
+        "endChar": 32
+      },
+      "revId": "ef2837d593991f1176b570f87074762feeb0c36a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef2070d7_c26c8adf",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1811,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-25T15:48:15Z",
+      "side": 1,
+      "message": "nit: Seems we should be saying \u0027initializer\u0027. That\u0027s what\u0027s in the spec.\nBut this usage is all over the place. Definitely not for this CL.\n\nI filed https://bugs.chromium.org/p/tint/issues/detail?id\u003d1600 for this.",
+      "range": {
+        "startLine": 1811,
+        "startChar": 46,
+        "endLine": 1811,
+        "endChar": 57
+      },
+      "revId": "ef2837d593991f1176b570f87074762feeb0c36a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3803c281_10df5abb",
+        "filename": "src/tint/reader/wgsl/parser_impl_error_msg_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-06-25T15:48:15Z",
+      "side": 1,
+      "message": "nit: This should probably be updated.",
+      "range": {
+        "startLine": 507,
+        "startChar": 52,
+        "endLine": 507,
+        "endChar": 62
+      },
+      "revId": "ef2837d593991f1176b570f87074762feeb0c36a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
