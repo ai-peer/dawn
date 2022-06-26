@@ -9,9 +9,8 @@
                OpExecutionMode %main LocalSize 1 1 1
                OpName %o "o"
                OpName %main "main"
-               OpDecorate %o SpecId 0
         %int = OpTypeInt 32 1
-          %o = OpSpecConstant %int 1
+          %o = OpConstant %int 1
        %void = OpTypeVoid
           %3 = OpTypeFunction %void
        %main = OpFunction %void None %3

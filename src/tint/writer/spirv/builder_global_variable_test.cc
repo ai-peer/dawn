@@ -61,7 +61,7 @@ TEST_F(BuilderTest, GlobalVar_WithConstructor) {
 )");
 }
 
-TEST_F(BuilderTest, GlobalVar_Const) {
+TEST_F(BuilderTest, GlobalLet) {
     auto* init = vec3<f32>(1_f, 1_f, 3_f);
 
     auto* v = GlobalLet("l", ty.vec3<f32>(), init);
@@ -81,7 +81,32 @@ TEST_F(BuilderTest, GlobalVar_Const) {
 )");
 }
 
-TEST_F(BuilderTest, GlobalVar_Complex_Constructor) {
+TEST_F(BuilderTest, GlobalConst) {
+    // const c = 42;
+    // var v = c;
+
+    auto* c = GlobalConst("c", nullptr, Expr(42_a));
+    GlobalVar("v", nullptr, ast::StorageClass::kPrivate, Expr(c));
+
+    spirv::Builder& b = SanitizeAndBuild();
+
+    ASSERT_TRUE(b.Build()) << b.error();
+
+    EXPECT_EQ(DumpInstructions(b.types()), R"(%1 = OpTypeInt 32 1
+%2 = OpConstant %1 42
+%4 = OpTypePointer Private %1
+%3 = OpVariable %4 Private %2
+%6 = OpTypeVoid
+%5 = OpTypeFunction %6
+)");
+    EXPECT_EQ(DumpInstructions(b.functions()[0].variables()), R"()");
+    EXPECT_EQ(DumpInstructions(b.functions()[0].instructions()), R"(OpReturn
+)");
+
+    Validate(b);
+}
+
+TEST_F(BuilderTest, GlobalLet_Vec_Constructor) {
     auto* init = vec3<f32>(1_f, 2_f, 3_f);
 
     auto* v = GlobalLet("l", ty.vec3<f32>(), init);
@@ -100,7 +125,94 @@ TEST_F(BuilderTest, GlobalVar_Complex_Constructor) {
 )");
 }
 
-TEST_F(BuilderTest, GlobalVar_Complex_ConstructorNestedVector) {
+TEST_F(BuilderTest, GlobalConst_Vec_Constructor) {
+    // const c = vec3<f32>(1f, 2f, 3f);
+    // var v = c;
+
+    auto* c = GlobalConst("c", nullptr, vec3<f32>(1_f, 2_f, 3_f));
+    GlobalVar("v", nullptr, ast::StorageClass::kPrivate, Expr(c));
+
+    spirv::Builder& b = SanitizeAndBuild();
+
+    ASSERT_TRUE(b.Build()) << b.error();
+
+    EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeFloat 32
+%1 = OpTypeVector %2 3
+%3 = OpConstant %2 1
+%4 = OpConstant %2 2
+%5 = OpConstant %2 3
+%6 = OpConstantComposite %1 %3 %4 %5
+%8 = OpTypePointer Private %1
+%7 = OpVariable %8 Private %6
+%10 = OpTypeVoid
+%9 = OpTypeFunction %10
+)");
+    EXPECT_EQ(DumpInstructions(b.functions()[0].variables()), R"()");
+    EXPECT_EQ(DumpInstructions(b.functions()[0].instructions()), R"(OpReturn
+)");
+
+    Validate(b);
+}
+
+TEST_F(BuilderTest, GlobalConst_Vec_AInt_Constructor) {
+    // const c = vec3(1, 2, 3);
+    // var v = c;
+
+    auto* c = GlobalConst("c", nullptr, Construct(ty.vec3(nullptr), 1_a, 2_a, 3_a));
+    GlobalVar("v", nullptr, ast::StorageClass::kPrivate, Expr(c));
+
+    spirv::Builder& b = SanitizeAndBuild();
+
+    ASSERT_TRUE(b.Build()) << b.error();
+
+    EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeInt 32 1
+%1 = OpTypeVector %2 3
+%3 = OpConstant %2 1
+%4 = OpConstant %2 2
+%5 = OpConstant %2 3
+%6 = OpConstantComposite %1 %3 %4 %5
+%8 = OpTypePointer Private %1
+%7 = OpVariable %8 Private %6
+%10 = OpTypeVoid
+%9 = OpTypeFunction %10
+)");
+    EXPECT_EQ(DumpInstructions(b.functions()[0].variables()), R"()");
+    EXPECT_EQ(DumpInstructions(b.functions()[0].instructions()), R"(OpReturn
+)");
+
+    Validate(b);
+}
+
+TEST_F(BuilderTest, GlobalConst_Vec_AFloat_Constructor) {
+    // const c = vec3(1.0, 2.0, 3.0);
+    // var v = c;
+
+    auto* c = GlobalConst("c", nullptr, Construct(ty.vec3(nullptr), 1._a, 2._a, 3._a));
+    GlobalVar("v", nullptr, ast::StorageClass::kPrivate, Expr(c));
+
+    spirv::Builder& b = SanitizeAndBuild();
+
+    ASSERT_TRUE(b.Build()) << b.error();
+
+    EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeFloat 32
+%1 = OpTypeVector %2 3
+%3 = OpConstant %2 1
+%4 = OpConstant %2 2
+%5 = OpConstant %2 3
+%6 = OpConstantComposite %1 %3 %4 %5
+%8 = OpTypePointer Private %1
+%7 = OpVariable %8 Private %6
+%10 = OpTypeVoid
+%9 = OpTypeFunction %10
+)");
+    EXPECT_EQ(DumpInstructions(b.functions()[0].variables()), R"()");
+    EXPECT_EQ(DumpInstructions(b.functions()[0].instructions()), R"(OpReturn
+)");
+
+    Validate(b);
+}
+
+TEST_F(BuilderTest, GlobalLet_Nested_Vec_Constructor) {
     auto* init = vec3<f32>(vec2<f32>(1_f, 2_f), 3_f);
 
     auto* v = GlobalLet("l", ty.vec3<f32>(), init);
@@ -117,6 +229,35 @@ TEST_F(BuilderTest, GlobalVar_Complex_ConstructorNestedVector) {
 %5 = OpConstant %2 3
 %6 = OpConstantComposite %1 %3 %4 %5
 )");
+}
+
+TEST_F(BuilderTest, GlobalConst_Nested_Vec_Constructor) {
+    // const c = vec3<f32>(vec2<f32>(1f, 2f), 3f));
+    // var v = c;
+
+    auto* c = GlobalConst("c", nullptr, vec3<f32>(vec2<f32>(1_f, 2_f), 3_f));
+    GlobalVar("v", nullptr, ast::StorageClass::kPrivate, Expr(c));
+
+    spirv::Builder& b = SanitizeAndBuild();
+
+    ASSERT_TRUE(b.Build()) << b.error();
+
+    EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeFloat 32
+%1 = OpTypeVector %2 3
+%3 = OpConstant %2 1
+%4 = OpConstant %2 2
+%5 = OpConstant %2 3
+%6 = OpConstantComposite %1 %3 %4 %5
+%8 = OpTypePointer Private %1
+%7 = OpVariable %8 Private %6
+%10 = OpTypeVoid
+%9 = OpTypeFunction %10
+)");
+    EXPECT_EQ(DumpInstructions(b.functions()[0].variables()), R"()");
+    EXPECT_EQ(DumpInstructions(b.functions()[0].instructions()), R"(OpReturn
+)");
+
+    Validate(b);
 }
 
 TEST_F(BuilderTest, GlobalVar_WithBindingAndGroup) {
@@ -152,10 +293,9 @@ TEST_F(BuilderTest, GlobalVar_Override_Bool) {
     EXPECT_TRUE(b.GenerateGlobalVariable(v)) << b.error();
     EXPECT_EQ(DumpInstructions(b.debug()), R"(OpName %2 "var"
 )");
-    EXPECT_EQ(DumpInstructions(b.annots()), R"(OpDecorate %2 SpecId 1200
-)");
+    EXPECT_EQ(DumpInstructions(b.annots()), R"()");
     EXPECT_EQ(DumpInstructions(b.types()), R"(%1 = OpTypeBool
-%2 = OpSpecConstantTrue %1
+%2 = OpConstantTrue %1
 )");
 }
 
@@ -170,10 +310,9 @@ TEST_F(BuilderTest, GlobalVar_Override_Bool_ZeroValue) {
     EXPECT_TRUE(b.GenerateGlobalVariable(v)) << b.error();
     EXPECT_EQ(DumpInstructions(b.debug()), R"(OpName %2 "var"
 )");
-    EXPECT_EQ(DumpInstructions(b.annots()), R"(OpDecorate %2 SpecId 1200
-)");
+    EXPECT_EQ(DumpInstructions(b.annots()), R"()");
     EXPECT_EQ(DumpInstructions(b.types()), R"(%1 = OpTypeBool
-%2 = OpSpecConstantFalse %1
+%2 = OpConstantNull %1
 )");
 }
 
@@ -206,10 +345,9 @@ TEST_F(BuilderTest, GlobalVar_Override_Scalar) {
     EXPECT_TRUE(b.GenerateGlobalVariable(v)) << b.error();
     EXPECT_EQ(DumpInstructions(b.debug()), R"(OpName %2 "var"
 )");
-    EXPECT_EQ(DumpInstructions(b.annots()), R"(OpDecorate %2 SpecId 0
-)");
+    EXPECT_EQ(DumpInstructions(b.annots()), R"()");
     EXPECT_EQ(DumpInstructions(b.types()), R"(%1 = OpTypeFloat 32
-%2 = OpSpecConstant %1 2
+%2 = OpConstant %1 2
 )");
 }
 
@@ -224,10 +362,9 @@ TEST_F(BuilderTest, GlobalVar_Override_Scalar_ZeroValue) {
     EXPECT_TRUE(b.GenerateGlobalVariable(v)) << b.error();
     EXPECT_EQ(DumpInstructions(b.debug()), R"(OpName %2 "var"
 )");
-    EXPECT_EQ(DumpInstructions(b.annots()), R"(OpDecorate %2 SpecId 0
-)");
+    EXPECT_EQ(DumpInstructions(b.annots()), R"()");
     EXPECT_EQ(DumpInstructions(b.types()), R"(%1 = OpTypeFloat 32
-%2 = OpSpecConstant %1 0
+%2 = OpConstantNull %1
 )");
 }
 
@@ -299,12 +436,10 @@ TEST_F(BuilderTest, GlobalVar_Override_NoId) {
     EXPECT_EQ(DumpInstructions(b.debug()), R"(OpName %2 "a"
 OpName %3 "b"
 )");
-    EXPECT_EQ(DumpInstructions(b.annots()), R"(OpDecorate %2 SpecId 0
-OpDecorate %3 SpecId 1
-)");
+    EXPECT_EQ(DumpInstructions(b.annots()), R"()");
     EXPECT_EQ(DumpInstructions(b.types()), R"(%1 = OpTypeBool
-%2 = OpSpecConstantTrue %1
-%3 = OpSpecConstantFalse %1
+%2 = OpConstantTrue %1
+%3 = OpConstantNull %1
 )");
 }
 
