@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f03574fb_1be8872b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-26T09:02:32Z",
+      "side": 1,
+      "message": "Kokoro failure was a transient VM network issue.",
+      "revId": "23f5803e17c2f486413aa2544e48836aa2c8e563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
