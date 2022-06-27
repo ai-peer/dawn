@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19c5f94f_d0ae874c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-27T17:37:35Z",
+      "side": 1,
+      "message": "I had forgotten to push the generated files for the new e2e tests. Done now.",
+      "revId": "2d3e953664e92beecfeaccbfad130ba0afc3963c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
