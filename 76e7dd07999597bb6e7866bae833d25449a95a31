@@ -68,6 +68,24 @@
       "message": "Note for future change: we should probably remove this comment, and possibly even this transform since FXC is not relevant on the GLSL backend.",
       "revId": "76e7dd07999597bb6e7866bae833d25449a95a31",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "312e98ac_d2b976a7",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-27T13:41:05Z",
+      "side": 1,
+      "message": "Ah yeah, good point 😊",
+      "parentUuid": "3239d77b_f2170a8e",
+      "revId": "76e7dd07999597bb6e7866bae833d25449a95a31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
