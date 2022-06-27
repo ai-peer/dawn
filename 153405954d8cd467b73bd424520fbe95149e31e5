@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f84bc0e9_011569cb",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-27T18:00:14Z",
+      "side": 0,
+      "message": "Do we not need to enable the extension?",
+      "revId": "153405954d8cd467b73bd424520fbe95149e31e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

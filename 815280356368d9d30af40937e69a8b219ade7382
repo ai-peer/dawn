@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c3dad3f_037ae1d0",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-27T18:00:14Z",
+      "side": 1,
+      "message": "The `select` matches `scalar` which includes `f16` in the spec. Why exclude here?",
+      "revId": "815280356368d9d30af40937e69a8b219ade7382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2409fefd_32ec3755",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-27T18:00:14Z",
+      "side": 1,
+      "message": "Why are these all commented out? (And tests below)",
+      "revId": "815280356368d9d30af40937e69a8b219ade7382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e533b8a1_36d6b136",
+        "filename": "test/tint/builtins/gen/literal/arrayLength/8421b9.wgsl.expected.glsl",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-27T18:00:14Z",
+      "side": 1,
+      "message": "Why do these all end up SKIP?",
+      "revId": "815280356368d9d30af40937e69a8b219ade7382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
