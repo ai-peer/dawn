@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d8ba2d4_91361c63",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 952,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-06-27T10:10:03Z",
+      "side": 1,
+      "message": "TODO: Here need to add a simulation for WriteTimestamp using blit encoder\u0027s sampleBufferAttachments when the sampleCountersInBuffer is not supported which I missed.",
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
