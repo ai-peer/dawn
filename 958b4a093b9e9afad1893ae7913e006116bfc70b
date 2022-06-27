@@ -104,6 +104,24 @@
       "parentUuid": "f96e3ad4_8655b32d",
       "revId": "958b4a093b9e9afad1893ae7913e006116bfc70b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88cb9a72_019f3308",
+        "filename": "test/tint/expressions/type_ctor/mat2x2/explicit/identity/f32.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-27T15:28:15Z",
+      "side": 1,
+      "message": "Yes, I would suggest do the same way as \"mat2x3(or others)/explicit/identity\". It seems that this \"mat2x2/explicit/identity\" is the only one that has such misalign.",
+      "parentUuid": "b1a8549d_ec0194dd",
+      "revId": "958b4a093b9e9afad1893ae7913e006116bfc70b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
