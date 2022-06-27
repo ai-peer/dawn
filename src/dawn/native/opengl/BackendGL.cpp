@@ -28,6 +28,34 @@
 
 namespace dawn::native::opengl {
 
+namespace {
+
+class ScopedMakeCurrent {
+  public:
+    ScopedMakeCurrent(const EGLFunctions& functions, ContextEGL* context)
+        : egl(functions),
+          mContext(context),
+          mPrevDisplay(egl.GetCurrentDisplay()),
+          mPrevDrawSurface(egl.GetCurrentSurface(EGL_DRAW)),
+          mPrevReadSurface(egl.GetCurrentSurface(EGL_READ)),
+          mPrevContext(egl.GetCurrentContext()) {
+        mContext->MakeCurrent();
+    }
+    ~ScopedMakeCurrent() {
+        egl.MakeCurrent(mPrevDisplay, mPrevDrawSurface, mPrevReadSurface, mPrevContext);
+    }
+
+  private:
+    const EGLFunctions& egl;
+    ContextEGL* mContext;
+    EGLDisplay mPrevDisplay;
+    EGLSurface mPrevDrawSurface;
+    EGLSurface mPrevReadSurface;
+    EGLContext mPrevContext;
+};
+
+}  // namespace
+
 // Implementation of the OpenGL backend's BackendConnection
 
 Backend::Backend(InstanceBase* instance, wgpu::BackendType backendType)
@@ -56,17 +84,12 @@ std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters() {
     egl.Init(reinterpret_cast<PFNEGLGETPROCADDRESSPROC>(options.getProc));
 
     EGLenum api = GetType() == wgpu::BackendType::OpenGLES ? EGL_OPENGL_ES_API : EGL_OPENGL_API;
-    std::unique_ptr<Device::Context> context = ContextEGL::Create(egl, api);
+    std::unique_ptr<ContextEGL> context = ContextEGL::Create(egl, api);
     if (!context) {
         return {};
     }
 
-    EGLDisplay prevDisplay = egl.GetCurrentDisplay();
-    EGLContext prevDrawSurface = egl.GetCurrentSurface(EGL_DRAW);
-    EGLContext prevReadSurface = egl.GetCurrentSurface(EGL_READ);
-    EGLContext prevContext = egl.GetCurrentContext();
-
-    context->MakeCurrent();
+    ScopedMakeCurrent(egl, context.get());
 
     auto result = DiscoverAdapters(&options);
 
@@ -76,8 +99,6 @@ std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters() {
         auto value = result.AcquireSuccess();
         adapters.insert(adapters.end(), value.begin(), value.end());
     }
-
-    egl.MakeCurrent(prevDisplay, prevDrawSurface, prevReadSurface, prevContext);
 
     return adapters;
 }
