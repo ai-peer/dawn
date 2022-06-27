@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37b65308_817e960a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001467
+      },
+      "writtenOn": "2022-06-27T17:12:30Z",
+      "side": 1,
+      "message": "SwiftShader into Dawn autorolls are successful again: https://dawn-review.googlesource.com/c/dawn/+/94840\n\nThanks Antonio!",
+      "revId": "8a290388261c3762afe85fd3846c0b791335d9e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
