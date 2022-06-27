@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2694fbb0_9c80dd65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-27T19:01:28Z",
+      "side": 1,
+      "message": "Latest patch restores accidentally deleted generated SKIP files for e2e tests.",
+      "revId": "1ed185e27de30e2df3081802ff0fa351ab70e13c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
