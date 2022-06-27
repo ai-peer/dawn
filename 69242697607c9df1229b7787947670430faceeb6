@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03f95006_22a90987",
+        "filename": "src/tint/reader/wgsl/parser_impl_global_decl_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-27T15:16:03Z",
+      "side": 1,
+      "message": "Is there a result we can check here to make sure it was processed correctly?",
+      "revId": "69242697607c9df1229b7787947670430faceeb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8671fdf6_73875bca",
+        "filename": "src/tint/reader/wgsl/parser_impl_variable_ident_decl_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-27T15:16:03Z",
+      "side": 1,
+      "message": "This test name is weird given it\u0027s a non-inferred type?",
+      "revId": "69242697607c9df1229b7787947670430faceeb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9873b3d9_1029c6b0",
+        "filename": "test/tint/var/inferred/global.wgsl.expected.msl",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-27T15:16:03Z",
+      "side": 1,
+      "message": "Is this because it was all dropped as dead code or something?",
+      "revId": "69242697607c9df1229b7787947670430faceeb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
