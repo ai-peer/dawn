@@ -206,6 +206,29 @@
       "message": "we should add a Toggle to force disable mSupportCounterSamplingAtStageBoundary so we can test the other path if both types of sampling are supported",
       "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2403662_7aacf754",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-27T22:19:36Z",
+      "side": 1,
+      "message": "This sounds like we should implement this workaround in the Vulkan backend instead of in the test.\n\nIt\u0027s ok to write the test the way it should work, and skip on Intel Windows Vulkan, with a bug about implementing the workaround in the future.",
+      "range": {
+        "startLine": 548,
+        "startChar": 27,
+        "endLine": 551,
+        "endChar": 48
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
