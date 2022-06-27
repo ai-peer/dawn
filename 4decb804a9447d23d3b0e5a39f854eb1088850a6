@@ -39,6 +39,30 @@
       },
       "revId": "4decb804a9447d23d3b0e5a39f854eb1088850a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c6d963e_f3fa8d88",
+        "filename": "tools/src/cmd/cts/common/results.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-27T21:55:08Z",
+      "side": 1,
+      "message": "Done. thanks for the review!",
+      "parentUuid": "6dc7b2cc_cedebe59",
+      "range": {
+        "startLine": 228,
+        "startChar": 4,
+        "endLine": 230,
+        "endChar": 19
+      },
+      "revId": "4decb804a9447d23d3b0e5a39f854eb1088850a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
