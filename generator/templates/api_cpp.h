@@ -233,7 +233,13 @@ namespace {{metadata.namespace}} {
                 {% set member_declaration = as_annotated_cppType(member) + render_cpp_default_value(member) %}
                 {% if type.chained and loop.first %}
                     //* Align the first member to ChainedStruct to match the C struct layout.
-                    alignas(ChainedStruct{{Out}}) {{member_declaration}};
+                    static constexpr size_t kChainedStructAlignment = alignof(ChainedStruct{{out}});
+                    static constexpr size_t kFirstMemberTypeAlignment = alignof({{decorate("", as_cppType(member.type.name), member)}});
+                    static constexpr size_t kFirstMemberAlignment =
+                        kChainedStructAlignment > kFirstMemberTypeAlignment ?
+                            kChainedStructAlignment :
+                            kFirstMemberTypeAlignment;
+                    alignas(kFirstMemberAlignment) {{member_declaration}};
                 {% else %}
                     {{member_declaration}};
                 {% endif %}
