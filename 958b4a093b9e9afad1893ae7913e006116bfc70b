@@ -16,6 +16,23 @@
       "message": "Note: This is failing end-to-end testing as the SPIR-V writer is mishandling identity conversions of matrices.",
       "revId": "958b4a093b9e9afad1893ae7913e006116bfc70b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfd55d82_36ff4f64",
+        "filename": "test/tint/expressions/type_ctor/mat2x2/explicit/identity/f32.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-27T03:28:10Z",
+      "side": 1,
+      "message": "Hi, if I get it right this is zero constructor (zero value expression) rather than identity constructor. (It seems that mat2x2/explicit is the only test suit that misuse zero constructor as identity constructor.)",
+      "revId": "958b4a093b9e9afad1893ae7913e006116bfc70b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
