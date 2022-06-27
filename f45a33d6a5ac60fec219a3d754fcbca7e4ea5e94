@@ -16,6 +16,24 @@
       "message": "Should we use `m_1` in the WGSL to force the SPIR-V to emit the copy? This loads `m` but I don\u0027t see `m_1` showing up?",
       "revId": "f45a33d6a5ac60fec219a3d754fcbca7e4ea5e94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c6f9e82_cac709a4",
+        "filename": "test/tint/expressions/type_ctor/mat2x2/load/f32.wgsl.expected.spvasm",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-27T18:04:38Z",
+      "side": 1,
+      "message": "I believe %14 is m_1. This _is_ the copy.",
+      "parentUuid": "f37963aa_94f99e67",
+      "revId": "f45a33d6a5ac60fec219a3d754fcbca7e4ea5e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
