@@ -22,6 +22,30 @@
       },
       "revId": "90e0618b0946a417768158d961f801ed29f31cf2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbaf8be3_4bf1c96e",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-27T15:57:58Z",
+      "side": 1,
+      "message": "I think because the patterns must match exactly for it to be considered a conflict.\nSee https://source.chromium.org/chromium/chromium/src/+/main:third_party/catapult/third_party/typ/typ/expectations_parser.py;l\u003d651?q\u003dcheck_test_expectations_patterns_for_conflicts",
+      "parentUuid": "300fd101_e544bb24",
+      "range": {
+        "startLine": 340,
+        "startChar": 20,
+        "endLine": 340,
+        "endChar": 56
+      },
+      "revId": "90e0618b0946a417768158d961f801ed29f31cf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
