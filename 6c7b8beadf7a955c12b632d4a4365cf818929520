@@ -87,6 +87,23 @@
       "message": "I am not particularly familiar with this code, so tapping in Dan for reviewing, since it looks like he has made some changes to this file.",
       "revId": "6c7b8beadf7a955c12b632d4a4365cf818929520",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10fc922e_9517428c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-27T14:37:50Z",
+      "side": 1,
+      "message": "Is this CL still valid as we don\u0027t allow single-scalar matrix constructor?",
+      "revId": "6c7b8beadf7a955c12b632d4a4365cf818929520",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
