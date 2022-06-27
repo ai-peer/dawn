@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "7c9cec183d99ef716fd250d38aac101f59e4540c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "989c205f_0570e8fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2022-06-27T14:21:29Z",
+      "side": 1,
+      "message": "Can you also CQ this?\nI think Antonio may not have CQ permission here (and I don\u0027t have for other\u0027s CLs)",
+      "revId": "7c9cec183d99ef716fd250d38aac101f59e4540c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
