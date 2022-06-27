@@ -122,6 +122,24 @@
       "parentUuid": "b1a8549d_ec0194dd",
       "revId": "958b4a093b9e9afad1893ae7913e006116bfc70b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b859bb4_ad948dd6",
+        "filename": "test/tint/expressions/type_ctor/mat2x2/explicit/identity/f32.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-27T18:00:16Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "88cb9a72_019f3308",
+      "revId": "958b4a093b9e9afad1893ae7913e006116bfc70b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
