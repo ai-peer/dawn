@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05236c0f_b094f417",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-27T19:55:01Z",
+      "side": 1,
+      "message": "Ben, this is *replacing* the current duration with the new Javascript duration reported from the page.\n\nI don\u0027t see a reason right now for the go tooling that we would need the other one - what do you think?",
+      "revId": "4decb804a9447d23d3b0e5a39f854eb1088850a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
