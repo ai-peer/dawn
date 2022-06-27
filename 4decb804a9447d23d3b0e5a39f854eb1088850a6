@@ -16,6 +16,29 @@
       "message": "Ben, this is *replacing* the current duration with the new Javascript duration reported from the page.\n\nI don\u0027t see a reason right now for the go tooling that we would need the other one - what do you think?",
       "revId": "4decb804a9447d23d3b0e5a39f854eb1088850a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dc7b2cc_cedebe59",
+        "filename": "tools/src/cmd/cts/common/results.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-27T21:47:11Z",
+      "side": 1,
+      "message": "übernit: check the error immediately after the statement. If an error is returned, the other values should be assumed to be undefined values. While what you have is safe, it\u0027s idiomatic to not touch the other values until checking `err`.\n\n```\nvar err error\nif duration, err \u003d time.ParseDuration(sp.Value); err !\u003d nil {\n\treturn err\n}\n```\nor\n\n```\nparsed, err :\u003d time.ParseDuration(sp.Value)\nif err !\u003d nil {\n\treturn err\n}\nduration \u003d parsed\n```",
+      "range": {
+        "startLine": 228,
+        "startChar": 4,
+        "endLine": 230,
+        "endChar": 19
+      },
+      "revId": "4decb804a9447d23d3b0e5a39f854eb1088850a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
