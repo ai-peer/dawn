@@ -60,6 +60,7 @@ MaybeError CommandRecordingContext::Open(ID3D12Device* d3d12Device,
     }
 
     mIsOpen = true;
+    mTempBuffers.clear();
 
     return {};
 }
