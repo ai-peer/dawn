@@ -34,6 +34,24 @@
       "parentUuid": "f37963aa_94f99e67",
       "revId": "f45a33d6a5ac60fec219a3d754fcbca7e4ea5e94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c597c656_d2d8f095",
+        "filename": "test/tint/expressions/type_ctor/mat2x2/load/f32.wgsl.expected.spvasm",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-27T18:06:50Z",
+      "side": 1,
+      "message": "Sigh, spirv-asm is hard to read, heh.",
+      "parentUuid": "9c6f9e82_cac709a4",
+      "revId": "f45a33d6a5ac60fec219a3d754fcbca7e4ea5e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
