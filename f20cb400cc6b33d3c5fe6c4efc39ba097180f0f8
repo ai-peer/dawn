@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1325f53_7442cd30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-27T17:40:18Z",
+      "side": 1,
+      "message": "Corentin, Austin: PTAL. Thanks!",
+      "revId": "f20cb400cc6b33d3c5fe6c4efc39ba097180f0f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1784f060_5cdb951e",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-27T17:40:18Z",
+      "side": 1,
+      "message": "This is only kept around for Chrome. Once this CL rolls, we can start using DiscoverDefaultAdapters() in Chrome and remove this, if desired.",
+      "revId": "f20cb400cc6b33d3c5fe6c4efc39ba097180f0f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af770177_547fab4f",
+        "filename": "src/dawn/native/opengl/AdapterGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-27T17:40:18Z",
+      "side": 1,
+      "message": "Note that context creation failure isn\u0027t handled. A subsequent CL (see dependencies) does that by changing ContextEGL::Create() to use ResultOrError and to transforms EGL errors into Dawn errors. Happy to merge that into this CL if you\u0027d prefer.",
+      "revId": "f20cb400cc6b33d3c5fe6c4efc39ba097180f0f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
