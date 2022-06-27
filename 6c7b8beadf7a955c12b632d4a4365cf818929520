@@ -104,6 +104,41 @@
       "message": "Is this CL still valid as we don\u0027t allow single-scalar matrix constructor?",
       "revId": "6c7b8beadf7a955c12b632d4a4365cf818929520",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25a01f45_92d25fe6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-27T14:46:16Z",
+      "side": 1,
+      "message": "I thought matrix single-scalar constructor will be soon removed, and the transform VectorizeScalarMatrixConstructors would be removed as well (if I get it right). I am going to mark this CL as WIP, and eventually abandon it after the removal. Thanks for reviewing!",
+      "parentUuid": "10fc922e_9517428c",
+      "revId": "6c7b8beadf7a955c12b632d4a4365cf818929520",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d9c89c9_ad5c6b52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-27T14:46:16Z",
+      "side": 1,
+      "message": "Thanks for reviewing!",
+      "revId": "6c7b8beadf7a955c12b632d4a4365cf818929520",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
