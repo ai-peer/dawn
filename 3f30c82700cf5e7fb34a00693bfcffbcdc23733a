@@ -1,6 +1,161 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5671b598_dd1f2634",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-27T22:17:51Z",
+      "side": 1,
+      "message": "What is the plan for separating the old extension and the new extension? Is the new extension currently only exposed when both the old AND new extensions are supported?",
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31fdb448_27d5e375",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-27T22:17:51Z",
+      "side": 1,
+      "message": "it\u0027s oddly redundant that the end timestamp is in both the `timestampWrites` vector as well as the EndComputePassCmd.\n\nWhat if instead we got rid of the vector and simply had two members `beginTimestamp` and `endTimestamp` on BeginComputePassCmd? We don\u0027t need it on EndComputePassCmd\n\nFor render passes, all of the backends already pass `BeginRenderPassCmd` into `RecordRenderPass`. We could do the same for compute passes so that we\u0027re able to get the end timestamp for backends that record it at the end of the pass.",
+      "range": {
+        "startLine": 758,
+        "startChar": 15,
+        "endLine": 761,
+        "endChar": 0
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b798ed5e_17a5a320",
+        "filename": "src/dawn/native/Commands.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-27T22:17:51Z",
+      "side": 1,
+      "message": "this struct holds a QuerySetBase* not a Ref\u003cQuerySetBase\u003e\ndo we hold the ref somewhere else? if not, we\u0027ll have a potential use-after-free",
+      "range": {
+        "startLine": 76,
+        "startChar": 16,
+        "endLine": 76,
+        "endChar": 41
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a12e26d6_724a31a7",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-27T22:17:51Z",
+      "side": 1,
+      "message": "\"GPU counters are only available if sampling at least one of the command or stage boundaries is supported.\"",
+      "range": {
+        "startLine": 249,
+        "startChar": 31,
+        "endLine": 250,
+        "endChar": 19
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec3eb9a5_741ee54f",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-27T22:17:51Z",
+      "side": 1,
+      "message": "why not Concurrent?",
+      "range": {
+        "startLine": 58,
+        "startChar": 30,
+        "endLine": 58,
+        "endChar": 51
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2619b8b_55b73417",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-27T22:17:51Z",
+      "side": 1,
+      "message": "what if we have a vertex-only pipeline with no fragment shader?",
+      "range": {
+        "startLine": 239,
+        "startChar": 16,
+        "endLine": 240,
+        "endChar": 80
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c81a9a0_24172ea8",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-27T22:17:51Z",
+      "side": 1,
+      "message": "why do we use 0 here and MTLCounterDontSample above?",
+      "range": {
+        "startLine": 244,
+        "startChar": 26,
+        "endLine": 244,
+        "endChar": 40
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d8ba2d4_91361c63",
@@ -14,6 +169,41 @@
       "writtenOn": "2022-06-27T10:10:03Z",
       "side": 1,
       "message": "TODO: Here need to add a simulation for WriteTimestamp using blit encoder\u0027s sampleBufferAttachments when the sampleCountersInBuffer is not supported which I missed.",
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5115d79d_072e4857",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 952,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-27T22:17:51Z",
+      "side": 1,
+      "message": "we should put that behind a Toggle so we can force using the path in tests",
+      "parentUuid": "5d8ba2d4_91361c63",
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23522488_8ff1906a",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-27T22:17:51Z",
+      "side": 1,
+      "message": "we should add a Toggle to force disable mSupportCounterSamplingAtStageBoundary so we can test the other path if both types of sampling are supported",
       "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
