@@ -1879,6 +1879,14 @@
             {"name": "timestamp writes", "type": "render pass timestamp write", "annotation": "const*", "length": "timestamp write count"}
         ]
     },
+    "render pass descriptor max draw count": {
+        "category": "structure",
+        "chained": "in",
+        "tags": ["dawn", "native"],
+        "members": [
+            {"name": "max draw count", "type": "uint64_t", "default": 50000000}
+        ]
+    },
     "render pass encoder": {
         "category": "object",
         "methods": [
@@ -2480,7 +2488,8 @@
             {"value": 1002, "name": "dawn toggles device descriptor", "tags": ["dawn", "native"]},
             {"value": 1003, "name": "dawn encoder internal usage descriptor", "tags": ["dawn"]},
             {"value": 1004, "name": "dawn instance descriptor", "tags": ["dawn", "native"]},
-            {"value": 1005, "name": "dawn cache device descriptor", "tags": ["dawn", "native"]}
+            {"value": 1005, "name": "dawn cache device descriptor", "tags": ["dawn", "native"]},
+            {"value": 1006, "name": "render pass descriptor max draw count", "tags": ["dawn", "native"]}
         ]
     },
     "texture": {

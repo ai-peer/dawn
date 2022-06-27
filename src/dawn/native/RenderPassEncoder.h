@@ -97,6 +97,8 @@ class RenderPassEncoder final : public RenderEncoderBase {
     uint32_t mCurrentOcclusionQueryIndex = 0;
     bool mOcclusionQueryActive = false;
 
+    uint64_t mMaxDrawCount = 50000000;
+
     std::vector<TimestampWrite> mTimestampWritesAtEnd;
 };
 
