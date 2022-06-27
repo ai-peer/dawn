@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b281d1da_fd36bf29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-27T17:29:58Z",
+      "side": 1,
+      "message": "Need https://github.com/gpuweb/cts/pull/1577 to land and roll into Dawn.",
+      "revId": "2e014b241c76b47586f652f87e4eb3db2fc68ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
