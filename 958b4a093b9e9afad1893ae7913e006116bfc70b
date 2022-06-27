@@ -86,6 +86,24 @@
       "parentUuid": "8b309cef_a6155805",
       "revId": "958b4a093b9e9afad1893ae7913e006116bfc70b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1a8549d_ec0194dd",
+        "filename": "test/tint/expressions/type_ctor/mat2x2/explicit/identity/f32.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-27T15:25:06Z",
+      "side": 1,
+      "message": "Ah, I see, so this should have a second matrix which receives `m` as the constructor value.",
+      "parentUuid": "f96e3ad4_8655b32d",
+      "revId": "958b4a093b9e9afad1893ae7913e006116bfc70b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
