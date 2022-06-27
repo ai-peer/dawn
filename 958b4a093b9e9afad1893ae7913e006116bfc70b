@@ -68,6 +68,24 @@
       "parentUuid": "cfd55d82_36ff4f64",
       "revId": "958b4a093b9e9afad1893ae7913e006116bfc70b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f96e3ad4_8655b32d",
+        "filename": "test/tint/expressions/type_ctor/mat2x2/explicit/identity/f32.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-27T15:23:23Z",
+      "side": 1,
+      "message": "Yes, but the test (\"mat2x2/explicit/identity\") shall be for \"identity\" constructor of \"mat2x2\" with \"explicit\" element type. The zero constructor is tested in \"mat2x2/zero\".",
+      "parentUuid": "8b309cef_a6155805",
+      "revId": "958b4a093b9e9afad1893ae7913e006116bfc70b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
