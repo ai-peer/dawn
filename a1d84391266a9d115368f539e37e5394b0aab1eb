@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5254de44_f4afa883",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2022-06-28T22:32:31Z",
+      "side": 1,
+      "message": "PTAL\n\nHopefully the last Dawn merge for this upgrade, but who knows.",
+      "revId": "a1d84391266a9d115368f539e37e5394b0aab1eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
