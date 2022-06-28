@@ -33,6 +33,23 @@
       "message": "Looks like the rubber stamper won\u0027t work. Austin, PTAL.",
       "revId": "41e876a84fa6317457afd864c6d1792188b9120d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0abceeb5_07383a0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-28T16:55:15Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "41e876a84fa6317457afd864c6d1792188b9120d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
