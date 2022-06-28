@@ -16,6 +16,23 @@
       "message": "Hmm, somehow your +1s got lost. Could you resend?",
       "revId": "fcf7130d55863e9a67d2c77ec46b5def34cbc019",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7557628a_a5713f77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 38
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-28T21:01:57Z",
+      "side": 1,
+      "message": "LGTM, but I think there\u0027s one outstanding thread",
+      "revId": "fcf7130d55863e9a67d2c77ec46b5def34cbc019",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
