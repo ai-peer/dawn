@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53c65105_5fa8e79f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:41:30Z",
+      "side": 1,
+      "message": "Thanks for your review!",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd2582d9_dfb06090",
@@ -31,6 +48,30 @@
       "writtenOn": "2022-06-28T15:59:42Z",
       "side": 1,
       "message": "nit: that reintepret_cast seems to be an implementation detail of EGL and could be moved to be inside Init.",
+      "range": {
+        "startLine": 61,
+        "startChar": 23,
+        "endLine": 61,
+        "endChar": 39
+      },
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "262de897_4bfecf72",
+        "filename": "src/dawn/native/opengl/AdapterGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:41:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd2582d9_dfb06090",
       "range": {
         "startLine": 61,
         "startChar": 23,
@@ -58,6 +99,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c31e2c86_8805a4e0",
+        "filename": "src/dawn/native/opengl/AdapterGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:41:30Z",
+      "side": 1,
+      "message": "Noted. Replaced with a ternary for simplicity. (InitializeImpl() has already asserted that it\u0027s one or the other, but I\u0027m happy to add another assert if you like.)",
+      "parentUuid": "bfb02163_2ffa720f",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e07044cf_266dce64",
@@ -71,6 +130,30 @@
       "writtenOn": "2022-06-28T15:59:42Z",
       "side": 1,
       "message": "nit: I think ToAPI(GetType()) would do the same and be less casting.",
+      "range": {
+        "startLine": 49,
+        "startChar": 35,
+        "endLine": 49,
+        "endChar": 65
+      },
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d52a974_43fed2e1",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:41:30Z",
+      "side": 1,
+      "message": "Nice, done.",
+      "parentUuid": "e07044cf_266dce64",
       "range": {
         "startLine": 49,
         "startChar": 35,
@@ -100,6 +183,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38c34c06_7e797697",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:41:30Z",
+      "side": 1,
+      "message": "Chrome tests get upset if the context is changed during adapter descovery (e.g., https://ci.chromium.org/ui/p/chromium/builders/try/mac-dawn-rel/b8811173412880649809/test-results?q\u003dExactID%3Aninja%3A%2F%2Fgpu%3Agl_tests%2FSharedImageBackingFactoryIOSurfaceTest.Dawn_SkiaGL+VHash%3Ab4158506337967ab).\n\nSince Chrome soon won\u0027t know about the context at all, it seems unfair to make Chrome restore it.\n\nHowever, another option might be a ScopedMakeCurrent, which might make it possible to use the code style you\u0027re after? https://dawn-review.googlesource.com/c/dawn/+/94900 Happy to merge that in if you\u0027d prefer.",
+      "parentUuid": "d929175e_44e6304c",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b3ce7b23_2c792a6b",
         "filename": "src/dawn/native/opengl/BackendGL.h",
         "patchSetId": 33
@@ -111,6 +212,24 @@
       "writtenOn": "2022-06-28T15:59:42Z",
       "side": 1,
       "message": "nit: unused?",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24d13588_55817366",
+        "filename": "src/dawn/native/opengl/BackendGL.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:41:30Z",
+      "side": 1,
+      "message": "Removed, thanks.",
+      "parentUuid": "b3ce7b23_2c792a6b",
       "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -134,6 +253,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "911d942c_a25d7758",
+        "filename": "src/dawn/native/opengl/ContextEGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:41:30Z",
+      "side": 1,
+      "message": "From the docs: \"Initializing an already initialized EGL display connection has no effect besides returning the version numbers.\" The pointers are for retrieving the version numbers. I suppose we could check that it\u0027s at least a minimum if you\u0027d like (probably 1.5?).",
+      "parentUuid": "a89efd79_24e97f73",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "814ae4e0_52fe7ffe",
         "filename": "src/dawn/native/opengl/ContextEGL.cpp",
         "patchSetId": 33
@@ -145,6 +282,24 @@
       "writtenOn": "2022-06-28T15:59:42Z",
       "side": 1,
       "message": "Maybe we should use Dawn\u0027s error facilities here so a ResultOrError is returned from Create",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38f40c8c_af9ac0aa",
+        "filename": "src/dawn/native/opengl/ContextEGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:41:30Z",
+      "side": 1,
+      "message": "See subsequent patch https://dawn-review.googlesource.com/c/dawn/+/94561. Happy to merge that here. (Am I happy in these comments or what?)",
+      "parentUuid": "814ae4e0_52fe7ffe",
       "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -223,6 +378,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "648c592b_0645ff20",
+        "filename": "src/dawn/native/opengl/DeviceGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:41:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4703ce3d_f04c0316",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b09c62b0_8ae0ab75",
@@ -236,6 +409,30 @@
       "writtenOn": "2022-06-28T15:59:42Z",
       "side": 1,
       "message": "u-nit: the rest of the code uses Initialize",
+      "range": {
+        "startLine": 21,
+        "startChar": 19,
+        "endLine": 21,
+        "endChar": 23
+      },
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "866c68c1_a818e00d",
+        "filename": "src/dawn/native/opengl/EGLFunctions.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:41:30Z",
+      "side": 1,
+      "message": "Can\u0027t do that, sadly, because of eglInitialize().",
+      "parentUuid": "b09c62b0_8ae0ab75",
       "range": {
         "startLine": 21,
         "startChar": 19,
@@ -263,6 +460,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c84bc15c_4f0eff66",
+        "filename": "src/dawn/native/opengl/EGLFunctions.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:41:30Z",
+      "side": 1,
+      "message": "Ack, will do in a followup.",
+      "parentUuid": "e651ac7f_763f6be6",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccd504a3_694b094d",
@@ -276,6 +491,24 @@
       "writtenOn": "2022-06-28T15:59:42Z",
       "side": 1,
       "message": "How hard would it be to adapt opengl_loader_generator.py to also produce a function loader from egl.xml? If it\u0027s hard we can defer indefinitely.",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb66bdfb_f0a26685",
+        "filename": "src/dawn/native/opengl/EGLFunctions.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:41:30Z",
+      "side": 1,
+      "message": "I thought about it. I decided it\u0027s overkill at the moment, given how few EGL functions we use. We could reconsider in the future.",
+      "parentUuid": "ccd504a3_694b094d",
       "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -297,6 +530,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bab4a186_c89961b4",
+        "filename": "src/dawn/tests/end2end/SwapChainTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:41:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a04533b9_f272ceca",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b0bb90d_58925b8c",
@@ -310,6 +561,24 @@
       "writtenOn": "2022-06-28T15:59:42Z",
       "side": 1,
       "message": "nit: Assert can be removed?",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ff04971_9046080b",
+        "filename": "src/dawn/tests/end2end/SwapChainValidationTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:41:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b0bb90d_58925b8c",
       "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
