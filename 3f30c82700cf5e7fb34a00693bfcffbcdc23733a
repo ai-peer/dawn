@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cb0d4847_473fffa2",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-28T17:22:56Z",
+      "side": 1,
+      "message": "I think it would be ok - you\u0027re beginning a render pass yes, but it matches the Metal API where the begin/end timestamps are specified both at the start of the pass",
+      "parentUuid": "96a87264_934e153c",
+      "range": {
+        "startLine": 758,
+        "startChar": 15,
+        "endLine": 761,
+        "endChar": 0
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b798ed5e_17a5a320",
         "filename": "src/dawn/native/Commands.h",
         "patchSetId": 3
@@ -148,6 +172,30 @@
       "side": 1,
       "message": "On macOS version less than 11.0 （iOS \u003c 14.0), we only can create default compute pass by [MTLCommandBuffer computeCommandEncoder] (https://developer.apple.com/documentation/metal/mtlcommandbuffer/1443044-computecommandencoder/), and it is a sequential compute pass. The compute pass created from descriptor should be same to the default one, otherwise it\u0027s hard to decide that the commands are executed concurrently or sequentially.",
       "parentUuid": "ec3eb9a5_741ee54f",
+      "range": {
+        "startLine": 58,
+        "startChar": 30,
+        "endLine": 58,
+        "endChar": 51
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40a38bbc_200fc2a6",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-28T17:22:56Z",
+      "side": 1,
+      "message": "I see. Is there a reason we wouldn\u0027t use Concurrent on higher mac os versions? It should allow better use of the GPU",
+      "parentUuid": "224c74ab_a389833e",
       "range": {
         "startLine": 58,
         "startChar": 30,
@@ -318,6 +366,24 @@
       "side": 1,
       "message": "The counter sampling will not be supported at both stage boundary and draw/dispatch/blit boundary on same device. Apple Silicon devices do not support draw/dispatch/blit boundary, and any TBDR renderer wouldn\u0027t be able to support them , draw calls for example, all the vertex processing of all the draw calls in the render pass execute together. So I think only one of stage boundary and draw/dispatch/blit boundary is supported if the counter sampling is supported.",
       "parentUuid": "23522488_8ff1906a",
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "977bb4b0_ef2c34dd",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-28T17:22:56Z",
+      "side": 1,
+      "message": "ah, I see - perhaps making this an enum would make it more clear that exactly one of the modes is supported",
+      "parentUuid": "8204e1cc_8b204246",
       "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
