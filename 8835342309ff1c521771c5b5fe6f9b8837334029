@@ -1,0 +1,317 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "025cfbd5_ef505661",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd2582d9_dfb06090",
+        "filename": "src/dawn/native/opengl/AdapterGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 1,
+      "message": "nit: that reintepret_cast seems to be an implementation detail of EGL and could be moved to be inside Init.",
+      "range": {
+        "startLine": 61,
+        "startChar": 23,
+        "endLine": 61,
+        "endChar": 39
+      },
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfb02163_2ffa720f",
+        "filename": "src/dawn/native/opengl/AdapterGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 1,
+      "message": "u-nit: in Dawn and ANGLE we tend to do else { ASSERT(second condition) ...} for cases like these.",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e07044cf_266dce64",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 1,
+      "message": "nit: I think ToAPI(GetType()) would do the same and be less casting.",
+      "range": {
+        "startLine": 49,
+        "startChar": 35,
+        "endLine": 49,
+        "endChar": 65
+      },
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d929175e_44e6304c",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 1,
+      "message": "Why do we need to set the previous context back? If we didn\u0027t have that then we could use if (!GetInstance()-\u003eConsumedError(DsicoverAdapter(), \u0026adapter)).\n\nBut Instance doesn\u0027t yet have that facility. See for example how it is done on the device https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Device.h;l\u003d78",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3ce7b23_2c792a6b",
+        "filename": "src/dawn/native/opengl/BackendGL.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a89efd79_24e97f73",
+        "filename": "src/dawn/native/opengl/ContextEGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 1,
+      "message": "What happens if the display is already initialized (is it always a new one)? What are the nullptrs?",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "814ae4e0_52fe7ffe",
+        "filename": "src/dawn/native/opengl/ContextEGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 1,
+      "message": "Maybe we should use Dawn\u0027s error facilities here so a ResultOrError is returned from Create",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8544d099_8a06094a",
+        "filename": "src/dawn/native/opengl/ContextEGL.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 1,
+      "message": "nit: can be private since there is a Create function.",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7f9208a_5445d85f",
+        "filename": "src/dawn/native/opengl/ContextEGL.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 1,
+      "message": "It\u0027s a bit weird to persistently store a reference. Did you mean to make it const? But even then I think Dawn usually keeps const* for stored pointers.",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8ae5521_d51c35ce",
+        "filename": "src/dawn/native/opengl/DeviceGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 1,
+      "message": "nit: can you file a bug and use it instead of my email? It\u0027s unlikely I\u0027ll ever get to it :P",
+      "range": {
+        "startLine": 133,
+        "startChar": 13,
+        "endLine": 133,
+        "endChar": 32
+      },
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4703ce3d_f04c0316",
+        "filename": "src/dawn/native/opengl/DeviceGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 1,
+      "message": "Maybe we should document in the header that GetGL is what does the implicit MakeCurrent?",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b09c62b0_8ae0ab75",
+        "filename": "src/dawn/native/opengl/EGLFunctions.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 1,
+      "message": "u-nit: the rest of the code uses Initialize",
+      "range": {
+        "startLine": 21,
+        "startChar": 19,
+        "endLine": 21,
+        "endChar": 23
+      },
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e651ac7f_763f6be6",
+        "filename": "src/dawn/native/opengl/EGLFunctions.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 1,
+      "message": "Maybe we should be defensive and return an error if the function could not be loaded. This is what OpenGLFunctions does.",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccd504a3_694b094d",
+        "filename": "src/dawn/native/opengl/EGLFunctions.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 1,
+      "message": "How hard would it be to adapt opengl_loader_generator.py to also produce a function loader from egl.xml? If it\u0027s hard we can defer indefinitely.",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a04533b9_f272ceca",
+        "filename": "src/dawn/tests/end2end/SwapChainTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b0bb90d_58925b8c",
+        "filename": "src/dawn/tests/end2end/SwapChainValidationTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 1,
+      "message": "nit: Assert can be removed?",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

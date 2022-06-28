@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b8d77db_16c69188",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T15:59:42Z",
+      "side": 0,
+      "message": "Why is this no longer a scoped environment var? Is it because we are going to repeatedly use ANGLE to create new GL contexts so it needs to outlive GL Adapter creation?",
+      "revId": "8a290388261c3762afe85fd3846c0b791335d9e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
