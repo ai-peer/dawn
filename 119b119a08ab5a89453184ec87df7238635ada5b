@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39f97291_1549327f",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T19:33:27Z",
+      "side": 1,
+      "message": "Yes, I think we should open all the libEGL\u0027s we can find, and create Adapters for each of them. Then we could run SwANGLE and native EGL in the same end2end run, for example.\n\nLogged https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1476",
+      "parentUuid": "9416377c_138d2a7a",
+      "revId": "119b119a08ab5a89453184ec87df7238635ada5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10887845_d42a632e",
