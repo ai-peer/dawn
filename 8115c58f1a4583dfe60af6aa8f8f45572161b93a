@@ -204,6 +204,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec42778f_3ded8f9a",
+        "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-28T20:12:01Z",
+      "side": 1,
+      "message": "Actually, might not be nit, might actually be causing test failures in windows.",
+      "parentUuid": "27a80f86_d9aee4f1",
+      "range": {
+        "startLine": 434,
+        "startChar": 37,
+        "endLine": 434,
+        "endChar": 39
+      },
+      "revId": "8115c58f1a4583dfe60af6aa8f8f45572161b93a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef7c5bf6_a1122658",
         "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
         "patchSetId": 4
@@ -215,6 +239,30 @@
       "writtenOn": "2022-06-28T20:11:05Z",
       "side": 1,
       "message": "nit. count.shaderModule",
+      "range": {
+        "startLine": 449,
+        "startChar": 37,
+        "endLine": 449,
+        "endChar": 39
+      },
+      "revId": "8115c58f1a4583dfe60af6aa8f8f45572161b93a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e71f6596_ead8007f",
+        "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-06-28T20:12:01Z",
+      "side": 1,
+      "message": "Same as above.",
+      "parentUuid": "ef7c5bf6_a1122658",
       "range": {
         "startLine": 449,
         "startChar": 37,
