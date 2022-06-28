@@ -165,6 +165,10 @@ class CopyTextureForBrowserTests : public Parent {
         DEST,
     };
 
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        return {wgpu::FeatureName::DawnInternalUsages};
+    }
+
     // Source texture contains red pixels and dst texture contains green pixels at start.
     static std::vector<RGBA8> GetTextureData(
         const utils::TextureDataCopyLayout& layout,
