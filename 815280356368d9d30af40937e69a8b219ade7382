@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b4cac01_9d166f80",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-28T01:38:55Z",
+      "side": 1,
+      "message": "In this patch I try not to modify the built-in function and operator, in order to keep the change relatively small (although large enough now). So matchers for all built-in function and operator (except `arrayLength`, which match everything with a unlimited `T`) are intentionally leave unchanged (not include `f16`). For `select`, the new `scalar_no_f16` is equal to the previous `scalar`.\nI plan to add built-in function and operator support in the next resolver CL.",
+      "parentUuid": "3c3dad3f_037ae1d0",
+      "revId": "815280356368d9d30af40937e69a8b219ade7382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2409fefd_32ec3755",
         "filename": "src/tint/resolver/materialize_test.cc",
         "patchSetId": 6
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41fa2318_26c58d47",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-28T01:38:55Z",
+      "side": 1,
+      "message": "The parameterized materialize test will test many use cases, including built-in function and binary operator, which are not supported yet in this CL. My plan is to enable all these commented code as soon as built-in function and binary operator are supported in resolver.\n\nThese commented code are tested locally and the results are as expected.",
+      "parentUuid": "2409fefd_32ec3755",
+      "revId": "815280356368d9d30af40937e69a8b219ade7382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e533b8a1_36d6b136",
         "filename": "test/tint/builtins/gen/literal/arrayLength/8421b9.wgsl.expected.glsl",
         "patchSetId": 6
@@ -48,6 +84,24 @@
       "writtenOn": "2022-06-27T18:00:14Z",
       "side": 1,
       "message": "Why do these all end up SKIP?",
+      "revId": "815280356368d9d30af40937e69a8b219ade7382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbf7145e_39e9f31d",
+        "filename": "test/tint/builtins/gen/literal/arrayLength/8421b9.wgsl.expected.glsl",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-28T01:38:55Z",
+      "side": 1,
+      "message": "Built-in function and operator are not supported for f16 yet in this CL intentionally, including the `arrayLength` built-in. And also the backend (transforms and writers) support for f16 is not ready yet, especially `arrayLength` require some specific transform. Therefore I don\u0027t expect to run end-to-end test for f16 yet.\n\nI tried to keep the matchers for built-in and operator unchanged in intrinsic.def (that\u0027s why I make the matcher for `select` become `scalar_no_f16`), but `arrayLength` has an unlimited matcher `T`, which I don\u0027t figure out how to modify properly. Leaving it unlimited, these test cases will be generated automatically, so I have to SKIP them in order not to result in writer error.",
+      "parentUuid": "e533b8a1_36d6b136",
       "revId": "815280356368d9d30af40937e69a8b219ade7382",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
