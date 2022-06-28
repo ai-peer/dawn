@@ -112,6 +112,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c3337a1_464996ee",
+        "filename": "src/dawn/native/RenderPassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-06-28T05:04:38Z",
+      "side": 1,
+      "message": "My understanding is \"just use the default maxDrawCount\" because WebGPU doesn\u0027t state that maxDrawCount is ignorable.",
+      "parentUuid": "8432a058_3f28df51",
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b20233c8_b0fb9876",
         "filename": "src/dawn/native/RenderPassEncoder.cpp",
         "patchSetId": 1
