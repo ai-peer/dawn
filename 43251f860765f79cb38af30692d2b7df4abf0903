@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "43251f860765f79cb38af30692d2b7df4abf0903",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9343bfba_829fc95a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-28T18:08:08Z",
+      "side": 1,
+      "message": "LGTM - running some of the bots that are expected to work",
+      "revId": "43251f860765f79cb38af30692d2b7df4abf0903",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
