@@ -52,6 +52,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b673e53_f829ad1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T05:46:20Z",
+      "side": 1,
+      "message": "LGTM. Tests are a bit verbose and don\u0027t check adverserialy (as in you could imagine implementation cheating and passing the tests easily), but that can be left for the CTS.",
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9c95e98_fd1ed8e8",
@@ -147,6 +164,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f036fac_95f9e201",
+        "filename": "src/dawn/native/RenderPassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T05:46:20Z",
+      "side": 1,
+      "message": "Yeah the intent was to still default to the maxDrawCount from the spec so that we are compliant so the logic here looks good. WDYT?",
+      "parentUuid": "3c3337a1_464996ee",
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b20233c8_b0fb9876",
         "filename": "src/dawn/native/RenderPassEncoder.cpp",
         "patchSetId": 1
@@ -164,6 +199,40 @@
         "endLine": 151,
         "endChar": 48
       },
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5020b94f_774219e3",
+        "filename": "src/dawn/native/RenderPassEncoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T05:46:20Z",
+      "side": 1,
+      "message": "nit: Maybe mention in a comment that this is the hardcoded value in the WebGPU spec.",
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99c5b0f3_321d8d86",
+        "filename": "src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T05:46:20Z",
+      "side": 1,
+      "message": "nit: the vertex buffer is not used so it isn\u0027t necessary to set it (or create it at the beginning)",
       "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
