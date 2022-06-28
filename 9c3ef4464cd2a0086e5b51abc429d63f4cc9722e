@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d7e2c1c_da1947b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-06-28T07:41:27Z",
+      "side": 1,
+      "message": "I can\u0027t reproduce the build error locally. So I need to cherry-pick that change, upload the CL, and run the CQ DRY TEST on the server for testing. Is it what you want me to do? If I remove the Change-Id tag from your commit comment, does Gerrit ignore the commit but apply that commit for testing?",
+      "parentUuid": "fe5d3e76_6ae2c8b6",
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9c95e98_fd1ed8e8",
         "filename": "dawn.json",
         "patchSetId": 1
