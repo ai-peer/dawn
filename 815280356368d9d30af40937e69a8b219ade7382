@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6b4355f_8d640bbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-28T12:49:25Z",
+      "side": 1,
+      "message": "LGTM. Thanks for the explanation of how you\u0027re splitting the CLs. Sounds good to me.",
+      "revId": "815280356368d9d30af40937e69a8b219ade7382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c3dad3f_037ae1d0",
@@ -53,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10e902bc_5949a8fb",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-28T12:49:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4b4cac01_9d166f80",
+      "revId": "815280356368d9d30af40937e69a8b219ade7382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2409fefd_32ec3755",
@@ -84,6 +119,24 @@
       "side": 1,
       "message": "The parameterized materialize test will test many use cases, including built-in function and binary operator, which are not supported yet in this CL. My plan is to enable all these commented code as soon as built-in function and binary operator are supported in resolver.\n\nThese commented code are tested locally and the results are as expected.",
       "parentUuid": "2409fefd_32ec3755",
+      "revId": "815280356368d9d30af40937e69a8b219ade7382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b534e6c_3346a144",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-28T12:49:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "41fa2318_26c58d47",
       "revId": "815280356368d9d30af40937e69a8b219ade7382",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -142,6 +195,24 @@
       "side": 1,
       "message": "Built-in function and operator are not supported for f16 yet in this CL intentionally, including the `arrayLength` built-in. And also the backend (transforms and writers) support for f16 is not ready yet, especially `arrayLength` require some specific transform. Therefore I don\u0027t expect to run end-to-end test for f16 yet.\n\nI tried to keep the matchers for built-in and operator unchanged in intrinsic.def (that\u0027s why I make the matcher for `select` become `scalar_no_f16`), but `arrayLength` has an unlimited matcher `T`, which I don\u0027t figure out how to modify properly. Leaving it unlimited, these test cases will be generated automatically, so I have to SKIP them in order not to result in writer error.",
       "parentUuid": "e533b8a1_36d6b136",
+      "revId": "815280356368d9d30af40937e69a8b219ade7382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaf5ea22_3e880003",
+        "filename": "test/tint/builtins/gen/literal/arrayLength/8421b9.wgsl.expected.glsl",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-28T12:49:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bbf7145e_39e9f31d",
       "revId": "815280356368d9d30af40937e69a8b219ade7382",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
