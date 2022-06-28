@@ -219,6 +219,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21bef4e8_7a1562a7",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T19:25:05Z",
+      "side": 1,
+      "message": "Thanks for the excellent analysis. #1 is definitely the safest but also the most chatty. The only reason that #2 didn\u0027t work is that tests were not expecting the GLES backend to be discovered (and to be made current).\n\nIt might not be a bad idea to make the tests more robust to context change, regardless. We could do that, then come back and remove the context restoration here.\n\nIf we move to an all-Dawn world in future-Chrome, we wouldn\u0027t have to worry about restoring it, since only Dawn would be issuing MakeCurrent calls, on various Dawn contexts, and we could safely leave the context in whatever state we want. In that case #2 is the best long-term approach.",
+      "parentUuid": "31c40f05_454ab64c",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b3ce7b23_2c792a6b",
         "filename": "src/dawn/native/opengl/BackendGL.h",
         "patchSetId": 33

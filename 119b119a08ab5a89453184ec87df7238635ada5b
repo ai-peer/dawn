@@ -39,6 +39,30 @@
       },
       "revId": "119b119a08ab5a89453184ec87df7238635ada5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1167d84c_e937c0cd",
+        "filename": "src/dawn/native/opengl/BackendGL.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T19:25:05Z",
+      "side": 1,
+      "message": "Realized this one doesn\u0027t need to be persistent anymore; removed.",
+      "parentUuid": "10887845_d42a632e",
+      "range": {
+        "startLine": 35,
+        "startChar": 17,
+        "endLine": 35,
+        "endChar": 20
+      },
+      "revId": "119b119a08ab5a89453184ec87df7238635ada5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
