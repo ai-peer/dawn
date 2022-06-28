@@ -24,11 +24,11 @@ struct Extent3D;
 struct ImageCopyTexture;
 struct CopyTextureForBrowserOptions;
 
-MaybeError ValidateCopyTextureForBrowser(DeviceBase* device,
-                                         const ImageCopyTexture* source,
-                                         const ImageCopyTexture* destination,
-                                         const Extent3D* copySize,
-                                         const CopyTextureForBrowserOptions* options);
+MaybeError ValidateCopyTextureForBrowserInternal(DeviceBase* device,
+                                                 const ImageCopyTexture* source,
+                                                 const ImageCopyTexture* destination,
+                                                 const Extent3D* copySize,
+                                                 const CopyTextureForBrowserOptions* options);
 
 MaybeError DoCopyTextureForBrowser(DeviceBase* device,
                                    const ImageCopyTexture* source,
