@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbf8a934_8246d1e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-28T05:16:16Z",
+      "side": 1,
+      "message": "Corentin, TBR because the compliance lint will get upset (still).\n\nI\u0027m just adding this single case in to get the bots green (CI is very red).\nI tried merging a bunch of these expectations in https://dawn-review.googlesource.com/c/dawn/+/94720 but sadly it will not play nicely with the roller.",
+      "revId": "783b20f0fa3cad2baaf2714c0ed70d6371feeed0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
