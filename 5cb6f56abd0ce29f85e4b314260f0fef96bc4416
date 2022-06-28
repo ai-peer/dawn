@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51d31d57_887cf46b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T06:54:58Z",
+      "side": 1,
+      "message": "PTAL!",
+      "revId": "5cb6f56abd0ce29f85e4b314260f0fef96bc4416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05466be1_d9316681",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T06:54:58Z",
+      "side": 1,
+      "message": "note: I thought of a one-liner for powers of two that\u0027s ((alignas(A) - 1) | (alignas(B) - 1)) + 1 but it seemed much less readable.",
+      "revId": "5cb6f56abd0ce29f85e4b314260f0fef96bc4416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
