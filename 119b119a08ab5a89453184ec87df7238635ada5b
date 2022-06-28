@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9416377c_138d2a7a",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-28T18:58:09Z",
+      "side": 1,
+      "message": "In official Chrome builds, we\u0027ve run into issues where we didn\u0027t find Chrome\u0027s version of SwiftShader. Assuming libEGL here should be coming from ANGLE, we may need to check a few different search paths. This is what we did for Swiftshader:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/BackendVk.cpp;l\u003d209?q\u003df:dawn%20GetRuntimeSearch\n\nok to address in a follow-up; or maybe it isn\u0027t needed at all",
+      "revId": "119b119a08ab5a89453184ec87df7238635ada5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10887845_d42a632e",
+        "filename": "src/dawn/native/opengl/BackendGL.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-28T18:58:09Z",
+      "side": 1,
+      "message": "u-nit: prefix with \"m\" ?",
+      "range": {
+        "startLine": 35,
+        "startChar": 17,
+        "endLine": 35,
+        "endChar": 20
+      },
+      "revId": "119b119a08ab5a89453184ec87df7238635ada5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "019b9086_4fc0c74d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-28T18:58:09Z",
+      "side": 1,
+      "message": "LGTM too; sorry I didn\u0027t have a change to review this until now",
+      "revId": "16f92ab30f6f7e83ac3cd0adef936fccfb84794e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "860c8794_9f5b679e",
+        "filename": "src/dawn/native/opengl/ContextEGL.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-28T18:58:09Z",
+      "side": 1,
+      "message": "ditto const\u0026",
+      "range": {
+        "startLine": 34,
+        "startChar": 15,
+        "endLine": 34,
+        "endChar": 27
+      },
+      "revId": "16f92ab30f6f7e83ac3cd0adef936fccfb84794e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b44e0beb_563b7df7",
+        "filename": "src/dawn/native/opengl/ContextEGL.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-28T18:58:09Z",
+      "side": 1,
+      "message": "like OpenGLFunctions, make it `const` too?",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 16
+      },
+      "revId": "16f92ab30f6f7e83ac3cd0adef936fccfb84794e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

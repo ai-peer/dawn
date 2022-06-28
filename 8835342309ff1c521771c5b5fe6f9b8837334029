@@ -201,6 +201,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "31c40f05_454ab64c",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-28T18:58:09Z",
+      "side": 1,
+      "message": "Hm, I don\u0027t completely agree with the reasoning. but tldr; I think it\u0027s fine for now.\n\nThe reason why this context restoration makes the test not crash is that it just-so-happens that in this test, DiscoverDefaultAdapters is the only operation that happens to make the context current. And that\u0027s the case because after discovering adapters, we explicitly continue only with the Metal adapter.\n\nHowever, you can easily imagine code that doesn\u0027t care about the backend type. It just does:\n\nwgpu::Adapter adapter \u003d instance.RequestAdapter();\nwgpu::Device device \u003d adapter.RequestDevice();\nwgpu::Buffer buffer \u003d device.CreateBuffer();\n\nThe CTS is all written this way, and Dawn\u0027s tests use this style for the most part (with some extra stuff to make tests parameterized by backend). When running on OpenGLES, the test would for sure make the context current by the time it makes a buffer, and so Chrome would need to go and restore its context after running the Dawn operations if it were to subsequently use Skia. \n\nUltimately, I think what we\u0027re doing here is inconsistent, which makes the API potentially fragile to use. Sometimes we restore the context, and sometimes we don\u0027t. We could either:\n 1. *Always* restore the context (GetGL returns ScopedGL or something), so an embedder of Dawn doesn\u0027t ever have to worry at all about context restoration.\n 2. *Never* restore the context, so that in Chrome, whenever some other graphics API is used, the burden is on Chrome to make sure its context is still current.\n 3. Say that inconsistency is fine. We can specify adapter discovery as a type of special operation that doesn\u0027t change the context, but all other operations (device creation and everything after) are expected to change the context. In this world though, we must recognize that it is still Chrome\u0027s responsibility to restore the context.\n 4. something else\n\n(3) is basically what we already have implemented here - we just need to be clear that we are still being \"unfair\" and will be making Chrome restore the context (sometimes). I think this would probably be reasonable though since after discovering adapters, you are able to determine if your adapter type is GLES, and then will know whether the burden of context restoration is on you.\n\nHowever, I wonder if in the general case, (2) is a better option since Chrome already deals with multiple contexts and takes responsibility for making sure its current (that\u0027s why `DecoderContext::MakeCurrent` exists). The crashing tests just aren\u0027t written that way. Probably `CheckSkiaPixels` should make sure the context is current.\n(1) is quite attractive too but it could get rather noisy making the context current and restoring it constantly. I think we could make it not-noisy in the future though.",
+      "parentUuid": "38c34c06_7e797697",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b3ce7b23_2c792a6b",
         "filename": "src/dawn/native/opengl/BackendGL.h",
         "patchSetId": 33
