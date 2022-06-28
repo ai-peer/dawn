@@ -306,6 +306,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52ac09d3_28ce72be",
+        "filename": "src/dawn/native/RenderPassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-28T16:56:45Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "6f036fac_95f9e201",
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b20233c8_b0fb9876",
