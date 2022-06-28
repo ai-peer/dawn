@@ -25,6 +25,8 @@
 #include "dawn/native/BindGroup.h"
 #include "dawn/native/BindGroupLayout.h"
 #include "dawn/native/Buffer.h"
+#include "dawn/native/ChainUtils_autogen.h"
+#include "dawn/native/CommandValidation.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/PipelineLayout.h"
 #include "dawn/native/Queue.h"
@@ -165,7 +167,8 @@ BindGroupEntry BindingInitializationHelper::GetAsBinding() const {
 ResultOrError<Ref<BindGroupBase>> MakeBindGroup(
     DeviceBase* device,
     const Ref<BindGroupLayoutBase>& layout,
-    std::initializer_list<BindingInitializationHelper> entriesInitializer) {
+    std::initializer_list<BindingInitializationHelper> entriesInitializer,
+    bool internalUsage) {
     std::vector<BindGroupEntry> entries;
     for (const BindingInitializationHelper& helper : entriesInitializer) {
         entries.push_back(helper.GetAsBinding());
@@ -176,11 +179,36 @@ ResultOrError<Ref<BindGroupBase>> MakeBindGroup(
     descriptor.entryCount = entries.size();
     descriptor.entries = entries.data();
 
+    if (internalUsage) {
+        DawnObjectInternalUsageDescriptor internalUsageDesc;
+        internalUsageDesc.useInternalUsages = true;
+        descriptor.nextInChain = &internalUsageDesc;
+    }
+
     return device->CreateBindGroup(&descriptor);
 }
 
 const char* GetLabelForTrace(const char* label) {
     return (label == nullptr || strlen(label) == 0) ? "None" : label;
+}
+
+ResultOrError<UsageValidationMode> GetUsageValidationModeFromDescriptor(
+    DeviceBase* device,
+    const ChainedStruct* chain) {
+    const DawnObjectInternalUsageDescriptor* internalUsageDesc = nullptr;
+    FindInChain(chain, &internalUsageDesc);
+
+    DAWN_INVALID_IF(internalUsageDesc != nullptr &&
+                        !device->APIHasFeature(wgpu::FeatureName::DawnInternalUsages),
+                    "%s is not available.", wgpu::FeatureName::DawnInternalUsages);
+
+    FindInChain(chain, &internalUsageDesc);
+
+    if (internalUsageDesc != nullptr && internalUsageDesc->useInternalUsages) {
+        return UsageValidationMode::Internal;
+    }
+
+    return UsageValidationMode::Default;
 }
 
 }  // namespace dawn::native::utils
