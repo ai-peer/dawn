@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96a87264_934e153c",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-06-28T09:28:49Z",
+      "side": 1,
+      "message": "I\u0027ve also considered adding the timestamps of the beginning and end separately in `BeginXxxPassCmd`, this is easier for implementation. But I think it is strange to use a parameter with end keyword in begin cmds. If the `endTimestamp` is acceptable, I\u0027d be happy to make changes.",
+      "parentUuid": "31fdb448_27d5e375",
+      "range": {
+        "startLine": 758,
+        "startChar": 15,
+        "endLine": 761,
+        "endChar": 0
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b798ed5e_17a5a320",
         "filename": "src/dawn/native/Commands.h",
         "patchSetId": 3
@@ -112,6 +136,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "224c74ab_a389833e",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-06-28T09:28:49Z",
+      "side": 1,
+      "message": "On macOS version less than 11.0 （iOS \u003c 14.0), we only can create default compute pass by [MTLCommandBuffer computeCommandEncoder] (https://developer.apple.com/documentation/metal/mtlcommandbuffer/1443044-computecommandencoder/), and it is a sequential compute pass. The compute pass created from descriptor should be same to the default one, otherwise it\u0027s hard to decide that the commands are executed concurrently or sequentially.",
+      "parentUuid": "ec3eb9a5_741ee54f",
+      "range": {
+        "startLine": 58,
+        "startChar": 30,
+        "endLine": 58,
+        "endChar": 51
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2619b8b_55b73417",
         "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
         "patchSetId": 3
@@ -135,6 +183,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "804821ad_1657c02f",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-06-28T09:28:49Z",
+      "side": 1,
+      "message": "Good question, but I didn\u0027t found any explaination about this in Apple document. I need to try it.",
+      "parentUuid": "d2619b8b_55b73417",
+      "range": {
+        "startLine": 239,
+        "startChar": 16,
+        "endLine": 240,
+        "endChar": 80
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c81a9a0_24172ea8",
         "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
         "patchSetId": 3
@@ -146,6 +218,30 @@
       "writtenOn": "2022-06-27T22:17:51Z",
       "side": 1,
       "message": "why do we use 0 here and MTLCounterDontSample above?",
+      "range": {
+        "startLine": 244,
+        "startChar": 26,
+        "endLine": 244,
+        "endChar": 40
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1c958b5_58c39a35",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-06-28T09:28:49Z",
+      "side": 1,
+      "message": "My mistake, should be `MTLCounterDontSample`.",
+      "parentUuid": "9c81a9a0_24172ea8",
       "range": {
         "startLine": 244,
         "startChar": 26,
@@ -210,6 +306,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8204e1cc_8b204246",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-06-28T09:28:49Z",
+      "side": 1,
+      "message": "The counter sampling will not be supported at both stage boundary and draw/dispatch/blit boundary on same device. Apple Silicon devices do not support draw/dispatch/blit boundary, and any TBDR renderer wouldn\u0027t be able to support them , draw calls for example, all the vertex processing of all the draw calls in the render pass execute together. So I think only one of stage boundary and draw/dispatch/blit boundary is supported if the counter sampling is supported.",
+      "parentUuid": "23522488_8ff1906a",
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b2403662_7aacf754",
         "filename": "src/dawn/tests/end2end/QueryTests.cpp",
         "patchSetId": 3
@@ -221,6 +335,30 @@
       "writtenOn": "2022-06-27T22:19:36Z",
       "side": 1,
       "message": "This sounds like we should implement this workaround in the Vulkan backend instead of in the test.\n\nIt\u0027s ok to write the test the way it should work, and skip on Intel Windows Vulkan, with a bug about implementing the workaround in the future.",
+      "range": {
+        "startLine": 548,
+        "startChar": 27,
+        "endLine": 551,
+        "endChar": 48
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "861b7f37_cba7f4de",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-06-28T09:28:49Z",
+      "side": 1,
+      "message": "Sure. We have reported this issue to Intel driver team, and it has been fixed on latest driver 30.0.11.1994. We don\u0027t need to workaround it, I will add a skip condition for driver version to make the tests could run on the fixed driver version.",
+      "parentUuid": "b2403662_7aacf754",
       "range": {
         "startLine": 548,
         "startChar": 27,
