@@ -153,7 +153,8 @@ void RenderEncoderBase::APIDrawIndirect(BufferBase* indirectBuffer, uint64_t ind
         [&](CommandAllocator* allocator) -> MaybeError {
             if (IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(indirectBuffer));
-                DAWN_TRY(ValidateCanUseAs(indirectBuffer, wgpu::BufferUsage::Indirect));
+                DAWN_TRY(ValidateCanUseAs(indirectBuffer, wgpu::BufferUsage::Indirect,
+                                          UsageValidationMode::Default));
                 DAWN_TRY(mCommandBufferState.ValidateCanDraw());
 
                 DAWN_INVALID_IF(indirectOffset % 4 != 0,
@@ -203,7 +204,8 @@ void RenderEncoderBase::APIDrawIndexedIndirect(BufferBase* indirectBuffer,
         [&](CommandAllocator* allocator) -> MaybeError {
             if (IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(indirectBuffer));
-                DAWN_TRY(ValidateCanUseAs(indirectBuffer, wgpu::BufferUsage::Indirect));
+                DAWN_TRY(ValidateCanUseAs(indirectBuffer, wgpu::BufferUsage::Indirect,
+                                          UsageValidationMode::Default));
                 DAWN_TRY(mCommandBufferState.ValidateCanDrawIndexed());
 
                 DAWN_INVALID_IF(indirectOffset % 4 != 0,
@@ -290,7 +292,8 @@ void RenderEncoderBase::APISetIndexBuffer(BufferBase* buffer,
         [&](CommandAllocator* allocator) -> MaybeError {
             if (IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(buffer));
-                DAWN_TRY(ValidateCanUseAs(buffer, wgpu::BufferUsage::Index));
+                DAWN_TRY(ValidateCanUseAs(buffer, wgpu::BufferUsage::Index,
+                                          UsageValidationMode::Default));
 
                 DAWN_TRY(ValidateIndexFormat(format));
 
@@ -350,7 +353,8 @@ void RenderEncoderBase::APISetVertexBuffer(uint32_t slot,
         [&](CommandAllocator* allocator) -> MaybeError {
             if (IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(buffer));
-                DAWN_TRY(ValidateCanUseAs(buffer, wgpu::BufferUsage::Vertex));
+                DAWN_TRY(ValidateCanUseAs(buffer, wgpu::BufferUsage::Vertex,
+                                          UsageValidationMode::Default));
 
                 DAWN_INVALID_IF(slot >= kMaxVertexBuffers,
                                 "Vertex buffer slot (%u) is larger the maximum (%u)", slot,

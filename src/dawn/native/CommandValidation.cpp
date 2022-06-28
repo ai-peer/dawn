@@ -97,7 +97,7 @@ MaybeError ValidateWriteBuffer(const DeviceBase* device,
                     "Write range (bufferOffset: %u, size: %u) does not fit in %s size (%u).",
                     bufferOffset, size, buffer, bufferSize);
 
-    DAWN_TRY(ValidateCanUseAs(buffer, wgpu::BufferUsage::CopyDst));
+    DAWN_TRY(ValidateCanUseAs(buffer, wgpu::BufferUsage::CopyDst, UsageValidationMode::Default));
 
     return {};
 }
@@ -471,14 +471,32 @@ MaybeError ValidateCanUseAs(const TextureBase* texture,
                             texture->GetInternalUsage(), usage);
             break;
     }
-
     return {};
 }
 
-MaybeError ValidateCanUseAs(const BufferBase* buffer, wgpu::BufferUsage usage) {
+MaybeError ValidateCanUseAs(const BufferBase* buffer,
+                            wgpu::BufferUsage usage,
+                            UsageValidationMode mode) {
     ASSERT(wgpu::HasZeroOrOneBits(usage));
-    DAWN_INVALID_IF(!(buffer->GetUsageExternalOnly() & usage), "%s usage (%s) doesn't include %s.",
-                    buffer, buffer->GetUsageExternalOnly(), usage);
+    switch (mode) {
+        case UsageValidationMode::Default:
+            DAWN_INVALID_IF(!(buffer->GetUsageExternalOnly() & usage),
+                            "%s usage (%s) doesn't include %s.", buffer,
+                            buffer->GetUsageExternalOnly(), usage);
+            break;
+        case UsageValidationMode::Internal:
+            if (DAWN_UNLIKELY(!(buffer->GetUsage() & usage))) {
+                if (!(buffer->GetUsageExternalOnly() & usage)) {
+                    return DAWN_FORMAT_VALIDATION_ERROR("%s usage (%s) doesn't include %s.", buffer,
+                                                        buffer->GetUsageExternalOnly(), usage);
+                } else {
+                    return DAWN_FORMAT_VALIDATION_ERROR(
+                        "%s internal usage (%s) doesn't include %s.", buffer,
+                        buffer->GetUsageInternalOnly(), usage);
+                }
+            }
+            break;
+    }
     return {};
 }
 

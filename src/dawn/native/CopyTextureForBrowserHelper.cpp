@@ -354,15 +354,15 @@ MaybeError ValidateCopyTextureForBrowser(DeviceBase* device,
         "not 1.",
         source->texture->GetSampleCount(), destination->texture->GetSampleCount());
 
-    DAWN_TRY(ValidateCanUseAs(source->texture, wgpu::TextureUsage::CopySrc,
-                              UsageValidationMode::Default));
-    DAWN_TRY(ValidateCanUseAs(source->texture, wgpu::TextureUsage::TextureBinding,
-                              UsageValidationMode::Default));
-
-    DAWN_TRY(ValidateCanUseAs(destination->texture, wgpu::TextureUsage::CopyDst,
-                              UsageValidationMode::Default));
-    DAWN_TRY(ValidateCanUseAs(destination->texture, wgpu::TextureUsage::RenderAttachment,
-                              UsageValidationMode::Default));
+    DAWN_INVALID_IF(
+        options->internalUsage && !device->IsFeatureEnabled(Feature::DawnInternalUsages),
+        "The dawn-internal-usages feature is not enabled");
+    UsageValidationMode mode =
+        options->internalUsage ? UsageValidationMode::Internal : UsageValidationMode::Default;
+    DAWN_TRY(ValidateCanUseAs(source->texture, wgpu::TextureUsage::CopySrc, mode));
+    DAWN_TRY(ValidateCanUseAs(source->texture, wgpu::TextureUsage::TextureBinding, mode));
+    DAWN_TRY(ValidateCanUseAs(destination->texture, wgpu::TextureUsage::CopyDst, mode));
+    DAWN_TRY(ValidateCanUseAs(destination->texture, wgpu::TextureUsage::RenderAttachment, mode));
 
     DAWN_TRY(ValidateCopyTextureFormatConversion(source->texture->GetFormat().format,
                                                  destination->texture->GetFormat().format));
@@ -546,17 +546,25 @@ MaybeError DoCopyTextureForBrowser(DeviceBase* device,
                     device->CreateTextureView(source->texture, &srcTextureViewDesc));
 
     // Create bind group after all binding entries are set.
+    UsageValidationMode mode =
+        options->internalUsage ? UsageValidationMode::Internal : UsageValidationMode::Default;
     Ref<BindGroupBase> bindGroup;
-    DAWN_TRY_ASSIGN(bindGroup,
-                    utils::MakeBindGroup(device, layout,
-                                         {{0, uniformBuffer}, {1, sampler}, {2, srcTextureView}}));
+    DAWN_TRY_ASSIGN(bindGroup, utils::MakeBindGroup(
+                                   device, layout,
+                                   {{0, uniformBuffer}, {1, sampler}, {2, srcTextureView}}, mode));
 
     // Create command encoder.
+    CommandEncoderDescriptor commandEncoderDesc = {};
+    DawnEncoderInternalUsageDescriptor internalUsageDesc = {};
+    if (options->internalUsage) {
+        internalUsageDesc.useInternalUsages = true;
+        commandEncoderDesc.nextInChain = &internalUsageDesc;
+    }
     Ref<CommandEncoder> encoder;
-    DAWN_TRY_ASSIGN(encoder, device->CreateCommandEncoder());
+    DAWN_TRY_ASSIGN(encoder, device->CreateCommandEncoder(&commandEncoderDesc));
 
     // Prepare dst texture view as color Attachment.
-    TextureViewDescriptor dstTextureViewDesc;
+    TextureViewDescriptor dstTextureViewDesc = {};
     dstTextureViewDesc.dimension = wgpu::TextureViewDimension::e2D;
     dstTextureViewDesc.baseMipLevel = destination->mipLevel;
     dstTextureViewDesc.mipLevelCount = 1;
@@ -566,7 +574,7 @@ MaybeError DoCopyTextureForBrowser(DeviceBase* device,
 
     DAWN_TRY_ASSIGN(dstView, device->CreateTextureView(destination->texture, &dstTextureViewDesc));
     // Prepare render pass color attachment descriptor.
-    RenderPassColorAttachment colorAttachmentDesc;
+    RenderPassColorAttachment colorAttachmentDesc = {};
 
     colorAttachmentDesc.view = dstView.Get();
     colorAttachmentDesc.loadOp = wgpu::LoadOp::Load;
@@ -574,7 +582,7 @@ MaybeError DoCopyTextureForBrowser(DeviceBase* device,
     colorAttachmentDesc.clearValue = {0.0, 0.0, 0.0, 1.0};
 
     // Create render pass.
-    RenderPassDescriptor renderPassDesc;
+    RenderPassDescriptor renderPassDesc = {};
     renderPassDesc.colorAttachmentCount = 1;
     renderPassDesc.colorAttachments = &colorAttachmentDesc;
     Ref<RenderPassEncoder> passEncoder = encoder->BeginRenderPass(&renderPassDesc);
