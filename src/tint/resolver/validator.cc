@@ -1612,8 +1612,7 @@ bool Validator::TextureBuiltinFunction(const sem::Call* call) const {
         auto* arg = call->Arguments()[index];
         if (auto values = arg->ConstantValue()) {
             // Assert that the constant values are of the expected type.
-            if (!values.Type()->IsAnyOf<sem::I32, sem::Vector>() ||
-                !values.ElementType()->Is<sem::I32>()) {
+            if (!values->Type()->is_integer_scalar_or_vector()) {
                 TINT_ICE(Resolver, diagnostics_)
                     << "failed to resolve '" + func_name + "' " << name << " parameter type";
                 return false;
@@ -1631,24 +1630,26 @@ bool Validator::TextureBuiltinFunction(const sem::Call* call) const {
                     return ast::TraverseAction::Stop;
                 });
             if (is_const_expr) {
-                auto vector = builtin->Parameters()[index]->Type()->Is<sem::Vector>();
-                for (size_t i = 0, n = values.ElementCount(); i < n; i++) {
-                    auto value = values.Element<AInt>(i).value;
-                    if (value < min || value > max) {
-                        if (vector) {
+                if (auto* vector = builtin->Parameters()[index]->Type()->As<sem::Vector>()) {
+                    for (size_t i = 0; i < vector->Width(); i++) {
+                        auto value = values->Index(i)->As<AInt>();
+                        if (value < min || value > max) {
                             AddError("each component of the " + name +
                                          " argument must be at least " + std::to_string(min) +
                                          " and at most " + std::to_string(max) + ". " + name +
                                          " component " + std::to_string(i) + " is " +
                                          std::to_string(value),
                                      arg->Declaration()->source);
-                        } else {
-                            AddError("the " + name + " argument must be at least " +
-                                         std::to_string(min) + " and at most " +
-                                         std::to_string(max) + ". " + name + " is " +
-                                         std::to_string(value),
-                                     arg->Declaration()->source);
+                            return false;
                         }
+                    }
+                } else {
+                    auto value = values->As<AInt>();
+                    if (value < min || value > max) {
+                        AddError("the " + name + " argument must be at least " +
+                                     std::to_string(min) + " and at most " + std::to_string(max) +
+                                     ". " + name + " is " + std::to_string(value),
+                                 arg->Declaration()->source);
                         return false;
                     }
                 }

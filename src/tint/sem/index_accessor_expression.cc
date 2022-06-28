@@ -14,6 +14,8 @@
 
 #include "src/tint/sem/index_accessor_expression.h"
 
+#include "src/tint/ast/index_accessor_expression.h"
+
 #include <utility>
 
 TINT_INSTANTIATE_TYPEINFO(tint::sem::IndexAccessorExpression);
@@ -25,7 +27,7 @@ IndexAccessorExpression::IndexAccessorExpression(const ast::IndexAccessorExpress
                                                  const Expression* object,
                                                  const Expression* index,
                                                  const Statement* statement,
-                                                 Constant constant,
+                                                 const Constant* constant,
                                                  bool has_side_effects,
                                                  const Variable* source_var /* = nullptr */)
     : Base(declaration, type, statement, constant, has_side_effects, source_var),

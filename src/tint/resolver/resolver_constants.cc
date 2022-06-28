@@ -23,7 +23,6 @@
 #include "src/tint/sem/type_constructor.h"
 #include "src/tint/utils/compiler_macros.h"
 #include "src/tint/utils/map.h"
-#include "src/tint/utils/transform.h"
 
 using namespace tint::number_suffixes;  // NOLINT
 
@@ -31,127 +30,314 @@ namespace tint::resolver {
 
 namespace {
 
-/// Converts and returns all the element values of `in` to the type `T`, using the converter
-/// function `CONVERTER`.
-/// @param elements_in the vector of elements to be converted
-/// @param converter a function-like with the signature `void(TO&, FROM)`
-/// @returns the elements converted to type T.
-template <typename T, typename ELEMENTS_IN, typename CONVERTER>
-sem::Constant::Elements Transform(const ELEMENTS_IN& elements_in, CONVERTER&& converter) {
-    TINT_BEGIN_DISABLE_WARNING(UNREACHABLE_CODE);
+template <typename V, typename F>
+auto Cast(const sem::Type* type, V value, F&& f) {
+    return Switch(
+        type,                                                         //
+        [&](const sem::AbstractInt*) { return f(AInt(value)); },      //
+        [&](const sem::AbstractFloat*) { return f(AFloat(value)); },  //
+        [&](const sem::I32*) { return f(i32(value)); },               //
+        [&](const sem::U32*) { return f(u32(value)); },               //
+        [&](const sem::F32*) { return f(f32(value)); },               //
+        [&](const sem::F16*) { return f(f16(value)); },               //
+        [&](const sem::Bool*) { return f(bool(value)); });
+}
 
-    return utils::Transform(elements_in, [&](auto value_in) {
-        if constexpr (std::is_same_v<UnwrapNumber<T>, bool>) {
-            return AInt(value_in != 0);
+template <typename T>
+inline bool IsNegativeFloat(T value) {
+    (void)value;
+    if constexpr (IsFloatingPoint<T>) {
+        return std::signbit(value);
+    } else {
+        return false;
+    }
+}
+
+template <typename T>
+inline auto ValueOf(T value) {
+    if constexpr (std::is_same_v<UnwrapNumber<T>, T>) {
+        return value;
+    } else {
+        return value.value;
+    }
+}
+
+template <typename T>
+inline bool IsPositiveZero(T value) {
+    using N = UnwrapNumber<T>;
+    return std::equal_to<N>()(ValueOf(value), static_cast<N>(0)) &&
+           !IsNegativeFloat(ValueOf(value));
+}
+
+struct Constant : public sem::Constant {
+    virtual utils::Result<const Constant*> Convert(ProgramBuilder& builder,
+                                                   const sem::Type* target_ty,
+                                                   const Source& source) const = 0;
+};
+
+// Forward declaration
+const Constant* CreateComposite(ProgramBuilder& builder,
+                                const sem::Type* type,
+                                std::vector<const Constant*> elements);
+
+template <typename T>
+struct Element : Constant {
+    Element(const sem::Type* t, T v) : type(t), value(v) {}
+    ~Element() override = default;
+    const sem::Type* Type() const override { return type; }
+    std::variant<std::monostate, AInt, AFloat> Value() const override {
+        if constexpr (IsFloatingPoint<UnwrapNumber<T>>) {
+            return static_cast<AFloat>(value);
         } else {
-            T converted{};
-            converter(converted, value_in);
-            if constexpr (IsFloatingPoint<UnwrapNumber<T>>) {
-                return AFloat(converted);
-            } else {
-                return AInt(converted);
-            }
+            return static_cast<AInt>(value);
         }
-    });
+    }
+    const Constant* Index(size_t) const override { return nullptr; }
+    bool AllZero() const override { return IsPositiveZero(value); }
+    bool AnyZero() const override { return IsPositiveZero(value); }
+    bool AllEqual() const override { return true; }
+    size_t Hash() const override { return utils::Hash(type, ValueOf(value)); }
 
-    TINT_END_DISABLE_WARNING(UNREACHABLE_CODE);
-}
-
-/// Converts and returns all the element values of `in` to the semantic type `el_ty`, using the
-/// converter function `CONVERTER`.
-/// @param in the constant to convert
-/// @param el_ty the target element type
-/// @param converter a function-like with the signature `void(TO&, FROM)`
-/// @returns the elements converted to `el_ty`
-template <typename CONVERTER>
-sem::Constant::Elements Transform(const sem::Constant::Elements& in,
-                                  const sem::Type* el_ty,
-                                  CONVERTER&& converter) {
-    return std::visit(
-        [&](auto&& v) {
-            return Switch(
-                el_ty,  //
-                [&](const sem::AbstractInt*) { return Transform<AInt>(v, converter); },
-                [&](const sem::AbstractFloat*) { return Transform<AFloat>(v, converter); },
-                [&](const sem::I32*) { return Transform<i32>(v, converter); },
-                [&](const sem::U32*) { return Transform<u32>(v, converter); },
-                [&](const sem::F32*) { return Transform<f32>(v, converter); },
-                [&](const sem::F16*) { return Transform<f16>(v, converter); },
-                [&](const sem::Bool*) { return Transform<bool>(v, converter); },
-                [&](Default) -> sem::Constant::Elements {
-                    diag::List diags;
-                    TINT_UNREACHABLE(Semantic, diags)
-                        << "invalid element type " << el_ty->TypeInfo().name;
-                    return {};
-                });
-        },
-        in);
-}
-
-/// Converts and returns all the elements in `in` to the type `el_ty`.
-/// If the value does not fit in the target type, and:
-///  * the target type is an integer type, then the resulting value will be clamped to the integer's
-///    highest or lowest value.
-///  * the target type is an float type, then the resulting value will be either positive or
-///    negative infinity, based on the sign of the input value.
-/// @param in the input elements
-/// @param el_ty the target element type
-/// @returns the elements converted to `el_ty`
-sem::Constant::Elements ConvertElements(const sem::Constant::Elements& in, const sem::Type* el_ty) {
-    return Transform(in, el_ty, [](auto& el_out, auto el_in) {
-        using OUT = std::decay_t<decltype(el_out)>;
-        if (auto conv = CheckedConvert<OUT>(el_in)) {
-            el_out = conv.Get();
+    utils::Result<const Constant*> Convert(ProgramBuilder& builder,
+                                           const sem::Type* target_ty,
+                                           const Source& source) const override {
+        if (target_ty == type) {
+            return this;
+        }
+        if constexpr (std::is_same_v<T, AInt> || std::is_same_v<T, AFloat>) {
+            auto* res = Cast(target_ty, 0, [&](auto used_for_static_type) -> const Constant* {
+                using TO = std::decay_t<decltype(used_for_static_type)>;
+                if constexpr (std::is_same_v<TO, bool>) {
+                    return builder.create<Element<TO>>(target_ty, IsPositiveZero(value));
+                } else if (auto conv = CheckedConvert<TO>(value)) {
+                    return builder.create<Element<TO>>(target_ty, conv.Get());
+                }
+                return nullptr;
+            });
+            if (!res) {
+                std::stringstream ss;
+                ss << "value " << value << " cannot be represented as ";
+                ss << "'" << builder.FriendlyName(target_ty) << "'";
+                builder.Diagnostics().add_error(tint::diag::System::Resolver, ss.str(), source);
+                return utils::Failure;
+            }
+            return res;
         } else {
-            constexpr auto kInf = std::numeric_limits<double>::infinity();
-            switch (conv.Failure()) {
-                case ConversionFailure::kExceedsNegativeLimit:
-                    el_out = IsFloatingPoint<UnwrapNumber<OUT>> ? OUT(-kInf) : OUT::kLowest;
-                    break;
-                case ConversionFailure::kExceedsPositiveLimit:
-                    el_out = IsFloatingPoint<UnwrapNumber<OUT>> ? OUT(kInf) : OUT::kHighest;
-                    break;
-            }
+            return Cast(target_ty, 0, [&](auto used_for_static_type) -> const Constant* {
+                using TO = std::decay_t<decltype(used_for_static_type)>;
+                if constexpr (std::is_same_v<TO, T>) {
+                    return this;
+                } else if constexpr (std::is_same_v<TO, bool>) {  // x -> bool
+                    return builder.create<Element<TO>>(target_ty, !IsPositiveZero(value));
+                } else if constexpr (std::is_same_v<T, bool>) {  // bool -> x
+                    return builder.create<Element<TO>>(target_ty, TO(value ? 1 : 0));
+                } else if (auto conv = CheckedConvert<TO>(value)) {
+                    return builder.create<Element<TO>>(target_ty, conv.Get());
+                } else {
+                    if constexpr (IsFloatingPoint<UnwrapNumber<TO>>) {
+                        constexpr auto kInf = std::numeric_limits<double>::infinity();
+                        switch (conv.Failure()) {
+                            case ConversionFailure::kExceedsNegativeLimit:
+                                return builder.create<Element<TO>>(target_ty, TO(-kInf));
+                            case ConversionFailure::kExceedsPositiveLimit:
+                                return builder.create<Element<TO>>(target_ty, TO(kInf));
+                        }
+                    } else {
+                        switch (conv.Failure()) {
+                            case ConversionFailure::kExceedsNegativeLimit:
+                                return builder.create<Element<TO>>(target_ty, TO(TO::kLowest));
+                            case ConversionFailure::kExceedsPositiveLimit:
+                                return builder.create<Element<TO>>(target_ty, TO(TO::kHighest));
+                        }
+                    }
+                }
+                return nullptr;
+            });
         }
-    });
-}
-
-/// Converts and returns all the elements in `in` to the type `el_ty`, by performing a
-/// `CheckedConvert` on each element value. A single error diagnostic will be raised if an element
-/// value cannot be represented by the target type.
-/// @param in the input elements
-/// @param el_ty the target element type
-/// @returns the elements converted to `el_ty`, or a Failure if some elements could not be
-/// represented by the target type.
-utils::Result<sem::Constant::Elements> MaterializeElements(const sem::Constant::Elements& in,
-                                                           const sem::Type* el_ty,
-                                                           ProgramBuilder& builder,
-                                                           Source source) {
-    std::optional<std::string> failure;
-
-    auto out = Transform(in, el_ty, [&](auto& el_out, auto el_in) {
-        using OUT = std::decay_t<decltype(el_out)>;
-        if (auto conv = CheckedConvert<OUT>(el_in)) {
-            el_out = conv.Get();
-        } else if (!failure.has_value()) {
-            std::stringstream ss;
-            ss << "value " << el_in << " cannot be represented as ";
-            ss << "'" << builder.FriendlyName(el_ty) << "'";
-            failure = ss.str();
-        }
-    });
-
-    if (failure.has_value()) {
-        builder.Diagnostics().add_error(diag::System::Resolver, std::move(failure.value()), source);
-        return utils::Failure;
     }
 
-    return out;
+    sem::Type const* const type;
+    const T value;
+};
+
+struct Splat : Constant {
+    Splat(const sem::Type* t, const Constant* e, size_t n) : type(t), el(e), count(n) {
+        TINT_ASSERT(Resolver, el != nullptr);
+    }
+    ~Splat() override = default;
+    const sem::Type* Type() const override { return type; }
+    std::variant<std::monostate, AInt, AFloat> Value() const override { return {}; }
+    const Constant* Index(size_t i) const override { return i < count ? el : nullptr; }
+    bool AllZero() const override { return el->AllZero(); }
+    bool AnyZero() const override { return el->AnyZero(); }
+    bool AllEqual() const override { return true; }
+    size_t Hash() const override { return utils::Hash(type, el->Hash(), count); }
+
+    utils::Result<const Constant*> Convert(ProgramBuilder& builder,
+                                           const sem::Type* target_ty,
+                                           const Source& source) const override {
+        auto conv_el = el->Convert(builder, sem::Type::ElementOf(target_ty), source);
+        if (!conv_el) {
+            return utils::Failure;
+        }
+        if (!conv_el.Get()) {
+            return nullptr;
+        }
+        return builder.create<Splat>(target_ty, conv_el.Get(), count);
+    }
+
+    sem::Type const* const type;
+    const Constant* el;
+    const size_t count;
+};
+
+struct Composite : Constant {
+    Composite(const sem::Type* t, std::vector<const Constant*> els, bool all_0, bool any_0)
+        : type(t), elements(std::move(els)), all_zero(all_0), any_zero(any_0), hash(CalcHash()) {}
+    ~Composite() override = default;
+    const sem::Type* Type() const override { return type; }
+    std::variant<std::monostate, AInt, AFloat> Value() const override { return {}; }
+    const Constant* Index(size_t i) const override {
+        return i < elements.size() ? elements[i] : nullptr;
+    }
+    bool AllZero() const override { return all_zero; }
+    bool AnyZero() const override { return any_zero; }
+    bool AllEqual() const override { return false; /* otherwise this should be a Splat */ }
+    size_t Hash() const override { return hash; }
+
+    utils::Result<const Constant*> Convert(ProgramBuilder& builder,
+                                           const sem::Type* target_ty,
+                                           const Source& source) const override {
+        auto* el_ty = sem::Type::ElementOf(target_ty);
+        std::vector<const Constant*> conv_els;
+        conv_els.reserve(elements.size());
+        for (auto* el : elements) {
+            auto conv_el = el->Convert(builder, el_ty, source);
+            if (!conv_el) {
+                return utils::Failure;
+            }
+            if (!conv_el.Get()) {
+                return nullptr;
+            }
+            conv_els.emplace_back(conv_el.Get());
+        }
+        return CreateComposite(builder, target_ty, std::move(conv_els));
+    }
+
+    size_t CalcHash() {
+        auto h = utils::Hash(type, all_zero, any_zero);
+        for (auto* el : elements) {
+            utils::HashCombine(&h, el->Hash());
+        }
+        return h;
+    }
+
+    sem::Type const* const type;
+    const std::vector<const Constant*> elements;
+    const bool all_zero;
+    const bool any_zero;
+    const size_t hash;
+};
+
+template <typename T>
+const Constant* CreateElement(ProgramBuilder& builder, const sem::Type* t, T v) {
+    return builder.create<Element<T>>(t, v);
+}
+
+const Constant* ZeroValue(ProgramBuilder& builder, const sem::Type* type) {
+    return Switch(
+        type,  //
+        [&](const sem::Vector* v) -> const Constant* {
+            auto* zero_el = ZeroValue(builder, v->type());
+            return builder.create<Splat>(type, zero_el, v->Width());
+        },
+        [&](const sem::Matrix* m) -> const Constant* {
+            auto* zero_el = ZeroValue(builder, m->ColumnType());
+            return builder.create<Splat>(type, zero_el, m->columns());
+        },
+        [&](const sem::Array* a) -> const Constant* {
+            if (auto* zero_el = ZeroValue(builder, a->ElemType())) {
+                return builder.create<Splat>(type, zero_el, a->Count());
+            }
+            return nullptr;
+        },
+        [&](Default) -> const Constant* {
+            return Cast(type, 0, [&](auto zero) -> const Constant* {
+                return CreateElement(builder, type, zero);
+            });
+        });
+}
+
+bool Equal(const sem::Constant* a, const sem::Constant* b) {
+    if (a->Hash() != b->Hash()) {
+        return false;
+    }
+    if (a->Type() != b->Type()) {
+        return false;
+    }
+    return Switch(
+        a->Type(),  //
+        [&](const sem::Vector* vec) {
+            for (size_t i = 0; i < vec->Width(); i++) {
+                if (!Equal(a->Index(i), b->Index(i))) {
+                    return false;
+                }
+            }
+            return true;
+        },
+        [&](const sem::Matrix* mat) {
+            for (size_t i = 0; i < mat->columns(); i++) {
+                if (!Equal(a->Index(i), b->Index(i))) {
+                    return false;
+                }
+            }
+            return true;
+        },
+        [&](const sem::Array* arr) {
+            for (size_t i = 0; i < arr->Count(); i++) {
+                if (!Equal(a->Index(i), b->Index(i))) {
+                    return false;
+                }
+            }
+            return true;
+        },
+        [&](Default) { return a->Value() == b->Value(); });
+}
+
+const Constant* CreateComposite(ProgramBuilder& builder,
+                                const sem::Type* type,
+                                std::vector<const Constant*> elements) {
+    if (elements.size() == 0) {
+        return nullptr;
+    }
+    bool any_zero = false;
+    bool all_zero = true;
+    bool all_equal = true;
+    auto* first = elements.front();
+    for (auto* el : elements) {
+        if (!any_zero && el->AnyZero()) {
+            any_zero = true;
+        }
+        if (all_zero && !el->AllZero()) {
+            all_zero = false;
+        }
+        if (all_equal && el != first) {
+            if (!Equal(el, first)) {
+                all_equal = false;
+            }
+        }
+    }
+    if (all_equal) {
+        return builder.create<Splat>(type, elements[0], elements.size());
+    } else {
+        return builder.create<Composite>(type, std::move(elements), all_zero, any_zero);
+    }
 }
 
 }  // namespace
 
-sem::Constant Resolver::EvaluateConstantValue(const ast::Expression* expr, const sem::Type* type) {
+const sem::Constant* Resolver::EvaluateConstantValue(const ast::Expression* expr,
+                                                     const sem::Type* type) {
     return Switch(
         expr,  //
         [&](const ast::IdentifierExpression* e) { return EvaluateConstantValue(e, type); },
@@ -160,112 +346,162 @@ sem::Constant Resolver::EvaluateConstantValue(const ast::Expression* expr, const
         [&](const ast::IndexAccessorExpression* e) { return EvaluateConstantValue(e, type); });
 }
 
-sem::Constant Resolver::EvaluateConstantValue(const ast::IdentifierExpression* ident,
-                                              const sem::Type*) {
+const sem::Constant* Resolver::EvaluateConstantValue(const ast::IdentifierExpression* ident,
+                                                     const sem::Type*) {
     if (auto* sem = builder_->Sem().Get(ident)) {
         return sem->ConstantValue();
     }
     return {};
 }
 
-sem::Constant Resolver::EvaluateConstantValue(const ast::LiteralExpression* literal,
-                                              const sem::Type* type) {
+const sem::Constant* Resolver::EvaluateConstantValue(const ast::LiteralExpression* literal,
+                                                     const sem::Type* type) {
     return Switch(
         literal,
         [&](const ast::BoolLiteralExpression* lit) {
-            return sem::Constant{type, {AInt(lit->value ? 1 : 0)}};
+            return CreateElement(*builder_, type, lit->value);
         },
-        [&](const ast::IntLiteralExpression* lit) {
-            return sem::Constant{type, {AInt(lit->value)}};
+        [&](const ast::IntLiteralExpression* lit) -> const Constant* {
+            switch (lit->suffix) {
+                case ast::IntLiteralExpression::Suffix::kNone:
+                    return CreateElement(*builder_, type, AInt(lit->value));
+                case ast::IntLiteralExpression::Suffix::kI:
+                    return CreateElement(*builder_, type, i32(lit->value));
+                case ast::IntLiteralExpression::Suffix::kU:
+                    return CreateElement(*builder_, type, u32(lit->value));
+            }
+            return nullptr;
         },
-        [&](const ast::FloatLiteralExpression* lit) {
-            return sem::Constant{type, {AFloat(lit->value)}};
+        [&](const ast::FloatLiteralExpression* lit) -> const Constant* {
+            switch (lit->suffix) {
+                case ast::FloatLiteralExpression::Suffix::kNone:
+                    return CreateElement(*builder_, type, AFloat(lit->value));
+                case ast::FloatLiteralExpression::Suffix::kF:
+                    return CreateElement(*builder_, type, f32(lit->value));
+                case ast::FloatLiteralExpression::Suffix::kH:
+                    return CreateElement(*builder_, type, f16(lit->value));
+            }
+            return nullptr;
         });
 }
 
-sem::Constant Resolver::EvaluateConstantValue(const ast::CallExpression* call,
-                                              const sem::Type* ty) {
-    uint32_t num_elems = 0;
-    auto* el_ty = sem::Type::DeepestElementOf(ty, &num_elems);
-    if (!el_ty || num_elems == 0) {
-        return {};
-    }
-
+const sem::Constant* Resolver::EvaluateConstantValue(const ast::CallExpression* call,
+                                                     const sem::Type* ty) {
     // Note: we are building constant values for array types. The working group as verbally agreed
     // to support constant expression arrays, but this is not (yet) part of the spec.
     // See: https://github.com/gpuweb/gpuweb/issues/3056
 
     // For zero value init, return 0s
     if (call->args.empty()) {
-        return Switch(
-            el_ty,
-            [&](const sem::AbstractInt*) {
-                return sem::Constant(ty, std::vector(num_elems, AInt(0)));
-            },
-            [&](const sem::AbstractFloat*) {
-                return sem::Constant(ty, std::vector(num_elems, AFloat(0)));
-            },
-            [&](const sem::I32*) { return sem::Constant(ty, std::vector(num_elems, AInt(0))); },
-            [&](const sem::U32*) { return sem::Constant(ty, std::vector(num_elems, AInt(0))); },
-            [&](const sem::F32*) { return sem::Constant(ty, std::vector(num_elems, AFloat(0))); },
-            [&](const sem::F16*) { return sem::Constant(ty, std::vector(num_elems, AFloat(0))); },
-            [&](const sem::Bool*) { return sem::Constant(ty, std::vector(num_elems, AInt(0))); });
+        return ZeroValue(*builder_, ty);
     }
 
-    // Build value for type_ctor from each child value by converting to type_ctor's type.
-    std::optional<sem::Constant::Elements> elements;
-    for (auto* expr : call->args) {
-        auto* arg = builder_->Sem().Get(expr);
+    uint32_t el_count = 0;
+    auto* el_ty = sem::Type::ElementOf(ty, &el_count);
+    if (!el_ty) {
+        return nullptr;  // Target type does not support constant values
+    }
+
+    auto value_of = [&](const ast::Expression* expr) {
+        return static_cast<const Constant*>(builder_->Sem().Get(expr)->ConstantValue());
+    };
+
+    if (call->args.size() == 1) {
+        auto& src = call->args[0]->source;
+        auto* arg = value_of(call->args[0]);
         if (!arg) {
-            return {};
-        }
-        auto value = arg->ConstantValue();
-        if (!value) {
-            return {};
+            return nullptr;
         }
 
-        // Convert the elements to the desired type.
-        auto converted = ConvertElements(value.GetElements(), el_ty);
-
-        if (elements.has_value()) {
-            // Append the converted vector to elements
-            std::visit(
-                [&](auto&& dst) {
-                    using VEC_TY = std::decay_t<decltype(dst)>;
-                    const auto& src = std::get<VEC_TY>(converted);
-                    dst.insert(dst.end(), src.begin(), src.end());
-                },
-                elements.value());
-        } else {
-            elements = std::move(converted);
+        if (ty->is_scalar()) {  // Scalar type conversion: i32(x), u32(x), bool(x)
+            return ConvertValue(arg, el_ty, src).Get();
         }
+
+        if (arg->Type() == el_ty) {
+            // Splat
+            auto splat = [&](size_t n) { return builder_->create<Splat>(ty, arg, n); };
+            return Switch(
+                ty,  //
+                [&](const sem::Vector* v) { return splat(v->Width()); },
+                [&](const sem::Matrix* m) { return splat(m->columns()); },
+                [&](const sem::Array* a) { return splat(a->Count()); });
+        }
+
+        // Conversion
+        if (auto conv = ConvertValue(arg, ty, src)) {
+            return conv.Get();
+        }
+
+        return nullptr;
     }
 
-    if (!elements) {
-        return {};
-    }
+    std::vector<const Constant*> els;
+    els.reserve(el_count);
 
-    return std::visit(
-        [&](auto&& v) {
-            if (num_elems != v.size()) {
-                if (v.size() == 1) {
-                    // Splat single-value initializers
-                    for (uint32_t i = 0; i < num_elems - 1; ++i) {
-                        v.emplace_back(v[0]);
+    auto push_all_args = [&] {
+        for (auto* expr : call->args) {
+            auto* arg = value_of(expr);
+            if (!arg) {
+                return;
+            }
+            els.emplace_back(arg);
+        }
+    };
+
+    Switch(
+        ty,  //
+        [&](const sem::Vector*) {
+            // Vector can be constructed with a mix of scalars and smaller vectors.
+            for (auto* expr : call->args) {
+                auto* arg = value_of(expr);
+                if (!arg) {
+                    return;
+                }
+                auto* arg_ty = arg->Type();
+                if (auto* arg_vec = arg_ty->As<sem::Vector>()) {
+                    // Extract out vector elements.
+                    for (uint32_t i = 0; i < arg_vec->Width(); i++) {
+                        auto* el = static_cast<const Constant*>(arg->Index(i));
+                        if (!el) {
+                            return;
+                        }
+                        els.emplace_back(el);
                     }
                 } else {
-                    // Provided number of arguments does not match the required number of elements.
-                    // Validation should error here.
-                    return sem::Constant{};
+                    els.emplace_back(arg);
                 }
             }
-            return sem::Constant(ty, std::move(elements.value()));
         },
-        elements.value());
+        [&](const sem::Matrix* m) {
+            if (call->args.size() == m->columns() * m->rows()) {
+                // Matrix built from scalars
+                for (uint32_t c = 0; c < m->columns(); c++) {
+                    std::vector<const Constant*> column;
+                    column.reserve(m->rows());
+                    for (uint32_t r = 0; r < m->rows(); r++) {
+                        auto* arg = value_of(call->args[r + c * m->rows()]);
+                        if (!arg) {
+                            return;
+                        }
+                        column.emplace_back(arg);
+                    }
+                    els.push_back(CreateComposite(*builder_, m->ColumnType(), std::move(column)));
+                }
+            } else if (call->args.size() == m->columns()) {
+                // Matrix built from column vectors
+                push_all_args();
+            }
+        },
+        [&](const sem::Array*) { push_all_args(); });
+
+    if (els.size() != el_count) {
+        return nullptr;
+    }
+    return CreateComposite(*builder_, ty, std::move(els));
 }
 
-sem::Constant Resolver::EvaluateConstantValue(const ast::IndexAccessorExpression* accessor,
-                                              const sem::Type* el_ty) {
+const sem::Constant* Resolver::EvaluateConstantValue(const ast::IndexAccessorExpression* accessor,
+                                                     const sem::Type*) {
     auto* obj_sem = builder_->Sem().Get(accessor->object);
     if (!obj_sem) {
         return {};
@@ -282,20 +518,14 @@ sem::Constant Resolver::EvaluateConstantValue(const ast::IndexAccessorExpression
     }
 
     auto idx_val = idx_sem->ConstantValue();
-    if (!idx_val || idx_val.ElementCount() != 1) {
+    if (!idx_val) {
         return {};
     }
 
-    AInt idx = idx_val.Element<AInt>(0);
-
-    // The immediate child element count.
     uint32_t el_count = 0;
-    sem::Type::ElementOf(obj_val.Type(), &el_count);
+    sem::Type::ElementOf(obj_val->Type(), &el_count);
 
-    // The total number of most-nested elements per child element type.
-    uint32_t step = 0;
-    sem::Type::DeepestElementOf(el_ty, &step);
-
+    AInt idx = idx_val->As<AInt>();
     if (idx < 0 || idx >= el_count) {
         auto clamped = std::min<AInt::type>(std::max<AInt::type>(idx, 0), el_count - 1);
         AddWarning("index " + std::to_string(idx) + " out of bounds [0.." +
@@ -305,32 +535,20 @@ sem::Constant Resolver::EvaluateConstantValue(const ast::IndexAccessorExpression
         idx = clamped;
     }
 
-    return sem::Constant{el_ty, obj_val.WithElements([&](auto&& v) {
-                             using VEC = std::decay_t<decltype(v)>;
-                             return sem::Constant::Elements(
-                                 VEC(v.begin() + (idx * step), v.begin() + (idx + 1) * step));
-                         })};
+    return obj_val->Index(idx);
 }
 
-utils::Result<sem::Constant> Resolver::ConvertValue(const sem::Constant& value,
-                                                    const sem::Type* ty,
-                                                    const Source& source) {
-    if (value.Type() == ty) {
+utils::Result<const sem::Constant*> Resolver::ConvertValue(const sem::Constant* value,
+                                                           const sem::Type* target_ty,
+                                                           const Source& source) {
+    if (value->Type() == target_ty) {
         return value;
     }
-
-    auto* el_ty = sem::Type::DeepestElementOf(ty);
-    if (el_ty == nullptr) {
-        return sem::Constant{};
+    auto conv = static_cast<const Constant*>(value)->Convert(*builder_, target_ty, source);
+    if (!conv) {
+        return utils::Failure;
     }
-    if (value.ElementType() == el_ty) {
-        return sem::Constant(ty, value.GetElements());
-    }
-
-    if (auto res = MaterializeElements(value.GetElements(), el_ty, *builder_, source)) {
-        return sem::Constant(ty, std::move(res.Get()));
-    }
-    return utils::Failure;
+    return conv.Get();
 }
 
 }  // namespace tint::resolver

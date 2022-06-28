@@ -17,6 +17,7 @@
 
 #include <vector>
 
+#include "src/tint/ast/call_expression.h"
 #include "src/tint/sem/builtin.h"
 #include "src/tint/sem/expression.h"
 
@@ -37,7 +38,7 @@ class Call final : public Castable<Call, Expression> {
          const CallTarget* target,
          std::vector<const sem::Expression*> arguments,
          const Statement* statement,
-         Constant constant,
+         const Constant* constant,
          bool has_side_effects);
 
     /// Destructor

@@ -25,6 +25,8 @@ using namespace tint::number_suffixes;  // NOLINT
 namespace tint::sem {
 namespace {
 
+#if 0
+
 struct ConstantTest : public TestHelper {
     const sem::Array* Array(uint32_t n, const sem::Type* el_ty) {
         return create<sem::Array>(el_ty,
@@ -536,5 +538,6 @@ TEST_F(ConstantTest, AllEqualRange) {
     EXPECT_EQ(Constant(vec3_af, {-0._a, -0._a, -0._a}).AllEqual(1, 3), true);
 }
 
+#endif
 }  // namespace
 }  // namespace tint::sem

@@ -27,6 +27,7 @@
 // Forward declarations
 namespace tint::ast {
 class IdentifierExpression;
+class Parameter;
 class Variable;
 }  // namespace tint::ast
 namespace tint::sem {
@@ -51,7 +52,7 @@ class Variable : public Castable<Variable, Node> {
              const sem::Type* type,
              ast::StorageClass storage_class,
              ast::Access access,
-             Constant constant_value);
+             const Constant* constant_value);
 
     /// Destructor
     ~Variable() override;
@@ -69,7 +70,7 @@ class Variable : public Castable<Variable, Node> {
     ast::Access Access() const { return access_; }
 
     /// @return the constant value of this expression
-    const Constant& ConstantValue() const { return constant_value_; }
+    const Constant* ConstantValue() const { return constant_value_; }
 
     /// @returns the variable constructor expression, or nullptr if the variable
     /// does not have one.
@@ -90,7 +91,7 @@ class Variable : public Castable<Variable, Node> {
     const sem::Type* const type_;
     const ast::StorageClass storage_class_;
     const ast::Access access_;
-    const Constant constant_value_;
+    const Constant* constant_value_;
     const Expression* constructor_ = nullptr;
     std::vector<const VariableUser*> users_;
 };
@@ -110,7 +111,7 @@ class LocalVariable final : public Castable<LocalVariable, Variable> {
                   ast::StorageClass storage_class,
                   ast::Access access,
                   const sem::Statement* statement,
-                  Constant constant_value);
+                  const Constant* constant_value);
 
     /// Destructor
     ~LocalVariable() override;
@@ -144,7 +145,7 @@ class GlobalVariable final : public Castable<GlobalVariable, Variable> {
                    const sem::Type* type,
                    ast::StorageClass storage_class,
                    ast::Access access,
-                   Constant constant_value,
+                   const Constant* constant_value,
                    sem::BindingPoint binding_point = {});
 
     /// Destructor
