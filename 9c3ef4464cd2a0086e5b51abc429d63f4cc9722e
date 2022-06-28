@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe5d3e76_6ae2c8b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T05:37:31Z",
+      "side": 1,
+      "message": "The compile error is due to some warnings in alignas that it pessimizes the alignment of uint64_t. Takahiro, can you try if rebasing on top of a copy of https://dawn-review.googlesource.com/c/dawn/+/94940 fixes it? (you can make a copy of that commit by cherry-picking it and removing the Change-Id commit tag so that Gerrit doesn\u0027t know it is the same commit.)",
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9c95e98_fd1ed8e8",
