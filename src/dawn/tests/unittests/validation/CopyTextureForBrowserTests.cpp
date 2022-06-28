@@ -22,14 +22,25 @@
 
 class CopyTextureForBrowserTest : public ValidationTest {
   protected:
-    wgpu::Texture Create2DTexture(uint32_t width,
-                                  uint32_t height,
-                                  uint32_t mipLevelCount,
-                                  uint32_t arrayLayerCount,
-                                  wgpu::TextureFormat format,
-                                  wgpu::TextureUsage usage,
-                                  uint32_t sampleCount = 1) {
+    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
+        wgpu::DeviceDescriptor descriptor;
+        wgpu::FeatureName feature = wgpu::FeatureName::DawnInternalUsages;
+        descriptor.requiredFeatures = &feature;
+        descriptor.requiredFeaturesCount = 1;
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+
+    wgpu::Texture Create2DTexture(
+        uint32_t width,
+        uint32_t height,
+        uint32_t mipLevelCount,
+        uint32_t arrayLayerCount,
+        wgpu::TextureFormat format,
+        wgpu::TextureUsage usage,
+        uint32_t sampleCount = 1,
+        const wgpu::DawnTextureInternalUsageDescriptor* internalDesc = nullptr) {
         wgpu::TextureDescriptor descriptor;
+        descriptor.nextInChain = internalDesc;
         descriptor.dimension = wgpu::TextureDimension::e2D;
         descriptor.size.width = width;
         descriptor.size.height = height;
@@ -433,4 +444,29 @@ TEST_F(CopyTextureForBrowserTest, ColorSpaceConversion_TextureAlphaState) {
         TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
                                   {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
     }
+}
+
+// Test for internal usage option
+TEST_F(CopyTextureForBrowserTest, InternalUsage) {
+    wgpu::DawnTextureInternalUsageDescriptor internalDesc1 = {};
+    internalDesc1.internalUsage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::TextureBinding;
+
+    wgpu::Texture source = Create2DTexture(16, 16, 5, 4, wgpu::TextureFormat::RGBA8Unorm,
+                                           wgpu::TextureUsage::CopySrc, 1, &internalDesc1);
+
+    wgpu::DawnTextureInternalUsageDescriptor internalDesc2 = {};
+    internalDesc2.internalUsage =
+        wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment;
+    wgpu::Texture destination = Create2DTexture(16, 16, 5, 4, wgpu::TextureFormat::RGBA8Unorm,
+                                                wgpu::TextureUsage::CopyDst, 1, &internalDesc2);
+
+    // Without internal usage option should fail usage validation
+    TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                              {0, 0, 0}, {16, 16, 1});
+
+    // With internal usage option should pass usage validation
+    wgpu::CopyTextureForBrowserOptions options = {};
+    options.internalUsage = true;
+    TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                              {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::All, options);
 }
