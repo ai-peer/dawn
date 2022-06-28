@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0820510f_285b3b84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-28T12:40:56Z",
+      "side": 1,
+      "message": "LGTM. Dan for +2",
+      "revId": "815280356368d9d30af40937e69a8b219ade7382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c3dad3f_037ae1d0",
@@ -67,6 +84,29 @@
       "side": 1,
       "message": "The parameterized materialize test will test many use cases, including built-in function and binary operator, which are not supported yet in this CL. My plan is to enable all these commented code as soon as built-in function and binary operator are supported in resolver.\n\nThese commented code are tested locally and the results are as expected.",
       "parentUuid": "2409fefd_32ec3755",
+      "revId": "815280356368d9d30af40937e69a8b219ade7382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bc538b2_5badf140",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1273,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-28T12:40:56Z",
+      "side": 1,
+      "message": "nit: can be removed.",
+      "range": {
+        "startLine": 1273,
+        "startChar": 0,
+        "endLine": 1273,
+        "endChar": 68
+      },
       "revId": "815280356368d9d30af40937e69a8b219ade7382",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
