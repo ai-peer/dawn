@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15d8277f_441bdeb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2022-06-28T23:45:30Z",
+      "side": 1,
+      "message": "Sample failed build https://ci.chromium.org/ui/p/chromium-m104/builders/try/dawn-mac-x64-deps-rel/9/test-results",
+      "revId": "ec7d0cac97fcf6dbbfd450cbce48bcf1a9501ab7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
