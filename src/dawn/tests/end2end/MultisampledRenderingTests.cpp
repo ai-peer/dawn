@@ -628,6 +628,9 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithEmptyFinalSampleMask) 
 // Test doing MSAA resolve into multiple resolve targets works correctly with a non-default sample
 // mask.
 TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithSampleMask) {
+    // TODO(crbug.com/dawn/1462): Re-enable on Mac Intel 12.4.
+    DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && IsMacOS(12, 4));
+
     wgpu::TextureView multisampledColorView2 =
         CreateTextureForRenderAttachment(kColorFormat, kSampleCount).CreateView();
     wgpu::Texture resolveTexture2 = CreateTextureForRenderAttachment(kColorFormat, 1);
@@ -797,9 +800,14 @@ TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithShaderOut
     // supported on some platforms.
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_sample_variables"));
 
+<<<<<<< HEAD   (fa8cc6 Fix freed memory access due to DestroyObjects.)
     // TODO(crbug.com/dawn/571): Fails on Metal / D3D12 because SPIRV-Cross produces bad shaders
     // for the SPIR-V outputted by Tint. Reenable once we use Tint's MSL / HLSL generators.
     DAWN_SUPPRESS_TEST_IF(IsD3D12() || IsMetal());
+=======
+    // TODO(crbug.com/dawn/1462): Re-enable on Mac Intel 12.4.
+    DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && IsMacOS(12, 4));
+>>>>>>> CHANGE (67973e Suppress Mac Intel 12.4 failures)
 
     wgpu::TextureView multisampledColorView2 =
         CreateTextureForRenderAttachment(kColorFormat, kSampleCount).CreateView();
