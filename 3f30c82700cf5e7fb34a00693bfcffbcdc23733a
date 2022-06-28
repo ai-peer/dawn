@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "183ef8bd_097f557f",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T17:25:17Z",
+      "side": 1,
+      "message": "+1 to that suggestion. BeginComputePass can have \"end\" stuff because it\u0027s begin this compute pass (start stuff, end stuff)",
+      "parentUuid": "96a87264_934e153c",
+      "range": {
+        "startLine": 758,
+        "startChar": 15,
+        "endLine": 761,
+        "endChar": 0
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b798ed5e_17a5a320",
         "filename": "src/dawn/native/Commands.h",
         "patchSetId": 3
