@@ -271,6 +271,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46b5f503_66e07781",
+        "filename": "src/dawn/native/opengl/ContextEGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T17:45:07Z",
+      "side": 1,
+      "message": "1.4 I still somewhat prevalent I think?",
+      "parentUuid": "911d942c_a25d7758",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "814ae4e0_52fe7ffe",
         "filename": "src/dawn/native/opengl/ContextEGL.cpp",
         "patchSetId": 33
@@ -300,6 +318,24 @@
       "side": 1,
       "message": "See subsequent patch https://dawn-review.googlesource.com/c/dawn/+/94561. Happy to merge that here. (Am I happy in these comments or what?)",
       "parentUuid": "814ae4e0_52fe7ffe",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05478bd0_05c93cc9",
+        "filename": "src/dawn/native/opengl/ContextEGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T17:45:07Z",
+      "side": 1,
+      "message": "You are indeed happy :D More seriously, a follow-up is almost always ok so let\u0027s keep it separate.",
+      "parentUuid": "38f40c8c_af9ac0aa",
       "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -433,6 +469,30 @@
       "side": 1,
       "message": "Can\u0027t do that, sadly, because of eglInitialize().",
       "parentUuid": "b09c62b0_8ae0ab75",
+      "range": {
+        "startLine": 21,
+        "startChar": 19,
+        "endLine": 21,
+        "endChar": 23
+      },
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aad04104_3a732912",
+        "filename": "src/dawn/native/opengl/EGLFunctions.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-28T17:45:07Z",
+      "side": 1,
+      "message": "Gotcha^^",
+      "parentUuid": "866c68c1_a818e00d",
       "range": {
         "startLine": 21,
         "startChar": 19,
