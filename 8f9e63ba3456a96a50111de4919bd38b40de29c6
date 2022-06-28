@@ -16,6 +16,23 @@
       "message": "Thanks for reviewing! The new patch remove the unnecessary comment. ",
       "revId": "8f9e63ba3456a96a50111de4919bd38b40de29c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2ec8fdc_5f432f7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-28T14:01:13Z",
+      "side": 1,
+      "message": "Thanks for reviewing, I am submitting this CL.",
+      "revId": "8f9e63ba3456a96a50111de4919bd38b40de29c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
