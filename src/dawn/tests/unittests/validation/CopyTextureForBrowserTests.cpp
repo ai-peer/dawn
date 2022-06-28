@@ -22,6 +22,14 @@
 
 class CopyTextureForBrowserTest : public ValidationTest {
   protected:
+    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
+        wgpu::DeviceDescriptor descriptor;
+        wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::DawnInternalUsages};
+        descriptor.requiredFeatures = requiredFeatures;
+        descriptor.requiredFeaturesCount = 1;
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+
     wgpu::Texture Create2DTexture(uint32_t width,
                                   uint32_t height,
                                   uint32_t mipLevelCount,
