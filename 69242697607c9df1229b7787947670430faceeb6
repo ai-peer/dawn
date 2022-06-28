@@ -104,6 +104,24 @@
       "parentUuid": "9873b3d9_1029c6b0",
       "revId": "69242697607c9df1229b7787947670430faceeb6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a24f7d8f_7797d3c0",
+        "filename": "test/tint/var/inferred/global.wgsl.expected.msl",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-28T09:06:32Z",
+      "side": 1,
+      "message": "Actually, that\u0027s not quite right. MSL does not have global variables, and have to be hoisted into the entry-points functions if they (or any transitive function) uses them.",
+      "parentUuid": "482e5760_efc87ff4",
+      "revId": "69242697607c9df1229b7787947670430faceeb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
