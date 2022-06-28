@@ -51,6 +51,24 @@
       "parentUuid": "2d60c97b_63de2b76",
       "revId": "dadd042bbd4b7ef7f2c3c88e0ca39530d1303fce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cfc23c6_f61a1a19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-28T00:18:09Z",
+      "side": 1,
+      "message": "I think scaling would be preferable so we don\u0027t need to worry about expanding the slow list. Also, based on the thread in WebGPU chat, further expansions and glob patterns could become incompatible with Ben\u0027s tooling.",
+      "parentUuid": "975dad95_8c4f666e",
+      "revId": "dadd042bbd4b7ef7f2c3c88e0ca39530d1303fce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
