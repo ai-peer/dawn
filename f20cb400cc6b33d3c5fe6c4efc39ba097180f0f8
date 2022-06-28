@@ -86,6 +86,24 @@
       "message": "Note that context creation failure isn\u0027t handled. A subsequent CL (see dependencies) does that by changing ContextEGL::Create() to use ResultOrError and to transforms EGL errors into Dawn errors. Happy to merge that into this CL if you\u0027d prefer.",
       "revId": "f20cb400cc6b33d3c5fe6c4efc39ba097180f0f8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f384937b_1935a363",
+        "filename": "src/dawn/native/opengl/AdapterGL.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:54:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af770177_547fab4f",
+      "revId": "f20cb400cc6b33d3c5fe6c4efc39ba097180f0f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

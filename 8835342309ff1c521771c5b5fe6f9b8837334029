@@ -357,6 +357,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e4d90e0_7fa4d928",
+        "filename": "src/dawn/native/opengl/ContextEGL.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:54:33Z",
+      "side": 1,
+      "message": "Done. Means I can\u0027t use std::make_unique (sad trombone).",
+      "parentUuid": "8544d099_8a06094a",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7f9208a_5445d85f",
@@ -374,6 +392,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d550abc_c57e96bb",
+        "filename": "src/dawn/native/opengl/ContextEGL.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:54:33Z",
+      "side": 1,
+      "message": "Changed to a copy, to be safe (a la Device::OpenGLFunctions).",
+      "parentUuid": "c7f9208a_5445d85f",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8ae5521_d51c35ce",
@@ -387,6 +423,30 @@
       "writtenOn": "2022-06-28T15:59:42Z",
       "side": 1,
       "message": "nit: can you file a bug and use it instead of my email? It\u0027s unlikely I\u0027ll ever get to it :P",
+      "range": {
+        "startLine": 133,
+        "startChar": 13,
+        "endLine": 133,
+        "endChar": 32
+      },
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fa31673_5320dba4",
+        "filename": "src/dawn/native/opengl/DeviceGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-28T17:54:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8ae5521_d51c35ce",
       "range": {
         "startLine": 133,
         "startChar": 13,
