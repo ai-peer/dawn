@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc887582_fbc51539",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2022-06-28T16:53:35Z",
+      "side": 1,
+      "message": "Let\u0027s see if the rubber stamper works on a clean cherry pick...",
+      "revId": "41e876a84fa6317457afd864c6d1792188b9120d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
