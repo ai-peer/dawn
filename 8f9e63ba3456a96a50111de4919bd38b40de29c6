@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d585a37_37b8f67d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-06-28T12:52:21Z",
+      "side": 1,
+      "message": "Thanks for reviewing! The new patch remove the unnecessary comment. ",
+      "revId": "8f9e63ba3456a96a50111de4919bd38b40de29c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
