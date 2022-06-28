@@ -16,6 +16,23 @@
       "message": "The build in the CQ try test faled only in win-clang-dbg-x86 and win-clang-rel-x86.\n\n```\ngen/include\\dawn/webgpu_cpp.h(1472,9): error: requested alignment is less than minimum alignment of 8 for type \u0027uint64_t\u0027 (aka \u0027unsigned long long\u0027)\n        alignas(ChainedStruct) uint64_t maxDrawCount \u003d 50000000;\n\ngen/src\\dawn/native/wgpu_structs_autogen.h(441,9): error: requested alignment is less than minimum alignment of 8 for type \u0027uint64_t\u0027 (aka \u0027unsigned long long\u0027)\n        alignas(ChainedStruct) uint64_t maxDrawCount \u003d 50000000;\n```\n\nIt looks an alignment issue. Anyone here knows how to resolve the problem? Is the definition of the new extension structure I added in this CL something wrong?",
       "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "063fcae9_51cdb76b",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 2492,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-06-28T02:30:00Z",
+      "side": 1,
+      "message": "What should the tags be?",
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
