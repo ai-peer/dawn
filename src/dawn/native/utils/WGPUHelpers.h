@@ -23,6 +23,10 @@
 #include "dawn/native/Error.h"
 #include "dawn/native/dawn_platform.h"
 
+namespace dawn::native {
+enum class UsageValidationMode;
+}  // namespace dawn::native
+
 namespace dawn::native::utils {
 
 ResultOrError<Ref<ShaderModuleBase>> CreateShaderModule(DeviceBase* device, const char* source);
@@ -113,9 +117,13 @@ struct BindingInitializationHelper {
 ResultOrError<Ref<BindGroupBase>> MakeBindGroup(
     DeviceBase* device,
     const Ref<BindGroupLayoutBase>& layout,
-    std::initializer_list<BindingInitializationHelper> entriesInitializer);
+    std::initializer_list<BindingInitializationHelper> entriesInitializer,
+    bool internalUsage = false);
 
 const char* GetLabelForTrace(const char* label);
+
+ResultOrError<UsageValidationMode> GetUsageValidationModeFromDescriptor(DeviceBase* device,
+                                                                        const ChainedStruct* chain);
 
 }  // namespace dawn::native::utils
 
