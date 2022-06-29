@@ -135,6 +135,10 @@ struct SpirvAtomic::State {
             });
         }
 
+        // Replace assignments and decls from atomic variables with atomicLoads, and assignments to
+        // atomic variables with atomicStores.
+        ReplaceLoadsAndStores();
+
         ctx.Clone();
     }
 
@@ -199,6 +203,56 @@ struct SpirvAtomic::State {
                     << "unhandled type: " << ty->FriendlyName(ctx.src->Symbols());
                 return nullptr;
             });
+    }
+
+    void ReplaceLoadsAndStores() {
+        auto is_ref_to_atomic_var = [&](const sem::Expression* e) {
+            return e && e->Type()->Is<sem::Reference>() && e->SourceVariable() &&
+                   (atomic_variables.count(e->SourceVariable()) != 0);
+        };
+
+        // Look for loads and stores via assignments and decls of atomic variables we've collected
+        // so far, and replace them with atomicLoad and atomicStore.
+        for (auto* var : atomic_variables) {
+            for (auto* vu : var->Users()) {
+                Switch(
+                    vu->Stmt()->Declaration(),
+                    [&](const ast::AssignmentStatement* assign) {
+                        auto* sem_lhs = ctx.src->Sem().Get(assign->lhs);
+                        if (is_ref_to_atomic_var(sem_lhs)) {
+                            auto* lhs = ctx.Clone(assign->lhs);
+                            auto* rhs = ctx.Clone(assign->rhs);
+                            auto* call = b.Call(sem::str(sem::BuiltinType::kAtomicStore),
+                                                b.AddressOf(lhs), rhs);
+
+                            ctx.Replace(assign, b.CallStmt(call));
+                            return;
+                        }
+
+                        auto sem_rhs = ctx.src->Sem().Get(assign->rhs);
+                        if (is_ref_to_atomic_var(sem_rhs)) {
+                            auto* rhs = ctx.Clone(assign->rhs);
+                            auto* call =
+                                b.Call(sem::str(sem::BuiltinType::kAtomicLoad), b.AddressOf(rhs));
+                            ctx.Replace(assign->rhs, call);
+                            return;
+                        }
+                    },
+                    [&](const ast::VariableDeclStatement* decl) {
+                        auto* var = decl->variable;
+                        if (auto* sem_ctor = ctx.src->Sem().Get(var->constructor)) {
+                            if (is_ref_to_atomic_var(sem_ctor)) {
+                                auto* rhs = ctx.Clone(var->constructor);
+                                auto* call = b.Call(sem::str(sem::BuiltinType::kAtomicLoad),
+                                                    b.AddressOf(rhs));
+
+                                ctx.Replace(var->constructor, call);
+                                return;
+                            }
+                        }
+                    });
+            }
+        }
     }
 };
 
