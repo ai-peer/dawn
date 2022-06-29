@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3de45ba7_813d0522",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-29T20:02:17Z",
+      "side": 1,
+      "message": "LGTM! Thank you for the changes",
+      "revId": "2ba5742fe7c08ffc2448854435de6b095bb65923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3fa1c8bc_fd83409b",
@@ -18,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18da081e_4f8cde08",
+        "filename": "src/tint/transform/spirv_atomic.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-29T20:02:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3fa1c8bc_fd83409b",
+      "revId": "2ba5742fe7c08ffc2448854435de6b095bb65923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea25b4a3_325e4a1d",
@@ -31,6 +66,24 @@
       "writtenOn": "2022-06-29T19:47:47Z",
       "side": 1,
       "message": "Added this for \u0027c\u0027 member which is non-atomic, so the output should not be replaced with atomicLoad/Store.",
+      "revId": "2ba5742fe7c08ffc2448854435de6b095bb65923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd2e4e3d_e9328ef9",
+        "filename": "src/tint/transform/spirv_atomic_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1174,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-06-29T20:02:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ea25b4a3_325e4a1d",
       "revId": "2ba5742fe7c08ffc2448854435de6b095bb65923",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
