@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb66a001_3733ef5c",
+        "filename": "src/dawn/native/CacheResult.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-29T20:01:19Z",
+      "side": 1,
+      "message": "I moved to BlobCache::EnsureStored. I dropped mutating mIsCached because it doesn\u0027t seem useful (yet).",
+      "parentUuid": "56373d0a_31799e81",
+      "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f01f9788_a25c9394",
         "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
         "patchSetId": 6
@@ -48,6 +66,24 @@
       "writtenOn": "2022-06-29T15:24:43Z",
       "side": 1,
       "message": "nit: This could be Create(std::vector\u003cuint32_t\u003e) so that callers don\u0027t need to care about CreateBlob etc.",
+      "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "647541a8_c4ab541d",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-29T20:01:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f01f9788_a25c9394",
       "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -65,6 +101,24 @@
       "writtenOn": "2022-06-29T15:24:43Z",
       "side": 1,
       "message": "Given that `Spirv` is-a `Blob`, I\u0027m not sure I understand why we need `Store` to be specialized for it. The underlying blob has the correct data and size, so we could just use that?",
+      "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8adf179a_ee8cde45",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-29T20:01:19Z",
+      "side": 1,
+      "message": "Spirv could happen to work nice, but we\u0027re going to need it for D3D\u0027s `CompiledShader` or stuff Metal backend  - both will be a struct of the shader blob/string and some reflection data.\n\nBut for Spirv, I think also better to make Blob a private base class so you don\u0027t touch the Data or Size in a confusing way.",
+      "parentUuid": "29c6e2bb_fba45edc",
       "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +146,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e68c748_969f5361",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-29T20:01:19Z",
+      "side": 1,
+      "message": "Loko though Create was weird, so I\u0027ll keep this as-is for now and we can rename in the future if we\u0027d like",
+      "parentUuid": "9cd9101e_2cb15fdc",
+      "range": {
+        "startLine": 240,
+        "startChar": 14,
+        "endLine": 240,
+        "endChar": 17
+      },
+      "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9159ce58_cd392eb5",
@@ -105,6 +183,24 @@
       "writtenOn": "2022-06-29T15:24:43Z",
       "side": 1,
       "message": "u-nit: this block of code is a bit dense, though part of it is because it\u0027s pushed to the right.",
+      "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54ec9a9c_97facb6d",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-29T20:01:19Z",
+      "side": 1,
+      "message": "I de-dented once by adding a new macro DAWN_TRY_LOAD_OR_RUN - maybe this is better?",
+      "parentUuid": "9159ce58_cd392eb5",
       "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

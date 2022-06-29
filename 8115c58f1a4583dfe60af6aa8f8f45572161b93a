@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7b842c5_dd1718dd",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-29T20:01:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbf8e962_549dcd54",
+      "range": {
+        "startLine": 63,
+        "startChar": 55,
+        "endLine": 63,
+        "endChar": 71
+      },
+      "revId": "8115c58f1a4583dfe60af6aa8f8f45572161b93a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2e12c78_1111d2b7",
@@ -306,6 +330,24 @@
       "writtenOn": "2022-06-29T15:24:43Z",
       "side": 1,
       "message": "nit: include is in a different block when it doesn\u0027t need to.",
+      "revId": "8115c58f1a4583dfe60af6aa8f8f45572161b93a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9729a48e_e4662813",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-29T20:01:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98386f3b_ce71b8a2",
       "revId": "8115c58f1a4583dfe60af6aa8f8f45572161b93a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
