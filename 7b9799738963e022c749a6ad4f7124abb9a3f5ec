@@ -16,6 +16,24 @@
       "message": "Why does `A` `UnwrapNumber` but `B` doesn\u0027t?",
       "revId": "7b9799738963e022c749a6ad4f7124abb9a3f5ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dd6100e_a239d199",
+        "filename": "src/tint/number.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T14:28:25Z",
+      "side": 1,
+      "message": "copypasta fail. Thanks for spotting!",
+      "parentUuid": "45b5cbc9_93af8e10",
+      "revId": "7b9799738963e022c749a6ad4f7124abb9a3f5ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
