@@ -16,6 +16,75 @@
       "message": "Ping! Can I haz review? +R? Loko",
       "revId": "45419d518ad77ea6ededbc3a97a9b6378a0f827f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8b888e0_a22e021a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-29T14:51:32Z",
+      "side": 1,
+      "message": "ah, sorry - I wasn\u0027t sure. I thought you had asked Takahiro to merge it into his CL and land things together",
+      "parentUuid": "81a9d624_82a3e2dc",
+      "revId": "45419d518ad77ea6ededbc3a97a9b6378a0f827f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17dc9a03_5034bcef",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-29T14:51:32Z",
+      "side": 1,
+      "message": "nit: update comment",
+      "revId": "45419d518ad77ea6ededbc3a97a9b6378a0f827f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0b32c33_eefe6334",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-29T14:51:32Z",
+      "side": 1,
+      "message": "optional nit:\nmaybe could be less verbose of we have a small helper. then we only need to name one of the variables.\nkFirstMemberAlignment \u003d ConstexprMax(alignof(..), alignof(..))",
+      "revId": "45419d518ad77ea6ededbc3a97a9b6378a0f827f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd054154_0bbfc9a0",
+        "filename": "generator/templates/dawn/native/api_structs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-29T14:51:32Z",
+      "side": 1,
+      "message": "not: update comment",
+      "revId": "45419d518ad77ea6ededbc3a97a9b6378a0f827f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
