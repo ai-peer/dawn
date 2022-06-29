@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2fc0291_3db88816",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-29T17:38:57Z",
+      "side": 1,
+      "message": "Corentin\u0027s fix just landed - LGTM after a rebase and one nit!",
+      "revId": "96666edfafaa5bb6efaed351defaf56bf19a5e37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b982647_f04b3463",
+        "filename": "src/dawn/native/RenderPassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-29T17:38:57Z",
+      "side": 1,
+      "message": "u-nit: should end with a period",
+      "range": {
+        "startLine": 151,
+        "startChar": 90,
+        "endLine": 151,
+        "endChar": 95
+      },
+      "revId": "96666edfafaa5bb6efaed351defaf56bf19a5e37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
