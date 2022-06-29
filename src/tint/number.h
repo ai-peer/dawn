@@ -16,6 +16,7 @@
 #define SRC_TINT_NUMBER_H_
 
 #include <stdint.h>
+#include <cmath>
 #include <functional>
 #include <limits>
 #include <optional>
@@ -138,17 +139,18 @@ inline std::ostream& operator<<(std::ostream& out, Number<T> num) {
 /// Equality operator.
 /// @param a the LHS number
 /// @param b the RHS number
-/// @returns true if the numbers `a` and `b` are exactly equal.
+/// @returns true if the numbers `a` and `b` are exactly equal. Also considers sign bit.
 template <typename A, typename B>
 bool operator==(Number<A> a, Number<B> b) {
     using T = decltype(a.value + b.value);
-    return std::equal_to<T>()(static_cast<T>(a.value), static_cast<T>(b.value));
+    return std::equal_to<T>()(static_cast<T>(a.value), static_cast<T>(b.value)) &&
+           std::signbit(a.value) == std::signbit(b.value);
 }
 
 /// Inequality operator.
 /// @param a the LHS number
 /// @param b the RHS number
-/// @returns true if the numbers `a` and `b` are exactly unequal.
+/// @returns true if the numbers `a` and `b` are exactly unequal. Also considers sign bit.
 template <typename A, typename B>
 bool operator!=(Number<A> a, Number<B> b) {
     return !(a == b);
