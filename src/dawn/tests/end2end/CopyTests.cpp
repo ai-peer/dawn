@@ -2177,68 +2177,6 @@ TEST_P(CopyTests_T2T, CopyWithinSameTextureNonOverlappedSlices) {
     DoTest(srcTextureSpec, dstTextureSpec, {kWidth, kHeight, kCopyArrayLayerCount}, true);
 }
 
-// A regression test (from WebGPU CTS) for an Intel D3D12 driver bug about T2T copy with specific
-// texture formats. See http://crbug.com/1161355 for more details.
-TEST_P(CopyTests_T2T, CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4Bytes) {
-    // This test can pass on the Windows Intel Vulkan driver version 27.20.100.9168.
-    // TODO(crbug.com/dawn/819): enable this test on Intel Vulkan drivers after the upgrade of
-    // try bots.
-    DAWN_SUPPRESS_TEST_IF(IsVulkan() && IsWindows() && IsIntel());
-
-    // This test also fails on D3D12 on Intel Windows. See http://crbug.com/1312066 for details.
-    DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsWindows() && IsIntel());
-
-    constexpr std::array<wgpu::TextureFormat, 11> kFormats = {
-        {wgpu::TextureFormat::RG8Sint, wgpu::TextureFormat::RG8Uint, wgpu::TextureFormat::RG8Snorm,
-         wgpu::TextureFormat::RG8Unorm, wgpu::TextureFormat::R16Float, wgpu::TextureFormat::R16Sint,
-         wgpu::TextureFormat::R16Uint, wgpu::TextureFormat::R8Snorm, wgpu::TextureFormat::R8Unorm,
-         wgpu::TextureFormat::R8Sint, wgpu::TextureFormat::R8Uint}};
-
-    constexpr uint32_t kSrcLevelCount = 4;
-    constexpr uint32_t kDstLevelCount = 5;
-    constexpr uint32_t kSrcSize = 2 << kSrcLevelCount;
-    constexpr uint32_t kDstSize = 2 << kDstLevelCount;
-    ASSERT_LE(kSrcSize, kTextureBytesPerRowAlignment);
-    ASSERT_LE(kDstSize, kTextureBytesPerRowAlignment);
-
-    // The copyLayer to test:
-    // 1u (non-array texture), 3u (copyLayer < copyWidth), 5u (copyLayer > copyWidth)
-    constexpr std::array<uint32_t, 3> kTestTextureLayer = {1u, 3u, 5u};
-
-    for (wgpu::TextureFormat format : kFormats) {
-        if (HasToggleEnabled("disable_snorm_read") &&
-            (format == wgpu::TextureFormat::RG8Snorm || format == wgpu::TextureFormat::R8Snorm)) {
-            continue;
-        }
-
-        if (HasToggleEnabled("disable_r8_rg8_mipmaps") &&
-            (format == wgpu::TextureFormat::R8Unorm || format == wgpu::TextureFormat::RG8Unorm)) {
-            continue;
-        }
-
-        for (uint32_t textureLayer : kTestTextureLayer) {
-            const wgpu::Extent3D kUploadSize = {4u, 4u, textureLayer};
-
-            for (uint32_t srcLevel = 0; srcLevel < kSrcLevelCount; ++srcLevel) {
-                for (uint32_t dstLevel = 0; dstLevel < kDstLevelCount; ++dstLevel) {
-                    TextureSpec srcSpec;
-                    srcSpec.levelCount = kSrcLevelCount;
-                    srcSpec.format = format;
-                    srcSpec.copyLevel = srcLevel;
-                    srcSpec.textureSize = {kSrcSize, kSrcSize, textureLayer};
-
-                    TextureSpec dstSpec = srcSpec;
-                    dstSpec.levelCount = kDstLevelCount;
-                    dstSpec.copyLevel = dstLevel;
-                    dstSpec.textureSize = {kDstSize, kDstSize, textureLayer};
-
-                    DoTest(srcSpec, dstSpec, kUploadSize);
-                }
-            }
-        }
-    }
-}
-
 // Test that copying from one mip level to another mip level within the same 2D array texture works.
 TEST_P(CopyTests_T2T, Texture2DArraySameTextureDifferentMipLevels) {
     constexpr uint32_t kWidth = 256;
@@ -2463,6 +2401,80 @@ TEST_P(CopyTests_T2T, Texture3DMipUnaligned) {
 }
 
 DAWN_INSTANTIATE_TEST_P(CopyTests_T2T,
+                        {D3D12Backend(),
+                         D3D12Backend({"use_temp_buffer_in_small_format_texture_to_texture_copy_"
+                                       "from_greater_to_less_mip_level"}),
+                         MetalBackend(), OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
+                        {true, false});
+
+// The regression tests (from WebGPU CTS) for an Intel D3D12 driver bug about T2T copy with specific
+// texture formats. See http://crbug.com/1161355 for more details.
+class CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4BytesTests : public CopyTests_T2T {
+  protected:
+    void DoTest(wgpu::TextureFormat format) {
+        // This test can pass on the Windows Intel Vulkan driver version 27.20.100.9168.
+        // TODO(crbug.com/dawn/819): enable this test on Intel Vulkan drivers after the upgrade of
+        // try bots.
+        DAWN_SUPPRESS_TEST_IF(IsVulkan() && IsWindows() && IsIntel());
+
+        DAWN_TEST_UNSUPPORTED_IF(
+            HasToggleEnabled("disable_snorm_read") &&
+            (format == wgpu::TextureFormat::RG8Snorm || format == wgpu::TextureFormat::R8Snorm));
+        DAWN_TEST_UNSUPPORTED_IF(
+            HasToggleEnabled("disable_r8_rg8_mipmaps") &&
+            (format == wgpu::TextureFormat::R8Unorm || format == wgpu::TextureFormat::RG8Unorm));
+
+        constexpr uint32_t kSrcLevelCount = 4;
+        constexpr uint32_t kDstLevelCount = 5;
+        constexpr uint32_t kSrcSize = 2 << kSrcLevelCount;
+        constexpr uint32_t kDstSize = 2 << kDstLevelCount;
+        ASSERT_LE(kSrcSize, kTextureBytesPerRowAlignment);
+        ASSERT_LE(kDstSize, kTextureBytesPerRowAlignment);
+
+        // The copyLayer to test:
+        // 1u (non-array texture), 3u (copyLayer < copyWidth), 5u (copyLayer > copyWidth)
+        constexpr std::array<uint32_t, 3> kTestTextureLayer = {1u, 3u, 5u};
+        for (uint32_t textureLayer : kTestTextureLayer) {
+            const wgpu::Extent3D kUploadSize = {4u, 4u, textureLayer};
+
+            for (uint32_t srcLevel = 0; srcLevel < kSrcLevelCount; ++srcLevel) {
+                for (uint32_t dstLevel = 0; dstLevel < kDstLevelCount; ++dstLevel) {
+                    TextureSpec srcSpec;
+                    srcSpec.levelCount = kSrcLevelCount;
+                    srcSpec.format = format;
+                    srcSpec.copyLevel = srcLevel;
+                    srcSpec.textureSize = {kSrcSize, kSrcSize, textureLayer};
+
+                    TextureSpec dstSpec = srcSpec;
+                    dstSpec.levelCount = kDstLevelCount;
+                    dstSpec.copyLevel = dstLevel;
+                    dstSpec.textureSize = {kDstSize, kDstSize, textureLayer};
+
+                    CopyTests_T2T::DoTest(srcSpec, dstSpec, kUploadSize);
+                }
+            }
+        }
+    }
+};
+
+#define DO_CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4BytesTest(format)     \
+    TEST_P(CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4BytesTests, format) { \
+        DoTest(wgpu::TextureFormat::format);                                       \
+    }
+
+DO_CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4BytesTest(RG8Sint);
+DO_CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4BytesTest(RG8Uint);
+DO_CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4BytesTest(RG8Snorm);
+DO_CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4BytesTest(RG8Unorm);
+DO_CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4BytesTest(R16Float);
+DO_CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4BytesTest(R16Sint);
+DO_CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4BytesTest(R16Uint);
+DO_CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4BytesTest(R8Snorm);
+DO_CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4BytesTest(R8Unorm);
+DO_CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4BytesTest(R8Sint);
+DO_CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4BytesTest(R8Uint);
+
+DAWN_INSTANTIATE_TEST_P(CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4BytesTests,
                         {D3D12Backend(),
                          D3D12Backend({"use_temp_buffer_in_small_format_texture_to_texture_copy_"
                                        "from_greater_to_less_mip_level"}),
