@@ -197,6 +197,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d097226c_51ec4175",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-06-29T01:07:30Z",
+      "side": 1,
+      "message": "Thanks, the build errors in CQ DRY RYN seem to have been resolved with the new commit. But Kokoro seems to fail. In your CL Kokoro succeeded in presubmit build. So my changes caused it? But I don\u0027t edit the files under wire so am wondering how the errors are caused...\n\n```\nIn file included from /dawn/src/src/dawn/wire/client/Device.h:23,\n                 from /dawn/src/src/dawn/wire/client/ApiObjects.h:22,\n                 from /dawn/build/gen/src/dawn/wire/client/ApiProcs_autogen.cpp:2:\n/dawn/build/gen/src/dawn/wire/client/ApiObjects_autogen.h:23:5: error: explicit template specialization cannot have a storage class\n   23 |     static constexpr ObjectType ObjectTypeToTypeEnum\u003cAdapter\u003e \u003d ObjectType::Adapter;\n      |     ^~~~~~\n/dawn/build/gen/src/dawn/wire/client/ApiObjects_autogen.h:37:5: error: explicit template specialization cannot have a storage class\n   37 |     static constexpr ObjectType ObjectTypeToTypeEnum\u003cBindGroup\u003e \u003d ObjectType::BindGroup;\n      |     ^~~~~~\n\n...\n```",
+      "parentUuid": "7f29c430_fcc66be0",
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9c95e98_fd1ed8e8",
         "filename": "dawn.json",
         "patchSetId": 1
