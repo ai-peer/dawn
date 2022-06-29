@@ -1,0 +1,293 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05d21e14_2d79e501",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-29T02:05:12Z",
+      "side": 1,
+      "message": "Should this be an ASSERT_TYPE? Is there any point in continuing if the types don\u0027t match?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f600df73_aecaafaa",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1704,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-29T02:05:12Z",
+      "side": 1,
+      "message": "This will propagate nulls where previously we had empty values. For GlobalVariable, Call (and any others) have you verified all the usages and added the needed nullptr checks?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0ad0bcb_e80fe3b7",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-29T02:05:12Z",
+      "side": 1,
+      "message": "Maybe @note `type` must be a scalar type ?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67b11bc7_ebeceebe",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-29T02:05:12Z",
+      "side": 1,
+      "message": "Why is negative 0 not considered zero?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbfc81e1_8e3fa85f",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-29T02:05:12Z",
+      "side": 1,
+      "message": "nit outdent to match the } ?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30e0e1d1_b30997fe",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-29T02:05:12Z",
+      "side": 1,
+      "message": "Why do these failures and the int failures not return failure but instead pretend to be the largest or smallest value?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "061f0e11_1c48bfc1",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-29T02:05:12Z",
+      "side": 1,
+      "message": "Do you actually need `failed` it seems equivalent to `res \u003d\u003d nullptr` ?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a83ee7d1_39585201",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-29T02:05:12Z",
+      "side": 1,
+      "message": "Should this (and the other ones) also TINT_ASSERT(Resolver, t !\u003d nullptr) or is there a blanket assumption that sem::Type is never nullptr?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeb2adcb_2e0637c1",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-29T02:05:12Z",
+      "side": 1,
+      "message": "Does this need to validate the TINT_ASSERT(el !\u003d nullptr) for each entry in els?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef114a39_0b1206f9",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-29T02:05:12Z",
+      "side": 1,
+      "message": "Would it be worthwhile to have debug code in here which validates they are not all equal? Just incase something creates a composite instead of a splat?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18545286_f231c8ea",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-29T02:05:12Z",
+      "side": 1,
+      "message": "Why is it not a failure to fail to get the value? What does it mean if this returns nullptr?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23372a9a_e14e3939",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-29T02:05:12Z",
+      "side": 1,
+      "message": "Doesn\u0027t the hash include the type and elements? So, don\u0027t all these checks get handled by checking the hash?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0fba4df_aa07396e",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-29T02:05:12Z",
+      "side": 1,
+      "message": "f32(x), f16(x) ?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37a5e0af_53755eb3",
+        "filename": "src/tint/sem/materialize.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-29T02:05:12Z",
+      "side": 1,
+      "message": "You\u0027ve already dereferenced the constant before doing the TINT_ASSERT ...",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "945e0a3e_788bb95a",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2243,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-29T02:05:12Z",
+      "side": 1,
+      "message": "Has the AllZero case been handled elsewhere? (same question for the below)",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eba900ce_f6cbb78c",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-29T02:05:12Z",
+      "side": 1,
+      "message": "Can we add a comment here that this is used for division so that we don\u0027t divide by zero which breaks FXC and is undefined in WGSL. We substitute division by zero as division by 1.",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ade7bd12_39585a90",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-06-29T02:05:12Z",
+      "side": 1,
+      "message": "(As an aside, why didn\u0027t we just fail the compile? is it a runtime error for div by zero instead of a compile time error?)",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
