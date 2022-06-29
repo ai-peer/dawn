@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80c2050f_b21e8069",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-29T19:40:26Z",
+      "side": 1,
+      "message": "Corentin, Austin: PTAL. Thanks!\n\nBTW it turns out we rely on some EGL 1.5 behaviour (EGLImage, context creation w/version) without checking extensions, so I\u0027ve set 1.5 as the minimum for now. (We should still check how prevalent 1.5 is, but it did come out in 2014.)",
+      "revId": "507444caa2b51da6ef19398b7677333b650a8cbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
