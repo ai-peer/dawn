@@ -237,6 +237,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f0c814d_a864beeb",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-29T11:18:07Z",
+      "side": 1,
+      "message": "Chromium mostly knows when GL contexts can be made current in decoders, but as we move towards more Dawn, I worry that we\u0027ll start implicitly making GL contexts current in SharedImage operations and other things that aren\u0027t strictly in the WebGPU command decoder, so IDK how we would make that pretty and robust in Chrome.\n\nBoth 1) and 2) would be good for consistency though they both have the drawback above. 1) seems like it could have more perf impact because MakeCurrent isn\u0027t super cheap (I think there\u0027s a bunch of validation in it?).\n\nFor Chromium I wonder if we could have something where Chrome notifies the previously current GL context owner that it is no longer current, so it knows to re-MakeCurrent the next time. It would be a pretty big change though.",
+      "parentUuid": "21bef4e8_7a1562a7",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b3ce7b23_2c792a6b",
         "filename": "src/dawn/native/opengl/BackendGL.h",
         "patchSetId": 33
