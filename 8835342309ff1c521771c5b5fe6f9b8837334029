@@ -253,6 +253,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c811e3f_5eee117b",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-29T15:27:22Z",
+      "side": 1,
+      "message": "OK, I\u0027ve logged https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1478 and captured this discussion there.",
+      "parentUuid": "6f0c814d_a864beeb",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3ce7b23_2c792a6b",
@@ -355,6 +373,24 @@
       "side": 1,
       "message": "address this?",
       "parentUuid": "46b5f503_66e07781",
+      "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85d177be_906ec327",
+        "filename": "src/dawn/native/opengl/ContextEGL.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-29T15:27:22Z",
+      "side": 1,
+      "message": "OK, I\u0027ve logged https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1477 to fix it. (I\u0027m actually not sure which EGL version we require, especially for Desktop GL, so I\u0027m punting on it until I figure that out.)",
+      "parentUuid": "b2c3cec6_954a683e",
       "revId": "8835342309ff1c521771c5b5fe6f9b8837334029",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
