@@ -236,6 +236,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9979b064_be506d47",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1885,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-06-29T06:53:19Z",
+      "side": 1,
+      "message": "Done, thanks.",
+      "parentUuid": "a9c95e98_fd1ed8e8",
+      "range": {
+        "startLine": 1885,
+        "startChar": 0,
+        "endLine": 1885,
+        "endChar": 35
+      },
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "063fcae9_51cdb76b",
@@ -267,6 +291,24 @@
       "side": 1,
       "message": "I think we can do without any tags. We\u0027ll have to agree on https://github.com/webgpu-native/webgpu-headers to have this extension struct, but I don\u0027t think it will be very contentious. Also, it can have value \"15\" since we plan to put it in the public headers, and not be an internal Dawn thing.",
       "parentUuid": "063fcae9_51cdb76b",
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41854677_895be85b",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 2492,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-06-29T06:53:19Z",
+      "side": 1,
+      "message": "Done, thanks",
+      "parentUuid": "f51c4727_63a4d313",
       "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -365,6 +407,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af955a6b_4b89833c",
+        "filename": "src/dawn/native/RenderPassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-06-29T06:53:19Z",
+      "side": 1,
+      "message": "Done, thanks",
+      "parentUuid": "b20233c8_b0fb9876",
+      "range": {
+        "startLine": 151,
+        "startChar": 33,
+        "endLine": 151,
+        "endChar": 48
+      },
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5020b94f_774219e3",
@@ -382,6 +448,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05203cf6_c3d640c7",
+        "filename": "src/dawn/native/RenderPassEncoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-06-29T06:53:19Z",
+      "side": 1,
+      "message": "Done, thanks",
+      "parentUuid": "5020b94f_774219e3",
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99c5b0f3_321d8d86",
@@ -395,6 +479,24 @@
       "writtenOn": "2022-06-28T05:46:20Z",
       "side": 1,
       "message": "nit: the vertex buffer is not used so it isn\u0027t necessary to set it (or create it at the beginning)",
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ac43585_3acd33d6",
+        "filename": "src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-06-29T06:53:19Z",
+      "side": 1,
+      "message": "Done, thanks",
+      "parentUuid": "99c5b0f3_321d8d86",
       "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
