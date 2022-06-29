@@ -57,8 +57,9 @@ std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters() {
     egl.Init(options.getProc);
 
     EGLenum api = GetType() == wgpu::BackendType::OpenGLES ? EGL_OPENGL_ES_API : EGL_OPENGL_API;
-    std::unique_ptr<Device::Context> context = ContextEGL::Create(egl, api);
-    if (!context) {
+    auto context = ContextEGL::Create(egl, api);
+    if (context.IsError()) {
+        GetInstance()->ConsumedError(context.AcquireError());
         return {};
     }
 
@@ -67,7 +68,7 @@ std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters() {
     EGLContext prevReadSurface = egl.GetCurrentSurface(EGL_READ);
     EGLContext prevContext = egl.GetCurrentContext();
 
-    context->MakeCurrent();
+    context.AcquireSuccess()->MakeCurrent();
 
     auto result = DiscoverAdapters(&options);
 
