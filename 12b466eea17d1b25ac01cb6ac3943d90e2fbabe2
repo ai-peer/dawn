@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd154334_ff5e0a77",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T12:06:49Z",
+      "side": 1,
+      "message": "`EXPECT_TYPE` is a helper in `src/tint/sem/test_helper.h` and I haven\u0027t implemented an `ASSERT_TYPE`.\n\nI only really use `ASSERT` in tests if the test is going to crash if the condition fails. Sometimes the additional information that follows can help identify the root problem.",
+      "parentUuid": "05d21e14_2d79e501",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f600df73_aecaafaa",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-06-29T02:05:12Z",
       "side": 1,
       "message": "This will propagate nulls where previously we had empty values. For GlobalVariable, Call (and any others) have you verified all the usages and added the needed nullptr checks?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18be2bab_8c8482b4",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1704,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T12:06:49Z",
+      "side": 1,
+      "message": "I can\u0027t say with 100% certainty, but I believe so. `sem::Constant` used to have a `operator bool()` to test for validity, so the switch to a pointer was pretty straight forward.",
+      "parentUuid": "f600df73_aecaafaa",
       "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fd30915_4b1951f3",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T12:06:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0ad0bcb_e80fe3b7",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67b11bc7_ebeceebe",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-06-29T02:05:12Z",
       "side": 1,
       "message": "Why is negative 0 not considered zero?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9271d64_b7ad0759",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T12:06:49Z",
+      "side": 1,
+      "message": "Because backends use these methods to emit zero initializers. For SPIR-V that maps to `OpConstantNull`, others are some form of `(T)0`. There\u0027s CTS that test for `-0.0`, so we can\u0027t treat it the same as positive zero, otherwise they\u0027ll get folded away in exciting ways.",
+      "parentUuid": "67b11bc7_ebeceebe",
       "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c00633c2_4f85027a",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T12:06:49Z",
+      "side": 1,
+      "message": "Not entirely sure what you mean. clang-format picked the indentation here. Are you suggesting I move to a different line?",
+      "parentUuid": "cbfc81e1_8e3fa85f",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30e0e1d1_b30997fe",
         "filename": "src/tint/resolver/resolver_constants.cc",
         "patchSetId": 2
@@ -99,6 +189,24 @@
       "writtenOn": "2022-06-29T02:05:12Z",
       "side": 1,
       "message": "Why do these failures and the int failures not return failure but instead pretend to be the largest or smallest value?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dc95d88_36902a44",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T12:06:49Z",
+      "side": 1,
+      "message": "Because that\u0027s the spec:\n\nhttps://www.w3.org/TR/WGSL/#floating-point-conversion\n\n```\nWhen converting a floating point scalar value to an integral type:\n\n• If the original value is exactly representable in the destination type, then the result is that value.\n\n• Otherwise, the original value is rounded toward zero.\n\n   ◦ If the rounded value is exactly representable in the destination type, the result is that value.\n\n   ◦ Otherwise, the result is the value in the destination type that is closest to the rounded value.\n\n```\n\nAnd below:\n\n```\nOtherwise, the result is the infinity value of the destination type, with the same sign as X.\n```",
+      "parentUuid": "30e0e1d1_b30997fe",
       "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +228,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d02fd14f_cae61a9e",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T12:06:49Z",
+      "side": 1,
+      "message": "Yes, they\u0027re signalled differently. `Failure` indicates that a diagnostic error has been raised, and resolving should fail. `nullptr` means there was no constant value produced, which can occur if the inputs or operation are not constant.",
+      "parentUuid": "061f0e11_1c48bfc1",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a83ee7d1_39585201",
@@ -133,6 +259,24 @@
       "writtenOn": "2022-06-29T02:05:12Z",
       "side": 1,
       "message": "Should this (and the other ones) also TINT_ASSERT(Resolver, t !\u003d nullptr) or is there a blanket assumption that sem::Type is never nullptr?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57c89ac0_4a3b2c05",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T12:06:49Z",
+      "side": 1,
+      "message": "I\u0027ve gone the other direction and removed the assert. This was to debug an issue.\nWhile I\u0027d usually like to add seatbelts where I can, this is silly-hot code, and we still have assertions enabled in production (which we\u0027ll keep for the foreseeable future).",
+      "parentUuid": "a83ee7d1_39585201",
       "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -154,6 +298,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25304170_bd03803e",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T12:06:49Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "aeb2adcb_2e0637c1",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef114a39_0b1206f9",
@@ -167,6 +329,24 @@
       "writtenOn": "2022-06-29T02:05:12Z",
       "side": 1,
       "message": "Would it be worthwhile to have debug code in here which validates they are not all equal? Just incase something creates a composite instead of a splat?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15065c00_26266edb",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T12:06:49Z",
+      "side": 1,
+      "message": "I considered it, but I\u0027m trying to keep performance in check here.\nInstead, I\u0027ve added a few billion additional tests.",
+      "parentUuid": "ef114a39_0b1206f9",
       "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -188,6 +368,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85ad4eee_3413c760",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T12:06:49Z",
+      "side": 1,
+      "message": "Returning `nullptr` means the expression cannot be evaluated at shader creation time. Updated the comment for `ConstantResult` in `resolver.h`.",
+      "parentUuid": "18545286_f231c8ea",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23372a9a_e14e3939",
@@ -201,6 +399,24 @@
       "writtenOn": "2022-06-29T02:05:12Z",
       "side": 1,
       "message": "Doesn\u0027t the hash include the type and elements? So, don\u0027t all these checks get handled by checking the hash?",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2664208a_c503480f",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T12:06:49Z",
+      "side": 1,
+      "message": "It does, but hashes can collide. The hash can only be an early rejection.",
+      "parentUuid": "23372a9a_e14e3939",
       "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -222,6 +438,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2581944c_92882433",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T12:06:49Z",
+      "side": 1,
+      "message": "Wasn\u0027t meant to be an exhaustive list. added `, etc`.",
+      "parentUuid": "d0fba4df_aa07396e",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37a5e0af_53755eb3",
@@ -239,6 +473,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3bf416c_1113b650",
+        "filename": "src/tint/sem/materialize.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T12:06:49Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "37a5e0af_53755eb3",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "945e0a3e_788bb95a",
@@ -252,6 +504,24 @@
       "writtenOn": "2022-06-29T02:05:12Z",
       "side": 1,
       "message": "Has the AllZero case been handled elsewhere? (same question for the below)",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e0bb587_8c7a1523",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2243,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T12:06:49Z",
+      "side": 1,
+      "message": "The backend didn\u0027t have a handler for an all-zero case, so I haven\u0027t added one here.",
+      "parentUuid": "945e0a3e_788bb95a",
       "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -286,6 +556,42 @@
       "writtenOn": "2022-06-29T02:05:12Z",
       "side": 1,
       "message": "(As an aside, why didn\u0027t we just fail the compile? is it a runtime error for div by zero instead of a compile time error?)",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c01933a2_ddf93e77",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T12:06:49Z",
+      "side": 1,
+      "message": "https://www.w3.org/TR/WGSL/#arithmetic-expr\n\n```\nIf T is a signed integral type, the scalar case, evaluates to:\n\n• e1, when e2 is zero.\n```\n\nHowever, this was added to keep FXC happy. We need to properly apply this logic across all the backends. Once we do this with a transform, this can probably be ripped out of here.",
+      "parentUuid": "ade7bd12_39585a90",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f17a0bb7_3b1897e3",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-06-29T12:06:49Z",
+      "side": 1,
+      "message": "Added a comment in the header.",
+      "parentUuid": "eba900ce_f6cbb78c",
       "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
