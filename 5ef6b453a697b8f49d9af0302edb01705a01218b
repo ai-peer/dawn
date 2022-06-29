@@ -16,6 +16,40 @@
       "message": "Hi Austin and Corentin,\n\nI\u0027m not sure if this CL can solve the crash issue on the bots but I\u0027d like to have a try.\n\nPTAL, thanks!",
       "revId": "5ef6b453a697b8f49d9af0302edb01705a01218b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d02c787_a97e8671",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-29T11:23:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5ef6b453a697b8f49d9af0302edb01705a01218b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e65a77f6_d66d7697",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2482,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-29T11:23:09Z",
+      "side": 1,
+      "message": "I thought it would be nice to add the list of formats there, but there seems to be no easy way to derive from param struct at the moment. But it could be easy to add by making the AdapterTestParam here https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/DawnTest.h;drc\u003d81b97656bcab6c3542dcd739e4edce791e11c181;l\u003d727 a name that\u0027s configurable (and DAWN_TEST_PARAM_STRUCT(Name, Args) would just be DAWN_TEST_PARAM_STRUCT(Name, AdapterTestParams, Args))\n\nIt may be a lot for just this CL so feel free to skip.",
+      "revId": "5ef6b453a697b8f49d9af0302edb01705a01218b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
