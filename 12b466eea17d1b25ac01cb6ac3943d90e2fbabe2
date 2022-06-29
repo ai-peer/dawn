@@ -176,6 +176,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0524a708_79117467",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-29T13:08:36Z",
+      "side": 1,
+      "message": "If it\u0027s clang format then don\u0027t worry about it. I was thinking line this comment up with the } else of the line below to show that the comment isn\u0027t about the block it\u0027s in but the following blocks.",
+      "parentUuid": "c00633c2_4f85027a",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30e0e1d1_b30997fe",
@@ -207,6 +225,24 @@
       "side": 1,
       "message": "Because that\u0027s the spec:\n\nhttps://www.w3.org/TR/WGSL/#floating-point-conversion\n\n```\nWhen converting a floating point scalar value to an integral type:\n\n• If the original value is exactly representable in the destination type, then the result is that value.\n\n• Otherwise, the original value is rounded toward zero.\n\n   ◦ If the rounded value is exactly representable in the destination type, the result is that value.\n\n   ◦ Otherwise, the result is the value in the destination type that is closest to the rounded value.\n\n```\n\nAnd below:\n\n```\nOtherwise, the result is the infinity value of the destination type, with the same sign as X.\n```",
       "parentUuid": "30e0e1d1_b30997fe",
+      "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a2abeef_6db56e1b",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-06-29T13:08:36Z",
+      "side": 1,
+      "message": "Thanks, was going to ask for the spec links put in to make clear where these rules came from, but you already did it.",
+      "parentUuid": "9dc95d88_36902a44",
       "revId": "12b466eea17d1b25ac01cb6ac3943d90e2fbabe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
