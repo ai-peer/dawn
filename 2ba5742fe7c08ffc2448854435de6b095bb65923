@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fa1c8bc_fd83409b",
+        "filename": "src/tint/transform/spirv_atomic.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-29T19:47:47Z",
+      "side": 1,
+      "message": "Added this to makes sure we only replace loads and stores for struct members that we marked as atomic. Caught this in our e2e test failures. Modified one of the unit tests to validate this.",
+      "revId": "2ba5742fe7c08ffc2448854435de6b095bb65923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea25b4a3_325e4a1d",
+        "filename": "src/tint/transform/spirv_atomic_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1174,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-29T19:47:47Z",
+      "side": 1,
+      "message": "Added this for \u0027c\u0027 member which is non-atomic, so the output should not be replaced with atomicLoad/Store.",
+      "revId": "2ba5742fe7c08ffc2448854435de6b095bb65923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

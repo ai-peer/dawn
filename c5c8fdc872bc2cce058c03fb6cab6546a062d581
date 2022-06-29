@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19bc2b19_4fe6ee47",
+        "filename": "src/tint/transform/spirv_atomic.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-29T19:47:47Z",
+      "side": 1,
+      "message": "I always forget about this form! Done.",
+      "parentUuid": "6a8f506c_46a00c37",
+      "range": {
+        "startLine": 210,
+        "startChar": 19,
+        "endLine": 210,
+        "endChar": 55
+      },
+      "revId": "c5c8fdc872bc2cce058c03fb6cab6546a062d581",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7a1e9c1_0b8a8675",
@@ -54,6 +78,24 @@
       "writtenOn": "2022-06-29T18:23:35Z",
       "side": 1,
       "message": "I _think_ this is safe, but I always get worried when I see `ctx.Replace()` used with other transformations in the same Transform. If the `Replace()` target expression has been touched by another replace / remove, then you can end up in the situation that the target is never seen, and you\u0027ve now got orphaned replacement AST nodes, which is an ICE.\nThat\u0027s why I have been trying to deprecate this method for the form that takes a callback function, so you can build the replacement AST nodes on demand.\n\nAlternatively, I don\u0027t see any reason why you couldn\u0027t use `ctx.ReplaceAll()` for these, which is generally safer.\n\nWith all that said, I can\u0027t think of any situation where these could overlap. So maybe we\u0027re good.",
+      "revId": "c5c8fdc872bc2cce058c03fb6cab6546a062d581",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccf79ace_0e012494",
+        "filename": "src/tint/transform/spirv_atomic.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-06-29T19:47:47Z",
+      "side": 1,
+      "message": "Went with the ctx.Replace callback version.",
+      "parentUuid": "e7a1e9c1_0b8a8675",
       "revId": "c5c8fdc872bc2cce058c03fb6cab6546a062d581",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
