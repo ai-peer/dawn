@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93502149_93185402",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-06-29T17:34:58Z",
+      "side": 1,
+      "message": "Looking good because build errors I encounted in https://dawn-review.googlesource.com/c/dawn/+/94821 are resolved with this change.",
+      "revId": "2a768d40e797fef2fa01b8f6f177bbfe6cb2bde4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
