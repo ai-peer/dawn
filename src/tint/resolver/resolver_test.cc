@@ -827,8 +827,8 @@ TEST_F(ResolverTest, Function_RegisterInputOutputVariables) {
     auto* sb_var =
         GlobalVar("sb_var", ty.Of(s), ast::StorageClass::kStorage, ast::Access::kReadWrite,
                   ast::AttributeList{
-                      create<ast::BindingAttribute>(0),
-                      create<ast::GroupAttribute>(0),
+                      create<ast::BindingAttribute>(0u),
+                      create<ast::GroupAttribute>(0u),
                   });
     auto* wg_var = GlobalVar("wg_var", ty.f32(), ast::StorageClass::kWorkgroup);
     auto* priv_var = GlobalVar("priv_var", ty.f32(), ast::StorageClass::kPrivate);
@@ -860,8 +860,8 @@ TEST_F(ResolverTest, Function_RegisterInputOutputVariables_SubFunction) {
     auto* sb_var =
         GlobalVar("sb_var", ty.Of(s), ast::StorageClass::kStorage, ast::Access::kReadWrite,
                   ast::AttributeList{
-                      create<ast::BindingAttribute>(0),
-                      create<ast::GroupAttribute>(0),
+                      create<ast::BindingAttribute>(0u),
+                      create<ast::GroupAttribute>(0u),
                   });
     auto* wg_var = GlobalVar("wg_var", ty.f32(), ast::StorageClass::kWorkgroup);
     auto* priv_var = GlobalVar("priv_var", ty.f32(), ast::StorageClass::kPrivate);
@@ -1870,8 +1870,8 @@ TEST_F(ResolverTest, StorageClass_SetForSampler) {
     auto* t = ty.sampler(ast::SamplerKind::kSampler);
     auto* var = GlobalVar("var", t,
                           ast::AttributeList{
-                              create<ast::BindingAttribute>(0),
-                              create<ast::GroupAttribute>(0),
+                              create<ast::BindingAttribute>(0u),
+                              create<ast::GroupAttribute>(0u),
                           });
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
@@ -1883,8 +1883,8 @@ TEST_F(ResolverTest, StorageClass_SetForTexture) {
     auto* t = ty.sampled_texture(ast::TextureDimension::k1d, ty.f32());
     auto* var = GlobalVar("var", t,
                           ast::AttributeList{
-                              create<ast::BindingAttribute>(0),
-                              create<ast::GroupAttribute>(0),
+                              create<ast::BindingAttribute>(0u),
+                              create<ast::GroupAttribute>(0u),
                           });
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
@@ -1908,8 +1908,8 @@ TEST_F(ResolverTest, Access_SetForStorageBuffer) {
     auto* s = Structure("S", {Member(Source{{12, 34}}, "x", ty.i32())});
     auto* var = GlobalVar(Source{{56, 78}}, "g", ty.Of(s), ast::StorageClass::kStorage,
                           ast::AttributeList{
-                              create<ast::BindingAttribute>(0),
-                              create<ast::GroupAttribute>(0),
+                              create<ast::BindingAttribute>(0u),
+                              create<ast::GroupAttribute>(0u),
                           });
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
@@ -1922,10 +1922,10 @@ TEST_F(ResolverTest, BindingPoint_SetForResources) {
     // @group(3) @binding(4) var s2 : sampler;
     auto* s1 = GlobalVar(
         Sym(), ty.sampler(ast::SamplerKind::kSampler),
-        ast::AttributeList{create<ast::GroupAttribute>(1), create<ast::BindingAttribute>(2)});
+        ast::AttributeList{create<ast::GroupAttribute>(1u), create<ast::BindingAttribute>(2u)});
     auto* s2 = GlobalVar(
         Sym(), ty.sampler(ast::SamplerKind::kSampler),
-        ast::AttributeList{create<ast::GroupAttribute>(3), create<ast::BindingAttribute>(4)});
+        ast::AttributeList{create<ast::GroupAttribute>(3u), create<ast::BindingAttribute>(4u)});
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 

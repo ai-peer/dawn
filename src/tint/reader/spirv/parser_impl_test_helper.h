@@ -22,7 +22,13 @@
 #include <vector>
 
 #if TINT_BUILD_SPV_READER
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnewline-eof"
+#pragma clang diagnostic ignored "-Wold-style-cast"
+#pragma clang diagnostic ignored "-Wsign-conversion"
+#pragma clang diagnostic ignored "-Wweak-vtables"
 #include "source/opt/ir_context.h"
+#pragma clang diagnostic pop
 #endif
 
 #include "gtest/gtest.h"
