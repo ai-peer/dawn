@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3287c3ac_2a827c98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-06-29T02:24:16Z",
+      "side": 1,
+      "message": "Hi Austin and Corentin,\n\nI\u0027m not sure if this CL can solve the crash issue on the bots but I\u0027d like to have a try.\n\nPTAL, thanks!",
+      "revId": "5ef6b453a697b8f49d9af0302edb01705a01218b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
