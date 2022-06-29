@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1923cac4_4381c08b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-29T15:24:43Z",
+      "side": 1,
+      "message": "LGTM overall, a bunch of nits and questions that could be potential improvements.\n\nLoadOrRun seems to work really well for this case!",
+      "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56373d0a_31799e81",
+        "filename": "src/dawn/native/CacheResult.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-29T15:24:43Z",
+      "side": 1,
+      "message": "This seems a bit weird, isn\u0027t it the BlobCache that should ensure that something is stored, instead of the stored thing ensuring it is itself stored? But maybe that would cause a cyclic dependency between Blob/BlobCache and CacheResult so I\u0027m not sure.",
+      "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f01f9788_a25c9394",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-29T15:24:43Z",
+      "side": 1,
+      "message": "nit: This could be Create(std::vector\u003cuint32_t\u003e) so that callers don\u0027t need to care about CreateBlob etc.",
+      "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29c6e2bb_fba45edc",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-29T15:24:43Z",
+      "side": 1,
+      "message": "Given that `Spirv` is-a `Blob`, I\u0027m not sure I understand why we need `Store` to be specialized for it. The underlying blob has the correct data and size, so we could just use that?",
+      "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cd9101e_2cb15fdc",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-29T15:24:43Z",
+      "side": 1,
+      "message": "very optional nit: Run is a bit weird, OrCreate?",
+      "range": {
+        "startLine": 240,
+        "startChar": 14,
+        "endLine": 240,
+        "endChar": 17
+      },
+      "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9159ce58_cd392eb5",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-29T15:24:43Z",
+      "side": 1,
+      "message": "u-nit: this block of code is a bit dense, though part of it is because it\u0027s pushed to the right.",
+      "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

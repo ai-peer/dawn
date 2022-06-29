@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fbf8e962_549dcd54",
+        "filename": "src/dawn/native/Blob.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-29T15:24:43Z",
+      "side": 1,
+      "message": "nit: probably requires a #include \u003ctype_traits\u003e",
+      "range": {
+        "startLine": 63,
+        "startChar": 55,
+        "endLine": 63,
+        "endChar": 71
+      },
+      "revId": "8115c58f1a4583dfe60af6aa8f8f45572161b93a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b2e12c78_1111d2b7",
         "filename": "src/dawn/native/CacheKey.cpp",
         "patchSetId": 4
@@ -159,6 +182,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b419a41_e8293dd2",
+        "filename": "src/dawn/native/SpirvValidation.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-29T15:24:43Z",
+      "side": 1,
+      "message": "note: I was going to suggest using std::span but that\u0027s C++20 :((",
+      "revId": "8115c58f1a4583dfe60af6aa8f8f45572161b93a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dece2596_ed3206f8",
@@ -248,6 +288,46 @@
         "startChar": 15,
         "endLine": 242,
         "endChar": 38
+      },
+      "revId": "8115c58f1a4583dfe60af6aa8f8f45572161b93a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98386f3b_ce71b8a2",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-29T15:24:43Z",
+      "side": 1,
+      "message": "nit: include is in a different block when it doesn\u0027t need to.",
+      "revId": "8115c58f1a4583dfe60af6aa8f8f45572161b93a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a695621d_5885a7da",
+        "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-29T15:24:43Z",
+      "side": 1,
+      "message": "nit: counts.Render/ComputeTotal() ? Ah, it doesn\u0027t work because of [1].",
+      "range": {
+        "startLine": 131,
+        "startChar": 42,
+        "endLine": 131,
+        "endChar": 79
       },
       "revId": "8115c58f1a4583dfe60af6aa8f8f45572161b93a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
@@ -414,6 +494,23 @@
         "endLine": 434,
         "endChar": 39
       },
+      "revId": "8115c58f1a4583dfe60af6aa8f8f45572161b93a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c1993bb_3f19b198",
+        "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-29T15:24:43Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "8115c58f1a4583dfe60af6aa8f8f45572161b93a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
