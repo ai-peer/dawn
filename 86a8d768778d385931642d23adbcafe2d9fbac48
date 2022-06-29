@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfc0ebb0_bcfa67e0",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2236,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-29T21:53:06Z",
+      "side": 0,
+      "message": "What if we moved\n```\n    MapSlotsSynchronously();\n    ResolveExpectations();\n\n    for (size_t i \u003d 0; i \u003c mReadbackSlots.size(); ++i) {\n        mReadbackSlots[i].buffer.Unmap();\n    }\n```\n\nto a helper on DawnTestBase, and called it here after DoTest ?\nThis would achieve the same goal of not letting mDeferredExpectations get too big since we would resolve them more eagerly",
+      "revId": "86a8d768778d385931642d23adbcafe2d9fbac48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
