@@ -17,22 +17,30 @@
 #include <memory>
 #include <vector>
 
+#include "dawn/native/opengl/UtilsEGL.h"
+
 namespace dawn::native::opengl {
 
-std::unique_ptr<ContextEGL> ContextEGL::Create(const EGLFunctions& egl, EGLenum api) {
+ResultOrError<std::unique_ptr<ContextEGL>> ContextEGL::Create(const EGLFunctions& egl,
+                                                              EGLenum api) {
     EGLDisplay display = egl.GetCurrentDisplay();
 
     if (display == EGL_NO_DISPLAY) {
         display = egl.GetDisplay(EGL_DEFAULT_DISPLAY);
     }
 
-    if (display == EGL_NO_DISPLAY) {
-        return nullptr;
-    }
+    DAWN_TRY(CheckEGL(egl, display != EGL_NO_DISPLAY, "eglGetDisplay"));
 
     EGLint renderableType = api == EGL_OPENGL_ES_API ? EGL_OPENGL_ES3_BIT : EGL_OPENGL_BIT;
 
-    egl.Initialize(display, nullptr, nullptr);
+    EGLint major, minor;
+
+    DAWN_TRY(CheckEGL(egl, egl.Initialize(display, &major, &minor), "eglInitialize"));
+
+    // We use EGLImage unconditionally, which only became core in 1.5.
+    if (major < 1 || (major == 1 && minor < 5)) {
+        return DAWN_INTERNAL_ERROR("EGL version is < 1.5");
+    }
 
     // Since we're creating a surfaceless context, the only thing we really care
     // about is the RENDERABLE_TYPE.
@@ -40,15 +48,11 @@ std::unique_ptr<ContextEGL> ContextEGL::Create(const EGLFunctions& egl, EGLenum 
 
     EGLint num_config;
     EGLConfig config;
-    if (egl.ChooseConfig(display, config_attribs, &config, 1, &num_config) == EGL_FALSE) {
-        return nullptr;
-    }
+    DAWN_TRY(CheckEGL(egl, egl.ChooseConfig(display, config_attribs, &config, 1, &num_config),
+                      "eglChooseConfig"));
 
-    if (!egl.BindAPI(api)) {
-        return nullptr;
-    }
+    DAWN_TRY(CheckEGL(egl, egl.BindAPI(api), "eglBindAPI"));
 
-    EGLint major, minor;
     if (api == EGL_OPENGL_ES_API) {
         major = 3;
         minor = 1;
@@ -60,9 +64,7 @@ std::unique_ptr<ContextEGL> ContextEGL::Create(const EGLFunctions& egl, EGLenum 
         EGL_CONTEXT_MAJOR_VERSION, major, EGL_CONTEXT_MINOR_VERSION, minor, EGL_NONE, EGL_NONE,
     };
     EGLContext context = egl.CreateContext(display, config, EGL_NO_CONTEXT, attrib_list);
-    if (!context) {
-        return nullptr;
-    }
+    DAWN_TRY(CheckEGL(egl, context != EGL_NO_CONTEXT, "eglCreateContext"));
 
     return std::unique_ptr<ContextEGL>(new ContextEGL(egl, display, context));
 }
