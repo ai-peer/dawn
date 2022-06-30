@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4852506a_a8d460fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-06-30T04:15:40Z",
+      "side": 1,
+      "message": "Thanks for the reviews. I will merge this CL and then I will make a CL for maxDrawCount to Blink next.",
+      "revId": "d1aa342b05b9093325cb8ada916e7a66633e3c72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
