@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9706a1e9_2397f5c1",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-30T15:16:12Z",
+      "side": 1,
+      "message": "Done (in https://dawn-review.googlesource.com/c/dawn/+/95261).",
+      "parentUuid": "cd572c8e_57a01c17",
+      "range": {
+        "startLine": 62,
+        "startChar": 23,
+        "endLine": 62,
+        "endChar": 36
+      },
+      "revId": "507444caa2b51da6ef19398b7677333b650a8cbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24741821_4202e244",
@@ -88,6 +112,24 @@
       "writtenOn": "2022-06-29T21:01:32Z",
       "side": 1,
       "message": "\"If no display connection matching native_display is available, EGL_NO_DISPLAY is returned. No error is generated.\"\n\nso maybe CheckEGL doesn\u0027t make the most sense since egl.GetError() wouldn\u0027t give you the error.\nWe can instead do DAWN_INVALID_IF display \u003d\u003d EGL_NO_DISPLAY",
+      "revId": "507444caa2b51da6ef19398b7677333b650a8cbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f1ca7d8_2ed5e52f",
+        "filename": "src/dawn/native/opengl/ContextEGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-30T15:16:12Z",
+      "side": 1,
+      "message": "Good point. Fixed.",
+      "parentUuid": "24741821_4202e244",
       "revId": "507444caa2b51da6ef19398b7677333b650a8cbc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -115,6 +157,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8e8ce6f_a64b9b38",
+        "filename": "src/dawn/native/opengl/ContextEGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-30T15:16:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a9bfe13_0f92c5c8",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 34
+      },
+      "revId": "507444caa2b51da6ef19398b7677333b650a8cbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cea74d10_c8ebd754",
@@ -128,6 +194,24 @@
       "writtenOn": "2022-06-29T21:01:32Z",
       "side": 1,
       "message": "existing nit as I was checking docs for error conditions\n\nshould we be calling eglChooseConfig twice? One to determine the number of configs matching `config_attribs`, a second time to get all the configs.\n\nI\u0027m not sure when there are multiple framebuffer configurations and what we would do about it if we had multiple though.\n\nSeparately though, we should probably DAWN_INVALID_IF(num_config \u003d\u003d 0) after this since that would mean we didn\u0027t find any compatible configs.",
+      "revId": "507444caa2b51da6ef19398b7677333b650a8cbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24a92663_6adb1926",
+        "filename": "src/dawn/native/opengl/ContextEGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-30T15:16:12Z",
+      "side": 1,
+      "message": "In general, you\u0027re right that we should be doing our own filtering since eglChooseConfig sucks (see http://directx.com/2014/06/egl-understanding-eglchooseconfig-then-ignoring-it/). When we fix the swapchains, we definitely should do that. But since this is a surfaceless context, we don\u0027t really care what surfaces it\u0027s compatible with.\n\nSeparately, done. :)",
+      "parentUuid": "cea74d10_c8ebd754",
       "revId": "507444caa2b51da6ef19398b7677333b650a8cbc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -149,6 +233,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c10124fb_9599ba13",
+        "filename": "src/dawn/native/opengl/ContextEGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-30T15:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bf44f121_7b96fc58",
+      "revId": "507444caa2b51da6ef19398b7677333b650a8cbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e0b9443_85a62c46",
@@ -162,6 +264,30 @@
       "writtenOn": "2022-06-29T21:01:32Z",
       "side": 1,
       "message": "if you\u0027d like, we can do the error injection thing that we do in Vulkan/D3D - that way the fuzzers can find issues where we get an error, don\u0027t handle it fully and then do something bad like deref an invalid pointer or leak memory. could be a follow-up",
+      "range": {
+        "startLine": 27,
+        "startChar": 11,
+        "endLine": 27,
+        "endChar": 19
+      },
+      "revId": "507444caa2b51da6ef19398b7677333b650a8cbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "875e39f7_286c1698",
+        "filename": "src/dawn/native/opengl/UtilsEGL.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-06-30T15:16:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0e0b9443_85a62c46",
       "range": {
         "startLine": 27,
         "startChar": 11,
