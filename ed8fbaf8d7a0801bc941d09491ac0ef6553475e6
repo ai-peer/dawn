@@ -16,6 +16,23 @@
       "message": "Shrek PTAL!",
       "revId": "ed8fbaf8d7a0801bc941d09491ac0ef6553475e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe9e8472_667bd4f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-06-30T19:39:54Z",
+      "side": 1,
+      "message": "Thanks for the update!",
+      "revId": "ed8fbaf8d7a0801bc941d09491ac0ef6553475e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
