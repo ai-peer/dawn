@@ -127,6 +127,37 @@ TEST(NumberTest, CheckedConvertSubnormals) {
     EXPECT_EQ(CheckedConvert<f16>(AFloat(-kHighestF16Subnormal)), f16(-kHighestF16Subnormal));
 }
 
+// Test cases for f16 subnormal quantization and BitsRepresentation.
+// The ULP is based on float rather than double or f16, since F16::Quantize and
+// F16::BitsRepresentation take float as input.
+constexpr float lowestPositiveNormalF16 = 0x1p-14;
+constexpr float lowestPositiveNormalF16PlusULP = 0x1.000002p-14;
+constexpr float lowestPositiveNormalF16MinusULP = 0x1.fffffep-15;
+constexpr float highestPositiveSubnormalF16 = 0x0.ffcp-14;
+constexpr float highestPositiveSubnormalF16PlusULP = 0x1.ff8002p-15;
+constexpr float highestPositiveSubnormalF16MinusULP = 0x1.ff7ffep-15;
+constexpr float lowestPositiveSubnormalF16 = 0x1.p-24;
+constexpr float lowestPositiveSubnormalF16PlusULP = 0x1.000002p-24;
+constexpr float lowestPositiveSubnormalF16MinusULP = 0x1.fffffep-25;
+
+constexpr uint16_t lowestPositiveNormalF16Bits = 0x0400u;
+constexpr uint16_t highestPositiveSubnormalF16Bits = 0x03ffu;
+constexpr uint16_t lowestPositiveSubnormalF16Bits = 0x0001u;
+
+constexpr float highestNegativeNormalF16 = -lowestPositiveNormalF16;
+constexpr float highestNegativeNormalF16PlusULP = -lowestPositiveNormalF16MinusULP;
+constexpr float highestNegativeNormalF16MinusULP = -lowestPositiveNormalF16PlusULP;
+constexpr float lowestNegativeSubnormalF16 = -highestPositiveSubnormalF16;
+constexpr float lowestNegativeSubnormalF16PlusULP = -highestPositiveSubnormalF16MinusULP;
+constexpr float lowestNegativeSubnormalF16MinusULP = -highestPositiveSubnormalF16PlusULP;
+constexpr float highestNegativeSubnormalF16 = -lowestPositiveSubnormalF16;
+constexpr float highestNegativeSubnormalF16PlusULP = -lowestPositiveSubnormalF16MinusULP;
+constexpr float highestNegativeSubnormalF16MinusULP = -lowestPositiveSubnormalF16PlusULP;
+
+constexpr uint16_t highestNegativeNormalF16Bits = 0x8400u;
+constexpr uint16_t lowestNegativeSubnormalF16Bits = 0x83ffu;
+constexpr uint16_t highestNegativeSubnormalF16Bits = 0x8001u;
+
 TEST(NumberTest, QuantizeF16) {
     constexpr float nan = std::numeric_limits<float>::quiet_NaN();
     constexpr float inf = std::numeric_limits<float>::infinity();
@@ -143,27 +174,6 @@ TEST(NumberTest, QuantizeF16) {
     EXPECT_TRUE(std::isnan(f16(nan)));
 
     // Test for subnormal quantization.
-    // The ULP is based on float rather than double or f16, since F16::Quantize take float as input.
-    constexpr float lowestPositiveNormalF16 = 0x1p-14;
-    constexpr float lowestPositiveNormalF16PlusULP = 0x1.000002p-14;
-    constexpr float lowestPositiveNormalF16MinusULP = 0x1.fffffep-15;
-    constexpr float highestPositiveSubnormalF16 = 0x0.ffcp-14;
-    constexpr float highestPositiveSubnormalF16PlusULP = 0x1.ff8002p-15;
-    constexpr float highestPositiveSubnormalF16MinusULP = 0x1.ff7ffep-15;
-    constexpr float lowestPositiveSubnormalF16 = 0x1.p-24;
-    constexpr float lowestPositiveSubnormalF16PlusULP = 0x1.000002p-24;
-    constexpr float lowestPositiveSubnormalF16MinusULP = 0x1.fffffep-25;
-
-    constexpr float highestNegativeNormalF16 = -lowestPositiveNormalF16;
-    constexpr float highestNegativeNormalF16PlusULP = -lowestPositiveNormalF16MinusULP;
-    constexpr float highestNegativeNormalF16MinusULP = -lowestPositiveNormalF16PlusULP;
-    constexpr float lowestNegativeSubnormalF16 = -highestPositiveSubnormalF16;
-    constexpr float lowestNegativeSubnormalF16PlusULP = -highestPositiveSubnormalF16MinusULP;
-    constexpr float lowestNegativeSubnormalF16MinusULP = -highestPositiveSubnormalF16PlusULP;
-    constexpr float highestNegativeSubnormalF16 = -lowestPositiveSubnormalF16;
-    constexpr float highestNegativeSubnormalF16PlusULP = -lowestPositiveSubnormalF16MinusULP;
-    constexpr float highestNegativeSubnormalF16MinusULP = -lowestPositiveSubnormalF16PlusULP;
-
     // Value larger than or equal to lowest positive normal f16 will be quantized to normal f16.
     EXPECT_EQ(f16(lowestPositiveNormalF16PlusULP), lowestPositiveNormalF16);
     EXPECT_EQ(f16(lowestPositiveNormalF16), lowestPositiveNormalF16);
@@ -195,6 +205,7 @@ TEST(NumberTest, QuantizeF16) {
     EXPECT_EQ(f16(highestNegativeSubnormalF16MinusULP), highestNegativeSubnormalF16);
     EXPECT_EQ(f16(highestNegativeSubnormalF16), highestNegativeSubnormalF16);
     EXPECT_EQ(f16(highestNegativeSubnormalF16PlusULP), 0.0);
+
     // Test the mantissa discarding.
     EXPECT_EQ(f16(-0x0.064p-14), -0x0.064p-14);
     EXPECT_EQ(f16(-0x0.067fecp-14), -0x0.064p-14);
@@ -202,6 +213,183 @@ TEST(NumberTest, QuantizeF16) {
     EXPECT_EQ(f16(-0x0.008p-14), -0x0.008p-14);
     EXPECT_EQ(f16(-0x0.00bffep-14), -0x0.008p-14);
     EXPECT_EQ(f16(-0x0.007ffep-14), -0x0.004p-14);
+}
+
+TEST(NumberTest, F16BitsRepresentation_static) {
+    constexpr float nan = std::numeric_limits<float>::quiet_NaN();
+    constexpr float inf = std::numeric_limits<float>::infinity();
+
+    // NaN, inf
+    EXPECT_EQ(f16::BitsRepresentation(inf), 0x7c00u);
+    EXPECT_EQ(f16::BitsRepresentation(-inf), 0xfc00u);
+    EXPECT_EQ(f16::BitsRepresentation(nan), 0x7e00u);
+    EXPECT_EQ(f16::BitsRepresentation(-nan), 0x7e00u);
+    // +/- zero
+    EXPECT_EQ(f16::BitsRepresentation(+0.0), 0x0000u);
+    EXPECT_EQ(f16::BitsRepresentation(-0.0), 0x8000u);
+    // Value in normal f16 range
+    EXPECT_EQ(f16::BitsRepresentation(1.0), 0x3c00u);
+    EXPECT_EQ(f16::BitsRepresentation(-1.0), 0xbc00u);
+    //   0.00006106496 quantized to 0.000061035156 = 0x1p-14
+    EXPECT_EQ(f16::BitsRepresentation(0.00006106496), 0x0400u);
+    EXPECT_EQ(f16::BitsRepresentation(-0.00006106496), 0x8400u);
+    //   1.0004883 quantized to 1.0 = 0x1p0
+    EXPECT_EQ(f16::BitsRepresentation(1.0004883), 0x3c00u);
+    EXPECT_EQ(f16::BitsRepresentation(-1.0004883), 0xbc00u);
+    //   8196.0 quantized to 8192.0 = 0x1p13
+    EXPECT_EQ(f16::BitsRepresentation(-8196), 0xf000u);
+    EXPECT_EQ(f16::BitsRepresentation(8196), 0x7000u);
+    // Value in subnormal f16 range
+    EXPECT_EQ(f16::BitsRepresentation(0x0.034p-14), 0x000du);
+    EXPECT_EQ(f16::BitsRepresentation(-0x0.034p-14), 0x800du);
+    EXPECT_EQ(f16::BitsRepresentation(0x0.068p-14), 0x001au);
+    EXPECT_EQ(f16::BitsRepresentation(-0x0.068p-14), 0x801au);
+    //   0x0.06b7p-14 quantized to 0x0.068p-14
+    EXPECT_EQ(f16::BitsRepresentation(0x0.06b7p-14), 0x001au);
+    EXPECT_EQ(f16::BitsRepresentation(-0x0.06b7p-14), 0x801au);
+    // Value out of f16 range
+    EXPECT_EQ(f16::BitsRepresentation(65504.003), 0x7c00u);
+    EXPECT_EQ(f16::BitsRepresentation(-65504.003), 0xfc00u);
+    EXPECT_EQ(f16::BitsRepresentation(0x1.234p56), 0x7c00u);
+    EXPECT_EQ(f16::BitsRepresentation(-0x4.321p65), 0xfc00u);
+
+    // Test for subnormal quantization.
+    // Value larger than or equal to lowest positive normal f16 will be quantized to normal f16.
+    EXPECT_EQ(f16::BitsRepresentation(lowestPositiveNormalF16PlusULP), lowestPositiveNormalF16Bits);
+    EXPECT_EQ(f16::BitsRepresentation(lowestPositiveNormalF16), lowestPositiveNormalF16Bits);
+    // Positive value smaller than lowest positive normal f16 but not smaller than lowest positive
+    // subnormal f16 will be quantized to subnormal f16 or zero.
+    EXPECT_EQ(f16::BitsRepresentation(lowestPositiveNormalF16MinusULP),
+              highestPositiveSubnormalF16Bits);
+    EXPECT_EQ(f16::BitsRepresentation(highestPositiveSubnormalF16PlusULP),
+              highestPositiveSubnormalF16Bits);
+    EXPECT_EQ(f16::BitsRepresentation(highestPositiveSubnormalF16),
+              highestPositiveSubnormalF16Bits);
+    EXPECT_EQ(f16::BitsRepresentation(highestPositiveSubnormalF16MinusULP), 0x03feu);
+    EXPECT_EQ(f16::BitsRepresentation(lowestPositiveSubnormalF16PlusULP),
+              lowestPositiveSubnormalF16Bits);
+    EXPECT_EQ(f16::BitsRepresentation(lowestPositiveSubnormalF16), lowestPositiveSubnormalF16Bits);
+    // Positive value smaller than lowest positive subnormal f16 will be quantized to zero.
+    EXPECT_EQ(f16::BitsRepresentation(lowestPositiveSubnormalF16MinusULP), 0x0000u);
+    // Test the mantissa discarding, the least significant mantissa bit is 0x1p-24 = 0x0.004p-14.
+    EXPECT_EQ(f16::BitsRepresentation(0x0.064p-14), 0x0019u);
+    EXPECT_EQ(f16::BitsRepresentation(0x0.067fecp-14), 0x0019u);
+    EXPECT_EQ(f16::BitsRepresentation(0x0.063ffep-14), 0x0018u);
+    EXPECT_EQ(f16::BitsRepresentation(0x0.008p-14), 0x0002u);
+    EXPECT_EQ(f16::BitsRepresentation(0x0.00bffep-14), 0x0002u);
+    EXPECT_EQ(f16::BitsRepresentation(0x0.007ffep-14), 0x0001u);
+
+    // Vice versa for negative cases.
+    EXPECT_EQ(f16::BitsRepresentation(highestNegativeNormalF16MinusULP),
+              highestNegativeNormalF16Bits);
+    EXPECT_EQ(f16::BitsRepresentation(highestNegativeNormalF16), highestNegativeNormalF16Bits);
+    EXPECT_EQ(f16::BitsRepresentation(highestNegativeNormalF16PlusULP),
+              lowestNegativeSubnormalF16Bits);
+    EXPECT_EQ(f16::BitsRepresentation(lowestNegativeSubnormalF16MinusULP),
+              lowestNegativeSubnormalF16Bits);
+    EXPECT_EQ(f16::BitsRepresentation(lowestNegativeSubnormalF16), lowestNegativeSubnormalF16Bits);
+    EXPECT_EQ(f16::BitsRepresentation(lowestNegativeSubnormalF16PlusULP), 0x83feu);
+    EXPECT_EQ(f16::BitsRepresentation(highestNegativeSubnormalF16MinusULP),
+              highestNegativeSubnormalF16Bits);
+    EXPECT_EQ(f16::BitsRepresentation(highestNegativeSubnormalF16),
+              highestNegativeSubnormalF16Bits);
+    EXPECT_EQ(f16::BitsRepresentation(highestNegativeSubnormalF16PlusULP), 0x8000u);
+    // Test the mantissa discarding.
+    EXPECT_EQ(f16::BitsRepresentation(-0x0.064p-14), 0x8019u);
+    EXPECT_EQ(f16::BitsRepresentation(-0x0.067fecp-14), 0x8019u);
+    EXPECT_EQ(f16::BitsRepresentation(-0x0.063ffep-14), 0x8018u);
+    EXPECT_EQ(f16::BitsRepresentation(-0x0.008p-14), 0x8002u);
+    EXPECT_EQ(f16::BitsRepresentation(-0x0.00bffep-14), 0x8002u);
+    EXPECT_EQ(f16::BitsRepresentation(-0x0.007ffep-14), 0x8001u);
+}
+
+TEST(NumberTest, F16BitsRepresentation_member) {
+    constexpr float nan = std::numeric_limits<float>::quiet_NaN();
+    constexpr float inf = std::numeric_limits<float>::infinity();
+
+    // NaN, inf
+    EXPECT_EQ(f16(inf).BitsRepresentation(), 0x7c00u);
+    EXPECT_EQ(f16(-inf).BitsRepresentation(), 0xfc00u);
+    EXPECT_EQ(f16(nan).BitsRepresentation(), 0x7e00u);
+    EXPECT_EQ(f16(-nan).BitsRepresentation(), 0x7e00u);
+    // +/- zero
+    EXPECT_EQ(f16(+0.0).BitsRepresentation(), 0x0000u);
+    EXPECT_EQ(f16(-0.0).BitsRepresentation(), 0x8000u);
+    // Value in normal f16 range
+    EXPECT_EQ(f16(1.0).BitsRepresentation(), 0x3c00u);
+    EXPECT_EQ(f16(-1.0).BitsRepresentation(), 0xbc00u);
+    //   0.00006106496 quantized to 0.000061035156 = 0x1p-14
+    EXPECT_EQ(f16(0.00006106496).BitsRepresentation(), 0x0400u);
+    EXPECT_EQ(f16(-0.00006106496).BitsRepresentation(), 0x8400u);
+    //   1.0004883 quantized to 1.0 = 0x1p0
+    EXPECT_EQ(f16(1.0004883).BitsRepresentation(), 0x3c00u);
+    EXPECT_EQ(f16(-1.0004883).BitsRepresentation(), 0xbc00u);
+    //   8196.0 quantized to 8192.0 = 0x1p13
+    EXPECT_EQ(f16(-8196).BitsRepresentation(), 0xf000u);
+    EXPECT_EQ(f16(8196).BitsRepresentation(), 0x7000u);
+    // Value in subnormal f16 range
+    EXPECT_EQ(f16(0x0.034p-14).BitsRepresentation(), 0x000du);
+    EXPECT_EQ(f16(-0x0.034p-14).BitsRepresentation(), 0x800du);
+    EXPECT_EQ(f16(0x0.068p-14).BitsRepresentation(), 0x001au);
+    EXPECT_EQ(f16(-0x0.068p-14).BitsRepresentation(), 0x801au);
+    //   0x0.06b7p-14 quantized to 0x0.068p-14
+    EXPECT_EQ(f16(0x0.06b7p-14).BitsRepresentation(), 0x001au);
+    EXPECT_EQ(f16(-0x0.06b7p-14).BitsRepresentation(), 0x801au);
+    // Value out of f16 range
+    EXPECT_EQ(f16(65504.003).BitsRepresentation(), 0x7c00u);
+    EXPECT_EQ(f16(-65504.003).BitsRepresentation(), 0xfc00u);
+    EXPECT_EQ(f16(0x1.234p56).BitsRepresentation(), 0x7c00u);
+    EXPECT_EQ(f16(-0x4.321p65).BitsRepresentation(), 0xfc00u);
+
+    // Test for subnormal quantization.
+    // Value larger than or equal to lowest positive normal f16 will be quantized to normal f16.
+    EXPECT_EQ(f16(lowestPositiveNormalF16PlusULP).BitsRepresentation(),
+              lowestPositiveNormalF16Bits);
+    EXPECT_EQ(f16(lowestPositiveNormalF16).BitsRepresentation(), lowestPositiveNormalF16Bits);
+    // Positive value smaller than lowest positive normal f16 but not smaller than lowest positive
+    // subnormal f16 will be quantized to subnormal f16 or zero.
+    EXPECT_EQ(f16(lowestPositiveNormalF16MinusULP).BitsRepresentation(),
+              highestPositiveSubnormalF16Bits);
+    EXPECT_EQ(f16(highestPositiveSubnormalF16PlusULP).BitsRepresentation(),
+              highestPositiveSubnormalF16Bits);
+    EXPECT_EQ(f16(highestPositiveSubnormalF16).BitsRepresentation(),
+              highestPositiveSubnormalF16Bits);
+    EXPECT_EQ(f16(highestPositiveSubnormalF16MinusULP).BitsRepresentation(), 0x03feu);
+    EXPECT_EQ(f16(lowestPositiveSubnormalF16PlusULP).BitsRepresentation(),
+              lowestPositiveSubnormalF16Bits);
+    EXPECT_EQ(f16(lowestPositiveSubnormalF16).BitsRepresentation(), lowestPositiveSubnormalF16Bits);
+    // Positive value smaller than lowest positive subnormal f16 will be quantized to zero.
+    EXPECT_EQ(f16(lowestPositiveSubnormalF16MinusULP).BitsRepresentation(), 0x0000u);
+    // Test the mantissa discarding, the least significant mantissa bit is 0x1p-24 = 0x0.004p-14.
+    EXPECT_EQ(f16(0x0.064p-14).BitsRepresentation(), 0x0019u);
+    EXPECT_EQ(f16(0x0.067fecp-14).BitsRepresentation(), 0x0019u);
+    EXPECT_EQ(f16(0x0.063ffep-14).BitsRepresentation(), 0x0018u);
+    EXPECT_EQ(f16(0x0.008p-14).BitsRepresentation(), 0x0002u);
+    EXPECT_EQ(f16(0x0.00bffep-14).BitsRepresentation(), 0x0002u);
+    EXPECT_EQ(f16(0x0.007ffep-14).BitsRepresentation(), 0x0001u);
+
+    // Vice versa for negative cases.
+    EXPECT_EQ(f16(highestNegativeNormalF16MinusULP).BitsRepresentation(),
+              highestNegativeNormalF16Bits);
+    EXPECT_EQ(f16(highestNegativeNormalF16).BitsRepresentation(), highestNegativeNormalF16Bits);
+    EXPECT_EQ(f16(highestNegativeNormalF16PlusULP).BitsRepresentation(),
+              lowestNegativeSubnormalF16Bits);
+    EXPECT_EQ(f16(lowestNegativeSubnormalF16MinusULP).BitsRepresentation(),
+              lowestNegativeSubnormalF16Bits);
+    EXPECT_EQ(f16(lowestNegativeSubnormalF16).BitsRepresentation(), lowestNegativeSubnormalF16Bits);
+    EXPECT_EQ(f16(lowestNegativeSubnormalF16PlusULP).BitsRepresentation(), 0x83feu);
+    EXPECT_EQ(f16(highestNegativeSubnormalF16MinusULP).BitsRepresentation(),
+              highestNegativeSubnormalF16Bits);
+    EXPECT_EQ(f16(highestNegativeSubnormalF16).BitsRepresentation(),
+              highestNegativeSubnormalF16Bits);
+    EXPECT_EQ(f16(highestNegativeSubnormalF16PlusULP).BitsRepresentation(), 0x8000u);
+    // Test the mantissa discarding.
+    EXPECT_EQ(f16(-0x0.064p-14).BitsRepresentation(), 0x8019u);
+    EXPECT_EQ(f16(-0x0.067fecp-14).BitsRepresentation(), 0x8019u);
+    EXPECT_EQ(f16(-0x0.063ffep-14).BitsRepresentation(), 0x8018u);
+    EXPECT_EQ(f16(-0x0.008p-14).BitsRepresentation(), 0x8002u);
+    EXPECT_EQ(f16(-0x0.00bffep-14).BitsRepresentation(), 0x8002u);
+    EXPECT_EQ(f16(-0x0.007ffep-14).BitsRepresentation(), 0x8001u);
 }
 
 using BinaryCheckedCase = std::tuple<std::optional<AInt>, AInt, AInt>;
