@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b24208d_2819b87d",
+        "filename": "src/dawn/native/CacheResult.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-30T12:38:30Z",
+      "side": 1,
+      "message": "Ack thanks for the change.",
+      "parentUuid": "fb66a001_3733ef5c",
+      "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f01f9788_a25c9394",
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "Spirv could happen to work nice, but we\u0027re going to need it for D3D\u0027s `CompiledShader` or stuff Metal backend  - both will be a struct of the shader blob/string and some reflection data.\n\nBut for Spirv, I think also better to make Blob a private base class so you don\u0027t touch the Data or Size in a confusing way.",
       "parentUuid": "29c6e2bb_fba45edc",
+      "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14e917ab_c100df0f",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-30T12:38:30Z",
+      "side": 1,
+      "message": "Thanks for the explanation. Makes sense that we need specialized stores this way.",
+      "parentUuid": "8adf179a_ee8cde45",
       "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -201,6 +237,24 @@
       "side": 1,
       "message": "I de-dented once by adding a new macro DAWN_TRY_LOAD_OR_RUN - maybe this is better?",
       "parentUuid": "9159ce58_cd392eb5",
+      "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5edf49e4_066dee36",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-30T12:38:30Z",
+      "side": 1,
+      "message": "Yeah looks better.",
+      "parentUuid": "54ec9a9c_97facb6d",
       "revId": "f4945edfb7e13c5de4d80c256fb91190800e574d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

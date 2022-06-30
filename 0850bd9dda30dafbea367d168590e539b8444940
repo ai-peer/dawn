@@ -16,6 +16,40 @@
       "message": "I added a couple more tests, but didn\u0027t find a way to test shader caching by itself (since we need to compile a pipeline always right now).\n\nI also redid some of the EXPECT_CACHE_HIT macros so that they can check both cache hits and added entries in one call.",
       "revId": "0850bd9dda30dafbea367d168590e539b8444940",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d4f7e38_8c7c5e1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-30T12:38:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0850bd9dda30dafbea367d168590e539b8444940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a8f00dc_8714ae6f",
+        "filename": "src/dawn/native/CacheResult.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-06-30T12:38:30Z",
+      "side": 1,
+      "message": "nit: now unused",
+      "revId": "0850bd9dda30dafbea367d168590e539b8444940",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
