@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87a6e04f_e4f2d13e",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-06-30T21:54:10Z",
+      "side": 1,
+      "message": "but, it\u0027s called via `copyExternalImageToTexture` so it can be used by Javascript. We shouldn\u0027t expose the internal usages up to Javascript, so we probably also need an extension struct on CopyTextureForBrowserOptions so we can call CopyTextureForBrowser in two ways: one for normal JS usage, and one for internal usage.\n\nIt would be annoying if we need the extension struct for CreateBindGroup AND CopyTextureForBrowser.\n\nLooking at utils::MakeBindGroup, it\u0027s calling DeviceBase::CreateBindGroup (not the public APICreateBindGroup). So, instead of adding the chained DawnObjectInternalUsageDescriptor to BindGroup, could we pass through a UsageValidationMode enum directly into DeviceBase::CreateBindGroup?\n\nThen, we should have a validation test for queueCopyTextureForBrowser both with/without internal usages enabled",
+      "range": {
+        "startLine": 545,
+        "startChar": 5,
+        "endLine": 547,
+        "endChar": 0
+      },
+      "revId": "b9fa7d4a293bcfae316c1cbb385a3cfee5e05bb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
