@@ -108,8 +108,8 @@ class PipelineCachingTests : public DawnTest {
     const EntryCounts counts = {
         // pipeline caching is only implemented on D3D12/Vulkan
         IsD3D12() || IsVulkan() ? 1u : 0u,
-        // shader module caching is only implemented on Vulkan
-        IsVulkan() ? 1u : 0u,
+        // shader module caching is only implemented on D3D12/Vulkan
+        IsVulkan() || IsD3D12() ? 1u : 0u,
     };
     NiceMock<CachingInterfaceMock> mMockCache;
 };
@@ -518,9 +518,9 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheNegativeCasesFragmentC
 }
 
 // Tests that pipeline creation hits the cache for shaders, but not the pipeline if the
-// shaders aren't impacted by the layout. This test is a bit change detecting - but all
-// cached backends currently remap shader bindings based on the layout. It can be split
-// per-backend as needed.
+// shaders aren't impacted by the layout. This test is a bit change detecting due to how
+// the backends remap shader bindings based on the layout. It can be split per-backend as
+// needed.
 TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheLayout) {
     // First time should create and write out to the cache.
     {
@@ -587,7 +587,8 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheLayout) {
     }
 
     // Cache should hit for the shaders, but not for the pipeline.
-    // The shader is different but compiles to the same due to binding number remapping.
+    // The fragment shader is different but compiles to the same on Vulkan due to binding number
+    // remapping.
     {
         wgpu::Device device = CreateDevice();
         utils::ComboRenderPipelineDescriptor desc;
@@ -604,8 +605,14 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheLayout) {
                                 {1, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform},
                             }),
                     });
-        EXPECT_CACHE_STATS(mMockCache, Hit(2 * counts.shaderModule), Add(counts.pipeline),
-                           device.CreateRenderPipeline(&desc));
+        if (IsVulkan()) {
+            EXPECT_CACHE_STATS(mMockCache, Hit(2 * counts.shaderModule), Add(counts.pipeline),
+                               device.CreateRenderPipeline(&desc));
+        } else {
+            EXPECT_CACHE_STATS(mMockCache, Hit(counts.shaderModule),
+                               Add(counts.shaderModule + counts.pipeline),
+                               device.CreateRenderPipeline(&desc));
+        }
     }
 }
 

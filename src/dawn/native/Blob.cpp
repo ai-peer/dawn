@@ -97,4 +97,13 @@ void Blob::AlignTo(size_t alignment) {
     *this = std::move(blob);
 }
 
+// static
+Blob Blob::Slice(Blob blob, size_t offset, size_t size) {
+    ASSERT(offset <= blob.mSize);
+    ASSERT(size == 0 || blob.mSize - offset >= size);
+    blob.mData += offset;
+    blob.mSize = size == 0 ? blob.mSize - offset : size;
+    return blob;
+}
+
 }  // namespace dawn::native
