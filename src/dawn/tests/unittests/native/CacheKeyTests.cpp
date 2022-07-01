@@ -191,6 +191,17 @@ TEST(CacheKeySerializerTests, StdStringViews) {
     EXPECT_THAT(CacheKey().Record(str), CacheKeyEq(expected));
 }
 
+// Test that CacheKey::Record serializes std::wstring_views as expected.
+TEST(CacheKeySerializerTests, StdWStringViews) {
+    static constexpr std::wstring_view str(L"string");
+
+    CacheKey expected;
+    expected.Record(size_t(6));
+    expected.insert(expected.end(), str.begin(), str.end());
+
+    EXPECT_THAT(CacheKey().Record(str), CacheKeyEq(expected));
+}
+
 // Test that CacheKey::Record serializes other CacheKeys as expected.
 TEST(CacheKeySerializerTests, CacheKeys) {
     CacheKey data = {'d', 'a', 't', 'a'};
@@ -232,6 +243,23 @@ TEST(CacheKeySerializerTests, StdUnorderedMap) {
     EXPECT_THAT(CacheKey().Record(m), CacheKeyEq(expected));
 }
 
+// Test that CacheKey::Record doesn't serialize anything for free function pointers.
+TEST(CacheKeySerializerTests, FreeFunction) {
+    CacheKey nothing;
+    {
+        void (*f)() = []() {};
+        EXPECT_THAT(CacheKey().Record(f), CacheKeyEq(nothing));
+    }
+    {
+        void (*f)(int, float, double) = [](int, float, double) {};
+        EXPECT_THAT(CacheKey().Record(f), CacheKeyEq(nothing));
+    }
+    {
+        int (*f)() = []() -> int { return 143; };
+        EXPECT_THAT(CacheKey().Record(f), CacheKeyEq(nothing));
+    }
+}
+
 // Test that CacheKey::Record serializes tint::sem::BindingPoint as expected.
 TEST(CacheKeySerializerTests, TintSemBindingPoint) {
     tint::sem::BindingPoint bp{3, 6};
@@ -246,6 +274,30 @@ TEST(CacheKeySerializerTests, TintTransformBindingPoints) {
     };
     EXPECT_THAT(CacheKey().Record(points),
                 CacheKeyEq(CacheKey().Record(uint32_t(1), uint32_t(4), uint32_t(3), uint32_t(7))));
+}
+
+// Test that CacheKey::Record serializes tint::writer::ArrayLengthFromUniformOptions as expected.
+TEST(CacheKeySerializerTests, TintWriterArrayLengthFromUniformOptions) {
+    tint::sem::BindingPoint bp0{3, 6};
+    tint::sem::BindingPoint bp1{1, 5};
+    tint::sem::BindingPoint bp2{5, 0};
+    {
+        tint::writer::ArrayLengthFromUniformOptions options;
+        options.ubo_binding = bp0;
+        options.bindpoint_to_size_index[bp1] = 9u;
+        options.bindpoint_to_size_index[bp2] = 3u;
+        EXPECT_THAT(CacheKey().Record(options),
+                    CacheKeyEq(CacheKey().Record(bp0, size_t(2), bp1, 9u, bp2, 3u)));
+    }
+    {
+        tint::writer::ArrayLengthFromUniformOptions options;
+        options.ubo_binding = bp1;
+        options.bindpoint_to_size_index[bp2] = 1u;
+        options.bindpoint_to_size_index[bp0] = 7u;
+        options.bindpoint_to_size_index[bp1] = 4u;
+        EXPECT_THAT(CacheKey().Record(options),
+                    CacheKeyEq(CacheKey().Record(bp1, size_t(3), bp1, 4u, bp0, 7u, bp2, 1u)));
+    }
 }
 
 }  // namespace
