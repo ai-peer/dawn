@@ -49,6 +49,11 @@ class Blob {
     // is aligned.
     void AlignTo(size_t alignment);
 
+    // Takes a slice of a Blob, returning another one starting at |offset|, of |size| bytes long.
+    // If |size| is zero, the size will extend to the end of the Blob.
+    // Data is moved, not copied.
+    static Blob Slice(Blob blob, size_t offset, size_t size = 0);
+
   private:
     // The constructor should be responsible to take ownership of |data| and releases ownership by
     // calling |deleter|. The deleter function is called at ~Blob() and during std::move.
