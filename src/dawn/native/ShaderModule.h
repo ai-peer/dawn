@@ -47,7 +47,12 @@ class DataMap;
 class Manager;
 class Transform;
 class VertexPulling;
+struct BindingPoints;
 }  // namespace transform
+
+namespace sem {
+struct BindingPoint;
+}  // namespace sem
 
 }  // namespace tint
 
@@ -298,6 +303,9 @@ class ShaderModuleBase : public ApiObjectBase, public CachedObject {
     static void AddExternalTextureTransform(const PipelineLayoutBase* layout,
                                             tint::transform::Manager* transformManager,
                                             tint::transform::DataMap* transformInputs);
+
+    static std::unordered_map<tint::sem::BindingPoint, tint::transform::BindingPoints>
+    BuildExternalTextureTransform(const PipelineLayoutBase* layout);
 
   private:
     ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag);

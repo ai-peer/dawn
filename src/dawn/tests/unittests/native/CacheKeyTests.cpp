@@ -191,6 +191,17 @@ TEST(CacheKeySerializerTests, StdStringViews) {
     EXPECT_THAT(CacheKey().Record(str), CacheKeyEq(expected));
 }
 
+// Test that CacheKey::Record serializes std::wstring_views as expected.
+TEST(CacheKeySerializerTests, StdWStringViews) {
+    static constexpr std::wstring_view str(L"string");
+
+    CacheKey expected;
+    expected.Record(size_t(6));
+    expected.insert(expected.end(), str.begin(), str.end());
+
+    EXPECT_THAT(CacheKey().Record(str), CacheKeyEq(expected));
+}
+
 // Test that CacheKey::Record serializes other CacheKeys as expected.
 TEST(CacheKeySerializerTests, CacheKeys) {
     CacheKey data = {'d', 'a', 't', 'a'};
@@ -230,6 +241,23 @@ TEST(CacheKeySerializerTests, StdUnorderedMap) {
     expected.Record(std::make_pair(uint32_t(7), m[7]));
 
     EXPECT_THAT(CacheKey().Record(m), CacheKeyEq(expected));
+}
+
+// Test that CacheKey::Record doesn't serialize anything for free function pointers.
+TEST(CacheKeySerializerTests, FreeFunction) {
+    CacheKey nothing;
+    {
+        void (*f)() = []() {};
+        EXPECT_THAT(CacheKey().Record(f), CacheKeyEq(nothing));
+    }
+    {
+        void (*f)(int, float, double) = [](int, float, double) {};
+        EXPECT_THAT(CacheKey().Record(f), CacheKeyEq(nothing));
+    }
+    {
+        int (*f)() = []() -> int { return 143; };
+        EXPECT_THAT(CacheKey().Record(f), CacheKeyEq(nothing));
+    }
 }
 
 // Test that CacheKey::Record serializes tint::sem::BindingPoint as expected.

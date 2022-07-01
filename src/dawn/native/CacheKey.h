@@ -118,6 +118,14 @@ class CacheKeySerializer<CacheKey::UnsafeUnkeyedValue<T>> {
     constexpr static void Serialize(CacheKey* key, const CacheKey::UnsafeUnkeyedValue<T>&) {}
 };
 
+// Specialized overload for raw function pointers. Raw function pointers don't contain any bound
+// data so they do not contribute to the CacheKey.
+template <typename R, typename... Args>
+class CacheKeySerializer<R (*)(Args...)> {
+  public:
+    constexpr static void Serialize(CacheKey*, R (*)(Args...)) {}
+};
+
 // Specialized overload for fundamental types.
 template <typename T>
 class CacheKeySerializer<T, std::enable_if_t<std::is_fundamental_v<T>>> {
@@ -180,11 +188,13 @@ class CacheKeySerializer<::detail::TypedIntegerImpl<Tag, Integer>> {
     }
 };
 
-// Specialized overload for pointers. Since we are serializing for a cache key, we always
-// serialize via value, not by pointer. To handle nullptr scenarios, we always serialize whether
-// the pointer was nullptr followed by the contents if applicable.
+// Specialized overload for non-function pointers. Since we are serializing for a cache key, we
+// always serialize via value, not by pointer. To handle nullptr scenarios, we always serialize
+// whether the pointer was nullptr followed by the contents if applicable.
 template <typename T>
-class CacheKeySerializer<T, std::enable_if_t<std::is_pointer_v<T>>> {
+class CacheKeySerializer<
+    T,
+    std::enable_if_t<std::is_pointer_v<T> && !std::is_function_v<std::remove_pointer_t<T>>>> {
   public:
     static void Serialize(CacheKey* key, const T t) {
         key->Record(t == nullptr);
