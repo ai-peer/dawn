@@ -12,12 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef SRC_DAWN_NATIVE_BLOBCACHEVALUE_H_
+#define SRC_DAWN_NATIVE_BLOBCACHEVALUE_H_
+
+#include <utility>
+#include <variant>
+
 #include "dawn/native/Blob.h"
-#include "dawn/native/d3d12/d3d12_platform.h"
 
 namespace dawn::native {
 
-Blob CreateBlob(ComPtr<ID3DBlob> blob);
-Blob CreateBlob(ComPtr<IDxcBlob> blob);
+class BlobCacheValue {
+  public:
+    virtual std::variant<std::pair<const void*, size_t>, Blob> GetDataForCache() const = 0;
+};
 
 }  // namespace dawn::native
+
+#endif  // SRC_DAWN_NATIVE_BLOBCACHEVALUE_H_

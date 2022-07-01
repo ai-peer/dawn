@@ -42,6 +42,12 @@ void CacheKeySerializer<std::string_view>::Serialize(CacheKey* key, const std::s
 }
 
 template <>
+void CacheKeySerializer<std::wstring_view>::Serialize(CacheKey* key, const std::wstring_view& t) {
+    key->Record(t.length());
+    key->insert(key->end(), t.begin(), t.end());
+}
+
+template <>
 void CacheKeySerializer<CacheKey>::Serialize(CacheKey* key, const CacheKey& t) {
     // For nested cache keys, we do not record the length, and just copy the key so that it
     // appears we just flatten the keys into a single key.

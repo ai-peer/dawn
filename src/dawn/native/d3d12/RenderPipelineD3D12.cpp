@@ -367,7 +367,7 @@ MaybeError RenderPipeline::Initialize() {
     }
 
     mUsesVertexOrInstanceIndex =
-        compiledShader[SingleShaderStage::Vertex].usesVertexOrInstanceIndex;
+        compiledShader[SingleShaderStage::Vertex].UsesVertexOrInstanceIndex();
 
     PipelineLayout* layout = ToBackend(GetLayout());
 

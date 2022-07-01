@@ -14,7 +14,9 @@
 
 #include "dawn/native/TintUtils.h"
 
+#include "dawn/native/BindGroupLayout.h"
 #include "dawn/native/Device.h"
+#include "dawn/native/PipelineLayout.h"
 
 #include "tint/tint.h"
 
@@ -51,6 +53,20 @@ ScopedTintICEHandler::ScopedTintICEHandler(DeviceBase* device) {
 
 ScopedTintICEHandler::~ScopedTintICEHandler() {
     tlDevice = nullptr;
+}
+
+tint::transform::MultiplanarExternalTexture::BindingsMap BuildExternalTextureBindings(
+    const PipelineLayoutBase* layout) {
+    tint::transform::MultiplanarExternalTexture::BindingsMap newBindingsMap;
+    for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+        const BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(i);
+        for (const auto& [_, expansion] : bgl->GetExternalTextureBindingExpansionMap()) {
+            newBindingsMap[{static_cast<uint32_t>(i), static_cast<uint32_t>(expansion.plane0)}] = {
+                {static_cast<uint32_t>(i), static_cast<uint32_t>(expansion.plane1)},
+                {static_cast<uint32_t>(i), static_cast<uint32_t>(expansion.params)}};
+        }
+    }
+    return newBindingsMap;
 }
 
 }  // namespace dawn::native

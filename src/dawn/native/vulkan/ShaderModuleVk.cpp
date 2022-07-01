@@ -20,6 +20,7 @@
 #include <string>
 #include <vector>
 
+#include "dawn/native/BlobCacheValue.h"
 #include "dawn/native/CacheRequest.h"
 #include "dawn/native/SpirvValidation.h"
 #include "dawn/native/TintUtils.h"
@@ -36,7 +37,7 @@
 namespace dawn::native::vulkan {
 
 // Spirv is a wrapper around Blob that exposes the data as uint32_t words.
-class ShaderModule::Spirv : private Blob {
+class ShaderModule::Spirv : private Blob, public BlobCacheValue {
   public:
     static Spirv FromBlob(Blob&& blob) {
         // Vulkan drivers expect the SPIRV to be aligned like an array of uint32_t values.
@@ -52,20 +53,13 @@ class ShaderModule::Spirv : private Blob {
 
     const uint32_t* Code() const { return reinterpret_cast<const uint32_t*>(Data()); }
     size_t WordCount() const { return Size() / sizeof(uint32_t); }
+
+    std::variant<std::pair<const void*, size_t>, Blob> GetDataForCache() const override {
+        return std::pair<const void*, size_t>(Code(), WordCount() * sizeof(uint32_t));
+    }
 };
 
 }  // namespace dawn::native::vulkan
-
-namespace dawn::native {
-
-// Define the implementation to store vulkan::ShaderModule::Spirv into the BlobCache.
-template <>
-void BlobCache::Store<vulkan::ShaderModule::Spirv>(const CacheKey& key,
-                                                   const vulkan::ShaderModule::Spirv& spirv) {
-    Store(key, spirv.WordCount() * sizeof(uint32_t), spirv.Code());
-}
-
-}  // namespace dawn::native
 
 namespace dawn::native::vulkan {
 
@@ -232,7 +226,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     }
 
     // Transform external textures into the binding locations specified in the bgl
-    // TODO(dawn:1082): Replace this block with ShaderModuleBase::AddExternalTextureTransform.
+    // TODO(dawn:1082): Replace this block with BuildExternalTextureBindings.
     tint::transform::MultiplanarExternalTexture::BindingsMap newBindingsMap;
     for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
         const BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(i);
@@ -277,7 +271,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
             if (!r.newBindingsMap.empty()) {
                 transformManager.Add<tint::transform::MultiplanarExternalTexture>();
                 transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
-                    r.newBindingsMap);
+                    std::move(r.newBindingsMap));
             }
             tint::Program program;
             {

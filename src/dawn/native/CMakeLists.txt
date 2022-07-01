@@ -49,6 +49,7 @@ target_sources(dawn_native PRIVATE
     "Blob.h"
     "BlobCache.cpp"
     "BlobCache.h"
+    "BlobCacheValue.h"
     "BuddyAllocator.cpp"
     "BuddyAllocator.h"
     "BuddyMemoryAllocator.cpp"

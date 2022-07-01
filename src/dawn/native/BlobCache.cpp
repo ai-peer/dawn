@@ -15,6 +15,8 @@
 #include "dawn/native/BlobCache.h"
 
 #include <algorithm>
+#include <utility>
+#include <variant>
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/Version_autogen.h"
@@ -39,6 +41,19 @@ void BlobCache::Store(const CacheKey& key, size_t valueSize, const void* value) 
 
 void BlobCache::Store(const CacheKey& key, const Blob& value) {
     Store(key, value.Size(), value.Data());
+}
+
+void BlobCache::Store(const CacheKey& key, const BlobCacheValue& value) {
+    std::visit(
+        [&](auto&& d) {
+            using D = std::decay_t<decltype(d)>;
+            if constexpr (std::is_same_v<D, Blob>) {
+                Store(key, std::move(d));
+            } else {
+                Store(key, d.second, d.first);
+            }
+        },
+        value.GetDataForCache());
 }
 
 Blob BlobCache::LoadInternal(const CacheKey& key) {
