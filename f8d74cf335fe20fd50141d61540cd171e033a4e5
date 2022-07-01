@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35fab99a_9ed1bfd3",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-07-01T23:00:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7859042_e8745b29",
+      "range": {
+        "startLine": 358,
+        "startChar": 8,
+        "endLine": 358,
+        "endChar": 30
+      },
+      "revId": "f8d74cf335fe20fd50141d61540cd171e033a4e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65124f05_8d2ea912",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-07-01T20:26:57Z",
       "side": 1,
       "message": "[1] nit: only do this if options-\u003einternalUsage",
+      "range": {
+        "startLine": 554,
+        "startChar": 0,
+        "endLine": 557,
+        "endChar": 56
+      },
+      "revId": "f8d74cf335fe20fd50141d61540cd171e033a4e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c01dd3e_a0bab199",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-07-01T23:00:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65124f05_8d2ea912",
       "range": {
         "startLine": 554,
         "startChar": 0,
@@ -81,6 +129,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "401647c9_cdf65d33",
+        "filename": "src/dawn/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-07-01T23:00:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a41fbb2_77498b82",
+      "revId": "f8d74cf335fe20fd50141d61540cd171e033a4e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "767589b8_8fe42d1b",
@@ -94,6 +160,24 @@
       "writtenOn": "2022-07-01T20:26:57Z",
       "side": 1,
       "message": "unit: you could just say\n\nwgpu::FeatureName feature \u003d DawnInternalUsages;\nand then .requiredFeatures \u003d \u0026feature;",
+      "revId": "f8d74cf335fe20fd50141d61540cd171e033a4e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4a7e93d_312b92ea",
+        "filename": "src/dawn/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-07-01T23:00:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "767589b8_8fe42d1b",
       "revId": "f8d74cf335fe20fd50141d61540cd171e033a4e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
