@@ -232,20 +232,8 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     }
 
     // Transform external textures into the binding locations specified in the bgl
-    // TODO(dawn:1082): Replace this block with ShaderModuleBase::AddExternalTextureTransform.
-    tint::transform::MultiplanarExternalTexture::BindingsMap newBindingsMap;
-    for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
-        const BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(i);
-
-        for (const auto& [_, expansion] : bgl->GetExternalTextureBindingExpansionMap()) {
-            newBindingsMap[{static_cast<uint32_t>(i),
-                            static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane0))}] = {
-                {static_cast<uint32_t>(i),
-                 static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane1))},
-                {static_cast<uint32_t>(i),
-                 static_cast<uint32_t>(bgl->GetBindingIndex(expansion.params))}};
-        }
-    }
+    tint::transform::MultiplanarExternalTexture::BindingsMap newBindingsMap =
+        BuildExternalTextureTransform(layout);
 
 #if TINT_BUILD_SPV_WRITER
     SpirvCompilationRequest req = {};

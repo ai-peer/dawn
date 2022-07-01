@@ -15,11 +15,14 @@
 #ifndef SRC_DAWN_NATIVE_D3D12_SHADERMODULED3D12_H_
 #define SRC_DAWN_NATIVE_D3D12_SHADERMODULED3D12_H_
 
-#include "dawn/native/ShaderModule.h"
+#include <string>
 
+#include "dawn/native/Blob.h"
+#include "dawn/native/ShaderModule.h"
 #include "dawn/native/d3d12/d3d12_platform.h"
 
 namespace dawn::native {
+class Blob;
 struct ProgrammableStage;
 }  // namespace dawn::native
 
@@ -30,12 +33,28 @@ class PipelineLayout;
 
 // Manages a ref to one of the various representations of shader blobs and information used to
 // emulate vertex/instance index starts
-struct CompiledShader {
-    ComPtr<ID3DBlob> compiledFXCShader;
-    ComPtr<IDxcBlob> compiledDXCShader;
-    D3D12_SHADER_BYTECODE GetD3D12ShaderBytecode() const;
+class CompiledShader {
+  public:
+    static CompiledShader Create(ComPtr<ID3DBlob> shaderBlob,
+                                 bool usesVertexOrInstanceIndex,
+                                 std::string hlslSource);
+    static CompiledShader Create(ComPtr<IDxcBlob> shaderBlob,
+                                 bool usesVertexOrInstanceIndex,
+                                 std::string hlslSource);
+    static CompiledShader FromBlob(Blob blob);
 
-    bool usesVertexOrInstanceIndex;
+    D3D12_SHADER_BYTECODE GetD3D12ShaderBytecode() const;
+    bool UsesVertexOrInstanceIndex() const;
+
+    const std::string& GetHLSLSourceForLogging() const;
+
+  private:
+    Blob mCachedBlob;
+
+    Blob mShaderBlob;
+    bool mUsesVertexOrInstanceIndex;
+    // HLSL source is not cached. It is only included on CacheMiss for logging purposes.
+    std::string mHlslSource;
 };
 
 class ShaderModule final : public ShaderModuleBase {
