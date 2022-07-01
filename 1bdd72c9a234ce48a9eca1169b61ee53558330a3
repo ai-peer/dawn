@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c13f226_fe3c4618",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-01T16:50:30Z",
+      "side": 1,
+      "message": "Sorry for the slow review. I\u0027m currently out of office as I\u0027m moving house. I\u0027ll be back on Thursday 7th.\nDan does not work Fridays.\nDavid might be around, but is usually very busy.\n\nIf you still don\u0027t have a review by Thursday, I\u0027ll be sure to review it first thing in the morning (UK)",
+      "revId": "1bdd72c9a234ce48a9eca1169b61ee53558330a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
