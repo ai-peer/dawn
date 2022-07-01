@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b13079a1_823cdfdf",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-01T20:26:57Z",
+      "side": 0,
+      "message": "why was this validation statement dropped?",
+      "range": {
+        "startLine": 359,
+        "startChar": 4,
+        "endLine": 360,
+        "endChar": 61
+      },
+      "revId": "7a64127a4110c6db3e4db2a9d5dd1fa337c8a64c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
