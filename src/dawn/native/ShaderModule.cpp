@@ -1328,6 +1328,22 @@ void ShaderModuleBase::AddExternalTextureTransform(const PipelineLayoutBase* lay
     }
 }
 
+// static
+std::unordered_map<tint::sem::BindingPoint, tint::transform::BindingPoints>
+ShaderModuleBase::BuildExternalTextureTransform(const PipelineLayoutBase* layout) {
+    std::unordered_map<tint::sem::BindingPoint, tint::transform::BindingPoints> newBindingsMap;
+    for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+        const BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(i);
+
+        for (const auto& [_, expansion] : bgl->GetExternalTextureBindingExpansionMap()) {
+            newBindingsMap[{static_cast<uint32_t>(i), static_cast<uint32_t>(expansion.plane0)}] = {
+                {static_cast<uint32_t>(i), static_cast<uint32_t>(expansion.plane1)},
+                {static_cast<uint32_t>(i), static_cast<uint32_t>(expansion.params)}};
+        }
+    }
+    return newBindingsMap;
+}
+
 MaybeError ShaderModuleBase::InitializeBase(ShaderModuleParseResult* parseResult,
                                             OwnedCompilationMessages* compilationMessages) {
     mTintProgram = std::move(parseResult->tintProgram);

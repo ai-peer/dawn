@@ -219,6 +219,56 @@ TEST(BlobTests, AlignTo) {
     }
 }
 
+// Test that Slice takes ownership of the Blob data.
+TEST(BlobTests, SliceTakesOwnership) {
+    uint8_t data[64];
+    testing::StrictMock<testing::MockFunction<void()>> mockDeleter;
+    Blob b = Blob::UnsafeCreateWithDeleter(data, sizeof(data), [&]() { mockDeleter.Call(); });
+    {
+        Blob slice = Blob::Slice(std::move(b), 4);
+
+        // Data should be deleted at the end of the inner scope.
+        EXPECT_CALL(mockDeleter, Call());
+    }
+}
+
+// Test that Slice data/size args
+TEST(BlobTests, SliceDataSize) {
+    constexpr size_t kDataSize = 64;
+    uint8_t data[kDataSize];
+
+    // Test the default size arg, and explicit size=0
+    // at the beginning, middle, and end of the data range.
+    for (size_t offset : {0, 3, 4, 63, 64}) {
+        {
+            Blob b = Blob::UnsafeCreateWithDeleter(data, kDataSize, []() {});
+            Blob slice = Blob::Slice(std::move(b), offset);
+            EXPECT_EQ(slice.Size(), kDataSize - offset);
+            EXPECT_EQ(slice.Data(), data + offset);
+            EXPECT_EQ(slice.Size() == 0, slice.Empty());
+        }
+        {
+            Blob b = Blob::UnsafeCreateWithDeleter(data, kDataSize, []() {});
+            Blob slice = Blob::Slice(std::move(b), offset, 0);
+            EXPECT_EQ(slice.Size(), kDataSize - offset);
+            EXPECT_EQ(slice.Data(), data + offset);
+            EXPECT_EQ(slice.Size() == 0, slice.Empty());
+        }
+    }
+
+    // Test passing both offset and size.
+    for (size_t size : {1, 7, 12, 61, 64}) {
+        size_t lastOffset = kDataSize - size;
+        for (size_t offset : {size_t(0), lastOffset / 2, lastOffset}) {
+            Blob b = Blob::UnsafeCreateWithDeleter(data, kDataSize, []() {});
+            Blob slice = Blob::Slice(std::move(b), offset, size);
+            EXPECT_FALSE(slice.Empty());
+            EXPECT_EQ(slice.Size(), size);
+            EXPECT_EQ(slice.Data(), data + offset);
+        }
+    }
+}
+
 }  // namespace
 
 }  // namespace dawn::native
