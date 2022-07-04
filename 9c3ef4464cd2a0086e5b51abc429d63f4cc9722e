@@ -287,6 +287,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "494c3ead_630bffef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-07-04T21:12:23Z",
+      "side": 1,
+      "message": "Hi Corentin, thanks for the comment for the tests. Would you please elaborate \"don\u0027t check adverserialy\" a bit more for me please?",
+      "parentUuid": "1b673e53_f829ad1b",
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9c95e98_fd1ed8e8",
         "filename": "dawn.json",
         "patchSetId": 1
