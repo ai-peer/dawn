@@ -16,6 +16,57 @@
       "message": "Sorry for the slow review. I\u0027m currently out of office as I\u0027m moving house. I\u0027ll be back on Thursday 7th.\nDan does not work Fridays.\nDavid might be around, but is usually very busy.\n\nIf you still don\u0027t have a review by Thursday, I\u0027ll be sure to review it first thing in the morning (UK)",
       "revId": "1bdd72c9a234ce48a9eca1169b61ee53558330a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aff0e8dc_259dbda1",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-04T13:58:12Z",
+      "side": 1,
+      "message": "Can we name these magic numbers? Maybe something like\n\nconstexpr uint32_t k32NormalBiasedExpMin \u003d 113;\n\nto make it clearer what is being checked?",
+      "revId": "1bdd72c9a234ce48a9eca1169b61ee53558330a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58ed72e8_41da9141",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-04T13:58:12Z",
+      "side": 1,
+      "message": "Maybe:\n\ntint::diag::List diag;\nTINT_UNREACHABLE(Semantic, diag);\n\nto make it clearer this is unreachable.",
+      "revId": "1bdd72c9a234ce48a9eca1169b61ee53558330a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7337b6a6_8f59b887",
+        "filename": "src/tint/number.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-04T13:58:12Z",
+      "side": 1,
+      "message": "Why have the `static` version along with the other one? Which one do you expect to be used?",
+      "revId": "1bdd72c9a234ce48a9eca1169b61ee53558330a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
