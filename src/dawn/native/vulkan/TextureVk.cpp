@@ -879,6 +879,104 @@ MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
     return {};
 }
 
+void Texture::ExternalTextureBeginAccess(const std::vector<VkSemaphore>& waitSemaphores) {
+    Device* device = ToBackend(GetDevice());
+    Aspect aspects = ComputeAspectsForSubresourceStorage();
+    ASSERT(GetNumMipLevels() == 1 && GetArrayLayers() == 1);
+    wgpu::TextureUsage usage = mSubresourceLastUsages->Get(aspects, 0, 0);
+
+    VkImageMemoryBarrier barrier;
+    barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+    barrier.pNext = nullptr;
+    barrier.image = GetHandle();
+    barrier.subresourceRange.aspectMask = VulkanAspectMask(aspects);
+    barrier.subresourceRange.baseMipLevel = 0;
+    barrier.subresourceRange.levelCount = 1;
+    barrier.subresourceRange.baseArrayLayer = 0;
+    barrier.subresourceRange.layerCount = 1;
+
+    barrier.dstAccessMask = VulkanAccessFlags(usage, GetFormat());
+    barrier.srcAccessMask = 0;
+
+    barrier.oldLayout = VulkanImageLayout(this, usage);
+    barrier.newLayout = barrier.oldLayout;
+
+    barrier.dstQueueFamilyIndex = device->GetGraphicsQueueFamily();
+    barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_EXTERNAL_KHR;
+    VkPipelineStageFlags dstStages = VulkanPipelineStage(usage, GetFormat());
+    VkPipelineStageFlags srcStages =
+        VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT;  // We don't know when the importing queue will need
+                                            // the texture, so pass
+                                            // VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT to ensure
+                                            // the barrier happens-before any usage in the
+                                            // importing queue.
+    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+    recordingContext->waitSemaphores.insert(recordingContext->waitSemaphores.end(),
+                                            waitSemaphores.begin(), waitSemaphores.end());
+    device->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
+                                  nullptr, 0, nullptr, 1, &barrier);
+}
+
+void Texture::ExternalTextureEndAccess(VkImageLayout desiredLayout,
+                                       VkSemaphore signalSemaphore,
+                                       VkSemaphore* outSignalSemaphore) {
+/*
+    Device* device = ToBackend(GetDevice());
+    Aspect aspects = ComputeAspectsForSubresourceStorage();
+    ASSERT(GetNumMipLevels() == 1 && GetArrayLayers() == 1);
+    wgpu::TextureUsage usage = mSubresourceLastUsages->Get(aspects, 0, 0);
+
+    VkImageMemoryBarrier barrier;
+    barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+    barrier.pNext = nullptr;
+    barrier.image = GetHandle();
+    barrier.subresourceRange.aspectMask = VulkanAspectMask(aspects);
+    barrier.subresourceRange.baseMipLevel = 0;
+    barrier.subresourceRange.levelCount = 1;
+    barrier.subresourceRange.baseArrayLayer = 0;
+    barrier.subresourceRange.layerCount = 1;
+
+    barrier.srcAccessMask = VulkanAccessFlags(usage, GetFormat());
+    barrier.dstAccessMask = 0;  // The barrier must be paired with another barrier that will
+                                // specify the dst access mask on the importing queue.
+
+    barrier.oldLayout = VulkanImageLayout(this, usage);
+    if (desiredLayout == VK_IMAGE_LAYOUT_UNDEFINED) {
+        // VK_IMAGE_LAYOUT_UNDEFINED is invalid here. We use it as a
+        // special value to indicate no layout transition should be done.
+        barrier.newLayout = barrier.oldLayout;
+    } else {
+        barrier.newLayout = desiredLayout;
+    }
+
+    barrier.srcQueueFamilyIndex = device->GetGraphicsQueueFamily();
+    barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_EXTERNAL_KHR;
+
+    VkPipelineStageFlags srcStages = VulkanPipelineStage(usage, GetFormat());
+    VkPipelineStageFlags dstStages =
+        VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT;  // We don't know when the importing queue will need
+                                            // the texture, so pass
+                                            // VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT to ensure
+                                            // the barrier happens-before any usage in the
+                                            // importing queue.
+
+    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+    device->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
+                                  nullptr, 0, nullptr, 1, &barrier);
+*/
+#if 0
+    Device* device = ToBackend(GetDevice());
+    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+    // Queue submit to signal we are done with the texture
+    recordingContext->signalSemaphores.push_back(mSignalSemaphore);
+    IgnoreErrors(device->SubmitPendingCommands());
+#endif
+
+    *outSignalSemaphore = mSignalSemaphore;
+
+    mSignalSemaphore = signalSemaphore;
+}
+
 Texture::~Texture() {}
 
 void Texture::SetLabelHelper(const char* prefix) {

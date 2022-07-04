@@ -94,6 +94,11 @@ class Texture final : public TextureBase {
                                      VkImageLayout* releasedOldLayout,
                                      VkImageLayout* releasedNewLayout);
 
+    void ExternalTextureBeginAccess(const std::vector<VkSemaphore>& waitSemaphores);
+    void ExternalTextureEndAccess(VkImageLayout desiredLayout,
+                                  VkSemaphore signalSemaphore,
+                                  VkSemaphore* outSignalSemaphore);
+
     void SetLabelHelper(const char* prefix);
 
     // Dawn API

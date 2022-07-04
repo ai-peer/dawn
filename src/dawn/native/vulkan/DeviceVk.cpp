@@ -826,6 +826,7 @@ bool Device::SignalAndExportExternalTexture(
         DAWN_TRY_ASSIGN(semaphoreHandle,
                         mExternalSemaphoreService->ExportSemaphore(signalSemaphore));
         semaphoreHandles->push_back(semaphoreHandle);
+
         info->releasedOldLayout = releasedOldLayout;
         info->releasedNewLayout = releasedNewLayout;
         info->isInitialized =
@@ -887,6 +888,38 @@ TextureBase* Device::CreateTextureWrappingVulkanImage(
     }
 
     return result;
+}
+
+void Device::ExternalTextureBeginAccess(Texture* texture,
+                                        const std::vector<ExternalSemaphoreHandle>& waitHandles) {
+    std::vector<VkSemaphore> waitSemaphores;
+    for (const auto& handle : waitHandles) {
+        ConsumedError([&]() -> MaybeError {
+            VkSemaphore semaphoreHandle;
+            DAWN_TRY_ASSIGN(semaphoreHandle, mExternalSemaphoreService->ImportSemaphore(handle));
+            waitSemaphores.push_back(semaphoreHandle);
+            return {};
+        }());
+    }
+    texture->ExternalTextureBeginAccess(waitSemaphores);
+}
+
+void Device::ExternalTextureEndAccess(Texture* texture,
+                                      VkImageLayout desiredLayout,
+                                      std::vector<ExternalSemaphoreHandle>* semaphoreHandles) {
+    ConsumedError([&]() -> MaybeError {
+        VkSemaphore signalSemaphore;
+        VkSemaphore outSignalSemaphore;
+        DAWN_TRY_ASSIGN(signalSemaphore, mExternalSemaphoreService->CreateExportableSemaphore());
+        texture->ExternalTextureEndAccess(desiredLayout, signalSemaphore, &outSignalSemaphore);
+#if 0
+        ExternalSemaphoreHandle semaphoreHandle;
+        DAWN_TRY_ASSIGN(semaphoreHandle,
+        mExternalSemaphoreService->ExportSemaphore(outSignalSemaphore));
+        semaphoreHandles->push_back(semaphoreHandle);
+#endif
+        return {};
+    }());
 }
 
 uint32_t Device::GetComputeSubgroupSize() const {

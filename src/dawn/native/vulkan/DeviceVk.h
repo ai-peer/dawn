@@ -78,6 +78,12 @@ class Device final : public DeviceBase {
                                         ExternalImageExportInfoVk* info,
                                         std::vector<ExternalSemaphoreHandle>* semaphoreHandle);
 
+    void ExternalTextureBeginAccess(Texture* texture,
+                                    const std::vector<ExternalSemaphoreHandle>& waitHandles);
+    void ExternalTextureEndAccess(Texture* texture,
+                                  VkImageLayout desiredLayout,
+                                  std::vector<ExternalSemaphoreHandle>* semaphoreHandle);
+
     ResultOrError<Ref<CommandBufferBase>> CreateCommandBuffer(
         CommandEncoder* encoder,
         const CommandBufferDescriptor* descriptor) override;

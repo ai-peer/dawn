@@ -119,4 +119,16 @@ bool ExportVulkanImage(WGPUTexture texture,
 #endif  // DAWN_PLATFORM_IS(LINUX)
 }
 
+void VulkanImageBeginAccess(WGPUTexture texture, const std::vector<int>& waitFDs) {
+    Texture* backendTexture = ToBackend(FromAPI(texture));
+    Device* device = ToBackend(backendTexture->GetDevice());
+    device->ExternalTextureBeginAccess(backendTexture, waitFDs);
+}
+
+void VulkanImageEndAccess(WGPUTexture texture, std::vector<int>* semaphoreHandles) {
+    Texture* backendTexture = ToBackend(FromAPI(texture));
+    Device* device = ToBackend(backendTexture->GetDevice());
+    device->ExternalTextureEndAccess(backendTexture, VK_IMAGE_LAYOUT_UNDEFINED, semaphoreHandles);
+}
+
 }  // namespace dawn::native::vulkan

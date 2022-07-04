@@ -143,6 +143,12 @@ DAWN_NATIVE_EXPORT bool ExportVulkanImage(WGPUTexture texture,
                                           VkImageLayout desiredLayout,
                                           ExternalImageExportInfoVk* info);
 
+DAWN_NATIVE_EXPORT void VulkanImageBeginAccess(WGPUTexture texture,
+                                               const std::vector<int>& waitFDs);
+
+DAWN_NATIVE_EXPORT void VulkanImageEndAccess(WGPUTexture texture,
+                                             std::vector<int>* semaphoreHandles);
+
 }  // namespace dawn::native::vulkan
 
 #endif  // INCLUDE_DAWN_NATIVE_VULKANBACKEND_H_
