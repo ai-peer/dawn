@@ -16,6 +16,23 @@
       "message": "Is this still relevant or has it been worked around?",
       "revId": "d72ca7e567f7d8555c49495cad1f89191dbd3c90",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e66f44f_22e37d99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-05T08:46:32Z",
+      "side": 1,
+      "message": "LGTM after rebase",
+      "revId": "d72ca7e567f7d8555c49495cad1f89191dbd3c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
