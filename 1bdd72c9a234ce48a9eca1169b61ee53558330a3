@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b2fa515_67992244",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-05T06:39:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aff0e8dc_259dbda1",
+      "revId": "1bdd72c9a234ce48a9eca1169b61ee53558330a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58ed72e8_41da9141",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62e784d6_a5c6d8ef",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-05T06:39:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58ed72e8_41da9141",
+      "revId": "1bdd72c9a234ce48a9eca1169b61ee53558330a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7337b6a6_8f59b887",
@@ -65,6 +101,24 @@
       "writtenOn": "2022-07-04T13:58:12Z",
       "side": 1,
       "message": "Why have the `static` version along with the other one? Which one do you expect to be used?",
+      "revId": "1bdd72c9a234ce48a9eca1169b61ee53558330a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecee60b3_14c9c9cb",
+        "filename": "src/tint/number.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-05T06:39:25Z",
+      "side": 1,
+      "message": "The `static` version could be used for generate zero constant (`f16::BitsRepresentation(0.0f)`), but we can always use `f16(0.0f).BitsRepresentation()`, which may have a little overhead but seems fine. Shall I remove the `static` one and just keep the non-static member version?",
+      "parentUuid": "7337b6a6_8f59b887",
       "revId": "1bdd72c9a234ce48a9eca1169b61ee53558330a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
