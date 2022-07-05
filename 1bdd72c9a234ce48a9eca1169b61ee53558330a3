@@ -121,6 +121,24 @@
       "parentUuid": "7337b6a6_8f59b887",
       "revId": "1bdd72c9a234ce48a9eca1169b61ee53558330a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "313c836f_fb6575ef",
+        "filename": "src/tint/number.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-05T13:40:35Z",
+      "side": 1,
+      "message": "Yea, I\u0027d drop the static version. We can always add it if we ever need it, but until then just have one.",
+      "parentUuid": "ecee60b3_14c9c9cb",
+      "revId": "1bdd72c9a234ce48a9eca1169b61ee53558330a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
