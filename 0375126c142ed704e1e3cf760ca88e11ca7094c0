@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0abfb66b_e364ced5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-05T08:24:02Z",
+      "side": 1,
+      "message": "It seems that Kokoro failure is irrelated to this patch. The failure is imported in https://dawn-review.googlesource.com/c/dawn/+/95322, \"Roll vulkan-deps from 76c2f42ea652 to cf47f3e49a61 (8 revisions)\"",
+      "revId": "0375126c142ed704e1e3cf760ca88e11ca7094c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
