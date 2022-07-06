@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "042c5506_c285a1b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-06T22:54:57Z",
+      "side": 1,
+      "message": "PTAL. See more comments at https://docs.google.com/document/d/19vfxPzCLLdlBD7-hp0TfyuHQq8zPXFHtlX5NGBIxiss/edit, which has restricted access permission.\n\nComments are welcome. For comments to improve the test code itself, just put them on this code review webpage. For detailed observations, please comment in the Google doc.",
+      "revId": "07bc29d7e699343c61a1b8717ebd1b4daf93fb18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e033ca5_2b52134c",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-06T22:54:57Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 161,
+        "startChar": 4,
+        "endLine": 161,
+        "endChar": 35
+      },
+      "revId": "07bc29d7e699343c61a1b8717ebd1b4daf93fb18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "328334e2_221e24fb",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-06T22:54:57Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 171,
+        "startChar": 24,
+        "endLine": 178,
+        "endChar": 69
+      },
+      "revId": "07bc29d7e699343c61a1b8717ebd1b4daf93fb18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
