@@ -305,6 +305,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d105027a_6c35db0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-06T12:37:40Z",
+      "side": 1,
+      "message": "Check adverserialy is if you imagine the test and implementation to be adversaries: the implementation tries to hide subtle bugs, but the tests is doing as much as it can to detect these bugs. Of course the tests can never be 100% complete, but they can check for a number of issues that could happen:\n\n - Having a separate counter of each type of draw instead of a combined one.\n - Render bundles drawCount overwriting the render pass draw count instead of setting it (or setting it to 0 at the start of executeBundles).\n - etc\n\nSo the coverage here should likely include validation of mixed draw types, including bundles vs not for example. However that\u0027s a lot more effort so it makes sense to put it in the CTS (and it\u0027s much easier to do combination testing there.)",
+      "parentUuid": "494c3ead_630bffef",
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9c95e98_fd1ed8e8",
         "filename": "dawn.json",
         "patchSetId": 1
