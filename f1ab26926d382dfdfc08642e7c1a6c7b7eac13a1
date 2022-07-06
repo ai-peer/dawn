@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "023f1c88_1b06f437",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-07-06T19:51:30Z",
+      "side": 1,
+      "message": "Sorry for the delay, took a while to understand the context. LGTM.",
+      "revId": "f1ab26926d382dfdfc08642e7c1a6c7b7eac13a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
