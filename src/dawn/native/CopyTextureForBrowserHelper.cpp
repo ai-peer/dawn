@@ -145,6 +145,11 @@ static const char sCopyTextureForBrowserShader[] = R"(
                 let kEncodeToGammaStep = 0x08u;
                 let kPremultiplyStep = 0x10u;
                 let kDecodeForSrgbDstFormat = 0x20u;
+                let kClearAlphaToOne = 0x40u;
+
+                if (bool(uniforms.steps_mask & kClearAlphaToOne)) {
+                    color.a = 1.0;
+                }
 
                 // Unpremultiply step. Appling color space conversion op on premultiplied source texture
                 // also needs to unpremultiply first.
@@ -456,11 +461,15 @@ MaybeError DoCopyTextureForBrowser(DeviceBase* device,
     constexpr uint32_t kEncodeToGammaStep = 0x08;
     constexpr uint32_t kPremultiplyStep = 0x10;
     constexpr uint32_t kDecodeForSrgbDstFormat = 0x20;
+    constexpr uint32_t kClearAlphaToOne = 0x40;
 
     if (options->srcAlphaMode == wgpu::AlphaMode::Premultiplied) {
         if (options->needsColorSpaceConversion || options->srcAlphaMode != options->dstAlphaMode) {
             stepsMask |= kUnpremultiplyStep;
         }
+    } else if (options->srcAlphaMode == wgpu::AlphaMode::Opaque) {
+        // Simply clear Alpha channel to 1.0
+        stepsMask |= kClearAlphaToOne;
     }
 
     if (options->needsColorSpaceConversion) {
@@ -497,7 +506,8 @@ MaybeError DoCopyTextureForBrowser(DeviceBase* device,
     }
 
     if (options->dstAlphaMode == wgpu::AlphaMode::Premultiplied) {
-        if (options->needsColorSpaceConversion || options->srcAlphaMode != options->dstAlphaMode) {
+        if (options->needsColorSpaceConversion ||
+            options->srcAlphaMode == wgpu::AlphaMode::Unpremultiplied) {
             stepsMask |= kPremultiplyStep;
         }
     }
@@ -587,7 +597,7 @@ MaybeError DoCopyTextureForBrowser(DeviceBase* device,
     renderPassDesc.colorAttachments = &colorAttachmentDesc;
     Ref<RenderPassEncoder> passEncoder = encoder->BeginRenderPass(&renderPassDesc);
 
-    // Start pipeline  and encode commands to complete
+    // Start pipeline and encode commands to complete
     // the copy from src texture to dst texture with transformation.
     passEncoder->APISetPipeline(pipeline);
     passEncoder->APISetBindGroup(0, bindGroup.Get());
