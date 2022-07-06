@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43ddbb7f_ce541d78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-07-06T21:30:12Z",
+      "side": 1,
+      "message": "This change (together with other unlanded chromium change) will produce the expected result in a new unlanded reftest for canvas with opaque alpha mode read by toDataURL, 2d context draw image, etc.\n\nLooking at the shader code changing color.a won\u0027t collide with other path (but I\u0027m not sure if there\u0027s any other impact)",
+      "revId": "b475d8c6572e8a1ba1e8183acbb41c9f62c7f28c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
