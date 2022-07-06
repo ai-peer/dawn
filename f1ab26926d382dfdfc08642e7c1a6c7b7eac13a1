@@ -16,6 +16,24 @@
       "message": "Sorry for the delay, took a while to understand the context. LGTM.",
       "revId": "f1ab26926d382dfdfc08642e7c1a6c7b7eac13a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "029db3c7_d5b64fdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-07-06T20:20:30Z",
+      "side": 1,
+      "message": "Thanks for the review! I should include some notes for the context atfirst:\nThis CL basically adds internal usage option for copyTextureForBrowser cmd to pass validation of related texture, bindgroup, encoder, because we are going to call it from chromium side for some internal purposes.\nI will wait for cwallez@ for a second eye since enga@ is out.",
+      "parentUuid": "023f1c88_1b06f437",
+      "revId": "f1ab26926d382dfdfc08642e7c1a6c7b7eac13a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
