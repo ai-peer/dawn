@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a56345ee_7ec86116",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-07T16:51:44Z",
+      "side": 1,
+      "message": "nit: else not needed as the if returns",
+      "revId": "7c6581f8a431009c27244c87269653de747d80d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
