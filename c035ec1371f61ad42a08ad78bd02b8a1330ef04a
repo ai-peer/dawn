@@ -16,6 +16,24 @@
       "message": "SwiftShader still needs to roll into Dawn, but this should be ready to try again as soon as the roll is done.",
       "revId": "c035ec1371f61ad42a08ad78bd02b8a1330ef04a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09782dbc_fee64810",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003281
+      },
+      "writtenOn": "2022-07-07T04:19:39Z",
+      "side": 1,
+      "message": "All right, all tests pass. PTAL!",
+      "parentUuid": "319f6f07_207f5817",
+      "revId": "c035ec1371f61ad42a08ad78bd02b8a1330ef04a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
