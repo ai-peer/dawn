@@ -16,6 +16,24 @@
       "message": "Is it possible to add a test here which crashes before and not after?",
       "revId": "115ac46a0f51fc8f3da0b2f06696444472b89b0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c9572d7_07bd09a0",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-07T16:53:26Z",
+      "side": 1,
+      "message": "I couldn\u0027t figure out a trivial repro case as it came from a binary fuzzer source. It\u0027s possible that this is impossible to trigger from WGSL input.\nI feel comfortable knowing that the fuzzers can detect the fix, and that this will persist in a fuzzer corpus so regressions should be detected.",
+      "parentUuid": "21875c6c_04f657ed",
+      "revId": "115ac46a0f51fc8f3da0b2f06696444472b89b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
