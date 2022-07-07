@@ -16,6 +16,24 @@
       "message": "nit: else not needed as the if returns",
       "revId": "7c6581f8a431009c27244c87269653de747d80d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a2bb5f0_884dc931",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-07T17:31:59Z",
+      "side": 1,
+      "message": "Ack. Tried fixing on my phone, as I\u0027m now OOO and this is fairly high priority, but it is apparently impossible to remove a newline using the web UI on Android, so I guess I\u0027ll clean this up when I implement `struct` support.",
+      "parentUuid": "a56345ee_7ec86116",
+      "revId": "7c6581f8a431009c27244c87269653de747d80d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
