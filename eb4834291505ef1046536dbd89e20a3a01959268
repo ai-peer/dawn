@@ -34,6 +34,24 @@
       "parentUuid": "4b3681bd_327a3969",
       "revId": "eb4834291505ef1046536dbd89e20a3a01959268",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "923e2fb4_bd770ca3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-07T15:52:29Z",
+      "side": 1,
+      "message": "Looka like Kokoro is having some difficulties right now. Giving a +2. We can fix / revert if stuff is broken after landing.",
+      "parentUuid": "fb2dce3e_c8e39f64",
+      "revId": "eb4834291505ef1046536dbd89e20a3a01959268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
