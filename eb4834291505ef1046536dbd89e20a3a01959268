@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b3681bd_327a3969",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-07T14:57:42Z",
+      "side": 1,
+      "message": "LGTM, but it appears you need to regenerate the expectations for:\n\n```\nextensions/parsing/basic.wgsl\nextensions/parsing/duplicated_extensions.wgsl\n```",
+      "revId": "eb4834291505ef1046536dbd89e20a3a01959268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
