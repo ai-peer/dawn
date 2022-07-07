@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9689f91b_8be4e11e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-07-07T18:51:25Z",
+      "side": 1,
+      "message": "Context: this is a followup fix of https://dawn-review.googlesource.com/c/dawn/+/51164/47..54/src/dawn_wire/client/ClientInlineMemoryTransferService.cpp#b52\n\noffset \u003e 0 is unneeded. Because when offset \u003d\u003d 0, it will be guarded by the size \u003e mDataLength to enter the if branch to return false.",
+      "revId": "183b15c39a6534841fe57c88710f60180db304b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
