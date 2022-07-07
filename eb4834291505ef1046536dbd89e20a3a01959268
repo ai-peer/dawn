@@ -16,6 +16,24 @@
       "message": "LGTM, but it appears you need to regenerate the expectations for:\n\n```\nextensions/parsing/basic.wgsl\nextensions/parsing/duplicated_extensions.wgsl\n```",
       "revId": "eb4834291505ef1046536dbd89e20a3a01959268",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb2dce3e_c8e39f64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-07T14:59:53Z",
+      "side": 1,
+      "message": "Thanks for the review! I have regenerate the expectations after Kokoro-1 one hour ago and upload patchset 4, but it seems that Kokoro is not trying the new patch.",
+      "parentUuid": "4b3681bd_327a3969",
+      "revId": "eb4834291505ef1046536dbd89e20a3a01959268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
