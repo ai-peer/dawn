@@ -16,6 +16,23 @@
       "message": "Please take a look, thanks",
       "revId": "d219816726761deab4a0d2070b99916e2888601e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc41352e_8540ea80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-07T15:04:00Z",
+      "side": 1,
+      "message": "I suspect that this will not work with storage buffers and uniform buffers, as they both use the `DecomposeMemoryAccess` transform, which will flatten down to an `array\u003cvec4\u003cu32\u003e, N\u003e`.\n\nFor read-only buffers this can be implemented by unpacking a 16-bit float from the 32-bits, but for read-write storage buffers, there\u0027s no easy way to safely write from two invocations.\n\nTo accomplish this, I think we\u0027d need the HLSL writer to utilize the templated Load/Store ops with a `ByteAddressBuffer`. This isn\u0027t supported by FXC.",
+      "revId": "d219816726761deab4a0d2070b99916e2888601e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
