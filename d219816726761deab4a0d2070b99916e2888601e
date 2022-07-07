@@ -33,6 +33,24 @@
       "message": "I suspect that this will not work with storage buffers and uniform buffers, as they both use the `DecomposeMemoryAccess` transform, which will flatten down to an `array\u003cvec4\u003cu32\u003e, N\u003e`.\n\nFor read-only buffers this can be implemented by unpacking a 16-bit float from the 32-bits, but for read-write storage buffers, there\u0027s no easy way to safely write from two invocations.\n\nTo accomplish this, I think we\u0027d need the HLSL writer to utilize the templated Load/Store ops with a `ByteAddressBuffer`. This isn\u0027t supported by FXC.",
       "revId": "d219816726761deab4a0d2070b99916e2888601e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6c0115a_a13dd552",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-07T16:41:13Z",
+      "side": 1,
+      "message": "Thanks for review!\nCurrently I haven\u0027t implement storage / uniform buffer support yet (intentionally), because I do realize there are some tricky cases for buffer accessing. Also I don\u0027t test array of f16 yet.\nI would like to first support using f16 types within a single shader, which includes declaring and constructing module-scope and function-scope f16 types variable and constant (frontend supported in CL #94642, and backend in these under-reviewing CLs and another two CLs to be uploaded for SPIRV and WGSL) and also using these variable and constant to call operator and built-in function (going to be the next CLs); than we are going to support f16 in storage / uniform buffer, and pipeline IO. This is my current plan, and I would love to have your suggestions.",
+      "parentUuid": "fc41352e_8540ea80",
+      "revId": "d219816726761deab4a0d2070b99916e2888601e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
