@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21875c6c_04f657ed",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-07T16:32:02Z",
+      "side": 1,
+      "message": "Is it possible to add a test here which crashes before and not after?",
+      "revId": "115ac46a0f51fc8f3da0b2f06696444472b89b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
