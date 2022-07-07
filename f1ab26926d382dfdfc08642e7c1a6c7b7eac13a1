@@ -34,6 +34,205 @@
       "parentUuid": "023f1c88_1b06f437",
       "revId": "f1ab26926d382dfdfc08642e7c1a6c7b7eac13a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfbe1693_0dfc3198",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T10:16:43Z",
+      "side": 1,
+      "message": "LGTM overall, with tiny nits.",
+      "revId": "f1ab26926d382dfdfc08642e7c1a6c7b7eac13a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efde7678_132278c6",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T10:16:43Z",
+      "side": 1,
+      "message": "nit: since we added the mode to the function signature, I think we should update `ValidateBufferBinding` as well, otherwise someone looking at the method in the future will think using the internal usages for buffers works, when it doesn\u0027t.",
+      "revId": "f1ab26926d382dfdfc08642e7c1a6c7b7eac13a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e2bffec_30a25a18",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T10:16:43Z",
+      "side": 1,
+      "message": "nit: the BUILD.gn file also needs to be updated.",
+      "revId": "f1ab26926d382dfdfc08642e7c1a6c7b7eac13a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "298beb41_4bbec428",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T10:16:43Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "f1ab26926d382dfdfc08642e7c1a6c7b7eac13a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9ff1169_df4877fe",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T10:16:43Z",
+      "side": 1,
+      "message": "nit: \"internalUsage is true while the \"dawn-internal-usages\" feature is not enabled.\" (missing period, but also missing explanation of why the feature is required).",
+      "range": {
+        "startLine": 359,
+        "startChar": 9,
+        "endLine": 359,
+        "endChar": 57
+      },
+      "revId": "f1ab26926d382dfdfc08642e7c1a6c7b7eac13a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f0996db_8851e71e",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T10:16:43Z",
+      "side": 1,
+      "message": "nit: these structures are all C++ structure with default values for everything (I think?) so we might not need the \u003d {}.\n\nDitto in other places potentially.",
+      "range": {
+        "startLine": 557,
+        "startChar": 47,
+        "endLine": 557,
+        "endChar": 53
+      },
+      "revId": "f1ab26926d382dfdfc08642e7c1a6c7b7eac13a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c78527de_bc3bd154",
+        "filename": "src/dawn/native/UsageValidationMode.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T10:16:43Z",
+      "side": 1,
+      "message": "It\u0027s a bit sad to have a header for a single enum, but I don\u0027t see a good place where to put it. Any idea? Otherwise it\u0027s fine to keep as is.",
+      "revId": "f1ab26926d382dfdfc08642e7c1a6c7b7eac13a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "936f3a3b_70f3e934",
+        "filename": "src/dawn/native/utils/WGPUHelpers.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T10:16:43Z",
+      "side": 1,
+      "message": "nit: unused",
+      "revId": "f1ab26926d382dfdfc08642e7c1a6c7b7eac13a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c99e8106_e80357f6",
+        "filename": "src/dawn/native/utils/WGPUHelpers.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T10:16:43Z",
+      "side": 1,
+      "message": "nit: unnecessary since  \"dawn/native/UsageValidationMode.h\" is included in WGPUHelpers.h",
+      "revId": "f1ab26926d382dfdfc08642e7c1a6c7b7eac13a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41bb1d88_72ae816f",
+        "filename": "src/dawn/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T10:16:43Z",
+      "side": 1,
+      "message": "nit: Test that the internal usages are taken into account when interalUsage \u003d true?",
+      "revId": "f1ab26926d382dfdfc08642e7c1a6c7b7eac13a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44ac3b3d_cb6ace90",
+        "filename": "src/dawn/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T10:16:43Z",
+      "side": 1,
+      "message": "nit: We don\u0027t have coverage for the check at [1]. We could make a subclass fixture of CopyTextureForBrowserTest that\u0027s CopyTextureForBrowserInternalUsageTest that\u0027s the one that creates the device with the correct feature. Then in CopyTextureForBrowserTest we\u0027d add a test that a validation error occurs, and change this test to be on CopyTextureForBrowserInternalUsageTest.",
+      "revId": "f1ab26926d382dfdfc08642e7c1a6c7b7eac13a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
