@@ -20,6 +20,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dd0e1cfc_5c310657",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T14:40:04Z",
+      "side": 1,
+      "message": "We have a helper for this in dawn/common/Math.h",
+      "revId": "07bc29d7e699343c61a1b8717ebd1b4daf93fb18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe5eed98_7fc63089",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T14:40:04Z",
+      "side": 1,
+      "message": "why the 0x0?",
+      "range": {
+        "startLine": 96,
+        "startChar": 33,
+        "endLine": 96,
+        "endChar": 37
+      },
+      "revId": "07bc29d7e699343c61a1b8717ebd1b4daf93fb18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e033ca5_2b52134c",
         "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
         "patchSetId": 2
@@ -37,6 +77,46 @@
         "endLine": 161,
         "endChar": 35
       },
+      "revId": "07bc29d7e699343c61a1b8717ebd1b4daf93fb18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c89a4d85_cf121c20",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T14:40:04Z",
+      "side": 1,
+      "message": "nit: Can just be hardcoded now",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 54
+      },
+      "revId": "07bc29d7e699343c61a1b8717ebd1b4daf93fb18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5b9fbec_db7e54f9",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T14:40:04Z",
+      "side": 1,
+      "message": "ditto",
       "revId": "07bc29d7e699343c61a1b8717ebd1b4daf93fb18",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
