@@ -16,6 +16,86 @@
       "message": "This change (together with other unlanded chromium change) will produce the expected result in a new unlanded reftest for canvas with opaque alpha mode read by toDataURL, 2d context draw image, etc.\n\nLooking at the shader code changing color.a won\u0027t collide with other path (but I\u0027m not sure if there\u0027s any other impact)",
       "revId": "b475d8c6572e8a1ba1e8183acbb41c9f62c7f28c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b82a88e_76d4b4c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T10:31:41Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b475d8c6572e8a1ba1e8183acbb41c9f62c7f28c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ef94825_6a380f83",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T10:31:41Z",
+      "side": 1,
+      "message": "Maybe we could have a small test in CopyTextureForBrowserTests.cpp for the new behavior?",
+      "revId": "b475d8c6572e8a1ba1e8183acbb41c9f62c7f28c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9f63c74_58ee7f58",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T10:31:41Z",
+      "side": 1,
+      "message": "nit: maybe mention \"src\" in the name since it could also be clearing post-unpremultiply.\n\nWhich brings the question, are you sure that we need to clear the src and not the dst alpha channel? I\u0027m not 100% (and not even sure if it makes a difference ^^)",
+      "range": {
+        "startLine": 148,
+        "startChar": 20,
+        "endLine": 148,
+        "endChar": 36
+      },
+      "revId": "b475d8c6572e8a1ba1e8183acbb41c9f62c7f28c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81a3bf4e_f83aca5e",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-07T10:31:41Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 464,
+        "startChar": 23,
+        "endLine": 464,
+        "endChar": 39
+      },
+      "revId": "b475d8c6572e8a1ba1e8183acbb41c9f62c7f28c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
