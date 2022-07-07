@@ -16,6 +16,23 @@
       "message": "Please take a look, thanks",
       "revId": "3407742f3f8aaf93b74f2abde5bccf2da7115ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6332a2b_0ec140b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-07T02:00:50Z",
+      "side": 1,
+      "message": "Thanks for reviewing, I am submitting the patch",
+      "revId": "3407742f3f8aaf93b74f2abde5bccf2da7115ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
