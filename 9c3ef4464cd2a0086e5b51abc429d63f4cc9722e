@@ -321,6 +321,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5ae2cf1_d955c227",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-07-07T06:48:31Z",
+      "side": 1,
+      "message": "Thanks for the explanation. I hope we can continue the CTS test plan discussion in https://github.com/gpuweb/cts/pull/1614",
+      "parentUuid": "d105027a_6c35db0c",
+      "revId": "9c3ef4464cd2a0086e5b51abc429d63f4cc9722e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9c95e98_fd1ed8e8",
