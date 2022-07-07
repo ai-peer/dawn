@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d40a8f9_86959c59",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-07T18:27:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd0e1cfc_5c310657",
+      "revId": "07bc29d7e699343c61a1b8717ebd1b4daf93fb18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe5eed98_7fc63089",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-07-07T14:40:04Z",
       "side": 1,
       "message": "why the 0x0?",
+      "range": {
+        "startLine": 96,
+        "startChar": 33,
+        "endLine": 96,
+        "endChar": 37
+      },
+      "revId": "07bc29d7e699343c61a1b8717ebd1b4daf93fb18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cb51727_9403dcce",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-07T18:27:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe5eed98_7fc63089",
       "range": {
         "startLine": 96,
         "startChar": 33,
@@ -104,6 +146,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "126d8d60_901a2cb7",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-07T18:27:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c89a4d85_cf121c20",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 54
+      },
+      "revId": "07bc29d7e699343c61a1b8717ebd1b4daf93fb18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5b9fbec_db7e54f9",
@@ -117,6 +183,24 @@
       "writtenOn": "2022-07-07T14:40:04Z",
       "side": 1,
       "message": "ditto",
+      "revId": "07bc29d7e699343c61a1b8717ebd1b4daf93fb18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2600c35b_aed495ac",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-07T18:27:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5b9fbec_db7e54f9",
       "revId": "07bc29d7e699343c61a1b8717ebd1b4daf93fb18",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
