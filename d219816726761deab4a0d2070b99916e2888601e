@@ -51,6 +51,24 @@
       "parentUuid": "fc41352e_8540ea80",
       "revId": "d219816726761deab4a0d2070b99916e2888601e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27ee7699_976d7734",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-07T17:01:30Z",
+      "side": 1,
+      "message": "Okay, we can defer buffer and I/O accesses, however we need to ensure that these WIP codepaths are safe (no null-derefs, no crashes, etc), so these need tests.\n\nThe fuzzers will report backend failures (that passed validation) as bugs that need fixing, so just putting errors in the backend is likely to upset the fuzzers.\n\nOne other thing to consider is that the `DecomposeMemoryAccess` transform may be required for more backends, due to the WG decision to ensure that padding bytes are not touched in loads and stores.\n\nFor the above reasons, maybe we should error out as `not implemented yet` in the resolver for use of `f16` in the `storage` or `uniform` storage class, or in use as I/O. WDYT?",
+      "parentUuid": "b6c0115a_a13dd552",
+      "revId": "d219816726761deab4a0d2070b99916e2888601e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
