@@ -228,6 +228,30 @@
       },
       "revId": "be9a86923d88f2b4fbc938d1a3b3708a20043669",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08c50a76_445346b7",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-08T17:52:54Z",
+      "side": 1,
+      "message": "Correct to `Is\u003csem::F16\u003e(sem::Type::DeepestElementOf(store_ty))`, since `sem::Type::DeepestElementOf` may return `nullptr`.",
+      "parentUuid": "5f70b1e4_eb961ea1",
+      "range": {
+        "startLine": 1134,
+        "startChar": 8,
+        "endLine": 1145,
+        "endChar": 10
+      },
+      "revId": "be9a86923d88f2b4fbc938d1a3b3708a20043669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
