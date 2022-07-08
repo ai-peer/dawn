@@ -505,7 +505,10 @@ MaybeError Device::CopyFromStagingToTexture(const StagingBufferBase* source,
 
     SubresourceRange range = GetSubresourcesAffectedByCopy(*dst, copySizePixels);
 
-    if (IsCompleteSubresourceCopiedTo(texture, copySizePixels, dst->mipLevel)) {
+    if (IsToggleEnabled(Toggle::ForceInitializingDepthStencilTextureInCopy) &&
+        texture->GetFormat().HasDepthOrStencil()) {
+        texture->EnsureSubresourceContentInitialized(commandContext, range);
+    } else if (IsCompleteSubresourceCopiedTo(texture, copySizePixels, dst->mipLevel)) {
         texture->SetIsSubresourceContentInitialized(true, range);
     } else {
         texture->EnsureSubresourceContentInitialized(commandContext, range);
@@ -598,6 +601,12 @@ void Device::InitTogglesFromDriver() {
     if (gpu_info::IsIntelGen9(vendorId, deviceId)) {
         SetToggle(Toggle::UseTempBufferInSmallFormatTextureToTextureCopyFromGreaterToLessMipLevel,
                   true);
+    }
+
+    // Currently this workaround is only needed on Intel GPUs.
+    // See http://crbug.com/dawn/1487 for more information.
+    if (gpu_info::IsIntel(vendorId)) {
+        SetToggle(Toggle::ForceInitializingDepthStencilTextureInCopy, true);
     }
 
     // Currently this workaround is needed on any D3D12 backend for some particular situations.

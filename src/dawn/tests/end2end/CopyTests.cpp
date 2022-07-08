@@ -2551,3 +2551,157 @@ DAWN_INSTANTIATE_TEST(ClearBufferTests,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+// Regression tests to reproduce a flaky failure when running whole WebGPU CTS on Intel GPUs.
+// See crbug.com/dawn/1487 for more details.
+namespace {
+using TextureFormat = wgpu::TextureFormat;
+
+enum class InitializationMethod {
+    CopyBufferToTexture,
+    WriteTexture,
+    CopyTextureToTexture,
+};
+
+std::ostream& operator<<(std::ostream& o, InitializationMethod method) {
+    switch (method) {
+        case InitializationMethod::CopyBufferToTexture:
+            o << "CopyBufferToTexture";
+            break;
+        case InitializationMethod::WriteTexture:
+            o << "WriteTexture";
+            break;
+        case InitializationMethod::CopyTextureToTexture:
+            o << "CopyTextureToTexture";
+            break;
+        default:
+            UNREACHABLE();
+            break;
+    }
+
+    return o;
+}
+
+DAWN_TEST_PARAM_STRUCT(CopyToDepthStencilTextureAfterDestroyingBigBufferTestsParams,
+                       TextureFormat,
+                       InitializationMethod);
+
+}  // anonymous namespace
+
+class CopyToDepthStencilTextureAfterDestroyingBigBufferTests
+    : public DawnTestWithParams<CopyToDepthStencilTextureAfterDestroyingBigBufferTestsParams> {};
+
+TEST_P(CopyToDepthStencilTextureAfterDestroyingBigBufferTests, DoTest) {
+    wgpu::TextureFormat format = GetParam().mTextureFormat;
+
+    const uint32_t texelBlockSize = utils::GetTexelBlockSizeInBytes(format);
+    const uint32_t expectedDataSize = Align(texelBlockSize, 4u);
+
+    // First, create a big buffer and fill some gabage data on DEFAULT heap.
+    constexpr size_t kBigBufferSize = 160000u;
+    constexpr uint8_t kGarbageData = 127u;
+    std::array<uint8_t, kBigBufferSize> garbageData;
+    garbageData.fill(kGarbageData);
+
+    wgpu::Buffer bigBuffer =
+        utils::CreateBufferFromData(device, garbageData.data(), garbageData.size(),
+                                    wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
+    // Next, destroy the buffer. Its heap is still alive and contains the gabage data.
+    bigBuffer.Destroy();
+
+    // Ensure the underlying ID3D12Resource of bigBuffer is deleted by waiting for the completion of
+    // a uploadBuffer.MapAsync().
+    wgpu::BufferDescriptor bufferDescriptor = {};
+    bufferDescriptor.size = expectedDataSize;
+    bufferDescriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::MapWrite;
+    wgpu::Buffer uploadBuffer = device.CreateBuffer(&bufferDescriptor);
+    bool done = false;
+    uploadBuffer.MapAsync(
+        wgpu::MapMode::Write, 0, expectedDataSize,
+        [](WGPUBufferMapAsyncStatus status, void* userdata) {
+            ASSERT_EQ(WGPUBufferMapAsyncStatus_Success, status);
+            *static_cast<bool*>(userdata) = true;
+        },
+        &done);
+    while (!done) {
+        WaitABit();
+    }
+
+    // Then, create a small texture, which should be allocated on the heap that contains the
+    // garbage data.
+    wgpu::TextureDescriptor textureDescriptor = {};
+    textureDescriptor.format = format;
+    textureDescriptor.size = {1, 1, 1};
+    textureDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
+                              wgpu::TextureUsage::RenderAttachment;
+    wgpu::Texture texture = device.CreateTexture(&textureDescriptor);
+
+    // Finally, upload valid data into the texture and validate its contents.
+    std::vector<uint8_t> expectedData(expectedDataSize);
+    constexpr uint8_t kBaseValue = 204u;
+    for (uint32_t i = 0; i < texelBlockSize; ++i) {
+        expectedData[i] = static_cast<uint8_t>(i + kBaseValue);
+    }
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(texture);
+    wgpu::Extent3D copySize = {1, 1, 1};
+
+    switch (GetParam().mInitializationMethod) {
+        case InitializationMethod::CopyBufferToTexture: {
+            uint8_t* uploadData = static_cast<uint8_t*>(uploadBuffer.GetMappedRange());
+            memcpy(uploadData, expectedData.data(), expectedDataSize);
+            uploadBuffer.Unmap();
+
+            wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(uploadBuffer);
+            encoder.CopyBufferToTexture(&imageCopyBuffer, &imageCopyTexture, &copySize);
+            break;
+        }
+        case InitializationMethod::WriteTexture: {
+            wgpu::TextureDataLayout layout;
+            queue.WriteTexture(&imageCopyTexture, expectedData.data(), texelBlockSize, &layout,
+                               &copySize);
+            break;
+        }
+        case InitializationMethod::CopyTextureToTexture: {
+            uint8_t* uploadData = static_cast<uint8_t*>(uploadBuffer.GetMappedRange());
+            memcpy(uploadData, expectedData.data(), expectedDataSize);
+            uploadBuffer.Unmap();
+
+            wgpu::Texture anotherTexture = device.CreateTexture(&textureDescriptor);
+            wgpu::ImageCopyTexture anotherImageCopyTexture =
+                utils::CreateImageCopyTexture(anotherTexture);
+            wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(uploadBuffer);
+            encoder.CopyBufferToTexture(&imageCopyBuffer, &anotherImageCopyTexture, &copySize);
+
+            encoder.CopyTextureToTexture(&anotherImageCopyTexture, &imageCopyTexture, &copySize);
+            break;
+        }
+        default:
+            UNREACHABLE();
+            break;
+    }
+
+    wgpu::BufferDescriptor destinationBufferDescriptor = {};
+    destinationBufferDescriptor.size = expectedDataSize;
+    destinationBufferDescriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+    wgpu::Buffer destinationBuffer = device.CreateBuffer(&destinationBufferDescriptor);
+
+    wgpu::ImageCopyBuffer imageCopyDestinationBuffer =
+        utils::CreateImageCopyBuffer(destinationBuffer);
+    encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyDestinationBuffer, &copySize);
+
+    wgpu::CommandBuffer commandBuffer = encoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    EXPECT_BUFFER_U8_RANGE_EQ(expectedData.data(), destinationBuffer, 0, expectedDataSize);
+}
+
+DAWN_INSTANTIATE_TEST_P(CopyToDepthStencilTextureAfterDestroyingBigBufferTests,
+                        {D3D12Backend(),
+                         D3D12Backend({"force_initializing_depth_stencil_texture_in_copy"}),
+                         MetalBackend(), VulkanBackend()},
+                        {wgpu::TextureFormat::Depth16Unorm, wgpu::TextureFormat::Stencil8},
+                        {InitializationMethod::CopyBufferToTexture,
+                         InitializationMethod::WriteTexture,
+                         InitializationMethod::CopyTextureToTexture});

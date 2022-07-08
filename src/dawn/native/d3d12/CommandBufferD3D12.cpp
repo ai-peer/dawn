@@ -719,8 +719,11 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext
                 SubresourceRange subresources =
                     GetSubresourcesAffectedByCopy(copy->destination, copy->copySize);
 
-                if (IsCompleteSubresourceCopiedTo(texture, copy->copySize,
-                                                  copy->destination.mipLevel)) {
+                if (device->IsToggleEnabled(Toggle::ForceInitializingDepthStencilTextureInCopy) &&
+                    texture->GetFormat().HasDepthOrStencil()) {
+                    texture->EnsureSubresourceContentInitialized(commandContext, subresources);
+                } else if (IsCompleteSubresourceCopiedTo(texture, copy->copySize,
+                                                         copy->destination.mipLevel)) {
                     texture->SetIsSubresourceContentInitialized(true, subresources);
                 } else {
                     texture->EnsureSubresourceContentInitialized(commandContext, subresources);
@@ -779,8 +782,12 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext
                     GetSubresourcesAffectedByCopy(copy->destination, copy->copySize);
 
                 source->EnsureSubresourceContentInitialized(commandContext, srcRange);
-                if (IsCompleteSubresourceCopiedTo(destination, copy->copySize,
-                                                  copy->destination.mipLevel)) {
+
+                if (device->IsToggleEnabled(Toggle::ForceInitializingDepthStencilTextureInCopy) &&
+                    destination->GetFormat().HasDepthOrStencil()) {
+                    destination->EnsureSubresourceContentInitialized(commandContext, dstRange);
+                } else if (IsCompleteSubresourceCopiedTo(destination, copy->copySize,
+                                                         copy->destination.mipLevel)) {
                     destination->SetIsSubresourceContentInitialized(true, dstRange);
                 } else {
                     destination->EnsureSubresourceContentInitialized(commandContext, dstRange);
