@@ -33,6 +33,23 @@
       "message": "could you CC me (or us) on crbug.com/1338470 ?",
       "revId": "1304a463aa1187064e8694cc7378327c53fe943e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8a44b64_ee14e0ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-08T19:39:38Z",
+      "side": 1,
+      "message": "The D3D12 fence and resource passed into ExternalImageDXGI::Create are created by Chromium, right? So Dawn shouldn\u0027t be destroying them.\n\nWhich objects are owned by Dawn\u0027s d3d12::Device that are getting destroyed are touched by ExternalImageDXGI? is it D3D11on12ResourceCacheEntry::mDXGIKeyedMutex and D3D11on12ResourceCacheEntry::mD3D11on12Device ? ",
+      "revId": "1304a463aa1187064e8694cc7378327c53fe943e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
