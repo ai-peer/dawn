@@ -77,6 +77,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1207fef3_be35ecfb",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-07-08T00:58:27Z",
+      "side": 1,
+      "message": "IMHO, maybe better to apply this as the final step? I\u0027m thinking about a case like this:\nConfig the canvas as opaque --\u003e GetCurrentTexture() ---\u003e Calling CopyExternalImageToTexture with ExternalImage configured to premultipliedAlpha to true (and source canvas is true) and is from color space p3 ---\u003e GetCurrentTexture()\n\nI know it is Ok for current logic because it seems the ClearAlphaToOne step is excluded with all of other steps (Or we could ensure this). But from the execution order view, it seems the clear alpha channel should happens at the last step.",
+      "revId": "b475d8c6572e8a1ba1e8183acbb41c9f62c7f28c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81a3bf4e_f83aca5e",
         "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 1
