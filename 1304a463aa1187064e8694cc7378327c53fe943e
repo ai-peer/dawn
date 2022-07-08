@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "005142dd_7d1ced43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-07-08T22:56:00Z",
+      "side": 1,
+      "message": "\u003e As you mentioned in the other comment, we need to make sure it still works with multiple WGPUDevices. Perhaps what we need is for Chromium to store a map of WGPUDevice -\u003e ExternalImageDXGI. We would lose any performance benefit from not re-opening share handles for multiple WGPUDevices that are backed by the same D3D12 adapter, but I don\u0027t think that was the intent of this cache. The intent was more to improve multiple consecutive ProduceTexture on the same WGPUDevice.\n\nAgreed, I\u0027m pretty sure this only works accidentally today because we create all webgpu devices from the same D3D device (from ANGLE). Fixing this will require a Chromium side change first to use map\u003cWGPUDevice,ExternalImageDXGI\u003e before landing this CL.\n\n\u003e Alternatively, we could structure it so we get back multi-WGPUDevice performance in the future. Chromium has a map of WGPUAdapter -\u003e ExternalImageDXGI, and we continue passing WGPUDevice to ProduceTexture(...).\nRight now we still have multiple WGPUAdapters in the GPU process, but there\u0027s a plan to eventually have one WGPUAdapter per real hardware adapter which are shared across all WebGPU contexts.\n\nThis will require keeping a ref on ExternalImageDXGI (or its Contents/Resources) for each WGPUDevice that uses it via ProduceTexture?  Given that we don\u0027t understand the nature of these implicit dependencies, maybe it\u0027s best to bind ExternalImageDXGI to one WGPUDevice only?",
+      "parentUuid": "8f64f764_5ae0ce1e",
+      "revId": "1304a463aa1187064e8694cc7378327c53fe943e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e9f7d28_33d6aaf8",
         "filename": "src/dawn/native/d3d12/DeviceD3D12.h",
         "patchSetId": 2
@@ -136,6 +154,30 @@
       "writtenOn": "2022-07-08T22:29:08Z",
       "side": 1,
       "message": "using raw pointers here doesn\u0027t seem super safe.\n\nwhat if instead we have a vector\u003cRef\u003cExternalImageDXGIContents\u003e\u003e\nand ExternalImageDXGI also owns a Ref\u003cExternalImageDXGIContents\u003e.\n\nWe would move all the contents of ExternalImageDXGI into ExternalImageDXGIContents and give it a Destroy() method to release all the resources.\n\nLastly, instead of adding to the list inside the ExternalImageDXGI constructor, we should probably move ExternalImageDXGI::Create such that it\u0027s defined on the Device. So the Device becomes a factory for ExternalImageDXGI. (or, if we do the suggestion in the other thread, the Adapter becomes a factory for ExternalImageDXGI)",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 52
+      },
+      "revId": "1304a463aa1187064e8694cc7378327c53fe943e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00f0ccce_0a8f9dd2",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-07-08T22:56:00Z",
+      "side": 1,
+      "message": "AFAICT ExternalImageDXGI can unfortunately not expose Ref\u003c\u003e in its header (D3D12Backend.h) because RefBase/RefCounted.h is a Dawn internal API so we would end up having to put a raw pointer to ExternalImageDXGIContents and making Reference/Release calls manually which makes it similarly unsafe to the Add/RemoveExternalImageDXGI implementation in the current CL.\n\nbikeshed: I\u0027d prefer naming it ExternalImageDXGIResources instead of ExternalImageDXGIContents.",
+      "parentUuid": "2e9f7d28_33d6aaf8",
       "range": {
         "startLine": 278,
         "startChar": 0,
