@@ -50,6 +50,42 @@
       "message": "The D3D12 fence and resource passed into ExternalImageDXGI::Create are created by Chromium, right? So Dawn shouldn\u0027t be destroying them.\n\nWhich objects are owned by Dawn\u0027s d3d12::Device that are getting destroyed are touched by ExternalImageDXGI? is it D3D11on12ResourceCacheEntry::mDXGIKeyedMutex and D3D11on12ResourceCacheEntry::mD3D11on12Device ? ",
       "revId": "1304a463aa1187064e8694cc7378327c53fe943e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13e2f59c_6aba7ea2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-07-08T21:26:47Z",
+      "side": 1,
+      "message": "Done - cwallez@ was already on it",
+      "parentUuid": "c45a8bf6_4283ee1f",
+      "revId": "1304a463aa1187064e8694cc7378327c53fe943e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "246f876d_4a044c7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-07-08T21:26:47Z",
+      "side": 1,
+      "message": "\u003e The D3D12 fence and resource passed into ExternalImageDXGI::Create are created by Chromium, right? So Dawn shouldn\u0027t be destroying them.\n\nThe D3D12 fence and resource are created inside Dawn from shared handles passed from Chromium. Chromium doesn\u0027t know or care about these - the underlying resources are alive until the shared handle is kept alive by Chromium which this CL doesn\u0027t affect.\n\n\u003e Which objects are owned by Dawn\u0027s d3d12::Device that are getting destroyed are touched by ExternalImageDXGI? is it D3D11on12ResourceCacheEntry::mDXGIKeyedMutex and D3D11on12ResourceCacheEntry::mD3D11on12Device ?\n\nIn crbug.com/1338470, the crash is in D3D12Core!CLayeredObject\u003cCBackingCommandAllocator\u003e::CContainedObject::Release. It\u0027s unclear why we would trigger any code related to the command allocator - maybe it\u0027s a code deduplicated symbol?\n\nFor the fence CL that\u0027s blocked by this, I haven\u0027t been able to determine what\u0027s crashing despite debugging on the failing bot directly - the test crashes without a crash dump or error messages - the debug layer is also unhelpful since the bots run an older Win10 version and don\u0027t have the necessary optional packages installed. See example failure: https://chromium-swarm.appspot.com/task?id\u003d5bd51866dc31f711\n\nOn that same CL, there\u0027s another crash in a webcodecs test that implicates chrome!Microsoft::WRL::ComPtr\u003cID3D12Fence\u003e::InternalRelease: https://chromium-swarm.appspot.com/task?id\u003d5bd51d16022bc311\n\nFWIW I tried making the ExternalImageDXGI take a ref on the D3D12 backend Device, but that didn\u0027t fix this crash (from my CL) either - I suspect something in Device::DestroyImpl releases resources that are needed when releasing the D3D12 fence or resource later in ~ExternalImageDXGI - maybe the command list? This CL fixes the crash however.",
+      "parentUuid": "e8a44b64_ee14e0ad",
+      "revId": "1304a463aa1187064e8694cc7378327c53fe943e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
