@@ -16,6 +16,52 @@
       "message": "Please take a look, thanks",
       "revId": "663e4fcd830d7ab38c17c769e99700ee0b7a52a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42896e54_a4b6902f",
+        "filename": "src/tint/resolver/storage_class_validation_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-08T17:01:26Z",
+      "side": 1,
+      "message": "Please remove unused `Source`s.",
+      "range": {
+        "startLine": 202,
+        "startChar": 14,
+        "endLine": 202,
+        "endChar": 32
+      },
+      "revId": "663e4fcd830d7ab38c17c769e99700ee0b7a52a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0547f6fb_b1cdf556",
+        "filename": "src/tint/resolver/storage_class_validation_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-08T17:01:26Z",
+      "side": 1,
+      "message": "Please remove unused `Source`s.",
+      "range": {
+        "startLine": 224,
+        "startChar": 14,
+        "endLine": 224,
+        "endChar": 31
+      },
+      "revId": "663e4fcd830d7ab38c17c769e99700ee0b7a52a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
