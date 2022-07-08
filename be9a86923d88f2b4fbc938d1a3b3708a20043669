@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9df8e50_4dff30a7",
+        "filename": "src/tint/resolver/storage_class_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-08T16:43:11Z",
+      "side": 1,
+      "message": "Done. The f16 errors of `uniform` and `storage` storage class are generated on types rather than variable declaration, so I move the `Source` to type nodes.",
+      "parentUuid": "f6695415_e0613198",
+      "range": {
+        "startLine": 128,
+        "startChar": 14,
+        "endLine": 128,
+        "endChar": 30
+      },
+      "revId": "be9a86923d88f2b4fbc938d1a3b3708a20043669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c969c30e_b1589e94",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-07-08T10:52:55Z",
       "side": 1,
       "message": "Ditto",
+      "range": {
+        "startLine": 413,
+        "startChar": 14,
+        "endLine": 413,
+        "endChar": 30
+      },
+      "revId": "be9a86923d88f2b4fbc938d1a3b3708a20043669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15bf9cc9_b03b497b",
+        "filename": "src/tint/resolver/storage_class_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-08T16:43:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c969c30e_b1589e94",
       "range": {
         "startLine": 413,
         "startChar": 14,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6652d0d0_dc70d1b1",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-08T16:43:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a21468e9_27f15438",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 409,
+        "endChar": 6
+      },
+      "revId": "be9a86923d88f2b4fbc938d1a3b3708a20043669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80e9fa36_7cd05a50",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-07-08T10:52:55Z",
       "side": 1,
       "message": "Can be reduced to:\n\n```\nbool is_element_f16 \u003d Is\u003csem::F16\u003e(sem::Type::ElementOf(ty));\n```\n\nThis will also return true for arrays of `f16`, but that should be caught elsewhere as arrays are not allowed as part of IO.\n\nNote: the shadowing of `store_ty` is causing Kokoro to fail.",
+      "range": {
+        "startLine": 1134,
+        "startChar": 8,
+        "endLine": 1145,
+        "endChar": 10
+      },
+      "revId": "be9a86923d88f2b4fbc938d1a3b3708a20043669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5356992_ad2dc407",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-08T16:43:11Z",
+      "side": 1,
+      "message": "Done, I am using `sem::Type::DeepestElementOf(ty)-\u003eIs\u003csem::F16\u003e()`",
+      "parentUuid": "80e9fa36_7cd05a50",
       "range": {
         "startLine": 1134,
         "startChar": 8,
