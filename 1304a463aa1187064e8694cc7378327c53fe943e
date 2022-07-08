@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "05855556_91b4d971",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-08T23:05:48Z",
+      "side": 1,
+      "message": "sounds good to just use a single WGPUDevice for simplicity",
+      "parentUuid": "005142dd_7d1ced43",
+      "revId": "1304a463aa1187064e8694cc7378327c53fe943e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e9f7d28_33d6aaf8",
         "filename": "src/dawn/native/d3d12/DeviceD3D12.h",
         "patchSetId": 2
@@ -178,6 +196,30 @@
       "side": 1,
       "message": "AFAICT ExternalImageDXGI can unfortunately not expose Ref\u003c\u003e in its header (D3D12Backend.h) because RefBase/RefCounted.h is a Dawn internal API so we would end up having to put a raw pointer to ExternalImageDXGIContents and making Reference/Release calls manually which makes it similarly unsafe to the Add/RemoveExternalImageDXGI implementation in the current CL.\n\nbikeshed: I\u0027d prefer naming it ExternalImageDXGIResources instead of ExternalImageDXGIContents.",
       "parentUuid": "2e9f7d28_33d6aaf8",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 52
+      },
+      "revId": "1304a463aa1187064e8694cc7378327c53fe943e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c527e98_ccde219d",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-08T23:05:48Z",
+      "side": 1,
+      "message": "Hm, I still think it would be better since it would be a single release call in the destructor (constructor implicitly is refcount \u003d 1).\n\nDeviceD3D12 can use Ref\u003c\u003e which makes the vector of pointers much safer to use.",
+      "parentUuid": "00f0ccce_0a8f9dd2",
       "range": {
         "startLine": 278,
         "startChar": 0,
