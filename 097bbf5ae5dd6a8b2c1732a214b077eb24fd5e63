@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afcf521f_b5927331",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-08T17:07:56Z",
+      "side": 1,
+      "message": "Thanks for reviewing, I am going to auto-submit the patch",
+      "revId": "097bbf5ae5dd6a8b2c1732a214b077eb24fd5e63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
