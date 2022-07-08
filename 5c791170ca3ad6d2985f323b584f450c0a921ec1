@@ -99,6 +99,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93e299a9_7f93e77f",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-08T20:10:49Z",
+      "side": 1,
+      "message": "Done. this-\u003e can be removed.",
+      "parentUuid": "08921c8f_c461bd3c",
+      "range": {
+        "startLine": 112,
+        "startChar": 48,
+        "endLine": 112,
+        "endChar": 54
+      },
+      "revId": "5c791170ca3ad6d2985f323b584f450c0a921ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72073194_d6e3d1c7",
@@ -116,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b33ff85c_d8cb930f",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-08T20:10:49Z",
+      "side": 1,
+      "message": "Done. It is unnecessary at all. The verification part should be the same.",
+      "parentUuid": "72073194_d6e3d1c7",
+      "revId": "5c791170ca3ad6d2985f323b584f450c0a921ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10ac6483_ca3ed2b9",
@@ -129,6 +171,30 @@
       "writtenOn": "2022-07-08T16:48:31Z",
       "side": 1,
       "message": "nit: just \"or layers\" since the test always uses 2D array textures",
+      "range": {
+        "startLine": 133,
+        "startChar": 81,
+        "endLine": 134,
+        "endChar": 17
+      },
+      "revId": "5c791170ca3ad6d2985f323b584f450c0a921ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e99b4a2_6dbfe560",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-08T20:10:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10ac6483_ca3ed2b9",
       "range": {
         "startLine": 133,
         "startChar": 81,
@@ -162,6 +228,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97eb1dc4_87e19eb9",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-08T20:10:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21d3eee6_4bfb3185",
+      "range": {
+        "startLine": 147,
+        "startChar": 60,
+        "endLine": 147,
+        "endChar": 71
+      },
+      "revId": "5c791170ca3ad6d2985f323b584f450c0a921ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f343fc33_2bc15364",
@@ -175,6 +265,30 @@
       "writtenOn": "2022-07-08T16:48:31Z",
       "side": 1,
       "message": "nit: EXPECT_BUFFER_* returns a `std::ostringstream\u0026`. If you return that from DoTest, we can have the test results be more readable:\n\n`DoTest(...) \u003c\u003c \"texNum: \" \u003c\u003c texNum \u003c\u003c \", layer: \" \u003c\u003c depthOrArrayLayerCount;`\n\nwould be easier to tell which texture/layer is incorrect instead of parsing what the expected copyValue is",
+      "range": {
+        "startLine": 151,
+        "startChar": 12,
+        "endLine": 151,
+        "endChar": 18
+      },
+      "revId": "5c791170ca3ad6d2985f323b584f450c0a921ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "121ecf17_c141a9cf",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-08T20:10:49Z",
+      "side": 1,
+      "message": "Done. Good point!",
+      "parentUuid": "f343fc33_2bc15364",
       "range": {
         "startLine": 151,
         "startChar": 12,
