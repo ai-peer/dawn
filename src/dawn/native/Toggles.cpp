@@ -268,6 +268,12 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "Enables usage of the blob cache (backed by the platform cache if set/passed). Necessary for "
       "any persistent caching capabilities, i.e. pipeline caching.",
       "https://crbug.com/dawn/549"}},
+    {Toggle::ForceInitializingDepthStencilTextureInCopy,
+     {"force_initializing_depth_stencil_texture_in_copy",
+      "Always initializing the depth stencil texture in copy commands instead of skipping the "
+      "initialization when the entire subresource is the copy destination as a workaround on Intel "
+      "D3D12 drivers.",
+      "https://crbug.com/dawn/1487"}},
     // Comment to separate the }} so it is clearer what to copy-paste to add a toggle.
 }};
 }  // anonymous namespace

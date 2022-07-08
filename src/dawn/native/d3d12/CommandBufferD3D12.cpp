@@ -777,8 +777,8 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext
                     GetSubresourcesAffectedByCopy(copy->source, copy->copySize);
                 SubresourceRange dstRange =
                     GetSubresourcesAffectedByCopy(copy->destination, copy->copySize);
-
                 source->EnsureSubresourceContentInitialized(commandContext, srcRange);
+
                 if (IsCompleteSubresourceCopiedTo(destination, copy->copySize,
                                                   copy->destination.mipLevel)) {
                     destination->SetIsSubresourceContentInitialized(true, dstRange);
