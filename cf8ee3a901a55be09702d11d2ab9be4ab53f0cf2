@@ -33,6 +33,24 @@
       "message": "Oops, I thought I had already LGTMed this.",
       "revId": "cf8ee3a901a55be09702d11d2ab9be4ab53f0cf2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74177350_5fb53b57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-08T20:34:22Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "13e445cd_bf318871",
+      "revId": "cf8ee3a901a55be09702d11d2ab9be4ab53f0cf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
