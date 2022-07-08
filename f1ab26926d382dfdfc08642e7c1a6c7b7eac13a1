@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cbb02307_80806a02",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-08T09:48:25Z",
+      "side": 1,
+      "message": "Uuuh ok makes sense to not do it in this CL then since it is much bigger than expected. Feel free to always suggest doing as a follow-up (or opening a bug and adding a TODO) for changes that grow the scope of a CL a lot like this.\n\nRight now the CL has a partial fix for this comment but not complete. Do you think you could split them off so they can form an atomic update in the future instead of being partially bundled here? What I find works well to split of changes in git is to do:\n\n  git checkout -p HEAD  \u003cselect the chunks to remove\u003e\n  git commit -m \"removed changes\"\n  git revert HEAD \u003cre-apply the changes\u003e\n  git rebase -i \u003cmerge the first two commits and rename the last one to be the change you want to do\u003e",
+      "parentUuid": "8d9b696e_ff5f0ad4",
+      "revId": "f1ab26926d382dfdfc08642e7c1a6c7b7eac13a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e2bffec_30a25a18",
         "filename": "src/dawn/native/CMakeLists.txt",
         "patchSetId": 9
