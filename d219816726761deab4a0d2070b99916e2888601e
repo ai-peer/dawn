@@ -87,6 +87,41 @@
       "parentUuid": "27ee7699_976d7734",
       "revId": "d219816726761deab4a0d2070b99916e2888601e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "593ed4da_02e26fdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-08T19:47:25Z",
+      "side": 1,
+      "message": "After the resolver patch landed (https://dawn-review.googlesource.com/c/dawn/+/95827), would this patch be proper to merge now?",
+      "parentUuid": "4d1a0f0a_43a9d985",
+      "revId": "d219816726761deab4a0d2070b99916e2888601e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "975047f5_e9655058",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-08T19:47:25Z",
+      "side": 1,
+      "message": "Please take a look, thanks",
+      "revId": "d219816726761deab4a0d2070b99916e2888601e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
