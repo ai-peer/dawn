@@ -69,6 +69,24 @@
       "parentUuid": "b6c0115a_a13dd552",
       "revId": "d219816726761deab4a0d2070b99916e2888601e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d1a0f0a_43a9d985",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-08T01:39:48Z",
+      "side": 1,
+      "message": "Yes, I think that would be a safe path. I will do the validation in resolver now.",
+      "parentUuid": "27ee7699_976d7734",
+      "revId": "d219816726761deab4a0d2070b99916e2888601e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
