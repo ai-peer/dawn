@@ -1023,9 +1023,11 @@ void CommandEncoder::APICopyBufferToBuffer(BufferBase* source,
                                  "validating destination %s copy size.", destination);
                 DAWN_TRY(ValidateB2BCopyAlignment(size, sourceOffset, destinationOffset));
 
-                DAWN_TRY_CONTEXT(ValidateCanUseAs(source, wgpu::BufferUsage::CopySrc),
+                DAWN_TRY_CONTEXT(ValidateCanUseAs(source, wgpu::BufferUsage::CopySrc,
+                                                  UsageValidationMode::Default),
                                  "validating source %s usage.", source);
-                DAWN_TRY_CONTEXT(ValidateCanUseAs(destination, wgpu::BufferUsage::CopyDst),
+                DAWN_TRY_CONTEXT(ValidateCanUseAs(destination, wgpu::BufferUsage::CopyDst,
+                                                  UsageValidationMode::Default),
                                  "validating destination %s usage.", destination);
 
                 mTopLevelBuffers.insert(source);
@@ -1054,7 +1056,8 @@ void CommandEncoder::APICopyBufferToTexture(const ImageCopyBuffer* source,
         [&](CommandAllocator* allocator) -> MaybeError {
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(ValidateImageCopyBuffer(GetDevice(), *source));
-                DAWN_TRY_CONTEXT(ValidateCanUseAs(source->buffer, wgpu::BufferUsage::CopySrc),
+                DAWN_TRY_CONTEXT(ValidateCanUseAs(source->buffer, wgpu::BufferUsage::CopySrc,
+                                                  mUsageValidationMode),
                                  "validating source %s usage.", source->buffer);
 
                 DAWN_TRY(ValidateImageCopyTexture(GetDevice(), *destination, *copySize));
@@ -1120,7 +1123,8 @@ void CommandEncoder::APICopyTextureToBuffer(const ImageCopyTexture* source,
                 DAWN_TRY(ValidateTextureDepthStencilToBufferCopyRestrictions(*source));
 
                 DAWN_TRY(ValidateImageCopyBuffer(GetDevice(), *destination));
-                DAWN_TRY_CONTEXT(ValidateCanUseAs(destination->buffer, wgpu::BufferUsage::CopyDst),
+                DAWN_TRY_CONTEXT(ValidateCanUseAs(destination->buffer, wgpu::BufferUsage::CopyDst,
+                                                  mUsageValidationMode),
                                  "validating destination %s usage.", destination->buffer);
 
                 // We validate texture copy range before validating linear texture data,
@@ -1258,7 +1262,8 @@ void CommandEncoder::APIClearBuffer(BufferBase* buffer, uint64_t offset, uint64_
                                     offset, size, bufferSize, buffer);
                 }
 
-                DAWN_TRY_CONTEXT(ValidateCanUseAs(buffer, wgpu::BufferUsage::CopyDst),
+                DAWN_TRY_CONTEXT(ValidateCanUseAs(buffer, wgpu::BufferUsage::CopyDst,
+                                                  UsageValidationMode::Default),
                                  "validating buffer %s usage.", buffer);
 
                 // Size must be a multiple of 4 bytes on macOS.
@@ -1360,7 +1365,8 @@ void CommandEncoder::APIResolveQuerySet(QuerySetBase* querySet,
                 DAWN_TRY(ValidateQuerySetResolve(querySet, firstQuery, queryCount, destination,
                                                  destinationOffset));
 
-                DAWN_TRY(ValidateCanUseAs(destination, wgpu::BufferUsage::QueryResolve));
+                DAWN_TRY(ValidateCanUseAs(destination, wgpu::BufferUsage::QueryResolve,
+                                          UsageValidationMode::Default));
 
                 TrackUsedQuerySet(querySet);
                 mTopLevelBuffers.insert(destination);

@@ -222,6 +222,11 @@ wgpu::BufferUsage BufferBase::GetUsageExternalOnly() const {
     return GetUsage() & ~kAllInternalBufferUsages;
 }
 
+wgpu::BufferUsage BufferBase::GetUsageInternalOnly() const {
+    ASSERT(!IsError());
+    return GetUsage() & kAllInternalBufferUsages;
+}
+
 wgpu::BufferUsage BufferBase::APIGetUsage() const {
     return mUsage & ~kAllInternalBufferUsages;
 }

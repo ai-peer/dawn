@@ -56,10 +56,12 @@ class BufferBase : public ApiObjectBase {
     uint64_t GetAllocatedSize() const;
 
     // |GetUsageExternalOnly| returns the usage with which the buffer was created using the
-    // base WebGPU API. Additional usages may be added for internal state tracking. |GetUsage|
-    // returns the union of base usage and the usages added internally.
+    // base WebGPU API.
+    // |GetUsageInternalOnly| returns additional usages added for internal state tracking.
+    // |GetUsage| returns the union of base usage and the usages added internally.
     wgpu::BufferUsage GetUsage() const;
     wgpu::BufferUsage GetUsageExternalOnly() const;
+    wgpu::BufferUsage GetUsageInternalOnly() const;
 
     MaybeError MapAtCreation();
     void OnMapRequestCompleted(MapRequestID mapID, WGPUBufferMapAsyncStatus status);

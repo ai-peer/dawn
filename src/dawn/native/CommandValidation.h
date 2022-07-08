@@ -90,7 +90,9 @@ enum class UsageValidationMode {
 MaybeError ValidateCanUseAs(const TextureBase* texture,
                             wgpu::TextureUsage usage,
                             UsageValidationMode mode);
-MaybeError ValidateCanUseAs(const BufferBase* buffer, wgpu::BufferUsage usage);
+MaybeError ValidateCanUseAs(const BufferBase* buffer,
+                            wgpu::BufferUsage usage,
+                            UsageValidationMode mode);
 
 }  // namespace dawn::native
 
