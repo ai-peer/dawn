@@ -86,6 +86,23 @@
       "parentUuid": "e8a44b64_ee14e0ad",
       "revId": "1304a463aa1187064e8694cc7378327c53fe943e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49598b4d_1f62c709",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-07-08T21:34:29Z",
+      "side": 1,
+      "message": "It seems test failures are because we\u0027re reusing the same ExternalImageDXGI across multiple WGPUDevice instances - trying to confirm that.",
+      "revId": "1304a463aa1187064e8694cc7378327c53fe943e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
