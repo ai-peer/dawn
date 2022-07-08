@@ -20,6 +20,7 @@
 #include <utility>
 
 #include "dawn/common/GPUInfo.h"
+#include "dawn/native/D3D12Backend.h"
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/d3d12/AdapterD3D12.h"
@@ -532,6 +533,17 @@ ResultOrError<ResourceHeapAllocation> Device::AllocateMemory(
     return mResourceAllocatorManager->AllocateMemory(heapType, resourceDescriptor, initialUsage);
 }
 
+void Device::AddExternalImageDXGI(ExternalImageDXGI* externalImage) {
+    mExternalImages.push_back(externalImage);
+}
+
+void Device::RemoveExternalImageDXGI(ExternalImageDXGI* externalImage) {
+    auto it = std::find(mExternalImages.begin(), mExternalImages.end(), externalImage);
+    if (it != mExternalImages.end()) {
+        mExternalImages.erase(it);
+    }
+}
+
 Ref<TextureBase> Device::CreateD3D12ExternalTexture(
     const TextureDescriptor* descriptor,
     ComPtr<ID3D12Resource> d3d12Texture,
@@ -705,6 +717,13 @@ void Device::AppendDebugLayerMessages(ErrorData* error) {
 
 void Device::DestroyImpl() {
     ASSERT(GetState() == State::Disconnected);
+
+    // ExternalImageDXGI::Destroy() calls RemoveExternalImage() which mutates |mExternalImages|.
+    std::vector<ExternalImageDXGI*> externalImages;
+    externalImages.swap(mExternalImages);
+    for (ExternalImageDXGI* externalImage : externalImages) {
+        externalImage->Destroy();
+    }
 
     mZeroBuffer = nullptr;
 
