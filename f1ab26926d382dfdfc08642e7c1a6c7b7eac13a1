@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f69997f4_c3a00cb2",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-07-08T17:10:08Z",
+      "side": 1,
+      "message": "Done. Thanks for the git tip!",
+      "parentUuid": "cbb02307_80806a02",
+      "revId": "f1ab26926d382dfdfc08642e7c1a6c7b7eac13a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e2bffec_30a25a18",
