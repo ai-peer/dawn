@@ -53,10 +53,12 @@ WGPUTextureFormat GetNativeSwapChainPreferredFormat(const DawnSwapChainImplement
 ExternalImageDescriptorDXGISharedHandle::ExternalImageDescriptorDXGISharedHandle()
     : ExternalImageDescriptor(ExternalImageType::DXGISharedHandle) {}
 
-ExternalImageDXGI::ExternalImageDXGI(ComPtr<ID3D12Resource> d3d12Resource,
+ExternalImageDXGI::ExternalImageDXGI(Device* backendDevice,
+                                     ComPtr<ID3D12Resource> d3d12Resource,
                                      ComPtr<ID3D12Fence> d3d12Fence,
                                      const WGPUTextureDescriptor* descriptor)
-    : mD3D12Resource(std::move(d3d12Resource)),
+    : mBackendDevice(backendDevice),
+      mD3D12Resource(std::move(d3d12Resource)),
       mD3D12Fence(std::move(d3d12Fence)),
       mUsage(descriptor->usage),
       mDimension(descriptor->dimension),
@@ -64,8 +66,10 @@ ExternalImageDXGI::ExternalImageDXGI(ComPtr<ID3D12Resource> d3d12Resource,
       mFormat(descriptor->format),
       mMipLevelCount(descriptor->mipLevelCount),
       mSampleCount(descriptor->sampleCount) {
+    ASSERT(mBackendDevice != nullptr);
     ASSERT(!descriptor->nextInChain ||
            descriptor->nextInChain->sType == WGPUSType_DawnTextureInternalUsageDescriptor);
+    mBackendDevice->AddExternalImageDXGI(this);
     if (descriptor->nextInChain) {
         mUsageInternal =
             reinterpret_cast<const WGPUDawnTextureInternalUsageDescriptor*>(descriptor->nextInChain)
@@ -74,12 +78,39 @@ ExternalImageDXGI::ExternalImageDXGI(ComPtr<ID3D12Resource> d3d12Resource,
     mD3D11on12ResourceCache = std::make_unique<D3D11on12ResourceCache>();
 }
 
-ExternalImageDXGI::~ExternalImageDXGI() = default;
+ExternalImageDXGI::~ExternalImageDXGI() {
+    Destroy();
+}
+
+void ExternalImageDXGI::Destroy() {
+    if (mBackendDevice != nullptr) {
+        mD3D11on12ResourceCache.reset();
+        mD3D12Fence.Reset();
+        mD3D12Resource.Reset();
+        mBackendDevice->RemoveExternalImageDXGI(this);
+        mBackendDevice = nullptr;
+    }
+}
+
+WGPUDevice ExternalImageDXGI::GetDevice() const {
+    if (mBackendDevice != nullptr) {
+        return ToAPI(mBackendDevice);
+    }
+    return nullptr;
+}
 
 WGPUTexture ExternalImageDXGI::ProduceTexture(
     WGPUDevice device,
     const ExternalImageAccessDescriptorDXGISharedHandle* descriptor) {
-    Device* backendDevice = ToBackend(FromAPI(device));
+    return ProduceTexture(descriptor);
+}
+
+WGPUTexture ExternalImageDXGI::ProduceTexture(
+    const ExternalImageAccessDescriptorDXGISharedHandle* descriptor) {
+    if (mBackendDevice == nullptr) {
+        dawn::ErrorLog() << "Cannot produce texture from extern image after device destruction";
+        return nullptr;
+    }
 
     // Ensure the texture usage is allowed
     if (!IsSubset(descriptor->usage, mUsage)) {
@@ -104,15 +135,15 @@ WGPUTexture ExternalImageDXGI::ProduceTexture(
 
     Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource;
     if (!mD3D12Fence) {
-        d3d11on12Resource =
-            mD3D11on12ResourceCache->GetOrCreateD3D11on12Resource(device, mD3D12Resource.Get());
+        d3d11on12Resource = mD3D11on12ResourceCache->GetOrCreateD3D11on12Resource(
+            mBackendDevice, mD3D12Resource.Get());
         if (d3d11on12Resource == nullptr) {
             dawn::ErrorLog() << "Unable to create 11on12 resource for external image";
             return nullptr;
         }
     }
 
-    Ref<TextureBase> texture = backendDevice->CreateD3D12ExternalTexture(
+    Ref<TextureBase> texture = mBackendDevice->CreateD3D12ExternalTexture(
         &textureDescriptor, mD3D12Resource, mD3D12Fence, std::move(d3d11on12Resource),
         descriptor->fenceWaitValue, descriptor->fenceSignalValue, descriptor->isSwapChainTexture,
         descriptor->isInitialized);
@@ -173,8 +204,9 @@ std::unique_ptr<ExternalImageDXGI> ExternalImageDXGI::Create(
         }
     }
 
-    std::unique_ptr<ExternalImageDXGI> result(new ExternalImageDXGI(
-        std::move(d3d12Resource), std::move(d3d12Fence), descriptor->cTextureDescriptor));
+    std::unique_ptr<ExternalImageDXGI> result(
+        new ExternalImageDXGI(backendDevice, std::move(d3d12Resource), std::move(d3d12Fence),
+                              descriptor->cTextureDescriptor));
     return result;
 }
 
