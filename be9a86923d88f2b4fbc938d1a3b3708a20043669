@@ -16,6 +16,98 @@
       "message": "Please take a look, thanks",
       "revId": "be9a86923d88f2b4fbc938d1a3b3708a20043669",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6695415_e0613198",
+        "filename": "src/tint/resolver/storage_class_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-08T10:52:55Z",
+      "side": 1,
+      "message": "We usually only provide a `Source` if it is going to be used in a diagnostic.\nIt doesn\u0027t seem to be used in the errors below - a possible bug?",
+      "range": {
+        "startLine": 128,
+        "startChar": 14,
+        "endLine": 128,
+        "endChar": 30
+      },
+      "revId": "be9a86923d88f2b4fbc938d1a3b3708a20043669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c969c30e_b1589e94",
+        "filename": "src/tint/resolver/storage_class_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-08T10:52:55Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 413,
+        "startChar": 14,
+        "endLine": 413,
+        "endChar": 30
+      },
+      "revId": "be9a86923d88f2b4fbc938d1a3b3708a20043669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a21468e9_27f15438",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-08T10:52:55Z",
+      "side": 1,
+      "message": "See below.",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 409,
+        "endChar": 6
+      },
+      "revId": "be9a86923d88f2b4fbc938d1a3b3708a20043669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80e9fa36_7cd05a50",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-08T10:52:55Z",
+      "side": 1,
+      "message": "Can be reduced to:\n\n```\nbool is_element_f16 \u003d Is\u003csem::F16\u003e(sem::Type::ElementOf(ty));\n```\n\nThis will also return true for arrays of `f16`, but that should be caught elsewhere as arrays are not allowed as part of IO.\n\nNote: the shadowing of `store_ty` is causing Kokoro to fail.",
+      "range": {
+        "startLine": 1134,
+        "startChar": 8,
+        "endLine": 1145,
+        "endChar": 10
+      },
+      "revId": "be9a86923d88f2b4fbc938d1a3b3708a20043669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
