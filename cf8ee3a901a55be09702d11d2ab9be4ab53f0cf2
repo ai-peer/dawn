@@ -16,6 +16,23 @@
       "message": "loko, ping!",
       "revId": "cf8ee3a901a55be09702d11d2ab9be4ab53f0cf2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13e445cd_bf318871",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-07-08T20:28:57Z",
+      "side": 1,
+      "message": "Oops, I thought I had already LGTMed this.",
+      "revId": "cf8ee3a901a55be09702d11d2ab9be4ab53f0cf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
