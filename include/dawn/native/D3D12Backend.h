@@ -31,6 +31,8 @@ struct ID3D12Resource;
 namespace dawn::native::d3d12 {
 
 class D3D11on12ResourceCache;
+class Device;
+class ExternalImageResourcesD3D12;
 
 DAWN_NATIVE_EXPORT Microsoft::WRL::ComPtr<ID3D12Device> GetD3D12Device(WGPUDevice device);
 DAWN_NATIVE_EXPORT DawnSwapChainImplementation CreateNativeSwapChainImpl(WGPUDevice device,
@@ -95,21 +97,23 @@ class DAWN_NATIVE_EXPORT ExternalImageDXGI {
   public:
     ~ExternalImageDXGI();
 
-    // Note: SharedHandle must be a handle to a texture object.
     static std::unique_ptr<ExternalImageDXGI> Create(
         WGPUDevice device,
         const ExternalImageDescriptorDXGISharedHandle* descriptor);
 
+    // TODO(sunnyps): |device| is ignored - remove after Chromium migrates to single parameter call.
     WGPUTexture ProduceTexture(WGPUDevice device,
                                const ExternalImageAccessDescriptorDXGISharedHandle* descriptor);
 
+    WGPUTexture ProduceTexture(const ExternalImageAccessDescriptorDXGISharedHandle* descriptor);
+
   private:
-    ExternalImageDXGI(Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource,
-                      Microsoft::WRL::ComPtr<ID3D12Fence> d3d12Fence,
+    ExternalImageDXGI(ExternalImageResourcesD3D12* resources,
                       const WGPUTextureDescriptor* descriptor);
 
-    Microsoft::WRL::ComPtr<ID3D12Resource> mD3D12Resource;
-    Microsoft::WRL::ComPtr<ID3D12Fence> mD3D12Fence;
+    // ExternalImageResourcesD3D12 is ref-counted and we hold a reference to it, but we can't expose
+    // Dawn internal Ref<T> in a public header so we store a raw pointer here instead.
+    ExternalImageResourcesD3D12* mResources;
 
     // Contents of WGPUTextureDescriptor are stored individually since the descriptor
     // could outlive this image.
@@ -120,8 +124,6 @@ class DAWN_NATIVE_EXPORT ExternalImageDXGI {
     WGPUTextureFormat mFormat;
     uint32_t mMipLevelCount;
     uint32_t mSampleCount;
-
-    std::unique_ptr<D3D11on12ResourceCache> mD3D11on12ResourceCache;
 };
 
 struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptions : public AdapterDiscoveryOptionsBase {

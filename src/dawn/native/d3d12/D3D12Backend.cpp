@@ -25,6 +25,7 @@
 #include "dawn/common/SwapChainUtils.h"
 #include "dawn/native/d3d12/D3D11on12Util.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
+#include "dawn/native/d3d12/ExternalImageResourcesD3D12.h"
 #include "dawn/native/d3d12/NativeSwapChainImplD3D12.h"
 #include "dawn/native/d3d12/ResidencyManagerD3D12.h"
 #include "dawn/native/d3d12/TextureD3D12.h"
@@ -53,17 +54,16 @@ WGPUTextureFormat GetNativeSwapChainPreferredFormat(const DawnSwapChainImplement
 ExternalImageDescriptorDXGISharedHandle::ExternalImageDescriptorDXGISharedHandle()
     : ExternalImageDescriptor(ExternalImageType::DXGISharedHandle) {}
 
-ExternalImageDXGI::ExternalImageDXGI(ComPtr<ID3D12Resource> d3d12Resource,
-                                     ComPtr<ID3D12Fence> d3d12Fence,
+ExternalImageDXGI::ExternalImageDXGI(ExternalImageResourcesD3D12* resources,
                                      const WGPUTextureDescriptor* descriptor)
-    : mD3D12Resource(std::move(d3d12Resource)),
-      mD3D12Fence(std::move(d3d12Fence)),
+    : mResources(resources),
       mUsage(descriptor->usage),
       mDimension(descriptor->dimension),
       mSize(descriptor->size),
       mFormat(descriptor->format),
       mMipLevelCount(descriptor->mipLevelCount),
       mSampleCount(descriptor->sampleCount) {
+    ASSERT(mResources != nullptr);
     ASSERT(!descriptor->nextInChain ||
            descriptor->nextInChain->sType == WGPUSType_DawnTextureInternalUsageDescriptor);
     if (descriptor->nextInChain) {
@@ -71,15 +71,25 @@ ExternalImageDXGI::ExternalImageDXGI(ComPtr<ID3D12Resource> d3d12Resource,
             reinterpret_cast<const WGPUDawnTextureInternalUsageDescriptor*>(descriptor->nextInChain)
                 ->internalUsage;
     }
-    mD3D11on12ResourceCache = std::make_unique<D3D11on12ResourceCache>();
 }
 
-ExternalImageDXGI::~ExternalImageDXGI() = default;
+ExternalImageDXGI::~ExternalImageDXGI() {
+    AcquireRef(mResources)->Destroy();
+}
 
 WGPUTexture ExternalImageDXGI::ProduceTexture(
     WGPUDevice device,
     const ExternalImageAccessDescriptorDXGISharedHandle* descriptor) {
-    Device* backendDevice = ToBackend(FromAPI(device));
+    return ProduceTexture(descriptor);
+}
+
+WGPUTexture ExternalImageDXGI::ProduceTexture(
+    const ExternalImageAccessDescriptorDXGISharedHandle* descriptor) {
+    Device* backendDevice = mResources->GetBackendDevice();
+    if (backendDevice == nullptr) {
+        dawn::ErrorLog() << "Cannot produce texture from external image after device destruction";
+        return nullptr;
+    }
 
     // Ensure the texture usage is allowed
     if (!IsSubset(descriptor->usage, mUsage)) {
@@ -102,10 +112,13 @@ WGPUTexture ExternalImageDXGI::ProduceTexture(
         internalDesc.sType = wgpu::SType::DawnTextureInternalUsageDescriptor;
     }
 
+    ComPtr<ID3D12Resource> d3d12Resource = mResources->GetD3D12Resource();
+    ComPtr<ID3D12Fence> d3d12Fence = mResources->GetD3D12Fence();
+
     Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource;
-    if (!mD3D12Fence) {
-        d3d11on12Resource =
-            mD3D11on12ResourceCache->GetOrCreateD3D11on12Resource(device, mD3D12Resource.Get());
+    if (!d3d12Fence) {
+        d3d11on12Resource = mResources->GetD3D11on12ResourceCache()->GetOrCreateD3D11on12Resource(
+            backendDevice, d3d12Resource.Get());
         if (d3d11on12Resource == nullptr) {
             dawn::ErrorLog() << "Unable to create 11on12 resource for external image";
             return nullptr;
@@ -113,9 +126,9 @@ WGPUTexture ExternalImageDXGI::ProduceTexture(
     }
 
     Ref<TextureBase> texture = backendDevice->CreateD3D12ExternalTexture(
-        &textureDescriptor, mD3D12Resource, mD3D12Fence, std::move(d3d11on12Resource),
-        descriptor->fenceWaitValue, descriptor->fenceSignalValue, descriptor->isSwapChainTexture,
-        descriptor->isInitialized);
+        &textureDescriptor, std::move(d3d12Resource), std::move(d3d12Fence),
+        std::move(d3d11on12Resource), descriptor->fenceWaitValue, descriptor->fenceSignalValue,
+        descriptor->isSwapChainTexture, descriptor->isInitialized);
 
     return ToAPI(texture.Detach());
 }
@@ -126,22 +139,10 @@ std::unique_ptr<ExternalImageDXGI> ExternalImageDXGI::Create(
     const ExternalImageDescriptorDXGISharedHandle* descriptor) {
     Device* backendDevice = ToBackend(FromAPI(device));
 
-    // Use sharedHandle as a fallback until Chromium code is changed to set textureSharedHandle.
-    HANDLE textureSharedHandle = descriptor->textureSharedHandle;
-    if (!textureSharedHandle) {
-        textureSharedHandle = descriptor->sharedHandle;
-    }
-
-    Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource;
-    if (FAILED(backendDevice->GetD3D12Device()->OpenSharedHandle(textureSharedHandle,
-                                                                 IID_PPV_ARGS(&d3d12Resource)))) {
-        return nullptr;
-    }
-
-    Microsoft::WRL::ComPtr<ID3D12Fence> d3d12Fence;
-    if (descriptor->fenceSharedHandle &&
-        FAILED(backendDevice->GetD3D12Device()->OpenSharedHandle(descriptor->fenceSharedHandle,
-                                                                 IID_PPV_ARGS(&d3d12Fence)))) {
+    Ref<ExternalImageResourcesD3D12> resources =
+        backendDevice->CreateExternalImageResources(descriptor);
+    if (resources == nullptr) {
+        dawn::ErrorLog() << "Unable to acquire D3D12 external image resources";
         return nullptr;
     }
 
@@ -158,7 +159,7 @@ std::unique_ptr<ExternalImageDXGI> ExternalImageDXGI::Create(
     }
 
     if (backendDevice->ConsumedError(
-            ValidateD3D12TextureCanBeWrapped(d3d12Resource.Get(), textureDescriptor))) {
+            ValidateD3D12TextureCanBeWrapped(resources->GetD3D12Resource(), textureDescriptor))) {
         return nullptr;
     }
 
@@ -173,8 +174,8 @@ std::unique_ptr<ExternalImageDXGI> ExternalImageDXGI::Create(
         }
     }
 
-    std::unique_ptr<ExternalImageDXGI> result(new ExternalImageDXGI(
-        std::move(d3d12Resource), std::move(d3d12Fence), descriptor->cTextureDescriptor));
+    std::unique_ptr<ExternalImageDXGI> result(
+        new ExternalImageDXGI(resources.Detach(), descriptor->cTextureDescriptor));
     return result;
 }
 
