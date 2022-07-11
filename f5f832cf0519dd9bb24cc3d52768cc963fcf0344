@@ -67,6 +67,24 @@
       "message": "I wonder if the `DAWN_TRY(ValidateSingleSType(externalTextureBindingEntry-\u003enextInChain, wgpu::SType::ExternalTextureBindingEntry));` at\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/BindGroup.cpp;l\u003d246;drc\u003dc46305e60d61c056449700a741f6f4e002e2c073;bpv\u003d1;bpt\u003d1\n\nshould be changed to validate `entry.nextInChain` instead. (like the other ValidateBufferBinding/ValidateTextureBinding ...)\nNow it seems to early return on externalTextureBindingEntry-\u003enextInChain being null.",
       "revId": "f5f832cf0519dd9bb24cc3d52768cc963fcf0344",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fe20a5c_6abd86b1",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-11T16:58:34Z",
+      "side": 1,
+      "message": "We checked that there is at least an entry since `externalTextureBindingEntry` is not null. I agree that the helpers could be a bit more \"fluent\" to use but the logic seems to be correct?",
+      "parentUuid": "907f1283_7db18e76",
+      "revId": "f5f832cf0519dd9bb24cc3d52768cc963fcf0344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
