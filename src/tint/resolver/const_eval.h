@@ -133,6 +133,24 @@ class ConstEval {
                               sem::Expression const* const* args,
                               size_t num_args);
 
+    /// Zero value type constructor
+    /// @param ty the result type
+    /// @param args unused (no arguments provided)
+    /// @param num_args unused (no arguments provided)
+    /// @return the constructed value, or null if the value cannot be calculated
+    const sem::Constant* zero(const sem::Type* ty,
+                              sem::Expression const* const* args,
+                              size_t num_args);
+
+    /// Identity value type constructor
+    /// @param ty the result type
+    /// @param args single input argument
+    /// @param num_args must be 1
+    /// @return the constructed value, or null if the value cannot be calculated
+    const sem::Constant* identity(const sem::Type* ty,
+                                  sem::Expression const* const* args,
+                                  size_t num_args);
+
   private:
     /// Adds the given error message to the diagnostics
     void AddError(const std::string& msg, const Source& source) const;
