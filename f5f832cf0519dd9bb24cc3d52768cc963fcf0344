@@ -85,6 +85,24 @@
       "parentUuid": "907f1283_7db18e76",
       "revId": "f5f832cf0519dd9bb24cc3d52768cc963fcf0344",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27cf0955_68e6e133",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-07-11T17:11:12Z",
+      "side": 1,
+      "message": "Oh I see ValidateSingleSType is expecting the `chain` to the param, not the descriptor itself. Thanks for the explaining.",
+      "parentUuid": "3fe20a5c_6abd86b1",
+      "revId": "f5f832cf0519dd9bb24cc3d52768cc963fcf0344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
