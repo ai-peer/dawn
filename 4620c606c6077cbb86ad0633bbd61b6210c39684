@@ -106,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efa2e001_868a7790",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-07-11T17:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "153df1ae_c643fb64",
+      "range": {
+        "startLine": 200,
+        "startChar": 47,
+        "endLine": 200,
+        "endChar": 66
+      },
+      "revId": "4620c606c6077cbb86ad0633bbd61b6210c39684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef3235dc_17013488",
@@ -137,6 +161,24 @@
       "side": 1,
       "message": "This should be `srcAlphaMode`. It clears color.a (that is going to be written to dst) only when `srcAlphaMode \u003d\u003d Opaque`, regardless of what the dstAlphaMode is.\nThe behavior change is when src canvas is used as image source (input).",
       "parentUuid": "ef3235dc_17013488",
+      "revId": "4620c606c6077cbb86ad0633bbd61b6210c39684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27a642de_f002de50",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-07-11T17:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c7d18b7_0f8657cf",
       "revId": "4620c606c6077cbb86ad0633bbd61b6210c39684",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
