@@ -16,6 +16,23 @@
       "message": "This is an attempt to fix some new build failures in the dawn -\u003e chromium roller.",
       "revId": "ff1720400fe28a2040d362a7a1dba5d6a6b08ad8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ed1964a_5fc07e4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-11T15:40:49Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "ff1720400fe28a2040d362a7a1dba5d6a6b08ad8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
