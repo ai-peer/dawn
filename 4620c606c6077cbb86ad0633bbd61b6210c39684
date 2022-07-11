@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "153df1ae_c643fb64",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-11T17:20:16Z",
+      "side": 1,
+      "message": "I guess that could work as well. My suggestion was based on color being essential dstColor at this point in the algorithm but either way is probably fine.",
+      "parentUuid": "c43a3926_944060f9",
+      "range": {
+        "startLine": 200,
+        "startChar": 47,
+        "endLine": 200,
+        "endChar": 66
+      },
+      "revId": "4620c606c6077cbb86ad0633bbd61b6210c39684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef3235dc_17013488",
         "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 4
