@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05953772_84e62017",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-11T09:46:15Z",
+      "side": 1,
+      "message": "Why not, ok. We\u0027ll see if we need to revisit later.",
+      "revId": "d783ba948d37e9522d1b1203a3dc6f3507d2a7ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
