@@ -122,6 +122,24 @@
       "message": "Please take a look, thanks",
       "revId": "d219816726761deab4a0d2070b99916e2888601e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c3e4f8b_2150f8f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-11T13:34:46Z",
+      "side": 1,
+      "message": "Yes, thank you!",
+      "parentUuid": "593ed4da_02e26fdc",
+      "revId": "d219816726761deab4a0d2070b99916e2888601e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
