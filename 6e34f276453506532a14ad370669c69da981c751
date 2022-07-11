@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35925a52_47842700",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-11T14:14:29Z",
+      "side": 1,
+      "message": "The tests failing are checking that the same ExternalImageDXGI can be safely used by multiple devices at the same time. Is this something that Chromium relies on?",
+      "revId": "6e34f276453506532a14ad370669c69da981c751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

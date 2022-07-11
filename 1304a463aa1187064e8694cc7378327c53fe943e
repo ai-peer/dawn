@@ -228,6 +228,30 @@
       },
       "revId": "1304a463aa1187064e8694cc7378327c53fe943e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fec6b38c_3ee2d8b8",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-11T14:14:29Z",
+      "side": 1,
+      "message": "Also nit: this can be an std::set or unordered_set",
+      "parentUuid": "7c527e98_ccde219d",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 52
+      },
+      "revId": "1304a463aa1187064e8694cc7378327c53fe943e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
