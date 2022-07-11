@@ -1119,8 +1119,9 @@ Impl::Builtin Impl::Lookup(sem::BuiltinType builtin_type,
         if (match.overload->flags.Contains(OverloadFlag::kSupportsComputePipeline)) {
             supported_stages.Add(ast::PipelineStage::kCompute);
         }
+        auto eval_stage = sem::EvaluationStage::kRuntime;  // TODO(crbug.com/tint/1581)
         return builder.create<sem::Builtin>(
-            builtin_type, match.return_type, std::move(params), supported_stages,
+            builtin_type, match.return_type, std::move(params), eval_stage, supported_stages,
             match.overload->flags.Contains(OverloadFlag::kIsDeprecated));
     });
     return Builtin{sem, match.overload->const_eval_fn};
@@ -1292,8 +1293,10 @@ const sem::CallTarget* Impl::Lookup(CtorConvIntrinsic type,
                 nullptr, static_cast<uint32_t>(params.size()), p.type, ast::StorageClass::kNone,
                 ast::Access::kUndefined, p.usage));
         }
+        auto eval_stage = sem::EvaluationStage::kRuntime;  // TODO(crbug.com/tint/1581)
         return utils::GetOrCreate(constructors, match, [&]() {
-            return builder.create<sem::TypeConstructor>(match.return_type, std::move(params));
+            return builder.create<sem::TypeConstructor>(match.return_type, std::move(params),
+                                                        eval_stage);
         });
     }
 
@@ -1302,7 +1305,8 @@ const sem::CallTarget* Impl::Lookup(CtorConvIntrinsic type,
         auto param = builder.create<sem::Parameter>(
             nullptr, 0u, match.parameters[0].type, ast::StorageClass::kNone,
             ast::Access::kUndefined, match.parameters[0].usage);
-        return builder.create<sem::TypeConversion>(match.return_type, param);
+        auto eval_stage = sem::EvaluationStage::kRuntime;  // TODO(crbug.com/tint/1581)
+        return builder.create<sem::TypeConversion>(match.return_type, param, eval_stage);
     });
 }
 

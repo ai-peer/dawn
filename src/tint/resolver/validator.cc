@@ -567,6 +567,12 @@ bool Validator::GlobalVariable(
     bool ok = Switch(
         decl,  //
         [&](const ast::Var* var) {
+            if (auto* init = global->Constructor(); init && !init->ConstantValue()) {
+                AddError("module-scope 'var' initializer must be a constant expression",
+                         init->Declaration()->source);
+                return false;
+            }
+
             if (global->StorageClass() == ast::StorageClass::kNone) {
                 AddError("module-scope 'var' declaration must have a storage class", decl->source);
                 return false;
