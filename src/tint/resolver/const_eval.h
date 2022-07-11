@@ -68,18 +68,17 @@ class ConstEval {
     // Constant value evaluation methods, to be called directly from Resolver
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /// @param ty the target type - must be an array or constructor
+    /// @param args the input arguments
+    /// @return the constructed value, or null if the value cannot be calculated
+    const sem::Constant* ArrayOrStructCtor(const sem::Type* ty,
+                                           const std::vector<const sem::Expression*>& args);
+
     /// @param ty the target type
     /// @param expr the input expression
     /// @return the bit-cast of the given expression to the given type, or null if the value cannot
     ///         be calculated
     const sem::Constant* Bitcast(const sem::Type* ty, const sem::Expression* expr);
-
-    /// @param ty the target type
-    /// @param args the input arguments
-    /// @return the resulting type constructor or conversion, or null if the value cannot be
-    ///         calculated
-    const sem::Constant* CtorOrConv(const sem::Type* ty,
-                                    const std::vector<const sem::Expression*>& args);
 
     /// @param obj the object being indexed
     /// @param idx the index expression
@@ -112,7 +111,7 @@ class ConstEval {
     ConstantResult Convert(const sem::Type* ty, const sem::Constant* value, const Source& source);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    // Constant value evaluation methods, to be referenced by the intrinsic table
+    // Constant value evaluation methods, to be indirectly called via the intrinsic table
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     /// Type conversion
@@ -124,14 +123,68 @@ class ConstEval {
                               sem::Expression const* const* args,
                               size_t num_args);
 
-    /// Type construction
+    /// Zero value type constructor
     /// @param ty the result type
+    /// @param args the input arguments (no arguments provided)
+    /// @param num_args the number of input arguments (no arguments provided)
+    /// @return the constructed value, or null if the value cannot be calculated
+    const sem::Constant* zero(const sem::Type* ty,
+                              sem::Expression const* const* args,
+                              size_t num_args);
+
+    /// Identity value type constructor
+    /// @param ty the result type
+    /// @param args the input arguments
+    /// @param num_args the number of input arguments (must be 1)
+    /// @return the constructed value, or null if the value cannot be calculated
+    const sem::Constant* identity(const sem::Type* ty,
+                                  sem::Expression const* const* args,
+                                  size_t num_args);
+
+    /// Vector splat constructor
+    /// @param ty the vector type
+    /// @param args the input arguments
+    /// @param num_args the number of input arguments (must be 1)
+    /// @return the constructed value, or null if the value cannot be calculated
+    const sem::Constant* vec_splat(const sem::Type* ty,
+                                   sem::Expression const* const* args,
+                                   size_t num_args);
+
+    /// Vector constructor using scalars
+    /// @param ty the vector type
+    /// @param args the input arguments
+    /// @param num_args the number of input arguments (must be equal to vector width)
+    /// @return the constructed value, or null if the value cannot be calculated
+    const sem::Constant* vec_ctor_s(const sem::Type* ty,
+                                    sem::Expression const* const* args,
+                                    size_t num_args);
+
+    /// Vector constructor using a mix of scalars and smaller vectors
+    /// @param ty the vector type
     /// @param args the input arguments
     /// @param num_args the number of input arguments
     /// @return the constructed value, or null if the value cannot be calculated
-    const sem::Constant* ctor(const sem::Type* ty,
-                              sem::Expression const* const* args,
-                              size_t num_args);
+    const sem::Constant* vec_ctor_m(const sem::Type* ty,
+                                    sem::Expression const* const* args,
+                                    size_t num_args);
+
+    /// Matrix constructor using scalar values
+    /// @param ty the matrix type
+    /// @param args the input arguments
+    /// @param num_args the number of input arguments (must equal num-columns * num-rows)
+    /// @return the constructed value, or null if the value cannot be calculated
+    const sem::Constant* mat_ctor_s(const sem::Type* ty,
+                                    sem::Expression const* const* args,
+                                    size_t num_args);
+
+    /// Matrix constructor using column vectors
+    /// @param ty the matrix type
+    /// @param args the input arguments
+    /// @param num_args the number of input arguments (must equal num-columns)
+    /// @return the constructed value, or null if the value cannot be calculated
+    const sem::Constant* mat_ctor_v(const sem::Type* ty,
+                                    sem::Expression const* const* args,
+                                    size_t num_args);
 
   private:
     /// Adds the given error message to the diagnostics
