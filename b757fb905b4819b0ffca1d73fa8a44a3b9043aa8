@@ -16,6 +16,23 @@
       "message": "Kai@ - I\u0027ve updated based on prior discussion in Matrix - let me know what you think.\n\nhttps://matrix.to/#/!ZSOHTEPDbwuEgSJwYw:matrix.org/$jaWOL76agYX0lM2sJRMbiqr2T1x4ubK7TiSBdNmtSSw?via\u003dmatrix.org\u0026via\u003dlostpod.me\u0026via\u003dkurumi.dev",
       "revId": "b757fb905b4819b0ffca1d73fa8a44a3b9043aa8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2a6bc3b_25ebb8ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-07-11T18:59:40Z",
+      "side": 1,
+      "message": "LGTM! I see no reason we need to force this to be constexpr. It\u0027s just a local constant definition not used anywhere else, so it\u0027s fine to rely on the compiler to optimize.",
+      "revId": "b757fb905b4819b0ffca1d73fa8a44a3b9043aa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
