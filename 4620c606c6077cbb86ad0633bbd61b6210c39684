@@ -16,6 +16,63 @@
       "message": "LGTM!",
       "revId": "4620c606c6077cbb86ad0633bbd61b6210c39684",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8ae8999_88117d27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-11T07:47:05Z",
+      "side": 1,
+      "message": "Still LGTM. When doing changes that modify the semantic of the code, please try to keep the rest of the naming and the logic consistent!\n\n (tests will need slight updating of the logic for the comments I made too)",
+      "revId": "4620c606c6077cbb86ad0633bbd61b6210c39684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46b431eb_fd7bd6ad",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-11T07:47:05Z",
+      "side": 1,
+      "message": "nit: this is now clearing the alpha of the dest instead of the src, so it really is kClearDstAlphaToOne and we should change the check at [1] accordingly.",
+      "range": {
+        "startLine": 200,
+        "startChar": 47,
+        "endLine": 200,
+        "endChar": 66
+      },
+      "revId": "4620c606c6077cbb86ad0633bbd61b6210c39684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef3235dc_17013488",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-11T07:47:05Z",
+      "side": 1,
+      "message": "[1] but also this should no longer be an elseif on srcAlphaMode but on dstAlphaMode",
+      "revId": "4620c606c6077cbb86ad0633bbd61b6210c39684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
