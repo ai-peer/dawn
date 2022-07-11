@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59abc16e_b764ec01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-07-11T17:53:54Z",
+      "side": 1,
+      "message": "Asking for a +2 if it looks good now 😊",
+      "revId": "4620c606c6077cbb86ad0633bbd61b6210c39684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46b431eb_fd7bd6ad",
