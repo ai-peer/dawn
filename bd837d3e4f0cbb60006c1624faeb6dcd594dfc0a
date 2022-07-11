@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78d7835d_6dc5cfa7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-11T07:51:11Z",
+      "side": 1,
+      "message": "Still LGTM, thanks for splitting the other change off!",
+      "revId": "bd837d3e4f0cbb60006c1624faeb6dcd594dfc0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
