@@ -427,67 +427,88 @@ const sem::Constant* ConstEval::Literal(const sem::Type* ty,
 
 const sem::Constant* ConstEval::CtorOrConv(const sem::Type* ty,
                                            const std::vector<const sem::Expression*>& args) {
-    // For zero value init, return 0s
-    if (args.empty()) {
-        return ZeroValue(builder, ty);
-    }
-
     uint32_t el_count = 0;
     if (auto* el_ty = sem::Type::ElementOf(ty, &el_count); el_ty && args.size() == 1) {
-        // Type constructor or conversion that takes a single argument.
-        auto& src = args[0]->Declaration()->source;
-        auto* arg = static_cast<const Constant*>(args[0]->ConstantValue());
-        if (!arg) {
-            return nullptr;  // Single argument is not constant.
+        if (args[0]->Type() == el_ty) {
+            // Argument type matches function type.
+            // This is an identity constructor or splat.
+            return ctor(ty, args.data(), args.size());
         }
+        return conv(ty, args.data(), args.size());
+    }
 
-        if (ty->is_scalar()) {  // Scalar type conversion: i32(x), u32(x), bool(x), etc
-            return Convert(el_ty, arg, src).Get();
-        }
+    // Multiple arguments. Must be a type constructor.
+    return ctor(ty, args.data(), args.size());
+}
 
-        if (arg->Type() == el_ty) {
-            // Argument type matches function type. This is a splat.
-            auto splat = [&](size_t n) { return builder.create<Splat>(ty, arg, n); };
-            return Switch(
-                ty,  //
-                [&](const sem::Vector* v) { return splat(v->Width()); },
-                [&](const sem::Matrix* m) { return splat(m->columns()); },
-                [&](const sem::Array* a) { return splat(a->Count()); });
-        }
-
-        // Argument type and function type mismatch. This is a type conversion.
-        if (auto conv = Convert(ty, arg, src)) {
-            return conv.Get();
-        }
-
+const sem::Constant* ConstEval::conv(const sem::Type* ty,
+                                     sem::Expression const* const* args,
+                                     size_t) {
+    uint32_t el_count = 0;
+    auto* el_ty = sem::Type::ElementOf(ty, &el_count);
+    if (!el_ty) {
         return nullptr;
     }
 
-    // Helper for pushing all the argument constants to `els`.
-    auto all_args = [&] {
-        return utils::Transform(
-            args, [&](auto* expr) { return static_cast<const Constant*>(expr->ConstantValue()); });
-    };
+    auto& src = args[0]->Declaration()->source;
+    auto* arg = static_cast<const Constant*>(args[0]->ConstantValue());
+    if (!arg) {
+        return nullptr;  // Single argument is not constant.
+    }
 
-    // Multiple arguments. Must be a type constructor.
+    if (auto conv = Convert(ty, arg, src)) {
+        return conv.Get();
+    }
+
+    return nullptr;
+}
+
+const sem::Constant* ConstEval::ctor(const sem::Type* ty,
+                                     sem::Expression const* const* args,
+                                     size_t num_args) {
+    // For zero value init, return 0s
+    if (num_args == 0) {
+        return ZeroValue(builder, ty);
+    }
+    if (num_args == 1 && args[0]->Type() == ty) {
+        // Identity constructor.
+        return args[0]->ConstantValue();
+    }
+
+    // Helper for returning all the argument constant values as a vector.
+    auto all_args = [&] {
+        std::vector<const Constant*> els;
+        els.reserve(num_args);
+        for (size_t i = 0; i < num_args; i++) {
+            els.emplace_back(static_cast<const Constant*>(args[i]->ConstantValue()));
+        }
+        return els;
+    };
 
     return Switch(
         ty,  // What's the target type being constructed?
-        [&](const sem::Vector*) -> const Constant* {
+        [&](const sem::Vector* v) -> const Constant* {
             // Vector can be constructed with a mix of scalars / abstract numerics and smaller
             // vectors.
+            if (num_args == 1 && args[0]->Type() == v->type()) {
+                if (auto* arg = static_cast<const Constant*>(args[0]->ConstantValue())) {
+                    return builder.create<Splat>(ty, arg, v->Width());
+                }
+                return nullptr;
+            }
+
             std::vector<const Constant*> els;
-            els.reserve(args.size());
-            for (auto* expr : args) {
-                auto* arg = static_cast<const Constant*>(expr->ConstantValue());
+            els.reserve(num_args);
+            for (size_t i = 0; i < num_args; i++) {
+                auto* arg = static_cast<const Constant*>(args[i]->ConstantValue());
                 if (!arg) {
                     return nullptr;
                 }
                 auto* arg_ty = arg->Type();
                 if (auto* arg_vec = arg_ty->As<sem::Vector>()) {
                     // Extract out vector elements.
-                    for (uint32_t i = 0; i < arg_vec->Width(); i++) {
-                        auto* el = static_cast<const Constant*>(arg->Index(i));
+                    for (uint32_t j = 0; j < arg_vec->Width(); j++) {
+                        auto* el = static_cast<const Constant*>(arg->Index(j));
                         if (!el) {
                             return nullptr;
                         }
@@ -502,10 +523,10 @@ const sem::Constant* ConstEval::CtorOrConv(const sem::Type* ty,
         [&](const sem::Matrix* m) -> const Constant* {
             // Matrix can be constructed with a set of scalars / abstract numerics, or column
             // vectors.
-            if (args.size() == m->columns() * m->rows()) {
+            if (num_args == m->columns() * m->rows()) {
                 // Matrix built from scalars / abstract numerics
                 std::vector<const Constant*> els;
-                els.reserve(args.size());
+                els.reserve(num_args);
                 for (uint32_t c = 0; c < m->columns(); c++) {
                     std::vector<const Constant*> column;
                     column.reserve(m->rows());
@@ -532,6 +553,16 @@ const sem::Constant* ConstEval::CtorOrConv(const sem::Type* ty,
             // Structures must be constructed using a list of elements
             return CreateComposite(builder, ty, all_args());
         });
+}
+
+const sem::Constant* ConstEval::zero(const sem::Type* ty, sem::Expression const* const*, size_t) {
+    return ZeroValue(builder, ty);
+}
+
+const sem::Constant* ConstEval::identity(const sem::Type*,
+                                         sem::Expression const* const* args,
+                                         size_t) {
+    return args[0]->ConstantValue();
 }
 
 const sem::Constant* ConstEval::Index(const sem::Expression* obj_expr,
