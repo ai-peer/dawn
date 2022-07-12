@@ -56,6 +56,30 @@
       },
       "revId": "49d58a275418584e1405a93f11ee0b7198a508a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35d631dc_afb3bab7",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-07-12T21:58:57Z",
+      "side": 1,
+      "message": "Yes, it should be equivalent - I\u0027ve changed it to what you suggested. Also renamed the list variable to not have \"resources\".",
+      "parentUuid": "0c861cce_fe969485",
+      "range": {
+        "startLine": 764,
+        "startChar": 4,
+        "endLine": 771,
+        "endChar": 0
+      },
+      "revId": "49d58a275418584e1405a93f11ee0b7198a508a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
