@@ -15,6 +15,7 @@
 #ifndef SRC_DAWN_NATIVE_VULKAN_DEVICEVK_H_
 #define SRC_DAWN_NATIVE_VULKAN_DEVICEVK_H_
 
+#include <map>
 #include <memory>
 #include <queue>
 #include <string>
@@ -40,6 +41,16 @@ class BufferUploader;
 class FencedDeleter;
 class RenderPassCache;
 class ResourceMemoryAllocator;
+
+#if DAWN_PLATFORM_IS(LINUX)
+class LazySignalSemaphore;
+
+// This is the internal representation of LazySignalSemaphore.
+struct ExternalSignalSemaphore {
+    ExecutionSerial executionSerial = ExecutionSerial(0);
+    ExternalSemaphoreHandle fd;
+};
+#endif
 
 class Device final : public DeviceBase {
   public:
@@ -69,6 +80,7 @@ class Device final : public DeviceBase {
 
     // Dawn Native API
 
+#if DAWN_PLATFORM_IS(LINUX)
     TextureBase* CreateTextureWrappingVulkanImage(
         const ExternalImageDescriptorVk* descriptor,
         ExternalMemoryHandle memoryHandle,
@@ -76,7 +88,13 @@ class Device final : public DeviceBase {
     bool SignalAndExportExternalTexture(Texture* texture,
                                         VkImageLayout desiredLayout,
                                         ExternalImageExportInfoVk* info,
-                                        std::vector<ExternalSemaphoreHandle>* semaphoreHandle);
+                                        LazySignalSemaphore* semaphoreHandle);
+
+    LazySignalSemaphore AddLazySignalSemaphore(ExecutionSerial executionSerial,
+                                               ExternalSemaphoreHandle fd);
+    void DestroyLazySignalSemaphore(uint64_t handle);
+    bool ResolveLazySignalSemaphore(uint64_t handle, ExternalSemaphoreHandle* semaphoreHandle);
+#endif
 
     ResultOrError<Ref<CommandBufferBase>> CreateCommandBuffer(
         CommandEncoder* encoder,
@@ -199,6 +217,17 @@ class Device final : public DeviceBase {
     const std::string mDebugPrefix;
     std::vector<std::string> mDebugMessages;
 
+#if DAWN_PLATFORM_IS(LINUX)
+    // This tracks the id, executionSerial, and fd mapping of all in flight external signal
+    // semaphores.
+    std::map<uint64_t, ExternalSignalSemaphore> mExternalSignalSemaphoresInFlight;
+    // Reserves 0 for use as invalid.
+    uint64_t mExternalSignalSemaphoreIncrementingID = 1;
+    // This tracks all external signal semaphores to be created, submitted and exported in the
+    // current queue submit.
+    std::vector<uint64_t> mExternalSignalSemaphoresToBeSubmitted;
+#endif
+
     MaybeError PrepareRecordingContext();
     void RecycleCompletedCommands();
 
@@ -216,7 +245,6 @@ class Device final : public DeviceBase {
                                    ExternalMemoryHandle memoryHandle,
                                    VkImage image,
                                    const std::vector<ExternalSemaphoreHandle>& waitHandles,
-                                   VkSemaphore* outSignalSemaphore,
                                    VkDeviceMemory* outAllocation,
                                    std::vector<VkSemaphore>* outWaitSemaphores);
 };
