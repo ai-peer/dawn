@@ -16,6 +16,29 @@
       "message": "PTAL\n\nI am not exactly sure about the correctness of CL theoretically. But the performance gain seems rather appealing. For the 7x7 Google meet sample(https://source.chromium.org/chromium/chromium/src/+/main:content/test/data/gpu/vc/webgpu_videos_mxn.html;l\u003d1?q\u003dwebgpu_videos\u0026sq\u003d\u0026ss\u003dchromium), the GPU usage can drop from 35% to 21% on my ADL ChromeOS device. I would really appreciate your perspective on this, Thanks!",
       "revId": "c9e208040b4af750317c56a76e5f81ac1c548e76",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0458f4d1_dca3d9e0",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-12T03:12:17Z",
+      "side": 1,
+      "message": "The thing that is actually at stake seems to be this submit. Doing this for the NV12 even without the barrier could lead to significant GPU usage increasing.",
+      "range": {
+        "startLine": 871,
+        "startChar": 8,
+        "endLine": 871,
+        "endChar": 50
+      },
+      "revId": "c9e208040b4af750317c56a76e5f81ac1c548e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
