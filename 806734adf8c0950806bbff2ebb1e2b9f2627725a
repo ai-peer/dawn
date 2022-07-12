@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8ae61fa_29841705",
+        "filename": "src/tint/reader/spirv/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1800,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-12T16:17:44Z",
+      "side": 1,
+      "message": "Our validation message says it can only be paired with `@location`.",
+      "parentUuid": "48d6925f_6c05b4a2",
+      "revId": "806734adf8c0950806bbff2ebb1e2b9f2627725a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef618972_2f0c1e04",
