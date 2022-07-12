@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fd21641_34e6ca53",
+        "filename": "include/dawn/native/D3D12Backend.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-12T01:49:33Z",
+      "side": 1,
+      "message": "Sorry, now that I\u0027m looking at this, I realize it may be better to also move all these members and the Create/ProduceTexture function definitions into ExternalImageResourcesD3D12 as well - basically reduce ExternalImageDXGI to be a pImpl pattern. What do you think?\n\nThis is how dawn::native::Adapter, dawn::native::Instance, dawn::wire::WireClient, and dawn::wire::WireServer are implemented. The exported class is just the interface, and it forwards everything to an inner private implementation class. That way, the public interface is clean and the actual implementation is all in one spot instead of mixed between the public and the private part.",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 130,
+        "endChar": 26
+      },
+      "revId": "36e0f86a7cf51ad5452bbe8fc7dbc78140d8ddbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b094473_bbb52704",
+        "filename": "src/dawn/native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-12T01:49:33Z",
+      "side": 1,
+      "message": "I think this should call mResources-\u003eIsValid() since it\u0027s an implementation detail of the Resources that you can use the Device* to determine validity.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 53
+      },
+      "revId": "36e0f86a7cf51ad5452bbe8fc7dbc78140d8ddbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c8661e2_08e81a65",
+        "filename": "src/dawn/native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-12T01:49:33Z",
+      "side": 1,
+      "message": "nit: this could check `IsValid()`",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 96,
+        "endChar": 5
+      },
+      "revId": "36e0f86a7cf51ad5452bbe8fc7dbc78140d8ddbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19ce1630_f3c05b37",
+        "filename": "src/dawn/native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-12T01:49:33Z",
+      "side": 1,
+      "message": "nit: `return std::unique_ptr\u003cExternalImageDXGI\u003e(new ExternalImageDXGI(..));` ?",
+      "revId": "36e0f86a7cf51ad5452bbe8fc7dbc78140d8ddbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4095d14c_9971809b",
+        "filename": "src/dawn/native/d3d12/ExternalImageResourcesD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-12T01:49:33Z",
+      "side": 1,
+      "message": "generally in Dawn, we keep all definitions in the .cpp file, which is unlike Chromium where small getters are often defined in the header inline.\n\nI\u0027m open to rethinking our style guidelines to be more like Chromium though. I\u0027m curious what Corentin thinks as to why in the past we\u0027ve preferred to move even small functions to .cpp file.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 5
+      },
+      "revId": "36e0f86a7cf51ad5452bbe8fc7dbc78140d8ddbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
