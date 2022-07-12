@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93217daa_4de26519",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-07-12T00:19:23Z",
+      "side": 1,
+      "message": "PTAL again - I\u0027ve also added a ExternalImageDXGI::IsValid() method based on the discussion on https://chromium-review.googlesource.com/c/chromium/src/+/3752055",
+      "revId": "e7a0fe8e66f61aa6f3977552816eeea16418c15b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
