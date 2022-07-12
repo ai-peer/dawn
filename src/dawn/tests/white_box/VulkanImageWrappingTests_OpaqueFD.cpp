@@ -145,14 +145,16 @@ class VulkanImageWrappingTestBackendOpaqueFD : public VulkanImageWrappingTestBac
             dawn::native::vulkan::WrapVulkanImage(device.Get(), &descriptorOpaqueFD));
     }
 
-    bool ExportImage(const wgpu::Texture& texture,
+    bool ExportImage(const wgpu::Device& device,
+                     const wgpu::Texture& texture,
                      VkImageLayout layout,
                      ExternalImageExportInfoVkForTesting* exportInfo) override {
         ExternalImageExportInfoOpaqueFD infoOpaqueFD;
         bool success = ExportVulkanImage(texture.Get(), layout, &infoOpaqueFD);
 
         *static_cast<ExternalImageExportInfoVk*>(exportInfo) = infoOpaqueFD;
-        for (int fd : infoOpaqueFD.semaphoreHandles) {
+        int fd = -1;
+        if (infoOpaqueFD.lazySignalSemaphore.Resolve(device.Get(), &fd)) {
             EXPECT_NE(fd, -1);
             exportInfo->semaphores.push_back(std::make_unique<ExternalSemaphoreOpaqueFD>(fd));
         }

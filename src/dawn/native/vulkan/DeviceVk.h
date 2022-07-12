@@ -40,6 +40,7 @@ class BufferUploader;
 class FencedDeleter;
 class RenderPassCache;
 class ResourceMemoryAllocator;
+class LazySignalSemaphore;
 
 class Device final : public DeviceBase {
   public:
@@ -76,7 +77,11 @@ class Device final : public DeviceBase {
     bool SignalAndExportExternalTexture(Texture* texture,
                                         VkImageLayout desiredLayout,
                                         ExternalImageExportInfoVk* info,
-                                        std::vector<ExternalSemaphoreHandle>* semaphoreHandle);
+                                        LazySignalSemaphore* semaphoreHandle);
+
+    bool CreateAndSubmitSignalSemaphoreForExport(uint64_t executionSerial,
+                                                 ExternalSemaphoreHandle* semaphoreHandle);
+    bool IsExternalSemaphoreSignaled(uint64_t executionSerial);
 
     ResultOrError<Ref<CommandBufferBase>> CreateCommandBuffer(
         CommandEncoder* encoder,
@@ -216,7 +221,6 @@ class Device final : public DeviceBase {
                                    ExternalMemoryHandle memoryHandle,
                                    VkImage image,
                                    const std::vector<ExternalSemaphoreHandle>& waitHandles,
-                                   VkSemaphore* outSignalSemaphore,
                                    VkDeviceMemory* outAllocation,
                                    std::vector<VkSemaphore>* outWaitSemaphores);
 };

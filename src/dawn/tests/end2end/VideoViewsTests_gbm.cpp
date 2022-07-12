@@ -204,10 +204,6 @@ class VideoViewsTestBackendGbm : public VideoViewsTestBackend {
         dawn::native::vulkan::ExternalImageExportInfoDmaBuf exportInfo;
         dawn::native::vulkan::ExportVulkanImage(platformTexture->wgpuTexture.Get(),
                                                 VK_IMAGE_LAYOUT_GENERAL, &exportInfo);
-        for (int fd : exportInfo.semaphoreHandles) {
-            ASSERT_NE(fd, -1);
-            close(fd);
-        }
         gbm_bo* gbmBo = static_cast<PlatformTextureGbm*>(platformTexture.get())->GetGbmBo();
         ASSERT_NE(gbmBo, nullptr);
         gbm_bo_destroy(gbmBo);
