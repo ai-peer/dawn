@@ -16,6 +16,23 @@
       "message": "Thanks!",
       "revId": "38d116f09448f121f5b30ffa6091e949d19c8cd1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7de204d3_a24dc2ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-07-12T21:59:27Z",
+      "side": 1,
+      "message": "Oops, forgot that Dawn needs a +2 too",
+      "revId": "38d116f09448f121f5b30ffa6091e949d19c8cd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
