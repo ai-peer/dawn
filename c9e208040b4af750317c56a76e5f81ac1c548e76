@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d15f122_8f21bb26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-12T12:41:09Z",
+      "side": 1,
+      "message": "The perf difference is impressive and it is totally worth looking at optimizing this. However I don\u0027t think this CL is correct because if the user of Dawn starts reusing the SharedImage then we didn\u0027t make a memory barrier that prevents read from Dawn from happening after the writes of whoever is reusing the SharedImage.\n\nThat\u0027s why I think we need to keep the semaphore being exported but avoid the need for empty submits (and ideally avoid the need for having 49 different semaphores).\n\nThe problem here is actually very similar to this TODO: https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/SwapChainVk.cpp;drc\u003d7e74c218738e637d4e9fdaff9dd5c38ca92ed1c3;l\u003d566 We are making empty submissions just to do a memory barrier, when we could in most cases eagerly transition and signal semaphores.\n\nSo the idea would be to detect in \"HandleTransitionSpecialCases\" that the resource needs to be eagerly transitioned / have a semaphore associated with it. Then at the end of the submit we would insert the transitions / special semaphores and update the state of the texture. This way we might create too many semaphores but at least there is no extra submits.\n\nAs a second part we could then have some kind of RefCounted semaphore wrapper so that external resources can all share the same \"export semaphore\" such that we only create at most one per submit. WDYT?",
+      "parentUuid": "9d364bd3_6d607e59",
+      "revId": "c9e208040b4af750317c56a76e5f81ac1c548e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0458f4d1_dca3d9e0",
