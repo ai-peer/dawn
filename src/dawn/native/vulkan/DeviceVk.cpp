@@ -765,7 +765,6 @@ MaybeError Device::ImportExternalImage(const ExternalImageDescriptorVk* descript
                                        ExternalMemoryHandle memoryHandle,
                                        VkImage image,
                                        const std::vector<ExternalSemaphoreHandle>& waitHandles,
-                                       VkSemaphore* outSignalSemaphore,
                                        VkDeviceMemory* outAllocation,
                                        std::vector<VkSemaphore>* outWaitSemaphores) {
     const TextureDescriptor* textureDescriptor = FromAPI(descriptor->cTextureDescriptor);
@@ -789,9 +788,6 @@ MaybeError Device::ImportExternalImage(const ExternalImageDescriptorVk* descript
                         VK_IMAGE_CREATE_ALIAS_BIT_KHR),
                     "External memory usage not supported");
 
-    // Create an external semaphore to signal when the texture is done being used
-    DAWN_TRY_ASSIGN(*outSignalSemaphore, mExternalSemaphoreService->CreateExportableSemaphore());
-
     // Import the external image's memory
     external_memory::MemoryImportParams importParams;
     DAWN_TRY_ASSIGN(importParams, mExternalMemoryService->GetMemoryImportParams(descriptor, image));
@@ -808,24 +804,17 @@ MaybeError Device::ImportExternalImage(const ExternalImageDescriptorVk* descript
     return {};
 }
 
-bool Device::SignalAndExportExternalTexture(
-    Texture* texture,
-    VkImageLayout desiredLayout,
-    ExternalImageExportInfoVk* info,
-    std::vector<ExternalSemaphoreHandle>* semaphoreHandles) {
+bool Device::SignalAndExportExternalTexture(Texture* texture,
+                                            VkImageLayout desiredLayout,
+                                            ExternalImageExportInfoVk* info,
+                                            LazySignalSemaphore* lazySignalSemaphore) {
     return !ConsumedError([&]() -> MaybeError {
         DAWN_TRY(ValidateObject(texture));
 
-        VkSemaphore signalSemaphore;
         VkImageLayout releasedOldLayout;
         VkImageLayout releasedNewLayout;
-        DAWN_TRY(texture->ExportExternalTexture(desiredLayout, &signalSemaphore, &releasedOldLayout,
-                                                &releasedNewLayout));
-
-        ExternalSemaphoreHandle semaphoreHandle;
-        DAWN_TRY_ASSIGN(semaphoreHandle,
-                        mExternalSemaphoreService->ExportSemaphore(signalSemaphore));
-        semaphoreHandles->push_back(semaphoreHandle);
+        DAWN_TRY(texture->ExportExternalTexture(desiredLayout, lazySignalSemaphore,
+                                                &releasedOldLayout, &releasedNewLayout));
         info->releasedOldLayout = releasedOldLayout;
         info->releasedNewLayout = releasedNewLayout;
         info->isInitialized =
@@ -833,6 +822,26 @@ bool Device::SignalAndExportExternalTexture(
 
         return {};
     }());
+}
+
+bool Device::CreateAndSubmitSignalSemaphoreForExport(uint64_t executionSerial,
+                                                     ExternalSemaphoreHandle* semaphoreHandle) {
+    return !ConsumedError([&]() -> MaybeError {
+        VkSemaphore semaphore;
+        DAWN_TRY_ASSIGN(semaphore, mExternalSemaphoreService->CreateExportableSemaphore());
+        mRecordingContext.signalSemaphores.push_back(semaphore);
+        DAWN_TRY(SubmitPendingCommands());
+        DAWN_TRY_ASSIGN(*semaphoreHandle, mExternalSemaphoreService->ExportSemaphore(semaphore));
+        return {};
+    }());
+}
+
+bool Device::IsExternalSemaphoreSignaled(uint64_t executionSerial) {
+    // Take it as signaled if the serial has completed.
+    if (executionSerial <= static_cast<uint64_t>(GetCompletedCommandSerial())) {
+        return true;
+    }
+    return false;
 }
 
 TextureBase* Device::CreateTextureWrappingVulkanImage(
@@ -851,7 +860,6 @@ TextureBase* Device::CreateTextureWrappingVulkanImage(
         return nullptr;
     }
 
-    VkSemaphore signalSemaphore = VK_NULL_HANDLE;
     VkDeviceMemory allocation = VK_NULL_HANDLE;
     std::vector<VkSemaphore> waitSemaphores;
     waitSemaphores.reserve(waitHandles.size());
@@ -864,17 +872,12 @@ TextureBase* Device::CreateTextureWrappingVulkanImage(
                                                   mExternalMemoryService.get()),
                       &result) ||
         ConsumedError(ImportExternalImage(descriptor, memoryHandle, result->GetHandle(),
-                                          waitHandles, &signalSemaphore, &allocation,
-                                          &waitSemaphores)) ||
-        ConsumedError(
-            result->BindExternalMemory(descriptor, signalSemaphore, allocation, waitSemaphores))) {
+                                          waitHandles, &allocation, &waitSemaphores)) ||
+        ConsumedError(result->BindExternalMemory(descriptor, allocation, waitSemaphores))) {
         // Delete the Texture if it was created
         if (result != nullptr) {
             result->Release();
         }
-
-        // Clear the signal semaphore
-        fn.DestroySemaphore(GetVkDevice(), signalSemaphore, nullptr);
 
         // Clear image memory
         fn.FreeMemory(GetVkDevice(), allocation, nullptr);

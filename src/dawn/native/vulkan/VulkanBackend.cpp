@@ -74,6 +74,25 @@ ExternalImageExportInfoDmaBuf::ExternalImageExportInfoDmaBuf()
     : ExternalImageExportInfoFD(ExternalImageType::DmaBuf) {}
 #endif  // DAWN_PLATFORM_IS(LINUX)
 
+LazySignalSemaphore::LazySignalSemaphore() : mExecutionSerial(0) {}
+
+LazySignalSemaphore::LazySignalSemaphore(uint64_t executionSerial)
+    : mExecutionSerial(executionSerial) {}
+
+LazySignalSemaphore::~LazySignalSemaphore() = default;
+
+void LazySignalSemaphore::SetExecutionSerial(uint64_t executionSerial) {
+    mExecutionSerial = executionSerial;
+}
+
+bool LazySignalSemaphore::Resolve(WGPUDevice device, int* handle) {
+    Device* backendDevice = ToBackend(FromAPI(device));
+    if (!backendDevice->IsExternalSemaphoreSignaled(mExecutionSerial)) {
+        return backendDevice->CreateAndSubmitSignalSemaphoreForExport(mExecutionSerial, handle);
+    }
+    return false;
+}
+
 WGPUTexture WrapVulkanImage(WGPUDevice device, const ExternalImageDescriptorVk* descriptor) {
 #if DAWN_PLATFORM_IS(LINUX)
     switch (descriptor->GetType()) {
@@ -109,7 +128,7 @@ bool ExportVulkanImage(WGPUTexture texture,
             ExternalImageExportInfoFD* fdInfo = static_cast<ExternalImageExportInfoFD*>(info);
 
             return device->SignalAndExportExternalTexture(backendTexture, desiredLayout, fdInfo,
-                                                          &fdInfo->semaphoreHandles);
+                                                          &fdInfo->lazySignalSemaphore);
         }
         default:
             return false;
