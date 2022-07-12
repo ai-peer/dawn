@@ -95,6 +95,7 @@ MaybeError CheckVkOOMThenSuccessImpl(VkResult result, const char* context) {
     }
 
     std::string message = std::string(context) + " failed with " + VkResultAsString(result);
+    fprintf(stderr, "%s\n", message.c_str());
 
     if (result == VK_ERROR_OUT_OF_DEVICE_MEMORY || result == VK_ERROR_OUT_OF_HOST_MEMORY ||
         result == VK_FAKE_DEVICE_OOM_FOR_TESTING) {
