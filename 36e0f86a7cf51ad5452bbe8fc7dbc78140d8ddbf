@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1c233b2_5e0a2b49",
+        "filename": "include/dawn/native/D3D12Backend.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-07-12T20:21:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fd21641_34e6ca53",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 130,
+        "endChar": 26
+      },
+      "revId": "36e0f86a7cf51ad5452bbe8fc7dbc78140d8ddbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b094473_bbb52704",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-12T01:49:33Z",
       "side": 1,
       "message": "I think this should call mResources-\u003eIsValid() since it\u0027s an implementation detail of the Resources that you can use the Device* to determine validity.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 53
+      },
+      "revId": "36e0f86a7cf51ad5452bbe8fc7dbc78140d8ddbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbb29436_7f19baab",
+        "filename": "src/dawn/native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-07-12T20:21:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b094473_bbb52704",
       "range": {
         "startLine": 81,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30d677f5_f8b839e6",
+        "filename": "src/dawn/native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-07-12T20:21:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c8661e2_08e81a65",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 96,
+        "endChar": 5
+      },
+      "revId": "36e0f86a7cf51ad5452bbe8fc7dbc78140d8ddbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19ce1630_f3c05b37",
@@ -83,6 +155,24 @@
       "writtenOn": "2022-07-12T01:49:33Z",
       "side": 1,
       "message": "nit: `return std::unique_ptr\u003cExternalImageDXGI\u003e(new ExternalImageDXGI(..));` ?",
+      "revId": "36e0f86a7cf51ad5452bbe8fc7dbc78140d8ddbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd310f96_2eca3595",
+        "filename": "src/dawn/native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-07-12T20:21:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19ce1630_f3c05b37",
       "revId": "36e0f86a7cf51ad5452bbe8fc7dbc78140d8ddbf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -148,6 +238,30 @@
       "side": 1,
       "message": "ok let\u0027s continue with moving as much as we can into .cc files",
       "parentUuid": "24248500_69a72a0a",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 5
+      },
+      "revId": "36e0f86a7cf51ad5452bbe8fc7dbc78140d8ddbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fba1126_07722a40",
+        "filename": "src/dawn/native/d3d12/ExternalImageResourcesD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-07-12T20:21:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38c42554_02d84478",
       "range": {
         "startLine": 44,
         "startChar": 0,
