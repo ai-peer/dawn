@@ -141,6 +141,7 @@ DAWN_NATIVE_EXPORT WGPUTexture WrapVulkanImage(WGPUDevice device,
 // perform a layout transition.
 DAWN_NATIVE_EXPORT bool ExportVulkanImage(WGPUTexture texture,
                                           VkImageLayout desiredLayout,
+                                          bool requireSignalSemaphore,
                                           ExternalImageExportInfoVk* info);
 
 }  // namespace dawn::native::vulkan

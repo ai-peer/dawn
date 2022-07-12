@@ -75,6 +75,7 @@ class Device final : public DeviceBase {
         const std::vector<ExternalSemaphoreHandle>& waitHandles);
     bool SignalAndExportExternalTexture(Texture* texture,
                                         VkImageLayout desiredLayout,
+                                        bool requireSignalSemaphore,
                                         ExternalImageExportInfoVk* info,
                                         std::vector<ExternalSemaphoreHandle>* semaphoreHandle);
 

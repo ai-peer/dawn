@@ -804,6 +804,7 @@ MaybeError Texture::BindExternalMemory(const ExternalImageDescriptorVk* descript
 }
 
 MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
+                                          bool requireSignalSemaphore,
                                           VkSemaphore* signalSemaphore,
                                           VkImageLayout* releasedOldLayout,
                                           VkImageLayout* releasedNewLayout) {
@@ -863,9 +864,13 @@ MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
     device->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
                                   nullptr, 0, nullptr, 1, &barrier);
 
-    // Queue submit to signal we are done with the texture
-    recordingContext->signalSemaphores.push_back(mSignalSemaphore);
-    DAWN_TRY(device->SubmitPendingCommands());
+    if (requireSignalSemaphore) {
+        // Queue submit to signal we are done with the texture
+        recordingContext->signalSemaphores.push_back(mSignalSemaphore);
+        DAWN_TRY(device->SubmitPendingCommands());
+    } else {
+        device->fn.DestroySemaphore(device->GetVkDevice(), mSignalSemaphore, nullptr);
+    }
 
     // Write out the layouts and signal semaphore
     *releasedOldLayout = barrier.oldLayout;

@@ -90,6 +90,7 @@ class Texture final : public TextureBase {
                                   std::vector<VkSemaphore> waitSemaphores);
 
     MaybeError ExportExternalTexture(VkImageLayout desiredLayout,
+                                     bool requireSignalSemaphore,
                                      VkSemaphore* signalSemaphore,
                                      VkImageLayout* releasedOldLayout,
                                      VkImageLayout* releasedNewLayout);

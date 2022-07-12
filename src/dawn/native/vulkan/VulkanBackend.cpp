@@ -96,6 +96,7 @@ WGPUTexture WrapVulkanImage(WGPUDevice device, const ExternalImageDescriptorVk* 
 
 bool ExportVulkanImage(WGPUTexture texture,
                        VkImageLayout desiredLayout,
+                       bool requireSignalSemaphore,
                        ExternalImageExportInfoVk* info) {
     if (texture == nullptr) {
         return false;
@@ -108,7 +109,8 @@ bool ExportVulkanImage(WGPUTexture texture,
             Device* device = ToBackend(backendTexture->GetDevice());
             ExternalImageExportInfoFD* fdInfo = static_cast<ExternalImageExportInfoFD*>(info);
 
-            return device->SignalAndExportExternalTexture(backendTexture, desiredLayout, fdInfo,
+            return device->SignalAndExportExternalTexture(backendTexture, desiredLayout,
+                                                          requireSignalSemaphore, fdInfo,
                                                           &fdInfo->semaphoreHandles);
         }
         default:

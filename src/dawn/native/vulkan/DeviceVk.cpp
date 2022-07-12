@@ -811,6 +811,7 @@ MaybeError Device::ImportExternalImage(const ExternalImageDescriptorVk* descript
 bool Device::SignalAndExportExternalTexture(
     Texture* texture,
     VkImageLayout desiredLayout,
+    bool requireSignalSemaphore,
     ExternalImageExportInfoVk* info,
     std::vector<ExternalSemaphoreHandle>* semaphoreHandles) {
     return !ConsumedError([&]() -> MaybeError {
@@ -819,13 +820,15 @@ bool Device::SignalAndExportExternalTexture(
         VkSemaphore signalSemaphore;
         VkImageLayout releasedOldLayout;
         VkImageLayout releasedNewLayout;
-        DAWN_TRY(texture->ExportExternalTexture(desiredLayout, &signalSemaphore, &releasedOldLayout,
+        DAWN_TRY(texture->ExportExternalTexture(desiredLayout, requireSignalSemaphore,
+                                                &signalSemaphore, &releasedOldLayout,
                                                 &releasedNewLayout));
-
-        ExternalSemaphoreHandle semaphoreHandle;
-        DAWN_TRY_ASSIGN(semaphoreHandle,
-                        mExternalSemaphoreService->ExportSemaphore(signalSemaphore));
-        semaphoreHandles->push_back(semaphoreHandle);
+        if (requireSignalSemaphore) {
+            ExternalSemaphoreHandle semaphoreHandle;
+            DAWN_TRY_ASSIGN(semaphoreHandle,
+                            mExternalSemaphoreService->ExportSemaphore(signalSemaphore));
+            semaphoreHandles->push_back(semaphoreHandle);
+        }
         info->releasedOldLayout = releasedOldLayout;
         info->releasedNewLayout = releasedNewLayout;
         info->isInitialized =
