@@ -21,7 +21,6 @@
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/EnumMaskIterator.h"
 #include "dawn/native/Error.h"
-#include "dawn/native/VulkanBackend.h"
 #include "dawn/native/vulkan/AdapterVk.h"
 #include "dawn/native/vulkan/BufferVk.h"
 #include "dawn/native/vulkan/CommandRecordingContext.h"
@@ -783,7 +782,6 @@ void Texture::InitializeForSwapChain(VkImage nativeImage) {
 }
 
 MaybeError Texture::BindExternalMemory(const ExternalImageDescriptorVk* descriptor,
-                                       VkSemaphore signalSemaphore,
                                        VkDeviceMemory externalMemoryAllocation,
                                        std::vector<VkSemaphore> waitSemaphores) {
     Device* device = ToBackend(GetDevice());
@@ -798,13 +796,12 @@ MaybeError Texture::BindExternalMemory(const ExternalImageDescriptorVk* descript
 
     // Success, acquire all the external objects.
     mExternalAllocation = externalMemoryAllocation;
-    mSignalSemaphore = signalSemaphore;
     mWaitRequirements = std::move(waitSemaphores);
     return {};
 }
 
 MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
-                                          VkSemaphore* signalSemaphore,
+                                          LazySignalSemaphore* lazySignalSemaphore,
                                           VkImageLayout* releasedOldLayout,
                                           VkImageLayout* releasedNewLayout) {
     Device* device = ToBackend(GetDevice());
@@ -815,8 +812,6 @@ MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
     DAWN_INVALID_IF(mExternalAllocation == VK_NULL_HANDLE,
                     "Can't export a signal semaphore from destroyed or non-external texture %s.",
                     this);
-
-    ASSERT(mSignalSemaphore != VK_NULL_HANDLE);
 
     // Release the texture
     mExternalState = ExternalState::Released;
@@ -863,16 +858,11 @@ MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
     device->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
                                   nullptr, 0, nullptr, 1, &barrier);
 
-    // Queue submit to signal we are done with the texture
-    recordingContext->signalSemaphores.push_back(mSignalSemaphore);
-    DAWN_TRY(device->SubmitPendingCommands());
-
     // Write out the layouts and signal semaphore
     *releasedOldLayout = barrier.oldLayout;
     *releasedNewLayout = barrier.newLayout;
-    *signalSemaphore = mSignalSemaphore;
-
-    mSignalSemaphore = VK_NULL_HANDLE;
+    lazySignalSemaphore->SetExecutionSerial(
+        static_cast<uint64_t>(device->GetPendingCommandSerial()));
 
     // Destroy the texture so it can't be used again
     Destroy();
@@ -907,8 +897,6 @@ void Texture::DestroyImpl() {
 
         mHandle = VK_NULL_HANDLE;
         mExternalAllocation = VK_NULL_HANDLE;
-        // If a signal semaphore exists it should be requested before we delete the texture
-        ASSERT(mSignalSemaphore == VK_NULL_HANDLE);
     }
     // For Vulkan, we currently run the base destruction code after the internal changes because
     // of the dependency on the texture state which the base code overwrites too early.

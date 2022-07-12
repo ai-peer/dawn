@@ -131,14 +131,16 @@ class VulkanImageWrappingTestBackendDmaBuf : public VulkanImageWrappingTestBacke
             dawn::native::vulkan::WrapVulkanImage(device.Get(), &descriptorDmaBuf));
     }
 
-    bool ExportImage(const wgpu::Texture& texture,
+    bool ExportImage(const wgpu::Device& device,
+                     const wgpu::Texture& texture,
                      VkImageLayout layout,
                      ExternalImageExportInfoVkForTesting* exportInfo) override {
         ExternalImageExportInfoDmaBuf infoDmaBuf;
         bool success = ExportVulkanImage(texture.Get(), layout, &infoDmaBuf);
 
         *static_cast<ExternalImageExportInfoVk*>(exportInfo) = infoDmaBuf;
-        for (int fd : infoDmaBuf.semaphoreHandles) {
+        int fd = -1;
+        if (infoDmaBuf.lazySignalSemaphore.Resolve(device.Get(), &fd)) {
             EXPECT_NE(fd, -1);
             exportInfo->semaphores.push_back(std::make_unique<ExternalSemaphoreDmaBuf>(fd));
         }
