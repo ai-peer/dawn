@@ -2129,7 +2129,7 @@ sem::Expression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
     const sem::Type* ty = nullptr;
     const sem::Variable* source_var = nullptr;
     const sem::Constant* value = nullptr;
-    auto stage = sem::EvaluationStage::kRuntime;  // TODO(crbug.com/tint/1581)
+    auto stage = sem::EvaluationStage::kRuntime;
 
     switch (unary->op) {
         case ast::UnaryOp::kAddressOf:
@@ -2181,10 +2181,15 @@ sem::Expression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
                     return nullptr;
                 }
             }
-            ty = op.result;
-            if (op.const_eval_fn) {
-                value = (const_eval_.*op.const_eval_fn)(ty, &expr, 1u);
+            stage = expr->Stage();
+            if (stage == sem::EvaluationStage::kConstant) {
+                if (op.const_eval_fn) {
+                    value = (const_eval_.*op.const_eval_fn)(ty, &expr, 1u);
+                } else {
+                    stage = sem::EvaluationStage::kRuntime;
+                }
             }
+            ty = op.result;
             break;
         }
     }
