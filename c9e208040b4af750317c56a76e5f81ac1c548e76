@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9fa36f4_accfecda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-12T03:07:15Z",
+      "side": 1,
+      "message": "PTAL\n\nI am not exactly sure about the correctness of CL theoretically. But the performance gain seems rather appealing. For the 7x7 Google meet sample(https://source.chromium.org/chromium/chromium/src/+/main:content/test/data/gpu/vc/webgpu_videos_mxn.html;l\u003d1?q\u003dwebgpu_videos\u0026sq\u003d\u0026ss\u003dchromium), the GPU usage can drop from 35% to 21% on my ADL ChromeOS device. I would really appreciate your perspective on this, Thanks!",
+      "revId": "c9e208040b4af750317c56a76e5f81ac1c548e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
