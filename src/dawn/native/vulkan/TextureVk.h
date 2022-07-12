@@ -85,12 +85,13 @@ class Texture final : public TextureBase {
     // Binds externally allocated memory to the VkImage and on success, takes ownership of
     // semaphores.
     MaybeError BindExternalMemory(const ExternalImageDescriptorVk* descriptor,
-                                  VkSemaphore signalSemaphore,
                                   VkDeviceMemory externalMemoryAllocation,
                                   std::vector<VkSemaphore> waitSemaphores);
 
     MaybeError ExportExternalTexture(VkImageLayout desiredLayout,
-                                     VkSemaphore* signalSemaphore,
+#if DAWN_PLATFORM_IS(LINUX)
+                                     LazySignalSemaphore* lazySignalSemaphore,
+#endif
                                      VkImageLayout* releasedOldLayout,
                                      VkImageLayout* releasedNewLayout);
 
@@ -163,7 +164,6 @@ class Texture final : public TextureBase {
     VkImageLayout mPendingAcquireOldLayout;
     VkImageLayout mPendingAcquireNewLayout;
 
-    VkSemaphore mSignalSemaphore = VK_NULL_HANDLE;
     std::vector<VkSemaphore> mWaitRequirements;
 
     // Note that in early Vulkan versions it is not possible to transition depth and stencil

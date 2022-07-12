@@ -108,11 +108,40 @@ struct DAWN_NATIVE_EXPORT ExternalImageDescriptorDmaBuf : ExternalImageDescripto
     uint64_t drmModifier;  // DRM modifier of the buffer
 };
 
+// This is returned to clients when exporting external textures from Dawn. Clients can resolve it
+// to a semaphore FD to synchronize with. Clients are responsible for either resolving or resetting
+// a LazySignalSemaphore with the 'WGPUDevice' from which it was created.
+class LazySignalSemaphore {
+  public:
+    LazySignalSemaphore(const LazySignalSemaphore&) = delete;
+    LazySignalSemaphore& operator=(const LazySignalSemaphore&) = delete;
+
+    LazySignalSemaphore();
+    explicit LazySignalSemaphore(uint64_t handle);
+    ~LazySignalSemaphore();
+
+    LazySignalSemaphore(LazySignalSemaphore&& other);
+    LazySignalSemaphore& operator=(LazySignalSemaphore&& other);
+
+    void Reset(WGPUDevice device);
+
+    // Resolve this lazy semaphore to a 'fd' that the client can synchronize with.
+    bool Resolve(WGPUDevice device, int* fd);
+
+  private:
+    uint64_t mHandle = 0;
+    bool mValid = false;
+};
+
 // Info struct that is written to in |ExportVulkanImage|.
 struct DAWN_NATIVE_EXPORT ExternalImageExportInfoFD : ExternalImageExportInfoVk {
   public:
+    // To be removed after chromium side API transition.
     // Contains the exported semaphore handles.
     std::vector<int> semaphoreHandles;
+
+    // Contains the exported lazy signal semaphore.
+    LazySignalSemaphore lazySignalSemaphore;
 
   protected:
     using ExternalImageExportInfoVk::ExternalImageExportInfoVk;
