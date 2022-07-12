@@ -64,6 +64,20 @@ auto TypeDispatch(const sem::Type* type, F&& f) {
         [&](const sem::Bool*) { return f(static_cast<bool>(0)); });
 }
 
+/// IntegerDispatch is a helper for calling the function `f`, passing the integer value of the
+/// constant c.
+/// @returns the value returned by calling `f`.
+/// @note `c` must be of an integer type. Other types will not call `f`, and willreturn the
+/// zero-initialized value of the return type for `f`
+template <typename F>
+auto IntegerDispatch(const sem::Constant* c, F&& f) {
+    return Switch(
+        c->Type(),                                                  //
+        [&](const sem::AbstractInt*) { return f(c->As<AInt>()); },  //
+        [&](const sem::I32*) { return f(c->As<i32>()); },           //
+        [&](const sem::U32*) { return f(c->As<u32>()); });
+}
+
 /// @returns `value` if `T` is not a Number, otherwise ValueOf returns the inner value of the
 /// Number.
 template <typename T>
@@ -91,6 +105,11 @@ struct Constant : public sem::Constant {
                                                    const Source& source) const = 0;
 };
 
+/// Helper for the common static_cast of a sem::Constant* to a Constant*
+const Constant* C(const sem::Constant* c) {
+    return static_cast<const Constant*>(c);
+}
+
 // Forward declaration
 const Constant* CreateComposite(ProgramBuilder& builder,
                                 const sem::Type* type,
@@ -100,6 +119,9 @@ const Constant* CreateComposite(ProgramBuilder& builder,
 /// Element implements the Constant interface.
 template <typename T>
 struct Element : Constant {
+    static_assert(!std::is_same_v<UnwrapNumber<T>, T> || std::is_same_v<T, bool>,
+                  "T must be a Number or bool");
+
     Element(const sem::Type* t, T v) : type(t), value(v) {}
     ~Element() override = default;
     const sem::Type* Type() const override { return type; }
@@ -390,6 +412,23 @@ const Constant* CreateComposite(ProgramBuilder& builder,
     }
 }
 
+/// TransformElements constructs a new constant by applying the transformation function 'f' on each
+/// of the most deeply nested elements of 'c'.
+template <typename F>
+const Constant* TransformElements(ProgramBuilder& builder, const Constant* c, F&& f) {
+    uint32_t n = 0;
+    auto* ty = c->Type();
+    auto* el_ty = sem::Type::ElementOf(ty, &n);
+    if (el_ty == ty) {
+        return f(c);
+    }
+    std::vector<const Constant*> els(n);
+    for (uint32_t i = 0; i < n; i++) {
+        els[i] = TransformElements(builder, C(c->Index(i)), f);
+    }
+    return CreateComposite(builder, c->Type(), std::move(els));
+}
+
 }  // namespace
 
 ConstEval::ConstEval(ProgramBuilder& b) : builder(b) {}
@@ -440,7 +479,7 @@ const sem::Constant* ConstEval::ArrayOrStructCtor(const sem::Type* ty,
     std::vector<const Constant*> els;
     els.reserve(args.size());
     for (auto* arg : args) {
-        els.emplace_back(static_cast<const Constant*>(arg->ConstantValue()));
+        els.emplace_back(C(arg->ConstantValue()));
     }
     return CreateComposite(builder, ty, std::move(els));
 }
@@ -455,7 +494,7 @@ const sem::Constant* ConstEval::Conv(const sem::Type* ty,
     }
 
     auto& src = args[0]->Declaration()->source;
-    auto* arg = static_cast<const Constant*>(args[0]->ConstantValue());
+    auto* arg = C(args[0]->ConstantValue());
     if (!arg) {
         return nullptr;  // Single argument is not constant.
     }
@@ -480,7 +519,7 @@ const sem::Constant* ConstEval::Identity(const sem::Type*,
 const sem::Constant* ConstEval::VecSplat(const sem::Type* ty,
                                          sem::Expression const* const* args,
                                          size_t) {
-    if (auto* arg = static_cast<const Constant*>(args[0]->ConstantValue())) {
+    if (auto* arg = C(args[0]->ConstantValue())) {
         return builder.create<Splat>(ty, arg, static_cast<const sem::Vector*>(ty)->Width());
     }
     return nullptr;
@@ -492,7 +531,7 @@ const sem::Constant* ConstEval::VecCtorS(const sem::Type* ty,
     std::vector<const Constant*> els;
     els.reserve(num_args);
     for (size_t i = 0; i < num_args; i++) {
-        els.emplace_back(static_cast<const Constant*>(args[i]->ConstantValue()));
+        els.emplace_back(C(args[i]->ConstantValue()));
     }
     return CreateComposite(builder, ty, std::move(els));
 }
@@ -503,7 +542,7 @@ const sem::Constant* ConstEval::VecCtorM(const sem::Type* ty,
     std::vector<const Constant*> els;
     els.reserve(num_args);
     for (size_t i = 0; i < num_args; i++) {
-        auto* arg = static_cast<const Constant*>(args[i]->ConstantValue());
+        auto* arg = C(args[i]->ConstantValue());
         if (!arg) {
             return nullptr;
         }
@@ -511,7 +550,7 @@ const sem::Constant* ConstEval::VecCtorM(const sem::Type* ty,
         if (auto* arg_vec = arg_ty->As<sem::Vector>()) {
             // Extract out vector elements.
             for (uint32_t j = 0; j < arg_vec->Width(); j++) {
-                auto* el = static_cast<const Constant*>(arg->Index(j));
+                auto* el = C(arg->Index(j));
                 if (!el) {
                     return nullptr;
                 }
@@ -536,7 +575,7 @@ const sem::Constant* ConstEval::MatCtorS(const sem::Type* ty,
         column.reserve(m->rows());
         for (uint32_t r = 0; r < m->rows(); r++) {
             auto i = r + c * m->rows();
-            column.emplace_back(static_cast<const Constant*>(args[i]->ConstantValue()));
+            column.emplace_back(C(args[i]->ConstantValue()));
         }
         els.push_back(CreateComposite(builder, m->ColumnType(), std::move(column)));
     }
@@ -549,7 +588,7 @@ const sem::Constant* ConstEval::MatCtorV(const sem::Type* ty,
     std::vector<const Constant*> els;
     els.reserve(num_args);
     for (size_t i = 0; i < num_args; i++) {
-        els.emplace_back(static_cast<const Constant*>(args[i]->ConstantValue()));
+        els.emplace_back(C(args[i]->ConstantValue()));
     }
     return CreateComposite(builder, ty, std::move(els));
 }
@@ -599,10 +638,9 @@ const sem::Constant* ConstEval::Swizzle(const sem::Type* ty,
         return nullptr;
     }
     if (indices.size() == 1) {
-        return static_cast<const Constant*>(vec_val->Index(indices[0]));
+        return C(vec_val->Index(indices[0]));
     } else {
-        auto values = utils::Transform(
-            indices, [&](uint32_t i) { return static_cast<const Constant*>(vec_val->Index(i)); });
+        auto values = utils::Transform(indices, [&](uint32_t i) { return C(vec_val->Index(i)); });
         return CreateComposite(builder, ty, std::move(values));
     }
 }
@@ -612,13 +650,23 @@ const sem::Constant* ConstEval::Bitcast(const sem::Type*, const sem::Expression*
     return nullptr;
 }
 
+const sem::Constant* ConstEval::OpComplement(const sem::Type*,
+                                             sem::Expression const* const* args,
+                                             size_t) {
+    return TransformElements(builder, C(args[0]->ConstantValue()), [&](const Constant* c) {
+        return IntegerDispatch(c, [&](auto i) {  //
+            return CreateElement(builder, c->Type(), decltype(i)(~i.value));
+        });
+    });
+}
+
 utils::Result<const sem::Constant*> ConstEval::Convert(const sem::Type* target_ty,
                                                        const sem::Constant* value,
                                                        const Source& source) {
     if (value->Type() == target_ty) {
         return value;
     }
-    auto conv = static_cast<const Constant*>(value)->Convert(builder, target_ty, source);
+    auto conv = C(value)->Convert(builder, target_ty, source);
     if (!conv) {
         return utils::Failure;
     }
