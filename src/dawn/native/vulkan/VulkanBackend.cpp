@@ -21,6 +21,8 @@
 
 #include "dawn/native/VulkanBackend.h"
 
+#include <utility>
+
 #include "dawn/common/SwapChainUtils.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/NativeSwapChainImplVk.h"
@@ -72,6 +74,43 @@ ExternalImageExportInfoOpaqueFD::ExternalImageExportInfoOpaqueFD()
 
 ExternalImageExportInfoDmaBuf::ExternalImageExportInfoDmaBuf()
     : ExternalImageExportInfoFD(ExternalImageType::DmaBuf) {}
+
+LazySignalSemaphore::LazySignalSemaphore() = default;
+
+LazySignalSemaphore::LazySignalSemaphore(uint64_t handle) : mHandle(handle) {}
+
+LazySignalSemaphore::~LazySignalSemaphore() {
+    ASSERT(mHandle == 0);
+}
+
+LazySignalSemaphore::LazySignalSemaphore(LazySignalSemaphore&& other) {
+    *this = std::move(other);
+}
+
+LazySignalSemaphore& LazySignalSemaphore::operator=(LazySignalSemaphore&& other) {
+    if (this != &other) {
+        mHandle = other.mHandle;
+        other.mHandle = 0;
+    }
+    return *this;
+}
+
+void LazySignalSemaphore::Reset(WGPUDevice device) {
+    if (mHandle != 0) {
+        Device* backendDevice = ToBackend(FromAPI(device));
+        backendDevice->DestroyLazySignalSemaphore(mHandle);
+        mHandle = 0;
+    }
+}
+
+bool LazySignalSemaphore::Resolve(WGPUDevice device, int* fd) {
+    ASSERT(mHandle != 0);
+    bool ret = false;
+    Device* backendDevice = ToBackend(FromAPI(device));
+    ret = backendDevice->ResolveLazySignalSemaphore(mHandle, fd);
+    mHandle = 0;
+    return ret;
+}
 #endif  // DAWN_PLATFORM_IS(LINUX)
 
 WGPUTexture WrapVulkanImage(WGPUDevice device, const ExternalImageDescriptorVk* descriptor) {
@@ -108,8 +147,17 @@ bool ExportVulkanImage(WGPUTexture texture,
             Device* device = ToBackend(backendTexture->GetDevice());
             ExternalImageExportInfoFD* fdInfo = static_cast<ExternalImageExportInfoFD*>(info);
 
-            return device->SignalAndExportExternalTexture(backendTexture, desiredLayout, fdInfo,
-                                                          &fdInfo->semaphoreHandles);
+            bool ret = device->SignalAndExportExternalTexture(backendTexture, desiredLayout, fdInfo,
+                                                              &fdInfo->lazySignalSemaphore);
+            // To be removed after chromium side API transition.
+            if (fdInfo->semaphoreHandles.empty()) {
+                int fd = -1;
+                ret &= fdInfo->lazySignalSemaphore.Resolve(ToAPI(device), &fd);
+                if (ret) {
+                    fdInfo->semaphoreHandles.push_back(fd);
+                }
+            }
+            return ret;
         }
         default:
             return false;
