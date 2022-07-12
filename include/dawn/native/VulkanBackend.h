@@ -108,11 +108,35 @@ struct DAWN_NATIVE_EXPORT ExternalImageDescriptorDmaBuf : ExternalImageDescripto
     uint64_t drmModifier;  // DRM modifier of the buffer
 };
 
+// This internally holds a ExecutionSerial where the signal semaphore should have been submitted
+// and exported. With the introduction of LazySignalSemaphore, clients may delay to actually do
+// that until they really need, such that Dawn can have an optimization opportunity to merge and
+// reduce them.
+class LazySignalSemaphore {
+  public:
+    LazySignalSemaphore();
+    explicit LazySignalSemaphore(uint64_t executionSerial);
+    ~LazySignalSemaphore();
+
+    void SetExecutionSerial(uint64_t executionSerial);
+
+    // Resolve this lazy semaphore to an immediate one that clients can wait on. Fails if not
+    // supported or signaled already.
+    bool Resolve(WGPUDevice device, int* handle);
+
+  private:
+    uint64_t mExecutionSerial;
+};
+
 // Info struct that is written to in |ExportVulkanImage|.
 struct DAWN_NATIVE_EXPORT ExternalImageExportInfoFD : ExternalImageExportInfoVk {
   public:
+    // To be removed.
     // Contains the exported semaphore handles.
     std::vector<int> semaphoreHandles;
+
+    // Contains the exported lazy signal semaphore.
+    LazySignalSemaphore lazySignalSemaphore;
 
   protected:
     using ExternalImageExportInfoVk::ExternalImageExportInfoVk;

@@ -30,6 +30,7 @@ namespace dawn::native::vulkan {
 struct CommandRecordingContext;
 class Device;
 class Texture;
+class LazySignalSemaphore;
 
 VkFormat VulkanImageFormat(const Device* device, wgpu::TextureFormat format);
 VkImageUsageFlags VulkanImageUsage(wgpu::TextureUsage usage, const Format& format);
@@ -85,12 +86,11 @@ class Texture final : public TextureBase {
     // Binds externally allocated memory to the VkImage and on success, takes ownership of
     // semaphores.
     MaybeError BindExternalMemory(const ExternalImageDescriptorVk* descriptor,
-                                  VkSemaphore signalSemaphore,
                                   VkDeviceMemory externalMemoryAllocation,
                                   std::vector<VkSemaphore> waitSemaphores);
 
     MaybeError ExportExternalTexture(VkImageLayout desiredLayout,
-                                     VkSemaphore* signalSemaphore,
+                                     LazySignalSemaphore* lazySignalSemaphore,
                                      VkImageLayout* releasedOldLayout,
                                      VkImageLayout* releasedNewLayout);
 
