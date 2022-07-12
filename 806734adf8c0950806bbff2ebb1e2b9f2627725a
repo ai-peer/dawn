@@ -16,6 +16,57 @@
       "message": "Should be enough to get the `vulkan-deps` rolling again.",
       "revId": "806734adf8c0950806bbff2ebb1e2b9f2627725a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33cf1550_9c043996",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-12T12:26:25Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "806734adf8c0950806bbff2ebb1e2b9f2627725a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48d6925f_6c05b4a2",
+        "filename": "src/tint/reader/spirv/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1800,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-12T12:26:25Z",
+      "side": 1,
+      "message": "ultra-nit: is it that it must be paired with @location or that it can only used on user IO that can be identified with that they have an @location?",
+      "revId": "806734adf8c0950806bbff2ebb1e2b9f2627725a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef618972_2f0c1e04",
+        "filename": "src/tint/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-12T12:26:25Z",
+      "side": 1,
+      "message": "Won\u0027t this also add the flat decoration for gl_SampleID and friends in GLSL?",
+      "revId": "806734adf8c0950806bbff2ebb1e2b9f2627725a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
