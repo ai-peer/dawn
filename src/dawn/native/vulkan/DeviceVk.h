@@ -76,7 +76,10 @@ class Device final : public DeviceBase {
     bool SignalAndExportExternalTexture(Texture* texture,
                                         VkImageLayout desiredLayout,
                                         ExternalImageExportInfoVk* info,
-                                        std::vector<ExternalSemaphoreHandle>* semaphoreHandle);
+                                        LazySignalSemaphore* semaphoreHandle);
+
+    bool GetOrCreateSignalSemaphoreForExport(uint64_t executionSerial,
+                                             ExternalSemaphoreHandle* semaphoreHandle);
 
     ResultOrError<Ref<CommandBufferBase>> CreateCommandBuffer(
         CommandEncoder* encoder,
@@ -192,6 +195,9 @@ class Device final : public DeviceBase {
     // to a serial and a fence, such that when the fence is "ready" we know the operations
     // have finished.
     std::queue<std::pair<VkFence, ExecutionSerial>> mFencesInFlight;
+
+    std::vector<std::pair<VkSemaphore, ExecutionSerial>> mExternalSemaphoresInFlight;
+
     // Fences in the unused list aren't reset yet.
     std::vector<VkFence> mUnusedFences;
 
@@ -207,6 +213,7 @@ class Device final : public DeviceBase {
         VkCommandBuffer commandBuffer = VK_NULL_HANDLE;
     };
     SerialQueue<ExecutionSerial, CommandPoolAndBuffer> mCommandsInFlight;
+
     // Command pools in the unused list haven't been reset yet.
     std::vector<CommandPoolAndBuffer> mUnusedCommands;
     // There is always a valid recording context stored in mRecordingContext
@@ -216,7 +223,6 @@ class Device final : public DeviceBase {
                                    ExternalMemoryHandle memoryHandle,
                                    VkImage image,
                                    const std::vector<ExternalSemaphoreHandle>& waitHandles,
-                                   VkSemaphore* outSignalSemaphore,
                                    VkDeviceMemory* outAllocation,
                                    std::vector<VkSemaphore>* outWaitSemaphores);
 };
