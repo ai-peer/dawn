@@ -863,9 +863,16 @@ MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
     device->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
                                   nullptr, 0, nullptr, 1, &barrier);
 
-    // Queue submit to signal we are done with the texture
-    recordingContext->signalSemaphores.push_back(mSignalSemaphore);
-    DAWN_TRY(device->SubmitPendingCommands());
+    // For YUV video external textures, both GL and Vulkan use them as readonly. We can save the
+    // synchronization here.
+    if (GetFormat().format != wgpu::TextureFormat::R8BG8Biplanar420Unorm) {
+        // Queue submit to signal we are done with the texture
+        recordingContext->signalSemaphores.push_back(mSignalSemaphore);
+        DAWN_TRY(device->SubmitPendingCommands());
+    } else {
+        device->fn.DestroySemaphore(device->GetVkDevice(), mSignalSemaphore, nullptr);
+        mSignalSemaphore = VK_NULL_HANDLE;
+    }
 
     // Write out the layouts and signal semaphore
     *releasedOldLayout = barrier.oldLayout;

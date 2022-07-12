@@ -821,11 +821,12 @@ bool Device::SignalAndExportExternalTexture(
         VkImageLayout releasedNewLayout;
         DAWN_TRY(texture->ExportExternalTexture(desiredLayout, &signalSemaphore, &releasedOldLayout,
                                                 &releasedNewLayout));
-
-        ExternalSemaphoreHandle semaphoreHandle;
-        DAWN_TRY_ASSIGN(semaphoreHandle,
-                        mExternalSemaphoreService->ExportSemaphore(signalSemaphore));
-        semaphoreHandles->push_back(semaphoreHandle);
+        if (signalSemaphore != VK_NULL_HANDLE) {
+            ExternalSemaphoreHandle semaphoreHandle;
+            DAWN_TRY_ASSIGN(semaphoreHandle,
+                            mExternalSemaphoreService->ExportSemaphore(signalSemaphore));
+            semaphoreHandles->push_back(semaphoreHandle);
+        }
         info->releasedOldLayout = releasedOldLayout;
         info->releasedNewLayout = releasedNewLayout;
         info->isInitialized =
