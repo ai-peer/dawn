@@ -16,6 +16,46 @@
       "message": "PTAL again - all comments should be addressed",
       "revId": "49d58a275418584e1405a93f11ee0b7198a508a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c38d471d_0f772a72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-12T21:47:15Z",
+      "side": 1,
+      "message": "LGTM, one nit - thanks for the updates",
+      "revId": "49d58a275418584e1405a93f11ee0b7198a508a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c861cce_fe969485",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-12T21:47:15Z",
+      "side": 1,
+      "message": "since destroy removes the node, is it equivalent to do:\n`while (!empty()) { head()-\u003eDestroy(); }` ?\n\nif not, nit: rename resources -\u003e externalImage",
+      "range": {
+        "startLine": 764,
+        "startChar": 4,
+        "endLine": 771,
+        "endChar": 0
+      },
+      "revId": "49d58a275418584e1405a93f11ee0b7198a508a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
