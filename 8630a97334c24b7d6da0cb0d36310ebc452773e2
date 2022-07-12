@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87864109_8aafd155",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-12T03:05:04Z",
+      "side": 1,
+      "message": "PTAL - this fixes the Dawn roll for me (locally).\nIt\u0027s news to me that we build dawn_unittests in Chromium checkouts - so alternatively we could figure out how to get Chromium bots like `mac-rel` to not compile it. Not sure where that gets configured.",
+      "revId": "8630a97334c24b7d6da0cb0d36310ebc452773e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
