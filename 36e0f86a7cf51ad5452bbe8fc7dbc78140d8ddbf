@@ -132,6 +132,30 @@
       },
       "revId": "36e0f86a7cf51ad5452bbe8fc7dbc78140d8ddbf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38c42554_02d84478",
+        "filename": "src/dawn/native/d3d12/ExternalImageResourcesD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-12T16:19:45Z",
+      "side": 1,
+      "message": "ok let\u0027s continue with moving as much as we can into .cc files",
+      "parentUuid": "24248500_69a72a0a",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 5
+      },
+      "revId": "36e0f86a7cf51ad5452bbe8fc7dbc78140d8ddbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
