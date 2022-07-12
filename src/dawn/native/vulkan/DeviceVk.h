@@ -18,6 +18,7 @@
 #include <memory>
 #include <queue>
 #include <string>
+#include <tuple>
 #include <utility>
 #include <vector>
 
@@ -76,7 +77,11 @@ class Device final : public DeviceBase {
     bool SignalAndExportExternalTexture(Texture* texture,
                                         VkImageLayout desiredLayout,
                                         ExternalImageExportInfoVk* info,
-                                        std::vector<ExternalSemaphoreHandle>* semaphoreHandle);
+                                        LazySignalSemaphore* semaphoreHandle);
+
+    bool CreateAndSubmitSignalSemaphoreForExport(uint64_t executionSerial,
+                                                 ExternalSemaphoreHandle* semaphoreHandle);
+    bool IsExternalSemaphoreSignaled(uint64_t executionSerial);
 
     ResultOrError<Ref<CommandBufferBase>> CreateCommandBuffer(
         CommandEncoder* encoder,
@@ -192,6 +197,7 @@ class Device final : public DeviceBase {
     // to a serial and a fence, such that when the fence is "ready" we know the operations
     // have finished.
     std::queue<std::pair<VkFence, ExecutionSerial>> mFencesInFlight;
+
     // Fences in the unused list aren't reset yet.
     std::vector<VkFence> mUnusedFences;
 
@@ -216,7 +222,6 @@ class Device final : public DeviceBase {
                                    ExternalMemoryHandle memoryHandle,
                                    VkImage image,
                                    const std::vector<ExternalSemaphoreHandle>& waitHandles,
-                                   VkSemaphore* outSignalSemaphore,
                                    VkDeviceMemory* outAllocation,
                                    std::vector<VkSemaphore>* outWaitSemaphores);
 };
