@@ -108,6 +108,30 @@
       },
       "revId": "36e0f86a7cf51ad5452bbe8fc7dbc78140d8ddbf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24248500_69a72a0a",
+        "filename": "src/dawn/native/d3d12/ExternalImageResourcesD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-12T13:19:02Z",
+      "side": 1,
+      "message": "The idea was to speed up compilation by moving as much stuff as possible into the implementation files. LTCG should be taking care of inlining when needed. It also makes it clear that everything is an implementation detail, even getters that might instead be reaching deeper in the object graph. Either style works though with their tradeoffs.",
+      "parentUuid": "4095d14c_9971809b",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 5
+      },
+      "revId": "36e0f86a7cf51ad5452bbe8fc7dbc78140d8ddbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
