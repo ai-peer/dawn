@@ -33,6 +33,23 @@
       "message": "Oops, forgot that Dawn needs a +2 too",
       "revId": "38d116f09448f121f5b30ffa6091e949d19c8cd1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b846e8b_61f776eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-13T11:30:31Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "38d116f09448f121f5b30ffa6091e949d19c8cd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
