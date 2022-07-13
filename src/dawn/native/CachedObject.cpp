@@ -46,4 +46,10 @@ const CacheKey& CachedObject::GetCacheKey() const {
     return mCacheKey;
 }
 
+// static
+template <>
+void serde::Serde<CachedObject>::SerializeImpl(serde::Sink* sink, const CachedObject& obj) {
+    Serialize(sink, obj.GetCacheKey());
+}
+
 }  // namespace dawn::native

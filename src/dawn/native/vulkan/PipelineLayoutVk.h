@@ -31,6 +31,11 @@ class PipelineLayout final : public PipelineLayoutBase {
 
     VkPipelineLayout GetHandle() const;
 
+    // Friend definition of Serialize which can be found by ADL to override serde::Serialize<T>.
+    friend void Serialize(serde::Sink* sink, const PipelineLayout& obj) {
+        Serialize(sink, static_cast<const CachedObject&>(obj));
+    }
+
   private:
     ~PipelineLayout() override;
     void DestroyImpl() override;
