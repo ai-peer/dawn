@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b57c2d3_98042b33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-13T11:26:42Z",
+      "side": 1,
+      "message": "\u003e My concern here is that the texture could have been destroyed by its client already before the submit. When it comes to lifetime issues, we should always be very careful. Another potential side effect worth to mention is that I\u0027ve run into the GPU process crash issue many times for unknown reason if dawn returns un-submitted signal semaphores to chromium. Not sure whether there will be any pitfalls.\n\nThe idea would be that as soon as the texture has been used at least once by Dawn, then it would have a valid, signaled `VkSemaphore`. When exporting the texture we give back a vector\u003cfd\u003e it should work to return nothing, and then the user of Dawn has to synchronize with whatever previous to Dawn was using the texture.\n\nMy understanding is that the FD for VkSemaphores exported by Dawn are put in the SharedImageBackingOzone and should be use to synchronize everything else:\nhttps://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/shared_image_representation_dawn_ozone.cc;drc\u003d8a2381542cc9e9f208f138d546dd8443a8924093;l\u003d151\nhttps://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/shared_image_backing_ozone.cc;drc\u003da6fe0210768868959ac7e8d0e04eaf771e83e524;l\u003d456\n\nI don\u0027t know what happens for the compositing on ChromeOS though. Maybe there are enough implicit flushes around that no ordering on the GPU is needed, just proper CPU ordering.\n\nIn all cases, as discussed today, I still believe we should make a best effort to provide a correct API at the Dawn level. By eagerly transitioning and signaling in the submits I think we can get to great performance.",
+      "parentUuid": "10cb4f11_4dafdaee",
+      "revId": "c9e208040b4af750317c56a76e5f81ac1c548e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0458f4d1_dca3d9e0",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 1
