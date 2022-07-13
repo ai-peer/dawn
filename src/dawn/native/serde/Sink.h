@@ -12,17 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "dawn/native/CacheKey.h"
+#ifndef SRC_DAWN_NATIVE_SERDE_SINK_H_
+#define SRC_DAWN_NATIVE_SERDE_SINK_H_
 
-#include <iomanip>
-#include <string>
-#include <string_view>
+#include <cstddef>
 
-namespace dawn::native {
+namespace dawn::native::serde {
 
-template <>
-void serde::Serde<CacheKey>::SerializeImpl(serde::Sink* sink, const CacheKey& t) {
-    Serialize(sink, static_cast<const ByteVectorSink&>(t));
-}
+// Interface for a serialization sink.
+class Sink {
+  public:
+    // Allocate `bytes` space in the sink. Returns the pointer to the start
+    // of the allocation.
+    virtual void* GetSpace(size_t bytes) = 0;
+};
 
-}  // namespace dawn::native
+}  // namespace dawn::native::serde
+
+#endif  // SRC_DAWN_NATIVE_SERDE_SINK_H_
