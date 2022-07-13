@@ -67,7 +67,10 @@ class Info {
         if (it == map_.end()) {
             return nullptr;
         }
-        return As<RESULT>(it->second);
+        // static_cast to the known semantic base type for the given AST type.
+        // Doing this before the call to As<RESULT>() can avoid unnecessary dynamic casts.
+        auto* ptr = static_cast<const SemanticNodeTypeFor<AST_OR_TYPE>*>(it->second);
+        return As<RESULT>(ptr);
     }
 
     /// Add registers the semantic node `sem_node` for the AST or type node `node`.
