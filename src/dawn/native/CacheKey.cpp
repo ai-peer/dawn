@@ -20,6 +20,14 @@
 
 namespace dawn::native {
 
+CacheKey::CacheKey() : CacheKeyRecorder(this) {}
+
+void* CacheKey::GetSpace(size_t bytes) {
+    size_t currentSize = this->size();
+    this->resize(currentSize + bytes);
+    return &this->operator[](currentSize);
+}
+
 std::ostream& operator<<(std::ostream& os, const CacheKey& key) {
     os << std::hex;
     for (const int b : key) {
@@ -30,22 +38,12 @@ std::ostream& operator<<(std::ostream& os, const CacheKey& key) {
 }
 
 template <>
-void CacheKeySerializer<std::string>::Serialize(CacheKey* key, const std::string& t) {
-    key->Record(t.length());
-    key->insert(key->end(), t.begin(), t.end());
-}
-
-template <>
-void CacheKeySerializer<std::string_view>::Serialize(CacheKey* key, const std::string_view& t) {
-    key->Record(t.length());
-    key->insert(key->end(), t.begin(), t.end());
-}
-
-template <>
-void CacheKeySerializer<CacheKey>::Serialize(CacheKey* key, const CacheKey& t) {
+void CacheKeySerializer<CacheKey>::Serialize(serde::Sink* sink, const CacheKey& t) {
     // For nested cache keys, we do not record the length, and just copy the key so that it
     // appears we just flatten the keys into a single key.
-    key->insert(key->end(), t.begin(), t.end());
+    size_t size = t.size();
+    void* ptr = sink->GetSpace(size);
+    memcpy(ptr, t.data(), size);
 }
 
 }  // namespace dawn::native

@@ -1,0 +1,51 @@
+// Copyright 2022 The Dawn Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#include "dawn/native/serde/Serde.h"
+
+namespace dawn::native::serde {
+
+void Serde<std::string>::Serialize(Sink* s, const std::string& t) {
+    serde::Serialize<Serde>(s, t.length());
+    size_t size = t.length() * sizeof(char);
+    void* ptr = s->GetSpace(size);
+    memcpy(ptr, t.data(), size);
+}
+
+MaybeError Serde<std::string>::Deserialize(Source* s, std::string* t) {
+    size_t length;
+    DAWN_TRY(serde::Deserialize<Serde>(s, &length));
+    const void* ptr;
+    DAWN_TRY_ASSIGN(ptr, s->Read(length));
+    *t = std::string(static_cast<const char*>(ptr), length);
+    return {};
+}
+
+void Serde<std::string_view>::Serialize(Sink* s, const std::string_view& t) {
+    serde::Serialize<Serde>(s, t.length());
+    size_t size = t.length() * sizeof(char);
+    void* ptr = s->GetSpace(size);
+    memcpy(ptr, t.data(), size);
+}
+
+MaybeError Serde<std::string_view>::Deserialize(Source* s, std::string_view* t) {
+    size_t length;
+    DAWN_TRY(serde::Deserialize<Serde>(s, &length));
+    const void* ptr;
+    DAWN_TRY_ASSIGN(ptr, s->Read(length));
+    *t = std::string_view(static_cast<const char*>(ptr), length);
+    return {};
+}
+
+}  // namespace dawn::native::serde
