@@ -232,6 +232,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f1d787d0_1b10f409",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-13T13:22:34Z",
+      "side": 1,
+      "message": "Using \"Concurrent\" would require putting memory barriers manually in the MTLComputePass which we could do but seems a larger project. Can you add a comment to explain that Serial is the same as the default and we can see about using Concurrent later (post-V1 definitely)?",
+      "parentUuid": "40a38bbc_200fc2a6",
+      "range": {
+        "startLine": 58,
+        "startChar": 30,
+        "endLine": 58,
+        "endChar": 51
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2619b8b_55b73417",
         "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
         "patchSetId": 3
