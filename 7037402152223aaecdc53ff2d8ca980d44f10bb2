@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31b23aa7_cdfdffe8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-13T17:49:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7037402152223aaecdc53ff2d8ca980d44f10bb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86b55305_a0002716",
@@ -37,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac8a3aa4_65f612e5",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-13T17:49:20Z",
+      "side": 1,
+      "message": "the name as well - now it\u0027s initialized on creation, not on copy.\n\nI might call it \"D3D12ForceInitializeCopyableDepthStencilTextureOnCreation\"\n(I\u0027d include the D3D12 because the toggle does nothing on other backends)\n\nAlso, do we know if it is only a problem for CopyDst? what about CopySrc?",
+      "parentUuid": "86b55305_a0002716",
+      "revId": "7037402152223aaecdc53ff2d8ca980d44f10bb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d24a80bf_5ebc31fc",
         "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
         "patchSetId": 3
@@ -48,6 +83,23 @@
       "writtenOn": "2022-07-13T10:33:32Z",
       "side": 1,
       "message": "optional nit: IMHO there isn\u0027t that much clarity coming from factoring both code paths like this because we need to re-compute the TextureBase::ClearValue.",
+      "revId": "7037402152223aaecdc53ff2d8ca980d44f10bb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "177076c1_c3367c29",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2718,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-13T17:49:20Z",
+      "side": 1,
+      "message": "does the test not work for GL backends?",
       "revId": "7037402152223aaecdc53ff2d8ca980d44f10bb2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
