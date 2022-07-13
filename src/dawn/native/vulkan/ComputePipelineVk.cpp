@@ -41,7 +41,7 @@ MaybeError ComputePipeline::Initialize() {
     const PipelineLayout* layout = ToBackend(GetLayout());
 
     // Vulkan devices need cache UUID field to be serialized into pipeline cache keys.
-    mCacheKey.Record(device->GetDeviceInfo().properties.pipelineCacheUUID);
+    Serialize(&mCacheKey, device->GetDeviceInfo().properties.pipelineCacheUUID);
 
     VkComputePipelineCreateInfo createInfo;
     createInfo.sType = VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO;
@@ -85,8 +85,8 @@ MaybeError ComputePipeline::Initialize() {
     }
 
     // Record cache key information now since the createInfo is not stored.
-    mCacheKey.Record(createInfo, layout)
-        .RecordIterable(moduleAndSpirv.spirv, moduleAndSpirv.wordCount);
+    Serialize(&mCacheKey, createInfo, layout,
+              serde::Iterable(moduleAndSpirv.spirv, moduleAndSpirv.wordCount));
 
     // Try to see if we have anything in the blob cache.
     Ref<PipelineCache> cache = ToBackend(GetDevice()->GetOrCreatePipelineCache(GetCacheKey()));
