@@ -704,6 +704,102 @@ TEST_P(QueueWriteTextureTests, WriteStencilAspectWithSourceOffsetUnalignedTo4) {
     EXPECT_BUFFER_U8_RANGE_EQ(expectedData.data(), outputBuffer, 0, 8);
 }
 
+TEST_P(QueueWriteTextureTests, CopyDepthAspectWithOffset512) {
+    // Copies to a single aspect are unsupported on OpenGL.
+    DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
+
+    wgpu::TextureFormat format = wgpu::TextureFormat::Depth16Unorm;
+    const uint32_t texelBlockSize = utils::GetTexelBlockSizeInBytes(format);
+    const uint32_t expectedDataSize = Align(texelBlockSize, 4u);
+
+    wgpu::TextureDescriptor textureDescriptor = {};
+    textureDescriptor.format = format;
+    textureDescriptor.size = {1, 1, 1};
+    textureDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
+                              wgpu::TextureUsage::RenderAttachment;
+    wgpu::Texture texture = device.CreateTexture(&textureDescriptor);
+    // Finally, upload valid data into the texture and validate its contents.
+    const uint32_t offset = 512;
+    std::vector<uint8_t> expectedData(expectedDataSize + offset);
+    constexpr uint8_t kBaseValue = 204u;
+    for (uint32_t i = 0; i < texelBlockSize; ++i) {
+        expectedData[i + offset] = static_cast<uint8_t>(i + kBaseValue);
+    }
+    wgpu::Buffer buffer =
+        utils::CreateBufferFromData(device, expectedData.data(), expectedData.size(),
+                                    wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+
+    wgpu::Extent3D copySize = {1, 1, 1};
+    wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(texture);
+
+    wgpu::ImageCopyBuffer imageCopySourceBuffer = utils::CreateImageCopyBuffer(buffer);
+    imageCopySourceBuffer.layout.offset = offset;
+    encoder.CopyBufferToTexture(&imageCopySourceBuffer, &imageCopyTexture, &copySize);
+
+    wgpu::BufferDescriptor destinationBufferDescriptor = {};
+    destinationBufferDescriptor.size = expectedDataSize;
+    destinationBufferDescriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+    wgpu::Buffer destinationBuffer = device.CreateBuffer(&destinationBufferDescriptor);
+    wgpu::ImageCopyBuffer imageCopyDestinationBuffer =
+        utils::CreateImageCopyBuffer(destinationBuffer);
+    encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyDestinationBuffer, &copySize);
+
+    wgpu::CommandBuffer commandBuffer = encoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    EXPECT_BUFFER_U8_RANGE_EQ(expectedData.data() + offset, destinationBuffer, 0, expectedDataSize);
+}
+
+TEST_P(QueueWriteTextureTests, CopyDepthAspectWithOffset4) {
+    // Copies to a single aspect are unsupported on OpenGL.
+    DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
+
+    wgpu::TextureFormat format = wgpu::TextureFormat::Depth16Unorm;
+    const uint32_t texelBlockSize = utils::GetTexelBlockSizeInBytes(format);
+    const uint32_t expectedDataSize = Align(texelBlockSize, 4u);
+
+    wgpu::TextureDescriptor textureDescriptor = {};
+    textureDescriptor.format = format;
+    textureDescriptor.size = {1, 1, 1};
+    textureDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
+                              wgpu::TextureUsage::RenderAttachment;
+    wgpu::Texture texture = device.CreateTexture(&textureDescriptor);
+    // Finally, upload valid data into the texture and validate its contents.
+    const uint32_t offset = 4;
+    std::vector<uint8_t> expectedData(expectedDataSize + offset);
+    constexpr uint8_t kBaseValue = 204u;
+    for (uint32_t i = 0; i < texelBlockSize; ++i) {
+        expectedData[i + offset] = static_cast<uint8_t>(i + kBaseValue);
+    }
+    wgpu::Buffer buffer =
+        utils::CreateBufferFromData(device, expectedData.data(), expectedData.size(),
+                                    wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+
+    wgpu::Extent3D copySize = {1, 1, 1};
+    wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(texture);
+
+    wgpu::ImageCopyBuffer imageCopySourceBuffer = utils::CreateImageCopyBuffer(buffer);
+    imageCopySourceBuffer.layout.offset = offset;
+    encoder.CopyBufferToTexture(&imageCopySourceBuffer, &imageCopyTexture, &copySize);
+
+    wgpu::BufferDescriptor destinationBufferDescriptor = {};
+    destinationBufferDescriptor.size = expectedDataSize;
+    destinationBufferDescriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+    wgpu::Buffer destinationBuffer = device.CreateBuffer(&destinationBufferDescriptor);
+    wgpu::ImageCopyBuffer imageCopyDestinationBuffer =
+        utils::CreateImageCopyBuffer(destinationBuffer);
+    encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyDestinationBuffer, &copySize);
+
+    wgpu::CommandBuffer commandBuffer = encoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    EXPECT_BUFFER_U8_RANGE_EQ(expectedData.data() + offset, destinationBuffer, 0, expectedDataSize);
+}
+
 DAWN_INSTANTIATE_TEST(QueueWriteTextureTests,
                       D3D12Backend(),
                       MetalBackend(),
