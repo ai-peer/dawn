@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a854d2e_0a53f735",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-13T02:05:53Z",
+      "side": 1,
+      "message": "Thanks, Corentin.\nI have been thinking over a solution to still keep the signal semaphores to ensure the correctness as long as it is clean and simple. Your idea of deferring to next submit is inspiring.\n\u003e Then at the end of the submit we would insert the transitions / special semaphores and update the state of the texture.\n\nMy concern here is that the texture could have been destroyed by its client already before the submit. When it comes to lifetime issues, we should always be very careful. Another potential side effect worth to mention is that I\u0027ve run into the GPU process crash issue many times for unknown reason if dawn returns un-submitted signal semaphores to chromium. Not sure whether there will be any pitfalls.\n\nAnyway we don\u0027t need to be perfect if it\u0027s really unnecessary, right?\nFor nv12 SharedImage, the only writer is the VAAPI. GL compositor and Vulkan WebGPU are merely readers. I\u0027ve been digging around for a while to understand the   synchronization between the writer and readers. But to my surprise a little bit, if I understand correctly, GPUFence(signal semaphore) is only used to synchronize between GL and Vulkan, and for VAAPI decoder synchronization, only SyncToken(command buffer level) is used which seems not sufficient to prevent the hazard of write-before-read-is-done. I happened to find the doc which partially confirms my understanding. https://docs.google.com/document/d/1-JQkhkz4ace8toR5saN7jezIDxwvVhsxHi-nLTW_JwA/edit#heading\u003dh.88fenkxl4wcf\n\u003e\u003e I don’t believe any other work is needed for synchronization with video buffers. However, do note that we currently mark VideoFrames going to the client with read lock fences enabled (see this) which means we should only get the frame back from the client once it’s not being used anymore, i.e., compositing is done (module a SyncToken, I think). Our video drivers don’t support explicit fences, so at least for video, there’s not much of a benefit in plumbing them.\n\nAlso SharedImageRepresentationVaapi is not actually being used for now. It seems there has been some suspended work for that support.\nSo in case of all these, probably we really don\u0027t need the signal semaphores to merely synchronize with GL compositor because both it and WebGPU vulkan are just readers, while the only writer VAAPI is ignoring semaphores.",
+      "parentUuid": "7d15f122_8f21bb26",
+      "revId": "c9e208040b4af750317c56a76e5f81ac1c548e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0458f4d1_dca3d9e0",
