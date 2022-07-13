@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4605be78_d4df7037",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-13T10:33:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7037402152223aaecdc53ff2d8ca980d44f10bb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86b55305_a0002716",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-13T10:33:32Z",
+      "side": 1,
+      "message": "nit: description could be updated.",
+      "revId": "7037402152223aaecdc53ff2d8ca980d44f10bb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d24a80bf_5ebc31fc",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-13T10:33:32Z",
+      "side": 1,
+      "message": "optional nit: IMHO there isn\u0027t that much clarity coming from factoring both code paths like this because we need to re-compute the TextureBase::ClearValue.",
+      "revId": "7037402152223aaecdc53ff2d8ca980d44f10bb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
