@@ -164,6 +164,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95d3810a_5c219cc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-13T12:47:42Z",
+      "side": 1,
+      "message": "Or just a brand new VkSemaphore.\n\nWhat I mean is that:\n\n```\nif (the texture was used at least once in Dawn) {\n  the export info will contain one semaphore\n  that semaphore will have been signaled (that addresses the concern that there\u0027s problems with waiting on unsignaled semaphores)\n} else {\n  the export info will contain 0 semaphores\n}\n```",
+      "parentUuid": "29b30b6e_4be469df",
+      "revId": "c9e208040b4af750317c56a76e5f81ac1c548e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0458f4d1_dca3d9e0",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 1
