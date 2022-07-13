@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c49355f_544238ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-13T12:06:00Z",
+      "side": 1,
+      "message": "\u003e\u003e The idea would be that as soon as the texture has been used at least once by Dawn, then it would have a valid, signaled  VkSemaphore . When exporting the texture we give back a vector\u003cfd\u003e it should work to return nothing, and then the user of Dawn has to synchronize with whatever previous to Dawn was using the texture.\n\nSorry, unable to exactly understand this.\nFirstly, are we going to have the CL specific for multi-planar video frames?\n\n\u003e\u003e it would have a valid, signaled  VkSemaphore \nWhat\u0027s this VkSemaphore for?\n\n\u003e\u003e When exporting the texture we give back a vector\u003cfd\u003e it should work to return nothing\nDoes this mean the returned \"vector\u003cfd\u003e\" can be empty?\n\n\u003e\u003e then the user of Dawn has to synchronize with whatever previous to Dawn was using the texture.\nWhen the user of Dawn should do that? Any representation like Dawn or Skia, of the SharedImageOzoneBacking runs BeginAccess if the returned vector\u003cfd\u003e was empty?",
+      "parentUuid": "9b57c2d3_98042b33",
+      "revId": "c9e208040b4af750317c56a76e5f81ac1c548e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0458f4d1_dca3d9e0",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 1
