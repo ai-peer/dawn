@@ -146,6 +146,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "29b30b6e_4be469df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-13T12:44:03Z",
+      "side": 1,
+      "message": "\u003e then it would have a valid, signaled  VkSemaphore . \nSo it should have been un-signaled, as waiting on a signaled semaphore just makes no sense, right?\n\nStill not quite clear about the idea.\n@Austin, I would really appreciate it if you could help understand this?",
+      "parentUuid": "5eb574c8_a786731b",
+      "revId": "c9e208040b4af750317c56a76e5f81ac1c548e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0458f4d1_dca3d9e0",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 1
