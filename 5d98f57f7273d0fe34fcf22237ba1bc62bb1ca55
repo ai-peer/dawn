@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb38d47c_142b9826",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-07-13T08:17:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb00e228_fd2c93f4",
+      "revId": "5d98f57f7273d0fe34fcf22237ba1bc62bb1ca55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d11a8659_96cbeffe",
@@ -65,6 +83,24 @@
       "writtenOn": "2022-07-12T12:54:08Z",
       "side": 1,
       "message": "optional nit: I think it could be more readable with:\n\n```\nbool skipInitialization \u003d IsComplete...\n\nif (isToggleEnabled \u0026\u0026 depth) {\n  skipInitialization \u003d false\n}\n\nif (skipInitalization) {\n  SetIsSubresourceInitialized\n} else {\n  EnsureSubresourceInitializer\n}\n```",
+      "revId": "5d98f57f7273d0fe34fcf22237ba1bc62bb1ca55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82163483_899d9367",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-07-13T08:17:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d11a8659_96cbeffe",
       "revId": "5d98f57f7273d0fe34fcf22237ba1bc62bb1ca55",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +128,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d09a9349_a7466473",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2609,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-07-13T08:17:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53f9d7ca_845c01b8",
+      "range": {
+        "startLine": 2609,
+        "startChar": 74,
+        "endLine": 2609,
+        "endChar": 80
+      },
+      "revId": "5d98f57f7273d0fe34fcf22237ba1bc62bb1ca55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09d9ac11_7817dd1c",
@@ -105,6 +165,24 @@
       "writtenOn": "2022-07-12T12:54:08Z",
       "side": 1,
       "message": "Isn\u0027t onSubmittedWorkDone enough?",
+      "revId": "5d98f57f7273d0fe34fcf22237ba1bc62bb1ca55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ec9dcc0_ed8143be",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2612,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-07-13T08:17:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09d9ac11_7817dd1c",
       "revId": "5d98f57f7273d0fe34fcf22237ba1bc62bb1ca55",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
