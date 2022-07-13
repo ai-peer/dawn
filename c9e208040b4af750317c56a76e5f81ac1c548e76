@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10cb4f11_4dafdaee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-13T02:32:51Z",
+      "side": 1,
+      "message": "Just realized I had been in chromium context all the time. For dawn, we may need to change the API to allow clients choose not to use signal semaphores.",
+      "parentUuid": "4a854d2e_0a53f735",
+      "revId": "c9e208040b4af750317c56a76e5f81ac1c548e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0458f4d1_dca3d9e0",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 1
