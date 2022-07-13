@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97d447c6_fcededf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-13T21:43:55Z",
+      "side": 1,
+      "message": "o_O big diff - what changed? / how did we generate the new expectations?",
+      "revId": "f4d742a1c4ab5fdef044256e388aea0b52b06dcf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
