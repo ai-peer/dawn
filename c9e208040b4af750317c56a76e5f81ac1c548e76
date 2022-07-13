@@ -128,6 +128,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5eb574c8_a786731b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-13T12:12:19Z",
+      "side": 1,
+      "message": "\u003e Sorry, unable to exactly understand this.\n\u003e Firstly, are we going to have the CL specific for multi-planar video frames?\n\nThe CL I was thinking about wouldn\u0027t be specific to multi-planar video frames no.\n\n\u003e What\u0027s this VkSemaphore for?\n\nSo that the user of Dawn can synchronize follow-up accesses to the texture by waiting on the semaphore.\n\n\u003e Does this mean the returned \"vector\u003cfd\u003e\" can be empty?\n\nPotentially, for example if you never used the texture. This means that the SharedImage representation should know to inject back the previous semaphores if Dawn didn\u0027t give any back.",
+      "parentUuid": "2c49355f_544238ce",
+      "revId": "c9e208040b4af750317c56a76e5f81ac1c548e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0458f4d1_dca3d9e0",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 1
