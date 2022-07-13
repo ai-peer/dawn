@@ -30,11 +30,11 @@ namespace {{native_namespace}} {
 {% macro render_serializer(member) %}
     {%- set name = member.name.camelCase() -%}
     {% if member.length == None %}
-        key->Record(t.{{name}});
+        CacheKeyRecorder(sink).Record(t.{{name}});
     {% elif member.length == "strlen" %}
-        key->RecordIterable(t.{{name}}, strlen(t.{{name}}));
+        CacheKeyRecorder(sink).RecordIterable(t.{{name}}, strlen(t.{{name}}));
     {% else %}
-        key->RecordIterable(t.{{name}}, t.{{member.length.name.camelCase()}});
+        CacheKeyRecorder(sink).RecordIterable(t.{{name}}, t.{{member.length.name.camelCase()}});
     {% endif %}
 {% endmacro %}
 
@@ -49,7 +49,7 @@ namespace {{native_namespace}} {
 {% macro render_cache_key_serializer(json_type, omits=[]) %}
     {%- set cpp_type = types[json_type].name.CamelCase() -%}
     template <>
-    void CacheKeySerializer<{{cpp_type}}>::Serialize(CacheKey* key, const {{cpp_type}}& t) {
+    void CacheKeySerializer<{{cpp_type}}>::Serialize(serde::Sink* sink, const {{cpp_type}}& t) {
     {{ caller() }}
     {% for member in types[json_type].members %}
         {%- if not member.name.get() in omits %}

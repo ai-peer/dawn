@@ -29,11 +29,11 @@ namespace dawn::native {
 // Testing classes with mock serializing implemented for testing.
 class A {
   public:
-    MOCK_METHOD(void, SerializeMock, (CacheKey*, const A&), (const));
+    MOCK_METHOD(void, SerializeMock, (serde::Sink*, const A&), (const));
 };
 template <>
-void CacheKeySerializer<A>::Serialize(CacheKey* key, const A& t) {
-    t.SerializeMock(key, t);
+void CacheKeySerializer<A>::Serialize(serde::Sink* s, const A& t) {
+    t.SerializeMock(s, t);
 }
 
 // Custom printer for CacheKey for clearer debug testing messages.
@@ -54,7 +54,9 @@ using ::testing::Ref;
 
 // Matcher to compare CacheKeys for easier testing.
 MATCHER_P(CacheKeyEq, key, PrintToString(key)) {
-    return arg.size() == key.size() && memcmp(arg.data(), key.data(), key.size()) == 0;
+    const CacheKey& lhs = static_cast<const CacheKey&>(arg);
+    const CacheKey& rhs = static_cast<const CacheKey&>(key);
+    return lhs.size() == rhs.size() && memcmp(lhs.data(), rhs.data(), rhs.size()) == 0;
 }
 
 // Test that CacheKey::Record calls serialize on the single member of a struct.
