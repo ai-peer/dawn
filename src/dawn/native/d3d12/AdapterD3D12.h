@@ -38,6 +38,7 @@ class Adapter : public AdapterBase {
     Backend* GetBackend() const;
     ComPtr<ID3D12Device> GetDevice() const;
     const gpu_info::D3DDriverVersion& GetDriverVersion() const;
+    bool IsDriverVersionLessThan(std::array<uint16_t, 4>* version);
 
   private:
     ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(const DeviceDescriptor* descriptor) override;

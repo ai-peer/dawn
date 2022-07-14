@@ -61,6 +61,18 @@ const gpu_info::D3DDriverVersion& Adapter::GetDriverVersion() const {
     return mDriverVersion;
 }
 
+bool Adapter::IsDriverVersionLessThan(std::array<uint16_t, 4>* version) {
+    ASSERT(mDriverVersion.size() == 4);
+    for (size_t i = 0; i < 4; ++i) {
+        if (mDriverVersion[i] < (*version)[i]) {
+            return true;
+        } else if (mDriverVersion[i] > (*version)[i]) {
+            return false;
+        }
+    }
+    return false;
+}
+
 MaybeError Adapter::InitializeImpl() {
     // D3D12 cannot check for feature support without a device.
     // Create the device to populate the adapter properties then reuse it when needed for actual
