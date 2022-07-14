@@ -94,6 +94,30 @@
       },
       "revId": "10caa8ca6aa95f1c740e195258f852a154972269",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e216c045_4aad9e7e",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2074,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-14T20:24:11Z",
+      "side": 1,
+      "message": "I don\u0027t feel that strongly about it.",
+      "parentUuid": "87a7a930_c1b4a70d",
+      "range": {
+        "startLine": 2074,
+        "startChar": 16,
+        "endLine": 2074,
+        "endChar": 47
+      },
+      "revId": "10caa8ca6aa95f1c740e195258f852a154972269",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
