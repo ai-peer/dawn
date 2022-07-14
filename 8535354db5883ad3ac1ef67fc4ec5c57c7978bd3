@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c93c461_1ef44a3d",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-14T18:25:07Z",
+      "side": 1,
+      "message": "Because structures are the only type where the element types can differ.",
+      "parentUuid": "b4b5c9f0_72cb71b5",
+      "range": {
+        "startLine": 282,
+        "startChar": 12,
+        "endLine": 282,
+        "endChar": 73
+      },
+      "revId": "8535354db5883ad3ac1ef67fc4ec5c57c7978bd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c27224b_8ed51763",
         "filename": "src/tint/resolver/resolver_constants.cc",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-14T18:04:45Z",
       "side": 1,
       "message": "nit: `args_as_constants` may be a better name",
+      "range": {
+        "startLine": 452,
+        "startChar": 9,
+        "endLine": 452,
+        "endChar": 18
+      },
+      "revId": "8535354db5883ad3ac1ef67fc4ec5c57c7978bd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff6a50d7_5013b819",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-14T18:25:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c27224b_8ed51763",
       "range": {
         "startLine": 452,
         "startChar": 9,
@@ -60,6 +108,30 @@
       "writtenOn": "2022-07-14T18:04:45Z",
       "side": 1,
       "message": "Unfortunate casting. Btw, how come we don\u0027t need this cast on line 567 below where `indices` is a vector of `uint32_t`?",
+      "range": {
+        "startLine": 556,
+        "startChar": 26,
+        "endLine": 556,
+        "endChar": 45
+      },
+      "revId": "8535354db5883ad3ac1ef67fc4ec5c57c7978bd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad11d44f_080dc289",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-14T18:25:07Z",
+      "side": 1,
+      "message": "Yes, this is now enforced with new warnings that Dan enabled. Is annoying. Maybe we can make `Index()` take a uint32_t. meh.\n\n\u003e Btw, how come we don\u0027t need this cast on line 567 below where `indices` is a vector of `uint32_t`?\n\nI... don\u0027t know. Fixed that one too.",
+      "parentUuid": "671ef409_84a93ece",
       "range": {
         "startLine": 556,
         "startChar": 26,
