@@ -22,6 +22,8 @@
 #include "dawn/native/Error.h"
 #include "dawn/native/ResourceMemoryAllocation.h"
 
+static constexpr uint32_t kExtraMemoryToMitigateTextureCorruption = 24576u;
+
 namespace dawn::native {
 
 class ResourceHeapAllocator;
@@ -44,7 +46,9 @@ class BuddyMemoryAllocator {
                          ResourceHeapAllocator* heapAllocator);
     ~BuddyMemoryAllocator();
 
-    ResultOrError<ResourceMemoryAllocation> Allocate(uint64_t allocationSize, uint64_t alignment);
+    ResultOrError<ResourceMemoryAllocation> Allocate(uint64_t allocationSize,
+                                                     uint64_t alignment,
+                                                     bool needExtraMemory = false);
     void Deallocate(const ResourceMemoryAllocation& allocation);
 
     uint64_t GetMemoryBlockSize() const;

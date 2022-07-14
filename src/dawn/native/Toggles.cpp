@@ -274,6 +274,13 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "the initialization when the entire subresource is the copy destination as a workaround on "
       "Intel D3D12 drivers.",
       "https://crbug.com/dawn/1487"}},
+    {Toggle::D3D12AllocateExtraMemoryFor2DArrayTexture,
+     {"d3d12_allocate_extra_memory_for_2d_array_texture",
+      "Memory allocation for 2D array texture may be smaller than it should be on D3D12 on some "
+      "Intel devices. So texture access can be out-of-bound, which may cause critical security "
+      "issue. We can workaround this security issue via allocating extra memory and limiting its "
+      "access in itself.",
+      "https://crbug.com/dawn/949"}},
     // Comment to separate the }} so it is clearer what to copy-paste to add a toggle.
 }};
 }  // anonymous namespace

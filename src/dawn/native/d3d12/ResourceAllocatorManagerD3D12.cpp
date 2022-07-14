@@ -197,6 +197,13 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::AllocateMemory(
         optimizedClearValue = &zero;
     }
 
+    // If we are allocating memory for a 2D array texture on D3D12 backend, we need to allocate
+    // extra memory on some devices, see crbug.com/dawn/949 for details.
+    bool needExtraMemory =
+        resourceDescriptor.Dimension == D3D12_RESOURCE_DIMENSION_TEXTURE2D &&
+        resourceDescriptor.DepthOrArraySize > 1 &&
+        mDevice->IsToggleEnabled(Toggle::D3D12AllocateExtraMemoryFor2DArrayTexture);
+
     // TODO(crbug.com/dawn/849): Conditionally disable sub-allocation.
     // For very large resources, there is no benefit to suballocate.
     // For very small resources, it is inefficent to suballocate given the min. heap
@@ -204,8 +211,9 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::AllocateMemory(
     // Attempt to satisfy the request using sub-allocation (placed resource in a heap).
     if (!mDevice->IsToggleEnabled(Toggle::DisableResourceSuballocation)) {
         ResourceHeapAllocation subAllocation;
-        DAWN_TRY_ASSIGN(subAllocation, CreatePlacedResource(heapType, resourceDescriptor,
-                                                            optimizedClearValue, initialUsage));
+        DAWN_TRY_ASSIGN(subAllocation,
+                        CreatePlacedResource(heapType, resourceDescriptor, optimizedClearValue,
+                                             initialUsage, needExtraMemory));
         if (subAllocation.GetInfo().mMethod != AllocationMethod::kInvalid) {
             return std::move(subAllocation);
         }
@@ -213,8 +221,9 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::AllocateMemory(
 
     // If sub-allocation fails, fall-back to direct allocation (committed resource).
     ResourceHeapAllocation directAllocation;
-    DAWN_TRY_ASSIGN(directAllocation, CreateCommittedResource(heapType, resourceDescriptor,
-                                                              optimizedClearValue, initialUsage));
+    DAWN_TRY_ASSIGN(directAllocation,
+                    CreateCommittedResource(heapType, resourceDescriptor, optimizedClearValue,
+                                            initialUsage, needExtraMemory));
     if (directAllocation.GetInfo().mMethod != AllocationMethod::kInvalid) {
         return std::move(directAllocation);
     }
@@ -275,7 +284,8 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::CreatePlacedReso
     D3D12_HEAP_TYPE heapType,
     const D3D12_RESOURCE_DESC& requestedResourceDescriptor,
     const D3D12_CLEAR_VALUE* optimizedClearValue,
-    D3D12_RESOURCE_STATES initialUsage) {
+    D3D12_RESOURCE_STATES initialUsage,
+    bool needExtraMemory) {
     const ResourceHeapKind resourceHeapKind =
         GetResourceHeapKind(requestedResourceDescriptor.Dimension, heapType,
                             requestedResourceDescriptor.Flags, mResourceHeapTier);
@@ -313,8 +323,8 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::CreatePlacedReso
         mSubAllocatedResourceAllocators[static_cast<size_t>(resourceHeapKind)].get();
 
     ResourceMemoryAllocation allocation;
-    DAWN_TRY_ASSIGN(allocation,
-                    allocator->Allocate(resourceInfo.SizeInBytes, resourceInfo.Alignment));
+    DAWN_TRY_ASSIGN(allocation, allocator->Allocate(resourceInfo.SizeInBytes,
+                                                    resourceInfo.Alignment, needExtraMemory));
     if (allocation.GetInfo().mMethod == AllocationMethod::kInvalid) {
         return ResourceHeapAllocation{};  // invalid
     }
@@ -351,7 +361,8 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::CreateCommittedR
     D3D12_HEAP_TYPE heapType,
     const D3D12_RESOURCE_DESC& resourceDescriptor,
     const D3D12_CLEAR_VALUE* optimizedClearValue,
-    D3D12_RESOURCE_STATES initialUsage) {
+    D3D12_RESOURCE_STATES initialUsage,
+    bool needExtraMemory) {
     D3D12_HEAP_PROPERTIES heapProperties;
     heapProperties.Type = heapType;
     heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_UNKNOWN;
@@ -365,6 +376,11 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::CreateCommittedR
     // incorrectly allocate a mismatched size.
     D3D12_RESOURCE_ALLOCATION_INFO resourceInfo =
         mDevice->GetD3D12Device()->GetResourceAllocationInfo(0, 1, &resourceDescriptor);
+
+    if (needExtraMemory) {
+        resourceInfo.SizeInBytes += kExtraMemoryToMitigateTextureCorruption;
+    }
+
     if (resourceInfo.SizeInBytes == 0 ||
         resourceInfo.SizeInBytes == std::numeric_limits<uint64_t>::max()) {
         return DAWN_OUT_OF_MEMORY_ERROR("Resource allocation size was invalid.");
@@ -383,11 +399,31 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::CreateCommittedR
     // Note: Heap flags are inferred by the resource descriptor and do not need to be explicitly
     // provided to CreateCommittedResource.
     ComPtr<ID3D12Resource> committedResource;
-    DAWN_TRY(CheckOutOfMemoryHRESULT(
-        mDevice->GetD3D12Device()->CreateCommittedResource(
-            &heapProperties, D3D12_HEAP_FLAG_NONE, &resourceDescriptor, initialUsage,
-            optimizedClearValue, IID_PPV_ARGS(&committedResource)),
-        "ID3D12Device::CreateCommittedResource"));
+    if (needExtraMemory) {
+        // Emulate CreateCommittedResource via explicitely creating a heap with given size and
+        // allocating memory from that heap, in order to workaround a bug on some devices.
+        D3D12_HEAP_DESC heapDesc;
+        heapDesc.SizeInBytes = resourceInfo.SizeInBytes;
+        heapDesc.Properties = heapProperties;
+        heapDesc.Alignment = resourceInfo.Alignment;
+        heapDesc.Flags = GetD3D12HeapFlags(GetResourceHeapKind(
+            resourceDescriptor.Dimension, heapType, resourceDescriptor.Flags, mResourceHeapTier));
+        ComPtr<ID3D12Heap> d3d12Heap;
+        DAWN_TRY(CheckOutOfMemoryHRESULT(
+            mDevice->GetD3D12Device()->CreateHeap(&heapDesc, IID_PPV_ARGS(&d3d12Heap)),
+            "ID3D12Device::CreateHeap"));
+
+        DAWN_TRY(CheckOutOfMemoryHRESULT(mDevice->GetD3D12Device()->CreatePlacedResource(
+                                             d3d12Heap.Get(), 0, &resourceDescriptor, initialUsage,
+                                             optimizedClearValue, IID_PPV_ARGS(&committedResource)),
+                                         "ID3D12Device::CreatePlacedResource"));
+    } else {
+        DAWN_TRY(CheckOutOfMemoryHRESULT(
+            mDevice->GetD3D12Device()->CreateCommittedResource(
+                &heapProperties, D3D12_HEAP_FLAG_NONE, &resourceDescriptor, initialUsage,
+                optimizedClearValue, IID_PPV_ARGS(&committedResource)),
+            "ID3D12Device::CreateCommittedResource"));
+    }
 
     // When using CreateCommittedResource, D3D12 creates an implicit heap that contains the
     // resource allocation. Because Dawn's memory residency management occurs at the resource
