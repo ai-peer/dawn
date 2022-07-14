@@ -2374,3 +2374,8 @@ crbug.com/dawn/0000 webgpu:web_platform,canvas,getCurrentTexture:* [ Skip ]
 crbug.com/dawn/0000 webgpu:web_platform,canvas,getPreferredFormat:* [ Skip ]
 crbug.com/dawn/0000 [ intel ] webgpu:web_platform,canvas,readbackFromWebGPUCanvas:drawTo2DCanvas:format="bgra8unorm";webgpuCanvasType="offscreen";canvas2DType="onscreen" [ Failure ]
 crbug.com/dawn/0000 [ intel ] webgpu:web_platform,canvas,readbackFromWebGPUCanvas:offscreenCanvas,snapshot:format="rgba16float";snapshotType="convertToBlob" [ Failure ]
+
+################################################################################
+# WebGPU canvas to WebGL copy flipY behavior change
+################################################################################
+crbug.com/1344276 [ win ] webgpu:web_platform,canvas,readbackFromWebGPUCanvas:onscreenCanvas,uploadToWebGL,* [ Failure ]
