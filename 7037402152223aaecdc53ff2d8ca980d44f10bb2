@@ -156,6 +156,24 @@
       "parentUuid": "177076c1_c3367c29",
       "revId": "7037402152223aaecdc53ff2d8ca980d44f10bb2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33c22a95_8b61ead8",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2718,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-14T23:05:39Z",
+      "side": 1,
+      "message": "That seems like something is unimplemented - perhaps because we did not previously have the Depth16Unorm format before.\n\nCould you file a bug and then suppress the test on the GL backends with a reference to the bug?",
+      "parentUuid": "27c49672_d9d6fd01",
+      "revId": "7037402152223aaecdc53ff2d8ca980d44f10bb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

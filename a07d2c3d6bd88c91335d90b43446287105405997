@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19c901c4_ced806ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-14T23:05:39Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a07d2c3d6bd88c91335d90b43446287105405997",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b516aead_5699b44e",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-14T23:05:39Z",
+      "side": 1,
+      "message": "nit: extraneous \"the\"",
+      "range": {
+        "startLine": 273,
+        "startChar": 27,
+        "endLine": 273,
+        "endChar": 31
+      },
+      "revId": "a07d2c3d6bd88c91335d90b43446287105405997",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
