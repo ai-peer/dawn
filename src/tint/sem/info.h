@@ -35,7 +35,7 @@ class Info {
     /// Placeholder type used by Get() to provide a default value for EXPLICIT_SEM
     using InferFromAST = std::nullptr_t;
 
-    /// Resolves to the return type of the Get() method given the desired sementic
+    /// Resolves to the return type of the Get() method given the desired semantic
     /// type and AST type.
     template <typename SEM, typename AST_OR_TYPE>
     using GetResultType = std::conditional_t<std::is_same<SEM, InferFromAST>::value,
@@ -55,6 +55,10 @@ class Info {
     /// @param rhs the Program to move
     /// @return this Program
     Info& operator=(Info&& rhs);
+
+    /// Pre-allocates the AST -> semantic node map to fit at least the given number of nodes.
+    /// @param num_ast_nodes the number of AST nodes to pre-allocate the map for.
+    void Reserve(size_t num_ast_nodes) { map_.reserve(num_ast_nodes); }
 
     /// Get looks up the semantic information for the AST or type node `node`.
     /// @param node the AST or type node
