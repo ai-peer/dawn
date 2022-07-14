@@ -24,9 +24,10 @@ class IdentifierExpression final : public Castable<IdentifierExpression, Express
   public:
     /// Constructor
     /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param src the source of this node
     /// @param sym the symbol for the identifier
-    IdentifierExpression(ProgramID pid, const Source& src, Symbol sym);
+    IdentifierExpression(ProgramID pid, size_t node_idx, const Source& src, Symbol sym);
     /// Move constructor
     IdentifierExpression(IdentifierExpression&&);
     ~IdentifierExpression() override;

@@ -34,10 +34,15 @@ class IntLiteralExpression : public Castable<IntLiteralExpression, LiteralExpres
 
     /// Constructor
     /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param src the source of this node
     /// @param val the literal value
     /// @param suf the literal suffix
-    IntLiteralExpression(ProgramID pid, const Source& src, int64_t val, Suffix suf);
+    IntLiteralExpression(ProgramID pid,
+                         size_t node_idx,
+                         const Source& src,
+                         int64_t val,
+                         Suffix suf);
 
     ~IntLiteralExpression() override;
 

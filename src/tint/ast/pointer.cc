@@ -21,11 +21,12 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::Pointer);
 namespace tint::ast {
 
 Pointer::Pointer(ProgramID pid,
+                 size_t node_idx,
                  const Source& src,
                  const Type* const subtype,
                  ast::StorageClass sc,
                  ast::Access ac)
-    : Base(pid, src), type(subtype), storage_class(sc), access(ac) {}
+    : Base(pid, node_idx, src), type(subtype), storage_class(sc), access(ac) {}
 
 std::string Pointer::FriendlyName(const SymbolTable& symbols) const {
     std::ostringstream out;

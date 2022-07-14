@@ -31,8 +31,9 @@ class Expression : public Castable<Expression, Node> {
   protected:
     /// Constructor
     /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param src the source of this node
-    Expression(ProgramID pid, const Source& src);
+    Expression(ProgramID pid, size_t node_idx, const Source& src);
     /// Move constructor
     Expression(Expression&&);
 };

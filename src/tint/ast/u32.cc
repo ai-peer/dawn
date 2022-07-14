@@ -20,7 +20,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::U32);
 
 namespace tint::ast {
 
-U32::U32(ProgramID pid, const Source& src) : Base(pid, src) {}
+U32::U32(ProgramID pid, size_t node_idx, const Source& src) : Base(pid, node_idx, src) {}
 
 U32::~U32() = default;
 

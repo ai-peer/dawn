@@ -20,7 +20,8 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::DiscardStatement);
 
 namespace tint::ast {
 
-DiscardStatement::DiscardStatement(ProgramID pid, const Source& src) : Base(pid, src) {}
+DiscardStatement::DiscardStatement(ProgramID pid, size_t node_idx, const Source& src)
+    : Base(pid, node_idx, src) {}
 
 DiscardStatement::DiscardStatement(DiscardStatement&&) = default;
 

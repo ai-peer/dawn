@@ -26,9 +26,10 @@ class BindingAttribute final : public Castable<BindingAttribute, Attribute> {
   public:
     /// Constructor
     /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param src the source of this node
     /// @param value the binding value
-    BindingAttribute(ProgramID pid, const Source& src, uint32_t value);
+    BindingAttribute(ProgramID pid, size_t node_idx, const Source& src, uint32_t value);
     ~BindingAttribute() override;
 
     /// @returns the WGSL name for the attribute

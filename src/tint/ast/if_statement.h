@@ -27,11 +27,13 @@ class IfStatement final : public Castable<IfStatement, Statement> {
   public:
     /// Constructor
     /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param src the source of this node
     /// @param condition the if condition
     /// @param body the if body
     /// @param else_stmt the else statement, or nullptr
     IfStatement(ProgramID pid,
+                size_t node_idx,
                 const Source& src,
                 const Expression* condition,
                 const BlockStatement* body,

@@ -72,11 +72,12 @@ class DecomposeMemoryAccess final : public Castable<DecomposeMemoryAccess, Trans
         };
 
         /// Constructor
-        /// @param program_id the identifier of the program that owns this node
+        /// @param pid the identifier of the program that owns this node
+        /// @param node_idx the unique node index
         /// @param o the op of the intrinsic
         /// @param sc the storage class of the buffer
         /// @param ty the data type of the intrinsic
-        Intrinsic(ProgramID program_id, Op o, ast::StorageClass sc, DataType ty);
+        Intrinsic(ProgramID pid, size_t node_idx, Op o, ast::StorageClass sc, DataType ty);
         /// Destructor
         ~Intrinsic() override;
 

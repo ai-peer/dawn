@@ -23,9 +23,10 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::StructMemberOffsetAttribute);
 namespace tint::ast {
 
 StructMemberOffsetAttribute::StructMemberOffsetAttribute(ProgramID pid,
+                                                         size_t node_idx,
                                                          const Source& src,
                                                          uint32_t o)
-    : Base(pid, src), offset(o) {}
+    : Base(pid, node_idx, src), offset(o) {}
 
 StructMemberOffsetAttribute::~StructMemberOffsetAttribute() = default;
 

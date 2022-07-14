@@ -16,7 +16,7 @@
 
 namespace tint::sem {
 
-Info::Info() = default;
+Info(size_t num_ast_nodes) : nodes_(num_ast_nodes) {}
 
 Info::Info(Info&&) = default;
 

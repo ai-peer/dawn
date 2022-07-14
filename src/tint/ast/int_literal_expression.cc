@@ -21,10 +21,11 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::IntLiteralExpression);
 namespace tint::ast {
 
 IntLiteralExpression::IntLiteralExpression(ProgramID pid,
+                                           size_t node_idx,
                                            const Source& src,
                                            int64_t val,
                                            Suffix suf)
-    : Base(pid, src), value(val), suffix(suf) {}
+    : Base(pid, node_idx, src), value(val), suffix(suf) {}
 
 IntLiteralExpression::~IntLiteralExpression() = default;
 

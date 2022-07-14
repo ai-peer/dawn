@@ -20,8 +20,11 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::IdentifierExpression);
 
 namespace tint::ast {
 
-IdentifierExpression::IdentifierExpression(ProgramID pid, const Source& src, Symbol sym)
-    : Base(pid, src), symbol(sym) {
+IdentifierExpression::IdentifierExpression(ProgramID pid,
+                                           size_t node_idx,
+                                           const Source& src,
+                                           Symbol sym)
+    : Base(pid, node_idx, src), symbol(sym) {
     TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(AST, symbol, program_id);
     TINT_ASSERT(AST, symbol.IsValid());
 }

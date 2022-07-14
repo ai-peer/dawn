@@ -29,14 +29,18 @@ class Node : public Castable<Node, Cloneable> {
     /// The identifier of the program that owns this node
     const ProgramID program_id;
 
+    /// The unique node index. Sequentually allocated, with the first allocated node being 0.
+    const size_t node_index;
+
     /// The node source data
     const Source source;
 
   protected:
     /// Create a new node
     /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param src the input source for the node
-    Node(ProgramID pid, const Source& src);
+    Node(ProgramID pid, size_t node_idx, const Source& src);
     /// Move constructor
     Node(Node&&);
 

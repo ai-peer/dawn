@@ -20,7 +20,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::F16);
 
 namespace tint::ast {
 
-F16::F16(ProgramID pid, const Source& src) : Base(pid, src) {}
+F16::F16(ProgramID pid, size_t node_idx, const Source& src) : Base(pid, node_idx, src) {}
 
 F16::F16(F16&&) = default;
 

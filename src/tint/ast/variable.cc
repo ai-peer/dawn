@@ -21,12 +21,17 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::Variable);
 namespace tint::ast {
 
 Variable::Variable(ProgramID pid,
+                   size_t node_idx,
                    const Source& src,
                    const Symbol& sym,
                    const ast::Type* ty,
                    const Expression* ctor,
                    AttributeList attrs)
-    : Base(pid, src), symbol(sym), type(ty), constructor(ctor), attributes(std::move(attrs)) {
+    : Base(pid, node_idx, src),
+      symbol(sym),
+      type(ty),
+      constructor(ctor),
+      attributes(std::move(attrs)) {
     TINT_ASSERT(AST, symbol.IsValid());
     TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(AST, symbol, program_id);
     TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(AST, constructor, program_id);

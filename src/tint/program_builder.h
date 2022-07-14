@@ -307,7 +307,7 @@ class ProgramBuilder {
     template <typename T, typename... ARGS>
     traits::EnableIfIsType<T, ast::Node>* create(const Source& source, ARGS&&... args) {
         AssertNotMoved();
-        return ast_nodes_.Create<T>(id_, source, std::forward<ARGS>(args)...);
+        return ast_nodes_.Create<T>(id_, ast_nodes_.Count(), source, std::forward<ARGS>(args)...);
     }
 
     /// Creates a new ast::Node owned by the ProgramBuilder, injecting the current
@@ -319,7 +319,7 @@ class ProgramBuilder {
     template <typename T>
     traits::EnableIfIsType<T, ast::Node>* create() {
         AssertNotMoved();
-        return ast_nodes_.Create<T>(id_, source_);
+        return ast_nodes_.Create<T>(id_, ast_nodes_.Count(), source_);
     }
 
     /// Creates a new ast::Node owned by the ProgramBuilder, injecting the current
@@ -337,7 +337,7 @@ class ProgramBuilder {
                      T>*
     create(ARG0&& arg0, ARGS&&... args) {
         AssertNotMoved();
-        return ast_nodes_.Create<T>(id_, source_, std::forward<ARG0>(arg0),
+        return ast_nodes_.Create<T>(id_, ast_nodes_.Count(), source_, std::forward<ARG0>(arg0),
                                     std::forward<ARGS>(args)...);
     }
 
@@ -2654,7 +2654,8 @@ class ProgramBuilder {
     /// @param validation the validation to disable
     /// @returns the disable validation attribute pointer
     const ast::DisableValidationAttribute* Disable(ast::DisabledValidation validation) {
-        return ASTNodes().Create<ast::DisableValidationAttribute>(ID(), validation);
+        return ASTNodes().Create<ast::DisableValidationAttribute>(ID(), ast_nodes_.Count(),
+                                                                  validation);
     }
 
     /// Sets the current builder source to `src`

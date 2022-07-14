@@ -23,8 +23,11 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::StructMemberSizeAttribute);
 
 namespace tint::ast {
 
-StructMemberSizeAttribute::StructMemberSizeAttribute(ProgramID pid, const Source& src, uint32_t sz)
-    : Base(pid, src), size(sz) {}
+StructMemberSizeAttribute::StructMemberSizeAttribute(ProgramID pid,
+                                                     size_t node_idx,
+                                                     const Source& src,
+                                                     uint32_t sz)
+    : Base(pid, node_idx, src), size(sz) {}
 
 StructMemberSizeAttribute::~StructMemberSizeAttribute() = default;
 

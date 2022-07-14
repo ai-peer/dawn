@@ -28,9 +28,10 @@ bool IsValidDepthDimension(TextureDimension dim) {
 }  // namespace
 
 DepthMultisampledTexture::DepthMultisampledTexture(ProgramID pid,
+                                                   size_t node_idx,
                                                    const Source& src,
                                                    TextureDimension d)
-    : Base(pid, src, d) {
+    : Base(pid, node_idx, src, d) {
     TINT_ASSERT(AST, IsValidDepthDimension(dim));
 }
 

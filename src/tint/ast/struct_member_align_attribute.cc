@@ -23,8 +23,11 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::StructMemberAlignAttribute);
 
 namespace tint::ast {
 
-StructMemberAlignAttribute::StructMemberAlignAttribute(ProgramID pid, const Source& src, uint32_t a)
-    : Base(pid, src), align(a) {}
+StructMemberAlignAttribute::StructMemberAlignAttribute(ProgramID pid,
+                                                       size_t node_idx,
+                                                       const Source& src,
+                                                       uint32_t a)
+    : Base(pid, node_idx, src), align(a) {}
 
 StructMemberAlignAttribute::~StructMemberAlignAttribute() = default;
 

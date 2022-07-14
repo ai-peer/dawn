@@ -23,11 +23,13 @@ namespace tint::ast {
 class LoopStatement final : public Castable<LoopStatement, Statement> {
   public:
     /// Constructor
-    /// @param program_id the identifier of the program that owns this node
+    /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param source the loop statement source
     /// @param body the body statements
     /// @param continuing the continuing statements
-    LoopStatement(ProgramID program_id,
+    LoopStatement(ProgramID pid,
+                  size_t node_idx,
                   const Source& source,
                   const BlockStatement* body,
                   const BlockStatement* continuing);

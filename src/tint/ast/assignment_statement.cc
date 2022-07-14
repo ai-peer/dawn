@@ -21,10 +21,11 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::AssignmentStatement);
 namespace tint::ast {
 
 AssignmentStatement::AssignmentStatement(ProgramID pid,
+                                         size_t node_idx,
                                          const Source& src,
                                          const Expression* l,
                                          const Expression* r)
-    : Base(pid, src), lhs(l), rhs(r) {
+    : Base(pid, node_idx, src), lhs(l), rhs(r) {
     TINT_ASSERT(AST, lhs);
     TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(AST, lhs, program_id);
     TINT_ASSERT(AST, rhs);

@@ -21,11 +21,12 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::Parameter);
 namespace tint::ast {
 
 Parameter::Parameter(ProgramID pid,
+                     size_t node_idx,
                      const Source& src,
                      const Symbol& sym,
                      const ast::Type* ty,
                      AttributeList attrs)
-    : Base(pid, src, sym, ty, nullptr, attrs) {}
+    : Base(pid, node_idx, src, sym, ty, nullptr, attrs) {}
 
 Parameter::Parameter(Parameter&&) = default;
 

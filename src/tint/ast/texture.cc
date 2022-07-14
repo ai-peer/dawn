@@ -77,7 +77,8 @@ int NumCoordinateAxes(TextureDimension dim) {
     return 0;
 }
 
-Texture::Texture(ProgramID pid, const Source& src, TextureDimension d) : Base(pid, src), dim(d) {}
+Texture::Texture(ProgramID pid, size_t node_idx, const Source& src, TextureDimension d)
+    : Base(pid, node_idx, src), dim(d) {}
 
 Texture::Texture(Texture&&) = default;
 

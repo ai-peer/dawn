@@ -42,8 +42,9 @@ class Type : public Castable<Type, Node> {
   protected:
     /// Constructor
     /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param src the source of this node
-    Type(ProgramID pid, const Source& src);
+    Type(ProgramID pid, size_t node_idx, const Source& src);
 };
 
 }  // namespace tint::ast

@@ -24,8 +24,9 @@ class DiscardStatement final : public Castable<DiscardStatement, Statement> {
   public:
     /// Constructor
     /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param src the source of this node
-    DiscardStatement(ProgramID pid, const Source& src);
+    DiscardStatement(ProgramID pid, size_t node_idx, const Source& src);
     /// Move constructor
     DiscardStatement(DiscardStatement&&);
     ~DiscardStatement() override;

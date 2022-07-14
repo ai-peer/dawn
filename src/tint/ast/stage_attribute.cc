@@ -22,8 +22,8 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::StageAttribute);
 
 namespace tint::ast {
 
-StageAttribute::StageAttribute(ProgramID pid, const Source& src, PipelineStage s)
-    : Base(pid, src), stage(s) {}
+StageAttribute::StageAttribute(ProgramID pid, size_t node_idx, const Source& src, PipelineStage s)
+    : Base(pid, node_idx, src), stage(s) {}
 
 StageAttribute::~StageAttribute() = default;
 

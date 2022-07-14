@@ -22,8 +22,11 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::LocationAttribute);
 
 namespace tint::ast {
 
-LocationAttribute::LocationAttribute(ProgramID pid, const Source& src, uint32_t val)
-    : Base(pid, src), value(val) {}
+LocationAttribute::LocationAttribute(ProgramID pid,
+                                     size_t node_idx,
+                                     const Source& src,
+                                     uint32_t val)
+    : Base(pid, node_idx, src), value(val) {}
 
 LocationAttribute::~LocationAttribute() = default;
 

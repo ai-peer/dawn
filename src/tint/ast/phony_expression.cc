@@ -20,7 +20,8 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::PhonyExpression);
 
 namespace tint::ast {
 
-PhonyExpression::PhonyExpression(ProgramID pid, const Source& src) : Base(pid, src) {}
+PhonyExpression::PhonyExpression(ProgramID pid, size_t node_idx, const Source& src)
+    : Base(pid, node_idx, src) {}
 
 PhonyExpression::PhonyExpression(PhonyExpression&&) = default;
 

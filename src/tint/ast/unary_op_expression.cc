@@ -21,10 +21,11 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::UnaryOpExpression);
 namespace tint::ast {
 
 UnaryOpExpression::UnaryOpExpression(ProgramID pid,
+                                     size_t node_idx,
                                      const Source& src,
                                      UnaryOp o,
                                      const Expression* e)
-    : Base(pid, src), op(o), expr(e) {
+    : Base(pid, node_idx, src), op(o), expr(e) {
     TINT_ASSERT(AST, expr);
     TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(AST, expr, program_id);
 }

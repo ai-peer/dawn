@@ -33,10 +33,12 @@ class InterpolateAttribute final : public Castable<InterpolateAttribute, Attribu
   public:
     /// Create an interpolate attribute.
     /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param src the source of this node
     /// @param type the interpolation type
     /// @param sampling the interpolation sampling
     InterpolateAttribute(ProgramID pid,
+                         size_t node_idx,
                          const Source& src,
                          InterpolationType type,
                          InterpolationSampling sampling);

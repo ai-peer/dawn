@@ -33,8 +33,9 @@ class Attribute : public Castable<Attribute, Node> {
   protected:
     /// Constructor
     /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param src the source of this node
-    Attribute(ProgramID pid, const Source& src) : Base(pid, src) {}
+    Attribute(ProgramID pid, size_t node_idx, const Source& src) : Base(pid, node_idx, src) {}
 };
 
 /// A list of attributes

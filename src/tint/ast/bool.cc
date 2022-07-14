@@ -20,7 +20,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::Bool);
 
 namespace tint::ast {
 
-Bool::Bool(ProgramID pid, const Source& src) : Base(pid, src) {}
+Bool::Bool(ProgramID pid, size_t node_idx, const Source& src) : Base(pid, node_idx, src) {}
 
 Bool::Bool(Bool&&) = default;
 

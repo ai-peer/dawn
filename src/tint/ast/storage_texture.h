@@ -53,12 +53,14 @@ class StorageTexture final : public Castable<StorageTexture, Texture> {
   public:
     /// Constructor
     /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param src the source of this node
     /// @param dim the dimensionality of the texture
     /// @param format the image format of the texture
     /// @param subtype the storage subtype. Use SubtypeFor() to calculate this.
     /// @param access_control the access control for the texture.
     StorageTexture(ProgramID pid,
+                   size_t node_idx,
                    const Source& src,
                    TextureDimension dim,
                    TexelFormat format,

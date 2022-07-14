@@ -20,8 +20,11 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::BoolLiteralExpression);
 
 namespace tint::ast {
 
-BoolLiteralExpression::BoolLiteralExpression(ProgramID pid, const Source& src, bool val)
-    : Base(pid, src), value(val) {}
+BoolLiteralExpression::BoolLiteralExpression(ProgramID pid,
+                                             size_t node_idx,
+                                             const Source& src,
+                                             bool val)
+    : Base(pid, node_idx, src), value(val) {}
 
 BoolLiteralExpression::~BoolLiteralExpression() = default;
 

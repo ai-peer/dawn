@@ -28,9 +28,10 @@ class StrideAttribute final : public Castable<StrideAttribute, Attribute> {
   public:
     /// constructor
     /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param src the source of this node
     /// @param stride the stride value
-    StrideAttribute(ProgramID pid, const Source& src, uint32_t stride);
+    StrideAttribute(ProgramID pid, size_t node_idx, const Source& src, uint32_t stride);
     ~StrideAttribute() override;
 
     /// @returns the WGSL name for the attribute

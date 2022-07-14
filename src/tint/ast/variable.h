@@ -54,13 +54,15 @@ struct VariableBindingPoint {
 class Variable : public Castable<Variable, Node> {
   public:
     /// Constructor
-    /// @param program_id the identifier of the program that owns this node
+    /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param source the variable source
     /// @param sym the variable symbol
     /// @param type the declared variable type
     /// @param constructor the constructor expression
     /// @param attributes the variable attributes
-    Variable(ProgramID program_id,
+    Variable(ProgramID pid,
+             size_t node_idx,
              const Source& source,
              const Symbol& sym,
              const ast::Type* type,

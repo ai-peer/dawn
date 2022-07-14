@@ -22,8 +22,8 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::StrideAttribute);
 
 namespace tint::ast {
 
-StrideAttribute::StrideAttribute(ProgramID pid, const Source& src, uint32_t s)
-    : Base(pid, src), stride(s) {}
+StrideAttribute::StrideAttribute(ProgramID pid, size_t node_idx, const Source& src, uint32_t s)
+    : Base(pid, node_idx, src), stride(s) {}
 
 StrideAttribute::~StrideAttribute() = default;
 

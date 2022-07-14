@@ -20,8 +20,10 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::DisableValidationAttribute);
 
 namespace tint::ast {
 
-DisableValidationAttribute::DisableValidationAttribute(ProgramID pid, DisabledValidation val)
-    : Base(pid), validation(val) {}
+DisableValidationAttribute::DisableValidationAttribute(ProgramID pid,
+                                                       size_t node_idx,
+                                                       DisabledValidation val)
+    : Base(pid, node_idx), validation(val) {}
 
 DisableValidationAttribute::~DisableValidationAttribute() = default;
 
@@ -46,7 +48,8 @@ std::string DisableValidationAttribute::InternalName() const {
 }
 
 const DisableValidationAttribute* DisableValidationAttribute::Clone(CloneContext* ctx) const {
-    return ctx->dst->ASTNodes().Create<DisableValidationAttribute>(ctx->dst->ID(), validation);
+    return ctx->dst->ASTNodes().Create<DisableValidationAttribute>(
+        ctx->dst->ID(), ctx->dst->ASTNodes().Count(), validation);
 }
 
 }  // namespace tint::ast

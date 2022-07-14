@@ -20,7 +20,8 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::ContinueStatement);
 
 namespace tint::ast {
 
-ContinueStatement::ContinueStatement(ProgramID pid, const Source& src) : Base(pid, src) {}
+ContinueStatement::ContinueStatement(ProgramID pid, size_t node_idx, const Source& src)
+    : Base(pid, node_idx, src) {}
 
 ContinueStatement::ContinueStatement(ContinueStatement&&) = default;
 

@@ -18,7 +18,8 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::InternalAttribute);
 
 namespace tint::ast {
 
-InternalAttribute::InternalAttribute(ProgramID pid) : Base(pid, Source{}) {}
+InternalAttribute::InternalAttribute(ProgramID pid, size_t node_idx)
+    : Base(pid, node_idx, Source{}) {}
 
 InternalAttribute::~InternalAttribute() = default;
 

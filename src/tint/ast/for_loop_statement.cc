@@ -21,12 +21,13 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::ForLoopStatement);
 namespace tint::ast {
 
 ForLoopStatement::ForLoopStatement(ProgramID pid,
+                                   size_t node_idx,
                                    const Source& src,
                                    const Statement* init,
                                    const Expression* cond,
                                    const Statement* cont,
                                    const BlockStatement* b)
-    : Base(pid, src), initializer(init), condition(cond), continuing(cont), body(b) {
+    : Base(pid, node_idx, src), initializer(init), condition(cond), continuing(cont), body(b) {
     TINT_ASSERT(AST, body);
 
     TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(AST, initializer, program_id);

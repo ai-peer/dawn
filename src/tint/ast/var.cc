@@ -21,6 +21,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::Var);
 namespace tint::ast {
 
 Var::Var(ProgramID pid,
+         size_t node_idx,
          const Source& src,
          const Symbol& sym,
          const ast::Type* ty,
@@ -28,7 +29,7 @@ Var::Var(ProgramID pid,
          Access access,
          const Expression* ctor,
          AttributeList attrs)
-    : Base(pid, src, sym, ty, ctor, attrs),
+    : Base(pid, node_idx, src, sym, ty, ctor, attrs),
       declared_storage_class(storage_class),
       declared_access(access) {}
 

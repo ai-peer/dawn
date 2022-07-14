@@ -24,11 +24,13 @@ namespace tint::ast {
 class UnaryOpExpression final : public Castable<UnaryOpExpression, Expression> {
   public:
     /// Constructor
-    /// @param program_id the identifier of the program that owns this node
+    /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param source the unary op expression source
     /// @param op the op
     /// @param expr the expr
-    UnaryOpExpression(ProgramID program_id,
+    UnaryOpExpression(ProgramID pid,
+                      size_t node_idx,
                       const Source& source,
                       UnaryOp op,
                       const Expression* expr);

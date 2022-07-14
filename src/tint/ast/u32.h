@@ -26,8 +26,9 @@ class U32 final : public Castable<U32, Type> {
   public:
     /// Constructor
     /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param src the source of this node
-    U32(ProgramID pid, const Source& src);
+    U32(ProgramID pid, size_t node_idx, const Source& src);
     /// Move constructor
     U32(U32&&);
     ~U32() override;

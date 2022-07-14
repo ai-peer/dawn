@@ -28,11 +28,13 @@ namespace tint::ast {
 class BitcastExpression final : public Castable<BitcastExpression, Expression> {
   public:
     /// Constructor
-    /// @param program_id the identifier of the program that owns this node
+    /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param source the bitcast expression source
     /// @param type the type
     /// @param expr the expr
-    BitcastExpression(ProgramID program_id,
+    BitcastExpression(ProgramID pid,
+                      size_t node_idx,
                       const Source& source,
                       const Type* type,
                       const Expression* expr);

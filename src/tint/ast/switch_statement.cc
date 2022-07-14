@@ -21,10 +21,11 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::SwitchStatement);
 namespace tint::ast {
 
 SwitchStatement::SwitchStatement(ProgramID pid,
+                                 size_t node_idx,
                                  const Source& src,
                                  const Expression* cond,
                                  CaseStatementList b)
-    : Base(pid, src), condition(cond), body(b) {
+    : Base(pid, node_idx, src), condition(cond), body(b) {
     TINT_ASSERT(AST, condition);
     TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(AST, condition, program_id);
     for (auto* stmt : body) {

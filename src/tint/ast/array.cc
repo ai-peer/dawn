@@ -38,11 +38,12 @@ std::string SizeExprToString(const Expression* size, const SymbolTable& symbols)
 }  // namespace
 
 Array::Array(ProgramID pid,
+             size_t node_idx,
              const Source& src,
              const Type* subtype,
              const Expression* cnt,
              AttributeList attrs)
-    : Base(pid, src), type(subtype), count(cnt), attributes(attrs) {}
+    : Base(pid, node_idx, src), type(subtype), count(cnt), attributes(attrs) {}
 
 Array::Array(Array&&) = default;
 

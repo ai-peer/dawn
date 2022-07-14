@@ -20,7 +20,8 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::FallthroughStatement);
 
 namespace tint::ast {
 
-FallthroughStatement::FallthroughStatement(ProgramID pid, const Source& src) : Base(pid, src) {}
+FallthroughStatement::FallthroughStatement(ProgramID pid, size_t node_idx, const Source& src)
+    : Base(pid, node_idx, src) {}
 
 FallthroughStatement::FallthroughStatement(FallthroughStatement&&) = default;
 

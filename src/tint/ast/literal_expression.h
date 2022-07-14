@@ -29,8 +29,9 @@ class LiteralExpression : public Castable<LiteralExpression, Expression> {
   protected:
     /// Constructor
     /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param src the input source
-    LiteralExpression(ProgramID pid, const Source& src);
+    LiteralExpression(ProgramID pid, size_t node_idx, const Source& src);
 };
 
 }  // namespace tint::ast

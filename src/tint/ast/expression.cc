@@ -21,7 +21,8 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::Expression);
 
 namespace tint::ast {
 
-Expression::Expression(ProgramID pid, const Source& src) : Base(pid, src) {}
+Expression::Expression(ProgramID pid, size_t node_idx, const Source& src)
+    : Base(pid, node_idx, src) {}
 
 Expression::Expression(Expression&&) = default;
 

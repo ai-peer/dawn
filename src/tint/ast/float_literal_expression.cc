@@ -23,10 +23,11 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::FloatLiteralExpression);
 namespace tint::ast {
 
 FloatLiteralExpression::FloatLiteralExpression(ProgramID pid,
+                                               size_t node_idx,
                                                const Source& src,
                                                double val,
                                                Suffix suf)
-    : Base(pid, src), value(val), suffix(suf) {}
+    : Base(pid, node_idx, src), value(val), suffix(suf) {}
 
 FloatLiteralExpression::~FloatLiteralExpression() = default;
 

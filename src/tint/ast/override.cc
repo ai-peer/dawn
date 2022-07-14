@@ -21,12 +21,13 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::Override);
 namespace tint::ast {
 
 Override::Override(ProgramID pid,
+                   size_t node_idx,
                    const Source& src,
                    const Symbol& sym,
                    const ast::Type* ty,
                    const Expression* ctor,
                    AttributeList attrs)
-    : Base(pid, src, sym, ty, ctor, attrs) {}
+    : Base(pid, node_idx, src, sym, ty, ctor, attrs) {}
 
 Override::Override(Override&&) = default;
 

@@ -26,9 +26,10 @@ class GroupAttribute final : public Castable<GroupAttribute, Attribute> {
   public:
     /// constructor
     /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param src the source of this node
     /// @param value the group value
-    GroupAttribute(ProgramID pid, const Source& src, uint32_t value);
+    GroupAttribute(ProgramID pid, size_t node_idx, const Source& src, uint32_t value);
     ~GroupAttribute() override;
 
     /// @returns the WGSL name for the attribute

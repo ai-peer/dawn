@@ -21,10 +21,11 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::CaseStatement);
 namespace tint::ast {
 
 CaseStatement::CaseStatement(ProgramID pid,
+                             size_t node_idx,
                              const Source& src,
                              CaseSelectorList s,
                              const BlockStatement* b)
-    : Base(pid, src), selectors(s), body(b) {
+    : Base(pid, node_idx, src), selectors(s), body(b) {
     TINT_ASSERT(AST, body);
     TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(AST, body, program_id);
     for (auto* selector : selectors) {

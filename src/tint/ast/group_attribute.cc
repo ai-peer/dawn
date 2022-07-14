@@ -22,8 +22,8 @@ TINT_INSTANTIATE_TYPEINFO(tint::ast::GroupAttribute);
 
 namespace tint::ast {
 
-GroupAttribute::GroupAttribute(ProgramID pid, const Source& src, uint32_t val)
-    : Base(pid, src), value(val) {}
+GroupAttribute::GroupAttribute(ProgramID pid, size_t node_idx, const Source& src, uint32_t val)
+    : Base(pid, node_idx, src), value(val) {}
 
 GroupAttribute::~GroupAttribute() = default;
 

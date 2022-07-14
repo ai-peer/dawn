@@ -24,8 +24,9 @@ class BreakStatement final : public Castable<BreakStatement, Statement> {
   public:
     /// Constructor
     /// @param pid the identifier of the program that owns this node
+    /// @param node_idx the unique node index
     /// @param src the source of this node
-    BreakStatement(ProgramID pid, const Source& src);
+    BreakStatement(ProgramID pid, size_t node_idx, const Source& src);
     /// Move constructor
     BreakStatement(BreakStatement&&);
     ~BreakStatement() override;

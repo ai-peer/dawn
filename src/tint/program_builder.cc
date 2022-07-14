@@ -29,7 +29,8 @@ namespace tint {
 ProgramBuilder::VarOptionals::~VarOptionals() = default;
 
 ProgramBuilder::ProgramBuilder()
-    : id_(ProgramID::New()), ast_(ast_nodes_.Create<ast::Module>(id_, Source{})) {}
+    : id_(ProgramID::New()),
+      ast_(ast_nodes_.Create<ast::Module>(id_, ast_nodes_.Count(), Source{})) {}
 
 ProgramBuilder::ProgramBuilder(ProgramBuilder&& rhs)
     : id_(std::move(rhs.id_)),
