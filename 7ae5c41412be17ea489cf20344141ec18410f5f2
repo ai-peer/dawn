@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "288a92cf_cc6d8129",
+        "filename": "src/tint/writer/glsl/generator_impl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-14T18:04:45Z",
+      "side": 0,
+      "message": "Oh, this was unused, right? I kept looking for where it was used before.",
+      "range": {
+        "startLine": 523,
+        "startChar": 56,
+        "endLine": 523,
+        "endChar": 75
+      },
+      "revId": "7ae5c41412be17ea489cf20344141ec18410f5f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
