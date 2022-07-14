@@ -21,6 +21,18 @@
 
 namespace tint::ast {
 
+/// NodeID is a unique node identifier for a given Program.
+/// NodeIDs are sequentially allocated, starting at 0.
+struct NodeID {
+    /// Equality operator
+    /// @param other the other NodeID
+    /// @returns true if the NodeIDs are the same
+    bool operator==(const NodeID& other) const { return value == other.value; }
+
+    /// The numerical value for the node identifier
+    size_t value = 0;
+};
+
 /// AST base class node
 class Node : public Castable<Node, Cloneable> {
   public:
@@ -29,14 +41,18 @@ class Node : public Castable<Node, Cloneable> {
     /// The identifier of the program that owns this node
     const ProgramID program_id;
 
+    /// The node identifier, unique for the program.
+    const NodeID node_id;
+
     /// The node source data
     const Source source;
 
   protected:
     /// Create a new node
     /// @param pid the identifier of the program that owns this node
+    /// @param nid the unique node identifier
     /// @param src the input source for the node
-    Node(ProgramID pid, const Source& src);
+    Node(ProgramID pid, NodeID nid, const Source& src);
     /// Move constructor
     Node(Node&&);
 
