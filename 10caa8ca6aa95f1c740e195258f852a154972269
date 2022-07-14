@@ -46,6 +46,30 @@
       },
       "revId": "10caa8ca6aa95f1c740e195258f852a154972269",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "035d8f06_703f6828",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2074,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-14T18:52:25Z",
+      "side": 1,
+      "message": "I guess it\u0027s a personal thing, but I don\u0027t like member function pointers much because they are weird syntactically. Further, the code you replaced was a function call `EvaluateBinaryValue` which was clearer.",
+      "parentUuid": "9dfe22ae_1dfe956d",
+      "range": {
+        "startLine": 2074,
+        "startChar": 16,
+        "endLine": 2074,
+        "endChar": 47
+      },
+      "revId": "10caa8ca6aa95f1c740e195258f852a154972269",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
