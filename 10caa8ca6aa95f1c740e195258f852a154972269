@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cafecfe9_fb7111dd",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2074,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-14T18:45:32Z",
+      "side": 1,
+      "message": "Would be nicer if we called a `const_eval_.Binary(op, ...)` and let that function forward through the member function pointer. Same for Unary below.",
+      "range": {
+        "startLine": 2074,
+        "startChar": 16,
+        "endLine": 2074,
+        "endChar": 47
+      },
+      "revId": "10caa8ca6aa95f1c740e195258f852a154972269",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
