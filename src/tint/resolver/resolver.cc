@@ -102,6 +102,8 @@ bool Resolver::Resolve() {
         return false;
     }
 
+    builder_->Sem().Reserve(builder_->LastAllocatedNodeID());
+
     if (!DependencyGraph::Build(builder_->AST(), builder_->Symbols(), builder_->Diagnostics(),
                                 dependencies_)) {
         return false;
