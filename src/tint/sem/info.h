@@ -80,7 +80,7 @@ class Info {
     template <typename AST_OR_TYPE>
     void Add(const AST_OR_TYPE* node, const SemanticNodeTypeFor<AST_OR_TYPE>* sem_node) {
         // Check there's no semantic info already existing for the node
-        TINT_ASSERT(Semantic, Get(node) == nullptr);
+        TINT_ASSERT(Semantic, map_.find(node) == map_.end());
         map_.emplace(node, sem_node);
     }
 
