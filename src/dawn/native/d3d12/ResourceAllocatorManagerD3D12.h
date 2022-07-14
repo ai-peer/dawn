@@ -78,13 +78,22 @@ class ResourceAllocatorManager {
         D3D12_HEAP_TYPE heapType,
         const D3D12_RESOURCE_DESC& requestedResourceDescriptor,
         const D3D12_CLEAR_VALUE* optimizedClearValue,
-        D3D12_RESOURCE_STATES initialUsage);
+        D3D12_RESOURCE_STATES initialUsage,
+        bool needExtraMemory);
 
     ResultOrError<ResourceHeapAllocation> CreateCommittedResource(
         D3D12_HEAP_TYPE heapType,
         const D3D12_RESOURCE_DESC& resourceDescriptor,
         const D3D12_CLEAR_VALUE* optimizedClearValue,
-        D3D12_RESOURCE_STATES initialUsage);
+        D3D12_RESOURCE_STATES initialUsage,
+        bool needExtraMemory);
+
+    MaybeError CreatePlacedResourceFromHeap(const uint64_t offset,
+                                            const D3D12_RESOURCE_DESC& resourceDescriptor,
+                                            const D3D12_CLEAR_VALUE* optimizedClearValue,
+                                            D3D12_RESOURCE_STATES initialUsage,
+                                            ComPtr<ID3D12Resource>& placedResource,
+                                            Heap* heap);
 
     Device* mDevice;
     uint32_t mResourceHeapTier;
