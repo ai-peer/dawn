@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5511c1be_cedb935f",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-14T21:03:54Z",
+      "side": 1,
+      "message": "For a future CL, but I think we can clean up a bunch of these static casts by using `sem::Constant*` everywhere, and only casting to `resolver::Constant*` when we need to call `Convert`. For example, we can make `CreateComposite` take a `std::vector\u003cconst sem::Constant*\u003e` instead of a `std::vector\u003cconst resolver::Constant*\u003e`. Basically, it looks like we\u0027re casting to the derived type too early.",
+      "range": {
+        "startLine": 443,
+        "startChar": 25,
+        "endLine": 443,
+        "endChar": 53
+      },
+      "revId": "1f903a9cb7f54c14c25c3241babd618ea680e9be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dfa40b0_82242ebc",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-14T21:03:54Z",
+      "side": 1,
+      "message": "This \u0027const\u0027 is probably not useful/necessary and obfuscates the pointer-to-pointer type a bit here (reads better as `sem::Expression const** args`).",
+      "range": {
+        "startLine": 123,
+        "startChar": 53,
+        "endLine": 123,
+        "endChar": 58
+      },
+      "revId": "1f903a9cb7f54c14c25c3241babd618ea680e9be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
