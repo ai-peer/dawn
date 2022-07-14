@@ -22,6 +22,30 @@
       },
       "revId": "10caa8ca6aa95f1c740e195258f852a154972269",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dfe22ae_1dfe956d",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2074,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-14T18:48:54Z",
+      "side": 1,
+      "message": "meh. There\u0027s only one call site for each. If there were multiple callers, I\u0027d agree, but when there\u0027s only one, I\u0027m not sure what a helper gives you aside from obfuscating the code a bit.",
+      "parentUuid": "cafecfe9_fb7111dd",
+      "range": {
+        "startLine": 2074,
+        "startChar": 16,
+        "endLine": 2074,
+        "endChar": 47
+      },
+      "revId": "10caa8ca6aa95f1c740e195258f852a154972269",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
