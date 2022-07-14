@@ -42,7 +42,8 @@ uint64_t BuddyMemoryAllocator::GetMemoryIndex(uint64_t offset) const {
 }
 
 ResultOrError<ResourceMemoryAllocation> BuddyMemoryAllocator::Allocate(uint64_t allocationSize,
-                                                                       uint64_t alignment) {
+                                                                       uint64_t alignment,
+                                                                       bool mayNeedExtraMemory) {
     ResourceMemoryAllocation invalidAllocation = ResourceMemoryAllocation{};
 
     if (allocationSize == 0) {
@@ -55,7 +56,14 @@ ResultOrError<ResourceMemoryAllocation> BuddyMemoryAllocator::Allocate(uint64_t 
     }
 
     // Round allocation size to nearest power-of-two.
+    uint64_t originalAllocationSize = allocationSize;
     allocationSize = NextPowerOfTwo(allocationSize);
+    // if (MitigateTextureCorruptionToggle) {
+    if (mayNeedExtraMemory) {
+        while (allocationSize - originalAllocationSize < kExtraMemoryToMitigateTextureCorruption) {
+            allocationSize *= 2;
+        }
+    }
 
     // Allocation cannot exceed the memory size.
     if (allocationSize > mMemoryBlockSize) {
