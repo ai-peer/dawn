@@ -140,6 +140,30 @@
       },
       "revId": "8535354db5883ad3ac1ef67fc4ec5c57c7978bd3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe661227_743fc210",
+        "filename": "src/tint/resolver/resolver_constants.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-14T18:36:29Z",
+      "side": 1,
+      "message": "Yeah, I guess Index should take uint32_t to avoid these cast shenanigans. Anyway, for later.",
+      "parentUuid": "ad11d44f_080dc289",
+      "range": {
+        "startLine": 556,
+        "startChar": 26,
+        "endLine": 556,
+        "endChar": 45
+      },
+      "revId": "8535354db5883ad3ac1ef67fc4ec5c57c7978bd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
