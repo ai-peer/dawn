@@ -18,12 +18,25 @@
 #include "src/tint/sem/builtin.h"
 
 #include <vector>
+#include <utility>
 
-#include "src/tint/utils/to_const_ptr_vec.h"
+#include "src/tint/utils/transform.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::sem::Builtin);
 
 namespace tint::sem {
+namespace {
+
+utils::List<const Parameter*> SetOwner(utils::List<Parameter*> parameters,
+                                       const tint::sem::CallTarget* owner) {
+    for (auto* parameter : parameters) {
+        parameter->SetOwner(owner);
+    }
+    return utils::Transform(parameters,
+                            [&](Parameter* p) { return static_cast<const Parameter*>(p); });
+}
+
+}  // namespace
 
 const char* Builtin::str() const {
     return sem::str(type_);
@@ -89,17 +102,13 @@ bool IsDP4aBuiltin(BuiltinType i) {
 
 Builtin::Builtin(BuiltinType type,
                  const sem::Type* return_type,
-                 std::vector<Parameter*> parameters,
+                 utils::ListRef<Parameter*> parameters,
                  PipelineStageSet supported_stages,
                  bool is_deprecated)
-    : Base(return_type, utils::ToConstPtrVec(parameters)),
+    : Base(return_type, SetOwner(std::move(parameters), this)),
       type_(type),
       supported_stages_(supported_stages),
-      is_deprecated_(is_deprecated) {
-    for (auto* parameter : parameters) {
-        parameter->SetOwner(this);
-    }
-}
+      is_deprecated_(is_deprecated) {}
 
 Builtin::~Builtin() = default;
 

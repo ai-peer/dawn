@@ -89,7 +89,7 @@ class Builtin final : public Castable<Builtin, CallTarget> {
     /// deprecated
     Builtin(BuiltinType type,
             const sem::Type* return_type,
-            std::vector<Parameter*> parameters,
+            utils::ListRef<Parameter*> parameters,
             PipelineStageSet supported_stages,
             bool is_deprecated);
 

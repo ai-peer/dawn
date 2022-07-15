@@ -375,7 +375,7 @@ TEST_P(ConversionConstructorValidTest, All) {
             auto* ctor = call->Target()->As<sem::TypeConstructor>();
             ASSERT_NE(ctor, nullptr);
             EXPECT_EQ(call->Type(), ctor->ReturnType());
-            ASSERT_EQ(ctor->Parameters().size(), 1u);
+            ASSERT_EQ(ctor->Parameters().Length(), 1u);
             EXPECT_EQ(ctor->Parameters()[0]->Type(), TypeOf(arg));
             break;
         }
@@ -383,7 +383,7 @@ TEST_P(ConversionConstructorValidTest, All) {
             auto* conv = call->Target()->As<sem::TypeConversion>();
             ASSERT_NE(conv, nullptr);
             EXPECT_EQ(call->Type(), conv->ReturnType());
-            ASSERT_EQ(conv->Parameters().size(), 1u);
+            ASSERT_EQ(conv->Parameters().Length(), 1u);
             EXPECT_EQ(conv->Parameters()[0]->Type(), TypeOf(arg));
             break;
         }
@@ -503,7 +503,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Array_ZeroValue_P
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 0u);
+    ASSERT_EQ(ctor->Parameters().Length(), 0u);
 }
 
 TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Array_type_match) {
@@ -519,7 +519,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Array_type_match)
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 3u);
+    ASSERT_EQ(ctor->Parameters().Length(), 3u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::U32>());
     EXPECT_TRUE(ctor->Parameters()[1]->Type()->Is<sem::U32>());
     EXPECT_TRUE(ctor->Parameters()[2]->Type()->Is<sem::U32>());
@@ -690,7 +690,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Construct_i32_Success) {
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 1u);
+    ASSERT_EQ(ctor->Parameters().Length(), 1u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::I32>());
 }
 
@@ -708,7 +708,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Construct_u32_Success) {
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 1u);
+    ASSERT_EQ(ctor->Parameters().Length(), 1u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::U32>());
 }
 
@@ -726,7 +726,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Construct_f32_Success) {
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 1u);
+    ASSERT_EQ(ctor->Parameters().Length(), 1u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::F32>());
 }
 
@@ -746,7 +746,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Construct_f16_Success) {
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 1u);
+    ASSERT_EQ(ctor->Parameters().Length(), 1u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::F16>());
 }
 
@@ -764,7 +764,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Convert_f32_to_i32_Success) {
     auto* ctor = call->Target()->As<sem::TypeConversion>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 1u);
+    ASSERT_EQ(ctor->Parameters().Length(), 1u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::F32>());
 }
 
@@ -782,7 +782,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Convert_i32_to_u32_Success) {
     auto* ctor = call->Target()->As<sem::TypeConversion>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 1u);
+    ASSERT_EQ(ctor->Parameters().Length(), 1u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::I32>());
 }
 
@@ -802,7 +802,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Convert_u32_to_f16_Success) {
     auto* ctor = call->Target()->As<sem::TypeConversion>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 1u);
+    ASSERT_EQ(ctor->Parameters().Length(), 1u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::U32>());
 }
 
@@ -822,7 +822,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Convert_f16_to_f32_Success) {
     auto* ctor = call->Target()->As<sem::TypeConversion>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 1u);
+    ASSERT_EQ(ctor->Parameters().Length(), 1u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::F16>());
 }
 
@@ -945,7 +945,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec2_Success_Zero
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 0u);
+    ASSERT_EQ(ctor->Parameters().Length(), 0u);
 }
 
 TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec2F32_Success_Scalar) {
@@ -964,7 +964,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec2F32_Success_S
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 2u);
+    ASSERT_EQ(ctor->Parameters().Length(), 2u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::F32>());
     EXPECT_TRUE(ctor->Parameters()[1]->Type()->Is<sem::F32>());
 }
@@ -987,7 +987,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec2F16_Success_S
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 2u);
+    ASSERT_EQ(ctor->Parameters().Length(), 2u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::F16>());
     EXPECT_TRUE(ctor->Parameters()[1]->Type()->Is<sem::F16>());
 }
@@ -1008,7 +1008,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec2U32_Success_S
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 2u);
+    ASSERT_EQ(ctor->Parameters().Length(), 2u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::U32>());
     EXPECT_TRUE(ctor->Parameters()[1]->Type()->Is<sem::U32>());
 }
@@ -1029,7 +1029,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec2I32_Success_S
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 2u);
+    ASSERT_EQ(ctor->Parameters().Length(), 2u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::I32>());
     EXPECT_TRUE(ctor->Parameters()[1]->Type()->Is<sem::I32>());
 }
@@ -1050,7 +1050,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec2Bool_Success_
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 2u);
+    ASSERT_EQ(ctor->Parameters().Length(), 2u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::Bool>());
     EXPECT_TRUE(ctor->Parameters()[1]->Type()->Is<sem::Bool>());
 }
@@ -1071,7 +1071,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec2_Success_Iden
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 1u);
+    ASSERT_EQ(ctor->Parameters().Length(), 1u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::Vector>());
 }
 
@@ -1091,7 +1091,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec2_Success_Vec2
     auto* ctor = call->Target()->As<sem::TypeConversion>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 1u);
+    ASSERT_EQ(ctor->Parameters().Length(), 1u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::Vector>());
 }
 
@@ -1227,7 +1227,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec3_Success_Zero
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 0u);
+    ASSERT_EQ(ctor->Parameters().Length(), 0u);
 }
 
 TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec3F32_Success_Scalar) {
@@ -1246,7 +1246,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec3F32_Success_S
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 3u);
+    ASSERT_EQ(ctor->Parameters().Length(), 3u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::F32>());
     EXPECT_TRUE(ctor->Parameters()[1]->Type()->Is<sem::F32>());
     EXPECT_TRUE(ctor->Parameters()[2]->Type()->Is<sem::F32>());
@@ -1270,7 +1270,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec3F16_Success_S
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 3u);
+    ASSERT_EQ(ctor->Parameters().Length(), 3u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::F16>());
     EXPECT_TRUE(ctor->Parameters()[1]->Type()->Is<sem::F16>());
     EXPECT_TRUE(ctor->Parameters()[2]->Type()->Is<sem::F16>());
@@ -1292,7 +1292,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec3U32_Success_S
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 3u);
+    ASSERT_EQ(ctor->Parameters().Length(), 3u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::U32>());
     EXPECT_TRUE(ctor->Parameters()[1]->Type()->Is<sem::U32>());
     EXPECT_TRUE(ctor->Parameters()[2]->Type()->Is<sem::U32>());
@@ -1314,7 +1314,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec3I32_Success_S
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 3u);
+    ASSERT_EQ(ctor->Parameters().Length(), 3u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::I32>());
     EXPECT_TRUE(ctor->Parameters()[1]->Type()->Is<sem::I32>());
     EXPECT_TRUE(ctor->Parameters()[2]->Type()->Is<sem::I32>());
@@ -1336,7 +1336,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec3Bool_Success_
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 3u);
+    ASSERT_EQ(ctor->Parameters().Length(), 3u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::Bool>());
     EXPECT_TRUE(ctor->Parameters()[1]->Type()->Is<sem::Bool>());
     EXPECT_TRUE(ctor->Parameters()[2]->Type()->Is<sem::Bool>());
@@ -1358,7 +1358,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec3_Success_Vec2
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 2u);
+    ASSERT_EQ(ctor->Parameters().Length(), 2u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::Vector>());
     EXPECT_TRUE(ctor->Parameters()[1]->Type()->Is<sem::F32>());
 }
@@ -1379,7 +1379,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec3_Success_Scal
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 2u);
+    ASSERT_EQ(ctor->Parameters().Length(), 2u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::F32>());
     EXPECT_TRUE(ctor->Parameters()[1]->Type()->Is<sem::Vector>());
 }
@@ -1400,7 +1400,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec3_Success_Iden
     auto* ctor = call->Target()->As<sem::TypeConstructor>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 1u);
+    ASSERT_EQ(ctor->Parameters().Length(), 1u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::Vector>());
 }
 
@@ -1420,7 +1420,7 @@ TEST_F(ResolverTypeConstructorValidationTest, Expr_Constructor_Vec3_Success_Vec3
     auto* ctor = call->Target()->As<sem::TypeConversion>();
     ASSERT_NE(ctor, nullptr);
     EXPECT_EQ(call->Type(), ctor->ReturnType());
-    ASSERT_EQ(ctor->Parameters().size(), 1u);
+    ASSERT_EQ(ctor->Parameters().Length(), 1u);
     EXPECT_TRUE(ctor->Parameters()[0]->Type()->Is<sem::Vector>());
 }
 

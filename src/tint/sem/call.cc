@@ -23,7 +23,7 @@ namespace tint::sem {
 
 Call::Call(const ast::CallExpression* declaration,
            const CallTarget* target,
-           std::vector<const sem::Expression*> arguments,
+           utils::ListRef<const sem::Expression*> arguments,
            const Statement* statement,
            const Constant* constant,
            bool has_side_effects)
