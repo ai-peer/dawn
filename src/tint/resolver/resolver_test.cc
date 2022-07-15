@@ -763,7 +763,7 @@ TEST_F(ResolverTest, Function_Parameters) {
 
     auto* func_sem = Sem().Get(func);
     ASSERT_NE(func_sem, nullptr);
-    EXPECT_EQ(func_sem->Parameters().size(), 3u);
+    EXPECT_EQ(func_sem->Parameters().Length(), 3u);
     EXPECT_TRUE(func_sem->Parameters()[0]->Type()->Is<sem::F32>());
     EXPECT_TRUE(func_sem->Parameters()[1]->Type()->Is<sem::I32>());
     EXPECT_TRUE(func_sem->Parameters()[2]->Type()->Is<sem::U32>());
@@ -796,7 +796,7 @@ TEST_F(ResolverTest, Function_RegisterInputOutputVariables) {
 
     auto* func_sem = Sem().Get(func);
     ASSERT_NE(func_sem, nullptr);
-    EXPECT_EQ(func_sem->Parameters().size(), 0u);
+    EXPECT_EQ(func_sem->Parameters().Length(), 0u);
     EXPECT_TRUE(func_sem->ReturnType()->Is<sem::Void>());
 
     const auto& vars = func_sem->TransitivelyReferencedGlobals();
@@ -832,7 +832,7 @@ TEST_F(ResolverTest, Function_RegisterInputOutputVariables_SubFunction) {
 
     auto* func2_sem = Sem().Get(func2);
     ASSERT_NE(func2_sem, nullptr);
-    EXPECT_EQ(func2_sem->Parameters().size(), 0u);
+    EXPECT_EQ(func2_sem->Parameters().Length(), 0u);
 
     const auto& vars = func2_sem->TransitivelyReferencedGlobals();
     ASSERT_EQ(vars.size(), 3u);
@@ -1146,7 +1146,7 @@ TEST_F(ResolverTest, Expr_MemberAccessor_VectorSwizzle) {
     auto* sma = Sem().Get(mem)->As<sem::Swizzle>();
     ASSERT_NE(sma, nullptr);
     EXPECT_EQ(sma->Object()->Declaration(), mem->structure);
-    EXPECT_THAT(sma->As<sem::Swizzle>()->Indices(), ElementsAre(0, 2, 1, 3));
+    EXPECT_THAT(utils::ToVector(sma->As<sem::Swizzle>()->Indices()), ElementsAre(0, 2, 1, 3));
 }
 
 TEST_F(ResolverTest, Expr_MemberAccessor_VectorSwizzle_SingleElement) {
@@ -1165,7 +1165,7 @@ TEST_F(ResolverTest, Expr_MemberAccessor_VectorSwizzle_SingleElement) {
     auto* sma = Sem().Get(mem)->As<sem::Swizzle>();
     ASSERT_NE(sma, nullptr);
     EXPECT_EQ(sma->Object()->Declaration(), mem->structure);
-    EXPECT_THAT(Sem().Get(mem)->As<sem::Swizzle>()->Indices(), ElementsAre(2));
+    EXPECT_THAT(utils::ToVector(Sem().Get(mem)->As<sem::Swizzle>()->Indices()), ElementsAre(2));
 }
 
 TEST_F(ResolverTest, Expr_Accessor_MultiLevel) {
@@ -1867,9 +1867,9 @@ TEST_F(ResolverTest, Function_EntryPoints_StageAttribute) {
     ASSERT_NE(ep_1_sem, nullptr);
     ASSERT_NE(ep_2_sem, nullptr);
 
-    EXPECT_EQ(func_b_sem->Parameters().size(), 0u);
-    EXPECT_EQ(func_a_sem->Parameters().size(), 0u);
-    EXPECT_EQ(func_c_sem->Parameters().size(), 0u);
+    EXPECT_EQ(func_b_sem->Parameters().Length(), 0u);
+    EXPECT_EQ(func_a_sem->Parameters().Length(), 0u);
+    EXPECT_EQ(func_c_sem->Parameters().Length(), 0u);
 
     const auto& b_eps = func_b_sem->AncestorEntryPoints();
     ASSERT_EQ(2u, b_eps.size());
