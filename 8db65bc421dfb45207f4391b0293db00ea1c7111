@@ -16,6 +16,52 @@
       "message": "PTAL!",
       "revId": "8db65bc421dfb45207f4391b0293db00ea1c7111",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a179f66_d2a6e21f",
+        "filename": "src/dawn/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-07-15T23:41:31Z",
+      "side": 1,
+      "message": "nit. Same formatting with the `/* depthClipControl */`\n\n(Here and all instances below also)\n\nAlso, nit, maybe this could also just be a bool instead of the struct?",
+      "range": {
+        "startLine": 162,
+        "startChar": 16,
+        "endLine": 162,
+        "endChar": 33
+      },
+      "revId": "8db65bc421dfb45207f4391b0293db00ea1c7111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73b9fa5e_dc46ffc3",
+        "filename": "src/dawn/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-07-15T23:41:31Z",
+      "side": 1,
+      "message": "Do we have to use something like 0.5? Could we just set `depth \u003d {x | x \u003e 1.0}`, and set red channel to `frag_pos.z / x`. Then for the expectation we could just expect `(255, 0, 0, 255)`. (Assuming if clamping happens then `frag_pos.z \u003d 1.0` in the fragment shader and the red channel becomes something less than 1.)",
+      "range": {
+        "startLine": 328,
+        "startChar": 4,
+        "endLine": 328,
+        "endChar": 75
+      },
+      "revId": "8db65bc421dfb45207f4391b0293db00ea1c7111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
