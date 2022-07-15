@@ -210,6 +210,24 @@
       "parentUuid": "1957d025_b6e415c2",
       "revId": "7037402152223aaecdc53ff2d8ca980d44f10bb2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c223fd97_b48f491a",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2718,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-15T02:56:02Z",
+      "side": 1,
+      "message": "ok - thanks! still LGTM",
+      "parentUuid": "5ad3b971_7854e76c",
+      "revId": "7037402152223aaecdc53ff2d8ca980d44f10bb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
