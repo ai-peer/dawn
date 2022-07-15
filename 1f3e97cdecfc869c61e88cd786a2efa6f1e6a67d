@@ -70,6 +70,30 @@
       },
       "revId": "1f3e97cdecfc869c61e88cd786a2efa6f1e6a67d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f98a4cfc_a6ddb2ea",
+        "filename": "src/tint/utils/block_allocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-15T20:27:35Z",
+      "side": 1,
+      "message": "Except it isn\u0027t one function, and that\u0027s rather the point.\nFor a move, it\u0027s extremely bug prone to `std::move` a new field in one place, and forget in another. So easy, it\u0027s exactly what I did when I first added the `count` field.\nIt also simplfies the clearing of the fields for `Reset()`.\n\nIf readability is your main concern, I\u0027ve added alias references in the two methods that heavily touch the `data` field.",
+      "parentUuid": "f17541dc_6512986d",
+      "range": {
+        "startLine": 285,
+        "startChar": 4,
+        "endLine": 285,
+        "endChar": 11
+      },
+      "revId": "1f3e97cdecfc869c61e88cd786a2efa6f1e6a67d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
