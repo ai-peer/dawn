@@ -53,13 +53,13 @@ Result HlslUsingDXC(const std::string& dxc_path,
                 result.failed = true;
                 return result;
             case ast::PipelineStage::kVertex:
-                profile = "-T vs_6_0";
+                profile = "-T vs_6_2";
                 break;
             case ast::PipelineStage::kFragment:
-                profile = "-T ps_6_0";
+                profile = "-T ps_6_2";
                 break;
             case ast::PipelineStage::kCompute:
-                profile = "-T cs_6_0";
+                profile = "-T cs_6_2";
                 break;
         }
 
@@ -67,9 +67,10 @@ Result HlslUsingDXC(const std::string& dxc_path,
         // See dawn\src\dawn_native\d3d12\RenderPipelineD3D12.cpp
         // and dawn_native\d3d12\ShaderModuleD3D12.cpp (GetDXCArguments)
         auto res = dxc(profile,
-                       "-E " + ep.first,  // Entry point
-                       "/Zpr",            // D3DCOMPILE_PACK_MATRIX_ROW_MAJOR
-                       "/Gis",            // D3DCOMPILE_IEEE_STRICTNESS
+                       "-E " + ep.first,       // Entry point
+                       "-enable-16bit-types",  // Enable native 16-bit types
+                       "/Zpr",                 // D3DCOMPILE_PACK_MATRIX_ROW_MAJOR
+                       "/Gis",                 // D3DCOMPILE_IEEE_STRICTNESS
                        file.Path());
         if (!res.out.empty()) {
             if (!result.output.empty()) {
