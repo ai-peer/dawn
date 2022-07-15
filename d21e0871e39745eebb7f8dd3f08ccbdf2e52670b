@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2448bd1a_1c8c10b2",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-15T14:24:09Z",
+      "side": 1,
+      "message": "No way to use a phony in a constant expression, right? I would have thought this would be set to the evaluate stage of `expr`.",
+      "range": {
+        "startLine": 1276,
+        "startChar": 57,
+        "endLine": 1276,
+        "endChar": 87
+      },
+      "revId": "d21e0871e39745eebb7f8dd3f08ccbdf2e52670b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59d2d1a9_b0f61bf9",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1511,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-15T14:24:09Z",
+      "side": 1,
+      "message": "s/ct_ctor_or_conv/arr_or_str_ctor",
+      "range": {
+        "startLine": 1511,
+        "startChar": 7,
+        "endLine": 1511,
+        "endChar": 23
+      },
+      "revId": "d21e0871e39745eebb7f8dd3f08ccbdf2e52670b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c66a1188_ec1daad6",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1526,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-15T14:24:09Z",
+      "side": 1,
+      "message": "Does this mean you\u0027re setting stage to `kRuntime` here in order for validation to fail later?",
+      "range": {
+        "startLine": 1525,
+        "startChar": 16,
+        "endLine": 1526,
+        "endChar": 55
+      },
+      "revId": "d21e0871e39745eebb7f8dd3f08ccbdf2e52670b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "607d8d2b_c10b9915",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1531,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-15T14:24:09Z",
+      "side": 1,
+      "message": "No need to move a pointer",
+      "range": {
+        "startLine": 1531,
+        "startChar": 63,
+        "endLine": 1531,
+        "endChar": 72
+      },
+      "revId": "d21e0871e39745eebb7f8dd3f08ccbdf2e52670b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5788b31f_02bd3da8",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1534,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-15T14:24:09Z",
+      "side": 1,
+      "message": "s/ct_ctor_or_conv/ty_ctor_or_conv",
+      "range": {
+        "startLine": 1534,
+        "startChar": 7,
+        "endLine": 1534,
+        "endChar": 23
+      },
+      "revId": "d21e0871e39745eebb7f8dd3f08ccbdf2e52670b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c5583ec_5d0bd027",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1713,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-15T14:24:09Z",
+      "side": 1,
+      "message": "This condition isn\u0027t necessary, right? We can always get the earliest stage of the builtin and its args.",
+      "range": {
+        "startLine": 1713,
+        "startChar": 4,
+        "endLine": 1713,
+        "endChar": 49
+      },
+      "revId": "d21e0871e39745eebb7f8dd3f08ccbdf2e52670b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5697532b_a4cd65bc",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1721,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-15T14:24:09Z",
+      "side": 1,
+      "message": "Is this redundant? If the builtin\u0027s stage is constant, then it must have a const_eval_fn right?",
+      "range": {
+        "startLine": 1721,
+        "startChar": 49,
+        "endLine": 1721,
+        "endChar": 73
+      },
+      "revId": "d21e0871e39745eebb7f8dd3f08ccbdf2e52670b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9d2b339_ac230379",
+        "filename": "src/tint/resolver/validator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-15T14:24:09Z",
+      "side": 1,
+      "message": "const ref?",
+      "range": {
+        "startLine": 377,
+        "startChar": 18,
+        "endLine": 377,
+        "endChar": 68
+      },
+      "revId": "d21e0871e39745eebb7f8dd3f08ccbdf2e52670b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
