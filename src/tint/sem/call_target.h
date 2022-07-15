@@ -34,7 +34,7 @@ struct CallTargetSignature {
     /// Constructor
     /// @param ret_ty the call target return type
     /// @param params the call target parameters
-    CallTargetSignature(const sem::Type* ret_ty, const ParameterList& params);
+    CallTargetSignature(const sem::Type* ret_ty, utils::ListRef<const Parameter*> params);
 
     /// Copy constructor
     CallTargetSignature(const CallTargetSignature&);
@@ -45,7 +45,7 @@ struct CallTargetSignature {
     /// The type of the call target return value
     const sem::Type* const return_type = nullptr;
     /// The parameters of the call target
-    const ParameterList parameters;
+    const ParameterList<8> parameters;
 
     /// Equality operator
     /// @param other the signature to compare this to
@@ -65,7 +65,7 @@ class CallTarget : public Castable<CallTarget, Node> {
     /// Constructor
     /// @param return_type the return type of the call target
     /// @param parameters the parameters for the call target
-    CallTarget(const sem::Type* return_type, const ParameterList& parameters);
+    CallTarget(const sem::Type* return_type, utils::ListRef<const Parameter*> parameters);
 
     /// Copy constructor
     CallTarget(const CallTarget&);
@@ -77,7 +77,7 @@ class CallTarget : public Castable<CallTarget, Node> {
     const sem::Type* ReturnType() const { return signature_.return_type; }
 
     /// @return the parameters of the call target
-    const ParameterList& Parameters() const { return signature_.parameters; }
+    auto& Parameters() const { return signature_.parameters; }
 
     /// @return the signature of the call target
     const CallTargetSignature& Signature() const { return signature_; }
