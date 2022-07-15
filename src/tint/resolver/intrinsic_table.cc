@@ -1102,11 +1102,11 @@ Impl::Builtin Impl::Lookup(sem::BuiltinType builtin_type,
 
     // De-duplicate builtins that are identical.
     auto* sem = utils::GetOrCreate(builtins, match, [&] {
-        std::vector<sem::Parameter*> params;
-        params.reserve(match.parameters.size());
+        utils::Vector<sem::Parameter*, 8> params;
+        params.Reserve(match.parameters.size());
         for (auto& p : match.parameters) {
-            params.emplace_back(builder.create<sem::Parameter>(
-                nullptr, static_cast<uint32_t>(params.size()), p.type, ast::StorageClass::kNone,
+            params.Push(builder.create<sem::Parameter>(
+                nullptr, static_cast<uint32_t>(params.Length()), p.type, ast::StorageClass::kNone,
                 ast::Access::kUndefined, p.usage));
         }
         sem::PipelineStageSet supported_stages;
@@ -1296,11 +1296,11 @@ IntrinsicTable::CtorOrConv Impl::Lookup(CtorConvIntrinsic type,
 
     // Was this overload a constructor or conversion?
     if (match.overload->flags.Contains(OverloadFlag::kIsConstructor)) {
-        sem::ParameterList params;
-        params.reserve(match.parameters.size());
+        sem::ParameterList<8> params;
+        params.Reserve(match.parameters.size());
         for (auto& p : match.parameters) {
-            params.emplace_back(builder.create<sem::Parameter>(
-                nullptr, static_cast<uint32_t>(params.size()), p.type, ast::StorageClass::kNone,
+            params.Push(builder.create<sem::Parameter>(
+                nullptr, static_cast<uint32_t>(params.Length()), p.type, ast::StorageClass::kNone,
                 ast::Access::kUndefined, p.usage));
         }
         auto eval_stage = match.overload->const_eval_fn ? sem::EvaluationStage::kConstant
