@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca69f54d_b73efc3b",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-15T21:12:03Z",
+      "side": 1,
+      "message": "This is the LHS of the phony assignment. There\u0027s an assertion in `sem::Expression` that if the `EvaluationStage` is `kConstant`, then there must be a constant value provided.\nPropagating the constant value from the RHS to the phony is a bit weird (much like the entire concept of the phony) as the phony isn\u0027t a `const`, nor is it a `let`, `var` or `override`.\n\nI don\u0027t really think there\u0027s any harm in having this as `kRuntime`, as almost everything special-cases the `PhonyAssignment`, and nothing actually looks at the `PhonyExpression` as it\u0027s just a placeholder.",
+      "parentUuid": "2448bd1a_1c8c10b2",
+      "range": {
+        "startLine": 1276,
+        "startChar": 57,
+        "endLine": 1276,
+        "endChar": 87
+      },
+      "revId": "d21e0871e39745eebb7f8dd3f08ccbdf2e52670b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59d2d1a9_b0f61bf9",
         "filename": "src/tint/resolver/resolver.cc",
         "patchSetId": 7
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-15T14:24:09Z",
       "side": 1,
       "message": "s/ct_ctor_or_conv/arr_or_str_ctor",
+      "range": {
+        "startLine": 1511,
+        "startChar": 7,
+        "endLine": 1511,
+        "endChar": 23
+      },
+      "revId": "d21e0871e39745eebb7f8dd3f08ccbdf2e52670b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93c6bbb9_aa84f216",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1511,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-15T21:12:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59d2d1a9_b0f61bf9",
       "range": {
         "startLine": 1511,
         "startChar": 7,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4734647_18ea344f",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1526,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-15T21:12:03Z",
+      "side": 1,
+      "message": "I\u0027m setting it to runtime as `kConstant` will trigger the assertion I mentioned above, and `kOverride` is just wrong.\nAdded a comment.",
+      "parentUuid": "c66a1188_ec1daad6",
+      "range": {
+        "startLine": 1525,
+        "startChar": 16,
+        "endLine": 1526,
+        "endChar": 55
+      },
+      "revId": "d21e0871e39745eebb7f8dd3f08ccbdf2e52670b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "607d8d2b_c10b9915",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-07-15T14:24:09Z",
       "side": 1,
       "message": "No need to move a pointer",
+      "range": {
+        "startLine": 1531,
+        "startChar": 63,
+        "endLine": 1531,
+        "endChar": 72
+      },
+      "revId": "d21e0871e39745eebb7f8dd3f08ccbdf2e52670b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c06b9d15_212bb240",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1531,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-15T21:12:03Z",
+      "side": 1,
+      "message": "Cruft from when this wasn\u0027t a pointer. Done.",
+      "parentUuid": "607d8d2b_c10b9915",
       "range": {
         "startLine": 1531,
         "startChar": 63,
@@ -116,6 +212,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b0e1c48_e463b35c",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1534,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-15T21:12:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5788b31f_02bd3da8",
+      "range": {
+        "startLine": 1534,
+        "startChar": 7,
+        "endLine": 1534,
+        "endChar": 23
+      },
+      "revId": "d21e0871e39745eebb7f8dd3f08ccbdf2e52670b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c5583ec_5d0bd027",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-07-15T14:24:09Z",
       "side": 1,
       "message": "This condition isn\u0027t necessary, right? We can always get the earliest stage of the builtin and its args.",
+      "range": {
+        "startLine": 1713,
+        "startChar": 4,
+        "endLine": 1713,
+        "endChar": 49
+      },
+      "revId": "d21e0871e39745eebb7f8dd3f08ccbdf2e52670b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8417e63_656941cd",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1713,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-15T21:12:03Z",
+      "side": 1,
+      "message": "It\u0027s an optimization. Added a comment.",
+      "parentUuid": "1c5583ec_5d0bd027",
       "range": {
         "startLine": 1713,
         "startChar": 4,
@@ -162,6 +306,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dd36fbd_f22da6a7",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1721,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-15T21:12:03Z",
+      "side": 1,
+      "message": "Yes, you\u0027re right. Removed.",
+      "parentUuid": "5697532b_a4cd65bc",
+      "range": {
+        "startLine": 1721,
+        "startChar": 49,
+        "endLine": 1721,
+        "endChar": 73
+      },
+      "revId": "d21e0871e39745eebb7f8dd3f08ccbdf2e52670b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9d2b339_ac230379",
@@ -175,6 +343,30 @@
       "writtenOn": "2022-07-15T14:24:09Z",
       "side": 1,
       "message": "const ref?",
+      "range": {
+        "startLine": 377,
+        "startChar": 18,
+        "endLine": 377,
+        "endChar": 68
+      },
+      "revId": "d21e0871e39745eebb7f8dd3f08ccbdf2e52670b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f407e4f_0563478d",
+        "filename": "src/tint/resolver/validator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-15T21:12:03Z",
+      "side": 1,
+      "message": "Good catch! Done",
+      "parentUuid": "b9d2b339_ac230379",
       "range": {
         "startLine": 377,
         "startChar": 18,
