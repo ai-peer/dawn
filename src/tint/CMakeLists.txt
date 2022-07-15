@@ -467,6 +467,7 @@ set(TINT_LIB_SRCS
   utils/crc32.h
   utils/enum_set.h
   utils/hash.h
+  utils/list.h
   utils/map.h
   utils/math.h
   utils/scoped_assignment.h
@@ -847,6 +848,7 @@ if(TINT_BUILD_TESTS)
     utils/hash_test.cc
     utils/io/command_test.cc
     utils/io/tmpfile_test.cc
+    utils/list_test.cc
     utils/map_test.cc
     utils/math_test.cc
     utils/result_test.cc
