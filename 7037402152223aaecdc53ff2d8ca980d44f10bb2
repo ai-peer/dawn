@@ -192,6 +192,24 @@
       "parentUuid": "33c22a95_8b61ead8",
       "revId": "7037402152223aaecdc53ff2d8ca980d44f10bb2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ad3b971_7854e76c",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2718,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-07-15T02:48:03Z",
+      "side": 1,
+      "message": "Oh sorry I just found dawn:1237 is about T2B copies. I\u0027ve filed a new one about B2T copies with Depth16Unorm:\nhttps://bugs.chromium.org/p/dawn/issues/detail?id\u003d1492",
+      "parentUuid": "1957d025_b6e415c2",
+      "revId": "7037402152223aaecdc53ff2d8ca980d44f10bb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
