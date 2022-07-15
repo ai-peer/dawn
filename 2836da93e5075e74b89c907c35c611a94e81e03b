@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4127c8bd_1d43f38b",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-15T15:21:28Z",
+      "side": 1,
+      "message": "missing space",
+      "range": {
+        "startLine": 70,
+        "startChar": 77,
+        "endLine": 70,
+        "endChar": 88
+      },
+      "revId": "2836da93e5075e74b89c907c35c611a94e81e03b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e809824_0141d19a",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-15T15:21:28Z",
+      "side": 1,
+      "message": "In that case, maybe this function should be called `IntegerDispatchOrZero`. Also, although the auto-default magic is cool, I think adding the Default case would make this more clear.",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 53
+      },
+      "revId": "2836da93e5075e74b89c907c35c611a94e81e03b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eb72255_0a6e50e6",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-15T15:21:28Z",
+      "side": 1,
+      "message": "Not really a fan as this hides the problem that I mentioned in an earlier CL. I would rather see the static_casts and fix it properly later.",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 43
+      },
+      "revId": "2836da93e5075e74b89c907c35c611a94e81e03b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8367b384_582b4b52",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-15T15:21:28Z",
+      "side": 1,
+      "message": "expression?",
+      "range": {
+        "startLine": 194,
+        "startChar": 22,
+        "endLine": 194,
+        "endChar": 29
+      },
+      "revId": "2836da93e5075e74b89c907c35c611a94e81e03b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1604fd18_1e538fa2",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2958,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-15T15:21:28Z",
+      "side": 1,
+      "message": "Fancy! I like how you wrote these tests.",
+      "range": {
+        "startLine": 2957,
+        "startChar": 4,
+        "endLine": 2958,
+        "endChar": 28
+      },
+      "revId": "2836da93e5075e74b89c907c35c611a94e81e03b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "632a4f91_239ade7c",
+        "filename": "test/tint/bug/chromium/1343242.wgsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-15T15:21:28Z",
+      "side": 1,
+      "message": "Did you not want to generate all the expected files for this?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 23
+      },
+      "revId": "2836da93e5075e74b89c907c35c611a94e81e03b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
