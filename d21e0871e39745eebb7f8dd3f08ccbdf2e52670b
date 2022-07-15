@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c32c4ae0_4913638b",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-15T21:19:16Z",
+      "side": 1,
+      "message": "ACK.",
+      "parentUuid": "ca69f54d_b73efc3b",
+      "range": {
+        "startLine": 1276,
+        "startChar": 57,
+        "endLine": 1276,
+        "endChar": 87
+      },
+      "revId": "d21e0871e39745eebb7f8dd3f08ccbdf2e52670b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59d2d1a9_b0f61bf9",
