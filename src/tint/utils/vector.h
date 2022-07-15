@@ -17,6 +17,7 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#include <array>
 #include <utility>
 #include <vector>
 
@@ -309,45 +310,51 @@ class Vector {
 
     constexpr static bool HasSmallArray = N > 0;
 
+    /// Replacement for std::aligned_storage as this is broken on earlier versions of MSVC.
+    struct TStorage alignas(alignof(T)) {
+        /// @returns the storage reinterpreted as a T*
+        T* Get() { return Bitcast<T*>(&data[0]); }
+        /// @returns the storage reinterpreted as a T*
+        const T* Get() const { return Bitcast<const T*>(&data[0]); }
+        /// Byte array of length sizeof(T)
+        uint8_t data[sizeof(T)];
+    };
+
     struct ImplWithSmallArray {
         Slice<T> slice;
 
-        /// Replacement for std::aligned_storage as this is broken on earlier versions of MSVC.
-        struct alignas(alignof(T)) {
-            /// Byte array of length sizeof(T)
-            uint8_t data[sizeof(T)];
-        } small[N];
+        std::array<TStorage, N> small_arr;
 
         /// Resets the slice field to the initial values on construction
         void Reset() {
-            slice.data = Bitcast<T*>(&small[0]);
+            slice.data = small_arr[0].Get();
             slice.len = 0;
             slice.cap = N;
         }
 
-        /// Allocates a new vector of T either from the small data array, or from the heap, then
+        /// Allocates a new vector of T either from small_arr, or from the heap, then
         /// assigns the pointer it to slice.data, and updates cap and move_policy.
         void Allocate(size_t new_cap) {
             if constexpr (HasSmallArray) {
                 if (new_cap < N) {
-                    slice.data = Bitcast<T*>(&small[0]);
+                    slice.data = small_arr[0].Get();
                     slice.cap = N;
                     return;
                 }
             }
-            slice.data = Bitcast<T*>(new uint8_t[new_cap * sizeof(T)]);
+            slice.data = Bitcast<T*>(new TStorage[new_cap]);
             slice.cap = new_cap;
         }
 
-        /// Heap-frees data, if isn't a pointer to small
+        /// Heap-frees data, if isn't a pointer to small_arr
         void Free(T* data) const {
-            if (data && data != Bitcast<const T*>(&small[0])) {
-                delete[] Bitcast<uint8_t*>(data);
+            if (data && data != small_arr[0].Get()) {
+                delete[] Bitcast<TStorage*>(data);
             }
         }
 
-        /// @returns true if slice.data does not point to small
-        bool IsHeapAllocation() const { return slice.data != Bitcast<const T*>(&small[0]); }
+        /// @returns true if slice.data does not point to small_arr
+        bool IsHeapAllocation() const { return slice.data != small_arr[0].Get(); }
     };
 
     struct ImplWithoutSmallArray {
@@ -363,14 +370,14 @@ class Vector {
         /// Heap-allocates a new vector of T, assigning it to slice.data, and updates cap and
         /// move_policy.
         void Allocate(size_t new_cap) {
-            slice.data = reinterpret_cast<T*>(new uint8_t[new_cap * sizeof(T)]);
+            slice.data = reinterpret_cast<T*>(new TStorage[new_cap]);
             slice.cap = new_cap;
         }
 
         /// Frees data.
         void Free(T* data) const {
             if (data) {
-                delete[] reinterpret_cast<uint8_t*>(data);
+                delete[] reinterpret_cast<TStorage*>(data);
             }
         }
 
