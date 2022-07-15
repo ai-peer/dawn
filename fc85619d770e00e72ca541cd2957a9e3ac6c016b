@@ -1091,6 +1091,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "63f53c74_4b23d404",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-15T09:32:17Z",
+      "side": 0,
+      "message": "Has `bigsur` been removed from the list of machines we\u0027re testing against or something?",
+      "parentUuid": "88cedc79_1228a965",
+      "revId": "fc85619d770e00e72ca541cd2957a9e3ac6c016b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "44af275a_6cd38d0c",
         "filename": "webgpu-cts/expectations.txt",
         "patchSetId": 3
