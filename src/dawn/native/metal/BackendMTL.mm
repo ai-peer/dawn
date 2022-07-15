@@ -370,10 +370,6 @@ class Adapter : public AdapterBase {
             }
         }
 
-        if (@available(macOS 10.11, iOS 11.0, *)) {
-            mSupportedFeatures.EnableFeature(Feature::DepthClamping);
-        }
-
         if (@available(macOS 10.11, iOS 9.0, *)) {
             mSupportedFeatures.EnableFeature(Feature::Depth32FloatStencil8);
         }
