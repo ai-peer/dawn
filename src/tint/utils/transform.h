@@ -21,6 +21,7 @@
 #include <vector>
 
 #include "src/tint/traits.h"
+#include "src/tint/utils/list.h"
 
 namespace tint::utils {
 
@@ -47,6 +48,33 @@ auto Transform(const std::vector<IN>& in, TRANSFORMER&& transform)
     -> std::vector<decltype(transform(in[0], 1u))> {
     std::vector<decltype(transform(in[0], 1u))> result(in.size());
     for (size_t i = 0; i < result.size(); ++i) {
+        result[i] = transform(in[i], i);
+    }
+    return result;
+}
+
+/// Transform performs an element-wise transformation of a list.
+/// @param in the input list.
+/// @param transform the transformation function with signature: `OUT(IN)`
+/// @returns a new list with each element of the source list transformed by `transform`.
+template <typename IN, size_t N, typename TRANSFORMER>
+auto Transform(const List<IN, N>& in, TRANSFORMER&& transform) -> List<decltype(transform(in[0]))> {
+    List<decltype(transform(in[0])), N> result(in.Length());
+    for (size_t i = 0; i < result.Length(); ++i) {
+        result[i] = transform(in[i]);
+    }
+    return result;
+}
+
+/// Transform performs an element-wise transformation of a list.
+/// @param in the input list.
+/// @param transform the transformation function with signature: `OUT(IN, size_t)`
+/// @returns a new list with each element of the source list transformed by `transform`.
+template <typename IN, size_t N, typename TRANSFORMER>
+auto Transform(const List<IN, N>& in, TRANSFORMER&& transform)
+    -> List<decltype(transform(in[0], 1u)), N> {
+    List<decltype(transform(in[0], 1u)), N> result(in.Length());
+    for (size_t i = 0; i < result.Length(); ++i) {
         result[i] = transform(in[i], i);
     }
     return result;

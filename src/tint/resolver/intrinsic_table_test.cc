@@ -58,7 +58,7 @@ TEST_F(IntrinsicTableTest, MatchF32) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kCos);
     EXPECT_EQ(result.sem->ReturnType(), f32);
-    ASSERT_EQ(result.sem->Parameters().size(), 1u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 1u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), f32);
 }
 
@@ -78,7 +78,7 @@ TEST_F(IntrinsicTableTest, MatchU32) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kUnpack2x16float);
     EXPECT_EQ(result.sem->ReturnType(), vec2_f32);
-    ASSERT_EQ(result.sem->Parameters().size(), 1u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 1u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), u32);
 }
 
@@ -99,7 +99,7 @@ TEST_F(IntrinsicTableTest, MatchI32) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kTextureLoad);
     EXPECT_EQ(result.sem->ReturnType(), vec4_f32);
-    ASSERT_EQ(result.sem->Parameters().size(), 3u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 3u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), tex);
     EXPECT_EQ(result.sem->Parameters()[0]->Usage(), ParameterUsage::kTexture);
     EXPECT_EQ(result.sem->Parameters()[1]->Type(), i32);
@@ -123,7 +123,7 @@ TEST_F(IntrinsicTableTest, MatchIU32AsI32) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kCountOneBits);
     EXPECT_EQ(result.sem->ReturnType(), i32);
-    ASSERT_EQ(result.sem->Parameters().size(), 1u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 1u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), i32);
 }
 
@@ -134,7 +134,7 @@ TEST_F(IntrinsicTableTest, MatchIU32AsU32) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kCountOneBits);
     EXPECT_EQ(result.sem->ReturnType(), u32);
-    ASSERT_EQ(result.sem->Parameters().size(), 1u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 1u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), u32);
 }
 
@@ -152,7 +152,7 @@ TEST_F(IntrinsicTableTest, MatchFIU32AsI32) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kClamp);
     EXPECT_EQ(result.sem->ReturnType(), i32);
-    ASSERT_EQ(result.sem->Parameters().size(), 3u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 3u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), i32);
     EXPECT_EQ(result.sem->Parameters()[1]->Type(), i32);
     EXPECT_EQ(result.sem->Parameters()[2]->Type(), i32);
@@ -165,7 +165,7 @@ TEST_F(IntrinsicTableTest, MatchFIU32AsU32) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kClamp);
     EXPECT_EQ(result.sem->ReturnType(), u32);
-    ASSERT_EQ(result.sem->Parameters().size(), 3u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 3u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), u32);
     EXPECT_EQ(result.sem->Parameters()[1]->Type(), u32);
     EXPECT_EQ(result.sem->Parameters()[2]->Type(), u32);
@@ -178,7 +178,7 @@ TEST_F(IntrinsicTableTest, MatchFIU32AsF32) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kClamp);
     EXPECT_EQ(result.sem->ReturnType(), f32);
-    ASSERT_EQ(result.sem->Parameters().size(), 3u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 3u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), f32);
     EXPECT_EQ(result.sem->Parameters()[1]->Type(), f32);
     EXPECT_EQ(result.sem->Parameters()[2]->Type(), f32);
@@ -199,7 +199,7 @@ TEST_F(IntrinsicTableTest, MatchBool) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kSelect);
     EXPECT_EQ(result.sem->ReturnType(), f32);
-    ASSERT_EQ(result.sem->Parameters().size(), 3u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 3u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), f32);
     EXPECT_EQ(result.sem->Parameters()[1]->Type(), f32);
     EXPECT_EQ(result.sem->Parameters()[2]->Type(), bool_);
@@ -222,7 +222,7 @@ TEST_F(IntrinsicTableTest, MatchPointer) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kAtomicLoad);
     EXPECT_EQ(result.sem->ReturnType(), i32);
-    ASSERT_EQ(result.sem->Parameters().size(), 1u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 1u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), ptr);
 }
 
@@ -242,7 +242,7 @@ TEST_F(IntrinsicTableTest, MatchArray) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kArrayLength);
     EXPECT_TRUE(result.sem->ReturnType()->Is<sem::U32>());
-    ASSERT_EQ(result.sem->Parameters().size(), 1u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 1u);
     auto* param_type = result.sem->Parameters()[0]->Type();
     ASSERT_TRUE(param_type->Is<sem::Pointer>());
     EXPECT_TRUE(param_type->As<sem::Pointer>()->StoreType()->Is<sem::Array>());
@@ -266,7 +266,7 @@ TEST_F(IntrinsicTableTest, MatchSampler) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kTextureSample);
     EXPECT_EQ(result.sem->ReturnType(), vec4_f32);
-    ASSERT_EQ(result.sem->Parameters().size(), 3u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 3u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), tex);
     EXPECT_EQ(result.sem->Parameters()[0]->Usage(), ParameterUsage::kTexture);
     EXPECT_EQ(result.sem->Parameters()[1]->Type(), sampler);
@@ -295,7 +295,7 @@ TEST_F(IntrinsicTableTest, MatchSampledTexture) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kTextureLoad);
     EXPECT_EQ(result.sem->ReturnType(), vec4_f32);
-    ASSERT_EQ(result.sem->Parameters().size(), 3u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 3u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), tex);
     EXPECT_EQ(result.sem->Parameters()[0]->Usage(), ParameterUsage::kTexture);
     EXPECT_EQ(result.sem->Parameters()[1]->Type(), vec2_i32);
@@ -315,7 +315,7 @@ TEST_F(IntrinsicTableTest, MatchMultisampledTexture) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kTextureLoad);
     EXPECT_EQ(result.sem->ReturnType(), vec4_f32);
-    ASSERT_EQ(result.sem->Parameters().size(), 3u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 3u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), tex);
     EXPECT_EQ(result.sem->Parameters()[0]->Usage(), ParameterUsage::kTexture);
     EXPECT_EQ(result.sem->Parameters()[1]->Type(), vec2_i32);
@@ -334,7 +334,7 @@ TEST_F(IntrinsicTableTest, MatchDepthTexture) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kTextureLoad);
     EXPECT_EQ(result.sem->ReturnType(), f32);
-    ASSERT_EQ(result.sem->Parameters().size(), 3u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 3u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), tex);
     EXPECT_EQ(result.sem->Parameters()[0]->Usage(), ParameterUsage::kTexture);
     EXPECT_EQ(result.sem->Parameters()[1]->Type(), vec2_i32);
@@ -353,7 +353,7 @@ TEST_F(IntrinsicTableTest, MatchDepthMultisampledTexture) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kTextureLoad);
     EXPECT_EQ(result.sem->ReturnType(), f32);
-    ASSERT_EQ(result.sem->Parameters().size(), 3u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 3u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), tex);
     EXPECT_EQ(result.sem->Parameters()[0]->Usage(), ParameterUsage::kTexture);
     EXPECT_EQ(result.sem->Parameters()[1]->Type(), vec2_i32);
@@ -373,7 +373,7 @@ TEST_F(IntrinsicTableTest, MatchExternalTexture) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kTextureLoad);
     EXPECT_EQ(result.sem->ReturnType(), vec4_f32);
-    ASSERT_EQ(result.sem->Parameters().size(), 2u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 2u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), tex);
     EXPECT_EQ(result.sem->Parameters()[0]->Usage(), ParameterUsage::kTexture);
     EXPECT_EQ(result.sem->Parameters()[1]->Type(), vec2_i32);
@@ -394,7 +394,7 @@ TEST_F(IntrinsicTableTest, MatchWOStorageTexture) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kTextureStore);
     EXPECT_TRUE(result.sem->ReturnType()->Is<sem::Void>());
-    ASSERT_EQ(result.sem->Parameters().size(), 3u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 3u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), tex);
     EXPECT_EQ(result.sem->Parameters()[0]->Usage(), ParameterUsage::kTexture);
     EXPECT_EQ(result.sem->Parameters()[1]->Type(), vec2_i32);
@@ -422,7 +422,7 @@ TEST_F(IntrinsicTableTest, ImplicitLoadOnReference) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kCos);
     EXPECT_EQ(result.sem->ReturnType(), f32);
-    ASSERT_EQ(result.sem->Parameters().size(), 1u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 1u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), f32);
 }
 
@@ -454,7 +454,7 @@ TEST_F(IntrinsicTableTest, MatchOpenSizeVector) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kClamp);
     EXPECT_EQ(result.sem->ReturnType(), vec2_f32);
-    ASSERT_EQ(result.sem->Parameters().size(), 3u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 3u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), vec2_f32);
     EXPECT_EQ(result.sem->Parameters()[1]->Type(), vec2_f32);
     EXPECT_EQ(result.sem->Parameters()[2]->Type(), vec2_f32);
@@ -478,7 +478,7 @@ TEST_F(IntrinsicTableTest, MatchOpenSizeMatrix) {
     ASSERT_EQ(Diagnostics().str(), "");
     EXPECT_EQ(result.sem->Type(), BuiltinType::kDeterminant);
     EXPECT_EQ(result.sem->ReturnType(), f32);
-    ASSERT_EQ(result.sem->Parameters().size(), 1u);
+    ASSERT_EQ(result.sem->Parameters().Length(), 1u);
     EXPECT_EQ(result.sem->Parameters()[0]->Type(), mat3_f32);
 }
 
@@ -681,7 +681,7 @@ TEST_F(IntrinsicTableTest, MatchTypeConstructorImplicit) {
     ASSERT_NE(result.target, nullptr);
     EXPECT_EQ(result.target->ReturnType(), vec3_i32);
     EXPECT_TRUE(result.target->Is<sem::TypeConstructor>());
-    ASSERT_EQ(result.target->Parameters().size(), 3u);
+    ASSERT_EQ(result.target->Parameters().Length(), 3u);
     EXPECT_EQ(result.target->Parameters()[0]->Type(), i32);
     EXPECT_EQ(result.target->Parameters()[1]->Type(), i32);
     EXPECT_EQ(result.target->Parameters()[2]->Type(), i32);
@@ -695,7 +695,7 @@ TEST_F(IntrinsicTableTest, MatchTypeConstructorExplicit) {
     ASSERT_NE(result.target, nullptr);
     EXPECT_EQ(result.target->ReturnType(), vec3_i32);
     EXPECT_TRUE(result.target->Is<sem::TypeConstructor>());
-    ASSERT_EQ(result.target->Parameters().size(), 3u);
+    ASSERT_EQ(result.target->Parameters().Length(), 3u);
     EXPECT_EQ(result.target->Parameters()[0]->Type(), i32);
     EXPECT_EQ(result.target->Parameters()[1]->Type(), i32);
     EXPECT_EQ(result.target->Parameters()[2]->Type(), i32);
@@ -761,7 +761,7 @@ TEST_F(IntrinsicTableTest, MatchTypeConversion) {
     ASSERT_NE(result.target, nullptr);
     EXPECT_EQ(result.target->ReturnType(), vec3_i32);
     EXPECT_TRUE(result.target->Is<sem::TypeConversion>());
-    ASSERT_EQ(result.target->Parameters().size(), 1u);
+    ASSERT_EQ(result.target->Parameters().Length(), 1u);
     EXPECT_EQ(result.target->Parameters()[0]->Type(), vec3_f32);
 }
 
@@ -808,7 +808,7 @@ TEST_F(IntrinsicTableTest, OverloadResolution) {
     auto result = table->Lookup(CtorConvIntrinsic::kI32, nullptr, {ai}, Source{});
     ASSERT_NE(result.target, nullptr);
     EXPECT_EQ(result.target->ReturnType(), i32);
-    EXPECT_EQ(result.target->Parameters().size(), 1u);
+    EXPECT_EQ(result.target->Parameters().Length(), 1u);
     EXPECT_EQ(result.target->Parameters()[0]->Type(), i32);
 }
 
