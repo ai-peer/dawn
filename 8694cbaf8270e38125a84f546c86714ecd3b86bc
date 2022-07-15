@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71e66c94_0888dfcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-15T12:13:24Z",
+      "side": 1,
+      "message": "Hi, sorry for troubling. I am not sure how to deal with f16 HLSL end-to-end tests, which make Kokoro failed on Windows, because the generated HLSL requires DXC and SM6.0 (or higher), so that `float16_t` would be valid, but it seems that Kokoro may just use FXC.",
+      "revId": "8694cbaf8270e38125a84f546c86714ecd3b86bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
