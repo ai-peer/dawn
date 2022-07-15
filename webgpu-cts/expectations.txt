@@ -115,6 +115,15 @@ crbug.com/1309194 [ linux ] webgpu:web_platform,copyToTexture,canvas:copy_conten
 crbug.com/1309194 [ linux ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_gpu_context_canvas:* [ Skip ]
 
 ################################################################################
+# web_platform crashes on SwiftShader
+# Skipped instead of just Crash because of the number of failures
+# KEEP
+################################################################################
+crbug.com/1344876 [ webgpu-adapter-swiftshader ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_2d_context_canvas:* [ Skip ]
+crbug.com/1344876 [ webgpu-adapter-swiftshader ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_gl_context_canvas:* [ Skip ]
+crbug.com/1344876 [ webgpu-adapter-swiftshader ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:* [ Skip ]
+
+################################################################################
 # copyToTexture failures. Needs investigation
 # KEEP
 ################################################################################
