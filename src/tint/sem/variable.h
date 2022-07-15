@@ -23,6 +23,7 @@
 #include "src/tint/sem/binding_point.h"
 #include "src/tint/sem/expression.h"
 #include "src/tint/sem/parameter_usage.h"
+#include "src/tint/utils/list.h"
 
 // Forward declarations
 namespace tint::ast {
@@ -223,7 +224,8 @@ class Parameter final : public Castable<Parameter, Variable> {
 };
 
 /// ParameterList is a list of Parameter
-using ParameterList = std::vector<const Parameter*>;
+template <size_t N>
+using ParameterList = utils::List<const Parameter*, N>;
 
 /// VariableUser holds the semantic information for an identifier expression
 /// node that resolves to a variable.

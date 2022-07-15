@@ -81,6 +81,7 @@
 #include "src/tint/sem/variable.h"
 #include "src/tint/sem/while_statement.h"
 #include "src/tint/utils/defer.h"
+#include "src/tint/utils/list.h"
 #include "src/tint/utils/math.h"
 #include "src/tint/utils/reverse.h"
 #include "src/tint/utils/scoped_assignment.h"
@@ -715,7 +716,7 @@ sem::GlobalVariable* Resolver::GlobalVariable(const ast::Variable* v) {
 sem::Function* Resolver::Function(const ast::Function* decl) {
     uint32_t parameter_index = 0;
     std::unordered_map<Symbol, Source> parameter_names;
-    std::vector<sem::Parameter*> parameters;
+    utils::List<sem::Parameter*, 8> parameters;
 
     // Resolve all the parameters
     for (auto* param : decl->params) {
@@ -740,7 +741,7 @@ sem::Function* Resolver::Function(const ast::Function* decl) {
             return nullptr;
         }
 
-        parameters.emplace_back(p);
+        parameters.Push(p);
 
         auto* p_ty = const_cast<sem::Type*>(p->Type());
         if (auto* str = p_ty->As<sem::Struct>()) {
@@ -794,7 +795,7 @@ sem::Function* Resolver::Function(const ast::Function* decl) {
         }
     }
 
-    auto* func = builder_->create<sem::Function>(decl, return_type, parameters);
+    auto* func = builder_->create<sem::Function>(decl, return_type, std::move(parameters));
     builder_->Sem().Add(decl, func);
 
     TINT_SCOPED_ASSIGNMENT(current_function_, func);
@@ -1374,7 +1375,7 @@ const sem::Expression* Resolver::Materialize(const sem::Expression* expr,
 
 bool Resolver::MaterializeArguments(std::vector<const sem::Expression*>& args,
                                     const sem::CallTarget* target) {
-    for (size_t i = 0, n = std::min(args.size(), target->Parameters().size()); i < n; i++) {
+    for (size_t i = 0, n = std::min(args.size(), target->Parameters().Length()); i < n; i++) {
         const auto* param_ty = target->Parameters()[i]->Type();
         if (ShouldMaterializeArgument(param_ty)) {
             auto* materialized = Materialize(args[i], param_ty);
@@ -1554,7 +1555,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                 auto* call_target = utils::GetOrCreate(
                     array_ctors_, ArrayConstructorSig{{arr, args.size(), args_stage}},
                     [&]() -> sem::TypeConstructor* {
-                        sem::ParameterList params(args.size());
+                        sem::ParameterList<8> params(args.size());
                         for (size_t i = 0; i < args.size(); i++) {
                             params[i] = builder_->create<sem::Parameter>(
                                 nullptr,                   // declaration
@@ -1572,8 +1573,8 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                 auto* call_target = utils::GetOrCreate(
                     struct_ctors_, StructConstructorSig{{str, args.size(), args_stage}},
                     [&]() -> sem::TypeConstructor* {
-                        sem::ParameterList params(std::min(args.size(), str->Members().size()));
-                        for (size_t i = 0, n = params.size(); i < n; i++) {
+                        sem::ParameterList<8> params(std::min(args.size(), str->Members().size()));
+                        for (size_t i = 0, n = params.Length(); i < n; i++) {
                             params[i] = builder_->create<sem::Parameter>(
                                 nullptr,                    // declaration
                                 static_cast<uint32_t>(i),   // index
@@ -1760,8 +1761,9 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
     return call;
 }
 
-void Resolver::CollectTextureSamplerPairs(const sem::Builtin* builtin,
-                                          const std::vector<const sem::Expression*>& args) const {
+void Resolver::CollectTextureSamplerPairs(
+    const sem::Builtin* builtin,
+    const utils::List<const sem::Expression*, 8>& args) const {
     // Collect a texture/sampler pair for this builtin.
     const auto& signature = builtin->Signature();
     int texture_index = signature.IndexOf(sem::ParameterUsage::kTexture);
@@ -1827,8 +1829,9 @@ sem::Call* Resolver::FunctionCall(const ast::CallExpression* expr,
     return call;
 }
 
-void Resolver::CollectTextureSamplerPairs(sem::Function* func,
-                                          const std::vector<const sem::Expression*>& args) const {
+void Resolver::CollectTextureSamplerPairs(
+    sem::Function* func,
+    const utils::List<const sem::Expression*, 8>& args) const {
     // Map all texture/sampler pairs from the target function to the
     // current function. These can only be global or parameter
     // variables. Resolve any parameter variables to the corresponding
