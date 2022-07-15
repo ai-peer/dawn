@@ -47,6 +47,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "856ebed8_ca3a391c",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-15T20:12:55Z",
+      "side": 1,
+      "message": "Nevermind what I wrote above.",
+      "parentUuid": "2e809824_0141d19a",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 53
+      },
+      "revId": "2836da93e5075e74b89c907c35c611a94e81e03b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0eb72255_0a6e50e6",
