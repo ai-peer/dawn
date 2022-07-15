@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63a2da3e_528400c6",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-15T21:11:57Z",
+      "side": 1,
+      "message": "Done. Much nicer, thanks.",
+      "parentUuid": "5511c1be_cedb935f",
+      "range": {
+        "startLine": 443,
+        "startChar": 25,
+        "endLine": 443,
+        "endChar": 53
+      },
+      "revId": "1f903a9cb7f54c14c25c3241babd618ea680e9be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5dfa40b0_82242ebc",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-14T21:03:54Z",
       "side": 1,
       "message": "This \u0027const\u0027 is probably not useful/necessary and obfuscates the pointer-to-pointer type a bit here (reads better as `sem::Expression const** args`).",
+      "range": {
+        "startLine": 123,
+        "startChar": 53,
+        "endLine": 123,
+        "endChar": 58
+      },
+      "revId": "1f903a9cb7f54c14c25c3241babd618ea680e9be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ca9e926_defa69ea",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-15T21:11:57Z",
+      "side": 1,
+      "message": "Not sure I agree. The second `const` is saying that these functions will not change the array of argument pointers. Given that materialization wraps a `sem::Expression` in-place, this is something that might actually (accidentally) happen.\n\nI agree though that it\u0027s ugly, so I\u0027ve added a `ArgumentList` typedef in the header and have replaced these with that. Maybe one day that can be replaced with a view / slice or something.",
+      "parentUuid": "5dfa40b0_82242ebc",
       "range": {
         "startLine": 123,
         "startChar": 53,
