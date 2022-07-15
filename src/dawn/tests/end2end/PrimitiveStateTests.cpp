@@ -21,11 +21,11 @@
 
 constexpr static unsigned int kRTSize = 1;
 
-class DepthClampingTest : public DawnTest {
+class DepthClippingTest : public DawnTest {
   protected:
     void SetUp() override {
         DawnTest::SetUp();
-        DAWN_TEST_UNSUPPORTED_IF(!SupportsFeatures({wgpu::FeatureName::DepthClamping}));
+        DAWN_TEST_UNSUPPORTED_IF(!SupportsFeatures({wgpu::FeatureName::DepthClipControl}));
 
         wgpu::TextureDescriptor renderTargetDescriptor;
         renderTargetDescriptor.size = {kRTSize, kRTSize};
@@ -70,14 +70,14 @@ class DepthClampingTest : public DawnTest {
 
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
         std::vector<wgpu::FeatureName> requiredFeatures = {};
-        if (SupportsFeatures({wgpu::FeatureName::DepthClamping})) {
-            requiredFeatures.push_back(wgpu::FeatureName::DepthClamping);
+        if (SupportsFeatures({wgpu::FeatureName::DepthClipControl})) {
+            requiredFeatures.push_back(wgpu::FeatureName::DepthClipControl);
         }
         return requiredFeatures;
     }
 
     struct TestSpec {
-        wgpu::PrimitiveDepthClampingState* depthClampingState;
+        wgpu::PrimitiveDepthClipControl* depthClipControl;
         RGBA8 color;
         float depth;
         wgpu::CompareFunction depthCompareFunction;
@@ -111,7 +111,7 @@ class DepthClampingTest : public DawnTest {
 
             // Create a pipeline for the triangles with the test spec's params.
             utils::ComboRenderPipelineDescriptor descriptor;
-            descriptor.primitive.nextInChain = test.depthClampingState;
+            descriptor.primitive.nextInChain = test.depthClipControl;
             descriptor.primitive.topology = wgpu::PrimitiveTopology::PointList;
             descriptor.vertex.module = vsModule;
             descriptor.cFragment.module = fsModule;
@@ -147,49 +147,49 @@ class DepthClampingTest : public DawnTest {
 };
 
 // Test that fragments beyond the far plane are clamped to 1.0 if depth clamping is enabled.
-TEST_P(DepthClampingTest, ClampOnBeyondFarPlane) {
-    wgpu::PrimitiveDepthClampingState clampingState;
-    clampingState.clampDepth = true;
+TEST_P(DepthClippingTest, UnclippedBeyondFarPlane) {
+    wgpu::PrimitiveDepthClipControl depthClipControl;
+    depthClipControl.unclippedDepth = true;
 
     DoTest(
         {
             // Draw a red triangle at depth 1.
             {
-                nullptr,               /* depthClampingState */
+                nullptr,               /* depthClipControl */
                 RGBA8(255, 0, 0, 255), /* color */
                 1.f,                   /* depth */
                 wgpu::CompareFunction::Always,
             },
-            // Draw a green triangle at depth 2 which should get clamped to 1.
+            // Draw a green triangle at depth 2 which should not be clipped.
             {
-                &clampingState,
+                &depthClipControl,
                 RGBA8(0, 255, 0, 255), /* color */
                 2.f,                   /* depth */
-                wgpu::CompareFunction::Equal,
+                wgpu::CompareFunction::Greater,
             },
         },
-        // Since we draw the green triangle with an "equal" depth compare function, the resulting
-        // fragment should be green.
+        // Since we draw the green triangle with an "greater" depth compare function, the resulting
+        // fragment should be green since the depth is greater.
         RGBA8(0, 255, 0, 255));
 }
 
 // Test that fragments beyond the near plane are clamped to 0.0 if depth clamping is enabled.
-TEST_P(DepthClampingTest, ClampOnBeyondNearPlane) {
-    wgpu::PrimitiveDepthClampingState clampingState;
-    clampingState.clampDepth = true;
+TEST_P(DepthClippingTest, ClampOnBeyondNearPlane) {
+    wgpu::PrimitiveDepthClipControl depthClipControl;
+    depthClipControl.unclippedDepth = true;
 
     DoTest(
         {
             // Draw a red triangle at depth 0.
             {
-                nullptr,               /* depthClampingState */
+                nullptr,               /* depthClipControl */
                 RGBA8(255, 0, 0, 255), /* color */
                 0.f,                   /* depth */
                 wgpu::CompareFunction::Always,
             },
             // Draw a green triangle at depth -1 which should get clamped to 0.
             {
-                &clampingState,
+                &depthClipControl,
                 RGBA8(0, 255, 0, 255), /* color */
                 -1.f,                  /* depth */
                 wgpu::CompareFunction::Equal,
@@ -201,14 +201,14 @@ TEST_P(DepthClampingTest, ClampOnBeyondNearPlane) {
 }
 
 // Test that fragments inside the view frustum are unaffected by depth clamping.
-TEST_P(DepthClampingTest, ClampOnInsideViewFrustum) {
-    wgpu::PrimitiveDepthClampingState clampingState;
-    clampingState.clampDepth = true;
+TEST_P(DepthClippingTest, ClampOnInsideViewFrustum) {
+    wgpu::PrimitiveDepthClipControl depthClipControl;
+    depthClipControl.unclippedDepth = true;
 
     DoTest(
         {
             {
-                &clampingState,
+                &depthClipControl,
                 RGBA8(0, 255, 0, 255), /* color */
                 0.5f,                  /* depth */
                 wgpu::CompareFunction::Always,
@@ -218,20 +218,20 @@ TEST_P(DepthClampingTest, ClampOnInsideViewFrustum) {
 }
 
 // Test that fragments outside the view frustum are clipped if depth clamping is disabled.
-TEST_P(DepthClampingTest, ClampOffOutsideViewFrustum) {
-    wgpu::PrimitiveDepthClampingState clampingState;
-    clampingState.clampDepth = false;
+TEST_P(DepthClippingTest, ClampOffOutsideViewFrustum) {
+    wgpu::PrimitiveDepthClipControl depthClipControl;
+    depthClipControl.unclippedDepth = false;
 
     DoTest(
         {
             {
-                &clampingState,
+                &depthClipControl,
                 RGBA8(0, 255, 0, 255), /* color */
                 2.f,                   /* depth */
                 wgpu::CompareFunction::Always,
             },
             {
-                &clampingState,
+                &depthClipControl,
                 RGBA8(0, 255, 0, 255), /* color */
                 -1.f,                  /* depth */
                 wgpu::CompareFunction::Always,
@@ -240,18 +240,18 @@ TEST_P(DepthClampingTest, ClampOffOutsideViewFrustum) {
         RGBA8(0, 0, 0, 0));
 }
 
-// Test that fragments outside the view frustum are clipped if clampDepth is left unspecified.
-TEST_P(DepthClampingTest, ClampUnspecifiedOutsideViewFrustum) {
+// Test that fragments outside the view frustum are clipped if unclippedDepth is left unspecified.
+TEST_P(DepthClippingTest, ClampUnspecifiedOutsideViewFrustum) {
     DoTest(
         {
             {
-                nullptr,               /* depthClampingState */
+                nullptr,               /* depthClipControl */
                 RGBA8(0, 255, 0, 255), /* color */
                 -1.f,                  /* depth */
                 wgpu::CompareFunction::Always,
             },
             {
-                nullptr,               /* depthClampingState */
+                nullptr,               /* depthClipControl */
                 RGBA8(0, 255, 0, 255), /* color */
                 2.f,                   /* depth */
                 wgpu::CompareFunction::Always,
@@ -261,19 +261,19 @@ TEST_P(DepthClampingTest, ClampUnspecifiedOutsideViewFrustum) {
 }
 
 // Test that fragments are properly clipped or clamped if multiple render pipelines are used
-// within the same render pass with differing clampDepth values.
-TEST_P(DepthClampingTest, MultipleRenderPipelines) {
-    wgpu::PrimitiveDepthClampingState clampingState;
-    clampingState.clampDepth = true;
+// within the same render pass with differing unclippedDepth values.
+TEST_P(DepthClippingTest, MultipleRenderPipelines) {
+    wgpu::PrimitiveDepthClipControl depthClipControl;
+    depthClipControl.unclippedDepth = true;
 
-    wgpu::PrimitiveDepthClampingState clippingState;
-    clippingState.clampDepth = false;
+    wgpu::PrimitiveDepthClipControl clippingState;
+    clippingState.unclippedDepth = false;
 
     DoTest(
         {
             // Draw green with clamping
             {
-                &clampingState,
+                &depthClipControl,
                 RGBA8(0, 255, 0, 255), /* color */
                 2.f,                   /* depth */
                 wgpu::CompareFunction::Always,
@@ -289,7 +289,7 @@ TEST_P(DepthClampingTest, MultipleRenderPipelines) {
         RGBA8(0, 255, 0, 255));  // Result should be green
 }
 
-DAWN_INSTANTIATE_TEST(DepthClampingTest,
+DAWN_INSTANTIATE_TEST(DepthClippingTest,
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
