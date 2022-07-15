@@ -34,6 +34,24 @@
       "parentUuid": "71e66c94_0888dfcb",
       "revId": "8694cbaf8270e38125a84f546c86714ecd3b86bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "912f804c_aea7ba65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-15T16:17:00Z",
+      "side": 1,
+      "message": "Thanks for helping! Some extra option may be required for DXC to works for f16, e.g. use `\"-T cs_6_2 -enable-16bit-types\"` instead of `-T cs_6_0` for a compute stage.",
+      "parentUuid": "f95502a5_af0da236",
+      "revId": "8694cbaf8270e38125a84f546c86714ecd3b86bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
