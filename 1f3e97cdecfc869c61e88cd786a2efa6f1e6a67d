@@ -94,6 +94,30 @@
       },
       "revId": "1f3e97cdecfc869c61e88cd786a2efa6f1e6a67d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8551f9b4_da531e4e",
+        "filename": "src/tint/utils/block_allocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-15T20:58:36Z",
+      "side": 1,
+      "message": "Okay, I still find it a bit unusual as I don\u0027t expect this class to change often, but fine.",
+      "parentUuid": "f98a4cfc_a6ddb2ea",
+      "range": {
+        "startLine": 285,
+        "startChar": 4,
+        "endLine": 285,
+        "endChar": 11
+      },
+      "revId": "1f3e97cdecfc869c61e88cd786a2efa6f1e6a67d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
