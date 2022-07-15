@@ -317,7 +317,7 @@ class Vector {
         if (impl_.slice.len >= impl_.slice.cap) {
             Grow();
         }
-        new (&impl_.slice.data[impl_.slice.len++]) T(std::forward<ARGS>(args)...);
+        new (&impl_.slice.data[impl_.slice.len++]) T{std::forward<ARGS>(args)...};
     }
 
     /// Removes and returns the last element from the vector.
@@ -591,6 +591,9 @@ class VectorRef {
     template <typename, size_t>
     friend class Vector;
 
+    template <typename>
+    friend class ConstVectorRef;
+
     /// The slice of the vector being referenced.
     Slice& slice_;
     /// Whether the slice data is passed by r-value reference, and can be moved.
@@ -615,6 +618,10 @@ class ConstVectorRef {
     /// Copy constructor
     /// @param other the vector reference
     ConstVectorRef(const ConstVectorRef& other) = default;
+
+    /// Conversion constructor to convert from a non-const to const vector reference
+    /// @param other the vector reference
+    ConstVectorRef(const VectorRef<T>& other) : slice_(other.slice_) {}  // NOLINT(runtime/explicit)
 
     /// Index operator
     /// @param i the element index. Must be less than `len`.
