@@ -232,12 +232,10 @@ crbug.com/dawn/0000 webgpu:util,texture,texel_data:ufloat_texel_data_in_shader:*
 crbug.com/dawn/0000 webgpu:util,texture,texel_data:unorm_texel_data_in_shader:format="bgra8unorm-srgb" [ Failure ]
 crbug.com/dawn/0000 webgpu:util,texture,texel_data:unorm_texel_data_in_shader:format="rgba8unorm-srgb" [ Failure ]
 
-################################################################################
 # depth_clip_clamp failures
-# KEEP
 ################################################################################
-crbug.com/dawn/0000 webgpu:api,operation,rendering,depth_clip_clamp:depth_clamp_and_clip:* [ Failure ]
-crbug.com/dawn/0000 webgpu:api,operation,rendering,depth_clip_clamp:depth_test_input_clamped:* [ Failure ]
+crbug.com/dawn/1125 [ linux ] webgpu:api,operation,rendering,depth_clip_clamp:depth_clamp_and_clip:* [ Failure ]
+crbug.com/dawn/1125 [ linux ] webgpu:api,operation,rendering,depth_clip_clamp:depth_test_input_clamped:* [ Failure ]
 
 ################################################################################
 # compilation_info failures
