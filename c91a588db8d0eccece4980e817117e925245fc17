@@ -16,6 +16,57 @@
       "message": "Hi Ryan - would you be able to take a look at this please?",
       "revId": "c91a588db8d0eccece4980e817117e925245fc17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa884f5a_19846374",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-07-18T14:08:55Z",
+      "side": 1,
+      "message": "lgtm, just a couple of documentation nits",
+      "revId": "c91a588db8d0eccece4980e817117e925245fc17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeae134c_9cf47cae",
+        "filename": "src/tint/fuzzers/tint_regex_fuzzer/wgsl_mutator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-07-18T14:08:55Z",
+      "side": 1,
+      "message": "nit: class should have a top-level comment describing it",
+      "revId": "c91a588db8d0eccece4980e817117e925245fc17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2fe2bcd_9bce76a3",
+        "filename": "src/tint/fuzzers/tint_regex_fuzzer/wgsl_mutator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-07-18T14:08:55Z",
+      "side": 1,
+      "message": "nit: description for constructor, can be something simple like:\n/// Constructor\n/// @param generator -  pseudo random generator to use in mutator",
+      "revId": "c91a588db8d0eccece4980e817117e925245fc17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
