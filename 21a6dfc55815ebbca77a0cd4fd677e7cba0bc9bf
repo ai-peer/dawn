@@ -321,6 +321,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "513b7fc5_e1d2e6b9",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3037,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-18T20:44:12Z",
+      "side": 1,
+      "message": "I\u0027m happy for our internal tests to check for better correctness than is necessary. I vote to keep the test.",
+      "parentUuid": "2087766c_bb98b1da",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f05abc6_9e35f09b",
