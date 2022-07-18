@@ -50,6 +50,24 @@
       "message": "would it be possible to test this in third_party/dawn/src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp where the test is that no hang happens?",
       "revId": "8b2132923e94383c4e3b24013d10450ab501fdad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "082f449b_1b0e2408",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-07-18T20:24:23Z",
+      "side": 1,
+      "message": "I\u0027ve been trying to recreate the conditions for the hang in a unit test based on the test failures in https://crrev.com/c/3700811, but so far I\u0027ve had no luck. The original test failure too wasn\u0027t reproducing on my workstation. This is a race in GPU work completion so it\u0027s not surprising that it\u0027s hard to recreate synthetically.",
+      "parentUuid": "91cebc95_542d3014",
+      "revId": "8b2132923e94383c4e3b24013d10450ab501fdad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
