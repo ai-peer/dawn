@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b62ae8e9_52d74a7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-18T09:32:35Z",
+      "side": 1,
+      "message": "Thanks for review!",
+      "revId": "3d34d56a9585e9c1a288fe0be0d72109b2d246e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7c60088e_a503fa6f",
         "filename": "src/tint/intrinsics.def",
         "patchSetId": 1
@@ -31,6 +48,24 @@
       "writtenOn": "2022-07-18T09:25:25Z",
       "side": 1,
       "message": "Note: We\u0027re currently working on implementing constant expression evaluation, and we\u0027ll likely need help to ensure that the `f16` operators are implemented. We\u0027ll CC you on future changes that touch the overloads that implement the `f32` constant evaluation.",
+      "revId": "3d34d56a9585e9c1a288fe0be0d72109b2d246e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b60e50b_250e6fdd",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-18T09:32:35Z",
+      "side": 1,
+      "message": "Thanks, I am looking forward to take part in implementing constant expression evaluation!",
+      "parentUuid": "7c60088e_a503fa6f",
       "revId": "3d34d56a9585e9c1a288fe0be0d72109b2d246e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
