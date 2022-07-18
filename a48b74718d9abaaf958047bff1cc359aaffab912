@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bda317d_ea93f09a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-07-18T18:10:13Z",
+      "side": 1,
+      "message": "PTAL, I am not sure if this is the best way to do this on macOS. From what I have read it sounds like macOS doesn\u0027t support #if/#ifdef around OS version.",
+      "revId": "a48b74718d9abaaf958047bff1cc359aaffab912",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
