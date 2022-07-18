@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7359daf4_4cc71617",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-18T18:54:30Z",
+      "side": 1,
+      "message": "Inspired from `aiu32` which doesn\u0027t split `ai` from `i32`. Not sure what\u0027s the right way.",
+      "parentUuid": "b0795f66_e5d7da4c",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa20b0bf_8b05ed0e",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6038c4f2_b5ee63a8",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-18T18:54:30Z",
+      "side": 1,
+      "message": "The point is to match the alias declared in intrinsics.def.",
+      "parentUuid": "fa20b0bf_8b05ed0e",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0255c0d_7edf07e2",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-07-18T18:48:04Z",
       "side": 1,
       "message": "Why not a switch like ZeroTypeDispatch below?",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6c320e7_d6785ba4",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-18T18:54:30Z",
+      "side": 1,
+      "message": "With `if consexpr`, this will only generate the code for the types passed into the tuple. This is important because with a Switch of all types, the callback function must support all types, which isn\u0027t always possible.",
+      "parentUuid": "b0255c0d_7edf07e2",
       "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -99,6 +153,24 @@
       "writtenOn": "2022-07-18T18:48:04Z",
       "side": 1,
       "message": "Why remove the unary minus part of the test?",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70484dec_49cdea27",
+        "filename": "src/tint/writer/msl/generator_impl_unary_op_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-18T18:54:30Z",
+      "side": 1,
+      "message": "Now that we handle this at compile time, we no longer generate the call to the function. This test is now just useful in showing us that we emit `(-2147483647 - 1)`.",
+      "parentUuid": "d98b4cab_73702745",
       "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
