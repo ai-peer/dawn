@@ -39,7 +39,7 @@ import (
 type outputFormat string
 
 const (
-	testTimeout = 30 * time.Second
+	testTimeout = 180 * time.Second
 
 	glsl   = outputFormat("glsl")
 	hlsl   = outputFormat("hlsl")
