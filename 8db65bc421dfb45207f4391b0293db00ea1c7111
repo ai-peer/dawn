@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25e9c14a_1a159118",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-18T10:06:46Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "8db65bc421dfb45207f4391b0293db00ea1c7111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc9f1c66_0a19c377",
+        "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-18T10:06:46Z",
+      "side": 1,
+      "message": "u-nit: We could use a PNExtChainHelper: https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/UtilsVulkan.h;drc\u003d8dbe22c65ac2db6ca353a5947f01aed9476339a6;l\u003d56",
+      "revId": "8db65bc421dfb45207f4391b0293db00ea1c7111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a179f66_d2a6e21f",
@@ -37,6 +71,47 @@
         "endLine": 162,
         "endChar": 33
       },
+      "revId": "8db65bc421dfb45207f4391b0293db00ea1c7111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7a4b9b7_21435008",
+        "filename": "src/dawn/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-18T10:06:46Z",
+      "side": 1,
+      "message": "It can\u0027t be a boolean because we wouldn\u0027t be able to test the case at [1]. The alternative would be a enum with three bools: True False Unspecified.",
+      "parentUuid": "5a179f66_d2a6e21f",
+      "range": {
+        "startLine": 162,
+        "startChar": 16,
+        "endLine": 162,
+        "endChar": 33
+      },
+      "revId": "8db65bc421dfb45207f4391b0293db00ea1c7111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47699dd2_0493b4ea",
+        "filename": "src/dawn/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-18T10:06:46Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "8db65bc421dfb45207f4391b0293db00ea1c7111",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

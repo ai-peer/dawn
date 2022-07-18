@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca654d92_623db817",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-18T10:06:46Z",
+      "side": 0,
+      "message": "Why was this line removed?",
+      "revId": "e21267fe94ca97706ff3abd58ff1ba828cfa3538",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
