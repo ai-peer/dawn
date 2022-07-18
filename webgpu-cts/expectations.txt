@@ -263,10 +263,10 @@ crbug.com/dawn/0000 webgpu:api,validation,buffer,create:createBuffer_invalid_and
 
 ################################################################################
 # atan2 shader execution failures
-# Very slow, many failing. Skip for now.
+# Slow on Windows
 # KEEP
 ################################################################################
-crbug.com/tint/1524 webgpu:shader,execution,expression,call,builtin,atan2:f32:* [ Skip ]
+crbug.com/tint/1524 [ win ] webgpu:shader,execution,expression,call,builtin,atan2:f32:* [ Slow ]
 
 ################################################################################
 # slow shader execution 'const' tests
