@@ -221,6 +221,30 @@
       },
       "revId": "8db65bc421dfb45207f4391b0293db00ea1c7111",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b380e7aa_d9ad73e2",
+        "filename": "src/dawn/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-18T19:15:15Z",
+      "side": 1,
+      "message": "we clarified over VC that the suggestion was to write (realDepth / expectedDepth) to the red channel - so it should be 1.0.\n\nI ultimately chose not to do this since if realDepth was greater than expectedDepth, the output would also be 1.0 so the maximum representable value in that channel is 1.0.",
+      "parentUuid": "4b8ca897_c5bd4f6a",
+      "range": {
+        "startLine": 328,
+        "startChar": 4,
+        "endLine": 328,
+        "endChar": 75
+      },
+      "revId": "8db65bc421dfb45207f4391b0293db00ea1c7111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
