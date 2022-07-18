@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0795f66_e5d7da4c",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-18T18:48:04Z",
+      "side": 1,
+      "message": "should this be `aiaf_f32i32f16` as it\u0027s both `ai` and `af`?",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa20b0bf_8b05ed0e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-18T18:48:04Z",
+      "side": 1,
+      "message": "These are only used once, can we just inline them?",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0255c0d_7edf07e2",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-18T18:48:04Z",
+      "side": 1,
+      "message": "Why not a switch like ZeroTypeDispatch below?",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb52acb6_f5afd296",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3037,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-18T18:48:04Z",
+      "side": 1,
+      "message": "This isn\u0027t necessarily correct, per the spec the answer could be -0 or 0.",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f05abc6_9e35f09b",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3045,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-18T18:48:04Z",
+      "side": 1,
+      "message": "What happens if I do unary minus on the smallest i32, f32, etc?",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d98b4cab_73702745",
+        "filename": "src/tint/writer/msl/generator_impl_unary_op_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-18T18:48:04Z",
+      "side": 1,
+      "message": "Why remove the unary minus part of the test?",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
