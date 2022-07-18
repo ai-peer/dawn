@@ -216,6 +216,19 @@ class Vector {
         }
     }
 
+    /// Resizes the vector to the given length, expanding capacity if necessary.
+    /// New elements are zero-initialized
+    /// @param new_len the new vector length
+    void Resize(size_t new_len) {
+        Reserve(new_len);
+        for (size_t i = impl_.slice.len; i > new_len; i--) {
+            impl_.slice.data[i].~T();  // Shrink
+        }
+        for (size_t i = impl_.slice.len; i < new_len; i++) {
+            new (&impl_.slice.data[i]) T{};  // Grow
+        }
+    }
+
     /// Copies all the elements from `other` to this vector, replacing the content of this vector.
     /// @param other the
     template <typename T2, size_t N2>
