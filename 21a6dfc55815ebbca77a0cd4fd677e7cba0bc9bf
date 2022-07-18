@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bd66aabd_317c7f82",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-18T19:08:18Z",
+      "side": 1,
+      "message": "Yea, they don\u0027t seem to be consistent as there is an `af_f32` below.\n\nFrom my reading of this, I\u0027d guess it was `abstract float`, `i32`, and `f16`, not `abstract-int`, `abstract-float`, `f32`, `i32`, and `f16`.",
+      "parentUuid": "7359daf4_4cc71617",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa20b0bf_8b05ed0e",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "The point is to match the alias declared in intrinsics.def.",
       "parentUuid": "fa20b0bf_8b05ed0e",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53b6ad65_0bcc307f",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-18T19:08:18Z",
+      "side": 1,
+      "message": "Can we just do that with a comment above the usage instead of having to jump around the file to understand the context?",
+      "parentUuid": "6038c4f2_b5ee63a8",
       "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -102,6 +138,24 @@
       "side": 1,
       "message": "With `if consexpr`, this will only generate the code for the types passed into the tuple. This is important because with a Switch of all types, the callback function must support all types, which isn\u0027t always possible.",
       "parentUuid": "b0255c0d_7edf07e2",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d032567_0b93360e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-18T19:08:18Z",
+      "side": 1,
+      "message": "Is that the case here that we can\u0027t support all types? Or is this in case we run into that in the future?",
+      "parentUuid": "c6c320e7_d6785ba4",
       "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
