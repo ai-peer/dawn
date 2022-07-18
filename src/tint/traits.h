@@ -151,6 +151,20 @@ template <std::size_t OFFSET, std::size_t COUNT, typename TUPLE>
 using SliceTuple =
     std::remove_pointer_t<decltype(detail::SwizzlePtrTy<TUPLE>(Range<OFFSET, COUNT>()))>;
 
+namespace detail {
+// Returns whether Tuple contains type T
+template <typename T, typename Tuple>
+struct HasType;
+
+// Returns whether Tuple contains type T
+template <typename T, typename... Us>
+struct HasType<T, std::tuple<Us...>> : std::disjunction<std::is_same<T, Us>...> {};
+}  // namespace detail
+
+// Returns whether Tuple contains type T
+template <typename T, typename Tuple>
+constexpr bool HasType = detail::HasType<T, Tuple>::value;
+
 }  // namespace tint::traits
 
 #endif  // SRC_TINT_TRAITS_H_

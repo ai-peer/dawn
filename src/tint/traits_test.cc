@@ -222,4 +222,18 @@ TEST(SliceTuple, MixedTupleSliceHighPart) {
     static_assert(std::is_same_v<std::tuple_element_t<1, sliced>, float>);
 }
 
+TEST(HasType, Empty) {
+    using Tuple = std::tuple<>;
+    static_assert(!HasType<int, Tuple>);
+    static_assert(!HasType<bool, Tuple>);
+    static_assert(!HasType<float, Tuple>);
+}
+
+TEST(HasType, Simple) {
+    using Tuple = std::tuple<int, bool>;
+    static_assert(HasType<int, Tuple>);
+    static_assert(HasType<bool, Tuple>);
+    static_assert(!HasType<float, Tuple>);
+}
+
 }  // namespace tint::traits
