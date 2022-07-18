@@ -288,6 +288,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f7381232_62219bdf",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-18T21:08:27Z",
+      "side": 1,
+      "message": "Okay, then I guess I\u0027ll replace this and hand-roll specific ones per matcher set. W can look at generating later if it makes sense.",
+      "parentUuid": "2e8d1d1c_fb18545b",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb52acb6_f5afd296",
         "filename": "src/tint/resolver/const_eval_test.cc",
         "patchSetId": 4
@@ -376,6 +394,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "24534f67_b84a7cfb",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3045,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-18T21:08:27Z",
+      "side": 1,
+      "message": "I missed this comment! If by \"smallest\" you mean \"minimum\", we can\u0027t unary minus the smallest i32 because the result doesn\u0027t fit in an i32. We could do for f32 though.",
+      "parentUuid": "7f05abc6_9e35f09b",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d869a169_7d92a88a",
         "filename": "src/tint/traits.h",
         "patchSetId": 4
@@ -387,6 +423,30 @@
       "writtenOn": "2022-07-18T20:39:42Z",
       "side": 1,
       "message": "Might be more symmetrical to call this `traits::IsAnyOf`? It\u0027s effectively the same thing as the runtime check.",
+      "range": {
+        "startLine": 166,
+        "startChar": 15,
+        "endLine": 166,
+        "endChar": 22
+      },
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6db91600_f47e62fd",
+        "filename": "src/tint/traits.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-18T21:08:27Z",
+      "side": 1,
+      "message": "True, but as I\u0027ll be removing my generic `TypeDispatch` for specific ones, I won\u0027t need this anymore, so I\u0027ll delete.",
+      "parentUuid": "d869a169_7d92a88a",
       "range": {
         "startLine": 166,
         "startChar": 15,
