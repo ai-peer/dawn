@@ -198,6 +198,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a34f843_82f07808",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-18T19:23:24Z",
+      "side": 1,
+      "message": "I guess my question is, do we _need_ to do that? For this CL, does the function only work for those types? Are we doing it for code size reasons? Perf reasons? Or does the code just not build?\n\nThe reason I ask is that things have been getting converted over to `Switch` so it\u0027s weird to see non-switch things, and I\u0027m trying to figure out how we convey that this instance is different.",
+      "parentUuid": "7c02323a_7849ab74",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb52acb6_f5afd296",
         "filename": "src/tint/resolver/const_eval_test.cc",
         "patchSetId": 4
@@ -227,6 +245,24 @@
       "side": 1,
       "message": "So I should just remove the 0 test case?",
       "parentUuid": "bb52acb6_f5afd296",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2087766c_bb98b1da",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3037,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-18T19:23:24Z",
+      "side": 1,
+      "message": "I\u0027m not really sure, I guess in our implementation we know it will be -0.0? Just the spec is strange in this instance? Either answer is technically correct, so if we always know we\u0027ll return -0.0 then maybe it\u0027s fine?",
+      "parentUuid": "ac3cb6e1_a9a886a9",
       "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
