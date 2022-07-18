@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f9a6c084_2036415c",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-18T20:50:45Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this be `faiaf32i32f16` ?",
+      "parentUuid": "4330b822_39921f69",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa20b0bf_8b05ed0e",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
