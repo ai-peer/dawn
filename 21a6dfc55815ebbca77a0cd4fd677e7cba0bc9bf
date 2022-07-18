@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4330b822_39921f69",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-18T20:39:42Z",
+      "side": 1,
+      "message": "My brain parses this as `af`. `i32`. `f16`.\nPrior to abstracts, we had `[fui]+32`. So maybe it would be more consistent / reduce ambiguity to change abstracts to `[fi]a`, keeping the precision as the RHS. Then this would be:\n\n`fai32f16`\n\nor maybe we should reduce ambiguity further with:\n\n`fa_i32_f16`\n\nThoughts?",
+      "parentUuid": "96d74bc3_fdea9dbf",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa20b0bf_8b05ed0e",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
@@ -234,6 +252,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e8d1d1c_fb18545b",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-18T20:39:42Z",
+      "side": 1,
+      "message": "We are losing here the performance gains of `Switch` though. My solution was to hand-roll a separate dispatch function per matcher set. It\u0027s more code, but it\u0027s faster, and (IMO) a bit easier to understand what\u0027s going on.\n\nI like your idea of matching the name of the set of types with those declared in `intrinsics.def`. If we want to keep these in sync, it wouldn\u0027t be impossible to generate the `Dispatch` functions from the `intrinsic.def` file, keeping both performance and having a single-source-of-truth.",
+      "parentUuid": "db688262_4a03d74e",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb52acb6_f5afd296",
         "filename": "src/tint/resolver/const_eval_test.cc",
         "patchSetId": 4
@@ -298,6 +334,29 @@
       "writtenOn": "2022-07-18T18:48:04Z",
       "side": 1,
       "message": "What happens if I do unary minus on the smallest i32, f32, etc?",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d869a169_7d92a88a",
+        "filename": "src/tint/traits.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-18T20:39:42Z",
+      "side": 1,
+      "message": "Might be more symmetrical to call this `traits::IsAnyOf`? It\u0027s effectively the same thing as the runtime check.",
+      "range": {
+        "startLine": 166,
+        "startChar": 15,
+        "endLine": 166,
+        "endChar": 22
+      },
       "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
