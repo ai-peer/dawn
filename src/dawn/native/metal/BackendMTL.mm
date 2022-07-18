@@ -117,10 +117,22 @@ MaybeError API_AVAILABLE(macos(10.13))
         return DAWN_INTERNAL_ERROR("Failed to create the matching dict for the device");
     }
 
+    // kIOMasterPortDefault has been deprecated in macOS 12.0/iOS 15.0, but WebGPU supports older
+    // API versions
+    mach_port_t defaultPort;
+    if (@available(macOS 12.0, iOS 15.0, *)) {
+        defaultPort = kIOMainPortDefault;
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        defaultPort = kIOMasterPortDefault;
+#pragma clang diagnostic pop
+    }
+
     // IOServiceGetMatchingService will consume the reference on the matching dictionary,
     // so we don't need to release the dictionary.
     IORef<io_registry_entry_t> acceleratorEntry =
-        AcquireIORef(IOServiceGetMatchingService(kIOMasterPortDefault, matchingDict.Detach()));
+        AcquireIORef(IOServiceGetMatchingService(defaultPort, matchingDict.Detach()));
     if (acceleratorEntry == IO_OBJECT_NULL) {
         return DAWN_INTERNAL_ERROR("Failed to get the IO registry entry for the accelerator");
     }
