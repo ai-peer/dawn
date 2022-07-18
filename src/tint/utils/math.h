@@ -26,7 +26,7 @@ namespace tint::utils {
 /// @return `value` rounded to the next multiple of `alignment`
 /// @note `alignment` must be positive. An alignment of zero will cause a DBZ.
 template <typename T>
-inline T RoundUp(T alignment, T value) {
+constexpr inline T RoundUp(T alignment, T value) {
     return ((value + alignment - 1) / alignment) * alignment;
 }
 
@@ -34,14 +34,14 @@ inline T RoundUp(T alignment, T value) {
 /// @returns true if `value` is a power-of-two
 /// @note `value` must be positive if `T` is signed
 template <typename T>
-inline bool IsPowerOfTwo(T value) {
+constexpr inline bool IsPowerOfTwo(T value) {
     return (value & (value - 1)) == 0;
 }
 
 /// @param value the input value
 /// @returns the largest power of two that `value` is a multiple of
 template <typename T>
-inline std::enable_if_t<std::is_unsigned<T>::value, T> MaxAlignOf(T value) {
+constexpr inline std::enable_if_t<std::is_unsigned<T>::value, T> MaxAlignOf(T value) {
     T pot = 1;
     while (value && ((value & 1u) == 0)) {
         pot <<= 1;
