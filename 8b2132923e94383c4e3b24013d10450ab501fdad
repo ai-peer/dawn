@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "8b2132923e94383c4e3b24013d10450ab501fdad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91cebc95_542d3014",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-18T15:13:52Z",
+      "side": 1,
+      "message": "would it be possible to test this in third_party/dawn/src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp where the test is that no hang happens?",
+      "revId": "8b2132923e94383c4e3b24013d10450ab501fdad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
