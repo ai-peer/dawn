@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dbc145c_44f0d9b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001736
+      },
+      "writtenOn": "2022-07-18T12:01:19Z",
+      "side": 1,
+      "message": "Cut down the number of cases as Kokoro was seeing timeouts with FXC *sigh*",
+      "revId": "45eee9f6ebc2e368d0d5203e814fefaaa14a2a6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
