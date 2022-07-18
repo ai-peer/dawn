@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "675388af_2223627c",
+        "filename": "src/tint/fuzzers/tint_regex_fuzzer/wgsl_mutator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002631
+      },
+      "writtenOn": "2022-07-18T20:15:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "aeae134c_9cf47cae",
+      "revId": "c91a588db8d0eccece4980e817117e925245fc17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2fe2bcd_9bce76a3",
@@ -65,6 +83,24 @@
       "writtenOn": "2022-07-18T14:08:55Z",
       "side": 1,
       "message": "nit: description for constructor, can be something simple like:\n/// Constructor\n/// @param generator -  pseudo random generator to use in mutator",
+      "revId": "c91a588db8d0eccece4980e817117e925245fc17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6fa8da5_ba0f955f",
+        "filename": "src/tint/fuzzers/tint_regex_fuzzer/wgsl_mutator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002631
+      },
+      "writtenOn": "2022-07-18T20:15:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c2fe2bcd_9bce76a3",
       "revId": "c91a588db8d0eccece4980e817117e925245fc17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
