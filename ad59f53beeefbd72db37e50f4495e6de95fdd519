@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff99c188_4c976792",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2022-07-18T12:17:43Z",
+      "side": 1,
+      "message": "Fail here https://luci-milo.appspot.com/ui/p/chromium/builders/ci/Dawn%20Linux%20x64%20Release%20(Intel%20UHD%20630)/304/overview",
+      "revId": "ad59f53beeefbd72db37e50f4495e6de95fdd519",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
