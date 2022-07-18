@@ -218,6 +218,10 @@ TEST(Math, IsAligned) {
     for (uint32_t i = 1; i < 64; ++i) {
         ASSERT_FALSE(IsAligned(64 + i, 64));
     }
+
+    // Test with uint64_t values
+    ASSERT_TRUE(IsAligned(0x1'000'000, 16));
+    ASSERT_FALSE(IsAligned(0x1'000'008, 16));
 }
 
 // Tests for float32 to float16 conversion
