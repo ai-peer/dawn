@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96d74bc3_fdea9dbf",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-18T19:11:33Z",
+      "side": 1,
+      "message": "Thoughts, Ben? I don\u0027t really mind what direction we go with this. Naming is hard 😊",
+      "parentUuid": "bd66aabd_317c7f82",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa20b0bf_8b05ed0e",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
@@ -191,6 +209,24 @@
       "writtenOn": "2022-07-18T18:48:04Z",
       "side": 1,
       "message": "This isn\u0027t necessarily correct, per the spec the answer could be -0 or 0.",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac3cb6e1_a9a886a9",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3037,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-18T19:11:33Z",
+      "side": 1,
+      "message": "So I should just remove the 0 test case?",
+      "parentUuid": "bb52acb6_f5afd296",
       "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
