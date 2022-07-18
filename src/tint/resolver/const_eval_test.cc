@@ -2930,13 +2930,23 @@ TEST_F(ResolverConstEvalTest, MemberAccess) {
 namespace unary_op {
 
 template <typename T>
+auto Highest() {
+    return T(T::kHighest);
+}
+
+template <typename T>
+auto Lowest() {
+    return T(T::kLowest);
+}
+
+template <typename T>
 struct Values {
     T input;
     T expect;
 };
 
 struct Case {
-    std::variant<Values<AInt>, Values<u32>, Values<i32>> values;
+    std::variant<Values<AInt>, Values<AFloat>, Values<u32>, Values<i32>, Values<f32>> values;
 };
 
 static std::ostream& operator<<(std::ostream& o, const Case& c) {
@@ -2952,6 +2962,8 @@ Case C(T input, T expect) {
 using ResolverConstEvalUnaryOpTest = ResolverTestWithParam<std::tuple<ast::UnaryOp, Case>>;
 
 TEST_P(ResolverConstEvalUnaryOpTest, Test) {
+    Enable(ast::Extension::kF16);
+
     auto op = std::get<0>(GetParam());
     auto c = std::get<1>(GetParam());
     std::visit(
@@ -3000,6 +3012,49 @@ INSTANTIATE_TEST_SUITE_P(Complement,
                                               C(2_i, -3_i),
                                               C(-3_i, 2_i),
                                           })));
+
+INSTANTIATE_TEST_SUITE_P(Negation,
+                         ResolverConstEvalUnaryOpTest,
+                         testing::Combine(testing::Values(ast::UnaryOp::kNegation),
+                                          testing::ValuesIn({
+                                              // AInt
+                                              C(0_a, -0_a),
+                                              C(-0_a, 0_a),
+                                              C(1_a, -1_a),
+                                              C(-1_a, 1_a),
+                                              C(Highest<AInt>(), -Highest<AInt>()),
+                                              C(-Highest<AInt>(), Highest<AInt>()),
+                                              C(Lowest<AInt>(), -Lowest<AInt>()),
+                                              C(-Lowest<AInt>(), Lowest<AInt>()),
+                                              // i32
+                                              C(0_i, -0_i),
+                                              C(-0_i, 0_i),
+                                              C(1_i, -1_i),
+                                              C(-1_i, 1_i),
+                                              C(Highest<i32>(), -Highest<i32>()),
+                                              C(-Highest<i32>(), Highest<i32>()),
+                                              C(Lowest<i32>(), -Lowest<i32>()),
+                                              C(-Lowest<i32>(), Lowest<i32>()),
+                                              // AFloat
+                                              C(0.0_a, -0.0_a),
+                                              C(-0.0_a, 0.0_a),
+                                              C(1.0_a, -1.0_a),
+                                              C(-1.0_a, 1.0_a),
+                                              C(Highest<AFloat>(), -Highest<AFloat>()),
+                                              C(-Highest<AFloat>(), Highest<AFloat>()),
+                                              C(Lowest<AFloat>(), -Lowest<AFloat>()),
+                                              C(-Lowest<AFloat>(), Lowest<AFloat>()),
+                                              // f32
+                                              C(0.0_f, -0.0_f),
+                                              C(-0.0_f, 0.0_f),
+                                              C(1.0_f, -1.0_f),
+                                              C(-1.0_f, 1.0_f),
+                                              C(Highest<f32>(), -Highest<f32>()),
+                                              C(-Highest<f32>(), Highest<f32>()),
+                                              C(Lowest<f32>(), -Lowest<f32>()),
+                                              C(-Lowest<f32>(), Lowest<f32>()),
+                                          })));
+
 }  // namespace unary_op
 
 }  // namespace
