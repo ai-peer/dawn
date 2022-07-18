@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31a7c366_d442e628",
+        "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-18T17:41:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc9f1c66_0a19c377",
+      "revId": "8db65bc421dfb45207f4391b0293db00ea1c7111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a179f66_d2a6e21f",
@@ -99,6 +117,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ededdfdd_271a4011",
+        "filename": "src/dawn/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-18T17:41:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7a4b9b7_21435008",
+      "range": {
+        "startLine": 162,
+        "startChar": 16,
+        "endLine": 162,
+        "endChar": 33
+      },
+      "revId": "8db65bc421dfb45207f4391b0293db00ea1c7111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47699dd2_0493b4ea",
@@ -116,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97a19feb_925ed58d",
+        "filename": "src/dawn/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-18T17:41:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "47699dd2_0493b4ea",
+      "revId": "8db65bc421dfb45207f4391b0293db00ea1c7111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73b9fa5e_dc46ffc3",
@@ -129,6 +189,30 @@
       "writtenOn": "2022-07-15T23:41:31Z",
       "side": 1,
       "message": "Do we have to use something like 0.5? Could we just set `depth \u003d {x | x \u003e 1.0}`, and set red channel to `frag_pos.z / x`. Then for the expectation we could just expect `(255, 0, 0, 255)`. (Assuming if clamping happens then `frag_pos.z \u003d 1.0` in the fragment shader and the red channel becomes something less than 1.)",
+      "range": {
+        "startLine": 328,
+        "startChar": 4,
+        "endLine": 328,
+        "endChar": 75
+      },
+      "revId": "8db65bc421dfb45207f4391b0293db00ea1c7111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b8ca897_c5bd4f6a",
+        "filename": "src/dawn/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-18T17:41:03Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand your suggestion - specifically what `{x | x \u003e 1.0}` means, and why we divide `frag_pos.z / x`. Probably misunderstanding what \"x\" is, but the `x` position is 0.0 here so dividing by zero would be invalid.\n\nThe goal I had was to map the expected value which is 2.0 into the middle of the representable range of color outputs 0.0 to 1.0. Prefer doing it this way instead of outputting red if correct and black otherwise (or something like that) so that if it\u0027s incorrect, you can determine from the values in the expectation what might have gone wrong / why the value is different from expected.",
+      "parentUuid": "73b9fa5e_dc46ffc3",
       "range": {
         "startLine": 328,
         "startChar": 4,
