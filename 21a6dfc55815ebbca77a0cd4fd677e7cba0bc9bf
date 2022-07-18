@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39e20020_6a0b0e28",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-18T23:12:53Z",
+      "side": 1,
+      "message": "Yeah, I screwed that up royally, sorry. Let\u0027s try that again:\n\n`fiafi32f16` or `fia_fi32_f16`\n\nwhich is read as:\n\n`[float, int] x abstract`, `[float, int] x 32-bit`, `[float] x 16-bit`.",
+      "parentUuid": "f9a6c084_2036415c",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa20b0bf_8b05ed0e",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
