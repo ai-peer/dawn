@@ -216,6 +216,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db688262_4a03d74e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-18T19:24:55Z",
+      "side": 1,
+      "message": "Ah, I understand what you\u0027re asking now. Yes, we need it, otherwise we\u0027ll be trying to apply unary minus to a bool, for example.",
+      "parentUuid": "2a34f843_82f07808",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb52acb6_f5afd296",
         "filename": "src/tint/resolver/const_eval_test.cc",
         "patchSetId": 4
