@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8525f16c_e0a2214e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002631
+      },
+      "writtenOn": "2022-07-19T22:20:00Z",
+      "side": 1,
+      "message": "Thanks for the feedback Ryan - addressed.",
+      "revId": "69f55797490d4bf122c2bec11c47684595ee4a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af2cc32c_a1f154d6",
@@ -35,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3984e9ea_dd15e68e",
+        "filename": "src/tint/fuzzers/patch",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002631
+      },
+      "writtenOn": "2022-07-19T22:20:00Z",
+      "side": 1,
+      "message": "Oops - no it wasn\u0027t. Good catch - thanks.",
+      "parentUuid": "af2cc32c_a1f154d6",
+      "revId": "69f55797490d4bf122c2bec11c47684595ee4a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0046d084_b8adf042",
@@ -48,6 +83,24 @@
       "writtenOn": "2022-07-19T20:51:44Z",
       "side": 1,
       "message": "It might be worth calling out the fact that this doesn\u0027t appear to be doing anything sophisticated like making sure the number of params are correct for the builtin, so is likely to generate invalid WGSL.",
+      "revId": "69f55797490d4bf122c2bec11c47684595ee4a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e04583a_6d713755",
+        "filename": "src/tint/fuzzers/tint_regex_fuzzer/wgsl_mutator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002631
+      },
+      "writtenOn": "2022-07-19T22:20:00Z",
+      "side": 1,
+      "message": "Good idea - done.",
+      "parentUuid": "0046d084_b8adf042",
       "revId": "69f55797490d4bf122c2bec11c47684595ee4a8f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
