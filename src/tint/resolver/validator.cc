@@ -394,7 +394,7 @@ bool Validator::StorageClassLayout(const sem::Type* store_ty,
 
     // Temporally forbid using f16 types in "uniform" and "storage" storage class.
     // TODO(tint:1473, tint:1502): Remove this error after f16 is supported in "uniform" and
-    // "storage" storage class.
+    // "storage" storage class but keep for "push_constant" storage class.
     if (Is<sem::F16>(sem::Type::DeepestElementOf(store_ty))) {
         AddError("using f16 types in 'uniform' or 'storage' storage class is not implemented yet",
                  source);
@@ -514,7 +514,19 @@ bool Validator::StorageClassLayout(const sem::Type* store_ty,
 }
 
 bool Validator::StorageClassLayout(const sem::Variable* var,
+                                   const ast::Extensions& enabled_extensions,
                                    ValidTypeStorageLayouts& layouts) const {
+    if (var->StorageClass() == ast::StorageClass::kPushConstant &&
+        !enabled_extensions.contains(ast::Extension::kChromiumExperimentalPushConstant) &&
+        IsValidationEnabled(var->Declaration()->attributes,
+                            ast::DisabledValidation::kIgnoreStorageClass)) {
+        AddError(
+            "cannot create variables with 'push_constant' storage class without extension "
+            "'chromium_experimental_push_constant'",
+            var->Declaration()->source);
+        return false;
+    }
+
     if (auto* str = var->Type()->UnwrapRef()->As<sem::Struct>()) {
         if (!StorageClassLayout(str, var->StorageClass(), str->Declaration()->source, layouts)) {
             AddNote("see declaration of variable", var->Declaration()->source);
@@ -1994,6 +2006,66 @@ bool Validator::PipelineStages(const std::vector<sem::Function*>& entry_points) 
             }
         }
     }
+    return true;
+}
+
+bool Validator::PushConstants(const std::vector<sem::Function*>& entry_points) const {
+    const sem::Variable* push_constant_var = nullptr;
+
+    auto check_push_constant = [&](const sem::Function* func, const sem::Function* entry_point) {
+        for (auto* var : func->DirectlyReferencedGlobals()) {
+            if (var->StorageClass() != ast::StorageClass::kPushConstant ||
+                var == push_constant_var) {
+                continue;
+            }
+
+            if (push_constant_var == nullptr) {
+                push_constant_var = var;
+                continue;
+            }
+
+            AddError("entry point '" + symbols_.NameFor(entry_point->Declaration()->symbol) +
+                         "' uses two different 'push_constant variables'.",
+                     entry_point->Declaration()->source);
+            AddNote("first variable is here", var->Declaration()->source);
+            if (func != entry_point) {
+                TraverseCallChain(diagnostics_, entry_point, func, [&](const sem::Function* f) {
+                    AddNote(
+                        "called by function '" + symbols_.NameFor(f->Declaration()->symbol) + "'",
+                        f->Declaration()->source);
+                });
+                AddNote("called by entry point '" +
+                            symbols_.NameFor(entry_point->Declaration()->symbol) + "'",
+                        entry_point->Declaration()->source);
+            }
+            AddNote("second variable is here", push_constant_var->Declaration()->source);
+            if (func != entry_point) {
+                TraverseCallChain(diagnostics_, entry_point, func, [&](const sem::Function* f) {
+                    AddNote(
+                        "called by function '" + symbols_.NameFor(f->Declaration()->symbol) + "'",
+                        f->Declaration()->source);
+                });
+                AddNote("called by entry point '" +
+                            symbols_.NameFor(entry_point->Declaration()->symbol) + "'",
+                        entry_point->Declaration()->source);
+            }
+            return false;
+        }
+
+        return true;
+    };
+
+    for (auto* entry_point : entry_points) {
+        if (!check_push_constant(entry_point, entry_point)) {
+            return false;
+        }
+        for (auto* func : entry_point->TransitivelyCalledFunctions()) {
+            if (!check_push_constant(func, entry_point)) {
+                return false;
+            }
+        }
+    }
+
     return true;
 }
 

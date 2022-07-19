@@ -279,6 +279,8 @@ class Token {
         kWhile,
         /// A 'workgroup'
         kWorkgroup,
+        /// A 'push_constant'
+        kPushConstant,
     };
 
     /// Converts a token type to a name
