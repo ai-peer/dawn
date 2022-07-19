@@ -22,6 +22,30 @@
       },
       "revId": "fca448c446824f975d8929783b8fbbd7bada7c96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c36b6a99_442f190f",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T15:40:06Z",
+      "side": 1,
+      "message": "The reason I did this is because I\u0027m still hoping we can eventually find a way to make the compiler generate the code for the types in the tuple. I was thinking along the lines of the `overloaded` utility often used for std::visit (see https://en.cppreference.com/w/cpp/utility/variant/visit). If we could create an overload set of callbacks and pass that to Switch, we\u0027d be able to generate these.\n\nIf it doesn\u0027t work out, then yeah, no problem with splitting this up into separate functions.",
+      "parentUuid": "f1c1497b_98759220",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 1
+      },
+      "revId": "fca448c446824f975d8929783b8fbbd7bada7c96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
