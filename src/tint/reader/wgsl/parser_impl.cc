@@ -1299,6 +1299,10 @@ Expect<ast::StorageClass> ParserImpl::expect_storage_class(std::string_view use)
         return {ast::StorageClass::kFunction, source};
     }
 
+    if (name == "push_constant") {
+        return {ast::StorageClass::kPushConstant, source};
+    }
+
     return add_error(source, "invalid storage class", use);
 }
 

@@ -20,6 +20,9 @@ Extension ParseExtension(const std::string& name) {
     if (name == "chromium_experimental_dp4a") {
         return Extension::kChromiumExperimentalDP4a;
     }
+    if (name == "chromium_experimental_push_constant") {
+        return Extension::kChromiumExperimentalPushConstant;
+    }
     if (name == "chromium_disable_uniformity_analysis") {
         return Extension::kChromiumDisableUniformityAnalysis;
     }
@@ -33,6 +36,8 @@ const char* str(Extension ext) {
     switch (ext) {
         case Extension::kChromiumExperimentalDP4a:
             return "chromium_experimental_dp4a";
+        case Extension::kChromiumExperimentalPushConstant:
+            return "chromium_experimental_push_constant";
         case Extension::kChromiumDisableUniformityAnalysis:
             return "chromium_disable_uniformity_analysis";
         case Extension::kF16:
