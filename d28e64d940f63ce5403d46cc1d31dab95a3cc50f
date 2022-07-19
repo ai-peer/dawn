@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "d28e64d940f63ce5403d46cc1d31dab95a3cc50f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e27fe74_f634fe2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-19T11:41:49Z",
+      "side": 1,
+      "message": "LGTM, though IMHO an option would be to just remove that optimized clear value code path. It doesn\u0027t seem to bring a lot of value.",
+      "revId": "d28e64d940f63ce5403d46cc1d31dab95a3cc50f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28a662fa_ac0255b1",
+        "filename": "src/dawn/tests/end2end/DepthStencilLoadOpTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-19T11:41:49Z",
+      "side": 1,
+      "message": "Q: what\u0027s the runtime of these tests?",
+      "revId": "d28e64d940f63ce5403d46cc1d31dab95a3cc50f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
