@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "28658674_5ca4089c",
+        "filename": "src/tint/fuzzers/tint_ast_fuzzer/mutations/wrap_unary_operator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-19T15:40:37Z",
+      "side": 1,
+      "message": "Out of curiousity, does this cover vector\u003cAbstractInt\u003e? (Is that covered by _or_vector)?",
+      "revId": "fca448c446824f975d8929783b8fbbd7bada7c96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1c1497b_98759220",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 6
@@ -44,6 +61,23 @@
         "endLine": 75,
         "endChar": 1
       },
+      "revId": "fca448c446824f975d8929783b8fbbd7bada7c96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f29b6b53_4974f01a",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2949,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-19T15:40:37Z",
+      "side": 1,
+      "message": "Does this need an f16 entry? Or a todo for one?",
       "revId": "fca448c446824f975d8929783b8fbbd7bada7c96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
