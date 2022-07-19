@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01f90c09_16fd7289",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T19:09:36Z",
+      "side": 1,
+      "message": "That\u0027s true. We could, and probably should, optimize this initialization for trivially copyable types though -- can do a memset instead.",
+      "parentUuid": "80d653d1_b7503692",
+      "range": {
+        "startLine": 144,
+        "startChar": 8,
+        "endLine": 146,
+        "endChar": 9
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "991c4220_088be7f0",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 9
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "Again - isn\u0027t that an assignment? This is copy-constructing.",
       "parentUuid": "991c4220_088be7f0",
+      "range": {
+        "startLine": 155,
+        "startChar": 8,
+        "endLine": 157,
+        "endChar": 9
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66b1a336_53048fe9",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T19:09:36Z",
+      "side": 1,
+      "message": "Yes, true. As above, we should optimize this for trivially copyable types to do a memcpy, which would be safe in that case.",
+      "parentUuid": "e4d14ad3_abda1bcb",
       "range": {
         "startLine": 155,
         "startChar": 8,
@@ -261,6 +309,30 @@
       "side": 1,
       "message": "Going via the `VectorRef` figures out whether the move can be done. Seemed nicer to reuse that logic than duplicating it.",
       "parentUuid": "771b4eb0_c148897e",
+      "range": {
+        "startLine": 194,
+        "startChar": 19,
+        "endLine": 194,
+        "endChar": 31
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c181628f_a11b472f",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T19:09:36Z",
+      "side": 1,
+      "message": "I don\u0027t follow. `other` is already a `VectorRef\u003cT\u003e`, so `std::move(other)` should do the right thing here, without constructor another `VectorRef\u003cT\u003e` around it, right?",
+      "parentUuid": "31796a17_f7000d5d",
       "range": {
         "startLine": 194,
         "startChar": 19,
@@ -425,6 +497,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0042e8db_717739dc",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T19:09:36Z",
+      "side": 1,
+      "message": "The idea is to use this instead of a std::vector, but the API should be the same (modulo the naming case convention). Even if there\u0027s no PushFront, the reason the names are normalized across containers in C++ is for algorithms (static polymorphism). In any case, for me it\u0027s about element of least surprise.",
+      "parentUuid": "e1f9efdd_12a9d31e",
+      "range": {
+        "startLine": 299,
+        "startChar": 9,
+        "endLine": 299,
+        "endChar": 13
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a659f5a_da8b5257",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 9
@@ -454,6 +550,24 @@
       "side": 1,
       "message": "No, I overloaded `Push()` to take a `T\u0026\u0026`",
       "parentUuid": "6a659f5a_da8b5257",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f40ab15_c6cfa45c",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T19:09:36Z",
+      "side": 1,
+      "message": "This isn\u0027t the same as EmplaceBack. EmplaceBack allows you to pass in variadic args that will be forwarded to the constructor of T: https://en.cppreference.com/w/cpp/container/vector/emplace_back",
+      "parentUuid": "5b2d362a_bd982c55",
       "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -495,6 +609,30 @@
       "side": 1,
       "message": "I made the conscious decision to break from the `std::vector` interface. Methods are capitalized, `VectorRef` is a non-std pattern, `size()` is `Length()`, etc.\nIf we want a proper `std` interface for... reasons, we can implement a wrapper.",
       "parentUuid": "858334dd_a453bbe1",
+      "range": {
+        "startLine": 320,
+        "startChar": 9,
+        "endLine": 320,
+        "endChar": 16
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e4b5bf5_3382c213",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T19:09:36Z",
+      "side": 1,
+      "message": "Having worked with custom containers in many other engines that _almost_ follow the standard conventions, I\u0027ll just say that I didn\u0027t enjoy it. In particular, the `size()` vs `Length()` tripped me up enough times to be annoying. Even if this class offers extra stuff over `std::vector`, I still think we should follow the conventions for `Empty` and `Length`.",
+      "parentUuid": "7bf13e09_c3f05c81",
       "range": {
         "startLine": 320,
         "startChar": 9,
@@ -712,6 +850,30 @@
       "side": 1,
       "message": "I don\u0027t think that logic works. Consider:\n\n```\nutils::Vector\u003cint, 1\u003e vec_a{1,2,3};  // This spilled to a heap allocation\nutils::Vector\u003cint, 3\u003e vec_b(std::move(vec_a));  // Slice moved.\n```\n\n`vec_b.impl_.cap` is `3`, but it isn\u0027t using its own small array, so it could be moved.",
       "parentUuid": "6585b573_16359150",
+      "range": {
+        "startLine": 449,
+        "startChar": 31,
+        "endLine": 449,
+        "endChar": 71
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7dafd6e_7ac0c894",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T19:09:36Z",
+      "side": 1,
+      "message": "Right, because once we go heap, we never go back. Okay.",
+      "parentUuid": "7c722c97_f12a296e",
       "range": {
         "startLine": 449,
         "startChar": 31,
@@ -977,6 +1139,30 @@
       "side": 1,
       "message": "I started off with this being move-only, but found some places in the resolver that passed the same thing in multiple places, which is unfortunate.",
       "parentUuid": "f4556841_4c61f6b8",
+      "range": {
+        "startLine": 525,
+        "startChar": 4,
+        "endLine": 525,
+        "endChar": 37
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "464873df_ba79d5e5",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T19:09:36Z",
+      "side": 1,
+      "message": "Not sure I understand. As I wrote in my comment above, couldn\u0027t you use a `const utils::Vector\u0026` for read-only views?",
+      "parentUuid": "00d3e3d4_a2f20edd",
       "range": {
         "startLine": 525,
         "startChar": 4,
