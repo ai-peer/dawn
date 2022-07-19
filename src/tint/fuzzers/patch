@@ -1,0 +1,16 @@
+diff --git a/src/tint/fuzzers/tint_regex_fuzzer/wgsl_mutator.cc b/src/tint/fuzzers/tint_regex_fuzzer/wgsl_mutator.cc
+index 0a126d877..0d2083119 100644
+--- a/src/tint/fuzzers/tint_regex_fuzzer/wgsl_mutator.cc
++++ b/src/tint/fuzzers/tint_regex_fuzzer/wgsl_mutator.cc
+@@ -382,8 +382,9 @@ std::string WgslMutator::ChooseRandomReplacementForOperator(const std::string& e
+     // making totally nonsensical replacements (such as changing ++ too /).
+     std::vector<std::string> assignment_operators{
+         "=", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=", "<<=", ">>="};
+-    std::vector<std::string> expression_operators{"+", "-", "*",  "/",  "%", "&&", "||", "&",
+-                                                  "|", "^", "<<", ">>", "<", ">",  "<=", ">=", "!", "!=", "~"};
++    std::vector<std::string> expression_operators{"+",  "-",  "*", "/",  "%",  "&&", "||",
++                                                  "&",  "|",  "^", "<<", ">>", "<",  ">",
++                                                  "<=", ">=", "!", "!=", "~"};
+     std::vector<std::string> increment_operators{"++", "--"};
+     for (auto operators : {assignment_operators, expression_operators, increment_operators}) {
+         auto it = std::find(operators.begin(), operators.end(), existing_operator);
