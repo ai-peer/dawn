@@ -375,6 +375,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f32d2780_51ce8273",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-19T17:43:35Z",
+      "side": 1,
+      "message": "Renamed. Although, it looks like I\u0027ll be removing it.",
+      "parentUuid": "f9018f21_6838156c",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6585b573_16359150",
