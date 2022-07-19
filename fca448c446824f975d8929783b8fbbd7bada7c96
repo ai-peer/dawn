@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "54cf5aa3_9440a521",
+        "filename": "src/tint/fuzzers/tint_ast_fuzzer/mutations/wrap_unary_operator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-19T21:50:51Z",
+      "side": 1,
+      "message": "Isn\u0027t that what `vec(1, 1, 1)` would be? It\u0027s a `vec3\u003cAbstractInt\u003e` (I think) and will materialize to `vec3\u003cf32\u003e`, `vec3\u003cf16\u003e`, `vec3\u003ci32\u003e` or `vec3\u003cu32\u003e` depending on usage.",
+      "parentUuid": "0bd61783_3785942d",
+      "revId": "fca448c446824f975d8929783b8fbbd7bada7c96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1c1497b_98759220",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 6
