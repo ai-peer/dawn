@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af2cc32c_a1f154d6",
+        "filename": "src/tint/fuzzers/patch",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-07-19T20:48:33Z",
+      "side": 1,
+      "message": "Was this meant to be added?",
+      "revId": "69f55797490d4bf122c2bec11c47684595ee4a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
