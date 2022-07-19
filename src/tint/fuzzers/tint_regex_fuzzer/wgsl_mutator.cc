@@ -145,14 +145,20 @@ bool WgslMutator::InsertReturnStatement(std::string& wgsl_code) {
 
     size_t semicolon_position = generator_.GetRandomElement(semicolon_positions);
 
-    // Get all identifiers and integer literals to use as potential return values.
-    std::vector<std::pair<size_t, size_t>> identifiers = GetIdentifiers(wgsl_code);
-    auto return_values = identifiers;
-    std::vector<std::pair<size_t, size_t>> int_literals = GetIntLiterals(wgsl_code);
-    return_values.insert(return_values.end(), int_literals.begin(), int_literals.end());
-    std::pair<size_t, size_t> return_value = generator_.GetRandomElement(return_values);
-    std::string return_statement =
-        "return " + wgsl_code.substr(return_value.first, return_value.second) + ";";
+    std::string return_statement = "return";
+
+    // Probabilistically decide whether to return a value.
+    if (generator_.GetBool()) {
+        // Get all identifiers and integer literals to use as potential return values.
+        std::vector<std::pair<size_t, size_t>> identifiers = GetIdentifiers(wgsl_code);
+        auto return_values = identifiers;
+        std::vector<std::pair<size_t, size_t>> int_literals = GetIntLiterals(wgsl_code);
+        return_values.insert(return_values.end(), int_literals.begin(), int_literals.end());
+        std::pair<size_t, size_t> return_value = generator_.GetRandomElement(return_values);
+        return_statement += " " + wgsl_code.substr(return_value.first, return_value.second);
+    }
+
+    return_statement += ";";
 
     // Insert the return statement immediately after the semicolon.
     wgsl_code.insert(semicolon_position + 1, return_statement);
