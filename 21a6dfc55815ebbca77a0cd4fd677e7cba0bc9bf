@@ -126,6 +126,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1adf0ca9_28cd30d1",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T14:11:44Z",
+      "side": 1,
+      "message": "Yeah, I like what you propose, Ben, with the underscores. I\u0027ll leave this as is, and follow up with a change that normalizes all of the Type matchers. Cool?",
+      "parentUuid": "39e20020_6a0b0e28",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa20b0bf_8b05ed0e",
@@ -322,6 +340,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc66202f_1c9caf7c",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T14:11:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7381232_62219bdf",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb52acb6_f5afd296",
@@ -428,6 +464,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14e42a06_8c23368e",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3045,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T14:11:44Z",
+      "side": 1,
+      "message": "Nevermind what I wrote. The spec basically says that unary minus of the lowest finite value (the minimum) for signed ints does the 2s complement thing (returns the same value). Added the missing cases.",
+      "parentUuid": "24534f67_b84a7cfb",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d869a169_7d92a88a",
@@ -465,6 +519,30 @@
       "side": 1,
       "message": "True, but as I\u0027ll be removing my generic `TypeDispatch` for specific ones, I won\u0027t need this anymore, so I\u0027ll delete.",
       "parentUuid": "d869a169_7d92a88a",
+      "range": {
+        "startLine": 166,
+        "startChar": 15,
+        "endLine": 166,
+        "endChar": 22
+      },
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd74bef7_6a7c82a1",
+        "filename": "src/tint/traits.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T14:11:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6db91600_f47e62fd",
       "range": {
         "startLine": 166,
         "startChar": 15,
