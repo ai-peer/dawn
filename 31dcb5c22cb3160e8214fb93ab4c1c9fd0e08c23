@@ -184,6 +184,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4901ada5_f52cdc3f",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-19T17:41:49Z",
+      "side": 1,
+      "message": "The moved value still needs to be destructed, so I presume so.",
+      "parentUuid": "7a2d8b03_181c9176",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6098c13_4f1bda7b",
@@ -304,6 +322,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93e14c89_48886c0c",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-19T17:41:49Z",
+      "side": 1,
+      "message": "Slice is just Plain Old Data (a pointer and 2x `size_t`). A `std::move` wouldn\u0027t do anything more than an assignment.",
+      "parentUuid": "87a929fb_869de2a2",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fc9144f_51199d80",
@@ -317,6 +353,24 @@
       "writtenOn": "2022-07-19T16:17:04Z",
       "side": 1,
       "message": "If we\u0027ve allocated a `TStorage` on line 435, and then `Reset` does this leak?",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9018f21_6838156c",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-19T17:41:49Z",
+      "side": 1,
+      "message": "Reset",
+      "parentUuid": "4fc9144f_51199d80",
       "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -357,6 +411,24 @@
       "writtenOn": "2022-07-19T16:17:04Z",
       "side": 1,
       "message": "If you have an `ImplWithoutSmallArray` and then `Allocate` and then `Reset` don\u0027t use leak `data`?",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c057ba6f_26c52150",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-19T17:41:49Z",
+      "side": 1,
+      "message": "If you did that, yes. But `Reset` is just used for setting initial values for the constructor. It\u0027s not public API.",
+      "parentUuid": "8c8f3681_258cc563",
       "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
