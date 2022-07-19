@@ -168,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4029bf5a_7755f0e6",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T20:25:41Z",
+      "side": 1,
+      "message": "I would really stunned if the compiler doesn\u0027t do this already.",
+      "parentUuid": "01f90c09_16fd7289",
+      "range": {
+        "startLine": 144,
+        "startChar": 8,
+        "endLine": 146,
+        "endChar": 9
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "991c4220_088be7f0",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 9
@@ -227,6 +251,30 @@
       "side": 1,
       "message": "Yes, true. As above, we should optimize this for trivially copyable types to do a memcpy, which would be safe in that case.",
       "parentUuid": "e4d14ad3_abda1bcb",
+      "range": {
+        "startLine": 155,
+        "startChar": 8,
+        "endLine": 157,
+        "endChar": 9
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32e6ae04_7a08836a",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T20:25:41Z",
+      "side": 1,
+      "message": "See above - I\u0027d really be surprised if the compiler didn\u0027t handle this already.",
+      "parentUuid": "66b1a336_53048fe9",
       "range": {
         "startLine": 155,
         "startChar": 8,
@@ -333,6 +381,30 @@
       "side": 1,
       "message": "I don\u0027t follow. `other` is already a `VectorRef\u003cT\u003e`, so `std::move(other)` should do the right thing here, without constructor another `VectorRef\u003cT\u003e` around it, right?",
       "parentUuid": "31796a17_f7000d5d",
+      "range": {
+        "startLine": 194,
+        "startChar": 19,
+        "endLine": 194,
+        "endChar": 31
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13943607_ebe2b5db",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T20:25:41Z",
+      "side": 1,
+      "message": "Sorry, mixing up constructors. Done.",
+      "parentUuid": "c181628f_a11b472f",
       "range": {
         "startLine": 194,
         "startChar": 19,
@@ -521,6 +593,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca27dccb_d7b1b29a",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T20:25:41Z",
+      "side": 1,
+      "message": "\u003e The idea is to use this instead of a std::vector, but the API should be the same (modulo the naming case convention). Even if there\u0027s no PushFront, the reason the names are normalized across containers in C++ is for algorithms (static polymorphism). \n\nThe algorithms cannot work with the different naming, so I\u0027m not convinced by that argument.\n\n\u003e In any case, for me it\u0027s about element of least surprise.\n\nIs `Push()` and `Pop()` going to confuse anyone? I highly doubt it.\n\nLike you said, the argument for adding the redundant `_back` to the vector methods is for C++ STL static polymorphism, which just doesn\u0027t apply here.",
+      "parentUuid": "0042e8db_717739dc",
+      "range": {
+        "startLine": 299,
+        "startChar": 9,
+        "endLine": 299,
+        "endChar": 13
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a659f5a_da8b5257",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 9
@@ -568,6 +664,24 @@
       "side": 1,
       "message": "This isn\u0027t the same as EmplaceBack. EmplaceBack allows you to pass in variadic args that will be forwarded to the constructor of T: https://en.cppreference.com/w/cpp/container/vector/emplace_back",
       "parentUuid": "5b2d362a_bd982c55",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cb3ff87_5b9f800a",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T20:25:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f40ab15_c6cfa45c",
       "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -633,6 +747,30 @@
       "side": 1,
       "message": "Having worked with custom containers in many other engines that _almost_ follow the standard conventions, I\u0027ll just say that I didn\u0027t enjoy it. In particular, the `size()` vs `Length()` tripped me up enough times to be annoying. Even if this class offers extra stuff over `std::vector`, I still think we should follow the conventions for `Empty` and `Length`.",
       "parentUuid": "7bf13e09_c3f05c81",
+      "range": {
+        "startLine": 320,
+        "startChar": 9,
+        "endLine": 320,
+        "endChar": 16
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe1bd841_52964006",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T20:25:41Z",
+      "side": 1,
+      "message": "I\u0027ve seen countless bugs in my career where people use `empty()` when they meant `clear()`. Logic where they used `size()` when they meant `size() * sizeof(T)`.\n\nThe conscious decision was to break away from the standard conventions, for good reasons. I\u0027m of the opinion that we either we fully imitate `std::vector` \u0027s signature (`snake_case` casing and all), or we implement something that is not trying to associate itself with the STL. Given our coding style, no need or incentive for supporting `std::allocator`, and distaste for the naming of C++\u0027s methods, I\u0027d strongly prefer the latter.",
+      "parentUuid": "3e4b5bf5_3382c213",
       "range": {
         "startLine": 320,
         "startChar": 9,
@@ -1128,6 +1266,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7989b6d_cf9c5162",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T20:25:41Z",
+      "side": 1,
+      "message": "Pushed the `ConstVectorRef` change.\n\nI was wondering the same thing, but I couldn\u0027t find anything that didn\u0027t make a little bit of sick come up in my mouth.\nThis is more code, but it\u0027s explicit. There are only a few places we\u0027d want to use `ConstVectorRef`.",
+      "parentUuid": "e25ae25b_c485ab58",
+      "range": {
+        "startLine": 515,
+        "startChar": 17,
+        "endLine": 515,
+        "endChar": 35
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4556841_4c61f6b8",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 9
@@ -1187,6 +1349,30 @@
       "side": 1,
       "message": "Not sure I understand. As I wrote in my comment above, couldn\u0027t you use a `const utils::Vector\u0026` for read-only views?",
       "parentUuid": "00d3e3d4_a2f20edd",
+      "range": {
+        "startLine": 525,
+        "startChar": 4,
+        "endLine": 525,
+        "endChar": 37
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cff7779_2ca38e7c",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T20:25:41Z",
+      "side": 1,
+      "message": "I really don\u0027t want to expose the vector length as part of the header interface.",
+      "parentUuid": "464873df_ba79d5e5",
       "range": {
         "startLine": 525,
         "startChar": 4,
