@@ -18,7 +18,7 @@
 #include "src/tint/sem/vector.h"
 #include "src/tint/utils/hash.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::Matrix);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::Matrix, true);
 
 namespace tint::sem {
 

@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::DiscardStatement);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::DiscardStatement, true);
 
 namespace tint::ast {
 

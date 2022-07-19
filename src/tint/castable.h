@@ -66,7 +66,7 @@ static constexpr bool IsCastable =
     !(std::is_same_v<TYPES, Ignore> && ...);
 
 /// Helper macro to instantiate the TypeInfo<T> template for `CLASS`.
-#define TINT_INSTANTIATE_TYPEINFO(CLASS)                        \
+#define TINT_INSTANTIATE_TYPEINFO(CLASS, FINAL)                 \
     TINT_CASTABLE_PUSH_DISABLE_WARNINGS();                      \
     template <>                                                 \
     const tint::TypeInfo tint::detail::TypeInfoOf<CLASS>::info{ \
@@ -74,6 +74,7 @@ static constexpr bool IsCastable =
         #CLASS,                                                 \
         tint::TypeInfo::HashCodeOf<CLASS>(),                    \
         tint::TypeInfo::FullHashCodeOf<CLASS>(),                \
+        FINAL,                                                  \
     };                                                          \
     TINT_CASTABLE_POP_DISABLE_WARNINGS()
 
@@ -101,6 +102,9 @@ struct TypeInfo {
     /// The type hash code bitwise-or'd with all ancestor's hashcodes.
     const HashCode full_hashcode;
 
+    /// The type is a leaf type with no inheritance
+    const bool is_final;
+
     /// @param type the test type info
     /// @returns true if the class with this TypeInfo is of, or derives from the
     /// class with the given TypeInfo.
@@ -117,6 +121,11 @@ struct TypeInfo {
         for (auto* ti = this; ti != nullptr; ti = ti->base) {
             if (ti == type) {
                 return true;
+            }
+            // Class we're comparing too is final, so it won't be any of the
+            // base types, so we're done.
+            if (type->is_final) {
+                break;
             }
         }
         return false;

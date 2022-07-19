@@ -33,7 +33,7 @@
 #include "src/tint/transform/utils/hoist_to_decl_before.h"
 #include "src/tint/utils/scoped_assignment.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::PromoteSideEffectsToDecl);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::PromoteSideEffectsToDecl, true);
 
 namespace tint::transform {
 namespace {

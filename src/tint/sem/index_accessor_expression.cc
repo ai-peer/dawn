@@ -18,7 +18,7 @@
 
 #include <utility>
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::IndexAccessorExpression);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::IndexAccessorExpression, true);
 
 namespace tint::sem {
 

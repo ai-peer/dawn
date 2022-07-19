@@ -26,7 +26,7 @@
 #include "src/tint/sem/variable.h"
 #include "src/tint/transform/unshadow.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::SimplifyPointers);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::SimplifyPointers, true);
 
 namespace tint::transform {
 

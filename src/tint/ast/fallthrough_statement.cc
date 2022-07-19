@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::FallthroughStatement);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::FallthroughStatement, true);
 
 namespace tint::ast {
 

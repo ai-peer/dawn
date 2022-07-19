@@ -16,8 +16,8 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::LoopStatement);
-TINT_INSTANTIATE_TYPEINFO(tint::sem::LoopContinuingBlockStatement);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::LoopStatement, true);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::LoopContinuingBlockStatement, true);
 
 namespace tint::sem {
 

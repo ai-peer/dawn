@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::CallExpression);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::CallExpression, true);
 
 namespace tint::ast {
 

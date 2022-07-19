@@ -14,7 +14,7 @@
 
 #include "src/tint/sem/type_constructor.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::TypeConstructor);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::TypeConstructor, true);
 
 namespace tint::sem {
 

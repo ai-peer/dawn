@@ -17,7 +17,7 @@
 #include "src/tint/sem/expression.h"
 #include "src/tint/sem/info.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::Expression);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Expression, false);
 
 namespace tint::ast {
 

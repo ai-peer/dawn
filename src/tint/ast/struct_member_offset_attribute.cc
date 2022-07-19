@@ -18,7 +18,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::StructMemberOffsetAttribute);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::StructMemberOffsetAttribute, true);
 
 namespace tint::ast {
 

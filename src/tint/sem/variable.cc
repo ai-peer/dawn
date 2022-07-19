@@ -21,11 +21,11 @@
 #include "src/tint/ast/variable.h"
 #include "src/tint/sem/pointer.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::Variable);
-TINT_INSTANTIATE_TYPEINFO(tint::sem::GlobalVariable);
-TINT_INSTANTIATE_TYPEINFO(tint::sem::LocalVariable);
-TINT_INSTANTIATE_TYPEINFO(tint::sem::Parameter);
-TINT_INSTANTIATE_TYPEINFO(tint::sem::VariableUser);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::Variable, false);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::GlobalVariable, true);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::LocalVariable, true);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::Parameter, true);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::VariableUser, true);
 
 namespace tint::sem {
 Variable::Variable(const ast::Variable* declaration,

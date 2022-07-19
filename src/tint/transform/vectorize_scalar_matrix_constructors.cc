@@ -23,7 +23,7 @@
 #include "src/tint/sem/type_constructor.h"
 #include "src/tint/utils/map.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::VectorizeScalarMatrixConstructors);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::VectorizeScalarMatrixConstructors, true);
 
 namespace tint::transform {
 

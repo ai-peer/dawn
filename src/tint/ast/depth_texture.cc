@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::DepthTexture);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::DepthTexture, true);
 
 namespace tint::ast {
 namespace {

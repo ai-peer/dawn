@@ -21,7 +21,7 @@
 #include "src/tint/sem/variable.h"
 #include "src/tint/utils/scoped_assignment.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::FoldTrivialSingleUseLets);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::FoldTrivialSingleUseLets, true);
 
 namespace tint::transform {
 namespace {

@@ -23,8 +23,8 @@
 
 using namespace tint::number_suffixes;  // NOLINT
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::BuiltinPolyfill);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::BuiltinPolyfill::Config);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::BuiltinPolyfill, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::BuiltinPolyfill::Config, true);
 
 namespace tint::transform {
 

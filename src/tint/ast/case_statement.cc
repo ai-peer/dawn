@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::CaseStatement);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::CaseStatement, true);
 
 namespace tint::ast {
 

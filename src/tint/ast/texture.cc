@@ -14,7 +14,7 @@
 
 #include "src/tint/ast/texture.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::Texture);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Texture, false);
 
 namespace tint::ast {
 

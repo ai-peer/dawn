@@ -17,7 +17,7 @@
 #include "src/tint/program_builder.h"
 #include "src/tint/utils/hash.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::AbstractFloat);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::AbstractFloat, true);
 
 namespace tint::sem {
 

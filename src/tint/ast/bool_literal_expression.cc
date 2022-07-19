@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::BoolLiteralExpression);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::BoolLiteralExpression, true);
 
 namespace tint::ast {
 

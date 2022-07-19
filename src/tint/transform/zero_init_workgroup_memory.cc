@@ -28,7 +28,7 @@
 #include "src/tint/utils/map.h"
 #include "src/tint/utils/unique_vector.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::ZeroInitWorkgroupMemory);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::ZeroInitWorkgroupMemory, true);
 
 namespace tint::transform {
 

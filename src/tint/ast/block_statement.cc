@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::BlockStatement);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::BlockStatement, true);
 
 namespace tint::ast {
 

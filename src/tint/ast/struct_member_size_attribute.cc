@@ -19,7 +19,7 @@
 #include "src/tint/clone_context.h"
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::StructMemberSizeAttribute);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::StructMemberSizeAttribute, true);
 
 namespace tint::ast {
 

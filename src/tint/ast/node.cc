@@ -14,7 +14,7 @@
 
 #include "src/tint/ast/node.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::Node);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Node, false);
 
 namespace tint::ast {
 

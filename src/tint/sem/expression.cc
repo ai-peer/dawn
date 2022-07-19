@@ -18,7 +18,7 @@
 
 #include "src/tint/sem/materialize.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::Expression);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::Expression, false);
 
 namespace tint::sem {
 

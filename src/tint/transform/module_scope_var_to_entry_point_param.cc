@@ -27,7 +27,7 @@
 #include "src/tint/sem/statement.h"
 #include "src/tint/sem/variable.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::ModuleScopeVarToEntryPointParam);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::ModuleScopeVarToEntryPointParam, true);
 
 namespace tint::transform {
 namespace {

@@ -30,7 +30,7 @@
 #include "src/tint/sem/if_statement.h"
 #include "src/tint/transform/utils/get_insertion_point.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::UnwindDiscardFunctions);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::UnwindDiscardFunctions, true);
 
 namespace tint::transform {
 namespace {

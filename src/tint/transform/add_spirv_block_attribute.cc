@@ -22,8 +22,8 @@
 #include "src/tint/sem/variable.h"
 #include "src/tint/utils/map.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::AddSpirvBlockAttribute);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::AddSpirvBlockAttribute::SpirvBlockAttribute);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::AddSpirvBlockAttribute, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::AddSpirvBlockAttribute::SpirvBlockAttribute, true);
 
 namespace tint::transform {
 

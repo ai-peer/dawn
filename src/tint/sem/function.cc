@@ -23,7 +23,7 @@
 #include "src/tint/sem/variable.h"
 #include "src/tint/utils/to_const_ptr_vec.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::Function);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::Function, true);
 
 namespace tint::sem {
 

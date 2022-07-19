@@ -25,8 +25,8 @@
 #include "src/tint/sem/reference.h"
 #include "src/tint/sem/sampler.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::Transform);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::Data);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::Transform, false);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::Data, false);
 
 namespace tint::transform {
 

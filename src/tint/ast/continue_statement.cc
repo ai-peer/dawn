@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::ContinueStatement);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::ContinueStatement, true);
 
 namespace tint::ast {
 

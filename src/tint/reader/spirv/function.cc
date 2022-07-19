@@ -6046,7 +6046,7 @@ FunctionEmitter::FunctionDeclaration::~FunctionDeclaration() = default;
 
 }  // namespace tint::reader::spirv
 
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::StatementBuilder);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::SwitchStatementBuilder);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::IfStatementBuilder);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::LoopStatementBuilder);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::StatementBuilder, false);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::SwitchStatementBuilder, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::IfStatementBuilder, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::LoopStatementBuilder, true);

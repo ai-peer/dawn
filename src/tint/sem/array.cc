@@ -19,7 +19,7 @@
 #include "src/tint/debug.h"
 #include "src/tint/utils/hash.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::Array);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::Array, true);
 
 namespace tint::sem {
 

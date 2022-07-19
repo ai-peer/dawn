@@ -19,7 +19,7 @@
 #include "src/tint/program_builder.h"
 #include "src/tint/utils/map.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::Cloneable);
+TINT_INSTANTIATE_TYPEINFO(tint::Cloneable, false);
 
 namespace tint {
 

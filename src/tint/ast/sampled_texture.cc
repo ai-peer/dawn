@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::SampledTexture);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::SampledTexture, true);
 
 namespace tint::ast {
 

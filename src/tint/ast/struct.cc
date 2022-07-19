@@ -18,7 +18,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::Struct);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Struct, true);
 
 namespace tint::ast {
 

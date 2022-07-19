@@ -16,7 +16,7 @@
 #include "src/tint/ast/binding_attribute.h"
 #include "src/tint/ast/group_attribute.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::Variable);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Variable, false);
 
 namespace tint::ast {
 

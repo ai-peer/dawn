@@ -21,8 +21,8 @@
 #include "src/tint/sem/function.h"
 #include "src/tint/sem/variable.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::SingleEntryPoint);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::SingleEntryPoint::Config);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::SingleEntryPoint, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::SingleEntryPoint::Config, true);
 
 namespace tint::transform {
 

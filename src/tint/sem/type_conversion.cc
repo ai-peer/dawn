@@ -14,7 +14,7 @@
 
 #include "src/tint/sem/type_conversion.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::TypeConversion);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::TypeConversion, true);
 
 namespace tint::sem {
 

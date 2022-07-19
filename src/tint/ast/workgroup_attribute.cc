@@ -18,7 +18,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::WorkgroupAttribute);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::WorkgroupAttribute, true);
 
 namespace tint::ast {
 

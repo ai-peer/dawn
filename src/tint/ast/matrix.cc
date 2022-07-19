@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::Matrix);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Matrix, true);
 
 namespace tint::ast {
 

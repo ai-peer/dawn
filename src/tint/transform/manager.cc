@@ -24,7 +24,7 @@
 #define TINT_IF_PRINT_PROGRAM(x)
 #endif  // TINT_PRINT_PROGRAM_FOR_EACH_TRANSFORM
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::Manager);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::Manager, true);
 
 namespace tint::transform {
 

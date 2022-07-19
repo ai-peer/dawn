@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::VariableDeclStatement);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::VariableDeclStatement, true);
 
 namespace tint::ast {
 

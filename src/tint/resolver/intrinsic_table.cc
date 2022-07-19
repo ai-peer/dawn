@@ -1673,4 +1673,4 @@ IntrinsicTable::~IntrinsicTable() = default;
 }  // namespace tint::resolver
 
 /// TypeInfo for the Any type declared in the anonymous namespace above
-TINT_INSTANTIATE_TYPEINFO(tint::resolver::Any);
+TINT_INSTANTIATE_TYPEINFO(tint::resolver::Any, true);

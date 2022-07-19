@@ -24,9 +24,9 @@
 #include "src/tint/sem/variable.h"
 #include "src/tint/transform/simplify_pointers.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::ArrayLengthFromUniform);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::ArrayLengthFromUniform::Config);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::ArrayLengthFromUniform::Result);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::ArrayLengthFromUniform, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::ArrayLengthFromUniform::Config, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::ArrayLengthFromUniform::Result, true);
 
 namespace tint::transform {
 

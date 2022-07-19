@@ -17,7 +17,7 @@
 #include "src/tint/program_builder.h"
 #include "src/tint/utils/hash.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::SampledTexture);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::SampledTexture, true);
 
 namespace tint::sem {
 

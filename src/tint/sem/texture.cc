@@ -14,7 +14,7 @@
 
 #include "src/tint/sem/texture.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::Texture);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::Texture, false);
 
 namespace tint::sem {
 

@@ -19,7 +19,7 @@
 #include "src/tint/ast/type_decl.h"
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::Module);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Module, true);
 
 namespace tint::ast {
 

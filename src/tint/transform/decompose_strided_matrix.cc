@@ -25,7 +25,7 @@
 #include "src/tint/utils/hash.h"
 #include "src/tint/utils/map.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::DecomposeStridedMatrix);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::DecomposeStridedMatrix, true);
 
 namespace tint::transform {
 namespace {

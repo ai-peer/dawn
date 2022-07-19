@@ -14,7 +14,7 @@
 
 #include "src/tint/ast/internal_attribute.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::InternalAttribute);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::InternalAttribute, false);
 
 namespace tint::ast {
 

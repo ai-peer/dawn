@@ -27,8 +27,8 @@
 
 using namespace tint::number_suffixes;  // NOLINT
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::CanonicalizeEntryPointIO);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::CanonicalizeEntryPointIO::Config);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::CanonicalizeEntryPointIO, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::CanonicalizeEntryPointIO::Config, true);
 
 namespace tint::transform {
 

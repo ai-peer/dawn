@@ -25,8 +25,8 @@
 
 #include "src/tint/utils/map.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::CombineSamplers);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::CombineSamplers::BindingInfo);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::CombineSamplers, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::CombineSamplers::BindingInfo, true);
 
 namespace {
 

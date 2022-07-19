@@ -40,8 +40,8 @@
 
 using namespace tint::number_suffixes;  // NOLINT
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::DecomposeMemoryAccess);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::DecomposeMemoryAccess::Intrinsic);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::DecomposeMemoryAccess, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::DecomposeMemoryAccess::Intrinsic, true);
 
 namespace tint::transform {
 
@@ -73,7 +73,7 @@ struct OffsetExpr : Offset {
 
 /// OffsetLiteral is an implementation of Offset that constructs a u32 literal
 /// value.
-struct OffsetLiteral : Castable<OffsetLiteral, Offset> {
+struct OffsetLiteral final : Castable<OffsetLiteral, Offset> {
     uint32_t const literal = 0;
 
     explicit OffsetLiteral(uint32_t lit) : literal(lit) {}
@@ -984,5 +984,5 @@ void DecomposeMemoryAccess::Run(CloneContext& ctx, const DataMap&, DataMap&) con
 
 }  // namespace tint::transform
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::Offset);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::OffsetLiteral);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::Offset, false);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::OffsetLiteral, true);

@@ -30,8 +30,8 @@
 #include "src/tint/utils/map.h"
 #include "src/tint/utils/unique_vector.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::SpirvAtomic);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::SpirvAtomic::Stub);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::SpirvAtomic, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::SpirvAtomic::Stub, true);
 
 namespace tint::transform {
 

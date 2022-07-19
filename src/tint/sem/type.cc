@@ -29,7 +29,7 @@
 #include "src/tint/sem/u32.h"
 #include "src/tint/sem/vector.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::Type);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::Type, false);
 
 namespace tint::sem {
 

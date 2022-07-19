@@ -14,7 +14,7 @@
 
 #include "src/tint/sem/abstract_numeric.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::AbstractNumeric);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::AbstractNumeric, false);
 
 namespace tint::sem {
 
