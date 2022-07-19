@@ -82,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d2e0d84_3dee6df3",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000022
+      },
+      "writtenOn": "2022-07-19T15:29:55Z",
+      "side": 1,
+      "message": "Yunchao, do you have the list of device ids that would be impacted. We added Alchemist support in Chromium, and their ids have pattern like 0x4Fxx and 0x56xx (with mask 0xFF00): https://source.chromium.org/chromium/chromium/src/+/main:gpu/config/gpu_util.cc;l\u003d909",
+      "parentUuid": "36eb5479_545313e0",
+      "range": {
+        "startLine": 671,
+        "startChar": 18,
+        "endLine": 671,
+        "endChar": 27
+      },
+      "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1df88668_f1f41344",
