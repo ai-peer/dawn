@@ -992,7 +992,8 @@ INSTANTIATE_TEST_SUITE_P(
                     TokenData{"vec3", Token::Type::kVec3},
                     TokenData{"vec4", Token::Type::kVec4},
                     TokenData{"while", Token::Type::kWhile},
-                    TokenData{"workgroup", Token::Type::kWorkgroup}));
+                    TokenData{"workgroup", Token::Type::kWorkgroup},
+                    TokenData{"push_constant", Token::Type::kPushConstant}));
 
 }  // namespace
 }  // namespace tint::reader::wgsl
