@@ -918,6 +918,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "47458ea7_611bde3e",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T19:03:23Z",
+      "side": 1,
+      "message": "I\u0027m playing with adding a `ConstVectorRef`. So far so good. Will push an update soon.",
+      "parentUuid": "22622ff3_dc907a8e",
+      "range": {
+        "startLine": 515,
+        "startChar": 17,
+        "endLine": 515,
+        "endChar": 35
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4556841_4c61f6b8",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 9
