@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "057cfcd3_a8ffb659",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-19T15:53:20Z",
+      "side": 1,
+      "message": "will it work if the texture has TextureBinding usage? - or in these cases, is using the optimized clear value ok?\n\nIn that case, we allocate\nDXGI_FORMAT_R32_TYPELESS for depth32float, DXGI_FORMAT_R24G8_TYPELESS for stencil8, and DXGI_FORMAT_R32G8X24_TYPELESS for combined depth/stencil.\n\nSee https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/TextureD3D12.cpp;l\u003d586?q\u003dneedsTypelessFormat%20f:dawn",
+      "revId": "b80595fde58ecb2e1619fe4d3185f50fbb987c83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
