@@ -1280,6 +1280,9 @@ Token Lexer::check_keyword(const Source& source, std::string_view str) {
     if (str == "workgroup") {
         return {Token::Type::kWorkgroup, source, "workgroup"};
     }
+    if (str == "push_constant") {
+        return {Token::Type::kPushConstant, source, "push_constant"};
+    }
     return {};
 }
 
