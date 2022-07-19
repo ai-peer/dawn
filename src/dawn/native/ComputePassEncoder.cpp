@@ -477,7 +477,7 @@ void ComputePassEncoder::RestoreCommandBufferState(CommandBufferStateTracker sta
             if (offsets.empty()) {
                 APISetBindGroup(static_cast<uint32_t>(i), bg);
             } else {
-                APISetBindGroup(static_cast<uint32_t>(i), bg, offsets.size(), offsets.data());
+                APISetBindGroup(static_cast<uint32_t>(i), bg, static_cast<uint32_t>(offsets.size()), offsets.data());
             }
         }
     }

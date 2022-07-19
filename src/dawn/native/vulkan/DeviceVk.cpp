@@ -436,7 +436,8 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice physicalD
     {
         // Note that GRAPHICS and COMPUTE imply TRANSFER so we don't need to check for it.
         constexpr uint32_t kUniversalFlags = VK_QUEUE_GRAPHICS_BIT | VK_QUEUE_COMPUTE_BIT;
-        int universalQueueFamily = -1;
+        constexpr uint32_t kNotFound = 0xFFFF'FFFF;
+        uint32_t universalQueueFamily = kNotFound;
         for (unsigned int i = 0; i < mDeviceInfo.queueFamilies.size(); ++i) {
             if ((mDeviceInfo.queueFamilies[i].queueFlags & kUniversalFlags) == kUniversalFlags) {
                 universalQueueFamily = i;
@@ -444,10 +445,10 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice physicalD
             }
         }
 
-        if (universalQueueFamily == -1) {
+        if (universalQueueFamily == kNotFound) {
             return DAWN_INTERNAL_ERROR("No universal queue family");
         }
-        mQueueFamily = static_cast<uint32_t>(universalQueueFamily);
+        mQueueFamily = universalQueueFamily;
     }
 
     // Choose to create a single universal queue
@@ -1077,7 +1078,11 @@ void Device::DestroyImpl() {
 }
 
 uint32_t Device::GetOptimalBytesPerRowAlignment() const {
-    return mDeviceInfo.properties.limits.optimalBufferCopyRowPitchAlignment;
+    uint64_t rowPitch = mDeviceInfo.properties.limits.optimalBufferCopyRowPitchAlignment;
+
+    // Technically the driver can return any power of two here, but anything above 2GB is ludicrous
+    // so we just clamp the value.
+    return static_cast<uint32_t>(std::min(uint64_t(0x8000'0000), rowPitch));
 }
 
 uint64_t Device::GetOptimalBufferToTextureCopyOffsetAlignment() const {

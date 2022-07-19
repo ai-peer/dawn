@@ -39,9 +39,9 @@ struct ComboDeprecatedDawnDeviceDescriptor : DeviceDescriptor {
         if (deviceDescriptor != nullptr) {
             desc->nextInChain = &mTogglesDesc;
             mTogglesDesc.forceEnabledToggles = deviceDescriptor->forceEnabledToggles.data();
-            mTogglesDesc.forceEnabledTogglesCount = deviceDescriptor->forceEnabledToggles.size();
+            mTogglesDesc.forceEnabledTogglesCount = static_cast<uint32_t>(deviceDescriptor->forceEnabledToggles.size());
             mTogglesDesc.forceDisabledToggles = deviceDescriptor->forceDisabledToggles.data();
-            mTogglesDesc.forceDisabledTogglesCount = deviceDescriptor->forceDisabledToggles.size();
+            mTogglesDesc.forceDisabledTogglesCount = static_cast<uint32_t>(deviceDescriptor->forceDisabledToggles.size());
 
             desc->requiredLimits =
                 reinterpret_cast<const RequiredLimits*>(deviceDescriptor->requiredLimits);
@@ -51,7 +51,7 @@ struct ComboDeprecatedDawnDeviceDescriptor : DeviceDescriptor {
                 mRequiredFeatures.push_back(featuresInfo.FeatureNameToAPIEnum(featureStr));
             }
             desc->requiredFeatures = mRequiredFeatures.data();
-            desc->requiredFeaturesCount = mRequiredFeatures.size();
+            desc->requiredFeaturesCount = static_cast<uint32_t>(mRequiredFeatures.size());
         }
     }
 

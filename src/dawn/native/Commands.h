@@ -261,13 +261,13 @@ struct ClearBufferCmd {
 };
 
 struct InsertDebugMarkerCmd {
-    uint32_t length;
+    size_t length;
 };
 
 struct PopDebugGroupCmd {};
 
 struct PushDebugGroupCmd {
-    uint32_t length;
+    size_t length;
 };
 
 struct ResolveQuerySetCmd {

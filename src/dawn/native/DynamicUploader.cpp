@@ -100,13 +100,15 @@ ResultOrError<UploadHandle> DynamicUploader::AllocateInternal(uint64_t allocatio
 void DynamicUploader::Deallocate(ExecutionSerial lastCompletedSerial) {
     // Reclaim memory within the ring buffers by ticking (or removing requests no longer
     // in-flight).
-    for (size_t i = 0; i < mRingBuffers.size(); ++i) {
-        mRingBuffers[i]->mAllocator.Deallocate(lastCompletedSerial);
+    for (auto it = mRingBuffers.begin(); it != mRingBuffers.end();) {
+        (*it)->mAllocator.Deallocate(lastCompletedSerial);
 
         // Never erase the last buffer as to prevent re-creating smaller buffers
         // again. The last buffer is the largest.
-        if (mRingBuffers[i]->mAllocator.Empty() && i < mRingBuffers.size() - 1) {
-            mRingBuffers.erase(mRingBuffers.begin() + i);
+        if ((*it)->mAllocator.Empty() && it + 1 != mRingBuffers.end()) {
+            it = mRingBuffers.erase(it);
+        } else {
+            it ++;
         }
     }
     mReleasedStagingBuffers.ClearUpTo(lastCompletedSerial);

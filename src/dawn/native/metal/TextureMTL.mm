@@ -615,8 +615,8 @@ MaybeError ValidateIOSurfaceCanBeWrapped(const DeviceBase*,
     DAWN_INVALID_IF(descriptor->sampleCount != 1, "Sample count (%u) is not 1.",
                     descriptor->sampleCount);
 
-    uint32_t surfaceWidth = IOSurfaceGetWidth(ioSurface);
-    uint32_t surfaceHeight = IOSurfaceGetHeight(ioSurface);
+    size_t surfaceWidth = IOSurfaceGetWidth(ioSurface);
+    size_t surfaceHeight = IOSurfaceGetHeight(ioSurface);
 
     DAWN_INVALID_IF(
         descriptor->size.width != surfaceWidth || descriptor->size.height != surfaceHeight ||

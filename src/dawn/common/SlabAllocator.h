@@ -19,6 +19,7 @@
 #include <type_traits>
 #include <utility>
 
+#include "dawn/common/Assert.h"
 #include "dawn/common/Numeric.h"
 #include "dawn/common/PlacementAllocated.h"
 
@@ -168,7 +169,9 @@ class SlabAllocator : public SlabAllocatorImpl {
     SlabAllocator(size_t totalObjectBytes,
                   uint32_t objectSize = u32_sizeof<T>,
                   uint32_t objectAlignment = u32_alignof<T>)
-        : SlabAllocatorImpl(totalObjectBytes / objectSize, objectSize, objectAlignment) {}
+        : SlabAllocatorImpl(static_cast<Index>(totalObjectBytes / objectSize), objectSize, objectAlignment) {
+            ASSERT(totalObjectBytes / objectSize < std::numeric_limits<Index>::max());
+        }
 
     template <typename... Args>
     T* Allocate(Args&&... args) {

@@ -571,7 +571,8 @@ uint32_t BindGroupLayoutBase::GetUnverifiedBufferCount() const {
 }
 
 uint32_t BindGroupLayoutBase::GetExternalTextureBindingCount() const {
-    return mExternalTextureBindingExpansionMap.size();
+    // There can be at most <max bindings> external textures, so the count fits in a uint32_t.
+    return static_cast<uint32_t>(mExternalTextureBindingExpansionMap.size());
 }
 
 const BindingCounts& BindGroupLayoutBase::GetBindingCountInfo() const {

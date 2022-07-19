@@ -223,9 +223,11 @@ SubresourceStorage<T>::SubresourceStorage(Aspect aspects,
                                           uint32_t arrayLayerCount,
                                           uint32_t mipLevelCount,
                                           T initialValue)
-    : mAspects(aspects), mMipLevelCount(mipLevelCount), mArrayLayerCount(arrayLayerCount) {
+    : mAspects(aspects) {
     ASSERT(arrayLayerCount <= std::numeric_limits<decltype(mArrayLayerCount)>::max());
     ASSERT(mipLevelCount <= std::numeric_limits<decltype(mMipLevelCount)>::max());
+    mMipLevelCount = static_cast<uint8_t>(mipLevelCount);
+    mArrayLayerCount = static_cast<uint16_t>(mArrayLayerCount);
 
     uint32_t aspectCount = GetAspectCount(aspects);
     ASSERT(aspectCount <= kMaxAspects);
