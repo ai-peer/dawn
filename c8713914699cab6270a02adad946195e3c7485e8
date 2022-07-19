@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "639e5013_be5de147",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T21:47:43Z",
+      "side": 1,
+      "message": "Fixed UBSan errors related to negating minimum signed integrals both with literals and at runtime (see the diffs on Patchset 7).",
+      "revId": "c8713914699cab6270a02adad946195e3c7485e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
