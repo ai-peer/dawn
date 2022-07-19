@@ -25,8 +25,8 @@
 #include "src/tint/sem/reference.h"
 #include "src/tint/sem/statement.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::Robustness);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::Robustness::Config);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::Robustness, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::Robustness::Config, true);
 
 using namespace tint::number_suffixes;  // NOLINT
 

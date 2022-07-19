@@ -23,8 +23,8 @@
 #include "src/tint/symbol_table.h"
 #include "src/tint/utils/hash.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::Struct);
-TINT_INSTANTIATE_TYPEINFO(tint::sem::StructMember);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::Struct, true);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::StructMember, true);
 
 namespace tint::sem {
 

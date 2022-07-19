@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::MemberAccessorExpression);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::MemberAccessorExpression, true);
 
 namespace tint::ast {
 

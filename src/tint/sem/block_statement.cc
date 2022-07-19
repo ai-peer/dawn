@@ -18,9 +18,9 @@
 #include "src/tint/ast/function.h"
 #include "src/tint/sem/function.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::BlockStatement);
-TINT_INSTANTIATE_TYPEINFO(tint::sem::FunctionBlockStatement);
-TINT_INSTANTIATE_TYPEINFO(tint::sem::LoopBlockStatement);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::BlockStatement, false);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::FunctionBlockStatement, true);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::LoopBlockStatement, true);
 
 namespace tint::sem {
 

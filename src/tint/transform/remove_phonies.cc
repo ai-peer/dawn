@@ -28,7 +28,7 @@
 #include "src/tint/utils/map.h"
 #include "src/tint/utils/scoped_assignment.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::RemovePhonies);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::RemovePhonies, true);
 
 namespace tint::transform {
 namespace {

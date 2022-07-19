@@ -24,9 +24,9 @@
 #include "src/tint/sem/struct.h"
 #include "src/tint/sem/variable.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::FirstIndexOffset);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::FirstIndexOffset::BindingPoint);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::FirstIndexOffset::Data);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::FirstIndexOffset, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::FirstIndexOffset::BindingPoint, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::FirstIndexOffset::Data, true);
 
 namespace tint::transform {
 namespace {

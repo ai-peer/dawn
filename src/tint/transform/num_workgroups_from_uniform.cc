@@ -24,8 +24,8 @@
 #include "src/tint/transform/canonicalize_entry_point_io.h"
 #include "src/tint/utils/hash.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::NumWorkgroupsFromUniform);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::NumWorkgroupsFromUniform::Config);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::NumWorkgroupsFromUniform, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::NumWorkgroupsFromUniform::Config, true);
 
 namespace tint::transform {
 namespace {

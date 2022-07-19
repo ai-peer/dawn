@@ -20,8 +20,8 @@
 #include "src/tint/sem/block_statement.h"
 #include "src/tint/sem/statement.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::Statement);
-TINT_INSTANTIATE_TYPEINFO(tint::sem::CompoundStatement);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::Statement, false);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::CompoundStatement, false);
 
 namespace tint::sem {
 

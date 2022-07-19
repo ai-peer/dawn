@@ -23,27 +23,27 @@
 #include "src/tint/utils/map.h"
 #include "src/tint/utils/unique_allocator.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Type);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Void);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Bool);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::U32);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::F32);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::I32);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Pointer);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Reference);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Vector);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Matrix);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Array);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Sampler);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Texture);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::DepthTexture);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::DepthMultisampledTexture);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::MultisampledTexture);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::SampledTexture);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::StorageTexture);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Named);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Alias);
-TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Struct);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Type, false);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Void, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Bool, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::U32, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::F32, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::I32, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Pointer, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Reference, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Vector, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Matrix, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Array, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Sampler, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Texture, false);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::DepthTexture, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::DepthMultisampledTexture, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::MultisampledTexture, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::SampledTexture, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::StorageTexture, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Named, false);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Alias, true);
+TINT_INSTANTIATE_TYPEINFO(tint::reader::spirv::Struct, true);
 
 namespace tint::reader::spirv {
 

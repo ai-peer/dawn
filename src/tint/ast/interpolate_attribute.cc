@@ -18,7 +18,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::InterpolateAttribute);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::InterpolateAttribute, true);
 
 namespace tint::ast {
 

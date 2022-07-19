@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::F16);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::F16, true);
 
 namespace tint::ast {
 

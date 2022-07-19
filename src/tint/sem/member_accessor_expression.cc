@@ -17,9 +17,9 @@
 
 #include <utility>
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::MemberAccessorExpression);
-TINT_INSTANTIATE_TYPEINFO(tint::sem::StructMemberAccess);
-TINT_INSTANTIATE_TYPEINFO(tint::sem::Swizzle);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::MemberAccessorExpression, false);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::StructMemberAccess, true);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::Swizzle, true);
 
 namespace tint::sem {
 

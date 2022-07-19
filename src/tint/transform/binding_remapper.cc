@@ -23,8 +23,8 @@
 #include "src/tint/sem/function.h"
 #include "src/tint/sem/variable.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::BindingRemapper);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::BindingRemapper::Remappings);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::BindingRemapper, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::BindingRemapper::Remappings, true);
 
 namespace tint::transform {
 

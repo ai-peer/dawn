@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::Sampler);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Sampler, true);
 
 namespace tint::ast {
 

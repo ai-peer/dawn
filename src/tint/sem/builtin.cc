@@ -21,7 +21,7 @@
 
 #include "src/tint/utils/to_const_ptr_vec.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::Builtin);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::Builtin, true);
 
 namespace tint::sem {
 

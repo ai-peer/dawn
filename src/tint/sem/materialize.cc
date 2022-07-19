@@ -14,7 +14,7 @@
 
 #include "src/tint/sem/materialize.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::Materialize);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::Materialize, true);
 
 namespace tint::sem {
 Materialize::Materialize(const Expression* expr,

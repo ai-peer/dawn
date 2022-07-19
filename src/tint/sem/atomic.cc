@@ -18,7 +18,7 @@
 #include "src/tint/sem/reference.h"
 #include "src/tint/utils/hash.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::Atomic);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::Atomic, true);
 
 namespace tint::sem {
 

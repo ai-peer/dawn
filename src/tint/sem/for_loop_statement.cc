@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::ForLoopStatement);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::ForLoopStatement, true);
 
 namespace tint::sem {
 

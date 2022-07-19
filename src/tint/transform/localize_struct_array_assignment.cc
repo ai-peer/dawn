@@ -28,7 +28,7 @@
 #include "src/tint/transform/simplify_pointers.h"
 #include "src/tint/utils/scoped_assignment.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::LocalizeStructArrayAssignment);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::LocalizeStructArrayAssignment, true);
 
 namespace tint::transform {
 

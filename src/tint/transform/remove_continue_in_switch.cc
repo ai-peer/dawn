@@ -29,7 +29,7 @@
 #include "src/tint/transform/utils/get_insertion_point.h"
 #include "src/tint/utils/map.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::RemoveContinueInSwitch);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::RemoveContinueInSwitch, true);
 
 namespace tint::transform {
 namespace {

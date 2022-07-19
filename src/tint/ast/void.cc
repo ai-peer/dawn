@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::Void);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Void, true);
 
 namespace tint::ast {
 

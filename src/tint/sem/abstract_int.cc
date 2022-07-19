@@ -17,7 +17,7 @@
 #include "src/tint/program_builder.h"
 #include "src/tint/utils/hash.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::AbstractInt);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::AbstractInt, true);
 
 namespace tint::sem {
 

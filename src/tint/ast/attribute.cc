@@ -14,7 +14,7 @@
 
 #include "src/tint/ast/attribute.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::Attribute);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Attribute, false);
 
 namespace tint::ast {
 

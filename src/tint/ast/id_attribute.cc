@@ -18,7 +18,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::IdAttribute);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::IdAttribute, true);
 
 namespace tint::ast {
 

@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::Pointer);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Pointer, true);
 
 namespace tint::ast {
 

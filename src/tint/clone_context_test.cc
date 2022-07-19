@@ -923,10 +923,10 @@ TEST_F(CloneContextTest, ProgramIDs_Clone_ObjectNotOwnedByDst) {
 
 }  // namespace
 
-TINT_INSTANTIATE_TYPEINFO(Node);
-TINT_INSTANTIATE_TYPEINFO(Replaceable);
-TINT_INSTANTIATE_TYPEINFO(Replacement);
-TINT_INSTANTIATE_TYPEINFO(NotANode);
-TINT_INSTANTIATE_TYPEINFO(ProgramNode);
+TINT_INSTANTIATE_TYPEINFO(Node, false);
+TINT_INSTANTIATE_TYPEINFO(Replaceable, false);
+TINT_INSTANTIATE_TYPEINFO(Replacement, true);
+TINT_INSTANTIATE_TYPEINFO(NotANode, true);
+TINT_INSTANTIATE_TYPEINFO(ProgramNode, true);
 
 }  // namespace tint

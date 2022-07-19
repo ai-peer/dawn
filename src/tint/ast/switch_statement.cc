@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::SwitchStatement);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::SwitchStatement, true);
 
 namespace tint::ast {
 

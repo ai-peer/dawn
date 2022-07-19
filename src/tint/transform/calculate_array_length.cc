@@ -31,8 +31,8 @@
 #include "src/tint/utils/hash.h"
 #include "src/tint/utils/map.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::CalculateArrayLength);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::CalculateArrayLength::BufferSizeIntrinsic);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::CalculateArrayLength, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::CalculateArrayLength::BufferSizeIntrinsic, true);
 
 using namespace tint::number_suffixes;  // NOLINT
 

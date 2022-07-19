@@ -14,7 +14,7 @@
 
 #include "src/tint/sem/node.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::Node);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::Node, false);
 
 namespace tint::sem {
 

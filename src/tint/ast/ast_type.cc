@@ -26,7 +26,7 @@
 #include "src/tint/ast/vector.h"
 #include "src/tint/symbol_table.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::Type);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Type, false);
 
 namespace tint::ast {
 

@@ -28,7 +28,7 @@
 #include "src/tint/utils/map.h"
 #include "src/tint/utils/scoped_assignment.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::RemoveUnreachableStatements);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::RemoveUnreachableStatements, true);
 
 namespace tint::transform {
 

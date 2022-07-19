@@ -17,7 +17,7 @@
 #include <utility>
 #include <vector>
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::Call);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::Call, true);
 
 namespace tint::sem {
 

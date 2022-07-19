@@ -23,9 +23,9 @@
 #include "src/tint/sem/member_accessor_expression.h"
 #include "src/tint/text/unicode.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::Renamer);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::Renamer::Data);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::Renamer::Config);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::Renamer, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::Renamer::Data, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::Renamer::Config, true);
 
 namespace tint::transform {
 

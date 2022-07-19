@@ -26,7 +26,7 @@
 #include "src/tint/ast/switch_statement.h"
 #include "src/tint/ast/variable_decl_statement.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::Statement);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Statement, false);
 
 namespace tint::ast {
 

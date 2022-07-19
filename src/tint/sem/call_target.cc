@@ -17,7 +17,7 @@
 #include "src/tint/symbol_table.h"
 #include "src/tint/utils/hash.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::CallTarget);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::CallTarget, false);
 
 namespace tint::sem {
 

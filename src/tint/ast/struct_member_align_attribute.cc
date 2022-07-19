@@ -19,7 +19,7 @@
 #include "src/tint/clone_context.h"
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::StructMemberAlignAttribute);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::StructMemberAlignAttribute, true);
 
 namespace tint::ast {
 

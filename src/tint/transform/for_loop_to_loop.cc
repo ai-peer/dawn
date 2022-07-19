@@ -17,7 +17,7 @@
 #include "src/tint/ast/break_statement.h"
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::ForLoopToLoop);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::ForLoopToLoop, true);
 
 namespace tint::transform {
 ForLoopToLoop::ForLoopToLoop() = default;

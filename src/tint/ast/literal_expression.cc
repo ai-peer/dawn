@@ -14,7 +14,7 @@
 
 #include "src/tint/ast/literal_expression.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::LiteralExpression);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::LiteralExpression, false);
 
 namespace tint::ast {
 

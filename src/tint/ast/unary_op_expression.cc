@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::UnaryOpExpression);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::UnaryOpExpression, true);
 
 namespace tint::ast {
 

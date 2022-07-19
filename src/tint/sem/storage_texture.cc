@@ -17,7 +17,7 @@
 #include "src/tint/program_builder.h"
 #include "src/tint/utils/hash.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::StorageTexture);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::StorageTexture, true);
 
 namespace tint::sem {
 

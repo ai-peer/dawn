@@ -25,8 +25,8 @@
 #include "src/tint/utils/map.h"
 #include "src/tint/utils/math.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::VertexPulling);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::VertexPulling::Config);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::VertexPulling, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::VertexPulling::Config, true);
 
 using namespace tint::number_suffixes;  // NOLINT
 

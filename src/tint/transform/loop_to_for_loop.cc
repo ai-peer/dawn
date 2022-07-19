@@ -23,7 +23,7 @@
 #include "src/tint/sem/variable.h"
 #include "src/tint/utils/scoped_assignment.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::LoopToForLoop);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::LoopToForLoop, true);
 
 namespace tint::transform {
 namespace {

@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::ExternalTexture);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::ExternalTexture, true);
 
 namespace tint::ast {
 

@@ -25,7 +25,7 @@
 #include "src/tint/sem/statement.h"
 #include "src/tint/transform/utils/hoist_to_decl_before.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::ExpandCompoundAssignment);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::ExpandCompoundAssignment, true);
 
 using namespace tint::number_suffixes;  // NOLINT
 

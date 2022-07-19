@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::LoopStatement);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::LoopStatement, true);
 
 namespace tint::ast {
 

@@ -16,8 +16,8 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::CaseStatement);
-TINT_INSTANTIATE_TYPEINFO(tint::sem::SwitchStatement);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::CaseStatement, true);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::SwitchStatement, true);
 
 namespace tint::sem {
 

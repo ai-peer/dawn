@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::IfStatement);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::IfStatement, true);
 
 namespace tint::sem {
 

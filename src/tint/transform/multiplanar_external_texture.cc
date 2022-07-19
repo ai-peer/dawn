@@ -23,8 +23,8 @@
 #include "src/tint/sem/function.h"
 #include "src/tint/sem/variable.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::MultiplanarExternalTexture);
-TINT_INSTANTIATE_TYPEINFO(tint::transform::MultiplanarExternalTexture::NewBindingPoints);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::MultiplanarExternalTexture, true);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::MultiplanarExternalTexture::NewBindingPoints, true);
 
 using namespace tint::number_suffixes;  // NOLINT
 

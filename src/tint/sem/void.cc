@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::Void);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::Void, true);
 
 namespace tint::sem {
 

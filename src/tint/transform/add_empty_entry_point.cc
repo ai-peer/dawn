@@ -18,7 +18,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::transform::AddEmptyEntryPoint);
+TINT_INSTANTIATE_TYPEINFO(tint::transform::AddEmptyEntryPoint, true);
 
 using namespace tint::number_suffixes;  // NOLINT
 

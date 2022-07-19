@@ -1287,5 +1287,5 @@ TEST_F(ResolverTest, Expr_Constructor_Cast_Pointer) {
 }  // namespace
 }  // namespace tint::resolver
 
-TINT_INSTANTIATE_TYPEINFO(tint::resolver::FakeStmt);
-TINT_INSTANTIATE_TYPEINFO(tint::resolver::FakeExpr);
+TINT_INSTANTIATE_TYPEINFO(tint::resolver::FakeStmt, true);
+TINT_INSTANTIATE_TYPEINFO(tint::resolver::FakeExpr, true);

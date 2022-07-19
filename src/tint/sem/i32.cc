@@ -16,7 +16,7 @@
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::I32);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::I32, true);
 
 namespace tint::sem {
 
