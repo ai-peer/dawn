@@ -1104,6 +1104,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e25ae25b_c485ab58",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T19:13:48Z",
+      "side": 1,
+      "message": "I was wondering if we could base it on th constness of the `VectorRef` itself.\n`const VectorRef\u003cT\u003e` vs `VectorRef\u003cT\u003e`. We could maybe assert that \u0027this\u0027 is a pointer to non-const if the input `Vector\u003cT\u003e` is non-const.",
+      "parentUuid": "47458ea7_611bde3e",
+      "range": {
+        "startLine": 515,
+        "startChar": 17,
+        "endLine": 515,
+        "endChar": 35
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4556841_4c61f6b8",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 9
