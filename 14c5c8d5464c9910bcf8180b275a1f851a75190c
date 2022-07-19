@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e25baf2_e4eb20dc",
+        "filename": "src/tint/utils/bitset.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-19T16:32:00Z",
+      "side": 1,
+      "message": "Is `vec_.Back` the right thing to do here? If new_size is 2 size_t\u0027s in size won\u0027t this do the wrong thing?",
+      "revId": "14c5c8d5464c9910bcf8180b275a1f851a75190c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
