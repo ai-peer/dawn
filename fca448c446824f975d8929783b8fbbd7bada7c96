@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1c1497b_98759220",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-19T15:34:23Z",
+      "side": 1,
+      "message": "Late comment, sorry, I forgot to look at this again.\nThis doesn\u0027t really gain anything by being templated with `TypesTuple` any more - could we not just have separate\n\n`aiu32Dispatch()`, `afi32f16Dispatch()` \n\nfunctions? Can be done as a followup.",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 1
+      },
+      "revId": "fca448c446824f975d8929783b8fbbd7bada7c96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
