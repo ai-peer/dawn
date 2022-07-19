@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b4f0f42_ba0008dd",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f2655a2_8588a89a",
+      "range": {
+        "startLine": 125,
+        "startChar": 15,
+        "endLine": 125,
+        "endChar": 28
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c23557b_ca5d250a",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-19T16:45:08Z",
       "side": 1,
       "message": "As above, not necessary. I won\u0027t mark all of these below.",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 130,
+        "endChar": 22
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "704c63d4_697a66a3",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c23557b_ca5d250a",
       "range": {
         "startLine": 130,
         "startChar": 8,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80d653d1_b7503692",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "You sure? Doesn\u0027t that do an assignment? The destination hasn\u0027t been constructed yet.",
+      "parentUuid": "be02b4c3_542bbdac",
+      "range": {
+        "startLine": 144,
+        "startChar": 8,
+        "endLine": 146,
+        "endChar": 9
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "991c4220_088be7f0",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 9
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4d14ad3_abda1bcb",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "Again - isn\u0027t that an assignment? This is copy-constructing.",
+      "parentUuid": "991c4220_088be7f0",
+      "range": {
+        "startLine": 155,
+        "startChar": 8,
+        "endLine": 157,
+        "endChar": 9
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d5b31392_c0065b46",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 9
@@ -106,6 +202,24 @@
       "writtenOn": "2022-07-19T16:17:04Z",
       "side": 1,
       "message": "Can you put what this is nolintng? `// NOLINT(foo/bar)`",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c03ed6d5_4c99653c",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5b31392_c0065b46",
       "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -135,6 +249,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "31796a17_f7000d5d",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "Going via the `VectorRef` figures out whether the move can be done. Seemed nicer to reuse that logic than duplicating it.",
+      "parentUuid": "771b4eb0_c148897e",
+      "range": {
+        "startLine": 194,
+        "startChar": 19,
+        "endLine": 194,
+        "endChar": 31
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ae6960d_08f6641a",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 9
@@ -146,6 +284,24 @@
       "writtenOn": "2022-07-19T16:45:08Z",
       "side": 1,
       "message": "Missing the usual `if (this !\u003d \u0026other) ...`",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0fc996c_5f11e08b",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ae6960d_08f6641a",
       "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -163,6 +319,24 @@
       "writtenOn": "2022-07-19T16:45:08Z",
       "side": 1,
       "message": "As above, missing `if (this !\u003d \u0026other)...`",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42c67fa8_1de402dc",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d428501d_226aa900",
       "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -227,6 +401,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e1f9efdd_12a9d31e",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "It\u0027s a vector, I don\u0027t think anyone would expect it to push any other end.\nAlso overloaded for the move.",
+      "parentUuid": "a6098c13_4f1bda7b",
+      "range": {
+        "startLine": 299,
+        "startChar": 9,
+        "endLine": 299,
+        "endChar": 13
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a659f5a_da8b5257",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 9
@@ -238,6 +436,24 @@
       "writtenOn": "2022-07-19T16:45:08Z",
       "side": 1,
       "message": "No `EmplaceBack`? Very useful for in-place construction with forwarded ctor args.",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b2d362a_bd982c55",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "No, I overloaded `Push()` to take a `T\u0026\u0026`",
+      "parentUuid": "6a659f5a_da8b5257",
       "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -267,6 +483,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7bf13e09_c3f05c81",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "I made the conscious decision to break from the `std::vector` interface. Methods are capitalized, `VectorRef` is a non-std pattern, `size()` is `Length()`, etc.\nIf we want a proper `std` interface for... reasons, we can implement a wrapper.",
+      "parentUuid": "858334dd_a453bbe1",
+      "range": {
+        "startLine": 320,
+        "startChar": 9,
+        "endLine": 320,
+        "endChar": 16
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d177139_781ec867",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 9
@@ -278,6 +518,30 @@
       "writtenOn": "2022-07-19T16:45:08Z",
       "side": 1,
       "message": "I would remove this here, and only put this check in the call sites where it can happen.",
+      "range": {
+        "startLine": 375,
+        "startChar": 8,
+        "endLine": 377,
+        "endChar": 9
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d35203b_b10cc80d",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d177139_781ec867",
       "range": {
         "startLine": 375,
         "startChar": 8,
@@ -336,6 +600,24 @@
       "side": 1,
       "message": "Slice is just Plain Old Data (a pointer and 2x `size_t`). A `std::move` wouldn\u0027t do anything more than an assignment.",
       "parentUuid": "87a929fb_869de2a2",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbe631e5_a7136747",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "Great catch. Yes, we were leaking with repeat moves. Fixed. Added tests.",
+      "parentUuid": "ea361e01_a398768a",
       "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -418,6 +700,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c722c97_f12a296e",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "I don\u0027t think that logic works. Consider:\n\n```\nutils::Vector\u003cint, 1\u003e vec_a{1,2,3};  // This spilled to a heap allocation\nutils::Vector\u003cint, 3\u003e vec_b(std::move(vec_a));  // Slice moved.\n```\n\n`vec_b.impl_.cap` is `3`, but it isn\u0027t using its own small array, so it could be moved.",
+      "parentUuid": "6585b573_16359150",
+      "range": {
+        "startLine": 449,
+        "startChar": 31,
+        "endLine": 449,
+        "endChar": 71
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c8f3681_258cc563",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 9
@@ -451,6 +757,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5dbbd90_3785e737",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "Removed `Reset()`",
+      "parentUuid": "c057ba6f_26c52150",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "189a4824_3dee96f1",
@@ -474,6 +798,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "925153c1_ec0fcb97",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "189a4824_3dee96f1",
+      "range": {
+        "startLine": 465,
+        "startChar": 25,
+        "endLine": 465,
+        "endChar": 45
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87dcf057_d894d4f9",
@@ -487,6 +835,30 @@
       "writtenOn": "2022-07-19T16:45:08Z",
       "side": 1,
       "message": "Same: `Bitcast\u003cT*\u003e`?",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 472,
+        "endChar": 52
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efc136da_f5eca8b0",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87dcf057_d894d4f9",
       "range": {
         "startLine": 472,
         "startChar": 0,
@@ -522,6 +894,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22622ff3_dc907a8e",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "Yeah, I had realised this earlier, then seemingly forgot. Any better suggestions than a `ConstVectorRef` or `MutableVectorRef` ? It\u0027s a shame you can\u0027t control which constructors are available based on the `const`-ness of the declaration.",
+      "parentUuid": "cd58296d_17bf0df6",
+      "range": {
+        "startLine": 515,
+        "startChar": 17,
+        "endLine": 515,
+        "endChar": 35
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4556841_4c61f6b8",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 9
@@ -533,6 +929,30 @@
       "writtenOn": "2022-07-19T17:02:16Z",
       "side": 1,
       "message": "Is this useful? Should VectorRef be a move-only type? I\u0027m afraid having this means we may accidentally copy because we forgot to move a ref.\n\nIf I wanted a argument type for a non-copyable view of a Vector, I\u0027d just use a const-ref to one.",
+      "range": {
+        "startLine": 525,
+        "startChar": 4,
+        "endLine": 525,
+        "endChar": 37
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00d3e3d4_a2f20edd",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "I started off with this being move-only, but found some places in the resolver that passed the same thing in multiple places, which is unfortunate.",
+      "parentUuid": "f4556841_4c61f6b8",
       "range": {
         "startLine": 525,
         "startChar": 4,
@@ -566,6 +986,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3e225b2_eac51fb8",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "Yeah... WTF - why does this compile? 😊\nDone",
+      "parentUuid": "42a86140_ad64b4cf",
+      "range": {
+        "startLine": 593,
+        "startChar": 18,
+        "endLine": 593,
+        "endChar": 27
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5eebb21f_f3ee6bc7",
@@ -579,6 +1023,30 @@
       "writtenOn": "2022-07-19T17:02:16Z",
       "side": 1,
       "message": "Would name this `ToStdVector`.",
+      "range": {
+        "startLine": 601,
+        "startChar": 15,
+        "endLine": 601,
+        "endChar": 23
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65318350_6473a7b8",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-19T18:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5eebb21f_f3ee6bc7",
       "range": {
         "startLine": 601,
         "startChar": 15,
