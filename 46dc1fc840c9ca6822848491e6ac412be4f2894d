@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c5fa297_b88f68b4",
+        "filename": "src/dawn/native/BuddyMemoryAllocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-19T12:37:01Z",
+      "side": 1,
+      "message": "I don\u0027t think this should be in this file because it\u0027s very D3D12 specific, and all the backend has to do is request an allocationSize that\u0027s bigger. Unless I\u0027m missing something?\n\nIt could be handled entirely in ResourceAllocatorManagerD3D12.cpp",
+      "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b4defb02_6ace454b",
         "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 4
@@ -37,6 +54,81 @@
         "endLine": 671,
         "endChar": 27
       },
+      "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36eb5479_545313e0",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-19T12:37:01Z",
+      "side": 1,
+      "message": "Please do file a bug, the current schema for gpu_info.json is very limited to what we needed in the first version, but we could extend it for sure.",
+      "parentUuid": "b4defb02_6ace454b",
+      "range": {
+        "startLine": 671,
+        "startChar": 18,
+        "endLine": 671,
+        "endChar": 27
+      },
+      "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1df88668_f1f41344",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-19T12:37:01Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeb1b91c_c6168355",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-19T12:37:01Z",
+      "side": 1,
+      "message": "nit: the amount of extra memory required could be passed directly here so kExtraMemoryToMitigateTextureCorruption and the logic to decide whether to add it are all in [1].",
+      "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00f5d8d7_0c1ffc6e",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-19T12:37:01Z",
+      "side": 1,
+      "message": "I think we might also need to make the resource resident immediately.",
       "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
