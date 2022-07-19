@@ -50,6 +50,24 @@
       "message": "Q: what\u0027s the runtime of these tests?",
       "revId": "d28e64d940f63ce5403d46cc1d31dab95a3cc50f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93490b5e_2b6a4511",
+        "filename": "src/dawn/tests/end2end/DepthStencilLoadOpTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-07-19T13:05:34Z",
+      "side": 1,
+      "message": "Oh I think we only need to test D3D12Backend() without any extra toggles. I\u0027ve made this change, and now to run all the newly-added tests on my dev machine the running time is about 4 seconds (previously 8 seconds). PTAL, thanks!",
+      "parentUuid": "28a662fa_ac0255b1",
+      "revId": "d28e64d940f63ce5403d46cc1d31dab95a3cc50f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
