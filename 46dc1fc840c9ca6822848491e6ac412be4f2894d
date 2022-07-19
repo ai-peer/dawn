@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b242d03_707884b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-19T06:19:53Z",
+      "side": 1,
+      "message": "It still has a couple questions, but we can discuss via code. PTAL. Thanks!\n\nMachines on Dawn/Chromium bots will not run into the Toggle and needExtraMemory code snippet, they are not new enough. But I tested the code on my local machine which falls into Intel Gen12LP category. ",
+      "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4defb02_6ace454b",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-19T06:19:53Z",
+      "side": 1,
+      "message": "Intel Gen 12 LP (or Intel Gen Xe LP) devices are a sub-category of Intel Gen Xe, in which LP means \"low performance\" (for example, integrate GPU). See https://en.wikipedia.org/wiki/Intel_Xe. So, I need to add some particular deviceId into gpu_info for this sub-category, but I cannot add it because it adds \"mask\" and the lower two bytes in deviceId are ignored for Intel: https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn/gpu_info.json#79.\n\nShall I file a bug for this? I think it is better to support {DeviceMask, Architecture} pair and we can support multiple such pairs for every GPU vendor. It will be much more flexible to designate particular categories/aggregates and fit the requirement above. Right now only one single {DeviceMask, Architecture} can be supported for each vendor.",
+      "range": {
+        "startLine": 671,
+        "startChar": 18,
+        "endLine": 671,
+        "endChar": 27
+      },
+      "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
