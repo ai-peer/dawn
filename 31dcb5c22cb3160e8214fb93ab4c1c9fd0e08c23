@@ -405,6 +405,98 @@
       },
       "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd58296d_17bf0df6",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T17:02:16Z",
+      "side": 1,
+      "message": "This means we could make a `VectorRef` to a const `Vector` and modify it\u0027s values via the non-const members like `Front`.",
+      "range": {
+        "startLine": 515,
+        "startChar": 17,
+        "endLine": 515,
+        "endChar": 35
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4556841_4c61f6b8",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T17:02:16Z",
+      "side": 1,
+      "message": "Is this useful? Should VectorRef be a move-only type? I\u0027m afraid having this means we may accidentally copy because we forgot to move a ref.\n\nIf I wanted a argument type for a non-copyable view of a Vector, I\u0027d just use a const-ref to one.",
+      "range": {
+        "startLine": 525,
+        "startChar": 4,
+        "endLine": 525,
+        "endChar": 37
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42a86140_ad64b4cf",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T17:02:16Z",
+      "side": 1,
+      "message": "Assigning nullptr to a ref?",
+      "range": {
+        "startLine": 593,
+        "startChar": 18,
+        "endLine": 593,
+        "endChar": 27
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eebb21f_f3ee6bc7",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T17:02:16Z",
+      "side": 1,
+      "message": "Would name this `ToStdVector`.",
+      "range": {
+        "startLine": 601,
+        "startChar": 15,
+        "endLine": 601,
+        "endChar": 23
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
