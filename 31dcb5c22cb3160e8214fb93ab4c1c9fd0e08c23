@@ -3,6 +3,98 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f2655a2_8588a89a",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T16:45:08Z",
+      "side": 1,
+      "message": "Calls to this should not be necessary for constructors. Instead, the `impl_` should already be reset by construction.",
+      "range": {
+        "startLine": 125,
+        "startChar": 15,
+        "endLine": 125,
+        "endChar": 28
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c23557b_ca5d250a",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T16:45:08Z",
+      "side": 1,
+      "message": "As above, not necessary. I won\u0027t mark all of these below.",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 130,
+        "endChar": 22
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be02b4c3_542bbdac",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T16:45:08Z",
+      "side": 1,
+      "message": "Can use `std::fill` or `std::fill_n` instead.",
+      "range": {
+        "startLine": 144,
+        "startChar": 8,
+        "endLine": 146,
+        "endChar": 9
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "991c4220_088be7f0",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T16:45:08Z",
+      "side": 1,
+      "message": "If possible, use `std::copy` or `std::copy_n` instead, as it will be more efficient (it can memcpy/memmove for trivially copyable types): https://en.cppreference.com/w/cpp/algorithm/copy",
+      "range": {
+        "startLine": 155,
+        "startChar": 8,
+        "endLine": 157,
+        "endChar": 9
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d5b31392_c0065b46",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 9
@@ -14,6 +106,63 @@
       "writtenOn": "2022-07-19T16:17:04Z",
       "side": 1,
       "message": "Can you put what this is nolintng? `// NOLINT(foo/bar)`",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "771b4eb0_c148897e",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T16:45:08Z",
+      "side": 1,
+      "message": "Is this construction necessary? Can\u0027t we pass in `other` directly?",
+      "range": {
+        "startLine": 194,
+        "startChar": 19,
+        "endLine": 194,
+        "endChar": 31
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ae6960d_08f6641a",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T16:45:08Z",
+      "side": 1,
+      "message": "Missing the usual `if (this !\u003d \u0026other) ...`",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d428501d_226aa900",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T16:45:08Z",
+      "side": 1,
+      "message": "As above, missing `if (this !\u003d \u0026other)...`",
       "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -37,6 +186,92 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a6098c13_4f1bda7b",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T16:45:08Z",
+      "side": 1,
+      "message": "For consistency with `std::vector`, I would name it `PushBack` and `PopBack` below.",
+      "range": {
+        "startLine": 299,
+        "startChar": 9,
+        "endLine": 299,
+        "endChar": 13
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a659f5a_da8b5257",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T16:45:08Z",
+      "side": 1,
+      "message": "No `EmplaceBack`? Very useful for in-place construction with forwarded ctor args.",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "858334dd_a453bbe1",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T16:45:08Z",
+      "side": 1,
+      "message": "Although this is a better name, I would still opt for `Empty` for consistency with `std::vector`.",
+      "range": {
+        "startLine": 320,
+        "startChar": 9,
+        "endLine": 320,
+        "endChar": 16
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d177139_781ec867",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T16:45:08Z",
+      "side": 1,
+      "message": "I would remove this here, and only put this check in the call sites where it can happen.",
+      "range": {
+        "startLine": 375,
+        "startChar": 8,
+        "endLine": 377,
+        "endChar": 9
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "87a929fb_869de2a2",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 9
@@ -48,6 +283,23 @@
       "writtenOn": "2022-07-19T16:17:04Z",
       "side": 1,
       "message": "Does this need a `std::move` or is there no copy assign operator?",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea361e01_a398768a",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T16:45:08Z",
+      "side": 1,
+      "message": "`MoveOrCopy` is called from assignment operators, so don\u0027t we have to make sure delete this instance\u0027s allocated memory?",
       "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +323,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6585b573_16359150",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T16:45:08Z",
+      "side": 1,
+      "message": "It might be faster to check if `slice.cap \u003d\u003d N` instead of doing a pointer compare.  That\u0027s what I\u0027ve seen out in the while (or some variation).",
+      "range": {
+        "startLine": 449,
+        "startChar": 31,
+        "endLine": 449,
+        "endChar": 71
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c8f3681_258cc563",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 9
@@ -82,6 +357,52 @@
       "writtenOn": "2022-07-19T16:17:04Z",
       "side": 1,
       "message": "If you have an `ImplWithoutSmallArray` and then `Allocate` and then `Reset` don\u0027t use leak `data`?",
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "189a4824_3dee96f1",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T16:45:08Z",
+      "side": 1,
+      "message": "`Bitcast\u003cT*\u003e`?",
+      "range": {
+        "startLine": 465,
+        "startChar": 25,
+        "endLine": 465,
+        "endChar": 45
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87dcf057_d894d4f9",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T16:45:08Z",
+      "side": 1,
+      "message": "Same: `Bitcast\u003cT*\u003e`?",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 472,
+        "endChar": 52
+      },
       "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
