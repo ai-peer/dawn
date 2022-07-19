@@ -27,6 +27,7 @@ enum class StorageClass {
     kOutput,
     kUniform,
     kWorkgroup,
+    kPushConstant,
     kHandle,
     kStorage,
     kPrivate,
@@ -37,7 +38,8 @@ enum class StorageClass {
 /// @param sc the StorageClass
 /// @see https://gpuweb.github.io/gpuweb/wgsl.html#host-shareable
 inline bool IsHostShareable(StorageClass sc) {
-    return sc == ast::StorageClass::kUniform || sc == ast::StorageClass::kStorage;
+    return sc == ast::StorageClass::kUniform || sc == ast::StorageClass::kStorage ||
+           sc == ast::StorageClass::kPushConstant;
 }
 
 /// @param sc the StorageClass

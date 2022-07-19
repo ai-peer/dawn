@@ -1,0 +1,11 @@
+SKIP: FAILED
+
+../../src/tint/transform/module_scope_var_to_entry_point_param.cc:223 internal compiler error: unhandled module-scope storage class (push_constant)
+
+
+********************************************************************
+*  The tint shader compiler has encountered an unexpected error.   *
+*                                                                  *
+*  Please help us fix this issue by submitting a bug report at     *
+*  crbug.com/tint with the source program that triggered the bug.  *
+********************************************************************

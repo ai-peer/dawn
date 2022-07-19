@@ -33,6 +33,8 @@ enum class Extension {
     kChromiumExperimentalDP4a,
     /// A Chromium-specific extension for disabling uniformity analysis.
     kChromiumDisableUniformityAnalysis,
+    /// A Chromium-specific extension for testing push constants.
+    kChromiumExperimentalPushConstant,
 
     /// Reserved for representing "No extension required" or "Not a valid extension".
     kNone,

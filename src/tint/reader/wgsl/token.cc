@@ -269,6 +269,8 @@ std::string_view Token::TypeToName(Type type) {
             return "while";
         case Token::Type::kWorkgroup:
             return "workgroup";
+        case Token::Type::kPushConstant:
+            return "push_constant";
     }
 
     return "<unknown>";
