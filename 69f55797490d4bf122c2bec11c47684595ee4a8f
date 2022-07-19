@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69059989_f302448a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-07-19T20:51:44Z",
+      "side": 1,
+      "message": "over seems good, just a couple of comments",
+      "revId": "69f55797490d4bf122c2bec11c47684595ee4a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af2cc32c_a1f154d6",
@@ -14,6 +31,23 @@
       "writtenOn": "2022-07-19T20:48:33Z",
       "side": 1,
       "message": "Was this meant to be added?",
+      "revId": "69f55797490d4bf122c2bec11c47684595ee4a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0046d084_b8adf042",
+        "filename": "src/tint/fuzzers/tint_regex_fuzzer/wgsl_mutator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-07-19T20:51:44Z",
+      "side": 1,
+      "message": "It might be worth calling out the fact that this doesn\u0027t appear to be doing anything sophisticated like making sure the number of params are correct for the builtin, so is likely to generate invalid WGSL.",
       "revId": "69f55797490d4bf122c2bec11c47684595ee4a8f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
