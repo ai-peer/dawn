@@ -235,6 +235,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e1c9f560_183b8343",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-19T15:06:02Z",
+      "side": 1,
+      "message": "I\u0027m not using these aliases in TypeDispatch, so they\u0027re not just used once anymore.",
+      "parentUuid": "de0d25ea_ee4d4270",
+      "revId": "21a6dfc55815ebbca77a0cd4fd677e7cba0bc9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0255c0d_7edf07e2",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
