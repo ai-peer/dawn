@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16525513_3e577831",
+        "filename": "src/tint/castable.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-20T13:56:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c0a2798_368550a1",
+      "range": {
+        "startLine": 77,
+        "startChar": 8,
+        "endLine": 77,
+        "endChar": 13
+      },
+      "revId": "b497a7d0dc63c51a659ac2abc467537694ab85eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2616c1fc_21817dab",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-20T10:44:11Z",
       "side": 1,
       "message": "I believe this can all be done at compile-time, without adding this field.\n\nI tried putting together an example of a compile-time eval at:\nhttps://dawn-review.googlesource.com/c/dawn/+/96680\nNote, mine is missing all the additional `final` annotations you added. If you like my changes, feel free to pull into this one.",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 24
+      },
+      "revId": "b497a7d0dc63c51a659ac2abc467537694ab85eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d077ba65_10c5b74a",
+        "filename": "src/tint/castable.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-20T13:56:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2616c1fc_21817dab",
       "range": {
         "startLine": 105,
         "startChar": 0,
