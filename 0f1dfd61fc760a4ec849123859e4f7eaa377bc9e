@@ -51,6 +51,24 @@
       "parentUuid": "fa647d0a_ec6679d8",
       "revId": "0f1dfd61fc760a4ec849123859e4f7eaa377bc9e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aed3fed3_6d20bb2a",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-20T14:42:27Z",
+      "side": 1,
+      "message": "Parens are optional for `staticAssert` so this keeps it in line with that. And, if people _write_ it and we can easily support it, it\u0027s better to support it then make the user remove the `()`s (at least in my mind)",
+      "parentUuid": "42740cb2_af375728",
+      "revId": "0f1dfd61fc760a4ec849123859e4f7eaa377bc9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
