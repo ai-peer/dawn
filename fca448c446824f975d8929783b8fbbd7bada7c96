@@ -90,6 +90,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "624dbab0_33371893",
+        "filename": "src/tint/fuzzers/tint_ast_fuzzer/mutations/wrap_unary_operator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T14:21:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15de9544_1c17d312",
+      "revId": "fca448c446824f975d8929783b8fbbd7bada7c96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1c1497b_98759220",

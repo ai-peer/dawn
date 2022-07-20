@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "81ee59db_5ef6ea19",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T14:21:56Z",
+      "side": 1,
+      "message": "Nice! Didn\u0027t know about this. Thanks and done.",
+      "parentUuid": "50777908_d769187d",
+      "range": {
+        "startLine": 671,
+        "startChar": 22,
+        "endLine": 671,
+        "endChar": 40
+      },
+      "revId": "c8713914699cab6270a02adad946195e3c7485e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9a4eec59_90188158",
         "filename": "src/tint/resolver/const_eval_test.cc",
         "patchSetId": 7
@@ -54,6 +78,30 @@
       "writtenOn": "2022-07-20T12:32:31Z",
       "side": 1,
       "message": "FYI: I\u0027ve found this is done all over the place. I don\u0027t know why I didn\u0027t make `kHighest` and `kLowest` be the number type. We probably should fix this and clean up all this duplicate logic.",
+      "range": {
+        "startLine": 2933,
+        "startChar": 0,
+        "endLine": 2942,
+        "endChar": 0
+      },
+      "revId": "c8713914699cab6270a02adad946195e3c7485e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28793cff_9884b044",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2942,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T14:21:56Z",
+      "side": 1,
+      "message": "Yeah, good point. I\u0027ll follow up with this.",
+      "parentUuid": "9a4eec59_90188158",
       "range": {
         "startLine": 2933,
         "startChar": 0,
