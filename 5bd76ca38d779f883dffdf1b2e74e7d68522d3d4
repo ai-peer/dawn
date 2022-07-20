@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e70fcf3_cb120bef",
+        "filename": "src/dawn/native/serde/Source.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-20T19:03:20Z",
+      "side": 1,
+      "message": "update comment",
+      "range": {
+        "startLine": 25,
+        "startChar": 50,
+        "endLine": 26,
+        "endChar": 26
+      },
+      "revId": "5bd76ca38d779f883dffdf1b2e74e7d68522d3d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
