@@ -190,6 +190,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab104aa6_b20bdcde",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T19:40:32Z",
+      "side": 1,
+      "message": "Huh, I\u0027d be impressed if it does. Will need to look at the generated code. I know the standard library does specialize initialization/copy of these buffers for trivial types.",
+      "parentUuid": "4029bf5a_7755f0e6",
+      "range": {
+        "startLine": 144,
+        "startChar": 8,
+        "endLine": 146,
+        "endChar": 9
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "991c4220_088be7f0",
@@ -275,6 +299,30 @@
       "side": 1,
       "message": "See above - I\u0027d really be surprised if the compiler didn\u0027t handle this already.",
       "parentUuid": "66b1a336_53048fe9",
+      "range": {
+        "startLine": 155,
+        "startChar": 8,
+        "endLine": 157,
+        "endChar": 9
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "779ffd49_9e82473c",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T19:40:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32e6ae04_7a08836a",
       "range": {
         "startLine": 155,
         "startChar": 8,
@@ -615,6 +663,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a27e58b4_a96c6ad6",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T19:40:32Z",
+      "side": 1,
+      "message": "Discussed offline. We\u0027ll go with whatever you decide.",
+      "parentUuid": "ca27dccb_d7b1b29a",
+      "range": {
+        "startLine": 299,
+        "startChar": 9,
+        "endLine": 299,
+        "endChar": 13
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a659f5a_da8b5257",
@@ -771,6 +843,30 @@
       "side": 1,
       "message": "I\u0027ve seen countless bugs in my career where people use `empty()` when they meant `clear()`. Logic where they used `size()` when they meant `size() * sizeof(T)`.\n\nThe conscious decision was to break away from the standard conventions, for good reasons. I\u0027m of the opinion that we either we fully imitate `std::vector` \u0027s signature (`snake_case` casing and all), or we implement something that is not trying to associate itself with the STL. Given our coding style, no need or incentive for supporting `std::allocator`, and distaste for the naming of C++\u0027s methods, I\u0027d strongly prefer the latter.",
       "parentUuid": "3e4b5bf5_3382c213",
+      "range": {
+        "startLine": 320,
+        "startChar": 9,
+        "endLine": 320,
+        "endChar": 16
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9358b975_46a2a533",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T19:40:32Z",
+      "side": 1,
+      "message": "Discussed offline. As I mentioned, the calling `empty()` to mean `clear()` is mostly mitigated in C++17 with the `nodiscard` attribute.\n\nAnyway, we\u0027ll go with what you decide (keep the current interface).",
+      "parentUuid": "fe1bd841_52964006",
       "range": {
         "startLine": 320,
         "startChar": 9,
@@ -1373,6 +1469,30 @@
       "side": 1,
       "message": "I really don\u0027t want to expose the vector length as part of the header interface.",
       "parentUuid": "464873df_ba79d5e5",
+      "range": {
+        "startLine": 525,
+        "startChar": 4,
+        "endLine": 525,
+        "endChar": 37
+      },
+      "revId": "31dcb5c22cb3160e8214fb93ab4c1c9fd0e08c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a3ed861_c06f235b",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T19:40:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6cff7779_2ca38e7c",
       "range": {
         "startLine": 525,
         "startChar": 4,
