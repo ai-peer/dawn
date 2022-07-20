@@ -16,6 +16,24 @@
       "message": "I think this looks correct, please double check the comment on https://github.com/gpuweb/cts/pull/1640/files#r923942655 because I realized the CTS test is missing some coverage.",
       "revId": "783045b86589b53e80bca6d9398996b6d367e94e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15d4625f_7bfb91c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-07-20T03:23:18Z",
+      "side": 1,
+      "message": "Thanks for the heads up! I added some tests to ensure that the case where the loadOp is not \"clear\" don\u0027t validate the value.",
+      "parentUuid": "37303c16_69784bec",
+      "revId": "783045b86589b53e80bca6d9398996b6d367e94e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
