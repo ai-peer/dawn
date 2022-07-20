@@ -103,12 +103,12 @@ func (g *generator) eval(template string, args ...interface{}) (string, error) {
 	} else {
 		m := newMap()
 		if len(args)%2 != 0 {
-			return "", fmt.Errorf("Eval expects a single argument or list name-value pairs")
+			return "", fmt.Errorf("eval expects a single argument or list name-value pairs")
 		}
 		for i := 0; i < len(args); i += 2 {
 			name, ok := args[i].(string)
 			if !ok {
-				return "", fmt.Errorf("Eval argument %v is not a string", i)
+				return "", fmt.Errorf("eval argument %v is not a string", i)
 			}
 			m.Put(name, args[i+1])
 		}
