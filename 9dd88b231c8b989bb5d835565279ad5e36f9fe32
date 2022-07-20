@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e3cc7e5_389c646f",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-20T15:30:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2ec4a15_7154da64",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 13
+      },
+      "revId": "9dd88b231c8b989bb5d835565279ad5e36f9fe32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b994ae24_b38e4acc",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-07-20T13:56:57Z",
       "side": 1,
       "message": "Can be reduced to:\n\n```\n{{-   $overload     :\u003d . -}}\n{{-   $builtin_name :\u003d $overload.Intrinsic.Name -}}\n{{-   if or (eq \"dot4I8Packed\" $builtin_name) (eq \"dot4U8Packed\" $builtin_name)}}\nenable chromium_experimental_dp4a;\n{{    end -}}\n{{- end -}}\n```",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 11
+      },
+      "revId": "9dd88b231c8b989bb5d835565279ad5e36f9fe32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70a05232_72aab48a",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-20T15:30:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b994ae24_b38e4acc",
       "range": {
         "startLine": 176,
         "startChar": 0,
