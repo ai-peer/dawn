@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "919f8753_770ba264",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-20T01:17:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b80595fde58ecb2e1619fe4d3185f50fbb987c83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "057cfcd3_a8ffb659",
@@ -32,6 +49,24 @@
       "side": 1,
       "message": "I find using typeless types won\u0027t trigger this issue and I\u0027ve tested the TextureBinding usage in [1].",
       "parentUuid": "057cfcd3_a8ffb659",
+      "revId": "b80595fde58ecb2e1619fe4d3185f50fbb987c83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c1f5191_2b69e645",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-20T01:17:32Z",
+      "side": 1,
+      "message": "ah, thanks for the tests!",
+      "parentUuid": "2ba0ec84_4e3194f7",
       "revId": "b80595fde58ecb2e1619fe4d3185f50fbb987c83",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
