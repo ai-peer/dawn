@@ -22,6 +22,30 @@
       },
       "revId": "339e959f4ed23a9da61884d0d61353d932b79f49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48bf0403_19f177b0",
+        "filename": "src/tint/sem/type.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T17:58:22Z",
+      "side": 1,
+      "message": "Okay, we can rename in a future CL. Am going to land this.",
+      "parentUuid": "c9c24e84_272aa3db",
+      "range": {
+        "startLine": 139,
+        "startChar": 11,
+        "endLine": 139,
+        "endChar": 36
+      },
+      "revId": "339e959f4ed23a9da61884d0d61353d932b79f49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
