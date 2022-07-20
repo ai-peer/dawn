@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dcdf7f0_88d1fd29",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T20:48:58Z",
+      "side": 0,
+      "message": "This should have been `const Candidates\u0026` before. We\u0027re faster now with VectorRef because we\u0027re not copying anymore.",
+      "range": {
+        "startLine": 956,
+        "startChar": 41,
+        "endLine": 956,
+        "endChar": 51
+      },
+      "revId": "683dfebcf5f8224389f186880105086a9968eefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9408a4a1_137d8573",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T20:48:58Z",
+      "side": 0,
+      "message": "Another place you discovered should have been moved, right?",
+      "range": {
+        "startLine": 799,
+        "startChar": 68,
+        "endLine": 799,
+        "endChar": 78
+      },
+      "revId": "683dfebcf5f8224389f186880105086a9968eefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e7c1e1a_7bd03c57",
+        "filename": "src/tint/sem/type_constructor.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T20:48:58Z",
+      "side": 0,
+      "message": "Another place we were not using `move`.",
+      "range": {
+        "startLine": 22,
+        "startChar": 33,
+        "endLine": 22,
+        "endChar": 64
+      },
+      "revId": "683dfebcf5f8224389f186880105086a9968eefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

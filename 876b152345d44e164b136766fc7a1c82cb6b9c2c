@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83db5e26_8fd3cc2e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T20:48:58Z",
+      "side": 1,
+      "message": "I know you wrote this CL before you added `utils::ConstVectorRef`, but I think this and many other places should be using that type instead.",
+      "range": {
+        "startLine": 387,
+        "startChar": 0,
+        "endLine": 387,
+        "endChar": 48
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86ce5366_adc8a542",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T20:48:58Z",
+      "side": 1,
+      "message": "Another use-case for `ConstVectorRef`. I won\u0027t point them all out, but I think you should go through all of these and change them to `ConstVectorRef` where it makes sense.",
+      "range": {
+        "startLine": 471,
+        "startChar": 50,
+        "endLine": 471,
+        "endChar": 66
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60929fdb_f394c80d",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T20:48:58Z",
+      "side": 1,
+      "message": "Couldn\u0027t we still use `utils::Transform` here as before?",
+      "range": {
+        "startLine": 635,
+        "startChar": 8,
+        "endLine": 638,
+        "endChar": 9
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd98b7b2_a6abcfc7",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T20:48:58Z",
+      "side": 1,
+      "message": "Why do we need double braces here? Shouldn\u0027t the ctor for std::initializer_list be selected with `{lhs, rhs}`?",
+      "range": {
+        "startLine": 1230,
+        "startChar": 43,
+        "endLine": 1230,
+        "endChar": 45
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4c231cc_1126e9a8",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 1479,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T20:48:58Z",
+      "side": 1,
+      "message": "Should be able to `parameters.Emplace(ty, parameter.usage);` here",
+      "range": {
+        "startLine": 1479,
+        "startChar": 23,
+        "endLine": 1479,
+        "endChar": 79
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28264a7d_7793352b",
+        "filename": "src/tint/resolver/intrinsic_table_test.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T20:48:58Z",
+      "side": 1,
+      "message": "Is the reason for this function to reduce the noise of `utils::MakeVector(f32)` with `Args(f32)`?\n\nWith deduction guides, this would at least be a little shorter as `utils::Vector{f32}`, and maybe we wouldn\u0027t need wrappers like this so much.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 1
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4170c2b_e195ed91",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 2123,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T20:48:58Z",
+      "side": 1,
+      "message": "Another place where deduction guides would be nicer. Or, at least use MakeVector to not have to specify the size explicitly. I think we should only specify the size when it\u0027s something we\u0027d like to tweak for performance. Here, we want it to be equal to the number of args we initialize with.",
+      "range": {
+        "startLine": 2123,
+        "startChar": 8,
+        "endLine": 2123,
+        "endChar": 64
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee0a4392_a2e29185",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 2200,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T20:48:58Z",
+      "side": 1,
+      "message": "Same comment as above - deduction guides or MakeVector.",
+      "range": {
+        "startLine": 2200,
+        "startChar": 20,
+        "endLine": 2200,
+        "endChar": 72
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d2d2bc2_3b902b72",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T20:48:58Z",
+      "side": 1,
+      "message": "Why not use `ConstVectorRef\u003cconst sem::Expression*\u003e` here (and on the overload below)?",
+      "range": {
+        "startLine": 259,
+        "startChar": 42,
+        "endLine": 259,
+        "endChar": 83
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1c74663_aac18750",
+        "filename": "src/tint/sem/builtin.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T20:48:58Z",
+      "side": 1,
+      "message": "Can\u0027t we have this like the code before, and split up the setting of the owner on the input VectorRef in the ctor body, and have a utility to transform it to a const pointer vec for the base class? Combining the two into this `SetOwner` function is confusing.",
+      "range": {
+        "startLine": 109,
+        "startChar": 24,
+        "endLine": 109,
+        "endChar": 61
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d9a1153_eb8d6eeb",
+        "filename": "src/tint/sem/call.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T20:48:58Z",
+      "side": 1,
+      "message": "Thank goodness for auto return types!",
+      "range": {
+        "startLine": 54,
+        "startChar": 10,
+        "endLine": 54,
+        "endChar": 14
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5245bdbd_121c97ad",
+        "filename": "src/tint/sem/type_conversion.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T20:48:58Z",
+      "side": 1,
+      "message": "Deduction guide or MakeVector.",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 67
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
