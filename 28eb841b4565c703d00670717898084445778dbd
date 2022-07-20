@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "84beee74_644a4728",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-20T14:25:17Z",
+      "side": 1,
+      "message": "nit: s/is/if",
+      "revId": "28eb841b4565c703d00670717898084445778dbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3892d100_ff0faa98",
@@ -14,6 +31,23 @@
       "writtenOn": "2022-07-20T14:14:46Z",
       "side": 1,
       "message": "PTAL",
+      "revId": "28eb841b4565c703d00670717898084445778dbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75e34205_38a1d634",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-20T14:25:17Z",
+      "side": 1,
+      "message": "I haven\u0027t gone through this yet, but per the https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/tint/experimental_extensions.md documentation, should this include a document on what the extension does?\n\n(A description of what the contents of that PR would be, committed as a document in this Tint repository.)",
       "revId": "28eb841b4565c703d00670717898084445778dbd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -48,6 +82,24 @@
       "writtenOn": "2022-07-20T14:14:46Z",
       "side": 1,
       "message": "Not sure if this is correct because it seems to add a new reserved keyword in violation of the spec. The alternative would be to handle an identifier that\u0027s \"push_constant\" in [1].",
+      "revId": "28eb841b4565c703d00670717898084445778dbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4583ed6f_58a34496",
+        "filename": "src/tint/reader/wgsl/token.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-20T14:25:17Z",
+      "side": 1,
+      "message": "Tint is lagging the spec here. The address spaces are `context depdendant` tokens now (https://gpuweb.github.io/gpuweb/wgsl/#context-dependent-name-tokens). So, when we update to have those correctly context dependant we should do this one as well.\n\nI don\u0027t think we have a tint issue for that change yet, but when we get one we should remember to add push_contants to the list.",
+      "parentUuid": "ce4ebadb_6913e453",
       "revId": "28eb841b4565c703d00670717898084445778dbd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
