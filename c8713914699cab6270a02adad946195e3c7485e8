@@ -16,6 +16,52 @@
       "message": "Fixed UBSan errors related to negating minimum signed integrals both with literals and at runtime (see the diffs on Patchset 7).",
       "revId": "c8713914699cab6270a02adad946195e3c7485e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50777908_d769187d",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-20T12:32:31Z",
+      "side": 1,
+      "message": "übernit: `UnwrapNumber\u003cdecltype(i)\u003e` is more commonly used, which also handles `bool` (the only const value that isn\u0027t wrapped in `Number`).",
+      "range": {
+        "startLine": 671,
+        "startChar": 22,
+        "endLine": 671,
+        "endChar": 40
+      },
+      "revId": "c8713914699cab6270a02adad946195e3c7485e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a4eec59_90188158",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2942,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-20T12:32:31Z",
+      "side": 1,
+      "message": "FYI: I\u0027ve found this is done all over the place. I don\u0027t know why I didn\u0027t make `kHighest` and `kLowest` be the number type. We probably should fix this and clean up all this duplicate logic.",
+      "range": {
+        "startLine": 2933,
+        "startChar": 0,
+        "endLine": 2942,
+        "endChar": 0
+      },
+      "revId": "c8713914699cab6270a02adad946195e3c7485e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
