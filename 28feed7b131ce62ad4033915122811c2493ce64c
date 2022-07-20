@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1a367f2_37fbd916",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-20T13:20:46Z",
+      "side": 1,
+      "message": "@Corentin, Could help review the idea of the latest CL? Let me know if it basically makes sense. The chromium side change would be like https://chromium-review.googlesource.com/c/chromium/src/+/3756645\nThanks",
+      "revId": "28feed7b131ce62ad4033915122811c2493ce64c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
