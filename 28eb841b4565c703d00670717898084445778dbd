@@ -156,6 +156,24 @@
       "parentUuid": "4583ed6f_58a34496",
       "revId": "28eb841b4565c703d00670717898084445778dbd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bddab20_762d5941",
+        "filename": "src/tint/reader/wgsl/token.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-20T15:08:37Z",
+      "side": 1,
+      "message": "Yea, I think that\u0027s fine, we just fix it when we fix the rest of them.",
+      "parentUuid": "9ecedd06_c042ecaf",
+      "revId": "28eb841b4565c703d00670717898084445778dbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
