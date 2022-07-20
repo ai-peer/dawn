@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aac19d0b_4b4ad23f",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-20T20:06:04Z",
+      "side": 1,
+      "message": "I\u0027m on the fence about defaulting this to 0. We will most likely always want to specify a specific size. Further, I think it would be interesting to provide a deduction guide that automatically sets N to the number of elements we contruct with, for example:\n\n```\nutils::Vector a{1, 2, 3}; // Same as utils::Vector\u003cint, 3\u003e\n```",
+      "range": {
+        "startLine": 121,
+        "startChar": 31,
+        "endLine": 121,
+        "endChar": 34
+      },
+      "revId": "683dfebcf5f8224389f186880105086a9968eefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d8af1068_d79edd99",
         "filename": "src/tint/utils/vector_test.cc",
         "patchSetId": 13
