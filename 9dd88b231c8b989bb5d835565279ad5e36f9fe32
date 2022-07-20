@@ -16,6 +16,52 @@
       "message": "Please take a look, thanks. Kokoro failed because using DP4A in HLSL require DXC. The future f16 built-in End-to-End tests are going to be based on this patch, i.e. add some template to check if f16 types are used by the overload.",
       "revId": "9dd88b231c8b989bb5d835565279ad5e36f9fe32",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2ec4a15_7154da64",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-20T13:56:57Z",
+      "side": 1,
+      "message": "Can be reduced to:\n\n```\n{{-   template \"EnableDirectives\" $overload -}}\n```",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 13
+      },
+      "revId": "9dd88b231c8b989bb5d835565279ad5e36f9fe32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b994ae24_b38e4acc",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-20T13:56:57Z",
+      "side": 1,
+      "message": "Can be reduced to:\n\n```\n{{-   $overload     :\u003d . -}}\n{{-   $builtin_name :\u003d $overload.Intrinsic.Name -}}\n{{-   if or (eq \"dot4I8Packed\" $builtin_name) (eq \"dot4U8Packed\" $builtin_name)}}\nenable chromium_experimental_dp4a;\n{{    end -}}\n{{- end -}}\n```",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 11
+      },
+      "revId": "9dd88b231c8b989bb5d835565279ad5e36f9fe32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
