@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e199a5c8_a3868212",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-20T14:29:33Z",
+      "side": 1,
+      "message": "We have some extensions already like chromium_experimental_dp4a but I wasn\u0027t able to find existing docs. Do I just create a markdown document docs/tint/extensions/chromium_experimental_push_constant.md ?",
+      "parentUuid": "75e34205_38a1d634",
+      "revId": "28eb841b4565c703d00670717898084445778dbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9fa9b2e9_ad61b1e2",
@@ -100,6 +118,24 @@
       "side": 1,
       "message": "Tint is lagging the spec here. The address spaces are `context depdendant` tokens now (https://gpuweb.github.io/gpuweb/wgsl/#context-dependent-name-tokens). So, when we update to have those correctly context dependant we should do this one as well.\n\nI don\u0027t think we have a tint issue for that change yet, but when we get one we should remember to add push_contants to the list.",
       "parentUuid": "ce4ebadb_6913e453",
+      "revId": "28eb841b4565c703d00670717898084445778dbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ecedd06_c042ecaf",
+        "filename": "src/tint/reader/wgsl/token.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-20T14:29:33Z",
+      "side": 1,
+      "message": "Makes sense, I was actually thinking other storage classes didn\u0027t need to be reserved, seems the WGSL spec already fixed it!\n\nIf I understand correctly it should be ok to add push_constant to tokens like this in this CL and see later?",
+      "parentUuid": "4583ed6f_58a34496",
       "revId": "28eb841b4565c703d00670717898084445778dbd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
