@@ -141,6 +141,24 @@
       "parentUuid": "12817f8f_bf4b9c97",
       "revId": "14c5c8d5464c9910bcf8180b275a1f851a75190c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee9572ce_a1db1be2",
+        "filename": "src/tint/utils/bitset.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-21T22:14:03Z",
+      "side": 1,
+      "message": "Chatted offline. This handles the case where you resize down and back up to clear the bits that were set in the top part. It handles multiple word resizes because on the resize down you\u0027ll clear the top bits and the resize bigger will clear the bits in the next byte.",
+      "parentUuid": "b1f10169_839147bb",
+      "revId": "14c5c8d5464c9910bcf8180b275a1f851a75190c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
