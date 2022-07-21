@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1cee5d7_02fb81d8",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-21T14:21:04Z",
+      "side": 1,
+      "message": "In this CL, there are 3 names used for this: dynamic_idx, runtime-index, and non_constant_index. I know they all mean the same, but maybe we should normalize on one or two?",
+      "range": {
+        "startLine": 205,
+        "startChar": 21,
+        "endLine": 205,
+        "endChar": 32
+      },
+      "revId": "e8b379688c5b0dbba3193a228d5946b06bc97722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
