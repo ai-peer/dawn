@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50f222b4_c6fa2b65",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-21T23:40:15Z",
+      "side": 1,
+      "message": "did we verify which one Chromium is setting in m104?",
+      "range": {
+        "startLine": 540,
+        "startChar": 4,
+        "endLine": 543,
+        "endChar": 5
+      },
+      "revId": "d02a18ea76e0f8b32c60aba1537dfa12f0faa8ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

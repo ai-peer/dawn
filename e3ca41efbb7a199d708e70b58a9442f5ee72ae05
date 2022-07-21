@@ -16,6 +16,24 @@
       "message": "Added No-Try: True since CQ doesn\u0027t seem to work on release branches? (from https://dawn-review.googlesource.com/c/dawn/+/96860)",
       "revId": "e3ca41efbb7a199d708e70b58a9442f5ee72ae05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff0456ce_79450896",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-21T23:40:15Z",
+      "side": 1,
+      "message": "yea - overall LGTM but since this wasn\u0027t clean, could you try making a chromium CL for M104 that points DEPS to this CL to help verify that Chrome works? CQ should work on the Chromium release branch.\n\nIn the past we\u0027ve used this process:\nhttps://docs.google.com/document/d/1zi7-8iGsfXa6FZ15DPFYgxI_ZwAMs-tmOVulwu1APrk/edit#heading\u003dh.1igmipovlrl\n\nI hope it still works - it looks like someone crossed out the step that says to click CQ Dry Run. If that doesn\u0027t work, perhaps we can test locally in Chrome.",
+      "parentUuid": "2e81fa26_ac37650d",
+      "revId": "e3ca41efbb7a199d708e70b58a9442f5ee72ae05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
