@@ -16,6 +16,201 @@
       "message": "I still have to regenerate the test expectation files, but wanted to send this out to see if you have comments which would change the output files.",
       "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bc3f55d_8bb05bb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T08:43:33Z",
+      "side": 1,
+      "message": "Thanks for taking this one on! Very unexpected, but I\u0027m also very grateful!",
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31792845_99fd225d",
+        "filename": "src/tint/ast/override.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T08:43:33Z",
+      "side": 1,
+      "message": "Can be reduced to:\n\n```\n    if (auto* id \u003d ast::GetAttribute\u003cast::IdAttribute\u003e(attributes)) {\n        return std::to_string(id-\u003evalue);\n    }\n```",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 5
+      },
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b42edf8_a5258833",
+        "filename": "src/tint/ast/override_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T08:43:33Z",
+      "side": 1,
+      "message": "`2022`",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a04da462_e25cc390",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T08:43:33Z",
+      "side": 1,
+      "message": "In reading this, I have no idea what the difference is between these.\n\nI reviewed further. So `--backend-overrides` is just to `#define` for the the HLSL backend. With your new transform, I don\u0027t think we need this functionality anymore, so I\u0027d recommend removing.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 84
+      },
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5c4e918_8aa1b0d3",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T08:43:33Z",
+      "side": 1,
+      "message": "Maybe this transform should just be automatically added if you\u0027ve specified `--override` ?",
+      "range": {
+        "startLine": 974,
+        "startChar": 10,
+        "endLine": 974,
+        "endChar": 29
+      },
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cc9d6dd_f90cfca6",
+        "filename": "src/tint/transform/substitute_override.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T08:43:33Z",
+      "side": 1,
+      "message": "I think in this case:\n\na) If an initializer is provided, then just replace the `override` with `const`.\nb) If no initializer is provided, the transform should error.\n\nIf we do this, we can safely gut all the override logic from the backends (it\u0027s pretty much all broken at the moment).",
+      "range": {
+        "startLine": 51,
+        "startChar": 12,
+        "endLine": 51,
+        "endChar": 27
+      },
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d535fb0a_c8eb1e2e",
+        "filename": "src/tint/transform/substitute_override.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T08:43:33Z",
+      "side": 1,
+      "message": "Initializer doesn\u0027t have to be a single scalar. It can be any `override` expression. It\u0027s actually much cleaner to just use the sem type, which works for any expression on the RHS:\n\n```\n        auto* ctor \u003d Switch(\n            ctx.src-\u003eSem().Get(w)-\u003eType(),\n            [\u0026](const sem::Bool*) { return ctx.dst-\u003eExpr(std::equal_to\u003cdouble\u003e()(value, 0.0)); },\n            [\u0026](const sem::I32*) { return ctx.dst-\u003eExpr(i32(value)); },\n            [\u0026](const sem::U32*) { return ctx.dst-\u003eExpr(u32(value)); },\n            [\u0026](const sem::F32*) { return ctx.dst-\u003eExpr(f32(value)); },\n            [\u0026](const sem::F16*) { return ctx.dst-\u003eExpr(f16(value)); });\n\n```",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 9
+      },
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adc72171_07d76e56",
+        "filename": "src/tint/transform/substitute_override.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T08:43:33Z",
+      "side": 1,
+      "message": "I believe we agreed that `override`s could be vectors too. Not sure if its spec\u0027d yet though.",
+      "range": {
+        "startLine": 63,
+        "startChar": 40,
+        "endLine": 63,
+        "endChar": 46
+      },
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1a8c840_ce601de9",
+        "filename": "test/tint/var/override/named/no_init/bool.wgsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T08:43:33Z",
+      "side": 1,
+      "message": "Please generate the expectations with `--filter var/override/**.wgsl --generate-expectations`",
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
