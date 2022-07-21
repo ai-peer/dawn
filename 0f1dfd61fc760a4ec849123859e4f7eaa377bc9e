@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ae2421a_e00b5944",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-21T14:34:57Z",
+      "side": 1,
+      "message": "Thank you both for the review!",
+      "revId": "0f1dfd61fc760a4ec849123859e4f7eaa377bc9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5736cd9_5deec20f",
@@ -55,6 +72,30 @@
       "side": 1,
       "message": "I think the specific error message is better. If I saw:\n\n```\nenable(f16);\n      ^ expected identifier\n```\n\nI\u0027d say, wtf, there _is_ an identifier.",
       "parentUuid": "d5736cd9_5deec20f",
+      "range": {
+        "startLine": 366,
+        "startChar": 10,
+        "endLine": 366,
+        "endChar": 50
+      },
+      "revId": "0f1dfd61fc760a4ec849123859e4f7eaa377bc9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "661d6eb2_e26a3f34",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-21T14:34:57Z",
+      "side": 1,
+      "message": "Going with the current direction based on Dan\u0027s comment, hopefully that\u0027s ok.",
+      "parentUuid": "2b1eea22_07754153",
       "range": {
         "startLine": 366,
         "startChar": 10,
