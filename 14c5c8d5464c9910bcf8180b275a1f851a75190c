@@ -105,6 +105,24 @@
       "parentUuid": "6e25baf2_e4eb20dc",
       "revId": "14c5c8d5464c9910bcf8180b275a1f851a75190c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12817f8f_bf4b9c97",
+        "filename": "src/tint/utils/bitset.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-21T21:38:39Z",
+      "side": 1,
+      "message": "Want to check I\u0027m not doing something silly here Dan?",
+      "parentUuid": "6e71e300_8bda3525",
+      "revId": "14c5c8d5464c9910bcf8180b275a1f851a75190c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
