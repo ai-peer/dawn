@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b1eea22_07754153",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-21T13:54:35Z",
+      "side": 1,
+      "message": "I think the specific error message is better. If I saw:\n\n```\nenable(f16);\n      ^ expected identifier\n```\n\nI\u0027d say, wtf, there _is_ an identifier.",
+      "parentUuid": "d5736cd9_5deec20f",
+      "range": {
+        "startLine": 366,
+        "startChar": 10,
+        "endLine": 366,
+        "endChar": 50
+      },
+      "revId": "0f1dfd61fc760a4ec849123859e4f7eaa377bc9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa647d0a_ec6679d8",
         "filename": "src/tint/reader/wgsl/parser_impl.cc",
         "patchSetId": 1
@@ -126,6 +150,24 @@
       "side": 1,
       "message": "https://github.com/gpuweb/gpuweb/issues/3207",
       "parentUuid": "5459eb9d_72037ced",
+      "revId": "0f1dfd61fc760a4ec849123859e4f7eaa377bc9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd9ef97a_dccef337",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-21T13:54:35Z",
+      "side": 1,
+      "message": "I\u0027m going to resolve this. I don\u0027t know where the community will go, so landing this and then fixing up if spec changes seems like the right direction.",
+      "parentUuid": "76bc7022_1ee176f6",
       "revId": "0f1dfd61fc760a4ec849123859e4f7eaa377bc9e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
