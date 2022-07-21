@@ -402,7 +402,7 @@ void main() {
 )"));
 }
 
-TEST_F(GlslGeneratorImplTest_Builtin, Degrees_Scalar) {
+TEST_F(GlslGeneratorImplTest_Builtin, Degrees_Scalar_f32) {
     auto* val = Var("val", ty.f32());
     auto* call = Call("degrees", val);
     WrapInFunction(val, call);
@@ -413,7 +413,7 @@ TEST_F(GlslGeneratorImplTest_Builtin, Degrees_Scalar) {
     EXPECT_EQ(gen.result(), R"(#version 310 es
 
 float tint_degrees(float param_0) {
-  return param_0 * 57.295779513082322865;
+  return param_0 * 57.295779513082322865f;
 }
 
 
@@ -430,7 +430,7 @@ void main() {
 )");
 }
 
-TEST_F(GlslGeneratorImplTest_Builtin, Degrees_Vector) {
+TEST_F(GlslGeneratorImplTest_Builtin, Degrees_Vector_f32) {
     auto* val = Var("val", ty.vec3<f32>());
     auto* call = Call("degrees", val);
     WrapInFunction(val, call);
@@ -441,7 +441,7 @@ TEST_F(GlslGeneratorImplTest_Builtin, Degrees_Vector) {
     EXPECT_EQ(gen.result(), R"(#version 310 es
 
 vec3 tint_degrees(vec3 param_0) {
-  return param_0 * 57.295779513082322865;
+  return param_0 * 57.295779513082322865f;
 }
 
 
@@ -458,7 +458,7 @@ void main() {
 )");
 }
 
-TEST_F(GlslGeneratorImplTest_Builtin, Radians_Scalar) {
+TEST_F(GlslGeneratorImplTest_Builtin, Radians_Scalar_f32) {
     auto* val = Var("val", ty.f32());
     auto* call = Call("radians", val);
     WrapInFunction(val, call);
@@ -469,7 +469,7 @@ TEST_F(GlslGeneratorImplTest_Builtin, Radians_Scalar) {
     EXPECT_EQ(gen.result(), R"(#version 310 es
 
 float tint_radians(float param_0) {
-  return param_0 * 0.017453292519943295474;
+  return param_0 * 0.017453292519943295474f;
 }
 
 
@@ -486,7 +486,7 @@ void main() {
 )");
 }
 
-TEST_F(GlslGeneratorImplTest_Builtin, Radians_Vector) {
+TEST_F(GlslGeneratorImplTest_Builtin, Radians_Vector_f32) {
     auto* val = Var("val", ty.vec3<f32>());
     auto* call = Call("radians", val);
     WrapInFunction(val, call);
@@ -497,7 +497,7 @@ TEST_F(GlslGeneratorImplTest_Builtin, Radians_Vector) {
     EXPECT_EQ(gen.result(), R"(#version 310 es
 
 vec3 tint_radians(vec3 param_0) {
-  return param_0 * 0.017453292519943295474;
+  return param_0 * 0.017453292519943295474f;
 }
 
 
