@@ -196,6 +196,19 @@ class ConstEval {
                                  sem::Expression const* const* args,
                                  size_t num_args);
 
+    ////////////////////////////////////////////////////////////////////////////
+    // Builtins
+    ////////////////////////////////////////////////////////////////////////////
+
+    const sem::Constant* atan2(const sem::Type* ty,
+        sem::Expression const* const* args,
+        size_t num_args);
+
+    const sem::Constant* clamp(const sem::Type* ty,
+        sem::Expression const* const* args,
+        size_t num_args);
+
+
   private:
     /// Adds the given error message to the diagnostics
     void AddError(const std::string& msg, const Source& source) const;
