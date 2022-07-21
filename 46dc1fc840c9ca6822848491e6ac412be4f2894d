@@ -171,6 +171,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d7b9e00_78de11d3",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000022
+      },
+      "writtenOn": "2022-07-21T07:52:02Z",
+      "side": 1,
+      "message": "We still don\u0027t need to change the design of mask, which is fine. We need to explicitly define TGL, RKL, DG1, ADL, Alchemist and so on separately, like we do in Chromium, and use them in your change. For bucket values, we can combine these together for xe. By the way, I think xe is a bit too coarse. Maybe eventually we will have Gen12 LP, Gen12 HP, Gen13 LP, Gen13 HP and so on there.",
+      "parentUuid": "cb1c8bad_0109baed",
+      "range": {
+        "startLine": 671,
+        "startChar": 18,
+        "endLine": 671,
+        "endChar": 27
+      },
+      "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1df88668_f1f41344",
