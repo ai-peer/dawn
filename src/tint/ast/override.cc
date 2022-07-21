@@ -46,4 +46,13 @@ const Override* Override::Clone(CloneContext* ctx) const {
     return ctx->dst->create<Override>(src, sym, ty, ctor, attrs);
 }
 
+std::string Override::Identifier(const SymbolTable& symbols) const {
+    for (const auto& attr : attributes) {
+        if (auto* id = attr->As<ast::IdAttribute>()) {
+            return std::to_string(id->value);
+        }
+    }
+    return symbols.NameFor(symbol);
+}
+
 }  // namespace tint::ast
