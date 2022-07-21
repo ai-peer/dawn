@@ -20,6 +20,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a86bbbe3_731f9321",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-21T13:27:52Z",
+      "side": 1,
+      "message": "Maybe we should rename this to `ia`, `af` -\u003e `fa` for consistency?",
+      "range": {
+        "startLine": 130,
+        "startChar": 26,
+        "endLine": 130,
+        "endChar": 28
+      },
+      "revId": "9b68fb1ab8949a951b86a56de0f25c1f62db4025",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd4b602d_7f0fd73a",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-21T13:27:52Z",
+      "side": 1,
+      "message": "maybe: `f32 | i32 | u32 | f16` so that order matches? Here and below.",
+      "range": {
+        "startLine": 140,
+        "startChar": 17,
+        "endLine": 140,
+        "endChar": 38
+      },
+      "revId": "9b68fb1ab8949a951b86a56de0f25c1f62db4025",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c7b83aa_f2d36e84",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 1
