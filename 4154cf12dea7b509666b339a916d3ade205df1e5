@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6a22ba3_6566a053",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-07-21T23:12:51Z",
+      "side": 1,
+      "message": "PTAL - this wasn\u0027t a clean cherry-pick - had to remove fence related code - verified that the D3D12 resource wrapping tests pass locally",
+      "revId": "4154cf12dea7b509666b339a916d3ade205df1e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
