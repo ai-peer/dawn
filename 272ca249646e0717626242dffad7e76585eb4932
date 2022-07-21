@@ -52,6 +52,24 @@
       "parentUuid": "77274dcf_4d98c6a9",
       "revId": "272ca249646e0717626242dffad7e76585eb4932",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e86b2f46_535ce678",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2848,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-21T14:01:08Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s what I meant by \"reference object\". For example: https://en.cppreference.com/w/cpp/utility/bitset/reference",
+      "parentUuid": "9e0cc19a_7a010909",
+      "revId": "272ca249646e0717626242dffad7e76585eb4932",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
