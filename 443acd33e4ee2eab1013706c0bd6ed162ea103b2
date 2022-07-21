@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc1ad8c5_df689412",
+        "filename": "src/tint/ast/override.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-21T15:20:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31792845_99fd225d",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 5
+      },
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b42edf8_a5258833",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-07-21T08:43:33Z",
       "side": 1,
       "message": "`2022`",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "905dd583_a60e7c93",
+        "filename": "src/tint/ast/override_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-21T15:20:32Z",
+      "side": 1,
+      "message": "Ohh, the future.",
+      "parentUuid": "1b42edf8_a5258833",
       "range": {
         "startLine": 1,
         "startChar": 13,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41110fb1_52f12c84",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-21T15:20:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a04da462_e25cc390",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 84
+      },
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5c4e918_8aa1b0d3",
@@ -117,6 +189,30 @@
       "writtenOn": "2022-07-21T08:43:33Z",
       "side": 1,
       "message": "Maybe this transform should just be automatically added if you\u0027ve specified `--override` ?",
+      "range": {
+        "startLine": 974,
+        "startChar": 10,
+        "endLine": 974,
+        "endChar": 29
+      },
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cded8d64_1d210b27",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-21T15:20:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5c4e918_8aa1b0d3",
       "range": {
         "startLine": 974,
         "startChar": 10,
@@ -152,6 +248,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56aaddd7_9052641b",
+        "filename": "src/tint/transform/substitute_override.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-21T15:20:32Z",
+      "side": 1,
+      "message": "Good call. I\u0027ll leave the removal from the backends of `override` as a followup.",
+      "parentUuid": "7cc9d6dd_f90cfca6",
+      "range": {
+        "startLine": 51,
+        "startChar": 12,
+        "endLine": 51,
+        "endChar": 27
+      },
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d535fb0a_c8eb1e2e",
         "filename": "src/tint/transform/substitute_override.cc",
         "patchSetId": 2
@@ -163,6 +283,30 @@
       "writtenOn": "2022-07-21T08:43:33Z",
       "side": 1,
       "message": "Initializer doesn\u0027t have to be a single scalar. It can be any `override` expression. It\u0027s actually much cleaner to just use the sem type, which works for any expression on the RHS:\n\n```\n        auto* ctor \u003d Switch(\n            ctx.src-\u003eSem().Get(w)-\u003eType(),\n            [\u0026](const sem::Bool*) { return ctx.dst-\u003eExpr(std::equal_to\u003cdouble\u003e()(value, 0.0)); },\n            [\u0026](const sem::I32*) { return ctx.dst-\u003eExpr(i32(value)); },\n            [\u0026](const sem::U32*) { return ctx.dst-\u003eExpr(u32(value)); },\n            [\u0026](const sem::F32*) { return ctx.dst-\u003eExpr(f32(value)); },\n            [\u0026](const sem::F16*) { return ctx.dst-\u003eExpr(f16(value)); });\n\n```",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 9
+      },
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a7f059c_57227834",
+        "filename": "src/tint/transform/substitute_override.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-21T15:20:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d535fb0a_c8eb1e2e",
       "range": {
         "startLine": 59,
         "startChar": 0,
@@ -196,6 +340,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e069f597_949aa016",
+        "filename": "src/tint/transform/substitute_override.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-21T15:20:32Z",
+      "side": 1,
+      "message": "Talked to dneto@, vectors are out. SPIR-V requires overrides to be scalars.",
+      "parentUuid": "adc72171_07d76e56",
+      "range": {
+        "startLine": 63,
+        "startChar": 40,
+        "endLine": 63,
+        "endChar": 46
+      },
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1a8c840_ce601de9",
@@ -209,6 +377,24 @@
       "writtenOn": "2022-07-21T08:43:33Z",
       "side": 1,
       "message": "Please generate the expectations with `--filter var/override/**.wgsl --generate-expectations`",
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e7e892e_c45c2d55",
+        "filename": "test/tint/var/override/named/no_init/bool.wgsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-21T15:20:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1a8c840_ce601de9",
       "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

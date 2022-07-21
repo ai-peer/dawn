@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc17883e_e949558e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-21T15:20:32Z",
+      "side": 1,
+      "message": "I looked at the inspector, it returns both the string and id in an object. I think we should unify that as a followup when we start integrating into dawn.",
+      "revId": "203a55d4a3df2196ea5d69183ea953bbe8d5beca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
