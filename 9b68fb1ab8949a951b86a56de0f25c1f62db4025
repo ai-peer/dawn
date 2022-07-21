@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a11e8cd_94d5939e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-21T13:11:17Z",
+      "side": 1,
+      "message": "Personally, even if it breaks our convention, I would suggest `Dispatch_ia_iu32`.",
+      "parentUuid": "4c7b83aa_f2d36e84",
+      "revId": "9b68fb1ab8949a951b86a56de0f25c1f62db4025",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eff414b8_db54176d",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 1
