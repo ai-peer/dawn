@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02eaceed_38078706",
+        "filename": "src/tint/resolver/entry_point_validation_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-21T17:26:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adf6b5af_95dc7151",
+      "range": {
+        "startLine": 370,
+        "startChar": 62,
+        "endLine": 370,
+        "endChar": 87
+      },
+      "revId": "7bdec4eab2c17aeedf85dcd6835ce9a5eb56021c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1cae95a_721ca349",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-07-21T09:07:06Z",
       "side": 1,
       "message": "nit: We try to only declare `Source` for things that actually appear in diagnostic messages. That way it\u0027s clear to a reader what\u0027s relevant in the test.",
+      "range": {
+        "startLine": 561,
+        "startChar": 14,
+        "endLine": 561,
+        "endChar": 20
+      },
+      "revId": "7bdec4eab2c17aeedf85dcd6835ce9a5eb56021c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d57a82b1_b4076c32",
+        "filename": "src/tint/resolver/storage_class_layout_validation_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-21T17:26:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1cae95a_721ca349",
       "range": {
         "startLine": 561,
         "startChar": 14,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcf6e5e2_2d7ee180",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-21T17:26:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83b95e06_ed312b9f",
+      "range": {
+        "startLine": 525,
+        "startChar": 13,
+        "endLine": 526,
+        "endChar": 50
+      },
+      "revId": "7bdec4eab2c17aeedf85dcd6835ce9a5eb56021c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90f6cfa8_29367f1c",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-07-21T09:07:06Z",
       "side": 1,
       "message": "this is neat, but I\u0027m not seeing it tested.",
+      "range": {
+        "startLine": 2032,
+        "startChar": 12,
+        "endLine": 2041,
+        "endChar": 13
+      },
+      "revId": "7bdec4eab2c17aeedf85dcd6835ce9a5eb56021c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb8ea680_0e5c129d",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2041,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-21T17:26:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90f6cfa8_29367f1c",
       "range": {
         "startLine": 2032,
         "startChar": 12,
@@ -127,6 +223,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "984c9125_7c3a629d",
+        "filename": "src/tint/transform/add_spirv_block_attribute_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-21T17:26:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec85df1e_63e869bd",
+      "revId": "7bdec4eab2c17aeedf85dcd6835ce9a5eb56021c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0edb59ab_8a6550ec",
@@ -150,6 +264,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c90ea6a_1fc69931",
+        "filename": "test/tint/var/uses/push_constant.wgsl.expected.hlsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-21T17:26:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0edb59ab_8a6550ec",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 32
+      },
+      "revId": "7bdec4eab2c17aeedf85dcd6835ce9a5eb56021c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a4a96b1_bf15e1ae",
@@ -163,6 +301,30 @@
       "writtenOn": "2022-07-21T09:07:06Z",
       "side": 1,
       "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 13
+      },
+      "revId": "7bdec4eab2c17aeedf85dcd6835ce9a5eb56021c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5520dd8f_1a04e1ff",
+        "filename": "test/tint/var/uses/push_constant.wgsl.expected.spvasm",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-21T17:26:51Z",
+      "side": 1,
+      "message": "Stray prints xD\n\nDone",
+      "parentUuid": "4a4a96b1_bf15e1ae",
       "range": {
         "startLine": 1,
         "startChar": 0,
