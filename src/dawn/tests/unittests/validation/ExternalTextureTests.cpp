@@ -541,4 +541,47 @@ TEST_F(ExternalTextureTest, BindGroupDoesNotMatchLayout) {
     }
 }
 
+<<<<<<< HEAD   (b18724 [M104] Suppress Mac capability_checks failures)
+=======
+// Regression test for crbug.com/1343099 where BindGroup validation let other binding types be used
+// for external texture bindings.
+TEST_F(ExternalTextureTest, TextureViewBindingDoesntMatch) {
+    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Fragment, &utils::kExternalTextureBindingLayout}});
+
+    wgpu::TextureDescriptor textureDescriptor = CreateTextureDescriptor();
+    wgpu::Texture texture = device.CreateTexture(&textureDescriptor);
+
+    // The bug was that this passed validation and crashed inside the backends with a null
+    // dereference. It passed validation because the number of bindings matched (1 == 1) and that
+    // the validation didn't check that an external texture binding was required, fell back to
+    // checking for the binding type of entry 0 that had been decayed to be a sampled texture view.
+    ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, bgl, {{0, texture.CreateView()}}));
+}
+
+// Ensure that bind group validation catches error external textures.
+TEST_F(ExternalTextureTest, UseErrorExternalTextureInBindGroup) {
+    // Control case should succeed.
+    {
+        wgpu::TextureDescriptor textureDescriptor = CreateTextureDescriptor();
+        wgpu::Texture texture = device.CreateTexture(&textureDescriptor);
+
+        wgpu::ExternalTextureDescriptor externalDesc = CreateDefaultExternalTextureDescriptor();
+        externalDesc.plane0 = texture.CreateView();
+        wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
+        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+            device, {{0, wgpu::ShaderStage::Fragment, &utils::kExternalTextureBindingLayout}});
+        utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
+    }
+
+    // Bind group creation should fail when an error external texture is present.
+    {
+        wgpu::ExternalTexture errorExternalTexture = device.CreateErrorExternalTexture();
+        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+            device, {{0, wgpu::ShaderStage::Fragment, &utils::kExternalTextureBindingLayout}});
+        ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, bgl, {{0, errorExternalTexture}}));
+    }
+}
+
+>>>>>>> CHANGE (e629ae dawn::native: Check that ExternalTexture bindings are Extern)
 }  // namespace
