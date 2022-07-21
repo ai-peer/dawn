@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6864bb9_fb28f986",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-21T23:24:52Z",
+      "side": 1,
+      "message": "LGTM\n\nsome of these are probably crbug.com/1345736 or crbug.com/1346124",
+      "revId": "b4b8e33f9275445d2a3cf30113992553bf8a4ccc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
