@@ -165,6 +165,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74fbd2a6_184d8895",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-21T15:11:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c5a33d90_d17f9b9a",
+      "revId": "1e97afe1f80c6abcba74f8991c21e979ae9b44da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2348972_705d44d9",
