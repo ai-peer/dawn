@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e81fa26_ac37650d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-07-21T23:26:56Z",
+      "side": 1,
+      "message": "Added No-Try: True since CQ doesn\u0027t seem to work on release branches? (from https://dawn-review.googlesource.com/c/dawn/+/96860)",
+      "revId": "e3ca41efbb7a199d708e70b58a9442f5ee72ae05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
