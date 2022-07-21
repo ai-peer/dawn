@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "524a58f5_a264c9ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-21T12:23:34Z",
+      "side": 1,
+      "message": "Gerrit has made it impossible to expand the full file list of this change.\n\nHere\u0027s the links to all the source files changed that are not test expectations:\n\n\nhttps://dawn-review.googlesource.com/c/dawn/+/96800/4/src/tint/cmd/main.cc\nhttps://dawn-review.googlesource.com/c/dawn/+/96800/4/src/tint/utils/io/command_windows.cc\nhttps://dawn-review.googlesource.com/c/dawn/+/96800/4/src/tint/val/hlsl.cc\nhttps://dawn-review.googlesource.com/c/dawn/+/96800/4/src/tint/val/val.h\nhttps://dawn-review.googlesource.com/c/dawn/+/96800/4/tools/src/cmd/test-runner/main.go\n",
+      "revId": "1e97afe1f80c6abcba74f8991c21e979ae9b44da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
