@@ -94,6 +94,17 @@ TEST(TintVectorTest, ConstructInitializerList_NoSmallArray) {
     EXPECT_TRUE(AllExternallyHeld(vec));
 }
 
+TEST(TintVectorTest, ConstructDeductionGuide) {
+    auto vec = Vector{"one", "two"};
+    static_assert(std::is_same_v<decltype(vec)::value_type, const char*>);
+    static_assert(decltype(vec)::static_length == 2u);
+    EXPECT_EQ(vec.Length(), 2u);
+    EXPECT_EQ(vec.Capacity(), 2u);
+    EXPECT_EQ(vec[0], "one");
+    EXPECT_EQ(vec[1], "two");
+    EXPECT_TRUE(AllInternallyHeld(vec));
+}
+
 TEST(TintVectorTest, CopyCtor_NoSpill_N2_to_N2) {
     Vector<std::string, 2> vec_a{"hello", "world"};
     Vector<std::string, 2> vec_b{vec_a};

@@ -22,6 +22,7 @@
 #include <utility>
 #include <vector>
 
+#include "src/tint/traits.h"
 #include "src/tint/utils/bitcast.h"
 
 namespace tint::utils {
@@ -123,13 +124,18 @@ class Vector {
   public:
     /// Type of `T`.
     using value_type = T;
+    /// Value of `N`
+    static constexpr size_t static_length = N;
 
     /// Constructor
     Vector() = default;
 
     /// Constructor
     /// @param elements the elements to place into the vector
-    explicit Vector(std::initializer_list<T> elements) {
+    /// @note The `U` template parameter is required to force the compiler to use the custom
+    /// deduction guide, otherwise it'll default `N` to 0 instead of the number of arguments.
+    template <typename U = T>
+    explicit Vector(std::initializer_list<U> elements) {
         Reserve(elements.size());
         for (auto& el : elements) {
             new (&impl_.slice.data[impl_.slice.len++]) T{el};
@@ -477,6 +483,10 @@ class Vector {
     std::conditional_t<HasSmallArray, ImplWithSmallArray, ImplWithoutSmallArray> impl_;
 };
 
+/// Deduction guide for Vector
+template <typename... Ts>
+Vector(Ts...) -> Vector<std::common_type_t<Ts...>, sizeof...(Ts)>;
+
 /// VectorRef is a weak reference to a Vector, used to pass vectors as parameters, avoiding copies
 /// between the caller and the callee. VectorRef can accept a Vector of any 'N' value, decoupling
 /// the caller's vector internal size from the callee's vector size.
@@ -504,7 +514,7 @@ class VectorRef {
 
   public:
     /// Constructor from a Vector.
-    /// @param vector the vector reference
+    /// @param vector the vector to create a reference of
     template <size_t N>
     VectorRef(Vector<T, N>& vector)  // NOLINT(runtime/explicit)
         : slice_(vector.impl_.slice), can_move_(false) {}
@@ -522,6 +532,26 @@ class VectorRef {
     /// Move constructor
     /// @param other the vector reference
     VectorRef(VectorRef&& other) = default;
+
+    /// Covariance Vector converter constructor.
+    /// @param vector the vector to create a reference of
+    template <typename U, size_t N>
+    VectorRef(const Vector<U, N>& vector)  // NOLINT(runtime/explicit)
+        : slice_(Bitcast<T>(vector.impl_.slice)), can_move_(false) {
+        static_assert(std::is_pointer_v<T>);
+        static_assert(std::is_pointer_v<U>);
+        static_assert(traits::IsTypeOrDerived<T, U>);
+    }
+
+    /// Covariance VectorRef converter constructor.
+    /// @param other the other vector reference
+    template <typename U>
+    VectorRef(const VectorRef<U>& other)  // NOLINT(runtime/explicit)
+        : slice_(Bitcast<T>(other.slice_)), can_move_(other.can_move_) {
+        static_assert(std::is_pointer_v<T>);
+        static_assert(std::is_pointer_v<U>);
+        static_assert(traits::IsTypeOrDerived<T, U>);
+    }
 
     /// Index operator
     /// @param i the element index. Must be less than `len`.
@@ -680,14 +710,6 @@ Vector<T, N> ToVector(const std::vector<T>& vector) {
         out.Push(el);
     }
     return out;
-}
-
-/// Helper for constructing a Vector from a set of elements.
-/// The returned Vector's small-array size (`N`) is equal to the number of provided elements.
-/// @param elements the elements used to construct the vector.
-template <typename T, typename... Ts>
-auto MakeVector(Ts&&... elements) {
-    return Vector<T, sizeof...(Ts)>({std::forward<Ts>(elements)...});
 }
 
 }  // namespace tint::utils

@@ -24,6 +24,7 @@
 #include "src/tint/utils/bitcast.h"
 #include "src/tint/utils/crc32.h"
 #include "src/tint/utils/defer.h"
+#include "src/tint/utils/vector.h"
 
 #if defined(__clang__)
 /// Temporarily disable certain warnings when using Castable API
@@ -803,6 +804,14 @@ inline auto Switch(T* object, CASES&&... cases) {
 }
 
 }  // namespace tint
+
+namespace tint::utils {
+
+/// Deduction guide for Vector of Castable pointers
+template <typename... Ts>
+Vector(Ts...) -> Vector<CastableCommonBase<Ts...>, sizeof...(Ts)>;
+
+}  // namespace tint::utils
 
 TINT_CASTABLE_POP_DISABLE_WARNINGS();
 
