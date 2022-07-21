@@ -108,7 +108,7 @@ struct Constant : public sem::Constant {
 // Forward declaration
 const Constant* CreateComposite(ProgramBuilder& builder,
                                 const sem::Type* type,
-                                utils::ConstVectorRef<const sem::Constant*> elements);
+                                utils::VectorRef<const sem::Constant*> elements);
 
 /// Element holds a single scalar or abstract-numeric value.
 /// Element implements the Constant interface.
@@ -241,7 +241,7 @@ struct Splat : Constant {
 /// Composite implements the Constant interface.
 struct Composite : Constant {
     Composite(const sem::Type* t,
-              utils::ConstVectorRef<const sem::Constant*> els,
+              utils::VectorRef<const sem::Constant*> els,
               bool all_0,
               bool any_0)
         : type(t), elements(std::move(els)), all_zero(all_0), any_zero(any_0), hash(CalcHash()) {}
@@ -384,7 +384,7 @@ bool Equal(const sem::Constant* a, const sem::Constant* b) {
 /// depending on the element types and values.
 const Constant* CreateComposite(ProgramBuilder& builder,
                                 const sem::Type* type,
-                                utils::ConstVectorRef<const sem::Constant*> elements) {
+                                utils::VectorRef<const sem::Constant*> elements) {
     if (elements.IsEmpty()) {
         return nullptr;
     }

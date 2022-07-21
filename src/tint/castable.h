@@ -460,7 +460,7 @@ struct CastableCommonBaseImpl {};
 
 /// Alias to typename CastableCommonBaseImpl<TYPES>::type
 template <typename... TYPES>
-using CastableCommonBase = typename detail::CastableCommonBaseImpl<TYPES...>::type;
+using CastableCommonBase = typename CastableCommonBaseImpl<TYPES...>::type;
 
 /// CastableCommonBaseImpl template specialization for a single type
 template <typename T>
