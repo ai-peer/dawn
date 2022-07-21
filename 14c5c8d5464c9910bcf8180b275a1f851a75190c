@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6927ec00_2cf76897",
+        "filename": "src/tint/utils/bitset.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-21T13:47:22Z",
+      "side": 1,
+      "message": "Discussed offline. `std::bitset` does not dynamically grow like this one. Boost has `boost::dynamic_bitset` for this. C++ has `std::vector\u003cbool\u003e` which is similar. I\u0027m fine with having our own implementation, though the name here may be confusing as it coincides with the non-dynamic `std::bitset`. Suggest `BitVector` or `DynamicBitset`. Up to you.",
+      "parentUuid": "0eaf98cd_8a3e6f3d",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 14
+      },
+      "revId": "14c5c8d5464c9910bcf8180b275a1f851a75190c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e25baf2_e4eb20dc",
         "filename": "src/tint/utils/bitset.h",
         "patchSetId": 1
