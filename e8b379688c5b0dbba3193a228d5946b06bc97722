@@ -22,6 +22,30 @@
       },
       "revId": "e8b379688c5b0dbba3193a228d5946b06bc97722",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d38284fd_1ccc29e7",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T14:25:52Z",
+      "side": 1,
+      "message": "Good point. I clearly couldn\u0027t make up my mind on what to call this. Done.",
+      "parentUuid": "f1cee5d7_02fb81d8",
+      "range": {
+        "startLine": 205,
+        "startChar": 21,
+        "endLine": 205,
+        "endChar": 32
+      },
+      "revId": "e8b379688c5b0dbba3193a228d5946b06bc97722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
