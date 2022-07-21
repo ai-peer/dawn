@@ -34,6 +34,24 @@
       "parentUuid": "766367d5_c5e4e407",
       "revId": "272ca249646e0717626242dffad7e76585eb4932",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e0cc19a_7a010909",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2848,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-21T13:59:40Z",
+      "side": 1,
+      "message": "It was that `marked` isn\u0027t a ref. It\u0027s an object that contains a ref inside it which was the magic I was missing.",
+      "parentUuid": "77274dcf_4d98c6a9",
+      "revId": "272ca249646e0717626242dffad7e76585eb4932",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
