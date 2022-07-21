@@ -2994,7 +2994,8 @@ struct Values {
 };
 
 struct Case {
-    std::variant<Values<AInt>, Values<AFloat>, Values<u32>, Values<i32>, Values<f32>> values;
+    std::variant<Values<AInt>, Values<AFloat>, Values<u32>, Values<i32>, Values<f32>, Values<f16>>
+        values;
 };
 
 static std::ostream& operator<<(std::ostream& o, const Case& c) {
@@ -3101,6 +3102,15 @@ INSTANTIATE_TEST_SUITE_P(Negation,
                                               C(-kHighest<f32>, kHighest<f32>),
                                               C(kLowest<f32>, Negate(kLowest<f32>)),
                                               C(Negate(kLowest<f32>), kLowest<f32>),
+                                              // f16
+                                              C(0.0_h, -0.0_h),
+                                              C(-0.0_h, 0.0_h),
+                                              C(1.0_h, -1.0_h),
+                                              C(-1.0_h, 1.0_h),
+                                              C(kHighest<f16>, -kHighest<f16>),
+                                              C(-kHighest<f16>, kHighest<f16>),
+                                              C(kLowest<f16>, Negate(kLowest<f16>)),
+                                              C(Negate(kLowest<f16>), kLowest<f16>),
                                           })));
 
 // Make sure UBSan doesn't trip on C++'s undefined behaviour of negating the smallest negative
