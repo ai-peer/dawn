@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3e48f078_433a68c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T14:21:54Z",
+      "side": 1,
+      "message": "The `FromSlash` was converting to windows slashes, but the path it was comparing against was normalized to linux style.\nIt was also using `strings.Contains()` when it should have been checking just the start.",
+      "parentUuid": "e955247b_4614a673",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 32
+      },
+      "revId": "1e97afe1f80c6abcba74f8991c21e979ae9b44da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "524a58f5_a264c9ee",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
@@ -82,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85581310_4e28830d",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T14:21:54Z",
+      "side": 1,
+      "message": "The logic above was wrong. `must` shouldn\u0027t apply to `--validate`, otherwise it\u0027ll always error if one of DXC / FXC is not found, making `--validate` on non-windows impossible. Fixed.",
+      "parentUuid": "8bb68696_5791e0cd",
+      "range": {
+        "startLine": 801,
+        "startChar": 8,
+        "endLine": 801,
+        "endChar": 24
+      },
+      "revId": "1e97afe1f80c6abcba74f8991c21e979ae9b44da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e2697a4_e6b2c4b1",
@@ -101,6 +149,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5a33d90_d17f9b9a",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T14:21:54Z",
+      "side": 1,
+      "message": "It\u0027s _mostly_ separated. The bits that are \u0027interleaved\u0027 need to be so that `--validate` can use either/both FXC and DXC, where as the `--dxc` and --fxc` *must* be found and pass validation.",
+      "parentUuid": "2e2697a4_e6b2c4b1",
+      "revId": "1e97afe1f80c6abcba74f8991c21e979ae9b44da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2348972_705d44d9",
         "filename": "src/tint/utils/io/command_windows.cc",
         "patchSetId": 4
@@ -112,6 +178,30 @@
       "writtenOn": "2022-07-21T13:44:01Z",
       "side": 1,
       "message": "What was the problem with what we were doing before? Was it not working with a release build of Tint?",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 46
+      },
+      "revId": "1e97afe1f80c6abcba74f8991c21e979ae9b44da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c56146bc_376ae9b7",
+        "filename": "src/tint/utils/io/command_windows.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T14:21:54Z",
+      "side": 1,
+      "message": "The old approach didn\u0027t recognise DLLs. This does.",
+      "parentUuid": "d2348972_705d44d9",
       "range": {
         "startLine": 118,
         "startChar": 0,

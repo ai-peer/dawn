@@ -16,6 +16,24 @@
       "message": "It it possible that we change the profile to \"-T vs_6_2\" and add \"-enable-16bit-types\" flag? These are required to use native f16 types in DXC. Or add another tint flag to use these options, e.g. \"--dxc-allow-f16\"?",
       "revId": "34b7610c4dc5264f95cf0593e0a7f09bc5f24269",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f021becc_87a1eedb",
+        "filename": "src/tint/val/hlsl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T14:21:54Z",
+      "side": 1,
+      "message": "Sure, but let\u0027s do that in a follow-up change. There\u0027s a lot going on in this one.",
+      "parentUuid": "af8e1dea_49979402",
+      "revId": "34b7610c4dc5264f95cf0593e0a7f09bc5f24269",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
