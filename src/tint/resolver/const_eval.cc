@@ -48,7 +48,7 @@ namespace {
 
 /// Helper that calls 'f' passing in `c`'s value
 template <typename F>
-auto aiu32Dispatch(const sem::Constant* c, F&& f) {
+auto DispatchIAIU32(const sem::Constant* c, F&& f) {
     return Switch(
         c->Type(), [&](const sem::AbstractInt*) { return f(c->As<AInt>()); },
         [&](const sem::I32*) { return f(c->As<i32>()); },
@@ -57,7 +57,7 @@ auto aiu32Dispatch(const sem::Constant* c, F&& f) {
 
 /// Helper that calls 'f' passing in `c`'s value
 template <typename F>
-auto afi32f16Dispatch(const sem::Constant* c, F&& f) {
+auto DispatchFIAFI32F16(const sem::Constant* c, F&& f) {
     return Switch(
         c->Type(), [&](const sem::AbstractInt*) { return f(c->As<AInt>()); },
         [&](const sem::AbstractFloat*) { return f(c->As<AFloat>()); },
@@ -654,7 +654,7 @@ const sem::Constant* ConstEval::OpComplement(const sem::Type*,
                                              sem::Expression const* const* args,
                                              size_t) {
     return TransformElements(builder, args[0]->ConstantValue(), [&](const sem::Constant* c) {
-        return aiu32Dispatch(c, [&](auto i) {  //
+        return DispatchIAIU32(c, [&](auto i) {  //
             return CreateElement(builder, c->Type(), decltype(i)(~i.value));
         });
     });
@@ -664,7 +664,7 @@ const sem::Constant* ConstEval::OpMinus(const sem::Type*,
                                         sem::Expression const* const* args,
                                         size_t) {
     return TransformElements(builder, args[0]->ConstantValue(), [&](const sem::Constant* c) {
-        return afi32f16Dispatch(c, [&](auto i) {  //
+        return DispatchFIAFI32F16(c, [&](auto i) {  //
             // For signed integrals, avoid C++ UB by not negating the smallest negative number. In
             // WGSL, this operation is well defined to return the same value, see:
             // https://gpuweb.github.io/gpuweb/wgsl/#arithmetic-expr.
