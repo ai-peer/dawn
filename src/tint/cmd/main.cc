@@ -20,6 +20,7 @@
 #include <optional>
 #include <sstream>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 #if TINT_BUILD_GLSL_WRITER
@@ -86,7 +87,8 @@ struct Options {
     bool use_fxc = false;
     std::string dxc_path;
     std::string xcrun_path;
-    std::vector<std::string> overrides;
+    std::unordered_map<std::string, double> overrides;
+    std::vector<std::string> backend_overrides;
     std::optional<tint::sem::BindingPoint> hlsl_root_constant_binding_point;
 };
 
@@ -126,7 +128,10 @@ ${transforms}
                                When specified, automatically enables --validate
   --xcrun                   -- Path to xcrun executable, used to validate MSL output.
                                When specified, automatically enables --validate
-  --overrides               -- Pipeline overrides as NAME=VALUE, comma-separated.)";
+  --backend-overrides       -- Pipeline overrides as NAME=VALUE, comma-separated.
+                               Passed to the backend for validation.
+  --overrides               -- Override values as IDENTIFIER=VALUE, comma-separated.
+)";
 
 Format parse_format(const std::string& fmt) {
     (void)fmt;
@@ -215,16 +220,24 @@ Format infer_format(const std::string& filename) {
     return Format::kNone;
 }
 
-std::vector<std::string> split_on_comma(std::string list) {
+std::vector<std::string> split_on_char(std::string list, char c) {
     std::vector<std::string> res;
 
     std::stringstream str(list);
     while (str.good()) {
         std::string substr;
-        getline(str, substr, ',');
+        getline(str, substr, c);
         res.push_back(substr);
     }
     return res;
+}
+
+std::vector<std::string> split_on_comma(std::string list) {
+    return split_on_char(list, ',');
+}
+
+std::vector<std::string> split_on_equal(std::string list) {
+    return split_on_char(list, '=');
 }
 
 std::optional<uint64_t> parse_unsigned_number(std::string number) {
@@ -423,13 +436,23 @@ bool ParseArgs(const std::vector<std::string>& args, Options* opts) {
             }
             opts->xcrun_path = args[i];
             opts->validate = true;
+        } else if (arg == "--backend-overrides") {
+            ++i;
+            if (i >= args.size()) {
+                std::cerr << "Missing value for " << arg << std::endl;
+                return false;
+            }
+            opts->backend_overrides = split_on_comma(args[i]);
         } else if (arg == "--overrides") {
             ++i;
             if (i >= args.size()) {
                 std::cerr << "Missing value for " << arg << std::endl;
                 return false;
             }
-            opts->overrides = split_on_comma(args[i]);
+            for (const auto& o : split_on_comma(args[i])) {
+                auto parts = split_on_equal(o);
+                opts->overrides.insert({parts[0], std::stod(parts[1])});
+            }
         } else if (arg == "--hlsl-root-constant-binding-point") {
             ++i;
             if (i >= args.size()) {
@@ -792,7 +815,8 @@ bool GenerateHlsl(const tint::Program* program, const Options& options) {
         tint::val::Result res;
         if (options.use_fxc) {
 #ifdef _WIN32
-            res = tint::val::HlslUsingFXC(result.hlsl, result.entry_points, options.overrides);
+            res = tint::val::HlslUsingFXC(result.hlsl, result.entry_points,
+                                          options.backend_overrides);
 #else
             res.failed = true;
             res.output = "FXC can only be used on Windows. Sorry :X";
@@ -802,7 +826,7 @@ bool GenerateHlsl(const tint::Program* program, const Options& options) {
                 tint::utils::Command::LookPath(options.dxc_path.empty() ? "dxc" : options.dxc_path);
             if (dxc.Found()) {
                 res = tint::val::HlslUsingDXC(dxc.Path(), result.hlsl, result.entry_points,
-                                              options.overrides);
+                                              options.backend_overrides);
             } else {
                 res.failed = true;
                 res.output = "DXC executable not found. Cannot validate";
@@ -947,6 +971,14 @@ int main(int argc, const char** argv) {
                        tint::transform::DataMap&) { m.Add<tint::transform::Renamer>(); }},
         {"robustness", [](tint::transform::Manager& m,
                           tint::transform::DataMap&) { m.Add<tint::transform::Robustness>(); }},
+        {"substitute_override",
+         [&](tint::transform::Manager& m, tint::transform::DataMap& i) {
+             tint::transform::SubstituteOverride::Config cfg;
+             cfg.map = options.overrides;
+
+             i.Add<tint::transform::SubstituteOverride::Config>(cfg);
+             m.Add<tint::transform::SubstituteOverride>();
+         }},
     };
     auto transform_names = [&] {
         std::stringstream names;
