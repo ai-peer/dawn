@@ -16,6 +16,24 @@
       "message": "Is `marked` a ref? So, we\u0027re updating the bit somehow here?",
       "revId": "272ca249646e0717626242dffad7e76585eb4932",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77274dcf_4d98c6a9",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2848,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-21T13:55:47Z",
+      "side": 1,
+      "message": "`std::bitset`, `boost::dynamic_bitset`, and `std::vector\u003cbool\u003e` all return a reference object that allows reading and writing to the specific bit via the object. This is a pretty common pattern, so I don\u0027t think it\u0027s that confusing. I see that Ben renamed `marked` to `marked_bit_ref`, which helps, though I think even just `marked_bit` would have been fine.",
+      "parentUuid": "766367d5_c5e4e407",
+      "revId": "272ca249646e0717626242dffad7e76585eb4932",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
