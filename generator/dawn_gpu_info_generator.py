@@ -66,17 +66,13 @@ class Architecture:
             self.devices.append(device)
 
 
-class Vendor:
-    def __init__(self, name, json_data):
-        self.name = Name(name)
-        self.id = json_data['id']
-
-        self.deviceMask = None
-        if 'deviceMask' in json_data:
-            self.deviceMask = json_data['deviceMask']
+class DeviceSet:
+    def __init__(self, json_data):
+        self.mask = None
+        if 'mask' in json_data:
+            self.mask = json_data['mask']
 
         self.architectures = []
-
         if 'architecture' in json_data:
             for (arch_name, arch_data) in json_data['architecture'].items():
                 # Skip any entries that start with an underscore. Used for comments.
@@ -86,9 +82,30 @@ class Vendor:
                 self.architectures.append(Architecture(arch_name, arch_data))
 
     def maskDeviceId(self):
-        if not self.deviceMask:
+        if not self.mask:
             return ''
-        return ' & ' + self.deviceMask
+        return ' & ' + self.mask
+
+
+class Vendor:
+    def __init__(self, name, json_data):
+        self.name = Name(name)
+        self.id = json_data['id']
+
+        architecture_dict = {}
+
+        self.device_sets = []
+        if 'devices' in json_data:
+            for device_data in json_data['devices']:
+                device_set = DeviceSet(device_data)
+                self.device_sets.append(device_set)
+
+                for architecture in device_set.architectures:
+                    architecture_dict[
+                        architecture.name.canonical_case()] = architecture.name
+
+        # List of unique architecture names under this vendor
+        self.architecture_names = architecture_dict.values()
 
 
 def parse_json(json):
