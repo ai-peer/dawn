@@ -1487,7 +1487,8 @@ Impl::Candidate Impl::ResolveCandidate(Impl::Candidates&& candidates,
                                        const char* intrinsic_name,
                                        utils::VectorRef<const sem::Type*> args,
                                        TemplateState templates) const {
-    utils::Vector<uint32_t, kNumFixedParams> best_ranks(args.Length(), 0xffffffff);
+    utils::Vector<uint32_t, kNumFixedParams> best_ranks;
+    best_ranks.Resize(args.Length(), 0xffffffff);
     size_t num_matched = 0;
     Candidate* best = nullptr;
     for (auto& candidate : candidates) {
