@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49ca874c_82244e98",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-21T14:56:32Z",
+      "side": 1,
+      "message": "runtime-index?",
+      "range": {
+        "startLine": 242,
+        "startChar": 25,
+        "endLine": 242,
+        "endChar": 38
+      },
+      "revId": "f75c74091653b6381002e69017a58d0b8d55ecfa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
