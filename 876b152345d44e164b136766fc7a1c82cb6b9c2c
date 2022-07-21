@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e48f356_c987bc38",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:11Z",
+      "side": 1,
+      "message": "Agreed. Done.",
+      "parentUuid": "83db5e26_8fd3cc2e",
+      "range": {
+        "startLine": 387,
+        "startChar": 0,
+        "endLine": 387,
+        "endChar": 48
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86ce5366_adc8a542",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-20T20:48:58Z",
       "side": 1,
       "message": "Another use-case for `ConstVectorRef`. I won\u0027t point them all out, but I think you should go through all of these and change them to `ConstVectorRef` where it makes sense.",
+      "range": {
+        "startLine": 471,
+        "startChar": 50,
+        "endLine": 471,
+        "endChar": 66
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bd7f8a5_9941edf6",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86ce5366_adc8a542",
       "range": {
         "startLine": 471,
         "startChar": 50,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98797742_92b45916",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:11Z",
+      "side": 1,
+      "message": "Yes, I added the `utils::Transform\u003cN\u003e` helpers after I made this change. Good shout.",
+      "parentUuid": "60929fdb_f394c80d",
+      "range": {
+        "startLine": 635,
+        "startChar": 8,
+        "endLine": 638,
+        "endChar": 9
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd98b7b2_a6abcfc7",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-07-20T20:48:58Z",
       "side": 1,
       "message": "Why do we need double braces here? Shouldn\u0027t the ctor for std::initializer_list be selected with `{lhs, rhs}`?",
+      "range": {
+        "startLine": 1230,
+        "startChar": 43,
+        "endLine": 1230,
+        "endChar": 45
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8535359_e9f01b6a",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd98b7b2_a6abcfc7",
       "range": {
         "startLine": 1230,
         "startChar": 43,
@@ -116,6 +212,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b60fe9a_4db76118",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 1479,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:11Z",
+      "side": 1,
+      "message": "Nice. Done.",
+      "parentUuid": "d4c231cc_1126e9a8",
+      "range": {
+        "startLine": 1479,
+        "startChar": 23,
+        "endLine": 1479,
+        "endChar": 79
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28264a7d_7793352b",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-07-20T20:48:58Z",
       "side": 1,
       "message": "Is the reason for this function to reduce the noise of `utils::MakeVector(f32)` with `Args(f32)`?\n\nWith deduction guides, this would at least be a little shorter as `utils::Vector{f32}`, and maybe we wouldn\u0027t need wrappers like this so much.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 1
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ada27ab_10df7ba7",
+        "filename": "src/tint/resolver/intrinsic_table_test.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:11Z",
+      "side": 1,
+      "message": "Yes, just a helper. Will add a comment.\n\n\u003e With deduction guides, this would at least be a little shorter as  utils::Vector{f32} , and maybe we wouldn\u0027t need wrappers like this so much.\n\nAgreed. Let\u0027s land this and try and figure out how to make deduction guides work.",
+      "parentUuid": "28264a7d_7793352b",
       "range": {
         "startLine": 37,
         "startChar": 0,
@@ -162,6 +306,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15b20527_3847b815",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 2123,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:11Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "f4170c2b_e195ed91",
+      "range": {
+        "startLine": 2123,
+        "startChar": 8,
+        "endLine": 2123,
+        "endChar": 64
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee0a4392_a2e29185",
@@ -185,6 +353,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38eebd3f_a2cd1b40",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 2200,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:11Z",
+      "side": 1,
+      "message": "Let\u0027s try and do deduction guides as a followup. I\u0027ve tried using `MakeVector` and its about as verbose as before, except now the `N` is utterly hidden. I don\u0027t think `MakeVector` is better in this case.",
+      "parentUuid": "ee0a4392_a2e29185",
+      "range": {
+        "startLine": 2200,
+        "startChar": 20,
+        "endLine": 2200,
+        "endChar": 72
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d2d2bc2_3b902b72",
@@ -198,6 +390,30 @@
       "writtenOn": "2022-07-20T20:48:58Z",
       "side": 1,
       "message": "Why not use `ConstVectorRef\u003cconst sem::Expression*\u003e` here (and on the overload below)?",
+      "range": {
+        "startLine": 259,
+        "startChar": 42,
+        "endLine": 259,
+        "endChar": 83
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0aca871_fa43669a",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d2d2bc2_3b902b72",
       "range": {
         "startLine": 259,
         "startChar": 42,
@@ -233,6 +449,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c2cbd7c_68f86d48",
+        "filename": "src/tint/sem/builtin.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:11Z",
+      "side": 1,
+      "message": "Renamed the methods. The trouble with the old way is that you can\u0027t move the vector down to the base and still access the non-const pointers. This is as efficient as I can get (without the reinterpret stuff we discussed)",
+      "parentUuid": "f1c74663_aac18750",
+      "range": {
+        "startLine": 109,
+        "startChar": 24,
+        "endLine": 109,
+        "endChar": 61
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d9a1153_eb8d6eeb",
         "filename": "src/tint/sem/call.h",
         "patchSetId": 14
@@ -244,6 +484,30 @@
       "writtenOn": "2022-07-20T20:48:58Z",
       "side": 1,
       "message": "Thank goodness for auto return types!",
+      "range": {
+        "startLine": 54,
+        "startChar": 10,
+        "endLine": 54,
+        "endChar": 14
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0456adc_2eff0d11",
+        "filename": "src/tint/sem/call.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9d9a1153_eb8d6eeb",
       "range": {
         "startLine": 54,
         "startChar": 10,
@@ -267,6 +531,30 @@
       "writtenOn": "2022-07-20T20:48:58Z",
       "side": 1,
       "message": "Deduction guide or MakeVector.",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 67
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfe89a47_45fd1e52",
+        "filename": "src/tint/sem/type_conversion.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:11Z",
+      "side": 1,
+      "message": "See earlier comments.",
+      "parentUuid": "5245bdbd_121c97ad",
       "range": {
         "startLine": 24,
         "startChar": 17,

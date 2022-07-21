@@ -33,6 +33,24 @@
       "message": "IsEmpty ?",
       "revId": "9bb172a4c73366f460aeb3a6e34afee2b4a92241",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ab60738_6e26a1b4",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2696ab1_fbb00735",
+      "revId": "9bb172a4c73366f460aeb3a6e34afee2b4a92241",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

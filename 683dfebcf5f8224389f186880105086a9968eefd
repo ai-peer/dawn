@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbf76cad_c95ed4c0",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:11Z",
+      "side": 0,
+      "message": "True.",
+      "parentUuid": "0dcdf7f0_88d1fd29",
+      "range": {
+        "startLine": 956,
+        "startChar": 41,
+        "endLine": 956,
+        "endChar": 51
+      },
+      "revId": "683dfebcf5f8224389f186880105086a9968eefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9408a4a1_137d8573",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31cb8ee8_503178f9",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:11Z",
+      "side": 0,
+      "message": "Yup.",
+      "parentUuid": "9408a4a1_137d8573",
+      "range": {
+        "startLine": 799,
+        "startChar": 68,
+        "endLine": 799,
+        "endChar": 78
+      },
+      "revId": "683dfebcf5f8224389f186880105086a9968eefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e7c1e1a_7bd03c57",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-07-20T20:48:58Z",
       "side": 0,
       "message": "Another place we were not using `move`.",
+      "range": {
+        "startLine": 22,
+        "startChar": 33,
+        "endLine": 22,
+        "endChar": 64
+      },
+      "revId": "683dfebcf5f8224389f186880105086a9968eefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8de75326_7aa6222b",
+        "filename": "src/tint/sem/type_constructor.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:11Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "1e7c1e1a_7bd03c57",
       "range": {
         "startLine": 22,
         "startChar": 33,
