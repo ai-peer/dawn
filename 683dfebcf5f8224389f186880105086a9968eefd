@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d254577d_9349a308",
+        "filename": "src/tint/utils/hash_test.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:07Z",
+      "side": 1,
+      "message": "Good idea. Done.",
+      "parentUuid": "04172c03_a84c7074",
+      "revId": "683dfebcf5f8224389f186880105086a9968eefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aac19d0b_4b4ad23f",
@@ -84,6 +102,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca208ff2_80f46839",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:07Z",
+      "side": 1,
+      "message": "I keep on thinking this is a C++ 20 feature!\nI\u0027d love to do this, but I can\u0027t figure out how, or whether it\u0027s possible for this type.\n\nThe `std::initializer_list` constructor doesn\u0027t have any way to infer the number of arguments provided, so I don\u0027t think I can use that constructor.\n\nAdding a `template\u003ctypename ... Ts\u003e` constructor could work, but it would introduce overload ambiguities with the other constructors.\n\nHappy to do this as a followup if we can figure out a clean approach.\n\nAs for defaulting to `0`. Yeah, I understand, but 0 seems like the best thing to default to, as it acts like a regular `std::vector`. There are going to be places where the small vector just isn\u0027t going to be useful - think a vector that needs to contain all the AST nodes. The typical number of AST nodes is going to far exceed any small-number we can think of.",
+      "parentUuid": "d735a254_7d0dfa4d",
+      "range": {
+        "startLine": 121,
+        "startChar": 31,
+        "endLine": 121,
+        "endChar": 34
+      },
+      "revId": "683dfebcf5f8224389f186880105086a9968eefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d8af1068_d79edd99",
         "filename": "src/tint/utils/vector_test.cc",
         "patchSetId": 13
@@ -95,6 +137,30 @@
       "writtenOn": "2022-07-20T19:40:32Z",
       "side": 1,
       "message": "Well done on the unit tests!",
+      "range": {
+        "startLine": 1358,
+        "startChar": 0,
+        "endLine": 1358,
+        "endChar": 4
+      },
+      "revId": "683dfebcf5f8224389f186880105086a9968eefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fad6baa_26144b35",
+        "filename": "src/tint/utils/vector_test.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 1358,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-21T16:04:07Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "d8af1068_d79edd99",
       "range": {
         "startLine": 1358,
         "startChar": 0,
