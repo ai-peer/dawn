@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e955247b_4614a673",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-21T13:44:01Z",
+      "side": 1,
+      "message": "What exactly was broken? After the tint -\u003e dawn merge, we did have a problem where it no longer ignored those paths on Windows, which we fixed. What issue did you run into?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 32
+      },
+      "revId": "1e97afe1f80c6abcba74f8991c21e979ae9b44da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "524a58f5_a264c9ee",
@@ -32,6 +55,69 @@
       "side": 1,
       "message": "I\u0027ve filed https://bugs.chromium.org/p/gerrit/issues/detail?id\u003d16102 for the gerrit usability issue.",
       "parentUuid": "524a58f5_a264c9ee",
+      "revId": "1e97afe1f80c6abcba74f8991c21e979ae9b44da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bb68696_5791e0cd",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-21T13:44:01Z",
+      "side": 1,
+      "message": "This is redundant as it\u0027s checked for both `must_validate_dxc/fxc` above",
+      "range": {
+        "startLine": 801,
+        "startChar": 8,
+        "endLine": 801,
+        "endChar": 24
+      },
+      "revId": "1e97afe1f80c6abcba74f8991c21e979ae9b44da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e2697a4_e6b2c4b1",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-21T13:44:01Z",
+      "side": 1,
+      "message": "This all looks good, but I think it would be a bit easier for my brain to parse if instead of interleaving FXC and DXC for each step, we put all `if (FXC)` together and `if (DXC)` together. It\u0027s very much because the only difference is one letter between `fxc` and `dxc`.",
+      "revId": "1e97afe1f80c6abcba74f8991c21e979ae9b44da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2348972_705d44d9",
+        "filename": "src/tint/utils/io/command_windows.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-21T13:44:01Z",
+      "side": 1,
+      "message": "What was the problem with what we were doing before? Was it not working with a release build of Tint?",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 46
+      },
       "revId": "1e97afe1f80c6abcba74f8991c21e979ae9b44da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
