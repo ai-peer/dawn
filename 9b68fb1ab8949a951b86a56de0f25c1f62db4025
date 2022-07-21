@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08779090_36a582d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-21T10:06:29Z",
+      "side": 1,
+      "message": "Please take a look, thanks!",
+      "revId": "9b68fb1ab8949a951b86a56de0f25c1f62db4025",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c7b83aa_f2d36e84",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-21T10:06:29Z",
+      "side": 1,
+      "message": "Or `DispatchIaIu32`?",
+      "revId": "9b68fb1ab8949a951b86a56de0f25c1f62db4025",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eff414b8_db54176d",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-21T10:06:29Z",
+      "side": 1,
+      "message": "Or `DispatchFiaFi32F16`?",
+      "revId": "9b68fb1ab8949a951b86a56de0f25c1f62db4025",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
