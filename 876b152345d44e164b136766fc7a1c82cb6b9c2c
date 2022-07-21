@@ -471,6 +471,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "173ffbde_416a2748",
+        "filename": "src/tint/sem/builtin.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-21T18:15:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2c2cbd7c_68f86d48",
+      "range": {
+        "startLine": 109,
+        "startChar": 24,
+        "endLine": 109,
+        "endChar": 61
+      },
+      "revId": "876b152345d44e164b136766fc7a1c82cb6b9c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d9a1153_eb8d6eeb",
