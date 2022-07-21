@@ -30,6 +30,9 @@ namespace tint::val {
 
 using EntryPointList = std::vector<std::pair<std::string, ast::PipelineStage>>;
 
+/// Name of the FXC compiler DLL
+static constexpr const char kFxcDLLName[] = "d3dcompiler_47.dll";
+
 /// The return structure of Validate()
 struct Result {
     /// True if validation passed
@@ -53,11 +56,13 @@ Result HlslUsingDXC(const std::string& dxc_path,
 #ifdef _WIN32
 /// Hlsl attempts to compile the shader with FXC, verifying that the shader
 /// compiles successfully.
+/// @param fxc_path path to the FXC DLL
 /// @param source the generated HLSL source
 /// @param entry_points the list of entry points to validate
 /// @param overrides optional list of pipeline overrides
 /// @return the result of the compile
-Result HlslUsingFXC(const std::string& source,
+Result HlslUsingFXC(const std::string& fxc_path,
+                    const std::string& source,
                     const EntryPointList& entry_points,
                     const std::vector<std::string>& overrides);
 #endif  // _WIN32
