@@ -123,6 +123,24 @@
       "parentUuid": "6e71e300_8bda3525",
       "revId": "14c5c8d5464c9910bcf8180b275a1f851a75190c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1f10169_839147bb",
+        "filename": "src/tint/utils/bitset.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-21T22:07:57Z",
+      "side": 1,
+      "message": "I\u0027m failing to grasp why this is needed (so, feel free to ignore me and go with Antonio\u0027s review, heh).\n\nWhy do we need to mask out the bit? Like, I set my new size to 32, that adds 4 bytes, we take the last byte added and apply the mask?",
+      "parentUuid": "12817f8f_bf4b9c97",
+      "revId": "14c5c8d5464c9910bcf8180b275a1f851a75190c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
