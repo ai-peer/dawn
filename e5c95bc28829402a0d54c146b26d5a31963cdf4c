@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44f5708e_bc147ca2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-21T22:14:51Z",
+      "side": 1,
+      "message": "ok, PTAL - did some code moving in the previous CL to separate out unchanged parts and make the diff here nicer.\n\nI also renamed things to \"Stream\", \"StreamIn\", \"StreamOut\". Eventually it might be nice to change StreamIn and StreamOut to operator\u003c\u003c and operator\u003e\u003e but I\u0027ll leave that as a future improvement to consider.",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
