@@ -70,6 +70,24 @@
       "parentUuid": "9e0cc19a_7a010909",
       "revId": "272ca249646e0717626242dffad7e76585eb4932",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ee08dd1_c3b8514d",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2848,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-21T14:04:14Z",
+      "side": 1,
+      "message": "Ah, I\u0027ve never seen that before. I assumed by `reference object` you just meant it returned a `Marked\u0026`.",
+      "parentUuid": "e86b2f46_535ce678",
+      "revId": "272ca249646e0717626242dffad7e76585eb4932",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
