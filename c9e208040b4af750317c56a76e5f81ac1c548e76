@@ -182,6 +182,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c55f18d3_e79704ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-21T17:57:42Z",
+      "side": 1,
+      "message": "Sorry for the delay in reviewing this. This is an amazing optimization!\n\nHere are my thoughts on the current `LazySignalSemaphore` approach.\n\n1. Right now, it looks like we don\u0027t create or export any semaphore if the execution serial has passed. I\u0027m not sure if that\u0027s correct. The completed execution serial is incremented based on querying VkFence. Is it correct synchronization to exporting and therefore skip waiting the semaphore in these situations? VkFence is for GPU-CPU synchronization whereas VkSemaphore is for GPU-GPU synchronization - so I\u0027m not sure.\n2. Right now, when we ExportVulkanImage, we don\u0027t create or submit any semaphores yet. It only happens later when you call Resolve(). Two concerns with this:\n  - this could be submitting the semaphores later than we could. Consider for example if you (a) ExportVulkanImage, (b) call device.Tick() implicitly or explicitly, (c) then enqueue some more work, then (d) call Resolve(). The semaphores could be submitted inside (b) instead of at (d).\n  - This still has the problem where we make multiple semaphores when we could make just one. Consider if there are two external images and we call ExportVulkanImage for both of them back-to-back. They should be able to share the same semaphore.\n  \nHere\u0027s my idea about how to resolve these issues.\n - inside Texture::ExportExternalTexture, we GetOrCreate an external semaphore and from the `recordingContext`. We do *not* submit pending commands. The only difference between this and the current top-of-tree code is that we GetOrCreate a semaphore instead of using `TextureVk::mSignalSemaphore` and we remove the code to `SubmitPendingCommands`. This addresses (2) by putting the semaphore on the pending recording context as soon as Dawn is done using it so it is signaled as early as possible on the next submit. It also addresses (1) by making sure that a VkSemaphore is always signaled instead of looking at the execution serials.\n - ExportExternalTexture will also store the semaphore that was GetOrCreate\u0027d into `LazySignalSemaphore`. I think this would need to be done perhaps by `dup`-ing file descriptor since we could be exporting the same semaphore for multiple external textures, and on the Chromium-side they would be separately owned by base::ScopedFD.\n - The `Resolve` operation on `LazySignalSemaphore` would do `SubmitPendingCommands` on the device to ensure that the signals are submitted. We may need to have LazySignalSemaphore ref a wrapper around the GetOrCreate\u0027d semaphore so we can avoid submitting more than once.",
+      "parentUuid": "95d3810a_5c219cc2",
+      "revId": "c9e208040b4af750317c56a76e5f81ac1c548e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0458f4d1_dca3d9e0",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 1
