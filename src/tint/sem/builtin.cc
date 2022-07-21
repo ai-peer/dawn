@@ -27,14 +27,12 @@ TINT_INSTANTIATE_TYPEINFO(tint::sem::Builtin);
 namespace tint::sem {
 namespace {
 
-utils::Vector<const Parameter*, 8> SetOwnerAndReturnWithConst(
-    utils::VectorRef<Parameter*> parameters,
-    const tint::sem::CallTarget* owner) {
+utils::VectorRef<const Parameter*> SetOwner(utils::VectorRef<Parameter*> parameters,
+                                            const tint::sem::CallTarget* owner) {
     for (auto* parameter : parameters) {
         parameter->SetOwner(owner);
     }
-    return utils::Transform<8>(parameters,
-                               [&](Parameter* p) { return static_cast<const Parameter*>(p); });
+    return std::move(parameters);
 }
 
 }  // namespace
@@ -107,7 +105,7 @@ Builtin::Builtin(BuiltinType type,
                  EvaluationStage eval_stage,
                  PipelineStageSet supported_stages,
                  bool is_deprecated)
-    : Base(return_type, SetOwnerAndReturnWithConst(std::move(parameters), this), eval_stage),
+    : Base(return_type, SetOwner(std::move(parameters), this), eval_stage),
       type_(type),
       supported_stages_(supported_stages),
       is_deprecated_(is_deprecated) {}

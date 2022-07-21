@@ -119,7 +119,7 @@ struct Constant : public sem::Constant {
 // Forward declaration
 const Constant* CreateComposite(ProgramBuilder& builder,
                                 const sem::Type* type,
-                                utils::ConstVectorRef<const sem::Constant*> elements);
+                                utils::VectorRef<const sem::Constant*> elements);
 
 /// Element holds a single scalar or abstract-numeric value.
 /// Element implements the Constant interface.
@@ -252,7 +252,7 @@ struct Splat : Constant {
 /// Composite implements the Constant interface.
 struct Composite : Constant {
     Composite(const sem::Type* t,
-              utils::ConstVectorRef<const sem::Constant*> els,
+              utils::VectorRef<const sem::Constant*> els,
               bool all_0,
               bool any_0)
         : type(t), elements(std::move(els)), all_zero(all_0), any_zero(any_0), hash(CalcHash()) {}
@@ -395,7 +395,7 @@ bool Equal(const sem::Constant* a, const sem::Constant* b) {
 /// depending on the element types and values.
 const Constant* CreateComposite(ProgramBuilder& builder,
                                 const sem::Type* type,
-                                utils::ConstVectorRef<const sem::Constant*> elements) {
+                                utils::VectorRef<const sem::Constant*> elements) {
     if (elements.IsEmpty()) {
         return nullptr;
     }
@@ -666,8 +666,7 @@ const sem::Constant* ConstEval::OpComplement(const sem::Type*,
 }
 
 const sem::Constant* ConstEval::OpMinus(const sem::Type*,
-                                        sem::Expression const* const* args,
-                                        size_t) {
+                                        utils::ConstVectorRef<const sem::Expression*> args) {
     return TransformElements(builder, args[0]->ConstantValue(), [&](const sem::Constant* c) {
         return Dispatch_fia_fi32_f16(c, [&](auto i) {  //
             // For signed integrals, avoid C++ UB by not negating the smallest negative number. In

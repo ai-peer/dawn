@@ -59,7 +59,7 @@ auto Transform(const std::vector<IN>& in, TRANSFORMER&& transform)
 /// @returns a new vector with each element of the source vector transformed by `transform`.
 template <typename IN, size_t N, typename TRANSFORMER>
 auto Transform(const Vector<IN, N>& in, TRANSFORMER&& transform)
-    -> Vector<decltype(transform(in[0]))> {
+    -> Vector<decltype(transform(in[0])), N> {
     const auto count = in.Length();
     Vector<decltype(transform(in[0])), N> result;
     result.Reserve(count);

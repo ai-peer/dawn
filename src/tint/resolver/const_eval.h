@@ -45,8 +45,8 @@ namespace tint::resolver {
 class ConstEval {
   public:
     /// Typedef for a constant evaluation function
-    using Function = const sem::Constant* (ConstEval::*)(const sem::Type* result_ty,
-                                                         utils::ConstVectorRef<const sem::Expression*>);
+    using Function = const sem::Constant* (
+        ConstEval::*)(const sem::Type* result_ty, utils::ConstVectorRef<const sem::Expression*>);
 
     /// The result type of a method that may raise a diagnostic error and the caller should abort
     /// resolving. Can be one of three distinct values:
@@ -117,13 +117,15 @@ class ConstEval {
     /// @param ty the result type
     /// @param args the input arguments
     /// @return the converted value, or null if the value cannot be calculated
-    const sem::Constant* Conv(const sem::Type* ty, utils::ConstVectorRef<const sem::Expression*> args);
+    const sem::Constant* Conv(const sem::Type* ty,
+                              utils::ConstVectorRef<const sem::Expression*> args);
 
     /// Zero value type constructor
     /// @param ty the result type
     /// @param args the input arguments (no arguments provided)
     /// @return the constructed value, or null if the value cannot be calculated
-    const sem::Constant* Zero(const sem::Type* ty, utils::ConstVectorRef<const sem::Expression*> args);
+    const sem::Constant* Zero(const sem::Type* ty,
+                              utils::ConstVectorRef<const sem::Expression*> args);
 
     /// Identity value type constructor
     /// @param ty the result type
@@ -181,11 +183,9 @@ class ConstEval {
     /// Minus operator '-'
     /// @param ty the expression type
     /// @param args the input arguments
-    /// @param num_args the number of input arguments (must be 1)
     /// @return the result value, or null if the value cannot be calculated
     const sem::Constant* OpMinus(const sem::Type* ty,
-                                 sem::Expression const* const* args,
-                                 size_t num_args);
+                                 utils::ConstVectorRef<const sem::Expression*> args);
 
   private:
     /// Adds the given error message to the diagnostics

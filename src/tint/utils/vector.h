@@ -22,6 +22,8 @@
 #include <utility>
 #include <vector>
 
+#include "src/tint/castable.h"
+#include "src/tint/traits.h"
 #include "src/tint/utils/bitcast.h"
 
 namespace tint::utils {
@@ -35,8 +37,6 @@ class ConstVectorRef;
 }  // namespace tint::utils
 
 namespace tint::utils {
-
-namespace detail {
 
 /// A slice represents a contigious array of elements of type T.
 template <typename T>
@@ -97,7 +97,41 @@ struct Slice {
     auto rend() const { return std::reverse_iterator<const T*>(begin()); }
 };
 
-}  // namespace detail
+/// Evaluates whether a vector<FROM> and be reinterpreted as a vector<TO>.
+/// Vectors can be reinterpreted if both FROM and TO are pointers to a type that derives from
+/// CastableBase. Vectors of non-`const` Castable pointers can be converted to a vector of `const`
+/// Castable pointers.
+template <typename TO, typename FROM>
+static constexpr bool CanReinterpretSlice =
+    // TO and FROM are both pointer types
+    std::is_pointer_v<TO> && std::is_pointer_v<FROM> &&  //
+    // const can only be applied, not removed
+    (std::is_const_v<std::remove_pointer_t<TO>> ||
+     !std::is_const_v<std::remove_pointer_t<FROM>>)&&  //
+    // TO and FROM are both Castable
+    IsCastable<std::remove_pointer_t<FROM>, std::remove_pointer_t<TO>> &&
+    // FROM is of, or derives from TO
+    traits::IsTypeOrDerived<std::remove_pointer_t<FROM>, std::remove_pointer_t<TO>>;
+
+/// Reinterprets `const Slice<FROM>*` as `const Slice<TO>*`
+/// @param slice a pointer to the slice to reinterpret
+/// @returns the reinterpreted slice
+/// @see CanReinterpretSlice
+template <typename TO, typename FROM>
+const Slice<TO>* ReinterpretSlice(const Slice<FROM>* slice) {
+    static_assert(CanReinterpretSlice<TO, FROM>);
+    return Bitcast<const Slice<TO>*>(slice);
+}
+
+/// Reinterprets `Slice<FROM>*` as `Slice<TO>*`
+/// @param slice a pointer to the slice to reinterpret
+/// @returns the reinterpreted slice
+/// @see CanReinterpretSlice
+template <typename TO, typename FROM>
+Slice<TO>* ReinterpretSlice(Slice<FROM>* slice) {
+    static_assert(CanReinterpretSlice<TO, FROM>);
+    return Bitcast<Slice<TO>*>(slice);
+}
 
 /// Vector is a small-object-optimized, dynamically-sized vector of contigious elements of type T.
 ///
@@ -118,18 +152,22 @@ struct Slice {
 ///   array'. This reduces memory copying, but may incur additional memory usage.
 /// * Resizing, or popping elements from a vector that has spilled to a heap allocation does not
 ///   revert back to using the 'small array'. Again, this is to reduce memory copying.
-template <typename T, size_t N = 0>
+template <typename T, size_t N>
 class Vector {
   public:
     /// Type of `T`.
     using value_type = T;
+    /// Value of `N`
+    static constexpr size_t static_length = N;
 
     /// Constructor
     Vector() = default;
 
     /// Constructor
     /// @param elements the elements to place into the vector
-    explicit Vector(std::initializer_list<T> elements) {
+    /// @note The `U` template parameter is required to force the compiler to use the custom
+    /// deduction guide, otherwise it'll default `N` to 0 instead of the number of arguments.
+    Vector(std::initializer_list<T> elements) {
         Reserve(elements.size());
         for (auto& el : elements) {
             new (&impl_.slice.data[impl_.slice.len++]) T{el};
@@ -158,17 +196,32 @@ class Vector {
         MoveOrCopy(VectorRef<T>(std::move(other)));
     }
 
+    /// Copy constructor with covariance / const conversion
+    /// @param other the vector to copy
+    /// @see CanReinterpretSlice for rules about conversion
+    template <typename U, size_t N2, typename = std::enable_if_t<CanReinterpretSlice<T, U>>>
+    Vector(const Vector<U, N2>& other) {  // NOLINT(runtime/explicit)
+        Copy(*ReinterpretSlice<T>(&other.impl_.slice));
+    }
+
+    /// Move constructor with covariance / const conversion
+    /// @param other the vector to move
+    /// @see CanReinterpretSlice for rules about conversion
+    template <typename U, size_t N2, typename = std::enable_if_t<CanReinterpretSlice<T, U>>>
+    Vector(Vector<U, N2>&& other) {  // NOLINT(runtime/explicit)
+        MoveOrCopy(VectorRef<T>(std::move(other)));
+    }
+
     /// Move constructor from a mutable vector reference
     /// @param other the vector reference to move
-    Vector(VectorRef<T>&& other) {  // NOLINT(runtime/explicit)
-        MoveOrCopy(std::move(other));
-    }
+    explicit Vector(VectorRef<T>&& other) { MoveOrCopy(std::move(other)); }
 
     /// Copy constructor from an immutable vector reference
     /// @param other the vector reference to copy
-    Vector(const ConstVectorRef<T>& other) {  // NOLINT(runtime/explicit)
-        Copy(other.slice_);
-    }
+    explicit Vector(const ConstVectorRef<T>& other) { Copy(other.slice_); }
+
+    /// Move constructor from an immutable vector reference (invalid)
+    Vector(ConstVectorRef<T>&&) = delete;  // NOLINT(runtime/explicit)
 
     /// Destructor
     ~Vector() { ClearAndFree(); }
@@ -370,7 +423,15 @@ class Vector {
     friend class ConstVectorRef;
 
     /// The slice type used by this vector
-    using Slice = detail::Slice<T>;
+    using Slice = utils::Slice<T>;
+
+    template <typename T0, typename... Ts>
+    void AppendVariadic(T0&& first, Ts&&... others) {
+        new (&impl_.slice.data[impl_.slice.len++]) T(std::forward<T0>(first));
+        if constexpr (sizeof...(others) > 0) {
+            AppendVariadic(std::forward<Ts>(others)...);
+        }
+    }
 
     /// Expands the capacity of the vector
     void Grow() { Reserve(impl_.slice.cap * 2); }
@@ -477,6 +538,43 @@ class Vector {
     std::conditional_t<HasSmallArray, ImplWithSmallArray, ImplWithoutSmallArray> impl_;
 };
 
+namespace detail {
+
+/// Helper for determining the Vector element type (`T`) from the vector's constuctor arguments
+/// @tparam IS_CASTABLE true if the types of `Ts` derive from CastableBase
+/// @tparam Ts the vector constructor argument types to infer the vector element type from.
+template <bool IS_CASTABLE, typename... Ts>
+struct VectorCommonType;
+
+/// VectorCommonType specialization for non-castable types.
+template <typename... Ts>
+struct VectorCommonType</*IS_CASTABLE*/ false, Ts...> {
+    /// The common T type to use for the vector
+    using type = std::common_type_t<Ts...>;
+};
+
+/// VectorCommonType specialization for castable types.
+template <typename... Ts>
+struct VectorCommonType</*IS_CASTABLE*/ true, Ts...> {
+    /// The common Castable type (excluding pointer)
+    using common_ty = CastableCommonBase<std::remove_pointer_t<Ts>...>;
+    /// The common T type to use for the vector
+    using type = std::conditional_t<(std::is_const_v<std::remove_pointer_t<Ts>> || ...),
+                                    const common_ty*,
+                                    common_ty*>;
+};
+
+}  // namespace detail
+
+/// Helper for determining the Vector element type (`T`) from the vector's constuctor arguments
+template <typename... Ts>
+using VectorCommonType =
+    typename detail::VectorCommonType<IsCastable<std::remove_pointer_t<Ts>...>, Ts...>::type;
+
+/// Deduction guide for Vector
+template <typename... Ts>
+Vector(Ts...) -> Vector<VectorCommonType<Ts...>, sizeof...(Ts)>;
+
 /// VectorRef is a weak reference to a Vector, used to pass vectors as parameters, avoiding copies
 /// between the caller and the callee. VectorRef can accept a Vector of any 'N' value, decoupling
 /// the caller's vector internal size from the callee's vector size.
@@ -500,16 +598,16 @@ class Vector {
 template <typename T>
 class VectorRef {
     /// The slice type used by this vector reference
-    using Slice = detail::Slice<T>;
+    using Slice = utils::Slice<T>;
 
   public:
-    /// Constructor from a Vector.
-    /// @param vector the vector reference
+    /// Constructor from a Vector
+    /// @param vector the vector to create a reference of
     template <size_t N>
     VectorRef(Vector<T, N>& vector)  // NOLINT(runtime/explicit)
         : slice_(vector.impl_.slice), can_move_(false) {}
 
-    /// Constructor from a std::move()'d Vector
+    /// Constructor from a moved Vector
     /// @param vector the vector being moved
     template <size_t N>
     VectorRef(Vector<T, N>&& vector)  // NOLINT(runtime/explicit)
@@ -522,6 +620,32 @@ class VectorRef {
     /// Move constructor
     /// @param other the vector reference
     VectorRef(VectorRef&& other) = default;
+
+    /// Copy constructor with covariance / const conversion
+    /// @param other the other vector reference
+    template <typename U, typename = std::enable_if_t<CanReinterpretSlice<T, U>>>
+    VectorRef(const VectorRef<U>& other)  // NOLINT(runtime/explicit)
+        : slice_(*ReinterpretSlice<T>(&other.slice_)), can_move_(false) {}
+
+    /// Move constructor with covariance / const conversion
+    /// @param other the vector reference
+    template <typename U, typename = std::enable_if_t<CanReinterpretSlice<T, U>>>
+    VectorRef(VectorRef<U>&& other)  // NOLINT(runtime/explicit)
+        : slice_(*ReinterpretSlice<T>(&other.slice_)), can_move_(other.can_move_) {}
+
+    /// Constructor from a Vector with covariance / const conversion
+    /// @param vector the vector to create a reference of
+    /// @see CanReinterpretSlice for rules about conversion
+    template <typename U, size_t N, typename = std::enable_if_t<CanReinterpretSlice<T, U>>>
+    VectorRef(Vector<U, N>& vector)  // NOLINT(runtime/explicit)
+        : slice_(*ReinterpretSlice<T>(&vector.impl_.slice)), can_move_(false) {}
+
+    /// Constructor from a moved Vector with covariance / const conversion
+    /// @param vector the vector to create a reference of
+    /// @see CanReinterpretSlice for rules about conversion
+    template <typename U, size_t N, typename = std::enable_if_t<CanReinterpretSlice<T, U>>>
+    VectorRef(Vector<U, N>&& vector)  // NOLINT(runtime/explicit)
+        : slice_(*ReinterpretSlice<T>(&vector.impl_.slice)), can_move_(vector.impl_.CanMove()) {}
 
     /// Index operator
     /// @param i the element index. Must be less than `len`.
@@ -580,10 +704,15 @@ class VectorRef {
     auto rend() const { return slice_.rend(); }
 
   private:
-    /// Friend classes
+    /// Friend class
     template <typename, size_t>
     friend class Vector;
 
+    /// Friend class
+    template <typename>
+    friend class VectorRef;
+
+    /// Friend class
     template <typename>
     friend class ConstVectorRef;
 
@@ -599,7 +728,7 @@ class VectorRef {
 template <typename T>
 class ConstVectorRef {
     /// The slice type used by this vector reference
-    using Slice = detail::Slice<T>;
+    using Slice = utils::Slice<T>;
 
   public:
     /// Constructor from a Vector.
@@ -615,6 +744,23 @@ class ConstVectorRef {
     /// Conversion constructor to convert from a non-const to const vector reference
     /// @param other the vector reference
     ConstVectorRef(const VectorRef<T>& other) : slice_(other.slice_) {}  // NOLINT(runtime/explicit)
+
+    /// Move constructor. Deleted as this won't move anything.
+    ConstVectorRef(ConstVectorRef&&) = delete;
+
+    /// Constructor from a Vector with covariance / const conversion
+    /// @param vector the vector to create a reference of
+    /// @see CanReinterpretSlice for rules about conversion
+    template <typename U, size_t N, typename = std::enable_if_t<CanReinterpretSlice<T, U>>>
+    ConstVectorRef(const Vector<U, N>& vector)  // NOLINT(runtime/explicit)
+        : slice_(*ReinterpretSlice<T>(&vector.impl_.slice)) {}
+
+    /// Constructor from a VectorRef with covariance / const conversion
+    /// @param other the vector reference
+    /// @see CanReinterpretSlice for rules about conversion
+    template <typename U, typename = std::enable_if_t<CanReinterpretSlice<T, U>>>
+    ConstVectorRef(const VectorRef<U>& other)  // NOLINT(runtime/explicit)
+        : slice_(*ReinterpretSlice<T>(&other.slice_)) {}
 
     /// Index operator
     /// @param i the element index. Must be less than `len`.
@@ -680,14 +826,6 @@ Vector<T, N> ToVector(const std::vector<T>& vector) {
         out.Push(el);
     }
     return out;
-}
-
-/// Helper for constructing a Vector from a set of elements.
-/// The returned Vector's small-array size (`N`) is equal to the number of provided elements.
-/// @param elements the elements used to construct the vector.
-template <typename T, typename... Ts>
-auto MakeVector(Ts&&... elements) {
-    return Vector<T, sizeof...(Ts)>({std::forward<Ts>(elements)...});
 }
 
 }  // namespace tint::utils

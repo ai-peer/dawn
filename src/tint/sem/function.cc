@@ -28,14 +28,12 @@ TINT_INSTANTIATE_TYPEINFO(tint::sem::Function);
 namespace tint::sem {
 namespace {
 
-utils::Vector<const Parameter*, 8> SetOwnerAndReturnWithConst(
-    utils::VectorRef<Parameter*> parameters,
-    const tint::sem::CallTarget* owner) {
+utils::VectorRef<const Parameter*> SetOwner(utils::VectorRef<Parameter*> parameters,
+                                            const tint::sem::CallTarget* owner) {
     for (auto* parameter : parameters) {
         parameter->SetOwner(owner);
     }
-    return utils::Transform<8>(parameters,
-                               [&](Parameter* p) { return static_cast<const Parameter*>(p); });
+    return std::move(parameters);
 }
 
 }  // namespace
@@ -43,9 +41,7 @@ utils::Vector<const Parameter*, 8> SetOwnerAndReturnWithConst(
 Function::Function(const ast::Function* declaration,
                    Type* return_type,
                    utils::VectorRef<Parameter*> parameters)
-    : Base(return_type,
-           SetOwnerAndReturnWithConst(std::move(parameters), this),
-           EvaluationStage::kRuntime),
+    : Base(return_type, SetOwner(std::move(parameters), this), EvaluationStage::kRuntime),
       declaration_(declaration),
       workgroup_size_{WorkgroupDimension{1}, WorkgroupDimension{1}, WorkgroupDimension{1}} {}
 
