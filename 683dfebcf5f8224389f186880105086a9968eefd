@@ -124,6 +124,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65a33006_f6edc796",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-21T18:05:03Z",
+      "side": 1,
+      "message": "\u003e Happy to do this as a followup if we can figure out a clean approach.\nMakes sense.\n\n\u003e As for defaulting to  0 . Yeah, I understand, but 0 seems like the best thing to default to, as it acts like a regular  std::vector\nFair point.",
+      "parentUuid": "ca208ff2_80f46839",
+      "range": {
+        "startLine": 121,
+        "startChar": 31,
+        "endLine": 121,
+        "endChar": 34
+      },
+      "revId": "683dfebcf5f8224389f186880105086a9968eefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8af1068_d79edd99",
