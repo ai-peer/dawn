@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dadab8a4_9028dcb0",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-21T13:52:41Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "a86bbbe3_731f9321",
+      "range": {
+        "startLine": 130,
+        "startChar": 26,
+        "endLine": 130,
+        "endChar": 28
+      },
+      "revId": "9b68fb1ab8949a951b86a56de0f25c1f62db4025",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd4b602d_7f0fd73a",
         "filename": "src/tint/intrinsics.def",
         "patchSetId": 1
@@ -113,6 +137,24 @@
       "side": 1,
       "message": "\u003e Personally, even if it breaks our convention, I would suggest `Dispatch_ia_iu32`.\n\nThat works for me.",
       "parentUuid": "7a11e8cd_94d5939e",
+      "revId": "9b68fb1ab8949a951b86a56de0f25c1f62db4025",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4582d06f_ad5801d6",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-21T13:52:41Z",
+      "side": 1,
+      "message": "+1 much more readable as `Dispatch_ia_iu32`",
+      "parentUuid": "de77111a_a4c2be27",
       "revId": "9b68fb1ab8949a951b86a56de0f25c1f62db4025",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
