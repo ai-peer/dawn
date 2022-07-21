@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5736cd9_5deec20f",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-21T13:39:31Z",
+      "side": 1,
+      "message": "An alternative way of doing this is to check for `kF16` first, then call `expect_ident`. The error message won\u0027t be as precise, but would highlight the `(` and say: `expected identifier for enable directive`",
+      "range": {
+        "startLine": 366,
+        "startChar": 10,
+        "endLine": 366,
+        "endChar": 50
+      },
+      "revId": "0f1dfd61fc760a4ec849123859e4f7eaa377bc9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa647d0a_ec6679d8",
         "filename": "src/tint/reader/wgsl/parser_impl.cc",
         "patchSetId": 1
