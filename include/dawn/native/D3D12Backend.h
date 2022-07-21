@@ -31,6 +31,8 @@ struct ID3D12Resource;
 namespace dawn::native::d3d12 {
 
 class D3D11on12ResourceCache;
+class Device;
+class ExternalImageDXGIImpl;
 
 DAWN_NATIVE_EXPORT Microsoft::WRL::ComPtr<ID3D12Device> GetD3D12Device(WGPUDevice device);
 DAWN_NATIVE_EXPORT DawnSwapChainImplementation CreateNativeSwapChainImpl(WGPUDevice device,
@@ -72,18 +74,29 @@ class DAWN_NATIVE_EXPORT ExternalImageDXGI {
   public:
     ~ExternalImageDXGI();
 
-    // Note: SharedHandle must be a handle to a texture object.
     static std::unique_ptr<ExternalImageDXGI> Create(
         WGPUDevice device,
         const ExternalImageDescriptorDXGISharedHandle* descriptor);
 
+    // Returns true if the external image resources are still valid, otherwise ProduceTexture() is
+    // guaranteed to fail e.g. after device destruction.
+    bool IsValid() const;
+
+    // TODO(sunnyps): |device| is ignored - remove after Chromium migrates to single parameter call.
     WGPUTexture ProduceTexture(WGPUDevice device,
                                const ExternalImageAccessDescriptorDXGIKeyedMutex* descriptor);
 
+    WGPUTexture ProduceTexture(const ExternalImageAccessDescriptorDXGISharedHandle* descriptor);
+
   private:
+<<<<<<< HEAD   (dde07e dawn::native: Check that ExternalTexture bindings are Extern)
     ExternalImageDXGI(Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource,
                       const WGPUTextureDescriptor* descriptor);
+=======
+    explicit ExternalImageDXGI(std::unique_ptr<ExternalImageDXGIImpl> impl);
+>>>>>>> CHANGE (7ae5c4 d3d12: Destroy ExternalImageDXGI resources on device destruc)
 
+<<<<<<< HEAD   (dde07e dawn::native: Check that ExternalTexture bindings are Extern)
     Microsoft::WRL::ComPtr<ID3D12Resource> mD3D12Resource;
 
     // Contents of WGPUTextureDescriptor are stored individually since the descriptor
@@ -97,6 +110,9 @@ class DAWN_NATIVE_EXPORT ExternalImageDXGI {
     uint32_t mSampleCount;
 
     std::unique_ptr<D3D11on12ResourceCache> mD3D11on12ResourceCache;
+=======
+    std::unique_ptr<ExternalImageDXGIImpl> mImpl;
+>>>>>>> CHANGE (7ae5c4 d3d12: Destroy ExternalImageDXGI resources on device destruc)
 };
 
 struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptions : public AdapterDiscoveryOptionsBase {

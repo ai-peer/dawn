@@ -25,6 +25,7 @@
 #include "dawn/common/SwapChainUtils.h"
 #include "dawn/native/d3d12/D3D11on12Util.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
+#include "dawn/native/d3d12/ExternalImageDXGIImpl.h"
 #include "dawn/native/d3d12/NativeSwapChainImplD3D12.h"
 #include "dawn/native/d3d12/ResidencyManagerD3D12.h"
 #include "dawn/native/d3d12/TextureD3D12.h"
@@ -53,6 +54,7 @@ WGPUTextureFormat GetNativeSwapChainPreferredFormat(const DawnSwapChainImplement
 ExternalImageDescriptorDXGISharedHandle::ExternalImageDescriptorDXGISharedHandle()
     : ExternalImageDescriptor(ExternalImageType::DXGISharedHandle) {}
 
+<<<<<<< HEAD   (dde07e dawn::native: Check that ExternalTexture bindings are Extern)
 ExternalImageDXGI::ExternalImageDXGI(ComPtr<ID3D12Resource> d3d12Resource,
                                      const WGPUTextureDescriptor* descriptor)
     : mD3D12Resource(std::move(d3d12Resource)),
@@ -70,20 +72,37 @@ ExternalImageDXGI::ExternalImageDXGI(ComPtr<ID3D12Resource> d3d12Resource,
                 ->internalUsage;
     }
     mD3D11on12ResourceCache = std::make_unique<D3D11on12ResourceCache>();
+=======
+ExternalImageDXGI::ExternalImageDXGI(std::unique_ptr<ExternalImageDXGIImpl> impl)
+    : mImpl(std::move(impl)) {
+    ASSERT(mImpl != nullptr);
+>>>>>>> CHANGE (7ae5c4 d3d12: Destroy ExternalImageDXGI resources on device destruc)
 }
 
 ExternalImageDXGI::~ExternalImageDXGI() = default;
 
+bool ExternalImageDXGI::IsValid() const {
+    return mImpl->IsValid();
+}
+
 WGPUTexture ExternalImageDXGI::ProduceTexture(
     WGPUDevice device,
+<<<<<<< HEAD   (dde07e dawn::native: Check that ExternalTexture bindings are Extern)
     const ExternalImageAccessDescriptorDXGIKeyedMutex* descriptor) {
     Device* backendDevice = ToBackend(FromAPI(device));
+=======
+    const ExternalImageAccessDescriptorDXGISharedHandle* descriptor) {
+    return ProduceTexture(descriptor);
+}
+>>>>>>> CHANGE (7ae5c4 d3d12: Destroy ExternalImageDXGI resources on device destruc)
 
-    // Ensure the texture usage is allowed
-    if (!IsSubset(descriptor->usage, mUsage)) {
-        dawn::ErrorLog() << "Texture usage is not valid for external image";
+WGPUTexture ExternalImageDXGI::ProduceTexture(
+    const ExternalImageAccessDescriptorDXGISharedHandle* descriptor) {
+    if (!IsValid()) {
+        dawn::ErrorLog() << "Cannot produce texture from external image after device destruction";
         return nullptr;
     }
+<<<<<<< HEAD   (dde07e dawn::native: Check that ExternalTexture bindings are Extern)
 
     TextureDescriptor textureDescriptor = {};
     textureDescriptor.usage = static_cast<wgpu::TextureUsage>(descriptor->usage);
@@ -112,6 +131,9 @@ WGPUTexture ExternalImageDXGI::ProduceTexture(
         descriptor->isSwapChainTexture, descriptor->isInitialized);
 
     return ToAPI(texture.Detach());
+=======
+    return mImpl->ProduceTexture(descriptor);
+>>>>>>> CHANGE (7ae5c4 d3d12: Destroy ExternalImageDXGI resources on device destruc)
 }
 
 // static
@@ -119,12 +141,20 @@ std::unique_ptr<ExternalImageDXGI> ExternalImageDXGI::Create(
     WGPUDevice device,
     const ExternalImageDescriptorDXGISharedHandle* descriptor) {
     Device* backendDevice = ToBackend(FromAPI(device));
+<<<<<<< HEAD   (dde07e dawn::native: Check that ExternalTexture bindings are Extern)
 
     Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource;
     if (FAILED(backendDevice->GetD3D12Device()->OpenSharedHandle(descriptor->sharedHandle,
                                                                  IID_PPV_ARGS(&d3d12Resource)))) {
+=======
+    std::unique_ptr<ExternalImageDXGIImpl> impl =
+        backendDevice->CreateExternalImageDXGIImpl(descriptor);
+    if (!impl) {
+        dawn::ErrorLog() << "Failed to create DXGI external image";
+>>>>>>> CHANGE (7ae5c4 d3d12: Destroy ExternalImageDXGI resources on device destruc)
         return nullptr;
     }
+<<<<<<< HEAD   (dde07e dawn::native: Check that ExternalTexture bindings are Extern)
 
     const TextureDescriptor* textureDescriptor = FromAPI(descriptor->cTextureDescriptor);
 
@@ -157,6 +187,9 @@ std::unique_ptr<ExternalImageDXGI> ExternalImageDXGI::Create(
     std::unique_ptr<ExternalImageDXGI> result(
         new ExternalImageDXGI(std::move(d3d12Resource), descriptor->cTextureDescriptor));
     return result;
+=======
+    return std::unique_ptr<ExternalImageDXGI>(new ExternalImageDXGI(std::move(impl)));
+>>>>>>> CHANGE (7ae5c4 d3d12: Destroy ExternalImageDXGI resources on device destruc)
 }
 
 uint64_t SetExternalMemoryReservation(WGPUDevice device,
