@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f7d815e_9378d625",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-07-21T17:57:04Z",
+      "side": 1,
+      "message": "PTAL! Hopefully this gives us enough flexibility to address things like https://dawn-review.googlesource.com/c/dawn/+/96220/4/src/dawn/native/d3d12/DeviceD3D12.cpp#671 when they come up. I don\u0027t think it makes the JSON file too much more complex, either.",
+      "revId": "0739aa075949269b539c3303945013ed4e2b7122",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
