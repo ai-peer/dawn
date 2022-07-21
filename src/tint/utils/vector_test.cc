@@ -66,53 +66,6 @@ TEST(TintVectorTest, Empty_NoSmallArray) {
     EXPECT_EQ(vec.Capacity(), 0u);
 }
 
-TEST(TintVectorTest, SmallArray_ConstructLength_NoSpill) {
-    Vector<int, 2> vec(2);
-    EXPECT_EQ(vec.Length(), 2u);
-    EXPECT_EQ(vec.Capacity(), 2u);
-    EXPECT_EQ(vec[0], 0);
-    EXPECT_EQ(vec[1], 0);
-    EXPECT_TRUE(AllInternallyHeld(vec));
-}
-
-TEST(TintVectorTest, SmallArray_ConstructLength_WithSpill) {
-    Vector<int, 2> vec(3);
-    EXPECT_EQ(vec.Length(), 3u);
-    EXPECT_EQ(vec.Capacity(), 3u);
-    EXPECT_EQ(vec[0], 0);
-    EXPECT_EQ(vec[1], 0);
-    EXPECT_EQ(vec[2], 0);
-    EXPECT_TRUE(AllExternallyHeld(vec));
-}
-
-TEST(TintVectorTest, SmallArray_ConstructLengthValue_NoSpill) {
-    Vector<std::string, 2> vec(2, "abc");
-    EXPECT_EQ(vec.Length(), 2u);
-    EXPECT_EQ(vec.Capacity(), 2u);
-    EXPECT_EQ(vec[0], "abc");
-    EXPECT_EQ(vec[1], "abc");
-    EXPECT_TRUE(AllInternallyHeld(vec));
-}
-
-TEST(TintVectorTest, SmallArray_ConstructLengthValue_WithSpill) {
-    Vector<std::string, 2> vec(3, "abc");
-    EXPECT_EQ(vec.Length(), 3u);
-    EXPECT_EQ(vec.Capacity(), 3u);
-    EXPECT_EQ(vec[0], "abc");
-    EXPECT_EQ(vec[1], "abc");
-    EXPECT_EQ(vec[2], "abc");
-    EXPECT_TRUE(AllExternallyHeld(vec));
-}
-
-TEST(TintVectorTest, ConstructLength_NoSmallArray) {
-    Vector<int> vec(2);
-    EXPECT_EQ(vec.Length(), 2u);
-    EXPECT_EQ(vec.Capacity(), 2u);
-    EXPECT_EQ(vec[0], 0);
-    EXPECT_EQ(vec[1], 0);
-    EXPECT_TRUE(AllExternallyHeld(vec));
-}
-
 TEST(TintVectorTest, ConstructInitializerList_NoSpill) {
     Vector<std::string, 2> vec{"one", "two"};
     EXPECT_EQ(vec.Length(), 2u);
@@ -584,7 +537,7 @@ TEST(TintVectorTest, SmallArray_Reserve_WithSpill) {
     EXPECT_TRUE(AllExternallyHeld(vec));
 }
 
-TEST(TintVectorTest, SmallArray_Resize_NoSpill) {
+TEST(TintVectorTest, SmallArray_ResizeZero_NoSpill) {
     Vector<std::string, 2> vec;
     EXPECT_EQ(vec.Length(), 0u);
     EXPECT_EQ(vec.Capacity(), 2u);
@@ -614,7 +567,7 @@ TEST(TintVectorTest, SmallArray_Resize_NoSpill) {
     EXPECT_TRUE(AllInternallyHeld(vec));
 }
 
-TEST(TintVectorTest, SmallArray_Resize_WithSpill) {
+TEST(TintVectorTest, SmallArray_ResizeZero_WithSpill) {
     Vector<std::string, 1> vec;
     EXPECT_EQ(vec.Length(), 0u);
     EXPECT_EQ(vec.Capacity(), 1u);
@@ -641,6 +594,66 @@ TEST(TintVectorTest, SmallArray_Resize_WithSpill) {
     EXPECT_EQ(vec.Capacity(), 2u);
     EXPECT_EQ(vec[0], "hello");
     EXPECT_EQ(vec[1], "");
+    EXPECT_TRUE(AllExternallyHeld(vec));
+}
+
+TEST(TintVectorTest, SmallArray_ResizeValue_NoSpill) {
+    Vector<std::string, 2> vec;
+    EXPECT_EQ(vec.Length(), 0u);
+    EXPECT_EQ(vec.Capacity(), 2u);
+    vec.Resize(1, "meow");
+    EXPECT_EQ(vec.Length(), 1u);
+    EXPECT_EQ(vec.Capacity(), 2u);
+    EXPECT_EQ(vec[0], "meow");
+    EXPECT_TRUE(AllInternallyHeld(vec));
+    vec[0] = "hello";
+    vec.Resize(2, "woof");
+    EXPECT_EQ(vec.Length(), 2u);
+    EXPECT_EQ(vec.Capacity(), 2u);
+    EXPECT_EQ(vec[0], "hello");
+    EXPECT_EQ(vec[1], "woof");
+    EXPECT_TRUE(AllInternallyHeld(vec));
+    vec[1] = "world";
+    vec.Resize(1, "quack");
+    EXPECT_EQ(vec.Length(), 1u);
+    EXPECT_EQ(vec.Capacity(), 2u);
+    EXPECT_EQ(vec[0], "hello");
+    EXPECT_TRUE(AllInternallyHeld(vec));
+    vec.Resize(2, "hiss");
+    EXPECT_EQ(vec.Length(), 2u);
+    EXPECT_EQ(vec.Capacity(), 2u);
+    EXPECT_EQ(vec[0], "hello");
+    EXPECT_EQ(vec[1], "hiss");
+    EXPECT_TRUE(AllInternallyHeld(vec));
+}
+
+TEST(TintVectorTest, SmallArray_ResizeValue_WithSpill) {
+    Vector<std::string, 1> vec;
+    EXPECT_EQ(vec.Length(), 0u);
+    EXPECT_EQ(vec.Capacity(), 1u);
+    vec.Resize(1, "meow");
+    EXPECT_EQ(vec.Length(), 1u);
+    EXPECT_EQ(vec.Capacity(), 1u);
+    EXPECT_EQ(vec[0], "meow");
+    EXPECT_TRUE(AllInternallyHeld(vec));
+    vec[0] = "hello";
+    vec.Resize(2, "woof");
+    EXPECT_EQ(vec.Length(), 2u);
+    EXPECT_EQ(vec.Capacity(), 2u);
+    EXPECT_EQ(vec[0], "hello");
+    EXPECT_EQ(vec[1], "woof");
+    EXPECT_TRUE(AllExternallyHeld(vec));
+    vec[1] = "world";
+    vec.Resize(1, "quack");
+    EXPECT_EQ(vec.Length(), 1u);
+    EXPECT_EQ(vec.Capacity(), 2u);
+    EXPECT_EQ(vec[0], "hello");
+    EXPECT_TRUE(AllExternallyHeld(vec));
+    vec.Resize(2, "hiss");
+    EXPECT_EQ(vec.Length(), 2u);
+    EXPECT_EQ(vec.Capacity(), 2u);
+    EXPECT_EQ(vec[0], "hello");
+    EXPECT_EQ(vec[1], "hiss");
     EXPECT_TRUE(AllExternallyHeld(vec));
 }
 

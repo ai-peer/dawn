@@ -1475,7 +1475,8 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
     // * A type conversion.
 
     // Resolve all of the arguments, their types and the set of behaviors.
-    utils::Vector<const sem::Expression*, 8> args(expr->args.size());
+    utils::Vector<const sem::Expression*, 8> args;
+    args.Reserve(expr->args.size());
     auto args_stage = sem::EvaluationStage::kConstant;
     sem::Behaviors arg_behaviors;
     for (size_t i = 0; i < expr->args.size(); i++) {
@@ -1483,7 +1484,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
         if (!arg) {
             return nullptr;
         }
-        args[i] = arg;
+        args.Push(arg);
         args_stage = sem::EarliestStage(args_stage, arg->Stage());
         arg_behaviors.Add(arg->Behaviors());
     }
@@ -1560,14 +1561,15 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                 auto* call_target = utils::GetOrCreate(
                     array_ctors_, ArrayConstructorSig{{arr, args.Length(), args_stage}},
                     [&]() -> sem::TypeConstructor* {
-                        utils::Vector<const sem::Parameter*, 8> params(args.Length());
+                        utils::Vector<const sem::Parameter*, 8> params;
+                        params.Reserve(args.Length());
                         for (size_t i = 0; i < args.Length(); i++) {
-                            params[i] = builder_->create<sem::Parameter>(
-                                nullptr,                   // declaration
-                                static_cast<uint32_t>(i),  // index
-                                arr->ElemType(),           // type
-                                ast::StorageClass::kNone,  // storage_class
-                                ast::Access::kUndefined);  // access
+                            params.Push(builder_->create<sem::Parameter>(
+                                nullptr,                    // declaration
+                                static_cast<uint32_t>(i),   // index
+                                arr->ElemType(),            // type
+                                ast::StorageClass::kNone,   // storage_class
+                                ast::Access::kUndefined));  // access
                         }
                         return builder_->create<sem::TypeConstructor>(arr, std::move(params),
                                                                       args_stage);
@@ -1578,8 +1580,8 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                 auto* call_target = utils::GetOrCreate(
                     struct_ctors_, StructConstructorSig{{str, args.Length(), args_stage}},
                     [&]() -> sem::TypeConstructor* {
-                        utils::Vector<const sem::Parameter*, 8> params(
-                            std::min(args.Length(), str->Members().size()));
+                        utils::Vector<const sem::Parameter*, 8> params;
+                        params.Resize(std::min(args.Length(), str->Members().size()));
                         for (size_t i = 0, n = params.Length(); i < n; i++) {
                             params[i] = builder_->create<sem::Parameter>(
                                 nullptr,                    // declaration

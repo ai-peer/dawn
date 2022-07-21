@@ -128,27 +128,6 @@ class Vector {
     Vector() = default;
 
     /// Constructor
-    /// @param length the initial length of the vector. Elements will be zero-initialized.
-    explicit Vector(size_t length) {
-        Reserve(length);
-        for (size_t i = 0; i < length; i++) {
-            new (&impl_.slice.data[i]) T{};
-        }
-        impl_.slice.len = length;
-    }
-
-    /// Constructor
-    /// @param length the initial length of the vector
-    /// @param value the value to copy into each element of the vector
-    Vector(size_t length, const T& value) {
-        Reserve(length);
-        for (size_t i = 0; i < length; i++) {
-            new (&impl_.slice.data[i]) T{value};
-        }
-        impl_.slice.len = length;
-    }
-
-    /// Constructor
     /// @param elements the elements to place into the vector
     explicit Vector(std::initializer_list<T> elements) {
         Reserve(elements.size());
@@ -273,6 +252,20 @@ class Vector {
         }
         for (size_t i = impl_.slice.len; i < new_len; i++) {  // Grow
             new (&impl_.slice.data[i]) T{};
+        }
+        impl_.slice.len = new_len;
+    }
+
+    /// Resizes the vector to the given length, expanding capacity if necessary.
+    /// @param new_len the new vector length
+    /// @param value the value to copy into the new elements
+    void Resize(size_t new_len, const T& value) {
+        Reserve(new_len);
+        for (size_t i = impl_.slice.len; i > new_len; i--) {  // Shrink
+            impl_.slice.data[i - 1].~T();
+        }
+        for (size_t i = impl_.slice.len; i < new_len; i++) {  // Grow
+            new (&impl_.slice.data[i]) T{value};
         }
         impl_.slice.len = new_len;
     }

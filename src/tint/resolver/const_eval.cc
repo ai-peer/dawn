@@ -425,9 +425,10 @@ const Constant* TransformElements(ProgramBuilder& builder, const sem::Constant* 
     if (el_ty == ty) {
         return f(c);
     }
-    utils::Vector<const sem::Constant*, 8> els(n);
+    utils::Vector<const sem::Constant*, 8> els;
+    els.Reserve(n);
     for (uint32_t i = 0; i < n; i++) {
-        els[i] = TransformElements(builder, c->Index(i), f);
+        els.Push(TransformElements(builder, c->Index(i), f));
     }
     return CreateComposite(builder, c->Type(), std::move(els));
 }

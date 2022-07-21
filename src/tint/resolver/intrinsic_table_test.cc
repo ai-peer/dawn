@@ -803,7 +803,8 @@ TEST_F(IntrinsicTableTest, MismatchTypeConversion) {
 
 TEST_F(IntrinsicTableTest, Err257Arguments) {  // crbug.com/1323605
     auto* f32 = create<sem::F32>();
-    utils::Vector<const sem::Type*> arg_tys(257, f32);
+    utils::Vector<const sem::Type*> arg_tys;
+    arg_tys.Resize(257, f32);
     auto result = table->Lookup(BuiltinType::kAbs, std::move(arg_tys), Source{});
     ASSERT_EQ(result.sem, nullptr);
     ASSERT_THAT(Diagnostics().str(), HasSubstr("no matching call"));
