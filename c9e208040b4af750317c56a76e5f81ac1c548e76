@@ -200,6 +200,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5692d3f_db94f28e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:34:24Z",
+      "side": 1,
+      "message": "1) unfortunately when we export, even if commands are completed, we still must transition to a foreign queue for correctness. AFAIK this can cause decompression of some planes to happen etc, so we need the semaphore even if we know the commands complete.\n\nThe ideas Austin gave are a great improvement IMHO and make the code a lot more tight wrt to memory dependencies, and more correct.\n\nHowever the interface exposed to Chromium is much more complicated and means that the various backings start having to track Dawn lazy semaphores instead of just FD. By eagerly transitioning to the foreign queue on submits that use the external textures, we\u0027d be able to keep the same FD-based interface with the optimization. The only downside I can see is that sometimes an external resource could be used in multiple submits, but that should be really rare (WebGPU guidelines are to minimize the number of submits, in most cases it will be just 1). Maybe I\u0027m missing something else?\n\nThe same dup()ing can allow creating a single exportable VkSemaphore for all the external resources used on a submit, then each one gets its own FD.\n\nI really think we\u0027ll eventually gain that eager transition logic, if only because it\u0027s useful to swapchains as well. But for now if you\u0027re ready to make the SharedImage logic more complicated, we could go with Austin\u0027s improvements.",
+      "parentUuid": "c55f18d3_e79704ef",
+      "revId": "c9e208040b4af750317c56a76e5f81ac1c548e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0458f4d1_dca3d9e0",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 1
