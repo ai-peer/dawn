@@ -51,6 +51,41 @@
       "message": "https://chromium-review.googlesource.com/c/chromium/src/+/3781453 links to this CL in chromium DEPS and it\u0027s only failing a compat (GLES backend) test which seems unrelated to this part of the code\n\n",
       "revId": "e3ca41efbb7a199d708e70b58a9442f5ee72ae05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85848c75_3e6a0a9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-22T17:13:36Z",
+      "side": 1,
+      "message": "Now I see why. CQ Dry Run doesn\u0027t run the Dawn bots by default unless the commit description says `Cq-Include-TryBots: dawn bots here...` I manually added them yesterday and never sent this message. I also updated the doc.",
+      "parentUuid": "ff0456ce_79450896",
+      "revId": "e3ca41efbb7a199d708e70b58a9442f5ee72ae05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0814826c_c1436726",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-22T17:13:36Z",
+      "side": 1,
+      "message": "great, still LGTM - Corentin could you take a look?",
+      "revId": "e3ca41efbb7a199d708e70b58a9442f5ee72ae05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
