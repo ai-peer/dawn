@@ -16,6 +16,284 @@
       "message": "ok, PTAL - did some code moving in the previous CL to separate out unchanged parts and make the diff here nicer.\n\nI also renamed things to \"Stream\", \"StreamIn\", \"StreamOut\". Eventually it might be nice to change StreamIn and StreamOut to operator\u003c\u003c and operator\u003e\u003e but I\u0027ll leave that as a future improvement to consider.",
       "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b00e5be_86cc4424",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:22:37Z",
+      "side": 1,
+      "message": "LGTM overall, thanks for splitting a bit, it made review much easier.",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db40ed51_900a161d",
+        "filename": "src/dawn/native/stream/BlobSource.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:22:37Z",
+      "side": 1,
+      "message": "very optional nit: I\u0027ve been wondering in the past if for such use-cases that want to acquire the object we should use Blob\u0026\u0026 to denote that in the function signature.",
+      "range": {
+        "startLine": 26,
+        "startChar": 24,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "298ba673_2a8e945e",
+        "filename": "src/dawn/native/stream/ByteVectorSink.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:22:37Z",
+      "side": 1,
+      "message": "nit: for some reason (I think it has to do with casting in some cases) inheriting from std containers is a bit frowned upon. Any strong reason why this is-a vector and not has-a vector?",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dce173ad_ed6b7ab4",
+        "filename": "src/dawn/native/stream/Sink.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:22:37Z",
+      "side": 1,
+      "message": "Are failure modes allowed or are they just supposed to OOM?",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6057a44d_4d2788a5",
+        "filename": "src/dawn/native/stream/Source.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:22:37Z",
+      "side": 1,
+      "message": "option: This could also return ResultOrError\u003cconst void*\u003e. No strong preference at all.",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2bfa86a_7d51535e",
+        "filename": "src/dawn/native/stream/Stream.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:22:37Z",
+      "side": 1,
+      "message": "Isn\u0027t Read for std::string_view a bit scary because it references the data directly? Is it ever used?",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9a101d2_a651bc36",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:22:37Z",
+      "side": 1,
+      "message": "Serialize and Deserialize seem to have disappeared in this patchset, the comment here and at [1] need to be updated.",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "419efaab_136e0f2d",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:22:37Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecd98105_8eab5491",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:22:37Z",
+      "side": 1,
+      "message": "nit: Why is v2 needed? Isn\u0027t (T\u0026\u0026v, Ts\u0026\u0026... vs) sufficient to make the arbitrary argument case work? ditto for StreamOut.",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4e299cc_469c85e4",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:22:37Z",
+      "side": 1,
+      "message": "Why is this specialization needed given we have one for to_ullong below?",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "840c12f6_f3ce45b4",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:22:37Z",
+      "side": 1,
+      "message": "nit: we could iterate by chunks of to_ullong similarly to how is done in BitSetIterator (though it only does to_ulong)",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "535f0c95_bbc88470",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:22:37Z",
+      "side": 1,
+      "message": "This serialization inverts the order of bits in the serialized stream. Maybe instead do:\n\n byte |\u003d (t[j] ? 1 : 0) \u003c\u003c (j - i)?",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ab4e2e1_ffe0d950",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:22:37Z",
+      "side": 1,
+      "message": "nice!",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "741dcac9_c6caabeb",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:22:37Z",
+      "side": 1,
+      "message": "nit: comment needs updating.",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "039e2b9f_fe3ad242",
+        "filename": "src/dawn/tests/unittests/native/CacheKeyTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:22:37Z",
+      "side": 1,
+      "message": "I\u0027m not sure in which way this test differs from the previous one. Aren\u0027t we just doing the same thing but many times?",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3066f2f_d8d868f9",
+        "filename": "src/dawn/tests/unittests/native/CacheKeyTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:22:37Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

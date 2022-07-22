@@ -22,6 +22,30 @@
       },
       "revId": "5bd76ca38d779f883dffdf1b2e74e7d68522d3d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3605c217_2c3da1a8",
+        "filename": "src/dawn/native/serde/Source.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T13:22:37Z",
+      "side": 1,
+      "message": "Could use ResultOrError, whichever you think is best.",
+      "parentUuid": "0e70fcf3_cb120bef",
+      "range": {
+        "startLine": 25,
+        "startChar": 50,
+        "endLine": 26,
+        "endChar": 26
+      },
+      "revId": "5bd76ca38d779f883dffdf1b2e74e7d68522d3d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
