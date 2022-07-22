@@ -16,6 +16,23 @@
       "message": "Does Dawn have Rubber Stamper?",
       "revId": "2d7e74318e4fb93a5457047074b95cfa5ac539f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bd33797_6b2bb2eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2022-07-22T14:54:44Z",
+      "side": 1,
+      "message": "Even if there is, it won\u0027t trigger now, because I had autosubmit on and Rubber Stamper doesn\u0027t have CQ+2 permission 😞",
+      "revId": "2d7e74318e4fb93a5457047074b95cfa5ac539f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
