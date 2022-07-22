@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcf18329_00e5544f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2022-07-22T14:46:01Z",
+      "side": 1,
+      "message": "Does Dawn have Rubber Stamper?",
+      "revId": "2d7e74318e4fb93a5457047074b95cfa5ac539f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
