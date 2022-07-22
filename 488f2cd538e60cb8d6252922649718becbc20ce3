@@ -16,6 +16,40 @@
       "message": "Thanks Austin!\n\nFWIW I also took the opportunity to add in some validation of the JSON values that should have landed in https://dawn-review.googlesource.com/c/dawn/+/90962 but somehow got lost.",
       "revId": "488f2cd538e60cb8d6252922649718becbc20ce3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "363d014e_7cf7a690",
+        "filename": "generator/dawn_gpu_info_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-07-22T23:13:05Z",
+      "side": 1,
+      "message": "nit: Might make more sense to do outside Architecture since afaict this check is the only reason `mask` is passed in?",
+      "revId": "488f2cd538e60cb8d6252922649718becbc20ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "868c166c_9c812fd4",
+        "filename": "generator/dawn_gpu_info_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-07-22T23:13:05Z",
+      "side": 1,
+      "message": "Supposed to be nested inside the previous for-loop?",
+      "revId": "488f2cd538e60cb8d6252922649718becbc20ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
