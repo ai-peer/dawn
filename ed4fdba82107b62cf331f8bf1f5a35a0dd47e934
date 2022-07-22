@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "ed4fdba82107b62cf331f8bf1f5a35a0dd47e934",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "007b30be_d1156896",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-22T16:05:57Z",
+      "side": 1,
+      "message": "Thanks! We should also update our internal AST naming. Most use \u0027constructor`",
+      "revId": "ed4fdba82107b62cf331f8bf1f5a35a0dd47e934",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
