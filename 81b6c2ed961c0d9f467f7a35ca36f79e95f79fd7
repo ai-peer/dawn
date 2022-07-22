@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d362022_98d58952",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3116,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-22T19:42:30Z",
+      "side": 1,
+      "message": "Because this is a list of attributes, not the parameter list for an attribute.",
+      "parentUuid": "3d839f71_cfe01fdb",
+      "revId": "81b6c2ed961c0d9f467f7a35ca36f79e95f79fd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "379bbb2f_2e2737b3",
