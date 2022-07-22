@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ab4f0b5_3168975a",
+        "filename": "src/dawn/native/stream/BlobSource.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-22T19:29:37Z",
+      "side": 1,
+      "message": "I\u0027m not sure what the convention should be. I haven\u0027t seen taking rvalues in constructors very much though, except for actual move constructors. Though I do suppose this constructor looks like a move constructor.\n\nSo I\u0027ll change this one to be Blob\u0026\u0026, but for other cases in the future like `FooBar(Foo\u0026\u0026, Bar\u0026\u0026)` I think it could pessimize the compiler at times. Because there, I think you would have to pass BOTH Foo and Bar as rvalues.\nIf you wanted something like `FooBar(std::move(foo), bar)` `FooBar(foo, std::move(bar))`, it would have to invoke some constructor overload. So for multi-arg functions, pushing the std::move to the callsite probably improves flexibility.",
+      "parentUuid": "db40ed51_900a161d",
+      "range": {
+        "startLine": 26,
+        "startChar": 24,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "298ba673_2a8e945e",
         "filename": "src/dawn/native/stream/ByteVectorSink.h",
         "patchSetId": 9
@@ -92,6 +116,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "04ecb8a3_16a74135",
+        "filename": "src/dawn/native/stream/Sink.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-22T19:29:37Z",
+      "side": 1,
+      "message": "std::vector is the only implementation right now and as far as I know, we don\u0027t have a way to catch OOM from it (except with exceptions which are disabled in Chromium).\nDo you think we should have it use MaybeError?",
+      "parentUuid": "dce173ad_ed6b7ab4",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6057a44d_4d2788a5",
@@ -109,6 +151,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33d9fff3_d36c7f62",
+        "filename": "src/dawn/native/stream/Source.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-22T19:29:37Z",
+      "side": 1,
+      "message": "ditto about tagged pointer alignment",
+      "parentUuid": "6057a44d_4d2788a5",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2bfa86a_7d51535e",
@@ -122,6 +182,24 @@
       "writtenOn": "2022-07-22T13:22:37Z",
       "side": 1,
       "message": "Isn\u0027t Read for std::string_view a bit scary because it references the data directly? Is it ever used?",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93dbc017_55ad146f",
+        "filename": "src/dawn/native/stream/Stream.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-22T19:29:37Z",
+      "side": 1,
+      "message": "Good point - I\u0027ll remove Reads into types that do not own the data.",
+      "parentUuid": "b2bfa86a_7d51535e",
       "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -196,6 +274,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bfe29239_c502bed8",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-22T19:29:37Z",
+      "side": 1,
+      "message": "will remove",
+      "parentUuid": "d4e299cc_469c85e4",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "840c12f6_f3ce45b4",
         "filename": "src/dawn/native/stream/Stream.h",
         "patchSetId": 9
@@ -207,6 +303,24 @@
       "writtenOn": "2022-07-22T13:22:37Z",
       "side": 1,
       "message": "nit: we could iterate by chunks of to_ullong similarly to how is done in BitSetIterator (though it only does to_ulong)",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9e1b173_b0c2a447",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-22T19:29:37Z",
+      "side": 1,
+      "message": "oh that\u0027s nice. I\u0027ll do that",
+      "parentUuid": "840c12f6_f3ce45b4",
       "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

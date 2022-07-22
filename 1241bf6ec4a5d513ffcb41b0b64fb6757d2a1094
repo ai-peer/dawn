@@ -67,6 +67,24 @@
       "message": "nit: using serde as a name is confusing because of https://serde.rs/ which is somewhat well known.\n\nsrc/dawn/native/serialization?\n\nOr dessert? xD",
       "revId": "1241bf6ec4a5d513ffcb41b0b64fb6757d2a1094",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93919ee0_a9e09b9d",
+        "filename": "src/dawn/native/serde/BlobSource.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-22T19:29:37Z",
+      "side": 1,
+      "message": "probably a stale comment - this is all \"Stream\" now.",
+      "parentUuid": "7a965a07_60da7810",
+      "revId": "1241bf6ec4a5d513ffcb41b0b64fb6757d2a1094",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

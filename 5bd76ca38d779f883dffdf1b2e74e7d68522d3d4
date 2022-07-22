@@ -46,6 +46,30 @@
       },
       "revId": "5bd76ca38d779f883dffdf1b2e74e7d68522d3d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a21794e3_eb3ccb3d",
+        "filename": "src/dawn/native/serde/Source.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-22T19:29:37Z",
+      "side": 1,
+      "message": "See the rest of the comment. Since we\u0027re tightly packing the bytes, the pointers might not be 4-byte aligned. So ResultOrError\u0027s tagged pointer does not work.\nI suppose I could modify ResultOrError to have a way to ask for the untagged version.",
+      "parentUuid": "3605c217_2c3da1a8",
+      "range": {
+        "startLine": 25,
+        "startChar": 50,
+        "endLine": 26,
+        "endChar": 26
+      },
+      "revId": "5bd76ca38d779f883dffdf1b2e74e7d68522d3d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
