@@ -16,6 +16,24 @@
       "message": "This doesn\u0027t seem right, the spec doesn\u0027t have a single element constructor for matrix except for providing another matrix. Did we add this in anticipation of adding it to the spec?",
       "revId": "3b5edf143505f6b97f065e83de0d63f647fd3e50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14152a33_a4fea2e7",
+        "filename": "test/tint/expressions/splat/call/mat.wgsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-22T16:01:16Z",
+      "side": 1,
+      "message": "Good spot. Removed in https://dawn-review.googlesource.com/c/dawn/+/95952",
+      "parentUuid": "5e160bf6_b31ab91c",
+      "revId": "3b5edf143505f6b97f065e83de0d63f647fd3e50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
