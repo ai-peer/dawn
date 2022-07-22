@@ -22,6 +22,30 @@
       },
       "revId": "d02a18ea76e0f8b32c60aba1537dfa12f0faa8ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dc42aec_99ce9d6b",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-07-22T17:12:03Z",
+      "side": 1,
+      "message": "sharedHandle is the deprecated one and is the one Chromium sets in M104 (and even on ToT since we haven\u0027t migrated Chrome to textureSharedHandle yet)",
+      "parentUuid": "50f222b4_c6fa2b65",
+      "range": {
+        "startLine": 540,
+        "startChar": 4,
+        "endLine": 543,
+        "endChar": 5
+      },
+      "revId": "d02a18ea76e0f8b32c60aba1537dfa12f0faa8ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
