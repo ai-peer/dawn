@@ -270,6 +270,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b00afb42_e0134c58",
+        "filename": "src/tint/transform/substitute_override.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-22T13:56:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "56aaddd7_9052641b",
+      "range": {
+        "startLine": 51,
+        "startChar": 12,
+        "endLine": 51,
+        "endChar": 27
+      },
+      "revId": "443acd33e4ee2eab1013706c0bd6ed162ea103b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d535fb0a_c8eb1e2e",
