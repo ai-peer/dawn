@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ce75d7b_ba005b52",
+        "filename": "tools/src/gerrit/gerrit.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-22T17:21:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "57643897_e4769c86",
+      "revId": "9e949d06ff72feb7e35c1b0cfda446b1ad4a73f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14d01723_2c66639a",
