@@ -63,6 +63,7 @@ func GetBuilds(
 }
 
 // WaitForBuildsToComplete waits until all the provided builds have finished.
+// The 'builds' status snapshot will be updated with the latest build results before returning.
 func WaitForBuildsToComplete(
 	ctx context.Context,
 	cfg Config,
@@ -109,7 +110,7 @@ func WaitForBuildsToComplete(
 }
 
 // GetOrStartBuildsAndWait starts the builds as declared in the config file,
-// for the given patchset, if they haven't already been started or if retest is
+// for the given patchset, if they haven't already been started or if 'retest' is
 // true. GetOrStartBuildsAndWait then waits for the builds to complete, and then
 // returns the results.
 func GetOrStartBuildsAndWait(
@@ -123,15 +124,8 @@ func GetOrStartBuildsAndWait(
 
 	if !retest {
 		// Find any existing builds for the patchset
-		err := bb.SearchBuilds(ctx, ps, func(build buildbucket.Build) error {
-			for name, builder := range cfg.Builders {
-				if build.Builder == builder {
-					builds[name] = build
-					break
-				}
-			}
-			return nil
-		})
+		var err error
+		builds, err = GetBuilds(ctx, cfg, ps, bb)
 		if err != nil {
 			return nil, err
 		}
