@@ -86,6 +86,23 @@
       "message": "great, still LGTM - Corentin could you take a look?",
       "revId": "e3ca41efbb7a199d708e70b58a9442f5ee72ae05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3651822e_8352baca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-22T21:18:06Z",
+      "side": 1,
+      "message": "LGTM too!",
+      "revId": "e3ca41efbb7a199d708e70b58a9442f5ee72ae05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
