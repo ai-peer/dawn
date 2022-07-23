@@ -378,7 +378,7 @@ Maybe<bool> ParserImpl::enable_directive() {
                 synchronized_ = true;
                 name = {"f16", t.source()};
                 next();
-            } else if (t.Is(Token::Type::kParenLeft)){
+            } else if (t.Is(Token::Type::kParenLeft)) {
                 // A common error case is writing `enable(foo);` instead of `enable foo;`.
                 synchronized_ = false;
                 return add_error(t.source(), "enable directives don't take parenthesis");
@@ -2563,8 +2563,8 @@ Maybe<const ast::Expression*> ParserImpl::unary_expression() {
         return Failure::kErrored;
     }
     if (!expr.matched) {
-        return add_error(
-            peek_source(), "unable to parse right side of " + std::string(name) + " expression");
+        return add_error(peek_source(),
+                         "unable to parse right side of " + std::string(name) + " expression");
     }
 
     return create<ast::UnaryOpExpression>(src, op, expr.value);
