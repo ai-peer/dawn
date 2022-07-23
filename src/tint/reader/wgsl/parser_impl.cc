@@ -123,7 +123,7 @@ const char kStageAttribute[] = "stage";
 const char kWorkgroupSizeAttribute[] = "workgroup_size";
 
 // https://gpuweb.github.io/gpuweb/wgsl.html#reserved-keywords
-bool is_reserved(Token t) {
+bool is_reserved(const Token& t) {
     return t == "asm" || t == "bf16" || t == "do" || t == "enum" || t == "f64" || t == "handle" ||
            t == "i8" || t == "i16" || t == "i64" || t == "mat" || t == "premerge" ||
            t == "regardless" || t == "typedef" || t == "u8" || t == "u16" || t == "u64" ||
@@ -171,7 +171,7 @@ class ParserImpl::MultiTokenSource {
     /// Constructor that starts with Source at the current peek position
     /// @param parser the parser
     explicit MultiTokenSource(ParserImpl* parser)
-        : MultiTokenSource(parser, parser->peek().source().Begin()) {}
+        : MultiTokenSource(parser, parser->peek_source().Begin()) {}
 
     /// Constructor that starts with the input `start` Source
     /// @param parser the parser
@@ -181,7 +181,7 @@ class ParserImpl::MultiTokenSource {
     /// Implicit conversion to Source that returns the combined source from start
     /// to the current last token's source.
     operator Source() const {
-        Source end = parser_->last_token().source().End();
+        Source end = parser_->last_source().End();
         if (end < start_) {
             end = start_;
         }
@@ -276,30 +276,38 @@ void ParserImpl::deprecated(const Source& source, const std::string& msg) {
 
 Token ParserImpl::next() {
     if (!token_queue_.empty()) {
-        last_token_ = token_queue_.pop_front();
-        return last_token_;
+        auto t = token_queue_.pop_front();
+        last_source_ = t.source();
+        return t;
     }
-    last_token_ = lexer_->next();
-    return last_token_;
+    auto t = lexer_->next();
+    last_source_ = t.source();
+    return t;
 }
 
-Token ParserImpl::peek(size_t idx) {
+void ParserImpl::read_tokens(size_t idx) {
     auto size = token_queue_.size();
-    if (size < idx + 1) {
-        size_t need = idx + 1 - size;
-        for (size_t i = 0; i < need; ++i) {
-            token_queue_.push_back(lexer_->next());
-        }
+    if (size > idx) {
+        return;
     }
+    size_t need = idx + 1 - size;
+    for (size_t i = 0; i < need; ++i) {
+        token_queue_.push_back(lexer_->next());
+    }
+}
+
+const Token& ParserImpl::peek(size_t idx) {
+    read_tokens(idx);
     return token_queue_[idx];
+}
+
+Source ParserImpl::peek_source(size_t idx) {
+    read_tokens(idx);
+    return token_queue_[idx].source();
 }
 
 bool ParserImpl::peek_is(Token::Type tok, size_t idx) {
     return peek(idx).Is(tok);
-}
-
-Token ParserImpl::last_token() const {
-    return last_token_;
 }
 
 bool ParserImpl::Parse() {
@@ -312,15 +320,19 @@ bool ParserImpl::Parse() {
 void ParserImpl::translation_unit() {
     bool after_global_decl = false;
     while (continue_parsing()) {
-        auto p = peek();
-        if (p.IsEof()) {
-            break;
+        Source src;
+        {
+            auto& p = peek();
+            src = p.source();
+            if (p.IsEof()) {
+                break;
+            }
         }
 
         auto ed = enable_directive();
         if (ed.matched) {
             if (after_global_decl) {
-                add_error(p, "enable directives must come before all global declarations");
+                add_error(src, "enable directives must come before all global declarations");
             }
         } else if (ed.errored) {
             // Found a invalid enable directive.
@@ -333,12 +345,12 @@ void ParserImpl::translation_unit() {
             }
 
             if (!gd.matched && !gd.errored) {
-                add_error(p, "unexpected token");
+                add_error(src, "unexpected token");
             }
         }
 
         if (builder_.Diagnostics().error_count() >= max_errors_) {
-            add_error(Source{{}, p.source().file},
+            add_error(Source{{}, src.file},
                       "stopping after " + std::to_string(max_errors_) + " errors");
             break;
         }
@@ -355,27 +367,29 @@ Maybe<bool> ParserImpl::enable_directive() {
 
         // Match the extension name.
         Expect<std::string> name = {""};
-        auto t = peek();
-        if (t.IsIdentifier()) {
-            synchronized_ = true;
-            next();
-            name = {t.to_str(), t.source()};
-        } else if (t.Is(Token::Type::kF16)) {
-            // `f16` is a valid extension name and also a keyword
-            synchronized_ = true;
-            next();
-            name = {"f16", t.source()};
-        } else if (t.Is(Token::Type::kParenLeft)){
-            // A common error case is writing `enable(foo);` instead of `enable foo;`.
-            synchronized_ = false;
-            return add_error(t.source(), "enable directives don't take parenthesis");
-        } else if (handle_error(t)) {
-            // The token might itself be an error.
-            return Failure::kErrored;
-        } else {
-            // Failed to match an extension name.
-            synchronized_ = false;
-            return add_error(t.source(), "invalid extension name");
+        {
+            auto& t = peek();
+            if (t.IsIdentifier()) {
+                synchronized_ = true;
+                name = {t.to_str(), t.source()};
+                next();
+            } else if (t.Is(Token::Type::kF16)) {
+                // `f16` is a valid extension name and also a keyword
+                synchronized_ = true;
+                name = {"f16", t.source()};
+                next();
+            } else if (t.Is(Token::Type::kParenLeft)){
+                // A common error case is writing `enable(foo);` instead of `enable foo;`.
+                synchronized_ = false;
+                return add_error(t.source(), "enable directives don't take parenthesis");
+            } else if (handle_error(t)) {
+                // The token might itself be an error.
+                return Failure::kErrored;
+            } else {
+                // Failed to match an extension name.
+                synchronized_ = false;
+                return add_error(t.source(), "invalid extension name");
+            }
         }
 
         if (!expect("enable directive", Token::Type::kSemicolon)) {
@@ -516,7 +530,7 @@ Maybe<bool> ParserImpl::global_decl() {
         // Attempt to jump to the next '}' - the function might have just been
         // missing an opening line.
         sync_to(Token::Type::kBraceRight, true);
-        return add_error(t, "statement found outside of function body");
+        return add_error(t.source(), "statement found outside of function body");
     }
     if (!stat.errored) {
         // No match, no error - the parser might not have progressed.
@@ -554,7 +568,7 @@ Maybe<const ast::Variable*> ParserImpl::global_variable_decl(ast::AttributeList&
             return Failure::kErrored;
         }
         if (!expr.matched) {
-            return add_error(peek(), "missing initalizer for 'var' declaration");
+            return add_error(peek_source(), "missing initalizer for 'var' declaration");
         }
         initalizer = expr.value;
     }
@@ -612,7 +626,7 @@ Maybe<const ast::Variable*> ParserImpl::global_constant_decl(ast::AttributeList&
             return Failure::kErrored;
         }
         if (!expr.matched) {
-            return add_error(peek(), "missing initializer for " + std::string(use));
+            return add_error(peek_source(), "missing initializer for " + std::string(use));
         }
         initializer = std::move(expr.value);
     }
@@ -953,13 +967,13 @@ Expect<ParserImpl::TypedIdentifier> ParserImpl::expect_variable_ident_decl(std::
         return Failure::kErrored;
     }
 
-    auto t = peek();
+    auto src = peek_source();
     auto type = type_decl();
     if (type.errored) {
         return Failure::kErrored;
     }
     if (!type.matched) {
-        return add_error(t.source(), "invalid type", use);
+        return add_error(src, "invalid type", use);
     }
 
     return TypedIdentifier{type.value, ident.value, ident.source};
@@ -1040,7 +1054,7 @@ Maybe<const ast::Alias*> ParserImpl::type_alias() {
         return Failure::kErrored;
     }
     if (!type.matched) {
-        return add_error(peek(), "invalid type alias");
+        return add_error(peek_source(), "invalid type alias");
     }
 
     return builder_.ty.alias(make_source_range_from(t.source()), name.value, type.value);
@@ -1136,12 +1150,12 @@ Expect<const ast::Type*> ParserImpl::expect_type(std::string_view use) {
         return Failure::kErrored;
     }
     if (!type.matched) {
-        return add_error(peek().source(), "invalid type", use);
+        return add_error(peek_source(), "invalid type", use);
     }
     return type.value;
 }
 
-Expect<const ast::Type*> ParserImpl::expect_type_decl_pointer(Token t) {
+Expect<const ast::Type*> ParserImpl::expect_type_decl_pointer(const Token& t) {
     const char* use = "ptr declaration";
 
     auto storage_class = ast::StorageClass::kNone;
@@ -1182,7 +1196,7 @@ Expect<const ast::Type*> ParserImpl::expect_type_decl_pointer(Token t) {
                                access);
 }
 
-Expect<const ast::Type*> ParserImpl::expect_type_decl_atomic(Token t) {
+Expect<const ast::Type*> ParserImpl::expect_type_decl_atomic(const Token& t) {
     const char* use = "atomic declaration";
 
     auto subtype = expect_lt_gt_block(use, [&] { return expect_type(use); });
@@ -1193,7 +1207,7 @@ Expect<const ast::Type*> ParserImpl::expect_type_decl_atomic(Token t) {
     return builder_.ty.atomic(make_source_range_from(t.source()), subtype.value);
 }
 
-Expect<const ast::Type*> ParserImpl::expect_type_decl_vector(Token t) {
+Expect<const ast::Type*> ParserImpl::expect_type_decl_vector(const Token& t) {
     uint32_t count = 2;
     if (t.Is(Token::Type::kVec3)) {
         count = 3;
@@ -1214,7 +1228,7 @@ Expect<const ast::Type*> ParserImpl::expect_type_decl_vector(Token t) {
     return builder_.ty.vec(make_source_range_from(t.source()), subtype, count);
 }
 
-Expect<const ast::Type*> ParserImpl::expect_type_decl_array(Token t) {
+Expect<const ast::Type*> ParserImpl::expect_type_decl_array(const Token& t) {
     const char* use = "array declaration";
 
     const ast::Expression* size = nullptr;
@@ -1230,7 +1244,7 @@ Expect<const ast::Type*> ParserImpl::expect_type_decl_array(Token t) {
             if (expr.errored) {
                 return Failure::kErrored;
             } else if (!expr.matched) {
-                return add_error(peek(), "expected array size expression");
+                return add_error(peek_source(), "expected array size expression");
             }
 
             size = std::move(expr.value);
@@ -1246,7 +1260,7 @@ Expect<const ast::Type*> ParserImpl::expect_type_decl_array(Token t) {
     return builder_.ty.array(make_source_range_from(t.source()), subtype.value, size);
 }
 
-Expect<const ast::Type*> ParserImpl::expect_type_decl_matrix(Token t) {
+Expect<const ast::Type*> ParserImpl::expect_type_decl_matrix(const Token& t) {
     uint32_t rows = 2;
     uint32_t columns = 2;
     if (t.IsMat3xN()) {
@@ -1274,7 +1288,7 @@ Expect<const ast::Type*> ParserImpl::expect_type_decl_matrix(Token t) {
 }
 
 Expect<ast::StorageClass> ParserImpl::expect_storage_class(std::string_view use) {
-    auto source = peek().source();
+    auto source = peek_source();
     auto ident = expect_ident("storage class");
     if (ident.errored) {
         return Failure::kErrored;
@@ -1307,8 +1321,7 @@ Expect<ast::StorageClass> ParserImpl::expect_storage_class(std::string_view use)
 // struct_decl
 //   : STRUCT IDENT struct_body_decl
 Maybe<const ast::Struct*> ParserImpl::struct_decl() {
-    auto t = peek();
-    auto source = t.source();
+    auto source = peek_source();
 
     if (!match(Token::Type::kStruct)) {
         return Failure::kNoMatch;
@@ -1336,9 +1349,11 @@ Expect<ast::StructMemberList> ParserImpl::expect_struct_body_decl() {
         bool errored = false;
         while (continue_parsing()) {
             // Check for the end of the list.
-            auto t = peek();
-            if (!t.IsIdentifier() && !t.Is(Token::Type::kAttr)) {
-                break;
+            {
+                auto& t = peek();
+                if (!t.IsIdentifier() && !t.Is(Token::Type::kAttr)) {
+                    break;
+                }
             }
 
             auto member = expect_struct_member();
@@ -1460,7 +1475,7 @@ Maybe<ParserImpl::FunctionHeader> ParserImpl::function_header() {
         if (type.errored) {
             errored = true;
         } else if (!type.matched) {
-            return add_error(peek(), "unable to determine function return type");
+            return add_error(peek_source(), "unable to determine function return type");
         } else {
             return_type = type.value;
         }
@@ -1483,9 +1498,11 @@ Expect<ast::ParameterList> ParserImpl::expect_param_list() {
     ast::ParameterList ret;
     while (continue_parsing()) {
         // Check for the end of the list.
-        auto t = peek();
-        if (!t.IsIdentifier() && !t.Is(Token::Type::kAttr)) {
-            break;
+        {
+            auto& t = peek();
+            if (!t.IsIdentifier() && !t.Is(Token::Type::kAttr)) {
+                break;
+            }
         }
 
         auto param = expect_param();
@@ -1524,20 +1541,21 @@ Expect<ast::Parameter*> ParserImpl::expect_param() {
 //   | FRAGMENT
 //   | COMPUTE
 Expect<ast::PipelineStage> ParserImpl::expect_pipeline_stage() {
-    auto t = peek();
+    auto& t = peek();
+    auto src = t.source();
     if (t == kVertexStage) {
         next();  // Consume the peek
-        return {ast::PipelineStage::kVertex, t.source()};
+        return {ast::PipelineStage::kVertex, src};
     }
     if (t == kFragmentStage) {
         next();  // Consume the peek
-        return {ast::PipelineStage::kFragment, t.source()};
+        return {ast::PipelineStage::kFragment, src};
     }
     if (t == kComputeStage) {
         next();  // Consume the peek
-        return {ast::PipelineStage::kCompute, t.source()};
+        return {ast::PipelineStage::kCompute, src};
     }
-    return add_error(peek(), "invalid value for stage attribute");
+    return add_error(src, "invalid value for stage attribute");
 }
 
 Expect<ast::Builtin> ParserImpl::expect_builtin() {
@@ -1575,7 +1593,7 @@ Expect<const ast::Expression*> ParserImpl::expect_paren_expression() {
             return Failure::kErrored;
         }
         if (!expr.matched) {
-            return add_error(peek(), "unable to parse expression");
+            return add_error(peek_source(), "unable to parse expression");
         }
 
         return expr.value;
@@ -1807,7 +1825,7 @@ Maybe<const ast::VariableDeclStatement*> ParserImpl::variable_stmt() {
             return Failure::kErrored;
         }
         if (!initializer.matched) {
-            return add_error(peek(), "missing initializer for 'const' declaration");
+            return add_error(peek_source(), "missing initializer for 'const' declaration");
         }
 
         auto* const_ = create<ast::Const>(decl->source,                             // source
@@ -1835,7 +1853,7 @@ Maybe<const ast::VariableDeclStatement*> ParserImpl::variable_stmt() {
             return Failure::kErrored;
         }
         if (!initializer.matched) {
-            return add_error(peek(), "missing initializer for 'let' declaration");
+            return add_error(peek_source(), "missing initializer for 'let' declaration");
         }
 
         auto* let = create<ast::Let>(decl->source,                             // source
@@ -1862,7 +1880,7 @@ Maybe<const ast::VariableDeclStatement*> ParserImpl::variable_stmt() {
             return Failure::kErrored;
         }
         if (!initializer_expr.matched) {
-            return add_error(peek(), "missing initializer for 'var' declaration");
+            return add_error(peek_source(), "missing initializer for 'var' declaration");
         }
 
         initializer = initializer_expr.value;
@@ -1906,7 +1924,7 @@ Maybe<const ast::IfStatement*> ParserImpl::if_stmt() {
             return Failure::kErrored;
         }
         if (!condition.matched) {
-            return add_error(peek(), "unable to parse condition expression");
+            return add_error(peek_source(), "unable to parse condition expression");
         }
 
         auto body = expect_body_stmt();
@@ -1974,7 +1992,7 @@ Maybe<const ast::SwitchStatement*> ParserImpl::switch_stmt() {
         return Failure::kErrored;
     }
     if (!condition.matched) {
-        return add_error(peek(), "unable to parse selector expression");
+        return add_error(peek_source(), "unable to parse selector expression");
     }
 
     auto body = expect_brace_block("switch statement", [&]() -> Expect<ast::CaseStatementList> {
@@ -2064,7 +2082,7 @@ Expect<ast::CaseSelectorList> ParserImpl::expect_case_selectors() {
     }
 
     if (selectors.empty()) {
-        return add_error(peek(), "unable to parse case selectors");
+        return add_error(peek_source(), "unable to parse case selectors");
     }
 
     return selectors;
@@ -2251,7 +2269,7 @@ Maybe<const ast::WhileStatement*> ParserImpl::while_stmt() {
         return Failure::kErrored;
     }
     if (!condition.matched) {
-        return add_error(peek(), "unable to parse while condition expression");
+        return add_error(peek_source(), "unable to parse while condition expression");
     }
 
     auto body = expect_body_stmt();
@@ -2265,16 +2283,19 @@ Maybe<const ast::WhileStatement*> ParserImpl::while_stmt() {
 // func_call_stmt
 //    : IDENT argument_expression_list
 Maybe<const ast::CallStatement*> ParserImpl::func_call_stmt() {
-    auto t = peek();
-    auto t2 = peek(1);
-    if (!t.IsIdentifier() || !t2.Is(Token::Type::kParenLeft)) {
-        return Failure::kNoMatch;
+    Source source;
+    std::string name;
+    {
+        auto& t = peek();
+        auto& t2 = peek(1);
+        if (!t.IsIdentifier() || !t2.Is(Token::Type::kParenLeft)) {
+            return Failure::kNoMatch;
+        }
+
+        source = t.source();
+        name = t.to_str();
     }
-
     next();  // Consume the first peek
-
-    auto source = t.source();
-    auto name = t.to_str();
 
     auto params = expect_argument_expression_list("function call");
     if (params.errored) {
@@ -2327,9 +2348,6 @@ Maybe<const ast::BlockStatement*> ParserImpl::continuing_stmt() {
 //   | paren_expression
 //   | BITCAST LESS_THAN type_decl GREATER_THAN paren_expression
 Maybe<const ast::Expression*> ParserImpl::primary_expression() {
-    auto t = peek();
-    auto source = t.source();
-
     auto lit = const_literal();
     if (lit.errored) {
         return Failure::kErrored;
@@ -2338,16 +2356,8 @@ Maybe<const ast::Expression*> ParserImpl::primary_expression() {
         return lit.value;
     }
 
-    if (t.Is(Token::Type::kParenLeft)) {
-        auto paren = expect_paren_expression();
-        if (paren.errored) {
-            return Failure::kErrored;
-        }
-
-        return paren.value;
-    }
-
-    if (match(Token::Type::kBitcast)) {
+    Source source;
+    if (match(Token::Type::kBitcast, &source)) {
         const char* use = "bitcast expression";
 
         auto type = expect_lt_gt_block(use, [&] { return expect_type(use); });
@@ -2363,22 +2373,36 @@ Maybe<const ast::Expression*> ParserImpl::primary_expression() {
         return create<ast::BitcastExpression>(source, type.value, params.value);
     }
 
-    if (t.IsIdentifier()) {
-        next();
-
-        auto* ident =
-            create<ast::IdentifierExpression>(t.source(), builder_.Symbols().Register(t.to_str()));
-
-        if (peek_is(Token::Type::kParenLeft)) {
-            auto params = expect_argument_expression_list("function call");
-            if (params.errored) {
+    {
+        auto& t = peek();
+        source = t.source();
+        if (t.Is(Token::Type::kParenLeft)) {
+            auto paren = expect_paren_expression();
+            if (paren.errored) {
                 return Failure::kErrored;
             }
 
-            return create<ast::CallExpression>(source, ident, std::move(params.value));
+            return paren.value;
         }
 
-        return ident;
+        if (t.IsIdentifier()) {
+            auto name = t.to_str();
+            next();
+
+            auto* ident =
+                create<ast::IdentifierExpression>(source, builder_.Symbols().Register(name));
+
+            if (peek_is(Token::Type::kParenLeft)) {
+                auto params = expect_argument_expression_list("function call");
+                if (params.errored) {
+                    return Failure::kErrored;
+                }
+
+                return create<ast::CallExpression>(source, ident, std::move(params.value));
+            }
+
+            return ident;
+        }
     }
 
     auto type = type_decl();
@@ -2412,7 +2436,7 @@ Maybe<const ast::Expression*> ParserImpl::postfix_expression(const ast::Expressi
                     return Failure::kErrored;
                 }
                 if (!param.matched) {
-                    return add_error(peek(), "unable to parse expression inside []");
+                    return add_error(peek_source(), "unable to parse expression inside []");
                 }
 
                 if (!expect("index accessor", Token::Type::kBracketRight)) {
@@ -2493,13 +2517,19 @@ Expect<ast::ExpressionList> ParserImpl::expect_argument_expression_list(std::str
 //   | STAR unary_expression
 //   | AND unary_expression
 Maybe<const ast::Expression*> ParserImpl::unary_expression() {
-    auto t = peek();
-
-    if (match(Token::Type::kPlusPlus) || match(Token::Type::kMinusMinus)) {
-        add_error(t.source(),
+    Source src;
+    if (match(Token::Type::kPlusPlus, &src) || match(Token::Type::kMinusMinus, &src)) {
+        add_error(src,
                   "prefix increment and decrement operators are reserved for a "
                   "future WGSL version");
         return Failure::kErrored;
+    }
+
+    std::string name;
+    {
+        auto& t = peek();
+        src = t.source();
+        name = t.to_name();
     }
 
     ast::UnaryOp op;
@@ -2521,7 +2551,7 @@ Maybe<const ast::Expression*> ParserImpl::unary_expression() {
         // We've hit a maximum parser recursive depth.
         // We can't call into unary_expression() as we might stack overflow.
         // Instead, report an error
-        add_error(peek(), "maximum parser recursive depth reached");
+        add_error(peek_source(), "maximum parser recursive depth reached");
         return Failure::kErrored;
     }
 
@@ -2534,10 +2564,10 @@ Maybe<const ast::Expression*> ParserImpl::unary_expression() {
     }
     if (!expr.matched) {
         return add_error(
-            peek(), "unable to parse right side of " + std::string(t.to_name()) + " expression");
+            peek_source(), "unable to parse right side of " + std::string(name) + " expression");
     }
 
-    return create<ast::UnaryOpExpression>(t.source(), op, expr.value);
+    return create<ast::UnaryOpExpression>(src, op, expr.value);
 }
 
 // multiplicative_expr
@@ -2567,7 +2597,7 @@ Expect<const ast::Expression*> ParserImpl::expect_multiplicative_expr(const ast:
             return Failure::kErrored;
         }
         if (!rhs.matched) {
-            return add_error(peek(),
+            return add_error(peek_source(),
                              "unable to parse right side of " + std::string(name) + " expression");
         }
 
@@ -2613,7 +2643,7 @@ Expect<const ast::Expression*> ParserImpl::expect_additive_expr(const ast::Expre
             return Failure::kErrored;
         }
         if (!rhs.matched) {
-            return add_error(peek(), "unable to parse right side of + expression");
+            return add_error(peek_source(), "unable to parse right side of + expression");
         }
 
         lhs = create<ast::BinaryExpression>(source, op, lhs, rhs.value);
@@ -2660,7 +2690,7 @@ Expect<const ast::Expression*> ParserImpl::expect_shift_expr(const ast::Expressi
             return Failure::kErrored;
         }
         if (!rhs.matched) {
-            return add_error(peek(),
+            return add_error(peek_source(),
                              std::string("unable to parse right side of ") + name + " expression");
         }
 
@@ -2713,7 +2743,7 @@ Expect<const ast::Expression*> ParserImpl::expect_relational_expr(const ast::Exp
             return Failure::kErrored;
         }
         if (!rhs.matched) {
-            return add_error(peek(),
+            return add_error(peek_source(),
                              "unable to parse right side of " + std::string(name) + " expression");
         }
 
@@ -2760,7 +2790,7 @@ Expect<const ast::Expression*> ParserImpl::expect_equality_expr(const ast::Expre
             return Failure::kErrored;
         }
         if (!rhs.matched) {
-            return add_error(peek(),
+            return add_error(peek_source(),
                              "unable to parse right side of " + std::string(name) + " expression");
         }
 
@@ -2800,7 +2830,7 @@ Expect<const ast::Expression*> ParserImpl::expect_and_expr(const ast::Expression
             return Failure::kErrored;
         }
         if (!rhs.matched) {
-            return add_error(peek(), "unable to parse right side of & expression");
+            return add_error(peek_source(), "unable to parse right side of & expression");
         }
 
         lhs = create<ast::BinaryExpression>(source, ast::BinaryOp::kAnd, lhs, rhs.value);
@@ -2837,7 +2867,7 @@ Expect<const ast::Expression*> ParserImpl::expect_exclusive_or_expr(const ast::E
             return Failure::kErrored;
         }
         if (!rhs.matched) {
-            return add_error(peek(), "unable to parse right side of ^ expression");
+            return add_error(peek_source(), "unable to parse right side of ^ expression");
         }
 
         lhs = create<ast::BinaryExpression>(source, ast::BinaryOp::kXor, lhs, rhs.value);
@@ -2874,7 +2904,7 @@ Expect<const ast::Expression*> ParserImpl::expect_inclusive_or_expr(const ast::E
             return Failure::kErrored;
         }
         if (!rhs.matched) {
-            return add_error(peek(), "unable to parse right side of | expression");
+            return add_error(peek_source(), "unable to parse right side of | expression");
         }
 
         lhs = create<ast::BinaryExpression>(source, ast::BinaryOp::kOr, lhs, rhs.value);
@@ -2913,7 +2943,7 @@ Expect<const ast::Expression*> ParserImpl::expect_logical_and_expr(const ast::Ex
             return Failure::kErrored;
         }
         if (!rhs.matched) {
-            return add_error(peek(), "unable to parse right side of && expression");
+            return add_error(peek_source(), "unable to parse right side of && expression");
         }
 
         lhs = create<ast::BinaryExpression>(source, ast::BinaryOp::kLogicalAnd, lhs, rhs.value);
@@ -2950,7 +2980,7 @@ Expect<const ast::Expression*> ParserImpl::expect_logical_or_expr(const ast::Exp
             return Failure::kErrored;
         }
         if (!rhs.matched) {
-            return add_error(peek(), "unable to parse right side of || expression");
+            return add_error(peek_source(), "unable to parse right side of || expression");
         }
 
         lhs = create<ast::BinaryExpression>(source, ast::BinaryOp::kLogicalOr, lhs, rhs.value);
@@ -3015,14 +3045,13 @@ Maybe<ast::BinaryOp> ParserImpl::compound_assignment_operator() {
 // decrement_stmt
 // | lhs_expression MINUS_MINUS
 Maybe<const ast::Statement*> ParserImpl::assignment_stmt() {
-    auto t = peek();
-    auto source = t.source();
+    auto source = peek_source();
 
     // tint:295 - Test for `ident COLON` - this is invalid grammar, and without
     // special casing will error as "missing = for assignment", which is less
     // helpful than this error message:
     if (peek_is(Token::Type::kIdentifier) && peek_is(Token::Type::kColon, 1)) {
-        return add_error(peek().source(), "expected 'var' for variable declaration");
+        return add_error(source, "expected 'var' for variable declaration");
     }
 
     auto lhs = unary_expression();
@@ -3061,7 +3090,7 @@ Maybe<const ast::Statement*> ParserImpl::assignment_stmt() {
         return Failure::kErrored;
     }
     if (!rhs.matched) {
-        return add_error(peek(), "unable to parse right side of assignment");
+        return add_error(peek_source(), "unable to parse right side of assignment");
     }
 
     if (compound_op.value != ast::BinaryOp::kNone) {
@@ -3078,36 +3107,38 @@ Maybe<const ast::Statement*> ParserImpl::assignment_stmt() {
 //   | TRUE
 //   | FALSE
 Maybe<const ast::LiteralExpression*> ParserImpl::const_literal() {
-    auto t = peek();
+    auto& t = peek();
+    auto src = t.source();
+
     if (match(Token::Type::kIntLiteral)) {
-        return create<ast::IntLiteralExpression>(t.source(), t.to_i64(),
+        return create<ast::IntLiteralExpression>(src, t.to_i64(),
                                                  ast::IntLiteralExpression::Suffix::kNone);
     }
     if (match(Token::Type::kIntLiteral_I)) {
-        return create<ast::IntLiteralExpression>(t.source(), t.to_i64(),
+        return create<ast::IntLiteralExpression>(src, t.to_i64(),
                                                  ast::IntLiteralExpression::Suffix::kI);
     }
     if (match(Token::Type::kIntLiteral_U)) {
-        return create<ast::IntLiteralExpression>(t.source(), t.to_i64(),
+        return create<ast::IntLiteralExpression>(src, t.to_i64(),
                                                  ast::IntLiteralExpression::Suffix::kU);
     }
     if (match(Token::Type::kFloatLiteral)) {
-        return create<ast::FloatLiteralExpression>(t.source(), t.to_f64(),
+        return create<ast::FloatLiteralExpression>(src, t.to_f64(),
                                                    ast::FloatLiteralExpression::Suffix::kNone);
     }
     if (match(Token::Type::kFloatLiteral_F)) {
-        return create<ast::FloatLiteralExpression>(t.source(), t.to_f64(),
+        return create<ast::FloatLiteralExpression>(src, t.to_f64(),
                                                    ast::FloatLiteralExpression::Suffix::kF);
     }
     if (match(Token::Type::kFloatLiteral_H)) {
-        return create<ast::FloatLiteralExpression>(t.source(), t.to_f64(),
+        return create<ast::FloatLiteralExpression>(src, t.to_f64(),
                                                    ast::FloatLiteralExpression::Suffix::kH);
     }
     if (match(Token::Type::kTrue)) {
-        return create<ast::BoolLiteralExpression>(t.source(), true);
+        return create<ast::BoolLiteralExpression>(src, true);
     }
     if (match(Token::Type::kFalse)) {
-        return create<ast::BoolLiteralExpression>(t.source(), false);
+        return create<ast::BoolLiteralExpression>(src, false);
     }
     if (handle_error(t)) {
         return Failure::kErrored;
@@ -3143,7 +3174,7 @@ Maybe<ast::AttributeList> ParserImpl::attribute_list() {
 }
 
 Expect<const ast::Attribute*> ParserImpl::expect_attribute() {
-    auto t = peek();
+    auto src = peek_source();
     auto attr = attribute();
     if (attr.errored) {
         return Failure::kErrored;
@@ -3151,7 +3182,7 @@ Expect<const ast::Attribute*> ParserImpl::expect_attribute() {
     if (attr.matched) {
         return attr.value;
     }
-    return add_error(t, "expected attribute");
+    return add_error(src, "expected attribute");
 }
 
 Maybe<const ast::Attribute*> ParserImpl::attribute() {
@@ -3256,7 +3287,7 @@ Maybe<const ast::Attribute*> ParserImpl::attribute() {
             if (expr.errored) {
                 return Failure::kErrored;
             } else if (!expr.matched) {
-                return add_error(peek(), "expected workgroup_size x parameter");
+                return add_error(peek_source(), "expected workgroup_size x parameter");
             }
             x = std::move(expr.value);
 
@@ -3265,7 +3296,7 @@ Maybe<const ast::Attribute*> ParserImpl::attribute() {
                 if (expr.errored) {
                     return Failure::kErrored;
                 } else if (!expr.matched) {
-                    return add_error(peek(), "expected workgroup_size y parameter");
+                    return add_error(peek_source(), "expected workgroup_size y parameter");
                 }
                 y = std::move(expr.value);
 
@@ -3274,7 +3305,7 @@ Maybe<const ast::Attribute*> ParserImpl::attribute() {
                     if (expr.errored) {
                         return Failure::kErrored;
                     } else if (!expr.matched) {
-                        return add_error(peek(), "expected workgroup_size z parameter");
+                        return add_error(peek_source(), "expected workgroup_size z parameter");
                     }
                     z = std::move(expr.value);
                 }
@@ -3369,8 +3400,7 @@ bool ParserImpl::expect_attributes_consumed(ast::AttributeList& in) {
 }
 
 bool ParserImpl::match(Token::Type tok, Source* source /*= nullptr*/) {
-    auto t = peek();
-
+    auto& t = peek();
     if (source != nullptr) {
         *source = t.source();
     }
@@ -3424,20 +3454,22 @@ bool ParserImpl::expect(std::string_view use, Token::Type tok) {
 }
 
 Expect<int32_t> ParserImpl::expect_sint(std::string_view use) {
-    auto t = peek();
+    auto& t = peek();
+    auto src = t.source();
+
     if (!t.Is(Token::Type::kIntLiteral) && !t.Is(Token::Type::kIntLiteral_I)) {
-        return add_error(t.source(), "expected signed integer literal", use);
+        return add_error(src, "expected signed integer literal", use);
     }
 
     int64_t val = t.to_i64();
     if ((val > std::numeric_limits<int32_t>::max()) ||
         (val < std::numeric_limits<int32_t>::min())) {
         // TODO(crbug.com/tint/1504): Test this when abstract int is implemented
-        return add_error(t.source(), "value overflows i32", use);
+        return add_error(src, "value overflows i32", use);
     }
 
     next();
-    return {static_cast<int32_t>(t.to_i64()), t.source()};
+    return {static_cast<int32_t>(val), src};
 }
 
 Expect<uint32_t> ParserImpl::expect_positive_sint(std::string_view use) {
@@ -3530,7 +3562,7 @@ T ParserImpl::sync(Token::Type tok, F&& body) {
         // We've hit a maximum parser recursive depth.
         // We can't call into body() as we might stack overflow.
         // Instead, report an error...
-        add_error(peek(), "maximum parser recursive depth reached");
+        add_error(peek_source(), "maximum parser recursive depth reached");
         // ...and try to resynchronize. If we cannot resynchronize to `tok` then
         // synchronized_ is set to false, and the parser knows that forward progress
         // is not being made.
