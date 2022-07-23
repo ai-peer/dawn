@@ -16,7 +16,7 @@
 
 namespace tint::reader::wgsl {
 
-TokenDeque::TokenDeque() : tokens_(kBufferSize) {}
+TokenDeque::TokenDeque() = default;
 
 TokenDeque::~TokenDeque() = default;
 

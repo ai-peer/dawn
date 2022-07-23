@@ -15,7 +15,7 @@
 #ifndef SRC_TINT_READER_WGSL_TOKEN_DEQUE_H_
 #define SRC_TINT_READER_WGSL_TOKEN_DEQUE_H_
 
-#include <vector>
+#include <array>
 
 #include "src/tint/reader/wgsl/token.h"
 
@@ -37,62 +37,49 @@ class TokenDeque {
     TokenDeque& operator=(TokenDeque&&) = delete;
 
     /// @returns true if the deque is empty
-    inline bool empty() const { return size() == 0; }
+    inline bool empty() const { return front_ == back_; }
 
     /// @returns the number of elements in the deque
     inline size_t size() const {
-        if (back_ < front_) {
-            return kBufferSize - front_ + back_;
-        }
         return back_ - front_;
     }
 
     /// @returns the token at the front of the deque
     inline Token pop_front() {
         auto old_front = front_++;
-        if (front_ == kBufferSize) {
-            front_ = 0;
+        // If the queue is empty, reset to the default position.
+        if (front_ == back_) {
+            front_ = back_ = kDefaultPosition;
         }
-        return tokens_[old_front];
+        return std::move(tokens_[old_front]);
     }
 
     /// Pushes a token onto the front of the deque
     /// @param t the token to push
     inline void push_front(Token t) {
-        // Wrap to end if needed.
-        if (front_ == 0) {
-            front_ = kBufferSize - 1;
-        } else {
-            front_--;
-        }
-        tokens_[front_] = t;
+        tokens_[--front_] = std::move(t);
     }
 
     /// Pushes a token onto the back of the deque
     /// @param t the token to push
     inline void push_back(Token t) {
-        tokens_[back_++] = t;
-        // Wrap to begining of queue
-        if (back_ == kBufferSize) {
-            back_ = 0;
-        }
+        tokens_[back_++] = std::move(t);
     }
 
     /// @param idx the index to retrieve from
     /// @returns the token at the given index.
     inline const Token& operator[](size_t idx) const {
-        if (front_ + idx >= kBufferSize) {
-            return tokens_[idx - (kBufferSize - front_)];
-        }
         return tokens_[front_ + idx];
     }
 
   private:
-    std::vector<Token> tokens_;
+    static constexpr size_t kDefaultPosition = 5;
+
+    std::array<Token, kBufferSize> tokens_;
     // The position of the first element
-    size_t front_ = 0;
+    size_t front_ = kDefaultPosition;
     // The position of one past the last element
-    size_t back_ = 0;
+    size_t back_ = kDefaultPosition;
 };
 
 }  // namespace tint::reader::wgsl

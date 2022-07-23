@@ -100,15 +100,14 @@ TEST_F(TokenDequeTest, push_back) {
 
 TEST_F(TokenDequeTest, push_back_lots) {
     TokenDeque d;
-    d.push_back(Token(Token::Type::kReturn, Source({20, 2})));
     for (size_t i = 0; i < 100; i++) {
         d.push_back(Token(Token::Type::kReturn, Source({20, 2})));
-        EXPECT_EQ(2u, d.size());
+        EXPECT_EQ(1u, d.size());
 
-        EXPECT_TRUE(d[1].Is(Token::Type::kReturn));
+        EXPECT_TRUE(d[0].Is(Token::Type::kReturn));
 
         d.pop_front();
-        EXPECT_EQ(1u, d.size());
+        EXPECT_EQ(0u, d.size());
     }
 }
 
