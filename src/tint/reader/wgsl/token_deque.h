@@ -16,6 +16,7 @@
 #define SRC_TINT_READER_WGSL_TOKEN_DEQUE_H_
 
 #include <array>
+#include <utility>
 
 #include "src/tint/reader/wgsl/token.h"
 
@@ -40,9 +41,7 @@ class TokenDeque {
     inline bool empty() const { return front_ == back_; }
 
     /// @returns the number of elements in the deque
-    inline size_t size() const {
-        return back_ - front_;
-    }
+    inline size_t size() const { return back_ - front_; }
 
     /// @returns the token at the front of the deque
     inline Token pop_front() {
@@ -56,21 +55,15 @@ class TokenDeque {
 
     /// Pushes a token onto the front of the deque
     /// @param t the token to push
-    inline void push_front(Token t) {
-        tokens_[--front_] = std::move(t);
-    }
+    inline void push_front(Token t) { tokens_[--front_] = std::move(t); }
 
     /// Pushes a token onto the back of the deque
     /// @param t the token to push
-    inline void push_back(Token t) {
-        tokens_[back_++] = std::move(t);
-    }
+    inline void push_back(Token t) { tokens_[back_++] = std::move(t); }
 
     /// @param idx the index to retrieve from
     /// @returns the token at the given index.
-    inline const Token& operator[](size_t idx) const {
-        return tokens_[front_ + idx];
-    }
+    inline const Token& operator[](size_t idx) const { return tokens_[front_ + idx]; }
 
   private:
     static constexpr size_t kDefaultPosition = 5;

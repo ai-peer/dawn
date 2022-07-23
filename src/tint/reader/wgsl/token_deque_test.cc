@@ -14,6 +14,8 @@
 
 #include "src/tint/reader/wgsl/token_deque.h"
 
+#include <vector>
+
 #include "gtest/gtest.h"
 
 #include "src/tint/source.h"
