@@ -773,6 +773,8 @@ libtint_source_set("libtint_wgsl_reader_src") {
     "reader/wgsl/parser_impl_detail.h",
     "reader/wgsl/token.cc",
     "reader/wgsl/token.h",
+    "reader/wgsl/token_deque.cc",
+    "reader/wgsl/token_deque.h",
   ]
 
   public_deps = [ ":libtint_core_src" ]
@@ -1406,6 +1408,7 @@ if (tint_build_unittests) {
       "reader/wgsl/parser_impl_variable_stmt_test.cc",
       "reader/wgsl/parser_impl_while_stmt_test.cc",
       "reader/wgsl/parser_test.cc",
+      "reader/wgsl/token_deque_test.cc",
       "reader/wgsl/token_test.cc",
     ]
 
