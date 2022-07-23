@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6293a1b_e7ceee40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-23T15:25:22Z",
+      "side": 1,
+      "message": "PTAL. Seems that the deque used for the token queue takes a good amount of parse time. This makes it a bit better by making some assumptions about how the queue works.",
+      "revId": "ac8157c99025c4a4d547724fb263f95cd4d15359",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
