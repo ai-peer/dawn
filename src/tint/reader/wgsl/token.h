@@ -308,21 +308,25 @@ class Token {
     /// @param source the source of the token
     /// @param val the source double for the token
     Token(Type type, const Source& source, double val);
-    /// Move constructor
-    Token(Token&&);
     /// Copy constructor
     Token(const Token&);
+    /// Move constructor
+    Token(Token&&);
     ~Token();
 
-    /// Assignment operator
+    /// Copy assignment operator
     /// @param b the token to copy
     /// @return Token
     Token& operator=(const Token& b);
+    /// Move assignment operator
+    /// @param b the token to copy
+    /// @return Token
+    Token& operator=(Token&& b);
 
     /// Equality operator with an identifier
     /// @param ident the identifier string
     /// @return true if this token is an identifier and is equal to ident.
-    bool operator==(std::string_view ident);
+    bool operator==(std::string_view ident) const;
 
     /// Returns true if the token is of the given type
     /// @param t the type to check against.

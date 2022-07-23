@@ -283,15 +283,17 @@ Token::Token(Type type, const Source& source, double val)
 
 Token::Token(Type type, const Source& source) : type_(type), source_(source) {}
 
-Token::Token(Token&&) = default;
-
 Token::Token(const Token&) = default;
+
+Token::Token(Token&&) = default;
 
 Token::~Token() = default;
 
 Token& Token::operator=(const Token& rhs) = default;
 
-bool Token::operator==(std::string_view ident) {
+Token& Token::operator=(Token&& rhs) = default;
+
+bool Token::operator==(std::string_view ident) const {
     if (type_ != Type::kIdentifier) {
         return false;
     }
