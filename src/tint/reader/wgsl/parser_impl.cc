@@ -276,9 +276,7 @@ void ParserImpl::deprecated(const Source& source, const std::string& msg) {
 
 Token ParserImpl::next() {
     if (!token_queue_.empty()) {
-        auto t = token_queue_.front();
-        token_queue_.pop_front();
-        last_token_ = t;
+        last_token_ = token_queue_.pop_front();
         return last_token_;
     }
     last_token_ = lexer_->next();
@@ -286,8 +284,12 @@ Token ParserImpl::next() {
 }
 
 Token ParserImpl::peek(size_t idx) {
-    while (token_queue_.size() < (idx + 1)) {
-        token_queue_.push_back(lexer_->next());
+    auto size = token_queue_.size();
+    if (size < idx + 1) {
+        size_t need = idx + 1 - size;
+        for (size_t i = 0; i < need; ++i) {
+            token_queue_.push_back(lexer_->next());
+        }
     }
     return token_queue_[idx];
 }
@@ -3020,7 +3022,7 @@ Maybe<const ast::Statement*> ParserImpl::assignment_stmt() {
     // special casing will error as "missing = for assignment", which is less
     // helpful than this error message:
     if (peek_is(Token::Type::kIdentifier) && peek_is(Token::Type::kColon, 1)) {
-        return add_error(peek(0).source(), "expected 'var' for variable declaration");
+        return add_error(peek().source(), "expected 'var' for variable declaration");
     }
 
     auto lhs = unary_expression();

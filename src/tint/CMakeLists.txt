@@ -539,6 +539,8 @@ if(${TINT_BUILD_WGSL_READER})
     reader/wgsl/parser_impl_detail.h
     reader/wgsl/token.cc
     reader/wgsl/token.h
+    reader/wgsl/token_deque.cc
+    reader/wgsl/token_deque.h
   )
 endif()
 
@@ -1003,6 +1005,7 @@ if(TINT_BUILD_TESTS)
       reader/wgsl/parser_impl_variable_qualifier_test.cc
       reader/wgsl/parser_impl_while_stmt_test.cc
       reader/wgsl/token_test.cc
+      reader/wgsl/token_deque_test.cc
     )
   endif()
 

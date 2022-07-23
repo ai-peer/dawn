@@ -15,7 +15,6 @@
 #ifndef SRC_TINT_READER_WGSL_PARSER_IMPL_H_
 #define SRC_TINT_READER_WGSL_PARSER_IMPL_H_
 
-#include <deque>
 #include <memory>
 #include <string>
 #include <string_view>
@@ -27,6 +26,7 @@
 #include "src/tint/program_builder.h"
 #include "src/tint/reader/wgsl/parser_impl_detail.h"
 #include "src/tint/reader/wgsl/token.h"
+#include "src/tint/reader/wgsl/token_deque.h"
 #include "src/tint/sem/storage_texture.h"
 
 namespace tint::ast {
@@ -838,7 +838,7 @@ class ParserImpl {
     }
 
     std::unique_ptr<Lexer> lexer_;
-    std::deque<Token> token_queue_;
+    TokenDeque token_queue_;
     Token last_token_;
     bool synchronized_ = true;
     uint32_t parse_depth_ = 0;
