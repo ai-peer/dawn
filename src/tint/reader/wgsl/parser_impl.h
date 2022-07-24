@@ -331,18 +331,26 @@ class ParserImpl {
 
     /// @returns the next token
     Token next();
+    /// Reads `idx` tokens ahead in the stream
+    /// @param idx the index of the token to read too
+    void read_tokens(size_t idx);
     /// Peeks ahead and returns the token at `idx` ahead of the current position
     /// @param idx the index of the token to return
     /// @returns the token `idx` positions ahead without advancing
-    Token peek(size_t idx = 0);
+    const Token& peek(size_t idx = 0);
+    /// Peeks ahead and returns the source for the token at `idx` ahead of the
+    /// current position
+    /// @param idx the index of the token to retrieve the source for
+    /// @returns the source at for the token `idx` positions ahead without advancing
+    Source peek_source(size_t idx = 0);
     /// Peeks ahead and returns true if the token at `idx` ahead of the current
     /// position is |tok|
     /// @param idx the index of the token to return
     /// @param tok the token to look for
     /// @returns true if the token `idx` positions ahead is |tok|
     bool peek_is(Token::Type tok, size_t idx = 0);
-    /// @returns the last token that was returned by `next()`
-    Token last_token() const;
+    /// @returns the last source for a token that was returned by `next()`
+    Source last_source() const { return last_source_; }
     /// Appends an error at `t` with the message `msg`
     /// @param t the token to associate the error with
     /// @param msg the error message
@@ -812,11 +820,11 @@ class ParserImpl {
     /// Used to ensure that all attributes are consumed.
     bool expect_attributes_consumed(ast::AttributeList& list);
 
-    Expect<const ast::Type*> expect_type_decl_pointer(Token t);
-    Expect<const ast::Type*> expect_type_decl_atomic(Token t);
-    Expect<const ast::Type*> expect_type_decl_vector(Token t);
-    Expect<const ast::Type*> expect_type_decl_array(Token t);
-    Expect<const ast::Type*> expect_type_decl_matrix(Token t);
+    Expect<const ast::Type*> expect_type_decl_pointer(const Token& t);
+    Expect<const ast::Type*> expect_type_decl_atomic(const Token& t);
+    Expect<const ast::Type*> expect_type_decl_vector(const Token& t);
+    Expect<const ast::Type*> expect_type_decl_array(const Token& t);
+    Expect<const ast::Type*> expect_type_decl_matrix(const Token& t);
 
     Expect<const ast::Type*> expect_type(std::string_view use);
 
@@ -839,7 +847,7 @@ class ParserImpl {
 
     std::unique_ptr<Lexer> lexer_;
     TokenDeque token_queue_;
-    Token last_token_;
+    Source last_source_;
     bool synchronized_ = true;
     uint32_t parse_depth_ = 0;
     std::vector<Token::Type> sync_tokens_;
