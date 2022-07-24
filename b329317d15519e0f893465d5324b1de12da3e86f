@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "835c1921_0dc4605d",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-24T18:58:03Z",
+      "side": 1,
+      "message": "I was starting to think down that path as well but I wasn\u0027t sure what the memory cost would be like to pre-tokenize the entire family. Might be worth exploring, but a big question I\u0027d have is, what is the average size of shader we should expect and is there a maximum size we should consider?",
+      "parentUuid": "d1582073_09a31037",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 307,
+        "endChar": 1
+      },
+      "revId": "b329317d15519e0f893465d5324b1de12da3e86f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dad40426_9174b2e0",
         "filename": "src/tint/reader/wgsl/parser_impl.cc",
         "patchSetId": 3
