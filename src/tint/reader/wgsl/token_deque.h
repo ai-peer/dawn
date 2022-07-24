@@ -43,13 +43,19 @@ class TokenDeque {
     /// @returns the number of elements in the deque
     inline size_t size() const { return back_ - front_; }
 
-    /// @returns the token at the front of the deque
-    inline Token pop_front() {
-        auto old_front = front_++;
+    /// Removes the item from the front of the deque
+    inline void erase_front() {
+        front_++;
         // If the queue is empty, reset to the default position.
         if (front_ == back_) {
             front_ = back_ = kDefaultPosition;
         }
+    }
+
+    /// @returns the token at the front of the deque
+    inline Token pop_front() {
+        auto old_front = front_;
+        erase_front();
         return std::move(tokens_[old_front]);
     }
 

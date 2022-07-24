@@ -331,6 +331,8 @@ class ParserImpl {
 
     /// @returns the next token
     Token next();
+    /// Skips the next token
+    void skip_next();
     /// Reads `idx` tokens ahead in the stream
     /// @param idx the index of the token to read too
     void read_tokens(size_t idx);

@@ -285,6 +285,15 @@ Token ParserImpl::next() {
     return t;
 }
 
+void ParserImpl::skip_next() {
+    if (!token_queue_.empty()) {
+        last_source_ = token_queue_[0].source();
+        token_queue_.erase_front();
+        return;
+    }
+    last_source_ = lexer_->next().source();
+}
+
 void ParserImpl::read_tokens(size_t idx) {
     auto size = token_queue_.size();
     if (size > idx) {
@@ -372,12 +381,12 @@ Maybe<bool> ParserImpl::enable_directive() {
             if (t.IsIdentifier()) {
                 synchronized_ = true;
                 name = {t.to_str(), t.source()};
-                next();
+                skip_next();
             } else if (t.Is(Token::Type::kF16)) {
                 // `f16` is a valid extension name and also a keyword
                 synchronized_ = true;
                 name = {"f16", t.source()};
-                next();
+                skip_next();
             } else if (t.Is(Token::Type::kParenLeft)) {
                 // A common error case is writing `enable(foo);` instead of `enable foo;`.
                 synchronized_ = false;
@@ -520,7 +529,8 @@ Maybe<bool> ParserImpl::global_decl() {
 
     // We have attributes parsed, but nothing to consume them?
     if (attrs.value.size() > 0) {
-        return add_error(next(), "expected declaration after attributes");
+        skip_next();
+        return add_error(last_source_, "expected declaration after attributes");
     }
 
     // We have a statement outside of a function?
@@ -535,7 +545,7 @@ Maybe<bool> ParserImpl::global_decl() {
     if (!stat.errored) {
         // No match, no error - the parser might not have progressed.
         // Ensure we always make _some_ forward progress.
-        next();
+        skip_next();
     }
 
     // The token might itself be an error.
@@ -1037,7 +1047,8 @@ Maybe<const ast::Alias*> ParserImpl::type_alias() {
         return Failure::kNoMatch;
     }
 
-    auto t = next();
+    skip_next();
+    auto src = last_source_;
     const char* use = "type alias";
 
     auto name = expect_ident(use);
@@ -1057,7 +1068,7 @@ Maybe<const ast::Alias*> ParserImpl::type_alias() {
         return add_error(peek_source(), "invalid type alias");
     }
 
-    return builder_.ty.alias(make_source_range_from(t.source()), name.value, type.value);
+    return builder_.ty.alias(make_source_range_from(src), name.value, type.value);
 }
 
 // type_decl
@@ -1112,7 +1123,7 @@ Maybe<const ast::Type*> ParserImpl::type_decl() {
     }
 
     if (t.IsVector()) {
-        next();  // Consume the peek
+        skip_next();  // Consume the peek
         return expect_type_decl_vector(t);
     }
 
@@ -1129,7 +1140,7 @@ Maybe<const ast::Type*> ParserImpl::type_decl() {
     }
 
     if (t.IsMatrix()) {
-        next();  // Consume the peek
+        skip_next();  // Consume the peek
         return expect_type_decl_matrix(t);
     }
 
@@ -1544,15 +1555,15 @@ Expect<ast::PipelineStage> ParserImpl::expect_pipeline_stage() {
     auto& t = peek();
     auto src = t.source();
     if (t == kVertexStage) {
-        next();  // Consume the peek
+        skip_next();  // Consume the peek
         return {ast::PipelineStage::kVertex, src};
     }
     if (t == kFragmentStage) {
-        next();  // Consume the peek
+        skip_next();  // Consume the peek
         return {ast::PipelineStage::kFragment, src};
     }
     if (t == kComputeStage) {
-        next();  // Consume the peek
+        skip_next();  // Consume the peek
         return {ast::PipelineStage::kCompute, src};
     }
     return add_error(src, "invalid value for stage attribute");
@@ -2295,7 +2306,7 @@ Maybe<const ast::CallStatement*> ParserImpl::func_call_stmt() {
         source = t.source();
         name = t.to_str();
     }
-    next();  // Consume the first peek
+    skip_next();  // Consume the first peek
 
     auto params = expect_argument_expression_list("function call");
     if (params.errored) {
@@ -2387,7 +2398,7 @@ Maybe<const ast::Expression*> ParserImpl::primary_expression() {
 
         if (t.IsIdentifier()) {
             auto name = t.to_str();
-            next();
+            skip_next();
 
             auto* ident =
                 create<ast::IdentifierExpression>(source, builder_.Symbols().Register(name));
@@ -2588,9 +2599,14 @@ Expect<const ast::Expression*> ParserImpl::expect_multiplicative_expr(const ast:
             return lhs;
         }
 
-        auto t = next();
-        auto source = t.source();
-        auto name = t.to_name();
+        Source source;
+        std::string_view name;
+        {
+            auto& t = peek();
+            source = t.source();
+            name = t.to_name();
+            skip_next();
+        }
 
         auto rhs = unary_expression();
         if (rhs.errored) {
@@ -2635,8 +2651,8 @@ Expect<const ast::Expression*> ParserImpl::expect_additive_expr(const ast::Expre
             return lhs;
         }
 
-        auto t = next();
-        auto source = t.source();
+        skip_next();
+        auto source = last_source_;
 
         auto rhs = multiplicative_expression();
         if (rhs.errored) {
@@ -2683,8 +2699,8 @@ Expect<const ast::Expression*> ParserImpl::expect_shift_expr(const ast::Expressi
             return lhs;
         }
 
-        auto t = next();
-        auto source = t.source();
+        skip_next();
+        auto source = last_source_;
         auto rhs = additive_expression();
         if (rhs.errored) {
             return Failure::kErrored;
@@ -2734,9 +2750,14 @@ Expect<const ast::Expression*> ParserImpl::expect_relational_expr(const ast::Exp
             return lhs;
         }
 
-        auto t = next();
-        auto source = t.source();
-        auto name = t.to_name();
+        Source source;
+        std::string_view name;
+        {
+            auto& t = peek();
+            source = t.source();
+            name = t.to_name();
+            skip_next();
+        }
 
         auto rhs = shift_expression();
         if (rhs.errored) {
@@ -2781,10 +2802,14 @@ Expect<const ast::Expression*> ParserImpl::expect_equality_expr(const ast::Expre
             return lhs;
         }
 
-        auto t = next();
-        auto source = t.source();
-        auto name = t.to_name();
-
+        Source source;
+        std::string_view name;
+        {
+            auto& t = peek();
+            source = t.source();
+            name = t.to_name();
+            skip_next();
+        }
         auto rhs = relational_expression();
         if (rhs.errored) {
             return Failure::kErrored;
@@ -2822,8 +2847,8 @@ Expect<const ast::Expression*> ParserImpl::expect_and_expr(const ast::Expression
             return lhs;
         }
 
-        auto t = next();
-        auto source = t.source();
+        skip_next();
+        auto source = last_source_;
 
         auto rhs = equality_expression();
         if (rhs.errored) {
@@ -2935,8 +2960,8 @@ Expect<const ast::Expression*> ParserImpl::expect_logical_and_expr(const ast::Ex
             return lhs;
         }
 
-        auto t = next();
-        auto source = t.source();
+        skip_next();
+        auto source = last_source_;
 
         auto rhs = inclusive_or_expression();
         if (rhs.errored) {
@@ -3031,7 +3056,7 @@ Maybe<ast::BinaryOp> ParserImpl::compound_assignment_operator() {
         compound_op = ast::BinaryOp::kXor;
     }
     if (compound_op != ast::BinaryOp::kNone) {
-        next();
+        skip_next();
         return compound_op;
     }
     return Failure::kNoMatch;
@@ -3406,7 +3431,7 @@ bool ParserImpl::match(Token::Type tok, Source* source /*= nullptr*/) {
     }
 
     if (t.Is(tok)) {
-        next();
+        skip_next();
         return true;
     }
     return false;
@@ -3415,7 +3440,7 @@ bool ParserImpl::match(Token::Type tok, Source* source /*= nullptr*/) {
 bool ParserImpl::expect(std::string_view use, Token::Type tok) {
     auto t = peek();
     if (t.Is(tok)) {
-        next();
+        skip_next();
         synchronized_ = true;
         return true;
     }
@@ -3423,7 +3448,7 @@ bool ParserImpl::expect(std::string_view use, Token::Type tok) {
     // Special case to split `>>` and `>=` tokens if we are looking for a `>`.
     if (tok == Token::Type::kGreaterThan &&
         (t.Is(Token::Type::kShiftRight) || t.Is(Token::Type::kGreaterThanEqual))) {
-        next();
+        skip_next();
 
         // Push the second character to the token queue.
         auto source = t.source();
@@ -3468,7 +3493,7 @@ Expect<int32_t> ParserImpl::expect_sint(std::string_view use) {
         return add_error(src, "value overflows i32", use);
     }
 
-    next();
+    skip_next();
     return {static_cast<int32_t>(val), src};
 }
 
@@ -3502,7 +3527,7 @@ Expect<std::string> ParserImpl::expect_ident(std::string_view use) {
     auto t = peek();
     if (t.IsIdentifier()) {
         synchronized_ = true;
-        next();
+        skip_next();
 
         if (is_reserved(t)) {
             return add_error(t.source(), "'" + t.to_str() + "' is a reserved keyword");
@@ -3608,13 +3633,13 @@ bool ParserImpl::sync_to(Token::Type tok, bool consume) {
         // Skip any tokens we don't understand, bringing us to just before the
         // resync point.
         while (i-- > 0) {
-            next();
+            skip_next();
         }
 
         // Is this synchronization token |tok|?
         if (t.Is(tok)) {
             if (consume) {
-                next();
+                skip_next();
             }
             synchronized_ = true;
             return true;
