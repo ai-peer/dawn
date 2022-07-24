@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1582073_09a31037",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-24T18:51:21Z",
+      "side": 1,
+      "message": "We\u0027re doing a whole lot of work to stream tokens from the `Lexer`, and the complexity involved in optimizing this is quite substantial.\n\nLooking at this stack of changes, and the inherent risk associate with references being returned which can be accidentally invalidated (`auto\u0026 t \u003d peek();`, which you wrapped in braces), I\u0027m starting to wonder if the streaming is necessary.\n\nCould we not just have the lexer do a full parse of the source, then immutably index tokens out of that? I\u0027m willing to bet that would be far better on the icache, result in far simpler code, and would be substantially more performant all round. The only down side is temporary memory cost, but I would imagine that would be mostly negligible given that the AST holds almost exactly the same data, and we have two copies of that in memory when we do a clone.",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 307,
+        "endChar": 1
+      },
+      "revId": "b329317d15519e0f893465d5324b1de12da3e86f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dad40426_9174b2e0",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 3472,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-24T18:51:21Z",
+      "side": 1,
+      "message": "The extra copy of `Source` looks like this might be slower than the old code.",
+      "range": {
+        "startLine": 3458,
+        "startChar": 0,
+        "endLine": 3472,
+        "endChar": 44
+      },
+      "revId": "b329317d15519e0f893465d5324b1de12da3e86f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faab7ab2_060a1c0f",
+        "filename": "src/tint/reader/wgsl/parser_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-24T18:51:21Z",
+      "side": 1,
+      "message": "I\u0027d expect a `read` function to return the read data. How about `prefetch` ?",
+      "range": {
+        "startLine": 336,
+        "startChar": 9,
+        "endLine": 336,
+        "endChar": 13
+      },
+      "revId": "b329317d15519e0f893465d5324b1de12da3e86f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
