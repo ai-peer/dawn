@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3675d861_5fe00705",
+        "filename": "src/tint/reader/wgsl/token_deque.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-24T18:38:58Z",
+      "side": 1,
+      "message": "k, will update.",
+      "parentUuid": "92655758_083f14fc",
+      "range": {
+        "startLine": 41,
+        "startChar": 16,
+        "endLine": 41,
+        "endChar": 21
+      },
+      "revId": "d6ae068e33d3fc34bbd5e0c516164fc9ed0e141a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bf29deea_d2a26fc8",
         "filename": "src/tint/reader/wgsl/token_deque.h",
         "patchSetId": 3
@@ -251,6 +275,30 @@
       "side": 1,
       "message": "So why `5`?",
       "parentUuid": "5f10f20e_442582ec",
+      "range": {
+        "startLine": 69,
+        "startChar": 47,
+        "endLine": 69,
+        "endChar": 48
+      },
+      "revId": "d6ae068e33d3fc34bbd5e0c516164fc9ed0e141a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "469d900d_1e74df2e",
+        "filename": "src/tint/reader/wgsl/token_deque.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-24T18:38:58Z",
+      "side": 1,
+      "message": "Seemed like a nice number? It was more then two, and ends up leaving the same amount of space on the end if we peek the 32 elements of a token sync.",
+      "parentUuid": "0592c787_b5f610dc",
       "range": {
         "startLine": 69,
         "startChar": 47,
