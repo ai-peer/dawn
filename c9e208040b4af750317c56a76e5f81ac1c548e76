@@ -218,6 +218,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb67a44f_5f4582a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-24T13:50:31Z",
+      "side": 1,
+      "message": "I basically made the Austin\u0027s improvement work with the latest PS.\nOverall my thoughts are:\na) It\u0027s almost impossible for me to find a new solution of implementation without changing the current Dawn API, that would have no correctness or potential performance downside. I would really appreciate it and be glad to try if you could propose one.\nb) The introduction of LazySignalSemaphore may be the least intrusive one I\u0027ve been able to come up with. With the adapter class GPUFenceOzone(probably should be renamed to GPUFenceDawnAdpater), Clients just need to do one more step -- \u0027Resolve\u0027, before use the fd. If this still seems not easy and straight enough, I am open to a simpler one if any.",
+      "parentUuid": "d5692d3f_db94f28e",
+      "revId": "c9e208040b4af750317c56a76e5f81ac1c548e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0458f4d1_dca3d9e0",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 1
