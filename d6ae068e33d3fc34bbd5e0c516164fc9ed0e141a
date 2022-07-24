@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b64204f7_a26cfbb3",
+        "filename": "src/tint/reader/wgsl/token_deque.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-24T17:48:03Z",
+      "side": 1,
+      "message": "Comment is out of date, I realized it didn\u0027t need to actually be a ring buffer. Will update.",
+      "parentUuid": "f14f3cf7_37c14925",
+      "range": {
+        "startLine": 25,
+        "startChar": 43,
+        "endLine": 25,
+        "endChar": 54
+      },
+      "revId": "d6ae068e33d3fc34bbd5e0c516164fc9ed0e141a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e25b559_c5cee4cd",
         "filename": "src/tint/reader/wgsl/token_deque.h",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-24T17:41:55Z",
       "side": 1,
       "message": "Please can we use pascal case for method names? Also `utils::Vector` went with `IsEmpty`. I suggest the same here.",
+      "range": {
+        "startLine": 41,
+        "startChar": 16,
+        "endLine": 41,
+        "endChar": 21
+      },
+      "revId": "d6ae068e33d3fc34bbd5e0c516164fc9ed0e141a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e27c8e31_90dc4ab0",
+        "filename": "src/tint/reader/wgsl/token_deque.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-24T17:48:03Z",
+      "side": 1,
+      "message": "This is the same api as std::deque, I wanted to make as few changes as possible to the callers.",
+      "parentUuid": "2e25b559_c5cee4cd",
       "range": {
         "startLine": 41,
         "startChar": 16,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae84f3dd_b09994e9",
+        "filename": "src/tint/reader/wgsl/token_deque.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-24T17:48:03Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "bf29deea_d2a26fc8",
+      "range": {
+        "startLine": 44,
+        "startChar": 18,
+        "endLine": 44,
+        "endChar": 22
+      },
+      "revId": "d6ae068e33d3fc34bbd5e0c516164fc9ed0e141a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29d5c732_ff090446",
         "filename": "src/tint/reader/wgsl/token_deque.h",
         "patchSetId": 3
@@ -83,6 +155,30 @@
       "writtenOn": "2022-07-24T17:41:55Z",
       "side": 1,
       "message": "Why `5`? This is a bit too magic for my liking. If this can be more than `2`, I\u0027d suspect that you can reach any number of `push_front`s via `\u003e\u003e` expansion.\n\nCould we just make this a proper ring-buffer with a `utils::Vector`, that handles growing beyond the optimized expected limits?",
+      "range": {
+        "startLine": 69,
+        "startChar": 47,
+        "endLine": 69,
+        "endChar": 48
+      },
+      "revId": "d6ae068e33d3fc34bbd5e0c516164fc9ed0e141a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f10f20e_442582ec",
+        "filename": "src/tint/reader/wgsl/token_deque.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-24T17:48:03Z",
+      "side": 1,
+      "message": "The `\u003e\u003e` expansion should really only be 1. You get a `\u003e\u003e` token, you split it and push `\u003e` token. You then read the `\u003e` token. There is no further pushing that can happen.",
+      "parentUuid": "29d5c732_ff090446",
       "range": {
         "startLine": 69,
         "startChar": 47,
