@@ -161,11 +161,15 @@ Token Lexer::next() {
         return t;
     }
 
+    if (auto t = try_punctuation(); !t.IsUninitialized()) {
+        return t;
+    }
+
     if (auto t = try_ident(); !t.IsUninitialized()) {
         return t;
     }
 
-    if (auto t = try_punctuation(); !t.IsUninitialized()) {
+    if (auto t = try_phony(); !t.IsUninitialized()) {
         return t;
     }
 
@@ -1082,9 +1086,6 @@ Token Lexer::try_punctuation() {
     } else if (matches(pos(), '~')) {
         type = Token::Type::kTilde;
         advance(1);
-    } else if (matches(pos(), '_')) {
-        type = Token::Type::kUnderscore;
-        advance(1);
     } else if (matches(pos(), '^')) {
         if (matches(pos() + 1, '=')) {
             type = Token::Type::kXorEqual;
@@ -1095,6 +1096,19 @@ Token Lexer::try_punctuation() {
         }
     }
 
+    end_source(source);
+
+    return {type, source};
+}
+
+Token Lexer::try_phony() {
+    auto source = begin_source();
+    auto type = Token::Type::kUninitialized;
+
+    if (matches(pos(), '_')) {
+        type = Token::Type::kUnderscore;
+        advance(1);
+    }
     end_source(source);
 
     return {type, source};
