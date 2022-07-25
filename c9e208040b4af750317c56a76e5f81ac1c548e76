@@ -236,6 +236,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "efdcb14e_e61aaaa3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-25T10:17:45Z",
+      "side": 1,
+      "message": "a) An approach like https://dawn-review.googlesource.com/c/dawn/+/97004 could work without changing the API no? What do you see as correctness or performance downsides with it (assuming external textures get used in a single submit in most cases).\nb) The problem with resolving before using the FD in Chromium is that if I understand correctly, it means that every SharedImageBacking that manipulates DawnVulkan now needs to start knowing about multiple types of external semaphores, instead of just FD / Zircon handles. It\u0027s not horrible, but still additional complexity and implementation details that leak.\n\nIf you really don\u0027t feel like going the direction of eager transitions, we can do the LazySemaphore but personally I feel like this is a shorter-term fix that will need to be revisited and that the eager transitions are not much more complicated. But I may be missing stuff.",
+      "parentUuid": "fb67a44f_5f4582a3",
+      "revId": "c9e208040b4af750317c56a76e5f81ac1c548e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0458f4d1_dca3d9e0",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 1

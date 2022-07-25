@@ -22,6 +22,30 @@
       },
       "revId": "aec9630a28564de56ff97a74551ca16dffa43437",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e0dd762_0128a345",
+        "filename": "src/dawn/native/vulkan/VulkanBackend.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-25T10:17:45Z",
+      "side": 1,
+      "message": "You can add // NOLINTNEXTLINE(build/include_order) before the include of vulkan_platform.h",
+      "parentUuid": "1a15811a_3dfe1013",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 40
+      },
+      "revId": "aec9630a28564de56ff97a74551ca16dffa43437",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
