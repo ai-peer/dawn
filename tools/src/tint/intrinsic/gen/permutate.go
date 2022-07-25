@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"strings"
 
-	"dawn.googlesource.com/dawn/tools/src/cmd/intrinsic-gen/sem"
 	"dawn.googlesource.com/dawn/tools/src/fileutils"
+	"dawn.googlesource.com/dawn/tools/src/tint/intrinsic/sem"
 )
 
 // Permuter generates permutations of intrinsic overloads
@@ -30,8 +30,8 @@ type Permuter struct {
 	allTypes []sem.FullyQualifiedName
 }
 
-// buildPermuter returns a new initialized Permuter
-func buildPermuter(s *sem.Sem) (*Permuter, error) {
+// NewPermuter returns a new initialized Permuter
+func NewPermuter(s *sem.Sem) (*Permuter, error) {
 	// allTypes are the list of FQNs that are used for unconstrained types
 	allTypes := []sem.FullyQualifiedName{}
 	for _, ty := range s.Types {
@@ -367,7 +367,7 @@ func validate(fqn sem.FullyQualifiedName, uses *sem.StageUses) bool {
 		}
 	}
 
-	if !isDeclarable(fqn) {
+	if !IsDeclarable(fqn) {
 		return false
 	}
 
