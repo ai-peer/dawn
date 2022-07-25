@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9b5aab9_3fc8e6a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-25T13:33:47Z",
+      "side": 1,
+      "message": "Looks great. Well done!",
+      "revId": "51f44038b2a3609c4b48d48b9933d9984c4096e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c2d8149_5a80d0e7",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-25T13:33:47Z",
+      "side": 1,
+      "message": "nice 😊",
+      "range": {
+        "startLine": 312,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 5
+      },
+      "revId": "51f44038b2a3609c4b48d48b9933d9984c4096e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
