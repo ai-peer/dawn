@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62849aa9_9d65c1ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-25T13:52:54Z",
+      "side": 1,
+      "message": "Great work, Ben. It\u0027ll be interesting to see how using a vector with covariance support works out - I\u0027ve not had experience with that in C++.",
+      "revId": "80eb6c211aed04120178cc3e7e48a81e220c7c32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c27a021_bb90f0c5",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-25T13:52:54Z",
+      "side": 1,
+      "message": "Does this apply? There is not U template parameter for this ctor.",
+      "range": {
+        "startLine": 169,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 93
+      },
+      "revId": "80eb6c211aed04120178cc3e7e48a81e220c7c32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91fc113d_f74a2ddd",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-25T13:52:54Z",
+      "side": 1,
+      "message": "You can get rid of the compile-time recursion using a fold expression like this:\n\n```\n    template \u003ctypename... Ts\u003e\n    void AppendVariadic(Ts\u0026\u0026... args) {\n        (new (\u0026impl_.slice.data[impl_.slice.len++]) T(std::forward\u003cTs\u003e(args))...);\n    }\n```",
+      "range": {
+        "startLine": 429,
+        "startChar": 1,
+        "endLine": 436,
+        "endChar": 0
+      },
+      "revId": "80eb6c211aed04120178cc3e7e48a81e220c7c32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
