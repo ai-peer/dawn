@@ -81,6 +81,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28c5cba5_12cee51b",
+        "filename": "src/tint/reader/wgsl/lexer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-25T13:01:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7117162_d6b9ab0b",
+      "range": {
+        "startLine": 34,
+        "startChar": 23,
+        "endLine": 34,
+        "endChar": 32
+      },
+      "revId": "4b84fd46a3e7a0f0096810dc946cf34fee02c965",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0dcad33_7e362211",
+        "filename": "src/tint/reader/wgsl/lexer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-25T13:01:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "134ef780_ba5a26ee",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 34,
+        "endChar": 15
+      },
+      "revId": "4b84fd46a3e7a0f0096810dc946cf34fee02c965",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be7ad621_581e11b2",
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3d07bf4_5bb05015",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-25T13:01:12Z",
+      "side": 1,
+      "message": "We don\u0027t, there are a bunch of copied sources in here that I want to get rid of, leaving as followup.",
+      "parentUuid": "be7ad621_581e11b2",
+      "range": {
+        "startLine": 287,
+        "startChar": 4,
+        "endLine": 287,
+        "endChar": 16
+      },
+      "revId": "4b84fd46a3e7a0f0096810dc946cf34fee02c965",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cfb702d_20ba0b7e",
@@ -117,6 +189,30 @@
       "writtenOn": "2022-07-25T08:33:16Z",
       "side": 1,
       "message": "We\u0027re only updating the type of the placeholder, and not its source. This might cause weirdnesses in diagnostics.\nI\u0027d suggest changing the signature to `split_token(Token::Type first, Token::Type second)`, which would allow look-back to work as expected too.",
+      "range": {
+        "startLine": 311,
+        "startChar": 0,
+        "endLine": 321,
+        "endChar": 0
+      },
+      "revId": "4b84fd46a3e7a0f0096810dc946cf34fee02c965",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9e6558f_bde13289",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-25T13:01:12Z",
+      "side": 1,
+      "message": "The column for the placeholder source is set correctly in the lexer at the moment when the token is created. It increments the column by one (which is the only case for now, it may have to change in the future if we have more complicated splits).\n\nUpdated to `split_token(rhs, lhs)`.",
+      "parentUuid": "4cfb702d_20ba0b7e",
       "range": {
         "startLine": 311,
         "startChar": 0,
