@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d6b61f2_cf7c84d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-25T04:50:58Z",
+      "side": 1,
+      "message": "PTAL. Hard to tell if this is just noise, or a small improvement.",
+      "revId": "917b5624b7584759c93dd133cb2d6f57929a0fd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
