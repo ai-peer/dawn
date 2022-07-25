@@ -211,6 +211,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d27c079b_6ff5773d",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-25T19:38:56Z",
+      "side": 1,
+      "message": "I think this idea sounds good and is simpler to use than Resolve. We can try it, and as you said, see how it impacts performance since we will have some extra transitions if you use the shared image more than once in separate submits.",
+      "parentUuid": "7d9a5cdf_b3658c68",
+      "range": {
+        "startLine": 825,
+        "startChar": 1,
+        "endLine": 829,
+        "endChar": 14
+      },
+      "revId": "902258d115dfdf4e6c92d3090bc6ffd917ec76b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a90d9e1_86b9df39",
         "filename": "src/dawn/native/vulkan/TextureVk.h",
         "patchSetId": 1
