@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a90d9e1_86b9df39",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-25T10:11:59Z",
+      "side": 1,
+      "message": "Of course this would require a new class that wraps imported/exported VkSemaphores instead of the service acting directly on VkSemaphore / ExternalSemaphoreHandle.",
+      "revId": "902258d115dfdf4e6c92d3090bc6ffd917ec76b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
