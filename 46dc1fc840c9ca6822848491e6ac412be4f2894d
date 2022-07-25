@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d8d4455_c9d94200",
+        "filename": "src/dawn/native/BuddyMemoryAllocator.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-25T18:28:10Z",
+      "side": 1,
+      "message": "No need to change this function.",
+      "parentUuid": "876f3810_6e43d5e2",
+      "range": {
+        "startLine": 62,
+        "startChar": 57,
+        "endLine": 62,
+        "endChar": 96
+      },
+      "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c5fa297_b88f68b4",
@@ -90,6 +114,24 @@
       "side": 1,
       "message": "Can\u0027t we just add the constant value in at [3] ?",
       "parentUuid": "1ba7106f_9ee66517",
+      "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a30e587_faa0fc79",
+        "filename": "src/dawn/native/BuddyMemoryAllocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-25T18:28:10Z",
+      "side": 1,
+      "message": "To Austin, we can add the constant value to [3] for CreatePlacedResource, then we don\u0027t need to change anything in its callee(s) like functions in this file. And the constant value can be moved from this file to ResourceAllocatorManagerD3D12.cpp as Corentin suggested.",
+      "parentUuid": "a813fd49_6b7d18b4",
       "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -213,6 +255,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef8e6620_097d607e",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-25T18:28:10Z",
+      "side": 1,
+      "message": "Yang, the current gpu_info.json will ignore the last two digits for Intel architecture (say `06` in `0x4906` will be ignored), while the link you pointed out need the last two digits: it is using both masked device id and device id (no mask at all). So we need to change the current code and support multiple {mask, architecture} pair. However, even we have the patch from Brandon at https://dawn-review.googlesource.com/c/dawn/+/96900, I feel like we cannot implement the code snippet as you pointed out in Chromium. Because there are a lot of if-elses, and I think the .json file cannot support that. It is understandable because C++ is much more flexible than current .json format and Dawn is used only for webgpu and maybe we don\u0027t need such flexible but complicated code as Chromium. And we can use C++ code block for particular fix/workaround if needed in future, in addition to gpu_info.json. \n\nFor this patch, maybe we can change the current `Gen Xe` to `Gen 12LP` at https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn/gpu_info.json#85, and add Gen 12HP for Intel Alchemist architecture according to Yang\u0027s link at https://source.chromium.org/chromium/chromium/src/+/main:gpu/config/gpu_util.cc;l\u003d909.",
+      "parentUuid": "9d7b9e00_78de11d3",
+      "range": {
+        "startLine": 671,
+        "startChar": 18,
+        "endLine": 671,
+        "endChar": 27
+      },
+      "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1df88668_f1f41344",
@@ -253,6 +319,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23375b97_6533160c",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-25T18:28:10Z",
+      "side": 1,
+      "message": "Added. Note that the constant value is also needed in CreateCommittedResource().",
+      "parentUuid": "d2dc3bef_85a31aa6",
+      "range": {
+        "startLine": 326,
+        "startChar": 52,
+        "endLine": 326,
+        "endChar": 76
+      },
+      "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ad120a7_dae97178",
@@ -266,6 +356,30 @@
       "writtenOn": "2022-07-21T18:21:25Z",
       "side": 1,
       "message": "[4]",
+      "range": {
+        "startLine": 332,
+        "startChar": 4,
+        "endLine": 355,
+        "endChar": 0
+      },
+      "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c964ecb_dc8c9d17",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-25T18:28:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ad120a7_dae97178",
       "range": {
         "startLine": 332,
         "startChar": 4,
@@ -311,6 +425,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "387a10fa_b7748e6a",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-25T18:28:10Z",
+      "side": 1,
+      "message": "Done. Add the constant value directly and removed `needExtraMemory`.",
+      "parentUuid": "f27f8979_560b04db",
+      "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93585ef7_19c4c792",
@@ -324,6 +456,30 @@
       "writtenOn": "2022-07-21T18:21:25Z",
       "side": 1,
       "message": "could we make the heap via `mPooledHeapAllocators[kind]-\u003eAllocateResourceHeap`? This might fit well with reusing the code at [4].",
+      "range": {
+        "startLine": 405,
+        "startChar": 8,
+        "endLine": 415,
+        "endChar": 0
+      },
+      "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d2b903d_a05392b1",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-25T18:28:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93585ef7_19c4c792",
       "range": {
         "startLine": 405,
         "startChar": 8,
@@ -383,6 +539,24 @@
       "side": 1,
       "message": "Please see the the residency-related code at [4]. In order to make sure things are done consistently, perhaps we should factor that out into a helper function that is called here.",
       "parentUuid": "d2001fef_6b3dc10c",
+      "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b47d067f_70fd2d70",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-25T18:28:10Z",
+      "side": 1,
+      "message": "Good point, Austin. Done. In this way, I think it also resolved the residency comment from Corentin.",
+      "parentUuid": "ce56448c_87263fc6",
       "revId": "46dc1fc840c9ca6822848491e6ac412be4f2894d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
