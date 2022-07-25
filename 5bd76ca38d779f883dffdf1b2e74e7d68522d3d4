@@ -70,6 +70,30 @@
       },
       "revId": "5bd76ca38d779f883dffdf1b2e74e7d68522d3d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "939306ff_65ca1539",
+        "filename": "src/dawn/native/serde/Source.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-25T07:17:17Z",
+      "side": 1,
+      "message": "Whoops I should not have assumed the comment was the same as last patchset. Ack.",
+      "parentUuid": "a21794e3_eb3ccb3d",
+      "range": {
+        "startLine": 25,
+        "startChar": 50,
+        "endLine": 26,
+        "endChar": 26
+      },
+      "revId": "5bd76ca38d779f883dffdf1b2e74e7d68522d3d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -101,6 +101,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6f1f07c_181f40ad",
+        "filename": "src/dawn/native/stream/BlobSource.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-25T07:17:17Z",
+      "side": 1,
+      "message": "Great analysis, it makes complete sense that we shouldn\u0027t force rvalue reference for multi-arg functions. Ack for changing this one to be more of a move constructor.",
+      "parentUuid": "7ab4f0b5_3168975a",
+      "range": {
+        "startLine": 26,
+        "startChar": 24,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "298ba673_2a8e945e",
         "filename": "src/dawn/native/stream/ByteVectorSink.h",
         "patchSetId": 9
@@ -147,6 +171,24 @@
       "side": 1,
       "message": "std::vector is the only implementation right now and as far as I know, we don\u0027t have a way to catch OOM from it (except with exceptions which are disabled in Chromium).\nDo you think we should have it use MaybeError?",
       "parentUuid": "dce173ad_ed6b7ab4",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e5845bb_d7a25934",
+        "filename": "src/dawn/native/stream/Sink.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-25T07:17:17Z",
+      "side": 1,
+      "message": "If we don\u0027t see another Sink than std::vector for the medium-term then we can keep as is since we can\u0027t catch OOM. Either way sounds good.",
+      "parentUuid": "04ecb8a3_16a74135",
       "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
