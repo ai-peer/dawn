@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad75f559_99c27773",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-25T13:25:17Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "902258d115dfdf4e6c92d3090bc6ffd917ec76b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8cc11c15_35e939fd",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 1
@@ -86,6 +103,30 @@
       "side": 1,
       "message": "\u003e Re: first comment: the point is that the export semaphores are created during the VkQueueSubmit that use this resource, so there is no need to make a submit afterwards.\n\nIIUC, the resource can be used by viz GL drivers also, where there is no VkQueueSubmit. I\u0027m kind of confused. Did you mean the export semaphores here, at runtime, must have been submitted? How is it ensured in this CL?",
       "parentUuid": "21303eb7_8d48aa49",
+      "range": {
+        "startLine": 825,
+        "startChar": 1,
+        "endLine": 829,
+        "endChar": 14
+      },
+      "revId": "902258d115dfdf4e6c92d3090bc6ffd917ec76b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a340b715_b5bf80ed",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-25T13:25:17Z",
+      "side": 1,
+      "message": "The export semaphore is created and signaled at [1]",
+      "parentUuid": "7402968f_20695bba",
       "range": {
         "startLine": 825,
         "startChar": 1,
