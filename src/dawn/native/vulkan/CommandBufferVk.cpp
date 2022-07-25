@@ -189,7 +189,7 @@ void TransitionAndClearForSyncScope(Device* device,
                                         &srcStages, &dstStages);
     }
 
-    if (bufferBarriers.size() || imageBarriers.size()) {
+    if (bufferBarriers.size() != 0 || imageBarriers.size() != 0) {
         device->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
                                       nullptr, bufferBarriers.size(), bufferBarriers.data(),
                                       imageBarriers.size(), imageBarriers.data());

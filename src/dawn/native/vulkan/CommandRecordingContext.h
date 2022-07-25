@@ -31,6 +31,14 @@ struct CommandRecordingContext {
     // formats.
     std::vector<Ref<Buffer>> tempBuffers;
 
+    // Textures that will be eagerly transitioned just before VkSubmit. The textures are kept alive
+    // by the CommandBuffer so they don't need to be Ref-ed.
+    std::set<Texture*> eagerlyTransitionedTextures;
+
+    // Do any of the eagerly transitioned need an external semaphore at the end?
+    bool needsExternalSemaphore = false;
+    Ref<ExternalSemaphore> externalSemaphore;
+
     // For Device state tracking only.
     VkCommandPool commandPool = VK_NULL_HANDLE;
     bool used = false;

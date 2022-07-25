@@ -260,6 +260,26 @@ MaybeError Device::SubmitPendingCommands() {
         return {};
     }
 
+    if (mRecodingContext.needsExternalSemaphore) {
+        mRecordingContent.externalSemaphore = ....;
+        mRecordingContext.signalSemaphores.push_back(mRecordingContent.externalSemaphore.GetVkSemaphore());
+    }
+
+    if (!mRecordingContext.eagerlyTransitionedTextures.empty()) {
+        std::vector<VkImageMemoryBarrier> imageBarriers;
+        VkPipelineStageFlags srcStages = 0;
+        VkPipelineStageFlags dstStages = 0;
+        for (auto texture : mRecordingContext.eagerlyTransitionedTextures) {
+            texture->TransitionEagerly(&mRecordingContent, &imageBarriers, &srcStages, &dstStages);
+        }
+
+        if (imageBarriers.size() != 0) {
+            device->fn.CmdPipelineBarrier(mRecordingContext->commandBuffer, srcStages, dstStages, 0, 0,
+                                          nullptr, 0, nullptr,
+                                          imageBarriers.size(), imageBarriers.data());
+        }
+    }
+
     DAWN_TRY(
         CheckVkSuccess(fn.EndCommandBuffer(mRecordingContext.commandBuffer), "vkEndCommandBuffer"));
 

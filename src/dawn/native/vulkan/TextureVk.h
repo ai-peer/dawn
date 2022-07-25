@@ -133,6 +133,10 @@ class Texture final : public TextureBase {
                                          std::vector<VkImageMemoryBarrier>* barriers,
                                          size_t transitionBarrierStart);
     bool CanReuseWithoutBarrier(wgpu::TextureUsage lastUsage, wgpu::TextureUsage usage);
+    void TransitionEagerly(CommandRecordingContext* recordingContext,
+                                    std::vector<VkImageMemoryBarrier>* imageBarriers,
+                                    VkPipelineStageFlags* srcStages,
+                                    VkPipelineStageFlags* dstStages);
 
     // In base Vulkan, Depth and stencil can only be transitioned together. This function
     // indicates whether we should combine depth and stencil barriers to accommodate this
@@ -163,6 +167,7 @@ class Texture final : public TextureBase {
     VkImageLayout mPendingAcquireOldLayout;
     VkImageLayout mPendingAcquireNewLayout;
 
+    Ref<ExternalSemaphore> mExportSemaphore;
     VkSemaphore mSignalSemaphore = VK_NULL_HANDLE;
     std::vector<VkSemaphore> mWaitRequirements;
 
