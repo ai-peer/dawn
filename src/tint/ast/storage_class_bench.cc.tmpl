@@ -1,0 +1,16 @@
+{{- Import "src/tint/templates/enums.tmpl.inc" -}}
+{{- $enum := (Sem.Enum "storage_class") -}}
+
+#include "src/tint/ast/storage_class.h"
+
+#include <array>
+
+#include "bench/benchmark.h"
+
+namespace tint::ast {
+namespace {
+
+{{- Eval "BenchmarkParseEnum" $enum}}
+
+}  // namespace
+}  // namespace tint::ast
