@@ -139,6 +139,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0ef2303_55113e9d",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-25T13:36:10Z",
+      "side": 1,
+      "message": "Could that be to earlier?\nFor example:\n  a) ImportExternalTexture\n  b) Use the texture\n  c) tweak the transition, submit and export the semaphore\n  d) Use the same texture and do something else and submit\n  e) ExportExternalTexture.\nSo clients expect the semaphore after the second use rather than the first use. In this case they get the wrong export semaphore.",
+      "parentUuid": "a340b715_b5bf80ed",
+      "range": {
+        "startLine": 825,
+        "startChar": 1,
+        "endLine": 829,
+        "endChar": 14
+      },
+      "revId": "902258d115dfdf4e6c92d3090bc6ffd917ec76b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a90d9e1_86b9df39",
         "filename": "src/dawn/native/vulkan/TextureVk.h",
         "patchSetId": 1
