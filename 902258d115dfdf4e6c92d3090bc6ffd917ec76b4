@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21303eb7_8d48aa49",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-25T13:08:05Z",
+      "side": 1,
+      "message": "Re: first comment: the point is that the export semaphores are created during the VkQueueSubmit that use this resource, so there is no need to make a submit afterwards.\n\nRe: second comment: in that case we could do an empty submit, or better, re-export (or never import) the FD used to import this resource into Dawn.",
+      "parentUuid": "9b557218_14dbec17",
+      "range": {
+        "startLine": 825,
+        "startChar": 1,
+        "endLine": 829,
+        "endChar": 14
+      },
+      "revId": "902258d115dfdf4e6c92d3090bc6ffd917ec76b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a90d9e1_86b9df39",
         "filename": "src/dawn/native/vulkan/TextureVk.h",
         "patchSetId": 1
