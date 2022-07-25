@@ -33,6 +33,24 @@
       "message": "LGTM if this will work for you Yunchao.",
       "revId": "0739aa075949269b539c3303945013ed4e2b7122",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "641fcdcb_ac75d37d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-25T14:57:47Z",
+      "side": 1,
+      "message": "Yes. I works fine. I just applied this change on top of my patch and tried it.\n\nThe new code can support multiple `{mask, architecture}` pairs, so we can divide each current architecture into smaller pieces with appropriate mask(s) if needed. \n\nA finding: for each vendor, all `{mask, architecture}`\u0027s vendor ids can not overlap. So if there is a workaround/fix aim at a few vendor ids which overlap with but are not exactly the same with current `architecture` in a `{mask, architecture}` pair, I think it is not OK to add an item into the gpu_info.json and we need a hard-coded C++ function for the particular vendor ids, right?",
+      "parentUuid": "0455a9c6_2f14d11d",
+      "revId": "0739aa075949269b539c3303945013ed4e2b7122",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
