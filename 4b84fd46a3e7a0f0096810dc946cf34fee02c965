@@ -16,6 +16,115 @@
       "message": "PTAL.",
       "revId": "4b84fd46a3e7a0f0096810dc946cf34fee02c965",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1478b0e7_080d06b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-25T08:33:16Z",
+      "side": 1,
+      "message": "Nicely done!",
+      "revId": "4b84fd46a3e7a0f0096810dc946cf34fee02c965",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7117162_d6b9ab0b",
+        "filename": "src/tint/reader/wgsl/lexer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-25T08:33:16Z",
+      "side": 1,
+      "message": "übernit: I prefer to keep hefty methods like this named with a verb, as it clearly indicates that it is doing work, and is more fluent (`person.Jump()`, etc). Suggest `Lex()`?",
+      "range": {
+        "startLine": 34,
+        "startChar": 23,
+        "endLine": 34,
+        "endChar": 32
+      },
+      "revId": "4b84fd46a3e7a0f0096810dc946cf34fee02c965",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "134ef780_ba5a26ee",
+        "filename": "src/tint/reader/wgsl/lexer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-25T08:33:16Z",
+      "side": 1,
+      "message": "Likely more wins with a `BlockAllocator` here, as we reduce the number of moves when the container needs to be resized. One for a followup change.",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 34,
+        "endChar": 15
+      },
+      "revId": "4b84fd46a3e7a0f0096810dc946cf34fee02c965",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be7ad621_581e11b2",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-25T08:33:16Z",
+      "side": 1,
+      "message": "Do we need to make this copy still now? Can\u0027t we use `tokens_[next_token_idx_-1].source()`?\nThis is also an also an argument for replacing `next_token_idx_` with `current_token_idx_`, so we\u0027re not going to go OOBs.",
+      "range": {
+        "startLine": 287,
+        "startChar": 4,
+        "endLine": 287,
+        "endChar": 16
+      },
+      "revId": "4b84fd46a3e7a0f0096810dc946cf34fee02c965",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cfb702d_20ba0b7e",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-25T08:33:16Z",
+      "side": 1,
+      "message": "We\u0027re only updating the type of the placeholder, and not its source. This might cause weirdnesses in diagnostics.\nI\u0027d suggest changing the signature to `split_token(Token::Type first, Token::Type second)`, which would allow look-back to work as expected too.",
+      "range": {
+        "startLine": 311,
+        "startChar": 0,
+        "endLine": 321,
+        "endChar": 0
+      },
+      "revId": "4b84fd46a3e7a0f0096810dc946cf34fee02c965",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
