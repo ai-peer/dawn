@@ -332,7 +332,7 @@ MaybeError CreateMTLFunction(const ProgrammableStage& programmableStage,
     ShaderModule* shaderModule = ToBackend(programmableStage.module.Get());
     const char* shaderEntryPoint = programmableStage.entryPoint.c_str();
     const auto& entryPointMetadata = programmableStage.module->GetEntryPoint(shaderEntryPoint);
-    if (entryPointMetadata.overridableConstants.size() == 0) {
+    if (entryPointMetadata.overrides.size() == 0) {
         DAWN_TRY(shaderModule->CreateFunction(shaderEntryPoint, singleShaderStage, pipelineLayout,
                                               functionData, nil, sampleMask, renderPipeline));
         return {};
@@ -346,7 +346,7 @@ MaybeError CreateMTLFunction(const ProgrammableStage& programmableStage,
         std::unordered_set<std::string> overriddenConstants;
 
         auto switchType = [&](EntryPointMetadata::OverridableConstant::Type dawnType,
-                              MTLDataType* type, OverridableConstantScalar* entry,
+                              MTLDataType* type, OverrideScalar* entry,
                               double value = 0) {
             switch (dawnType) {
                 case EntryPointMetadata::OverridableConstant::Type::Boolean:
@@ -382,10 +382,10 @@ MaybeError CreateMTLFunction(const ProgrammableStage& programmableStage,
             overriddenConstants.insert(name);
 
             // This is already validated so `name` must exist
-            const auto& moduleConstant = entryPointMetadata.overridableConstants.at(name);
+            const auto& moduleConstant = entryPointMetadata.overrides.at(name);
 
             MTLDataType type;
-            OverridableConstantScalar entry{};
+            OverrideScalar entry{};
 
             switchType(moduleConstant.type, &type, &entry, value);
 
@@ -394,14 +394,14 @@ MaybeError CreateMTLFunction(const ProgrammableStage& programmableStage,
 
         // Set shader initialized default values because MSL function_constant
         // has no default value
-        for (const std::string& name : entryPointMetadata.initializedOverridableConstants) {
+        for (const std::string& name : entryPointMetadata.initializedOverrides) {
             if (overriddenConstants.count(name) != 0) {
                 // This constant already has overridden value
                 continue;
             }
 
             // Must exist because it is validated
-            const auto& moduleConstant = entryPointMetadata.overridableConstants.at(name);
+            const auto& moduleConstant = entryPointMetadata.overrides.at(name);
             ASSERT(moduleConstant.isInitialized);
             MTLDataType type;
 

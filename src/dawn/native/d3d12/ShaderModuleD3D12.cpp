@@ -112,7 +112,7 @@ std::string FloatToStringWithPrecision(float v, std::streamsize n = 8) {
 }
 
 std::string GetHLSLValueString(EntryPointMetadata::OverridableConstant::Type dawnType,
-                               const OverridableConstantScalar* entry,
+                               const OverrideScalar* entry,
                                double value = 0) {
     switch (dawnType) {
         case EntryPointMetadata::OverridableConstant::Type::Boolean:
@@ -305,8 +305,7 @@ struct ShaderCompilationRequest {
 
         GetOverridableConstantsDefines(
             &request.defineStrings, &programmableStage.constants,
-            &programmableStage.module->GetEntryPoint(programmableStage.entryPoint)
-                 .overridableConstants);
+            &programmableStage.module->GetEntryPoint(programmableStage.entryPoint).overrides);
 
         return std::move(request);
     }
