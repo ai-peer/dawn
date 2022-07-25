@@ -78,10 +78,18 @@
 #include "src/tint/utils/math.h"
 #include "src/tint/utils/reverse.h"
 #include "src/tint/utils/scoped_assignment.h"
+#include "src/tint/utils/string.h"
 #include "src/tint/utils/transform.h"
 
 namespace tint::resolver {
 namespace {
+
+template <typename T>
+std::string ToString(const T& value) {
+    std::stringstream s;
+    s << value;
+    return s.str();
+}
 
 bool IsValidStorageTextureDimension(ast::TextureDimension dim) {
     switch (dim) {
@@ -344,7 +352,7 @@ bool Validator::VariableInitializer(const ast::Variable* v,
                 // https://gpuweb.github.io/gpuweb/wgsl/#var-and-let
                 // Optionally has an initializer expression, if the variable is in the
                 // private or function storage classes.
-                AddError("var of storage class '" + std::string(ast::ToString(storage_class)) +
+                AddError("var of storage class '" + ToString(storage_class) +
                              "' cannot have an initializer. var initializers are only "
                              "supported for the storage classes "
                              "'private' and 'function'",
@@ -396,8 +404,7 @@ bool Validator::StorageClassLayout(const sem::Type* store_ty,
     // TODO(tint:1473, tint:1502): Remove this error after f16 is supported in "uniform" and
     // "storage" storage class.
     if (Is<sem::F16>(sem::Type::DeepestElementOf(store_ty))) {
-        AddError("using f16 types in '" + std::string(ast::ToString(sc)) +
-                     "' storage class is not implemented yet",
+        AddError("using f16 types in '" + ToString(sc) + "' storage class is not implemented yet",
                  source);
         return false;
     }
@@ -418,11 +425,11 @@ bool Validator::StorageClassLayout(const sem::Type* store_ty,
             if (m->Offset() % required_align != 0) {
                 AddError("the offset of a struct member of type '" +
                              m->Type()->UnwrapRef()->FriendlyName(symbols_) +
-                             "' in storage class '" + ast::ToString(sc) +
-                             "' must be a multiple of " + std::to_string(required_align) +
-                             " bytes, but '" + member_name_of(m) + "' is currently at offset " +
-                             std::to_string(m->Offset()) + ". Consider setting @align(" +
-                             std::to_string(required_align) + ") on this member",
+                             "' in storage class '" + ToString(sc) + "' must be a multiple of " +
+                             std::to_string(required_align) + " bytes, but '" + member_name_of(m) +
+                             "' is currently at offset " + std::to_string(m->Offset()) +
+                             ". Consider setting @align(" + std::to_string(required_align) +
+                             ") on this member",
                          m->Declaration()->source);
 
                 AddNote("see layout of struct:\n" + str->Layout(symbols_),
@@ -583,8 +590,8 @@ bool Validator::GlobalVariable(
                 bool is_shader_io_attribute =
                     attr->IsAnyOf<ast::BuiltinAttribute, ast::InterpolateAttribute,
                                   ast::InvariantAttribute, ast::LocationAttribute>();
-                bool has_io_storage_class = global->StorageClass() == ast::StorageClass::kInput ||
-                                            global->StorageClass() == ast::StorageClass::kOutput;
+                bool has_io_storage_class = global->StorageClass() == ast::StorageClass::kIn ||
+                                            global->StorageClass() == ast::StorageClass::kOut;
                 if (!attr->IsAnyOf<ast::BindingAttribute, ast::GroupAttribute,
                                    ast::InternalAttribute>() &&
                     (!is_shader_io_attribute || !has_io_storage_class)) {
@@ -740,8 +747,8 @@ bool Validator::Var(const sem::Variable* v) const {
     }
 
     if (IsValidationEnabled(var->attributes, ast::DisabledValidation::kIgnoreStorageClass) &&
-        (var->declared_storage_class == ast::StorageClass::kInput ||
-         var->declared_storage_class == ast::StorageClass::kOutput)) {
+        (var->declared_storage_class == ast::StorageClass::kIn ||
+         var->declared_storage_class == ast::StorageClass::kOut)) {
         AddError("invalid use of input/output storage class", var->source);
         return false;
     }
@@ -1706,13 +1713,13 @@ bool Validator::RequiredExtensionForBuiltinFunction(
     }
 
     const auto extension = builtin->RequiredExtension();
-    if (extension == ast::Extension::kNone) {
+    if (extension == ast::Extension::kInvalid) {
         return true;
     }
 
     if (!enabled_extensions.contains(extension)) {
         AddError("cannot call built-in function '" + std::string(builtin->str()) +
-                     "' without extension " + ast::str(extension),
+                     "' without extension " + utils::ToString(extension),
                  call->Declaration()->source);
         return false;
     }

@@ -122,10 +122,10 @@ void BindingRemapper::Run(CloneContext& ctx, const DataMap& inputs, DataMap&) co
                 }
                 auto* sem = ctx.src->Sem().Get(var);
                 if (sem->StorageClass() != ast::StorageClass::kStorage) {
-                    ctx.dst->Diagnostics().add_error(
-                        diag::System::Transform,
-                        "cannot apply access control to variable with storage class " +
-                            std::string(ast::ToString(sem->StorageClass())));
+                    std::stringstream ss;
+                    ss << "cannot apply access control to variable with storage class "
+                       << sem->StorageClass();
+                    ctx.dst->Diagnostics().add_error(diag::System::Transform, ss.str());
                     return;
                 }
                 auto* ty = sem->Type()->UnwrapRef();

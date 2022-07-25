@@ -1,0 +1,12 @@
+{{- Import "src/tint/templates/enums.tmpl.inc" -}}
+{{- $enum := (Sem.Enum "storage_class") -}}
+
+#include "src/tint/ast/storage_class.h"
+
+namespace tint::ast {
+
+{{ Eval "ParseEnum" $enum}}
+
+{{ Eval "EnumOStream" $enum}}
+
+}  // namespace tint::ast

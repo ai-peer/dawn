@@ -17,19 +17,21 @@
 
 #include "gtest/gtest.h"
 
+#include "src/tint/utils/string.h"
+
 namespace tint::ast {
 namespace {
 
 TEST(ExtensionTest, NameToKind_InvalidName) {
     EXPECT_EQ(ParseExtension("f16"), Extension::kF16);
-    EXPECT_EQ(ParseExtension(""), Extension::kNone);
-    EXPECT_EQ(ParseExtension("__ImpossibleExtensionName"), Extension::kNone);
-    EXPECT_EQ(ParseExtension("123"), Extension::kNone);
+    EXPECT_EQ(ParseExtension(""), Extension::kInvalid);
+    EXPECT_EQ(ParseExtension("__ImpossibleExtensionName"), Extension::kInvalid);
+    EXPECT_EQ(ParseExtension("123"), Extension::kInvalid);
 }
 
 TEST(ExtensionTest, KindToName) {
-    EXPECT_EQ(std::string(str(Extension::kF16)), "f16");
-    EXPECT_EQ(std::string(str(Extension::kNone)), "<none>");
+    EXPECT_EQ(utils::ToString(Extension::kF16), "f16");
+    EXPECT_EQ(utils::ToString(Extension::kInvalid), "invalid");
 }
 
 }  // namespace
