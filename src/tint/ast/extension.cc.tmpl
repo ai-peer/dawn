@@ -1,0 +1,12 @@
+{{- Import "src/tint/templates/enums.tmpl.inc" -}}
+{{- $enum := (Sem.Enum "extension") -}}
+
+#include "src/tint/ast/extension.h"
+
+namespace tint::ast {
+
+{{ Eval "ParseEnum" $enum}}
+
+{{ Eval "EnumOStream" $enum}}
+
+}  // namespace tint::ast
