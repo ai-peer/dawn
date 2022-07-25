@@ -163,6 +163,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b8cd787_617a9e3f",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-25T13:39:30Z",
+      "side": 1,
+      "message": "If you do two submits:\n\n - ImportExternalTexture, import the FD semaphore\n - First submit\n   - Tweak the transition to import from foreign queue.\n   - Use the texture\n   - Create an exportable semaphore store it in the texture, record and export to foreign queue\n - Second submit\n   - Tweak the transition to import from foreign queue (discarding the previously store exportable semaphore)\n   - Use the texture\n   - Create an exportable semaphore store it in the texture, record and export to foreign queue\n - ExportExternalTexture.",
+      "parentUuid": "c0ef2303_55113e9d",
+      "range": {
+        "startLine": 825,
+        "startChar": 1,
+        "endLine": 829,
+        "endChar": 14
+      },
+      "revId": "902258d115dfdf4e6c92d3090bc6ffd917ec76b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a90d9e1_86b9df39",
         "filename": "src/dawn/native/vulkan/TextureVk.h",
         "patchSetId": 1
