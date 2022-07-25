@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36bf4ece_eb45144b",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2067,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-25T11:52:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05ce0b6d_3f47922b",
+      "range": {
+        "startLine": 2065,
+        "startChar": 0,
+        "endLine": 2067,
+        "endChar": 37
+      },
+      "revId": "aaf41fa0f470efe90862fa9ad330e64af171eb94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3e1079b_5e37fd46",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-07-25T10:43:26Z",
       "side": 1,
       "message": "This is treated as broken behaviour by fuzzers, which in time, they\u0027ll find and trigger resulting in bugs being filed. I\u0027m not too sure how to best work around this right now.",
+      "range": {
+        "startLine": 3,
+        "startChar": 50,
+        "endLine": 3,
+        "endChar": 73
+      },
+      "revId": "aaf41fa0f470efe90862fa9ad330e64af171eb94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "567fd71e_8ec22097",
+        "filename": "test/tint/var/uses/push_constant.wgsl.expected.glsl",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-25T11:52:43Z",
+      "side": 1,
+      "message": "Is there a way to make an \"expected\" error for fuzzers? Or a validation error from writers?",
+      "parentUuid": "b3e1079b_5e37fd46",
       "range": {
         "startLine": 3,
         "startChar": 50,
