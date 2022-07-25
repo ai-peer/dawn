@@ -431,7 +431,7 @@ sem::Variable* Resolver::Override(const ast::Override* v) {
         /* constant_value */ nullptr, sem::BindingPoint{});
 
     if (auto* id = ast::GetAttribute<ast::IdAttribute>(v->attributes)) {
-        sem->SetConstantId(static_cast<uint16_t>(id->value));
+        sem->SetOverrideId(OverrideId{static_cast<decltype(OverrideId::value)>(id->value)});
     }
 
     sem->SetConstructor(rhs);
@@ -642,7 +642,7 @@ ast::Access Resolver::DefaultAccessForStorageClass(ast::StorageClass storage_cla
 
 void Resolver::AllocateOverridableConstantIds() {
     // The next pipeline constant ID to try to allocate.
-    uint16_t next_constant_id = 0;
+    OverrideId next_override_id;
 
     // Allocate constant IDs in global declaration order, so that they are
     // deterministic.
@@ -654,25 +654,25 @@ void Resolver::AllocateOverridableConstantIds() {
             continue;
         }
 
-        uint16_t constant_id;
+        OverrideId override_id;
         if (auto* id_attr = ast::GetAttribute<ast::IdAttribute>(override->attributes)) {
-            constant_id = static_cast<uint16_t>(id_attr->value);
+            override_id = OverrideId{static_cast<decltype(OverrideId::value)>(id_attr->value)};
         } else {
             // No ID was specified, so allocate the next available ID.
-            constant_id = next_constant_id;
-            while (constant_ids_.count(constant_id)) {
-                if (constant_id == UINT16_MAX) {
+            override_id = next_override_id;
+            while (override_ids_.count(override_id)) {
+                if (override_id.value == std::numeric_limits<decltype(OverrideId::value)>::max()) {
                     TINT_ICE(Resolver, builder_->Diagnostics())
                         << "no more pipeline constant IDs available";
                     return;
                 }
-                constant_id++;
+                override_id.value = override_id.value + 1;
             }
-            next_constant_id = constant_id + 1;
+            next_override_id.value = override_id.value + 1;
         }
 
         auto* sem = sem_.Get<sem::GlobalVariable>(override);
-        const_cast<sem::GlobalVariable*>(sem)->SetConstantId(constant_id);
+        const_cast<sem::GlobalVariable*>(sem)->SetOverrideId(override_id);
     }
 }
 
@@ -696,7 +696,7 @@ sem::GlobalVariable* Resolver::GlobalVariable(const ast::Variable* v) {
 
         if (auto* id_attr = attr->As<ast::IdAttribute>()) {
             // Track the constant IDs that are specified in the shader.
-            constant_ids_.emplace(id_attr->value, sem);
+            override_ids_.emplace(OverrideId{static_cast<decltype(OverrideId::value)>(id_attr->value)}, sem);
         }
     }
 
@@ -704,7 +704,7 @@ sem::GlobalVariable* Resolver::GlobalVariable(const ast::Variable* v) {
         return nullptr;
     }
 
-    if (!validator_.GlobalVariable(sem, constant_ids_, atomic_composite_info_)) {
+    if (!validator_.GlobalVariable(sem, override_ids_, atomic_composite_info_)) {
         return nullptr;
     }
 
