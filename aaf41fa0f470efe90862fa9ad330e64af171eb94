@@ -127,6 +127,30 @@
       },
       "revId": "aaf41fa0f470efe90862fa9ad330e64af171eb94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b589897_f938be98",
+        "filename": "test/tint/var/uses/push_constant.wgsl.expected.glsl",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-25T20:25:27Z",
+      "side": 1,
+      "message": "The generator should be able to call `set_error` to set the error and return `false` to show it failed.",
+      "parentUuid": "567fd71e_8ec22097",
+      "range": {
+        "startLine": 3,
+        "startChar": 50,
+        "endLine": 3,
+        "endChar": 73
+      },
+      "revId": "aaf41fa0f470efe90862fa9ad330e64af171eb94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

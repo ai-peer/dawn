@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34c7d5c0_643928d7",
+        "filename": "docs/tint/extensions/chromium_experimental_push_constant.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-25T20:25:27Z",
+      "side": 1,
+      "message": "Push constants must not have an initializer ?",
+      "revId": "62c116cc0c1f25563b69203b6e0266cc391ceb54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00c3c5cb_bb79f9a1",
+        "filename": "docs/tint/extensions/chromium_experimental_push_constant.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-25T20:25:27Z",
+      "side": 1,
+      "message": "Is there a limit on how big push constants can be (like, a max of 64bytes or something?",
+      "revId": "62c116cc0c1f25563b69203b6e0266cc391ceb54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd2e0bc2_29b38767",
+        "filename": "src/tint/resolver/entry_point_validation_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-25T20:25:27Z",
+      "side": 1,
+      "message": "This comment doesn\u0027t match the code built.",
+      "revId": "62c116cc0c1f25563b69203b6e0266cc391ceb54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d25c5588_f79a5113",
+        "filename": "src/tint/resolver/entry_point_validation_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-25T20:25:27Z",
+      "side": 1,
+      "message": "Add a  test to show the following is allowed:\n\n```\nenable chromium_experimental_push_constant;\nvar\u003cpush_constant\u003e a: u32;\nvar\u003cpush_constant\u003e b: u32;\n@compute @workgroup_size(1) fn a_main() { _ \u003d a; }\n@compute @workgroup_size(1) fn b_main() { _ \u003d b; }\n```",
+      "revId": "62c116cc0c1f25563b69203b6e0266cc391ceb54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "289aaf88_87f6864a",
+        "filename": "src/tint/resolver/storage_class_layout_validation_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-25T20:25:27Z",
+      "side": 1,
+      "message": "I\u0027d rename this test to something like: `PushConstant_Aligned` as the current name made me think it was looking for a suggested fix error message instead of implementing the suggested fix.",
+      "revId": "62c116cc0c1f25563b69203b6e0266cc391ceb54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edd4aefd_1332b6bf",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 2037,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-25T20:25:27Z",
+      "side": 1,
+      "message": "Maybe `first push_constant variable declaration is here` ? I originally though this was the first usage, but it\u0027s the declaration.",
+      "revId": "62c116cc0c1f25563b69203b6e0266cc391ceb54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e922813a_6dffae16",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 2048,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-25T20:25:27Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "62c116cc0c1f25563b69203b6e0266cc391ceb54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
