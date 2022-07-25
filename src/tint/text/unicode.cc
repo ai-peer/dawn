@@ -306,6 +306,10 @@ constexpr size_t kNumXIDContinueRanges = sizeof(kXIDContinueRanges) / sizeof(kXI
 }  // namespace
 
 bool CodePoint::IsXIDStart() const {
+    // Nothing smaller then ascii 'A' will be in XID start
+    if (value < 'A') {
+        return false;
+    }
     // Short circuit ascii. It will end up being at the end of the binary search
     // but is our, currently, common case.
     if ((value >= 'a' && value <= 'z') || (value >= 'A' && value <= 'Z')) {
