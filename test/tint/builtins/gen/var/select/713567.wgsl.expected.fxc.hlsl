@@ -1,6 +1,6 @@
 void select_713567() {
-  float4 arg_0 = (0.0f).xxxx;
-  float4 arg_1 = (0.0f).xxxx;
+  float4 arg_0 = (1.0f).xxxx;
+  float4 arg_1 = (1.0f).xxxx;
   bool arg_2 = false;
   float4 res = (arg_2 ? arg_1 : arg_0);
 }

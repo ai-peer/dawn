@@ -1,8 +1,8 @@
 #version 310 es
 
 void select_bb447f() {
-  ivec2 arg_0 = ivec2(0);
-  ivec2 arg_1 = ivec2(0);
+  ivec2 arg_0 = ivec2(1);
+  ivec2 arg_1 = ivec2(1);
   bool arg_2 = false;
   ivec2 res = (arg_2 ? arg_1 : arg_0);
 }
@@ -24,8 +24,8 @@ void main() {
 precision mediump float;
 
 void select_bb447f() {
-  ivec2 arg_0 = ivec2(0);
-  ivec2 arg_1 = ivec2(0);
+  ivec2 arg_0 = ivec2(1);
+  ivec2 arg_1 = ivec2(1);
   bool arg_2 = false;
   ivec2 res = (arg_2 ? arg_1 : arg_0);
 }
@@ -41,8 +41,8 @@ void main() {
 #version 310 es
 
 void select_bb447f() {
-  ivec2 arg_0 = ivec2(0);
-  ivec2 arg_1 = ivec2(0);
+  ivec2 arg_0 = ivec2(1);
+  ivec2 arg_1 = ivec2(1);
   bool arg_2 = false;
   ivec2 res = (arg_2 ? arg_1 : arg_0);
 }

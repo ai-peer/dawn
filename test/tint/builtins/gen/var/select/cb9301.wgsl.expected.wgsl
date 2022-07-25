@@ -1,7 +1,7 @@
 fn select_cb9301() {
-  var arg_0 = vec2<bool>();
-  var arg_1 = vec2<bool>();
-  var arg_2 = vec2<bool>();
+  var arg_0 = vec2<bool>(false);
+  var arg_1 = vec2<bool>(false);
+  var arg_2 = vec2<bool>(false);
   var res : vec2<bool> = select(arg_0, arg_1, arg_2);
 }
 

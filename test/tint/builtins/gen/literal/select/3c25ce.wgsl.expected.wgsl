@@ -1,5 +1,5 @@
 fn select_3c25ce() {
-  var res : vec3<bool> = select(vec3<bool>(), vec3<bool>(), bool());
+  var res : vec3<bool> = select(vec3<bool>(false), vec3<bool>(false), false);
 }
 
 @vertex

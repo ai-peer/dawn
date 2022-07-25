@@ -25,7 +25,7 @@
 
 // fn any(vec<3, bool>) -> bool
 fn any_e755c1() {
-  var arg_0 = vec3<bool>();
+  var arg_0 = vec3<bool>(false);
   var res: bool = any(arg_0);
 }
 

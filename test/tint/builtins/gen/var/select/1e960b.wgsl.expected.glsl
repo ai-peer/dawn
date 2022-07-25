@@ -1,8 +1,8 @@
 #version 310 es
 
 void select_1e960b() {
-  uvec2 arg_0 = uvec2(0u);
-  uvec2 arg_1 = uvec2(0u);
+  uvec2 arg_0 = uvec2(1u);
+  uvec2 arg_1 = uvec2(1u);
   bvec2 arg_2 = bvec2(false);
   uvec2 res = mix(arg_0, arg_1, arg_2);
 }
@@ -24,8 +24,8 @@ void main() {
 precision mediump float;
 
 void select_1e960b() {
-  uvec2 arg_0 = uvec2(0u);
-  uvec2 arg_1 = uvec2(0u);
+  uvec2 arg_0 = uvec2(1u);
+  uvec2 arg_1 = uvec2(1u);
   bvec2 arg_2 = bvec2(false);
   uvec2 res = mix(arg_0, arg_1, arg_2);
 }
@@ -41,8 +41,8 @@ void main() {
 #version 310 es
 
 void select_1e960b() {
-  uvec2 arg_0 = uvec2(0u);
-  uvec2 arg_1 = uvec2(0u);
+  uvec2 arg_0 = uvec2(1u);
+  uvec2 arg_1 = uvec2(1u);
   bvec2 arg_2 = bvec2(false);
   uvec2 res = mix(arg_0, arg_1, arg_2);
 }

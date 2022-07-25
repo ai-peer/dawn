@@ -1,6 +1,6 @@
 void select_087ea4() {
-  uint4 arg_0 = (0u).xxxx;
-  uint4 arg_1 = (0u).xxxx;
+  uint4 arg_0 = (1u).xxxx;
+  uint4 arg_1 = (1u).xxxx;
   bool arg_2 = false;
   uint4 res = (arg_2 ? arg_1 : arg_0);
 }

@@ -1,6 +1,6 @@
 void select_8fa62c() {
-  int3 arg_0 = (0).xxx;
-  int3 arg_1 = (0).xxx;
+  int3 arg_0 = (1).xxx;
+  int3 arg_1 = (1).xxx;
   bool arg_2 = false;
   int3 res = (arg_2 ? arg_1 : arg_0);
 }

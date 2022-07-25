@@ -1,5 +1,5 @@
 fn all_353d6a() {
-  var arg_0 = bool();
+  var arg_0 = false;
   var res : bool = all(arg_0);
 }
 

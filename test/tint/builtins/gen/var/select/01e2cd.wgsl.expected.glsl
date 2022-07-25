@@ -1,8 +1,8 @@
 #version 310 es
 
 void select_01e2cd() {
-  ivec3 arg_0 = ivec3(0);
-  ivec3 arg_1 = ivec3(0);
+  ivec3 arg_0 = ivec3(1);
+  ivec3 arg_1 = ivec3(1);
   bvec3 arg_2 = bvec3(false);
   ivec3 res = mix(arg_0, arg_1, arg_2);
 }
@@ -24,8 +24,8 @@ void main() {
 precision mediump float;
 
 void select_01e2cd() {
-  ivec3 arg_0 = ivec3(0);
-  ivec3 arg_1 = ivec3(0);
+  ivec3 arg_0 = ivec3(1);
+  ivec3 arg_1 = ivec3(1);
   bvec3 arg_2 = bvec3(false);
   ivec3 res = mix(arg_0, arg_1, arg_2);
 }
@@ -41,8 +41,8 @@ void main() {
 #version 310 es
 
 void select_01e2cd() {
-  ivec3 arg_0 = ivec3(0);
-  ivec3 arg_1 = ivec3(0);
+  ivec3 arg_0 = ivec3(1);
+  ivec3 arg_1 = ivec3(1);
   bvec3 arg_2 = bvec3(false);
   ivec3 res = mix(arg_0, arg_1, arg_2);
 }

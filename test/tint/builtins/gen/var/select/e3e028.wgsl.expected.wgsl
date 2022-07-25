@@ -1,7 +1,7 @@
 fn select_e3e028() {
-  var arg_0 = vec4<bool>();
-  var arg_1 = vec4<bool>();
-  var arg_2 = vec4<bool>();
+  var arg_0 = vec4<bool>(false);
+  var arg_1 = vec4<bool>(false);
+  var arg_2 = vec4<bool>(false);
   var res : vec4<bool> = select(arg_0, arg_1, arg_2);
 }
 

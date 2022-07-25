@@ -1,7 +1,7 @@
 fn select_bb447f() {
-  var arg_0 = vec2<i32>();
-  var arg_1 = vec2<i32>();
-  var arg_2 = bool();
+  var arg_0 = vec2<i32>(1);
+  var arg_1 = vec2<i32>(1);
+  var arg_2 = false;
   var res : vec2<i32> = select(arg_0, arg_1, arg_2);
 }
 

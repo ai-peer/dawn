@@ -1,5 +1,5 @@
 fn select_fb7e53() {
-  var res : vec2<bool> = select(vec2<bool>(), vec2<bool>(), bool());
+  var res : vec2<bool> = select(vec2<bool>(false), vec2<bool>(false), false);
 }
 
 @vertex

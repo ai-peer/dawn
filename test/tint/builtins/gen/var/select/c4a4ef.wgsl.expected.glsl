@@ -1,8 +1,8 @@
 #version 310 es
 
 void select_c4a4ef() {
-  uvec4 arg_0 = uvec4(0u);
-  uvec4 arg_1 = uvec4(0u);
+  uvec4 arg_0 = uvec4(1u);
+  uvec4 arg_1 = uvec4(1u);
   bvec4 arg_2 = bvec4(false);
   uvec4 res = mix(arg_0, arg_1, arg_2);
 }
@@ -24,8 +24,8 @@ void main() {
 precision mediump float;
 
 void select_c4a4ef() {
-  uvec4 arg_0 = uvec4(0u);
-  uvec4 arg_1 = uvec4(0u);
+  uvec4 arg_0 = uvec4(1u);
+  uvec4 arg_1 = uvec4(1u);
   bvec4 arg_2 = bvec4(false);
   uvec4 res = mix(arg_0, arg_1, arg_2);
 }
@@ -41,8 +41,8 @@ void main() {
 #version 310 es
 
 void select_c4a4ef() {
-  uvec4 arg_0 = uvec4(0u);
-  uvec4 arg_1 = uvec4(0u);
+  uvec4 arg_0 = uvec4(1u);
+  uvec4 arg_1 = uvec4(1u);
   bvec4 arg_2 = bvec4(false);
   uvec4 res = mix(arg_0, arg_1, arg_2);
 }

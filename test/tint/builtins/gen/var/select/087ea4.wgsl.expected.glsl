@@ -1,8 +1,8 @@
 #version 310 es
 
 void select_087ea4() {
-  uvec4 arg_0 = uvec4(0u);
-  uvec4 arg_1 = uvec4(0u);
+  uvec4 arg_0 = uvec4(1u);
+  uvec4 arg_1 = uvec4(1u);
   bool arg_2 = false;
   uvec4 res = (arg_2 ? arg_1 : arg_0);
 }
@@ -24,8 +24,8 @@ void main() {
 precision mediump float;
 
 void select_087ea4() {
-  uvec4 arg_0 = uvec4(0u);
-  uvec4 arg_1 = uvec4(0u);
+  uvec4 arg_0 = uvec4(1u);
+  uvec4 arg_1 = uvec4(1u);
   bool arg_2 = false;
   uvec4 res = (arg_2 ? arg_1 : arg_0);
 }
@@ -41,8 +41,8 @@ void main() {
 #version 310 es
 
 void select_087ea4() {
-  uvec4 arg_0 = uvec4(0u);
-  uvec4 arg_1 = uvec4(0u);
+  uvec4 arg_0 = uvec4(1u);
+  uvec4 arg_1 = uvec4(1u);
   bool arg_2 = false;
   uvec4 res = (arg_2 ? arg_1 : arg_0);
 }

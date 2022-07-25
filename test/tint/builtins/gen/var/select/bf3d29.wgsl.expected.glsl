@@ -1,8 +1,8 @@
 #version 310 es
 
 void select_bf3d29() {
-  vec2 arg_0 = vec2(0.0f);
-  vec2 arg_1 = vec2(0.0f);
+  vec2 arg_0 = vec2(1.0f);
+  vec2 arg_1 = vec2(1.0f);
   bool arg_2 = false;
   vec2 res = (arg_2 ? arg_1 : arg_0);
 }
@@ -24,8 +24,8 @@ void main() {
 precision mediump float;
 
 void select_bf3d29() {
-  vec2 arg_0 = vec2(0.0f);
-  vec2 arg_1 = vec2(0.0f);
+  vec2 arg_0 = vec2(1.0f);
+  vec2 arg_1 = vec2(1.0f);
   bool arg_2 = false;
   vec2 res = (arg_2 ? arg_1 : arg_0);
 }
@@ -41,8 +41,8 @@ void main() {
 #version 310 es
 
 void select_bf3d29() {
-  vec2 arg_0 = vec2(0.0f);
-  vec2 arg_1 = vec2(0.0f);
+  vec2 arg_0 = vec2(1.0f);
+  vec2 arg_1 = vec2(1.0f);
   bool arg_2 = false;
   vec2 res = (arg_2 ? arg_1 : arg_0);
 }
