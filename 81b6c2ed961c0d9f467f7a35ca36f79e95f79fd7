@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d44d1d97_11421668",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3116,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-25T08:37:54Z",
+      "side": 1,
+      "message": "Gotcha.",
+      "parentUuid": "1d362022_98d58952",
+      "revId": "81b6c2ed961c0d9f467f7a35ca36f79e95f79fd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "379bbb2f_2e2737b3",
@@ -66,6 +84,24 @@
       "writtenOn": "2022-07-22T18:08:32Z",
       "side": 1,
       "message": "Missing match for comma here?",
+      "revId": "81b6c2ed961c0d9f467f7a35ca36f79e95f79fd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "087dc1e3_e6a91b0b",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3240,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-25T08:37:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "379bbb2f_2e2737b3",
       "revId": "81b6c2ed961c0d9f467f7a35ca36f79e95f79fd7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
