@@ -187,6 +187,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d9a5cdf_b3658c68",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-25T13:53:18Z",
+      "side": 1,
+      "message": "Got you, thanks!\nThere could be unnecessary foreign queue \"to/from\" between submits. I am not sure how much it impacts performance. I\u0027d have a try if you prefer that way.\n@Austin, how do yo like it?",
+      "parentUuid": "2b8cd787_617a9e3f",
+      "range": {
+        "startLine": 825,
+        "startChar": 1,
+        "endLine": 829,
+        "endChar": 14
+      },
+      "revId": "902258d115dfdf4e6c92d3090bc6ffd917ec76b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a90d9e1_86b9df39",
         "filename": "src/dawn/native/vulkan/TextureVk.h",
         "patchSetId": 1
