@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e032ce6f_988aee68",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-07-25T13:49:13Z",
+      "side": 1,
+      "message": "\"Could we not just have the lexer do a full parse of the source, then immutably index tokens out of that?\".   WGSL relies on grammatical context to determine the next token.   The \u0027\u003e\u003e\u0027 to \u0027\u003e\u0027 \u0027\u003e\u0027 split is one symptom of that.\n\nI think you can remove the interaction by returning sets of candidates instead.\nhttps://gpuweb.github.io/gpuweb/wgsl/#token-candidate  I betcha the lists are generally very short (the same justification that reinsertion should be rare)\n\nKeep this in mind.",
+      "parentUuid": "c84278cf_1b662319",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 307,
+        "endChar": 1
+      },
+      "revId": "b329317d15519e0f893465d5324b1de12da3e86f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dad40426_9174b2e0",
         "filename": "src/tint/reader/wgsl/parser_impl.cc",
         "patchSetId": 3
