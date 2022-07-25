@@ -16,6 +16,69 @@
       "message": "Rebased on top of Dan\u0027s context-aware tokenization change and Ben\u0027s FXC/DXC split for expected files.\n\nPTAL again!",
       "revId": "aaf41fa0f470efe90862fa9ad330e64af171eb94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7ce62e5_a88ff5f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-25T10:43:26Z",
+      "side": 1,
+      "message": "+1, but I\u0027m a bit concerned about the fuzzer issue. We\u0027ll have to have a think about how to bail out before erroring in the backends.",
+      "revId": "aaf41fa0f470efe90862fa9ad330e64af171eb94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05ce0b6d_3f47922b",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2067,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-25T10:43:26Z",
+      "side": 1,
+      "message": "nit: you could just put the variables and the lambda in this scope.",
+      "range": {
+        "startLine": 2065,
+        "startChar": 0,
+        "endLine": 2067,
+        "endChar": 37
+      },
+      "revId": "aaf41fa0f470efe90862fa9ad330e64af171eb94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3e1079b_5e37fd46",
+        "filename": "test/tint/var/uses/push_constant.wgsl.expected.glsl",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-25T10:43:26Z",
+      "side": 1,
+      "message": "This is treated as broken behaviour by fuzzers, which in time, they\u0027ll find and trigger resulting in bugs being filed. I\u0027m not too sure how to best work around this right now.",
+      "range": {
+        "startLine": 3,
+        "startChar": 50,
+        "endLine": 3,
+        "endChar": 73
+      },
+      "revId": "aaf41fa0f470efe90862fa9ad330e64af171eb94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
