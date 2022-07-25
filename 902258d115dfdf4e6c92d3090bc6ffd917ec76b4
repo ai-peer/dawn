@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8cc11c15_35e939fd",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-25T12:30:01Z",
+      "side": 1,
+      "message": "The problem here is that we are unable to ensure that there will a SubmitPendingCommands() afterward, which is right before the \u0027exportSemaphore\u0027 is used by clients.\n\nThe current implementation of WebGPU Canvas basically is like:\n  a) Chromium WebGPU: Disassociate a external texture(Canvas).\n  b) Chromium SI: runs \u0027ExportVulkanImage\u0027\n  c) Dawn: returns here with \u0027exportSemaphore\u0027.\n  d) Chromium Viz: Begin GL access to the texture whose \u0027exportSemaphore\u0027 may not be submitted yet.",
+      "range": {
+        "startLine": 825,
+        "startChar": 1,
+        "endLine": 829,
+        "endChar": 14
+      },
+      "revId": "902258d115dfdf4e6c92d3090bc6ffd917ec76b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a90d9e1_86b9df39",
         "filename": "src/dawn/native/vulkan/TextureVk.h",
         "patchSetId": 1
