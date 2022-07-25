@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c84278cf_1b662319",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-25T03:44:55Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/97070",
+      "parentUuid": "75a36724_07ac5ce8",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 307,
+        "endChar": 1
+      },
+      "revId": "b329317d15519e0f893465d5324b1de12da3e86f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dad40426_9174b2e0",
         "filename": "src/tint/reader/wgsl/parser_impl.cc",
         "patchSetId": 3
