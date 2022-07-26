@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "948bc8db_8c02bda9",
+        "filename": "src/tint/ast/storage_class_bench.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-26T19:26:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a4034a5_6d74dae3",
+      "revId": "f430377eb78e867a5853ad04fef86282a619598b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1f3870e_3a8d6c2e",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-07-26T15:11:02Z",
       "side": 1,
       "message": "nit: \u003d -1 ?",
+      "revId": "f430377eb78e867a5853ad04fef86282a619598b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ed78183_dc8e4336",
+        "filename": "src/tint/templates/enums.tmpl.inc",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-26T19:26:24Z",
+      "side": 1,
+      "message": "I believe (and could be wrong) that `-1` can prevent the compiler from picking a smaller data type for the enum. There\u0027s no real need for anything to actually inspect the numerical value, so I\u0027m not sure it\u0027s worthwhile.",
+      "parentUuid": "a1f3870e_3a8d6c2e",
       "revId": "f430377eb78e867a5853ad04fef86282a619598b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
