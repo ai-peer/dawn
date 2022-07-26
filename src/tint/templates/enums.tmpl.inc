@@ -11,7 +11,7 @@ enum class {{$enum}} {
 
 /// @param out the std::ostream to write to
 /// @param value the {{$enum}}
-/// @return the std::ostream so calls can be chained
+/// @returns `out` so calls can be chained
 std::ostream& operator<<(std::ostream& out, {{$enum}} value);
 
 /// Parse{{$enum}} parses a {{$enum}} from a string.
