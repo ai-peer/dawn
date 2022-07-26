@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f534264_ceff3c73",
+        "filename": "tools/src/cmd/gen/main.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-26T15:05:48Z",
+      "side": 1,
+      "message": "nit: `into to` -\u003e `into`",
+      "revId": "728fcfb8c42c88df87ff256c286ed11edf40d096",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
