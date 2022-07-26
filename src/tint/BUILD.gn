@@ -328,6 +328,8 @@ libtint_source_set("libtint_core_all_src") {
     "ast/struct_member_size_attribute.h",
     "ast/switch_statement.cc",
     "ast/switch_statement.h",
+    "ast/texel_format.cc",
+    "ast/texel_format.h",
     "ast/texture.cc",
     "ast/texture.h",
     "ast/traverse_expressions.h",

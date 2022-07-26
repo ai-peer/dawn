@@ -198,6 +198,8 @@ set(TINT_LIB_SRCS
   ast/struct.h
   ast/switch_statement.cc
   ast/switch_statement.h
+  ast/texel_format.cc
+  ast/texel_format.h
   ast/texture.cc
   ast/texture.h
   ast/traverse_expressions.h
@@ -1279,6 +1281,7 @@ if(TINT_BUILD_BENCHMARKS)
     "castable_bench.cc"
     "ast/extension_bench.cc"
     "ast/storage_class_bench.cc"
+    "ast/texel_format_bench.cc"
     "bench/benchmark.cc"
     "reader/wgsl/parser_bench.cc"
   )
