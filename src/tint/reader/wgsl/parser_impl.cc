@@ -71,63 +71,157 @@ const char kWriteAccess[] = "write";
 const char kReadWriteAccess[] = "read_write";
 
 ast::Builtin ident_to_builtin(std::string_view str) {
-    if (str == "position") {
-        return ast::Builtin::kPosition;
+    if (str.length() < 8) {
+        return ast::Builtin::kNone;
     }
-    if (str == "vertex_index") {
-        return ast::Builtin::kVertexIndex;
+
+    if (str[0] == 'f') {
+        if (str.back() == 'h') {
+            if (str == "frag_depth") {
+                return ast::Builtin::kFragDepth;
+            }
+            return {};
+        }
+        if (str.back() == 'g' && str == "front_facing") {
+            return ast::Builtin::kFrontFacing;
+        }
+        return ast::Builtin::kNone;
     }
-    if (str == "instance_index") {
-        return ast::Builtin::kInstanceIndex;
+
+    if (str[0] == 'g') {
+        if (str[1] == 'l' && str == "global_invocation_id") {
+            return ast::Builtin::kGlobalInvocationId;
+        }
+        return ast::Builtin::kNone;
     }
-    if (str == "front_facing") {
-        return ast::Builtin::kFrontFacing;
+
+    if (str[0] == 'i') {
+        if (str[1] == 'n' && str == "instance_index") {
+            return ast::Builtin::kInstanceIndex;
+        }
+        return ast::Builtin::kNone;
     }
-    if (str == "frag_depth") {
-        return ast::Builtin::kFragDepth;
+
+    if (str[0] == 'l') {
+        if (str.back() == 'd') {
+            if (str == "local_invocation_id") {
+                return ast::Builtin::kLocalInvocationId;
+            }
+            return ast::Builtin::kNone;
+        }
+        if (str.back() == 'x' &&
+            (str == "local_invocation_idx" || str == "local_invocation_index")) {
+            return ast::Builtin::kLocalInvocationIndex;
+        }
+        return ast::Builtin::kNone;
     }
-    if (str == "local_invocation_id") {
-        return ast::Builtin::kLocalInvocationId;
+
+    if (str[0] == 'n') {
+        if (str[1] == 'u' && str == "num_workgroups") {
+            return ast::Builtin::kNumWorkgroups;
+        }
+        return ast::Builtin::kNone;
     }
-    if (str == "local_invocation_idx" || str == "local_invocation_index") {
-        return ast::Builtin::kLocalInvocationIndex;
+
+    if (str[0] == 'p') {
+        if (str[1] == 'o' && str == "position") {
+            return ast::Builtin::kPosition;
+        }
+        return ast::Builtin::kNone;
     }
-    if (str == "global_invocation_id") {
-        return ast::Builtin::kGlobalInvocationId;
+
+    if (str[0] == 's') {
+        if (str.back() == 'x') {
+            if (str == "sample_index") {
+                return ast::Builtin::kSampleIndex;
+            }
+            return ast::Builtin::kNone;
+        }
+
+        if (str.back() == 'k' && str == "sample_mask") {
+            return ast::Builtin::kSampleMask;
+        }
+        return ast::Builtin::kNone;
     }
-    if (str == "workgroup_id") {
+
+    if (str[0] == 'v') {
+        if (str[1] == 'e' && str == "vertex_index") {
+            return ast::Builtin::kVertexIndex;
+        }
+        return ast::Builtin::kNone;
+    }
+
+    if (str[0] == 'w' && str[1] == 'o' && str == "workgroup_id") {
         return ast::Builtin::kWorkgroupId;
     }
-    if (str == "num_workgroups") {
-        return ast::Builtin::kNumWorkgroups;
-    }
-    if (str == "sample_index") {
-        return ast::Builtin::kSampleIndex;
-    }
-    if (str == "sample_mask") {
-        return ast::Builtin::kSampleMask;
-    }
+
     return ast::Builtin::kNone;
 }
 
-const char kBindingAttribute[] = "binding";
-const char kBuiltinAttribute[] = "builtin";
-const char kGroupAttribute[] = "group";
-const char kIdAttribute[] = "id";
-const char kInterpolateAttribute[] = "interpolate";
-const char kInvariantAttribute[] = "invariant";
-const char kLocationAttribute[] = "location";
-const char kSizeAttribute[] = "size";
-const char kAlignAttribute[] = "align";
-const char kStageAttribute[] = "stage";
-const char kWorkgroupSizeAttribute[] = "workgroup_size";
-
 // https://gpuweb.github.io/gpuweb/wgsl.html#reserved-keywords
 bool is_reserved(const Token& t) {
-    return t == "asm" || t == "bf16" || t == "do" || t == "enum" || t == "f64" || t == "handle" ||
-           t == "i8" || t == "i16" || t == "i64" || t == "mat" || t == "premerge" ||
-           t == "regardless" || t == "typedef" || t == "u8" || t == "u16" || t == "u64" ||
-           t == "unless" || t == "using" || t == "vec" || t == "void" || t == "while";
+    if (!t.IsIdentifier()) {
+        return false;
+    }
+    auto str = t.to_str();
+    if (str.length() < 2) {
+        return false;
+    }
+
+    if (str[0] == 'a') {
+        return str[1] == 's' && str == "asm";
+    }
+    if (str[0] == 'b') {
+        return str[1] == 'f' && str == "bf16";
+    }
+    if (str[0] == 'd') {
+        return str.length() == 2 && str[1] == 'o';
+    }
+    if (str[0] == 'e') {
+        return str[1] == 'n' && str == "enum";
+    }
+    if (str[0] == 'f') {
+        return str[1] == '6' && str == "f64";
+    }
+    if (str[0] == 'h') {
+        return str[1] == 'a' && str == "handle";
+    }
+    if (str[0] == 'i') {
+        return (str.length() == 2 && str[1] == '8') ||
+               (str.length() == 3 &&
+                ((str[1] == '1' && str[2] == '6') || (str[1] == '6' && str[2] == '4')));
+    }
+    if (str[0] == 'm') {
+        return str[1] == 'a' && str == "mat";
+    }
+    if (str[0] == 'p') {
+        return str[1] == 'r' && str == "premerge";
+    }
+    if (str[0] == 'r') {
+        return str[1] == 'e' && str == "regardless";
+    }
+    if (str[0] == 't') {
+        return str[1] == 'y' && str == "typedef";
+    }
+    if (str[0] == 'u') {
+        if (str[1] == '8') {
+            return str.length() == 2;
+        }
+        if (str[1] == '1') {
+            return str.length() == 3 && str[2] == '6';
+        }
+        if (str[1] == '6') {
+            return str.length() == 3 && str[2] == '4';
+        }
+        return (str[1] == 'n' && str == "unless") || (str[1] == 's' && str == "using");
+    }
+    if (str[0] == 'v') {
+        return (str[1] == 'e' && str == "vec") || (str[1] == 'o' && str == "void");
+    }
+    if (str[0] == 'w') {
+        return str[1] == 'h' && str == "while";
+    }
+    return false;
 }
 
 /// Enter-exit counters for block token types.
@@ -917,55 +1011,127 @@ Maybe<const ast::Type*> ParserImpl::depth_texture() {
 //  | 'rgba32float'
 Expect<ast::TexelFormat> ParserImpl::expect_texel_format(std::string_view use) {
     auto& t = next();
-    if (t == "rgba8unorm") {
-        return ast::TexelFormat::kRgba8Unorm;
+
+    auto err = [&]() { return add_error(t.source(), "invalid format", use); };
+
+    if (!t.IsIdentifier()) {
+        return err();
     }
-    if (t == "rgba8snorm") {
-        return ast::TexelFormat::kRgba8Snorm;
+
+    auto s = t.to_str();
+    if (s.length() < 6 || s[0] != 'r') {
+        return err();
     }
-    if (t == "rgba8uint") {
-        return ast::TexelFormat::kRgba8Uint;
+
+    if (s[1] == '3') {
+        if (s[3] == 'u') {
+            if (s[4] == 'i' && s == "r32uint") {
+                return ast::TexelFormat::kR32Uint;
+            }
+            return err();
+        }
+        if (s[3] == 's') {
+            if (s[4] == 'i' && s == "r32sint") {
+                return ast::TexelFormat::kR32Sint;
+            }
+            return err();
+        }
+        if (s[3] == 'f' && s[4] == 'l' && s == "r32float") {
+            return ast::TexelFormat::kR32Float;
+        }
+        return err();
     }
-    if (t == "rgba8sint") {
-        return ast::TexelFormat::kRgba8Sint;
+
+    if (s[2] == '3') {
+        if (s[4] == 'u') {
+            if (s[5] == 'i' && s == "rg32uint") {
+                return ast::TexelFormat::kRg32Uint;
+            }
+            return err();
+        }
+        if (s[4] == 's') {
+            if (s[5] == 'i' && s == "rg32sint") {
+                return ast::TexelFormat::kRg32Sint;
+            }
+            return err();
+        }
+        if (s[4] == 'f' && s[5] == 'l' && s == "rg32float") {
+            return ast::TexelFormat::kRg32Float;
+        }
+        return err();
     }
-    if (t == "rgba16uint") {
-        return ast::TexelFormat::kRgba16Uint;
+
+    if (s[4] == '8') {
+        if (s[5] == 'u') {
+            if (s.back() == 'm') {
+                if (s == "rgba8unorm") {
+                    return ast::TexelFormat::kRgba8Unorm;
+                }
+                return err();
+            }
+            if (s.back() == 't' && s == "rgba8uint") {
+                return ast::TexelFormat::kRgba8Uint;
+            }
+            return err();
+        }
+        if (s[5] == 's') {
+            if (s.back() == 'm') {
+                if (s == "rgba8snorm") {
+                    return ast::TexelFormat::kRgba8Snorm;
+                }
+                return err();
+            }
+            if (s.back() == 't' && s == "rgba8sint") {
+                return ast::TexelFormat::kRgba8Sint;
+            }
+        }
+        err();
     }
-    if (t == "rgba16sint") {
-        return ast::TexelFormat::kRgba16Sint;
+
+    if (s[4] == '1') {
+        if (s.length() < 10) {
+            return err();
+        }
+
+        if (s[6] == 'u') {
+            if (s[7] == 'i' && s == "rgba16uint") {
+                return ast::TexelFormat::kRgba16Uint;
+            }
+            return err();
+        }
+        if (s[6] == 's') {
+            if (s[7] == 'i' && s == "rgba16sint") {
+                return ast::TexelFormat::kRgba16Sint;
+            }
+            return err();
+        }
+        if (s[6] == 'f' && s[7] == 'l' && s == "rgba16float") {
+            return ast::TexelFormat::kRgba16Float;
+        }
+        return err();
     }
-    if (t == "rgba16float") {
-        return ast::TexelFormat::kRgba16Float;
+
+    if (s[4] == '3') {
+        if (s.length() < 10) {
+            return err();
+        }
+        if (s[6] == 'u') {
+            if (s[7] == 'i' && s == "rgba32uint") {
+                return ast::TexelFormat::kRgba32Uint;
+            }
+            return err();
+        }
+        if (s[6] == 's') {
+            if (s[7] == 'i' && s == "rgba32sint") {
+                return ast::TexelFormat::kRgba32Sint;
+            }
+            return err();
+        }
+        if (s[6] == 'f' && s[7] == 'l' && s == "rgba32float") {
+            return ast::TexelFormat::kRgba32Float;
+        }
     }
-    if (t == "r32uint") {
-        return ast::TexelFormat::kR32Uint;
-    }
-    if (t == "r32sint") {
-        return ast::TexelFormat::kR32Sint;
-    }
-    if (t == "r32float") {
-        return ast::TexelFormat::kR32Float;
-    }
-    if (t == "rg32uint") {
-        return ast::TexelFormat::kRg32Uint;
-    }
-    if (t == "rg32sint") {
-        return ast::TexelFormat::kRg32Sint;
-    }
-    if (t == "rg32float") {
-        return ast::TexelFormat::kRg32Float;
-    }
-    if (t == "rgba32uint") {
-        return ast::TexelFormat::kRgba32Uint;
-    }
-    if (t == "rgba32sint") {
-        return ast::TexelFormat::kRgba32Sint;
-    }
-    if (t == "rgba32float") {
-        return ast::TexelFormat::kRgba32Float;
-    }
-    return add_error(t.source(), "invalid format", use);
+    return err();
 }
 
 // variable_ident_decl
@@ -1312,28 +1478,43 @@ Expect<ast::StorageClass> ParserImpl::expect_storage_class(std::string_view use)
         return Failure::kErrored;
     }
 
+    auto err = [&]() { return add_error(t.source(), "invalid storage class", use); };
+
     auto name = ident.value;
-    if (name == "uniform") {
-        return {ast::StorageClass::kUniform, t.source()};
+    if (name[0] == 'f') {
+        if (name[1] == 'u' && name == "function") {
+            return {ast::StorageClass::kFunction, t.source()};
+        }
+        return err();
     }
 
-    if (name == "workgroup") {
-        return {ast::StorageClass::kWorkgroup, t.source()};
+    if (name[0] == 'p') {
+        if (name[1] == 'r' && name == "private") {
+            return {ast::StorageClass::kPrivate, t.source()};
+        }
+        return err();
     }
 
-    if (name == "storage" || name == "storage_buffer") {
-        return {ast::StorageClass::kStorage, t.source()};
+    if (name[0] == 's') {
+        if ((name.back() == 'e' && name == "storage") ||
+            (name.back() == 'r' && name == "storage_buffer")) {
+            return {ast::StorageClass::kStorage, t.source()};
+        }
+        return err();
+    }
+    if (name[0] == 'u') {
+        if (name[1] == 'n' && name == "uniform") {
+            return {ast::StorageClass::kUniform, t.source()};
+        }
+        return err();
     }
 
-    if (name == "private") {
-        return {ast::StorageClass::kPrivate, t.source()};
+    if (name[0] == 'w') {
+        if (name[1] == 'o' && name == "workgroup") {
+            return {ast::StorageClass::kWorkgroup, t.source()};
+        }
     }
-
-    if (name == "function") {
-        return {ast::StorageClass::kFunction, t.source()};
-    }
-
-    return add_error(t.source(), "invalid storage class", use);
+    return err();
 }
 
 // struct_decl
@@ -3181,98 +3362,219 @@ Maybe<const ast::Attribute*> ParserImpl::attribute() {
         return Failure::kNoMatch;
     }
 
-    if (t == kLocationAttribute) {
-        const char* use = "location attribute";
-        return expect_paren_block(use, [&]() -> Result {
-            auto val = expect_positive_sint(use);
-            if (val.errored) {
-                return Failure::kErrored;
-            }
-            match(Token::Type::kComma);
-
-            return create<ast::LocationAttribute>(t.source(), val.value);
-        });
+    auto s = t.to_str();
+    if (s.length() < 2) {
+        return Failure::kNoMatch;
     }
 
-    if (t == kBindingAttribute) {
-        const char* use = "binding attribute";
-        return expect_paren_block(use, [&]() -> Result {
-            auto val = expect_positive_sint(use);
-            if (val.errored) {
-                return Failure::kErrored;
-            }
-            match(Token::Type::kComma);
+    if (s[0] == 'a') {
+        if (s[1] == 'l' && s == "align") {
+            const char* use = "align attribute";
+            return expect_paren_block(use, [&]() -> Result {
+                auto val = expect_positive_sint(use);
+                if (val.errored) {
+                    return Failure::kErrored;
+                }
+                match(Token::Type::kComma);
 
-            return create<ast::BindingAttribute>(t.source(), val.value);
-        });
+                return create<ast::StructMemberAlignAttribute>(t.source(), val.value);
+            });
+        }
+        return Failure::kNoMatch;
     }
 
-    if (t == kGroupAttribute) {
-        const char* use = "group attribute";
-        return expect_paren_block(use, [&]() -> Result {
-            auto val = expect_positive_sint(use);
-            if (val.errored) {
-                return Failure::kErrored;
-            }
-            match(Token::Type::kComma);
-
-            return create<ast::GroupAttribute>(t.source(), val.value);
-        });
-    }
-
-    if (t == kInterpolateAttribute) {
-        return expect_paren_block("interpolate attribute", [&]() -> Result {
-            ast::InterpolationType type;
-            ast::InterpolationSampling sampling = ast::InterpolationSampling::kNone;
-
-            auto& type_tok = next();
-            if (type_tok == "perspective") {
-                type = ast::InterpolationType::kPerspective;
-            } else if (type_tok == "linear") {
-                type = ast::InterpolationType::kLinear;
-            } else if (type_tok == "flat") {
-                type = ast::InterpolationType::kFlat;
-            } else {
-                return add_error(type_tok, "invalid interpolation type");
-            }
-
-            if (match(Token::Type::kComma)) {
-                if (!peek_is(Token::Type::kParenRight)) {
-                    auto& sampling_tok = next();
-                    if (sampling_tok == "center") {
-                        sampling = ast::InterpolationSampling::kCenter;
-                    } else if (sampling_tok == "centroid") {
-                        sampling = ast::InterpolationSampling::kCentroid;
-                    } else if (sampling_tok == "sample") {
-                        sampling = ast::InterpolationSampling::kSample;
-                    } else {
-                        return add_error(sampling_tok, "invalid interpolation sampling");
+    if (s[0] == 'b') {
+        if (s[1] == 'i') {
+            if (s == "binding") {
+                const char* use = "binding attribute";
+                return expect_paren_block(use, [&]() -> Result {
+                    auto val = expect_positive_sint(use);
+                    if (val.errored) {
+                        return Failure::kErrored;
                     }
                     match(Token::Type::kComma);
+
+                    return create<ast::BindingAttribute>(t.source(), val.value);
+                });
+            }
+            return Failure::kNoMatch;
+        }
+        if (s[1] == 'u' && s == "builtin") {
+            return expect_paren_block("builtin attribute", [&]() -> Result {
+                auto builtin = expect_builtin();
+                if (builtin.errored) {
+                    return Failure::kErrored;
                 }
+
+                match(Token::Type::kComma);
+                return create<ast::BuiltinAttribute>(t.source(), builtin.value);
+            });
+        }
+        return Failure::kNoMatch;
+    }
+
+    if (s[0] == 'c') {
+        if (s[1] == 'o' && s == kComputeStage) {
+            return create<ast::StageAttribute>(t.source(), ast::PipelineStage::kCompute);
+        }
+        return Failure::kNoMatch;
+    }
+
+    if (s[0] == 'f') {
+        if (s[1] == 'r' && s == kFragmentStage) {
+            return create<ast::StageAttribute>(t.source(), ast::PipelineStage::kFragment);
+        }
+        return Failure::kNoMatch;
+    }
+
+    if (s[0] == 'g') {
+        if (s[1] == 'r' && s == "group") {
+            const char* use = "group attribute";
+            return expect_paren_block(use, [&]() -> Result {
+                auto val = expect_positive_sint(use);
+                if (val.errored) {
+                    return Failure::kErrored;
+                }
+                match(Token::Type::kComma);
+
+                return create<ast::GroupAttribute>(t.source(), val.value);
+            });
+        }
+        return Failure::kNoMatch;
+    }
+
+    if (s[0] == 'i') {
+        if (s[1] == 'd') {
+            if (s.length() == 2) {
+                const char* use = "id attribute";
+                return expect_paren_block(use, [&]() -> Result {
+                    auto val = expect_positive_sint(use);
+                    if (val.errored) {
+                        return Failure::kErrored;
+                    }
+                    match(Token::Type::kComma);
+
+                    return create<ast::IdAttribute>(t.source(), val.value);
+                });
             }
+            return Failure::kNoMatch;
+        }
 
-            return create<ast::InterpolateAttribute>(t.source(), type, sampling);
-        });
-    }
+        if (s.back() == 'e') {
+            if (s == "interpolate") {
+                return expect_paren_block("interpolate attribute", [&]() -> Result {
+                    ast::InterpolationType type;
+                    ast::InterpolationSampling sampling = ast::InterpolationSampling::kNone;
 
-    if (t == kInvariantAttribute) {
-        return create<ast::InvariantAttribute>(t.source());
-    }
+                    auto& type_tok = next();
+                    if (type_tok == "perspective") {
+                        type = ast::InterpolationType::kPerspective;
+                    } else if (type_tok == "linear") {
+                        type = ast::InterpolationType::kLinear;
+                    } else if (type_tok == "flat") {
+                        type = ast::InterpolationType::kFlat;
+                    } else {
+                        return add_error(type_tok, "invalid interpolation type");
+                    }
 
-    if (t == kBuiltinAttribute) {
-        return expect_paren_block("builtin attribute", [&]() -> Result {
-            auto builtin = expect_builtin();
-            if (builtin.errored) {
-                return Failure::kErrored;
+                    if (match(Token::Type::kComma)) {
+                        if (!peek_is(Token::Type::kParenRight)) {
+                            auto& sampling_tok = next();
+                            if (sampling_tok == "center") {
+                                sampling = ast::InterpolationSampling::kCenter;
+                            } else if (sampling_tok == "centroid") {
+                                sampling = ast::InterpolationSampling::kCentroid;
+                            } else if (sampling_tok == "sample") {
+                                sampling = ast::InterpolationSampling::kSample;
+                            } else {
+                                return add_error(sampling_tok, "invalid interpolation sampling");
+                            }
+                            match(Token::Type::kComma);
+                        }
+                    }
+
+                    return create<ast::InterpolateAttribute>(t.source(), type, sampling);
+                });
             }
-
-            match(Token::Type::kComma);
-            return create<ast::BuiltinAttribute>(t.source(), builtin.value);
-        });
+            return Failure::kNoMatch;
+        }
+        if (s.back() == 't' && s == "invariant") {
+            return create<ast::InvariantAttribute>(t.source());
+        }
+        return Failure::kNoMatch;
     }
 
-    if (t == kWorkgroupSizeAttribute) {
+    if (s[0] == 'l') {
+        if (s[1] == 'o' && s == "location") {
+            const char* use = "location attribute";
+            return expect_paren_block(use, [&]() -> Result {
+                auto val = expect_positive_sint(use);
+                if (val.errored) {
+                    return Failure::kErrored;
+                }
+                match(Token::Type::kComma);
+
+                return create<ast::LocationAttribute>(t.source(), val.value);
+            });
+        }
+        return Failure::kNoMatch;
+    }
+
+    if (s[0] == 's') {
+        // TODO(crbug.com/tint/1503): Remove when deprecation period is over.
+        if (s[1] == 't') {
+            if (s == "stage") {
+                return expect_paren_block("stage attribute", [&]() -> Result {
+                    auto stage = expect_pipeline_stage();
+                    if (stage.errored) {
+                        return Failure::kErrored;
+                    }
+
+                    std::string warning = "remove stage and use @";
+                    switch (stage.value) {
+                        case ast::PipelineStage::kVertex:
+                            warning += "vertex";
+                            break;
+                        case ast::PipelineStage::kFragment:
+                            warning += "fragment";
+                            break;
+                        case ast::PipelineStage::kCompute:
+                            warning += "compute";
+                            break;
+                        case ast::PipelineStage::kNone:
+                            break;
+                    }
+                    deprecated(t.source(), warning);
+
+                    return create<ast::StageAttribute>(t.source(), stage.value);
+                });
+            }
+            return Failure::kNoMatch;
+        }
+
+        if (s[1] == 'i' && s == "size") {
+            const char* use = "size attribute";
+            return expect_paren_block(use, [&]() -> Result {
+                auto val = expect_positive_sint(use);
+                if (val.errored) {
+                    return Failure::kErrored;
+                }
+                match(Token::Type::kComma);
+
+                return create<ast::StructMemberSizeAttribute>(t.source(), val.value);
+            });
+        }
+        return Failure::kNoMatch;
+    }
+
+    if (s[0] == 'v') {
+        if (s[1] == 'e' && s == kVertexStage) {
+            return create<ast::StageAttribute>(t.source(), ast::PipelineStage::kVertex);
+        }
+        return Failure::kNoMatch;
+    }
+
+    if (s[0] == 'w' && s[1] == 'o' && s == "workgroup_size") {
         return expect_paren_block("workgroup_size attribute", [&]() -> Result {
             const ast::Expression* x = nullptr;
             const ast::Expression* y = nullptr;
@@ -3315,83 +3617,6 @@ Maybe<const ast::Attribute*> ParserImpl::attribute() {
             return create<ast::WorkgroupAttribute>(t.source(), x, y, z);
         });
     }
-
-    // TODO(crbug.com/tint/1503): Remove when deprecation period is over.
-    if (t == kStageAttribute) {
-        return expect_paren_block("stage attribute", [&]() -> Result {
-            auto stage = expect_pipeline_stage();
-            if (stage.errored) {
-                return Failure::kErrored;
-            }
-
-            std::string warning = "remove stage and use @";
-            switch (stage.value) {
-                case ast::PipelineStage::kVertex:
-                    warning += "vertex";
-                    break;
-                case ast::PipelineStage::kFragment:
-                    warning += "fragment";
-                    break;
-                case ast::PipelineStage::kCompute:
-                    warning += "compute";
-                    break;
-                case ast::PipelineStage::kNone:
-                    break;
-            }
-            deprecated(t.source(), warning);
-
-            return create<ast::StageAttribute>(t.source(), stage.value);
-        });
-    }
-    if (t == kComputeStage) {
-        return create<ast::StageAttribute>(t.source(), ast::PipelineStage::kCompute);
-    }
-    if (t == kVertexStage) {
-        return create<ast::StageAttribute>(t.source(), ast::PipelineStage::kVertex);
-    }
-    if (t == kFragmentStage) {
-        return create<ast::StageAttribute>(t.source(), ast::PipelineStage::kFragment);
-    }
-
-    if (t == kSizeAttribute) {
-        const char* use = "size attribute";
-        return expect_paren_block(use, [&]() -> Result {
-            auto val = expect_positive_sint(use);
-            if (val.errored) {
-                return Failure::kErrored;
-            }
-            match(Token::Type::kComma);
-
-            return create<ast::StructMemberSizeAttribute>(t.source(), val.value);
-        });
-    }
-
-    if (t == kAlignAttribute) {
-        const char* use = "align attribute";
-        return expect_paren_block(use, [&]() -> Result {
-            auto val = expect_positive_sint(use);
-            if (val.errored) {
-                return Failure::kErrored;
-            }
-            match(Token::Type::kComma);
-
-            return create<ast::StructMemberAlignAttribute>(t.source(), val.value);
-        });
-    }
-
-    if (t == kIdAttribute) {
-        const char* use = "id attribute";
-        return expect_paren_block(use, [&]() -> Result {
-            auto val = expect_positive_sint(use);
-            if (val.errored) {
-                return Failure::kErrored;
-            }
-            match(Token::Type::kComma);
-
-            return create<ast::IdAttribute>(t.source(), val.value);
-        });
-    }
-
     return Failure::kNoMatch;
 }
 
