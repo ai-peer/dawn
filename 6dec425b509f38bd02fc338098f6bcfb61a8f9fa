@@ -50,6 +50,24 @@
       "message": "What about moving these into a namespace or the enum so this would be:\n\n```\nnamespace storage_class {\n\nStorageClass Parse(std::string_view str);\n\n}\n```\n\nNot sure if that\u0027s better or not ...",
       "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb73e56b_a5bd1f36",
+        "filename": "src/tint/ast/storage_class.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-26T14:57:56Z",
+      "side": 1,
+      "message": "Would you be happy if the `enum class` became an `enum` in that namespace?\n\n```\nnamespace StorageClass {\n\nenum Enum {\n    kInvalid,\n    kNone,\n    kFunction,\n    kPrivate,\n    kWorkgroup,\n    kUniform,\n    kStorage,\n    kHandle,\n    kIn,\n    kOut,\n};\n\nStorageClass Parse(std::string_view str);\n\n}\n```\n\nThen the likes of `StorageClass::kFunction` would remain the same, but the use of the enum would become `StorageClass::Enum`, which is a bit gross.",
+      "parentUuid": "31b1f9e0_585de2f5",
+      "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
