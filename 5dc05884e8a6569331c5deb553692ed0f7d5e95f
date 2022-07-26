@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93ae0555_e2cced78",
+        "filename": "tools/src/cmd/gen/main.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-26T14:39:22Z",
+      "side": 1,
+      "message": "nit: 2022",
+      "revId": "5dc05884e8a6569331c5deb553692ed0f7d5e95f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fadfce75_e3ae3d9a",
+        "filename": "tools/src/cmd/gen/main.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-26T14:39:22Z",
+      "side": 1,
+      "message": "nit: 2022",
+      "revId": "5dc05884e8a6569331c5deb553692ed0f7d5e95f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
