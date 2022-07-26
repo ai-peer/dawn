@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6945946_7353aec9",
+        "filename": "tools/src/cmd/gen/main.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-26T14:51:30Z",
+      "side": 1,
+      "message": "File was actually moved, and our legal team say we should keep the old date.",
+      "parentUuid": "93ae0555_e2cced78",
+      "revId": "5dc05884e8a6569331c5deb553692ed0f7d5e95f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fadfce75_e3ae3d9a",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-07-26T14:39:22Z",
       "side": 1,
       "message": "nit: 2022",
+      "revId": "5dc05884e8a6569331c5deb553692ed0f7d5e95f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aeca38c_3073ea1e",
+        "filename": "tools/src/cmd/gen/main.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-26T14:51:30Z",
+      "side": 1,
+      "message": "See: https://dawn-review.googlesource.com/c/dawn/+/97149",
+      "parentUuid": "fadfce75_e3ae3d9a",
       "revId": "5dc05884e8a6569331c5deb553692ed0f7d5e95f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
