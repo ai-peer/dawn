@@ -104,6 +104,24 @@
       "parentUuid": "de342486_c55a051a",
       "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18ad4f0f_a057da5d",
+        "filename": "src/tint/ast/storage_class.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-26T17:51:54Z",
+      "side": 1,
+      "message": "I\u0027m not explaining my self well.\n\n\n```\nnamespace tint::ast {\nenum class Foo {\n  kBar,\n};\n\nnamespace foo {\n\nFoo Parse(std::string_view str) {\n  if (str \u003d\u003d \"bar\") {\n    return Foo::kBar;\n  }\n }\n  \n}  // namespace foo\n\n}  // namespace tint::ast\n\n\nSo you\u0027d call `tint::ast::foo::Parse()` and get back a Foo object.\n\n```",
+      "parentUuid": "ee2e77fc_ee013a24",
+      "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
