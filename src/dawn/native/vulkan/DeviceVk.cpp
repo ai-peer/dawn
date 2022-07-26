@@ -251,7 +251,7 @@ void Device::EnqueueDeferredDeallocation(DescriptorSetAllocator* allocator) {
 
 CommandRecordingContext* Device::GetPendingRecordingContext() {
     ASSERT(mRecordingContext.commandBuffer != VK_NULL_HANDLE);
-    mRecordingContext.used = true;
+    mRecordingContext.used = (mSubmitMode != SubmitMode::Passive);
     return &mRecordingContext;
 }
 
@@ -259,6 +259,7 @@ MaybeError Device::SubmitPendingCommands() {
     if (!mRecordingContext.used) {
         return {};
     }
+    fprintf(stderr, "SubmitPendingCommands\n");
 
     DAWN_TRY(
         CheckVkSuccess(fn.EndCommandBuffer(mRecordingContext.commandBuffer), "vkEndCommandBuffer"));
@@ -846,6 +847,7 @@ TextureBase* Device::CreateTextureWrappingVulkanImage(
     const std::vector<ExternalSemaphoreHandle>& waitHandles) {
     const TextureDescriptor* textureDescriptor = FromAPI(descriptor->cTextureDescriptor);
 
+    fprintf(stderr, "CreateTextureWrappingVulkanImage\n");
     // Initial validation
     if (ConsumedError(ValidateTextureDescriptor(this, textureDescriptor))) {
         return nullptr;

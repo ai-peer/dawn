@@ -185,8 +185,11 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
     const float* dstFn = descriptor->dstTransferFunctionParameters;
     std::copy(dstFn, dstFn + 7, params.gammaEncodingParams.begin());
 
+    auto oldSubmitMode = device->GetSubmitMode();
+    // device->SetSubmitMode(SubmitMode::Passive);
     DAWN_TRY(device->GetQueue()->WriteBuffer(mParamsBuffer.Get(), 0, &params,
                                              sizeof(ExternalTextureParams)));
+    device->SetSubmitMode(oldSubmitMode);
 
     return {};
 }

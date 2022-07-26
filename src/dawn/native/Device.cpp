@@ -1284,6 +1284,14 @@ MaybeError DeviceBase::Tick() {
     return {};
 }
 
+void DeviceBase::SetSubmitMode(SubmitMode mode) {
+    mSubmitMode = mode;
+}
+
+DeviceBase::SubmitMode DeviceBase::GetSubmitMode() const {
+    return mSubmitMode;
+}
+
 QueueBase* DeviceBase::APIGetQueue() {
     // Backends gave the primary queue during initialization.
     ASSERT(mQueue != nullptr);

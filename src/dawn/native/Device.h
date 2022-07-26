@@ -358,6 +358,11 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     MaybeError Tick();
 
+    enum class SubmitMode { Normal, Passive, Aggressive };
+
+    void SetSubmitMode(SubmitMode mode);
+    SubmitMode GetSubmitMode() const;
+
     // TODO(crbug.com/dawn/839): Organize the below backend-specific parameters into the struct
     // BackendMetadata that we can query from the device.
     virtual uint32_t GetOptimalBytesPerRowAlignment() const = 0;
@@ -414,6 +419,8 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     // Incrememt mLastSubmittedSerial when we submit the next serial
     void IncrementLastSubmittedCommandSerial();
+
+    SubmitMode mSubmitMode = SubmitMode::Normal;
 
   private:
     void WillDropLastExternalRef() override;
