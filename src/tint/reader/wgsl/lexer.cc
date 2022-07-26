@@ -1121,199 +1121,428 @@ Token Lexer::try_punctuation() {
 }
 
 Token Lexer::check_keyword(const Source& source, std::string_view str) {
-    if (str == "array") {
-        return {Token::Type::kArray, source, "array"};
-    }
-    if (str == "atomic") {
-        return {Token::Type::kAtomic, source, "atomic"};
-    }
-    if (str == "bitcast") {
-        return {Token::Type::kBitcast, source, "bitcast"};
-    }
-    if (str == "bool") {
-        return {Token::Type::kBool, source, "bool"};
-    }
-    if (str == "break") {
-        return {Token::Type::kBreak, source, "break"};
-    }
-    if (str == "case") {
-        return {Token::Type::kCase, source, "case"};
-    }
-    if (str == "const") {
-        return {Token::Type::kConst, source, "const"};
-    }
-    if (str == "continue") {
-        return {Token::Type::kContinue, source, "continue"};
-    }
-    if (str == "continuing") {
-        return {Token::Type::kContinuing, source, "continuing"};
-    }
-    if (str == "discard") {
-        return {Token::Type::kDiscard, source, "discard"};
-    }
-    if (str == "default") {
-        return {Token::Type::kDefault, source, "default"};
-    }
-    if (str == "else") {
-        return {Token::Type::kElse, source, "else"};
-    }
-    if (str == "enable") {
-        return {Token::Type::kEnable, source, "enable"};
-    }
-    if (str == "f16") {
-        return {Token::Type::kF16, source, "f16"};
-    }
-    if (str == "f32") {
-        return {Token::Type::kF32, source, "f32"};
-    }
-    if (str == "fallthrough") {
-        return {Token::Type::kFallthrough, source, "fallthrough"};
-    }
-    if (str == "false") {
-        return {Token::Type::kFalse, source, "false"};
-    }
-    if (str == "fn") {
-        return {Token::Type::kFn, source, "fn"};
-    }
-    if (str == "for") {
-        return {Token::Type::kFor, source, "for"};
-    }
-    if (str == "i32") {
-        return {Token::Type::kI32, source, "i32"};
-    }
-    if (str == "if") {
-        return {Token::Type::kIf, source, "if"};
-    }
-    if (str == "import") {
-        return {Token::Type::kImport, source, "import"};
-    }
-    if (str == "let") {
-        return {Token::Type::kLet, source, "let"};
-    }
-    if (str == "loop") {
-        return {Token::Type::kLoop, source, "loop"};
-    }
-    if (str == "mat2x2") {
-        return {Token::Type::kMat2x2, source, "mat2x2"};
-    }
-    if (str == "mat2x3") {
-        return {Token::Type::kMat2x3, source, "mat2x3"};
-    }
-    if (str == "mat2x4") {
-        return {Token::Type::kMat2x4, source, "mat2x4"};
-    }
-    if (str == "mat3x2") {
-        return {Token::Type::kMat3x2, source, "mat3x2"};
-    }
-    if (str == "mat3x3") {
-        return {Token::Type::kMat3x3, source, "mat3x3"};
-    }
-    if (str == "mat3x4") {
-        return {Token::Type::kMat3x4, source, "mat3x4"};
-    }
-    if (str == "mat4x2") {
-        return {Token::Type::kMat4x2, source, "mat4x2"};
-    }
-    if (str == "mat4x3") {
-        return {Token::Type::kMat4x3, source, "mat4x3"};
-    }
-    if (str == "mat4x4") {
-        return {Token::Type::kMat4x4, source, "mat4x4"};
-    }
-    if (str == "override") {
-        return {Token::Type::kOverride, source, "override"};
-    }
-    if (str == "ptr") {
-        return {Token::Type::kPtr, source, "ptr"};
-    }
-    if (str == "return") {
-        return {Token::Type::kReturn, source, "return"};
-    }
-    if (str == "sampler") {
-        return {Token::Type::kSampler, source, "sampler"};
-    }
-    if (str == "sampler_comparison") {
-        return {Token::Type::kComparisonSampler, source, "sampler_comparison"};
-    }
-    if (str == "struct") {
-        return {Token::Type::kStruct, source, "struct"};
-    }
-    if (str == "switch") {
-        return {Token::Type::kSwitch, source, "switch"};
-    }
-    if (str == "texture_1d") {
-        return {Token::Type::kTextureSampled1d, source, "texture_1d"};
-    }
-    if (str == "texture_2d") {
-        return {Token::Type::kTextureSampled2d, source, "texture_2d"};
-    }
-    if (str == "texture_2d_array") {
-        return {Token::Type::kTextureSampled2dArray, source, "texture_2d_array"};
-    }
-    if (str == "texture_3d") {
-        return {Token::Type::kTextureSampled3d, source, "texture_3d"};
-    }
-    if (str == "texture_cube") {
-        return {Token::Type::kTextureSampledCube, source, "texture_cube"};
-    }
-    if (str == "texture_cube_array") {
-        return {Token::Type::kTextureSampledCubeArray, source, "texture_cube_array"};
-    }
-    if (str == "texture_depth_2d") {
-        return {Token::Type::kTextureDepth2d, source, "texture_depth_2d"};
-    }
-    if (str == "texture_depth_2d_array") {
-        return {Token::Type::kTextureDepth2dArray, source, "texture_depth_2d_array"};
-    }
-    if (str == "texture_depth_cube") {
-        return {Token::Type::kTextureDepthCube, source, "texture_depth_cube"};
-    }
-    if (str == "texture_depth_cube_array") {
-        return {Token::Type::kTextureDepthCubeArray, source, "texture_depth_cube_array"};
-    }
-    if (str == "texture_depth_multisampled_2d") {
-        return {Token::Type::kTextureDepthMultisampled2d, source, "texture_depth_multisampled_2d"};
-    }
-    if (str == "texture_external") {
-        return {Token::Type::kTextureExternal, source, "texture_external"};
-    }
-    if (str == "texture_multisampled_2d") {
-        return {Token::Type::kTextureMultisampled2d, source, "texture_multisampled_2d"};
-    }
-    if (str == "texture_storage_1d") {
-        return {Token::Type::kTextureStorage1d, source, "texture_storage_1d"};
-    }
-    if (str == "texture_storage_2d") {
-        return {Token::Type::kTextureStorage2d, source, "texture_storage_2d"};
-    }
-    if (str == "texture_storage_2d_array") {
-        return {Token::Type::kTextureStorage2dArray, source, "texture_storage_2d_array"};
-    }
-    if (str == "texture_storage_3d") {
-        return {Token::Type::kTextureStorage3d, source, "texture_storage_3d"};
-    }
-    if (str == "true") {
-        return {Token::Type::kTrue, source, "true"};
-    }
-    if (str == "type") {
-        return {Token::Type::kType, source, "type"};
-    }
-    if (str == "u32") {
-        return {Token::Type::kU32, source, "u32"};
-    }
-    if (str == "var") {
-        return {Token::Type::kVar, source, "var"};
-    }
-    if (str == "vec2") {
-        return {Token::Type::kVec2, source, "vec2"};
-    }
-    if (str == "vec3") {
-        return {Token::Type::kVec3, source, "vec3"};
-    }
-    if (str == "vec4") {
-        return {Token::Type::kVec4, source, "vec4"};
-    }
-    if (str == "while") {
+    // Shortest token is 'fn'
+    if (str.length() < 2) {
+        return {};
+    }
+
+    if (str[0] == 'a') {
+        if (str[1] == 'r') {
+            if (str == "array") {
+                return {Token::Type::kArray, source, "array"};
+            }
+            return {};
+        }
+        if (str[1] == 't' && str == "atomic") {
+            return {Token::Type::kAtomic, source, "atomic"};
+        }
+        return {};
+    }
+
+    if (str[0] == 'b') {
+        if (str[1] == 'i') {
+            if (str == "bitcast") {
+                return {Token::Type::kBitcast, source, "bitcast"};
+            }
+            return {};
+        }
+        if (str[1] == 'o') {
+            if (str == "bool") {
+                return {Token::Type::kBool, source, "bool"};
+            }
+            return {};
+        }
+        if (str[1] == 'r' && str == "break") {
+            return {Token::Type::kBreak, source, "break"};
+        }
+        return {};
+    }
+
+    if (str[0] == 'c') {
+        if (str[1] == 'a') {
+            if (str == "case") {
+                return {Token::Type::kCase, source, "case"};
+            }
+            return {};
+        }
+        if (str[1] == 'o') {
+            if (str.back() == 't') {
+                if (str == "const") {
+                    return {Token::Type::kConst, source, "const"};
+                }
+                return {};
+            }
+            if (str.back() == 'e') {
+                if (str == "continue") {
+                    return {Token::Type::kContinue, source, "continue"};
+                }
+                return {};
+            }
+            if (str.back() == 'g' && str == "continuing") {
+                return {Token::Type::kContinuing, source, "continuing"};
+            }
+        }
+        return {};
+    }
+
+    if (str[0] == 'd') {
+        if (str[1] == 'i') {
+            if (str == "discard") {
+                return {Token::Type::kDiscard, source, "discard"};
+            }
+            return {};
+        }
+        if (str[1] == 'e' && str == "default") {
+            return {Token::Type::kDefault, source, "default"};
+        }
+        return {};
+    }
+
+    if (str[0] == 'e') {
+        if (str[1] == 'l') {
+            if (str == "else") {
+                return {Token::Type::kElse, source, "else"};
+            }
+            return {};
+        }
+        if (str[1] == 'n' && str == "enable") {
+            return {Token::Type::kEnable, source, "enable"};
+        }
+        return {};
+    }
+
+    if (str[0] == 'f') {
+        if (str[1] == '1') {
+            if (str == "f16") {
+                return {Token::Type::kF16, source, "f16"};
+            }
+            return {};
+        }
+        if (str[1] == '3') {
+            if (str == "f32") {
+                return {Token::Type::kF32, source, "f32"};
+            }
+            return {};
+        }
+        if (str[1] == 'a') {
+            if (str.back() == 'h') {
+                if (str == "fallthrough") {
+                    return {Token::Type::kFallthrough, source, "fallthrough"};
+                }
+                return {};
+            }
+            if (str.back() == 'e' && str == "false") {
+                return {Token::Type::kFalse, source, "false"};
+            }
+            return {};
+        }
+        if (str[1] == 'n') {
+            if (str.length() == 2) {
+                return {Token::Type::kFn, source, "fn"};
+            }
+            return {};
+        }
+        if (str[1] == 'o' && str == "for") {
+            return {Token::Type::kFor, source, "for"};
+        }
+        return {};
+    }
+
+    if (str[0] == 'i') {
+        if (str[1] == '3') {
+            if (str == "i32") {
+                return {Token::Type::kI32, source, "i32"};
+            }
+            return {};
+        }
+        if (str[1] == 'f') {
+            if (str.length() == 2) {
+                return {Token::Type::kIf, source, "if"};
+            }
+            return {};
+        }
+        if (str[1] == 'm' && str == "import") {
+            return {Token::Type::kImport, source, "import"};
+        }
+        return {};
+    }
+
+    if (str[0] == 'l') {
+        if (str[1] == 'e') {
+            if (str == "let") {
+                return {Token::Type::kLet, source, "let"};
+            }
+            return {};
+        }
+        if (str[1] == 'o' && str == "loop") {
+            return {Token::Type::kLoop, source, "loop"};
+        }
+        return {};
+    }
+
+    if (str[0] == 'm') {
+        if (str.length() != 6 || str[1] != 'a' || str[2] != 't' || str[4] != 'x') {
+            return {};
+        }
+        if (str[3] == '2') {
+            if (str[5] == '2') {
+                return {Token::Type::kMat2x2, source, "mat2x2"};
+            }
+            if (str[5] == '3') {
+                return {Token::Type::kMat2x3, source, "mat2x3"};
+            }
+            if (str[5] == '4') {
+                return {Token::Type::kMat2x4, source, "mat2x4"};
+            }
+            return {};
+        }
+        if (str[3] == '3') {
+            if (str[5] == '2') {
+                return {Token::Type::kMat3x2, source, "mat3x2"};
+            }
+            if (str[5] == '3') {
+                return {Token::Type::kMat3x3, source, "mat3x3"};
+            }
+            if (str[5] == '4') {
+                return {Token::Type::kMat3x4, source, "mat3x4"};
+            }
+            return {};
+        }
+        if (str[3] == '4') {
+            if (str[5] == '2') {
+                return {Token::Type::kMat4x2, source, "mat4x2"};
+            }
+            if (str[5] == '3') {
+                return {Token::Type::kMat4x3, source, "mat4x3"};
+            }
+            if (str[5] == '4') {
+                return {Token::Type::kMat4x4, source, "mat4x4"};
+            }
+        }
+        return {};
+    }
+
+    if (str[0] == 'o') {
+        if (str[1] == 'v' && str == "override") {
+            return {Token::Type::kOverride, source, "override"};
+        }
+        return {};
+    }
+
+    if (str[0] == 'p') {
+        if (str[1] == 't' && str == "ptr") {
+            return {Token::Type::kPtr, source, "ptr"};
+        }
+        return {};
+    }
+
+    if (str[0] == 'r') {
+        if (str[1] == 'e' && str == "return") {
+            return {Token::Type::kReturn, source, "return"};
+        }
+        return {};
+    }
+
+    if (str[0] == 's') {
+        if (str.back() == 'r') {
+            if (str == "sampler") {
+                return {Token::Type::kSampler, source, "sampler"};
+            }
+            return {};
+        }
+        if (str.back() == 'n') {
+            if (str == "sampler_comparison") {
+                return {Token::Type::kComparisonSampler, source, "sampler_comparison"};
+            }
+            return {};
+        }
+        if (str.back() == 't') {
+            if (str == "struct") {
+                return {Token::Type::kStruct, source, "struct"};
+            }
+            return {};
+        }
+        if (str.back() == 'h') {
+            if (str == "switch") {
+                return {Token::Type::kSwitch, source, "switch"};
+            }
+        }
+        return {};
+    }
+
+    if (str[0] == 't') {
+        if (str[1] == 'e') {
+            if (str.length() < 10) {
+                return {};
+            }
+            if (str[8] == '1') {
+                if (str == "texture_1d") {
+                    return {Token::Type::kTextureSampled1d, source, "texture_1d"};
+                }
+                return {};
+            }
+            if (str[8] == '2') {
+                if (str.back() == 'd') {
+                    if (str == "texture_2d") {
+                        return {Token::Type::kTextureSampled2d, source, "texture_2d"};
+                    }
+                    return {};
+                }
+                if (str.back() == 'y' && str == "texture_2d_array") {
+                    return {Token::Type::kTextureSampled2dArray, source, "texture_2d_array"};
+                }
+                return {};
+            }
+            if (str[8] == '3') {
+                if (str == "texture_3d") {
+                    return {Token::Type::kTextureSampled3d, source, "texture_3d"};
+                }
+                return {};
+            }
+            if (str[8] == 'c') {
+                if (str.back() == 'e') {
+                    if (str == "texture_cube") {
+                        return {Token::Type::kTextureSampledCube, source, "texture_cube"};
+                    }
+                    return {};
+                }
+                if (str.back() == 'y' && str == "texture_cube_array") {
+                    return {Token::Type::kTextureSampledCubeArray, source, "texture_cube_array"};
+                }
+                return {};
+            }
+            if (str[8] == 'd') {
+                if (str.length() < 16) {
+                    return {};
+                }
+
+                if (str[14] == '2') {
+                    if (str.back() == 'd') {
+                        if (str == "texture_depth_2d") {
+                            return {Token::Type::kTextureDepth2d, source, "texture_depth_2d"};
+                        }
+                        return {};
+                    }
+                    if (str.back() == 'y' && str == "texture_depth_2d_array") {
+                        return {Token::Type::kTextureDepth2dArray, source,
+                                "texture_depth_2d_array"};
+                    }
+                    return {};
+                }
+                if (str[14] == 'c') {
+                    if (str.back() == 'e') {
+                        if (str == "texture_depth_cube") {
+                            return {Token::Type::kTextureDepthCube, source, "texture_depth_cube"};
+                        }
+                        return {};
+                    }
+                    if (str.back() == 'y' && str == "texture_depth_cube_array") {
+                        return {Token::Type::kTextureDepthCubeArray, source,
+                                "texture_depth_cube_array"};
+                    }
+                    return {};
+                }
+                if (str[14] == 'm' && str == "texture_depth_multisampled_2d") {
+                    return {Token::Type::kTextureDepthMultisampled2d, source,
+                            "texture_depth_multisampled_2d"};
+                }
+                return {};
+            }
+
+            if (str[8] == 'e') {
+                if (str == "texture_external") {
+                    return {Token::Type::kTextureExternal, source, "texture_external"};
+                }
+                return {};
+            }
+            if (str[8] == 'm') {
+                if (str == "texture_multisampled_2d") {
+                    return {Token::Type::kTextureMultisampled2d, source, "texture_multisampled_2d"};
+                }
+            }
+            if (str[8] == 's') {
+                if (str.length() < 17) {
+                    return {};
+                }
+                if (str[16] == '1') {
+                    if (str == "texture_storage_1d") {
+                        return {Token::Type::kTextureStorage1d, source, "texture_storage_1d"};
+                    }
+                    return {};
+                }
+                if (str[16] == '2') {
+                    if (str.back() == 'd') {
+                        if (str == "texture_storage_2d") {
+                            return {Token::Type::kTextureStorage2d, source, "texture_storage_2d"};
+                        }
+                        return {};
+                    }
+                    if (str.back() == 'y' && str == "texture_storage_2d_array") {
+                        return {Token::Type::kTextureStorage2dArray, source,
+                                "texture_storage_2d_array"};
+                    }
+                    return {};
+                }
+                if (str[16] == '3' && str == "texture_storage_3d") {
+                    return {Token::Type::kTextureStorage3d, source, "texture_storage_3d"};
+                }
+            }
+            return {};
+        }
+
+        if (str[1] == 'r') {
+            if (str == "true") {
+                return {Token::Type::kTrue, source, "true"};
+            }
+            return {};
+        }
+
+        if (str[1] == 'y' && str == "type") {
+            return {Token::Type::kType, source, "type"};
+        }
+        return {};
+    }
+
+    if (str[0] == 'u') {
+        if (str[1] == '3' && str == "u32") {
+            return {Token::Type::kU32, source, "u32"};
+        }
+        return {};
+    }
+
+    if (str[0] == 'v') {
+        if (str[1] == 'a') {
+            if (str == "var") {
+                return {Token::Type::kVar, source, "var"};
+            }
+            return {};
+        }
+
+        if (str[1] == 'e') {
+            if (str.length() != 4) {
+                return {};
+            }
+            if (str[3] == '2') {
+                if (str == "vec2") {
+                    return {Token::Type::kVec2, source, "vec2"};
+                }
+                return {};
+            }
+            if (str[3] == '3') {
+                if (str == "vec3") {
+                    return {Token::Type::kVec3, source, "vec3"};
+                }
+                return {};
+            }
+            if (str[3] == '4' && str == "vec4") {
+                return {Token::Type::kVec4, source, "vec4"};
+            }
+            return {};
+        }
+
+        return {};
+    }
+    if (str[0] == 'w' && str[1] == 'h' && str == "while") {
         return {Token::Type::kWhile, source, "while"};
     }
     return {};
