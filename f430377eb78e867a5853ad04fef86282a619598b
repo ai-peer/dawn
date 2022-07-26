@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e09e504_c97a6c7f",
+        "filename": "src/tint/ast/storage_class.h.tmpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-26T15:11:02Z",
+      "side": 1,
+      "message": "For pure-functions (don\u0027t use any templating) is there somewhere we can put them so they don\u0027t end up in the generaeted code?\n\nLike, maybe we have a storage_class.h and we generate an _impl that the .h includes?",
+      "revId": "f430377eb78e867a5853ad04fef86282a619598b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a4034a5_6d74dae3",
+        "filename": "src/tint/ast/storage_class_bench.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-26T15:11:02Z",
+      "side": 1,
+      "message": "nit: missing newlines after `namespace {`",
+      "revId": "f430377eb78e867a5853ad04fef86282a619598b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1f3870e_3a8d6c2e",
+        "filename": "src/tint/templates/enums.tmpl.inc",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-26T15:11:02Z",
+      "side": 1,
+      "message": "nit: \u003d -1 ?",
+      "revId": "f430377eb78e867a5853ad04fef86282a619598b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
