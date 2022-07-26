@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "508bf2a2_1eb877ed",
+        "filename": "src/tint/ast/storage_class.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-26T19:26:08Z",
+      "side": 1,
+      "message": "Done in https://dawn-review.googlesource.com/c/dawn/+/97150/",
+      "parentUuid": "81f9cf93_af97f779",
+      "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d86754c_b3527b3a",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-07-26T14:53:33Z",
       "side": 1,
       "message": "This actually only parses _some_ storage classes. Specifically, in, out, handle are intentionally not parsed.",
+      "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b855b8e3_0d9402cb",
+        "filename": "src/tint/ast/storage_class.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-26T19:26:08Z",
+      "side": 1,
+      "message": "Added comments on the fields that are internal in https://dawn-review.googlesource.com/c/dawn/+/97150/",
+      "parentUuid": "4d86754c_b3527b3a",
       "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
