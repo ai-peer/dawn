@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81f9cf93_af97f779",
+        "filename": "src/tint/ast/storage_class.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-26T14:53:33Z",
+      "side": 1,
+      "message": "Now that this lives outside the parser, we should create a test file for it specifically.",
+      "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d86754c_b3527b3a",
+        "filename": "src/tint/ast/storage_class.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-26T14:53:33Z",
+      "side": 1,
+      "message": "This actually only parses _some_ storage classes. Specifically, in, out, handle are intentionally not parsed.",
+      "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31b1f9e0_585de2f5",
+        "filename": "src/tint/ast/storage_class.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-26T14:53:33Z",
+      "side": 1,
+      "message": "What about moving these into a namespace or the enum so this would be:\n\n```\nnamespace storage_class {\n\nStorageClass Parse(std::string_view str);\n\n}\n```\n\nNot sure if that\u0027s better or not ...",
+      "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
