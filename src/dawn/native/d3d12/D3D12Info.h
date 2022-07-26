@@ -34,6 +34,7 @@ struct D3D12DeviceInfo {
     PerStage<std::wstring> shaderProfiles;
     bool supportsSharedResourceCapabilityTier1;
     bool supportsDP4a;
+    uint32_t programmableSamplePositionsTier;
 };
 
 ResultOrError<D3D12DeviceInfo> GatherDeviceInfo(const Adapter& adapter);

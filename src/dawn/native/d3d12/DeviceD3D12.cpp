@@ -638,6 +638,12 @@ void Device::InitTogglesFromDriver() {
     SetToggle(Toggle::UseD3D12ResidencyManagement, true);
     SetToggle(Toggle::UseDXC, false);
 
+    // The restriction on the source box specifying a portion of the depth stencil texture in
+    // CopyTextureRegion() is only available on the D3D12 platforms which doesn't support
+    // programmable sample positions.
+    SetToggle(Toggle::D3D12UseTempBufferInDepthStencilTextureAndBufferCopyWithNonZeroBufferOffset,
+              GetDeviceInfo().programmableSamplePositionsTier == 0);
+
     // Disable optimizations when using FXC
     // See https://crbug.com/dawn/1203
     SetToggle(Toggle::FxcOptimizations, false);

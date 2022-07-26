@@ -279,6 +279,13 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "Don't set D3D12_CLEAR_VALUE when creating depth textures with CreatePlacedResource() or "
       "CreateCommittedResource() as a workaround on Intel Gen12 D3D12 drivers.",
       "https://crbug.com/dawn/1487"}},
+    {Toggle::D3D12UseTempBufferInDepthStencilTextureAndBufferCopyWithNonZeroBufferOffset,
+     {"d3d12_use_temp_buffer_in_depth_stencil_texture_and_buffer_copy_with_non_zero_buffer_offset",
+      "Split buffer-texture copy into two copies: do first copy with a temporary buffer at offset "
+      "0 "
+      "then copy from the temporary buffer to the destination. Now this toggle must be enabled on "
+      "the D3D12 platforms where programmable MSAA is not supported.",
+      "https://crbug.com/dawn/727"}}
     // Comment to separate the }} so it is clearer what to copy-paste to add a toggle.
 }};
 }  // anonymous namespace
