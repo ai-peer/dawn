@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "783f723a_3735288e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-26T16:15:23Z",
+      "side": 1,
+      "message": "LGTM with one nit: but overall, I have a question which we can consider after this.\n\nIs this the best workaround we could do? If copies to depth textures are broken, is it sufficient to only do the workaround for ClearTexture, or would it be better to make a more general workaround to emulate ALL B2T copies using a blit?",
+      "revId": "2146e97a840c3fd2739724a257021d58198449f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de11867d_1a0da1c0",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2585,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-26T16:15:23Z",
+      "side": 1,
+      "message": "unit: \"AddRenderAttachmentUsage\" might be more clear than \"Supports\". \"Supports\" seems to imply that the format does not support it.",
+      "range": {
+        "startLine": 2585,
+        "startChar": 6,
+        "endLine": 2585,
+        "endChar": 30
+      },
+      "revId": "2146e97a840c3fd2739724a257021d58198449f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
