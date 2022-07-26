@@ -1312,28 +1312,12 @@ Expect<ast::StorageClass> ParserImpl::expect_storage_class(std::string_view use)
         return Failure::kErrored;
     }
 
-    auto name = ident.value;
-    if (name == "uniform") {
-        return {ast::StorageClass::kUniform, source};
+    auto storage_class = ast::ParseStorageClass(ident.value);
+    if (storage_class == ast::StorageClass::kInvalid) {
+        return add_error(source, "invalid storage class", use);
     }
 
-    if (name == "workgroup") {
-        return {ast::StorageClass::kWorkgroup, source};
-    }
-
-    if (name == "storage" || name == "storage_buffer") {
-        return {ast::StorageClass::kStorage, source};
-    }
-
-    if (name == "private") {
-        return {ast::StorageClass::kPrivate, source};
-    }
-
-    if (name == "function") {
-        return {ast::StorageClass::kFunction, source};
-    }
-
-    return add_error(source, "invalid storage class", use);
+    return storage_class;
 }
 
 // struct_decl
