@@ -16,6 +16,24 @@
       "message": "nit: `into to` -\u003e `into`",
       "revId": "728fcfb8c42c88df87ff256c286ed11edf40d096",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eee9000_d092ebc2",
+        "filename": "tools/src/cmd/gen/main.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-26T19:26:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f534264_ceff3c73",
+      "revId": "728fcfb8c42c88df87ff256c286ed11edf40d096",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
