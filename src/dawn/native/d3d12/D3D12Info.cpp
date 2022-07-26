@@ -119,6 +119,12 @@ ResultOrError<D3D12DeviceInfo> GatherDeviceInfo(const Adapter& adapter) {
 
     info.supportsDP4a = driverShaderModel >= D3D_SHADER_MODEL_6_4;
 
+    D3D12_FEATURE_DATA_D3D12_OPTIONS3 featureData3 = {};
+    if (SUCCEEDED(adapter.GetDevice()->CheckFeatureSupport(D3D12_FEATURE_D3D12_OPTIONS3,
+                                                           &featureData3, sizeof(featureData3)))) {
+        info.supportsCastingFullyTypedFormat = featureData3.CastingFullyTypedFormatSupported;
+    }
+
     return std::move(info);
 }
 
