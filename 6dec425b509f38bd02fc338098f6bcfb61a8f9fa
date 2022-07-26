@@ -140,6 +140,24 @@
       "parentUuid": "18ad4f0f_a057da5d",
       "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f51e8799_d1be0a18",
+        "filename": "src/tint/ast/storage_class.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-26T19:13:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "afece92c_11801509",
+      "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
