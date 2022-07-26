@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e2deea2c_ff777a1f",
+        "filename": "src/tint/ast/storage_class.h.tmpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-26T19:33:29Z",
+      "side": 1,
+      "message": "I could do, but it\u0027s a trade off of having code where you expect it to be (but via a template), vs random `#include` which make finding this stuff hard.",
+      "parentUuid": "7e09e504_c97a6c7f",
+      "revId": "f430377eb78e867a5853ad04fef86282a619598b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a4034a5_6d74dae3",
         "filename": "src/tint/ast/storage_class_bench.cc",
         "patchSetId": 4
