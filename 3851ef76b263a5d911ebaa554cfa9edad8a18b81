@@ -16,6 +16,24 @@
       "message": "These files are so small, it seems weird to generate them. I don\u0027t really see us having so many exensions that just having the method would be an issue?",
       "revId": "3851ef76b263a5d911ebaa554cfa9edad8a18b81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71256100_3c8911cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-26T13:26:16Z",
+      "side": 1,
+      "message": "It\u0027s mostly about having a single source of truth. Most of these enums are already used in the `intrinsic.def` file. There\u0027s already a TODO to add a `@requires` decoration on the builtins in `intrinsics.def` that require a particular extension to be enabled.\n\nIt also allows us to optimize the parsing of these using accelerated algorithms. I\u0027ve started the emission just doing what we\u0027ve always done, but it would be fairly trivial to automatically generate the likes of https://dawn-review.googlesource.com/c/dawn/+/97160, or alternatives as we\u0027ve discussed.\nThe generated micro-benchmarks will validate any optimizations around this.",
+      "parentUuid": "740b791b_8f169ea6",
+      "revId": "3851ef76b263a5d911ebaa554cfa9edad8a18b81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
