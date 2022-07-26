@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "740b791b_8f169ea6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-26T13:09:59Z",
+      "side": 1,
+      "message": "These files are so small, it seems weird to generate them. I don\u0027t really see us having so many exensions that just having the method would be an issue?",
+      "revId": "3851ef76b263a5d911ebaa554cfa9edad8a18b81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
