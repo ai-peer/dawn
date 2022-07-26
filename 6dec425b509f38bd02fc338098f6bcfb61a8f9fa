@@ -86,6 +86,24 @@
       "parentUuid": "eb73e56b_a5bd1f36",
       "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee2e77fc_ee013a24",
+        "filename": "src/tint/ast/storage_class.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-26T17:49:13Z",
+      "side": 1,
+      "message": "Unfortunately you cannot add methods to an `enum class`. I wish you could.\nYou can create a namespace or structure with the enum\u0027s name, but you end up with the same thing as I\u0027ve described above.",
+      "parentUuid": "de342486_c55a051a",
+      "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
