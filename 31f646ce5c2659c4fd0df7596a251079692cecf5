@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84c353b5_be001d2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-26T13:28:55Z",
+      "side": 1,
+      "message": "Can I be awkward and ask for these two intrinsic implementations to be split up?",
+      "revId": "31f646ce5c2659c4fd0df7596a251079692cecf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
