@@ -39,6 +39,16 @@ type Sem struct {
 	UniqueParameterNames []string
 }
 
+// Enum returns the enum with the given name
+func (s *Sem) Enum(name string) *Enum {
+	for _, e := range s.Enums {
+		if e.Name == name {
+			return e
+		}
+	}
+	return nil
+}
+
 // New returns a new Sem
 func New() *Sem {
 	return &Sem{
@@ -67,6 +77,17 @@ func (e *Enum) FindEntry(name string) *EnumEntry {
 		}
 	}
 	return nil
+}
+
+// PublicEntries returns the enum entries that are not annotated with @internal
+func (e *Enum) PublicEntries() []*EnumEntry {
+	out := make([]*EnumEntry, 0, len(e.Entries))
+	for _, entry := range e.Entries {
+		if !entry.IsInternal {
+			out = append(out, entry)
+		}
+	}
+	return out
 }
 
 // EnumEntry is an entry in an enumerator
