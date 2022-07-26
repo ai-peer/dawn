@@ -16,6 +16,24 @@
       "message": "What about:\n\n* chromium_experimental_dp4a\n* chromium_disable_uniformity_analysis",
       "revId": "38ce46db8b34a67771a824e0b5a1cf1459429430",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cd54c8b_91fc6ca5",
+        "filename": "src/tint/ast/extension_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-26T19:26:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "678d0184_2fcabd7a",
+      "revId": "38ce46db8b34a67771a824e0b5a1cf1459429430",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
