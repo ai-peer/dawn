@@ -122,6 +122,24 @@
       "parentUuid": "ee2e77fc_ee013a24",
       "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afece92c_11801509",
+        "filename": "src/tint/ast/storage_class.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-26T18:04:00Z",
+      "side": 1,
+      "message": "I see. I think having `foo` and `Foo` in the same namespace is slightly awkward in terms of readability and typing. There\u0027s also the fact that `operator \u003c\u003c` needs to be in the `tint::ast` namespace to work, which means these functions wouldn\u0027t all end up in the same namespace.\n\nWhat about `Parse\u003cFoo\u003e()` 😊 ? (j/k)",
+      "parentUuid": "18ad4f0f_a057da5d",
+      "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
