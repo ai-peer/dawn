@@ -168,6 +168,16 @@ ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetRenderPipelineDescrip
 
 }  // anonymous namespace
 
+DeviceBase::ScopedSubmitModeStateRestore::ScopedSubmitModeStateRestore(DeviceBase* device,
+                                                                       SubmitMode submitMode)
+    : mDevice(device), mOldMode(device->mSubmitMode) {
+    device->mSubmitMode = submitMode;
+}
+
+DeviceBase::ScopedSubmitModeStateRestore::~ScopedSubmitModeStateRestore() {
+    mDevice->mSubmitMode = mOldMode;
+}
+
 // DeviceBase
 
 DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor)

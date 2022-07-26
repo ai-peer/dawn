@@ -358,6 +358,26 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     MaybeError Tick();
 
+    enum class SubmitMode { Normal, Passive, Aggressive };
+
+    // Set the device to the new submit mode when in scope, and restore the old mode when out of
+    // scope.
+    class ScopedSubmitModeStateRestore {
+      public:
+        ScopedSubmitModeStateRestore(DeviceBase* device, SubmitMode submitMode);
+        ~ScopedSubmitModeStateRestore();
+
+        ScopedSubmitModeStateRestore() = delete;
+        ScopedSubmitModeStateRestore(const ScopedSubmitModeStateRestore& rhs) = delete;
+        ScopedSubmitModeStateRestore& operator=(const ScopedSubmitModeStateRestore& rhs) = delete;
+        ScopedSubmitModeStateRestore(ScopedSubmitModeStateRestore&& rhs) = delete;
+        ScopedSubmitModeStateRestore& operator=(ScopedSubmitModeStateRestore&& rhs) = delete;
+
+      private:
+        DeviceBase* mDevice;
+        SubmitMode mOldMode;
+    };
+
     // TODO(crbug.com/dawn/839): Organize the below backend-specific parameters into the struct
     // BackendMetadata that we can query from the device.
     virtual uint32_t GetOptimalBytesPerRowAlignment() const = 0;
@@ -415,7 +435,11 @@ class DeviceBase : public RefCountedWithExternalCount {
     // Incrememt mLastSubmittedSerial when we submit the next serial
     void IncrementLastSubmittedCommandSerial();
 
+    SubmitMode mSubmitMode = SubmitMode::Normal;
+
   private:
+    friend class ScopedSubmitModeStateRestore;
+
     void WillDropLastExternalRef() override;
 
     virtual ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
