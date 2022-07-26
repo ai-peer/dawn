@@ -2757,7 +2757,7 @@ OpFunctionEnd
 TEST_F(BuiltinBuilderTest, Call_Dot4I8Packed) {
     auto* ext =
         create<ast::Enable>(Source{Source::Range{Source::Location{10, 2}, Source::Location{10, 5}}},
-                            ast::Extension::kChromiumExperimentalDP4a);
+                            ast::Extension::kChromiumExperimentalDp4A);
     AST().AddEnable(ext);
 
     auto* val1 = Var("val1", ty.u32());
@@ -2797,7 +2797,7 @@ OpFunctionEnd
 TEST_F(BuiltinBuilderTest, Call_Dot4U8Packed) {
     auto* ext =
         create<ast::Enable>(Source{Source::Range{Source::Location{10, 2}, Source::Location{10, 5}}},
-                            ast::Extension::kChromiumExperimentalDP4a);
+                            ast::Extension::kChromiumExperimentalDp4A);
     AST().AddEnable(ext);
 
     auto* val1 = Var("val1", ty.u32());
