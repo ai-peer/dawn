@@ -68,6 +68,24 @@
       "parentUuid": "31b1f9e0_585de2f5",
       "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de342486_c55a051a",
+        "filename": "src/tint/ast/storage_class.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-26T15:00:09Z",
+      "side": 1,
+      "message": "Oh, I wasn\u0027t actually thinking of moving the enum, just the methods we attach to the enum (like Parse).",
+      "parentUuid": "eb73e56b_a5bd1f36",
+      "revId": "6dec425b509f38bd02fc338098f6bcfb61a8f9fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
