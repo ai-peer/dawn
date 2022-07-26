@@ -16,6 +16,24 @@
       "message": "Can you add to the commit message something about the common identifier names being excluded? since I think that may change behaviour of other fuzzers from before this patch.",
       "revId": "3f8b69fefa78ae1c882baa322888a063eb504c50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd35b589_4fb2dc6c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002631
+      },
+      "writtenOn": "2022-07-26T16:25:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20e73899_460a1977",
+      "revId": "3f8b69fefa78ae1c882baa322888a063eb504c50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

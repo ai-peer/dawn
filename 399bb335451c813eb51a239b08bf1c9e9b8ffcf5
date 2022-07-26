@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10104ad6_dfe2850f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002631
+      },
+      "writtenOn": "2022-07-26T16:25:21Z",
+      "side": 1,
+      "message": "Thanks for the note about the commit message.",
+      "revId": "399bb335451c813eb51a239b08bf1c9e9b8ffcf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
