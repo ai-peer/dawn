@@ -16,6 +16,98 @@
       "message": "Can I be awkward and ask for these two intrinsic implementations to be split up?",
       "revId": "31f646ce5c2659c4fd0df7596a251079692cecf5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9198b69b_70e01d6c",
+        "filename": "src/tint/resolver/builtin_test.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1101,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-26T13:32:44Z",
+      "side": 1,
+      "message": "Added a copy of these tests for _NoConstEval functions `pow` and `step` until these also get migrated.",
+      "range": {
+        "startLine": 1101,
+        "startChar": 34,
+        "endLine": 1101,
+        "endChar": 46
+      },
+      "revId": "31f646ce5c2659c4fd0df7596a251079692cecf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "490146d7_8153aad5",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-26T13:32:44Z",
+      "side": 1,
+      "message": "Sorry, will delete.",
+      "range": {
+        "startLine": 455,
+        "startChar": 0,
+        "endLine": 490,
+        "endChar": 4
+      },
+      "revId": "31f646ce5c2659c4fd0df7596a251079692cecf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "886a6d96_64658a7b",
+        "filename": "src/tint/resolver/intrinsic_table_test.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1256,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-26T13:32:44Z",
+      "side": 1,
+      "message": "`atan2` is now const-evaluated, so I added a copy of these tests for non-const evaluated `mix`, but it only has float args, so less tests.",
+      "range": {
+        "startLine": 1256,
+        "startChar": 40,
+        "endLine": 1256,
+        "endChar": 53
+      },
+      "revId": "31f646ce5c2659c4fd0df7596a251079692cecf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25957f53_7ba925c6",
+        "filename": "src/tint/writer/spirv/builder_builtin_test.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 921,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-26T13:32:44Z",
+      "side": 1,
+      "message": "These tests want to ensure that atan2 is being emitted, so I made one arg a variable.",
+      "range": {
+        "startLine": 921,
+        "startChar": 4,
+        "endLine": 921,
+        "endChar": 52
+      },
+      "revId": "31f646ce5c2659c4fd0df7596a251079692cecf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
