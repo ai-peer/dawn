@@ -16,6 +16,23 @@
       "message": "PTAL! this is to unblock some other rolls - fingers crossed ",
       "revId": "3df3fb7cdbadf0c5bdcf68e7f2e978d0d5948c3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41085a02_4370ae42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-07-27T21:48:47Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3df3fb7cdbadf0c5bdcf68e7f2e978d0d5948c3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
