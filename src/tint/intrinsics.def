@@ -30,6 +30,7 @@ enum storage_class {
   workgroup
   uniform
   storage
+  push_constant
   @internal handle
 }
 
