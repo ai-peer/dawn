@@ -124,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef8e5a61_8afedf1d",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-27T16:09:49Z",
+      "side": 1,
+      "message": "CreatePlacedResource tells D3D12 to use a range of memory for the backing of a buffer resource. I assume that the hardware constraint that D3D12 tried to surface with this validation is that the alignment must be 512 in memory, not in the specific buffer (otherwise we could alias the buffer for example and make the error go away. I\u0027m not suggesting we do that though ^^). I\u0027ll ask on the directx discord.",
+      "parentUuid": "dc21979d_33942502",
+      "revId": "84b106495b44d7b34aa8c441d977ee30a73d48d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b9d22f0c_63d81521",
         "filename": "src/dawn/native/d3d12/D3D12Info.cpp",
         "patchSetId": 2
@@ -135,6 +153,24 @@
       "writtenOn": "2022-07-26T15:25:11Z",
       "side": 1,
       "message": "u-u-nit: can we put this before options4 so in the future options are queried in increasing order?",
+      "revId": "84b106495b44d7b34aa8c441d977ee30a73d48d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21176194_89db0e98",
+        "filename": "src/dawn/native/d3d12/D3D12Info.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-27T16:09:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9d22f0c_63d81521",
       "revId": "84b106495b44d7b34aa8c441d977ee30a73d48d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
