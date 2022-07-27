@@ -77,6 +77,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ae72959_ec837846",
+        "filename": "src/tint/resolver/builtin_test.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1101,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-27T13:13:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9198b69b_70e01d6c",
+      "range": {
+        "startLine": 1101,
+        "startChar": 34,
+        "endLine": 1101,
+        "endChar": 46
+      },
+      "revId": "31f646ce5c2659c4fd0df7596a251079692cecf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "490146d7_8153aad5",
@@ -160,6 +184,30 @@
       "writtenOn": "2022-07-26T13:32:44Z",
       "side": 1,
       "message": "These tests want to ensure that atan2 is being emitted, so I made one arg a variable.",
+      "range": {
+        "startLine": 921,
+        "startChar": 4,
+        "endLine": 921,
+        "endChar": 52
+      },
+      "revId": "31f646ce5c2659c4fd0df7596a251079692cecf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95307ec6_5a3e647a",
+        "filename": "src/tint/writer/spirv/builder_builtin_test.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 921,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-27T13:13:55Z",
+      "side": 1,
+      "message": "Nice.",
+      "parentUuid": "25957f53_7ba925c6",
       "range": {
         "startLine": 921,
         "startChar": 4,
