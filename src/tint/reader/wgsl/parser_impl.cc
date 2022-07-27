@@ -288,7 +288,12 @@ const Token& ParserImpl::next() {
         next_token_idx_++;
     }
     last_source_idx_ = next_token_idx_;
-    return tokens_[next_token_idx_++];
+
+    auto idx = next_token_idx_;
+    if (!tokens_[next_token_idx_].IsEof() && !tokens_[next_token_idx_].IsError()) {
+        next_token_idx_++;
+    }
+    return tokens_[idx];
 }
 
 const Token& ParserImpl::peek(size_t idx) {
@@ -302,6 +307,9 @@ const Token& ParserImpl::peek(size_t idx) {
             break;
         }
         idx++;
+    }
+    if (next_token_idx_ + idx >= tokens_.size()) {
+        return tokens_[tokens_.size() - 1];
     }
 
     return tokens_[next_token_idx_ + idx];
