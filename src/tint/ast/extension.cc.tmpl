@@ -11,6 +11,9 @@ See:
 {{- Import "src/tint/templates/enums.tmpl.inc" -}}
 {{- $enum := (Sem.Enum "extension") -}}
 
+#include <algorithm>
+#include <cstring>
+
 #include "src/tint/ast/extension.h"
 
 namespace tint::ast {
