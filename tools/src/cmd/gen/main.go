@@ -302,6 +302,8 @@ func (g *generator) bindAndParse(t *template.Template, text string) error {
 		"IsTemplateNumberParam": is(sem.TemplateNumberParam{}),
 		"IsTemplateTypeParam":   is(sem.TemplateTypeParam{}),
 		"IsType":                is(sem.Type{}),
+		"ElementType":           gen.ElementType,
+		"DeepestElementType":    gen.DeepestElementType,
 		"IsAbstract":            gen.IsAbstract,
 		"IsDeclarable":          gen.IsDeclarable,
 		"IsFirstIn":             isFirstIn,
