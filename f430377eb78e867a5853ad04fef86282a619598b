@@ -90,6 +90,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "416979de_e7011cb9",
+        "filename": "src/tint/ast/storage_class.h.tmpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-27T14:25:45Z",
+      "side": 1,
+      "message": "That\u0027s the spirit! 😊",
+      "parentUuid": "4a2fcfa5_69fbd953",
+      "revId": "f430377eb78e867a5853ad04fef86282a619598b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a4034a5_6d74dae3",
