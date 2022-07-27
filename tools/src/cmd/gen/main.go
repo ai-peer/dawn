@@ -34,6 +34,7 @@ import (
 	"time"
 	"unicode"
 
+	"dawn.googlesource.com/dawn/tools/src/cmd/gen/mph"
 	"dawn.googlesource.com/dawn/tools/src/container"
 	"dawn.googlesource.com/dawn/tools/src/fileutils"
 	"dawn.googlesource.com/dawn/tools/src/glob"
@@ -311,6 +312,7 @@ func (g *generator) bindAndParse(t *template.Template, text string) error {
 		"TrimRight":             strings.TrimRight,
 		"Split":                 strings.Split,
 		"Scramble":              g.scramble,
+		"MinimalPerfectHash":    mph.Find,
 		"IsEnumEntry":           is(sem.EnumEntry{}),
 		"IsEnumMatcher":         is(sem.EnumMatcher{}),
 		"IsFQN":                 is(sem.FullyQualifiedName{}),
