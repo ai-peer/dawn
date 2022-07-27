@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02dc0162_0e3c72a2",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-07-27T05:21:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98dbfd70_c5e6dc97",
+      "revId": "84b106495b44d7b34aa8c441d977ee30a73d48d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fad07cb5_f1a1b7b3",
@@ -82,6 +100,24 @@
       "writtenOn": "2022-07-26T15:24:05Z",
       "side": 1,
       "message": "How do we make sure that the buffer is aligned to 512 when it is suballocated in the BuddyMemoryAllocator? I think we could make the size max(512, tempBufferSize) and ASSERT it afterwards. Because of how the buffer memory allocator work, it should ensure that the start offset of the buffer is aligned to 512.",
+      "revId": "84b106495b44d7b34aa8c441d977ee30a73d48d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc21979d_33942502",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-07-27T05:21:00Z",
+      "side": 1,
+      "message": "Sry I failed to catch your point...  I see all the buffers are created either with CreatePlacedResource() or CreateCommittedResource(), not created from an existing buffer, so the alignment on the heap should not affect the buffer used here?",
+      "parentUuid": "fad07cb5_f1a1b7b3",
       "revId": "84b106495b44d7b34aa8c441d977ee30a73d48d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -116,6 +152,24 @@
       "writtenOn": "2022-07-26T15:24:05Z",
       "side": 1,
       "message": "Maybe in the future we should check for https://devblogs.microsoft.com/directx/agility-sdk-1-602-0/#buffer-texture-copy-pitch-and-offset-alignment as well since it will allow skipping the texture splitting entirely! Can we have a TODO?",
+      "revId": "84b106495b44d7b34aa8c441d977ee30a73d48d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d9c4394_77564c15",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-07-27T05:21:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3626d0d_218ce3d2",
       "revId": "84b106495b44d7b34aa8c441d977ee30a73d48d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
