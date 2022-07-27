@@ -56,6 +56,30 @@
       },
       "revId": "65f8353d6ae1d697855bd63a8393ac29b14e8b35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f55296a_ba693b4e",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-27T12:27:45Z",
+      "side": 1,
+      "message": "Done. It seems that the \"/*\" of comment can not get moved, so the result would be:\n\n```\n{{- /* Check and emit chromium_experimental_dp4a */ -}}\n{{-   if or (eq \"dot4I8Packed\" $builtin_name) (eq \"dot4U8Packed\" $builtin_name)}}\nenable chromium_experimental_dp4a;\n{{    end -}}\n\n{{- end -}}\n``",
+      "parentUuid": "8d6fb19e_8bd2ee25",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 10
+      },
+      "revId": "65f8353d6ae1d697855bd63a8393ac29b14e8b35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

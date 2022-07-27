@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c0779ee_7fd8aebe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-27T12:27:45Z",
+      "side": 1,
+      "message": "Thanks for review, going to submit the CL after Kokoro.",
+      "revId": "7f3cd26f2eff3e16d8ffa5a5a324f228cb9b6a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
