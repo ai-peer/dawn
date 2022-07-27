@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca9fa005_3db3c447",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-27T01:57:46Z",
+      "side": 1,
+      "message": "This is another optimization of saving submits. It\u0027s for import rather that export. I haven\u0027t had a chance to measure the performance data yet, as the WebGPU on ChromeOS is broken again.",
+      "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99958b5f_dcdc2eaa",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-27T01:57:46Z",
+      "side": 1,
+      "message": "This causes:\n```\n  mRecordingContext.used \u003d true;\n```\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/DeviceVk.cpp;drc\u003d8d73198aca5f1a83283068298c9bfd79640ca36b;l\u003d254\n\n```\n#0  dawn::native::vulkan::Device::GetPendingRecordingContext ()\n    at ./../../third_party/dawn/src/dawn/native/vulkan/DeviceVk.cpp:257\n#1  0x0000556d50c752ef in dawn::native::vulkan::Device::CopyFromStagingToBuffer ()\n    at ./../../third_party/dawn/src/dawn/native/vulkan/DeviceVk.cpp:721\n#2  0x0000556d50c3ec06 in dawn::native::QueueBase::WriteBufferImpl ()\n    at ./../../third_party/dawn/src/dawn/native/Queue.cpp:291\n#3  0x0000556d50c3e9e8 in dawn::native::QueueBase::WriteBuffer ()\n    at ./../../third_party/dawn/src/dawn/native/Queue.cpp:268\n#4  0x0000556d50c25afd in dawn::native::ExternalTextureBase::Initialize ()\n    at ./../../third_party/dawn/src/dawn/native/ExternalTexture.cpp:188\n#5  0x0000556d50c25685 in dawn::native::ExternalTextureBase::Create ()\n    at ./../../third_party/dawn/src/dawn/native/ExternalTexture.cpp:111\n#6  0x0000556d50c1d0c1 in dawn::native::DeviceBase::CreateExternalTextureImpl ()\n    at ./../../third_party/dawn/src/dawn/native/Device.cpp:1582\n#7  0x0000556d50c1c2d5 in dawn::native::DeviceBase::APICreateExternalTexture ()\n    at ./../../third_party/dawn/src/dawn/native/Device.cpp:1290\n#8  0x0000556d566b58da in dawn::wire::server::Server::DoDeviceCreateExternalTexture ()\n```\n\nSo it indirectly leads to SubmitPendingCommands on Tick which WebGPU ignites per Dawn command processing.\n\n```\nMaybeError Device::SubmitPendingCommands() {\n    if (!mRecordingContext.used) {\n        return {};\n    }\n    // submit\n    ...\n}\n```\n\n```\n\n#0  dawn::native::vulkan::Device::SubmitPendingCommands ()\n    at ./../../third_party/dawn/src/dawn/native/vulkan/DeviceVk.cpp:263\n#1  0x0000556d50c73a22 in dawn::native::vulkan::Device::TickImpl ()\n    at ./../../third_party/dawn/src/dawn/native/vulkan/DeviceVk.cpp:208\n#2  0x0000556d50c1c146 in dawn::native::DeviceBase::Tick ()\n    at ./../../third_party/dawn/src/dawn/native/Device.cpp:1254\n#3  0x0000556d50c1bedd in dawn::native::DeviceBase::APITick ()\n    at ./../../third_party/dawn/src/dawn/native/Device.cpp:1236\n```",
+      "range": {
+        "startLine": 190,
+        "startChar": 13,
+        "endLine": 191,
+        "endChar": 74
+      },
+      "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
