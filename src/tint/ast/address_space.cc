@@ -20,6 +20,9 @@
 // Do not modify this file directly
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <algorithm>
+#include <cstring>
+
 #include "src/tint/ast/address_space.h"
 
 namespace tint::ast {
@@ -28,23 +31,52 @@ namespace tint::ast {
 /// @param str the string to parse
 /// @returns the parsed enum, or AddressSpace::kUndefined if the string could not be parsed.
 AddressSpace ParseAddressSpace(std::string_view str) {
-    if (str == "function") {
-        return AddressSpace::kFunction;
-    }
-    if (str == "private") {
-        return AddressSpace::kPrivate;
-    }
-    if (str == "push_constant") {
-        return AddressSpace::kPushConstant;
-    }
-    if (str == "storage") {
-        return AddressSpace::kStorage;
-    }
-    if (str == "uniform") {
-        return AddressSpace::kUniform;
-    }
-    if (str == "workgroup") {
-        return AddressSpace::kWorkgroup;
+    std::array<uint64_t, 5> u64s = {};
+    memcpy(u64s.data(), str.data(), str.size());
+
+    switch (((u64s[0] * 407) % 83591) & 7) {
+        case 0: {
+            if (u64s[0] == 0x006d726f66696e75) {
+                return AddressSpace::kUniform;
+            }
+            return AddressSpace::kUndefined;
+        }
+        case 1: {
+            if (u64s[0] == 0x6e6f6974636e7566) {
+                if (u64s[1] == 0x0000000000000000) {
+                    return AddressSpace::kFunction;
+                }
+            }
+            return AddressSpace::kUndefined;
+        }
+        case 2: {
+            if (u64s[0] == 0x6e6f635f68737570) {
+                if (u64s[1] == 0x000000746e617473) {
+                    return AddressSpace::kPushConstant;
+                }
+            }
+            return AddressSpace::kUndefined;
+        }
+        case 3: {
+            if (u64s[0] == 0x00656761726f7473) {
+                return AddressSpace::kStorage;
+            }
+            return AddressSpace::kUndefined;
+        }
+        case 4: {
+            if (u64s[0] == 0x0065746176697270) {
+                return AddressSpace::kPrivate;
+            }
+            return AddressSpace::kUndefined;
+        }
+        case 5: {
+            if (u64s[0] == 0x756f72676b726f77) {
+                if (u64s[1] == 0x0000000000000070) {
+                    return AddressSpace::kWorkgroup;
+                }
+            }
+            return AddressSpace::kUndefined;
+        }
     }
     return AddressSpace::kUndefined;
 }

@@ -22,6 +22,7 @@
 
 #include "src/tint/ast/interpolate_attribute.h"
 
+#include <algorithm>
 #include <string>
 
 #include "src/tint/program_builder.h"
@@ -53,14 +54,19 @@ const InterpolateAttribute* InterpolateAttribute::Clone(CloneContext* ctx) const
 /// @param str the string to parse
 /// @returns the parsed enum, or InterpolationType::kUndefined if the string could not be parsed.
 InterpolationType ParseInterpolationType(std::string_view str) {
-    if (str == "flat") {
+    std::array<uint64_t, 5> u64s = {};
+    memcpy(u64s.data(), str.data(), str.size());
+
+    if (u64s[0] == 0x7463657073726570) {
+        if (u64s[1] == 0x0000000000657669) {
+            return InterpolationType::kPerspective;
+        }
+    }
+    if (u64s[0] == 0x0000000074616c66) {
         return InterpolationType::kFlat;
     }
-    if (str == "linear") {
+    if (u64s[0] == 0x00007261656e696c) {
         return InterpolationType::kLinear;
-    }
-    if (str == "perspective") {
-        return InterpolationType::kPerspective;
     }
     return InterpolationType::kUndefined;
 }
@@ -84,13 +90,18 @@ std::ostream& operator<<(std::ostream& out, InterpolationType value) {
 /// @returns the parsed enum, or InterpolationSampling::kUndefined if the string could not be
 /// parsed.
 InterpolationSampling ParseInterpolationSampling(std::string_view str) {
-    if (str == "center") {
+    std::array<uint64_t, 5> u64s = {};
+    memcpy(u64s.data(), str.data(), str.size());
+
+    if (u64s[0] == 0x00007265746e6563) {
         return InterpolationSampling::kCenter;
     }
-    if (str == "centroid") {
-        return InterpolationSampling::kCentroid;
+    if (u64s[0] == 0x64696f72746e6563) {
+        if (u64s[1] == 0x0000000000000000) {
+            return InterpolationSampling::kCentroid;
+        }
     }
-    if (str == "sample") {
+    if (u64s[0] == 0x0000656c706d6173) {
         return InterpolationSampling::kSample;
     }
     return InterpolationSampling::kUndefined;

@@ -20,6 +20,9 @@
 // Do not modify this file directly
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <algorithm>
+#include <cstring>
+
 #include "src/tint/ast/texel_format.h"
 
 namespace tint::ast {
@@ -28,53 +31,134 @@ namespace tint::ast {
 /// @param str the string to parse
 /// @returns the parsed enum, or TexelFormat::kUndefined if the string could not be parsed.
 TexelFormat ParseTexelFormat(std::string_view str) {
-    if (str == "r32float") {
-        return TexelFormat::kR32Float;
-    }
-    if (str == "r32sint") {
-        return TexelFormat::kR32Sint;
-    }
-    if (str == "r32uint") {
-        return TexelFormat::kR32Uint;
-    }
-    if (str == "rg32float") {
-        return TexelFormat::kRg32Float;
-    }
-    if (str == "rg32sint") {
-        return TexelFormat::kRg32Sint;
-    }
-    if (str == "rg32uint") {
-        return TexelFormat::kRg32Uint;
-    }
-    if (str == "rgba16float") {
-        return TexelFormat::kRgba16Float;
-    }
-    if (str == "rgba16sint") {
-        return TexelFormat::kRgba16Sint;
-    }
-    if (str == "rgba16uint") {
-        return TexelFormat::kRgba16Uint;
-    }
-    if (str == "rgba32float") {
-        return TexelFormat::kRgba32Float;
-    }
-    if (str == "rgba32sint") {
-        return TexelFormat::kRgba32Sint;
-    }
-    if (str == "rgba32uint") {
-        return TexelFormat::kRgba32Uint;
-    }
-    if (str == "rgba8sint") {
-        return TexelFormat::kRgba8Sint;
-    }
-    if (str == "rgba8snorm") {
-        return TexelFormat::kRgba8Snorm;
-    }
-    if (str == "rgba8uint") {
-        return TexelFormat::kRgba8Uint;
-    }
-    if (str == "rgba8unorm") {
-        return TexelFormat::kRgba8Unorm;
+    std::array<uint64_t, 5> u64s = {};
+    memcpy(u64s.data(), str.data(), str.size());
+
+    switch (((u64s[0] * 1028559) % 83591) & 15) {
+        case 0: {
+            if (u64s[0] == 0x746e697532336772) {
+                if (u64s[1] == 0x0000000000000000) {
+                    return TexelFormat::kRg32Uint;
+                }
+            }
+            return TexelFormat::kUndefined;
+        }
+        case 1: {
+            if (u64s[0] == 0x6975323361626772) {
+                if (u64s[1] == 0x000000000000746e) {
+                    return TexelFormat::kRgba32Uint;
+                }
+            }
+            return TexelFormat::kUndefined;
+        }
+        case 2: {
+            if (u64s[0] == 0x00746e6973323372) {
+                return TexelFormat::kR32Sint;
+            }
+            return TexelFormat::kUndefined;
+        }
+        case 3: {
+            if (u64s[0] == 0x6c66363161626772) {
+                if (u64s[1] == 0x000000000074616f) {
+                    return TexelFormat::kRgba16Float;
+                }
+            }
+            return TexelFormat::kUndefined;
+        }
+        case 4: {
+            if (u64s[0] == 0x6973323361626772) {
+                if (u64s[1] == 0x000000000000746e) {
+                    return TexelFormat::kRgba32Sint;
+                }
+            }
+            return TexelFormat::kUndefined;
+        }
+        case 5: {
+            if (u64s[0] == 0x6973363161626772) {
+                if (u64s[1] == 0x000000000000746e) {
+                    return TexelFormat::kRgba16Sint;
+                }
+            }
+            return TexelFormat::kUndefined;
+        }
+        case 6: {
+            if (u64s[0] == 0x6f6e753861626772) {
+                if (u64s[1] == 0x0000000000006d72) {
+                    return TexelFormat::kRgba8Unorm;
+                }
+            }
+            return TexelFormat::kUndefined;
+        }
+        case 7: {
+            if (u64s[0] == 0x6975363161626772) {
+                if (u64s[1] == 0x000000000000746e) {
+                    return TexelFormat::kRgba16Uint;
+                }
+            }
+            return TexelFormat::kUndefined;
+        }
+        case 8: {
+            if (u64s[0] == 0x74616f6c66323372) {
+                if (u64s[1] == 0x0000000000000000) {
+                    return TexelFormat::kR32Float;
+                }
+            }
+            return TexelFormat::kUndefined;
+        }
+        case 9: {
+            if (u64s[0] == 0x6e69733861626772) {
+                if (u64s[1] == 0x0000000000000074) {
+                    return TexelFormat::kRgba8Sint;
+                }
+            }
+            return TexelFormat::kUndefined;
+        }
+        case 10: {
+            if (u64s[0] == 0x00746e6975323372) {
+                return TexelFormat::kR32Uint;
+            }
+            return TexelFormat::kUndefined;
+        }
+        case 11: {
+            if (u64s[0] == 0x746e697332336772) {
+                if (u64s[1] == 0x0000000000000000) {
+                    return TexelFormat::kRg32Sint;
+                }
+            }
+            return TexelFormat::kUndefined;
+        }
+        case 12: {
+            if (u64s[0] == 0x6f6e733861626772) {
+                if (u64s[1] == 0x0000000000006d72) {
+                    return TexelFormat::kRgba8Snorm;
+                }
+            }
+            return TexelFormat::kUndefined;
+        }
+        case 13: {
+            if (u64s[0] == 0x6c66323361626772) {
+                if (u64s[1] == 0x000000000074616f) {
+                    return TexelFormat::kRgba32Float;
+                }
+            }
+            return TexelFormat::kUndefined;
+        }
+        case 14: {
+            if (u64s[0] == 0x6e69753861626772) {
+                if (u64s[1] == 0x0000000000000074) {
+                    return TexelFormat::kRgba8Uint;
+                }
+            }
+            return TexelFormat::kUndefined;
+        }
+        case 15: {
+            if (u64s[0] == 0x616f6c6632336772) {
+                if (u64s[1] == 0x0000000000000074) {
+                    return TexelFormat::kRg32Float;
+                }
+            }
+            return TexelFormat::kUndefined;
+        }
     }
     return TexelFormat::kUndefined;
 }

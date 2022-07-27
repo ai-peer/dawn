@@ -56,7 +56,7 @@ static constexpr Case kValidCases[] = {
     {"workgroup_id", BuiltinValue::kWorkgroupId},
 };
 
-static constexpr Case kInvalidCases[] = {
+static constexpr Case kUndefinedCases[] = {
     {"fragdeccth", BuiltinValue::kUndefined},
     {"flaget3", BuiltinValue::kUndefined},
     {"fVag_depth", BuiltinValue::kUndefined},
@@ -104,7 +104,7 @@ TEST_P(BuiltinValueParseTest, Parse) {
 }
 
 INSTANTIATE_TEST_SUITE_P(ValidCases, BuiltinValueParseTest, testing::ValuesIn(kValidCases));
-INSTANTIATE_TEST_SUITE_P(InvalidCases, BuiltinValueParseTest, testing::ValuesIn(kInvalidCases));
+INSTANTIATE_TEST_SUITE_P(InvalidCases, BuiltinValueParseTest, testing::ValuesIn(kUndefinedCases));
 
 using BuiltinValuePrintTest = testing::TestWithParam<Case>;
 

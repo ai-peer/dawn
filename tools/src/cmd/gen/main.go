@@ -34,6 +34,7 @@ import (
 	"time"
 	"unicode"
 
+	"dawn.googlesource.com/dawn/tools/src/cmd/gen/mph"
 	"dawn.googlesource.com/dawn/tools/src/container"
 	"dawn.googlesource.com/dawn/tools/src/fileutils"
 	"dawn.googlesource.com/dawn/tools/src/glob"
@@ -298,6 +299,7 @@ func generate(tmpl string, cache *genCache, w io.Writer, writeFile WriteFile) er
 
 func (g *generator) bindAndParse(t *template.Template, text string) error {
 	_, err := t.Funcs(map[string]interface{}{
+		"Add":                   add,
 		"Map":                   newMap,
 		"Iterate":               iterate,
 		"Title":                 strings.Title,
@@ -312,6 +314,7 @@ func (g *generator) bindAndParse(t *template.Template, text string) error {
 		"TrimRight":             strings.TrimRight,
 		"Split":                 strings.Split,
 		"Scramble":              g.scramble,
+		"MinimalPerfectHash":    mph.Find,
 		"IsEnumEntry":           is(sem.EnumEntry{}),
 		"IsEnumMatcher":         is(sem.EnumMatcher{}),
 		"IsFQN":                 is(sem.FullyQualifiedName{}),
@@ -422,6 +425,8 @@ func (g *generator) scramble(str string, avoid container.Set[string]) (string, e
 
 // Map is a simple generic key-value map, which can be used in the template
 type Map map[interface{}]interface{}
+
+func add(a, b int) int { return a + b }
 
 func newMap() Map { return Map{} }
 

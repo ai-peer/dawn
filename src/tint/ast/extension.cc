@@ -20,6 +20,9 @@
 // Do not modify this file directly
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <algorithm>
+#include <cstring>
+
 #include "src/tint/ast/extension.h"
 
 namespace tint::ast {
@@ -28,17 +31,36 @@ namespace tint::ast {
 /// @param str the string to parse
 /// @returns the parsed enum, or Extension::kUndefined if the string could not be parsed.
 Extension ParseExtension(std::string_view str) {
-    if (str == "chromium_disable_uniformity_analysis") {
-        return Extension::kChromiumDisableUniformityAnalysis;
-    }
-    if (str == "chromium_experimental_dp4a") {
-        return Extension::kChromiumExperimentalDp4A;
-    }
-    if (str == "chromium_experimental_push_constant") {
-        return Extension::kChromiumExperimentalPushConstant;
-    }
-    if (str == "f16") {
+    std::array<uint64_t, 5> u64s = {};
+    memcpy(u64s.data(), str.data(), str.size());
+
+    if (u64s[0] == 0x0000000000363166) {
         return Extension::kF16;
+    }
+    if (u64s[0] == 0x6d75696d6f726863) {
+        if (u64s[1] == 0x656c62617369645f) {
+            if (u64s[2] == 0x6d726f66696e755f) {
+                if (u64s[3] == 0x6c616e615f797469) {
+                    if (u64s[4] == 0x0000000073697379) {
+                        return Extension::kChromiumDisableUniformityAnalysis;
+                    }
+                }
+            }
+        }
+        if (u64s[1] == 0x6d6972657078655f) {
+            if (u64s[2] == 0x70645f6c61746e65) {
+                if (u64s[3] == 0x0000000000006134) {
+                    return Extension::kChromiumExperimentalDp4A;
+                }
+            }
+            if (u64s[2] == 0x75705f6c61746e65) {
+                if (u64s[3] == 0x74736e6f635f6873) {
+                    if (u64s[4] == 0x0000000000746e61) {
+                        return Extension::kChromiumExperimentalPushConstant;
+                    }
+                }
+            }
+        }
     }
     return Extension::kUndefined;
 }

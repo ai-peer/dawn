@@ -14,6 +14,9 @@ See:
 {{- Import "src/tint/templates/enums.tmpl.inc" -}}
 {{- $enum := (Sem.Enum "address_space") -}}
 
+#include <algorithm>
+#include <cstring>
+
 #include "src/tint/ast/address_space.h"
 
 namespace tint::ast {

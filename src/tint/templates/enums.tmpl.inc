@@ -49,13 +49,54 @@ constexpr const char* k{{$enum}}Strings[] = {
 /// @param str the string to parse
 /// @returns the parsed enum, or {{$enum}}::kUndefined if the string could not be parsed.
 {{$enum}} Parse{{$enum}}(std::string_view str) {
-{{-   range $entry := $.PublicEntries }}
-    if (str == "{{$entry.Name}}") {
-        return {{template "EnumCase" $entry}};
-    }
-{{-   end }}
+{{- $node := MinimalPerfectHash $.PublicNameSet }}
+    std::array<uint64_t, 5> u64s = {};
+    memcpy(u64s.data(), str.data(), str.size());
+{{ Eval "HashTreeNode" "enum" $enum "node" $node "word" 0 }}
     return {{$enum}}::kUndefined;
 }
+{{- end -}}
+
+
+{{- /* ------------------------------------------------------------------ */ -}}
+{{-                          define "HashTreeNode"                           -}}
+{{- /* ------------------------------------------------------------------ */ -}}
+{{- $node    := $.node   -}}
+{{- $enum    := $.enum   -}}
+{{- $word    := $.word   -}}
+{{/* indent */}}    {{/*    */ -}}
+{{- if lt (len $node.Bins) 4 }}
+{{-   range $i, $bin := $node.Bins }}
+{{      Eval "HashTreeBin" "enum" $enum "bin" $bin "word" $word }}
+{{-   end }}
+{{- else }}
+      switch (((u64s[{{$word}}] * {{$node.Multiplier}}) % {{$node.Prime}}) & {{$node.Mask}}) {
+{{-     range $i, $bin := $node.Bins }}
+        case {{$i}}: {
+{{    Eval "HashTreeBin" "enum" $enum "bin" $bin "word" $word }}
+            return {{$enum}}::kUndefined;
+        }
+{{-     end }}
+      }
+{{-   end }}
+{{- end -}}
+
+
+{{- /* ------------------------------------------------------------------ */ -}}
+{{-                          define "HashTreeBin"                           -}}
+{{- /* ------------------------------------------------------------------ */ -}}
+{{- $bin  := $.bin     -}}
+{{- $enum := $.enum   -}}
+{{- $word := $.word   -}}
+{{/* indent */}}    {{/*    */ -}}
+    if (u64s[{{$word}}] == {{printf "0x%.16x" $bin.U64}}) {
+{{- if $bin.Children }}
+{{-   $next_word := Add $word 1 }}
+{{    Eval "HashTreeNode" "enum" $enum "node" $bin.Children "word" $next_word}}
+{{- else }}
+      return {{$enum}}::k{{PascalCase $bin.String}};
+{{- end }}
+    }
 {{- end -}}
 
 
@@ -102,7 +143,7 @@ static constexpr Case kValidCases[] = {
 {{-   end }}
 };
 
-static constexpr Case kInvalidCases[] = {
+static constexpr Case kUndefinedCases[] = {
 {{-   $exclude := $.NameSet -}}
 {{-   range $entry := $.PublicEntries }}
     {"{{Scramble $entry.Name $exclude}}", {{$enum}}::kUndefined},
@@ -120,7 +161,7 @@ TEST_P({{$enum}}ParseTest, Parse) {
 }
 
 INSTANTIATE_TEST_SUITE_P(ValidCases, {{$enum}}ParseTest, testing::ValuesIn(kValidCases));
-INSTANTIATE_TEST_SUITE_P(InvalidCases, {{$enum}}ParseTest, testing::ValuesIn(kInvalidCases));
+INSTANTIATE_TEST_SUITE_P(InvalidCases, {{$enum}}ParseTest, testing::ValuesIn(kUndefinedCases));
 
 using {{$enum}}PrintTest = testing::TestWithParam<Case>;
 

@@ -20,6 +20,9 @@
 // Do not modify this file directly
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <algorithm>
+#include <cstring>
+
 #include "src/tint/ast/builtin_value.h"
 
 namespace tint::ast {
@@ -28,41 +31,105 @@ namespace tint::ast {
 /// @param str the string to parse
 /// @returns the parsed enum, or BuiltinValue::kUndefined if the string could not be parsed.
 BuiltinValue ParseBuiltinValue(std::string_view str) {
-    if (str == "frag_depth") {
-        return BuiltinValue::kFragDepth;
-    }
-    if (str == "front_facing") {
-        return BuiltinValue::kFrontFacing;
-    }
-    if (str == "global_invocation_id") {
-        return BuiltinValue::kGlobalInvocationId;
-    }
-    if (str == "instance_index") {
-        return BuiltinValue::kInstanceIndex;
-    }
-    if (str == "local_invocation_id") {
-        return BuiltinValue::kLocalInvocationId;
-    }
-    if (str == "local_invocation_index") {
-        return BuiltinValue::kLocalInvocationIndex;
-    }
-    if (str == "num_workgroups") {
-        return BuiltinValue::kNumWorkgroups;
-    }
-    if (str == "position") {
-        return BuiltinValue::kPosition;
-    }
-    if (str == "sample_index") {
-        return BuiltinValue::kSampleIndex;
-    }
-    if (str == "sample_mask") {
-        return BuiltinValue::kSampleMask;
-    }
-    if (str == "vertex_index") {
-        return BuiltinValue::kVertexIndex;
-    }
-    if (str == "workgroup_id") {
-        return BuiltinValue::kWorkgroupId;
+    std::array<uint64_t, 5> u64s = {};
+    memcpy(u64s.data(), str.data(), str.size());
+
+    switch (((u64s[0] * 935459) % 83591) & 15) {
+        case 0: {
+            if (u64s[0] == 0x6e6f697469736f70) {
+                if (u64s[1] == 0x0000000000000000) {
+                    return BuiltinValue::kPosition;
+                }
+            }
+            return BuiltinValue::kUndefined;
+        }
+        case 1: {
+            if (u64s[0] == 0x7065645f67617266) {
+                if (u64s[1] == 0x0000000000006874) {
+                    return BuiltinValue::kFragDepth;
+                }
+            }
+            return BuiltinValue::kUndefined;
+        }
+        case 2: {
+            if (u64s[0] == 0x695f6c61626f6c67) {
+                if (u64s[1] == 0x6f697461636f766e) {
+                    if (u64s[2] == 0x0000000064695f6e) {
+                        return BuiltinValue::kGlobalInvocationId;
+                    }
+                }
+            }
+            return BuiltinValue::kUndefined;
+        }
+        case 3: {
+            if (u64s[0] == 0x61665f746e6f7266) {
+                if (u64s[1] == 0x00000000676e6963) {
+                    return BuiltinValue::kFrontFacing;
+                }
+            }
+            return BuiltinValue::kUndefined;
+        }
+        case 4: {
+            if (u64s[0] == 0x65636e6174736e69) {
+                if (u64s[1] == 0x00007865646e695f) {
+                    return BuiltinValue::kInstanceIndex;
+                }
+            }
+            return BuiltinValue::kUndefined;
+        }
+        case 5: {
+            if (u64s[0] == 0x695f786574726576) {
+                if (u64s[1] == 0x000000007865646e) {
+                    return BuiltinValue::kVertexIndex;
+                }
+            }
+            return BuiltinValue::kUndefined;
+        }
+        case 6: {
+            if (u64s[0] == 0x6e695f6c61636f6c) {
+                if (u64s[1] == 0x6e6f697461636f76) {
+                    if (u64s[2] == 0x00007865646e695f) {
+                        return BuiltinValue::kLocalInvocationIndex;
+                    }
+                    if (u64s[2] == 0x000000000064695f) {
+                        return BuiltinValue::kLocalInvocationId;
+                    }
+                }
+            }
+            return BuiltinValue::kUndefined;
+        }
+        case 7: {
+            if (u64s[0] == 0x756f72676b726f77) {
+                if (u64s[1] == 0x0000000064695f70) {
+                    return BuiltinValue::kWorkgroupId;
+                }
+            }
+            return BuiltinValue::kUndefined;
+        }
+        case 8: {
+            if (u64s[0] == 0x6d5f656c706d6173) {
+                if (u64s[1] == 0x00000000006b7361) {
+                    return BuiltinValue::kSampleMask;
+                }
+            }
+            return BuiltinValue::kUndefined;
+        }
+        case 9: {
+            if (u64s[0] == 0x695f656c706d6173) {
+                if (u64s[1] == 0x000000007865646e) {
+                    return BuiltinValue::kSampleIndex;
+                }
+            }
+            return BuiltinValue::kUndefined;
+        }
+        case 10: {
+            if (u64s[0] == 0x6b726f775f6d756e) {
+                if (u64s[1] == 0x00007370756f7267) {
+                    return BuiltinValue::kNumWorkgroups;
+                }
+            }
+            return BuiltinValue::kUndefined;
+        }
     }
     return BuiltinValue::kUndefined;
 }
