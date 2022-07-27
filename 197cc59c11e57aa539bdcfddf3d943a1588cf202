@@ -94,6 +94,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae625bb3_e8543aac",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-27T14:05:16Z",
+      "side": 1,
+      "message": "Like `initializer_list`, using `tuple` means the callback would need to accept a `tuple`, which isn\u0027t as nice as variadic args. As I said offline, this is idiomatic C++ and is something you get used to, and clang-format helps a lot with the way it indents args.",
+      "parentUuid": "48064e26_3a203712",
+      "range": {
+        "startLine": 69,
+        "startChar": 27,
+        "endLine": 69,
+        "endChar": 51
+      },
+      "revId": "197cc59c11e57aa539bdcfddf3d943a1588cf202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f9b9ef0_13728041",
