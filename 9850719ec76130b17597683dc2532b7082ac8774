@@ -138,6 +138,24 @@
       "message": "Is this still in progress or can it be closed? (Note, we no longer use spirv-cross)",
       "revId": "9850719ec76130b17597683dc2532b7082ac8774",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0a29508_db54b30c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2022-07-27T08:17:01Z",
+      "side": 1,
+      "message": "It is invalid, and I will close it.",
+      "parentUuid": "01811807_48663a51",
+      "revId": "9850719ec76130b17597683dc2532b7082ac8774",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
