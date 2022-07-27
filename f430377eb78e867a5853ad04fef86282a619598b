@@ -72,6 +72,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a2fcfa5_69fbd953",
+        "filename": "src/tint/ast/storage_class.h.tmpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-27T14:17:40Z",
+      "side": 1,
+      "message": "I actually realized last night, we should just generate this helper, heh. The `intrinsic.def` file could easily annotate which types are host shareable.",
+      "parentUuid": "4ed7a496_3485eb1d",
+      "revId": "f430377eb78e867a5853ad04fef86282a619598b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a4034a5_6d74dae3",
