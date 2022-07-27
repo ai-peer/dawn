@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61571e8a_608afc28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-27T19:47:30Z",
+      "side": 1,
+      "message": "Manually submitting this as it\u0027s waiting on one remaining trybot, it\u0027s a pure-comment change, and is blocking my CLs.",
+      "revId": "f81aeb7705f1c4fd18bc26ac5aff0965f05e0427",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
