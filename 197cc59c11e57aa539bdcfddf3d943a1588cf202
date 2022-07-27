@@ -118,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79d9d2d8_842095c5",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-27T14:19:46Z",
+      "side": 1,
+      "message": "\u003e Like `initializer_list`, using `tuple` means the callback would need to accept a  `tuple`\n\nI\u0027m 80% confident you can keep the function `F` signature the same, using `std::apply` and lots of template magic to build that transformed tuple.",
+      "parentUuid": "ae625bb3_e8543aac",
+      "range": {
+        "startLine": 69,
+        "startChar": 27,
+        "endLine": 69,
+        "endChar": 51
+      },
+      "revId": "197cc59c11e57aa539bdcfddf3d943a1588cf202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f9b9ef0_13728041",
@@ -212,6 +236,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "828719d1_52d5abe9",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 3129,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-27T14:19:46Z",
+      "side": 1,
+      "message": "If you\u0027re going to keep this generic, it makes me question why we have separate `Case` for `ResolverConstEvalUnaryOpTest` and `ResolverConstEvalBuiltinTest`.\nSeems like this could be shared for all cases that have a common-type for inputs + output?",
+      "parentUuid": "2bfcc6bc_0de893af",
+      "range": {
+        "startLine": 3129,
+        "startChar": 17,
+        "endLine": 3129,
+        "endChar": 98
+      },
+      "revId": "197cc59c11e57aa539bdcfddf3d943a1588cf202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c7764df_a30073ec",
@@ -249,6 +297,30 @@
       "side": 1,
       "message": "Nice catch, swapped the bools.\n\nI prefer having functions like this because I find it a lot less confusing to understand the tests. It makes it clear that the only difference is the type, and whether it considers finite vs non-finite cases. Also, we will be adding cases for f16 soon, which means a whole lot more copy-pasta. The child CL for `clamp` does the same for 5 types:\n\n```\n                     testing::ValuesIn(Concat(ClampCases\u003cAInt\u003e(),  //\n                                              ClampCases\u003ci32\u003e(),\n                                              ClampCases\u003cu32\u003e(),\n                                              ClampCases\u003cAFloat\u003e(),\n                                              ClampCases\u003cf32\u003e()))));\n```\n\nFinally, if we need to modify the tests in the future, we are less likely to forget a case for one of the types by doing it this way. I\u0027ll keep it like this, and we\u0027ll see how it goes.",
       "parentUuid": "5c7764df_a30073ec",
+      "range": {
+        "startLine": 3254,
+        "startChar": 46,
+        "endLine": 3255,
+        "endChar": 69
+      },
+      "revId": "197cc59c11e57aa539bdcfddf3d943a1588cf202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b095b0e_7b0350fb",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 3255,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-27T14:19:46Z",
+      "side": 1,
+      "message": "Okay. I don\u0027t feel strongly enough to push back on this.",
+      "parentUuid": "8f2cbc83_124ac892",
       "range": {
         "startLine": 3254,
         "startChar": 46,
