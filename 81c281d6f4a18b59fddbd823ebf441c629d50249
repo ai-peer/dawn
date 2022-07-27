@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6046b98e_e3093d29",
+        "filename": "tools/src/cmd/gen/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-27T21:45:12Z",
+      "side": 1,
+      "message": "Antonio - please can you confirm this is correct for windows?",
+      "range": {
+        "startLine": 528,
+        "startChar": 37,
+        "endLine": 528,
+        "endChar": 68
+      },
+      "revId": "81c281d6f4a18b59fddbd823ebf441c629d50249",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
