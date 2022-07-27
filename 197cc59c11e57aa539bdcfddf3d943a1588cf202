@@ -142,6 +142,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc12521d_08e4d9c2",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-27T14:24:22Z",
+      "side": 1,
+      "message": "Ah right, `std::apply` to the rescue. I think you\u0027re right. I can take a look at that in a future CL.",
+      "parentUuid": "79d9d2d8_842095c5",
+      "range": {
+        "startLine": 69,
+        "startChar": 27,
+        "endLine": 69,
+        "endChar": 51
+      },
+      "revId": "197cc59c11e57aa539bdcfddf3d943a1588cf202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f9b9ef0_13728041",
@@ -250,6 +274,30 @@
       "side": 1,
       "message": "If you\u0027re going to keep this generic, it makes me question why we have separate `Case` for `ResolverConstEvalUnaryOpTest` and `ResolverConstEvalBuiltinTest`.\nSeems like this could be shared for all cases that have a common-type for inputs + output?",
       "parentUuid": "2bfcc6bc_0de893af",
+      "range": {
+        "startLine": 3129,
+        "startChar": 17,
+        "endLine": 3129,
+        "endChar": 98
+      },
+      "revId": "197cc59c11e57aa539bdcfddf3d943a1588cf202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e24cb690_3433d120",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 3129,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-27T14:24:22Z",
+      "side": 1,
+      "message": "Yes, that\u0027s true, we can certainly hoist this out as we add more cases.",
+      "parentUuid": "828719d1_52d5abe9",
       "range": {
         "startLine": 3129,
         "startChar": 17,
