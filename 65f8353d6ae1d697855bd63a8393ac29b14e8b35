@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d2893ad_c7a8711b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-27T07:41:36Z",
+      "side": 1,
+      "message": "Please take a look, thanks. As FXC and DXC expectations get separated, this CL is now able to work.",
+      "revId": "65f8353d6ae1d697855bd63a8393ac29b14e8b35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
