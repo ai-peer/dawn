@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fd1b0ea_812be4cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2022-07-27T19:51:36Z",
+      "side": 1,
+      "message": "Austin, PTAL, the last one.\nA bit more had to be suppressed in M102.\nTested in https://chromium-review.googlesource.com/c/chromium/src/+/3789347\nhttps://ci.chromium.org/ui/p/chromium-m102/builders/try/dawn-linux-x64-deps-rel/36/overview\nI\u0027ll submit when other testers finish, to make sure I don\u0027t break WebGPU CTS with the new expectation.",
+      "revId": "5d71e2aebf1027ebb5b6d5c8975ed97ef0b418e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
