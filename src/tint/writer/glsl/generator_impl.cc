@@ -1906,12 +1906,10 @@ bool GeneratorImpl::EmitUniformVariable(const ast::Var* var, const sem::Variable
     {
         auto out = line();
         out << "layout(binding = " << bp.binding;
-        if (version_.IsDesktop()) {
-            out << ", std140";
-        }
+        out << ", std140";
         out << ") uniform " << UniqueIdentifier(StructName(str) + "_ubo") << " {";
     }
-    EmitStructMembers(current_buffer_, str, /* emit_offsets */ true);
+    EmitStructMembers(current_buffer_, str);
     auto name = builder_.Symbols().NameFor(var->symbol);
     line() << "} " << name << ";";
     line();
@@ -1929,7 +1927,7 @@ bool GeneratorImpl::EmitStorageVariable(const ast::Var* var, const sem::Variable
     auto bp = sem->As<sem::GlobalVariable>()->BindingPoint();
     line() << "layout(binding = " << bp.binding << ", std430) buffer "
            << UniqueIdentifier(StructName(str) + "_ssbo") << " {";
-    EmitStructMembers(current_buffer_, str, /* emit_offsets */ true);
+    EmitStructMembers(current_buffer_, str);
     auto name = builder_.Symbols().NameFor(var->symbol);
     line() << "} " << name << ";";
     line();
@@ -2854,11 +2852,19 @@ bool GeneratorImpl::EmitTypeAndName(std::ostream& out,
 bool GeneratorImpl::EmitStructType(TextBuffer* b, const sem::Struct* str) {
     auto storage_class_uses = str->StorageClassUsage();
     line(b) << "struct " << StructName(str) << " {";
-    EmitStructMembers(b, str, false);
+    EmitStructMembers(b, str);
     line(b) << "};";
     line(b);
 
     return true;
+}
+
+void GeneratorImpl::EmitPadding(uint32_t bytes) {
+    TINT_ASSERT(Writer, bytes % 4u == 0);
+    for (uint32_t padding = bytes / 4u; padding > 0; --padding) {
+        auto padding_name = UniqueIdentifier(std::string("pad"));
+        line() << "uint " << padding_name << ";";
+    }
 }
 
 bool GeneratorImpl::EmitStructTypeOnce(TextBuffer* buffer, const sem::Struct* str) {
@@ -2869,23 +2875,45 @@ bool GeneratorImpl::EmitStructTypeOnce(TextBuffer* buffer, const sem::Struct* st
     return EmitStructType(buffer, str);
 }
 
-bool GeneratorImpl::EmitStructMembers(TextBuffer* b, const sem::Struct* str, bool emit_offsets) {
+bool GeneratorImpl::EmitStructMembers(TextBuffer* b, const sem::Struct* str) {
     ScopedIndent si(b);
+    uint32_t offset = 0;
+    bool host_shareable = str->IsHostShareable();
+    bool has_runtime_sized_array = false;
     for (auto* mem : str->Members()) {
         auto name = builder_.Symbols().NameFor(mem->Name());
 
+        if (host_shareable && offset < mem->Offset()) {
+            EmitPadding(mem->Offset() - offset);
+            offset = mem->Offset();
+        }
+
         auto* ty = mem->Type();
 
-        auto out = line(b);
+        {
+            auto out = line(b);
+            if (!EmitTypeAndName(out, ty, ast::StorageClass::kNone, ast::Access::kReadWrite,
+                                 name)) {
+                return false;
+            }
+            out << ";";
+        }
+        if (host_shareable) {
+            uint32_t size = ty->Size();
+            if (ty->Is<sem::Struct>()) {
+                // GLSL structs are already padded out to a multiple of 16.
+                size = utils::RoundUp(16u, size);
+            } else if (auto* array_ty = ty->As<sem::Array>()) {
+                if (array_ty->Count() == 0) {
+                    has_runtime_sized_array = true;
+                }
+            }
+            offset += size;
+        }
+    }
 
-        // Note: offsets are unsupported on GLSL ES.
-        if (emit_offsets && version_.IsDesktop() && mem->Offset() != 0) {
-            out << "layout(offset=" << mem->Offset() << ") ";
-        }
-        if (!EmitTypeAndName(out, ty, ast::StorageClass::kNone, ast::Access::kReadWrite, name)) {
-            return false;
-        }
-        out << ";";
+    if (host_shareable && offset < str->Size() && !has_runtime_sized_array) {
+        EmitPadding(str->Size() - offset);
     }
     return true;
 }
