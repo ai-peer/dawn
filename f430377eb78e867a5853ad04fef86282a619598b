@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c424d8c_3c8a9ea0",
+        "filename": "src/tint/ast/storage_class.h.tmpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-27T00:16:23Z",
+      "side": 1,
+      "message": "Yup, but it\u0027s also a trade off between syntax highlighted code and non, heh. I\u0027m honestly not sure which is better, although if it was a general pattern it would be pretty quick to know where to look for the rest of the implementation. (We also have a history of `_impl` files.)",
+      "parentUuid": "e2deea2c_ff777a1f",
+      "revId": "f430377eb78e867a5853ad04fef86282a619598b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a4034a5_6d74dae3",
         "filename": "src/tint/ast/storage_class_bench.cc",
         "patchSetId": 4
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "I believe (and could be wrong) that `-1` can prevent the compiler from picking a smaller data type for the enum. There\u0027s no real need for anything to actually inspect the numerical value, so I\u0027m not sure it\u0027s worthwhile.",
       "parentUuid": "a1f3870e_3a8d6c2e",
+      "revId": "f430377eb78e867a5853ad04fef86282a619598b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6031d431_94aa559a",
+        "filename": "src/tint/templates/enums.tmpl.inc",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-27T00:16:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1ed78183_dc8e4336",
       "revId": "f430377eb78e867a5853ad04fef86282a619598b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
