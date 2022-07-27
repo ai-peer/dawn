@@ -11,6 +11,9 @@ See:
 {{- Import "src/tint/templates/enums.tmpl.inc" -}}
 {{- $enum := (Sem.Enum "texel_format") -}}
 
+#include <algorithm>
+#include <cstring>
+
 #include "src/tint/ast/texel_format.h"
 
 namespace tint::ast {

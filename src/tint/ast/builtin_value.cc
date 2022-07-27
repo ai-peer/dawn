@@ -20,6 +20,9 @@
 // Do not modify this file directly
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <algorithm>
+#include <cstring>
+
 #include "src/tint/ast/builtin_value.h"
 
 namespace tint::ast {
@@ -28,41 +31,49 @@ namespace tint::ast {
 /// @param str the string to parse
 /// @returns the parsed enum, or BuiltinValue::kInvalid if the string could not be parsed.
 BuiltinValue ParseBuiltinValue(std::string_view str) {
-    if (str == "position") {
-        return BuiltinValue::kPosition;
+    uint64_t word = 0u;
+memcpy(&word, str.data(), std::min(str.size(), sizeof(word)));
+    switch (((word * 537) % 83591) % 11) {
+        case 0:
+            return (str == "sample_index") ? BuiltinValue::kSampleIndex : BuiltinValue::kInvalid;
+        case 1:
+            return (str == "workgroup_id") ? BuiltinValue::kWorkgroupId : BuiltinValue::kInvalid;
+        case 2:
+            if (word == 0x6e695f6c61636f6c) {
+                word = 0;
+                str = str.substr(8);memcpy(&word, str.data(), std::min(str.size(), sizeof(word)));
+    switch (((word * 1) % 83591) % 1) {
+        case 0:
+            if (word == 0x6e6f697461636f76) {
+                word = 0;
+                str = str.substr(8);memcpy(&word, str.data(), std::min(str.size(), sizeof(word)));
+    switch (((word * 3) % 83591) % 2) {
+        case 0:
+            return (str == "_index") ? BuiltinValue::kLocalInvocationIndex : BuiltinValue::kInvalid;
+        case 1:
+            return (str == "_id") ? BuiltinValue::kLocalInvocationId : BuiltinValue::kInvalid;
     }
-    if (str == "vertex_index") {
-        return BuiltinValue::kVertexIndex;
+            }
+            break;
     }
-    if (str == "instance_index") {
-        return BuiltinValue::kInstanceIndex;
-    }
-    if (str == "front_facing") {
-        return BuiltinValue::kFrontFacing;
-    }
-    if (str == "frag_depth") {
-        return BuiltinValue::kFragDepth;
-    }
-    if (str == "local_invocation_id") {
-        return BuiltinValue::kLocalInvocationId;
-    }
-    if (str == "local_invocation_index") {
-        return BuiltinValue::kLocalInvocationIndex;
-    }
-    if (str == "global_invocation_id") {
-        return BuiltinValue::kGlobalInvocationId;
-    }
-    if (str == "workgroup_id") {
-        return BuiltinValue::kWorkgroupId;
-    }
-    if (str == "num_workgroups") {
-        return BuiltinValue::kNumWorkgroups;
-    }
-    if (str == "sample_index") {
-        return BuiltinValue::kSampleIndex;
-    }
-    if (str == "sample_mask") {
-        return BuiltinValue::kSampleMask;
+            }
+            break;
+        case 3:
+            return (str == "vertex_index") ? BuiltinValue::kVertexIndex : BuiltinValue::kInvalid;
+        case 4:
+            return (str == "global_invocation_id") ? BuiltinValue::kGlobalInvocationId : BuiltinValue::kInvalid;
+        case 5:
+            return (str == "sample_mask") ? BuiltinValue::kSampleMask : BuiltinValue::kInvalid;
+        case 6:
+            return (str == "num_workgroups") ? BuiltinValue::kNumWorkgroups : BuiltinValue::kInvalid;
+        case 7:
+            return (str == "instance_index") ? BuiltinValue::kInstanceIndex : BuiltinValue::kInvalid;
+        case 8:
+            return (str == "front_facing") ? BuiltinValue::kFrontFacing : BuiltinValue::kInvalid;
+        case 9:
+            return (str == "frag_depth") ? BuiltinValue::kFragDepth : BuiltinValue::kInvalid;
+        case 10:
+            return (str == "position") ? BuiltinValue::kPosition : BuiltinValue::kInvalid;
     }
     return BuiltinValue::kInvalid;
 }

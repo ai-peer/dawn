@@ -20,6 +20,9 @@
 // Do not modify this file directly
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <algorithm>
+#include <cstring>
+
 #include "src/tint/ast/storage_class.h"
 
 namespace tint::ast {
@@ -28,20 +31,19 @@ namespace tint::ast {
 /// @param str the string to parse
 /// @returns the parsed enum, or StorageClass::kInvalid if the string could not be parsed.
 StorageClass ParseStorageClass(std::string_view str) {
-    if (str == "function") {
-        return StorageClass::kFunction;
-    }
-    if (str == "private") {
-        return StorageClass::kPrivate;
-    }
-    if (str == "workgroup") {
-        return StorageClass::kWorkgroup;
-    }
-    if (str == "uniform") {
-        return StorageClass::kUniform;
-    }
-    if (str == "storage") {
-        return StorageClass::kStorage;
+    uint64_t word = 0u;
+memcpy(&word, str.data(), std::min(str.size(), sizeof(word)));
+    switch (((word * 14) % 83591) % 5) {
+        case 0:
+            return (str == "uniform") ? StorageClass::kUniform : StorageClass::kInvalid;
+        case 1:
+            return (str == "storage") ? StorageClass::kStorage : StorageClass::kInvalid;
+        case 2:
+            return (str == "private") ? StorageClass::kPrivate : StorageClass::kInvalid;
+        case 3:
+            return (str == "workgroup") ? StorageClass::kWorkgroup : StorageClass::kInvalid;
+        case 4:
+            return (str == "function") ? StorageClass::kFunction : StorageClass::kInvalid;
     }
     return StorageClass::kInvalid;
 }

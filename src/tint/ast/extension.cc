@@ -20,6 +20,9 @@
 // Do not modify this file directly
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <algorithm>
+#include <cstring>
+
 #include "src/tint/ast/extension.h"
 
 namespace tint::ast {
@@ -28,14 +31,23 @@ namespace tint::ast {
 /// @param str the string to parse
 /// @returns the parsed enum, or Extension::kInvalid if the string could not be parsed.
 Extension ParseExtension(std::string_view str) {
-    if (str == "f16") {
-        return Extension::kF16;
+    uint64_t word = 0u;
+memcpy(&word, str.data(), std::min(str.size(), sizeof(word)));
+    switch (((word * 2) % 83591) % 2) {
+        case 0:
+            return (str == "f16") ? Extension::kF16 : Extension::kInvalid;
+        case 1:
+            if (word == 0x6d75696d6f726863) {
+                word = 0;
+                str = str.substr(8);memcpy(&word, str.data(), std::min(str.size(), sizeof(word)));
+    switch (((word * 3) % 83591) % 2) {
+        case 0:
+            return (str == "_disable_uniformity_analysis") ? Extension::kChromiumDisableUniformityAnalysis : Extension::kInvalid;
+        case 1:
+            return (str == "_experimental_dp4a") ? Extension::kChromiumExperimentalDp4A : Extension::kInvalid;
     }
-    if (str == "chromium_experimental_dp4a") {
-        return Extension::kChromiumExperimentalDp4A;
-    }
-    if (str == "chromium_disable_uniformity_analysis") {
-        return Extension::kChromiumDisableUniformityAnalysis;
+            }
+            break;
     }
     return Extension::kInvalid;
 }
