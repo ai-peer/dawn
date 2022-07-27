@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58c2fb8a_57da2980",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-27T15:22:55Z",
+      "side": 1,
+      "message": "Shuffled the assignment of `workgroup_size` so that it isn\u0027t given a value when the entry point is not compute.",
+      "revId": "a5fe601c51f4f2da42a2b66cbf607cf61992dd55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
