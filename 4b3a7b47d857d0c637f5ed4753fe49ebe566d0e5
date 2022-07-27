@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1dee82d_9a9cdea3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-27T00:54:16Z",
+      "side": 1,
+      "message": "I\u0027ve rebased this on top of the error CL and merged in the recent changes to StorageClass. The generated files are updated to show the error is generated instead of an ICE.",
+      "revId": "4b3a7b47d857d0c637f5ed4753fe49ebe566d0e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
