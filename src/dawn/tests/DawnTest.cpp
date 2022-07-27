@@ -1013,14 +1013,7 @@ void DawnTestBase::SetUp() {
 }
 
 void DawnTestBase::TearDown() {
-    FlushWire();
-
-    MapSlotsSynchronously();
-    ResolveExpectations();
-
-    for (size_t i = 0; i < mReadbackSlots.size(); ++i) {
-        mReadbackSlots[i].buffer.Unmap();
-    }
+    ResolveDeferredExpectationsNow();
 
     if (!UsesWire()) {
         EXPECT_EQ(mLastWarningCount,
@@ -1552,6 +1545,18 @@ void DawnTestBase::ResolveExpectations() {
 
 std::unique_ptr<dawn::platform::Platform> DawnTestBase::CreateTestPlatform() {
     return nullptr;
+}
+
+void DawnTestBase::ResolveDeferredExpectationsNow() {
+    FlushWire();
+
+    MapSlotsSynchronously();
+    ResolveExpectations();
+
+    mDeferredExpectations.clear();
+    for (size_t i = 0; i < mReadbackSlots.size(); ++i) {
+        mReadbackSlots[i].buffer.Unmap();
+    }
 }
 
 bool RGBA8::operator==(const RGBA8& other) const {
