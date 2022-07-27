@@ -121,6 +121,23 @@
       "message": "Xinghua, is this CL still up for review? If yes Rafael can you get the information requested in the last comment thread?",
       "revId": "9850719ec76130b17597683dc2532b7082ac8774",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01811807_48663a51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-27T01:08:25Z",
+      "side": 1,
+      "message": "Is this still in progress or can it be closed? (Note, we no longer use spirv-cross)",
+      "revId": "9850719ec76130b17597683dc2532b7082ac8774",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
