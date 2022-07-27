@@ -20,6 +20,9 @@
 // Do not modify this file directly
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <algorithm>
+#include <cstring>
+
 #include "src/tint/ast/texel_format.h"
 
 namespace tint::ast {
@@ -28,53 +31,41 @@ namespace tint::ast {
 /// @param str the string to parse
 /// @returns the parsed enum, or TexelFormat::kInvalid if the string could not be parsed.
 TexelFormat ParseTexelFormat(std::string_view str) {
-    if (str == "rgba8unorm") {
-        return TexelFormat::kRgba8Unorm;
-    }
-    if (str == "rgba8snorm") {
-        return TexelFormat::kRgba8Snorm;
-    }
-    if (str == "rgba8uint") {
-        return TexelFormat::kRgba8Uint;
-    }
-    if (str == "rgba8sint") {
-        return TexelFormat::kRgba8Sint;
-    }
-    if (str == "rgba16uint") {
-        return TexelFormat::kRgba16Uint;
-    }
-    if (str == "rgba16sint") {
-        return TexelFormat::kRgba16Sint;
-    }
-    if (str == "rgba16float") {
-        return TexelFormat::kRgba16Float;
-    }
-    if (str == "r32uint") {
-        return TexelFormat::kR32Uint;
-    }
-    if (str == "r32sint") {
-        return TexelFormat::kR32Sint;
-    }
-    if (str == "r32float") {
-        return TexelFormat::kR32Float;
-    }
-    if (str == "rg32uint") {
-        return TexelFormat::kRg32Uint;
-    }
-    if (str == "rg32sint") {
-        return TexelFormat::kRg32Sint;
-    }
-    if (str == "rg32float") {
-        return TexelFormat::kRg32Float;
-    }
-    if (str == "rgba32uint") {
-        return TexelFormat::kRgba32Uint;
-    }
-    if (str == "rgba32sint") {
-        return TexelFormat::kRgba32Sint;
-    }
-    if (str == "rgba32float") {
-        return TexelFormat::kRgba32Float;
+    uint64_t u64 = 0u;
+    memcpy(&u64, str.data(), std::min(str.size(), sizeof(u64)));
+    switch (((u64 * 1028559) % 83591) % 16) {
+        case 0:
+            return (str == "rg32uint") ? TexelFormat::kRg32Uint : TexelFormat::kInvalid;
+        case 1:
+            return (str == "rgba32uint") ? TexelFormat::kRgba32Uint : TexelFormat::kInvalid;
+        case 2:
+            return (str == "r32sint") ? TexelFormat::kR32Sint : TexelFormat::kInvalid;
+        case 3:
+            return (str == "rgba16float") ? TexelFormat::kRgba16Float : TexelFormat::kInvalid;
+        case 4:
+            return (str == "rgba32sint") ? TexelFormat::kRgba32Sint : TexelFormat::kInvalid;
+        case 5:
+            return (str == "rgba16sint") ? TexelFormat::kRgba16Sint : TexelFormat::kInvalid;
+        case 6:
+            return (str == "rgba8unorm") ? TexelFormat::kRgba8Unorm : TexelFormat::kInvalid;
+        case 7:
+            return (str == "rgba16uint") ? TexelFormat::kRgba16Uint : TexelFormat::kInvalid;
+        case 8:
+            return (str == "r32float") ? TexelFormat::kR32Float : TexelFormat::kInvalid;
+        case 9:
+            return (str == "rgba8sint") ? TexelFormat::kRgba8Sint : TexelFormat::kInvalid;
+        case 10:
+            return (str == "r32uint") ? TexelFormat::kR32Uint : TexelFormat::kInvalid;
+        case 11:
+            return (str == "rg32sint") ? TexelFormat::kRg32Sint : TexelFormat::kInvalid;
+        case 12:
+            return (str == "rgba8snorm") ? TexelFormat::kRgba8Snorm : TexelFormat::kInvalid;
+        case 13:
+            return (str == "rgba32float") ? TexelFormat::kRgba32Float : TexelFormat::kInvalid;
+        case 14:
+            return (str == "rgba8uint") ? TexelFormat::kRgba8Uint : TexelFormat::kInvalid;
+        case 15:
+            return (str == "rg32float") ? TexelFormat::kRg32Float : TexelFormat::kInvalid;
     }
     return TexelFormat::kInvalid;
 }
