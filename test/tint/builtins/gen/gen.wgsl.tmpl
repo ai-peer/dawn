@@ -11,27 +11,20 @@ See:
 
 {{- /* For each permutation of each overload of each function... */ -}}
 {{- range Sem.Builtins -}}
-{{- /* TODO(crbug.com/tint/1536): Remove the bodge below after we support [[extension("extension_name")]] in intrinsics.def */}}
-{{- if not (or (eq .Name "dot4I8Packed") (eq .Name "dot4U8Packed"))}}
 {{-   range .Overloads  -}}
 {{-     range Permute . -}}
-{{- /*    TODO(crbug.com/tint/1502): Remove the bodge below and emit "enable f16;" after
-          getting ready for F16 end-to-end tests.                                        */ -}}
-{{-       if not (eq "Yes" (Eval "CheckIfF16Used" .)) -}}
-{{- /*      Generate a ./literal/<function>/<permuataion-hash>.wgsl file using
-            the Permutation macro defined below                             */ -}}
-{{-         $file := printf "./literal/%v/%v.wgsl" .Intrinsic.Name .Hash -}}
-{{-         $content := Eval "Permutation" "Overload" . "Mode" "literal" -}}
-{{-         WriteFile $file $content -}}
-{{- /*      Generate a ./var/<function>/<permuataion-hash>.wgsl file using
-            the Permutation macro defined below                             */ -}}
-{{-         $file := printf "./var/%v/%v.wgsl" .Intrinsic.Name .Hash -}}
-{{-         $content := Eval "Permutation" "Overload" . "Mode" "var" -}}
-{{-         WriteFile $file $content -}}
-{{-       end  }}
+{{- /*    Generate a ./literal/<function>/<permuataion-hash>.wgsl file using
+          the Permutation macro defined below                             */ -}}
+{{-       $file := printf "./literal/%v/%v.wgsl" .Intrinsic.Name .Hash -}}
+{{-       $content := Eval "Permutation" "Overload" . "Mode" "literal" -}}
+{{-       WriteFile $file $content -}}
+{{- /*    Generate a ./var/<function>/<permuataion-hash>.wgsl file using
+          the Permutation macro defined below                             */ -}}
+{{-       $file := printf "./var/%v/%v.wgsl" .Intrinsic.Name .Hash -}}
+{{-       $content := Eval "Permutation" "Overload" . "Mode" "var" -}}
+{{-       WriteFile $file $content -}}
 {{-     end  }}
 {{-   end  }}
-{{- end  }}
 {{- end  }}
 
 {{- /* ------------------------------------------------------------------ */ -}}
@@ -43,6 +36,9 @@ See:
 {{-   $builtin     := $overload.Intrinsic.Name -}}
 {{-   $permutation := printf "%v_%v" $builtin $overload.Hash -}}
 {{-   $args        := Map -}}
+
+{{- /* Generate enable directives */ -}}
+{{- template "EnableDirectives" $overload -}}
 
 {{- /* Generate RW storage buffer parameters */ -}}
 {{-   $sb_rw_fields := Eval "EmitBufferFields" "overload"    $overload
@@ -170,6 +166,26 @@ fn fragment_main() {
 fn compute_main() {
   {{$permutation}}();
 }
+{{ end -}}
+
+{{- end -}}
+
+
+{{- /* ------------------------------------------------------------------ */ -}}
+{{-                        define "EnableDirectives"                         -}}
+{{- /* Emits the required enable directives for a given overload          */ -}}
+{{- /* ------------------------------------------------------------------ */ -}}
+{{-   $overload     := . -}}
+{{-   $builtin_name := $overload.Intrinsic.Name -}}
+
+{{- /* Check and emit chromium_experimental_dp4a */ -}}
+{{- if or (eq "dot4I8Packed" $builtin_name) (eq "dot4U8Packed" $builtin_name)}}
+enable chromium_experimental_dp4a;
+{{ end -}}
+
+{{- /* Check and emit f16 */ -}}
+{{- if eq "Yes" (Eval "CheckIfF16Used" $overload)}}
+enable f16;
 {{ end -}}
 
 {{- end -}}
@@ -343,16 +359,17 @@ Yes
 {{- /* ------------------------------------------------------------------ */ -}}
 {{-                             define "IsF16Types"                          -}}
 {{- /* Return "Yes" if a type is f16 scalar, vector, or matrix, or        */ -}}
-{{- /* pointer to these types. Otherwise return "".                       */ -}}
+{{- /* pointer to, or array of these types. Otherwise return "".          */ -}}
 {{- /* ------------------------------------------------------------------ */ -}}
 {{-   if IsType .Target -}}
 {{-     if eq .Target.Name "ptr" -}}{{template "IsF16Types" index .TemplateArguments 1}}
-{{-     else if eq .Target.Name "vec"  -}}{{template "IsF16Types" index .TemplateArguments 1}}
-{{-     else if eq .Target.Name "vec2" -}}{{template "IsF16Types" index .TemplateArguments 0}}
-{{-     else if eq .Target.Name "vec3" -}}{{template "IsF16Types" index .TemplateArguments 0}}
-{{-     else if eq .Target.Name "vec4" -}}{{template "IsF16Types" index .TemplateArguments 0}}
-{{-     else if eq .Target.Name "mat"  -}}{{template "IsF16Types" index .TemplateArguments 2}}
-{{-     else if eq .Target.Name "f16"  -}}Yes
+{{-     else if eq .Target.Name "array" -}}{{template "IsF16Types" index .TemplateArguments 0}}
+{{-     else if eq .Target.Name "vec"   -}}{{template "IsF16Types" index .TemplateArguments 1}}
+{{-     else if eq .Target.Name "vec2"  -}}{{template "IsF16Types" index .TemplateArguments 0}}
+{{-     else if eq .Target.Name "vec3"  -}}{{template "IsF16Types" index .TemplateArguments 0}}
+{{-     else if eq .Target.Name "vec4"  -}}{{template "IsF16Types" index .TemplateArguments 0}}
+{{-     else if eq .Target.Name "mat"   -}}{{template "IsF16Types" index .TemplateArguments 2}}
+{{-     else if eq .Target.Name "f16"   -}}Yes
 {{-     end                           -}}
 {{-   end                             -}}
 {{- end -}}
