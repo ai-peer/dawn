@@ -259,6 +259,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac8ac142_5092745e",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-27T07:52:30Z",
+      "side": 1,
+      "message": "```\n// Exports external memory from a Vulkan image. This must be called on wrapped textures\n// before they are destroyed. It writes the semaphore to wait on and the old/new image\n// layouts to |info|. Pass VK_IMAGE_LAYOUT_UNDEFINED as |desiredLayout| if you don\u0027t want to\n// perform a layout transition.\nDAWN_NATIVE_EXPORT bool ExportVulkanImage(WGPUTexture texture,\n                                          VkImageLayout desiredLayout,\n                                          ExternalImageExportInfoVk* info);\n```\n\nWe still need to change this API for eager transition. `VkImageLayout desiredLayout,` is unknown for eager transition until ExportVulkanImage is called. Can we just remove it? It\u0027s not actually used in chromium now with only `VK_IMAGE_LAYOUT_UNDEFINED` specified.\n```\n  // Grab the signal semaphore from dawn\n  dawn::native::vulkan::ExternalImageExportInfoOpaqueFD export_info;\n  if (!dawn::native::vulkan::ExportVulkanImage(\n          texture_, VK_IMAGE_LAYOUT_UNDEFINED, \u0026export_info)) {\n    DLOG(ERROR) \u003c\u003c \"Failed to export Dawn Vulkan image.\";\n  } else {\n```",
+      "parentUuid": "e85fc58f_bb74a95b",
+      "range": {
+        "startLine": 825,
+        "startChar": 1,
+        "endLine": 829,
+        "endChar": 14
+      },
+      "revId": "902258d115dfdf4e6c92d3090bc6ffd917ec76b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a90d9e1_86b9df39",
         "filename": "src/dawn/native/vulkan/TextureVk.h",
         "patchSetId": 1
