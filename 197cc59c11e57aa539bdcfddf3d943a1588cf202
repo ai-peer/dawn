@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b0859502_22769d7c",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-27T13:49:23Z",
+      "side": 1,
+      "message": "I like that much more, thanks.",
+      "parentUuid": "bd55ace2_dcaeb2ae",
+      "range": {
+        "startLine": 51,
+        "startChar": 5,
+        "endLine": 51,
+        "endChar": 11
+      },
+      "revId": "197cc59c11e57aa539bdcfddf3d943a1588cf202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0f78711d_45055d4d",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 14
@@ -93,6 +117,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fc683ed_4c2a16ea",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-27T13:49:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f9b9ef0_13728041",
+      "range": {
+        "startLine": 450,
+        "startChar": 16,
+        "endLine": 450,
+        "endChar": 33
+      },
+      "revId": "197cc59c11e57aa539bdcfddf3d943a1588cf202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1df5464_dd30971f",
@@ -116,6 +164,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bfcc6bc_0de893af",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 3129,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-27T13:49:23Z",
+      "side": 1,
+      "message": "Remnant from the CL split for atan2 and clamp. Will leave as is. In any case, we\u0027ll be using this struct for more builtin tests soon enough.",
+      "parentUuid": "d1df5464_dd30971f",
+      "range": {
+        "startLine": 3129,
+        "startChar": 17,
+        "endLine": 3129,
+        "endChar": 98
+      },
+      "revId": "197cc59c11e57aa539bdcfddf3d943a1588cf202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c7764df_a30073ec",
@@ -129,6 +201,30 @@
       "writtenOn": "2022-07-27T13:13:55Z",
       "side": 1,
       "message": "Is this the right way around for `finite_only`?\n\nI appreciate the desire for DRY code, but I feel like duplications is fine for test cases like this, as explicitness and ease-of-readability is often preferable over compactness for this sort of stuff. Especially when the cases vary by type, and case-generation helpers can hide what\u0027s actually being tested. Suggest unrolling:\n\n\n```\n    testing::ValuesIn(std::vector\u003cCase\u003e{\n        // AFloat\n        // If y is +/-0 and x is negative or -0, +/-PI is returned\n        C({0._a, -0._a}, kPi\u003cAFloat\u003e, true),\n        // If y is +/-0 and x is positive or +0, +/-0 is returned\n        C({0._a, 0._a}, 0._a, true),\n        // If x is +/-0 and y is negative, -PI/2 is returned\n        C({-1._a, 0._a}, -kPiOver2\u003cAFloat\u003e),\n        C({-1._a, -0._a}, -kPiOver2\u003cAFloat\u003e),\n        // If x is +/-0 and y is positive, +PI/2 is returned\n        C({1._a, 0._a}, kPiOver2\u003cAFloat\u003e),\n        C({1._a, -0._a}, kPiOver2\u003cAFloat\u003e),\n\n        // f32\n        // If y is +/-0 and x is negative or -0, +/-PI is returned\n        C({0_f, -0_f}, kPi\u003cf32\u003e, true),\n        // If y is +/-0 and x is positive or +0, +/-0 is returned\n        C({0_f, 0_f}, 0_f, true),\n        // If x is +/-0 and y is negative, -PI/2 is returned\n        C({-1._f, 0_f}, -kPiOver2\u003cf32\u003e),\n        C({-1._f, -0_f}, -kPiOver2\u003cf32\u003e),\n        // If x is +/-0 and y is positive, +PI/2 is returned\n        C({1._f, 0_f}, kPiOver2\u003cf32\u003e),\n        C({1._f, -0_f}, kPiOver2\u003cf32\u003e),\n        // If y is +/-INF and x is finite, +/-PI/2 is returned\n        C({kInf\u003cf32\u003e, 0_f}, kPiOver2\u003cf32\u003e, true),\n        C({-kInf\u003cf32\u003e, 0_f}, kPiOver2\u003cf32\u003e, true),\n        // If y is +/-INF and x is -INF, +/-3PI/4 is returned\n        C({kInf\u003cf32\u003e, -kInf\u003cf32\u003e}, k3PiOver4\u003cf32\u003e, true),\n        C({-kInf\u003cf32\u003e, -kInf\u003cf32\u003e}, k3PiOver4\u003cf32\u003e, true),\n        // If y is +/-INF and x is +INF, +/-PI/4 is returned\n        C({kInf\u003cf32\u003e, kInf\u003cf32\u003e}, kPiOver4\u003cf32\u003e, true),\n        C({-kInf\u003cf32\u003e, kInf\u003cf32\u003e}, kPiOver4\u003cf32\u003e, true),\n        // If x is -INF and y is finite and positive, +PI is returned\n        C({0_f, -kInf\u003cf32\u003e}, kPi\u003cf32\u003e),\n        // If x is -INF and y is finite and negative, -PI is returned\n        C({-0_f, -kInf\u003cf32\u003e}, -kPi\u003cf32\u003e),\n        // If x is +INF and y is finite and positive, +0 is returned\n        C({0_f, kInf\u003cf32\u003e}, 0_f),\n        // If x is +INF and y is finite and negative, -0 is returned\n        C({-0_f, kInf\u003cf32\u003e}, -0_f),\n        // If either x is NaN or y is NaN, NaN is returned\n        C({kNaN\u003cf32\u003e, 0_f}, kNaN\u003cf32\u003e),\n        C({0_f, kNaN\u003cf32\u003e}, kNaN\u003cf32\u003e),\n        C({kNaN\u003cf32\u003e, kNaN\u003cf32\u003e}, kNaN\u003cf32\u003e),\n```",
+      "range": {
+        "startLine": 3254,
+        "startChar": 46,
+        "endLine": 3255,
+        "endChar": 69
+      },
+      "revId": "197cc59c11e57aa539bdcfddf3d943a1588cf202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f2cbc83_124ac892",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 3255,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-27T13:49:23Z",
+      "side": 1,
+      "message": "Nice catch, swapped the bools.\n\nI prefer having functions like this because I find it a lot less confusing to understand the tests. It makes it clear that the only difference is the type, and whether it considers finite vs non-finite cases. Also, we will be adding cases for f16 soon, which means a whole lot more copy-pasta. The child CL for `clamp` does the same for 5 types:\n\n```\n                     testing::ValuesIn(Concat(ClampCases\u003cAInt\u003e(),  //\n                                              ClampCases\u003ci32\u003e(),\n                                              ClampCases\u003cu32\u003e(),\n                                              ClampCases\u003cAFloat\u003e(),\n                                              ClampCases\u003cf32\u003e()))));\n```\n\nFinally, if we need to modify the tests in the future, we are less likely to forget a case for one of the types by doing it this way. I\u0027ll keep it like this, and we\u0027ll see how it goes.",
+      "parentUuid": "5c7764df_a30073ec",
       "range": {
         "startLine": 3254,
         "startChar": 46,
