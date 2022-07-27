@@ -33,6 +33,23 @@
       "message": "snap: https://dawn-review.googlesource.com/c/dawn/+/97360",
       "revId": "aca0b7fd78a3c5a09bb2d1a1cf5e96ac5a5cde66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42d9138a_a2180b73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-27T10:07:02Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "aca0b7fd78a3c5a09bb2d1a1cf5e96ac5a5cde66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
