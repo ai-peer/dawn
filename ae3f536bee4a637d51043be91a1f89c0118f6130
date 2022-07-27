@@ -1,6 +1,24 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "618bd2be_534d07d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-27T01:06:38Z",
+      "side": 1,
+      "message": "Is this something you plan on picking up again or should we close the PR?",
+      "revId": "ae3f536bee4a637d51043be91a1f89c0118f6130",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "b5fa6147_b9cbaf2c",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
@@ -20,10 +38,10 @@
         "endChar": 9
       },
       "revId": "ae3f536bee4a637d51043be91a1f89c0118f6130",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "e6dc2e69_0c1b09c9",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
@@ -43,10 +61,10 @@
         "endChar": 33
       },
       "revId": "ae3f536bee4a637d51043be91a1f89c0118f6130",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "2d970620_78172342",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
@@ -67,8 +85,7 @@
         "endChar": 33
       },
       "revId": "ae3f536bee4a637d51043be91a1f89c0118f6130",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
