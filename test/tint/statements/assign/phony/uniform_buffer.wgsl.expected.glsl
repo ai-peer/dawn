@@ -1,6 +1,6 @@
 #version 310 es
 
-layout(binding = 0) uniform S_ubo {
+layout(binding = 0, std140) uniform S_ubo {
   int i;
 } u;
 

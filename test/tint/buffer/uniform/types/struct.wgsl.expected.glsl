@@ -8,7 +8,7 @@ struct S {
   Inner inner;
 };
 
-layout(binding = 0) uniform u_block_ubo {
+layout(binding = 0, std140) uniform u_block_ubo {
   S inner;
 } u;
 
