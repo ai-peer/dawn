@@ -16,6 +16,46 @@
       "message": "Please take a look, thanks. As FXC and DXC expectations get separated, this CL is now able to work.",
       "revId": "65f8353d6ae1d697855bd63a8393ac29b14e8b35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11b2327d_a5093e07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-27T09:41:56Z",
+      "side": 1,
+      "message": "Good job!",
+      "revId": "65f8353d6ae1d697855bd63a8393ac29b14e8b35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d6fb19e_8bd2ee25",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-27T09:41:56Z",
+      "side": 1,
+      "message": "übernit: I like to indent the logic of the whole-line `{{ }}` blocks, so there\u0027s some form of visual nesting. With indentation between the `define` and `end`, this would be:\n\n```\n{{-   /* Check and emit chromium_experimental_dp4a */ -}}\n{{-   if or (eq \"dot4I8Packed\" $builtin_name) (eq \"dot4U8Packed\" $builtin_name)}}\nenable chromium_experimental_dp4a;\n{{    end -}}\n\n{{- end -}}\n```",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 10
+      },
+      "revId": "65f8353d6ae1d697855bd63a8393ac29b14e8b35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
