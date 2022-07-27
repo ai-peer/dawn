@@ -19,7 +19,7 @@ layout(binding = 0, std430) buffer Tiles_ssbo {
   TileLightIdData data[4];
 } tileLightId;
 
-layout(binding = 0) uniform Config_ubo {
+layout(binding = 0, std140) uniform Config_ubo {
   uint numLights;
   uint numTiles;
   uint tileCountX;
@@ -28,7 +28,7 @@ layout(binding = 0) uniform Config_ubo {
   uint tileSize;
 } config;
 
-layout(binding = 0) uniform Uniforms_ubo {
+layout(binding = 0, std140) uniform Uniforms_ubo {
   vec4 tint_symbol;
   vec4 tint_symbol_1;
   mat4 viewMatrix;
