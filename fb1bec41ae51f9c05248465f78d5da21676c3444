@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d68d99df_be29915d",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 12
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-27T11:50:46Z",
+      "side": 1,
+      "message": "Nice template skills! However, from past experience with this sort of thing, I know this can be fragile, and a performantly costly solution.\n\nI\u0027ve added a `OverloadUsesF16` helper in https://dawn-review.googlesource.com/c/dawn/+/97361 (untested), which should act as a drop-in replacement.",
+      "range": {
+        "startLine": 314,
+        "startChar": 0,
+        "endLine": 359,
+        "endChar": 11
+      },
+      "revId": "fb1bec41ae51f9c05248465f78d5da21676c3444",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
