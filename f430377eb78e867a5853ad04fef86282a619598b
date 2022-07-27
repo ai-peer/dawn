@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ed7a496_3485eb1d",
+        "filename": "src/tint/ast/storage_class.h.tmpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-27T08:57:12Z",
+      "side": 1,
+      "message": "It\u0027s not really an implementation though, it\u0027s just an inline helper, that really belongs next to the enum. The greatest barrier for modifying static text in the `.tmpl` file is having golang installed, which is pretty much a prerequisite for updating the expectations. The static text really doesn\u0027t require any knowledge of the template language or the rest of the dynamic generation stuff.\n\nI\u0027ve made it more explicit in the `.tmpl` file on how to regenerate on edits.\n\nIf you feel strongly that this should be external to the generated code, then I could add a `ast/storage_class_helpers.h` which this header includes, but I feel the pros to doing this are at least outweighed by the cons.",
+      "parentUuid": "6c424d8c_3c8a9ea0",
+      "revId": "f430377eb78e867a5853ad04fef86282a619598b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a4034a5_6d74dae3",
         "filename": "src/tint/ast/storage_class_bench.cc",
         "patchSetId": 4
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "Failed to push?",
       "parentUuid": "948bc8db_8c02bda9",
+      "revId": "f430377eb78e867a5853ad04fef86282a619598b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a1f9379_b2665fbe",
+        "filename": "src/tint/ast/storage_class_bench.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-27T08:57:12Z",
+      "side": 1,
+      "message": "Nope, I\u0027m just an idiot. Done. For realz.",
+      "parentUuid": "7c2f60cd_86208aa7",
       "revId": "f430377eb78e867a5853ad04fef86282a619598b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
