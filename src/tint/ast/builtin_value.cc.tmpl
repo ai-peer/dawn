@@ -11,6 +11,9 @@ See:
 {{- Import "src/tint/templates/enums.tmpl.inc" -}}
 {{- $enum := (Sem.Enum "builtin_value") -}}
 
+#include <algorithm>
+#include <cstring>
+
 #include "src/tint/ast/builtin_value.h"
 
 namespace tint::ast {

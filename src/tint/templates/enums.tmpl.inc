@@ -41,15 +41,39 @@ std::ostream& operator<<(std::ostream& out, {{$enum}} value);
 /// @param str the string to parse
 /// @returns the parsed enum, or {{$enum}}::kInvalid if the string could not be parsed.
 {{$enum}} Parse{{$enum}}(std::string_view str) {
-{{-   range $entry := $.PublicEntries }}
-    if (str == "{{$entry.Name}}") {
-        return {{template "EnumCase" $entry}};
-    }
-{{-   end }}
+{{- $tree := MinimalPerfectHash $.PublicNameSet }}
+    uint64_t u64 = 0u;
+{{ Eval "HashTree" "enum" $enum "tree" $tree }}
     return {{$enum}}::kInvalid;
 }
 {{- end -}}
 
+
+{{- /* ------------------------------------------------------------------ */ -}}
+{{-                          define "HashTree"                               -}}
+{{- /* ------------------------------------------------------------------ */ -}}
+{{- $tree    := $.tree   -}}
+{{- $enum    := $.enum   -}}
+{{/* indent */}}    {{/*    */ -}}
+    memcpy(&u64, str.data(), std::min(str.size(), sizeof(u64)));
+    switch (((u64 * {{$tree.Multiplier}}) % {{$tree.Prime}}) % {{len $tree.Bins}}) {
+{{-   range $i, $bin := $tree.Bins }}
+        case {{$i}}:
+{{-     if $bin.Children }}
+            if (u64 == 0x{{printf "%.8x" $bin.U64}}) {
+                u64 = 0;
+                str = str.substr(8);
+{{              Eval "HashTree" "enum" $enum "tree" $bin.Children }}
+            }
+            break;
+{{-     else if le (len $bin.Remaining) 4 }}
+            return (u64 == {{$bin.U64}}) ? {{$enum}}::k{{PascalCase $bin.String}} : {{$enum}}::kInvalid;
+{{-     else }}
+            return (str == "{{$bin.Remaining}}") ? {{$enum}}::k{{PascalCase $bin.String}} : {{$enum}}::kInvalid;
+{{-     end }}
+{{-   end }}
+    }
+{{- end -}}
 
 {{- /* ------------------------------------------------------------------ */ -}}
 {{-                         define "EnumOStream"                             -}}
