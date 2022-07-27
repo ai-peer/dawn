@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec08f1ee_a3b8c1d7",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2964,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-27T14:23:02Z",
+      "side": 1,
+      "message": "nit: `implicitly`.",
+      "range": {
+        "startLine": 2964,
+        "startChar": 32,
+        "endLine": 2964,
+        "endChar": 39
+      },
+      "revId": "4bc7876e1a1806658dcb287252119bec41dd08f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
