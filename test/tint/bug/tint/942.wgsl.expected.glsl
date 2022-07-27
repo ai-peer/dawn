@@ -1,12 +1,12 @@
 #version 310 es
 
-layout(binding = 1) uniform Params_ubo {
+layout(binding = 1, std140) uniform Params_ubo {
   uint filterDim;
   uint blockDim;
 } params;
 
 layout(rgba8) uniform highp writeonly image2D outputTex;
-layout(binding = 3) uniform Flip_ubo {
+layout(binding = 3, std140) uniform Flip_ubo {
   uint value;
 } flip;
 
