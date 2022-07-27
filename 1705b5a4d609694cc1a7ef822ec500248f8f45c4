@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fcb0084d_fa72a06d",
+        "filename": "src/tint/diagnostic/diagnostic.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-27T13:59:05Z",
+      "side": 1,
+      "message": "If we don\u0027t do this then we just end up removing the success check in the fuzzers completely. If we\u0027re OK with that, it\u0027s fine, otherwise we need to know the severity is \u003e error.",
+      "parentUuid": "88344aa6_b42e3a5c",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 56
+      },
+      "revId": "1705b5a4d609694cc1a7ef822ec500248f8f45c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fae0ba05_c34b072e",
         "filename": "src/tint/transform/module_scope_var_to_entry_point_param.cc",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-27T09:29:29Z",
       "side": 1,
       "message": "I\u0027m not sure about this being lowered to an error (at least for `default`). The transform is fuzzed to make sure it can handle all inputs, and if this is lowered to error, unhandled storage classes aren\u0027t going to trigger a fuzzer failure. We don\u0027t treat `diag::Severity::Error` as a fuzzer failure for transforms, as errors include validation of the input `DataMap`.\n\nPerhaps we should:\n\n* Add a `case ast::StorageClass::kPushConstant:` (would require reordering / squashing CLs) which errors with a message saying push constants are not handled by this transform, and keep the old `default` case to detect bad behavior.\n* Add a comment to the doxygen on this class to explicitly call out that it is unable to handle push constants.\n* In the backends that do not support push constants, prior to running any sanitizer transforms, query the `sem::Module::Extensions()` set for `kChromiumExperimentalPushConstant`, and error-out.",
+      "range": {
+        "startLine": 196,
+        "startChar": 16,
+        "endLine": 199,
+        "endChar": 22
+      },
+      "revId": "1705b5a4d609694cc1a7ef822ec500248f8f45c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdbfc311_deb1c465",
+        "filename": "src/tint/transform/module_scope_var_to_entry_point_param.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-27T13:59:05Z",
+      "side": 1,
+      "message": "I can also leave the `default` as ICE and error in the `case kPushConstant` and then the fuzzer just looks for ICE or Fatal, same as the generator fuzzers",
+      "parentUuid": "fae0ba05_c34b072e",
       "range": {
         "startLine": 196,
         "startChar": 16,
