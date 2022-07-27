@@ -26,6 +26,7 @@ enum class StorageClass {
     kFunction,
     kPrivate,
     kWorkgroup,
+    kPushConstant,
     kUniform,
     kStorage,
     kHandle,
@@ -47,7 +48,8 @@ StorageClass ParseStorageClass(std::string_view str);
 /// @param sc the StorageClass
 /// @see https://gpuweb.github.io/gpuweb/wgsl.html#host-shareable
 inline bool IsHostShareable(StorageClass sc) {
-    return sc == ast::StorageClass::kUniform || sc == ast::StorageClass::kStorage;
+    return sc == ast::StorageClass::kUniform || sc == ast::StorageClass::kStorage ||
+           sc == ast::StorageClass::kPushConstant;
 }
 
 }  // namespace tint::ast
