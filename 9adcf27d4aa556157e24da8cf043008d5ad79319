@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcd7f02e_c76811b9",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-07-27T08:38:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12e0149d_534cfacb",
+      "revId": "9adcf27d4aa556157e24da8cf043008d5ad79319",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30b4a99f_715b2d84",
@@ -65,6 +83,24 @@
       "writtenOn": "2022-07-13T13:22:34Z",
       "side": 1,
       "message": "nit: The logic here is the same as for the render pass, I think it might be possible to fold them as they are both have a sampleBufferAttachment. It might require a template though.",
+      "revId": "9adcf27d4aa556157e24da8cf043008d5ad79319",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81136101_ecd06d5d",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-07-27T08:38:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30b4a99f_715b2d84",
       "revId": "9adcf27d4aa556157e24da8cf043008d5ad79319",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ccad5cb_7a4ef835",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-07-27T08:38:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8768578_2dac158e",
+      "revId": "9adcf27d4aa556157e24da8cf043008d5ad79319",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a19c616_410e266e",
@@ -99,6 +153,24 @@
       "writtenOn": "2022-07-13T13:22:34Z",
       "side": 1,
       "message": "Maybe ASSERT that we support sampling at command boundary here",
+      "revId": "9adcf27d4aa556157e24da8cf043008d5ad79319",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b10c119_98df8fa1",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-07-27T08:38:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a19c616_410e266e",
       "revId": "9adcf27d4aa556157e24da8cf043008d5ad79319",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

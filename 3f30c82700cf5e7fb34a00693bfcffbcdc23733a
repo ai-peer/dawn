@@ -113,6 +113,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4fbcd95_4b3f2152",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-07-27T08:38:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "183ef8bd_097f557f",
+      "range": {
+        "startLine": 758,
+        "startChar": 15,
+        "endLine": 761,
+        "endChar": 0
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b798ed5e_17a5a320",
@@ -136,6 +160,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2765514_8ba6706f",
+        "filename": "src/dawn/native/Commands.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-07-27T08:38:31Z",
+      "side": 1,
+      "message": "Actually not. I change it back to use `TimestampWrite` struct because of adding `beginTimestamp` and `endTimestamp` in BeginXxxPassCmd, we don\u0027t need the timestamp location when recording commands.",
+      "parentUuid": "b798ed5e_17a5a320",
+      "range": {
+        "startLine": 76,
+        "startChar": 16,
+        "endLine": 76,
+        "endChar": 41
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a12e26d6_724a31a7",
@@ -149,6 +197,30 @@
       "writtenOn": "2022-06-27T22:17:51Z",
       "side": 1,
       "message": "\"GPU counters are only available if sampling at least one of the command or stage boundaries is supported.\"",
+      "range": {
+        "startLine": 249,
+        "startChar": 31,
+        "endLine": 250,
+        "endChar": 19
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f5ce73c_42902094",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-07-27T08:38:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a12e26d6_724a31a7",
       "range": {
         "startLine": 249,
         "startChar": 31,
@@ -254,6 +326,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b00e2e0e_7d6d8c56",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-07-27T08:38:31Z",
+      "side": 1,
+      "message": "Correct the above comment, actually concurrent compute pass is supported from macOS 10.14 and iOS 12.0, we can create it by [MTLCommandBuffer computeCommandEncoderWithDispatchType:MTLDispatchTypeConcurrent](https://developer.apple.com/documentation/metal/mtlcommandbuffer/2966541-computecommandencoderwithdispatc?language\u003dobjc)，and it can be created from compute pass descriptor from macOS 11.0+.\n\nMetal document says if multiple commands encoded by the MTLComputeCommandEncoder access the same resources, you must synchronize access to those resources. As Corentin said, we need to insert memory barriers manually, it cannot be done implicitly.",
+      "parentUuid": "40a38bbc_200fc2a6",
+      "range": {
+        "startLine": 58,
+        "startChar": 30,
+        "endLine": 58,
+        "endChar": 51
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2619b8b_55b73417",
@@ -291,6 +387,30 @@
       "side": 1,
       "message": "Good question, but I didn\u0027t found any explaination about this in Apple document. I need to try it.",
       "parentUuid": "d2619b8b_55b73417",
+      "range": {
+        "startLine": 239,
+        "startChar": 16,
+        "endLine": 240,
+        "endChar": 80
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d54ee7b0_16cbbc11",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-07-27T08:38:31Z",
+      "side": 1,
+      "message": "We also could got timestamps at the startOfFragmentSampleIndex and endOfFragmentSampleIndex if there is no fragment shader in render pass, even no render pipeline. On compute pass, it seems the compute shader is required, otherwise the counter sampling does not work, but the document just says store the GPU counters at the end of compute pass, not compute pass\u0027s compute stage.\n\nI think the GPU counters of fragement stage may also contain others post-fragment processing, the compute stage is ended when the compute shader is computed.  But I\u0027m not sure about that, I\u0027ve raised this question to Apple Feedback Assistant.",
+      "parentUuid": "804821ad_1657c02f",
       "range": {
         "startLine": 239,
         "startChar": 16,
@@ -348,6 +468,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f851ea9_a73bdef0",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-07-27T08:38:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1c958b5_58c39a35",
+      "range": {
+        "startLine": 244,
+        "startChar": 26,
+        "endLine": 244,
+        "endChar": 40
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d8ba2d4_91361c63",
@@ -379,6 +523,24 @@
       "side": 1,
       "message": "we should put that behind a Toggle so we can force using the path in tests",
       "parentUuid": "5d8ba2d4_91361c63",
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "122862d6_0f023691",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 952,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-07-27T08:38:31Z",
+      "side": 1,
+      "message": "Explained below that both of them cannot be supported at the same time.",
+      "parentUuid": "5115d79d_072e4857",
       "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -436,6 +598,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04f42264_21abaef7",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-07-27T08:38:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "977bb4b0_ef2c34dd",
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2403662_7aacf754",
@@ -473,6 +653,30 @@
       "side": 1,
       "message": "Sure. We have reported this issue to Intel driver team, and it has been fixed on latest driver 30.0.11.1994. We don\u0027t need to workaround it, I will add a skip condition for driver version to make the tests could run on the fixed driver version.",
       "parentUuid": "b2403662_7aacf754",
+      "range": {
+        "startLine": 548,
+        "startChar": 27,
+        "endLine": 551,
+        "endChar": 48
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "406f807a_9dc857ee",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-07-27T08:38:31Z",
+      "side": 1,
+      "message": "I found we only could skip tests on D3D12 backend with driver version, Vulkan still cannot. I left it as TODO and implement it later.",
+      "parentUuid": "861b7f37_cba7f4de",
       "range": {
         "startLine": 548,
         "startChar": 27,
