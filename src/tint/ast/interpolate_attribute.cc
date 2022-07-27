@@ -22,6 +22,7 @@
 
 #include "src/tint/ast/interpolate_attribute.h"
 
+#include <algorithm>
 #include <string>
 
 #include "src/tint/program_builder.h"
@@ -53,14 +54,16 @@ const InterpolateAttribute* InterpolateAttribute::Clone(CloneContext* ctx) const
 /// @param str the string to parse
 /// @returns the parsed enum, or InterpolationType::kUndefined if the string could not be parsed.
 InterpolationType ParseInterpolationType(std::string_view str) {
-    if (str == "flat") {
-        return InterpolationType::kFlat;
-    }
-    if (str == "linear") {
-        return InterpolationType::kLinear;
-    }
-    if (str == "perspective") {
-        return InterpolationType::kPerspective;
+    uint64_t u64 = 0u;
+    memcpy(&u64, str.data(), std::min(str.size(), sizeof(u64)));
+    switch (((u64 * 4) % 83591) % 3) {
+        case 0:
+            return (str == "perspective") ? InterpolationType::kPerspective
+                                          : InterpolationType::kUndefined;
+        case 1:
+            return (u64 == 1952541798) ? InterpolationType::kFlat : InterpolationType::kUndefined;
+        case 2:
+            return (str == "linear") ? InterpolationType::kLinear : InterpolationType::kUndefined;
     }
     return InterpolationType::kUndefined;
 }
@@ -84,14 +87,18 @@ std::ostream& operator<<(std::ostream& out, InterpolationType value) {
 /// @returns the parsed enum, or InterpolationSampling::kUndefined if the string could not be
 /// parsed.
 InterpolationSampling ParseInterpolationSampling(std::string_view str) {
-    if (str == "center") {
-        return InterpolationSampling::kCenter;
-    }
-    if (str == "centroid") {
-        return InterpolationSampling::kCentroid;
-    }
-    if (str == "sample") {
-        return InterpolationSampling::kSample;
+    uint64_t u64 = 0u;
+    memcpy(&u64, str.data(), std::min(str.size(), sizeof(u64)));
+    switch (((u64 * 4) % 83591) % 3) {
+        case 0:
+            return (str == "sample") ? InterpolationSampling::kSample
+                                     : InterpolationSampling::kUndefined;
+        case 1:
+            return (str == "center") ? InterpolationSampling::kCenter
+                                     : InterpolationSampling::kUndefined;
+        case 2:
+            return (str == "centroid") ? InterpolationSampling::kCentroid
+                                       : InterpolationSampling::kUndefined;
     }
     return InterpolationSampling::kUndefined;
 }

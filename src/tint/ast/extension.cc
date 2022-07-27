@@ -20,6 +20,9 @@
 // Do not modify this file directly
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <algorithm>
+#include <cstring>
+
 #include "src/tint/ast/extension.h"
 
 namespace tint::ast {
@@ -28,17 +31,41 @@ namespace tint::ast {
 /// @param str the string to parse
 /// @returns the parsed enum, or Extension::kUndefined if the string could not be parsed.
 Extension ParseExtension(std::string_view str) {
-    if (str == "chromium_disable_uniformity_analysis") {
-        return Extension::kChromiumDisableUniformityAnalysis;
-    }
-    if (str == "chromium_experimental_dp4a") {
-        return Extension::kChromiumExperimentalDp4A;
-    }
-    if (str == "chromium_experimental_push_constant") {
-        return Extension::kChromiumExperimentalPushConstant;
-    }
-    if (str == "f16") {
-        return Extension::kF16;
+    uint64_t u64 = 0u;
+    memcpy(&u64, str.data(), std::min(str.size(), sizeof(u64)));
+    switch (((u64 * 2) % 83591) % 2) {
+        case 0:
+            return (u64 == 3551590) ? Extension::kF16 : Extension::kUndefined;
+        case 1:
+            if (u64 == 0x6d75696d6f726863) {
+                str = str.substr(8);  // Skip the 8 bytes of the processed u64
+                u64 = 0;              // Clear the u64 for the memcpy
+                memcpy(&u64, str.data(), std::min(str.size(), sizeof(u64)));
+                switch (((u64 * 3) % 83591) % 2) {
+                    case 0:
+                        return (str == "_disable_uniformity_analysis")
+                                   ? Extension::kChromiumDisableUniformityAnalysis
+                                   : Extension::kUndefined;
+                    case 1:
+                        if (u64 == 0x6d6972657078655f) {
+                            str = str.substr(8);  // Skip the 8 bytes of the processed u64
+                            u64 = 0;              // Clear the u64 for the memcpy
+                            memcpy(&u64, str.data(), std::min(str.size(), sizeof(u64)));
+                            switch (((u64 * 1) % 83591) % 2) {
+                                case 0:
+                                    return (str == "ental_dp4a")
+                                               ? Extension::kChromiumExperimentalDp4A
+                                               : Extension::kUndefined;
+                                case 1:
+                                    return (str == "ental_push_constant")
+                                               ? Extension::kChromiumExperimentalPushConstant
+                                               : Extension::kUndefined;
+                            }
+                        }
+                        break;
+                }
+            }
+            break;
     }
     return Extension::kUndefined;
 }

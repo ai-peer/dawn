@@ -50,7 +50,7 @@ static constexpr Case kValidCases[] = {
     {"workgroup", AddressSpace::kWorkgroup},
 };
 
-static constexpr Case kInvalidCases[] = {
+static constexpr Case kUndefinedCases[] = {
     {"fccnctin", AddressSpace::kUndefined},        {"ucti3", AddressSpace::kUndefined},
     {"functVon", AddressSpace::kUndefined},        {"priv1te", AddressSpace::kUndefined},
     {"pqiJate", AddressSpace::kUndefined},         {"privat7ll", AddressSpace::kUndefined},
@@ -71,7 +71,7 @@ TEST_P(AddressSpaceParseTest, Parse) {
 }
 
 INSTANTIATE_TEST_SUITE_P(ValidCases, AddressSpaceParseTest, testing::ValuesIn(kValidCases));
-INSTANTIATE_TEST_SUITE_P(InvalidCases, AddressSpaceParseTest, testing::ValuesIn(kInvalidCases));
+INSTANTIATE_TEST_SUITE_P(InvalidCases, AddressSpaceParseTest, testing::ValuesIn(kUndefinedCases));
 
 using AddressSpacePrintTest = testing::TestWithParam<Case>;
 

@@ -48,7 +48,7 @@ static constexpr Case kValidCases[] = {
     {"f16", Extension::kF16},
 };
 
-static constexpr Case kInvalidCases[] = {
+static constexpr Case kUndefinedCases[] = {
     {"chromium_disableuniformiccy_analysis", Extension::kUndefined},
     {"chromil3_disable_unifority_analss", Extension::kUndefined},
     {"chromium_disable_Vniformity_analysis", Extension::kUndefined},
@@ -72,7 +72,7 @@ TEST_P(ExtensionParseTest, Parse) {
 }
 
 INSTANTIATE_TEST_SUITE_P(ValidCases, ExtensionParseTest, testing::ValuesIn(kValidCases));
-INSTANTIATE_TEST_SUITE_P(InvalidCases, ExtensionParseTest, testing::ValuesIn(kInvalidCases));
+INSTANTIATE_TEST_SUITE_P(InvalidCases, ExtensionParseTest, testing::ValuesIn(kUndefinedCases));
 
 using ExtensionPrintTest = testing::TestWithParam<Case>;
 

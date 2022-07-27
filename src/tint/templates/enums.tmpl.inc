@@ -49,13 +49,38 @@ constexpr const char* k{{$enum}}Strings[] = {
 /// @param str the string to parse
 /// @returns the parsed enum, or {{$enum}}::kUndefined if the string could not be parsed.
 {{$enum}} Parse{{$enum}}(std::string_view str) {
-{{-   range $entry := $.PublicEntries }}
-    if (str == "{{$entry.Name}}") {
-        return {{template "EnumCase" $entry}};
-    }
-{{-   end }}
+{{- $tree := MinimalPerfectHash $.PublicNameSet }}
+    uint64_t u64 = 0u;
+{{ Eval "HashTree" "enum" $enum "tree" $tree }}
     return {{$enum}}::kUndefined;
 }
+{{- end -}}
+
+
+{{- /* ------------------------------------------------------------------ */ -}}
+{{-                          define "HashTree"                               -}}
+{{- /* ------------------------------------------------------------------ */ -}}
+{{- $tree    := $.tree   -}}
+{{- $enum    := $.enum   -}}
+{{/* indent */}}    {{/*    */ -}}
+    memcpy(&u64, str.data(), std::min(str.size(), sizeof(u64)));
+    switch (((u64 * {{$tree.Multiplier}}) % {{$tree.Prime}}) % {{len $tree.Bins}}) {
+{{-   range $i, $bin := $tree.Bins }}
+        case {{$i}}:
+{{-     if $bin.Children }}
+            if (u64 == 0x{{printf "%.8x" $bin.U64}}) {
+                str = str.substr(8);  // Skip the 8 bytes of the processed u64
+                u64 = 0;              // Clear the u64 for the memcpy
+{{              Eval "HashTree" "enum" $enum "tree" $bin.Children }}
+            }
+            break;
+{{-     else if le (len $bin.Remaining) 4 }}
+            return (u64 == {{$bin.U64}}) ? {{$enum}}::k{{PascalCase $bin.String}} : {{$enum}}::kUndefined;
+{{-     else }}
+            return (str == "{{$bin.Remaining}}") ? {{$enum}}::k{{PascalCase $bin.String}} : {{$enum}}::kUndefined;
+{{-     end }}
+{{-   end }}
+    }
 {{- end -}}
 
 
@@ -102,7 +127,7 @@ static constexpr Case kValidCases[] = {
 {{-   end }}
 };
 
-static constexpr Case kInvalidCases[] = {
+static constexpr Case kUndefinedCases[] = {
 {{-   $exclude := $.NameSet -}}
 {{-   range $entry := $.PublicEntries }}
     {"{{Scramble $entry.Name $exclude}}", {{$enum}}::kUndefined},
@@ -120,7 +145,7 @@ TEST_P({{$enum}}ParseTest, Parse) {
 }
 
 INSTANTIATE_TEST_SUITE_P(ValidCases, {{$enum}}ParseTest, testing::ValuesIn(kValidCases));
-INSTANTIATE_TEST_SUITE_P(InvalidCases, {{$enum}}ParseTest, testing::ValuesIn(kInvalidCases));
+INSTANTIATE_TEST_SUITE_P(InvalidCases, {{$enum}}ParseTest, testing::ValuesIn(kUndefinedCases));
 
 using {{$enum}}PrintTest = testing::TestWithParam<Case>;
 

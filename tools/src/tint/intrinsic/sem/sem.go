@@ -100,6 +100,15 @@ func (e *Enum) NameSet() container.Set[string] {
 	return out
 }
 
+// NameSet returns a set of the enum entry names which are not annotated with @internal
+func (e *Enum) PublicNameSet() container.Set[string] {
+	out := container.NewSet[string]()
+	for _, entry := range e.PublicEntries() {
+		out.Add(entry.Name)
+	}
+	return out
+}
+
 // EnumEntry is an entry in an enumerator
 type EnumEntry struct {
 	Enum       *Enum

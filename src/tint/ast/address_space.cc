@@ -20,6 +20,9 @@
 // Do not modify this file directly
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <algorithm>
+#include <cstring>
+
 #include "src/tint/ast/address_space.h"
 
 namespace tint::ast {
@@ -28,23 +31,22 @@ namespace tint::ast {
 /// @param str the string to parse
 /// @returns the parsed enum, or AddressSpace::kUndefined if the string could not be parsed.
 AddressSpace ParseAddressSpace(std::string_view str) {
-    if (str == "function") {
-        return AddressSpace::kFunction;
-    }
-    if (str == "private") {
-        return AddressSpace::kPrivate;
-    }
-    if (str == "push_constant") {
-        return AddressSpace::kPushConstant;
-    }
-    if (str == "storage") {
-        return AddressSpace::kStorage;
-    }
-    if (str == "uniform") {
-        return AddressSpace::kUniform;
-    }
-    if (str == "workgroup") {
-        return AddressSpace::kWorkgroup;
+    uint64_t u64 = 0u;
+    memcpy(&u64, str.data(), std::min(str.size(), sizeof(u64)));
+    switch (((u64 * 101) % 83591) % 6) {
+        case 0:
+            return (str == "storage") ? AddressSpace::kStorage : AddressSpace::kUndefined;
+        case 1:
+            return (str == "private") ? AddressSpace::kPrivate : AddressSpace::kUndefined;
+        case 2:
+            return (str == "workgroup") ? AddressSpace::kWorkgroup : AddressSpace::kUndefined;
+        case 3:
+            return (str == "push_constant") ? AddressSpace::kPushConstant
+                                            : AddressSpace::kUndefined;
+        case 4:
+            return (str == "uniform") ? AddressSpace::kUniform : AddressSpace::kUndefined;
+        case 5:
+            return (str == "function") ? AddressSpace::kFunction : AddressSpace::kUndefined;
     }
     return AddressSpace::kUndefined;
 }

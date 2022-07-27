@@ -20,6 +20,9 @@
 // Do not modify this file directly
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <algorithm>
+#include <cstring>
+
 #include "src/tint/ast/access.h"
 
 namespace tint::ast {
@@ -28,14 +31,15 @@ namespace tint::ast {
 /// @param str the string to parse
 /// @returns the parsed enum, or Access::kUndefined if the string could not be parsed.
 Access ParseAccess(std::string_view str) {
-    if (str == "read") {
-        return Access::kRead;
-    }
-    if (str == "read_write") {
-        return Access::kReadWrite;
-    }
-    if (str == "write") {
-        return Access::kWrite;
+    uint64_t u64 = 0u;
+    memcpy(&u64, str.data(), std::min(str.size(), sizeof(u64)));
+    switch (((u64 * 3) % 83591) % 3) {
+        case 0:
+            return (str == "write") ? Access::kWrite : Access::kUndefined;
+        case 1:
+            return (str == "read_write") ? Access::kReadWrite : Access::kUndefined;
+        case 2:
+            return (u64 == 1684104562) ? Access::kRead : Access::kUndefined;
     }
     return Access::kUndefined;
 }

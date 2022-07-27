@@ -52,7 +52,7 @@ static constexpr Case kValidCases[] = {
     {"rgba8uint", TexelFormat::kRgba8Uint},     {"rgba8unorm", TexelFormat::kRgba8Unorm},
 };
 
-static constexpr Case kInvalidCases[] = {
+static constexpr Case kUndefinedCases[] = {
     {"rcc2flot", TexelFormat::kUndefined},       {"3flo3", TexelFormat::kUndefined},
     {"r32flVat", TexelFormat::kUndefined},       {"r32s1nt", TexelFormat::kUndefined},
     {"rq2Jint", TexelFormat::kUndefined},        {"r32sin7ll", TexelFormat::kUndefined},
@@ -88,7 +88,7 @@ TEST_P(TexelFormatParseTest, Parse) {
 }
 
 INSTANTIATE_TEST_SUITE_P(ValidCases, TexelFormatParseTest, testing::ValuesIn(kValidCases));
-INSTANTIATE_TEST_SUITE_P(InvalidCases, TexelFormatParseTest, testing::ValuesIn(kInvalidCases));
+INSTANTIATE_TEST_SUITE_P(InvalidCases, TexelFormatParseTest, testing::ValuesIn(kUndefinedCases));
 
 using TexelFormatPrintTest = testing::TestWithParam<Case>;
 
