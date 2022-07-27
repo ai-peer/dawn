@@ -91,6 +91,9 @@ struct Result {
     /// True if generation was successful.
     bool success = false;
 
+    /// True if the generator encountered an error if ICE or greater severity
+    bool has_ice_error = false;
+
     /// The errors generated during code generation, if any.
     std::string error;
 

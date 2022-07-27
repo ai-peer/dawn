@@ -221,7 +221,7 @@ int CommonFuzzer::Run(const uint8_t* data, size_t size) {
 #if TINT_BUILD_WGSL_WRITER
             auto result = writer::wgsl::Generate(&program, options_wgsl_);
             generated_wgsl_ = std::move(result.wgsl);
-            if (!result.success) {
+            if (!result.success && result.has_ice_erorr) {
                 VALIDITY_ERROR(program.Diagnostics(),
                                "WGSL writer errored on validated input:\n" + result.error);
             }
@@ -249,7 +249,7 @@ int CommonFuzzer::Run(const uint8_t* data, size_t size) {
 #if TINT_BUILD_HLSL_WRITER
             auto result = writer::hlsl::Generate(&program, options_hlsl_);
             generated_hlsl_ = std::move(result.hlsl);
-            if (!result.success) {
+            if (!result.success && result.has_ice_erorr) {
                 VALIDITY_ERROR(program.Diagnostics(),
                                "HLSL writer errored on validated input:\n" + result.error);
             }
@@ -268,7 +268,7 @@ int CommonFuzzer::Run(const uint8_t* data, size_t size) {
 
             auto result = writer::msl::Generate(input_program, options_msl_);
             generated_msl_ = std::move(result.msl);
-            if (!result.success) {
+            if (!result.success && result.has_ice_erorr) {
                 VALIDITY_ERROR(input_program->Diagnostics(),
                                "MSL writer errored on validated input:\n" + result.error);
             }

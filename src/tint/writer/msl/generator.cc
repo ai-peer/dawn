@@ -51,6 +51,7 @@ Result Generate(const Program* program, const Options& options) {
     auto impl = std::make_unique<GeneratorImpl>(&sanitized_result.program);
     result.success = impl->Generate();
     result.error = impl->error();
+    result.has_ice_error = impl->Diagnostics().contains_ice();
     result.msl = impl->result();
     result.has_invariant_attribute = impl->HasInvariant();
     result.workgroup_allocations = impl->DynamicWorkgroupAllocations();

@@ -28,6 +28,7 @@ Result Generate(const Program* program, const Options&) {
     auto impl = std::make_unique<GeneratorImpl>(program);
     result.success = impl->Generate();
     result.error = impl->error();
+    result.has_ice_error = impl->Diagnostics().contains_ice();
     result.wgsl = impl->result();
 
     return result;

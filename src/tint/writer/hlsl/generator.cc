@@ -46,6 +46,7 @@ Result Generate(const Program* program, const Options& options) {
     auto impl = std::make_unique<GeneratorImpl>(&sanitized_result.program);
     result.success = impl->Generate();
     result.error = impl->error();
+    result.has_ice_error = impl->Diagnostics().contains_ice();
     result.hlsl = impl->result();
 
     // Collect the list of entry points in the sanitized program.

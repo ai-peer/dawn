@@ -123,6 +123,9 @@ class List {
         if (diag.severity >= Severity::Error) {
             error_count_++;
         }
+        if (diag.severity >= Severity::InternalCompilerError) {
+            ice_count_++;
+        }
         entries_.emplace_back(std::move(diag));
     }
 
@@ -221,6 +224,9 @@ class List {
     /// @returns true iff the diagnostic list contains errors diagnostics (or of
     /// higher severity).
     bool contains_errors() const { return error_count_ > 0; }
+    /// @returns true iff the diagnostic list contains internal compiler error diagnostics (or of
+    /// higher severity).
+    bool contains_ice() const { return ice_count_ > 0; }
     /// @returns the number of error diagnostics (or of higher severity).
     size_t error_count() const { return error_count_; }
     /// @returns the number of entries in the list.
@@ -236,6 +242,7 @@ class List {
   private:
     std::vector<Diagnostic> entries_;
     size_t error_count_ = 0;
+    size_t ice_count_ = 0;
 };
 
 }  // namespace tint::diag
