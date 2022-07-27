@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47602f92_138bfe6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-27T05:12:25Z",
+      "side": 1,
+      "message": "The LUCI bot seems to be broken currently. The patch is ready for review, please take a look, thanks",
+      "revId": "fc804ef3873aded434f19e5ad66ac2469e0a46d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
