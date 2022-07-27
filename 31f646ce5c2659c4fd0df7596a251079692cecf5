@@ -171,6 +171,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4983def6_67889d94",
+        "filename": "src/tint/resolver/intrinsic_table_test.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1256,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-27T13:15:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "886a6d96_64658a7b",
+      "range": {
+        "startLine": 1256,
+        "startChar": 40,
+        "endLine": 1256,
+        "endChar": 53
+      },
+      "revId": "31f646ce5c2659c4fd0df7596a251079692cecf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25957f53_7ba925c6",
