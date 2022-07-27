@@ -414,6 +414,9 @@ class GeneratorImpl : public TextGenerator {
                          ast::StorageClass storage_class,
                          ast::Access access,
                          const std::string& name);
+    /// Emits padding members for a struct or interface block.
+    /// @param bytes the number of bytes to pad (must be a multiple of 4)
+    void EmitPadding(uint32_t bytes);
     /// Handles generating a structure declaration
     /// @param buffer the text buffer that the type declaration will be written to
     /// @param ty the struct to generate
@@ -428,9 +431,8 @@ class GeneratorImpl : public TextGenerator {
     /// Handles generating the members of a structure
     /// @param buffer the text buffer that the struct members will be written to
     /// @param ty the struct to generate
-    /// @param emit_offsets whether offsets should be emitted as offset=
     /// @returns true if the struct members are emitted
-    bool EmitStructMembers(TextBuffer* buffer, const sem::Struct* ty, bool emit_offsets);
+    bool EmitStructMembers(TextBuffer* buffer, const sem::Struct* ty);
     /// Handles a unary op expression
     /// @param out the output of the expression stream
     /// @param expr the expression to emit
