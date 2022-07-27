@@ -16,6 +16,23 @@
       "message": "PTAL, tested with:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/3789763\nhttps://ci.chromium.org/ui/p/chromium-m103/builders/try/dawn-linux-x64-deps-rel/20/overview",
       "revId": "8b25e4f1bd48380ea717bc6b9cc1664134fc1b9f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d56e1d7f_8b8ca048",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-27T18:00:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8b25e4f1bd48380ea717bc6b9cc1664134fc1b9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
