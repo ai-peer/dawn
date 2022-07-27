@@ -385,7 +385,7 @@ struct UBO {
   vec4 coord;
 };
 
-layout(binding = 0) uniform UBO_1 {
+layout(binding = 0, std140) uniform UBO_1 {
   vec4 coord;
 } ubo;
 
@@ -431,7 +431,7 @@ struct Uniforms {
   vec4 coord;
 };
 
-layout(binding = 0) uniform Uniforms_1 {
+layout(binding = 0, std140) uniform Uniforms_1 {
   vec4 coord;
 } uniforms;
 
@@ -673,7 +673,7 @@ struct S {
   float x;
 };
 
-layout(binding = 0) uniform S_1 {
+layout(binding = 0, std140) uniform S_1 {
   float x;
 } coord;
 
