@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fbf77c6_e7fe6c75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-07-27T07:17:21Z",
+      "side": 1,
+      "message": "Thanks for your review, Austin. I had a little different opinion but followed your suggestions and let\u0027s move forward. ",
+      "revId": "40d4f632bdb9dba41ce084e41947de81782cc84b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
