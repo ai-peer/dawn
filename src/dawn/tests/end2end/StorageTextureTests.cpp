@@ -696,6 +696,9 @@ TEST_P(StorageTextureTests, WriteonlyStorageTextureInFragmentShader) {
     // NVidia OpenGLES drivers.
     DAWN_SUPPRESS_TEST_IF(IsNvidia() && IsLinux() && IsOpenGLES());
 
+    // TODO(crbug.com/dawn/1503): Investigate the regression in ANGLE that causes the test failure.
+    DAWN_SUPPRESS_TEST_IF(IsANGLE());
+
     for (wgpu::TextureFormat format : utils::kAllTextureFormats) {
         if (!utils::TextureFormatSupportsStorageTexture(format)) {
             continue;
