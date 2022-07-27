@@ -1,6 +1,24 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04caf09e_90048466",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-27T01:07:09Z",
+      "side": 1,
+      "message": "Is this still in progress or should we close?",
+      "revId": "93b8c72ddcb6197cc7bee1d5058ed9ba9cf5ba05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "0a585f94_6f0eaea6",
         "filename": "scripts/dawn_test.gni",
@@ -14,10 +32,10 @@
       "side": 1,
       "message": "This template is never used.",
       "revId": "93b8c72ddcb6197cc7bee1d5058ed9ba9cf5ba05",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "2eb6ab9a_ea513c02",
         "filename": "scripts/dawn_test_for_fuchsia.gni",
@@ -31,10 +49,10 @@
       "side": 1,
       "message": "This isn\u0027t used, maybe you meant to have dawn_unittests use this?",
       "revId": "93b8c72ddcb6197cc7bee1d5058ed9ba9cf5ba05",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "290335ae_4a8eb754",
         "filename": "src/common/BUILD.gn",
@@ -48,10 +66,10 @@
       "side": 1,
       "message": "Why is this needed?",
       "revId": "93b8c72ddcb6197cc7bee1d5058ed9ba9cf5ba05",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "f49dff37_51c8edea",
         "filename": "src/common/BUILD.gn",
@@ -65,10 +83,10 @@
       "side": 1,
       "message": "Can we fix them and add them to the list of cflags_cc unconditionally instead? Could be in another CL.",
       "revId": "93b8c72ddcb6197cc7bee1d5058ed9ba9cf5ba05",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "633a16a9_9d218605",
         "filename": "third_party/BUILD.gn",
@@ -82,8 +100,7 @@
       "side": 1,
       "message": "Why is this needed? It\u0027s the reason why the build fails on Mac.",
       "revId": "93b8c72ddcb6197cc7bee1d5058ed9ba9cf5ba05",
-      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd",
-      "unresolved": true
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
