@@ -37,7 +37,11 @@ struct Simple {
   float member;
 };
 
+<<<<<<< HEAD
 layout(binding = 0) uniform Simple_ubo {
+=======
+layout(binding = 0, std140) uniform Simple_1 {
+>>>>>>> e023aac9d (GLSL: correct memory alignment for storage and uniform buffers.)
   float member;
 } simple;
 
