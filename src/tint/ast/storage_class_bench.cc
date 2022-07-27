@@ -66,6 +66,13 @@ void StorageClassParser(::benchmark::State& state) {
         "trooe",
         "zzrage",
         "siioppa1",
+        "puXXh_constant",
+        "pusII9_nn55nstant",
+        "YusHH_coaastSSrnt",
+        "push_constant",
+        "pushonkkHan",
+        "jush_consgRt",
+        "puh_cobsant",
     };
     for (auto _ : state) {
         for (auto& str : kStrings) {
