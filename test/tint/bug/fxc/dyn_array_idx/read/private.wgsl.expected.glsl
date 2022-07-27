@@ -1,6 +1,6 @@
 #version 310 es
 
-layout(binding = 0) uniform UBO_ubo {
+layout(binding = 0, std140) uniform UBO_ubo {
   int dynamic_idx;
 } ubo;
 

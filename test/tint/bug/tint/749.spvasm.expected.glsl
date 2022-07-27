@@ -8,7 +8,7 @@ struct QuicksortObject {
 
 QuicksortObject obj = QuicksortObject(int[10](0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 vec4 tint_symbol = vec4(0.0f, 0.0f, 0.0f, 0.0f);
-layout(binding = 0) uniform buf0_ubo {
+layout(binding = 0, std140) uniform buf0_ubo {
   vec2 resolution;
 } x_188;
 

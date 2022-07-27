@@ -1,6 +1,6 @@
 #version 310 es
 
-layout(binding = 0) uniform Constants_ubo {
+layout(binding = 0, std140) uniform Constants_ubo {
   uint zero;
 } constants;
 

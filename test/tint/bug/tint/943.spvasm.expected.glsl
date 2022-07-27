@@ -4,11 +4,17 @@ note: reading from module-scope private variable 'dimInner_1' may result in a no
 #version 310 es
 
 int dimAOuter_1 = 0;
-layout(binding = 3) uniform Uniforms_ubo {
+layout(binding = 3, std140) uniform Uniforms_ubo {
   float NAN;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
   ivec3 aShape;
+  uint pad_3;
   ivec3 bShape;
+  uint pad_4;
   ivec3 outShape;
+  uint pad_5;
   ivec2 outShapeStrides;
 } x_48;
 
