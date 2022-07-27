@@ -280,11 +280,17 @@ precision mediump float;
 
 struct Data {
   int a;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
   mat2x3 b;
 };
 
 layout(binding = 0, std430) buffer Data_1 {
   int a;
+  uint pad_3;
+  uint pad_4;
+  uint pad_5;
   mat2x3 b;
 } data;
 void tint_symbol() {
@@ -326,11 +332,17 @@ precision mediump float;
 
 struct Data {
   float z;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
   mat4x3 a;
 };
 
 layout(binding = 0, std430) buffer Data_1 {
   float z;
+  uint pad_3;
+  uint pad_4;
+  uint pad_5;
   mat4x3 a;
 } data;
 void tint_symbol() {
@@ -522,7 +534,9 @@ precision mediump float;
 
 struct Inner {
   vec3 a;
+  uint pad;
   vec3 b;
+  uint pad_1;
 };
 
 struct Data {
@@ -580,7 +594,9 @@ precision mediump float;
 
 struct Inner {
   vec3 a;
+  uint pad;
   vec3 b;
+  uint pad_1;
 };
 
 struct Data {
@@ -639,7 +655,9 @@ precision mediump float;
 
 struct Inner {
   vec3 a;
+  uint pad;
   vec3 b;
+  uint pad_1;
 };
 
 struct Data {
@@ -697,7 +715,9 @@ precision mediump float;
 
 struct Inner {
   vec3 a;
+  uint pad;
   vec3 b;
+  uint pad_1;
 };
 
 struct Data {
@@ -754,7 +774,9 @@ precision mediump float;
 
 struct Inner {
   vec3 a;
+  uint pad;
   vec3 b;
+  uint pad_1;
 };
 
 struct Data {
@@ -812,7 +834,9 @@ precision mediump float;
 
 struct Inner {
   ivec3 a;
+  uint pad;
   vec3 b;
+  uint pad_1;
 };
 
 struct Data {
