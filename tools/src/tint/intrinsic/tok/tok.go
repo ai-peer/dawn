@@ -85,15 +85,13 @@ type Location struct {
 func (l Location) Format(w fmt.State, verb rune) {
 	if w.Flag('+') {
 		if l.Filepath != "" {
-			fmt.Fprintf(w, "%v:%v:%v[%v]", l.Filepath, l.Line, l.Column, l.Rune)
+			fmt.Fprintf(w, "%v:[%v]", l.Filepath, l.Rune)
 		} else {
-			fmt.Fprintf(w, "%v:%v[%v]", l.Line, l.Column, l.Rune)
+			fmt.Fprintf(w, "[%v]", l.Rune)
 		}
 	} else {
 		if l.Filepath != "" {
-			fmt.Fprintf(w, "%v:%v:%v", l.Filepath, l.Line, l.Column)
-		} else {
-			fmt.Fprintf(w, "%v:%v", l.Line, l.Column)
+			fmt.Fprintf(w, "%v", l.Filepath)
 		}
 	}
 }
