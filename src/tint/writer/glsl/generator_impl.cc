@@ -58,6 +58,7 @@
 #include "src/tint/transform/fold_trivial_single_use_lets.h"
 #include "src/tint/transform/loop_to_for_loop.h"
 #include "src/tint/transform/manager.h"
+#include "src/tint/transform/pad_structs.h"
 #include "src/tint/transform/promote_initializers_to_let.h"
 #include "src/tint/transform/promote_side_effects_to_decl.h"
 #include "src/tint/transform/remove_phonies.h"
@@ -220,6 +221,7 @@ SanitizedResult Sanitize(const Program* in,
     manager.Add<transform::ExpandCompoundAssignment>();
     manager.Add<transform::PromoteSideEffectsToDecl>();
     manager.Add<transform::Std140>();  // Must come after PromoteSideEffectsToDecl
+    manager.Add<transform::PadStructs>();
     manager.Add<transform::UnwindDiscardFunctions>();
     manager.Add<transform::SimplifyPointers>();
 
