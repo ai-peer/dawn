@@ -26,6 +26,7 @@
 #include "src/tint/sem/module.h"
 #include "src/tint/sem/statement.h"
 #include "src/tint/sem/variable.h"
+#include "src/tint/utils/string.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::transform::ModuleScopeVarToEntryPointParam);
 
@@ -192,8 +193,10 @@ struct ModuleScopeVarToEntryPointParam::State {
                 break;
             }
             default: {
-                TINT_ICE(Transform, ctx.dst->Diagnostics())
-                    << "unhandled module-scope storage class (" << sc << ")";
+                ctx.dst->Diagnostics().add_error(
+                    diag::System::Transform,
+                    "unhandled module-scope storage class (" + utils::ToString(sc) + ")");
+                break;
             }
         }
     }
@@ -219,9 +222,11 @@ struct ModuleScopeVarToEntryPointParam::State {
             case ast::StorageClass::kHandle:
             case ast::StorageClass::kWorkgroup:
                 break;
-            default:
-                TINT_ICE(Transform, ctx.dst->Diagnostics())
-                    << "unhandled module-scope storage class (" << sc << ")";
+            default: {
+                ctx.dst->Diagnostics().add_error(
+                    diag::System::Transform,
+                    "unhandled module-scope storage class (" + utils::ToString(sc) + ")");
+            }
         }
 
         // Use a pointer for non-handle types.

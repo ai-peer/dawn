@@ -46,6 +46,9 @@ struct Result {
     /// True if generation was successful.
     bool success = false;
 
+    /// True if generator has error of ICE severity or greater
+    bool has_ice_error = false;
+
     /// The errors generated during code generation, if any.
     std::string error;
 

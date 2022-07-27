@@ -70,6 +70,7 @@
 #include "src/tint/utils/defer.h"
 #include "src/tint/utils/map.h"
 #include "src/tint/utils/scoped_assignment.h"
+#include "src/tint/utils/string.h"
 #include "src/tint/writer/append_vector.h"
 #include "src/tint/writer/float_to_string.h"
 #include "src/tint/writer/generate_external_texture_bindings.h"
@@ -1932,10 +1933,12 @@ bool GeneratorImpl::EmitGlobalVariable(const ast::Variable* global) {
                 case ast::StorageClass::kIn:
                 case ast::StorageClass::kOut:
                     return EmitIOVariable(sem);
-                default:
-                    TINT_ICE(Writer, diagnostics_)
-                        << "unhandled storage class " << sem->StorageClass();
+                default: {
+                    diagnostics_.add_error(
+                        diag::System::Writer,
+                        "unhandled storage class " + utils::ToString(sem->StorageClass()));
                     return false;
+                }
             }
         },
         [&](const ast::Let* let) { return EmitProgramConstVariable(let); },
@@ -1944,8 +1947,9 @@ bool GeneratorImpl::EmitGlobalVariable(const ast::Variable* global) {
             return true;  // Constants are embedded at their use
         },
         [&](Default) {
-            TINT_ICE(Writer, diagnostics_)
-                << "unhandled global variable type " << global->TypeInfo().name;
+            diagnostics_.add_error(
+                diag::System::Writer,
+                "unhandled global variable type " + utils::ToString(global->TypeInfo().name));
             return false;
         });
 }
