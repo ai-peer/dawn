@@ -603,7 +603,8 @@ bool IsSampleCountSupported(const dawn::native::vulkan::Device* device,
 ResultOrError<Ref<Texture>> Texture::Create(Device* device,
                                             const TextureDescriptor* descriptor,
                                             VkImageUsageFlags extraUsages) {
-    Ref<Texture> texture = AcquireRef(new Texture(device, descriptor, TextureState::OwnedInternal));
+    Ref<Texture> texture =
+        AcquireRef(new Texture(device, descriptor, TextureState::OwnedInternal, nullptr));
     DAWN_TRY(texture->InitializeAsInternalTexture(extraUsages));
     return std::move(texture);
 }
@@ -613,9 +614,10 @@ ResultOrError<Texture*> Texture::CreateFromExternal(
     Device* device,
     const ExternalImageDescriptorVk* descriptor,
     const TextureDescriptor* textureDescriptor,
-    external_memory::Service* externalMemoryService) {
-    Ref<Texture> texture =
-        AcquireRef(new Texture(device, textureDescriptor, TextureState::OwnedInternal));
+    external_memory::Service* externalMemoryService,
+    std::shared_ptr<external_semaphore::Service> externalSemaphoreService) {
+    Ref<Texture> texture = AcquireRef(new Texture(
+        device, textureDescriptor, TextureState::OwnedInternal, externalSemaphoreService));
     DAWN_TRY(texture->InitializeFromExternal(descriptor, externalMemoryService));
     return texture.Detach();
 }
@@ -624,13 +626,18 @@ ResultOrError<Texture*> Texture::CreateFromExternal(
 Ref<Texture> Texture::CreateForSwapChain(Device* device,
                                          const TextureDescriptor* descriptor,
                                          VkImage nativeImage) {
-    Ref<Texture> texture = AcquireRef(new Texture(device, descriptor, TextureState::OwnedExternal));
+    Ref<Texture> texture =
+        AcquireRef(new Texture(device, descriptor, TextureState::OwnedExternal, nullptr));
     texture->InitializeForSwapChain(nativeImage);
     return texture;
 }
 
-Texture::Texture(Device* device, const TextureDescriptor* descriptor, TextureState state)
+Texture::Texture(Device* device,
+                 const TextureDescriptor* descriptor,
+                 TextureState state,
+                 std::shared_ptr<external_semaphore::Service> externalSemaphoreService)
     : TextureBase(device, descriptor, state),
+      mExternalSemaphoreService(std::move(externalSemaphoreService)),
       // A usage of none will make sure the texture is transitioned before its first use as
       // required by the Vulkan spec.
       mSubresourceLastUsages(std::make_unique<SubresourceStorage<wgpu::TextureUsage>>(
@@ -783,7 +790,6 @@ void Texture::InitializeForSwapChain(VkImage nativeImage) {
 }
 
 MaybeError Texture::BindExternalMemory(const ExternalImageDescriptorVk* descriptor,
-                                       VkSemaphore signalSemaphore,
                                        VkDeviceMemory externalMemoryAllocation,
                                        std::vector<VkSemaphore> waitSemaphores) {
     Device* device = ToBackend(GetDevice());
@@ -798,17 +804,49 @@ MaybeError Texture::BindExternalMemory(const ExternalImageDescriptorVk* descript
 
     // Success, acquire all the external objects.
     mExternalAllocation = externalMemoryAllocation;
-    mSignalSemaphore = signalSemaphore;
     mWaitRequirements = std::move(waitSemaphores);
     return {};
 }
 
+void Texture::TransitionEagerlyForExport(CommandRecordingContext* recordingContext) {
+    mExternalState = ExternalState::EagerlyTransitioned;
+
+    Aspect aspects = ComputeAspectsForSubresourceStorage();
+    ASSERT(GetNumMipLevels() == 1 && GetArrayLayers() == 1);
+    SubresourceRange range = {aspects, {0, 1}, {0, 1}};
+
+    wgpu::TextureUsage usage = mSubresourceLastUsages->Get(aspects, 0, 0);
+
+    std::vector<VkImageMemoryBarrier> barriers;
+    VkPipelineStageFlags srcStages = 0;
+    VkPipelineStageFlags dstStages = 0;
+
+    // Same usage as last.
+    TransitionUsageAndGetResourceBarrier(usage, range, &barriers, &srcStages, &dstStages);
+
+    ASSERT(barriers.size() == 1);
+    VkImageMemoryBarrier& barrier = barriers[0];
+    // The barrier must be paired with another barrier that will specify the dst access mask on the
+    // importing queue.
+    barrier.dstAccessMask = 0;
+
+    Device* device = ToBackend(GetDevice());
+    barrier.srcQueueFamilyIndex = device->GetGraphicsQueueFamily();
+    barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_EXTERNAL_KHR;
+
+    // We don't know when the importing queue will need the texture, so pass
+    // VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT to ensure the barrier happens-before any usage in the
+    // importing queue.
+    dstStages = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT;
+
+    device->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
+                                  nullptr, 0, nullptr, 1, &barrier);
+}
+
 MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
-                                          VkSemaphore* signalSemaphore,
+                                          ExternalSemaphoreHandle* handle,
                                           VkImageLayout* releasedOldLayout,
                                           VkImageLayout* releasedNewLayout) {
-    Device* device = ToBackend(GetDevice());
-
     DAWN_INVALID_IF(mExternalState == ExternalState::Released,
                     "Can't export a signal semaphore from signaled texture %s.", this);
 
@@ -816,7 +854,10 @@ MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
                     "Can't export a signal semaphore from destroyed or non-external texture %s.",
                     this);
 
-    ASSERT(mSignalSemaphore != VK_NULL_HANDLE);
+    DAWN_INVALID_IF(
+        desiredLayout != VK_IMAGE_LAYOUT_UNDEFINED,
+        "Can't export a signal semaphore to a layout other than VK_IMAGE_LAYOUT_UNDEFINED %s.",
+        this);
 
     // Release the texture
     mExternalState = ExternalState::Released;
@@ -825,54 +866,15 @@ MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
     ASSERT(GetNumMipLevels() == 1 && GetArrayLayers() == 1);
     wgpu::TextureUsage usage = mSubresourceLastUsages->Get(aspects, 0, 0);
 
-    VkImageMemoryBarrier barrier;
-    barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
-    barrier.pNext = nullptr;
-    barrier.image = GetHandle();
-    barrier.subresourceRange.aspectMask = VulkanAspectMask(aspects);
-    barrier.subresourceRange.baseMipLevel = 0;
-    barrier.subresourceRange.levelCount = 1;
-    barrier.subresourceRange.baseArrayLayer = 0;
-    barrier.subresourceRange.layerCount = 1;
-
-    barrier.srcAccessMask = VulkanAccessFlags(usage, GetFormat());
-    barrier.dstAccessMask = 0;  // The barrier must be paired with another barrier that will
-                                // specify the dst access mask on the importing queue.
-
-    barrier.oldLayout = VulkanImageLayout(this, usage);
-    if (desiredLayout == VK_IMAGE_LAYOUT_UNDEFINED) {
-        // VK_IMAGE_LAYOUT_UNDEFINED is invalid here. We use it as a
-        // special value to indicate no layout transition should be done.
-        barrier.newLayout = barrier.oldLayout;
-    } else {
-        barrier.newLayout = desiredLayout;
-    }
-
-    barrier.srcQueueFamilyIndex = device->GetGraphicsQueueFamily();
-    barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_EXTERNAL_KHR;
-
-    VkPipelineStageFlags srcStages = VulkanPipelineStage(usage, GetFormat());
-    VkPipelineStageFlags dstStages =
-        VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT;  // We don't know when the importing queue will need
-                                            // the texture, so pass
-                                            // VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT to ensure
-                                            // the barrier happens-before any usage in the
-                                            // importing queue.
-
-    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
-    device->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
-                                  nullptr, 0, nullptr, 1, &barrier);
-
-    // Queue submit to signal we are done with the texture
-    recordingContext->signalSemaphores.push_back(mSignalSemaphore);
-    DAWN_TRY(device->SubmitPendingCommands());
+    auto layout = VulkanImageLayout(this, usage);
 
     // Write out the layouts and signal semaphore
-    *releasedOldLayout = barrier.oldLayout;
-    *releasedNewLayout = barrier.newLayout;
-    *signalSemaphore = mSignalSemaphore;
+    *releasedOldLayout = layout;
+    *releasedNewLayout = layout;
 
-    mSignalSemaphore = VK_NULL_HANDLE;
+    ASSERT(mExternalSemaphoreHandle != kNullExternalMemoryHandle);
+
+    *handle = mExternalSemaphoreHandle;
 
     // Destroy the texture so it can't be used again
     Destroy();
@@ -907,8 +909,11 @@ void Texture::DestroyImpl() {
 
         mHandle = VK_NULL_HANDLE;
         mExternalAllocation = VK_NULL_HANDLE;
-        // If a signal semaphore exists it should be requested before we delete the texture
-        ASSERT(mSignalSemaphore == VK_NULL_HANDLE);
+
+        if (mExternalSemaphoreHandle != kNullExternalMemoryHandle) {
+            mExternalSemaphoreService->CloseHandle(mExternalSemaphoreHandle);
+        }
+        mExternalSemaphoreHandle = kNullExternalMemoryHandle;
     }
     // For Vulkan, we currently run the base destruction code after the internal changes because
     // of the dependency on the texture state which the base code overwrites too early.
@@ -929,7 +934,9 @@ void Texture::TweakTransitionForExternalUsage(CommandRecordingContext* recording
     // have already added into the vector during current transition.
     ASSERT(barriers->size() - transitionBarrierStart <= 1);
 
-    if (mExternalState == ExternalState::PendingAcquire) {
+    if (mExternalState == ExternalState::PendingAcquire ||
+        mExternalState == ExternalState::EagerlyTransitioned) {
+        recordingContext->externalTexturesForEagerTransition.insert(this);
         if (barriers->size() == transitionBarrierStart) {
             barriers->push_back(BuildMemoryBarrier(
                 this, wgpu::TextureUsage::None, wgpu::TextureUsage::None,
@@ -946,27 +953,28 @@ void Texture::TweakTransitionForExternalUsage(CommandRecordingContext* recording
         // this.
         barrier->srcAccessMask = 0;
 
-        // This should be the first barrier after import.
-        ASSERT(barrier->oldLayout == VK_IMAGE_LAYOUT_UNDEFINED);
-
         // Save the desired layout. We may need to transition through an intermediate
         // |mPendingAcquireLayout| first.
         VkImageLayout desiredLayout = barrier->newLayout;
 
-        bool isInitialized = IsSubresourceContentInitialized(GetAllSubresources());
+        if (mExternalState == ExternalState::PendingAcquire) {
+            bool isInitialized = IsSubresourceContentInitialized(GetAllSubresources());
 
-        // We don't care about the pending old layout if the texture is uninitialized. The
-        // driver is free to discard it. Also it is invalid to transition to layout UNDEFINED or
-        // PREINITIALIZED. If the embedder provided no new layout, or we don't care about the
-        // previous contents, we can skip the layout transition.
-        // https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#VUID-VkImageMemoryBarrier-newLayout-01198
-        if (!isInitialized || mPendingAcquireNewLayout == VK_IMAGE_LAYOUT_UNDEFINED ||
-            mPendingAcquireNewLayout == VK_IMAGE_LAYOUT_PREINITIALIZED) {
-            barrier->oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-            barrier->newLayout = desiredLayout;
+            // We don't care about the pending old layout if the texture is uninitialized. The
+            // driver is free to discard it. Also it is invalid to transition to layout UNDEFINED or
+            // PREINITIALIZED. If the embedder provided no new layout, or we don't care about the
+            // previous contents, we can skip the layout transition.
+            // https://www.khronos.org/registry/vulkan/specs/1.3-extensions/html/vkspec.html#VUID-VkImageMemoryBarrier-newLayout-01198
+            if (!isInitialized || mPendingAcquireNewLayout == VK_IMAGE_LAYOUT_UNDEFINED ||
+                mPendingAcquireNewLayout == VK_IMAGE_LAYOUT_PREINITIALIZED) {
+                barrier->oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+                barrier->newLayout = desiredLayout;
+            } else {
+                barrier->oldLayout = mPendingAcquireOldLayout;
+                barrier->newLayout = mPendingAcquireNewLayout;
+            }
         } else {
-            barrier->oldLayout = mPendingAcquireOldLayout;
-            barrier->newLayout = mPendingAcquireNewLayout;
+            barrier->newLayout = barrier->oldLayout;
         }
 
         // If these are unequal, we need an another barrier to transition the layout.
@@ -1320,6 +1328,13 @@ void Texture::EnsureSubresourceContentInitialized(CommandRecordingContext* recor
         GetDevice()->ConsumedError(
             ClearTexture(recordingContext, range, TextureBase::ClearValue::Zero));
     }
+}
+
+void Texture::UpdateExternalSemaphoreHandle(ExternalSemaphoreHandle handle) {
+    if (mExternalSemaphoreHandle != kNullExternalMemoryHandle) {
+        mExternalSemaphoreService->CloseHandle(mExternalSemaphoreHandle);
+    }
+    mExternalSemaphoreHandle = handle;
 }
 
 VkImageLayout Texture::GetCurrentLayoutForSwapChain() const {
