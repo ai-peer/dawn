@@ -34,6 +34,24 @@
       "parentUuid": "445372d8_f8454ebc",
       "revId": "a71ee7835526d30ff1b42bbb990a42c510ba5855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ffa2cb7_fa7f98ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-28T13:53:14Z",
+      "side": 1,
+      "message": "If we don\u0027t enable it, that means the `test/tint` tests won\u0027t work anymore",
+      "parentUuid": "3370f0a2_b71be6b2",
+      "revId": "a71ee7835526d30ff1b42bbb990a42c510ba5855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
