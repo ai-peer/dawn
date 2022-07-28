@@ -63,6 +63,30 @@
       },
       "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bc9e5db_1990a5ed",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-28T01:29:45Z",
+      "side": 1,
+      "message": "```\n    for (let i \u003d 0; i \u003c videos.length; ++i) {\n      if (!videoTextures[i] || videoTextures[i].expired) {\n        videoTextures[i] \u003d\n          device.importExternalTexture(externalTextureDescriptor[i]);\n        totalVideoFrames++;\n      }\n    }\n```\nIt\u0027s due to this loop. The current `importExternalTexture` will be indirectly pumped to submit by next `importExternalTexture` -- \"PerformPollingWork -\u003e Tick\".",
+      "parentUuid": "844da9d2_0d664786",
+      "range": {
+        "startLine": 190,
+        "startChar": 13,
+        "endLine": 191,
+        "endChar": 74
+      },
+      "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
