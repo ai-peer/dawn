@@ -283,6 +283,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2aaa4ceb_7faff220",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T00:56:25Z",
+      "side": 1,
+      "message": "Hm, if we\u0027re not using it then I guess it can be removed for now. In the future, I think it will be important to bring back this layout transition - though it could live somewhere else. perhaps something like:\n\n```\nwgpuQueueSubmitAndEndAccess(\n  WGPUQueue queue,\n  uint32_t commandCount,\n  WGPUCommandBuffer const * commands,\n  WGPUSharedTextureEndAccessDescriptor const* sharedTexturesToEndAccess)\n```\n\nThat would let us bundle a queue submit with the layout transitions and semaphores. Not super important right now, but if we want Dawn to be used in more places in Chrome, bundling them like this will help save on submits.\nI was told that Skia found significant performance wins from doing the transition to VK_IMAGE_LAYOUT_PRESENT_SRC_KHR in the same submit that finished rendering.\n\nAlternatively, we could pass `desiredLayout` into WrapVulkanImage on ExternalImageDescriptorVk. But, it would be an imperfect solution since the layout Chrome passes would have to be a guess of what the next layout will be (or VK_IMAGE_LAYOUT_UNDEFINED if Chrome doesn\u0027t know).\nDownside of this is that if Chrome passes VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL (ex. assuming that the WebGPU canvas will be sampled for compositing after we finish rendering to it), then if there are multiple VkQueueSubmits from Dawn, we\u0027ll be doing both unnecessary transitions to/from the foreign queue as well as extra layout transitions which could have additional cost.",
+      "parentUuid": "ac8ac142_5092745e",
+      "range": {
+        "startLine": 825,
+        "startChar": 1,
+        "endLine": 829,
+        "endChar": 14
+      },
+      "revId": "902258d115dfdf4e6c92d3090bc6ffd917ec76b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a90d9e1_86b9df39",
         "filename": "src/dawn/native/vulkan/TextureVk.h",
         "patchSetId": 1
