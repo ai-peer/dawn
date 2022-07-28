@@ -160,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0271369c_b38a4c6f",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-28T06:52:43Z",
+      "side": 1,
+      "message": "Rafael, can you forward this question to someone on the D3D12 side? (Jesse?) I wasn\u0027t able to get an answer on the discord.\n\n\u003e Is the constraint from D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT checked against the offset of the data in the buffer, or against the virtual memory address corresponding to that offset? For example is it allowed to: create a heap (with base VA aligned to more than 512 I assume), then place a buffer at offset 256 of that heap, then copy buffer-\u003etexture at offset 0 of that buffer?",
+      "parentUuid": "446a4265_3bfdb92f",
+      "revId": "84b106495b44d7b34aa8c441d977ee30a73d48d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b9d22f0c_63d81521",
         "filename": "src/dawn/native/d3d12/D3D12Info.cpp",
         "patchSetId": 2
