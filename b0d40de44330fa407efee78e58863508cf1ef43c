@@ -87,6 +87,30 @@
       },
       "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97fff04b_4e2846d5",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T20:38:16Z",
+      "side": 1,
+      "message": "hm still not sure where PerformPollingWork gets called\n\nIt gets called at the end of WebGPUDecoderImpl::HandleDawnCommands, and when the WebGPU command buffer is descheduled due to other GPU work ongoing.\n\nI don\u0027t see a reason that more calls to importExternalTexture would make PerformPollingWork get called unless:\n - there were very many of them so we ran out of space and flushed commands\n - we\u0027re waiting on work from the raster decoder (perhaps waiting for PaintVideoFrame)\n\nIn both these situations, it seems like there is so much other work going on, it might not be beneficial to delay the vkQueueSubmit. I could be wrong, but it would be helpful to see performance numbers once we have ChromeOS working again.",
+      "parentUuid": "4bc9e5db_1990a5ed",
+      "range": {
+        "startLine": 190,
+        "startChar": 13,
+        "endLine": 191,
+        "endChar": 74
+      },
+      "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
