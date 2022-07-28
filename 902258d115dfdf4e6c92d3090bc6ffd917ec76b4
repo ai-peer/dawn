@@ -307,6 +307,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ed534a4_b407a8bd",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-28T01:53:07Z",
+      "side": 1,
+      "message": "Thanks Austin, informative and insightful to me.\nUnnecessary transitions may have significant performance impact. But for now, let\u0027s just live with it. I am going to continue this pathway ignoring the `desiredLayout`.\n@Corentin, let me know if you have other opinions on this!",
+      "parentUuid": "2aaa4ceb_7faff220",
+      "range": {
+        "startLine": 825,
+        "startChar": 1,
+        "endLine": 829,
+        "endChar": 14
+      },
+      "revId": "902258d115dfdf4e6c92d3090bc6ffd917ec76b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a90d9e1_86b9df39",
         "filename": "src/dawn/native/vulkan/TextureVk.h",
         "patchSetId": 1
