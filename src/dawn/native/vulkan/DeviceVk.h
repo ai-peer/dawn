@@ -216,7 +216,6 @@ class Device final : public DeviceBase {
                                    ExternalMemoryHandle memoryHandle,
                                    VkImage image,
                                    const std::vector<ExternalSemaphoreHandle>& waitHandles,
-                                   VkSemaphore* outSignalSemaphore,
                                    VkDeviceMemory* outAllocation,
                                    std::vector<VkSemaphore>* outWaitSemaphores);
 };

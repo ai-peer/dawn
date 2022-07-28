@@ -22,16 +22,19 @@ namespace dawn::native::vulkan {
 #if DAWN_PLATFORM_IS(LINUX)
 // File descriptor
 using ExternalMemoryHandle = int;
+const ExternalMemoryHandle kNullExternalMemoryHandle = -1;
 // File descriptor
 using ExternalSemaphoreHandle = int;
 #elif DAWN_PLATFORM_IS(FUCHSIA)
 // Really a Zircon vmo handle.
 using ExternalMemoryHandle = zx_handle_t;
+const ExternalMemoryHandle kNullExternalMemoryHandle = ZX_HANDLE_INVALID;
 // Really a Zircon event handle.
 using ExternalSemaphoreHandle = zx_handle_t;
 #else
 // Generic types so that the Null service can compile, not used for real handles
 using ExternalMemoryHandle = void*;
+const ExternalMemoryHandle kNullExternalMemoryHandle = nullptr;
 using ExternalSemaphoreHandle = void*;
 #endif
 
