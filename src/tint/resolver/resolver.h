@@ -233,9 +233,12 @@ class Resolver {
     /// @param ty the type that may hold abstract numeric types
     /// @param target_ty the target type for the expression (variable type, parameter type, etc).
     ///        May be nullptr.
+    /// @param source the source of the expression requiring materialization
     /// @returns the concrete (materialized) type for the given type, or nullptr if the type is
     ///          already concrete.
-    const sem::Type* ConcreteType(const sem::Type* ty, const sem::Type* target_ty);
+    const sem::Type* ConcreteType(const sem::Type* ty,
+                                  const sem::Type* target_ty,
+                                  const Source& source);
 
     // Statement resolving methods
     // Each return true on success, false on failure.
@@ -286,13 +289,37 @@ class Resolver {
     /// @returns the resolved semantic type
     sem::Type* TypeDecl(const ast::TypeDecl* named_type);
 
-    /// Builds and returns the semantic information for the array `arr`.
-    /// This method does not mark the ast::Array node, nor attach the generated
-    /// semantic information to the AST node.
-    /// @returns the semantic Array information, or nullptr if an error is
-    /// raised.
+    /// Builds and returns the semantic information for the AST array `arr`.
+    /// This method does not mark the ast::Array node, nor attach the generated semantic information
+    /// to the AST node.
+    /// @returns the semantic Array information, or nullptr if an error is raised.
     /// @param arr the Array to get semantic information for
     sem::Array* Array(const ast::Array* arr);
+
+    /// Resolves and validates the expression used as the count parameter of an array.
+    /// @param count_expr the expression used as the second template parameter to an array<>.
+    /// @returns the number of elements in the array, or 0 if there was an error.
+    uint32_t ArrayCount(const ast::Expression* count_expr);
+
+    /// Resolves and validates the attributes on an array.
+    /// @param attributes the attributes on the array type.
+    /// @param el_ty the element type of the array.
+    /// @param explicit_stride assigned the specified stride of the array in bytes.
+    /// @returns true on success, false on failure
+    bool ArrayAttributes(const ast::AttributeList& attributes,
+                         const sem::Type* el_ty,
+                         uint32_t& explicit_stride);
+
+    /// Builds and returns the semantic information for an array.
+    /// @returns the semantic Array information, or nullptr if an error is raised.
+    /// @param source the source of the array declaration
+    /// @param el_ty the Array element type
+    /// @param el_count the number of elements in the array. Zero means runtime-sized.
+    /// @param explicit_stride the explicit byte stride of the array. Zero means implicit stride.
+    sem::Array* Array(const Source& source,
+                      const sem::Type* el_ty,
+                      uint32_t el_count,
+                      uint32_t explicit_stride);
 
     /// Builds and returns the semantic information for the alias `alias`.
     /// This method does not mark the ast::Alias node, nor attach the generated
