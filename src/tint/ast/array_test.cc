@@ -42,6 +42,14 @@ TEST_F(AstArrayTest, CreateRuntimeArray) {
     EXPECT_TRUE(arr->IsRuntimeArray());
 }
 
+TEST_F(AstArrayTest, CreateInferredTypeArray) {
+    auto* arr = create<Array>(nullptr, nullptr, AttributeList{});
+    EXPECT_EQ(arr->type, nullptr);
+    EXPECT_EQ(arr->count, nullptr);
+    EXPECT_TRUE(arr->Is<Array>());
+    EXPECT_FALSE(arr->IsRuntimeArray());
+}
+
 TEST_F(AstArrayTest, FriendlyName_RuntimeSized) {
     auto* i32 = create<I32>();
     auto* arr = create<Array>(i32, nullptr, AttributeList{});
