@@ -16,6 +16,23 @@
       "message": "Thanks for your review, Austin. I had a little different opinion but followed your suggestions and let\u0027s move forward. ",
       "revId": "40d4f632bdb9dba41ce084e41947de81782cc84b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b76ceb7_ced1bb53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T14:40:11Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "40d4f632bdb9dba41ce084e41947de81782cc84b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
