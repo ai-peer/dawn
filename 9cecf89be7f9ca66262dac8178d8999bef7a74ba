@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "606ddce0_6b9f06f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-28T12:07:41Z",
+      "side": 1,
+      "message": "Please take a look, thanks. This patch help preventing supporting constant evaluation for built-ins break the unit tests and make implementing corresponding f16 testcases more convenience.",
+      "revId": "9cecf89be7f9ca66262dac8178d8999bef7a74ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
