@@ -77,6 +77,10 @@ class Texture final : public TextureBase {
                                 VkPipelineStageFlags* srcStages,
                                 VkPipelineStageFlags* dstStages);
 
+    void TransitionEagerlyForExport();
+
+    void UpdateExternalSemaphoreHandle(ExternalSemaphoreHandle handle);
+
     void EnsureSubresourceContentInitialized(CommandRecordingContext* recordingContext,
                                              const SubresourceRange& range);
 
@@ -85,12 +89,11 @@ class Texture final : public TextureBase {
     // Binds externally allocated memory to the VkImage and on success, takes ownership of
     // semaphores.
     MaybeError BindExternalMemory(const ExternalImageDescriptorVk* descriptor,
-                                  VkSemaphore signalSemaphore,
                                   VkDeviceMemory externalMemoryAllocation,
                                   std::vector<VkSemaphore> waitSemaphores);
 
     MaybeError ExportExternalTexture(VkImageLayout desiredLayout,
-                                     VkSemaphore* signalSemaphore,
+                                     ExternalSemaphoreHandle* handle,
                                      VkImageLayout* releasedOldLayout,
                                      VkImageLayout* releasedNewLayout);
 
@@ -156,14 +159,14 @@ class Texture final : public TextureBase {
     ResourceMemoryAllocation mMemoryAllocation;
     VkDeviceMemory mExternalAllocation = VK_NULL_HANDLE;
 
-    enum class ExternalState { InternalOnly, PendingAcquire, Acquired, Released };
+    enum class ExternalState { InternalOnly, PendingAcquire, Acquired, EagerTransition, Released };
     ExternalState mExternalState = ExternalState::InternalOnly;
     ExternalState mLastExternalState = ExternalState::InternalOnly;
 
     VkImageLayout mPendingAcquireOldLayout;
     VkImageLayout mPendingAcquireNewLayout;
 
-    VkSemaphore mSignalSemaphore = VK_NULL_HANDLE;
+    ExternalSemaphoreHandle mExternalSemaphoreHandle = kNullExternalMemoryHandle;
     std::vector<VkSemaphore> mWaitRequirements;
 
     // Note that in early Vulkan versions it is not possible to transition depth and stencil
