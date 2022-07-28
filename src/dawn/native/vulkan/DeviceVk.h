@@ -182,7 +182,7 @@ class Device final : public DeviceBase {
     std::unique_ptr<RenderPassCache> mRenderPassCache;
 
     std::unique_ptr<external_memory::Service> mExternalMemoryService;
-    std::unique_ptr<external_semaphore::Service> mExternalSemaphoreService;
+    std::shared_ptr<external_semaphore::Service> mExternalSemaphoreService;
 
     ResultOrError<VkFence> GetUnusedFence();
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
@@ -216,7 +216,6 @@ class Device final : public DeviceBase {
                                    ExternalMemoryHandle memoryHandle,
                                    VkImage image,
                                    const std::vector<ExternalSemaphoreHandle>& waitHandles,
-                                   VkSemaphore* outSignalSemaphore,
                                    VkDeviceMemory* outAllocation,
                                    std::vector<VkSemaphore>* outWaitSemaphores);
 };
