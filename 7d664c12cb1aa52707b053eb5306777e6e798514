@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9095e62_636ff1c3",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2283,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-28T20:14:16Z",
+      "side": 1,
+      "message": "(this is the bit I find weird as 4 lines up we say 0 means runtime-array and here 0 means error)",
+      "revId": "7d664c12cb1aa52707b053eb5306777e6e798514",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c9d66d3_986fde06",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2288,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-28T20:14:16Z",
+      "side": 1,
+      "message": "`if (out \u003d\u003d nullptr) { return nullptr; }` ?",
+      "revId": "7d664c12cb1aa52707b053eb5306777e6e798514",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85df9e63_3cb6bbe6",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-07-28T20:14:16Z",
+      "side": 1,
+      "message": "It\u0027s confusing this returns `0` for error, but below `0` means runtime array. Can we add an actual return so return `std::tuple\u003cbool, uint32_t\u003e` or something?",
+      "revId": "7d664c12cb1aa52707b053eb5306777e6e798514",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
