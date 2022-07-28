@@ -331,6 +331,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a6fe64b_74ef3359",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 829,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-28T06:46:04Z",
+      "side": 1,
+      "message": "Yeah let\u0027s ignore the desiredLayout, and maybe error if it isn\u0027t `VK_IMAGE_LAYOUT_UNDEFINED`. With Shahbaz from the ANGLE team we previously discussed that instead of doing the layout transitions in EndAccess, the components that relinquish access give information about the current layout / memory barriers. Then the next component that uses the SharedImage uses that information for its import barrier. This removes the need for empty submits completely.",
+      "parentUuid": "7ed534a4_b407a8bd",
+      "range": {
+        "startLine": 825,
+        "startChar": 1,
+        "endLine": 829,
+        "endChar": 14
+      },
+      "revId": "902258d115dfdf4e6c92d3090bc6ffd917ec76b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a90d9e1_86b9df39",
         "filename": "src/dawn/native/vulkan/TextureVk.h",
         "patchSetId": 1
