@@ -34,6 +34,24 @@
       "parentUuid": "6650bd1d_efbe0687",
       "revId": "0716c340408bc6853254cf299ddeb4208e63b9f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d593a7bf_0907ffb5",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2806,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-07-28T20:10:06Z",
+      "side": 1,
+      "message": "Can you add the TODO here then so we don\u0027t lose this one?",
+      "parentUuid": "dc023631_860c95c2",
+      "revId": "0716c340408bc6853254cf299ddeb4208e63b9f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
