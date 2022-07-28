@@ -69,6 +69,17 @@ TEST_F(WgslGeneratorImplTest, EmitType_RuntimeArray) {
     EXPECT_EQ(out.str(), "array<bool>");
 }
 
+TEST_F(WgslGeneratorImplTest, EmitType_ImplicitTypeAndCount) {
+    auto* a = ty.array(nullptr);
+    Alias("make_type_reachable", a);
+
+    GeneratorImpl& gen = Build();
+
+    std::stringstream out;
+    ASSERT_TRUE(gen.EmitType(out, a)) << gen.error();
+    EXPECT_EQ(out.str(), "array");
+}
+
 TEST_F(WgslGeneratorImplTest, EmitType_Bool) {
     auto* bool_ = ty.bool_();
     Alias("make_type_reachable", bool_);
