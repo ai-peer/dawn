@@ -52,6 +52,24 @@
       "parentUuid": "3370f0a2_b71be6b2",
       "revId": "a71ee7835526d30ff1b42bbb990a42c510ba5855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88b63fa4_a7f03101",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-28T13:57:36Z",
+      "side": 1,
+      "message": "test/tint only uses the tint binary, not Dawn. So Dawn not allowing these extensions should be ok for testing.",
+      "parentUuid": "8ffa2cb7_fa7f98ba",
+      "revId": "a71ee7835526d30ff1b42bbb990a42c510ba5855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
