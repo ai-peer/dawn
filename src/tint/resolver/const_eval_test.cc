@@ -30,18 +30,6 @@ namespace tint::resolver {
 namespace {
 
 template <typename T>
-const auto kHighest = T(T::kHighest);
-
-template <typename T>
-const auto kLowest = T(T::kLowest);
-
-template <typename T>
-const auto kNaN = T(std::numeric_limits<UnwrapNumber<T>>::quiet_NaN());
-
-template <typename T>
-const auto kInf = T(std::numeric_limits<UnwrapNumber<T>>::infinity());
-
-template <typename T>
 const auto kPi = T(UnwrapNumber<T>(3.14159265358979323846));
 
 template <typename T>
@@ -1336,17 +1324,17 @@ TEST_F(ResolverConstEvalTest, Vec3_Convert_Large_f32_to_i32) {
     EXPECT_TRUE(sem->ConstantValue()->Index(0)->AllEqual());
     EXPECT_FALSE(sem->ConstantValue()->Index(0)->AnyZero());
     EXPECT_FALSE(sem->ConstantValue()->Index(0)->AllZero());
-    EXPECT_EQ(sem->ConstantValue()->Index(0)->As<AInt>(), i32::kHighest);
+    EXPECT_EQ(sem->ConstantValue()->Index(0)->As<AInt>(), kHighest<i32>);
 
     EXPECT_TRUE(sem->ConstantValue()->Index(1)->AllEqual());
     EXPECT_FALSE(sem->ConstantValue()->Index(1)->AnyZero());
     EXPECT_FALSE(sem->ConstantValue()->Index(1)->AllZero());
-    EXPECT_EQ(sem->ConstantValue()->Index(1)->As<AInt>(), i32::kLowest);
+    EXPECT_EQ(sem->ConstantValue()->Index(1)->As<AInt>(), kLowest<i32>);
 
     EXPECT_TRUE(sem->ConstantValue()->Index(2)->AllEqual());
     EXPECT_FALSE(sem->ConstantValue()->Index(2)->AnyZero());
     EXPECT_FALSE(sem->ConstantValue()->Index(2)->AllZero());
-    EXPECT_EQ(sem->ConstantValue()->Index(2)->As<AInt>(), i32::kHighest);
+    EXPECT_EQ(sem->ConstantValue()->Index(2)->As<AInt>(), kHighest<i32>);
 }
 
 TEST_F(ResolverConstEvalTest, Vec3_Convert_Large_f32_to_u32) {
@@ -1369,17 +1357,17 @@ TEST_F(ResolverConstEvalTest, Vec3_Convert_Large_f32_to_u32) {
     EXPECT_TRUE(sem->ConstantValue()->Index(0)->AllEqual());
     EXPECT_FALSE(sem->ConstantValue()->Index(0)->AnyZero());
     EXPECT_FALSE(sem->ConstantValue()->Index(0)->AllZero());
-    EXPECT_EQ(sem->ConstantValue()->Index(0)->As<AInt>(), u32::kHighest);
+    EXPECT_EQ(sem->ConstantValue()->Index(0)->As<AInt>(), kHighest<u32>);
 
     EXPECT_TRUE(sem->ConstantValue()->Index(1)->AllEqual());
     EXPECT_TRUE(sem->ConstantValue()->Index(1)->AnyZero());
     EXPECT_TRUE(sem->ConstantValue()->Index(1)->AllZero());
-    EXPECT_EQ(sem->ConstantValue()->Index(1)->As<AInt>(), u32::kLowest);
+    EXPECT_EQ(sem->ConstantValue()->Index(1)->As<AInt>(), kLowest<u32>);
 
     EXPECT_TRUE(sem->ConstantValue()->Index(2)->AllEqual());
     EXPECT_FALSE(sem->ConstantValue()->Index(2)->AnyZero());
     EXPECT_FALSE(sem->ConstantValue()->Index(2)->AllZero());
-    EXPECT_EQ(sem->ConstantValue()->Index(2)->As<AInt>(), u32::kHighest);
+    EXPECT_EQ(sem->ConstantValue()->Index(2)->As<AInt>(), kHighest<u32>);
 }
 
 TEST_F(ResolverConstEvalTest, Vec3_Convert_Large_f32_to_f16) {

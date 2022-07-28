@@ -77,17 +77,17 @@ struct Number {
     using type = T;
 
     /// Highest finite representable value of this type.
-    static constexpr type kHighest = std::numeric_limits<type>::max();
+    static constexpr type kHighestValue = std::numeric_limits<type>::max();
 
     /// Lowest finite representable value of this type.
-    static constexpr type kLowest = std::numeric_limits<type>::lowest();
+    static constexpr type kLowestValue = std::numeric_limits<type>::lowest();
 
     /// Smallest positive normal value of this type.
-    static constexpr type kSmallest =
+    static constexpr type kSmallestValue =
         std::is_integral_v<type> ? 0 : std::numeric_limits<type>::min();
 
     /// Smallest positive subnormal value of this type, 0 for integral type.
-    static constexpr type kSmallestSubnormal =
+    static constexpr type kSmallestSubnormalValue =
         std::is_integral_v<type> ? 0 : std::numeric_limits<type>::denorm_min();
 
     /// Constructor. The value is zero-initialized.
@@ -144,18 +144,18 @@ struct Number<detail::NumberKindF16> {
     using type = float;
 
     /// Highest finite representable value of this type.
-    static constexpr type kHighest = 65504.0f;  // 2¹⁵ × (1 + 1023/1024)
+    static constexpr type kHighestValue = 65504.0f;  // 2¹⁵ × (1 + 1023/1024)
 
     /// Lowest finite representable value of this type.
-    static constexpr type kLowest = -65504.0f;
+    static constexpr type kLowestValue = -65504.0f;
 
     /// Smallest positive normal value of this type.
     /// binary16 0_00001_0000000000, value is 2⁻¹⁴.
-    static constexpr type kSmallest = 0x1p-14f;
+    static constexpr type kSmallestValue = 0x1p-14f;
 
     /// Smallest positive subnormal value of this type.
     /// binary16 0_00000_0000000001, value is 2⁻¹⁴ * 2⁻¹⁰ = 2⁻²⁴.
-    static constexpr type kSmallestSubnormal = 0x1p-24f;
+    static constexpr type kSmallestSubnormalValue = 0x1p-24f;
 
     /// Constructor. The value is zero-initialized.
     Number() = default;
@@ -204,6 +204,40 @@ struct Number<detail::NumberKindF16> {
     type value = {};
 };
 
+namespace detail {
+/// Base template for `IsNumber` is false
+template <typename T>
+struct IsNumber : std::false_type {};
+
+/// Specialization to `Number<U>` is true
+template <typename U>
+struct IsNumber<Number<U>> : std::true_type {};
+}  // namespace detail
+
+/// Evaluates to true if `T` is of type `Number`
+template <typename T>
+constexpr bool IsNumber = detail::IsNumber<T>::value;
+
+/// `kHighest<T>` returns a constant of type `Number<T>` with the highest value for that type.
+template <typename T, typename = std::enable_if_t<IsNumber<T>>>
+const auto kHighest = T(T::kHighestValue);
+
+/// `kLowest<T>` returns a constant of type `Number<T>` with the lowest value for that type.
+template <typename T, typename = std::enable_if_t<IsNumber<T>>>
+const auto kLowest = T(T::kLowestValue);
+
+/// `kLowest<T>` returns a constant of type `Number<T>` with the smallest value for that type.
+template <typename T, typename = std::enable_if_t<IsNumber<T>>>
+const auto kSmallest = T(T::kSmallestValue);
+
+/// `kLowest<T>` returns a constant of type `Number<T>` with the NaN value for that type.
+template <typename T, typename = std::enable_if_t<IsNumber<T>>>
+const auto kNaN = T(std::numeric_limits<UnwrapNumber<T>>::quiet_NaN());
+
+/// `kLowest<T>` returns a constant of type `Number<T>` with the infinity value for that type.
+template <typename T, typename = std::enable_if_t<IsNumber<T>>>
+const auto kInf = T(std::numeric_limits<UnwrapNumber<T>>::infinity());
+
 /// `AInt` is a type alias to `Number<int64_t>`.
 using AInt = Number<int64_t>;
 /// `AFloat` is a type alias to `Number<double>`.
@@ -239,10 +273,10 @@ utils::Result<TO, ConversionFailure> CheckedConvert(Number<FROM> num) {
     using T = std::conditional_t<IsFloatingPoint<UnwrapNumber<TO>> || IsFloatingPoint<FROM>,
                                  AFloat::type, AInt::type>;
     const auto value = static_cast<T>(num.value);
-    if (value > static_cast<T>(TO::kHighest)) {
+    if (value > static_cast<T>(TO::kHighestValue)) {
         return ConversionFailure::kExceedsPositiveLimit;
     }
-    if (value < static_cast<T>(TO::kLowest)) {
+    if (value < static_cast<T>(TO::kLowestValue)) {
         return ConversionFailure::kExceedsNegativeLimit;
     }
     return TO(value);  // Success
@@ -333,11 +367,11 @@ inline std::optional<AInt> CheckedAdd(AInt a, AInt b) {
     }
 #else   // TINT_HAS_OVERFLOW_BUILTINS
     if (a.value >= 0) {
-        if (AInt::kHighest - a.value < b.value) {
+        if (AInt::kHighestValue - a.value < b.value) {
             return {};
         }
     } else {
-        if (b.value < AInt::kLowest - a.value) {
+        if (b.value < AInt::kLowestValue - a.value) {
             return {};
         }
     }
@@ -356,21 +390,21 @@ inline std::optional<AInt> CheckedMul(AInt a, AInt b) {
 #else   // TINT_HAS_OVERFLOW_BUILTINS
     if (a > 0) {
         if (b > 0) {
-            if (a > (AInt::kHighest / b)) {
+            if (a > (AInt::kHighestValue / b)) {
                 return {};
             }
         } else {
-            if (b < (AInt::kLowest / a)) {
+            if (b < (AInt::kLowestValue / a)) {
                 return {};
             }
         }
     } else {
         if (b > 0) {
-            if (a < (AInt::kLowest / b)) {
+            if (a < (AInt::kLowestValue / b)) {
                 return {};
             }
         } else {
-            if ((a != 0) && (b < (AInt::kHighest / a))) {
+            if ((a != 0) && (b < (AInt::kHighestValue / a))) {
                 return {};
             }
         }
