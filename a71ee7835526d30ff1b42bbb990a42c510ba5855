@@ -70,6 +70,24 @@
       "parentUuid": "8ffa2cb7_fa7f98ba",
       "revId": "a71ee7835526d30ff1b42bbb990a42c510ba5855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28caa5f5_6b971947",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-28T14:01:38Z",
+      "side": 1,
+      "message": "The validation happens entirely after tint processing, right? We don\u0027t pass down to tint an allow-list, tint just reports what was used.\n\nJust pointing out that if this is WIP, this code is exposed in production - even if the end result is not usable.",
+      "parentUuid": "88b63fa4_a7f03101",
+      "revId": "a71ee7835526d30ff1b42bbb990a42c510ba5855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
