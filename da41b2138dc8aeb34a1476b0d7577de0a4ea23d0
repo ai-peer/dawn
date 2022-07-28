@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b83666c_7fce2bc1",
+        "filename": "src/tint/resolver/builtin_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-28T10:59:03Z",
+      "side": 1,
+      "message": "So long as we have a handful of tests that check the full output (which we do above), I\u0027m happy to drop this full-error string testing entirely for these tests.\n\nIn other words, instead of:\n\n```\n                    HasSubstr(\"error: no matching call to \" + std::string(param.name) +\n\n                              \"(f32)\\n\\n\" + param.GetCandidatesString()));\n    }\n    \n```\n\nI\u0027m happy to have:\n\n```\nHasSubstr(\"error: no matching call to \" + std::string(param.name) + \"(f32)\");\n    }\n```",
+      "range": {
+        "startLine": 265,
+        "startChar": 4,
+        "endLine": 283,
+        "endChar": 5
+      },
+      "revId": "da41b2138dc8aeb34a1476b0d7577de0a4ea23d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
