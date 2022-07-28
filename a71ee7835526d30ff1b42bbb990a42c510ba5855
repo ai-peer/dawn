@@ -16,6 +16,24 @@
       "message": "+2 - however note this will allow anyone to enable this extension by writing `enable chromium_experimental_push_constant` at the top of their shader. Is something we want to happen?\n\nIf not, we can simply add `@internal` to the enum entry in the `intrinsics.def` file, which will disable parsing of this extension.",
       "revId": "a71ee7835526d30ff1b42bbb990a42c510ba5855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3370f0a2_b71be6b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-28T13:37:57Z",
+      "side": 1,
+      "message": "WGSL extensions have to be enabled explicitly in Dawn https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Device.cpp;drc\u003ddb0d32ea0c658e4744009d0935d3da0d8b5e7b0a;l\u003d1321 https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/ShaderModule.cpp;drc\u003d9a6acc419eb550a46bf77c4174c521ddfc5ad98d;l\u003d908\n\nHowever the extension can be enabled in WGSL at least up to the resolver/validator/reflection.",
+      "parentUuid": "445372d8_f8454ebc",
+      "revId": "a71ee7835526d30ff1b42bbb990a42c510ba5855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
