@@ -39,6 +39,30 @@
       },
       "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "844da9d2_0d664786",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T01:11:27Z",
+      "side": 1,
+      "message": "I\u0027m not sure the cleanest way to do this without being too intrusive. Perhaps we can have a scoped variable like\n```\nPassiveRecordingContextScope scope(device);\n```\nso you don\u0027t manually have to get and set to restore.\n\nA question though:\nthis CL seems to imply there\u0027s a reasonable amount of time such that Tick() gets called (by Chromium\u0027s PerformPollingWork?) between when an external texture gets created and when it gets used. Do you know why that is?\n\nIn some example code like:\ncontent/test/data/gpu/vc/webgpu_video.js we call importExternalTexture and then queue.submit in the same Javascript task, so there shouldn\u0027t be so much time between them.\n\nEdit: ah, maybe it is the Tick() that occurs inside vulkan::Queue::SubmitImpl?\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/QueueVk.cpp;l\u003d49?q\u003dQueueVk. I don\u0027t remember why we have it, but perhaps it\u0027s not needed or can be optimized away.",
+      "parentUuid": "99958b5f_dcdc2eaa",
+      "range": {
+        "startLine": 190,
+        "startChar": 13,
+        "endLine": 191,
+        "endChar": 74
+      },
+      "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
