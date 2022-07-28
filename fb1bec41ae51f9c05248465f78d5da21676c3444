@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5aa26335_1ef360b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-28T13:42:44Z",
+      "side": 1,
+      "message": "Hi, I realize that adding f16 types for built-in and implementing constant evaluation may have some conflict as long as constant evaluation does not support f16 types. I plan to hang this patch and start implementing f16 constant evaluation, starting from f16 operator. What do you think? Thanks!",
+      "revId": "fb1bec41ae51f9c05248465f78d5da21676c3444",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d68d99df_be29915d",
