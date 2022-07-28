@@ -27,13 +27,17 @@ namespace {
 
 using AFloatV = builder::vec<3, AFloat>;
 using AFloatM = builder::mat<3, 2, AFloat>;
+using AFloatA = builder::array<3, AFloat>;
 using AIntV = builder::vec<3, AInt>;
+using AIntA = builder::array<3, AInt>;
 using f32V = builder::vec<3, f32>;
 using f16V = builder::vec<3, f16>;
 using i32V = builder::vec<3, i32>;
 using u32V = builder::vec<3, u32>;
 using f32M = builder::mat<3, 2, f32>;
-using i32Varr = builder::array<3, i32>;
+using f32A = builder::array<3, f32>;
+using i32A = builder::array<3, i32>;
+using u32A = builder::array<3, u32>;
 
 constexpr double kHighestU32 = static_cast<double>(u32::kHighest);
 constexpr double kLowestU32 = static_cast<double>(u32::kLowest);
@@ -117,6 +121,14 @@ class MaterializeTest : public resolver::ResolverTestWithParam<CASE> {
                         EXPECT_TYPE(el->Type(), m->type());
                         EXPECT_EQ(std::get<T>(el->Value()), expected_value);
                     }
+                }
+            },
+            [&](const sem::Array* a) {
+                for (uint32_t i = 0; i < a->Count(); i++) {
+                    auto* el = value->Index(i);
+                    ASSERT_NE(el, nullptr);
+                    EXPECT_TYPE(el->Type(), a->ElemType());
+                    EXPECT_EQ(std::get<T>(el->Value()), expected_value);
                 }
             },
             [&](Default) { EXPECT_EQ(std::get<T>(value->Value()), expected_value); });
@@ -443,6 +455,12 @@ constexpr Method kMatrixMethods[] = {
     Method::kReturn, Method::kArray, Method::kStruct, Method::kBinaryOp,
 };
 
+/// Methods that support array materialization
+constexpr Method kArrayMethods[] = {
+    Method::kLet,    Method::kVar,   Method::kAssign, Method::kFnArg,
+    Method::kReturn, Method::kArray, Method::kStruct,
+};
+
 /// Methods that support materialization for switch cases
 constexpr Method kSwitchMethods[] = {
     Method::kSwitchCond,
@@ -581,6 +599,55 @@ INSTANTIATE_TEST_SUITE_P(
                          Types<f32M, AFloatM>(AFloat(-kSubnormalF32), -kSubnormalF32),  //
                      })));
 
+INSTANTIATE_TEST_SUITE_P(
+    MaterializeArray,
+    MaterializeAbstractNumericToConcreteType,
+    testing::Combine(testing::Values(Expectation::kMaterialize),
+                     testing::ValuesIn(kArrayMethods),
+                     testing::ValuesIn(std::vector<Data>{
+                         Types<i32A, AIntA>(0_a, 0.0),                                        //
+                         Types<i32A, AIntA>(1_a, 1.0),                                        //
+                         Types<i32A, AIntA>(-1_a, -1.0),                                      //
+                         Types<i32A, AIntA>(AInt(kHighestI32), kHighestI32),                  //
+                         Types<i32A, AIntA>(AInt(kLowestI32), kLowestI32),                    //
+                         Types<u32A, AIntA>(0_a, 0.0),                                        //
+                         Types<u32A, AIntA>(1_a, 1.0),                                        //
+                         Types<u32A, AIntA>(AInt(kHighestU32), kHighestU32),                  //
+                         Types<u32A, AIntA>(AInt(kLowestU32), kLowestU32),                    //
+                         Types<f32A, AFloatA>(0.0_a, 0.0),                                    //
+                         Types<f32A, AFloatA>(1.0_a, 1.0),                                    //
+                         Types<f32A, AFloatA>(-1.0_a, -1.0),                                  //
+                         Types<f32A, AFloatA>(AFloat(kHighestF32), kHighestF32),              //
+                         Types<f32A, AFloatA>(AFloat(kLowestF32), kLowestF32),                //
+                         Types<f32A, AFloatA>(AFloat(kPiF32), kPiF64),                        //
+                         Types<f32A, AFloatA>(AFloat(kSubnormalF32), kSubnormalF32),          //
+                         Types<f32A, AFloatA>(AFloat(-kSubnormalF32), -kSubnormalF32),        //
+                         /* Types<f16A, AFloatA>(0.0_a, 0.0),                             */  //
+                         /* Types<f16A, AFloatA>(1.0_a, 1.0),                             */  //
+                         /* Types<f16A, AFloatA>(-1.0_a, -1.0),                           */  //
+                         /* Types<f16A, AFloatA>(AFloat(kHighestF16), kHighestF16),       */  //
+                         /* Types<f16A, AFloatA>(AFloat(kLowestF16), kLowestF16),         */  //
+                         /* Types<f16A, AFloatA>(AFloat(kPiF16), kPiF64),                 */  //
+                         /* Types<f16A, AFloatA>(AFloat(kSubnormalF16), kSubnormalF16),   */  //
+                         /* Types<f16A, AFloatA>(AFloat(-kSubnormalF16), -kSubnormalF16), */  //
+                     })));
+
+INSTANTIATE_TEST_SUITE_P(
+    MaterializeArrayRuntimeIndex,
+    MaterializeAbstractNumericToConcreteType,
+    testing::Combine(testing::Values(Expectation::kMaterialize),
+                     testing::Values(Method::kRuntimeIndex),
+                     testing::ValuesIn(std::vector<Data>{
+                         Types<f32A, AFloatA>(0.0_a, 0.0),                              //
+                         Types<f32A, AFloatA>(1.0_a, 1.0),                              //
+                         Types<f32A, AFloatA>(-1.0_a, -1.0),                            //
+                         Types<f32A, AFloatA>(AFloat(kHighestF32), kHighestF32),        //
+                         Types<f32A, AFloatA>(AFloat(kLowestF32), kLowestF32),          //
+                         Types<f32A, AFloatA>(AFloat(kPiF32), kPiF64),                  //
+                         Types<f32A, AFloatA>(AFloat(kSubnormalF32), kSubnormalF32),    //
+                         Types<f32A, AFloatA>(AFloat(-kSubnormalF32), -kSubnormalF32),  //
+                     })));
+
 INSTANTIATE_TEST_SUITE_P(MaterializeSwitch,
                          MaterializeAbstractNumericToConcreteType,
                          testing::Combine(testing::Values(Expectation::kMaterialize),
@@ -627,14 +694,14 @@ INSTANTIATE_TEST_SUITE_P(InvalidConversion,
                          testing::Combine(testing::Values(Expectation::kInvalidConversion),
                                           testing::ValuesIn(kScalarMethods),
                                           testing::ValuesIn(std::vector<Data>{
-                                              Types<i32, AFloat>(),       //
-                                              Types<u32, AFloat>(),       //
-                                              Types<i32V, AFloatV>(),     //
-                                              Types<u32V, AFloatV>(),     //
-                                              Types<i32Varr, AInt>(),     //
-                                              Types<i32Varr, AIntV>(),    //
-                                              Types<i32Varr, AFloat>(),   //
-                                              Types<i32Varr, AFloatV>(),  //
+                                              Types<i32, AFloat>(),     //
+                                              Types<u32, AFloat>(),     //
+                                              Types<i32V, AFloatV>(),   //
+                                              Types<u32V, AFloatV>(),   //
+                                              Types<i32A, AInt>(),     //
+                                              Types<i32A, AIntV>(),    //
+                                              Types<i32A, AFloat>(),   //
+                                              Types<i32A, AFloatV>(),  //
                                           })));
 
 INSTANTIATE_TEST_SUITE_P(ScalarValueCannotBeRepresented,
@@ -895,6 +962,12 @@ constexpr Method kMatrixMethods[] = {
     Method::kVar,
 };
 
+/// Methods that support array materialization
+constexpr Method kArrayMethods[] = {
+    Method::kLet,
+    Method::kVar,
+};
+
 INSTANTIATE_TEST_SUITE_P(
     MaterializeScalar,
     MaterializeAbstractNumericToDefaultType,
@@ -949,6 +1022,27 @@ INSTANTIATE_TEST_SUITE_P(
                          Types<f32M, AFloatM>(AFloat(kPiF32), kPiF64),                  //
                          Types<f32M, AFloatM>(AFloat(kSubnormalF32), kSubnormalF32),    //
                          Types<f32M, AFloatM>(AFloat(-kSubnormalF32), -kSubnormalF32),  //
+                     })));
+
+INSTANTIATE_TEST_SUITE_P(
+    MaterializeArray,
+    MaterializeAbstractNumericToDefaultType,
+    testing::Combine(testing::Values(Expectation::kMaterialize),
+                     testing::ValuesIn(kArrayMethods),
+                     testing::ValuesIn(std::vector<Data>{
+                         Types<i32A, AIntA>(0_a, 0.0),                                  //
+                         Types<i32A, AIntA>(1_a, 1.0),                                  //
+                         Types<i32A, AIntA>(-1_a, -1.0),                                //
+                         Types<i32A, AIntA>(AInt(kHighestI32), kHighestI32),            //
+                         Types<i32A, AIntA>(AInt(kLowestI32), kLowestI32),              //
+                         Types<f32A, AFloatA>(0.0_a, 0.0),                              //
+                         Types<f32A, AFloatA>(1.0_a, 1.0),                              //
+                         Types<f32A, AFloatA>(-1.0_a, -1.0),                            //
+                         Types<f32A, AFloatA>(AFloat(kHighestF32), kHighestF32),        //
+                         Types<f32A, AFloatA>(AFloat(kLowestF32), kLowestF32),          //
+                         Types<f32A, AFloatA>(AFloat(kPiF32), kPiF64),                  //
+                         Types<f32A, AFloatA>(AFloat(kSubnormalF32), kSubnormalF32),    //
+                         Types<f32A, AFloatA>(AFloat(-kSubnormalF32), -kSubnormalF32),  //
                      })));
 
 INSTANTIATE_TEST_SUITE_P(MaterializeAInt,
