@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e28bfb66_109fc80b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T20:41:23Z",
+      "side": 1,
+      "message": "LGTM with some comments",
+      "revId": "9fecf90156394f5a934da1550817f1d6e2c0c89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7527eb6_0d0785ff",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T20:41:23Z",
+      "side": 1,
+      "message": "I think what we can do for now is hardcode a constant like kMaxSampleBufferAttachments to 4.\nIt should be fine since we only ever use two of them: begin and end\n\nThen elsewhere (like BackendMTL.mm when we check other limits), we can put this TODO about ASSERTing or checking it whenever we\u0027re able to query what the max is.",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 45
+      },
+      "revId": "9fecf90156394f5a934da1550817f1d6e2c0c89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7484cea2_2514a6c4",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T20:41:23Z",
+      "side": 1,
+      "message": "it would be best to split this test into multiple tests so we can suppress them individually. Same for the test after it",
+      "range": {
+        "startLine": 834,
+        "startChar": 93,
+        "endLine": 835,
+        "endChar": 19
+      },
+      "revId": "9fecf90156394f5a934da1550817f1d6e2c0c89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

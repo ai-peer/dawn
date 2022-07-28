@@ -423,6 +423,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68dcd518_6b8f6b45",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T20:41:23Z",
+      "side": 1,
+      "message": "ok - we should have tests for all the various interesting cases though. I think the current tests only test\n - using a compute pipeline\n - using no render pipeline\n \nIn order to be sure timestamps are recorded as we expect in all of the cases,\n\nwe should have all of\n - compute pipeline\n - no compute pipeline\n - vertex + fragment render pipeline\n - vertex-only render pipeline\n - no render pipeline\n \nFor the cases that don\u0027t work - like no compute pipeline on Metal, we can suppress it and address them later with workarounds (like make an empty compute pipeline if no work ran at all inside the pass. same for empty blit encoders.)",
+      "parentUuid": "d54ee7b0_16cbbc11",
+      "range": {
+        "startLine": 239,
+        "startChar": 16,
+        "endLine": 240,
+        "endChar": 80
+      },
+      "revId": "3f30c82700cf5e7fb34a00693bfcffbcdc23733a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c81a9a0_24172ea8",
         "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
         "patchSetId": 3
