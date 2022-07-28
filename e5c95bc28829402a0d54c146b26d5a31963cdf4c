@@ -123,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3315c68_04428d88",
+        "filename": "src/dawn/native/stream/BlobSource.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T21:41:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6f1f07c_181f40ad",
+      "range": {
+        "startLine": 26,
+        "startChar": 24,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "298ba673_2a8e945e",
@@ -136,6 +160,24 @@
       "writtenOn": "2022-07-22T13:22:37Z",
       "side": 1,
       "message": "nit: for some reason (I think it has to do with casting in some cases) inheriting from std containers is a bit frowned upon. Any strong reason why this is-a vector and not has-a vector?",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1236ff86_86b37fbf",
+        "filename": "src/dawn/native/stream/ByteVectorSink.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T21:41:52Z",
+      "side": 1,
+      "message": "Hm, this is ported from CacheKey which was like this. wasn\u0027t easy to make it has-a since a bunch of the existing tests depend on it being is-a. I can look into it as a follow-up",
+      "parentUuid": "298ba673_2a8e945e",
       "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -189,6 +231,24 @@
       "side": 1,
       "message": "If we don\u0027t see another Sink than std::vector for the medium-term then we can keep as is since we can\u0027t catch OOM. Either way sounds good.",
       "parentUuid": "04ecb8a3_16a74135",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4db6a588_df3b7ead",
+        "filename": "src/dawn/native/stream/Sink.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T21:41:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2e5845bb_d7a25934",
       "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -263,6 +323,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0da15cd0_317ecce3",
+        "filename": "src/dawn/native/stream/Stream.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T21:41:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93dbc017_55ad146f",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9a101d2_a651bc36",
@@ -276,6 +354,24 @@
       "writtenOn": "2022-07-22T13:22:37Z",
       "side": 1,
       "message": "Serialize and Deserialize seem to have disappeared in this patchset, the comment here and at [1] need to be updated.",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "641078ea_84af3d68",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T21:41:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9a101d2_a651bc36",
       "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -297,6 +393,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea3982e8_6c4bb54f",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T21:41:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "419efaab_136e0f2d",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecd98105_8eab5491",
@@ -310,6 +424,24 @@
       "writtenOn": "2022-07-22T13:22:37Z",
       "side": 1,
       "message": "nit: Why is v2 needed? Isn\u0027t (T\u0026\u0026v, Ts\u0026\u0026... vs) sufficient to make the arbitrary argument case work? ditto for StreamOut.",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d086db18_e849d898",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T21:41:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecd98105_8eab5491",
       "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -349,6 +481,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a87e613_91d1412c",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T21:41:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfe29239_c502bed8",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "840c12f6_f3ce45b4",
@@ -384,6 +534,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "552cdd58_ec09bef1",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T21:41:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9e1b173_b0c2a447",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "535f0c95_bbc88470",
@@ -397,6 +565,24 @@
       "writtenOn": "2022-07-22T13:22:37Z",
       "side": 1,
       "message": "This serialization inverts the order of bits in the serialized stream. Maybe instead do:\n\n byte |\u003d (t[j] ? 1 : 0) \u003c\u003c (j - i)?",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab8989a2_6d3912a8",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T21:41:52Z",
+      "side": 1,
+      "message": "N/A now.",
+      "parentUuid": "535f0c95_bbc88470",
       "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -435,6 +621,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46471386_ec227574",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T21:41:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "741dcac9_c6caabeb",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "039e2b9f_fe3ad242",
@@ -452,6 +656,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca936c5d_464a9539",
+        "filename": "src/dawn/tests/unittests/native/CacheKeyTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T21:41:52Z",
+      "side": 1,
+      "message": "Changed up some of these tests to not be redundant",
+      "parentUuid": "039e2b9f_fe3ad242",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3066f2f_d8d868f9",
@@ -465,6 +687,24 @@
       "writtenOn": "2022-07-22T13:22:37Z",
       "side": 1,
       "message": "ditto",
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce9d2146_3d64e136",
+        "filename": "src/dawn/tests/unittests/native/CacheKeyTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T21:41:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3066f2f_d8d868f9",
       "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -505,6 +745,30 @@
       "writtenOn": "2022-07-23T04:29:44Z",
       "side": 1,
       "message": "nit. weird formatting?",
+      "range": {
+        "startLine": 406,
+        "startChar": 92,
+        "endLine": 406,
+        "endChar": 95
+      },
+      "revId": "e5c95bc28829402a0d54c146b26d5a31963cdf4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f69da609_372317cd",
+        "filename": "src/dawn/tests/unittests/native/CacheKeyTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-28T21:41:52Z",
+      "side": 1,
+      "message": "the macro requires this for some reason\n\n\"must specify at least one argument for \u0027...\u0027 parameter of variadic macro\"",
+      "parentUuid": "45555c9e_566fe694",
       "range": {
         "startLine": 406,
         "startChar": 92,
