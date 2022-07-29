@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "a592a120c5c18b89fb210bf75bac5949bb833b45",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbd432f2_85bb6a9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-07-29T00:19:46Z",
+      "side": 1,
+      "message": "LGTM, just curious how do we determine if the gen files should be prefixed by `api_`? ",
+      "revId": "a592a120c5c18b89fb210bf75bac5949bb833b45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
