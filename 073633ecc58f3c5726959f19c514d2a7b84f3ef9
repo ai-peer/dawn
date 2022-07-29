@@ -16,6 +16,239 @@
       "message": "The implementation of eager transition would be basically like this. PTAL, thanks!",
       "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d2dc9c4_db7955f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-29T18:57:25Z",
+      "side": 1,
+      "message": "Direction looks good, thanks! It would be nice to keep the OS-specific parts separated. Also there are failures on the bots due to tests needed updates.\n\nI had hoped the external texture logic had stayed more inside texture so swapchains could work with the same code path but I think we can see about that much later.\n\nDo you see the gains you hoped for one ChromeOS with this?",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c892dae7_97267f05",
+        "filename": "src/dawn/native/vulkan/CommandRecordingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-29T18:57:25Z",
+      "side": 1,
+      "message": "nit: for now this is always a single exportable VkSemaphore, so maybe it could be \"VkSemaphore exportableSignalSemaphore\"? Or remove entirely if we choose to do all the handling in DeviceVk.",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb493f90_02825515",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-29T18:57:25Z",
+      "side": 1,
+      "message": "nit: nothing here requires Linux",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faaa7bbb_d7769c97",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-29T18:57:25Z",
+      "side": 1,
+      "message": "nit: we can avoid OS-specific defines in this code by making the dup() be part of the external semaphore service API as DuplicateHandle() for example. On Fuchsia it can be https://fuchsia.dev/fuchsia-src/reference/syscalls/handle_duplicate",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "951c7239_f3b7f28c",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-29T18:57:25Z",
+      "side": 1,
+      "message": "u-u-nit: Maybe we could have a comment for this block describing vaguely what happens so this large function is easier to skim.",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5884f249_408fd1f0",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-29T18:57:25Z",
+      "side": 1,
+      "message": "nit: no need to clear since the recording context is reset below.",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78644683_9004963a",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-29T18:57:25Z",
+      "side": 1,
+      "message": "u-u-nit: we could put the comment on the line above to avoid this awkward reflow. Ditto below.",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b20b87f_43c36b0b",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-29T18:57:25Z",
+      "side": 1,
+      "message": "It is the code that\u0027s handling a specific recording context that calls this method, so it would be better to pass it as an argument as it is not immediately clear that GetPendingRecordingContext and the caller\u0027s one are the same.",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0da3bb23_9376882f",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-29T18:57:25Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d038b54_e17f72e4",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-29T18:57:25Z",
+      "side": 1,
+      "message": "nit: this will be done in DestroyImpl that Destroy calls",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3dd6c16_2036a58f",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-29T18:57:25Z",
+      "side": 1,
+      "message": "ditto this could be part of the ExternalSemaphore service to avoid OS-specific code here. Fuchsia would be https://fuchsia.dev/fuchsia-src/reference/syscalls/handle_close",
+      "range": {
+        "startLine": 916,
+        "startChar": 12,
+        "endLine": 916,
+        "endChar": 17
+      },
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ac674da_185a5e22",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-29T18:57:25Z",
+      "side": 1,
+      "message": "u-nit: this could be grouped around with the import/export functions below.",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "589eb823_bada41a9",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-29T18:57:25Z",
+      "side": 1,
+      "message": "nit: \"EagerlyTransitioned\" to keep it adjective-like like the other enum names.\n\nAlso can we have some doc about what each state mean?",
+      "range": {
+        "startLine": 164,
+        "startChar": 71,
+        "endLine": 164,
+        "endChar": 86
+      },
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
