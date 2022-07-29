@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c84fece0_84a620e1",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1197,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-07-29T14:27:10Z",
+      "side": 1,
+      "message": "This should be element_count_expression\n\nhttps://gpuweb.github.io/gpuweb/wgsl/#syntax-element_count_expression\n\nI filed https://bugs.chromium.org/p/tint/issues/detail?id\u003d1630 to fix this separately.",
+      "range": {
+        "startLine": 1197,
+        "startChar": 20,
+        "endLine": 1197,
+        "endChar": 41
+      },
+      "revId": "14529e6797b4daa9fc1c260e3a68a90f57249f67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

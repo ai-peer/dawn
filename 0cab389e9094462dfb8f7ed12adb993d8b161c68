@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b954dbe_58c7ea1e",
+        "filename": "src/tint/reader/wgsl/parser_impl_error_msg_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-07-29T14:27:10Z",
+      "side": 0,
+      "message": "right.  This will be caught in type resolution:  \u0027array\u0027 is not a type.",
+      "range": {
+        "startLine": 825,
+        "startChar": 17,
+        "endLine": 825,
+        "endChar": 28
+      },
+      "revId": "0cab389e9094462dfb8f7ed12adb993d8b161c68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
