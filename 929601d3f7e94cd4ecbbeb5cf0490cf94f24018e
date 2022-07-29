@@ -22,6 +22,30 @@
       },
       "revId": "929601d3f7e94cd4ecbbeb5cf0490cf94f24018e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4be241b0_a6602fcc",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2579,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-29T14:12:27Z",
+      "side": 0,
+      "message": "I think it was so there was less work for `sem::Type::Common`, which can handle duplicates.",
+      "parentUuid": "38f50706_e06f67f2",
+      "range": {
+        "startLine": 2579,
+        "startChar": 8,
+        "endLine": 2579,
+        "endChar": 27
+      },
+      "revId": "929601d3f7e94cd4ecbbeb5cf0490cf94f24018e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
