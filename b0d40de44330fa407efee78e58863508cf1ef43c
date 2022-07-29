@@ -135,6 +135,30 @@
       },
       "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb0a69c7_26038f25",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-29T08:29:15Z",
+      "side": 1,
+      "message": "I think what\u0027s happening is that inside importExternalTexture we call AssociateMailbox which implicitly flushes all the Dawn commands to make the reservations etc correctly pipelined.\n\nSo what the decoder sees is:\n\n  for (each importExternalTexture) {\n    HandleDawnCommands\n    AssociateMailbox\n  }\n\nA suggestion I gave Jie in our last meeting is that maybe we could just throttle the performPollingWork done by HandleDawnCommands to run no more often than each 1ms for example. It\u0027s a short-term solution until we have a mechanism where Dawn can signal that some stuff completed, but at least it fixes the issue in the short term.",
+      "parentUuid": "68fbd986_33e350ae",
+      "range": {
+        "startLine": 190,
+        "startChar": 13,
+        "endLine": 191,
+        "endChar": 74
+      },
+      "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
