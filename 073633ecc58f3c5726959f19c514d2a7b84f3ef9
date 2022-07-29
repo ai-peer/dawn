@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aefc5ef7_167a1f33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-29T12:57:53Z",
+      "side": 1,
+      "message": "The implementation of eager transition would be basically like this. PTAL, thanks!",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
