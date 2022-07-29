@@ -111,6 +111,30 @@
       },
       "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68fbd986_33e350ae",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-29T01:02:34Z",
+      "side": 1,
+      "message": "My understanding is:\n```\nfor each video in total 7x7 videos {\n  1)Renderer: JS calls ImportExternalTexture for video.\n  2)Renderer: C++ runs deviceCreateExternalTxture -- https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/webgpu/gpu_external_texture.cc;drc\u003d17f7701d0e74a1a73ddb80002a07b5f83245381f;l\u003d288\n  3)GPU: runs WebGPUDecoderImpl::HandleDawnCommands for the devieCeateExternal.\n  4)GPU: calls PerformPollingWork at the end of HandleDawnCommands -- https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/webgpu_decoder_impl.cc;drc\u003ddaed597d580d450d36578c0cc53b4f72d3b507da;l\u003d1474 \n}\n```\nSo PerformPollingWork should gets called in step 4.\nI will try to capture a stacktrace to confirm this.",
+      "parentUuid": "97fff04b_4e2846d5",
+      "range": {
+        "startLine": 190,
+        "startChar": 13,
+        "endLine": 191,
+        "endChar": 74
+      },
+      "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
