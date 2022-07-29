@@ -33,6 +33,24 @@
       "message": "LGTM, just curious how do we determine if the gen files should be prefixed by `api_`? ",
       "revId": "a592a120c5c18b89fb210bf75bac5949bb833b45",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15c9ad26_c95de45a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-07-29T00:34:17Z",
+      "side": 1,
+      "message": "the api_ stuff is relatively new and probably the rest of generated files should use it if it\u0027s here to stay.\n\nThat said, it might go away. There were folks at Intel interested in reusing parts of Dawn for WebNN but it\u0027s unclear what the status is.",
+      "parentUuid": "cbd432f2_85bb6a9a",
+      "revId": "a592a120c5c18b89fb210bf75bac5949bb833b45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
