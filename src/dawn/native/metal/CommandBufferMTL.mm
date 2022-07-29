@@ -610,7 +610,12 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
     while (mCommands.NextCommandId(&type)) {
         switch (type) {
             case Command::BeginComputePass: {
-                mCommands.NextCommand<BeginComputePassCmd>();
+                BeginComputePassCmd* cmd = mCommands.NextCommand<BeginComputePassCmd>();
+
+                if (cmd->beginTimestamp.querySet.Get() != nullptr ||
+                    cmd->endTimestamp.querySet.Get() != nullptr) {
+                    return DAWN_UNIMPLEMENTED_ERROR("timestampWrites unimplemented.");
+                }
 
                 for (const SyncScopeResourceUsage& scope :
                      GetResourceUsages().computePasses[nextComputePassNumber].dispatchUsages) {
@@ -626,6 +631,11 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
 
             case Command::BeginRenderPass: {
                 BeginRenderPassCmd* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
+
+                if (cmd->beginTimestamp.querySet.Get() != nullptr ||
+                    cmd->endTimestamp.querySet.Get() != nullptr) {
+                    return DAWN_UNIMPLEMENTED_ERROR("timestampWrites unimplemented.");
+                }
 
                 LazyClearSyncScope(GetResourceUsages().renderPasses[nextRenderPassNumber],
                                    commandContext);
@@ -896,6 +906,10 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
             case Command::WriteTimestamp: {
                 WriteTimestampCmd* cmd = mCommands.NextCommand<WriteTimestampCmd>();
                 QuerySet* querySet = ToBackend(cmd->querySet.Get());
+
+                if (@available(macos 11.0, *)) {
+                    return DAWN_UNIMPLEMENTED_ERROR("timestampWrites unimplemented.");
+                }
 
                 if (@available(macos 10.15, iOS 14.0, *)) {
                     [commandContext->EnsureBlit()
