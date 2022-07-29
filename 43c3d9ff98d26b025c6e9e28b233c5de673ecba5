@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e448e7b_64844882",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002631
+      },
+      "writtenOn": "2022-07-29T16:39:15Z",
+      "side": 1,
+      "message": "Hi Ryan - this AST mutation, about deleting statements, proved to be rather involved because of issues such as not making a loop accidentally infinite, and not deleting the final case statement in a switch if there is a fallthrough that targets it.",
+      "revId": "43c3d9ff98d26b025c6e9e28b233c5de673ecba5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
