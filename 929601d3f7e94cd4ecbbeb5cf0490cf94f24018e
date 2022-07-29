@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38f50706_e06f67f2",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2579,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-07-29T13:51:56Z",
+      "side": 0,
+      "message": "I assume this was `UniqueVector` for a reason, no?",
+      "range": {
+        "startLine": 2579,
+        "startChar": 8,
+        "endLine": 2579,
+        "endChar": 27
+      },
+      "revId": "929601d3f7e94cd4ecbbeb5cf0490cf94f24018e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
