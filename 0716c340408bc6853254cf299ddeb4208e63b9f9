@@ -52,6 +52,24 @@
       "parentUuid": "dc023631_860c95c2",
       "revId": "0716c340408bc6853254cf299ddeb4208e63b9f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b2d1d00_10f710ee",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2806,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-07-29T10:33:34Z",
+      "side": 1,
+      "message": "The bug is to address all the `const_cast`s in the codebase. Given that they\u0027re so easy to search for, I see little value in spewing comments on each and every one of them.",
+      "parentUuid": "d593a7bf_0907ffb5",
+      "revId": "0716c340408bc6853254cf299ddeb4208e63b9f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
