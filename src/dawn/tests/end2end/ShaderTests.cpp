@@ -102,6 +102,53 @@ struct Buf {
     EXPECT_BUFFER_U32_RANGE_EQ(expected.data(), buffer, 0, kSteps);
 }
 
+// Test that structs continaing mat2xN used as uniforms are tightly-packed, and can be assigned to
+// storage buffers
+TEST_P(ShaderTests, Mat2x2UniformAndStorage) {
+    uint32_t const kSize = 4;
+    std::vector<float> expected{0.0f, 1.0f, 2.0f, 3.0f};
+    std::vector<float> data{0.0f, 1.0f, 2.0f, 3.0f};
+    uint64_t bufferSize = static_cast<uint64_t>(data.size() * sizeof(uint32_t));
+    wgpu::Buffer in_buffer = utils::CreateBufferFromData(
+        device, data.data(), bufferSize, wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst);
+    wgpu::Buffer out_buffer = CreateBuffer(kSize);
+
+    std::string shader = R"(
+struct Buf {
+    m : mat2x2<f32>,
+}
+
+@group(0) @binding(0) var<uniform> in_buffer : Buf;
+@group(0) @binding(1) var<storage, read_write> out_buffer : Buf;
+
+@compute @workgroup_size(1) fn main() {
+    for (out_buffer.m = in_buffer.m; ; ) {
+        break;
+    }
+})";
+
+    wgpu::ComputePipeline pipeline = CreateComputePipeline(shader, "main");
+
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                     {{0, in_buffer}, {1, out_buffer}});
+
+    wgpu::CommandBuffer commands;
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+        pass.SetPipeline(pipeline);
+        pass.SetBindGroup(0, bindGroup);
+        pass.DispatchWorkgroups(1);
+        pass.End();
+
+        commands = encoder.Finish();
+    }
+
+    queue.Submit(1, &commands);
+
+    EXPECT_BUFFER_FLOAT_RANGE_EQ(expected.data(), out_buffer, 0, kSize);
+}
+
 TEST_P(ShaderTests, BadWGSL) {
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("skip_validation"));
 
