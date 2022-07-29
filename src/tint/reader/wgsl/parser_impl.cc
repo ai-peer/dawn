@@ -170,9 +170,9 @@ ParserImpl::FunctionHeader::FunctionHeader(const FunctionHeader&) = default;
 
 ParserImpl::FunctionHeader::FunctionHeader(Source src,
                                            std::string n,
-                                           ast::ParameterList p,
+                                           utils::VectorRef<const ast::Parameter*> p,
                                            const ast::Type* ret_ty,
-                                           ast::AttributeList ret_attrs)
+                                           utils::VectorRef<const ast::Attribute*> ret_attrs)
     : source(src),
       name(n),
       params(std::move(p)),
@@ -507,7 +507,7 @@ Maybe<bool> ParserImpl::global_decl() {
     // Invalid syntax found - try and determine the best error message
 
     // We have attributes parsed, but nothing to consume them?
-    if (attrs.value.size() > 0) {
+    if (attrs.value.Length() > 0) {
         return add_error(next(), "expected declaration after attributes");
     }
 
@@ -540,7 +540,7 @@ Maybe<bool> ParserImpl::global_decl() {
 // global_variable_decl
 //  : variable_attribute_list* variable_decl
 //  | variable_attribute_list* variable_decl EQUAL const_expr
-Maybe<const ast::Variable*> ParserImpl::global_variable_decl(ast::AttributeList& attrs) {
+Maybe<const ast::Variable*> ParserImpl::global_variable_decl(AttributeList& attrs) {
     auto decl = variable_decl();
     if (decl.errored) {
         return Failure::kErrored;
@@ -549,24 +549,26 @@ Maybe<const ast::Variable*> ParserImpl::global_variable_decl(ast::AttributeList&
         return Failure::kNoMatch;
     }
 
-    const ast::Expression* initalizer = nullptr;
+    const ast::Expression* initializer = nullptr;
     if (match(Token::Type::kEqual)) {
         auto expr = logical_or_expression();
         if (expr.errored) {
             return Failure::kErrored;
         }
         if (!expr.matched) {
-            return add_error(peek(), "missing initalizer for 'var' declaration");
+            return add_error(peek(), "missing initializer for 'var' declaration");
         }
-        initalizer = expr.value;
+        initializer = expr.value;
     }
+
+    TINT_DEFER(attrs.Clear());
 
     return create<ast::Var>(decl->source,                             // source
                             builder_.Symbols().Register(decl->name),  // symbol
                             decl->type,                               // type
                             decl->storage_class,                      // storage class
                             decl->access,                             // access control
-                            initalizer,                               // initializer
+                            initializer,                              // initializer
                             std::move(attrs));                        // attributes
 }
 
@@ -575,7 +577,7 @@ Maybe<const ast::Variable*> ParserImpl::global_variable_decl(ast::AttributeList&
 //  | attribute* override (ident | variable_ident_decl) (equal expression)?
 // global_const_initializer
 //  : EQUAL const_expr
-Maybe<const ast::Variable*> ParserImpl::global_constant_decl(ast::AttributeList& attrs) {
+Maybe<const ast::Variable*> ParserImpl::global_constant_decl(AttributeList& attrs) {
     bool is_const = false;
     bool is_overridable = false;
     const char* use = nullptr;
@@ -618,6 +620,8 @@ Maybe<const ast::Variable*> ParserImpl::global_constant_decl(ast::AttributeList&
         }
         initializer = std::move(expr.value);
     }
+
+    TINT_DEFER(attrs.Clear());
 
     if (is_const) {
         return create<ast::Const>(decl->source,                             // source
@@ -1266,14 +1270,14 @@ Maybe<const ast::Struct*> ParserImpl::struct_decl() {
     }
 
     auto sym = builder_.Symbols().Register(name.value);
-    return create<ast::Struct>(t.source(), sym, std::move(body.value), ast::AttributeList{});
+    return create<ast::Struct>(t.source(), sym, std::move(body.value), utils::Empty);
 }
 
 // struct_body_decl
 //   : BRACE_LEFT (struct_member COMMA)* struct_member COMMA? BRACE_RIGHT
-Expect<ast::StructMemberList> ParserImpl::expect_struct_body_decl() {
-    return expect_brace_block("struct declaration", [&]() -> Expect<ast::StructMemberList> {
-        ast::StructMemberList members;
+Expect<ParserImpl::StructMemberList> ParserImpl::expect_struct_body_decl() {
+    return expect_brace_block("struct declaration", [&]() -> Expect<StructMemberList> {
+        StructMemberList members;
         bool errored = false;
         while (continue_parsing()) {
             // Check for the end of the list.
@@ -1289,7 +1293,7 @@ Expect<ast::StructMemberList> ParserImpl::expect_struct_body_decl() {
                     return Failure::kErrored;
                 }
             } else {
-                members.push_back(member.value);
+                members.Push(member.value);
             }
 
             if (!match(Token::Type::kComma)) {
@@ -1323,7 +1327,7 @@ Expect<ast::StructMember*> ParserImpl::expect_struct_member() {
 
 // function_decl
 //   : function_header body_stmt
-Maybe<const ast::Function*> ParserImpl::function_decl(ast::AttributeList& attrs) {
+Maybe<const ast::Function*> ParserImpl::function_decl(AttributeList& attrs) {
     auto header = function_header();
     if (header.errored) {
         if (sync_to(Token::Type::kBraceLeft, /* consume: */ false)) {
@@ -1352,8 +1356,10 @@ Maybe<const ast::Function*> ParserImpl::function_decl(ast::AttributeList& attrs)
         return Failure::kErrored;
     }
 
+    TINT_DEFER(attrs.Clear());
+
     return create<ast::Function>(header->source, builder_.Symbols().Register(header->name),
-                                 header->params, header->return_type, body.value, attrs,
+                                 header->params, header->return_type, body.value, std::move(attrs),
                                  header->return_type_attributes);
 }
 
@@ -1388,7 +1394,7 @@ Maybe<ParserImpl::FunctionHeader> ParserImpl::function_header() {
     }
 
     const ast::Type* return_type = nullptr;
-    ast::AttributeList return_attributes;
+    AttributeList return_attributes;
 
     if (match(Token::Type::kArrow)) {
         auto attrs = attribute_list();
@@ -1413,15 +1419,17 @@ Maybe<ParserImpl::FunctionHeader> ParserImpl::function_header() {
         return Failure::kErrored;
     }
 
-    return FunctionHeader{source, name.value, std::move(params.value), return_type,
-                          std::move(return_attributes)};
+    return FunctionHeader{
+        source,      std::move(name.value),        std::move(params.value),
+        return_type, std::move(return_attributes),
+    };
 }
 
 // param_list
 //   :
 //   | (param COMMA)* param COMMA?
-Expect<ast::ParameterList> ParserImpl::expect_param_list() {
-    ast::ParameterList ret;
+Expect<ParserImpl::ParameterList> ParserImpl::expect_param_list() {
+    ParameterList ret;
     while (continue_parsing()) {
         // Check for the end of the list.
         auto& t = peek();
@@ -1433,7 +1441,7 @@ Expect<ast::ParameterList> ParserImpl::expect_param_list() {
         if (param.errored) {
             return Failure::kErrored;
         }
-        ret.push_back(param.value);
+        ret.Push(param.value);
 
         if (!match(Token::Type::kComma)) {
             break;
@@ -1525,16 +1533,16 @@ Expect<const ast::Expression*> ParserImpl::expect_paren_expression() {
 
 // statements
 //   : statement*
-Expect<ast::StatementList> ParserImpl::expect_statements() {
+Expect<ParserImpl::StatementList> ParserImpl::expect_statements() {
     bool errored = false;
-    ast::StatementList stmts;
+    StatementList stmts;
 
     while (continue_parsing()) {
         auto stmt = statement();
         if (stmt.errored) {
             errored = true;
         } else if (stmt.matched) {
-            stmts.emplace_back(stmt.value);
+            stmts.Push(stmt.value);
         } else {
             break;
         }
@@ -1755,7 +1763,7 @@ Maybe<const ast::VariableDeclStatement*> ParserImpl::variable_stmt() {
                                           builder_.Symbols().Register(decl->name),  // symbol
                                           decl->type,                               // type
                                           initializer.value,                        // initializer
-                                          ast::AttributeList{});                    // attributes
+                                          utils::Empty);                            // attributes
 
         return create<ast::VariableDeclStatement>(decl->source, const_);
     }
@@ -1783,7 +1791,7 @@ Maybe<const ast::VariableDeclStatement*> ParserImpl::variable_stmt() {
                                      builder_.Symbols().Register(decl->name),  // symbol
                                      decl->type,                               // type
                                      initializer.value,                        // initializer
-                                     ast::AttributeList{});                    // attributes
+                                     utils::Empty);                            // attributes
 
         return create<ast::VariableDeclStatement>(decl->source, let);
     }
@@ -1815,7 +1823,7 @@ Maybe<const ast::VariableDeclStatement*> ParserImpl::variable_stmt() {
                                  decl->storage_class,                      // storage class
                                  decl->access,                             // access control
                                  initializer,                              // initializer
-                                 ast::AttributeList{});                    // attributes
+                                 utils::Empty);                            // attributes
 
     return create<ast::VariableDeclStatement>(var->source, var);
 }
@@ -1918,9 +1926,9 @@ Maybe<const ast::SwitchStatement*> ParserImpl::switch_stmt() {
         return add_error(peek(), "unable to parse selector expression");
     }
 
-    auto body = expect_brace_block("switch statement", [&]() -> Expect<ast::CaseStatementList> {
+    auto body = expect_brace_block("switch statement", [&]() -> Expect<CaseStatementList> {
         bool errored = false;
-        ast::CaseStatementList list;
+        CaseStatementList list;
         while (continue_parsing()) {
             auto stmt = switch_body();
             if (stmt.errored) {
@@ -1930,7 +1938,7 @@ Maybe<const ast::SwitchStatement*> ParserImpl::switch_stmt() {
             if (!stmt.matched) {
                 break;
             }
-            list.push_back(stmt.value);
+            list.Push(stmt.value);
         }
         if (errored) {
             return Failure::kErrored;
@@ -1955,7 +1963,7 @@ Maybe<const ast::CaseStatement*> ParserImpl::switch_body() {
 
     auto& t = next();
 
-    ast::CaseSelectorList selector_list;
+    CaseSelectorList selector_list;
     if (t.Is(Token::Type::kCase)) {
         auto selectors = expect_case_selectors();
         if (selectors.errored) {
@@ -1983,8 +1991,8 @@ Maybe<const ast::CaseStatement*> ParserImpl::switch_body() {
 
 // case_selectors
 //   : const_literal (COMMA const_literal)* COMMA?
-Expect<ast::CaseSelectorList> ParserImpl::expect_case_selectors() {
-    ast::CaseSelectorList selectors;
+Expect<ParserImpl::CaseSelectorList> ParserImpl::expect_case_selectors() {
+    CaseSelectorList selectors;
 
     while (continue_parsing()) {
         auto cond = const_literal();
@@ -1996,14 +2004,14 @@ Expect<ast::CaseSelectorList> ParserImpl::expect_case_selectors() {
             return add_error(cond.value->source, "invalid case selector must be an integer value");
         }
 
-        selectors.push_back(cond.value->As<ast::IntLiteralExpression>());
+        selectors.Push(cond.value->As<ast::IntLiteralExpression>());
 
         if (!match(Token::Type::kComma)) {
             break;
         }
     }
 
-    if (selectors.empty()) {
+    if (selectors.IsEmpty()) {
         return add_error(peek(), "unable to parse case selectors");
     }
 
@@ -2015,7 +2023,7 @@ Expect<ast::CaseSelectorList> ParserImpl::expect_case_selectors() {
 //   | statement case_body
 //   | FALLTHROUGH SEMICOLON
 Maybe<const ast::BlockStatement*> ParserImpl::case_body() {
-    ast::StatementList stmts;
+    StatementList stmts;
     while (continue_parsing()) {
         Source source;
         if (match(Token::Type::kFallthrough, &source)) {
@@ -2023,7 +2031,7 @@ Maybe<const ast::BlockStatement*> ParserImpl::case_body() {
                 return Failure::kErrored;
             }
 
-            stmts.emplace_back(create<ast::FallthroughStatement>(source));
+            stmts.Push(create<ast::FallthroughStatement>(source));
             break;
         }
 
@@ -2035,7 +2043,7 @@ Maybe<const ast::BlockStatement*> ParserImpl::case_body() {
             break;
         }
 
-        stmts.emplace_back(stmt.value);
+        stmts.Push(stmt.value);
     }
 
     return create<ast::BlockStatement>(Source{}, stmts);
@@ -2252,7 +2260,7 @@ Maybe<const ast::ContinueStatement*> ParserImpl::continue_stmt() {
 //   : CONTINUING body_stmt
 Maybe<const ast::BlockStatement*> ParserImpl::continuing_stmt() {
     if (!match(Token::Type::kContinuing)) {
-        return create<ast::BlockStatement>(Source{}, ast::StatementList{});
+        return create<ast::BlockStatement>(Source{}, utils::Empty);
     }
 
     return expect_body_stmt();
@@ -2402,9 +2410,10 @@ Maybe<const ast::Expression*> ParserImpl::singular_expression() {
 // argument_expression_list
 //   : PAREN_LEFT ((logical_or_expression COMMA)* logical_or_expression COMMA?)?
 //   PAREN_RIGHT
-Expect<ast::ExpressionList> ParserImpl::expect_argument_expression_list(std::string_view use) {
-    return expect_paren_block(use, [&]() -> Expect<ast::ExpressionList> {
-        ast::ExpressionList ret;
+Expect<ParserImpl::ExpressionList> ParserImpl::expect_argument_expression_list(
+    std::string_view use) {
+    return expect_paren_block(use, [&]() -> Expect<ExpressionList> {
+        ExpressionList ret;
         while (continue_parsing()) {
             auto arg = logical_or_expression();
             if (arg.errored) {
@@ -2412,7 +2421,7 @@ Expect<ast::ExpressionList> ParserImpl::expect_argument_expression_list(std::str
             } else if (!arg.matched) {
                 break;
             }
-            ret.push_back(arg.value);
+            ret.Push(arg.value);
 
             if (!match(Token::Type::kComma)) {
                 break;
@@ -3044,16 +3053,16 @@ Maybe<const ast::LiteralExpression*> ParserImpl::const_literal() {
     return Failure::kNoMatch;
 }
 
-Maybe<ast::AttributeList> ParserImpl::attribute_list() {
+Maybe<ParserImpl::AttributeList> ParserImpl::attribute_list() {
     bool errored = false;
-    ast::AttributeList attrs;
+    AttributeList attrs;
 
     while (continue_parsing()) {
         if (match(Token::Type::kAttr)) {
             if (auto attr = expect_attribute(); attr.errored) {
                 errored = true;
             } else {
-                attrs.emplace_back(attr.value);
+                attrs.Push(attr.value);
             }
         } else {
             break;
@@ -3064,7 +3073,7 @@ Maybe<ast::AttributeList> ParserImpl::attribute_list() {
         return Failure::kErrored;
     }
 
-    if (attrs.empty()) {
+    if (attrs.IsEmpty()) {
         return Failure::kNoMatch;
     }
 
@@ -3305,8 +3314,8 @@ Maybe<const ast::Attribute*> ParserImpl::attribute() {
     return Failure::kNoMatch;
 }
 
-bool ParserImpl::expect_attributes_consumed(ast::AttributeList& in) {
-    if (in.empty()) {
+bool ParserImpl::expect_attributes_consumed(utils::VectorRef<const ast::Attribute*> in) {
+    if (in.IsEmpty()) {
         return true;
     }
     add_error(in[0]->source, "unexpected attributes");
