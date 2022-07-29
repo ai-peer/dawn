@@ -16,6 +16,41 @@
       "message": "Okay, let\u0027s go with this then. Worst case is that we add an explicit `not-implemented-yet` error to the const-eval for `f16` builtins.",
       "revId": "b093b9b45a887631df001d13572d131bd522f9da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33b6242f_a48f3bc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-29T11:38:59Z",
+      "side": 1,
+      "message": "Thanks for review, I am submitting the CL.",
+      "revId": "b093b9b45a887631df001d13572d131bd522f9da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69b81512_9fb0b9d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-29T11:38:59Z",
+      "side": 1,
+      "message": "Thanks, I hope to implement `f16` const-eval at my best effort.",
+      "parentUuid": "46171d84_17d18a46",
+      "revId": "b093b9b45a887631df001d13572d131bd522f9da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
