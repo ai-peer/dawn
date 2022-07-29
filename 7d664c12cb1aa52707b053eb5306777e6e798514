@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "473a84c2_0101ffa6",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2288,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-29T12:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c9d66d3_986fde06",
+      "revId": "7d664c12cb1aa52707b053eb5306777e6e798514",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85df9e63_3cb6bbe6",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-07-28T20:14:16Z",
       "side": 1,
       "message": "It\u0027s confusing this returns `0` for error, but below `0` means runtime array. Can we add an actual return so return `std::tuple\u003cbool, uint32_t\u003e` or something?",
+      "revId": "7d664c12cb1aa52707b053eb5306777e6e798514",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ac47173_7a605b50",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-29T12:13:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85df9e63_3cb6bbe6",
       "revId": "7d664c12cb1aa52707b053eb5306777e6e798514",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
