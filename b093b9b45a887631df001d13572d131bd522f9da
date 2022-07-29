@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46171d84_17d18a46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-07-29T11:34:20Z",
+      "side": 1,
+      "message": "Okay, let\u0027s go with this then. Worst case is that we add an explicit `not-implemented-yet` error to the const-eval for `f16` builtins.",
+      "revId": "b093b9b45a887631df001d13572d131bd522f9da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
