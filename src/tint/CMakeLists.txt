@@ -419,6 +419,8 @@ set(TINT_LIB_SRCS
   transform/loop_to_for_loop.h
   transform/manager.cc
   transform/manager.h
+  transform/mat2_to_vec2.cc
+  transform/mat2_to_vec2.h
   transform/module_scope_var_to_entry_point_param.cc
   transform/module_scope_var_to_entry_point_param.h
   transform/multiplanar_external_texture.cc
@@ -1110,6 +1112,7 @@ if(TINT_BUILD_TESTS)
       transform/expand_compound_assignment.cc
       transform/localize_struct_array_assignment_test.cc
       transform/loop_to_for_loop_test.cc
+      transform/mat2_to_vec2_test.cc
       transform/module_scope_var_to_entry_point_param_test.cc
       transform/multiplanar_external_texture_test.cc
       transform/num_workgroups_from_uniform_test.cc
