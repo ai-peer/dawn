@@ -33,6 +33,40 @@
       "message": "still LGTM",
       "revId": "40d4f632bdb9dba41ce084e41947de81782cc84b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e1013c5_a75641a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-29T08:38:28Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "40d4f632bdb9dba41ce084e41947de81782cc84b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a820474c_23612176",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-29T08:38:28Z",
+      "side": 1,
+      "message": "nit: maybe check for the toggle first so that there is as little additional cost as possible for systems which don\u0027t have the issue.",
+      "revId": "40d4f632bdb9dba41ce084e41947de81782cc84b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
