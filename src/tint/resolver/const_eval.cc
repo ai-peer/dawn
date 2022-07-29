@@ -73,10 +73,7 @@ auto Dispatch_fia_fi32_f16(F&& f, CONSTANTS&&... cs) {
         [&](const sem::AbstractFloat*) { return f(cs->template As<AFloat>()...); },
         [&](const sem::F32*) { return f(cs->template As<f32>()...); },
         [&](const sem::I32*) { return f(cs->template As<i32>()...); },
-        [&](const sem::F16*) {
-            // TODO(crbug.com/tint/1502): Support const eval for f16
-            return nullptr;
-        });
+        [&](const sem::F16*) { return f(cs->template As<f16>()...); });
 }
 
 /// Helper that calls `f` passing in the value of all `cs`.
