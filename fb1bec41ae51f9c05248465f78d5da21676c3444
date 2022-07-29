@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "787a44ef_bf230078",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-29T09:47:26Z",
+      "side": 1,
+      "message": "Yeah I see your point, but please take a look at current patch. I thought implementing f16 constant evaluation may be kind of identical to f32 constant evaluation (?), and I have a try in this patch.",
+      "parentUuid": "ae64ee47_2d092fdc",
+      "revId": "fb1bec41ae51f9c05248465f78d5da21676c3444",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d68d99df_be29915d",
@@ -91,6 +109,30 @@
       "side": 1,
       "message": "Thanks!",
       "parentUuid": "d68d99df_be29915d",
+      "range": {
+        "startLine": 314,
+        "startChar": 0,
+        "endLine": 359,
+        "endChar": 11
+      },
+      "revId": "fb1bec41ae51f9c05248465f78d5da21676c3444",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1147bf1_830b4284",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 12
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-29T09:47:26Z",
+      "side": 1,
+      "message": "After tests, some fix are added to support `pointer` types (used by `arrayLength`) and fix-length vector types (e.g. `vec3\u003cT\u003e` instead of `vec\u003c3, T\u003e`, used by `cross`).",
+      "parentUuid": "cdca60f8_285c411c",
       "range": {
         "startLine": 314,
         "startChar": 0,

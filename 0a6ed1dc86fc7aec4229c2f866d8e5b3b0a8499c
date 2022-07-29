@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3736ec94_6027c77b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-29T09:47:26Z",
+      "side": 1,
+      "message": "Please take a look, thanks! This patch also support f16 constant evaluation for unary minus operator, `atan2` and `clamp` built-ins, which get aligned to the progressing constant evaluation works for other types.",
+      "revId": "0a6ed1dc86fc7aec4229c2f866d8e5b3b0a8499c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
