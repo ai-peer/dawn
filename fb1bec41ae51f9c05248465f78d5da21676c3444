@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57dc441c_b5ce2dcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-07-29T08:27:46Z",
+      "side": 1,
+      "message": "Now I am making this CL works with constant evaluation, which currently include `atan2`, `clamp`, and unary minus operator.",
+      "parentUuid": "5aa26335_1ef360b1",
+      "revId": "fb1bec41ae51f9c05248465f78d5da21676c3444",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d68d99df_be29915d",
