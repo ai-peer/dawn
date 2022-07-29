@@ -24,7 +24,9 @@
 #include "src/tint/transform/disable_uniformity_analysis.h"
 #include "src/tint/transform/expand_compound_assignment.h"
 #include "src/tint/transform/for_loop_to_loop.h"
+#include "src/tint/transform/fork_uniform_structs.h"
 #include "src/tint/transform/manager.h"
+#include "src/tint/transform/mat2_to_vec2.h"
 #include "src/tint/transform/promote_side_effects_to_decl.h"
 #include "src/tint/transform/remove_unreachable_statements.h"
 #include "src/tint/transform/simplify_pointers.h"
@@ -82,6 +84,8 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
     manager.Add<transform::AddEmptyEntryPoint>();
     manager.Add<transform::AddSpirvBlockAttribute>();
     manager.Add<transform::VarForDynamicIndex>();
+    manager.Add<transform::ForkUniformStructs>();
+    manager.Add<transform::Mat2ToVec2>();
 
     data.Add<transform::CanonicalizeEntryPointIO::Config>(
         transform::CanonicalizeEntryPointIO::Config(
