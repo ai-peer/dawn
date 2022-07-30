@@ -326,6 +326,8 @@ void Buffer::Unmap() {
         // instead of at buffer destruction.
         if (mMapState == MapState::MappedAtCreation && mDestructWriteHandleOnUnmap) {
             mWriteHandle = nullptr;
+            mMappedData = nullptr
+
             if (mReadHandle) {
                 // If it's both mappedAtCreation and MapRead we need to reset
                 // mMappedData to readHandle's GetData(). This could be changed to
