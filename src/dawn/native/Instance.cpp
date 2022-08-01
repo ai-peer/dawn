@@ -180,7 +180,9 @@ ResultOrError<Ref<AdapterBase>> InstanceBase::RequestAdapterInternal(
         if (GetEnabledBackends()[wgpu::BackendType::Vulkan]) {
             dawn_native::vulkan::AdapterDiscoveryOptions vulkanOptions;
             vulkanOptions.forceSwiftShader = true;
-            DAWN_TRY(DiscoverAdaptersInternal(&vulkanOptions));
+            DAWN_TRY_CONTEXT(DiscoverAdaptersInternal(&vulkanOptions),
+                             "trying to use Swiftshader trough the Vulkan backend (this adapter "
+                             "will be skipped).");
         }
 #else
         return Ref<AdapterBase>(nullptr);
@@ -371,7 +373,9 @@ MaybeError InstanceBase::DiscoverAdaptersInternal(const AdapterDiscoveryOptionsB
         foundBackend = true;
 
         std::vector<Ref<AdapterBase>> newAdapters;
-        DAWN_TRY_ASSIGN(newAdapters, backend->DiscoverAdapters(options));
+        DAWN_TRY_ASSIGN_CONTEXT(newAdapters, backend->DiscoverAdapters(options),
+                                "trying to discover a %s adapter (this adapter will be skipped).",
+                                backendType);
 
         for (Ref<AdapterBase>& adapter : newAdapters) {
             ASSERT(adapter->GetBackendType() == backend->GetType());
