@@ -16,6 +16,46 @@
       "message": "WDYT?",
       "revId": "259ae1cc8aa1bb437308203d6de4073953d278d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb4bbc4a_ae6f5c6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-01T15:45:22Z",
+      "side": 1,
+      "message": "hmm..  I feel like it would be more ideal to prepend the message so you see it better. Also, because DiscoverAdaptersInternal is called by RequestAdaptersInternal, I think the skipped message will show up twice. Right now I think this will look like:\n\n```\nSome error happened!\n - While trying use SwiftShader through the Vulkan backend (this adapter will be skipped)\n - While trying to discover a Vulkan adapter (this adapter will be skipped)\n - While foo\n - While bar\n ```\n\nwould be nicer more like:\n\n```\nSkipping Vulkan SwiftShader adapter because initialization failed: Some error happened!\n - While foo\n - While bar\n```\n\nHow we might do that: maybe it\u0027s better to handle it later just after formatting the error message?\n 1. So when we ConsumedError in InstanceBase::DiscoverAdapters\n 2. When we call the request adapter callback with nullptr adapter.\n\nSide note: on (2) we call it with status Error when it more (all?) cases it should probably be WGPURequestAdapterStatus_Unavailable because in the JS api, requestAdapter never rejects the Promise.",
+      "revId": "259ae1cc8aa1bb437308203d6de4073953d278d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acaae87f_fb73fe7b",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-01T15:45:22Z",
+      "side": 1,
+      "message": "typo: \"through\"",
+      "range": {
+        "startLine": 184,
+        "startChar": 56,
+        "endLine": 184,
+        "endChar": 62
+      },
+      "revId": "259ae1cc8aa1bb437308203d6de4073953d278d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
