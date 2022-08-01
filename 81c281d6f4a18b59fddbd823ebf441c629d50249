@@ -46,6 +46,30 @@
       },
       "revId": "81c281d6f4a18b59fddbd823ebf441c629d50249",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "982e1a43_aed545e9",
+        "filename": "tools/src/cmd/gen/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-01T17:20:55Z",
+      "side": 1,
+      "message": "Holding on!",
+      "parentUuid": "d39f9a1c_67e3a24e",
+      "range": {
+        "startLine": 528,
+        "startChar": 37,
+        "endLine": 528,
+        "endChar": 68
+      },
+      "revId": "81c281d6f4a18b59fddbd823ebf441c629d50249",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
