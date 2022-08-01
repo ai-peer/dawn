@@ -108,8 +108,8 @@ class PipelineCachingTests : public DawnTest {
     const EntryCounts counts = {
         // pipeline caching is only implemented on D3D12/Vulkan
         IsD3D12() || IsVulkan() ? 1u : 0u,
-        // shader module caching is only implemented on Vulkan
-        IsVulkan() ? 1u : 0u,
+        // shader module caching is only implemented on Vulkan/Metal
+        IsVulkan() || IsMetal() ? 1u : 0u,
     };
     NiceMock<CachingInterfaceMock> mMockCache;
 };
@@ -406,7 +406,7 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheDescriptorNegativeCase
     {
         wgpu::Device device = CreateDevice();
         utils::ComboRenderPipelineDescriptor desc;
-        desc.primitive.topology = wgpu::PrimitiveTopology::PointList;
+        desc.EnableDepthStencil();
         desc.vertex.module = utils::CreateShaderModule(device, kVertexShaderDefault.data());
         desc.vertex.entryPoint = "main";
         desc.cFragment.module = utils::CreateShaderModule(device, kFragmentShaderDefault.data());
@@ -586,7 +586,7 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheLayout) {
                            device.CreateRenderPipeline(&desc));
     }
 
-    // Cache should hit for the shaders, but not for the pipeline.
+    // Cache should not hit for the fragment shader, but should hit for the pipeline.
     // The shader is different but compiles to the same due to binding number remapping.
     {
         wgpu::Device device = CreateDevice();
@@ -604,8 +604,8 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheLayout) {
                                 {1, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform},
                             }),
                     });
-        EXPECT_CACHE_STATS(mMockCache, Hit(2 * counts.shaderModule), Add(counts.pipeline),
-                           device.CreateRenderPipeline(&desc));
+        EXPECT_CACHE_STATS(mMockCache, Hit(counts.shaderModule + counts.pipeline),
+                           Add(counts.shaderModule), device.CreateRenderPipeline(&desc));
     }
 }
 
