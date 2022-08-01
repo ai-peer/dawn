@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "429f8d3b_b3c4e384",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-08-01T08:21:24Z",
+      "side": 1,
+      "message": "Hi Corentin, Austin and Rafael,\n\nI\u0027ve just rebased this CL. PTAL, thanks!",
+      "revId": "0ab2ccc7b5e8325a911de01d473b25f196e836ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
