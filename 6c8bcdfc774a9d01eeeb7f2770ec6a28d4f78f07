@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67b68f64_24899918",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-01T20:02:56Z",
+      "side": 1,
+      "message": "Suggested at https://github.com/emscripten-core/emscripten/pull/17507#discussion_r932707507\n\nDidn\u0027t change \"vertex buffer not used\" value to 0 though, as there is an earlier update change it from 0 to 2 with some reasons: https://dawn-review.googlesource.com/c/dawn/+/91920 ",
+      "revId": "6c8bcdfc774a9d01eeeb7f2770ec6a28d4f78f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
