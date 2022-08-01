@@ -193,6 +193,23 @@ TEST(SerializeTests, StdPair) {
     EXPECT_CACHE_KEY_EQ(std::make_pair(s, uint32_t(42)), expected);
 }
 
+// Test that ByteVectorSink serializes std::optional as expected.
+TEST(SerializeTests, StdOptional) {
+    std::string_view s = "webgpu";
+    {
+        ByteVectorSink expected;
+        StreamIn(&expected, true, s);
+
+        EXPECT_CACHE_KEY_EQ(std::optional(s), expected);
+    }
+    {
+        ByteVectorSink expected;
+        StreamIn(&expected, false);
+
+        EXPECT_CACHE_KEY_EQ(std::optional<std::string_view>(), expected);
+    }
+}
+
 // Test that ByteVectorSink serializes std::unordered_map as expected.
 TEST(SerializeTests, StdUnorderedMap) {
     std::unordered_map<uint32_t, std::string_view> m;
@@ -254,6 +271,50 @@ TEST(StreamTests, SerializeDeserializeParamPack) {
     EXPECT_EQ(a, aOut);
     EXPECT_EQ(b, bOut);
     EXPECT_EQ(c, cOut);
+}
+
+// Test that serializing then deserializing stream::StructMembers works as expected.
+TEST(StreamTests, SerializeDeserializeStructMembers) {
+    struct Foo {
+        int a;
+        float b;
+        std::string c;
+    };
+    constexpr auto members = std::make_tuple(&Foo::a, &Foo::b, &Foo::c);
+
+    Foo foo{1, 2, "3"};
+    ByteVectorSink sink;
+    StreamIn(&sink, StructMembers(foo, members));
+
+    // Test that the serialization is correct.
+    {
+        ByteVectorSink expected;
+        StreamIn(&expected, foo.a, foo.b, foo.c);
+        EXPECT_THAT(sink, VectorEq(expected));
+    }
+
+    // Test that deserialization works for StructMembers, passed inline.
+    {
+        BlobSource src(CreateBlob(sink));
+        Foo out;
+        auto err = StreamOut(&src, StructMembers(&out, members));
+        EXPECT_FALSE(err.IsError());
+        EXPECT_EQ(foo.a, out.a);
+        EXPECT_EQ(foo.b, out.b);
+        EXPECT_EQ(foo.c, out.c);
+    }
+
+    // Test that deserialization works for StructMembers, passed as a pointer.
+    {
+        BlobSource src(CreateBlob(sink));
+        Foo out;
+        auto outMembers = StructMembers(&out, members);
+        auto err = StreamOut(&src, &outMembers);
+        EXPECT_FALSE(err.IsError());
+        EXPECT_EQ(foo.a, out.a);
+        EXPECT_EQ(foo.b, out.b);
+        EXPECT_EQ(foo.c, out.c);
+    }
 }
 
 template <size_t N>
