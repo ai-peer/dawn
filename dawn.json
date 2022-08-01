@@ -1086,16 +1086,6 @@
             },
             {
                 "name": "create swap chain",
-                "tags": ["dawn"],
-                "returns": "swap chain",
-                "args": [
-                    {"name": "surface", "type": "surface", "optional": true},
-                    {"name": "descriptor", "type": "swap chain descriptor", "annotation": "const*"}
-                ]
-            },
-            {
-                "name": "create swap chain",
-                "tags": ["upstream", "emscripten"],
                 "returns": "swap chain",
                 "args": [
                     {"name": "surface", "type": "surface"},
@@ -2484,8 +2474,7 @@
             {"name": "format", "type": "texture format"},
             {"name": "width", "type": "uint32_t"},
             {"name": "height", "type": "uint32_t"},
-            {"name": "present mode", "type": "present mode"},
-            {"name": "implementation", "type": "uint64_t", "default": 0, "tags": ["deprecated"]}
+            {"name": "present mode", "type": "present mode"}
         ]
     },
     "s type": {

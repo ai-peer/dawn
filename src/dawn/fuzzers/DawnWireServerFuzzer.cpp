@@ -55,8 +55,8 @@ WGPUSwapChain ErrorDeviceCreateSwapChain(WGPUDevice device,
                                          WGPUSurface surface,
                                          const WGPUSwapChainDescriptor*) {
     WGPUSwapChainDescriptor desc = {};
-    // A 0 implementation will trigger a swapchain creation error.
-    desc.implementation = 0;
+    // A 0 width will trigger a swapchain creation error.
+    desc.width = 0;
     return sOriginalDeviceCreateSwapChain(device, surface, &desc);
 }
 

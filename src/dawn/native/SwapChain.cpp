@@ -41,9 +41,6 @@ class ErrorSwapChain final : public SwapChainBase {
 MaybeError ValidateSwapChainDescriptor(const DeviceBase* device,
                                        const Surface* surface,
                                    const SwapChainDescriptor* descriptor) {
-    DAWN_INVALID_IF(descriptor->implementation != 0, "implementation (%u) is not 0.", descriptor->implementation);
-    DAWN_INVALID_IF(surface == nullptr,
-                    "The surface is null.");
     DAWN_INVALID_IF(surface->IsError(), "[Surface] is invalid.");
 
     DAWN_TRY(ValidatePresentMode(descriptor->presentMode));

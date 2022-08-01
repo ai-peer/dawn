@@ -142,7 +142,6 @@ wgpu::Device CreateCppDawnDevice() {
     swapChainDesc.width = 640;
     swapChainDesc.height = 480;
     swapChainDesc.presentMode = WGPUPresentMode_Mailbox;
-    swapChainDesc.implementation = 0;
     WGPUSwapChain backendSwapChain =
         backendProcs.deviceCreateSwapChain(backendDevice, surface, &swapChainDesc);
 
