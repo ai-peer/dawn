@@ -451,22 +451,8 @@ TEST_F(DestroyObjectTests, SwapChainExplicit) {
     swapChainMock.Destroy();
     EXPECT_FALSE(swapChainMock.IsAlive());
 }
-
-// If the reference count on API objects reach 0, they should delete themselves. Note that GTest
-// will also complain if there is a memory leak.
-TEST_F(DestroyObjectTests, SwapChainImplicit) {
-    SwapChainMock* swapChainMock = new SwapChainMock(&mDevice);
-    EXPECT_CALL(*swapChainMock, DestroyImpl).Times(1);
-    {
-        SwapChainDescriptor desc = {};
-        Ref<SwapChainBase> swapChain;
-        EXPECT_CALL(mDevice, CreateSwapChainImpl(_))
-            .WillOnce(Return(ByMove(AcquireRef(swapChainMock))));
-        DAWN_ASSERT_AND_ASSIGN(swapChain, mDevice.CreateSwapChain(nullptr, &desc));
-
-        EXPECT_TRUE(swapChain->IsAlive());
-    }
-}
+// Note that no implicit tests are done for swapchain because it is awkward to create a
+// wgpu::Surface in this file.
 
 TEST_F(DestroyObjectTests, TextureExplicit) {
     {
@@ -711,14 +697,8 @@ TEST_F(DestroyObjectTests, DestroyObjects) {
         EXPECT_TRUE(shaderModule->IsCachedReference());
     }
 
-    Ref<SwapChainBase> swapChain;
-    {
-        SwapChainDescriptor desc = {};
-        EXPECT_CALL(mDevice, CreateSwapChainImpl(_))
-            .WillOnce(Return(ByMove(AcquireRef(swapChainMock))));
-        DAWN_ASSERT_AND_ASSIGN(swapChain, mDevice.CreateSwapChain(nullptr, &desc));
-        EXPECT_TRUE(swapChain->IsAlive());
-    }
+    // Note that swapchains aren't tested because it is awkward to create a wgpu::Surface in this
+    // file.
 
     Ref<TextureBase> texture;
     {
@@ -749,7 +729,6 @@ TEST_F(DestroyObjectTests, DestroyObjects) {
     EXPECT_FALSE(renderPipeline->IsAlive());
     EXPECT_FALSE(sampler->IsAlive());
     EXPECT_FALSE(shaderModule->IsAlive());
-    EXPECT_FALSE(swapChain->IsAlive());
     EXPECT_FALSE(texture->IsAlive());
     EXPECT_FALSE(textureView->IsAlive());
 }
