@@ -29,8 +29,12 @@ namespace dawn::native {
 
 enum class UsageValidationMode;
 
+bool HasDeprecatedColor(const RenderPassColorAttachment& attachment);
+
 MaybeError ValidateCommandEncoderDescriptor(const DeviceBase* device,
                                             const CommandEncoderDescriptor* descriptor);
+
+Color ClampClearColorValueToLegalRange(const Color& originalColor, const Format& format);
 
 class CommandEncoder final : public ApiObjectBase {
   public:
