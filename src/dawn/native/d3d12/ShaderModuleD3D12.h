@@ -15,8 +15,11 @@
 #ifndef SRC_DAWN_NATIVE_D3D12_SHADERMODULED3D12_H_
 #define SRC_DAWN_NATIVE_D3D12_SHADERMODULED3D12_H_
 
-#include "dawn/native/ShaderModule.h"
+#include <string>
+#include <tuple>
 
+#include "dawn/native/Blob.h"
+#include "dawn/native/ShaderModule.h"
 #include "dawn/native/d3d12/d3d12_platform.h"
 
 namespace dawn::native {
@@ -31,11 +34,21 @@ class PipelineLayout;
 // Manages a ref to one of the various representations of shader blobs and information used to
 // emulate vertex/instance index starts
 struct CompiledShader {
-    ComPtr<ID3DBlob> compiledFXCShader;
-    ComPtr<IDxcBlob> compiledDXCShader;
+    static ResultOrError<CompiledShader> FromBlob(Blob blob);
+
     D3D12_SHADER_BYTECODE GetD3D12ShaderBytecode() const;
 
+    Blob shaderBlob;
+    std::string hlslSource;  // hlslSource is NOT written or loaded from the cache if Toggle
+                             // dump_shaders is false.
     bool usesVertexOrInstanceIndex;
+
+    // Note: Called as a function instead of a constexpr value since MSVC fails to compile this
+    // as a static member variable.
+    static constexpr auto Members() {
+        return std::make_tuple(&CompiledShader::shaderBlob, &CompiledShader::hlslSource,
+                               &CompiledShader::usesVertexOrInstanceIndex);
+    }
 };
 
 class ShaderModule final : public ShaderModuleBase {
