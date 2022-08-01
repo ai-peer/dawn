@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f28e6ab_347ce67d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-01T07:24:25Z",
+      "side": 1,
+      "message": "LGTM, thanks for splitting!",
+      "revId": "1898a172f6c274161976a6037eb674e40a1ec11d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ddd7f27_cd1698b7",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-01T07:24:25Z",
+      "side": 1,
+      "message": "nit: until",
+      "range": {
+        "startLine": 821,
+        "startChar": 88,
+        "endLine": 821,
+        "endChar": 92
+      },
+      "revId": "1898a172f6c274161976a6037eb674e40a1ec11d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd97ad0d_80306bb3",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-01T07:24:25Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 884,
+        "startChar": 88,
+        "endLine": 884,
+        "endChar": 92
+      },
+      "revId": "1898a172f6c274161976a6037eb674e40a1ec11d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
