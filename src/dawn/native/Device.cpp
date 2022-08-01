@@ -1709,16 +1709,16 @@ ResultOrError<Ref<SwapChainBase>> DeviceBase::CreateSwapChain(
                          descriptor);
     }
 
-    NewSwapChainBase* previousSwapChain = surface->GetAttachedSwapChain();
-    ResultOrError<Ref<NewSwapChainBase>> maybeNewSwapChain =
+    SwapChainBase* previousSwapChain = surface->GetAttachedSwapChain();
+    ResultOrError<Ref<SwapChainBase>> maybeSwapChain =
         CreateSwapChainImpl(surface, previousSwapChain, descriptor);
 
     if (previousSwapChain != nullptr) {
         previousSwapChain->DetachFromSurface();
     }
 
-    Ref<NewSwapChainBase> newSwapChain;
-    DAWN_TRY_ASSIGN(newSwapChain, std::move(maybeNewSwapChain));
+    Ref<SwapChainBase> newSwapChain;
+    DAWN_TRY_ASSIGN(newSwapChain, std::move(maybeSwapChain));
 
     newSwapChain->SetIsAttached();
     surface->SetAttachedSwapChain(newSwapChain.Get());

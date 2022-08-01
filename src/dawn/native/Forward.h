@@ -49,7 +49,7 @@ class Surface;
 class ShaderModuleBase;
 class StagingBufferBase;
 class SwapChainBase;
-class NewSwapChainBase;
+class SwapChainBase;
 class TextureBase;
 class TextureViewBase;
 

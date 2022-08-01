@@ -291,9 +291,9 @@ ResultOrError<Ref<ShaderModuleBase>> Device::CreateShaderModuleImpl(
     OwnedCompilationMessages* compilationMessages) {
     return ShaderModule::Create(this, descriptor, parseResult, compilationMessages);
 }
-ResultOrError<Ref<NewSwapChainBase>> Device::CreateSwapChainImpl(
+ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(
     Surface* surface,
-    NewSwapChainBase* previousSwapChain,
+    SwapChainBase* previousSwapChain,
     const SwapChainDescriptor* descriptor) {
     return DAWN_FORMAT_VALIDATION_ERROR("New swapchains not implemented.");
 }

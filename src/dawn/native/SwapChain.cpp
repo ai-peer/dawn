@@ -31,24 +31,12 @@ class ErrorSwapChain final : public SwapChainBase {
     explicit ErrorSwapChain(DeviceBase* device) : SwapChainBase(device, ObjectBase::kError) {}
 
   private:
-    void APIConfigure(wgpu::TextureFormat format,
-                      wgpu::TextureUsage allowedUsage,
-                      uint32_t width,
-                      uint32_t height) override {
-        GetDevice()->ConsumedError(DAWN_FORMAT_VALIDATION_ERROR("%s is an error swapchain.", this));
-    }
-
-    TextureViewBase* APIGetCurrentTextureView() override {
-        GetDevice()->ConsumedError(DAWN_FORMAT_VALIDATION_ERROR("%s is an error swapchain.", this));
-        return TextureViewBase::MakeError(GetDevice());
-    }
-
-    void APIPresent() override {
-        GetDevice()->ConsumedError(DAWN_FORMAT_VALIDATION_ERROR("%s is an error swapchain.", this));
-    }
+    ResultOrError<Ref<TextureViewBase>> GetCurrentTextureViewImpl() override { UNREACHABLE(); }
+    MaybeError PresentImpl() override { UNREACHABLE(); }
+    void DetachFromSurfaceImpl() override { UNREACHABLE(); }
 };
 
-}  // anonymous namespace
+}  // namespace
 
 MaybeError ValidateSwapChainDescriptor(const DeviceBase* device,
                                        const Surface* surface,
@@ -102,7 +90,7 @@ MaybeError ValidateSwapChainDescriptor(const DeviceBase* device,
     return {};
 }
 
-TextureDescriptor GetSwapChainBaseTextureDescriptor(NewSwapChainBase* swapChain) {
+TextureDescriptor GetSwapChainBaseTextureDescriptor(SwapChainBase* swapChain) {
     TextureDescriptor desc;
     desc.usage = swapChain->GetUsage();
     desc.dimension = wgpu::TextureDimension::e2D;
@@ -114,43 +102,31 @@ TextureDescriptor GetSwapChainBaseTextureDescriptor(NewSwapChainBase* swapChain)
     return desc;
 }
 
-// SwapChainBase
-
-SwapChainBase::SwapChainBase(DeviceBase* device) : ApiObjectBase(device, kLabelNotImplemented) {
-    TrackInDevice();
-}
-
-SwapChainBase::SwapChainBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-    : ApiObjectBase(device, tag) {}
-
-SwapChainBase::~SwapChainBase() {}
-
-void SwapChainBase::DestroyImpl() {}
-
-// static
-SwapChainBase* SwapChainBase::MakeError(DeviceBase* device) {
-    return new ErrorSwapChain(device);
-}
-
-ObjectType SwapChainBase::GetType() const {
-    return ObjectType::SwapChain;
-}
-
-// Implementation of NewSwapChainBase
-
-NewSwapChainBase::NewSwapChainBase(DeviceBase* device,
-                                   Surface* surface,
-                                   const SwapChainDescriptor* descriptor)
-    : SwapChainBase(device),
+SwapChainBase::SwapChainBase(DeviceBase* device,
+                             Surface* surface,
+                             const SwapChainDescriptor* descriptor)
+    : ApiObjectBase(device, descriptor->label),
       mAttached(false),
       mWidth(descriptor->width),
       mHeight(descriptor->height),
       mFormat(descriptor->format),
       mUsage(descriptor->usage),
       mPresentMode(descriptor->presentMode),
-      mSurface(surface) {}
+      mSurface(surface) {
+    TrackInDevice();
+}
 
-NewSwapChainBase::~NewSwapChainBase() {
+SwapChainBase::SwapChainBase(DeviceBase* device, ObjectBase::ErrorTag tag)
+    : ApiObjectBase(device, tag) {}
+
+SwapChainBase::SwapChainBase(DeviceBase* device) : ApiObjectBase(device, kLabelNotImplemented) {}
+
+// static
+SwapChainBase* SwapChainBase::MakeError(DeviceBase* device) {
+    return new ErrorSwapChain(device);
+}
+
+SwapChainBase::~SwapChainBase() {
     if (mCurrentTextureView != nullptr) {
         ASSERT(mCurrentTextureView->GetTexture()->GetTextureState() ==
                TextureBase::TextureState::Destroyed);
@@ -159,7 +135,9 @@ NewSwapChainBase::~NewSwapChainBase() {
     ASSERT(!mAttached);
 }
 
-void NewSwapChainBase::DetachFromSurface() {
+void SwapChainBase::DestroyImpl() {}
+
+void SwapChainBase::DetachFromSurface() {
     if (mAttached) {
         DetachFromSurfaceImpl();
         mSurface = nullptr;
@@ -167,19 +145,19 @@ void NewSwapChainBase::DetachFromSurface() {
     }
 }
 
-void NewSwapChainBase::SetIsAttached() {
+void SwapChainBase::SetIsAttached() {
     mAttached = true;
 }
 
-void NewSwapChainBase::APIConfigure(wgpu::TextureFormat format,
-                                    wgpu::TextureUsage allowedUsage,
-                                    uint32_t width,
-                                    uint32_t height) {
+void SwapChainBase::APIConfigure(wgpu::TextureFormat format,
+                                 wgpu::TextureUsage allowedUsage,
+                                 uint32_t width,
+                                 uint32_t height) {
     GetDevice()->ConsumedError(
         DAWN_FORMAT_VALIDATION_ERROR("Configure is invalid for surface-based swapchains."));
 }
 
-TextureViewBase* NewSwapChainBase::APIGetCurrentTextureView() {
+TextureViewBase* SwapChainBase::APIGetCurrentTextureView() {
     Ref<TextureViewBase> result;
     if (GetDevice()->ConsumedError(GetCurrentTextureView(), &result,
                                    "calling %s.GetCurrentTextureView()", this)) {
@@ -188,7 +166,7 @@ TextureViewBase* NewSwapChainBase::APIGetCurrentTextureView() {
     return result.Detach();
 }
 
-ResultOrError<Ref<TextureViewBase>> NewSwapChainBase::GetCurrentTextureView() {
+ResultOrError<Ref<TextureViewBase>> SwapChainBase::GetCurrentTextureView() {
     DAWN_TRY(ValidateGetCurrentTextureView());
 
     if (mCurrentTextureView != nullptr) {
@@ -214,7 +192,7 @@ ResultOrError<Ref<TextureViewBase>> NewSwapChainBase::GetCurrentTextureView() {
     return mCurrentTextureView;
 }
 
-void NewSwapChainBase::APIPresent() {
+void SwapChainBase::APIPresent() {
     if (GetDevice()->ConsumedError(ValidatePresent())) {
         return;
     }
@@ -228,39 +206,43 @@ void NewSwapChainBase::APIPresent() {
     mCurrentTextureView = nullptr;
 }
 
-uint32_t NewSwapChainBase::GetWidth() const {
+ObjectType SwapChainBase::GetType() const {
+    return ObjectType::SwapChain;
+}
+
+uint32_t SwapChainBase::GetWidth() const {
     return mWidth;
 }
 
-uint32_t NewSwapChainBase::GetHeight() const {
+uint32_t SwapChainBase::GetHeight() const {
     return mHeight;
 }
 
-wgpu::TextureFormat NewSwapChainBase::GetFormat() const {
+wgpu::TextureFormat SwapChainBase::GetFormat() const {
     return mFormat;
 }
 
-wgpu::TextureUsage NewSwapChainBase::GetUsage() const {
+wgpu::TextureUsage SwapChainBase::GetUsage() const {
     return mUsage;
 }
 
-wgpu::PresentMode NewSwapChainBase::GetPresentMode() const {
+wgpu::PresentMode SwapChainBase::GetPresentMode() const {
     return mPresentMode;
 }
 
-Surface* NewSwapChainBase::GetSurface() const {
+Surface* SwapChainBase::GetSurface() const {
     return mSurface;
 }
 
-bool NewSwapChainBase::IsAttached() const {
+bool SwapChainBase::IsAttached() const {
     return mAttached;
 }
 
-wgpu::BackendType NewSwapChainBase::GetBackendType() const {
+wgpu::BackendType SwapChainBase::GetBackendType() const {
     return GetDevice()->GetAdapter()->GetBackendType();
 }
 
-MaybeError NewSwapChainBase::ValidatePresent() const {
+MaybeError SwapChainBase::ValidatePresent() const {
     DAWN_TRY(GetDevice()->ValidateIsAlive());
     DAWN_TRY(GetDevice()->ValidateObject(this));
 
@@ -273,7 +255,7 @@ MaybeError NewSwapChainBase::ValidatePresent() const {
     return {};
 }
 
-MaybeError NewSwapChainBase::ValidateGetCurrentTextureView() const {
+MaybeError SwapChainBase::ValidateGetCurrentTextureView() const {
     DAWN_TRY(GetDevice()->ValidateIsAlive());
     DAWN_TRY(GetDevice()->ValidateObject(this));
 
