@@ -639,6 +639,7 @@ void Device::InitTogglesFromDriver() {
     SetToggle(Toggle::UseDXC, false);
     SetToggle(Toggle::D3D12AlwaysUseTypelessFormatsForCastableTexture,
               !GetDeviceInfo().supportsCastingFullyTypedFormat);
+    SetToggle(Toggle::D3D12ApplyLargeIntegerAsClearValueWithDraw, true);
 
     // Disable optimizations when using FXC
     // See https://crbug.com/dawn/1203

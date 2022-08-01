@@ -235,10 +235,6 @@ TEST_P(RenderPassLoadOpTests, LoadOpClearOnIntegerFormats) {
 
 // This test verifies that input double values are being rendered correctly when clearing.
 TEST_P(RenderPassLoadOpTests, LoadOpClearIntegerFormatsToLargeValues) {
-    // TODO(http://crbug.com/dawn/537): Implemement a workaround to enable clearing integer formats
-    // to large values on D3D12.
-    DAWN_SUPPRESS_TEST_IF(IsD3D12());
-
     // TODO(crbug.com/dawn/1109): Re-enable once fixed on Mac Mini 8,1s w/ 11.5.
     DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && IsMacOS(11, 5));
 
@@ -389,10 +385,6 @@ TEST_P(RenderPassLoadOpTests, LoadOpClearIntegerFormatsOutOfBound_Sint16) {
 // Test clearing a color attachment on Uint32 formats (R32Uint, RG32Uint, RGBA32Uint) when the clear
 // values are out of bound.
 TEST_P(RenderPassLoadOpTests, LoadOpClearIntegerFormatsOutOfBound_Uint32) {
-    // TODO(http://crbug.com/dawn/537): Implemement a workaround to enable clearing integer formats
-    // to large values on D3D12.
-    DAWN_SUPPRESS_TEST_IF(IsD3D12());
-
     // TODO(crbug.com/dawn/1109): Re-enable once fixed on Mac Mini 8,1s w/ 11.5.
     DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && IsMacOS(11, 5));
 
@@ -424,10 +416,6 @@ TEST_P(RenderPassLoadOpTests, LoadOpClearIntegerFormatsOutOfBound_Uint32) {
 // Test clearing a color attachment on Sint32 formats (R32Sint, RG32Sint, RGBA32Sint) when the clear
 // values are out of bound.
 TEST_P(RenderPassLoadOpTests, LoadOpClearIntegerFormatsOutOfBound_Sint32) {
-    // TODO(http://crbug.com/dawn/537): Implemement a workaround to enable clearing integer formats
-    // to large values on D3D12.
-    DAWN_SUPPRESS_TEST_IF(IsD3D12());
-
     // TODO(crbug.com/dawn/1109): Re-enable once fixed on Mac Mini 8,1s w/ 11.5.
     DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && IsMacOS(11, 5));
 
@@ -499,10 +487,6 @@ TEST_P(RenderPassLoadOpTests, LoadOpClearNormalizedFormatsOutOfBound) {
 
 // Test clearing multiple color attachments with different big integers can still work correctly.
 TEST_P(RenderPassLoadOpTests, LoadOpClearWithBigInt32ValuesOnMultipleColorAttachments) {
-    // TODO(http://crbug.com/dawn/537): Implemement a workaround to enable clearing integer formats
-    // to large values on D3D12.
-    DAWN_SUPPRESS_TEST_IF(IsD3D12());
-
     // TODO(crbug.com/dawn/1109): Re-enable once fixed on Mac Mini 8,1s w/ 11.5.
     DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && IsMacOS(11, 5));
 
@@ -598,10 +582,6 @@ TEST_P(RenderPassLoadOpTests, LoadOpClearWithBigInt32ValuesOnMultipleColorAttach
 // Test clearing multiple color attachments with different big unsigned integers can still work
 // correctly.
 TEST_P(RenderPassLoadOpTests, LoadOpClearWithBigUInt32ValuesOnMultipleColorAttachments) {
-    // TODO(http://crbug.com/dawn/537): Implemement a workaround to enable clearing integer formats
-    // to large values on D3D12.
-    DAWN_SUPPRESS_TEST_IF(IsD3D12());
-
     // TODO(crbug.com/dawn/1109): Re-enable once fixed on Mac Mini 8,1s w/ 11.5.
     DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && IsMacOS(11, 5));
 
