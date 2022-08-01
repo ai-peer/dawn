@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "279eed0e_50f3513a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-01T07:50:46Z",
+      "side": 1,
+      "message": "Thanks for the CL! I don\u0027t if it is meant to be up for review yet. If it is the case you can add a couple OWNERS as reviewers and start the review. See https://dawn.googlesource.com/dawn/+/refs/heads/main/CONTRIBUTING.md for the contributing process which is a tiny bit different from Chromium (you need CR+2 to submit to CQ)\n\nThe fix looks good. We can also have a test specifically for this in third_party/dawn/src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp if you want, or you can let the Dawn team take care of that if it\u0027s too involved.",
+      "revId": "8e0ba7649ecfc735ae472caf99af89e85b0c0834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
