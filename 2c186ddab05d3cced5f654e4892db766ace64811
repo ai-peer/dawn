@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0884a61c_cca88d88",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-01T17:21:44Z",
+      "side": 1,
+      "message": "missing a clang-format?",
+      "range": {
+        "startLine": 895,
+        "startChar": 17,
+        "endLine": 895,
+        "endChar": 27
+      },
+      "revId": "2c186ddab05d3cced5f654e4892db766ace64811",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
