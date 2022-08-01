@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20494d33_05e42ef8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-01T23:54:44Z",
+      "side": 1,
+      "message": "LGTM. Generally, if you can identify failing tests and file bugs, that\u0027s preferred. It\u0027s hard to do now with the CTS noise and I hope it\u0027ll get better soon. Probably not worth filing a bug for some of these failures though as I think Shrek\u0027s CL will fix it. In any case, we can wait till the results are more stable before further triage.",
+      "revId": "7acb3ee295d592a1c1bc7734d255d9c988279298",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "454e74aa_81fde97e",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-01T23:54:44Z",
+      "side": 1,
+      "message": "fyi, shrekshao@, I think your CL https://chromium-review.googlesource.com/c/chromium/src/+/3800399 will fix all or many of these issues too.",
+      "revId": "7acb3ee295d592a1c1bc7734d255d9c988279298",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
