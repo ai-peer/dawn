@@ -96,4 +96,21 @@ void stream::Stream<tint::transform::VertexAttributeDescriptor>::Write(
     StreamIn(sink, attrib.format, attrib.offset, attrib.shader_location);
 }
 
+// static
+template <>
+void stream::Stream<tint::writer::ArrayLengthFromUniformOptions>::Write(
+    stream::Sink* sink,
+    const tint::writer::ArrayLengthFromUniformOptions& o) {
+    static_assert(offsetof(tint::writer::ArrayLengthFromUniformOptions, ubo_binding) == 0,
+                  "Please update serialization for tint::writer::ArrayLengthFromUniformOptions");
+    static_assert(
+        offsetof(tint::writer::ArrayLengthFromUniformOptions, bindpoint_to_size_index) == 8,
+        "Please update serialization for tint::writer::ArrayLengthFromUniformOptions");
+    static_assert(
+        sizeof(tint::writer::ArrayLengthFromUniformOptions) ==
+            8 + sizeof(tint::writer::ArrayLengthFromUniformOptions::bindpoint_to_size_index),
+        "Please update serialization for tint::writer::ArrayLengthFromUniformOptions");
+    StreamIn(sink, o.ubo_binding, o.bindpoint_to_size_index);
+}
+
 }  // namespace dawn::native
