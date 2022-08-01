@@ -19,6 +19,7 @@
 #include <bitset>
 #include <functional>
 #include <limits>
+#include <tuple>
 #include <unordered_map>
 #include <utility>
 #include <vector>
@@ -57,6 +58,14 @@ MaybeError StreamOut(Source* s, T* v) {
     return Stream<T>::Read(s, v);
 }
 
+// Helper to take an rvalue passed to StreamOut and forward it as a pointer.
+// This makes it possible to pass output wrappers like stream::StructMembers inline.
+// For example: `DAWN_TRY(StreamOut(&source, stream::StructMembers(...)));`
+template <typename T>
+MaybeError StreamOut(Source* s, T&& v) {
+    return StreamOut(s, &v);
+}
+
 // Helper to call StreamIn on a parameter pack.
 template <typename T, typename... Ts>
 constexpr void StreamIn(Sink* s, const T& v, const Ts&... vs) {
@@ -66,9 +75,9 @@ constexpr void StreamIn(Sink* s, const T& v, const Ts&... vs) {
 
 // Helper to call StreamOut on a parameter pack.
 template <typename T, typename... Ts>
-MaybeError StreamOut(Source* s, T* v, Ts*... vs) {
-    DAWN_TRY(StreamOut(s, v));
-    return StreamOut(s, vs...);
+MaybeError StreamOut(Source* s, T&& v, Ts&&... vs) {
+    DAWN_TRY(StreamOut(s, std::forward<T>(v)));
+    return StreamOut(s, std::forward<Ts>(vs)...);
 }
 
 // Stream specialization for fundamental types.
@@ -182,6 +191,19 @@ class Stream<T, std::enable_if_t<std::is_pointer_v<T>>> {
                       "std::string_view instead.");
         StreamIn(sink, t != nullptr);
         if (t != nullptr) {
+            StreamIn(sink, *t);
+        }
+    }
+};
+
+// Stream specialization fro std::optional
+template <typename T>
+class Stream<std::optional<T>> {
+  public:
+    static void Write(stream::Sink* sink, const std::optional<T>& t) {
+        bool hasValue = t.has_value();
+        StreamIn(sink, hasValue);
+        if (hasValue) {
             StreamIn(sink, *t);
         }
     }
@@ -308,6 +330,42 @@ class Stream<detail::Iterable<Iterator>> {
         for (auto it = iter.begin; it != iter.end; ++it) {
             StreamIn(sink, *it);
         }
+    }
+};
+
+// Helper class to contain the begin/end iterators of an iterable.
+namespace detail {
+template <typename S, typename... Members>
+struct StructMembers {
+    S s;
+    std::tuple<Members...> members;
+};
+}  // namespace detail
+
+// Helper for making detail::StructMembers from a struct and a tuple of pointer-to-members.
+template <typename Struct, typename... Members>
+auto StructMembers(const Struct& s, std::tuple<Members...> members) {
+    return detail::StructMembers<const Struct&, Members...>{s, std::move(members)};
+}
+
+// Helper for making detail::StructMembers from a struct and a tuple of pointer-to-members.
+template <typename Struct, typename... Members>
+auto StructMembers(Struct* s, std::tuple<Members...> members) {
+    return detail::StructMembers<Struct*, Members...>{s, std::move(members)};
+}
+
+// Stream specialization for detail::StructMembers calls StreamIn/StreamOut on all struct members.
+template <typename S, typename... Members>
+class Stream<detail::StructMembers<S, Members...>> {
+  public:
+    static void Write(Sink* sink, const detail::StructMembers<S, Members...>& in) {
+        std::apply([&](const auto&... member) { StreamIn(sink, in.s.*member...); }, in.members);
+    }
+
+    static MaybeError Read(Source* source, detail::StructMembers<S, Members...>* out) {
+        return std::apply(
+            [&](const auto&... member) { return StreamOut(source, (*out->s).*member...); },
+            out->members);
     }
 };
 
