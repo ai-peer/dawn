@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28434081_9a0a47b6",
+        "filename": "src/dawn/gpu_info.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-08-01T23:18:22Z",
+      "side": 0,
+      "message": "[1]",
+      "range": {
+        "startLine": 85,
+        "startChar": 8,
+        "endLine": 85,
+        "endChar": 54
+      },
+      "revId": "6835c8df3e016f4607659bfeaae840483fb1cb24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

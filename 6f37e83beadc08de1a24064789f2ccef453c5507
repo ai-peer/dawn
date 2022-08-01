@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27d0e359_138b77d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-08-01T23:18:22Z",
+      "side": 1,
+      "message": "Jiawei (and Yang), please take a look at this small change before I send it to Google folks. ",
+      "revId": "6f37e83beadc08de1a24064789f2ccef453c5507",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31fa6043_b8ade2d7",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-08-01T23:18:22Z",
+      "side": 1,
+      "message": "Jiawei, the current architectures for Intel Xe (Intel Gen 12) in gpu_info.json at [1] are actually Intel Gen 12 LP. I need to use Intel Gen 12 LP for a toggle (see the toggle below). I think what you want for this toggle for dawn issue 1487 (https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1487) includes both Gen 12 LP and Gen 12 HP. Please correct me if I am wrong.",
+      "range": {
+        "startLine": 668,
+        "startChar": 4,
+        "endLine": 669,
+        "endChar": 55
+      },
+      "revId": "6f37e83beadc08de1a24064789f2ccef453c5507",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
