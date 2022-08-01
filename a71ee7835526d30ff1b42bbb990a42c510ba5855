@@ -124,6 +124,24 @@
       "parentUuid": "a9f053c8_15d5d751",
       "revId": "a71ee7835526d30ff1b42bbb990a42c510ba5855",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29080ad1_df44cb83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-01T17:25:54Z",
+      "side": 1,
+      "message": "\u003e The validation is done by the Dawn frontend, so the parts of Tint that are hit are just reader/wgsl resolver/ and inspctor/. These parts aren\u0027t WIP so we should be ok.\n\n\"just\" 😊 SGTM - if you\u0027re happy that they\u0027re solidly tested, I\u0027m happy for this to land.",
+      "parentUuid": "9be7ed7d_fb23cf6e",
+      "revId": "a71ee7835526d30ff1b42bbb990a42c510ba5855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
