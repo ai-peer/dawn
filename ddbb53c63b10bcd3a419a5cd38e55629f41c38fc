@@ -33,6 +33,24 @@
       "message": "The Luci and Kokoro infra seems to be broken.",
       "revId": "ddbb53c63b10bcd3a419a5cd38e55629f41c38fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "675e8e02_f0454a6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-01T13:32:53Z",
+      "side": 1,
+      "message": "Yeah, Gerrit is having issues at the momment and is serving stale data. It should be fixed eventually.",
+      "parentUuid": "185f3524_30910d48",
+      "revId": "ddbb53c63b10bcd3a419a5cd38e55629f41c38fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
