@@ -175,6 +175,8 @@ source_set("sources") {
   sources += [
     "Adapter.cpp",
     "Adapter.h",
+    "ApplyClearValueWithDrawHelper.cpp",
+    "ApplyClearValueWithDrawHelper.h",
     "AsyncTask.cpp",
     "AsyncTask.h",
     "AttachmentState.cpp",

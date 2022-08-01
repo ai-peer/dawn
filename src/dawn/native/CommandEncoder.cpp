@@ -20,6 +20,7 @@
 
 #include "dawn/common/BitSetIterator.h"
 #include "dawn/common/Math.h"
+#include "dawn/native/ApplyClearValueWithDrawHelper.h"
 #include "dawn/native/BindGroup.h"
 #include "dawn/native/Buffer.h"
 #include "dawn/native/ChainUtils_autogen.h"
@@ -43,11 +44,6 @@
 namespace dawn::native {
 
 namespace {
-
-bool HasDeprecatedColor(const RenderPassColorAttachment& attachment) {
-    return !std::isnan(attachment.clearColor.r) || !std::isnan(attachment.clearColor.g) ||
-           !std::isnan(attachment.clearColor.b) || !std::isnan(attachment.clearColor.a);
-}
 
 MaybeError ValidateB2BCopyAlignment(uint64_t dataSize, uint64_t srcOffset, uint64_t dstOffset) {
     // Copy size must be a multiple of 4 bytes on macOS.
@@ -654,6 +650,22 @@ bool IsReadOnlyDepthStencilAttachment(
     return true;
 }
 
+}  // namespace
+
+MaybeError ValidateCommandEncoderDescriptor(const DeviceBase* device,
+                                            const CommandEncoderDescriptor* descriptor) {
+    DAWN_TRY(ValidateSingleSType(descriptor->nextInChain,
+                                 wgpu::SType::DawnEncoderInternalUsageDescriptor));
+
+    const DawnEncoderInternalUsageDescriptor* internalUsageDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &internalUsageDesc);
+
+    DAWN_INVALID_IF(internalUsageDesc != nullptr &&
+                        !device->APIHasFeature(wgpu::FeatureName::DawnInternalUsages),
+                    "%s is not available.", wgpu::FeatureName::DawnInternalUsages);
+    return {};
+}
+
 Color ClampClearColorValueToLegalRange(const Color& originalColor, const Format& format) {
     const AspectInfo& aspectInfo = format.GetAspectInfo(Aspect::Color);
     double minValue = 0;
@@ -688,20 +700,9 @@ Color ClampClearColorValueToLegalRange(const Color& originalColor, const Format&
             std::clamp(originalColor.a, minValue, maxValue)};
 }
 
-}  // namespace
-
-MaybeError ValidateCommandEncoderDescriptor(const DeviceBase* device,
-                                            const CommandEncoderDescriptor* descriptor) {
-    DAWN_TRY(ValidateSingleSType(descriptor->nextInChain,
-                                 wgpu::SType::DawnEncoderInternalUsageDescriptor));
-
-    const DawnEncoderInternalUsageDescriptor* internalUsageDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &internalUsageDesc);
-
-    DAWN_INVALID_IF(internalUsageDesc != nullptr &&
-                        !device->APIHasFeature(wgpu::FeatureName::DawnInternalUsages),
-                    "%s is not available.", wgpu::FeatureName::DawnInternalUsages);
-    return {};
+bool HasDeprecatedColor(const RenderPassColorAttachment& attachment) {
+    return !std::isnan(attachment.clearColor.r) || !std::isnan(attachment.clearColor.g) ||
+           !std::isnan(attachment.clearColor.b) || !std::isnan(attachment.clearColor.a);
 }
 
 // static
@@ -844,6 +845,11 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
     bool depthReadOnly = false;
     bool stencilReadOnly = false;
     Ref<AttachmentState> attachmentState;
+    std::vector<TimestampWrite> timestampWritesAtBeginning;
+    std::vector<TimestampWrite> timestampWritesAtEnd;
+    Ref<BufferBase> optionalUniformBufferWithClearColors;
+    bool applyClearValueWithDraw = false;
+
     bool success = mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
@@ -851,6 +857,12 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
 
             DAWN_TRY(ValidateRenderPassDescriptor(device, descriptor, &width, &height, &sampleCount,
                                                   mUsageValidationMode));
+
+            applyClearValueWithDraw = ShouldApplyClearValueWithDraw(device, descriptor);
+            if (applyClearValueWithDraw) {
+                DAWN_TRY_ASSIGN(optionalUniformBufferWithClearColors,
+                                CreateUniformBufferWithClearValues(device, descriptor));
+            }
 
             ASSERT(width > 0 && height > 0 && sampleCount > 0);
 
@@ -997,6 +1009,15 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
             device, descriptor, this, &mEncodingContext, std::move(usageTracker),
             std::move(attachmentState), width, height, depthReadOnly, stencilReadOnly);
         mEncodingContext.EnterPass(passEncoder.Get());
+
+        if (applyClearValueWithDraw) {
+            MaybeError error = ApplyClearValueWithDraw(
+                passEncoder.Get(), std::move(optionalUniformBufferWithClearColors), descriptor);
+            if (error.IsError()) {
+                return RenderPassEncoder::MakeError(device, this, &mEncodingContext);
+            }
+        }
+
         return passEncoder;
     }
 
