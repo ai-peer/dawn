@@ -36,7 +36,6 @@ void Mat2ToVec2::Run(CloneContext& ctx, const DataMap&, DataMap&) const {
 
     const Program* s = ctx.src;
     ProgramBuilder* d = ctx.dst;
-    std::unordered_map<const ast::Struct*, const ast::Struct*> modified_structs;
 
     // Process all structs.
     ctx.ReplaceAll([&](const ast::Struct* ast_str) -> const ast::Struct* {
@@ -54,29 +53,14 @@ void Mat2ToVec2::Run(CloneContext& ctx, const DataMap&, DataMap&) const {
             auto* vecTySem = d->create<sem::Vector>(mat->type(), 2u);
             for (uint32_t i = 0u; i < mat->rows(); ++i) {
                 auto* vecTy = CreateASTTypeFor(ctx, vecTySem);
-                members.push_back(d->Member(d->Symbols().New(s->Symbols().NameFor(mem->Name()) + std::to_string(i)), vecTy));
+                std::string name = (s->Symbols().NameFor(mem->Name()) + std::to_string(i));
+                tint::Symbol symbol = d->Symbols().New(name);
+                members.push_back(d->Member(symbol, vecTy));
             }
             modified = true;
         }
         if (modified) {
-            auto* new_str = d->Structure(ctx.Clone(str->Name()), std::move(members));
-            modified_structs[ast_str] = new_str;
-            return new_str;
-        }
-        return nullptr;
-    });
-
-    // Process all vars using modified structs.
-    ctx.ReplaceAll([&](const ast::Var* var) -> const ast::Var* {
-        if (var->declared_storage_class != ast::StorageClass::kUniform) {
-            return nullptr;
-        }
-        auto* str = sem.Get(var->type)->As<sem::Struct>();
-        if (!str) {
-            return nullptr;
-        }
-        if (auto* new_struct = modified_structs[str->Declaration()]) {
-            return d->Var(ctx.Clone(var->symbol), d->ty.Of(new_struct), var->declared_storage_class, ctx.Clone(var->attributes));
+            return d->Structure(ctx.Clone(str->Name()), std::move(members));
         }
         return nullptr;
     });
