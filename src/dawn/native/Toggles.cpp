@@ -290,6 +290,14 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "issue. We can workaround this security issue via allocating extra memory and limiting its "
       "access in itself.",
       "https://crbug.com/dawn/949"}},
+    {Toggle::D3D12ApplyLargeIntegerAsClearValueWithDraw,
+     {"d3d12_apply_large_integer_as_clear_value_with_draw",
+      "Apply large integer value (> 2^24 or < -2^24) as the clear value of the color attachment "
+      "with a draw call instead of using ClearRenderTargetView() or setting the clear value in "
+      "the render pass. This toggle is enabled by default on D3D12 backends as D3D12 APIs only "
+      "support using float numbers as clear values, while float cannot precisely represent an "
+      "integer that is greater than 2^24 or smaller than -2^24).",
+      "https://crbug.com/dawn/537"}}
     // Comment to separate the }} so it is clearer what to copy-paste to add a toggle.
 }};
 }  // anonymous namespace
