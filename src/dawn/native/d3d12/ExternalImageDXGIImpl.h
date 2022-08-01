@@ -20,7 +20,6 @@
 #include <memory>
 
 #include "dawn/common/LinkedList.h"
-#include "dawn/dawn_wsi.h"
 #include "dawn/native/Forward.h"
 
 struct ID3D12Resource;

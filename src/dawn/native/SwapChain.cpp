@@ -40,52 +40,41 @@ class ErrorSwapChain final : public SwapChainBase {
 
 MaybeError ValidateSwapChainDescriptor(const DeviceBase* device,
                                        const Surface* surface,
-                                       const SwapChainDescriptor* descriptor) {
-    if (descriptor->implementation != 0) {
-        DAWN_INVALID_IF(surface != nullptr, "Exactly one of surface or implementation must be set");
+                                   const SwapChainDescriptor* descriptor) {
+    DAWN_INVALID_IF(descriptor->implementation != 0, "implementation (%u) is not 0.", descriptor->implementation);
+    DAWN_INVALID_IF(surface == nullptr,
+                    "The surface is null.");
+    DAWN_INVALID_IF(surface->IsError(), "[Surface] is invalid.");
 
-        DawnSwapChainImplementation* impl =
-            reinterpret_cast<DawnSwapChainImplementation*>(descriptor->implementation);
-
-        DAWN_INVALID_IF(!impl->Init || !impl->Destroy || !impl->Configure ||
-                            !impl->GetNextTexture || !impl->Present,
-                        "Implementation is incomplete");
-
-    } else {
-        DAWN_INVALID_IF(surface == nullptr,
-                        "At least one of surface or implementation must be set");
-        DAWN_INVALID_IF(surface->IsError(), "[Surface] is invalid.");
-
-        DAWN_TRY(ValidatePresentMode(descriptor->presentMode));
+    DAWN_TRY(ValidatePresentMode(descriptor->presentMode));
 
 // TODO(crbug.com/dawn/160): Lift this restriction once wgpu::Instance::GetPreferredSurfaceFormat is
 // implemented.
 // TODO(dawn:286):
 #if DAWN_PLATFORM_IS(ANDROID)
-        constexpr wgpu::TextureFormat kRequireSwapChainFormat = wgpu::TextureFormat::RGBA8Unorm;
+    constexpr wgpu::TextureFormat kRequireSwapChainFormat = wgpu::TextureFormat::RGBA8Unorm;
 #else
-        constexpr wgpu::TextureFormat kRequireSwapChainFormat = wgpu::TextureFormat::BGRA8Unorm;
+    constexpr wgpu::TextureFormat kRequireSwapChainFormat = wgpu::TextureFormat::BGRA8Unorm;
 #endif  // !DAWN_PLATFORM_IS(ANDROID)
-        DAWN_INVALID_IF(descriptor->format != kRequireSwapChainFormat,
-                        "Format (%s) is not %s, which is (currently) the only accepted format.",
-                        descriptor->format, kRequireSwapChainFormat);
+    DAWN_INVALID_IF(descriptor->format != kRequireSwapChainFormat,
+                    "Format (%s) is not %s, which is (currently) the only accepted format.",
+                    descriptor->format, kRequireSwapChainFormat);
 
-        DAWN_INVALID_IF(descriptor->usage != wgpu::TextureUsage::RenderAttachment,
-                        "Usage (%s) is not %s, which is (currently) the only accepted usage.",
-                        descriptor->usage, wgpu::TextureUsage::RenderAttachment);
+    DAWN_INVALID_IF(descriptor->usage != wgpu::TextureUsage::RenderAttachment,
+                    "Usage (%s) is not %s, which is (currently) the only accepted usage.",
+                    descriptor->usage, wgpu::TextureUsage::RenderAttachment);
 
-        DAWN_INVALID_IF(descriptor->width == 0 || descriptor->height == 0,
-                        "Swap Chain size (width: %u, height: %u) is empty.", descriptor->width,
-                        descriptor->height);
+    DAWN_INVALID_IF(descriptor->width == 0 || descriptor->height == 0,
+                    "Swap Chain size (width: %u, height: %u) is empty.", descriptor->width,
+                    descriptor->height);
 
-        DAWN_INVALID_IF(
-            descriptor->width > device->GetLimits().v1.maxTextureDimension2D ||
-                descriptor->height > device->GetLimits().v1.maxTextureDimension2D,
-            "Swap Chain size (width: %u, height: %u) is greater than the maximum 2D texture "
-            "size (width: %u, height: %u).",
-            descriptor->width, descriptor->height, device->GetLimits().v1.maxTextureDimension2D,
-            device->GetLimits().v1.maxTextureDimension2D);
-    }
+    DAWN_INVALID_IF(
+        descriptor->width > device->GetLimits().v1.maxTextureDimension2D ||
+            descriptor->height > device->GetLimits().v1.maxTextureDimension2D,
+        "Swap Chain size (width: %u, height: %u) is greater than the maximum 2D texture "
+        "size (width: %u, height: %u).",
+        descriptor->width, descriptor->height, device->GetLimits().v1.maxTextureDimension2D,
+        device->GetLimits().v1.maxTextureDimension2D);
 
     return {};
 }

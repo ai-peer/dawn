@@ -17,7 +17,6 @@
 
 typedef void* EGLImage;
 
-#include "dawn/dawn_wsi.h"
 #include "dawn/native/DawnNative.h"
 
 namespace dawn::native::opengl {

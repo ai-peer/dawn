@@ -26,7 +26,6 @@
 #include "dawn/common/Platform.h"
 #include "dawn/common/SystemUtils.h"
 #include "dawn/dawn_proc.h"
-#include "dawn/dawn_wsi.h"
 #include "dawn/native/DawnNative.h"
 #include "dawn/utils/GLFWUtils.h"
 #include "dawn/utils/TerribleCommandBuffer.h"

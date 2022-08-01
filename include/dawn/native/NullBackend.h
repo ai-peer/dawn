@@ -15,7 +15,6 @@
 #ifndef INCLUDE_DAWN_NATIVE_NULLBACKEND_H_
 #define INCLUDE_DAWN_NATIVE_NULLBACKEND_H_
 
-#include "dawn/dawn_wsi.h"
 #include "dawn/native/DawnNative.h"
 
 namespace dawn::native::null {

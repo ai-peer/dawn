@@ -22,7 +22,6 @@
 
 #include <memory>
 
-#include "dawn/dawn_wsi.h"
 #include "dawn/native/DawnNative.h"
 
 struct ID3D12Device;
