@@ -299,19 +299,6 @@ class SwapChain final : public SwapChainBase {
     void DetachFromSurfaceImpl() override;
 };
 
-class NativeSwapChainImpl {
-  public:
-    using WSIContext = struct {};
-    void Init(WSIContext* context);
-    DawnSwapChainError Configure(WGPUTextureFormat format,
-                                 WGPUTextureUsage,
-                                 uint32_t width,
-                                 uint32_t height);
-    DawnSwapChainError GetNextTexture(DawnSwapChainNextTexture* nextTexture);
-    DawnSwapChainError Present();
-    wgpu::TextureFormat GetPreferredFormat() const;
-};
-
 class StagingBuffer : public StagingBufferBase {
   public:
     StagingBuffer(size_t size, Device* device);

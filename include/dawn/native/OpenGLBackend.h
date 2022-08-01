@@ -33,13 +33,6 @@ struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptionsES : public AdapterDiscoveryOpt
     AdapterDiscoveryOptionsES();
 };
 
-using PresentCallback = void (*)(void*);
-DAWN_NATIVE_EXPORT DawnSwapChainImplementation CreateNativeSwapChainImpl(WGPUDevice device,
-                                                                         PresentCallback present,
-                                                                         void* presentUserdata);
-DAWN_NATIVE_EXPORT WGPUTextureFormat
-GetNativeSwapChainPreferredFormat(const DawnSwapChainImplementation* swapChain);
-
 struct DAWN_NATIVE_EXPORT ExternalImageDescriptorEGLImage : ExternalImageDescriptor {
   public:
     ExternalImageDescriptorEGLImage();

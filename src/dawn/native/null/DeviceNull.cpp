@@ -431,29 +431,6 @@ MaybeError ShaderModule::Initialize(ShaderModuleParseResult* parseResult,
     return InitializeBase(parseResult, compilationMessages);
 }
 
-// NativeSwapChainImpl
-
-void NativeSwapChainImpl::Init(WSIContext* context) {}
-
-DawnSwapChainError NativeSwapChainImpl::Configure(WGPUTextureFormat format,
-                                                  WGPUTextureUsage,
-                                                  uint32_t width,
-                                                  uint32_t height) {
-    return DAWN_SWAP_CHAIN_NO_ERROR;
-}
-
-DawnSwapChainError NativeSwapChainImpl::GetNextTexture(DawnSwapChainNextTexture* nextTexture) {
-    return DAWN_SWAP_CHAIN_NO_ERROR;
-}
-
-DawnSwapChainError NativeSwapChainImpl::Present() {
-    return DAWN_SWAP_CHAIN_NO_ERROR;
-}
-
-wgpu::TextureFormat NativeSwapChainImpl::GetPreferredFormat() const {
-    return wgpu::TextureFormat::RGBA8Unorm;
-}
-
 // StagingBuffer
 
 StagingBuffer::StagingBuffer(size_t size, Device* device)
