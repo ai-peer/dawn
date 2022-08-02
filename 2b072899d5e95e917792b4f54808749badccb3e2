@@ -33,6 +33,24 @@
       "message": "The comment when I did this in https://dawn-review.googlesource.com/c/dawn/+/94381 was that g3 used this code. Has that code been updated?\n\n(I also created the followup to remove the OldSwapChain implementation)",
       "revId": "2b072899d5e95e917792b4f54808749badccb3e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b6e8714_f220c21c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-02T13:36:31Z",
+      "side": 1,
+      "message": "I think that dependency can be safely removed. Trying in https://critique.corp.google.com/cl/464776774",
+      "parentUuid": "15e72be3_3b12b861",
+      "revId": "2b072899d5e95e917792b4f54808749badccb3e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
