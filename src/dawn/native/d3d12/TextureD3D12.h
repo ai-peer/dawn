@@ -48,12 +48,13 @@ class Texture final : public TextureBase {
         ComPtr<ID3D12Fence> d3d12Fence,
         Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
         uint64_t fenceWaitValue,
-        uint64_t fenceSignalValue,
         bool isSwapChainTexture,
         bool isInitialized);
     static ResultOrError<Ref<Texture>> Create(Device* device,
                                               const TextureDescriptor* descriptor,
                                               ComPtr<ID3D12Resource> d3d12Texture);
+
+    void DestroyExternalTexture(uint64_t fenceSignalValue);
 
     DXGI_FORMAT GetD3D12Format() const;
     ID3D12Resource* GetD3D12Resource() const;
@@ -104,11 +105,11 @@ class Texture final : public TextureBase {
                                            ComPtr<ID3D12Fence> d3d12Fence,
                                            Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
                                            uint64_t fenceWaitValue,
-                                           uint64_t fenceSignalValue,
                                            bool isSwapChainTexture);
     MaybeError InitializeAsSwapChainTexture(ComPtr<ID3D12Resource> d3d12Texture);
 
     void SetLabelHelper(const char* prefix);
+    void DestroyHelper(uint64_t fenceSignalValue = 0);
 
     // Dawn API
     void SetLabelImpl() override;
@@ -144,7 +145,6 @@ class Texture final : public TextureBase {
     ComPtr<ID3D12Fence> mD3D12Fence;
     Ref<D3D11on12ResourceCacheEntry> mD3D11on12Resource;
     uint64_t mFenceWaitValue = 0;
-    uint64_t mFenceSignalValue = 0;
     bool mSwapChainTexture = false;
 
     SubresourceStorage<StateAndDecay> mSubresourceStateAndDecay;

@@ -22,6 +22,7 @@
 #include "dawn/native/D3D12Backend.h"
 #include "dawn/native/DawnNative.h"
 #include "dawn/native/d3d12/D3D11on12Util.h"
+#include "dawn/native/d3d12/D3D12Error.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
 
 namespace dawn::native::d3d12 {
@@ -75,8 +76,9 @@ void ExternalImageDXGIImpl::Destroy() {
 }
 
 WGPUTexture ExternalImageDXGIImpl::ProduceTexture(
-    const ExternalImageAccessDescriptorDXGISharedHandle* descriptor) {
+    const ExternalImageBeginAccessDescriptorDXGISharedHandle* descriptor) {
     ASSERT(mBackendDevice != nullptr);
+    ASSERT(descriptor != nullptr);
     // Ensure the texture usage is allowed
     if (!IsSubset(descriptor->usage, mUsage)) {
         dawn::ErrorLog() << "Texture usage is not valid for external image";
@@ -110,9 +112,16 @@ WGPUTexture ExternalImageDXGIImpl::ProduceTexture(
 
     Ref<TextureBase> texture = mBackendDevice->CreateD3D12ExternalTexture(
         &textureDescriptor, mD3D12Resource, mD3D12Fence, std::move(d3d11on12Resource),
-        descriptor->fenceWaitValue, descriptor->fenceSignalValue, descriptor->isSwapChainTexture,
-        descriptor->isInitialized);
+        descriptor->fenceWaitValue, descriptor->isSwapChainTexture, descriptor->isInitialized);
     return ToAPI(texture.Detach());
+}
+
+void ExternalImageDXGIImpl::DestroyTexture(
+    WGPUTexture texture,
+    const ExternalImageEndAccessDescriptorDXGISharedHandle* descriptor) {
+    Texture* backendTexture = ToBackend(FromAPI(texture));
+    ASSERT(backendTexture != nullptr);
+    backendTexture->DestroyExternalTexture(descriptor ? descriptor->fenceSignalValue : 0);
 }
 
 }  // namespace dawn::native::d3d12

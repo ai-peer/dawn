@@ -21,6 +21,7 @@
 
 #include "dawn/common/LinkedList.h"
 #include "dawn/dawn_wsi.h"
+#include "dawn/native/D3D12Backend.h"
 #include "dawn/native/Forward.h"
 
 struct ID3D12Resource;
@@ -30,7 +31,7 @@ namespace dawn::native::d3d12 {
 
 class D3D11on12ResourceCache;
 class Device;
-struct ExternalImageAccessDescriptorDXGISharedHandle;
+struct ExternalImageBeginAccessDescriptorDXGISharedHandle;
 struct ExternalImageDescriptorDXGISharedHandle;
 
 class ExternalImageDXGIImpl : public LinkNode<ExternalImageDXGIImpl> {
@@ -48,7 +49,10 @@ class ExternalImageDXGIImpl : public LinkNode<ExternalImageDXGIImpl> {
 
     bool IsValid() const;
 
-    WGPUTexture ProduceTexture(const ExternalImageAccessDescriptorDXGISharedHandle* descriptor);
+    WGPUTexture ProduceTexture(
+        const ExternalImageBeginAccessDescriptorDXGISharedHandle* descriptor);
+    void DestroyTexture(WGPUTexture texture,
+                        const ExternalImageEndAccessDescriptorDXGISharedHandle* descriptor);
 
   private:
     Device* mBackendDevice;
