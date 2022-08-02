@@ -16,6 +16,46 @@
       "message": "Please take a look, thanks. This CL is updated for separated DXC and FXC expectation, and also modify HLSL validating using DXC to use SM6.2 with `-enable-16bit-types` flag.",
       "revId": "01f1078e51bbd9a1728150b47fa8a1337ef0a0d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7058a9a6_ba1b4abe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-02T11:59:42Z",
+      "side": 1,
+      "message": "Tests look good, thanks!",
+      "revId": "01f1078e51bbd9a1728150b47fa8a1337ef0a0d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56a8e8e9_80e06111",
+        "filename": "src/tint/val/hlsl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-02T11:59:42Z",
+      "side": 1,
+      "message": "Please can we keep the \"core\" level set at `6.0`, and bump to `6.2` if `enable f16` is used?\nI\u0027m concerned that changing the baseline will cause us to use more advanced SM6 features without realising.",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 38
+      },
+      "revId": "01f1078e51bbd9a1728150b47fa8a1337ef0a0d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
