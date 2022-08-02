@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb80b33a_1bbf3a48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-02T17:48:07Z",
+      "side": 1,
+      "message": "this CL is going to conflict with https://dawn-review.googlesource.com/c/dawn/+/97901 so it\u0027ll probably need to be rebased before landing",
+      "revId": "488f2cd538e60cb8d6252922649718becbc20ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "363d014e_7cf7a690",
