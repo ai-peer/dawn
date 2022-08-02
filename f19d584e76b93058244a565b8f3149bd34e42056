@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4bb54946_4e980eef",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-02T18:00:51Z",
+      "side": 1,
+      "message": "The expression is squiggly highlighted in the diagnostic.\nI would love to expand the expression to the values, GCC-esq, but I found I couldn\u0027t actually test this as we don\u0027t have any binary ops implemented for `@const` yet!",
+      "parentUuid": "ef081c8f_e27243bb",
+      "revId": "f19d584e76b93058244a565b8f3149bd34e42056",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eab03b65_55c3a32e",
         "filename": "src/tint/resolver/resolver.cc",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2022-08-02T17:11:19Z",
       "side": 1,
       "message": "Why does this create a semantic node? Can\u0027t we, basically, just remove the static_assert now that we\u0027ve validated the condition is true?",
+      "revId": "f19d584e76b93058244a565b8f3149bd34e42056",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7712a0a7_b8859f9e",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-02T18:00:51Z",
+      "side": 1,
+      "message": "We can\u0027t remove the static_assert as the AST is immutable. There\u0027s limited value in the sem node, but not having a sem node would be a first, and I suspect something might break if there was no mapping.",
+      "parentUuid": "eab03b65_55c3a32e",
       "revId": "f19d584e76b93058244a565b8f3149bd34e42056",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
