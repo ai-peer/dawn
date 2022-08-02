@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9067bd5c_4fa52930",
+        "filename": "src/tint/resolver/dependency_graph.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T21:52:27Z",
+      "side": 1,
+      "message": "I\u0027m confused. `globals_` does not contain empty symbols. This is a C++17 if statement with an \u0027init-statement\u0027 (https://en.cppreference.com/w/cpp/language/if):\n\n```\nif (auto symbol \u003d SymbolOf(node); symbol.IsValid()) {\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^\n    initializer                   condition\n```\n\nSo, we only emplace the symbol if it is valid (non-empty)",
+      "parentUuid": "4e6202c5_ba3d700d",
+      "revId": "f19d584e76b93058244a565b8f3149bd34e42056",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef081c8f_e27243bb",
