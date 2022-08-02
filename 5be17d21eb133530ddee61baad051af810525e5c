@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd62333f_f9b93bb7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T14:00:53Z",
+      "side": 1,
+      "message": "This CL seems to do the opposite and replace ConstVectorRef with VectorRef?",
+      "revId": "5be17d21eb133530ddee61baad051af810525e5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91567ab1_a42bdfae",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T14:00:53Z",
+      "side": 1,
+      "message": "Why is this needed instead of just constructing an empty slice in the constructors?",
+      "revId": "5be17d21eb133530ddee61baad051af810525e5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ab86532_4307c464",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T14:00:53Z",
+      "side": 1,
+      "message": "This seems odd, why are we casting off const?",
+      "revId": "5be17d21eb133530ddee61baad051af810525e5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
