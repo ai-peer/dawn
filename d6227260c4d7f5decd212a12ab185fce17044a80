@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e11eeab3_bda5c58f",
+        "filename": "src/tint/ast/array_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T15:34:10Z",
+      "side": 1,
+      "message": "Heh, I wrote `utils::EmptyVector()` and instead of deleting the `()` I deleted `Vector`. I wanted to say `utils::EmptyVector`.",
+      "parentUuid": "ed9b8fa5_03bed95f",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1207292_b58f970a",
         "filename": "src/tint/ast/case_statement_test.cc",
         "patchSetId": 4
