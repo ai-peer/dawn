@@ -197,6 +197,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04383b09_ad721ca1",
+        "filename": "src/tint/ast/case_statement_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T15:41:53Z",
+      "side": 1,
+      "message": "You can see that you\u0027re creating a `BlockStatement`, passing in a `DiscardStatement`.\n\nIs `ProgramBuilder::Block(discard)` better or worse for you?",
+      "parentUuid": "3b3eb7ee_c7426655",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e699198_71c53a35",
         "filename": "src/tint/ast/function.h",
         "patchSetId": 4
