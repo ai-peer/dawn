@@ -16,6 +16,23 @@
       "message": "PTAL\nWebGPU will be back to life on ChromeOS with this fix.",
       "revId": "d5e2a4a192be227f0ffe21940d9c804eb1cbe9e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ab2ade9_2f690d00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-02T07:38:21Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d5e2a4a192be227f0ffe21940d9c804eb1cbe9e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
