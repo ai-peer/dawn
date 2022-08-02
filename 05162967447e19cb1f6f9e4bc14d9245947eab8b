@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ed3e86c_17555771",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-02T03:14:33Z",
+      "side": 1,
+      "message": "Kokoro tool_failed on dawn/linux/cmake-clang-release-ubsan/presubmit. Submitting the CL, thanks for reviewing!",
+      "revId": "05162967447e19cb1f6f9e4bc14d9245947eab8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
