@@ -139,7 +139,6 @@ class Device final : public DeviceBase {
                                                 ComPtr<ID3D12Fence> d3d12Fence,
                                                 Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
                                                 uint64_t fenceWaitValue,
-                                                uint64_t fenceSignalValue,
                                                 bool isSwapChainTexture,
                                                 bool isInitialized);
 
