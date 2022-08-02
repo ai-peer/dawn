@@ -16,6 +16,91 @@
       "message": "My apologies for the size of this change, but it\u0027s hard to support both `std::vector` and `utils::Vector` due to `CloneContext`",
       "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b06798f_d76ed6b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T15:00:08Z",
+      "side": 1,
+      "message": "While this has a perf benefit, it feels like it has a fairly large maintainability deficit. There is a new vector type that has to be used everywhere, readability decrease in the tests and the loss of the `using` statements which made it clear what types of things were being provided.",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5898b98c_4952f6eb",
+        "filename": "src/tint/ast/array_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T15:00:08Z",
+      "side": 1,
+      "message": "utils::Empty would be better named as utils::Empty() or something to make it clearer what the empty thing being created is.",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1207292_b58f970a",
+        "filename": "src/tint/ast/case_statement_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T15:00:08Z",
+      "side": 1,
+      "message": "This was a lot more readable when we were creating a `StatementList{discard}` instead of a generic vector of `discard`",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e699198_71c53a35",
+        "filename": "src/tint/ast/function.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T15:00:08Z",
+      "side": 1,
+      "message": "Why are these vectors and not vectorRefs?",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8f4ea31_ea9f337d",
+        "filename": "src/tint/ast/module.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T15:00:08Z",
+      "side": 1,
+      "message": "Where do these magic numbers come from?",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
