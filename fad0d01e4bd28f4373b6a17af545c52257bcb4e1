@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c0a05e2_2c57cd65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-08-02T15:02:51Z",
+      "side": 1,
+      "message": "lgtm, this is really impressive, there is a lot of subtly to what can be deleted that you have worked through, but the code is quite readable 👍",
+      "revId": "fad0d01e4bd28f4373b6a17af545c52257bcb4e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d66341a_bd45ea42",
+        "filename": "src/tint/fuzzers/tint_ast_fuzzer/jump_tracker.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-08-02T15:02:51Z",
+      "side": 1,
+      "message": "Thanks for the clear explaination of what is going on here.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 96
+      },
+      "revId": "fad0d01e4bd28f4373b6a17af545c52257bcb4e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de81243b_c025baca",
+        "filename": "src/tint/fuzzers/tint_ast_fuzzer/jump_tracker.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-08-02T15:02:51Z",
+      "side": 1,
+      "message": "This could be turned into a one-liner instead of a loop using candidate.begin() \u0026 candidate.end(), but I don\u0027t think that actually guarantees a speed up. And I am not sure it is more readable.\n\nI am mostly noting this, so if I look at this again I don\u0027t spend more time pondering that possibility 😊",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 21
+      },
+      "revId": "fad0d01e4bd28f4373b6a17af545c52257bcb4e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
