@@ -178,6 +178,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28f5d9fe_be5f37e0",
+        "filename": "src/tint/ast/array_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T16:59:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "40ab87da_61ba6b47",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1207292_b58f970a",
@@ -285,6 +303,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfa9957d_7eda5d74",
+        "filename": "src/tint/ast/case_statement_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T16:59:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3ba4516e_06887ef9",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e699198_71c53a35",
@@ -351,6 +387,24 @@
       "side": 1,
       "message": "They\u0027re just estimates of high-water marks for \u0027typical\u0027 shaders (i.e. pulled from the air).\nLike all small vectors, you have to dream up some small-vector-sizes. The design of `VectorRef` decouples the sizes from one another, so we can tune these based on each vector as opposed to having whole-program constants per type.",
       "parentUuid": "d8f4ea31_ea9f337d",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37e4cb56_f7fcf267",
+        "filename": "src/tint/ast/module.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T16:59:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b8103846_0af66b09",
       "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
