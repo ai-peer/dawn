@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "232fbdbe_0c9260b3",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T14:43:23Z",
+      "side": 1,
+      "message": "No, it\u0027s an in-flight reference - however a `Vector` can take ownership going via a `VectorRef`.",
+      "parentUuid": "da6e9883_f958f241",
+      "revId": "5be17d21eb133530ddee61baad051af810525e5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91567ab1_a42bdfae",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 4
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "933a19de_75881696",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T14:43:23Z",
+      "side": 1,
+      "message": "Because `VectorRef` uses a reference (`\u0026`) to the slice.",
+      "parentUuid": "91567ab1_a42bdfae",
+      "revId": "5be17d21eb133530ddee61baad051af810525e5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ab86532_4307c464",
         "filename": "src/tint/utils/vector.h",
         "patchSetId": 4
@@ -65,6 +101,24 @@
       "writtenOn": "2022-08-02T14:00:53Z",
       "side": 1,
       "message": "This seems odd, why are we casting off const?",
+      "revId": "5be17d21eb133530ddee61baad051af810525e5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3111b00_aba9cd46",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T14:43:23Z",
+      "side": 1,
+      "message": "We want `VectorRef` to be able to immutably reference to a const-vector.\nWe want `VectorRef` to be able to immutably reference a non-const-vector, constructed without a `std::move`.\nWe want `VectorRef` to be able to move-able reference a non-const-vector, constructed with a `std::move`.\n\nC++ cannot move a const object, so we have to break const-correctness here to have this type support all of the above. `const_cast` is not UB unless you actually do something non-const with the end result, and `can_move_` prevents this from happening.",
+      "parentUuid": "9ab86532_4307c464",
       "revId": "5be17d21eb133530ddee61baad051af810525e5c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
