@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e6202c5_ba3d700d",
+        "filename": "src/tint/resolver/dependency_graph.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T17:11:19Z",
+      "side": 1,
+      "message": "Prior to this `globals_` did not contain empty symbols. Did you take a look at the usages to verify having the `Symbol()` values in there is OK?",
+      "revId": "f19d584e76b93058244a565b8f3149bd34e42056",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef081c8f_e27243bb",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T17:11:19Z",
+      "side": 1,
+      "message": "Would this be better outputting the `cond` as well? So you\u0027d see `static assertion \"(1 + 2) \u003d\u003d 4\" failed`?",
+      "revId": "f19d584e76b93058244a565b8f3149bd34e42056",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eab03b65_55c3a32e",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T17:11:19Z",
+      "side": 1,
+      "message": "Why does this create a semantic node? Can\u0027t we, basically, just remove the static_assert now that we\u0027ve validated the condition is true?",
+      "revId": "f19d584e76b93058244a565b8f3149bd34e42056",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
