@@ -1,5 +1,11 @@
 # Tint changes during Origin Trial
 
+## Changes for M106
+
+### New features
+
+* `static_assert` statement has been added. [tint:1625](crbug.com/tint/1625)
+
 ## Changes for M105
 
 ### New features
