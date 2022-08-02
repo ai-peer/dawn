@@ -162,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40ab87da_61ba6b47",
+        "filename": "src/tint/ast/array_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-02T16:03:30Z",
+      "side": 1,
+      "message": "It is, but even that\u0027s one step too far into the abstract for me.",
+      "parentUuid": "484fed70_9448b363",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1207292_b58f970a",
         "filename": "src/tint/ast/case_statement_test.cc",
         "patchSetId": 4
@@ -245,6 +263,24 @@
       "side": 1,
       "message": "That one is worse, as it isn\u0027t even passing in the list which seems really weird to me. But, I\u0027m also in the camp of much preferring explicitness to conciseness. I\u0027d rather see `create\u003cBlockStatement\u003e(utils::Vector\u003cStatementList\u003e{discard})` so I can tell what the vector _is_ without having to go wade through a bunch of code.\n\nThis is, of course, subjective. I\u0027m curious to see what others think of the change overall and if it\u0027s a net positive or negative.",
       "parentUuid": "04383b09_ad721ca1",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ba4516e_06887ef9",
+        "filename": "src/tint/ast/case_statement_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-02T16:03:30Z",
+      "side": 1,
+      "message": "To be explicit, and not spill to a heap allocation, you\u0027d need:\n\n`create\u003cBlockStatement\u003e(utils::Vector\u003cconst ast::Statement*, 1\u003e{discard})`\n\nor with the alias:\n\n```\ntemplate\u003csize_t N\u003e\nusing StatementList \u003d utils::Vector\u003cconst ast::Statement*, N\u003e\n```\n\nyou could have:\n\n`create\u003cBlockStatement\u003e(ast::StatementList\u003c1\u003e{discard})`\n\nEither way, you need to make sure the template argument for `N` is at least as big as the number of arguments, in order to avoid heap allocations. Part of the `utils::Vector` template inferencing is to prevent this easy mistake that silently costs performance.\n\nI still feel like I\u0027m missing something here. The explicitness you seem to be after is pulling the signature out of the callee into the call-site. You wouldn\u0027t annotate a function that takes a `std::string` by first casting a string literal (`\"blah\"`) to a `std::string` (`std::string(\"blah\")`) to be ultra-explicit, right? Where do you draw the line on explicitness?\n\nFWIW, the type of `utils::Vector{discard}` is actually `utils::Vector\u003cconst ast::DiscardStatement*, 1\u003e`, not `utils::Vector\u003cconst ast::Statement*, 1\u003e`. `utils::Vector` supports covariance (up-casting of the pointer type). The idea is you don\u0027t actually have to care, as you can see that you\u0027re passing in statements into something you expect to take a list of statements.",
+      "parentUuid": "c6bccb6a_c6436aeb",
       "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
