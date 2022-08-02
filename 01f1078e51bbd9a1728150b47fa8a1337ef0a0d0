@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44ec50b7_8b0955bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-02T09:12:51Z",
+      "side": 1,
+      "message": "Please take a look, thanks. This CL is updated for separated DXC and FXC expectation, and also modify HLSL validating using DXC to use SM6.2 with `-enable-16bit-types` flag.",
+      "revId": "01f1078e51bbd9a1728150b47fa8a1337ef0a0d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
