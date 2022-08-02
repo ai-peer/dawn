@@ -33,6 +33,23 @@
       "message": "Nice",
       "revId": "804353d8704ad6a991c0af6c8ff5022b2e35f9c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a2a330b_6b3a3893",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T18:04:36Z",
+      "side": 1,
+      "message": "Kokoro failure is an infra failure, all other kokoro bots succeeded.",
+      "revId": "804353d8704ad6a991c0af6c8ff5022b2e35f9c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
