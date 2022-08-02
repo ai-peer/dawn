@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d90e8622_b3b38777",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-02T15:23:14Z",
+      "side": 1,
+      "message": "\u003e There is a new vector type that has to be used everywhere\n\nYes. That\u0027s absolutely needed for the performance gains.\n\n\u003e readability decrease in the tests\n\nNot sure about this. Most tests used initialiser lists `{ el0, el1 }` instead of `SomeList{ el0, el1 }`. These are now `utils::Vector{ el0, el1 }`. It\u0027s more verbose than I like, but it seems like you want even more verbosity.\n\n\u003e and the loss of the `using` statements which made it clear what types of things were being provided.\n\nAgain, most tests didn\u0027t actually use these. They used the unsuffixed initializer list form `{}`.",
+      "parentUuid": "0b06798f_d76ed6b9",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5898b98c_4952f6eb",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-08-02T15:00:08Z",
       "side": 1,
       "message": "utils::Empty would be better named as utils::Empty() or something to make it clearer what the empty thing being created is.",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed9b8fa5_03bed95f",
+        "filename": "src/tint/ast/array_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-02T15:23:14Z",
+      "side": 1,
+      "message": "How is making `Empty` a function helping define the type?",
+      "parentUuid": "5898b98c_4952f6eb",
       "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94929c05_30710874",
+        "filename": "src/tint/ast/case_statement_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-02T15:23:14Z",
+      "side": 1,
+      "message": "The vector isn\u0027t generic. It infers the type from the elements. Most of the `ProgramBuilder` usage had already dropped `StatementList` and just used the initializer-list form.",
+      "parentUuid": "d1207292_b58f970a",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e699198_71c53a35",
         "filename": "src/tint/ast/function.h",
         "patchSetId": 4
@@ -82,6 +136,24 @@
       "writtenOn": "2022-08-02T15:00:08Z",
       "side": 1,
       "message": "Why are these vectors and not vectorRefs?",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ffa62ce_8a8f8483",
+        "filename": "src/tint/ast/function.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-02T15:23:14Z",
+      "side": 1,
+      "message": "Because the `ast::Function` needs to own the vector data.\nA `VectorRef` is just a reference, it does not hold the actual data. If the reference goes byebye, you have a dangling reference.",
+      "parentUuid": "9e699198_71c53a35",
       "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -99,6 +171,24 @@
       "writtenOn": "2022-08-02T15:00:08Z",
       "side": 1,
       "message": "Where do these magic numbers come from?",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8103846_0af66b09",
+        "filename": "src/tint/ast/module.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-02T15:23:14Z",
+      "side": 1,
+      "message": "They\u0027re just estimates of high-water marks for \u0027typical\u0027 shaders (i.e. pulled from the air).\nLike all small vectors, you have to dream up some small-vector-sizes. The design of `VectorRef` decouples the sizes from one another, so we can tune these based on each vector as opposed to having whole-program constants per type.",
+      "parentUuid": "d8f4ea31_ea9f337d",
       "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
