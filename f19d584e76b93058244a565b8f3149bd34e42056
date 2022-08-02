@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac6fcd3f_d3cffeaa",
+        "filename": "src/tint/resolver/dependency_graph.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T22:23:07Z",
+      "side": 1,
+      "message": "Ah, I didn\u0027t realize Symbol() was `InValid`. Thanks.",
+      "parentUuid": "9067bd5c_4fa52930",
+      "revId": "f19d584e76b93058244a565b8f3149bd34e42056",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef081c8f_e27243bb",
