@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14c4b110_6d0ee5f1",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T18:02:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4bb54946_4e980eef",
+      "revId": "f19d584e76b93058244a565b8f3149bd34e42056",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eab03b65_55c3a32e",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "We can\u0027t remove the static_assert as the AST is immutable. There\u0027s limited value in the sem node, but not having a sem node would be a first, and I suspect something might break if there was no mapping.",
       "parentUuid": "eab03b65_55c3a32e",
+      "revId": "f19d584e76b93058244a565b8f3149bd34e42056",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0497c35_72e44f19",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T18:02:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7712a0a7_b8859f9e",
       "revId": "f19d584e76b93058244a565b8f3149bd34e42056",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
