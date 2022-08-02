@@ -1,0 +1,274 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33969e03_5240d173",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T21:31:52Z",
+      "side": 1,
+      "message": "Great job, Antonio!\nRequests for splitting up, but I very much like the change!",
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c3e8540_91254b74",
+        "filename": "src/tint/number.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T21:31:52Z",
+      "side": 1,
+      "message": "Please move out to separate CL, and add tests.",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 373,
+        "endChar": 1
+      },
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "838378e5_cc28e5e2",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T21:31:52Z",
+      "side": 1,
+      "message": "Nit: less than half the code to just write:\n\n```\nuint32_t n0 \u003d 0, n1 \u003d 0;\nsem::Type::ElementOf(c0-\u003eType(), \u0026n0);\nsem::Type::ElementOf(c1-\u003eType(), \u0026n1);\n```",
+      "range": {
+        "startLine": 486,
+        "startChar": 0,
+        "endLine": 492,
+        "endChar": 36
+      },
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0f108a9_813151ab",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T21:31:52Z",
+      "side": 1,
+      "message": "Could be reduced to: `c0-\u003eIndex(std::min(i, n0-1))`",
+      "range": {
+        "startLine": 508,
+        "startChar": 70,
+        "endLine": 508,
+        "endChar": 92
+      },
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cab1001f_54736722",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T21:31:52Z",
+      "side": 1,
+      "message": "docs please",
+      "range": {
+        "startLine": 516,
+        "startChar": 7,
+        "endLine": 516,
+        "endChar": 20
+      },
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0628da98_996c6cff",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T21:31:52Z",
+      "side": 1,
+      "message": "I\u0027d try and be consistent with the lexer errors around this. Maybe something like:\n\n`\u003cvalue\u003e cannot be represented as \u0027abstract-float\u0027`",
+      "range": {
+        "startLine": 784,
+        "startChar": 30,
+        "endLine": 784,
+        "endChar": 68
+      },
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e40874f7_43b63f0b",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T21:31:52Z",
+      "side": 1,
+      "message": "nit: no capitalisation of diagnostics.",
+      "range": {
+        "startLine": 784,
+        "startChar": 30,
+        "endLine": 784,
+        "endChar": 31
+      },
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e8b5d67_b0f8db80",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T21:31:52Z",
+      "side": 1,
+      "message": "Nice - I wanted this earlier.\nAgain, would be nice as a separate change.",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 18
+      },
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cc6fd0c_fb6a0627",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T21:31:52Z",
+      "side": 1,
+      "message": "Looks unrelated to `+`? Another change perhaps?",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 1
+      },
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdf0b64f_afd76df7",
+        "filename": "src/tint/writer/spirv/builder_accessor_expression_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T21:31:52Z",
+      "side": 1,
+      "message": "`1i`",
+      "range": {
+        "startLine": 165,
+        "startChar": 24,
+        "endLine": 165,
+        "endChar": 26
+      },
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b3bc65e_792757cf",
+        "filename": "src/tint/writer/spirv/builder_accessor_expression_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T21:31:52Z",
+      "side": 1,
+      "message": "`1i`",
+      "range": {
+        "startLine": 199,
+        "startChar": 24,
+        "endLine": 199,
+        "endChar": 26
+      },
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e51dd47b_41a7ef1b",
+        "filename": "src/tint/writer/spirv/builder_function_variable_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T21:31:52Z",
+      "side": 1,
+      "message": "humm... might want to put one of those `3_f`\u0027s in a `let` 😊",
+      "range": {
+        "startLine": 75,
+        "startChar": 36,
+        "endLine": 75,
+        "endChar": 47
+      },
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
