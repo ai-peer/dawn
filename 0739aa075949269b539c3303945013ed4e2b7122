@@ -51,6 +51,24 @@
       "parentUuid": "0455a9c6_2f14d11d",
       "revId": "0739aa075949269b539c3303945013ed4e2b7122",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3450dfc_5ddf837a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-08-02T16:02:02Z",
+      "side": 1,
+      "message": "Workarounds that need to target specific devices rather than an \"architecture\" as laid out in this file currently would indeed need to have custom C++ code. I want to keep the architectures non-overlapping so that there\u0027s no ambiguity as to which will be reported by the `GPUAdapterInfo`.\n\nThat said, I can definitely see how it would be useful to have architectures in here that aren\u0027t reported publicly, but are used for internal workarounds. In a follow-up CL I can add a way to flag an architecture as internal-only, which would generated the appropriate `IsVendorArch()` methods in Dawn and allow for overlapping IDs, but never appear in a `GPUAdapterInfo`.",
+      "parentUuid": "641fcdcb_ac75d37d",
+      "revId": "0739aa075949269b539c3303945013ed4e2b7122",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
