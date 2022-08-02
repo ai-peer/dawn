@@ -1240,7 +1240,7 @@ INSTANTIATE_TEST_SUITE_P(
         "signed",
         "sizeof",
         "static",
-        "static_assert",
+        // "static_assert", // Also used in WGSL
         "static_cast",
         // "struct",  // Also used in WGSL
         // "switch",  // Also used in WGSL
