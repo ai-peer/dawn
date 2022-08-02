@@ -16,6 +16,23 @@
       "message": "Looks like I have to fix up some `utils::Vector` rebase issues, but otherwise good for review",
       "revId": "9c22c717abe5dcc1433b8ec6c77755c9ea21229e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7feb6a56_f68cb1a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T17:14:47Z",
+      "side": 1,
+      "message": "Question, would this be easier as a transform which deletes static_assert which we run in all the backends except WGSL?",
+      "revId": "9c22c717abe5dcc1433b8ec6c77755c9ea21229e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
