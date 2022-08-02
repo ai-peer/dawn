@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9004319a_8f657db2",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1664,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T17:18:19Z",
+      "side": 1,
+      "message": "This should be in `non_block_statement()` to match the rest of the statemnts requiring `;` at the end? Otherwise, you\u0027re missing the `;` requirement.",
+      "revId": "a5405cc1c0f87e337d5661524ba5d6cd1a6378a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
