@@ -85,6 +85,24 @@
       "message": "Supposed to be nested inside the previous for-loop?",
       "revId": "488f2cd538e60cb8d6252922649718becbc20ce3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8acb199_c1c65677",
+        "filename": "generator/dawn_gpu_info_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-08-02T20:54:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "868c166c_9c812fd4",
+      "revId": "488f2cd538e60cb8d6252922649718becbc20ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

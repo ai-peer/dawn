@@ -87,6 +87,24 @@
       "parentUuid": "d3450dfc_5ddf837a",
       "revId": "0739aa075949269b539c3303945013ed4e2b7122",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d10b290e_3d577a0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-08-02T20:54:50Z",
+      "side": 1,
+      "message": "Turns out this was easy enough to do that I just added it while fixing a separate issue. I haven\u0027t added any internal device sets yet, but I did add an \"Example Vendor\" to the top of the JSON file to explain the format, including explaining how the internal flag works. Hopefully this gives you all the flexibility you need going forward!",
+      "parentUuid": "8d321eab_c86ce426",
+      "revId": "0739aa075949269b539c3303945013ed4e2b7122",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
