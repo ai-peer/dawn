@@ -33,6 +33,24 @@
       "message": "Question, would this be easier as a transform which deletes static_assert which we run in all the backends except WGSL?",
       "revId": "9c22c717abe5dcc1433b8ec6c77755c9ea21229e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37d8ce68_571b5b93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T21:52:35Z",
+      "side": 1,
+      "message": "I don\u0027t think so. Handling these is just an additional `Switch` case statement for the module-scope and function-scope `Switch` statements for each backend.\nAdding a transform is a bunch more code and tests, and silly expensive for performance.",
+      "parentUuid": "7feb6a56_f68cb1a0",
+      "revId": "9c22c717abe5dcc1433b8ec6c77755c9ea21229e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
