@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed867da8_68d36d8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-02T14:22:45Z",
+      "side": 1,
+      "message": "How about now?",
+      "parentUuid": "eb4bbc4a_ae6f5c6b",
+      "revId": "259ae1cc8aa1bb437308203d6de4073953d278d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acaae87f_fb73fe7b",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-08-01T15:45:22Z",
       "side": 1,
       "message": "typo: \"through\"",
+      "range": {
+        "startLine": 184,
+        "startChar": 56,
+        "endLine": 184,
+        "endChar": 62
+      },
+      "revId": "259ae1cc8aa1bb437308203d6de4073953d278d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1e4eea8_b9cb261c",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-02T14:22:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acaae87f_fb73fe7b",
       "range": {
         "startLine": 184,
         "startChar": 56,
