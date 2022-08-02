@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eb5a98d_2e35ad8e",
+        "filename": "src/tint/ast/module.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T17:04:13Z",
+      "side": 1,
+      "message": "Should this be a call to `BinGlobalDeclaration`? Or, do we call `BinGlobalDeclaration` with a static assert?",
+      "revId": "6765db11a30f9f7d8af3ee12c9b2f09d256c9b07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06eb21e7_5a0a8682",
+        "filename": "src/tint/ast/static_assert.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T17:04:13Z",
+      "side": 1,
+      "message": "A static assert statement",
+      "revId": "6765db11a30f9f7d8af3ee12c9b2f09d256c9b07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "469d6476_cfe3972f",
+        "filename": "src/tint/ast/static_assert_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T17:04:13Z",
+      "side": 1,
+      "message": "IsStaticAssertDecl ?",
+      "revId": "6765db11a30f9f7d8af3ee12c9b2f09d256c9b07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
