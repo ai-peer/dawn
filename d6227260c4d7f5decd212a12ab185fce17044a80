@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df27f22e_6579983a",
+        "filename": "src/tint/ast/array_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-02T15:40:32Z",
+      "side": 1,
+      "message": "`utils::Empty` is just a token type for a constructor, much like `std::nullopt`.\nIf we end up adding a `utils::Hashmap`, then I\u0027d like to reuse the same thing for that.\n\nI like `Empty` as it\u0027s short, and has symmetry with `utils::Vector::IsEmpty()`.\n\nAgain, I\u0027ll point out that 90% of the places we use `utils::Empty` was just `{}` before. A bunch of those `{}` places were actually incorrectly being used to zero-initialize nullptrs, zero integers etc.",
+      "parentUuid": "e11eeab3_bda5c58f",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1207292_b58f970a",
         "filename": "src/tint/ast/case_statement_test.cc",
         "patchSetId": 4
