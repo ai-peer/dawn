@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ef21173_d1ddb0d0",
+        "filename": "src/tint/ast/module.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-02T17:49:00Z",
+      "side": 1,
+      "message": "`BinGlobalDeclaration` is called by `AddGlobalDeclaration` which does the same thing, but is slower due to the dynamic casting. We have the slower form because the it\u0027s used by the `CloneContext` to ensure that all module scope declarations are cloned in declaration order.",
+      "parentUuid": "3eb5a98d_2e35ad8e",
+      "revId": "6765db11a30f9f7d8af3ee12c9b2f09d256c9b07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06eb21e7_5a0a8682",
         "filename": "src/tint/ast/static_assert.h",
         "patchSetId": 1

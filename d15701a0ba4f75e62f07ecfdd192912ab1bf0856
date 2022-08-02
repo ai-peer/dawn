@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92b7caf9_6f5bc41c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-02T17:49:00Z",
+      "side": 1,
+      "message": "Good spot on the copypasta. Will fix tomorrow ",
+      "revId": "d15701a0ba4f75e62f07ecfdd192912ab1bf0856",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
