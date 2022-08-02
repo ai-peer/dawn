@@ -118,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4462a98_b8452e09",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-02T16:32:38Z",
+      "side": 1,
+      "message": "Ah.. because the `FromBlob` needs to be in `dawn::native`? Hmm actually do we even need the `static ResultOrError\u003cMslCompilation\u003e FromBlob(Blob blob);` in the struct declaration? Isn\u0027t the implementation below just for the template specialization? Or is it just to make it easier to pass the function later on in the `DAWN_TRY_LOAD_OR_RUN` call?\n\nAlso fine to not have macro for now then if the namespace stuff will be difficult.",
+      "parentUuid": "197e83e4_fe28cde7",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 2
+      },
+      "revId": "c695af4927f629ce0ea6159c7e1ccf11f1dfb912",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a9be45d_c138e135",
