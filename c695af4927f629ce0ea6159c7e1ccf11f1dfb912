@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b86eb853_e83adb17",
+        "filename": "src/dawn/native/StreamImplTint.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-02T14:40:45Z",
+      "side": 1,
+      "message": "yea it was hard because the contents are complex types. I could try to do it but I\u0027d be manually incrementing the offsets with sizeof and aligning based on alignof.\ndo you think it\u0027s worth doing?",
+      "parentUuid": "9f83cbf1_4a44726f",
+      "revId": "c695af4927f629ce0ea6159c7e1ccf11f1dfb912",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46734844_4e7bdf2a",
         "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
         "patchSetId": 7
@@ -48,6 +66,30 @@
       "writtenOn": "2022-08-02T06:25:12Z",
       "side": 1,
       "message": "Is it possible to make this into a macro kinda like `DAWN_MAKE_CACHE_REQUEST`? IIUC, the `FromBlob` function could be implemented in the macro also.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 2
+      },
+      "revId": "c695af4927f629ce0ea6159c7e1ccf11f1dfb912",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "197e83e4_fe28cde7",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-02T14:40:45Z",
+      "side": 1,
+      "message": "mm it would be possible, but I was hoping having the serialization and deserialization the same would address most of what we want.\n\nsounds like you also would prefer to have the members declared exactly in one spot?\n\nI think the macro would help declare the struct and \"visit\" all the members, but I think we would still implement FromBlob and BlobCache::Store outside of the macro since making the namespaces work nicely will probably get messy.",
+      "parentUuid": "46734844_4e7bdf2a",
       "range": {
         "startLine": 53,
         "startChar": 0,
@@ -134,6 +176,24 @@
       "writtenOn": "2022-08-02T12:04:31Z",
       "side": 1,
       "message": "Are we sure that std::apply calls tuple members in order?",
+      "revId": "c695af4927f629ce0ea6159c7e1ccf11f1dfb912",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f33ada18_3537b320",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-02T14:40:45Z",
+      "side": 1,
+      "message": "in the C++23 noexcept specification, it does say that it\u0027s specified as unpacking std::get\u003cI\u003e where I is an index sequence - so that would be in order.\n\nbut the rest doesn\u0027t explicitly say it\u0027s in order (though it would be very not useful if the order were not guaranteed).\n\nwould you prefer to manually write our own helper to perform apply?\nfwiw, I think the invariant we absolutely care about is that the order is stable, not necessarily that it\u0027s from 0-\u003eN",
+      "parentUuid": "23ccd4b1_14aa815b",
       "revId": "c695af4927f629ce0ea6159c7e1ccf11f1dfb912",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
