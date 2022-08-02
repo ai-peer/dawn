@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "484fed70_9448b363",
+        "filename": "src/tint/ast/array_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T15:49:33Z",
+      "side": 1,
+      "message": "Why incorrectly being used, isn\u0027t `{}` a valid way to zero initialize things?",
+      "parentUuid": "df27f22e_6579983a",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1207292_b58f970a",
         "filename": "src/tint/ast/case_statement_test.cc",
         "patchSetId": 4
@@ -209,6 +227,24 @@
       "side": 1,
       "message": "You can see that you\u0027re creating a `BlockStatement`, passing in a `DiscardStatement`.\n\nIs `ProgramBuilder::Block(discard)` better or worse for you?",
       "parentUuid": "3b3eb7ee_c7426655",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6bccb6a_c6436aeb",
+        "filename": "src/tint/ast/case_statement_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T15:49:33Z",
+      "side": 1,
+      "message": "That one is worse, as it isn\u0027t even passing in the list which seems really weird to me. But, I\u0027m also in the camp of much preferring explicitness to conciseness. I\u0027d rather see `create\u003cBlockStatement\u003e(utils::Vector\u003cStatementList\u003e{discard})` so I can tell what the vector _is_ without having to go wade through a bunch of code.\n\nThis is, of course, subjective. I\u0027m curious to see what others think of the change overall and if it\u0027s a net positive or negative.",
+      "parentUuid": "04383b09_ad721ca1",
       "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
