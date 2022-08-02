@@ -84,22 +84,21 @@ TEST_F(BuilderTest, FunctionVar_WithNonConstantConstructor) {
     EXPECT_TRUE(b.GenerateFunctionVariable(v)) << b.error();
     ASSERT_FALSE(b.has_error()) << b.error();
 
-    EXPECT_EQ(DumpInstructions(b.debug()), R"(OpName %7 "var"
+    EXPECT_EQ(DumpInstructions(b.debug()), R"(OpName %6 "var"
 )");
     EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeFloat 32
 %1 = OpTypeVector %2 2
 %3 = OpConstant %2 1
-%4 = OpConstant %2 3
-%8 = OpTypePointer Function %1
-%9 = OpConstantNull %1
+%4 = OpConstant %2 6
+%5 = OpConstantComposite %1 %3 %4
+%7 = OpTypePointer Function %1
+%8 = OpConstantNull %1
 )");
     EXPECT_EQ(DumpInstructions(b.functions()[0].variables()),
-              R"(%7 = OpVariable %8 Function %9
+              R"(%6 = OpVariable %7 Function %8
 )");
     EXPECT_EQ(DumpInstructions(b.functions()[0].instructions()),
-              R"(%5 = OpFAdd %2 %4 %4
-%6 = OpCompositeConstruct %1 %3 %5
-OpStore %7 %6
+              R"(OpStore %6 %5
 )");
 }
 
