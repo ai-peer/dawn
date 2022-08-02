@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29385c65_4fec3a38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000022
+      },
+      "writtenOn": "2022-08-02T00:17:19Z",
+      "side": 1,
+      "message": "Some nits on the commit message:\nRevisie -\u003e Revise\nLP means Low Power, while HP means High Performance (https://en.wikipedia.org/wiki/Intel_Xe)\nseperate -\u003e separate",
+      "revId": "6f37e83beadc08de1a24064789f2ccef453c5507",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31fa6043_b8ade2d7",
