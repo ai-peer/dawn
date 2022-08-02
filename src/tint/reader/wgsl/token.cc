@@ -207,6 +207,8 @@ std::string_view Token::TypeToName(Type type) {
             return "sampler";
         case Token::Type::kComparisonSampler:
             return "sampler_comparison";
+        case Token::Type::kStaticAssert:
+            return "static_assert";
         case Token::Type::kStruct:
             return "struct";
         case Token::Type::kSwitch:

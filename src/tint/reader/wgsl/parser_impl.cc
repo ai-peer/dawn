@@ -410,6 +410,7 @@ Maybe<bool> ParserImpl::enable_directive() {
 //  | type_alias SEMICOLON
 //  | struct_decl
 //  | function_decl
+//  | static_assert_statement
 Maybe<bool> ParserImpl::global_decl() {
     if (match(Token::Type::kSemicolon) || match(Token::Type::kEOF)) {
         return true;
@@ -443,7 +444,6 @@ Maybe<bool> ParserImpl::global_decl() {
         if (gc.errored) {
             return Failure::kErrored;
         }
-
         if (gc.matched) {
             // Avoid the cost of the string allocation for the common no-error case
             if (!peek().Is(Token::Type::kSemicolon)) {
@@ -461,7 +461,6 @@ Maybe<bool> ParserImpl::global_decl() {
         if (ta.errored) {
             return Failure::kErrored;
         }
-
         if (ta.matched) {
             if (!expect("type alias", Token::Type::kSemicolon)) {
                 return Failure::kErrored;
@@ -475,9 +474,17 @@ Maybe<bool> ParserImpl::global_decl() {
         if (str.errored) {
             return Failure::kErrored;
         }
-
         if (str.matched) {
             builder_.AST().AddTypeDecl(str.value);
+            return true;
+        }
+
+        auto assertion = static_assert_stmt();
+        if (assertion.errored) {
+            return Failure::kErrored;
+        }
+        if (assertion.matched) {
+            builder_.AST().AddStaticAssert(assertion.value);
             return true;
         }
 
@@ -1332,6 +1339,24 @@ Expect<ast::StructMember*> ParserImpl::expect_struct_member() {
                                      decl->type, std::move(attrs.value));
 }
 
+Maybe<const ast::StaticAssert*> ParserImpl::static_assert_stmt() {
+    Source start;
+    if (!match(Token::Type::kStaticAssert, &start)) {
+        return Failure::kNoMatch;
+    }
+
+    auto condition = logical_or_expression();
+    if (condition.errored) {
+        return Failure::kErrored;
+    }
+    if (!condition.matched) {
+        return add_error(peek(), "unable to parse condition expression");
+    }
+
+    Source source = make_source_range_from(start);
+    return create<ast::StaticAssert>(source, condition.value);
+}
+
 // function_decl
 //   : function_header body_stmt
 Maybe<const ast::Function*> ParserImpl::function_decl(AttributeList& attrs) {
@@ -1580,6 +1605,7 @@ Expect<ParserImpl::StatementList> ParserImpl::expect_statements() {
 //      | assignment_stmt SEMICOLON
 //      | increment_stmt SEMICOLON
 //      | decrement_stmt SEMICOLON
+//      | static_assert_stmt SEMICOLON
 Maybe<const ast::Statement*> ParserImpl::statement() {
     while (match(Token::Type::kSemicolon)) {
         // Skip empty statements
@@ -1633,6 +1659,14 @@ Maybe<const ast::Statement*> ParserImpl::statement() {
     }
     if (stmt_while.matched) {
         return stmt_while.value;
+    }
+
+    auto stmt_static_assert = static_assert_stmt();
+    if (stmt_static_assert.errored) {
+        return Failure::kErrored;
+    }
+    if (stmt_static_assert.matched) {
+        return stmt_static_assert.value;
     }
 
     if (peek_is(Token::Type::kBraceLeft)) {

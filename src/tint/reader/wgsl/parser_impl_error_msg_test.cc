@@ -697,6 +697,41 @@ var x : texture_multisampled_2d<1>;
 )");
 }
 
+TEST_F(ParserImplErrorTest, GlobalDeclStaticAssertMissingCondThenEOF) {
+    EXPECT("static_assert", R"(test.wgsl:1:14 error: unable to parse condition expression
+static_assert
+             ^
+)");
+}
+
+TEST_F(ParserImplErrorTest, GlobalDeclStaticAssertMissingCondThenSemicolon) {
+    EXPECT("static_assert;", R"(test.wgsl:1:14 error: unable to parse condition expression
+static_assert;
+             ^
+)");
+}
+
+TEST_F(ParserImplErrorTest, GlobalDeclStaticAssertMissingCondThenAlias) {
+    EXPECT("static_assert\ntype T = i32;", R"(test.wgsl:2:1 error: unable to parse condition expression
+type T = i32;
+^^^^
+)");
+}
+
+TEST_F(ParserImplErrorTest, GlobalDeclStaticAssertMissingLParen) {
+    EXPECT("static_assert true);", R"(test.wgsl:1:19 error: unexpected token
+static_assert true);
+                  ^
+)");
+}
+
+TEST_F(ParserImplErrorTest, GlobalDeclStaticAssertMissingRParen) {
+    EXPECT("static_assert (true;", R"(test.wgsl:1:20 error: expected ')'
+static_assert (true;
+                   ^
+)");
+}
+
 TEST_F(ParserImplErrorTest, GlobalDeclStorageTextureMissingLessThan) {
     EXPECT("var x : texture_storage_2d;",
            R"(test.wgsl:1:27 error: expected '<' for storage texture type

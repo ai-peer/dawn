@@ -217,6 +217,8 @@ class Token {
         kSampler,
         /// A 'sampler_comparison'
         kComparisonSampler,
+        /// A 'static_assert'
+        kStaticAssert,
         /// A 'struct'
         kStruct,
         /// A 'switch'
