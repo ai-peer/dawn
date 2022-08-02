@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b231416_05a247a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T15:39:40Z",
+      "side": 1,
+      "message": "It seems the tests used both forms. I preferred the `StatementList{}` to the `{}` as I like the explicit-ness, but we seemed to have been moving away from that.",
+      "parentUuid": "d90e8622_b3b38777",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5898b98c_4952f6eb",
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "The vector isn\u0027t generic. It infers the type from the elements. Most of the `ProgramBuilder` usage had already dropped `StatementList` and just used the initializer-list form.",
       "parentUuid": "d1207292_b58f970a",
+      "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b3eb7ee_c7426655",
+        "filename": "src/tint/ast/case_statement_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-02T15:39:40Z",
+      "side": 1,
+      "message": "It _looks_ generic. From reading this line I\u0027d have no idea what is being passed into the `BlockStatement` create method.",
+      "parentUuid": "94929c05_30710874",
       "revId": "d6227260c4d7f5decd212a12ab185fce17044a80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
