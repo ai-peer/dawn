@@ -183,8 +183,6 @@ class Token {
         kI32,
         /// A 'if'
         kIf,
-        /// A 'import'
-        kImport,
         /// A 'let'
         kLet,
         /// A 'loop'

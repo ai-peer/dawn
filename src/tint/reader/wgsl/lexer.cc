@@ -1185,9 +1185,6 @@ Token Lexer::check_keyword(const Source& source, std::string_view str) {
     if (str == "if") {
         return {Token::Type::kIf, source, "if"};
     }
-    if (str == "import") {
-        return {Token::Type::kImport, source, "import"};
-    }
     if (str == "let") {
         return {Token::Type::kLet, source, "let"};
     }
