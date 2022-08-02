@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c3eb295_d7c1ff8c",
+        "filename": "src/dawn/native/StreamImplTint.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-02T15:59:20Z",
+      "side": 1,
+      "message": "It\u0027s unfortunate there\u0027s no better way to do this. Let\u0027s leave as is I guess.",
+      "parentUuid": "b86eb853_e83adb17",
+      "revId": "c695af4927f629ce0ea6159c7e1ccf11f1dfb912",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46734844_4e7bdf2a",
@@ -194,6 +212,24 @@
       "side": 1,
       "message": "in the C++23 noexcept specification, it does say that it\u0027s specified as unpacking std::get\u003cI\u003e where I is an index sequence - so that would be in order.\n\nbut the rest doesn\u0027t explicitly say it\u0027s in order (though it would be very not useful if the order were not guaranteed).\n\nwould you prefer to manually write our own helper to perform apply?\nfwiw, I think the invariant we absolutely care about is that the order is stable, not necessarily that it\u0027s from 0-\u003eN",
       "parentUuid": "23ccd4b1_14aa815b",
+      "revId": "c695af4927f629ce0ea6159c7e1ccf11f1dfb912",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d47df34_7b2fd5f2",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-02T15:59:20Z",
+      "side": 1,
+      "message": "Thanks for checking. It\u0027s probably safe to assume it is stable this it is at least in the latest C++ spec.",
+      "parentUuid": "f33ada18_3537b320",
       "revId": "c695af4927f629ce0ea6159c7e1ccf11f1dfb912",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
