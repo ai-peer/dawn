@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47ca04ef_38b91c1a",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-03T19:28:22Z",
+      "side": 1,
+      "message": "There seems to be an implicit assumption that this is always called by a scalar and and a non-scalar. If this is called with a vec2 and a vec3 for instance the indexing on 502 will be incorrect.\n\nShould we add an assert in here that `n0 \u003d\u003d 1 || n1 \u003d\u003d 1`?",
+      "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "408a0d8a_0fe76aa6",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-03T19:28:22Z",
+      "side": 1,
+      "message": "Should we note somewhere that the types of `args` have to be the same? (Or, the deepest element types have to be the same?)",
+      "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6ccfbe9_d7cbe7ca",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3227,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-03T19:28:22Z",
+      "side": 1,
+      "message": "This would be a lot more readable if all the cases were listed out instead of generated. It\u0027s really hard to figure out what exactly is being tested, and I can\u0027t tell you from reading this if there are cases missing.",
+      "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7915862_b9bb96b0",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3240,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-03T19:28:22Z",
+      "side": 1,
+      "message": "This error is weird as it shows the overflowed value, instead of what it would have calcluated too. Should we promote the math to int64_t and emit that value so we see the correct positive number?",
+      "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

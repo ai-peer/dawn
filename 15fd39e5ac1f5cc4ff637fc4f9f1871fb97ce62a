@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1e9573c_83ebeb37",
+        "filename": "test/tint/expressions/binary/add/scalar-scalar/f32.wgsl.expected.glsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-03T19:28:22Z",
+      "side": 0,
+      "message": "For all these tests that are getting folded do we need a `var` version where the math is left in the shader?",
+      "revId": "15fd39e5ac1f5cc4ff637fc4f9f1871fb97ce62a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
