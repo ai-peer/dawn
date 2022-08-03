@@ -39,7 +39,43 @@ TEST_F(Mat2ToVec2Test, Simple) {
 struct U {
   m : mat2x2<f32>,
 }
+
 @group(0) @binding(0) var<uniform> u : U;
+)";
+    auto* expect = R"(
+struct U {
+  m0 : vec2<f32>,
+  m1 : vec2<f32>,
+}
+
+struct U {
+  m0 : vec2<f32>,
+  m1 : vec2<f32>,
+}
+
+@group(0) @binding(0) var<uniform> u : U;
+)";
+
+    DataMap data;
+    auto got = Run<Mat2ToVec2>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(Mat2ToVec2Test, MemberAssignment) {
+    auto* src = R"(
+struct U {
+  m : mat2x2<f32>,
+}
+
+@group(0) @binding(0) var<uniform> u : U;
+
+fn f() {
+  let x = u.m[0][0];
+  let y = u.m[0][1];
+  let z = u.m[1][0];
+  let w = u.m[1][1];
+}
 )";
     auto* expect = R"(
 struct U {
