@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44eb5590_a845b811",
+        "filename": "include/dawn/native/D3D12Backend.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-03T12:17:46Z",
+      "side": 0,
+      "message": "Why the change to remove this?",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 37
+      },
+      "revId": "d5030ad463fed3ec1d672c30b56e44cc6829ca4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
