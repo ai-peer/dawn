@@ -67,25 +67,29 @@ struct DAWN_NATIVE_EXPORT ExternalImageDescriptorDXGISharedHandle : ExternalImag
 // Keyed mutex acquire/release uses a fixed key of 0 to match Chromium behavior.
 constexpr UINT64 kDXGIKeyedMutexAcquireReleaseKey = 0;
 
-struct DAWN_NATIVE_EXPORT ExternalImageAccessDescriptorDXGISharedHandle
-    : ExternalImageAccessDescriptor {
-  public:
-    // Value used for fence wait. A value of 0 is valid, but essentially a no-op since the fence
-    // lifetime starts with the 0 value signaled. A value of UINT64_MAX is ignored since it's also
-    // used by the D3D runtime to indicate that the device was removed.
-    uint64_t fenceWaitValue = 0;
+struct DAWN_NATIVE_EXPORT ExternalImageDXGIBeginAccessDescriptor {
+    bool isInitialized = false;  // Whether the texture is initialized on import
+    WGPUTextureUsageFlags usage = WGPUTextureUsage_None;
 
-    // Value to signal the fence with after the texture is destroyed. A value of 0 means the fence
-    // will not be signaled.
-    uint64_t fenceSignalValue = 0;
+    // Value used for fence wait. A value of 0 is valid, but essentially a no-op since the fence
+    // lifetime starts with the 0 value signaled. A default value of UINT64_MAX is chosen so that
+    // failing to specify this will make the wait block indefinitely making the bug apparent.
+    uint64_t fenceWaitValue = UINT64_MAX;
 
     // Whether the texture is for a WebGPU swap chain.
     bool isSwapChainTexture = false;
 };
 
+struct DAWN_NATIVE_EXPORT ExternalImageDXGIEndAccessDescriptor {
+    // Value to signal the fence with after the texture is destroyed. A default value of 0 is chosen
+    // so that failing to specify the signal value causes future waits to block indefinitely making
+    // the bug apparent instead of dropping the wait silently.
+    uint64_t fenceSignalValue = 0;
+};
+
 // TODO(dawn:576): Remove after changing Chromium code to use the new struct name.
 struct DAWN_NATIVE_EXPORT ExternalImageAccessDescriptorDXGIKeyedMutex
-    : ExternalImageAccessDescriptorDXGISharedHandle {
+    : ExternalImageDXGIBeginAccessDescriptor {
   public:
     // TODO(chromium:1241533): Remove deprecated keyed mutex params after removing associated
     // code from Chromium - we use a fixed key of 0 for acquire and release everywhere now.
@@ -107,9 +111,16 @@ class DAWN_NATIVE_EXPORT ExternalImageDXGI {
 
     // TODO(sunnyps): |device| is ignored - remove after Chromium migrates to single parameter call.
     WGPUTexture ProduceTexture(WGPUDevice device,
-                               const ExternalImageAccessDescriptorDXGISharedHandle* descriptor);
+                               const ExternalImageDXGIBeginAccessDescriptor* descriptor);
 
-    WGPUTexture ProduceTexture(const ExternalImageAccessDescriptorDXGISharedHandle* descriptor);
+    // Creates WGPUTexture wrapping the DXGI shared handle. The provided fence or keyed mutex will
+    // be synchronized before using the texture in any command lists.
+    WGPUTexture ProduceTexture(const ExternalImageDXGIBeginAccessDescriptor* descriptor);
+
+    // Destroys WGPUTexture returned by ProduceTexture() and performs any necessary synchronization.
+    // Note that merely calling Destroy() on the WGPUTexture does not perform synchronization.
+    void DestroyTexture(WGPUTexture texture,
+                        const ExternalImageDXGIEndAccessDescriptor* descriptor);
 
   private:
     explicit ExternalImageDXGI(std::unique_ptr<ExternalImageDXGIImpl> impl);

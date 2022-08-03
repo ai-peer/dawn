@@ -18,10 +18,12 @@
 #include <utility>
 
 #include "dawn/common/Constants.h"
+#include "dawn/common/Log.h"
 #include "dawn/common/Math.h"
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/EnumMaskIterator.h"
 #include "dawn/native/Error.h"
+#include "dawn/native/ResourceMemoryAllocation.h"
 #include "dawn/native/d3d12/BufferD3D12.h"
 #include "dawn/native/d3d12/CommandRecordingContext.h"
 #include "dawn/native/d3d12/D3D11on12Util.h"
@@ -513,14 +515,13 @@ ResultOrError<Ref<Texture>> Texture::CreateExternalImage(
     ComPtr<ID3D12Fence> d3d12Fence,
     Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
     uint64_t fenceWaitValue,
-    uint64_t fenceSignalValue,
     bool isSwapChainTexture,
     bool isInitialized) {
     Ref<Texture> dawnTexture =
         AcquireRef(new Texture(device, descriptor, TextureState::OwnedExternal));
     DAWN_TRY(dawnTexture->InitializeAsExternalTexture(
         std::move(d3d12Texture), std::move(d3d12Fence), std::move(d3d11on12Resource),
-        fenceWaitValue, fenceSignalValue, isSwapChainTexture));
+        fenceWaitValue, isSwapChainTexture));
 
     // Importing a multi-planar format must be initialized. This is required because
     // a shared multi-planar format cannot be initialized by Dawn.
@@ -548,7 +549,6 @@ MaybeError Texture::InitializeAsExternalTexture(ComPtr<ID3D12Resource> d3d12Text
                                                 ComPtr<ID3D12Fence> d3d12Fence,
                                                 Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
                                                 uint64_t fenceWaitValue,
-                                                uint64_t fenceSignalValue,
                                                 bool isSwapChainTexture) {
     D3D12_RESOURCE_DESC desc = d3d12Texture->GetDesc();
     mD3D12ResourceFlags = desc.Flags;
@@ -563,7 +563,6 @@ MaybeError Texture::InitializeAsExternalTexture(ComPtr<ID3D12Resource> d3d12Text
     mD3D12Fence = std::move(d3d12Fence);
     mD3D11on12Resource = std::move(d3d11on12Resource);
     mFenceWaitValue = fenceWaitValue;
-    mFenceSignalValue = fenceSignalValue;
     mSwapChainTexture = isSwapChainTexture;
 
     SetLabelHelper("Dawn_ExternalTexture");
@@ -648,7 +647,7 @@ Texture::Texture(Device* device, const TextureDescriptor* descriptor, TextureSta
 
 Texture::~Texture() {}
 
-void Texture::DestroyImpl() {
+void Texture::DestroyHelper(uint64_t fenceSignalValue) {
     TextureBase::DestroyImpl();
 
     Device* device = ToBackend(GetDevice());
@@ -674,15 +673,16 @@ void Texture::DestroyImpl() {
     mSwapChainTexture = false;
 
     // Signal the fence on destroy after all uses of the texture.
-    if (mD3D12Fence != nullptr && mFenceSignalValue != 0) {
+    if (mD3D12Fence != nullptr) {
         // Enqueue a fence wait if we haven't already; otherwise the fence signal will be racy.
-        if (mFenceWaitValue != UINT64_MAX) {
-            device->ConsumedError(
-                CheckHRESULT(device->GetCommandQueue()->Wait(mD3D12Fence.Get(), mFenceWaitValue),
-                             "D3D12 fence wait"));
+        if (mFenceWaitValue.has_value()) {
+            device->ConsumedError(CheckHRESULT(
+                device->GetCommandQueue()->Wait(mD3D12Fence.Get(), mFenceWaitValue.value()),
+                "D3D12 fence wait"));
+            mFenceWaitValue.reset();
         }
         device->ConsumedError(
-            CheckHRESULT(device->GetCommandQueue()->Signal(mD3D12Fence.Get(), mFenceSignalValue),
+            CheckHRESULT(device->GetCommandQueue()->Signal(mD3D12Fence.Get(), fenceSignalValue),
                          "D3D12 fence signal"));
     }
 
@@ -690,6 +690,24 @@ void Texture::DestroyImpl() {
     // resource and the fence.
     mD3D11on12Resource = nullptr;
     mD3D12Fence = nullptr;
+}
+
+void Texture::DestroyImpl() {
+    if (mD3D12Fence != nullptr) {
+        dawn::WarningLog() << "D3D12 texture called Destroy() before DestroyExternalTexture()";
+    }
+    // We use a fence signal value of 0 so that unsynchronized waits block indefinitely, and that
+    // would make the bug apparent instead of silently dropping the wait.
+    DestroyHelper(/*fenceSignalValue=*/0);
+}
+
+void Texture::DestroyExternalTexture(uint64_t fenceSignalValue) {
+    ASSERT(mResourceAllocation.GetInfo().mMethod == AllocationMethod::kExternal);
+    // Emit a warning log to help debugging if client didn't specify a non-default signal value.
+    if (mD3D12Fence != nullptr && fenceSignalValue == 0) {
+        dawn::WarningLog() << "D3D12 external image texture destruction likely unsynchronized";
+    }
+    DestroyHelper(fenceSignalValue);
 }
 
 DXGI_FORMAT Texture::GetD3D12Format() const {
@@ -725,14 +743,13 @@ MaybeError Texture::SynchronizeImportedTextureBeforeUse() {
     if (mD3D11on12Resource != nullptr) {
         DAWN_TRY(mD3D11on12Resource->AcquireKeyedMutex());
     }
-    // Perform the wait only on the first call. We can use UINT64_MAX as a sentinel value since it's
-    // also used by the D3D runtime to indicate device removed according to:
-    // https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12fence-getcompletedvalue#return-value
-    if (mD3D12Fence != nullptr && mFenceWaitValue != UINT64_MAX) {
-        DAWN_TRY(CheckHRESULT(
-            ToBackend(GetDevice())->GetCommandQueue()->Wait(mD3D12Fence.Get(), mFenceWaitValue),
-            "D3D12 fence wait"));
-        mFenceWaitValue = UINT64_MAX;
+    // Perform the wait only on the first call.
+    if (mD3D12Fence != nullptr && mFenceWaitValue.has_value()) {
+        DAWN_TRY(CheckHRESULT(ToBackend(GetDevice())
+                                  ->GetCommandQueue()
+                                  ->Wait(mD3D12Fence.Get(), mFenceWaitValue.value()),
+                              "D3D12 fence wait"));
+        mFenceWaitValue.reset();
     }
     return {};
 }

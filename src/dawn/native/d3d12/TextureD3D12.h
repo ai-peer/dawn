@@ -15,6 +15,7 @@
 #ifndef SRC_DAWN_NATIVE_D3D12_TEXTURED3D12_H_
 #define SRC_DAWN_NATIVE_D3D12_TEXTURED3D12_H_
 
+#include <optional>
 #include <vector>
 
 #include "dawn/native/Texture.h"
@@ -48,12 +49,13 @@ class Texture final : public TextureBase {
         ComPtr<ID3D12Fence> d3d12Fence,
         Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
         uint64_t fenceWaitValue,
-        uint64_t fenceSignalValue,
         bool isSwapChainTexture,
         bool isInitialized);
     static ResultOrError<Ref<Texture>> Create(Device* device,
                                               const TextureDescriptor* descriptor,
                                               ComPtr<ID3D12Resource> d3d12Texture);
+
+    void DestroyExternalTexture(uint64_t fenceSignalValue);
 
     DXGI_FORMAT GetD3D12Format() const;
     ID3D12Resource* GetD3D12Resource() const;
@@ -104,11 +106,11 @@ class Texture final : public TextureBase {
                                            ComPtr<ID3D12Fence> d3d12Fence,
                                            Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
                                            uint64_t fenceWaitValue,
-                                           uint64_t fenceSignalValue,
                                            bool isSwapChainTexture);
     MaybeError InitializeAsSwapChainTexture(ComPtr<ID3D12Resource> d3d12Texture);
 
     void SetLabelHelper(const char* prefix);
+    void DestroyHelper(uint64_t fenceSignalValue);
 
     // Dawn API
     void SetLabelImpl() override;
@@ -143,8 +145,7 @@ class Texture final : public TextureBase {
     // TODO(dawn:1460): Encapsulate imported image fields e.g. std::unique_ptr<ExternalImportInfo>.
     ComPtr<ID3D12Fence> mD3D12Fence;
     Ref<D3D11on12ResourceCacheEntry> mD3D11on12Resource;
-    uint64_t mFenceWaitValue = 0;
-    uint64_t mFenceSignalValue = 0;
+    std::optional<uint64_t> mFenceWaitValue;
     bool mSwapChainTexture = false;
 
     SubresourceStorage<StateAndDecay> mSubresourceStateAndDecay;
