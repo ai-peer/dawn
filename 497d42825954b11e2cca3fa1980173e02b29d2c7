@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec2fc73b_73a2802e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-08-03T15:50:45Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin, \n\nI just set this CL to be in WIP status because I found I need more work to refine this CL.",
+      "revId": "497d42825954b11e2cca3fa1980173e02b29d2c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83e86a6e_168b0028",
