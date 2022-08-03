@@ -22,6 +22,30 @@
       },
       "revId": "7d7976d590fe95a0e500e235d3cb78c5997a2f53",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "745634a6_b4921f0a",
+        "filename": "src/tint/val/hlsl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-03T19:40:16Z",
+      "side": 1,
+      "message": "I\u0027ve got a fix up here: https://dawn-review.googlesource.com/c/dawn/+/98110",
+      "parentUuid": "43f73ebb_a8ae0040",
+      "range": {
+        "startLine": 76,
+        "startChar": 12,
+        "endLine": 76,
+        "endChar": 55
+      },
+      "revId": "7d7976d590fe95a0e500e235d3cb78c5997a2f53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
