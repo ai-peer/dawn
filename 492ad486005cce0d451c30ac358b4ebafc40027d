@@ -16,6 +16,24 @@
       "message": "Should we inline `profile` into the usage below so we don\u0027t run into this problem again in the future? This _looks_ like a good spot to do what was done.",
       "revId": "492ad486005cce0d451c30ac358b4ebafc40027d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50ad58c6_5c7bea2b",
+        "filename": "src/tint/val/hlsl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-03T19:51:02Z",
+      "side": 1,
+      "message": "I like it. Done.",
+      "parentUuid": "e3738902_af00ab17",
+      "revId": "492ad486005cce0d451c30ac358b4ebafc40027d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
