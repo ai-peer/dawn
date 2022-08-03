@@ -33,6 +33,24 @@
       "message": "LGTM",
       "revId": "6c8bcdfc774a9d01eeeb7f2770ec6a28d4f78f07",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0641ffbe_4f0a48b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-08-03T21:18:03Z",
+      "side": 1,
+      "message": "Good call, I forgot that wouldn\u0027t make sense to be 0 because it\u0027s not the default in JS.",
+      "parentUuid": "67b68f64_24899918",
+      "revId": "6c8bcdfc774a9d01eeeb7f2770ec6a28d4f78f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
