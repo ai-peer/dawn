@@ -7,9 +7,9 @@ struct frexp_result_vec4 {
   int4 exp;
 };
 frexp_result_vec4 tint_frexp(float4 param_0) {
-  int4 exp;
-  float4 sig = frexp(param_0, exp);
-  return {sig, exp};
+  frexp_result_vec4 result;
+  result.sig = frexp(param_0, result.exp);
+  return result;
 }
 
 void frexp_3c4f48() {

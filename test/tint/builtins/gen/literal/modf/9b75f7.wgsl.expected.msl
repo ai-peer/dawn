@@ -7,9 +7,9 @@ struct modf_result_vec3 {
   float3 whole;
 };
 modf_result_vec3 tint_modf(float3 param_0) {
-  float3 whole;
-  float3 fract = modf(param_0, whole);
-  return {fract, whole};
+  modf_result_vec3 result;
+  result.fract = modf(param_0, result.whole);
+  return result;
 }
 
 void modf_9b75f7() {
