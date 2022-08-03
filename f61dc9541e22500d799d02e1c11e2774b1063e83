@@ -124,6 +124,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d7ff8ac_28090d00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-03T22:03:45Z",
+      "side": 1,
+      "message": "So it seems I had a brain fart - UINT64_MAX will actually satisfy any waits instead of making them block indefinitely. Signaling 0 will make all waits except 0 wait indefinitely. I\u0027m changing the behavior and defaults:\n\n1) Default fenceWaitValue is now UINT64_MAX so that failing to specify it blocks indefinitely. There\u0027s no special treatment of UINT64_MAX in the code - TextureD3D12 uses a std::optional to store the fence wait value. Note: D3D12 device loss also signals the fence with UINT64_MAX, but I think that\u0027s merely a mechanism to retire pending and future fence waits, it doesn\u0027t seem to be intended for detecting errors by itself.\n\n2) Default fenceSignalValue is 0 so that failing to specify it almost certainly makes the next wait block indefinitely unless client specifically passes the 0 value on purpose.\n\nLet me know if you have suggestions for solving this in another way.",
+      "parentUuid": "4ffcd70b_cd8ff80e",
+      "revId": "f61dc9541e22500d799d02e1c11e2774b1063e83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a145c8b6_19f5858b",
