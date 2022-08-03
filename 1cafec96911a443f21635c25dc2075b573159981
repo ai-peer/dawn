@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8625a1c0_e2e7d6cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-03T09:07:56Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "1cafec96911a443f21635c25dc2075b573159981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "657a0407_c171f473",
+        "filename": "src/dawn/native/VisitableMembers.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-03T09:07:56Z",
+      "side": 1,
+      "message": "That\u0027s really nice!",
+      "revId": "1cafec96911a443f21635c25dc2075b573159981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb4d4deb_9e808c5c",
+        "filename": "src/dawn/native/VisitableMembers.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-03T09:07:56Z",
+      "side": 1,
+      "message": "u-nit: maybe use a constexpr kUnusedForComma \u003d 0?",
+      "range": {
+        "startLine": 45,
+        "startChar": 10,
+        "endLine": 45,
+        "endChar": 12
+      },
+      "revId": "1cafec96911a443f21635c25dc2075b573159981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

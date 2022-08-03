@@ -237,6 +237,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "421ccb96_e1f0b0a9",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-03T09:07:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ec32556e_1630a5fd",
+      "range": {
+        "startLine": 184,
+        "startChar": 25,
+        "endLine": 184,
+        "endChar": 39
+      },
+      "revId": "c695af4927f629ce0ea6159c7e1ccf11f1dfb912",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8794b97e_bb205200",
