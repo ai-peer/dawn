@@ -719,7 +719,17 @@ const sem::ExternalTexture* build_texture_external(MatchState& state) {
 bool match_modf_result(const sem::Type* ty) {
     return ty->Is<Any>();
 }
+bool match_modf_result_f16(const sem::Type* ty) {
+    return ty->Is<Any>();
+}
 bool match_modf_result_vec(const sem::Type* ty, Number& N) {
+    if (!ty->Is<Any>()) {
+        return false;
+    }
+    N = Number::any;
+    return true;
+}
+bool match_modf_result_vec_f16(const sem::Type* ty, Number& N) {
     if (!ty->Is<Any>()) {
         return false;
     }
@@ -729,7 +739,17 @@ bool match_modf_result_vec(const sem::Type* ty, Number& N) {
 bool match_frexp_result(const sem::Type* ty) {
     return ty->Is<Any>();
 }
+bool match_frexp_result_f16(const sem::Type* ty) {
+    return ty->Is<Any>();
+}
 bool match_frexp_result_vec(const sem::Type* ty, Number& N) {
+    if (!ty->Is<Any>()) {
+        return false;
+    }
+    N = Number::any;
+    return true;
+}
+bool match_frexp_result_vec_f16(const sem::Type* ty, Number& N) {
     if (!ty->Is<Any>()) {
         return false;
     }
@@ -785,21 +805,41 @@ const sem::Struct* build_modf_result(MatchState& state) {
     auto* f32 = state.builder.create<sem::F32>();
     return build_struct(state, "__modf_result", {{"fract", f32}, {"whole", f32}});
 }
+const sem::Struct* build_modf_result_f16(MatchState& state) {
+    auto* f16 = state.builder.create<sem::F16>();
+    return build_struct(state, "__modf_result_f16", {{"fract", f16}, {"whole", f16}});
+}
 const sem::Struct* build_modf_result_vec(MatchState& state, Number& n) {
     auto* vec_f32 = state.builder.create<sem::Vector>(state.builder.create<sem::F32>(), n.Value());
     return build_struct(state, "__modf_result_vec" + std::to_string(n.Value()),
                         {{"fract", vec_f32}, {"whole", vec_f32}});
+}
+const sem::Struct* build_modf_result_vec_f16(MatchState& state, Number& n) {
+    auto* vec_f16 = state.builder.create<sem::Vector>(state.builder.create<sem::F16>(), n.Value());
+    return build_struct(state, "__modf_result_vec" + std::to_string(n.Value()) + "_f16",
+                        {{"fract", vec_f16}, {"whole", vec_f16}});
 }
 const sem::Struct* build_frexp_result(MatchState& state) {
     auto* f32 = state.builder.create<sem::F32>();
     auto* i32 = state.builder.create<sem::I32>();
     return build_struct(state, "__frexp_result", {{"sig", f32}, {"exp", i32}});
 }
+const sem::Struct* build_frexp_result_f16(MatchState& state) {
+    auto* f16 = state.builder.create<sem::F16>();
+    auto* i32 = state.builder.create<sem::I32>();
+    return build_struct(state, "__frexp_result_f16", {{"sig", f16}, {"exp", i32}});
+}
 const sem::Struct* build_frexp_result_vec(MatchState& state, Number& n) {
     auto* vec_f32 = state.builder.create<sem::Vector>(state.builder.create<sem::F32>(), n.Value());
     auto* vec_i32 = state.builder.create<sem::Vector>(state.builder.create<sem::I32>(), n.Value());
     return build_struct(state, "__frexp_result_vec" + std::to_string(n.Value()),
                         {{"sig", vec_f32}, {"exp", vec_i32}});
+}
+const sem::Struct* build_frexp_result_vec_f16(MatchState& state, Number& n) {
+    auto* vec_f16 = state.builder.create<sem::Vector>(state.builder.create<sem::F16>(), n.Value());
+    auto* vec_i32 = state.builder.create<sem::Vector>(state.builder.create<sem::I32>(), n.Value());
+    return build_struct(state, "__frexp_result_vec" + std::to_string(n.Value()) + "_f16",
+                        {{"sig", vec_f16}, {"exp", vec_i32}});
 }
 
 const sem::Struct* build_atomic_compare_exchange_result(MatchState& state, const sem::Type* ty) {
