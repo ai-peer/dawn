@@ -97,5 +97,5 @@ struct U {
     EXPECT_EQ(expect, str(got));
 }
 
-}
-}
+}  // namespace
+}  // namespace tint::transform

@@ -1,4 +1,4 @@
-// Copyright 2021 The Tint Authors.
+// Copyright 2022 The Tint Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,15 +14,12 @@
 
 #include "src/tint/transform/mat2_to_vec2.h"
 
-// #include <unordered_map>
-// #include <unordered_set>
-// #include <utility>
+#include <unordered_map>
+#include <utility>
 
-#include "src/tint/program_builder.h"
 #include "src/tint/ast/struct.h"
-// #include "src/tint/sem/variable.h"
+#include "src/tint/program_builder.h"
 #include "src/tint/sem/member_accessor_expression.h"
-// #include "src/tint/utils/map.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::transform::Mat2ToVec2);
 
