@@ -284,6 +284,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f92ef776_a7a96a66",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-03T15:15:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8794b97e_bb205200",
+      "range": {
+        "startLine": 201,
+        "startChar": 25,
+        "endLine": 201,
+        "endChar": 28
+      },
+      "revId": "c695af4927f629ce0ea6159c7e1ccf11f1dfb912",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96f03e98_97613cb9",
@@ -385,6 +409,30 @@
       "writtenOn": "2022-08-02T06:25:12Z",
       "side": 1,
       "message": "If we make a macro then we could replace this here.",
+      "range": {
+        "startLine": 278,
+        "startChar": 4,
+        "endLine": 283,
+        "endChar": 72
+      },
+      "revId": "c695af4927f629ce0ea6159c7e1ccf11f1dfb912",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fad9130b_8d0ffd56",
+        "filename": "src/dawn/tests/unittests/native/StreamTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-03T15:15:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83bb6f3b_d5e4a722",
       "range": {
         "startLine": 278,
         "startChar": 4,
