@@ -111,6 +111,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e834cec_c4087d9e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-03T13:49:47Z",
+      "side": 1,
+      "message": "Aha. 😊",
+      "parentUuid": "44bb7a53_c4695e30",
+      "range": {
+        "startLine": 508,
+        "startChar": 70,
+        "endLine": 508,
+        "endChar": 92
+      },
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cab1001f_54736722",
