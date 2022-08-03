@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f07ddf8_d163f2d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-03T18:30:10Z",
+      "side": 1,
+      "message": "lgtm w/ question",
+      "revId": "62c9aa997dbc9e25769ffb09fd5e4e38a29dc59a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f68fc911_782908bb",
+        "filename": "src/tint/number_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-03T18:30:10Z",
+      "side": 1,
+      "message": "Why do these say `*` and not `+`?",
+      "revId": "62c9aa997dbc9e25769ffb09fd5e4e38a29dc59a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
