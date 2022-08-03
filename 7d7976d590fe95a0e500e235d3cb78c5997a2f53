@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43f73ebb_a8ae0040",
+        "filename": "src/tint/val/hlsl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-03T16:54:17Z",
+      "side": 1,
+      "message": "Unfortunately, this does not work on non-windows systems.\nOn windows the called program is responsible for splitting arguments from one joined string.\n\nCommand line arguments on \u0027nix systems need to be passed as separate strings. Because you\u0027re concatenating strings here, DXC errors with `dxc failed : unable to parse shader model.`",
+      "range": {
+        "startLine": 76,
+        "startChar": 12,
+        "endLine": 76,
+        "endChar": 55
+      },
+      "revId": "7d7976d590fe95a0e500e235d3cb78c5997a2f53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
