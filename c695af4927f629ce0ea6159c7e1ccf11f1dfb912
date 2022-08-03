@@ -168,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "989cb475_4c3857c2",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-03T04:21:20Z",
+      "side": 1,
+      "message": "I decided to try this out in this patch. I only address not needing to list the members twice as defining the other methods weren\u0027t as simple if we want to keep the macro simple and shared with CacheRequest. We can probably do it with more complexity, but I don\u0027t think it\u0027s worth it right now.\nThe way it is now is actually quite nice as it decreases the complexity of the macro used for CacheRequest as well; there\u0027s now just a basic helper to declare members and VisitAll of them.\n\nPTAL again and let me know what you think of this approach, or if the previous one was better.",
+      "parentUuid": "109b8c3b_f813a454",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 2
+      },
+      "revId": "c695af4927f629ce0ea6159c7e1ccf11f1dfb912",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a9be45d_c138e135",
         "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
         "patchSetId": 7
@@ -179,6 +203,30 @@
       "writtenOn": "2022-08-02T12:04:31Z",
       "side": 1,
       "message": "nit: could move this one as well I think.",
+      "range": {
+        "startLine": 184,
+        "startChar": 25,
+        "endLine": 184,
+        "endChar": 39
+      },
+      "revId": "c695af4927f629ce0ea6159c7e1ccf11f1dfb912",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec32556e_1630a5fd",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-03T04:21:20Z",
+      "side": 1,
+      "message": "This one is const char* and we\u0027re turning it into std::string.\nWe could make it string_view, but a few of its uses use `const std::string\u0026` so we need it as a std::string anyway (hm.. unless I change those callsites..).",
+      "parentUuid": "5a9be45d_c138e135",
       "range": {
         "startLine": 184,
         "startChar": 25,
