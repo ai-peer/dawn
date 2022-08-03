@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d65c6d82_7f614a6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-03T15:22:30Z",
+      "side": 1,
+      "message": "Addressed all comments, except for splitting up. Will now split up.",
+      "revId": "7f64764715ec67b085b8463fd3b8f3b4779e7150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
