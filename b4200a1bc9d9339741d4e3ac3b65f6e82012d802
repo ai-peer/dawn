@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d6f76f8_4be7b7d0",
+        "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-03T04:21:43Z",
+      "side": 1,
+      "message": "I should add a config with use_dxc",
+      "range": {
+        "startLine": 648,
+        "startChar": 22,
+        "endLine": 648,
+        "endChar": 58
+      },
+      "revId": "b4200a1bc9d9339741d4e3ac3b65f6e82012d802",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
