@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38a0cfc7_36b9f820",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-03T16:08:09Z",
+      "side": 1,
+      "message": "Please take a look, thanks. I am not sure why Kokoro failed on some spirv reader E2E tests, for example \"unittest/reader/spirv/SpvModuleScopeVarParserTest_MatrixStrideDecoration.spvasm\".",
+      "revId": "fa65d8841eef95c1bc7251cfe792e6efac589fca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
