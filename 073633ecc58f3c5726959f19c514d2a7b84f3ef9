@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a380bd0c_f98732b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-03T14:08:23Z",
+      "side": 1,
+      "message": "Thanks for the comments. I really appreciate the idea of keeping the OS-specific parts separated. It greatly makes the code cleaner.\n\nWith the CL, I can still see the expected gains, the dropping of GPU usage from 38% to 23% roughly.",
+      "parentUuid": "8d2dc9c4_db7955f4",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c892dae7_97267f05",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-07-29T18:57:25Z",
       "side": 1,
       "message": "nit: for now this is always a single exportable VkSemaphore, so maybe it could be \"VkSemaphore exportableSignalSemaphore\"? Or remove entirely if we choose to do all the handling in DeviceVk.",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "631d4a30_50562afc",
+        "filename": "src/dawn/native/vulkan/CommandRecordingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-03T14:08:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c892dae7_97267f05",
       "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3a921b8_1453409e",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-03T14:08:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb493f90_02825515",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "faaa7bbb_d7769c97",
@@ -82,6 +136,24 @@
       "writtenOn": "2022-07-29T18:57:25Z",
       "side": 1,
       "message": "nit: we can avoid OS-specific defines in this code by making the dup() be part of the external semaphore service API as DuplicateHandle() for example. On Fuchsia it can be https://fuchsia.dev/fuchsia-src/reference/syscalls/handle_duplicate",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51a18c34_64231913",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-03T14:08:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "faaa7bbb_d7769c97",
       "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e527813_5ba9e176",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-03T14:08:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "951c7239_f3b7f28c",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5884f249_408fd1f0",
@@ -116,6 +206,24 @@
       "writtenOn": "2022-07-29T18:57:25Z",
       "side": 1,
       "message": "nit: no need to clear since the recording context is reset below.",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bac55a6_c768e19f",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-03T14:08:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5884f249_408fd1f0",
       "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -137,6 +245,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6ab0a17_fa4b6aec",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-03T14:08:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78644683_9004963a",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b20b87f_43c36b0b",
@@ -150,6 +276,24 @@
       "writtenOn": "2022-07-29T18:57:25Z",
       "side": 1,
       "message": "It is the code that\u0027s handling a specific recording context that calls this method, so it would be better to pass it as an argument as it is not immediately clear that GetPendingRecordingContext and the caller\u0027s one are the same.",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f38b2237_f2061741",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-03T14:08:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b20b87f_43c36b0b",
       "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -171,6 +315,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "773b2cc3_48eac9ba",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-03T14:08:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0da3bb23_9376882f",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d038b54_e17f72e4",
@@ -184,6 +346,24 @@
       "writtenOn": "2022-07-29T18:57:25Z",
       "side": 1,
       "message": "nit: this will be done in DestroyImpl that Destroy calls",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bab1dfe1_3ca8f1ed",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-03T14:08:23Z",
+      "side": 1,
+      "message": "DestroyImpl will close the handle if not null. This is just unexpected as the owndership of handle here is supposed to be transferred to the client.",
+      "parentUuid": "0d038b54_e17f72e4",
       "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -211,6 +391,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "415be1bc_ad66d1f9",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-03T14:08:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3dd6c16_2036a58f",
+      "range": {
+        "startLine": 916,
+        "startChar": 12,
+        "endLine": 916,
+        "endChar": 17
+      },
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ac674da_185a5e22",
@@ -228,6 +432,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9eed935c_a5b533ca",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-03T14:08:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ac674da_185a5e22",
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "589eb823_bada41a9",
@@ -241,6 +463,30 @@
       "writtenOn": "2022-07-29T18:57:25Z",
       "side": 1,
       "message": "nit: \"EagerlyTransitioned\" to keep it adjective-like like the other enum names.\n\nAlso can we have some doc about what each state mean?",
+      "range": {
+        "startLine": 164,
+        "startChar": 71,
+        "endLine": 164,
+        "endChar": 86
+      },
+      "revId": "073633ecc58f3c5726959f19c514d2a7b84f3ef9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "990c2ed4_84e2501a",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-03T14:08:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "589eb823_bada41a9",
       "range": {
         "startLine": 164,
         "startChar": 71,
