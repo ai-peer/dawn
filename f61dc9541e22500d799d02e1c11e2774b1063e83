@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ffcd70b_cd8ff80e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-03T20:23:07Z",
+      "side": 1,
+      "message": "UINT64_MAX when specified as the fenceWaitValue in the begin access descriptor is treated as a no-op, but here we\u0027re talking about cases where the client either uses wgpuTextureDestroy instead of ExternalImageDXGI::DestroyTexture or forgets to set a fenceSignalValue. We\u0027re passing UINT64_MAX to the D3D12 fence signal command, but the client doesn\u0027t know this and the next wait will block indefinitely.\n\nYou\u0027re right that this doesn\u0027t protect against the client also passing the default value in the begin access descriptor and therefore the wait gets treated as a no-op, and the bug wouldn\u0027t be caught assuming that there are no other waits (e.g. in D3D11). We can protect against that by setting the default wait value in the begin access descriptor to 0. WDYT?",
+      "parentUuid": "b8f7c86d_e608500f",
+      "revId": "f61dc9541e22500d799d02e1c11e2774b1063e83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a145c8b6_19f5858b",
         "filename": "include/dawn/native/D3D12Backend.h",
         "patchSetId": 3

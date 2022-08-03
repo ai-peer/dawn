@@ -50,6 +50,24 @@
       "message": "nit: Maybe we could replace this with an assert so that the internal texture destruction code doesn\u0027t look like it is using fences etc. It could look like this:\n\n```\nvoid DestroyExternalTexture(fence value) {\n  ASSERT(is external)\n  ASSERT(fence !\u003d nullptr)\n  Fence wait and signal.\n  mFence \u003d nullptr\n  \n  DestroyImpl();\n}\n\nDestroyImpl() {\n  ASSERT fence \u003d\u003d nullpte\n  Do the regular destroy code.\n}\n```",
       "revId": "13c503d88d4d1a0006da9d958f8b3004ad3bef4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "141ba2af_3f8c71ee",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-03T20:23:07Z",
+      "side": 1,
+      "message": "Asserting fence !\u003d nullptr in DestroyExternalTexture won\u0027t work at the moment since we have to support keyed mutex until Chromium migrates to fences - the assert will fail on Chromium trunk and the next Dawn roll will likely fail.\n\nAsserting fence \u003d\u003d nullptr in DestroyImpl is ok, though it will be possible to trigger this assert from the renderer by calling wgpuTextureDestroy before DissociateMailbox which isn\u0027t ideal.",
+      "parentUuid": "59970869_ac00b052",
+      "revId": "13c503d88d4d1a0006da9d958f8b3004ad3bef4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

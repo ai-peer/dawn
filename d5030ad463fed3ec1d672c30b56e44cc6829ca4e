@@ -22,6 +22,30 @@
       },
       "revId": "d5030ad463fed3ec1d672c30b56e44cc6829ca4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "913c487e_3ff2387c",
+        "filename": "include/dawn/native/D3D12Backend.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-03T20:23:07Z",
+      "side": 0,
+      "message": "There is no other user of this, and arguably since this is part of the platform specific Dawn native interface, there\u0027s not much benefit to be gained by abstracting over this?",
+      "parentUuid": "44eb5590_a845b811",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 37
+      },
+      "revId": "d5030ad463fed3ec1d672c30b56e44cc6829ca4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
