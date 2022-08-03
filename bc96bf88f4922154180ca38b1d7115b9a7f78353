@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6701a514_f800b4ef",
+        "filename": "src/tint/number.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-03T18:01:11Z",
+      "side": 1,
+      "message": "See: https://dawn-review.googlesource.com/c/dawn/+/98106",
+      "parentUuid": "9c3e8540_91254b74",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 373,
+        "endChar": 1
+      },
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "838378e5_cc28e5e2",
@@ -337,6 +361,30 @@
       "side": 1,
       "message": "Yep, my intention was always to split this up and have this in a separate change. Just wanted you to take a look at the whole change first in case there were bigger changes to make first.",
       "parentUuid": "1e8b5d67_b0f8db80",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 18
+      },
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7425dd63_410a01e9",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-03T18:01:11Z",
+      "side": 1,
+      "message": "See: https://dawn-review.googlesource.com/c/dawn/+/98107",
+      "parentUuid": "a66646ee_49a7eb64",
       "range": {
         "startLine": 73,
         "startChar": 4,
