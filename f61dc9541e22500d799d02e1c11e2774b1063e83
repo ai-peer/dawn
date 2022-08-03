@@ -70,6 +70,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c40c53d_86cc53af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-03T04:37:40Z",
+      "side": 1,
+      "message": "oh, nice I think that will work indeed (unless someone intended to have the particular current ordering)",
+      "parentUuid": "7342b9a5_d144625b",
+      "revId": "f61dc9541e22500d799d02e1c11e2774b1063e83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8f7c86d_e608500f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-03T04:37:40Z",
+      "side": 1,
+      "message": "Wouldn\u0027t UINT64_MAX cause no waits to happen?\n\n`ID3D12CommandQueue::Wait` does\n\u003e Queues a GPU-side wait, and returns immediately. A GPU-side wait is where the GPU waits until the specified fence reaches or exceeds the specified value.\n\nSo if we signal UINT64_MAX, nearly all waits will be marked complete since the fence will exceed nearly all values\n\nI think it might be best to never signal at all if there is an unsynchronized destroy.\nI was thinking:\n\n```\nDestroyExternalTexture(signalValue) {\n  if (fence !\u003d null) {\n    Signal(fence, signalValue);\n    fence \u003d null; // clear out fence so DestroyImpl knows it\u0027s been signaled\n  }\n  DestroyImpl();\n}\n\nDestroyImpl() {\n  ...\n  if (fence) {\n    dawn::WarningLog() \u003c\u003c \"wrong usage\";\n    fence \u003d nullptr;\n  }\n  ...\n}\n```",
+      "parentUuid": "d2b8b412_96630e96",
+      "revId": "f61dc9541e22500d799d02e1c11e2774b1063e83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a145c8b6_19f5858b",
