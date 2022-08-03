@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e69175f3_6f1ff8d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-08-03T21:54:47Z",
+      "side": 1,
+      "message": "Actually, I think it might be have been a wrong suggestion to make this change, sorry. Commenting on https://github.com/emscripten-core/emscripten/pull/17507",
+      "revId": "9ec183ed9f90897fd302b323fa444f7532b47817",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
