@@ -29,11 +29,11 @@ namespace tint::utils {
 
 /// Action taken by Hashset::Insert()
 enum class InsertAction {
-    /// The Insert() added a new entry to the Hashset
+    /// Insert() added a new entry to the Hashset
     kAdded,
-    /// The Insert() replaced an existing entry in the Hashset
+    /// Insert() replaced an existing entry in the Hashset
     kReplaced,
-    /// The Insert() found an existing entry, which was not replaced.
+    /// Insert() found an existing entry, which was not replaced.
     kFoundExisting,
 };
 
@@ -41,7 +41,21 @@ enum class InsertAction {
 /// @see the fantastic tutorial: https://programming.guide/robin-hood-hashing.html
 template <typename T, size_t N, typename HASH = std::hash<T>, typename EQUAL = std::equal_to<T>>
 class Hashset {
-    struct Slot;
+    /// A slot is in single entry in the underlying vector.
+    /// A slot can either be empty or filled with a value. If the slot is empty, #hash and #distance
+    /// will be zero.
+    struct Slot {
+        template <typename V>
+        bool Equals(size_t value_hash, const V& val) const {
+            return value_hash == hash && EQUAL()(val, value.value());
+        }
+
+        /// The slot value. If this does not contain a value, then the slot is vacant.
+        std::optional<T> value;
+        /// The precomputed hash of value.
+        size_t hash = 0;
+        size_t distance = 0;
+    };
 
     static constexpr size_t kRehashFactor = 150;  // percent
     static constexpr size_t kNumFixedSlots = (N * kRehashFactor) / 100;
@@ -192,9 +206,9 @@ class Hashset {
                 // Slot is equal to value. Replace or preserve?
                 if constexpr (REPLACE) {
                     slot.value = std::forward<V>(value);
-                    result = {InsertAction::kReplaced, &slot.value.value()};
+                    result = InsertionResult{InsertAction::kReplaced, &slot.value.value()};
                 } else {
-                    result = {InsertAction::kFoundExisting, &slot.value.value()};
+                    result = InsertionResult{InsertAction::kFoundExisting, &slot.value.value()};
                 }
                 return Action::Stop;
             }
@@ -212,7 +226,7 @@ class Hashset {
                 InsertShuffle(Wrap(index + 1), std::move(temp), hash, distance + 1);
 
                 count_++;
-                result = {InsertAction::kAdded, &slot.value.value()};
+                result = InsertionResult{InsertAction::kAdded, &slot.value.value()};
 
                 return Action::Stop;
             }
@@ -336,6 +350,8 @@ class Hashset {
     }
 
   private:
+    enum class Action { Continue, Stop };
+
     template <typename V>
     std::tuple<size_t, size_t> IndexAndHash(const V& value) const {
         const size_t hash = HASH()(value);
@@ -415,24 +431,11 @@ class Hashset {
         });
     }
 
-    enum class Action { Continue, Stop };
-
     bool ShouldRehash(size_t count) const {
         return ((count * kRehashFactor) / 100) > slots_.Length();
     }
 
     size_t Wrap(size_t index) const { return index % slots_.Length(); }
-
-    struct Slot {
-        template <typename V>
-        bool Equals(size_t value_hash, const V& val) const {
-            return value_hash == hash && EQUAL()(val, value.value());
-        }
-
-        std::optional<T> value;
-        size_t hash = 0;
-        size_t distance = 0;
-    };
 
     Vector<Slot, kNumFixedSlots> slots_;
     size_t count_ = 0;
