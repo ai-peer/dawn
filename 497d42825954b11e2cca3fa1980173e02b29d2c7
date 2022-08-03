@@ -16,6 +16,103 @@
       "message": "PTAL, thanks!",
       "revId": "497d42825954b11e2cca3fa1980173e02b29d2c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e054408_6112daca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-03T12:35:13Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "497d42825954b11e2cca3fa1980173e02b29d2c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83e86a6e_168b0028",
+        "filename": "src/dawn/native/ApplyClearValueWithDrawHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-03T12:35:13Z",
+      "side": 1,
+      "message": "nit: extra identation",
+      "range": {
+        "startLine": 46,
+        "startChar": 3,
+        "endLine": 46,
+        "endChar": 8
+      },
+      "revId": "497d42825954b11e2cca3fa1980173e02b29d2c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0dc2588_5f527276",
+        "filename": "src/dawn/native/ApplyClearValueWithDrawHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-03T12:35:13Z",
+      "side": 1,
+      "message": "nit: Maybe this method could use a KeyOfApplyClearColorWithDrawPipelines instead to make it clear that the cache works as expected. Ditto for GetOrCreateApplyClearValueWithDrawPipeline",
+      "revId": "497d42825954b11e2cca3fa1980173e02b29d2c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b98162d_6f40347b",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-03T12:35:13Z",
+      "side": 1,
+      "message": "nit: merge conflict?",
+      "range": {
+        "startLine": 848,
+        "startChar": 0,
+        "endLine": 849,
+        "endChar": 53
+      },
+      "revId": "497d42825954b11e2cca3fa1980173e02b29d2c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc8d5c83_609a3746",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-03T12:35:13Z",
+      "side": 1,
+      "message": "nit: It seems that the buffer creation could be done below once we\u0027re inside the pass, so maybe we could move the code to all be in one place. Is there a reason we can\u0027t do that at the moment?",
+      "revId": "497d42825954b11e2cca3fa1980173e02b29d2c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
