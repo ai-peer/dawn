@@ -89,6 +89,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "44bb7a53_c4695e30",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-03T13:31:04Z",
+      "side": 1,
+      "message": "That\u0027s what I had initially, but I cannot call Index on a leaf constant (Scalar).",
+      "parentUuid": "e0f108a9_813151ab",
+      "range": {
+        "startLine": 508,
+        "startChar": 70,
+        "endLine": 508,
+        "endChar": 92
+      },
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cab1001f_54736722",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 2
@@ -181,6 +205,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a66646ee_49a7eb64",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-03T13:31:04Z",
+      "side": 1,
+      "message": "Yep, my intention was always to split this up and have this in a separate change. Just wanted you to take a look at the whole change first in case there were bigger changes to make first.",
+      "parentUuid": "1e8b5d67_b0f8db80",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 18
+      },
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1cc6fd0c_fb6a0627",
         "filename": "src/tint/resolver/const_eval_test.cc",
         "patchSetId": 2
@@ -192,6 +240,30 @@
       "writtenOn": "2022-08-02T21:31:52Z",
       "side": 1,
       "message": "Looks unrelated to `+`? Another change perhaps?",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 1
+      },
+      "revId": "bc96bf88f4922154180ca38b1d7115b9a7f78353",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f18c420_421b19d2",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-03T13:31:04Z",
+      "side": 1,
+      "message": "No it\u0027s related. I need this for line 3217 below:\n```\nNegate(T::Highest())\n```\nProblem is I can\u0027t write `-T::Highest()` when T is signed integral because the compiler warns about negating the min signed value resulting in the same value.",
+      "parentUuid": "1cc6fd0c_fb6a0627",
       "range": {
         "startLine": 45,
         "startChar": 0,
