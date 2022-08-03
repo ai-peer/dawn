@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee5f81eb_a241692a",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-03T22:36:32Z",
+      "side": 1,
+      "message": "Hmm.. I assume these are the reason why we need to pass `r` as a pointer instead of a const ref in the first place (and do an ASSERT that the pointer isn\u0027t null)? Maybe it\u0027s fine to pass as non-const ref also?\n\nI\u0027m not a huge fan that the request is modified in this helper since I see that request is still used for other purposes after the call to `TranslateToHLSL` in `CompileShader`. I think that `r.remappedBindingPoints` and `r.remappedAccessControls` are generated using the BGLs at [1]. I tried thinking of some alternatives but the way it\u0027s structured might be hard to fix without these helpers being more descriptive in what they need for arguments. I guess some comments could be a step in the right direction for now?",
+      "range": {
+        "startLine": 406,
+        "startChar": 8,
+        "endLine": 406,
+        "endChar": 79
+      },
+      "revId": "888d9c4b9881c578f9afc1611afa12a61c03ac92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f21ce18b_17ae88e0",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-03T22:36:32Z",
+      "side": 1,
+      "message": "[1] I think it may also be easier to read if some of this logic is put into a helper or something. Would be nice to just see a bunch of:\n\n`req.field_a \u003d foo;`\n`req.field_b \u003d bar;`\n...\n\nInstead of this massive for loop block.",
+      "range": {
+        "startLine": 581,
+        "startChar": 4,
+        "endLine": 581,
+        "endChar": 83
+      },
+      "revId": "888d9c4b9881c578f9afc1611afa12a61c03ac92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
