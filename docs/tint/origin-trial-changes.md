@@ -6,6 +6,10 @@
 
 * `array()` constructor can now infer type and count. [tint:1628](crbug.com/tint/1628)
 
+### Deprecated Features
+
+* The list of reserved words has been sync'd to the WGSL specification. [tint:1463](crbug.com/tint/1463)
+
 ## Changes for M105
 
 ### New features
