@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a31143bf_a25c2410",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-04T03:29:28Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58d1ca93_ad301951",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-04T03:29:28Z",
+      "side": 1,
+      "message": "I think we need to vkDestroySemaphore this after exporting the handles",
+      "range": {
+        "startLine": 267,
+        "startChar": 24,
+        "endLine": 267,
+        "endChar": 39
+      },
+      "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b3226eb_a135e90f",
+        "filename": "src/dawn/native/vulkan/DeviceVk.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-04T03:29:28Z",
+      "side": 1,
+      "message": "do we need this to be shared_ptr?\nThe only other use of it in this CL is for Texture, in DestroyImpl where we are guaranteed to have a valid Device\n\nWe also don\u0027t need to pass it into Texture::CreateFromExternal. The Texture can just ask for the Semaphore service from the device.",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 75
+      },
+      "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28b88af2_f118ebdc",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-04T03:29:28Z",
+      "side": 1,
+      "message": "nit: std::move",
+      "range": {
+        "startLine": 620,
+        "startChar": 64,
+        "endLine": 620,
+        "endChar": 88
+      },
+      "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "996d6d0d_2b555ed8",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-04T03:29:28Z",
+      "side": 1,
+      "message": "nit: prefer to write out VkLayout since it\u0027s short",
+      "range": {
+        "startLine": 869,
+        "startChar": 4,
+        "endLine": 869,
+        "endChar": 8
+      },
+      "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6df7acd4_39759130",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-04T03:29:28Z",
+      "side": 1,
+      "message": "could all these tests be enabled if we pass UNDEFINED for the layout to mBackend-\u003eExportImage?",
+      "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
