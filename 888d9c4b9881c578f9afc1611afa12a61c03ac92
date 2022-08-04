@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e00ab146_f51a46cd",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-04T01:08:38Z",
+      "side": 1,
+      "message": "LoadOrRun only takes one, and overall we don\u0027t want to be making two loads and two stores when it could just be one.",
+      "parentUuid": "cf79638e_cd260dd0",
+      "range": {
+        "startLine": 406,
+        "startChar": 8,
+        "endLine": 406,
+        "endChar": 79
+      },
+      "revId": "888d9c4b9881c578f9afc1611afa12a61c03ac92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f21ce18b_17ae88e0",
         "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 17
