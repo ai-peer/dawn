@@ -80,6 +80,30 @@
       },
       "revId": "1c301734c817293e40905c581670ee0d6843b95c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b23c7b83_416f25db",
+        "filename": "tools/src/tint/intrinsic/gen/gen.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-04T18:33:36Z",
+      "side": 1,
+      "message": "Hmm, I\u0027m not familiar enough with Go templates either, so let\u0027s go with this, and maybe bclayton@ can take a look when he gets back from vacation in a couple weeks.",
+      "parentUuid": "f0eeaf83_46ad12f3",
+      "range": {
+        "startLine": 498,
+        "startChar": 30,
+        "endLine": 498,
+        "endChar": 42
+      },
+      "revId": "1c301734c817293e40905c581670ee0d6843b95c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
