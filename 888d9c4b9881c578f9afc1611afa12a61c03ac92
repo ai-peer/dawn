@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf79638e_cd260dd0",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-04T01:00:33Z",
+      "side": 1,
+      "message": "Oh nice! Hmm, looking at this though, what if we just made 3 `CacheRequests`, `BytecodeCompilationRequest`, `HlslCompilationRequest`, and finally `D3DCompilationRequest` which just has 2 members: the two other requests? (since they seem fully disjoint) (I didn\u0027t realize they were entirely disjoint).",
+      "parentUuid": "0857f596_ea22f9e5",
+      "range": {
+        "startLine": 406,
+        "startChar": 8,
+        "endLine": 406,
+        "endChar": 79
+      },
+      "revId": "888d9c4b9881c578f9afc1611afa12a61c03ac92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f21ce18b_17ae88e0",
         "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 17
