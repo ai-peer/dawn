@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25f7a3c1_451e9017",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-04T18:51:32Z",
+      "side": 1,
+      "message": "It feels like we should be able to make __modf_result a template like:\n```\ntype __modf_result\u003cT: f32_f16\u003e\n```\nand similar for the vec version:\n```\n@display(\"__frexp_result_vec{T}{N}\") type __frexp_result_vec\u003cT: f32_f16, N: num\u003e\n```",
+      "range": {
+        "startLine": 152,
+        "startChar": 5,
+        "endLine": 152,
+        "endChar": 22
+      },
+      "revId": "3febae303169b3b8fa6dbfc2fc9047e56b1f7464",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb8c3a24_46f78c04",
+        "filename": "src/tint/resolver/builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-04T18:51:32Z",
+      "side": 1,
+      "message": "This test is a copy-paste of the one above it. Perhaps we can parameterize the test, or use a TYPED_TEST?",
+      "range": {
+        "startLine": 935,
+        "startChar": 0,
+        "endLine": 935,
+        "endChar": 51
+      },
+      "revId": "3febae303169b3b8fa6dbfc2fc9047e56b1f7464",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
