@@ -39,6 +39,30 @@
       },
       "revId": "87a2a0822928a9383fe8147e0ca3e3182a088b17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "620bc3a1_f6bed1e4",
+        "filename": "src/tint/reader/wgsl/parser_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-04T20:07:35Z",
+      "side": 1,
+      "message": "doh, yes. Fixed.\n\nWe should fixup our code base to match the grammar. It\u0027s a stumbling block when trying to match things to the grammar. There is a post-v1 bug filed to rename StorageClass -\u003e AddressSpace already filed.",
+      "parentUuid": "1bd93532_555ad9e5",
+      "range": {
+        "startLine": 429,
+        "startChar": 18,
+        "endLine": 429,
+        "endChar": 31
+      },
+      "revId": "87a2a0822928a9383fe8147e0ca3e3182a088b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

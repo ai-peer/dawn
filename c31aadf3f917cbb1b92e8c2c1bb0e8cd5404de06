@@ -22,6 +22,30 @@
       },
       "revId": "c31aadf3f917cbb1b92e8c2c1bb0e8cd5404de06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45378858_a054807b",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-04T20:07:35Z",
+      "side": 0,
+      "message": "These are pretty much only used once. In the case they aren\u0027t it\u0027s for `vertex`, `fragment` and `compute` and when the deprecation is over they\u0027ll only be used once.\n\nI find seeing the keywords in context is more useful then a giant listing at the top. Looking at this list doesn\u0027t really tell me anything, it\u0027s the usage that\u0027s important.",
+      "parentUuid": "80e471c3_5251a7c1",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 56
+      },
+      "revId": "c31aadf3f917cbb1b92e8c2c1bb0e8cd5404de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
