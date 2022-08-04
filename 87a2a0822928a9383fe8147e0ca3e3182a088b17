@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "87a2a0822928a9383fe8147e0ca3e3182a088b17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bd93532_555ad9e5",
+        "filename": "src/tint/reader/wgsl/parser_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-04T19:52:51Z",
+      "side": 1,
+      "message": "Should this be `address_space`?\n\nThis is an unfortunate mismatch in the grammar\u0027s name and our name for this. Is this necessary? Do we plan to rename StorageClass to AddressSpace in Tint someday? Or are we happy to leave this only in the parser, calling it StorageClass in the rest of the codebase?",
+      "range": {
+        "startLine": 429,
+        "startChar": 18,
+        "endLine": 429,
+        "endChar": 31
+      },
+      "revId": "87a2a0822928a9383fe8147e0ca3e3182a088b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

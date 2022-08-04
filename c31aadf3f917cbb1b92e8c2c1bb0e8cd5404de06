@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80e471c3_5251a7c1",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-04T19:52:51Z",
+      "side": 0,
+      "message": "Is it really better to inline these? I realize they\u0027re not likely to change in the future, but there is some value in not repeating the hard-coded strings in the code below. There\u0027s also value in seeing all the keywords in one place in the code, rather than spread out throughout the parser.",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 56
+      },
+      "revId": "c31aadf3f917cbb1b92e8c2c1bb0e8cd5404de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
