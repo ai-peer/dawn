@@ -16,6 +16,23 @@
       "message": "For Kokoro.",
       "revId": "1c301734c817293e40905c581670ee0d6843b95c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c556197_9debf4b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-04T09:05:36Z",
+      "side": 1,
+      "message": "Please take a look, thanks. Please note that there is a tiny change in \"tint/intrinsic/gen/gen.go\" (https://dawn-review.googlesource.com/c/dawn/+/97340/2/tools/src/tint/intrinsic/gen/gen.go), which is the very last file in the changing list.",
+      "revId": "1c301734c817293e40905c581670ee0d6843b95c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
