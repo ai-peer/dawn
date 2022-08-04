@@ -142,6 +142,30 @@
       },
       "revId": "c31aadf3f917cbb1b92e8c2c1bb0e8cd5404de06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9175a27a_c5e259a7",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-04T22:17:55Z",
+      "side": 0,
+      "message": "I\u0027ve never actually seen this from sublime or nvim which are the two editors I use.\n\nIf we do change these it will be to probably remove them and convert to something more like what we\u0027ve done with the StorageClass and generate things.",
+      "parentUuid": "2b465052_bb60a1dc",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 56
+      },
+      "revId": "c31aadf3f917cbb1b92e8c2c1bb0e8cd5404de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
