@@ -68,6 +68,24 @@
       "parentUuid": "59970869_ac00b052",
       "revId": "13c503d88d4d1a0006da9d958f8b3004ad3bef4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de64dd38_a526f064",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-04T02:22:17Z",
+      "side": 1,
+      "message": "I agree with Corentin\u0027s overall point here that it would be nice for DestroyImpl to know as little about the fence as possible. if no ASSERT, maybe:\n\n```\nvoid EndFenceAccess(uint64_t signalValue \u003d 0) {\n  if (fence) Signal(fence, signalValue);\n  fence \u003d nullptr;\n}\n\nDestroyImpl() {\n  TextureBase::DestroyImpl();\n  EndFenceAccess();\n  ...\n}\n\nDestroyExternalTexture(uint64_t signalValue) {\n  EndFenceAccess(signalValue);\n  DestroyImpl();\n}\n\n```\n?",
+      "parentUuid": "141ba2af_3f8c71ee",
+      "revId": "13c503d88d4d1a0006da9d958f8b3004ad3bef4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

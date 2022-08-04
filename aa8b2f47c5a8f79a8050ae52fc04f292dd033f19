@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76eb9a24_be213a2e",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-04T02:22:17Z",
+      "side": 1,
+      "message": "calling Destroy() then calling DestroyExternalTexture() will hit this ASSERT I think. DestroyImpl invalidates the mResourceAllocation such that the method will be kInvalid.\n\nCould we have a test for Destroy() followed by DestroyExternalTexture(), and vice versa?",
+      "range": {
+        "startLine": 705,
+        "startChar": 0,
+        "endLine": 705,
+        "endChar": 81
+      },
+      "revId": "aa8b2f47c5a8f79a8050ae52fc04f292dd033f19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
