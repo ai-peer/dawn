@@ -33,6 +33,29 @@
       "message": "Please take a look, thanks. Please note that there is a tiny change in \"tint/intrinsic/gen/gen.go\" (https://dawn-review.googlesource.com/c/dawn/+/97340/2/tools/src/tint/intrinsic/gen/gen.go), which is the very last file in the changing list.",
       "revId": "1c301734c817293e40905c581670ee0d6843b95c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fab56d2_7032b15b",
+        "filename": "tools/src/tint/intrinsic/gen/gen.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-04T14:25:24Z",
+      "side": 1,
+      "message": "This change makes it so that we call this function on a copy of `sem.Overload`, right? Why did you need this?",
+      "range": {
+        "startLine": 498,
+        "startChar": 30,
+        "endLine": 498,
+        "endChar": 42
+      },
+      "revId": "1c301734c817293e40905c581670ee0d6843b95c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
