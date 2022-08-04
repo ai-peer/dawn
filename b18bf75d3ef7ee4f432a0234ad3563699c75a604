@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c3db3da_0f712357",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-04T15:50:17Z",
+      "side": 1,
+      "message": "My experience is that it often crashes. But even if it doesn\u0027t, we run our unit tests with ASAN and UBSAN builds on Kokoro, and we\u0027ve relied on that a lot for this codebase.",
+      "parentUuid": "5557fba4_7594a89f",
+      "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "408a0d8a_0fe76aa6",
@@ -144,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ede84aee_658dd602",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3227,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-04T15:50:17Z",
+      "side": 1,
+      "message": "Okay, I simplified things. I added a `bool is_overflow` defaulted to false for each case, and added a check to skip overflow cases for AInt and AFloat in the testing function itself. I also split up the function to add cases into two: `OpAddIntCases` and `OpAddFloatCases`. There is copy-paste of entries between the two, but I think it\u0027s an okay compromise.",
+      "parentUuid": "61c97c7a_855d7227",
+      "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7915862_b9bb96b0",
         "filename": "src/tint/resolver/const_eval_test.cc",
         "patchSetId": 4
@@ -191,6 +227,24 @@
       "side": 1,
       "message": "Coudl we instead write out \u0027\u003cval\u003e + \u003cva\u003e\u0027 cannot be represented as \u0027abstract-int\u0027?",
       "parentUuid": "846956cb_7443224c",
+      "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d513c553_2353565a",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3240,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-04T15:50:17Z",
+      "side": 1,
+      "message": "I\u0027m going to push back on this for now. I think there is some value in seeing the result of the operation, as it gives a clue to what\u0027s the problem. For example, it will say the \"inf\" cannot be represented, which is more useful than seeing the two large floats that will lead to \"inf\". We can revisit this in the future.",
+      "parentUuid": "9ebc7714_80254886",
       "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
