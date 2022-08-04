@@ -46,6 +46,30 @@
       },
       "revId": "c31aadf3f917cbb1b92e8c2c1bb0e8cd5404de06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb246bc7_17ee3bee",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-08-04T20:50:10Z",
+      "side": 0,
+      "message": "There is *some* value in seeing the list of k*Attribute in one place and quickly checking against the spec to see that all the cases are covered.\nAnd the grouping into \"Attribute\"  \"Access\" \"Stage\" are useful.\n\nI recommend *keeping* the k* definitions, but moving them down to the uses.",
+      "parentUuid": "45378858_a054807b",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 56
+      },
+      "revId": "c31aadf3f917cbb1b92e8c2c1bb0e8cd5404de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
