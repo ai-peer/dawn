@@ -118,6 +118,30 @@
       },
       "revId": "c31aadf3f917cbb1b92e8c2c1bb0e8cd5404de06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b465052_bb60a1dc",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-04T21:30:05Z",
+      "side": 0,
+      "message": "As I wrote above: \"and all modern text editors have a way of displaying what the constant is defined to easily enough\". Anyway, not going to push more on this because, ultimately and realistically, we won\u0027t be changing these constants.",
+      "parentUuid": "1d9d9aaf_8196ed4a",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 56
+      },
+      "revId": "c31aadf3f917cbb1b92e8c2c1bb0e8cd5404de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
