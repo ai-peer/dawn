@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5557fba4_7594a89f",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-04T14:28:32Z",
+      "side": 1,
+      "message": "Will it crash, or just index out of bounds? I\u0027m not too concerned about the cost of having asserts in the release build, we can always re-evaluate that if we find it\u0027s slowing things down.",
+      "parentUuid": "d7eac6e7_a1e7c174",
+      "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "408a0d8a_0fe76aa6",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
@@ -108,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "61c97c7a_855d7227",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3227,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-04T14:28:32Z",
+      "side": 1,
+      "message": "For test cases, having them readable is more important then harder to change. Like, with this trying to figure out what is being tested for each type is .... really hard. I couldn\u0027t tell you if this was sufficiently covered in each case.\n\nWhat about if we broke `OpAddCases` into `OpAddInt` and `OpAddFloat` cases? It would make less conditionals in the method, but keep the duplication here lower?",
+      "parentUuid": "0ceddcbc_9a6a5a4f",
+      "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7915862_b9bb96b0",
         "filename": "src/tint/resolver/const_eval_test.cc",
         "patchSetId": 4
@@ -137,6 +173,24 @@
       "side": 1,
       "message": "Problem is that we\u0027re already using 64-bit values for abstracts. Ben suggested we go with this. I think it\u0027s still helpful because the user sees that the result is not what they expect.",
       "parentUuid": "c7915862_b9bb96b0",
+      "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ebc7714_80254886",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3240,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-04T14:28:32Z",
+      "side": 1,
+      "message": "Coudl we instead write out \u0027\u003cval\u003e + \u003cva\u003e\u0027 cannot be represented as \u0027abstract-int\u0027?",
+      "parentUuid": "846956cb_7443224c",
       "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
