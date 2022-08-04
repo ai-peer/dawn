@@ -56,6 +56,30 @@
       },
       "revId": "1c301734c817293e40905c581670ee0d6843b95c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0eeaf83_46ad12f3",
+        "filename": "tools/src/tint/intrinsic/gen/gen.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-04T16:20:17Z",
+      "side": 1,
+      "message": "Because (although I don\u0027t quite understand why) calling `OverloadUsesF16 $overload` in `EnableDirectives` template in \"test/tint/builtins/gen/gen.wgsl.tmpl\" would require `OverloadUsesF16(sem.Overload)`, and making this function `OverloadUsesF16(*sem.Overload)` would result in Go error. However, both function declarations work for the original `if not (OverloadUsesF16 .Overload)` in the top-level template. Sorry I am not familiar with GO template, but I just try and found that such declaration may work.",
+      "parentUuid": "6fab56d2_7032b15b",
+      "range": {
+        "startLine": 498,
+        "startChar": 30,
+        "endLine": 498,
+        "endChar": 42
+      },
+      "revId": "1c301734c817293e40905c581670ee0d6843b95c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
