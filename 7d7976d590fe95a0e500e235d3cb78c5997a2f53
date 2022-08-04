@@ -46,6 +46,30 @@
       },
       "revId": "7d7976d590fe95a0e500e235d3cb78c5997a2f53",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "914b5712_0cd43dc0",
+        "filename": "src/tint/val/hlsl.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-04T18:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "745634a6_b4921f0a",
+      "range": {
+        "startLine": 76,
+        "startChar": 12,
+        "endLine": 76,
+        "endChar": 55
+      },
+      "revId": "7d7976d590fe95a0e500e235d3cb78c5997a2f53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
