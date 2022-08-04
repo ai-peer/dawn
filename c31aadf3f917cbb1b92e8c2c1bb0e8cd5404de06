@@ -70,6 +70,30 @@
       },
       "revId": "c31aadf3f917cbb1b92e8c2c1bb0e8cd5404de06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3033798_f70a98bf",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-04T21:07:05Z",
+      "side": 0,
+      "message": "I would rather keep this as is. Moving the k*Attribute definitions down to usage makes reusing them more difficult.\n\n\u003e I find seeing the keywords in context is more useful then a giant listing at the top. Looking at this list doesn\u0027t really tell me anything, it\u0027s the usage that\u0027s important.\n\nLike David said, it tells you that these are keywords. As for usage, it doesn\u0027t make reading the usage any harder to see constants, and all modern text editors have a way of displaying what the constant is defined to easily enough.",
+      "parentUuid": "bb246bc7_17ee3bee",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 56
+      },
+      "revId": "c31aadf3f917cbb1b92e8c2c1bb0e8cd5404de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

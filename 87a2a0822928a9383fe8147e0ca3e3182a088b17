@@ -63,6 +63,30 @@
       },
       "revId": "87a2a0822928a9383fe8147e0ca3e3182a088b17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1f325f3_3183687e",
+        "filename": "src/tint/reader/wgsl/parser_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-04T21:07:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "620bc3a1_f6bed1e4",
+      "range": {
+        "startLine": 429,
+        "startChar": 18,
+        "endLine": 429,
+        "endChar": 31
+      },
+      "revId": "87a2a0822928a9383fe8147e0ca3e3182a088b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
