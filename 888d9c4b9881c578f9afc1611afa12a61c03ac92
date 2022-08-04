@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0857f596_ea22f9e5",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-04T00:02:42Z",
+      "side": 1,
+      "message": "yea, we move out so we can use copies. We pass `r` as pointer since in Dawn, the convention for mutable objects is to pass them by pointer, not by reference.\n\nI tried something at [2] to hopefully make it clear that nothing used in TranslateToHLSL is used in CompileShaderFXC/DXC. It\u0027s some macro though. WDYT?",
+      "parentUuid": "ee5f81eb_a241692a",
+      "range": {
+        "startLine": 406,
+        "startChar": 8,
+        "endLine": 406,
+        "endChar": 79
+      },
+      "revId": "888d9c4b9881c578f9afc1611afa12a61c03ac92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f21ce18b_17ae88e0",
         "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 17
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-03T22:36:32Z",
       "side": 1,
       "message": "[1] I think it may also be easier to read if some of this logic is put into a helper or something. Would be nice to just see a bunch of:\n\n`req.field_a \u003d foo;`\n`req.field_b \u003d bar;`\n...\n\nInstead of this massive for loop block.",
+      "range": {
+        "startLine": 581,
+        "startChar": 4,
+        "endLine": 581,
+        "endChar": 83
+      },
+      "revId": "888d9c4b9881c578f9afc1611afa12a61c03ac92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13ae50b8_e2cd5933",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-04T00:02:42Z",
+      "side": 1,
+      "message": "I re-ordered some stuff to make the assignments nicer",
+      "parentUuid": "f21ce18b_17ae88e0",
       "range": {
         "startLine": 581,
         "startChar": 4,

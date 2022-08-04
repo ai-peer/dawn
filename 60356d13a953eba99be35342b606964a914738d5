@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "712432af_87720e7b",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-04T00:02:42Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "60356d13a953eba99be35342b606964a914738d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
