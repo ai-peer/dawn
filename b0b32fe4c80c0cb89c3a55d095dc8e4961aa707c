@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a24a55f_a9b9aea5",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-04T17:21:56Z",
+      "side": 1,
+      "message": "Ah, I was confused because I saw the calls to delete the semaphores were deleted in the old code and I didn\u0027t see them added.\nNow I see that the previous calls were handling cleanup in the error cases.\nI think we may need to do the same here - if any of the DAWN_TRYs below fail before the handle is stored in the textures in UpdateExternalSemaphoreHandle, then the semaphore will never be exported and it will leak.\n\nPerhaps we need to make a small scoped wrapper around the semaphore which will clean it up if it is not yet consumed by the export",
+      "parentUuid": "0ba66c56_2b5d796e",
+      "range": {
+        "startLine": 267,
+        "startChar": 24,
+        "endLine": 267,
+        "endChar": 39
+      },
+      "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0b3226eb_a135e90f",
         "filename": "src/dawn/native/vulkan/DeviceVk.h",
         "patchSetId": 12
@@ -255,6 +279,24 @@
       "side": 1,
       "message": "Some tests would fail.\nI tried that in this CL: https://dawn-review.googlesource.com/c/dawn/+/98048\nThere were some bots failures.",
       "parentUuid": "6df7acd4_39759130",
+      "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92db4b7f_74f11437",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-04T17:21:56Z",
+      "side": 1,
+      "message": "Ideally we should get these tests running to have more coverage.\n\nLooks like there\u0027s a VVL error since the layouts are wrong which indicates we have the transitions incorrectly.\n\n\u003e Validation Error: [ SYNC-HAZARD-READ_AFTER_WRITE ] Object 0: handle \u003d 0xacc9b00000acc9b, name \u003d DawnDbg\u003d3488;Dawn_ExternalTexture, type \u003d VK_OBJECT_TYPE_IMAGE; | MessageID \u003d 0x4cb75b2d | vkCmdCopyImageToBuffer: Hazard READ_AFTER_WRITE for srcImage VkImage 0xacc9b00000acc9b[DawnDbg\u003d3488;Dawn_ExternalTexture], region 0. Access info (usage: SYNC_COPY_TRANSFER_READ, prior_usage: SYNC_IMAGE_LAYOUT_TRANSITION, write_barriers: 0, command: vkCmdPipelineBarrier, seq_no: 1, reset_no: 1).",
+      "parentUuid": "1cb22d88_2c973d6c",
       "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
