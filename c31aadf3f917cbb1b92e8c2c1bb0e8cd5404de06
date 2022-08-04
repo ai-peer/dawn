@@ -94,6 +94,30 @@
       },
       "revId": "c31aadf3f917cbb1b92e8c2c1bb0e8cd5404de06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d9d9aaf_8196ed4a",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-04T21:22:30Z",
+      "side": 0,
+      "message": "Seeing the list here doesn\u0027t tell you they\u0027re parsed correctly. I actually had to go find the usages and then come up here to determine if they were spelled correctly, it actually made it harder to review the spec compliance.",
+      "parentUuid": "f3033798_f70a98bf",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 56
+      },
+      "revId": "c31aadf3f917cbb1b92e8c2c1bb0e8cd5404de06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
