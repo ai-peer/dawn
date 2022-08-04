@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7eac6e7_a1e7c174",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-04T14:13:47Z",
+      "side": 1,
+      "message": "Yes, there are a few assumptions in place, but as our asserts are present in Release builds, I hesitate to add them. I\u0027m not too worried, though, as these are private functions used only by the implementation below, not part of a public API. Also, if we do miuses them, it\u0027ll crash pretty spectacularly.",
+      "parentUuid": "47ca04ef_38b91c1a",
+      "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "408a0d8a_0fe76aa6",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-08-03T19:28:22Z",
       "side": 1,
       "message": "Should we note somewhere that the types of `args` have to be the same? (Or, the deepest element types have to be the same?)",
+      "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1466a9d_7d615911",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-04T14:13:47Z",
+      "side": 1,
+      "message": "This is the basic assumption for _all_ the op and builtin implementations, that the CreateElement callback takes the same type for all args (at least so far). The `add_values` lambda would fail to compile if it weren\u0027t the case.",
+      "parentUuid": "408a0d8a_0fe76aa6",
       "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ceddcbc_9a6a5a4f",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3227,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-04T14:13:47Z",
+      "side": 1,
+      "message": "It\u0027s a trade-off. On the one hand, expanding it out makes it easier to see the tests, but makes it harder to add/change them because of the copy-pasta. Further, having the function makes it clear why certain cases are added, like overflow vs non-overflow. I\u0027d like to keep as-is, especially as there are 7 types being tested here. As we add many more tests, we\u0027ll see how this goes. Maybe we\u0027ll expand these out later.",
+      "parentUuid": "a6ccfbe9_d7cbe7ca",
+      "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7915862_b9bb96b0",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-08-03T19:28:22Z",
       "side": 1,
       "message": "This error is weird as it shows the overflowed value, instead of what it would have calcluated too. Should we promote the math to int64_t and emit that value so we see the correct positive number?",
+      "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "846956cb_7443224c",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3240,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-04T14:13:47Z",
+      "side": 1,
+      "message": "Problem is that we\u0027re already using 64-bit values for abstracts. Ben suggested we go with this. I think it\u0027s still helpful because the user sees that the result is not what they expect.",
+      "parentUuid": "c7915862_b9bb96b0",
       "revId": "b18bf75d3ef7ee4f432a0234ad3563699c75a604",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
