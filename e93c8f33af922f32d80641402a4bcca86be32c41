@@ -22,6 +22,30 @@
       },
       "revId": "e93c8f33af922f32d80641402a4bcca86be32c41",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3814f286_067cf111",
+        "filename": "src/dawn/native/VisitableMembers.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-04T00:00:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7ded4df_ee218a7a",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 46
+      },
+      "revId": "e93c8f33af922f32d80641402a4bcca86be32c41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
