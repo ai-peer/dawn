@@ -16,6 +16,29 @@
       "message": "[2]",
       "revId": "60356d13a953eba99be35342b606964a914738d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aae0f80c_03c53633",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-04T03:06:50Z",
+      "side": 1,
+      "message": "nit. Might be worthwhile to one for `std::map` and then use that here also, i.e. `std::map\u003cK, V\u003e ordered(m.begin(), m.end())` since I feel like being able to handle `std::map` will be useful sooner or later.",
+      "range": {
+        "startLine": 299,
+        "startChar": 8,
+        "endLine": 299,
+        "endChar": 65
+      },
+      "revId": "60356d13a953eba99be35342b606964a914738d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
