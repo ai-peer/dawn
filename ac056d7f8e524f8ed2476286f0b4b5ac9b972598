@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2526c42_4a70ea08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-04T03:36:08Z",
+      "side": 1,
+      "message": "Loko, did some bug triage today and cleaned some of the expectations up slightly.\nPTAL even after landing so the the compliance bot doesn\u0027t get upset with me ",
+      "revId": "ac056d7f8e524f8ed2476286f0b4b5ac9b972598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
