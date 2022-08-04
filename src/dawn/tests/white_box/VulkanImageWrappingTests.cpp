@@ -304,9 +304,6 @@ class VulkanImageWrappingUsageTests : public VulkanImageWrappingTestBase {
 // Clear an image in |secondDevice|
 // Verify clear color is visible in |device|
 TEST_P(VulkanImageWrappingUsageTests, ClearImageAcrossDevices) {
-    // TODO(crbug.com/dawn/1505): Support 'desiredLayout' other than VK_IMAGE_LAYOUT_UNDEFINED.
-    DAWN_SUPPRESS_TEST_IF(IsVulkan());
-
     // Import the image on |secondDevice|
     wgpu::Texture wrappedTexture =
         WrapVulkanImage(secondDevice, &defaultDescriptor, defaultTexture.get(), {},
@@ -316,8 +313,7 @@ TEST_P(VulkanImageWrappingUsageTests, ClearImageAcrossDevices) {
     ClearImage(secondDevice, wrappedTexture, {1 / 255.0f, 2 / 255.0f, 3 / 255.0f, 4 / 255.0f});
 
     ExternalImageExportInfoVkForTesting exportInfo;
-    ASSERT_TRUE(
-        mBackend->ExportImage(wrappedTexture, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, &exportInfo));
+    ASSERT_TRUE(mBackend->ExportImage(wrappedTexture, VK_IMAGE_LAYOUT_UNDEFINED, &exportInfo));
 
     // Import the image to |device|, making sure we wait on signalFd
     wgpu::Texture nextWrappedTexture = WrapVulkanImage(
@@ -333,9 +329,6 @@ TEST_P(VulkanImageWrappingUsageTests, ClearImageAcrossDevices) {
 // Clear an image in |secondDevice|
 // Verify clear color is not visible in |device| if we import the texture as not cleared
 TEST_P(VulkanImageWrappingUsageTests, UninitializedTextureIsCleared) {
-    // TODO(crbug.com/dawn/1505): Support 'desiredLayout' other than VK_IMAGE_LAYOUT_UNDEFINED.
-    DAWN_SUPPRESS_TEST_IF(IsVulkan());
-
     // Import the image on |secondDevice|
     wgpu::Texture wrappedTexture =
         WrapVulkanImage(secondDevice, &defaultDescriptor, defaultTexture.get(), {},
@@ -345,8 +338,7 @@ TEST_P(VulkanImageWrappingUsageTests, UninitializedTextureIsCleared) {
     ClearImage(secondDevice, wrappedTexture, {1 / 255.0f, 2 / 255.0f, 3 / 255.0f, 4 / 255.0f});
 
     ExternalImageExportInfoVkForTesting exportInfo;
-    ASSERT_TRUE(
-        mBackend->ExportImage(wrappedTexture, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, &exportInfo));
+    ASSERT_TRUE(mBackend->ExportImage(wrappedTexture, VK_IMAGE_LAYOUT_UNDEFINED, &exportInfo));
 
     // Import the image to |device|, making sure we wait on signalFd
     wgpu::Texture nextWrappedTexture = WrapVulkanImage(
@@ -364,9 +356,6 @@ TEST_P(VulkanImageWrappingUsageTests, UninitializedTextureIsCleared) {
 // Issue a copy of the imported texture inside |device| to |copyDstTexture|
 // Verify the clear color from |secondDevice| is visible in |copyDstTexture|
 TEST_P(VulkanImageWrappingUsageTests, CopyTextureToTextureSrcSync) {
-    // TODO(crbug.com/dawn/1505): Support 'desiredLayout' other than VK_IMAGE_LAYOUT_UNDEFINED.
-    DAWN_SUPPRESS_TEST_IF(IsVulkan());
-
     // Import the image on |secondDevice|
     wgpu::Texture wrappedTexture =
         WrapVulkanImage(secondDevice, &defaultDescriptor, defaultTexture.get(), {},
@@ -376,8 +365,7 @@ TEST_P(VulkanImageWrappingUsageTests, CopyTextureToTextureSrcSync) {
     ClearImage(secondDevice, wrappedTexture, {1 / 255.0f, 2 / 255.0f, 3 / 255.0f, 4 / 255.0f});
 
     ExternalImageExportInfoVkForTesting exportInfo;
-    ASSERT_TRUE(
-        mBackend->ExportImage(wrappedTexture, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, &exportInfo));
+    ASSERT_TRUE(mBackend->ExportImage(wrappedTexture, VK_IMAGE_LAYOUT_UNDEFINED, &exportInfo));
 
     // Import the image to |device|, making sure we wait on |signalFd|
     wgpu::Texture deviceWrappedTexture = WrapVulkanImage(
@@ -406,9 +394,6 @@ TEST_P(VulkanImageWrappingUsageTests, CopyTextureToTextureSrcSync) {
 // If texture destination isn't synchronized, |secondDevice| could copy color B
 // into the texture first, then |device| writes color A
 TEST_P(VulkanImageWrappingUsageTests, CopyTextureToTextureDstSync) {
-    // TODO(crbug.com/dawn/1505): Support 'desiredLayout' other than VK_IMAGE_LAYOUT_UNDEFINED.
-    DAWN_SUPPRESS_TEST_IF(IsVulkan());
-
     // Import the image on |device|
     wgpu::Texture wrappedTexture =
         WrapVulkanImage(device, &defaultDescriptor, defaultTexture.get(), {},
@@ -418,8 +403,7 @@ TEST_P(VulkanImageWrappingUsageTests, CopyTextureToTextureDstSync) {
     ClearImage(device, wrappedTexture, {5 / 255.0f, 6 / 255.0f, 7 / 255.0f, 8 / 255.0f});
 
     ExternalImageExportInfoVkForTesting exportInfo;
-    ASSERT_TRUE(
-        mBackend->ExportImage(wrappedTexture, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, &exportInfo));
+    ASSERT_TRUE(mBackend->ExportImage(wrappedTexture, VK_IMAGE_LAYOUT_UNDEFINED, &exportInfo));
 
     // Import the image to |secondDevice|, making sure we wait on |signalFd|
     wgpu::Texture secondDeviceWrappedTexture = WrapVulkanImage(
@@ -437,8 +421,8 @@ TEST_P(VulkanImageWrappingUsageTests, CopyTextureToTextureDstSync) {
 
     // Re-import back into |device|, waiting on |secondDevice|'s signal
     ExternalImageExportInfoVkForTesting secondExportInfo;
-    ASSERT_TRUE(mBackend->ExportImage(secondDeviceWrappedTexture,
-                                      VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, &secondExportInfo));
+    ASSERT_TRUE(mBackend->ExportImage(secondDeviceWrappedTexture, VK_IMAGE_LAYOUT_UNDEFINED,
+                                      &secondExportInfo));
 
     wgpu::Texture nextWrappedTexture = WrapVulkanImage(
         device, &defaultDescriptor, defaultTexture.get(), std::move(secondExportInfo.semaphores),
@@ -455,9 +439,6 @@ TEST_P(VulkanImageWrappingUsageTests, CopyTextureToTextureDstSync) {
 // Issue a copy of the imported texture inside |device| to |copyDstBuffer|
 // Verify the clear color from |secondDevice| is visible in |copyDstBuffer|
 TEST_P(VulkanImageWrappingUsageTests, CopyTextureToBufferSrcSync) {
-    // TODO(crbug.com/dawn/1505): Support 'desiredLayout' other than VK_IMAGE_LAYOUT_UNDEFINED.
-    DAWN_SUPPRESS_TEST_IF(IsVulkan());
-
     // Import the image on |secondDevice|
     wgpu::Texture wrappedTexture =
         WrapVulkanImage(secondDevice, &defaultDescriptor, defaultTexture.get(), {},
@@ -467,8 +448,7 @@ TEST_P(VulkanImageWrappingUsageTests, CopyTextureToBufferSrcSync) {
     ClearImage(secondDevice, wrappedTexture, {1 / 255.0f, 2 / 255.0f, 3 / 255.0f, 4 / 255.0f});
 
     ExternalImageExportInfoVkForTesting exportInfo;
-    ASSERT_TRUE(
-        mBackend->ExportImage(wrappedTexture, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, &exportInfo));
+    ASSERT_TRUE(mBackend->ExportImage(wrappedTexture, VK_IMAGE_LAYOUT_UNDEFINED, &exportInfo));
 
     // Import the image to |device|, making sure we wait on |signalFd|
     wgpu::Texture deviceWrappedTexture = WrapVulkanImage(
@@ -509,9 +489,6 @@ TEST_P(VulkanImageWrappingUsageTests, CopyTextureToBufferSrcSync) {
 // If texture destination isn't synchronized, |secondDevice| could copy color B
 // into the texture first, then |device| writes color A
 TEST_P(VulkanImageWrappingUsageTests, CopyBufferToTextureDstSync) {
-    // TODO(crbug.com/dawn/1505): Support 'desiredLayout' other than VK_IMAGE_LAYOUT_UNDEFINED.
-    DAWN_SUPPRESS_TEST_IF(IsVulkan());
-
     // Import the image on |device|
     wgpu::Texture wrappedTexture =
         WrapVulkanImage(device, &defaultDescriptor, defaultTexture.get(), {},
@@ -521,8 +498,7 @@ TEST_P(VulkanImageWrappingUsageTests, CopyBufferToTextureDstSync) {
     ClearImage(device, wrappedTexture, {5 / 255.0f, 6 / 255.0f, 7 / 255.0f, 8 / 255.0f});
 
     ExternalImageExportInfoVkForTesting exportInfo;
-    ASSERT_TRUE(
-        mBackend->ExportImage(wrappedTexture, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, &exportInfo));
+    ASSERT_TRUE(mBackend->ExportImage(wrappedTexture, VK_IMAGE_LAYOUT_UNDEFINED, &exportInfo));
 
     // Import the image to |secondDevice|, making sure we wait on |signalFd|
     wgpu::Texture secondDeviceWrappedTexture = WrapVulkanImage(
@@ -550,8 +526,8 @@ TEST_P(VulkanImageWrappingUsageTests, CopyBufferToTextureDstSync) {
 
     // Re-import back into |device|, waiting on |secondDevice|'s signal
     ExternalImageExportInfoVkForTesting secondExportInfo;
-    ASSERT_TRUE(mBackend->ExportImage(secondDeviceWrappedTexture,
-                                      VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, &secondExportInfo));
+    ASSERT_TRUE(mBackend->ExportImage(secondDeviceWrappedTexture, VK_IMAGE_LAYOUT_UNDEFINED,
+                                      &secondExportInfo));
 
     wgpu::Texture nextWrappedTexture = WrapVulkanImage(
         device, &defaultDescriptor, defaultTexture.get(), std::move(secondExportInfo.semaphores),
@@ -569,9 +545,6 @@ TEST_P(VulkanImageWrappingUsageTests, CopyBufferToTextureDstSync) {
 // Issue second copy to |secondCopyDstTexture|
 // Verify the clear color from |secondDevice| is visible in both copies
 TEST_P(VulkanImageWrappingUsageTests, DoubleTextureUsage) {
-    // TODO(crbug.com/dawn/1505): Support 'desiredLayout' other than VK_IMAGE_LAYOUT_UNDEFINED.
-    DAWN_SUPPRESS_TEST_IF(IsVulkan());
-
     // Import the image on |secondDevice|
     wgpu::Texture wrappedTexture =
         WrapVulkanImage(secondDevice, &defaultDescriptor, defaultTexture.get(), {},
@@ -581,8 +554,7 @@ TEST_P(VulkanImageWrappingUsageTests, DoubleTextureUsage) {
     ClearImage(secondDevice, wrappedTexture, {1 / 255.0f, 2 / 255.0f, 3 / 255.0f, 4 / 255.0f});
 
     ExternalImageExportInfoVkForTesting exportInfo;
-    ASSERT_TRUE(
-        mBackend->ExportImage(wrappedTexture, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, &exportInfo));
+    ASSERT_TRUE(mBackend->ExportImage(wrappedTexture, VK_IMAGE_LAYOUT_UNDEFINED, &exportInfo));
 
     // Import the image to |device|, making sure we wait on |signalFd|
     wgpu::Texture deviceWrappedTexture = WrapVulkanImage(
@@ -619,9 +591,6 @@ TEST_P(VulkanImageWrappingUsageTests, DoubleTextureUsage) {
 // Copy C->D on device 1 (wait on C from previous op)
 // Verify D has same color as A
 TEST_P(VulkanImageWrappingUsageTests, ChainTextureCopy) {
-    // TODO(crbug.com/dawn/1505): Support 'desiredLayout' other than VK_IMAGE_LAYOUT_UNDEFINED.
-    DAWN_SUPPRESS_TEST_IF(IsVulkan());
-
     // device 1 = |device|
     // device 2 = |secondDevice|
     // Create device 3
@@ -658,7 +627,7 @@ TEST_P(VulkanImageWrappingUsageTests, ChainTextureCopy) {
                                wrappedTexBDevice3);
 
     ExternalImageExportInfoVkForTesting exportInfoTexBDevice3;
-    ASSERT_TRUE(mBackend->ExportImage(wrappedTexBDevice3, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
+    ASSERT_TRUE(mBackend->ExportImage(wrappedTexBDevice3, VK_IMAGE_LAYOUT_UNDEFINED,
                                       &exportInfoTexBDevice3));
     IgnoreSignalSemaphore(wrappedTexADevice3);
 
@@ -677,7 +646,7 @@ TEST_P(VulkanImageWrappingUsageTests, ChainTextureCopy) {
                                wrappedTexCDevice2);
 
     ExternalImageExportInfoVkForTesting exportInfoTexCDevice2;
-    ASSERT_TRUE(mBackend->ExportImage(wrappedTexCDevice2, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
+    ASSERT_TRUE(mBackend->ExportImage(wrappedTexCDevice2, VK_IMAGE_LAYOUT_UNDEFINED,
                                       &exportInfoTexCDevice2));
     IgnoreSignalSemaphore(wrappedTexBDevice2);
 
@@ -700,9 +669,6 @@ TEST_P(VulkanImageWrappingUsageTests, ChainTextureCopy) {
 
 // Tests a larger image is preserved when importing
 TEST_P(VulkanImageWrappingUsageTests, LargerImage) {
-    // TODO(crbug.com/dawn/1505): Support 'desiredLayout' other than VK_IMAGE_LAYOUT_UNDEFINED.
-    DAWN_SUPPRESS_TEST_IF(IsVulkan());
-
     wgpu::TextureDescriptor descriptor;
     descriptor.dimension = wgpu::TextureDimension::e2D;
     descriptor.size.width = 640;
@@ -763,8 +729,7 @@ TEST_P(VulkanImageWrappingUsageTests, LargerImage) {
         secondDeviceQueue.Submit(1, &commands);
     }
     ExternalImageExportInfoVkForTesting exportInfo;
-    ASSERT_TRUE(
-        mBackend->ExportImage(wrappedTexture, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, &exportInfo));
+    ASSERT_TRUE(mBackend->ExportImage(wrappedTexture, VK_IMAGE_LAYOUT_UNDEFINED, &exportInfo));
 
     // Import the image on |device|
     wgpu::Texture nextWrappedTexture =
