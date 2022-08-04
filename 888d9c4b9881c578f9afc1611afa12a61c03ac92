@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35ea3c3f_82f0c26c",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-04T01:45:52Z",
+      "side": 1,
+      "message": "Ah, maybe that was confusing. I mean that there is still only 1 call to `LoadOrRun` using only the `D3DCompilationRequest`, but we have three different structs one which is a composition of the other two instead of having 1 struct and two aliases. The aliasing is more confusing than just separate structs is what I am trying to say.",
+      "parentUuid": "e00ab146_f51a46cd",
+      "range": {
+        "startLine": 406,
+        "startChar": 8,
+        "endLine": 406,
+        "endChar": 79
+      },
+      "revId": "888d9c4b9881c578f9afc1611afa12a61c03ac92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f21ce18b_17ae88e0",
         "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 17
