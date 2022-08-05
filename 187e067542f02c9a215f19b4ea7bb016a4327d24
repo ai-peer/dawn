@@ -33,6 +33,23 @@
       "message": "RSLGTM",
       "revId": "187e067542f02c9a215f19b4ea7bb016a4327d24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ef26469_c49eaa6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-05T15:08:07Z",
+      "side": 1,
+      "message": "Thanks for reviewing, I am submitting the CL.",
+      "revId": "187e067542f02c9a215f19b4ea7bb016a4327d24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
