@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84bac3a0_f3ae999c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-05T15:06:31Z",
+      "side": 1,
+      "message": "Thanks for reviewing, I am submitting the CL.",
+      "revId": "4e314661b07359786c7a302baa34b873105acb60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50084b0a_117cf4f8",
@@ -14,6 +31,30 @@
       "writtenOn": "2022-08-05T13:21:46Z",
       "side": 1,
       "message": "For a future change, but we should probably just append the type in all cases, so `__modf_result_f16` and `__modf_result_f32`.",
+      "range": {
+        "startLine": 812,
+        "startChar": 4,
+        "endLine": 816,
+        "endChar": 5
+      },
+      "revId": "4e314661b07359786c7a302baa34b873105acb60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eda64052_6ab0fe39",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-05T15:06:31Z",
+      "side": 1,
+      "message": "I see your point, but currently these names follow the WGSL spec (https://gpuweb.github.io/gpuweb/wgsl/#modf-builtin), which are somehow arbitrary when proposing F16 extension. Maybe I could raise a issue or PR there to propose the change?",
+      "parentUuid": "50084b0a_117cf4f8",
       "range": {
         "startLine": 812,
         "startChar": 4,
