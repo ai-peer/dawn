@@ -109,6 +109,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a4caedf_d23c2559",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-05T05:14:20Z",
+      "side": 1,
+      "message": "Good catching, done!",
+      "parentUuid": "9a24a55f_a9b9aea5",
+      "range": {
+        "startLine": 267,
+        "startChar": 24,
+        "endLine": 267,
+        "endChar": 39
+      },
+      "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0b3226eb_a135e90f",
         "filename": "src/dawn/native/vulkan/DeviceVk.h",
         "patchSetId": 12
@@ -297,6 +321,24 @@
       "side": 1,
       "message": "Ideally we should get these tests running to have more coverage.\n\nLooks like there\u0027s a VVL error since the layouts are wrong which indicates we have the transitions incorrectly.\n\n\u003e Validation Error: [ SYNC-HAZARD-READ_AFTER_WRITE ] Object 0: handle \u003d 0xacc9b00000acc9b, name \u003d DawnDbg\u003d3488;Dawn_ExternalTexture, type \u003d VK_OBJECT_TYPE_IMAGE; | MessageID \u003d 0x4cb75b2d | vkCmdCopyImageToBuffer: Hazard READ_AFTER_WRITE for srcImage VkImage 0xacc9b00000acc9b[DawnDbg\u003d3488;Dawn_ExternalTexture], region 0. Access info (usage: SYNC_COPY_TRANSFER_READ, prior_usage: SYNC_IMAGE_LAYOUT_TRANSITION, write_barriers: 0, command: vkCmdPipelineBarrier, seq_no: 1, reset_no: 1).",
       "parentUuid": "1cb22d88_2c973d6c",
+      "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66844db3_da6ef6ca",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-05T05:14:20Z",
+      "side": 1,
+      "message": "If the desired layout for export is not VK_IMAGE_LAYOUT_UNDEFINED, we can fallback to forcing an extra submit. This way I have gotten these tests back.",
+      "parentUuid": "92db4b7f_74f11437",
       "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
