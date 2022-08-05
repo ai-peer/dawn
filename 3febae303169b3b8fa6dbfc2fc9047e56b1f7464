@@ -117,6 +117,30 @@
       },
       "revId": "3febae303169b3b8fa6dbfc2fc9047e56b1f7464",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bca0423a_ea875078",
+        "filename": "src/tint/resolver/builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-05T13:19:15Z",
+      "side": 1,
+      "message": "\u003e There are some different in result structure layout. Currently there are quite a lot of such kind of duplication between  f32  and  f16  tests, each have a little different from others.\n\nFair enough. We can leave these as-is. Thank you.",
+      "parentUuid": "d24c00c0_20c85218",
+      "range": {
+        "startLine": 935,
+        "startChar": 0,
+        "endLine": 935,
+        "endChar": 51
+      },
+      "revId": "3febae303169b3b8fa6dbfc2fc9047e56b1f7464",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
