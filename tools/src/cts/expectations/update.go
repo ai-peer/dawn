@@ -272,6 +272,13 @@ func (u *updater) chunk(in Chunk) Chunk {
 
 	// Sort the expectations to keep things clean and tidy.
 	sort.Slice(out.Expectations, func(i, j int) bool {
+                // Sort by bug first, then query, and finally by tags.
+                switch {
+                case out.Expectations[i].Bug < out.Expectations[j].Bug:
+                        return true
+                case out.Expectations[i].Bug > out.Expectations[j].Bug:
+                        return false
+                }
 		switch {
 		case out.Expectations[i].Query < out.Expectations[j].Query:
 			return true
