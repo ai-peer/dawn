@@ -61,7 +61,7 @@
 # tags: [ webgpu-adapter-default webgpu-adapter-swiftshader ]
 # END TAG HEADER
 
-# Last rolled: 2022-08-01 09:34:37PM
+# Last rolled: 2022-08-05 09:02:35PM
 
 ################################################################################
 # webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero
@@ -80,14 +80,14 @@ crbug.com/1343969 [ intel-gen-9 win10 ] webgpu:web_platform,copyToTexture,ImageB
 crbug.com/1343969 [ intel-gen-9 win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:alpha="premultiply";orientation="flipY";srcDoFlipYDuringCopy=true;dstColorFormat="rgba32float";* [ RetryOnFailure ]
 crbug.com/1343969 [ intel-gen-9 win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:alpha="premultiply";orientation="none";srcDoFlipYDuringCopy=true;dstColorFormat="rg32float";* [ RetryOnFailure ]
 crbug.com/1343969 [ intel-gen-9 win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:alpha="premultiply";orientation="none";srcDoFlipYDuringCopy=false;dstColorFormat="rg32float";* [ RetryOnFailure ]
-crbug.com/1343969 [ intel-gen-9 win10 webgpu-adapter-default ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="flipY";srcDoFlipYDuringCopy=false;dstColorFormat="rgba32float";* [ RetryOnFailure ]
-crbug.com/1343969 [ intel-gen-9 win10 webgpu-adapter-default ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="flipY";srcDoFlipYDuringCopy=true;dstColorFormat="rgba32float";* [ RetryOnFailure ]
-crbug.com/1343969 [ intel-gen-9 win10 webgpu-adapter-default ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="none";srcDoFlipYDuringCopy=true;dstColorFormat="rg32float";* [ RetryOnFailure ]
-crbug.com/1343969 [ intel-gen-9 win10 webgpu-adapter-default ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="none";srcDoFlipYDuringCopy=false;dstColorFormat="rg32float";* [ RetryOnFailure ]
-crbug.com/1343969 [ intel-gen-9 win10 webgpu-adapter-swiftshader ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="flipY";srcDoFlipYDuringCopy=false;dstColorFormat="rgba32float";* [ Failure ]
-crbug.com/1343969 [ intel-gen-9 win10 webgpu-adapter-swiftshader ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="flipY";srcDoFlipYDuringCopy=true;dstColorFormat="rgba32float";* [ Failure ]
-crbug.com/1343969 [ intel-gen-9 win10 webgpu-adapter-swiftshader ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="none";srcDoFlipYDuringCopy=true;dstColorFormat="rg32float";* [ Failure ]
-crbug.com/1343969 [ intel-gen-9 win10 webgpu-adapter-swiftshader ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="none";srcDoFlipYDuringCopy=false;dstColorFormat="rg32float";* [ Failure ]
+crbug.com/1343969 [ intel-gen-9 webgpu-adapter-default win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="flipY";srcDoFlipYDuringCopy=false;dstColorFormat="rgba32float";* [ RetryOnFailure ]
+crbug.com/1343969 [ intel-gen-9 webgpu-adapter-default win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="flipY";srcDoFlipYDuringCopy=true;dstColorFormat="rgba32float";* [ RetryOnFailure ]
+crbug.com/1343969 [ intel-gen-9 webgpu-adapter-default win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="none";srcDoFlipYDuringCopy=true;dstColorFormat="rg32float";* [ RetryOnFailure ]
+crbug.com/1343969 [ intel-gen-9 webgpu-adapter-default win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="none";srcDoFlipYDuringCopy=false;dstColorFormat="rg32float";* [ RetryOnFailure ]
+crbug.com/1343969 [ intel-gen-9 webgpu-adapter-swiftshader win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="flipY";srcDoFlipYDuringCopy=false;dstColorFormat="rgba32float";* [ Failure ]
+crbug.com/1343969 [ intel-gen-9 webgpu-adapter-swiftshader win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="flipY";srcDoFlipYDuringCopy=true;dstColorFormat="rgba32float";* [ Failure ]
+crbug.com/1343969 [ intel-gen-9 webgpu-adapter-swiftshader win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="none";srcDoFlipYDuringCopy=true;dstColorFormat="rg32float";* [ Failure ]
+crbug.com/1343969 [ intel-gen-9 webgpu-adapter-swiftshader win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="none";srcDoFlipYDuringCopy=false;dstColorFormat="rg32float";* [ Failure ]
 
 ################################################################################
 # copyToTexture failures on Linux
