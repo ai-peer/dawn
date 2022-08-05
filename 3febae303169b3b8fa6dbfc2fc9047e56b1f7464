@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a202b5d_6faf9033",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-05T13:21:46Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "be55397e_af759341",
+      "range": {
+        "startLine": 152,
+        "startChar": 5,
+        "endLine": 152,
+        "endChar": 22
+      },
+      "revId": "3febae303169b3b8fa6dbfc2fc9047e56b1f7464",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb8c3a24_46f78c04",
