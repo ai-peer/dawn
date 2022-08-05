@@ -86,6 +86,7 @@ func simplifyStatuses(results result.List) {
 		switch r.Status {
 		case result.Pass, result.RetryOnFailure, result.Slow:
 			// keep
+			continue
 		case result.Skip:
 			// Typically represents a .unimplemented() test
 			results[i].Status = result.Pass
@@ -168,7 +169,10 @@ func (qt *queryTree) glob(q query.Query) (result.List, error) {
 // results consumed by expectations declared in the input (non-zero line), vs
 // those that were introduced by the update (zero line). We only want to error
 // if there's a collision in user declared expectations.
-func (qt *queryTree) globAndCheckForCollisions(q query.Query, t result.Tags) (result.List, error) {
+// Collision detection should match the algorithm used by the typ expectations parser:
+// `check_test_expectations_patterns_for_conflicts` in
+// third_party/catapult/third_party/typ/typ/expectations_parser.py
+func (qt *queryTree) globAndCheckForCollisions(q query.Query, in Expectation, tagSets []result.Tags) (result.List, error) {
 	glob, err := qt.tree.Glob(q)
 	if err != nil {
 		return nil, err
@@ -177,15 +181,22 @@ func (qt *queryTree) globAndCheckForCollisions(q query.Query, t result.Tags) (re
 	out := result.List{}
 	for _, indices := range glob {
 		for _, idx := range indices.Data {
-			if r := qt.results[idx]; r.Tags.ContainsAll(t) {
-				if at := qt.consumedAt[idx]; at > 0 {
-					if len(t) > 0 {
-						return nil, fmt.Errorf("%v %v collides with expectation at line %v", t, q, at)
+			current := qt.results[idx]
+			// Status
+			if current.Query == q {
+				commonTags := current.Tags.Intersection(in.Tags)
+				for _, tagSet := range tagSets {
+					if tagSet.ContainsAny(commonTags) {
+						if at := qt.consumedAt[idx]; at > 0 {
+							if len(in.Tags) > 0 {
+								return nil, fmt.Errorf("%v %v collides with expectation at line %v", in.Tags, q, at)
+							}
+							return nil, fmt.Errorf("%v collides with expectation at line %v", q, at)
+						}
 					}
-					return nil, fmt.Errorf("%v collides with expectation at line %v", q, at)
 				}
-				out = append(out, r)
 			}
+			out = append(out, current)
 		}
 	}
 	return out, nil
@@ -321,7 +332,7 @@ func (u *updater) expectation(in Expectation, keep bool) []Expectation {
 
 	// Glob the results for the expectation's query + tag combination.
 	// Ensure that none of these are already consumed.
-	results, err := u.qt.globAndCheckForCollisions(q, in.Tags)
+	results, err := u.qt.globAndCheckForCollisions(q, in, u.tagSets)
 	// If we can't find any results for this query + tag combination, then bail.
 	switch {
 	case errors.As(err, &query.ErrNoDataForQuery{}):
