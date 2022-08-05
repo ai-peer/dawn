@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "620133d6_83602970",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-05T07:32:45Z",
+      "side": 1,
+      "message": "Please take a look, thanks. This CL still requires Code-Owner approvals.",
+      "revId": "187e067542f02c9a215f19b4ea7bb016a4327d24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
