@@ -159,6 +159,30 @@
       },
       "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c2321c3_4460abd6",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-05T02:56:33Z",
+      "side": 1,
+      "message": "I saw a GPU usage drop from 23% to 16% with CL, slightly better than https://chromium-review.googlesource.com/c/chromium/src/+/3809251\n\nWhich direction would you like to go?",
+      "parentUuid": "cb0a69c7_26038f25",
+      "range": {
+        "startLine": 190,
+        "startChar": 13,
+        "endLine": 191,
+        "endChar": 74
+      },
+      "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
