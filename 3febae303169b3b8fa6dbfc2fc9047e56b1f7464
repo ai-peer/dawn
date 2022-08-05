@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be55397e_af759341",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-05T07:33:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25f7a3c1_451e9017",
+      "range": {
+        "startLine": 152,
+        "startChar": 5,
+        "endLine": 152,
+        "endChar": 22
+      },
+      "revId": "3febae303169b3b8fa6dbfc2fc9047e56b1f7464",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb8c3a24_46f78c04",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-04T18:51:32Z",
       "side": 1,
       "message": "This test is a copy-paste of the one above it. Perhaps we can parameterize the test, or use a TYPED_TEST?",
+      "range": {
+        "startLine": 935,
+        "startChar": 0,
+        "endLine": 935,
+        "endChar": 51
+      },
+      "revId": "3febae303169b3b8fa6dbfc2fc9047e56b1f7464",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19fee04f_bc380821",
+        "filename": "src/tint/resolver/builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-05T07:33:35Z",
+      "side": 1,
+      "message": "There are some different in result structure layout. Currently there are quite a lot of such kind of duplication between `f32` and `f16` tests, each have a little different from others. Maybe we can leave the clean up as a follow up? I would also want to clean up \"tint\\resolver\\builtin_validation_test.cc\" and \"tint\\resolver\\builtins_validation_test.cc\" (which seems to have a lot of overlap with \"tint\\resolver\\builtin_test.cc\") in the near future.",
+      "parentUuid": "cb8c3a24_46f78c04",
       "range": {
         "startLine": 935,
         "startChar": 0,
