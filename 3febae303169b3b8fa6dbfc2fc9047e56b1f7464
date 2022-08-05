@@ -93,6 +93,30 @@
       },
       "revId": "3febae303169b3b8fa6dbfc2fc9047e56b1f7464",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d24c00c0_20c85218",
+        "filename": "src/tint/resolver/builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-05T09:09:31Z",
+      "side": 1,
+      "message": "There\u0027s enough different here to warrant separate tests here.\n\n\u003e  I would also want to clean up \"tint\\resolver\\builtin_validation_test.cc\" and \"tint\\resolver\\builtins_validation_test.cc\" (which seems to have a lot of overlap with \"tint\\resolver\\builtin_test.cc\")\n\nThe `_validation` files were supposed to handle validation cases, like error messages, where as the non-`_validation` files were supposed to check for resolver behaviour, like `sem` output.\nThat said, there is a lot of fuzziness between these files, and I\u0027m not sure it\u0027s worth maintaining the split. I\u0027d be happy if we merged these files together so that repeated tests (validation and non-validation sat side-by-side)",
+      "parentUuid": "19fee04f_bc380821",
+      "range": {
+        "startLine": 935,
+        "startChar": 0,
+        "endLine": 935,
+        "endChar": 51
+      },
+      "revId": "3febae303169b3b8fa6dbfc2fc9047e56b1f7464",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
