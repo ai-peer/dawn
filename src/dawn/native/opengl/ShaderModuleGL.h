@@ -21,30 +21,54 @@
 #include <vector>
 
 #include "dawn/native/ShaderModule.h"
-
+#include "dawn/native/VisitableMembers.h"
 #include "dawn/native/opengl/opengl_platform.h"
 
-namespace dawn::native::opengl {
+namespace dawn::native {
+
+struct ProgrammableStage;
+
+namespace stream {
+class Sink;
+class Source;
+}  // namespace stream
+
+namespace opengl {
 
 class Device;
 class PipelineLayout;
+struct OpenGLFunctions;
 
 std::string GetBindingName(BindGroupIndex group, BindingNumber bindingNumber);
 
+#define BINDING_LOCATION_MEMBERS(X) \
+    X(BindGroupIndex, group)        \
+    X(BindingNumber, binding)
 struct BindingLocation {
-    BindGroupIndex group;
-    BindingNumber binding;
+    DAWN_VISITABLE_MEMBERS(BINDING_LOCATION_MEMBERS)
+#undef BINDING_LOCATION_MEMBERS
+
+    friend void StreamIn(stream::Sink*, const BindingLocation&);
+    friend MaybeError StreamOut(stream::Source*, BindingLocation*);
 };
 bool operator<(const BindingLocation& a, const BindingLocation& b);
 
+#define COMBINED_SAMPLER_MEMBERS(X)                                                         \
+    X(BindingLocation, samplerLocation)                                                     \
+    X(BindingLocation, textureLocation)                                                     \
+    /* OpenGL requires a sampler with texelFetch. If this is true, the developer did not */ \
+    /* provide one and Dawn should bind a placeholder non-filtering sampler;  */            \
+    /* |samplerLocation| is unused. */                                                      \
+    X(bool, usePlaceholderSampler)
+
 struct CombinedSampler {
-    BindingLocation samplerLocation;
-    BindingLocation textureLocation;
-    // OpenGL requires a sampler with texelFetch. If this is true, the developer did not provide
-    // one and Dawn should bind a placeholder non-filtering sampler. |samplerLocation| is
-    // unused.
-    bool usePlaceholderSampler;
+    DAWN_VISITABLE_MEMBERS(COMBINED_SAMPLER_MEMBERS)
+#undef COMBINED_SAMPLER_MEMBERS
+
     std::string GetName() const;
+
+    friend void StreamIn(stream::Sink*, const CombinedSampler&);
+    friend MaybeError StreamOut(stream::Source*, CombinedSampler*);
 };
 bool operator<(const CombinedSampler& a, const CombinedSampler& b);
 
@@ -59,11 +83,12 @@ class ShaderModule final : public ShaderModuleBase {
                                                    ShaderModuleParseResult* parseResult,
                                                    OwnedCompilationMessages* compilationMessages);
 
-    ResultOrError<std::string> TranslateToGLSL(const char* entryPointName,
-                                               SingleShaderStage stage,
-                                               CombinedSamplerInfo* combinedSamplers,
-                                               const PipelineLayout* layout,
-                                               bool* needsPlaceholderSampler) const;
+    ResultOrError<GLuint> CompileShader(const OpenGLFunctions& gl,
+                                        const ProgrammableStage& programmableStage,
+                                        SingleShaderStage stage,
+                                        CombinedSamplerInfo* combinedSamplers,
+                                        const PipelineLayout* layout,
+                                        bool* needsPlaceholderSampler) const;
 
   private:
     ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
@@ -72,6 +97,7 @@ class ShaderModule final : public ShaderModuleBase {
                           OwnedCompilationMessages* compilationMessages);
 };
 
-}  // namespace dawn::native::opengl
+}  // namespace opengl
+}  // namespace dawn::native
 
 #endif  // SRC_DAWN_NATIVE_OPENGL_SHADERMODULEGL_H_

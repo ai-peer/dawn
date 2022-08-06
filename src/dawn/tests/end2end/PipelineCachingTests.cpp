@@ -108,8 +108,8 @@ class PipelineCachingTests : public DawnTest {
     const EntryCounts counts = {
         // pipeline caching is only implemented on D3D12/Vulkan
         IsD3D12() || IsVulkan() ? 1u : 0u,
-        // shader module caching is only implemented on Vulkan/D3D12/Metal
-        IsVulkan() || IsMetal() || IsD3D12() ? 1u : 0u,
+        // One blob per shader module
+        1u,
     };
     NiceMock<CachingInterfaceMock> mMockCache;
 };
@@ -587,8 +587,8 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheLayout) {
     }
 
     // Cache should not hit for the fragment shader, but should hit for the pipeline.
-    // Except for D3D12, the shader is different but compiles to the same due to binding number
-    // remapping.
+    // On Metal and Vulkan, the shader is different but compiles to the same due to binding number
+    // remapping. On other backends, the compiled shader is different and so is the pipeline.
     {
         wgpu::Device device = CreateDevice();
         utils::ComboRenderPipelineDescriptor desc;
@@ -605,13 +605,13 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheLayout) {
                                 {1, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform},
                             }),
                     });
-        if (!IsD3D12()) {
-            EXPECT_CACHE_STATS(mMockCache, Hit(counts.shaderModule + counts.pipeline),
-                               Add(counts.shaderModule), device.CreateRenderPipeline(&desc));
-        } else {
+        if (IsD3D12() || IsOpenGL() || IsOpenGLES()) {
             EXPECT_CACHE_STATS(mMockCache, Hit(counts.shaderModule),
                                Add(counts.shaderModule + counts.pipeline),
                                device.CreateRenderPipeline(&desc));
+        } else {
+            EXPECT_CACHE_STATS(mMockCache, Hit(counts.shaderModule + counts.pipeline),
+                               Add(counts.shaderModule), device.CreateRenderPipeline(&desc));
         }
     }
 }
