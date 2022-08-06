@@ -107,9 +107,7 @@ class PipelineCachingTests : public DawnTest {
     };
     const EntryCounts counts = {
         // pipeline caching is only implemented on D3D12/Vulkan
-        IsD3D12() || IsVulkan() ? 1u : 0u,
-        // shader module caching is only implemented on Vulkan/D3D12/Metal
-        IsVulkan() || IsMetal() || IsD3D12() ? 1u : 0u,
+        IsD3D12() || IsVulkan() ? 1u : 0u, 1u, /* One blob per shader module */
     };
     NiceMock<CachingInterfaceMock> mMockCache;
 };
