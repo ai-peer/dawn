@@ -50,6 +50,24 @@
       "message": "nit: I think it would be better to be opt-in so that all platform support is opt-in instead of some complicated combinaison of booleans :), so we\u0027d add a new DAWN_PLATFORM_WINDOWS_UI and check for that. The style of the platform defines changed recently though so this CL will have to adapt to that.\n\nAlso it means we\u0027ll need to add the flags to cmake / GN but if that\u0027s too annoying someone else can do it.",
       "revId": "bcfcbd970ec7182b63cdda9421e475c85c1b2753",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62c177dc_7a67eb58",
+        "filename": "src/dawn/native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1003176
+      },
+      "writtenOn": "2022-08-07T01:26:05Z",
+      "side": 1,
+      "message": "Done!",
+      "parentUuid": "578dd0e7_84a26ab3",
+      "revId": "bcfcbd970ec7182b63cdda9421e475c85c1b2753",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
