@@ -46,6 +46,30 @@
       },
       "revId": "d5030ad463fed3ec1d672c30b56e44cc6829ca4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d37ab02_4895fbf7",
+        "filename": "include/dawn/native/D3D12Backend.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-07T11:16:23Z",
+      "side": 0,
+      "message": "One plan was to add ExternalImage to other backends so that they can avoid re-importing textures each frame (especially Vulkan), so ExternalImageAccessDescriptor is the part common to all backends. But we could split it back when we actually need it. Either way sounds fine.",
+      "parentUuid": "913c487e_3ff2387c",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 37
+      },
+      "revId": "d5030ad463fed3ec1d672c30b56e44cc6829ca4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
