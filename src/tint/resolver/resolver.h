@@ -216,10 +216,6 @@ class Resolver {
     bool MaterializeArguments(utils::Vector<const sem::Expression*, N>& args,
                               const sem::CallTarget* target);
 
-    /// @returns true if an argument of an abstract numeric type, passed to a parameter of type
-    /// `parameter_ty` should be materialized.
-    bool ShouldMaterializeArgument(const sem::Type* parameter_ty) const;
-
     /// @param ty the type that may hold abstract numeric types
     /// @param target_ty the target type for the expression (variable type, parameter type, etc).
     ///        May be nullptr.

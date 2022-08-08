@@ -464,10 +464,19 @@ constexpr Method kSwitchMethods[] = {
 
 /// Methods that do not materialize
 constexpr Method kNoMaterializeMethods[] = {
-    Method::kPhonyAssign,
-    // TODO(crbug.com/tint/1504): Enable once we have abstract overloads of builtins / binary
-    // ops: Method::kBuiltinArg, Method::kBinaryOp,
+    Method::kPhonyAssign,  //
+    Method::kBinaryOp,
+    // TODO(crbug.com/tint/1504): Enable once "min" supports const evaluation
+    // Method::kBuiltinArg,
 };
+
+// Methods that support abstract to abstract materialization
+constexpr Method kMaterializeAbstractMethods[] = {
+    Method::kBinaryOp,
+    // TODO(crbug.com/tint/1504): Enable once "min" supports const evaluation
+    // Method::kBuiltinArg,
+};
+
 INSTANTIATE_TEST_SUITE_P(
     MaterializeScalar,
     MaterializeAbstractNumericToConcreteType,
@@ -688,6 +697,14 @@ INSTANTIATE_TEST_SUITE_P(NoMaterialize,
                                               Types<AFloat, AFloat>(1.0_a, 1.0_a),    //
                                               Types<AFloatV, AFloatV>(1.0_a, 1.0_a),  //
                                               Types<AFloatM, AFloatM>(1.0_a, 1.0_a),  //
+                                          })));
+
+INSTANTIATE_TEST_SUITE_P(MaterializeAbstract,
+                         MaterializeAbstractNumericToConcreteType,
+                         testing::Combine(testing::Values(Expectation::kMaterialize),
+                                          testing::ValuesIn(kMaterializeAbstractMethods),
+                                          testing::ValuesIn(std::vector<Data>{
+                                              Types<AFloat, AInt>(1.0_a, 1_a),
                                           })));
 
 INSTANTIATE_TEST_SUITE_P(InvalidConversion,
