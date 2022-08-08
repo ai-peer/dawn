@@ -37,6 +37,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f58e223d_9ac93d81",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-08T05:51:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5001ca4_fa3f3f04",
+      "revId": "56186d5962b719158aebcf3a2d7f34bbd4b52a9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c4a022e9_b5b280ba",
         "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
         "patchSetId": 16
@@ -65,6 +83,24 @@
       "writtenOn": "2022-08-07T11:27:09Z",
       "side": 1,
       "message": "nit: it\u0027s a bit unclear reading the code that both scopedSignalSemaphore and signalSemaphore point to the same object. Maybe we could have .Get() on ScopedSignalSemaphore and default move constructors/assignment operators so that there a single variable outside of the if at [1]. Then the Reset() could become an Acquire that returns the object, similarly to RefBase.",
+      "revId": "56186d5962b719158aebcf3a2d7f34bbd4b52a9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ceb8234_dfecf8c0",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-08T05:51:06Z",
+      "side": 1,
+      "message": "Good idea. In the light of your inspiration, it seems to me more like a \"Detach\" other than \"Reset\". How\u0027s that sound?",
+      "parentUuid": "2690da8f_4c8a8550",
       "revId": "56186d5962b719158aebcf3a2d7f34bbd4b52a9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -105,6 +141,48 @@
       "writtenOn": "2022-08-07T11:27:09Z",
       "side": 1,
       "message": "nit: Can we add a TODO that in the future we could keep the ExternalHandle that was given as input to give it back, such that there is no need to do an empty submit if the texture wasn\u0027t used?",
+      "revId": "56186d5962b719158aebcf3a2d7f34bbd4b52a9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8b46ade_2c35f158",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-08T05:51:06Z",
+      "side": 1,
+      "message": "Thanks for catching. It should have been NullExternalSemaphoreHandle. Let\u0027s see if we need the more general NullExternalHandle afterwards.",
+      "parentUuid": "9919e2e6_969b77a8",
+      "range": {
+        "startLine": 871,
+        "startChar": 36,
+        "endLine": 871,
+        "endChar": 61
+      },
+      "revId": "56186d5962b719158aebcf3a2d7f34bbd4b52a9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d78f0a5a_26919ed2",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-08T05:51:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e28c59d6_430396bf",
       "revId": "56186d5962b719158aebcf3a2d7f34bbd4b52a9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
