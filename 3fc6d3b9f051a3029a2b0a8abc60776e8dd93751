@@ -222,6 +222,23 @@
       "message": "Can we have a test that shows the passing of the matrix to a function? Like:\n\n\n```\nstruct U {\n  m : mat2x2\u003cf32\u003e,\n}\n\n@group(0) @binding(0) var\u003cuniform\u003e u : U;\n\nfn g(m : mat3x2\u003cf32\u003e) {\n  let a \u003d m[0][0];\n  let b \u003d m[0][1];\n  let c \u003d m[1][0];\n  let d \u003d m[1][1];\n}\n\nfn f() {\n  g(u.m);\n}\n```",
       "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03135068_2a3803c1",
+        "filename": "src/tint/transform/mat2_to_vec2_test.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-08T14:59:36Z",
+      "side": 1,
+      "message": "We also need tests to cover cases of using the same struct for multiple use-cases: as uniform buffer, storage buffer, and regular variable. For the latter two, the test should include writes to the matrix.",
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
