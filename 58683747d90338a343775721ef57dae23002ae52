@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00652eed_5741184b",
+        "filename": "src/tint/resolver/side_effects_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-08T19:54:14Z",
+      "side": 1,
+      "message": "Out of curiousity, why use a function here instead of just doing `Case{...}` below where you do `C()` ?",
+      "revId": "58683747d90338a343775721ef57dae23002ae52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "243148d8_d4e3dcaa",
+        "filename": "src/tint/resolver/side_effects_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-08T19:54:14Z",
+      "side": 1,
+      "message": "We appear to always provide `false` or `true` so we can drop the default value.",
+      "revId": "58683747d90338a343775721ef57dae23002ae52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39cf8d19_6d00bcd7",
+        "filename": "src/tint/resolver/side_effects_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-08T19:54:14Z",
+      "side": 1,
+      "message": "Some of these will affect uniformity so they should be considered to have side effects.",
+      "revId": "58683747d90338a343775721ef57dae23002ae52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
