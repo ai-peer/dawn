@@ -16,6 +16,23 @@
       "message": "PTAL again, made docs",
       "revId": "2d620ed56a78a852ea7980ed2fb0a746381d8678",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d76ef2f2_743ecfb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-08T16:28:30Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "2d620ed56a78a852ea7980ed2fb0a746381d8678",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
