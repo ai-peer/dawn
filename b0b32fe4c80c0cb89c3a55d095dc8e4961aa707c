@@ -425,6 +425,24 @@
       "parentUuid": "313dfc5c_e59c57df",
       "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40fa9e78_aef010a4",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-08T22:13:23Z",
+      "side": 1,
+      "message": "optional: we would get a bit more coverage in all the cases if we parameterize the test with DAWN_INSTANTIATE_TEST_P to use the provided layout, or to use undefined",
+      "parentUuid": "f19f288b_39673680",
+      "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
