@@ -207,6 +207,30 @@
       },
       "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "800c2f09_96caf0e4",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-08T07:58:02Z",
+      "side": 1,
+      "message": "Yes, I can still see the tiny submits from time to time, although they would be further reduced with 2ms interval. But it would be still not long enough to have them merged and saved into  the [submit](https://source.chromium.org/chromium/chromium/src/+/main:content/test/data/gpu/vc/webgpu_video.js;l\u003d608;drc\u003dd5a2d2950088170ccf5c83f89c9b19e4d525ba1e;bpv\u003d0;bpt\u003d0) of client as this CL can.\nIn future, we can probably apply this optimization to other WriteTexture and WriteBuffer usages in addition to this one, so as to do as few submits as possible.",
+      "parentUuid": "a4561988_d91c8a06",
+      "range": {
+        "startLine": 190,
+        "startChar": 13,
+        "endLine": 191,
+        "endChar": 74
+      },
+      "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
