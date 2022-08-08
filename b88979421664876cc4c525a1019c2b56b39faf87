@@ -51,6 +51,24 @@
       "parentUuid": "28d760bd_f3704773",
       "revId": "b88979421664876cc4c525a1019c2b56b39faf87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b229631a_59857635",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-08T09:24:28Z",
+      "side": 1,
+      "message": "Ah that\u0027s weird, maybe we shouldn\u0027t be returning a renference. .Get() semantically really means that we\u0027re getting the data, not a ref to the data that can be modified. I don\u0027t think we ever use .Get() to modify what\u0027s inside the ref.",
+      "parentUuid": "9f5f59f2_fa7dabab",
+      "revId": "b88979421664876cc4c525a1019c2b56b39faf87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
