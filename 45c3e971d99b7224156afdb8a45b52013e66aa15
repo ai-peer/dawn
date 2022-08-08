@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c41087c_273d51ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-08T08:50:57Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "45c3e971d99b7224156afdb8a45b52013e66aa15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62f7ee4c_1789ca23",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-08T08:50:57Z",
+      "side": 1,
+      "message": "nit: I think f32 is UNREACHABLE as well with the check at [1]",
+      "revId": "45c3e971d99b7224156afdb8a45b52013e66aa15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "300f0120_9a9b77e9",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-08T08:50:57Z",
+      "side": 1,
+      "message": "Since the pipeline created depends on the color attachment count, shouldn\u0027t that count be part of the key?",
+      "revId": "45c3e971d99b7224156afdb8a45b52013e66aa15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42bfde94_401121a9",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-08T08:50:57Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "45c3e971d99b7224156afdb8a45b52013e66aa15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fed1fc2e_0db3d803",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-08T08:50:57Z",
+      "side": 1,
+      "message": "nit: Isn\u0027t this UNREACHABLE() as well with the check at [1]?",
+      "revId": "45c3e971d99b7224156afdb8a45b52013e66aa15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85d386b4_fe2b37ea",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-08T08:50:57Z",
+      "side": 1,
+      "message": "u-nit: I think the device could be const as well.",
+      "range": {
+        "startLine": 46,
+        "startChar": 50,
+        "endLine": 46,
+        "endChar": 60
+      },
+      "revId": "45c3e971d99b7224156afdb8a45b52013e66aa15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
