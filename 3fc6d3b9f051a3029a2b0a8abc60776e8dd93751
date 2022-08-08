@@ -209,6 +209,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f20cf95_c1128e0e",
+        "filename": "src/tint/transform/mat2_to_vec2_test.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-08T15:56:15Z",
+      "side": 1,
+      "message": "We also need a test for the case of natural alignment of a mat3x2 followed by 2 scalars. In WGSL, the mat3x2 takes 24 bytes, so the two scalers would fit in the 8 bytes immediately following. Just need to make sure your transform doesn\u0027t align the scalers to say 16 bytes (I don\u0027t think it will).",
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c661816a_5159630c",
         "filename": "src/tint/transform/mat2_to_vec2_test.cc",
         "patchSetId": 13
@@ -237,6 +254,24 @@
       "writtenOn": "2022-08-08T14:59:36Z",
       "side": 1,
       "message": "We also need tests to cover cases of using the same struct for multiple use-cases: as uniform buffer, storage buffer, and regular variable. For the latter two, the test should include writes to the matrix.",
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "184e7a05_173980aa",
+        "filename": "src/tint/transform/mat2_to_vec2_test.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-08T15:56:15Z",
+      "side": 1,
+      "message": "Also, we need to make sure that we can copy between structures of different use-cases, e.g. from a uniform to a non-uniform of the same structure type.\n\nFurthermore, one case that often bites us when decomposing a single statement into multiple statements are in places where we only allow a single statement in WGSL, such as in a for-loop initializer. So we would need a test that does the assignment of different use-cases in a for-loop initializer.",
+      "parentUuid": "03135068_2a3803c1",
       "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
