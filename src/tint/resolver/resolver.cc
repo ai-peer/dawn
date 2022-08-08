@@ -1399,6 +1399,11 @@ const sem::Expression* Resolver::Materialize(const sem::Expression* expr,
 
     auto* decl = expr->Declaration();
 
+    if (expr->Type() == target_type) {
+        // TODO(amaiorano): Maybe push this check into ConcreteType() so that it returns nullptr.
+        return expr;  // Does not require materialization
+    }
+
     auto* concrete_ty = ConcreteType(expr->Type(), target_type, decl->source);
     if (!concrete_ty) {
         return expr;  // Does not require materialization
@@ -1440,20 +1445,13 @@ bool Resolver::MaterializeArguments(utils::Vector<const sem::Expression*, N>& ar
                                     const sem::CallTarget* target) {
     for (size_t i = 0, n = std::min(args.Length(), target->Parameters().Length()); i < n; i++) {
         const auto* param_ty = target->Parameters()[i]->Type();
-        if (ShouldMaterializeArgument(param_ty)) {
-            auto* materialized = Materialize(args[i], param_ty);
-            if (!materialized) {
-                return false;
-            }
-            args[i] = materialized;
+        auto* materialized = Materialize(args[i], param_ty);
+        if (!materialized) {
+            return false;
         }
+        args[i] = materialized;
     }
     return true;
-}
-
-bool Resolver::ShouldMaterializeArgument(const sem::Type* parameter_ty) const {
-    const auto* param_el_ty = sem::Type::ElementOf(parameter_ty);
-    return param_el_ty && !param_el_ty->Is<sem::AbstractNumeric>();
 }
 
 sem::Expression* Resolver::IndexAccessor(const ast::IndexAccessorExpression* expr) {
@@ -1893,6 +1891,11 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
     if (stage == sem::EvaluationStage::kConstant) {
         if (auto r = (const_eval_.*builtin.const_eval_fn)(builtin.sem->ReturnType(), args)) {
             value = r.Get();
+            if (!value) {
+                TINT_ICE(Resolver, diagnostics_)
+                    << "Constant evaluation of builtin failed to return a constant value";
+                return nullptr;
+            }
         } else {
             return nullptr;
         }
@@ -2280,17 +2283,13 @@ sem::Expression* Resolver::Binary(const ast::BinaryExpression* expr) {
     if (!op.result) {
         return nullptr;
     }
-    if (ShouldMaterializeArgument(op.lhs)) {
-        lhs = Materialize(lhs, op.lhs);
-        if (!lhs) {
-            return nullptr;
-        }
+    lhs = Materialize(lhs, op.lhs);
+    if (!lhs) {
+        return nullptr;
     }
-    if (ShouldMaterializeArgument(op.rhs)) {
-        rhs = Materialize(rhs, op.rhs);
-        if (!rhs) {
-            return nullptr;
-        }
+    rhs = Materialize(rhs, op.rhs);
+    if (!rhs) {
+        return nullptr;
     }
 
     const sem::Constant* value = nullptr;
@@ -2371,11 +2370,9 @@ sem::Expression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
             if (!op.result) {
                 return nullptr;
             }
-            if (ShouldMaterializeArgument(op.parameter)) {
-                expr = Materialize(expr, op.parameter);
-                if (!expr) {
-                    return nullptr;
-                }
+            expr = Materialize(expr, op.parameter);
+            if (!expr) {
+                return nullptr;
             }
             stage = expr->Stage();
             if (stage == sem::EvaluationStage::kConstant) {
