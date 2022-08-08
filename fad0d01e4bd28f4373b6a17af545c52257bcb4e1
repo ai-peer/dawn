@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "eea0baf1_a7088036",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-08-08T23:14:55Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "4c0a05e2_2c57cd65",
+      "revId": "fad0d01e4bd28f4373b6a17af545c52257bcb4e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1d66341a_bd45ea42",
         "filename": "src/tint/fuzzers/tint_ast_fuzzer/jump_tracker.cc",
         "patchSetId": 4
