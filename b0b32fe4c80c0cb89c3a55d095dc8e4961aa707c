@@ -131,6 +131,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "947fc21e_3d198aed",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-08T08:56:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a4caedf_d23c2559",
+      "range": {
+        "startLine": 267,
+        "startChar": 24,
+        "endLine": 267,
+        "endChar": 39
+      },
+      "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b3226eb_a135e90f",
@@ -168,6 +192,30 @@
       "side": 1,
       "message": "Sounds good.",
       "parentUuid": "0b3226eb_a135e90f",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 75
+      },
+      "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2814fca2_b67e9161",
+        "filename": "src/dawn/native/vulkan/DeviceVk.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-08T08:56:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a80a4f7a_6d283d76",
       "range": {
         "startLine": 185,
         "startChar": 0,
@@ -339,6 +387,24 @@
       "side": 1,
       "message": "If the desired layout for export is not VK_IMAGE_LAYOUT_UNDEFINED, we can fallback to forcing an extra submit. This way I have gotten these tests back.",
       "parentUuid": "92db4b7f_74f11437",
+      "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "313dfc5c_e59c57df",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-08T08:56:37Z",
+      "side": 1,
+      "message": "Do we have any test that doesn\u0027t export with VK_IMAGE_LAYOUT_UNDEFINED so we have coverage of the new code path that doesn\u0027t do an additional submit?",
+      "parentUuid": "66844db3_da6ef6ca",
       "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

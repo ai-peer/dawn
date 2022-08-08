@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51cb4573_f9f829c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-08T08:56:37Z",
+      "side": 1,
+      "message": "LGTM still, one tiny nit and suggestion for a test that maybe is missing.",
+      "revId": "b88979421664876cc4c525a1019c2b56b39faf87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28d760bd_f3704773",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-08T08:56:37Z",
+      "side": 1,
+      "message": "nit: If we follow the convention of RefBase, then this should just return a VkSemaphore, and instead we\u0027d also have InitializeInto() that return \u0026mSemaphore.",
+      "revId": "b88979421664876cc4c525a1019c2b56b39faf87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
