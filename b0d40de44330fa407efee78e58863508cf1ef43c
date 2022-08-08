@@ -231,6 +231,30 @@
       },
       "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4d1d67f_046bfc81",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-08T09:02:58Z",
+      "side": 1,
+      "message": "The reason why WriteTexture/WriteBuffer need to tag the recording context as used is to make sure that there isn\u0027t an ever increasing amount of data held in staging buffers waiting to be uploaded. WriteBuffer/WriteTexture are supposed to write \"immediately\" so an infinite loop of WriteBuffers should theorically not OOM.\n\nMaybe we could change .used to .needsSubmit, not set it to true in GetPendingRecordingContext, but instead count how many bytes are to be uploaded, and when we reach a threshold (megabytes?), then mark .needsSubmit. I think it would solve the small submits we see here as well. Austin, Loko WDYT?",
+      "parentUuid": "800c2f09_96caf0e4",
+      "range": {
+        "startLine": 190,
+        "startChar": 13,
+        "endLine": 191,
+        "endChar": 74
+      },
+      "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
