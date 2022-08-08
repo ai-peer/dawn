@@ -69,6 +69,24 @@
       "parentUuid": "9f5f59f2_fa7dabab",
       "revId": "b88979421664876cc4c525a1019c2b56b39faf87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09af2c4c_64a6caf0",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-08T09:45:00Z",
+      "side": 1,
+      "message": "Sounds fair. Let\u0027s use InitializeInto().",
+      "parentUuid": "b229631a_59857635",
+      "revId": "b88979421664876cc4c525a1019c2b56b39faf87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
