@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f16e0e9_36f98571",
+        "filename": "src/tint/transform/remove_phonies.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-08T21:10:05Z",
+      "side": 1,
+      "message": "Doesn\u0027t this unconditionally remove _all_ constant value call statements? How do you know it\u0027s assigned to a phony?",
+      "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
