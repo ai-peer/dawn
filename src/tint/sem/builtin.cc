@@ -153,11 +153,38 @@ bool Builtin::IsDP4a() const {
 }
 
 bool Builtin::HasSideEffects() const {
-    if (IsAtomic() && type_ != sem::BuiltinType::kAtomicLoad) {
-        return true;
-    }
-    if (type_ == sem::BuiltinType::kTextureStore) {
-        return true;
+    switch (type_) {
+        // Builtins that modify memory have side-effects.
+        case sem::BuiltinType::kAtomicAdd:
+        case sem::BuiltinType::kAtomicAnd:
+        case sem::BuiltinType::kAtomicCompareExchangeWeak:
+        case sem::BuiltinType::kAtomicExchange:
+        case sem::BuiltinType::kAtomicMax:
+        case sem::BuiltinType::kAtomicMin:
+        case sem::BuiltinType::kAtomicOr:
+        case sem::BuiltinType::kAtomicStore:
+        case sem::BuiltinType::kAtomicSub:
+        case sem::BuiltinType::kAtomicXor:
+        case sem::BuiltinType::kTextureStore:
+        // Builtins that affect uniformity have side-effects.
+        // See https://gpuweb.github.io/gpuweb/wgsl/#collective-operations
+        case sem::BuiltinType::kStorageBarrier:
+        case sem::BuiltinType::kWorkgroupBarrier:
+        case sem::BuiltinType::kTextureSample:
+        case sem::BuiltinType::kTextureSampleBias:
+        case sem::BuiltinType::kTextureSampleCompare:
+        case sem::BuiltinType::kDpdx:
+        case sem::BuiltinType::kDpdxCoarse:
+        case sem::BuiltinType::kDpdxFine:
+        case sem::BuiltinType::kDpdy:
+        case sem::BuiltinType::kDpdyCoarse:
+        case sem::BuiltinType::kDpdyFine:
+        case sem::BuiltinType::kFwidth:
+        case sem::BuiltinType::kFwidthCoarse:
+        case sem::BuiltinType::kFwidthFine:
+            return true;
+        default:
+            break;
     }
     return false;
 }
