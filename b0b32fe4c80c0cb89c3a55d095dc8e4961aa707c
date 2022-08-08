@@ -407,6 +407,24 @@
       "parentUuid": "66844db3_da6ef6ca",
       "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f19f288b_39673680",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-08T09:16:58Z",
+      "side": 1,
+      "message": "Yes, there are quite some such cases like [this](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/white_box/VulkanImageWrappingTests.cpp;drc\u003d825b95b7c1ddaefe139c0892ecbe7f7b506b9f92;l\u003d343). Some of them failed previously on CQ and then got passed with the additional submit fixing CL.",
+      "parentUuid": "313dfc5c_e59c57df",
+      "revId": "b0b32fe4c80c0cb89c3a55d095dc8e4961aa707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

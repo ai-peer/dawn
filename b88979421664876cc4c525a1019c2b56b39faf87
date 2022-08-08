@@ -33,6 +33,24 @@
       "message": "nit: If we follow the convention of RefBase, then this should just return a VkSemaphore, and instead we\u0027d also have InitializeInto() that return \u0026mSemaphore.",
       "revId": "b88979421664876cc4c525a1019c2b56b39faf87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f5f59f2_fa7dabab",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-08T09:16:58Z",
+      "side": 1,
+      "message": "```\n    // Smart pointer methods.\n    const T\u0026 Get() const { return mValue; }\n    T\u0026 Get() { return mValue; }\n\n    [[nodiscard]] T Detach() {\n        T value{std::move(mValue)};\n        mValue \u003d Traits::kNullValue;\n        return value;\n    }\n\n    void Acquire(T value) {\n        Release(mValue);\n        mValue \u003d value;\n    }\n\n    [[nodiscard]] T* InitializeInto() {\n        ASSERT(mValue \u003d\u003d Traits::kNullValue);\n        return \u0026mValue;\n    }\n```\n\n[RefBase\u0027s Get()](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/common/RefBase.h;drc\u003d41e4d9a34c1d9dcb2eef3ff39ff9c1f987bfa02a;l\u003d115) returns a reference other than value. Could you please clarify if I missed something.",
+      "parentUuid": "28d760bd_f3704773",
+      "revId": "b88979421664876cc4c525a1019c2b56b39faf87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
