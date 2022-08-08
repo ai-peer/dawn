@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c36d201_190f83cf",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-08T21:06:14Z",
+      "side": 1,
+      "message": "Removed (it wasn\u0027t used very much anyway).",
+      "parentUuid": "03acf5d0_150f01c3",
+      "range": {
+        "startLine": 63,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 31
+      },
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "934fabc7_55f55638",
@@ -88,6 +112,30 @@
       "writtenOn": "2022-08-08T13:58:20Z",
       "side": 1,
       "message": "nit: in other transforms, this is usually a `ProgramBuilder\u0026 b` for builder.",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 32
+      },
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "172619ad_079c31bf",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-08T21:06:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "934fabc7_55f55638",
       "range": {
         "startLine": 64,
         "startChar": 4,
@@ -121,6 +169,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fc3b470_a94a0e06",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-08T21:06:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71ac7021_4b955bd7",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 66,
+        "endChar": 11
+      },
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91cef8e8_3257bc4f",
@@ -134,6 +206,30 @@
       "writtenOn": "2022-08-08T13:58:20Z",
       "side": 1,
       "message": "As we\u0027re creating new names, can you add a unit test where the struct already has other members that have the same name as you would have produced? Something like:\n\n```\nstruct U {\n  m0 : f32;\n  m : mat4x2\u003cf32\u003e,\n  m2 : u32;\n}\n```",
+      "range": {
+        "startLine": 87,
+        "startChar": 16,
+        "endLine": 87,
+        "endChar": 94
+      },
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86283238_e3b54660",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-08T21:06:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91cef8e8_3257bc4f",
       "range": {
         "startLine": 87,
         "startChar": 16,
@@ -167,6 +263,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7cf6f24_123c6708",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-08T21:06:14Z",
+      "side": 1,
+      "message": "Cool! I was hoping to clean that up.\n\nDone.",
+      "parentUuid": "a85b5962_b92f8079",
+      "range": {
+        "startLine": 106,
+        "startChar": 38,
+        "endLine": 106,
+        "endChar": 79
+      },
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b60f715e_1665876f",
@@ -180,6 +300,24 @@
       "writtenOn": "2022-08-08T13:58:20Z",
       "side": 1,
       "message": "Can we have a few `ShouldRun` tests that cover:\n* Will not run when MatMxN where N !\u003d 2? Could be parameterized to cover all combinations.\n* Will not run for non-uniform matrices.",
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88795cf3_db6e89d6",
+        "filename": "src/tint/transform/mat2_to_vec2_test.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-08T21:06:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b60f715e_1665876f",
       "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -209,6 +347,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f9fa76cb_094645ee",
+        "filename": "src/tint/transform/mat2_to_vec2_test.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-08T21:06:14Z",
+      "side": 1,
+      "message": "I haven\u0027t yet. We may need to do some optimization (ie., detect static access and omit the constructor and deref), or use the DMA transform as you point out.",
+      "parentUuid": "cc5d9aee_41eff94f",
+      "range": {
+        "startLine": 130,
+        "startChar": 2,
+        "endLine": 130,
+        "endChar": 40
+      },
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f20cf95_c1128e0e",
         "filename": "src/tint/transform/mat2_to_vec2_test.cc",
         "patchSetId": 13
@@ -220,6 +382,24 @@
       "writtenOn": "2022-08-08T15:56:15Z",
       "side": 1,
       "message": "We also need a test for the case of natural alignment of a mat3x2 followed by 2 scalars. In WGSL, the mat3x2 takes 24 bytes, so the two scalers would fit in the 8 bytes immediately following. Just need to make sure your transform doesn\u0027t align the scalers to say 16 bytes (I don\u0027t think it will).",
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "131dc14b_13c3d240",
+        "filename": "src/tint/transform/mat2_to_vec2_test.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-08T21:06:14Z",
+      "side": 1,
+      "message": "I think the Dawn end2end test ComputeLayoutMemoryBufferTests.Fields covers this case by actually doing a readback of a scalar packed tightly after the datatype (mat3x2 in this case) which is probably the only 100% certain way to ensure it\u0027s doing the right thing. But I\u0027ve added some Tint unittests too (can\u0027t hurt).",
+      "parentUuid": "1f20cf95_c1128e0e",
       "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -237,6 +417,24 @@
       "writtenOn": "2022-08-08T13:58:20Z",
       "side": 1,
       "message": "Can we have a test that shows the passing of the matrix to a function? Like:\n\n\n```\nstruct U {\n  m : mat2x2\u003cf32\u003e,\n}\n\n@group(0) @binding(0) var\u003cuniform\u003e u : U;\n\nfn g(m : mat3x2\u003cf32\u003e) {\n  let a \u003d m[0][0];\n  let b \u003d m[0][1];\n  let c \u003d m[1][0];\n  let d \u003d m[1][1];\n}\n\nfn f() {\n  g(u.m);\n}\n```",
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "283d4151_902654a3",
+        "filename": "src/tint/transform/mat2_to_vec2_test.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-08T21:06:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c661816a_5159630c",
       "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -272,6 +470,24 @@
       "side": 1,
       "message": "Also, we need to make sure that we can copy between structures of different use-cases, e.g. from a uniform to a non-uniform of the same structure type.\n\nFurthermore, one case that often bites us when decomposing a single statement into multiple statements are in places where we only allow a single statement in WGSL, such as in a for-loop initializer. So we would need a test that does the assignment of different use-cases in a for-loop initializer.",
       "parentUuid": "03135068_2a3803c1",
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0f02a90_001c5123",
+        "filename": "src/tint/transform/mat2_to_vec2_test.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-08T21:06:14Z",
+      "side": 1,
+      "message": "Writes won\u0027t work, currently. This is a known issue that I\u0027d prefer to address in a subsequent CL. Is that ok?\n\nAnd copying from uniform to non-uniform is broken in the GLSL backend for other reasons, so I\u0027d prefer to look at it later too, even thought it will require fixes here too.",
+      "parentUuid": "184e7a05_173980aa",
       "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
