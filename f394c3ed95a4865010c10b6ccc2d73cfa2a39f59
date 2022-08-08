@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb43bc79_7f07bcb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-08T21:08:52Z",
+      "side": 1,
+      "message": "I made some manual changes to the expectations file while triaging issues last week. And, the conflict detection kept tripping me up. I think we should make it match what typ does (more permissive), but not 100% sure how this will impact the rest of the roller - but I didn\u0027t get any errors when I tried it and from what I can tell, it should be fine. Do you know?\n",
+      "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
