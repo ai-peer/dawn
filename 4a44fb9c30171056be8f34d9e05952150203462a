@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd681ff8_a3f79546",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-08T19:39:18Z",
+      "side": 1,
+      "message": "lgtm w/ nit",
+      "revId": "4a44fb9c30171056be8f34d9e05952150203462a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f98772d7_e4468553",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-08T19:39:18Z",
+      "side": 1,
+      "message": "Could `size_t{1}` be `1u` ?",
+      "revId": "4a44fb9c30171056be8f34d9e05952150203462a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
