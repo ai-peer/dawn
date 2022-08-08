@@ -33,6 +33,195 @@
       "message": "(This will probably fail Kokoro, but we\u0027ll see how it goes.)",
       "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3505e37_5fedf8d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-08T13:58:20Z",
+      "side": 1,
+      "message": "Nice work, Stephen!",
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03acf5d0_150f01c3",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-08T13:58:20Z",
+      "side": 1,
+      "message": "nit: in other transforms, this is usually named `src`.",
+      "range": {
+        "startLine": 63,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 31
+      },
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "934fabc7_55f55638",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-08T13:58:20Z",
+      "side": 1,
+      "message": "nit: in other transforms, this is usually a `ProgramBuilder\u0026 b` for builder.",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 32
+      },
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71ac7021_4b955bd7",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-08T13:58:20Z",
+      "side": 1,
+      "message": "Since C++11, instead of typedef, we now use `using`, so:\n\n```\nusing StructMemberList \u003d utils::Vector\u003cconst ast::StructMember*, 8\u003e;\n```",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 66,
+        "endChar": 11
+      },
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91cef8e8_3257bc4f",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-08T13:58:20Z",
+      "side": 1,
+      "message": "As we\u0027re creating new names, can you add a unit test where the struct already has other members that have the same name as you would have produced? Something like:\n\n```\nstruct U {\n  m0 : f32;\n  m : mat4x2\u003cf32\u003e,\n  m2 : u32;\n}\n```",
+      "range": {
+        "startLine": 87,
+        "startChar": 16,
+        "endLine": 87,
+        "endChar": 94
+      },
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a85b5962_b92f8079",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-08T13:58:20Z",
+      "side": 1,
+      "message": "I think you can use `utils::Empty` here (still getting used to the new `utils::Vector` API, so I might be wrong.)",
+      "range": {
+        "startLine": 106,
+        "startChar": 38,
+        "endLine": 106,
+        "endChar": 79
+      },
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b60f715e_1665876f",
+        "filename": "src/tint/transform/mat2_to_vec2_test.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-08T13:58:20Z",
+      "side": 1,
+      "message": "Can we have a few `ShouldRun` tests that cover:\n* Will not run when MatMxN where N !\u003d 2? Could be parameterized to cover all combinations.\n* Will not run for non-uniform matrices.",
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc5d9aee_41eff94f",
+        "filename": "src/tint/transform/mat2_to_vec2_test.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-08T13:58:20Z",
+      "side": 1,
+      "message": "I wonder at how good the backend compilers are at optimizing this, as compared to using the `DecomposeMemoryAccess` transform. Have you taken a look at that?",
+      "range": {
+        "startLine": 130,
+        "startChar": 2,
+        "endLine": 130,
+        "endChar": 40
+      },
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c661816a_5159630c",
+        "filename": "src/tint/transform/mat2_to_vec2_test.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-08T13:58:20Z",
+      "side": 1,
+      "message": "Can we have a test that shows the passing of the matrix to a function? Like:\n\n\n```\nstruct U {\n  m : mat2x2\u003cf32\u003e,\n}\n\n@group(0) @binding(0) var\u003cuniform\u003e u : U;\n\nfn g(m : mat3x2\u003cf32\u003e) {\n  let a \u003d m[0][0];\n  let b \u003d m[0][1];\n  let c \u003d m[1][0];\n  let d \u003d m[1][1];\n}\n\nfn f() {\n  g(u.m);\n}\n```",
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
