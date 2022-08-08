@@ -255,6 +255,30 @@
       },
       "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d787150e_8170f7ec",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-08T22:29:00Z",
+      "side": 1,
+      "message": "Makes sense to me - maybe it can be a property of the DynamicUploader. When we don\u0027t have enough space to fit in the ring buffer and we need to make a new one, we make sure that we issue a flush of all the uploads?\nkRingBufferSize is currently 4 MB.\n\nThe intent of .used is we want to avoid OOM. So if there\u0027s enough already-allocated space, we don\u0027t need to do anything. Only when we make a new allocation do we care that previous allocations are submitted so that later on they become free.\n\n~There are additional details though with mapped buffers. .used also forces eventual completion. If you writeBuffer and then map the buffer for reading, you\u0027ll never receive the callback unless the writeBuffer upload is flushed.~\nEdit: ^actually this is probably fine since you need to call Tick anyway to trigger the callback. And the Tick will flush the upload.",
+      "parentUuid": "e4d1d67f_046bfc81",
+      "range": {
+        "startLine": 190,
+        "startChar": 13,
+        "endLine": 191,
+        "endChar": 74
+      },
+      "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
