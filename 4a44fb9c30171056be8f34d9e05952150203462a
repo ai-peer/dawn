@@ -33,6 +33,24 @@
       "message": "Could `size_t{1}` be `1u` ?",
       "revId": "4a44fb9c30171056be8f34d9e05952150203462a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92e0f902_d5931009",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-08T20:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f98772d7_e4468553",
+      "revId": "4a44fb9c30171056be8f34d9e05952150203462a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
