@@ -33,6 +33,23 @@
       "message": "The failures on Kokoro are not related to this CL.\n\n/dawn/src/src/tint/fuzzers/tint_ast_fuzzer/mutations/delete_statement.cc:97:55: error: cannot initialize a variable of type \u0027const std::vector\u003cconst ast::CaseStatement *\u003e *\u0027 with an rvalue of type \u0027const utils::Vector\u003cconst CaseStatement *, 4\u003e *\u0027\n        const std::vector\u003cconst ast::CaseStatement*\u003e* case_statement_list \u003d\n                                                      ^\n/dawn/src/src/tint/fuzzers/tint_ast_fuzzer/mutations/delete_statement.cc:159:36: error: no member named \u0027size\u0027 in \u0027tint::utils::Vector\u003cconst tint::ast::CaseStatement *, 4\u003e\u0027\n        if (switch_statement-\u003ebody.size() \u003e 1 \u0026\u0026\n            ~~~~~~~~~~~~~~~~~~~~~~ ^\n/dawn/src/src/tint/fuzzers/tint_ast_fuzzer/mutations/delete_statement.cc:160:59: error: no member named \u0027size\u0027 in \u0027tint::utils::Vector\u003cconst tint::ast::CaseStatement *, 4\u003e\u0027\n            switch_statement-\u003ebody[switch_statement-\u003ebody.size() - 1] \u003d\u003d case_statement) {\n                                   ~~~~~~~~~~~~~~~~~~~~~~ ^\n/dawn/src/src/tint/fuzzers/tint_ast_fuzzer/mutations/delete_statement.cc:163:63: error: no member named \u0027size\u0027 in \u0027tint::utils::Vector\u003cconst tint::ast::CaseStatement *, 4\u003e\u0027\n                switch_statement-\u003ebody[switch_statement-\u003ebody.size() - 2]-\u003ebody-\u003estatements;\n                                       ~~~~~~~~~~~~~~~~~~~~~~ ^\n4 errors generated.",
       "revId": "853a724a11137aace0864ffd9d1c3622ecc6f6ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "868b0648_a242aac7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-09T12:18:31Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "853a724a11137aace0864ffd9d1c3622ecc6f6ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
