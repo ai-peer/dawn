@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95964115_81bbd161",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-09T14:26:01Z",
+      "side": 1,
+      "message": "The unit tests are combining values from this array along with a `vector\u003cData\u003e` of type-to-type. For example, we expect there to be no materialization from `AInt -\u003e AInt` in a phony assignment or binary operation; however, we do expect it from an `AFloat -\u003e AInt`.\n\nSee the two test suite instantiations below on lines 692 and 704.\n\nNote that this will be reworked now, as we won\u0027t \"materialize\" AFloat -\u003e AInt anymore.",
+      "parentUuid": "47078912_ca8fb85d",
+      "revId": "b8e33cdd08e56b164d30f89ae7139d73eaad17e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c57b61d5_ab79cf48",
         "filename": "src/tint/resolver/resolver.cc",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2022-08-09T02:14:33Z",
       "side": 1,
       "message": "This changes the behaviour of the method, but the docs weren\u0027t updated. I also think the logic is wrong (see below).",
+      "revId": "b8e33cdd08e56b164d30f89ae7139d73eaad17e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e7a6052_7855cc3b",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1402,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-09T14:26:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c57b61d5_ab79cf48",
       "revId": "b8e33cdd08e56b164d30f89ae7139d73eaad17e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

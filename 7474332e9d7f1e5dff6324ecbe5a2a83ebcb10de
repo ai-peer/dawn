@@ -52,6 +52,24 @@
       "parentUuid": "bd1dfd69_2d581336",
       "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "116b5bf6_5c30c8f6",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1454,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-09T14:26:01Z",
+      "side": 0,
+      "message": "I don\u0027t think you lead me down this path, actually, so no cone of shame needed.",
+      "parentUuid": "4defba16_05877a17",
+      "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
