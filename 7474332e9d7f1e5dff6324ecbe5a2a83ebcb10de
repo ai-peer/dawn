@@ -34,6 +34,24 @@
       "parentUuid": "777fe398_b23a583d",
       "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4defba16_05877a17",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1454,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-09T02:37:58Z",
+      "side": 0,
+      "message": "Sounds like we\u0027re in agreement.\n\nSorry for leading you down this path. I should have spent more time reading through the chat history before asserting that this should be handled by materialization.\n\nAI -\u003e AF is a subtle edge case which I clearly have entirely neglected.\n\nI\u0027ll put on my cone of shame.",
+      "parentUuid": "bd1dfd69_2d581336",
+      "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
