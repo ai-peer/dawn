@@ -16,6 +16,23 @@
       "message": "Still LGTM. Austin?",
       "revId": "71c8ef9b0f74b396b62dc67d5f8acd0c54a9c515",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37ab3e7b_4c9c81e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-09T15:45:57Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "71c8ef9b0f74b396b62dc67d5f8acd0c54a9c515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
