@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "345a2427_30ca69ab",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-09T06:53:08Z",
+      "side": 1,
+      "message": "The change here should be more accurate after re-examining the spec carefully.",
+      "range": {
+        "startLine": 982,
+        "startChar": 0,
+        "endLine": 989,
+        "endChar": 52
+      },
+      "revId": "cebb32d892b481ba2350431a1146cb6f64ab2d08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56e80785_46bb823b",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-09T06:53:08Z",
+      "side": 1,
+      "message": "This change really matters. Without it, we would run into this error:\n```\n[ RUN      ] VulkanImageWrappingUsageTests.SRGBReinterpretation/Vulkan_GeForce_GTX_1660\nError: Validation Error: [ SYNC-HAZARD-READ_AFTER_WRITE ] Object 0: handle \u003d 0xacdff00000acdff, name \u003d DawnDbg\u003d3507;Dawn_TextureView, type \u003d VK_OBJECT_TYPE_IMAGE_VIEW; | MessageID \u003d 0x4cb75b2d | vkCmdDraw: Hazard READ_AFTER_WRITE for VkImageView 0xacdff00000acdff[DawnDbg\u003d3507;Dawn_TextureView], in VkCommandBuffer 0x34d40b164050[], and VkPipeline 0xace0a00000ace0a[DawnDbg\u003d3507;Dawn_RenderPipeline], VkDescriptorSet 0xad00b00000ad00b[DawnDbg\u003d3507;Dawn_BindGroup], type: VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, imageLayout: VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, binding #0, index 0. Access info (usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, prior_usage: SYNC_IMAGE_LAYOUT_TRANSITION, write_barriers: 0, command: vkCmdPipelineBarrier, seq_no: 1, reset_no: 1).\nunknown file: Failure\n```\n\nIt makes sense to me as the mask is actually for image layout transition and the previous barrier is for queue ownership transfer.",
+      "range": {
+        "startLine": 1005,
+        "startChar": 12,
+        "endLine": 1005,
+        "endChar": 65
+      },
+      "revId": "cebb32d892b481ba2350431a1146cb6f64ab2d08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "155b7082_8bc0f1db",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-09T06:53:08Z",
+      "side": 1,
+      "message": "Parameterize these tests wouldn\u0027t help too much as they just validation tests.",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 0
+      },
+      "revId": "cebb32d892b481ba2350431a1146cb6f64ab2d08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0e4fc4e_cdcce405",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-09T06:53:08Z",
+      "side": 1,
+      "message": "For these usage tests, the provided layouts are intentionally meant. we shouldn\u0027t parameterize them with undefined layout.",
+      "range": {
+        "startLine": 317,
+        "startChar": 46,
+        "endLine": 317,
+        "endChar": 82
+      },
+      "revId": "cebb32d892b481ba2350431a1146cb6f64ab2d08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0326f034_d548f376",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-09T06:53:08Z",
+      "side": 1,
+      "message": "The case here covers \u0027EagerTransition\u0027 remarkably well. Before exporting, there are 2 submits of different usages.",
+      "range": {
+        "startLine": 628,
+        "startChar": 0,
+        "endLine": 635,
+        "endChar": 0
+      },
+      "revId": "cebb32d892b481ba2350431a1146cb6f64ab2d08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
