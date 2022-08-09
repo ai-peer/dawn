@@ -327,6 +327,30 @@
       },
       "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4c803f6_9a00bfa0",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-09T07:48:45Z",
+      "side": 1,
+      "message": "Another simpler idea is to just check the `size` of `CopyFromStagingToBuffer`, we would not set `mRecordingContext.used` if it\u0027s really small, for example, less than 512 or 1024. So even there are thousands of such copies, they are still insignificant for OOM. How do you like it?\n\n```\nMaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,\n                                           uint64_t sourceOffset,\n                                           BufferBase* destination,\n                                           uint64_t destinationOffset,\n                                           uint64_t size) {\n    // It is a validation error to do a 0-sized copy in Vulkan, check it is skipped prior to\n    // calling this function.\n    ASSERT(size !\u003d 0);\n\n    CommandRecordingContext* recordingContext \u003d GetPendingRecordingContext();\n\n    ToBackend(destination)\n        -\u003eEnsureDataInitializedAsDestination(recordingContext, destinationOffset, size);\n\n    // There is no need of a barrier to make host writes available and visible to the copy\n    // operation for HOST_COHERENT memory. The Vulkan spec for vkQueueSubmit describes that it\n    // does an implicit availability, visibility and domain operation.\n\n    // Insert pipeline barrier to ensure correct ordering with previous memory operations on the\n    // buffer.\n    ToBackend(destination)-\u003eTransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);\n\n    VkBufferCopy copy;\n    copy.srcOffset \u003d sourceOffset;\n    copy.dstOffset \u003d destinationOffset;\n    copy.size \u003d size;\n\n    this-\u003efn.CmdCopyBuffer(recordingContext-\u003ecommandBuffer, ToBackend(source)-\u003eGetBufferHandle(),\n                           ToBackend(destination)-\u003eGetHandle(), 1, \u0026copy);\n\n    return {};\n}\n```",
+      "parentUuid": "1468e2dc_5338233b",
+      "range": {
+        "startLine": 190,
+        "startChar": 13,
+        "endLine": 191,
+        "endChar": 74
+      },
+      "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
