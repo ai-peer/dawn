@@ -50,6 +50,24 @@
       "message": "Not for this CL, but how difficult would it be to have blanket implementations of Write, Read and FromBlob when there\u0027s a visitable struct?",
       "revId": "c4507302c5aa84920e6e3de0c42b49a56c7ce102",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87ae3e2d_ae173b67",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-09T15:27:48Z",
+      "side": 1,
+      "message": "yea that would be nice; I\u0027ll look into it",
+      "parentUuid": "5449a5a3_750bfd1c",
+      "revId": "c4507302c5aa84920e6e3de0c42b49a56c7ce102",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
