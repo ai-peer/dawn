@@ -16,6 +16,75 @@
       "message": "PTAL!",
       "revId": "3b3b29c017f956cf25f2efdf42c5b038b9cf2c4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23fe8510_ae6ce866",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-09T00:15:16Z",
+      "side": 1,
+      "message": "Wait... I think I might\u0027ve asked a similar question in the other caching CL before also, but idr the answer... Why do these need to be friends again? (Or do they?) Also wondering if some of these could just be in the .cc file instead of the header if we don\u0027t need them?",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 67
+      },
+      "revId": "3b3b29c017f956cf25f2efdf42c5b038b9cf2c4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e5eee72_64298245",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-09T00:15:16Z",
+      "side": 1,
+      "message": "nit. Maybe not as relevant for us, but in general I think style guide suggests putting these into the .cc file unless we absolutely need them? (https://google.github.io/styleguide/cppguide.html#Namespaces)",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 0
+      },
+      "revId": "3b3b29c017f956cf25f2efdf42c5b038b9cf2c4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17d3fb99_abed416f",
+        "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-09T00:15:16Z",
+      "side": 1,
+      "message": "nit. The comment and the if block below don\u0027t match and can be a bit confusing.\n\ni.e. this would be a bit easier to follow:\n```\nif (IsMetal() || IsVulkan()) {\n  blah\n} else {\n  blah\n}\n```",
+      "range": {
+        "startLine": 590,
+        "startChar": 4,
+        "endLine": 590,
+        "endChar": 26
+      },
+      "revId": "3b3b29c017f956cf25f2efdf42c5b038b9cf2c4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
