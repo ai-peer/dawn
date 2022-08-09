@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3d19cf0_0e4c79bf",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-09T15:26:20Z",
+      "side": 1,
+      "message": "hm, the glob is also appending all matching things in the glob to the output - see [1]",
+      "parentUuid": "84cfef8f_172a8b21",
+      "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15b6ca7c_a4c30354",
         "filename": "tools/src/cts/expectations/update.go",
         "patchSetId": 1
@@ -48,6 +66,47 @@
       "writtenOn": "2022-08-09T13:04:30Z",
       "side": 1,
       "message": "I\u0027m trying to understand what this gains us. Is it that it is ok for queries to have intersecting tags as long as the intersecting tags aren\u0027t in any tag set?",
+      "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d32d780_19445490",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-09T15:26:20Z",
+      "side": 1,
+      "message": "I think the most helpful thing it gives us is you can now do:\n\nfoo:* [ RetryOnFailure Slow ]\nfoo:bar:* [ Failure ]\n\nwith the current algorithm, you need to split the first one up into all children (which is kinda the problem we had with the old CTS harness as well)\n\ntyp says that the test pattern needs to match exactly for it to be considered conflicting",
+      "parentUuid": "15b6ca7c_a4c30354",
+      "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b37ab78_108bf019",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-09T15:26:20Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 199,
+        "endChar": 29
+      },
       "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
