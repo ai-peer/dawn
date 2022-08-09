@@ -97,11 +97,10 @@ ResultOrError<UploadHandle> UploadTextureDataAligningBytesPerRowAndOffset(
     // since both of them are powers of two, we only need to align to the max value.
     uint64_t offsetAlignment = std::max(optimalOffsetAlignment, uint64_t(blockInfo.byteSize));
 
-    // For depth-stencil texture, buffer offset must be a multiple of 4, which is required
-    // by WebGPU and Vulkan SPEC.
+    // Buffer offset aligments must follow additional restrictions.
     if (hasDepthOrStencil) {
-        constexpr uint64_t kOffsetAlignmentForDepthStencil = 4;
-        offsetAlignment = std::max(offsetAlignment, kOffsetAlignmentForDepthStencil);
+        offsetAlignment =
+            std::max(offsetAlignment, device->GetBufferCopyOffsetAlignmentForDepthStencil());
     }
 
     UploadHandle uploadHandle;
