@@ -112,6 +112,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "414eea4e_dc3aec28",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-09T16:51:44Z",
+      "side": 1,
+      "message": "Ah oops I linked the wrong section in the style guide... https://google.github.io/styleguide/cppguide.html#Aliases\n\nBut yea, if it\u0027s being used elsewhere it is probably fine to keep.",
+      "parentUuid": "a371d7d7_f3423072",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 0
+      },
+      "revId": "3b3b29c017f956cf25f2efdf42c5b038b9cf2c4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17d3fb99_abed416f",
