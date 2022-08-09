@@ -965,29 +965,8 @@ void Texture::TweakTransitionForExternalUsage(CommandRecordingContext* recording
             barrier->oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
             barrier->newLayout = desiredLayout;
         } else {
-            barrier->oldLayout = mPendingAcquireOldLayout;
-            barrier->newLayout = mPendingAcquireNewLayout;
-        }
-
-        // If these are unequal, we need an another barrier to transition the layout.
-        if (barrier->newLayout != desiredLayout) {
-            VkImageMemoryBarrier layoutBarrier;
-            layoutBarrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
-            layoutBarrier.pNext = nullptr;
-            layoutBarrier.image = GetHandle();
-            layoutBarrier.subresourceRange = barrier->subresourceRange;
-
-            // Transition from the acquired new layout to the desired layout.
-            layoutBarrier.oldLayout = barrier->newLayout;
-            layoutBarrier.newLayout = desiredLayout;
-
-            // We already transitioned these.
-            layoutBarrier.srcAccessMask = 0;
-            layoutBarrier.dstAccessMask = 0;
-            layoutBarrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-            layoutBarrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-
-            barriers->push_back(layoutBarrier);
+            barrier->oldLayout = mPendingAcquireNewLayout;
+            barrier->newLayout = desiredLayout;
         }
 
         mExternalState = ExternalState::Acquired;
