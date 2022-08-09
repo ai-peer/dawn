@@ -490,6 +490,24 @@
       "parentUuid": "184e7a05_173980aa",
       "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf69a096_4b80070f",
+        "filename": "src/tint/transform/mat2_to_vec2_test.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-09T07:43:00Z",
+      "side": 1,
+      "message": "Writes are where all the complexity lies.\n\nWhile I\u0027m a strong proponent for small incremental changes, I\u0027d really like to see how writes will work with this approach before landing. We also need to ensure that landing this in it\u0027s partial state is safe, and will not cause the fuzzers to start filing release blocker bugs. To do this, we need tests for the write cases, and mixed `uniform`, `storage` and plain struct cases.",
+      "parentUuid": "f0f02a90_001c5123",
+      "revId": "3fc6d3b9f051a3029a2b0a8abc60776e8dd93751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
