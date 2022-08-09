@@ -106,6 +106,24 @@
       "parentUuid": "61aa9933_ba810942",
       "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7b19a3b_2240b15e",
+        "filename": "src/tint/transform/remove_phonies.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-09T14:27:52Z",
+      "side": 1,
+      "message": "I guess so, but a builtin with side-effects would be quite a can of worms. We\u0027d be entering C++ constexpr land. Anyway, okay, I\u0027ll add the extra check.",
+      "parentUuid": "7ddb2541_dc142730",
+      "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
