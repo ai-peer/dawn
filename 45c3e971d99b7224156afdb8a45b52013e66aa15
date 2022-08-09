@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "472dca9a_805ff9ba",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-08-09T00:43:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62f7ee4c_1789ca23",
+      "revId": "45c3e971d99b7224156afdb8a45b52013e66aa15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "300f0120_9a9b77e9",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-08-08T08:50:57Z",
       "side": 1,
       "message": "Since the pipeline created depends on the color attachment count, shouldn\u0027t that count be part of the key?",
+      "revId": "45c3e971d99b7224156afdb8a45b52013e66aa15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96015057_ad6934e3",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-08-09T00:43:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "300f0120_9a9b77e9",
       "revId": "45c3e971d99b7224156afdb8a45b52013e66aa15",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f21205e_ef0e03eb",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-08-09T00:43:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fed1fc2e_0db3d803",
+      "revId": "45c3e971d99b7224156afdb8a45b52013e66aa15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85d386b4_fe2b37ea",
@@ -99,6 +153,30 @@
       "writtenOn": "2022-08-08T08:50:57Z",
       "side": 1,
       "message": "u-nit: I think the device could be const as well.",
+      "range": {
+        "startLine": 46,
+        "startChar": 50,
+        "endLine": 46,
+        "endChar": 60
+      },
+      "revId": "45c3e971d99b7224156afdb8a45b52013e66aa15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "932055c1_4b753ecd",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-08-09T00:43:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85d386b4_fe2b37ea",
       "range": {
         "startLine": 46,
         "startChar": 50,
