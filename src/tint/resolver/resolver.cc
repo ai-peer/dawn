@@ -1471,6 +1471,36 @@ bool Resolver::ShouldMaterializeArgument(const sem::Type* parameter_ty) const {
     return param_el_ty && !param_el_ty->Is<sem::AbstractNumeric>();
 }
 
+bool Resolver::ConvertAbstract(const sem::Constant*& c,
+                               const sem::Type* target_ty,
+                               const Source& source) {
+    auto is_abstract_ty = [](const sem::Type* ty) {
+        const auto* el_ty = sem::Type::DeepestElementOf(ty);
+        return el_ty && el_ty->Is<sem::AbstractNumeric>();
+    };
+    if (is_abstract_ty(c->Type()) && is_abstract_ty(target_ty)) {
+        auto r = const_eval_.Convert(target_ty, c, source);
+        if (!r) {
+            return false;
+        }
+        c = r.Get();
+    }
+    return true;
+}
+
+utils::Result<utils::Vector<const sem::Constant*, 5>> Resolver::ConvertAbstractArgs(
+    utils::VectorRef<const sem::Expression*> args,
+    const sem::CallTarget* target) {
+    auto const_args = utils::Transform<5>(args, [](auto* arg) { return arg->ConstantValue(); });
+    for (size_t i = 0, n = std::min(args.Length(), target->Parameters().Length()); i < n; i++) {
+        if (!ConvertAbstract(const_args[i], target->Parameters()[i]->Type(),
+                             args[i]->Declaration()->source)) {
+            return utils::Failure;
+        }
+    }
+    return std::move(const_args);
+}
+
 sem::Expression* Resolver::IndexAccessor(const ast::IndexAccessorExpression* expr) {
     auto* idx = Materialize(sem_.Get(expr->index));
     if (!idx) {
@@ -1908,9 +1938,12 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
     // If the builtin is @const, and all arguments have constant values, evaluate the builtin now.
     const sem::Constant* value = nullptr;
     if (stage == sem::EvaluationStage::kConstant) {
-        auto const_args = utils::Transform(args, [](auto* arg) { return arg->ConstantValue(); });
-        if (auto r = (const_eval_.*builtin.const_eval_fn)(builtin.sem->ReturnType(), const_args,
-                                                          CombineSource(args))) {
+        auto const_args = ConvertAbstractArgs(args, builtin.sem);
+        if (!const_args) {
+            return nullptr;
+        }
+        if (auto r = (const_eval_.*builtin.const_eval_fn)(builtin.sem->ReturnType(),
+                                                          const_args.Get(), CombineSource(args))) {
             value = r.Get();
         } else {
             return nullptr;
@@ -2317,6 +2350,12 @@ sem::Expression* Resolver::Binary(const ast::BinaryExpression* expr) {
     if (stage == sem::EvaluationStage::kConstant) {
         if (op.const_eval_fn) {
             auto const_args = utils::Vector{lhs->ConstantValue(), rhs->ConstantValue()};
+            if (!ConvertAbstract(const_args[0], op.result, lhs->Declaration()->source)) {
+                return nullptr;
+            }
+            if (!ConvertAbstract(const_args[1], op.result, rhs->Declaration()->source)) {
+                return nullptr;
+            }
             if (auto r = (const_eval_.*op.const_eval_fn)(op.result, const_args,
                                                          CombineSource(utils::Vector{lhs, rhs}))) {
                 value = r.Get();
