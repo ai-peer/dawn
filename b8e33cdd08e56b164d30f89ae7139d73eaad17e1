@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c57b61d5_ab79cf48",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1402,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-09T02:14:33Z",
+      "side": 1,
+      "message": "This changes the behaviour of the method, but the docs weren\u0027t updated. I also think the logic is wrong (see below).",
+      "revId": "b8e33cdd08e56b164d30f89ae7139d73eaad17e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "777fe398_b23a583d",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1454,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-09T02:14:33Z",
+      "side": 0,
+      "message": "I think the removal of this function is breaking logic.\n\nConsider a function that has a `AbstractFloat` parameter, and you pass it an `AbstractInt`. Previously we wouldn\u0027t materialize (which is correct behaviour, as materialization is the conversion of abstract to non-abstract), but now we do. Re-reading the chat room, I can see that I led you down this path, as I thought the thread was only discussing the `AbstractInt` -\u003e `f32` cases, but the `AbstractInt` -\u003e `AbstractFloat` implicit conversion can\u0027t be handled by materialization (there are large assumptions by the later stages around materialization). Sorry about that.\n\nI suggest we change the `ConstEval` signature to take a list of `sem::Constant` values instead of `sem::Expression`s, and have the Resolver do the implicit cast before calling the `ConstEval` function. This is similar to materialization, but does not change the `sem` output, aside from the constant values.",
+      "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
