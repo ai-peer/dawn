@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d18bb13_1a2fea7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-09T12:34:12Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "c4507302c5aa84920e6e3de0c42b49a56c7ce102",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5449a5a3_750bfd1c",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-09T12:34:12Z",
+      "side": 1,
+      "message": "Not for this CL, but how difficult would it be to have blanket implementations of Write, Read and FromBlob when there\u0027s a visitable struct?",
+      "revId": "c4507302c5aa84920e6e3de0c42b49a56c7ce102",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
