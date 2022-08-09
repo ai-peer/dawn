@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d368169f_034e6312",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-09T05:08:40Z",
+      "side": 1,
+      "message": "oh you\u0027re right - we don\u0027t need them; removed.",
+      "parentUuid": "23fe8510_ae6ce866",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 67
+      },
+      "revId": "3b3b29c017f956cf25f2efdf42c5b038b9cf2c4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e5eee72_64298245",
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a371d7d7_f3423072",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-09T05:08:40Z",
+      "side": 1,
+      "message": "well, I checked and I removed `BindingInfoArrayTable` as it is never used. I kept CombinedSamplerInfo since it\u0027s used in a few other .cpp files.\n\nI\u0027m not sure which part of the style guide you\u0027re referring to though - it seems to say not to put \"using namespace\" inside a .h file, but this is an alias of a type, not a using of a namespace.",
+      "parentUuid": "7e5eee72_64298245",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 0
+      },
+      "revId": "3b3b29c017f956cf25f2efdf42c5b038b9cf2c4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "17d3fb99_abed416f",
         "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
         "patchSetId": 2
@@ -77,6 +125,30 @@
       "writtenOn": "2022-08-09T00:15:16Z",
       "side": 1,
       "message": "nit. The comment and the if block below don\u0027t match and can be a bit confusing.\n\ni.e. this would be a bit easier to follow:\n```\nif (IsMetal() || IsVulkan()) {\n  blah\n} else {\n  blah\n}\n```",
+      "range": {
+        "startLine": 590,
+        "startChar": 4,
+        "endLine": 590,
+        "endChar": 26
+      },
+      "revId": "3b3b29c017f956cf25f2efdf42c5b038b9cf2c4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7d9ac24_0ef2a88d",
+        "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-09T05:08:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17d3fb99_abed416f",
       "range": {
         "startLine": 590,
         "startChar": 4,
