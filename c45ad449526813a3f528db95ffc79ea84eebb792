@@ -50,6 +50,24 @@
       "message": "nit: it\u0027s a bit weird that this function returns -1/0/1 when the comparison function in sort.Slice returns a boolean.",
       "revId": "c45ad449526813a3f528db95ffc79ea84eebb792",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "502f9ee0_33196b63",
+        "filename": "tools/src/cts/expectations/expectations.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-09T16:07:13Z",
+      "side": 1,
+      "message": "I\u0027m not too familiar with the style for go, but I just followed what was done in the repo: https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/tools/src/cts/result/result.go;l\u003d64 and https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/tools/src/cts/result/result.go;l\u003d236\n\nLmk if you still want me to change this otherwise will submit as is.",
+      "parentUuid": "320204e6_53398711",
+      "revId": "c45ad449526813a3f528db95ffc79ea84eebb792",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
