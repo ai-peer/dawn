@@ -68,6 +68,24 @@
       "parentUuid": "320204e6_53398711",
       "revId": "c45ad449526813a3f528db95ffc79ea84eebb792",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8540b3c_30dfd66f",
+        "filename": "tools/src/cts/expectations/expectations.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-09T16:31:22Z",
+      "side": 1,
+      "message": "I\u0027m not sure what\u0027s the best style in go either. Let\u0027s go with it then.",
+      "parentUuid": "502f9ee0_33196b63",
+      "revId": "c45ad449526813a3f528db95ffc79ea84eebb792",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
