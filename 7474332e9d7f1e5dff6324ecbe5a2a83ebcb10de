@@ -52,6 +52,24 @@
       "parentUuid": "a67148da_cf131ee0",
       "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2b3931a_357f7a42",
+        "filename": "src/tint/transform/remove_phonies.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-09T13:46:22Z",
+      "side": 1,
+      "message": "Don\u0027t you also need to check that the call statement doesn\u0027t have side effects? This seems like it\u0027s unconditionally removing any call regardless of if it could have side effects?",
+      "parentUuid": "91d3f7f7_fc2daa0f",
+      "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
