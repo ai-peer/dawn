@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3591e06_d70c318a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-09T02:11:20Z",
+      "side": 1,
+      "message": "I reworked this so that it only tests the builtins that already returned true for HasSideEffects (i.e. the builtins that modify memory). We can discuss whether to also include builtins that affect uniformity later.",
+      "revId": "9c0fd52c1048326b265c72116677ac9e8c98de7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
