@@ -88,6 +88,24 @@
       "parentUuid": "a2b3931a_357f7a42",
       "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ddb2541_dc142730",
+        "filename": "src/tint/transform/remove_phonies.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-08-09T14:26:07Z",
+      "side": 1,
+      "message": "That is currently true, but what happens if we add a builtin which has side effects and returns a value? Seems safer to check here for side effects which should always be true currently?",
+      "parentUuid": "61aa9933_ba810942",
+      "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
