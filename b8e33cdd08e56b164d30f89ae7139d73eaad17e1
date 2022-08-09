@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e9c2ba2_53553b6f",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-09T22:15:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95964115_81bbd161",
+      "revId": "b8e33cdd08e56b164d30f89ae7139d73eaad17e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c57b61d5_ab79cf48",
