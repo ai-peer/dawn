@@ -16,6 +16,40 @@
       "message": "Forwarding to Corentin since Ben is OOO and Corentin is also next gardener. (I want to get the child CL roll in asap from last week)",
       "revId": "c45ad449526813a3f528db95ffc79ea84eebb792",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "197bc489_7b18c741",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-09T12:54:56Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c45ad449526813a3f528db95ffc79ea84eebb792",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "320204e6_53398711",
+        "filename": "tools/src/cts/expectations/expectations.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-09T12:54:56Z",
+      "side": 1,
+      "message": "nit: it\u0027s a bit weird that this function returns -1/0/1 when the comparison function in sort.Slice returns a boolean.",
+      "revId": "c45ad449526813a3f528db95ffc79ea84eebb792",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
