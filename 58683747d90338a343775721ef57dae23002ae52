@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b4141c2_c986f165",
+        "filename": "src/tint/resolver/side_effects_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-09T13:53:43Z",
+      "side": 1,
+      "message": "You could just assign the defaults in the struct which remove the need for the defaults in the constructor.",
+      "parentUuid": "a74045a2_aa6d8c1d",
+      "revId": "58683747d90338a343775721ef57dae23002ae52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "243148d8_d4e3dcaa",
