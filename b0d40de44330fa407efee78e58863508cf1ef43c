@@ -351,6 +351,30 @@
       },
       "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "953e9c4c_52c4a90a",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-09T13:34:22Z",
+      "side": 1,
+      "message": "Instrumenting CopyFromStagingToBuffer/Texture probably works, though it\u0027d be nice to count how many bytes are used so even many small uploads result in a flush.",
+      "parentUuid": "a4c803f6_9a00bfa0",
+      "range": {
+        "startLine": 190,
+        "startChar": 13,
+        "endLine": 191,
+        "endChar": 74
+      },
+      "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
