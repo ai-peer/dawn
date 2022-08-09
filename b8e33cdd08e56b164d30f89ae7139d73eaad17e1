@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "47078912_ca8fb85d",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-09T13:51:53Z",
+      "side": 1,
+      "message": "Why is this listed in both don\u0027t materialize and materialize abstract?",
+      "revId": "b8e33cdd08e56b164d30f89ae7139d73eaad17e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c57b61d5_ab79cf48",
         "filename": "src/tint/resolver/resolver.cc",
         "patchSetId": 2
