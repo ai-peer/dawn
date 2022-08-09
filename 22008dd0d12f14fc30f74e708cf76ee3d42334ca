@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bc2d7ef_8d85f2f9",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-09T20:31:31Z",
+      "side": 1,
+      "message": "This version handles basic assignments, but not more tricky ones. Just wondering if I\u0027m on the right track here.",
+      "revId": "22008dd0d12f14fc30f74e708cf76ee3d42334ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39a4fe92_9a33d03b",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-09T20:31:31Z",
+      "side": 1,
+      "message": "Is this correct? I\u0027m using this to avoid the decomposition of the LHS that the previous ReplaceAll() call would do.",
+      "revId": "22008dd0d12f14fc30f74e708cf76ee3d42334ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e77e3c53_82b66e96",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-09T20:31:31Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "22008dd0d12f14fc30f74e708cf76ee3d42334ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdb0cd4b_725c533b",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-09T20:31:31Z",
+      "side": 1,
+      "message": "Is it correct that I should replace the one assignment with a block? I don\u0027t think I can replace it with multiple statements, unless I insert the first N-1 and then return the last one as the replacement, or something like that.",
+      "revId": "22008dd0d12f14fc30f74e708cf76ee3d42334ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
