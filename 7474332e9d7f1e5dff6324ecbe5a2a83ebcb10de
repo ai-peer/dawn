@@ -70,6 +70,24 @@
       "parentUuid": "91d3f7f7_fc2daa0f",
       "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61aa9933_ba810942",
+        "filename": "src/tint/transform/remove_phonies.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-09T14:18:29Z",
+      "side": 1,
+      "message": "The only call statements that can return a constant value are builtins that have no side effects.",
+      "parentUuid": "a2b3931a_357f7a42",
+      "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
