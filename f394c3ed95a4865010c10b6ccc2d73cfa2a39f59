@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7495dde_e22426fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-09T16:30:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84cfef8f_172a8b21",
@@ -49,6 +66,24 @@
       "side": 1,
       "message": "hm, the glob is also appending all matching things in the glob to the output - see [1]",
       "parentUuid": "84cfef8f_172a8b21",
+      "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62988303_0497f0be",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-09T16:30:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f3d19cf0_0e4c79bf",
       "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7cf6c1d_1736c978",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-09T16:30:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9d32d780_19445490",
+      "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b37ab78_108bf019",
@@ -101,6 +154,30 @@
       "writtenOn": "2022-08-09T15:26:20Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 199,
+        "endChar": 29
+      },
+      "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74d924fd_585e9b5a",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-09T16:30:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0b37ab78_108bf019",
       "range": {
         "startLine": 199,
         "startChar": 0,
