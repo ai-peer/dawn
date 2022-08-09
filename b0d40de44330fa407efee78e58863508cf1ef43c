@@ -279,6 +279,30 @@
       },
       "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dabd45d_ce702700",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-09T01:06:02Z",
+      "side": 1,
+      "message": "I agree with the byte counting `.needSubmit` suggestion. Probably would want to check against the threshold before each internal queue-ing, and maybe flushing before if we would hit it?",
+      "parentUuid": "d787150e_8170f7ec",
+      "range": {
+        "startLine": 190,
+        "startChar": 13,
+        "endLine": 191,
+        "endChar": 74
+      },
+      "revId": "b0d40de44330fa407efee78e58863508cf1ef43c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
