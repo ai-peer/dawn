@@ -34,6 +34,24 @@
       "parentUuid": "3f16e0e9_36f98571",
       "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91d3f7f7_fc2daa0f",
+        "filename": "src/tint/transform/remove_phonies.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-09T02:01:53Z",
+      "side": 1,
+      "message": "Just to add more clarity: const values are usually materialized by the Resolver, say in assignments to variables, args to functions, etc. But some do not get materialized, like those assigned to phonies, and as the result of call statements (assigned to nothing). We can think of the latter case as a an implicit phony assignment, which is why I think it\u0027s okay to handle this case here.",
+      "parentUuid": "a67148da_cf131ee0",
+      "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
