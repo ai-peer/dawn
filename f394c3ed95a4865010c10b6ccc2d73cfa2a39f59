@@ -16,6 +16,40 @@
       "message": "I made some manual changes to the expectations file while triaging issues last week. And, the conflict detection kept tripping me up. I think we should make it match what typ does (more permissive), but not 100% sure how this will impact the rest of the roller - but I didn\u0027t get any errors when I tried it and from what I can tell, it should be fine. Do you know?\n",
       "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84cfef8f_172a8b21",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-09T13:04:30Z",
+      "side": 1,
+      "message": "nit: using Glob here just to get the QueryData for q is a bit overkill. What do you think of adding a `func (t *Tree[Data]) At(q Query) (*QueryData[Data], err)` (and some simple unittests in tree_test.go)?",
+      "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15b6ca7c_a4c30354",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-09T13:04:30Z",
+      "side": 1,
+      "message": "I\u0027m trying to understand what this gains us. Is it that it is ok for queries to have intersecting tags as long as the intersecting tags aren\u0027t in any tag set?",
+      "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
