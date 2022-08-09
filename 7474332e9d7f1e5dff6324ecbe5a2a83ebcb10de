@@ -16,6 +16,24 @@
       "message": "I think the removal of this function is breaking logic.\n\nConsider a function that has a `AbstractFloat` parameter, and you pass it an `AbstractInt`. Previously we wouldn\u0027t materialize (which is correct behaviour, as materialization is the conversion of abstract to non-abstract), but now we do. Re-reading the chat room, I can see that I led you down this path, as I thought the thread was only discussing the `AbstractInt` -\u003e `f32` cases, but the `AbstractInt` -\u003e `AbstractFloat` implicit conversion can\u0027t be handled by materialization (there are large assumptions by the later stages around materialization). Sorry about that.\n\nI suggest we change the `ConstEval` signature to take a list of `sem::Constant` values instead of `sem::Expression`s, and have the Resolver do the implicit cast before calling the `ConstEval` function. This is similar to materialization, but does not change the `sem` output, aside from the constant values.",
       "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd1dfd69_2d581336",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1454,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-09T02:22:25Z",
+      "side": 0,
+      "message": "I figured this would be your conclusion. I mentioned it in our standup this morning that you would probably disagree with the change in definition for materialization. \n\nI considered adding code to perform the AInt -\u003e AFloat implicit conversion in the ConstEval class, which is where we extract the sem::Constants, but that didn\u0027t seem right, as the values should be coming in with the correct types already. It makes sense to change the ConstEval API to take sem::Constants instead, so this conversion can just be done in the Resolver, as you said. I suppose we only need to perform this implicit conversion just when we call into the ConstEval callbacks.\n\nI\u0027ll work on this tomorrow. Thanks for the review!",
+      "parentUuid": "777fe398_b23a583d",
+      "revId": "7474332e9d7f1e5dff6324ecbe5a2a83ebcb10de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
