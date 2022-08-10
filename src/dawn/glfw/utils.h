@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_UTILS_GLFWUTILS_H_
-#define SRC_DAWN_UTILS_GLFWUTILS_H_
+#ifndef SRC_DAWN_GLFW_UTILS_H_
+#define SRC_DAWN_GLFW_UTILS_H_
 
 #include <memory>
 
@@ -21,7 +21,7 @@
 
 struct GLFWwindow;
 
-namespace utils {
+namespace wgpu::glfw {
 
 // Does the necessary setup on the GLFWwindow to allow creating a wgpu::Surface with it and
 // calls `instance.CreateSurface` with the correct descriptor for this window.
@@ -33,6 +33,6 @@ wgpu::Surface CreateSurfaceForWindow(const wgpu::Instance& instance, GLFWwindow*
 // avoid using the global proc table.
 std::unique_ptr<wgpu::ChainedStruct> SetupWindowAndGetSurfaceDescriptor(GLFWwindow* window);
 
-}  // namespace utils
+}  // namespace wgpu::glfw
 
-#endif  // SRC_DAWN_UTILS_GLFWUTILS_H_
+#endif  // SRC_DAWN_GLFW_UTILS_H_

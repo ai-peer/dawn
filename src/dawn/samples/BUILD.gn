@@ -48,7 +48,7 @@ static_library("utils") {
 # Template for samples to avoid listing utils as a dep every time
 template("sample") {
   executable(target_name) {
-    deps = [ ":utils" ]
+    deps = [ ":utils", ":glfw" ]
     forward_variables_from(invoker, "*", [ "deps" ])
 
     if (defined(invoker.deps)) {

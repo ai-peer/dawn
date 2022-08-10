@@ -17,7 +17,7 @@
 
 #include "GLFW/glfw3.h"
 #include "dawn/common/Platform.h"
-#include "dawn/utils/GLFWUtils.h"
+#include "dawn/glfw/utils.h"
 
 #if DAWN_PLATFORM_IS(WINDOWS)
 #define GLFW_EXPOSE_NATIVE_WIN32
@@ -30,7 +30,7 @@
 #endif
 #include "GLFW/glfw3native.h"
 
-namespace utils {
+namespace wgpu::glfw {
 
 wgpu::Surface CreateSurfaceForWindow(const wgpu::Instance& instance, GLFWwindow* window) {
     std::unique_ptr<wgpu::ChainedStruct> chainedDescriptor =
@@ -81,4 +81,4 @@ std::unique_ptr<wgpu::ChainedStruct> SetupWindowAndGetSurfaceDescriptor(GLFWwind
 #endif
 }
 
-}  // namespace utils
+}  // namespace wgpu::glfw
