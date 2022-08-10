@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "833f1af0_74549c75",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T20:24:49Z",
+      "side": 1,
+      "message": "Yes, that\u0027s pretty much what `CloneWithoutTransform` is for. 👍",
+      "parentUuid": "b5344e0a_d7cd51c4",
+      "revId": "22008dd0d12f14fc30f74e708cf76ee3d42334ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e77e3c53_82b66e96",
         "filename": "src/tint/transform/mat2_to_vec2.cc",
         "patchSetId": 16
@@ -72,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b90ad95a_64378eb4",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T20:24:49Z",
+      "side": 1,
+      "message": "Touching upon the \"why RHS\" again - I think you\u0027re better off assigning the RHS to a temporary `let`, using a regular `Clone` (it\u0027ll compose the matrix if it\u0027s from a decomposed struct), then index that `let` for the RHS of your decomposed assignment.",
+      "parentUuid": "e77e3c53_82b66e96",
+      "revId": "22008dd0d12f14fc30f74e708cf76ee3d42334ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fdb0cd4b_725c533b",
         "filename": "src/tint/transform/mat2_to_vec2.cc",
         "patchSetId": 16
@@ -83,6 +119,24 @@
       "writtenOn": "2022-08-09T20:31:31Z",
       "side": 1,
       "message": "Is it correct that I should replace the one assignment with a block? I don\u0027t think I can replace it with multiple statements, unless I insert the first N-1 and then return the last one as the replacement, or something like that.",
+      "revId": "22008dd0d12f14fc30f74e708cf76ee3d42334ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dec0fc1f_48f3f79c",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T20:24:49Z",
+      "side": 1,
+      "message": "Antonio will guide you here.",
+      "parentUuid": "fdb0cd4b_725c533b",
       "revId": "22008dd0d12f14fc30f74e708cf76ee3d42334ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

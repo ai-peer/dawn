@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42f028b3_aa13cc69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T20:24:49Z",
+      "side": 1,
+      "message": "Heading in the right direction!",
+      "revId": "d5331583576d15395111f87302726a8fd631b78c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b341345b_60323d69",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T20:24:49Z",
+      "side": 1,
+      "message": "`ast::Struct` derives from `TypeDecl`, so more efficient to loop over `TypeDecls()`.",
+      "range": {
+        "startLine": 50,
+        "startChar": 31,
+        "endLine": 50,
+        "endChar": 51
+      },
+      "revId": "d5331583576d15395111f87302726a8fd631b78c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5160352d_6fa0fb50",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T20:24:49Z",
+      "side": 1,
+      "message": "No need for `const`. `As` does the right thing.",
+      "range": {
+        "startLine": 51,
+        "startChar": 33,
+        "endLine": 51,
+        "endChar": 38
+      },
+      "revId": "d5331583576d15395111f87302726a8fd631b78c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5de4c780_dca9a870",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T20:24:49Z",
+      "side": 1,
+      "message": "We have to be careful of order here. You\u0027re populating this map with a `ReplaceAll`, which will get called in AST order (declaration order), but WGSL now supports arbitrary module scope ordering. You\u0027re probably best off doing a pre-pass like you do in `ShouldRun`. We should also test for out-of-order decl / use.",
+      "range": {
+        "startLine": 66,
+        "startChar": 67,
+        "endLine": 66,
+        "endChar": 77
+      },
+      "revId": "d5331583576d15395111f87302726a8fd631b78c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94105638_fe3722e2",
+        "filename": "src/tint/transform/mat2_to_vec2.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T20:24:49Z",
+      "side": 1,
+      "message": "Why does the RHS need to be a member access?\n\n`str.mat \u003d mat2x3(1f, 2f, 3f, 4f, 5f, 6f)`\n\nneeds splitting into two assignments, and the RHS is not a member access.",
+      "range": {
+        "startLine": 128,
+        "startChar": 14,
+        "endLine": 128,
+        "endChar": 22
+      },
+      "revId": "d5331583576d15395111f87302726a8fd631b78c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
