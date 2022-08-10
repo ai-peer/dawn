@@ -1266,7 +1266,7 @@ MaybeError DeviceBase::Tick() {
         // so that CPU operations waiting on GPU completion can know they don't have to wait.
         // AssumeCommandsComplete will assign the max serial we must tick to in order to
         // fire the awaiting callbacks.
-        if (mCompletedSerial == mLastSubmittedSerial) {
+        if (mCompletedSerial == mLastSubmittedSerial && mCompletedSerial > ExecutionSerial(0)) {
             AssumeCommandsComplete();
         }
 

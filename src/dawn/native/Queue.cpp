@@ -213,6 +213,7 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
     // commands (this is non-observable outside of tests so it's ok to do deviate a bit from the
     // spec).
     TrackTask(std::move(task), GetDevice()->GetPendingCommandSerial());
+    GetDevice()->OnTrackTask();
 
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Queue::APIOnSubmittedWorkDone", "serial",
                  uint64_t(GetDevice()->GetPendingCommandSerial()));
