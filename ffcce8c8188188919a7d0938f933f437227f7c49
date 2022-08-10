@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "ffcce8c8188188919a7d0938f933f437227f7c49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4bc861a_85806f3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2022-08-10T23:00:42Z",
+      "side": 1,
+      "message": "Ah, apparently there was a good reason for not using // before - it evaluates to chromium src/. Will revert those changes.",
+      "revId": "ffcce8c8188188919a7d0938f933f437227f7c49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
