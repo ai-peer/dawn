@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be3edcdb_bdae5eb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-10T01:33:56Z",
+      "side": 1,
+      "message": "This was the idea I had in the meeting today to provide the GLFW utils as a usable target. This lets me use `webgpu_glfw` downstream and delete the duplicated utils code. (I haven\u0027t tested the BUILD.gn files yet, don\u0027t have that config setup on this machine, will test tomorrow).",
+      "revId": "5fe9b3bd62489cdec6d175bc148d161f05eea924",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aabc7bb_bb62194c",
+        "filename": "src/dawn/glfw/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-10T01:33:56Z",
+      "side": 1,
+      "message": "This had to be public to find the dawn/glfw/utils.h header from the include folder. The others work because the dawn/webgpu.h and webgpu_cpp.h are in the `gen` folder which is already in the path.",
+      "revId": "5fe9b3bd62489cdec6d175bc148d161f05eea924",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
