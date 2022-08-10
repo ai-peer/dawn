@@ -16,6 +16,92 @@
       "message": "PTAL\nIt seems okay to use 2M size threshold. But as you can see in PS1, there were some CQ failures(dawn_end2end_tests/SwiftShader), just because of the 64M threshold. If we put the OOM consideration aside, would it be right always not to tag .needsSubmit for WriteTexture/Buffer. I am kind of in doubt about that now.",
       "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "358181e9_ea97c643",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-10T15:26:25Z",
+      "side": 1,
+      "message": "LGTM overall with some questions",
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff8b7ea8_33a6c2e3",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-10T15:26:25Z",
+      "side": 1,
+      "message": "why do we need to move this to be protected? Couldn\u0027t the derived classes call GetDynamicUploader() ?",
+      "range": {
+        "startLine": 418,
+        "startChar": 4,
+        "endLine": 418,
+        "endChar": 54
+      },
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36da255a_78cb3b03",
+        "filename": "src/dawn/native/DynamicUploader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-10T15:26:25Z",
+      "side": 1,
+      "message": "should probably have a more clear name like \"GetTotalAllocatedSize\"\n\nThat said - is this counting what we want? IIUC, `HasTooManyStagingBuffers` is going to return true nearly all of the time. The limit there is 2MB but every ring buffer is at least 4MB large.\n\nShould we instead be counting the amount of bytes that are pending upload instead of the allocated bytes?",
+      "range": {
+        "startLine": 130,
+        "startChar": 26,
+        "endLine": 130,
+        "endChar": 33
+      },
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "817af7d8_5b7a8362",
+        "filename": "src/dawn/native/vulkan/DeviceVk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-10T15:26:25Z",
+      "side": 1,
+      "message": "nit: it\u0027s not that we have too many buffers; it\u0027s that the total size of all the buffers is large and we want to flush it. Perhaps the callsite should do GetDynamicUploader()-\u003eShouldFlush()",
+      "range": {
+        "startLine": 172,
+        "startChar": 12,
+        "endLine": 172,
+        "endChar": 19
+      },
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
