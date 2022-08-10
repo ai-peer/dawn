@@ -62,7 +62,7 @@ class Device final : public DeviceBase {
     RenderPassCache* GetRenderPassCache() const;
     ResourceMemoryAllocator* GetResourceMemoryAllocator() const;
 
-    CommandRecordingContext* GetPendingRecordingContext();
+    CommandRecordingContext* GetPendingRecordingContext(bool needsSubmit = true);
     MaybeError SubmitPendingCommands();
 
     void EnqueueDeferredDeallocation(DescriptorSetAllocator* allocator);
@@ -110,6 +110,8 @@ class Device final : public DeviceBase {
 
     // Used to associate this device with validation layer messages.
     const char* GetDebugPrefix() { return mDebugPrefix.c_str(); }
+
+    void OnTrackTask() override;
 
   private:
     Device(Adapter* adapter, const DeviceDescriptor* descriptor);
