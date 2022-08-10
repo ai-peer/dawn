@@ -29,14 +29,10 @@
 
 namespace dawn::native {
 
+struct CallbackTask;
+
 class QueueBase : public ApiObjectBase {
   public:
-    struct TaskInFlight {
-        virtual ~TaskInFlight();
-        virtual void Finish(dawn::platform::Platform* platform, ExecutionSerial serial) = 0;
-        virtual void HandleDeviceLoss() = 0;
-    };
-
     ~QueueBase() override;
 
     static QueueBase* MakeError(DeviceBase* device);
@@ -63,7 +59,7 @@ class QueueBase : public ApiObjectBase {
                            uint64_t bufferOffset,
                            const void* data,
                            size_t size);
-    void TrackTask(std::unique_ptr<TaskInFlight> task, ExecutionSerial serial);
+    void TrackTask(std::unique_ptr<CallbackTask> task, ExecutionSerial serial);
     void Tick(ExecutionSerial finishedSerial);
     void HandleDeviceLoss();
 
@@ -103,7 +99,7 @@ class QueueBase : public ApiObjectBase {
 
     void SubmitInternal(uint32_t commandCount, CommandBufferBase* const* commands);
 
-    SerialQueue<ExecutionSerial, std::unique_ptr<TaskInFlight>> mTasksInFlight;
+    SerialQueue<ExecutionSerial, std::unique_ptr<CallbackTask>> mTasksInFlight;
 };
 
 }  // namespace dawn::native
