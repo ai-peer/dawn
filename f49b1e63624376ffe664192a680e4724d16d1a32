@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1b4c37a_76bfbbec",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T14:15:52Z",
+      "side": 1,
+      "message": "Yup. Exactly that. The intrinsic table should have already ruled out any other type of argument / parameter pairings. I think. 😊",
+      "parentUuid": "ebda7e93_dd40a87b",
+      "revId": "f49b1e63624376ffe664192a680e4724d16d1a32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6149227_801b9f17",
         "filename": "src/tint/writer/spirv/generator_impl.cc",
         "patchSetId": 4
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Right, this is part of the same CL because I can\u0027t write a unit test like `atan2(1, 1.f)` (with mixed abstract types) without the fix here. However, I can split this out and make the unit test use the type. Will do.",
       "parentUuid": "f6149227_801b9f17",
+      "revId": "f49b1e63624376ffe664192a680e4724d16d1a32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dc4ac65_20ec7c92",
+        "filename": "src/tint/writer/spirv/generator_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T14:15:52Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "ac92e3e0_abb1b5d4",
       "revId": "f49b1e63624376ffe664192a680e4724d16d1a32",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
