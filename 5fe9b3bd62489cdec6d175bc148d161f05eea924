@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "062a5e63_c0b01f68",
+        "filename": "src/dawn/glfw/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-10T13:42:17Z",
+      "side": 1,
+      "message": "It\u0027d definitely be best to not make this public. We could have the header directly in include/dawn/ instead of forwarding like you set up.",
+      "parentUuid": "8aabc7bb_bb62194c",
+      "revId": "5fe9b3bd62489cdec6d175bc148d161f05eea924",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f85fa67_e804e883",
         "filename": "src/dawn/glfw/utils.h",
         "patchSetId": 1
