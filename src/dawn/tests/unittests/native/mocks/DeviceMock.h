@@ -39,11 +39,11 @@ class DeviceMock : public DeviceBase {
                 (size_t),
                 (override));
     MOCK_METHOD(MaybeError,
-                CopyFromStagingToBuffer,
+                CopyFromStagingToBufferImpl,
                 (StagingBufferBase*, uint64_t, BufferBase*, uint64_t, uint64_t),
                 (override));
     MOCK_METHOD(MaybeError,
-                CopyFromStagingToTexture,
+                CopyFromStagingToTextureImpl,
                 (const StagingBufferBase*, const TextureDataLayout&, TextureCopy*, const Extent3D&),
                 (override));
 
@@ -116,6 +116,7 @@ class DeviceMock : public DeviceBase {
     MOCK_METHOD(ResultOrError<ExecutionSerial>, CheckAndUpdateCompletedSerials, (), (override));
     MOCK_METHOD(void, DestroyImpl, (), (override));
     MOCK_METHOD(MaybeError, WaitForIdleForDestruction, (), (override));
+    MOCK_METHOD(bool, HasPendingCommandsImpl, (), (const, override));
 };
 
 }  // namespace dawn::native
