@@ -165,7 +165,7 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
         !mappedAtCreation) {
         CommandRecordingContext* commandRecordingContext;
         DAWN_TRY_ASSIGN(commandRecordingContext,
-                        ToBackend(GetDevice())->GetPendingCommandContext());
+                        ToBackend(GetDevice())->GetPendingCommandContext(false));
 
         DAWN_TRY(ClearBuffer(commandRecordingContext, uint8_t(1u)));
     }
@@ -176,7 +176,7 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
         if (paddingBytes > 0) {
             CommandRecordingContext* commandRecordingContext;
             DAWN_TRY_ASSIGN(commandRecordingContext,
-                            ToBackend(GetDevice())->GetPendingCommandContext());
+                            ToBackend(GetDevice())->GetPendingCommandContext(false));
 
             uint32_t clearSize = paddingBytes;
             uint64_t clearOffset = GetSize();
@@ -359,7 +359,7 @@ MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) 
     // Skip the unnecessary GetPendingCommandContext() call saves an extra fence.
     if (NeedsInitialization()) {
         CommandRecordingContext* commandContext;
-        DAWN_TRY_ASSIGN(commandContext, ToBackend(GetDevice())->GetPendingCommandContext());
+        DAWN_TRY_ASSIGN(commandContext, ToBackend(GetDevice())->GetPendingCommandContext(false));
         DAWN_TRY(EnsureDataInitialized(commandContext));
     }
 

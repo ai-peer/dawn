@@ -35,7 +35,7 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
 
     DAWN_TRY(device->Tick());
 
-    CommandRecordingContext* commandContext = device->GetPendingCommandContext();
+    CommandRecordingContext* commandContext = device->GetPendingCommandContext(true);
 
     TRACE_EVENT_BEGIN0(GetDevice()->GetPlatform(), Recording, "CommandBufferMTL::FillCommands");
     for (uint32_t i = 0; i < commandCount; ++i) {

@@ -21,6 +21,7 @@
 
 #include "dawn/common/Constants.h"
 #include "dawn/native/Buffer.h"
+#include "dawn/native/CallbackTaskManager.h"
 #include "dawn/native/CommandBuffer.h"
 #include "dawn/native/CommandEncoder.h"
 #include "dawn/native/CommandValidation.h"
@@ -130,13 +131,16 @@ ResultOrError<UploadHandle> UploadTextureDataAligningBytesPerRowAndOffset(
     return uploadHandle;
 }
 
-struct SubmittedWorkDone : QueueBase::TaskInFlight {
-    SubmittedWorkDone(WGPUQueueWorkDoneCallback callback, void* userdata)
-        : mCallback(callback), mUserdata(userdata) {}
-    void Finish(dawn::platform::Platform* platform, ExecutionSerial serial) override {
+struct SubmittedWorkDone : CallbackTask {
+    SubmittedWorkDone(WGPUQueueWorkDoneCallback callback,
+                      void* userdata,
+                      dawn::platform::Platform* platform,
+                      ExecutionSerial serial)
+        : mCallback(callback), mUserdata(userdata), mPlatform(platform), mSerial(serial) {}
+    void Finish() override {
         ASSERT(mCallback != nullptr);
-        TRACE_EVENT1(platform, General, "Queue::SubmittedWorkDone::Finished", "serial",
-                     uint64_t(serial));
+        TRACE_EVENT1(mPlatform, General, "Queue::SubmittedWorkDone::Finished", "serial",
+                     uint64_t(mSerial));
         mCallback(WGPUQueueWorkDoneStatus_Success, mUserdata);
         mCallback = nullptr;
     }
@@ -145,11 +149,14 @@ struct SubmittedWorkDone : QueueBase::TaskInFlight {
         mCallback(WGPUQueueWorkDoneStatus_DeviceLost, mUserdata);
         mCallback = nullptr;
     }
+    void HandleShutDown() override { HandleDeviceLoss(); }
     ~SubmittedWorkDone() override = default;
 
   private:
     WGPUQueueWorkDoneCallback mCallback = nullptr;
     void* mUserdata;
+    dawn::platform::Platform* mPlatform = nullptr;
+    ExecutionSerial mSerial;
 };
 
 class ErrorQueue : public QueueBase {
@@ -164,8 +171,6 @@ class ErrorQueue : public QueueBase {
 }  // namespace
 
 // QueueBase
-
-QueueBase::TaskInFlight::~TaskInFlight() {}
 
 QueueBase::QueueBase(DeviceBase* device, const QueueDescriptor* descriptor)
     : ApiObjectBase(device, descriptor->label) {}
@@ -205,8 +210,8 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
         return;
     }
 
-    std::unique_ptr<SubmittedWorkDone> task =
-        std::make_unique<SubmittedWorkDone>(callback, userdata);
+    std::unique_ptr<SubmittedWorkDone> task = std::make_unique<SubmittedWorkDone>(
+        callback, userdata, GetDevice()->GetPlatform(), GetDevice()->GetPendingCommandSerial());
 
     // Technically we only need to wait for previously submitted work but OnSubmittedWorkDone is
     // also used to make sure ALL queue work is finished in tests, so we also wait for pending
@@ -218,9 +223,15 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
                  uint64_t(GetDevice()->GetPendingCommandSerial()));
 }
 
-void QueueBase::TrackTask(std::unique_ptr<TaskInFlight> task, ExecutionSerial serial) {
-    mTasksInFlight.Enqueue(std::move(task), serial);
-    GetDevice()->AddFutureSerial(serial);
+void QueueBase::TrackTask(std::unique_ptr<CallbackTask> task, ExecutionSerial serial) {
+    GetDevice()->ForceEventualFlushOfCommands();
+    // No pending commands after the flush means all previously submitted works are done. So we
+    // can move the tasks to the callback task manager, as they are ready to be called.
+    if (!GetDevice()->HasPendingCommands()) {
+        GetDevice()->GetCallbackTaskManager()->AddCallbackTask(std::move(task));
+    } else {
+        mTasksInFlight.Enqueue(std::move(task), GetDevice()->GetSubmittedWorkDoneSerial());
+    }
 }
 
 void QueueBase::Tick(ExecutionSerial finishedSerial) {
@@ -232,14 +243,16 @@ void QueueBase::Tick(ExecutionSerial finishedSerial) {
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Queue::Tick", "finishedSerial",
                  uint64_t(finishedSerial));
 
-    std::vector<std::unique_ptr<TaskInFlight>> tasks;
+    std::vector<std::unique_ptr<CallbackTask>> tasks;
     for (auto& task : mTasksInFlight.IterateUpTo(finishedSerial)) {
         tasks.push_back(std::move(task));
     }
     mTasksInFlight.ClearUpTo(finishedSerial);
 
+    // Tasks' serials have passed. Move them to the callback task manager. They
+    // are ready to be called.
     for (auto& task : tasks) {
-        task->Finish(GetDevice()->GetPlatform(), finishedSerial);
+        GetDevice()->GetCallbackTaskManager()->AddCallbackTask(std::move(task));
     }
 }
 
@@ -285,8 +298,6 @@ MaybeError QueueBase::WriteBufferImpl(BufferBase* buffer,
     ASSERT(uploadHandle.mappedBuffer != nullptr);
 
     memcpy(uploadHandle.mappedBuffer, data, size);
-
-    device->AddFutureSerial(device->GetPendingCommandSerial());
 
     return device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer, uploadHandle.startOffset,
                                            buffer, bufferOffset, size);
@@ -355,8 +366,6 @@ MaybeError QueueBase::WriteTextureImpl(const ImageCopyTexture& destination,
     textureCopy.aspect = ConvertAspect(format, destination.aspect);
 
     DeviceBase* device = GetDevice();
-
-    device->AddFutureSerial(device->GetPendingCommandSerial());
 
     return device->CopyFromStagingToTexture(uploadHandle.stagingBuffer, passDataLayout,
                                             &textureCopy, writeSizePixel);

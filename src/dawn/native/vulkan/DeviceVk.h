@@ -65,7 +65,7 @@ class Device final : public DeviceBase {
     ResourceMemoryAllocator* GetResourceMemoryAllocator() const;
     external_semaphore::Service* GetExternalSemaphoreService() const;
 
-    CommandRecordingContext* GetPendingRecordingContext();
+    CommandRecordingContext* GetPendingRecordingContext(bool needsSubmit);
     MaybeError SplitRecordingContext(CommandRecordingContext* recordingContext);
     MaybeError SubmitPendingCommands();
 
@@ -114,6 +114,8 @@ class Device final : public DeviceBase {
 
     // Used to associate this device with validation layer messages.
     const char* GetDebugPrefix() { return mDebugPrefix.c_str(); }
+
+    void ForceEventualFlushOfCommands() override;
 
   private:
     Device(Adapter* adapter,
@@ -171,6 +173,7 @@ class Device final : public DeviceBase {
 
     void DestroyImpl() override;
     MaybeError WaitForIdleForDestruction() override;
+    bool HasPendingCommandsImpl() const override;
 
     // To make it easier to use fn it is a public const member. However
     // the Device is allowed to mutate them through these private methods.
