@@ -705,7 +705,7 @@ MaybeError Texture::InitializeAsInternalTexture(VkImageUsageFlags extraUsages) {
         "BindImageMemory"));
 
     if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
-        DAWN_TRY(ClearTexture(ToBackend(GetDevice())->GetPendingRecordingContext(),
+        DAWN_TRY(ClearTexture(ToBackend(GetDevice())->GetPendingRecordingContext(true),
                               GetAllSubresources(), TextureBase::ClearValue::NonZero));
     }
 
@@ -859,7 +859,7 @@ MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
                                             // the barrier happens-before any usage in the
                                             // importing queue.
 
-    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext(true);
     device->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
                                   nullptr, 0, nullptr, 1, &barrier);
 
