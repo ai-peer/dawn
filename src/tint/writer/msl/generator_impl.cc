@@ -1698,7 +1698,7 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const sem::Constant* constan
             return true;
         },
         [&](const sem::Struct* s) {
-            out << "{";
+            out << program_->Symbols().NameFor(s->Name()) << "{";
             TINT_DEFER(out << "}");
 
             if (constant->AllZero()) {
@@ -2973,7 +2973,6 @@ bool GeneratorImpl::EmitVar(const ast::Var* var) {
     auto* type = sem->Type()->UnwrapRef();
 
     auto out = line();
-
     switch (sem->StorageClass()) {
         case ast::StorageClass::kFunction:
         case ast::StorageClass::kHandle:
@@ -3022,7 +3021,6 @@ bool GeneratorImpl::EmitLet(const ast::Let* let) {
     auto* type = sem->Type();
 
     auto out = line();
-
     switch (sem->StorageClass()) {
         case ast::StorageClass::kFunction:
         case ast::StorageClass::kHandle:
