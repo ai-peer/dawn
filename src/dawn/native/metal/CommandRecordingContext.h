@@ -30,6 +30,8 @@ class CommandRecordingContext : NonMovable {
     ~CommandRecordingContext();
 
     id<MTLCommandBuffer> GetCommands();
+    void SetNeedsSubmit();
+    bool NeedsSubmit() const;
     void MarkUsed();
     bool WasUsed() const;
 

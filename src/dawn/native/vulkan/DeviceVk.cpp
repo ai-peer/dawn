@@ -288,6 +288,10 @@ CommandRecordingContext* Device::GetPendingRecordingContext() {
     return &mRecordingContext;
 }
 
+bool Device::HasScheduledCommandsImpl() const {
+    return mRecordingContext.used;
+}
+
 MaybeError Device::SubmitPendingCommands() {
     if (!mRecordingContext.used) {
         return {};

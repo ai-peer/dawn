@@ -398,6 +398,10 @@ void Device::ReferenceUntilUnused(ComPtr<IUnknown> object) {
     mUsedComObjectRefs.Enqueue(object, GetPendingCommandSerial());
 }
 
+bool Device::HasScheduledCommandsImpl() const {
+    return mPendingCommands.IsOpen();
+}
+
 MaybeError Device::ExecutePendingCommandContext() {
     return mPendingCommands.ExecuteCommandList(this);
 }
