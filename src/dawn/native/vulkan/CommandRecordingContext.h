@@ -40,6 +40,7 @@ struct CommandRecordingContext {
 
     // For Device state tracking only.
     VkCommandPool commandPool = VK_NULL_HANDLE;
+    bool needsSubmit = false;
     bool used = false;
 };
 

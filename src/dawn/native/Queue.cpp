@@ -21,6 +21,7 @@
 
 #include "dawn/common/Constants.h"
 #include "dawn/native/Buffer.h"
+#include "dawn/native/CallbackTaskManager.h"
 #include "dawn/native/CommandBuffer.h"
 #include "dawn/native/CommandEncoder.h"
 #include "dawn/native/CommandValidation.h"
@@ -219,8 +220,28 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
 }
 
 void QueueBase::TrackTask(std::unique_ptr<TaskInFlight> task, ExecutionSerial serial) {
+    GetDevice()->ForceEventualFlushOfCommands();
+    if (GetDevice()->GetLastSubmittedCommandSerial() == GetDevice()->GetCompletedCommandSerial() &&
+        !GetDevice()->HasPendingCommands()) {
+        struct TrackTaskCallbackTask : CallbackTask {
+            TrackTaskCallbackTask(std::unique_ptr<TaskInFlight>&& task,
+                                  QueueBase* queue,
+                                  ExecutionSerial serial)
+                : mTask(std::move(task)), mQueue(queue), mSerial(serial) {}
+
+            void Finish() override { mTask->Finish(mQueue->GetDevice()->GetPlatform(), mSerial); }
+            void HandleShutDown() override { Finish(); }
+            void HandleDeviceLoss() override { Finish(); }
+
+            std::unique_ptr<TaskInFlight> mTask;
+            QueueBase* mQueue;
+            ExecutionSerial mSerial;
+        };
+        GetDevice()->GetCallbackTaskManager()->AddCallbackTask(
+            std::make_unique<TrackTaskCallbackTask>(std::move(task), this, serial));
+        return;
+    }
     mTasksInFlight.Enqueue(std::move(task), serial);
-    GetDevice()->AddFutureSerial(serial);
 }
 
 void QueueBase::Tick(ExecutionSerial finishedSerial) {
@@ -285,8 +306,6 @@ MaybeError QueueBase::WriteBufferImpl(BufferBase* buffer,
     ASSERT(uploadHandle.mappedBuffer != nullptr);
 
     memcpy(uploadHandle.mappedBuffer, data, size);
-
-    device->AddFutureSerial(device->GetPendingCommandSerial());
 
     return device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer, uploadHandle.startOffset,
                                            buffer, bufferOffset, size);
@@ -355,8 +374,6 @@ MaybeError QueueBase::WriteTextureImpl(const ImageCopyTexture& destination,
     textureCopy.aspect = ConvertAspect(format, destination.aspect);
 
     DeviceBase* device = GetDevice();
-
-    device->AddFutureSerial(device->GetPendingCommandSerial());
 
     return device->CopyFromStagingToTexture(uploadHandle.stagingBuffer, passDataLayout,
                                             &textureCopy, writeSizePixel);

@@ -217,7 +217,7 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
     // BufferBase::MapAtCreation().
     if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) &&
         !mappedAtCreation) {
-        ClearBuffer(device->GetPendingRecordingContext(), 0x01010101);
+        ClearBuffer(device->GetPendingRecordingContext(false), 0x01010101);
     }
 
     // Initialize the padding bytes to zero.
@@ -227,7 +227,7 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
             uint32_t clearSize = Align(paddingBytes, 4);
             uint64_t clearOffset = GetAllocatedSize() - clearSize;
 
-            CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+            CommandRecordingContext* recordingContext = device->GetPendingRecordingContext(false);
             ClearBuffer(recordingContext, 0, clearOffset, clearSize);
         }
     }
@@ -306,7 +306,7 @@ MaybeError Buffer::MapAtCreationImpl() {
 MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
     Device* device = ToBackend(GetDevice());
 
-    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext(false);
 
     // TODO(crbug.com/dawn/852): initialize mapped buffer in CPU side.
     EnsureDataInitialized(recordingContext);
