@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "feb1d16c_a257038d",
+        "filename": "tools/src/cts/expectations/expectations.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T21:47:09Z",
+      "side": 1,
+      "message": "s/longer/linter stupid autocorrect",
+      "parentUuid": "eb9410be_017a528f",
+      "revId": "eaca2ebd4c9707043f9b2f6950cd89974012ae57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a1166382_dda626d5",
         "filename": "tools/src/cts/expectations/parse.go",
         "patchSetId": 7
