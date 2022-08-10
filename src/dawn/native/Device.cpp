@@ -51,6 +51,7 @@
 #include "dawn/native/SwapChain.h"
 #include "dawn/native/Texture.h"
 #include "dawn/native/ValidationUtils_autogen.h"
+#include "dawn/native/null/DeviceNull.h"
 #include "dawn/native/utils/WGPUHelpers.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
@@ -215,6 +216,20 @@ DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor)
 
 DeviceBase::DeviceBase() : mState(State::Alive) {
     mCaches = std::make_unique<DeviceBase::Caches>();
+}
+
+DeviceBase* DeviceBase::MakeError(AdapterBase* adapter, const DeviceDescriptor* descriptor) {
+    Ref<null::Device> errorDevice = AcquireRef(new null::Device(adapter, descriptor));
+
+    // null devices should never error during initialization.
+    MaybeError maybeError = errorDevice->Initialize(descriptor);
+    DAWN_ASSERT(!maybeError.IsError());
+
+    // Lose the device immediately.
+    errorDevice->HandleError(InternalErrorType::DeviceLost, "Device was created as a Error Device");
+
+    // Return the destroyed device.
+    return errorDevice.Detach();
 }
 
 DeviceBase::~DeviceBase() {

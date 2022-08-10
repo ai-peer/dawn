@@ -65,6 +65,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor);
     ~DeviceBase() override;
 
+    static DeviceBase* MakeError(AdapterBase* adapter, const DeviceDescriptor* descriptor);
+
     void HandleError(InternalErrorType type, const char* message);
 
     bool ConsumedError(MaybeError maybeError) {
