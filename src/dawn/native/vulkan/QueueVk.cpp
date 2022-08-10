@@ -49,7 +49,7 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
     DAWN_TRY(device->Tick());
 
     TRACE_EVENT_BEGIN0(GetDevice()->GetPlatform(), Recording, "CommandBufferVk::RecordCommands");
-    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext(true);
     for (uint32_t i = 0; i < commandCount; ++i) {
         DAWN_TRY(ToBackend(commands[i])->RecordCommands(recordingContext));
     }
