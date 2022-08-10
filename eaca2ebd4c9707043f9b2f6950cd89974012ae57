@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "608f322a_f3adc24e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T21:46:30Z",
+      "side": 1,
+      "message": "Kokoro is failing as go unit tests need updating.\nYou can test locally with `go test ./...`",
+      "revId": "eaca2ebd4c9707043f9b2f6950cd89974012ae57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb9410be_017a528f",
+        "filename": "tools/src/cts/expectations/expectations.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T21:46:30Z",
+      "side": 1,
+      "message": "I\u0027ve tried to keep the go longer happy by adding a godoc comment to all public symbols.\nPlease prefix with something like `Expectations are a list of Expectation`\nWhile this is fairly obvious, it keeps the HTML documentation easier to read.",
+      "revId": "eaca2ebd4c9707043f9b2f6950cd89974012ae57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1166382_dda626d5",
+        "filename": "tools/src/cts/expectations/parse.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T21:46:30Z",
+      "side": 1,
+      "message": "Why are we sorting here as well as update?",
+      "revId": "eaca2ebd4c9707043f9b2f6950cd89974012ae57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
