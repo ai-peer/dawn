@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b353f6ad_35c6a3d9",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-10T17:38:48Z",
+      "side": 1,
+      "message": "I decided to keep the two functions, because it made the code more difficult to read (especially the args version), but I removed the check for abstract. These are now just `Convert` and `ConvertArguments`. There\u0027s a symmetry now with `Materialize` and `MaterializeArguments`.",
+      "parentUuid": "b1b4c37a_76bfbbec",
+      "revId": "f49b1e63624376ffe664192a680e4724d16d1a32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6149227_801b9f17",
