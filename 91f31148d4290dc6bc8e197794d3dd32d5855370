@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f162adc4_64fb8f5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2022-08-10T21:39:02Z",
+      "side": 1,
+      "message": "Seems to play nicely with the Chromium code now. Example where we still properly get the log https://ci.chromium.org/ui/p/chromium/builders/try/dawn-win10-x64-deps-rel/25302/test-results?q\u003dExactID%3Aninja%3A%2F%2Fchrome%2Ftest%3Atelemetry_gpu_integration_test%2Fgpu_tests.webgpu_cts_integration_test.WebGpuCtsIntegrationTest.webgpu%3Aweb_platform%2CcopyToTexture%2CImageBitmap%3Afrom_ImageData%3Aalpha%3D%22none%22%3Borientation%3D%22flipY%22%3BsrcDoFlipYDuringCopy%3Dtrue%3BdstColorFormat%3D%22rgba32float%22%3BdstPremultiplied%3Dfalse+VHash%3A295dd6fc13492bd6",
+      "revId": "91f31148d4290dc6bc8e197794d3dd32d5855370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
