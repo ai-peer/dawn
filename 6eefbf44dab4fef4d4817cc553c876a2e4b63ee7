@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a4c3b1e_6f4230d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-10T03:24:42Z",
+      "side": 1,
+      "message": "Having some documentation in the webgpu_cpp.h file would be useful when trying to determine how things work. One way to do it would be to annotate the sections in dawn.json and emit into the generated file.\n\nI\u0027ve done that for Adapter and some bits of the Adapter methods just to see what it would look like. I can\u0027t figure out how to get the indenting in the generated file correct.\n\nBut, does this seem like it would be generally useful? In theory the same descriptions could be emitted into the c header as well.",
+      "revId": "6eefbf44dab4fef4d4817cc553c876a2e4b63ee7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
