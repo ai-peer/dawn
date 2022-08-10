@@ -49,6 +49,9 @@ class DynamicUploader {
                                          uint64_t offsetAlignment);
     void Deallocate(ExecutionSerial lastCompletedSerial);
 
+    // Get the total size of all staging buffers.
+    uint64_t GetSize();
+
   private:
     static constexpr uint64_t kRingBufferSize = 4 * 1024 * 1024;
 

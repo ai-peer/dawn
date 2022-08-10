@@ -62,7 +62,7 @@ class Device final : public DeviceBase {
     RenderPassCache* GetRenderPassCache() const;
     ResourceMemoryAllocator* GetResourceMemoryAllocator() const;
 
-    CommandRecordingContext* GetPendingRecordingContext();
+    CommandRecordingContext* GetPendingRecordingContext(bool needsSubmit = true);
     MaybeError SubmitPendingCommands();
 
     void EnqueueDeferredDeallocation(DescriptorSetAllocator* allocator);
@@ -168,6 +168,8 @@ class Device final : public DeviceBase {
     // To make it easier to use fn it is a public const member. However
     // the Device is allowed to mutate them through these private methods.
     VulkanFunctions* GetMutableFunctions();
+
+    bool HasTooManyStagingBuffers();
 
     VulkanDeviceInfo mDeviceInfo = {};
     VkDevice mVkDevice = VK_NULL_HANDLE;
