@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05df6eca_d95c1885",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T07:41:48Z",
+      "side": 1,
+      "message": "nit: Unnecessary change?",
+      "revId": "ec5817da02ba888b30e9f4a75ce23ccaef46071a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35ca4b37_962da41e",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T07:41:48Z",
+      "side": 1,
+      "message": "I don\u0027t know why we need this. The call or operator should be spanning all arguments / expressions. The parser might not be currently, but it should",
+      "revId": "ec5817da02ba888b30e9f4a75ce23ccaef46071a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fface83f_36eceeb5",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1913,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T07:41:48Z",
+      "side": 1,
+      "message": "should be the call\u0027s source",
+      "range": {
+        "startLine": 1913,
+        "startChar": 58,
+        "endLine": 1913,
+        "endChar": 77
+      },
+      "revId": "ec5817da02ba888b30e9f4a75ce23ccaef46071a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
