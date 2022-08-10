@@ -306,7 +306,7 @@ MaybeError Buffer::MapAtCreationImpl() {
 MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
     Device* device = ToBackend(GetDevice());
 
-    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext(false);
 
     // TODO(crbug.com/dawn/852): initialize mapped buffer in CPU side.
     EnsureDataInitialized(recordingContext);
