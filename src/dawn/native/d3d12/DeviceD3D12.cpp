@@ -272,11 +272,15 @@ ResidencyManager* Device::GetResidencyManager() const {
     return mResidencyManager.get();
 }
 
-ResultOrError<CommandRecordingContext*> Device::GetPendingCommandContext() {
+ResultOrError<CommandRecordingContext*> Device::GetPendingCommandContext(
+    Device::SubmitMode submitMode) {
     // Callers of GetPendingCommandList do so to record commands. Only reserve a command
     // allocator when it is needed so we don't submit empty command lists
     if (!mPendingCommands.IsOpen()) {
         DAWN_TRY(mPendingCommands.Open(mD3d12Device.Get(), mCommandAllocatorManager.get()));
+    }
+    if (submitMode == Device::SubmitMode::Normal) {
+        mPendingCommands.SetNeedsSubmit();
     }
     return &mPendingCommands;
 }
@@ -307,9 +311,9 @@ MaybeError Device::ClearBufferToZero(CommandRecordingContext* commandContext,
 
         memset(uploadHandle.mappedBuffer, 0u, kZeroBufferSize);
 
-        CopyFromStagingToBufferImpl(commandContext, uploadHandle.stagingBuffer,
-                                    uploadHandle.startOffset, mZeroBuffer.Get(), 0,
-                                    kZeroBufferSize);
+        CopyFromStagingToBufferHelper(commandContext, uploadHandle.stagingBuffer,
+                                      uploadHandle.startOffset, mZeroBuffer.Get(), 0,
+                                      kZeroBufferSize);
 
         mZeroBuffer->SetIsDataInitialized();
     }
@@ -344,7 +348,7 @@ MaybeError Device::TickImpl() {
     mDepthStencilViewAllocator->Tick(completedSerial);
     mUsedComObjectRefs.ClearUpTo(completedSerial);
 
-    if (mPendingCommands.IsOpen()) {
+    if (mPendingCommands.IsOpen() && mPendingCommands.NeedsSubmit()) {
         DAWN_TRY(ExecutePendingCommandContext());
         DAWN_TRY(NextSerial());
     }
@@ -396,6 +400,17 @@ ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
 
 void Device::ReferenceUntilUnused(ComPtr<IUnknown> object) {
     mUsedComObjectRefs.Enqueue(object, GetPendingCommandSerial());
+}
+
+void Device::ForceEventualFlushOfCommands() {
+    DeviceBase::ForceEventualFlushOfCommands();
+    if (mPendingCommands.IsOpen()) {
+        mPendingCommands.SetNeedsSubmit();
+    }
+}
+
+bool Device::HasPendingCommandsImpl() const {
+    return mPendingCommands.NeedsSubmit();
 }
 
 MaybeError Device::ExecutePendingCommandContext() {
@@ -478,11 +493,11 @@ ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(si
     return std::move(stagingBuffer);
 }
 
-MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
-                                           uint64_t sourceOffset,
-                                           BufferBase* destination,
-                                           uint64_t destinationOffset,
-                                           uint64_t size) {
+MaybeError Device::CopyFromStagingToBufferImpl(StagingBufferBase* source,
+                                               uint64_t sourceOffset,
+                                               BufferBase* destination,
+                                               uint64_t destinationOffset,
+                                               uint64_t size) {
     CommandRecordingContext* commandRecordingContext;
     DAWN_TRY_ASSIGN(commandRecordingContext, GetPendingCommandContext());
 
@@ -493,18 +508,18 @@ MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
                                  commandRecordingContext, destinationOffset, size));
     DAWN_UNUSED(cleared);
 
-    CopyFromStagingToBufferImpl(commandRecordingContext, source, sourceOffset, destination,
-                                destinationOffset, size);
+    CopyFromStagingToBufferHelper(commandRecordingContext, source, sourceOffset, destination,
+                                  destinationOffset, size);
 
     return {};
 }
 
-void Device::CopyFromStagingToBufferImpl(CommandRecordingContext* commandContext,
-                                         StagingBufferBase* source,
-                                         uint64_t sourceOffset,
-                                         BufferBase* destination,
-                                         uint64_t destinationOffset,
-                                         uint64_t size) {
+void Device::CopyFromStagingToBufferHelper(CommandRecordingContext* commandContext,
+                                           StagingBufferBase* source,
+                                           uint64_t sourceOffset,
+                                           BufferBase* destination,
+                                           uint64_t destinationOffset,
+                                           uint64_t size) {
     ASSERT(commandContext != nullptr);
     Buffer* dstBuffer = ToBackend(destination);
     StagingBuffer* srcBuffer = ToBackend(source);
@@ -515,10 +530,10 @@ void Device::CopyFromStagingToBufferImpl(CommandRecordingContext* commandContext
                                                        sourceOffset, size);
 }
 
-MaybeError Device::CopyFromStagingToTexture(const StagingBufferBase* source,
-                                            const TextureDataLayout& src,
-                                            TextureCopy* dst,
-                                            const Extent3D& copySizePixels) {
+MaybeError Device::CopyFromStagingToTextureImpl(const StagingBufferBase* source,
+                                                const TextureDataLayout& src,
+                                                TextureCopy* dst,
+                                                const Extent3D& copySizePixels) {
     CommandRecordingContext* commandContext;
     DAWN_TRY_ASSIGN(commandContext, GetPendingCommandContext());
     Texture* texture = ToBackend(dst->texture.Get());

@@ -18,6 +18,7 @@
 #include <memory>
 
 #include "dawn/common/SerialQueue.h"
+#include "dawn/native/CallbackTaskManager.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/IntegerTypes.h"
@@ -29,14 +30,18 @@
 
 namespace dawn::native {
 
+struct TrackTaskCallback : CallbackTask {
+    explicit TrackTaskCallback(dawn::platform::Platform* platform) : mPlatform(platform) {}
+    void SetFinishedSerial(ExecutionSerial serial);
+    ~TrackTaskCallback() override = default;
+
+  protected:
+    dawn::platform::Platform* mPlatform = nullptr;
+    ExecutionSerial mSerial;
+};
+
 class QueueBase : public ApiObjectBase {
   public:
-    struct TaskInFlight {
-        virtual ~TaskInFlight();
-        virtual void Finish(dawn::platform::Platform* platform, ExecutionSerial serial) = 0;
-        virtual void HandleDeviceLoss() = 0;
-    };
-
     ~QueueBase() override;
 
     static QueueBase* MakeError(DeviceBase* device);
@@ -63,7 +68,7 @@ class QueueBase : public ApiObjectBase {
                            uint64_t bufferOffset,
                            const void* data,
                            size_t size);
-    void TrackTask(std::unique_ptr<TaskInFlight> task, ExecutionSerial serial);
+    void TrackTask(std::unique_ptr<TrackTaskCallback> task);
     void Tick(ExecutionSerial finishedSerial);
     void HandleDeviceLoss();
 
@@ -103,7 +108,7 @@ class QueueBase : public ApiObjectBase {
 
     void SubmitInternal(uint32_t commandCount, CommandBufferBase* const* commands);
 
-    SerialQueue<ExecutionSerial, std::unique_ptr<TaskInFlight>> mTasksInFlight;
+    SerialQueue<ExecutionSerial, std::unique_ptr<TrackTaskCallback>> mTasksInFlight;
 };
 
 }  // namespace dawn::native
