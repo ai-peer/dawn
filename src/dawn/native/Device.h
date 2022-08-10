@@ -402,6 +402,8 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     virtual void AppendDebugLayerMessages(ErrorData* error) {}
 
+    virtual void ForceEventualFlushOfCommands() {}
+
   protected:
     // Constructor used only for mocking and testing.
     DeviceBase();
