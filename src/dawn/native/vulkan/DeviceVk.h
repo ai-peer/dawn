@@ -65,7 +65,7 @@ class Device final : public DeviceBase {
     ResourceMemoryAllocator* GetResourceMemoryAllocator() const;
     external_semaphore::Service* GetExternalSemaphoreService() const;
 
-    CommandRecordingContext* GetPendingRecordingContext();
+    CommandRecordingContext* GetPendingRecordingContext(bool needsSubmit);
     MaybeError SplitRecordingContext(CommandRecordingContext* recordingContext);
     MaybeError SubmitPendingCommands();
 
@@ -114,6 +114,9 @@ class Device final : public DeviceBase {
 
     // Used to associate this device with validation layer messages.
     const char* GetDebugPrefix() { return mDebugPrefix.c_str(); }
+
+    void ForceEventualFlushOfCommands() override;
+    bool HasPendingCommands() override;
 
   private:
     Device(Adapter* adapter,
