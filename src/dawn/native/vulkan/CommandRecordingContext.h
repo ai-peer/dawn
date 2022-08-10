@@ -33,7 +33,7 @@ struct CommandRecordingContext {
 
     // For Device state tracking only.
     VkCommandPool commandPool = VK_NULL_HANDLE;
-    bool used = false;
+    bool needsSubmit = false;
 };
 
 }  // namespace dawn::native::vulkan

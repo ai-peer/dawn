@@ -415,6 +415,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     // Incrememt mLastSubmittedSerial when we submit the next serial
     void IncrementLastSubmittedCommandSerial();
 
+    std::unique_ptr<DynamicUploader> mDynamicUploader;
+
   private:
     void WillDropLastExternalRef() override;
 
@@ -541,7 +543,6 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     Ref<TextureViewBase> mExternalTexturePlaceholderView;
 
-    std::unique_ptr<DynamicUploader> mDynamicUploader;
     std::unique_ptr<AsyncTaskManager> mAsyncTaskManager;
     Ref<QueueBase> mQueue;
 

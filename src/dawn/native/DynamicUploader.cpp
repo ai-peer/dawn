@@ -126,4 +126,18 @@ ResultOrError<UploadHandle> DynamicUploader::Allocate(uint64_t allocationSize,
     uploadHandle.startOffset += additionalOffset;
     return uploadHandle;
 }
+
+uint64_t DynamicUploader::GetSize() {
+    uint64_t size = 0;
+    for (const auto& buffer : mReleasedStagingBuffers.IterateAll()) {
+        size += buffer->GetSize();
+    }
+    for (const auto& buffer : mRingBuffers) {
+        if (buffer->mStagingBuffer != nullptr) {
+            size += buffer->mStagingBuffer->GetSize();
+        }
+    }
+    return size;
+}
+
 }  // namespace dawn::native
