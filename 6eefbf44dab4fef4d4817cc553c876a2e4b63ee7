@@ -34,6 +34,24 @@
       "parentUuid": "8a4c3b1e_6f4230d0",
       "revId": "6eefbf44dab4fef4d4817cc553c876a2e4b63ee7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0173d1b8_682d9891",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-10T14:03:05Z",
+      "side": 1,
+      "message": "Yea, I don\u0027t have a feel for the size of dawn.json but writing comments in JSON kinda wasn\u0027t great for the few I wrote to test it out.\n\nI think the trick will be, if we put this into a different file, how do we make sure it\u0027s kept in sync with dawn.json. Will need to think of some way to make sure the doc file is updated.",
+      "parentUuid": "9f931df3_65356d4b",
+      "revId": "6eefbf44dab4fef4d4817cc553c876a2e4b63ee7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
