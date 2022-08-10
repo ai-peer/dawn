@@ -169,6 +169,9 @@ crbug.com/dawn/1319 [ intel win ] webgpu:api,operation,command_buffer,copyTextur
 ################################################################################
 crbug.com/dawn/1398 [ webgpu-adapter-default win ] webgpu:web_platform,copyToTexture,canvas:color_space_conversion:* [ RetryOnFailure ]
 
+
+crbug.com/dawn/1413 [ intel mac ] worker_webgpu:api,operation,onSubmittedWorkDone:many,serial:* [ Slow ]
+
 ################################################################################
 # Large and slow tests
 # KEEP
