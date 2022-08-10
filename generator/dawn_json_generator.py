@@ -95,7 +95,6 @@ class Type:
         self.category = json_data['category']
         self.is_wire_transparent = False
 
-
 EnumValue = namedtuple('EnumValue', ['name', 'value', 'valid', 'json_data'])
 
 
@@ -595,6 +594,37 @@ def as_jsEnumValue(value):
     if 'jsrepr' in value.json_data: return value.json_data['jsrepr']
     return "'" + value.name.js_enum_case() + "'"
 
+def as_comment(value):
+    if isinstance(value, list):
+        ret = ""
+        for  v in value:
+            ret += "/// " + v + "\n"
+        return ret
+    return "/// " + value + "\n"
+
+def as_param_comment(arg):
+    ret = "/// @param " + as_varName(arg.name)
+    if 'description' in arg.json_data:
+        if isinstance(arg.json_data['description'], list):
+            for v in arg.json_data['description']:
+                ret += " " + v
+        else:
+            ret += " " + arg.json_data['description']
+    else:
+        ret += " " + as_cppType(arg.type.name)
+    return ret
+
+def gen_method_comment(method):
+    ret = ""
+    if 'description' in method.json_data:
+        ret += as_comment(method.json_data['description'])
+
+    for i, arg in enumerate(method.arguments):
+        if i > 0:
+            ret += "\n"
+        ret += as_param_comment(arg)
+
+    return ret
 
 def convert_cType_to_cppType(typ, annotation, arg, indent=0):
     if typ.category == 'native':
@@ -766,7 +796,10 @@ def make_base_render_params(metadata):
             'convert_cType_to_cppType': convert_cType_to_cppType,
             'as_varName': as_varName,
             'decorate': decorate,
-            'as_formatType': as_formatType
+            'as_formatType': as_formatType,
+            'as_comment': as_comment,
+            "as_param_comment": as_param_comment,
+            "gen_method_comment": gen_method_comment,
         }
 
 

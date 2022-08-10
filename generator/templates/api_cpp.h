@@ -170,6 +170,8 @@ namespace {{metadata.namespace}} {
 
 {% macro render_cpp_method_declaration(type, method) %}
     {% set CppType = as_cppType(type.name) %}
+    {% set Comment = gen_method_comment(method) %}
+    {{Comment}}
     {{as_cppType(method.return_type.name)}} {{method.name.CamelCase()}}(
         {%- for arg in method.arguments -%}
             {%- if not loop.first %}, {% endif -%}
@@ -186,6 +188,10 @@ namespace {{metadata.namespace}} {
     {% for type in by_category["object"] %}
         {% set CppType = as_cppType(type.name) %}
         {% set CType = as_cType(type.name) %}
+        {% if type.json_data.description %}
+            {% set Comment = as_comment(type.json_data.description) %}
+            {{Comment}}
+        {%- endif %}
         class {{CppType}} : public ObjectBase<{{CppType}}, {{CType}}> {
           public:
             using ObjectBase::ObjectBase;

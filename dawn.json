@@ -77,9 +77,11 @@
     },
     "adapter": {
         "category": "object",
+        "description": "Identifies an implementation of WebGPU on the system",
         "methods": [
             {
                 "name": "get limits",
+                "description": "retrieves the limits for this adapter",
                 "returns": "bool",
                 "args": [
                     {"name": "limits", "type": "supported limits", "annotation": "*"}
@@ -87,26 +89,38 @@
             },
             {
                 "name": "get properties",
+                "description": "retrieves the properties for this adapter",
                 "args": [
                     {"name": "properties", "type": "adapter properties", "annotation": "*"}
                 ]
             },
             {
                 "name": "has feature",
+                "description": "returns true if the adapater supports |feature|",
                 "returns": "bool",
                 "args": [
-                    {"name": "feature", "type": "feature name"}
+                    {"name": "feature", "type": "feature name", "description": "the feature to check"}
                 ]
             },
             {
                 "name": "enumerate features",
+                "description": [
+                  "returns the number of features available.",
+                  "|features| will be populated with FeatureNames.",
+                  "Pass a nullptr for |features| to retrieve the count.",
+                  "|features| must be large enough to hold the features."
+                ],
                 "returns": "size_t",
                 "args": [
-                    {"name": "features", "type": "feature name", "annotation": "*"}
+                    {"name": "features", "type": "feature name", "annotation": "*", "description": "the destination to put the feature list"}
                 ]
             },
             {
                 "name": "request device",
+                "description": [
+                  "Requests a device to be created asynchronously.",
+                  "The provided |callback| will be executed with the device is available"
+                ],
                 "args": [
                     {"name": "descriptor", "type": "device descriptor", "annotation": "const*", "optional": true, "no_default": true},
                     {"name": "callback", "type": "request device callback"},
@@ -115,6 +129,10 @@
             },
             {
                 "name": "create device",
+                "description": [
+                  "Requests a device to be created synchronously.",
+                  "Returns the device if successful, nullptr otherwise"
+                ],
                 "tags": ["dawn"],
                 "returns": "device",
                 "args": [
@@ -138,6 +156,7 @@
         ]
     },
     "adapter type": {
+        "description": "The type of adaptor desired to be used",
         "category": "enum",
         "emscripten_no_enum_table": true,
         "values": [
