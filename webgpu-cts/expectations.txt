@@ -188,6 +188,9 @@ crbug.com/dawn/1398 [ webgpu-adapter-default win ] webgpu:web_platform,copyToTex
 crbug.com/dawn/1398 [ mac webgpu-adapter-default ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_gpu_context_canvas:* [ Slow ]
 crbug.com/dawn/1398 [ webgpu-adapter-default win ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_gpu_context_canvas:* [ Slow ]
 
+
+crbug.com/dawn/1413 [ intel mac ] worker_webgpu:api,operation,onSubmittedWorkDone:many,serial:* [ Slow ]
+
 ################################################################################
 # Large and slow tests
 # KEEP

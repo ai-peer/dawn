@@ -73,7 +73,7 @@ MaybeError OldSwapChain::OnBeforePresent(TextureViewBase* view) {
 
     // Perform the necessary pipeline barriers for the texture to be used with the usage
     // requested by the implementation.
-    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext(false);
     ToBackend(view->GetTexture())
         ->TransitionUsageNow(recordingContext, mTextureUsage, view->GetSubresourceRange());
 
@@ -526,7 +526,7 @@ ResultOrError<SwapChain::Config> SwapChain::ChooseConfig(
 MaybeError SwapChain::PresentImpl() {
     Device* device = ToBackend(GetDevice());
 
-    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext(true);
 
     if (mConfig.needsBlit) {
         // TODO(dawn:269): ditto same as present below: eagerly transition the blit texture to
@@ -637,7 +637,7 @@ ResultOrError<Ref<TextureViewBase>> SwapChain::GetCurrentTextureViewInternal(boo
     if (result == VK_SUCCESS) {
         // TODO(crbug.com/dawn/269) put the semaphore on the texture so it is waited on when
         // used instead of directly on the recording context?
-        device->GetPendingRecordingContext()->waitSemaphores.push_back(semaphore);
+        device->GetPendingRecordingContext(false)->waitSemaphores.push_back(semaphore);
     } else {
         // The semaphore wasn't actually used (? this is unclear in the spec). Delete it when
         // we get a chance.

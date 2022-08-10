@@ -440,7 +440,6 @@ void DeviceBase::Destroy() {
             break;
     }
     ASSERT(mCompletedSerial == mLastSubmittedSerial);
-    ASSERT(mFutureSerial <= mCompletedSerial);
 
     if (mState != State::BeingCreated) {
         // The GPU timeline is finished.
@@ -511,7 +510,6 @@ void DeviceBase::HandleError(InternalErrorType type,
         IgnoreErrors(WaitForIdleForDestruction());
         IgnoreErrors(TickImpl());
         AssumeCommandsComplete();
-        ASSERT(mFutureSerial <= mCompletedSerial);
         mState = State::Disconnected;
 
         // Now everything is as if the device was lost.
@@ -712,10 +710,6 @@ ExecutionSerial DeviceBase::GetLastSubmittedCommandSerial() const {
     return mLastSubmittedSerial;
 }
 
-ExecutionSerial DeviceBase::GetFutureSerial() const {
-    return mFutureSerial;
-}
-
 InternalPipelineStore* DeviceBase::GetInternalPipelineStore() {
     return mInternalPipelineStore.get();
 }
@@ -725,10 +719,9 @@ void DeviceBase::IncrementLastSubmittedCommandSerial() {
 }
 
 void DeviceBase::AssumeCommandsComplete() {
-    ExecutionSerial maxSerial =
-        ExecutionSerial(std::max(mLastSubmittedSerial + ExecutionSerial(1), mFutureSerial));
-    mLastSubmittedSerial = maxSerial;
-    mCompletedSerial = maxSerial;
+    // bump serials so any pending callbacks can fire.
+    mLastSubmittedSerial++;
+    mCompletedSerial = mLastSubmittedSerial;
 }
 
 bool DeviceBase::IsDeviceIdle() {
@@ -739,8 +732,7 @@ bool DeviceBase::IsDeviceIdle() {
         return false;
     }
 
-    ExecutionSerial maxSerial = std::max(mLastSubmittedSerial, mFutureSerial);
-    if (mCompletedSerial == maxSerial) {
+    if (mCompletedSerial == mLastSubmittedSerial && !HasPendingCommands()) {
         return true;
     }
     return false;
@@ -748,12 +740,6 @@ bool DeviceBase::IsDeviceIdle() {
 
 ExecutionSerial DeviceBase::GetPendingCommandSerial() const {
     return mLastSubmittedSerial + ExecutionSerial(1);
-}
-
-void DeviceBase::AddFutureSerial(ExecutionSerial serial) {
-    if (serial > mFutureSerial) {
-        mFutureSerial = serial;
-    }
 }
 
 MaybeError DeviceBase::CheckPassedSerials() {
@@ -1261,18 +1247,10 @@ MaybeError DeviceBase::Tick() {
 
     // to avoid overly ticking, we only want to tick when:
     // 1. the last submitted serial has moved beyond the completed serial
-    // 2. or the completed serial has not reached the future serial set by the trackers
-    if (mLastSubmittedSerial > mCompletedSerial || mCompletedSerial < mFutureSerial) {
+    // 2. or the backend still has pending commands to submit.
+    if (mLastSubmittedSerial > mCompletedSerial || HasPendingCommands()) {
         DAWN_TRY(CheckPassedSerials());
         DAWN_TRY(TickImpl());
-
-        // There is no GPU work in flight, we need to move the serials forward so that
-        // so that CPU operations waiting on GPU completion can know they don't have to wait.
-        // AssumeCommandsComplete will assign the max serial we must tick to in order to
-        // fire the awaiting callbacks.
-        if (mCompletedSerial == mLastSubmittedSerial) {
-            AssumeCommandsComplete();
-        }
 
         // TODO(crbug.com/dawn/833): decouple TickImpl from updating the serial so that we can
         // tick the dynamic uploader before the backend resource allocators. This would allow
@@ -1941,6 +1919,12 @@ uint64_t DeviceBase::GetBufferCopyOffsetAlignmentForDepthStencil() const {
     // For depth-stencil texture, buffer offset must be a multiple of 4, which is required
     // by WebGPU and Vulkan SPEC.
     return 4u;
+}
+
+void DeviceBase::ForceEventualFlushOfCommands() {}
+
+bool DeviceBase::HasPendingCommands() {
+    return false;
 }
 
 }  // namespace dawn::native
