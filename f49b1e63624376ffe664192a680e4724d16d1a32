@@ -34,6 +34,40 @@
       "parentUuid": "9be8aad4_c3170876",
       "revId": "f49b1e63624376ffe664192a680e4724d16d1a32",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef90cd69_5768a940",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T07:55:01Z",
+      "side": 1,
+      "message": "Do we need all this? Can\u0027t we just call `Convert` and have validation deal with bad arg -\u003e param conversions?",
+      "revId": "f49b1e63624376ffe664192a680e4724d16d1a32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6149227_801b9f17",
+        "filename": "src/tint/writer/spirv/generator_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-10T07:55:01Z",
+      "side": 1,
+      "message": "I\u0027d personally split this out to another earlier change, just so clusterfuzz can more easily bisect.",
+      "revId": "f49b1e63624376ffe664192a680e4724d16d1a32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
