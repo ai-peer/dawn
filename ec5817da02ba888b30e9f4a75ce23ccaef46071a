@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f4fb9c4_22507ad9",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-10T15:29:40Z",
+      "side": 1,
+      "message": "Yep, this was me trying to get rid of all VectorRefs of sem::Expressions, but in the end, I only updated the `ConstEval::Function` ones. We may want to also to these in a future change. Will remove.",
+      "parentUuid": "05df6eca_d95c1885",
+      "revId": "ec5817da02ba888b30e9f4a75ce23ccaef46071a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35ca4b37_962da41e",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03aea4e0_1c704764",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-10T15:29:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35ca4b37_962da41e",
+      "revId": "ec5817da02ba888b30e9f4a75ce23ccaef46071a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fface83f_36eceeb5",
@@ -48,6 +84,30 @@
       "writtenOn": "2022-08-10T07:41:48Z",
       "side": 1,
       "message": "should be the call\u0027s source",
+      "range": {
+        "startLine": 1913,
+        "startChar": 58,
+        "endLine": 1913,
+        "endChar": 77
+      },
+      "revId": "ec5817da02ba888b30e9f4a75ce23ccaef46071a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9148efd0_6da4a49e",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1913,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-10T15:29:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fface83f_36eceeb5",
       "range": {
         "startLine": 1913,
         "startChar": 58,
