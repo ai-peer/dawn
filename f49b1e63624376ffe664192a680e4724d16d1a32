@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ebda7e93_dd40a87b",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-10T13:32:48Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand what you mean. We first materialize, which skips abstracts. After that, where it matters (calls and builtins), we implicitly convert only abstract types if needed to the target type. Are you suggesting we just try to convert all the constants to the target type, regardless of whether it\u0027s abstract, and rely on the fact that Convert will be a no-op for non-abstract args?",
+      "parentUuid": "ef90cd69_5768a940",
+      "revId": "f49b1e63624376ffe664192a680e4724d16d1a32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6149227_801b9f17",
         "filename": "src/tint/writer/spirv/generator_impl.cc",
         "patchSetId": 4
@@ -66,6 +84,24 @@
       "writtenOn": "2022-08-10T07:55:01Z",
       "side": 1,
       "message": "I\u0027d personally split this out to another earlier change, just so clusterfuzz can more easily bisect.",
+      "revId": "f49b1e63624376ffe664192a680e4724d16d1a32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac92e3e0_abb1b5d4",
+        "filename": "src/tint/writer/spirv/generator_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-10T13:32:48Z",
+      "side": 1,
+      "message": "Right, this is part of the same CL because I can\u0027t write a unit test like `atan2(1, 1.f)` (with mixed abstract types) without the fix here. However, I can split this out and make the unit test use the type. Will do.",
+      "parentUuid": "f6149227_801b9f17",
       "revId": "f49b1e63624376ffe664192a680e4724d16d1a32",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
