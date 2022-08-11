@@ -173,21 +173,11 @@ enum class Compiler { FXC, DXC };
     X(IDxcCompiler*, dxcCompiler)                   \
     X(DefineStrings, defineStrings)
 
-struct HlslCompilationRequest {
-    DAWN_VISITABLE_MEMBERS(HLSL_COMPILATION_REQUEST_MEMBERS)
+DAWN_VISITABLE(struct, HlslCompilationRequest, HLSL_COMPILATION_REQUEST_MEMBERS){};
+#undef HLSL_COMPILATION_REQUEST_MEMBERS
 
-    friend void StreamIn(stream::Sink* sink, const HlslCompilationRequest& r) {
-        r.VisitAll([&](const auto&... members) { StreamIn(sink, members...); });
-    }
-};
-
-struct D3DBytecodeCompilationRequest {
-    DAWN_VISITABLE_MEMBERS(D3D_BYTECODE_COMPILATION_REQUEST_MEMBERS)
-
-    friend void StreamIn(stream::Sink* sink, const D3DBytecodeCompilationRequest& r) {
-        r.VisitAll([&](const auto&... members) { StreamIn(sink, members...); });
-    }
-};
+DAWN_VISITABLE(struct, D3DBytecodeCompilationRequest, D3D_BYTECODE_COMPILATION_REQUEST_MEMBERS){};
+#undef D3D_BYTECODE_COMPILATION_REQUEST_MEMBERS
 
 #define D3D_COMPILATION_REQUEST_MEMBERS(X)     \
     X(HlslCompilationRequest, hlsl)            \
@@ -195,8 +185,6 @@ struct D3DBytecodeCompilationRequest {
     X(CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*>, tracePlatform)
 
 DAWN_MAKE_CACHE_REQUEST(D3DCompilationRequest, D3D_COMPILATION_REQUEST_MEMBERS);
-#undef HLSL_COMPILATION_REQUEST_MEMBERS
-#undef D3D_BYTECODE_COMPILATION_REQUEST_MEMBERS
 #undef D3D_COMPILATION_REQUEST_MEMBERS
 
 std::vector<const wchar_t*> GetDXCArguments(uint32_t compileFlags, bool enable16BitTypes) {
