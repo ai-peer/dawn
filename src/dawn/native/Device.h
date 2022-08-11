@@ -62,7 +62,10 @@ using WGSLExtensionSet = std::unordered_set<std::string>;
 
 class DeviceBase : public RefCountedWithExternalCount {
   public:
-    DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor);
+    DeviceBase(AdapterBase* adapter,
+               const DeviceDescriptor* descriptor,
+               const TogglesSet& togglesIsUserProvided,
+               const TogglesSet& userProvidedToggles);
     ~DeviceBase() override;
 
     // Handles the error, causing a device loss if applicable. Almost always when a device loss
@@ -279,11 +282,9 @@ class DeviceBase : public RefCountedWithExternalCount {
     QueueBase* APIGetQueue();
 
     bool APIGetLimits(SupportedLimits* limits) const;
-    // Note that we should not use this function to query the features which can only be enabled
-    // behind toggles (use IsFeatureEnabled() instead).
+    // All features of a valid device have been validated to be suitable for the device's toggles.
+    // The validation is done in AdapterBase::CreateDeviceInternal.
     bool APIHasFeature(wgpu::FeatureName feature) const;
-    // Note that we should not use this function to query the features which can only be enabled
-    // behind toggles (use IsFeatureEnabled() instead).
     size_t APIEnumerateFeatures(wgpu::FeatureName* features) const;
     void APIInjectError(wgpu::ErrorType type, const char* message);
     bool APITick();
@@ -381,9 +382,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     virtual bool ShouldDuplicateParametersForDrawIndirect(
         const RenderPipelineBase* renderPipelineBase) const;
 
-    // TODO(crbug.com/dawn/1434): Make this function non-overridable when we support requesting
-    // Adapter with toggles.
-    virtual bool IsFeatureEnabled(Feature feature) const;
+    bool IsFeatureEnabled(Feature feature) const;
 
     const CombinedLimits& GetLimits() const;
 
@@ -482,7 +481,6 @@ class DeviceBase : public RefCountedWithExternalCount {
                                                    WGPUCreateRenderPipelineAsyncCallback callback,
                                                    void* userdata);
 
-    void ApplyToggleOverrides(const DawnTogglesDeviceDescriptor* togglesDescriptor);
     void ApplyFeatures(const DeviceDescriptor* deviceDescriptor);
 
     void SetDefaultToggles();

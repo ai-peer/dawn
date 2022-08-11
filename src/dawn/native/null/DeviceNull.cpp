@@ -65,8 +65,10 @@ MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
     return {};
 }
 
-ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor) {
-    return Device::Create(this, descriptor);
+ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor,
+                                                         const TogglesSet& togglesIsUserProvided,
+                                                         const TogglesSet& userProvidedToggles) {
+    return Device::Create(this, descriptor, togglesIsUserProvided, userProvidedToggles);
 }
 
 class Backend : public BackendConnection {
@@ -103,8 +105,12 @@ struct CopyFromStagingToBufferOperation : PendingOperation {
 // Device
 
 // static
-ResultOrError<Ref<Device>> Device::Create(Adapter* adapter, const DeviceDescriptor* descriptor) {
-    Ref<Device> device = AcquireRef(new Device(adapter, descriptor));
+ResultOrError<Ref<Device>> Device::Create(Adapter* adapter,
+                                          const DeviceDescriptor* descriptor,
+                                          const TogglesSet& togglesIsUserProvided,
+                                          const TogglesSet& userProvidedToggles) {
+    Ref<Device> device =
+        AcquireRef(new Device(adapter, descriptor, togglesIsUserProvided, userProvidedToggles));
     DAWN_TRY(device->Initialize(descriptor));
     return device;
 }

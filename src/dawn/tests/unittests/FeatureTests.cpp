@@ -77,6 +77,14 @@ TEST_F(FeatureTests, GetEnabledFeatures) {
         deviceDescriptor.requiredFeatures = &featureName;
         deviceDescriptor.requiredFeaturesCount = 1;
 
+        // Some features may require DisallowUnsafeApis toggle disabled, otherwise CreateDevice may
+        // failed.
+        const char* const disableToggles[] = {"disallow_unsafe_apis"};
+        wgpu::DawnTogglesDeviceDescriptor toggleDesc;
+        toggleDesc.forceDisabledToggles = disableToggles;
+        toggleDesc.forceDisabledTogglesCount = 1;
+        deviceDescriptor.nextInChain = &toggleDesc;
+
         dawn::native::DeviceBase* deviceBase = dawn::native::FromAPI(
             adapter.CreateDevice(reinterpret_cast<const WGPUDeviceDescriptor*>(&deviceDescriptor)));
 
@@ -85,5 +93,42 @@ TEST_F(FeatureTests, GetEnabledFeatures) {
         deviceBase->APIEnumerateFeatures(&enabledFeature);
         EXPECT_EQ(enabledFeature, featureName);
         deviceBase->APIRelease();
+    }
+}
+
+// Test features guarded by toggles are validated when creating devices.
+TEST_F(FeatureTests, FeaturesGuardedByToggle) {
+    std::vector<wgpu::FeatureName> featuresGuardedByToggle = {
+        wgpu::FeatureName::ShaderF16, wgpu::FeatureName::ChromiumExperimentalDp4a};
+    dawn::native::Adapter adapter(&mAdapterBase);
+    for (auto feature : featuresGuardedByToggle) {
+        wgpu::DeviceDescriptor deviceDescriptor;
+        deviceDescriptor.requiredFeatures = &feature;
+        deviceDescriptor.requiredFeaturesCount = 1;
+
+        // Test creating device without toggle.
+        {
+            dawn::native::DeviceBase* deviceBase = dawn::native::FromAPI(adapter.CreateDevice(
+                reinterpret_cast<const WGPUDeviceDescriptor*>(&deviceDescriptor)));
+            ASSERT_EQ(nullptr, deviceBase);
+        }
+
+        // Test creating device without DisallowUnsafeApis toggle disabled.
+        {
+            const char* const disableToggles[] = {"disallow_unsafe_apis"};
+            wgpu::DawnTogglesDeviceDescriptor toggleDesc;
+            toggleDesc.forceDisabledToggles = disableToggles;
+            toggleDesc.forceDisabledTogglesCount = 1;
+            deviceDescriptor.nextInChain = &toggleDesc;
+
+            dawn::native::DeviceBase* deviceBase = dawn::native::FromAPI(adapter.CreateDevice(
+                reinterpret_cast<const WGPUDeviceDescriptor*>(&deviceDescriptor)));
+
+            ASSERT_EQ(1u, deviceBase->APIEnumerateFeatures(nullptr));
+            wgpu::FeatureName enabledFeature;
+            deviceBase->APIEnumerateFeatures(&enabledFeature);
+            EXPECT_EQ(enabledFeature, feature);
+            deviceBase->APIRelease();
+        }
     }
 }
