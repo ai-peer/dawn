@@ -335,7 +335,7 @@ source_set("sources") {
     "UsageValidationMode.h",
     "VertexFormat.cpp",
     "VertexFormat.h",
-    "VisitableMembers.h",
+    "Visitable.h",
     "dawn_platform.h",
     "stream/BlobSource.cpp",
     "stream/BlobSource.h",

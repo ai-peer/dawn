@@ -26,7 +26,7 @@
 #include "dawn/native/CacheResult.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/Error.h"
-#include "dawn/native/VisitableMembers.h"
+#include "dawn/native/Visitable.h"
 
 namespace dawn::native {
 
