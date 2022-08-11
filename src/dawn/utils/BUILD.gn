@@ -121,19 +121,6 @@ static_library("utils") {
     sources += [ "ScopedAutoreleasePool.cpp" ]
   }
 
-  if (dawn_supports_glfw_for_windowing) {
-    sources += [
-      "GLFWUtils.cpp",
-      "GLFWUtils.h",
-    ]
-    deps += [ ":glfw" ]
-
-    if (dawn_enable_metal) {
-      sources += [ "GLFWUtils_metal.mm" ]
-      frameworks += [ "Metal.framework" ]
-    }
-  }
-
   public_deps = [ "${dawn_root}/include/dawn:cpp_headers" ]
 }
 
