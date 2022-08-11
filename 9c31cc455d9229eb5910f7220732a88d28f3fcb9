@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d07892da_01bee1d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-11T14:56:03Z",
+      "side": 1,
+      "message": "Would it also have been sufficient instead to always submit pending commands on APIOnSubmittedWorkDone? The comment there says:\n\n// Technically we only need to wait for previously submitted work but OnSubmittedWorkDone is\n// also used to make sure ALL queue work is finished in tests, so we also wait for pending\n// commands (this is non-observable outside of tests so it\u0027s ok to do deviate a bit from the\n// spec).",
+      "parentUuid": "f0dc7d6d_045c6d40",
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff8b7ea8_33a6c2e3",
         "filename": "src/dawn/native/Device.h",
         "patchSetId": 2
