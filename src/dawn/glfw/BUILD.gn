@@ -1,0 +1,79 @@
+# Copyright 2022 The Dawn Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("../../../scripts/dawn_overrides_with_defaults.gni")
+
+import("${dawn_root}/scripts/dawn_component.gni")
+import("${dawn_root}/scripts/dawn_features.gni")
+
+###############################################################################
+# GLFW utils
+###############################################################################
+
+# GLFW does not support ChromeOS, Android or Fuchsia, so provide a small mock
+# library that can be linked into the Dawn tests on these platforms. Otherwise,
+# use the real library from third_party/.
+if (dawn_supports_glfw_for_windowing) {
+  static_library("glfw") {
+    defines = [ "WGPU_GLFW_IMPLEMENTATION" ]
+
+    sources = [ "utils.cpp" ]
+    deps = [
+      "${dawn_root}/src/dawn:cpp",
+      "${dawn_root}/src/dawn:proc",
+      "${dawn_root}/src/dawn/common",
+    ]
+
+    if (dawn_enable_metal) {
+      sources += [ "utils_metal.mm" ]
+      frameworks = [
+        "Metal.framework",
+        "QuartzCore.framework",
+      ]
+    }
+
+    public_deps = [
+      "${dawn_root}/include/dawn:cpp_headers",
+      "${dawn_root}/third_party/gn/glfw",
+    ]
+  }
+} else if (is_fuchsia) {
+  # The mock implementation of GLFW on Fuchsia
+  config("glfw_public_config") {
+    # Allow inclusion of <GLFW/glfw3.h>
+    include_dirs = [ "${dawn_glfw_dir}/include" ]
+
+    # The GLFW/glfw3.h header includes <GL/gl.h> by default, but the latter
+    # does not exist on Fuchsia. Defining GLFW_INCLUDE_NONE helps work around
+    # the issue, but it needs to be defined for any file that includes the
+    # header.
+    defines = [
+      "GLFW_INCLUDE_NONE",
+      "GLFW_INCLUDE_VULKAN",
+    ]
+  }
+
+  static_library("glfw") {
+    sources = [
+      # NOTE: The header below is required to pass "gn check".
+      "${dawn_glfw_dir}/include/GLFW/glfw3.h",
+      "Glfw3Fuchsia.cpp",
+    ]
+    public_configs = [ ":glfw_public_config" ]
+    deps = [ "${dawn_root}/src/dawn/common" ]
+  }
+} else {
+  group("glfw") {
+  }
+}
