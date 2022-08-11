@@ -37,6 +37,7 @@ enum class Feature {
     Depth32FloatStencil8,
     ChromiumExperimentalDp4a,
     IndirectFirstInstance,
+    ShaderF16,
 
     // Dawn-specific
     DawnInternalUsages,

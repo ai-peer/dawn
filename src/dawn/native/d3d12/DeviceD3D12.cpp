@@ -63,8 +63,12 @@ static constexpr uint64_t kZeroBufferSize = 1024 * 1024 * 4;  // 4 Mb
 static constexpr uint64_t kMaxDebugMessagesToPrint = 5;
 
 // static
-ResultOrError<Ref<Device>> Device::Create(Adapter* adapter, const DeviceDescriptor* descriptor) {
-    Ref<Device> device = AcquireRef(new Device(adapter, descriptor));
+ResultOrError<Ref<Device>> Device::Create(Adapter* adapter,
+                                          const DeviceDescriptor* descriptor,
+                                          const TogglesSet& togglesIsUserProvided,
+                                          const TogglesSet& userProvidedToggles) {
+    Ref<Device> device =
+        AcquireRef(new Device(adapter, descriptor, togglesIsUserProvided, userProvidedToggles));
     DAWN_TRY(device->Initialize(descriptor));
     return device;
 }

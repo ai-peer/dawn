@@ -305,6 +305,12 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "integer that is greater than 2^24 or smaller than -2^24). This toggle is also enabled on "
       "Intel GPUs on Metal backend due to a driver issue on Intel Metal driver.",
       "https://crbug.com/dawn/537"}},
+    /*
+    {Toggle::EnableShaderF16,
+     {"enable_shader_f16",
+      "Enable the shader-f16 feature, before it is completely implemented and validated.",
+      "https://crbug.com/dawn/1510"}},
+    */
     // Comment to separate the }} so it is clearer what to copy-paste to add a toggle.
 }};
 }  // anonymous namespace

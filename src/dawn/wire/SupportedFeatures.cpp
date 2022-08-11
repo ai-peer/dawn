@@ -36,6 +36,7 @@ bool IsFeatureSupported(WGPUFeatureName feature) {
         case WGPUFeatureName_DawnInternalUsages:
         case WGPUFeatureName_DawnMultiPlanarFormats:
         case WGPUFeatureName_ChromiumExperimentalDp4a:
+        case WGPUFeatureName_ShaderF16:
             return true;
     }
 

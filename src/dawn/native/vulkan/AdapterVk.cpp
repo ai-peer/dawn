@@ -159,6 +159,15 @@ MaybeError Adapter::InitializeSupportedFeaturesImpl() {
         mSupportedFeatures.EnableFeature(Feature::IndirectFirstInstance);
     }
 
+    if (mDeviceInfo.HasExt(DeviceExt::ShaderFloat16Int8) &&
+        mDeviceInfo.HasExt(DeviceExt::_16BitStorage) &&
+        mDeviceInfo.shaderFloat16Int8Features.shaderFloat16 == VK_TRUE &&
+        mDeviceInfo._16BitStorageFeatures.storageBuffer16BitAccess == VK_TRUE &&
+        mDeviceInfo._16BitStorageFeatures.storageInputOutput16 == VK_TRUE &&
+        mDeviceInfo._16BitStorageFeatures.uniformAndStorageBuffer16BitAccess == VK_TRUE) {
+        mSupportedFeatures.EnableFeature(Feature::ShaderF16);
+    }
+
     if (mDeviceInfo.HasExt(DeviceExt::ShaderIntegerDotProduct) &&
         mDeviceInfo.shaderIntegerDotProductProperties
                 .integerDotProduct4x8BitPackedSignedAccelerated == VK_TRUE &&
@@ -354,8 +363,10 @@ bool Adapter::SupportsExternalImages() const {
                                                      mVulkanInstance->GetFunctions());
 }
 
-ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor) {
-    return Device::Create(this, descriptor);
+ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor,
+                                                         const TogglesSet& togglesIsUserProvided,
+                                                         const TogglesSet& userProvidedToggles) {
+    return Device::Create(this, descriptor, togglesIsUserProvided, userProvidedToggles);
 }
 
 }  // namespace dawn::native::vulkan

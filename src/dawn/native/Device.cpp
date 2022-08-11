@@ -170,19 +170,19 @@ ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetRenderPipelineDescrip
 
 // DeviceBase
 
-DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor)
-    : mAdapter(adapter), mNextPipelineCompatibilityToken(1) {
+DeviceBase::DeviceBase(AdapterBase* adapter,
+                       const DeviceDescriptor* descriptor,
+                       const TogglesSet& togglesIsUserProvided,
+                       const TogglesSet& userProvidedToggles)
+    : mAdapter(adapter),
+      mEnabledToggles(userProvidedToggles),
+      mOverridenToggles(togglesIsUserProvided),
+      mNextPipelineCompatibilityToken(1) {
     mAdapter->GetInstance()->IncrementDeviceCountForTesting();
     ASSERT(descriptor != nullptr);
 
     AdapterProperties adapterProperties;
     adapter->APIGetProperties(&adapterProperties);
-
-    const DawnTogglesDeviceDescriptor* togglesDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &togglesDesc);
-    if (togglesDesc != nullptr) {
-        ApplyToggleOverrides(togglesDesc);
-    }
 
     SetDefaultToggles();
     ApplyFeatures(descriptor);
@@ -1319,7 +1319,16 @@ void DeviceBase::ApplyFeatures(const DeviceDescriptor* deviceDescriptor) {
         {deviceDescriptor->requiredFeatures, deviceDescriptor->requiredFeaturesCount}));
 
     for (uint32_t i = 0; i < deviceDescriptor->requiredFeaturesCount; ++i) {
-        mEnabledFeatures.EnableFeature(deviceDescriptor->requiredFeatures[i]);
+        wgpu::FeatureName feature = deviceDescriptor->requiredFeatures[i];
+        // Guard shader-f16 feature behind the EnableShaderF16 toggle before it is completely
+        // implemented.
+        if (feature == wgpu::FeatureName::ShaderF16) {
+            if (!IsToggleEnabled(Toggle::DisallowUnsafeAPIs)) {
+                mEnabledFeatures.EnableFeature(Feature::ShaderF16);
+            }
+            continue;
+        }
+        mEnabledFeatures.EnableFeature(feature);
     }
 }
 
@@ -1329,10 +1338,12 @@ bool DeviceBase::IsFeatureEnabled(Feature feature) const {
 
 void DeviceBase::SetWGSLExtensionAllowList() {
     // Set the WGSL extensions allow list based on device's enabled features and other
-    // propority. For example:
-    //     mWGSLExtensionAllowList.insert("InternalExtensionForTesting");
+    // propority.
     if (IsFeatureEnabled(Feature::ChromiumExperimentalDp4a)) {
         mWGSLExtensionAllowList.insert("chromium_experimental_dp4a");
+    }
+    if (IsFeatureEnabled(Feature::ShaderF16)) {
+        mWGSLExtensionAllowList.insert("f16");
     }
 }
 
@@ -1798,27 +1809,6 @@ void DeviceBase::ForceSetToggle(Toggle toggle, bool isEnabled) {
 void DeviceBase::SetDefaultToggles() {
     SetToggle(Toggle::LazyClearResourceOnFirstUse, true);
     SetToggle(Toggle::DisallowUnsafeAPIs, true);
-}
-
-void DeviceBase::ApplyToggleOverrides(const DawnTogglesDeviceDescriptor* togglesDescriptor) {
-    ASSERT(togglesDescriptor != nullptr);
-
-    for (uint32_t i = 0; i < togglesDescriptor->forceEnabledTogglesCount; ++i) {
-        Toggle toggle = GetAdapter()->GetInstance()->ToggleNameToEnum(
-            togglesDescriptor->forceEnabledToggles[i]);
-        if (toggle != Toggle::InvalidEnum) {
-            mEnabledToggles.Set(toggle, true);
-            mOverridenToggles.Set(toggle, true);
-        }
-    }
-    for (uint32_t i = 0; i < togglesDescriptor->forceDisabledTogglesCount; ++i) {
-        Toggle toggle = GetAdapter()->GetInstance()->ToggleNameToEnum(
-            togglesDescriptor->forceDisabledToggles[i]);
-        if (toggle != Toggle::InvalidEnum) {
-            mEnabledToggles.Set(toggle, false);
-            mOverridenToggles.Set(toggle, true);
-        }
-    }
 }
 
 void DeviceBase::FlushCallbackTaskQueue() {
