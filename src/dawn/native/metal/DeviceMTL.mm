@@ -107,16 +107,23 @@ void API_AVAILABLE(macos(10.15), ios(14)) UpdateTimestampPeriod(id<MTLDevice> de
 // static
 ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
                                           NSPRef<id<MTLDevice>> mtlDevice,
-                                          const DeviceDescriptor* descriptor) {
-    Ref<Device> device = AcquireRef(new Device(adapter, std::move(mtlDevice), descriptor));
+                                          const DeviceDescriptor* descriptor,
+                                          const TogglesSet& togglesIsUserProvided,
+                                          const TogglesSet& userProvidedToggles) {
+    Ref<Device> device = AcquireRef(new Device(adapter, std::move(mtlDevice), descriptor,
+                                               togglesIsUserProvided, userProvidedToggles));
     DAWN_TRY(device->Initialize(descriptor));
     return device;
 }
 
 Device::Device(AdapterBase* adapter,
                NSPRef<id<MTLDevice>> mtlDevice,
-               const DeviceDescriptor* descriptor)
-    : DeviceBase(adapter, descriptor), mMtlDevice(std::move(mtlDevice)), mCompletedSerial(0) {}
+               const DeviceDescriptor* descriptor,
+               const TogglesSet& togglesIsUserProvided,
+               const TogglesSet& userProvidedToggles)
+    : DeviceBase(adapter, descriptor, togglesIsUserProvided, userProvidedToggles),
+      mMtlDevice(std::move(mtlDevice)),
+      mCompletedSerial(0) {}
 
 Device::~Device() {
     Destroy();

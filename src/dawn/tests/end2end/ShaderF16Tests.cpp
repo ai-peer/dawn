@@ -18,46 +18,42 @@
 #include "dawn/utils/WGPUHelpers.h"
 
 namespace {
-using RequestDP4aExtension = bool;
-DAWN_TEST_PARAM_STRUCT(ExperimentalDP4aTestsParams, RequestDP4aExtension);
+using RequireShaderF16Feature = bool;
+DAWN_TEST_PARAM_STRUCT(ShaderF16TestsParams, RequireShaderF16Feature);
 
 }  // anonymous namespace
 
-class ExperimentalDP4aTests : public DawnTestWithParams<ExperimentalDP4aTestsParams> {
+class ShaderF16Tests : public DawnTestWithParams<ShaderF16TestsParams> {
   protected:
+    void SetUp() override {
+        DawnTestWithParams<ShaderF16TestsParams>::SetUp();
+        mIsShaderF16SupportedOnAdapter = SupportsFeatures({wgpu::FeatureName::ShaderF16});
+    }
+
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
-        mIsDP4aSupportedOnAdapter = SupportsFeatures({wgpu::FeatureName::ChromiumExperimentalDp4a});
-        if (!mIsDP4aSupportedOnAdapter) {
-            return {};
-        }
-
-        if (!IsD3D12()) {
-            mUseDxcEnabledOrNonD3D12 = true;
-        } else {
-            for (auto* enabledToggle : GetParam().forceEnabledWorkarounds) {
-                if (strncmp(enabledToggle, "use_dxc", 7) == 0) {
-                    mUseDxcEnabledOrNonD3D12 = true;
-                    break;
-                }
-            }
-        }
-
-        if (GetParam().mRequestDP4aExtension && mUseDxcEnabledOrNonD3D12) {
-            return {wgpu::FeatureName::ChromiumExperimentalDp4a};
+        if (mIsShaderF16SupportedOnAdapter && GetParam().mRequireShaderF16Feature) {
+            mIsShaderF16FeatureRequired = true;
+            return {wgpu::FeatureName::ShaderF16};
         }
 
         return {};
     }
 
-    bool IsDP4aSupportedOnAdapter() const { return mIsDP4aSupportedOnAdapter; }
-    bool UseDxcEnabledOrNonD3D12() const { return mUseDxcEnabledOrNonD3D12; }
+    bool IsShaderF16SupportedOnAdapter() const { return mIsShaderF16SupportedOnAdapter; }
 
   private:
-    bool mIsDP4aSupportedOnAdapter = false;
-    bool mUseDxcEnabledOrNonD3D12 = false;
+    bool mIsShaderF16SupportedOnAdapter = false;
+    bool mIsShaderF16FeatureRequired = false;
 };
 
-TEST_P(ExperimentalDP4aTests, BasicDP4aFeaturesTest) {
+/*
+// Test that adapter don't support shader-f16 feature if enable_shader_f16 toggle is not enabled.
+TEST_P(ShaderF16Tests, ShaderF16FeatureGuardedByToggle) {
+    EXPECT_TRUE((!IsShaderF16SupportedOnAdapter()) || HasToggleEnabled("enable_shader_f16"));
+}
+
+TEST_P(ShaderF16Tests, RequireShaderF16FeatureTest) {
+
     const char* computeShader = R"(
         enable chromium_experimental_dp4a;
 
@@ -80,23 +76,11 @@ TEST_P(ExperimentalDP4aTests, BasicDP4aFeaturesTest) {
             buf.data4 = dot4U8Packed(a, c);
         }
 )";
-    const bool shouldDP4AFeatureSupportedByDevice =
-        // Required when creating device
-        GetParam().mRequestDP4aExtension &&
-        // Adapter support the feature
-        IsDP4aSupportedOnAdapter() &&
-        // Proper toggle, disallow_unsafe_apis and use_dxc if d3d12
-        // Note that "disallow_unsafe_apis" is always disabled in DawnTestBase::CreateDeviceImpl.
-        !HasToggleEnabled("disallow_unsafe_apis") && UseDxcEnabledOrNonD3D12();
-    const bool deviceSupportDP4AFeature =
-        device.HasFeature(wgpu::FeatureName::ChromiumExperimentalDp4a);
-    EXPECT_EQ(deviceSupportDP4AFeature, shouldDP4AFeatureSupportedByDevice);
-    if (!deviceSupportDP4AFeature) {
+    if (!GetParam().mRequireShaderF16Feature || !IsShaderF16SupportedOnAdapter() ||
+        (IsD3D12() && !HasToggleEnabled("use_dxc"))) {
         ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, computeShader));
         return;
     }
-
-    utils::CreateShaderModule(device, computeShader);
 
     wgpu::BufferDescriptor bufferDesc;
     bufferDesc.size = 4 * sizeof(uint32_t);
@@ -125,12 +109,22 @@ TEST_P(ExperimentalDP4aTests, BasicDP4aFeaturesTest) {
     uint32_t expected[] = {5, 259845, static_cast<uint32_t>(-10), 2550};
     EXPECT_BUFFER_U32_RANGE_EQ(expected, bufferOut, 0, 4);
 }
+*/
 
-// DawnTestBase::CreateDeviceImpl always disable disallow_unsafe_apis toggle.
-DAWN_INSTANTIATE_TEST_P(ExperimentalDP4aTests,
+DAWN_INSTANTIATE_TEST_P(ShaderF16Tests,
                         {
                             D3D12Backend(),
-                            D3D12Backend({"use_dxc"}, {}),
                             VulkanBackend(),
+                            MetalBackend(),
+                            OpenGLBackend(),
+                            OpenGLESBackend(),
+                            NullBackend(),
+                            D3D12Backend({}, {"disallow_unsafe_apis"}),
+                            D3D12Backend({"use_dxc"}, {"disallow_unsafe_apis"}),
+                            VulkanBackend({}, {"disallow_unsafe_apis"}),
+                            MetalBackend({}, {"disallow_unsafe_apis"}),
+                            OpenGLBackend({}, {"disallow_unsafe_apis"}),
+                            OpenGLESBackend({}, {"disallow_unsafe_apis"}),
+                            NullBackend({}, {"disallow_unsafe_apis"}),
                         },
                         {true, false});

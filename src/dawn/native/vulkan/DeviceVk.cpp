@@ -78,14 +78,22 @@ class ScopedSignalSemaphore : public NonMovable {
 }  // namespace
 
 // static
-ResultOrError<Ref<Device>> Device::Create(Adapter* adapter, const DeviceDescriptor* descriptor) {
-    Ref<Device> device = AcquireRef(new Device(adapter, descriptor));
+ResultOrError<Ref<Device>> Device::Create(Adapter* adapter,
+                                          const DeviceDescriptor* descriptor,
+                                          const TogglesSet& togglesIsUserProvided,
+                                          const TogglesSet& userProvidedToggles) {
+    Ref<Device> device =
+        AcquireRef(new Device(adapter, descriptor, togglesIsUserProvided, userProvidedToggles));
     DAWN_TRY(device->Initialize(descriptor));
     return device;
 }
 
-Device::Device(Adapter* adapter, const DeviceDescriptor* descriptor)
-    : DeviceBase(adapter, descriptor), mDebugPrefix(GetNextDeviceDebugPrefix()) {
+Device::Device(Adapter* adapter,
+               const DeviceDescriptor* descriptor,
+               const TogglesSet& togglesIsUserProvided,
+               const TogglesSet& userProvidedToggles)
+    : DeviceBase(adapter, descriptor, togglesIsUserProvided, userProvidedToggles),
+      mDebugPrefix(GetNextDeviceDebugPrefix()) {
     InitTogglesFromDriver();
 }
 
@@ -481,16 +489,18 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice physicalD
                           VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT);
     }
 
-    if (IsFeatureEnabled(Feature::ShaderFloat16)) {
+    if (IsFeatureEnabled(Feature::ShaderF16)) {
         const VulkanDeviceInfo& deviceInfo = ToBackend(GetAdapter())->GetDeviceInfo();
         ASSERT(deviceInfo.HasExt(DeviceExt::ShaderFloat16Int8) &&
                deviceInfo.shaderFloat16Int8Features.shaderFloat16 == VK_TRUE &&
                deviceInfo.HasExt(DeviceExt::_16BitStorage) &&
                deviceInfo._16BitStorageFeatures.storageBuffer16BitAccess == VK_TRUE &&
+               deviceInfo._16BitStorageFeatures.storageInputOutput16 == VK_TRUE &&
                deviceInfo._16BitStorageFeatures.uniformAndStorageBuffer16BitAccess == VK_TRUE);
 
         usedKnobs.shaderFloat16Int8Features.shaderFloat16 = VK_TRUE;
         usedKnobs._16BitStorageFeatures.storageBuffer16BitAccess = VK_TRUE;
+        usedKnobs._16BitStorageFeatures.storageInputOutput16 = VK_TRUE;
         usedKnobs._16BitStorageFeatures.uniformAndStorageBuffer16BitAccess = VK_TRUE;
 
         featuresChain.Add(&usedKnobs.shaderFloat16Int8Features,

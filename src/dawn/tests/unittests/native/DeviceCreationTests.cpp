@@ -90,6 +90,42 @@ TEST_F(DeviceCreationTest, CreateDeviceWithTogglesSuccess) {
     EXPECT_THAT(toggles, Contains(StrEq(toggle)));
 }
 
+// Test features guarded by toggles are validated when creating devices.
+TEST_F(DeviceCreationTest, CreateDeviceRequiringFeaturesGuardedByToggle) {
+    std::vector<wgpu::FeatureName> featuresGuardedByToggle = {
+        wgpu::FeatureName::ShaderF16, wgpu::FeatureName::ChromiumExperimentalDp4a};
+
+    for (auto feature : featuresGuardedByToggle) {
+        wgpu::DeviceDescriptor deviceDescriptor;
+        deviceDescriptor.requiredFeatures = &feature;
+        deviceDescriptor.requiredFeaturesCount = 1;
+
+        // Test creating device without toggle would fail.
+        {
+            wgpu::Device device = adapter.CreateDevice(&deviceDescriptor);
+            EXPECT_EQ(device, nullptr);
+        }
+
+        // Test creating device without DisallowUnsafeApis toggle disabled.
+        {
+            const char* const disableToggles[] = {"disallow_unsafe_apis"};
+            wgpu::DawnTogglesDeviceDescriptor toggleDesc;
+            toggleDesc.forceDisabledToggles = disableToggles;
+            toggleDesc.forceDisabledTogglesCount = 1;
+            deviceDescriptor.nextInChain = &toggleDesc;
+
+            wgpu::Device device = adapter.CreateDevice(&deviceDescriptor);
+            EXPECT_NE(device, nullptr);
+
+            ASSERT_EQ(1u, device.EnumerateFeatures(nullptr));
+            wgpu::FeatureName enabledFeature;
+            device.EnumerateFeatures(&enabledFeature);
+            EXPECT_EQ(enabledFeature, feature);
+            device.Release();
+        }
+    }
+}
+
 TEST_F(DeviceCreationTest, CreateDeviceWithCacheSuccess) {
     // Default device descriptor should have the same cache key as a device descriptor with a
     // default cache descriptor.
