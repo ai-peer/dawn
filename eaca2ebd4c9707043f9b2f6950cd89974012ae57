@@ -104,6 +104,24 @@
       "parentUuid": "a1166382_dda626d5",
       "revId": "eaca2ebd4c9707043f9b2f6950cd89974012ae57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eab0c53_a3ffd8bb",
+        "filename": "tools/src/cts/expectations/parse.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-11T06:54:26Z",
+      "side": 1,
+      "message": "Then I\u0027d recommend that `cts format` should do the sort. Otherwise parsing reorders the content, meaning diagnostics can be out of order, etc.",
+      "parentUuid": "80f00f1b_8e8ee09c",
+      "revId": "eaca2ebd4c9707043f9b2f6950cd89974012ae57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
