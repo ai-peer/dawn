@@ -147,6 +147,9 @@ MaybeError Adapter::InitializeSupportedFeaturesImpl() {
             dxcVersion >= MakeDXCVersion(kLeastMajorVersionForDP4a, kLeastMinorVersionForDP4a)) {
             mSupportedFeatures.EnableFeature(Feature::ChromiumExperimentalDp4a);
         }
+        if (mDeviceInfo.supportsShaderF16) {
+            mSupportedFeatures.EnableFeature(Feature::ShaderF16);
+        }
     }
 
     return {};
@@ -418,8 +421,10 @@ void Adapter::CleanUpDebugLayerFilters() {
     infoQueue->PopStorageFilter();
 }
 
-ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor) {
-    return Device::Create(this, descriptor);
+ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor,
+                                                         const TogglesSet& togglesIsUserProvided,
+                                                         const TogglesSet& userProvidedToggles) {
+    return Device::Create(this, descriptor, togglesIsUserProvided, userProvidedToggles);
 }
 
 // Resets the backend device and creates a new one. If any D3D12 objects belonging to the

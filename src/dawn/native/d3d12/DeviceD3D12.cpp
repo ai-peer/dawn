@@ -63,8 +63,12 @@ static constexpr uint64_t kZeroBufferSize = 1024 * 1024 * 4;  // 4 Mb
 static constexpr uint64_t kMaxDebugMessagesToPrint = 5;
 
 // static
-ResultOrError<Ref<Device>> Device::Create(Adapter* adapter, const DeviceDescriptor* descriptor) {
-    Ref<Device> device = AcquireRef(new Device(adapter, descriptor));
+ResultOrError<Ref<Device>> Device::Create(Adapter* adapter,
+                                          const DeviceDescriptor* descriptor,
+                                          const TogglesSet& togglesIsUserProvided,
+                                          const TogglesSet& userProvidedToggles) {
+    Ref<Device> device =
+        AcquireRef(new Device(adapter, descriptor, togglesIsUserProvided, userProvidedToggles));
     DAWN_TRY(device->Initialize(descriptor));
     return device;
 }
@@ -880,17 +884,6 @@ float Device::GetTimestampPeriodInNS() const {
 bool Device::ShouldDuplicateNumWorkgroupsForDispatchIndirect(
     ComputePipelineBase* computePipeline) const {
     return ToBackend(computePipeline)->UsesNumWorkgroups();
-}
-
-bool Device::IsFeatureEnabled(Feature feature) const {
-    // Currently we can only use DXC to compile HLSL shaders using float16, and
-    // ChromiumExperimentalDp4a is an experimental feature which can only be enabled with toggle
-    // "use_dxc".
-    if ((feature == Feature::ChromiumExperimentalDp4a || feature == Feature::ShaderFloat16) &&
-        !IsToggleEnabled(Toggle::UseDXC)) {
-        return false;
-    }
-    return DeviceBase::IsFeatureEnabled(feature);
 }
 
 void Device::SetLabelImpl() {

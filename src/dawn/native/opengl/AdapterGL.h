@@ -36,7 +36,9 @@ class Adapter : public AdapterBase {
     MaybeError InitializeImpl() override;
     MaybeError InitializeSupportedFeaturesImpl() override;
     MaybeError InitializeSupportedLimitsImpl(CombinedLimits* limits) override;
-    ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(const DeviceDescriptor* descriptor) override;
+    ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(const DeviceDescriptor* descriptor,
+                                                    const TogglesSet& togglesIsUserProvided,
+                                                    const TogglesSet& userProvidedToggles) override;
 
     OpenGLFunctions mFunctions;
     EGLFunctions mEGLFunctions;
