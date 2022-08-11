@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3607295_e8c29361",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-11T05:52:49Z",
+      "side": 1,
+      "message": "The troublesome [testcase](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/end2end/CopyTests.cpp;drc\u003daeadb03c8553c39e88d5d11d10f706d42f06a1d7;l\u003d2615) seems to break our assumption.\nIt assumes that `device.Tick()` gets `WriteBuffer` submitted eventually. But it would not necessarily be the case with our CL. Any idea?\n\n```\n    wgpu::Buffer bigBuffer \u003d\n        utils::CreateBufferFromData(device, garbageData.data(), garbageData.size(),\n                                    wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst);\n    // Next, destroy the buffer. Its heap is still alive and contains the garbage data.\n    bigBuffer.Destroy();\n\n    // Ensure the underlying ID3D12Resource of bigBuffer is deleted.\n    bool submittedWorkDone \u003d false;\n    queue.OnSubmittedWorkDone(\n        0,\n        [](WGPUQueueWorkDoneStatus status, void* userdata) {\n            EXPECT_EQ(status, WGPUQueueWorkDoneStatus_Success);\n            *static_cast\u003cbool*\u003e(userdata) \u003d true;\n        },\n        \u0026submittedWorkDone);\n    while (!submittedWorkDone) {\n        WaitABit();\n    }\n```\n\n```\nvoid DawnTestBase::WaitABit() {\n    if (device) {\n        device.Tick();\n    }\n    FlushWire();\n\n    utils::USleep(100);\n}\n```",
+      "parentUuid": "b992205f_6564308d",
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff8b7ea8_33a6c2e3",
