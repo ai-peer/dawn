@@ -108,8 +108,11 @@ namespace dawn::native::opengl {
 ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
                                           const DeviceDescriptor* descriptor,
                                           const OpenGLFunctions& functions,
-                                          std::unique_ptr<Context> context) {
-    Ref<Device> device = AcquireRef(new Device(adapter, descriptor, functions, std::move(context)));
+                                          std::unique_ptr<Context> context,
+                                          const TogglesSet& togglesIsUserProvided,
+                                          const TogglesSet& userProvidedToggles) {
+    Ref<Device> device = AcquireRef(new Device(adapter, descriptor, functions, std::move(context),
+                                               togglesIsUserProvided, userProvidedToggles));
     DAWN_TRY(device->Initialize(descriptor));
     return device;
 }
@@ -117,8 +120,12 @@ ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
 Device::Device(AdapterBase* adapter,
                const DeviceDescriptor* descriptor,
                const OpenGLFunctions& functions,
-               std::unique_ptr<Context> context)
-    : DeviceBase(adapter, descriptor), mGL(functions), mContext(std::move(context)) {}
+               std::unique_ptr<Context> context,
+               const TogglesSet& togglesIsUserProvided,
+               const TogglesSet& userProvidedToggles)
+    : DeviceBase(adapter, descriptor, togglesIsUserProvided, userProvidedToggles),
+      mGL(functions),
+      mContext(std::move(context)) {}
 
 Device::~Device() {
     Destroy();

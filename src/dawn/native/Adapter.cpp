@@ -19,6 +19,7 @@
 
 #include "dawn/common/Constants.h"
 #include "dawn/common/GPUInfo.h"
+#include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/ValidationUtils_autogen.h"
@@ -193,11 +194,67 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDeviceInternal(
     const DeviceDescriptor* descriptor) {
     ASSERT(descriptor != nullptr);
 
+    // Check overriden toggles before creating device, as some device features may be guarded by
+    // toggles, and requiring such features without using corresponding toggles should fails the
+    // device creating.
+    TogglesSet togglesIsUserProvided;
+    TogglesSet userProvidedToggles;
+
+    const DawnTogglesDeviceDescriptor* togglesDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &togglesDesc);
+
+    if (togglesDesc) {
+        for (uint32_t i = 0; i < togglesDesc->forceEnabledTogglesCount; ++i) {
+            Toggle toggle = GetInstance()->ToggleNameToEnum(togglesDesc->forceEnabledToggles[i]);
+            if (toggle != Toggle::InvalidEnum) {
+                userProvidedToggles.Set(toggle, true);
+                togglesIsUserProvided.Set(toggle, true);
+            }
+        }
+        for (uint32_t i = 0; i < togglesDesc->forceDisabledTogglesCount; ++i) {
+            Toggle toggle = GetInstance()->ToggleNameToEnum(togglesDesc->forceDisabledToggles[i]);
+            if (toggle != Toggle::InvalidEnum) {
+                userProvidedToggles.Set(toggle, false);
+                togglesIsUserProvided.Set(toggle, true);
+            }
+        }
+    }
+
+    auto isToggleEnabledByUser = [&](Toggle toggle) {
+        return togglesIsUserProvided.Has(toggle) && userProvidedToggles.Has(toggle);
+    };
+    auto isToggleDisabledByUser = [&](Toggle toggle) {
+        return togglesIsUserProvided.Has(toggle) && !userProvidedToggles.Has(toggle);
+    };
+
+    // Validate all required features are supported by the adapter and suitable under given toggles.
     for (uint32_t i = 0; i < descriptor->requiredFeaturesCount; ++i) {
         wgpu::FeatureName f = descriptor->requiredFeatures[i];
         DAWN_TRY(ValidateFeatureName(f));
         DAWN_INVALID_IF(!mSupportedFeatures.IsEnabled(f), "Requested feature %s is not supported.",
                         f);
+
+        // shader-f16 feature is guraded by toggle DisallowUnsafeAPIs before it is completely
+        // implemented, and requires DXC for D3D12.
+        // chromium-experimental-dp4a feature is guraded by toggle DisallowUnsafeAPIs, and
+        // requires DXC for D3D12.
+        if (f == wgpu::FeatureName::ShaderF16 || f == wgpu::FeatureName::ChromiumExperimentalDp4a) {
+            // If the adapter is of D3D12 backend, its supporting ShaderF16 or
+            // ChromiumExperimentalDp4a feature means DXC is avaliable,
+            // d3d12::Adapter::InitializeSupportedFeaturesImpl ensure that. So if use_dxc toggle is
+            // provided, the device will use DXC.
+            const bool willUseDXCIfD3D12Backend = isToggleEnabledByUser(Toggle::UseDXC);
+            const bool nonD3D12BackendOrUseDXC =
+                mBackend != wgpu::BackendType::D3D12 || willUseDXCIfD3D12Backend;
+
+            FeaturesInfo featuresInfo;
+
+            DAWN_INVALID_IF(
+                !(isToggleDisabledByUser(Toggle::DisallowUnsafeAPIs) && nonD3D12BackendOrUseDXC),
+                "Feature %s is guarded by toggle disallow_unsafe_apis, and "
+                "require DXC for D3D12.",
+                featuresInfo.GetFeatureInfo(f)->name);
+        }
     }
 
     if (descriptor->requiredLimits != nullptr) {
@@ -208,7 +265,7 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDeviceInternal(
         DAWN_INVALID_IF(descriptor->requiredLimits->nextInChain != nullptr,
                         "nextInChain is not nullptr.");
     }
-    return CreateDeviceImpl(descriptor);
+    return CreateDeviceImpl(descriptor, togglesIsUserProvided, userProvidedToggles);
 }
 
 void AdapterBase::SetUseTieredLimits(bool useTieredLimits) {
