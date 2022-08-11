@@ -32,10 +32,10 @@ bool IsFeatureSupported(WGPUFeatureName feature) {
         case WGPUFeatureName_TextureCompressionASTC:
         case WGPUFeatureName_IndirectFirstInstance:
         case WGPUFeatureName_DepthClipControl:
-        case WGPUFeatureName_DawnShaderFloat16:
         case WGPUFeatureName_DawnInternalUsages:
         case WGPUFeatureName_DawnMultiPlanarFormats:
         case WGPUFeatureName_ChromiumExperimentalDp4a:
+        case WGPUFeatureName_ShaderF16:
             return true;
     }
 
