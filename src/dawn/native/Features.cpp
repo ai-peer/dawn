@@ -45,10 +45,6 @@ static constexpr FeatureEnumAndInfoList kFeatureNameAndInfoList = {{
       "Support Adaptable Scalable Texture Compressed (ASTC) "
       "texture formats",
       "https://bugs.chromium.org/p/dawn/issues/detail?id=955"}},
-    {Feature::ShaderFloat16,
-     {"shader-float16",
-      "Support 16bit float arithmetic and declarations in uniform and storage buffers",
-      "https://bugs.chromium.org/p/dawn/issues/detail?id=426"}},
     {Feature::PipelineStatisticsQuery,
      {"pipeline-statistics-query", "Support Pipeline Statistics Query",
       "https://bugs.chromium.org/p/dawn/issues/detail?id=434"}},
@@ -67,6 +63,9 @@ static constexpr FeatureEnumAndInfoList kFeatureNameAndInfoList = {{
     {Feature::IndirectFirstInstance,
      {"indirect-first-instance", "Support non-zero first instance values on indirect draw calls",
       "https://bugs.chromium.org/p/dawn/issues/detail?id=1197"}},
+    {Feature::ShaderF16,
+     {"shader-f16", "Supports the \"enable f16;\" directive in WGSL",
+      "https://bugs.chromium.org/p/dawn/issues/detail?id=1510"}},
     {Feature::DawnInternalUsages,
      {"dawn-internal-usages",
       "Add internal usages to resources to affect how the texture is allocated, but not "
@@ -86,6 +85,9 @@ Feature FromAPIFeature(wgpu::FeatureName feature) {
     switch (feature) {
         case wgpu::FeatureName::Undefined:
             return Feature::InvalidEnum;
+        case wgpu::FeatureName::DawnShaderFloat16:
+            // Deprecated.
+            return Feature::InvalidEnum;
 
         case wgpu::FeatureName::TimestampQuery:
             return Feature::TimestampQuery;
@@ -103,8 +105,6 @@ Feature FromAPIFeature(wgpu::FeatureName feature) {
             return Feature::Depth32FloatStencil8;
         case wgpu::FeatureName::IndirectFirstInstance:
             return Feature::IndirectFirstInstance;
-        case wgpu::FeatureName::DawnShaderFloat16:
-            return Feature::ShaderFloat16;
         case wgpu::FeatureName::DawnInternalUsages:
             return Feature::DawnInternalUsages;
         case wgpu::FeatureName::DawnMultiPlanarFormats:
@@ -113,6 +113,8 @@ Feature FromAPIFeature(wgpu::FeatureName feature) {
             return Feature::DawnNative;
         case wgpu::FeatureName::ChromiumExperimentalDp4a:
             return Feature::ChromiumExperimentalDp4a;
+        case wgpu::FeatureName::ShaderF16:
+            return Feature::ShaderF16;
     }
     return Feature::InvalidEnum;
 }
@@ -135,8 +137,6 @@ wgpu::FeatureName ToAPIFeature(Feature feature) {
             return wgpu::FeatureName::Depth32FloatStencil8;
         case Feature::IndirectFirstInstance:
             return wgpu::FeatureName::IndirectFirstInstance;
-        case Feature::ShaderFloat16:
-            return wgpu::FeatureName::DawnShaderFloat16;
         case Feature::DawnInternalUsages:
             return wgpu::FeatureName::DawnInternalUsages;
         case Feature::MultiPlanarFormats:
@@ -145,6 +145,8 @@ wgpu::FeatureName ToAPIFeature(Feature feature) {
             return wgpu::FeatureName::DawnNative;
         case Feature::ChromiumExperimentalDp4a:
             return wgpu::FeatureName::ChromiumExperimentalDp4a;
+        case Feature::ShaderF16:
+            return wgpu::FeatureName::ShaderF16;
 
         case Feature::EnumCount:
             break;
