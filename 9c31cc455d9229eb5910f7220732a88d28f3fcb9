@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0dc7d6d_045c6d40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-11T13:46:43Z",
+      "side": 1,
+      "message": "Mitigated it by escalating `.used` to `.needsSubmit` if there is a `TrackTask`(MapAsync/OnSubmittedWorkDone) afterwards. How does it sound?",
+      "parentUuid": "d3607295_e8c29361",
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff8b7ea8_33a6c2e3",
@@ -66,6 +84,30 @@
       "writtenOn": "2022-08-10T15:26:25Z",
       "side": 1,
       "message": "why do we need to move this to be protected? Couldn\u0027t the derived classes call GetDynamicUploader() ?",
+      "range": {
+        "startLine": 418,
+        "startChar": 4,
+        "endLine": 418,
+        "endChar": 54
+      },
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c354fb3_42f67cc5",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-11T13:46:43Z",
+      "side": 1,
+      "message": "Didn\u0027t know that, thanks for the hint!",
+      "parentUuid": "ff8b7ea8_33a6c2e3",
       "range": {
         "startLine": 418,
         "startChar": 4,
@@ -101,6 +143,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6258f873_2e988381",
+        "filename": "src/dawn/native/DynamicUploader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-11T13:46:43Z",
+      "side": 1,
+      "message": "Good naming, thanks!\n2MB was to confirm the bots failure. Got it back 64MB threshold now.",
+      "parentUuid": "36da255a_78cb3b03",
+      "range": {
+        "startLine": 130,
+        "startChar": 26,
+        "endLine": 130,
+        "endChar": 33
+      },
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "817af7d8_5b7a8362",
         "filename": "src/dawn/native/vulkan/DeviceVk.h",
         "patchSetId": 2
@@ -112,6 +178,30 @@
       "writtenOn": "2022-08-10T15:26:25Z",
       "side": 1,
       "message": "nit: it\u0027s not that we have too many buffers; it\u0027s that the total size of all the buffers is large and we want to flush it. Perhaps the callsite should do GetDynamicUploader()-\u003eShouldFlush()",
+      "range": {
+        "startLine": 172,
+        "startChar": 12,
+        "endLine": 172,
+        "endChar": 19
+      },
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f712770_d7f80439",
+        "filename": "src/dawn/native/vulkan/DeviceVk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-11T13:46:43Z",
+      "side": 1,
+      "message": "Can\u0027t like the idea more. Thanks!",
+      "parentUuid": "817af7d8_5b7a8362",
       "range": {
         "startLine": 172,
         "startChar": 12,
