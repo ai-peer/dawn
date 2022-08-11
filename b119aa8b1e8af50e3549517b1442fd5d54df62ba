@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85a046da_e642d994",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-08-11T19:51:06Z",
+      "side": 1,
+      "message": "PTAL, I have added tracing and confirmed that this fixes these functions getting stripped on Mac.",
+      "revId": "b119aa8b1e8af50e3549517b1442fd5d54df62ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
