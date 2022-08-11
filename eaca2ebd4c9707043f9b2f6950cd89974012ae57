@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6e2d6af_909638de",
+        "filename": "tools/src/cts/expectations/expectations.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-11T00:59:34Z",
+      "side": 1,
+      "message": "Done in https://dawn-review.googlesource.com/c/dawn/+/98761",
+      "parentUuid": "feb1d16c_a257038d",
+      "revId": "eaca2ebd4c9707043f9b2f6950cd89974012ae57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1166382_dda626d5",
@@ -66,6 +84,24 @@
       "writtenOn": "2022-08-10T21:46:30Z",
       "side": 1,
       "message": "Why are we sorting here as well as update?",
+      "revId": "eaca2ebd4c9707043f9b2f6950cd89974012ae57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80f00f1b_8e8ee09c",
+        "filename": "tools/src/cts/expectations/parse.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-11T00:59:34Z",
+      "side": 1,
+      "message": "Necessary for the `cts format` command.",
+      "parentUuid": "a1166382_dda626d5",
       "revId": "eaca2ebd4c9707043f9b2f6950cd89974012ae57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
