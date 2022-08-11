@@ -40,7 +40,9 @@ class Adapter : public AdapterBase {
     const gpu_info::D3DDriverVersion& GetDriverVersion() const;
 
   private:
-    ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(const DeviceDescriptor* descriptor) override;
+    ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(const DeviceDescriptor* descriptor,
+                                                    const TogglesSet& togglesIsUserProvided,
+                                                    const TogglesSet& userProvidedToggles) override;
     MaybeError ResetInternalDeviceForTestingImpl() override;
 
     bool AreTimestampQueriesSupported() const;

@@ -38,7 +38,9 @@ class Device final : public DeviceBase {
   public:
     static ResultOrError<Ref<Device>> Create(AdapterBase* adapter,
                                              NSPRef<id<MTLDevice>> mtlDevice,
-                                             const DeviceDescriptor* descriptor);
+                                             const DeviceDescriptor* descriptor,
+                                             const TogglesSet& togglesIsUserProvided,
+                                             const TogglesSet& userProvidedToggles);
     ~Device() override;
 
     MaybeError Initialize(const DeviceDescriptor* descriptor);
@@ -74,7 +76,9 @@ class Device final : public DeviceBase {
   private:
     Device(AdapterBase* adapter,
            NSPRef<id<MTLDevice>> mtlDevice,
-           const DeviceDescriptor* descriptor);
+           const DeviceDescriptor* descriptor,
+           const TogglesSet& togglesIsUserProvided,
+           const TogglesSet& userProvidedToggles);
 
     ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) override;
