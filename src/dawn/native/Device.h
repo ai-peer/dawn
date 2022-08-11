@@ -62,7 +62,10 @@ using WGSLExtensionSet = std::unordered_set<std::string>;
 
 class DeviceBase : public RefCountedWithExternalCount {
   public:
-    DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor);
+    DeviceBase(AdapterBase* adapter,
+               const DeviceDescriptor* descriptor,
+               const TogglesSet& togglesIsUserProvided,
+               const TogglesSet& userProvidedToggles);
     ~DeviceBase() override;
 
     // Handles the error, causing a device loss if applicable. Almost always when a device loss
@@ -482,7 +485,6 @@ class DeviceBase : public RefCountedWithExternalCount {
                                                    WGPUCreateRenderPipelineAsyncCallback callback,
                                                    void* userdata);
 
-    void ApplyToggleOverrides(const DawnTogglesDeviceDescriptor* togglesDescriptor);
     void ApplyFeatures(const DeviceDescriptor* deviceDescriptor);
 
     void SetDefaultToggles();

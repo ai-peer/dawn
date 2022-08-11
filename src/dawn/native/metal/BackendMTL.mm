@@ -299,8 +299,12 @@ class Adapter : public AdapterBase {
     }
 
   private:
-    ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(const DeviceDescriptor* descriptor) override {
-        return Device::Create(this, mDevice, descriptor);
+    ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(
+        const DeviceDescriptor* descriptor,
+        const TogglesSet& togglesIsUserProvided,
+        const TogglesSet& userProvidedToggles) override {
+        return Device::Create(this, mDevice, descriptor, togglesIsUserProvided,
+                              userProvidedToggles);
     }
 
     MaybeError InitializeImpl() override { return {}; }
@@ -377,6 +381,8 @@ class Adapter : public AdapterBase {
         }
 
         mSupportedFeatures.EnableFeature(Feature::IndirectFirstInstance);
+
+        mSupportedFeatures.EnableFeature(Feature::ShaderF16);
 
         return {};
     }

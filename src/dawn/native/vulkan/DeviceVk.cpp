@@ -78,14 +78,22 @@ class ScopedSignalSemaphore : public NonMovable {
 }  // namespace
 
 // static
-ResultOrError<Ref<Device>> Device::Create(Adapter* adapter, const DeviceDescriptor* descriptor) {
-    Ref<Device> device = AcquireRef(new Device(adapter, descriptor));
+ResultOrError<Ref<Device>> Device::Create(Adapter* adapter,
+                                          const DeviceDescriptor* descriptor,
+                                          const TogglesSet& togglesIsUserProvided,
+                                          const TogglesSet& userProvidedToggles) {
+    Ref<Device> device =
+        AcquireRef(new Device(adapter, descriptor, togglesIsUserProvided, userProvidedToggles));
     DAWN_TRY(device->Initialize(descriptor));
     return device;
 }
 
-Device::Device(Adapter* adapter, const DeviceDescriptor* descriptor)
-    : DeviceBase(adapter, descriptor), mDebugPrefix(GetNextDeviceDebugPrefix()) {
+Device::Device(Adapter* adapter,
+               const DeviceDescriptor* descriptor,
+               const TogglesSet& togglesIsUserProvided,
+               const TogglesSet& userProvidedToggles)
+    : DeviceBase(adapter, descriptor, togglesIsUserProvided, userProvidedToggles),
+      mDebugPrefix(GetNextDeviceDebugPrefix()) {
     InitTogglesFromDriver();
 }
 
