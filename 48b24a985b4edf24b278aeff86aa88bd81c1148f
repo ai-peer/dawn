@@ -16,6 +16,46 @@
       "message": "PTAL",
       "revId": "48b24a985b4edf24b278aeff86aa88bd81c1148f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "380622b9_e46e98c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-11T22:55:21Z",
+      "side": 1,
+      "message": "Nice!! This looks super clean now! Just nit on the naming though.",
+      "revId": "48b24a985b4edf24b278aeff86aa88bd81c1148f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f44790cf_40fd6baf",
+        "filename": "src/dawn/native/Visitable.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-11T22:55:21Z",
+      "side": 1,
+      "message": "Trying to decide if `Visitable` is the best name anymore given we are implementing stuff like `StreamIn/Out` and `To/FromBlob`... I also kinda liked how `Visitable` was one functionality before (separately).\n\nIs it possible to have something like... `Serializable` which extends `Visitable` and implements the `StreamIn/Out` and `To/FromBlob`?",
+      "range": {
+        "startLine": 70,
+        "startChar": 6,
+        "endLine": 70,
+        "endChar": 15
+      },
+      "revId": "48b24a985b4edf24b278aeff86aa88bd81c1148f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
