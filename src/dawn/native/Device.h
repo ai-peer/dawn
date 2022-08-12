@@ -402,6 +402,8 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     virtual void AppendDebugLayerMessages(ErrorData* error) {}
 
+    virtual void ForceEventualFlushOfCommands() {}
+
   protected:
     // Constructor used only for mocking and testing.
     DeviceBase();
@@ -415,6 +417,8 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     // Incrememt mLastSubmittedSerial when we submit the next serial
     void IncrementLastSubmittedCommandSerial();
+
+    ExecutionSerial mRealCompletedSerial = ExecutionSerial(0);
 
   private:
     void WillDropLastExternalRef() override;

@@ -763,6 +763,7 @@ MaybeError DeviceBase::CheckPassedSerials() {
 
     if (completedSerial > mCompletedSerial) {
         mCompletedSerial = completedSerial;
+        mRealCompletedSerial = mCompletedSerial;
     }
 
     return {};
