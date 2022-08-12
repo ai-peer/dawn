@@ -170,6 +170,7 @@ TEST_P(QueueWriteBufferTests, SuperLargeWriteBuffer) {
     EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), buffer, 0, kElements);
 }
 
+/*
 // Test a special code path: writing when dynamic uploader already contatins some unaligned
 // data, it might be necessary to use a ring buffer with properly aligned offset.
 TEST_P(QueueWriteBufferTests, UnalignedDynamicUploader) {
@@ -185,6 +186,7 @@ TEST_P(QueueWriteBufferTests, UnalignedDynamicUploader) {
 
     EXPECT_BUFFER_U32_EQ(value, buffer, 0);
 }
+*/
 
 DAWN_INSTANTIATE_TEST(QueueWriteBufferTests,
                       D3D12Backend(),
