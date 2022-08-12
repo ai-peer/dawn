@@ -73,6 +73,30 @@
       },
       "revId": "48b24a985b4edf24b278aeff86aa88bd81c1148f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06271a58_37cd0005",
+        "filename": "src/dawn/native/Visitable.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-12T20:08:35Z",
+      "side": 1,
+      "message": "I renamed it to Serializable and moved it to a new file",
+      "parentUuid": "f44790cf_40fd6baf",
+      "range": {
+        "startLine": 70,
+        "startChar": 6,
+        "endLine": 70,
+        "endChar": 15
+      },
+      "revId": "48b24a985b4edf24b278aeff86aa88bd81c1148f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
