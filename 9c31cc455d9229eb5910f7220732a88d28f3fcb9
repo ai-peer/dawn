@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a98e803b_f8400e8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-12T06:53:21Z",
+      "side": 1,
+      "message": "To always submit pending commands on APIOnSubmittedWorkDone could lead to unnecessary submits, after all we should just do that only if there is such pending WriteBuffer/Texture.",
+      "parentUuid": "d07892da_01bee1d7",
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff8b7ea8_33a6c2e3",
         "filename": "src/dawn/native/Device.h",
         "patchSetId": 2
