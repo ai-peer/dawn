@@ -5632,7 +5632,7 @@ FunctionEmitter::ExpressionList FunctionEmitter::MakeCoordinateOperandsForImageA
     auto* component_type = raw_coords.type;
     if (component_type->IsFloatScalar() || component_type->IsIntegerScalar()) {
         num_coords_supplied = 1;
-    } else if (auto* vec_type = As<Vector>(raw_coords.type)) {
+    } else if (auto* vec_type = As<Vector>(raw_coords.type->UnwrapRef())) {
         component_type = vec_type->type;
         num_coords_supplied = vec_type->size;
     }
