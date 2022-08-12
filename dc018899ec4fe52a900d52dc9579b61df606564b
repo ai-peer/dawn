@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "dc018899ec4fe52a900d52dc9579b61df606564b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5077b11e_7e761cca",
+        "filename": "src/dawn/glfw/BUILD.gn",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-12T10:27:06Z",
+      "side": 1,
+      "message": "The wrapping of the real GLFW or the fake one for Fuchsia has conceptually nothing to do with webgpu/glfw.h. Maybe we could remove Fuchsia support for GLFW altogether (digit@ added it years ago but it\u0027s been unused since) or move the wrapping lib to third_party/gn/glfw.",
+      "revId": "dc018899ec4fe52a900d52dc9579b61df606564b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

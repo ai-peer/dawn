@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6db84a90_aa5f0f24",
+        "filename": "include/webgpu/glfw.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-12T10:27:06Z",
+      "side": 1,
+      "message": "Using the same export macro might cause problems on Windows / MSVC because the dawn_glfw implementation code would be considered \"exporting\" the webgpu.h functions. IMHO it would be better to have a separate export macro. Ah, you did just that :)\n\nI have a slight preference for `webgpu/webgpu_glfw.h` but nothing strong.",
+      "parentUuid": "0be50262_e6d95aa5",
+      "revId": "5fe9b3bd62489cdec6d175bc148d161f05eea924",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8aabc7bb_bb62194c",
         "filename": "src/dawn/glfw/CMakeLists.txt",
         "patchSetId": 1
