@@ -122,6 +122,24 @@
       "parentUuid": "80f00f1b_8e8ee09c",
       "revId": "eaca2ebd4c9707043f9b2f6950cd89974012ae57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f758dce9_8e1b9fbb",
+        "filename": "tools/src/cts/expectations/parse.go",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-12T20:34:10Z",
+      "side": 1,
+      "message": "Ah.. it should be fine (in general) aside from manual changes I guess since `update` does the sort anyways. Would probably be best to somehow make it so that manual updates should also `format` then because otherwise the diff shows up in the next roll making it just a little harder to read the diffs.\n\nAnyways though, I removed the sort in https://dawn-review.googlesource.com/c/dawn/+/99020 in `parse` and moved it into `format`",
+      "parentUuid": "3eab0c53_a3ffd8bb",
+      "revId": "eaca2ebd4c9707043f9b2f6950cd89974012ae57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
