@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1768f48b_01d7085f",
+        "filename": "include/webgpu/glfw.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-13T12:56:48Z",
+      "side": 1,
+      "message": "Yea, I started with the same macro and then fought the build system for several hours and ended up changing it in the middle. Forgot to update the comment.\n\nRenamed to `webgpu/webgpu_glfw.h`",
+      "parentUuid": "6db84a90_aa5f0f24",
+      "revId": "5fe9b3bd62489cdec6d175bc148d161f05eea924",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8aabc7bb_bb62194c",
