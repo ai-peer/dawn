@@ -377,6 +377,8 @@ source_set("test_infra_sources") {
   sources = [
     "DawnTest.cpp",
     "DawnTest.h",
+    "DawnTestStructs.cpp",
+    "DawnTestStructs.h",
     "MockCallback.h",
     "ParamGenerator.h",
     "ToggleParser.cpp",

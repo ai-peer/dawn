@@ -28,6 +28,7 @@
 #include "dawn/dawn_proc_table.h"
 #include "dawn/native/DawnNative.h"
 #include "dawn/platform/DawnPlatform.h"
+#include "dawn/tests/DawnTestStructs.h"
 #include "dawn/tests/MockCallback.h"
 #include "dawn/tests/ParamGenerator.h"
 #include "dawn/tests/ToggleParser.h"
@@ -119,76 +120,6 @@
     ASSERT_DEVICE_ERROR_MSG_ON(device, statement, testing::_)
 
 #define ASSERT_DEVICE_ERROR(statement) ASSERT_DEVICE_ERROR_MSG(statement, testing::_)
-
-struct RGBA8 {
-    constexpr RGBA8() : RGBA8(0, 0, 0, 0) {}
-    constexpr RGBA8(uint8_t r, uint8_t g, uint8_t b, uint8_t a) : r(r), g(g), b(b), a(a) {}
-    bool operator==(const RGBA8& other) const;
-    bool operator!=(const RGBA8& other) const;
-    bool operator<=(const RGBA8& other) const;
-    bool operator>=(const RGBA8& other) const;
-
-    uint8_t r, g, b, a;
-
-    static const RGBA8 kZero;
-    static const RGBA8 kBlack;
-    static const RGBA8 kRed;
-    static const RGBA8 kGreen;
-    static const RGBA8 kBlue;
-    static const RGBA8 kYellow;
-    static const RGBA8 kWhite;
-};
-std::ostream& operator<<(std::ostream& stream, const RGBA8& color);
-
-struct BackendTestConfig {
-    BackendTestConfig(wgpu::BackendType backendType,
-                      std::initializer_list<const char*> forceEnabledWorkarounds = {},
-                      std::initializer_list<const char*> forceDisabledWorkarounds = {});
-
-    wgpu::BackendType backendType;
-
-    std::vector<const char*> forceEnabledWorkarounds;
-    std::vector<const char*> forceDisabledWorkarounds;
-};
-
-struct TestAdapterProperties : wgpu::AdapterProperties {
-    TestAdapterProperties(const wgpu::AdapterProperties& properties, bool selected);
-    std::string adapterName;
-    bool selected;
-
-  private:
-    // This may be temporary, so it is copied into |adapterName| and made private.
-    using wgpu::AdapterProperties::name;
-};
-
-struct AdapterTestParam {
-    AdapterTestParam(const BackendTestConfig& config,
-                     const TestAdapterProperties& adapterProperties);
-
-    TestAdapterProperties adapterProperties;
-    std::vector<const char*> forceEnabledWorkarounds;
-    std::vector<const char*> forceDisabledWorkarounds;
-};
-
-std::ostream& operator<<(std::ostream& os, const AdapterTestParam& param);
-
-BackendTestConfig D3D12Backend(std::initializer_list<const char*> forceEnabledWorkarounds = {},
-                               std::initializer_list<const char*> forceDisabledWorkarounds = {});
-
-BackendTestConfig MetalBackend(std::initializer_list<const char*> forceEnabledWorkarounds = {},
-                               std::initializer_list<const char*> forceDisabledWorkarounds = {});
-
-BackendTestConfig NullBackend(std::initializer_list<const char*> forceEnabledWorkarounds = {},
-                              std::initializer_list<const char*> forceDisabledWorkarounds = {});
-
-BackendTestConfig OpenGLBackend(std::initializer_list<const char*> forceEnabledWorkarounds = {},
-                                std::initializer_list<const char*> forceDisabledWorkarounds = {});
-
-BackendTestConfig OpenGLESBackend(std::initializer_list<const char*> forceEnabledWorkarounds = {},
-                                  std::initializer_list<const char*> forceDisabledWorkarounds = {});
-
-BackendTestConfig VulkanBackend(std::initializer_list<const char*> forceEnabledWorkarounds = {},
-                                std::initializer_list<const char*> forceDisabledWorkarounds = {});
 
 struct GLFWwindow;
 
