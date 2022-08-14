@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "705e5f97_9198bcf6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001771
+      },
+      "writtenOn": "2022-08-14T21:32:14Z",
+      "side": 1,
+      "message": "Hmm, the Kokoro results don\u0027t look like my fault?  Should I worry about them?",
+      "revId": "8743c242287743cd71c2f5cfd526343a1c13458e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
