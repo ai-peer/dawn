@@ -166,6 +166,9 @@ OnInstanceCreationDebugUtilsCallback(VkDebugUtilsMessageSeverityFlagBitsEXT mess
 
 VulkanInstance::VulkanInstance() = default;
 
+VulkanInstance::VulkanInstance(OverrideFunctions overrideFunctions)
+    : mOverrideFunctions(overrideFunctions) {}
+
 VulkanInstance::~VulkanInstance() {
     ASSERT(mMessageListenerDevices.empty());
 
@@ -198,8 +201,21 @@ const std::vector<VkPhysicalDevice>& VulkanInstance::GetPhysicalDevices() const 
 }
 
 // static
-ResultOrError<Ref<VulkanInstance>> VulkanInstance::Create(const InstanceBase* instance, ICD icd) {
-    Ref<VulkanInstance> vulkanInstance = AcquireRef(new VulkanInstance());
+ResultOrError<Ref<VulkanInstance>> VulkanInstance::Create(
+    const InstanceBase* instance, ICD icd) {
+    Ref<VulkanInstance> vulkanInstance =
+        AcquireRef(new VulkanInstance());
+    DAWN_TRY(vulkanInstance->Initialize(instance, icd));
+    return std::move(vulkanInstance);
+}
+
+// static
+ResultOrError<Ref<VulkanInstance>> VulkanInstance::Create(
+    const InstanceBase* instance,
+    ICD icd,
+    OverrideFunctions overrideFunctions) {
+    Ref<VulkanInstance> vulkanInstance =
+        AcquireRef(new VulkanInstance(overrideFunctions));
     DAWN_TRY(vulkanInstance->Initialize(instance, icd));
     return std::move(vulkanInstance);
 }
@@ -279,7 +295,11 @@ MaybeError VulkanInstance::Initialize(const InstanceBase* instance, ICD icd) {
         DAWN_TRY(RegisterDebugUtils());
     }
 
-    DAWN_TRY_ASSIGN(mPhysicalDevices, GatherPhysicalDevices(mInstance, mFunctions));
+    if (mOverrideFunctions.overrideGatherPhysicalDevices != nullptr){
+        mPhysicalDevices = mOverrideFunctions.overrideGatherPhysicalDevices(mInstance, mFunctions.GetInstanceProcAddr);
+    } else {
+        DAWN_TRY_ASSIGN(mPhysicalDevices, GatherPhysicalDevices(mInstance, mFunctions));
+    }
 
     return {};
 }
@@ -383,8 +403,14 @@ ResultOrError<VulkanGlobalKnobs> VulkanInstance::CreateVkInstance(const Instance
         createInfoChain.Add(&validationFeatures, VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT);
     }
 
-    DAWN_TRY(CheckVkSuccess(mFunctions.CreateInstance(&createInfo, nullptr, &mInstance),
-                            "vkCreateInstance"));
+    if (mOverrideFunctions.overrideVkCreateInstance != nullptr) {
+        DAWN_TRY(CheckVkSuccess(
+            mOverrideFunctions.overrideVkCreateInstance(&createInfo, nullptr, &mInstance, mFunctions.GetInstanceProcAddr),
+            "vkCreateInstance"));
+    } else {
+        DAWN_TRY(CheckVkSuccess(mFunctions.CreateInstance(&createInfo, nullptr, &mInstance),
+                                "vkCreateInstance"));
+    }
 
     return usedKnobs;
 }
@@ -423,6 +449,9 @@ bool VulkanInstance::HandleDeviceMessage(std::string deviceDebugPrefix, std::str
     }
     return false;
 }
+OverrideFunctions VulkanInstance::GetOverrideFunctions() {
+    return mOverrideFunctions;
+}
 
 Backend::Backend(InstanceBase* instance) : BackendConnection(instance, wgpu::BackendType::Vulkan) {}
 
@@ -459,7 +488,9 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
             continue;
         }
         if (mVulkanInstances[icd] == nullptr && instance->ConsumedError([&]() -> MaybeError {
-                DAWN_TRY_ASSIGN(mVulkanInstances[icd], VulkanInstance::Create(instance, icd));
+                DAWN_TRY_ASSIGN(
+                    mVulkanInstances[icd],
+                    VulkanInstance::Create(instance, icd, options->overrideFunctions));
                 return {};
             }())) {
             // Instance failed to initialize.

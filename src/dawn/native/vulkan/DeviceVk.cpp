@@ -78,14 +78,14 @@ class ScopedSignalSemaphore : public NonMovable {
 }  // namespace
 
 // static
-ResultOrError<Ref<Device>> Device::Create(Adapter* adapter, const DeviceDescriptor* descriptor) {
-    Ref<Device> device = AcquireRef(new Device(adapter, descriptor));
+ResultOrError<Ref<Device>> Device::Create(Adapter* adapter, const DeviceDescriptor* descriptor, OverrideFunctions overrideFunctions) {
+    Ref<Device> device = AcquireRef(new Device(adapter, descriptor, overrideFunctions));
     DAWN_TRY(device->Initialize(descriptor));
     return device;
 }
 
-Device::Device(Adapter* adapter, const DeviceDescriptor* descriptor)
-    : DeviceBase(adapter, descriptor), mDebugPrefix(GetNextDeviceDebugPrefix()) {
+Device::Device(Adapter* adapter, const DeviceDescriptor* descriptor, OverrideFunctions overrideFunctions)
+    : DeviceBase(adapter, descriptor), mOverrideFunctions(overrideFunctions), mDebugPrefix(GetNextDeviceDebugPrefix()) {
     InitTogglesFromDriver();
 }
 
@@ -554,8 +554,12 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice physicalD
         createInfo.pEnabledFeatures = &usedKnobs.features;
     }
 
-    DAWN_TRY(CheckVkSuccess(fn.CreateDevice(physicalDevice, &createInfo, nullptr, &mVkDevice),
-                            "vkCreateDevice"));
+    if (mOverrideFunctions.overrideVkCreateDevice != nullptr){
+        DAWN_TRY(CheckVkSuccess(mOverrideFunctions.overrideVkCreateDevice(physicalDevice, &createInfo, nullptr, &mVkDevice, fn.GetInstanceProcAddr), "vkCreateDevice"));
+    } else {
+        DAWN_TRY(CheckVkSuccess(fn.CreateDevice(physicalDevice, &createInfo, nullptr, &mVkDevice),
+                                "vkCreateDevice"));
+    }
 
     return usedKnobs;
 }

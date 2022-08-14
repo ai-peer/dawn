@@ -27,6 +27,7 @@
 #include "dawn/common/ityp_array.h"
 #include "dawn/native/vulkan/VulkanFunctions.h"
 #include "dawn/native/vulkan/VulkanInfo.h"
+#include "dawn/native/VulkanBackend.h"
 
 namespace dawn::native::vulkan {
 
@@ -48,7 +49,9 @@ class Device;
 class VulkanInstance : public RefCounted {
   public:
     static ResultOrError<Ref<VulkanInstance>> Create(const InstanceBase* instance, ICD icd);
+    static ResultOrError<Ref<VulkanInstance>> Create(const InstanceBase* instance, ICD icd, OverrideFunctions overrideFunctions);
     ~VulkanInstance() override;
+
 
     const VulkanFunctions& GetFunctions() const;
     VkInstance GetVkInstance() const;
@@ -61,8 +64,11 @@ class VulkanInstance : public RefCounted {
     void StopListeningForDeviceMessages(Device* device);
     bool HandleDeviceMessage(std::string deviceDebugPrefix, std::string message);
 
+    OverrideFunctions GetOverrideFunctions();
+
   private:
     VulkanInstance();
+    explicit VulkanInstance(OverrideFunctions overrideFunctions);
 
     MaybeError Initialize(const InstanceBase* instance, ICD icd);
     ResultOrError<VulkanGlobalKnobs> CreateVkInstance(const InstanceBase* instance);
@@ -73,6 +79,7 @@ class VulkanInstance : public RefCounted {
     VulkanGlobalInfo mGlobalInfo = {};
     VkInstance mInstance = VK_NULL_HANDLE;
     VulkanFunctions mFunctions;
+    OverrideFunctions mOverrideFunctions;
 
     VkDebugUtilsMessengerEXT mDebugUtilsMessenger = VK_NULL_HANDLE;
 
