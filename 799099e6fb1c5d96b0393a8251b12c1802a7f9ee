@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4401909a_2d4a0b01",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-08-15T14:03:32Z",
+      "side": 1,
+      "message": "nit: this case is untested.\n\ne.g. \n@location(0) var x:i32;",
+      "revId": "799099e6fb1c5d96b0393a8251b12c1802a7f9ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
