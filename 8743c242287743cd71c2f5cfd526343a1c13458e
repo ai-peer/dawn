@@ -16,6 +16,58 @@
       "message": "Hmm, the Kokoro results don\u0027t look like my fault?  Should I worry about them?",
       "revId": "8743c242287743cd71c2f5cfd526343a1c13458e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f645a539_e4d85599",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-15T14:09:11Z",
+      "side": 1,
+      "message": "No, Kokoro was already broken",
+      "parentUuid": "705e5f97_9198bcf6",
+      "revId": "8743c242287743cd71c2f5cfd526343a1c13458e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff8ed9a9_e8a626b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-15T14:09:11Z",
+      "side": 1,
+      "message": "LGTM, one comment.",
+      "revId": "8743c242287743cd71c2f5cfd526343a1c13458e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5dc70ae_f0d6b420",
+        "filename": "src/dawn/tests/DawnTestStructs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-15T14:09:11Z",
+      "side": 1,
+      "message": "perhaps call this file \"AdapterTestConfig.h/cpp\", and move RGBA8 into src/dawn/utils/TestUtils.h/.cpp ?",
+      "revId": "8743c242287743cd71c2f5cfd526343a1c13458e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
