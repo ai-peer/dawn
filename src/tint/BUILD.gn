@@ -1345,6 +1345,7 @@ if (tint_build_unittests) {
   tint_unittests_source_set("tint_unittests_wgsl_reader_src") {
     sources = [
       "reader/wgsl/lexer_test.cc",
+      "reader/wgsl/parser/impl_core_lhs_expression_test.cc",
       "reader/wgsl/parser_impl_additive_expression_test.cc",
       "reader/wgsl/parser_impl_and_expression_test.cc",
       "reader/wgsl/parser_impl_argument_expression_list_test.cc",
@@ -1375,6 +1376,7 @@ if (tint_build_unittests) {
       "reader/wgsl/parser_impl_if_stmt_test.cc",
       "reader/wgsl/parser_impl_inclusive_or_expression_test.cc",
       "reader/wgsl/parser_impl_increment_decrement_stmt_test.cc",
+      "reader/wgsl/parser_impl_lhs_expression_test.cc",
       "reader/wgsl/parser_impl_logical_and_expression_test.cc",
       "reader/wgsl/parser_impl_logical_or_expression_test.cc",
       "reader/wgsl/parser_impl_loop_stmt_test.cc",
