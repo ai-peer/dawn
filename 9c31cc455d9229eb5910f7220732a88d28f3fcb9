@@ -221,6 +221,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0cd0d2b1_a1a45212",
+        "filename": "src/dawn/native/DynamicUploader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-15T16:56:34Z",
+      "side": 1,
+      "message": "+1 on counting the number of bytes that need upload instead of the allocated size. An alternative is to count it only on the Vulkan backend on the CommandRecordingContext here. Either way sounds fine.\n\nThat said, isn\u0027t 64M a lot to be keeping around? For regular Dawn operations even 1MB is a lot. IDK",
+      "parentUuid": "6258f873_2e988381",
+      "range": {
+        "startLine": 130,
+        "startChar": 26,
+        "endLine": 130,
+        "endChar": 33
+      },
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "817af7d8_5b7a8362",
         "filename": "src/dawn/native/vulkan/DeviceVk.h",
         "patchSetId": 2

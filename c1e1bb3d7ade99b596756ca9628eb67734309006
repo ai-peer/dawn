@@ -18,6 +18,57 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac451565_e5656126",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-15T16:56:34Z",
+      "side": 1,
+      "message": "LGTM, I\u0027ll let Austin iterate and +2.",
+      "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75700fd0_ac470783",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-15T16:56:34Z",
+      "side": 1,
+      "message": "nit: Maybe we could be more explicit and call it ForceEventualFlushOfCommands() something like that.",
+      "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "251a455c_a992f456",
+        "filename": "src/dawn/native/DynamicUploader.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-15T16:56:34Z",
+      "side": 1,
+      "message": "nit: Doesn\u0027t need to be in the .h, it could be in the .cpp",
+      "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cde1ccfc_c8665f16",
@@ -37,6 +88,23 @@
         "endLine": 65,
         "endChar": 79
       },
+      "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8f80de4_7d5e7fb7",
+        "filename": "src/dawn/native/vulkan/DeviceVk.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-15T16:56:34Z",
+      "side": 1,
+      "message": "nit: Getting with needsSubmit vs. not seems quite important. Maybe we could have the boolean explicit, two methods or an enum to say which behavior is chosen.",
       "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
