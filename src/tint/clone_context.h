@@ -18,8 +18,6 @@
 #include <algorithm>
 #include <functional>
 #include <type_traits>
-#include <unordered_map>
-#include <unordered_set>
 #include <utility>
 #include <vector>
 
@@ -28,6 +26,7 @@
 #include "src/tint/program_id.h"
 #include "src/tint/symbol.h"
 #include "src/tint/traits.h"
+#include "src/tint/utils/hashmap.h"
 #include "src/tint/utils/vector.h"
 
 // Forward declarations
@@ -201,58 +200,56 @@ class CloneContext {
     void Clone(utils::Vector<T*, N>& to, const utils::Vector<T*, N>& from) {
         to.Reserve(from.Length());
 
-        auto list_transform_it = list_transforms_.find(&from);
-        if (list_transform_it != list_transforms_.end()) {
-            const auto& transforms = list_transform_it->second;
-            for (auto* o : transforms.insert_front_) {
+        // TODO(bclayton): PERFORMANCE - We perform expensive list_transforms_.Find() calls in this
+        // function after each call out to Clone(), as the list_transforms_ map may be mutated by
+        // the clone call. Consider using a generational ID, so that the re-lookup can be avoided if
+        // nothing changed (common case).
+
+        if (auto* transforms = list_transforms_.Find(&from)) {
+            for (auto* o : transforms->insert_front_) {
                 to.Push(CheckedCast<T>(o));
             }
             for (auto& el : from) {
-                auto insert_before_it = transforms.insert_before_.find(el);
-                if (insert_before_it != transforms.insert_before_.end()) {
-                    for (auto insert : insert_before_it->second) {
+                if (auto* insert_before = transforms->insert_before_.Find(el)) {
+                    for (auto insert : *insert_before) {
                         to.Push(CheckedCast<T>(insert));
                     }
                 }
-                if (transforms.remove_.count(el) == 0) {
+                if (!transforms->remove_.Contains(el)) {
                     to.Push(Clone(el));
                 }
-                auto insert_after_it = transforms.insert_after_.find(el);
-                if (insert_after_it != transforms.insert_after_.end()) {
-                    for (auto insert : insert_after_it->second) {
+                // Re-fetch the transforms, as the list_transforms_ map may have changed,
+                // invalidating the pointer.
+                transforms = list_transforms_.Find(&from);
+                if (auto* insert_after = transforms->insert_after_.Find(el)) {
+                    for (auto insert : *insert_after) {
                         to.Push(CheckedCast<T>(insert));
                     }
                 }
             }
-            for (auto* o : transforms.insert_back_) {
+            for (auto* o : transforms->insert_back_) {
                 to.Push(CheckedCast<T>(o));
             }
-        } else {
-            for (auto& el : from) {
-                to.Push(Clone(el));
+            return;
+        }
 
-                // Clone(el) may have inserted after
-                list_transform_it = list_transforms_.find(&from);
-                if (list_transform_it != list_transforms_.end()) {
-                    const auto& transforms = list_transform_it->second;
+        for (auto& el : from) {
+            to.Push(Clone(el));
 
-                    auto insert_after_it = transforms.insert_after_.find(el);
-                    if (insert_after_it != transforms.insert_after_.end()) {
-                        for (auto insert : insert_after_it->second) {
-                            to.Push(CheckedCast<T>(insert));
-                        }
+            // Clone (el) may have inserted after
+            if (auto* transforms = list_transforms_.Find(&from)) {
+                if (auto* insert_after = transforms->insert_after_.Find(el)) {
+                    for (auto insert : *insert_after) {
+                        to.Push(CheckedCast<T>(insert));
                     }
                 }
             }
+        }
 
-            // Clone(el)s may have inserted back
-            list_transform_it = list_transforms_.find(&from);
-            if (list_transform_it != list_transforms_.end()) {
-                const auto& transforms = list_transform_it->second;
-
-                for (auto* o : transforms.insert_back_) {
-                    to.Push(CheckedCast<T>(o));
-                }
+        // Clone (el)s may have inserted back
+        if (auto* transforms = list_transforms_.Find(&from)) {
+            for (auto* o : transforms->insert_back_) {
+                to.Push(CheckedCast<T>(o));
             }
         }
     }
@@ -358,7 +355,7 @@ class CloneContext {
     CloneContext& Replace(const WHAT* what, const WITH* with) {
         TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(Clone, src, what);
         TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(Clone, dst, with);
-        replacements_[what] = [with]() -> const Cloneable* { return with; };
+        replacements_.Add(what, [with]() -> const Cloneable* { return with; });
         return *this;
     }
 
@@ -378,7 +375,7 @@ class CloneContext {
     template <typename WHAT, typename WITH, typename = std::invoke_result_t<WITH>>
     CloneContext& Replace(const WHAT* what, WITH&& with) {
         TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(Clone, src, what);
-        replacements_[what] = with;
+        replacements_.Add(what, with);
         return *this;
     }
 
@@ -396,7 +393,7 @@ class CloneContext {
             return *this;
         }
 
-        list_transforms_[&vector].remove_.emplace(object);
+        list_transforms_.GetOrZero(&vector).remove_.Add(object);
         return *this;
     }
 
@@ -408,9 +405,8 @@ class CloneContext {
     template <typename T, size_t N, typename OBJECT>
     CloneContext& InsertFront(const utils::Vector<T, N>& vector, OBJECT* object) {
         TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(Clone, dst, object);
-        auto& transforms = list_transforms_[&vector];
-        auto& list = transforms.insert_front_;
-        list.Push(object);
+        auto& transforms = list_transforms_.GetOrZero(&vector);
+        transforms.insert_front_.Push(object);
         return *this;
     }
 
@@ -422,9 +418,8 @@ class CloneContext {
     template <typename T, size_t N, typename OBJECT>
     CloneContext& InsertBack(const utils::Vector<T, N>& vector, OBJECT* object) {
         TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(Clone, dst, object);
-        auto& transforms = list_transforms_[&vector];
-        auto& list = transforms.insert_back_;
-        list.Push(object);
+        auto& transforms = list_transforms_.GetOrZero(&vector);
+        transforms.insert_back_.Push(object);
         return *this;
     }
 
@@ -446,9 +441,8 @@ class CloneContext {
             return *this;
         }
 
-        auto& transforms = list_transforms_[&vector];
-        auto& list = transforms.insert_before_[before];
-        list.Push(object);
+        auto& transforms = list_transforms_.GetOrZero(&vector);
+        transforms.insert_before_.GetOrZero(before).Push(object);
         return *this;
     }
 
@@ -470,9 +464,8 @@ class CloneContext {
             return *this;
         }
 
-        auto& transforms = list_transforms_[&vector];
-        auto& list = transforms.insert_after_[after];
-        list.Push(object);
+        auto& transforms = list_transforms_.GetOrZero(&vector);
+        transforms.insert_after_.GetOrZero(after).Push(object);
         return *this;
     }
 
@@ -535,45 +528,37 @@ class CloneContext {
 
     /// Transformations to be applied to a list (vector)
     struct ListTransforms {
-        /// Constructor
-        ListTransforms();
-        /// Destructor
-        ~ListTransforms();
-
         /// A map of object in #src to omit when cloned into #dst.
-        std::unordered_set<const Cloneable*> remove_;
+        utils::Hashset<const Cloneable*, 4> remove_;
 
-        /// A list of objects in #dst to insert before any others when the vector is
-        /// cloned.
+        /// A list of objects in #dst to insert before any others when the vector is cloned.
         CloneableList insert_front_;
 
-        /// A list of objects in #dst to insert befor after any others when the
-        /// vector is cloned.
+        /// A list of objects in #dst to insert befor after any others when the vector is cloned.
         CloneableList insert_back_;
 
         /// A map of object in #src to the list of cloned objects in #dst.
         /// Clone(const utils::Vector<T*>& v) will use this to insert the map-value
         /// list into the target vector before cloning and inserting the map-key.
-        std::unordered_map<const Cloneable*, CloneableList> insert_before_;
+        utils::Hashmap<const Cloneable*, CloneableList, 4> insert_before_;
 
         /// A map of object in #src to the list of cloned objects in #dst.
         /// Clone(const utils::Vector<T*>& v) will use this to insert the map-value
         /// list into the target vector after cloning and inserting the map-key.
-        std::unordered_map<const Cloneable*, CloneableList> insert_after_;
+        utils::Hashmap<const Cloneable*, CloneableList, 4> insert_after_;
     };
 
-    /// A map of object in #src to functions that create their replacement in
-    /// #dst
-    std::unordered_map<const Cloneable*, std::function<const Cloneable*()>> replacements_;
+    /// A map of object in #src to functions that create their replacement in #dst
+    utils::Hashmap<const Cloneable*, std::function<const Cloneable*()>, 8> replacements_;
 
     /// A map of symbol in #src to their cloned equivalent in #dst
-    std::unordered_map<Symbol, Symbol> cloned_symbols_;
+    utils::Hashmap<Symbol, Symbol, 32> cloned_symbols_;
 
     /// Cloneable transform functions registered with ReplaceAll()
     utils::Vector<CloneableTransform, 8> transforms_;
 
     /// Map of utils::Vector pointer to transforms for that list
-    std::unordered_map<const void*, ListTransforms> list_transforms_;
+    utils::Hashmap<const void*, ListTransforms, 4> list_transforms_;
 
     /// Symbol transform registered with ReplaceAll()
     SymbolTransform symbol_transform_;
