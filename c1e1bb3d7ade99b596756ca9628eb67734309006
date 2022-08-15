@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43492d0d_067e7686",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-15T14:31:54Z",
+      "side": 1,
+      "message": "LGTM, cwallez@ is out, so Loko, WDYT?",
+      "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

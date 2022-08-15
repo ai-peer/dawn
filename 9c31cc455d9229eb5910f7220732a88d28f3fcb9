@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb032eb5_6f13a70e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-15T14:31:54Z",
+      "side": 1,
+      "message": "hm, ok; I agree we should avoid the unnecessary submits. Was hoping to avoid having multiple concepts of .used and .needsSubmit, but I don\u0027t see a good way right now.\n\nI think we may need to do OnTrackTask after Buffer mapAsync as well! That\u0027s because we need to finish executing a writeBuffer to a mappable buffer, before the mapAsync callback is called. Could we add that, as well as test for it?",
+      "parentUuid": "a98e803b_f8400e8c",
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff8b7ea8_33a6c2e3",
         "filename": "src/dawn/native/Device.h",
         "patchSetId": 2
