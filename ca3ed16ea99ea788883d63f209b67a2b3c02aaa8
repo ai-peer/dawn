@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a13255cb_df6451ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001771
+      },
+      "writtenOn": "2022-08-15T17:32:49Z",
+      "side": 1,
+      "message": "Wow, moving RGBA8 into utils:: caused a lot of churn 😞",
+      "revId": "ca3ed16ea99ea788883d63f209b67a2b3c02aaa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
