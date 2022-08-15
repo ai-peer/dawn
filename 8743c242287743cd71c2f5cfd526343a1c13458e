@@ -68,6 +68,24 @@
       "message": "perhaps call this file \"AdapterTestConfig.h/cpp\", and move RGBA8 into src/dawn/utils/TestUtils.h/.cpp ?",
       "revId": "8743c242287743cd71c2f5cfd526343a1c13458e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e8da81a_4a47d638",
+        "filename": "src/dawn/tests/DawnTestStructs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001771
+      },
+      "writtenOn": "2022-08-15T16:51:36Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "e5dc70ae_f0d6b420",
+      "revId": "8743c242287743cd71c2f5cfd526343a1c13458e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
