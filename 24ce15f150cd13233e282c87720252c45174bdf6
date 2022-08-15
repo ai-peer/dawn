@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcf7d583_43f6c119",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-15T21:57:36Z",
+      "side": 1,
+      "message": "How concerned are we about bugs that cause an async infinite loop? TBH I\u0027m not that concerned and think that such a thing should be rare. I think we should land a simple solution to gets flakes under control, and we can make it smarter in the future if there\u0027s pressure to do so.\n\nI tried a few other ways of tracking progress in previous patchsets, but they all felt like they wouldn\u0027t be completely sufficient. So instead, the latest patchset simply sends a heartbeat every 750 ms. This is good enough to catch bad infinite-loops in Renderer process code that blocks the main thread or JS code. But not good enough to catch a loop produced by infinitely creating and posting async tasks. I think that such a bug should be rare, and it would get caught by the larger global timeout we plan to add. It\u0027s hard to make a bug like that in C++. It\u0027s easy in Javascript because you can do `while (true) await new Promise(...)`, but again - I\u0027m not sure it\u0027s worth a ton of effort to gracefully handle definitely-bad code. And again, the larger global timeout will catch it.\n\nResults from Patchset 7 on Windows show that this simple heartbeat mechanism already reduces the number of flaky timeouts compared to the latest ToT build from 20 to 2. I suspect those other timeouts are coming from other parts of the harness initialization (Brian/I discussing on https://chromium-review.googlesource.com/c/chromium/src/+/3829229).\n\n",
+      "revId": "24ce15f150cd13233e282c87720252c45174bdf6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
