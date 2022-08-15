@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e072972b_1f756f92",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-15T14:16:28Z",
+      "side": 1,
+      "message": "The `Void` change seems unrelated to the fix for the actual issue? The `Maybe\u003cVoid\u003e` just seems ... odd?",
+      "revId": "799099e6fb1c5d96b0393a8251b12c1802a7f9ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4401909a_2d4a0b01",
         "filename": "src/tint/reader/wgsl/parser_impl.cc",
         "patchSetId": 1
@@ -14,6 +31,23 @@
       "writtenOn": "2022-08-15T14:03:32Z",
       "side": 1,
       "message": "nit: this case is untested.\n\ne.g. \n@location(0) var x:i32;",
+      "revId": "799099e6fb1c5d96b0393a8251b12c1802a7f9ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2bd87a5_753f4071",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-15T14:16:28Z",
+      "side": 1,
+      "message": "This seems like the only bit that\u0027s actually needed in order to fix the clusterfuzz issue?",
       "revId": "799099e6fb1c5d96b0393a8251b12c1802a7f9ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
