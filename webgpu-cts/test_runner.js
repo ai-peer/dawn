@@ -25,6 +25,58 @@ const LOGS_MAX_BYTES = 72000;
 
 var socket;
 
+// Returns a wrapper around `fn` which gets called at most once every `intervalMs`.
+// If the wrapper is called when `fn` was called too recently, `fn` is scheduled to
+// be called later in the future after the interval passes.
+function rateLimited(fn, intervalMs) {
+  const last = undefined;
+  const timer = undefined;
+  const wrappedFn = (...args) => {
+    if (timer === undefined) {
+      // If there is already a fn call scheduled, return.
+      return;
+    }
+    // Get the current time as a number.
+    const now = +new Date();
+    if (last === undefined || now - last > intervalMs) {
+      // If this is the first call, or we haven't called fn in more
+      // than `intervalMs`, call it.
+      last = now;
+      fn(...args);
+    } else if (timer === undefined) {
+      // Otherwise, we have called `fn` too recently. To rate-limit it,
+      // schedule a future call if one has not already been scheduled.
+      timer = setTimeout(() => {
+        timer = undefined; // Clear the timer to indicate nothing is scheduled.
+        last = +new Date();
+        fn(...args);
+      }, intervalMs - (now - last));
+    }
+  }
+  return wrappedFn;
+}
+
+// Make a wrapper around TestCaseRecorder that sends a rate-limited heartbeat
+// to the test harness to indicate the test is still making progress.
+function makeRecorderWithHeartbeat(rec, sendHeartbeat) {
+  sendHeartbeat = rateLimited(sendHeartbeat, 500);
+  return new Proxy(rec, {
+    // Create a wrapper around all methods of the TestCaseRecorder.
+    get(_target, prop, receiver) {
+      const orig = Reflect.get(...arguments);
+      if (typeof orig !== 'function') {
+        // Return the original property if it is not a function.
+        return orig;
+      }
+      console.log(prop);
+      return (...args) => {
+        sendHeartbeat();
+        return orig.call(receiver, ...args)
+      }
+    }
+  });
+}
+
 function byteSize(s) {
   return new Blob([s]).size;
 }
@@ -56,19 +108,24 @@ async function runCtsTest(query, use_worker) {
 
     const wpt_fn = async () => {
       sendMessageTestStarted();
-      const [rec, res] = log.record(name);
+      let [rec, res] = log.record(name);
+
+      let done = false;
+      rec = makeRecorderWithHeartbeat(rec, () => {
+        // Check the |done| bool in case this is a scheduled heartbeat
+        // after the test has finished. We have already sent TEST_STATUS.
+        if (done) return;
+        sendMessageTestHeartbeat();
+      });
       if (worker) {
         await worker.run(rec, name, expectations);
       } else {
         await testcase.run(rec, expectations);
       }
+      done = true;
 
       sendMessageTestStatus(res.status, res.timems);
-
-      let fullLogs = (res.logs ?? []).map(prettyPrintLog);
-      fullLogs = fullLogs.join('\n\n\n');
-      let logPieces = splitLogsForPayload(fullLogs);
-      sendMessageTestLog(logPieces);
+      sendMessageTestLog(res.logs);
       sendMessageTestFinished();
     };
     await wpt_fn();
@@ -100,7 +157,12 @@ function splitLogsForPayload(fullLogs) {
 }
 
 function sendMessageTestStarted() {
-  socket.send(JSON.stringify({'type': 'TEST_STARTED'}));
+  socket.send('{"type":"TEST_STARTED"}');
+}
+
+function sendMessageTestHeartbeat() {
+  console.log('heartbeat');
+  socket.send('{"type":"TEST_HEARTBEAT"}');
 }
 
 function sendMessageTestStatus(status, jsDurationMs) {
@@ -109,15 +171,18 @@ function sendMessageTestStatus(status, jsDurationMs) {
                               'js_duration_ms': jsDurationMs}));
 }
 
-function sendMessageTestLog(logPieces) {
-  logPieces.forEach((piece) => {
-    socket.send(JSON.stringify({'type': 'TEST_LOG',
-                                'log': piece}));
-  });
+function sendMessageTestLog(logs) {
+  splitLogsForPayload((logs ?? []).map(prettyPrintLog).join('\n\n'))
+    .forEach((piece) => {
+      socket.send(JSON.stringify({
+        'type': 'TEST_LOG',
+        'log': piece
+      }));
+    });
 }
 
 function sendMessageTestFinished() {
-  socket.send(JSON.stringify({'type': 'TEST_FINISHED'}));
+  socket.send('{"type":"TEST_FINISHED"}');
 }
 
 window.runCtsTest = runCtsTest;
