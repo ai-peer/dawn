@@ -16,6 +16,29 @@
       "message": "LGTM, cwallez@ is out, so Loko, WDYT?",
       "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cde1ccfc_c8665f16",
+        "filename": "src/dawn/native/vulkan/DeviceVk.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-15T14:34:25Z",
+      "side": 1,
+      "message": "is this the right default? while it certainly preserves the original behavior where it would always mark the context for submission, I think it would be better to have the default be false, so that by default, we\u0027re not making extra submits.\n\nThen, we can audit the existing call sites to check whether or not they should explicitly pass true.",
+      "range": {
+        "startLine": 65,
+        "startChar": 73,
+        "endLine": 65,
+        "endChar": 79
+      },
+      "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
