@@ -39,6 +39,30 @@
       },
       "revId": "24ce15f150cd13233e282c87720252c45174bdf6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "626d6122_9c2a8e63",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-15T22:12:04Z",
+      "side": 1,
+      "message": "I believe the only way we could stop the timer from firing would be to synchronously block on something or loop synchronously in the Renderer process\u0027s main thread. Kai should know more about the HTML event processing model though.\n\nSo there can definitely be situations where this timer will keep on firing, and the code inside testcase.run is waiting (non-synchronously) forever.\nHowever, I do think that most stuff inside testcase.run that waits also has its own timeout, so at least the majority of the time, the JS code shouldn\u0027t wait forever. Kai should know more about the harness internals though.\nex.) see https://source.chromium.org/search?q\u003df:webgpu-cts%20f:.ts$%20raceWithReject",
+      "parentUuid": "ef458611_e6610d18",
+      "range": {
+        "startLine": 62,
+        "startChar": 20,
+        "endLine": 62,
+        "endChar": 31
+      },
+      "revId": "24ce15f150cd13233e282c87720252c45174bdf6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
