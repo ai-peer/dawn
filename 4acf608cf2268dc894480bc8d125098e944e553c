@@ -33,6 +33,24 @@
       "message": "This change broke Kokoro, but annoyingly there was an transient failure that meant the Kokoro -1 was never posted.\nI\u0027ve pushed a workaround for the build failure to: https://dawn-review.googlesource.com/c/dawn/+/99040",
       "revId": "4acf608cf2268dc894480bc8d125098e944e553c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0dad9ce_50d4db18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-08-15T14:44:25Z",
+      "side": 1,
+      "message": "Thanks for handling this",
+      "parentUuid": "d55b0bdc_27339f0a",
+      "revId": "4acf608cf2268dc894480bc8d125098e944e553c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
