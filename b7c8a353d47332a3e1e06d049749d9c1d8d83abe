@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "400aab78_b6ea71ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-15T16:34:35Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b7c8a353d47332a3e1e06d049749d9c1d8d83abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7d12a50_30f533f9",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-15T16:34:35Z",
+      "side": 1,
+      "message": "Can we also have a slight modification to DepthSamplingTests to check that not only validation passes, but that performing the action of sampling through an unfilterable-float bind group layout works? The background for this change in the WebGPU spec is that this is supported in D3D12 and Vulkan (though we should still test it) but that in Metal it is technically UB that happens to work and should never be broken because applications depend on it (so it really needs testing).",
+      "revId": "b7c8a353d47332a3e1e06d049749d9c1d8d83abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0002639_85aafa7a",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-15T16:34:35Z",
+      "side": 1,
+      "message": "typo: Depth16Unorm",
+      "range": {
+        "startLine": 501,
+        "startChar": 17,
+        "endLine": 501,
+        "endChar": 30
+      },
+      "revId": "b7c8a353d47332a3e1e06d049749d9c1d8d83abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
