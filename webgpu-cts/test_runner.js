@@ -57,18 +57,20 @@ async function runCtsTest(query, use_worker) {
     const wpt_fn = async () => {
       sendMessageTestStarted();
       const [rec, res] = log.record(name);
+
+      // Send a heartbeat every 750 ms.
+      const timer = setInterval(() => {
+        sendMessageTestHeartbeat(name);
+      }, 750);
       if (worker) {
         await worker.run(rec, name, expectations);
       } else {
         await testcase.run(rec, expectations);
       }
+      clearInterval(timer);
 
       sendMessageTestStatus(res.status, res.timems);
-
-      let fullLogs = (res.logs ?? []).map(prettyPrintLog);
-      fullLogs = fullLogs.join('\n\n\n');
-      let logPieces = splitLogsForPayload(fullLogs);
-      sendMessageTestLog(logPieces);
+      sendMessageTestLog(res.logs);
       sendMessageTestFinished();
     };
     await wpt_fn();
@@ -100,7 +102,11 @@ function splitLogsForPayload(fullLogs) {
 }
 
 function sendMessageTestStarted() {
-  socket.send(JSON.stringify({'type': 'TEST_STARTED'}));
+  socket.send('{"type":"TEST_STARTED"}');
+}
+
+function sendMessageTestHeartbeat() {
+  socket.send('{"type":"TEST_HEARTBEAT"}');
 }
 
 function sendMessageTestStatus(status, jsDurationMs) {
@@ -109,15 +115,18 @@ function sendMessageTestStatus(status, jsDurationMs) {
                               'js_duration_ms': jsDurationMs}));
 }
 
-function sendMessageTestLog(logPieces) {
-  logPieces.forEach((piece) => {
-    socket.send(JSON.stringify({'type': 'TEST_LOG',
-                                'log': piece}));
-  });
+function sendMessageTestLog(logs) {
+  splitLogsForPayload((logs ?? []).map(prettyPrintLog).join('\n\n'))
+    .forEach((piece) => {
+      socket.send(JSON.stringify({
+        'type': 'TEST_LOG',
+        'log': piece
+      }));
+    });
 }
 
 function sendMessageTestFinished() {
-  socket.send(JSON.stringify({'type': 'TEST_FINISHED'}));
+  socket.send('{"type":"TEST_FINISHED"}');
 }
 
 window.runCtsTest = runCtsTest;
