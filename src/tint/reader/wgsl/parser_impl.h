@@ -456,23 +456,23 @@ class ParserImpl {
     /// Parses a `texture_samplers` grammar element
     /// @returns the parsed Type or nullptr if none matched.
     Maybe<const ast::Type*> texture_samplers();
-    /// Parses a `sampler` grammar element
+    /// Parses a `sampler_type` grammar element
     /// @returns the parsed Type or nullptr if none matched.
-    Maybe<const ast::Type*> sampler();
+    Maybe<const ast::Type*> sampler_type();
     /// Parses a `multisampled_texture` grammar element
     /// @returns returns the multisample texture dimension or kNone if none
     /// matched.
     Maybe<const ast::TextureDimension> multisampled_texture();
-    /// Parses a `sampled_texture` grammar element
+    /// Parses a `sampled_texture_type` grammar element
     /// @returns returns the sample texture dimension or kNone if none matched.
-    Maybe<const ast::TextureDimension> sampled_texture();
-    /// Parses a `storage_texture` grammar element
+    Maybe<const ast::TextureDimension> sampled_texture_type();
+    /// Parses a `storage_texture_type` grammar element
     /// @returns returns the storage texture dimension.
     /// Returns kNone if none matched.
-    Maybe<const ast::TextureDimension> storage_texture();
-    /// Parses a `depth_texture` grammar element
+    Maybe<const ast::TextureDimension> storage_texture_type();
+    /// Parses a `depth_texture_type` grammar element
     /// @returns the parsed Type or nullptr if none matched.
-    Maybe<const ast::Type*> depth_texture();
+    Maybe<const ast::Type*> depth_texture_type();
     /// Parses a 'texture_external_type' grammar element
     /// @returns the parsed Type or nullptr if none matched
     Maybe<const ast::Type*> external_texture();
