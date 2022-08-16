@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f4b8e13_653793eb",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-08-16T00:21:51Z",
+      "side": 1,
+      "message": "I agree, these tests are crucial.\n\nIt seems `DepthStencilSamplingTest` uses \"auto\" layouts, but I think you can just add new cases where `GenerateSamplingShader` additionally tests `texture_2d\u003cf32\u003e` for depth, and the auto layout algorithm will generate `UnfilterableFloat` bindings. https://gpuweb.github.io/gpuweb/#abstract-opdef-default-pipeline-layout",
+      "parentUuid": "a7d12a50_30f533f9",
+      "revId": "b7c8a353d47332a3e1e06d049749d9c1d8d83abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0002639_85aafa7a",
         "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 3
