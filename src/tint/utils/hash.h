@@ -126,6 +126,16 @@ struct UnorderedKeyWrapper {
     bool operator==(const UnorderedKeyWrapper& other) const { return value == other.value; }
 };
 
+/// A STL-compatible hasher that does a more thorough job than most implementations of std::hash.
+/// Hasher has been optimized for a better quality hash at the expense of increased computation
+/// costs.
+template <typename T>
+struct Hasher {
+    /// @param value the value to hash
+    /// @returns a hash of the value
+    size_t operator()(const T& value) { return Hash(value); }
+};
+
 }  // namespace tint::utils
 
 namespace std {
