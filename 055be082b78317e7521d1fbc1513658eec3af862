@@ -16,6 +16,24 @@
       "message": "So after investigating the for-loop hoisting, I think this may become a rabbit-hole of special cases.\n\nE.g., s.m \u003d f() where f() has side-effects will turn into\n\ns.m.v1 \u003d f().v1;\ns.m.v2 \u003d f().v2;\n\nSo that\u0027s a no-go and will have to be stored in a temporary, and also hoisted.\n\nAs an alternative I\u0027m investigating the possibility of forking the structs, as in the current patch. It handles all of the tint unit tests correctly (although one case is breaking in dawn end2end tests). The case it doesn\u0027t handle at all is aggregate assignment. I think the easiest way to fix that is to break that out into its own transform (something I\u0027ll need to do for GLSL anyway to handle interface block vs. struct). Ben, I remember you had some objections to that approach. I\u0027ll capture what I\u0027ve discovered so far in my doc and we can discuss there.",
       "revId": "055be082b78317e7521d1fbc1513658eec3af862",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb86b3c7_ca202af4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-16T20:50:47Z",
+      "side": 1,
+      "message": "Ooops, that should be:\n\ns.m1 \u003d f()[0];\ns.m2 \u003d f()[1];\n\nor something like that.",
+      "parentUuid": "146def6f_f0ac7986",
+      "revId": "055be082b78317e7521d1fbc1513658eec3af862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
