@@ -14,8 +14,7 @@ struct S1 {
 };
 
 layout(binding = 4) uniform Uniforms_1 {
-  uint i;
-  uint j;
+  Uniforms _;
 } uniforms;
 
 layout(binding = 0, std430) buffer OuterS_1 {
@@ -23,7 +22,7 @@ layout(binding = 0, std430) buffer OuterS_1 {
 } s;
 void tint_symbol() {
   InnerS v = InnerS(0);
-  s.a1[uniforms.i].a2[uniforms.j] = v;
+  s.a1[uniforms._.i].a2[uniforms._.j] = v;
 }
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;

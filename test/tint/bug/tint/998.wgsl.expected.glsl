@@ -5,7 +5,7 @@ struct Constants {
 };
 
 layout(binding = 0) uniform Constants_1 {
-  uint zero;
+  Constants _;
 } constants;
 
 struct Result {
@@ -18,7 +18,7 @@ struct S {
 
 S s = S(uint[3](0u, 0u, 0u));
 void tint_symbol() {
-  s.data[constants.zero] = 0u;
+  s.data[constants._.zero] = 0u;
 }
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;

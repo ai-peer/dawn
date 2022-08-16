@@ -21,12 +21,12 @@ struct x__atomic_compare_exchange_resulti32 {
 };
 
 layout(binding = 0, std430) buffer SB_RW_atomic_1 {
-  int arg_0;
+  SB_RW_atomic _;
 } sb_rw;
 void atomicCompareExchangeWeak_1bd40a() {
   x__atomic_compare_exchange_resulti32 res = x__atomic_compare_exchange_resulti32(0, false);
   atomic_compare_exchange_resulti32 atomic_compare_result;
-  atomic_compare_result.old_value = atomicCompSwap(sb_rw.arg_0, 1, 1);
+  atomic_compare_result.old_value = atomicCompSwap(sb_rw._.arg_0, 1, 1);
   atomic_compare_result.exchanged = atomic_compare_result.old_value == 1;
   atomic_compare_exchange_resulti32 tint_symbol = atomic_compare_result;
   int old_value_1 = tint_symbol.old_value;
@@ -71,12 +71,12 @@ struct x__atomic_compare_exchange_resulti32 {
 };
 
 layout(binding = 0, std430) buffer SB_RW_atomic_1 {
-  int arg_0;
+  SB_RW_atomic _;
 } sb_rw;
 void atomicCompareExchangeWeak_1bd40a() {
   x__atomic_compare_exchange_resulti32 res = x__atomic_compare_exchange_resulti32(0, false);
   atomic_compare_exchange_resulti32 atomic_compare_result;
-  atomic_compare_result.old_value = atomicCompSwap(sb_rw.arg_0, 1, 1);
+  atomic_compare_result.old_value = atomicCompSwap(sb_rw._.arg_0, 1, 1);
   atomic_compare_result.exchanged = atomic_compare_result.old_value == 1;
   atomic_compare_exchange_resulti32 tint_symbol = atomic_compare_result;
   int old_value_1 = tint_symbol.old_value;

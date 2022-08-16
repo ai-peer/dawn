@@ -10,13 +10,13 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_atomic_1 {
-  int arg_0;
+  SB_RW_atomic _;
 } sb_rw;
 void atomicExchange_f2e22f() {
   int arg_1 = 0;
   int res = 0;
   arg_1 = 1;
-  int x_13 = atomicExchange(sb_rw.arg_0, arg_1);
+  int x_13 = atomicExchange(sb_rw._.arg_0, arg_1);
   res = x_13;
   return;
 }
@@ -45,13 +45,13 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_atomic_1 {
-  int arg_0;
+  SB_RW_atomic _;
 } sb_rw;
 void atomicExchange_f2e22f() {
   int arg_1 = 0;
   int res = 0;
   arg_1 = 1;
-  int x_13 = atomicExchange(sb_rw.arg_0, arg_1);
+  int x_13 = atomicExchange(sb_rw._.arg_0, arg_1);
   res = x_13;
   return;
 }

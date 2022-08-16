@@ -9,17 +9,17 @@ struct vertexUniformBuffer2 {
 };
 
 layout(binding = 0) uniform vertexUniformBuffer1_1 {
-  mat2 transform1;
+  vertexUniformBuffer1 _;
 } x_20;
 
 layout(binding = 0) uniform vertexUniformBuffer2_1 {
-  mat2 transform2;
+  vertexUniformBuffer2 _;
 } x_26;
 
 vec4 tint_symbol(uint tint_symbol_1) {
   vec2 indexable[3] = vec2[3](vec2(0.0f, 0.0f), vec2(0.0f, 0.0f), vec2(0.0f, 0.0f));
-  mat2 x_23 = x_20.transform1;
-  mat2 x_28 = x_26.transform2;
+  mat2 x_23 = x_20._.transform1;
+  mat2 x_28 = x_26._.transform2;
   uint x_46 = tint_symbol_1;
   vec2 tint_symbol_2[3] = vec2[3](vec2(-1.0f, 1.0f), vec2(1.0f), vec2(-1.0f));
   indexable = tint_symbol_2;

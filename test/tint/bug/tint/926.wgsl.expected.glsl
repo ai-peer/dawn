@@ -5,11 +5,11 @@ struct DrawIndirectArgs {
 };
 
 layout(binding = 5, std430) buffer DrawIndirectArgs_1 {
-  uint vertexCount;
+  DrawIndirectArgs _;
 } drawOut;
 uint cubeVerts = 0u;
 void computeMain(uvec3 global_id) {
-  uint firstVertex = atomicAdd(drawOut.vertexCount, cubeVerts);
+  uint firstVertex = atomicAdd(drawOut._.vertexCount, cubeVerts);
 }
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;

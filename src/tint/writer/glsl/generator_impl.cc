@@ -171,6 +171,14 @@ bool PrintF16(std::ostream& out, float value) {
     }
 }
 
+bool HasRuntimeSizedArray(const sem::Struct* str) {
+    const auto& members = str->Members();
+    TINT_ASSERT(Writer, members.size() > 0);
+    auto* last_member = members[members.size() - 1];
+    auto* arr = last_member->Type()->As<sem::Array>();
+    return arr && arr->IsRuntimeSized();
+}
+
 }  // namespace
 
 SanitizedResult::SanitizedResult() = default;
@@ -288,11 +296,7 @@ bool GeneratorImpl::Generate() {
             // TODO(crbug.com/tint/1339): We could also avoid emitting any other
             // struct that is only used as a buffer store type.
             const sem::Struct* sem_str = builder_.Sem().Get(str);
-            const auto& members = sem_str->Members();
-            TINT_ASSERT(Writer, members.size() > 0);
-            auto* last_member = members[members.size() - 1];
-            auto* arr = last_member->Type()->As<sem::Array>();
-            if (!arr || !arr->IsRuntimeSized()) {
+            if (!HasRuntimeSizedArray(sem_str)) {
                 if (!EmitStructType(current_buffer_, sem_str)) {
                     return false;
                 }
@@ -1823,6 +1827,14 @@ bool GeneratorImpl::EmitExpression(std::ostream& out, const ast::Expression* exp
 
 bool GeneratorImpl::EmitIdentifier(std::ostream& out, const ast::IdentifierExpression* expr) {
     out << builder_.Symbols().NameFor(expr->symbol);
+    if (auto* var_user = builder_.Sem().Get<sem::VariableUser>(expr)) {
+        if (IsHostShareable(var_user->Variable()->StorageClass())) {
+            auto* str = var_user->Type()->UnwrapRef()->As<sem::Struct>();
+            if (!str || !HasRuntimeSizedArray(str)) {
+                out << "._";
+            }
+        }
+    }
     return true;
 }
 
@@ -1977,7 +1989,12 @@ bool GeneratorImpl::EmitUniformVariable(const ast::Var* var, const sem::Variable
         }
         out << ") uniform " << UniqueIdentifier(StructName(str)) << " {";
     }
-    EmitStructMembers(current_buffer_, str, /* emit_offsets */ true);
+    if (HasRuntimeSizedArray(str)) {
+        EmitStructMembers(current_buffer_, str, /* emit_offset */ true);
+    } else {
+        ScopedIndent si(this);
+        line() << StructName(str) << " _;";
+    }
     auto name = builder_.Symbols().NameFor(var->symbol);
     line() << "} " << name << ";";
     line();
@@ -1995,7 +2012,12 @@ bool GeneratorImpl::EmitStorageVariable(const ast::Var* var, const sem::Variable
     ast::VariableBindingPoint bp = var->BindingPoint();
     line() << "layout(binding = " << bp.binding->value << ", std430) buffer "
            << UniqueIdentifier(StructName(str)) << " {";
-    EmitStructMembers(current_buffer_, str, /* emit_offsets */ true);
+    if (HasRuntimeSizedArray(str)) {
+        EmitStructMembers(current_buffer_, str, /* emit_offset */ true);
+    } else {
+        ScopedIndent si(this);
+        line() << StructName(str) << " _;";
+    }
     auto name = builder_.Symbols().NameFor(var->symbol);
     line() << "} " << name << ";";
     return true;
