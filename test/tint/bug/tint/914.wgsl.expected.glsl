@@ -16,42 +16,40 @@ layout(binding = 2, std430) buffer Matrix_3 {
   float numbers[];
 } resultMatrix;
 layout(binding = 3) uniform Uniforms_1 {
-  uint dimAOuter;
-  uint dimInner;
-  uint dimBOuter;
+  Uniforms _;
 } uniforms;
 
 float mm_readA(uint row, uint col) {
-  bool tint_tmp = (row < uniforms.dimAOuter);
+  bool tint_tmp = (row < uniforms._.dimAOuter);
   if (tint_tmp) {
-    tint_tmp = (col < uniforms.dimInner);
+    tint_tmp = (col < uniforms._.dimInner);
   }
   if ((tint_tmp)) {
-    float result = firstMatrix.numbers[((row * uniforms.dimInner) + col)];
+    float result = firstMatrix.numbers[((row * uniforms._.dimInner) + col)];
     return result;
   }
   return 0.0f;
 }
 
 float mm_readB(uint row, uint col) {
-  bool tint_tmp_1 = (row < uniforms.dimInner);
+  bool tint_tmp_1 = (row < uniforms._.dimInner);
   if (tint_tmp_1) {
-    tint_tmp_1 = (col < uniforms.dimBOuter);
+    tint_tmp_1 = (col < uniforms._.dimBOuter);
   }
   if ((tint_tmp_1)) {
-    float result = secondMatrix.numbers[((row * uniforms.dimBOuter) + col)];
+    float result = secondMatrix.numbers[((row * uniforms._.dimBOuter) + col)];
     return result;
   }
   return 0.0f;
 }
 
 void mm_write(uint row, uint col, float value) {
-  bool tint_tmp_2 = (row < uniforms.dimAOuter);
+  bool tint_tmp_2 = (row < uniforms._.dimAOuter);
   if (tint_tmp_2) {
-    tint_tmp_2 = (col < uniforms.dimBOuter);
+    tint_tmp_2 = (col < uniforms._.dimBOuter);
   }
   if ((tint_tmp_2)) {
-    uint index = (col + (row * uniforms.dimBOuter));
+    uint index = (col + (row * uniforms._.dimBOuter));
     resultMatrix.numbers[index] = value;
   }
 }
@@ -72,7 +70,7 @@ void tint_symbol(uvec3 local_id, uvec3 global_id, uint local_invocation_index) {
   uint tileCol = (local_id.x * 4u);
   uint globalRow = (global_id.y * 4u);
   uint globalCol = (global_id.x * 4u);
-  uint numTiles = (((uniforms.dimInner - 1u) / 64u) + 1u);
+  uint numTiles = (((uniforms._.dimInner - 1u) / 64u) + 1u);
   float acc[16] = float[16](0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
   float ACached = 0.0f;
   float BCached[4] = float[4](0.0f, 0.0f, 0.0f, 0.0f);

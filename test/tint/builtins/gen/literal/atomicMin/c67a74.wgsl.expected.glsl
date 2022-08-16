@@ -6,10 +6,10 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_1 {
-  uint arg_0;
+  SB_RW _;
 } sb_rw;
 void atomicMin_c67a74() {
-  uint res = atomicMin(sb_rw.arg_0, 1u);
+  uint res = atomicMin(sb_rw._.arg_0, 1u);
 }
 
 void fragment_main() {
@@ -27,10 +27,10 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_1 {
-  uint arg_0;
+  SB_RW _;
 } sb_rw;
 void atomicMin_c67a74() {
-  uint res = atomicMin(sb_rw.arg_0, 1u);
+  uint res = atomicMin(sb_rw._.arg_0, 1u);
 }
 
 void compute_main() {

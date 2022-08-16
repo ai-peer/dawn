@@ -12,11 +12,11 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_1 {
-  int arg_0;
+  SB_RW _;
 } sb_rw;
 void atomicCompareExchangeWeak_1bd40a() {
   atomic_compare_exchange_resulti32 atomic_compare_result;
-  atomic_compare_result.old_value = atomicCompSwap(sb_rw.arg_0, 1, 1);
+  atomic_compare_result.old_value = atomicCompSwap(sb_rw._.arg_0, 1, 1);
   atomic_compare_result.exchanged = atomic_compare_result.old_value == 1;
   atomic_compare_exchange_resulti32 res = atomic_compare_result;
 }
@@ -42,11 +42,11 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_1 {
-  int arg_0;
+  SB_RW _;
 } sb_rw;
 void atomicCompareExchangeWeak_1bd40a() {
   atomic_compare_exchange_resulti32 atomic_compare_result;
-  atomic_compare_result.old_value = atomicCompSwap(sb_rw.arg_0, 1, 1);
+  atomic_compare_result.old_value = atomicCompSwap(sb_rw._.arg_0, 1, 1);
   atomic_compare_result.exchanged = atomic_compare_result.old_value == 1;
   atomic_compare_exchange_resulti32 res = atomic_compare_result;
 }

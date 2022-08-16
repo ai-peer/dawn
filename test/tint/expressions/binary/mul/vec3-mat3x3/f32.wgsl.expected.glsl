@@ -7,12 +7,11 @@ struct S {
 };
 
 layout(binding = 0) uniform S_1 {
-  mat3 matrix;
-  vec3 vector;
+  S _;
 } data;
 
 void tint_symbol() {
-  vec3 x = (data.vector * data.matrix);
+  vec3 x = (data._.vector * data._.matrix);
 }
 
 void main() {

@@ -13,7 +13,7 @@ struct OuterS {
 };
 
 layout(binding = 4) uniform Uniforms_1 {
-  uint i;
+  Uniforms _;
 } uniforms;
 
 void tint_symbol() {
@@ -21,7 +21,7 @@ void tint_symbol() {
   OuterS s1 = OuterS(InnerS[8](InnerS(0), InnerS(0), InnerS(0), InnerS(0), InnerS(0), InnerS(0), InnerS(0), InnerS(0)));
   {
     for(int i = 0; (i < 4); i = (i + 1)) {
-      s1.a1[uniforms.i] = v;
+      s1.a1[uniforms._.i] = v;
     }
   }
 }

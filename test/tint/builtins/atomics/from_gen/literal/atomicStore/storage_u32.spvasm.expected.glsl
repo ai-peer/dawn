@@ -10,10 +10,10 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_atomic_1 {
-  uint arg_0;
+  SB_RW_atomic _;
 } sb_rw;
 void atomicStore_cdc29e() {
-  atomicExchange(sb_rw.arg_0, 1u);
+  atomicExchange(sb_rw._.arg_0, 1u);
   return;
 }
 
@@ -41,10 +41,10 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_atomic_1 {
-  uint arg_0;
+  SB_RW_atomic _;
 } sb_rw;
 void atomicStore_cdc29e() {
-  atomicExchange(sb_rw.arg_0, 1u);
+  atomicExchange(sb_rw._.arg_0, 1u);
   return;
 }
 
