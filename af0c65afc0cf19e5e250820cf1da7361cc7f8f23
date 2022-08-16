@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90a22eed_8f8405e8",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-16T19:36:42Z",
+      "side": 1,
+      "message": "This is only used once, seems clearer to just use the actual type below?",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d29d9b7a_b690df85",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-16T19:36:42Z",
+      "side": 1,
+      "message": "Never used? (same with the one below)",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b293dca3_ccbedb70",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-16T19:36:42Z",
+      "side": 1,
+      "message": "Why not std::optional instead of nullptr?",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bbfc4a8_0ed0bdfb",
+        "filename": "src/tint/utils/hashset.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-16T19:36:42Z",
+      "side": 1,
+      "message": "nit: A slot is a ...",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "468cda4e_235590bc",
+        "filename": "src/tint/utils/hashset.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-16T19:36:42Z",
+      "side": 1,
+      "message": "What does `150` mean as a percentage? The set must have 150% less items then the vector?",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b510dc0b_73a2de2e",
+        "filename": "src/tint/utils/hashset.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-16T19:36:42Z",
+      "side": 1,
+      "message": "Put would be clearer as an enum param then a bool template.\n\n`Put(std::forward\u003cV\u003e(value), PutType::kReplace)`",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3905823_31343dba",
+        "filename": "src/tint/utils/hashset.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-16T19:36:42Z",
+      "side": 1,
+      "message": "std::optional?",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efff46d0_559f9799",
+        "filename": "src/tint/utils/hashset.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-16T19:36:42Z",
+      "side": 1,
+      "message": "the slot ...",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e20b33c3_93207044",
+        "filename": "src/tint/utils/hashset.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-16T19:36:42Z",
+      "side": 1,
+      "message": "nit: tparam",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ba55a31_c0c13e58",
+        "filename": "src/tint/utils/hashset.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-16T19:36:42Z",
+      "side": 1,
+      "message": "Doesn\u0027t this need to stop if `slot.distance \u003e\u003d distance` instead of the other way around?",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
