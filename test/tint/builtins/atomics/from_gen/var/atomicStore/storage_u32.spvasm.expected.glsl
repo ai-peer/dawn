@@ -10,12 +10,12 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_atomic_1 {
-  uint arg_0;
+  SB_RW_atomic _;
 } sb_rw;
 void atomicStore_cdc29e() {
   uint arg_1 = 0u;
   arg_1 = 1u;
-  atomicExchange(sb_rw.arg_0, arg_1);
+  atomicExchange(sb_rw._.arg_0, arg_1);
   return;
 }
 
@@ -43,12 +43,12 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_atomic_1 {
-  uint arg_0;
+  SB_RW_atomic _;
 } sb_rw;
 void atomicStore_cdc29e() {
   uint arg_1 = 0u;
   arg_1 = 1u;
-  atomicExchange(sb_rw.arg_0, arg_1);
+  atomicExchange(sb_rw._.arg_0, arg_1);
   return;
 }
 

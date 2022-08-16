@@ -5,7 +5,7 @@ struct S {
 };
 
 layout(binding = 0, std430) buffer S_1 {
-  int i;
+  S _;
 } s;
 void tint_symbol() {
 }

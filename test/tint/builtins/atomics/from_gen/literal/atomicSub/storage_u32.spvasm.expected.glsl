@@ -10,11 +10,11 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_atomic_1 {
-  uint arg_0;
+  SB_RW_atomic _;
 } sb_rw;
 void atomicSub_15bfc9() {
   uint res = 0u;
-  uint x_9 = atomicAdd(sb_rw.arg_0, 1u);
+  uint x_9 = atomicAdd(sb_rw._.arg_0, 1u);
   res = x_9;
   return;
 }
@@ -43,11 +43,11 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_atomic_1 {
-  uint arg_0;
+  SB_RW_atomic _;
 } sb_rw;
 void atomicSub_15bfc9() {
   uint res = 0u;
-  uint x_9 = atomicAdd(sb_rw.arg_0, 1u);
+  uint x_9 = atomicAdd(sb_rw._.arg_0, 1u);
   res = x_9;
   return;
 }

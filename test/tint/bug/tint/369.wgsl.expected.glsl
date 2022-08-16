@@ -9,9 +9,9 @@ struct S {
 };
 
 layout(binding = 0, std430) buffer S_1 {
-  mat2 m;
+  S _;
 } SSBO;
 layout(binding = 0) uniform S_2 {
-  mat2 m;
+  S _;
 } UBO;
 

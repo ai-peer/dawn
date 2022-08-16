@@ -5,7 +5,7 @@ struct S {
 };
 
 layout(binding = 0) uniform S_1 {
-  int i;
+  S _;
 } u;
 
 void tint_symbol() {

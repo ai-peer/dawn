@@ -9,11 +9,11 @@ struct i_block {
 };
 
 layout(binding = 0, std430) buffer i_block_1 {
-  uint inner;
+  i_block _;
 } i;
 void tint_symbol() {
   {
-    for(i.inner = (i.inner + 1u); (i.inner < 10u); ) {
+    for(i._.inner = (i._.inner + 1u); (i._.inner < 10u); ) {
     }
   }
 }

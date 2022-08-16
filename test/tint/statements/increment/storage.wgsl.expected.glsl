@@ -9,9 +9,9 @@ struct i_block {
 };
 
 layout(binding = 0, std430) buffer i_block_1 {
-  uint inner;
+  i_block _;
 } i;
 void tint_symbol() {
-  i.inner = (i.inner + 1u);
+  i._.inner = (i._.inner + 1u);
 }
 

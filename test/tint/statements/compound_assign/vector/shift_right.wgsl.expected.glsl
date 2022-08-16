@@ -9,9 +9,9 @@ struct S {
 };
 
 layout(binding = 0, std430) buffer S_1 {
-  ivec4 a;
+  S _;
 } v;
 void foo() {
-  v.a = (v.a >> uvec4(2u));
+  v._.a = (v._.a >> uvec4(2u));
 }
 

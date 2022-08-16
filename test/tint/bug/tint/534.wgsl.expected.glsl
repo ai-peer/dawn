@@ -11,10 +11,7 @@ layout(binding = 2, std430) buffer OutputBuf_1 {
   uint result[];
 } tint_symbol;
 layout(binding = 3) uniform Uniforms_1 {
-  uint dstTextureFlipY;
-  uint isFloat16;
-  uint isRGB10A2Unorm;
-  uint channelCount;
+  Uniforms _;
 } uniforms;
 
 uint ConvertToFp16FloatValue(float fp32) {
@@ -27,7 +24,7 @@ void tint_symbol_1(uvec3 GlobalInvocationID) {
   ivec2 size = textureSize(src_1, 0);
   ivec2 dstTexCoord = ivec2(GlobalInvocationID.xy);
   ivec2 srcTexCoord = dstTexCoord;
-  if ((uniforms.dstTextureFlipY == 1u)) {
+  if ((uniforms._.dstTextureFlipY == 1u)) {
     srcTexCoord.y = ((size.y - dstTexCoord.y) - 1);
   }
   vec4 srcColor = texelFetch(src_1, srcTexCoord, 0);
@@ -36,7 +33,7 @@ void tint_symbol_1(uvec3 GlobalInvocationID) {
   uvec4 srcColorBits = uvec4(0u, 0u, 0u, 0u);
   uvec4 dstColorBits = uvec4(dstColor);
   {
-    for(uint i = 0u; (i < uniforms.channelCount); i = (i + 1u)) {
+    for(uint i = 0u; (i < uniforms._.channelCount); i = (i + 1u)) {
       uint tint_symbol_2 = ConvertToFp16FloatValue(srcColor[i]);
       srcColorBits[i] = tint_symbol_2;
       bool tint_tmp = success;

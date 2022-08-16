@@ -388,11 +388,11 @@ struct UBO {
 };
 
 layout(binding = 0) uniform UBO_1 {
-  vec4 coord;
+  UBO _;
 } ubo;
 
 float sub_func(float param) {
-  return ubo.coord.x;
+  return ubo._.coord.x;
 }
 
 void frag_main() {
@@ -434,11 +434,11 @@ struct Uniforms {
 };
 
 layout(binding = 0) uniform Uniforms_1 {
-  vec4 coord;
+  Uniforms _;
 } uniforms;
 
 void frag_main() {
-  float v = uniforms.coord.x;
+  float v = uniforms._.coord.x;
   return;
 }
 )");
@@ -676,11 +676,11 @@ struct S {
 };
 
 layout(binding = 0) uniform S_1 {
-  float x;
+  S _;
 } coord;
 
 float sub_func(float param) {
-  return coord.x;
+  return coord._.x;
 }
 
 void frag_main() {
