@@ -87,6 +87,30 @@
       },
       "revId": "24ce15f150cd13233e282c87720252c45174bdf6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d323ed5_3b1cfd5c",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-08-16T00:34:01Z",
+      "side": 1,
+      "message": "The tests generally never block for long periods of time. The only exceptions should be things like synchronous canvas readbacks (and potentially synchronous image decodes if we add a way to pass image elements directly into WebGPU), all of which should be fast enough that this isn\u0027t a problem.\n\nThere\u0027s nothing at the framework level that catches async stalls (`raceWithRejectOnTimeout`) but most things that can timeout should use it, for example `device.lost` tests, `popErrorScope()` (https://github.com/gpuweb/cts/blob/8a9afc652513fae1a913f3db1648e5adc54239b1/src/webgpu/util/device_pool.ts#L339), and tests which access the internet (which we don\u0027t want but currently have).\n\nWorst case we timeout at the infra level. If we find cases like that, they probably need to be fixed in the CTS.",
+      "parentUuid": "40e12df1_8aa23aaf",
+      "range": {
+        "startLine": 62,
+        "startChar": 20,
+        "endLine": 62,
+        "endChar": 31
+      },
+      "revId": "24ce15f150cd13233e282c87720252c45174bdf6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
