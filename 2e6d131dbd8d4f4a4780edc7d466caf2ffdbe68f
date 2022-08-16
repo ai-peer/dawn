@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "794ea69a_ce378b7c",
+        "filename": "src/tint/sem/function.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-16T19:41:57Z",
+      "side": 1,
+      "message": "Can we put the real types back in here? This makes it a lot less clear what is actually being returned by these functions (which I think makes it a style guide violation on using `auto`).  (And below)",
+      "revId": "2e6d131dbd8d4f4a4780edc7d466caf2ffdbe68f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7831bc8b_848a7dbb",
+        "filename": "src/tint/sem/module.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-16T19:41:57Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "2e6d131dbd8d4f4a4780edc7d466caf2ffdbe68f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
