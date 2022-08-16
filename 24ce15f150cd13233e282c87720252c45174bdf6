@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65118f3d_59627eea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-16T20:53:10Z",
+      "side": 1,
+      "message": "I think in this one, Mac actually hits some infinite loop, so probably not best to submit as is. And, it looks like it still doesn\u0027t fix all instances of the timeout error after TEST_STARTED.\n\nthe other CL doesn\u0027t infinite loop, but also sees timeout errors still. Still need to identify what might be going wrong.",
+      "parentUuid": "f3752c8e_d578e7d2",
+      "revId": "24ce15f150cd13233e282c87720252c45174bdf6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef458611_e6610d18",
