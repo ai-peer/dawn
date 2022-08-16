@@ -509,7 +509,228 @@ const Constant* TransformBinaryElements(ProgramBuilder& builder,
     return CreateComposite(builder, ty, std::move(els));
 }
 
+// TODO: move to Number.h
+template <typename T>
+const char* FriendlyName() {
+    if constexpr (std::is_same_v<T, AInt>) {
+        return "abstract-int";
+    } else if constexpr (std::is_same_v<T, AFloat>) {
+        return "abstract-float";
+    } else if constexpr (std::is_same_v<T, i32>) {
+        return "i32";
+    } else if constexpr (std::is_same_v<T, u32>) {
+        return "u32";
+    } else if constexpr (std::is_same_v<T, f32>) {
+        return "f32";
+    } else if constexpr (std::is_same_v<T, f16>) {
+        return "f16"
+    } else {
+        static_assert(!sizeof(T), "Unhandled type");
+    }
+}
 }  // namespace
+
+struct ConstEval::State {
+    ConstEval* const const_eval;
+    const Source& source;
+    ProgramBuilder& builder;
+
+    State(ConstEval* const const_eval_in, const Source& source_in)
+        : const_eval(const_eval_in), source(source_in), builder(const_eval_in->builder) {}
+
+    template <typename NumberT>
+    utils::Result<NumberT> Add(NumberT a, NumberT b) {
+        using T = UnwrapNumber<NumberT>;
+        auto add_values = [](T lhs, T rhs) {
+            if constexpr (std::is_integral_v<T> && std::is_signed_v<T>) {
+                // Ensure no UB for signed overflow
+                using UT = std::make_unsigned_t<T>;
+                return static_cast<T>(static_cast<UT>(lhs) + static_cast<UT>(rhs));
+            } else {
+                return lhs + rhs;
+            }
+        };
+        NumberT result;
+        if constexpr (std::is_same_v<NumberT, AInt> || std::is_same_v<NumberT, AFloat>) {
+            // Check for over/underflow for abstract values
+            if (auto r = CheckedAdd(a, b)) {
+                result = r->value;
+            } else {
+                const_eval->AddError("'" + std::to_string(add_values(a.value, b.value)) +
+                                         "' cannot be represented as '" + FriendlyName<NumberT>() +
+                                         "'",
+                                     source);
+                return utils::Failure;
+            }
+        } else {
+            result = add_values(a.value, b.value);
+        }
+        return result;
+    }
+
+    template <typename NumberT>
+    utils::Result<NumberT> Mul(NumberT a, NumberT b) {
+        using T = UnwrapNumber<NumberT>;
+        auto mul_values = [](T lhs, T rhs) {  //
+            return lhs * rhs;
+        };
+        NumberT result;
+        if constexpr (std::is_same_v<NumberT, AInt> || std::is_same_v<NumberT, AFloat>) {
+            // Check for over/underflow for abstract values
+            if (auto r = CheckedMul(a, b)) {
+                result = r->value;
+            } else {
+                const_eval->AddError("'" + std::to_string(mul_values(a.value, b.value)) +
+                                         "' cannot be represented as '" + FriendlyName<NumberT>() +
+                                         "'",
+                                     source);
+                return utils::Failure;
+            }
+        } else {
+            result = mul_values(a.value, b.value);
+        }
+        return result;
+    }
+
+    template <typename NumberT>
+    utils::Result<NumberT> Dot2(NumberT a1, NumberT a2, NumberT b1, NumberT b2) {
+        auto ar = Mul(a1, a2);
+        if (!ar) {
+            return utils::Failure;
+        }
+        auto br = Mul(b1, b2);
+        if (!br) {
+            return utils::Failure;
+        }
+        auto r = Add(ar.Get(), br.Get());
+        if (!r) {
+            return utils::Failure;
+        }
+        return r;
+    }
+
+    template <typename NumberT>
+    utils::Result<NumberT> Dot3(NumberT a1,
+                                NumberT a2,
+                                NumberT b1,
+                                NumberT b2,
+                                NumberT c1,
+                                NumberT c2) {
+        auto ar = Mul(a1, a2);
+        if (!ar) {
+            return utils::Failure;
+        }
+        auto br = Mul(b1, b2);
+        if (!br) {
+            return utils::Failure;
+        }
+        auto cr = Mul(c1, c2);
+        if (!cr) {
+            return utils::Failure;
+        }
+        auto r = Add(ar.Get(), br.Get());
+        if (!r) {
+            return utils::Failure;
+        }
+        r = Add(r.Get(), cr.Get());
+        if (!r) {
+            return utils::Failure;
+        }
+        return r;
+    }
+
+    template <typename NumberT>
+    utils::Result<NumberT> Dot4(NumberT a1,
+                                NumberT a2,
+                                NumberT b1,
+                                NumberT b2,
+                                NumberT c1,
+                                NumberT c2,
+                                NumberT d1,
+                                NumberT d2) {
+        auto ar = Mul(a1, a2);
+        if (!ar) {
+            return utils::Failure;
+        }
+        auto br = Mul(b1, b2);
+        if (!br) {
+            return utils::Failure;
+        }
+        auto cr = Mul(c1, c2);
+        if (!cr) {
+            return utils::Failure;
+        }
+        auto dr = Mul(d1, d2);
+        if (!dr) {
+            return utils::Failure;
+        }
+        auto r = Add(ar.Get(), br.Get());
+        if (!r) {
+            return utils::Failure;
+        }
+        r = Add(r.Get(), cr.Get());
+        if (!r) {
+            return utils::Failure;
+        }
+        r = Add(r.Get(), dr.Get());
+        if (!r) {
+            return utils::Failure;
+        }
+        return r;
+    }
+
+    auto AddFunc(const sem::Type* elem_ty) {
+        auto f = [=](auto a1, auto a2) -> utils::Result<const Constant*> {
+            if (auto r = Add(a1, a2)) {
+                return CreateElement(builder, elem_ty, r.Get());
+            }
+            return utils::Failure;
+        };
+        return f;
+    }
+
+    auto MulFunc(const sem::Type* elem_ty) {
+        auto f = [=](auto a1, auto a2) -> utils::Result<const Constant*> {
+            if (auto r = Mul(a1, a2)) {
+                return CreateElement(builder, elem_ty, r.Get());
+            }
+            return utils::Failure;
+        };
+        return f;
+    }
+
+    auto Dot2Func(const sem::Type* elem_ty) {
+        auto f = [=](auto a1, auto a2, auto b1, auto b2) -> utils::Result<const Constant*> {
+            if (auto r = Dot2(a1, a2, b1, b2)) {
+                return CreateElement(builder, elem_ty, r.Get());
+            }
+            return utils::Failure;
+        };
+        return f;
+    }
+
+    auto Dot3Func(const sem::Type* elem_ty) {
+        auto f = [=](auto a1, auto a2, auto b1, auto b2, auto c1,
+                     auto c2) -> utils::Result<const Constant*> {
+            if (auto r = Dot3(a1, a2, b1, b2, c1, c2)) {
+                return CreateElement(builder, elem_ty, r.Get());
+            }
+            return utils::Failure;
+        };
+        return f;
+    }
+
+    auto Dot4Func(const sem::Type* elem_ty) {
+        auto f = [=](auto a1, auto a2, auto b1, auto b2, auto c1, auto c2, auto d1,
+                     auto d2) -> utils::Result<const Constant*> {
+            if (auto r = Dot4(a1, a2, b1, b2, c1, c2, d1, d2)) {
+                return CreateElement(builder, elem_ty, r.Get());
+            }
+            return utils::Failure;
+        };
+        return f;
+    }
+};
 
 ConstEval::ConstEval(ProgramBuilder& b) : builder(b) {}
 
@@ -756,42 +977,15 @@ ConstEval::ConstantResult ConstEval::OpUnaryMinus(const sem::Type*,
     return TransformElements(builder, transform, args[0]);
 }
 
-ConstEval::ConstantResult ConstEval::OpPlus(const sem::Type* ty,
+ConstEval::ConstantResult ConstEval::OpPlus(const sem::Type*,
                                             utils::VectorRef<const sem::Constant*> args,
                                             const Source& source) {
-    auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) {
-        auto create = [&](auto i, auto j) -> const Constant* {
-            using NumberT = decltype(i);
-            using T = UnwrapNumber<NumberT>;
-
-            auto add_values = [](T lhs, T rhs) {
-                if constexpr (std::is_integral_v<T> && std::is_signed_v<T>) {
-                    // Ensure no UB for signed overflow
-                    using UT = std::make_unsigned_t<T>;
-                    return static_cast<T>(static_cast<UT>(lhs) + static_cast<UT>(rhs));
-                } else {
-                    return lhs + rhs;
-                }
-            };
-
-            NumberT result;
-            if constexpr (std::is_same_v<NumberT, AInt> || std::is_same_v<NumberT, AFloat>) {
-                // Check for over/underflow for abstract values
-                if (auto r = CheckedAdd(i, j)) {
-                    result = r->value;
-                } else {
-                    AddError("'" + std::to_string(add_values(i.value, j.value)) +
-                                 "' cannot be represented as '" +
-                                 ty->FriendlyName(builder.Symbols()) + "'",
-                             source);
-                    return nullptr;
-                }
-            } else {
-                result = add_values(i.value, j.value);
-            }
-            return CreateElement(builder, c0->Type(), result);
-        };
-        return Dispatch_fia_fiu32_f16(create, c0, c1);
+    auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) -> const Constant* {
+        State s(this, source);
+        if (auto r = Dispatch_fia_fiu32_f16(s.AddFunc(c0->Type()), c0, c1)) {
+            return r.Get();
+        }
+        return nullptr;
     };
 
     auto r = TransformBinaryElements(builder, transform, args[0], args[1]);
@@ -844,6 +1038,166 @@ ConstEval::ConstantResult ConstEval::OpMinus(const sem::Type* ty,
         return utils::Failure;
     }
     return r;
+}
+
+ConstEval::ConstantResult ConstEval::OpStar(const sem::Type* /*ty*/,
+                                            utils::VectorRef<const sem::Constant*> args,
+                                            const Source& source) {
+    auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) -> const Constant* {
+        State s(this, source);
+        if (auto r = Dispatch_fia_fiu32_f16(s.MulFunc(c0->Type()), c0, c1)) {
+            return r.Get();
+        }
+        return nullptr;
+    };
+
+    auto r = TransformBinaryElements(builder, transform, args[0], args[1]);
+    if (builder.Diagnostics().contains_errors()) {
+        return utils::Failure;
+    }
+    return r;
+}
+
+ConstEval::ConstantResult ConstEval::OpStarMatVec(const sem::Type* ty,
+                                                  utils::VectorRef<const sem::Constant*> args,
+                                                  const Source& source) {
+    auto* mat_ty = args[0]->Type()->As<sem::Matrix>();
+    auto* vec_ty = args[1]->Type()->As<sem::Vector>();
+    auto* elem_ty = vec_ty->type();
+    State s(this, source);
+
+    auto dot = [&](const sem::Constant* m, size_t row, const sem::Constant* v) {
+        utils::Result<const Constant*> result;
+        switch (mat_ty->columns()) {
+            case 2:
+                result = Dispatch_fa_f32_f16(s.Dot2Func(elem_ty),                    //
+                                             m->Index(0)->Index(row), v->Index(0),   //
+                                             m->Index(1)->Index(row), v->Index(1));  //
+                break;
+            case 3:
+                result = Dispatch_fa_f32_f16(s.Dot3Func(elem_ty),                    //
+                                             m->Index(0)->Index(row), v->Index(0),   //
+                                             m->Index(1)->Index(row), v->Index(1),   //
+                                             m->Index(2)->Index(row), v->Index(2));  //
+                break;
+            case 4:
+                result = Dispatch_fa_f32_f16(s.Dot4Func(elem_ty),                    //
+                                             m->Index(0)->Index(row), v->Index(0),   //
+                                             m->Index(1)->Index(row), v->Index(1),   //
+                                             m->Index(2)->Index(row), v->Index(2),   //
+                                             m->Index(3)->Index(row), v->Index(3));  //
+                break;
+        }
+        return result;
+    };
+
+    utils::Vector<const sem::Constant*, 4> result;
+    for (size_t i = 0; i < mat_ty->rows(); ++i) {
+        auto r = dot(args[0], i, args[1]);  // matrix row i * vector
+        if (!r) {
+            return utils::Failure;
+        }
+        result.Push(r.Get());
+    }
+    return CreateComposite(builder, ty, result);
+}
+ConstEval::ConstantResult ConstEval::OpStarVecMat(const sem::Type* ty,
+                                                  utils::VectorRef<const sem::Constant*> args,
+                                                  const Source& source) {
+    auto* vec_ty = args[0]->Type()->As<sem::Vector>();
+    auto* mat_ty = args[1]->Type()->As<sem::Matrix>();
+    auto* elem_ty = vec_ty->type();
+    State s(this, source);
+
+    auto dot = [&](const sem::Constant* v, const sem::Constant* m, size_t col) {
+        utils::Result<const Constant*> result;
+        switch (mat_ty->rows()) {
+            case 2:
+                result = Dispatch_fa_f32_f16(s.Dot2Func(elem_ty),                    //
+                                             m->Index(col)->Index(0), v->Index(0),   //
+                                             m->Index(col)->Index(1), v->Index(1));  //
+                break;
+            case 3:
+                result = Dispatch_fa_f32_f16(s.Dot3Func(elem_ty),                    //
+                                             m->Index(col)->Index(0), v->Index(0),   //
+                                             m->Index(col)->Index(1), v->Index(1),   //
+                                             m->Index(col)->Index(2), v->Index(2));  //
+                break;
+            case 4:
+                result = Dispatch_fa_f32_f16(s.Dot4Func(elem_ty),                    //
+                                             m->Index(col)->Index(0), v->Index(0),   //
+                                             m->Index(col)->Index(1), v->Index(1),   //
+                                             m->Index(col)->Index(2), v->Index(2),   //
+                                             m->Index(col)->Index(3), v->Index(3));  //
+        }
+        return result;
+    };
+
+    utils::Vector<const sem::Constant*, 4> result;
+    for (size_t i = 0; i < mat_ty->columns(); ++i) {
+        auto r = dot(args[0], args[1], i);  // vector * matrix col i
+        if (!r) {
+            return utils::Failure;
+        }
+        result.Push(r.Get());
+    }
+    return CreateComposite(builder, ty, result);
+}
+
+ConstEval::ConstantResult ConstEval::OpStarMatMat(const sem::Type* ty,
+                                                  utils::VectorRef<const sem::Constant*> args,
+                                                  const Source& source) {
+    auto* mat1 = args[0];
+    auto* mat2 = args[1];
+    auto* mat1_ty = mat1->Type()->As<sem::Matrix>();
+    auto* mat2_ty = mat2->Type()->As<sem::Matrix>();
+    auto* elem_ty = mat1_ty->type();
+    State s(this, source);
+
+    auto dot = [&](const sem::Constant* m1, size_t row, const sem::Constant* m2, size_t col) {
+        auto m1e = [&](size_t row, size_t col) { return m1->Index(col)->Index(row); };
+        auto m2e = [&](size_t row, size_t col) { return m2->Index(col)->Index(row); };
+
+        utils::Result<const Constant*> result;
+        switch (mat1_ty->columns()) {
+            case 2:
+                result = Dispatch_fa_f32_f16(s.Dot2Func(elem_ty),       //
+                                             m1e(row, 0), m2e(0, col),  //
+                                             m1e(row, 1), m2e(1, col));
+                break;
+            case 3:
+                result = Dispatch_fa_f32_f16(s.Dot3Func(elem_ty),       //
+                                             m1e(row, 0), m2e(0, col),  //
+                                             m1e(row, 1), m2e(1, col),  //
+                                             m1e(row, 2), m2e(2, col));
+                break;
+            case 4:
+                result = Dispatch_fa_f32_f16(s.Dot4Func(elem_ty),       //
+                                             m1e(row, 0), m2e(0, col),  //
+                                             m1e(row, 1), m2e(1, col),  //
+                                             m1e(row, 2), m2e(2, col),  //
+                                             m1e(row, 3), m2e(3, col));
+                break;
+        }
+        return result;
+    };
+
+    utils::Vector<const sem::Constant*, 4> result_mat;
+    for (size_t c = 0; c < mat2_ty->columns(); ++c) {
+        utils::Vector<const sem::Constant*, 4> col_vec;
+        for (size_t r = 0; r < mat1_ty->rows(); ++r) {
+            auto v = dot(mat1, r, mat2, c);  // mat1 row r * mat2 col c
+            if (!v) {
+                return utils::Failure;
+            }
+            col_vec.Push(v.Get());  // mat1 row r * mat2 col c
+        }
+
+        // Add column vector to matrix
+        auto* col_vec_ty = ty->As<sem::Matrix>()->ColumnType();
+        result_mat.Push(CreateComposite(builder, col_vec_ty, col_vec));
+    }
+    return CreateComposite(builder, ty, result_mat);
 }
 
 ConstEval::ConstantResult ConstEval::atan2(const sem::Type*,
