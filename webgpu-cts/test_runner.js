@@ -24,37 +24,52 @@ import { TestWorker } from '../third_party/webgpu-cts/src/common/runtime/helper/
 const LOGS_MAX_BYTES = 72000;
 
 var socket;
+var id = Math.floor(Math.random() * 10000);
+console.log('ASDF Loaded page with ID ' + id);
 
 function byteSize(s) {
   return new Blob([s]).size;
 }
 
 async function setupWebsocket(port) {
+  console.log('ASDF ' + id + ' preloading');
+  const loader = new DefaultTestFileLoader();
+  await loader.listing('webgpu');
+  console.log('ASDF ' + id + ' done preloading');
   socket = new WebSocket('ws://127.0.0.1:' + port)
   socket.addEventListener('message', runCtsTestViaSocket);
+  console.log('ASDF ' + id + ' set up websocket');
 }
 
 async function runCtsTestViaSocket(event) {
+  console.log('ASDF ' + id + ' received test request');
   let input = JSON.parse(event.data);
   runCtsTest(input['q'], input['w']);
 }
 
 async function runCtsTest(query, use_worker) {
+  console.log('ASDF ' + id + ' in run function');
   const workerEnabled = use_worker;
   const worker = workerEnabled ? new TestWorker(false) : undefined;
 
+  console.log('ASDF ' + id + ' creating loader');
   const loader = new DefaultTestFileLoader();
+  console.log('ASDF ' + id + ' parsing query');
   const filterQuery = parseQuery(query);
+  console.log('ASDF ' + id + ' loading cases');
   const testcases = await loader.loadCases(filterQuery);
+  console.log('ASDF ' + id + ' finished loading cases');
 
   const expectations = [];
 
   const log = new Logger();
+  console.log('ASDF ' + id + ' finished creating logger');
 
   for (const testcase of testcases) {
     const name = testcase.query.toString();
 
     const wpt_fn = async () => {
+      console.log('ASDF ' + id + ' sending start message');
       sendMessageTestStarted();
       const [rec, res] = log.record(name);
       if (worker) {
