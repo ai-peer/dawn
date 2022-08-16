@@ -230,6 +230,42 @@ class ConstEval {
                            utils::VectorRef<const sem::Constant*> args,
                            const Source& source);
 
+    /// Star operator '*'
+    /// @param ty the expression type
+    /// @param args the input arguments
+    /// @param source the source location of the conversion
+    /// @return the result value, or null if the value cannot be calculated
+    ConstantResult OpStar(const sem::Type* ty,
+                          utils::VectorRef<const sem::Constant*> args,
+                          const Source& source);
+
+    /// Star operator '*'
+    /// @param ty the expression type
+    /// @param args the input arguments
+    /// @param source the source location of the conversion
+    /// @return the result value, or null if the value cannot be calculated
+    ConstantResult OpStarMatVec(const sem::Type* ty,
+                                utils::VectorRef<const sem::Constant*> args,
+                                const Source& source);
+
+    /// Star operator '*'
+    /// @param ty the expression type
+    /// @param args the input arguments
+    /// @param source the source location of the conversion
+    /// @return the result value, or null if the value cannot be calculated
+    ConstantResult OpStarVecMat(const sem::Type* ty,
+                                utils::VectorRef<const sem::Constant*> args,
+                                const Source& source);
+
+    /// Star operator '*'
+    /// @param ty the expression type
+    /// @param args the input arguments
+    /// @param source the source location of the conversion
+    /// @return the result value, or null if the value cannot be calculated
+    ConstantResult OpStarMatMat(const sem::Type* ty,
+                                utils::VectorRef<const sem::Constant*> args,
+                                const Source& source);
+
     ////////////////////////////////////////////////////////////////////////////
     // Builtins
     ////////////////////////////////////////////////////////////////////////////
@@ -260,6 +296,7 @@ class ConstEval {
     void AddWarning(const std::string& msg, const Source& source) const;
 
     ProgramBuilder& builder;
+    struct State;
 };
 
 }  // namespace tint::resolver
