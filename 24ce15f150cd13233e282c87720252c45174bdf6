@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3752c8e_d578e7d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2022-08-16T20:49:10Z",
+      "side": 1,
+      "message": "Should this be submitted or is it superseded by https://dawn-review.googlesource.com/c/dawn/+/99360 ?",
+      "revId": "24ce15f150cd13233e282c87720252c45174bdf6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef458611_e6610d18",
