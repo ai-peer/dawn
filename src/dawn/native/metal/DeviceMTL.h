@@ -34,6 +34,13 @@ namespace dawn::native::metal {
 
 struct KalmanInfo;
 
+enum class CounterSamplingPoint {
+    None,
+    CommandBoundary,  // Between blit commands, dispatches and draw calls
+    StageBoundary,    // The begin and end of blit pass, compute pass and render pass's
+                      // vertex/fragement stage
+};
+
 class Device final : public DeviceBase {
   public:
     static ResultOrError<Ref<Device>> Create(AdapterBase* adapter,
@@ -70,6 +77,13 @@ class Device final : public DeviceBase {
     uint64_t GetOptimalBufferToTextureCopyOffsetAlignment() const override;
 
     float GetTimestampPeriodInNS() const override;
+
+    bool IsCounterSamplingAtCommandSupported() const;
+    bool IsCounterSamplingAtStageSupported() const;
+
+    // Get a MTLBuffer that can be used as a dummy in a no-op blit encoder based on filling this
+    // single-byte buffer
+    id<MTLBuffer> GetDummyBlitMtlBuffer();
 
   private:
     Device(AdapterBase* adapter,
@@ -142,6 +156,9 @@ class Device final : public DeviceBase {
     MTLTimestamp mGpuTimestamp API_AVAILABLE(macos(10.15), ios(14.0)) = 0;
     // The parameters for kalman filter
     std::unique_ptr<KalmanInfo> mKalmanInfo;
+
+    CounterSamplingPoint mCounterSamplingPoint = CounterSamplingPoint::None;
+    NSPRef<id<MTLBuffer>> mDummyBlitMtlBuffer;
 };
 
 }  // namespace dawn::native::metal

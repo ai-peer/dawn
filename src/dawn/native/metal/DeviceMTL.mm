@@ -116,7 +116,19 @@ ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
 Device::Device(AdapterBase* adapter,
                NSPRef<id<MTLDevice>> mtlDevice,
                const DeviceDescriptor* descriptor)
-    : DeviceBase(adapter, descriptor), mMtlDevice(std::move(mtlDevice)), mCompletedSerial(0) {}
+    : DeviceBase(adapter, descriptor), mMtlDevice(std::move(mtlDevice)), mCompletedSerial(0) {
+    if (@available(macOS 11.0, iOS 14.0, *)) {
+        if (SupportCounterSamplingAtCommandBoundary(GetMTLDevice())) {
+            mCounterSamplingPoint = CounterSamplingPoint::CommandBoundary;
+        } else if (SupportCounterSamplingAtStageBoundary(GetMTLDevice())) {
+            mCounterSamplingPoint = CounterSamplingPoint::StageBoundary;
+        } else {
+            mCounterSamplingPoint = CounterSamplingPoint::None;
+        }
+    } else {
+        mCounterSamplingPoint = CounterSamplingPoint::CommandBoundary;
+    }
+}
 
 Device::~Device() {
     Destroy();
@@ -493,6 +505,7 @@ void Device::DestroyImpl() {
 
     mCommandQueue = nullptr;
     mMtlDevice = nullptr;
+    mDummyBlitMtlBuffer = nullptr;
 }
 
 uint32_t Device::GetOptimalBytesPerRowAlignment() const {
@@ -505,6 +518,23 @@ uint64_t Device::GetOptimalBufferToTextureCopyOffsetAlignment() const {
 
 float Device::GetTimestampPeriodInNS() const {
     return mTimestampPeriod;
+}
+
+bool Device::IsCounterSamplingAtCommandSupported() const {
+    return mCounterSamplingPoint == CounterSamplingPoint::CommandBoundary;
+}
+
+bool Device::IsCounterSamplingAtStageSupported() const {
+    return mCounterSamplingPoint == CounterSamplingPoint::StageBoundary;
+}
+
+id<MTLBuffer> Device::GetDummyBlitMtlBuffer() {
+    if (mDummyBlitMtlBuffer == nullptr) {
+        mDummyBlitMtlBuffer.Acquire(
+            [GetMTLDevice() newBufferWithLength:1 options:MTLResourceStorageModePrivate]);
+    }
+
+    return mDummyBlitMtlBuffer.Get();
 }
 
 }  // namespace dawn::native::metal
