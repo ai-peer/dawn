@@ -1977,7 +1977,10 @@ bool GeneratorImpl::EmitUniformVariable(const ast::Var* var, const sem::Variable
         }
         out << ") uniform " << UniqueIdentifier(StructName(str)) << " {";
     }
-    EmitStructMembers(current_buffer_, str, /* emit_offsets */ true);
+    {
+        ScopedIndent si(this);
+        line() << StructName(str) << " _;";
+    }
     auto name = builder_.Symbols().NameFor(var->symbol);
     line() << "} " << name << ";";
     line();
@@ -2624,6 +2627,11 @@ bool GeneratorImpl::EmitMemberAccessor(std::ostream& out,
                                        const ast::MemberAccessorExpression* expr) {
     if (!EmitExpression(out, expr->structure)) {
         return false;
+    }
+    if (auto* var_user = builder_.Sem().Get<sem::VariableUser>(expr->structure)) {
+        if (var_user->Variable()->StorageClass() == ast::StorageClass::kUniform) {
+            out << "._";
+        }
     }
     out << ".";
 

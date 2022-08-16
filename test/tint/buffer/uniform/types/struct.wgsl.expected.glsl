@@ -11,7 +11,7 @@ struct S {
 };
 
 layout(binding = 0) uniform S_1 {
-  Inner inner;
+  S _;
 } u;
 
 void tint_symbol() {
@@ -24,8 +24,8 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
-ERROR: 0:16: '=' :  cannot convert from 'layout( binding=0 column_major shared) uniform block{layout( column_major shared) uniform structure{ global highp float f} inner}' to ' temp structure{ global structure{ global highp float f} inner}'
-ERROR: 0:16: '' : compilation terminated 
+ERROR: 0:16: '=' :  cannot convert from 'layout( binding=0 column_major shared) uniform block{layout( column_major shared) uniform structure{layout( column_major) global structure{ global highp float f} inner} _}' to ' temp structure{ global structure{ global highp float f} inner}'
+ERROR: 0:16: '' : compilation terminated
 ERROR: 2 compilation errors.  No code generated.
 
 

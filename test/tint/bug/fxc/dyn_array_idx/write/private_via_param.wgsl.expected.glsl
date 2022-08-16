@@ -5,7 +5,7 @@ struct UBO {
 };
 
 layout(binding = 0) uniform UBO_1 {
-  int dynamic_idx;
+  UBO _;
 } ubo;
 
 struct S {
@@ -21,7 +21,7 @@ layout(binding = 1, std430) buffer Result_1 {
 } result;
 S s = S(int[64](0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 void x(inout S p) {
-  p.data[ubo.dynamic_idx] = 1;
+  p.data[ubo._.dynamic_idx] = 1;
 }
 
 void f() {

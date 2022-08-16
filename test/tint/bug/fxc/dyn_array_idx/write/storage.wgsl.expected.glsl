@@ -5,7 +5,7 @@ struct UBO {
 };
 
 layout(binding = 0) uniform UBO_1 {
-  int dynamic_idx;
+  UBO _;
 } ubo;
 
 struct Result {
@@ -23,7 +23,7 @@ layout(binding = 1, std430) buffer SSBO_1 {
   int data[4];
 } ssbo;
 void f() {
-  ssbo.data[ubo.dynamic_idx] = 1;
+  ssbo.data[ubo._.dynamic_idx] = 1;
   result.tint_symbol = ssbo.data[3];
 }
 

@@ -13,12 +13,12 @@ struct OuterS {
 };
 
 layout(binding = 4) uniform Uniforms_1 {
-  uint i;
+  Uniforms _;
 } uniforms;
 
 void f(inout OuterS p) {
   InnerS v = InnerS(0);
-  p.a1[uniforms.i] = v;
+  p.a1[uniforms._.i] = v;
 }
 
 void tint_symbol() {

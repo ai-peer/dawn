@@ -14,9 +14,7 @@ struct RenderParams {
 };
 
 layout(binding = 0) uniform RenderParams_1 {
-  mat4 modelViewProjectionMatrix;
-  vec3 right;
-  vec3 up;
+  RenderParams _;
 } render_params;
 
 struct VertexInput {
@@ -48,10 +46,10 @@ struct UBO {
 };
 
 VertexOutput vs_main(VertexInput tint_symbol) {
-  vec3 quad_pos = (mat2x3(render_params.right, render_params.up) * tint_symbol.quad_pos);
+  vec3 quad_pos = (mat2x3(render_params._.right, render_params._.up) * tint_symbol.quad_pos);
   vec3 position = (tint_symbol.position + (quad_pos * 0.01f));
   VertexOutput tint_symbol_1 = VertexOutput(vec4(0.0f, 0.0f, 0.0f, 0.0f), vec4(0.0f, 0.0f, 0.0f, 0.0f), vec2(0.0f, 0.0f));
-  tint_symbol_1.position = (render_params.modelViewProjectionMatrix * vec4(position, 1.0f));
+  tint_symbol_1.position = (render_params._.modelViewProjectionMatrix * vec4(position, 1.0f));
   tint_symbol_1.color = tint_symbol.color;
   tint_symbol_1.quad_pos = tint_symbol.quad_pos;
   return tint_symbol_1;
@@ -160,8 +158,7 @@ struct Particle {
 };
 
 layout(binding = 0) uniform SimulationParams_1 {
-  float deltaTime;
-  vec4 seed;
+  SimulationParams _;
 } sim_params;
 
 layout(binding = 1, std430) buffer Particles_1 {
@@ -173,12 +170,12 @@ struct UBO {
 
 uniform highp sampler2D tint_symbol_6;
 void simulate(uvec3 GlobalInvocationID) {
-  rand_seed = ((sim_params.seed.xy + vec2(GlobalInvocationID.xy)) * sim_params.seed.zw);
+  rand_seed = ((sim_params._.seed.xy + vec2(GlobalInvocationID.xy)) * sim_params._.seed.zw);
   uint idx = GlobalInvocationID.x;
   Particle particle = data.particles[idx];
-  particle.velocity.z = (particle.velocity.z - (sim_params.deltaTime * 0.5f));
-  particle.position = (particle.position + (sim_params.deltaTime * particle.velocity));
-  particle.lifetime = (particle.lifetime - sim_params.deltaTime);
+  particle.velocity.z = (particle.velocity.z - (sim_params._.deltaTime * 0.5f));
+  particle.position = (particle.position + (sim_params._.deltaTime * particle.velocity));
+  particle.lifetime = (particle.lifetime - sim_params._.deltaTime);
   particle.color.a = smoothstep(0.0f, 0.5f, particle.lifetime);
   if ((particle.lifetime < 0.0f)) {
     ivec2 coord = ivec2(0);
@@ -214,8 +211,8 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
-ERROR: 0:64: 'textureQueryLevels' : no matching overloaded function found 
-ERROR: 0:64: '' : compilation terminated 
+ERROR: 0:63: 'textureQueryLevels' : no matching overloaded function found
+ERROR: 0:63: '' : compilation terminated
 ERROR: 2 compilation errors.  No code generated.
 
 
@@ -257,7 +254,7 @@ struct UBO {
 };
 
 layout(binding = 3) uniform UBO_1 {
-  uint width;
+  UBO _;
 } ubo;
 
 layout(binding = 4, std430) buffer Buffer_1 {
@@ -268,7 +265,7 @@ layout(binding = 5, std430) buffer Buffer_2 {
 } buf_out;
 uniform highp sampler2D tex_in_1;
 void import_level(uvec3 coord) {
-  uint offset = (coord.x + (coord.y * ubo.width));
+  uint offset = (coord.x + (coord.y * ubo._.width));
   buf_out.weights[offset] = texelFetch(tex_in_1, ivec2(coord.xy), 0).w;
 }
 
@@ -314,7 +311,7 @@ struct UBO {
 };
 
 layout(binding = 3) uniform UBO_1 {
-  uint width;
+  UBO _;
 } ubo;
 
 layout(binding = 4, std430) buffer Buffer_1 {
@@ -326,12 +323,12 @@ layout(binding = 5, std430) buffer Buffer_2 {
 layout(rgba8) uniform highp writeonly image2D tex_out;
 void export_level(uvec3 coord) {
   if (all(lessThan(coord.xy, uvec2(imageSize(tex_out))))) {
-    uint dst_offset = (coord.x + (coord.y * ubo.width));
-    uint src_offset = ((coord.x * 2u) + ((coord.y * 2u) * ubo.width));
+    uint dst_offset = (coord.x + (coord.y * ubo._.width));
+    uint src_offset = ((coord.x * 2u) + ((coord.y * 2u) * ubo._.width));
     float a = buf_in.weights[(src_offset + 0u)];
     float b = buf_in.weights[(src_offset + 1u)];
-    float c = buf_in.weights[((src_offset + 0u) + ubo.width)];
-    float d = buf_in.weights[((src_offset + 1u) + ubo.width)];
+    float c = buf_in.weights[((src_offset + 0u) + ubo._.width)];
+    float d = buf_in.weights[((src_offset + 1u) + ubo._.width)];
     float sum = dot(vec4(a, b, c, d), vec4(1.0f));
     buf_out.weights[dst_offset] = (sum / 4.0f);
     vec4 probabilities = (vec4(a, (a + b), ((a + b) + c), sum) / max(sum, 0.0001f));

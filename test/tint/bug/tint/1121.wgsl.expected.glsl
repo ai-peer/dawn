@@ -31,12 +31,7 @@ struct Config {
 };
 
 layout(binding = 0) uniform Config_1 {
-  uint numLights;
-  uint numTiles;
-  uint tileCountX;
-  uint tileCountY;
-  uint numTileLightSlot;
-  uint tileSize;
+  Config _;
 } config;
 
 struct Uniforms {
@@ -48,27 +43,23 @@ struct Uniforms {
 };
 
 layout(binding = 0) uniform Uniforms_1 {
-  vec4 tint_symbol;
-  vec4 tint_symbol_1;
-  mat4 viewMatrix;
-  mat4 projectionMatrix;
-  vec4 fullScreenSize;
+  Uniforms _;
 } uniforms;
 
 void tint_symbol_2(uvec3 GlobalInvocationID) {
   uint index = GlobalInvocationID.x;
-  if ((index >= config.numLights)) {
+  if ((index >= config._.numLights)) {
     return;
   }
   lightsBuffer.lights[index].position.y = ((lightsBuffer.lights[index].position.y - 0.100000001f) + (0.001f * (float(index) - (64.0f * floor((float(index) / 64.0f))))));
-  if ((lightsBuffer.lights[index].position.y < uniforms.tint_symbol.y)) {
-    lightsBuffer.lights[index].position.y = uniforms.tint_symbol_1.y;
+  if ((lightsBuffer.lights[index].position.y < uniforms._.tint_symbol.y)) {
+    lightsBuffer.lights[index].position.y = uniforms._.tint_symbol_1.y;
   }
-  mat4 M = uniforms.projectionMatrix;
+  mat4 M = uniforms._.projectionMatrix;
   float viewNear = (-(M[3][2]) / (-1.0f + M[2][2]));
   float viewFar = (-(M[3][2]) / (1.0f + M[2][2]));
   vec4 lightPos = lightsBuffer.lights[index].position;
-  lightPos = (uniforms.viewMatrix * lightPos);
+  lightPos = (uniforms._.viewMatrix * lightPos);
   lightPos = (lightPos / lightPos.w);
   float lightRadius = lightsBuffer.lights[index].radius;
   vec4 boxMin = (lightPos - vec4(vec3(lightRadius), 0.0f));
@@ -83,8 +74,8 @@ void tint_symbol_2(uvec3 GlobalInvocationID) {
       {
         for(int x_1 = 0; (x_1 < TILE_COUNT_X); x_1 = (x_1 + 1)) {
           ivec2 tilePixel0Idx = ivec2((x_1 * TILE_SIZE), (y_1 * TILE_SIZE));
-          vec2 floorCoord = (((2.0f * vec2(tilePixel0Idx)) / uniforms.fullScreenSize.xy) - vec2(1.0f));
-          vec2 ceilCoord = (((2.0f * vec2((tilePixel0Idx + ivec2(TILE_SIZE)))) / uniforms.fullScreenSize.xy) - vec2(1.0f));
+          vec2 floorCoord = (((2.0f * vec2(tilePixel0Idx)) / uniforms._.fullScreenSize.xy) - vec2(1.0f));
+          vec2 ceilCoord = (((2.0f * vec2((tilePixel0Idx + ivec2(TILE_SIZE)))) / uniforms._.fullScreenSize.xy) - vec2(1.0f));
           vec2 viewFloorCoord = vec2((((-(viewNear) * floorCoord.x) - (M[2][0] * viewNear)) / M[0][0]), (((-(viewNear) * floorCoord.y) - (M[2][1] * viewNear)) / M[1][1]));
           vec2 viewCeilCoord = vec2((((-(viewNear) * ceilCoord.x) - (M[2][0] * viewNear)) / M[0][0]), (((-(viewNear) * ceilCoord.y) - (M[2][1] * viewNear)) / M[1][1]));
           frustumPlanes[0] = vec4(1.0f, 0.0f, (-(viewFloorCoord.x) / viewNear), 0.0f);
@@ -118,13 +109,13 @@ void tint_symbol_2(uvec3 GlobalInvocationID) {
             uint tileId = uint((x_1 + (y_1 * TILE_COUNT_X)));
             bool tint_tmp = (tileId < 0u);
             if (!tint_tmp) {
-              tint_tmp = (tileId >= config.numTiles);
+              tint_tmp = (tileId >= config._.numTiles);
             }
             if ((tint_tmp)) {
               continue;
             }
             uint offset = atomicAdd(tileLightId.data[tileId].count, 1u);
-            if ((offset >= config.numTileLightSlot)) {
+            if ((offset >= config._.numTileLightSlot)) {
               continue;
             }
             tileLightId.data[tileId].lightId[offset] = GlobalInvocationID.x;

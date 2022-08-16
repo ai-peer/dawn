@@ -19,21 +19,21 @@ struct S {
 };
 
 layout(binding = 0) uniform S_1 {
-  Inner arr[8];
+  S _;
 } s;
 
 void tint_symbol(uint idx) {
-  ivec3 a = s.arr[idx].a;
-  int b = s.arr[idx].b;
-  uvec3 c = s.arr[idx].c;
-  uint d = s.arr[idx].d;
-  vec3 e = s.arr[idx].e;
-  float f = s.arr[idx].f;
-  ivec2 g = s.arr[idx].g;
-  ivec2 h = s.arr[idx].h;
-  mat2x3 i = s.arr[idx].i;
-  mat3x2 j = s.arr[idx].j;
-  ivec4 k[4] = s.arr[idx].k;
+  ivec3 a = s._.arr[idx].a;
+  int b = s._.arr[idx].b;
+  uvec3 c = s._.arr[idx].c;
+  uint d = s._.arr[idx].d;
+  vec3 e = s._.arr[idx].e;
+  float f = s._.arr[idx].f;
+  ivec2 g = s._.arr[idx].g;
+  ivec2 h = s._.arr[idx].h;
+  mat2x3 i = s._.arr[idx].i;
+  mat3x2 j = s._.arr[idx].j;
+  ivec4 k[4] = s._.arr[idx].k;
 }
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;

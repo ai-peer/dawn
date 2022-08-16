@@ -23,12 +23,7 @@ struct ExternalTextureParams {
 };
 
 layout(binding = 3) uniform ExternalTextureParams_1 {
-  uint numPlanes;
-  uint doYuvToRgbConversionOnly;
-  mat3x4 yuvToRgbConversionMatrix;
-  GammaTransferParams gammaDecodeParams;
-  GammaTransferParams gammaEncodeParams;
-  mat3 gamutConversionMatrix;
+  ExternalTextureParams _;
 } ext_tex_params;
 
 vec3 gammaCorrection(vec3 v, GammaTransferParams params) {
@@ -75,9 +70,9 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
-ERROR: 0:59: 'textureSampleExternal' : no matching overloaded function found 
-ERROR: 0:59: '=' :  cannot convert from ' const float' to ' temp highp 4-component vector of float'
-ERROR: 0:59: '' : compilation terminated 
+ERROR: 0:54: 'textureSampleExternal' : no matching overloaded function found
+ERROR: 0:54: '=' :  cannot convert from ' const float' to ' temp highp 4-component vector of float'
+ERROR: 0:54: '' : compilation terminated
 ERROR: 3 compilation errors.  No code generated.
 
 
@@ -106,12 +101,7 @@ struct ExternalTextureParams {
 };
 
 layout(binding = 3) uniform ExternalTextureParams_1 {
-  uint numPlanes;
-  uint doYuvToRgbConversionOnly;
-  mat3x4 yuvToRgbConversionMatrix;
-  GammaTransferParams gammaDecodeParams;
-  GammaTransferParams gammaEncodeParams;
-  mat3 gamutConversionMatrix;
+  ExternalTextureParams _;
 } ext_tex_params;
 
 vec3 gammaCorrection(vec3 v, GammaTransferParams params) {
@@ -153,9 +143,9 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
-ERROR: 0:60: 'textureSampleExternal' : no matching overloaded function found 
-ERROR: 0:60: '=' :  cannot convert from ' const float' to ' temp mediump 4-component vector of float'
-ERROR: 0:60: '' : compilation terminated 
+ERROR: 0:55: 'textureSampleExternal' : no matching overloaded function found
+ERROR: 0:55: '=' :  cannot convert from ' const float' to ' temp mediump 4-component vector of float'
+ERROR: 0:55: '' : compilation terminated
 ERROR: 3 compilation errors.  No code generated.
 
 
@@ -183,12 +173,7 @@ struct ExternalTextureParams {
 };
 
 layout(binding = 3) uniform ExternalTextureParams_1 {
-  uint numPlanes;
-  uint doYuvToRgbConversionOnly;
-  mat3x4 yuvToRgbConversionMatrix;
-  GammaTransferParams gammaDecodeParams;
-  GammaTransferParams gammaEncodeParams;
-  mat3 gamutConversionMatrix;
+  ExternalTextureParams _;
 } ext_tex_params;
 
 vec3 gammaCorrection(vec3 v, GammaTransferParams params) {
@@ -231,9 +216,9 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
-ERROR: 0:59: 'textureSampleExternal' : no matching overloaded function found 
-ERROR: 0:59: '=' :  cannot convert from ' const float' to ' temp highp 4-component vector of float'
-ERROR: 0:59: '' : compilation terminated 
+ERROR: 0:54: 'textureSampleExternal' : no matching overloaded function found
+ERROR: 0:54: '=' :  cannot convert from ' const float' to ' temp highp 4-component vector of float'
+ERROR: 0:54: '' : compilation terminated
 ERROR: 3 compilation errors.  No code generated.
 
 
