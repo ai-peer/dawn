@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a37053b_3dd4bf79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-16T21:00:43Z",
+      "side": 1,
+      "message": "PTAL. The tests are copied over from the existing `and`, `or` and `xor` tests with minor modifications.",
+      "revId": "be8aafda9991129ded315dec72fa5d5273fae5b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
