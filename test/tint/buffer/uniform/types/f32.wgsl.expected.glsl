@@ -5,11 +5,11 @@ struct u_block {
 };
 
 layout(binding = 0) uniform u_block_1 {
-  float inner;
+  u_block _;
 } u;
 
 void tint_symbol() {
-  float x = u.inner;
+  float x = u._.inner;
 }
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;

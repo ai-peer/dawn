@@ -6,13 +6,12 @@ struct Uniforms {
 };
 
 layout(binding = 4) uniform Uniforms_1 {
-  uint i;
-  uint j;
+  Uniforms _;
 } uniforms;
 
 void tint_symbol() {
   mat2x4 m1 = mat2x4(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-  m1[uniforms.i][0] = 1.0f;
+  m1[uniforms._.i][0] = 1.0f;
 }
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;

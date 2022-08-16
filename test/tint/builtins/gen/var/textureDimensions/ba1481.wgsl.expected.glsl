@@ -21,12 +21,7 @@ struct ExternalTextureParams {
 };
 
 layout(binding = 2) uniform ExternalTextureParams_1 {
-  uint numPlanes;
-  uint doYuvToRgbConversionOnly;
-  mat3x4 yuvToRgbConversionMatrix;
-  GammaTransferParams gammaDecodeParams;
-  GammaTransferParams gammaEncodeParams;
-  mat3 gamutConversionMatrix;
+  ExternalTextureParams _;
 } ext_tex_params;
 
 uniform highp sampler2D arg_0_1;
@@ -71,12 +66,7 @@ struct ExternalTextureParams {
 };
 
 layout(binding = 2) uniform ExternalTextureParams_1 {
-  uint numPlanes;
-  uint doYuvToRgbConversionOnly;
-  mat3x4 yuvToRgbConversionMatrix;
-  GammaTransferParams gammaDecodeParams;
-  GammaTransferParams gammaEncodeParams;
-  mat3 gamutConversionMatrix;
+  ExternalTextureParams _;
 } ext_tex_params;
 
 uniform highp sampler2D arg_0_1;
@@ -115,12 +105,7 @@ struct ExternalTextureParams {
 };
 
 layout(binding = 2) uniform ExternalTextureParams_1 {
-  uint numPlanes;
-  uint doYuvToRgbConversionOnly;
-  mat3x4 yuvToRgbConversionMatrix;
-  GammaTransferParams gammaDecodeParams;
-  GammaTransferParams gammaEncodeParams;
-  mat3 gamutConversionMatrix;
+  ExternalTextureParams _;
 } ext_tex_params;
 
 uniform highp sampler2D arg_0_1;

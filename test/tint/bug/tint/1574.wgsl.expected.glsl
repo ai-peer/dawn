@@ -16,14 +16,14 @@ struct a_u32_block {
 };
 
 layout(binding = 0, std430) buffer a_u32_block_1 {
-  uint inner;
+  a_u32_block _;
 } a_u32;
 struct a_i32_block {
   int inner;
 };
 
 layout(binding = 1, std430) buffer a_i32_block_1 {
-  int inner;
+  a_i32_block _;
 } a_i32;
 shared uint b_u32;
 shared int b_i32;
@@ -36,30 +36,30 @@ void tint_symbol(uint local_invocation_index) {
   {
     uint value = 42u;
     atomic_compare_exchange_resultu32 atomic_compare_result;
-    atomic_compare_result.old_value = atomicCompSwap(a_u32.inner, 0u, value);
+    atomic_compare_result.old_value = atomicCompSwap(a_u32._.inner, 0u, value);
     atomic_compare_result.exchanged = atomic_compare_result.old_value == 0u;
     atomic_compare_exchange_resultu32 r1 = atomic_compare_result;
     atomic_compare_exchange_resultu32 atomic_compare_result_1;
-    atomic_compare_result_1.old_value = atomicCompSwap(a_u32.inner, 0u, value);
+    atomic_compare_result_1.old_value = atomicCompSwap(a_u32._.inner, 0u, value);
     atomic_compare_result_1.exchanged = atomic_compare_result_1.old_value == 0u;
     atomic_compare_exchange_resultu32 r2 = atomic_compare_result_1;
     atomic_compare_exchange_resultu32 atomic_compare_result_2;
-    atomic_compare_result_2.old_value = atomicCompSwap(a_u32.inner, 0u, value);
+    atomic_compare_result_2.old_value = atomicCompSwap(a_u32._.inner, 0u, value);
     atomic_compare_result_2.exchanged = atomic_compare_result_2.old_value == 0u;
     atomic_compare_exchange_resultu32 r3 = atomic_compare_result_2;
   }
   {
     int value = 42;
     atomic_compare_exchange_resulti32 atomic_compare_result_3;
-    atomic_compare_result_3.old_value = atomicCompSwap(a_i32.inner, 0, value);
+    atomic_compare_result_3.old_value = atomicCompSwap(a_i32._.inner, 0, value);
     atomic_compare_result_3.exchanged = atomic_compare_result_3.old_value == 0;
     atomic_compare_exchange_resulti32 r1 = atomic_compare_result_3;
     atomic_compare_exchange_resulti32 atomic_compare_result_4;
-    atomic_compare_result_4.old_value = atomicCompSwap(a_i32.inner, 0, value);
+    atomic_compare_result_4.old_value = atomicCompSwap(a_i32._.inner, 0, value);
     atomic_compare_result_4.exchanged = atomic_compare_result_4.old_value == 0;
     atomic_compare_exchange_resulti32 r2 = atomic_compare_result_4;
     atomic_compare_exchange_resulti32 atomic_compare_result_5;
-    atomic_compare_result_5.old_value = atomicCompSwap(a_i32.inner, 0, value);
+    atomic_compare_result_5.old_value = atomicCompSwap(a_i32._.inner, 0, value);
     atomic_compare_result_5.exchanged = atomic_compare_result_5.old_value == 0;
     atomic_compare_exchange_resulti32 r3 = atomic_compare_result_5;
   }

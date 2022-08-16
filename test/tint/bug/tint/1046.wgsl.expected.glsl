@@ -19,11 +19,7 @@ struct Uniforms {
 };
 
 layout(binding = 0) uniform Uniforms_1 {
-  mat4 worldView;
-  mat4 proj;
-  uint numPointLights;
-  uint color_source;
-  vec4 color;
+  Uniforms _;
 } uniforms;
 
 layout(binding = 1, std430) buffer PointLights_1 {
