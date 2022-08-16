@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc3fe175_f58bad8d",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-16T07:01:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75700fd0_ac470783",
+      "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "251a455c_a992f456",
@@ -82,6 +100,24 @@
       "writtenOn": "2022-08-15T16:56:34Z",
       "side": 1,
       "message": "nit: Doesn\u0027t need to be in the .h, it could be in the .cpp",
+      "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cc34d88_297eaa5b",
+        "filename": "src/dawn/native/DynamicUploader.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-16T07:01:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "251a455c_a992f456",
       "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -122,6 +158,48 @@
       "writtenOn": "2022-08-15T16:56:34Z",
       "side": 1,
       "message": "nit: Getting with needsSubmit vs. not seems quite important. Maybe we could have the boolean explicit, two methods or an enum to say which behavior is chosen.",
+      "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d178f99b_cc31f982",
+        "filename": "src/dawn/native/vulkan/DeviceVk.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-16T07:01:51Z",
+      "side": 1,
+      "message": "Sounds fair.\nPlease help audit these call sites. I am not quite familiar with some of them. Thanks!",
+      "parentUuid": "cde1ccfc_c8665f16",
+      "range": {
+        "startLine": 65,
+        "startChar": 73,
+        "endLine": 65,
+        "endChar": 79
+      },
+      "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cacdf880_9e9adc5e",
+        "filename": "src/dawn/native/vulkan/DeviceVk.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-16T07:01:51Z",
+      "side": 1,
+      "message": "Sound good. Please help audit the existing call sites of GetPendingrecordingContext.",
+      "parentUuid": "a8f80de4_7d5e7fb7",
       "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

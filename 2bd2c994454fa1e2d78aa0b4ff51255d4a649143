@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b21dba2e_7988d55a",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-16T07:01:51Z",
+      "side": 1,
+      "message": "Looks unnecessary to delay submit for testing only code.",
+      "range": {
+        "startLine": 220,
+        "startChar": 55,
+        "endLine": 220,
+        "endChar": 59
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ed9585c_ab78310d",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-16T07:01:51Z",
+      "side": 1,
+      "message": "Not sure about this.",
+      "range": {
+        "startLine": 230,
+        "startChar": 91,
+        "endLine": 230,
+        "endChar": 95
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0487bc1a_7cff0eaa",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-16T07:01:51Z",
+      "side": 1,
+      "message": "\u0027false\u0027 here can lead to the CQ [fail](https://ci.chromium.org/ui/p/dawn/builders/try/linux-clang-dbg-x64/b8805711684613257553/overview). There might be something unexpected in the implementation exposed. Let me know if it\u0027s worth digging deeper into that.",
+      "range": {
+        "startLine": 811,
+        "startChar": 75,
+        "endLine": 811,
+        "endChar": 79
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d1f24ba_b0ec7120",
+        "filename": "src/dawn/native/vulkan/NativeSwapChainImplVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-16T07:01:51Z",
+      "side": 1,
+      "message": "Totally unfamiliar with this.",
+      "range": {
+        "startLine": 191,
+        "startChar": 40,
+        "endLine": 191,
+        "endChar": 44
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b55132a2_e52b3a42",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-16T07:01:51Z",
+      "side": 1,
+      "message": "Not sure.",
+      "range": {
+        "startLine": 76,
+        "startChar": 83,
+        "endLine": 76,
+        "endChar": 87
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47a976fe_9642bf94",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-16T07:01:51Z",
+      "side": 1,
+      "message": "Not sure.",
+      "range": {
+        "startLine": 530,
+        "startChar": 83,
+        "endLine": 530,
+        "endChar": 87
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "480a51d6_5784433d",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-16T07:01:51Z",
+      "side": 1,
+      "message": "Not sure",
+      "range": {
+        "startLine": 641,
+        "startChar": 43,
+        "endLine": 641,
+        "endChar": 47
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adde6ce6_edaaa3f5",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-16T07:01:51Z",
+      "side": 1,
+      "message": "Seems testing only.",
+      "range": {
+        "startLine": 708,
+        "startChar": 81,
+        "endLine": 708,
+        "endChar": 85
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

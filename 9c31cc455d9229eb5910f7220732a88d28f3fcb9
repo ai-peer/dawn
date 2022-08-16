@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d2e34dff_2b5bd8cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-16T07:01:51Z",
+      "side": 1,
+      "message": "There are quite a few such test cases like [this](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/end2end/BufferTests.cpp;l\u003d134). It didn\u0027t fail because this [GetPendingRecordingContext](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/BufferVk.cpp;drc\u003d41e4d9a34c1d9dcb2eef3ff39ff9c1f987bfa02a;l\u003d309) enables `needsSubmit`. Corrected in the latest PS.",
+      "parentUuid": "fb032eb5_6f13a70e",
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff8b7ea8_33a6c2e3",
         "filename": "src/dawn/native/Device.h",
         "patchSetId": 2
@@ -233,6 +251,30 @@
       "side": 1,
       "message": "+1 on counting the number of bytes that need upload instead of the allocated size. An alternative is to count it only on the Vulkan backend on the CommandRecordingContext here. Either way sounds fine.\n\nThat said, isn\u0027t 64M a lot to be keeping around? For regular Dawn operations even 1MB is a lot. IDK",
       "parentUuid": "6258f873_2e988381",
+      "range": {
+        "startLine": 130,
+        "startChar": 26,
+        "endLine": 130,
+        "endChar": 33
+      },
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a426158c_a2df1a1e",
+        "filename": "src/dawn/native/DynamicUploader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-16T07:01:51Z",
+      "side": 1,
+      "message": "IIUC, DynamicUploader tracks staging buffers for both WriteBuffer and WriteTexture, not only internally from Dawn\u0027s implementation, but also externally from clients. So 1MB might not be large enough. I am not firmly sure 64M would be an ideal one. My consideration was that it should be as large as possible to save submits for WriteBuffer/Texture, meanwhile it shouldn\u0027t count too much regarding OOM. In this sense \u002764M\u0027 seems a safe one as modern GPUs usually have dozens of GB physical memory.\n\nAs the original concern is OOM, probably it makes more sense to count how much Dawn has allocated from the device, rather than actually used by Dawn itself.",
+      "parentUuid": "0cd0d2b1_a1a45212",
       "range": {
         "startLine": 130,
         "startChar": 26,
