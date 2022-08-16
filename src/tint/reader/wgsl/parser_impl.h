@@ -637,6 +637,10 @@ class ParserImpl {
     /// Parses the `equality_expression` grammar element
     /// @returns the parsed expression or nullptr
     Maybe<const ast::Expression*> equality_expression();
+    /// Parses the `bitwise_expression.post.unary_expression` grammar element
+    /// @returns the parsed expression or nullptr
+    Maybe<const ast::Expression*> bitwise_expression_post_unary_expression(
+        const ast::Expression* lhs);
     /// Parses the recursive part of the `and_expression`, erroring on parse
     /// failure.
     /// @param lhs the left side of the expression
