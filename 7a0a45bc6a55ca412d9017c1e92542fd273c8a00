@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e73b615_a0d78050",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-16T20:51:12Z",
+      "side": 1,
+      "message": "This version is now rebased onto the forked-structs transform, so all forking of structs has been removed here.",
+      "revId": "7a0a45bc6a55ca412d9017c1e92542fd273c8a00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
