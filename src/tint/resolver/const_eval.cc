@@ -509,7 +509,287 @@ const Constant* TransformBinaryElements(ProgramBuilder& builder,
     return CreateComposite(builder, ty, std::move(els));
 }
 
+// TODO: move to Number.h
+template <typename T>
+const char* FriendlyName() {
+    if constexpr (std::is_same_v<T, AInt>) {
+        return "abstract-int";
+    } else if constexpr (std::is_same_v<T, AFloat>) {
+        return "abstract-float";
+    } else if constexpr (std::is_same_v<T, i32>) {
+        return "i32";
+    } else if constexpr (std::is_same_v<T, u32>) {
+        return "u32";
+    } else if constexpr (std::is_same_v<T, f32>) {
+        return "f32";
+    } else if constexpr (std::is_same_v<T, f16>) {
+        return "f16"
+    } else {
+        static_assert(!sizeof(T), "Unhandled type");
+    }
+}
 }  // namespace
+
+/// Holds the evaluation state for a single constant evaluation operation, and provides reusable
+/// helpers to implement it.
+struct ConstEval::State {
+  private:
+    ConstEval* const const_eval;
+    const Source& source;
+    ProgramBuilder& builder;
+
+  public:
+    /// Constructor
+    /// @param const_eval_in ConstEval pointer
+    /// @param source_in source of expression being evaluated
+    State(ConstEval* const const_eval_in, const Source& source_in)
+        : const_eval(const_eval_in), source(source_in), builder(const_eval_in->builder) {}
+
+    /// Adds two Number<T>s
+    /// @param a the lhs number
+    /// @param b the rhs number
+    /// @returns the result number on success, or logs an error and returns Failure
+    template <typename NumberT>
+    utils::Result<NumberT> Add(NumberT a, NumberT b) {
+        using T = UnwrapNumber<NumberT>;
+        auto add_values = [](T lhs, T rhs) {
+            if constexpr (std::is_integral_v<T> && std::is_signed_v<T>) {
+                // Ensure no UB for signed overflow
+                using UT = std::make_unsigned_t<T>;
+                return static_cast<T>(static_cast<UT>(lhs) + static_cast<UT>(rhs));
+            } else {
+                return lhs + rhs;
+            }
+        };
+        NumberT result;
+        if constexpr (std::is_same_v<NumberT, AInt> || std::is_same_v<NumberT, AFloat>) {
+            // Check for over/underflow for abstract values
+            if (auto r = CheckedAdd(a, b)) {
+                result = r->value;
+            } else {
+                const_eval->AddError("'" + std::to_string(add_values(a.value, b.value)) +
+                                         "' cannot be represented as '" + FriendlyName<NumberT>() +
+                                         "'",
+                                     source);
+                return utils::Failure;
+            }
+        } else {
+            result = add_values(a.value, b.value);
+        }
+        return result;
+    }
+
+    /// Multiplies two Number<T>s
+    /// @param a the lhs number
+    /// @param b the rhs number
+    /// @returns the result number on success, or logs an error and returns Failure
+    template <typename NumberT>
+    utils::Result<NumberT> Mul(NumberT a, NumberT b) {
+        using T = UnwrapNumber<NumberT>;
+        auto mul_values = [](T lhs, T rhs) {  //
+            return lhs * rhs;
+        };
+        NumberT result;
+        if constexpr (std::is_same_v<NumberT, AInt> || std::is_same_v<NumberT, AFloat>) {
+            // Check for over/underflow for abstract values
+            if (auto r = CheckedMul(a, b)) {
+                result = r->value;
+            } else {
+                const_eval->AddError("'" + std::to_string(mul_values(a.value, b.value)) +
+                                         "' cannot be represented as '" + FriendlyName<NumberT>() +
+                                         "'",
+                                     source);
+                return utils::Failure;
+            }
+        } else {
+            result = mul_values(a.value, b.value);
+        }
+        return result;
+    }
+
+    /// Returns the dot product of (a1,a2) with (b1,b2)
+    /// @param a1 component 1 of lhs vector
+    /// @param a2 component 2 of lhs vector
+    /// @param b1 component 1 of rhs vector
+    /// @param b2 component 2 of lhs vector
+    /// @returns the result number on success, or logs an error and returns Failure
+    template <typename NumberT>
+    utils::Result<NumberT> Dot2(NumberT a1, NumberT a2, NumberT b1, NumberT b2) {
+        auto r1 = Mul(a1, b1);
+        if (!r1) {
+            return utils::Failure;
+        }
+        auto r2 = Mul(a2, b2);
+        if (!r2) {
+            return utils::Failure;
+        }
+        auto r = Add(r1.Get(), r2.Get());
+        if (!r) {
+            return utils::Failure;
+        }
+        return r;
+    }
+
+    /// Returns the dot product of (a1,a2,a3) with (b1,b2,b3)
+    /// @param a1 component 1 of lhs vector
+    /// @param a2 component 2 of lhs vector
+    /// @param a3 component 3 of lhs vector
+    /// @param b1 component 1 of rhs vector
+    /// @param b2 component 2 of lhs vector
+    /// @param b3 component 3 of lhs vector
+    /// @returns the result number on success, or logs an error and returns Failure
+    template <typename NumberT>
+    utils::Result<NumberT> Dot3(NumberT a1,
+                                NumberT a2,
+                                NumberT a3,
+                                NumberT b1,
+                                NumberT b2,
+                                NumberT b3) {
+        auto r1 = Mul(a1, b1);
+        if (!r1) {
+            return utils::Failure;
+        }
+        auto r2 = Mul(a2, b2);
+        if (!r2) {
+            return utils::Failure;
+        }
+        auto r3 = Mul(a3, b3);
+        if (!r3) {
+            return utils::Failure;
+        }
+        auto r = Add(r1.Get(), r2.Get());
+        if (!r) {
+            return utils::Failure;
+        }
+        r = Add(r.Get(), r3.Get());
+        if (!r) {
+            return utils::Failure;
+        }
+        return r;
+    }
+
+    /// Returns the dot product of (a1,b1,c1,d1) with (a2,b2,c2,d2)
+    /// @param a1 component 1 of lhs vector
+    /// @param a2 component 2 of lhs vector
+    /// @param a3 component 3 of lhs vector
+    /// @param a4 component 4 of lhs vector
+    /// @param b1 component 1 of rhs vector
+    /// @param b2 component 2 of lhs vector
+    /// @param b3 component 3 of lhs vector
+    /// @param b4 component 4 of lhs vector
+    /// @returns the result number on success, or logs an error and returns Failure
+    template <typename NumberT>
+    utils::Result<NumberT> Dot4(NumberT a1,
+                                NumberT a2,
+                                NumberT a3,
+                                NumberT a4,
+                                NumberT b1,
+                                NumberT b2,
+                                NumberT b3,
+                                NumberT b4) {
+        auto r1 = Mul(a1, b1);
+        if (!r1) {
+            return utils::Failure;
+        }
+        auto r2 = Mul(a2, b2);
+        if (!r2) {
+            return utils::Failure;
+        }
+        auto r3 = Mul(a3, b3);
+        if (!r3) {
+            return utils::Failure;
+        }
+        auto r4 = Mul(a4, b4);
+        if (!r4) {
+            return utils::Failure;
+        }
+        auto r = Add(r1.Get(), r2.Get());
+        if (!r) {
+            return utils::Failure;
+        }
+        r = Add(r.Get(), r3.Get());
+        if (!r) {
+            return utils::Failure;
+        }
+        r = Add(r.Get(), r4.Get());
+        if (!r) {
+            return utils::Failure;
+        }
+        return r;
+    }
+
+    /// Returns a callable that calls Add, and creates a Constant with its result of type `elem_ty`
+    /// if successful, or returns Failure otherwise.
+    /// @param elem_ty the element type of the Constant to create on success
+    /// @returns the callable function
+    auto AddFunc(const sem::Type* elem_ty) {
+        auto f = [=](auto a1, auto a2) -> utils::Result<const Constant*> {
+            if (auto r = Add(a1, a2)) {
+                return CreateElement(builder, elem_ty, r.Get());
+            }
+            return utils::Failure;
+        };
+        return f;
+    }
+
+    /// Returns a callable that calls Mul, and creates a Constant with its result of type `elem_ty`
+    /// if successful, or returns Failure otherwise.
+    /// @param elem_ty the element type of the Constant to create on success
+    /// @returns the callable function
+    auto MulFunc(const sem::Type* elem_ty) {
+        auto f = [=](auto a1, auto a2) -> utils::Result<const Constant*> {
+            if (auto r = Mul(a1, a2)) {
+                return CreateElement(builder, elem_ty, r.Get());
+            }
+            return utils::Failure;
+        };
+        return f;
+    }
+
+    /// Returns a callable that calls Dot2, and creates a Constant with its result of type `elem_ty`
+    /// if successful, or returns Failure otherwise.
+    /// @param elem_ty the element type of the Constant to create on success
+    /// @returns the callable function
+    auto Dot2Func(const sem::Type* elem_ty) {
+        auto f = [=](auto a1, auto a2, auto b1, auto b2) -> utils::Result<const Constant*> {
+            if (auto r = Dot2(a1, a2, b1, b2)) {
+                return CreateElement(builder, elem_ty, r.Get());
+            }
+            return utils::Failure;
+        };
+        return f;
+    }
+
+    /// Returns a callable that calls Dot3, and creates a Constant with its result of type `elem_ty`
+    /// if successful, or returns Failure otherwise.
+    /// @param elem_ty the element type of the Constant to create on success
+    /// @returns the callable function
+    auto Dot3Func(const sem::Type* elem_ty) {
+        auto f = [=](auto a1, auto a2, auto a3, auto b1, auto b2,
+                     auto b3) -> utils::Result<const Constant*> {
+            if (auto r = Dot3(a1, a2, a3, b1, b2, b3)) {
+                return CreateElement(builder, elem_ty, r.Get());
+            }
+            return utils::Failure;
+        };
+        return f;
+    }
+
+    /// Returns a callable that calls Dot4, and creates a Constant with its result of type `elem_ty`
+    /// if successful, or returns Failure otherwise.
+    /// @param elem_ty the element type of the Constant to create on success
+    /// @returns the callable function
+    auto Dot4Func(const sem::Type* elem_ty) {
+        auto f = [=](auto a1, auto a2, auto a3, auto a4, auto b1, auto b2, auto b3,
+                     auto b4) -> utils::Result<const Constant*> {
+            if (auto r = Dot4(a1, a2, a3, a4, b1, b2, b3, b4)) {
+                return CreateElement(builder, elem_ty, r.Get());
+            }
+            return utils::Failure;
+        };
+        return f;
+    }
+};
 
 ConstEval::ConstEval(ProgramBuilder& b) : builder(b) {}
 
@@ -756,42 +1036,15 @@ ConstEval::ConstantResult ConstEval::OpUnaryMinus(const sem::Type*,
     return TransformElements(builder, transform, args[0]);
 }
 
-ConstEval::ConstantResult ConstEval::OpPlus(const sem::Type* ty,
+ConstEval::ConstantResult ConstEval::OpPlus(const sem::Type*,
                                             utils::VectorRef<const sem::Constant*> args,
                                             const Source& source) {
-    auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) {
-        auto create = [&](auto i, auto j) -> const Constant* {
-            using NumberT = decltype(i);
-            using T = UnwrapNumber<NumberT>;
-
-            auto add_values = [](T lhs, T rhs) {
-                if constexpr (std::is_integral_v<T> && std::is_signed_v<T>) {
-                    // Ensure no UB for signed overflow
-                    using UT = std::make_unsigned_t<T>;
-                    return static_cast<T>(static_cast<UT>(lhs) + static_cast<UT>(rhs));
-                } else {
-                    return lhs + rhs;
-                }
-            };
-
-            NumberT result;
-            if constexpr (std::is_same_v<NumberT, AInt> || std::is_same_v<NumberT, AFloat>) {
-                // Check for over/underflow for abstract values
-                if (auto r = CheckedAdd(i, j)) {
-                    result = r->value;
-                } else {
-                    AddError("'" + std::to_string(add_values(i.value, j.value)) +
-                                 "' cannot be represented as '" +
-                                 ty->FriendlyName(builder.Symbols()) + "'",
-                             source);
-                    return nullptr;
-                }
-            } else {
-                result = add_values(i.value, j.value);
-            }
-            return CreateElement(builder, c0->Type(), result);
-        };
-        return Dispatch_fia_fiu32_f16(create, c0, c1);
+    auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) -> const Constant* {
+        State s(this, source);
+        if (auto r = Dispatch_fia_fiu32_f16(s.AddFunc(c0->Type()), c0, c1)) {
+            return r.Get();
+        }
+        return nullptr;
     };
 
     auto r = TransformBinaryElements(builder, transform, args[0], args[1]);
@@ -844,6 +1097,192 @@ ConstEval::ConstantResult ConstEval::OpMinus(const sem::Type* ty,
         return utils::Failure;
     }
     return r;
+}
+
+ConstEval::ConstantResult ConstEval::OpStar(const sem::Type* /*ty*/,
+                                            utils::VectorRef<const sem::Constant*> args,
+                                            const Source& source) {
+    auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) -> const Constant* {
+        State s(this, source);
+        if (auto r = Dispatch_fia_fiu32_f16(s.MulFunc(c0->Type()), c0, c1)) {
+            return r.Get();
+        }
+        return nullptr;
+    };
+
+    auto r = TransformBinaryElements(builder, transform, args[0], args[1]);
+    if (builder.Diagnostics().contains_errors()) {
+        return utils::Failure;
+    }
+    return r;
+}
+
+ConstEval::ConstantResult ConstEval::OpStarMatVec(const sem::Type* ty,
+                                                  utils::VectorRef<const sem::Constant*> args,
+                                                  const Source& source) {
+    auto* mat_ty = args[0]->Type()->As<sem::Matrix>();
+    auto* vec_ty = args[1]->Type()->As<sem::Vector>();
+    auto* elem_ty = vec_ty->type();
+    State s(this, source);
+
+    auto dot = [&](const sem::Constant* m, size_t row, const sem::Constant* v) {
+        utils::Result<const Constant*> result;
+        switch (mat_ty->columns()) {
+            case 2:
+                result = Dispatch_fa_f32_f16(s.Dot2Func(elem_ty),      //
+                                             m->Index(0)->Index(row),  //
+                                             m->Index(1)->Index(row),  //
+                                             v->Index(0),              //
+                                             v->Index(1));
+                break;
+            case 3:
+                result = Dispatch_fa_f32_f16(s.Dot3Func(elem_ty),      //
+                                             m->Index(0)->Index(row),  //
+                                             m->Index(1)->Index(row),  //
+                                             m->Index(2)->Index(row),  //
+                                             v->Index(0),              //
+                                             v->Index(1), v->Index(2));
+                break;
+            case 4:
+                result = Dispatch_fa_f32_f16(s.Dot4Func(elem_ty),      //
+                                             m->Index(0)->Index(row),  //
+                                             m->Index(1)->Index(row),  //
+                                             m->Index(2)->Index(row),  //
+                                             m->Index(3)->Index(row),  //
+                                             v->Index(0),              //
+                                             v->Index(1),              //
+                                             v->Index(2),              //
+                                             v->Index(3));
+                break;
+        }
+        return result;
+    };
+
+    utils::Vector<const sem::Constant*, 4> result;
+    for (size_t i = 0; i < mat_ty->rows(); ++i) {
+        auto r = dot(args[0], i, args[1]);  // matrix row i * vector
+        if (!r) {
+            return utils::Failure;
+        }
+        result.Push(r.Get());
+    }
+    return CreateComposite(builder, ty, result);
+}
+ConstEval::ConstantResult ConstEval::OpStarVecMat(const sem::Type* ty,
+                                                  utils::VectorRef<const sem::Constant*> args,
+                                                  const Source& source) {
+    auto* vec_ty = args[0]->Type()->As<sem::Vector>();
+    auto* mat_ty = args[1]->Type()->As<sem::Matrix>();
+    auto* elem_ty = vec_ty->type();
+    State s(this, source);
+
+    auto dot = [&](const sem::Constant* v, const sem::Constant* m, size_t col) {
+        utils::Result<const Constant*> result;
+        switch (mat_ty->rows()) {
+            case 2:
+                result = Dispatch_fa_f32_f16(s.Dot2Func(elem_ty),      //
+                                             m->Index(col)->Index(0),  //
+                                             m->Index(col)->Index(1),  //
+                                             v->Index(0),              //
+                                             v->Index(1));
+                break;
+            case 3:
+                result = Dispatch_fa_f32_f16(s.Dot3Func(elem_ty),      //
+                                             m->Index(col)->Index(0),  //
+                                             m->Index(col)->Index(1),  //
+                                             m->Index(col)->Index(2),
+                                             v->Index(0),  //
+                                             v->Index(1),  //
+                                             v->Index(2));
+                break;
+            case 4:
+                result = Dispatch_fa_f32_f16(s.Dot4Func(elem_ty),      //
+                                             m->Index(col)->Index(0),  //
+                                             m->Index(col)->Index(1),  //
+                                             m->Index(col)->Index(2),  //
+                                             m->Index(col)->Index(3),  //
+                                             v->Index(0),              //
+                                             v->Index(1),              //
+                                             v->Index(2),              //
+                                             v->Index(3));
+        }
+        return result;
+    };
+
+    utils::Vector<const sem::Constant*, 4> result;
+    for (size_t i = 0; i < mat_ty->columns(); ++i) {
+        auto r = dot(args[0], args[1], i);  // vector * matrix col i
+        if (!r) {
+            return utils::Failure;
+        }
+        result.Push(r.Get());
+    }
+    return CreateComposite(builder, ty, result);
+}
+
+ConstEval::ConstantResult ConstEval::OpStarMatMat(const sem::Type* ty,
+                                                  utils::VectorRef<const sem::Constant*> args,
+                                                  const Source& source) {
+    auto* mat1 = args[0];
+    auto* mat2 = args[1];
+    auto* mat1_ty = mat1->Type()->As<sem::Matrix>();
+    auto* mat2_ty = mat2->Type()->As<sem::Matrix>();
+    auto* elem_ty = mat1_ty->type();
+    State s(this, source);
+
+    auto dot = [&](const sem::Constant* m1, size_t row, const sem::Constant* m2, size_t col) {
+        auto m1e = [&](size_t row, size_t col) { return m1->Index(col)->Index(row); };
+        auto m2e = [&](size_t row, size_t col) { return m2->Index(col)->Index(row); };
+
+        utils::Result<const Constant*> result;
+        switch (mat1_ty->columns()) {
+            case 2:
+                result = Dispatch_fa_f32_f16(s.Dot2Func(elem_ty),  //
+                                             m1e(row, 0),          //
+                                             m1e(row, 1),          //
+                                             m2e(0, col),          //
+                                             m2e(1, col));
+                break;
+            case 3:
+                result = Dispatch_fa_f32_f16(s.Dot3Func(elem_ty),  //
+                                             m1e(row, 0),          //
+                                             m1e(row, 1),          //
+                                             m1e(row, 2),          //
+                                             m2e(0, col),          //
+                                             m2e(1, col),          //
+                                             m2e(2, col));
+                break;
+            case 4:
+                result = Dispatch_fa_f32_f16(s.Dot4Func(elem_ty),  //
+                                             m1e(row, 0),          //
+                                             m1e(row, 1),          //
+                                             m1e(row, 2),          //
+                                             m1e(row, 3),          //
+                                             m2e(0, col),          //
+                                             m2e(1, col),          //
+                                             m2e(2, col),          //
+                                             m2e(3, col));
+                break;
+        }
+        return result;
+    };
+
+    utils::Vector<const sem::Constant*, 4> result_mat;
+    for (size_t c = 0; c < mat2_ty->columns(); ++c) {
+        utils::Vector<const sem::Constant*, 4> col_vec;
+        for (size_t r = 0; r < mat1_ty->rows(); ++r) {
+            auto v = dot(mat1, r, mat2, c);  // mat1 row r * mat2 col c
+            if (!v) {
+                return utils::Failure;
+            }
+            col_vec.Push(v.Get());  // mat1 row r * mat2 col c
+        }
+
+        // Add column vector to matrix
+        auto* col_vec_ty = ty->As<sem::Matrix>()->ColumnType();
+        result_mat.Push(CreateComposite(builder, col_vec_ty, col_vec));
+    }
+    return CreateComposite(builder, ty, result_mat);
 }
 
 ConstEval::ConstantResult ConstEval::atan2(const sem::Type*,
