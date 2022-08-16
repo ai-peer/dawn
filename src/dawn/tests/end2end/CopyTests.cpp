@@ -2732,3 +2732,195 @@ DAWN_INSTANTIATE_TEST_P(
     {InitializationMethod::CopyBufferToTexture, InitializationMethod::WriteTexture,
      InitializationMethod::CopyTextureToTexture},
     {true, false});
+
+// A series of regression tests for an Intel D3D12 driver issue about creating textures with
+// CreatePlacedResource(). See crbug.com/1237175 for more details.
+class T2TCopyFromDirtyHeapTests : public DawnTest {
+  public:
+    void DoTest(uint32_t layerCount, uint32_t levelCount) {
+        // TODO(crbug.com/1237175): Re-enable these tests when we add the workaround on the Intel
+        // D3D12 drivers.
+        DAWN_SUPPRESS_TEST_IF(IsIntel() && IsD3D12());
+        std::vector<uint32_t> expectedData;
+        wgpu::Buffer uploadBuffer = GetUploadBufferAndExpectedData(&expectedData);
+
+        // First, create a 2D texture colorTexture1, fill data into it and destroy it.
+        {
+            wgpu::Texture colorTexture1 = Create2DTexture(kTextureSize, layerCount, levelCount);
+
+            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+            for (uint32_t layer = 0; layer < layerCount; ++layer) {
+                for (uint32_t level = 0; level < levelCount; ++level) {
+                    wgpu::ImageCopyBuffer uploadCopyBuffer =
+                        utils::CreateImageCopyBuffer(uploadBuffer, 0, kBytesPerRow, kTextureSize);
+                    wgpu::ImageCopyTexture colorCopyTexture =
+                        utils::CreateImageCopyTexture(colorTexture1, level, {0, 0, layer});
+
+                    wgpu::Extent3D copySize = {kTextureSize >> level, kTextureSize >> level, 1};
+                    encoder.CopyBufferToTexture(&uploadCopyBuffer, &colorCopyTexture, &copySize);
+                }
+            }
+            wgpu::CommandBuffer commandBuffer = encoder.Finish();
+            queue.Submit(1, &commandBuffer);
+
+            colorTexture1.Destroy();
+
+            // Ensure colorTexture1 has been destroyed on the backend.
+            EnsureSubmittedWorkDone();
+        }
+
+        // Next, try to create both destinationTexture and colorTexture2 on the heap used by
+        // colorTexture1 before and check if the texture-to-texture copy to destinationTexture will
+        // succeed. Note that some of the destinationTexture will be allocated on the memory used by
+        // colorTexture1 previously.
+        {
+            wgpu::Texture colorTexture2 = Create2DTexture(kTextureSize, layerCount, levelCount);
+            std::vector<wgpu::Texture> destinationTextures;
+
+            for (uint32_t layer = 0; layer < layerCount; ++layer) {
+                for (uint32_t level = 0; level < levelCount; ++level) {
+                    uint32_t textureSizeAtLevel = kTextureSize >> level;
+                    wgpu::Texture destinationTexture = Create2DTexture(textureSizeAtLevel, 1, 1);
+                    // Save all destinationTextures so that they won't be deleted during the test.
+                    destinationTextures.push_back(destinationTexture);
+
+                    CopyIntoStagingTextureAndVerifyTexelData(colorTexture2, level, layer,
+                                                             destinationTexture, uploadBuffer,
+                                                             expectedData);
+                }
+            }
+        }
+    }
+
+    wgpu::Buffer GetUploadBufferAndExpectedData(std::vector<uint32_t>* expectedData) {
+        const uint32_t kBytesPerRow =
+            Align(kBytesPerBlock * kTextureSize, kTextureBytesPerRowAlignment);
+        const size_t kBufferSize =
+            kBytesPerRow * (kTextureSize - 1) + kTextureSize * kBytesPerBlock;
+
+        wgpu::BufferDescriptor uploadBufferDesc = {};
+        uploadBufferDesc.size = kBufferSize;
+        uploadBufferDesc.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::MapWrite;
+        uploadBufferDesc.mappedAtCreation = true;
+        wgpu::Buffer uploadBuffer = device.CreateBuffer(&uploadBufferDesc);
+        expectedData->resize(kBufferSize / sizeof(uint32_t));
+        uint32_t* uploadDataPtr = static_cast<uint32_t*>(uploadBuffer.GetMappedRange());
+        for (uint32_t y = 0; y < kTextureSize; ++y) {
+            for (uint32_t x = 0; x < kTextureSize * (kBytesPerBlock / sizeof(uint32_t)); ++x) {
+                uint32_t index = (kBytesPerRow / sizeof(uint32_t)) * y + x;
+                (*expectedData)[index] = x + y * 1000;
+                uploadDataPtr[index] = x + y * 1000;
+            }
+        }
+        uploadBuffer.Unmap();
+        return uploadBuffer;
+    }
+
+    wgpu::Texture Create2DTexture(uint32_t textureSize, uint32_t layerCount, uint32_t levelCount) {
+        wgpu::TextureDescriptor colorTextureDesc = {};
+        colorTextureDesc.format = kFormat;
+        colorTextureDesc.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
+                                 wgpu::TextureUsage::RenderAttachment;
+        colorTextureDesc.mipLevelCount = levelCount;
+        colorTextureDesc.size = {textureSize, textureSize, layerCount};
+        return device.CreateTexture(&colorTextureDesc);
+    }
+
+    void CopyIntoStagingTextureAndVerifyTexelData(wgpu::Texture sourceTexture,
+                                                  uint32_t copyLevel,
+                                                  uint32_t copyLayer,
+                                                  wgpu::Texture stagingTexture,
+                                                  wgpu::Buffer uploadBuffer,
+                                                  const std::vector<uint32_t>& expectedData) {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ImageCopyBuffer uploadCopyBuffer =
+            utils::CreateImageCopyBuffer(uploadBuffer, 0, kBytesPerRow, kTextureSize);
+        wgpu::ImageCopyTexture colorCopyTexture =
+            utils::CreateImageCopyTexture(sourceTexture, copyLevel, {0, 0, copyLayer});
+
+        uint32_t stagingTextureSize = kTextureSize >> copyLevel;
+        wgpu::Extent3D copySize = {stagingTextureSize, stagingTextureSize, 1};
+        encoder.CopyBufferToTexture(&uploadCopyBuffer, &colorCopyTexture, &copySize);
+
+        wgpu::ImageCopyTexture stagingCopyTexture = utils::CreateImageCopyTexture(stagingTexture);
+        encoder.CopyTextureToTexture(&colorCopyTexture, &stagingCopyTexture, &copySize);
+
+        const size_t kBufferSize =
+            kBytesPerRow * (stagingTextureSize - 1) + stagingTextureSize * kBytesPerBlock;
+        wgpu::BufferDescriptor readbackBufferDesc = {};
+        readbackBufferDesc.size = kBufferSize;
+        readbackBufferDesc.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+        wgpu::Buffer readbackBuffer = device.CreateBuffer(&readbackBufferDesc);
+        wgpu::ImageCopyBuffer readbackCopyBuffer =
+            utils::CreateImageCopyBuffer(readbackBuffer, 0, kBytesPerRow, kTextureSize);
+        encoder.CopyTextureToBuffer(&stagingCopyTexture, &readbackCopyBuffer, &copySize);
+
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+        queue.Submit(1, &commandBuffer);
+
+        bool done = false;
+        readbackBuffer.MapAsync(
+            wgpu::MapMode::Read, 0, kBufferSize,
+            [](WGPUBufferMapAsyncStatus status, void* userdata) {
+                ASSERT_EQ(WGPUBufferMapAsyncStatus_Success, status);
+                *static_cast<bool*>(userdata) = true;
+            },
+            &done);
+        while (!done) {
+            WaitABit();
+        }
+
+        const uint32_t* readbackData =
+            static_cast<const uint32_t*>(readbackBuffer.GetConstMappedRange());
+        for (uint32_t y = 0; y < stagingTextureSize; ++y) {
+            for (uint32_t x = 0; x < stagingTextureSize * (kBytesPerBlock / sizeof(uint32_t));
+                 ++x) {
+                uint32_t index = y * (kBytesPerRow / sizeof(uint32_t)) + x;
+                ASSERT_EQ(expectedData[index], readbackData[index]);
+            }
+        }
+        readbackBuffer.Unmap();
+
+        readbackBuffer.Destroy();
+    }
+
+    void EnsureSubmittedWorkDone() {
+        bool submittedWorkDone = false;
+        queue.OnSubmittedWorkDone(
+            0,
+            [](WGPUQueueWorkDoneStatus status, void* userdata) {
+                EXPECT_EQ(status, WGPUQueueWorkDoneStatus_Success);
+                *static_cast<bool*>(userdata) = true;
+            },
+            &submittedWorkDone);
+        while (!submittedWorkDone) {
+            WaitABit();
+        }
+    }
+
+  private:
+    const uint32_t kTextureSize = 63;
+    const wgpu::TextureFormat kFormat = wgpu::TextureFormat::RGBA32Uint;
+    const uint32_t kBytesPerBlock = 16;
+    const uint32_t kBytesPerRow =
+        Align(kBytesPerBlock * kTextureSize, kTextureBytesPerRowAlignment);
+};
+
+TEST_P(T2TCopyFromDirtyHeapTests, From2DArrayTexture) {
+    constexpr uint32_t kLayerCount = 7;
+    constexpr uint32_t kLevelCount = 1;
+    DoTest(kLayerCount, kLevelCount);
+}
+
+TEST_P(T2TCopyFromDirtyHeapTests, From2DMultiMipmapLevelTexture) {
+    constexpr uint32_t kLayerCount = 1;
+    constexpr uint32_t kLevelCount = 5;
+    DoTest(kLayerCount, kLevelCount);
+}
+
+DAWN_INSTANTIATE_TEST(T2TCopyFromDirtyHeapTests,
+                      D3D12Backend(),
+                      MetalBackend(),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
+                      VulkanBackend());
