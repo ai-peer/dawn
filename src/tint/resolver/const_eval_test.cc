@@ -15,6 +15,7 @@
 #include <cmath>
 #include <type_traits>
 
+#include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include "src/tint/resolver/resolver_test_helper.h"
 #include "src/tint/sem/builtin_type.h"
@@ -23,6 +24,8 @@
 #include "src/tint/sem/member_accessor_expression.h"
 #include "src/tint/sem/test_helper.h"
 #include "src/tint/utils/transform.h"
+
+using ::testing::HasSubstr;
 
 using namespace tint::number_suffixes;  // NOLINT
 
@@ -73,6 +76,19 @@ auto Abs(const Number<T>& v) {
         return Number<T>(std::abs(v));
     }
 }
+
+TINT_BEGIN_DISABLE_WARNING(CONSTANT_OVERFLOW);
+template <typename T>
+constexpr Number<T> Mul(Number<T> v1, Number<T> v2) {
+    if constexpr (std::is_integral_v<T> && std::is_signed_v<T>) {
+        // For signed integrals, avoid C++ UB by multiplying as unsigned
+        using UT = std::make_unsigned_t<T>;
+        return static_cast<Number<T>>(static_cast<UT>(v1) * static_cast<UT>(v2));
+    } else {
+        return static_cast<Number<T>>(v1 * v2);
+    }
+}
+TINT_END_DISABLE_WARNING(CONSTANT_OVERFLOW);
 
 // Concats any number of std::vectors
 template <typename Vec, typename... Vecs>
@@ -3228,29 +3244,26 @@ Case C(T lhs, U rhs, V expected, bool overflow = false) {
     return Case{S(lhs), S(rhs), S(expected), overflow};
 }
 
-static std::ostream& operator<<(std::ostream& o, const Case& c) {
-    auto print_value = [&](auto&& value) {
-        std::visit(
-            [&](auto&& v) {
-                using ValueType = std::decay_t<decltype(v)>;
-                o << ValueType::DataType::Name() << "(";
-                for (auto& a : v.args.values) {
-                    o << std::get<typename ValueType::ElementType>(a);
-                    if (&a != &v.args.values.Back()) {
-                        o << ", ";
-                    }
+static std::ostream& operator<<(std::ostream& o, const Types& types) {
+    std::visit(
+        [&](auto&& v) {
+            using ValueType = std::decay_t<decltype(v)>;
+            o << ValueType::DataType::Name() << "(";
+            for (auto& a : v.args.values) {
+                o << std::get<typename ValueType::ElementType>(a);
+                if (&a != &v.args.values.Back()) {
+                    o << ", ";
                 }
-                o << ")";
-            },
-            value);
-    };
-    o << "lhs: ";
-    print_value(c.lhs);
-    o << ", rhs: ";
-    print_value(c.rhs);
-    o << ", expected: ";
-    print_value(c.expected);
-    o << ", overflow: " << c.overflow;
+            }
+            o << ")";
+        },
+        types);
+    return o;
+}
+
+static std::ostream& operator<<(std::ostream& o, const Case& c) {
+    o << "lhs: " << c.lhs << ", rhs: " << c.rhs << ", expected: " << c.expected
+      << ", overflow: " << c.overflow;
     return o;
 }
 
@@ -3281,7 +3294,6 @@ bool ForEachElemPair(const sem::Constant* a, const sem::Constant* b, Func&& f) {
 using ResolverConstEvalBinaryOpTest = ResolverTestWithParam<std::tuple<ast::BinaryOp, Case>>;
 TEST_P(ResolverConstEvalBinaryOpTest, Test) {
     Enable(ast::Extension::kF16);
-
     auto op = std::get<0>(GetParam());
     auto& c = std::get<1>(GetParam());
 
@@ -3300,10 +3312,8 @@ TEST_P(ResolverConstEvalBinaryOpTest, Test) {
             auto* expr = create<ast::BinaryExpression>(op, lhs_expr, rhs_expr);
 
             GlobalConst("C", expr);
-
             auto* expected_expr = expected.Expr(*this);
             GlobalConst("E", expected_expr);
-
             EXPECT_TRUE(r()->Resolve()) << r()->error();
 
             auto* sem = Sem().Get(expr);
@@ -3412,6 +3422,211 @@ INSTANTIATE_TEST_SUITE_P(Sub,
                                               OpSubFloatCases<AFloat>(),
                                               OpSubFloatCases<f32>(),
                                               OpSubFloatCases<f16>()))));
+
+template <typename T>
+std::vector<Case> OpMulScalarCases() {
+    return {
+        C(T{0}, T{0}, T{0}),
+        C(T{1}, T{2}, T{2}),
+        C(T{2}, T{3}, T{6}),
+        C(Negate(T{2}), T{3}, Negate(T{6})),
+        C(T::Highest(), T{1}, T::Highest()),
+        C(T::Lowest(), T{1}, T::Lowest()),
+        C(T::Highest(), T::Highest(), Mul(T::Highest(), T::Highest()), true),
+        C(T::Lowest(), T::Lowest(), Mul(T::Lowest(), T::Lowest()), true),
+    };
+}
+
+template <typename T>
+std::vector<Case> OpMulVecCases() {
+    return {
+        // s * vec3 = vec3
+        C(S(T{2.0}), V(T{1.25}, T{2.25}, T{3.25}), V(T{2.5}, T{4.5}, T{6.5})),
+        // vec3 * s = vec3
+        C(V(T{1.25}, T{2.25}, T{3.25}), S(T{2.0}), V(T{2.5}, T{4.5}, T{6.5})),
+        // vec3 * vec3 = vec3
+        C(V(T{1.25}, T{2.25}, T{3.25}), V(T{2.0}, T{2.0}, T{2.0}), V(T{2.5}, T{4.5}, T{6.5})),
+    };
+}
+
+template <typename T>
+std::vector<Case> OpMulMatCases() {
+    return {
+        // s * mat3x2 = mat3x2
+        C(S(T{2.25}),
+          M({T{1.0}, T{4.0}},  //
+            {T{2.0}, T{5.0}},  //
+            {T{3.0}, T{6.0}}),
+          M({T{2.25}, T{9.0}},   //
+            {T{4.5}, T{11.25}},  //
+            {T{6.75}, T{13.5}})),
+        // mat3x2 * s = mat3x2
+        C(M({T{1.0}, T{4.0}},  //
+            {T{2.0}, T{5.0}},  //
+            {T{3.0}, T{6.0}}),
+          S(T{2.25}),
+          M({T{2.25}, T{9.0}},   //
+            {T{4.5}, T{11.25}},  //
+            {T{6.75}, T{13.5}})),
+        // vec3 * mat2x3 = vec2
+        C(V(T{1.25}, T{2.25}, T{3.25}),  //
+          M({T{1.0}, T{2.0}, T{3.0}},    //
+            {T{4.0}, T{5.0}, T{6.0}}),   //
+          V(T{15.5}, T{35.75})),
+        // mat2x3 * vec2 = vec3
+        C(M({T{1.0}, T{2.0}, T{3.0}},   //
+            {T{4.0}, T{5.0}, T{6.0}}),  //
+          V(T{1.25}, T{2.25}),          //
+          V(T{10.25}, T{13.75}, T{17.25})),
+        // mat3x2 * mat2x3 = mat2x2
+        C(M({T{1.0}, T{2.0}},              //
+            {T{3.0}, T{4.0}},              //
+            {T{5.0}, T{6.0}}),             //
+          M({T{1.25}, T{2.25}, T{3.25}},   //
+            {T{4.25}, T{5.25}, T{6.25}}),  //
+          M({T{24.25}, T{31.0}},           //
+            {T{51.25}, T{67.0}})),         //
+    };
+}
+
+INSTANTIATE_TEST_SUITE_P(Mul,
+                         ResolverConstEvalBinaryOpTest,
+                         testing::Combine(  //
+                             testing::Values(ast::BinaryOp::kMultiply),
+                             testing::ValuesIn(Concat(  //
+                                 OpMulScalarCases<AInt>(),
+                                 OpMulScalarCases<i32>(),
+                                 OpMulScalarCases<u32>(),
+                                 OpMulScalarCases<AFloat>(),
+                                 OpMulScalarCases<f32>(),
+                                 OpMulScalarCases<f16>(),
+                                 OpMulVecCases<AInt>(),
+                                 OpMulVecCases<i32>(),
+                                 OpMulVecCases<u32>(),
+                                 OpMulVecCases<AFloat>(),
+                                 OpMulVecCases<f32>(),
+                                 OpMulVecCases<f16>(),
+                                 OpMulMatCases<AFloat>(),
+                                 OpMulMatCases<f32>(),
+                                 OpMulMatCases<f16>()))));
+
+// Tests for errors on overflow/underflow of binary operations with abstract numbers
+struct OverflowCase {
+    ast::BinaryOp op;
+    Types lhs;
+    Types rhs;
+    std::string overflowed_result;
+};
+
+static std::ostream& operator<<(std::ostream& o, const OverflowCase& c) {
+    o << ast::FriendlyName(c.op) << ", lhs: " << c.lhs << ", rhs: " << c.rhs;
+    return o;
+}
+using ResolverConstEvalBinaryOpTest_Overflow = ResolverTestWithParam<OverflowCase>;
+TEST_P(ResolverConstEvalBinaryOpTest_Overflow, Test) {
+    Enable(ast::Extension::kF16);
+    auto& c = GetParam();
+    auto* lhs_expr = std::visit([&](auto&& value) { return value.Expr(*this); }, c.lhs);
+    auto* rhs_expr = std::visit([&](auto&& value) { return value.Expr(*this); }, c.rhs);
+    auto* expr = create<ast::BinaryExpression>(Source{{1, 1}}, c.op, lhs_expr, rhs_expr);
+    GlobalConst("C", expr);
+    ASSERT_FALSE(r()->Resolve());
+
+    std::string type_name = std::visit(
+        [&](auto&& value) {
+            using ValueType = std::decay_t<decltype(value)>;
+            return tint::FriendlyName<typename ValueType::ElementType>();
+        },
+        c.lhs);
+
+    EXPECT_THAT(r()->error(), HasSubstr("1:1 error: '" + c.overflowed_result +
+                                        "' cannot be represented as '" + type_name + "'"));
+}
+INSTANTIATE_TEST_SUITE_P(
+    Test,
+    ResolverConstEvalBinaryOpTest_Overflow,
+    testing::Values(  //
+                      // scalar-scalar add
+        OverflowCase{ast::BinaryOp::kAdd, S(AInt::Highest()), S(1_a), "-9223372036854775808"},
+        OverflowCase{ast::BinaryOp::kAdd, S(AInt::Lowest()), S(-1_a), "9223372036854775807"},
+        OverflowCase{ast::BinaryOp::kAdd, S(AFloat::Highest()), S(AFloat::Highest()), "inf"},
+        OverflowCase{ast::BinaryOp::kAdd, S(AFloat::Lowest()), S(AFloat::Lowest()), "-inf"},
+        // scalar-scalar subtract
+        OverflowCase{ast::BinaryOp::kSubtract, S(AInt::Lowest()), S(1_a), "9223372036854775807"},
+        OverflowCase{ast::BinaryOp::kSubtract, S(AInt::Highest()), S(-1_a), "-9223372036854775808"},
+        OverflowCase{ast::BinaryOp::kSubtract, S(AFloat::Highest()), S(AFloat::Lowest()), "inf"},
+        OverflowCase{ast::BinaryOp::kSubtract, S(AFloat::Lowest()), S(AFloat::Highest()), "-inf"},
+
+        // scalar-scalar multiply
+        OverflowCase{ast::BinaryOp::kMultiply, S(AInt::Highest()), S(2_a), "-2"},
+        OverflowCase{ast::BinaryOp::kMultiply, S(AInt::Lowest()), S(-2_a), "0"},
+
+        // scalar-vector multiply
+        OverflowCase{ast::BinaryOp::kMultiply, S(AInt::Highest()), V(2_a, 1_a), "-2"},
+        OverflowCase{ast::BinaryOp::kMultiply, S(AInt::Lowest()), V(-2_a, 1_a), "0"},
+
+        // vector-matrix multiply
+
+        // Overflow from first multiplication of dot product of vector and matrix column 0
+        // i.e. (v[0] * m[0][0] + v[1] * m[0][1])
+        //            ^
+        OverflowCase{ast::BinaryOp::kMultiply,     //
+                     V(AFloat::Highest(), 1.0_a),  //
+                     M({2.0_a, 1.0_a},             //
+                       {1.0_a, 1.0_a}),            //
+                     "inf"},
+
+        // Overflow from second multiplication of dot product of vector and matrix column 0
+        // i.e. (v[0] * m[0][0] + v[1] * m[0][1])
+        //                             ^
+        OverflowCase{ast::BinaryOp::kMultiply,     //
+                     V(1.0_a, AFloat::Highest()),  //
+                     M({1.0_a, 2.0_a},             //
+                       {1.0_a, 1.0_a}),            //
+                     "inf"},
+
+        // Overflow from addition of dot product of vector and matrix column 0
+        // i.e. (v[0] * m[0][0] + v[1] * m[0][1])
+        //                      ^
+        OverflowCase{ast::BinaryOp::kMultiply,                 //
+                     V(AFloat::Highest(), AFloat::Highest()),  //
+                     M({1.0_a, 1.0_a},                         //
+                       {1.0_a, 1.0_a}),                        //
+                     "inf"},
+
+        // matrix-matrix multiply
+
+        // Overflow from first multiplication of dot product of lhs row 0 and rhs column 0
+        // i.e. m1[0][0] * m2[0][0] + m1[0][1] * m[1][0]
+        //               ^
+        OverflowCase{ast::BinaryOp::kMultiply,      //
+                     M({AFloat::Highest(), 1.0_a},  //
+                       {1.0_a, 1.0_a}),             //
+                     M({2.0_a, 1.0_a},              //
+                       {1.0_a, 1.0_a}),             //
+                     "inf"},
+
+        // Overflow from second multiplication of dot product of lhs row 0 and rhs column 0
+        // i.e. m1[0][0] * m2[0][0] + m1[0][1] * m[1][0]
+        //                                     ^
+        OverflowCase{ast::BinaryOp::kMultiply,      //
+                     M({1.0_a, AFloat::Highest()},  //
+                       {1.0_a, 1.0_a}),             //
+                     M({1.0_a, 1.0_a},              //
+                       {2.0_a, 1.0_a}),             //
+                     "inf"},
+
+        // Overflow from addition of dot product of lhs row 0 and rhs column 0
+        // i.e. m1[0][0] * m2[0][0] + m1[0][1] * m[1][0]
+        //                          ^
+        OverflowCase{ast::BinaryOp::kMultiply,       //
+                     M({AFloat::Highest(), 1.0_a},   //
+                       {AFloat::Highest(), 1.0_a}),  //
+                     M({1.0_a, 1.0_a},               //
+                       {1.0_a, 1.0_a}),              //
+                     "inf"}
+
+        ));
 
 TEST_F(ResolverConstEvalTest, BinaryAbstractAddOverflow_AInt) {
     GlobalConst("c", Add(Source{{1, 1}}, Expr(AInt::Highest()), 1_a));
