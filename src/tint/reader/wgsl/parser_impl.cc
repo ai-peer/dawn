@@ -2587,6 +2587,41 @@ Expect<ParserImpl::ExpressionList> ParserImpl::expect_argument_expression_list(
     });
 }
 
+// bitwise_expression.post.unary_expression
+//   : AND unary_expression (AND unary_expression)*
+//   | OR unary_expression (OR unary_expression)*
+//   | XOR unary_expression (XOR unary_expression)*
+Maybe<const ast::Expression*> ParserImpl::bitwise_expression_post_unary_expression(
+    const ast::Expression* lhs) {
+    while (continue_parsing()) {
+        if (!peek_is(Token::Type::kAnd) && !peek_is(Token::Type::kOr) &&
+            !peek_is(Token::Type::kXor)) {
+            return lhs;
+        }
+
+        auto& t = next();
+
+        ast::BinaryOp op = ast::BinaryOp::kXor;
+        if (t.Is(Token::Type::kAnd)) {
+            op = ast::BinaryOp::kAnd;
+        } else if (t.Is(Token::Type::kOr)) {
+            op = ast::BinaryOp::kOr;
+        }
+
+        auto rhs = unary_expression();
+        if (rhs.errored) {
+            return Failure::kErrored;
+        }
+        if (!rhs.matched) {
+            return add_error(peek(), std::string("unable to parse right side of ") +
+                                         std::string(t.to_name()) + " expression");
+        }
+
+        lhs = create<ast::BinaryExpression>(t.source(), op, lhs, rhs.value);
+    }
+    return Failure::kErrored;
+}
+
 // unary_expression
 //   : singular_expression
 //   | MINUS unary_expression
