@@ -846,6 +846,214 @@ ConstEval::ConstantResult ConstEval::OpMinus(const sem::Type* ty,
     return r;
 }
 
+ConstEval::ConstantResult ConstEval::OpStar(const sem::Type* ty,
+                                            utils::VectorRef<const sem::Constant*> args,
+                                            const Source& source) {
+    auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) {
+        auto create = [&](auto i, auto j) -> const Constant* {
+            using NumberT = decltype(i);
+            using T = UnwrapNumber<NumberT>;
+
+            auto mul_values = [](T lhs, T rhs) { return lhs * rhs; };
+
+            NumberT result;
+            if constexpr (std::is_same_v<NumberT, AInt> || std::is_same_v<NumberT, AFloat>) {
+                // Check for over/underflow for abstract values
+                if (auto r = CheckedMul(i, j)) {
+                    result = r->value;
+                } else {
+                    AddError("'" + std::to_string(mul_values(i.value, j.value)) +
+                                 "' cannot be represented as '" +
+                                 ty->FriendlyName(builder.Symbols()) + "'",
+                             source);
+                    return nullptr;
+                }
+            } else {
+                result = mul_values(i.value, j.value);
+            }
+            return CreateElement(builder, c0->Type(), result);
+        };
+        return Dispatch_fia_fiu32_f16(create, c0, c1);
+    };
+
+    auto r = TransformBinaryElements(builder, transform, args[0], args[1]);
+    if (builder.Diagnostics().contains_errors()) {
+        return utils::Failure;
+    }
+    return r;
+}
+ConstEval::ConstantResult ConstEval::OpStarMatVec(const sem::Type* ty,
+                                                  utils::VectorRef<const sem::Constant*> args,
+                                                  const Source&) {
+    auto* mat_ty = args[0]->Type()->As<sem::Matrix>();
+    auto* vec_ty = args[1]->Type()->As<sem::Vector>();
+    auto* elem_ty = vec_ty->type();
+
+    auto dot = [&](const sem::Constant* m, size_t row, const sem::Constant* v) {
+        auto mul_add2 = [&](auto a1, auto a2, auto b1, auto b2) {
+            auto result = (a1.value * a2.value) + (b1.value * b2.value);
+            return CreateElement(builder, elem_ty, decltype(a1){result});
+        };
+        auto mul_add3 = [&](auto a1, auto a2, auto b1, auto b2, auto c1, auto c2) {
+            auto result = (a1.value * a2.value) + (b1.value * b2.value) + (c1.value * c2.value);
+            return CreateElement(builder, elem_ty, decltype(a1){result});
+        };
+        auto mul_add4 = [&](auto a1, auto a2, auto b1, auto b2, auto c1, auto c2, auto d1,
+                            auto d2) {
+            auto result = (a1.value * a2.value) + (b1.value * b2.value) + (c1.value * c2.value) +
+                          (d1.value * d2.value);
+            return CreateElement(builder, elem_ty, decltype(a1){result});
+        };
+
+        const Constant* result = nullptr;
+        switch (mat_ty->columns()) {
+            case 2:
+                result = Dispatch_fa_f32_f16(mul_add2,                               //
+                                             m->Index(0)->Index(row), v->Index(0),   //
+                                             m->Index(1)->Index(row), v->Index(1));  //
+                break;
+            case 3:
+                result = Dispatch_fa_f32_f16(mul_add3,                               //
+                                             m->Index(0)->Index(row), v->Index(0),   //
+                                             m->Index(1)->Index(row), v->Index(1),   //
+                                             m->Index(2)->Index(row), v->Index(2));  //
+                break;
+            case 4:
+                result = Dispatch_fa_f32_f16(mul_add4,                               //
+                                             m->Index(0)->Index(row), v->Index(0),   //
+                                             m->Index(1)->Index(row), v->Index(1),   //
+                                             m->Index(2)->Index(row), v->Index(2),   //
+                                             m->Index(3)->Index(row), v->Index(3));  //
+        }
+        return static_cast<const sem::Constant*>(result);
+    };
+
+    utils::Vector<const sem::Constant*, 4> result;
+    for (size_t i = 0; i < mat_ty->rows(); ++i) {
+        result.Push(dot(args[0], i, args[1]));  // matrix row i * vector
+    }
+    return CreateComposite(builder, ty, result);
+}
+ConstEval::ConstantResult ConstEval::OpStarVecMat(const sem::Type* ty,
+                                                  utils::VectorRef<const sem::Constant*> args,
+                                                  const Source&) {
+    auto* vec_ty = args[0]->Type()->As<sem::Vector>();
+    auto* mat_ty = args[1]->Type()->As<sem::Matrix>();
+    auto* elem_ty = vec_ty->type();
+
+    auto dot = [&](const sem::Constant* v, const sem::Constant* m, size_t col) {
+        auto mul_add2 = [&](auto a1, auto a2, auto b1, auto b2) {
+            auto result = (a1.value * a2.value) + (b1.value * b2.value);
+            return CreateElement(builder, elem_ty, decltype(a1){result});
+        };
+        auto mul_add3 = [&](auto a1, auto a2, auto b1, auto b2, auto c1, auto c2) {
+            auto result = (a1.value * a2.value) + (b1.value * b2.value) + (c1.value * c2.value);
+            return CreateElement(builder, elem_ty, decltype(a1){result});
+        };
+        auto mul_add4 = [&](auto a1, auto a2, auto b1, auto b2, auto c1, auto c2, auto d1,
+                            auto d2) {
+            auto result = (a1.value * a2.value) + (b1.value * b2.value) + (c1.value * c2.value) +
+                          (d1.value * d2.value);
+            return CreateElement(builder, elem_ty, decltype(a1){result});
+        };
+
+        const Constant* result = nullptr;
+        switch (mat_ty->rows()) {
+            case 2:
+                result = Dispatch_fa_f32_f16(mul_add2,                               //
+                                             m->Index(col)->Index(0), v->Index(0),   //
+                                             m->Index(col)->Index(1), v->Index(1));  //
+                break;
+            case 3:
+                result = Dispatch_fa_f32_f16(mul_add3,                               //
+                                             m->Index(col)->Index(0), v->Index(0),   //
+                                             m->Index(col)->Index(1), v->Index(1),   //
+                                             m->Index(col)->Index(2), v->Index(2));  //
+                break;
+            case 4:
+                result = Dispatch_fa_f32_f16(mul_add4,                               //
+                                             m->Index(col)->Index(0), v->Index(0),   //
+                                             m->Index(col)->Index(1), v->Index(1),   //
+                                             m->Index(col)->Index(2), v->Index(2),   //
+                                             m->Index(col)->Index(3), v->Index(3));  //
+        }
+        return static_cast<const sem::Constant*>(result);
+    };
+
+    utils::Vector<const sem::Constant*, 4> result;
+    for (size_t i = 0; i < mat_ty->columns(); ++i) {
+        result.Push(dot(args[0], args[1], i));  // vector * matrix col i
+    }
+    return CreateComposite(builder, ty, result);
+}
+
+ConstEval::ConstantResult ConstEval::OpStarMatMat(const sem::Type* ty,
+                                                  utils::VectorRef<const sem::Constant*> args,
+                                                  const Source&) {
+    auto* mat1 = args[0];
+    auto* mat2 = args[1];
+    auto* mat1_ty = mat1->Type()->As<sem::Matrix>();
+    auto* mat2_ty = mat2->Type()->As<sem::Matrix>();
+    auto* elem_ty = mat1_ty->type();
+
+    auto dot = [&](const sem::Constant* m1, size_t row, const sem::Constant* m2, size_t col) {
+        auto mul_add2 = [&](auto a1, auto a2, auto b1, auto b2) {
+            auto result = (a1.value * a2.value) + (b1.value * b2.value);
+            return CreateElement(builder, elem_ty, decltype(a1){result});
+        };
+        auto mul_add3 = [&](auto a1, auto a2, auto b1, auto b2, auto c1, auto c2) {
+            auto result = (a1.value * a2.value) + (b1.value * b2.value) + (c1.value * c2.value);
+            return CreateElement(builder, elem_ty, decltype(a1){result});
+        };
+        auto mul_add4 = [&](auto a1, auto a2, auto b1, auto b2, auto c1, auto c2, auto d1,
+                            auto d2) {
+            auto result = (a1.value * a2.value) + (b1.value * b2.value) + (c1.value * c2.value) +
+                          (d1.value * d2.value);
+            return CreateElement(builder, elem_ty, decltype(a1){result});
+        };
+
+        auto m1e = [&](size_t row, size_t col) { return m1->Index(col)->Index(row); };
+        auto m2e = [&](size_t row, size_t col) { return m2->Index(col)->Index(row); };
+
+        const Constant* result = nullptr;
+        switch (mat1_ty->columns()) {
+            case 2:
+                result = Dispatch_fa_f32_f16(mul_add2,                  //
+                                             m1e(row, 0), m2e(0, col),  //
+                                             m1e(row, 1), m2e(1, col));
+                break;
+            case 3:
+                result = Dispatch_fa_f32_f16(mul_add3,                  //
+                                             m1e(row, 0), m2e(0, col),  //
+                                             m1e(row, 1), m2e(1, col),  //
+                                             m1e(row, 2), m2e(2, col));
+                break;
+            case 4:
+                result = Dispatch_fa_f32_f16(mul_add4,                  //
+                                             m1e(row, 0), m2e(0, col),  //
+                                             m1e(row, 1), m2e(1, col),  //
+                                             m1e(row, 2), m2e(2, col),  //
+                                             m1e(row, 3), m2e(3, col));
+                break;
+        }
+        return static_cast<const sem::Constant*>(result);
+    };
+
+    utils::Vector<const sem::Constant*, 4> result_mat;
+    for (size_t c = 0; c < mat2_ty->columns(); ++c) {
+        utils::Vector<const sem::Constant*, 4> col_vec;
+        for (size_t r = 0; r < mat1_ty->rows(); ++r) {
+            col_vec.Push(dot(mat1, r, mat2, c));  // mat1 row r * mat2 col c
+        }
+
+        // Add column vector to matrix
+        auto* col_vec_ty = ty->As<sem::Matrix>()->ColumnType();
+        result_mat.Push(CreateComposite(builder, col_vec_ty, col_vec));
+    }
+
+    return CreateComposite(builder, ty, result_mat);
+}
+
 ConstEval::ConstantResult ConstEval::atan2(const sem::Type*,
                                            utils::VectorRef<const sem::Constant*> args,
                                            const Source&) {
