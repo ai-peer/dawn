@@ -1823,6 +1823,11 @@ bool GeneratorImpl::EmitExpression(std::ostream& out, const ast::Expression* exp
 
 bool GeneratorImpl::EmitIdentifier(std::ostream& out, const ast::IdentifierExpression* expr) {
     out << builder_.Symbols().NameFor(expr->symbol);
+    if (auto* var_user = builder_.Sem().Get<sem::VariableUser>(expr)) {
+        if (IsHostShareable(var_user->Variable()->StorageClass())) {
+            out << "._";
+        }
+    }
     return true;
 }
 
@@ -1977,7 +1982,10 @@ bool GeneratorImpl::EmitUniformVariable(const ast::Var* var, const sem::Variable
         }
         out << ") uniform " << UniqueIdentifier(StructName(str)) << " {";
     }
-    EmitStructMembers(current_buffer_, str, /* emit_offsets */ true);
+    {
+        ScopedIndent si(this);
+        line() << StructName(str) << " _;";
+    }
     auto name = builder_.Symbols().NameFor(var->symbol);
     line() << "} " << name << ";";
     line();
@@ -1995,7 +2003,10 @@ bool GeneratorImpl::EmitStorageVariable(const ast::Var* var, const sem::Variable
     ast::VariableBindingPoint bp = var->BindingPoint();
     line() << "layout(binding = " << bp.binding->value << ", std430) buffer "
            << UniqueIdentifier(StructName(str)) << " {";
-    EmitStructMembers(current_buffer_, str, /* emit_offsets */ true);
+    {
+        ScopedIndent si(this);
+        line() << StructName(str) << " _;";
+    }
     auto name = builder_.Symbols().NameFor(var->symbol);
     line() << "} " << name << ";";
     return true;

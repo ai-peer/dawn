@@ -30,35 +30,35 @@ layout(binding = 0, std430) buffer S_8 {
   float a;
 } b7;
 layout(binding = 1) uniform S_9 {
-  float a;
+  S _;
 } b8;
 
 layout(binding = 1) uniform S_10 {
-  float a;
+  S _;
 } b9;
 
 layout(binding = 1) uniform S_11 {
-  float a;
+  S _;
 } b10;
 
 layout(binding = 1) uniform S_12 {
-  float a;
+  S _;
 } b11;
 
 layout(binding = 1) uniform S_13 {
-  float a;
+  S _;
 } b12;
 
 layout(binding = 1) uniform S_14 {
-  float a;
+  S _;
 } b13;
 
 layout(binding = 1) uniform S_15 {
-  float a;
+  S _;
 } b14;
 
 layout(binding = 1) uniform S_16 {
-  float a;
+  S _;
 } b15;
 
 void tint_symbol() {

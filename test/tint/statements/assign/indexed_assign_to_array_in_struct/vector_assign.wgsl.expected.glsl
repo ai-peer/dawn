@@ -9,7 +9,7 @@ struct OuterS {
 };
 
 layout(binding = 4) uniform Uniforms_1 {
-  uint i;
+  Uniforms _;
 } uniforms;
 
 uint f(uint i) {
@@ -19,8 +19,8 @@ uint f(uint i) {
 void tint_symbol() {
   OuterS s1 = OuterS(uint[8](0u, 0u, 0u, 0u, 0u, 0u, 0u, 0u));
   vec3 v = vec3(0.0f, 0.0f, 0.0f);
-  v[s1.a1[uniforms.i]] = 1.0f;
-  uint tint_symbol_1 = f(s1.a1[uniforms.i]);
+  v[s1.a1[uniforms._.i]] = 1.0f;
+  uint tint_symbol_1 = f(s1.a1[uniforms._.i]);
   v[tint_symbol_1] = 1.0f;
 }
 

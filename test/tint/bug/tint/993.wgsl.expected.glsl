@@ -5,7 +5,7 @@ struct Constants {
 };
 
 layout(binding = 0) uniform Constants_1 {
-  uint zero;
+  Constants _;
 } constants;
 
 struct Result {
@@ -23,7 +23,7 @@ layout(binding = 0, std430) buffer TestData_1 {
   int data[3];
 } s;
 int runTest() {
-  return atomicOr(s.data[(0u + uint(constants.zero))], 0);
+  return atomicOr(s.data[(0u + uint(constants._.zero))], 0);
 }
 
 void tint_symbol() {

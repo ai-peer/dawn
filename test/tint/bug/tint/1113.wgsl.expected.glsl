@@ -25,12 +25,7 @@ struct Dbg {
 };
 
 layout(binding = 0) uniform Uniforms_1 {
-  uint numTriangles;
-  uint gridSize;
-  uint pad1;
-  uint pad2;
-  vec3 bbMin;
-  vec3 bbMax;
+  Uniforms _;
 } uniforms;
 
 layout(binding = 10, std430) buffer U32s_1 {
@@ -60,14 +55,14 @@ layout(binding = 50, std430) buffer Dbg_1 {
   float value_f32_3;
 } dbg;
 vec3 toVoxelPos(vec3 position) {
-  vec3 bbMin = vec3(uniforms.bbMin.x, uniforms.bbMin.y, uniforms.bbMin.z);
-  vec3 bbMax = vec3(uniforms.bbMax.x, uniforms.bbMax.y, uniforms.bbMax.z);
+  vec3 bbMin = vec3(uniforms._.bbMin.x, uniforms._.bbMin.y, uniforms._.bbMin.z);
+  vec3 bbMax = vec3(uniforms._.bbMax.x, uniforms._.bbMax.y, uniforms._.bbMax.z);
   vec3 bbSize = (bbMax - bbMin);
   float cubeSize = max(max(bbSize.x, bbSize.y), bbSize.z);
-  float gridSize = float(uniforms.gridSize);
-  float gx = ((gridSize * (position.x - uniforms.bbMin.x)) / cubeSize);
-  float gy = ((gridSize * (position.y - uniforms.bbMin.y)) / cubeSize);
-  float gz = ((gridSize * (position.z - uniforms.bbMin.z)) / cubeSize);
+  float gridSize = float(uniforms._.gridSize);
+  float gx = ((gridSize * (position.x - uniforms._.bbMin.x)) / cubeSize);
+  float gy = ((gridSize * (position.y - uniforms._.bbMin.y)) / cubeSize);
+  float gz = ((gridSize * (position.z - uniforms._.bbMin.z)) / cubeSize);
   return vec3(gx, gy, gz);
 }
 
@@ -82,7 +77,7 @@ vec3 loadPosition(uint vertexIndex) {
 }
 
 void doIgnore() {
-  uint g42 = uniforms.numTriangles;
+  uint g42 = uniforms._.numTriangles;
   uint kj6 = dbg.value1;
   uint b53 = atomicOr(counters.values[0], 0u);
   uint rwg = indices.values[0];
@@ -92,7 +87,7 @@ void doIgnore() {
 
 void main_count(uvec3 GlobalInvocationID) {
   uint triangleIndex = GlobalInvocationID.x;
-  if ((triangleIndex >= uniforms.numTriangles)) {
+  if ((triangleIndex >= uniforms._.numTriangles)) {
     return;
   }
   doIgnore();
@@ -104,10 +99,10 @@ void main_count(uvec3 GlobalInvocationID) {
   vec3 p2 = loadPosition(i2);
   vec3 center = (((p0 + p1) + p2) / 3.0f);
   vec3 voxelPos = toVoxelPos(center);
-  uint voxelIndex = toIndex1D(uniforms.gridSize, voxelPos);
+  uint voxelIndex = toIndex1D(uniforms._.gridSize, voxelPos);
   uint acefg = atomicAdd(counters.values[voxelIndex], 1u);
   if ((triangleIndex == 0u)) {
-    dbg.value0 = uniforms.gridSize;
+    dbg.value0 = uniforms._.gridSize;
     dbg.value_f32_0 = center.x;
     dbg.value_f32_1 = center.y;
     dbg.value_f32_2 = center.z;
@@ -146,12 +141,7 @@ struct Dbg {
 };
 
 layout(binding = 0) uniform Uniforms_1 {
-  uint numTriangles;
-  uint gridSize;
-  uint pad1;
-  uint pad2;
-  vec3 bbMin;
-  vec3 bbMax;
+  Uniforms _;
 } uniforms;
 
 layout(binding = 10, std430) buffer U32s_1 {
@@ -181,7 +171,7 @@ layout(binding = 50, std430) buffer Dbg_1 {
   float value_f32_3;
 } dbg;
 void doIgnore() {
-  uint g42 = uniforms.numTriangles;
+  uint g42 = uniforms._.numTriangles;
   uint kj6 = dbg.value1;
   uint b53 = atomicOr(counters.values[0], 0u);
   uint rwg = indices.values[0];
@@ -192,7 +182,7 @@ void doIgnore() {
 void main_create_lut(uvec3 GlobalInvocationID) {
   uint voxelIndex = GlobalInvocationID.x;
   doIgnore();
-  uint maxVoxels = ((uniforms.gridSize * uniforms.gridSize) * uniforms.gridSize);
+  uint maxVoxels = ((uniforms._.gridSize * uniforms._.gridSize) * uniforms._.gridSize);
   if ((voxelIndex >= maxVoxels)) {
     return;
   }
@@ -237,12 +227,7 @@ struct Dbg {
 };
 
 layout(binding = 0) uniform Uniforms_1 {
-  uint numTriangles;
-  uint gridSize;
-  uint pad1;
-  uint pad2;
-  vec3 bbMin;
-  vec3 bbMax;
+  Uniforms _;
 } uniforms;
 
 layout(binding = 10, std430) buffer U32s_1 {
@@ -272,14 +257,14 @@ layout(binding = 50, std430) buffer Dbg_1 {
   float value_f32_3;
 } dbg;
 vec3 toVoxelPos(vec3 position) {
-  vec3 bbMin = vec3(uniforms.bbMin.x, uniforms.bbMin.y, uniforms.bbMin.z);
-  vec3 bbMax = vec3(uniforms.bbMax.x, uniforms.bbMax.y, uniforms.bbMax.z);
+  vec3 bbMin = vec3(uniforms._.bbMin.x, uniforms._.bbMin.y, uniforms._.bbMin.z);
+  vec3 bbMax = vec3(uniforms._.bbMax.x, uniforms._.bbMax.y, uniforms._.bbMax.z);
   vec3 bbSize = (bbMax - bbMin);
   float cubeSize = max(max(bbSize.x, bbSize.y), bbSize.z);
-  float gridSize = float(uniforms.gridSize);
-  float gx = ((gridSize * (position.x - uniforms.bbMin.x)) / cubeSize);
-  float gy = ((gridSize * (position.y - uniforms.bbMin.y)) / cubeSize);
-  float gz = ((gridSize * (position.z - uniforms.bbMin.z)) / cubeSize);
+  float gridSize = float(uniforms._.gridSize);
+  float gx = ((gridSize * (position.x - uniforms._.bbMin.x)) / cubeSize);
+  float gy = ((gridSize * (position.y - uniforms._.bbMin.y)) / cubeSize);
+  float gz = ((gridSize * (position.z - uniforms._.bbMin.z)) / cubeSize);
   return vec3(gx, gy, gz);
 }
 
@@ -294,7 +279,7 @@ vec3 loadPosition(uint vertexIndex) {
 }
 
 void doIgnore() {
-  uint g42 = uniforms.numTriangles;
+  uint g42 = uniforms._.numTriangles;
   uint kj6 = dbg.value1;
   uint b53 = atomicOr(counters.values[0], 0u);
   uint rwg = indices.values[0];
@@ -305,7 +290,7 @@ void doIgnore() {
 void main_sort_triangles(uvec3 GlobalInvocationID) {
   uint triangleIndex = GlobalInvocationID.x;
   doIgnore();
-  if ((triangleIndex >= uniforms.numTriangles)) {
+  if ((triangleIndex >= uniforms._.numTriangles)) {
     return;
   }
   uint i0 = indices.values[((3u * triangleIndex) + 0u)];
@@ -316,7 +301,7 @@ void main_sort_triangles(uvec3 GlobalInvocationID) {
   vec3 p2 = loadPosition(i2);
   vec3 center = (((p0 + p1) + p2) / 3.0f);
   vec3 voxelPos = toVoxelPos(center);
-  uint voxelIndex = toIndex1D(uniforms.gridSize, voxelPos);
+  uint voxelIndex = toIndex1D(uniforms._.gridSize, voxelPos);
   int triangleOffset = atomicAdd(LUT.values[voxelIndex], 1);
 }
 
