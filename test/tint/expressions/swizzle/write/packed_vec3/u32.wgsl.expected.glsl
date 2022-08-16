@@ -9,12 +9,12 @@ struct S {
 };
 
 layout(binding = 0, std430) buffer S_1 {
-  uvec3 v;
+  S _;
 } U;
 void f() {
-  U.v = uvec3(1u, 2u, 3u);
-  U.v.x = 1u;
-  U.v.y = 2u;
-  U.v.z = 3u;
+  U._.v = uvec3(1u, 2u, 3u);
+  U._.v.x = 1u;
+  U._.v.y = 2u;
+  U._.v.z = 3u;
 }
 

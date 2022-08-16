@@ -9,9 +9,9 @@ struct S {
 };
 
 layout(binding = 0, std430) buffer S_1 {
-  vec4 a;
+  S _;
 } v;
 void foo() {
-  v.a = (v.a / 2.0f);
+  v._.a = (v._.a / 2.0f);
 }
 

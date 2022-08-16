@@ -13,16 +13,16 @@ struct S {
 };
 
 layout(binding = 0, std430) buffer S_1 {
-  strided_arr_1 a[4];
+  S _;
 } s;
 void f_1() {
-  strided_arr_1 x_19[4] = s.a;
-  strided_arr x_24[3][2] = s.a[3].el;
-  strided_arr x_28[2] = s.a[3].el[2];
-  float x_32 = s.a[3].el[2][1].el;
+  strided_arr_1 x_19[4] = s._.a;
+  strided_arr x_24[3][2] = s._.a[3].el;
+  strided_arr x_28[2] = s._.a[3].el[2];
+  float x_32 = s._.a[3].el[2][1].el;
   strided_arr_1 tint_symbol[4] = strided_arr_1[4](strided_arr_1(strided_arr[3][2](strided_arr[2](strided_arr(0.0f), strided_arr(0.0f)), strided_arr[2](strided_arr(0.0f), strided_arr(0.0f)), strided_arr[2](strided_arr(0.0f), strided_arr(0.0f)))), strided_arr_1(strided_arr[3][2](strided_arr[2](strided_arr(0.0f), strided_arr(0.0f)), strided_arr[2](strided_arr(0.0f), strided_arr(0.0f)), strided_arr[2](strided_arr(0.0f), strided_arr(0.0f)))), strided_arr_1(strided_arr[3][2](strided_arr[2](strided_arr(0.0f), strided_arr(0.0f)), strided_arr[2](strided_arr(0.0f), strided_arr(0.0f)), strided_arr[2](strided_arr(0.0f), strided_arr(0.0f)))), strided_arr_1(strided_arr[3][2](strided_arr[2](strided_arr(0.0f), strided_arr(0.0f)), strided_arr[2](strided_arr(0.0f), strided_arr(0.0f)), strided_arr[2](strided_arr(0.0f), strided_arr(0.0f)))));
-  s.a = tint_symbol;
-  s.a[3].el[2][1].el = 5.0f;
+  s._.a = tint_symbol;
+  s._.a[3].el[2][1].el = 5.0f;
   return;
 }
 

@@ -6,11 +6,11 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_1 {
-  uint arg_0;
+  SB_RW _;
 } sb_rw;
 void atomicAnd_85a8d9() {
   uint arg_1 = 1u;
-  uint res = atomicAnd(sb_rw.arg_0, arg_1);
+  uint res = atomicAnd(sb_rw._.arg_0, arg_1);
 }
 
 void fragment_main() {
@@ -28,11 +28,11 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_1 {
-  uint arg_0;
+  SB_RW _;
 } sb_rw;
 void atomicAnd_85a8d9() {
   uint arg_1 = 1u;
-  uint res = atomicAnd(sb_rw.arg_0, arg_1);
+  uint res = atomicAnd(sb_rw._.arg_0, arg_1);
 }
 
 void compute_main() {

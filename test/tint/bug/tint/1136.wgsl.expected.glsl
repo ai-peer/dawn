@@ -9,9 +9,9 @@ struct Buffer {
 };
 
 layout(binding = 0, std430) buffer Buffer_1 {
-  uint data;
+  Buffer _;
 } tint_symbol;
 void tint_symbol_1() {
-  tint_symbol.data = (tint_symbol.data + 1u);
+  tint_symbol._.data = (tint_symbol._.data + 1u);
 }
 

@@ -90,28 +90,22 @@ struct Particles {
 };
 
 layout(binding = 0) uniform SimParams_1 {
-  float deltaT;
-  float rule1Distance;
-  float rule2Distance;
-  float rule3Distance;
-  float rule1Scale;
-  float rule2Scale;
-  float rule3Scale;
+  SimParams _;
 } params;
 
 layout(binding = 1, std430) buffer Particles_1 {
-  Particle particles[5];
+  Particles _;
 } particlesA;
 layout(binding = 2, std430) buffer Particles_2 {
-  Particle particles[5];
+  Particles _;
 } particlesB;
 void comp_main(uvec3 tint_symbol) {
   uint index = tint_symbol.x;
   if ((index >= 5u)) {
     return;
   }
-  vec2 vPos = particlesA.particles[index].pos;
-  vec2 vVel = particlesA.particles[index].vel;
+  vec2 vPos = particlesA._.particles[index].pos;
+  vec2 vVel = particlesA._.particles[index].vel;
   vec2 cMass = vec2(0.0f);
   vec2 cVel = vec2(0.0f);
   vec2 colVel = vec2(0.0f);
@@ -124,16 +118,16 @@ void comp_main(uvec3 tint_symbol) {
       if ((i == index)) {
         continue;
       }
-      pos = particlesA.particles[i].pos.xy;
-      vel = particlesA.particles[i].vel.xy;
-      if ((distance(pos, vPos) < params.rule1Distance)) {
+      pos = particlesA._.particles[i].pos.xy;
+      vel = particlesA._.particles[i].vel.xy;
+      if ((distance(pos, vPos) < params._.rule1Distance)) {
         cMass = (cMass + pos);
         cMassCount = (cMassCount + 1);
       }
-      if ((distance(pos, vPos) < params.rule2Distance)) {
+      if ((distance(pos, vPos) < params._.rule2Distance)) {
         colVel = (colVel - (pos - vPos));
       }
-      if ((distance(pos, vPos) < params.rule3Distance)) {
+      if ((distance(pos, vPos) < params._.rule3Distance)) {
         cVel = (cVel + vel);
         cVelCount = (cVelCount + 1);
       }
@@ -145,9 +139,9 @@ void comp_main(uvec3 tint_symbol) {
   if ((cVelCount > 0)) {
     cVel = (cVel / vec2(float(cVelCount), float(cVelCount)));
   }
-  vVel = (((vVel + (cMass * params.rule1Scale)) + (colVel * params.rule2Scale)) + (cVel * params.rule3Scale));
+  vVel = (((vVel + (cMass * params._.rule1Scale)) + (colVel * params._.rule2Scale)) + (cVel * params._.rule3Scale));
   vVel = (normalize(vVel) * clamp(length(vVel), 0.0f, 0.100000001f));
-  vPos = (vPos + (vVel * params.deltaT));
+  vPos = (vPos + (vVel * params._.deltaT));
   if ((vPos.x < -1.0f)) {
     vPos.x = 1.0f;
   }
@@ -160,8 +154,8 @@ void comp_main(uvec3 tint_symbol) {
   if ((vPos.y > 1.0f)) {
     vPos.y = -1.0f;
   }
-  particlesB.particles[index].pos = vPos;
-  particlesB.particles[index].vel = vVel;
+  particlesB._.particles[index].pos = vPos;
+  particlesB._.particles[index].vel = vVel;
 }
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;

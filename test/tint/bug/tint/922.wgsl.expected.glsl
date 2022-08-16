@@ -45,16 +45,15 @@ struct VertexOutput {
 };
 
 layout(binding = 0) uniform ub_SceneParams_1 {
-  Mat4x4_ u_Projection;
+  ub_SceneParams _;
 } global;
 
 layout(binding = 1) uniform ub_MaterialParams_1 {
-  Mat4x2_ u_TexMtx[1];
-  vec4 u_Misc0_;
+  ub_MaterialParams _;
 } global1;
 
 layout(binding = 2) uniform ub_PacketParams_1 {
-  Mat4x3_ u_PosMtx[32];
+  ub_PacketParams _;
 } global2;
 
 vec3 a_Position1 = vec3(0.0f, 0.0f, 0.0f);
@@ -107,13 +106,13 @@ Mat4x4_ x_Mat4x4_1(Mat4x3_ m16) {
 void main1() {
   Mat4x3_ t_PosMtx = Mat4x3_(vec4(0.0f, 0.0f, 0.0f, 0.0f), vec4(0.0f, 0.0f, 0.0f, 0.0f), vec4(0.0f, 0.0f, 0.0f, 0.0f));
   vec2 t_TexSpaceCoord = vec2(0.0f, 0.0f);
-  Mat4x3_ x_e18 = global2.u_PosMtx[int(a_PosMtxIdx1)];
+  Mat4x3_ x_e18 = global2._.u_PosMtx[int(a_PosMtxIdx1)];
   t_PosMtx = x_e18;
   Mat4x4_ x_e24 = x_Mat4x4_1(t_PosMtx);
   vec3 x_e25 = a_Position1;
   Mat4x4_ x_e30 = x_Mat4x4_1(t_PosMtx);
   vec4 x_e34 = Mul(x_e30, vec4(a_Position1, 1.0f));
-  Mat4x4_ x_e35 = global.u_Projection;
+  Mat4x4_ x_e35 = global._.u_Projection;
   Mat4x4_ x_e38 = x_Mat4x4_1(t_PosMtx);
   vec3 x_e39 = a_Position1;
   Mat4x4_ x_e44 = x_Mat4x4_1(t_PosMtx);
@@ -121,11 +120,11 @@ void main1() {
   vec4 x_e49 = Mul(x_e35, x_e48);
   tint_symbol = x_e49;
   v_Color = a_Color1;
-  vec4 x_e52 = global1.u_Misc0_;
+  vec4 x_e52 = global1._.u_Misc0_;
   if ((x_e52.x == 2.0f)) {
     {
       vec3 x_e59 = a_Normal1;
-      Mat4x2_ x_e64 = global1.u_TexMtx[0];
+      Mat4x2_ x_e64 = global1._.u_TexMtx[0];
       vec2 x_e68 = Mul2(x_e64, vec4(a_Normal1, 1.0f));
       v_TexCoord = x_e68.xy;
       return;
@@ -133,7 +132,7 @@ void main1() {
   } else {
     {
       vec2 x_e73 = a_UV1;
-      Mat4x2_ x_e79 = global1.u_TexMtx[0];
+      Mat4x2_ x_e79 = global1._.u_TexMtx[0];
       vec2 x_e84 = Mul2(x_e79, vec4(a_UV1, 1.0f, 1.0f));
       v_TexCoord = x_e84.xy;
       return;
