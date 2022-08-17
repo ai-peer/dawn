@@ -39,6 +39,30 @@
       },
       "revId": "36c6844501bcfa246504860658b5f54398acf28e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c00ec36a_32e5c985",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-17T12:44:44Z",
+      "side": 1,
+      "message": "Thanks. I thought one of our presubmits detected invalid formatting?",
+      "parentUuid": "1e036e02_8cee4cdc",
+      "range": {
+        "startLine": 230,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 30
+      },
+      "revId": "36c6844501bcfa246504860658b5f54398acf28e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
