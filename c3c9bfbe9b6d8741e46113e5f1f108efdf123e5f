@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "411674cd_c54836af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-17T11:32:16Z",
+      "side": 1,
+      "message": "+2 with some nits",
+      "revId": "c3c9bfbe9b6d8741e46113e5f1f108efdf123e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b81f9d45_6fb5e9fc",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3145,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-17T11:32:16Z",
+      "side": 1,
+      "message": "consider using `utils::Vector`?",
+      "range": {
+        "startLine": 3145,
+        "startChar": 4,
+        "endLine": 3145,
+        "endChar": 15
+      },
+      "revId": "c3c9bfbe9b6d8741e46113e5f1f108efdf123e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef3bfcbe_48fa515d",
+        "filename": "src/tint/reader/wgsl/parser_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-17T11:32:16Z",
+      "side": 1,
+      "message": "We prefix match-or-error methods with `expect_`, so this should be `expect_core_lhs_expression`",
+      "range": {
+        "startLine": 688,
+        "startChar": 35,
+        "endLine": 688,
+        "endChar": 54
+      },
+      "revId": "c3c9bfbe9b6d8741e46113e5f1f108efdf123e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c756f057_6ed98079",
+        "filename": "src/tint/reader/wgsl/parser_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-17T11:32:16Z",
+      "side": 1,
+      "message": "`expect_lhs_expression`",
+      "range": {
+        "startLine": 691,
+        "startChar": 35,
+        "endLine": 691,
+        "endChar": 49
+      },
+      "revId": "c3c9bfbe9b6d8741e46113e5f1f108efdf123e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
