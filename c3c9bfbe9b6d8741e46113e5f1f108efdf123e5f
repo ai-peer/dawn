@@ -64,6 +64,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "973f8dd8_68297b18",
+        "filename": "src/tint/reader/wgsl/parser_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-17T11:34:27Z",
+      "side": 1,
+      "message": "And now I see the in the next change these become `Maybe`s. Okay then.",
+      "parentUuid": "ef3bfcbe_48fa515d",
+      "range": {
+        "startLine": 688,
+        "startChar": 35,
+        "endLine": 688,
+        "endChar": 54
+      },
+      "revId": "c3c9bfbe9b6d8741e46113e5f1f108efdf123e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c756f057_6ed98079",
@@ -77,6 +101,30 @@
       "writtenOn": "2022-08-17T11:32:16Z",
       "side": 1,
       "message": "`expect_lhs_expression`",
+      "range": {
+        "startLine": 691,
+        "startChar": 35,
+        "endLine": 691,
+        "endChar": 49
+      },
+      "revId": "c3c9bfbe9b6d8741e46113e5f1f108efdf123e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c97eca83_e918ab8e",
+        "filename": "src/tint/reader/wgsl/parser_impl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-17T11:34:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c756f057_6ed98079",
       "range": {
         "startLine": 691,
         "startChar": 35,
