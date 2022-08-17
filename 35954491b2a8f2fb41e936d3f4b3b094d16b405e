@@ -16,6 +16,23 @@
       "message": "Please take a look, thanks",
       "revId": "35954491b2a8f2fb41e936d3f4b3b094d16b405e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "100423a0_e401ab3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-17T16:25:30Z",
+      "side": 1,
+      "message": "Thanks.\nJust a heads up that we may be retiring this transform, in order to handle smaller data types (like `f16`) and WGSL specification changes around padding fields not being written.\nIf you\u0027re looking at this for `f16`, then we should probably chat.",
+      "revId": "35954491b2a8f2fb41e936d3f4b3b094d16b405e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
