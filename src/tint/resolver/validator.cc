@@ -397,10 +397,12 @@ bool Validator::StorageClassLayout(const sem::Type* store_ty,
     // TODO(tint:1473, tint:1502): Remove this error after f16 is supported in "uniform" and
     // "storage" storage class but keep for "push_constant" storage class.
     if (Is<sem::F16>(sem::Type::DeepestElementOf(store_ty))) {
-        AddError(
-            "using f16 types in '" + utils::ToString(sc) + "' storage class is not implemented yet",
-            source);
-        return false;
+        if ((sc != ast::StorageClass::kUniform) && (sc != ast::StorageClass::kStorage)) {
+            AddError("using f16 types in '" + utils::ToString(sc) +
+                         "' storage class is not implemented yet",
+                     source);
+            return false;
+        }
     }
 
     if (auto* str = store_ty->As<sem::Struct>()) {

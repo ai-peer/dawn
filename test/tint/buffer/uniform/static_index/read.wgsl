@@ -1,3 +1,5 @@
+enable f16;
+
 struct Inner {
     @size(16) x : i32,
 };
@@ -9,12 +11,17 @@ struct S {
     d : u32,
     e : vec3<f32>,
     f : f32,
-    g : vec2<i32>,
-    h : vec2<i32>,
-    i : mat2x3<f32>,
-    j : mat3x2<f32>,
-    @align(16) k : Inner,
-    @align(16) l : array<Inner, 4>,
+    g : vec3<f16>,
+    h : f16,
+    i : vec2<f16>,
+    j : vec2<i32>,
+    k : vec2<i32>,
+    l : mat2x3<f32>,
+    m : mat3x2<f32>,
+    n : mat2x3<f16>,
+    o : mat3x2<f16>,
+    @align(16) p : Inner,
+    @align(16) q : array<Inner, 4>,
 };
 
 @binding(0) @group(0) var<uniform> s : S;
@@ -33,4 +40,9 @@ fn main() {
     let j = s.j;
     let k = s.k;
     let l = s.l;
+    let m = s.m;
+    let n = s.n;
+    let o = s.o;
+    let p = s.p;
+    let q = s.q;
 }

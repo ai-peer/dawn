@@ -1,3 +1,5 @@
+enable f16;
+
 struct Inner {
     a : vec3<i32>,
     b : i32,
