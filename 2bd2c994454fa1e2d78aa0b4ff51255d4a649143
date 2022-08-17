@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb6b9214_78105bf3",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-17T06:47:03Z",
+      "side": 1,
+      "message": "After digging around for quite a while, it turned out me a very subtle bug relating `AssumeCommandsComplete` [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Device.cpp;drc\u003dfd3d5ceda5d7987a7c8fb21e24ab52b1799ca8af;l\u003d1270):\n```\nMaybeError DeviceBase::Tick() {\n    DAWN_TRY(ValidateIsAlive());\n\n    // to avoid overly ticking, we only want to tick when:\n    // 1. the last submitted serial has moved beyond the completed serial\n    // 2. or the completed serial has not reached the future serial set by the trackers\n    if (mLastSubmittedSerial \u003e mCompletedSerial || mCompletedSerial \u003c mFutureSerial) {\n        DAWN_TRY(CheckPassedSerials());\n        DAWN_TRY(TickImpl());\n\n        // There is no GPU work in flight, we need to move the serials forward so that\n        // so that CPU operations waiting on GPU completion can know they don\u0027t have to wait.\n        // AssumeCommandsComplete will assign the max serial we must tick to in order to\n        // fire the awaiting callbacks.\n        if (mCompletedSerial \u003d\u003d mLastSubmittedSerial) {\n            AssumeCommandsComplete();\n        }\n\n        // TODO(crbug.com/dawn/833): decouple TickImpl from updating the serial so that we can\n        // tick the dynamic uploader before the backend resource allocators. This would allow\n        // reclaiming resources one tick earlier.\n        mDynamicUploader-\u003eDeallocate(mCompletedSerial);\n        mQueue-\u003eTick(mCompletedSerial);\n    }\n```\n\nAs my debug log below shows,\n```\n[ RUN      ] QueueWriteBufferTests.UnalignedDynamicUploader/Vulkan_SwiftShader_Device_Subzero\nAddFutureSerial -- serial:1\nGetPendingRecordingContext:0\ncmd CopyBufferToImage\ncopyBufferToTexture: src:6070000a3408 dst:611000008748\ncmdbuf:6070000a5240\nTexture::DestroyImpl:611000008748\nAddFutureSerial -- serial:1\ncopyFromStagingBuffer:0\nGetPendingRecordingContext:0\ncmd CopyBufferToBuffer\ncopyBufferToBuffer: src:6070000a3408 dst:6070000a4f98\ncmdbuf:6070000a5240\nAddFutureSerial -- serial:1\ncopyFromStagingBuffer:0\nGetPendingRecordingContext:0\ncmd CopyBufferToBuffer\ncopyBufferToBuffer: src:6070000a3408 dst:6070000a5158\ncmdbuf:6070000a5240\nTickImpl -- completedSerial:0\nAssumeCommandsComplete -- mFutureSerial:1\nAssumeCommandsComplete -- mLastSubmittedSerial:0\nGetPendingRecordingContext:1\ncopyBufferToBuffer: src:6070000a4f98 dst:6070000a5158\ncmdbuf:6070000a5240\nSubmitPendingCommands\nqueue submit\nsubmit done -- lastSubmittedSerial:2\nMapAsync\nGetPendingRecordingContext:0\nAddFutureSerial -- serial:3\nOnTrackTask\nTickImpl -- completedSerial:1\nDestroyTexture 611000008748\nSubmitPendingCommands\nqueue submit\nsubmit done -- lastSubmittedSerial:3\n```\n`AssumeCommandsComplete` advances `mCompletedSerial`, which in turn causes `FencedDeleter` to destory the texture, that is still in use.\n\nPer [vkspec](https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VUID-vkDestroyImage-image-01000):\n```\nAll submitted commands that refer to image, either directly or via a VkImageView, must have completed execution\n```\nWithout the signaled fence, we can\u0027t accurately tell if the execution is completed. \nSo we probably can\u0027t just assume anything to safely advance `mCompletedSerial`. No idea yet to fix this, any insights?",
+      "parentUuid": "0487bc1a_7cff0eaa",
+      "range": {
+        "startLine": 811,
+        "startChar": 75,
+        "endLine": 811,
+        "endChar": 79
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d1f24ba_b0ec7120",
         "filename": "src/dawn/native/vulkan/NativeSwapChainImplVk.cpp",
         "patchSetId": 10
