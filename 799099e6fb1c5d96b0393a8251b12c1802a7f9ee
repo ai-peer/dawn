@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d584e55e_46eaf86e",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-17T17:57:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "75c51cc2_5c7ffdfb",
+      "revId": "799099e6fb1c5d96b0393a8251b12c1802a7f9ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4401909a_2d4a0b01",
