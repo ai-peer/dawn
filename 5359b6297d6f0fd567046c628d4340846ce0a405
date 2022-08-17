@@ -33,6 +33,23 @@
       "message": "This loop isnt\u0027 correct, after the first match, all the operators have to match. You can\u0027t mix `\u0026`, `|` or `.\n\nFor `\u0026` we also have to split `\u0026\u0026` in here as you can have `a \u0026 b \u0026\u0026c` where the `\u0026\u0026c` is a bitwise `\u0026` of unary expression `\u0026c`.",
       "revId": "5359b6297d6f0fd567046c628d4340846ce0a405",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b107cad_3cb6dd0d",
+        "filename": "src/tint/reader/wgsl/parser_impl_bitwise_expression_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-17T15:25:41Z",
+      "side": 1,
+      "message": "This test is invalid as you can\u0027t group this way.",
+      "revId": "5359b6297d6f0fd567046c628d4340846ce0a405",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
