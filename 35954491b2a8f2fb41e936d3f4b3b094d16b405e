@@ -86,6 +86,23 @@
       "message": "Auto-submitting, thanks",
       "revId": "35954491b2a8f2fb41e936d3f4b3b094d16b405e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e26c6ceb_4fae7d22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-17T18:03:10Z",
+      "side": 1,
+      "message": "I think you meant to +2 on the `Commit-Queue`, doing that for you.",
+      "revId": "35954491b2a8f2fb41e936d3f4b3b094d16b405e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
