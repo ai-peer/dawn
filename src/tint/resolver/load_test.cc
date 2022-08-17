@@ -12,24 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ast/override.h"
+#include "src/tint/sem/load.h"
 
-#include "src/tint/ast/test_helper.h"
+#include "src/tint/resolver/resolver.h"
+#include "src/tint/resolver/resolver_test_helper.h"
+#include "src/tint/sem/test_helper.h"
 
-namespace tint::ast {
+#include "gmock/gmock.h"
+
+using namespace tint::number_suffixes;  // NOLINT
+
+namespace tint::resolver {
 namespace {
 
-using OverrideTest = TestHelper;
+using ResolverLoadTest = TestHelper;
 
-TEST_F(OverrideTest, Identifier_NoId) {
-    auto* o = Override("o", Expr(f32(1.0)));
-    EXPECT_EQ(std::string("o"), o->Identifier(Symbols()));
-}
-
-TEST_F(OverrideTest, Identifier_WithId) {
-    auto* o = Override("o", Expr(f32(1.0)), Id(4u));
-    EXPECT_EQ(std::string("4"), o->Identifier(Symbols()));
+TEST_F(ResolverLoadTest, VarAssignment) {
+    // var ref = 1.0;
+    // var v = ref;
+    auto* ref = Var("ref",)
 }
 
 }  // namespace
-}  // namespace tint::ast
+}  // namespace tint::resolver
