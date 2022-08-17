@@ -16,6 +16,23 @@
       "message": "Removing the code review as this parse is actually wrong. You can\u0027t mix the `\u0026`, `|` or `^` without brackets. Will update to parse the correct grammar element.",
       "revId": "5359b6297d6f0fd567046c628d4340846ce0a405",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4e6a0c2_24f70759",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2604,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-17T15:14:22Z",
+      "side": 1,
+      "message": "This loop isnt\u0027 correct, after the first match, all the operators have to match. You can\u0027t mix `\u0026`, `|` or `.\n\nFor `\u0026` we also have to split `\u0026\u0026` in here as you can have `a \u0026 b \u0026\u0026c` where the `\u0026\u0026c` is a bitwise `\u0026` of unary expression `\u0026c`.",
+      "revId": "5359b6297d6f0fd567046c628d4340846ce0a405",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
