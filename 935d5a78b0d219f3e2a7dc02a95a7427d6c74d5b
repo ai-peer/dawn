@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "297b53e3_bea7ae07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-17T00:27:12Z",
+      "side": 1,
+      "message": "PTAL this alternative approach. It turns out the other one was actually hitting a hang. This one is more complex but more conservative about when we send heartbeats.",
+      "revId": "935d5a78b0d219f3e2a7dc02a95a7427d6c74d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
