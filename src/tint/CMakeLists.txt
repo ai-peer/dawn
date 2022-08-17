@@ -323,6 +323,8 @@ set(TINT_LIB_SRCS
   sem/index_accessor_expression.h
   sem/info.cc
   sem/info.h
+  sem/load.cc
+  sem/load.h
   sem/loop_statement.cc
   sem/loop_statement.h
   sem/materialize.cc
