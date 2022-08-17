@@ -524,7 +524,7 @@ TEST_F(ParserImplTest, TypeDecl_Array_BadSize) {
     EXPECT_FALSE(t.matched);
     ASSERT_EQ(t.value, nullptr);
     ASSERT_TRUE(p->has_error());
-    ASSERT_EQ(p->error(), "1:12: expected array size expression");
+    ASSERT_EQ(p->error(), "1:13: unable to parse right side of ! expression");
 }
 
 TEST_F(ParserImplTest, TypeDecl_Array_MissingSize) {
