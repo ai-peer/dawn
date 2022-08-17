@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14d7a0e7_8e642e67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000169
+      },
+      "writtenOn": "2022-08-17T17:06:47Z",
+      "side": 1,
+      "message": "Hi, this function was being used in Skia\u0027s viewer tool on Mac to hook into the display system (CAMetalLayer). Is there an alternative approach we should be using or could we get this back?\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/skia/tools/sk_app/mac/DawnMTLWindowContext_mac.mm;l\u003d127?q\u003dDawnMTLWindow\u0026ss\u003dchromium%2Fchromium%2Fsrc:third_party%2Fskia%2F",
+      "revId": "a55b686ded2b547170704f99195dc7e4a97c3670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
