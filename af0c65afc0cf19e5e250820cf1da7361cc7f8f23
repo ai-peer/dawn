@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ceda374_8d7c4b85",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-17T13:28:56Z",
+      "side": 1,
+      "message": "Used twice, once for the `set_` field, and again for the iterator: `using SetIterator \u003d typename Set::Iterator;`.",
+      "parentUuid": "90a22eed_8f8405e8",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d29d9b7a_b690df85",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-08-16T19:36:42Z",
       "side": 1,
       "message": "Never used? (same with the one below)",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d333d12a_1d1a138c",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-17T13:28:56Z",
+      "side": 1,
+      "message": "Used by gmock. Added a comment.",
+      "parentUuid": "d29d9b7a_b690df85",
       "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6b13b07_022efa7a",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-17T13:28:56Z",
+      "side": 1,
+      "message": "We have `Get()` that returns a `std::optional`.\nTrouble with `Get()` is that you\u0027re making a copy. This can be expensive, if the value is large, and there\u0027s no way to mutate the stored element.\n`Find()` returns a pointer to the stored element, and comes with the `@warning` to give caution to the fact the pointer is not stable if the map is mutated.",
+      "parentUuid": "b293dca3_ccbedb70",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bbfc4a8_0ed0bdfb",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-08-16T19:36:42Z",
       "side": 1,
       "message": "nit: A slot is a ...",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83ac35d7_a076a539",
+        "filename": "src/tint/utils/hashset.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-17T13:28:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bbfc4a8_0ed0bdfb",
       "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc4b8700_2d948299",
+        "filename": "src/tint/utils/hashset.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-17T13:28:56Z",
+      "side": 1,
+      "message": "Yes. Added more docs.",
+      "parentUuid": "468cda4e_235590bc",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b510dc0b_73a2de2e",
@@ -99,6 +189,24 @@
       "writtenOn": "2022-08-16T19:36:42Z",
       "side": 1,
       "message": "Put would be clearer as an enum param then a bool template.\n\n`Put(std::forward\u003cV\u003e(value), PutType::kReplace)`",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4217288a_6b019919",
+        "filename": "src/tint/utils/hashset.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-17T13:28:56Z",
+      "side": 1,
+      "message": "Done (but still as a template arg)",
+      "parentUuid": "b510dc0b_73a2de2e",
       "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +228,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77d5723f_aa29296a",
+        "filename": "src/tint/utils/hashset.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-17T13:28:56Z",
+      "side": 1,
+      "message": "Added a `Get()` method.",
+      "parentUuid": "e3905823_31343dba",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efff46d0_559f9799",
@@ -133,6 +259,24 @@
       "writtenOn": "2022-08-16T19:36:42Z",
       "side": 1,
       "message": "the slot ...",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc463331_2615a69b",
+        "filename": "src/tint/utils/hashset.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-17T13:28:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efff46d0_559f9799",
       "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -154,6 +298,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "680de0dc_f827e5b2",
+        "filename": "src/tint/utils/hashset.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-17T13:28:56Z",
+      "side": 1,
+      "message": "`tparam` is correct for a template parameter. I\u0027ve removed this though as the documentation now exists on the enum.",
+      "parentUuid": "e20b33c3_93207044",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ba55a31_c0c13e58",
@@ -167,6 +329,24 @@
       "writtenOn": "2022-08-16T19:36:42Z",
       "side": 1,
       "message": "Doesn\u0027t this need to stop if `slot.distance \u003e\u003d distance` instead of the other way around?",
+      "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4584370_01d31dc0",
+        "filename": "src/tint/utils/hashset.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-17T13:28:56Z",
+      "side": 1,
+      "message": "I think https://programming.guide/robin-hood-hashing.html just got this wrong. Added a comment.",
+      "parentUuid": "7ba55a31_c0c13e58",
       "revId": "af0c65afc0cf19e5e250820cf1da7361cc7f8f23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
