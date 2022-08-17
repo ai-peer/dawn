@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "75c51cc2_5c7ffdfb",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-17T17:17:11Z",
+      "side": 1,
+      "message": "`Maybe\u003cbool\u003e` is more odd. What do you check? The `Maybe` error state? The boolean?\nIt\u0027s part of this CL, because in making the fix I wrote the wrong thing and I struggled to figure out what was wrong. This is less error prone.",
+      "parentUuid": "e072972b_1f756f92",
+      "revId": "799099e6fb1c5d96b0393a8251b12c1802a7f9ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4401909a_2d4a0b01",
         "filename": "src/tint/reader/wgsl/parser_impl.cc",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2022-08-15T14:03:32Z",
       "side": 1,
       "message": "nit: this case is untested.\n\ne.g. \n@location(0) var x:i32;",
+      "revId": "799099e6fb1c5d96b0393a8251b12c1802a7f9ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f4bb2a8_447f3d82",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-17T17:17:11Z",
+      "side": 1,
+      "message": "It is tested. The attribute \u003c-\u003e usage is not checked by the parser, but by the resolver. The test for this very case is here:\nhttps://dawn.googlesource.com/dawn/+/2de4deea1f4de5bae44be624e0ec88060e8aae60/src/tint/resolver/attribute_validation_test.cc#700",
+      "parentUuid": "4401909a_2d4a0b01",
       "revId": "799099e6fb1c5d96b0393a8251b12c1802a7f9ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -48,6 +84,24 @@
       "writtenOn": "2022-08-15T14:16:28Z",
       "side": 1,
       "message": "This seems like the only bit that\u0027s actually needed in order to fix the clusterfuzz issue?",
+      "revId": "799099e6fb1c5d96b0393a8251b12c1802a7f9ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d86baa23_4507bd15",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-17T17:17:11Z",
+      "side": 1,
+      "message": "Yes. But I\u0027m trying to prevent more bugs in the same code.",
+      "parentUuid": "e2bd87a5_753f4071",
       "revId": "799099e6fb1c5d96b0393a8251b12c1802a7f9ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
