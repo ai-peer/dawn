@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b39fc82_6ad5f94b",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-08-17T23:19:39Z",
+      "side": 1,
+      "message": "Roughly speaking, yeah, that makes sense. I wonder if you could just add a third value to `TestAspect` so we have Stencil, Depth, DepthAsFloat? I\u0027m not sure.",
+      "parentUuid": "6b10b7eb_fe86b364",
+      "revId": "b7c8a353d47332a3e1e06d049749d9c1d8d83abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0002639_85aafa7a",
         "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 3
