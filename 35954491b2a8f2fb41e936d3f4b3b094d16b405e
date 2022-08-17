@@ -51,6 +51,24 @@
       "parentUuid": "100423a0_e401ab3f",
       "revId": "35954491b2a8f2fb41e936d3f4b3b094d16b405e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59b8663e_88525ada",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-17T16:41:31Z",
+      "side": 1,
+      "message": "Would you like to chat in the `[PUBLIC] Tint Discuss` room?\nhttps://mail.google.com/chat/u/0/?zx\u003d75o5dbden1bp#chat/space/AAAA-6gDxTo",
+      "parentUuid": "e5eff809_feb9b87c",
+      "revId": "35954491b2a8f2fb41e936d3f4b3b094d16b405e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
