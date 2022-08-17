@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ba65101_ca081b9c",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3145,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-17T14:07:43Z",
+      "side": 1,
+      "message": "1-2 items is the perfect use of `utils::Vector`, as it avoids the expensive heap allocation. Happy to have this done later.",
+      "parentUuid": "66d779c5_27fc10e8",
+      "range": {
+        "startLine": 3145,
+        "startChar": 4,
+        "endLine": 3145,
+        "endChar": 15
+      },
+      "revId": "c3c9bfbe9b6d8741e46113e5f1f108efdf123e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef3bfcbe_48fa515d",
