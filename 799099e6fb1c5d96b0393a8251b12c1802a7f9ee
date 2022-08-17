@@ -122,6 +122,24 @@
       "parentUuid": "e2bd87a5_753f4071",
       "revId": "799099e6fb1c5d96b0393a8251b12c1802a7f9ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f518b0b7_cae1a31c",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-17T18:01:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d86baa23_4507bd15",
+      "revId": "799099e6fb1c5d96b0393a8251b12c1802a7f9ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
