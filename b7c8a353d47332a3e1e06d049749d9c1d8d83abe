@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b10b7eb_fe86b364",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-08-17T15:30:32Z",
+      "side": 1,
+      "message": "Thanks for the advices. They make sense to me. I will add tests in `DepthStencilSamplingTest`.\n\nTo reuse the existing code as much as possible, maybe adding `TestSamplerType` enum would be good?\n\n```\nenum class TestSamplerType {\n    Depth,\n    UnfilterableFloat,\n    Uint\n};\n\nDoSamplingTest(TestAspect::Depth, CreateSamplingRenderPipeline({TestAspect::Depth}, {TestSamplerType::Depth}, 0), format, kNormalizedTextureValues, tolerance);\nDoSamplingTest(TestAspect::Depth, CreateSamplingRenderPipeline({TestAspect::Depth}, {TestSamplerType::UnfilterableFloat}, 0), format, kNormalizedTextureValues, tolerance);\n\n// In GenerateSamplingShader\nshaderSource \u003c\u003c \"@group(0) @binding(\" \u003c\u003c 2 * index \u003c\u003c \") var tex\" \u003c\u003c index;\nswitch(samplerType) {\n  case TestSamplerType::Depth:\n    shaderSource \u003c\u003c \" : texture_depth_2d;\\n\";\n    break;\n  case TestSamplerType::UnfilterableFloat:\n    shaderSource \u003c\u003c \" : texture_2d\u003cf32\u003e;\\n\";\n    break;\n}\n\nshaderSource \u003c\u003c \"@group(0) @binding(\" \u003c\u003c 2 * index + 1\n             \u003c\u003c \") var\u003cstorage, read_write\u003e result\" \u003c\u003c index\n             \u003c\u003c \" : DepthResult;\\n\";\n\nASSERT(components.size() \u003d\u003d 1 \u0026\u0026 components[0] \u003d\u003d 0);\nshaderBody \u003c\u003c \"\\nresult\" \u003c\u003c index \u003c\u003c \".value \u003d textureLoad(tex\" \u003c\u003c index;\nswitch(samplerType) {\n  case TestSamplerType::Depth:\n    shaderBody \u003c\u003c \", vec2\u003ci32\u003e(0, 0), 0);\";\n    break;\n  case TestSamplerType::UnfilterableFloat:\n    shaderBody \u003c\u003c \", vec2\u003ci32\u003e(0, 0), 0)[0];\";\n    break;\n```",
+      "parentUuid": "0f4b8e13_653793eb",
+      "revId": "b7c8a353d47332a3e1e06d049749d9c1d8d83abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0002639_85aafa7a",
         "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 3
