@@ -202,6 +202,30 @@
       "parentUuid": "a8f80de4_7d5e7fb7",
       "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09519c4c_1611e0cb",
+        "filename": "src/dawn/native/vulkan/DeviceVk.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-18T09:00:43Z",
+      "side": 1,
+      "message": "Except that we need to turn on `needsSubmit` at [1] and [2], where it looks quite reasonable, we can set all the rest to `false` without any issue.",
+      "parentUuid": "d178f99b_cc31f982",
+      "range": {
+        "startLine": 65,
+        "startChar": 73,
+        "endLine": 65,
+        "endChar": 79
+      },
+      "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

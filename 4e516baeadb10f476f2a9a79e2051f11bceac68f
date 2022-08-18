@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a96ea913_07ba9d51",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-18T09:00:43Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 530,
+        "startChar": 83,
+        "endLine": 530,
+        "endChar": 87
+      },
+      "revId": "4e516baeadb10f476f2a9a79e2051f11bceac68f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00d68a98_d4f7515c",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-18T09:00:43Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 875,
+        "startChar": 87,
+        "endLine": 875,
+        "endChar": 91
+      },
+      "revId": "4e516baeadb10f476f2a9a79e2051f11bceac68f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
