@@ -103,7 +103,7 @@ TEST_P(MaxLimitTests, MaxComputeWorkgroupStorageSize) {
 // Test using the maximum uniform/storage buffer binding size works
 TEST_P(MaxLimitTests, MaxBufferBindingSize) {
     // The uniform buffer layout used in this test is not supported on ES.
-    DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
+    DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES() || IsOpenGL());
 
     // TODO(crbug.com/dawn/1172)
     DAWN_SUPPRESS_TEST_IF(IsWindows() && IsVulkan() && IsIntel());
