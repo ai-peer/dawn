@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3cd8ed8_85d47dd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T17:25:23Z",
+      "side": 1,
+      "message": "Mo, please review - you will need this so you can query the adapter from the device. Then, from the adapter you can query the adapter properties.",
+      "revId": "a380eb902c346c6f1dd199653a0e9c258dd0c015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
