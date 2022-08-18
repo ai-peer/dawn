@@ -16,6 +16,57 @@
       "message": "PTAL this alternative approach. It turns out the other one was actually hitting a hang. This one is more complex but more conservative about when we send heartbeats.",
       "revId": "935d5a78b0d219f3e2a7dc02a95a7427d6c74d5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "587c995e_9b277909",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-08-18T01:11:59Z",
+      "side": 1,
+      "message": "I don\u0027t think this sends a heartbeat after any code awaiting the promise. Pretty sure both heartbeats will happen before.\n\nAFAIK you can\u0027t really hook code that happens after the promise unless you override the implementation of `then` which I\u0027m not sure is compatible with `await` anyway.\n\nHow about sending a heartbeat before `old.call` instead? That way you\u0027ll get a heartbeat while waiting e.g. for a map to complete.",
+      "revId": "935d5a78b0d219f3e2a7dc02a95a7427d6c74d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "651eedc8_405c1665",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-08-18T01:11:59Z",
+      "side": 1,
+      "message": "nit: I think you could just\n\n```\nconst p \u003d old.call(this, ...args);\np.finally(sendHeartbeat);\nreturn p;\n```\n\nSince the finally is registered before anything the application does with the promise, I think it\u0027s supposed to get called first.\n\nOnly difference would be I think it would suppress unhandledrejection events.",
+      "revId": "935d5a78b0d219f3e2a7dc02a95a7427d6c74d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eb7ad46_2e75da2e",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-08-18T01:11:59Z",
+      "side": 1,
+      "message": "nit: IMO clearer if you just pass `target, prop, receiver` explicitly. The magic `arguments` keyword is hard to read.",
+      "revId": "935d5a78b0d219f3e2a7dc02a95a7427d6c74d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
