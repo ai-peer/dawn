@@ -221,6 +221,7 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
 void QueueBase::TrackTask(std::unique_ptr<TaskInFlight> task, ExecutionSerial serial) {
     mTasksInFlight.Enqueue(std::move(task), serial);
     GetDevice()->AddFutureSerial(serial);
+    GetDevice()->ForceEventualFlushOfCommands();
 }
 
 void QueueBase::Tick(ExecutionSerial finishedSerial) {

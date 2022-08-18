@@ -63,7 +63,7 @@ class Device final : public DeviceBase {
     ResourceMemoryAllocator* GetResourceMemoryAllocator() const;
     external_semaphore::Service* GetExternalSemaphoreService() const;
 
-    CommandRecordingContext* GetPendingRecordingContext();
+    CommandRecordingContext* GetPendingRecordingContext(bool needsSubmit);
     MaybeError SubmitPendingCommands();
 
     void EnqueueDeferredDeallocation(DescriptorSetAllocator* allocator);
@@ -111,6 +111,8 @@ class Device final : public DeviceBase {
 
     // Used to associate this device with validation layer messages.
     const char* GetDebugPrefix() { return mDebugPrefix.c_str(); }
+
+    void ForceEventualFlushOfCommands() override;
 
   private:
     Device(Adapter* adapter, const DeviceDescriptor* descriptor);
@@ -193,6 +195,8 @@ class Device final : public DeviceBase {
     // to a serial and a fence, such that when the fence is "ready" we know the operations
     // have finished.
     std::queue<std::pair<VkFence, ExecutionSerial>> mFencesInFlight;
+    // The serial of ready fence in the last check.
+    ExecutionSerial mLastReadyFenceSerial = ExecutionSerial(0);
     // Fences in the unused list aren't reset yet.
     std::vector<VkFence> mUnusedFences;
 
