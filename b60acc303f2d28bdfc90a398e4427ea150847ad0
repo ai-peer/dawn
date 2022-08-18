@@ -16,6 +16,24 @@
       "message": "why not just \u003d {} this?\n\nit\u0027s probably easier overall to audit code by checking that every variable has an initializer, instead of tracing where the pointer came from and check that the origin was initialized properly",
       "revId": "b60acc303f2d28bdfc90a398e4427ea150847ad0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14fe2e39_4ea84880",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-18T01:29:28Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "2a49e129_56d0b9ea",
+      "revId": "b60acc303f2d28bdfc90a398e4427ea150847ad0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

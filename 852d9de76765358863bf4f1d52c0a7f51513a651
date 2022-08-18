@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6413a88_b0e4c44c",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-18T01:29:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18370edd_73f344f2",
+      "revId": "852d9de76765358863bf4f1d52c0a7f51513a651",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34e1afff_063ade97",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-08-18T00:49:25Z",
       "side": 1,
       "message": "should we zero init this?\n\n(also, prefix should not have m)",
+      "revId": "852d9de76765358863bf4f1d52c0a7f51513a651",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b311426_2f55680e",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-18T01:29:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34e1afff_063ade97",
       "revId": "852d9de76765358863bf4f1d52c0a7f51513a651",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +111,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "555a5948_509f3d05",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-18T01:29:28Z",
+      "side": 1,
+      "message": "Ah I did not see this and didn\u0027t realize that the only problem was the helper overwriting the defaults. Done.",
+      "parentUuid": "4f571adc_6b3b8acd",
+      "range": {
+        "startLine": 350,
+        "startChar": 0,
+        "endLine": 352,
+        "endChar": 0
+      },
+      "revId": "852d9de76765358863bf4f1d52c0a7f51513a651",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ecd6a26_0b3cda64",
@@ -88,6 +148,24 @@
       "writtenOn": "2022-08-18T00:49:25Z",
       "side": 1,
       "message": "do we need this or do the inner structures get initialized by [1]?",
+      "revId": "852d9de76765358863bf4f1d52c0a7f51513a651",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60f585b4_c83166a5",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-18T01:29:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ecd6a26_0b3cda64",
       "revId": "852d9de76765358863bf4f1d52c0a7f51513a651",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
