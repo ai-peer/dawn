@@ -226,6 +226,48 @@
       },
       "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "683c6196_8682a066",
+        "filename": "src/dawn/native/vulkan/DeviceVk.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T15:54:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cacdf880_9e9adc5e",
+      "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e6c3db3_d6f0fc46",
+        "filename": "src/dawn/native/vulkan/DeviceVk.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T15:54:46Z",
+      "side": 1,
+      "message": "Responses in other threads",
+      "parentUuid": "09519c4c_1611e0cb",
+      "range": {
+        "startLine": 65,
+        "startChar": 73,
+        "endLine": 65,
+        "endChar": 79
+      },
+      "revId": "c1e1bb3d7ade99b596756ca9628eb67734309006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

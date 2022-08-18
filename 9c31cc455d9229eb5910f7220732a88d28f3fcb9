@@ -143,6 +143,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b685624_4bfbc312",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T15:54:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2e34dff_2b5bd8cf",
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff8b7ea8_33a6c2e3",
@@ -180,6 +198,30 @@
       "side": 1,
       "message": "Didn\u0027t know that, thanks for the hint!",
       "parentUuid": "ff8b7ea8_33a6c2e3",
+      "range": {
+        "startLine": 418,
+        "startChar": 4,
+        "endLine": 418,
+        "endChar": 54
+      },
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6877ee3a_62c29888",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T15:54:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c354fb3_42f67cc5",
       "range": {
         "startLine": 418,
         "startChar": 4,
@@ -322,6 +364,30 @@
       "side": 1,
       "message": "Can\u0027t like the idea more. Thanks!",
       "parentUuid": "817af7d8_5b7a8362",
+      "range": {
+        "startLine": 172,
+        "startChar": 12,
+        "endLine": 172,
+        "endChar": 19
+      },
+      "revId": "9c31cc455d9229eb5910f7220732a88d28f3fcb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6006b8c_cbebd152",
+        "filename": "src/dawn/native/vulkan/DeviceVk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T15:54:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f712770_d7f80439",
       "range": {
         "startLine": 172,
         "startChar": 12,

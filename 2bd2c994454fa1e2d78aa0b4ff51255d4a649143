@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "014191f2_0ac47be0",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T15:54:46Z",
+      "side": 1,
+      "message": "This is the ensure before the buffer is first used, it is initialized to non-zero. It should be OK to defer since we only need it to happen at the start of the next usage.",
+      "parentUuid": "b21dba2e_7988d55a",
+      "range": {
+        "startLine": 220,
+        "startChar": 55,
+        "endLine": 220,
+        "endChar": 59
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ed9585c_ab78310d",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-16T07:01:51Z",
       "side": 1,
       "message": "Not sure about this.",
+      "range": {
+        "startLine": 230,
+        "startChar": 91,
+        "endLine": 230,
+        "endChar": 95
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3bf72f9_77ba9571",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T15:54:46Z",
+      "side": 1,
+      "message": "This is the ensure before the buffer is first used, it is initialized to zero. It should be OK to defer since we only need it to happen at the start of the next usage.",
+      "parentUuid": "2ed9585c_ab78310d",
       "range": {
         "startLine": 230,
         "startChar": 91,
@@ -120,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f4478f3_3fda8579",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T15:54:46Z",
+      "side": 1,
+      "message": "ugh... the serials, and particularly mFutureSerial, are hard to understand and we would like to make it better (see crbug.com/dawn/1413)\n\nIt seems bad that we advance mCompletedSerial up to mFutureSerial when there are still incomplete commands. I have a suggestion to fix this problem by removing mFutureSerial entirely. I feel like mFutureSerial is a bit of a hack.\n\nYour solution will look like it will work, but I\u0027m afraid about other places and that this is a bigger problem than just mDeleter. What about  mResourceMemoryAllocator-\u003eTick and  mDescriptorAllocatorsPendingDeallocation.ClearUpTo and DescriptorSetAllocator-\u003eFinishDeallocation?\n\nI went and looked through history to see why we AddFutureSerial in WriteBuffer and WriteTexture. It came from here\nhttps://dawn-review.googlesource.com/c/dawn/+/29980/comments/21fe028a_5859e7ff\n\nWe AddFutureSerial so that Tick() knows there is a pending write operations that need to get flushed and we don\u0027t increase memory forever. This CL fixes that though! \n a) I think, we can remove AddFutureSerial from WriteBuffer and WriteTexture if inside DeviceBase::Tick() we add another condition which will make sure the uploads are submitted. That way, if there are many pending WriteBuffers, calling Tick repeatedly will eventually cause them to all get flushed.\n\n b) The one more remaining usage of AddFutureSerial is in QueueBase::TrackTask. This is because operations like OnSubmittedWorkDone and MapAsync are scheduled to resolved their callbacks using the pending command serial. Calling Tick() needs to eventually make them fire, so we tracked that there is a future submit that needs to happen using mFutureSerial. However, now we have ForceEventualFlushOfCommands. I think we could also remove AddFutureSerial from TrackTask, and instead, add another condition in Device::Tick() like CheckCommandsNeedFlush().\n\nall in all, Device::Tick would look something like\n(may also need to tag the recording context as needsSubmit)\n```\n\nif (mLastSubmittedSerial \u003e mCompletedSerial || CheckCommandsNeedFlush()) {\n  ...\n  mForceNextTick \u003d false;\n  DAWN_TRY(TickImpl());\n  ...\n}\n```\n```\n\nvirtual void DeviceBase::ForceEventualFlushOfCommands() {\n  mForceNextTick \u003d true;\n}\n\nvirtual bool DeviceBase::CheckCommandsNeedFlush() {\n  return mForceNextTick || GetDynamicUploader()-\u003eShouldFlush();\n}\n\nvirtual bool DeviceVk::ForceEventualFlushOfCommands() {\n  DeviceBase::ForceEventualFlushOfCommands();\n  mRecordingContext.needsSubmit |\u003d mRecordingContext.used;\n}\n\nbool DeviceVk::CheckCommandsNeedFlush() override {\n  return mRecordingContext.needsSubmit || DeviceBase::CheckCommandsNeedFlush();\n}\n```\nfinally, with no more AddFutureSerial, we can remove it from AssumeCommandsComplete.\n```\nvoid DeviceBase::AssumeCommandsComplete() {\n    // bump serials so any pending callbacks can fire. \n    mLastSubmittedSerial++;\n    mCompletedSerial \u003d mLastSubmittedSerial;\n}\n```\n\nI only thought about Vulkan here; we we also likely need a similar thing for other backends.\n\nWhat do you think? Please feel free to simplify this idea or offer other suggestions as well.",
+      "parentUuid": "f42b8ab8_117c8dbb",
+      "range": {
+        "startLine": 811,
+        "startChar": 75,
+        "endLine": 811,
+        "endChar": 79
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d1f24ba_b0ec7120",
         "filename": "src/dawn/native/vulkan/NativeSwapChainImplVk.cpp",
         "patchSetId": 10
@@ -131,6 +203,30 @@
       "writtenOn": "2022-08-16T07:01:51Z",
       "side": 1,
       "message": "Totally unfamiliar with this.",
+      "range": {
+        "startLine": 191,
+        "startChar": 40,
+        "endLine": 191,
+        "endChar": 44
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c962e2f_f74d605e",
+        "filename": "src/dawn/native/vulkan/NativeSwapChainImplVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T15:54:46Z",
+      "side": 1,
+      "message": "the semaphore is signaled by vkAcquireNextImageKHR. We should enqueue it to be waited on before the next usage of nextTexture. Changing to `false` looks ok to me",
+      "parentUuid": "0d1f24ba_b0ec7120",
       "range": {
         "startLine": 191,
         "startChar": 40,
@@ -166,6 +262,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d1d2af5_a76a74ba",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T15:54:46Z",
+      "side": 1,
+      "message": "I think this one should be true because we need to be the transition to presentation usage actually happens before vkQueuePresent",
+      "parentUuid": "b55132a2_e52b3a42",
+      "range": {
+        "startLine": 76,
+        "startChar": 83,
+        "endLine": 76,
+        "endChar": 87
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47a976fe_9642bf94",
         "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
         "patchSetId": 10
@@ -177,6 +297,30 @@
       "writtenOn": "2022-08-16T07:01:51Z",
       "side": 1,
       "message": "Not sure.",
+      "range": {
+        "startLine": 530,
+        "startChar": 83,
+        "endLine": 530,
+        "endChar": 87
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76b72c01_a403e4d9",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T15:54:46Z",
+      "side": 1,
+      "message": "I think it should be true because we need to be the transition to presentation usage actually happens before vkQueuePresent",
+      "parentUuid": "47a976fe_9642bf94",
       "range": {
         "startLine": 530,
         "startChar": 83,
@@ -210,6 +354,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42f65b25_710bc6d7",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T15:54:46Z",
+      "side": 1,
+      "message": "the semaphore is signaled by vkAcquireNextImageKHR. We should enqueue it to be waited on before the next usage of nextTexture. Changing to `false` looks ok to me",
+      "parentUuid": "480a51d6_5784433d",
+      "range": {
+        "startLine": 641,
+        "startChar": 43,
+        "endLine": 641,
+        "endChar": 47
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adde6ce6_edaaa3f5",
@@ -223,6 +391,30 @@
       "writtenOn": "2022-08-16T07:01:51Z",
       "side": 1,
       "message": "Seems testing only.",
+      "range": {
+        "startLine": 708,
+        "startChar": 81,
+        "endLine": 708,
+        "endChar": 85
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dc3e59f_dbf8dcd1",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T15:54:46Z",
+      "side": 1,
+      "message": "This is the ensure before the texture is first used, it is initialized to non-zero. It should be OK to defer since we only need it to happen at the start of the next usage.",
+      "parentUuid": "adde6ce6_edaaa3f5",
       "range": {
         "startLine": 708,
         "startChar": 81,

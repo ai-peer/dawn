@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "113fd21a_58f97702",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T15:54:46Z",
+      "side": 1,
+      "message": "sorry for the slow review",
+      "revId": "4e516baeadb10f476f2a9a79e2051f11bceac68f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a96ea913_07ba9d51",
@@ -24,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f257e69d_b5b6658a",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T15:54:46Z",
+      "side": 1,
+      "message": "I think it should be true because we need to be the transition to presentation usage actually happens before vkQueuePresent",
+      "parentUuid": "a96ea913_07ba9d51",
+      "range": {
+        "startLine": 530,
+        "startChar": 83,
+        "endLine": 530,
+        "endChar": 87
+      },
+      "revId": "4e516baeadb10f476f2a9a79e2051f11bceac68f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00d68a98_d4f7515c",
@@ -37,6 +78,30 @@
       "writtenOn": "2022-08-18T09:00:43Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 875,
+        "startChar": 87,
+        "endLine": 875,
+        "endChar": 91
+      },
+      "revId": "4e516baeadb10f476f2a9a79e2051f11bceac68f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6a9d94e_6eed77ac",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T15:54:46Z",
+      "side": 1,
+      "message": "Looks good; we need to transition before SubmitPendingCommands",
+      "parentUuid": "00d68a98_d4f7515c",
       "range": {
         "startLine": 875,
         "startChar": 87,
