@@ -130,7 +130,7 @@ void FirstIndexOffset::Run(CloneContext& ctx, const DataMap& inputs, DataMap& ou
         // Fix up all references to the builtins with the offsets
         ctx.ReplaceAll([=, &ctx](const ast::Expression* expr) -> const ast::Expression* {
             if (auto* sem = ctx.src->Sem().Get(expr)) {
-                if (auto* user = sem->As<sem::VariableUser>()) {
+                if (auto* user = sem->UnwrapLoad()->As<sem::VariableUser>()) {
                     auto it = builtin_vars.find(user->Variable());
                     if (it != builtin_vars.end()) {
                         return ctx.dst->Add(ctx.CloneWithoutTransform(expr),

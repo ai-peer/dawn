@@ -816,15 +816,18 @@ void DecomposeMemoryAccess::Run(CloneContext& ctx, const DataMap&, DataMap&) con
     for (auto* node : ctx.src->ASTNodes().Objects()) {
         if (auto* ident = node->As<ast::IdentifierExpression>()) {
             // X
-            if (auto* var = sem.Get<sem::VariableUser>(ident)) {
-                if (var->Variable()->StorageClass() == ast::StorageClass::kStorage ||
-                    var->Variable()->StorageClass() == ast::StorageClass::kUniform) {
-                    // Variable to a storage or uniform buffer
-                    state.AddAccess(ident, {
-                                               var,
-                                               state.ToOffset(0u),
-                                               var->Type()->UnwrapRef(),
-                                           });
+            if (auto* ident_sem = sem.Get(ident)) {
+                if (auto* user = ident_sem->UnwrapLoad()->As<sem::VariableUser>()) {
+                    auto* var = user->Variable();
+                    if (var->StorageClass() == ast::StorageClass::kStorage ||
+                        var->StorageClass() == ast::StorageClass::kUniform) {
+                        // Variable to a storage or uniform buffer
+                        state.AddAccess(ident, {
+                                                   user,
+                                                   state.ToOffset(0u),
+                                                   user->Type()->UnwrapRef(),
+                                               });
+                    }
                 }
             }
             continue;
@@ -832,7 +835,7 @@ void DecomposeMemoryAccess::Run(CloneContext& ctx, const DataMap&, DataMap&) con
 
         if (auto* accessor = node->As<ast::MemberAccessorExpression>()) {
             // X.Y
-            auto* accessor_sem = sem.Get(accessor);
+            auto* accessor_sem = sem.Get(accessor)->UnwrapLoad();
             if (auto* swizzle = accessor_sem->As<sem::Swizzle>()) {
                 if (swizzle->Indices().Length() == 1) {
                     if (auto access = state.TakeAccess(accessor->structure)) {
@@ -841,7 +844,7 @@ void DecomposeMemoryAccess::Run(CloneContext& ctx, const DataMap&, DataMap&) con
                         state.AddAccess(accessor, {
                                                       access.var,
                                                       state.Add(access.offset, offset),
-                                                      vec_ty->type()->UnwrapRef(),
+                                                      vec_ty->type(),
                                                   });
                     }
                 }
@@ -853,7 +856,7 @@ void DecomposeMemoryAccess::Run(CloneContext& ctx, const DataMap&, DataMap&) con
                     state.AddAccess(accessor, {
                                                   access.var,
                                                   state.Add(access.offset, offset),
-                                                  member->Type()->UnwrapRef(),
+                                                  member->Type(),
                                               });
                 }
             }
@@ -868,7 +871,7 @@ void DecomposeMemoryAccess::Run(CloneContext& ctx, const DataMap&, DataMap&) con
                     state.AddAccess(accessor, {
                                                   access.var,
                                                   state.Add(access.offset, offset),
-                                                  arr->ElemType()->UnwrapRef(),
+                                                  arr->ElemType(),
                                               });
                     continue;
                 }
@@ -877,7 +880,7 @@ void DecomposeMemoryAccess::Run(CloneContext& ctx, const DataMap&, DataMap&) con
                     state.AddAccess(accessor, {
                                                   access.var,
                                                   state.Add(access.offset, offset),
-                                                  vec_ty->type()->UnwrapRef(),
+                                                  vec_ty->type(),
                                               });
                     continue;
                 }
@@ -949,6 +952,7 @@ void DecomposeMemoryAccess::Run(CloneContext& ctx, const DataMap&, DataMap&) con
 
     // All remaining accesses are loads, transform these into calls to the
     // corresponding load function
+    // TODO: Just looks for `sem::Load`s instead of maintaining `state.expression_order`.
     for (auto* expr : state.expression_order) {
         auto access_it = state.accesses.find(expr);
         if (access_it == state.accesses.end()) {
