@@ -1263,7 +1263,7 @@ Transform::ApplyResult Renamer::Apply(const Program* src,
     utils::Hashset<const ast::IdentifierExpression*, 8> preserve;
     for (auto* node : src->ASTNodes().Objects()) {
         if (auto* member = node->As<ast::MemberAccessorExpression>()) {
-            auto* sem = src->Sem().Get(member);
+            auto* sem = src->Sem().Get(member)->UnwrapLoad();
             if (sem->Is<sem::Swizzle>()) {
                 preserve.Add(member->member);
             } else if (auto* str_expr = src->Sem().Get(member->structure)) {
