@@ -145,6 +145,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59d39ddb_5ea9f1c6",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-08-18T03:46:14Z",
+      "side": 1,
+      "message": "I think that\u0027s fine. It\u0027s just a test, so verbosity is good :)",
+      "parentUuid": "e007aa07_7a60121e",
+      "revId": "b7c8a353d47332a3e1e06d049749d9c1d8d83abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0002639_85aafa7a",
         "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 3
