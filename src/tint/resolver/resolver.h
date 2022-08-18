@@ -194,7 +194,10 @@ class Resolver {
     sem::Expression* MemberAccessor(const ast::MemberAccessorExpression*);
     sem::Expression* UnaryOp(const ast::UnaryOpExpression*);
 
-    /// If `expr` is not of an abstract-numeric type, then Materialize() will just return `expr`.
+    /// If `expr` is of a reference type, then Load will create and return a sem::Load node wrapping
+    /// `expr`. If `expr` is not of a reference type, then Load will just return `expr`.
+    const sem::Expression* Load(const sem::Expression* expr);
+
     /// If `expr` is of an abstract-numeric type:
     /// * Materialize will create and return a sem::Materialize node wrapping `expr`.
     /// * The AST -> Sem binding will be updated to point to the new sem::Materialize node.
@@ -206,15 +209,19 @@ class Resolver {
     ///       if `expr` has a element type of abstract-float.
     /// * The sem::Materialize constant value will be the value of `expr` value-converted to the
     ///   materialized type.
+    /// If `expr` is not of an abstract-numeric type, then Materialize() will just return `expr`.
     /// If `expr` is nullptr, then Materialize() will also return nullptr.
     const sem::Expression* Materialize(const sem::Expression* expr,
                                        const sem::Type* target_type = nullptr);
 
-    /// Materializes all the arguments in `args` to the parameter types of `target`.
+    /// For each argument in `args`:
+    /// * Calls Materialize() passing the argument and the corresponding parameter type.
+    /// * Calls Load() passing the argument, iff the corresponding parameter type is not a
+    ///   reference type.
     /// @returns true on success, false on failure.
     template <size_t N>
-    bool MaterializeArguments(utils::Vector<const sem::Expression*, N>& args,
-                              const sem::CallTarget* target);
+    bool MaterializeAndLoadArguments(utils::Vector<const sem::Expression*, N>& args,
+                                     const sem::CallTarget* target);
 
     /// @returns true if an argument of an abstract numeric type, passed to a parameter of type
     /// `parameter_ty` should be materialized.

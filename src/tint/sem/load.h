@@ -16,6 +16,7 @@
 #define SRC_TINT_SEM_LOAD_H_
 
 #include "src/tint/sem/expression.h"
+#include "src/tint/sem/reference.h"
 
 namespace tint::sem {
 
@@ -27,14 +28,18 @@ class Load final : public Castable<Load, Expression> {
     /// Constructor
     /// @param reference the reference expression being loaded
     /// @param statement the statement that owns this expression
-    /// @param constant the constant value of this expression
-    Load(const Expression* reference, const Statement* statement, const Constant* constant);
+    Load(const Expression* reference, const Statement* statement);
 
     /// Destructor
     ~Load() override;
 
     /// @return the reference being loaded
     const Expression* Reference() const { return reference_; }
+
+    /// @returns the type of the loaded reference.
+    const sem::Reference* ReferenceType() const {
+        return static_cast<const sem::Reference*>(reference_->Type());
+    }
 
   private:
     Expression const* const reference_;

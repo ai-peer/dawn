@@ -43,7 +43,7 @@ TEST_F(ResolverIndexAccessorTest, Matrix_Dynamic_Ref) {
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 
-    auto idx_sem = Sem().Get<sem::IndexAccessorExpression>(acc);
+    auto idx_sem = Sem().Get(acc)->UnwrapLoad()->As<sem::IndexAccessorExpression>();
     ASSERT_NE(idx_sem, nullptr);
     EXPECT_EQ(idx_sem->Index()->Declaration(), acc->index);
     EXPECT_EQ(idx_sem->Object()->Declaration(), acc->object);
@@ -58,7 +58,7 @@ TEST_F(ResolverIndexAccessorTest, Matrix_BothDimensions_Dynamic_Ref) {
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 
-    auto idx_sem = Sem().Get<sem::IndexAccessorExpression>(acc);
+    auto idx_sem = Sem().Get(acc)->UnwrapLoad()->As<sem::IndexAccessorExpression>();
     ASSERT_NE(idx_sem, nullptr);
     EXPECT_EQ(idx_sem->Index()->Declaration(), acc->index);
     EXPECT_EQ(idx_sem->Object()->Declaration(), acc->object);
@@ -73,7 +73,7 @@ TEST_F(ResolverIndexAccessorTest, Matrix_Dynamic) {
     EXPECT_TRUE(r()->Resolve());
     EXPECT_EQ(r()->error(), "");
 
-    auto idx_sem = Sem().Get<sem::IndexAccessorExpression>(acc);
+    auto idx_sem = Sem().Get(acc)->UnwrapLoad()->As<sem::IndexAccessorExpression>();
     ASSERT_NE(idx_sem, nullptr);
     EXPECT_EQ(idx_sem->Index()->Declaration(), acc->index);
     EXPECT_EQ(idx_sem->Object()->Declaration(), acc->object);
@@ -108,13 +108,10 @@ TEST_F(ResolverIndexAccessorTest, Matrix) {
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 
     ASSERT_NE(TypeOf(acc), nullptr);
-    ASSERT_TRUE(TypeOf(acc)->Is<sem::Reference>());
+    ASSERT_TRUE(TypeOf(acc)->Is<sem::Vector>());
+    EXPECT_EQ(TypeOf(acc)->As<sem::Vector>()->Width(), 3u);
 
-    auto* ref = TypeOf(acc)->As<sem::Reference>();
-    ASSERT_TRUE(ref->StoreType()->Is<sem::Vector>());
-    EXPECT_EQ(ref->StoreType()->As<sem::Vector>()->Width(), 3u);
-
-    auto idx_sem = Sem().Get<sem::IndexAccessorExpression>(acc);
+    auto idx_sem = Sem().Get(acc)->UnwrapLoad()->As<sem::IndexAccessorExpression>();
     ASSERT_NE(idx_sem, nullptr);
     EXPECT_EQ(idx_sem->Index()->Declaration(), acc->index);
     EXPECT_EQ(idx_sem->Object()->Declaration(), acc->object);
@@ -129,12 +126,9 @@ TEST_F(ResolverIndexAccessorTest, Matrix_BothDimensions) {
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 
     ASSERT_NE(TypeOf(acc), nullptr);
-    ASSERT_TRUE(TypeOf(acc)->Is<sem::Reference>());
+    EXPECT_TRUE(TypeOf(acc)->Is<sem::F32>());
 
-    auto* ref = TypeOf(acc)->As<sem::Reference>();
-    EXPECT_TRUE(ref->StoreType()->Is<sem::F32>());
-
-    auto idx_sem = Sem().Get<sem::IndexAccessorExpression>(acc);
+    auto idx_sem = Sem().Get(acc)->UnwrapLoad()->As<sem::IndexAccessorExpression>();
     ASSERT_NE(idx_sem, nullptr);
     EXPECT_EQ(idx_sem->Index()->Declaration(), acc->index);
     EXPECT_EQ(idx_sem->Object()->Declaration(), acc->object);
@@ -157,7 +151,7 @@ TEST_F(ResolverIndexAccessorTest, Vector_Dynamic_Ref) {
 
     EXPECT_TRUE(r()->Resolve());
 
-    auto idx_sem = Sem().Get<sem::IndexAccessorExpression>(acc);
+    auto idx_sem = Sem().Get(acc)->UnwrapLoad()->As<sem::IndexAccessorExpression>();
     ASSERT_NE(idx_sem, nullptr);
     EXPECT_EQ(idx_sem->Index()->Declaration(), acc->index);
     EXPECT_EQ(idx_sem->Object()->Declaration(), acc->object);
@@ -186,7 +180,7 @@ TEST_F(ResolverIndexAccessorTest, Vector) {
     auto* ref = TypeOf(acc)->As<sem::Reference>();
     EXPECT_TRUE(ref->StoreType()->Is<sem::F32>());
 
-    auto idx_sem = Sem().Get<sem::IndexAccessorExpression>(acc);
+    auto idx_sem = Sem().Get(acc)->UnwrapLoad()->As<sem::IndexAccessorExpression>();
     ASSERT_NE(idx_sem, nullptr);
     EXPECT_EQ(idx_sem->Index()->Declaration(), acc->index);
     EXPECT_EQ(idx_sem->Object()->Declaration(), acc->object);
@@ -202,7 +196,7 @@ TEST_F(ResolverIndexAccessorTest, Array_Literal_i32) {
     ASSERT_NE(ref, nullptr);
     EXPECT_TRUE(ref->StoreType()->Is<sem::F32>());
 
-    auto idx_sem = Sem().Get<sem::IndexAccessorExpression>(acc);
+    auto idx_sem = Sem().Get(acc)->UnwrapLoad()->As<sem::IndexAccessorExpression>();
     ASSERT_NE(idx_sem, nullptr);
     EXPECT_EQ(idx_sem->Index()->Declaration(), acc->index);
     EXPECT_EQ(idx_sem->Object()->Declaration(), acc->object);
@@ -218,7 +212,7 @@ TEST_F(ResolverIndexAccessorTest, Array_Literal_u32) {
     ASSERT_NE(ref, nullptr);
     EXPECT_TRUE(ref->StoreType()->Is<sem::F32>());
 
-    auto idx_sem = Sem().Get<sem::IndexAccessorExpression>(acc);
+    auto idx_sem = Sem().Get(acc)->UnwrapLoad()->As<sem::IndexAccessorExpression>();
     ASSERT_NE(idx_sem, nullptr);
     EXPECT_EQ(idx_sem->Index()->Declaration(), acc->index);
     EXPECT_EQ(idx_sem->Object()->Declaration(), acc->object);
@@ -234,7 +228,7 @@ TEST_F(ResolverIndexAccessorTest, Array_Literal_AInt) {
     ASSERT_NE(ref, nullptr);
     EXPECT_TRUE(ref->StoreType()->Is<sem::F32>());
 
-    auto idx_sem = Sem().Get<sem::IndexAccessorExpression>(acc);
+    auto idx_sem = Sem().Get(acc)->UnwrapLoad()->As<sem::IndexAccessorExpression>();
     ASSERT_NE(idx_sem, nullptr);
     EXPECT_EQ(idx_sem->Index()->Declaration(), acc->index);
     EXPECT_EQ(idx_sem->Object()->Declaration(), acc->object);
@@ -256,7 +250,7 @@ TEST_F(ResolverIndexAccessorTest, Alias_Array) {
     auto* ref = TypeOf(acc)->As<sem::Reference>();
     EXPECT_TRUE(ref->StoreType()->Is<sem::F32>());
 
-    auto idx_sem = Sem().Get<sem::IndexAccessorExpression>(acc);
+    auto idx_sem = Sem().Get(acc)->UnwrapLoad()->As<sem::IndexAccessorExpression>();
     ASSERT_NE(idx_sem, nullptr);
     EXPECT_EQ(idx_sem->Index()->Declaration(), acc->index);
     EXPECT_EQ(idx_sem->Object()->Declaration(), acc->object);
@@ -292,7 +286,7 @@ TEST_F(ResolverIndexAccessorTest, Array_Dynamic_I32) {
     EXPECT_TRUE(r()->Resolve());
     EXPECT_EQ(r()->error(), "");
 
-    auto idx_sem = Sem().Get<sem::IndexAccessorExpression>(acc);
+    auto idx_sem = Sem().Get(acc)->UnwrapLoad()->As<sem::IndexAccessorExpression>();
     ASSERT_NE(idx_sem, nullptr);
     EXPECT_EQ(idx_sem->Index()->Declaration(), acc->index);
     EXPECT_EQ(idx_sem->Object()->Declaration(), acc->object);
@@ -325,7 +319,7 @@ TEST_F(ResolverIndexAccessorTest, Array_Literal_I32) {
          });
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 
-    auto idx_sem = Sem().Get<sem::IndexAccessorExpression>(acc);
+    auto idx_sem = Sem().Get(acc)->UnwrapLoad()->As<sem::IndexAccessorExpression>();
     ASSERT_NE(idx_sem, nullptr);
     EXPECT_EQ(idx_sem->Index()->Declaration(), acc->index);
     EXPECT_EQ(idx_sem->Object()->Declaration(), acc->object);
@@ -346,7 +340,7 @@ TEST_F(ResolverIndexAccessorTest, Expr_Deref_FuncGoodParent) {
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 
-    auto idx_sem = Sem().Get<sem::IndexAccessorExpression>(acc);
+    auto idx_sem = Sem().Get(acc)->UnwrapLoad()->As<sem::IndexAccessorExpression>();
     ASSERT_NE(idx_sem, nullptr);
     EXPECT_EQ(idx_sem->Index()->Declaration(), acc->index);
     EXPECT_EQ(idx_sem->Object()->Declaration(), acc->object);
