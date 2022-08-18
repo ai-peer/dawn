@@ -188,7 +188,7 @@ DawnSwapChainError NativeSwapChainImpl::GetNextTexture(DawnSwapChainNextTexture*
         reinterpret_cast<uint64_t>
 #endif
         (*mSwapChainImages[mLastImageIndex]);
-    mDevice->GetPendingRecordingContext()->waitSemaphores.push_back(semaphore);
+    mDevice->GetPendingRecordingContext(false)->waitSemaphores.push_back(semaphore);
 
     return DAWN_SWAP_CHAIN_NO_ERROR;
 }
