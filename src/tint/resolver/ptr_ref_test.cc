@@ -14,6 +14,7 @@
 
 #include "src/tint/resolver/resolver.h"
 #include "src/tint/resolver/resolver_test_helper.h"
+#include "src/tint/sem/load.h"
 #include "src/tint/sem/reference.h"
 
 #include "gmock/gmock.h"
@@ -52,8 +53,14 @@ TEST_F(ResolverPtrRefTest, AddressOfThenDeref) {
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 
-    ASSERT_TRUE(TypeOf(expr)->Is<sem::Reference>());
-    EXPECT_TRUE(TypeOf(expr)->As<sem::Reference>()->StoreType()->Is<type::I32>());
+    auto* load = Sem().Get<sem::Load>(expr);
+    ASSERT_NE(load, nullptr);
+
+    auto* ref = load->Reference();
+    ASSERT_NE(ref, nullptr);
+
+    ASSERT_TRUE(ref->Type()->Is<sem::Reference>());
+    EXPECT_TRUE(ref->Type()->As<sem::Reference>()->StoreType()->Is<type::I32>());
 }
 
 TEST_F(ResolverPtrRefTest, DefaultPtrAddressSpace) {

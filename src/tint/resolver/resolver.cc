@@ -61,6 +61,7 @@
 #include "src/tint/sem/function.h"
 #include "src/tint/sem/if_statement.h"
 #include "src/tint/sem/index_accessor_expression.h"
+#include "src/tint/sem/load.h"
 #include "src/tint/sem/loop_statement.h"
 #include "src/tint/sem/materialize.h"
 #include "src/tint/sem/member_accessor_expression.h"
@@ -386,12 +387,10 @@ sem::Variable* Resolver::Let(const ast::Let* v, bool is_global) {
         return nullptr;
     }
 
-    auto* rhs = Materialize(Expression(v->initializer), ty);
+    auto* rhs = Load(Materialize(Expression(v->initializer), ty));
     if (!rhs) {
         return nullptr;
     }
-
-    RegisterLoadIfNeeded(rhs);
 
     // If the variable has no declared type, infer it from the RHS
     if (!ty) {
@@ -439,8 +438,11 @@ sem::Variable* Resolver::Override(const ast::Override* v) {
 
     const sem::Expression* rhs = nullptr;
 
-    // Does the variable have a initializer?
+    // Does the variable have an initializer?
     if (v->initializer) {
+        // Note: RHS must be a const or override expression, which excludes references.
+        // So there's no need to load or unwrap references here.
+
         ExprEvalStageConstraint constraint{sem::EvaluationStage::kOverride, "override initializer"};
         TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);
         rhs = Materialize(Expression(v->initializer), ty);
@@ -450,7 +452,7 @@ sem::Variable* Resolver::Override(const ast::Override* v) {
 
         // If the variable has no declared type, infer it from the RHS
         if (!ty) {
-            ty = rhs->Type()->UnwrapRef();  // Implicit load of RHS
+            ty = rhs->Type();
         }
     } else if (!ty) {
         AddError("override declaration requires a type or initializer", v->source);
@@ -536,6 +538,9 @@ sem::Variable* Resolver::Const(const ast::Const* c, bool is_global) {
         }
     }
 
+    // Note: RHS must be a const expression, which excludes references.
+    // So there's no need to load or unwrap references here.
+
     if (ty) {
         // If an explicit type was specified, materialize to that type
         rhs = Materialize(rhs, ty);
@@ -591,16 +596,14 @@ sem::Variable* Resolver::Var(const ast::Var* var, bool is_global) {
         };
         TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);
 
-        rhs = Materialize(Expression(var->initializer), storage_ty);
+        rhs = Load(Materialize(Expression(var->initializer), storage_ty));
         if (!rhs) {
             return nullptr;
         }
         // If the variable has no declared type, infer it from the RHS
         if (!storage_ty) {
-            storage_ty = rhs->Type()->UnwrapRef();  // Implicit load of RHS
+            storage_ty = rhs->Type();
         }
-
-        RegisterLoadIfNeeded(rhs);
     }
 
     if (!storage_ty) {
@@ -1322,15 +1325,13 @@ sem::IfStatement* Resolver::IfStatement(const ast::IfStatement* stmt) {
     auto* sem =
         builder_->create<sem::IfStatement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
-        auto* cond = Expression(stmt->condition);
+        auto* cond = Load(Expression(stmt->condition));
         if (!cond) {
             return false;
         }
         sem->SetCondition(cond);
         sem->Behaviors() = cond->Behaviors();
         sem->Behaviors().Remove(sem::Behavior::kNext);
-
-        RegisterLoadIfNeeded(cond);
 
         Mark(stmt->body);
         auto* body = builder_->create<sem::BlockStatement>(stmt->body, current_compound_statement_,
@@ -1419,14 +1420,12 @@ sem::ForLoopStatement* Resolver::ForLoopStatement(const ast::ForLoopStatement* s
         }
 
         if (auto* cond_expr = stmt->condition) {
-            auto* cond = Expression(cond_expr);
+            auto* cond = Load(Expression(cond_expr));
             if (!cond) {
                 return false;
             }
             sem->SetCondition(cond);
             behaviors.Add(cond->Behaviors());
-
-            RegisterLoadIfNeeded(cond);
         }
 
         if (auto* continuing = stmt->continuing) {
@@ -1464,14 +1463,12 @@ sem::WhileStatement* Resolver::WhileStatement(const ast::WhileStatement* stmt) {
     return StatementScope(stmt, sem, [&] {
         auto& behaviors = sem->Behaviors();
 
-        auto* cond = Expression(stmt->condition);
+        auto* cond = Load(Expression(stmt->condition));
         if (!cond) {
             return false;
         }
         sem->SetCondition(cond);
         behaviors.Add(cond->Behaviors());
-
-        RegisterLoadIfNeeded(cond);
 
         Mark(stmt->body);
 
@@ -1572,26 +1569,6 @@ sem::Expression* Resolver::Expression(const ast::Expression* root) {
 
     TINT_ICE(Resolver, diagnostics_) << "Expression() did not find root node";
     return nullptr;
-}
-
-void Resolver::RegisterLoadIfNeeded(const sem::Expression* expr) {
-    if (!expr) {
-        return;
-    }
-    if (!expr->Type()->Is<sem::Reference>()) {
-        return;
-    }
-    if (!current_function_) {
-        // There is currently no situation where the Load Rule can be invoked outside of a function.
-        return;
-    }
-    auto& info = alias_analysis_infos_[current_function_];
-    Switch(
-        expr->RootIdentifier(),
-        [&](const sem::GlobalVariable* global) {
-            info.module_scope_reads.insert({global, expr});
-        },
-        [&](const sem::Parameter* param) { info.parameter_reads.insert(param); });
 }
 
 void Resolver::RegisterStore(const sem::Expression* expr) {
@@ -1760,6 +1737,33 @@ const type::Type* Resolver::ConcreteType(const type::Type* ty,
         });
 }
 
+const sem::Expression* Resolver::Load(const sem::Expression* expr) {
+    if (!expr) {
+        // Allow for Load(Expression(blah)), where failures pass through Load()
+        return nullptr;
+    }
+
+    if (!expr->Type()->Is<sem::Reference>()) {
+        // Expression is not a reference type, so cannot be loaded. Just return expr.
+        return expr;
+    }
+
+    auto* load = builder_->create<sem::Load>(expr, current_statement_, expr->HasSideEffects());
+    load->Behaviors() = expr->Behaviors();
+    builder_->Sem().Replace(expr->Declaration(), load);
+
+    // Track the load for the alias analysis.
+    auto& alias_info = alias_analysis_infos_[current_function_];
+    Switch(
+        expr->RootIdentifier(),
+        [&](const sem::GlobalVariable* global) {
+            alias_info.module_scope_reads.insert({global, expr});
+        },
+        [&](const sem::Parameter* param) { alias_info.parameter_reads.insert(param); });
+
+    return load;
+}
+
 const sem::Expression* Resolver::Materialize(const sem::Expression* expr,
                                              const type::Type* target_type /* = nullptr */) {
     if (!expr) {
@@ -1806,8 +1810,8 @@ const sem::Expression* Resolver::Materialize(const sem::Expression* expr,
 }
 
 template <size_t N>
-bool Resolver::MaybeMaterializeArguments(utils::Vector<const sem::Expression*, N>& args,
-                                         const sem::CallTarget* target) {
+bool Resolver::MaybeMaterializeAndLoadArguments(utils::Vector<const sem::Expression*, N>& args,
+                                                const sem::CallTarget* target) {
     for (size_t i = 0, n = std::min(args.Length(), target->Parameters().Length()); i < n; i++) {
         const auto* param_ty = target->Parameters()[i]->Type();
         if (ShouldMaterializeArgument(param_ty)) {
@@ -1816,6 +1820,13 @@ bool Resolver::MaybeMaterializeArguments(utils::Vector<const sem::Expression*, N
                 return false;
             }
             args[i] = materialized;
+        }
+        if (!param_ty->Is<sem::Reference>()) {
+            auto* load = Load(args[i]);
+            if (!load) {
+                return false;
+            }
+            args[i] = load;
         }
     }
     return true;
@@ -1850,7 +1861,7 @@ utils::Result<utils::Vector<const sem::Constant*, N>> Resolver::ConvertArguments
 }
 
 sem::Expression* Resolver::IndexAccessor(const ast::IndexAccessorExpression* expr) {
-    auto* idx = Materialize(sem_.Get(expr->index));
+    auto* idx = Load(Materialize(sem_.Get(expr->index)));
     if (!idx) {
         return nullptr;
     }
@@ -1861,7 +1872,6 @@ sem::Expression* Resolver::IndexAccessor(const ast::IndexAccessorExpression* exp
         //     vec2(1, 2)[runtime-index]
         obj = Materialize(obj);
     }
-    RegisterLoadIfNeeded(idx);
     if (!obj) {
         return nullptr;
     }
@@ -1910,7 +1920,7 @@ sem::Expression* Resolver::IndexAccessor(const ast::IndexAccessorExpression* exp
 }
 
 sem::Expression* Resolver::Bitcast(const ast::BitcastExpression* expr) {
-    auto* inner = Materialize(sem_.Get(expr->expr));
+    auto* inner = Load(Materialize(sem_.Get(expr->expr)));
     if (!inner) {
         return nullptr;
     }
@@ -1918,8 +1928,6 @@ sem::Expression* Resolver::Bitcast(const ast::BitcastExpression* expr) {
     if (!ty) {
         return nullptr;
     }
-
-    RegisterLoadIfNeeded(inner);
 
     const sem::Constant* val = nullptr;
     if (auto r = const_eval_.Bitcast(ty, inner)) {
@@ -1960,8 +1968,6 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
         args.Push(arg);
         args_stage = sem::EarliestStage(args_stage, arg->Stage());
         arg_behaviors.Add(arg->Behaviors());
-
-        RegisterLoadIfNeeded(arg);
     }
     arg_behaviors.Remove(sem::Behavior::kNext);
 
@@ -1978,7 +1984,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
         if (!ctor_or_conv.target) {
             return nullptr;
         }
-        if (!MaybeMaterializeArguments(args, ctor_or_conv.target)) {
+        if (!MaybeMaterializeAndLoadArguments(args, ctor_or_conv.target)) {
             return nullptr;
         }
         const sem::Constant* value = nullptr;
@@ -2003,7 +2009,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
     // initializer call target.
     auto arr_or_str_init = [&](const type::Type* ty,
                                const sem::CallTarget* call_target) -> sem::Call* {
-        if (!MaybeMaterializeArguments(args, call_target)) {
+        if (!MaybeMaterializeAndLoadArguments(args, call_target)) {
             return nullptr;
         }
 
@@ -2291,7 +2297,7 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
         }
     } else {
         // Materialize arguments if the parameter type is not abstract
-        if (!MaybeMaterializeArguments(args, builtin.sem)) {
+        if (!MaybeMaterializeAndLoadArguments(args, builtin.sem)) {
             return nullptr;
         }
     }
@@ -2388,14 +2394,17 @@ void Resolver::CollectTextureSamplerPairs(const sem::Builtin* builtin,
     if (texture_index == -1) {
         TINT_ICE(Resolver, diagnostics_) << "texture builtin without texture parameter";
     }
-    if (auto* user = args[static_cast<size_t>(texture_index)]->As<sem::VariableUser>()) {
+    if (auto* user =
+            args[static_cast<size_t>(texture_index)]->UnwrapLoad()->As<sem::VariableUser>()) {
         auto* texture = user->Variable();
         if (!texture->Type()->UnwrapRef()->Is<type::StorageTexture>()) {
             int sampler_index = signature.IndexOf(sem::ParameterUsage::kSampler);
-            const sem::Variable* sampler =
-                sampler_index != -1
-                    ? args[static_cast<size_t>(sampler_index)]->As<sem::VariableUser>()->Variable()
-                    : nullptr;
+            const sem::Variable* sampler = sampler_index != -1
+                                               ? args[static_cast<size_t>(sampler_index)]
+                                                     ->UnwrapLoad()
+                                                     ->As<sem::VariableUser>()
+                                                     ->Variable()
+                                               : nullptr;
             current_function_->AddTextureSamplerPair(texture, sampler);
         }
     }
@@ -2409,7 +2418,7 @@ sem::Call* Resolver::FunctionCall(const ast::CallExpression* expr,
     auto sym = expr->target.name->symbol;
     auto name = builder_->Symbols().NameFor(sym);
 
-    if (!MaybeMaterializeArguments(args, target)) {
+    if (!MaybeMaterializeAndLoadArguments(args, target)) {
         return nullptr;
     }
 
@@ -2466,11 +2475,11 @@ void Resolver::CollectTextureSamplerPairs(sem::Function* func,
         const sem::Variable* texture = pair.first;
         const sem::Variable* sampler = pair.second;
         if (auto* param = texture->As<sem::Parameter>()) {
-            texture = args[param->Index()]->As<sem::VariableUser>()->Variable();
+            texture = args[param->Index()]->UnwrapLoad()->As<sem::VariableUser>()->Variable();
         }
         if (sampler) {
             if (auto* param = sampler->As<sem::Parameter>()) {
-                sampler = args[param->Index()]->As<sem::VariableUser>()->Variable();
+                sampler = args[param->Index()]->UnwrapLoad()->As<sem::VariableUser>()->Variable();
             }
         }
         current_function_->AddTextureSamplerPair(texture, sampler);
@@ -2729,6 +2738,7 @@ sem::Expression* Resolver::MemberAccessor(const ast::MemberAccessorExpression* e
                 return nullptr;
             }
 
+            const sem::Expression* obj_expr = object;
             if (size == 1) {
                 // A single element swizzle is just the type of the vector.
                 ty = vec->type();
@@ -2740,12 +2750,15 @@ sem::Expression* Resolver::MemberAccessor(const ast::MemberAccessorExpression* e
                 // The vector will have a number of components equal to the length of
                 // the swizzle.
                 ty = builder_->create<sem::Vector>(vec->type(), static_cast<uint32_t>(size));
+
+                // The load rule is invoked before the swizzle, if necessary.
+                obj_expr = Load(object);
             }
             auto val = const_eval_.Swizzle(ty, object, swizzle);
             if (!val) {
                 return nullptr;
             }
-            return builder_->create<sem::Swizzle>(expr, ty, current_statement_, val.Get(), object,
+            return builder_->create<sem::Swizzle>(expr, ty, current_statement_, val.Get(), obj_expr,
                                                   std::move(swizzle), has_side_effects, root_ident);
         },
 
@@ -2781,8 +2794,15 @@ sem::Expression* Resolver::Binary(const ast::BinaryExpression* expr) {
         }
     }
 
-    RegisterLoadIfNeeded(lhs);
-    RegisterLoadIfNeeded(rhs);
+    // Load arguments if they are references
+    lhs = Load(lhs);
+    if (!lhs) {
+        return nullptr;
+    }
+    rhs = Load(rhs);
+    if (!rhs) {
+        return nullptr;
+    }
 
     const sem::Constant* value = nullptr;
     if (stage == sem::EvaluationStage::kConstant) {
@@ -2878,6 +2898,14 @@ sem::Expression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
                     return nullptr;
                 }
             }
+
+            // Load expr if it is a reference
+            expr = Load(expr);
+            if (!expr) {
+                return nullptr;
+            }
+
+            stage = expr->Stage();
             if (stage == sem::EvaluationStage::kConstant) {
                 if (op.const_eval_fn) {
                     if (auto r = (const_eval_.*op.const_eval_fn)(
@@ -2891,7 +2919,6 @@ sem::Expression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
                     stage = sem::EvaluationStage::kRuntime;
                 }
             }
-            RegisterLoadIfNeeded(expr);
             break;
         }
     }
@@ -3340,7 +3367,7 @@ sem::Statement* Resolver::ReturnStatement(const ast::ReturnStatement* stmt) {
 
         const type::Type* value_ty = nullptr;
         if (auto* value = stmt->value) {
-            const auto* expr = Expression(value);
+            const auto* expr = Load(Expression(value));
             if (!expr) {
                 return false;
             }
@@ -3351,9 +3378,8 @@ sem::Statement* Resolver::ReturnStatement(const ast::ReturnStatement* stmt) {
                 }
             }
             behaviors.Add(expr->Behaviors() - sem::Behavior::kNext);
-            value_ty = expr->Type()->UnwrapRef();
 
-            RegisterLoadIfNeeded(expr);
+            value_ty = expr->Type();
         } else {
             value_ty = builder_->create<type::Void>();
         }
@@ -3371,15 +3397,13 @@ sem::SwitchStatement* Resolver::SwitchStatement(const ast::SwitchStatement* stmt
     return StatementScope(stmt, sem, [&] {
         auto& behaviors = sem->Behaviors();
 
-        const auto* cond = Expression(stmt->condition);
+        const auto* cond = Load(Expression(stmt->condition));
         if (!cond) {
             return false;
         }
         behaviors = cond->Behaviors() - sem::Behavior::kNext;
 
-        RegisterLoadIfNeeded(cond);
-
-        auto* cond_ty = cond->Type()->UnwrapRef();
+        auto* cond_ty = cond->Type();
 
         // Determine the common type across all selectors and the switch expression
         // This must materialize to an integer scalar (non-abstract).
@@ -3482,7 +3506,10 @@ sem::Statement* Resolver::AssignmentStatement(const ast::AssignmentStatement* st
             }
         }
 
-        RegisterLoadIfNeeded(rhs);
+        rhs = Load(rhs);
+        if (!rhs) {
+            return false;
+        }
 
         auto& behaviors = sem->Behaviors();
         behaviors = rhs->Behaviors();
@@ -3512,15 +3539,13 @@ sem::Statement* Resolver::BreakIfStatement(const ast::BreakIfStatement* stmt) {
     auto* sem = builder_->create<sem::BreakIfStatement>(stmt, current_compound_statement_,
                                                         current_function_);
     return StatementScope(stmt, sem, [&] {
-        auto* cond = Expression(stmt->condition);
+        auto* cond = Load(Expression(stmt->condition));
         if (!cond) {
             return false;
         }
         sem->SetCondition(cond);
         sem->Behaviors() = cond->Behaviors();
         sem->Behaviors().Add(sem::Behavior::kBreak);
-
-        RegisterLoadIfNeeded(cond);
 
         return validator_.BreakIfStatement(sem, current_statement_);
     });
@@ -3548,12 +3573,11 @@ sem::Statement* Resolver::CompoundAssignmentStatement(
             return false;
         }
 
-        auto* rhs = Expression(stmt->rhs);
+        auto* rhs = Load(Expression(stmt->rhs));
         if (!rhs) {
             return false;
         }
 
-        RegisterLoadIfNeeded(rhs);
         RegisterStore(lhs);
 
         sem->Behaviors() = rhs->Behaviors() + lhs->Behaviors();
@@ -3608,7 +3632,6 @@ sem::Statement* Resolver::IncrementDecrementStatement(
         }
         sem->Behaviors() = lhs->Behaviors();
 
-        RegisterLoadIfNeeded(lhs);
         RegisterStore(lhs);
 
         return validator_.IncrementDecrementStatement(stmt);
