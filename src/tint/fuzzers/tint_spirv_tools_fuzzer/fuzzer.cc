@@ -17,6 +17,7 @@
 #include <string>
 #include <vector>
 
+#include "build/build_config.h"
 #include "spirv-tools/libspirv.hpp"
 #include "src/tint/fuzzers/random_generator.h"
 #include "src/tint/fuzzers/tint_common_fuzzer.h"
@@ -27,7 +28,11 @@
 #include "src/tint/fuzzers/tint_spirv_tools_fuzzer/spirv_opt_mutator.h"
 #include "src/tint/fuzzers/tint_spirv_tools_fuzzer/spirv_reduce_mutator.h"
 #include "src/tint/fuzzers/tint_spirv_tools_fuzzer/util.h"
+
+// This header is used to prevent the linker from stripping LLVMFuzzer* functions on Mac builds
+#if BUILDFLAG(IS_MAC)
 #include "testing/libfuzzer/libfuzzer_exports.h"
+#endif  // BUILDFLAG(IS_MAC)
 
 namespace tint::fuzzers::spvtools_fuzzer {
 namespace {

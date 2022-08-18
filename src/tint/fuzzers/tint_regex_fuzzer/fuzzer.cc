@@ -16,6 +16,7 @@
 #include <cstddef>
 #include <cstdint>
 
+#include "build/build_config.h"
 #include "src/tint/fuzzers/random_generator.h"
 #include "src/tint/fuzzers/tint_common_fuzzer.h"
 #include "src/tint/fuzzers/tint_regex_fuzzer/cli.h"
@@ -24,7 +25,11 @@
 #include "src/tint/fuzzers/transform_builder.h"
 #include "src/tint/reader/wgsl/parser.h"
 #include "src/tint/writer/wgsl/generator.h"
+
+// This header is used to prevent the linker from stripping LLVMFuzzer* functions on Mac builds
+#if BUILDFLAG(IS_MAC)
 #include "testing/libfuzzer/libfuzzer_exports.h"
+#endif  // BUILDFLAG(IS_MAC)
 
 namespace tint::fuzzers::regex_fuzzer {
 namespace {

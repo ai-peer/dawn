@@ -14,9 +14,14 @@
 
 #include <cstddef>
 
+#include "build/build_config.h"
 #include "src/tint/fuzzers/cli.h"
 #include "src/tint/fuzzers/fuzzer_init.h"
+
+// This header is used to prevent the linker from stripping LLVMFuzzer* functions on Mac builds
+#if BUILDFLAG(IS_MAC)
 #include "testing/libfuzzer/libfuzzer_exports.h"
+#endif  // BUILDFLAG(IS_MAC)
 
 namespace tint::fuzzers {
 
