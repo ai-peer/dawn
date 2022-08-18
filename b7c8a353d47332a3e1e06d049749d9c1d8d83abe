@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e27f576f_ea6d3be2",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-08-18T00:42:08Z",
+      "side": 1,
+      "message": "I think that would also work, tho `TestAspect::DepthAsFloat` might be a bit confusing because I\u0027m not sure if \"AsFloat\" is an aspect?",
+      "parentUuid": "9b39fc82_6ad5f94b",
+      "revId": "b7c8a353d47332a3e1e06d049749d9c1d8d83abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0002639_85aafa7a",
         "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
         "patchSetId": 3
