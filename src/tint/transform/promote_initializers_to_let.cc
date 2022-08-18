@@ -76,7 +76,7 @@ void PromoteInitializersToLet::Run(CloneContext& ctx, const DataMap&, DataMap&) 
             },
             [&](const ast::IdentifierExpression* expr) {
                 if (auto* sem = ctx.src->Sem().Get(expr)) {
-                    if (auto* user = sem->UnwrapMaterialize()->As<sem::VariableUser>()) {
+                    if (auto* user = sem->Unwrap()->As<sem::VariableUser>()) {
                         // Identifier resolves to a variable
                         if (auto* stmt = user->Stmt()) {
                             if (auto* decl = stmt->Declaration()->As<ast::VariableDeclStatement>();
