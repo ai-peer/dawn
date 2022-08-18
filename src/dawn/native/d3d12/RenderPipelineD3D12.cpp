@@ -234,21 +234,20 @@ uint8_t D3D12RenderTargetWriteMask(wgpu::ColorWriteMask writeMask) {
     return static_cast<uint8_t>(writeMask);
 }
 
-D3D12_RENDER_TARGET_BLEND_DESC ComputeColorDesc(const ColorTargetState* state) {
-    D3D12_RENDER_TARGET_BLEND_DESC blendDesc;
-    blendDesc.BlendEnable = state->blend != nullptr;
-    if (blendDesc.BlendEnable) {
-        blendDesc.SrcBlend = D3D12Blend(state->blend->color.srcFactor);
-        blendDesc.DestBlend = D3D12Blend(state->blend->color.dstFactor);
-        blendDesc.BlendOp = D3D12BlendOperation(state->blend->color.operation);
-        blendDesc.SrcBlendAlpha = D3D12AlphaBlend(state->blend->alpha.srcFactor);
-        blendDesc.DestBlendAlpha = D3D12AlphaBlend(state->blend->alpha.dstFactor);
-        blendDesc.BlendOpAlpha = D3D12BlendOperation(state->blend->alpha.operation);
+// Updates the target blend descriptor depending on the target state.
+void ComputeColorDesc(D3D12_RENDER_TARGET_BLEND_DESC* blendDesc, const ColorTargetState* state) {
+    blendDesc->BlendEnable = state->blend != nullptr;
+    if (blendDesc->BlendEnable) {
+        blendDesc->SrcBlend = D3D12Blend(state->blend->color.srcFactor);
+        blendDesc->DestBlend = D3D12Blend(state->blend->color.dstFactor);
+        blendDesc->BlendOp = D3D12BlendOperation(state->blend->color.operation);
+        blendDesc->SrcBlendAlpha = D3D12AlphaBlend(state->blend->alpha.srcFactor);
+        blendDesc->DestBlendAlpha = D3D12AlphaBlend(state->blend->alpha.dstFactor);
+        blendDesc->BlendOpAlpha = D3D12BlendOperation(state->blend->alpha.operation);
     }
-    blendDesc.RenderTargetWriteMask = D3D12RenderTargetWriteMask(state->writeMask);
-    blendDesc.LogicOpEnable = false;
-    blendDesc.LogicOp = D3D12_LOGIC_OP_NOOP;
-    return blendDesc;
+    blendDesc->RenderTargetWriteMask = D3D12RenderTargetWriteMask(state->writeMask);
+    blendDesc->LogicOpEnable = false;
+    blendDesc->LogicOp = D3D12_LOGIC_OP_NOOP;
 }
 
 D3D12_STENCIL_OP StencilOp(wgpu::StencilOperation op) {
@@ -402,9 +401,9 @@ MaybeError RenderPipeline::Initialize() {
     static_assert(kMaxColorAttachments == 8);
     for (uint8_t i = 0; i < kMaxColorAttachments; i++) {
         descriptorD3D12.RTVFormats[i] = DXGI_FORMAT_UNKNOWN;
-        descriptorD3D12.BlendState.RenderTarget[i].BlendEnable = false;
-        descriptorD3D12.BlendState.RenderTarget[i].RenderTargetWriteMask = 0;
-        descriptorD3D12.BlendState.RenderTarget[i].LogicOpEnable = false;
+
+        // Set default zero-ed render target values since they are used in the cache key.
+        descriptorD3D12.BlendState.RenderTarget[i] = D3D12_RENDER_TARGET_BLEND_DESC{};
         descriptorD3D12.BlendState.RenderTarget[i].LogicOp = D3D12_LOGIC_OP_NOOP;
     }
     ColorAttachmentIndex highestColorAttachmentIndexPlusOne =
@@ -412,8 +411,8 @@ MaybeError RenderPipeline::Initialize() {
     for (ColorAttachmentIndex i : IterateBitSet(GetColorAttachmentsMask())) {
         descriptorD3D12.RTVFormats[static_cast<uint8_t>(i)] =
             D3D12TextureFormat(GetColorAttachmentFormat(i));
-        descriptorD3D12.BlendState.RenderTarget[static_cast<uint8_t>(i)] =
-            ComputeColorDesc(GetColorTargetState(i));
+        ComputeColorDesc(&descriptorD3D12.BlendState.RenderTarget[static_cast<uint8_t>(i)],
+                         GetColorTargetState(i));
     }
     ASSERT(highestColorAttachmentIndexPlusOne <= kMaxColorAttachmentsTyped);
     descriptorD3D12.NumRenderTargets = static_cast<uint8_t>(highestColorAttachmentIndexPlusOne);
