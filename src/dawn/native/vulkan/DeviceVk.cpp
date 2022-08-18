@@ -19,6 +19,7 @@
 #include "dawn/common/Platform.h"
 #include "dawn/native/BackendConnection.h"
 #include "dawn/native/ChainUtils_autogen.h"
+#include "dawn/native/DynamicUploader.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/ErrorData.h"
 #include "dawn/native/Instance.h"
@@ -228,10 +229,17 @@ MaybeError Device::TickImpl() {
     }
 
     mResourceMemoryAllocator->Tick(completedSerial);
-    mDeleter->Tick(completedSerial);
+
+    // We should only destroy Vulkan resources according to the real completion of queue execution
+    // rather than the possibly assumed completion.
+    // https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VUID-vkDestroyImage-image-01000
+    ExecutionSerial serial =
+        (completedSerial > mLastReadyFenceSerial ? mLastReadyFenceSerial : completedSerial);
+    mDeleter->Tick(serial);
+
     mDescriptorAllocatorsPendingDeallocation.ClearUpTo(completedSerial);
 
-    if (mRecordingContext.used) {
+    if (mRecordingContext.needsSubmit) {
         DAWN_TRY(SubmitPendingCommands());
     }
 
@@ -283,14 +291,19 @@ void Device::EnqueueDeferredDeallocation(DescriptorSetAllocator* allocator) {
     mDescriptorAllocatorsPendingDeallocation.Enqueue(allocator, GetPendingCommandSerial());
 }
 
-CommandRecordingContext* Device::GetPendingRecordingContext() {
+CommandRecordingContext* Device::GetPendingRecordingContext(bool needsSubmit) {
     ASSERT(mRecordingContext.commandBuffer != VK_NULL_HANDLE);
+    mRecordingContext.needsSubmit |= needsSubmit;
     mRecordingContext.used = true;
     return &mRecordingContext;
 }
 
+void Device::ForceEventualFlushOfCommands() {
+    mRecordingContext.needsSubmit |= mRecordingContext.used;
+}
+
 MaybeError Device::SubmitPendingCommands() {
-    if (!mRecordingContext.used) {
+    if (!mRecordingContext.needsSubmit) {
         return {};
     }
 
@@ -669,6 +682,7 @@ ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
         // Fence are added in order, so we can stop searching as soon
         // as we see one that's not ready.
         if (result == VK_NOT_READY) {
+            mLastReadyFenceSerial = fenceSerial;
             return fenceSerial;
         } else {
             DAWN_TRY(CheckVkSuccess(::VkResult(result), "GetFenceStatus"));
@@ -686,7 +700,7 @@ ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
 }
 
 MaybeError Device::PrepareRecordingContext() {
-    ASSERT(!mRecordingContext.used);
+    ASSERT(!mRecordingContext.needsSubmit);
     ASSERT(mRecordingContext.commandBuffer == VK_NULL_HANDLE);
     ASSERT(mRecordingContext.commandPool == VK_NULL_HANDLE);
 
@@ -769,7 +783,8 @@ MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
     // calling this function.
     ASSERT(size != 0);
 
-    CommandRecordingContext* recordingContext = GetPendingRecordingContext();
+    bool needsSubmit = GetDynamicUploader()->ShouldFlush();
+    CommandRecordingContext* recordingContext = GetPendingRecordingContext(needsSubmit);
 
     ToBackend(destination)
         ->EnsureDataInitializedAsDestination(recordingContext, destinationOffset, size);
@@ -801,7 +816,8 @@ MaybeError Device::CopyFromStagingToTexture(const StagingBufferBase* source,
     // operation for HOST_COHERENT memory. The Vulkan spec for vkQueueSubmit describes that it
     // does an implicit availability, visibility and domain operation.
 
-    CommandRecordingContext* recordingContext = GetPendingRecordingContext();
+    bool needsSubmit = GetDynamicUploader()->ShouldFlush();
+    CommandRecordingContext* recordingContext = GetPendingRecordingContext(needsSubmit);
 
     VkBufferImageCopy region = ComputeBufferImageCopyRegion(src, *dst, copySizePixels);
     VkImageSubresourceLayers subresource = region.imageSubresource;
@@ -976,9 +992,9 @@ void Device::AppendDebugLayerMessages(ErrorData* error) {
 
 MaybeError Device::WaitForIdleForDestruction() {
     // Immediately tag the recording context as unused so we don't try to submit it in Tick.
-    // Move the mRecordingContext.used to mUnusedCommands so it can be cleaned up in
+    // Move the mRecordingContext.needsSubmit to mUnusedCommands so it can be cleaned up in
     // ShutDownImpl
-    if (mRecordingContext.used) {
+    if (mRecordingContext.needsSubmit) {
         CommandPoolAndBuffer commands = {mRecordingContext.commandPool,
                                          mRecordingContext.commandBuffer};
         mUnusedCommands.push_back(commands);
@@ -1048,7 +1064,7 @@ void Device::DestroyImpl() {
     ToBackend(GetAdapter())->GetVulkanInstance()->StopListeningForDeviceMessages(this);
 
     // Immediately tag the recording context as unused so we don't try to submit it in Tick.
-    mRecordingContext.used = false;
+    mRecordingContext.needsSubmit = false;
     if (mRecordingContext.commandPool != VK_NULL_HANDLE) {
         // The VkCommandBuffer memory should be wholly owned by the pool and freed when it is
         // destroyed, but that's not the case in some drivers and the leak memory.
