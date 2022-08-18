@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56586a1f_1baaf421",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T02:32:19Z",
+      "side": 1,
+      "message": "you can\n\n```\nconst outer \u003d new Promise(resolve \u003d\u003e {\n  const inner \u003d new Promise(innerResolve \u003d\u003e setTimeout(innerResolve, 5));\n  inner.then(() \u003d\u003e {\n    console.log(\u0027before\u0027);\n    resolve();\n  }).finally(() \u003d\u003e console.log(\u0027after\u0027));\n});\n\nouter.then(() \u003d\u003e {\n  console.log(\u0027could be really long running, like checking texture contents\u0027);\n});\n```\n\nwill log:\n```\nbefore\ncould be really long running, like checking texture contents\nafter\n```",
+      "parentUuid": "587c995e_9b277909",
+      "revId": "935d5a78b0d219f3e2a7dc02a95a7427d6c74d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "651eedc8_405c1665",
         "filename": "webgpu-cts/test_runner.js",
         "patchSetId": 4
@@ -48,6 +66,24 @@
       "writtenOn": "2022-08-18T01:11:59Z",
       "side": 1,
       "message": "nit: I think you could just\n\n```\nconst p \u003d old.call(this, ...args);\np.finally(sendHeartbeat);\nreturn p;\n```\n\nSince the finally is registered before anything the application does with the promise, I think it\u0027s supposed to get called first.\n\nOnly difference would be I think it would suppress unhandledrejection events.",
+      "revId": "935d5a78b0d219f3e2a7dc02a95a7427d6c74d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40a1a31f_f25bf814",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-18T02:32:19Z",
+      "side": 1,
+      "message": "this will spew with unhandledrejection events. Consider:\n\n```\nconst p \u003d new Promise((resolve, reject) \u003d\u003e reject(new Error(\u0027err\u0027)));\n\np.finally(() \u003d\u003e console.log(\u0027finally\u0027));\n\n(async () \u003d\u003e {\n    try {\n        await p;\n        console.log(\u0027not reached\u0027);\n    } catch (e) {\n        console.log(\u0027catch\u0027, e);\n    }\n})();\n```\n\n\n`p` throws and we get the log `catch Error: err`, as expected.\nbut, we also get uncaught errors\n\n```\nUncaught (in promise) Error: err\n    at \u003canonymous\u003e:1:51\n    at new Promise (\u003canonymous\u003e)\n    at \u003canonymous\u003e:1:11\n```\n\nwhy? because `p.finally` returned a **new** promise, and that one was not caught\n\nto suppress this, we need to install a do-nothing catch handler:\n```\np.finally(() \u003d\u003e console.log(\u0027finally\u0027))\n  .catch(() \u003d\u003e {}); // do nothing\n```\n\nbut I\u0027d rather not do it this way since it seems confusing.",
+      "parentUuid": "651eedc8_405c1665",
       "revId": "935d5a78b0d219f3e2a7dc02a95a7427d6c74d5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
