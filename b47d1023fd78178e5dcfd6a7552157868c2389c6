@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec874f32_4ea9bf6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-18T22:26:39Z",
+      "side": 1,
+      "message": "Ben: PTAL. Thanks!\n\nThis CL handles storage and uniform buffers. It does break some Dawn end2end tests, which I\u0027ve suppressed in a downstream patch (need to merge them). Anyway LMK if this looks correct so far.",
+      "revId": "b47d1023fd78178e5dcfd6a7552157868c2389c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
