@@ -16,6 +16,24 @@
       "message": "No e2e tests are affected by this change?",
       "revId": "46bd11a8149e1acc85bf2d288fff4f4d1ea4885e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8840bfc3_0ca7a0e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-19T19:27:05Z",
+      "side": 1,
+      "message": "nope. Just removing dead code.",
+      "parentUuid": "77c75282_0c60fe9d",
+      "revId": "46bd11a8149e1acc85bf2d288fff4f4d1ea4885e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
