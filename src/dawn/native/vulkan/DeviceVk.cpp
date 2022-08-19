@@ -229,14 +229,7 @@ MaybeError Device::TickImpl() {
     }
 
     mResourceMemoryAllocator->Tick(completedSerial);
-
-    // We should only destroy Vulkan resources according to the real completion of queue execution
-    // rather than the possibly assumed completion.
-    // https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#VUID-vkDestroyImage-image-01000
-    ExecutionSerial serial =
-        (completedSerial > mLastReadyFenceSerial ? mLastReadyFenceSerial : completedSerial);
-    mDeleter->Tick(serial);
-
+    mDeleter->Tick(completedSerial);
     mDescriptorAllocatorsPendingDeallocation.ClearUpTo(completedSerial);
 
     if (mRecordingContext.needsSubmit) {
@@ -299,6 +292,7 @@ CommandRecordingContext* Device::GetPendingRecordingContext(bool needsSubmit) {
 }
 
 void Device::ForceEventualFlushOfCommands() {
+    DeviceBase::ForceEventualFlushOfCommands();
     mRecordingContext.needsSubmit |= mRecordingContext.used;
 }
 
@@ -682,7 +676,6 @@ ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
         // Fence are added in order, so we can stop searching as soon
         // as we see one that's not ready.
         if (result == VK_NOT_READY) {
-            mLastReadyFenceSerial = fenceSerial;
             return fenceSerial;
         } else {
             DAWN_TRY(CheckVkSuccess(::VkResult(result), "GetFenceStatus"));

@@ -195,8 +195,6 @@ class Device final : public DeviceBase {
     // to a serial and a fence, such that when the fence is "ready" we know the operations
     // have finished.
     std::queue<std::pair<VkFence, ExecutionSerial>> mFencesInFlight;
-    // The serial of ready fence in the last check.
-    ExecutionSerial mLastReadyFenceSerial = ExecutionSerial(0);
     // Fences in the unused list aren't reset yet.
     std::vector<VkFence> mUnusedFences;
 
