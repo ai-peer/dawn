@@ -74,6 +74,7 @@ MaybeError CreateMTLFunction(const ProgrammableStage& programmableStage,
                              SingleShaderStage singleShaderStage,
                              PipelineLayout* pipelineLayout,
                              ShaderModule::MetalFunctionData* functionData,
+                             bool useBackendOverridesImplementation,
                              uint32_t sampleMask = 0xFFFFFFFF,
                              const RenderPipeline* renderPipeline = nullptr);
 

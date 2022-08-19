@@ -327,12 +327,13 @@ MaybeError CreateMTLFunction(const ProgrammableStage& programmableStage,
                              SingleShaderStage singleShaderStage,
                              PipelineLayout* pipelineLayout,
                              ShaderModule::MetalFunctionData* functionData,
+                             bool useBackendOverridesImplementation,
                              uint32_t sampleMask,
                              const RenderPipeline* renderPipeline) {
     ShaderModule* shaderModule = ToBackend(programmableStage.module.Get());
     const char* shaderEntryPoint = programmableStage.entryPoint.c_str();
     const auto& entryPointMetadata = programmableStage.module->GetEntryPoint(shaderEntryPoint);
-    if (entryPointMetadata.overrides.size() == 0) {
+    if (entryPointMetadata.overrides.size() == 0 || !useBackendOverridesImplementation) {
         DAWN_TRY(shaderModule->CreateFunction(shaderEntryPoint, singleShaderStage, pipelineLayout,
                                               functionData, nil, sampleMask, renderPipeline));
         return {};
