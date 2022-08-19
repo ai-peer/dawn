@@ -567,6 +567,24 @@ uint32_t Inspector::GetWorkgroupStorageSize(const std::string& entry_point) {
     return total_size;
 }
 
+std::optional<WorkgroupSize> Inspector::GetWorkgroupSize(const std::string& entry_point) {
+    auto* func = FindEntryPointByName(entry_point);
+    if (!func || func->PipelineStage() != ast::PipelineStage::kCompute) {
+        return std::nullopt;
+    }
+
+    auto* func_sem = program_->Sem().Get(func);
+    auto wgsize = func_sem->WorkgroupSize();
+
+    for (const auto& wg_dimension : wgsize) {
+        if (wg_dimension.overridable_const != nullptr) {
+            return std::nullopt;
+        }
+    }
+
+    return WorkgroupSize{wgsize[0].value, wgsize[1].value, wgsize[2].value};
+}
+
 std::vector<std::string> Inspector::GetUsedExtensionNames() {
     auto& extensions = program_->Sem().Module()->Extensions();
     std::vector<std::string> out;

@@ -67,6 +67,22 @@ void stream::Stream<tint::transform::VertexPulling::Config>::Write(
 
 // static
 template <>
+void stream::Stream<tint::transform::SubstituteOverride::Config>::Write(
+    stream::Sink* sink,
+    const tint::transform::SubstituteOverride::Config& cfg) {
+    StreamInTintObject(cfg, sink);
+}
+
+// static
+template <>
+void stream::Stream<tint::OverrideId>::Write(stream::Sink* sink, const tint::OverrideId& id) {
+    static_assert(offsetof(tint::OverrideId, value) == 0,
+                  "Please update serialization for tint::OverrideId");
+    StreamIn(sink, id.value);
+}
+
+// static
+template <>
 void stream::Stream<tint::transform::VertexBufferLayoutDescriptor>::Write(
     stream::Sink* sink,
     const tint::transform::VertexBufferLayoutDescriptor& layout) {
