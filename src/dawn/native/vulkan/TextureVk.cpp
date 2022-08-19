@@ -705,7 +705,7 @@ MaybeError Texture::InitializeAsInternalTexture(VkImageUsageFlags extraUsages) {
         "BindImageMemory"));
 
     if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
-        DAWN_TRY(ClearTexture(ToBackend(GetDevice())->GetPendingRecordingContext(),
+        DAWN_TRY(ClearTexture(ToBackend(GetDevice())->GetPendingRecordingContext(false),
                               GetAllSubresources(), TextureBase::ClearValue::NonZero));
     }
 
@@ -872,7 +872,7 @@ MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
     if (mExternalSemaphoreHandle == kNullExternalSemaphoreHandle ||
         desiredLayout != VK_IMAGE_LAYOUT_UNDEFINED) {
         Device* device = ToBackend(GetDevice());
-        CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+        CommandRecordingContext* recordingContext = device->GetPendingRecordingContext(true);
         recordingContext->externalTexturesForEagerTransition.insert(this);
         DAWN_TRY(device->SubmitPendingCommands());
     }
