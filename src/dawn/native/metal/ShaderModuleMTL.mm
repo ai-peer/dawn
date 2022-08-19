@@ -274,9 +274,9 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(DeviceBase* device,
 
 MaybeError ShaderModule::CreateFunction(const char* entryPointName,
                                         SingleShaderStage stage,
+                                        const ProgrammableStage& programmableStage,
                                         const PipelineLayout* layout,
                                         ShaderModule::MetalFunctionData* out,
-                                        id constantValuesPointer,
                                         uint32_t sampleMask,
                                         const RenderPipeline* renderPipeline) {
     TRACE_EVENT0(GetDevice()->GetPlatform(), General, "ShaderModuleMTL::CreateFunction");
@@ -290,10 +290,18 @@ MaybeError ShaderModule::CreateFunction(const char* entryPointName,
     }
 
     CacheResult<MslCompilation> mslCompilation;
-    DAWN_TRY_ASSIGN(mslCompilation, TranslateToMSL(GetDevice(), GetTintProgram(), entryPointName,
-                                                   stage, layout, sampleMask, renderPipeline));
+    DAWN_TRY_ASSIGN(mslCompilation,
+                    TranslateToMSL(GetDevice(), programmableStage.GetTintProgram(), entryPointName,
+                                   stage, layout, sampleMask, renderPipeline));
     out->needsStorageBufferLength = mslCompilation->needsStorageBufferLength;
     out->workgroupAllocations = std::move(mslCompilation->workgroupAllocations);
+
+    if (stage == SingleShaderStage::Compute) {
+        tint::inspector::Inspector inspector(programmableStage.GetTintProgram());
+        const tint::inspector::WorkgroupSize& localSize =
+            inspector.GetWorkgroupSize(programmableStage.entryPoint);
+        out->localWorkgroupSize = MTLSizeMake(localSize.x, localSize.y, localSize.z);
+    }
 
     NSRef<NSString> mslSource =
         AcquireNSRef([[NSString alloc] initWithUTF8String:mslCompilation->msl.c_str()]);
@@ -327,25 +335,7 @@ MaybeError ShaderModule::CreateFunction(const char* entryPointName,
 
     {
         TRACE_EVENT0(GetDevice()->GetPlatform(), General, "MTLLibrary::newFunctionWithName");
-        if (constantValuesPointer != nil) {
-            if (@available(macOS 10.12, *)) {
-                MTLFunctionConstantValues* constantValues = constantValuesPointer;
-                out->function = AcquireNSPRef([*library newFunctionWithName:name.Get()
-                                                             constantValues:constantValues
-                                                                      error:&error]);
-                if (error != nullptr) {
-                    if (error.code != MTLLibraryErrorCompileWarning) {
-                        return DAWN_VALIDATION_ERROR(std::string("Function compile error: ") +
-                                                     [error.localizedDescription UTF8String]);
-                    }
-                }
-                ASSERT(out->function != nil);
-            } else {
-                UNREACHABLE();
-            }
-        } else {
-            out->function = AcquireNSPRef([*library newFunctionWithName:name.Get()]);
-        }
+        out->function = AcquireNSPRef([*library newFunctionWithName:name.Get()]);
     }
 
     if (BlobCache* cache = GetDevice()->GetBlobCache()) {

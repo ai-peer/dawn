@@ -37,6 +37,7 @@
 #include "dawn/native/PerStage.h"
 #include "dawn/native/VertexFormat.h"
 #include "dawn/native/dawn_platform.h"
+#include "tint/override_id.h"
 
 namespace tint {
 
@@ -211,7 +212,8 @@ struct EntryPointMetadata {
     SingleShaderStage stage;
 
     struct Override {
-        uint32_t id;
+        tint::OverrideId id;
+
         // Match tint::inspector::Override::Type
         // Bool is defined as a macro on linux X11 and cannot compile
         enum class Type { Boolean, Float32, Uint32, Int32 } type;
@@ -273,7 +275,10 @@ class ShaderModuleBase : public ApiObjectBase, public CachedObject {
         bool operator()(const ShaderModuleBase* a, const ShaderModuleBase* b) const;
     };
 
-    const tint::Program* GetTintProgram() const;
+    // This should only be called by ProgrammableStage or pipeline when running program transform.
+    // Backend pipelines should get the program by calling ProgrammableStage::GetTintProgram,
+    // as it can potentially be modified at pipeline creation time.
+    const tint::Program* GetRawTintProgram() const;
 
     void APIGetCompilationInfo(wgpu::CompilationInfoCallback callback, void* userdata);
 

@@ -168,7 +168,7 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
     }
 
     GLSLCompilationRequest req = {};
-    req.inputProgram = GetTintProgram();
+    req.inputProgram = programmableStage.GetTintProgram();
     req.entryPointName = programmableStage.entryPoint;
     req.externalTextureBindings = BuildExternalTextureTransformBindings(layout);
     req.glBindings = std::move(glBindings);
