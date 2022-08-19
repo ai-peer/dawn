@@ -64,6 +64,7 @@ class QueueBase : public ApiObjectBase {
                            const void* data,
                            size_t size);
     void TrackTask(std::unique_ptr<TaskInFlight> task, ExecutionSerial serial);
+    bool HasPendingTrackTask();
     void Tick(ExecutionSerial finishedSerial);
     void HandleDeviceLoss();
 

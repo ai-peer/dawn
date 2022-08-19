@@ -220,8 +220,11 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
 
 void QueueBase::TrackTask(std::unique_ptr<TaskInFlight> task, ExecutionSerial serial) {
     mTasksInFlight.Enqueue(std::move(task), serial);
-    GetDevice()->AddFutureSerial(serial);
     GetDevice()->ForceEventualFlushOfCommands();
+}
+
+bool QueueBase::HasPendingTrackTask() {
+    return !mTasksInFlight.Empty();
 }
 
 void QueueBase::Tick(ExecutionSerial finishedSerial) {
@@ -286,8 +289,6 @@ MaybeError QueueBase::WriteBufferImpl(BufferBase* buffer,
     ASSERT(uploadHandle.mappedBuffer != nullptr);
 
     memcpy(uploadHandle.mappedBuffer, data, size);
-
-    device->AddFutureSerial(device->GetPendingCommandSerial());
 
     return device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer, uploadHandle.startOffset,
                                            buffer, bufferOffset, size);
@@ -356,8 +357,6 @@ MaybeError QueueBase::WriteTextureImpl(const ImageCopyTexture& destination,
     textureCopy.aspect = ConvertAspect(format, destination.aspect);
 
     DeviceBase* device = GetDevice();
-
-    device->AddFutureSerial(device->GetPendingCommandSerial());
 
     return device->CopyFromStagingToTexture(uploadHandle.stagingBuffer, passDataLayout,
                                             &textureCopy, writeSizePixel);
