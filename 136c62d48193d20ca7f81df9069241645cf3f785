@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb088d28_32e3db46",
+        "filename": "src/dawn/tests/end2end/DeviceInitializationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-19T23:22:27Z",
+      "side": 1,
+      "message": "Hmm.. unfortunate that we can\u0027t use something like `EXPECT_BUFFER_U32_RANGE_EQ` here since we aren\u0027t using `DawnTest`. :/",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 65,
+        "endChar": 34
+      },
+      "revId": "136c62d48193d20ca7f81df9069241645cf3f785",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
