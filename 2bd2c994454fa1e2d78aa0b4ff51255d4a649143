@@ -216,6 +216,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a1c84f1_9d361b3c",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-19T14:39:02Z",
+      "side": 1,
+      "message": "The CPU operations are enqueued callbacks for onSubmittedWorkDone and mapAsync.\n\nConsider for example if there is absolutely 0 work in flight.\nmLastSubmittedSerial \u003d\u003d 2 \u0026\u0026 mCompletedSerial \u003d\u003d 2\n\nYou enqueue some callbacks like\n```\nqueue.onSubmittedWorkDone(cb1);\nbuffer.mapAsync(cb2);\n```\n\nThese callbacks are enqueued using the \"pending command serial\" which will be 3.\n\nIf you do:\n```\nwhile (NotCalled(cb1)) {\n  device.Tick();\n  sleep(10);\n}\n```\n\nYou will loop forever since we never get to serial 3 since nothing gets submitted to the queue.\nThe goal of AssumeCommandsComplete here is to make it so that the serial continues to increase if there are pending callbacks but no GPU work.\n\nHowever, I think we may be able to remedy this as well. If at the time the callbacks are enqueued (QueueBase::TrackTask), after we call ForceEventualFlushOfCommands()..  if the recording context does not `needsSubmit`, that means the callbacks are waiting on nothing. We may be able to enqueue them immediately in DeviceBase::mCallbackTaskManager instead of having them wait on a future serial.",
+      "parentUuid": "7f0c7741_5d41d920",
+      "range": {
+        "startLine": 811,
+        "startChar": 75,
+        "endLine": 811,
+        "endChar": 79
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d1f24ba_b0ec7120",
         "filename": "src/dawn/native/vulkan/NativeSwapChainImplVk.cpp",
         "patchSetId": 10
