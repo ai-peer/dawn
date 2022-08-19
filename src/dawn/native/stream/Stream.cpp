@@ -16,6 +16,8 @@
 
 #include <string>
 
+#include "dawn/native/Limits.h"
+
 namespace dawn::native::stream {
 
 template <>
@@ -56,6 +58,17 @@ void Stream<std::wstring_view>::Write(Sink* s, const std::wstring_view& t) {
         void* ptr = s->GetSpace(size);
         memcpy(ptr, t.data(), size);
     }
+}
+
+template <>
+MaybeError stream::Stream<wgpu::Extent3D>::Read(stream::Source* s, wgpu::Extent3D* v) {
+    DAWN_TRY(StreamOut(s, &v->width, &v->height, &v->depthOrArrayLayers));
+    return {};
+}
+
+template <>
+void stream::Stream<wgpu::Extent3D>::Write(stream::Sink* s, const wgpu::Extent3D& v) {
+    StreamIn(s, v.width, v.height, v.depthOrArrayLayers);
 }
 
 }  // namespace dawn::native::stream
