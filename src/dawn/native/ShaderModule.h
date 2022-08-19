@@ -37,6 +37,7 @@
 #include "dawn/native/PerStage.h"
 #include "dawn/native/VertexFormat.h"
 #include "dawn/native/dawn_platform.h"
+#include "tint/override_id.h"
 
 namespace tint {
 
@@ -48,6 +49,10 @@ class Manager;
 class Transform;
 class VertexPulling;
 }  // namespace transform
+
+namespace inspector {
+struct WorkgroupSize;
+}  // namespace inspector
 
 }  // namespace tint
 
@@ -107,6 +112,10 @@ MaybeError ValidateAndParseShaderModule(DeviceBase* device,
 MaybeError ValidateCompatibilityWithPipelineLayout(DeviceBase* device,
                                                    const EntryPointMetadata& entryPoint,
                                                    const PipelineLayoutBase* layout);
+ResultOrError<tint::inspector::WorkgroupSize> ValidateComputeStageWorkgroupSize(
+    DeviceBase* device,
+    const tint::Program& program,
+    const char* entryPointName);
 
 RequiredBufferSizes ComputeRequiredBufferSizesForLayout(const EntryPointMetadata& entryPoint,
                                                         const PipelineLayoutBase* layout);
@@ -211,7 +220,8 @@ struct EntryPointMetadata {
     SingleShaderStage stage;
 
     struct Override {
-        uint32_t id;
+        tint::OverrideId id;
+
         // Match tint::inspector::Override::Type
         // Bool is defined as a macro on linux X11 and cannot compile
         enum class Type { Boolean, Float32, Uint32, Int32 } type;
@@ -273,7 +283,8 @@ class ShaderModuleBase : public ApiObjectBase, public CachedObject {
         bool operator()(const ShaderModuleBase* a, const ShaderModuleBase* b) const;
     };
 
-    const tint::Program* GetTintProgram() const;
+    // This returns tint program before running transforms.
+    const tint::Program* GetRawTintProgram() const;
 
     void APIGetCompilationInfo(wgpu::CompilationInfoCallback callback, void* userdata);
 

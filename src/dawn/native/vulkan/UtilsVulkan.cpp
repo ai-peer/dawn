@@ -282,7 +282,7 @@ VkSpecializationInfo* GetVkSpecializationInfo(
         const auto& moduleConstant = entryPointMetaData.overrides.at(identifier);
 
         specializationMapEntries->push_back(VkSpecializationMapEntry{
-            moduleConstant.id,
+            moduleConstant.id.value,
             static_cast<uint32_t>(specializationDataEntries->size() * sizeof(OverrideScalar)),
             sizeof(OverrideScalar)});
 

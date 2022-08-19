@@ -168,10 +168,14 @@ void ShaderModule::DestroyImpl() {
 
 ShaderModule::~ShaderModule() = default;
 
+using OptionalSubstituteOverrideConfig = std::optional<tint::transform::SubstituteOverride::Config>;
+
 #define SPIRV_COMPILATION_REQUEST_MEMBERS(X)                                    \
+    X(SingleShaderStage, stage)                                                 \
     X(const tint::Program*, inputProgram)                                       \
     X(tint::transform::BindingRemapper::BindingPoints, bindingPoints)           \
     X(tint::transform::MultiplanarExternalTexture::BindingsMap, newBindingsMap) \
+    X(OptionalSubstituteOverrideConfig, substituteOverrideConfig)               \
     X(std::string_view, entryPointName)                                         \
     X(bool, disableWorkgroupInit)                                               \
     X(bool, useZeroInitializeWorkgroupMemoryExtension)                          \
@@ -181,6 +185,8 @@ DAWN_MAKE_CACHE_REQUEST(SpirvCompilationRequest, SPIRV_COMPILATION_REQUEST_MEMBE
 #undef SPIRV_COMPILATION_REQUEST_MEMBERS
 
 ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
+    SingleShaderStage stage,
+    const ProgrammableStage& programmableStage,
     const char* entryPointName,
     const PipelineLayout* layout) {
     TRACE_EVENT0(GetDevice()->GetPlatform(), General, "ShaderModuleVk::GetHandleAndSpirv");
@@ -238,9 +244,15 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
         }
     }
 
+    std::optional<tint::transform::SubstituteOverride::Config> substituteOverrideConfig;
+    if (!programmableStage.metadata->overrides.empty()) {
+        substituteOverrideConfig = BuildSubstituteOverridesTransform(programmableStage);
+    }
+
 #if TINT_BUILD_SPV_WRITER
     SpirvCompilationRequest req = {};
-    req.inputProgram = GetTintProgram();
+    req.stage = stage;
+    req.inputProgram = GetRawTintProgram();
     req.bindingPoints = std::move(bindingPoints);
     req.newBindingsMap = std::move(newBindingsMap);
     req.entryPointName = entryPointName;
@@ -248,11 +260,12 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     req.useZeroInitializeWorkgroupMemoryExtension =
         GetDevice()->IsToggleEnabled(Toggle::VulkanUseZeroInitializeWorkgroupMemoryExtension);
     req.tracePlatform = UnsafeUnkeyedValue(GetDevice()->GetPlatform());
+    req.substituteOverrideConfig = std::move(substituteOverrideConfig);
 
     CacheResult<Spirv> spirv;
     DAWN_TRY_LOAD_OR_RUN(
         spirv, GetDevice(), std::move(req), Spirv::FromBlob,
-        [](SpirvCompilationRequest r) -> ResultOrError<Spirv> {
+        [](DeviceBase* device, SpirvCompilationRequest r) -> ResultOrError<Spirv> {
             tint::transform::Manager transformManager;
             // Many Vulkan drivers can't handle multi-entrypoint shader modules.
             transformManager.append(std::make_unique<tint::transform::SingleEntryPoint>());
@@ -262,6 +275,13 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
             tint::transform::DataMap transformInputs;
             transformInputs.Add<tint::transform::SingleEntryPoint::Config>(
                 std::string(r.entryPointName));
+            if (r.substituteOverrideConfig) {
+                // This needs to run after SingleEntryPoint transform to get rid of overrides not
+                // used for the current entry point.
+                transformManager.Add<tint::transform::SubstituteOverride>();
+                transformInputs.Add<tint::transform::SubstituteOverride::Config>(
+                    std::move(r.substituteOverrideConfig).value());
+            }
             transformInputs.Add<BindingRemapper::Remappings>(std::move(r.bindingPoints),
                                                              BindingRemapper::AccessControls{},
                                                              /* mayCollide */ false);
@@ -276,6 +296,14 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
                 DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, r.inputProgram,
                                                        transformInputs, nullptr, nullptr));
             }
+
+            if (r.stage == SingleShaderStage::Compute) {
+                // Validate workgroup size after program runs transforms.
+                tint::inspector::WorkgroupSize _;
+                DAWN_TRY_ASSIGN(
+                    _, ValidateComputeStageWorkgroupSize(device, program, r.entryPointName.data()));
+            }
+
             tint::writer::spirv::Options options;
             options.emit_vertex_point_size = true;
             options.disable_workgroup_init = r.disableWorkgroupInit;

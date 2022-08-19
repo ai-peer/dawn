@@ -112,9 +112,10 @@ class CacheRequestImpl {
         // Get return types and check that CacheMissReturnType can be cast to a raw function
         // pointer. This means it's not a std::function or lambda that captures additional data.
         using CacheHitReturnType = decltype(cacheHitFn(std::declval<Blob>()));
-        using CacheMissReturnType = decltype(cacheMissFn(std::declval<Request>()));
+        using CacheMissReturnType =
+            decltype(cacheMissFn(std::declval<DeviceBase*>(), std::declval<Request>()));
         static_assert(
-            std::is_convertible_v<CacheMissFn, CacheMissReturnType (*)(Request)>,
+            std::is_convertible_v<CacheMissFn, CacheMissReturnType (*)(DeviceBase*, Request)>,
             "CacheMissFn function signature does not match, or it is not a free function.");
 
         static_assert(detail::IsResultOrError<CacheMissReturnType>::value,
@@ -153,7 +154,7 @@ class CacheRequestImpl {
             }
         }
         // Cache miss, or the CacheHitFn failed.
-        auto result = cacheMissFn(std::move(r));
+        auto result = cacheMissFn(device, std::move(r));
         if (DAWN_LIKELY(result.IsSuccess())) {
             return ReturnType(CacheResultType::CacheMiss(std::move(key), result.AcquireSuccess()));
         }

@@ -15,6 +15,7 @@
 #include "dawn/native/Pipeline.h"
 
 #include <algorithm>
+#include <memory>
 #include <unordered_set>
 #include <utility>
 
@@ -24,6 +25,8 @@
 #include "dawn/native/ObjectContentHasher.h"
 #include "dawn/native/PipelineLayout.h"
 #include "dawn/native/ShaderModule.h"
+
+#include "tint/tint.h"
 
 namespace dawn::native {
 MaybeError ValidateProgrammableStage(DeviceBase* device,
@@ -56,12 +59,6 @@ MaybeError ValidateProgrammableStage(DeviceBase* device,
 
     if (layout != nullptr) {
         DAWN_TRY(ValidateCompatibilityWithPipelineLayout(device, metadata, layout));
-    }
-
-    if (constantCount > 0u && device->IsToggleEnabled(Toggle::DisallowUnsafeAPIs)) {
-        return DAWN_VALIDATION_ERROR(
-            "Pipeline overridable constants are disallowed because they are partially "
-            "implemented.");
     }
 
     // Validate if overridable constants exist in shader module
@@ -184,6 +181,11 @@ const RequiredBufferSizes& PipelineBase::GetMinBufferSizes() const {
 const ProgrammableStage& PipelineBase::GetStage(SingleShaderStage stage) const {
     ASSERT(!IsError());
     return mStages[stage];
+}
+
+ProgrammableStage* PipelineBase::GetStageRef(SingleShaderStage stage) {
+    ASSERT(!IsError());
+    return &(mStages[stage]);
 }
 
 const PerStage<ProgrammableStage>& PipelineBase::GetAllStages() const {
