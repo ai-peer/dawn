@@ -168,19 +168,30 @@ void ShaderModule::DestroyImpl() {
 
 ShaderModule::~ShaderModule() = default;
 
+using OptionalSubstituteOverrideConfig = std::optional<tint::transform::SubstituteOverride::Config>;
+
 #define SPIRV_COMPILATION_REQUEST_MEMBERS(X)                                    \
+    X(SingleShaderStage, stage)                                                 \
     X(const tint::Program*, inputProgram)                                       \
     X(tint::transform::BindingRemapper::BindingPoints, bindingPoints)           \
     X(tint::transform::MultiplanarExternalTexture::BindingsMap, newBindingsMap) \
+    X(OptionalSubstituteOverrideConfig, substituteOverrideConfig)               \
     X(std::string_view, entryPointName)                                         \
     X(bool, disableWorkgroupInit)                                               \
     X(bool, useZeroInitializeWorkgroupMemoryExtension)                          \
-    X(CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*>, tracePlatform)
+    X(CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*>, tracePlatform)   \
+    X(uint32_t, maxComputeWorkgroupSizeX)                                       \
+    X(uint32_t, maxComputeWorkgroupSizeY)                                       \
+    X(uint32_t, maxComputeWorkgroupSizeZ)                                       \
+    X(uint32_t, maxComputeInvocationsPerWorkgroup)                              \
+    X(uint32_t, maxComputeWorkgroupStorageSize)
 
 DAWN_MAKE_CACHE_REQUEST(SpirvCompilationRequest, SPIRV_COMPILATION_REQUEST_MEMBERS);
 #undef SPIRV_COMPILATION_REQUEST_MEMBERS
 
 ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
+    SingleShaderStage stage,
+    const ProgrammableStage& programmableStage,
     const char* entryPointName,
     const PipelineLayout* layout) {
     TRACE_EVENT0(GetDevice()->GetPlatform(), General, "ShaderModuleVk::GetHandleAndSpirv");
@@ -238,9 +249,15 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
         }
     }
 
+    std::optional<tint::transform::SubstituteOverride::Config> substituteOverrideConfig;
+    if (!programmableStage.metadata->overrides.empty()) {
+        substituteOverrideConfig = BuildSubstituteOverridesTransform(programmableStage);
+    }
+
 #if TINT_BUILD_SPV_WRITER
     SpirvCompilationRequest req = {};
-    req.inputProgram = GetTintProgram();
+    req.stage = stage;
+    req.inputProgram = GetRawTintProgram();
     req.bindingPoints = std::move(bindingPoints);
     req.newBindingsMap = std::move(newBindingsMap);
     req.entryPointName = entryPointName;
@@ -248,6 +265,14 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     req.useZeroInitializeWorkgroupMemoryExtension =
         GetDevice()->IsToggleEnabled(Toggle::VulkanUseZeroInitializeWorkgroupMemoryExtension);
     req.tracePlatform = UnsafeUnkeyedValue(GetDevice()->GetPlatform());
+    req.substituteOverrideConfig = std::move(substituteOverrideConfig);
+
+    const CombinedLimits& limits = GetDevice()->GetLimits();
+    req.maxComputeWorkgroupSizeX = limits.v1.maxComputeWorkgroupSizeX;
+    req.maxComputeWorkgroupSizeY = limits.v1.maxComputeWorkgroupSizeY;
+    req.maxComputeWorkgroupSizeZ = limits.v1.maxComputeWorkgroupSizeZ;
+    req.maxComputeInvocationsPerWorkgroup = limits.v1.maxComputeInvocationsPerWorkgroup;
+    req.maxComputeWorkgroupStorageSize = limits.v1.maxComputeWorkgroupStorageSize;
 
     CacheResult<Spirv> spirv;
     DAWN_TRY_LOAD_OR_RUN(
@@ -270,12 +295,30 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
                 transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
                     r.newBindingsMap);
             }
+            if (r.substituteOverrideConfig) {
+                // This needs to run after SingleEntryPoint transform to get rid of overrides not
+                // used for the current entry point.
+                transformManager.Add<tint::transform::SubstituteOverride>();
+                transformInputs.Add<tint::transform::SubstituteOverride::Config>(
+                    std::move(r.substituteOverrideConfig).value());
+            }
             tint::Program program;
             {
                 TRACE_EVENT0(r.tracePlatform.UnsafeGetValue(), General, "RunTransforms");
                 DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, r.inputProgram,
                                                        transformInputs, nullptr, nullptr));
             }
+
+            if (r.stage == SingleShaderStage::Compute) {
+                // Validate workgroup size after program runs transforms.
+                tint::inspector::WorkgroupSize _;
+                DAWN_TRY_ASSIGN(
+                    _, ValidateComputeStageWorkgroupSize(
+                           program, r.entryPointName.data(), r.maxComputeWorkgroupSizeX,
+                           r.maxComputeWorkgroupSizeY, r.maxComputeWorkgroupSizeZ,
+                           r.maxComputeInvocationsPerWorkgroup, r.maxComputeWorkgroupStorageSize));
+            }
+
             tint::writer::spirv::Options options;
             options.emit_vertex_point_size = true;
             options.disable_workgroup_init = r.disableWorkgroupInit;
