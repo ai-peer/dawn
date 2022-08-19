@@ -18,6 +18,7 @@
 #include <array>
 #include <bitset>
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -51,6 +52,14 @@ struct ProgrammableStage {
     const EntryPointMetadata* metadata = nullptr;
 
     PipelineConstantEntries constants;
+
+    // Transformed program used for SubstitutueOverrides.
+    std::unique_ptr<tint::Program> transformedProgram;
+
+    // The workgroup size could be overrided at pipeline stage.
+    Origin3D updatedLocalWorkgroupSize;
+
+    const tint::Program* GetTintProgram() const;
 };
 
 class PipelineBase : public ApiObjectBase, public CachedObject {
@@ -61,6 +70,7 @@ class PipelineBase : public ApiObjectBase, public CachedObject {
     const PipelineLayoutBase* GetLayout() const;
     const RequiredBufferSizes& GetMinBufferSizes() const;
     const ProgrammableStage& GetStage(SingleShaderStage stage) const;
+    ProgrammableStage* GetStageRef(SingleShaderStage stage);
     const PerStage<ProgrammableStage>& GetAllStages() const;
     wgpu::ShaderStage GetStageMask() const;
 
@@ -85,6 +95,10 @@ class PipelineBase : public ApiObjectBase, public CachedObject {
 
     // Constructor used only for mocking and testing.
     explicit PipelineBase(DeviceBase* device);
+
+    //
+    MaybeError RunTintProgramTransformForOverrides(SingleShaderStage singleShaderStage,
+                                                   ProgrammableStage* stage);
 
   private:
     MaybeError ValidateGetBindGroupLayout(uint32_t group);

@@ -65,6 +65,9 @@ class RenderPipelineBase : public PipelineBase {
     RenderPipelineBase(DeviceBase* device, const RenderPipelineDescriptor* descriptor);
     ~RenderPipelineBase() override;
 
+    // Common backend-agnostic initialization.
+    MaybeError InitializeBackendAgnostic();
+
     static RenderPipelineBase* MakeError(DeviceBase* device);
 
     ObjectType GetType() const override;

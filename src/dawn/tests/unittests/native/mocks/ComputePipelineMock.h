@@ -27,6 +27,7 @@ class ComputePipelineMock : public ComputePipelineBase {
     explicit ComputePipelineMock(DeviceBase* device);
     ~ComputePipelineMock() override;
 
+    // MOCK_METHOD(MaybeError, InitializeBackendAgnostic, ());
     MOCK_METHOD(MaybeError, Initialize, (), (override));
     MOCK_METHOD(size_t, ComputeContentHash, (), (override));
     MOCK_METHOD(void, DestroyImpl, (), (override));

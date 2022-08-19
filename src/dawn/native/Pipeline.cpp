@@ -15,6 +15,7 @@
 #include "dawn/native/Pipeline.h"
 
 #include <algorithm>
+#include <memory>
 #include <unordered_set>
 #include <utility>
 
@@ -24,6 +25,8 @@
 #include "dawn/native/ObjectContentHasher.h"
 #include "dawn/native/PipelineLayout.h"
 #include "dawn/native/ShaderModule.h"
+
+#include "tint/tint.h"
 
 namespace dawn::native {
 MaybeError ValidateProgrammableStage(DeviceBase* device,
@@ -134,7 +137,7 @@ PipelineBase::PipelineBase(DeviceBase* device,
         // Record them internally.
         bool isFirstStage = mStageMask == wgpu::ShaderStage::None;
         mStageMask |= StageBit(shaderStage);
-        mStages[shaderStage] = {module, entryPointName, &metadata, {}};
+        mStages[shaderStage] = {module, entryPointName, &metadata, {}, nullptr};
         auto& constants = mStages[shaderStage].constants;
         for (uint32_t i = 0; i < stage.constantCount; i++) {
             constants.emplace(stage.constants[i].key, stage.constants[i].value);
@@ -184,6 +187,11 @@ const RequiredBufferSizes& PipelineBase::GetMinBufferSizes() const {
 const ProgrammableStage& PipelineBase::GetStage(SingleShaderStage stage) const {
     ASSERT(!IsError());
     return mStages[stage];
+}
+
+ProgrammableStage* PipelineBase::GetStageRef(SingleShaderStage stage) {
+    ASSERT(!IsError());
+    return &(mStages[stage]);
 }
 
 const PerStage<ProgrammableStage>& PipelineBase::GetAllStages() const {
@@ -254,6 +262,95 @@ bool PipelineBase::EqualForCache(const PipelineBase* a, const PipelineBase* b) {
     }
 
     return true;
+}
+
+MaybeError PipelineBase::RunTintProgramTransformForOverrides(SingleShaderStage singleShaderStage,
+                                                             ProgrammableStage* stage) {
+    if (!stage || !stage->metadata) {
+        return {};
+    }
+
+    const EntryPointMetadata& metadata = *stage->metadata;
+    const auto& constants = stage->constants;
+
+    if (!metadata.overrides.empty()) {
+        tint::transform::Manager transformManager;
+        tint::transform::DataMap transformInputs;
+
+        transformManager.Add<tint::transform::SingleEntryPoint>();
+        transformInputs.Add<tint::transform::SingleEntryPoint::Config>(stage->entryPoint.data());
+
+        transformManager.Add<tint::transform::SubstituteOverride>();
+        tint::transform::SubstituteOverride::Config cfg;
+
+        for (const auto& [key, value] : constants) {
+            const auto& o = metadata.overrides.at(key);
+            cfg.map.insert({o.id, value});
+        }
+
+        // tint::transform::DataMap data;
+        // data.Add<tint::transform::SubstituteOverride::Config>(cfg);
+        transformInputs.Add<tint::transform::SubstituteOverride::Config>(cfg);
+
+        tint::Program program;
+        DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, stage->module->GetTintProgram(),
+                                               transformInputs, nullptr, nullptr));
+
+        // Validate workgroup size
+        if (singleShaderStage == SingleShaderStage::Compute) {
+            const CombinedLimits& limits = GetDevice()->GetLimits();
+            tint::inspector::Inspector inspector(&program);
+            tint::inspector::WorkgroupSize workgroup_size =
+                inspector.GetWorkgroupSize(stage->entryPoint);
+
+            DAWN_INVALID_IF(workgroup_size.x < 1 || workgroup_size.y < 1 || workgroup_size.z < 1,
+                            "Entry-point uses workgroup_size(%u, %u, %u) that are below the "
+                            "minimum allowed (1, 1, 1).",
+                            workgroup_size.x, workgroup_size.y, workgroup_size.z);
+
+            DAWN_INVALID_IF(workgroup_size.x > limits.v1.maxComputeWorkgroupSizeX ||
+                                workgroup_size.y > limits.v1.maxComputeWorkgroupSizeY ||
+                                workgroup_size.z > limits.v1.maxComputeWorkgroupSizeZ,
+                            "Entry-point uses workgroup_size(%u, %u, %u) that exceeds the "
+                            "maximum allowed (%u, %u, %u).",
+                            workgroup_size.x, workgroup_size.y, workgroup_size.z,
+                            limits.v1.maxComputeWorkgroupSizeX, limits.v1.maxComputeWorkgroupSizeY,
+                            limits.v1.maxComputeWorkgroupSizeZ);
+
+            uint64_t numInvocations =
+                static_cast<uint64_t>(workgroup_size.x) * workgroup_size.y * workgroup_size.z;
+            DAWN_INVALID_IF(numInvocations > limits.v1.maxComputeInvocationsPerWorkgroup,
+                            "The total number of workgroup invocations (%u) exceeds the "
+                            "maximum allowed (%u).",
+                            numInvocations, limits.v1.maxComputeInvocationsPerWorkgroup);
+
+            const size_t workgroupStorageSize =
+                inspector.GetWorkgroupStorageSize(stage->entryPoint);
+            DAWN_INVALID_IF(workgroupStorageSize > limits.v1.maxComputeWorkgroupStorageSize,
+                            "The total use of workgroup storage (%u bytes) is larger than "
+                            "the maximum allowed (%u bytes).",
+                            workgroupStorageSize, limits.v1.maxComputeWorkgroupStorageSize);
+
+            stage->updatedLocalWorkgroupSize.x = workgroup_size.x;
+            stage->updatedLocalWorkgroupSize.y = workgroup_size.y;
+            stage->updatedLocalWorkgroupSize.z = workgroup_size.z;
+        }
+
+        stage->transformedProgram = std::make_unique<tint::Program>(std::move(program));
+    } else {
+        // There are no overrides, the workgroup size information is fixed.
+        // Copy the info from entry point metadata.
+        stage->updatedLocalWorkgroupSize = metadata.localWorkgroupSize;
+    }
+
+    return {};
+}
+
+const tint::Program* ProgrammableStage::GetTintProgram() const {
+    if (transformedProgram != nullptr) {
+        return transformedProgram.get();
+    }
+    return module->GetTintProgram();
 }
 
 }  // namespace dawn::native
