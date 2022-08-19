@@ -327,14 +327,16 @@ MaybeError CreateMTLFunction(const ProgrammableStage& programmableStage,
                              SingleShaderStage singleShaderStage,
                              PipelineLayout* pipelineLayout,
                              ShaderModule::MetalFunctionData* functionData,
+                             bool useBackendOverridesImplementation,
                              uint32_t sampleMask,
                              const RenderPipeline* renderPipeline) {
     ShaderModule* shaderModule = ToBackend(programmableStage.module.Get());
     const char* shaderEntryPoint = programmableStage.entryPoint.c_str();
     const auto& entryPointMetadata = programmableStage.module->GetEntryPoint(shaderEntryPoint);
-    if (entryPointMetadata.overrides.size() == 0) {
-        DAWN_TRY(shaderModule->CreateFunction(shaderEntryPoint, singleShaderStage, pipelineLayout,
-                                              functionData, nil, sampleMask, renderPipeline));
+    if (entryPointMetadata.overrides.size() == 0 || !useBackendOverridesImplementation) {
+        DAWN_TRY(shaderModule->CreateFunction(shaderEntryPoint, singleShaderStage,
+                                              programmableStage, pipelineLayout, functionData, nil,
+                                              sampleMask, renderPipeline));
         return {};
     }
 
@@ -389,7 +391,9 @@ MaybeError CreateMTLFunction(const ProgrammableStage& programmableStage,
 
             switchType(moduleConstant.type, &type, &entry, value);
 
-            [constantValues.Get() setConstantValue:&entry type:type atIndex:moduleConstant.id];
+            [constantValues.Get() setConstantValue:&entry
+                                              type:type
+                                           atIndex:moduleConstant.id.value];
         }
 
         // Set shader initialized default values because MSL function_constant
@@ -409,12 +413,12 @@ MaybeError CreateMTLFunction(const ProgrammableStage& programmableStage,
 
             [constantValues.Get() setConstantValue:&moduleConstant.defaultValue
                                               type:type
-                                           atIndex:moduleConstant.id];
+                                           atIndex:moduleConstant.id.value];
         }
 
-        DAWN_TRY(shaderModule->CreateFunction(shaderEntryPoint, singleShaderStage, pipelineLayout,
-                                              functionData, constantValues.Get(), sampleMask,
-                                              renderPipeline));
+        DAWN_TRY(shaderModule->CreateFunction(shaderEntryPoint, singleShaderStage,
+                                              programmableStage, pipelineLayout, functionData,
+                                              constantValues.Get(), sampleMask, renderPipeline));
     } else {
         UNREACHABLE();
     }
