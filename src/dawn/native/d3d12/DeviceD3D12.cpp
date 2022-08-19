@@ -543,22 +543,9 @@ std::unique_ptr<ExternalImageDXGIImpl> Device::CreateExternalImageDXGIImpl(
         return nullptr;
     }
 
-    // Use sharedHandle as a fallback until Chromium code is changed to set textureSharedHandle.
-    HANDLE textureSharedHandle = descriptor->textureSharedHandle;
-    if (!textureSharedHandle) {
-        textureSharedHandle = descriptor->sharedHandle;
-    }
-
     Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource;
-    if (FAILED(GetD3D12Device()->OpenSharedHandle(textureSharedHandle,
+    if (FAILED(GetD3D12Device()->OpenSharedHandle(descriptor->sharedHandle,
                                                   IID_PPV_ARGS(&d3d12Resource)))) {
-        return nullptr;
-    }
-
-    Microsoft::WRL::ComPtr<ID3D12Fence> d3d12Fence;
-    if (descriptor->fenceSharedHandle &&
-        FAILED(GetD3D12Device()->OpenSharedHandle(descriptor->fenceSharedHandle,
-                                                  IID_PPV_ARGS(&d3d12Fence)))) {
         return nullptr;
     }
 
@@ -588,8 +575,16 @@ std::unique_ptr<ExternalImageDXGIImpl> Device::CreateExternalImageDXGIImpl(
         }
     }
 
-    auto impl = std::make_unique<ExternalImageDXGIImpl>(
-        this, std::move(d3d12Resource), std::move(d3d12Fence), descriptor->cTextureDescriptor);
+    Ref<Fence> signalFence;
+    if (descriptor->useFenceSynchronization) {
+        signalFence = Fence::Create(this);
+        if (signalFence == nullptr) {
+            return nullptr;
+        }
+    }
+
+    auto impl = std::make_unique<ExternalImageDXGIImpl>(this, std::move(d3d12Resource),
+                                                        std::move(signalFence), textureDescriptor);
     mExternalImageList.Append(impl.get());
     return impl;
 }
@@ -597,17 +592,16 @@ std::unique_ptr<ExternalImageDXGIImpl> Device::CreateExternalImageDXGIImpl(
 Ref<TextureBase> Device::CreateD3D12ExternalTexture(
     const TextureDescriptor* descriptor,
     ComPtr<ID3D12Resource> d3d12Texture,
-    ComPtr<ID3D12Fence> d3d12Fence,
+    std::vector<Ref<Fence>> waitFences,
+    Ref<Fence> signalFence,
     Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource,
-    uint64_t fenceWaitValue,
-    uint64_t fenceSignalValue,
     bool isSwapChainTexture,
     bool isInitialized) {
     Ref<Texture> dawnTexture;
-    if (ConsumedError(Texture::CreateExternalImage(
-                          this, descriptor, std::move(d3d12Texture), std::move(d3d12Fence),
-                          std::move(d3d11on12Resource), fenceWaitValue, fenceSignalValue,
-                          isSwapChainTexture, isInitialized),
+    if (ConsumedError(Texture::CreateExternalImage(this, descriptor, std::move(d3d12Texture),
+                                                   std::move(waitFences), std::move(signalFence),
+                                                   std::move(d3d11on12Resource), isSwapChainTexture,
+                                                   isInitialized),
                       &dawnTexture)) {
         return nullptr;
     }
