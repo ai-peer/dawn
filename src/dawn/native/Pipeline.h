@@ -18,6 +18,7 @@
 #include <array>
 #include <bitset>
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -61,6 +62,7 @@ class PipelineBase : public ApiObjectBase, public CachedObject {
     const PipelineLayoutBase* GetLayout() const;
     const RequiredBufferSizes& GetMinBufferSizes() const;
     const ProgrammableStage& GetStage(SingleShaderStage stage) const;
+    ProgrammableStage* GetStageRef(SingleShaderStage stage);
     const PerStage<ProgrammableStage>& GetAllStages() const;
     wgpu::ShaderStage GetStageMask() const;
 

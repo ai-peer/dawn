@@ -168,7 +168,7 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
     }
 
     GLSLCompilationRequest req = {};
-    req.inputProgram = GetTintProgram();
+    req.inputProgram = GetRawTintProgram();
     req.entryPointName = programmableStage.entryPoint;
     req.externalTextureBindings = BuildExternalTextureTransformBindings(layout);
     req.glBindings = std::move(glBindings);
@@ -179,7 +179,7 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
     CacheResult<GLSLCompilation> compilationResult;
     DAWN_TRY_LOAD_OR_RUN(
         compilationResult, GetDevice(), std::move(req), GLSLCompilation::FromBlob,
-        [](GLSLCompilationRequest r) -> ResultOrError<GLSLCompilation> {
+        [](DeviceBase* device, GLSLCompilationRequest r) -> ResultOrError<GLSLCompilation> {
             tint::transform::Manager transformManager;
             tint::transform::DataMap transformInputs;
 
