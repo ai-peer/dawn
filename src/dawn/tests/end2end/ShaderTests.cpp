@@ -471,6 +471,58 @@ struct Buf {
     EXPECT_BUFFER_U32_RANGE_EQ(expected.data(), buffer, 0, kCount);
 }
 
+// Test overridable constants work with workgroup size
+TEST_P(ShaderTests, OverridableConstantsWorkgroupSize) {
+    DAWN_TEST_UNSUPPORTED_IF(IsOpenGL());
+    DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
+
+    std::string shader = R"(
+override x: u32;
+
+struct Buf {
+    data : array<u32, 1>
+}
+
+@group(0) @binding(0) var<storage, read_write> buf : Buf;
+
+@compute @workgroup_size(x) fn main(
+    @builtin(local_invocation_id) local_invocation_id : vec3<u32>
+) {
+    if (local_invocation_id.x >= x - 1) {
+        buf.data[0] = local_invocation_id.x + 1;
+    }
+})";
+
+    const uint32_t workgroup_size_x = 16u;
+
+    std::vector<uint32_t> expected{workgroup_size_x};
+    wgpu::Buffer buffer = CreateBuffer(expected.size());
+
+    std::vector<wgpu::ConstantEntry> constants;
+    constants.push_back({nullptr, "x", static_cast<double>(workgroup_size_x)});
+
+    wgpu::ComputePipeline pipeline = CreateComputePipeline(shader, "main", &constants);
+
+    wgpu::BindGroup bindGroup =
+        utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
+
+    wgpu::CommandBuffer commands;
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+        pass.SetPipeline(pipeline);
+        pass.SetBindGroup(0, bindGroup);
+        pass.DispatchWorkgroups(workgroup_size_x);
+        pass.End();
+
+        commands = encoder.Finish();
+    }
+
+    queue.Submit(1, &commands);
+
+    EXPECT_BUFFER_U32_RANGE_EQ(expected.data(), buffer, 0, expected.size());
+}
+
 // Test overridable constants with numeric identifiers
 TEST_P(ShaderTests, OverridableConstantsNumericIdentifiers) {
     DAWN_TEST_UNSUPPORTED_IF(IsOpenGL());
@@ -596,6 +648,7 @@ TEST_P(ShaderTests, OverridableConstantsMultipleEntryPoints) {
     std::string shader = R"(
 @id(1001) override c1: u32;
 @id(1002) override c2: u32;
+@id(1003) override c3: u32;
 
 struct Buf {
     data : array<u32, 1>
@@ -611,7 +664,7 @@ struct Buf {
     buf.data[0] = c2;
 }
 
-@compute @workgroup_size(1) fn main3() {
+@compute @workgroup_size(c3) fn main3() {
     buf.data[0] = 3u;
 }
 )";
@@ -620,6 +673,8 @@ struct Buf {
     constants1.push_back({nullptr, "1001", 1});
     std::vector<wgpu::ConstantEntry> constants2;
     constants2.push_back({nullptr, "1002", 2});
+    std::vector<wgpu::ConstantEntry> constants3;
+    constants3.push_back({nullptr, "1003", 1});
 
     wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader.c_str());
 
@@ -640,6 +695,8 @@ struct Buf {
     wgpu::ComputePipelineDescriptor csDesc3;
     csDesc3.compute.module = shaderModule;
     csDesc3.compute.entryPoint = "main3";
+    csDesc3.compute.constants = constants3.data();
+    csDesc3.compute.constantCount = constants3.size();
     wgpu::ComputePipeline pipeline3 = device.CreateComputePipeline(&csDesc3);
 
     wgpu::BindGroup bindGroup1 =
