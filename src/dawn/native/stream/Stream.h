@@ -333,6 +333,24 @@ class Stream<detail::Iterable<Iterator>> {
     }
 };
 
+// If there are new limit member needed at shader compilation time
+// Simply append a new X(type, name) here.
+#define LIMITS_FOR_COMPILATION_REQUEST_MEMBERS(X)  \
+    X(uint32_t, maxComputeWorkgroupSizeX)          \
+    X(uint32_t, maxComputeWorkgroupSizeY)          \
+    X(uint32_t, maxComputeWorkgroupSizeZ)          \
+    X(uint32_t, maxComputeInvocationsPerWorkgroup) \
+    X(uint32_t, maxComputeWorkgroupStorageSize)
+
+#define DAWN_INTERNAL_STRUCT_MEMBER_DECL(type, name) type name{};
+#define DAWN_INTERNAL_STRUCT_MEMBER_FOREACH_DECL(MEMBERS) MEMBERS(DAWN_INTERNAL_STRUCT_MEMBER_DECL)
+struct LimitsForCompilationRequest {
+    static LimitsForCompilationRequest Create(const Limits& limits);
+    DAWN_INTERNAL_STRUCT_MEMBER_FOREACH_DECL(LIMITS_FOR_COMPILATION_REQUEST_MEMBERS)
+};
+#undef DAWN_INTERNAL_STRUCT_MEMBER_FOREACH_DECL
+#undef DAWN_INTERNAL_STRUCT_MEMBER_DECL
+
 }  // namespace dawn::native::stream
 
 #endif  // SRC_DAWN_NATIVE_STREAM_STREAM_H_
