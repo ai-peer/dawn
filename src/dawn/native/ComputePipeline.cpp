@@ -62,6 +62,12 @@ ComputePipelineBase::ComputePipelineBase(DeviceBase* device, ObjectBase::ErrorTa
 
 ComputePipelineBase::~ComputePipelineBase() = default;
 
+MaybeError ComputePipelineBase::InitializeBackendAgnostic() {
+    DAWN_TRY(RunTintProgramTransformForOverrides(SingleShaderStage::Compute,
+                                                 GetStageRef(SingleShaderStage::Compute)));
+    return {};
+}
+
 void ComputePipelineBase::DestroyImpl() {
     if (IsCachedReference()) {
         // Do not uncache the actual cached object if we are a blueprint.
