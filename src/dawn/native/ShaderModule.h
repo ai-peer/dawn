@@ -116,6 +116,12 @@ ResultOrError<tint::Program> RunTransforms(tint::transform::Transform* transform
                                            tint::transform::DataMap* outputs,
                                            OwnedCompilationMessages* messages);
 
+MaybeError ReflectShaderUsingTint(const DeviceBase* device,
+                                  const tint::Program* program,
+                                  OwnedCompilationMessages* compilationMessages,
+                                  EntryPointMetadataTable* entryPointMetadataTable,
+                                  WGSLExtensionSet* enabledWGSLExtensions);
+
 // Mirrors wgpu::SamplerBindingLayout but instead stores a single boolean
 // for isComparison instead of a wgpu::SamplerBindingType enum.
 struct ShaderSamplerBindingInfo {
@@ -273,7 +279,12 @@ class ShaderModuleBase : public ApiObjectBase, public CachedObject {
         bool operator()(const ShaderModuleBase* a, const ShaderModuleBase* b) const;
     };
 
+    // const tint::Program* GetOriginalTintProgram() const;
     const tint::Program* GetTintProgram() const;
+    // const tint::Program* GetTintProgram(const std::string&entryPoint) const;
+
+    //
+    void SetTintProgram(std::unique_ptr<tint::Program>&& program);
 
     void APIGetCompilationInfo(wgpu::CompilationInfoCallback callback, void* userdata);
 

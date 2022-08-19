@@ -259,6 +259,7 @@ std::string GetDeviceDebugPrefixFromDebugName(const char* debugName) {
 }
 
 VkSpecializationInfo* GetVkSpecializationInfo(
+    bool enableBackendSpecializationInfo,
     const ProgrammableStage& programmableStage,
     VkSpecializationInfo* specializationInfo,
     std::vector<OverrideScalar>* specializationDataEntries,
@@ -267,7 +268,7 @@ VkSpecializationInfo* GetVkSpecializationInfo(
     ASSERT(specializationDataEntries);
     ASSERT(specializationMapEntries);
 
-    if (programmableStage.constants.size() == 0) {
+    if (!enableBackendSpecializationInfo || programmableStage.constants.size() == 0) {
         return nullptr;
     }
 

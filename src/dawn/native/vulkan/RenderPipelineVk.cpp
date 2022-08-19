@@ -352,9 +352,12 @@ MaybeError RenderPipeline::Initialize() {
         const ProgrammableStage& programmableStage = GetStage(stage);
         ShaderModule* module = ToBackend(programmableStage.module.Get());
 
+        DAWN_TRY(RunTintProgramTransformForOverrides(GetStageRef(stage)));
+
         ShaderModule::ModuleAndSpirv moduleAndSpirv;
         DAWN_TRY_ASSIGN(moduleAndSpirv,
-                        module->GetHandleAndSpirv(programmableStage.entryPoint.c_str(), layout));
+                        module->GetHandleAndSpirv(programmableStage,
+                                                  programmableStage.entryPoint.c_str(), layout));
 
         shaderStage.module = moduleAndSpirv.module;
         shaderStage.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
@@ -379,10 +382,11 @@ MaybeError RenderPipeline::Initialize() {
             }
         }
 
-        shaderStage.pSpecializationInfo =
-            GetVkSpecializationInfo(programmableStage, &specializationInfoPerStages[stageCount],
-                                    &specializationDataEntriesPerStages[stageCount],
-                                    &specializationMapEntriesPerStages[stageCount]);
+        shaderStage.pSpecializationInfo = GetVkSpecializationInfo(
+            device->IsToggleEnabled(Toggle::UseBackendOverridesImplementation), programmableStage,
+            &specializationInfoPerStages[stageCount],
+            &specializationDataEntriesPerStages[stageCount],
+            &specializationMapEntriesPerStages[stageCount]);
 
         DAWN_ASSERT(stageCount < 2);
         shaderStages[stageCount] = shaderStage;
