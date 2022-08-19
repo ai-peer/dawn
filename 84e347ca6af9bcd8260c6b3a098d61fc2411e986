@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec4e8be8_8cfadd9d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-19T12:39:29Z",
+      "side": 1,
+      "message": "nit: paradigm",
+      "range": {
+        "startLine": 9,
+        "startChar": 27,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "84e347ca6af9bcd8260c6b3a098d61fc2411e986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eee9314_8afc919b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-19T12:39:29Z",
+      "side": 1,
+      "message": "nit: equivalent",
+      "range": {
+        "startLine": 13,
+        "startChar": 63,
+        "endLine": 13,
+        "endChar": 75
+      },
+      "revId": "84e347ca6af9bcd8260c6b3a098d61fc2411e986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37291c4e_e06130cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-19T12:39:29Z",
+      "side": 1,
+      "message": "nit: remove?",
+      "range": {
+        "startLine": 16,
+        "startChar": 2,
+        "endLine": 16,
+        "endChar": 9
+      },
+      "revId": "84e347ca6af9bcd8260c6b3a098d61fc2411e986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0c36a72_56d04f41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-19T12:39:29Z",
+      "side": 1,
+      "message": "This is great! My only comment is that we may want to keep `GroupAndBinding` instead of `Group` and `Binding` separately because we always need to define both.",
+      "revId": "84e347ca6af9bcd8260c6b3a098d61fc2411e986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
