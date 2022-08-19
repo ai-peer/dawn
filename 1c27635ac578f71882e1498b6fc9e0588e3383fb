@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aef28e6_725ecad3",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-19T19:27:51Z",
+      "side": 1,
+      "message": "IMO I think it would be OK to reuse Dawn\u0027s internal fence and always make it shared. Dawn will already take care signaling it; we just have to save the signal value in SynchronizeTextureAfterUse to device-\u003eGetPendingCommandSerial()",
+      "range": {
+        "startLine": 578,
+        "startChar": 4,
+        "endLine": 584,
+        "endChar": 5
+      },
+      "revId": "1c27635ac578f71882e1498b6fc9e0588e3383fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2130a6f3_0e04adab",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-19T19:27:51Z",
+      "side": 1,
+      "message": "don\u0027t think we would need this if we used Dawn\u0027s internal fence",
+      "range": {
+        "startLine": 69,
+        "startChar": 7,
+        "endLine": 72,
+        "endChar": 9
+      },
+      "revId": "1c27635ac578f71882e1498b6fc9e0588e3383fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce35cb1d_ab84eeff",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-19T19:27:51Z",
+      "side": 1,
+      "message": "maybe add a TODO; IIUC, this is where we would use the imported fence cache?",
+      "revId": "1c27635ac578f71882e1498b6fc9e0588e3383fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98c7fd90_9cf0f4ec",
+        "filename": "src/dawn/native/d3d12/FenceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-19T19:27:51Z",
+      "side": 1,
+      "message": "should return ResultOrError instead of using ErrorLog",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 10
+      },
+      "revId": "1c27635ac578f71882e1498b6fc9e0588e3383fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "859a0129_cdee66e1",
+        "filename": "src/dawn/native/d3d12/FenceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-19T19:27:51Z",
+      "side": 1,
+      "message": "should return ResultOrError instead of using ErrorLog\n\nbut also, it wouldn\u0027t be needed if we use Dawn\u0027s internal fence",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 6
+      },
+      "revId": "1c27635ac578f71882e1498b6fc9e0588e3383fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
