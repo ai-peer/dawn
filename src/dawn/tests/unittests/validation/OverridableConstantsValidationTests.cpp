@@ -212,3 +212,83 @@ TEST_F(ComputePipelineOverridableConstantsValidationTest, ConstantsIdentifierUni
         ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
     }
 }
+
+// TODO
+class ComputePipelineWorkgroupSizeOverridableConstantsValidationTest : public ValidationTest {
+  protected:
+    void SetUpShadersWithValidDefaultValueConstants() {
+        computeModule = utils::CreateShaderModule(device, R"(
+override x: u32 = 1u;
+override y: u32 = 1u;
+override z: u32 = 1u;
+
+@compute @workgroup_size(x, y, z) fn main() {
+    _ = 0u;
+})");
+    }
+
+    void SetUpShadersWithInvalidDefaultValueConstants() {
+        computeModule = utils::CreateShaderModule(device, R"(
+override x: u32 = 0u;
+override y: u32 = 0u;
+override z: u32 = 1024u;
+
+@compute @workgroup_size(x, y, z) fn main() {
+    _ = 0u;
+})");
+    }
+
+    void SetUpShadersWithUninitializedConstants() {
+        computeModule = utils::CreateShaderModule(device, R"(
+override x: u32;
+override y: u32;
+override z: u32;
+
+@compute @workgroup_size(x, y, z) fn main() {
+    _ = 0u;
+})");
+    }
+
+    void SetUpShadersWithPartialConstants() {
+        computeModule = utils::CreateShaderModule(device, R"(
+override x: u32;
+
+@compute @workgroup_size(x, 1, 1) fn main() {
+    _ = 0u;
+})");
+    }
+
+    void TestCreatePipeline() {
+        wgpu::ComputePipelineDescriptor csDesc;
+        csDesc.compute.module = computeModule;
+        csDesc.compute.entryPoint = "main";
+        wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&csDesc);
+    }
+
+    void TestCreatePipeline(const std::vector<wgpu::ConstantEntry>& constants) {
+        wgpu::ComputePipelineDescriptor csDesc;
+        csDesc.compute.module = computeModule;
+        csDesc.compute.entryPoint = "main";
+        csDesc.compute.constants = constants.data();
+        csDesc.compute.constantCount = constants.size();
+        wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&csDesc);
+    }
+
+    wgpu::ShaderModule computeModule;
+    wgpu::Buffer buffer;
+};
+
+// Test that identifiers are unique
+TEST_F(ComputePipelineWorkgroupSizeOverridableConstantsValidationTest, WithValidDefault) {
+    SetUpShadersWithValidDefaultValueConstants();
+    {
+        // Valid:
+        TestCreatePipeline();
+    }
+    // {
+    //     // Error:
+    //     std::vector<wgpu::ConstantEntry> constants{{nullptr, "x", 0}};
+    //     ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
+    //     // TestCreatePipeline(constants);
+    // }
+}

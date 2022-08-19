@@ -63,6 +63,9 @@ class SubstituteOverride final : public Castable<SubstituteOverride, Transform> 
         /// The value is always a double coming into the transform and will be
         /// converted to the correct type through and initializer.
         std::unordered_map<OverrideId, double> map;
+
+        ///
+        bool substituteOverridesNotInMap = false;
     };
 
     /// Constructor
