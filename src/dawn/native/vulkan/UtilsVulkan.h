@@ -148,6 +148,7 @@ std::string GetDeviceDebugPrefixFromDebugName(const char* debugName);
 // specializationInfo, specializationDataEntries, specializationMapEntries needs to
 // be alive at least until VkSpecializationInfo is passed into Vulkan Create*Pipelines
 VkSpecializationInfo* GetVkSpecializationInfo(
+    bool enableBackendSpecializationInfo,
     const ProgrammableStage& programmableStage,
     VkSpecializationInfo* specializationInfo,
     std::vector<OverrideScalar>* specializationDataEntries,

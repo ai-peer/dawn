@@ -25,6 +25,10 @@
 
 #import <Metal/Metal.h>
 
+namespace dawn::native {
+struct ProgrammableStage;
+}
+
 namespace dawn::native::metal {
 
 class Device;
@@ -48,6 +52,7 @@ class ShaderModule final : public ShaderModuleBase {
     // Use id (like void*) in function signature as workaround and do static cast inside
     MaybeError CreateFunction(const char* entryPointName,
                               SingleShaderStage stage,
+                              const ProgrammableStage& programmableStage,
                               const PipelineLayout* layout,
                               MetalFunctionData* out,
                               id constantValues = nil,

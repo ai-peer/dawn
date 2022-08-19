@@ -645,6 +645,13 @@ void RenderPipelineBase::DestroyImpl() {
     mAttachmentState = nullptr;
 }
 
+MaybeError RenderPipelineBase::InitializeBackendAgnostic() {
+    for (auto stage : IterateStages(GetStageMask())) {
+        DAWN_TRY(RunTintProgramTransformForOverrides(stage, GetStageRef(stage)));
+    }
+    return {};
+}
+
 // static
 RenderPipelineBase* RenderPipelineBase::MakeError(DeviceBase* device) {
     class ErrorRenderPipeline final : public RenderPipelineBase {
