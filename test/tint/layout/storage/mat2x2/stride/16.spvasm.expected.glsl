@@ -9,7 +9,7 @@ struct SSBO {
 };
 
 layout(binding = 0, std430) buffer SSBO_1 {
-  strided_arr m[2];
+  SSBO _;
 } ssbo;
 mat2 arr_to_mat2x2_stride_16(strided_arr arr[2]) {
   return mat2(arr[0u].el, arr[1u].el);
@@ -23,9 +23,9 @@ strided_arr[2] mat2x2_stride_16_to_arr(mat2 m) {
 }
 
 void f_1() {
-  mat2 x_15 = arr_to_mat2x2_stride_16(ssbo.m);
+  mat2 x_15 = arr_to_mat2x2_stride_16(ssbo._.m);
   strided_arr tint_symbol[2] = mat2x2_stride_16_to_arr(x_15);
-  ssbo.m = tint_symbol;
+  ssbo._.m = tint_symbol;
   return;
 }
 

@@ -2,7 +2,7 @@ SKIP: FAILED
 
 #version 310 es
 
-vec4 tint_symbol_1 = vec4(0.0f, 0.0f, 0.0f, 0.0f);
+vec4 tint_symbol_1 = vec4(0.0f);
 uniform highp sampler2DMS arg_0_1;
 void textureNumSamples_a3c8a0() {
   int res = 0;
@@ -18,7 +18,7 @@ void tint_symbol_2(vec4 tint_symbol) {
 
 void vertex_main_1() {
   textureNumSamples_a3c8a0();
-  tint_symbol_2(vec4(0.0f, 0.0f, 0.0f, 0.0f));
+  tint_symbol_2(vec4(0.0f));
   return;
 }
 
@@ -41,9 +41,9 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
-ERROR: 0:7: 'textureSamples' : no matching overloaded function found 
+ERROR: 0:7: 'textureSamples' : no matching overloaded function found
 ERROR: 0:7: '=' :  cannot convert from ' const float' to ' temp highp int'
-ERROR: 0:7: '' : compilation terminated 
+ERROR: 0:7: '' : compilation terminated
 ERROR: 3 compilation errors.  No code generated.
 
 
@@ -77,9 +77,9 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
-ERROR: 0:7: 'textureSamples' : no matching overloaded function found 
+ERROR: 0:7: 'textureSamples' : no matching overloaded function found
 ERROR: 0:7: '=' :  cannot convert from ' const float' to ' temp mediump int'
-ERROR: 0:7: '' : compilation terminated 
+ERROR: 0:7: '' : compilation terminated
 ERROR: 3 compilation errors.  No code generated.
 
 
@@ -113,9 +113,9 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
-ERROR: 0:6: 'textureSamples' : no matching overloaded function found 
+ERROR: 0:6: 'textureSamples' : no matching overloaded function found
 ERROR: 0:6: '=' :  cannot convert from ' const float' to ' temp highp int'
-ERROR: 0:6: '' : compilation terminated 
+ERROR: 0:6: '' : compilation terminated
 ERROR: 3 compilation errors.  No code generated.
 
 

@@ -59,9 +59,7 @@ struct Nephews {
 };
 
 layout(binding = 0, std430) buffer Nephews_1 {
-  float huey;
-  float dewey;
-  float louie;
+  Nephews _;
 } nephews;
 )");
 }
@@ -81,9 +79,7 @@ struct Nephews {
 };
 
 layout(binding = 0, std430) buffer Nephews_1 {
-  float huey;
-  layout(offset=256) float dewey;
-  layout(offset=512) float louie;
+  Nephews _;
 } nephews;
 )");
 }

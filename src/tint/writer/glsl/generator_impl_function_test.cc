@@ -386,11 +386,11 @@ struct UBO {
 };
 
 layout(binding = 0) uniform UBO_1 {
-  vec4 coord;
+  UBO _;
 } ubo;
 
 float sub_func(float param) {
-  return ubo.coord.x;
+  return ubo._.coord.x;
 }
 
 void frag_main() {
@@ -432,11 +432,11 @@ struct Uniforms {
 };
 
 layout(binding = 0) uniform Uniforms_1 {
-  vec4 coord;
+  Uniforms _;
 } uniforms;
 
 void frag_main() {
-  float v = uniforms.coord.x;
+  float v = uniforms._.coord.x;
   return;
 }
 )");
@@ -477,11 +477,10 @@ struct Data {
 };
 
 layout(binding = 0, std430) buffer Data_1 {
-  int a;
-  float b;
+  Data _;
 } coord;
 void frag_main() {
-  float v = coord.b;
+  float v = coord._.b;
   return;
 }
 
@@ -528,11 +527,10 @@ struct Data {
 };
 
 layout(binding = 0, std430) buffer Data_1 {
-  int a;
-  float b;
+  Data _;
 } coord;
 void frag_main() {
-  float v = coord.b;
+  float v = coord._.b;
   return;
 }
 
@@ -576,11 +574,10 @@ struct Data {
 };
 
 layout(binding = 0, std430) buffer Data_1 {
-  int a;
-  float b;
+  Data _;
 } coord;
 void frag_main() {
-  coord.b = 2.0f;
+  coord._.b = 2.0f;
   return;
 }
 
@@ -624,11 +621,10 @@ struct Data {
 };
 
 layout(binding = 0, std430) buffer Data_1 {
-  int a;
-  float b;
+  Data _;
 } coord;
 void frag_main() {
-  coord.b = 2.0f;
+  coord._.b = 2.0f;
   return;
 }
 
@@ -674,11 +670,11 @@ struct S {
 };
 
 layout(binding = 0) uniform S_1 {
-  float x;
+  S _;
 } coord;
 
 float sub_func(float param) {
-  return coord.x;
+  return coord._.x;
 }
 
 void frag_main() {
@@ -724,10 +720,10 @@ struct S {
 };
 
 layout(binding = 0, std430) buffer S_1 {
-  float x;
+  S _;
 } coord;
 float sub_func(float param) {
-  return coord.x;
+  return coord._.x;
 }
 
 void frag_main() {
@@ -963,10 +959,10 @@ struct Data {
 };
 
 layout(binding = 0, std430) buffer Data_1 {
-  float d;
+  Data _;
 } data;
 void a() {
-  float v = data.d;
+  float v = data._.d;
   return;
 }
 
@@ -976,7 +972,7 @@ void main() {
   return;
 }
 void b() {
-  float v = data.d;
+  float v = data._.d;
   return;
 }
 

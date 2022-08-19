@@ -6,10 +6,10 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_1 {
-  uint arg_0;
+  SB_RW _;
 } sb_rw;
 void atomicLoad_fe6cc3() {
-  uint res = atomicOr(sb_rw.arg_0, 0u);
+  uint res = atomicOr(sb_rw._.arg_0, 0u);
 }
 
 void fragment_main() {
@@ -27,10 +27,10 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_1 {
-  uint arg_0;
+  SB_RW _;
 } sb_rw;
 void atomicLoad_fe6cc3() {
-  uint res = atomicOr(sb_rw.arg_0, 0u);
+  uint res = atomicOr(sb_rw._.arg_0, 0u);
 }
 
 void compute_main() {

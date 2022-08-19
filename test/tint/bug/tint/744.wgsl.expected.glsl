@@ -16,15 +16,13 @@ layout(binding = 2, std430) buffer Matrix_3 {
   uint numbers[];
 } resultMatrix;
 layout(binding = 3) uniform Uniforms_1 {
-  uvec2 aShape;
-  uvec2 bShape;
-  uvec2 outShape;
+  Uniforms _;
 } uniforms;
 
 void tint_symbol(uvec3 global_id) {
   uvec2 resultCell = uvec2(global_id.y, global_id.x);
-  uint dimInner = uniforms.aShape.y;
-  uint dimOutter = uniforms.outShape.y;
+  uint dimInner = uniforms._.aShape.y;
+  uint dimOutter = uniforms._.outShape.y;
   uint result = 0u;
   {
     for(uint i = 0u; (i < dimInner); i = (i + 1u)) {

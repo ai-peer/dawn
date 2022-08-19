@@ -49,15 +49,7 @@ float u_Float = 0.0f;
 vec3 u_Color = vec3(0.0f, 0.0f, 0.0f);
 vec2 vMainuv = vec2(0.0f, 0.0f);
 layout(binding = 6) uniform LeftOver_1 {
-  mat4 u_World;
-  mat4 u_ViewProjection;
-  float u_bumpStrength;
-  uint padding;
-  vec3 u_cameraPosition;
-  float u_parallaxScale;
-  float textureInfoName;
-  uint padding_1;
-  vec2 tangentSpaceParameter0;
+  LeftOver _;
 } x_269;
 
 vec4 v_output1 = vec4(0.0f, 0.0f, 0.0f, 0.0f);
@@ -65,13 +57,7 @@ bool tint_symbol = false;
 vec2 v_uv = vec2(0.0f, 0.0f);
 vec4 v_output2 = vec4(0.0f, 0.0f, 0.0f, 0.0f);
 layout(binding = 5) uniform Light0_1 {
-  vec4 vLightData;
-  vec4 vLightDiffuse;
-  vec4 vLightSpecular;
-  vec3 vLightGround;
-  uint padding_2;
-  vec4 shadowsInfo;
-  vec2 depthValues;
+  Light0 _;
 } light0;
 
 vec4 glFragColor = vec4(0.0f, 0.0f, 0.0f, 0.0f);
@@ -254,14 +240,14 @@ void main_1() {
   vec4 x_262 = texture(TextureSamplerTexture_TextureSamplerSampler, vMainuv);
   tempTextureRead = x_262;
   vec4 x_264 = tempTextureRead;
-  float x_273 = x_269.textureInfoName;
+  float x_273 = x_269._.textureInfoName;
   rgb = (vec3(x_264.x, x_264.y, x_264.z) * x_273);
-  vec3 x_279 = x_269.u_cameraPosition;
+  vec3 x_279 = x_269._.u_cameraPosition;
   vec4 x_282 = v_output1;
   output5 = normalize((x_279 - vec3(x_282.x, x_282.y, x_282.z)));
   output4 = vec4(0.0f);
   uvOffset = vec2(0.0f);
-  float x_292 = x_269.u_bumpStrength;
+  float x_292 = x_269._.u_bumpStrength;
   normalScale = (1.0f / x_292);
   if (tint_symbol) {
     x_299 = v_uv;
@@ -274,7 +260,7 @@ void main_1() {
   vec4 x_317 = v_output1;
   param_4 = vec3(x_317.x, x_317.y, x_317.z);
   param_5 = TBNUV;
-  vec2 x_324 = x_269.tangentSpaceParameter0;
+  vec2 x_324 = x_269._.tangentSpaceParameter0;
   param_6 = x_324;
   mat3 x_325 = cotangent_frame_vf3_vf3_vf2_vf2_(param_3, param_4, param_5, param_6);
   TBN = x_325;
@@ -283,7 +269,7 @@ void main_1() {
   invTBN = x_329;
   vec3 x_334 = (invTBN * -(output5));
   parallaxLimit = (length(vec2(x_334.x, x_334.y)) / (invTBN * -(output5)).z);
-  float x_345 = x_269.u_parallaxScale;
+  float x_345 = x_269._.u_parallaxScale;
   parallaxLimit = (parallaxLimit * x_345);
   vec3 x_352 = (invTBN * -(output5));
   vOffsetDir = normalize(vec2(x_352.x, x_352.y));
@@ -318,7 +304,7 @@ void main_1() {
   parallaxOcclusion_0 = vCurrOffset;
   uvOffset = parallaxOcclusion_0;
   vec4 x_452 = texture(TextureSamplerTexture_TextureSamplerSampler, (v_uv + uvOffset));
-  float x_454 = x_269.u_bumpStrength;
+  float x_454 = x_269._.u_bumpStrength;
   param_8 = TBN;
   param_9 = vec3(x_452.x, x_452.y, x_452.z);
   param_10 = (1.0f / x_454);
@@ -329,7 +315,7 @@ void main_1() {
   tempTextureRead1 = x_475;
   vec4 x_477 = tempTextureRead1;
   rgb1 = vec3(x_477.x, x_477.y, x_477.z);
-  vec3 x_481 = x_269.u_cameraPosition;
+  vec3 x_481 = x_269._.u_cameraPosition;
   vec4 x_482 = v_output1;
   viewDirectionW_1 = normalize((x_481 - vec3(x_482.x, x_482.y, x_482.z)));
   shadow = 1.0f;
@@ -340,13 +326,13 @@ void main_1() {
   normalW = vec3(x_494.x, x_494.y, x_494.z);
   param_11 = viewDirectionW_1;
   param_12 = normalW;
-  vec4 x_507 = light0.vLightData;
+  vec4 x_507 = light0._.vLightData;
   param_13 = x_507;
-  vec4 x_510 = light0.vLightDiffuse;
+  vec4 x_510 = light0._.vLightDiffuse;
   param_14 = vec3(x_510.x, x_510.y, x_510.z);
-  vec4 x_514 = light0.vLightSpecular;
+  vec4 x_514 = light0._.vLightSpecular;
   param_15 = vec3(x_514.x, x_514.y, x_514.z);
-  vec3 x_518 = light0.vLightGround;
+  vec3 x_518 = light0._.vLightGround;
   param_16 = x_518;
   param_17 = glossiness_1;
   lightingInfo x_521 = computeHemisphericLighting_vf3_vf3_vf4_vf3_vf3_vf3_f1_(param_11, param_12, param_13, param_14, param_15, param_16, param_17);

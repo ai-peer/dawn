@@ -5,7 +5,7 @@ precision mediump float;
 
 layout(rg32f) uniform highp writeonly image1D x_20;
 void main_1() {
-  imageStore(x_20, int(1u), vec4(0.0f, 0.0f, 0.0f, 0.0f));
+  imageStore(x_20, 1, vec4(0.0f));
   return;
 }
 
@@ -19,7 +19,7 @@ void main() {
 }
 Error parsing GLSL shader:
 ERROR: 0:4: 'image load-store format' : not supported with this profile: es
-ERROR: 0:4: '' : compilation terminated 
+ERROR: 0:4: '' : compilation terminated
 ERROR: 2 compilation errors.  No code generated.
 
 

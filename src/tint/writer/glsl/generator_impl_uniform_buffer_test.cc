@@ -36,7 +36,7 @@ struct Simple {
 };
 
 layout(binding = 0) uniform Simple_1 {
-  float member;
+  Simple _;
 } simple;
 
 )");
@@ -56,7 +56,7 @@ struct Simple {
 };
 
 layout(binding = 0, std140) uniform Simple_1 {
-  float member;
+  Simple _;
 } simple;
 
 )");

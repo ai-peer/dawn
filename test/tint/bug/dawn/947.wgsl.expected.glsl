@@ -19,8 +19,7 @@ struct Uniforms {
 };
 
 layout(binding = 0) uniform Uniforms_1 {
-  vec2 u_scale;
-  vec2 u_offset;
+  Uniforms _;
 } uniforms;
 
 struct VertexOutputs {
@@ -32,11 +31,11 @@ VertexOutputs vs_main(uint VertexIndex) {
   vec2 texcoord[3] = vec2[3](vec2(-0.5f, 0.0f), vec2(1.5f, 0.0f), vec2(0.5f, 2.0f));
   VertexOutputs tint_symbol = VertexOutputs(vec2(0.0f, 0.0f), vec4(0.0f, 0.0f, 0.0f, 0.0f));
   tint_symbol.position = vec4(((texcoord[VertexIndex] * 2.0f) - vec2(1.0f)), 0.0f, 1.0f);
-  bool flipY = (uniforms.u_scale.y < 0.0f);
+  bool flipY = (uniforms._.u_scale.y < 0.0f);
   if (flipY) {
-    tint_symbol.texcoords = ((((texcoord[VertexIndex] * uniforms.u_scale) + uniforms.u_offset) * vec2(1.0f, -1.0f)) + vec2(0.0f, 1.0f));
+    tint_symbol.texcoords = ((((texcoord[VertexIndex] * uniforms._.u_scale) + uniforms._.u_offset) * vec2(1.0f, -1.0f)) + vec2(0.0f, 1.0f));
   } else {
-    tint_symbol.texcoords = ((((texcoord[VertexIndex] * vec2(1.0f, -1.0f)) + vec2(0.0f, 1.0f)) * uniforms.u_scale) + uniforms.u_offset);
+    tint_symbol.texcoords = ((((texcoord[VertexIndex] * vec2(1.0f, -1.0f)) + vec2(0.0f, 1.0f)) * uniforms._.u_scale) + uniforms._.u_offset);
   }
   return tint_symbol;
 }

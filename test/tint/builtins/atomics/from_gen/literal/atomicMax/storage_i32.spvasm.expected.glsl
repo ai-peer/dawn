@@ -10,11 +10,11 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_atomic_1 {
-  int arg_0;
+  SB_RW_atomic _;
 } sb_rw;
 void atomicMax_92aa72() {
   int res = 0;
-  int x_9 = atomicMax(sb_rw.arg_0, 1);
+  int x_9 = atomicMax(sb_rw._.arg_0, 1);
   res = x_9;
   return;
 }
@@ -43,11 +43,11 @@ struct SB_RW {
 };
 
 layout(binding = 0, std430) buffer SB_RW_atomic_1 {
-  int arg_0;
+  SB_RW_atomic _;
 } sb_rw;
 void atomicMax_92aa72() {
   int res = 0;
-  int x_9 = atomicMax(sb_rw.arg_0, 1);
+  int x_9 = atomicMax(sb_rw._.arg_0, 1);
   res = x_9;
   return;
 }

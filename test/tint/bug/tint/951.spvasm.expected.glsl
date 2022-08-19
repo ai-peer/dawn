@@ -16,11 +16,7 @@ layout(binding = 1, std430) buffer ssbA_1 {
 } x_20;
 uvec3 tint_symbol = uvec3(0u, 0u, 0u);
 layout(binding = 2) uniform Uniforms_1 {
-  float NAN;
-  int aShape;
-  int outShape;
-  int outShapeStrides;
-  int size;
+  Uniforms _;
 } x_24;
 
 float getAAtOutCoords_() {
@@ -54,7 +50,7 @@ void main_1() {
   uint x_61 = tint_symbol.x;
   index = int(x_61);
   int x_63 = index;
-  int x_70 = x_24.size;
+  int x_70 = x_24._.size;
   if ((x_63 < x_70)) {
     float x_75 = getAAtOutCoords_();
     a_1 = x_75;

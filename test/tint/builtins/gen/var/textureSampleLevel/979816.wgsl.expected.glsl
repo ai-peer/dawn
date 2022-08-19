@@ -1,5 +1,3 @@
-SKIP: FAILED
-
 #version 310 es
 
 struct GammaTransferParams {
@@ -15,6 +13,7 @@ struct GammaTransferParams {
 
 struct ExternalTextureParams {
   uint numPlanes;
+  uint doYuvToRgbConversionOnly;
   mat3x4 yuvToRgbConversionMatrix;
   GammaTransferParams gammaDecodeParams;
   GammaTransferParams gammaEncodeParams;
@@ -22,11 +21,7 @@ struct ExternalTextureParams {
 };
 
 layout(binding = 3) uniform ExternalTextureParams_1 {
-  uint numPlanes;
-  mat3x4 yuvToRgbConversionMatrix;
-  GammaTransferParams gammaDecodeParams;
-  GammaTransferParams gammaEncodeParams;
-  mat3 gamutConversionMatrix;
+  ExternalTextureParams _;
 } ext_tex_params;
 
 vec3 gammaCorrection(vec3 v, GammaTransferParams params) {
@@ -44,9 +39,11 @@ vec4 textureSampleExternal(highp sampler2D plane0_smp, highp sampler2D plane1_sm
   } else {
     color = (vec4(textureLod(plane0_smp, coord, 0.0f).r, textureLod(plane1_smp, coord, 0.0f).rg, 1.0f) * params.yuvToRgbConversionMatrix);
   }
-  color = gammaCorrection(color, params.gammaDecodeParams);
-  color = (params.gamutConversionMatrix * color);
-  color = gammaCorrection(color, params.gammaEncodeParams);
+  if ((params.doYuvToRgbConversionOnly == 0u)) {
+    color = gammaCorrection(color, params.gammaDecodeParams);
+    color = (params.gamutConversionMatrix * color);
+    color = gammaCorrection(color, params.gammaEncodeParams);
+  }
   return vec4(color, 1.0f);
 }
 
@@ -54,7 +51,7 @@ uniform highp sampler2D arg_0_arg_1;
 uniform highp sampler2D ext_tex_plane_1_arg_1;
 void textureSampleLevel_979816() {
   vec2 arg_2 = vec2(0.0f);
-  vec4 res = textureSampleExternal(arg_0_arg_1, ext_tex_plane_1_arg_1, arg_2, ext_tex_params);
+  vec4 res = textureSampleExternal(arg_0_arg_1, ext_tex_plane_1_arg_1, arg_2, ext_tex_params._);
 }
 
 vec4 vertex_main() {
@@ -70,14 +67,6 @@ void main() {
   gl_Position.z = ((2.0f * gl_Position.z) - gl_Position.w);
   return;
 }
-Error parsing GLSL shader:
-ERROR: 0:55: 'textureSampleExternal' : no matching overloaded function found 
-ERROR: 0:55: '=' :  cannot convert from ' const float' to ' temp highp 4-component vector of float'
-ERROR: 0:55: '' : compilation terminated 
-ERROR: 3 compilation errors.  No code generated.
-
-
-
 #version 310 es
 precision mediump float;
 
@@ -94,6 +83,7 @@ struct GammaTransferParams {
 
 struct ExternalTextureParams {
   uint numPlanes;
+  uint doYuvToRgbConversionOnly;
   mat3x4 yuvToRgbConversionMatrix;
   GammaTransferParams gammaDecodeParams;
   GammaTransferParams gammaEncodeParams;
@@ -101,11 +91,7 @@ struct ExternalTextureParams {
 };
 
 layout(binding = 3) uniform ExternalTextureParams_1 {
-  uint numPlanes;
-  mat3x4 yuvToRgbConversionMatrix;
-  GammaTransferParams gammaDecodeParams;
-  GammaTransferParams gammaEncodeParams;
-  mat3 gamutConversionMatrix;
+  ExternalTextureParams _;
 } ext_tex_params;
 
 vec3 gammaCorrection(vec3 v, GammaTransferParams params) {
@@ -123,9 +109,11 @@ vec4 textureSampleExternal(highp sampler2D plane0_smp, highp sampler2D plane1_sm
   } else {
     color = (vec4(textureLod(plane0_smp, coord, 0.0f).r, textureLod(plane1_smp, coord, 0.0f).rg, 1.0f) * params.yuvToRgbConversionMatrix);
   }
-  color = gammaCorrection(color, params.gammaDecodeParams);
-  color = (params.gamutConversionMatrix * color);
-  color = gammaCorrection(color, params.gammaEncodeParams);
+  if ((params.doYuvToRgbConversionOnly == 0u)) {
+    color = gammaCorrection(color, params.gammaDecodeParams);
+    color = (params.gamutConversionMatrix * color);
+    color = gammaCorrection(color, params.gammaEncodeParams);
+  }
   return vec4(color, 1.0f);
 }
 
@@ -133,7 +121,7 @@ uniform highp sampler2D arg_0_arg_1;
 uniform highp sampler2D ext_tex_plane_1_arg_1;
 void textureSampleLevel_979816() {
   vec2 arg_2 = vec2(0.0f);
-  vec4 res = textureSampleExternal(arg_0_arg_1, ext_tex_plane_1_arg_1, arg_2, ext_tex_params);
+  vec4 res = textureSampleExternal(arg_0_arg_1, ext_tex_plane_1_arg_1, arg_2, ext_tex_params._);
 }
 
 void fragment_main() {
@@ -144,14 +132,6 @@ void main() {
   fragment_main();
   return;
 }
-Error parsing GLSL shader:
-ERROR: 0:56: 'textureSampleExternal' : no matching overloaded function found 
-ERROR: 0:56: '=' :  cannot convert from ' const float' to ' temp mediump 4-component vector of float'
-ERROR: 0:56: '' : compilation terminated 
-ERROR: 3 compilation errors.  No code generated.
-
-
-
 #version 310 es
 
 struct GammaTransferParams {
@@ -167,6 +147,7 @@ struct GammaTransferParams {
 
 struct ExternalTextureParams {
   uint numPlanes;
+  uint doYuvToRgbConversionOnly;
   mat3x4 yuvToRgbConversionMatrix;
   GammaTransferParams gammaDecodeParams;
   GammaTransferParams gammaEncodeParams;
@@ -174,11 +155,7 @@ struct ExternalTextureParams {
 };
 
 layout(binding = 3) uniform ExternalTextureParams_1 {
-  uint numPlanes;
-  mat3x4 yuvToRgbConversionMatrix;
-  GammaTransferParams gammaDecodeParams;
-  GammaTransferParams gammaEncodeParams;
-  mat3 gamutConversionMatrix;
+  ExternalTextureParams _;
 } ext_tex_params;
 
 vec3 gammaCorrection(vec3 v, GammaTransferParams params) {
@@ -196,9 +173,11 @@ vec4 textureSampleExternal(highp sampler2D plane0_smp, highp sampler2D plane1_sm
   } else {
     color = (vec4(textureLod(plane0_smp, coord, 0.0f).r, textureLod(plane1_smp, coord, 0.0f).rg, 1.0f) * params.yuvToRgbConversionMatrix);
   }
-  color = gammaCorrection(color, params.gammaDecodeParams);
-  color = (params.gamutConversionMatrix * color);
-  color = gammaCorrection(color, params.gammaEncodeParams);
+  if ((params.doYuvToRgbConversionOnly == 0u)) {
+    color = gammaCorrection(color, params.gammaDecodeParams);
+    color = (params.gamutConversionMatrix * color);
+    color = gammaCorrection(color, params.gammaEncodeParams);
+  }
   return vec4(color, 1.0f);
 }
 
@@ -206,7 +185,7 @@ uniform highp sampler2D arg_0_arg_1;
 uniform highp sampler2D ext_tex_plane_1_arg_1;
 void textureSampleLevel_979816() {
   vec2 arg_2 = vec2(0.0f);
-  vec4 res = textureSampleExternal(arg_0_arg_1, ext_tex_plane_1_arg_1, arg_2, ext_tex_params);
+  vec4 res = textureSampleExternal(arg_0_arg_1, ext_tex_plane_1_arg_1, arg_2, ext_tex_params._);
 }
 
 void compute_main() {
@@ -218,11 +197,3 @@ void main() {
   compute_main();
   return;
 }
-Error parsing GLSL shader:
-ERROR: 0:55: 'textureSampleExternal' : no matching overloaded function found 
-ERROR: 0:55: '=' :  cannot convert from ' const float' to ' temp highp 4-component vector of float'
-ERROR: 0:55: '' : compilation terminated 
-ERROR: 3 compilation errors.  No code generated.
-
-
-

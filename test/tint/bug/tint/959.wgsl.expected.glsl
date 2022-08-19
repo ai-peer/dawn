@@ -6,59 +6,59 @@ struct S {
 };
 
 layout(binding = 0, std430) buffer S_1 {
-  float a;
+  S _;
 } b0;
 layout(binding = 0, std430) buffer S_2 {
-  float a;
+  S _;
 } b1;
 layout(binding = 0, std430) buffer S_3 {
-  float a;
+  S _;
 } b2;
 layout(binding = 0, std430) buffer S_4 {
-  float a;
+  S _;
 } b3;
 layout(binding = 0, std430) buffer S_5 {
-  float a;
+  S _;
 } b4;
 layout(binding = 0, std430) buffer S_6 {
-  float a;
+  S _;
 } b5;
 layout(binding = 0, std430) buffer S_7 {
-  float a;
+  S _;
 } b6;
 layout(binding = 0, std430) buffer S_8 {
-  float a;
+  S _;
 } b7;
 layout(binding = 1) uniform S_9 {
-  float a;
+  S _;
 } b8;
 
 layout(binding = 1) uniform S_10 {
-  float a;
+  S _;
 } b9;
 
 layout(binding = 1) uniform S_11 {
-  float a;
+  S _;
 } b10;
 
 layout(binding = 1) uniform S_12 {
-  float a;
+  S _;
 } b11;
 
 layout(binding = 1) uniform S_13 {
-  float a;
+  S _;
 } b12;
 
 layout(binding = 1) uniform S_14 {
-  float a;
+  S _;
 } b13;
 
 layout(binding = 1) uniform S_15 {
-  float a;
+  S _;
 } b14;
 
 layout(binding = 1) uniform S_16 {
-  float a;
+  S _;
 } b15;
 
 void tint_symbol() {

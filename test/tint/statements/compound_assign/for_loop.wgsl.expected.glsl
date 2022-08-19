@@ -11,9 +11,7 @@ struct S {
 };
 
 layout(binding = 0, std430) buffer S_1 {
-  int a;
-  vec4 b;
-  mat2 c;
+  S _;
 } v;
 uint i = 0u;
 int idx1() {
