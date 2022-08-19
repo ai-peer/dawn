@@ -16,6 +16,8 @@
 
 #include <string>
 
+#include "dawn/native/Limits.h"
+
 namespace dawn::native::stream {
 
 template <>
@@ -56,6 +58,31 @@ void Stream<std::wstring_view>::Write(Sink* s, const std::wstring_view& t) {
         void* ptr = s->GetSpace(size);
         memcpy(ptr, t.data(), size);
     }
+}
+
+#define DAWN_INTERNAL_LIMITS_MEMBER_ASSIGNMENT(type, name) \
+    { result.name = limits.name; }
+#define DAWN_INTERNAL_LIMITS_FOREACH_MEMBER_ASSIGNMENT(MEMBERS) \
+    MEMBERS(DAWN_INTERNAL_LIMITS_MEMBER_ASSIGNMENT)
+
+LimitsForCompilationRequest LimitsForCompilationRequest::Create(const Limits& limits) {
+    LimitsForCompilationRequest result;
+    DAWN_INTERNAL_LIMITS_FOREACH_MEMBER_ASSIGNMENT(LIMITS_FOR_COMPILATION_REQUEST_MEMBERS)
+    return result;
+}
+
+#undef DAWN_INTERNAL_LIMITS_FOREACH_MEMBER_ASSIGNMENT
+#undef DAWN_INTERNAL_LIMITS_MEMBER_ASSIGNMENT
+
+template <>
+void Stream<LimitsForCompilationRequest>::Write(Sink* s, const LimitsForCompilationRequest& t) {
+#define DAWN_INTERNAL_STREAM_IN_HELPER(type, name) , t.name
+#define DAWN_INTERNAL_STREAM_IN_FOREACH(MEMBERS) MEMBERS(DAWN_INTERNAL_STREAM_IN_HELPER)
+
+    StreamIn(s DAWN_INTERNAL_STREAM_IN_FOREACH(LIMITS_FOR_COMPILATION_REQUEST_MEMBERS));
+
+#undef DAWN_INTERNAL_STREAM_IN_FOREACH
+#undef DAWN_INTERNAL_STREAM_IN_HELPER
 }
 
 }  // namespace dawn::native::stream
