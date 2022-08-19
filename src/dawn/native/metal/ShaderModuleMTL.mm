@@ -274,6 +274,7 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(DeviceBase* device,
 
 MaybeError ShaderModule::CreateFunction(const char* entryPointName,
                                         SingleShaderStage stage,
+                                        const ProgrammableStage programmableStage,
                                         const PipelineLayout* layout,
                                         ShaderModule::MetalFunctionData* out,
                                         id constantValuesPointer,
@@ -290,8 +291,9 @@ MaybeError ShaderModule::CreateFunction(const char* entryPointName,
     }
 
     CacheResult<MslCompilation> mslCompilation;
-    DAWN_TRY_ASSIGN(mslCompilation, TranslateToMSL(GetDevice(), GetTintProgram(), entryPointName,
-                                                   stage, layout, sampleMask, renderPipeline));
+    DAWN_TRY_ASSIGN(mslCompilation,
+                    TranslateToMSL(GetDevice(), programmableStage.GetTintProgram(), entryPointName,
+                                   stage, layout, sampleMask, renderPipeline));
     out->needsStorageBufferLength = mslCompilation->needsStorageBufferLength;
     out->workgroupAllocations = std::move(mslCompilation->workgroupAllocations);
 
