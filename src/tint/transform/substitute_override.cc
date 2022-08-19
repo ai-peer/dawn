@@ -56,10 +56,20 @@ void SubstituteOverride::Run(CloneContext& ctx, const DataMap& config, DataMap&)
         auto iter = data->map.find(sem->OverrideId());
         if (iter == data->map.end()) {
             if (!w->constructor) {
-                ctx.dst->Diagnostics().add_error(
-                    diag::System::Transform,
-                    "Initializer not provided for override, and override not overridden.");
-                return nullptr;
+                if (!data->substituteOverridesNotInMap) {
+                    ctx.dst->Diagnostics().add_error(
+                        diag::System::Transform,
+                        "Initializer not provided for override, and override not overridden.");
+                    return nullptr;
+                }
+                return ctx.dst->Const(
+                    src, sym, ty,
+                    Switch(
+                        sem->Type(), [&](const sem::Bool*) { return ctx.dst->Expr(false); },
+                        [&](const sem::I32*) { return ctx.dst->Expr(i32(0)); },
+                        [&](const sem::U32*) { return ctx.dst->Expr(u32(0)); },
+                        [&](const sem::F32*) { return ctx.dst->Expr(f32(0)); },
+                        [&](const sem::F16*) { return ctx.dst->Expr(f16(0)); }));
             }
             return ctx.dst->Const(src, sym, ty, ctx.Clone(w->constructor));
         }
