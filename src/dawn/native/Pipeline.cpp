@@ -15,6 +15,7 @@
 #include "dawn/native/Pipeline.h"
 
 #include <algorithm>
+#include <memory>
 #include <unordered_set>
 #include <utility>
 
@@ -24,6 +25,8 @@
 #include "dawn/native/ObjectContentHasher.h"
 #include "dawn/native/PipelineLayout.h"
 #include "dawn/native/ShaderModule.h"
+
+#include "tint/tint.h"
 
 namespace dawn::native {
 MaybeError ValidateProgrammableStage(DeviceBase* device,
@@ -113,6 +116,34 @@ MaybeError ValidateProgrammableStage(DeviceBase* device,
     return {};
 }
 
+// // TransformedProgram
+
+// TransformedProgram TransformedProgram::CreateProgramWithoutOwnership(tint::Program* program)
+// {
+//     return TransformedProgram(program, {});
+// }
+
+// // Unsafe, program needs to be allocated by new
+// TransformedProgram TransformedProgram::CreateNewTransformedProgramWithDeleter(tint::Program*
+// program)
+// {
+//     return TransformedProgram(program, [=]() {
+//         delete program;
+//     });
+// }
+
+// TransformedProgram::TransformedProgram(tint::Program* program, std::function<void()> deleter)
+//     : mProgram(program), mDeleter(std::move(deleter))
+// {
+// }
+
+// TransformedProgram::~TransformedProgram()
+// {
+//     if (mDeleter) {
+//         mDeleter();
+//     }
+// }
+
 // PipelineBase
 
 PipelineBase::PipelineBase(DeviceBase* device,
@@ -186,6 +217,11 @@ const ProgrammableStage& PipelineBase::GetStage(SingleShaderStage stage) const {
     return mStages[stage];
 }
 
+ProgrammableStage* PipelineBase::GetStageRef(SingleShaderStage stage) {
+    ASSERT(!IsError());
+    return &(mStages[stage]);
+}
+
 const PerStage<ProgrammableStage>& PipelineBase::GetAllStages() const {
     return mStages;
 }
@@ -254,6 +290,69 @@ bool PipelineBase::EqualForCache(const PipelineBase* a, const PipelineBase* b) {
     }
 
     return true;
+}
+
+MaybeError PipelineBase::RunTintProgramTransformForOverrides(ProgrammableStage* stage) {
+    // MaybeError PipelineBase::RunTintProgramTransformForOverrides(const ProgrammableStage& stage)
+    // { ResultOrError<TransformedProgram> PipelineBase::RunTintProgramTransformForOverrides(const
+    // ProgrammableStage& stage) {
+    const EntryPointMetadata& metadata = *stage->metadata;
+    const auto& constants = stage->constants;
+
+    if (!metadata.overrides.empty()) {
+        // Special handling for overrides used as workgroup size
+        tint::transform::SubstituteOverride substituteOverride;
+        tint::transform::SubstituteOverride::Config cfg;
+        cfg.substituteOverridesNotInMap = true;
+
+        // temp
+        std::unordered_set<std::string> uninitializedOverrides = metadata.uninitializedOverrides;
+
+        // for (auto key : metadata.workgroupSizeOverrides) {
+        for (const auto& [key, value] : constants) {
+            const auto& o = metadata.overrides.at(key);
+            cfg.map.insert({tint::OverrideId{static_cast<uint16_t>(o.id)}, value});
+            uninitializedOverrides.erase(key);
+        }
+
+        // // still need to substitute other unused overrides
+        // // - not in constants, but have default value in shader (the SubstituteOverrides
+        // transform could handle)
+        // // - not in constants, but not used in cur entry point (uninitializedOverrides)
+        // // for (const std::string& key : metadata.uninitializedOverrides) {
+        // for (const std::string& key : uninitializedOverrides) {
+        //     const auto& o = metadata.overrides.at(key);
+        //     cfg.map.insert({tint::OverrideId{static_cast<uint16_t>(o.id)}, 0});
+        // }
+
+        // also replace overrides not used by this entry point with foo value.
+        // Its not related to entrypoint metadata but for shader globally.
+
+        tint::transform::DataMap data;
+        data.Add<tint::transform::SubstituteOverride::Config>(cfg);
+
+        tint::Program program;
+        DAWN_TRY_ASSIGN(program, RunTransforms(&substituteOverride, stage->module->GetTintProgram(),
+                                               data, nullptr, nullptr));
+
+        stage->transformedProgram = std::make_unique<tint::Program>(std::move(program));
+        // stage.module->SetTintProgram(std::move(program));
+
+        // stage.module->SetTintProgram(std::make_unique<tint::Program>(std::move(program)));
+
+        // return program;
+    }
+    return {};
+    // return stage.module->GetTintProgram();
+    // return TransformedProgram::CreateProgramWithoutOwnership(stage.module->GetTintProgram(),
+    // nullptr);
+}
+
+const tint::Program* ProgrammableStage::GetTintProgram() const {
+    if (transformedProgram != nullptr) {
+        return transformedProgram.get();
+    }
+    return module->GetTintProgram();
 }
 
 }  // namespace dawn::native

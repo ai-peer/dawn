@@ -337,11 +337,15 @@ MaybeError RenderPipeline::Initialize() {
     }
     descriptorMTL.vertexDescriptor = vertexDesc.Get();
 
-    const PerStage<ProgrammableStage>& allStages = GetAllStages();
-    const ProgrammableStage& vertexStage = allStages[wgpu::ShaderStage::Vertex];
+    // const PerStage<ProgrammableStage>& allStages = GetAllStages();
+    // const ProgrammableStage& vertexStage = allStages[wgpu::ShaderStage::Vertex];
+    const ProgrammableStage& vertexStage = GetStage(wgpu::ShaderStage::Vertex);
+    DAWN_TRY(RunTintProgramTransformForOverrides(GetStageRef(wgpu::ShaderStage::Vertex)));
     ShaderModule::MetalFunctionData vertexData;
     DAWN_TRY(CreateMTLFunction(vertexStage, SingleShaderStage::Vertex, ToBackend(GetLayout()),
-                               &vertexData, 0xFFFFFFFF, this));
+                               &vertexData,
+                               GetDevice()->IsToggleEnabled(Toggle::UseBackendOverridesImplementation)),
+                               0xFFFFFFFF, this));
 
     descriptorMTL.vertexFunction = vertexData.function.Get();
     if (vertexData.needsStorageBufferLength) {
@@ -349,10 +353,14 @@ MaybeError RenderPipeline::Initialize() {
     }
 
     if (GetStageMask() & wgpu::ShaderStage::Fragment) {
-        const ProgrammableStage& fragmentStage = allStages[wgpu::ShaderStage::Fragment];
+        // const ProgrammableStage& fragmentStage = allStages[wgpu::ShaderStage::Fragment];
+        const ProgrammableStage& fragmentStage = GetStage(wgpu::ShaderStage::Fragment);
+        DAWN_TRY(RunTintProgramTransformForOverrides(GetStageRef(wgpu::ShaderStage::Fragment)));
         ShaderModule::MetalFunctionData fragmentData;
         DAWN_TRY(CreateMTLFunction(fragmentStage, SingleShaderStage::Fragment,
-                                   ToBackend(GetLayout()), &fragmentData, GetSampleMask()));
+                                   ToBackend(GetLayout()), &fragmentData,
+                                   GetDevice()->IsToggleEnabled(Toggle::UseBackendOverridesImplementation)),
+                                   GetSampleMask()));
 
         descriptorMTL.fragmentFunction = fragmentData.function.Get();
         if (fragmentData.needsStorageBufferLength) {
