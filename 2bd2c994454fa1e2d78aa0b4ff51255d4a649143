@@ -192,6 +192,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7f0c7741_5d41d920",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-19T05:51:09Z",
+      "side": 1,
+      "message": "Sounds like a good idea. Let me have a try.\nBut what still concerns me most is the `AssumeCommandsComplete` [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Device.cpp;drc\u003d5e879c6f6b61fd2768cbf2453515e371fdb00811;l\u003d1270):\n```\n        // There is no GPU work in flight, we need to move the serials forward so that\n        // so that CPU operations waiting on GPU completion can know they don\u0027t have to wait.\n        // AssumeCommandsComplete will assign the max serial we must tick to in order to\n        // fire the awaiting callbacks.\n        if (mCompletedSerial \u003d\u003d mLastSubmittedSerial) {\n            AssumeCommandsComplete();\n        }\n```\nMy understanding is that we should only do `AssumeCommandsComplete` in abnormal cases like device lost, etc. We should by no means do that in a normal tick, which can cause wrong resource release. I don\u0027t quite understand its comment. Can you help me understand what CPU operation callbacks it intends to trigger? It seems to me that we have to find a way to remove it here.",
+      "parentUuid": "6f4478f3_3fda8579",
+      "range": {
+        "startLine": 811,
+        "startChar": 75,
+        "endLine": 811,
+        "endChar": 79
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d1f24ba_b0ec7120",
         "filename": "src/dawn/native/vulkan/NativeSwapChainImplVk.cpp",
         "patchSetId": 10
