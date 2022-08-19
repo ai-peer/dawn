@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f4c1c2c_352bce13",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-19T16:41:19Z",
+      "side": 1,
+      "message": "`libc++` is recommended for TSAN, but after wasting a day, I still couldn\u0027t get the CMake TSAN build to work without false-positives. I could gut this from this file, if we don\u0027t think it\u0027s worth landing.",
+      "range": {
+        "startLine": 337,
+        "startChar": 0,
+        "endLine": 338,
+        "endChar": 34
+      },
+      "revId": "af0d23d5bfc5cf63d052528cee1c6c32f1ad74fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
