@@ -11,12 +11,12 @@ struct a_block {
 };
 
 layout(binding = 0, std430) buffer a_block_1 {
-  uint inner;
+  a_block _;
 } a;
 void tint_symbol() {
   uint value = 42u;
   atomic_compare_exchange_resultu32 atomic_compare_result;
-  atomic_compare_result.old_value = atomicCompSwap(a.inner, 0u, value);
+  atomic_compare_result.old_value = atomicCompSwap(a._.inner, 0u, value);
   atomic_compare_result.exchanged = atomic_compare_result.old_value == 0u;
   atomic_compare_exchange_resultu32 result = atomic_compare_result;
 }

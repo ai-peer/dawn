@@ -5,7 +5,7 @@ struct UBO {
 };
 
 layout(binding = 0) uniform UBO_1 {
-  int dynamic_idx;
+  UBO _;
 } ubo;
 
 struct S {
@@ -17,7 +17,7 @@ struct Result {
 };
 
 layout(binding = 1, std430) buffer Result_1 {
-  int tint_symbol;
+  Result _;
 } result;
 shared S s;
 void f(uint local_invocation_index) {
@@ -28,7 +28,7 @@ void f(uint local_invocation_index) {
     }
   }
   barrier();
-  result.tint_symbol = s.data[ubo.dynamic_idx];
+  result._.tint_symbol = s.data[ubo._.dynamic_idx];
 }
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;

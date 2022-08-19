@@ -9,11 +9,11 @@ struct a_block {
 };
 
 layout(binding = 0, std430) buffer a_block_1 {
-  uvec4 inner;
+  a_block _;
 } a;
 void tint_symbol() {
   int tint_symbol_2 = 1;
-  a.inner[tint_symbol_2] = (a.inner[tint_symbol_2] + 1u);
-  a.inner.z = (a.inner.z + 1u);
+  a._.inner[tint_symbol_2] = (a._.inner[tint_symbol_2] + 1u);
+  a._.inner.z = (a._.inner.z + 1u);
 }
 

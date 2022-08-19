@@ -6,26 +6,25 @@ struct Buf {
 };
 
 layout(binding = 0, std430) buffer Buf_1 {
-  uint count;
-  uint data[50];
+  Buf _;
 } b;
 void tint_symbol() {
   uint i = 0u;
   while (true) {
-    if ((i >= b.count)) {
+    if ((i >= b._.count)) {
       break;
     }
     uint p_save = i;
     if (((i % 2u) == 0u)) {
       {
-        b.data[p_save] = (b.data[p_save] * 2u);
+        b._.data[p_save] = (b._.data[p_save] * 2u);
         i = (i + 1u);
       }
       continue;
     }
-    b.data[p_save] = 0u;
+    b._.data[p_save] = 0u;
     {
-      b.data[p_save] = (b.data[p_save] * 2u);
+      b._.data[p_save] = (b._.data[p_save] * 2u);
       i = (i + 1u);
     }
   }
