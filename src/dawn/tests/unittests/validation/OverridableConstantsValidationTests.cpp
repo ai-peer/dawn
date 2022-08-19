@@ -212,3 +212,191 @@ TEST_F(ComputePipelineOverridableConstantsValidationTest, ConstantsIdentifierUni
         ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
     }
 }
+
+//
+class ComputePipelineWorkgroupSizeOverridableConstantsValidationTest : public ValidationTest {
+  protected:
+    void SetUpShadersWithValidDefaultValueConstants() {
+        computeModule = utils::CreateShaderModule(device, R"(
+override x: u32 = 1u;
+override y: u32 = 1u;
+override z: u32 = 1u;
+
+@compute @workgroup_size(x, y, z) fn main() {
+    _ = 0u;
+})");
+    }
+
+    void SetUpShadersWithZeroDefaultValueConstants() {
+        computeModule = utils::CreateShaderModule(device, R"(
+override x: u32 = 0u;
+override y: u32 = 0u;
+override z: u32 = 0u;
+
+@compute @workgroup_size(x, y, z) fn main() {
+    _ = 0u;
+})");
+    }
+
+    void SetUpShadersWithOutOfLimitsDefaultValueConstants() {
+        computeModule = utils::CreateShaderModule(device, R"(
+override x: u32 = 1u;
+override y: u32 = 1u;
+override z: u32 = 9999u;
+
+@compute @workgroup_size(x, y, z) fn main() {
+    _ = 0u;
+})");
+    }
+
+    void SetUpShadersWithUninitializedConstants() {
+        computeModule = utils::CreateShaderModule(device, R"(
+override x: u32;
+override y: u32;
+override z: u32;
+
+@compute @workgroup_size(x, y, z) fn main() {
+    _ = 0u;
+})");
+    }
+
+    void SetUpShadersWithPartialConstants() {
+        computeModule = utils::CreateShaderModule(device, R"(
+override x: u32;
+
+@compute @workgroup_size(x, 1, 1) fn main() {
+    _ = 0u;
+})");
+    }
+
+    void SetUpShadersWithExpressionConstants() {
+        computeModule = utils::CreateShaderModule(device, R"(
+override x: u32;
+
+@compute @workgroup_size(x + 1u) fn main() {
+    _ = 0u;
+})");
+    }
+
+    void TestCreatePipeline() {
+        wgpu::ComputePipelineDescriptor csDesc;
+        csDesc.compute.module = computeModule;
+        csDesc.compute.entryPoint = "main";
+        wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&csDesc);
+    }
+
+    void TestCreatePipeline(const std::vector<wgpu::ConstantEntry>& constants) {
+        wgpu::ComputePipelineDescriptor csDesc;
+        csDesc.compute.module = computeModule;
+        csDesc.compute.entryPoint = "main";
+        csDesc.compute.constants = constants.data();
+        csDesc.compute.constantCount = constants.size();
+        wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&csDesc);
+    }
+
+    void TestInitializedWithZero() {
+        std::vector<wgpu::ConstantEntry> constants{
+            {nullptr, "x", 0}, {nullptr, "y", 0}, {nullptr, "z", 0}};
+        TestCreatePipeline(constants);
+    }
+
+    void TestInitializedWithOutOfLimitValue() {
+        std::vector<wgpu::ConstantEntry> constants{
+            {nullptr, "x", 9999}, {nullptr, "y", 8888}, {nullptr, "z", 7777}};
+        TestCreatePipeline(constants);
+    }
+
+    void TestInitializedWithValidValue() {
+        std::vector<wgpu::ConstantEntry> constants{
+            {nullptr, "x", 1}, {nullptr, "y", 1}, {nullptr, "z", 1}};
+        TestCreatePipeline(constants);
+    }
+
+    void TestInitializedPartially() {
+        std::vector<wgpu::ConstantEntry> constants{{nullptr, "y", 1}};
+        TestCreatePipeline(constants);
+    }
+
+    wgpu::ShaderModule computeModule;
+    wgpu::Buffer buffer;
+};
+
+// Test that
+TEST_F(ComputePipelineWorkgroupSizeOverridableConstantsValidationTest, WithValidDefault) {
+    SetUpShadersWithValidDefaultValueConstants();
+    {
+        // Valid default
+        TestCreatePipeline();
+    }
+    {
+        // Error: invalid value (zero)
+        ASSERT_DEVICE_ERROR(TestInitializedWithZero());
+    }
+    {
+        // Error: invalid value (out of device limits)
+        ASSERT_DEVICE_ERROR(TestInitializedWithOutOfLimitValue());
+    }
+    {
+        // Valid: initialized partially
+        TestInitializedPartially();
+    }
+    {
+        // Valid
+        TestInitializedWithValidValue();
+    }
+}
+
+//
+TEST_F(ComputePipelineWorkgroupSizeOverridableConstantsValidationTest, WithZeroDefault) {
+    // Error: zero is detected as invalid at shader creation time
+    ASSERT_DEVICE_ERROR(SetUpShadersWithZeroDefaultValueConstants());
+}
+
+//
+TEST_F(ComputePipelineWorkgroupSizeOverridableConstantsValidationTest, WithOutOfLimitsDefault) {
+    SetUpShadersWithOutOfLimitsDefaultValueConstants();
+    {
+        // Error: invalid default
+        ASSERT_DEVICE_ERROR(TestCreatePipeline());
+    }
+    {
+        // Error: invalid value (zero)
+        ASSERT_DEVICE_ERROR(TestInitializedWithZero());
+    }
+    {
+        // Error: invalid value (out of device limits)
+        ASSERT_DEVICE_ERROR(TestInitializedWithOutOfLimitValue());
+    }
+    {
+        // Error: initialized partially
+        ASSERT_DEVICE_ERROR(TestInitializedPartially());
+    }
+    {
+        // Valid
+        TestInitializedWithValidValue();
+    }
+}
+
+TEST_F(ComputePipelineWorkgroupSizeOverridableConstantsValidationTest, WithUninitialized) {
+    SetUpShadersWithUninitializedConstants();
+    {
+        // Error: uninitialized
+        ASSERT_DEVICE_ERROR(TestCreatePipeline());
+    }
+    {
+        // Error: invalid value (zero)
+        ASSERT_DEVICE_ERROR(TestInitializedWithZero());
+    }
+    {
+        // Error: invalid value (out of device limits)
+        ASSERT_DEVICE_ERROR(TestInitializedWithOutOfLimitValue());
+    }
+    {
+        // Error: initialized partially
+        ASSERT_DEVICE_ERROR(TestInitializedPartially());
+    }
+    {
+        // Valid
+        TestInitializedWithValidValue();
+    }
+}

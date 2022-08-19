@@ -40,8 +40,9 @@ MaybeError ComputePipeline::Initialize() {
     const ProgrammableStage& computeStage = GetStage(SingleShaderStage::Compute);
     ShaderModule::MetalFunctionData computeData;
 
-    DAWN_TRY(CreateMTLFunction(computeStage, SingleShaderStage::Compute, ToBackend(GetLayout()),
-                               &computeData));
+    DAWN_TRY(CreateMTLFunction(
+        computeStage, SingleShaderStage::Compute, ToBackend(GetLayout()), &computeData,
+        GetDevice()->IsToggleEnabled(Toggle::UseBackendOverridesImplementation)));
 
     NSError* error = nullptr;
     mMtlComputePipelineState.Acquire(

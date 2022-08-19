@@ -18,6 +18,7 @@
 #include <array>
 #include <bitset>
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -51,7 +52,32 @@ struct ProgrammableStage {
     const EntryPointMetadata* metadata = nullptr;
 
     PipelineConstantEntries constants;
+
+    // Transformed program used for SubstitutueOverrides
+    std::unique_ptr<tint::Program> transformedProgram;
+
+    const tint::Program* GetTintProgram() const;
 };
+
+// // In some cases (substitute overrides with constant expressions), we need to update the shader
+// program at pipeline creation time.
+// // If there's no transform needed, the program pointer simply points to the shaderModule owned
+// mTintProgram.
+// // Otherwise it point to a newly allocated transformed program which will be destroyed by the
+// deleter. class TransformedProgram {
+//   public:
+//   static TransformedProgram CreateProgramWithoutOwnership(tint::Program* program);
+//   static TransformedProgram CreateNewTransformedProgramWithDeleter(tint::Program* program);
+
+//     TransformedProgram() = delete;
+//     ~TransformedProgram();
+
+//   private:
+//     explicit TransformedProgram(tint::Program* program, std::function<void()> deleter);
+
+//     tint::Program* mProgram = nullptr;
+//     std::function<void()> mDeleter;
+// };
 
 class PipelineBase : public ApiObjectBase, public CachedObject {
   public:
@@ -61,6 +87,7 @@ class PipelineBase : public ApiObjectBase, public CachedObject {
     const PipelineLayoutBase* GetLayout() const;
     const RequiredBufferSizes& GetMinBufferSizes() const;
     const ProgrammableStage& GetStage(SingleShaderStage stage) const;
+    ProgrammableStage* GetStageRef(SingleShaderStage stage);
     const PerStage<ProgrammableStage>& GetAllStages() const;
     wgpu::ShaderStage GetStageMask() const;
 
@@ -85,6 +112,10 @@ class PipelineBase : public ApiObjectBase, public CachedObject {
 
     // Constructor used only for mocking and testing.
     explicit PipelineBase(DeviceBase* device);
+
+    //
+    MaybeError RunTintProgramTransformForOverrides(SingleShaderStage singleShaderStage,
+                                                   ProgrammableStage* stage);
 
   private:
     MaybeError ValidateGetBindGroupLayout(uint32_t group);
