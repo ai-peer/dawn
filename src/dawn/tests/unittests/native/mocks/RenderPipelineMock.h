@@ -27,6 +27,7 @@ class RenderPipelineMock : public RenderPipelineBase {
     explicit RenderPipelineMock(DeviceBase* device);
     ~RenderPipelineMock() override;
 
+    MOCK_METHOD(MaybeError, InitializeBackendAgnostic, ());
     MOCK_METHOD(MaybeError, Initialize, (), (override));
     MOCK_METHOD(size_t, ComputeContentHash, (), (override));
     MOCK_METHOD(void, DestroyImpl, (), (override));

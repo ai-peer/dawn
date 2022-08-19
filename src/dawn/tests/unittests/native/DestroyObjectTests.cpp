@@ -257,6 +257,7 @@ TEST_F(DestroyObjectTests, ComputePipelineImplicit) {
     ON_CALL(*computePipelineMock, ComputeContentHash).WillByDefault(Return(hash));
 
     // Compute pipelines are initialized during their creation via the device.
+    // EXPECT_CALL(*computePipelineMock, InitializeBackendAgnostic).Times(1);
     EXPECT_CALL(*computePipelineMock, Initialize).Times(1);
     EXPECT_CALL(*computePipelineMock, DestroyImpl).Times(1);
 
@@ -368,6 +369,7 @@ TEST_F(DestroyObjectTests, RenderPipelineImplicit) {
     ON_CALL(*renderPipelineMock, ComputeContentHash).WillByDefault(Return(hash));
 
     // Render pipelines are initialized during their creation via the device.
+    // EXPECT_CALL(*renderPipelineMock, InitializeBackendAgnostic).Times(1);
     EXPECT_CALL(*renderPipelineMock, Initialize).Times(1);
     EXPECT_CALL(*renderPipelineMock, DestroyImpl).Times(1);
 
@@ -625,6 +627,7 @@ TEST_F(DestroyObjectTests, DestroyObjects) {
         ON_CALL(*computePipelineMock, ComputeContentHash).WillByDefault(Return(hash));
 
         // Compute pipelines are initialized during their creation via the device.
+        // EXPECT_CALL(*computePipelineMock, InitializeBackendAgnostic).Times(1);
         EXPECT_CALL(*computePipelineMock, Initialize).Times(1);
 
         ComputePipelineDescriptor desc = {};

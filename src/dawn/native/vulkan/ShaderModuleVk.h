@@ -25,7 +25,11 @@
 #include "dawn/native/Error.h"
 #include "dawn/native/ShaderModule.h"
 
-namespace dawn::native::vulkan {
+namespace dawn::native {
+
+struct ProgrammableStage;
+
+namespace vulkan {
 
 class Device;
 class PipelineLayout;
@@ -44,7 +48,8 @@ class ShaderModule final : public ShaderModuleBase {
                                                    ShaderModuleParseResult* parseResult,
                                                    OwnedCompilationMessages* compilationMessages);
 
-    ResultOrError<ModuleAndSpirv> GetHandleAndSpirv(const char* entryPointName,
+    ResultOrError<ModuleAndSpirv> GetHandleAndSpirv(const ProgrammableStage& programmableStage,
+                                                    const char* entryPointName,
                                                     const PipelineLayout* layout);
 
   private:
@@ -59,6 +64,8 @@ class ShaderModule final : public ShaderModuleBase {
     std::unique_ptr<ConcurrentTransformedShaderModuleCache> mTransformedShaderModuleCache;
 };
 
-}  // namespace dawn::native::vulkan
+}  // namespace vulkan
+
+}  // namespace dawn::native
 
 #endif  // SRC_DAWN_NATIVE_VULKAN_SHADERMODULEVK_H_

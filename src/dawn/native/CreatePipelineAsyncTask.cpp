@@ -127,11 +127,17 @@ void CreateComputePipelineAsyncTask::Run() {
     TRACE_EVENT1(device->GetPlatform(), General, "CreateComputePipelineAsyncTask::Run", "label",
                  eventLabel);
 
-    MaybeError maybeError = mComputePipeline->Initialize();
     std::string errorMessage;
-    if (maybeError.IsError()) {
+    MaybeError maybeErrorBackendAgnostic = mComputePipeline->InitializeBackendAgnostic();
+    if (maybeErrorBackendAgnostic.IsError()) {
         mComputePipeline = nullptr;
-        errorMessage = maybeError.AcquireError()->GetMessage();
+        errorMessage = maybeErrorBackendAgnostic.AcquireError()->GetMessage();
+    } else {
+        MaybeError maybeError = mComputePipeline->Initialize();
+        if (maybeError.IsError()) {
+            mComputePipeline = nullptr;
+            errorMessage = maybeError.AcquireError()->GetMessage();
+        }
     }
 
     device->AddComputePipelineAsyncCallbackTask(mComputePipeline, errorMessage, mCallback,
@@ -179,11 +185,17 @@ void CreateRenderPipelineAsyncTask::Run() {
     TRACE_EVENT1(device->GetPlatform(), General, "CreateRenderPipelineAsyncTask::Run", "label",
                  eventLabel);
 
-    MaybeError maybeError = mRenderPipeline->Initialize();
     std::string errorMessage;
-    if (maybeError.IsError()) {
+    MaybeError maybeErrorBackendAgnostic = mRenderPipeline->InitializeBackendAgnostic();
+    if (maybeErrorBackendAgnostic.IsError()) {
         mRenderPipeline = nullptr;
-        errorMessage = maybeError.AcquireError()->GetMessage();
+        errorMessage = maybeErrorBackendAgnostic.AcquireError()->GetMessage();
+    } else {
+        MaybeError maybeError = mRenderPipeline->Initialize();
+        if (maybeError.IsError()) {
+            mRenderPipeline = nullptr;
+            errorMessage = maybeError.AcquireError()->GetMessage();
+        }
     }
 
     device->AddRenderPipelineAsyncCallbackTask(mRenderPipeline, errorMessage, mCallback, mUserdata);
