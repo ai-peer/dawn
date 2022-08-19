@@ -181,6 +181,7 @@ DAWN_MAKE_CACHE_REQUEST(SpirvCompilationRequest, SPIRV_COMPILATION_REQUEST_MEMBE
 #undef SPIRV_COMPILATION_REQUEST_MEMBERS
 
 ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
+    const ProgrammableStage& programmableStage,
     const char* entryPointName,
     const PipelineLayout* layout) {
     TRACE_EVENT0(GetDevice()->GetPlatform(), General, "ShaderModuleVk::GetHandleAndSpirv");
@@ -240,7 +241,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
 
 #if TINT_BUILD_SPV_WRITER
     SpirvCompilationRequest req = {};
-    req.inputProgram = GetTintProgram();
+    req.inputProgram = programmableStage.GetTintProgram();
     req.bindingPoints = std::move(bindingPoints);
     req.newBindingsMap = std::move(newBindingsMap);
     req.entryPointName = entryPointName;

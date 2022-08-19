@@ -53,7 +53,7 @@ MaybeError ComputePipeline::Initialize() {
     ASSERT(mMtlComputePipelineState != nil);
 
     // Copy over the local workgroup size as it is passed to dispatch explicitly in Metal
-    Origin3D localSize = GetStage(SingleShaderStage::Compute).metadata->localWorkgroupSize;
+    Origin3D localSize = GetStage(SingleShaderStage::Compute).updatedLocalWorkgroupSize;
     mLocalWorkgroupSize = MTLSizeMake(localSize.x, localSize.y, localSize.z);
 
     mRequiresStorageBufferLength = computeData.needsStorageBufferLength;

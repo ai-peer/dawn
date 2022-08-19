@@ -1470,6 +1470,7 @@ ResultOrError<Ref<ComputePipelineBase>> DeviceBase::CreateComputePipeline(
         return cachedComputePipeline;
     }
 
+    DAWN_TRY(uninitializedComputePipeline->InitializeBackendAgnostic());
     DAWN_TRY(uninitializedComputePipeline->Initialize());
     return AddOrGetCachedComputePipeline(std::move(uninitializedComputePipeline));
 }
@@ -1535,12 +1536,18 @@ void DeviceBase::InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> com
     Ref<ComputePipelineBase> result;
     std::string errorMessage;
 
-    MaybeError maybeError = computePipeline->Initialize();
-    if (maybeError.IsError()) {
-        std::unique_ptr<ErrorData> error = maybeError.AcquireError();
+    MaybeError maybeErrorBackendAgnostic = computePipeline->InitializeBackendAgnostic();
+    if (maybeErrorBackendAgnostic.IsError()) {
+        std::unique_ptr<ErrorData> error = maybeErrorBackendAgnostic.AcquireError();
         errorMessage = error->GetMessage();
     } else {
-        result = AddOrGetCachedComputePipeline(std::move(computePipeline));
+        MaybeError maybeError = computePipeline->Initialize();
+        if (maybeError.IsError()) {
+            std::unique_ptr<ErrorData> error = maybeError.AcquireError();
+            errorMessage = error->GetMessage();
+        } else {
+            result = AddOrGetCachedComputePipeline(std::move(computePipeline));
+        }
     }
 
     std::unique_ptr<CreateComputePipelineAsyncCallbackTask> callbackTask =
@@ -1557,12 +1564,18 @@ void DeviceBase::InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> rende
     Ref<RenderPipelineBase> result;
     std::string errorMessage;
 
-    MaybeError maybeError = renderPipeline->Initialize();
-    if (maybeError.IsError()) {
-        std::unique_ptr<ErrorData> error = maybeError.AcquireError();
+    MaybeError maybeErrorBase = renderPipeline->InitializeBackendAgnostic();
+    if (maybeErrorBase.IsError()) {
+        std::unique_ptr<ErrorData> error = maybeErrorBase.AcquireError();
         errorMessage = error->GetMessage();
     } else {
-        result = AddOrGetCachedRenderPipeline(std::move(renderPipeline));
+        MaybeError maybeError = renderPipeline->Initialize();
+        if (maybeError.IsError()) {
+            std::unique_ptr<ErrorData> error = maybeError.AcquireError();
+            errorMessage = error->GetMessage();
+        } else {
+            result = AddOrGetCachedRenderPipeline(std::move(renderPipeline));
+        }
     }
 
     std::unique_ptr<CreateRenderPipelineAsyncCallbackTask> callbackTask =
@@ -1631,6 +1644,7 @@ ResultOrError<Ref<RenderPipelineBase>> DeviceBase::CreateRenderPipeline(
         return cachedRenderPipeline;
     }
 
+    DAWN_TRY(uninitializedRenderPipeline->InitializeBackendAgnostic());
     DAWN_TRY(uninitializedRenderPipeline->Initialize());
     return AddOrGetCachedRenderPipeline(std::move(uninitializedRenderPipeline));
 }

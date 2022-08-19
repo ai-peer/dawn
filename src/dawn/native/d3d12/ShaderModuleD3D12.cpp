@@ -65,72 +65,6 @@ namespace dawn::native::d3d12 {
 
 namespace {
 
-// 32 bit float has 7 decimal digits of precision so setting n to 8 should be enough
-std::string FloatToStringWithPrecision(float v, std::streamsize n = 8) {
-    std::ostringstream out;
-    out.precision(n);
-    out << std::fixed << v;
-    return out.str();
-}
-
-std::string GetHLSLValueString(EntryPointMetadata::Override::Type dawnType,
-                               const OverrideScalar* entry,
-                               double value = 0) {
-    switch (dawnType) {
-        case EntryPointMetadata::Override::Type::Boolean:
-            return std::to_string(entry ? entry->b : static_cast<int32_t>(value));
-        case EntryPointMetadata::Override::Type::Float32:
-            return FloatToStringWithPrecision(entry ? entry->f32 : static_cast<float>(value));
-        case EntryPointMetadata::Override::Type::Int32:
-            return std::to_string(entry ? entry->i32 : static_cast<int32_t>(value));
-        case EntryPointMetadata::Override::Type::Uint32:
-            return std::to_string(entry ? entry->u32 : static_cast<uint32_t>(value));
-        default:
-            UNREACHABLE();
-    }
-}
-
-constexpr char kSpecConstantPrefix[] = "WGSL_SPEC_CONSTANT_";
-
-using DefineStrings = std::vector<std::pair<std::string, std::string>>;
-
-DefineStrings GetOverridableConstantsDefines(
-    const PipelineConstantEntries& pipelineConstantEntries,
-    const EntryPointMetadata::OverridesMap& shaderEntryPointConstants) {
-    DefineStrings defineStrings;
-    std::unordered_set<std::string> overriddenConstants;
-
-    // Set pipeline overridden values
-    for (const auto& [name, value] : pipelineConstantEntries) {
-        overriddenConstants.insert(name);
-
-        // This is already validated so `name` must exist
-        const auto& moduleConstant = shaderEntryPointConstants.at(name);
-
-        defineStrings.emplace_back(
-            kSpecConstantPrefix + std::to_string(static_cast<int32_t>(moduleConstant.id)),
-            GetHLSLValueString(moduleConstant.type, nullptr, value));
-    }
-
-    // Set shader initialized default values
-    for (const auto& iter : shaderEntryPointConstants) {
-        const std::string& name = iter.first;
-        if (overriddenConstants.count(name) != 0) {
-            // This constant already has overridden value
-            continue;
-        }
-
-        const auto& moduleConstant = shaderEntryPointConstants.at(name);
-
-        // Uninitialized default values are okay since they ar only defined to pass
-        // compilation but not used
-        defineStrings.emplace_back(
-            kSpecConstantPrefix + std::to_string(static_cast<int32_t>(moduleConstant.id)),
-            GetHLSLValueString(moduleConstant.type, &moduleConstant.defaultValue));
-    }
-    return defineStrings;
-}
-
 enum class Compiler { FXC, DXC };
 
 #define HLSL_COMPILATION_REQUEST_MEMBERS(X)                                     \
@@ -151,7 +85,6 @@ enum class Compiler { FXC, DXC };
     X(bool, usesNumWorkgroups)                                                  \
     X(uint32_t, numWorkgroupsShaderRegister)                                    \
     X(uint32_t, numWorkgroupsRegisterSpace)                                     \
-    X(DefineStrings, defineStrings)                                             \
     X(tint::transform::MultiplanarExternalTexture::BindingsMap, newBindingsMap) \
     X(tint::writer::ArrayLengthFromUniformOptions, arrayLengthFromUniform)      \
     X(tint::transform::BindingRemapper::BindingPoints, remappedBindingPoints)   \
@@ -170,8 +103,7 @@ enum class Compiler { FXC, DXC };
     X(std::string_view, fxcShaderProfile)           \
     X(pD3DCompile, d3dCompile)                      \
     X(IDxcLibrary*, dxcLibrary)                     \
-    X(IDxcCompiler*, dxcCompiler)                   \
-    X(DefineStrings, defineStrings)
+    X(IDxcCompiler*, dxcCompiler)
 
 DAWN_SERIALIZABLE(struct, HlslCompilationRequest, HLSL_COMPILATION_REQUEST_MEMBERS){};
 #undef HLSL_COMPILATION_REQUEST_MEMBERS
@@ -255,25 +187,11 @@ ResultOrError<ComPtr<IDxcBlob>> CompileShaderDXC(const D3DBytecodeCompilationReq
     std::vector<const wchar_t*> arguments =
         GetDXCArguments(r.compileFlags, r.hasShaderFloat16Feature);
 
-    // Build defines for overridable constants
-    std::vector<std::pair<std::wstring, std::wstring>> defineStrings;
-    defineStrings.reserve(r.defineStrings.size());
-    for (const auto& [name, value] : r.defineStrings) {
-        defineStrings.emplace_back(UTF8ToWStr(name.c_str()), UTF8ToWStr(value.c_str()));
-    }
-
-    std::vector<DxcDefine> dxcDefines;
-    dxcDefines.reserve(defineStrings.size());
-    for (const auto& [name, value] : defineStrings) {
-        dxcDefines.push_back({name.c_str(), value.c_str()});
-    }
-
     ComPtr<IDxcOperationResult> result;
-    DAWN_TRY(CheckHRESULT(
-        r.dxcCompiler->Compile(sourceBlob.Get(), nullptr, entryPointW.c_str(),
-                               r.dxcShaderProfile.data(), arguments.data(), arguments.size(),
-                               dxcDefines.data(), dxcDefines.size(), nullptr, &result),
-        "DXC compile"));
+    DAWN_TRY(CheckHRESULT(r.dxcCompiler->Compile(sourceBlob.Get(), nullptr, entryPointW.c_str(),
+                                                 r.dxcShaderProfile.data(), arguments.data(),
+                                                 arguments.size(), nullptr, 0, nullptr, &result),
+                          "DXC compile"));
 
     HRESULT hr;
     DAWN_TRY(CheckHRESULT(result->GetStatus(&hr), "DXC get status"));
@@ -359,20 +277,7 @@ ResultOrError<ComPtr<ID3DBlob>> CompileShaderFXC(const D3DBytecodeCompilationReq
     ComPtr<ID3DBlob> compiledShader;
     ComPtr<ID3DBlob> errors;
 
-    // Build defines for overridable constants
-    const D3D_SHADER_MACRO* pDefines = nullptr;
-    std::vector<D3D_SHADER_MACRO> fxcDefines;
-    if (r.defineStrings.size() > 0) {
-        fxcDefines.reserve(r.defineStrings.size() + 1);
-        for (const auto& [name, value] : r.defineStrings) {
-            fxcDefines.push_back({name.c_str(), value.c_str()});
-        }
-        // d3dCompile D3D_SHADER_MACRO* pDefines is a nullptr terminated array
-        fxcDefines.push_back({nullptr, nullptr});
-        pDefines = fxcDefines.data();
-    }
-
-    DAWN_INVALID_IF(FAILED(r.d3dCompile(hlslSource.c_str(), hlslSource.length(), nullptr, pDefines,
+    DAWN_INVALID_IF(FAILED(r.d3dCompile(hlslSource.c_str(), hlslSource.length(), nullptr, nullptr,
                                         nullptr, entryPointName.c_str(), r.fxcShaderProfile.data(),
                                         r.compileFlags, 0, &compiledShader, &errors)),
                     "D3D compile failed with: %s", static_cast<char*>(errors->GetBufferPointer()));
@@ -556,8 +461,7 @@ ResultOrError<CompiledShader> ShaderModule::Compile(const ProgrammableStage& pro
 
     req.bytecode.hasShaderFloat16Feature = device->IsFeatureEnabled(Feature::ShaderFloat16);
     req.bytecode.compileFlags = compileFlags;
-    req.bytecode.defineStrings =
-        GetOverridableConstantsDefines(programmableStage.constants, entryPoint.overrides);
+
     if (device->IsToggleEnabled(Toggle::UseDXC)) {
         req.bytecode.compiler = Compiler::DXC;
         req.bytecode.dxcLibrary = device->GetDxcLibrary().Get();
@@ -646,7 +550,7 @@ ResultOrError<CompiledShader> ShaderModule::Compile(const ProgrammableStage& pro
         }
     }
 
-    req.hlsl.inputProgram = GetTintProgram();
+    req.hlsl.inputProgram = programmableStage.GetTintProgram();
     req.hlsl.entryPointName = programmableStage.entryPoint.c_str();
     req.hlsl.stage = stage;
     req.hlsl.firstIndexOffsetShaderRegister = layout->GetFirstIndexOffsetShaderRegister();
