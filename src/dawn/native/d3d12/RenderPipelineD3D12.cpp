@@ -360,6 +360,7 @@ MaybeError RenderPipeline::Initialize() {
     PerStage<CompiledShader> compiledShader;
 
     for (auto stage : IterateStages(GetStageMask())) {
+        DAWN_TRY(RunTintProgramTransformForOverrides(pipelineStages[stage]));
         DAWN_TRY_ASSIGN(compiledShader[stage], ToBackend(pipelineStages[stage].module)
                                                    ->Compile(pipelineStages[stage], stage,
                                                              ToBackend(GetLayout()), compileFlags));

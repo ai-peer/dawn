@@ -15,6 +15,7 @@
 #include "dawn/native/Pipeline.h"
 
 #include <algorithm>
+#include <memory>
 #include <unordered_set>
 #include <utility>
 
@@ -24,6 +25,8 @@
 #include "dawn/native/ObjectContentHasher.h"
 #include "dawn/native/PipelineLayout.h"
 #include "dawn/native/ShaderModule.h"
+
+#include "tint/tint.h"
 
 namespace dawn::native {
 MaybeError ValidateProgrammableStage(DeviceBase* device,
@@ -254,6 +257,42 @@ bool PipelineBase::EqualForCache(const PipelineBase* a, const PipelineBase* b) {
     }
 
     return true;
+}
+
+MaybeError PipelineBase::RunTintProgramTransformForOverrides(const ProgrammableStage& stage) {
+    const EntryPointMetadata& metadata = *stage.metadata;
+    auto& constants = stage.constants;
+
+    if (!metadata.overrides.empty()) {
+        // Special handling for overrides used as workgroup size
+        tint::transform::SubstituteOverride substituteOverride;
+
+        tint::transform::SubstituteOverride::Config cfg;
+        // for (auto key : metadata.workgroupSizeOverrides) {
+        for (const auto& [key, value] : constants) {
+            const auto& o = metadata.overrides.at(key);
+            cfg.map.insert({tint::OverrideId{static_cast<uint16_t>(o.id)}, value});
+        }
+        tint::transform::DataMap data;
+        data.Add<tint::transform::SubstituteOverride::Config>(cfg);
+
+        tint::Program program;
+        DAWN_TRY_ASSIGN(program, RunTransforms(&substituteOverride, stage.module->GetTintProgram(),
+                                               data, nullptr, nullptr));
+        // stage.module->SetTintProgram(std::move(program));
+
+        tint::inspector::Inspector inspector(&program);
+
+        // DelayedCheckIfWorkgroupSizeIsInvalid(
+        //     const_cast(metadata),
+        //     GetDevice()->GetLimits(),
+        //     // temp
+
+        //     inspector.GetWorkgroupStorageSize());
+
+        stage.module->SetTintProgram(std::make_unique<tint::Program>(std::move(program)));
+    }
+    return {};
 }
 
 }  // namespace dawn::native

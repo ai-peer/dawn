@@ -556,8 +556,10 @@ ResultOrError<CompiledShader> ShaderModule::Compile(const ProgrammableStage& pro
 
     req.bytecode.hasShaderFloat16Feature = device->IsFeatureEnabled(Feature::ShaderFloat16);
     req.bytecode.compileFlags = compileFlags;
-    req.bytecode.defineStrings =
-        GetOverridableConstantsDefines(programmableStage.constants, entryPoint.overrides);
+    if (device->IsToggleEnabled(Toggle::UseBackendOverridesImplementation)) {
+        req.bytecode.defineStrings =
+            GetOverridableConstantsDefines(programmableStage.constants, entryPoint.overrides);
+    }
     if (device->IsToggleEnabled(Toggle::UseDXC)) {
         req.bytecode.compiler = Compiler::DXC;
         req.bytecode.dxcLibrary = device->GetDxcLibrary().Get();

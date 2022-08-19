@@ -529,9 +529,9 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
     })()
 
     if (!entryPoint.overrides.empty()) {
-        DAWN_INVALID_IF(device->IsToggleEnabled(Toggle::DisallowUnsafeAPIs),
-                        "Pipeline overridable constants are disallowed because they "
-                        "are partially implemented.");
+        // DAWN_INVALID_IF(device->IsToggleEnabled(Toggle::DisallowUnsafeAPIs),
+        //                 "Pipeline overridable constants are disallowed because they "
+        //                 "are partially implemented.");
 
         const auto& name2Id = inspector->GetNamedOverrideIds();
         const auto& id2Scalar = inspector->GetOverrideDefaultValues();
@@ -577,39 +577,41 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
 
     if (metadata->stage == SingleShaderStage::Compute) {
         auto workgroup_size = entryPoint.workgroup_size;
-        DAWN_INVALID_IF(
-            !workgroup_size.has_value(),
-            "TODO(crbug.com/dawn/1504): Dawn does not currently support @workgroup_size "
-            "attributes using override-expressions");
-        DelayedInvalidIf(workgroup_size->x > limits.v1.maxComputeWorkgroupSizeX ||
-                             workgroup_size->y > limits.v1.maxComputeWorkgroupSizeY ||
-                             workgroup_size->z > limits.v1.maxComputeWorkgroupSizeZ,
-                         "Entry-point uses workgroup_size(%u, %u, %u) that exceeds the "
-                         "maximum allowed (%u, %u, %u).",
-                         workgroup_size->x, workgroup_size->y, workgroup_size->z,
-                         limits.v1.maxComputeWorkgroupSizeX, limits.v1.maxComputeWorkgroupSizeY,
-                         limits.v1.maxComputeWorkgroupSizeZ);
+        // DAWN_INVALID_IF(
+        //     !workgroup_size.has_value(),
+        //     "TODO(crbug.com/dawn/1504): Dawn does not currently support @workgroup_size "
+        //     "attributes using override-expressions");
+        if (workgroup_size.has_value()) {
+            DelayedInvalidIf(workgroup_size->x > limits.v1.maxComputeWorkgroupSizeX ||
+                                 workgroup_size->y > limits.v1.maxComputeWorkgroupSizeY ||
+                                 workgroup_size->z > limits.v1.maxComputeWorkgroupSizeZ,
+                             "Entry-point uses workgroup_size(%u, %u, %u) that exceeds the "
+                             "maximum allowed (%u, %u, %u).",
+                             workgroup_size->x, workgroup_size->y, workgroup_size->z,
+                             limits.v1.maxComputeWorkgroupSizeX, limits.v1.maxComputeWorkgroupSizeY,
+                             limits.v1.maxComputeWorkgroupSizeZ);
 
-        // Dimensions have already been validated against their individual limits above.
-        // Cast to uint64_t to avoid overflow in this multiplication.
-        uint64_t numInvocations =
-            static_cast<uint64_t>(workgroup_size->x) * workgroup_size->y * workgroup_size->z;
-        DelayedInvalidIf(numInvocations > limits.v1.maxComputeInvocationsPerWorkgroup,
-                         "The total number of workgroup invocations (%u) exceeds the "
-                         "maximum allowed (%u).",
-                         numInvocations, limits.v1.maxComputeInvocationsPerWorkgroup);
+            // Dimensions have already been validated against their individual limits above.
+            // Cast to uint64_t to avoid overflow in this multiplication.
+            uint64_t numInvocations =
+                static_cast<uint64_t>(workgroup_size->x) * workgroup_size->y * workgroup_size->z;
+            DelayedInvalidIf(numInvocations > limits.v1.maxComputeInvocationsPerWorkgroup,
+                             "The total number of workgroup invocations (%u) exceeds the "
+                             "maximum allowed (%u).",
+                             numInvocations, limits.v1.maxComputeInvocationsPerWorkgroup);
 
-        const size_t workgroupStorageSize = inspector->GetWorkgroupStorageSize(entryPoint.name);
-        DelayedInvalidIf(workgroupStorageSize > limits.v1.maxComputeWorkgroupStorageSize,
-                         "The total use of workgroup storage (%u bytes) is larger than "
-                         "the maximum allowed (%u bytes).",
-                         workgroupStorageSize, limits.v1.maxComputeWorkgroupStorageSize);
+            const size_t workgroupStorageSize = inspector->GetWorkgroupStorageSize(entryPoint.name);
+            DelayedInvalidIf(workgroupStorageSize > limits.v1.maxComputeWorkgroupStorageSize,
+                             "The total use of workgroup storage (%u bytes) is larger than "
+                             "the maximum allowed (%u bytes).",
+                             workgroupStorageSize, limits.v1.maxComputeWorkgroupStorageSize);
 
-        metadata->localWorkgroupSize.x = workgroup_size->x;
-        metadata->localWorkgroupSize.y = workgroup_size->y;
-        metadata->localWorkgroupSize.z = workgroup_size->z;
+            metadata->localWorkgroupSize.x = workgroup_size->x;
+            metadata->localWorkgroupSize.y = workgroup_size->y;
+            metadata->localWorkgroupSize.z = workgroup_size->z;
 
-        metadata->usesNumWorkgroups = entryPoint.num_workgroups_used;
+            metadata->usesNumWorkgroups = entryPoint.num_workgroups_used;
+        }
     }
 
     if (metadata->stage == SingleShaderStage::Vertex) {
@@ -852,6 +854,8 @@ MaybeError ValidateWGSLProgramExtension(const DeviceBase* device,
     return {};
 }
 
+}  // anonymous namespace
+
 MaybeError ReflectShaderUsingTint(const DeviceBase* device,
                                   const tint::Program* program,
                                   OwnedCompilationMessages* compilationMessages,
@@ -883,7 +887,6 @@ MaybeError ReflectShaderUsingTint(const DeviceBase* device,
     }
     return {};
 }
-}  // anonymous namespace
 
 ShaderModuleParseResult::ShaderModuleParseResult() = default;
 ShaderModuleParseResult::~ShaderModuleParseResult() = default;
@@ -1144,6 +1147,10 @@ bool ShaderModuleBase::EqualityFunc::operator()(const ShaderModuleBase* a,
 const tint::Program* ShaderModuleBase::GetTintProgram() const {
     ASSERT(mTintProgram);
     return mTintProgram.get();
+}
+
+void ShaderModuleBase::SetTintProgram(std::unique_ptr<tint::Program>&& program) {
+    mTintProgram = std::move(program);
 }
 
 void ShaderModuleBase::APIGetCompilationInfo(wgpu::CompilationInfoCallback callback,

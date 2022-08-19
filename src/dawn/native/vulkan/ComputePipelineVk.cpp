@@ -59,6 +59,8 @@ MaybeError ComputePipeline::Initialize() {
     const ProgrammableStage& computeStage = GetStage(SingleShaderStage::Compute);
     ShaderModule* module = ToBackend(computeStage.module.Get());
 
+    DAWN_TRY(RunTintProgramTransformForOverrides(computeStage));
+
     ShaderModule::ModuleAndSpirv moduleAndSpirv;
     DAWN_TRY_ASSIGN(moduleAndSpirv,
                     module->GetHandleAndSpirv(computeStage.entryPoint.c_str(), layout));
@@ -70,7 +72,8 @@ MaybeError ComputePipeline::Initialize() {
     std::vector<VkSpecializationMapEntry> specializationMapEntries;
     VkSpecializationInfo specializationInfo{};
     createInfo.stage.pSpecializationInfo = GetVkSpecializationInfo(
-        computeStage, &specializationInfo, &specializationDataEntries, &specializationMapEntries);
+        device->IsToggleEnabled(Toggle::UseBackendOverridesImplementation), computeStage,
+        &specializationInfo, &specializationDataEntries, &specializationMapEntries);
 
     PNextChainBuilder stageExtChain(&createInfo.stage);
 

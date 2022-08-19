@@ -86,6 +86,9 @@ class PipelineBase : public ApiObjectBase, public CachedObject {
     // Constructor used only for mocking and testing.
     explicit PipelineBase(DeviceBase* device);
 
+    //
+    MaybeError RunTintProgramTransformForOverrides(const ProgrammableStage& stage);
+
   private:
     MaybeError ValidateGetBindGroupLayout(uint32_t group);
 
