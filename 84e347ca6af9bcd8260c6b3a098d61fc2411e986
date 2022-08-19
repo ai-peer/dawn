@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a06018b9_36e2b127",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-19T16:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec4e8be8_8cfadd9d",
+      "range": {
+        "startLine": 9,
+        "startChar": 27,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "84e347ca6af9bcd8260c6b3a098d61fc2411e986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5eee9314_8afc919b",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-19T12:39:29Z",
       "side": 1,
       "message": "nit: equivalent",
+      "range": {
+        "startLine": 13,
+        "startChar": 63,
+        "endLine": 13,
+        "endChar": 75
+      },
+      "revId": "84e347ca6af9bcd8260c6b3a098d61fc2411e986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0544d8d8_8e4efc32",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-19T16:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5eee9314_8afc919b",
       "range": {
         "startLine": 13,
         "startChar": 63,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09f120ba_22fcd6f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-19T16:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37291c4e_e06130cd",
+      "range": {
+        "startLine": 16,
+        "startChar": 2,
+        "endLine": 16,
+        "endChar": 9
+      },
+      "revId": "84e347ca6af9bcd8260c6b3a098d61fc2411e986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0c36a72_56d04f41",
@@ -83,6 +155,24 @@
       "writtenOn": "2022-08-19T12:39:29Z",
       "side": 1,
       "message": "This is great! My only comment is that we may want to keep `GroupAndBinding` instead of `Group` and `Binding` separately because we always need to define both.",
+      "revId": "84e347ca6af9bcd8260c6b3a098d61fc2411e986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b521a92_2be54526",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-19T16:36:01Z",
+      "side": 1,
+      "message": "As discussed, I\u0027d rather not encourage helpers that return a vector. It\u0027s going to be more confusing that these vectors will replace previous attributes.\nI actually prefer `Group(1), Binding(2)` to `GroupAndBinding(1, 2)` in terms of readability anyway.",
+      "parentUuid": "f0c36a72_56d04f41",
       "revId": "84e347ca6af9bcd8260c6b3a098d61fc2411e986",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
