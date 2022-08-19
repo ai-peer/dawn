@@ -32,6 +32,9 @@ class ComputePipelineBase : public PipelineBase {
     ComputePipelineBase(DeviceBase* device, const ComputePipelineDescriptor* descriptor);
     ~ComputePipelineBase() override;
 
+    // Common backend-agnostic initialization.
+    MaybeError InitializeBackendAgnostic();
+
     static ComputePipelineBase* MakeError(DeviceBase* device);
 
     ObjectType GetType() const override;

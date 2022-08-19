@@ -138,6 +138,11 @@ class Inspector {
     /// referenced transitively by the entry point.
     uint32_t GetWorkgroupStorageSize(const std::string& entry_point);
 
+    /// @param entry_point name of the entry point to get information about.
+    /// @returns the workgroup size of the entry point.
+    /// This is meant to be called after overrides are replaced by const expressions.
+    WorkgroupSize GetWorkgroupSize(const std::string& entry_point);
+
     /// @returns vector of all valid extension names used by the program. There
     /// will be no duplicated names in the returned vector even if an extension
     /// is enabled multiple times.
