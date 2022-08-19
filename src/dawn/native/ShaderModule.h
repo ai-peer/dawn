@@ -55,6 +55,7 @@ namespace dawn::native {
 
 using WGSLExtensionSet = std::unordered_set<std::string>;
 struct EntryPointMetadata;
+struct CombinedLimits;
 
 // Base component type of an inter-stage variable
 enum class InterStageComponentType {
@@ -115,6 +116,13 @@ ResultOrError<tint::Program> RunTransforms(tint::transform::Transform* transform
                                            const tint::transform::DataMap& inputs,
                                            tint::transform::DataMap* outputs,
                                            OwnedCompilationMessages* messages);
+
+bool DelayedCheckIfWorkgroupSizeIsInvalid(EntryPointMetadata* metadata,
+                                          const CombinedLimits& limits,
+                                          uint32_t x,
+                                          uint32_t y,
+                                          uint32_t z,
+                                          size_t workgroupStorageSize);
 
 // Mirrors wgpu::SamplerBindingLayout but instead stores a single boolean
 // for isComparison instead of a wgpu::SamplerBindingType enum.
@@ -211,6 +219,7 @@ struct EntryPointMetadata {
     SingleShaderStage stage;
 
     struct Override {
+        // TODO: replace by tint::OverrideId
         uint32_t id;
         // Match tint::inspector::Override::Type
         // Bool is defined as a macro on linux X11 and cannot compile
@@ -241,6 +250,14 @@ struct EntryPointMetadata {
     // This is used by metal backend to set values with default initializers that are not
     // overridden
     std::unordered_set<std::string> initializedOverrides;
+
+    // For WebGPU V1, workgroup size overridable constants are implemented by doing a tint transform
+    // of subsituting the overridable declaration to const. As the value is known at the compute
+    // pipeline creation stage, these workgroup size overrides need to be recorded and subsitute by
+    // then.
+    std::unordered_set<std::string> workgroupSizeOverrides;
+    // std::array<std::optional<tint::OverrideId>, 3> workgroupSizeOverrides;
+    // std::array<std::optional<Override>, 3> workgroupSizeOverrides;
 
     bool usesNumWorkgroups = false;
     // Used at render pipeline validation.
@@ -274,6 +291,9 @@ class ShaderModuleBase : public ApiObjectBase, public CachedObject {
     };
 
     const tint::Program* GetTintProgram() const;
+
+    // void SetTintProgram(tint::Program&& program);
+    void SetTintProgram(std::unique_ptr<tint::Program>&& program);
 
     void APIGetCompilationInfo(wgpu::CompilationInfoCallback callback, void* userdata);
 

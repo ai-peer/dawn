@@ -17,6 +17,9 @@
 #include "dawn/native/Device.h"
 #include "dawn/native/ObjectContentHasher.h"
 #include "dawn/native/ObjectType_autogen.h"
+#include "dawn/native/ShaderModule.h"
+
+#include "tint/tint.h"
 
 namespace dawn::native {
 
@@ -67,6 +70,55 @@ void ComputePipelineBase::DestroyImpl() {
         // Do not uncache the actual cached object if we are a blueprint.
         GetDevice()->UncacheComputePipeline(this);
     }
+}
+
+MaybeError ComputePipelineBase::RunTintProgramTransformWorkgroupSize() {
+    const ProgrammableStage& stage = GetStage(SingleShaderStage::Compute);
+    const EntryPointMetadata& metadata = *stage.metadata;
+    auto& constants = stage.constants;
+
+    if (!metadata.workgroupSizeOverrides.empty()) {
+        // Special handling for overrides used as workgroup size
+        tint::transform::SubstituteOverride substituteOverride;
+
+        tint::transform::SubstituteOverride::Config cfg;
+        // for (auto key : metadata.workgroupSizeOverrides) {
+        for (const auto& [key, value] : constants) {
+            if (metadata.workgroupSizeOverrides.count(key) > 0) {
+                const auto& o = metadata.overrides.at(key);
+                DAWN_ASSERT(o.type == EntryPointMetadata::Override::Type::Uint32);
+                cfg.map.insert({tint::OverrideId{static_cast<uint16_t>(o.id)}, value});
+            }
+
+            // // temp
+            // DAWN_INVALID_IF(o.defaultValue.u32 < 1u, "workgroup_size argument must be at
+            // least 1.");
+
+            // cfg.map.insert(o.id, o.defaultValue});
+            // cfg.map.insert({tint::OverrideId{static_cast<uint16_t>(o.id)}, o.defaultValue.f32});
+            // cfg.map.insert({tint::OverrideId{static_cast<uint16_t>(o.id)}, stage.constants});
+            // cfg.map.insert({tint::OverrideId{static_cast<uint16_t>(o.id)}, 16});
+        }
+        tint::transform::DataMap data;
+        data.Add<tint::transform::SubstituteOverride::Config>(cfg);
+
+        tint::Program program;
+        DAWN_TRY_ASSIGN(program, RunTransforms(&substituteOverride, stage.module->GetTintProgram(),
+                                               data, nullptr, nullptr));
+        // stage.module->SetTintProgram(std::move(program));
+
+        tint::inspector::Inspector inspector(&program);
+
+        // DelayedCheckIfWorkgroupSizeIsInvalid(
+        //     const_cast(metadata),
+        //     GetDevice()->GetLimits(),
+        //     // temp
+
+        //     inspector.GetWorkgroupStorageSize());
+
+        stage.module->SetTintProgram(std::make_unique<tint::Program>(std::move(program)));
+    }
+    return {};
 }
 
 // static

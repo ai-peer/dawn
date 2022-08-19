@@ -508,6 +508,17 @@ MaybeError ValidateCompatibilityWithBindGroupLayout(DeviceBase* device,
     return {};
 }
 
+// Returns the invalid argument, and if it is true additionally store the formatted
+// error in metadata.infringedLimits. This is to delay the emission of these validation
+// errors until the entry point is used.
+#define DelayedInvalidIf(invalid, ...)                                              \
+    ([&]() {                                                                        \
+        if (invalid) {                                                              \
+            metadata->infringedLimitErrors.push_back(absl::StrFormat(__VA_ARGS__)); \
+        }                                                                           \
+        return invalid;                                                             \
+    })()
+
 ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
     const DeviceBase* device,
     tint::inspector::Inspector* inspector,
@@ -517,24 +528,17 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
 
     std::unique_ptr<EntryPointMetadata> metadata = std::make_unique<EntryPointMetadata>();
 
-    // Returns the invalid argument, and if it is true additionally store the formatted
-    // error in metadata.infringedLimits. This is to delay the emission of these validation
-    // errors until the entry point is used.
-#define DelayedInvalidIf(invalid, ...)                                              \
-    ([&]() {                                                                        \
-        if (invalid) {                                                              \
-            metadata->infringedLimitErrors.push_back(absl::StrFormat(__VA_ARGS__)); \
-        }                                                                           \
-        return invalid;                                                             \
-    })()
-
     if (!entryPoint.overrides.empty()) {
-        DAWN_INVALID_IF(device->IsToggleEnabled(Toggle::DisallowUnsafeAPIs),
-                        "Pipeline overridable constants are disallowed because they "
-                        "are partially implemented.");
+        // DAWN_INVALID_IF(device->IsToggleEnabled(Toggle::DisallowUnsafeAPIs),
+        //                 "Pipeline overridable constants are disallowed because they "
+        //                 "are partially implemented.");
 
         const auto& name2Id = inspector->GetNamedOverrideIds();
         const auto& id2Scalar = inspector->GetOverrideDefaultValues();
+
+        // // Special handling for overrides used as workgroup size
+        // tint::transform::SubstituteOverride substituteOverride;
+        // tint::transform::SubstituteOverride::Config cfg;
 
         for (auto& c : entryPoint.overrides) {
             auto id = name2Id.at(c.name);
@@ -560,6 +564,15 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
             std::string identifier = c.is_id_specified ? std::to_string(override.id) : c.name;
             metadata->overrides[identifier] = override;
 
+            if (entryPoint.workgroup_size_override_ids.count(id) > 0) {
+                auto [_, inserted] = metadata->workgroupSizeOverrides.emplace(identifier);
+                // The insertion should have taken place
+                ASSERT(inserted);
+            }
+            // for(size_t i = 0; i < entryPoint.workgroup_size_ovveride_ids.size(); i++) {
+            //     metadata->workgroupSizeOverrides[i] = entryPoint.workgroup_size_ovveride_ids[i];
+            // }
+
             if (!c.is_initialized) {
                 auto [_, inserted] =
                     metadata->uninitializedOverrides.emplace(std::move(identifier));
@@ -571,45 +584,69 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
                 ASSERT(inserted);
             }
         }
+
+        // tint::transform::DataMap data;
+        // data.Add<tint::transform::SubstituteOverride::Config>(cfg);
     }
 
     DAWN_TRY_ASSIGN(metadata->stage, TintPipelineStageToShaderStage(entryPoint.stage));
 
     if (metadata->stage == SingleShaderStage::Compute) {
         auto workgroup_size = entryPoint.workgroup_size;
-        DAWN_INVALID_IF(
-            !workgroup_size.has_value(),
-            "TODO(crbug.com/dawn/1504): Dawn does not currently support @workgroup_size "
-            "attributes using override-expressions");
-        DelayedInvalidIf(workgroup_size->x > limits.v1.maxComputeWorkgroupSizeX ||
-                             workgroup_size->y > limits.v1.maxComputeWorkgroupSizeY ||
-                             workgroup_size->z > limits.v1.maxComputeWorkgroupSizeZ,
-                         "Entry-point uses workgroup_size(%u, %u, %u) that exceeds the "
-                         "maximum allowed (%u, %u, %u).",
-                         workgroup_size->x, workgroup_size->y, workgroup_size->z,
-                         limits.v1.maxComputeWorkgroupSizeX, limits.v1.maxComputeWorkgroupSizeY,
-                         limits.v1.maxComputeWorkgroupSizeZ);
+        // DAWN_INVALID_IF(
+        //     !workgroup_size.has_value(),
+        //     "TODO(crbug.com/dawn/1504): Dawn does not currently support @workgroup_size "
+        //     "attributes using override-expressions");
 
-        // Dimensions have already been validated against their individual limits above.
-        // Cast to uint64_t to avoid overflow in this multiplication.
-        uint64_t numInvocations =
-            static_cast<uint64_t>(workgroup_size->x) * workgroup_size->y * workgroup_size->z;
-        DelayedInvalidIf(numInvocations > limits.v1.maxComputeInvocationsPerWorkgroup,
-                         "The total number of workgroup invocations (%u) exceeds the "
-                         "maximum allowed (%u).",
-                         numInvocations, limits.v1.maxComputeInvocationsPerWorkgroup);
+        // if (!workgroup_size.has_value()) {
+        //     // The workgroup size should come from overridable constants given at pipeline
+        //     creation stage.
 
-        const size_t workgroupStorageSize = inspector->GetWorkgroupStorageSize(entryPoint.name);
-        DelayedInvalidIf(workgroupStorageSize > limits.v1.maxComputeWorkgroupStorageSize,
-                         "The total use of workgroup storage (%u bytes) is larger than "
-                         "the maximum allowed (%u bytes).",
-                         workgroupStorageSize, limits.v1.maxComputeWorkgroupStorageSize);
+        //     // TODO: how to detect if a override is used as workgroup size?
+        // } else {
+        if (workgroup_size.has_value()) {
+            // DelayedInvalidIf(workgroup_size->x > limits.v1.maxComputeWorkgroupSizeX ||
+            //                     workgroup_size->y > limits.v1.maxComputeWorkgroupSizeY ||
+            //                     workgroup_size->z > limits.v1.maxComputeWorkgroupSizeZ,
+            //                 "Entry-point uses workgroup_size(%u, %u, %u) that exceeds the "
+            //                 "maximum allowed (%u, %u, %u).",
+            //                 workgroup_size->x, workgroup_size->y, workgroup_size->z,
+            //                 limits.v1.maxComputeWorkgroupSizeX,
+            //                 limits.v1.maxComputeWorkgroupSizeY,
+            //                 limits.v1.maxComputeWorkgroupSizeZ);
 
-        metadata->localWorkgroupSize.x = workgroup_size->x;
-        metadata->localWorkgroupSize.y = workgroup_size->y;
-        metadata->localWorkgroupSize.z = workgroup_size->z;
+            // // Dimensions have already been validated against their individual limits above.
+            // // Cast to uint64_t to avoid overflow in this multiplication.
+            // uint64_t numInvocations =
+            //     static_cast<uint64_t>(workgroup_size->x) * workgroup_size->y * workgroup_size->z;
+            // DelayedInvalidIf(numInvocations > limits.v1.maxComputeInvocationsPerWorkgroup,
+            //                 "The total number of workgroup invocations (%u) exceeds the "
+            //                 "maximum allowed (%u).",
+            //                 numInvocations, limits.v1.maxComputeInvocationsPerWorkgroup);
 
-        metadata->usesNumWorkgroups = entryPoint.num_workgroups_used;
+            // const size_t workgroupStorageSize =
+            // inspector->GetWorkgroupStorageSize(entryPoint.name);
+            // DelayedInvalidIf(workgroupStorageSize > limits.v1.maxComputeWorkgroupStorageSize,
+            //                 "The total use of workgroup storage (%u bytes) is larger than "
+            //                 "the maximum allowed (%u bytes).",
+            //                 workgroupStorageSize, limits.v1.maxComputeWorkgroupStorageSize);
+
+            const size_t workgroupStorageSize = inspector->GetWorkgroupStorageSize(entryPoint.name);
+            DelayedCheckIfWorkgroupSizeIsInvalid(metadata.get(), limits, workgroup_size->x,
+                                                 workgroup_size->y, workgroup_size->z,
+                                                 workgroupStorageSize);
+
+            metadata->localWorkgroupSize.x = workgroup_size->x;
+            metadata->localWorkgroupSize.y = workgroup_size->y;
+            metadata->localWorkgroupSize.z = workgroup_size->z;
+
+            metadata->usesNumWorkgroups = entryPoint.num_workgroups_used;
+        }
+        // else {
+        //     // The workgroup size should come from overrides given at pipeline creation stage.
+        //     // They will be subsituted by const expressions at the pipeline creation stage.
+        //     metadata->workgroupSizeOverrides = entryPoint.;
+        // }
     }
 
     if (metadata->stage == SingleShaderStage::Vertex) {
@@ -820,9 +857,44 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
                        return result;
                    });
 
-#undef DelayedInvalidIf
     return std::move(metadata);
 }
+
+}  // namespace
+
+bool DelayedCheckIfWorkgroupSizeIsInvalid(EntryPointMetadata* metadata,
+                                          const CombinedLimits& limits,
+                                          uint32_t x,
+                                          uint32_t y,
+                                          uint32_t z,
+                                          size_t workgroupStorageSize) {
+    DelayedInvalidIf(x > limits.v1.maxComputeWorkgroupSizeX ||
+                         y > limits.v1.maxComputeWorkgroupSizeY ||
+                         z > limits.v1.maxComputeWorkgroupSizeZ,
+                     "Entry-point uses workgroup_size(%u, %u, %u) that exceeds the "
+                     "maximum allowed (%u, %u, %u).",
+                     x, y, z, limits.v1.maxComputeWorkgroupSizeX,
+                     limits.v1.maxComputeWorkgroupSizeY, limits.v1.maxComputeWorkgroupSizeZ);
+
+    // Dimensions have already been validated against their individual limits above.
+    // Cast to uint64_t to avoid overflow in this multiplication.
+    uint64_t numInvocations = static_cast<uint64_t>(x) * y * z;
+    DelayedInvalidIf(numInvocations > limits.v1.maxComputeInvocationsPerWorkgroup,
+                     "The total number of workgroup invocations (%u) exceeds the "
+                     "maximum allowed (%u).",
+                     numInvocations, limits.v1.maxComputeInvocationsPerWorkgroup);
+
+    DelayedInvalidIf(workgroupStorageSize > limits.v1.maxComputeWorkgroupStorageSize,
+                     "The total use of workgroup storage (%u bytes) is larger than "
+                     "the maximum allowed (%u bytes).",
+                     workgroupStorageSize, limits.v1.maxComputeWorkgroupStorageSize);
+
+    return false;
+}
+
+#undef DelayedInvalidIf
+
+namespace {
 
 MaybeError ValidateWGSLProgramExtension(const DeviceBase* device,
                                         const WGSLExtensionSet* enabledExtensions,
@@ -1146,6 +1218,12 @@ const tint::Program* ShaderModuleBase::GetTintProgram() const {
     return mTintProgram.get();
 }
 
+// void ShaderModuleBase::SetTintProgram(tint::Program&& program) {
+void ShaderModuleBase::SetTintProgram(std::unique_ptr<tint::Program>&& program) {
+    // mTintProgram = std::make_unique<tint::Program>(std::move(program));
+    mTintProgram = std::move(program);
+}
+
 void ShaderModuleBase::APIGetCompilationInfo(wgpu::CompilationInfoCallback callback,
                                              void* userdata) {
     if (callback == nullptr) {
@@ -1199,6 +1277,49 @@ MaybeError ShaderModuleBase::InitializeBase(ShaderModuleParseResult* parseResult
 
     DAWN_TRY(ReflectShaderUsingTint(GetDevice(), mTintProgram.get(), compilationMessages,
                                     &mEntryPoints, &mEnabledWGSLExtensions));
+
+    // // Special handling for overrides used as workgroup size
+    // tint::transform::SubstituteOverride substituteOverride;
+
+    // // TODO: if not set value, subsitute with default value, or report validation error
+    // tint::transform::SubstituteOverride::Config cfg;
+
+    // bool shouldDoTransform = false;
+
+    // for (auto& [_, metadata] : mEntryPoints) {
+    //     if (!metadata->workgroupSizeOverrides.empty()) {
+    //         for (auto key : metadata->workgroupSizeOverrides) {
+    //             // TODO:? duplicate workgroupSize?
+    //             shouldDoTransform = true;
+    //             const auto& o = metadata->overrides.at(key);
+    //             // cfg.map.insert(o.id, o.defaultValue});
+    //             // cfg.map.insert({tint::OverrideId{static_cast<uint16_t>(o.id)},
+    //             o.defaultValue.f32});
+    //             // cfg.map.insert({tint::OverrideId{static_cast<uint16_t>(o.id)},
+    //             o.defaultValue.u32});
+    //             cfg.map.insert({tint::OverrideId{static_cast<uint16_t>(o.id)}, 8u});
+    //         }
+    //     }
+    // }
+
+    // if (shouldDoTransform) {
+    //     tint::transform::DataMap data;
+    //     data.Add<tint::transform::SubstituteOverride::Config>(cfg);
+
+    //     tint::Program program;
+    //     DAWN_TRY_ASSIGN(program, RunTransforms(&substituteOverride, mTintProgram.get(), data,
+    //     nullptr, nullptr)); mTintProgram = std::make_unique<tint::Program>(std::move(program));
+
+    //     // if (mDevice->IsToggleEnabled(Toggle::DumpShaders)) {
+    //     //     std::ostringstream dumpedMsg;
+    //     //     dumpedMsg << "\n\n\n!!!!!!!!!!!!!!!!!! Transformed Dumped WGSL:" << std::endl <<
+    //     *mTintProgram.get();
+    //     //     // mDevice.EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+    //     // }
+    // // mTintProgram.reset(RunTransforms(&substituteOverride, mTintProgram.get(), data, nullptr,
+    // nullptr));
+    // }
+
     return {};
 }
 

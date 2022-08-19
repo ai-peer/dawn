@@ -58,11 +58,11 @@ MaybeError ValidateProgrammableStage(DeviceBase* device,
         DAWN_TRY(ValidateCompatibilityWithPipelineLayout(device, metadata, layout));
     }
 
-    if (constantCount > 0u && device->IsToggleEnabled(Toggle::DisallowUnsafeAPIs)) {
-        return DAWN_VALIDATION_ERROR(
-            "Pipeline overridable constants are disallowed because they are partially "
-            "implemented.");
-    }
+    // if (constantCount > 0u && device->IsToggleEnabled(Toggle::DisallowUnsafeAPIs)) {
+    //     return DAWN_VALIDATION_ERROR(
+    //         "Pipeline overridable constants are disallowed because they are partially "
+    //         "implemented.");
+    // }
 
     // Validate if overridable constants exist in shader module
     // pipelineBase is not yet constructed at this moment so iterate constants from descriptor
@@ -73,6 +73,8 @@ MaybeError ValidateProgrammableStage(DeviceBase* device,
         DAWN_INVALID_IF(metadata.overrides.count(constants[i].key) == 0,
                         "Pipeline overridable constant \"%s\" not found in %s.", constants[i].key,
                         module);
+
+        // TODO: do validation if it is a workgroup size override
 
         if (stageInitializedConstantIdentifiers.count(constants[i].key) == 0) {
             if (metadata.uninitializedOverrides.count(constants[i].key) > 0) {

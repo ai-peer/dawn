@@ -154,6 +154,18 @@ struct EntryPoint {
     /// size is derived from an override-expression. In this situation you first need to run the
     /// tint::transform::SubstituteOverride transform before using the inspector.
     std::optional<WorkgroupSize> workgroup_size;
+
+    // std::array<std::optional<WorkgroupDimension>, 3> workgroup_size_overrides;
+    // std::array<const ast::Variable*, 3> workgroup_size_overrides;
+    std::unordered_set<OverrideId> workgroup_size_override_ids;
+    // enum class WorkgroupSizeDimention
+
+    // key: OverrideId
+    // Value: {0, 1, 2} -> {x, y, z} dimension id of the workgroup size
+    // No duplicate?
+    // std::unordered_map<OverrideId, uint32_t> workgroup_size_override_ids;
+    // std::array<std::optional<OverrideId>, 3> workgroup_size_override_ids;
+
     /// List of the input variable accessed via this entry point.
     std::vector<StageVariable> input_variables;
     /// List of the output variable accessed via this entry point.

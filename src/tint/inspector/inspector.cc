@@ -156,6 +156,28 @@ std::vector<EntryPoint> Inspector::GetEntryPoints() {
                     !wgsize[2].overridable_const) {
                     entry_point.workgroup_size = {wgsize[0].value, wgsize[1].value,
                                                   wgsize[2].value};
+                } else {
+                    // if (wgsize[0].overridable_const) {
+                    //     entry_point.workgroup_size_overrides[0] = wgsize[0].overridable_const;
+                    // }
+                    // if (wgsize[1].overridable_const) {
+                    //     entry_point.workgroup_size_overrides[1] = wgsize[1].overridable_const;
+                    // }
+                    // if (wgsize[2].overridable_const) {
+                    //     entry_point.workgroup_size_overrides[2] = wgsize[2].overridable_const;
+                    // }
+                    for (size_t i = 0; i < 3; i++) {
+                        const ast::Variable* var = wgsize[i].overridable_const;
+                        if (var) {
+                            auto* global = program_->Sem().Get<sem::GlobalVariable>(var);
+                            TINT_ASSERT(Inspector, global);
+                            entry_point.workgroup_size_override_ids.emplace(global->OverrideId());
+                            // entry_point.workgroup_size_override_ids.emplace(global->OverrideId(),
+                            // i);
+                            // entry_point.workgroup_size_override_ids[i] =
+                            // std::optional<tint::OverrideId>{global->OverrideId()};
+                        }
+                    }
                 }
                 break;
             }

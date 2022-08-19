@@ -46,6 +46,8 @@ class ComputePipelineBase : public PipelineBase {
     explicit ComputePipelineBase(DeviceBase* device);
     void DestroyImpl() override;
 
+    MaybeError RunTintProgramTransformWorkgroupSize();
+
   private:
     ComputePipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 };
