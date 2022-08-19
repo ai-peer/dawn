@@ -108,7 +108,7 @@ DefineStrings GetOverridableConstantsDefines(
         const auto& moduleConstant = shaderEntryPointConstants.at(name);
 
         defineStrings.emplace_back(
-            kSpecConstantPrefix + std::to_string(static_cast<int32_t>(moduleConstant.id)),
+            kSpecConstantPrefix + std::to_string(static_cast<int32_t>(moduleConstant.id.value)),
             GetHLSLValueString(moduleConstant.type, nullptr, value));
     }
 
@@ -125,7 +125,7 @@ DefineStrings GetOverridableConstantsDefines(
         // Uninitialized default values are okay since they ar only defined to pass
         // compilation but not used
         defineStrings.emplace_back(
-            kSpecConstantPrefix + std::to_string(static_cast<int32_t>(moduleConstant.id)),
+            kSpecConstantPrefix + std::to_string(static_cast<int32_t>(moduleConstant.id.value)),
             GetHLSLValueString(moduleConstant.type, &moduleConstant.defaultValue));
     }
     return defineStrings;
@@ -556,8 +556,10 @@ ResultOrError<CompiledShader> ShaderModule::Compile(const ProgrammableStage& pro
 
     req.bytecode.hasShaderFloat16Feature = device->IsFeatureEnabled(Feature::ShaderFloat16);
     req.bytecode.compileFlags = compileFlags;
-    req.bytecode.defineStrings =
-        GetOverridableConstantsDefines(programmableStage.constants, entryPoint.overrides);
+    if (device->IsToggleEnabled(Toggle::UseBackendOverridesImplementation)) {
+        req.bytecode.defineStrings =
+            GetOverridableConstantsDefines(programmableStage.constants, entryPoint.overrides);
+    }
     if (device->IsToggleEnabled(Toggle::UseDXC)) {
         req.bytecode.compiler = Compiler::DXC;
         req.bytecode.dxcLibrary = device->GetDxcLibrary().Get();
@@ -646,7 +648,7 @@ ResultOrError<CompiledShader> ShaderModule::Compile(const ProgrammableStage& pro
         }
     }
 
-    req.hlsl.inputProgram = GetTintProgram();
+    req.hlsl.inputProgram = programmableStage.GetTintProgram();
     req.hlsl.entryPointName = programmableStage.entryPoint.c_str();
     req.hlsl.stage = stage;
     req.hlsl.firstIndexOffsetShaderRegister = layout->GetFirstIndexOffsetShaderRegister();
