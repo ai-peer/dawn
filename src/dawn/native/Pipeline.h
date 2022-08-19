@@ -18,6 +18,7 @@
 #include <array>
 #include <bitset>
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
