@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e2b64ba_e61454de",
+        "filename": "src/dawn/tests/unittests/ToBackendTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-19T22:13:41Z",
+      "side": 0,
+      "message": "bad things were happening because this symbol was getting redefined.\n\nIt used to work fine since we had ~AdapterBase() \u003d default in the header, but I moved it to the .cpp",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 41
+      },
+      "revId": "c2f332176e1cdba64cb2d6444e939ffc4643eb6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
