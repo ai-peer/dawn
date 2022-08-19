@@ -375,6 +375,7 @@ if (DAWN_ENABLE_METAL)
         "metal/ShaderModuleMTL.mm"
         "metal/StagingBufferMTL.h"
         "metal/StagingBufferMTL.mm"
+        "metal/StreamImplMTL.mm"
         "metal/SwapChainMTL.h"
         "metal/SwapChainMTL.mm"
         "metal/TextureMTL.h"
