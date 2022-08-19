@@ -929,6 +929,8 @@ TEST_P(BufferNoSuballocationTests, WriteBufferThenDestroy) {
     // Destroy the buffer.
     buffer.Destroy();
 
+    // Flush and wait for all commands.
+    queue.Submit(0, nullptr);
     WaitForAllOperations();
 }
 
