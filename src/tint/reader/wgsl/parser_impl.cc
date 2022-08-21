@@ -277,11 +277,20 @@ const Token& ParserImpl::peek(size_t idx) {
     }
 
     // Skip over any placeholder elements
-    while (true) {
-        if (!tokens_[next_token_idx_ + idx].IsPlaceholder()) {
-            break;
+    size_t pos = 0;
+    size_t end_token_count = idx + 1;
+    size_t num_tokens_found = 0;
+    while (num_tokens_found < end_token_count) {
+        if (next_token_idx_ + pos >= tokens_.size()) {
+            return tokens_[tokens_.size() - 1];
         }
-        idx++;
+
+        if (tokens_[next_token_idx_ + pos].IsPlaceholder()) {
+            idx++;
+        } else {
+            num_tokens_found++;
+        }
+        pos++;
     }
     if (next_token_idx_ + idx >= tokens_.size()) {
         return tokens_[tokens_.size() - 1];
