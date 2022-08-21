@@ -3419,28 +3419,25 @@ Expect<const ast::Attribute*> ParserImpl::expect_attribute() {
 }
 
 // attribute
-//   : ATTR 'align' PAREN_LEFT expression attrib_end
-//   | ATTR 'binding' PAREN_LEFT expression attrib_end
-//   | ATTR 'builtin' PAREN_LEFT builtin_value_name attrib_end
+//   : ATTR 'align' PAREN_LEFT expression COMMA? PAREN_RIGHT
+//   | ATTR 'binding' PAREN_LEFT expression COMMA? PAREN_RIGHT
+//   | ATTR 'builtin' PAREN_LEFT builtin_value_name COMMA? PAREN_RIGHT
 //   | ATTR 'const'
-//   | ATTR 'group' PAREN_LEFT expression attrib_end
-//   | ATTR 'id' PAREN_LEFT expression attrib_end
-//   | ATTR 'interpolate' PAREN_LEFT interpolation_type_name attrib_end
+//   | ATTR 'group' PAREN_LEFT expression COMMA? PAREN_RIGHT
+//   | ATTR 'id' PAREN_LEFT expression COMMA? PAREN_RIGHT
+//   | ATTR 'interpolate' PAREN_LEFT interpolation_type_name COMMA? PAREN_RIGHT
 //   | ATTR 'interpolate' PAREN_LEFT interpolation_type_name COMMA
-//                                   interpolation_sample_name attrib_end
+//                                   interpolation_sample_name COMMA? PAREN_RIGHT
 //   | ATTR 'invariant'
-//   | ATTR 'location' PAREN_LEFT expression attrib_end
-//   | ATTR 'size' PAREN_LEFT expression attrib_end
-//   | ATTR 'workgroup_size' PAREN_LEFT expression attrib_end
-//   | ATTR 'workgroup_size' PAREN_LEFT expression COMMA expression attrib_end
-//   | ATTR 'workgroup_size' PAREN_LEFT expression COMMA expression COMMA expression attrib_end
+//   | ATTR 'location' PAREN_LEFT expression COMMA? PAREN_RIGHT
+//   | ATTR 'size' PAREN_LEFT expression COMMA? PAREN_RIGHT
+//   | ATTR 'workgroup_size' PAREN_LEFT expression COMMA? PAREN_RIGHT
+//   | ATTR 'workgroup_size' PAREN_LEFT expression COMMA expression COMMA? PAREN_RIGHT
+//   | ATTR 'workgroup_size' PAREN_LEFT expression COMMA expression COMMA
+//                                      expression COMMA? PAREN_RIGHT
 //   | ATTR 'vertex'
 //   | ATTR 'fragment'
 //   | ATTR 'compute'
-//
-// attrib_end
-//   : COMMA? PAREN_RIGHT
-//
 Maybe<const ast::Attribute*> ParserImpl::attribute() {
     using Result = Maybe<const ast::Attribute*>;
     auto& t = next();
@@ -3615,7 +3612,7 @@ Maybe<const ast::Attribute*> ParserImpl::attribute() {
             const ast::Expression* y = nullptr;
             const ast::Expression* z = nullptr;
 
-            auto expr = primary_expression();
+            auto expr = expression();
             if (expr.errored) {
                 return Failure::kErrored;
             } else if (!expr.matched) {
@@ -3625,7 +3622,7 @@ Maybe<const ast::Attribute*> ParserImpl::attribute() {
 
             if (match(Token::Type::kComma)) {
                 if (!peek_is(Token::Type::kParenRight)) {
-                    expr = primary_expression();
+                    expr = expression();
                     if (expr.errored) {
                         return Failure::kErrored;
                     } else if (!expr.matched) {
@@ -3635,7 +3632,7 @@ Maybe<const ast::Attribute*> ParserImpl::attribute() {
 
                     if (match(Token::Type::kComma)) {
                         if (!peek_is(Token::Type::kParenRight)) {
-                            expr = primary_expression();
+                            expr = expression();
                             if (expr.errored) {
                                 return Failure::kErrored;
                             } else if (!expr.matched) {
