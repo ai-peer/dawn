@@ -89,7 +89,7 @@ static utils::Vector<const ast::Attribute*, 2> createAttributes(const Source& so
                                                                 AttributeKind kind) {
     switch (kind) {
         case AttributeKind::kAlign:
-            return {builder.create<ast::StructMemberAlignAttribute>(source, 4u)};
+            return {builder.create<ast::StructMemberAlignAttribute>(source, builder.Expr(4_u))};
         case AttributeKind::kBinding:
             return {builder.create<ast::BindingAttribute>(source, 1u)};
         case AttributeKind::kBuiltin:
@@ -629,8 +629,8 @@ TEST_F(StructMemberAttributeTest, DuplicateAttribute) {
               utils::Vector{
                   Member("a", ty.i32(),
                          utils::Vector{
-                             create<ast::StructMemberAlignAttribute>(Source{{12, 34}}, 4u),
-                             create<ast::StructMemberAlignAttribute>(Source{{56, 78}}, 8u),
+                             create<ast::StructMemberAlignAttribute>(Source{{12, 34}}, Expr(4_u)),
+                             create<ast::StructMemberAlignAttribute>(Source{{56, 78}}, Expr(8_u)),
                          }),
               });
     EXPECT_FALSE(r()->Resolve());

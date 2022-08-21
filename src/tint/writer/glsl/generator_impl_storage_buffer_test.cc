@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "gmock/gmock.h"
+#include "src/tint/number.h"
 #include "src/tint/writer/glsl/test_helper.h"
 
 using ::testing::HasSubstr;
@@ -31,9 +32,12 @@ void TestAlign(ProgramBuilder* ctx) {
     // @group(0) @binding(0) var<storage, read_write> nephews : Nephews;
     auto* nephews = ctx->Structure(
         "Nephews", utils::Vector{
-                       ctx->Member("huey", ctx->ty.f32(), utils::Vector{ctx->MemberAlign(256)}),
-                       ctx->Member("dewey", ctx->ty.f32(), utils::Vector{ctx->MemberAlign(256)}),
-                       ctx->Member("louie", ctx->ty.f32(), utils::Vector{ctx->MemberAlign(256)}),
+                       ctx->Member("huey", ctx->ty.f32(),
+                                   utils::Vector{ctx->MemberAlign(ctx->Expr(u32(256)))}),
+                       ctx->Member("dewey", ctx->ty.f32(),
+                                   utils::Vector{ctx->MemberAlign(ctx->Expr(u32(256)))}),
+                       ctx->Member("louie", ctx->ty.f32(),
+                                   utils::Vector{ctx->MemberAlign(ctx->Expr(u32(256)))}),
                    });
     ctx->GlobalVar("nephews", ctx->ty.Of(nephews), ast::StorageClass::kStorage, ctx->Binding(0),
                    ctx->Group(0));

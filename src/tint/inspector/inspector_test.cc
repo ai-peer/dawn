@@ -1807,12 +1807,12 @@ TEST_F(InspectorGetUniformBufferResourceBindingsTest, MultipleUniformBuffers) {
 TEST_F(InspectorGetUniformBufferResourceBindingsTest, ContainingArray) {
     // Manually create uniform buffer to make sure it had a valid layout (array
     // with elem stride of 16, and that is 16-byte aligned within the struct)
-    auto* foo_struct_type = Structure(
-        "foo_type",
-        utils::Vector{
-            Member("0i32", ty.i32()),
-            Member("b", ty.array(ty.u32(), 4_u, /*stride*/ 16), utils::Vector{MemberAlign(16)}),
-        });
+    auto* foo_struct_type =
+        Structure("foo_type", utils::Vector{
+                                  Member("0i32", ty.i32()),
+                                  Member("b", ty.array(ty.u32(), 4_u, /*stride*/ 16),
+                                         utils::Vector{MemberAlign(Expr(16_u))}),
+                              });
 
     AddUniformBuffer("foo_ub", ty.Of(foo_struct_type), 0, 0);
 
@@ -3241,7 +3241,7 @@ TEST_F(InspectorGetWorkgroupStorageSizeTest, StructAlignment) {
         "WgStruct",
         utils::Vector{
             MakeStructMember(0, ty.f32(),
-                             utils::Vector{create<ast::StructMemberAlignAttribute>(1024u)}),
+                             utils::Vector{create<ast::StructMemberAlignAttribute>(Expr(1024_u))}),
         });
 
     AddWorkgroupStorage("wg_struct_var", ty.Of(wg_struct_type));
