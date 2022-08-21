@@ -593,7 +593,7 @@ Maybe<const ast::Variable*> ParserImpl::global_variable_decl(AttributeList& attr
 
     const ast::Expression* initializer = nullptr;
     if (match(Token::Type::kEqual)) {
-        auto expr = maybe_expression();
+        auto expr = expression();
         if (expr.errored) {
             return Failure::kErrored;
         }
@@ -653,7 +653,7 @@ Maybe<const ast::Variable*> ParserImpl::global_constant_decl(AttributeList& attr
 
     const ast::Expression* initializer = nullptr;
     if (has_initializer) {
-        auto expr = maybe_expression();
+        auto expr = expression();
         if (expr.errored) {
             return Failure::kErrored;
         }
@@ -1440,7 +1440,7 @@ Maybe<const ast::StaticAssert*> ParserImpl::static_assert_statement() {
         return Failure::kNoMatch;
     }
 
-    auto condition = maybe_expression();
+    auto condition = expression();
     if (condition.errored) {
         return Failure::kErrored;
     }
@@ -1705,7 +1705,7 @@ Expect<ast::BlockStatement*> ParserImpl::expect_compound_statement() {
 //   : PAREN_LEFT expression PAREN_RIGHT
 Expect<const ast::Expression*> ParserImpl::expect_paren_expression() {
     return expect_paren_block("", [&]() -> Expect<const ast::Expression*> {
-        auto expr = maybe_expression();
+        auto expr = expression();
         if (expr.errored) {
             return Failure::kErrored;
         }
@@ -1909,7 +1909,7 @@ Maybe<const ast::ReturnStatement*> ParserImpl::return_statement() {
         return create<ast::ReturnStatement>(source, nullptr);
     }
 
-    auto expr = maybe_expression();
+    auto expr = expression();
     if (expr.errored) {
         return Failure::kErrored;
     }
@@ -1934,7 +1934,7 @@ Maybe<const ast::VariableDeclStatement*> ParserImpl::variable_statement() {
             return Failure::kErrored;
         }
 
-        auto initializer = maybe_expression();
+        auto initializer = expression();
         if (initializer.errored) {
             return Failure::kErrored;
         }
@@ -1961,7 +1961,7 @@ Maybe<const ast::VariableDeclStatement*> ParserImpl::variable_statement() {
             return Failure::kErrored;
         }
 
-        auto initializer = maybe_expression();
+        auto initializer = expression();
         if (initializer.errored) {
             return Failure::kErrored;
         }
@@ -1988,7 +1988,7 @@ Maybe<const ast::VariableDeclStatement*> ParserImpl::variable_statement() {
 
     const ast::Expression* initializer = nullptr;
     if (match(Token::Type::kEqual)) {
-        auto initializer_expr = maybe_expression();
+        auto initializer_expr = expression();
         if (initializer_expr.errored) {
             return Failure::kErrored;
         }
@@ -2032,7 +2032,7 @@ Maybe<const ast::IfStatement*> ParserImpl::if_statement() {
             return Failure::kNoMatch;
         }
 
-        auto condition = maybe_expression();
+        auto condition = expression();
         if (condition.errored) {
             return Failure::kErrored;
         }
@@ -2100,7 +2100,7 @@ Maybe<const ast::SwitchStatement*> ParserImpl::switch_statement() {
         return Failure::kNoMatch;
     }
 
-    auto condition = maybe_expression();
+    auto condition = expression();
     if (condition.errored) {
         return Failure::kErrored;
     }
@@ -2333,7 +2333,7 @@ Expect<std::unique_ptr<ForHeader>> ParserImpl::expect_for_header() {
         return Failure::kErrored;
     }
 
-    auto condition = maybe_expression();
+    auto condition = expression();
     if (condition.errored) {
         return Failure::kErrored;
     }
@@ -2381,7 +2381,7 @@ Maybe<const ast::WhileStatement*> ParserImpl::while_statement() {
         return Failure::kNoMatch;
     }
 
-    auto condition = maybe_expression();
+    auto condition = expression();
     if (condition.errored) {
         return Failure::kErrored;
     }
@@ -2615,7 +2615,7 @@ Maybe<const ast::Expression*> ParserImpl::postfix_expression(const ast::Expressi
     while (continue_parsing()) {
         if (match(Token::Type::kBracketLeft, &source)) {
             auto res = sync(Token::Type::kBracketRight, [&]() -> Maybe<const ast::Expression*> {
-                auto param = maybe_expression();
+                auto param = expression();
                 if (param.errored) {
                     return Failure::kErrored;
                 }
@@ -2663,7 +2663,7 @@ Expect<ParserImpl::ExpressionList> ParserImpl::expect_argument_expression_list(
     return expect_paren_block(use, [&]() -> Expect<ExpressionList> {
         ExpressionList ret;
         while (continue_parsing()) {
-            auto arg = maybe_expression();
+            auto arg = expression();
             if (arg.errored) {
                 return Failure::kErrored;
             } else if (!arg.matched) {
@@ -2895,7 +2895,7 @@ Maybe<const ast::Expression*> ParserImpl::element_count_expression() {
 
 // shift_expression
 //   : unary_expression shift_expression.post.unary_expression
-Maybe<const ast::Expression*> ParserImpl::maybe_shift_expression() {
+Maybe<const ast::Expression*> ParserImpl::shift_expression() {
     auto lhs = unary_expression();
     if (lhs.errored) {
         return Failure::kErrored;
@@ -2944,7 +2944,7 @@ Expect<const ast::Expression*> ParserImpl::expect_shift_expression_post_unary_ex
 
 // relational_expression
 //   : unary_expression relational_expression.post.unary_expression
-Maybe<const ast::Expression*> ParserImpl::maybe_relational_expression() {
+Maybe<const ast::Expression*> ParserImpl::relational_expression() {
     auto lhs = unary_expression();
     if (lhs.errored) {
         return Failure::kErrored;
@@ -2993,7 +2993,7 @@ Expect<const ast::Expression*> ParserImpl::expect_relational_expression_post_una
         }
 
         auto& next = peek();
-        auto rhs = maybe_shift_expression();
+        auto rhs = shift_expression();
         if (rhs.errored) {
             return Failure::kErrored;
         }
@@ -3015,7 +3015,7 @@ Expect<const ast::Expression*> ParserImpl::expect_relational_expression_post_una
 //        relational_expression ( or_or relational_expression )*
 //
 // Note, a `relational_expression` element was added to simplify many of the right sides
-Maybe<const ast::Expression*> ParserImpl::maybe_expression() {
+Maybe<const ast::Expression*> ParserImpl::expression() {
     auto lhs = unary_expression();
     if (lhs.errored) {
         return Failure::kErrored;
@@ -3059,7 +3059,7 @@ Maybe<const ast::Expression*> ParserImpl::maybe_expression() {
             }
             next();
 
-            auto rhs = maybe_relational_expression();
+            auto rhs = relational_expression();
             if (rhs.errored) {
                 return Failure::kErrored;
             }
@@ -3319,7 +3319,7 @@ Maybe<const ast::Statement*> ParserImpl::variable_updating_statement() {
         }
     }
 
-    auto rhs = maybe_expression();
+    auto rhs = expression();
     if (rhs.errored) {
         return Failure::kErrored;
     }
