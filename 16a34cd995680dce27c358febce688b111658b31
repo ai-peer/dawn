@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8184454_bfd51cb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-21T17:49:46Z",
+      "side": 1,
+      "message": "This requires https://github.com/gpuweb/cts/pull/1771 and a CTS roll before landing.",
+      "revId": "16a34cd995680dce27c358febce688b111658b31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
