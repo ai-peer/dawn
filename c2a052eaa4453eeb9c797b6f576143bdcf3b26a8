@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "736f916c_86a1ea3c",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-08-22T21:48:39Z",
+      "side": 0,
+      "message": "I sacrificed formats in order to prevent long test time (Corentin was concerned about it). It also makes the new tests easier in shaders and test code if there is only one format (RGBA8Unorm).",
+      "range": {
+        "startLine": 149,
+        "startChar": 24,
+        "endLine": 150,
+        "endChar": 58
+      },
+      "revId": "c2a052eaa4453eeb9c797b6f576143bdcf3b26a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

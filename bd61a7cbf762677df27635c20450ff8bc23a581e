@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d61af662_a8c2973c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-08-22T21:48:39Z",
+      "side": 1,
+      "message": "(This is not related to spec change but) add Kai, looks like Corentin and Austin are OOO recently.\n\nPTAL. Thank you!",
+      "revId": "bd61a7cbf762677df27635c20450ff8bc23a581e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
