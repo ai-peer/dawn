@@ -16,6 +16,24 @@
       "message": "This requires https://github.com/gpuweb/cts/pull/1771 and a CTS roll before landing.",
       "revId": "16a34cd995680dce27c358febce688b111658b31",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07b06c39_98013689",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-22T10:16:45Z",
+      "side": 1,
+      "message": "Merged. Kicking a roll now.",
+      "parentUuid": "d8184454_bfd51cb7",
+      "revId": "16a34cd995680dce27c358febce688b111658b31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
