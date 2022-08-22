@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "e2a80113705d39c5c6af848671a51b302e5ed82c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb44b74d_30e9a5e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-22T10:23:47Z",
+      "side": 1,
+      "message": "Please can we throw in an e2e test that uses some interesting expressions for `@workgroup_size` ?",
+      "revId": "e2a80113705d39c5c6af848671a51b302e5ed82c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
