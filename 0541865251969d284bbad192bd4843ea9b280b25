@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "688c1b5c_8cf6f100",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-22T10:54:35Z",
+      "side": 1,
+      "message": "I thought you were going to use the `AddSpirvBlockAttribute` for this?\nWas there an issue with using this transform?",
+      "revId": "0541865251969d284bbad192bd4843ea9b280b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
