@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "082db050_124c7e08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-22T13:49:19Z",
+      "side": 1,
+      "message": "I just wanna try to have some clean up on expectation.txt (in https://dawn-review.googlesource.com/c/dawn/+/100020), but it seems rather hard to manually update expectation for all 24 new CTS PRs, and I haven\u0027t figure out how to run the `run cts roll` script (hit some HTTP error, e.g. `failed to find existing roll gerrit changes: API call to https://dawn-review.googlesource.com/a/changes/?q\u003downer:me+is:open+repo:%22dawn%22+message:%22Roll+third_party%2Fwebgpu-cts%2F+%22 failed: 400 Bad Request`).\nMaybe I could wait for your rolling patch landed, and have a further look if the clean up is still necessary... ",
+      "revId": "55100de862e7c4ce0693ec6515b368966c505726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
