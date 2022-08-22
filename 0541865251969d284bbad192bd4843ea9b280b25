@@ -52,6 +52,24 @@
       "parentUuid": "8f78f433_245a8024",
       "revId": "0541865251969d284bbad192bd4843ea9b280b25",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50aedf4f_52340441",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-22T22:40:27Z",
+      "side": 1,
+      "message": "OK, so it turns out James already added the AddSpirvBlockAttribute transform to the GLSL backend here: https://dawn-review.googlesource.com/c/tint/+/76164, in order to turn wrap all non-struct interface variables in structs.\n\nAFAICT, the only actual use of SpirvBlockAttribute in the SPIR-V backend is to decorate structs used as memory buffers with SpvDecorationBlock. I suppose I could use it determine when to emit an interface block, but I don\u0027t see how that helps.",
+      "parentUuid": "ed7d11bb_b8b29192",
+      "revId": "0541865251969d284bbad192bd4843ea9b280b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
