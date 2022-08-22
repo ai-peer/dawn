@@ -16,6 +16,24 @@
       "message": "I thought you were going to use the `AddSpirvBlockAttribute` for this?\nWas there an issue with using this transform?",
       "revId": "0541865251969d284bbad192bd4843ea9b280b25",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f78f433_245a8024",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-08-22T18:47:40Z",
+      "side": 1,
+      "message": "I looked at it, but TBH I don\u0027t understand the need for special handling of nested structs. I\u0027m probably missing something, but this simple CL handles all the test cases. Are there cases not covered by existing tests?",
+      "parentUuid": "688c1b5c_8cf6f100",
+      "revId": "0541865251969d284bbad192bd4843ea9b280b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
