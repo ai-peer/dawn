@@ -33,6 +33,24 @@
       "message": "Please can we throw in an e2e test that uses some interesting expressions for `@workgroup_size` ?",
       "revId": "e2a80113705d39c5c6af848671a51b302e5ed82c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42276328_2dd329b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-22T19:14:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb44b74d_30e9a5e9",
+      "revId": "e2a80113705d39c5c6af848671a51b302e5ed82c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
