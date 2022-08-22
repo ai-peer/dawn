@@ -87,6 +87,30 @@
       },
       "revId": "ff95882eb486d4930b64b98b1eaa2d31cef2de37",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd5c2163_bde612a6",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-22T13:38:52Z",
+      "side": 1,
+      "message": "It is, but you have to account for it. So, if you have `|1|PH|2|PH|3|` you should have:\n\n- peek 0: 1\n- peek 1: 2\n- peek 2: 3\n\nBut, if you start counting at `next + 2` you\u0027ll return `2` as you need to account for the `PH` prior. So, you have to walk from the start and count each `PH` seen.",
+      "parentUuid": "e6d0f72c_76827503",
+      "range": {
+        "startLine": 274,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 1
+      },
+      "revId": "ff95882eb486d4930b64b98b1eaa2d31cef2de37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
