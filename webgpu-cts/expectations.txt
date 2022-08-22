@@ -59,7 +59,7 @@
 # tags: [ webgpu-adapter-default webgpu-adapter-swiftshader ]
 # END TAG HEADER
 
-# Last rolled: 2022-08-05 10:38:27AM
+# Last rolled: 2022-08-22 08:48:06AM
 
 ################################################################################
 # webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero
@@ -528,27 +528,9 @@ crbug.com/dawn/0000 [ win ] webgpu:shader,execution,memory_model,* [ Failure ]
 ################################################################################
 # shader validation failures
 ################################################################################
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val=".0" [ Failure ]
 crbug.com/tint/0000 webgpu:shader,validation,parse,blankspace:null_characters:contains_null=true;placement="comment" [ Failure ]
 crbug.com/tint/0000 webgpu:shader,validation,parse,blankspace:null_characters:contains_null=true;placement="eol" [ Failure ]
-crbug.com/tint/0000 [ amd-0x6821 monterey ] webgpu:shader,validation,parse,identifiers:identifiers:* [ Failure ]
-crbug.com/tint/0000 [ intel-gen-9 monterey ] webgpu:shader,validation,parse,identifiers:identifiers:* [ Failure ]
-crbug.com/tint/0000 [ intel-gen-9 ubuntu ] webgpu:shader,validation,parse,identifiers:identifiers:* [ Failure ]
-crbug.com/tint/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,identifiers:identifiers:* [ Failure ]
-crbug.com/tint/0000 [ nvidia-0x2184 ubuntu ] webgpu:shader,validation,parse,identifiers:identifiers:* [ Failure ]
-crbug.com/tint/0000 [ nvidia-0x2184 win10 ] webgpu:shader,validation,parse,identifiers:identifiers:* [ Failure ]
-crbug.com/tint/1502 webgpu:shader,validation,parse,literal:abstract_float:val=".1h" [ Failure ]
-crbug.com/tint/1502 webgpu:shader,validation,parse,literal:abstract_float:val="0X3h" [ Failure ]
-crbug.com/tint/1502 webgpu:shader,validation,parse,literal:abstract_float:val="0h" [ Failure ]
-crbug.com/tint/1502 webgpu:shader,validation,parse,literal:abstract_float:val="0x3.2p%2B2h" [ Failure ]
-crbug.com/tint/1502 webgpu:shader,validation,parse,literal:abstract_float:val="0x3p%2B2h" [ Failure ]
-crbug.com/tint/1502 webgpu:shader,validation,parse,literal:abstract_float:val="0xEp-2h" [ Failure ]
-crbug.com/tint/1502 webgpu:shader,validation,parse,literal:abstract_float:val="0xep2h" [ Failure ]
-crbug.com/tint/1502 webgpu:shader,validation,parse,literal:abstract_float:val="1.1E%2B2h" [ Failure ]
-crbug.com/tint/1502 webgpu:shader,validation,parse,literal:abstract_float:val="1.1e2h" [ Failure ]
-crbug.com/tint/1502 webgpu:shader,validation,parse,literal:abstract_float:val="1h" [ Failure ]
-crbug.com/tint/1502 webgpu:shader,validation,parse,literal:abstract_float:val="2.4e-2h" [ Failure ]
-crbug.com/tint/1525 webgpu:shader,validation,parse,literal:u32:val="-2147483648" [ Failure ]
+crbug.com/tint/1463 webgpu:shader,validation,parse,identifiers:identifiers:* [ Failure ]
 
 ################################################################################
 # API validation failures
@@ -793,34 +775,6 @@ crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,execution,expression,una
 crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,execution,expression,unary,f32_arithmetic:negation:inputSource="storage_r";vectorize=3 [ Failure ]
 crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,execution,robust_access:linear_memory:storageClass="storage";storageMode="read";access="read";dynamicOffset=false;containerType="array";isAtomic=false [ Failure ]
 crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,execution,zero_init:compute,zero_init:storageClass="workgroup";workgroupSize=[33,1,1];batch__=3 [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val=".12" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val=".12f" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val="0.0" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val="0.0f" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val="0X.3" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val="0X1.fp-4" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val="0x.3" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val="0x.p2" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val="0x1.0p%2B999999h" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val="0xE.fp%2B2" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val="0xa.fp%2B2" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val="1.0e%2B999999999999f" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val="1.1e%2Bh" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val="1.2e2" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val="1.e%2Bf" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val="12." [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val="2.4e%2B4f" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_float:val="2.e%2B4f" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_int:val="-1u" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_int:val="0" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_int:val="2147483648i" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_int:val="4294967295i" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:abstract_int:val="94i" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:f16:val=".1h" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:f16:val="0.0" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:f16:val="1.0e%2B999999h" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:f16:val="1h" [ Failure ]
-crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,parse,literal:f32:val=".e-2" [ Failure ]
 crbug.com/dawn/0000 [ intel-gen-9 win10 ] webgpu:shader,validation,shader_io,builtins:reuse_builtin_name:name="frag_depth";stage="fragment";io="out";type="f32";use="module-var" [ Failure ]
 crbug.com/dawn/0000 [ amd-0x6821 monterey webgpu-adapter-default ] webgpu:web_platform,canvas,configure:alpha_mode:* [ Failure ]
 crbug.com/dawn/0000 [ amd-0x6821 monterey webgpu-adapter-swiftshader ] webgpu:web_platform,canvas,configure:alpha_mode:* [ Failure ]
