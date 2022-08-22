@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d01ad87d_dcf48174",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1126,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-22T09:40:42Z",
+      "side": 1,
+      "message": "This is really poorly named in the spec.\nI believe most would expect a `type declaration` to be a declaration of a new type, i.e. `struct X { ... }` or `type T \u003d ...`.\nI would expect this to be called just `type`.",
+      "range": {
+        "startLine": 1126,
+        "startChar": 36,
+        "endLine": 1126,
+        "endChar": 59
+      },
+      "revId": "42cec1bcdf9b43cbeb8791854214622ee185dff2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
