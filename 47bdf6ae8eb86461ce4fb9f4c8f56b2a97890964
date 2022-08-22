@@ -16,6 +16,75 @@
       "message": "PTAL.",
       "revId": "47bdf6ae8eb86461ce4fb9f4c8f56b2a97890964",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1e2e40b_f43c8a83",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2289,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-22T10:53:26Z",
+      "side": 1,
+      "message": "```\n    /// Creates a ast::StructMemberAlignAttribute\n    /// @param source the source information\n    /// @param val the align value expression\n    /// @returns the align attribute pointer\n    template \u003ctypename EXPR\u003e\n    const ast::StructMemberAlignAttribute* MemberAlign(const Source\u0026 source, EXPR\u0026\u0026 val) {\n        return create\u003cast::StructMemberAlignAttribute\u003e(source, Expr(std::forward\u003cEXPR\u003e(val)));\n    }\n\n    /// Creates a ast::StructMemberAlignAttribute\n    /// @param val the align value expression\n    /// @returns the align attribute pointer\n    template \u003ctypename EXPR\u003e\n    const ast::StructMemberAlignAttribute* MemberAlign(EXPR\u0026\u0026 val) {\n        return create\u003cast::StructMemberAlignAttribute\u003e(source_, Expr(std::forward\u003cEXPR\u003e(val)));\n    }\n```\n\nThen you can drop all the `Expr()` stuff in usage.",
+      "range": {
+        "startLine": 2274,
+        "startChar": 0,
+        "endLine": 2289,
+        "endChar": 5
+      },
+      "revId": "47bdf6ae8eb86461ce4fb9f4c8f56b2a97890964",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21721619_f8740dfb",
+        "filename": "src/tint/resolver/attribute_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-22T10:53:26Z",
+      "side": 1,
+      "message": "`MemberAlign` ?",
+      "range": {
+        "startLine": 632,
+        "startChar": 29,
+        "endLine": 632,
+        "endChar": 68
+      },
+      "revId": "47bdf6ae8eb86461ce4fb9f4c8f56b2a97890964",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1209c95a_78d7510b",
+        "filename": "src/tint/writer/glsl/generator_impl_storage_buffer_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-22T10:53:26Z",
+      "side": 1,
+      "message": "`256_u` ?",
+      "range": {
+        "startLine": 36,
+        "startChar": 76,
+        "endLine": 36,
+        "endChar": 84
+      },
+      "revId": "47bdf6ae8eb86461ce4fb9f4c8f56b2a97890964",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
