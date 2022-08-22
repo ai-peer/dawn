@@ -133,6 +133,30 @@
       },
       "revId": "47bdf6ae8eb86461ce4fb9f4c8f56b2a97890964",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91cad07b_b64dc648",
+        "filename": "src/tint/writer/glsl/generator_impl_storage_buffer_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-22T13:42:24Z",
+      "side": 1,
+      "message": "Nope, it\u0027s actually an error from `operator\"\"_u` itself:\n\n```\nerror: no matching literal operator for call to \u0027operator\"\"_u\u0027 with argument of type \u0027unsigned long long\u0027 or \u0027const char *\u0027, and no matching literal operator template\nutils::Vector{ctx-\u003eMemberAlign(ctx-\u003eExpr(256_u))}),\n                                            ^\n\n```",
+      "parentUuid": "0182194b_4cebca1a",
+      "range": {
+        "startLine": 36,
+        "startChar": 76,
+        "endLine": 36,
+        "endChar": 84
+      },
+      "revId": "47bdf6ae8eb86461ce4fb9f4c8f56b2a97890964",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
