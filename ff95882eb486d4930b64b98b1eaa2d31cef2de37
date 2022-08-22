@@ -63,6 +63,30 @@
       },
       "revId": "ff95882eb486d4930b64b98b1eaa2d31cef2de37",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6d0f72c_76827503",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-22T13:34:26Z",
+      "side": 1,
+      "message": "\u003e initial `count + next_token_idx_` may skip over a placeholder\n\nIsn\u0027t that what you want to happen?",
+      "parentUuid": "79a14096_5e3f7830",
+      "range": {
+        "startLine": 274,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 1
+      },
+      "revId": "ff95882eb486d4930b64b98b1eaa2d31cef2de37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
