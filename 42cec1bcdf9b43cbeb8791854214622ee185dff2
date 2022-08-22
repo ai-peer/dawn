@@ -46,6 +46,30 @@
       },
       "revId": "42cec1bcdf9b43cbeb8791854214622ee185dff2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdc16bee_1e3c3f38",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1126,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-22T12:30:58Z",
+      "side": 1,
+      "message": "It\u0027s because of how we use it, it\u0027s a lot easier in the grammar to not have `ident` in here as it causes conflicts later.",
+      "parentUuid": "22617dfb_742c81d4",
+      "range": {
+        "startLine": 1126,
+        "startChar": 36,
+        "endLine": 1126,
+        "endChar": 59
+      },
+      "revId": "42cec1bcdf9b43cbeb8791854214622ee185dff2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
