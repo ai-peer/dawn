@@ -16,6 +16,46 @@
       "message": "PTAL.",
       "revId": "32c7fda7aab154727abae9a3e7c536ba4bb0cc74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06a8aee7_76d85a3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-22T09:32:26Z",
+      "side": 1,
+      "message": "Nicely done.",
+      "revId": "32c7fda7aab154727abae9a3e7c536ba4bb0cc74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43d3c295_ea116fd8",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-22T09:32:26Z",
+      "side": 1,
+      "message": "2",
+      "range": {
+        "startLine": 1,
+        "startChar": 16,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "32c7fda7aab154727abae9a3e7c536ba4bb0cc74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
