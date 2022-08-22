@@ -34,6 +34,24 @@
       "parentUuid": "688c1b5c_8cf6f100",
       "revId": "0541865251969d284bbad192bd4843ea9b280b25",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed7d11bb_b8b29192",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-22T19:11:49Z",
+      "side": 1,
+      "message": "The handling is to only split the structure if it is needed. If there\u0027s no other use of the structure, aside from direct use from storage, uniform or pushconstant, then it isn\u0027t split.\n\n\u003e Are there cases not covered by existing tests?\n\nPush constants. Everything else appears to work - however, I\u0027d rather we unified this logic (by using the existing transform) instead of adding a complexity to one backend, and having two solutions to maintain.",
+      "parentUuid": "8f78f433_245a8024",
+      "revId": "0541865251969d284bbad192bd4843ea9b280b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
