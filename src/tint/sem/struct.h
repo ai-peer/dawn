@@ -23,6 +23,7 @@
 
 #include "src/tint/ast/storage_class.h"
 #include "src/tint/ast/struct.h"
+#include "src/tint/sem/expression.h"
 #include "src/tint/sem/node.h"
 #include "src/tint/sem/type.h"
 #include "src/tint/symbol.h"
@@ -32,6 +33,7 @@ namespace tint::ast {
 class StructMember;
 }  // namespace tint::ast
 namespace tint::sem {
+class MemberAccessorExpression;
 class StructMember;
 class Type;
 }  // namespace tint::sem
@@ -219,6 +221,12 @@ class StructMember final : public Castable<StructMember, Node> {
     /// @returns byte size
     uint32_t Size() const { return size_; }
 
+    /// @returns the list of accesses to this member
+    const utils::Vector<const MemberAccessorExpression*, 4>& Accesses() const { return accesses_; }
+
+    /// @param access the access to this member
+    void AddAccess(const MemberAccessorExpression* access) { accesses_.Push(access); }
+
   private:
     const ast::StructMember* const declaration_;
     const Symbol name_;
@@ -228,6 +236,7 @@ class StructMember final : public Castable<StructMember, Node> {
     const uint32_t offset_;
     const uint32_t align_;
     const uint32_t size_;
+    utils::Vector<const MemberAccessorExpression*, 4> accesses_;
 };
 
 }  // namespace tint::sem
