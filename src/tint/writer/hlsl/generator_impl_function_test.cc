@@ -724,25 +724,10 @@ TEST_F(HlslGeneratorImplTest_Function,
 
     GeneratorImpl& gen = Build();
 
-    ASSERT_TRUE(gen.Generate()) << gen.error();
-    EXPECT_EQ(gen.result(), R"(#ifndef WGSL_SPEC_CONSTANT_7
-#define WGSL_SPEC_CONSTANT_7 2
-#endif
-static const int width = WGSL_SPEC_CONSTANT_7;
-#ifndef WGSL_SPEC_CONSTANT_8
-#define WGSL_SPEC_CONSTANT_8 3
-#endif
-static const int height = WGSL_SPEC_CONSTANT_8;
-#ifndef WGSL_SPEC_CONSTANT_9
-#define WGSL_SPEC_CONSTANT_9 4
-#endif
-static const int depth = WGSL_SPEC_CONSTANT_9;
-
-[numthreads(WGSL_SPEC_CONSTANT_7, WGSL_SPEC_CONSTANT_8, WGSL_SPEC_CONSTANT_9)]
-void main() {
-  return;
-}
-)");
+    EXPECT_FALSE(gen.Generate()) << gen.error();
+    EXPECT_EQ(
+        gen.error(),
+        R"(error: override expressions should have been removed with the SubstituteOverride transform)");
 }
 
 TEST_F(HlslGeneratorImplTest_Function, Emit_Function_WithArrayParams) {

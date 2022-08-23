@@ -814,26 +814,10 @@ TEST_F(GlslGeneratorImplTest_Function,
 
     GeneratorImpl& gen = Build();
 
-    ASSERT_TRUE(gen.Generate()) << gen.error();
-    EXPECT_EQ(gen.result(), R"(#version 310 es
-
-#ifndef WGSL_SPEC_CONSTANT_7
-#define WGSL_SPEC_CONSTANT_7 2
-#endif
-const int width = WGSL_SPEC_CONSTANT_7;
-#ifndef WGSL_SPEC_CONSTANT_8
-#define WGSL_SPEC_CONSTANT_8 3
-#endif
-const int height = WGSL_SPEC_CONSTANT_8;
-#ifndef WGSL_SPEC_CONSTANT_9
-#define WGSL_SPEC_CONSTANT_9 4
-#endif
-const int depth = WGSL_SPEC_CONSTANT_9;
-layout(local_size_x = WGSL_SPEC_CONSTANT_7, local_size_y = WGSL_SPEC_CONSTANT_8, local_size_z = WGSL_SPEC_CONSTANT_9) in;
-void main() {
-  return;
-}
-)");
+    EXPECT_FALSE(gen.Generate()) << gen.error();
+    EXPECT_EQ(
+        gen.error(),
+        R"(error: override expressions should have been removed with the SubstituteOverride transform)");
 }
 
 TEST_F(GlslGeneratorImplTest_Function, Emit_Function_WithArrayParams) {
