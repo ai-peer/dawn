@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eed3b541_d9410fac",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-23T15:14:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f45e21d5_415cbd5f",
+      "revId": "c27893c84d7ba4280c46f3f4bfe544bec51fa695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41fe2bd1_a1da1f58",
