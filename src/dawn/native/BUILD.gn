@@ -231,6 +231,8 @@ source_set("sources") {
     "CopyTextureForBrowserHelper.h",
     "CreatePipelineAsyncTask.cpp",
     "CreatePipelineAsyncTask.h",
+    "Destroyable.cpp",
+    "Destroyable.h",
     "Device.cpp",
     "Device.h",
     "DynamicUploader.cpp",
