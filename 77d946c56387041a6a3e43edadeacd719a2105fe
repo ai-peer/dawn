@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cf2f7ec_676eca9d",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-23T14:48:56Z",
+      "side": 1,
+      "message": "This whole function is a bit of a mess due to the legacy spec on `@workgroup_size`.\n\nI\u0027ve tried to clean this all up in https://dawn-review.googlesource.com/c/dawn/+/100142",
+      "range": {
+        "startLine": 917,
+        "startChar": 15,
+        "endLine": 917,
+        "endChar": 28
+      },
+      "revId": "77d946c56387041a6a3e43edadeacd719a2105fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
