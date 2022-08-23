@@ -243,11 +243,11 @@ class Vector {
 
     /// Move constructor from a mutable vector reference
     /// @param other the vector reference to move
-    explicit Vector(VectorRef<T>&& other) { MoveOrCopy(std::move(other)); }
+    Vector(VectorRef<T>&& other) { MoveOrCopy(std::move(other)); }  // NOLINT(runtime/explicit)
 
     /// Copy constructor from an immutable vector reference
     /// @param other the vector reference to copy
-    explicit Vector(const VectorRef<T>& other) { Copy(other.slice_); }
+    Vector(const VectorRef<T>& other) { Copy(other.slice_); }  // NOLINT(runtime/explicit)
 
     /// Destructor
     ~Vector() { ClearAndFree(); }
