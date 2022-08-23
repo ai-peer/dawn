@@ -14,6 +14,7 @@
 
 #include "src/tint/transform/add_spirv_block_attribute.h"
 
+#include <unordered_set>
 #include <utility>
 
 #include "src/tint/program_builder.h"
@@ -25,6 +26,19 @@ TINT_INSTANTIATE_TYPEINFO(tint::transform::AddSpirvBlockAttribute);
 TINT_INSTANTIATE_TYPEINFO(tint::transform::AddSpirvBlockAttribute::SpirvBlockAttribute);
 
 namespace tint::transform {
+
+namespace {
+
+bool IsUsedAsNonBuffer(const std::unordered_set<tint::ast::StorageClass>& uses) {
+    for (auto use : uses) {
+        if (!ast::IsHostShareable(use)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+}  // namespace
 
 AddSpirvBlockAttribute::AddSpirvBlockAttribute() = default;
 
@@ -66,8 +80,10 @@ void AddSpirvBlockAttribute::Run(CloneContext& ctx, const DataMap&, DataMap&) co
 
         auto* ty = var->Type()->UnwrapRef();
         auto* str = ty->As<sem::Struct>();
-        bool needs_wrapping = !str ||                        // Type is not a structure
-                              nested_structs.Contains(str);  // Structure is nested by another type
+        bool needs_wrapping =
+            !str ||                                       // Type is not a structure
+            nested_structs.Contains(str) ||               // Structure is nested by another type
+            IsUsedAsNonBuffer(str->StorageClassUsage());  // Structure is used as a non-buffer usage
 
         if (needs_wrapping) {
             const char* kMemberName = "inner";
