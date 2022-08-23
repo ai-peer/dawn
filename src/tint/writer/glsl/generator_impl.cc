@@ -282,18 +282,16 @@ bool GeneratorImpl::Generate() {
                 return false;
             }
         } else if (auto* str = decl->As<ast::Struct>()) {
-            // Skip emission if the struct contains a runtime-sized array, since its
-            // only use will be as the store-type of a buffer and we emit those
-            // elsewhere.
-            // TODO(crbug.com/tint/1339): We could also avoid emitting any other
-            // struct that is only used as a buffer store type.
-            const sem::Struct* sem_str = builder_.Sem().Get(str);
-            const auto& members = sem_str->Members();
-            TINT_ASSERT(Writer, members.size() > 0);
-            auto* last_member = members[members.size() - 1];
-            auto* arr = last_member->Type()->As<sem::Array>();
-            if (!arr || !arr->IsRuntimeSized()) {
-                if (!EmitStructType(current_buffer_, sem_str)) {
+            auto* sem = builder_.Sem().Get(str);
+            bool has_rt_arr = false;
+            if (auto* arr = sem->Members().back()->Type()->As<sem::Array>()) {
+                has_rt_arr = arr->IsRuntimeSized();
+            }
+            bool is_block =
+                ast::HasAttribute<transform::AddSpirvBlockAttribute::SpirvBlockAttribute>(
+                    str->attributes);
+            if (!has_rt_arr && !is_block) {
+                if (!EmitStructType(current_buffer_, sem)) {
                     return false;
                 }
             }
@@ -1929,7 +1927,7 @@ bool GeneratorImpl::EmitUniformVariable(const ast::Var* var, const sem::Variable
         if (version_.IsDesktop()) {
             out << ", std140";
         }
-        out << ") uniform " << UniqueIdentifier(StructName(str)) << " {";
+        out << ") uniform " << UniqueIdentifier(StructName(str) + "_ubo") << " {";
     }
     EmitStructMembers(current_buffer_, str, /* emit_offsets */ true);
     auto name = builder_.Symbols().NameFor(var->symbol);
@@ -1948,10 +1946,12 @@ bool GeneratorImpl::EmitStorageVariable(const ast::Var* var, const sem::Variable
     }
     ast::VariableBindingPoint bp = var->BindingPoint();
     line() << "layout(binding = " << bp.binding->value << ", std430) buffer "
-           << UniqueIdentifier(StructName(str)) << " {";
+           << UniqueIdentifier(StructName(str) + "_ssbo") << " {";
     EmitStructMembers(current_buffer_, str, /* emit_offsets */ true);
     auto name = builder_.Symbols().NameFor(var->symbol);
     line() << "} " << name << ";";
+    line();
+
     return true;
 }
 
