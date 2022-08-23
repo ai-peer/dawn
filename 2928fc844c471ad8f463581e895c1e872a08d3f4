@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24fa344f_d0ceea71",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-08-23T03:56:27Z",
+      "side": 1,
+      "message": "This is confusing me because sampling and textureLoad are not ways to write to a texture. I think I understand from reading the code, all three of these write to the texture, just reading from different sources? What I don\u0027t quite understand is which texture is being tested. The source or the destination?\nIt\u0027s also harder for me because I haven\u0027t seen this code before.\n\nIMO, add a short comment on each WriteType value describing what the test will do with that WriteType.",
+      "range": {
+        "startLine": 10,
+        "startChar": 26,
+        "endLine": 11,
+        "endChar": 15
+      },
+      "revId": "2928fc844c471ad8f463581e895c1e872a08d3f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad29c1e9_6efcf642",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-08-23T03:56:27Z",
+      "side": 1,
+      "message": "here",
+      "revId": "2928fc844c471ad8f463581e895c1e872a08d3f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
