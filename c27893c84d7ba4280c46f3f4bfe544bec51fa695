@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f45e21d5_415cbd5f",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-23T15:09:32Z",
+      "side": 1,
+      "message": "I\u0027m not gutting all the override stuff in this CL - just the stuff specific to `workgroup_size`",
+      "parentUuid": "1113fb17_87768b8f",
+      "revId": "c27893c84d7ba4280c46f3f4bfe544bec51fa695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41fe2bd1_a1da1f58",
         "filename": "src/tint/writer/glsl/generator_impl.cc",
         "patchSetId": 1
