@@ -178,16 +178,20 @@ fn main() {
 }
 )";
     auto* expect = R"(
-@internal(spirv_block)
 struct S {
   f : f32,
 }
 
-@group(0) @binding(0) var<uniform> u : S;
+@internal(spirv_block)
+struct u_block {
+  inner : S,
+}
+
+@group(0) @binding(0) var<uniform> u : u_block;
 
 @fragment
 fn main() {
-  let f = u;
+  let f = u.inner;
 }
 )";
 
