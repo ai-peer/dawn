@@ -1,18 +1,10 @@
 #version 310 es
 
-struct vertexUniformBuffer1 {
-  mat2 transform1;
-};
-
-struct vertexUniformBuffer2 {
-  mat2 transform2;
-};
-
-layout(binding = 0) uniform vertexUniformBuffer1_1 {
+layout(binding = 0) uniform vertexUniformBuffer1_ubo {
   mat2 transform1;
 } x_20;
 
-layout(binding = 0) uniform vertexUniformBuffer2_1 {
+layout(binding = 0) uniform vertexUniformBuffer2_ubo {
   mat2 transform2;
 } x_26;
 
