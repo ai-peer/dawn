@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1113fb17_87768b8f",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-23T15:01:54Z",
+      "side": 1,
+      "message": "Remove",
+      "revId": "c27893c84d7ba4280c46f3f4bfe544bec51fa695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41fe2bd1_a1da1f58",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1907,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-23T15:01:54Z",
+      "side": 1,
+      "message": "Remove?",
+      "revId": "c27893c84d7ba4280c46f3f4bfe544bec51fa695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bae9f8d_97606cf8",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2999,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-23T15:01:54Z",
+      "side": 1,
+      "message": "Remove?",
+      "revId": "c27893c84d7ba4280c46f3f4bfe544bec51fa695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4007470f_324d8c0a",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-23T15:01:54Z",
+      "side": 1,
+      "message": "Remove",
+      "revId": "c27893c84d7ba4280c46f3f4bfe544bec51fa695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8bd6aa7_daee3506",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2867,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-23T15:01:54Z",
+      "side": 1,
+      "message": "Remove?",
+      "revId": "c27893c84d7ba4280c46f3f4bfe544bec51fa695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f49120d9_f4c7af0a",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 4108,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-23T15:01:54Z",
+      "side": 1,
+      "message": "Remove",
+      "revId": "c27893c84d7ba4280c46f3f4bfe544bec51fa695",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
