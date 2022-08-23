@@ -70,6 +70,24 @@
       "parentUuid": "ed7d11bb_b8b29192",
       "revId": "0541865251969d284bbad192bd4843ea9b280b25",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3e72752_35b14d09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-23T11:41:33Z",
+      "side": 1,
+      "message": "It decorates buffers, but more importantly, it does the wrapping of structures if they are used as a storage, uniform or push_buffer *and* that structure is used by another type.\n\nIt\u0027s not (currently) a perfect match for GLSL, as there is one subtle difference between SPIRV and GLSL\u0027s needs for wrapping:\n* SPIR-V can happily use a `Block` decorated structure as a regular (`private`, `function`) structure.\n* GLSL cannot use an interface block as a regular structure.\n\n\nSo the particular case that this CL is addressing wouldn\u0027t currently be handled by the `AddSpirvBlockAttribute` transform:\n\n```\nstruct S { i : i32 }\n@group(0) binding(0) var\u003cuniform\u003e u : S;\n\nfn f() {\n  let l \u003d u; // Note that we\u0027re loading the whole \u0027S\u0027 structure, not a member access.\n}\n```\n\nHowever, making the `AddSpirvBlockAttribute` transform handle this is trivial. I\u0027ve pushed a PoC at:\nhttps://dawn-review.googlesource.com/c/dawn/+/100141\n\n\nI think using this transform is preferable, as it keeps the complexity out of the writer, and means we can properly isolate and test these code-transformations. It also means bug fixes can be made to a single place, instead of having to juggle a bunch of different implementations.",
+      "parentUuid": "50aedf4f_52340441",
+      "revId": "0541865251969d284bbad192bd4843ea9b280b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
