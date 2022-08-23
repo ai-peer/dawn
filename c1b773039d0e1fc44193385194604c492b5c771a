@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76501add_e7ae8c86",
+        "filename": "src/tint/clone_context.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-23T15:13:33Z",
+      "side": 1,
+      "message": "Won\u0027t this always be false as we already checked `if (transform)` on 205.\n\n\nAh, I see what\u0027s going on now, this is super magic. Maybe expand the comments to something like:\n\n`Clone (el) may have inserted after the current node. This will update the transformation list behind the scenes and may make `transform` valid now.`\n\n\nOr something? Otherwise, this is super non-obvious what is going on.",
+      "revId": "c1b773039d0e1fc44193385194604c492b5c771a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73f02a3f_49f7e971",
+        "filename": "src/tint/clone_context.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-23T15:13:33Z",
+      "side": 1,
+      "message": "Always false?",
+      "revId": "c1b773039d0e1fc44193385194604c492b5c771a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81eac185_06f5b893",
+        "filename": "src/tint/clone_context.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-23T15:13:33Z",
+      "side": 1,
+      "message": "nit: before\n\nAlso ... `insert befor after` ? not sure what that means",
+      "revId": "c1b773039d0e1fc44193385194604c492b5c771a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
