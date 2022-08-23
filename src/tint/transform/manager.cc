@@ -34,7 +34,6 @@ Manager::~Manager() = default;
 Output Manager::Run(const Program* program, const DataMap& data) const {
     const Program* in = program;
 
-#if TINT_PRINT_PROGRAM_FOR_EACH_TRANSFORM
     auto print_program = [&](const char* msg, const Transform* transform) {
         auto wgsl = Program::printer(in);
         std::cout << "---------------------------------------------------------" << std::endl;
@@ -44,7 +43,6 @@ Output Manager::Run(const Program* program, const DataMap& data) const {
         std::cout << "---------------------------------------------------------" << std::endl
                   << std::endl;
     };
-#endif
 
     Output out;
     for (const auto& transform : transforms_) {
@@ -60,7 +58,7 @@ Output Manager::Run(const Program* program, const DataMap& data) const {
         out.data.Add(std::move(res.data));
         in = &out.program;
         if (!in->IsValid()) {
-            TINT_IF_PRINT_PROGRAM(print_program("Invalid output of", transform.get()));
+            print_program("Invalid output of", transform.get());
             return out;
         }
 
