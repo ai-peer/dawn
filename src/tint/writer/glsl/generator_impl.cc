@@ -2119,16 +2119,14 @@ bool GeneratorImpl::EmitEntryPointFunction(const ast::Function* func) {
             }
             out << "local_size_" << (i == 0 ? "x" : i == 1 ? "y" : "z") << " = ";
 
-            if (wgsize[i].overridable_const) {
-                auto* global = builder_.Sem().Get<sem::GlobalVariable>(wgsize[i].overridable_const);
-                if (!global->Declaration()->Is<ast::Override>()) {
-                    TINT_ICE(Writer, builder_.Diagnostics())
-                        << "expected a pipeline-overridable constant";
-                }
-                out << kSpecConstantPrefix << global->OverrideId().value;
-            } else {
-                out << std::to_string(wgsize[i].value);
+            if (!wgsize[i].has_value()) {
+                diagnostics_.add_error(
+                    diag::System::Writer,
+                    "override expressions should have been removed with the SubstituteOverride "
+                    "transform");
+                return false;
             }
+            out << std::to_string(wgsize[i].value());
         }
         out << ") in;";
     }
