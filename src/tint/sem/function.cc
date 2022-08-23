@@ -43,7 +43,7 @@ Function::Function(const ast::Function* declaration,
                    utils::VectorRef<Parameter*> parameters)
     : Base(return_type, SetOwner(std::move(parameters), this), EvaluationStage::kRuntime),
       declaration_(declaration),
-      workgroup_size_{WorkgroupDimension{1}, WorkgroupDimension{1}, WorkgroupDimension{1}} {}
+      workgroup_size_{1, 1, 1} {}
 
 Function::~Function() = default;
 

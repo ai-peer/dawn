@@ -152,10 +152,9 @@ std::vector<EntryPoint> Inspector::GetEntryPoints() {
                 entry_point.stage = PipelineStage::kCompute;
 
                 auto wgsize = sem->WorkgroupSize();
-                if (!wgsize[0].overridable_const && !wgsize[1].overridable_const &&
-                    !wgsize[2].overridable_const) {
-                    entry_point.workgroup_size = {wgsize[0].value, wgsize[1].value,
-                                                  wgsize[2].value};
+                if (wgsize[0].has_value() && wgsize[1].has_value() && wgsize[2].has_value()) {
+                    entry_point.workgroup_size = {wgsize[0].value(), wgsize[1].value(),
+                                                  wgsize[2].value()};
                 }
                 break;
             }

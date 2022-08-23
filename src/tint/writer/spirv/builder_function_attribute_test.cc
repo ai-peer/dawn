@@ -161,22 +161,10 @@ TEST_F(BuilderTest, Decoration_ExecutionMode_WorkgroupSize_OverridableConst) {
 
     spirv::Builder& b = Build();
 
-    ASSERT_TRUE(b.GenerateExecutionModes(func, 3)) << b.error();
-    EXPECT_EQ(DumpInstructions(b.execution_modes()), "");
-    EXPECT_EQ(DumpInstructions(b.types()),
-              R"(%2 = OpTypeInt 32 0
-%1 = OpTypeVector %2 3
-%4 = OpSpecConstant %2 2
-%5 = OpSpecConstant %2 3
-%6 = OpSpecConstant %2 4
-%3 = OpSpecConstantComposite %1 %4 %5 %6
-)");
-    EXPECT_EQ(DumpInstructions(b.annots()),
-              R"(OpDecorate %4 SpecId 7
-OpDecorate %5 SpecId 8
-OpDecorate %6 SpecId 9
-OpDecorate %3 BuiltIn WorkgroupSize
-)");
+    EXPECT_FALSE(b.GenerateExecutionModes(func, 3)) << b.error();
+    EXPECT_EQ(
+        b.error(),
+        R"(override expressions should have been removed with the SubstituteOverride transform)");
 }
 
 TEST_F(BuilderTest, Decoration_ExecutionMode_WorkgroupSize_LiteralAndConst) {
@@ -190,20 +178,10 @@ TEST_F(BuilderTest, Decoration_ExecutionMode_WorkgroupSize_LiteralAndConst) {
 
     spirv::Builder& b = Build();
 
-    ASSERT_TRUE(b.GenerateExecutionModes(func, 3)) << b.error();
-    EXPECT_EQ(DumpInstructions(b.execution_modes()), "");
-    EXPECT_EQ(DumpInstructions(b.types()),
-              R"(%2 = OpTypeInt 32 0
-%1 = OpTypeVector %2 3
-%4 = OpConstant %2 4
-%5 = OpSpecConstant %2 2
-%6 = OpConstant %2 3
-%3 = OpSpecConstantComposite %1 %4 %5 %6
-)");
-    EXPECT_EQ(DumpInstructions(b.annots()),
-              R"(OpDecorate %5 SpecId 7
-OpDecorate %3 BuiltIn WorkgroupSize
-)");
+    EXPECT_FALSE(b.GenerateExecutionModes(func, 3)) << b.error();
+    EXPECT_EQ(
+        b.error(),
+        R"(override expressions should have been removed with the SubstituteOverride transform)");
 }
 
 TEST_F(BuilderTest, Decoration_ExecutionMode_MultipleFragment) {
