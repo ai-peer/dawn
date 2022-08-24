@@ -619,13 +619,13 @@ MaybeError Texture::InitializeAsInternalTexture() {
 
     if (applyForceClearCopyableDepthStencilTextureOnCreationToggle) {
         CommandRecordingContext* commandContext;
-        DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext());
+        DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext(false));
         DAWN_TRY(ClearTexture(commandContext, GetAllSubresources(), TextureBase::ClearValue::Zero));
     }
 
     if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
         CommandRecordingContext* commandContext;
-        DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext());
+        DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext(false));
 
         DAWN_TRY(
             ClearTexture(commandContext, GetAllSubresources(), TextureBase::ClearValue::NonZero));

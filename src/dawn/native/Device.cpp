@@ -1226,7 +1226,7 @@ bool DeviceBase::APITick() {
 MaybeError DeviceBase::Tick() {
     DAWN_TRY(ValidateIsAlive());
 
-    // to avoid overly ticking, we only want to tick when:
+    // To avoid overly ticking, we only want to tick when:
     // 1. the last submitted serial has moved beyond the completed serial
     // 2. or the backend still has pending commands to submit.
     if (HasPendingCommands()) {

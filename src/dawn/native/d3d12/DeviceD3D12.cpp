@@ -272,12 +272,13 @@ ResidencyManager* Device::GetResidencyManager() const {
     return mResidencyManager.get();
 }
 
-ResultOrError<CommandRecordingContext*> Device::GetPendingCommandContext() {
+ResultOrError<CommandRecordingContext*> Device::GetPendingCommandContext(bool needsSubmit) {
     // Callers of GetPendingCommandList do so to record commands. Only reserve a command
     // allocator when it is needed so we don't submit empty command lists
     if (!mPendingCommands.IsOpen()) {
         DAWN_TRY(mPendingCommands.Open(mD3d12Device.Get(), mCommandAllocatorManager.get()));
     }
+    mPendingCommands.SetNeedsSubmit(needsSubmit);
     return &mPendingCommands;
 }
 
@@ -344,7 +345,7 @@ MaybeError Device::TickImpl() {
     mDepthStencilViewAllocator->Tick(completedSerial);
     mUsedComObjectRefs.ClearUpTo(completedSerial);
 
-    if (mPendingCommands.IsOpen()) {
+    if (mPendingCommands.IsOpen() && mPendingCommands.NeedsSubmit()) {
         DAWN_TRY(ExecutePendingCommandContext());
         DAWN_TRY(NextSerial());
     }
@@ -396,6 +397,17 @@ ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
 
 void Device::ReferenceUntilUnused(ComPtr<IUnknown> object) {
     mUsedComObjectRefs.Enqueue(object, GetPendingCommandSerial());
+}
+
+void Device::ForceEventualFlushOfCommands() {
+    DeviceBase::ForceEventualFlushOfCommands();
+    if (mPendingCommands.IsOpen()) {
+        mPendingCommands.SetNeedsSubmit(true);
+    }
+}
+
+bool Device::HasPendingCommands() {
+    return DeviceBase::HasPendingCommands() || mPendingCommands.NeedsSubmit();
 }
 
 MaybeError Device::ExecutePendingCommandContext() {
@@ -484,7 +496,8 @@ MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
                                            uint64_t destinationOffset,
                                            uint64_t size) {
     CommandRecordingContext* commandRecordingContext;
-    DAWN_TRY_ASSIGN(commandRecordingContext, GetPendingCommandContext());
+    bool needsSubmit = GetDynamicUploader()->ShouldFlush();
+    DAWN_TRY_ASSIGN(commandRecordingContext, GetPendingCommandContext(needsSubmit));
 
     Buffer* dstBuffer = ToBackend(destination);
 
@@ -520,7 +533,8 @@ MaybeError Device::CopyFromStagingToTexture(const StagingBufferBase* source,
                                             TextureCopy* dst,
                                             const Extent3D& copySizePixels) {
     CommandRecordingContext* commandContext;
-    DAWN_TRY_ASSIGN(commandContext, GetPendingCommandContext());
+    bool needsSubmit = GetDynamicUploader()->ShouldFlush();
+    DAWN_TRY_ASSIGN(commandContext, GetPendingCommandContext(needsSubmit));
     Texture* texture = ToBackend(dst->texture.Get());
 
     SubresourceRange range = GetSubresourcesAffectedByCopy(*dst, copySizePixels);
