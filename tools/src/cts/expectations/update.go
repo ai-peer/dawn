@@ -274,7 +274,7 @@ func (u *updater) chunk(in Chunk) Chunk {
 	return out
 }
 
-// chunk returns a new list of Expectations, based on the Expectation 'in',
+// expectation returns a new list of Expectations, based on the Expectation 'in',
 // using the new result data.
 func (u *updater) expectation(in Expectation, keep bool) []Expectation {
 	// noResults is a helper for returning when the expectation has no test
@@ -310,6 +310,9 @@ func (u *updater) expectation(in Expectation, keep bool) []Expectation {
 		return noResults()
 	case err != nil:
 		u.diag(Error, in.Line, "%v", err)
+		if keep {
+			return []Expectation{in}
+		}
 		return []Expectation{}
 	case len(results) == 0:
 		return noResults()
