@@ -22,6 +22,30 @@
       },
       "revId": "a20efe35d0cc72fcab1f0253d4066e9adb976dfb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d254667_a6c6fb3d",
+        "filename": "src/tint/ast/variable.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-24T14:53:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf22ec73_72adbb90",
+      "range": {
+        "startLine": 67,
+        "startChar": 9,
+        "endLine": 67,
+        "endChar": 26
+      },
+      "revId": "a20efe35d0cc72fcab1f0253d4066e9adb976dfb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
