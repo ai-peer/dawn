@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6353dc6_7340f8b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-24T15:14:04Z",
+      "side": 1,
+      "message": "The mac failure seems to be not gating the old backend implementation using specialized function properly. I should look at it.",
+      "revId": "573dd0ed413e73d599e576ce683d0f802ad03e70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eaed4c22_dc579080",
