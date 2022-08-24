@@ -240,6 +240,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "019cabe8_0a30658a",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-24T01:18:24Z",
+      "side": 1,
+      "message": "Got it, thanks for the clarification.\nLuckily I\u0027ve got a simple fix. We can make a dummy submit to advance in tick rather than `AssumeCommandsComplete`. As a result we could ensure the correctness and avoid bothering with different backends.",
+      "parentUuid": "0a1c84f1_9d361b3c",
+      "range": {
+        "startLine": 811,
+        "startChar": 75,
+        "endLine": 811,
+        "endChar": 79
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d1f24ba_b0ec7120",
         "filename": "src/dawn/native/vulkan/NativeSwapChainImplVk.cpp",
         "patchSetId": 10
