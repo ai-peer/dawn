@@ -118,7 +118,7 @@ MaybeError OldSwapChain::OnBeforePresent(TextureViewBase* view) {
     Device* device = ToBackend(GetDevice());
 
     CommandRecordingContext* commandContext;
-    DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext());
+    DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext(false));
 
     // Perform the necessary transition for the texture to be presented.
     ToBackend(view->GetTexture())
@@ -309,7 +309,7 @@ MaybeError SwapChain::PresentImpl() {
     // TODO(crbug.com/dawn/269): Remove the need for this by eagerly transitioning the
     // presentable texture to present at the end of submits that use them.
     CommandRecordingContext* commandContext;
-    DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext());
+    DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext(true));
     mApiTexture->TrackUsageAndTransitionNow(commandContext, kPresentTextureUsage,
                                             mApiTexture->GetAllSubresources());
     DAWN_TRY(device->ExecutePendingCommandContext());
