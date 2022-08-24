@@ -77,7 +77,7 @@ class Device final : public DeviceBase {
     ComPtr<IDxcCompiler> GetDxcCompiler() const;
     ComPtr<IDxcValidator> GetDxcValidator() const;
 
-    ResultOrError<CommandRecordingContext*> GetPendingCommandContext();
+    ResultOrError<CommandRecordingContext*> GetPendingCommandContext(bool needsSubmit);
 
     MaybeError ClearBufferToZero(CommandRecordingContext* commandContext,
                                  BufferBase* destination,
@@ -90,6 +90,8 @@ class Device final : public DeviceBase {
     MaybeError WaitForSerial(ExecutionSerial serial);
 
     void ReferenceUntilUnused(ComPtr<IUnknown> object);
+
+    void ForceEventualFlushOfCommands() override;
 
     MaybeError ExecutePendingCommandContext();
 
