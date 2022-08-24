@@ -16,6 +16,23 @@
       "message": "Please RS this merge.",
       "revId": "f9b7e82fc4ae4222f025b6bd3503f343a6550aa2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76570df1_92532409",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-08-24T20:02:41Z",
+      "side": 1,
+      "message": "LGTM, but weird compilation failure? I think that and the kokoro failure are probably both unrelated.",
+      "revId": "f9b7e82fc4ae4222f025b6bd3503f343a6550aa2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
