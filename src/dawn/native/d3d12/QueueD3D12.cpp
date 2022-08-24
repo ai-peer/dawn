@@ -46,7 +46,7 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
     DAWN_TRY(device->Tick());
 
     CommandRecordingContext* commandContext;
-    DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext());
+    DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext(true));
 
     TRACE_EVENT_BEGIN1(GetDevice()->GetPlatform(), Recording, "CommandBufferD3D12::RecordCommands",
                        "serial", uint64_t(GetDevice()->GetPendingCommandSerial()));
