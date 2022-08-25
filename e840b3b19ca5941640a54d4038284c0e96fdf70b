@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "152b8be7_c48c40b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-08-25T06:00:44Z",
+      "side": 1,
+      "message": "Thanks for your review, Kai.",
+      "revId": "e840b3b19ca5941640a54d4038284c0e96fdf70b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

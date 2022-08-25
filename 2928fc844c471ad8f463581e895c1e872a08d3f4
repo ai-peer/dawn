@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4cbdeaf_c65b35f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-08-25T06:00:44Z",
+      "side": 1,
+      "message": "Yeah, it is a little confusing. Sampling and textureLoad sound more like reading methods, not writing methods. I changed the names to samplingAndWrite, textureLoadAndWrite. \n\nThe destination texture of writing operation is being tested. And I changed the name of src texture to temp texture, which indicates that it is not being tested. \n\nI also add comments on each WriteType value as you suggested.",
+      "parentUuid": "24fa344f_d0ceea71",
+      "range": {
+        "startLine": 10,
+        "startChar": 26,
+        "endLine": 11,
+        "endChar": 15
+      },
+      "revId": "2928fc844c471ad8f463581e895c1e872a08d3f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad29c1e9_6efcf642",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-08-23T03:56:27Z",
       "side": 1,
       "message": "here",
+      "revId": "2928fc844c471ad8f463581e895c1e872a08d3f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54f0eadb_263f573f",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-08-25T06:00:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad29c1e9_6efcf642",
       "revId": "2928fc844c471ad8f463581e895c1e872a08d3f4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
