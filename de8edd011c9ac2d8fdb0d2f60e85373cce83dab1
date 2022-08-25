@@ -16,6 +16,86 @@
       "message": "Oops I got it wrong. enga@ is still out, cwallez@ is back",
       "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7855ed07_5c111b0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-25T21:06:28Z",
+      "side": 1,
+      "message": "some high level thoughts first",
+      "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "323dcfd9_5b2a9a8c",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-25T21:06:28Z",
+      "side": 1,
+      "message": "instead of this, what do you think about having a free function\n```\nResultOrError\u003ctint::transform::SubstituteOverride::Config\u003e\nBuildSubstituteOverridesTransform(...);\n```\nkinda like `BuildExternalTextureTransformBindings` and `BuildVertexPullingTransformConfig`\n\nwe would call it along with the rest of the transforms that run during backend pipeline creation. The metadata.overrides will need to be added into the compilation request struct for all the backends.\n\nThe benefit of this is that all the transforms happen in one place with fewer tint::Programs around; we don\u0027t need to mutate ProgrammableStage with additional members only relevant to SubstituteOverrides; and we don\u0027t need to run the SubstituteOverrides transform at all on cache hit.\nMutating ProgrammableStage seems not so great since now you have to be careful about using the correct program since you can get different versions of it in multiple ways.",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 1
+      },
+      "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cecbce76_7043316a",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-25T21:06:28Z",
+      "side": 1,
+      "message": "Why does this need to be a Toggle?",
+      "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cf6ac51_192b6034",
+        "filename": "src/dawn/native/metal/ComputePipelineMTL.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-25T21:06:28Z",
+      "side": 1,
+      "message": "instead of adding `updatedLocalWorkgroupSize`, perhaps we can output the workgroup size from `ShaderModule::MetalFunctionData`. It doesn\u0027t appear that any of the other backends need it.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 88
+      },
+      "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
