@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22e2c1b8_076ef209",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-25T21:30:55Z",
+      "side": 1,
+      "message": "hmmm that\u0027s a fair point. What if we modified DeviceNull\u0027s ComputePipeline::Initialize as well? there\u0027s a bit of a risk that we implement it differently in the backends vs the null backend, but I think it should still get caught in the CTS.",
+      "parentUuid": "47e31d1d_fd1b9f2f",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 1
+      },
+      "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cecbce76_7043316a",
         "filename": "src/dawn/native/Toggles.cpp",
         "patchSetId": 14
@@ -113,6 +137,24 @@
       "side": 1,
       "message": "I want this toggle to gate the old backend specific implementation for overrides, instead of fully removing them at all. Sounds like we may still use them in a future version.",
       "parentUuid": "cecbce76_7043316a",
+      "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d4e45de_a8738fb3",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-25T21:30:55Z",
+      "side": 1,
+      "message": "just so I understand, why are we not using the backend implementation? does it not support some types of overrides?",
+      "parentUuid": "4fc18fa6_036861d1",
       "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
