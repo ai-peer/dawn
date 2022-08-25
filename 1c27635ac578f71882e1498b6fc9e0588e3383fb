@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "887eff45_43d4aa98",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-25T13:09:12Z",
+      "side": 1,
+      "message": "What is the risk of clients misusing Dawn\u0027s internal fence? That they might signal it when it should be only Dawn that does it? IMHO it could be part of the contract, and if people start messing with the fence then we could always wrap it in a COM interface that prevents Signal / add a second fence just for interop etc.\n\nIIRC Shaobo measured a significant perf difference in the classroom demo if the signaling was done only once per frame instead of for each shared image.",
+      "parentUuid": "78af9390_ef2f1def",
+      "range": {
+        "startLine": 578,
+        "startChar": 4,
+        "endLine": 584,
+        "endChar": 5
+      },
+      "revId": "1c27635ac578f71882e1498b6fc9e0588e3383fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2130a6f3_0e04adab",
         "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
         "patchSetId": 2
