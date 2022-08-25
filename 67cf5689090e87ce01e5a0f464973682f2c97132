@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "67cf5689090e87ce01e5a0f464973682f2c97132",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb0bf391_1e108e5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-25T10:37:47Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "67cf5689090e87ce01e5a0f464973682f2c97132",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "525d97ce_1432fc1a",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-25T10:37:47Z",
+      "side": 1,
+      "message": "nit: Maybe comment that this call is what will make a recording context pending.",
+      "revId": "67cf5689090e87ce01e5a0f464973682f2c97132",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
