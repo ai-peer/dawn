@@ -22,6 +22,30 @@
       },
       "revId": "c2a052eaa4453eeb9c797b6f576143bdcf3b26a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d9f3b7c_ce4fc40d",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-25T12:50:19Z",
+      "side": 0,
+      "message": "Thank you :) As long as a fix for the RGBA8Unorm fixes the other formats as well I think that ok.",
+      "parentUuid": "736f916c_86a1ea3c",
+      "range": {
+        "startLine": 149,
+        "startChar": 24,
+        "endLine": 150,
+        "endChar": 58
+      },
+      "revId": "c2a052eaa4453eeb9c797b6f576143bdcf3b26a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
