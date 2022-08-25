@@ -893,16 +893,11 @@ bool Builder::GenerateGlobalVariable(const ast::Variable* v) {
                            {Operand(var_id), U32Operand(SpvDecorationInvariant)});
                 return true;
             },
-            [&](const ast::BindingAttribute* binding) {
-                push_annot(spv::Op::OpDecorate, {Operand(var_id), U32Operand(SpvDecorationBinding),
-                                                 Operand(binding->value)});
-                return true;
+            [&](const ast::BindingAttribute*) {
+                return true;  // Handled below
             },
-            [&](const ast::GroupAttribute* group) {
-                push_annot(spv::Op::OpDecorate,
-                           {Operand(var_id), U32Operand(SpvDecorationDescriptorSet),
-                            Operand(group->value)});
-                return true;
+            [&](const ast::GroupAttribute*) {
+                return true;  // Handled below
             },
             [&](const ast::IdAttribute*) {
                 return true;  // Spec constants are handled elsewhere
@@ -917,6 +912,13 @@ bool Builder::GenerateGlobalVariable(const ast::Variable* v) {
         if (!ok) {
             return false;
         }
+    }
+    if (v->HasBindingPoint()) {
+        auto bp = sem->As<sem::GlobalVariable>()->BindingPoint();
+        push_annot(spv::Op::OpDecorate,
+                   {Operand(var_id), U32Operand(SpvDecorationBinding), Operand(bp.binding)});
+        push_annot(spv::Op::OpDecorate,
+                   {Operand(var_id), U32Operand(SpvDecorationDescriptorSet), Operand(bp.group)});
     }
 
     RegisterVariable(sem, var_id);
