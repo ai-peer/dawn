@@ -108,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23d2093f_bf273efb",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-25T21:36:21Z",
+      "side": 1,
+      "message": "This should pass the dawn_unittests, let me try.",
+      "parentUuid": "22e2c1b8_076ef209",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 1
+      },
+      "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cecbce76_7043316a",
         "filename": "src/dawn/native/Toggles.cpp",
         "patchSetId": 14
@@ -155,6 +179,24 @@
       "side": 1,
       "message": "just so I understand, why are we not using the backend implementation? does it not support some types of overrides?",
       "parentUuid": "4fc18fa6_036861d1",
+      "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85c4042a_c2a50f09",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-25T21:36:21Z",
+      "side": 1,
+      "message": "bclayton@ should know the complete concern based on wgsl discussion for this.\nBut turns out our plan for webgpu v1 is to use const expression replacement for all overrides. I think the major issue is the validation issue.",
+      "parentUuid": "0d4e45de_a8738fb3",
       "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
