@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "47e31d1d_fd1b9f2f",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-25T21:18:24Z",
+      "side": 1,
+      "message": "One problem with calling from backend pipeline is that workgroup size validation is happening inside this transform. And dawn_unittests doing validation test don\u0027t actually have it run.",
+      "parentUuid": "323dcfd9_5b2a9a8c",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 1
+      },
+      "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cecbce76_7043316a",
         "filename": "src/dawn/native/Toggles.cpp",
         "patchSetId": 14
@@ -71,6 +95,24 @@
       "writtenOn": "2022-08-25T21:06:28Z",
       "side": 1,
       "message": "Why does this need to be a Toggle?",
+      "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fc18fa6_036861d1",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-25T21:18:24Z",
+      "side": 1,
+      "message": "I want this toggle to gate the old backend specific implementation for overrides, instead of fully removing them at all. Sounds like we may still use them in a future version.",
+      "parentUuid": "cecbce76_7043316a",
       "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
