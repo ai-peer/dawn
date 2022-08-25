@@ -88,6 +88,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22e1f591_da8b372a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-25T22:56:54Z",
+      "side": 1,
+      "message": "Before doing so, would recommend reading through https://chat.google.com/room/AAAATWNUeXA/ZWnB1xNFcDY since I think that it might actually be better to separate the collision detection logic entirely, and remove the dependency on the actual results.",
+      "parentUuid": "dbdd1c7a_413c564f",
+      "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84cfef8f_172a8b21",
         "filename": "tools/src/cts/expectations/update.go",
         "patchSetId": 1
