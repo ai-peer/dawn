@@ -36,7 +36,7 @@ size_t Vector::Hash() const {
 
 bool Vector::Equals(const Type& other) const {
     if (auto* v = other.As<Vector>()) {
-        return v->width_ == width_ && v->subtype_ == subtype_;
+        return v->width_ == width_ && v->subtype_->Equals(*subtype_);
     }
     return false;
 }
