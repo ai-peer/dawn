@@ -46,6 +46,30 @@
       },
       "revId": "c2a052eaa4453eeb9c797b6f576143bdcf3b26a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4a82f23_fb79ee2b",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-08-25T23:17:18Z",
+      "side": 0,
+      "message": "Ack. I will definitely verify my fix/workaround with a few other formats on my local machine.",
+      "parentUuid": "6d9f3b7c_ce4fc40d",
+      "range": {
+        "startLine": 149,
+        "startChar": 24,
+        "endLine": 150,
+        "endChar": 58
+      },
+      "revId": "c2a052eaa4453eeb9c797b6f576143bdcf3b26a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

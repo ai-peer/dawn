@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9254593_cfda96b2",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-08-25T23:17:18Z",
+      "side": 1,
+      "message": "Done. The new names are better.\n\nI am not very sure whether these new rendering types exercise different paths for the bug. Maybe one rendering type is enough. But Intel driver team and other folks told me that if I hack the 2d-array texture\u0027s dimension in a workaround, I need to change the shader code. So I added a few typical rendering scenarios like rendering a solid color, rendering from texture sample and rendering from textureLoad.",
+      "parentUuid": "985a27fa_8db8e5b3",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 51
+      },
+      "revId": "e840b3b19ca5941640a54d4038284c0e96fdf70b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80977f9a_b145fa7f",
@@ -71,6 +95,24 @@
       "writtenOn": "2022-08-25T12:50:19Z",
       "side": 1,
       "message": "nit: fragmentShader is assigned a whole string in each of the cases, so we don\u0027t really need an ostringstream AFAIU,",
+      "revId": "e840b3b19ca5941640a54d4038284c0e96fdf70b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "703782d0_a52f75ac",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-08-25T23:17:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80977f9a_b145fa7f",
       "revId": "e840b3b19ca5941640a54d4038284c0e96fdf70b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
