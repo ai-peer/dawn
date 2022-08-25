@@ -43,7 +43,8 @@ size_t Matrix::Hash() const {
 
 bool Matrix::Equals(const Type& other) const {
     if (auto* v = other.As<Matrix>()) {
-        return v->rows_ == rows_ && v->columns_ == columns_ && v->column_type_ == column_type_;
+        return v->rows_ == rows_ && v->columns_ == columns_ &&
+               v->column_type_->Equals(*column_type_);
     }
     return false;
 }
