@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4f4bad8_dce7562a",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 7
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-26T20:20:39Z",
+      "side": 1,
+      "message": "The reason for this name is that by default, it\u0027s \"Star\" -- like for the cases just above, it binds to a function named \"OpStar\", and these will be \"OpStarMatVec\", etc.",
+      "parentUuid": "4d87856c_7ceeaa31",
+      "range": {
+        "startLine": 907,
+        "startChar": 8,
+        "endLine": 907,
+        "endChar": 12
+      },
+      "revId": "4806c476765c6977e8e3a2a353a6e2f499dbdd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67fc473b_701d023a",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 7
@@ -129,6 +153,30 @@
       "writtenOn": "2022-08-26T20:12:23Z",
       "side": 1,
       "message": "It\u0027s not a great idea to depend on this for bailing. We will probably (one day) want to support reporting of multiple errors in the resolver. This will prevent this. I suggest having `TransformBinaryElements` return a `ConstEval::ConstantResult`",
+      "range": {
+        "startLine": 1031,
+        "startChar": 8,
+        "endLine": 1031,
+        "endChar": 45
+      },
+      "revId": "4806c476765c6977e8e3a2a353a6e2f499dbdd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12e7360e_8ec75af9",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-26T20:20:39Z",
+      "side": 1,
+      "message": "Yes, when I first introduced the returning of ConstantResult for these functions, I had initially propagated it down, but the number of changes was quite large, as most of the internal functions return a `const Constant*`. So instead, I decided to use this kludge to keep the change small. I\u0027ll definitely revisit this in a future change (this isn\u0027t related to this specific CL).",
+      "parentUuid": "9233922e_82791890",
       "range": {
         "startLine": 1031,
         "startChar": 8,
