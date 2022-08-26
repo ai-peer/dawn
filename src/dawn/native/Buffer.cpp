@@ -355,8 +355,9 @@ void BufferBase::APIMapAsync(wgpu::MapMode mode,
     }
     std::unique_ptr<MapRequestTask> request = std::make_unique<MapRequestTask>(this, mLastMapID);
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Buffer::APIMapAsync", "serial",
-                 uint64_t(GetDevice()->GetPendingCommandSerial()));
-    GetDevice()->GetQueue()->TrackTask(std::move(request), GetDevice()->GetPendingCommandSerial());
+                 uint64_t(GetDevice()->GetQueueWorkDoneCommandSerial()));
+    GetDevice()->GetQueue()->TrackTask(std::move(request),
+                                       GetDevice()->GetQueueWorkDoneCommandSerial());
 }
 
 void* BufferBase::APIGetMappedRange(size_t offset, size_t size) {

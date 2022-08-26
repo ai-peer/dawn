@@ -212,15 +212,25 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
     // also used to make sure ALL queue work is finished in tests, so we also wait for pending
     // commands (this is non-observable outside of tests so it's ok to do deviate a bit from the
     // spec).
-    TrackTask(std::move(task), GetDevice()->GetPendingCommandSerial());
+    TrackTask(std::move(task), GetDevice()->GetQueueWorkDoneCommandSerial());
 
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Queue::APIOnSubmittedWorkDone", "serial",
-                 uint64_t(GetDevice()->GetPendingCommandSerial()));
+                 uint64_t(GetDevice()->GetQueueWorkDoneCommandSerial()));
 }
 
 void QueueBase::TrackTask(std::unique_ptr<TaskInFlight> task, ExecutionSerial serial) {
+    ASSERT(serial <= GetDevice()->GetQueueWorkDoneCommandSerial());
+    ExecutionSerial completedSerial = GetDevice()->GetCompletedCommandSerial();
+    if (serial <= completedSerial) {
+        // The serial has already passed. We can finish the task immediately.
+        task->Finish(GetDevice()->GetPlatform(), completedSerial);
+        return;
+    }
     mTasksInFlight.Enqueue(std::move(task), serial);
-    GetDevice()->AddFutureSerial(serial);
+
+    // Ensure that this ExecutionSerial is submitted and completed so that tasks waiting
+    // on it may complete.
+    GetDevice()->EnsureEventualCompletion(serial);
 }
 
 void QueueBase::Tick(ExecutionSerial finishedSerial) {
@@ -248,6 +258,10 @@ void QueueBase::HandleDeviceLoss() {
         task->HandleDeviceLoss();
     }
     mTasksInFlight.Clear();
+}
+
+ExecutionSerial QueueBase::GetPendingWorkDoneSerial() const {
+    return mPendingWorkDoneSerial;
 }
 
 void QueueBase::APIWriteBuffer(BufferBase* buffer,
@@ -286,10 +300,10 @@ MaybeError QueueBase::WriteBufferImpl(BufferBase* buffer,
 
     memcpy(uploadHandle.mappedBuffer, data, size);
 
-    device->AddFutureSerial(device->GetPendingCommandSerial());
-
-    return device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer, uploadHandle.startOffset,
-                                           buffer, bufferOffset, size);
+    DAWN_TRY(device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer, uploadHandle.startOffset,
+                                             buffer, bufferOffset, size));
+    mPendingWorkDoneSerial = device->GetPendingCommandSerial();
+    return {};
 }
 
 void QueueBase::APIWriteTexture(const ImageCopyTexture* destination,
@@ -356,10 +370,10 @@ MaybeError QueueBase::WriteTextureImpl(const ImageCopyTexture& destination,
 
     DeviceBase* device = GetDevice();
 
-    device->AddFutureSerial(device->GetPendingCommandSerial());
-
-    return device->CopyFromStagingToTexture(uploadHandle.stagingBuffer, passDataLayout,
-                                            &textureCopy, writeSizePixel);
+    DAWN_TRY(device->CopyFromStagingToTexture(uploadHandle.stagingBuffer, passDataLayout,
+                                              &textureCopy, writeSizePixel));
+    mPendingWorkDoneSerial = device->GetPendingCommandSerial();
+    return {};
 }
 
 void QueueBase::APICopyTextureForBrowser(const ImageCopyTexture* source,

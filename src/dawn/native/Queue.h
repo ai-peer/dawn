@@ -67,6 +67,8 @@ class QueueBase : public ApiObjectBase {
     void Tick(ExecutionSerial finishedSerial);
     void HandleDeviceLoss();
 
+    ExecutionSerial GetPendingWorkDoneSerial() const;
+
   protected:
     QueueBase(DeviceBase* device, const QueueDescriptor* descriptor);
     QueueBase(DeviceBase* device, ObjectBase::ErrorTag tag);
@@ -103,6 +105,10 @@ class QueueBase : public ApiObjectBase {
 
     void SubmitInternal(uint32_t commandCount, CommandBufferBase* const* commands);
 
+    // Tracks when pending work enqueued from WriteBuffer/Texture will be complete.
+    ExecutionSerial mPendingWorkDoneSerial = ExecutionSerial(0);
+
+    // Tasks in flight that will be completed when their ExecutionSerial passes.
     SerialQueue<ExecutionSerial, std::unique_ptr<TaskInFlight>> mTasksInFlight;
 };
 
