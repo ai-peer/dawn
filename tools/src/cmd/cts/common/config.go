@@ -58,6 +58,9 @@ type Config struct {
 		// Remove holds tags that should be removed before processing.
 		// See crbug.com/dawn/1401 for more information.
 		Remove []string
+		// Tags that control the test runner, but do not provide an expected test result.
+		// Examples: 'Slow', 'Skip', 'RetryOnFailure'
+		SugarResults []string
 	}
 	// Sheets holds information about the Google Sheets document used for
 	// tracking CTS statistics.
