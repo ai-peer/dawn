@@ -288,6 +288,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0846a438_fe059ddd",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-26T01:59:11Z",
+      "side": 1,
+      "message": "Insightful thoughts. Let\u0027s split and have a separate CL to address them.\nTo clarify a little bit for DummySubmit, in very rare case we actually force an empty submit. As Austin\u0027s case explained, we only do that in case we don\u0027t have any work for GPU to do. So I am not seeing any significant perf impact potentially. Please correct me if I missed anything. Let me know if you have something else better in your mind.",
+      "parentUuid": "ef05c951_f58a36cd",
+      "range": {
+        "startLine": 811,
+        "startChar": 75,
+        "endLine": 811,
+        "endChar": 79
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d1f24ba_b0ec7120",
         "filename": "src/dawn/native/vulkan/NativeSwapChainImplVk.cpp",
         "patchSetId": 10
