@@ -20,6 +20,7 @@
 #include <vector>
 
 #include "dawn/common/Constants.h"
+#include "dawn/common/Log.h"
 #include "dawn/native/Buffer.h"
 #include "dawn/native/CommandBuffer.h"
 #include "dawn/native/CommandEncoder.h"
@@ -133,11 +134,17 @@ ResultOrError<UploadHandle> UploadTextureDataAligningBytesPerRowAndOffset(
 struct SubmittedWorkDone : QueueBase::TaskInFlight {
     SubmittedWorkDone(WGPUQueueWorkDoneCallback callback, void* userdata)
         : mCallback(callback), mUserdata(userdata) {}
-    void Finish(dawn::platform::Platform* platform, ExecutionSerial serial) override {
+    const char* GetFinishedNameForTrace() const override {
+        return "Queue::SubmittedWorkDone::Finished";
+    }
+    void Finish() override {
         ASSERT(mCallback != nullptr);
-        TRACE_EVENT1(platform, General, "Queue::SubmittedWorkDone::Finished", "serial",
-                     uint64_t(serial));
         mCallback(WGPUQueueWorkDoneStatus_Success, mUserdata);
+        mCallback = nullptr;
+    }
+    void HandleShutDown() override {
+        ASSERT(mCallback != nullptr);
+        mCallback(WGPUQueueWorkDoneStatus_Unknown, mUserdata);
         mCallback = nullptr;
     }
     void HandleDeviceLoss() override {
@@ -163,9 +170,17 @@ class ErrorQueue : public QueueBase {
 };
 }  // namespace
 
-// QueueBase
+// static
+void QueueBase::TaskInFlight::FinishedOnQueue(std::unique_ptr<TaskInFlight> task,
+                                              DeviceBase* device,
+                                              ExecutionSerial serial) {
+    TRACE_EVENT1(device->GetPlatform(), General, task->GetFinishedNameForTrace(), "serial",
+                 uint64_t(serial));
+    DAWN_DEBUG() << task->GetFinishedNameForTrace() << " serial: " << uint64_t(serial);
+    device->GetCallbackTaskManager()->AddCallbackTask(std::move(task));
+}
 
-QueueBase::TaskInFlight::~TaskInFlight() {}
+// QueueBase
 
 QueueBase::QueueBase(DeviceBase* device, const QueueDescriptor* descriptor)
     : ApiObjectBase(device, descriptor->label) {}
@@ -212,15 +227,25 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
     // also used to make sure ALL queue work is finished in tests, so we also wait for pending
     // commands (this is non-observable outside of tests so it's ok to do deviate a bit from the
     // spec).
-    TrackTask(std::move(task), GetDevice()->GetPendingCommandSerial());
+    TrackTask(std::move(task), GetDevice()->GetQueueWorkDoneCommandSerial());
 
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Queue::APIOnSubmittedWorkDone", "serial",
-                 uint64_t(GetDevice()->GetPendingCommandSerial()));
+                 uint64_t(GetDevice()->GetQueueWorkDoneCommandSerial()));
 }
 
 void QueueBase::TrackTask(std::unique_ptr<TaskInFlight> task, ExecutionSerial serial) {
+    ASSERT(serial <= GetDevice()->GetQueueWorkDoneCommandSerial());
+    ExecutionSerial completedSerial = GetDevice()->GetCompletedCommandSerial();
+    if (serial <= completedSerial) {
+        // The serial has already passed. We can finish the task immediately.
+        TaskInFlight::FinishedOnQueue(std::move(task), GetDevice(), completedSerial);
+        return;
+    }
     mTasksInFlight.Enqueue(std::move(task), serial);
-    GetDevice()->AddFutureSerial(serial);
+
+    // Ensure that this ExecutionSerial is submitted and completed so that tasks waiting
+    // on it may complete.
+    GetDevice()->EnsureEventualCompletion(serial);
 }
 
 void QueueBase::Tick(ExecutionSerial finishedSerial) {
@@ -239,15 +264,20 @@ void QueueBase::Tick(ExecutionSerial finishedSerial) {
     mTasksInFlight.ClearUpTo(finishedSerial);
 
     for (auto& task : tasks) {
-        task->Finish(GetDevice()->GetPlatform(), finishedSerial);
+        TaskInFlight::FinishedOnQueue(std::move(task), GetDevice(), finishedSerial);
     }
 }
 
 void QueueBase::HandleDeviceLoss() {
+    // Move all tasks to the callback manager which will cancel them.
     for (auto& task : mTasksInFlight.IterateAll()) {
-        task->HandleDeviceLoss();
+        GetDevice()->GetCallbackTaskManager()->AddCallbackTask(std::move(task));
     }
     mTasksInFlight.Clear();
+}
+
+ExecutionSerial QueueBase::GetPendingWorkDoneSerial() const {
+    return mPendingWorkDoneSerial;
 }
 
 void QueueBase::APIWriteBuffer(BufferBase* buffer,
@@ -286,10 +316,10 @@ MaybeError QueueBase::WriteBufferImpl(BufferBase* buffer,
 
     memcpy(uploadHandle.mappedBuffer, data, size);
 
-    device->AddFutureSerial(device->GetPendingCommandSerial());
-
-    return device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer, uploadHandle.startOffset,
-                                           buffer, bufferOffset, size);
+    DAWN_TRY(device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer, uploadHandle.startOffset,
+                                             buffer, bufferOffset, size));
+    mPendingWorkDoneSerial = device->GetPendingCommandSerial();
+    return {};
 }
 
 void QueueBase::APIWriteTexture(const ImageCopyTexture* destination,
@@ -356,10 +386,10 @@ MaybeError QueueBase::WriteTextureImpl(const ImageCopyTexture& destination,
 
     DeviceBase* device = GetDevice();
 
-    device->AddFutureSerial(device->GetPendingCommandSerial());
-
-    return device->CopyFromStagingToTexture(uploadHandle.stagingBuffer, passDataLayout,
-                                            &textureCopy, writeSizePixel);
+    DAWN_TRY(device->CopyFromStagingToTexture(uploadHandle.stagingBuffer, passDataLayout,
+                                              &textureCopy, writeSizePixel));
+    mPendingWorkDoneSerial = device->GetPendingCommandSerial();
+    return {};
 }
 
 void QueueBase::APICopyTextureForBrowser(const ImageCopyTexture* source,
@@ -488,6 +518,7 @@ MaybeError QueueBase::ValidateWriteTexture(const ImageCopyTexture* destination,
 
 void QueueBase::SubmitInternal(uint32_t commandCount, CommandBufferBase* const* commands) {
     DeviceBase* device = GetDevice();
+    DAWN_DEBUG() << "Submit serial " << uint64_t(device->GetPendingCommandSerial());
     if (device->ConsumedError(device->ValidateIsAlive())) {
         // If device is lost, don't let any commands be submitted
         return;

@@ -20,6 +20,7 @@
 #include <utility>
 
 #include "dawn/common/Alloc.h"
+#include "dawn/common/Log.h"
 #include "dawn/common/Assert.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/Device.h"
@@ -36,10 +37,12 @@ namespace dawn::native {
 namespace {
 struct MapRequestTask : QueueBase::TaskInFlight {
     MapRequestTask(Ref<BufferBase> buffer, MapRequestID id) : buffer(std::move(buffer)), id(id) {}
-    void Finish(dawn::platform::Platform* platform, ExecutionSerial serial) override {
-        TRACE_EVENT1(platform, General, "Buffer::TaskInFlight::Finished", "serial",
-                     uint64_t(serial));
-        buffer->OnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_Success);
+    const char* GetFinishedNameForTrace() const override {
+        return "Buffer::TaskInFlight::Finished";
+    }
+    void Finish() override { buffer->OnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_Success); }
+    void HandleShutDown() override {
+        buffer->OnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
     }
     void HandleDeviceLoss() override {
         buffer->OnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_DeviceLost);
@@ -323,6 +326,7 @@ void BufferBase::APIMapAsync(wgpu::MapMode mode,
                              size_t size,
                              WGPUBufferMapCallback callback,
                              void* userdata) {
+    DAWN_DEBUG() << "Map " << static_cast<uint32_t>(mode) << " serial: " << uint64_t(GetDevice()->GetQueueWorkDoneCommandSerial());
     // Handle the defaulting of size required by WebGPU, even if in webgpu_cpp.h it is not
     // possible to default the function argument (because there is the callback later in the
     // argument list)
@@ -355,8 +359,9 @@ void BufferBase::APIMapAsync(wgpu::MapMode mode,
     }
     std::unique_ptr<MapRequestTask> request = std::make_unique<MapRequestTask>(this, mLastMapID);
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Buffer::APIMapAsync", "serial",
-                 uint64_t(GetDevice()->GetPendingCommandSerial()));
-    GetDevice()->GetQueue()->TrackTask(std::move(request), GetDevice()->GetPendingCommandSerial());
+                 uint64_t(GetDevice()->GetQueueWorkDoneCommandSerial()));
+    GetDevice()->GetQueue()->TrackTask(std::move(request),
+                                       GetDevice()->GetQueueWorkDoneCommandSerial());
 }
 
 void* BufferBase::APIGetMappedRange(size_t offset, size_t size) {
@@ -420,6 +425,7 @@ void BufferBase::Unmap() {
 
 void BufferBase::UnmapInternal(WGPUBufferMapAsyncStatus callbackStatus) {
     if (mState == BufferState::Mapped) {
+        DAWN_DEBUG() << "Unmap";
         // A map request can only be called once, so this will fire only if the request wasn't
         // completed before the Unmap.
         // Callbacks are not fired if there is no callback registered, so this is correct for

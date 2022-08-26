@@ -151,7 +151,7 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     ExecutionSerial GetCompletedCommandSerial() const;
     ExecutionSerial GetLastSubmittedCommandSerial() const;
-    ExecutionSerial GetFutureSerial() const;
+    ExecutionSerial GetQueueWorkDoneCommandSerial() const;
     ExecutionSerial GetPendingCommandSerial() const;
 
     // Many Dawn objects are completely immutable once created which means that if two
@@ -346,14 +346,10 @@ class DeviceBase : public RefCountedWithExternalCount {
     void APILoseForTesting();
     QueueBase* GetQueue() const;
 
-    // AddFutureSerial is used to update the mFutureSerial with the max serial needed to be
-    // ticked in order to clean up all pending callback work or to execute asynchronous resource
-    // writes. It should be given the serial that a callback is tracked with, so that once that
-    // serial is completed, it can be resolved and cleaned up. This is so that when there is no
-    // gpu work (the last submitted serial has not moved beyond the completed serial), Tick can
-    // still check if we have pending work to take care of, rather than hanging and never
-    // reaching the serial the work will be executed on.
-    void AddFutureSerial(ExecutionSerial serial);
+    // Ensure that commands are submitted and Tick processed until this
+    // serial is completed.
+    void EnsureEventualCompletion(ExecutionSerial serial);
+
     // Check for passed fences and set the new completed serial
     MaybeError CheckPassedSerials();
 
@@ -414,7 +410,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     void DestroyObjects();
     void Destroy();
 
-    // Incrememt mLastSubmittedSerial when we submit the next serial
+    // Increment mLastSubmittedSerial when we submit the next serial
     void IncrementLastSubmittedCommandSerial();
 
   private:
@@ -492,19 +488,20 @@ class DeviceBase : public RefCountedWithExternalCount {
     // and waiting on a serial that doesn't have a corresponding fence enqueued. Fake serials to
     // make all commands look completed.
     void AssumeCommandsComplete();
+    // Returns true if the device should be tick'ed to advance the completed serial further.
+    bool HasIncompleteSerials() const;
     bool IsDeviceIdle();
 
     // mCompletedSerial tracks the last completed command serial that the fence has returned.
     // mLastSubmittedSerial tracks the last submitted command serial.
-    // During device removal, the serials could be artificially incremented
-    // to make it appear as if commands have been compeleted. They can also be artificially
-    // incremented when no work is being done in the GPU so CPU operations don't have to wait on
-    // stale serials.
-    // mFutureSerial tracks the largest serial we need to tick to for asynchronous commands or
-    // callbacks to fire
+    // mEnsureCompletionSerial tracks the largest serial we need to tick to for asynchronous
+    // commands or callbacks to fire. During device removal, the serials could be artificially
+    // incremented to make it appear as if commands have been compeleted. They can also be
+    // artificially incremented when no work is being done in the GPU so CPU operations don't have
+    // to wait on stale serials.
     ExecutionSerial mCompletedSerial = ExecutionSerial(0);
     ExecutionSerial mLastSubmittedSerial = ExecutionSerial(0);
-    ExecutionSerial mFutureSerial = ExecutionSerial(0);
+    ExecutionSerial mEnsureCompletionSerial = ExecutionSerial(0);
 
     // DestroyImpl is used to clean up and release resources used by device, does not wait for
     // GPU or check errors.
