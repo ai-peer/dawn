@@ -16,6 +16,115 @@
       "message": "PTAL.",
       "revId": "c35216b1ba977ab60dfec16f9d717ab8f5f17399",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2558d086_7648b971",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-26T20:28:43Z",
+      "side": 1,
+      "message": "+2, but kokoro is happy. A bunch of nits.",
+      "revId": "c35216b1ba977ab60dfec16f9d717ab8f5f17399",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a668443_c9fd33c5",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-26T20:28:43Z",
+      "side": 1,
+      "message": "`Matrialize` copes with nullptr, so you can write: `Materialize(Expression(attr-\u003evalue))`",
+      "range": {
+        "startLine": 604,
+        "startChar": 26,
+        "endLine": 604,
+        "endChar": 36
+      },
+      "revId": "c35216b1ba977ab60dfec16f9d717ab8f5f17399",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e432b1bf_5d2eb484",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-26T20:28:43Z",
+      "side": 1,
+      "message": "This will need to raise an error diagnostic. Doesn\u0027t need to be done now, as it must be an integer expression, but you had a `TODO` for the materialize, so I wanted to make sure you\u0027re aware.",
+      "range": {
+        "startLine": 615,
+        "startChar": 20,
+        "endLine": 615,
+        "endChar": 35
+      },
+      "revId": "c35216b1ba977ab60dfec16f9d717ab8f5f17399",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a53aaf2_3637aaee",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-26T20:28:43Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 690,
+        "startChar": 22,
+        "endLine": 690,
+        "endChar": 32
+      },
+      "revId": "c35216b1ba977ab60dfec16f9d717ab8f5f17399",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7e0411b_19623f7e",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-26T20:28:43Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 700,
+        "startChar": 5,
+        "endLine": 702,
+        "endChar": 13
+      },
+      "revId": "c35216b1ba977ab60dfec16f9d717ab8f5f17399",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
