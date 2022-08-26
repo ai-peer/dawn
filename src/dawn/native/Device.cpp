@@ -440,7 +440,7 @@ void DeviceBase::Destroy() {
             break;
     }
     ASSERT(mCompletedSerial == mLastSubmittedSerial);
-    ASSERT(mFutureSerial <= mCompletedSerial);
+    ASSERT(mEnsureCompletionSerial <= mCompletedSerial);
 
     if (mState != State::BeingCreated) {
         // The GPU timeline is finished.
@@ -509,7 +509,7 @@ void DeviceBase::HandleError(InternalErrorType type, const char* message) {
         IgnoreErrors(WaitForIdleForDestruction());
         IgnoreErrors(TickImpl());
         AssumeCommandsComplete();
-        ASSERT(mFutureSerial <= mCompletedSerial);
+        ASSERT(mEnsureCompletionSerial <= mCompletedSerial);
         mState = State::Disconnected;
 
         // Now everything is as if the device was lost.
@@ -711,8 +711,8 @@ ExecutionSerial DeviceBase::GetLastSubmittedCommandSerial() const {
     return mLastSubmittedSerial;
 }
 
-ExecutionSerial DeviceBase::GetFutureSerial() const {
-    return mFutureSerial;
+ExecutionSerial DeviceBase::GetQueueWorkDoneCommandSerial() const {
+    return std::max(mLastSubmittedSerial, mQueue->GetPendingWorkDoneSerial());
 }
 
 InternalPipelineStore* DeviceBase::GetInternalPipelineStore() {
@@ -723,33 +723,33 @@ void DeviceBase::IncrementLastSubmittedCommandSerial() {
     mLastSubmittedSerial++;
 }
 
+void DeviceBase::EnsureEventualCompletion(ExecutionSerial serial) {
+    // We should not ensure eventual completion of a serial that refers to
+    // future queue work (beyond pending).
+    ASSERT(serial <= GetQueueWorkDoneCommandSerial());
+    mEnsureCompletionSerial = std::max(serial, mEnsureCompletionSerial);
+}
+
 void DeviceBase::AssumeCommandsComplete() {
-    ExecutionSerial maxSerial =
-        ExecutionSerial(std::max(mLastSubmittedSerial + ExecutionSerial(1), mFutureSerial));
+    ExecutionSerial maxSerial = ExecutionSerial(
+        std::max(mLastSubmittedSerial + ExecutionSerial(1), mEnsureCompletionSerial));
     mLastSubmittedSerial = maxSerial;
     mCompletedSerial = maxSerial;
+}
+
+bool DeviceBase::HasIncompleteSerials() const {
+    return mCompletedSerial < std::max(mLastSubmittedSerial, mEnsureCompletionSerial);
 }
 
 bool DeviceBase::IsDeviceIdle() {
     if (mAsyncTaskManager->HasPendingTasks()) {
         return false;
     }
-
-    ExecutionSerial maxSerial = std::max(mLastSubmittedSerial, mFutureSerial);
-    if (mCompletedSerial == maxSerial) {
-        return true;
-    }
-    return false;
+    return HasIncompleteSerials();
 }
 
 ExecutionSerial DeviceBase::GetPendingCommandSerial() const {
     return mLastSubmittedSerial + ExecutionSerial(1);
-}
-
-void DeviceBase::AddFutureSerial(ExecutionSerial serial) {
-    if (serial > mFutureSerial) {
-        mFutureSerial = serial;
-    }
 }
 
 MaybeError DeviceBase::CheckPassedSerials() {
@@ -1255,20 +1255,9 @@ bool DeviceBase::APITick() {
 MaybeError DeviceBase::Tick() {
     DAWN_TRY(ValidateIsAlive());
 
-    // to avoid overly ticking, we only want to tick when:
-    // 1. the last submitted serial has moved beyond the completed serial
-    // 2. or the completed serial has not reached the future serial set by the trackers
-    if (mLastSubmittedSerial > mCompletedSerial || mCompletedSerial < mFutureSerial) {
+    if (HasIncompleteSerials()) {
         DAWN_TRY(CheckPassedSerials());
         DAWN_TRY(TickImpl());
-
-        // There is no GPU work in flight, we need to move the serials forward so that
-        // so that CPU operations waiting on GPU completion can know they don't have to wait.
-        // AssumeCommandsComplete will assign the max serial we must tick to in order to
-        // fire the awaiting callbacks.
-        if (mCompletedSerial == mLastSubmittedSerial) {
-            AssumeCommandsComplete();
-        }
 
         // TODO(crbug.com/dawn/833): decouple TickImpl from updating the serial so that we can
         // tick the dynamic uploader before the backend resource allocators. This would allow

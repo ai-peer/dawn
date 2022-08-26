@@ -18,6 +18,7 @@
 #include <memory>
 
 #include "dawn/common/SerialQueue.h"
+#include "dawn/native/CallbackTaskManager.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/IntegerTypes.h"
@@ -31,10 +32,12 @@ namespace dawn::native {
 
 class QueueBase : public ApiObjectBase {
   public:
-    struct TaskInFlight {
-        virtual ~TaskInFlight();
-        virtual void Finish(dawn::platform::Platform* platform, ExecutionSerial serial) = 0;
-        virtual void HandleDeviceLoss() = 0;
+    struct TaskInFlight : CallbackTask {
+        virtual const char* GetFinishedNameForTrace() const = 0;
+
+        static void FinishedOnQueue(std::unique_ptr<TaskInFlight> task,
+                                    DeviceBase* device,
+                                    ExecutionSerial serial);
     };
 
     ~QueueBase() override;
@@ -66,6 +69,8 @@ class QueueBase : public ApiObjectBase {
     void TrackTask(std::unique_ptr<TaskInFlight> task, ExecutionSerial serial);
     void Tick(ExecutionSerial finishedSerial);
     void HandleDeviceLoss();
+
+    ExecutionSerial GetPendingWorkDoneSerial() const;
 
   protected:
     QueueBase(DeviceBase* device, const QueueDescriptor* descriptor);
@@ -103,6 +108,10 @@ class QueueBase : public ApiObjectBase {
 
     void SubmitInternal(uint32_t commandCount, CommandBufferBase* const* commands);
 
+    // Tracks when pending work enqueued from WriteBuffer/Texture will be complete.
+    ExecutionSerial mPendingWorkDoneSerial = ExecutionSerial(0);
+
+    // Tasks in flight that will be completed when their ExecutionSerial passes.
     SerialQueue<ExecutionSerial, std::unique_ptr<TaskInFlight>> mTasksInFlight;
 };
 

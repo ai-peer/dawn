@@ -36,10 +36,12 @@ namespace dawn::native {
 namespace {
 struct MapRequestTask : QueueBase::TaskInFlight {
     MapRequestTask(Ref<BufferBase> buffer, MapRequestID id) : buffer(std::move(buffer)), id(id) {}
-    void Finish(dawn::platform::Platform* platform, ExecutionSerial serial) override {
-        TRACE_EVENT1(platform, General, "Buffer::TaskInFlight::Finished", "serial",
-                     uint64_t(serial));
-        buffer->OnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_Success);
+    const char* GetFinishedNameForTrace() const override {
+        return "Buffer::TaskInFlight::Finished";
+    }
+    void Finish() override { buffer->OnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_Success); }
+    void HandleShutDown() override {
+        buffer->OnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
     }
     void HandleDeviceLoss() override {
         buffer->OnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_DeviceLost);
@@ -355,8 +357,9 @@ void BufferBase::APIMapAsync(wgpu::MapMode mode,
     }
     std::unique_ptr<MapRequestTask> request = std::make_unique<MapRequestTask>(this, mLastMapID);
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Buffer::APIMapAsync", "serial",
-                 uint64_t(GetDevice()->GetPendingCommandSerial()));
-    GetDevice()->GetQueue()->TrackTask(std::move(request), GetDevice()->GetPendingCommandSerial());
+                 uint64_t(GetDevice()->GetQueueWorkDoneCommandSerial()));
+    GetDevice()->GetQueue()->TrackTask(std::move(request),
+                                       GetDevice()->GetQueueWorkDoneCommandSerial());
 }
 
 void* BufferBase::APIGetMappedRange(size_t offset, size_t size) {
