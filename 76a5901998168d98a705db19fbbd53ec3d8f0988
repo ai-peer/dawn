@@ -16,6 +16,23 @@
       "message": "Looking at the presubmit logs, seems to be working ok\n\n[D2022-08-26 12:10:14,625 10598 140568105432960 subprocess2.py] /b/s/w/ir/cache/builder/presubmit/dawn/tools/golang/bin/go test ./...;  cwd\u003d/b/s/w/ir/cache/builder/presubmit/dawn/src/dawn/node\n[D2022-08-26 12:10:20,368 10598 140568105432960 presubmit_support.py] Running CheckChangeOnCommit done.\n\n[D2022-08-26 12:10:20,790 10598 140568105432960 subprocess2.py] /b/s/w/ir/cache/builder/presubmit/dawn/tools/golang/bin/go test ./...;  cwd\u003d/b/s/w/ir/cache/builder/presubmit/dawn/tools\n  20.5s to run CheckChangeOnCommit from /b/s/w/ir/cache/builder/presubmit/dawn/tools/PRESUBMIT.py.\n[D2022-08-26 12:10:41,274 10598 140568105432960 presubmit_support.py] Running CheckChangeOnCommit done.\n\nI also tested locally that making changes that intentionally fail some go tests will get caught in the presubmit.\n\nWhat I\u0027m not sure about without looking at all the go tests: is it possible a go test in src/dawn/node/ to fail due to a change in some other directory? or for a test in tools/ to fail due to a change in some other directory? If that\u0027s the case, then we\u0027ll want to run ALL go tests on any change - probably only in CheckChangeOnCommit, not CheckChangeOnUpload",
       "revId": "76a5901998168d98a705db19fbbd53ec3d8f0988",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ec3909e_9b3f4fb6",
+        "filename": "go_presubmit_support.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-26T19:24:27Z",
+      "side": 1,
+      "message": "whoops - need license",
+      "revId": "76a5901998168d98a705db19fbbd53ec3d8f0988",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
