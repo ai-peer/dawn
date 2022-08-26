@@ -69,6 +69,24 @@
       "parentUuid": "eaed4c22_dc579080",
       "revId": "573dd0ed413e73d599e576ce683d0f802ad03e70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48b99b4f_97c673f9",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-26T12:41:38Z",
+      "side": 1,
+      "message": "The WebGPU spec only mandates that the workgroup size is validated inside createComputePipeline so we could just remove the copy of the code in ShaderModule and always reflect the transformed entrypoint.",
+      "parentUuid": "ee9b01da_234d1689",
+      "revId": "573dd0ed413e73d599e576ce683d0f802ad03e70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

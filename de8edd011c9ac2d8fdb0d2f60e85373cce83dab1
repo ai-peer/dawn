@@ -132,6 +132,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f1dc56be_6f775382",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-26T12:41:38Z",
+      "side": 1,
+      "message": "What about adding a `MaybeError RenderPipelineBase/ComputePipeline/Pipeline::InitializeBase()` like we have for some objects already. `Pipeline::InitializeBase` would take care of iterating the stages and running the SingleEntryPoint transform (that we do on all backends already) and the SubstituteOverrides transform if needed. In the future we can have more code paths, but it would make the situation much simpler to start. Am I missing something?",
+      "parentUuid": "23d2093f_bf273efb",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 1
+      },
+      "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cecbce76_7043316a",
         "filename": "src/dawn/native/Toggles.cpp",
         "patchSetId": 14
@@ -197,6 +221,24 @@
       "side": 1,
       "message": "bclayton@ should know the complete concern based on wgsl discussion for this.\nBut turns out our plan for webgpu v1 is to use const expression replacement for all overrides. I think the major issue is the validation issue.",
       "parentUuid": "0d4e45de_a8738fb3",
+      "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8077ec53_a97d8f35",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-26T12:41:38Z",
+      "side": 1,
+      "message": "Using the backend implementation would require Tint to export the created specialization constants for each constant in WGSL and also have an interface to give a partial assignment of constants and return a complete one (because you are allowed to do `override a \u003d override_b + override_c` in WGSL but not necessarily in backends, and not necessarily all operations that WGSL supports).\n\nAnyways, given that we are going to use the transform for the forseeable future, we could remove the backend-specific specialization constant code altogether. If we need it in the future, it would be easy to find it again in the git commits, so it is not lost at all!",
+      "parentUuid": "85c4042a_c2a50f09",
       "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
