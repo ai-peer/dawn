@@ -348,7 +348,7 @@ func (r *roller) roll(ctx context.Context) error {
 		// Note: The new expectations are not used if the last attempt didn't
 		// fail, but we always want to post the diagnostics
 		newExpectations := ex.Clone()
-		diags, err := newExpectations.Update(results)
+		diags, err := newExpectations.Update(results, r.cfg.Tag.SugarResults)
 		if err != nil {
 			return err
 		}
