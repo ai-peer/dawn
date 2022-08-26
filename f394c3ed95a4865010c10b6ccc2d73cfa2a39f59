@@ -104,6 +104,69 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "878aa388_631f985d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-26T09:20:16Z",
+      "side": 1,
+      "message": "I appreciate the effort to try and simplify usage here, but I\u0027m not sold that this is the right approach. To do this properly, the expectation generation algorithm needs an overhaul, which considers rules below the currently processed line. This stuff is remarkably complex, and I think to do this would be at least a couple of weeks work.\n\nThe expectation file is extremely verbose because of excessive CTS failures and flakes. I strongly believe that attempting to paper over the number of expectation rules is the wrong place to be investing our resources right now. Instead I\u0027d hope we can spend more efforts on reducing the number of failures and flakes. Do that, and the tooling (in its current form) will dramatically reduce the number of expectation rules.",
+      "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d36805b_b2c5dd72",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-26T09:20:16Z",
+      "side": 1,
+      "message": "remove. `break` is implicit in go.",
+      "range": {
+        "startLine": 89,
+        "startChar": 3,
+        "endLine": 89,
+        "endChar": 11
+      },
+      "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e10c0db_f28fe220",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-26T09:20:16Z",
+      "side": 1,
+      "message": "not true with this change.",
+      "range": {
+        "startLine": 167,
+        "startChar": 53,
+        "endLine": 167,
+        "endChar": 56
+      },
+      "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84cfef8f_172a8b21",
@@ -206,6 +269,24 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "9d32d780_19445490",
+      "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d85ca05_f2980c5f",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-26T09:20:16Z",
+      "side": 1,
+      "message": "This change does not fix this problem.\n\nThe code scans through the expectation lines, top to bottom. It looks at the query set, and rebuilds the set of expectations based on the results (assuming it wasn\u0027t set as `KEEP`). So, the tooling will have split the first set of expectations before it has even seen the second sub-query rule.\n\nThe end goal is that once the flakes have all been removed, we can remove all the `KEEP`s.",
+      "parentUuid": "f7cf6c1d_1736c978",
       "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
