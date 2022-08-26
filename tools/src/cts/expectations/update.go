@@ -31,13 +31,17 @@ import (
 // Update will:
 // • Remove any expectation lines that have a query where no results match.
 // • Remove expectations lines that are in a chunk which is not annotated with
-//   'KEEP', and all test results have the status 'Pass'.
+//   'KEEP', and all test results have the status 'Pass' (with exception to
+//   sugar-result tags).
 // • Remove chunks that have had all expectation lines removed.
 // • Appends new chunks for flaky and failing tests which are not covered by
 //   existing expectation lines.
 //
+// Sugar-result tags are tags that control the test runner, and should not be
+// modified by the update (only removed if the tests no longer exist).
+//
 // Update returns a list of diagnostics for things that should be addressed.
-func (c *Content) Update(results result.List) ([]Diagnostic, error) {
+func (c *Content) Update(results result.List, sugarResultTags []string) ([]Diagnostic, error) {
 	// Make a copy of the results. This code mutates the list.
 	results = append(result.List{}, results...)
 
@@ -55,10 +59,11 @@ func (c *Content) Update(results result.List) ([]Diagnostic, error) {
 
 	// Update those expectations!
 	u := updater{
-		in:      *c,
-		out:     Content{},
-		qt:      newQueryTree(results),
-		tagSets: tagSets,
+		in:           *c,
+		out:          Content{},
+		qt:           newQueryTree(results),
+		tagSets:      tagSets,
+		sugarResults: container.NewSet(sugarResultTags...),
 	}
 	if err := u.build(); err != nil {
 		return nil, fmt.Errorf("while updating expectations: %w", err)
@@ -70,11 +75,12 @@ func (c *Content) Update(results result.List) ([]Diagnostic, error) {
 
 // updater holds the state used for updating the expectations
 type updater struct {
-	in      Content       // the original expectations Content
-	out     Content       // newly built expectations Content
-	qt      queryTree     // the query tree
-	diags   []Diagnostic  // diagnostics raised during update
-	tagSets []result.Tags // reverse-ordered tag-sets of 'in'
+	in           Content               // the original expectations Content
+	out          Content               // newly built expectations Content
+	qt           queryTree             // the query tree
+	diags        []Diagnostic          // diagnostics raised during update
+	tagSets      []result.Tags         // reverse-ordered tag-sets of 'in'
+	sugarResults container.Set[string] // result tags that should be left alone
 }
 
 // simplifyStatuses replaces all result statuses that are not one of
@@ -142,8 +148,7 @@ func newQueryTree(results result.List) queryTree {
 	return queryTree{results, consumedAt, tree}
 }
 
-// glob returns the list of results matching the given tags under (or with) the
-// given query.
+// glob returns the list of results under (or with) the given query.
 func (qt *queryTree) glob(q query.Query) (result.List, error) {
 	glob, err := qt.tree.Glob(q)
 	if err != nil {
@@ -160,14 +165,14 @@ func (qt *queryTree) glob(q query.Query) (result.List, error) {
 	return out, nil
 }
 
-// globAndCheckForCollisions returns the list of results matching the given tags
-// under (or with) the given query.
-// globAndCheckForCollisions will return an error if any of the results are
-// already consumed by a non-zero line. The non-zero line distinguishes between
-// results consumed by expectations declared in the input (non-zero line), vs
-// those that were introduced by the update (zero line). We only want to error
-// if there's a collision in user declared expectations.
-func (qt *queryTree) globAndCheckForCollisions(q query.Query, t result.Tags) (result.List, error) {
+// globTags returns the list of results matching the given tags under (or with)
+// the given query.
+// If checkForCollisions is true then globTags() will return an error if any of
+// the results are already consumed by a non-zero line. The non-zero line
+// distinguishes between results consumed by expectations declared in the input
+// (non-zero line), vs those that were introduced by the update (zero line).
+// We only want to error if there's a collision in user declared expectations.
+func (qt *queryTree) globTags(q query.Query, t result.Tags, checkForCollisions bool) (result.List, error) {
 	glob, err := qt.tree.Glob(q)
 	if err != nil {
 		return nil, err
@@ -177,11 +182,13 @@ func (qt *queryTree) globAndCheckForCollisions(q query.Query, t result.Tags) (re
 	for _, indices := range glob {
 		for _, idx := range indices.Data {
 			if r := qt.results[idx]; r.Tags.ContainsAll(t) {
-				if at := qt.consumedAt[idx]; at > 0 {
-					if len(t) > 0 {
-						return nil, fmt.Errorf("%v %v collides with expectation at line %v", t, q, at)
+				if checkForCollisions {
+					if at := qt.consumedAt[idx]; at > 0 {
+						if len(t) > 0 {
+							return nil, fmt.Errorf("%v %v collides with expectation at line %v", t, q, at)
+						}
+						return nil, fmt.Errorf("%v collides with expectation at line %v", q, at)
 					}
-					return nil, fmt.Errorf("%v collides with expectation at line %v", q, at)
 				}
 				out = append(out, r)
 			}
@@ -194,7 +201,7 @@ func (qt *queryTree) globAndCheckForCollisions(q query.Query, t result.Tags) (re
 // under (or with) the given query, as consumed.
 // line is used to record the line at which the results were consumed. If the
 // results were consumed as part of generating new expectations then line should
-// be 0. See queryTree.globAndCheckForCollisions().
+// be 0. See queryTree.globTags().
 func (qt *queryTree) markAsConsumed(q query.Query, t result.Tags, line int) {
 	if glob, err := qt.tree.Glob(q); err == nil {
 		for _, indices := range glob {
@@ -301,9 +308,15 @@ func (u *updater) expectation(in Expectation, keep bool) []Expectation {
 	// Grab all the results that match the expectation's query
 	q := query.Parse(in.Query)
 
+	// The expectation status(es)
+	status := container.NewSet(in.Status...)
+
+	// Are all the expectation statuses 'sugar' (Slow, Skip, etc)?
+	allSugar := u.sugarResults.ContainsAll(status)
+
 	// Glob the results for the expectation's query + tag combination.
-	// Ensure that none of these are already consumed.
-	results, err := u.qt.globAndCheckForCollisions(q, in.Tags)
+	// If there are non-sugar statues, ensure that none of these are already consumed.
+	results, err := u.qt.globTags(q, in.Tags, !allSugar)
 	// If we can't find any results for this query + tag combination, then bail.
 	switch {
 	case errors.As(err, &query.ErrNoDataForQuery{}):
@@ -315,16 +328,19 @@ func (u *updater) expectation(in Expectation, keep bool) []Expectation {
 		return noResults()
 	}
 
-	// Before returning, mark all the results as consumed.
-	// Note: this has to happen *after* we've generated the new expectations, as
-	// marking the results as 'consumed' will impact the logic of
-	// expectationsForRoot()
-	defer u.qt.markAsConsumed(q, in.Tags, in.Line)
+	if !allSugar {
+
+		// Before returning, mark all the results as consumed.
+		// Note: this has to happen *after* we've generated the new
+		// expectations, as marking the results as 'consumed' will impact the
+		// logic of expectationsForRoot()
+		defer u.qt.markAsConsumed(q, in.Tags, in.Line)
+	}
 
 	if keep { // Expectation chunk was marked with 'KEEP'
 		// Add a diagnostic if all tests of the expectation were 'Pass'
 		if s := results.Statuses(); len(s) == 1 && s.One() == result.Pass {
-			if ex := container.NewSet(in.Status...); len(ex) == 1 && ex.One() == string(result.Slow) {
+			if len(status) == 1 && status.One() == string(result.Slow) {
 				// Expectation was 'Slow'. Give feedback on actual time taken.
 				var longest, average time.Duration
 				for _, r := range results {
@@ -350,8 +366,28 @@ func (u *updater) expectation(in Expectation, keep bool) []Expectation {
 		return []Expectation{in}
 	}
 
+	out := []Expectation{}
+
+	// If any status tags were sugar...
+	if sugar := status.Intersection(u.sugarResults); len(sugar) > 0 {
+		// Emit the sugar expectation separately from the non-sugar expectations
+		ex := in
+		ex.Status = sugar.List()
+		out = append(out, ex)
+
+		// Subtract out the sugar status
+		status.RemoveAll(sugar)
+		in.Status = status.List()
+	}
+
+	if len(status) == 0 {
+		return out // All were sugar
+	}
+
 	// Rebuild the expectations for this query.
-	return u.expectationsForRoot(q, in.Line, in.Bug, in.Comment)
+	out = append(out, u.expectationsForRoot(q, in.Line, in.Bug, in.Comment)...)
+
+	return out
 }
 
 // addNewExpectations (potentially) appends to 'u.out' chunks for new flaky and

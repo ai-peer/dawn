@@ -72,7 +72,7 @@ func (c *cmd) Run(ctx context.Context, cfg common.Config) error {
 	}
 
 	// Update the expectations file with the results
-	msgs, err := ex.Update(results)
+	msgs, err := ex.Update(results, cfg.Tag.SugarResults)
 	if err != nil {
 		return err
 	}
