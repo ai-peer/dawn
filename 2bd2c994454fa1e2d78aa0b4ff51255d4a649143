@@ -312,6 +312,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58565f1e_19c2fd6a",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-26T15:37:21Z",
+      "side": 1,
+      "message": "Thanks for the additional thoughts here - I\u0027m still thinking about this and trying to see how we can make progress on this CL without needing to overhaul all the serial stuff (yet).\n\nStill hacking around with it but I think what I\u0027m trying to target is to narrow down mFutureSerial so it is less \"future\". It should always refer to either actually submitted or actually pending commands. So it\u0027s past or near-future. There should never be a case where we a callback is waiting on a pending serial that doesn\u0027t refer to any actual pending commands. I think this will remove the need for the artificial serial progression, and then this CL will be unblocked.",
+      "parentUuid": "0846a438_fe059ddd",
+      "range": {
+        "startLine": 811,
+        "startChar": 75,
+        "endLine": 811,
+        "endChar": 79
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d1f24ba_b0ec7120",
         "filename": "src/dawn/native/vulkan/NativeSwapChainImplVk.cpp",
         "patchSetId": 10
