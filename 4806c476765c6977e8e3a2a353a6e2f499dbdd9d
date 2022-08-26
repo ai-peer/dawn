@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d87856c_7ceeaa31",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 7
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-26T20:12:23Z",
+      "side": 1,
+      "message": "nit: I\u0027d call this `MultiplyMatVec` \u0027Star\u0027 is just a token.",
+      "range": {
+        "startLine": 907,
+        "startChar": 8,
+        "endLine": 907,
+        "endChar": 12
+      },
+      "revId": "4806c476765c6977e8e3a2a353a6e2f499dbdd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67fc473b_701d023a",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-26T20:12:23Z",
+      "side": 1,
+      "message": "rhs",
+      "range": {
+        "startLine": 594,
+        "startChar": 33,
+        "endLine": 594,
+        "endChar": 36
+      },
+      "revId": "4806c476765c6977e8e3a2a353a6e2f499dbdd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17f9e653_b1a8ec42",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-26T20:12:23Z",
+      "side": 1,
+      "message": "rhs",
+      "range": {
+        "startLine": 618,
+        "startChar": 33,
+        "endLine": 618,
+        "endChar": 36
+      },
+      "revId": "4806c476765c6977e8e3a2a353a6e2f499dbdd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "570b74e5_ed746667",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-26T20:12:23Z",
+      "side": 1,
+      "message": "and so on",
+      "range": {
+        "startLine": 657,
+        "startChar": 33,
+        "endLine": 657,
+        "endChar": 36
+      },
+      "revId": "4806c476765c6977e8e3a2a353a6e2f499dbdd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59c488e5_11e89bf1",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-26T20:12:23Z",
+      "side": 1,
+      "message": "nit: just `return` here?",
+      "range": {
+        "startLine": 706,
+        "startChar": 8,
+        "endLine": 706,
+        "endChar": 16
+      },
+      "revId": "4806c476765c6977e8e3a2a353a6e2f499dbdd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9233922e_82791890",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-26T20:12:23Z",
+      "side": 1,
+      "message": "It\u0027s not a great idea to depend on this for bailing. We will probably (one day) want to support reporting of multiple errors in the resolver. This will prevent this. I suggest having `TransformBinaryElements` return a `ConstEval::ConstantResult`",
+      "range": {
+        "startLine": 1031,
+        "startChar": 8,
+        "endLine": 1031,
+        "endChar": 45
+      },
+      "revId": "4806c476765c6977e8e3a2a353a6e2f499dbdd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
