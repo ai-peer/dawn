@@ -132,6 +132,7 @@ wrapPromiseWithHeartbeat(GPUBuffer.prototype, 'mapAsync');
 wrapPromiseWithHeartbeat(GPUShaderModule.prototype, 'compilationInfo');
 
 globalTestConfig.testHeartbeatCallback = sendHeartbeat;
+globalTestConfig.maxSubcasesInFlight = 100;
 
 async function runCtsTest(query, use_worker) {
   const workerEnabled = use_worker;
