@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "452f1db5_643b113a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-26T20:43:33Z",
+      "side": 1,
+      "message": "Quite a lot to review here. Will have to continue on monday, sorry!",
+      "revId": "492868a3b18f8dee70961ff05381000920578012",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8882f94e_5eb185f5",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-26T20:43:33Z",
+      "side": 1,
+      "message": "Does this class give you anything over `using Storage \u003d std::variant\u003ci32, u32, f32, f16, AInt, AFloat, bool\u003e;` ?",
+      "range": {
+        "startLine": 196,
+        "startChar": 11,
+        "endLine": 196,
+        "endChar": 18
+      },
+      "revId": "492868a3b18f8dee70961ff05381000920578012",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ff249a7_314a612d",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-26T20:43:33Z",
+      "side": 1,
+      "message": "Can\u0027t this just be `utils::Vector v{args...}` ?",
+      "range": {
+        "startLine": 769,
+        "startChar": 0,
+        "endLine": 771,
+        "endChar": 24
+      },
+      "revId": "492868a3b18f8dee70961ff05381000920578012",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
