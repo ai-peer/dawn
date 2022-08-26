@@ -36,6 +36,8 @@ func TestUpdate(t *testing.T) {
 `
 	headerLines := strings.Count(header, "\n")
 
+	sugarTags := []string{"SugarA", "SugarB"}
+
 	type Test struct {
 		name         string
 		expectations string
@@ -53,8 +55,8 @@ func TestUpdate(t *testing.T) {
 		{ //////////////////////////////////////////////////////////////////////
 			name: "no results found",
 			expectations: `
-crbug.com/a/123 a:missing,test,result:* [ Failure ]
-crbug.com/a/123 [ tag ] another:missing,test,result:* [ Failure ]
+crbug.com/dawn/123 a:missing,test,result:* [ Failure ]
+crbug.com/dawn/123 [ tag ] another:missing,test,result:* [ Failure ]
 
 some:other,test:* [ Failure ]
 `,
@@ -90,7 +92,7 @@ some:other,test:* [ Failure ]
 			name: "no results found KEEP",
 			expectations: `
 # KEEP
-crbug.com/a/123 a:missing,test,result:* [ Failure ]
+crbug.com/dawn/123 a:missing,test,result:* [ Failure ]
 
 some:other,test:* [ Failure ]
 `,
@@ -120,7 +122,7 @@ some:other,test:* [ Failure ]
 		{ //////////////////////////////////////////////////////////////////////
 			name: "no results found Skip",
 			expectations: `
-crbug.com/a/123 a:missing,test,result:* [ Skip ]
+crbug.com/dawn/123 a:missing,test,result:* [ Skip ]
 
 some:other,test:* [ Failure ]
 `,
@@ -137,7 +139,7 @@ some:other,test:* [ Failure ]
 				},
 			},
 			updated: `
-crbug.com/a/123 a:missing,test,result:* [ Skip ]
+crbug.com/dawn/123 a:missing,test,result:* [ Skip ]
 
 some:other,test:* [ Failure ]
 `,
@@ -280,8 +282,8 @@ a:b:* [ Failure ]
 		{ //////////////////////////////////////////////////////////////////////
 			name: "expectation test now passes",
 			expectations: `
-crbug.com/a/123 [ gpu-a os-a ] a:b,c:* [ Failure ]
-crbug.com/a/123 [ gpu-b os-b ] a:b,c:* [ Failure ]
+crbug.com/dawn/123 [ gpu-a os-a ] a:b,c:* [ Failure ]
+crbug.com/dawn/123 [ gpu-b os-b ] a:b,c:* [ Failure ]
 `,
 			results: result.List{
 				result.Result{
@@ -296,14 +298,14 @@ crbug.com/a/123 [ gpu-b os-b ] a:b,c:* [ Failure ]
 				},
 			},
 			updated: `
-crbug.com/a/123 [ os-b ] a:b,c:* [ Failure ]
+crbug.com/dawn/123 [ os-b ] a:b,c:* [ Failure ]
 `,
 		},
 		{ //////////////////////////////////////////////////////////////////////
 			name: "expectation case now passes",
 			expectations: `
-crbug.com/a/123 [ gpu-a os-a ] a:b,c:d [ Failure ]
-crbug.com/a/123 [ gpu-b os-b ] a:b,c:d [ Failure ]
+crbug.com/dawn/123 [ gpu-a os-a ] a:b,c:d [ Failure ]
+crbug.com/dawn/123 [ gpu-b os-b ] a:b,c:d [ Failure ]
 `,
 			results: result.List{
 				result.Result{
@@ -318,15 +320,15 @@ crbug.com/a/123 [ gpu-b os-b ] a:b,c:d [ Failure ]
 				},
 			},
 			updated: `
-crbug.com/a/123 [ os-b ] a:b,c:d: [ Failure ]
+crbug.com/dawn/123 [ os-b ] a:b,c:d: [ Failure ]
 `,
 		},
 		{ //////////////////////////////////////////////////////////////////////
 			name: "expectation case now passes KEEP - single",
 			expectations: `
 # KEEP
-crbug.com/a/123 [ gpu-a os-a ] a:b,c:d [ Failure ]
-crbug.com/a/123 [ gpu-b os-b ] a:b,c:d [ Failure ]
+crbug.com/dawn/123 [ gpu-a os-a ] a:b,c:d [ Failure ]
+crbug.com/dawn/123 [ gpu-b os-b ] a:b,c:d [ Failure ]
 `,
 			results: result.List{
 				result.Result{
@@ -342,8 +344,8 @@ crbug.com/a/123 [ gpu-b os-b ] a:b,c:d [ Failure ]
 			},
 			updated: `
 # KEEP
-crbug.com/a/123 [ gpu-a os-a ] a:b,c:d [ Failure ]
-crbug.com/a/123 [ gpu-b os-b ] a:b,c:d [ Failure ]
+crbug.com/dawn/123 [ gpu-a os-a ] a:b,c:d [ Failure ]
+crbug.com/dawn/123 [ gpu-b os-b ] a:b,c:d [ Failure ]
 `,
 			diagnostics: []expectations.Diagnostic{
 				{
@@ -357,7 +359,7 @@ crbug.com/a/123 [ gpu-b os-b ] a:b,c:d [ Failure ]
 			name: "expectation case now passes KEEP - multiple",
 			expectations: `
 # KEEP
-crbug.com/a/123 a:b,c:d:* [ Failure ]
+crbug.com/dawn/123 a:b,c:d:* [ Failure ]
 `,
 			results: result.List{
 				result.Result{Query: Q("a:b,c:d:a"), Status: result.Pass},
@@ -367,7 +369,7 @@ crbug.com/a/123 a:b,c:d:* [ Failure ]
 			},
 			updated: `
 # KEEP
-crbug.com/a/123 a:b,c:d:* [ Failure ]
+crbug.com/dawn/123 a:b,c:d:* [ Failure ]
 `,
 			diagnostics: []expectations.Diagnostic{
 				{
@@ -409,7 +411,7 @@ crbug.com/a/123 a:b,c:d:* [ Failure ]
 				result.Result{
 					Query:  Q("suite:dir_a,dir_b:test_b:*"),
 					Tags:   result.NewTags("os-a", "gpu-a"),
-					Status: result.Slow,
+					Status: result.Crash,
 				},
 				result.Result{
 					Query:  Q("suite:dir_a,dir_b:test_b:*"),
@@ -431,8 +433,116 @@ crbug.com/dawn/0000 [ gpu-b os-b ] suite:dir_a,dir_b:test_c:case=5;* [ RetryOnFa
 # New failures. Please triage:
 crbug.com/dawn/0000 [ gpu-b os-a ] suite:* [ Failure ]
 crbug.com/dawn/0000 [ gpu-a os-a ] suite:dir_a,dir_b:test_a:* [ Failure ]
-crbug.com/dawn/0000 [ gpu-a os-a ] suite:dir_a,dir_b:test_b:* [ Slow ]
+crbug.com/dawn/0000 [ gpu-a os-a ] suite:dir_a,dir_b:test_b:* [ Failure ]
 crbug.com/dawn/0000 [ gpu-b os-b ] suite:dir_a,dir_b:test_c:case=4;* [ Failure ]
+`,
+		},
+		{ //////////////////////////////////////////////////////////////////////
+			name: "sugar split",
+			expectations: `
+crbug.com/dawn/123 a:b,c:* [ SugarA Failure ]
+`,
+			results: result.List{
+				result.Result{Query: Q("a:b,c:d:a"), Status: result.Failure},
+				result.Result{Query: Q("a:b,c:d:b"), Status: result.Failure},
+				result.Result{Query: Q("a:b,c:d:c"), Status: result.Failure},
+				result.Result{Query: Q("a:b,c:d:d"), Status: result.Failure},
+				result.Result{Query: Q("a:b,x"), Status: result.Pass},
+			},
+			updated: `
+crbug.com/dawn/123 a:b,c:* [ SugarA ]
+crbug.com/dawn/123 a:b,c:* [ Failure ]
+`,
+		},
+		{ //////////////////////////////////////////////////////////////////////
+			name: "sugar split at sub-query",
+			expectations: `
+crbug.com/dawn/123 a:b,* [ SugarA Failure ]
+`,
+			results: result.List{
+				result.Result{Query: Q("a:b,c:d:a"), Status: result.Failure},
+				result.Result{Query: Q("a:b,c:d:b"), Status: result.Failure},
+				result.Result{Query: Q("a:b,c:d:c"), Status: result.Failure},
+				result.Result{Query: Q("a:b,c:d:d"), Status: result.Failure},
+				result.Result{Query: Q("a:b,x"), Status: result.Pass},
+			},
+			updated: `
+crbug.com/dawn/123 a:b,* [ SugarA ]
+crbug.com/dawn/123 a:b,c:* [ Failure ]
+`,
+		},
+		{ //////////////////////////////////////////////////////////////////////
+			name: "sugar missing results",
+			expectations: `
+crbug.com/dawn/123 a:b,* [ SugarA ]
+`,
+			results: result.List{},
+			updated: `
+`,
+			diagnostics: []expectations.Diagnostic{
+				{
+					Severity: expectations.Warning,
+					Line:     headerLines + 2,
+					Message:  "no results found for 'a:b,*'",
+				},
+			},
+		},
+		{ //////////////////////////////////////////////////////////////////////
+			name: "sugar and failure missing results",
+			expectations: `
+crbug.com/dawn/123 a:b,* [ SugarA Failure SugarB ]
+`,
+			results: result.List{},
+			updated: `
+`,
+			diagnostics: []expectations.Diagnostic{
+				{
+					Severity: expectations.Warning,
+					Line:     headerLines + 2,
+					Message:  "no results found for 'a:b,*'",
+				},
+			},
+		},
+		{ //////////////////////////////////////////////////////////////////////
+			name: "collision with same sugar",
+			expectations: `
+crbug.com/dawn/123 a:b,c:* [ SugarA ]
+crbug.com/dawn/123 a:b,c:d:* [ SugarA ]
+`,
+			results: result.List{
+				result.Result{Query: Q("a:b,c:d:a"), Status: result.Failure},
+				result.Result{Query: Q("a:b,c:d:b"), Status: result.Failure},
+				result.Result{Query: Q("a:b,c:d:c"), Status: result.Failure},
+				result.Result{Query: Q("a:b,c:d:d"), Status: result.Failure},
+				result.Result{Query: Q("a:b,x"), Status: result.Pass},
+			},
+			updated: `
+crbug.com/dawn/123 a:b,c:* [ SugarA ]
+crbug.com/dawn/123 a:b,c:d:* [ SugarA ]
+
+# New failures. Please triage:
+crbug.com/dawn/0000 a:b,c:* [ Failure ]
+`,
+		},
+		{ //////////////////////////////////////////////////////////////////////
+			name: "collision with different sugar",
+			expectations: `
+crbug.com/dawn/123 a:b,c:* [ SugarA ]
+crbug.com/dawn/123 a:b,c:d:* [ SugarB ]
+`,
+			results: result.List{
+				result.Result{Query: Q("a:b,c:d:a"), Status: result.Failure},
+				result.Result{Query: Q("a:b,c:d:b"), Status: result.Failure},
+				result.Result{Query: Q("a:b,c:d:c"), Status: result.Failure},
+				result.Result{Query: Q("a:b,c:d:d"), Status: result.Failure},
+				result.Result{Query: Q("a:b,x"), Status: result.Pass},
+			},
+			updated: `
+crbug.com/dawn/123 a:b,c:* [ SugarA ]
+crbug.com/dawn/123 a:b,c:d:* [ SugarB ]
+
+# New failures. Please triage:
+crbug.com/dawn/0000 a:b,c:* [ Failure ]
 `,
 		},
 		{ //////////////////////////////////////////////////////////////////////
@@ -651,7 +761,7 @@ crbug.com/dawn/0000 a:b,c:t29:* [ Failure ]
 		}
 
 		errMsg := ""
-		diagnostics, err := ex.Update(test.results)
+		diagnostics, err := ex.Update(test.results, sugarTags)
 		if err != nil {
 			errMsg = err.Error()
 		}

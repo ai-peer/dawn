@@ -47,6 +47,12 @@
       "intel-0x5912",
       "intel-0x3e92"
     ],
+    "SugarResults": [
+      // Tags that control the test runner, but do not provide an expected test result.
+      "Skip",
+      "Slow",
+      "RetryOnFailure"
+    ]
   },
   "Sheets": {
     // Spreadsheet to export results data to
