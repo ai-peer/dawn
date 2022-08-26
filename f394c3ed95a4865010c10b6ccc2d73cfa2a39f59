@@ -121,6 +121,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "629a6acd_ddac5467",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-26T16:17:48Z",
+      "side": 1,
+      "message": "The goal isn\u0027t really to paper over the number of expectations rules. The goal is to make the file a useful list of what is failing by precisely describing the problems. Right now, we can\u0027t handle the situation like:\n\n```\nfoo:* [ Slow ] # crbug.com/1234\nfoo:bar:baz [ Failure ] # crbug.com/5678\n```\n\nThis, chiefly, is the type of conflict detection I\u0027d like to find a way to resolve.\nPreviously we used to have a problem where we would need to manually split tests up into smaller test groups, and it was a huge pain. Now, we have the same problem but in the expectations file. To precisely describe what this example expresses, you might have to split foo:* into all 1000 testcases, just to mark 999 of them as [ Slow ] # crbug.com/1234 and foo:bar:baz as [ Slow Failure ] # crbug.com/5678.\n\nPlease know we are investing considerable resources into solving the failures and flakes and have made significant progress there with still some work to go. For example, a few weeks ago our random flaky timeout rate was over 240 per hour. Now it\u0027s at about that much per day. Any help on that front would certainly be appreciated.\n\nPart of burning down the other problems is helped by a way to list what they are in a manageable way. We have bugs filed for every type of failure and flake but we can\u0027t express them in the expectations file clearly. The expectations file is a great place to track this information since the tooling can automatically keep it up to date. I think that managing this list well is pretty important, and both Loko and I have run into difficulty doing so on separate occasions.\n\nI understand that the tooling is complex, but that doesn\u0027t mean we can\u0027t improve and simplify it. I ask we do not ignore the need to express expectations in this way. This same expectations format is used throughout Chromium and this type of overlapping pattern is common. We have a need for it now, and experience from Chromium shows we will continue to need it in the future. Let\u0027s think through specifically what the barriers are to matching how `typ` interprets expectations and see how we might solve them incrementally.",
+      "parentUuid": "878aa388_631f985d",
+      "revId": "f394c3ed95a4865010c10b6ccc2d73cfa2a39f59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d36805b_b2c5dd72",
