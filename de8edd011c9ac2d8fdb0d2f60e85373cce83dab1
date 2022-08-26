@@ -156,6 +156,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "daf9e076_422318f6",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-26T14:56:15Z",
+      "side": 1,
+      "message": "overall I wanted to see if it would be possible for us to 1. have fewer intermediate programs by doing it as part of pipeline compilation, and 2. not run the transform at all on cache hit",
+      "parentUuid": "f1dc56be_6f775382",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 1
+      },
+      "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cecbce76_7043316a",
         "filename": "src/dawn/native/Toggles.cpp",
         "patchSetId": 14
@@ -239,6 +263,24 @@
       "side": 1,
       "message": "Using the backend implementation would require Tint to export the created specialization constants for each constant in WGSL and also have an interface to give a partial assignment of constants and return a complete one (because you are allowed to do `override a \u003d override_b + override_c` in WGSL but not necessarily in backends, and not necessarily all operations that WGSL supports).\n\nAnyways, given that we are going to use the transform for the forseeable future, we could remove the backend-specific specialization constant code altogether. If we need it in the future, it would be easy to find it again in the git commits, so it is not lost at all!",
       "parentUuid": "85c4042a_c2a50f09",
+      "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35fd31e2_f3ed66bb",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-26T14:56:15Z",
+      "side": 1,
+      "message": "oh okay, I see - yea in that case I think we should remove it entirely instead of keeping it around. can always recover from git history as Corentin said",
+      "parentUuid": "8077ec53_a97d8f35",
       "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
