@@ -336,6 +336,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9427e4af_ff91ce53",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-26T22:23:43Z",
+      "side": 1,
+      "message": "ugh nevermind - that idea won\u0027t work so easily. mFutureSerial is a frontend concept, and we can\u0027t simply narrow it to be less futuristic since the frontend only knows about frontend work. MapAsync still needs to wait on backend operations like buffer zero-initialization so we can\u0027t do it purely based on frontend knowledge. here was my attempt if you\u0027re curious\nhttps://dawn-review.googlesource.com/c/dawn/+/100481\n\nwe can discuss more on crbug.com/dawn/1413 about what to do.\n\nMy concern with DummySubmit is also that it\u0027s highly re-entrant. That\u0027s risky because is likely not expecting to be called re-entrantly. Some of the backend implementations of Submit call Tick which will then call Submit again... :-/",
+      "parentUuid": "58565f1e_19c2fd6a",
+      "range": {
+        "startLine": 811,
+        "startChar": 75,
+        "endLine": 811,
+        "endChar": 79
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d1f24ba_b0ec7120",
         "filename": "src/dawn/native/vulkan/NativeSwapChainImplVk.cpp",
         "patchSetId": 10
