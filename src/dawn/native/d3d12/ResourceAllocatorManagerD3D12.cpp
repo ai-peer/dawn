@@ -177,6 +177,18 @@ bool IsClearValueOptimizable(DeviceBase* device, const D3D12_RESOURCE_DESC& reso
                                         D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL)) != 0;
 }
 
+bool ShouldAllocateAsCommittedResource(Device* device, bool allocateAsCommittedResource) {
+    if (allocateAsCommittedResource) {
+        return true;
+    }
+
+    if (device->IsToggleEnabled(Toggle::DisableResourceSuballocation)) {
+        return true;
+    }
+
+    return false;
+}
+
 }  // namespace
 
 ResourceAllocatorManager::ResourceAllocatorManager(Device* device) : mDevice(device) {
@@ -199,7 +211,8 @@ ResourceAllocatorManager::ResourceAllocatorManager(Device* device) : mDevice(dev
 ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::AllocateMemory(
     D3D12_HEAP_TYPE heapType,
     const D3D12_RESOURCE_DESC& resourceDescriptor,
-    D3D12_RESOURCE_STATES initialUsage) {
+    D3D12_RESOURCE_STATES initialUsage,
+    bool allocateAsCommittedResource) {
     // In order to suppress a warning in the D3D12 debug layer, we need to specify an
     // optimized clear value. As there are no negative consequences when picking a mismatched
     // clear value, we use zero as the optimized clear value. This also enables fast clears on
@@ -213,10 +226,10 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::AllocateMemory(
 
     // TODO(crbug.com/dawn/849): Conditionally disable sub-allocation.
     // For very large resources, there is no benefit to suballocate.
-    // For very small resources, it is inefficent to suballocate given the min. heap
-    // size could be much larger then the resource allocation.
+    // For very small resources, it is inefficent to suballocate given the min heap size could be
+    // much larger than the resource allocation.
     // Attempt to satisfy the request using sub-allocation (placed resource in a heap).
-    if (!mDevice->IsToggleEnabled(Toggle::DisableResourceSuballocation)) {
+    if (!ShouldAllocateAsCommittedResource(mDevice, allocateAsCommittedResource)) {
         ResourceHeapAllocation subAllocation;
         DAWN_TRY_ASSIGN(subAllocation, CreatePlacedResource(heapType, resourceDescriptor,
                                                             optimizedClearValue, initialUsage));
@@ -293,7 +306,6 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::CreatePlacedReso
     const ResourceHeapKind resourceHeapKind =
         GetResourceHeapKind(requestedResourceDescriptor.Dimension, heapType,
                             requestedResourceDescriptor.Flags, mResourceHeapTier);
-
     D3D12_RESOURCE_DESC resourceDescriptor = requestedResourceDescriptor;
     resourceDescriptor.Alignment = GetResourcePlacementAlignment(
         resourceHeapKind, requestedResourceDescriptor.SampleDesc.Count,
