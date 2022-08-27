@@ -315,7 +315,8 @@ class DawnTestBase {
                                               T tolerance = 0,
                                               uint32_t level = 0,
                                               wgpu::TextureAspect aspect = wgpu::TextureAspect::All,
-                                              uint32_t bytesPerRow = 0) {
+                                              uint32_t bytesPerRow = 0,
+                                              wgpu::Device device = nullptr) {
         uint32_t texelBlockSize = utils::GetTexelBlockSizeInBytes(format);
         uint32_t texelComponentCount = utils::GetWGSLRenderableColorTextureComponentCount(format);
 
@@ -325,7 +326,7 @@ class DawnTestBase {
                 expectedData,
                 texelComponentCount * extent.width * extent.height * extent.depthOrArrayLayers,
                 tolerance),
-            texture, origin, extent, level, aspect, texelBlockSize, bytesPerRow);
+            texture, origin, extent, level, aspect, texelBlockSize, bytesPerRow, device);
     }
 
     template <typename T, typename U = T>
@@ -337,12 +338,13 @@ class DawnTestBase {
                                               wgpu::Extent3D extent,
                                               uint32_t level = 0,
                                               wgpu::TextureAspect aspect = wgpu::TextureAspect::All,
-                                              uint32_t bytesPerRow = 0) {
+                                              uint32_t bytesPerRow = 0,
+                                              wgpu::Device device = nullptr) {
         return AddTextureExpectationImpl(
             file, line,
             new detail::ExpectEq<T, U>(expectedData,
                                        extent.width * extent.height * extent.depthOrArrayLayers),
-            texture, origin, extent, level, aspect, sizeof(U), bytesPerRow);
+            texture, origin, extent, level, aspect, sizeof(U), bytesPerRow, device);
     }
 
     template <typename T, typename U = T>
@@ -353,10 +355,11 @@ class DawnTestBase {
                                               wgpu::Origin3D origin,
                                               uint32_t level = 0,
                                               wgpu::TextureAspect aspect = wgpu::TextureAspect::All,
-                                              uint32_t bytesPerRow = 0) {
+                                              uint32_t bytesPerRow = 0,
+                                              wgpu::Device device = nullptr) {
         return AddTextureExpectationImpl(file, line, new detail::ExpectEq<T, U>(expectedData),
                                          texture, origin, {1, 1}, level, aspect, sizeof(U),
-                                         bytesPerRow);
+                                         bytesPerRow, device);
     }
 
     template <typename E,
@@ -370,9 +373,10 @@ class DawnTestBase {
                                               wgpu::Extent3D extent,
                                               uint32_t level = 0,
                                               wgpu::TextureAspect aspect = wgpu::TextureAspect::All,
-                                              uint32_t bytesPerRow = 0) {
+                                              uint32_t bytesPerRow = 0,
+                                              wgpu::Device device = nullptr) {
         return AddTextureExpectationImpl(file, line, expectation, texture, origin, extent, level,
-                                         aspect, expectation->DataSize(), bytesPerRow);
+                                         aspect, expectation->DataSize(), bytesPerRow, device);
     }
 
     template <typename T>
@@ -386,10 +390,11 @@ class DawnTestBase {
         uint32_t y,
         uint32_t level = 0,
         wgpu::TextureAspect aspect = wgpu::TextureAspect::All,
-        uint32_t bytesPerRow = 0) {
+        uint32_t bytesPerRow = 0,
+        wgpu::Device device = nullptr) {
         return AddTextureExpectationImpl(
             file, line, new detail::ExpectBetweenColors<T>(color0, color1), texture, {x, y}, {1, 1},
-            level, aspect, sizeof(T), bytesPerRow);
+            level, aspect, sizeof(T), bytesPerRow, device);
     }
 
     std::ostringstream& ExpectSampledFloatData(wgpu::Texture texture,
@@ -452,7 +457,7 @@ class DawnTestBase {
                                                     mipLevel, {}, &expectedStencil);
     }
 
-    void WaitABit();
+    void WaitABit(wgpu::Device = nullptr);
     void FlushWire();
     void WaitForAllOperations();
 
@@ -496,7 +501,8 @@ class DawnTestBase {
                                                   uint32_t level,
                                                   wgpu::TextureAspect aspect,
                                                   uint32_t dataSize,
-                                                  uint32_t bytesPerRow);
+                                                  uint32_t bytesPerRow,
+                                                  wgpu::Device targetDevice);
 
     std::ostringstream& ExpectSampledFloatDataImpl(wgpu::TextureView textureView,
                                                    const char* wgslTextureType,
@@ -508,6 +514,7 @@ class DawnTestBase {
 
     // MapRead buffers used to get data for the expectations
     struct ReadbackSlot {
+        wgpu::Device device;
         wgpu::Buffer buffer;
         uint64_t bufferSize;
         const void* mappedData = nullptr;
@@ -521,11 +528,12 @@ class DawnTestBase {
 
     // Reserve space where the data for an expectation can be copied
     struct ReadbackReservation {
+        wgpu::Device device;
         wgpu::Buffer buffer;
         size_t slot;
         uint64_t offset;
     };
-    ReadbackReservation ReserveReadback(uint64_t readbackSize);
+    ReadbackReservation ReserveReadback(uint64_t readbackSize, wgpu::Device device);
 
     struct DeferredExpectation {
         const char* file;
