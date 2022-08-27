@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91c14e3c_81dd864f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-27T23:39:50Z",
+      "side": 1,
+      "message": "Latest patch makes the Device internal fence shared and makes TextureD3D12 record the value after ExecuteCommandLists. I had to move around the call to NextSerial() from the Device to the CommandRecordingContext since we want the fence value there - otherwise we would need an additional call on CommandRecordingContext to propagate the fence value to the texture.\n\nI\u0027ve also significantly expanded the ConcurrentAccess test to use multiple devices and therefore fences. I also had to extend several test helpers to take an optional device parameter so that we can check pixels on different devices.\n\nPTAL again - I\u0027ve cleaned it up sufficiently for a real review. Thanks!",
+      "revId": "5e8a4444b51be37e68d4d323df982bb14f03be97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
