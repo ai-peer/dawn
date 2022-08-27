@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "570ea6cf_adcfb7c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-27T02:23:17Z",
+      "side": 1,
+      "message": "LGTM - it looks like one of the Linux NVIDIA shards hit a bad crash in gl::GLDisplayEGL::Initialize() and/or libnvidia-glcore.so.440.100 (known issues) but it produced a ton of failures. I\u0027m re-running things to double check it\u0027s not a new problem we somehow caused. I\u0027ll check again when it\u0027s done and submit.",
+      "revId": "d360f86fb3a14320c04c834872647c409095c661",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
