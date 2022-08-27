@@ -14,6 +14,7 @@
 
 #include "dawn/native/d3d12/ResourceAllocatorManagerD3D12.h"
 
+#include <algorithm>
 #include <limits>
 #include <utility>
 
@@ -177,6 +178,15 @@ bool IsClearValueOptimizable(DeviceBase* device, const D3D12_RESOURCE_DESC& reso
                                         D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL)) != 0;
 }
 
+bool ShouldAllocateWholeHeap(Device* device, const D3D12_RESOURCE_DESC& resourceDescriptor) {
+    if (device->IsToggleEnabled(Toggle::D3D12AllocateMultiSubresourceTexturesOnSeparatedHeaps)) {
+        return resourceDescriptor.Dimension == D3D12_RESOURCE_DIMENSION_TEXTURE2D &&
+               (resourceDescriptor.DepthOrArraySize > 1 || resourceDescriptor.MipLevels > 1);
+    }
+
+    return false;
+}
+
 }  // namespace
 
 ResourceAllocatorManager::ResourceAllocatorManager(Device* device) : mDevice(device) {
@@ -213,8 +223,8 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::AllocateMemory(
 
     // TODO(crbug.com/dawn/849): Conditionally disable sub-allocation.
     // For very large resources, there is no benefit to suballocate.
-    // For very small resources, it is inefficent to suballocate given the min. heap
-    // size could be much larger then the resource allocation.
+    // For very small resources, it is inefficent to suballocate given the min heap size could be
+    // much larger than the resource allocation.
     // Attempt to satisfy the request using sub-allocation (placed resource in a heap).
     if (!mDevice->IsToggleEnabled(Toggle::DisableResourceSuballocation)) {
         ResourceHeapAllocation subAllocation;
@@ -293,8 +303,8 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::CreatePlacedReso
     const ResourceHeapKind resourceHeapKind =
         GetResourceHeapKind(requestedResourceDescriptor.Dimension, heapType,
                             requestedResourceDescriptor.Flags, mResourceHeapTier);
-
     D3D12_RESOURCE_DESC resourceDescriptor = requestedResourceDescriptor;
+
     resourceDescriptor.Alignment = GetResourcePlacementAlignment(
         resourceHeapKind, requestedResourceDescriptor.SampleDesc.Count,
         requestedResourceDescriptor.Alignment);
@@ -328,11 +338,22 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::CreatePlacedReso
     BuddyMemoryAllocator* allocator =
         mSubAllocatedResourceAllocators[static_cast<size_t>(resourceHeapKind)].get();
 
+    bool shouldAllocateWholeHeap = ShouldAllocateWholeHeap(mDevice, resourceDescriptor);
+    if (shouldAllocateWholeHeap) {
+        resourceInfo.Alignment = std::max(resourceInfo.Alignment, allocator->GetMemoryBlockSize());
+        resourceInfo.SizeInBytes =
+            std::max(resourceInfo.SizeInBytes, allocator->GetMemoryBlockSize());
+    }
+
     ResourceMemoryAllocation allocation;
     DAWN_TRY_ASSIGN(allocation,
                     allocator->Allocate(resourceInfo.SizeInBytes, resourceInfo.Alignment));
     if (allocation.GetInfo().mMethod == AllocationMethod::kInvalid) {
         return ResourceHeapAllocation{};  // invalid
+    }
+
+    if (shouldAllocateWholeHeap) {
+        ASSERT(allocation.GetOffset() == 0);
     }
 
     Heap* heap = ToBackend(allocation.GetResourceHeap());
