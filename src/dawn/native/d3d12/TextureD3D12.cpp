@@ -585,6 +585,11 @@ MaybeError Texture::InitializeAsInternalTexture() {
     bool applyForceClearCopyableDepthStencilTextureOnCreationToggle =
         device->IsToggleEnabled(Toggle::D3D12ForceClearCopyableDepthStencilTextureOnCreation) &&
         GetFormat().HasDepthOrStencil() && (GetInternalUsage() & wgpu::TextureUsage::CopyDst);
+    bool applyForceClearRenderableTextureOnCreation =
+        device->IsToggleEnabled(Toggle::D3D12Allocate2DTexturewithCopyDstAsCommittedResource) &&
+        GetDimension() == wgpu::TextureDimension::e2D &&
+        (GetInternalUsage() & wgpu::TextureUsage::RenderAttachment);
+
     if (applyForceClearCopyableDepthStencilTextureOnCreationToggle) {
         AddInternalUsage(wgpu::TextureUsage::RenderAttachment);
     }
@@ -608,13 +613,20 @@ MaybeError Texture::InitializeAsInternalTexture() {
     resourceDescriptor.Flags = D3D12ResourceFlags(GetInternalUsage(), GetFormat());
     mD3D12ResourceFlags = resourceDescriptor.Flags;
 
-    DAWN_TRY_ASSIGN(mResourceAllocation,
-                    device->AllocateMemory(D3D12_HEAP_TYPE_DEFAULT, resourceDescriptor,
-                                           D3D12_RESOURCE_STATE_COMMON));
+    bool allocateAsCommittedResource =
+        device->IsToggleEnabled(Toggle::D3D12Allocate2DTexturewithCopyDstAsCommittedResource) &&
+        GetDimension() == wgpu::TextureDimension::e2D &&
+        !(GetInternalUsage() & wgpu::TextureUsage::RenderAttachment);
+
+    DAWN_TRY_ASSIGN(
+        mResourceAllocation,
+        device->AllocateMemory(D3D12_HEAP_TYPE_DEFAULT, resourceDescriptor,
+                               D3D12_RESOURCE_STATE_COMMON, allocateAsCommittedResource));
 
     SetLabelImpl();
 
-    if (applyForceClearCopyableDepthStencilTextureOnCreationToggle) {
+    if (applyForceClearCopyableDepthStencilTextureOnCreationToggle ||
+        applyForceClearRenderableTextureOnCreation) {
         CommandRecordingContext* commandContext;
         DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext());
         DAWN_TRY(ClearTexture(commandContext, GetAllSubresources(), TextureBase::ClearValue::Zero));

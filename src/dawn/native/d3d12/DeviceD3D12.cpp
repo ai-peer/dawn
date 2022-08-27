@@ -530,8 +530,10 @@ void Device::DeallocateMemory(ResourceHeapAllocation& allocation) {
 ResultOrError<ResourceHeapAllocation> Device::AllocateMemory(
     D3D12_HEAP_TYPE heapType,
     const D3D12_RESOURCE_DESC& resourceDescriptor,
-    D3D12_RESOURCE_STATES initialUsage) {
-    return mResourceAllocatorManager->AllocateMemory(heapType, resourceDescriptor, initialUsage);
+    D3D12_RESOURCE_STATES initialUsage,
+    bool allocateAsCommittedResource) {
+    return mResourceAllocatorManager->AllocateMemory(heapType, resourceDescriptor, initialUsage,
+                                                     allocateAsCommittedResource);
 }
 
 std::unique_ptr<ExternalImageDXGIImpl> Device::CreateExternalImageDXGIImpl(
@@ -699,6 +701,11 @@ void Device::InitTogglesFromDriver() {
                                               version) == -1) {
             SetToggle(Toggle::D3D12AllocateExtraMemoryFor2DArrayTexture, true);
         }
+    }
+
+    if ((gpu_info::IsIntelGen9(vendorId, deviceId) && !gpu_info::IsSkylake(deviceId)) ||
+        gpu_info::IsIntelGen11(vendorId, deviceId)) {
+        SetToggle(Toggle::D3D12Allocate2DTexturewithCopyDstAsCommittedResource, true);
     }
 }
 
