@@ -112,7 +112,8 @@ class Device final : public DeviceBase {
     ResultOrError<ResourceHeapAllocation> AllocateMemory(
         D3D12_HEAP_TYPE heapType,
         const D3D12_RESOURCE_DESC& resourceDescriptor,
-        D3D12_RESOURCE_STATES initialUsage);
+        D3D12_RESOURCE_STATES initialUsage,
+        bool allocateAsCommittedResource = false);
 
     void DeallocateMemory(ResourceHeapAllocation& allocation);
 
