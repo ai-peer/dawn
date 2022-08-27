@@ -62,15 +62,6 @@
 # Last rolled: 2022-08-23 08:48:27PM
 
 ################################################################################
-# webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero
-# Flakes on Windows Intel. depth32float-stencil8 and stencil8 fail consistently.
-# Marked all as failing to avoid expectation overlap with `dimension="2d";*`
-# and `dimension="2d";moreParams...`
-# KEEP
-################################################################################
-crbug.com/dawn/1487 [ intel-gen-9 win10 ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";* [ Failure ]
-
-################################################################################
 # webgpu:web_platform,copyToTexture,ImageBitmap flakes on Windows Intel with rgba32float and rg32float formats
 # KEEP
 ################################################################################
