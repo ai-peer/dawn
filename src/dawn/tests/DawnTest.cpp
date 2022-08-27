@@ -1006,7 +1006,7 @@ std::ostringstream& DawnTestBase::AddBufferExpectation(const char* file,
                                                        uint64_t size,
                                                        detail::Expectation* expectation) {
     uint64_t alignedSize = Align(size, uint64_t(4));
-    auto readback = ReserveReadback(alignedSize);
+    auto readback = ReserveReadback(alignedSize, device);
 
     // We need to enqueue the copy immediately because by the time we resolve the expectation,
     // the buffer might have been modified.
@@ -1038,7 +1038,12 @@ std::ostringstream& DawnTestBase::AddTextureExpectationImpl(const char* file,
                                                             uint32_t level,
                                                             wgpu::TextureAspect aspect,
                                                             uint32_t dataSize,
-                                                            uint32_t bytesPerRow) {
+                                                            uint32_t bytesPerRow,
+                                                            wgpu::Device targetDevice) {
+    if (targetDevice == nullptr) {
+        targetDevice = this->device;
+    }
+
     if (bytesPerRow == 0) {
         bytesPerRow = Align(extent.width * dataSize, kTextureBytesPerRowAlignment);
     } else {
@@ -1050,7 +1055,7 @@ std::ostringstream& DawnTestBase::AddTextureExpectationImpl(const char* file,
     uint32_t size = utils::RequiredBytesInCopy(bytesPerRow, rowsPerImage, extent.width,
                                                extent.height, extent.depthOrArrayLayers, dataSize);
 
-    auto readback = ReserveReadback(Align(size, 4));
+    auto readback = ReserveReadback(Align(size, 4), targetDevice);
 
     // We need to enqueue the copy immediately because by the time we resolve the expectation,
     // the texture might have been modified.
@@ -1059,11 +1064,11 @@ std::ostringstream& DawnTestBase::AddTextureExpectationImpl(const char* file,
     wgpu::ImageCopyBuffer imageCopyBuffer =
         utils::CreateImageCopyBuffer(readback.buffer, readback.offset, bytesPerRow, rowsPerImage);
 
-    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::CommandEncoder encoder = targetDevice.CreateCommandEncoder();
     encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer, &extent);
 
     wgpu::CommandBuffer commands = encoder.Finish();
-    queue.Submit(1, &commands);
+    targetDevice.GetQueue().Submit(1, &commands);
 
     DeferredExpectation deferred;
     deferred.file = file;
@@ -1357,7 +1362,10 @@ std::ostringstream& DawnTestBase::ExpectAttachmentDepthStencilTestData(
     return EXPECT_TEXTURE_EQ(colorData.data(), colorTexture, {0, 0}, {width, height});
 }
 
-void DawnTestBase::WaitABit() {
+void DawnTestBase::WaitABit(wgpu::Device device) {
+    if (device == nullptr) {
+        device = this->device;
+    }
     if (device) {
         device.Tick();
     }
@@ -1385,18 +1393,21 @@ void DawnTestBase::WaitForAllOperations() {
     }
 }
 
-DawnTestBase::ReadbackReservation DawnTestBase::ReserveReadback(uint64_t readbackSize) {
+DawnTestBase::ReadbackReservation DawnTestBase::ReserveReadback(uint64_t readbackSize,
+                                                                wgpu::Device targetDevice) {
     ReadbackSlot slot;
+    slot.device = targetDevice;
     slot.bufferSize = readbackSize;
 
     // Create and initialize the slot buffer so that it won't unexpectedly affect the count of
     // resource lazy clear in the tests.
     const std::vector<uint8_t> initialBufferData(readbackSize, 0u);
     slot.buffer =
-        utils::CreateBufferFromData(device, initialBufferData.data(), readbackSize,
+        utils::CreateBufferFromData(targetDevice, initialBufferData.data(), readbackSize,
                                     wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst);
 
     ReadbackReservation reservation;
+    reservation.device = targetDevice;
     reservation.buffer = slot.buffer;
     reservation.slot = mReadbackSlots.size();
     reservation.offset = 0;
@@ -1410,6 +1421,8 @@ void DawnTestBase::MapSlotsSynchronously() {
     // immediately.
     mNumPendingMapOperations = mReadbackSlots.size();
 
+    std::vector<wgpu::Device> pendingDevices;
+
     // Map all readback slots
     for (size_t i = 0; i < mReadbackSlots.size(); ++i) {
         MapReadUserdata* userdata = new MapReadUserdata{this, i};
@@ -1417,11 +1430,15 @@ void DawnTestBase::MapSlotsSynchronously() {
         const ReadbackSlot& slot = mReadbackSlots[i];
         slot.buffer.MapAsync(wgpu::MapMode::Read, 0, wgpu::kWholeMapSize, SlotMapCallback,
                              userdata);
+
+        pendingDevices.push_back(slot.device);
     }
 
     // Busy wait until all map operations are done.
     while (mNumPendingMapOperations != 0) {
-        WaitABit();
+        for (const wgpu::Device& device : pendingDevices) {
+            WaitABit(device);
+        }
     }
 }
 
