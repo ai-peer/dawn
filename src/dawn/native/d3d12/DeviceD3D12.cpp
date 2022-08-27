@@ -700,6 +700,10 @@ void Device::InitTogglesFromDriver() {
             SetToggle(Toggle::D3D12AllocateExtraMemoryFor2DArrayTexture, true);
         }
     }
+
+    if (gpu_info::IsIntelGen9(vendorId, deviceId) || gpu_info::IsIntelGen11(vendorId, deviceId)) {
+        SetToggle(Toggle::D3D12Allocate2DTextureAsCommittedResource, true);
+    }
 }
 
 MaybeError Device::WaitForIdleForDestruction() {

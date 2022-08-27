@@ -177,6 +177,19 @@ bool IsClearValueOptimizable(DeviceBase* device, const D3D12_RESOURCE_DESC& reso
                                         D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL)) != 0;
 }
 
+bool ShouldAllocateAsCommittedResource(Device* device,
+                                       const D3D12_RESOURCE_DESC& resourceDescriptor) {
+    if (device->IsToggleEnabled(Toggle::DisableResourceSuballocation)) {
+        return true;
+    }
+
+    if (device->IsToggleEnabled(Toggle::D3D12Allocate2DTextureAsCommittedResource)) {
+        return resourceDescriptor.Dimension == D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+    }
+
+    return false;
+}
+
 }  // namespace
 
 ResourceAllocatorManager::ResourceAllocatorManager(Device* device) : mDevice(device) {
@@ -213,10 +226,10 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::AllocateMemory(
 
     // TODO(crbug.com/dawn/849): Conditionally disable sub-allocation.
     // For very large resources, there is no benefit to suballocate.
-    // For very small resources, it is inefficent to suballocate given the min. heap
-    // size could be much larger then the resource allocation.
+    // For very small resources, it is inefficent to suballocate given the min heap size could be
+    // much larger than the resource allocation.
     // Attempt to satisfy the request using sub-allocation (placed resource in a heap).
-    if (!mDevice->IsToggleEnabled(Toggle::DisableResourceSuballocation)) {
+    if (!ShouldAllocateAsCommittedResource(mDevice, resourceDescriptor)) {
         ResourceHeapAllocation subAllocation;
         DAWN_TRY_ASSIGN(subAllocation, CreatePlacedResource(heapType, resourceDescriptor,
                                                             optimizedClearValue, initialUsage));
@@ -293,7 +306,6 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::CreatePlacedReso
     const ResourceHeapKind resourceHeapKind =
         GetResourceHeapKind(requestedResourceDescriptor.Dimension, heapType,
                             requestedResourceDescriptor.Flags, mResourceHeapTier);
-
     D3D12_RESOURCE_DESC resourceDescriptor = requestedResourceDescriptor;
     resourceDescriptor.Alignment = GetResourcePlacementAlignment(
         resourceHeapKind, requestedResourceDescriptor.SampleDesc.Count,
