@@ -29,7 +29,7 @@ namespace {{native_namespace}} {
                         return {};
                 {% endfor %}
                 default:
-                    return DAWN_FORMAT_VALIDATION_ERROR("Value %s is invalid for {{as_cType(type.name)}}.", value);
+                    return DAWN_VALIDATION_ERROR("Value %s is invalid for {{as_cType(type.name)}}.", value);
             }
         }
 
@@ -40,7 +40,7 @@ namespace {{native_namespace}} {
             if ((value & static_cast<{{namespace}}::{{as_cppType(type.name)}}>(~{{type.full_mask}})) == 0) {
                 return {};
             }
-            return DAWN_FORMAT_VALIDATION_ERROR("Value %s is invalid for {{as_cType(type.name)}}.", value);
+            return DAWN_VALIDATION_ERROR("Value %s is invalid for {{as_cType(type.name)}}.", value);
         }
 
     {% endfor %}
