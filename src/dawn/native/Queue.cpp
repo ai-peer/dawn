@@ -160,6 +160,7 @@ class ErrorQueue : public QueueBase {
     MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override {
         UNREACHABLE();
     }
+    MaybeError OnSubmittedWorkDoneImpl() override { UNREACHABLE(); }
 };
 }  // namespace
 
@@ -205,6 +206,11 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
         return;
     }
 
+    if (GetDevice()->ConsumedError(OnSubmittedWorkDoneImpl())) {
+        callback(WGPUQueueWorkDoneStatus_Error, userdata);
+        return;
+    }
+
     std::unique_ptr<SubmittedWorkDone> task =
         std::make_unique<SubmittedWorkDone>(callback, userdata);
 
@@ -220,7 +226,7 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
 
 void QueueBase::TrackTask(std::unique_ptr<TaskInFlight> task, ExecutionSerial serial) {
     mTasksInFlight.Enqueue(std::move(task), serial);
-    GetDevice()->AddFutureSerial(serial);
+    GetDevice()->ForceEventualFlushOfCommands();
 }
 
 void QueueBase::Tick(ExecutionSerial finishedSerial) {
@@ -285,8 +291,6 @@ MaybeError QueueBase::WriteBufferImpl(BufferBase* buffer,
     ASSERT(uploadHandle.mappedBuffer != nullptr);
 
     memcpy(uploadHandle.mappedBuffer, data, size);
-
-    device->AddFutureSerial(device->GetPendingCommandSerial());
 
     return device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer, uploadHandle.startOffset,
                                            buffer, bufferOffset, size);
@@ -355,8 +359,6 @@ MaybeError QueueBase::WriteTextureImpl(const ImageCopyTexture& destination,
     textureCopy.aspect = ConvertAspect(format, destination.aspect);
 
     DeviceBase* device = GetDevice();
-
-    device->AddFutureSerial(device->GetPendingCommandSerial());
 
     return device->CopyFromStagingToTexture(uploadHandle.stagingBuffer, passDataLayout,
                                             &textureCopy, writeSizePixel);
