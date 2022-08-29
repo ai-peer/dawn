@@ -3960,6 +3960,12 @@ TypedExpression FunctionEmitter::EmitGlslStd450ExtInst(const spvtools::opt::Inst
         // Some GLSLstd450 builtins have scalar forms not supported by WGSL.
         // Emulate them.
         switch (ext_opcode) {
+            case GLSLstd450Determinant: {
+                auto m = MakeOperand(inst, 2);
+                TINT_ASSERT(Reader, m.type->Is<Matrix>());
+                return {ty_.F32(), builder_.Call(Source{}, "determinant", m.expr)};
+            }
+
             case GLSLstd450Normalize:
                 // WGSL does not have scalar form of the normalize builtin.
                 // The answer would be 1 anyway, so return that directly.
