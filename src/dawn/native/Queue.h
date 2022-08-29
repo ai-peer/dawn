@@ -84,6 +84,7 @@ class QueueBase : public ApiObjectBase {
                                              const CopyTextureForBrowserOptions* options);
 
     virtual MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) = 0;
+    virtual MaybeError OnSubmittedWorkDoneImpl() = 0;
     virtual MaybeError WriteBufferImpl(BufferBase* buffer,
                                        uint64_t bufferOffset,
                                        const void* data,

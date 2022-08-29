@@ -46,4 +46,10 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
     return device->SubmitPendingCommandBuffer();
 }
 
+MaybeError Queue::OnSubmittedWorkDoneImpl() {
+    Device* device = ToBackend(GetDevice());
+    device->GetPendingCommandContext();
+    return {};
+}
+
 }  // namespace dawn::native::metal
