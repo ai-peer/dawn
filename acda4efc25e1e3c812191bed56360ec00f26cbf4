@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9c97d8d_fdb38d46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:54:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "acda4efc25e1e3c812191bed56360ec00f26cbf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1dd6c5f_5dcaa5dd",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2792,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:54:37Z",
+      "side": 1,
+      "message": "u-nit: can we have an empty line to separate buffer creation from the logic to generate the data?\n\nWe could also use a memcpy to make it super clear that both expectedData and uploadDataPtr contain the same data.",
+      "revId": "acda4efc25e1e3c812191bed56360ec00f26cbf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e49cbce_3c6432dc",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2842,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:54:37Z",
+      "side": 1,
+      "message": "u-nit: Can we have comments for blocks of code that describe briefly what they do? (so readers can skim)",
+      "revId": "acda4efc25e1e3c812191bed56360ec00f26cbf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5beba475_1e45f26d",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2883,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:54:37Z",
+      "side": 1,
+      "message": "nit: Destroy() is enough to unmap.",
+      "revId": "acda4efc25e1e3c812191bed56360ec00f26cbf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
