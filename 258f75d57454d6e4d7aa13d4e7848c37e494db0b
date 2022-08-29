@@ -1,0 +1,260 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95711567_f9761caf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:44:38Z",
+      "side": 1,
+      "message": "LGTM overall, thanks for updating the code to use Dawn\u0027s internal fence.",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11bdc441_4c040b66",
+        "filename": "include/dawn/native/D3D12Backend.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:44:38Z",
+      "side": 1,
+      "message": "Returning null here means that the component using Dawn has to remember the waitFences to use them for future synchronization if Dawn returns a nullptr handle. What about having Dawn return a vector\u003cFence\u003e that\u0027s either waitFences or {signalFence} (or {signalFences, forMultiQueueInTheFuture}). This way Dawn takes care of the forwarding and there\u0027s less logic in its users + we already store mWaitFences in d3d12::Texture anyway.",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f928a56e_87cdc5c4",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:44:38Z",
+      "side": 1,
+      "message": "nit: This could use device-\u003eConsumedError(Fence::CreateFromHandle(), \u0026fence) if we want to use ResultOrError.",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3b89508_d5d57204",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:44:38Z",
+      "side": 1,
+      "message": "What should happen in terms of synchronization if the texture wasn\u0027t used? Shouldn\u0027t we re-export the vector from BeginAccess so that follow-up components in Chromium correctly synchronize with whatever last used the texture?",
+      "range": {
+        "startLine": 133,
+        "startChar": 21,
+        "endLine": 133,
+        "endChar": 32
+      },
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2394d94d_6117f81c",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:44:38Z",
+      "side": 1,
+      "message": "nit: that\u0027s part of dawn_platform.h I think",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c222f59_36084d7c",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:44:38Z",
+      "side": 1,
+      "message": "nit: I thing most of these don\u0027t need the wgpu:: prefix because we reexport them in the namespace in dawn_platform.h",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 32
+      },
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "225848a1_33710ac4",
+        "filename": "src/dawn/native/d3d12/FenceD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:44:38Z",
+      "side": 1,
+      "message": "Do we know if this takes a reference to the handle so it is not necessary to DuplicateHandle first? The docs for OpenSharedHandle don\u0027t say anything about this. (and can we add a comment explaining the ownership for future readers?)",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eaa251f_e4095425",
+        "filename": "src/dawn/native/d3d12/FenceD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:44:38Z",
+      "side": 1,
+      "message": "nit: Maybe the fence could just be a \"dumb\" container instead of having logic that touches the device\u0027s internals.",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f96a05ce_354819b8",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:44:38Z",
+      "side": 1,
+      "message": "Probably no longer needed.",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eac2fa2f_8ffcc107",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:44:38Z",
+      "side": 1,
+      "message": "wat?",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b780ed08_03c5d972",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:44:38Z",
+      "side": 1,
+      "message": "nit:\" unused?",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26193776_36e88ad8",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:44:38Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ffe4cee_d2e49645",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:44:38Z",
+      "side": 1,
+      "message": "nit: external",
+      "range": {
+        "startLine": 61,
+        "startChar": 11,
+        "endLine": 61,
+        "endChar": 20
+      },
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "526e0539_6770d646",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:44:38Z",
+      "side": 1,
+      "message": "I worry that pushing the device at the end will cause issues if we ever want to add arguments but I\u0027m not sure what\u0027s a better solution. Maybe a ExpectationRecorder that has its own wgpu::Device and on which you call ResolveExpectations() at the end? Then DawnTest would have one for the default device (would be one actually). But that\u0027s a larger change than needed for this CL for sure.",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

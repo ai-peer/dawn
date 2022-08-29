@@ -161,6 +161,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e815a5c_4420c314",
+        "filename": "src/dawn/native/d3d12/FenceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-29T20:44:38Z",
+      "side": 1,
+      "message": "You can use \"CheckHResult\" for that.",
+      "parentUuid": "98c7fd90_9cf0f4ec",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 10
+      },
+      "revId": "1c27635ac578f71882e1498b6fc9e0588e3383fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "859a0129_cdee66e1",
         "filename": "src/dawn/native/d3d12/FenceD3D12.cpp",
         "patchSetId": 2
