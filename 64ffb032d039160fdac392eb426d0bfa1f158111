@@ -16,6 +16,46 @@
       "message": "PTAL the whole stack!",
       "revId": "64ffb032d039160fdac392eb426d0bfa1f158111",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2fd6070_2be1c1b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-29T21:21:27Z",
+      "side": 1,
+      "message": "LGTM % the test failure which just looks like a mismatched string for the validation error.",
+      "revId": "64ffb032d039160fdac392eb426d0bfa1f158111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c741683_56af063a",
+        "filename": "src/dawn/native/PipelineLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-08-29T21:21:27Z",
+      "side": 1,
+      "message": "nit. created",
+      "range": {
+        "startLine": 46,
+        "startChar": 25,
+        "endLine": 46,
+        "endChar": 31
+      },
+      "revId": "64ffb032d039160fdac392eb426d0bfa1f158111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
