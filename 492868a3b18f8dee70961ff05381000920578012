@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71c887e5_e90d4bb6",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-29T13:36:33Z",
+      "side": 1,
+      "message": "Yeah, originally it memcpy\u0027d to/from a buffer, but then I changed it to a variant. I kept the class originally because I don\u0027t really love the `std::get` way of accessing variant values, but in the end, the extra class isn\u0027t worth it.",
+      "parentUuid": "8882f94e_5eb185f5",
+      "range": {
+        "startLine": 196,
+        "startChar": 11,
+        "endLine": 196,
+        "endChar": 18
+      },
+      "revId": "492868a3b18f8dee70961ff05381000920578012",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ff249a7_314a612d",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-08-26T20:43:33Z",
       "side": 1,
       "message": "Can\u0027t this just be `utils::Vector v{args...}` ?",
+      "range": {
+        "startLine": 769,
+        "startChar": 0,
+        "endLine": 771,
+        "endChar": 24
+      },
+      "revId": "492868a3b18f8dee70961ff05381000920578012",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "000ddb90_f403b692",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-29T13:36:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ff249a7_314a612d",
       "range": {
         "startLine": 769,
         "startChar": 0,
