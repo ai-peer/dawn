@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "b50736890e64f6fe3eaa932038e5987bd4eb0131",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9efe24bb_2cb11685",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-29T15:42:42Z",
+      "side": 1,
+      "message": "LGTM; kokoro failure appears to be existing",
+      "revId": "b50736890e64f6fe3eaa932038e5987bd4eb0131",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
