@@ -35,6 +35,69 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9100b14a_2c4a9191",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-29T21:23:41Z",
+      "side": 1,
+      "message": "LGTM too with nits",
+      "revId": "64ffb032d039160fdac392eb426d0bfa1f158111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32efe207_0f1c634f",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-29T21:23:41Z",
+      "side": 1,
+      "message": "uunit - I *think* this would be singular \"sType\"",
+      "range": {
+        "startLine": 44,
+        "startChar": 43,
+        "endLine": 44,
+        "endChar": 49
+      },
+      "revId": "64ffb032d039160fdac392eb426d0bfa1f158111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95922170_dc2b7212",
+        "filename": "generator/templates/dawn/native/ValidationUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-29T21:23:41Z",
+      "side": 1,
+      "message": "if value is not in type.values, I don\u0027t think this will render right. Maybe that case ought to cast to the underlying type\n\nFor example, the current unittest failure says:\n\n\"Value TextureAspect:: is invalid for WGPUTextureAspect.\"",
+      "range": {
+        "startLine": 32,
+        "startChar": 108,
+        "endLine": 32,
+        "endChar": 113
+      },
+      "revId": "64ffb032d039160fdac392eb426d0bfa1f158111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c741683_56af063a",
