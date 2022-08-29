@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "342483fb_ac265ae9",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-29T19:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67c94621_8282eb5a",
+      "revId": "400628d45e79323f99741295b51e4049ae735d51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74684c25_d4d195d0",
@@ -58,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51fa00a6_eb2add5d",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-29T19:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74684c25_d4d195d0",
+      "range": {
+        "startLine": 765,
+        "startChar": 31,
+        "endLine": 765,
+        "endChar": 34
+      },
+      "revId": "400628d45e79323f99741295b51e4049ae735d51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a76b942_54a2baef",
@@ -71,6 +113,30 @@
       "writtenOn": "2022-08-26T20:33:05Z",
       "side": 1,
       "message": "... and you can keep the attribute logic in here.",
+      "range": {
+        "startLine": 897,
+        "startChar": 0,
+        "endLine": 900,
+        "endChar": 46
+      },
+      "revId": "400628d45e79323f99741295b51e4049ae735d51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71f52d9a_2485833f",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-29T19:11:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a76b942_54a2baef",
       "range": {
         "startLine": 897,
         "startChar": 0,
