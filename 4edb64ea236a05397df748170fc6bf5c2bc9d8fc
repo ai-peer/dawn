@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "703b2f92_d45dca37",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3966,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-29T18:24:11Z",
+      "side": 1,
+      "message": "Does this need to verify the matrix is f32 or was any non-f32 matrix already rejected?",
+      "revId": "4edb64ea236a05397df748170fc6bf5c2bc9d8fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b880a2c5_4ba43527",
         "filename": "src/tint/reader/spirv/function.cc",
         "patchSetId": 1
