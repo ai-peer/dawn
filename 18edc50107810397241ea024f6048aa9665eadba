@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "073dfef9_b0233922",
+        "filename": "src/tint/transform/vectorize_matrix_conversions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-29T13:27:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffff64d8_132fae45",
+      "range": {
+        "startLine": 1,
+        "startChar": 16,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "18edc50107810397241ea024f6048aa9665eadba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d53ec4e0_df548394",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-08-26T20:20:34Z",
       "side": 1,
       "message": "We unwrap the materialize here, but not in `ShouldRun()`. bug?",
+      "range": {
+        "startLine": 53,
+        "startChar": 47,
+        "endLine": 53,
+        "endChar": 66
+      },
+      "revId": "18edc50107810397241ea024f6048aa9665eadba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e1e5c95_d721ac47",
+        "filename": "src/tint/transform/vectorize_matrix_conversions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-29T13:27:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d53ec4e0_df548394",
       "range": {
         "startLine": 53,
         "startChar": 47,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df62ae65_e902ceb8",
+        "filename": "src/tint/transform/vectorize_matrix_conversions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-29T13:27:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf37a55f_2ca54b7d",
+      "range": {
+        "startLine": 76,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 19
+      },
+      "revId": "18edc50107810397241ea024f6048aa9665eadba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d80d538_e7c2c214",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-08-26T20:20:34Z",
       "side": 1,
       "message": "You\u0027re cloning the same expression multiple times. If this had side-effects (i.e. function call), then you\u0027re now duplicating the call N times.\nYou likely need to generate a helper function which takes the input matrix, and returns the converted matrix.\nNeeds tests.",
+      "range": {
+        "startLine": 83,
+        "startChar": 67,
+        "endLine": 83,
+        "endChar": 96
+      },
+      "revId": "18edc50107810397241ea024f6048aa9665eadba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df9d3f04_bd85b51e",
+        "filename": "src/tint/transform/vectorize_matrix_conversions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-29T13:27:54Z",
+      "side": 1,
+      "message": "Done, having two paths for parameter with and without side effects, unit tests and E2E tests added. However, transform PromoteSideEffectsToDecl will also handle the parameter having side effects, so in the E2E tests we will not meet this case (i.e. the parameter is a expression with side effect).",
+      "parentUuid": "9d80d538_e7c2c214",
       "range": {
         "startLine": 83,
         "startChar": 67,
@@ -133,6 +229,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95ea4ca2_0c1b48da",
+        "filename": "src/tint/transform/vectorize_matrix_conversions.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-29T13:27:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14b526f1_971393b6",
+      "range": {
+        "startLine": 1,
+        "startChar": 16,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "18edc50107810397241ea024f6048aa9665eadba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee33e272_6eac4ffd",
@@ -146,6 +266,30 @@
       "writtenOn": "2022-08-26T20:20:34Z",
       "side": 1,
       "message": "2",
+      "range": {
+        "startLine": 1,
+        "startChar": 16,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "18edc50107810397241ea024f6048aa9665eadba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4bef296_7b30f116",
+        "filename": "src/tint/transform/vectorize_matrix_conversions_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-29T13:27:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee33e272_6eac4ffd",
       "range": {
         "startLine": 1,
         "startChar": 16,
