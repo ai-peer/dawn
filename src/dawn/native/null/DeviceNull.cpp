@@ -363,6 +363,10 @@ MaybeError Queue::SubmitImpl(uint32_t, CommandBufferBase* const*) {
     return device->SubmitPendingOperations();
 }
 
+MaybeError Queue::OnSubmittedWorkDoneImpl() {
+    return {};
+}
+
 MaybeError Queue::WriteBufferImpl(BufferBase* buffer,
                                   uint64_t bufferOffset,
                                   const void* data,

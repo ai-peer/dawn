@@ -346,14 +346,6 @@ class DeviceBase : public RefCountedWithExternalCount {
     void APILoseForTesting();
     QueueBase* GetQueue() const;
 
-    // AddFutureSerial is used to update the mFutureSerial with the max serial needed to be
-    // ticked in order to clean up all pending callback work or to execute asynchronous resource
-    // writes. It should be given the serial that a callback is tracked with, so that once that
-    // serial is completed, it can be resolved and cleaned up. This is so that when there is no
-    // gpu work (the last submitted serial has not moved beyond the completed serial), Tick can
-    // still check if we have pending work to take care of, rather than hanging and never
-    // reaching the serial the work will be executed on.
-    void AddFutureSerial(ExecutionSerial serial);
     // Check for passed fences and set the new completed serial
     MaybeError CheckPassedSerials();
 
@@ -402,6 +394,13 @@ class DeviceBase : public RefCountedWithExternalCount {
     void APIDestroy();
 
     virtual void AppendDebugLayerMessages(ErrorData* error) {}
+
+    virtual void ForceEventualFlushOfCommands();
+
+    // During shut down of device, some operations might have been started since the last submit
+    // and waiting on a serial that doesn't have a corresponding fence enqueued. Fake serials to
+    // make all commands look completed.
+    void AssumeCommandsComplete();
 
   protected:
     // Constructor used only for mocking and testing.
@@ -488,23 +487,14 @@ class DeviceBase : public RefCountedWithExternalCount {
     // Each backend should implement to check their passed fences if there are any and return a
     // completed serial. Return 0 should indicate no fences to check.
     virtual ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() = 0;
-    // During shut down of device, some operations might have been started since the last submit
-    // and waiting on a serial that doesn't have a corresponding fence enqueued. Fake serials to
-    // make all commands look completed.
-    void AssumeCommandsComplete();
     bool IsDeviceIdle();
 
     // mCompletedSerial tracks the last completed command serial that the fence has returned.
     // mLastSubmittedSerial tracks the last submitted command serial.
     // During device removal, the serials could be artificially incremented
-    // to make it appear as if commands have been compeleted. They can also be artificially
-    // incremented when no work is being done in the GPU so CPU operations don't have to wait on
-    // stale serials.
-    // mFutureSerial tracks the largest serial we need to tick to for asynchronous commands or
-    // callbacks to fire
+    // to make it appear as if commands have been compeleted.
     ExecutionSerial mCompletedSerial = ExecutionSerial(0);
     ExecutionSerial mLastSubmittedSerial = ExecutionSerial(0);
-    ExecutionSerial mFutureSerial = ExecutionSerial(0);
 
     // DestroyImpl is used to clean up and release resources used by device, does not wait for
     // GPU or check errors.
@@ -515,6 +505,10 @@ class DeviceBase : public RefCountedWithExternalCount {
     // device loss, this function doesn't need to be called since the driver already closed all
     // resources.
     virtual MaybeError WaitForIdleForDestruction() = 0;
+
+    // Merely advance the GPU execution without meaningful work actually submitted for asynchronous
+    // commands or callbacks to fire.
+    void DummySubmit();
 
     wgpu::ErrorCallback mUncapturedErrorCallback = nullptr;
     void* mUncapturedErrorUserdata = nullptr;
@@ -577,6 +571,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     std::unique_ptr<dawn::platform::WorkerTaskPool> mWorkerTaskPool;
     std::string mLabel;
     CacheKey mDeviceCacheKey;
+
+    ExecutionSerial mLastForceFlushSerial = ExecutionSerial(0);
 };
 
 }  // namespace dawn::native

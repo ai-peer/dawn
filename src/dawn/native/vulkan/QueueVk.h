@@ -33,6 +33,7 @@ class Queue final : public QueueBase {
     void Initialize();
 
     MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override;
+    MaybeError OnSubmittedWorkDoneImpl() override;
 
     // Dawn API
     void SetLabelImpl() override;

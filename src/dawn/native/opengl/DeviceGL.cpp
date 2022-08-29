@@ -317,6 +317,11 @@ void Device::SubmitFenceSync() {
     mFencesInFlight.emplace(sync, GetLastSubmittedCommandSerial());
 }
 
+void Device::ForceEventualFlushOfCommands() {
+    DeviceBase::ForceEventualFlushOfCommands();
+    SubmitFenceSync();
+}
+
 MaybeError Device::ValidateEGLImageCanBeWrapped(const TextureDescriptor* descriptor,
                                                 ::EGLImage image) {
     DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D,

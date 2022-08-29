@@ -28,6 +28,7 @@ class Queue final : public QueueBase {
 
   private:
     MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override;
+    MaybeError OnSubmittedWorkDoneImpl() override;
 };
 
 }  // namespace dawn::native::metal

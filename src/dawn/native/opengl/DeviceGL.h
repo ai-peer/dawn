@@ -82,6 +82,7 @@ class Device final : public DeviceBase {
     uint64_t GetOptimalBufferToTextureCopyOffsetAlignment() const override;
 
     float GetTimestampPeriodInNS() const override;
+    void ForceEventualFlushOfCommands() override;
 
     class Context {
       public:
