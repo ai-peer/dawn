@@ -62,6 +62,13 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
     return {};
 }
 
+MaybeError Queue::OnSubmittedWorkDoneImpl() {
+    Device* device = ToBackend(GetDevice());
+    CommandRecordingContext* commandContext;
+    DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext());
+    return {};
+}
+
 void Queue::SetLabelImpl() {
     Device* device = ToBackend(GetDevice());
     // TODO(crbug.com/dawn/1344): When we start using multiple queues this needs to be adjusted
