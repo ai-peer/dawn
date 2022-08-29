@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a380fcaf_ac310eda",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-29T22:53:53Z",
+      "side": 1,
+      "message": "unit: probably meant \"CommandRecordingContext\"",
+      "range": {
+        "startLine": 339,
+        "startChar": 11,
+        "endLine": 339,
+        "endChar": 34
+      },
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f928a56e_87cdc5c4",
         "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
         "patchSetId": 7
@@ -242,6 +265,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d213653f_9c01413e",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-29T22:53:53Z",
+      "side": 1,
+      "message": "unused?",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 50
+      },
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "526e0539_6770d646",
         "filename": "src/dawn/tests/DawnTest.h",
         "patchSetId": 7
@@ -253,6 +299,41 @@
       "writtenOn": "2022-08-29T20:44:38Z",
       "side": 1,
       "message": "I worry that pushing the device at the end will cause issues if we ever want to add arguments but I\u0027m not sure what\u0027s a better solution. Maybe a ExpectationRecorder that has its own wgpu::Device and on which you call ResolveExpectations() at the end? Then DawnTest would have one for the default device (would be one actually). But that\u0027s a larger change than needed for this CL for sure.",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "951027fd_6a41cf9a",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-29T22:53:53Z",
+      "side": 1,
+      "message": "another alternative to the last-arg solution would be to make another AddTextureExpectation overload. EXPECT_TEXTURE_EQ just forwards all the macro args, prepended with the __FILE__ and __LINE__. So you could pass the device as the *first* arg and resolve it with an overload.\n\nwe would have two overloads:\n\n```\nAddTextureExpectation(const char* file, int line, wgpu::Device device, const T* expectedData, rest, of, the args);\n\ntemplate \u003ctypename T, typename... Args\u003e\nAddTextureExpectation(const char* file, int line, const T* expectedData, Args\u0026\u0026... args) {\n  // no device passed explicitly. Default it, and forward the rest of the args.\n  return AddTextureExpectation(file, line, this-\u003edevice, expectedData, std::forward\u003cArgs\u003e(args)...);\n}\n```\n\nand then, we can still use the EXPECT_TEXTURE_EQ macro instead of passing __FILE__ and __LINE__ at [1]",
+      "parentUuid": "526e0539_6770d646",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4682ad21_a4abae9f",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-29T22:53:53Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
