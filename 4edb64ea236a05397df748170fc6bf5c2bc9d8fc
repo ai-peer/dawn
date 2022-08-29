@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a54b6d88_c792b00a",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3966,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-29T18:58:17Z",
+      "side": 1,
+      "message": "SPIR-V only accepts matrices of float type, like WGSL.",
+      "parentUuid": "703b2f92_d45dca37",
+      "revId": "4edb64ea236a05397df748170fc6bf5c2bc9d8fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b880a2c5_4ba43527",
@@ -55,6 +73,30 @@
       "side": 1,
       "message": "I don\u0027t think we want to remove it, I think we want to move it up to the named section, similar to normalize?",
       "parentUuid": "b880a2c5_4ba43527",
+      "range": {
+        "startLine": 4046,
+        "startChar": 22,
+        "endLine": 4046,
+        "endChar": 43
+      },
+      "revId": "4edb64ea236a05397df748170fc6bf5c2bc9d8fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79245fba_e021f60a",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 4046,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-29T18:58:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e60815aa_bc49c7a2",
       "range": {
         "startLine": 4046,
         "startChar": 22,
