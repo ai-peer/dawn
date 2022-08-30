@@ -208,6 +208,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18af0591_cc44dfce",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-30T00:11:01Z",
+      "side": 1,
+      "message": "I just had a realization about this as I was debugging another issue where my shared image was getting unexpectedly destroyed.\n\ndevice.destroy() implicitly causes all textures to be destroyed. Since that\u0027s the case, we *can* expect well-formed code to sometimes destroy a texture before EndAccess is called.\n\nHowever, that should be OK though. Now that EndAccess doesn\u0027t do anything except return to you the value, do we even need this ASSERT?",
+      "range": {
+        "startLine": 685,
+        "startChar": 2,
+        "endLine": 687,
+        "endChar": 43
+      },
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b780ed08_03c5d972",
         "filename": "src/dawn/native/d3d12/TextureD3D12.h",
         "patchSetId": 7
