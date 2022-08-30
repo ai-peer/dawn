@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dfe422b1_78b4f75d",
+        "filename": "include/dawn/native/D3D12Backend.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 1,
+      "message": "Good point - what about performing the synchronization automatically in Dawn if the wait fences haven\u0027t already been waited on? That way it still returns a single signal fence, but Dawn performs the waits for us. Latest patch implements this approach.",
+      "parentUuid": "11bdc441_4c040b66",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a380fcaf_ac310eda",
         "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 7
@@ -48,6 +66,30 @@
       "writtenOn": "2022-08-29T22:53:53Z",
       "side": 1,
       "message": "unit: probably meant \"CommandRecordingContext\"",
+      "range": {
+        "startLine": 339,
+        "startChar": 11,
+        "endLine": 339,
+        "endChar": 34
+      },
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba96597c_953783bb",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a380fcaf_ac310eda",
       "range": {
         "startLine": 339,
         "startChar": 11,
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "533ce7ce_c8c32ceb",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f928a56e_87cdc5c4",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3b89508_d5d57204",
@@ -98,6 +158,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10b3e5d9_1a776eee",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 1,
+      "message": "Answered on the other comment.",
+      "parentUuid": "b3b89508_d5d57204",
+      "range": {
+        "startLine": 133,
+        "startChar": 21,
+        "endLine": 133,
+        "endChar": 32
+      },
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2394d94d_6117f81c",
@@ -111,6 +195,24 @@
       "writtenOn": "2022-08-29T20:44:38Z",
       "side": 1,
       "message": "nit: that\u0027s part of dawn_platform.h I think",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97e549f7_8239de0c",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2394d94d_6117f81c",
       "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -140,6 +242,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7f06f812_b930d90a",
+        "filename": "src/dawn/native/d3d12/ExternalImageDXGIImpl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 1,
+      "message": "Not sure I see these re-exported (just removing the wgpu:: prefix causes compile errors) - maybe it was in the past, but isn\u0027t anymore or maybe I missed something?",
+      "parentUuid": "8c222f59_36084d7c",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 32
+      },
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "225848a1_33710ac4",
         "filename": "src/dawn/native/d3d12/FenceD3D12.cpp",
         "patchSetId": 7
@@ -151,6 +277,24 @@
       "writtenOn": "2022-08-29T20:44:38Z",
       "side": 1,
       "message": "Do we know if this takes a reference to the handle so it is not necessary to DuplicateHandle first? The docs for OpenSharedHandle don\u0027t say anything about this. (and can we add a comment explaining the ownership for future readers?)",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19170060_23ca405c",
+        "filename": "src/dawn/native/d3d12/FenceD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 1,
+      "message": "It doesn\u0027t need a DuplicateHandle per se since it will take a reference to the underlying object - the reason I chose to have a duplicated handle is for the fence caching follow-up where we will need to use CompareObjectHandles on the duplicated handle and passed in handle to make sure the lookup by passed in handle is valid, something like:\n\n```\nstd::map\u003cHANDLE, Ref\u003cFence\u003e\u003e mFenceCache;\nauto it \u003d mFenceCache.find(unownedHandle);\nif (it !\u003d mFenceCache.end() \u0026\u0026 CompareObjectHandles(it-\u003eownedHandle, unownedHandle)) {\n  return *it;\n}\n// create new fence and insert into map\n```",
+      "parentUuid": "225848a1_33710ac4",
       "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -172,6 +316,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b805b1d4_5e99e1ba",
+        "filename": "src/dawn/native/d3d12/FenceD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3eaa251f_e4095425",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f96a05ce_354819b8",
@@ -189,6 +351,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "732dab6b_ccdf8ec3",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f96a05ce_354819b8",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eac2fa2f_8ffcc107",
@@ -202,6 +382,24 @@
       "writtenOn": "2022-08-29T20:44:38Z",
       "side": 1,
       "message": "wat?",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c172c610_759ffaa5",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 1,
+      "message": "clangd being too clever before I disabled the auto-imports - I thought I caught them all, but clearly not :|",
+      "parentUuid": "eac2fa2f_8ffcc107",
       "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -229,6 +427,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c36a5813_c03b5cac",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 1,
+      "message": "This is mostly to prevent accidental Destroy() before EndAccess(), but yeah the device being destroyed case is important too so I\u0027ll remove this.",
+      "parentUuid": "18af0591_cc44dfce",
+      "range": {
+        "startLine": 685,
+        "startChar": 2,
+        "endLine": 687,
+        "endChar": 43
+      },
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b780ed08_03c5d972",
@@ -246,6 +468,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecb0c60c_9c11c153",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b780ed08_03c5d972",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26193776_36e88ad8",
@@ -259,6 +499,24 @@
       "writtenOn": "2022-08-29T20:44:38Z",
       "side": 1,
       "message": "nit: unused?",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "434cdac8_f0d5db40",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26193776_36e88ad8",
       "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -286,6 +544,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5abfea8b_59b0d4b6",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ffe4cee_d2e49645",
+      "range": {
+        "startLine": 61,
+        "startChar": 11,
+        "endLine": 61,
+        "endChar": 20
+      },
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d213653f_9c01413e",
@@ -299,6 +581,30 @@
       "writtenOn": "2022-08-29T22:53:53Z",
       "side": 1,
       "message": "unused?",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 50
+      },
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3003745_a5ad6ba2",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d213653f_9c01413e",
       "range": {
         "startLine": 119,
         "startChar": 0,
@@ -344,6 +650,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd5383df_5ae16b13",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 1,
+      "message": "Clever! I had to make a few overloads like this because the expectation types are different - const T*, const T\u0026, and E*. Also, std::forward wants to deduce the types before forwarding so I had to include more of the args especially Origin3D and Extend3D in the function parameters since we often pass them untyped to the macro, but that\u0027s fine since those are required parameters for all the calls.\n\nAlso, had to prevent infinite template recursion for the const T\u0026 variant because that likes to match against const wgpu::Device\u0026 as well.",
+      "parentUuid": "951027fd_6a41cf9a",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4682ad21_a4abae9f",
@@ -357,6 +681,24 @@
       "writtenOn": "2022-08-29T22:53:53Z",
       "side": 1,
       "message": "[1]",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e08915cb_a9b5f6f4",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4682ad21_a4abae9f",
       "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

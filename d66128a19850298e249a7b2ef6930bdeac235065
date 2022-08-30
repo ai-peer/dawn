@@ -16,6 +16,24 @@
       "message": "The serials are subtle so I\u0027m not completely sure about this. NextSerial is called in several other places as well. Since we moved it, should it also be removed from other callsites?\n - QueueD3D12 currently calls ExecutePendingCommandContext, then NextSerial. Seems like we could remove it there.\n - SwapChainD3D12 - I *think* this one is Ok.",
       "revId": "d66128a19850298e249a7b2ef6930bdeac235065",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0352e68d_b7382f20",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-30T23:18:34Z",
+      "side": 0,
+      "message": "Removed the NextSerial() call from QueueD3D12, and also added a comment above ExecutePendingCommandContext that says it will advance the serial if needed.",
+      "parentUuid": "2237cb72_68cd085e",
+      "revId": "d66128a19850298e249a7b2ef6930bdeac235065",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
