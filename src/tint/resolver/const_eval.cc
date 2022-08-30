@@ -139,6 +139,14 @@ inline bool IsPositiveZero(T value) {
     return Number<N>(value) == Number<N>(0);  // Considers sign bit
 }
 
+template <typename NumberT>
+std::string OverflowErrorMessage(NumberT lhs, const char* op, NumberT rhs) {
+    std::stringstream ss;
+    ss << "'" << lhs.value << " " << op << " " << rhs.value << "' cannot be represented as '"
+       << FriendlyName<NumberT>() << "'";
+    return ss.str();
+}
+
 /// Constant inherits from sem::Constant to add an private implementation method for conversion.
 struct Constant : public sem::Constant {
     /// Convert attempts to convert the constant value to the given type. On error, Convert()
@@ -547,10 +555,7 @@ struct ConstEval::State {
             if (auto r = CheckedAdd(a, b)) {
                 result = r->value;
             } else {
-                const_eval->AddError("'" + std::to_string(add_values(a.value, b.value)) +
-                                         "' cannot be represented as '" + FriendlyName<NumberT>() +
-                                         "'",
-                                     source);
+                const_eval->AddError(OverflowErrorMessage(a, "+", b), source);
                 return utils::Failure;
             }
         } else {
@@ -581,10 +586,7 @@ struct ConstEval::State {
             if (auto r = CheckedMul(a, b)) {
                 result = r->value;
             } else {
-                const_eval->AddError("'" + std::to_string(mul_values(a.value, b.value)) +
-                                         "' cannot be represented as '" + FriendlyName<NumberT>() +
-                                         "'",
-                                     source);
+                const_eval->AddError(OverflowErrorMessage(a, "*", b), source);
                 return utils::Failure;
             }
         } else {
@@ -1035,7 +1037,7 @@ ConstEval::ConstantResult ConstEval::OpPlus(const sem::Type*,
     return r;
 }
 
-ConstEval::ConstantResult ConstEval::OpMinus(const sem::Type* ty,
+ConstEval::ConstantResult ConstEval::OpMinus(const sem::Type*,
                                              utils::VectorRef<const sem::Constant*> args,
                                              const Source& source) {
     auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) {
@@ -1059,10 +1061,7 @@ ConstEval::ConstantResult ConstEval::OpMinus(const sem::Type* ty,
                 if (auto r = CheckedSub(i, j)) {
                     result = r->value;
                 } else {
-                    AddError("'" + std::to_string(subtract_values(i.value, j.value)) +
-                                 "' cannot be represented as '" +
-                                 ty->FriendlyName(builder.Symbols()) + "'",
-                             source);
+                    AddError(OverflowErrorMessage(i, "-", j), source);
                     return nullptr;
                 }
             } else {
@@ -1264,6 +1263,56 @@ ConstEval::ConstantResult ConstEval::OpMultiplyMatMat(const sem::Type* ty,
         result_mat.Push(CreateComposite(builder, col_vec_ty, col_vec));
     }
     return CreateComposite(builder, ty, result_mat);
+}
+
+ConstEval::ConstantResult ConstEval::OpDivide(const sem::Type*,
+                                              utils::VectorRef<const sem::Constant*> args,
+                                              const Source& source) {
+    auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) {
+        auto create = [&](auto i, auto j) -> const Constant* {
+            using NumberT = decltype(i);
+            using T = UnwrapNumber<NumberT>;
+
+            auto divide_values = [](T lhs, T rhs) {
+                if constexpr (std::is_integral_v<T>) {
+                    // For integers, lhs / 0 returns lhs
+                    if (rhs == 0) {
+                        return lhs;
+                    }
+
+                    if constexpr (std::is_signed_v<T>) {
+                        // For signed integers, for lhs / -1, return lhs if lhs is the
+                        // most negative value
+                        if (rhs == -1 && lhs == std::numeric_limits<T>::min()) {
+                            return lhs;
+                        }
+                    }
+                }
+                return lhs / rhs;
+            };
+
+            NumberT result;
+            if constexpr (std::is_same_v<NumberT, AInt> || std::is_same_v<NumberT, AFloat>) {
+                // Check for over/underflow for abstract values
+                if (auto r = CheckedDiv(i, j)) {
+                    result = r->value;
+                } else {
+                    AddError(OverflowErrorMessage(i, "/", j), source);
+                    return nullptr;
+                }
+            } else {
+                result = divide_values(i.value, j.value);
+            }
+            return CreateElement(builder, c0->Type(), result);
+        };
+        return Dispatch_fia_fiu32_f16(create, c0, c1);
+    };
+
+    auto r = TransformBinaryElements(builder, transform, args[0], args[1]);
+    if (builder.Diagnostics().contains_errors()) {
+        return utils::Failure;
+    }
+    return r;
 }
 
 ConstEval::ConstantResult ConstEval::atan2(const sem::Type*,
