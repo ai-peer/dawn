@@ -16,6 +16,144 @@
       "message": "Please take a look, thanks",
       "revId": "ff3f8e56e60fd25a7764df79555aa64e4f46a91b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc0edc7c_b510f9bb",
+        "filename": "src/tint/sem/matrix.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:46:57Z",
+      "side": 1,
+      "message": "This change should not be necessary. Types are deduplicated by the resolver.",
+      "range": {
+        "startLine": 47,
+        "startChar": 32,
+        "endLine": 47,
+        "endChar": 38
+      },
+      "revId": "ff3f8e56e60fd25a7764df79555aa64e4f46a91b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caacf62b_7807959d",
+        "filename": "src/tint/sem/vector.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:46:57Z",
+      "side": 1,
+      "message": "Same",
+      "range": {
+        "startLine": 39,
+        "startChar": 51,
+        "endLine": 39,
+        "endChar": 57
+      },
+      "revId": "ff3f8e56e60fd25a7764df79555aa64e4f46a91b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4e3fc2c_ff139837",
+        "filename": "src/tint/transform/vectorize_matrix_conversions_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:46:57Z",
+      "side": 1,
+      "message": "While the parameterization is very thorougher, it makes reviewing the pre-transform and post-transform very hard.\nMaybe we could add a comment to each test where we show an example input and output?",
+      "range": {
+        "startLine": 297,
+        "startChar": 0,
+        "endLine": 297,
+        "endChar": 24
+      },
+      "revId": "ff3f8e56e60fd25a7764df79555aa64e4f46a91b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a4cb669_d54518a9",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1386,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:46:57Z",
+      "side": 1,
+      "message": "`res_mat \u003d\u003d val_mat`",
+      "range": {
+        "startLine": 1386,
+        "startChar": 31,
+        "endLine": 1386,
+        "endChar": 56
+      },
+      "revId": "ff3f8e56e60fd25a7764df79555aa64e4f46a91b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5397d704_2edabec3",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1650,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:46:57Z",
+      "side": 1,
+      "message": "`from_mat \u003d\u003d to_mat`",
+      "range": {
+        "startLine": 1650,
+        "startChar": 12,
+        "endLine": 1650,
+        "endChar": 37
+      },
+      "revId": "ff3f8e56e60fd25a7764df79555aa64e4f46a91b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76b286c8_c17be5db",
+        "filename": "test/tint/expressions/type_conv/mat2x2/literal/f16-f32.wgsl.expected.spvasm",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:46:57Z",
+      "side": 1,
+      "message": "As all your matrix scalars come from literals (constants), we\u0027re not really seeing the transform do its thing here. Might be better to hoist the literals to `var` or `let`s so the constant folding doesn\u0027t take effect.",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 21,
+        "endChar": 61
+      },
+      "revId": "ff3f8e56e60fd25a7764df79555aa64e4f46a91b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
