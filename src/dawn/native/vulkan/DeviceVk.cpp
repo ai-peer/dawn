@@ -285,6 +285,8 @@ void Device::EnqueueDeferredDeallocation(DescriptorSetAllocator* allocator) {
 
 CommandRecordingContext* Device::GetPendingRecordingContext() {
     ASSERT(mRecordingContext.commandBuffer != VK_NULL_HANDLE);
+    ASSERT(GetState() == State::BeingCreated || GetState() == State::Alive);
+
     mRecordingContext.used = true;
     return &mRecordingContext;
 }
