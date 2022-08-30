@@ -408,9 +408,7 @@ MaybeError BufferBase::CopyFromStagingBuffer() {
 }
 
 void BufferBase::APIUnmap() {
-    if (GetDevice()->ConsumedError(ValidateUnmap(), "calling %s.Unmap().", this)) {
-        return;
-    }
+    // Buffer.Unmap() doesn't have any validation failure cases.
     Unmap();
 }
 
@@ -419,25 +417,40 @@ void BufferBase::Unmap() {
 }
 
 void BufferBase::UnmapInternal(WGPUBufferMapAsyncStatus callbackStatus) {
-    if (mState == BufferState::Mapped) {
-        // A map request can only be called once, so this will fire only if the request wasn't
-        // completed before the Unmap.
-        // Callbacks are not fired if there is no callback registered, so this is correct for
-        // mappedAtCreation = true.
-        CallMapCallback(mLastMapID, callbackStatus);
-        UnmapImpl();
+    switch (mState) {
+        case BufferState::Mapped:
+            // A map request can only be called once, so this will fire only if the request wasn't
+            // completed before the Unmap. Callbacks are not fired if there is no callback
+            // registered, so this is correct for mappedAtCreation = true.
+            CallMapCallback(mLastMapID, callbackStatus);
+            mMapCallback = nullptr;
+            mMapUserdata = 0;
 
-        mMapCallback = nullptr;
-        mMapUserdata = 0;
-    } else if (mState == BufferState::MappedAtCreation) {
-        if (mStagingBuffer != nullptr) {
-            GetDevice()->ConsumedError(CopyFromStagingBuffer());
-        } else if (mSize != 0) {
             UnmapImpl();
-        }
-    }
+            mState = BufferState::Unmapped;
+            break;
 
-    mState = BufferState::Unmapped;
+        case BufferState::MappedAtCreation:
+            if (mStagingBuffer != nullptr) {
+                if (GetDevice()->IsLost()) {
+                    // Don't enqueue commands if the device is lost.
+                    mStagingBuffer.reset();
+                } else {
+                    GetDevice()->ConsumedError(CopyFromStagingBuffer());
+                }
+            } else if (mSize != 0) {
+                UnmapImpl();
+            }
+
+            mState = BufferState::Unmapped;
+            break;
+
+        case BufferState::Unmapped:
+        case BufferState::Destroyed:
+            // Do not change the state to "Unmapped" for destroyed buffers as it would un-destroy
+            // them.
+            break;
+    }
 }
 
 MaybeError BufferBase::ValidateMapAsync(wgpu::MapMode mode,
@@ -526,23 +539,6 @@ bool BufferBase::CanGetMappedRange(bool writable, size_t offset, size_t size) co
         case BufferState::Unmapped:
         case BufferState::Destroyed:
             return false;
-    }
-    UNREACHABLE();
-}
-
-MaybeError BufferBase::ValidateUnmap() const {
-    DAWN_TRY(GetDevice()->ValidateIsAlive());
-
-    switch (mState) {
-        case BufferState::Mapped:
-        case BufferState::MappedAtCreation:
-            // A buffer may be in the Mapped state if it was created with mappedAtCreation
-            // even if it did not have a mappable usage.
-            return {};
-        case BufferState::Unmapped:
-            return DAWN_VALIDATION_ERROR("%s is unmapped.", this);
-        case BufferState::Destroyed:
-            return DAWN_VALIDATION_ERROR("%s is destroyed.", this);
     }
     UNREACHABLE();
 }

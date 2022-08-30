@@ -240,8 +240,8 @@ TEST_P(DeviceLostTest, BufferMapAsyncBeforeLossFailsForWriting) {
     LoseDeviceForTesting();
 }
 
-// Test that buffer.Unmap fails after device is lost
-TEST_P(DeviceLostTest, BufferUnmapFails) {
+// Test that buffer.Unmap succeeds after device is lost, mappable buffer case.
+TEST_P(DeviceLostTest, BufferUnmapSucceeds_MappableBuffer) {
     wgpu::BufferDescriptor bufferDescriptor;
     bufferDescriptor.size = sizeof(float);
     bufferDescriptor.usage = wgpu::BufferUsage::MapWrite;
@@ -249,9 +249,22 @@ TEST_P(DeviceLostTest, BufferUnmapFails) {
     wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
 
     LoseDeviceForTesting();
-    ASSERT_DEVICE_ERROR(buffer.Unmap());
+    buffer.Unmap();
 }
 
+// Test that buffer.Unmap succeeds after device is lost, unmappable buffer case. This tests a code
+// path where a staging buffer would be used, so that we check that commands aren't enqueued to copy
+// from staging when the buffer is unmapped after device loss.
+TEST_P(DeviceLostTest, BufferUnmapSucceeds_UnmappableBuffer) {
+    wgpu::BufferDescriptor bufferDescriptor;
+    bufferDescriptor.size = sizeof(float);
+    bufferDescriptor.usage = wgpu::BufferUsage::Vertex;
+    bufferDescriptor.mappedAtCreation = true;
+    wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
+
+    LoseDeviceForTesting();
+    buffer.Unmap();
+}
 // Test that mappedAtCreation fails after device is lost
 TEST_P(DeviceLostTest, CreateBufferMappedAtCreationFails) {
     wgpu::BufferDescriptor bufferDescriptor;
