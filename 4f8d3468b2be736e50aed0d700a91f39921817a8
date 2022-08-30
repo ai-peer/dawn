@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90596206_b9a3dac3",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3187,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:21:52Z",
+      "side": 1,
+      "message": "No need for matrix element types other than `AFloat`, `f32` and `f16`. Integer matrix types are not supported.",
+      "range": {
+        "startLine": 3168,
+        "startChar": 0,
+        "endLine": 3187,
+        "endChar": 54
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f4fe533_ba2df483",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3205,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:21:52Z",
+      "side": 1,
+      "message": "Maybe move this next to the decl of `Value` ?",
+      "range": {
+        "startLine": 3198,
+        "startChar": 0,
+        "endLine": 3205,
+        "endChar": 51
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e12326e4_070b3d39",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3255,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:21:52Z",
+      "side": 1,
+      "message": "Should we fail the test `if (!a_elem \u0026\u0026 b_elem)` ?",
+      "range": {
+        "startLine": 3255,
+        "startChar": 12,
+        "endLine": 3255,
+        "endChar": 17
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35579e5c_2092d761",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3263,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:21:52Z",
+      "side": 1,
+      "message": "nit: If you checked `i \u003d\u003d 0` here, then you can keep `a_elem` scoped to the `while`, keeping more symmetry with `b_elem`.",
+      "range": {
+        "startLine": 3263,
+        "startChar": 8,
+        "endLine": 3263,
+        "endChar": 15
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d388807d_06656d20",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3279,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:21:52Z",
+      "side": 1,
+      "message": "Feel free to add an `IsAbstract` to `number.h`. I thought we had this already, but apparently not.",
+      "range": {
+        "startLine": 3279,
+        "startChar": 26,
+        "endLine": 3279,
+        "endChar": 78
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aca268d2_8882de9b",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3315,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:21:52Z",
+      "side": 1,
+      "message": "We actually want to check for exactness here, no? `bool operator\u003d\u003d(Number\u003cA\u003e a, Number\u003cB\u003e b) {` does this.",
+      "range": {
+        "startLine": 3315,
+        "startChar": 36,
+        "endLine": 3315,
+        "endChar": 51
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8d936da_1aa96c56",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:21:52Z",
+      "side": 1,
+      "message": "Doesn\u0027t seem to be the only place this is used?",
+      "range": {
+        "startLine": 176,
+        "startChar": 26,
+        "endLine": 176,
+        "endChar": 43
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aca9d7b_ff9a089b",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:21:52Z",
+      "side": 1,
+      "message": "`ScalarList` ?",
+      "range": {
+        "startLine": 178,
+        "startChar": 7,
+        "endLine": 178,
+        "endChar": 18
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e53907dc_3226684b",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:21:52Z",
+      "side": 1,
+      "message": "`cast to the T` ? `T` is specialized here, so I suggest `cast to bool`. Here and below.",
+      "range": {
+        "startLine": 241,
+        "startChar": 49,
+        "endLine": 241,
+        "endChar": 63
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0227031c_8e04196b",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:21:52Z",
+      "side": 1,
+      "message": "I\u0027d call this `Scalar`, and below `Vector` and `Matrix`, etc.\nYou can shorten them to single letter names in the .cc test files where you do the `using S \u003d builder::Scalar`, etc.",
+      "range": {
+        "startLine": 743,
+        "startChar": 5,
+        "endLine": 743,
+        "endChar": 6
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2058829_c5ee4d38",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:21:52Z",
+      "side": 1,
+      "message": "We could do with a `PushAll`.",
+      "range": {
+        "startLine": 775,
+        "startChar": 10,
+        "endLine": 775,
+        "endChar": 14
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
