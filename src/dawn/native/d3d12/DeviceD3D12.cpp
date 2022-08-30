@@ -275,6 +275,8 @@ ResidencyManager* Device::GetResidencyManager() const {
 }
 
 ResultOrError<CommandRecordingContext*> Device::GetPendingCommandContext() {
+    ASSERT(GetState() == State::BeingCreated || GetState() == State::Alive);
+
     // Callers of GetPendingCommandList do so to record commands. Only reserve a command
     // allocator when it is needed so we don't submit empty command lists
     if (!mPendingCommands.IsOpen()) {

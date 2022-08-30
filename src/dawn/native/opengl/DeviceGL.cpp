@@ -459,6 +459,8 @@ float Device::GetTimestampPeriodInNS() const {
 }
 
 const OpenGLFunctions& Device::GetGL() const {
+    ASSERT(GetState() == State::BeingCreated || GetState() == State::Alive);
+
     if (mContext) {
         mContext->MakeCurrent();
     }
