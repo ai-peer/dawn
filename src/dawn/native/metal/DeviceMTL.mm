@@ -341,6 +341,8 @@ id<MTLCommandQueue> Device::GetMTLQueue() {
 }
 
 CommandRecordingContext* Device::GetPendingCommandContext() {
+    ASSERT(!IsLost());
+
     mCommandContext.MarkUsed();
     return &mCommandContext;
 }
