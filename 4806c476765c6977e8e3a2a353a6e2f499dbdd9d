@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e43f296e_80de336b",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 7
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:52:44Z",
+      "side": 1,
+      "message": "Yeah, they should all be renamed. They\u0027re only called `OpStar`, as I had to give the template a string to emit. It doesn\u0027t have vast context, so the template doesn\u0027t know if this is a multiply or a dereference. Turns out the deref isn\u0027t actually handled by the intrinsic table, but still.",
+      "parentUuid": "f4f4bad8_dce7562a",
+      "range": {
+        "startLine": 907,
+        "startChar": 8,
+        "endLine": 907,
+        "endChar": 12
+      },
+      "revId": "4806c476765c6977e8e3a2a353a6e2f499dbdd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67fc473b_701d023a",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 7
@@ -273,6 +297,30 @@
       "side": 1,
       "message": "Yes, when I first introduced the returning of ConstantResult for these functions, I had initially propagated it down, but the number of changes was quite large, as most of the internal functions return a `const Constant*`. So instead, I decided to use this kludge to keep the change small. I\u0027ll definitely revisit this in a future change (this isn\u0027t related to this specific CL).",
       "parentUuid": "9233922e_82791890",
+      "range": {
+        "startLine": 1031,
+        "startChar": 8,
+        "endLine": 1031,
+        "endChar": 45
+      },
+      "revId": "4806c476765c6977e8e3a2a353a6e2f499dbdd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eb76da9_ee9da859",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-30T12:52:44Z",
+      "side": 1,
+      "message": "https://bugs.chromium.org/p/tint/issues/detail?id\u003d1661",
+      "parentUuid": "12e7360e_8ec75af9",
       "range": {
         "startLine": 1031,
         "startChar": 8,
