@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74801e45_2e74cb9f",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-30T00:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32efe207_0f1c634f",
+      "range": {
+        "startLine": 44,
+        "startChar": 43,
+        "endLine": 44,
+        "endChar": 49
+      },
+      "revId": "64ffb032d039160fdac392eb426d0bfa1f158111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95922170_dc2b7212",
@@ -98,6 +122,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3156163b_d17139e8",
+        "filename": "generator/templates/dawn/native/ValidationUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-30T00:05:35Z",
+      "side": 1,
+      "message": "Good call, done.",
+      "parentUuid": "95922170_dc2b7212",
+      "range": {
+        "startLine": 32,
+        "startChar": 108,
+        "endLine": 32,
+        "endChar": 113
+      },
+      "revId": "64ffb032d039160fdac392eb426d0bfa1f158111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c741683_56af063a",
@@ -111,6 +159,30 @@
       "writtenOn": "2022-08-29T21:21:27Z",
       "side": 1,
       "message": "nit. created",
+      "range": {
+        "startLine": 46,
+        "startChar": 25,
+        "endLine": 46,
+        "endChar": 31
+      },
+      "revId": "64ffb032d039160fdac392eb426d0bfa1f158111",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b39b27c_08b5c20c",
+        "filename": "src/dawn/native/PipelineLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-30T00:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c741683_56af063a",
       "range": {
         "startLine": 46,
         "startChar": 25,
