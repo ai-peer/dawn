@@ -437,12 +437,36 @@ sem::Variable* Resolver::Override(const ast::Override* v) {
     auto* sem = builder_->create<sem::GlobalVariable>(
         v, ty, sem::EvaluationStage::kOverride, ast::StorageClass::kNone, ast::Access::kUndefined,
         /* constant_value */ nullptr, sem::BindingPoint{});
+    sem->SetConstructor(rhs);
 
-    if (auto* id = ast::GetAttribute<ast::IdAttribute>(v->attributes)) {
-        sem->SetOverrideId(OverrideId{static_cast<decltype(OverrideId::value)>(id->value)});
+    if (auto* id_attr = GetAttribute<ast::IdAttribute>(v->attributes)) {
+        auto* s = Expression(id_attr->value);
+        auto* materialize = Materialize(Expression(id_attr->value));
+        if (!materialize) {
+            return nullptr;
+        }
+        auto* c = materialize->ConstantValue();
+        if (!c) {
+            // TODO(crbug.com/tint/1633): Handle invalid materialization when expressions
+            // are supported.
+            return nullptr;
+        }
+
+        auto v = c->As<uint32_t>();
+        if (v > std::numeric_limits<decltype(OverrideId::value)>::max()) {
+            AddError("override IDs must be between 0 and " +
+                         std::to_string(std::numeric_limits<decltype(OverrideId::value)>::max()),
+                     id_attr->source);
+            return nullptr;
+        }
+
+        auto o = OverrideId{static_cast<decltype(OverrideId::value)>(c->As<uint32_t>())};
+        sem->SetOverrideId(o);
+
+        // Track the constant IDs that are specified in the shader.
+        override_ids_.emplace(o, sem);
     }
 
-    sem->SetConstructor(rhs);
     builder_->Sem().Add(v, sem);
     return sem;
 }
@@ -738,7 +762,20 @@ bool Resolver::AllocateOverridableConstantIds() {
 
         OverrideId id;
         if (auto* id_attr = ast::GetAttribute<ast::IdAttribute>(override->attributes)) {
-            id = OverrideId{static_cast<decltype(OverrideId::value)>(id_attr->value)};
+            auto* s = Expression(id_attr->value);
+            if (!s) {
+                return nullptr;
+            }
+
+            auto* materialize = Materialize(s);
+            if (!materialize) {
+                return nullptr;
+            }
+            auto* c = materialize->ConstantValue();
+            if (!c) {
+                return nullptr;
+            }
+            id = OverrideId{static_cast<decltype(OverrideId::value)>(c->As<uint32_t>())};
         } else {
             // No ID was specified, so allocate the next available ID.
             while (!ids_exhausted && override_ids_.count(next_id)) {
@@ -773,16 +810,6 @@ sem::GlobalVariable* Resolver::GlobalVariable(const ast::Variable* v) {
     auto* sem = As<sem::GlobalVariable>(Variable(v, /* is_global */ true));
     if (!sem) {
         return nullptr;
-    }
-
-    for (auto* attr : v->attributes) {
-        Mark(attr);
-
-        if (auto* id_attr = attr->As<ast::IdAttribute>()) {
-            // Track the constant IDs that are specified in the shader.
-            override_ids_.emplace(
-                OverrideId{static_cast<decltype(OverrideId::value)>(id_attr->value)}, sem);
-        }
     }
 
     if (!validator_.NoDuplicateAttributes(v->attributes)) {

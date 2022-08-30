@@ -67,7 +67,7 @@ class Override final : public Castable<Override, Variable> {
     /// @returns the identifier string for the override. If the override has
     /// an ID attribute, the string is the id-stringified. Otherwise, the ID
     /// is the symbol.
-    std::string Identifier(const SymbolTable& symbols) const;
+    std::string Identifier2(const SymbolTable& symbols) const;
 };
 
 }  // namespace tint::ast
