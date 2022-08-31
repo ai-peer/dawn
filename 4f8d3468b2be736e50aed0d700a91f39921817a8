@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6fad378_7523d932",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3255,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-31T08:39:55Z",
+      "side": 1,
+      "message": "No need for `TINT_ASSERT`, given that this is a test. You could `EXPECT_TYPE(a-\u003eType(), b-\u003eType());` at the top of this function. That does magic to print the two types if they don\u0027t match, and fail the test.\nWould also be good to state in the docs that the types of `a` and `b` must be equal.",
+      "parentUuid": "841f760a_5c1c6d99",
+      "range": {
+        "startLine": 3255,
+        "startChar": 12,
+        "endLine": 3255,
+        "endChar": 17
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "35579e5c_2092d761",
         "filename": "src/tint/resolver/const_eval_test.cc",
         "patchSetId": 5
@@ -238,6 +262,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e9fde95b_94b5bd65",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3279,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-31T08:39:55Z",
+      "side": 1,
+      "message": "*shrug* If you really want. Fairly minor addition to make to this one though.",
+      "parentUuid": "7001fab5_d72da8f3",
+      "range": {
+        "startLine": 3279,
+        "startChar": 26,
+        "endLine": 3279,
+        "endChar": 78
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aca268d2_8882de9b",
         "filename": "src/tint/resolver/const_eval_test.cc",
         "patchSetId": 5
@@ -273,6 +321,30 @@
       "side": 1,
       "message": "Thanks for that, it helped uncover a couple of bugs related to implicit conversions of AInt to AFloat, one that [you fixed](https://dawn-review.googlesource.com/c/dawn/+/100780), and one that I fixed in the [parent CL](https://dawn-review.googlesource.com/c/dawn/+/100800).",
       "parentUuid": "aca268d2_8882de9b",
+      "range": {
+        "startLine": 3315,
+        "startChar": 36,
+        "endLine": 3315,
+        "endChar": 51
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fecfd83_0a0c26b6",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3315,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-31T08:39:55Z",
+      "side": 1,
+      "message": "👍",
+      "parentUuid": "1e7ab4fe_55f43ef0",
       "range": {
         "startLine": 3315,
         "startChar": 36,
@@ -377,6 +449,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ab5c280_90717aaf",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-31T08:39:55Z",
+      "side": 1,
+      "message": "I usually prefer to keep usage out of the semantics and documentation of a type, and have the thing described as what it actually is. But okay.",
+      "parentUuid": "e6c29c27_c6a01cf7",
+      "range": {
+        "startLine": 178,
+        "startChar": 7,
+        "endLine": 178,
+        "endChar": 18
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e53907dc_3226684b",
@@ -461,6 +557,30 @@
       "side": 1,
       "message": "Yeah, I wanted to do that, but you can\u0027t alias functions easily like that, only types. Furthermore, M is a function template with multiple overloads, making it more difficult. The only way I know of \"aliasing\" these would be to use a generic forwarding lambda (see https://stackoverflow.com/a/63083298).\n\nAs these are part of the builder namespace, are you deeply opposed to keeping the short names for these functions? Alternatively, I could stick these all into a new sub-namespace if that helps (not sure what to call it).",
       "parentUuid": "0227031c_8e04196b",
+      "range": {
+        "startLine": 743,
+        "startChar": 5,
+        "endLine": 743,
+        "endChar": 6
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3ae6192_25cedb62",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-31T08:39:55Z",
+      "side": 1,
+      "message": "It is quite cryptic to have single letter functions like this declared in a header somewhere. Someone reading a test will struggle to identify what they are, especially given the templatey-ness of all of this. How about `Val`, `Vec`, `Mat`?",
+      "parentUuid": "5c52989d_1ba6a173",
       "range": {
         "startLine": 743,
         "startChar": 5,
