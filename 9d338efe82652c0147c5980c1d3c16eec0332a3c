@@ -16,6 +16,24 @@
       "message": "This comment seems wrong, if the item isn\u0027t found we return `nullptr`.",
       "revId": "9d338efe82652c0147c5980c1d3c16eec0332a3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "198e78b3_91997189",
+        "filename": "src/tint/sem/type_manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-08-31T19:26:11Z",
+      "side": 1,
+      "message": "Copy-pasta. Removed.",
+      "parentUuid": "39f0748b_d6d16bf9",
+      "revId": "9d338efe82652c0147c5980c1d3c16eec0332a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
