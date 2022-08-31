@@ -195,6 +195,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a8573bfd_9efc8bc8",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1578,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-31T15:28:14Z",
+      "side": 1,
+      "message": "That would be faster, so SGTM.",
+      "parentUuid": "3ea28978_60c291cb",
+      "range": {
+        "startLine": 1578,
+        "startChar": 58,
+        "endLine": 1578,
+        "endChar": 66
+      },
+      "revId": "0e87bfa40790eabc26017ee4c568027e3abd0efe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "396700af_f48f7a9f",
         "filename": "src/tint/writer/spirv/builder.cc",
         "patchSetId": 7
