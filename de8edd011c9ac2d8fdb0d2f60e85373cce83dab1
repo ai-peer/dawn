@@ -202,6 +202,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e28bbf2b_87e24e96",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T00:26:32Z",
+      "side": 1,
+      "message": "Add transform at shader compile translate to hlsl/msl/spirv time. Also do the validation there on the shader backend. Thus move the workgroup size validation tests to end2end tests instead. Should be good as we are going to have cts to gate that as well.",
+      "parentUuid": "79cc6f70_310b7557",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 1
+      },
+      "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cecbce76_7043316a",
@@ -309,6 +333,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8002a1e4_fbf93367",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T00:26:32Z",
+      "side": 1,
+      "message": "Thanks for the reason behind this! Old impl and toggle are removed.",
+      "parentUuid": "35fd31e2_f3ed66bb",
+      "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5cf6ac51_192b6034",
@@ -322,6 +364,30 @@
       "writtenOn": "2022-08-25T21:06:28Z",
       "side": 1,
       "message": "instead of adding `updatedLocalWorkgroupSize`, perhaps we can output the workgroup size from `ShaderModule::MetalFunctionData`. It doesn\u0027t appear that any of the other backends need it.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 88
+      },
+      "revId": "de8edd011c9ac2d8fdb0d2f60e85373cce83dab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4896eff5_dc6fa1fe",
+        "filename": "src/dawn/native/metal/ComputePipelineMTL.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T00:26:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cf6ac51_192b6034",
       "range": {
         "startLine": 57,
         "startChar": 0,

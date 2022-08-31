@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3192ac50_bd5e416e",
+        "filename": "src/dawn/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T00:26:32Z",
+      "side": 1,
+      "message": "Fixed comments",
+      "revId": "88c520d40fdba9559cb9097fdaa9ef37696255b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -57,6 +57,30 @@
       },
       "revId": "2db09eaf5ee5e7aa672e4d6630f712f932f3dff1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c57afdb5_791e217c",
+        "filename": "src/tint/inspector/inspector.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T00:26:32Z",
+      "side": 1,
+      "message": "Looks like having this function is to get workgroup size for a given entry point.\nGetEntryPoints() returns EntryPoint with workgroup_size of all entry points as a vector and hard to look up by entry point name string.",
+      "parentUuid": "586a7a13_ed36f9e1",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 0
+      },
+      "revId": "2db09eaf5ee5e7aa672e4d6630f712f932f3dff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3fa3e55_42096859",
+        "filename": "src/dawn/native/Pipeline.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T00:26:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06d82504_6f250803",
+      "range": {
+        "startLine": 56,
+        "startChar": 36,
+        "endLine": 56,
+        "endChar": 56
+      },
+      "revId": "a198f9364c252d371a8de42794358361974d34fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79193cba_f35c925b",
@@ -41,6 +65,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4380648_ab5eef17",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T00:26:32Z",
+      "side": 1,
+      "message": "Done (If you mean removing the empty line)",
+      "parentUuid": "79193cba_f35c925b",
+      "revId": "a198f9364c252d371a8de42794358361974d34fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a49ffc2_5899c2a8",
@@ -54,6 +96,24 @@
       "writtenOn": "2022-08-26T12:41:38Z",
       "side": 1,
       "message": "nit: Maybe we could rename the function to make it clear. For example GetRawTintProgram?",
+      "revId": "a198f9364c252d371a8de42794358361974d34fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f493db_023570ab",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T00:26:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a49ffc2_5899c2a8",
       "revId": "a198f9364c252d371a8de42794358361974d34fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
