@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4292a1b8_6f270fcd",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3187,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T01:46:41Z",
+      "side": 1,
+      "message": "Removed i32 and u32, but kept AInt as this allows me to declare the equivalent of a matrix constructed from abstract-ints (which implicitly converts to a matrix of abstract-floats).",
+      "parentUuid": "90596206_b9a3dac3",
+      "range": {
+        "startLine": 3168,
+        "startChar": 0,
+        "endLine": 3187,
+        "endChar": 54
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f4fe533_ba2df483",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-30T12:21:52Z",
       "side": 1,
       "message": "Maybe move this next to the decl of `Value` ?",
+      "range": {
+        "startLine": 3198,
+        "startChar": 0,
+        "endLine": 3205,
+        "endChar": 51
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d21cc397_359e74f5",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3205,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T01:46:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f4fe533_ba2df483",
       "range": {
         "startLine": 3198,
         "startChar": 0,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "841f760a_5c1c6d99",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3255,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T01:46:41Z",
+      "side": 1,
+      "message": "Not sure I follow. This function expects to be called on two constants of the same type. If you wish, I can TINT_ASSERT that this is the case. The check here for (!a_elem) assumes that b_elem will also be nullptr.",
+      "parentUuid": "e12326e4_070b3d39",
+      "range": {
+        "startLine": 3255,
+        "startChar": 12,
+        "endLine": 3255,
+        "endChar": 17
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "35579e5c_2092d761",
         "filename": "src/tint/resolver/const_eval_test.cc",
         "patchSetId": 5
@@ -83,6 +155,30 @@
       "writtenOn": "2022-08-30T12:21:52Z",
       "side": 1,
       "message": "nit: If you checked `i \u003d\u003d 0` here, then you can keep `a_elem` scoped to the `while`, keeping more symmetry with `b_elem`.",
+      "range": {
+        "startLine": 3263,
+        "startChar": 8,
+        "endLine": 3263,
+        "endChar": 15
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1f43468_133fd33d",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3263,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T01:46:41Z",
+      "side": 1,
+      "message": "Nice.",
+      "parentUuid": "35579e5c_2092d761",
       "range": {
         "startLine": 3263,
         "startChar": 8,
@@ -118,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7001fab5_d72da8f3",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3279,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T01:46:41Z",
+      "side": 1,
+      "message": "Yes, good idea. I\u0027ll tackle that in an future CL, if you don\u0027t mind.",
+      "parentUuid": "d388807d_06656d20",
+      "range": {
+        "startLine": 3279,
+        "startChar": 26,
+        "endLine": 3279,
+        "endChar": 78
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aca268d2_8882de9b",
         "filename": "src/tint/resolver/const_eval_test.cc",
         "patchSetId": 5
@@ -129,6 +249,30 @@
       "writtenOn": "2022-08-30T12:21:52Z",
       "side": 1,
       "message": "We actually want to check for exactness here, no? `bool operator\u003d\u003d(Number\u003cA\u003e a, Number\u003cB\u003e b) {` does this.",
+      "range": {
+        "startLine": 3315,
+        "startChar": 36,
+        "endLine": 3315,
+        "endChar": 51
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e7ab4fe_55f43ef0",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3315,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T01:46:41Z",
+      "side": 1,
+      "message": "Thanks for that, it helped uncover a couple of bugs related to implicit conversions of AInt to AFloat, one that [you fixed](https://dawn-review.googlesource.com/c/dawn/+/100780), and one that I fixed in the [parent CL](https://dawn-review.googlesource.com/c/dawn/+/100800).",
+      "parentUuid": "aca268d2_8882de9b",
       "range": {
         "startLine": 3315,
         "startChar": 36,
@@ -162,6 +306,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d77cdc1e_afe998f4",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T01:46:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8d936da_1aa96c56",
+      "range": {
+        "startLine": 176,
+        "startChar": 26,
+        "endLine": 176,
+        "endChar": 43
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9aca9d7b_ff9a089b",
@@ -185,6 +353,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6c29c27_c6a01cf7",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T01:46:41Z",
+      "side": 1,
+      "message": "Went for ScalarArgs, as it\u0027s only meant to be used as an arg type.",
+      "parentUuid": "9aca9d7b_ff9a089b",
+      "range": {
+        "startLine": 178,
+        "startChar": 7,
+        "endLine": 178,
+        "endChar": 18
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e53907dc_3226684b",
@@ -198,6 +390,30 @@
       "writtenOn": "2022-08-30T12:21:52Z",
       "side": 1,
       "message": "`cast to the T` ? `T` is specialized here, so I suggest `cast to bool`. Here and below.",
+      "range": {
+        "startLine": 241,
+        "startChar": 49,
+        "endLine": 241,
+        "endChar": 63
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "517f9c14_23ce695c",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T01:46:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e53907dc_3226684b",
       "range": {
         "startLine": 241,
         "startChar": 49,
@@ -233,6 +449,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c52989d_1ba6a173",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T01:46:41Z",
+      "side": 1,
+      "message": "Yeah, I wanted to do that, but you can\u0027t alias functions easily like that, only types. Furthermore, M is a function template with multiple overloads, making it more difficult. The only way I know of \"aliasing\" these would be to use a generic forwarding lambda (see https://stackoverflow.com/a/63083298).\n\nAs these are part of the builder namespace, are you deeply opposed to keeping the short names for these functions? Alternatively, I could stick these all into a new sub-namespace if that helps (not sure what to call it).",
+      "parentUuid": "0227031c_8e04196b",
+      "range": {
+        "startLine": 743,
+        "startChar": 5,
+        "endLine": 743,
+        "endChar": 6
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b2058829_c5ee4d38",
         "filename": "src/tint/resolver/resolver_test_helper.h",
         "patchSetId": 5
@@ -244,6 +484,30 @@
       "writtenOn": "2022-08-30T12:21:52Z",
       "side": 1,
       "message": "We could do with a `PushAll`.",
+      "range": {
+        "startLine": 775,
+        "startChar": 10,
+        "endLine": 775,
+        "endChar": 14
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75e21b67_58c2e5cf",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T01:46:41Z",
+      "side": 1,
+      "message": "Agreed, for a future CL.",
+      "parentUuid": "b2058829_c5ee4d38",
       "range": {
         "startLine": 775,
         "startChar": 10,
