@@ -2302,9 +2302,12 @@ sem::Expression* Resolver::MemberAccessor(const ast::MemberAccessorExpression* e
             if (!val) {
                 return nullptr;
             }
-            return builder_->create<sem::StructMemberAccess>(expr, ty, current_statement_,
-                                                             val.Get(), object, member,
-                                                             has_side_effects, source_var);
+
+            auto* access = builder_->create<sem::StructMemberAccess>(expr, ty, current_statement_,
+                                                                     val.Get(), object, member,
+                                                                     has_side_effects, source_var);
+            const_cast<sem::StructMember*>(member)->AddAccess(access) ;
+            return access;
         },
 
         [&](const sem::Vector* vec) -> sem::Expression* {
