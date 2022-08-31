@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a51dad9b_d3b331e2",
+        "filename": "src/tint/sem/matrix.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-31T12:50:13Z",
+      "side": 1,
+      "message": "It should never happen. Thanks for the changes.",
+      "parentUuid": "c7eaf0b9_67e72de9",
+      "range": {
+        "startLine": 47,
+        "startChar": 32,
+        "endLine": 47,
+        "endChar": 38
+      },
+      "revId": "ff3f8e56e60fd25a7764df79555aa64e4f46a91b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "caacf62b_7807959d",
@@ -290,6 +314,30 @@
       "side": 1,
       "message": "Yes, `type_conv/[types]/literal/*` tests use literal sources (may check the constant folding on this conversion), while `type_conv/[types]/var/*` tests use a variable as input (which will result in explicit conversion in output code) and `type_conv/[types]/function/*` tests use a function call with side effect as input \u003d(which may test the side-effect issue).",
       "parentUuid": "76b286c8_c17be5db",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 21,
+        "endChar": 61
+      },
+      "revId": "ff3f8e56e60fd25a7764df79555aa64e4f46a91b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c60aac72_34cdefcf",
+        "filename": "test/tint/expressions/type_conv/mat2x2/literal/f16-f32.wgsl.expected.spvasm",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-31T12:50:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "84fb12c9_d5479f48",
       "range": {
         "startLine": 19,
         "startChar": 4,
