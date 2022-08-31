@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bf17267_2ff321ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-08-31T13:48:22Z",
+      "side": 1,
+      "message": "The SPIR-V side looks good.\nI have some very minor comments.\n",
+      "revId": "0e87bfa40790eabc26017ee4c568027e3abd0efe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bceec57_34d31847",
@@ -77,6 +94,63 @@
         "endLine": 120,
         "endChar": 22
       },
+      "revId": "0e87bfa40790eabc26017ee4c568027e3abd0efe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83090762_4859cbac",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1578,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-08-31T13:48:22Z",
+      "side": 1,
+      "message": "nit:   Is there an advantage to writing it this way?  Is it for readability?\n\nMy understanding is that the types should be de-duplicated already.",
+      "range": {
+        "startLine": 1578,
+        "startChar": 58,
+        "endLine": 1578,
+        "endChar": 66
+      },
+      "revId": "0e87bfa40790eabc26017ee4c568027e3abd0efe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "396700af_f48f7a9f",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1582,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-08-31T13:48:22Z",
+      "side": 1,
+      "message": "nit: I suggest adding a comment here saying that OpFConvert requires the scalar component types to be different.   So the case of from_type and to_type being the same floating point vector type must already have been handled.  It is already handled in the previous else-if clause.",
+      "revId": "0e87bfa40790eabc26017ee4c568027e3abd0efe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a9274a4_78ceab24",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1646,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-08-31T13:48:22Z",
+      "side": 1,
+      "message": "This is a good comment!",
       "revId": "0e87bfa40790eabc26017ee4c568027e3abd0efe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
