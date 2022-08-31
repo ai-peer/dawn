@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7071ef18_497724b8",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2760,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T02:40:01Z",
+      "side": 1,
+      "message": "ok - is this because of this TODO?\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Device.cpp;l\u003d1279?q\u003dDevice.cpp%20f:dawn%20f:native\n\nit would be good as much as possible if we can decouple the test from the specifics of Dawn internals. if the goal is for colorTexture1 and colorTexture2 to be next to each other, then to free colorTexture1 and allocate the destination textures on top of where colorTexture1 was,\nI might suggest something like:\n\n```\ncolorTexture1 \u003d Create2DTexture(...)\ncolorTexture2 \u003d Create2DTexture(...)\n\ncolorTexture1.Destroy();\n\nEnsureSubmittedWorkDone();\n\n// Empty queue.Submit to workaround crbug.com/dawn/833 where resources are not recycled until the next serial.\nqueue.Submit(0, nullptr);\nEnsureSubmittedWorkDone();\n\nthen, allocate destination textures\n```",
+      "parentUuid": "eacd2beb_2f4b5585",
+      "range": {
+        "startLine": 2759,
+        "startChar": 20,
+        "endLine": 2760,
+        "endChar": 36
+      },
+      "revId": "acda4efc25e1e3c812191bed56360ec00f26cbf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a1dd6c5f_5dcaa5dd",
         "filename": "src/dawn/tests/end2end/CopyTests.cpp",
         "patchSetId": 3
