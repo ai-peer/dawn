@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9753604a_1d925d70",
+        "filename": "include/dawn/native/D3D12Backend.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T15:42:08Z",
+      "side": 1,
+      "message": "In the current implementation though, there\u0027s no Signal between SynchronizeBeforeUse and SynchronizeAfterUse. We need to call NextSerial to bump and signal with a new value. Otherwise, I think there will be a race. Should probably have a test for that. Consider:\n1. exclusive write\n2. import for read and do nothing\n3. read: may not see correct contents from (1)\n\nor\n1. exclusive write\n2. import for read and do nothing\n3. exclusive write again\n4. read: may see contents race from (1) and (3)\n\nIt\u0027s reasonable if you think that import and no actual usage is a degenerate case that we don\u0027t need to support efficiently. But, it also seems like Corentin\u0027s suggestion might be simpler since we don\u0027t need to do extra serial manipulations. It\u0027s also more extensible since we\u0027ll need to support multiple fences for multi-queue anyway",
+      "parentUuid": "dfe422b1_78b4f75d",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a380fcaf_ac310eda",
         "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 7
