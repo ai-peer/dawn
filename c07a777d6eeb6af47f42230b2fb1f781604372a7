@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e5262df_f4c54293",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-31T19:02:04Z",
+      "side": 1,
+      "message": "If `create` added an entry with `key` this would overwrite it by accident? Do we need to check that the thing we\u0027re replacing was the thing we inserted on line 187?",
+      "revId": "c07a777d6eeb6af47f42230b2fb1f781604372a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e6979b5_8843daaf",
+        "filename": "src/tint/utils/hashmap_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-31T19:02:04Z",
+      "side": 1,
+      "message": "Ie, if I did:\n\n```\nEXPECT_EQ(map.GetOrCreate(4,\n   [\u0026] {\n      map.Add(4, \"nine\");\n      return \"four\";\n   }), \"nine\");\n```",
+      "revId": "c07a777d6eeb6af47f42230b2fb1f781604372a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
