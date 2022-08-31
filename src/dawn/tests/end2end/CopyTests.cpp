@@ -104,8 +104,8 @@ class CopyTests {
             rowsPerImage = overrideRowsPerImage;
         }
 
-        uint32_t totalDataSize =
-            utils::RequiredBytesInCopy(bytesPerRow, rowsPerImage, copyExtent, format);
+        uint32_t totalDataSize = checked_cast<uint32_t>(
+            utils::RequiredBytesInCopy(bytesPerRow, rowsPerImage, copyExtent, format));
         return {totalDataSize, 0, bytesPerRow, rowsPerImage};
     }
     static void CopyTextureData(uint32_t bytesPerTexelBlock,
@@ -200,8 +200,9 @@ class CopyTests_T2B : public CopyTests, public DawnTest {
 
         const wgpu::Extent3D copySizePerLayer = {copySize.width, copySize.height, copyDepth};
         // Texels in single layer.
-        const uint32_t texelCountInCopyRegion = utils::GetTexelCountInCopyRegion(
-            bufferSpec.bytesPerRow, bufferSpec.rowsPerImage, copySizePerLayer, textureSpec.format);
+        const uint32_t texelCountInCopyRegion = checked_cast<uint32_t>(
+            utils::GetTexelCountInCopyRegion(bufferSpec.bytesPerRow, bufferSpec.rowsPerImage,
+                                             copySizePerLayer, textureSpec.format));
         const uint32_t maxArrayLayer = textureSpec.copyOrigin.z + copyLayer;
         std::vector<utils::RGBA8> expected(texelCountInCopyRegion);
         for (uint32_t layer = textureSpec.copyOrigin.z; layer < maxArrayLayer; ++layer) {
@@ -491,7 +492,7 @@ class CopyTests_T2TBase : public CopyTests, public Parent {
                 EXPECT_BUFFER_U32_RANGE_EQ(
                     reinterpret_cast<const uint32_t*>(expectedDstDataPerSlice.data()), outputBuffer,
                     outputBufferExpectationBytesOffset,
-                    validDataSizePerDstTextureLayer / sizeof(uint32_t));
+                    checked_cast<uint32_t>(validDataSizePerDstTextureLayer / sizeof(uint32_t)));
             }
         }
     }
@@ -578,7 +579,7 @@ class CopyTests_B2B : public DawnTest {
 
         std::vector<uint32_t> sourceData(static_cast<size_t>(sourceSize / sizeof(uint32_t)));
         for (size_t i = 0; i < sourceData.size(); i++) {
-            sourceData[i] = i + 1;
+            sourceData[i] = checked_cast<uint32_t>(i + 1);
         }
         wgpu::Buffer source = utils::CreateBufferFromData(device, sourceData.data(),
                                                           sourceData.size() * sizeof(uint32_t),
@@ -592,12 +593,14 @@ class CopyTests_B2B : public DawnTest {
 
         // Check destination is exactly the expected content.
         EXPECT_BUFFER_U32_RANGE_EQ(zeroes.data(), destination, 0,
-                                   destinationOffset / sizeof(uint32_t));
+                                   checked_cast<uint32_t>(destinationOffset / sizeof(uint32_t)));
         EXPECT_BUFFER_U32_RANGE_EQ(sourceData.data() + sourceOffset / sizeof(uint32_t), destination,
-                                   destinationOffset, copySize / sizeof(uint32_t));
+                                   destinationOffset,
+                                   checked_cast<uint32_t>(copySize / sizeof(uint32_t)));
         uint64_t copyEnd = destinationOffset + copySize;
-        EXPECT_BUFFER_U32_RANGE_EQ(zeroes.data(), destination, copyEnd,
-                                   (destinationSize - copyEnd) / sizeof(uint32_t));
+        EXPECT_BUFFER_U32_RANGE_EQ(
+            zeroes.data(), destination, copyEnd,
+            checked_cast<uint32_t>((destinationSize - copyEnd) / sizeof(uint32_t)));
     }
 };
 
@@ -612,7 +615,7 @@ class ClearBufferTests : public DawnTest {
         // Create our test buffer, filled with non-zeroes
         std::vector<uint32_t> bufferData(static_cast<size_t>(bufferSize / sizeof(uint32_t)));
         for (size_t i = 0; i < bufferData.size(); i++) {
-            bufferData[i] = i + 1;
+            bufferData[i] = checked_cast<uint32_t>(i + 1);
         }
         wgpu::Buffer buffer = utils::CreateBufferFromData(
             device, bufferData.data(), bufferData.size() * sizeof(uint32_t),
@@ -627,11 +630,14 @@ class ClearBufferTests : public DawnTest {
         queue.Submit(1, &commands);
 
         // Check destination is exactly the expected content.
-        EXPECT_BUFFER_U32_RANGE_EQ(bufferData.data(), buffer, 0, clearOffset / sizeof(uint32_t));
-        EXPECT_BUFFER_U8_RANGE_EQ(fillData.data(), buffer, clearOffset, clearSize);
+        EXPECT_BUFFER_U32_RANGE_EQ(bufferData.data(), buffer, 0,
+                                   checked_cast<uint32_t>(clearOffset / sizeof(uint32_t)));
+        EXPECT_BUFFER_U8_RANGE_EQ(fillData.data(), buffer, clearOffset,
+                                  checked_cast<uint32_t>(clearSize));
         uint64_t clearEnd = clearOffset + clearSize;
-        EXPECT_BUFFER_U32_RANGE_EQ(bufferData.data() + clearEnd / sizeof(uint32_t), buffer,
-                                   clearEnd, (bufferSize - clearEnd) / sizeof(uint32_t));
+        EXPECT_BUFFER_U32_RANGE_EQ(
+            bufferData.data() + clearEnd / sizeof(uint32_t), buffer, clearEnd,
+            checked_cast<uint32_t>((bufferSize - clearEnd) / sizeof(uint32_t)));
     }
 };
 

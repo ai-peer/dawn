@@ -14,6 +14,7 @@
 
 #include <vector>
 
+#include "dawn/common/Numeric.h"
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 #include "dawn/utils/WGPUHelpers.h"
 
@@ -30,7 +31,7 @@ class QuerySetValidationTest : public ValidationTest {
 
         if (pipelineStatistics.size() > 0) {
             descriptor.pipelineStatistics = pipelineStatistics.data();
-            descriptor.pipelineStatisticsCount = pipelineStatistics.size();
+            descriptor.pipelineStatisticsCount = checked_cast<uint32_t>(pipelineStatistics.size());
         }
 
         return cDevice.CreateQuerySet(&descriptor);
@@ -284,7 +285,7 @@ class TimestampQueryValidationTest : public QuerySetValidationTest {
         wgpu::CommandEncoder encoder,
         const std::vector<wgpu::RenderPassTimestampWrite>& timestampWrites) {
         PlaceholderRenderPass renderPass(device);
-        renderPass.timestampWriteCount = timestampWrites.size();
+        renderPass.timestampWriteCount = checked_cast<uint32_t>(timestampWrites.size());
         renderPass.timestampWrites = timestampWrites.data();
 
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
@@ -295,7 +296,7 @@ class TimestampQueryValidationTest : public QuerySetValidationTest {
         wgpu::CommandEncoder encoder,
         const std::vector<wgpu::ComputePassTimestampWrite>& timestampWrites) {
         wgpu::ComputePassDescriptor descriptor;
-        descriptor.timestampWriteCount = timestampWrites.size();
+        descriptor.timestampWriteCount = checked_cast<uint32_t>(timestampWrites.size());
         descriptor.timestampWrites = timestampWrites.data();
 
         wgpu::ComputePassEncoder pass = encoder.BeginComputePass(&descriptor);

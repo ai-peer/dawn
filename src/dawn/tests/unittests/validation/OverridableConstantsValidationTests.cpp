@@ -85,7 +85,7 @@ override c9: u32 = 0u;          // default override
         csDesc.compute.module = computeModule;
         csDesc.compute.entryPoint = "main";
         csDesc.compute.constants = constants.data();
-        csDesc.compute.constantCount = constants.size();
+        csDesc.compute.constantCount = static_cast<uint32_t>(constants.size());
         wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&csDesc);
     }
 

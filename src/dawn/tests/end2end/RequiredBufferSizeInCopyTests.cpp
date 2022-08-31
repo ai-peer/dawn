@@ -98,19 +98,19 @@ class RequiredBufferSizeInCopyTests
 
         wgpu::ImageCopyTexture imageCopyTexture =
             utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
-        wgpu::ImageCopyBuffer imageCopyBuffer =
-            utils::CreateImageCopyBuffer(buffer, kOffset, kBytesPerRow, rowsPerImage);
+        wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(
+            buffer, kOffset, kBytesPerRow, checked_cast<uint32_t>(rowsPerImage));
 
         // Initialize copied data and set expected data for buffer and texture.
         ASSERT(sizeof(uint32_t) == kBytesPerBlock);
-        uint32_t numOfBufferElements = bufferSize / kBytesPerBlock;
+        uint32_t numOfBufferElements = checked_cast<uint32_t>(bufferSize / kBytesPerBlock);
         std::vector<uint32_t> data(numOfBufferElements, 1);
         std::vector<uint32_t> expectedBufferData(numOfBufferElements, 0);
         std::vector<uint32_t> expectedTextureData(copySize.depthOrArrayLayers, 0);
         // Initialize the first element on every image to be 0x80808080
         uint64_t imageSize = kBytesPerRow * rowsPerImage;
         ASSERT(bufferSize >= (imageSize * (copySize.depthOrArrayLayers - 1) + kBytesPerBlock));
-        uint32_t numOfImageElements = imageSize / kBytesPerBlock;
+        uint32_t numOfImageElements = checked_cast<uint32_t>(imageSize / kBytesPerBlock);
         for (uint32_t i = 0; i < copySize.depthOrArrayLayers; ++i) {
             data[i * numOfImageElements] = 0x80808080;
             expectedBufferData[i * numOfImageElements] = 0x80808080;
@@ -121,8 +121,8 @@ class RequiredBufferSizeInCopyTests
         wgpu::CommandEncoder encoder = this->device.CreateCommandEncoder();
         switch (GetParam().mType) {
             case Type::T2BCopy: {
-                wgpu::TextureDataLayout textureDataLayout =
-                    utils::CreateTextureDataLayout(kOffset, kBytesPerRow, rowsPerImage);
+                wgpu::TextureDataLayout textureDataLayout = utils::CreateTextureDataLayout(
+                    kOffset, kBytesPerRow, checked_cast<uint32_t>(rowsPerImage));
 
                 queue.WriteTexture(&imageCopyTexture, data.data(), bufferSize, &textureDataLayout,
                                    &copySize);
@@ -141,7 +141,8 @@ class RequiredBufferSizeInCopyTests
         // Verify the data in buffer (T2B copy) or texture (B2T copy)
         switch (GetParam().mType) {
             case Type::T2BCopy:
-                EXPECT_BUFFER_U32_RANGE_EQ(expectedBufferData.data(), buffer, 0, bufferSize / 4);
+                EXPECT_BUFFER_U32_RANGE_EQ(expectedBufferData.data(), buffer, 0,
+                                           checked_cast<uint32_t>(bufferSize / 4));
                 break;
             case Type::B2TCopy:
                 EXPECT_TEXTURE_EQ(expectedTextureData.data(), texture, {0, 0, 0}, copySize);

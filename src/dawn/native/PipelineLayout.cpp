@@ -241,7 +241,7 @@ ResultOrError<Ref<PipelineLayoutBase>> PipelineLayoutBase::CreateDefault(
 
         BindGroupLayoutDescriptor desc = {};
         desc.entries = entryVec.data();
-        desc.entryCount = entryVec.size();
+        desc.entryCount = checked_cast<uint32_t>(entryVec.size());
 
         if (device->IsValidationEnabled()) {
             DAWN_TRY_CONTEXT(ValidateBindGroupLayoutDescriptor(device, &desc), "validating %s",

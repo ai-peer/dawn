@@ -225,8 +225,8 @@ class QueueWriteTextureTests : public DawnTest {
             rowsPerImage = overrideRowsPerImage;
         }
 
-        uint32_t totalDataSize =
-            utils::RequiredBytesInCopy(bytesPerRow, rowsPerImage, writeSize, kTextureFormat);
+        uint32_t totalDataSize = checked_cast<uint32_t>(
+            utils::RequiredBytesInCopy(bytesPerRow, rowsPerImage, writeSize, kTextureFormat));
         return {totalDataSize, 0, bytesPerRow, rowsPerImage};
     }
 

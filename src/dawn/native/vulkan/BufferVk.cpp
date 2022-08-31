@@ -222,7 +222,7 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
 
     // Initialize the padding bytes to zero.
     if (device->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse) && !mappedAtCreation) {
-        uint32_t paddingBytes = GetAllocatedSize() - GetSize();
+        uint32_t paddingBytes = checked_cast<uint32_t>(GetAllocatedSize() - GetSize());
         if (paddingBytes > 0) {
             uint32_t clearSize = Align(paddingBytes, 4);
             uint64_t clearOffset = GetAllocatedSize() - clearSize;

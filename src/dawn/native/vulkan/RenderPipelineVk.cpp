@@ -606,7 +606,7 @@ VkPipelineVertexInputStateCreateInfo RenderPipeline::ComputeVertexInputDesc(
 
         VkVertexInputBindingDescription* bindingDesc = &tempAllocations->bindings[bindingCount];
         bindingDesc->binding = static_cast<uint8_t>(slot);
-        bindingDesc->stride = bindingInfo.arrayStride;
+        bindingDesc->stride = checked_cast<uint32_t>(bindingInfo.arrayStride);
         bindingDesc->inputRate = VulkanInputRate(bindingInfo.stepMode);
 
         bindingCount++;
@@ -622,7 +622,7 @@ VkPipelineVertexInputStateCreateInfo RenderPipeline::ComputeVertexInputDesc(
         attributeDesc->location = static_cast<uint8_t>(loc);
         attributeDesc->binding = static_cast<uint8_t>(attributeInfo.vertexBufferSlot);
         attributeDesc->format = VulkanVertexFormat(attributeInfo.format);
-        attributeDesc->offset = attributeInfo.offset;
+        attributeDesc->offset = checked_cast<uint32_t>(attributeInfo.offset);
 
         attributeCount++;
     }

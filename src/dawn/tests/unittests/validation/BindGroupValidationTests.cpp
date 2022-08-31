@@ -18,6 +18,7 @@
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/Constants.h"
+#include "dawn/common/Numeric.h"
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
@@ -1160,7 +1161,8 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimits) {
         }
 
         // Creating with the maxes works.
-        bgl[0] = MakeBindGroupLayout(maxBindings.data(), maxBindings.size());
+        bgl[0] =
+            MakeBindGroupLayout(maxBindings.data(), checked_cast<uint32_t>(maxBindings.size()));
 
         // Adding an extra binding of a different type works.
         {
@@ -1168,7 +1170,7 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimits) {
             wgpu::BindGroupLayoutEntry entry = info.otherEntry;
             entry.binding = info.maxCount;
             bindings.push_back(entry);
-            MakeBindGroupLayout(bindings.data(), bindings.size());
+            MakeBindGroupLayout(bindings.data(), checked_cast<uint32_t>(bindings.size()));
         }
 
         // Adding an extra binding of the maxed type in a different stage works
@@ -1178,7 +1180,7 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimits) {
             entry.binding = info.maxCount;
             entry.visibility = wgpu::ShaderStage::Fragment;
             bindings.push_back(entry);
-            MakeBindGroupLayout(bindings.data(), bindings.size());
+            MakeBindGroupLayout(bindings.data(), checked_cast<uint32_t>(bindings.size()));
         }
 
         // Adding an extra binding of the maxed type and stage exceeds the per stage limit.
@@ -1187,7 +1189,8 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimits) {
             wgpu::BindGroupLayoutEntry entry = info.entry;
             entry.binding = info.maxCount;
             bindings.push_back(entry);
-            ASSERT_DEVICE_ERROR(MakeBindGroupLayout(bindings.data(), bindings.size()));
+            ASSERT_DEVICE_ERROR(
+                MakeBindGroupLayout(bindings.data(), checked_cast<uint32_t>(bindings.size())));
         }
 
         // Creating a pipeline layout from the valid BGL works.
@@ -1252,7 +1255,8 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimitsWithExternalTexture) {
         }
 
         // Ensure that creation without the external texture works.
-        bgl[0] = MakeBindGroupLayout(maxBindings.data(), maxBindings.size());
+        bgl[0] =
+            MakeBindGroupLayout(maxBindings.data(), checked_cast<uint32_t>(maxBindings.size()));
 
         // Adding an extra binding of a different type works.
         {
@@ -1260,7 +1264,7 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimitsWithExternalTexture) {
             wgpu::BindGroupLayoutEntry entry = info.otherEntry;
             entry.binding = info.maxCount;
             bindings.push_back(entry);
-            MakeBindGroupLayout(bindings.data(), bindings.size());
+            MakeBindGroupLayout(bindings.data(), checked_cast<uint32_t>(bindings.size()));
         }
 
         // Adding an extra binding of the maxed type in a different stage works
@@ -1270,7 +1274,7 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimitsWithExternalTexture) {
             entry.binding = info.maxCount;
             entry.visibility = wgpu::ShaderStage::Fragment;
             bindings.push_back(entry);
-            MakeBindGroupLayout(bindings.data(), bindings.size());
+            MakeBindGroupLayout(bindings.data(), checked_cast<uint32_t>(bindings.size()));
         }
 
         // Adding an extra binding of the maxed type and stage exceeds the per stage limit.
@@ -1279,7 +1283,8 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimitsWithExternalTexture) {
             wgpu::BindGroupLayoutEntry entry = info.entry;
             entry.binding = info.maxCount;
             bindings.push_back(entry);
-            ASSERT_DEVICE_ERROR(MakeBindGroupLayout(bindings.data(), bindings.size()));
+            ASSERT_DEVICE_ERROR(
+                MakeBindGroupLayout(bindings.data(), checked_cast<uint32_t>(bindings.size())));
         }
 
         // Creating a pipeline layout from the valid BGL works.
@@ -1332,13 +1337,16 @@ TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberLimit) {
 
     // Test creating with the maxes works
     {
-        bgl[0] = MakeBindGroupLayout(maxUniformDB.data(), maxUniformDB.size());
+        bgl[0] =
+            MakeBindGroupLayout(maxUniformDB.data(), checked_cast<uint32_t>(maxUniformDB.size()));
         TestCreatePipelineLayout(bgl, 1, true);
 
-        bgl[0] = MakeBindGroupLayout(maxStorageDB.data(), maxStorageDB.size());
+        bgl[0] =
+            MakeBindGroupLayout(maxStorageDB.data(), checked_cast<uint32_t>(maxStorageDB.size()));
         TestCreatePipelineLayout(bgl, 1, true);
 
-        bgl[0] = MakeBindGroupLayout(maxReadonlyStorageDB.data(), maxReadonlyStorageDB.size());
+        bgl[0] = MakeBindGroupLayout(maxReadonlyStorageDB.data(),
+                                     checked_cast<uint32_t>(maxReadonlyStorageDB.size()));
         TestCreatePipelineLayout(bgl, 1, true);
     }
 
@@ -1347,7 +1355,8 @@ TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberLimit) {
 
     // Check dynamic uniform buffers exceed maximum in pipeline layout.
     {
-        bgl[0] = MakeBindGroupLayout(maxUniformDB.data(), maxUniformDB.size());
+        bgl[0] =
+            MakeBindGroupLayout(maxUniformDB.data(), checked_cast<uint32_t>(maxUniformDB.size()));
         bgl[1] = utils::MakeBindGroupLayout(
             device, {
                         {0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform, true},
@@ -1358,7 +1367,8 @@ TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberLimit) {
 
     // Check dynamic storage buffers exceed maximum in pipeline layout
     {
-        bgl[0] = MakeBindGroupLayout(maxStorageDB.data(), maxStorageDB.size());
+        bgl[0] =
+            MakeBindGroupLayout(maxStorageDB.data(), checked_cast<uint32_t>(maxStorageDB.size()));
         bgl[1] = utils::MakeBindGroupLayout(
             device, {
                         {0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Storage, true},
@@ -1369,7 +1379,8 @@ TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberLimit) {
 
     // Check dynamic readonly storage buffers exceed maximum in pipeline layout
     {
-        bgl[0] = MakeBindGroupLayout(maxReadonlyStorageDB.data(), maxReadonlyStorageDB.size());
+        bgl[0] = MakeBindGroupLayout(maxReadonlyStorageDB.data(),
+                                     checked_cast<uint32_t>(maxReadonlyStorageDB.size()));
         bgl[1] = utils::MakeBindGroupLayout(
             device,
             {
@@ -1382,7 +1393,8 @@ TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberLimit) {
     // Check dynamic storage buffers + dynamic readonly storage buffers exceed maximum storage
     // buffers in pipeline layout
     {
-        bgl[0] = MakeBindGroupLayout(maxStorageDB.data(), maxStorageDB.size());
+        bgl[0] =
+            MakeBindGroupLayout(maxStorageDB.data(), checked_cast<uint32_t>(maxStorageDB.size()));
         bgl[1] = utils::MakeBindGroupLayout(
             device,
             {
@@ -1397,7 +1409,8 @@ TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberLimit) {
         maxUniformDB.push_back(utils::BindingLayoutEntryInitializationHelper(
             kMaxDynamicUniformBuffersPerPipelineLayout, wgpu::ShaderStage::Fragment,
             wgpu::BufferBindingType::Uniform, true));
-        TestCreateBindGroupLayout(maxUniformDB.data(), maxUniformDB.size(), false);
+        TestCreateBindGroupLayout(maxUniformDB.data(), checked_cast<uint32_t>(maxUniformDB.size()),
+                                  false);
     }
 
     // Check dynamic storage buffers exceed maximum in bind group layout.
@@ -1405,7 +1418,8 @@ TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberLimit) {
         maxStorageDB.push_back(utils::BindingLayoutEntryInitializationHelper(
             kMaxDynamicStorageBuffersPerPipelineLayout, wgpu::ShaderStage::Fragment,
             wgpu::BufferBindingType::Storage, true));
-        TestCreateBindGroupLayout(maxStorageDB.data(), maxStorageDB.size(), false);
+        TestCreateBindGroupLayout(maxStorageDB.data(), checked_cast<uint32_t>(maxStorageDB.size()),
+                                  false);
     }
 
     // Check dynamic readonly storage buffers exceed maximum in bind group layout.
@@ -1413,7 +1427,8 @@ TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberLimit) {
         maxReadonlyStorageDB.push_back(utils::BindingLayoutEntryInitializationHelper(
             kMaxDynamicStorageBuffersPerPipelineLayout, wgpu::ShaderStage::Fragment,
             wgpu::BufferBindingType::ReadOnlyStorage, true));
-        TestCreateBindGroupLayout(maxReadonlyStorageDB.data(), maxReadonlyStorageDB.size(), false);
+        TestCreateBindGroupLayout(maxReadonlyStorageDB.data(),
+                                  checked_cast<uint32_t>(maxReadonlyStorageDB.size()), false);
     }
 }
 
@@ -2151,7 +2166,7 @@ class BindGroupLayoutCompatibilityTest : public ValidationTest {
         wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fsShader);
 
         wgpu::PipelineLayoutDescriptor descriptor;
-        descriptor.bindGroupLayoutCount = bindGroupLayout.size();
+        descriptor.bindGroupLayoutCount = checked_cast<uint32_t>(bindGroupLayout.size());
         descriptor.bindGroupLayouts = bindGroupLayout.data();
         utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
@@ -2184,7 +2199,7 @@ class BindGroupLayoutCompatibilityTest : public ValidationTest {
         wgpu::ShaderModule csModule = utils::CreateShaderModule(device, shader);
 
         wgpu::PipelineLayoutDescriptor descriptor;
-        descriptor.bindGroupLayoutCount = bindGroupLayout.size();
+        descriptor.bindGroupLayoutCount = checked_cast<uint32_t>(bindGroupLayout.size());
         descriptor.bindGroupLayouts = bindGroupLayout.data();
         wgpu::PipelineLayout pipelineLayout = device.CreatePipelineLayout(&descriptor);
 

@@ -126,6 +126,7 @@ config("internal_config") {
       "-Wrange-loop-analysis",
       "-Wredundant-move",
       "-Wshadow-field",
+      "-Wshorten-64-to-32",
       "-Wstrict-prototypes",
       "-Wsuggest-destructor-override",
       "-Wsuggest-override",

@@ -545,7 +545,7 @@ TEST_P(DrawIndexedIndirectTest, ValidateWithBundlesInSamePass) {
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     {
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
-        pass.ExecuteBundles(bundles.size(), bundles.data());
+        pass.ExecuteBundles(checked_cast<uint32_t>(bundles.size()), bundles.data());
         pass.End();
     }
     wgpu::CommandBuffer commands = encoder.Finish();

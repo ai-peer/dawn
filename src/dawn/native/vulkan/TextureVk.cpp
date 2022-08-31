@@ -671,7 +671,7 @@ MaybeError Texture::InitializeAsInternalTexture(VkImageUsageFlags extraUsages) {
                 viewFormats.push_back(VulkanImageFormat(device, viewFormat.format));
             }
 
-            imageFormatListInfo.viewFormatCount = viewFormats.size();
+            imageFormatListInfo.viewFormatCount = checked_cast<uint32_t>(viewFormats.size());
             imageFormatListInfo.pViewFormats = viewFormats.data();
         }
     }
@@ -765,7 +765,7 @@ MaybeError Texture::InitializeFromExternal(const ExternalImageDescriptorVk* desc
                 viewFormats.push_back(VulkanImageFormat(device, viewFormat.format));
             }
 
-            imageFormatListInfo.viewFormatCount = viewFormats.size();
+            imageFormatListInfo.viewFormatCount = checked_cast<uint32_t>(viewFormats.size());
             imageFormatListInfo.pViewFormats = viewFormats.data();
         }
     }
@@ -1143,7 +1143,8 @@ void Texture::TransitionUsageNow(CommandRecordingContext* recordingContext,
         ASSERT(srcStages != 0 && dstStages != 0);
         ToBackend(GetDevice())
             ->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
-                                    nullptr, 0, nullptr, barriers.size(), barriers.data());
+                                    nullptr, 0, nullptr, checked_cast<uint32_t>(barriers.size()),
+                                    barriers.data());
     }
 }
 
@@ -1255,7 +1256,7 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* recordingContext,
         device->fn.CmdCopyBufferToImage(recordingContext->commandBuffer,
                                         ToBackend(uploadHandle.stagingBuffer)->GetBufferHandle(),
                                         GetHandle(), VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-                                        regions.size(), regions.data());
+                                        checked_cast<uint32_t>(regions.size()), regions.data());
     } else {
         for (uint32_t level = range.baseMipLevel; level < range.baseMipLevel + range.levelCount;
              ++level) {

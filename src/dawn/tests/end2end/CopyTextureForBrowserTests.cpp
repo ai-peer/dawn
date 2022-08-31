@@ -504,9 +504,9 @@ class CopyTextureForBrowserTests : public Parent {
 
         wgpu::TextureUsage srcUsage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
                                       wgpu::TextureUsage::TextureBinding;
-        wgpu::Texture srcTexture =
-            CreateAndInitTexture(srcSpec, srcUsage, srcCopyLayout, srcTextureArrayCopyData.data(),
-                                 srcTextureArrayCopyData.size() * sizeof(utils::RGBA8));
+        wgpu::Texture srcTexture = CreateAndInitTexture(
+            srcSpec, srcUsage, srcCopyLayout, srcTextureArrayCopyData.data(),
+            checked_cast<uint32_t>(srcTextureArrayCopyData.size() * sizeof(utils::RGBA8)));
 
         bool testSubRectCopy = srcSpec.copyOrigin.x > 0 || srcSpec.copyOrigin.y > 0 ||
                                dstSpec.copyOrigin.x > 0 || dstSpec.copyOrigin.y > 0 ||
@@ -534,7 +534,7 @@ class CopyTextureForBrowserTests : public Parent {
                 GetTextureData(dstCopyLayout, TextureCopyRole::DEST);
             dstTexture = CreateAndInitTexture(
                 dstSpec, dstUsage, dstCopyLayout, dstTextureArrayCopyData.data(),
-                dstTextureArrayCopyData.size() * sizeof(utils::RGBA8));
+                checked_cast<uint32_t>(dstTextureArrayCopyData.size() * sizeof(utils::RGBA8)));
         } else {
             dstTexture = CreateTexture(dstSpec, dstUsage);
         }
@@ -659,11 +659,13 @@ class CopyTextureForBrowser_Formats
             case wgpu::TextureFormat::BGRA8Unorm:
                 return CreateAndInitTexture(
                     srcSpec, srcUsage, srcCopyLayout, srcRGBA8UnormTextureArrayCopyData.data(),
-                    srcRGBA8UnormTextureArrayCopyData.size() * sizeof(utils::RGBA8));
+                    checked_cast<uint32_t>(srcRGBA8UnormTextureArrayCopyData.size() *
+                                           sizeof(utils::RGBA8)));
             case wgpu::TextureFormat::RGBA16Float:
                 return CreateAndInitTexture(
                     srcSpec, srcUsage, srcCopyLayout, srcRGBA16FloatTextureArrayCopyData.data(),
-                    srcRGBA16FloatTextureArrayCopyData.size() * sizeof(uint16_t));
+                    checked_cast<uint32_t>(srcRGBA16FloatTextureArrayCopyData.size() *
+                                           sizeof(uint16_t)));
             default:
                 UNREACHABLE();
         }
@@ -1034,7 +1036,7 @@ class CopyTextureForBrowser_ColorSpace
                                       wgpu::TextureUsage::TextureBinding;
         wgpu::Texture srcTexture = this->CreateAndInitTexture(
             srcTextureSpec, srcUsage, srcCopyLayout, sourceTextureData.data(),
-            sourceTextureData.size() * sizeof(utils::RGBA8));
+            checked_cast<uint32_t>(sourceTextureData.size() * sizeof(utils::RGBA8)));
 
         // Create dst texture.
         wgpu::Texture dstTexture = this->CreateTexture(

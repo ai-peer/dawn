@@ -62,7 +62,7 @@ TEST_P(PipelineLayoutTests, DynamicBuffersOverflow) {
     // Create a pipeline layout using both bind group layouts.
     wgpu::PipelineLayoutDescriptor descriptor;
     std::vector<wgpu::BindGroupLayout> bindgroupLayouts = {bglA, bglB};
-    descriptor.bindGroupLayoutCount = bindgroupLayouts.size();
+    descriptor.bindGroupLayoutCount = checked_cast<uint32_t>(bindgroupLayouts.size());
     descriptor.bindGroupLayouts = bindgroupLayouts.data();
     device.CreatePipelineLayout(&descriptor);
 }

@@ -190,9 +190,10 @@ void TransitionAndClearForSyncScope(Device* device,
     }
 
     if (bufferBarriers.size() || imageBarriers.size()) {
-        device->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
-                                      nullptr, bufferBarriers.size(), bufferBarriers.data(),
-                                      imageBarriers.size(), imageBarriers.data());
+        device->fn.CmdPipelineBarrier(
+            recordingContext->commandBuffer, srcStages, dstStages, 0, 0, nullptr,
+            checked_cast<uint32_t>(bufferBarriers.size()), bufferBarriers.data(),
+            checked_cast<uint32_t>(imageBarriers.size()), imageBarriers.data());
     }
 }
 
@@ -362,13 +363,18 @@ void ResetUsedQuerySetsOnRenderPass(Device* device,
 
         auto nextFalseIt = std::find(firstTrueIt, lastIt, false);
 
-        uint32_t queryIndex = std::distance(availability.begin(), firstTrueIt);
-        uint32_t queryCount = std::distance(firstTrueIt, nextFalseIt);
+        int32_t queryIndex =
+            checked_cast<int32_t>(std::distance(availability.begin(), firstTrueIt));
+        int32_t queryCount = checked_cast<int32_t>(std::distance(firstTrueIt, nextFalseIt));
+
+        ASSERT(queryIndex >= 0);
+        ASSERT(queryCount >= 0);
 
         // Reset the queries between firstTrueIt and nextFalseIt (which is at most
         // lastIt)
-        device->fn.CmdResetQueryPool(commands, ToBackend(querySet)->GetHandle(), queryIndex,
-                                     queryCount);
+        device->fn.CmdResetQueryPool(commands, ToBackend(querySet)->GetHandle(),
+                                     static_cast<uint32_t>(queryIndex),
+                                     static_cast<uint32_t>(queryCount));
 
         // Set current iterator to next false
         currentIt = nextFalseIt;
@@ -414,19 +420,25 @@ void RecordResolveQuerySetCmd(VkCommandBuffer commands,
         auto nextFalseIt = std::find(firstTrueIt, lastIt, false);
 
         // The query index of firstTrueIt where the resolving starts
-        uint32_t resolveQueryIndex = std::distance(availability.begin(), firstTrueIt);
+        int32_t resolveQueryIndex =
+            checked_cast<int32_t>(std::distance(availability.begin(), firstTrueIt));
         // The queries count between firstTrueIt and nextFalseIt need to be resolved
-        uint32_t resolveQueryCount = std::distance(firstTrueIt, nextFalseIt);
+        int32_t resolveQueryCount = checked_cast<int32_t>(std::distance(firstTrueIt, nextFalseIt));
+
+        ASSERT(resolveQueryIndex >= 0);
+        ASSERT(resolveQueryCount >= 0);
 
         // Calculate destinationOffset based on the current resolveQueryIndex and firstQuery
-        uint32_t resolveDestinationOffset =
-            destinationOffset + (resolveQueryIndex - firstQuery) * sizeof(uint64_t);
+        uint32_t resolveDestinationOffset = checked_cast<uint32_t>(
+            destinationOffset +
+            (static_cast<uint32_t>(resolveQueryIndex) - firstQuery) * sizeof(uint64_t));
 
         // Resolve the queries between firstTrueIt and nextFalseIt (which is at most lastIt)
-        device->fn.CmdCopyQueryPoolResults(commands, querySet->GetHandle(), resolveQueryIndex,
-                                           resolveQueryCount, destination->GetHandle(),
-                                           resolveDestinationOffset, sizeof(uint64_t),
-                                           VK_QUERY_RESULT_64_BIT | VK_QUERY_RESULT_WAIT_BIT);
+        device->fn.CmdCopyQueryPoolResults(
+            commands, querySet->GetHandle(), static_cast<uint32_t>(resolveQueryIndex),
+            static_cast<uint32_t>(resolveQueryCount), destination->GetHandle(),
+            resolveDestinationOffset, sizeof(uint64_t),
+            VK_QUERY_RESULT_64_BIT | VK_QUERY_RESULT_WAIT_BIT);
 
         // Set current iterator to next false
         currentIt = nextFalseIt;

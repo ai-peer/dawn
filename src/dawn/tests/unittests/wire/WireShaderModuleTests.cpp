@@ -14,6 +14,7 @@
 
 #include <memory>
 
+#include "dawn/common/Numeric.h"
 #include "dawn/tests/unittests/wire/WireTest.h"
 #include "dawn/wire/WireClient.h"
 
@@ -208,7 +209,7 @@ TEST_F(WireShaderModuleTests, GetCompilationInfoInsideCallbackBeforeDisconnect) 
 
     EXPECT_CALL(*mockCompilationInfoCallback,
                 Call(WGPUCompilationInfoRequestStatus_DeviceLost, nullptr, _))
-        .Times(1 + testData.numRequests);
+        .Times(checked_cast<uint32_t>(1 + testData.numRequests));
     GetWireClient()->Disconnect();
 }
 
@@ -235,7 +236,7 @@ TEST_F(WireShaderModuleTests, GetCompilationInfoInsideCallbackBeforeDestruction)
 
     EXPECT_CALL(*mockCompilationInfoCallback,
                 Call(WGPUCompilationInfoRequestStatus_Unknown, nullptr, _))
-        .Times(1 + testData.numRequests);
+        .Times(checked_cast<uint32_t>(1 + testData.numRequests));
     wgpuShaderModuleRelease(shaderModule);
 }
 

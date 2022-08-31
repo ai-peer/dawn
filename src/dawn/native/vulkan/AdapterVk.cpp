@@ -22,6 +22,7 @@
 #include "dawn/native/vulkan/DeviceVk.h"
 
 #include "dawn/common/GPUInfo.h"
+#include "dawn/common/Numeric.h"
 
 namespace dawn::native::vulkan {
 
@@ -199,10 +200,22 @@ MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
         limits->v1.webgpuName = vkLimits.vulkanName;                                 \
     } while (false)
 
+#define CHECK_AND_SET_V1_LIMIT_IMPL32(vulkanName, webgpuName, compareOp, msgSegment) \
+    do {                                                                             \
+        if (vkLimits.vulkanName compareOp baseLimits.v1.webgpuName) {                \
+            return DAWN_INTERNAL_ERROR("Insufficient Vulkan limits for " #webgpuName \
+                                       "."                                           \
+                                       " VkPhysicalDeviceLimits::" #vulkanName       \
+                                       " must be at " msgSegment " " +               \
+                                       std::to_string(baseLimits.v1.webgpuName));    \
+        }                                                                            \
+        limits->v1.webgpuName = checked_cast<uint32_t>(vkLimits.vulkanName);         \
+    } while (false)
+
 #define CHECK_AND_SET_V1_MAX_LIMIT(vulkanName, webgpuName) \
     CHECK_AND_SET_V1_LIMIT_IMPL(vulkanName, webgpuName, <, "least")
 #define CHECK_AND_SET_V1_MIN_LIMIT(vulkanName, webgpuName) \
-    CHECK_AND_SET_V1_LIMIT_IMPL(vulkanName, webgpuName, >, "most")
+    CHECK_AND_SET_V1_LIMIT_IMPL32(vulkanName, webgpuName, >, "most")
 
     CHECK_AND_SET_V1_MAX_LIMIT(maxImageDimension1D, maxTextureDimension1D);
 

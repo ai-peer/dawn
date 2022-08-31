@@ -260,8 +260,8 @@ fn main() {
             inputData.emplace_back((u32 >> 24) & 0xff);
         };
         auto AlignTo = [&inputData](uint32_t alignment, uint8_t code) {
-            uint32_t target = Align(inputData.size(), alignment);
-            uint32_t bytes = target - inputData.size();
+            uint32_t target = checked_cast<uint32_t>(Align(inputData.size(), alignment));
+            uint32_t bytes = checked_cast<uint32_t>(target - inputData.size());
             for (uint32_t i = 0; i < bytes; i++) {
                 inputData.emplace_back(code);
             }

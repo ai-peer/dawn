@@ -14,6 +14,7 @@
 
 #include <vector>
 
+#include "dawn/common/Numeric.h"
 #include "dawn/tests/MockCallback.h"
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 #include "dawn/utils/ComboRenderBundleEncoderDescriptor.h"
@@ -72,7 +73,7 @@ TEST_F(UnsafeAPIValidationTest, PipelineOverridableConstants) {
             utils::CreateShaderModule(device, "@compute @workgroup_size(1) fn main() {}");
         std::vector<wgpu::ConstantEntry> constants{{nullptr, "c", 1u}};
         pipelineDesc.compute.constants = constants.data();
-        pipelineDesc.compute.constantCount = constants.size();
+        pipelineDesc.compute.constantCount = checked_cast<uint32_t>(constants.size());
         ASSERT_DEVICE_ERROR(device.CreateComputePipeline(&pipelineDesc));
     }
 }
@@ -113,7 +114,7 @@ TEST_F(UnsafeQueryAPIValidationTest, PipelineStatisticsDisallowed) {
         std::vector<wgpu::PipelineStatisticName> pipelineStatistics = {
             wgpu::PipelineStatisticName::VertexShaderInvocations};
         descriptor.pipelineStatistics = pipelineStatistics.data();
-        descriptor.pipelineStatisticsCount = pipelineStatistics.size();
+        descriptor.pipelineStatisticsCount = checked_cast<uint32_t>(pipelineStatistics.size());
         ASSERT_DEVICE_ERROR(device.CreateQuerySet(&descriptor));
     }
 }

@@ -95,7 +95,7 @@ MaybeError ValidateBufferBinding(const DeviceBase* device,
                     "Binding range (offset: %u, size: %u) doesn't fit in the size (%u) of %s.",
                     entry.offset, bufferSize, bindingSize, entry.buffer);
 
-    DAWN_INVALID_IF(!IsAligned(entry.offset, requiredBindingAlignment),
+    DAWN_INVALID_IF(!IsAligned(checked_cast<uint32_t>(entry.offset), requiredBindingAlignment),
                     "Offset (%u) does not satisfy the minimum %s alignment (%u).", entry.offset,
                     bindingInfo.buffer.type, requiredBindingAlignment);
 

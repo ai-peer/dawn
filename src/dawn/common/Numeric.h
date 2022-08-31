@@ -43,10 +43,15 @@ inline constexpr uint32_t u32_sizeof = detail::u32_sizeof<T>();
 template <typename T>
 inline constexpr uint32_t u32_alignof = detail::u32_alignof<T>();
 
-// Only defined for unsigned integers because that is all that is
-// needed at the time of writing.
-template <typename Dst, typename Src, typename = std::enable_if_t<std::is_unsigned_v<Src>>>
-inline Dst checked_cast(const Src& value) {
+template <typename Dst, typename Src>
+inline typename std::enable_if_t<std::is_signed_v<Src>, Dst> checked_cast(const Src& value) {
+    ASSERT(value >= std::numeric_limits<Dst>::min());
+    ASSERT(value <= std::numeric_limits<Dst>::max());
+    return static_cast<Dst>(value);
+}
+
+template <typename Dst, typename Src>
+inline typename std::enable_if_t<std::is_unsigned_v<Src>, Dst> checked_cast(const Src& value) {
     ASSERT(value <= std::numeric_limits<Dst>::max());
     return static_cast<Dst>(value);
 }

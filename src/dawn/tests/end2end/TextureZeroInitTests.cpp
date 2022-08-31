@@ -2139,7 +2139,8 @@ TEST_P(CompressedTextureZeroInitTest, Copy2DArrayCompressedB2T2B) {
         }
     }
     // Check final contents
-    EXPECT_BUFFER_U8_RANGE_EQ(expected.data(), readbackBuffer, 0, expected.size());
+    EXPECT_BUFFER_U8_RANGE_EQ(expected.data(), readbackBuffer, 0,
+                              checked_cast<uint32_t>(expected.size()));
 }
 
 DAWN_INSTANTIATE_TEST(CompressedTextureZeroInitTest,

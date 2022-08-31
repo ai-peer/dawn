@@ -46,7 +46,7 @@ class BindGroupTests : public DawnTest {
         std::vector<wgpu::BindGroupLayout> bindingInitializer) const {
         wgpu::PipelineLayoutDescriptor descriptor;
 
-        descriptor.bindGroupLayoutCount = bindingInitializer.size();
+        descriptor.bindGroupLayoutCount = checked_cast<uint32_t>(bindingInitializer.size());
         descriptor.bindGroupLayouts = bindingInitializer.data();
 
         return device.CreatePipelineLayout(&descriptor);
@@ -680,7 +680,7 @@ TEST_P(BindGroupTests, SetDynamicBindGroupBeforePipeline) {
     pass.SetBindGroup(0, bindGroup, 1, &dynamicOffset);
 
     // Set the second dynamic bind group.
-    dynamicOffset = color1Offset;
+    dynamicOffset = checked_cast<uint32_t>(color1Offset);
     pass.SetBindGroup(1, bindGroup, 1, &dynamicOffset);
 
     // Set the pipeline and draw.
@@ -755,7 +755,7 @@ TEST_P(BindGroupTests, BindGroupsPersistAfterPipelineChange) {
 
     // Set the second bind group at a dynamic offset.
     // This bind group does not match the slot in the pipeline layout.
-    dynamicOffset = color1Offset;
+    dynamicOffset = checked_cast<uint32_t>(color1Offset);
     pass.SetBindGroup(1, bindGroup, 1, &dynamicOffset);
 
     // Set the second pipeline (uniform, uniform).
@@ -852,11 +852,11 @@ TEST_P(BindGroupTests, DrawThenChangePipelineAndBindGroup) {
     pass.SetBindGroup(0, uniformBindGroup, 1, &dynamicOffset);
 
     // Set the first bind group to color1 in the dynamic uniform buffer.
-    dynamicOffset = color1Offset;
+    dynamicOffset = checked_cast<uint32_t>(color1Offset);
     pass.SetBindGroup(1, uniformBindGroup, 1, &dynamicOffset);
 
     // Set the first bind group to color2 in the dynamic storage buffer.
-    dynamicOffset = color2Offset;
+    dynamicOffset = checked_cast<uint32_t>(color2Offset);
     pass.SetBindGroup(2, storageBindGroup, 1, &dynamicOffset);
 
     pass.Draw(3);
@@ -869,7 +869,7 @@ TEST_P(BindGroupTests, DrawThenChangePipelineAndBindGroup) {
     pass.SetPipeline(pipeline1);
 
     // Set the second bind group to color3 in the dynamic storage buffer.
-    dynamicOffset = color3Offset;
+    dynamicOffset = checked_cast<uint32_t>(color3Offset);
     pass.SetBindGroup(1, storageBindGroup, 1, &dynamicOffset);
 
     pass.Draw(3);
@@ -943,15 +943,15 @@ TEST_P(BindGroupTests, DrawThenChangePipelineTwiceAndBindGroup) {
     pass.SetPipeline(pipeline0);
 
     // Set the first bind group to color0 in the dynamic uniform buffer.
-    uint32_t dynamicOffset = color0Offset;
+    uint32_t dynamicOffset = checked_cast<uint32_t>(color0Offset);
     pass.SetBindGroup(0, uniformBindGroup, 1, &dynamicOffset);
 
     // Set the first bind group to color1 in the dynamic uniform buffer.
-    dynamicOffset = color1Offset;
+    dynamicOffset = checked_cast<uint32_t>(color1Offset);
     pass.SetBindGroup(1, uniformBindGroup, 1, &dynamicOffset);
 
     // Set the first bind group to color2 in the dynamic uniform buffer.
-    dynamicOffset = color2Offset;
+    dynamicOffset = checked_cast<uint32_t>(color2Offset);
     pass.SetBindGroup(2, uniformBindGroup, 1, &dynamicOffset);
 
     // This draw will internally apply bind groups for pipeline 0.
@@ -964,7 +964,7 @@ TEST_P(BindGroupTests, DrawThenChangePipelineTwiceAndBindGroup) {
     pass.SetPipeline(pipeline1);
 
     // Set the second bind group to color3 in the dynamic uniform buffer.
-    dynamicOffset = color3Offset;
+    dynamicOffset = checked_cast<uint32_t>(color3Offset);
     pass.SetBindGroup(2, uniformBindGroup, 1, &dynamicOffset);
 
     // Revert to pipeline 0

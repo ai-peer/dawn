@@ -311,9 +311,18 @@ find_package(PythonInterp 3 REQUIRED)
 function(common_compile_options TARGET)
   if (COMPILER_IS_LIKE_GNU)
     target_compile_options(${TARGET} PRIVATE
-      -fno-exceptions
-      -fno-rtti
+      $<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions>
+      $<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>
+
+      -Werror
     )
+
+    if (("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang") OR
+        ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang"))
+      target_compile_options(${TARGET} PRIVATE
+        -Wshorten-64-to-32
+      )
+    endif()
 
     if (${DAWN_ENABLE_MSAN})
       target_compile_options(${TARGET} PUBLIC -fsanitize=memory)
@@ -508,7 +517,6 @@ function(tint_default_compile_options TARGET)
 
   set(COMMON_GNU_OPTIONS
     -Wall
-    -Werror
     -Wextra
     -Wno-documentation-unknown-command
     -Wno-padded

@@ -571,7 +571,7 @@ uint32_t BindGroupLayoutBase::GetUnverifiedBufferCount() const {
 }
 
 uint32_t BindGroupLayoutBase::GetExternalTextureBindingCount() const {
-    return mExternalTextureBindingExpansionMap.size();
+    return checked_cast<uint32_t>(mExternalTextureBindingExpansionMap.size());
 }
 
 const BindingCounts& BindGroupLayoutBase::GetBindingCountInfo() const {
@@ -615,10 +615,10 @@ size_t BindGroupLayoutBase::GetBindingDataSize() const {
     // |---------buffer size array--------|
     // |-uint64_t[mUnverifiedBufferCount]-|
     size_t objectPointerStart = mBindingCounts.bufferCount * sizeof(BufferBindingData);
-    ASSERT(IsAligned(objectPointerStart, alignof(Ref<ObjectBase>)));
+    ASSERT(IsAligned(checked_cast<uint32_t>(objectPointerStart), alignof(Ref<ObjectBase>)));
     size_t bufferSizeArrayStart = Align(
         objectPointerStart + mBindingCounts.totalCount * sizeof(Ref<ObjectBase>), sizeof(uint64_t));
-    ASSERT(IsAligned(bufferSizeArrayStart, alignof(uint64_t)));
+    ASSERT(IsAligned(checked_cast<uint32_t>(bufferSizeArrayStart), alignof(uint64_t)));
     return bufferSizeArrayStart + mBindingCounts.unverifiedBufferCount * sizeof(uint64_t);
 }
 

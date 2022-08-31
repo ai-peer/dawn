@@ -15,6 +15,7 @@
 #include <vector>
 
 #include "dawn/common/Math.h"
+#include "dawn/common/Numeric.h"
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 #include "dawn/utils/TestUtils.h"
 #include "dawn/utils/TextureUtils.h"
@@ -106,9 +107,10 @@ TEST_F(QueueWriteTextureValidationTest, Success) {
         // Copy 4x4 block in the 4x4 mip.
         TestWriteTexture(dataSize, 0, 256, 4, destination, 2, {0, 0, 0}, {4, 4, 1});
         // Copy with a data offset
-        TestWriteTexture(dataSize, dataSize - 4, 256, 1, destination, 0, {0, 0, 0}, {1, 1, 1});
-        TestWriteTexture(dataSize, dataSize - 4, 256, wgpu::kCopyStrideUndefined, destination, 0,
+        TestWriteTexture(dataSize, checked_cast<uint32_t>(dataSize - 4), 256, 1, destination, 0,
                          {0, 0, 0}, {1, 1, 1});
+        TestWriteTexture(dataSize, checked_cast<uint32_t>(dataSize - 4), 256,
+                         wgpu::kCopyStrideUndefined, destination, 0, {0, 0, 0}, {1, 1, 1});
     }
 
     // Copies with a 256-byte aligned bytes per row but unaligned texture region
@@ -132,9 +134,10 @@ TEST_F(QueueWriteTextureValidationTest, Success) {
         TestWriteTexture(dataSize, 0, 0, wgpu::kCopyStrideUndefined, destination, 0, {0, 0, 0},
                          {0, 0, 0});
         // An empty copy touching the end of the data
-        TestWriteTexture(dataSize, dataSize, 0, 0, destination, 0, {0, 0, 0}, {0, 0, 1});
-        TestWriteTexture(dataSize, dataSize, 0, wgpu::kCopyStrideUndefined, destination, 0,
+        TestWriteTexture(dataSize, checked_cast<uint32_t>(dataSize), 0, 0, destination, 0,
                          {0, 0, 0}, {0, 0, 1});
+        TestWriteTexture(dataSize, checked_cast<uint32_t>(dataSize), 0, wgpu::kCopyStrideUndefined,
+                         destination, 0, {0, 0, 0}, {0, 0, 1});
         // An empty copy touching the side of the texture
         TestWriteTexture(dataSize, 0, 0, 0, destination, 0, {16, 16, 0}, {0, 0, 1});
         TestWriteTexture(dataSize, 0, 0, wgpu::kCopyStrideUndefined, destination, 0, {16, 16, 0},
@@ -173,8 +176,8 @@ TEST_F(QueueWriteTextureValidationTest, OutOfBoundsOnData) {
     // Not OOB on the data although bytes per row * height overflows
     // but utils::RequiredBytesInCopy * depth does not overflow
     {
-        uint32_t sourceDataSize =
-            utils::RequiredBytesInCopy(256, 0, {7, 3, 1}, wgpu::TextureFormat::RGBA8Unorm);
+        uint32_t sourceDataSize = checked_cast<uint32_t>(
+            utils::RequiredBytesInCopy(256, 0, {7, 3, 1}, wgpu::TextureFormat::RGBA8Unorm));
         ASSERT_TRUE(256 * 3 > sourceDataSize) << "bytes per row * height should overflow data";
 
         TestWriteTexture(sourceDataSize, 0, 256, 3, destination, 0, {0, 0, 0}, {7, 3, 1});
@@ -310,12 +313,14 @@ TEST_F(QueueWriteTextureValidationTest, DataOffset) {
                                                 wgpu::TextureUsage::CopyDst);
 
     // Offset aligned
-    TestWriteTexture(dataSize, dataSize - 4, 256, 1, destination, 0, {0, 0, 0}, {1, 1, 1});
+    TestWriteTexture(dataSize, checked_cast<uint32_t>(dataSize - 4), 256, 1, destination, 0,
+                     {0, 0, 0}, {1, 1, 1});
     // Offset not aligned
-    TestWriteTexture(dataSize, dataSize - 5, 256, 1, destination, 0, {0, 0, 0}, {1, 1, 1});
+    TestWriteTexture(dataSize, checked_cast<uint32_t>(dataSize - 5), 256, 1, destination, 0,
+                     {0, 0, 0}, {1, 1, 1});
     // Offset+size too large
-    ASSERT_DEVICE_ERROR(
-        TestWriteTexture(dataSize, dataSize - 3, 256, 1, destination, 0, {0, 0, 0}, {1, 1, 1}));
+    ASSERT_DEVICE_ERROR(TestWriteTexture(dataSize, checked_cast<uint32_t>(dataSize - 3), 256, 1,
+                                         destination, 0, {0, 0, 0}, {1, 1, 1}));
 }
 
 // Test multisampled textures can be used in WriteTexture.
@@ -397,8 +402,8 @@ TEST_F(QueueWriteTextureValidationTest, TextureWriteDataSizeLastRowComputation) 
 
     {
         for (wgpu::TextureFormat format : kFormats) {
-            uint32_t validDataSize =
-                utils::RequiredBytesInCopy(kBytesPerRow, 0, {kWidth, kHeight, 1}, format);
+            uint32_t validDataSize = checked_cast<uint32_t>(
+                utils::RequiredBytesInCopy(kBytesPerRow, 0, {kWidth, kHeight, 1}, format));
             wgpu::Texture destination =
                 Create2DTexture({kWidth, kHeight, 1}, 1, format, wgpu::TextureUsage::CopyDst);
 

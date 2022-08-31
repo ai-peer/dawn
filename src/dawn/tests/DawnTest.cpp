@@ -191,7 +191,7 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
         if (strncmp(argv[i], kVendorIdFilterArg, argLen) == 0) {
             const char* vendorIdFilter = argv[i] + argLen;
             if (vendorIdFilter[0] != '\0') {
-                mVendorIdFilter = strtoul(vendorIdFilter, nullptr, 16);
+                mVendorIdFilter = checked_cast<uint32_t>(strtoul(vendorIdFilter, nullptr, 16));
                 // Set filter flag if vendor id is non-zero.
                 mHasVendorIdFilter = mVendorIdFilter != 0;
             }
@@ -811,8 +811,8 @@ wgpu::SupportedLimits DawnTestBase::GetSupportedLimits() {
 bool DawnTestBase::SupportsFeatures(const std::vector<wgpu::FeatureName>& features) {
     ASSERT(mBackendAdapter);
     std::vector<wgpu::FeatureName> supportedFeatures;
-    uint32_t count =
-        dawn::native::GetProcs().adapterEnumerateFeatures(mBackendAdapter.Get(), nullptr);
+    uint32_t count = checked_cast<uint32_t>(
+        dawn::native::GetProcs().adapterEnumerateFeatures(mBackendAdapter.Get(), nullptr));
     supportedFeatures.resize(count);
     dawn::native::GetProcs().adapterEnumerateFeatures(
         mBackendAdapter.Get(), reinterpret_cast<WGPUFeatureName*>(&supportedFeatures[0]));
@@ -868,14 +868,14 @@ WGPUDevice DawnTestBase::CreateDeviceImpl(std::string isolationKey) {
     wgpu::DeviceDescriptor deviceDescriptor = {};
     deviceDescriptor.requiredLimits = &requiredLimits;
     deviceDescriptor.requiredFeatures = requiredFeatures.data();
-    deviceDescriptor.requiredFeaturesCount = requiredFeatures.size();
+    deviceDescriptor.requiredFeaturesCount = checked_cast<uint32_t>(requiredFeatures.size());
 
     wgpu::DawnTogglesDeviceDescriptor togglesDesc = {};
     deviceDescriptor.nextInChain = &togglesDesc;
     togglesDesc.forceEnabledToggles = forceEnabledToggles.data();
-    togglesDesc.forceEnabledTogglesCount = forceEnabledToggles.size();
+    togglesDesc.forceEnabledTogglesCount = checked_cast<uint32_t>(forceEnabledToggles.size());
     togglesDesc.forceDisabledToggles = forceDisabledToggles.data();
-    togglesDesc.forceDisabledTogglesCount = forceDisabledToggles.size();
+    togglesDesc.forceDisabledTogglesCount = checked_cast<uint32_t>(forceDisabledToggles.size());
 
     wgpu::DawnCacheDeviceDescriptor cacheDesc = {};
     togglesDesc.nextInChain = &cacheDesc;
@@ -1047,8 +1047,9 @@ std::ostringstream& DawnTestBase::AddTextureExpectationImpl(const char* file,
     }
 
     uint32_t rowsPerImage = extent.height;
-    uint32_t size = utils::RequiredBytesInCopy(bytesPerRow, rowsPerImage, extent.width,
-                                               extent.height, extent.depthOrArrayLayers, dataSize);
+    uint32_t size = checked_cast<uint32_t>(
+        utils::RequiredBytesInCopy(bytesPerRow, rowsPerImage, extent.width, extent.height,
+                                   extent.depthOrArrayLayers, dataSize));
 
     auto readback = ReserveReadback(Align(size, 4));
 
@@ -1450,8 +1451,8 @@ void DawnTestBase::ResolveExpectations() {
         std::vector<char> packedData;
         if (expectation.rowBytes != expectation.bytesPerRow) {
             DAWN_ASSERT(expectation.bytesPerRow > expectation.rowBytes);
-            uint32_t rowCount =
-                (expectation.size + expectation.bytesPerRow - 1) / expectation.bytesPerRow;
+            uint32_t rowCount = checked_cast<uint32_t>(
+                (expectation.size + expectation.bytesPerRow - 1) / expectation.bytesPerRow);
             uint32_t packedSize = rowCount * expectation.rowBytes;
             packedData.resize(packedSize);
             for (uint32_t r = 0; r < rowCount; ++r) {
@@ -1463,7 +1464,7 @@ void DawnTestBase::ResolveExpectations() {
             data = packedData.data();
             size = packedSize;
         } else {
-            size = expectation.size;
+            size = checked_cast<uint32_t>(expectation.size);
         }
 
         // Get the result for the expectation and add context to failures

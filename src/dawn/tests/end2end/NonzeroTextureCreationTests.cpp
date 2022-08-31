@@ -241,7 +241,8 @@ class NonzeroTextureCreationTests : public DawnTestWithParams<Params> {
                         d += bytesPerRow;
                     }
                 }
-                EXPECT_BUFFER_U8_RANGE_EQ(data.data(), bufferDst, 0, bufferSize);
+                EXPECT_BUFFER_U8_RANGE_EQ(data.data(), bufferDst, 0,
+                                          checked_cast<uint32_t>(bufferSize));
                 break;
             }
             default:

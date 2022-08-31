@@ -91,7 +91,7 @@ DawnPerfTestEnvironment::DawnPerfTestEnvironment(int argc, char** argv)
         if (strncmp(argv[i], kOverrideStepsArg, argLen) == 0) {
             const char* overrideSteps = argv[i] + argLen;
             if (overrideSteps[0] != '\0') {
-                mOverrideStepsToRun = strtoul(overrideSteps, nullptr, 0);
+                mOverrideStepsToRun = checked_cast<uint32_t>(strtoul(overrideSteps, nullptr, 0));
             }
             continue;
         }

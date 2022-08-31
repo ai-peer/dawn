@@ -118,7 +118,8 @@ class DepthStencilLoadOpTests : public DawnTestWithParams<DepthStencilLoadOpTest
                 std::vector<float> expectedDepth(mipSize * mipSize, kDepthValues[mipLevel]);
                 ExpectSampledDepthData(
                     texture, mipSize, mipSize, 0, mipLevel,
-                    new detail::ExpectEq<float>(expectedDepth.data(), expectedDepth.size(), 0.0001))
+                    new detail::ExpectEq<float>(
+                        expectedDepth.data(), checked_cast<uint32_t>(expectedDepth.size()), 0.0001))
                     << "sample depth mip " << mipLevel;
                 break;
             }

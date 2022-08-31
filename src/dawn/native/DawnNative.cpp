@@ -17,6 +17,7 @@
 #include <vector>
 
 #include "dawn/common/Log.h"
+#include "dawn/common/Numeric.h"
 #include "dawn/native/BindGroupLayout.h"
 #include "dawn/native/Buffer.h"
 #include "dawn/native/Device.h"
@@ -39,9 +40,11 @@ struct ComboDeprecatedDawnDeviceDescriptor : DeviceDescriptor {
         if (deviceDescriptor != nullptr) {
             desc->nextInChain = &mTogglesDesc;
             mTogglesDesc.forceEnabledToggles = deviceDescriptor->forceEnabledToggles.data();
-            mTogglesDesc.forceEnabledTogglesCount = deviceDescriptor->forceEnabledToggles.size();
+            mTogglesDesc.forceEnabledTogglesCount =
+                checked_cast<uint32_t>(deviceDescriptor->forceEnabledToggles.size());
             mTogglesDesc.forceDisabledToggles = deviceDescriptor->forceDisabledToggles.data();
-            mTogglesDesc.forceDisabledTogglesCount = deviceDescriptor->forceDisabledToggles.size();
+            mTogglesDesc.forceDisabledTogglesCount =
+                checked_cast<uint32_t>(deviceDescriptor->forceDisabledToggles.size());
 
             desc->requiredLimits =
                 reinterpret_cast<const RequiredLimits*>(deviceDescriptor->requiredLimits);
@@ -51,7 +54,7 @@ struct ComboDeprecatedDawnDeviceDescriptor : DeviceDescriptor {
                 mRequiredFeatures.push_back(featuresInfo.FeatureNameToAPIEnum(featureStr));
             }
             desc->requiredFeatures = mRequiredFeatures.data();
-            desc->requiredFeaturesCount = mRequiredFeatures.size();
+            desc->requiredFeaturesCount = checked_cast<uint32_t>(mRequiredFeatures.size());
         }
     }
 

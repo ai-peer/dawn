@@ -14,6 +14,7 @@
 
 #include <memory>
 
+#include "dawn/common/Numeric.h"
 #include "dawn/tests/unittests/wire/WireTest.h"
 #include "dawn/wire/WireClient.h"
 
@@ -135,7 +136,7 @@ TEST_F(WireQueueTests, OnSubmittedWorkDoneInsideCallbackBeforeDisconnect) {
     FlushClient();
 
     EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_DeviceLost, this))
-        .Times(1 + testData.numRequests);
+        .Times(checked_cast<uint32_t>(1 + testData.numRequests));
     GetWireClient()->Disconnect();
 }
 

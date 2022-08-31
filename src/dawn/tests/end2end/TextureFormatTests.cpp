@@ -190,7 +190,7 @@ class TextureFormatTest : public DawnTest {
                       detail::Expectation* customExpectation) {
         // The input data should contain an exact number of texels
         ASSERT(sampleDataSize % sampleFormatInfo.texelByteSize == 0);
-        uint32_t width = sampleDataSize / sampleFormatInfo.texelByteSize;
+        uint32_t width = checked_cast<uint32_t>(sampleDataSize / sampleFormatInfo.texelByteSize);
 
         // The input data must be a multiple of 4 byte in length for WriteBuffer
         ASSERT(sampleDataSize % 4 == 0);
@@ -263,9 +263,9 @@ class TextureFormatTest : public DawnTest {
             AddBufferExpectation(__FILE__, __LINE__, readbackBuffer, 0, expectedRenderDataSize,
                                  customExpectation);
         } else {
-            EXPECT_BUFFER_U32_RANGE_EQ(static_cast<const uint32_t*>(expectedRenderData),
-                                       readbackBuffer, 0,
-                                       expectedRenderDataSize / sizeof(uint32_t));
+            EXPECT_BUFFER_U32_RANGE_EQ(
+                static_cast<const uint32_t*>(expectedRenderData), readbackBuffer, 0,
+                checked_cast<uint32_t>(expectedRenderDataSize / sizeof(uint32_t)));
         }
     }
 
