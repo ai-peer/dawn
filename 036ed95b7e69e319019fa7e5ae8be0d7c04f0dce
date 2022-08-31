@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "974d63c3_2741c7f0",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T18:35:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17a56ee0_050805c6",
+      "range": {
+        "startLine": 515,
+        "startChar": 7,
+        "endLine": 515,
+        "endChar": 23
+      },
+      "revId": "036ed95b7e69e319019fa7e5ae8be0d7c04f0dce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "625f9300_1277d504",
@@ -61,6 +85,30 @@
       "writtenOn": "2022-08-31T17:37:15Z",
       "side": 1,
       "message": "`Multiply operator \u0027*\u0027 for the same type on the LHS and RHS`\n\nOr something.",
+      "range": {
+        "startLine": 233,
+        "startChar": 8,
+        "endLine": 233,
+        "endChar": 12
+      },
+      "revId": "036ed95b7e69e319019fa7e5ae8be0d7c04f0dce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d34aff4_014893ca",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T18:35:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "625f9300_1277d504",
       "range": {
         "startLine": 233,
         "startChar": 8,
@@ -94,6 +142,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7c220c4_6f5a2ace",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T18:35:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "579845f9_ab377971",
+      "range": {
+        "startLine": 242,
+        "startChar": 8,
+        "endLine": 242,
+        "endChar": 25
+      },
+      "revId": "036ed95b7e69e319019fa7e5ae8be0d7c04f0dce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c991531_06ae1c7d",
@@ -107,6 +179,30 @@
       "writtenOn": "2022-08-31T17:37:15Z",
       "side": 1,
       "message": "Please use https://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/utils/compiler_macros.h",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 6
+      },
+      "revId": "036ed95b7e69e319019fa7e5ae8be0d7c04f0dce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6541411e_36d41ead",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T18:35:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c991531_06ae1c7d",
       "range": {
         "startLine": 80,
         "startChar": 0,
