@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "954ce5c3_28db9e0c",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2958,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-31T13:23:29Z",
+      "side": 1,
+      "message": "I\u0027m not sure if these would ever get called, as I believe the `EXPR\u0026\u0026` overloads will have higher precedence. Could be wrong though.\nIf I\u0027m right, and this is building fine, they can be safely removed.",
+      "range": {
+        "startLine": 2944,
+        "startChar": 0,
+        "endLine": 2958,
+        "endChar": 0
+      },
+      "revId": "6aabd43e9822f836b19c1157cd4059f1dc78f91a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11f66cec_c96dbdc5",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-31T13:23:29Z",
+      "side": 1,
+      "message": "Not sure why you\u0027ve moved this validation out of validator to here?",
+      "range": {
+        "startLine": 456,
+        "startChar": 0,
+        "endLine": 461,
+        "endChar": 9
+      },
+      "revId": "6aabd43e9822f836b19c1157cd4059f1dc78f91a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
