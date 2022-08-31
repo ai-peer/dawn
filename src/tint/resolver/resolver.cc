@@ -1674,6 +1674,9 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
         if (stage == sem::EvaluationStage::kConstant) {
             auto const_args =
                 utils::Transform(args, [](auto* arg) { return arg->ConstantValue(); });
+            for (size_t i = 0; i < const_args.Length(); ++i) {
+                Convert(const_args[i], ctor_or_conv.target->Parameters()[i]->Type(), expr->source);
+            }
             if (auto r = (const_eval_.*ctor_or_conv.const_eval_fn)(
                     ctor_or_conv.target->ReturnType(), const_args, expr->source)) {
                 value = r.Get();
