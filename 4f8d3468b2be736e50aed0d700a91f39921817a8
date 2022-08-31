@@ -689,6 +689,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35233f7f_e8fc691e",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-31T18:14:35Z",
+      "side": 1,
+      "message": "I\u0027m not convinced that two additional characters per call makes things any harder to write/read. I\u0027d say there\u0027s a better chance that someone will understand what they\u0027re reading.",
+      "parentUuid": "0e9be0a2_2f0b5871",
+      "range": {
+        "startLine": 743,
+        "startChar": 5,
+        "endLine": 743,
+        "endChar": 6
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b2058829_c5ee4d38",
         "filename": "src/tint/resolver/resolver_test_helper.h",
         "patchSetId": 5
