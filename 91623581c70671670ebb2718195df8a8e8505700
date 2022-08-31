@@ -59,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e13f335a_4a8e87ee",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T21:30:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9646c1c7_1fe451f4",
+      "range": {
+        "startLine": 573,
+        "startChar": 38,
+        "endLine": 573,
+        "endChar": 42
+      },
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd8fee4b_26163673",
@@ -72,6 +96,30 @@
       "writtenOn": "2022-08-31T16:58:27Z",
       "side": 1,
       "message": "unit: perhaps, if we don\u0027t want the \"tint::inspector\" namespace to get exposed outside this function, we could return a wgpu::Extent3D here instead",
+      "range": {
+        "startLine": 848,
+        "startChar": 14,
+        "endLine": 848,
+        "endChar": 44
+      },
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5836a249_b4709c73",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T21:30:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd8fee4b_26163673",
       "range": {
         "startLine": 848,
         "startChar": 14,
@@ -105,6 +153,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49b12fe2_3af94d72",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T21:30:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0f2669b_445b906e",
+      "range": {
+        "startLine": 288,
+        "startChar": 25,
+        "endLine": 288,
+        "endChar": 42
+      },
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "634071b3_e579bf0e",
@@ -118,6 +190,24 @@
       "writtenOn": "2022-08-31T16:58:27Z",
       "side": 1,
       "message": "unit: add a static assert about the offset. sizeof unfortunately probably shouldn\u0027t be done since the sizeof std::unordered_map depends on the platform",
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e720a95e_938f4974",
+        "filename": "src/dawn/native/StreamImplTint.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T21:30:14Z",
+      "side": 1,
+      "message": "Like this?\nstatic_assert(offsetof(tint::transform::SubstituteOverride::Config, map) \u003d\u003d 0,\n...);\nThat didn\u0027t pass and Config is an inheirtance of Castable. I don\u0027t see a static assert for VertexPulling::Config",
+      "parentUuid": "634071b3_e579bf0e",
       "revId": "91623581c70671670ebb2718195df8a8e8505700",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -139,6 +229,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec2f6753_3b1849d5",
+        "filename": "src/dawn/native/StreamImplTint.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T21:30:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6a1493f_f23e7ac4",
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6c69939_f7cfeeee",
@@ -152,6 +260,30 @@
       "writtenOn": "2022-08-31T16:58:27Z",
       "side": 1,
       "message": "unit: here and the rest, perhaps put it next to the substituteOverrideConfig",
+      "range": {
+        "startLine": 99,
+        "startChar": 5,
+        "endLine": 103,
+        "endChar": 47
+      },
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6770be13_7fe30460",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T21:30:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6c69939_f7cfeeee",
       "range": {
         "startLine": 99,
         "startChar": 5,
@@ -187,6 +319,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33cd30c4_a48e4d08",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T21:30:14Z",
+      "side": 1,
+      "message": "sorry didn\u0027t get this. Do you think it\u0027s better to change to a regular variable name like `tint::inspector::WorkgroupSize workgroupSize;`?",
+      "parentUuid": "b0f0d8af_89a61888",
+      "range": {
+        "startLine": 376,
+        "startChar": 39,
+        "endLine": 376,
+        "endChar": 40
+      },
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18521f67_53cecfaa",
         "filename": "src/dawn/tests/end2end/ShaderValidationTests.cpp",
         "patchSetId": 26
@@ -198,6 +354,24 @@
       "writtenOn": "2022-08-31T16:58:27Z",
       "side": 1,
       "message": "if const work in tint is already done, we should have something where we have an override x, and a const value y \u003d x + 1, and then pass y to @workgroup_size\n\nand the const eval should propagate it (I think)",
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "470d969e_3368491f",
+        "filename": "src/dawn/tests/end2end/ShaderValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T21:30:14Z",
+      "side": 1,
+      "message": "Turns out override x:u32; const y: u32 \u003d x + 1u; will fail at tint shader creation before substitute override transform. (\u0027const\u0027 initializer must be constant expression)",
+      "parentUuid": "18521f67_53cecfaa",
       "revId": "91623581c70671670ebb2718195df8a8e8505700",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -215,6 +389,30 @@
       "writtenOn": "2022-08-31T16:58:27Z",
       "side": 1,
       "message": "should we use a value that is not 1? since 1 is the default",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 0
+      },
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5f72392_5bd80b5d",
+        "filename": "src/dawn/tests/end2end/ShaderValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T21:30:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d719bb84_3b08b029",
       "range": {
         "startLine": 113,
         "startChar": 0,
@@ -248,6 +446,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "669a1dfb_39aa65aa",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T21:30:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1a5cac0_8b432367",
+      "range": {
+        "startLine": 573,
+        "startChar": 15,
+        "endLine": 573,
+        "endChar": 28
+      },
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6e474cd_62b8a6dc",
@@ -261,6 +483,24 @@
       "writtenOn": "2022-08-31T16:58:27Z",
       "side": 1,
       "message": "should check that they are not overridable_const and return std::nullopt if they are.\n\nIn Dawn, after running SubstituteOverrides, we can ASSERT it is not nullopt",
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeaae33c_704c9e00",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T21:30:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6e474cd_62b8a6dc",
       "revId": "91623581c70671670ebb2718195df8a8e8505700",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
