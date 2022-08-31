@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17a56ee0_050805c6",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T17:39:49Z",
+      "side": 1,
+      "message": "Okay. It looked like you had gone to some length to keep most the implementation private, with very little in the `ConstEval` class, but yeah, this sounds good to me.",
+      "parentUuid": "6defdc38_f2c5cd71",
+      "range": {
+        "startLine": 515,
+        "startChar": 7,
+        "endLine": 515,
+        "endChar": 23
+      },
+      "revId": "036ed95b7e69e319019fa7e5ae8be0d7c04f0dce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "625f9300_1277d504",
         "filename": "src/tint/resolver/const_eval.h",
         "patchSetId": 11
