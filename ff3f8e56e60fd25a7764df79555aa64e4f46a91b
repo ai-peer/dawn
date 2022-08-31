@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7eaf0b9_67e72de9",
+        "filename": "src/tint/sem/matrix.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-31T05:11:24Z",
+      "side": 1,
+      "message": "Changed it back. I am not sure what if we compare types from two different program (will this happen?)",
+      "parentUuid": "dc0edc7c_b510f9bb",
+      "range": {
+        "startLine": 47,
+        "startChar": 32,
+        "endLine": 47,
+        "endChar": 38
+      },
+      "revId": "ff3f8e56e60fd25a7764df79555aa64e4f46a91b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "caacf62b_7807959d",
         "filename": "src/tint/sem/vector.cc",
         "patchSetId": 6
@@ -54,6 +78,30 @@
       "writtenOn": "2022-08-30T12:46:57Z",
       "side": 1,
       "message": "Same",
+      "range": {
+        "startLine": 39,
+        "startChar": 51,
+        "endLine": 39,
+        "endChar": 57
+      },
+      "revId": "ff3f8e56e60fd25a7764df79555aa64e4f46a91b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf32efc9_3748e6bb",
+        "filename": "src/tint/sem/vector.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-31T05:11:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "caacf62b_7807959d",
       "range": {
         "startLine": 39,
         "startChar": 51,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27245285_9ec9da00",
+        "filename": "src/tint/transform/vectorize_matrix_conversions_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-31T05:11:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4e3fc2c_ff139837",
+      "range": {
+        "startLine": 297,
+        "startChar": 0,
+        "endLine": 297,
+        "endChar": 24
+      },
+      "revId": "ff3f8e56e60fd25a7764df79555aa64e4f46a91b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a4cb669_d54518a9",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-08-30T12:46:57Z",
       "side": 1,
       "message": "`res_mat \u003d\u003d val_mat`",
+      "range": {
+        "startLine": 1386,
+        "startChar": 31,
+        "endLine": 1386,
+        "endChar": 56
+      },
+      "revId": "ff3f8e56e60fd25a7764df79555aa64e4f46a91b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b876b451_13e86a2c",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1386,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-31T05:11:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a4cb669_d54518a9",
       "range": {
         "startLine": 1386,
         "startChar": 31,
@@ -133,6 +229,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5764f8fd_b15bbf10",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1650,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-31T05:11:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5397d704_2edabec3",
+      "range": {
+        "startLine": 1650,
+        "startChar": 12,
+        "endLine": 1650,
+        "endChar": 37
+      },
+      "revId": "ff3f8e56e60fd25a7764df79555aa64e4f46a91b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76b286c8_c17be5db",
@@ -146,6 +266,30 @@
       "writtenOn": "2022-08-30T12:46:57Z",
       "side": 1,
       "message": "As all your matrix scalars come from literals (constants), we\u0027re not really seeing the transform do its thing here. Might be better to hoist the literals to `var` or `let`s so the constant folding doesn\u0027t take effect.",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 21,
+        "endChar": 61
+      },
+      "revId": "ff3f8e56e60fd25a7764df79555aa64e4f46a91b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84fb12c9_d5479f48",
+        "filename": "test/tint/expressions/type_conv/mat2x2/literal/f16-f32.wgsl.expected.spvasm",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-31T05:11:24Z",
+      "side": 1,
+      "message": "Yes, `type_conv/[types]/literal/*` tests use literal sources (may check the constant folding on this conversion), while `type_conv/[types]/var/*` tests use a variable as input (which will result in explicit conversion in output code) and `type_conv/[types]/function/*` tests use a function call with side effect as input \u003d(which may test the side-effect issue).",
+      "parentUuid": "76b286c8_c17be5db",
       "range": {
         "startLine": 19,
         "startChar": 4,
