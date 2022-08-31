@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d89f964_619442c7",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-31T19:23:33Z",
+      "side": 1,
+      "message": "ohhh, good catch.",
+      "parentUuid": "5e5262df_f4c54293",
+      "revId": "c07a777d6eeb6af47f42230b2fb1f781604372a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4e6979b5_8843daaf",
         "filename": "src/tint/utils/hashmap_test.cc",
         "patchSetId": 2
