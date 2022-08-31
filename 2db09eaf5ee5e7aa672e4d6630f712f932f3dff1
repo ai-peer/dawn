@@ -81,6 +81,30 @@
       },
       "revId": "2db09eaf5ee5e7aa672e4d6630f712f932f3dff1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "753533f7_58000384",
+        "filename": "src/tint/inspector/inspector.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-08-31T23:13:29Z",
+      "side": 1,
+      "message": "What about adding a way to look up entrypoints by string instead of a specialized method just for workgroup_size?",
+      "parentUuid": "c57afdb5_791e217c",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 0
+      },
+      "revId": "2db09eaf5ee5e7aa672e4d6630f712f932f3dff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
