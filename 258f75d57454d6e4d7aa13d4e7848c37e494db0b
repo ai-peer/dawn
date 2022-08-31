@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a43aa15a_4ba7a6a3",
+        "filename": "include/dawn/native/D3D12Backend.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-08-31T21:28:41Z",
+      "side": 1,
+      "message": "Just tried to implement this, and ran into an unexpected problem: the fences imported into Dawn are passed as unowned handles so Dawn duplicates the handles, and it will return these duplicated handles back to Chrome, but that means any fence caching we implement in Chrome will be broken because the duplicated handles are unique, whereas if we return the device\u0027s fence we will often get a cache hit because the same handle will be returned on every EndAccess.\n\nThis also makes the tests more verbose because we need to duplicate the fence handles after every EndAccess since they aren\u0027t long lived like the device fences were.\n\nI\u0027ve kept the single fence export for now with a fix for this case by calling NextSerial() and added a no-use import case in the concurrent access test.",
+      "parentUuid": "9753604a_1d925d70",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a380fcaf_ac310eda",
         "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 7
