@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3df6595e_8147d82c",
+        "filename": "src/tint/transform/vectorize_matrix_conversions.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-31T14:17:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bceec57_34d31847",
+      "range": {
+        "startLine": 93,
+        "startChar": 20,
+        "endLine": 95,
+        "endChar": 94
+      },
+      "revId": "0e87bfa40790eabc26017ee4c568027e3abd0efe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02e77c2c_a566a3d0",
@@ -88,6 +112,30 @@
       "writtenOn": "2022-08-31T12:50:13Z",
       "side": 1,
       "message": "You can use `ctx.dst-\u003eFriendlyName(scalar_type)`",
+      "range": {
+        "startLine": 110,
+        "startChar": 20,
+        "endLine": 120,
+        "endChar": 22
+      },
+      "revId": "0e87bfa40790eabc26017ee4c568027e3abd0efe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d44fabec_3533952c",
+        "filename": "src/tint/transform/vectorize_matrix_conversions.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-31T14:17:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02e77c2c_a566a3d0",
       "range": {
         "startLine": 110,
         "startChar": 20,
@@ -123,6 +171,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ea28978_60c291cb",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1578,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-31T14:17:52Z",
+      "side": 1,
+      "message": "Changed it back. Actually I use it just because I found the `sem::Type` class explicitly implement such a `Equals` method that look different from comparing the pointer...\n\nBy the way, shall we change the whole condition expression to `from_type-\u003eIsAnyOf\u003csem::Bool, sem::U32, sem::I32, sem::F32, sem::F16, sem::Vector\u003e() \u0026\u0026 (from_type \u003d\u003d to_type)`?",
+      "parentUuid": "83090762_4859cbac",
+      "range": {
+        "startLine": 1578,
+        "startChar": 58,
+        "endLine": 1578,
+        "endChar": 66
+      },
+      "revId": "0e87bfa40790eabc26017ee4c568027e3abd0efe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "396700af_f48f7a9f",
         "filename": "src/tint/writer/spirv/builder.cc",
         "patchSetId": 7
@@ -134,6 +206,24 @@
       "writtenOn": "2022-08-31T13:48:22Z",
       "side": 1,
       "message": "nit: I suggest adding a comment here saying that OpFConvert requires the scalar component types to be different.   So the case of from_type and to_type being the same floating point vector type must already have been handled.  It is already handled in the previous else-if clause.",
+      "revId": "0e87bfa40790eabc26017ee4c568027e3abd0efe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "974aae4d_dddb9c29",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1582,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-08-31T14:17:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "396700af_f48f7a9f",
       "revId": "0e87bfa40790eabc26017ee4c568027e3abd0efe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
