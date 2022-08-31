@@ -166,6 +166,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ef4a2ac_5f98fc85",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3255,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T12:09:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6fad378_7523d932",
+      "range": {
+        "startLine": 3255,
+        "startChar": 12,
+        "endLine": 3255,
+        "endChar": 17
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35579e5c_2092d761",
@@ -581,6 +605,30 @@
       "side": 1,
       "message": "It is quite cryptic to have single letter functions like this declared in a header somewhere. Someone reading a test will struggle to identify what they are, especially given the templatey-ness of all of this. How about `Val`, `Vec`, `Mat`?",
       "parentUuid": "5c52989d_1ba6a173",
+      "range": {
+        "startLine": 743,
+        "startChar": 5,
+        "endLine": 743,
+        "endChar": 6
+      },
+      "revId": "4f8d3468b2be736e50aed0d700a91f39921817a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e9be0a2_2f0b5871",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T12:09:55Z",
+      "side": 1,
+      "message": "In general I agree, but these are in the `builder` namespace, and are only used for resolver unit tests. I would rather keep the single letter names to make the tests easier to write/read. Is that acceptable?",
+      "parentUuid": "e3ae6192_25cedb62",
       "range": {
         "startLine": 743,
         "startChar": 5,
