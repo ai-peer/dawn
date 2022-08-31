@@ -72,6 +72,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "096c22ff_ae1dde9b",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 7
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T13:32:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e43f296e_80de336b",
+      "range": {
+        "startLine": 907,
+        "startChar": 8,
+        "endLine": 907,
+        "endChar": 12
+      },
+      "revId": "4806c476765c6977e8e3a2a353a6e2f499dbdd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67fc473b_701d023a",
@@ -321,6 +345,30 @@
       "side": 1,
       "message": "https://bugs.chromium.org/p/tint/issues/detail?id\u003d1661",
       "parentUuid": "12e7360e_8ec75af9",
+      "range": {
+        "startLine": 1031,
+        "startChar": 8,
+        "endLine": 1031,
+        "endChar": 45
+      },
+      "revId": "4806c476765c6977e8e3a2a353a6e2f499dbdd9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e58650e_0135cc74",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-08-31T13:32:59Z",
+      "side": 1,
+      "message": "Thanks.",
+      "parentUuid": "8eb76da9_ee9da859",
       "range": {
         "startLine": 1031,
         "startChar": 8,
