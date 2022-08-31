@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4856104_2a248f21",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-31T19:24:57Z",
+      "side": 1,
+      "message": "Played around with the various options in this case, and I think I\u0027m happy with this behavior. Documented it. Added tests.",
+      "parentUuid": "6d89f964_619442c7",
+      "revId": "c07a777d6eeb6af47f42230b2fb1f781604372a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e6979b5_8843daaf",
@@ -49,6 +67,24 @@
       "writtenOn": "2022-08-31T19:02:04Z",
       "side": 1,
       "message": "Ie, if I did:\n\n```\nEXPECT_EQ(map.GetOrCreate(4,\n   [\u0026] {\n      map.Add(4, \"nine\");\n      return \"four\";\n   }), \"nine\");\n```",
+      "revId": "c07a777d6eeb6af47f42230b2fb1f781604372a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f9cf13a_55d566b2",
+        "filename": "src/tint/utils/hashmap_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-31T19:24:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4e6979b5_8843daaf",
       "revId": "c07a777d6eeb6af47f42230b2fb1f781604372a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
