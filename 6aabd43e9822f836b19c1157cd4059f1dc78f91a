@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "594fff92_1edb4db1",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2958,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-31T13:29:47Z",
+      "side": 1,
+      "message": "They do get called as we pass an actual `OverrideId` into `Id` in some of the transforms (like single_entry_point) and if we don\u0027t have this override then compile fails as you can\u0027t call expression with an OverrideId, you need the `value`.",
+      "parentUuid": "954ce5c3_28db9e0c",
+      "range": {
+        "startLine": 2944,
+        "startChar": 0,
+        "endLine": 2958,
+        "endChar": 0
+      },
+      "revId": "6aabd43e9822f836b19c1157cd4059f1dc78f91a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11f66cec_c96dbdc5",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-31T13:23:29Z",
       "side": 1,
       "message": "Not sure why you\u0027ve moved this validation out of validator to here?",
+      "range": {
+        "startLine": 456,
+        "startChar": 0,
+        "endLine": 461,
+        "endChar": 9
+      },
+      "revId": "6aabd43e9822f836b19c1157cd4059f1dc78f91a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6d1d31f_21a4ea7c",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-08-31T13:29:47Z",
+      "side": 1,
+      "message": "Because by the time we get here we\u0027ve already evaluated `value` and have stored it into a `OverrideId` which stores a `uint16_t`. Comparing a `uint16_t` to the max `uint16_t` is a compile erorr as it\u0027s impossible to fail.\n\nI had to move this into the resolver to the point where we do the evaluation.",
+      "parentUuid": "11f66cec_c96dbdc5",
       "range": {
         "startLine": 456,
         "startChar": 0,
