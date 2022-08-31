@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "966777e2_88070199",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-08-31T22:55:30Z",
+      "side": 1,
+      "message": "[1]: Ah found the issue. the ShaderModuleVk cacheKey needs update",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
