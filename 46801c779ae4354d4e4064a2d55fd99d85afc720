@@ -1,6 +1,57 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cbdd7a9_27b4605c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T23:07:37Z",
+      "side": 1,
+      "message": "LGTM, couple more comments and of course the ShaderModuleVk cache fix",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc0b4d1b_b86395a1",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T23:07:37Z",
+      "side": 1,
+      "message": "hash constantCount and constants as well",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f9ef34d_9b971813",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T23:07:37Z",
+      "side": 1,
+      "message": "test for this can go in dawn/tests/end2end/ObjectCachingTests.cpp",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "966777e2_88070199",
@@ -14,6 +65,47 @@
       "writtenOn": "2022-08-31T22:55:30Z",
       "side": 1,
       "message": "[1]: Ah found the issue. the ShaderModuleVk cacheKey needs update",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f4bc737_57035c4a",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T23:07:37Z",
+      "side": 1,
+      "message": "nice find!",
+      "parentUuid": "966777e2_88070199",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95da59c0_82681581",
+        "filename": "src/dawn/tests/end2end/ShaderValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T23:07:37Z",
+      "side": 1,
+      "message": "unit: 2022",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
       "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

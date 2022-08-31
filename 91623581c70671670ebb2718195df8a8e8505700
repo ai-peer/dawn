@@ -230,6 +230,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9f5d001_56ac18f0",
+        "filename": "src/dawn/native/StreamImplTint.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T23:07:37Z",
+      "side": 1,
+      "message": "oh.. yea won\u0027t work since it inherits Castable :(",
+      "parentUuid": "e720a95e_938f4974",
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6a1493f_f23e7ac4",
@@ -349,6 +367,30 @@
       "side": 1,
       "message": "sorry didn\u0027t get this. Do you think it\u0027s better to change to a regular variable name like `tint::inspector::WorkgroupSize workgroupSize;`?",
       "parentUuid": "b0f0d8af_89a61888",
+      "range": {
+        "startLine": 376,
+        "startChar": 39,
+        "endLine": 376,
+        "endChar": 40
+      },
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "486ac7de_df5b2c15",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T23:07:37Z",
+      "side": 1,
+      "message": "nah, I just think it\u0027s cool syntax because we don\u0027t really care about it.",
+      "parentUuid": "33cd30c4_a48e4d08",
       "range": {
         "startLine": 376,
         "startChar": 39,
@@ -519,6 +561,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "b6e474cd_62b8a6dc",
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b2f2494_92a780be",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T23:07:37Z",
+      "side": 1,
+      "message": "still don\u0027t see checking overridable_const and returning nullopt?",
+      "parentUuid": "aeaae33c_704c9e00",
       "revId": "91623581c70671670ebb2718195df8a8e8505700",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
