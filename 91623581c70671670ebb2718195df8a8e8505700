@@ -16,6 +16,253 @@
       "message": "There\u0027s still one flaky failure on the new test WorkgroupSizeValidationTest.OverridesWithValidDefault I haven\u0027t figured out why (The validation is called in backend code but is essentially backend agnostic. so it shouldn\u0027t be. Shader Cache?)\nBut send out for review first.",
       "revId": "91623581c70671670ebb2718195df8a8e8505700",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edb2f467_c0c89e99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T16:58:27Z",
+      "side": 1,
+      "message": "I\u0027m not sure - able to reproduce locally?\n\notherwise I might try updating DawnTest.cpp to set dump_shaders and see what the spirv looks like. If it\u0027s not generating a validation error, it should be generating spirv with some values for the workgroup size",
+      "parentUuid": "4f848af8_b985371a",
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9646c1c7_1fe451f4",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T16:58:27Z",
+      "side": 1,
+      "message": "what happened to `entryPoint.num_workgroups_used` ?",
+      "range": {
+        "startLine": 573,
+        "startChar": 38,
+        "endLine": 573,
+        "endChar": 42
+      },
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd8fee4b_26163673",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T16:58:27Z",
+      "side": 1,
+      "message": "unit: perhaps, if we don\u0027t want the \"tint::inspector\" namespace to get exposed outside this function, we could return a wgpu::Extent3D here instead",
+      "range": {
+        "startLine": 848,
+        "startChar": 14,
+        "endLine": 848,
+        "endChar": 44
+      },
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0f2669b_445b906e",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T16:58:27Z",
+      "side": 1,
+      "message": "do we still need the name \"raw\" now that there isn\u0027t another getter elsewhere for it?",
+      "range": {
+        "startLine": 288,
+        "startChar": 25,
+        "endLine": 288,
+        "endChar": 42
+      },
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "634071b3_e579bf0e",
+        "filename": "src/dawn/native/StreamImplTint.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T16:58:27Z",
+      "side": 1,
+      "message": "unit: add a static assert about the offset. sizeof unfortunately probably shouldn\u0027t be done since the sizeof std::unordered_map depends on the platform",
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6a1493f_f23e7ac4",
+        "filename": "src/dawn/native/StreamImplTint.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T16:58:27Z",
+      "side": 1,
+      "message": "unit: add a static assert that it\u0027s located at offset 0 and about the sizeof tint::OverrideId",
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c69939_f7cfeeee",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T16:58:27Z",
+      "side": 1,
+      "message": "unit: here and the rest, perhaps put it next to the substituteOverrideConfig",
+      "range": {
+        "startLine": 99,
+        "startChar": 5,
+        "endLine": 103,
+        "endChar": 47
+      },
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0f0d8af_89a61888",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T16:58:27Z",
+      "side": 1,
+      "message": "nifty",
+      "range": {
+        "startLine": 376,
+        "startChar": 39,
+        "endLine": 376,
+        "endChar": 40
+      },
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18521f67_53cecfaa",
+        "filename": "src/dawn/tests/end2end/ShaderValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T16:58:27Z",
+      "side": 1,
+      "message": "if const work in tint is already done, we should have something where we have an override x, and a const value y \u003d x + 1, and then pass y to @workgroup_size\n\nand the const eval should propagate it (I think)",
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d719bb84_3b08b029",
+        "filename": "src/dawn/tests/end2end/ShaderValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T16:58:27Z",
+      "side": 1,
+      "message": "should we use a value that is not 1? since 1 is the default",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 0
+      },
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1a5cac0_8b432367",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T16:58:27Z",
+      "side": 1,
+      "message": "probably, prefer std::optional instead of default initializing to be more explicit",
+      "range": {
+        "startLine": 573,
+        "startChar": 15,
+        "endLine": 573,
+        "endChar": 28
+      },
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6e474cd_62b8a6dc",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-08-31T16:58:27Z",
+      "side": 1,
+      "message": "should check that they are not overridable_const and return std::nullopt if they are.\n\nIn Dawn, after running SubstituteOverrides, we can ASSERT it is not nullopt",
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
