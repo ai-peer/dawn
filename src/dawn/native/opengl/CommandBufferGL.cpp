@@ -188,11 +188,13 @@ class VertexStateBufferBindingTracker {
                 gl.BindBuffer(GL_ARRAY_BUFFER, buffer);
                 if (VertexFormatIsInt(attribute.format)) {
                     gl.VertexAttribIPointer(
-                        attribIndex, components, formatType, vertexBuffer.arrayStride,
+                        attribIndex, components, formatType,
+                        checked_cast<uint32_t>(vertexBuffer.arrayStride),
                         reinterpret_cast<void*>(static_cast<intptr_t>(offset + attribute.offset)));
                 } else {
                     gl.VertexAttribPointer(
-                        attribIndex, components, formatType, normalized, vertexBuffer.arrayStride,
+                        attribIndex, components, formatType, normalized,
+                        checked_cast<uint32_t>(vertexBuffer.arrayStride),
                         reinterpret_cast<void*>(static_cast<intptr_t>(offset + attribute.offset)));
                 }
             }
@@ -261,7 +263,7 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                     BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
                     GLuint buffer = ToBackend(binding.buffer)->GetHandle();
                     GLuint index = indices[bindingIndex];
-                    GLuint offset = binding.offset;
+                    GLuint offset = checked_cast<uint32_t>(binding.offset);
 
                     if (bindingInfo.buffer.hasDynamicOffset) {
                         offset += dynamicOffsets[currentDynamicOffsetIndex];
@@ -1109,7 +1111,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass) {
 
                 indexBufferBaseOffset = cmd->offset;
                 indexBufferFormat = IndexFormatType(cmd->format);
-                indexFormatSize = IndexFormatSize(cmd->format);
+                indexFormatSize = checked_cast<uint32_t>(IndexFormatSize(cmd->format));
                 vertexStateBufferBindingTracker.OnSetIndexBuffer(cmd->buffer.Get());
                 break;
             }
@@ -1266,12 +1268,13 @@ void DoTexSubImage(const OpenGLFunctions& gl,
             if (texture->GetArrayLayers() == 1 &&
                 texture->GetDimension() == wgpu::TextureDimension::e2D) {
                 gl.CompressedTexSubImage2D(target, destination.mipLevel, x, y, width, height,
-                                           format.internalFormat, imageSize, data);
+                                           format.internalFormat, checked_cast<uint32_t>(imageSize),
+                                           data);
             } else {
                 gl.PixelStorei(GL_UNPACK_IMAGE_HEIGHT, dataLayout.rowsPerImage * blockInfo.height);
                 gl.CompressedTexSubImage3D(target, destination.mipLevel, x, y, z, width, height,
                                            copySize.depthOrArrayLayers, format.internalFormat,
-                                           imageSize, data);
+                                           checked_cast<uint32_t>(imageSize), data);
                 gl.PixelStorei(GL_UNPACK_IMAGE_HEIGHT, 0);
             }
 
@@ -1288,7 +1291,8 @@ void DoTexSubImage(const OpenGLFunctions& gl,
                 for (; y < destination.origin.y + copySize.height; y += blockInfo.height) {
                     uint32_t height = std::min(blockInfo.height, virtSize.height - y);
                     gl.CompressedTexSubImage2D(target, destination.mipLevel, x, y, width, height,
-                                               format.internalFormat, rowSize, d);
+                                               format.internalFormat,
+                                               checked_cast<uint32_t>(rowSize), d);
                     d += dataLayout.bytesPerRow;
                 }
             } else {
@@ -1301,7 +1305,8 @@ void DoTexSubImage(const OpenGLFunctions& gl,
                          y += blockInfo.height) {
                         uint32_t height = std::min(blockInfo.height, virtSize.height - y);
                         gl.CompressedTexSubImage3D(target, destination.mipLevel, x, y, z, width,
-                                                   height, 1, format.internalFormat, rowSize, d);
+                                                   height, 1, format.internalFormat,
+                                                   checked_cast<uint32_t>(rowSize), d);
                         d += dataLayout.bytesPerRow;
                     }
 

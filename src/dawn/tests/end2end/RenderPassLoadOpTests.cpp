@@ -134,7 +134,7 @@ class RenderPassLoadOpTests : public DawnTest {
         queue.Submit(1, &commandBuffer);
 
         EXPECT_BUFFER_U8_RANGE_EQ(reinterpret_cast<const uint8_t*>(expectedPixelValue.data()),
-                                  buffer, 0, bufferSize / sizeof(uint8_t));
+                                  buffer, 0, checked_cast<uint32_t>(bufferSize / sizeof(uint8_t)));
     }
 
     wgpu::Texture renderTarget;

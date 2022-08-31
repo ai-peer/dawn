@@ -15,9 +15,9 @@
 #include <unordered_set>
 #include <vector>
 
+#include "dawn/common/Numeric.h"
 #include "dawn/tests/MockCallback.h"
 #include "dawn/tests/unittests/wire/WireTest.h"
-
 #include "dawn/wire/WireClient.h"
 #include "dawn/wire/WireServer.h"
 
@@ -133,7 +133,7 @@ TEST_F(WireAdapterTests, RequestDevicePassesDescriptor) {
         wgpu::DeviceDescriptor desc = {};
         desc.label = "hello device";
         desc.requiredLimits = &limits;
-        desc.requiredFeaturesCount = features.size();
+        desc.requiredFeaturesCount = checked_cast<uint32_t>(features.size());
         desc.requiredFeatures = features.data();
 
         adapter.RequestDevice(&desc, cb.Callback(), userdata);

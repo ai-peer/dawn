@@ -17,6 +17,8 @@
 #include <iostream>
 #include <vector>
 
+#include "dawn/common/Numeric.h"
+
 extern "C" int LLVMFuzzerInitialize(int* argc, char*** argv);
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size);
 
@@ -46,7 +48,7 @@ int main(int argc, char** argv) {
         }
 
         fseek(file, 0, SEEK_END);
-        int32_t tellFileSize = ftell(file);
+        int32_t tellFileSize = checked_cast<int32_t>(ftell(file));
         if (tellFileSize <= 0) {
             std::cerr << "Input file of incorrect size: " << filename << std::endl;
             return 1;

@@ -179,7 +179,7 @@ MaybeError DescriptorSetAllocator::AllocateDescriptorPool() {
         freeSetIndices.push_back(i);
     }
 
-    mAvailableDescriptorPoolIndices.push_back(mDescriptorPools.size());
+    mAvailableDescriptorPoolIndices.push_back(checked_cast<uint32_t>(mDescriptorPools.size()));
     mDescriptorPools.emplace_back(
         DescriptorPool{descriptorPool, std::move(sets), std::move(freeSetIndices)});
 

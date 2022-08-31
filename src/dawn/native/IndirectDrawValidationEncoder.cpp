@@ -295,7 +295,7 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
             Batch newBatch;
             newBatch.metadata = &batch;
             newBatch.numIndexBufferElements = config.numIndexBufferElements;
-            newBatch.dataSize = GetBatchDataSize(batch.draws.size());
+            newBatch.dataSize = GetBatchDataSize(checked_cast<uint32_t>(batch.draws.size()));
             newBatch.inputIndirectOffset = minOffsetAlignedDown;
             newBatch.inputIndirectSize =
                 batch.maxOffset + indirectDrawCommandSize - minOffsetAlignedDown;

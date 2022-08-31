@@ -16,6 +16,7 @@
 #define SRC_DAWN_COMMON_ITYP_BITSET_H_
 
 #include "dawn/common/BitSetIterator.h"
+#include "dawn/common/Numeric.h"
 #include "dawn/common/Platform.h"
 #include "dawn/common/TypedInteger.h"
 #include "dawn/common/UnderlyingType.h"
@@ -163,7 +164,8 @@ Index GetHighestBitIndexPlusOne(const ityp::bitset<Index, N>& bitset) {
         return Index(
             static_cast<I>(64 - static_cast<uint32_t>(__builtin_clzll(bitset.to_ullong()))));
     } else {
-        return Index(static_cast<I>(32 - static_cast<uint32_t>(__builtin_clz(bitset.to_ulong()))));
+        return Index(static_cast<I>(
+            32 - static_cast<uint32_t>(__builtin_clz(checked_cast<uint32_t>(bitset.to_ulong())))));
     }
 #endif  // DAWN_COMPILER_IS(MSVC)
 }

@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "dawn/common/Assert.h"
+#include "dawn/common/Numeric.h"
 #include "dawn/common/SystemUtils.h"
 #include "dawn/dawn_proc.h"
 #include "dawn/native/NullBackend.h"
@@ -280,9 +281,9 @@ WGPUDevice ValidationTest::CreateTestDevice(dawn::native::Adapter dawnAdapter) {
     deviceDescriptor.nextInChain = &togglesDesc;
 
     togglesDesc.forceEnabledToggles = forceEnabledToggles.data();
-    togglesDesc.forceEnabledTogglesCount = forceEnabledToggles.size();
+    togglesDesc.forceEnabledTogglesCount = checked_cast<uint32_t>(forceEnabledToggles.size());
     togglesDesc.forceDisabledToggles = forceDisabledToggles.data();
-    togglesDesc.forceDisabledTogglesCount = forceDisabledToggles.size();
+    togglesDesc.forceDisabledTogglesCount = checked_cast<uint32_t>(forceDisabledToggles.size());
 
     return dawnAdapter.CreateDevice(&deviceDescriptor);
 }

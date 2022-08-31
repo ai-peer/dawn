@@ -59,7 +59,7 @@ void ProgrammableEncoder::APIInsertDebugMarker(const char* groupLabel) {
         [&](CommandAllocator* allocator) -> MaybeError {
             InsertDebugMarkerCmd* cmd =
                 allocator->Allocate<InsertDebugMarkerCmd>(Command::InsertDebugMarker);
-            cmd->length = strlen(groupLabel);
+            cmd->length = checked_cast<uint32_t>(strlen(groupLabel));
 
             char* label = allocator->AllocateData<char>(cmd->length + 1);
             memcpy(label, groupLabel, cmd->length + 1);
@@ -92,7 +92,7 @@ void ProgrammableEncoder::APIPushDebugGroup(const char* groupLabel) {
         [&](CommandAllocator* allocator) -> MaybeError {
             PushDebugGroupCmd* cmd =
                 allocator->Allocate<PushDebugGroupCmd>(Command::PushDebugGroup);
-            cmd->length = strlen(groupLabel);
+            cmd->length = checked_cast<uint32_t>(strlen(groupLabel));
 
             char* label = allocator->AllocateData<char>(cmd->length + 1);
             memcpy(label, groupLabel, cmd->length + 1);

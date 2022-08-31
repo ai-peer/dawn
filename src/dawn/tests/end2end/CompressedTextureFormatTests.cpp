@@ -97,9 +97,9 @@ class CompressedTextureFormatTest : public DawnTestWithParams<CompressedTextureF
         for (uint32_t layer = 0; layer < copyConfig.copyExtent3D.depthOrArrayLayers; ++layer) {
             for (uint32_t h = 0; h < copyHeightInBlock; ++h) {
                 for (uint32_t w = 0; w < copyWidthInBlock; ++w) {
-                    uint32_t uploadBufferOffset = copyConfig.bufferOffset +
-                                                  copyBytesPerImage * layer + copyBytesPerRow * h +
-                                                  oneBlockCompressedTextureData.size() * w;
+                    uint32_t uploadBufferOffset = checked_cast<uint32_t>(
+                        copyConfig.bufferOffset + copyBytesPerImage * layer + copyBytesPerRow * h +
+                        oneBlockCompressedTextureData.size() * w);
                     std::memcpy(&data[uploadBufferOffset], oneBlockCompressedTextureData.data(),
                                 oneBlockCompressedTextureData.size() * sizeof(uint8_t));
                 }

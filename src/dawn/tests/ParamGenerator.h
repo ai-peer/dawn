@@ -19,6 +19,7 @@
 #include <utility>
 #include <vector>
 
+#include "dawn/common/Numeric.h"
 #include "dawn/tests/AdapterTestConfig.h"
 
 // ParamStruct is a custom struct which ParamStruct will yield when iterating.
@@ -66,12 +67,15 @@ class ParamGenerator {
         Iterator& operator++() {
             // Increment the Index by 1. If the i'th place reaches the maximum,
             // reset it to 0 and continue with the i+1'th place.
-            for (int i = mIndex.size() - 1; i >= 0; --i) {
-                if (mIndex[i] >= mLastIndex[i]) {
-                    mIndex[i] = 0;
-                } else {
-                    mIndex[i]++;
-                    return *this;
+            auto size = mIndex.size();
+            if (size > 0) {
+                for (int i = checked_cast<int32_t>(size) - 1; i >= 0; --i) {
+                    if (mIndex[i] >= mLastIndex[i]) {
+                        mIndex[i] = 0;
+                    } else {
+                        mIndex[i]++;
+                        return *this;
+                    }
                 }
             }
 

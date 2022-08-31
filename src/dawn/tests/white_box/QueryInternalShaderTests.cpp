@@ -105,7 +105,7 @@ class QueryInternalShaderTests : public DawnTest {
         39872473956,     // t7
     };
 
-    const uint32_t kQueryCount = querySetValues.size();
+    const uint32_t kQueryCount = checked_cast<uint32_t>(querySetValues.size());
 
     // Timestamps available state
     const std::vector<uint32_t> availabilities = {0, 1, 1, 0, 1, 1, 1, 1, 1, 1};
@@ -175,7 +175,8 @@ class QueryInternalShaderTests : public DawnTest {
             GetExpectedResults(timestampValues, start, firstQuery, queryCount, period);
 
         EXPECT_BUFFER(timestampsBuffer, 0, size,
-                      new InternalShaderExpectation(expected.data(), size / sizeof(uint64_t)))
+                      new InternalShaderExpectation(
+                          expected.data(), checked_cast<uint32_t>(size / sizeof(uint64_t))))
             << "Conversion test for period:" << period << " firstQuery:" << firstQuery
             << " queryCount:" << queryCount << " destinationOffset:" << destinationOffset;
     }

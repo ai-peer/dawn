@@ -142,8 +142,9 @@ class BindGroupLayoutBase : public ApiObjectBase, public CachedObject {
     template <typename BindGroup>
     SlabAllocator<BindGroup> MakeFrontendBindGroupAllocator(size_t size) {
         return SlabAllocator<BindGroup>(
-            size,                                                                        // bytes
-            Align(sizeof(BindGroup), GetBindingDataAlignment()) + GetBindingDataSize(),  // size
+            size,  // bytes
+            checked_cast<uint32_t>(Align(sizeof(BindGroup), GetBindingDataAlignment()) +
+                                   GetBindingDataSize()),            // size
             std::max(alignof(BindGroup), GetBindingDataAlignment())  // alignment
         );
     }

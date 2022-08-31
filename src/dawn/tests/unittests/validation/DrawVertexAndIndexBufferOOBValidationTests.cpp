@@ -15,6 +15,7 @@
 #include <vector>
 
 #include "dawn/common/Constants.h"
+#include "dawn/common/Numeric.h"
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
@@ -136,7 +137,7 @@ class DrawVertexAndIndexBufferOOBValidationTests : public ValidationTest {
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
 
-        descriptor.vertex.bufferCount = bufferDescList.size();
+        descriptor.vertex.bufferCount = checked_cast<uint32_t>(bufferDescList.size());
 
         size_t attributeCount = 0;
 
@@ -145,7 +146,8 @@ class DrawVertexAndIndexBufferOOBValidationTests : public ValidationTest {
             descriptor.cBuffers[bufferCount].arrayStride = bufferDesc.arrayStride;
             descriptor.cBuffers[bufferCount].stepMode = bufferDesc.stepMode;
             if (bufferDesc.attributes.size() > 0) {
-                descriptor.cBuffers[bufferCount].attributeCount = bufferDesc.attributes.size();
+                descriptor.cBuffers[bufferCount].attributeCount =
+                    checked_cast<uint32_t>(bufferDesc.attributes.size());
                 descriptor.cBuffers[bufferCount].attributes =
                     &descriptor.cAttributes[attributeCount];
                 for (auto attribute : bufferDesc.attributes) {

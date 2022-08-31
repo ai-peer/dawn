@@ -1126,7 +1126,7 @@ void Device::DestroyImpl() {
 }
 
 uint32_t Device::GetOptimalBytesPerRowAlignment() const {
-    return mDeviceInfo.properties.limits.optimalBufferCopyRowPitchAlignment;
+    return checked_cast<uint32_t>(mDeviceInfo.properties.limits.optimalBufferCopyRowPitchAlignment);
 }
 
 uint64_t Device::GetOptimalBufferToTextureCopyOffsetAlignment() const {

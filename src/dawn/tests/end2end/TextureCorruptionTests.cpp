@@ -98,7 +98,7 @@ class TextureCorruptionTests : public DawnTestWithParams<TextureCorruptionTestsP
         // elements for some formats
         ASSERT(bytesPerTexel = sizeof(uint32_t));
         uint32_t elementNumPerRow = bytesPerRow / sizeof(uint32_t);
-        uint32_t elementNumInTotal = bufferSize / sizeof(uint32_t);
+        uint32_t elementNumInTotal = checked_cast<uint32_t>(bufferSize / sizeof(uint32_t));
         std::vector<uint32_t> data(elementNumInTotal, 0);
         for (uint32_t i = 0; i < copySize.height; ++i) {
             for (uint32_t j = 0; j < copySize.width; ++j) {

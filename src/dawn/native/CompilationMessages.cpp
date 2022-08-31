@@ -15,6 +15,7 @@
 #include "dawn/native/CompilationMessages.h"
 
 #include "dawn/common/Assert.h"
+#include "dawn/common/Numeric.h"
 #include "dawn/native/dawn_platform.h"
 
 #include "tint/tint.h"
@@ -140,7 +141,7 @@ void OwnedCompilationMessages::ClearMessages() {
 }
 
 const WGPUCompilationInfo* OwnedCompilationMessages::GetCompilationInfo() {
-    mCompilationInfo.messageCount = mMessages.size();
+    mCompilationInfo.messageCount = checked_cast<uint32_t>(mMessages.size());
     mCompilationInfo.messages = mMessages.data();
 
     // Ensure every message points at the correct message string. Cannot do this earlier, since

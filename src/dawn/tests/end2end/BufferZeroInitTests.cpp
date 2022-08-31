@@ -161,8 +161,9 @@ class BufferZeroInitTest : public DawnTest {
             }
         }
 
-        EXPECT_LAZY_CLEAR(0u, EXPECT_BUFFER_FLOAT_RANGE_EQ(expectedValues.data(), buffer, 0,
-                                                           expectedValues.size()));
+        EXPECT_LAZY_CLEAR(
+            0u, EXPECT_BUFFER_FLOAT_RANGE_EQ(expectedValues.data(), buffer, 0,
+                                             checked_cast<uint32_t>(expectedValues.size())));
     }
 
     void TestBufferZeroInitInBindGroup(wgpu::ShaderModule module,
@@ -196,8 +197,9 @@ class BufferZeroInitTest : public DawnTest {
 
         EXPECT_LAZY_CLEAR(1u, queue.Submit(1, &commandBuffer));
 
-        EXPECT_LAZY_CLEAR(0u, EXPECT_BUFFER_U32_RANGE_EQ(expectedBufferData.data(), buffer, 0,
-                                                         expectedBufferData.size()));
+        EXPECT_LAZY_CLEAR(
+            0u, EXPECT_BUFFER_U32_RANGE_EQ(expectedBufferData.data(), buffer, 0,
+                                           checked_cast<uint32_t>(expectedBufferData.size())));
 
         constexpr utils::RGBA8 kExpectedColor = {0, 255, 0, 255};
         EXPECT_PIXEL_RGBA8_EQ(kExpectedColor, outputTexture, 0u, 0u);
@@ -240,8 +242,9 @@ class BufferZeroInitTest : public DawnTest {
         // Although we just bind a part of the buffer, we still expect the whole buffer to be
         // lazily initialized to 0.
         const std::vector<uint32_t> expectedBufferData(bufferSize / sizeof(uint32_t), 0);
-        EXPECT_LAZY_CLEAR(0u, EXPECT_BUFFER_U32_RANGE_EQ(expectedBufferData.data(), buffer, 0,
-                                                         expectedBufferData.size()));
+        EXPECT_LAZY_CLEAR(
+            0u, EXPECT_BUFFER_U32_RANGE_EQ(expectedBufferData.data(), buffer, 0,
+                                           checked_cast<uint32_t>(expectedBufferData.size())));
 
         const utils::RGBA8 kExpectedPixelValue = {0, 255, 0, 255};
         EXPECT_PIXEL_RGBA8_EQ(kExpectedPixelValue, colorAttachment, 0, 0);
@@ -879,8 +882,8 @@ TEST_P(BufferZeroInitTest, CopyBufferToTexture) {
         utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
 
     const uint32_t rowsPerImage = kTextureSize.height;
-    const uint32_t requiredBufferSizeForCopy = utils::RequiredBytesInCopy(
-        kTextureBytesPerRowAlignment, rowsPerImage, kTextureSize, kTextureFormat);
+    const uint32_t requiredBufferSizeForCopy = checked_cast<uint32_t>(utils::RequiredBytesInCopy(
+        kTextureBytesPerRowAlignment, rowsPerImage, kTextureSize, kTextureFormat));
 
     constexpr wgpu::BufferUsage kBufferUsage =
         wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;

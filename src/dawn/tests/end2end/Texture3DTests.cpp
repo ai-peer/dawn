@@ -73,8 +73,8 @@ TEST_P(Texture3DTests, Sampling) {
     wgpu::TextureView textureView = texture.CreateView();
 
     uint32_t bytesPerRow = utils::GetMinimumBytesPerRow(kFormat, copySize.width);
-    uint32_t sizeInBytes =
-        utils::RequiredBytesInCopy(bytesPerRow, copySize.height, copySize, kFormat);
+    uint32_t sizeInBytes = checked_cast<uint32_t>(
+        utils::RequiredBytesInCopy(bytesPerRow, copySize.height, copySize, kFormat));
     const uint32_t bytesPerTexel = utils::GetTexelBlockSizeInBytes(kFormat);
     uint32_t size = sizeInBytes / bytesPerTexel;
     std::vector<utils::RGBA8> data = std::vector<utils::RGBA8>(size);

@@ -17,6 +17,7 @@
 #include <utility>
 
 #include "GLFW/glfw3.h"
+#include "dawn/common/Numeric.h"
 #include "dawn/common/Platform.h"
 #include "webgpu/webgpu_glfw.h"
 
@@ -71,7 +72,7 @@ std::unique_ptr<wgpu::ChainedStruct> SetupWindowAndGetSurfaceDescriptor(GLFWwind
         std::unique_ptr<wgpu::SurfaceDescriptorFromXlibWindow> desc =
             std::make_unique<wgpu::SurfaceDescriptorFromXlibWindow>();
         desc->display = glfwGetX11Display();
-        desc->window = glfwGetX11Window(window);
+        desc->window = checked_cast<uint32_t>(glfwGetX11Window(window));
         return std::move(desc);
     }
 #else

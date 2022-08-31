@@ -17,6 +17,7 @@
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/Constants.h"
+#include "dawn/common/Numeric.h"
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
@@ -168,7 +169,7 @@ class MinBufferSizeTestsBase : public ValidationTest {
         csDesc.layout = nullptr;
         if (!layouts.empty()) {
             wgpu::PipelineLayoutDescriptor descriptor;
-            descriptor.bindGroupLayoutCount = layouts.size();
+            descriptor.bindGroupLayoutCount = checked_cast<uint32_t>(layouts.size());
             descriptor.bindGroupLayouts = layouts.data();
             csDesc.layout = device.CreatePipelineLayout(&descriptor);
         }
@@ -198,7 +199,7 @@ class MinBufferSizeTestsBase : public ValidationTest {
         pipelineDescriptor.layout = nullptr;
         if (!layouts.empty()) {
             wgpu::PipelineLayoutDescriptor descriptor;
-            descriptor.bindGroupLayoutCount = layouts.size();
+            descriptor.bindGroupLayoutCount = checked_cast<uint32_t>(layouts.size());
             descriptor.bindGroupLayouts = layouts.data();
             pipelineDescriptor.layout = device.CreatePipelineLayout(&descriptor);
         }
@@ -271,7 +272,7 @@ class MinBufferSizeTestsBase : public ValidationTest {
 
         wgpu::BindGroupDescriptor descriptor;
         descriptor.layout = layout;
-        descriptor.entryCount = entries.size();
+        descriptor.entryCount = checked_cast<uint32_t>(entries.size());
         descriptor.entries = entries.data();
 
         return device.CreateBindGroup(&descriptor);
@@ -286,7 +287,7 @@ class MinBufferSizeTestsBase : public ValidationTest {
         wgpu::ComputePassEncoder computePassEncoder = commandEncoder.BeginComputePass();
         computePassEncoder.SetPipeline(computePipeline);
         for (size_t i = 0; i < bindGroups.size(); ++i) {
-            computePassEncoder.SetBindGroup(i, bindGroups[i]);
+            computePassEncoder.SetBindGroup(checked_cast<uint32_t>(i), bindGroups[i]);
         }
         computePassEncoder.DispatchWorkgroups(1);
         computePassEncoder.End();
@@ -307,7 +308,7 @@ class MinBufferSizeTestsBase : public ValidationTest {
         wgpu::RenderPassEncoder renderPassEncoder = commandEncoder.BeginRenderPass(&renderPass);
         renderPassEncoder.SetPipeline(renderPipeline);
         for (size_t i = 0; i < bindGroups.size(); ++i) {
-            renderPassEncoder.SetBindGroup(i, bindGroups[i]);
+            renderPassEncoder.SetBindGroup(checked_cast<uint32_t>(i), bindGroups[i]);
         }
         renderPassEncoder.Draw(3);
         renderPassEncoder.End();
@@ -525,9 +526,10 @@ class MinBufferSizeDefaultLayoutTests : public MinBufferSizeTestsBase {
 
         size_t i = 0;
         for (const std::vector<BindingDescriptor>& b : bindings) {
-            wgpu::BindGroupLayout computeLayout = GetBGLFromComputeShader(computeShader, i);
+            wgpu::BindGroupLayout computeLayout =
+                GetBGLFromComputeShader(computeShader, checked_cast<uint32_t>(i));
             wgpu::BindGroupLayout renderLayout =
-                GetBGLFromRenderShaders(vertexShader, fragShader, i);
+                GetBGLFromRenderShaders(vertexShader, fragShader, checked_cast<uint32_t>(i));
 
             CheckLayoutBindingSizeValidation(computeLayout, b);
             CheckLayoutBindingSizeValidation(renderLayout, b);

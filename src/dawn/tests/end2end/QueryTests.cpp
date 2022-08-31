@@ -474,7 +474,7 @@ class PipelineStatisticsQueryTests : public QueryTests {
 
         if (pipelineStatistics.size() > 0) {
             descriptor.pipelineStatistics = pipelineStatistics.data();
-            descriptor.pipelineStatisticsCount = pipelineStatistics.size();
+            descriptor.pipelineStatisticsCount = checked_cast<uint32_t>(pipelineStatistics.size());
         }
         return device.CreateQuerySet(&descriptor);
     }
@@ -560,7 +560,7 @@ class TimestampQueryTests : public QueryTests {
             CreateResolveBuffer(queryCount * kMinDestinationOffset + sizeof(uint64_t));
 
         wgpu::ComputePassDescriptor descriptor;
-        descriptor.timestampWriteCount = timestampWrites.size();
+        descriptor.timestampWriteCount = checked_cast<uint32_t>(timestampWrites.size());
         descriptor.timestampWrites = timestampWrites.data();
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -579,7 +579,8 @@ class TimestampQueryTests : public QueryTests {
         // Begin another compute pass if the timestampWritesOnAnotherPass is set.
         if (!timestampWritesOnAnotherPass.empty()) {
             wgpu::ComputePassDescriptor descriptor2;
-            descriptor2.timestampWriteCount = timestampWritesOnAnotherPass.size();
+            descriptor2.timestampWriteCount =
+                checked_cast<uint32_t>(timestampWritesOnAnotherPass.size());
             descriptor2.timestampWrites = timestampWritesOnAnotherPass.data();
 
             wgpu::ComputePassEncoder pass2 = encoder.BeginComputePass(&descriptor2);
@@ -614,7 +615,8 @@ class TimestampQueryTests : public QueryTests {
             CreateResolveBuffer(queryCount * kMinDestinationOffset + sizeof(uint64_t));
 
         utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
-        renderPass.renderPassInfo.timestampWriteCount = timestampWrites.size();
+        renderPass.renderPassInfo.timestampWriteCount =
+            checked_cast<uint32_t>(timestampWrites.size());
         renderPass.renderPassInfo.timestampWrites = timestampWrites.data();
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -631,7 +633,8 @@ class TimestampQueryTests : public QueryTests {
         // Begin another render pass if the timestampWritesOnAnotherPass is set.
         if (!timestampWritesOnAnotherPass.empty()) {
             utils::BasicRenderPass renderPass2 = utils::CreateBasicRenderPass(device, 1, 1);
-            renderPass2.renderPassInfo.timestampWriteCount = timestampWritesOnAnotherPass.size();
+            renderPass2.renderPassInfo.timestampWriteCount =
+                checked_cast<uint32_t>(timestampWritesOnAnotherPass.size());
             renderPass2.renderPassInfo.timestampWrites = timestampWritesOnAnotherPass.data();
 
             wgpu::RenderPassEncoder pass2 = encoder.BeginRenderPass(&renderPass2.renderPassInfo);

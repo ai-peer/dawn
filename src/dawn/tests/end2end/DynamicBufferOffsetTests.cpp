@@ -228,7 +228,8 @@ TEST_P(DynamicBufferOffsetTests, BasicRenderPipeline) {
 
     std::vector<uint32_t> expectedData = {2, 4};
     EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(1, 2, 255, 255), renderPass.color, 0, 0);
-    EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), mStorageBuffers[1], 0, expectedData.size());
+    EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), mStorageBuffers[1], 0,
+                               checked_cast<uint32_t>(expectedData.size()));
 }
 
 // Have non-zero dynamic offsets.
@@ -251,7 +252,8 @@ TEST_P(DynamicBufferOffsetTests, SetDynamicOffsetsRenderPipeline) {
     std::vector<uint32_t> expectedData = {6, 8};
     EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(5, 6, 255, 255), renderPass.color, 0, 0);
     EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), mStorageBuffers[1],
-                               mMinUniformBufferOffsetAlignment, expectedData.size());
+                               mMinUniformBufferOffsetAlignment,
+                               checked_cast<uint32_t>(expectedData.size()));
 }
 
 // Dynamic offsets are all zero and no effect to result.
@@ -270,7 +272,8 @@ TEST_P(DynamicBufferOffsetTests, BasicComputePipeline) {
     queue.Submit(1, &commands);
 
     std::vector<uint32_t> expectedData = {2, 4};
-    EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), mStorageBuffers[1], 0, expectedData.size());
+    EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), mStorageBuffers[1], 0,
+                               checked_cast<uint32_t>(expectedData.size()));
 }
 
 // Have non-zero dynamic offsets.
@@ -291,7 +294,8 @@ TEST_P(DynamicBufferOffsetTests, SetDynamicOffsetsComputePipeline) {
 
     std::vector<uint32_t> expectedData = {6, 8};
     EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), mStorageBuffers[1],
-                               mMinUniformBufferOffsetAlignment, expectedData.size());
+                               mMinUniformBufferOffsetAlignment,
+                               checked_cast<uint32_t>(expectedData.size()));
 }
 
 // Test inherit dynamic offsets on render pipeline
@@ -320,7 +324,8 @@ TEST_P(DynamicBufferOffsetTests, InheritDynamicOffsetsRenderPipeline) {
     std::vector<uint32_t> expectedData = {12, 16};
     EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(5, 6, 255, 255), renderPass.color, 0, 0);
     EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), mStorageBuffers[1],
-                               mMinUniformBufferOffsetAlignment, expectedData.size());
+                               mMinUniformBufferOffsetAlignment,
+                               checked_cast<uint32_t>(expectedData.size()));
 }
 
 // Test inherit dynamic offsets on compute pipeline
@@ -349,7 +354,8 @@ TEST_P(DynamicBufferOffsetTests, InheritDynamicOffsetsComputePipeline) {
 
     std::vector<uint32_t> expectedData = {12, 16};
     EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), mStorageBuffers[1],
-                               mMinUniformBufferOffsetAlignment, expectedData.size());
+                               mMinUniformBufferOffsetAlignment,
+                               checked_cast<uint32_t>(expectedData.size()));
 }
 
 // Setting multiple dynamic offsets for the same bindgroup in one render pass.
@@ -377,7 +383,8 @@ TEST_P(DynamicBufferOffsetTests, UpdateDynamicOffsetsMultipleTimesRenderPipeline
 
     std::vector<uint32_t> expectedData = {2, 4};
     EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(1, 2, 255, 255), renderPass.color, 0, 0);
-    EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), mStorageBuffers[1], 0, expectedData.size());
+    EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), mStorageBuffers[1], 0,
+                               checked_cast<uint32_t>(expectedData.size()));
 }
 
 // Setting multiple dynamic offsets for the same bindgroup in one compute pass.
@@ -400,7 +407,8 @@ TEST_P(DynamicBufferOffsetTests, UpdateDynamicOffsetsMultipleTimesComputePipelin
     queue.Submit(1, &commands);
 
     std::vector<uint32_t> expectedData = {2, 4};
-    EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), mStorageBuffers[1], 0, expectedData.size());
+    EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), mStorageBuffers[1], 0,
+                               checked_cast<uint32_t>(expectedData.size()));
 }
 
 namespace {
@@ -569,7 +577,8 @@ TEST_P(ClampedOOBDynamicBufferOffsetTests, CheckOOBAccess) {
     wgpu::CommandBuffer commands = commandEncoder.Finish();
     queue.Submit(1, &commands);
 
-    EXPECT_BUFFER_U32_RANGE_EQ(expectedDst.data(), dst, 0, dstBufferSize / sizeof(uint32_t));
+    EXPECT_BUFFER_U32_RANGE_EQ(expectedDst.data(), dst, 0,
+                               checked_cast<uint32_t>(dstBufferSize / sizeof(uint32_t)));
 }
 
 DAWN_INSTANTIATE_TEST(DynamicBufferOffsetTests,

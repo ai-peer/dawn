@@ -247,9 +247,11 @@ class VulkanImageWrappingUsageTests : public VulkanImageWrappingTestBase {
             dawn::native::vulkan::ToBackend(dawn::native::FromAPI(device.Get())->GetAdapter());
         deviceDescriptor.nextInChain = &togglesDesc;
         togglesDesc.forceEnabledToggles = GetParam().forceEnabledWorkarounds.data();
-        togglesDesc.forceEnabledTogglesCount = GetParam().forceEnabledWorkarounds.size();
+        togglesDesc.forceEnabledTogglesCount =
+            checked_cast<uint32_t>(GetParam().forceEnabledWorkarounds.size());
         togglesDesc.forceDisabledToggles = GetParam().forceDisabledWorkarounds.data();
-        togglesDesc.forceDisabledTogglesCount = GetParam().forceDisabledWorkarounds.size();
+        togglesDesc.forceDisabledTogglesCount =
+            checked_cast<uint32_t>(GetParam().forceDisabledWorkarounds.size());
 
         secondDeviceVk =
             dawn::native::vulkan::ToBackend(backendAdapter->APICreateDevice(&deviceDescriptor));
@@ -764,7 +766,7 @@ TEST_P(VulkanImageWrappingUsageTests, LargerImage) {
 
     // Check the image is not corrupted on |device|
     EXPECT_BUFFER_U32_RANGE_EQ(reinterpret_cast<uint32_t*>(data.data()), copyDstBuffer, 0,
-                               data.size() / 4);
+                               checked_cast<uint32_t>(data.size() / 4));
 
     IgnoreSignalSemaphore(nextWrappedTexture);
 }

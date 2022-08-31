@@ -358,14 +358,16 @@ class BindGroupTracker : public BindGroupTrackerBase<true, uint64_t> {
                     }
 
                     if (hasVertStage) {
-                        mLengthTracker->data[SingleShaderStage::Vertex][vertIndex] = binding.size;
+                        mLengthTracker->data[SingleShaderStage::Vertex][vertIndex] =
+                            checked_cast<uint32_t>(binding.size);
                         mLengthTracker->dirtyStages |= wgpu::ShaderStage::Vertex;
                         [render setVertexBuffers:&buffer
                                          offsets:&offset
                                        withRange:NSMakeRange(vertIndex, 1)];
                     }
                     if (hasFragStage) {
-                        mLengthTracker->data[SingleShaderStage::Fragment][fragIndex] = binding.size;
+                        mLengthTracker->data[SingleShaderStage::Fragment][fragIndex] =
+                            checked_cast<uint32_t>(binding.size);
                         mLengthTracker->dirtyStages |= wgpu::ShaderStage::Fragment;
                         [render setFragmentBuffers:&buffer
                                            offsets:&offset
@@ -373,7 +375,7 @@ class BindGroupTracker : public BindGroupTrackerBase<true, uint64_t> {
                     }
                     if (hasComputeStage) {
                         mLengthTracker->data[SingleShaderStage::Compute][computeIndex] =
-                            binding.size;
+                            checked_cast<uint32_t>(binding.size);
                         mLengthTracker->dirtyStages |= wgpu::ShaderStage::Compute;
                         [compute setBuffers:&buffer
                                     offsets:&offset
@@ -1279,7 +1281,7 @@ MaybeError CommandBuffer::EncodeRenderPass(id<MTLRenderCommandEncoder> encoder) 
                 SetIndexBufferCmd* cmd = iter->NextCommand<SetIndexBufferCmd>();
                 auto b = ToBackend(cmd->buffer.Get());
                 indexBuffer = b->GetMTLBuffer();
-                indexBufferBaseOffset = cmd->offset;
+                indexBufferBaseOffset = checked_cast<uint32_t>(cmd->offset);
                 indexBufferType = MTLIndexFormat(cmd->format);
                 indexFormatSize = IndexFormatSize(cmd->format);
                 break;

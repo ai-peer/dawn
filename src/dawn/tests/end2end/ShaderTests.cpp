@@ -37,7 +37,7 @@ class ShaderTests : public DawnTest {
         csDesc.compute.entryPoint = entryPoint;
         if (constants) {
             csDesc.compute.constants = constants->data();
-            csDesc.compute.constantCount = constants->size();
+            csDesc.compute.constantCount = checked_cast<uint32_t>(constants->size());
         }
         return device.CreateComputePipeline(&csDesc);
     }
@@ -627,14 +627,14 @@ struct Buf {
     csDesc1.compute.module = shaderModule;
     csDesc1.compute.entryPoint = "main1";
     csDesc1.compute.constants = constants1.data();
-    csDesc1.compute.constantCount = constants1.size();
+    csDesc1.compute.constantCount = checked_cast<uint32_t>(constants1.size());
     wgpu::ComputePipeline pipeline1 = device.CreateComputePipeline(&csDesc1);
 
     wgpu::ComputePipelineDescriptor csDesc2;
     csDesc2.compute.module = shaderModule;
     csDesc2.compute.entryPoint = "main2";
     csDesc2.compute.constants = constants2.data();
-    csDesc2.compute.constantCount = constants2.size();
+    csDesc2.compute.constantCount = checked_cast<uint32_t>(constants2.size());
     wgpu::ComputePipeline pipeline2 = device.CreateComputePipeline(&csDesc2);
 
     wgpu::ComputePipelineDescriptor csDesc3;
@@ -717,11 +717,11 @@ fn main(@builtin(vertex_index) VertexIndex : u32)
     vertexConstants.push_back({nullptr, "1111", 3.0});  // x right
     vertexConstants.push_back({nullptr, "2222", 3.0});  // y top
     descriptor.vertex.constants = vertexConstants.data();
-    descriptor.vertex.constantCount = vertexConstants.size();
+    descriptor.vertex.constantCount = checked_cast<uint32_t>(vertexConstants.size());
     std::vector<wgpu::ConstantEntry> fragmentConstants;
     fragmentConstants.push_back({nullptr, "1000", 1.0});  // color intensity
     descriptor.cFragment.constants = fragmentConstants.data();
-    descriptor.cFragment.constantCount = fragmentConstants.size();
+    descriptor.cFragment.constantCount = checked_cast<uint32_t>(fragmentConstants.size());
 
     wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&descriptor);
 

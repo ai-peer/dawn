@@ -128,7 +128,7 @@ class ComputeDispatchTests : public DawnTest {
             device, &indirectBufferData[0], indirectBufferData.size() * sizeof(uint32_t),
             wgpu::BufferUsage::Indirect);
 
-        uint32_t indirectStart = indirectOffset / sizeof(uint32_t);
+        uint32_t indirectStart = checked_cast<uint32_t>(indirectOffset / sizeof(uint32_t));
 
         // Set up bind group and issue dispatch
         wgpu::BindGroup bindGroup;

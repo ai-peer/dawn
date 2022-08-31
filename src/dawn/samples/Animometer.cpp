@@ -18,6 +18,7 @@
 
 #include "dawn/samples/SampleUtils.h"
 
+#include "dawn/common/Numeric.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/ScopedAutoreleasePool.h"
 #include "dawn/utils/SystemUtils.h"
@@ -162,7 +163,7 @@ void frame() {
         pass.SetPipeline(pipeline);
 
         for (size_t i = 0; i < kNumTriangles; i++) {
-            uint32_t offset = i * sizeof(ShaderData);
+            uint32_t offset = checked_cast<uint32_t>(i * sizeof(ShaderData));
             pass.SetBindGroup(0, bindGroup, 1, &offset);
             pass.Draw(3);
         }

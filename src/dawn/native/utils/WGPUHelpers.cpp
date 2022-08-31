@@ -174,7 +174,7 @@ ResultOrError<Ref<BindGroupBase>> MakeBindGroup(
 
     BindGroupDescriptor descriptor;
     descriptor.layout = layout.Get();
-    descriptor.entryCount = entries.size();
+    descriptor.entryCount = checked_cast<uint32_t>(entries.size());
     descriptor.entries = entries.data();
 
     return device->CreateBindGroup(&descriptor, mode);
