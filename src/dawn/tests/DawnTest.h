@@ -302,11 +302,25 @@ class DawnTestBase {
                                              uint64_t size,
                                              detail::Expectation* expectation);
 
+    template <typename T, typename... Args>
+    std::ostringstream& AddTextureExpectation(const char* file,
+                                              int line,
+                                              const T* expectedData,
+                                              const wgpu::Texture& texture,
+                                              wgpu::Origin3D origin,
+                                              wgpu::Extent3D extent,
+                                              Args&&... args) {
+        // No device passed explicitly. Default it, and forward the rest of the args.
+        return AddTextureExpectation(file, line, this->device, expectedData, texture, origin,
+                                     extent, std::forward<Args>(args)...);
+    }
+
     // T - expected value Type
     // U - actual value Type (defaults = T)
     template <typename T, typename U = T>
     std::ostringstream& AddTextureExpectation(const char* file,
                                               int line,
+                                              wgpu::Device targetDevice,
                                               const T* expectedData,
                                               const wgpu::Texture& texture,
                                               wgpu::Origin3D origin,
@@ -320,7 +334,7 @@ class DawnTestBase {
         uint32_t texelComponentCount = utils::GetWGSLRenderableColorTextureComponentCount(format);
 
         return AddTextureExpectationImpl(
-            file, line,
+            file, line, std::move(targetDevice),
             new detail::ExpectEq<T, U>(
                 expectedData,
                 texelComponentCount * extent.width * extent.height * extent.depthOrArrayLayers,
@@ -331,6 +345,7 @@ class DawnTestBase {
     template <typename T, typename U = T>
     std::ostringstream& AddTextureExpectation(const char* file,
                                               int line,
+                                              wgpu::Device targetDevice,
                                               const T* expectedData,
                                               const wgpu::Texture& texture,
                                               wgpu::Origin3D origin,
@@ -339,24 +354,57 @@ class DawnTestBase {
                                               wgpu::TextureAspect aspect = wgpu::TextureAspect::All,
                                               uint32_t bytesPerRow = 0) {
         return AddTextureExpectationImpl(
-            file, line,
+            file, line, std::move(targetDevice),
             new detail::ExpectEq<T, U>(expectedData,
                                        extent.width * extent.height * extent.depthOrArrayLayers),
             texture, origin, extent, level, aspect, sizeof(U), bytesPerRow);
     }
 
+    template <
+        typename T,
+        // Prevent infinite recursion due to matching const wgpu::Device& as const T&.
+        typename = typename std::enable_if<!std::is_convertible<T, wgpu::Device>::value>::type,
+        typename... Args>
+    std::ostringstream& AddTextureExpectation(const char* file,
+                                              int line,
+                                              const T& expectedData,
+                                              const wgpu::Texture& texture,
+                                              wgpu::Origin3D origin,
+                                              Args&&... args) {
+        // No device passed explicitly. Default it, and forward the rest of the args.
+        return AddTextureExpectation(file, line, this->device, expectedData, texture, origin,
+                                     std::forward<Args>(args)...);
+    }
+
     template <typename T, typename U = T>
     std::ostringstream& AddTextureExpectation(const char* file,
                                               int line,
+                                              wgpu::Device targetDevice,
                                               const T& expectedData,
                                               const wgpu::Texture& texture,
                                               wgpu::Origin3D origin,
                                               uint32_t level = 0,
                                               wgpu::TextureAspect aspect = wgpu::TextureAspect::All,
                                               uint32_t bytesPerRow = 0) {
-        return AddTextureExpectationImpl(file, line, new detail::ExpectEq<T, U>(expectedData),
-                                         texture, origin, {1, 1}, level, aspect, sizeof(U),
-                                         bytesPerRow);
+        return AddTextureExpectationImpl(file, line, std::move(targetDevice),
+                                         new detail::ExpectEq<T, U>(expectedData), texture, origin,
+                                         {1, 1}, level, aspect, sizeof(U), bytesPerRow);
+    }
+
+    template <typename E,
+              typename = typename std::enable_if<
+                  std::is_base_of<detail::CustomTextureExpectation, E>::value>::type,
+              typename... Args>
+    std::ostringstream& AddTextureExpectation(const char* file,
+                                              int line,
+                                              E* expectation,
+                                              const wgpu::Texture& texture,
+                                              wgpu::Origin3D origin,
+                                              wgpu::Extent3D extent,
+                                              Args&&... args) {
+        // No device passed explicitly. Default it, and forward the rest of the args.
+        return AddTextureExpectation(file, line, this->device, expectation, texture, origin, extent,
+                                     std::forward<Args>(args)...);
     }
 
     template <typename E,
@@ -364,6 +412,7 @@ class DawnTestBase {
                   std::is_base_of<detail::CustomTextureExpectation, E>::value>::type>
     std::ostringstream& AddTextureExpectation(const char* file,
                                               int line,
+                                              wgpu::Device targetDevice,
                                               E* expectation,
                                               const wgpu::Texture& texture,
                                               wgpu::Origin3D origin,
@@ -371,14 +420,34 @@ class DawnTestBase {
                                               uint32_t level = 0,
                                               wgpu::TextureAspect aspect = wgpu::TextureAspect::All,
                                               uint32_t bytesPerRow = 0) {
-        return AddTextureExpectationImpl(file, line, expectation, texture, origin, extent, level,
-                                         aspect, expectation->DataSize(), bytesPerRow);
+        return AddTextureExpectationImpl(file, line, std::move(targetDevice), expectation, texture,
+                                         origin, extent, level, aspect, expectation->DataSize(),
+                                         bytesPerRow);
+    }
+
+    template <
+        typename T,
+        // Prevent infinite recursion due to matching const wgpu::Device& as const T&.
+        typename = typename std::enable_if<!std::is_convertible<T, wgpu::Device>::value>::type,
+        typename... Args>
+    std::ostringstream& AddTextureBetweenColorsExpectation(const char* file,
+                                                           int line,
+                                                           const T& color0,
+                                                           const T& color1,
+                                                           const wgpu::Texture& texture,
+                                                           uint32_t x,
+                                                           uint32_t y,
+                                                           Args&&... args) {
+        // No device passed explicitly. Default it, and forward the rest of the args.
+        return AddTextureBetweenColorsExpectation(file, line, this->device, color0, color1, texture,
+                                                  x, y);
     }
 
     template <typename T>
     std::ostringstream& AddTextureBetweenColorsExpectation(
         const char* file,
         int line,
+        const wgpu::Device& targetDevice,
         const T& color0,
         const T& color1,
         const wgpu::Texture& texture,
@@ -388,8 +457,8 @@ class DawnTestBase {
         wgpu::TextureAspect aspect = wgpu::TextureAspect::All,
         uint32_t bytesPerRow = 0) {
         return AddTextureExpectationImpl(
-            file, line, new detail::ExpectBetweenColors<T>(color0, color1), texture, {x, y}, {1, 1},
-            level, aspect, sizeof(T), bytesPerRow);
+            file, line, std::move(targetDevice), new detail::ExpectBetweenColors<T>(color0, color1),
+            texture, {x, y}, {1, 1}, level, aspect, sizeof(T), bytesPerRow);
     }
 
     std::ostringstream& ExpectSampledFloatData(wgpu::Texture texture,
@@ -452,7 +521,7 @@ class DawnTestBase {
                                                     mipLevel, {}, &expectedStencil);
     }
 
-    void WaitABit();
+    void WaitABit(wgpu::Device = nullptr);
     void FlushWire();
     void WaitForAllOperations();
 
@@ -489,6 +558,7 @@ class DawnTestBase {
 
     std::ostringstream& AddTextureExpectationImpl(const char* file,
                                                   int line,
+                                                  wgpu::Device targetDevice,
                                                   detail::Expectation* expectation,
                                                   const wgpu::Texture& texture,
                                                   wgpu::Origin3D origin,
@@ -508,6 +578,7 @@ class DawnTestBase {
 
     // MapRead buffers used to get data for the expectations
     struct ReadbackSlot {
+        wgpu::Device device;
         wgpu::Buffer buffer;
         uint64_t bufferSize;
         const void* mappedData = nullptr;
@@ -521,11 +592,12 @@ class DawnTestBase {
 
     // Reserve space where the data for an expectation can be copied
     struct ReadbackReservation {
+        wgpu::Device device;
         wgpu::Buffer buffer;
         size_t slot;
         uint64_t offset;
     };
-    ReadbackReservation ReserveReadback(uint64_t readbackSize);
+    ReadbackReservation ReserveReadback(wgpu::Device targetDevice, uint64_t readbackSize);
 
     struct DeferredExpectation {
         const char* file;
