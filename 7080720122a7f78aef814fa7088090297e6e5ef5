@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71850912_e79d1691",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1679,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-08-31T08:28:17Z",
+      "side": 1,
+      "message": "Use `ConvertArguments()`. It handles argument length mismatches, correctly uses the argument\u0027s source, and checks the result.",
+      "range": {
+        "startLine": 1677,
+        "startChar": 12,
+        "endLine": 1679,
+        "endChar": 13
+      },
+      "revId": "7080720122a7f78aef814fa7088090297e6e5ef5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
