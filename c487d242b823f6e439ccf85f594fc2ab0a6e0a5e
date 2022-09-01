@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "307e5910_0ea8a2bb",
+        "filename": "src/tint/reflection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T18:47:44Z",
+      "side": 1,
+      "message": "You say potato. Wikipedia says `Foreach`:\nhttps://en.wikipedia.org/wiki/Foreach_loop\n\nIt\u0027s a keyword in many languages, including c#.",
+      "parentUuid": "48b46c06_74a43bde",
+      "range": {
+        "startLine": 45,
+        "startChar": 5,
+        "endLine": 45,
+        "endChar": 17
+      },
+      "revId": "c487d242b823f6e439ccf85f594fc2ab0a6e0a5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "afc017e9_dfb3182d",
         "filename": "src/tint/reflection.h",
         "patchSetId": 5
@@ -89,6 +113,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "633d15a6_669fc4e3",
+        "filename": "src/tint/reflection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T18:47:44Z",
+      "side": 1,
+      "message": "It\u0027s done as a static so that the same thing can be used for `const` and non-`const` objects.",
+      "parentUuid": "afc017e9_dfb3182d",
+      "range": {
+        "startLine": 60,
+        "startChar": 27,
+        "endLine": 60,
+        "endChar": 42
+      },
+      "revId": "c487d242b823f6e439ccf85f594fc2ab0a6e0a5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41c29c28_3672da33",
+        "filename": "src/tint/reflection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T18:47:44Z",
+      "side": 1,
+      "message": "It\u0027s an internal thing that you wouldn\u0027t call directly. I\u0027d like to keep the name different so there\u0027s less confusion.",
+      "parentUuid": "8665855b_fa60b71a",
+      "range": {
+        "startLine": 60,
+        "startChar": 20,
+        "endLine": 60,
+        "endChar": 26
+      },
+      "revId": "c487d242b823f6e439ccf85f594fc2ab0a6e0a5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f12b240e_7e330a2d",
         "filename": "src/tint/transform/multiplanar_external_texture.h",
         "patchSetId": 5
@@ -100,6 +172,30 @@
       "writtenOn": "2022-09-01T18:21:38Z",
       "side": 1,
       "message": "Can we move this below the members, as you\u0027ve done every else?",
+      "range": {
+        "startLine": 47,
+        "startChar": 7,
+        "endLine": 48,
+        "endChar": 38
+      },
+      "revId": "c487d242b823f6e439ccf85f594fc2ab0a6e0a5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "981afa3c_962a2296",
+        "filename": "src/tint/transform/multiplanar_external_texture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T18:47:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f12b240e_7e330a2d",
       "range": {
         "startLine": 47,
         "startChar": 7,
