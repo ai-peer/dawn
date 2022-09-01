@@ -113,6 +113,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ba566f4_822dd73f",
+        "filename": "src/tint/reflection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-01T19:00:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f813fd8d_a5a993e6",
+      "range": {
+        "startLine": 45,
+        "startChar": 5,
+        "endLine": 45,
+        "endChar": 17
+      },
+      "revId": "c487d242b823f6e439ccf85f594fc2ab0a6e0a5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afc017e9_dfb3182d",
@@ -269,6 +293,30 @@
       "side": 1,
       "message": "It\u0027s in a `Reflection` subclass, so you\u0027d have to go out of your way to accidentally call it. It\u0027s not the end of the world if you did though.",
       "parentUuid": "7beb7239_88876377",
+      "range": {
+        "startLine": 60,
+        "startChar": 20,
+        "endLine": 60,
+        "endChar": 26
+      },
+      "revId": "c487d242b823f6e439ccf85f594fc2ab0a6e0a5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "901ed5c8_012afee3",
+        "filename": "src/tint/reflection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-01T19:00:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ad46ca38_6cba3c7f",
       "range": {
         "startLine": 60,
         "startChar": 20,
