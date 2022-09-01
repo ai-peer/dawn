@@ -136,6 +136,14 @@ constexpr auto* SwizzlePtrTy(std::index_sequence<INDICES...>) {
     return static_cast<Swizzled*>(nullptr);
 }
 
+/// IsComplete<T>::value is false if T is an incomplete type
+template <typename T, typename = void>
+struct IsComplete : std::false_type {};
+
+/// IsComplete<T> specialization for complete types
+template <typename T>
+struct IsComplete<T, decltype(void(sizeof(T)))> : std::true_type {};
+
 }  // namespace detail
 
 /// @returns the slice of the tuple `t` with the tuple elements
@@ -150,6 +158,10 @@ constexpr auto Slice(TUPLE&& t) {
 template <std::size_t OFFSET, std::size_t COUNT, typename TUPLE>
 using SliceTuple =
     std::remove_pointer_t<decltype(detail::SwizzlePtrTy<TUPLE>(Range<OFFSET, COUNT>()))>;
+
+/// Is true iff T is an complete type.
+template <typename T>
+static constexpr bool IsComplete = detail::IsComplete<T>::value;
 
 }  // namespace tint::traits
 
