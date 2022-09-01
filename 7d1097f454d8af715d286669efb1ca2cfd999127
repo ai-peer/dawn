@@ -16,6 +16,23 @@
       "message": "I\u0027ve added tests. Requesting approval from bclayton",
       "revId": "7d1097f454d8af715d286669efb1ca2cfd999127",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b47bd28e_b42c769b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-01T22:16:59Z",
+      "side": 1,
+      "message": "Please abandon this.\nI\u0027ve moved the fix to https://dawn-review.googlesource.com/c/dawn/+/101064",
+      "revId": "7d1097f454d8af715d286669efb1ca2cfd999127",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
