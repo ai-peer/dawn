@@ -50,6 +50,24 @@
       "message": "Oh, thanks for catching this.\nPlease add a test for this.",
       "revId": "52912e06ac98c031a319dc41dbce4a558e59afc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df8b9808_9cf0beaf",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 5734,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-01T20:05:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e66dd034_d1cd248e",
+      "revId": "52912e06ac98c031a319dc41dbce4a558e59afc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
