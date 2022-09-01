@@ -22,6 +22,40 @@
       },
       "revId": "006bfe5ecd4cfcaf0370b4de263778356b9d9623",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9eac4d2_64c774c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-01T20:59:42Z",
+      "side": 1,
+      "message": "I\u0027ll take this over.\n",
+      "revId": "006bfe5ecd4cfcaf0370b4de263778356b9d9623",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adc8d93f_5f125a1e",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 5635,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-01T20:59:42Z",
+      "side": 1,
+      "message": "This UnwrapRef should occur when we first compute component_type.\nI\u0027ve added comments to the original issue.",
+      "revId": "006bfe5ecd4cfcaf0370b4de263778356b9d9623",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
