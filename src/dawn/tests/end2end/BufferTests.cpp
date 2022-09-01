@@ -321,6 +321,20 @@ TEST_P(BufferMappingTests, MapWrite_TwiceRangeOverlap) {
     EXPECT_BUFFER_U32_EQ(0x89abcdef, buffer, 12);
 }
 
+// Bleh
+TEST_P(BufferMappingTests, Bleh) {
+    wgpu::BufferDescriptor desc;
+    desc.usage = wgpu::BufferUsage::CopySrc;
+    desc.size = 4;
+    desc.mappedAtCreation = true;
+
+    for (int i = 0; i < 1000; i++) {
+        wgpu::Buffer buffer = device.CreateBuffer(&desc);
+        buffer.Unmap();
+        device.Tick();
+    }
+}
+
 // Map write and test multiple mapped range data get updated correctly
 TEST_P(BufferMappingTests, MapWrite_MultipleMappedRange) {
     wgpu::Buffer buffer = CreateMapWriteBuffer(12);
