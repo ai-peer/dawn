@@ -140,6 +140,14 @@ inline bool IsPositiveZero(T value) {
     return Number<N>(value) == Number<N>(0);  // Considers sign bit
 }
 
+template <typename NumberT>
+std::string OverflowErrorMessage(NumberT lhs, const char* op, NumberT rhs) {
+    std::stringstream ss;
+    ss << "'" << lhs.value << " " << op << " " << rhs.value << "' cannot be represented as '"
+       << FriendlyName<NumberT>() << "'";
+    return ss.str();
+}
+
 /// Constant inherits from sem::Constant to add an private implementation method for conversion.
 struct Constant : public sem::Constant {
     /// Convert attempts to convert the constant value to the given type. On error, Convert()
@@ -531,9 +539,7 @@ utils::Result<NumberT> ConstEval::Add(NumberT a, NumberT b) {
         if (auto r = CheckedAdd(a, b)) {
             result = r->value;
         } else {
-            AddError("'" + std::to_string(add_values(a.value, b.value)) +
-                         "' cannot be represented as '" + FriendlyName<NumberT>() + "'",
-                     *current_source);
+            AddError(OverflowErrorMessage(a, "+", b), *current_source);
             return utils::Failure;
         }
     } else {
@@ -560,9 +566,7 @@ utils::Result<NumberT> ConstEval::Mul(NumberT a, NumberT b) {
         if (auto r = CheckedMul(a, b)) {
             result = r->value;
         } else {
-            AddError("'" + std::to_string(mul_values(a.value, b.value)) +
-                         "' cannot be represented as '" + FriendlyName<NumberT>() + "'",
-                     *current_source);
+            AddError(OverflowErrorMessage(a, "*", b), *current_source);
             return utils::Failure;
         }
     } else {
@@ -966,7 +970,7 @@ ConstEval::ConstantResult ConstEval::OpPlus(const sem::Type*,
     return r;
 }
 
-ConstEval::ConstantResult ConstEval::OpMinus(const sem::Type* ty,
+ConstEval::ConstantResult ConstEval::OpMinus(const sem::Type*,
                                              utils::VectorRef<const sem::Constant*> args,
                                              const Source& source) {
     auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) {
@@ -990,10 +994,7 @@ ConstEval::ConstantResult ConstEval::OpMinus(const sem::Type* ty,
                 if (auto r = CheckedSub(i, j)) {
                     result = r->value;
                 } else {
-                    AddError("'" + std::to_string(subtract_values(i.value, j.value)) +
-                                 "' cannot be represented as '" +
-                                 ty->FriendlyName(builder.Symbols()) + "'",
-                             source);
+                    AddError(OverflowErrorMessage(i, "-", j), source);
                     return nullptr;
                 }
             } else {
