@@ -30,8 +30,7 @@ if (enable_vulkan_validation_layers) {
 use_angle = dawn_use_angle && defined(dawn_angle_dir)
 
 # Swiftshader is an optional dependency, only use it if the path has been set.
-use_swiftshader =
-    dawn_use_swiftshader && dawn_swiftshader_dir != "" && !is_android
+use_swiftshader = dawn_use_swiftshader && dawn_swiftshader_dir != ""
 if (use_swiftshader) {
   assert(dawn_enable_vulkan,
          "dawn_use_swiftshader requires dawn_enable_vulkan=true")
@@ -689,6 +688,12 @@ source_set("sources") {
         "vulkan/external_memory/MemoryServiceZirconHandle.cpp",
         "vulkan/external_semaphore/SemaphoreServiceZirconHandle.cpp",
       ]
+    } else if (is_android) {
+      sources += [
+        "vulkan/external_memory/MemoryServiceAHardwareBuffer.cpp",
+        "vulkan/external_semaphore/SemaphoreServiceFD.cpp",
+      ]
+      defines += [ "DAWN_USE_SYNC_FDS" ]
     } else {
       sources += [
         "vulkan/external_memory/MemoryServiceNull.cpp",

@@ -36,7 +36,7 @@ declare_args() {
 
   # Enables SwiftShader as the fallback adapter. Requires dawn_swiftshader_dir
   # to be set to take effect.
-  dawn_use_swiftshader = true
+  dawn_use_swiftshader = !is_android
 }
 
 declare_args() {
