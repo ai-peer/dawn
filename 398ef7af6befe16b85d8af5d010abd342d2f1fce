@@ -33,6 +33,24 @@
       "message": "LGTM, I think it would be better to put this in dawn_features.gni though.\nthat\u0027s where, for example, we have:\n\n```\ndawn_enable_opengles \u003d\n      (is_linux \u0026\u0026 !is_chromeos) || (is_win \u0026\u0026 !dawn_is_winuwp)\n```\n\nlet\u0027s also file a bug about the build failure and say TODO(dawn:bugnum) about it so we can remember to fix it later. We\u0027ll want fallback adapter support on all platforms I think.",
       "revId": "398ef7af6befe16b85d8af5d010abd342d2f1fce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53862bd7_ec0b91c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-09-01T01:45:42Z",
+      "side": 1,
+      "message": "FYI Brandon you may have missed this comment (I\u0027m marking it as unresolved)",
+      "parentUuid": "e7e54c3a_07b040f3",
+      "revId": "398ef7af6befe16b85d8af5d010abd342d2f1fce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
