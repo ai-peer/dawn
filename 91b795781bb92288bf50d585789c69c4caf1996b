@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5386186e_68ad8e56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T11:36:29Z",
+      "side": 1,
+      "message": "Please change to:\n\n```\ntint/reader/spirv: Fix texel type confusion in loop\n\nBug: tint:1642\nChange-Id: I14909afd9ecc6dafd213bb1e6859747b810957d0\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 52
+      },
+      "revId": "91b795781bb92288bf50d585789c69c4caf1996b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b353c3d7_9b30dd2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T11:36:29Z",
+      "side": 1,
+      "message": "Thank you again!",
+      "revId": "91b795781bb92288bf50d585789c69c4caf1996b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
