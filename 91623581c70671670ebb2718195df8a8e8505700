@@ -266,6 +266,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8cfc7b4_9d55fed8",
+        "filename": "src/dawn/native/StreamImplTint.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T11:39:12Z",
+      "side": 1,
+      "message": "I now see crbug.com/tint/1640.",
+      "parentUuid": "7e5af650_e4b62564",
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6a1493f_f23e7ac4",
