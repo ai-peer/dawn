@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d1f0443_f6eb0efc",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-01T18:10:26Z",
+      "side": 1,
+      "message": "This is a pattern we\u0027ve been using in the transforms for the state, which are all `struct`s, not `class`es.\n\nI get that `struct` vs `class` in this case is somewhat moot, but I find the `_` suffix useful when you have a typical class `.h` / `.cc` file split - it clearly indicates that stuff is declared in the header, and helps with non-collision of constructor args, and setter variables, etc.\n\nThese `State` structs exist to carry the common transform state, so you don\u0027t have to pass the same stuff into each and every method. They\u0027re a convenience (and possibly a slight performance win). I don\u0027t really see any benefit of the `_` suffix for these. It\u0027s just more noise in code that should be as easy to read as possible (as it\u0027s damn complex).",
+      "parentUuid": "fc77ea17_3acf3c74",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e87bdfc_523bb688",
         "filename": "src/tint/transform/std140.cc",
         "patchSetId": 5
@@ -155,6 +173,24 @@
       "side": 1,
       "message": "Maybe a TODO linking to the f16 bug?",
       "parentUuid": "871780a8_8dd2d953",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "befe0336_132fc0ce",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-01T18:10:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64c8d3d5_34a95948",
       "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
