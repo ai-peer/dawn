@@ -2727,6 +2727,7 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
         bool has_offset_attr = false;
         bool has_align_attr = false;
         bool has_size_attr = false;
+        std::optional<uint32_t> location;
         for (auto* attr : member->attributes) {
             Mark(attr);
             if (auto* o = attr->As<ast::StructMemberOffsetAttribute>()) {
@@ -2740,11 +2741,7 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
                 align = 1;
                 has_offset_attr = true;
             } else if (auto* a = attr->As<ast::StructMemberAlignAttribute>()) {
-                const auto* expr = Expression(a->align);
-                if (!expr) {
-                    return nullptr;
-                }
-                auto* materialized = Materialize(expr);
+                auto* materialized = Materialize(Expression(a->align));
                 if (!materialized) {
                     return nullptr;
                 }
@@ -2770,6 +2767,8 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
                 }
                 size = s->size;
                 has_size_attr = true;
+            } else if (auto* l = attr->As<ast::LocationAttribute>()) {
+                location = l->value;
             }
         }
 
@@ -2791,7 +2790,7 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
         auto* sem_member = builder_->create<sem::StructMember>(
             member, member->symbol, type, static_cast<uint32_t>(sem_members.size()),
             static_cast<uint32_t>(offset), static_cast<uint32_t>(align),
-            static_cast<uint32_t>(size));
+            static_cast<uint32_t>(size), location);
         builder_->Sem().Add(member, sem_member);
         sem_members.emplace_back(sem_member);
 
