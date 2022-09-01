@@ -16,6 +16,23 @@
       "message": "Thank you for your fix!\nSorry this took me so long to find - WIP changes are hidden by default.",
       "revId": "c1c7d7944e83d5c97db1540cea3c4f75f5356e24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5604e445_641d3281",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-01T22:42:08Z",
+      "side": 1,
+      "message": "Thanks for finding and fixing this!\nI\u0027ve taken it over, in https://dawn-review.googlesource.com/c/dawn/+/101069\n",
+      "revId": "c1c7d7944e83d5c97db1540cea3c4f75f5356e24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
