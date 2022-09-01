@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc77ea17_3acf3c74",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-01T17:05:27Z",
+      "side": 1,
+      "message": "Then `b_`? As far as I know the pattern is a tail on private variables?",
+      "parentUuid": "95e83268_d913de33",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e87bdfc_523bb688",
         "filename": "src/tint/transform/std140.cc",
         "patchSetId": 5
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "I\u0027m honestly not sure what the intersection of `f16` and `std140` is. I was hoping to leave this can of worms for the `f16` implementation work.",
       "parentUuid": "3e87bdfc_523bb688",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64c8d3d5_34a95948",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-01T17:05:27Z",
+      "side": 1,
+      "message": "Maybe a TODO linking to the f16 bug?",
+      "parentUuid": "871780a8_8dd2d953",
       "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
