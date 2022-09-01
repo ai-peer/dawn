@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f463b08d_4d7d5d61",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T11:38:06Z",
+      "side": 1,
+      "message": "Please change to:\n\n```\ntint/reader/spirv: Add missing UnwrapRef\n\nIn MakeCoordinateOperandsForImageAccess()\n\nBug: tint:1646\nChange-Id: I77db9116385a37038e306fb882bbb1f9f7a4dd18\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "006bfe5ecd4cfcaf0370b4de263778356b9d9623",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
