@@ -284,6 +284,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fdd86e6_789cf019",
+        "filename": "src/dawn/native/StreamImplTint.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-01T15:55:33Z",
+      "side": 1,
+      "message": "Potential simplification:\nhttps://dawn-review.googlesource.com/c/dawn/+/101001",
+      "parentUuid": "b8cfc7b4_9d55fed8",
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6a1493f_f23e7ac4",
