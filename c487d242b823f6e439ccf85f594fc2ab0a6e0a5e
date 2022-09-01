@@ -16,6 +16,98 @@
       "message": "LGTM",
       "revId": "c487d242b823f6e439ccf85f594fc2ab0a6e0a5e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48b46c06_74a43bde",
+        "filename": "src/tint/reflection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-01T18:21:38Z",
+      "side": 1,
+      "message": "nit: ForEachField (captial \"E\")",
+      "range": {
+        "startLine": 45,
+        "startChar": 5,
+        "endLine": 45,
+        "endChar": 17
+      },
+      "revId": "c487d242b823f6e439ccf85f594fc2ab0a6e0a5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afc017e9_dfb3182d",
+        "filename": "src/tint/reflection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-01T18:21:38Z",
+      "side": 1,
+      "message": "Could this function be a non-static member function? Then we would have the option of doing `object.ForEachField(callback)` (similar to how we have the choice between `object.As\u003cT\u003e()` and `As\u003cT\u003e(object)`.",
+      "range": {
+        "startLine": 60,
+        "startChar": 27,
+        "endLine": 60,
+        "endChar": 42
+      },
+      "revId": "c487d242b823f6e439ccf85f594fc2ab0a6e0a5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8665855b_fa60b71a",
+        "filename": "src/tint/reflection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-01T18:21:38Z",
+      "side": 1,
+      "message": "I think this should also be named `ForEachField`.",
+      "range": {
+        "startLine": 60,
+        "startChar": 20,
+        "endLine": 60,
+        "endChar": 26
+      },
+      "revId": "c487d242b823f6e439ccf85f594fc2ab0a6e0a5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f12b240e_7e330a2d",
+        "filename": "src/tint/transform/multiplanar_external_texture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-01T18:21:38Z",
+      "side": 1,
+      "message": "Can we move this below the members, as you\u0027ve done every else?",
+      "range": {
+        "startLine": 47,
+        "startChar": 7,
+        "endLine": 48,
+        "endChar": 38
+      },
+      "revId": "c487d242b823f6e439ccf85f594fc2ab0a6e0a5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
