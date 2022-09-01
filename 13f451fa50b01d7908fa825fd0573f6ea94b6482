@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5879fac7_095725af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "Thank you for the thorougher review!",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "623570ee_99dd6001",
@@ -14,6 +31,24 @@
       "writtenOn": "2022-09-01T16:21:44Z",
       "side": 1,
       "message": "This is an interesting inequality ....",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c04b4637_74622671",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "Sure is. Fixed. Also fixed e2e tests that were affected by this.",
+      "parentUuid": "623570ee_99dd6001",
       "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -37,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95e83268_d913de33",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "It\u0027s a fairly standard pattern in tint. I count 126 instances of `ProgramBuilder\u0026 b` in the codebase.\n\nThe point of the `struct TRANSFORM::State` PIMPL pattern is to remove the boilerplate from the the template implementations.",
+      "parentUuid": "37b549bf_e2f1c5f9",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e87bdfc_523bb688",
         "filename": "src/tint/transform/std140.cc",
         "patchSetId": 5
@@ -48,6 +101,24 @@
       "writtenOn": "2022-09-01T16:21:44Z",
       "side": 1,
       "message": "Does the `ColumnStride() \u003d\u003d 8` work for `f16`? Isn\u0027t the stride for the `vec2\u003cf16\u003e` 4 instead of 8?",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "871780a8_8dd2d953",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "I\u0027m honestly not sure what the intersection of `f16` and `std140` is. I was hoping to leave this can of worms for the `f16` implementation work.",
+      "parentUuid": "3e87bdfc_523bb688",
       "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "adad47fa_74be782a",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8d80ec6_8dd3f5db",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c79971b9_88646866",
@@ -82,6 +171,24 @@
       "writtenOn": "2022-09-01T16:21:44Z",
       "side": 1,
       "message": "nit: need to fork",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "762ca826_927e277b",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c79971b9_88646866",
       "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +210,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "376a71a2_34584e74",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "952d3906_7cb45953",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0f0ef18_79387fbf",
@@ -116,6 +241,24 @@
       "writtenOn": "2022-09-01T16:21:44Z",
       "side": 1,
       "message": "nit: members that have not",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fb55296_f2fdf58a",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0f0ef18_79387fbf",
       "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -137,6 +280,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6520ee12_1a6c91e1",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd0fe351_c5783ec2",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "815b7495_ba273447",
@@ -150,6 +311,24 @@
       "writtenOn": "2022-09-01T16:21:44Z",
       "side": 1,
       "message": "Maybe `PrefixForUniqueNames`? I thought this was creating a single unique name, but it\u0027s in fact finding a prefix for which count names can be created.",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79ed5543_5be394cc",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "815b7495_ba273447",
       "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -171,6 +350,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7adec3d_b10dea15",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dca800b5_d241f771",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "280760e5_42108cb1",
@@ -184,6 +381,24 @@
       "writtenOn": "2022-09-01T16:21:44Z",
       "side": 1,
       "message": "This dosen\u0027t seem quite right. The comment makes me thing there is only a single type returned, but this is creating a new type each time it\u0027s called?",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "792c286a_166acae5",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "280760e5_42108cb1",
       "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -205,6 +420,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77b261a7_4bdb66f9",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "No, there\u0027s a check below to see if `fn` is a valid symbol.",
+      "parentUuid": "06af8891_bbf7f60a",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40ab7601_0d984b73",
@@ -218,6 +451,24 @@
       "writtenOn": "2022-09-01T16:21:44Z",
       "side": 1,
       "message": "Having a comment to describe what is being built would be useful. Seems like it\u0027s turning the column index into the case selector for a switch, not sure what the `default` case is doing?",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acee95a6_7bc77567",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40ab7601_0d984b73",
       "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -239,6 +490,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b2bf690_bed680e6",
+        "filename": "src/tint/transform/std140_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b68641b_5da097e9",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3338b4c6_b563d153",
@@ -252,6 +521,24 @@
       "writtenOn": "2022-09-01T16:21:44Z",
       "side": 1,
       "message": "Maybe template this and test:\n\n* `mat2x2\u003cf32\u003e`\n* `mat3x2\u003cf32\u003e`\n* `mat4x2\u003cf32\u003e`\n* `mat2x2\u003cf16\u003e`\n* `mat3x2\u003cf16\u003e`\n* `mat4x2\u003cf16\u003e`",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31fcbd87_62b7b0aa",
+        "filename": "src/tint/transform/std140_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3338b4c6_b563d153",
       "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -273,6 +560,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a80fd5e8_14c3b856",
+        "filename": "src/tint/transform/std140_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46dab974_6a0fd332",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb646b19_244de9bf",
@@ -290,6 +595,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c12dab91_09571f1e",
+        "filename": "src/tint/transform/std140_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb646b19_244de9bf",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81b1afe0_9c0220ef",
@@ -303,6 +626,24 @@
       "writtenOn": "2022-09-01T16:21:44Z",
       "side": 1,
       "message": "Nit, test name says 3x2",
+      "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41807560_a6979297",
+        "filename": "src/tint/transform/std140_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T17:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81b1afe0_9c0220ef",
       "revId": "13f451fa50b01d7908fa825fd0573f6ea94b6482",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
