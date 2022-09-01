@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a17e452_ddf947de",
+        "filename": "src/tint/reader/spirv/parser_impl_handle_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2457,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-01T22:17:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "16455eec_5aaa8cd7",
+      "revId": "f0f445c9453a5a45a67c9517e51137881f5b9a77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aaa10e23_1890155d",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-09-01T20:09:59Z",
       "side": 1,
       "message": "This case fails before the fix.",
+      "revId": "f0f445c9453a5a45a67c9517e51137881f5b9a77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2866ddaf_d70b996a",
+        "filename": "src/tint/reader/spirv/parser_impl_handle_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2497,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-01T22:17:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "aaa10e23_1890155d",
       "revId": "f0f445c9453a5a45a67c9517e51137881f5b9a77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
