@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89fc12de_b7d75ff1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-01T22:15:37Z",
+      "side": 1,
+      "message": "This is the better fix.\nObsoletes https://dawn-review.git.corp.google.com/c/dawn/+/98981",
+      "revId": "b9febf308f0bf220175d2ea03b8c4fc80e9f60b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
