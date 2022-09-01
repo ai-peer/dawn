@@ -773,6 +773,43 @@ TEST_F(ResolverTest, Function_Parameters) {
     EXPECT_TRUE(func_sem->ReturnType()->Is<sem::Void>());
 }
 
+TEST_F(ResolverTest, Function_Parameters_Locations) {
+    auto* param_a = Param("a", ty.f32(), utils::Vector{Location(3)});
+    auto* param_b = Param("b", ty.u32(), utils::Vector{Builtin(ast::BuiltinValue::kVertexIndex)});
+    auto* param_c = Param("c", ty.u32(), utils::Vector{Location(1)});
+
+    GlobalVar("my_vec", ty.vec4<f32>(), ast::StorageClass::kPrivate);
+    auto* func = Func("my_func",
+                      utils::Vector{
+                          param_a,
+                          param_b,
+                          param_c,
+                      },
+                      ty.vec4<f32>(),
+                      utils::Vector{
+                          Return("my_vec"),
+                      },
+                      utils::Vector{
+                          Stage(ast::PipelineStage::kVertex),
+                      },
+                      utils::Vector{
+                          Builtin(ast::BuiltinValue::kPosition),
+                      });
+
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+
+    auto* func_sem = Sem().Get(func);
+    ASSERT_NE(func_sem, nullptr);
+    EXPECT_EQ(func_sem->Parameters().Length(), 3u);
+    ASSERT_TRUE(func_sem->Parameters()[0]->Location().has_value());
+    EXPECT_EQ(3u, func_sem->Parameters()[0]->Location().value());
+
+    EXPECT_FALSE(func_sem->Parameters()[1]->Location().has_value());
+
+    ASSERT_TRUE(func_sem->Parameters()[2]->Location().has_value());
+    EXPECT_EQ(1u, func_sem->Parameters()[2]->Location().value());
+}
+
 TEST_F(ResolverTest, Function_RegisterInputOutputVariables) {
     auto* s = Structure("S", utils::Vector{Member("m", ty.u32())});
 
@@ -808,7 +845,7 @@ TEST_F(ResolverTest, Function_ReturnType_Location) {
                           Return(1_f),
                       },
                       utils::Vector{
-                          Stage(ast::PipelineStage::kFragment),
+                          Stage(ast::PipelineStage::kCompute),
                       },
                       utils::Vector{
                           Location(2),
