@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "495b1d56_6d016d23",
+        "filename": "src/tint/reflection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-01T18:53:49Z",
+      "side": 1,
+      "message": "Yeah, in languages like C# where it\u0027s named `foreach`, they choose not to capitalize any of the words, but here we capital the `F` in `Field`, so it makes it look like \"foreach\" is a word. Javascript calls it `forEach`, btw.",
+      "parentUuid": "307e5910_0ea8a2bb",
+      "range": {
+        "startLine": 45,
+        "startChar": 5,
+        "endLine": 45,
+        "endChar": 17
+      },
+      "revId": "c487d242b823f6e439ccf85f594fc2ab0a6e0a5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "afc017e9_dfb3182d",
         "filename": "src/tint/reflection.h",
         "patchSetId": 5
@@ -149,6 +173,54 @@
       "side": 1,
       "message": "It\u0027s an internal thing that you wouldn\u0027t call directly. I\u0027d like to keep the name different so there\u0027s less confusion.",
       "parentUuid": "8665855b_fa60b71a",
+      "range": {
+        "startLine": 60,
+        "startChar": 20,
+        "endLine": 60,
+        "endChar": 26
+      },
+      "revId": "c487d242b823f6e439ccf85f594fc2ab0a6e0a5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d05b2ddf_75351867",
+        "filename": "src/tint/reflection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-01T18:53:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "633d15a6_669fc4e3",
+      "range": {
+        "startLine": 60,
+        "startChar": 27,
+        "endLine": 60,
+        "endChar": 42
+      },
+      "revId": "c487d242b823f6e439ccf85f594fc2ab0a6e0a5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7beb7239_88876377",
+        "filename": "src/tint/reflection.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-01T18:53:49Z",
+      "side": 1,
+      "message": "If it\u0027s internal, we should probably give it a name that ensures we don\u0027t call it directly, like `InternalForEachField` or `DoForEachField`. Right now, my IDE will list `Fields` in the list of possible members for these classes.",
+      "parentUuid": "41c29c28_3672da33",
       "range": {
         "startLine": 60,
         "startChar": 20,
