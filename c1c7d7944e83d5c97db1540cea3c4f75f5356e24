@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8c8fd95_5d9c63bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-01T11:33:51Z",
+      "side": 1,
+      "message": "Thank you for your fix!\nSorry this took me so long to find - WIP changes are hidden by default.",
+      "revId": "c1c7d7944e83d5c97db1540cea3c4f75f5356e24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
