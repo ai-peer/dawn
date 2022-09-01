@@ -126,6 +126,21 @@ struct DAWN_NATIVE_EXPORT ExternalImageExportInfoDmaBuf : ExternalImageExportInf
     ExternalImageExportInfoDmaBuf();
 };
 
+#ifdef __ANDROID__
+
+// Descriptor for AHardwareBuffer image import
+struct DAWN_NATIVE_EXPORT ExternalImageDescriptorAHardwareBuffer : ExternalImageDescriptorFD {
+    ExternalImageDescriptorAHardwareBuffer();
+
+    struct AHardwareBuffer* handle;
+};
+
+struct DAWN_NATIVE_EXPORT ExternalImageExportInfoAHardwareBuffer : ExternalImageExportInfoFD {
+    ExternalImageExportInfoAHardwareBuffer();
+};
+
+#endif  // __ANDROID__
+
 #endif  // __linux__
 
 // Imports external memory into a Vulkan image. Internally, this uses external memory /
