@@ -2,7 +2,7 @@
 
 void f() {
   ivec3 a = ivec3(1, 2, 3);
-  ivec3 b = ivec3(0, 5, 0);
+  ivec3 b = ivec3(1, 5, 1);
   ivec3 r = (a / b);
 }
 

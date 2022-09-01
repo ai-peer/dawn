@@ -2,7 +2,7 @@
 
 void f() {
   float a = 4.0f;
-  vec3 b = vec3(0.0f, 2.0f, 0.0f);
+  vec3 b = vec3(1.0f, 2.0f, 1.0f);
   vec3 r = (a / b);
 }
 

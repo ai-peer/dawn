@@ -2,7 +2,7 @@
 
 void f() {
   uint a = 4u;
-  uvec3 b = uvec3(0u, 2u, 0u);
+  uvec3 b = uvec3(1u, 2u, 1u);
   uvec3 r = (a / b);
 }
 

@@ -3,7 +3,7 @@
 using namespace metal;
 kernel void f() {
   uint3 const a = uint3(1u, 2u, 3u);
-  uint const b = 0u;
+  uint const b = 1u;
   uint3 const r = (a / b);
   return;
 }

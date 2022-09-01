@@ -3,7 +3,7 @@
 using namespace metal;
 kernel void f() {
   half const a = 4.0h;
-  half3 const b = half3(0.0h, 2.0h, 0.0h);
+  half3 const b = half3(1.0h, 2.0h, 1.0h);
   half3 const r = (a / b);
   return;
 }
