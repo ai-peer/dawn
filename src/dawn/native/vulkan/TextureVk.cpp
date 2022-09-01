@@ -216,6 +216,12 @@ void FillVulkanCreateInfoSizesAndType(const Texture& texture, VkImageCreateInfo*
     }
 }
 
+#if DAWN_PLATFORM_IS(ANDROID)
+static constexpr uint32_t kExportQueueFamilyIndex = VK_QUEUE_FAMILY_FOREIGN_EXT;
+#else
+static constexpr uint32_t kExportQueueFamilyIndex = VK_QUEUE_FAMILY_EXTERNAL_KHR;
+#endif
+
 }  // namespace
 
 // Converts Dawn texture format to Vulkan formats.
@@ -829,7 +835,7 @@ void Texture::TransitionEagerlyForExport(CommandRecordingContext* recordingConte
 
     Device* device = ToBackend(GetDevice());
     barrier.srcQueueFamilyIndex = device->GetGraphicsQueueFamily();
-    barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_EXTERNAL_KHR;
+    barrier.dstQueueFamilyIndex = kExportQueueFamilyIndex;
 
     // We don't know when the importing queue will need the texture, so pass
     // VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT to ensure the barrier happens-before any usage in the
@@ -950,7 +956,7 @@ void Texture::TweakTransitionForExternalUsage(CommandRecordingContext* recording
 
         VkImageMemoryBarrier* barrier = &(*barriers)[transitionBarrierStart];
         // Transfer texture from external queue to graphics queue
-        barrier->srcQueueFamilyIndex = VK_QUEUE_FAMILY_EXTERNAL_KHR;
+        barrier->srcQueueFamilyIndex = kExportQueueFamilyIndex;
         barrier->dstQueueFamilyIndex = ToBackend(GetDevice())->GetGraphicsQueueFamily();
 
         // srcAccessMask means nothing when importing. Queue transfers require a barrier on
