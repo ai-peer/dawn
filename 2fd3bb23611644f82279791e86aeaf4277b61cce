@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf09e45a_1f201222",
+        "filename": "test/tint/bug/tint/1083.wgsl",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-01T23:27:43Z",
+      "side": 1,
+      "message": "Unfortunately, I had to modify a bunch of these tests because of crbug.com/tint/1664\n\nOne thing I could do is split out these test changes into a separate CL that we can later revert when crbug.com/tint/1664 is fixed...",
+      "range": {
+        "startLine": 4,
+        "startChar": 4,
+        "endLine": 4,
+        "endChar": 8
+      },
+      "revId": "2fd3bb23611644f82279791e86aeaf4277b61cce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
