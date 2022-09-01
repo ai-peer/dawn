@@ -39,6 +39,23 @@
       "message": "Thank you again!",
       "revId": "91b795781bb92288bf50d585789c69c4caf1996b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a9e4d8f_aec41465",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-01T22:34:10Z",
+      "side": 1,
+      "message": "Please abandon this.  I\u0027ve taken over this in https://dawn-review.googlesource.com/c/dawn/+/101068",
+      "revId": "91b795781bb92288bf50d585789c69c4caf1996b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
