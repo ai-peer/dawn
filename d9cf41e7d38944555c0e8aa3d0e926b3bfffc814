@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84bec11a_628adc2d",
+        "filename": "test/tint/buffer/uniform/std140/mat2x2/to_storage.wgsl.expected.glsl",
+        "patchSetId": 15
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-09-02T17:54:15Z",
+      "side": 1,
+      "message": "This seems to occur because the std140 transform leaves the original struct\u0027s storage classes in place. This means that the original struct is still considered to have kUniform, kStorage or kPushConstant storage class, so it remains host \n shareable, and needs padding (when it doesn\u0027t).",
+      "revId": "d9cf41e7d38944555c0e8aa3d0e926b3bfffc814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
