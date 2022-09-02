@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f8c7fa1_e25ccbae",
+        "filename": "src/tint/program.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-02T17:23:38Z",
+      "side": 1,
+      "message": "Under what condition would this overload be called? Normally we\u0027d call this function with a variable of type `const ast::Type* type` or `const sem::Type*`, and not with `nullptr` directly.",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 51
+      },
+      "revId": "cc83728da39275767e676acaec5270a42629e19c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
