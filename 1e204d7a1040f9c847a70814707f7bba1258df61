@@ -16,6 +16,29 @@
       "message": "Ben: PTAL. Thanks!",
       "revId": "1e204d7a1040f9c847a70814707f7bba1258df61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0f41bf3_d26fcbbf",
+        "filename": "src/tint/transform/add_block_attribute_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-02T14:05:38Z",
+      "side": 1,
+      "message": "When the expectation is a no-change, we usually use `auto* expect \u003d src;`. It\u0027s just clearer that the two strings are identical.",
+      "range": {
+        "startLine": 846,
+        "startChar": 18,
+        "endLine": 857,
+        "endChar": 2
+      },
+      "revId": "1e204d7a1040f9c847a70814707f7bba1258df61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
