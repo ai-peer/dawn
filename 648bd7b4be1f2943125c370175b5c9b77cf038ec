@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7626fd18_62c3f3d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T17:59:47Z",
+      "side": 1,
+      "message": "Q: is `#include \"src/tint/reflection.h\"` allowed in `include/tint/override_id.h`? (Probably not)\n\nWas trying to add a TINT_REFLECT for `struct OverrideId`",
+      "revId": "648bd7b4be1f2943125c370175b5c9b77cf038ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
