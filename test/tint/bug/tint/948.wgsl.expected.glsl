@@ -28,6 +28,8 @@ layout(location = 0) out vec4 glFragColor_1_1;
 struct LeftOver {
   float time;
   uint padding;
+  uint pad;
+  uint pad_1;
   mat4 worldViewProjection;
   vec2 outputSize;
   vec2 stageSize;
@@ -35,11 +37,14 @@ struct LeftOver {
   float stageScale;
   float spriteCount;
   vec3 colorMul;
+  uint pad_2;
 };
 
-layout(binding = 9) uniform LeftOver_1 {
+layout(binding = 9, std140) uniform LeftOver_1 {
   float time;
   uint padding;
+  uint pad_3;
+  uint pad_4;
   mat4 worldViewProjection;
   vec2 outputSize;
   vec2 stageSize;
@@ -47,6 +52,7 @@ layout(binding = 9) uniform LeftOver_1 {
   float stageScale;
   float spriteCount;
   vec3 colorMul;
+  uint pad_5;
 } x_20;
 
 vec2 tUV = vec2(0.0f, 0.0f);

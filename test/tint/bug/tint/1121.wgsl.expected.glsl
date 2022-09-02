@@ -30,7 +30,7 @@ struct Config {
   uint tileSize;
 };
 
-layout(binding = 0) uniform Config_1 {
+layout(binding = 0, std140) uniform Config_1 {
   uint numLights;
   uint numTiles;
   uint tileCountX;
@@ -47,7 +47,7 @@ struct Uniforms {
   vec4 fullScreenSize;
 };
 
-layout(binding = 0) uniform Uniforms_1 {
+layout(binding = 0, std140) uniform Uniforms_1 {
   vec4 tint_symbol;
   vec4 tint_symbol_1;
   mat4 viewMatrix;

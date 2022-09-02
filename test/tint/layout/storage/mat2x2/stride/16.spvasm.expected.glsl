@@ -1,7 +1,11 @@
+SKIP: FAILED
+
 #version 310 es
 
 struct strided_arr {
   vec2 el;
+  uint pad;
+  uint pad_1;
 };
 
 struct SSBO {
@@ -38,3 +42,11 @@ void main() {
   f();
   return;
 }
+Error parsing GLSL shader:
+ERROR: 0:21: 'constructor' : Number of constructor parameters does not match the number of structure fields
+ERROR: 0:21: '=' :  cannot convert from ' const float' to ' temp structure{ global highp 2-component vector of float el,  global highp uint pad,  global highp uint pad_1}'
+ERROR: 0:21: '' : compilation terminated
+ERROR: 3 compilation errors.  No code generated.
+
+
+

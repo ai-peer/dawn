@@ -37,7 +37,7 @@ struct Simple {
   float member;
 };
 
-layout(binding = 0) uniform Simple_1 {
+layout(binding = 0, std140) uniform Simple_1 {
   float member;
 } simple;
 

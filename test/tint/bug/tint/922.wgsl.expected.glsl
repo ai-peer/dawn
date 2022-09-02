@@ -44,16 +44,16 @@ struct VertexOutput {
   vec4 member;
 };
 
-layout(binding = 0) uniform ub_SceneParams_1 {
+layout(binding = 0, std140) uniform ub_SceneParams_1 {
   Mat4x4_ u_Projection;
 } global;
 
-layout(binding = 1) uniform ub_MaterialParams_1 {
+layout(binding = 1, std140) uniform ub_MaterialParams_1 {
   Mat4x2_ u_TexMtx[1];
   vec4 u_Misc0_;
 } global1;
 
-layout(binding = 2) uniform ub_PacketParams_1 {
+layout(binding = 2, std140) uniform ub_PacketParams_1 {
   Mat4x3_ u_PosMtx[32];
 } global2;
 

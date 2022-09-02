@@ -3,11 +3,17 @@
 struct UBO {
   ivec4 data[4];
   int dynamic_idx;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
 };
 
-layout(binding = 0) uniform UBO_1 {
+layout(binding = 0, std140) uniform UBO_1 {
   ivec4 data[4];
   int dynamic_idx;
+  uint pad_3;
+  uint pad_4;
+  uint pad_5;
 } ubo;
 
 struct Result {

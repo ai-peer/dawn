@@ -8,16 +8,18 @@ struct S {
 
 struct S_std140 {
   int before;
+  uint pad;
   vec2 m_0;
   vec2 m_1;
   int after;
+  uint pad_1;
 };
 
 struct u_block {
   S_std140 inner[4];
 };
 
-layout(binding = 0) uniform u_block_1 {
+layout(binding = 0, std140) uniform u_block_1 {
   S_std140 inner[4];
 } u;
 

@@ -23,7 +23,7 @@ struct a_block {
   Outer_std140 inner[4];
 };
 
-layout(binding = 0) uniform a_block_1 {
+layout(binding = 0, std140) uniform a_block_1 {
   Outer_std140 inner[4];
 } a;
 

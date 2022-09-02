@@ -2,13 +2,16 @@
 
 struct tint_symbol_block {
   uvec3 inner;
+  uint pad;
 };
 
 layout(binding = 0, std430) buffer tint_symbol_block_1 {
   uvec3 inner;
+  uint pad_1;
 } tint_symbol;
 layout(binding = 1, std430) buffer tint_symbol_block_2 {
   uvec3 inner;
+  uint pad_2;
 } tint_symbol_1;
 void tint_symbol_2() {
   tint_symbol_1.inner = tint_symbol.inner;

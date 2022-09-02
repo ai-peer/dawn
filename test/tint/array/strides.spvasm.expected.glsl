@@ -1,11 +1,34 @@
+SKIP: FAILED
+
 #version 310 es
 
 struct strided_arr {
   float el;
+  uint pad;
 };
 
 struct strided_arr_1 {
   strided_arr el[3][2];
+  uint pad_1;
+  uint pad_2;
+  uint pad_3;
+  uint pad_4;
+  uint pad_5;
+  uint pad_6;
+  uint pad_7;
+  uint pad_8;
+  uint pad_9;
+  uint pad_10;
+  uint pad_11;
+  uint pad_12;
+  uint pad_13;
+  uint pad_14;
+  uint pad_15;
+  uint pad_16;
+  uint pad_17;
+  uint pad_18;
+  uint pad_19;
+  uint pad_20;
 };
 
 struct S {
@@ -35,3 +58,10 @@ void main() {
   f();
   return;
 }
+Error parsing GLSL shader:
+ERROR: 0:44: 'constructor' : Number of constructor parameters does not match the number of structure fields
+ERROR: 0:44: '' : compilation terminated
+ERROR: 2 compilation errors.  No code generated.
+
+
+

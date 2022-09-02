@@ -15,6 +15,7 @@ struct S {
   mat3x2 h;
   Inner i;
   Inner j[4];
+  uint pad;
 };
 
 layout(binding = 0, std430) buffer S_1 {
@@ -28,6 +29,7 @@ layout(binding = 0, std430) buffer S_1 {
   mat3x2 h;
   Inner i;
   Inner j[4];
+  uint pad_1;
 } s;
 void tint_symbol() {
   s.a = ivec3(0);

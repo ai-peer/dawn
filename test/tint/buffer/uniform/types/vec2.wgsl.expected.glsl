@@ -4,7 +4,7 @@ struct u_block {
   ivec2 inner;
 };
 
-layout(binding = 0) uniform u_block_1 {
+layout(binding = 0, std140) uniform u_block_1 {
   ivec2 inner;
 } u;
 

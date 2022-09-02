@@ -15,7 +15,7 @@ layout(binding = 1, std430) buffer Matrix_2 {
 layout(binding = 2, std430) buffer Matrix_3 {
   float numbers[];
 } resultMatrix;
-layout(binding = 3) uniform Uniforms_1 {
+layout(binding = 3, std140) uniform Uniforms_1 {
   uint dimAOuter;
   uint dimInner;
   uint dimBOuter;

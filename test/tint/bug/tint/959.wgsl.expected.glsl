@@ -29,35 +29,35 @@ layout(binding = 0, std430) buffer S_7 {
 layout(binding = 0, std430) buffer S_8 {
   float a;
 } b7;
-layout(binding = 1) uniform S_9 {
+layout(binding = 1, std140) uniform S_9 {
   float a;
 } b8;
 
-layout(binding = 1) uniform S_10 {
+layout(binding = 1, std140) uniform S_10 {
   float a;
 } b9;
 
-layout(binding = 1) uniform S_11 {
+layout(binding = 1, std140) uniform S_11 {
   float a;
 } b10;
 
-layout(binding = 1) uniform S_12 {
+layout(binding = 1, std140) uniform S_12 {
   float a;
 } b11;
 
-layout(binding = 1) uniform S_13 {
+layout(binding = 1, std140) uniform S_13 {
   float a;
 } b12;
 
-layout(binding = 1) uniform S_14 {
+layout(binding = 1, std140) uniform S_14 {
   float a;
 } b13;
 
-layout(binding = 1) uniform S_15 {
+layout(binding = 1, std140) uniform S_15 {
   float a;
 } b14;
 
-layout(binding = 1) uniform S_16 {
+layout(binding = 1, std140) uniform S_16 {
   float a;
 } b15;
 

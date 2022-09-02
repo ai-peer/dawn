@@ -89,7 +89,7 @@ struct Particles {
   Particle particles[5];
 };
 
-layout(binding = 0) uniform SimParams_1 {
+layout(binding = 0, std140) uniform SimParams_1 {
   float deltaT;
   float rule1Distance;
   float rule2Distance;

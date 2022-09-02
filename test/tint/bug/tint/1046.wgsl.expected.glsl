@@ -15,14 +15,18 @@ struct Uniforms {
   mat4 proj;
   uint numPointLights;
   uint color_source;
+  uint pad;
+  uint pad_1;
   vec4 color;
 };
 
-layout(binding = 0) uniform Uniforms_1 {
+layout(binding = 0, std140) uniform Uniforms_1 {
   mat4 worldView;
   mat4 proj;
   uint numPointLights;
   uint color_source;
+  uint pad_2;
+  uint pad_3;
   vec4 color;
 } uniforms;
 

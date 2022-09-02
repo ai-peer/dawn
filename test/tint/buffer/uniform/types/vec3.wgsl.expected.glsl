@@ -2,10 +2,12 @@
 
 struct u_block {
   uvec3 inner;
+  uint pad;
 };
 
-layout(binding = 0) uniform u_block_1 {
+layout(binding = 0, std140) uniform u_block_1 {
   uvec3 inner;
+  uint pad_1;
 } u;
 
 void tint_symbol() {

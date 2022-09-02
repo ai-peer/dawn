@@ -6,7 +6,9 @@ struct Uniforms {
   uint pad1;
   uint pad2;
   vec3 bbMin;
+  uint pad;
   vec3 bbMax;
+  uint pad_1;
 };
 
 struct Dbg {
@@ -24,13 +26,15 @@ struct Dbg {
   float value_f32_3;
 };
 
-layout(binding = 0) uniform Uniforms_1 {
+layout(binding = 0, std140) uniform Uniforms_1 {
   uint numTriangles;
   uint gridSize;
   uint pad1;
   uint pad2;
   vec3 bbMin;
+  uint pad_2;
   vec3 bbMax;
+  uint pad_3;
 } uniforms;
 
 layout(binding = 10, std430) buffer U32s_1 {
@@ -127,7 +131,9 @@ struct Uniforms {
   uint pad1;
   uint pad2;
   vec3 bbMin;
+  uint pad;
   vec3 bbMax;
+  uint pad_1;
 };
 
 struct Dbg {
@@ -145,13 +151,15 @@ struct Dbg {
   float value_f32_3;
 };
 
-layout(binding = 0) uniform Uniforms_1 {
+layout(binding = 0, std140) uniform Uniforms_1 {
   uint numTriangles;
   uint gridSize;
   uint pad1;
   uint pad2;
   vec3 bbMin;
+  uint pad_2;
   vec3 bbMax;
+  uint pad_3;
 } uniforms;
 
 layout(binding = 10, std430) buffer U32s_1 {
@@ -218,7 +226,9 @@ struct Uniforms {
   uint pad1;
   uint pad2;
   vec3 bbMin;
+  uint pad;
   vec3 bbMax;
+  uint pad_1;
 };
 
 struct Dbg {
@@ -236,13 +246,15 @@ struct Dbg {
   float value_f32_3;
 };
 
-layout(binding = 0) uniform Uniforms_1 {
+layout(binding = 0, std140) uniform Uniforms_1 {
   uint numTriangles;
   uint gridSize;
   uint pad1;
   uint pad2;
   vec3 bbMin;
+  uint pad_2;
   vec3 bbMax;
+  uint pad_3;
 } uniforms;
 
 layout(binding = 10, std430) buffer U32s_1 {

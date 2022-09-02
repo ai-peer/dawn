@@ -10,14 +10,20 @@ struct S_std140 {
   vec2 matrix_0;
   vec2 matrix_1;
   vec2 matrix_2;
+  uint pad;
+  uint pad_1;
   vec3 vector;
+  uint pad_2;
 };
 
-layout(binding = 0) uniform S_std140_1 {
+layout(binding = 0, std140) uniform S_std140_1 {
   vec2 matrix_0;
   vec2 matrix_1;
   vec2 matrix_2;
+  uint pad_3;
+  uint pad_4;
   vec3 vector;
+  uint pad_5;
 } data;
 
 mat3x2 load_data_matrix() {

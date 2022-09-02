@@ -4,7 +4,7 @@ struct Constants {
   uint zero;
 };
 
-layout(binding = 0) uniform Constants_1 {
+layout(binding = 0, std140) uniform Constants_1 {
   uint zero;
 } constants;
 

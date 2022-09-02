@@ -15,7 +15,7 @@ layout(binding = 1, std430) buffer Matrix_2 {
 layout(binding = 2, std430) buffer Matrix_3 {
   uint numbers[];
 } resultMatrix;
-layout(binding = 3) uniform Uniforms_1 {
+layout(binding = 3, std140) uniform Uniforms_1 {
   uvec2 aShape;
   uvec2 bShape;
   uvec2 outShape;

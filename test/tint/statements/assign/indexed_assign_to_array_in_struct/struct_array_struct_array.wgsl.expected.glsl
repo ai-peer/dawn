@@ -17,7 +17,7 @@ struct OuterS {
   S1 a1[8];
 };
 
-layout(binding = 4) uniform Uniforms_1 {
+layout(binding = 4, std140) uniform Uniforms_1 {
   uint i;
   uint j;
 } uniforms;

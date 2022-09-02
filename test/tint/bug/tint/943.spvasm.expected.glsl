@@ -5,18 +5,30 @@ note: reading from module-scope private variable 'dimInner_1' may result in a no
 
 struct Uniforms {
   float NAN;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
   ivec3 aShape;
+  uint pad_3;
   ivec3 bShape;
+  uint pad_4;
   ivec3 outShape;
+  uint pad_5;
   ivec2 outShapeStrides;
 };
 
 int dimAOuter_1 = 0;
-layout(binding = 3) uniform Uniforms_1 {
+layout(binding = 3, std140) uniform Uniforms_1 {
   float NAN;
+  uint pad_6;
+  uint pad_7;
+  uint pad_8;
   ivec3 aShape;
+  uint pad_9;
   ivec3 bShape;
+  uint pad_10;
   ivec3 outShape;
+  uint pad_11;
   ivec2 outShapeStrides;
 } x_48;
 

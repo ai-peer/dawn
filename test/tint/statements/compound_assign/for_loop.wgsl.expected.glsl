@@ -6,12 +6,18 @@ void unused_entry_point() {
 }
 struct S {
   int a;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
   vec4 b;
   mat2 c;
 };
 
 layout(binding = 0, std430) buffer S_1 {
   int a;
+  uint pad_3;
+  uint pad_4;
+  uint pad_5;
   vec4 b;
   mat2 c;
 } v;

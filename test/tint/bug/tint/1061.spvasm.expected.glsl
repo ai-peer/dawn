@@ -6,7 +6,7 @@ struct buf0 {
   vec4 ref;
 };
 
-layout(binding = 0) uniform buf0_1 {
+layout(binding = 0, std140) uniform buf0_1 {
   vec4 ref;
 } x_7;
 

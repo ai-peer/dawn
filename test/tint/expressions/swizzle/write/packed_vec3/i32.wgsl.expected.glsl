@@ -6,10 +6,12 @@ void unused_entry_point() {
 }
 struct S {
   ivec3 v;
+  uint pad;
 };
 
 layout(binding = 0, std430) buffer S_1 {
   ivec3 v;
+  uint pad_1;
 } U;
 void f() {
   U.v = ivec3(1, 2, 3);

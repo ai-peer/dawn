@@ -34,11 +34,11 @@ struct Mesh {
 
 float fClipDistance3 = 0.0f;
 float fClipDistance4 = 0.0f;
-layout(binding = 0) uniform Scene_1 {
+layout(binding = 0, std140) uniform Scene_1 {
   vec4 vEyePosition;
 } x_29;
 
-layout(binding = 1) uniform Material_1 {
+layout(binding = 1, std140) uniform Material_1 {
   vec4 vDiffuseColor;
   vec3 vAmbientColor;
   float placeholder;
@@ -46,7 +46,7 @@ layout(binding = 1) uniform Material_1 {
   float placeholder2;
 } x_49;
 
-layout(binding = 2) uniform Mesh_1 {
+layout(binding = 2, std140) uniform Mesh_1 {
   float visibility;
 } x_137;
 

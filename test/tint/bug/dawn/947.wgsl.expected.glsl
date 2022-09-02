@@ -18,7 +18,7 @@ struct Uniforms {
   vec2 u_offset;
 };
 
-layout(binding = 0) uniform Uniforms_1 {
+layout(binding = 0, std140) uniform Uniforms_1 {
   vec2 u_scale;
   vec2 u_offset;
 } uniforms;

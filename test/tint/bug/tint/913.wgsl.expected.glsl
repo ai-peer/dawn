@@ -11,7 +11,7 @@ struct Uniforms {
 layout(binding = 2, std430) buffer OutputBuf_1 {
   uint result[];
 } tint_symbol;
-layout(binding = 3) uniform Uniforms_1 {
+layout(binding = 3, std140) uniform Uniforms_1 {
   uint dstTextureFlipY;
   uint channelCount;
   uvec2 srcCopyOrigin;

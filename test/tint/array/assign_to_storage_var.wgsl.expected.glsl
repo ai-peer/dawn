@@ -14,7 +14,7 @@ struct S_nested {
 
 ivec4 src_private[4] = ivec4[4](ivec4(0, 0, 0, 0), ivec4(0, 0, 0, 0), ivec4(0, 0, 0, 0), ivec4(0, 0, 0, 0));
 shared ivec4 src_workgroup[4];
-layout(binding = 0) uniform S_1 {
+layout(binding = 0, std140) uniform S_1 {
   ivec4 arr[4];
 } src_uniform;
 

@@ -10,7 +10,7 @@ struct S {
   Inner inner;
 };
 
-layout(binding = 0) uniform S_1 {
+layout(binding = 0, std140) uniform S_1 {
   Inner inner;
 } u;
 
@@ -24,7 +24,7 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
-ERROR: 0:16: '=' :  cannot convert from 'layout( binding=0 column_major shared) uniform block{layout( column_major shared) uniform structure{ global highp float f} inner}' to ' temp structure{ global structure{ global highp float f} inner}'
+ERROR: 0:16: '=' :  cannot convert from 'layout( binding=0 column_major std140) uniform block{layout( column_major std140 offset=0) uniform structure{ global highp float f} inner}' to ' temp structure{ global structure{ global highp float f} inner}'
 ERROR: 0:16: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.
 

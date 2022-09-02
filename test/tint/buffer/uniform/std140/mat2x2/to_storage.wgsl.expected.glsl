@@ -1,23 +1,29 @@
+SKIP: FAILED
+
 #version 310 es
 
 struct S {
   int before;
+  uint pad;
   mat2 m;
   int after;
+  uint pad_1;
 };
 
 struct S_std140 {
   int before;
+  uint pad_2;
   vec2 m_0;
   vec2 m_1;
   int after;
+  uint pad_3;
 };
 
 struct u_block {
   S_std140 inner[4];
 };
 
-layout(binding = 0) uniform u_block_1 {
+layout(binding = 0, std140) uniform u_block_1 {
   S_std140 inner[4];
 } u;
 
@@ -59,3 +65,11 @@ void main() {
   f();
   return;
 }
+Error parsing GLSL shader:
+ERROR: 0:36: 'constructor' : Number of constructor parameters does not match the number of structure fields
+ERROR: 0:36: '=' :  cannot convert from ' const float' to ' temp structure{ global highp int before,  global highp uint pad,  global highp 2X2 matrix of float m,  global highp int after,  global highp uint pad_1}'
+ERROR: 0:36: '' : compilation terminated
+ERROR: 3 compilation errors.  No code generated.
+
+
+

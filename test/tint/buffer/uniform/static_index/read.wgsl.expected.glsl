@@ -2,6 +2,9 @@
 
 struct Inner {
   int x;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
 };
 
 struct S {
@@ -32,11 +35,13 @@ struct S_std140 {
   vec2 j_0;
   vec2 j_1;
   vec2 j_2;
+  uint pad_3;
+  uint pad_4;
   Inner k;
   Inner l[4];
 };
 
-layout(binding = 0) uniform S_std140_1 {
+layout(binding = 0, std140) uniform S_std140_1 {
   ivec3 a;
   int b;
   uvec3 c;
@@ -49,6 +54,8 @@ layout(binding = 0) uniform S_std140_1 {
   vec2 j_0;
   vec2 j_1;
   vec2 j_2;
+  uint pad_5;
+  uint pad_6;
   Inner k;
   Inner l[4];
 } s;

@@ -15,7 +15,7 @@ layout(binding = 1, std430) buffer ssbA_1 {
   float A[];
 } x_20;
 uvec3 tint_symbol = uvec3(0u, 0u, 0u);
-layout(binding = 2) uniform Uniforms_1 {
+layout(binding = 2, std140) uniform Uniforms_1 {
   float NAN;
   int aShape;
   int outShape;

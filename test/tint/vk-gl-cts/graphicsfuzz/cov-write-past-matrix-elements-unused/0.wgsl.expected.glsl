@@ -6,6 +6,9 @@ precision mediump float;
 layout(location = 0) out vec4 x_GLF_color_1_1;
 struct strided_arr {
   float el;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
 };
 
 struct buf1 {
@@ -14,17 +17,20 @@ struct buf1 {
 
 struct strided_arr_1 {
   int el;
+  uint pad_3;
+  uint pad_4;
+  uint pad_5;
 };
 
 struct buf0 {
   strided_arr_1 x_GLF_uniform_int_values[3];
 };
 
-layout(binding = 1) uniform buf1_1 {
+layout(binding = 1, std140) uniform buf1_1 {
   strided_arr x_GLF_uniform_float_values[2];
 } x_6;
 
-layout(binding = 0) uniform buf0_1 {
+layout(binding = 0, std140) uniform buf0_1 {
   strided_arr_1 x_GLF_uniform_int_values[3];
 } x_8;
 
@@ -83,8 +89,8 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
-ERROR: 0:38: '[' :  matrix index out of range '3'
-ERROR: 0:38: '' : compilation terminated 
+ERROR: 0:44: '[' :  matrix index out of range '3'
+ERROR: 0:44: '' : compilation terminated
 ERROR: 2 compilation errors.  No code generated.
 
 

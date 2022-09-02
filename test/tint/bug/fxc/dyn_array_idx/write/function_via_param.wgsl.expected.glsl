@@ -4,7 +4,7 @@ struct UBO {
   int dynamic_idx;
 };
 
-layout(binding = 0) uniform UBO_1 {
+layout(binding = 0, std140) uniform UBO_1 {
   int dynamic_idx;
 } ubo;
 

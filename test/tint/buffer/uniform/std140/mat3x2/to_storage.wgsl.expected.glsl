@@ -1,24 +1,50 @@
+SKIP: FAILED
+
 #version 310 es
 
 struct S {
   int before;
+  uint pad;
   mat3x2 m;
+  uint pad_1;
+  uint pad_2;
+  uint pad_3;
+  uint pad_4;
+  uint pad_5;
+  uint pad_6;
+  uint pad_7;
+  uint pad_8;
+  uint pad_9;
+  uint pad_10;
   int after;
+  uint pad_11;
 };
 
 struct S_std140 {
   int before;
+  uint pad_12;
   vec2 m_0;
   vec2 m_1;
   vec2 m_2;
+  uint pad_13;
+  uint pad_14;
+  uint pad_15;
+  uint pad_16;
+  uint pad_17;
+  uint pad_18;
+  uint pad_19;
+  uint pad_20;
+  uint pad_21;
+  uint pad_22;
   int after;
+  uint pad_23;
 };
 
 struct u_block {
   S_std140 inner[4];
 };
 
-layout(binding = 0) uniform u_block_1 {
+layout(binding = 0, std140) uniform u_block_1 {
   S_std140 inner[4];
 } u;
 
@@ -60,3 +86,11 @@ void main() {
   f();
   return;
 }
+Error parsing GLSL shader:
+ERROR: 0:57: 'constructor' : Number of constructor parameters does not match the number of structure fields
+ERROR: 0:57: '=' :  cannot convert from ' const float' to ' temp structure{ global highp int before,  global highp uint pad,  global highp 3X2 matrix of float m,  global highp uint pad_1,  global highp uint pad_2,  global highp uint pad_3,  global highp uint pad_4,  global highp uint pad_5,  global highp uint pad_6,  global highp uint pad_7,  global highp uint pad_8,  global highp uint pad_9,  global highp uint pad_10,  global highp int after,  global highp uint pad_11}'
+ERROR: 0:57: '' : compilation terminated
+ERROR: 3 compilation errors.  No code generated.
+
+
+
