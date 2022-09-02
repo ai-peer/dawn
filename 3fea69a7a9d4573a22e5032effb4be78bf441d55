@@ -16,6 +16,23 @@
       "message": "Kokoro failure is a false positive. It failed to update depot_tools. Will run Kokoro manually against this CL.",
       "revId": "3fea69a7a9d4573a22e5032effb4be78bf441d55",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6228ae46_dc7c3c27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-02T19:14:10Z",
+      "side": 1,
+      "message": "Nicely done! Kokoro isn\u0027t happy though",
+      "revId": "3fea69a7a9d4573a22e5032effb4be78bf441d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
