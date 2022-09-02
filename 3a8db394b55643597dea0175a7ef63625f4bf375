@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2181bf28_cfce716e",
+        "filename": "src/tint/reader/spirv/parser_impl_handle_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3841,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-02T09:50:17Z",
+      "side": 1,
+      "message": "```\nsrc/tint/reader/spirv/parser_impl_handle_test.cc:3841:  (cpplint) Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]\n```",
+      "revId": "3a8db394b55643597dea0175a7ef63625f4bf375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
