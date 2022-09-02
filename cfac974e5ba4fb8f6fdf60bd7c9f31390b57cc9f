@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d8308a0_b80a462e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-02T14:02:05Z",
+      "side": 1,
+      "message": "I\u0027m guessing you meant to `Commit-Queue +2`, instead of `Code-Review +2`, Stephen?\nI\u0027ll assume so, and land it.",
+      "revId": "cfac974e5ba4fb8f6fdf60bd7c9f31390b57cc9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
