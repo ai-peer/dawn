@@ -641,7 +641,9 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                                    commandContext);
                 commandContext->EndBlit();
 
-                LazyClearRenderPassAttachments(cmd);
+                auto leftovers = LazyClearRenderPassAttachments(cmd, ClearReadOnlyDepthStencil::Yes);
+                ASSERT(!leftovers.depthRequiresClear && !leftovers.stencilRequiresClear);
+
                 NSRef<MTLRenderPassDescriptor> descriptor = CreateMTLRenderPassDescriptor(cmd);
                 DAWN_TRY(EncodeMetalRenderPass(
                     ToBackend(GetDevice()), commandContext, descriptor.Get(), cmd->width,
