@@ -62,14 +62,28 @@ bool IsCompleteSubresourceCopiedTo(const TextureBase* texture,
                                    const uint32_t mipLevel);
 SubresourceRange GetSubresourcesAffectedByCopy(const TextureCopy& copy, const Extent3D& copySize);
 
-void LazyClearRenderPassAttachments(BeginRenderPassCmd* renderPass);
-
 bool IsFullBufferOverwrittenInTextureToBufferCopy(const CopyTextureToBufferCmd* copy);
 
 std::array<float, 4> ConvertToFloatColor(dawn::native::Color color);
 std::array<int32_t, 4> ConvertToSignedIntegerColor(dawn::native::Color color);
 std::array<uint32_t, 4> ConvertToUnsignedIntegerColor(dawn::native::Color color);
 
+// In most cases render pass attachments that need initialization can be initialized by changing the
+// loadOp to "clear". However for readOnlyDepth/Stencil, this doesn't work on backends with manual
+// memory barriers as clearing is a write operation that's thus readOnly.
+// TODO(dawn:813): The clears could be scheduled in LazyClearRenderPassAttachments if the
+// RecordingContext was a frontend concept (so we could call Texture::Clear inside the function).
+enum class ClearReadOnlyDepthStencil {
+    Yes,
+    No,
+};
+struct LeftoverClearsNeeded {
+    bool depthRequiresClear = false;
+    bool stencilRequiresClear = false;
+};
+LeftoverClearsNeeded LazyClearRenderPassAttachments(
+    BeginRenderPassCmd* renderPass,
+    ClearReadOnlyDepthStencil clearReadOnlyDepthStencil);
 }  // namespace dawn::native
 
 #endif  // SRC_DAWN_NATIVE_COMMANDBUFFER_H_

@@ -491,7 +491,11 @@ MaybeError CommandBuffer::Execute() {
             case Command::BeginRenderPass: {
                 auto* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
                 LazyClearSyncScope(GetResourceUsages().renderPasses[nextRenderPassNumber]);
-                LazyClearRenderPassAttachments(cmd);
+
+                auto leftovers =
+                    LazyClearRenderPassAttachments(cmd, ClearReadOnlyDepthStencil::Yes);
+                ASSERT(!leftovers.depthRequiresClear && !leftovers.stencilRequiresClear);
+
                 DAWN_TRY(ExecuteRenderPass(cmd));
 
                 nextRenderPassNumber++;
