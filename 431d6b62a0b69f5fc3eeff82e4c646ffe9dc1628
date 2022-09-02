@@ -22,6 +22,30 @@
       },
       "revId": "431d6b62a0b69f5fc3eeff82e4c646ffe9dc1628",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ffe7bad_f020e869",
+        "filename": "src/tint/transform/fold_trivial_single_use_lets.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-02T13:55:12Z",
+      "side": 1,
+      "message": "We\u0027re not dropping it at L87, we\u0027re wrapping it in a cast.",
+      "parentUuid": "9bdb56fe_63d2a1ca",
+      "range": {
+        "startLine": 79,
+        "startChar": 48,
+        "endLine": 79,
+        "endChar": 76
+      },
+      "revId": "431d6b62a0b69f5fc3eeff82e4c646ffe9dc1628",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
