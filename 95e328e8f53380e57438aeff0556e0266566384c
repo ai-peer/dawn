@@ -16,6 +16,23 @@
       "message": "Fails on two graphics fuzz tests",
       "revId": "95e328e8f53380e57438aeff0556e0266566384c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e212214_5d5e260d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-02T19:28:52Z",
+      "side": 1,
+      "message": "+2, but Kokoro isn\u0027t happy.",
+      "revId": "95e328e8f53380e57438aeff0556e0266566384c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
