@@ -16,6 +16,29 @@
       "message": "Gotta update CTS",
       "revId": "dc97c7e457554de2df607261be4f349f8a333826",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac2735a9_5152f4b5",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-02T17:57:52Z",
+      "side": 1,
+      "message": "Nice.",
+      "range": {
+        "startLine": 79,
+        "startChar": 20,
+        "endLine": 80,
+        "endChar": 70
+      },
+      "revId": "dc97c7e457554de2df607261be4f349f8a333826",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
