@@ -103,7 +103,9 @@ SubresourceRange GetSubresourcesAffectedByCopy(const TextureCopy& copy, const Ex
     UNREACHABLE();
 }
 
-void LazyClearRenderPassAttachments(BeginRenderPassCmd* renderPass) {
+LeftoverClearsNeeded LazyClearRenderPassAttachments(
+    BeginRenderPassCmd* renderPass,
+    ClearReadOnlyDepthStencil clearReadOnlyDepthStencil) {
     for (ColorAttachmentIndex i :
          IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
         auto& attachmentInfo = renderPass->colorAttachments[i];
@@ -147,6 +149,7 @@ void LazyClearRenderPassAttachments(BeginRenderPassCmd* renderPass) {
         }
     }
 
+    LeftoverClearsNeeded leftovers;
     if (renderPass->attachmentState->HasDepthStencilAttachment()) {
         auto& attachmentInfo = renderPass->depthStencilAttachment;
         TextureViewBase* view = attachmentInfo.view.Get();
@@ -160,18 +163,29 @@ void LazyClearRenderPassAttachments(BeginRenderPassCmd* renderPass) {
         SubresourceRange stencilRange = range;
         stencilRange.aspects = range.aspects & Aspect::Stencil;
 
-        // If the depth stencil texture has not been initialized, we want to use loadop
-        // clear to init the contents to 0's
+        // If the depth stencil texture has not been initialized, we want to use loadop clear to
+        // init the contents to 0's. That is unless the attachments are read-only and the backend
+        // doesn't support lazy initialization for them.
         if (!view->GetTexture()->IsSubresourceContentInitialized(depthRange) &&
             attachmentInfo.depthLoadOp == wgpu::LoadOp::Load) {
-            attachmentInfo.clearDepth = 0.0f;
-            attachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
+            if (attachmentInfo.depthReadOnly &&
+                clearReadOnlyDepthStencil == ClearReadOnlyDepthStencil::No) {
+                leftovers.depthRequiresClear = true;
+            } else {
+                attachmentInfo.clearDepth = 0.0f;
+                attachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
+            }
         }
 
         if (!view->GetTexture()->IsSubresourceContentInitialized(stencilRange) &&
             attachmentInfo.stencilLoadOp == wgpu::LoadOp::Load) {
-            attachmentInfo.clearStencil = 0u;
-            attachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
+            if (attachmentInfo.stencilReadOnly &&
+                clearReadOnlyDepthStencil == ClearReadOnlyDepthStencil::No) {
+                leftovers.stencilRequiresClear = true;
+            } else {
+                attachmentInfo.clearStencil = 0u;
+                attachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
+            }
         }
 
         view->GetTexture()->SetIsSubresourceContentInitialized(
@@ -180,6 +194,8 @@ void LazyClearRenderPassAttachments(BeginRenderPassCmd* renderPass) {
         view->GetTexture()->SetIsSubresourceContentInitialized(
             attachmentInfo.stencilStoreOp == wgpu::StoreOp::Store, stencilRange);
     }
+
+    return leftovers;
 }
 
 bool IsFullBufferOverwrittenInTextureToBufferCopy(const CopyTextureToBufferCmd* copy) {

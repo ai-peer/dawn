@@ -734,7 +734,24 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* recordingConte
                     device, recordingContext,
                     GetResourceUsages().renderPasses[nextRenderPassNumber]);
 
-                LazyClearRenderPassAttachments(cmd);
+                auto leftovers = LazyClearRenderPassAttachments(cmd, ClearReadOnlyDepthStencil::No);
+                Aspect dsAspectsToClear = Aspect::None;
+                if (leftovers.depthRequiresClear) {
+                    dsAspectsToClear |= Aspect::Depth;
+                }
+                if (leftovers.stencilRequiresClear) {
+                    dsAspectsToClear |= Aspect::Stencil;
+                }
+                if (dsAspectsToClear != Aspect::None) {
+                    ASSERT(cmd->depthStencilAttachment.view != nullptr);
+                    TextureViewBase* view = cmd->depthStencilAttachment.view.Get();
+
+                    SubresourceRange range = view->GetSubresourceRange();
+                    range.aspects = dsAspectsToClear;
+                    ToBackend(view->GetTexture())
+                        ->EnsureSubresourceContentInitialized(recordingContext, range);
+                }
+
                 DAWN_TRY(RecordRenderPass(recordingContext, cmd));
 
                 nextRenderPassNumber++;
