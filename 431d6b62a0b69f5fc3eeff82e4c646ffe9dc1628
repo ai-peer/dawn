@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bdb56fe_63d2a1ca",
+        "filename": "src/tint/transform/fold_trivial_single_use_lets.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-02T13:19:05Z",
+      "side": 1,
+      "message": "Is it alright to clone here when we may possibly drop this clone on line 87 below?",
+      "range": {
+        "startLine": 79,
+        "startChar": 48,
+        "endLine": 79,
+        "endChar": 76
+      },
+      "revId": "431d6b62a0b69f5fc3eeff82e4c646ffe9dc1628",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
