@@ -166,8 +166,8 @@ struct BlockInfo {
     struct PhiAssignment {
         /// The ID of an OpPhi receiving a value from this basic block.
         uint32_t phi_id;
-        /// The the value carried to the given OpPhi.
-        uint32_t value;
+        /// The ID of the value carried to the given OpPhi.
+        uint32_t value_id;
     };
     /// If this basic block branches to a visited basic block containing phis,
     /// then this is the list of writes to the variables associated those phis.
@@ -303,6 +303,13 @@ struct DefInfo {
     /// variable that stores the value carried from parent basic blocks into
     /// the basic block containing the OpPhi. Otherwise this is the empty string.
     std::string phi_var;
+
+    /// The structured construct which will contain the WGSL declaration.
+    /// This adjusts for a value definition in the header block of a
+    /// kIfSelection or kSwitchSelection. In those cases, the definition
+    /// will appear before the body of the "if" or "switch", and hence
+    /// be visible after the end of the if or switch.
+    const Construct* def_in_wgsl_construct = nullptr;
 
     /// The storage class to use for this value, if it is of pointer type.
     /// This is required to carry a storage class override from a storage

@@ -3393,14 +3393,37 @@ bool FunctionEmitter::EmitStatementsInBasicBlock(const BlockInfo& block_info,
             });
         for (auto assignment : block_info.phi_assignments) {
             const auto var_name = GetDefInfo(assignment.phi_id)->phi_var;
-            auto expr = MakeExpression(assignment.value);
-            if (!expr) {
-                return false;
+            // The value might have required hoisting, which means we may have
+            // to use the associaed phi variable. This can occur when:
+            // - the current block is the backedge block for a loop, and
+            // - this PhiAssignment represents the contribution of the value
+            //   through that backedge, and
+            // - the value being sent is defined inside the body of the loop
+            //   or the continue construct.
+            // The use is coming from the OpPhi at the top of the loop, but
+            // this assignment induces an implied use at the bottom.
+            const auto value_id = assignment.value_id;
+            const auto* value_info = GetDefInfo(value_id);
+            const ast::Expression* expr = nullptr;
+
+            if (value_info &&
+                !value_info->def_in_wgsl_construct->ScopeContainsPos(block_info.pos)) {
+                // Use the hoisted phi var.
+                TINT_ASSERT(Reader, !value_info->phi_var.empty());
+                expr = create<ast::IdentifierExpression>(
+                    Source{}, builder_.Symbols().Register(value_info->phi_var));
+            } else {
+                auto typed_expr = MakeExpression(assignment.value_id);
+                if (!typed_expr) {
+                    return false;
+                }
+                expr = typed_expr.expr;
             }
+
             AddStatement(create<ast::AssignmentStatement>(
                 Source{},
                 create<ast::IdentifierExpression>(Source{}, builder_.Symbols().Register(var_name)),
-                expr.expr));
+                expr));
         }
     }
 
@@ -4788,6 +4811,7 @@ void FunctionEmitter::FindValuesNeedingNamedOrHoistedDefinition() {
                 def_in_construct = def_in_construct->parent;
             }
         }
+        def_info->def_in_wgsl_construct = def_in_construct;
 
         bool should_hoist = false;
         if (!def_in_construct->ContainsPos(last_use_pos)) {
