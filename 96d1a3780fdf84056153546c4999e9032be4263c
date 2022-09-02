@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "96d1a3780fdf84056153546c4999e9032be4263c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72c61194_49007711",
+        "filename": "src/tint/resolver/resolver_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-02T16:26:24Z",
+      "side": 1,
+      "message": "see my earlier comment about just using `EXPECT_EQ(3u, func_sem-\u003eParameters()[0]-\u003eLocation());`",
+      "range": {
+        "startLine": 804,
+        "startChar": 0,
+        "endLine": 805,
+        "endChar": 65
+      },
+      "revId": "96d1a3780fdf84056153546c4999e9032be4263c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
