@@ -202,6 +202,27 @@ class ReadOnlyDepthStencilAttachmentTests
     bool mIsFormatSupported = false;
 };
 
+// Regression test for crbug.com/dawn/1512 where lazy clearing of read-only depth stencil attachments causes the Vulkan load op to change to "clear", which is invalid (since the attachment is readonly).
+TEST_P(ReadOnlyDepthStencilAttachmentTests, Dawn1512Regression) {
+    wgpu::Texture depthStencilTexture = CreateTexture(wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::RenderAttachment);
+
+    utils::ComboRenderPassDescriptor passDescriptor({},
+                                                    depthStencilTexture.CreateView());
+    passDescriptor.cDepthStencilAttachmentInfo.depthReadOnly = true;
+    passDescriptor.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Undefined;
+    passDescriptor.cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Undefined;
+    passDescriptor.cDepthStencilAttachmentInfo.stencilReadOnly = true;
+    passDescriptor.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Undefined;
+    passDescriptor.cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Undefined;
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&passDescriptor);
+    pass.End();
+    wgpu::CommandBuffer commands = encoder.Finish();
+
+    queue.Submit(1, &commands);
+}
+
 class ReadOnlyDepthAttachmentTests : public ReadOnlyDepthStencilAttachmentTests {
   protected:
     void SetUp() override {
