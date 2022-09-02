@@ -105,6 +105,30 @@
       },
       "revId": "2db09eaf5ee5e7aa672e4d6630f712f932f3dff1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad79f5f8_64e99a2d",
+        "filename": "src/tint/inspector/inspector.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Looks like it\u0027s better to have a GetWorkgroupSize specialized one compared to just get entry point data, as there are some special handling (returning nullopt, or the value). This way we can keep tint details inside tint code.",
+      "parentUuid": "753533f7_58000384",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 0
+      },
+      "revId": "2db09eaf5ee5e7aa672e4d6630f712f932f3dff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

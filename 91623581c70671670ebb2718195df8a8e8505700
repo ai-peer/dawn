@@ -635,6 +635,24 @@
       "parentUuid": "aeaae33c_704c9e00",
       "revId": "91623581c70671670ebb2718195df8a8e8505700",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d63d133_a7683ca1",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b2f2494_92a780be",
+      "revId": "91623581c70671670ebb2718195df8a8e8505700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -52,6 +52,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a33476b_0671b988",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f72d880_f649709b",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f42dc45_173258ab",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc0b4d1b_b86395a1",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f9ef34d_9b971813",
@@ -65,6 +101,24 @@
       "writtenOn": "2022-08-31T23:07:37Z",
       "side": 1,
       "message": "test for this can go in dawn/tests/end2end/ObjectCachingTests.cpp",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79a9bc66_5eda44ef",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f9ef34d_9b971813",
       "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed281a3b_9b3eda15",
+        "filename": "src/dawn/native/Pipeline.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a69c603_3cd9d6fc",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fde10ad_70cd066e",
@@ -99,6 +171,24 @@
       "writtenOn": "2022-08-31T23:13:29Z",
       "side": 1,
       "message": "nit: Maybe comment what the extend3d that\u0027s returned is.",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9280577_b24c461d",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fde10ad_70cd066e",
       "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -126,6 +216,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6952322_5f536428",
+        "filename": "src/dawn/native/TintUtils.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "348c8aa7_ac96392c",
+      "range": {
+        "startLine": 51,
+        "startChar": 44,
+        "endLine": 51,
+        "endChar": 77
+      },
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bdae1292_4078ef36",
@@ -139,6 +253,24 @@
       "writtenOn": "2022-08-31T23:13:29Z",
       "side": 1,
       "message": "u-nit: instead of passing these by value individually what do you think of adding a struct ComputePipelineLimits { all of them } in Limits.h, Limits::GetComputePipelineLimits(), then implemented Stream for them, and pass a single variable here and in the validation function?",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f917b66_f0d516b9",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 27
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Add a LimitsForCompilationRequest using the X(type, name) macro style.",
+      "parentUuid": "bdae1292_4078ef36",
       "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -166,6 +298,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea5bda56_6ab68519",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 27
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "We need added programmableStage to the param and programmableStage has entryPoint name info. So we get it removed.",
+      "parentUuid": "db865b58_3590d087",
+      "range": {
+        "startLine": 150,
+        "startChar": 30,
+        "endLine": 150,
+        "endChar": 65
+      },
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e531cfc7_7a92dc23",
@@ -179,6 +335,24 @@
       "writtenOn": "2022-08-31T23:13:29Z",
       "side": 1,
       "message": "This is used in many places, maybe it could be defined in a single place. But also maybe we could create it unconditionally and always add the transform. If we add a check in here https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/tint/transform/substitute_override.cc;drc\u003d634a2430d83f26970bef2cb381959f805f2d5241;l\u003d32 that the transform doesn\u0027t need to run if the map is empty, then that\u0027s basically free.\n\nWDYT? If we decide to do it, it could be a follow up.",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd17ca6e_826d4389",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "I just use the std::option\u003cX\u003e directly so we get rid of the using.\nI think having std::optional\u003ctint::transform::SubstituteOverride::Config\u003e is almost as good as tint::transform::SubstituteOverride::Config",
+      "parentUuid": "e531cfc7_7a92dc23",
       "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -218,6 +392,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6090d6f9_1252297d",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f4bc737_57035c4a",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "102fae89_3e882b70",
@@ -231,6 +423,30 @@
       "writtenOn": "2022-08-31T23:13:29Z",
       "side": 1,
       "message": "nit: overridden I think",
+      "range": {
+        "startLine": 474,
+        "startChar": 68,
+        "endLine": 474,
+        "endChar": 77
+      },
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1695319_7cf9f91f",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "102fae89_3e882b70",
       "range": {
         "startLine": 474,
         "startChar": 68,
@@ -258,6 +474,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72d2bfc6_ea841967",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "35b014eb_0e49a646",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42284317_5aba2e41",
@@ -271,6 +505,24 @@
       "writtenOn": "2022-08-31T23:13:29Z",
       "side": 1,
       "message": "nit: this is a number of workgroups dispatched, so we only need to dispatch 1",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd2f997b_705cf0f7",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42284317_5aba2e41",
       "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -321,6 +573,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a50db16e_f2cc3085",
+        "filename": "src/dawn/tests/end2end/ShaderValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95da59c0_82681581",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bf12c14_ade1bed8",
+        "filename": "src/dawn/tests/end2end/ShaderValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "357cb1a4_31c41508",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a63f4e17_c1f1653d",
@@ -334,6 +634,24 @@
       "writtenOn": "2022-08-31T23:13:29Z",
       "side": 1,
       "message": "What about the GL backend and the null backend? ^^",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "675e4d1c_8fc0c9cf",
+        "filename": "src/dawn/tests/end2end/ShaderValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Add comments (for null backend) and TODO (for GL backend)",
+      "parentUuid": "a63f4e17_c1f1653d",
       "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -361,6 +679,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccac7674_5aa27245",
+        "filename": "src/dawn/tests/end2end/ShaderValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abbbf603_7b59d87b",
+      "range": {
+        "startLine": 72,
+        "startChar": 14,
+        "endLine": 72,
+        "endChar": 21
+      },
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c3c0f4a_e00b5a86",
@@ -378,6 +720,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "562fc1a3_f1c6c766",
+        "filename": "src/dawn/tests/end2end/ShaderValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c3c0f4a_e00b5a86",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "351a8ef9_b00b3ed9",
@@ -391,6 +751,24 @@
       "writtenOn": "2022-08-31T23:13:29Z",
       "side": 1,
       "message": "Isn\u0027t DAWN_SUPPRESS_TEST_IF? or DISABLED_ValidationAfterOverrideStorageSize good enough?",
+      "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d3fd348_ae1248fd",
+        "filename": "src/dawn/tests/end2end/ShaderValidationTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T00:59:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "351a8ef9_b00b3ed9",
       "revId": "46801c779ae4354d4e4064a2d55fd99d85afc720",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
