@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "086aa2e0_f83dda66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-02T19:27:03Z",
+      "side": 1,
+      "message": "Some minor cleanups requested.\nGood stuff, Antonio. The framework is working well!",
+      "revId": "eba2a0028ab6b1b2c8851265b3fc69874fd1f7c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43642de7_b0c64b42",
+        "filename": "src/tint/number.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-02T19:27:03Z",
+      "side": 1,
+      "message": "I think this is just:\n\n```\ntemplate \u003ctypename T\u003e\nconstexpr bool IsIntegral \u003d std::is_integral_v\u003cUnwrapNumber\u003cT\u003e\u003e;\n```\n\nSame above and below.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 50
+      },
+      "revId": "eba2a0028ab6b1b2c8851265b3fc69874fd1f7c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da72bde5_c1230fc9",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-02T19:27:03Z",
+      "side": 1,
+      "message": "Needs docs.",
+      "revId": "eba2a0028ab6b1b2c8851265b3fc69874fd1f7c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5279ce69_695bd465",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-02T19:27:03Z",
+      "side": 1,
+      "message": "Also needs docs",
+      "revId": "eba2a0028ab6b1b2c8851265b3fc69874fd1f7c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
