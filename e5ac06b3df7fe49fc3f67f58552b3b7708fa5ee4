@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87cb9976_55db6d74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T20:26:55Z",
+      "side": 1,
+      "message": "Should be good to review now. (Tests seem good)",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1eedd25_92822f20",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T20:26:55Z",
+      "side": 1,
+      "message": "Unfortunately this seems need to have a copy",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb08df38_a6afa7cd",
+        "filename": "src/dawn/native/StreamImplTint.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-02T20:26:55Z",
+      "side": 1,
+      "message": "I kept this one as is. Because tint::OverrideId is under \u0027include\u0027 thus not able to `#include \"src/tint/reflection.h\"` from there",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
