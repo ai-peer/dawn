@@ -1369,7 +1369,7 @@ return;
     EXPECT_EQ(expect, got) << got << assembly;
 }
 
-TEST_F(SpvParserFunctionVarTest, EmitStatement_UseInPhiCountsAsUse) {
+TEST_F(SpvParserFunctionVarTest, EmitStatement_Phi_UseInPhiCountsAsUse) {
     // From crbug.com/215
     // If the only use of a combinatorially computed ID is as the value
     // in an OpPhi, then we still have to emit it.  The algorithm fix
@@ -1413,6 +1413,97 @@ if (true) {
   x_101_phi = x_12;
 }
 let x_101 : bool = x_101_phi;
+return;
+)";
+    EXPECT_EQ(expect, got);
+}
+
+TEST_F(SpvParserFunctionVarTest, EmitStatement_Phi_BackedgeValueMayNeedToBePhiVarForAnotherPhi) {
+    // From crbug.com/1649
+    //
+    // There are two loops, and who Phis.
+    // Outer loop phi value %18 uses %19 from the outer loop backedge.
+    // Inner loop phi value %19 causes %19 to be hoisted.
+    // The %19 value itself is defined inside the inner loop.
+    // But that means the generated x_19 itself won't be in scope
+    // as needed for the assignment to x_18_phi
+    // in the backedge of the outer loop.  So in that case use the x_19_phi
+    // variable instead.
+    auto assembly = R"(
+               OpCapability Shader
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %100 "main"
+               OpExecutionMode %100 OriginUpperLeft
+       %uint = OpTypeInt 32 0
+     %uint_0 = OpConstant %uint 0
+
+       %void = OpTypeVoid
+         %14 = OpTypeFunction %void
+       %bool = OpTypeBool
+       %true = OpConstantTrue %bool
+
+       %100 = OpFunction %void None %14
+
+         %16 = OpLabel
+               OpBranch %17
+
+         %17 = OpLabel
+         %18 = OpPhi %uint %uint_0 %16 %19 %20
+               OpLoopMerge %25 %20 None
+               OpBranchConditional %true %25 %260
+
+           %260 = OpLabel
+                  OpBranch %27
+
+           %27 = OpLabel
+           %19 = OpPhi %uint %18 %260 %19 %290
+                 OpLoopMerge %31 %290 None
+                 OpBranchConditional %true %31 %290
+
+             %290 = OpLabel
+                    OpBranch %27
+
+           %31 = OpLabel
+                 OpBranch %20
+
+           %20 = OpLabel
+                 OpBranch %17
+
+         %25 = OpLabel
+               OpReturn
+               OpFunctionEnd
+  )";
+    auto p = parser(test::Assemble(assembly));
+    ASSERT_TRUE(p->BuildAndParseInternalModuleExceptFunctions()) << assembly;
+    auto fe = p->function_emitter(100);
+    EXPECT_TRUE(fe.EmitBody()) << p->error();
+
+    auto ast_body = fe.ast_body();
+    auto got = test::ToString(p->program(), ast_body);
+    auto* expect = R"(var x_18_phi : u32;
+x_18_phi = 0u;
+loop {
+  var x_19_phi : u32;
+  let x_18 : u32 = x_18_phi;
+  if (true) {
+    break;
+  }
+  x_19_phi = x_18;
+  loop {
+    let x_19 : u32 = x_19_phi;
+    if (true) {
+      break;
+    }
+
+    continuing {
+      x_19_phi = x_19;
+    }
+  }
+
+  continuing {
+    x_18_phi = x_19_phi;
+  }
+}
 return;
 )";
     EXPECT_EQ(expect, got);

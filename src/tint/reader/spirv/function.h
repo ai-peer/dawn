@@ -166,8 +166,8 @@ struct BlockInfo {
     struct PhiAssignment {
         /// The ID of an OpPhi receiving a value from this basic block.
         uint32_t phi_id;
-        /// The the value carried to the given OpPhi.
-        uint32_t value;
+        /// The ID of the value carried to the given OpPhi.
+        uint32_t value_id;
     };
     /// If this basic block branches to a visited basic block containing phis,
     /// then this is the list of writes to the variables associated those phis.
