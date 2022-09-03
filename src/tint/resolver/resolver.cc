@@ -2497,6 +2497,7 @@ sem::Expression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
             if (!op.result) {
                 return nullptr;
             }
+            ty = op.result;
             if (ShouldMaterializeArgument(op.parameter)) {
                 expr = Materialize(expr, op.parameter);
                 if (!expr) {
@@ -2517,7 +2518,6 @@ sem::Expression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
                     stage = sem::EvaluationStage::kRuntime;
                 }
             }
-            ty = op.result;
             break;
         }
     }
