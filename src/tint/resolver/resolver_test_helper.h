@@ -751,6 +751,16 @@ struct IsValue<Value<T>> : std::true_type {};
 template <typename T>
 constexpr bool IsValue = detail::IsValue<T>::value;
 
+template <typename ValueT, typename = traits::EnableIf<IsValue<ValueT>>>
+const char* FriendlyName() {
+    using ElementType = typename ValueT::ElementType;
+    if constexpr (std::is_same_v<ElementType, bool>) {
+        return "bool";
+    } else {
+        return tint::FriendlyName<ElementType>();
+    }
+}
+
 /// Creates a `Value<T>` from a scalar `v`
 template <typename T>
 auto Val(T v) {

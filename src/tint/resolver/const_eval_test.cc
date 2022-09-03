@@ -3200,6 +3200,7 @@ using Types = std::variant<Value<AInt>,
                            Value<i32>,
                            Value<f32>,
                            Value<f16>,
+                           Value<bool>,
 
                            Value<builder::vec2<AInt>>,
                            Value<builder::vec2<AFloat>>,
@@ -3207,6 +3208,7 @@ using Types = std::variant<Value<AInt>,
                            Value<builder::vec2<i32>>,
                            Value<builder::vec2<f32>>,
                            Value<builder::vec2<f16>>,
+                           Value<builder::vec2<bool>>,
 
                            Value<builder::vec3<AInt>>,
                            Value<builder::vec3<AFloat>>,
@@ -3582,6 +3584,32 @@ INSTANTIATE_TEST_SUITE_P(Div,
                                  OpDivFloatCases<f32>(),
                                  OpDivFloatCases<f16>()))));
 
+template <typename T>
+std::vector<Case> OpEqualCases() {
+    return {
+        C(Val(T{0}), Val(T{0}), Val(true)),
+        C(Val(T{0}), Val(T{1}), Val(false)),
+        C(Val(T{1}), Val(T{0}), Val(false)),
+        C(Val(T{1}), Val(T{1}), Val(true)),
+        C(Vec(T{0}, T{0}), Vec(T{0}, T{0}), Vec(true, true)),
+    };
+}
+INSTANTIATE_TEST_SUITE_P(Equal,
+                         ResolverConstEvalBinaryOpTest,
+                         testing::Combine(  //
+                             testing::Values(ast::BinaryOp::kEqual),
+
+                             // testing::ValuesIn(Concat(  //
+                             //     OpDivIntCases<AInt>(),
+                             //     OpDivIntCases<i32>(),
+                             //     OpDivIntCases<u32>(),
+                             //     OpDivFloatCases<AFloat>(),
+                             //     OpDivFloatCases<f32>(),
+                             //     OpDivFloatCases<f16>()))
+                             testing::ValuesIn(OpEqualCases<AInt>())
+
+                                 ));
+
 // Tests for errors on overflow/underflow of binary operations with abstract numbers
 struct OverflowCase {
     ast::BinaryOp op;
@@ -3606,7 +3634,7 @@ TEST_P(ResolverConstEvalBinaryOpTest_Overflow, Test) {
     std::string type_name = std::visit(
         [&](auto&& value) {
             using ValueType = std::decay_t<decltype(value)>;
-            return tint::FriendlyName<typename ValueType::ElementType>();
+            return builder::FriendlyName<ValueType>();
         },
         c.lhs);
 

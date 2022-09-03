@@ -481,7 +481,9 @@ const Constant* TransformElements(ProgramBuilder& builder, F&& f, CONSTANTS&&...
     for (uint32_t i = 0; i < n; i++) {
         els.Push(TransformElements(builder, std::forward<F>(f), cs->Index(i)...));
     }
-    return CreateComposite(builder, ty, std::move(els));
+    //auto* result_type = sem::Type::DeepestElementOf(els[0]->Type());
+    auto* result_type = els[0]->Type();
+    return CreateComposite(builder, result_type, std::move(els));
 }
 
 /// TransformBinaryElements constructs a new constant by applying the transformation function 'f' on
@@ -1242,6 +1244,68 @@ ConstEval::ConstantResult ConstEval::OpDivide(const sem::Type*,
         return utils::Failure;
     }
     return r;
+}
+
+ConstEval::ConstantResult ConstEval::OpEqual(const sem::Type* ty,
+                                             utils::VectorRef<const sem::Constant*> args,
+                                             const Source&) {
+    auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) {
+        auto create = [&](auto i, auto j) -> const Constant* {
+            return CreateElement(builder, ty, i.value == j.value);
+        };
+        return Dispatch_fia_fiu32_f16(create, c0, c1);
+    };
+
+    auto r = TransformElements(builder, transform, args[0], args[1]);
+    if (builder.Diagnostics().contains_errors()) {
+        return utils::Failure;
+    }
+    return r;
+}
+
+ConstEval::ConstantResult ConstEval::OpNotEqual(const sem::Type* ty,
+                                                utils::VectorRef<const sem::Constant*> args,
+                                                const Source& source) {
+    (void)ty;
+    (void)args;
+    (void)source;
+    return nullptr;
+}
+
+ConstEval::ConstantResult ConstEval::OpLessThan(const sem::Type* ty,
+                                                utils::VectorRef<const sem::Constant*> args,
+                                                const Source& source) {
+    (void)ty;
+    (void)args;
+    (void)source;
+    return nullptr;
+}
+
+ConstEval::ConstantResult ConstEval::OpGreaterThan(const sem::Type* ty,
+                                                   utils::VectorRef<const sem::Constant*> args,
+                                                   const Source& source) {
+    (void)ty;
+    (void)args;
+    (void)source;
+    return nullptr;
+}
+
+ConstEval::ConstantResult ConstEval::OpLessThanEqual(const sem::Type* ty,
+                                                     utils::VectorRef<const sem::Constant*> args,
+                                                     const Source& source) {
+    (void)ty;
+    (void)args;
+    (void)source;
+    return nullptr;
+}
+
+ConstEval::ConstantResult ConstEval::OpGreaterThanEqual(const sem::Type* ty,
+                                                        utils::VectorRef<const sem::Constant*> args,
+                                                        const Source& source) {
+    (void)ty;
+    (void)args;
+    (void)source;
+    return nullptr;
 }
 
 ConstEval::ConstantResult ConstEval::atan2(const sem::Type*,
