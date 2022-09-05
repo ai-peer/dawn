@@ -22,6 +22,30 @@
       },
       "revId": "cc83728da39275767e676acaec5270a42629e19c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d59c626_0cfb5f51",
+        "filename": "src/tint/program.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-05T09:41:55Z",
+      "side": 1,
+      "message": "It can be transitively called by macros like `EXPECT_TYPE` where you want to pass a nullptr. In this situation you want to print `null`, but without this overload, it\u0027s an ambiguous overload error.",
+      "parentUuid": "4f8c7fa1_e25ccbae",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 51
+      },
+      "revId": "cc83728da39275767e676acaec5270a42629e19c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
