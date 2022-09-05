@@ -50,6 +50,24 @@
       "message": "I kept this one as is. Because tint::OverrideId is under \u0027include\u0027 thus not able to `#include \"src/tint/reflection.h\"` from there",
       "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c1c2f57_b6c4b47a",
+        "filename": "src/dawn/native/StreamImplTint.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-05T09:18:15Z",
+      "side": 1,
+      "message": "Humm, I\u0027m not sure I understand. The [other public tint header](https://dawn.googlesource.com/dawn/+/refs/heads/main/include/tint/tint.h) makes a large number of `#include`s to headers in `src/tint`. Do we just need to fix some GN rules?\nNote: we haven\u0027t got a well defined public / private API split right now for Tint - this is tracked by crbug.com/tint/342. Don\u0027t worry if the split isn\u0027t particularly clean right now.",
+      "parentUuid": "eb08df38_a6afa7cd",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
