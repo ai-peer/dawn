@@ -33,6 +33,199 @@
       "message": "Please take a look, thanks",
       "revId": "709020237614346c79e855cd2800e2230c612737",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab5fede2_e0057645",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:50:34Z",
+      "side": 1,
+      "message": "LGTM overall. Feel free to push fixes for some of the comments to follow-ups if that\u0027s convenient.",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a68b762_079fc0c2",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:50:34Z",
+      "side": 1,
+      "message": "nit: Maybe we could have a UserToggles structure in Toggles.h with a ::Create function from DawnTogglesDeviceDescriptor so more of the logic is gathered in Toggles.h and so a single thing needs to be passed in constructors.",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fefee9d_a52f571a",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:50:34Z",
+      "side": 1,
+      "message": "nit: maybe could be on that UserToggles struct.",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af43aa67_9be55f42",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:50:34Z",
+      "side": 1,
+      "message": "I wonder if maybe we should have an \"experimental\" flag in Features.h so we don\u0027t need to add special handling here. WDYT?",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0d23d01_23c010b5",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:50:34Z",
+      "side": 1,
+      "message": "Maybe this validation could be done in d3d12::Device::Create since it is D3D12-specific. (it\u0027s annoying to re-iterate the features, so I wonder if maybe we should parse the device descriptor here and pass a ParsedDeviceDescriptor desc through the constructors?)",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61ba6418_59c18c39",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:50:34Z",
+      "side": 1,
+      "message": "u-u-nit: IMHO this comment reads like a changelog but doesn\u0027t help future readers. It seems like features here should all have been validated already because WeBGPU should validate everything. So the comment is more confusing than it should be.\n\nAlso it\u0027s weird that the WebGPU API is APIHasFeature while Dawn internally uses IsFeatureEnabled. WDYT of renaming IsFeatureEnabled to HasFeature in a follow-up, and make APIHasFeature just proxy to HasFeature?",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b17ac0a_59cda7c7",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:50:34Z",
+      "side": 1,
+      "message": "u-u-nit: \"Supports \"enable f16\" in WGSL\" or \"Supports the \"enable f16\" directive in WGSL\"",
+      "range": {
+        "startLine": 67,
+        "startChar": 29,
+        "endLine": 67,
+        "endChar": 34
+      },
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "751cd94d_0085e497",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:50:34Z",
+      "side": 1,
+      "message": "Do you see any issues with removing this feature immediately? Since it was never implemented in Dawn, maybe noone was relying on it yet?\n\nAh, Blink uses it, nevermind :) Can you still remove the feature from Blink without a deprecation period as a follow up, then remove it from Dawn? Thanks!",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23b14872_4e448eef",
+        "filename": "src/dawn/native/opengl/AdapterGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:50:34Z",
+      "side": 1,
+      "message": "Is it the only extension for F16 on GL? That\u0027d be unfortunate :(",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6ef899a_aa5ca6bf",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:50:34Z",
+      "side": 1,
+      "message": "didn\u0027t we decide that storageInputOutput16 would be handled by a transform if it isn\u0027t present?",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e60f5a0_7f9e4f2e",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:50:34Z",
+      "side": 1,
+      "message": "u-u-nit: Indent 4 to match the start of const char* above?",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
