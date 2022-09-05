@@ -18,6 +18,57 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66b839c3_0461ed0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:22:29Z",
+      "side": 1,
+      "message": "LGTM with some comments left.",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43be3385_72d98854",
+        "filename": "src/dawn/native/ObjectContentHasher.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:22:29Z",
+      "side": 1,
+      "message": "Do we have any test file for these? I wonder if we could reuse the Stream.h facilities for it at some point. We\u0027ll see later.",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4883275_83168656",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:22:29Z",
+      "side": 1,
+      "message": "Isn\u0027t this needed only in ShaderModuleVk? Maybe it could be defined there.",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1eedd25_92822f20",
@@ -31,6 +82,23 @@
       "writtenOn": "2022-09-02T20:26:55Z",
       "side": 1,
       "message": "Unfortunately this seems need to have a copy",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6f1693a_cf839f03",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:22:29Z",
+      "side": 1,
+      "message": "nit: We could use the new struct that was just define to hold all these limits.",
       "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -66,6 +134,57 @@
       "side": 1,
       "message": "Humm, I\u0027m not sure I understand. The [other public tint header](https://dawn.googlesource.com/dawn/+/refs/heads/main/include/tint/tint.h) makes a large number of `#include`s to headers in `src/tint`. Do we just need to fix some GN rules?\nNote: we haven\u0027t got a well defined public / private API split right now for Tint - this is tracked by crbug.com/tint/342. Don\u0027t worry if the split isn\u0027t particularly clean right now.",
       "parentUuid": "eb08df38_a6afa7cd",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02a8d99a_f17cdceb",
+        "filename": "src/dawn/native/metal/StreamImplMTL.mm",
+        "patchSetId": 32
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:22:29Z",
+      "side": 1,
+      "message": "optional nit: IMHO we could return the Extent3D directly and only build the MTLSize in ComputePipeline.cpp. This way we need less Metal-specific things for example for Stream.",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4627cdc5_f53ecc5b",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 32
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:22:29Z",
+      "side": 1,
+      "message": "TBH at this point we could inline this function in its callers. It\u0027s just forwarding its arguments to CreateFunction.",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4feb9107_506f09d9",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-05T20:22:29Z",
+      "side": 1,
+      "message": "Any reason this isn\u0027t using Serializable.h? Also Steam.h is the implementation of the serializer so it\u0027s weird to define a limit struct for shader compilation in it. Maybe put this in Limits.h?",
       "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
